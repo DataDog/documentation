@@ -10,7 +10,7 @@ Before diving into detailed configuration steps, here's a quick overview of what
 | Step               | Description                                                                                                                                       | Setup Guides              |
 |--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
 | Agent setup        | An agent needs Kafka consumer integration enabled, be on at least version 7.69.0, and have remote configuration enabled                           | [Agent Setup][1]          |
-| Verify permissions | You'll need a few log access permissions which usually come standard as well as `Data Streams Monitoring Capture Messages` enabled in Datadog     | [Required Permissions][2] |
+| Verify permissions | You need a few log access permissions, which usually come standard as well as `Data Streams Monitoring Capture Messages` enabled in Datadog     | [Required Permissions][2] |
 
 
 ### Agent Setup
