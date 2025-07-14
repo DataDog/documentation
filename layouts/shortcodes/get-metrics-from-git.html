@@ -6,8 +6,10 @@
 
 {{- if $int_name -}}
   <!-- Some edge cases the metadata is from a non-integration source, we get the JSON from websites-sources -->
-  {{- if eq $int_name "synthetics" -}}
-    {{- $data := .Site.Data.synthetics_metadata -}}
+   <!-- The datafile in sources needs to follow the convention to match: appid_metadata.json -->
+  {{- $exceptions := slice "synthetics" "cloud-foundry" -}}
+  {{- if in $exceptions $int_name -}}
+    {{- $data := index .Site.Data (print $int_name "_metadata") -}}
     {{- if $data -}}
       <table>
         {{- range $data -}}
@@ -32,7 +34,7 @@
         {{- end -}}
       </table>
     {{- else -}}
-      {{ warnf "synthetics_metadata.json datafile not found for synthetics integration." }}
+      {{ warnf "%s_metadata.json datafile not found for %s integration." $int_name $int_name }}
     {{- end -}}
   {{- else -}}
 
