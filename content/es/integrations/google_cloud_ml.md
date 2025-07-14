@@ -36,7 +36,7 @@
   "text": "Prácticas recomendadas para la monitorización de modelos de ML en producción"
 "git_integration_title": "google_cloud_ml"
 "has_logo": verdadero
-"integration_id": "google-cloud-ml"
+"integration_id": "google_cloud_ml"
 "integration_title": "Google Cloud ML"
 "integration_version": ""
 "is_public": verdadero
