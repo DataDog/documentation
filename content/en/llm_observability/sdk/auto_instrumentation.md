@@ -134,7 +134,7 @@ The Anthropic integration instruments the following methods:
 
 ## Google GenAI
 
-The Google GenAI integration provides automatic tracing for methods in the [Google GenAI Python SDK][19]
+The Google GenAI integration automatically traces methods in the [Google GenAI Python SDK][19].
 
 **Note:** The [Google GenAI Python SDK][19] succeeds the Google GenerativeAI SDK, and exposes both Gemini Developer API as well as Vertex.
 
