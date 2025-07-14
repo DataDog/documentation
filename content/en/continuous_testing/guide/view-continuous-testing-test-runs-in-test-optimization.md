@@ -24,7 +24,7 @@ You can view Continuous Testing test runs in Test Optimization to get a consolid
 
 Navigate to [Test Runs][4] in Test Optimization and filter the **Test Framework** facet to **synthetics**:
 
-{{< img src="continuous_testing/guide/view-continuous-testing-test-runs-test-optimization/test_optimization_test_runs_explorer.png"  style="width:100%" >}}
+{{< img src="continuous_testing/guide/view-continuous-testing-test-runs-in-test-optimization/test_optimization_test_runs_explorer.png"  style="width:100%" >}}
 
 Use this to search, filter, and analyze Continuous Testing test runs using both Test Optimization and Continuous Testing metadata in one view.
 
@@ -36,7 +36,7 @@ For example:
 
 Open a Continuous Testing test run in Test Optimization to see detailed information about the test run:
 
-{{< img src="continuous_testing/guide/view-continuous-testing-test-runs-test-optimization/test_runs_detail.png"  style="width:100%" >}}
+{{< img src="continuous_testing/guide/view-continuous-testing-test-runs-in-test-optimization/test_runs_detail.png"  style="width:100%" >}}
 
 For example:
 
@@ -48,7 +48,7 @@ To view a Continuous Testing test run in Synthetics from Test Optimization, clic
 
 To view a Continuous Testing test run in Test Optimization from Synthetics, click **View in Test Optimization** from the Synthetics test run page:
 
-{{< img src="continuous_testing/guide/view-continuous-testing-test-runs-test-optimization/continuous_testing_test_run_detail.png"  style="width:100%" >}}
+{{< img src="continuous_testing/guide/view-continuous-testing-test-runs-in-test-optimization/continuous_testing_test_run_detail.png"  style="width:100%" >}}
 
 ## Pricing
 
