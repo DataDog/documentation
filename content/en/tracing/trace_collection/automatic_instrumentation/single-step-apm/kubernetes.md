@@ -340,7 +340,7 @@ If you don't enable automatic instrumentation for specific pods using annotation
 
 The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
 
-{{< collapse-content title="Datadog Operator" level="h4" >}}
+{{< collapse-content title="Datadog Operator" level="h5" >}}
 
 For example, to instrument .NET, Python, and Node.js applications, add the following configuration to your `datadog-agent.yaml` file:
 
@@ -357,7 +357,7 @@ For example, to instrument .NET, Python, and Node.js applications, add the follo
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="Helm" level="h4" >}}
+{{< collapse-content title="Helm" level="h5" >}}
 
 For example, to instrument .NET, Python, and Node.js applications, add the following configuration to your `datadog-values.yaml` file:
 
