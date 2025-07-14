@@ -18,7 +18,7 @@ Before diving into detailed configuration steps, here's a quick overview of what
 #### Selecting an Agent
 Any Datadog agent having access to Kafka can be used for setup.
 
-If you self-host Kafka, set up Messages on your Kafka broker's agent. Otherwise, choose any agent your producer or consumer services communicate with that has access to your Kafka cluster.
+If you self-host Kafka, we recommend setting up Messages on your one of your Kafka brokers' agents. Otherwise, choose any one agent your producer or consumer services communicate with that has access to your Kafka cluster.
 
 #### Step-by-step guide
 
@@ -33,29 +33,12 @@ Ensure your agent is running version `7.69.0` or later.
 Confirm Remote Configuration is enabled for your agent (typically enabled by default). Verify this setting on the [Fleet Automation page][4] and also confirm it at the organizational level via the [Remote Configuration settings page][5].
 
 ##### 3. Configure Kafka consumer integration
-Create or update the Kafka consumer configuration file at
 
-```
-[agent config directory]/kafka_consumer.d/conf.yaml
-```
-
-Here's an example configuration (see a detailed sample [here][9]):
-```yaml
-init_config:
-
-instances:
-  - kafka_connect_str: kafka:29092 # Replace with your Kafka cluster address
-    monitor_unlisted_consumer_groups: true
-    tags:
-      - env:staging
-```
-Ensure you correctly tag your clusters to facilitate filtering and identification.
-
-For detailed instructions and advanced settings, review the [Kafka consumer integration documentation][6].
+Follow the steps detailed at [Kafka consumer integration documentation][6] to configure a Datadog agent for the Kafka consumer integration.
 
 ##### 4. Verify setup
 
-* Review agent logs for `kafka_consumer` entries to confirm successful integration.
+* Review agent logs for `kafka_consumer` entries to confirm successful configuration.
 * Verify data ingestion by inspecting the `kafka.broker_offset` metric in Datadog's Metrics Explorer, filtering by the relevant Kafka topics.
 
 
@@ -80,4 +63,3 @@ To enable permissions, edit an existing role or create a new one on the [Roles p
 [6]: /integrations/kafka-consumer/?tab=host#setup
 [7]: https://app.datad0g.com/personal-settings/profile
 [8]: https://app.datadoghq.com/organization-settings/roles
-[9]: https://github.com/DataDog/integrations-core/blob/master/kafka_consumer/datadog_checks/kafka_consumer/data/conf.yaml.example
