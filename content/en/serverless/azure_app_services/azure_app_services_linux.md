@@ -47,8 +47,6 @@ Instrumentation starts when the application is launched.
 
 Add the `Datadog.Trace.Bundle` Nuget package to your project.
 
-**Note**: When you complete Step 2, ensure that you also set the [additional environment variables](#configure-environment-variables) required by the .NET tracer.
-
 {{% /tab %}} 
 {{% tab "PHP" %}}
 
@@ -142,8 +140,13 @@ For .NET applications, the following environment variables are **required** unle
 | `DD_TRACE_LOG_DIRECTORY`   | `/home/LogFiles/dotnet`  | Where tracer logs are stored |
 | `CORECLR_ENABLE_PROFILING` | 1  | Instructs the .NET CLR that profiling should be enabled.                   | 
 | `CORECLR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` | Profiler GUID. |
-| `CORECLR_PROFILER_PATH`    | `/home/site/wwwroot/datadog/linux-musl-x64/Datadog.Trace.ClrProfiler.Native.so` | The profiler binary that the .NET CLR loads into memory, which contains the GUID. |
-| `DD_PROFILING_ENABLED` (_optional_) | `true` | Enables Datadog's [Continuous Profiler][303]. |
+| `CORECLR_PROFILER_PATH`    | `/home/site/wwwroot/datadog//Datadog.Trace.ClrProfiler.Native.so` | The profiler binary that the .NET CLR loads into memory, which contains the GUID. |
+
+In `CORECLR_PROFILER_PATH`, replace `<os-arch>` with one of:
+- `linux-x64`
+- `linux-arm64`
+- `linux-musl-x64`
+- `linux-musl-arm64`
 
 {{% /collapse-content %}}
 
