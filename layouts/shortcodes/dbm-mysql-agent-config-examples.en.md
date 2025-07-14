@@ -1,6 +1,6 @@
 ### One agent connecting to multiple hosts
 It is common to configure a single Agent host to connect to multiple remote database instances (see [Agent installation architectures](/database_monitoring/architecture/) for DBM). To connect to multiple hosts, create an entry for each host in the MySQL integration config.
-For an agent running with the same amount of resources as the monitored databases, Datadog recommends limiting the number of instances per Agent to a maximum of 30.
+An agent with 4 CPUs and 16GB of RAM can monitor up to 30 databases with the same resources each.
 
 ```yaml
 init_config:
