@@ -41,10 +41,10 @@ Datadog is continuously evaluating customer requests to support DDR for addition
 ## Setup 
 To enable Datadog Disaster Recovery:
 
-1. [Configure Datadog Disaster Recovery](#configure-datadog-disaster-recovery)
-2. [Retrieve the public IDs and link your organization](#retrieve-the-public-ids-and-link-your-organization)
-3. [Configure your DDR organization](#configure-your-ddr-organization)
-4. [Test the failover process](#test-the-failover-process)
+[Configure Datadog Disaster Recovery](#configure-datadog-disaster-recovery)
+[Retrieve the public IDs and link your organization](#retrieve-the-public-ids-and-link-your-organization)
+[Configure your DDR organization](#configure-your-ddr-organization)
+[Test the failover process](#test-the-failover-process)
 
 ### Configure Datadog Disaster Recovery
 {{% collapse-content title=" 1. Create your DDR Datadog organization and share it with your Customer Success Manager" level="h5" %}}
