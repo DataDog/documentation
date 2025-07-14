@@ -37,7 +37,7 @@
 "integration_id": "google-cloud-pubsub"
 "integration_title": "Google Cloud Pubsub"
 "integration_version": ""
-"is_public": verdadero
+"is_public": true
 "manifest_version": "2.0.0"
 "name": "google_cloud_pubsub"
 "public_title": "Google Cloud Pubsub"
