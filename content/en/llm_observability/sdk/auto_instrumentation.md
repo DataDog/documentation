@@ -25,7 +25,8 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 | [Langchain](#langchain)                    | >= 0.0.192         | >= 2.9.0          |
 | [Amazon Bedrock](#amazon-bedrock)          | >= 1.31.57         | >= 2.9.0          |
 | [Anthropic](#anthropic)                    | >= 0.28.0          | >= 2.10.0         |
-| [Google Gemini](#google-gemini)            | >= 0.7.2           | >= 2.14.0         |
+| [Google GenAI](#google-genai)              | >= 1.21.1          | >= 3.11.0         |
+| [Google GenerativeAI](#google-generativeai)| >= 0.7.2           | >= 2.14.0         |
 | [Vertex AI](#vertex-ai)                    | >= 1.71.1          | >= 2.18.0         |
 | [LangGraph](#langgraph)                    | >= 0.2.23          | >= 3.5.0          |
 | [Crew AI](#crew-ai)                        | >= 0.105.0         | >= 3.5.0          |
@@ -52,9 +53,8 @@ from ddtrace import patch
 from ddtrace.llmobs import LLMObs
 
 LLMObs.enable(integrations_enabled=False, ...)
-patch(openai=True, langchain=True, botocore=["bedrock-runtime"], anthropic=True, gemini=True, vertexai=True, crewai=True, openai_agents=True, langgraph=True, litellm=True)
+patch(openai=True, langchain=True, botocore=["bedrock-runtime"], anthropic=True, gemini=True, vertexai=True, crewai=True, openai_agents=True, langgraph=True, litellm=True, google_genai=True)
 ```
-
 
 [1]: https://platform.openai.com/docs/api-reference/introduction
 [2]: https://platform.openai.com/docs/api-reference/completions
@@ -75,7 +75,7 @@ patch(openai=True, langchain=True, botocore=["bedrock-runtime"], anthropic=True,
 [17]: https://python.langchain.com/docs/concepts/embedding_models/
 [18]: /llm_observability/setup/sdk/#tracing-spans
 [19]: https://ai.google.dev/gemini-api/docs
-[20]: https://ai.google.dev/api/generate-content#method:-models.streamgeneratecontent
+[20]: https://ai.google.dev/api/generate-content#method:-models.generatecontent
 [21]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/python/latest
 [22]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/python/latest/summary_method#vertexai_preview_generative_models_GenerativeModel_generate_content_summary
 [23]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/python/latest/summary_method#vertexai_generative_models_ChatSession_send_message_summary
@@ -106,6 +106,8 @@ patch(openai=True, langchain=True, botocore=["bedrock-runtime"], anthropic=True,
 [48]: https://docs.litellm.ai/docs/completion
 [49]: https://docs.litellm.ai/docs/text_completion
 [50]: https://platform.openai.com/docs/api-reference/responses
+[51]: https://ai.google.dev/api/embeddings#method:-models.embedcontent
+[52]: https://github.com/google-gemini/deprecated-generative-ai-python
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
