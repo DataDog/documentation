@@ -785,11 +785,21 @@ menu:
       identifier: otel_logs
       parent: otel_explore
       weight: 701
+    - name: Correlate Metrics and Traces
+      url: /opentelemetry/correlate/metrics_and_traces/
+      identifier: otel_metrics_traces
+      parent: otel_explore
+      weight: 702
     - name: Correlate RUM and Traces
       url: /opentelemetry/correlate/rum_and_traces/
       identifier: otel_rum
       parent: otel_explore
-      weight: 702
+      weight: 703
+    - name: Correlate DBM and Traces
+      url: /opentelemetry/correlate/dbm_and_traces/
+      identifier: otel_dbm
+      parent: otel_explore
+      weight: 704
     - name: Integrations
       url: opentelemetry/integrations/
       identifier: otel_integrations
