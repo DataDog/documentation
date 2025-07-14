@@ -18,7 +18,7 @@ Before diving into detailed configuration steps, here's a quick overview of what
 #### Selecting an Agent
 Any Datadog agent having access to Kafka can be used for setup.
 
-If you self-host Kafka, we recommend setting up Messages on your one of your Kafka brokers' agents. Otherwise, choose any one agent your producer or consumer services communicate with that has access to your Kafka cluster.
+If you self-host Kafka, Datadog recommends setting up Messages on one of your Kafka brokers' agents. Otherwise, choose any one agent your producer or consumer services communicate with that has access to your Kafka cluster.
 
 #### Step-by-step guide
 
