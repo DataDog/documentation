@@ -145,7 +145,7 @@ The Google GenAI integration instruments the following methods:
 - [Generating content][20] (including streamed calls):
   - `models.generate_content()` (Also captures `chat.send_message()`)
   - `aio.models.generate_content()` (Also captures `aio.chat.send_message()`)
-- [Embedding content][50]
+- [Embedding content][51]
   -`models.embed_content()`
   -`aio.models.embed_content()`
 
@@ -154,7 +154,7 @@ The Google GenAI integration instruments the following methods:
 
 The Google GenerativeAI integration provides automatic tracing for the Google GenerativeAI Python SDK content generation calls.
 
-**Note:** The [Google Generative AI SDK][51] is deprecated, and succeeded by Google GenAI.
+**Note:** The [Google Generative AI SDK][52] is deprecated, and succeeded by Google GenAI.
 
 ### Traced methods
 
