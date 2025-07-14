@@ -104,7 +104,7 @@ Para los entornos de contenedores, consulta las [plantillas de integración de A
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "hdfs_datanode" >}}
+{{< get-metrics-from-git "hdfs-datanode" >}}
 
 
 ### Eventos
@@ -112,7 +112,7 @@ Para los entornos de contenedores, consulta las [plantillas de integración de A
 El check de HDFS-datanode no incluye ningún evento.
 
 ### Check de servicio
-{{< get-service-checks-from-git "hdfs_datanode" >}}
+{{< get-service-checks-from-git "hdfs-datanode" >}}
 
 
 ## Solucionar problemas
@@ -226,7 +226,7 @@ Para entornos de contenedores, consulta las [plantillas de integración de Autod
 ## Datos recogidos
 
 ### Métricas
-{{< get-metrics-from-git "hdfs_namenode" >}}
+{{< get-metrics-from-git "hdfs-namenode" >}}
 
 
 ### Eventos
@@ -234,7 +234,7 @@ Para entornos de contenedores, consulta las [plantillas de integración de Autod
 El check de HDFS-namenode no incluye ningún evento.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "hdfs_namenode" >}}
+{{< get-service-checks-from-git "hdfs-namenode" >}}
 
 
 ## Solucionar problemas

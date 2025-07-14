@@ -31,9 +31,11 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 
 - [Resource collection][2] must be enabled for your AWS accounts.
 - For the best experience, Datadog strongly recommends using the AWS-managed [`SecurityAudit`][5] policy, or the more permissive [`ReadOnlyAccess`][6] policy.
-- To view security misconfigurations on the [Security overlay][10], [Cloud Security][3] must be enabled.
+- Viewing content on the [Security overlay][10] requires additional products to be enabled:
+  - To view security misconfigurations and identity risks, [Cloud Security][3] must be enabled.
+  - To view sensitive data, [Sensitive Data Scanner][12] must be enabled. For a user to turn the layer on, they must have the [`data_scanner_read`][13] permission.
 
-**Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you opt to not grant permission to list S3 buckets, the diagram will simply exclude those buckets. If permissions block certain resources, an alert is displayed in the UI.
+**Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you don't grant permission to list S3 buckets, the diagram excludes those buckets. If permissions block certain resources, an alert displays in the UI.
 
 ## Getting started
 
@@ -108,3 +110,5 @@ Learn how to navigate between [built-in overlays][4] to view your architecture f
 [9]: /datadog_cloudcraft/overlays#observability
 [10]: /datadog_cloudcraft/overlays#security
 [11]: /datadog_cloudcraft/overlays#cloud-cost-management
+[12]: /security/sensitive_data_scanner
+[13]: /account_management/rbac/permissions/#compliance

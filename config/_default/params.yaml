@@ -102,7 +102,9 @@ code_language_ids:
     native: Native
     other: Other
     linux: Linux
+    macos: macOS
     windows: Windows
+    aws-fargate: "AWS Fargate"
     opentelemetry: OpenTelemetry
     ddprof: "Rust/C/C++"
     full_host: "Full Host"
@@ -174,9 +176,15 @@ allowedRegions:
     domain: ap1.datadoghq.com
     exact_domains:
       - "saffron.oncall.datadoghq.com"
+  - name: AP2
+    value: ap2
+    weight: 30
+    domain: ap2.datadoghq.com
+    exact_domains:
+      - "lava.oncall.datadoghq.com"
   - name: US1-FED
     value: gov
-    weight: 30
+    weight: 35
     domain: ddog-gov.com
     exact_domains:
       - "navy.oncall.datadoghq.com"
@@ -245,25 +253,30 @@ core_product:
 # Unsupported sites for each product
 unsupported_sites:
   actions: [gov]
-  adobe_experience_manager: [us3,ap1]
+  adobe_experience_manager: [us3,ap1,ap2]
   agent_flare: [gov]
   agentless_scanning: [gov]
   amazon_event_bridge: [gov]
   app_builder: [gov]
   application_security: [gov]
   autocomplete_search: [gov]
-  case_management: [gov,ap1]
+  bits_ai: [gov]
+  bits_ai_sre: [gov, ap2]
+  case_management: [gov,ap1,ap2]
   ci_visibility: [gov]
+  code_security: [gov]
   continuous_delivery: [gov]
   continuous_integration: [gov]
+  correlation: [gov] #Event management correlation
   data_jobs: [gov]
   datadog_cloudcraft: [gov]
   dora_metrics: [gov]
   dynamic_quotas: [gov]
   eng_reports: [gov]
-  fips-compliance: [us,us3,us5,eu,ap1]
-  fips-integrations: [us,us3,us5,eu,ap1]
-  fips-proxy: [us,us3,us5,eu,ap1]
+  events_from_sns_emails: [gov]
+  fips-compliance: [us,us3,us5,eu,ap1,ap2]
+  fips-integrations: [us,us3,us5,eu,ap1,ap2]
+  fips-proxy: [us,us3,us5,eu,ap1,ap2]
   fleet_automation: [gov]
   high_availability_datadog_agent: [gov]
   iac_security: [gov]
@@ -272,7 +285,7 @@ unsupported_sites:
   network_path: [gov]
   observability_pipelines: [gov]
   on-call: [gov]
-  otlp_agentless: [gov,ap1]
+  otlp_agentless: [gov,ap1,ap2]
   overview_pages: [gov]
   quality_gates: [gov]
   remote_config: [gov]
@@ -288,6 +301,6 @@ unsupported_sites:
   synthetics_safari: [gov]
   test_optimization: [gov]
   universal_service_monitoring: [gov]
-  watchdog_faulty_service_deployment: [us3,us5,eu,ap1,gov]
+  watchdog_faulty_service_deployment: [us3,us5,eu,ap1,ap2,gov]
   workflow-automation: [gov]
   workflows: [gov]

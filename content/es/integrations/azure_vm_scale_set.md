@@ -68,7 +68,7 @@ Para obtener detalles adicionales, consulta la información sobre la integració
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_vm_scale_set" >}}
+{{< get-metrics-from-git "azure-vm-scale-set" >}}
 
 
 ### Events (Eventos)

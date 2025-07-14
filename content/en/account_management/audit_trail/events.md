@@ -311,6 +311,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 |---------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 | [Test Optimization settings][172]     | A user modified or deleted the settings of a repository or a service.   | `@evt.name:"Test Optimization" @asset.type:test_optimization_settings (@action:modified OR @action:deleted)`            |
 | [Test Optimization default settings][173]     | A user modified or deleted the default settings.   | `@evt.name:"Test Optimization" @asset.type:test_optimization_default_settings (@action:modified OR @action:deleted)`            |
+| [Flaky Test Status][174]     | A user modified the status of a flaky test.   | `@evt.name:"Test Optimization" @asset.type:"test_optimization_management" @action:modified `            |
 
 ### Workflow events
 | Name                     | Description of audit event                                          | Query in audit explorer                           |
@@ -576,3 +577,4 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [171]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3ASheets%20%40asset.type%3Apivot%20%40action%3A%28created%20OR%20modified%20OR%20deleted%29
 [172]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Test%20Optimization%22%20%40asset.type%3Atest_optimization_settings%20%28%40action%3Acreated%20OR%20%40action%3Amodified%20OR%20%40action%3Adeleted%29
 [173]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Test%20Optimization%22%20%40asset.type%3Atest_optimization_default_settings%20%28%40action%3Acreated%20OR%20%40action%3Amodified%20OR%20%40action%3Adeleted%29
+[174]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Test%20Optimization%22%20%40asset.type%3A%22test_optimization_management%22%20%40action%3Amodified
