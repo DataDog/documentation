@@ -40,7 +40,7 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 
 ## Advanced options
 
-When you run the one-line installation command, there are a few options to customize your experience:
+Use the following advanced options to customize how Single Step Instrumentation behaves in your environment. These settings are optional and typically only needed in specialized setups.
 
 ### Target specific workloads
 
