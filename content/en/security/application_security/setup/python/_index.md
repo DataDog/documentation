@@ -46,5 +46,5 @@ further_reading:
 
 ## Additional Resources
 
-- [Troubleshooting Guide](python/troubleshooting)
-- [Compatibility Information](python/compatibility)
+- [Troubleshooting Guide](/security/application_security/setup/python/troubleshooting)
+- [Compatibility Information](/security/application_security/setup/python/compatibility)
