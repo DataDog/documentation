@@ -69,6 +69,9 @@ The OpenAI integration instruments the following methods, including streamed cal
 - [Chat completions][3]:
    - `OpenAI().chat.completions.create()`, `AzureOpenAI().chat.completions.create()`
    - `AsyncOpenAI().chat.completions.create()`, `AsyncAzureOpenAI().chat.completions.create()`
+- [Responses][50]:
+   - `OpenAI().responses.create()`
+   - `AsyncOpenAI().responses.create()`
 
 ## LangChain
 
@@ -278,6 +281,7 @@ The LiteLLM integration instruments the following methods:
 [47]: https://docs.litellm.ai/docs/routing
 [48]: https://docs.litellm.ai/docs/completion
 [49]: https://docs.litellm.ai/docs/text_completion
+[50]: https://platform.openai.com/docs/api-reference/responses
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
