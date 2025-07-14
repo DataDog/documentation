@@ -89,14 +89,14 @@ ZooKeeper チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 #### SSL の有効化
 
-ZooKeeper 3.5 で SSL 認証を使用できるようになりました。ZooKeeper での SSL 設定については、[ZooKeeper SSL ユーザーガイド][5]を参照してください。 
+ZooKeeper 3.5 で SSL 認証を使用できるようになりました。ZooKeeper での SSL 設定については、[ZooKeeper SSL ユーザーガイド][5]を参照してください。
 
 ZooKeeper で SSL の設定が完了すると、SSL を使用して Datadog Agent を構成し、ZooKeeper に接続できるようになります。JKS ファイルによってすでに認証設定が済んでいる場合は、次のステップに従って JKS ファイルを TLS/SSL コンフィギュレーション用の PEM ファイルに変換します。
 
 次のコマンドの例は、JKS `truststore` ファイルと `keystore` ファイルが呼び出された場合を仮定しています。
 
 - `server_truststore.jks`
-- `server_keystore.jks` 
+- `server_keystore.jks`
 - `client_truststore.jks`
 - `client_keystore.jks`
 
@@ -113,12 +113,12 @@ JKS ファイルを PEM ファイルに変換するには
 2. クライアントの `keystore` にはエイリアス `client_cert` のクライアントの証明書が含まれているため、`cert.pem` ファイルを `client_keystore.jks` から取得します。
     ```
     keytool -importkeystore -srckeystore client_keystore.jks -destkeystore cert.p12 -srcstoretype jks -deststoretype pkcs12 -srcalias client_cert
-    ```   
+    ```
 
 3. `openssl pkcs12` コマンドを実行します。これにより、クライアント証明書と証明書の秘密キーをエクスポートします。`tls_cert` コンフィグオプションにより、証明書と秘密キーを含む PEM ファイルを読み取って、パースできます。パスワード保護されていないファイルを取得するには、このコマンドに `-nodes` を追加します。
    ```
    openssl pkcs12 -in cert.p12 -out cert.pem
-   ``` 
+   ```
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
@@ -221,7 +221,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "zk" >}}
+{{< get-metrics-from-git "zookeeper" >}}
 
 
 #### 非推奨メトリクス
@@ -236,7 +236,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 ZooKeeper チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "zk" >}}
+{{< get-service-checks-from-git "zookeeper" >}}
 
 
 ## トラブルシューティング

@@ -10,7 +10,7 @@ title: 수집된 도커 데이터
 
 에이전트가 도커 컨테이너에 배포할 때 수집한 메트릭:
 
-{{< get-metrics-from-git "docker_daemon" >}}
+{{< get-metrics-from-git "docker" >}}
 
 ### 이벤트
 

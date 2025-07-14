@@ -104,6 +104,30 @@ datadogLogs.init({
 </html>
 ```
 {{</ site-region>}}
+{{< site-region region="ap2" >}}
+```html
+<html>
+  <head>
+    <title>Datadog へのログ送信サンプル</title>
+      <script>
+      (function(h,o,u,n,d) {
+        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+        d=o.createElement(u);d.async=1;d.src=n
+        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/ap2/v6/datadog-logs.js','DD_LOGS')
+      DD_LOGS.onReady(function() {
+          DD_LOGS.init({
+            clientToken: '<DATADOG_CLIENT_TOKEN>',
+            site: 'ap2.datadoghq.com',
+            forwardErrorsToLogs: true,
+            sessionSampleRate: 100,
+          })
+        })
+      </script>
+  </head>
+</html>
+```
+{{</ site-region>}}
 {{< site-region region="eu" >}}
 ```html
 <html>
@@ -246,6 +270,25 @@ datadogLogs.init({
 </html>
 ```
 {{</ site-region>}}
+{{< site-region region="ap2" >}}
+```html
+<html>
+  <head>
+    <title>Datadog へのログ送信サンプル</title>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap2/v6/datadog-logs.js"></script>
+    <script>
+      window.DD_LOGS &&
+        DD_LOGS.init({
+          clientToken: '<DATADOG_CLIENT_TOKEN>',
+          site: 'ap2.datadoghq.com',
+          forwardErrorsToLogs: true,
+          sessionSampleRate: 100,
+        })
+    </script>
+  </head>
+</html>
+```
+{{</ site-region>}}
 {{< site-region region="eu" >}}
 ```html
 <html>
@@ -350,7 +393,7 @@ window.DD_LOGS.init({
 
 以下のパラメーターを使用して、Datadog にログを送信するように Datadog ブラウザログ SDK を構成できます。
 
-| パラメーター                  | タイプ                                                                      | 必須 | デフォルト         | 説明                                                                                                                                                                           |
+| パラメーター                  | タイプ                                                                      | 必須 | Default         | 説明                                                                                                                                                                            |
 |----------------------------|---------------------------------------------------------------------------|----------|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `clientToken`              | 文字列                                                                    | はい      |                 | [Datadog クライアントトークン][2]。                                                                                                                                                          |
 | `site`                     | 文字列                                                                    | はい      | `datadoghq.com` | 組織の Datadog サイトパラメーター][9]。                                                                                                                                 |
@@ -369,12 +412,13 @@ window.DD_LOGS.init({
 | `storeContextsAcrossPages` | Boolean                                                                   | いいえ       |                 | グローバルコンテキストとユーザーコンテキストを `localStorage` に格納して、ユーザーナビゲーションに沿って保存します。詳細と具体的な制限については[コンテキストのライフサイクル][11]を参照してください。          |
 | `allowUntrustedEvents`     | Boolean                                                                   | いいえ       |                 | [信頼できないイベント][13] ( 例えば自動 UI テストなど) のキャプチャを許可します。                                                                                                           |
 | `sendLogsAfterSessionExpiration` | Boolean                                                             | いいえ       |                 | セッションが期限切れになった後もログの送信を続けます。
+| `allowedTrackingOrigins`   | Array                                                                     | いいえ       |                 | SDK が実行を許可されているオリジンの一覧です。 |
 
 
 `RUM` SDK を使用するときに一致するコンフィギュレーションが必要なオプション:
 
 
-| パラメーター                              | タイプ                            | 必須 | デフォルト    | 説明                                                                                                                                                                                                                                                              |
+| パラメーター                              | タイプ                            | 必須 | Default    | 説明                                                                                                                                                                                                                                                               |
 | -------------------------------------- | ------------------------------- | -------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `sessionPersistence`                    | `"cookie"` または `"local-storage"`  | いいえ       | `"cookie"`  | セッションを保持するために使用するストレージ戦略を指定します。`cookie` または `local-storage` のいずれかを指定できます。                                                                                                                                                                        |
 | `trackAnonymousUser`                    | Boolean                         | いいえ       | `true`     | セッションをまたいだ匿名ユーザー ID の収集を有効にします。                                                                                                                                                                        |
@@ -574,7 +618,7 @@ window.DD_LOGS && window.DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>
 
 上記例のプレースホルダーは、以下に説明されています。
 
-| プレースホルダー         | 説明                                                                             |
+| プレースホルダー         | 説明                                                                              |
 | ------------------- | --------------------------------------------------------------------------------------- |
 | `<MESSAGE>`         | Datadog によって完全にインデックス化されたログメッセージ。                               |
 | `<JSON_ATTRIBUTES>` | `<MESSAGE>` に付随するすべての属性を含む有効な JSON オブジェクト。         |
@@ -648,7 +692,7 @@ window.DD_LOGS &&
 
 次のプロパティは SDK によって自動的に収集され、機密データが含まれる可能性があります。
 
-| 属性       | タイプ   | 説明                                                                                      |
+| 属性       | タイプ   | 説明                                                                                       |
 | --------------- | ------ | ------------------------------------------------------------------------------------------------ |
 | `view.url`      | 文字列 | アクティブな Web ページの URL。                                                                  |
 | `view.referrer` | 文字列 | 現在リクエストされているページへのリンクがたどられた前のウェブページの URL。 |
