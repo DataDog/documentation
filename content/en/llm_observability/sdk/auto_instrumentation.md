@@ -142,7 +142,7 @@ The Google GenAI integration instruments the following methods:
 - [Generating content][20] (including streamed calls):
   - `models.generate_content()` (Also captures `chat.send_message()`)
   - `aio.models.generate_content()` (Also captures `aio.chat.send_message()`)
-- [Embedding content][21]
+- [Embedding content][50]
   -`models.embed_content()`
   -`aio.models.embed_content()`
 
@@ -151,7 +151,7 @@ The Google GenAI integration instruments the following methods:
 
 The Google GenerativeAI integration provides automatic tracing for the Google GenerativeAI Python SDK content generation calls.
 
-**Note:** The [Google Generative AI SDK][22] is deprecated, and succeeded by Google GenAI.
+**Note:** The [Google Generative AI SDK][51] is deprecated, and succeeded by Google GenAI.
 
 ### Traced methods
 
@@ -299,6 +299,8 @@ The LiteLLM integration instruments the following methods:
 [47]: https://docs.litellm.ai/docs/routing
 [48]: https://docs.litellm.ai/docs/completion
 [49]: https://docs.litellm.ai/docs/text_completion
+[50]: https://ai.google.dev/api/embeddings#method:-models.embedcontent
+[51]: https://github.com/google-gemini/deprecated-generative-ai-python
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -512,8 +514,6 @@ module.exports = {
 [18]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/nodejs/latest#send-text-prompt-requests
 [19]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/nodejs/latest#send-multiturn-chat-requests
 [20]: https://www.npmjs.com/package/@aws-sdk/client-bedrock-runtime
-[21]: https://ai.google.dev/api/embeddings#method:-models.embedcontent
-[22]: https://github.com/google-gemini/deprecated-generative-ai-python
 {{% /tab %}}
 {{< /tabs >}}
 
