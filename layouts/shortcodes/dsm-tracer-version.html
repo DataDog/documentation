@@ -221,7 +221,7 @@
       3.47.0 or 4.26.0 or 5.2.0
     {{- end -}}
     {{- if eq (.Get "type") "recommended" -}}
-      5.18 or later
+      5.18.0 or later
     {{- end -}}
   {{- end -}}
 <!-- Amazon Kinesis (client-kinesis) -->
@@ -230,7 +230,7 @@
       3.47.0 or 4.26.0 or 5.2.0
     {{- end -}}
     {{- if eq (.Get "type") "recommended" -}}
-      5.18 or later
+      5.18.0 or later
     {{- end -}}
   {{- end -}}
 <!-- Amazon SNS (client-sns) -->
@@ -239,13 +239,13 @@
       3.47.0 or 4.26.0 or 5.2.0
     {{- end -}}
     {{- if eq (.Get "type") "recommended" -}}
-      5.18 or later
+      5.18.0 or later
     {{- end -}}
   {{- end -}}
 <!-- Google Pub/Sub (google-cloud-pubsub) -->
   {{- if eq (.Get "lib") "google-cloud-pubsub" -}}
     {{- if eq (.Get "type") "minimal" -}}
-      5.25.0 or 4.49.0
+      4.49.0 or 5.25.0
     {{- end -}}
     {{- if eq (.Get "type") "recommended" -}}
       5.25.0 or later
