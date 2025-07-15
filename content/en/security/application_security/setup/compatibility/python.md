@@ -3,6 +3,8 @@ title: Python Compatibility Requirements
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 50
+aliases:
+  - /security/application_security/threats/setup/compatibility/python
 ---
 ## App and API Protection capabilities support
 
@@ -13,21 +15,19 @@ The following App and API Protection capabilities are supported in the Python li
 | Threat Detection                       | 1.9.0                         |
 | Threat Protection                      | 1.10.0                        |
 | Customize response to blocked requests | 1.19.0                        |
-| Software Composition Analysis (SCA)    | 1.5.0                         |
-| Code Security (Preview)                   | 2.9.3                         |
 | Automatic user activity event tracking | 1.17.0                        |
 | API Security                           | 2.6.0                         |
 
 **Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
 ### Supported deployment types
-| Type        | Threat Detection support | Software Composition Analysis |
-|-------------|--------------------------|-------------------------------|
-| Docker      | {{< X >}}                | {{< X >}}                     |
-| Kubernetes  | {{< X >}}                | {{< X >}}                     |
-| Amazon ECS  | {{< X >}}                | {{< X >}}                     |
-| AWS Fargate | {{< X >}}                | {{< X >}}                     |
-| AWS Lambda  | {{< X >}}                |                               |
+| Type        | Threat Detection support |
+|-------------|--------------------------|
+| Docker      | {{< X >}}                |
+| Kubernetes  | {{< X >}}                |
+| Amazon ECS  | {{< X >}}                |
+| AWS Fargate | {{< X >}}                |
+| AWS Lambda  | {{< X >}}                |
 
 
 ## Language and framework compatibility
@@ -38,19 +38,12 @@ The Python App and API Protection Client library follows a [versioning policy][3
 
 Two release branches are supported:
 
-| Release    | Support level        |
-|------------|----------------------|
-| `<1`       | Maintenance           |
-| `>=1.0,<2` | General Availability |
+{{< partial name="trace_collection/python/supported_versions.html" >}}
+
 
 And the library supports the following runtimes:
 
-| OS      | CPU                   | Runtime | Runtime version | Support ddtrace versions |
-|---------|-----------------------|---------|-----------------|--------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                     |
-
+{{< partial name="trace_collection/python/supported_runtimes.html" >}}
 
 ### Web framework compatibility
 
@@ -58,11 +51,7 @@ And the library supports the following runtimes:
 - Tags for the HTTP request (status code, method, etc)
 - Distributed Tracing to see attack flows through your applications
 
-##### App and API Protection Capability Notes
-- **Software Composition Analysis** is supported on all frameworks
-
 ### Supported frameworks
-
 
 | Framework                | Versions    | Threat Detection supported? | Threat Protection supported? |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- |
@@ -83,7 +72,7 @@ And the library supports the following runtimes:
 - error and stacktrace capturing
 
 ##### App and API Protection Capability Notes
-- **Software Composition Analysis** is supported on all frameworks.
+
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 -
 The Python library supports the [database API specifications][4] and supports all generic SQL databases. This includes databases such as SQLite, Mysql, Postgres and MariaDB.

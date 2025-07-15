@@ -12,10 +12,6 @@ is_beta: true
 title: Monitorizar los despliegues de proveedores de CI
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CD Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="¡Únete a la vista previa!" >}}
 CD Visibility para despliegues de proveedor de CI está en vista previa. Si te interesa esta característica, completa el formulario para acceder.
 {{< /callout >}}

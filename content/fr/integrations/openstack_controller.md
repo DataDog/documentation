@@ -119,7 +119,7 @@ Créez un utilisateur `datadog` afin de l'utiliser dans votre fichier `openstack
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "openstack_controller" >}}
+{{< get-metrics-from-git "openstack-controller" >}}
 
 
 ### Événements
@@ -127,7 +127,7 @@ Créez un utilisateur `datadog` afin de l'utiliser dans votre fichier `openstack
 OpenStack Controller n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "openstack_controller" >}}
+{{< get-service-checks-from-git "openstack-controller" >}}
 
 
 ## Dépannage

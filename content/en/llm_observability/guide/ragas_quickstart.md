@@ -1,14 +1,10 @@
 ---
 title: Ragas Quickstart
 further_reading:
-    - link: '/llm_observability/ragas_evaluations'
+    - link: '/llm_observability/evaluations/ragas_evaluations'
       tag: 'Documentation'
       text: 'Ragas Evaluations'
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
 
 Learn how to use Datadog's integration with the [Ragas][1] framework to evaluate your LLM application. For more information about the Ragas integration, including a detailed setup guide, see [Ragas Evaluations][2].
 
@@ -57,4 +53,4 @@ Learn how to use Datadog's integration with the [Ragas][1] framework to evaluate
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.ragas.io/en/stable/
-[2]: /llm_observability/ragas_evaluations
+[2]: /llm_observability/evaluations/ragas_evaluations

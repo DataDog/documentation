@@ -31,6 +31,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/unit-economics-ccm/"
     tag: "Blog"
     text: "Monitor unit economics with Datadog Cloud Cost Management"
+  - link: "https://www.datadoghq.com/blog/finops-at-datadog/"
+    tag: "Blog"
+    text: "How we've created a successful FinOps practice at Datadog"
 cascade:
     algolia:
       subcategory: 'Cloud Cost Management'
@@ -117,6 +120,7 @@ The table below describes the impact of these permissions in both Cloud Cost Man
 | CCM Settings Page - Tag Pipelines     | Permission Required                         | Permission Required to create tag pipelines       |
 | CCM Settings Page - SaaS Integrations | Permission Required                         | Permission Required to enable integration for CCM |
 | CCM Settings Page - Accounts          | Permission Required                         | Permission Required to modify or create accounts  |
+| CCM Settings Page - Configure Recommendations          | Permission Required                         | Permission Required to customize recommendations  |
 | Dashboards/Notebooks (external)   | Permission Required to create and view data | N/A                                               |
 | Monitors (external)               | Permission Required to create CCM monitors  | N/A                                               |
 | Service Catalog (external)        | Permission Required to view cost data       | N/A                                               |

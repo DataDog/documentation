@@ -122,7 +122,7 @@ _Agent バージョン 6.0 以降で利用可能_
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "citrix_hypervisor" >}}
+{{< get-metrics-from-git "citrix-hypervisor" >}}
 
 
 ### イベント
@@ -130,7 +130,7 @@ _Agent バージョン 6.0 以降で利用可能_
 Citrix Hypervisor インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "citrix_hypervisor" >}}
+{{< get-service-checks-from-git "citrix-hypervisor" >}}
 
 
 ## トラブルシューティング

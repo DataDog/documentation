@@ -476,7 +476,7 @@ datadog:
 {{< /code-block >}}
 
 
-If you want all the files in a repository to be associated with a service, you can use the glob `**/*` as follows:
+If you want all the files in a repository to be associated with a service, you can use the glob `**` as follows:
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
@@ -487,7 +487,7 @@ datadog:
   codeLocations:
     - repositoryURL: https://github.com/myorganization/myrepo.git
       paths:
-        - "**/*"
+        - "**"
 {{< /code-block >}}
 
 #### Detecting file usage patterns

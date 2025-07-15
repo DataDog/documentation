@@ -1,12 +1,13 @@
 ---
-title: Overview
+title: Attack Summary
 aliases:
   - /security/application_security/threats/threat-overview
+  - /security/application_security/threats/attack-summary
 ---
 
 <!-- {{< img src="security/application_security/threats/appsec-threat-overview-page-top.png" alt="Screenshot of the AAP Attack Summary page"  >}} -->
 
-The AAP **Attack Summary** provides a quick view of your application and API posture. It highlights trends, service exposure, attack traffic, and the impact on business logic. You can pivot from widgets to their related traces.
+The App and API Protection (AAP) [Attack Summary][2] provides a quick view of your application and API posture. It highlights trends, service exposure, attack traffic, and the impact on business logic. You can pivot from widgets to their related traces.
 
 Each section of **Attack Summary** focuses on a different aspect of security with supporting information.
 
@@ -40,3 +41,4 @@ When adding a widget to a [new dashboard][1] in Datadog, choose the **Powerpacks
 Each section in the **Attack Summary** page corresponds to a dedicated powerpack.
 
 [1]: https://app.datadoghq.com/dashboard/lists
+[2]: https://app.datadoghq.com/security/appsec/threat
