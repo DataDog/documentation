@@ -224,7 +224,7 @@ The following configuration options behave consistently across the latest versio
 `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED`
 : **Default**: `false` <br>
 **Supported Input**: Boolean <br>
-**Description**: Controls automatic service name overrides as per [the inferred services feature][7]. Disables the feature when set to false. See examples in the dedicated [inferred services documentation][8].
+**Description**: Enable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to ensure no Datadog integration sets service names that are different from the default global service name. When set to false, [Inferred Services][7] takes effect.
 
 ### Context propagation
 `DD_TRACE_BAGGAGE_MAX_ITEMS`
