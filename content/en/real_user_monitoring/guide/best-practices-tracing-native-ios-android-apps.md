@@ -27,6 +27,15 @@ Native mobile tracing gives you precise control over what operations are measure
 
 **Note**: When using the Trace SDK independently (without the RUM SDK), backend APM traces do not automatically collect spans, so you need to manually start and stop spans.
 
+This guide focuses on native iOS and Android apps. For other mobile platforms, see the following documentation:
+
+- [React Native RUM and APM][8]
+- [Flutter RUM and APM][9]
+- [Kotlin Multiplatform RUM and APM][10]
+- [Unity RUM and APM][11]
+
+For a comprehensive overview of correlating RUM with other telemetry data, see [Correlate RUM with other telemetry data][12].
+
 ## Use cases
 
 ### Wrap a frontend-to-backend distributed trace under a native span
@@ -107,8 +116,8 @@ The following sampling rate parameters control different aspects of data collect
 |---------------------------------------------|------------------------------------------------------------------|
 | `Trace.Configuration.sampleRate`                          | Controls the percentage of manually instrumented spans collected by the tracer.|
 | `urlSessionTracking.firstPartyHostsTracing.sampleRate` | Controls the percentage of network requests traced for first-party hosts. |
-| `RUM.sessionSampleRate`                     | Controls the percentage of user sessions that are recorded for RUM.|
-| `WebViewTracking.logsSampleRate`            | Controls the percentage of logs collected from WebViews.          |
+
+**Note**: `RUM.sessionSampleRate` controls RUM session sampling and does not affect trace sampling rates. When using the Trace SDK independently of RUM, trace sampling is controlled only by the parameters listed above.
 
 {{% /tab %}}
 {{% tab "Android" %}}
@@ -117,8 +126,8 @@ The following sampling rate parameters control different aspects of data collect
 |---------------------------------------------|------------------------------------------------------------------|
 | `AndroidTracer.Builder.setSampleRate`                          | Controls the percentage of manually instrumented spans collected by the tracer.|
 | `DatadogInterceptor.Builder.setTraceSampler` | Controls the percentage of network requests traced for first-party hosts. |
-| `RUM.sessionSampleRate`                     | Controls the percentage of user sessions that are recorded for RUM.|
-| `WebViewTracking.logsSampleRate`            | Controls the percentage of logs collected from WebViews.          |
+
+**Note**: `RUM.sessionSampleRate` controls RUM session sampling and does not affect trace sampling rates. When using the Trace SDK independently of RUM, trace sampling is controlled only by the parameters listed above.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -137,8 +146,8 @@ Sampling rates are applied independently. The most restrictive rate determines w
 
 **Example scenario:**  
 To sample 1% of all app sessions and trace all API networks within those sessions:
-- Set `RUM.sessionSampleRate = 1`
-- Set `urlSessionTracking.firstPartyHostsTracing.sampleRate = 100`
+- Set `RUM.sessionSampleRate = 1` (controls RUM session sampling only)
+- Set `urlSessionTracking.firstPartyHostsTracing.sampleRate = 100` (controls trace sampling for network requests)
 
 Sampling decisions are communicated through trace headers, ensuring all services in a distributed trace use the same sampling choice.
 
@@ -155,3 +164,8 @@ Sampling decisions are communicated through trace headers, ensuring all services
 [5]: https://github.com/DataDog/dd-sdk-ios/blob/develop/DatadogTrace/Sources/TraceConfiguration.swift#L32
 [6]: https://github.com/DataDog/dd-sdk-ios/blob/develop/DatadogTrace/Sources/TraceConfiguration.swift#L106
 [7]: https://www.w3.org/TR/trace-context/#sampled-flag
+[8]: /real_user_monitoring/reactnative/
+[9]: /real_user_monitoring/flutter/
+[10]: /real_user_monitoring/kotlin_multiplatform/
+[11]: /real_user_monitoring/unity/
+[12]: /real_user_monitoring/correlate_with_other_telemetry/apm/
