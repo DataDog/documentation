@@ -51,7 +51,6 @@ LLM Observability requires a Datadog API key if you don't have an Agent running.
    DD_LLMOBS_ENABLED=1 \
    DD_LLMOBS_ML_APP=quickstart-app \
    DD_API_KEY=<YOUR_DATADOG_API_KEY> \
-   DD_SITE={{< region-param key="dd_site" code="true" >}} \
    DD_LLMOBS_AGENTLESS_ENABLED=1 \
    NODE_OPTIONS="--import dd-trace/initialize.mjs" <your application command>
    ```
