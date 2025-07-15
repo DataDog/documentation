@@ -3,6 +3,7 @@ metadataformat: "yaml"
 canonifyURLs: true
 pygmentsuseclasses: true
 pygmentsCodeFences: true
+enableRobotsTXT: true
 
 # don't publish cdocs source files
 ignoreFiles: ["\\.mdoc\\.md$"]
