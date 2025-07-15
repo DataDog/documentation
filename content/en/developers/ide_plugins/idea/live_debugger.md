@@ -18,26 +18,30 @@ The **Live Debugger** in the Datadog tool window shows the defined logpoints and
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/tool-window-tab.png" alt="The Live Debugger tab" style="width:100%;" >}}
 
-The panel has three sections: the first shows the available logpoints, the second shows the status and events for the selected logpoint, and the last shows runtime data for the selected logpoint event, if any. These panels are described in the sections below.
+The panel has three sections: 
+
+* [All available logpoints](#logpoints-tree)
+* [Status and events](#logpoint-status-and-events) for the selected logpoint
+* [Runtime data](#logpoint-event-data) for the selected logpoint event
 
 ### Logpoints tree
-The Logpoints tree on the left-side of the panel shows the available logpoints, with these filters:
+The logpoints tree on the left section shows the available logpoints, with these filters:
 
-* `Only my logpoints` - show only logpoints created by the current user
-* `Only the current repositories` - show only logpoints for the repositories associated with the current project
-* `Only enabled logpoints` - show only logpoints that are enabled
+* `Only my logpoints` - Show only logpoints created by the current user
+* `Only the current repositories` - Show only logpoints for the repositories associated with the current project
+* `Only enabled logpoints` - Show only logpoints that are enabled
 
-Select any logpoint to display its status and recently generated events, or to [enable](#enable-and-disable-a-logpoint), [disable](#enable-and-disable-a-logpoint), [edit](#edit-a-logpoint) or [delete](#delete-a-logpoint) it. To navigate to the source code location for a logpoint, double-click it or right-click and select **Jump to Source**.
+Select any logpoint to display its status and recently generated events, or to [enable, disable](#enable-and-disable-a-logpoint), [edit](#edit-a-logpoint) or [delete](#delete-a-logpoint) it. To navigate to the source code location for a logpoint, double-click it or right-click and select **Jump to Source**.
 
 ### Logpoint status and events
-The central panel displays the status and recent event information for the selected logpoint. Select an event to view the generated log message, the captured variables and the runtime stacktrace for the event. The list shows up to 50 events from within the past 24 hours.
+The central section displays the status and recent event information for the selected logpoint. Select an event to view the generated log message, the captured variables, and the runtime stacktrace for the event. The list shows up to 50 events from within the past 24 hours.
 
 At the top-right of the panel, **View logs in Datadog** opens the [Log Explorer][2] in Datadog to explore all log events for the selected logpoint. 
 
 ### Logpoint event data
-The right-most panel displays data for the selected logpoint event, including captured variables and the stacktrace for the event. This runtime context is invaluable for understanding issues and reasoning about the source code.
+The right section displays data for the selected logpoint event, including captured variables and the stacktrace for the event. This runtime context is invaluable for understanding issues and reasoning about the source code.
 
-The **Captures** tab shows a tree-view of variable values captured at runtime for the logpoint. Nested values are captured up to the depth limit defined in the logpoint. The data is fully searchable and selected items can be copied to the clipboard.
+The **Captures** tab shows a tree view of variable values captured at runtime for the logpoint. Nested values are captured up to the depth limit defined in the logpoint. The data is fully searchable and you can copy selected items to the clipboard.
 
 The **Stacktrace** tab shows the runtime path execution leading up to the logpoint. Double-click any frame in the stack trace to open the corresponding source file location.
 
@@ -46,7 +50,7 @@ In the source editor, an icon is shown in the gutter for any line that has a log
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/gutter-icon.png" alt="Gutter icon in the source editor" style="width:100%;" >}}
 
-Click the icon to open the Datadog tool window and show the selected logpoint. Right-click the icon for options to [enable](#enable-and-disable-a-logpoint), [disable](#enable-and-disable-a-logpoint), [edit](#edit-a-logpoint), and [delete](#delete-a-logpoint) the logpoint.
+Click the icon to open the Datadog tool window and show the selected logpoint. Right-click the icon for options to [enable, disable](#enable-and-disable-a-logpoint), [edit](#edit-a-logpoint), and [delete](#delete-a-logpoint) the logpoint.
 
 ## Managing logpoints
 
@@ -57,7 +61,7 @@ To add a logpoint, right-click on a line of code in the source editor and select
 
 The log message field accepts a log template that contains descriptive text and variable references—see the [Dynamic Instrumentation expression language][3] documentation for details. The log message is generated using the runtime state immediately *prior* to the line of code being executed. Generated log messages automatically pass through the Dynamic Instrumentation [Sensitive Data Scanner][5].
 
-When a condition is defined, log events are generated only when the condition evaluates to true. Use conditions to capture events based on runtime state, for example a particular transaction or product identifier.
+When a condition is defined, log events are generated only when the condition evaluates to true. Use conditions to capture events based on runtime state (for example, a particular transaction or product identifier).
 
 The *Capture variables depth* controls how deeply hierarchical data structures are traversed when capturing runtime values. Higher values provide more useful information but require more capacity.
 
