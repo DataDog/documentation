@@ -25,7 +25,6 @@ further_reading:
 {{< product-availability >}}
 
 ## Overview
-{{< product-availability names="Notebooks,DDSQL Editor" >}}
 
 DDSQL is SQL for Datadog data. It implements several standard SQL operations, such as `SELECT`, and allows queries against unstructured data. You can perform actions like getting exactly the data you want by writing your own `SELECT` statement, or querying tags as if they are standard table columns.
 
