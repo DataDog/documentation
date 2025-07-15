@@ -607,6 +607,24 @@
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
   },
+  "GetAllDatasets": {
+    "description": "Get all datasets that have been configured for an organization.",
+    "summary": "Get all datasets"
+  },
+  "CreateDataset": {
+    "description": "Create a dataset with the configurations in the request.",
+    "summary": "Create a dataset",
+    "request_description": "Dataset payload",
+    "request_schema_description": "Create request for a dataset."
+  },
+  "DeleteDataset": {
+    "description": "Deletes the dataset associated with the ID.",
+    "summary": "Delete a dataset"
+  },
+  "GetDataset": {
+    "description": "Retrieves the dataset associated with the ID.",
+    "summary": "Get a single dataset by ID"
+  },
   "GetDomainAllowlist": {
     "description": "Get the domain allowlist for an organization.",
     "summary": "Get Domain Allowlist"
