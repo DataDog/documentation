@@ -6,9 +6,6 @@ further_reading:
     - link: '/llm_observability'
       tag: 'Documentation'
       text: 'Learn about LLM Observability'
-    - link: '/llm_observability/sdk'
-      tag: 'SDK'
-      text: 'SDK reference'
 ---
 
 
@@ -16,7 +13,7 @@ further_reading:
 
 ### Prerequisites
 
-- LLM Observability requires a Datadog API key if you don't have an Agent running. Find your API key [in the Datadog application](https://app.datadoghq.com/organization-settings/api-keys).
+- LLM Observability requires a Datadog API key if you don't have an Agent running. Find your API key [in Datadog](https://app.datadoghq.com/organization-settings/api-keys).
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -33,7 +30,6 @@ further_reading:
    DD_LLMOBS_ENABLED=1 \
    DD_LLMOBS_ML_APP=quickstart-app \
    DD_API_KEY=<YOUR_DATADOG_API_KEY> \
-   DD_SITE={{< region-param key="dd_site" code="true" >}} \
    DD_LLMOBS_AGENTLESS_ENABLED=1 \
    ddtrace-run <your application command>
    ```
@@ -70,11 +66,11 @@ further_reading:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Trace an LLM application in AWS Lambda
-The following steps generate an LLM Observability trace in an AWS Lambda environment and create an Amazon Bedrock based chatbot running with LLM Observability in AWS Lambda.
+3. Make requests to your application triggering LLM calls and then view traces in the **Traces** tab [of the **LLM Observability** page][3] in Datadog. If you don't see any traces, make sure you are using a supported library else you may need to instrument your application's LLM calls manually.
 
-1. Create a [Lambda function chatbot using Amazon Bedrock][13].
-2. Instrument your Lambda function:
+## Trace an LLM application in AWS Lambda
+
+1. Instrument your Lambda function:
     1. Open a Cloudshell
     2. Install the Datadog CLI client
     ```shell
@@ -82,32 +78,31 @@ The following steps generate an LLM Observability trace in an AWS Lambda environ
     ```
     3. Set the Datadog API key and site
     ```shell
-    export DD_SITE=<YOUR_DD_SITE>
     export DD_API_KEY=<YOUR_DATADOG_API_KEY>
-    ```
-    If you already have or prefer to use a secret in Secrets Manager, you can set the API key by using the secret ARN:
-    ```shell
+
+    # If you already have or prefer to use a secret in Secrets Manager, you can set the API key by using the secret ARN:
     export DATADOG_API_KEY_SECRET_ARN=<DATADOG_API_KEY_SECRET_ARN>
     ```
     4. Instrument your Lambda function with LLM Observability (this requires at least version 77 of the Datadog Extension layer).
+
 {{< tabs >}}
 {{% tab "Python" %}}
 ```shell
-datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="python" >}} -e {{< latest-lambda-layer-version layer="extension" >}} --llmobs <YOUR_LLMOBS_ML_APP>
+datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="python" >}} -e {{< latest-lambda-layer-version layer="extension" >}} --llmobs quickstart-app
 ```
 {{% /tab %}}
 {{% tab "Node.js" %}}
 ```shell
-datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="node" >}} -e {{< latest-lambda-layer-version layer="extension" >}} --llmobs <YOUR_LLMOBS_ML_APP>
+datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="node" >}} -e {{< latest-lambda-layer-version layer="extension" >}} --llmobs quickstart-app
 ```
 {{% /tab %}}
 {{< /tabs >}}
-3. Verify that your function was instrumented.
+2. Verify that your function was instrumented.
     1. In the Datadog UI, navigate to `Infrastructure > Serverless`
     2. Search for the name of your function.
     3. Click on it to open the details panel.
     4. Under the `Configuration` tab are the details of the Lambda function, attached layers, and a list of `DD_` Datadog-related environment variables under the `Datadog Environment Variables` section.
-4. Invoke your Lambda function and verify that LLM Observability traces are visible in the Datadog UI.
+3. Invoke your Lambda function and verify that LLM Observability traces are visible in the Datadog UI.
 
 ### Force flushing traces
 
@@ -139,7 +134,6 @@ export const handler = async (event) => {
 {{% /tab %}}
 {{< /tabs >}}
 
-3. Make requests to your application triggering LLM calls and then view traces in the **Traces** tab [of the **LLM Observability** page][3] in Datadog. If you don't see any traces, make sure you are using a supported library else you may need to instrument your application's LLM calls manually.
 
 
 ## Further Reading
