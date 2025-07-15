@@ -268,7 +268,13 @@ Follow these steps to collect the custom resources that these CRDs define:
 
     {{< img src="infrastructure/containers_view/CRD_indexing_2.mp4" alt="A video of the Collecting and Indexing modal. The cursor selects three fields and clicks Enable Indexing. A success message displays." video="true">}}
 
-#### Indexing complex types
+    For details, see the [Indexing complex types](#indexing-complex-types) section.
+
+1.  Select **Enable Indexing** to save.
+
+After the fields are indexed, you can add them as columns in the explorer or as part of Saved Views.
+
+### Indexing complex types
 
 For arrays of objects, two indexing strategies are available:
 
@@ -279,8 +285,7 @@ For arrays of objects, two indexing strategies are available:
 
 Consider these two custom resources:
 
-{{< tabs >}}
-{{% tab "CR1" %}}
+**Custom Resource 1 (CR1)**:
 
 ```yaml
 status:
@@ -291,8 +296,7 @@ status:
           status: 'False'
 ```
 
-{{% /tab %}}
-{{% tab "CR2" %}}
+**Custom Resource 2 (CR2)**:
 
 ```yaml
 status:
@@ -302,9 +306,6 @@ status:
         - type: HorizontalAbleToScale
           status: 'False'
 ```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 You have the filtering possibilities on `status.conditions` based on the two indexing strategies:
 
@@ -384,10 +385,6 @@ field#status.conditions.HorizontalAbleToScale.status:"False"
 {{< /tabs >}}
 
 <div class="alert alert-info">You can select up to 50 fields per resource. You can use the preview to validate your indexing choices.</div>
-
-5.  Select **Enable Indexing** to save.
-
-After the fields are indexed, you can add them as columns in the explorer or as part of Saved Views.
 
 
 ## Further reading
