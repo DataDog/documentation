@@ -231,7 +231,7 @@ You can switch tabs in a browser test recording in order to perform an action on
 Step Replay lets you re-run one or more steps of your browser test directly from the Datadog Synthetics Chrome extension. This feature is designed to help you quickly set up the right state when adding or editing steps in the middle of a long test, without having to manually replay the entire journey from scratch.
 
 <div class="alert alert-warning">
-  <p>The current version of the extension<strong> <span style="font-weight: bold;">does not have Chrome’s debugger permission</span></strong>, as a result:</p>
+  <p>The current version of the extension<strong> <span style="font-weight: bold;">does not have Chrome's debugger permission</span></strong>, as a result:</p>
   <ul>
     <li>Some advanced actions are <strong>not yet supported</strong>.</li>
     <li>Certain steps (like <strong>click</strong> or <strong>hover</strong>) may behave <strong>differently</strong> than in a full Synthetics test run.</li>
