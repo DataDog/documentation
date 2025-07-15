@@ -13,6 +13,8 @@ further_reading:
 
 LLM Observability requires a Datadog API key if you don't have an Agent running. Find your API key [in Datadog](https://app.datadoghq.com/organization-settings/api-keys).
 
+### Setup
+
 {{< tabs >}}
 {{% tab "Python" %}}
 
@@ -46,7 +48,7 @@ LLM Observability requires a Datadog API key if you don't have an Agent running.
    npm install dd-trace
    ```
 
-2. Add `NODE_OPTIONS` your Node.js start command:
+2. Add `NODE_OPTIONS` to your Node.js start command:
    ```shell
    DD_LLMOBS_ENABLED=1 \
    DD_LLMOBS_ML_APP=quickstart-app \
@@ -63,7 +65,9 @@ LLM Observability requires a Datadog API key if you don't have an Agent running.
 {{% /tab %}}
 {{< /tabs >}}
 
-3. Make requests to your application triggering LLM calls and then view traces in the **Traces** tab [of the **LLM Observability** page][3] in Datadog. If you don't see any traces, make sure you are using a supported library else you may need to instrument your application's LLM calls manually.
+### View traces
+
+Make requests to your application triggering LLM calls and then view traces in the **Traces** tab [of the **LLM Observability** page][3] in Datadog. If you don't see any traces, make sure you are using a supported library. Otherwise, you may need to instrument your application's LLM calls manually.
 
 
 ## Further Reading
