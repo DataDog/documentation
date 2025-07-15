@@ -1,0 +1,225 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appServiceName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the Azure App Service"
+      },
+      "minLength": 2,
+      "maxLength": 60
+    },
+    "appServicePlanName": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('appServiceName'), '-plan')]",
+      "metadata": {
+        "description": "Name of the App Service Plan"
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location for all resources"
+      }
+    },
+    "sku": {
+      "type": "string",
+      "defaultValue": "B1",
+      "allowedValues": [
+        "B1",
+        "B2",
+        "B3",
+        "S1",
+        "S2",
+        "S3",
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "metadata": {
+        "description": "App Service Plan SKU"
+      }
+    },
+    "ddApiKey": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Your Datadog API Key"
+      }
+    },
+    "ddSite": {
+      "type": "string",
+      "defaultValue": "datadoghq.com",
+      "allowedValues": [
+        "datadoghq.com",
+        "datadoghq.eu",
+        "us3.datadoghq.com",
+        "us5.datadoghq.com",
+        "ap1.datadoghq.com",
+        "ddog-gov.com"
+      ],
+      "metadata": {
+        "description": "Your Datadog Site"
+      }
+    },
+    "ddService": {
+      "type": "string",
+      "defaultValue": "[parameters('appServiceName')]",
+      "metadata": {
+        "description": "Service name for Datadog APM"
+      }
+    },
+    "ddEnv": {
+      "type": "string",
+      "defaultValue": "production",
+      "metadata": {
+        "description": "Environment name for Datadog APM"
+      }
+    },
+    "ddVersion": {
+      "type": "string",
+      "defaultValue": "1.0.0",
+      "metadata": {
+        "description": "Version for Datadog APM"
+      }
+    },
+    "ddServerlessLogPath": {
+      "type": "string",
+      "defaultValue": "/home/LogFiles/*.log",
+      "metadata": {
+        "description": "Log path for Datadog sidecar log collection"
+      }
+    },
+    "runtime": {
+      "type": "string",
+      "defaultValue": "NODE|18-lts",
+      "allowedValues": [
+        "NODE|18-lts",
+        "NODE|20-lts",
+        "PYTHON|3.9",
+        "PYTHON|3.10",
+        "PYTHON|3.11",
+        "DOTNETCORE|6.0",
+        "DOTNETCORE|7.0",
+        "DOTNETCORE|8.0",
+        "JAVA|11",
+        "JAVA|17",
+        "JAVA|21",
+        "PHP|8.1",
+        "PHP|8.2"
+      ],
+      "metadata": {
+        "description": "Runtime stack for the App Service"
+      }
+    }
+  },
+  "variables": {
+    "sidecarImageName": "datadog/serverless-init:latest"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2022-09-01",
+      "name": "[parameters('appServicePlanName')]",
+      "location": "[parameters('location')]",
+      "kind": "linux",
+      "properties": {
+        "reserved": true
+      },
+      "sku": {
+        "name": "[parameters('sku')]"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2022-09-01",
+      "name": "[parameters('appServiceName')]",
+      "location": "[parameters('location')]",
+      "kind": "app,linux,container",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]"
+      ],
+      "properties": {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]",
+        "siteConfig": {
+          "linuxFxVersion": "[parameters('runtime')]",
+          "appSettings": [
+            {
+              "name": "DD_API_KEY",
+              "value": "[parameters('ddApiKey')]"
+            },
+            {
+              "name": "DD_SITE",
+              "value": "[parameters('ddSite')]"
+            },
+            {
+              "name": "DD_SERVICE",
+              "value": "[parameters('ddService')]"
+            },
+            {
+              "name": "DD_ENV",
+              "value": "[parameters('ddEnv')]"
+            },
+            {
+              "name": "DD_VERSION",
+              "value": "[parameters('ddVersion')]"
+            },
+            {
+              "name": "DD_SERVERLESS_LOG_PATH",
+              "value": "[parameters('ddServerlessLogPath')]"
+            },
+            {
+              "name": "DD_TRACE_ENABLED",
+              "value": "true"
+            },
+            {
+              "name": "DD_LOGS_INJECTION",
+              "value": "true"
+            },
+            {
+              "name": "DD_RUNTIME_METRICS_ENABLED",
+              "value": "true"
+            },
+            {
+              "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
+              "value": "true"
+            },
+            {
+              "name": "WEBSITES_PORT",
+              "value": "8080"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/siteextensions",
+      "apiVersion": "2022-09-01",
+      "name": "[concat(parameters('appServiceName'), '/DatadogAgentExtension')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('appServiceName'))]"
+      ],
+      "properties": {}
+    }
+  ],
+  "outputs": {
+    "appServiceName": {
+      "type": "string",
+      "value": "[parameters('appServiceName')]"
+    },
+    "appServiceUrl": {
+      "type": "string",
+      "value": "[concat('https://', reference(resourceId('Microsoft.Web/sites', parameters('appServiceName'))).defaultHostName)]"
+    },
+    "datadogConfiguration": {
+      "type": "object",
+      "value": {
+        "service": "[parameters('ddService')]",
+        "environment": "[parameters('ddEnv')]",
+        "version": "[parameters('ddVersion')]",
+        "site": "[parameters('ddSite')]"
+      }
+    }
+  }
+}
