@@ -136,8 +136,7 @@ Your nodes have this feature enabled if they have the label `kubernetes.azure.co
 kubectl get nodes -L kubernetes.azure.com/kubelet-serving-ca
 ```
 
-Ensure that all your nodes show `cluster`. 
-**Note:** 
+Ensure that all your nodes show `cluster`.
 
 #### Without Kubelet serving certificate rotation
 
