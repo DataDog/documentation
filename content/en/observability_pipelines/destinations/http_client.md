@@ -12,10 +12,10 @@ Use Observability Pipelines' HTTP Client destination to send logs to an HTTP cli
 Set up the New Relic destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
 
 1. Select your authorization strategy (**None**, **Basic**, or **Bearer**).
-1. Select the encoder you want to use for the HTTP messages.
+1. JSON is the only available encoder.
 1. Optionally, toggle the switch to enable compression. If enabled:
-	1. Select the compression algorithm you want to use.
-	1. Select the compressions level you want to use.
+	1. GZIP is the only available compression algorithm.
+	1. Select the compression level you want to use.
 1. Optionally, toggle the switch to enable TLS. If you enable TLS, the following certificate and key files are required.
     - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
     - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
