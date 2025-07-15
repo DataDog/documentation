@@ -22,6 +22,8 @@ This guide walks you through the recommended aggregator architecture for new Obs
 
 {{< img src="observability_pipelines/test.png" alt="Your image description" style="width:100%;" >}}
 
+{{< img src="observability_pipelines/test2.png" alt="Your image description" style="width:100%;" >}}
+
 ## Optimize the instance
 
 ### Instance sizing
