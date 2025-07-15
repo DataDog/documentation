@@ -233,7 +233,7 @@ Step replay allows you to re-run one or more steps of your browser test directly
 <div class="alert alert-warning">
   <p>The current version of the extension<strong> <span style="font-weight: bold;">does not have Chrome's debugger permission</span></strong>, as a result:</p>
   <ul>
-    <li>Some advanced actions are <strong>not yet supported</strong>.</li>
+    <li>Some advanced actions are <strong>not supported</strong>.</li>
     <li>Certain steps (like <strong>click</strong> or <strong>hover</strong>) may behave <strong>differently</strong> than in a full Synthetic Monitoring test run.</li>
     <li><strong>JavaScript-based assertions or extractions, keystroke simulations, and email interactions</strong> are <strong> unavailable</strong>.</li>
   </ul>
@@ -245,7 +245,7 @@ You can replay steps in three ways:
 
 <strong>1. Single step replay:</strong> Re-execute a single step:
 {{< img src="synthetics/browser_tests/recording__replay--replay-one-step.mp4" alt="Single Step Replay" video="true" height="400px" >}}
-<p style="text-align: center;"><em>Hover the step, click on the play button to replay only this step</em></p>
+<p style="text-align: center;"><em>Hover over the step, and click on the play button to replay only this step.</em></p>
 
 <strong>2. Replay all steps:</strong> Run the entire sequence of steps as defined in the recorder:
 {{< img src="synthetics/browser_tests/recording__replay--replay-all-steps.mp4" alt="Replay All Steps" video="true" height="400px" >}}
@@ -257,9 +257,9 @@ You can replay steps in three ways:
 
 ### Step replay feature support
 
-The following table summarizes which browser test step types are supported by Step Replay:
+The following table summarizes which Browser Test step types are supported by step replay:
 
-| Step Type                | Supported by Step Replay? | Notes |
+| Step type                | Supported by Step Replay | Notes |
 |--------------------------|:------------------------:|-------|
 | Extract variable         | {{< X >}}                       |       |
 | Go to URL                | {{< X >}}                       |       |
@@ -277,17 +277,22 @@ The following table summarizes which browser test step types are supported by St
 | Assert page lacks        | {{< X >}}                       |       |
 | Click                    | {{< X >}}*                      | *Click steps are supported, but may behave differently than in a full Synthetic Monitoring test run. |
 | Hover                    | {{< X >}}*                      | *Hover steps are supported, but may behave differently than in a full Synthetic Monitoring test run. |
-| Assert email             |                          | Not supported |
-| Assert requests          |                          | Not supported |
-| Extract from email body  |                          | Not supported |
-| Go to email link         |                          | Not supported |
-| Upload files             |                          | Not supported |
-| Assert natural language  |                          | Not supported |
-| Run API test             |                          | Not supported |
-| Assert from JavaScript   |                          | Not supported |
-| Extract from JavaScript  |                          | Not supported |
-| Press key                |                          | Not supported |
-| Type text                |                          | Not supported |
+
+### Step types not supported by step replay
+
+| Step type                | Supported by step replay |
+|--------------------------|:------------------------:|
+| Assert email             | Not supported            |
+| Assert requests          | Not supported            |
+| Extract from email body  | Not supported            |
+| Go to email link         | Not supported            |
+| Upload files             | Not supported            |
+| Assert natural language  | Not supported            |
+| Run API test             | Not supported            |
+| Assert from JavaScript   | Not supported            |
+| Extract from JavaScript  | Not supported            |
+| Press key                | Not supported            |
+| Type text                | Not supported            |
 
 ## Permissions
 
