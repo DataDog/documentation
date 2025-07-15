@@ -36,17 +36,17 @@ Additionally, [set up Azure log forwarding][6] to automatically collect and send
 
 To monitor Azure App Service workloads with APM and custom metrics, install instrumentation on your Azure App Service workloads. This instrumentation is available for both Windows and Linux App Services, and supports the following runtimes on Basic, Standard, and Premium plans:
 
-| OS    | Runtime   | Documentation               |
-|-------|-----------|-----------------------------|
-| Windows| .NET     | [Windows .NET setup][7]     |
-| Windows| Java     | [Windows Java setup][8]     |
-| Windows| Node.js  | [Windows Node.js setup][9]  |
-| Linux  | .NET     | [Linux .NET setup][10]      |
-| Linux  | Java     | [Linux Java setup][11]      |
-| Linux  | Node.js  | [Linux Node.js setup][12]   |
-| Linux  | PHP      | [Linux PHP setup][13]       |
-| Linux  | Python   | [Linux Python setup][14]    |
-| Linux  | Container| [Linux Container setup][15] |
+| OS      | Runtime   | Documentation               |
+|---------|-----------|-----------------------------|
+| Windows | .NET      | [Windows .NET setup][7]     |
+| Windows | Java      | [Windows Java setup][8]     |
+| Windows | Node.js   | [Windows Node.js setup][9]  |
+| Linux   | .NET      | [Linux .NET setup][10]      |
+| Linux   | Java      | [Linux Java setup][11]      |
+| Linux   | Node.js   | [Linux Node.js setup][12]   |
+| Linux   | PHP       | [Linux PHP setup][13]       |
+| Linux   | Python    | [Linux Python setup][14]    |
+| Linux   | Container | [Linux Container setup][15] |
 
 
 Capabilities:
