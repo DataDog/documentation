@@ -76,7 +76,7 @@ To get started, follow the instructions below.
 
    Adding `"source": "airflow"` enables the extraction of the correlation-required attributes by the [Airflow integration][8] logs pipeline.
 
-   **Note**: Log collection requires the Datadog agent to be already installed on your Kubernetes cluster. If this is not the case yet, see the [Kubernetes installation documentation][9].
+   **Note**: Log collection requires the Datadog agent to already be installed on your Kubernetes cluster. If you haven't installed it yet, see the [Kubernetes installation documentation][9].
 
    For more methods to set up log collection on Kubernetes, see the [Kubernetes and Integrations configuration section][7].
    
