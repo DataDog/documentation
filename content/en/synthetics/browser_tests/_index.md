@@ -228,13 +228,13 @@ You can switch tabs in a browser test recording in order to perform an action on
 
 ## Step replay
 
-Step Replay lets you re-run one or more steps of your browser test directly from the Datadog Synthetics Chrome extension. This feature is designed to help you quickly set up the right state when adding or editing steps in the middle of a long test, without having to manually replay the entire journey from scratch.
+Step replay allows you to re-run one or more steps of your browser test directly from the Datadog Synthetic Monitoring Chrome extension. This feature helps you establish the correct state when adding or editing steps in the middle of a long test, so you don't need to manually replay the entire test from the beginning.
 
 <div class="alert alert-warning">
   <p>The current version of the extension<strong> <span style="font-weight: bold;">does not have Chrome's debugger permission</span></strong>, as a result:</p>
   <ul>
     <li>Some advanced actions are <strong>not yet supported</strong>.</li>
-    <li>Certain steps (like <strong>click</strong> or <strong>hover</strong>) may behave <strong>differently</strong> than in a full Synthetics test run.</li>
+    <li>Certain steps (like <strong>click</strong> or <strong>hover</strong>) may behave <strong>differently</strong> than in a full Synthetic Monitoring test run.</li>
     <li><strong>JavaScript-based assertions or extractions, keystroke simulations, and email interactions</strong> are <strong> unavailable</strong>.</li>
   </ul>
 </div>
@@ -276,7 +276,7 @@ The following steps are supported in step replay:
 
 ### Debugger permissions
 
-Currently, the step replay feature runs without Chrome's debugger permission. This means some advanced user actions are either not yet supported or may behave differently compared to full Synthetics test runs.
+Currently, the step replay feature runs without Chrome's debugger permission. This means some advanced user actions are either not yet supported or may behave differently compared to full Synthetic Monitoring test runs.
 
 An upcoming release of the Chrome extension will enable debugger permission, bringing Step Replay much closer to full feature compatibility with the Synthetics platform, providing:
 
