@@ -163,8 +163,9 @@ For .NET applications, the following environment variables are **required**:
 **Value for Alpine Linux and other musl-based distros**:<br>
 `/home/site/wwwroot/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so`<br>
 Path to the library that implements the Profiling API callbacks. Loaded by the .NET runtime.<br>
-**Note**: This path is determined by OS and architecture. See the [Nuget package's README file][304] for more details.
+**Note**: This path is determined by OS and architecture. See the [Nuget package's README file][1] for more details.
 
+[1]: https://www.nuget.org/packages/Datadog.Trace.Bundle#readme-body-tab
 
 {{% /collapse-content %}}
 
@@ -187,7 +188,6 @@ Path to the library that implements the Profiling API callbacks. Loaded by the .
 [301]: https://app.datadoghq.com/organization-settings/api-keys
 [302]: /getting_started/site/
 [303]: /profiler
-[304]: https://www.nuget.org/packages/Datadog.Trace.Bundle#readme-body-tab
 
 {{% /tab %}}
 {{< /tabs >}}
