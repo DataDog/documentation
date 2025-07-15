@@ -1,7 +1,7 @@
 traits:
 - id: prog_lang
   label: Programming Language
-  internal_notes: Do not use for frameworks like Next or React Native. Instead, use `env`.
+  internal_notes: Do not use for frameworks like Next or React Native. Instead, use `platform`.
 
 - id: protocol
   label: Protocol
