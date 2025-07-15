@@ -3,7 +3,7 @@ title: Azure Storage Destination
 disable_toc: false
 ---
 
-Use the Azure Storage destination to send logs to an Azure Storage bucket for archiving. If you want to send logs in Datadog-rehydratable format to Azure Storage for [archiving][1] and [rehydration][2], you must [configure Log Archives](#configure-log-archives). If you want to send your logs directly to Azure Storage, without converting them to Datadog-rehydratable format, skip to [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
+Use the Azure Storage destination to send logs to an Azure Storage bucket. If you want to send logs in Datadog-rehydratable format to Azure Storage for [archiving][1] and [rehydration][2], you must [configure Log Archives](#configure-log-archives). If you want to send your logs directly to Azure Storage, without converting them to Datadog-rehydratable format, skip to [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
 
 ## Configure Log Archives
 
