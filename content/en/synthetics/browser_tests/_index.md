@@ -255,36 +255,39 @@ You can replay steps in three ways:
 {{< img src="synthetics/browser_tests/recording__replay--replay-selected-steps.mp4" alt="Replay Selected Steps" video="true">}}
 <p style="text-align: center;"><em>Select the steps you want to replay then click on the replay selected icon (⏩︎) on top of the step list.</em></p>
 
-### Supported steps
+### Step replay feature support
 
-The following steps are supported in step replay:
+The following table summarizes which browser test step types are supported by Step Replay:
 
-- Extract variable
-- Go to URL
-- Refresh
-- Scroll
-- Select option
-- Wait
-- Assert checkbox state
-- Assert current url
-- Assert element attribute
-- Assert element content
-- Assert element present
-- Assert file download
-- Assert page contains
-- Assert page lacks
-
-### Step types not supported
-
-The following steps are currently not available in Step Replay, even with debugger permission. They may be added in future versions:
-
-- Assert Email
-- Assert Requests
-- Extract from Email Body
-- Go to Email Link
-- Upload Files
-- Assert Natural Language
-- Run API Test
+| Step Type                | Supported by Step Replay? | Notes |
+|--------------------------|:------------------------:|-------|
+| Extract variable         | {{< X >}}                       |       |
+| Go to URL                | {{< X >}}                       |       |
+| Refresh                  | {{< X >}}                       |       |
+| Scroll                   | {{< X >}}                       |       |
+| Select option            | {{< X >}}                       |       |
+| Wait                     | {{< X >}}                       |       |
+| Assert checkbox state    | {{< X >}}                       |       |
+| Assert current URL       | {{< X >}}                       |       |
+| Assert element attribute | {{< X >}}                       |       |
+| Assert element content   | {{< X >}}                       |       |
+| Assert element present   | {{< X >}}                       |       |
+| Assert file download     | {{< X >}}                       |       |
+| Assert page contains     | {{< X >}}                       |       |
+| Assert page lacks        | {{< X >}}                       |       |
+| Click                    | {{< X >}}*                      | *Click steps are supported, but may behave differently than in a full Synthetic Monitoring test run. |
+| Hover                    | {{< X >}}*                      | *Hover steps are supported, but may behave differently than in a full Synthetic Monitoring test run. |
+| Assert email             |                          | Not supported |
+| Assert requests          |                          | Not supported |
+| Extract from email body  |                          | Not supported |
+| Go to email link         |                          | Not supported |
+| Upload files             |                          | Not supported |
+| Assert natural language  |                          | Not supported |
+| Run API test             |                          | Not supported |
+| Assert from JavaScript   |                          | Not supported |
+| Extract from JavaScript  |                          | Not supported |
+| Press key                |                          | Not supported |
+| Type text                |                          | Not supported |
 
 ## Permissions
 
