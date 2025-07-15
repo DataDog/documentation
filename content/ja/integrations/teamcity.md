@@ -24,7 +24,7 @@ assets:
     source_type_id: 109
     source_type_name: Teamcity
   monitors:
-    Build Status: assets/monitors/build_status.json
+    Builds are failing: assets/monitors/build_status.json
   saved_views:
     teamcity_processes: assets/saved_views/teamcity_processes.json
 author:
@@ -36,7 +36,7 @@ categories:
 - configuration & deployment
 - log collection
 - notifications
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/teamcity/README.md
 display_on_public_website: true
@@ -44,7 +44,7 @@ draft: false
 git_integration_title: teamcity
 integration_id: teamcity
 integration_title: TeamCity
-integration_version: 4.3.1
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: teamcity
@@ -114,7 +114,7 @@ TeamCity チェックは [Datadog Agent][1] パッケージに含まれていま
 
 Basic HTTP 認証の場合
 - [Agent の構成ディレクトリ][11]の `conf.d/` フォルダ内の `teamcity.d/conf.yaml` ファイルに、識別された `username` と `password` を指定します。
-- `Access denied. Enable guest authentication or check user permissions.` (アクセスが拒否されました。ゲスト認証を有効にするか、ユーザー権限を確認してください。) というエラーが発生した場合は、ユーザーの権限が正しいことを確認してください。
+- `Access denied. Enable guest authentication or check user permissions.` (アクセスが拒否されました。ゲスト認証を有効にするか、ユーザー権限を確認してください。) というエラーが発生した場合は、ユーザーの権限が正しいことを確認してください。 
   - プロジェクト単位および View Usage Statistics 権限が有効になっている。
   - Agent Workload Statistics を収集する場合は、View Agent Details および View Agent Usage Statistics 権限も割り当てます。
 
@@ -134,26 +134,17 @@ TeamCity チェックは、データ収集の 2 つのメソッドを提供し�
    TeamCity の `/metrics` Prometheus エンドポイントからメトリクスを収集するために `use_openmetrics: true` を有効化します。
 
    ```yaml
-   init_config:
+   init_config: 
 
    instances:
-     - server: http://teamcity.<ACCOUNT_NAME>.com
+    - use_openmetrics: true
 
-       ## @param projects - mapping - optional
-       ## Mapping of TeamCity projects and build configurations to
-       ## collect events and metrics from the TeamCity REST API.
-       #
-       projects:
-         <PROJECT_A>:
-           include:
-           - <BUILD_CONFIG_A>
-           - <BUILD_CONFIG_B>
-           exclude:
-           - <BUILD_CONFIG_C>
-         <PROJECT_B>:
-           include:
-           - <BUILD_CONFIG_D>
-         <PROJECT_C>: {}
+      ## @param server - string - required
+      ## Specify the server name of your TeamCity instance.
+      ## Enable Guest Authentication on your instance or specify `username` and `password` to
+      ## enable basic HTTP authentication.
+      #
+      server: http://teamcity.<ACCOUNT_NAME>.com
    ```
 
   [OpenMetrics 準拠][3]のヒストグラムとサマリーのメトリクスを収集するには (TeamCity Server 2022.10+ から利用可能)、内部プロパティである `teamcity.metrics.followOpenMetricsSpec=true` を追加してください。[TeamCity 内部プロパティ][4]を参照してください。
@@ -174,7 +165,7 @@ TeamCity チェックは、データ収集の 2 つのメソッドを提供し�
        #
        projects:
          <PROJECT_A>:
-           include:
+           include:    
            - <BUILD_CONFIG_A>
            - <BUILD_CONFIG_B>
            exclude:

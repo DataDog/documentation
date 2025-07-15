@@ -35,7 +35,7 @@ App Analytics is available starting in version 0.25.0 of the Java tracing client
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-App Analytics is available starting in version 0.19.0 of the Python tracing client. Enable App Analytics globally for all **web** integrations with one configuration parameter in the Tracing Client:
+App Analytics is available starting in version 0.19.0 of the Python tracing client. This configuration is only available for ddtrace versions 3.x or older. Enable App Analytics globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
 * Tracer Configuration: `ddtrace.config.analytics_enabled = True`
 * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
@@ -59,7 +59,7 @@ Datadog.configure { |c| c.tracing.analytics.enabled = true }
 
 App Analytics is available starting in version 1.11.0 of the Go tracing client, and can be enabled globally for all **web** integrations using:
 
-* the [`WithAnalytics`][1] tracer start option, for example:
+* the [`WithAnalytics`][2] ([v1 documentation][1]) tracer start option, for example:
 
   ```go
   tracer.Start(tracer.WithAnalytics(true))
@@ -68,6 +68,7 @@ App Analytics is available starting in version 1.11.0 of the Go tracing client, 
 * starting in version 1.26.0 using environment variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
+[2]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#WithAnalytics
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -185,14 +186,16 @@ Where `integration` is the name of the integration. See the [list of available i
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
+{{% tracing-go-v2 %}}
+
 In addition to the global setting, you can enable or disable App Analytics individually for each integration. As an example, for configuring the standard library's `net/http` package, you could do:
 
 ```go
 package main
 
 import (
-    httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {

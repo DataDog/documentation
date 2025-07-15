@@ -253,6 +253,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_3298564989",
+      "description": "Create a new dashboard with llm_observability_stream list_stream widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2029850837",
       "description": "Create a new dashboard with log_stream widget"
     },
@@ -300,6 +305,11 @@
       "group": "dashboards",
       "suffix": "_2336428357",
       "description": "Create a new dashboard with query_table widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1490099434",
+      "description": "Create a new dashboard with query_table widget and cell_display_mode is trend"
     },
     {
       "group": "dashboards",
@@ -373,6 +383,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1751391372",
+      "description": "Create a new dashboard with template variable type field returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_41622531",
       "description": "Create a new dashboard with timeseries widget and formula style attributes"
     },
@@ -380,6 +395,11 @@
       "group": "dashboards",
       "suffix": "_3982498788",
       "description": "Create a new dashboard with timeseries widget containing style attributes"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3520534424",
+      "description": "Create a new dashboard with timeseries widget with custom_unit"
     },
     {
       "group": "dashboards",
@@ -437,6 +457,11 @@
       "group": "dashboards",
       "suffix": "",
       "description": "Create a shared dashboard returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1668947073",
+      "description": "Create a shared dashboard with a group template variable returns \"OK\" response"
     }
   ],
   "DeleteDashboards": [
@@ -477,6 +502,11 @@
       "group": "dashboards",
       "suffix": "",
       "description": "Update a shared dashboard returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1708268778",
+      "description": "Update a shared dashboard with selectable_template_vars returns \"OK\" response"
     }
   ],
   "CancelDowntimesByScope": [
@@ -582,6 +612,38 @@
       "description": "Send logs returns \"Response from server (always 200 empty JSON).\" response"
     }
   ],
+  "CreateLogsPipeline": [
+    {
+      "group": "logs_pipelines",
+      "suffix": "_1248402480",
+      "description": "Create a pipeline with Array Processor Append Operation returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_3934594739",
+      "description": "Create a pipeline with Array Processor Append Operation with preserve_source false returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_3314493032",
+      "description": "Create a pipeline with Array Processor Append Operation with preserve_source true returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_1271012410",
+      "description": "Create a pipeline with Array Processor Length Operation returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_1267211320",
+      "description": "Create a pipeline with Array Processor Select Operation returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_2707101123",
+      "description": "Create a pipeline with Span Id Remapper returns \"OK\" response"
+    }
+  ],
   "SubmitDistributionPoints": [
     {
       "group": "metrics",
@@ -607,6 +669,11 @@
     }
   ],
   "CreateMonitor": [
+    {
+      "group": "monitors",
+      "suffix": "_1303514967",
+      "description": "Create a Cost Monitor returns \"OK\" response"
+    },
     {
       "group": "monitors",
       "suffix": "_3883669300",

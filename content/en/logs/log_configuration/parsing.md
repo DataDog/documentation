@@ -5,6 +5,9 @@ aliases:
     - /logs/parsing/
     - /logs/processing/parsing
 further_reading:
+- link: "https://learn.datadoghq.com/courses/log-pipelines"
+  tag: "Learning Center"
+  text: "Learn how to build and modify log pipelines"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
@@ -20,6 +23,10 @@ further_reading:
 algolia:
   tags: ["grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---
+
+{{< learning-center-callout header="Try Grok parsing in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/log-pipelines">}}
+  Learn to build and modify log pipelines, manage them with the Pipeline Scanner, and standardize attribute names across processed logs for consistency.
+{{< /learning-center-callout >}}
 
 ## Overview
 
@@ -60,10 +67,13 @@ After processing, the following structured log is generated:
 * You must have unique rule names within the same Grok parser.
 * The rule name must contain only: alphanumeric characters, `_`, and `.`. It must start with an alphanumeric character.
 * Properties with null or empty values are not displayed.
-* The regex matcher applies an implicit `^`, to match the start of a string, and `$`, to match the end of a string.
+* You must define your parsing rule to match the entire log entry, as each rule applies from the beginning to the end of the log.
 * Certain logs can produce large gaps of whitespace. Use `\n` and `\s+` to account for newlines and whitespace.
 
 ### Matcher and filter
+
+<div class="alert alert-warning">Grok parsing features available at <em>query-time</em> (in <a href="/logs/workspaces/#transformation-cell">Log Workspaces</a> and in the <a href="/logs/explorer/calculated_fields/">Log Explorer</a>) support a limited subset of matchers (<strong>data</strong>, <strong>integer</strong>, <strong>notSpace</strong>, <strong>number</strong>, and <strong>word</strong>) and filters (<strong>number</strong> and <strong>integer</strong>).<br><br>
+The following full set of matchers and filters are specific to <em>ingest-time</em> <a href="/logs/log_configuration/processors/?tab=ui#grok-parser">Grok Parser</a> functionality.</div>
 
 Here is a list of all the matchers and filters natively implemented by Datadog:
 

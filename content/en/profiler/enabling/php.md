@@ -54,11 +54,11 @@ apk add libgcc
 
 The following profiling features are available in the following minimum versions of the `dd-trace-php` library:
 
-|      Feature              | Required `dd-trace-php` version          |
-|---------------------------|------------------------------------------|
-| [Code Hotspots][12]       | 0.71+                                    |
-| [Endpoint Profiling][13]  | 0.79.0+                                  |
-| [Timeline][15]            | 0.98.0+ (beta since 0.89.0+)             |
+| Feature                              | Required `dd-trace-php` version |
+|--------------------------------------|---------------------------------|
+| [Trace to Profiling integration][12] | 0.89.0+                           |
+| [Endpoint Profiling][13]             | 0.79.0+                         |
+| [Timeline][15]                       | 0.98.0+                         |
 
 Continuous Profiler is not supported on some serverless platforms, such as AWS Lambda.
 

@@ -6,7 +6,7 @@ Cloudcraft stores data in the AWS `us-east-1` (North Virginia) region for public
 
 All data is encrypted at rest and in transit using industry best practices.
 
-Cloudcraft also implements rigorous security processes. For more information, see the [Cloudcraft security page][1] and [SOC 2 Type I report][2].
+Cloudcraft also implements rigorous security processes. For more information, see the [Cloudcraft security page][1] and [SOC 2 Type II report][2].
 
 If you are interested in storing your data in Europe, contact [the sales team][3] for more information.
 

@@ -38,7 +38,7 @@ draft: false
 git_integration_title: gearmand
 integration_id: gearman
 integration_title: Gearman
-integration_version: 3.1.0
+integration_version: 5.0.0
 is_public: true
 manifest_version: 2.0.0
 name: gearmand
@@ -150,7 +150,7 @@ Gearman 메트릭을 수집하면 다음을 할 수 있습니다.
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "gearmand" >}}
+{{< get-metrics-from-git "gearman" >}}
 
 
 ### 이벤트
@@ -158,7 +158,7 @@ Gearman 메트릭을 수집하면 다음을 할 수 있습니다.
 Gearman 점검에는 이벤트가 포함되어 있지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "gearmand" >}}
+{{< get-service-checks-from-git "gearman" >}}
 
 
 ## 트러블슈팅

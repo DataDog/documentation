@@ -38,12 +38,11 @@ further_reading:
 - link: https://www.datadoghq.com/blog/modernize-your-ci-cd-environment/
   tag: 블로그
   text: Datadog CI 파이프라인 가시성을 통한 CI/CD 현대화 모니터링
+- link: https://www.datadoghq.com/blog/datadog-detection-as-code/
+  tag: 블로그
+  text: Datadog를 사용해 코드로 감지하기
 title: 지속적 통합 가시성
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">현재 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 CI Visibility를 사용할 수 없습니다.</div>
-{{< /site-region >}}
 
 이 페이지에서는 연속적인 통합(CI) 메트릭과 데이터를 Datadog 대시보드로 가져오는 방법에 대해 설명합니다. CI 파이프라인에서 Continuous Testing 테스트를 실행하려면 <a href="/continuous_testing/cicd_integrations/" target="_blank">Continuous Testing 및 CI/CD</a> 섹션을 참조하세요.
 

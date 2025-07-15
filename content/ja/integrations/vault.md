@@ -22,7 +22,7 @@ assets:
     source_type_id: 10059
     source_type_name: Vault
   monitors:
-    '[Vault] S3 time to access secrets is high': assets/monitors/vault_S3_time_high.json
+    Time to access secrets is high: assets/monitors/vault_S3_time_high.json
   saved_views:
     error_warning_status: assets/saved_views/error_warning_status.json
     service_name_overview: assets/saved_views/service_name_overview.json
@@ -35,7 +35,7 @@ author:
 categories:
 - ログの収集
 - セキュリティ
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/vault/README.md
 display_on_public_website: true
@@ -43,7 +43,7 @@ draft: false
 git_integration_title: vault
 integration_id: vault
 integration_title: Vault
-integration_version: 4.2.1
+integration_version: 6.0.0
 is_public: true
 manifest_version: 2.0.0
 name: vault

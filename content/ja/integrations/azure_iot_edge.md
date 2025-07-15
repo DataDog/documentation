@@ -19,10 +19,10 @@ assets:
     source_type_id: 10125
     source_type_name: Azure IoT Edge
   monitors:
-    Disk usage: assets/monitors/disk_usage.json
-    Edge Hub retries: assets/monitors/edgehub_retries.json
-    IoT Hub syncs: assets/monitors/iothub_syncs.json
-    Memory usage: assets/monitors/memory_usage.json
+    Device is running out of disk space: assets/monitors/disk_usage.json
+    Device is running out of memory: assets/monitors/memory_usage.json
+    Edge Hub operation retries is higher than usual: assets/monitors/edgehub_retries.json
+    Unsuccessful syncs are high: assets/monitors/iothub_syncs.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -33,7 +33,7 @@ categories:
 - iot
 - ログの収集
 - ネットワーク
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/README.md
 display_on_public_website: true
@@ -41,7 +41,7 @@ draft: false
 git_integration_title: azure_iot_edge
 integration_id: azure-iot-edge
 integration_title: Azure IoT Edge
-integration_version: 4.2.1
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: azure_iot_edge
@@ -177,7 +177,7 @@ Agent がデバイスにデプロイされたら、[Agent の status サブコ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_iot_edge" >}}
+{{< get-metrics-from-git "azure-iot-edge" >}}
 
 
 ### イベント
@@ -185,7 +185,7 @@ Agent がデバイスにデプロイされたら、[Agent の status サブコ�
 Azure IoT Edge には、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "azure_iot_edge" >}}
+{{< get-service-checks-from-git "azure-iot-edge" >}}
 
 
 ## トラブルシューティング

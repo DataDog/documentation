@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Uso de la herramienta de diagnóstico de .NET para solucionar problemas
 ---
 

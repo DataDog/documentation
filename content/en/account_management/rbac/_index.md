@@ -22,6 +22,8 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
       tag: "Blog"
       text: "Build compliance, governance, and transparency across your teams with Datadog Audit Trail"
+algolia:
+  tags: ["rbac"]
 ---
 
 ## Overview
@@ -48,7 +50,7 @@ Datadog Admin Role
 : Users have access to billing information and the ability to revoke API keys. They can manage users and configure [read-only dashboards][5]. They can also promote standard users to administrators.
 
 Datadog Standard Role
-: Users are allowed to view and modify all monitoring features that Datadog offers, such as [dashboards][5], [monitors][6], [events][7], and [notebooks][8]. Standard users can also invite other users to organizations.
+: Users are allowed to view and modify all monitoring features that Datadog offers, such as [dashboards][5], [monitors][6], [events][7], and [notebooks][11]. Standard users can also invite other users to organizations.
 
 Datadog Read Only Role
 : Users do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client, or when a member of one business unit needs to share a [dashboard][5] with someone outside their unit.
@@ -59,7 +61,7 @@ The custom roles feature gives your organization the ability to create new roles
 
 ### Enable custom roles
 
-1. Navigate to [Organization Settings][9]. 
+1. Navigate to [Organization Settings][9].
 2. On the left side of the page, select **Roles**.
 3. Click the gear in the upper right corner. The Custom Roles pop-up appears.
 4. In the Custom Roles pop-up, click **Enable**.
@@ -204,3 +206,4 @@ When creating or updating a role on the Datadog site, use a Datadog role templat
 [8]: /api/v2/roles/
 [9]: https://app.datadoghq.com/organization-settings/
 [10]: /api/latest/roles/#create-role
+[11]: /notebooks

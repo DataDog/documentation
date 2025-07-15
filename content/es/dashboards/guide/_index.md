@@ -13,24 +13,27 @@ title: Guías para crear gráficos
 ---
 
 {{< whatsnext desc="General Guides:" >}}
-    {{< nextlink href="dashboards/guide/maintain-relevant-dashboards" >}}Best practices for maintaining relevant dashboards{{< /nextlink >}} 
-    {{< nextlink href="dashboards/guide/how-to-graph-percentiles-in-datadog" >}}Graphing percentiles in Datadog{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/query-to-the-graph" >}}Query to the Graph{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/widget_colors" >}}Selecting the right colors for your graphs{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/compatible_semantic_tags" >}}Compatible semantic tags{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/custom_time_frames" >}}Custom time frames{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/quick-graphs" >}}Quick Graphs{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/context-links" >}}Context Links{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/unit-override" >}}Unit override{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/how-to-use-terraform-to-restrict-dashboards" >}}Using Terraform to restrict the editing of a dashboard{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/embeddable-graphs-with-template-variables" >}}Embeddable graphs with template variables{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/unable-to-iframe" >}}Why am I unable to iFrame certain HTTPS URLs?{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/powerpacks-best-practices" >}}Powerpacks best practices{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/slo_data_source" >}}Graph historical SLO data on Dashboards{{< /nextlink >}}
-    {{< nextlink href="/dashboards/guide/slo_graph_query" >}}Scope metric-based SLO queries{{< /nextlink >}}
-    {{< nextlink href="/dashboards/guide/apm-stats-graph" >}}Configuring an APM stats graph{{< /nextlink >}}
-    {{< nextlink href="/dashboards/guide/version_history" >}}Version History{{< /nextlink >}}
-    {{< nextlink href="/dashboards/guide/graphing_json/" >}}Graphing with JSON
+    {{< nextlink href="dashboards/guide/maintain-relevant-dashboards" >}}Prácticas recomendadas para el mantenimiento de dashboards relevantes{{< /nextlink >}} 
+    {{< nextlink href="dashboards/guide/how-to-graph-percentiles-in-datadog" >}}Gráfico de percentiles en Datadog{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/query-to-the-graph" >}}Consulta del gráfico{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/widget_colors" >}}Elección de los colores adecuados para tus gráficos{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/compatible_semantic_tags" >}}Etiquetas semánticas compatibles{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/custom_time_frames" >}}Periodos de tiempo personalizados{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/quick-graphs" >}}Gráficos rápidos{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/context-links" >}}Enlaces de contexto{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/unit-override" >}}Sobrescritura de unidades{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/how-to-use-terraform-to-restrict-dashboards" >}}Uso de Terraform para restringir la modificación de un dashboard{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/is-read-only-deprecation" >}}API de dashboards: Migra desde is_read_only antes del 30 de noviembre de 2024{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/embeddable-graphs-with-template-variables" >}}Gráficos incrustables con variables de plantillas{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/unable-to-iframe" >}}¿Por qué no puedo iFrame las URL de ciertos HTTP?{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/powerpacks-best-practices" >}}Prácticas recomendadas para Powerpacks{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/slo_data_source" >}}Graficar datos de SLOs históricos en dasboards{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/slo_graph_query" >}}Acotar consultas de SLOs basadas en métricas{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/apm-stats-graph" >}}Configurar un gráfico de estadísticas APM{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/version_history" >}}Historial de versiones{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/graphing_json/" >}}Gráficos con JSON
+    {{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/tv_mode" >}}Uso del modo TV para dashboards
     {{< /nextlink >}}
 {{< /whatsnext >}}
 

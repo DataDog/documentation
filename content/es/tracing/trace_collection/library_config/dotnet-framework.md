@@ -47,7 +47,7 @@ Puedes establecer parámetros de configuración en .NET Tracer utilizando cualqu
 
 {{< tabs >}}
 
-{{% tab "Environment variables" (Variables de entorno) %}}
+{{% tab "Variables de entorno" %}}
 
 Para configurar el rastreador utilizando variables de entorno, configura las variables antes de iniciar la aplicación instrumentada. Para saber cómo configurar las variables de entorno en diferentes entornos, consulta [Configuración de las variables de entorno de procesos][1].
 
@@ -55,7 +55,7 @@ Para configurar el rastreador utilizando variables de entorno, configura las var
 
 {{% /tab %}}
 
-{{% tab "Code" (Código) %}}
+{{% tab "Código" %}}
 
 Para configurar el rastreador en el código de la aplicación, crea una instancia `TracerSettings` a partir de las fuentes de configuración predeterminadas. Define las propiedades de esta instancia `TracerSettings` antes de llamar a `Tracer.Configure()`. Por ejemplo:
 
@@ -99,7 +99,7 @@ Para configurar el rastreador utilizando un archivo `app.config` o `web.config`,
 
 {{% /tab %}}
 
-{{% tab "JSON file" (Archivo JSON) %}}
+{{% tab "Archivo JSON" %}}
 
 Para configurar el rastreador utilizando un archivo JSON, crea `datadog.json` en el directorio de la aplicación instrumentada. El objeto JSON raíz debe ser un objeto con un par clave-valor para cada parámetro. Por ejemplo:
 
@@ -224,7 +224,7 @@ Añadido en la versión 1.17.0. <br>
 
 `DD_TRACE_LOGFILE_RETENTION_DAYS`
 : Durante el inicio del rastreador, esta configuración utiliza el directorio de logs actual del rastreador para borrar los archivos de logs que tienen la misma o una mayor antigüedad que el número de días dado. Añadido en la versión 2.19.0. <br>
-**Por defecto**: `31`
+**Por defecto**: `32`
 
 `DD_TRACE_LOGGING_RATE`
 : Define un límite de frecuencia para los mensajes de logs. Si se configura, las líneas de log únicas se escriben una vez cada `x` segundos. Por ejemplo, para registrar un mensaje determinado una vez cada 60 segundos, configura `60`. Si configuras `0`, se deshabilita la limitación de la frecuencia de los logs. Añadido en la versión 1.24.0. Deshabilitado por defecto.

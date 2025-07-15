@@ -11,8 +11,10 @@
     </div>
 
     {{ partial "integration-labels/integration-labels.html" . }}
-    
-    {{ if and (in .Params.custom_kind "integration") ($media | len) }}
+    {{ partial "site_support_banner/site_support_banner.html" . }}
+    {{ $dir := "" }}
+    {{ with .File }}{{ $dir = .Dir }}{{ end }}
+    {{ if and (eq $dir "integrations/") ($media | len) }}
         {{ partial "integrations-carousel/integrations-carousel.html" (dict "context" . "media" $media) }}
     {{ end }}
 

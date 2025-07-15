@@ -52,7 +52,8 @@ It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `
 `DD_TRACE_ENABLED`
 : **Configuration**: N/A<br>
 **Default**: `true`<br>
-Whether to enable dd-trace. Setting this to `false` disables all features of the library.
+Whether to enable dd-trace. Setting this to `false` disables all features of the library.<br/>
+See also [DD_APM_TRACING_ENABLED][16].
 
 `DD_TRACE_DEBUG`
 : **Configuration**: N/A<br>
@@ -76,17 +77,6 @@ Accepts a comma-delimited list of case-insensitive HTTP headers optionally mappe
 **Example**: `User-ID:userId,Request-ID`<br>
   - If the **Request/Response** has a header `User-ID`, its value is applied as tag `userId` to the spans produced by the service.<br>
   - If the **Request/Response** has a header `Request-ID`, its value is applied as tag `http.request.headers.Request-ID` for requests and `http.response.headers.Request-ID` for responses.
-
-`DD_TRACE_SAMPLE_RATE`
-: **Configuration**: `sampleRate`<br>
-**Default**: Defers the decision to the Agent.<br>
-Controls the ingestion sample rate (between 0.0 and 1.0) between the Agent and the backend.<br>
-**Note**: `DD_TRACE_SAMPLE_RATE` is deprecated in favor of `DD_TRACE_SAMPLING_RULES`.<br>
-
-`DD_TRACE_SAMPLING_RULES`
-: **Configuration**: `samplingRules`<br>
-**Default**: `[]`<br>
-Sampling rules to apply to priority sampling. A JSON array of objects. Each object must have a `sample_rate` value between 0.0 and 1.0 (inclusive). Each rule has optional `name` and `service` fields, which are regex strings to match against a trace's `service` and `name`. Rules are applied in configured order to determine the trace's sample rate. If omitted, the tracer defers to the Agent to dynamically adjust sample rate across all traces.
 
 `DD_SERVICE_MAPPING`
 : **Configuration**: `serviceMapping`<br>
@@ -163,6 +153,24 @@ Automatically Instrument External Libraries
 **Default**: `true`<br>
 Whether to enable automatic instrumentation of external libraries using the built-in plugins.
 
+`DD_TRACE_CLOUD_REQUEST_PAYLOAD_TAGGING`
+: **Configuration**: `cloudPayloadTagging.request`<br>
+**Default**: N/A (disabled)<br>
+**Example**: `DD_TRACE_CLOUD_REQUEST_PAYLOAD_TAGGING=$.Metadata.UserId`<br>
+A comma-separated string of JSONPath entries to redact from AWS SDK requests. Setting this enables [AWS payload tagging][6] for requests.
+
+`DD_TRACE_CLOUD_RESPONSE_PAYLOAD_TAGGING`
+: **Configuration**: `cloudPayloadTagging.response`<br>
+**Default**: N/A (disabled)<br>
+**Example**: `DD_TRACE_CLOUD_RESPONSE_PAYLOAD_TAGGING=$.Metadata.UserId`<br>
+A comma-separated string of JSONPath entries to redact from AWS SDK responses. Setting this enables [AWS payload tagging][6] for responses.
+
+`DD_TRACE_CLOUD_PAYLOAD_TAGGING_MAX_DEPTH`
+: **Configuration**: `cloudPayloadTagging.maxDepth`<br>
+**Default**: 10<br>
+**Example**: `DD_TRACE_CLOUD_PAYLOAD_TAGGING_MAX_DEPTH=10`<br>
+An integer representing the maximum depth of an AWS SDK request/reponse payload to use for [AWS payload tagging][6].
+
 ### Agent
 
 `DD_TAGS`
@@ -195,12 +203,12 @@ The port of the DogStatsD Agent that metrics are submitted to. If the [Agent con
 **Default**: 5<br>
 Remote configuration polling interval in seconds.
 
-### ASM
+### AAP
 
 `DD_APPSEC_ENABLED`
 : **Configuration**: `appsec.enabled`<br>
 **Default**: `false`<br>
-Enable Application Security Management features.
+Enable App and API Protection features.
 
 `DD_APPSEC_RULES`
 : **Configuration**: `appsec.rules`<br>
@@ -268,17 +276,17 @@ For information about valid values and using the following configuration options
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **Configuration**: `tracePropagationStyle.inject`<br>
-**Default**: `Datadog,tracecontext`<br>
+**Default**: `Datadog,tracecontext,baggage`<br>
 A comma-separated list of header formats to include to propagate distributed traces between services.
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **Configuration**: `tracePropagationStyle.extract`<br>
-**Default**: `Datadog,tracecontext`<br>
+**Default**: `Datadog,tracecontext,baggage`<br>
 A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.
 
 `DD_TRACE_PROPAGATION_STYLE`
 : **Configuration**: `tracePropagationStyle`<br>
-**Default**: `Datadog,tracecontext`<br>
+**Default**: `Datadog,tracecontext,baggage`<br>
 A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `DD_TRACE_PROPAGATION_STYLE_INJECT` and `DD_TRACE_PROPAGATION_STYLE_EXTRACT` configurations take priority when present.
 
 For more examples of how to work with the library see [API documentation][2].
@@ -292,6 +300,8 @@ For more examples of how to work with the library see [API documentation][2].
 [3]: /tracing/trace_pipeline/ingestion_mechanisms/
 [4]: /help/
 [5]: /tracing/trace_collection/trace_context_propagation/
+[6]: /tracing/guide/aws_payload_tagging/?code-lang=nodejs
 [13]: /agent/configuration/network/#configure-ports
 [14]: /opentelemetry/interoperability/environment_variable_support
 [15]: /tracing/trace_collection/custom_instrumentation/nodejs/otel/
+[16]: /tracing/trace_collection/library_config/#traces

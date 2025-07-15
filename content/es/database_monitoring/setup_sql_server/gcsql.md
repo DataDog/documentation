@@ -5,6 +5,9 @@ further_reading:
 - link: /integrations/sqlserver/
   tag: Documentación
   text: Integración SQL Server básica
+- link: /database_monitoring/guide/sql_deadlock/
+  tag: Documentación
+  text: Configurar la monitorización de interbloqueos
 title: Configuración de Database Monitoring para SQL Server gestionado por Google
   Cloud SQL
 ---
@@ -24,7 +27,7 @@ Versiones de SQL Server compatibles
 
 {{% dbm-sqlserver-before-you-begin %}}
 
-## Conceder acceso al Agent 
+## Conceder acceso al Agent
 
 El Datadog Agent requiere acceso de sólo lectura al servidor de la base de datos para recopilar estadísticas y consultas.
 
@@ -80,7 +83,7 @@ Para utilizar la [autenticación de Windows][4], configura `connection_string: "
 
 Utiliza las etiquetas (tags) `service` y `env` para vincular la telemetría de tu base de datos a otras telemetrías mediante un esquema de etiquetado común. Para saber cómo se utilizan estas etiquetas en Datadog, consulta [Etiquetado unificado de servicios][5].
 
-### Guardar tu contraseña de forma segura
+### Guarda tu contraseña de forma segura
 {{% dbm-secret %}}
 
 ### Controladores compatibles
@@ -173,7 +176,7 @@ Una vez terminada la configuración del Agent, [reinicia el Datadog Agent][6].
 {{% tab "Docker" %}}
 Para configurar el Database Monitoring Agent que se ejecuta en un contenedor Docker, configura las [plantillas de integración Autodiscovery][1] como etiquetas (labels) de Docker en el contenedor de tu Agent.
 
-**Nota**: El Agent debe tener permiso de lectura en el socket de Docker para que las etiquetas (labels) de Autodiscovery funcionen.
+**Nota**: El Agent debe tener permiso de lectura en el socket Docker para que las etiquetas de Autodiscovery funcionen.
 
 Sustituye los valores para que coincidan con tu cuenta y tu entorno. Para ver todas las opciones de configuración disponibles, consulta el [archivo de configuración de ejemplo][2].
 
@@ -227,14 +230,14 @@ Si los checks de clúster no están habilitados en tu clúster de Kubernetes, si
 
 ### Helm
 
-Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu clúster de Kubernetes. Sustituye los valores para que coincidan con tu cuenta y tu entorno.
+Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu clúster Kubernetes. Sustituye los valores para que coincidan con tu cuenta y tu entorno.
 
 1. Sigue las [instrucciones de instalación del Datadog Agent][3] para Helm.
 2. Actualiza tu archivo de configuración YAML (`datadog-values.yaml` en las instrucciones de instalación del Cluster Agent) para incluir lo siguiente:
     ```yaml
     clusterAgent:
       confd:
-        sqlserver.yaml: -|
+        sqlserver.yaml: |-
           cluster_check: true
           init_config:
           instances:
@@ -244,7 +247,7 @@ Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu c
             username: datadog
             password: 'ENC[datadog_user_database_password]'
             connector: 'odbc'
-            driver: 'ODBC Driver 18 for SQL Server'
+            driver: '{ODBC Driver 18 for SQL Server}'
             tags:  # Optional
               - 'service:<CUSTOM_SERVICE>'
               - 'env:<CUSTOM_ENV>'
@@ -262,7 +265,7 @@ Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu c
     ```
 
 <div class="alert alert-info">
-Para Windows, añade <code>--set targetSystem=Windows</code> al comando <code>helm install</code>.
+For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
 </div>
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
@@ -271,10 +274,10 @@ Para Windows, añade <code>--set targetSystem=Windows</code> al comando <code>he
 
 ### Configuración con archivos integrados
 
-Para configurar un check de clúster con un archivo de configuración montado, monta el archivo de configuración del contenedor del Cluster Agent en la ruta: `/conf.d/postgres.yaml`:
+Para configurar un check de clúster con un archivo de configuración montado, monta el archivo de configuración del contenedor del Cluster Agent en la ruta: `/conf.d/sqlserver.yaml`:
 
 ```yaml
-cluster_check: true  # Asegúrate de incluir este indicador
+cluster_check: true  # Asegúrate de incluir esta marca
 init_config:
 instances:
   - dbm: true
@@ -283,11 +286,11 @@ instances:
     username: datadog
     password: 'ENC[datadog_user_database_password]'
     connector: "odbc"
-    driver: "ODBC Driver 18 for SQL Server"
+    driver: '{ODBC Driver 18 for SQL Server}'
     tags:  # Opcional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # Después de añadir tu proyecto y tu instancia, configura la integración Datadog Google Cloud (GCP) para extraer datos de nube adicionales, como CPU, memoria, etc.
+    # Después de añadir tu proyecto e instancia, configura la integración de Datadog con Google Cloud (GCP) para extraer datos de nube adicionales, como CPU y memoria, entre otros.
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
@@ -342,10 +345,10 @@ Para evitar exponer la contraseña del usuario `datadog` en texto simple, utiliz
 [3]: https://helm.sh
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
 [5]: /es/agent/configuration/secrets-management
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
-## Ejemplo de configuraciones del Agent
+## Configuraciones del Agent de ejemplo
 {{% dbm-sqlserver-agent-config-examples %}}
 
 ## Instalar la integración Google Cloud SQL
@@ -355,6 +358,7 @@ Para recopilar métricas de base de datos más completas de Google Cloud SQL, in
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: https://cloud.google.com/sql/docs/sqlserver/create-manage-users#creating
 [2]: /es/integrations/google_cloudsql

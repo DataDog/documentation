@@ -20,7 +20,7 @@ further_reading:
 - link: /glossary/#tail
   tag: Glossaire
   text: Entrée du glossaire pour le terme « tail »
-title: Collecte de logs avec NodeJS
+title: Collecte de logs avec Node.js
 ---
 
 

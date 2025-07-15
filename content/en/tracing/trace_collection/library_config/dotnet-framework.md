@@ -131,7 +131,7 @@ If specified, adds the `env` tag with the specified value to all generated spans
 
 `DD_SERVICE`
 : **TracerSettings property**: `ServiceName`<br>
-If specified, sets the service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (IIS application name, process entry assembly, or process name). Added in version 1.17.0.
+If specified, sets the service name. Otherwise, the .NET Tracer tries to determine service name automatically from the application name (IIS application name, process entry assembly, or process name). Added in version 1.17.0.
 
 `DD_VERSION`
 : **TracerSettings property**: `ServiceVersion`<br>
@@ -143,37 +143,15 @@ The following configuration variables are available for both automatic and custo
 
 #### Traces
 
-`DD_TRACE_AGENT_URL`
-: **TracerSettings property**: `Exporter.AgentUri`<br>
-Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.<br>
-Note that Unix Domain Sockets (UDS) are not supported on .NET Framework.<br>
-**Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set or `http://localhost:8126`.
-
-`DD_TRACE_AGENT_PORT`
-: Sets the TCP port where the Agent is listening for connections. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.<br>
-**Default**: `8126`
-
-`DD_TRACE_SAMPLE_RATE`
-: **TracerSettings property**: `GlobalSamplingRate` <br>
-**Default**: Defaults to the rates returned by the Datadog Agent<br>
-Enables ingestion rate control. This parameter is a float representing the percentage of spans to sample. Valid values are from `0.0` to `1.0`.
-For more information, see [Ingestion Mechanisms][6]. <br>
-**Note**: `DD_TRACE_SAMPLE_RATE` is deprecated in favor of `DD_TRACE_SAMPLING_RULES`.<br><br>
-**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` in the [Service Catalog][17] UI.
-
-`DD_TRACE_SAMPLING_RULES`
-: **TracerSettings property**: `CustomSamplingRules`<br>
-**Default**: `null`<br>
-A JSON array of objects. Each object must have a `sample_rate`. The `name` and `service` fields are optional. The `sample_rate` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
-For more information, see [Ingestion Mechanisms][6].<br>
-**Examples:**<br>
-  - Set the sample rate to 20%: `[{"sample_rate": 0.2}]`
-  - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]`
-
 `DD_TRACE_RATE_LIMIT`
 : **TracerSettings property**: `MaxTracesSubmittedPerSecond` <br>
 The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRACES_PER_SECOND`). <br>
 **Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
+
+`DD_SPAN_SAMPLING_RULES`
+: **Default**: `null`<br>
+A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). For more information, see [Ingestion Mechanisms][3].<br>
+**Example**: Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]`
 
 `DD_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
@@ -182,18 +160,9 @@ If specified, adds all of the specified tags to all generated spans. <br>
 **Note**: The delimiter is a comma and a space: `, `. <br>
 Added in version 1.17.0. <br>
 
-`DD_SPAN_SAMPLING_RULES`
-: **Default**: `null`<br>
-A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). For more information, see [Ingestion Mechanisms][3].<br>
-**Example**: Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]`
-
-`DD_TRACE_DEBUG`
-: Enables or disables debug logging. Valid values are `true` or `false`.<br>
-**Default**: `false`
-
 `DD_TRACE_HEADER_TAGS`
 : **TracerSettings property**:`HeaderTags` <br>
-Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.request.headers.<header-name>` and `http.response.headers.<header-name>` respectively.<br><br>
+Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.request.headers.<header-name>` and `http.response.headers.<header-name>` respectively. Applies to web server integrations (ASP.NET, ASP.NET Core, ASP.NET WebAPI, etc...). For incoming requests and outgoing responses handled by these frameworks. This feature does not apply to outbound HTTP client calls.<br><br>
 **Example** (with specified tag names): `User-ID:userId`<br>
 If the **Request** has a header `User-ID`, its value is applied as tag `userId` to the spans produced by the service.<br><br>
 **Example** (without specified tag names): `User-ID`<br>
@@ -201,7 +170,8 @@ If the **Request** has a header `User-ID`, its value is applied as tag `http.req
 If the **Response** has a header `User-ID`, its value is applied as tag `http.response.headers.User-ID`.<br><br>
 Added in version 1.18.3.<br>
 Response header support and entries without tag names added in version 1.26.0.<br>
-**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Service Catalog][17] UI.
+Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Software Catalog][17] UI.
+
 
 `DD_TRACE_CLIENT_IP_ENABLED`
 : Enables client IP collection from relevant IP headers.<br>
@@ -211,10 +181,10 @@ Added in version `2.19.0`.<br>
 `DD_TRACE_CLIENT_IP_HEADER`
 : The IP header to be used for client IP collection, for example: `x-forwarded-for`. <br>
 Added in version `2.19.0`.<br>
-**Default**: Datadog parses the following: `x-forwarded-for`, `x-real-ip`, `true-client-ip`, `x-client-ip`, `x-forwarded`, `forwarded-for`, `x-cluster-client-ip`, `fastly-client-ip`, `cf-connecting-ip`, `cf-connecting-ipv6`. If several are present, none will be reported.<br>
+**Default**: Datadog parses the following: `x-forwarded-for`, `x-real-ip`, `true-client-ip`, `x-client-ip`, `x-forwarded`, `forwarded-for`, `x-cluster-client-ip`, `fastly-client-ip`, `cf-connecting-ip`, `cf-connecting-ipv6`. If several are present, the first from the list to parse correctly will be used.<br>
 
 `DD_TRACE_SERVICE_MAPPING`
-: Rename services using configuration. Accepts a comma-separated list of key-value pairs from the service name keys to rename, and the name to use instead, in the format `[from-key]:[to-name]`. <br>
+: Rename services using configuration. Accepts a comma-separated list of key-value pairs of service name keys to rename, and the name to use instead, in the format `[from-key]:[to-name]`. <br>
 **Example**: `mysql:main-mysql-db, mongodb:offsite-mongodb-service`<br>
 The `from-key` value is specific to the integration type, and should exclude the application name prefix. For example, to rename `my-application-sql-server` to `main-db`, use `sql-server:main-db`. Added in version 1.23.0
 
@@ -231,15 +201,53 @@ The `from-key` value is specific to the integration type, and should exclude the
 
 #### Agent
 
+`DD_TRACE_AGENT_URL`
+: **TracerSettings property**: `Exporter.AgentUri`<br>
+Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.<br>
+Note that Unix Domain Sockets (UDS) are not supported on .NET Framework.<br>
+**Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set or `http://localhost:8126`.
+
 `DD_AGENT_HOST`
 : Sets the host where the Agent is listening for connections. Can be a hostname or an IP address. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. <br>
 **Default**: `localhost`
+
+`DD_TRACE_AGENT_PORT`
+: Sets the TCP port where the Agent is listening for connections. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.<br>
+**Default**: `8126`
 
 `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
 : Datadog may collect [environmental and diagnostic information about your system][15] to improve the product. When false, this telemetry data will not be collected.<br>
 **Default**: `true`
 
+#### Trace context propagation
+
+For information about valid values and using the following configuration options, see [Trace Context Propagation][21].
+
+`DD_TRACE_PROPAGATION_STYLE_INJECT`
+: **Default**: `datadog,tracecontext,baggage`<br>
+A comma-separated list of header formats to include to propagate distributed traces between services.<br>
+Available since version `2.20.0`
+
+`DD_TRACE_PROPAGATION_STYLE_EXTRACT`
+: **Default**: `datadog,tracecontext,baggage`<br>
+A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.<br>
+Available since version `2.20.0`
+
+`DD_TRACE_PROPAGATION_STYLE`
+: **Default**: `datadog,tracecontext,baggage`<br>
+A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `DD_TRACE_PROPAGATION_STYLE_INJECT` and `DD_TRACE_PROPAGATION_STYLE_EXTRACT` configuration settings take priority when present.<br>
+Available since version `2.20.0`
+
+`DD_TRACE_PROPAGATION_EXTRACT_FIRST`
+: **Default**: `false`<br>
+When set to `true`, stop extracting trace context when a valid one is found.<br>
+Available since version `2.42.0`
+
 #### Diagnostic logs
+
+`DD_TRACE_DEBUG`
+: Enables or disables debug logging. Valid values are `true` or `false`.<br>
+**Default**: `false`
 
 `DD_TRACE_LOG_DIRECTORY`
 : Sets the directory for .NET Tracer logs. <br>
@@ -247,7 +255,7 @@ The `from-key` value is specific to the integration type, and should exclude the
 
 `DD_TRACE_LOGFILE_RETENTION_DAYS`
 : During the tracer's startup, this configuration uses the tracer's current log directory to delete log files the same age and older than the given number of days. Added in version 2.19.0. <br>
-**Default**: `31`
+**Default**: `32`
 
 `DD_TRACE_LOGGING_RATE`
 : Sets rate limiting for log messages. If set, unique log lines are written once per `x` seconds. For example, to log a given message once per 60 seconds, set to `60`. Setting to `0` disables log rate limiting. Added in version 1.24.0. Disabled by default.
@@ -268,26 +276,27 @@ The following configuration variables are available **only** when using automati
 `DD_TRACE_ENABLED`
 : **TracerSettings property**: `TraceEnabled`<br>
 Enables or disables all instrumentation. Valid values are: `true` or `false`.<br>
-**Default**: `true`
-**Note**: Setting the environment variable to `false` completely disables the client library, and it cannot be enabled through other configuration methods. If it is set to `false` through another configuration method (not an environment variable), the client library is still loaded, but traces will not be generated.
+**Default**: `true`<br/>
+See also [DD_APM_TRACING_ENABLED][22].
 
 `DD_TRACE_EXPAND_ROUTE_TEMPLATES_ENABLED`
 : Expands all route parameters in the application for ASP.NET/ASP.NET Core (except ID parameters)<br>
 This can be useful if you are using parameter names to differentiate between form values, or a slug, such as in GraphQL.
 **Default**: `false`
-Added in version 2.5.2
+Added in version 2.5.1.
 
 `DD_TRACE_METHODS`
-: List of methods to trace. Accepts a semicolon (`;`) separated list where each entry has the format `TypeName[MethodNames]`, where `MethodNames` is either a comma (`,`) separated list of method names or the `*` wildcard. For generic types, replace the angled brackets and the type parameters' names with a backtick (`` ` ``) followed by the number of generic type parameters. For example, `Dictionary<TKey, TValue>` must be written as `` Dictionary`2 ``. For generic methods, you only need to specify the method name. <br>
+: List of methods to trace. Accepts a semicolon (`;`) separated list where each entry has the format `Namespace.TypeName[MethodNames]`, where `MethodNames` is either a comma (`,`) separated list of method names or the `*` wildcard. For generic types, replace the angled brackets and the type parameters' names with a backtick (`` ` ``) followed by the number of generic type parameters. For example, `Dictionary<TKey, TValue>` must be written as `` Dictionary`2 ``. For generic methods, you only need to specify the method name. <br>
 **Example**: ```Namespace1.Class1[Method1,GenericMethod];Namespace1.GenericTypeWithOneTypeVariable`1[ExecuteAsync];Namespace2.Class2[*]```<br>
 **Note:** The wildcard method support (`[*]`) selects all methods in a type except constructors, property getters and setters, `Equals`, `Finalize`, `GetHashCode`, and `ToString`. <br>
+`DD_TRACE_METHODS` is not intended for tracing large numbers of methods and classes. To find CPU, memory, and IO bottlenecks, broken down by method name, class name, and line number, consider the [Continuous Profiler][23] product instead. <br>
 Added in version 2.6.0.
 Wildcard support `[*]` added in version 2.7.0.
 
 `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED`
 : Alters the behavior of the Kafka consumer span<br>
 **Default**: `true`<br>
-When set to `true`, the consumer span is created when a message is consumed and closed before consuming the next message. The span duration is representative of the computation between one message consumption and the next. Use this setting when message consumption is performed in a loop. <br>
+When set to `true`, the consumer span is created when a message is consumed and closed before consuming the next message. The span duration is representative of the computation between one message consumption and the next. Use this setting when message consumption is performed in a loop.<br>
 When set to `false`, the consumer span is created when a message is consumed and immediately closed. Use this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once. When you set this parameter to `false`, consumer spans are closed right away. If you have child spans to trace, you must extract the context manually. Read [Headers extraction and injection][12] for more details.
 
 #### Database monitoring
@@ -318,8 +327,8 @@ Added in version 1.23.0.
 `DD_LOGS_INJECTION`
 : **TracerSettings property**: `LogsInjectionEnabled` <br>
 Enables or disables automatic injection of correlation identifiers into application logs. <br>
-Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5]. <br><br>
-**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][17] UI.
+Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5].<br><br>
+**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Software Catalog][17] UI.
 
 ### Automatic instrumentation integration configuration
 
@@ -373,3 +382,6 @@ The following configuration variables are for features that are available for us
 [18]: /tracing/trace_collection/otel_instrumentation/dotnet/
 [19]: /tracing/trace_collection/compatibility/dotnet-core/#opentelemetry-based-integrations
 [20]: /opentelemetry/interoperability/environment_variable_support
+[21]: /tracing/trace_collection/trace_context_propagation/
+[22]: /tracing/trace_collection/library_config/#traces
+[23]: /profiler/

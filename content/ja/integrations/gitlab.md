@@ -35,7 +35,7 @@ categories:
 - issue tracking
 - log collection
 - source control
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/gitlab/README.md
 display_on_public_website: true
@@ -43,7 +43,7 @@ draft: false
 git_integration_title: gitlab
 integration_id: gitlab
 integration_title: GitLab
-integration_version: 7.3.2
+integration_version: 9.0.0
 is_public: true
 manifest_version: 2.0.0
 name: gitlab
@@ -243,7 +243,7 @@ Runner の Prometheus メトリクスエンドポイントおよびサービス�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "gitlab_runner" >}}
+{{< get-metrics-from-git "gitlab-runner" >}}
 
 
 ### ログ収集

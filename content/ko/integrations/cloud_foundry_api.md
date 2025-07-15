@@ -22,16 +22,16 @@ author:
 categories:
 - cloud
 - orchestration
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cloud_foundry_api/README.md
 display_on_public_website: true
-draft: false
+draft: true
 git_integration_title: cloud_foundry_api
 integration_id: cloud-foundry-api
 integration_title: Cloud Foundry API
-integration_version: 3.3.0
+integration_version: 5.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: cloud_foundry_api
 public_title: Cloud Foundry API
@@ -48,6 +48,7 @@ tile:
   - 지원 OS::Windows
   - 카테고리::클라우드
   - 카테고리::오케스트레이션
+  - 제공::통합
   configuration: README.md#Setup
   description: Cloud Foundry 감사 이벤트를 수집하세요.
   media: []
@@ -65,18 +66,18 @@ tile:
 
 ## 설정
 
-호스트에서 실행 중인 에이전트의 경우 다음 지침에 따라 설치하고 구성하세요. 컨테이너화된 환경의 경우 [자동탐지 통합 템플릿][2]에 다음 지침을 적용하는 방법이 안내되어 있습니다.
+아래 지침을 따라 호스트에서 실행되는 에이전트에 대해 이 점검을 설치하고 설정하세요. 컨테이너화된 환경의 경우 이러한 지침을 적용하는 데 가이드가 필요하면 [오토파일럿 통합 템플릿][3]을 참조하세요.
 
 ### 설치
 
-Cloud Foundry API 점검은 [Datadog 에이전트][3] 패키지에 포함됩니다. 
+Cloud Foundry API 점검은 [Datadog 에이전트][3] 패키지에 포함됩니다.
 서버에 추가 설치할 필요가 없습니다.
 
-### 설정
+### 구성
 
 1. Agent의 설정 디렉터리 루트에서 `conf.d/` 폴더에 있는 `cloud_foundry_api.d/conf.yaml` 파일을 편집하여 Cloud Foundry API 데이터 수집을 시작하세요. 사용 가능한 모든 설정 옵션은 [cloud_foundry_api.d/conf.yaml 샘플][4]을 참조하세요.
 
-2. [에이전트를 재시작합니다][5].
+2. [Agent를 재시작합니다][5].
 
 ### 검증
 
@@ -85,7 +86,7 @@ Cloud Foundry API 점검은 [Datadog 에이전트][3] 패키지에 포함됩니�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "cloud_foundry_api" >}}
+{{< get-metrics-from-git "cloud-foundry-api" >}}
 
 
 ### 이벤트
@@ -93,7 +94,7 @@ Cloud Foundry API 점검은 [Datadog 에이전트][3] 패키지에 포함됩니�
 Cloud Foundry API 통합으로 설정한 감사 이벤트를 수집합니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "cloud_foundry_api" >}}
+{{< get-service-checks-from-git "cloud-foundry-api" >}}
 
 
 ## 트러블슈팅

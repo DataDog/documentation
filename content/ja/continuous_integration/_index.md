@@ -38,12 +38,11 @@ further_reading:
 - link: https://www.datadoghq.com/blog/modernize-your-ci-cd-environment/
   tag: ブログ
   text: Datadog CI Pipeline Visibility で CI/CD のモダナイゼーションを監視
+- link: https://www.datadoghq.com/blog/datadog-detection-as-code/
+  tag: ブログ
+  text: Datadog を Detection as Code (コードとしての検出) に使用する方法
 title: Continuous Integration Visibility
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
-{{< /site-region >}}
 
 <div class="alert alert-info">このページでは、継続的インテグレーション (CI) のメトリクスとデータを Datadog のダッシュボードに取り込む方法について説明します。CI パイプラインで Continuous Testing テストを実行したい場合は、<a href="/continuous_testing/cicd_integrations/" target="_blank">Continuous Testing と CI/CD</a> のセクションを参照してください。</div>
 

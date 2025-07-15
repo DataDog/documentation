@@ -44,7 +44,7 @@ The Datadog extension for Azure App Service provides additional monitoring capab
     - Azure App Service Web Apps
     - Function Apps hosted on Basic, Standard, and Premium plans.
 
-    <div class="alert alert-warning">Function Apps on consumption plans are not supported. Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
+    <div class="alert alert-warning">Function Apps on consumption plans are not supported. Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a Preview becomes available.</div>
 
 3. The Datadog .NET APM extension supports the following .NET runtimes in both x64 and x86 architectures when running on Windows OS (AAS does not yet support extensions on Linux). For more details about automatically instrumented libraries, see the [Tracer documentation][2].
 
@@ -57,6 +57,7 @@ The Datadog extension for Azure App Service provides additional monitoring capab
     - .NET 6
     - .NET 7
     - .NET 8
+    - .NET 9
 
 4. Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require your web app to be fully stopped in order to install/update successfully.
 
@@ -79,7 +80,7 @@ For example:
 
 2. Open the [Azure Portal][3] and navigate to the dashboard for the Azure app you wish to instrument with Datadog.
 
-**Note**: Customers using the Azure Native integration can use the Datadog resource in Azure to add the extension to their .NET apps. For instructions, see the [App Service extension section][12] of Datadog's [Azure Portal guide][13].
+**Note**: Customers using the Azure Native integration can use the Datadog resource in Azure to add the extension to their .NET apps. For instructions, see the **App Service extension section** of Datadog's [Azure Portal guide][13].
 
 3. Go to the Application settings tab of the Configuration page.
     {{< img src="infrastructure/serverless/azure_app_services/config.png" alt="configuration page" >}}
@@ -91,7 +92,7 @@ For example:
     - Set `DD_SERVICE` to specify a service name (defaults to your app name).
     - Set `DD_LOGS_INJECTION:true` for correlation with application logs from your app.
     - Set `DD_PROFILING_ENABLED:true` to enable .NET [Continuous Profiler][5].
-    - Set `DD_APPSEC_ENABLED:true` to enable [Application Security][15].
+    - Set `DD_APPSEC_ENABLED:true` to enable [App and API Protection][15].
     - See a full list of [optional configuration variables][6].
 6. Click **Save** (this restarts your application).
 7. <div class="alert alert-warning">[REQUIRED] Stop your application by clicking <u>Stop</u>.</div>
@@ -104,7 +105,7 @@ For example:
 ### Application logging
 
 You can send logs from your application in Azure App Service to Datadog in one of the following ways:
-1. [Agentless logging with automatic instrumentation][7]
+1. Use the [installation steps](#installation) above to enable APM with the Datadog APM extension, then [enable Agentless logging][7]
 2. [Agentless logging with the Serilog sink][8]
 
 Both methods allow trace ID injection, making it possible to connect logs and traces in Datadog. To enable trace ID injection with the extension, add the application setting `DD_LOGS_INJECTION:true`.
@@ -153,7 +154,7 @@ Learn more about [custom metrics][12].
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: /profiler/enabling/dotnet/?tab=azureappservice
 [6]: /tracing/trace_collection/library_config/dotnet-framework/#additional-optional-configuration
-[7]: /logs/log_collection/csharp/#agentless-logging-with-apm
+[7]: /logs/log_collection/csharp/#enable-agentless-logging
 [8]: /logs/log_collection/csharp/#agentless-logging-with-serilog-sink
 [9]: /developers/dogstatsd
 [10]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
@@ -169,8 +170,8 @@ Learn more about [custom metrics][12].
 1. If you haven't already, set up the [Microsoft Azure integration][1] first.
 
 2. The extension supports Azure App Service Web Apps. Function Apps are not supported.
-    <div class="alert alert-warning">Support for Java Web Apps is in beta for extension v2.4+. There are no billing implications for tracing Java Web Apps during this period.<br/><br/>
-    Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
+    <div class="alert alert-warning">Support for Java Web Apps is in Preview for extension v2.4+. There are no billing implications for tracing Java Web Apps during this period.<br/><br/>
+    Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a Preview becomes available.</div>
 
 3. The Datadog Java APM extension supports all Java runtimes on Windows OS. Azure App Service does not support extensions on Linux. For more details about automatically instrumented libraries, see the [Tracer documentation][2].
 
@@ -266,7 +267,7 @@ Datadog's Azure App Service Node.js extension supports Azure App Service Web App
    - `DD_ENV`: Your environment name
    - `DD_SERVICE`: Your service name (defaults to your Web App name)
    - `DD_RUNTIME_METRICS_ENABLED`: `true` to enable runtime metrics
-   - `DD_APPSEC_ENABLED`: `true` to enable [Application Security Management][11]
+   - `DD_APPSEC_ENABLED`: `true` to enable [App and API Protection][11]
 
    See the full list of [optional configuration settings][5].
 6. Select **Save**. This restarts your application.
@@ -434,8 +435,8 @@ Many organizations use [Azure Resource Management (ARM) templates][8] to impleme
 {{% /tab %}}
 {{% tab "Java" %}}
 
-<div class="alert alert-warning">Support for Java Web Apps is in beta for extension v2.4+. Programmatic management is not available for Java Web Apps.<br/><br/>
-    Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
+<div class="alert alert-warning">Support for Java Web Apps is in Preview for extension v2.4+. Programmatic management is not available for Java Web Apps.<br/><br/>
+    Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a Preview becomes available.</div>
 
 {{% /tab %}}
 {{< /tabs >}}

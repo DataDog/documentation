@@ -59,6 +59,8 @@ The Datadog Lambda Library and tracing libraries for Python and Node.js support:
   - SNS and SQS direct integration
   - Kinesis
   - EventBridge
+  - DynamoDB
+  - S3
 - Tracing dozens of additional out-of-the-box [Python][3] and [Node.js][4] libraries.
 
 For Python and Node.js serverless applications, Datadog recommends you [install Datadog's tracing libraries][5].
@@ -108,7 +110,48 @@ For .NET serverless applications, Datadog recommends [installing Datadog's traci
 
 Learn more about [tracing through .NET Azure serverless applications][15].
 
-### Hybrid environments
+## Span Auto-linking
+{{< img src="serverless/lambda/tracing/autolink.png" alt="In Datadog, a DynamoDB trace. At the top, a message reads 'This trace is linked to other traces'. The Span Links tab is open and displays a clickable link to another DynamoDB trace." style="width:100%;" >}}
+
+Datadog automatically detects linked spans when segments of your asynchronous requests cannot propagate trace context. For example, this may occur when a request triggers an [S3 Change Events][28], or [DynamoDB Streams][29]. You can see Auto-linked spans appear in the [Span Links tab][30]. These appear as **Backward** or **Forward**.
+
+_Backward_: The linked span was caused by the trace you are viewing.
+
+_Forward_: The linked span caused the trace you are viewing.
+
+
+<div class="alert alert-info">Sampling and <a href="/tracing/trace_pipeline/trace_retention/">trace retention filters</a> can interfere with Auto-linking. To improve your chances of seeing Auto-linked spans, increase your sample rate or adjust your retention filters.</div>
+
+### Supported technologies
+
+Span Auto-linking is available for:
+- Python AWS Lambda functions instrumented with [`datadog-lambda-python`][33] layer v101+
+- Python applications instrumented with [`dd-trace-py`][31] v2.16+
+- Node.js AWS Lambda functions instrumented with [`datadog-lambda-js`][34] layer 118+
+- Node.js applications instrumented with [`dd-trace-js`][32] v4.53.0+ or v5.29.0+
+
+### DynamoDB Change Stream Auto-linking
+
+For [DynamoDB Change Streams][29], Span Auto-linking supports the following operations:
+
+- `PutItem`
+- `UpdateItem`
+- `DeleteItem`
+- `BatchWriteItem`
+- `TransactWriteItems`
+
+<div class="alert alert-info">The <code>PutItem</code> operation requires additional configuration. For more information, see <a href="/serverless/aws_lambda/installation/python/#span-auto-linking">Instrumenting Python Serverless Applications</a> or <a href="/serverless/aws_lambda/installation/nodejs/#span-auto-linking">Instrumenting Node.js Serverless Applications</a>.</div>
+
+### S3 Change Notification Auto-linking
+
+For [S3 Change Notifications][28], Span Auto-linking supports the following operations:
+
+- `PutObject`
+- `CompleteMultipartUpload`
+- `CopyObject`
+
+
+## Hybrid environments
 
 If you have installed Datadog's tracing libraries (`dd-trace`) on both your Lambda functions and hosts, your traces automatically show you the complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services.
 
@@ -116,11 +159,9 @@ If `dd-trace` is installed on your hosts with the Datadog Agent, and your server
 
 Datadog's [AWS X-Ray integration][2] only provides traces for Lambda functions. See the [Datadog APM documentation][16] to learn more about tracing in container or host-based environments.
 
-## Profiling your Lambda Functions (Public Beta)
+## Profiling your Lambda Functions
 
-<div class="alert alert-info">During the beta period, profiling is available at no additional cost.</div>
-
-Datadog's [Continuous Profiler][27] is available in beta for Python in version 4.62.0 and layer version 62 and above. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`. 
+Datadog's [Continuous Profiler][27] is available in Preview for Python in version 4.62.0 and layer version 62 and above. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`. 
 
 The Continuous Profiler works by spawning a thread that periodically wakes up and takes a snapshot of the CPU and heap of all running Python code. This can include the profiler itself. If you want the profiler to ignore itself, set `DD_PROFILING_IGNORE_PROFILER` to `true`.
 
@@ -360,3 +401,10 @@ If you are already tracing your serverless application with X-Ray and want to co
 [25]: /tracing/trace_collection/custom_instrumentation/
 [26]: /serverless/guide/handler_wrapper/
 [27]: /profiler/
+[28]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/EventNotifications.html
+[29]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
+[30]: https://docs.datadoghq.com/tracing/trace_explorer/trace_view/?tab=spanlinksbeta
+[31]: https://github.com/DataDog/dd-trace-py/
+[32]: https://github.com/DataDog/dd-trace-js/
+[33]: https://github.com/DataDog/datadog-lambda-python
+[34]: https://github.com/DataDog/datadog-lambda-js

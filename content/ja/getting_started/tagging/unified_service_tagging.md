@@ -95,14 +95,14 @@ metadata:
   labels:
     tags.datadoghq.com/env: "<ENV>"
     tags.datadoghq.com/service: "<SERVICE>"
-    tags.datadoghq.com/version: "<VERSION>"
+    tags.datadoghq.com/version: "<VERSION>" 
 ...
 template:
   metadata:
     labels:
       tags.datadoghq.com/env: "<ENV>"
       tags.datadoghq.com/service: "<SERVICE>"
-      tags.datadoghq.com/version: "<VERSION>"
+      tags.datadoghq.com/version: "<VERSION>" 
   containers:
   -  ...
      env:
@@ -114,13 +114,26 @@ template:
             valueFrom:
               fieldRef:
                 fieldPath: metadata.labels['tags.datadoghq.com/service']
-          - name: DD_VERSION
-            valueFrom:
-              fieldRef:
+          - name: DD_VERSION 
+            valueFrom: 
+              fieldRef: 
                 fieldPath: metadata.labels['tags.datadoghq.com/version']
 ```
 
-##### 部分的な構成
+また、OpenTelemetry Resource Attributes の環境変数を使用して、`env`、`service`、`version` タグを設定することもできます。
+
+```yaml
+  containers:
+  -  ...
+     env:
+         - name: OTEL_RESOURCE_ATTRIBUTES
+           value: "service.name=<SERVICE>,service.version=<VERSION>,deployment.environment=<ENV>"
+         - name: OTEL_SERVICE_NAME
+           value: "<SERVICE>"
+```
+<div class="alert alert-warning"><strong>注</strong>: <code>OTEL_SERVICE_NAME</code> 環境変数は、<code>OTEL_RESOURCE_ATTRIBUTES</code> 環境変数内の <code>service.name</code> 属性より優先されます。</div>
+
+##### 部分構成
 
 ###### ポッドレベルのメトリクス
 
@@ -132,7 +145,7 @@ template:
     labels:
       tags.datadoghq.com/env: "<ENV>"
       tags.datadoghq.com/service: "<SERVICE>"
-      tags.datadoghq.com/version: "<VERSION>"
+      tags.datadoghq.com/version: "<VERSION>" 
 ```
 これらのラベルは、ポッドレベルの Kubernetes CPU、メモリ、ネットワーク、ディスクメトリクスをカバーし、[Kubernetes の Downward API][2] を介してサービスのコンテナに `DD_ENV`、`DD_SERVICE`、`DD_VERSION` を注入するために使用できます。
 
@@ -141,7 +154,7 @@ template:
 ```yaml
 tags.datadoghq.com/<container-name>.env
 tags.datadoghq.com/<container-name>.service
-tags.datadoghq.com/<container-name>.version
+tags.datadoghq.com/<container-name>.version 
 ```
 
 ###### ステートメトリクス
@@ -159,14 +172,14 @@ tags.datadoghq.com/<container-name>.version
     labels:
       tags.datadoghq.com/env: "<ENV>"
       tags.datadoghq.com/service: "<SERVICE>"
-      tags.datadoghq.com/version: "<VERSION>"
+      tags.datadoghq.com/version: "<VERSION>" 
   spec:
     template:
       metadata:
         labels:
           tags.datadoghq.com/env: "<ENV>"
           tags.datadoghq.com/service: "<SERVICE>"
-          tags.datadoghq.com/version: "<VERSION>"
+          tags.datadoghq.com/version: "<VERSION>" 
   ```
 
 ###### APM トレーサー / StatsD クライアント
@@ -185,11 +198,30 @@ containers:
           valueFrom:
             fieldRef:
               fieldPath: metadata.labels['tags.datadoghq.com/service']
-        - name: DD_VERSION
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.labels['tags.datadoghq.com/version']
+        - name: DD_VERSION 
+          valueFrom: 
+            fieldRef: 
+              fieldPath: metadata.labels['tags.datadoghq.com/version'] 
 ```
+
+##### コンテナ化された環境での APM データに対する自動バージョンタグ付け
+
+<div class="alert alert-info">この機能は、<a href="https://docs.datadoghq.com/tracing/">Application Performance Monitoring (APM)</a> データでのみ有効です。</div>
+
+APM で `version` タグを使用して[デプロイを監視][7]したり、[自動障害デプロイ検出][8]を通じて不良なコードデプロイを特定したりできます。
+
+APM データに対して、Datadog は以下の優先順位で `version` タグを設定します。もし手動で `version` を設定している場合、Datadog はその `version` 値をオーバーライドしません。
+
+| 優先度         | バージョン値 |
+|--------------|------------|
+| 1    |  {your version value}       |
+| 2   | {image_tag}_{first_7_digits_of_git_commit_sha}       |
+| 3         |  {image_tag} または {first_7_digits_of_git_commit_sha} (どちらか一方のみ利用可能な場合)      |
+
+要件:
+- Datadog Agent バージョン 7.52.0 以上
+- サービスがコンテナ化された環境で動作しており、新しいバージョンのデプロイを追跡するには `image_tag` で十分な場合、これ以上の構成は不要です
+- サービスがコンテナ化された環境で実行されていない場合、または git SHA も含めたい場合は、[ビルド成果物に Git 情報を埋め込んでください][9]
 
 
 [1]: /ja/agent/cluster_agent/admission_controller/
@@ -198,6 +230,10 @@ containers:
 [4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example
 [5]: /ja/tracing/send_traces/
 [6]: /ja/integrations/statsd/
+[7]: /ja/tracing/services/deployment_tracking/
+[8]: /ja/watchdog/faulty_deployment_detection/
+[9]: /ja/integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
+
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -209,10 +245,10 @@ containers:
 
 ```yaml
 ENV DD_SERVICE <SERVICE>
-ENV DD_VERSION <VERSION>
+ENV DD_VERSION <VERSION> 
 
 LABEL com.datadoghq.tags.service="<SERVICE>"
-LABEL com.datadoghq.tags.version="<VERSION>"
+LABEL com.datadoghq.tags.version="<VERSION>" 
 ```
 
 `env` はデプロイ時に決定される可能性が高いため、後で環境変数を注入してラベルを付けることができます。
@@ -226,31 +262,60 @@ docker run -e DD_ENV=<ENV> -l com.datadoghq.tags.env=<ENV> ...
 ```shell
 docker run -e DD_ENV="<ENV>" \
            -e DD_SERVICE="<SERVICE>" \
-           -e DD_VERSION="<VERSION>" \
+           -e DD_VERSION="<VERSION>" \ 
            -l com.datadoghq.tags.env="<ENV>" \
            -l com.datadoghq.tags.service="<SERVICE>" \
-           -l com.datadoghq.tags.version="<VERSION>" \
+           -l com.datadoghq.tags.version="<VERSION>" \ 
            ...
 ```
 
-##### 部分的な構成
+##### 部分構成
 
-サービスが Datadog 環境変数を必要としない場合 (たとえば、Redis、PostgreSQL、NGINX などのサードパーティソフトウェアや、APM によってトレースされないアプリケーション)、Docker ラベルを使用できます。
+サービスが Datadog 環境変数を必要としない場合 (例えば、Redis、PostgreSQL、NGINX などのサードパーティソフトウェアや、APM によってトレースされないアプリケーション)、Docker ラベルを使用できます。
 
 ```yaml
 com.datadoghq.tags.env
 com.datadoghq.tags.service
-com.datadoghq.tags.version
+com.datadoghq.tags.version 
 ```
 
 完全な構成で説明したように、これらのラベルは Dockerfile で設定するか、コンテナを起動するための引数として設定できます。
 
+##### コンテナ化された環境での APM データに対する自動バージョンタグ付け
+
+<div class="alert alert-info">この機能は、<a href="/tracing/">Application Performance Monitoring (APM)</a> データでのみ有効です。</div>
+
+APM で `version` タグを使用して[デプロイを監視][1]したり、[自動障害デプロイ検出][2]を通じて不良なコードデプロイを特定したりできます。
+
+APM データに対して、Datadog は以下の優先順位で `version` タグを設定します。もし手動で `version` を設定している場合、Datadog はその `version` 値をオーバーライドしません。
+
+| 優先度         | バージョン値 |
+|--------------|------------|
+| 1    |  {your version value}       |
+| 2   | {image_tag}_{first_7_digits_of_git_commit_sha}       |
+| 3         |  {image_tag} または {first_7_digits_of_git_commit_sha} (どちらか一方のみ利用可能な場合)      |
+
+要件:
+- Datadog Agent バージョン 7.52.0 以上
+- サービスがコンテナ化された環境で動作しており、新しいバージョンのデプロイを追跡するには `image_tag` で十分な場合、これ以上の構成は不要です
+- サービスがコンテナ化された環境で実行されていない場合、または git SHA を含めたい場合は、[ビルド成果物に Git 情報を埋め込んでください][3]
+
+
+[1]: /ja/tracing/services/deployment_tracking/
+[2]: /ja/watchdog/faulty_deployment_detection/
+[3]: /ja/integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
+
 {{% /tab %}}
 
 {{% tab "ECS" %}}
+
+<div class="alert alert-warning">
+ECS Fargate 上で Fluent Bit や FireLens を使用する場合、統合サービスタグ付けはメトリクスとトレースに対してのみ利用可能で、ログ収集には対応していません。
+</div>
+
 ##### 完全な構成
 
-各サービスのコンテナのランタイム環境で、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` 環境変数と対応する Docker ラベルを設定して、統合サービスタグ付けの全範囲を取得します。たとえば、ECS タスク定義を通じて、この構成をすべて 1 か所で設定できます。
+各サービスのコンテナのランタイム環境で、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` (自動バージョンタグ付けでオプション) 環境変数と対応する Docker ラベルを設定して、統合サービスタグ付けの全範囲を取得します。たとえば、ECS タスク定義を通じて、この構成をすべて 1 か所で設定できます。
 
 ```
 "environment": [
@@ -266,6 +331,7 @@ com.datadoghq.tags.version
     "name": "DD_VERSION",
     "value": "<VERSION>"
   }
+
 ],
 "dockerLabels": {
   "com.datadoghq.tags.env": "<ENV>",
@@ -286,8 +352,31 @@ com.datadoghq.tags.version
 }
 ```
 
+##### コンテナ化された環境での APM データに対する自動バージョンタグ付け
+
+<div class="alert alert-info">この機能は、<a href="/tracing/">Application Performance Monitoring (APM)</a> データでのみ有効です。</div>
+
+APM で `version` タグを使用して[デプロイを監視][1]したり、[自動障害デプロイ検出][2]を通じて不良なコードデプロイを特定したりできます。
+
+APM データに対して、Datadog は以下の優先順位で `version` タグを設定します。もし手動で `version` を設定している場合、Datadog はその `version` 値をオーバーライドしません。
+
+| 優先度         | バージョン値 |
+|--------------|------------|
+| 1    |  {your version value}       |
+| 2   | {image_tag}_{first_7_digits_of_git_commit_sha}       |
+| 3         |  {image_tag} または {first_7_digits_of_git_commit_sha} (どちらか一方のみ利用可能な場合)      |
+
+要件:
+- Datadog Agent バージョン 7.52.0 以上
+- サービスがコンテナ化された環境で動作しており、新しいバージョンのデプロイを追跡するには `image_tag` で十分な場合、これ以上の構成は不要です
+- サービスがコンテナ化された環境で実行されていない場合、または git SHA を含めたい場合は、[ビルド成果物に Git 情報を埋め込んでください][3]
+
+[1]: /ja/tracing/services/deployment_tracking/
+[2]: /ja/watchdog/faulty_deployment_detection/
+[3]: /ja/integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
+
 {{% /tab %}}
-{{< /tabs >}}
+{{% /tabs %}}
 
 ### 非コンテナ化環境
 
@@ -335,7 +424,7 @@ com.datadoghq.tags.version
 
 
 [1]: /ja/real_user_monitoring/platform/connect_rum_and_traces/
-[2]: /ja/real_user_monitoring/browser/setup
+[2]: /ja/real_user_monitoring/browser/setup/
    {{% /tab %}}
 
    {{% tab "Synthetics" %}}
@@ -417,9 +506,13 @@ OpenTelemetry を使用する場合、以下の[リソース属性][16] を、�
 
 | OpenTelemetry 規則 | Datadog 規則 |
 | --- | --- |
-| `deployment.environment` | `env` |
+| `deployment.environment` <sup>1</sup>  | `env` |
+| `deployment.environment.name` <sup>2</sup> | `env` |
 | `service.name` | `service` |
 | `service.version` | `version` |
+
+1: `deployment.environment` は [OpenTelemetry セマンティック規約 v1.27.0][17] において `deployment.environment.name` が推奨されるため非推奨となります。
+2: `deployment.environment.name` は Datadog Agent 7.58.0+ および Datadog Exporter v0.110.0+ でサポートされています。
 
 <div class="alert alert-warning"><code>DD_SERVICE</code>、<code>DD_ENV</code>、<code>DD_VERSION</code> のような Datadog 固有の環境変数は、OpenTelemetry 構成では既定ではサポートされていません。</div>
 
@@ -495,3 +588,4 @@ processors:
 [14]: https://www.ansible.com/
 [15]: /ja/serverless/configuration/#connect-telemetry-using-tags
 [16]: https://opentelemetry.io/docs/languages/js/resources/
+[17]: https://github.com/open-telemetry/semantic-conventions/releases/tag/v1.27.0

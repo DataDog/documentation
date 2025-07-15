@@ -12,10 +12,6 @@ further_reading:
     text: "Learn about Saved Views"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 The Quality Gates Explorer allows you to [search and filter](#search-and-filter), [visualize](#visualize), and [export](#export) quality gates or rule executions at multiple levels using any tag.
@@ -25,7 +21,7 @@ The Quality Gates Explorer allows you to [search and filter](#search-and-filter)
 
 Navigate to [**Software Delivery** > **Quality Gates** > **Quality Gate Executions**][101] to see your Quality Gates. 
   
-{{< img src="/quality_gates/explorer/gates_2.png" text="Quality Gate rules page" style="width:100%" >}}
+{{< img src="/quality_gates/explorer/gates_3.png" text="Quality Gate rules page" style="width:100%" >}}
 
 The **Quality Gates** panel on the left lists default facets you can use to search for your gates.
 

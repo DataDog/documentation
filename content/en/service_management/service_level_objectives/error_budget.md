@@ -13,7 +13,7 @@ further_reading:
 
 SLO error budget alerts are threshold based and notify you when a certain percentage of your SLO's error budget has been consumed. For example, alert me if 75% of the error budget for my 7-day target is consumed. Warn me if 50% is consumed (optional).
 
-**Note:** Error budget alerts are available for the following SLO types:
+Error budget alerts are available for the following SLO types:
 
 - [Metric-based SLOs][1], 
 - [Monitor-based SLOs][2] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors), and
@@ -34,6 +34,11 @@ over the past `target` number of days.
 5. Click the **Create & Set Alert** button on the SLO configuration page.
 
 {{< img src="service_management/service_level_objectives/slo_create_set_alert.png" alt="Create SLO and set up an error budget alert" style="width:80%;">}}
+
+### Alerting for SLOs with groups
+
+For Time Slice SLOs containing groups, you can set error budget alerts based on the SLO groups or the overall SLO. If you alert based on the groups, you can confiure the [alert aggregation][9] to use simple or multi alerts. For metric-based and monitor-based SLOs, you can only set error budget alerts based on the overall SLO.
+
 
 ### API and Terraform
 
@@ -79,3 +84,4 @@ resource "datadog_monitor" "metric-based-slo" {
 [6]: /api/v1/monitors/#create-a-monitor
 [7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor
 [8]: /service_management/service_level_objectives/time_slice
+[9]: /monitors/configuration/#set-alert-aggregation

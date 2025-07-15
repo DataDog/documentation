@@ -1,11 +1,15 @@
 ---
 title: Error Tracking
 disable_toc: false
+further_reading:
+- link: 'https://www.datadoghq.com/blog/error-tracking-and-github/'
+  tag: 'Blog'
+  text: 'Troubleshoot root causes with GitHub commit and ownership data in Error Tracking'
 ---
 
 ## Overview
 
-{{< img src="error_tracking/error-tracking-overview.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-2.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 
@@ -27,6 +31,10 @@ For details, see the product-specific Error Tracking documentation:
 - [APM][1]
 - [Log Management][2]
 - [Real User Monitoring][3]
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/error_tracking#setup
 [2]: /logs/error_tracking#setup

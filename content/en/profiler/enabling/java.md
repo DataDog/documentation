@@ -32,10 +32,13 @@ Supported operating systems:
 - Linux
 
 Minimum JDK versions:
-- OpenJDK 8u352+, 11.0.17+, 17.0.5+ (including builds on top of it: Amazon Corretto, Azul Zulu, and others)
-- Oracle JDK 8u352+, 11.0.17+, 17.0.5+
+- OpenJDK 8u352+, 11.0.17+, 17.0.5+, 21+ (including builds on top of it: Amazon Corretto, Azul Zulu, and others)
+- Oracle JDK 8u351+, 11.0.17+, 17.0.5+, 21+
 - OpenJ9 JDK 8u372+, 11.0.18+, 17.0.6+ (used on Eclipse OpenJ9, IBM JDK, IBM Semeru Runtime). The profiler is disabled by default for OpenJ9 due to the possibility of crashing JVM caused by a subtle bug in JVTMI implementation. If you are not experiencing any crashes, you can enable the profiler by adding `-Ddd.profiling.ddprof.enabled=true`.
 - Azul Platform Prime 23.05.0.0+ (formerly Azul Zing)
+
+
+**Note:** The Datadog Profiler is disabled on the GraalVM compiler (JVMCI) and needs to be enabled explicitly with `-Ddd.profiling.ddprof.enabled=true` or `DD_PROFILING_DDPROF_ENABLED=true`.
 
 The Datadog Profiler uses the JVMTI `AsyncGetCallTrace` function, in which there is a [known issue][1] prior to JDK release 17.0.5. This fix was backported to 11.0.17 and 8u352. The Datadog Profiler is not enabled unless the JVM the profiler is deployed into has this fix. Upgrade to at least 8u352, 11.0.17, 17.0.5, or the latest non-LTS JVM version to use the Datadog Profiler.
 
@@ -56,9 +59,13 @@ Minimum JDK versions:
 
 Because non-LTS JDK versions may not contain stability and performance fixes related to the Datadog Profiler library, use versions 8, 11, and 17 of the Long Term Support JDK.
 
-Additional requirements for profiling [Code Hotspots][12]:
- - OpenJDK 11+ and `dd-trace-java` version 0.65.0+
- - OpenJDK 8 8u282+ and `dd-trace-java` version 0.77.0+
+Additional requirements for profiling [Trace to Profiling integration][12]:
+ - OpenJDK 17.0.5+ and `dd-trace-java` version 1.17.0+
+ - OpenJDK 11.0.17+ and `dd-trace-java` version 1.17.0+
+ - OpenJDK 8 8u352+ and `dd-trace-java` version 1.17.0+
+ - OpenJ9 17.0.6+ and `dd-trace-java` version 1.17.0+
+ - OpenJ9 11.0.18+ and `dd-trace-java` version 1.17.0+
+ - OpenJ9 8.0.362+ and `dd-trace-java` version 1.17.0+
 
 [3]: /profiler/profiler_troubleshooting/java/#java-8-support
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
@@ -129,9 +136,9 @@ java \
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% collapse-content title="(Optional) Build and run native-image" level="h4" %}}
+{{% collapse-content title="(Optional) Build and run Graal native-image" level="h4" %}}
 
-Follow the [Tracer Setup Instructions][14] to build your native image with the Datadog Java Profiler.
+Follow the [Tracer Setup Instructions][14] to build your Graal native image with the Datadog Java Profiler.
 
 When the service binary is built, you can use environment variables to enable and configure the Datadog Java Profiler:
 
@@ -152,14 +159,14 @@ When the service binary is built, you can use environment variables to enable an
 
 Since dd-trace-java version 1.5.0, you have two options for the CPU profiler used, Datadog or Java Flight Recorder (JFR). Since version 1.7.0, Datadog is the default, but you can also optionally enable JFR for CPU profiling. You can enable either one or both engines. Enabling both captures both profile types at the same time.
 
-The Datadog profiler records the active span on every sample, which improves the fidelity of the Code Hotspots and Endpoint profiling features. Enabling this engine supports much better integration with APM tracing.
+The Datadog profiler records the active span on every sample, which improves the fidelity of the Trace to Profiling integration and Endpoint profiling features. Enabling this engine supports much better integration with APM tracing.
 
 The Datadog profiler consists of several profiling engines, including CPU, wallclock, allocation, and memory leak profilers.
 
 
 {{< tabs >}}
 {{% tab "Datadog Profiler" %}}
-_Requires JDK 11+._
+_Please refer to the Minimum JDK version requirements for enabling DataDog profiler._
 
 The Datadog profiler is enabled by default in dd-trace-java versions 1.7.0+. Datadog CPU profiling is scheduled through perf events and is more accurate than JFR CPU profiling. To enable CPU profiling:
 
@@ -272,11 +279,9 @@ The allocation profiler engine does not depend on the `/proc/sys/kernel/perf_eve
 
 {{< /tabs >}}
 
-### Live-heap profiler engine (beta)
+### Live-heap profiler engine
 
 _Since: v1.39.0. Requires JDK 11.0.23+, 17.0.11+, 21.0.3+, or 22+._
-
-<div class="alert alert-warning">This is a beta feature, it is recommended to enable this feature with caution.</div>
 
 The live-heap profiler engine is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 The engine samples allocations and keeps track of whether those samples survived the most recent garbage collection cycle. The number of surviving samples is used to estimate the number of live objects in the heap.
@@ -355,3 +360,4 @@ The [Getting Started with Profiler][11] guide takes a sample service with a perf
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /profiler/enabling/supported_versions/
 [14]: /tracing/trace_collection/compatibility/java/?tab=graalvm#setup
+[15]: https://docs.datadoghq.com/profiler/enabling/java/?tab=datadogprofiler#

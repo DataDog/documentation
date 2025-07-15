@@ -52,7 +52,7 @@ pricing:
   short_description: メールボックス 1 個あたりの単価
   tag: mailbox
   unit_label: Mailbox
-  unit_price: 250
+  unit_price: 350.0
 public_title: Synthetic Email
 short_description: 世界中からのメールメールボックスのラウンドトリップパフォーマンスを監視する
 supported_os:
@@ -102,4 +102,4 @@ tile:
 *お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-syntheticemail" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-syntheticemail" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

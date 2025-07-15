@@ -2,7 +2,7 @@
 categories:
 - cloud
 - azure
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure Front Door のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/azure_frontdoor/
@@ -27,6 +27,9 @@ Azure Front Door は、マイクロソフトの最新のクラウドコンテン
 
 Datadog Azure インテグレーションを使用して、Azure Front Door からメトリクスを収集できます。
 
+**注**: Classic 階層では、以下に示すように `azure.network_frontdoors.*` ネームスペースを使用します。メトリクスは代わりに `azure.cdn_profiles.*` ネームスペースに表示されます。
+
+
 ## セットアップ
 
 ### インストール
@@ -38,8 +41,6 @@ Datadog Azure インテグレーションを使用して、Azure Front Door か�
 ### メトリクス
 {{< get-metrics-from-git "azure_frontdoor" >}}
 
-
-**注**: Classic 階層では、`azure.network_frontdoors.*` ネームスペースを使用します。Standard および Premium 階層では、代わりにメトリクスは `azure.cdn_profiles.*` ネームスペースで表示されます。
 
 ### イベント
 

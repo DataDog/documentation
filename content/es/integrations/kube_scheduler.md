@@ -36,7 +36,7 @@ draft: false
 git_integration_title: kube_scheduler
 integration_id: kube-scheduler
 integration_title: Programador Kubernetes
-integration_version: 4.10.1
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: kube_scheduler
@@ -107,7 +107,7 @@ La recopilación de logs está desactivada por defecto en el Datadog Agent. Para
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "kube_scheduler" >}}
+{{< get-metrics-from-git "kube-scheduler" >}}
 
 
 ### Eventos
@@ -115,7 +115,7 @@ La recopilación de logs está desactivada por defecto en el Datadog Agent. Para
 El Programador Kube no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "kube_scheduler" >}}
+{{< get-service-checks-from-git "kube-scheduler" >}}
 
 
 ## Solucionar problemas

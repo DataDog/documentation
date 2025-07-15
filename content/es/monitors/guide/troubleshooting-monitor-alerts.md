@@ -40,9 +40,7 @@ El estado de un monitor también puede actualizarse a veces en ausencia de una e
 
 ### Verificar la presencia de datos
 
-Si el estado de tu monitor no es el que esperabas, confirma el comportamiento de la fuente de datos subyacente. En el caso de un monitor de métricas, puedes utilizar el gráfico del [historial][2] para ver los puntos de datos extraídos por la consulta de métricas. Para investigar más a fondo la evolución de tus métricas, haz clic en **Open in a notebook** (Abrir en un notebook), junto al gráfico de estado. Esto genera un [notebook][20] de investigación con un gráfico formateado de la consulta del monitor.
-
-{{< img src="monitors/monitor_status/notebook-button2.png" alt="The monitor status page with the mouse cursor hovering over the Open in a notebook button next to one monitor group status bar" "Página de estado de un monitor que muestra un cursor sobre el botón "Abrir en un notebook", junto a la barra de estado de un grupo de monitores) style="width:60%;">}}
+Si el estado de tu monitor no es el que esperabas, confirma el comportamiento de la fuente de datos subyacente. En el caso de un monitor de métricas, puedes utilizar el gráfico del [historial][2] para ver los puntos de datos extraídos por la consulta de métricas. 
 
 ### Condiciones de alerta
 

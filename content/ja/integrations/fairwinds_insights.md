@@ -26,13 +26,13 @@ author:
   support_email: insights@fairwinds.com
   vendor_id: fairwinds
 categories:
-- コンテナ
+- incident-teams
 - コスト管理
 - kubernetes
-- マーケットプレイス
+- marketplace
 - プロビジョニング
-- セキュリティ
-custom_kind: integration
+- security
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -166,7 +166,7 @@ Fairwinds Insights にサービスのチェックは含まれません。
 
 サポートまたはリクエストをご希望の場合は、以下のチャンネルから Fairwinds にお問い合わせください。
 
-- 電話: +1 617-202-3659
+- 電話: +1 617-202-3659 
 - メール: [sales@fairwinds.com][2]
 
 ### よくある質問
@@ -215,4 +215,4 @@ Fairwinds Insights は月々の定額利用で提供されるため、お客様�
 [2]: https://www.datadoghq.com/blog/fairwinds-insights-datadog-marketplace/
 [3]: https://insights.docs.fairwinds.com/
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/fairwinds-insights" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/fairwinds-insights" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

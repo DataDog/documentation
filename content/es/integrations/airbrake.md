@@ -24,7 +24,7 @@ categories:
 - metrics
 - event management
 - issue tracking
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false

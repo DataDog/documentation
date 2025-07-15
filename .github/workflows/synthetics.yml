@@ -1,5 +1,6 @@
 name: Preview Synthetics
-on: [pull_request]
+on: 
+  workflow_dispatch: # allows manual trigger
 
 # Stop the current running job if a new push is made to the PR
 concurrency:
@@ -11,6 +12,7 @@ permissions:
 
 jobs:
   synthetic_testing:
+    if: github.ref != 'refs/heads/guacbot/translation-pipeline'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

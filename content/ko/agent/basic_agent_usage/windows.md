@@ -141,7 +141,7 @@ gMSA를 실행할 때 Windows 에이전트의 핵심 및 APM/추적 컴포넌트
 
 **참고:** `DatadogGMSA$`를 내 gMSA 사용자 이름을 변경합니다. 사용자 이름은 **$ 기호로 종료되어야 합니다.**
   ```powershell
-  Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>" DDAGENTUSER_NAME="<YOUR_DOMAIN_NAME>\DatadogGMSA$'
+  Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>" DDAGENTUSER_NAME="<YOUR_DOMAIN_NAME>\DatadogGMSA$"'
   ```
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
@@ -196,7 +196,7 @@ Windows에 에이전트를 설치할 때 다음 각 구성 옵션을 명령줄�
 | `PROXY_USER`                                | 문자열  | (프록시를 사용하는 경우) 프록시 사용자를 설정합니다. [Datadog 에이전트를 프록시와 함께 사용하는 방법에 대해 자세히 알아보세요][4].                                                                                                                                 |
 | `PROXY_PASSWORD`                            | 문자열  | (프록시를 사용하는 경우) 프록시 비밀번호를 설정하세요. 프로세스/컨테이너 에이전트의 경우 이 변수는 인증 비밀번호를 전달하는 데 필요하며 이름을 바꿀 수 없습니다. [Datadog 에이전트를 프록시와 함께 사용하는 방법에 대해 자세히 알아보세요][4]. |
 | `EC2_USE_WINDOWS_PREFIX_DETECTION`          | Boolean | EC2의 Windows 호스트에는 EC2 인스턴스 ID를 사용합니다. _(v7.28.0+)_                                                                                                                                                                      |
-| [지원 중단됨] `ADDLOCAL` | 문자열 | 추가 에이전트 구성 요소를 활성화합니다. `"MainApplication,NPM"`로 설정하면 [네트워크 성능 모니터링][5]용 드라이버 구성 요소가 설치됩니다. _(버전 7.44.0 및 이전)_ |
+| [지원 중단됨] `ADDLOCAL` | 문자열 | 추가 에이전트 구성 요소를 활성화합니다. `"MainApplication,NPM"`로 설정하면 [클라우드 네트워크 모니터링][5]용 드라이버 구성 요소가 설치됩니다. _(버전 7.44.0 및 이전)_ |
 
 **참고:**
 에이전트 7은 Python 3만 지원합니다. 업그레이드하기 전에 사용자 지정 검사가 Python 3과 호환되는지 확인합니다. 자세한 내용은 [Python 3 Custom Check Migration][1] 가이드를 참조하세요. 사용자 정의 검사를 사용하지 않거나 이미 호환성을 확인한 경우 일반적인 방법으로 업그레이드합니다.
@@ -327,7 +327,7 @@ start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/q', '/x', 
 
 ### flare 전송 
 
-*  Datadog 에이전트 Manager를 표시하기 위해 [http://127.0.0.1:5002][12]로 이동합니다.
+* Datadog Agent Manager를 표시하기 위해 [http://127.0.0.1:5002][12]로 이동합니다.
 
 * flare 탭을 선택합니다.
 
@@ -340,16 +340,16 @@ start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/q', '/x', 
 PowerShell에서 플레어 명령을 사용할 수 있습니다.
 
 ```powershell
-& "$env:ProgramFiles\Datadog\Datadog 에이전트\bin\agent.exe" flare <CASE_ID>
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>
 ```
 
 또는 cmd.exe:
 
 ```cmd
-"%ProgramFiles%\Datadog\Datadog 에이전트\bin\agent.exe" flare <CASE_ID>
+"%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>
 ```
 
-{{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Windows flare with 에이전트 6" style="width:75%;">}}
+{{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Windows flare with Agent 6" style="width:75%;">}}
 
 ## 사용 사례
 
@@ -397,7 +397,7 @@ process_config:
 [2]: /ko/agent/supported_platforms/?tab=windows
 [3]: /ko/agent/faq/windows-agent-ddagent-user/
 [4]: /ko/agent/configuration/proxy/
-[5]: /ko/network_monitoring/performance
+[5]: /ko/network_monitoring/cloud_network_monitoring
 [6]: /ko/agent/guide/datadog-agent-manager-windows/
 [7]: /ko/integrations/wmi_check/
 [8]: https://app.datadoghq.com/monitors/create/integration

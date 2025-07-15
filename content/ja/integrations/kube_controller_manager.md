@@ -27,7 +27,7 @@ categories:
 - コンテナ
 - kubernetes
 - orchestration
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/README.md
 display_on_public_website: true
@@ -35,7 +35,7 @@ draft: false
 git_integration_title: kube_controller_manager
 integration_id: kube-controller-manager
 integration_title: Kubernetes Controller Manager
-integration_version: 5.1.1
+integration_version: 7.1.0
 is_public: true
 manifest_version: 2.0.0
 name: kube_controller_manager
@@ -99,7 +99,7 @@ Kubernetes Controller Manager チェックは [Datadog Agent][3] パッケージ
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "kube_controller_manager" >}}
+{{< get-metrics-from-git "kube-controller-manager" >}}
 
 
 ### イベント
@@ -107,7 +107,7 @@ Kubernetes Controller Manager チェックは [Datadog Agent][3] パッケージ
 Kubernetes Controller Manager チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "kube_controller_manager" >}}
+{{< get-service-checks-from-git "kube-controller-manager" >}}
 
 
 ## トラブルシューティング

@@ -7,7 +7,7 @@ further_reading:
   text: "Build dashboards using JSON"
 ---
 
-<div class="alert alert-info">Split graph widgets are not supported on screenboards and <a href="https://docs.datadoghq.com/dashboards/sharing/public_dashboards">public dashboards.</a></div>
+<div class="alert alert-info">Split graph widgets are not supported on screenboards and <a href="/dashboards/sharing/shared_dashboards">shared dashboards.</a></div>
 
 ## Overview
 

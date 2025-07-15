@@ -2,7 +2,7 @@
 description: Datadog 계정용 SAML 문제 트러블슈팅
 further_reading:
 - link: https://www.samltool.com/online_tools.php
-  tag: 개발 툴
+  tag: 외부 사이트
   text: 개발자 SAML 툴로 어서션 식별하기
 title: SAML 트러블슈팅
 ---
@@ -93,7 +93,7 @@ SAML을 통해 로그인한 사용자가 Datadog 역할에 매핑되는 값이 �
 
 역할 기반 오류로 인해 로그인하는 데 문제가 있는 경우 관리자에게 문의하여 위의 트러블슈팅 단계를 완료하세요.
 
-**참조**:
+**참고**:
 
 - 각 IdP는 다양한 유형의 속성과 다양한 속성 설정 방법을 제공합니다. 예를 들어, Azure는 속성에 [객체 ID][8]를 사용하며, Okta를 사용하는 경우에는 [Okta 설정][9]에서 속성을 설정해야 합니다. 자세한 내용은 IdP의 속성 설명서를 참조하세요.
 
@@ -124,7 +124,7 @@ Google, Active Directory, Azure, Okta 등 IdP에서 오류가 발생한 경우:
 
 이 문제를 해결하려면 IdP 인증서가 IdP 설정 내에서 최신 상태이고 Datadog에서 IdP의 최신 메타데이터 파일이 업로드됐는지 확인하세요.
 
-## 지원팀
+## 지원
 
 Datadog에 로그인하는 데 여전히 문제가 있으면 [Datadog 지원팀][18]에 문의하세요.
 

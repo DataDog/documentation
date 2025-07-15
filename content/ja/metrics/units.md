@@ -80,7 +80,7 @@ title: メトリクスのユニット
 
 ### 単位処理
 
-単位は、読みやすくするためにグラフ上で自動的にフォーマットされます。
+単位は可読性を高めるためにグラフ上で自動的にフォーマットされます。単位ラベルのカスタマイズ方法については、[単位オーバーライドで可視化をカスタマイズする][3]をご覧ください。
 
 #### 例
 
@@ -123,3 +123,4 @@ title: メトリクスのユニット
 
 [1]: https://app.datadoghq.com/metric/summary
 [2]: https://en.wikipedia.org/wiki/Metric_prefix#List_of_SI_prefixes
+[3]: /ja/dashboards/guide/unit-override/

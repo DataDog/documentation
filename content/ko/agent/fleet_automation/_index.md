@@ -15,10 +15,6 @@ title: 플릿 자동화
 
 {{< callout btn_hidden="true">}}플릿 자동화는 베타 버전입니다. Datadog <a href="https://app.datadoghq.com/fleet">플릿 자동화</a> 페이지에서 이용할 수 있습니다.{{< /callout >}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">선택한 <a href="/getting_started/site">Datadog 사이트</a>({{< region-param key="dd_site_name" >}})에서는 플릿 자동화가 지원되지 않습니다.</div>
-{{< /site-region >}}
-
 ## 개요
 
 Datadog Fleet Automation을 사용하면 다양한 가시적 요구 사항을 지원하기 위해 대규모의 Datadog Agents를 중앙에서 원격으로 관리할 수 있습니다.

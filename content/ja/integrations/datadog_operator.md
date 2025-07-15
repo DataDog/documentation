@@ -71,7 +71,7 @@ tile:
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "datadog_operator" >}}
+{{< get-metrics-from-git "datadog-operator" >}}
 
 
 ### イベント
@@ -79,7 +79,7 @@ tile:
 Datadog Operator インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "datadog_operator" >}}
+{{< get-service-checks-from-git "datadog-operator" >}}
 
 
 ## トラブルシューティング

@@ -27,7 +27,7 @@ categories:
 - コンテナ
 - kubernetes
 - orchestration
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/README.md
 display_on_public_website: true
@@ -35,7 +35,7 @@ draft: false
 git_integration_title: kube_metrics_server
 integration_id: kube-metrics-server
 integration_title: Kubernetes Metrics Server
-integration_version: 3.3.1
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: kube_metrics_server
@@ -125,7 +125,7 @@ Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含ま�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "kube_metrics_server" >}}
+{{< get-metrics-from-git "kubernetes_state_core" >}}
 
 
 ### イベント
@@ -133,7 +133,7 @@ Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含ま�
 kube_metrics_server には、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "kube_metrics_server" >}}
+{{< get-service-checks-from-git "kubernetes_state_core" >}}
 
 
 ## トラブルシューティング

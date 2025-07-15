@@ -20,10 +20,6 @@ is_beta: true
 title: Event Management
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Event Management no es compatible con este sitio.</div>
-{{< /site-region >}}
-
 {{< img src="service_management/events/correlation/event_management.png" alt="¿Qué es Event Management?" style="width:100%;" >}}
 
 ## Información general
@@ -45,7 +41,7 @@ La recopilación de eventos es compatible con más de 100 integraciones de Data
 
 ## Lectura adicional
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /es/agent/kubernetes/#event-collection

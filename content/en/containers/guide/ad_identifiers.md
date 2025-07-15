@@ -83,12 +83,12 @@ If you want to apply different configuration templates to containers running the
    {{% tab "Kubernetes annotation" %}}
 
    ```text
-   ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id: 'foo'
+   ad.datadoghq.com/<CONTAINER_NAME>.check.id: 'foo'
    ```
 
-   Replace `<CONTAINER_IDENTIFIER>` with the container name within the pod.
+   Replace `<CONTAINER_NAME>` with the container name within the pod.
 
-   **Note**: Supported in Datadog Agent v6.25+ and v7.25. The `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id` label takes precedence over the image name.
+   **Note**: Supported in Datadog Agent v6.25+ and v7.25. The `ad.datadoghq.com/<CONTAINER_NAME>.check.id` label takes precedence over the image name.
    {{% /tab %}}
    {{< /tabs >}}
 

@@ -1,7 +1,7 @@
 ---
 aliases:
-- /tracing/compatibility_requirements/cpp
-- /tracing/setup_overview/compatibility_requirements/cpp
+- /fr/tracing/compatibility_requirements/cpp
+- /fr/tracing/setup_overview/compatibility_requirements/cpp
 code_lang: cpp
 code_lang_weight: 60
 description: Exigences de compatibilité pour le traceur C++

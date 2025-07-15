@@ -4,6 +4,7 @@ further_reading:
 - link: "/agent/basic_agent_usage/"
   tag: "Documentation"
   text: "Basic Agent Usage"
+private: true  
 ---
 
 This guide covers installing Agent 5. Datadog recommends installing or upgrading to Agent 7 for the latest features. For information on installing the latest version of the Agent, follow the [Agent 7 Installation Instructions][1]. For information on upgrading to Agent 7 from an earlier version, see [Upgrade to Datadog Agent v7][2].

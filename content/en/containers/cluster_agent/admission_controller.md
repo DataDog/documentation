@@ -12,12 +12,18 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/"
   tag: "Blog"
   text: "Use library injection to auto-instrument tracing for Kubernetes applications with Datadog APM"
+- link: "https://www.datadoghq.com/architecture/instrument-your-app-using-the-datadog-operator-and-admission-controller/"
+  tag: "Architecture Center"
+  text: "Instrument your app using the Datadog Operator and Admission Controller"
+- link: "/containers/guide/cluster_agent_disable_admission_controller"
+  tag: "Documentation"
+  text: "Disable the Datadog Admission Controller with the Cluster Agent"
 ---
 
 ## Overview
 The Datadog Admission Controller is a component of the Datadog Cluster Agent. The main benefit of the Admission Controller is to simplify your application Pod configuration. For that, it has two main functionalities:
 
-- Inject environment variables (`DD_AGENT_HOST`, `DD_TRACE_AGENT_URL` and `DD_ENTITY_ID`) to configure DogStatsD and APM tracer libraries into the user's application containers.
+- Inject environment variables (`DD_AGENT_HOST`, `DD_TRACE_AGENT_URL`, `DD_ENTITY_ID` and `DD_EXTERNAL_ENV`) to configure DogStatsD and APM tracer libraries into the user's application containers.
 - Inject Datadog standard tags (`env`, `service`, `version`) from application labels into the container environment variables.
 
 Datadog's Admission Controller is `MutatingAdmissionWebhook` type. For more details on admission controllers, see the [Kubernetes guide on admission controllers][1].
@@ -30,7 +36,10 @@ Datadog's Admission Controller is `MutatingAdmissionWebhook` type. For more deta
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-To enable the Admission Controller for the Datadog Operator, set the parameter `features.admissionController.enabled` to `true` in your `DatadogAgent` configuration:
+The Datadog Operator enables the Datadog Admission Controller by default. No extra configuration is needed to enable the Admission Controller.
+
+
+If you disabled Admission Controller, you can re-enable it by setting the parameter `features.admissionController.enabled` to `true` in your `DatadogAgent` configuration:
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" disable_copy="false" >}}
 apiVersion: datadoghq.com/v2alpha1
@@ -46,7 +55,7 @@ spec:
 {{< /code-block >}}
 {{% /tab %}}
 {{% tab "Helm" %}}
-Starting from Helm chart v2.35.0, Datadog Admission controller is activated by default. No extra configuration is needed to enable the Admission Controller.
+Starting from Helm chart v2.35.0, Datadog Admission Controller is enabled by default. No extra configuration is needed to enable the Admission Controller.
 
 To enable the Admission Controller for Helm chart v2.34.6 and earlier, set the parameter `clusterAgent.admissionController.enabled` to `true`:
 

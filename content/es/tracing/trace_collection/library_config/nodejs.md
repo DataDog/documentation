@@ -1,5 +1,5 @@
 ---
-code_lang: NodeJS
+code_lang: nodejs
 code_lang_weight: 30
 further_reading:
 - link: https://github.com/DataDog/dd-trace-js
@@ -197,7 +197,7 @@ Características experimentales
 **Por defecto**: `{}`<br>
 Las funciones experimentales pueden habilitarse añadiendo claves predefinidas con un valor de `true`. Para obtener más información sobre las funciones experimentales disponibles, [ponte en contacto con el servicio de asistencia][4].
 
-Automáticamente Instrumentar Externo <txprotected>bibliotecas</txprotected>
+Automáticamente Instrumentar Externo bibliotecas
 : **Configuración**: `plugins`<br>
 **Por defecto**: `true`<br>
 Si habilitar o no la instrumentación automática de bibliotecas externas utilizando los complementos incorporados.

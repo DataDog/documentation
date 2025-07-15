@@ -8,6 +8,7 @@ further_reading:
 - link: "/synthetics/browser_tests/advanced_options/"
   tag: "Documentation"
   text: "Configure advanced options for steps"
+site_support_id: synthetics_email_validation
 ---
 
 ## Overview

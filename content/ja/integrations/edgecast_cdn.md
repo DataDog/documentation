@@ -22,7 +22,7 @@ author:
 categories:
 - キャッシュ
 - モニター
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -35,17 +35,26 @@ manifest_version: 2.0.0
 name: edgecast_cdn
 public_title: Edgecast
 short_description: Datadog メトリクスを使用した Edgecast CDN トラフィックの監視
-supported_os: []
+supported_os:
+- linux
+- windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Caching
   - Category::Metrics
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Datadog メトリクスを使用した Edgecast CDN トラフィックの監視
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/integrations/edgecast_cdn/
   support: README.md#Support
   title: Edgecast
 ---
@@ -58,7 +67,7 @@ Edgecast は、エッジコンピューティング、アプリケーション�
 ## セットアップ
 
 
-### Edgecast クライアントの作成
+### Edgecast クライアントの作成 
 
 1. [Edgecast VDMS アカウント][1]にログインし、**Clients** タブに移動します。
 2. **Create New Client** をクリックすると、New Client モーダルが表示されます。
@@ -79,7 +88,7 @@ Edgecast は、エッジコンピューティング、アプリケーション�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "edgecast_cdn" >}}
+{{< get-metrics-from-git "edgecast-cdn" >}}
 
 
 ### イベント
