@@ -193,9 +193,5 @@ By isolating the CSI driver in a privileged namespace, Kubernetes clusters can s
    Limit access to the CSI driver's namespace and configuration to trusted operators, as the driver’s elevated privileges could be exploited if misconfigured.
 </div>
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: https://github.com/DataDog/datadog-csi-driver
 [2]: https://hub.docker.com/r/datadog/csi-driver
