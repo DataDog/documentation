@@ -9,7 +9,7 @@ further_reading:
 
 This solution uses a sidecar container and Application Settings for Linux Azure App Service to instrument the application and manage its configuration.
 
-If you would prefer to not use the sidecar approach (Not Recommended), you can instead follow the instructions to [Instrument Azure App Service - Linux Code Deployment with the Datadog wrapper][17].
+If you would prefer to not use the sidecar approach (Not Recommended), you can instead follow the instructions to [Instrument Azure App Service - Linux Code Deployment with the Datadog wrapper][1].
 
 **Supported runtimes**: Java, Node.js, .NET, PHP, Python
 
@@ -194,21 +194,21 @@ Path to the library that implements the Profiling API callbacks. Loaded by the .
 
 ### View traces in Datadog
 
-After your application restarts, go to Datadog's [APM Service page][4] and search for the service name you set for your application (`DD_SERVICE`).
+After your application restarts, go to Datadog's [APM Service page][1] and search for the service name you set for your application (`DD_SERVICE`).
 
 ### Custom metrics
 
 To configure your application to submit custom metrics, follow the appropriate steps for your runtime:
 
-- [Java][9]
-- [Node.js][5]
-- [.NET][6]
-- [PHP][10]
-- [Python][11]
+- [Java][3]
+- [Node.js][4] (external link)
+- [.NET][5]
+- [PHP][6]
+- [Python][7]
 
 ### Continuous Profiler
 
-To enable the Continuous Profiler, set the environment variable `DD_PROFILING_ENABLED=true`. For more information, see the [Continuous Profiler documentation][12].
+To enable the Continuous Profiler, set the environment variable `DD_PROFILING_ENABLED=true`. For more information, see the [Continuous Profiler documentation][8].
 
 ## Deployment
 
@@ -222,20 +222,18 @@ Be sure to enable **App Service logs** to receive debugging logs.
 
 {{< img src="serverless/azure_app_service/app-service-logs.png" alt="Azure App Service Configuration: App Service logs, under the Monitoring section of Settings in the Azure UI. The 'Application logging' option is set to 'File System'." style="width:100%;" >}}
  
-Share the content of the **Log stream** with [Datadog Support][14].
+Share the content of the **Log stream** with [Datadog Support][9].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd
-[3]: https://www.datadoghq.com/blog/azure-app-service-datadog-serverless-view/
-[4]: /tracing/services/service_page/
-[5]: https://github.com/brightcove/hot-shots
-[6]: /developers/dogstatsd/?tab=hostagent&code-lang=dotnet#code
-[9]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=java
-[10]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=php
-[11]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=python
-[12]: https://docs.datadoghq.com/profiler/
-[14]: /help
-[17]: /serverless/guide/azure_app_service_linux_code_wrapper_script
+[1]: /serverless/guide/azure_app_service_linux_code_wrapper_script
+[2]: /tracing/services/service_page/
+[3]: /developers/dogstatsd/?tab=java#dogstatsd-client
+[4]: https://github.com/brightcove/hot-shots
+[5]: /developers/dogstatsd/?tab=dotnet#dogstatsd-client
+[6]: /developers/dogstatsd/?tab=php#dogstatsd-client
+[7]: /developers/dogstatsd/?tab=python#dogstatsd-client
+[8]: /profiler/
+[9]: /help
