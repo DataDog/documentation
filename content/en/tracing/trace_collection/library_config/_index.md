@@ -254,4 +254,3 @@ This feature only applies to baggage extracted from incoming HTTP headers. Bagga
 [5]: /tracing/metrics/runtime_metrics/
 [6]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java#in-tracing-libraries-user-defined-rules
 [7]: /tracing/guide/service_overrides
-[8]: /tracing/guide/service_overrides/#remove-service-overrides
