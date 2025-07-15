@@ -288,7 +288,6 @@ An upcoming release of the Chrome extension will enable debugger permission, bri
   - Type Text
 - **Enhanced fidelity for click and hover:** These steps will behave identically to how they execute in the Synthetics platform.
 
-We’re actively working on this enhancement and expect to release it soon. Stay tuned for update notifications in the extension or Synthetics UI.
 
 ### Step Types Not Yet Supported
 
