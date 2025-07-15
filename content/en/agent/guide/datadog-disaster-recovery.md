@@ -21,10 +21,10 @@ DDR also allows you to periodically conduct disaster recovery drills to not only
 
 
 ## Prerequisites 
-Datadog Agent version **7.54 or above** is required for Datadog Disaster Recovery. 
+Datadog Disaster Recovery requires Datadog Agent version **7.54 or above**. 
 
 ### Supported telemetry types and products
-The Agent-based failover description provided on this page supports failover of the following telemetry types and products:
+The Agent-based failover supports the following telemetry types and products:
 
 |Supported telemetry |Supported products       |
 |--------------------|-------------------------|
@@ -41,40 +41,37 @@ Datadog is continuously evaluating customer requests to support DDR for addition
 ## Setup 
 To enable Datadog Disaster Recovery, follow these steps:
 
-### 1. Configure Datadog Disaster Recovery
-{{% collapse-content title=" Create your DDR Datadog organization and share it with your Customer Success Manager" level="h5" %}}
-<div class="alert alert-info">Datadog can set this up for you if you'd prefer.</div>
+### 1. Create a new DDR org and link it to your primary
+
+<div class="alert alert-info">If required, Datadog can set this up for you.</div>
 
 #### Create the DDR org
-Identify which site your primary organization is on by matching your Datadog website URL to the [`SITE URL`][4] in the table. Then, select a secondary site for your DDR organization.
 
-{{% agent/sites_no_fed %}}
-
-For example, if you are hosted in [US1](https://app.datadoghq.com), you may choose to select another Datadog site to ensure observability continuity in the event of a regional disaster. All Datadog sites are geographically separated.
-
-If you're also sending telemetry to Datadog using cloud provider integrations, you must add your cloud provider accounts in the DDR org. 
-
-Datadog does not use cloud providers to receive telemetry data while the DDR site is passive.
-
-#### Share the DDR org with your Customer Success Manager
-Share your DDR organization name with your Datadog [Customer Success Manager](mailto:success@datadoghq.com) so they can configure it to be your DDR failover organization. 
-
-Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datadog Support](https://www.datadoghq.com/support/) if you need help to select the DDR Datadog site and configure your new organization to be your DDR failover organization.
+  - Go to [Get Started with Datadog](https://app.datadoghq.com/signup)
+  - Choose a different Datadog site than your primary (for example if you're on `US1`, choose `EU` or `US5`)
+  - Follow the prompts to create an account
 
 
-**Note**: This organization appears in your Datadog billing hierarchy, but all usage and cost associated is _not_  billed during the Preview.
+All Datadog sites are geographically separated. Reference the [Datadog Site List](https://docs.datadoghq.com/getting_started/site#access-the-datadog-site) for options. 
 
-{{% /collapse-content %}}
-<br>
+If you are also sending telemetry to Datadog using cloud provider integrations, you must add your cloud provider accounts in the DDR org. Datadog does not use cloud providers to receive telemetry data while the DDR site is not in failover.
+
+#### Share the DDR org information
+
+- Email your DDR org name to your [Customer Success Manager](mailto:success@datadoghq.com)
+- Your Customer Success Manager sets this new org as your **DDR failover organization**
+
+<!-- Share your DDR organization name with your Datadog [Customer Success Manager](mailto:success@datadoghq.com) so they can configure it to be your DDR failover organization. 
+
+Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datadog Support](https://www.datadoghq.com/support/) if you need help to select the DDR Datadog site and configure your new organization to be your DDR failover organization. -->
 
 
+Although this organization appears in your Datadog billing hierarchy, all usage and cost associated is _not_  billed during the Preview period.
 
-### 2. Retrieve the public IDs and link your organization
-{{% collapse-content title="Retrieve the public IDs of your orgs and link the DDR org to the primary org" level="h5" %}}
 
 #### Retrieve the public IDs
 
-After the Datadog team has completed the configuration of the designated orgs, use the cURL commands from the Datadog [public API endpoint][8] to retrieve the public IDs of the primary and DDR org. 
+After the Datadog team has has set your DDR org, use the cURL commands from the Datadog [public API endpoint][8] to retrieve the public IDs of the primary and DDR org. 
 
 
 #### Link the DDR org to the primary org
@@ -97,13 +94,17 @@ curl -v -H "Content-Type: application/json" -H
 "dd-api-key:${PRIMARY_DD_API_KEY}" -H 
 "dd-application-key:${PRIMARY_DD_APP_KEY}" --data "${CONNECTION}" --request POST ${PRIMARY_DD_API_URL}/api/v2/hamr
 ```
-{{% /collapse-content %}} <br>
 
 
+<br>
 
-### 3. Configure your DDR organization
+<!-- ------------------------------- -->
+
+
+### 2. Set up access, integrations, syncing, and agents
+
 {{% collapse-content title="Create your Datadog API and App key for syncing" level="h5" %}}
-In DDR Datadog org, create a set of `API key` **and** `App key`. These are useful in [steps 6][id="using-sync-cli-tool"] to copy dashboards and monitors between Datadog sites. 
+In DDR Datadog org, create a set of `API key` **and** `App key`. These are useful for copying dashboards and monitors between Datadog sites. 
 
 <div class="alert alert-info">
 Datadog can help copy the API key signatures for your Agents to the DDR back-up account. Contact your <a href="mailto:success@datadoghq.com">Customer Success Manager</a> for any questions regarding this.
@@ -134,7 +135,7 @@ During an integration failover, integrations will run only in the DDR data cente
 
 
 {{% collapse-content title="Set up Resources syncing and scheduler" level="h5" id="using-sync-cli-tool" %}}
-Datadog provides a tool called [datadog sync-cli][3] to copy your dashboards, monitors, and other configurations from your primary organization to your secondary organization. Regular syncing is essential to ensure that your secondary organization is up-to-date in the event of a disaster. 
+Use Datadog's [datadog sync-cli][3] tool to copy your dashboards, monitors, and other configurations from your primary organization to your secondary organization. Regular syncing is essential to ensure that your secondary organization is up-to-date in the event of a disaster. 
 
 Datadog recommends performing this operation on a daily basis; you can determine the frequency and timing of syncing based on your business requirements. For information on setting up and running the backup process, see the [datadog-sync-cli README][5]. 
 
@@ -210,7 +211,9 @@ Your Datadog customer success manager will work with you on scheduling dedicated
 {{% /collapse-content %}} <br>
 
 
-### 4. Test the failover process
+<!-- ------------------------------- -->
+
+### 3. Test	Run failover tests in various environments
 {{% collapse-content title="Activate and test DDR failover in Agent-based environments" level="h5" %}}
 Use the steps appropriate for your environment to activate/test the DDR failover. 
 
@@ -301,3 +304,196 @@ Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datado
 [7]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile
 [8]: https://docs.datadoghq.com/api/latest/organizations/#get-organization-information 
 [9]: https://docs.datadoghq.com/account_management/saml/#overview
+
+
+
+--------------------------------------
+
+## Datadog Disaster Recovery (DDR) Setup Guide
+
+This guide outlines how to set up, configure, and test a Datadog Disaster Recovery (DDR) organization.
+
+
+
+## Overview
+
+To enable DDR, complete these phases:
+
+| Phase | Description |
+|-------|-------------|
+| 1. Set Up | Create a new DDR org and link it to your primary |
+| 2. Configure | Set up access, integrations, syncing, and agents |
+| 3. Test | Run failover tests in various environments |
+
+**Need Help?** Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datadog Support](https://www.datadoghq.com/support/).
+
+---
+
+## 🏢 1. Set Up Your DDR Organization
+
+### Create New Organization
+- Go to [Create New Org](https://app.datadoghq.com/account/new_org)
+- Choose a different **Datadog site** than your primary (e.g., `EU1`, `US5`)
+- Reference the [Datadog Site List](https://docs.datadoghq.com/getting_started/site/) for options
+
+### Share Org Info
+- Email your DDR org name to your [Customer Success Manager](mailto:success@datadoghq.com)
+- They will configure it as your **DDR failover organization**
+
+> 🔒 If you're using cloud integrations, reconnect the accounts in the DDR org
+
+---
+
+## 🔐 2. Identity & Access
+
+### Configure SSO
+- Navigate to [Organization Settings](https://app.datadoghq.com/organization-settings)
+- Enable [SAML](https://docs.datadoghq.com/account_management/saml/) or Google Login
+- Optionally enable [Just-in-Time provisioning](https://docs.datadoghq.com/account_management/saml/#just-in-time-user-provisioning)
+
+### User Roles
+- Invite users manually or via SAML
+- Assign roles that match your primary org
+
+---
+
+## 🔑 3. API & App Keys
+
+| Key | Location | Purpose |
+|-----|----------|---------|
+| API Key | DDR Org | Used with sync-cli |
+| App Key | DDR Org | Auth for dashboard/monitor sync |
+| Remote Config | DDR Org | Optional; enabled by default for new orgs |
+
+---
+
+## 🔗 4. Link Primary and DDR Orgs
+
+Use the following command to establish linkage:
+
+```bash
+export PRIMARY_DD_API_KEY=<PRIMARY_KEY>
+export PRIMARY_DD_APP_KEY=<PRIMARY_APP_KEY>
+export PRIMARY_DD_API_URL=<PRIMARY_SITE>
+export DDR_ORG_ID=<DDR_ORG_ID>
+export PRIMARY_ORG_ID=<PRIMARY_ORG_ID>
+export USER_EMAIL=<EMAIL>
+
+export CONNECTION='{"data":{"id":"'${PRIMARY_ORG_ID}'","type":"hamr_org_connections","attributes":{"TargetOrgUuid":"'${DDR_ORG_ID}'","HamrStatus":1,"ModifiedBy":"'${USER_EMAIL}'", "IsPrimary":true}}}'
+
+curl -v -H "Content-Type: application/json" \
+     -H "dd-api-key:${PRIMARY_DD_API_KEY}" \
+     -H "dd-application-key:${PRIMARY_DD_APP_KEY}" \
+     --data "${CONNECTION}" \
+     --request POST ${PRIMARY_DD_API_URL}/api/v2/hamr
+````
+
+---
+
+## ☁️ 5. Configure Integrations & Sync
+
+### Cloud Integrations
+
+* Add cloud accounts (AWS, Azure, GCP) to both orgs
+* Only run telemetry in the **Primary org** until failover
+
+### Sync with `datadog-sync-cli`
+
+#### Example Sync Command
+
+```bash
+datadog-sync import --config config \
+--resources users,roles,logs_pipelines,logs_indexes,logs_metrics
+
+datadog-sync sync --config config \
+--resources users,roles,logs_pipelines,logs_indexes,logs_metrics \
+--cleanup=Force
+```
+
+#### Sample Config Snippet
+
+```bash
+destination_api_url="https://api.us5.datadoghq.com"
+source_api_url="https://api.datadoghq.eu"
+filter=["Type=Dashboards;Name=title","Type=Monitors;Name=tags;Value=sync:true"]
+```
+
+> ⚠️ Log **standard attributes** are not supported in sync-cli and must be configured manually.
+
+---
+
+## ⚙️ 6. Agent Configuration
+
+### Shared `datadog.yaml` Configuration
+
+```yaml
+multi_region_failover:
+  enabled: true
+  failover_metrics: false
+  failover_logs: false
+  failover_traces: false
+  site: <DDR_SITE>
+  api_key: <DDR_API_KEY>
+```
+
+> 🔄 Enable telemetry failover only during drills/tests.
+
+---
+
+## 🚨 7. Testing Failover
+
+### Agents (Non-Containerized)
+
+```bash
+agent config set multi_region_failover.failover_metrics true
+agent config set multi_region_failover.failover_logs true
+agent config set multi_region_failover.failover_traces true
+```
+
+### Agents (Kubernetes or Containers)
+
+#### Using `kubectl`
+
+```bash
+kubectl exec <POD_NAME> -c agent -- agent config set multi_region_failover.failover_metrics true
+```
+
+#### Or via Env Vars
+
+```bash
+DD_MULTI_REGION_FAILOVER_ENABLED=true
+DD_MULTI_REGION_FAILOVER_METRICS=true
+DD_MULTI_REGION_FAILOVER_SITE=<DDR_SITE>
+DD_MULTI_REGION_FAILOVER_API_KEY=<DDR_API_KEY>
+```
+
+### Cloud Integrations
+
+* Navigate to **DDR site → Disaster Recovery Landing Page**
+* Initiate failover from there
+
+---
+
+## ✅ Final Checklist
+
+| Step                      | Completed |
+| ------------------------- | --------- |
+| DDR Org Created           | ☐         |
+| Org Linked to Primary     | ☐         |
+| SSO Configured            | ☐         |
+| API/App Keys Created      | ☐         |
+| Cloud Integrations Synced | ☐         |
+| sync-cli Setup Complete   | ☐         |
+| Agent Config Updated      | ☐         |
+| Failover Tested           | ☐         |
+
+---
+
+> ℹ️ For help at any stage, reach out to [Datadog Support](https://www.datadoghq.com/support/) or your [Customer Success Manager](mailto:success@datadoghq.com).
+
+```
+
+---
+
+Would you like this exported as a downloadable `.md` file? Or turned into a GitHub-ready README?
+```
