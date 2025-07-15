@@ -74,18 +74,8 @@ spec:
 
 ## Azure Kubernetes Service (AKS) {#AKS}
 
-Your AKS cluster may need a specific configuration to enable the Datadog Agent to connect to the Kubelet depending on its version. If your cluster has [kubelet serving certificate rotation][13] enabled, you do **not** need to provide any special configuration. This feature is enabled in Kubernetes clusters 1.27 and above on node pools updated after July 2025.
-
-Your nodes have this feature enabled if they have the label `kubernetes.azure.com/kubelet-serving-ca=cluster`. Verify if all of your nodes have this label by running:
-
-```shell
-kubectl get nodes -L kubernetes.azure.com/kubelet-serving-ca
-```
-
-If all your nodes show `cluster` do not provide any specific `kubelet` configuration as the Agent successfully connects by default. If your nodes do not have this feature enabled use the [Kubelet configurations without certificate rotation](#without-kubelet-serving-certificate-rotation).
-**Note:** This configuration should be removed once certificate rotation is enabled in your cluster.
-
-Lastly, the optional [Admission Controller][1] feature requires a specific configuration to prevent an error when reconciling the webhook.
+### Admission Controller
+The optional [Admission Controller][1] feature requires a specific configuration to prevent an error when reconciling the webhook.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -137,16 +127,21 @@ The `providers.aks.enabled` option sets the necessary environment variable `DD_A
 {{% /tab %}}
 {{< /tabs >}}
 
-### Without Kubelet serving certificate rotation
+### Kubelet serving certificate rotation
+If your cluster, **does not** have [Kubelet serving certificate rotation][13] enabled, you must provide additional configuration to enable the Datadog Agent to connect to the Kubelet. Kubelet serving certificate rotation is enabled in Kubernetes clusters 1.27 and above on node pools updated after July 2025.
 
-**Note:** When upgrading your AKS cluster you may see the [certificate rotation][13] feature enabled for you automatically which can negatively impact your Datadog Agent if you are using the below configuration to reference the certificate `/etc/kubernetes/certs/kubeletserver.crt`. This certificate file is removed once this feature enabled. Which can cause:
+Your nodes have this feature enabled if they have the label `kubernetes.azure.com/kubelet-serving-ca=cluster`. Verify if all of your nodes have this label by running:
 
-- In Datadog Operator: The Agent container shuts down in `Error` as it cannot connect to the Kubelet and it logs `Error while getting hostname, exiting: unable to reliably determine the host name`
-- In Helm: The Agent pod fails to start with the warning event `MountVolume.SetUp failed for volume "kubelet-ca" : hostPath type check failed: /etc/kubernetes/certs/kubeletserver.crt is not a file`
+```shell
+kubectl get nodes -L kubernetes.azure.com/kubelet-serving-ca
+```
 
-In these cases remove the kubelet configurations and return to the defaults as seen above. Alternatively [connecting to the kubelet without TLS Verification](#without-tls-verification) is still supported on all AKS versions.
+Ensure that all your nodes show `cluster`. 
+**Note:** 
 
-When this feature is not enabled you can provide the Datadog Agent an updated kubelet configuration to allow it to properly connect.
+#### Without Kubelet serving certificate rotation
+
+If Kubelet serving certificate rotation is not enabled, provide the following additional Kubelet configuration:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -203,6 +198,17 @@ providers:
 {{< /tabs >}}
 
 In these AKS node versions, the AKS Kubelet certificate requires changing the Kubelet host to the `spec.nodeName` and the `hostCAPath` location of the certificate, as seen in the previous snippets. This enables TLS verification. Without these changes, the Agent cannot connect to the Kubelet.
+
+<div class="alert alert-info">After Kubelet serving certificate rotation is enabled in your cluster, remove this configuration.</div>
+
+When you upgrade your AKS cluster, you may see the Kubelet serving certificate rotation feature enabled for you automatically, which can negatively impact your Datadog Agent if you are using the above special configuration to reference the certificate `/etc/kubernetes/certs/kubeletserver.crt`. When Kubelet serving certificate rotation is enabled, this certificate is removed, causing:
+
+- In Datadog Operator: The Agent container shuts down in `Error`, as it cannot connect to the Kubelet, and it logs `Error while getting hostname, exiting: unable to reliably determine the host name`
+- In Helm: The Agent pod fails to start with the warning event `MountVolume.SetUp failed for volume "kubelet-ca" : hostPath type check failed: /etc/kubernetes/certs/kubeletserver.crt is not a file`
+
+In these cases, remove the additional Kubelet configurations. 
+
+As an alternative, you can also [connect to the Kubelet without TLS verification](#without-tls-verification).
 
 ### Without TLS verification
 
