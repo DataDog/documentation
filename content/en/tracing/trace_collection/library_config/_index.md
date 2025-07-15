@@ -224,7 +224,7 @@ The following configuration options behave consistently across the latest versio
 `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED`
 : **Default**: `false` <br>
 **Supported Input**: Boolean <br>
-**Description**: Controls automatic service name overrides as per [the inferred services feature][7]. Disables the feature when set to false. See examples in the dedicated [inferred services documentation][8[.
+**Description**: Controls automatic service name overrides as per [the inferred services feature][7]. Disables the feature when set to false. See examples in the dedicated [inferred services documentation][8].
 
 ### Context propagation
 `DD_TRACE_BAGGAGE_MAX_ITEMS`
