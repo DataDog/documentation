@@ -239,7 +239,7 @@ Step Replay lets you re-run one or more steps of your browser test directly from
   </ul>
 </div>
 
-### How to use Step Replay
+### How to use step replay
 
 You can replay steps in three ways:
 
