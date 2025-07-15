@@ -268,7 +268,7 @@ Follow these steps to collect the custom resources that these CRDs define:
 
     {{< img src="infrastructure/containers_view/CRD_indexing_2.mp4" alt="A video of the Collecting and Indexing modal. The cursor selects three fields and clicks Enable Indexing. A success message displays." video="true">}}
 
-    For details, see the [Indexing complex types](#indexing-complex-types) section.
+    For arrays of objects, see the [Indexing complex types](#indexing-complex-types) section.
 
 1.  Select **Enable Indexing** to save.
 
@@ -276,10 +276,12 @@ After the fields are indexed, you can add them as columns in the explorer or as 
 
 ### Indexing complex types
 
-For arrays of objects, two indexing strategies are available:
+{{< img src="containers/explorer/crd_groupby.png" alt="Indexing Configuration: A conditions object[] array, with 'Group by' drop down options: no field, type, lastTransitionTime, message, reason, status" style="width:100%;" >}}
 
--   **Field**: Object's nested fields are indexed based on each unique value of Field.
--   **No field**: Object's nested fields are indexed solely on nested field name.
+For arrays of objects, two group-by strategies are available:
+
+-   `No field`: Object's nested fields are indexed solely on nested field name.
+-   **Field** (for example: `type`, `status`, etc.): Object's nested fields are indexed based on each unique field value.
 
 ##### Example: Filtering on DatadogPodAutoscaler custom resources
 
@@ -346,7 +348,7 @@ field#status.conditions.status:"False"
 field#status.conditions.status:"False" AND field#status.conditions.type:VerticalAbleToApply
 ```
 
-**Result:** Returns CR1 and CR2. At least one `status.condition` object in each custom resource matches one of the filters - even if it's not the same object that matches both filters.
+**Result:** Returns CR1 and CR2. At least one `status.condition` object in each custom resource matches one of the filters—even if it's not the same object that matches both filters.
 
 {{% /tab %}}
 {{% tab "Grouping by type" %}}
@@ -379,7 +381,7 @@ status:
 field#status.conditions.HorizontalAbleToScale.status:"False"
 ```
 
-**Result:** Returns CR2. Only `status.condition` object whose `type:"HorizontalAbleToScale"` and `status:"False"` is returned.
+**Result:** Returns CR2. Only a `status.condition` object whose `type:"HorizontalAbleToScale"` and `status:"False"` is returned.
 
 {{% /tab %}}
 {{< /tabs >}}
