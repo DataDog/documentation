@@ -235,7 +235,7 @@ Step Replay lets you re-run one or more steps of your browser test directly from
   <ul>
     <li>Some advanced actions are <strong>not yet supported</strong>.</li>
     <li>Certain steps (like <strong>click</strong> or <strong>hover</strong>) may behave <strong>differently</strong> than in a full Synthetics test run.</li>
-    <li><strong>JavaScript-based assertions or extractions, keystroke simulations, and email interactions</strong> are <strong>currently unavailable</strong>.</li>
+    <li><strong>JavaScript-based assertions or extractions, keystroke simulations, and email interactions</strong> are <strong> unavailable</strong>.</li>
   </ul>
 </div>
 
