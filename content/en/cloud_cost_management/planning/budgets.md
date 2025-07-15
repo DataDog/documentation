@@ -94,16 +94,18 @@ To investigate budgets:
 ## Modify a budget
 To modify a budget, click the edit icon on the Budgets page.
 
-   {{< img src="cloud_cost/budgets/budget-edit-1.png" alt="Click the edit icon to edit a budget"  style="width:70%;">}}
+{{< img src="cloud_cost/budgets/budget-edit-1.png" alt="Click the edit icon to edit a budget"  style="width:70%;">}}
 
 ## Delete budget
 To delete a budget, click the trash icon on the Budgets page.
 
-   {{< img src="cloud_cost/budgets/budget-delete-2.png" alt="Click the delete icon to delete a budget"  style="width:70%;">}}
+{{< img src="cloud_cost/budgets/budget-delete-2.png" alt="Click the delete icon to delete a budget"  style="width:70%;">}}
 
 ## Add a budget to a dashboard
 
 Learn how to [create a budget report][4], then add it to a [dashboard][5].
+
+{{< img src="cloud_cost/budgets/budgets-dashboard.png" alt="A budget report that has been added to a dashboard"  style="width:100%;">}}
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
