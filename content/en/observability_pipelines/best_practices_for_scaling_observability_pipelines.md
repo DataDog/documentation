@@ -20,6 +20,8 @@ This guide walks you through the recommended aggregator architecture for new Obs
 - [Optimizing the instance](#optimize-the-instance) so you can horizontally scale the Observability Pipelines Worker aggregator.
 - Starting points to estimate your resource capacity for [capacity planning and scaling](#capacity-planning-and-scaling) the Observability Pipelines Worker.
 
+{{< img src="observability_pipelines/test.png" alt="Your image description" style="width:100%;" >}}
+
 ## Optimize the instance
 
 ### Instance sizing
