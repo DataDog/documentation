@@ -43,7 +43,7 @@ Open a Continuous Testing test run in Test Optimization to see detailed informat
 
 In this view you can:
 
-- Use the **Overview** tab to to troubleshoot a flaky test by viewing the first and last commit it flaked.
+- Use the **Overview** tab to troubleshoot a flaky test by viewing the first and last commit it flaked.
 - Use the **History** tab to visualize past runs by status and branch.
 - Use the **Performance** tab to track the mean, minimum, maximum, p95, and trends for test run durations over time.
 
