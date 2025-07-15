@@ -206,6 +206,10 @@ To configure your application to submit custom metrics, follow the appropriate s
 - [PHP][10]
 - [Python][11]
 
+### Continuous Profiler
+
+To enable the Continuous Profiler, set the environment variable `DD_PROFILING_ENABLED=true`. For more information, see the [Continuous Profiler documentation][12].
+
 ## Deployment
 
 {{% aas-workflow-linux %}}
@@ -232,5 +236,6 @@ Share the content of the **Log stream** with [Datadog Support][14].
 [9]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=java
 [10]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=php
 [11]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=python
+[12]: https://docs.datadoghq.com/profiler/
 [14]: /help
 [17]: /serverless/guide/azure_app_service_linux_code_wrapper_script
