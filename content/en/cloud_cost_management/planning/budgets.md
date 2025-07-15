@@ -101,9 +101,14 @@ To delete a budget, click the trash icon on the Budgets page.
 
    {{< img src="cloud_cost/budgets/budget-delete-2.png" alt="Click the delete icon to delete a budget"  style="width:70%;">}}
 
+## Add a budget report to a dashboard
+
+Learn how to [create a budget report][4], then add it to a dashboard.
+
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/plan/budgets
 [2]: /api/latest/cloud-cost-management/#create-or-update-a-budget
 [3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/cost_budget
+[4]: /cloud_cost_management/reports/
