@@ -21,6 +21,7 @@ Install the tracing library for your language:
 
 {{< tabs >}}
 {{% tab "Java" %}}
+
 Java supports adding instrumentation code through the use of a command line argument, `javaagent`.
 
 1. Download the [latest version of Datadog's Java tracing library][101].
@@ -31,8 +32,10 @@ Java supports adding instrumentation code through the use of a command line argu
 Instrumentation starts when the application is launched.
 
 [101]: https://dtdg.co/latest-java-tracer
+
 {{% /tab %}}
 {{% tab "Node.js" %}}
+
 1. Add the `ddtrace` package to your project using your package manager.
 1. Initialize the tracer by doing one of the following:
    - Set `NODE_OPTIONS` with `--require=dd-trace/init`
@@ -45,13 +48,15 @@ Instrumentation starts when the application is launched.
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Add the `Datadog.Trace.Bundle` Nuget package to your project. See [https://www.nuget.org/packages/Datadog.Trace.Bundle][18].
+Add the `Datadog.Trace.Bundle` Nuget package to your project. See [https://www.nuget.org/packages/Datadog.Trace.Bundle][102].
 
 For example:
 
 ```shell
 dotnet add package Datadog.Trace.Bundle --version 3.21.0
 ```
+
+[102]: https://www.nuget.org/packages/Datadog.Trace.Bundle#readme-body-tab
 
 {{% /tab %}} 
 {{% tab "PHP" %}}
@@ -140,27 +145,25 @@ Additional flags, like `--service` and `--env`, can be used to set the service a
 
 For .NET applications, the following environment variables are **required**:
 
-`DD_DOTNET_TRACER_HOME`
-: **Value**: `/home/site/wwwroot/datadog`<br>
-Path to the .NET tracing libraries.
+`DD_DOTNET_TRACER_HOME=/home/site/wwwroot/datadog`
+: Path to the .NET tracing libraries.
 
-`DD_TRACE_LOG_DIRECTORY`
-: **Value**: `/home/LogFiles/dotnet`<br>
-Path where tracer logs are written.
+`DD_TRACE_LOG_DIRECTORY=/home/LogFiles/dotnet`
+: Path where tracing library will write its logs.
 
-`CORECLR_ENABLE_PROFILING`
-: **Value**: `1`<br>
-Used by the .NET runtime to enable the Profiling API.
+`CORECLR_ENABLE_PROFILING=1`
+: Used by the .NET runtime to enable the Profiling API.
 
-`CORECLR_PROFILER`
-: **Value**: `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`<br>
-Used by the .NET runtime to identify the CLR Profiler's GUID.
+`CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}`
+: Used by the .NET runtime to identify the CLR Profiler's GUID.
 
 `CORECLR_PROFILER_PATH`
-: **Value for glibc-based distros**: `/home/site/wwwroot/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so`<br>
-: **Value for Alpine Linux and other musl-based distros**: `/home/site/wwwroot/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so`<br>
-Path to the library that implements the Profiling API callbacks. Loaded by the .NET runtime.
-**Note**: This path is determined by OS and architecture. See the [Nuget package's README file][18] for more details.
+: **Value for glibc-based distros**:<br>
+`/home/site/wwwroot/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so`<br>
+**Value for Alpine Linux and other musl-based distros**:<br>
+`/home/site/wwwroot/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so`<br>
+Path to the library that implements the Profiling API callbacks. Loaded by the .NET runtime.<br>
+**Note**: This path is determined by OS and architecture. See the [Nuget package's README file][304] for more details.
 
 
 {{% /collapse-content %}}
@@ -184,6 +187,8 @@ Path to the library that implements the Profiling API callbacks. Loaded by the .
 [301]: https://app.datadoghq.com/organization-settings/api-keys
 [302]: /getting_started/site/
 [303]: /profiler
+[304]: https://www.nuget.org/packages/Datadog.Trace.Bundle#readme-body-tab
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -229,4 +234,3 @@ Share the content of the **Log stream** with [Datadog Support][14].
 [11]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=python
 [14]: /help
 [17]: /serverless/guide/azure_app_service_linux_code_wrapper_script
-[18]: https://www.nuget.org/packages/Datadog.Trace.Bundle#readme-body-tab
