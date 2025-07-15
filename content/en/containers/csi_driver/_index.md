@@ -4,27 +4,27 @@ title: Datadog CSI Driver
 
 ## Overview
 
-This page provides an overview of the Datadog CSI driver and installation instructions on a kubernetes cluster.
+This page provides an overview of the Datadog CSI driver and installation instructions on a Kubernetes cluster.
 
 More information about Kubernetes Container Storage Interface (CSI) can be found [here](https://kubernetes-csi.github.io/docs/introduction.html).
 
 Datadog CSI driver is open source; the driver implementation is available [here](https://github.com/DataDog/datadog-csi-driver).
 
 <div class="alert alert-info">
-   Datadog CSI Driver is not supported on windows.
+   Datadog CSI Driver is not supported on Windows.
 </div>
 
 ## How It Works
 
 Datadog CSI driver is a DaemonSet that runs a gRPC server implementing the CSI specifications on each node of your Kubernetes cluster.
 
-Installing Datadog CSI driver on a kubernetes cluster allows users to leverage CSI volumes by specifying datadog's CSI driver name.
+Installing Datadog CSI driver on a Kubernetes cluster allows users to leverage CSI volumes by specifying Datadog's CSI driver name.
 
 Datadog CSI node server will be responsible for managing Datadog CSI's volume lifecycle.
 
 ## Why use Datadog CSI Driver?
 
-Datadog CSI driver allows the agent to share the trace agent and dogstatsd Unix Domain Sockets with user pods regardless of the namespace [pod security standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/).
+Datadog CSI driver allows the agent to share the trace agent and DogStatsD Unix Domain Sockets with user pods regardless of the namespace [pod security standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/).
 
 If CSI volumes are not used, the UDS sockets need to be shared with the user pod via hostpath volumes. If the user pod is running in a namespace having a non-privileged pod security standard, the pod will fail to start because hostpath volumes are not permitted in such contexts.
 
