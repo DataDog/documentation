@@ -6,9 +6,6 @@ description: Explore and dig into your database host health and configuration
 
 {{< img src="database_monitoring/databases-list-3.png" alt="The Databases page in Datadog" style="width:100%;" >}}
 
-<div class="alert alert-info">
-If you are using Amazon RDS with the <a href="https://docs.datadoghq.com/integrations/amazon_rds/?tab=standard">RDS integration</a> enabled, Datadog automatically receives the <code>dbclusteridentifier</code> tag from AWS. When this tag is present, a <strong>Group my RDS clusters</strong> toggle appears, grouping related RDS instances into clusters based on the identifier. No additional setup or manual tagging is required.</div>
-
 On the [Databases page][1], you can assess the health and activity of your database hosts. Sort and filter the list to prioritize hosts with triggered alerts, high query volume, and other criteria. Click on any host in the list to open a details panel:
 
 {{< img src="database_monitoring/db-list-details-panel-cropped-2.png" alt="The details panel for a single database host on the Databases page" style="width:90%;" >}}
@@ -25,6 +22,14 @@ In addition to a filterable graph of active connections for that host, the host 
 | [Blocking queries](#blocking-queries)           | {{< X >}} | {{< X >}}  |           | {{< X >}} |
 | [Calling services](#calling-services)           | {{< X >}} | {{< X >}}  | {{< X >}} |           |
 | [Configuration details](#configuration-details) | {{< X >}} | {{< X >}}  | {{< X >}} |           |
+
+## Cluster grouping
+When you view the list of database hosts, a **Group into clusters** toggle might appear if we detect some cluster topologies. This is powered by the tagging information done by an integration or the agent.
+Currently, here are the supported cluster topologies:
+
+- Amazon RDS with the <a href="https://docs.datadoghq.com/integrations/amazon_rds/?tab=standard">RDS integration</a> enabled. Datadog uses the <code>dbclusteridentifier</code> and <code>region</code> tags to group hosts into clusters.
+- PostgreSQL's physical replication. Agent 7.58+ uses the <code>system_identifier</code> tag to group hosts into clusters.
+- MySQL's traditional replication. Agent 7.68+ uses the <code>cluster_uuid</code> tag to group hosts into clusters.
 
 ## Top queries
 
