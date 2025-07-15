@@ -38,7 +38,7 @@
 <div class="product-availability container mb-3 p-0">
     <div class="d-flex">
         <strong class="p-0">{{ i18n "available_for"}}:</strong>
-        <p class="mb-0 p-0">
+        <p class="mb-0 p-0 d-flex flex-wrap">
             {{ range $idx, $product := $products }}
                 <span class="product-wrapper">
                     <span class="product position-relative">
@@ -46,7 +46,7 @@
                         <span>{{$product.name}}</span>
                         <a class="border-0 stretched-link" href="{{$product.url}}"></a>
                     </span>
-                    <span>{{ if ne $idx (sub $len 1) }}|{{ end }}</span>
+                    <span class="separator">{{ if ne $idx (sub $len 1) }}|{{ end }}</span>
                 </span>
             {{ end }}
         </p>
