@@ -10,7 +10,7 @@ further_reading:
   text: "Collect Amazon CloudWatch metrics using Metric Streams"
 ---
 
-{{% site-region region="us3,gov" %}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">AWS CloudWatch Metric Streams with Amazon Data Firehose is not available for the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{% /site-region %}}
 
