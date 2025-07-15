@@ -75,13 +75,13 @@ You can use [Carthage][1] to install `dd-sdk-ios`:
 github "DataDog/dd-sdk-ios"
 ```
 
-Note: Datadog does not provide prebuilt Carthage binaries. This means Carthage will build the SDK from source.
-To build and integrate the SDK successfully, run:
+**Note**: Datadog does not provide prebuilt Carthage binaries. This means Carthage will build the SDK from source.
+To build and integrate the SDK, run:
 ```
 carthage bootstrap --use-xcframeworks --no-use-binaries
 ```
 
-After building, link the following XCFrameworks in Xcode:
+After building, add the following XCFrameworks to your Xcode project (in the "Frameworks, Libraries, and Embedded Content" section):
 ```
 DatadogInternal.xcframework
 DatadogCore.xcframework
