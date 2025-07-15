@@ -274,20 +274,6 @@ The following steps are supported in step replay:
 - Assert page contains
 - Assert page lacks
 
-### Debugger permissions
-
-Currently, the step replay feature runs without Chrome's debugger permission. This means some advanced user actions are either not yet supported or may behave differently compared to full Synthetic Monitoring test runs.
-
-An upcoming release of the Chrome extension will enable debugger permission, bringing Step Replay much closer to full feature compatibility with the Synthetics platform, providing:
-
-- **More accurate simulation of user behavior:** Complex interactions like keystrokes, dynamic page updates, and UI transitions will match the behavior observed in full test runs on the Synthetics platform.
-- **Support for advanced Step Types:** Steps previously unsupported or limited will become fully functional:
-  - Assert from JavaScript
-  - Extract from JavaScript
-  - Press Key
-  - Type Text
-- **Enhanced fidelity for click and hover:** These steps will behave identically to how they execute in the Synthetics platform.
-
 ### Step types not supported
 
 The following steps are currently not available in Step Replay, even with debugger permission. They may be added in future versions:
