@@ -6,7 +6,7 @@ announcement_banner:
   desktop_message: '<i class="icon-right-arrow-slim"></i><span>NOW LIVE: Datadog launches data centre presence in Australia to support local data residency.</span><span>Learn More</span>'
   mobile_message: 'Datadog launches data centre presence in Australia'
   background_color: "#6300D4"
-  # custom_classes: 'dash-announcement-banner'
+  custom_classes: 'dash-announcement-banner'
   external_link: https://www.datadoghq.com/blog/dash-2025-new-feature-roundup-keynote/
 translate_status_banner: "This translation isn't up-to-date. For the latest English version, click here"
 site_support_banner: "This product is not supported for your selected <a href=\"/getting_started/site\">Datadog site</a>."
