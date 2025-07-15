@@ -226,7 +226,7 @@ You can switch tabs in a browser test recording in order to perform an action on
    Datadog recommends ending your browser test with an **[assertion][12]** to confirm the journey executed by the browser test resulted in the expected state.
 6. Once you have finished your scenario, click **Save and Launch Test**.
 
-## Step Replay
+## Step replay
 
 Step Replay lets you re-run one or more steps of your browser test directly from the Datadog Synthetics Chrome extension. This feature is designed to help you quickly set up the right state when adding or editing steps in the middle of a long test, without having to manually replay the entire journey from scratch.
 
