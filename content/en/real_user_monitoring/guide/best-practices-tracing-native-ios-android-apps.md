@@ -55,7 +55,7 @@ Use [OkHttp parent span helpers][1] or [OpenTelemetry addParentSpan][2] to link 
 
 ### Profiling native application performance
 
-Instrumenting multiple native spans and linking them (using `setActive` on iOS or `addParentSpan` on Android) allows you to profile key parts of your app. This helps you:
+Instrumenting multiple native spans and linking them (using `setActive` on iOS or `activateSpan` on Android) allows you to profile key parts of your app. This helps you:
 - Understand how different methods and components interact
 - Break down performance bottlenecks
 - Gain actionable insights into app behavior
@@ -105,7 +105,7 @@ The following sampling rate parameters control different aspects of data collect
 
 | Parameter                                   | Description                                                      |
 |---------------------------------------------|------------------------------------------------------------------|
-| `Trace.sampleRate`                          | Controls the percentage of manually instrumented spans collected by the tracer.|
+| `Trace.Configuration.sampleRate`                          | Controls the percentage of manually instrumented spans collected by the tracer.|
 | `urlSessionTracking.firstPartyHostsTracing.sampleRate` | Controls the percentage of network requests traced for first-party hosts. |
 | `RUM.sessionSampleRate`                     | Controls the percentage of user sessions that are recorded for RUM.|
 | `WebViewTracking.logsSampleRate`            | Controls the percentage of logs collected from WebViews.          |
@@ -115,8 +115,8 @@ The following sampling rate parameters control different aspects of data collect
 
 | Parameter                                   | Description                                                      |
 |---------------------------------------------|------------------------------------------------------------------|
-| `Trace.sampleRate`                          | Controls the percentage of manually instrumented spans collected by the tracer.|
-| `urlSessionTracking.firstPartyHostsTracing.sampleRate` | Controls the percentage of network requests traced for first-party hosts. |
+| `AndroidTracer.Builder.setSampleRate`                          | Controls the percentage of manually instrumented spans collected by the tracer.|
+| `DatadogInterceptor.Builder.setTraceSampler` | Controls the percentage of network requests traced for first-party hosts. |
 | `RUM.sessionSampleRate`                     | Controls the percentage of user sessions that are recorded for RUM.|
 | `WebViewTracking.logsSampleRate`            | Controls the percentage of logs collected from WebViews.          |
 
@@ -129,7 +129,7 @@ Sampling affects different types of spans you create in your mobile app:
 
 - **Local span sampling** applies to manually instrumented spans (like business spans or performance profiling spans). It's controlled by the `Trace.sampleRate` parameter. For example, if you set this rate to 50, all manually created spans are sent to Datadog, but only 50% are visible in the UI. Each span event includes the `_dd.agent_psr` field (the sampling rate) and `metrics._sampling_priority_v1` (1 for sampled, 0 for not sampled).
 
-- **Distributed trace sampling** applies to traces that cross service boundaries, such as network requests to your backend (relevant for the "Wrap a frontend-to-backend distributed trace" use case). This is controlled by the `urlSessionTracking.firstPartyHostsTracing.sampleRate` parameter. If set to 50, only half of backend requests have the sampled flag set to true, as indicated by the [W3C trace context][7]. All Datadog agents honor this decision, so you see 50% of distributed traces in the UI.
+- **Distributed trace sampling** applies to traces that cross service boundaries, such as network requests to your backend (relevant for the "Wrap a frontend-to-backend distributed trace" use case). This is controlled by the `urlSessionTracking.firstPartyHostsTracing.sampleRate` parameter for iOS and `DatadogInterceptor.Builder.setTraceSampler` parameter for Android. If set to 50, only half of backend requests have the sampled flag set to true, as indicated by the [W3C trace context][7]. All Datadog agents honor this decision, so you see 50% of distributed traces in the UI.
 
 Sampling rates are applied independently. The most restrictive rate determines what data is visible in the UI for a given session or trace. For example:
 - If you set a low RUM session sample rate (for example, 1%), only 1% of user sessions are recorded for RUM, but you can still trace all network requests within those sessions by setting the network tracing sample rate to 100%.
