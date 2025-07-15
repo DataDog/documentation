@@ -19,7 +19,7 @@ You need to have Datadog's [Google Cloud Platform integration][3] installed to s
 
 ## Set up the destination for your pipeline {#set-up-the-destinations}
 
-Set up the Amazon S3 destination and its environment variables when you [set up an Archive Logs pipeline][4]. The information below is configured in the pipelines UI.
+Set up the Google Cloud Storage destination and its environment variables when you [set up an Archive Logs pipeline][4]. The information below is configured in the pipelines UI.
 
 {{% observability_pipelines/destination_settings/datadog_archives_google_cloud_storage %}}
 
