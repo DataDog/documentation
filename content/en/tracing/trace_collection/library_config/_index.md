@@ -221,6 +221,11 @@ The following configuration options behave consistently across the latest versio
   - `cf-connecting-ip`
   - `cf-connecting-ipv6`
 
+`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED`
+: **Default**: `false` <br>
+**Supported Input**: Boolean <br>
+**Description**: Controls automatic service name overrides as per [the inferred services feature][7]. Disables the feature when set to false. See examples in the dedicated [inferred services documentation][8[.
+
 ### Context propagation
 `DD_TRACE_BAGGAGE_MAX_ITEMS`
 : **Default**: `64` <br>
@@ -248,3 +253,5 @@ This feature only applies to baggage extracted from incoming HTTP headers. Bagga
 [4]: /tracing/trace_pipeline/ingestion_mechanisms/
 [5]: /tracing/metrics/runtime_metrics/
 [6]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java#in-tracing-libraries-user-defined-rules
+[7]: /tracing/guide/service_overrides
+[8]: /tracing/guide/service_overrides/#remove-service-overrides
