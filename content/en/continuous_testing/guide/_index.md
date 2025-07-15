@@ -10,5 +10,5 @@ cascade:
 ---
 
 {{< whatsnext desc="Datadog Integrations:" >}}
-    {{< nextlink href="/continuous_testing/guides/view-continuous-testing-test-runs-in-test-optimization" >}}View Continuous Testing Test Runs in Test Optimization{{< /nextlink >}}
+    {{< nextlink href="/continuous_testing/guide/view-continuous-testing-test-runs-in-test-optimization" >}}View Continuous Testing Test Runs in Test Optimization{{< /nextlink >}}
 {{< /whatsnext >}}

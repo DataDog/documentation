@@ -13,46 +13,49 @@ further_reading:
     text: 'Working with Flaky Tests'
 
 ---
+{{< site-region region="gov" >}}<div class="alert alert-warning"> Mobile Application Testing is not supported on this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 ## Overview
 
-[Continuous Testing][1] allows you run [Synthetic tests][2] within your CI/CD pipelines to automate software testing for a product's entire lifecycle. [Test Optimization][3] provides a test-first view into your CI health by displaying important metrics and results from your tests. 
+[Continuous Testing][1] enables you to run [Synthetic Monitoring tests][2] within your CI/CD pipelines, automating software testing throughout your product's lifecycle. [Test Optimization][3] provides a test-first view into your CI health by displaying important metrics and results from your tests. 
 
-You can view Continuous Testing test runs in Test Optimization to get a consolidated view of metrics and results across all of your test frameworks, including Synthetics, in one place.
+You can use Test Optimization to view Continuous Testing test runs, giving you a unified overview of metrics and results from all your test frameworks, including Synthetic Monitoring, in one place.
 
 ## View Continuous Testing test runs in Test Optimization
 
-Navigate to [Test Runs][4] in Test Optimization and filter the **Test Framework** facet to **synthetics**:
+1. Navigate to [Test Runs][4] in Test Optimization.
+2. Filter the **Test Framework** facet to **synthetics**:
 
-{{< img src="continuous_testing/guide/view-continuous-testing-test-runs-in-test-optimization/test_optimization_test_run_explorer.png"  style="width:100%" >}}
+{{< img src="continuous_testing/guide/view-continuous-testing-test-runs-in-test-optimization/test_optimization_test_run_explorer_2.png" alt="Test Optimization Test Runs explorer, filtered to synthetics framework facet" style="width:100%" >}}
 
-Use this to search, filter, and analyze Continuous Testing test runs using both Test Optimization and Continuous Testing metadata in one view.
+Use this feature to search, filter, and analyze Continuous Testing test runs, combining both Test Optimization and Continuous Testing metadata in a single view.
 
 For example:
 
-- Use the **Flaky**, **New Flaky** and **Known Flaky** facets to identify flaky test runs
-- Use the **Synthetics Teams** facet to analyze test run status and performance by team
-- Use the **@test.name** column to export a list of test runs and their names
+- Use the **Flaky**, **New Flaky** and **Known Flaky** facets to identify flaky test runs.
+- Use the **Synthetics Teams** facet to analyze test run status and performance by team.
+- Use the **@test.name** column to export a list of test runs and their names.
 
 Open a Continuous Testing test run in Test Optimization to see detailed information about the test run:
 
-{{< img src="continuous_testing/guide/view-continuous-testing-test-runs-in-test-optimization/test_optimization_test_run_detail.png"  style="width:100%" >}}
+{{< img src="continuous_testing/guide/view-continuous-testing-test-runs-in-test-optimization/test_optimization_test_run_detail.png" alt="Test Optimization Test Runs details view" style="width:100%" >}}
 
-For example:
+In this view you can:
 
-- Use the **Overview** tab to troubleshoot a flaky test by viewing the first and last commit it flaked
-- Use the **History** tab to visualize past runs by status and branch
-- Use the **Performance** tab to measure the mean, min, max, p95, and trend of the duration of test runs over time
+- Use the **Overview** tab to to troubleshoot a flaky test by viewing the first and last commit it flaked.
+- Use the **History** tab to visualize past runs by status and branch.
+- Use the **Performance** tab to track the mean, minimum, maximum, p95, and trends for test run durations over time.
 
-To view a Continuous Testing test run in Synthetics from Test Optimization, click **View in Synthetics** from the Test Optimization test run page.
+## Viewing test runs
 
-To view a Continuous Testing test run in Test Optimization from Synthetics, click **View in Test Optimization** from the Synthetics test run page:
+To view a Continuous Testing test run in Synthetic Monitoring from Test Optimization, click **View in Synthetics** from the Test Optimization test run page.
 
-{{< img src="continuous_testing/guide/view-continuous-testing-test-runs-in-test-optimization/continuous_testing_test_run_detail.png"  style="width:100%" >}}
+{{< img src="continuous_testing/guide/view-continuous-testing-test-runs-in-test-optimization/view_in_synthetics.png" alt="Test Optimization Test Runs details view, highlighting View in Synthetics button" style="width:100%" >}}
 
-## Pricing
+To view a Continuous Testing test run in Test Optimization from Synthetic Monitoring, click **View in Test Optimization** from the Synthetic Monitoring test run page:
 
-Continuous Testing test runs are available for free in Test Optimization (spans are excluded from billing).
+{{< img src="continuous_testing/guide/view-continuous-testing-test-runs-in-test-optimization/continuous_testing_test_run_detail.png" alt="Synthetics Test Runs details view, highlighting View in Test Optimization button"  style="width:100%" >}}
 
 
 ## Further Reading
@@ -62,4 +65,4 @@ Continuous Testing test runs are available for free in Test Optimization (spans 
 [1]: /continuous_testing/
 [2]: /synthetics/
 [3]: /tests/
-[4]: /tests/explorer/
+[4]: https://app.datadoghq.com/ci/test/runs
