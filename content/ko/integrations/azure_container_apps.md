@@ -68,7 +68,7 @@ Azure Container Apps를 사용하면 서버리스 컨테이너를 사용하여 �
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_container_apps" >}}
+{{< get-metrics-from-git "azure-container-apps" >}}
 
 
 ### 이벤트

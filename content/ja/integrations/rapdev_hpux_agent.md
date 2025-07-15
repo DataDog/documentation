@@ -24,7 +24,7 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- マーケットプレイス
+- marketplace
 custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
@@ -59,7 +59,7 @@ tile:
   configuration: README.md#Setup
   description: hppa および itanium の HP-UX 11.31 メトリクスを提供するシステム Agent
   media:
-  - caption: インフラストラクチャーリスト
+  - caption: インフラストラクチャー一覧
     image_url: images/1.png
     media_type: image
   - caption: ホストメトリクス
@@ -84,7 +84,7 @@ HP-UX Agent は、Datadog インフラストラクチャーリストをサポー
 
 HP-UX Agent は、ネイティブ Agent と同じ URL とポートを使用します。HP-UX Agent は現在、コアインフラストラクチャーメトリクス、プロセスチェック、ログ追跡をサポートしています。カスタム Agent チェック、インテグレーション、またはサービスチェックはサポートしていません。
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 

@@ -20,7 +20,7 @@ title: Amazon ECS データ収集
 
 Amazon ECS on EC2 は、EC2 インスタンス上で動作する Docker コンテナ向けのコンテナ管理サービスです。Agent for Amazon ECS によって収集されたメトリクス:
 
-{{< get-metrics-from-git "amazon_ecs" >}}
+{{< get-metrics-from-git "amazon-ecs" >}}
 
 Docker コンテナでのデプロイ時に Agent により収集されたメトリクスにも Docker インテグレーションにより収集されたものと同じメトリクスが含まれます。すべてのメトリクスのリストは、[Docker のインテグレーションメトリクス][1]を参照してください。
 

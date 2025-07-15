@@ -43,6 +43,10 @@ Some Observability Pipelines components require setting up environment variables
 ### Logstash
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/logstash %}}
 
+### Socket
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/socket %}}
+
 ### Splunk HEC
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/splunk_hec %}}
 
@@ -70,6 +74,9 @@ Some Observability Pipelines components require setting up environment variables
 
 ### Amazon OpenSearch
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_opensearch %}}
+
+### Amazon Security Lake
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_security_lake %}}
 
 ### Chronicle
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
@@ -99,6 +106,9 @@ Some Observability Pipelines components require setting up environment variables
 
 ### SentinelOne
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sentinelone %}}
+
+### Socket
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/socket %}}
 
 ### Splunk HEC
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/splunk_hec %}}

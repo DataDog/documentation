@@ -10,10 +10,6 @@ title: Vistas guardadas
 Las Puertas de calidad están en vista previa.
 {{< /callout >}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Puertas de calidad no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Las vistas guardadas te permiten guardar el estado del [Explorador de puertas de Calidad][2] en la [página **Ejecuciones de puertas de Calidad**][1] y te permiten solucionar problemas de forma eficaz, proporcionándote acceso a consultas delimitadas, facetas relevantes, opciones de visualización e intervalo de tiempo. 

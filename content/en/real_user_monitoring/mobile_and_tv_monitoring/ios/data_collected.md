@@ -182,7 +182,7 @@ RUM action, error, resource, and long task events contain information about the 
 | `view.url`     | string | URL of the `UIViewController` class corresponding to the event. |
 | `view.name`    | string | Customizable name of the view corresponding to the event.       |
 | `view.loading_time` | number (ns) | Time it took for the view to load, set by addViewLoadingTime(override:) call. |
-| `view.network_settled_time` | number (ns) | Time it ook for a view to be fully initiated at the start of the view. | 
+| `view.network_settled_time` | number (ns) | Time it took for a view to be fully initiated at the start of the view. | 
 | `view.interaction_to_next_view_time` | number (ns) | Time between the last user interaction in the previous view and start of this (current) view. |
 
 ### Resource metrics

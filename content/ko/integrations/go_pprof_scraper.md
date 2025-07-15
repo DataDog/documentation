@@ -104,7 +104,7 @@ Go-pprof-scraper 통합은 메트릭을 생성하지 않습니다.
 Go-prof-스크래퍼 통합에는 이벤트가 포함되지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "go_pprof_scraper" >}}
+{{< get-service-checks-from-git "go-pprof-scraper" >}}
 
 
 ## 트러블슈팅
