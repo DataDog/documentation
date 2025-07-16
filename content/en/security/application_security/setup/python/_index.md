@@ -42,7 +42,7 @@ further_reading:
 ### AWS
 {{< appsec-integrations >}}
 {{< appsec-integration name="AWS Fargate" avatar="aws-fargate" link="./aws_fargate" >}}
-{{< appsec-integration name="AWS Lambda" avatar="aws-lambda" link="./aws_lambda" >}}
+{{< appsec-integration name="AWS Lambda" avatar="aws-lambda" link="/security/application_security/setup/aws/lambda/" >}}
 {{< /appsec-integrations >}}
 
 ## Additional Resources
