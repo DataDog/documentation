@@ -12,5 +12,5 @@ Outlier detection is performed across key dimensions:
 - Workflow type
 - Cluster input/output topics
 
-These outliers are analyzed over the past week and automatically surfaced in the corresponding time window selected by the user. This enables teams to proactively detect regressions, performance drifts, or unexpected behavior in their LLM pipelines.
+These outliers are analyzed over the past week and automatically surfaced in the corresponding time window selected by the user. This enables teams to proactively detect regressions, performance drifts, or unexpected behavior in their LLM applications.
 
