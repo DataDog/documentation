@@ -180,7 +180,7 @@ Used by the .NET runtime to identify the CLR Profiler's GUID.<br>
 : **Value for glibc-based distros**:<br>
 `/home/site/wwwroot/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so`<br>
 **Value for Alpine Linux and other musl-based distros**:<br>
-`/home/site/wwwroot/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so`<br>
+`/home/site/wwwroot/datadog/linux-musl-x64/Datadog.Trace.ClrProfiler.Native.so`<br>
 Path to the library that implements the Profiling API callbacks. Loaded by the .NET runtime.<br>
 **Note**: This path is determined by OS and architecture. See the [Nuget package's README file][1] for more details.<br>
 
