@@ -42,6 +42,8 @@ Install the Datadog Python tracing library:
 pip install ddtrace
 ```
 
+Configure and run your service with Datadog:
+
 {{% collapse-content title="APM Tracing Enabled" level="h4" %}}
 
 Set the required environment variables and start your Python application:

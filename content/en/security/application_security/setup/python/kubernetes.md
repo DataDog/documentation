@@ -44,6 +44,8 @@ Install the Datadog Python tracing library using an init container or in your ap
 RUN pip install ddtrace
 ```
 
+Configure and run your service with Datadog:
+
 {{% collapse-content title="APM Tracing Enabled" level="h4" %}}
 
 Start your Python application with App and API Protection enabled using environment variables:
