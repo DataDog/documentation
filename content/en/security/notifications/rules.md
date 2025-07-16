@@ -47,7 +47,7 @@ To create a notification rule, specify the conditions under which the rule shoul
 1. Click **Add Recipient**.
 1. Specify the recipients you want to notify when the notification rule is triggered. You can notify individuals, teams, create Jira issues, and more. See [Notification channels][2] for more information.
 1. To test notifications for this rule, click ** Test Notifications**. **Note: This is not available for Cloud Security Vulnerabilities.
-  1. In the modal, select the sources you want to test.
+  1. In the modal, select the security products you want to test.
   1. Click **Run Test**.
 1. Click **Save**.
 
