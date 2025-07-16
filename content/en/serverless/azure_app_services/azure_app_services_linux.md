@@ -132,14 +132,29 @@ Additional flags, like `--service` and `--env`, can be used to set the service a
 1. **Configure environment variables**.
    In Azure, add the following key-value pairs in **Settings** > **Configuration** > **Application settings**:
 
-| Name | Value | Description |
-|------|-------|-------------|
-| `DD_API_KEY` | Your Datadog API key. | See [Organization Settings > API Keys][301] in Datadog. |
-| `DD_SITE` | {{< region-param key="dd_site" code="true" >}} | Your [Datadog site][302]. Defaults to `datadoghq.com`. |
-| `DD_SERVICE` | Your application's service name. | Defaults to the name field value in `package.json`. |
-| `DD_ENV` | Your application's environment name. | There is no default value for this field. |
-| `DD_SERVERLESS_LOG_PATH` | The log path the sidecar uses to collect logs. | Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFiles/myapp/*.log`. |
-| `WEBSITES_ENABLE_APP_SERVICE_STORAGE` | `true` | Setting this environment variable to `true` allows the `/home/` mount to persist and be shared with the sidecar. |
+`DD_API_KEY`
+: **Value**: Your Datadog API key.<br>
+See [Organization Settings > API Keys][301] in Datadog.<br>
+
+`DD_SITE`
+: **Value**: {{< region-param key="dd_site" code="true" >}}<br>
+Your [Datadog site][302]. Defaults to `datadoghq.com`.<br>
+
+`DD_SERVICE`
+: **Value**: Your application's service name.<br>
+Defaults to the name field value in `package.json`.<br>
+
+`DD_ENV`
+: **Value**: Your application's environment name.<br>
+There is no default value for this field.<br>
+
+`DD_SERVERLESS_LOG_PATH`
+: **Value**: The log path the sidecar uses to collect logs.<br>
+Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFiles/myapp/*.log`.<br>
+
+`WEBSITES_ENABLE_APP_SERVICE_STORAGE`
+: **Value**: `true`<br>
+Setting this environment variable to `true` allows the `/home/` mount to persist and be shared with the sidecar.<br>
 
 {{% collapse-content title=".NET: Additional required environment variables" level="h4" id="dotnet-additional-settings" %}}
 
