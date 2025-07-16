@@ -97,10 +97,6 @@ See [more Android examples][1].
 {{% /tab %}}
 {{< /tabs >}}
 
-### Creating business spans
-
-The Trace SDK is independent from RUM, so you can track business processes or flows that span multiple screens or views. For example, you can measure how long it takes users to complete a checkout flow, or how long a background sync takes, regardless of RUM session sampling. These business spans appear in the APM UI and can be used for custom metrics and dashboards.
-
 ## Sampling
 
 Sampling in native mobile tracing controls which spans and traces are ingested in Datadog, helping you balance visibility with data volume. When you manually instrument spans in your app, the ones that are sampled in go trough the APM retention filters which determine which ones end up being displayed for analysis in the Datadog interface.
