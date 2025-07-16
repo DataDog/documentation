@@ -11,7 +11,7 @@ further_reading:
 
 ### Prerequisites
 
-LLM Observability requires a Datadog API key if you don't have an Agent running. Find your API key [in Datadog](https://app.datadoghq.com/organization-settings/api-keys).
+LLM Observability requires a Datadog API key if you don't have a Datadog Agent running. Find your API key [in Datadog](https://app.datadoghq.com/organization-settings/api-keys).
 
 ### Setup
 
