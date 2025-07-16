@@ -236,7 +236,69 @@ Check that the OpenLineage environment variables are correctly set on the Astron
 
 **Note**: Using the `.env` file to add the environment variables does not work because the variables are only applied to the local Airflow environment.
 {{% /tab %}}
+{{% tab "Google Cloud Composer" %}}
+## Requirements
 
+* [Cloud Composer 2][1] or later
+* [apache-airflow-providers-openlineage][2] or [openlineage-airflow][8] depending on your Airflow version
+
+## Setup
+
+To get started, follow the instructions below.
+
+
+1. In the Advanced Configuration tab, under "Airflow configuration override", click on "Add Airflow configuration override" and configure as follows:
+
+   - In Section 1, enter `openlineage`
+   - In Key 1, enter `transport`
+   - In Value 1, enter the follows:
+     ```
+     {
+      "type": "http", 
+      "url": "<DD_DATA_OBSERVABILITY_INTAKE>", 
+      "auth": {
+         "type": "api_key", 
+         "api_key": "<DD_API_KEY>"
+      }
+     }
+
+   * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
+   * Replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
+   
+
+   Check official [Airflow][4] and [Composer][3] documentation pages for other supported configurations of `openlineage` provider in Google Cloud Composer.
+
+2. After starting the Composer environment, install `openlineage` provider by editing the Pypi packages tab in your environment page.
+
+    For **Airflow 2.7 or later**, add:
+
+      ```text
+      apache-airflow-providers-openlineage
+      ```
+
+    For **Airflow 2.5 & 2.6**, add:
+
+      ```text
+      openlineage-airflow
+      ```
+
+[1]: https://cloud.google.com/composer/docs/composer-versioning-overview
+[2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
+[3]: https://cloud.google.com/composer/docs/airflow-configurations
+[4]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html#configuration-openlineage
+[5]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
+[7]: https://app.datadoghq.com/data-jobs/
+[8]: https://openlineage.io/docs/integrations/airflow/
+
+## Validation
+
+In Datadog, view the [Data Jobs Monitoring][7] page to see a list of your Airflow job runs after the setup.
+
+## Troubleshooting
+
+Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` in the Environment variables tab of the Composer page for OpenLineage client and its child modules. This can be useful in troubleshooting during the configuration of `openlineage` provider.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Advanced Configuration
