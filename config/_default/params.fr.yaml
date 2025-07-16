@@ -8,7 +8,7 @@ announcement_banner:
   background_color: "#6300D4"
   icon_color: "#ffffff"
   custom_classes: 'dash-announcement-banner'
-  external_link: https://www.datadoghq.com/about/latest-news/press-releases/datadog-launches-new-availability-zone-in-australia
+  external_link: https://www.datadoghq.com/about/latest-news/press-releases/datadog-launches-new-datacenter-in-australia
 exclude: []
 translate_status_banner: Cette traduction n'est pas à jour. Pour consulter la dernière version en anglais, cliquez ici
 site_support_banner: "This product is not supported for your selected <a href=\"/getting_started/site\">Datadog site</a>."
