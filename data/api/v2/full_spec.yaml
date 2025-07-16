@@ -43057,9 +43057,6 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
-            appsec_vm_read: View infrastructure, application code, and library vulnerabilities.
-              This does not restrict API or inventory SQL access to the vulnerability
-              data source.
             billing_read: View your organization's billing information.
             cases_read: View Cases.
             cases_write: Create and update cases.
@@ -43074,6 +43071,8 @@ components:
             code_analysis_read: View Code Analysis.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
+            coterm_read: Read terminal recordings.
+            coterm_write: Write terminal recordings.
             create_webhooks: Create webhooks integrations.
             dashboards_embed_share: Create, modify, and delete shared dashboards with
               share type 'embed'.
@@ -43095,7 +43094,6 @@ components:
             incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
-            monitor_config_policy_write: Edit and delete monitor configuration.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in
               an organization. Mute and unmute monitors. The ability to write monitors
               is not required to set downtimes.
@@ -43111,10 +43109,6 @@ components:
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View a list of findings that include
               both misconfigurations and identity risks.
-            security_monitoring_notification_profiles_read: View Rule Security Notification
-              rules.
-            security_monitoring_notification_profiles_write: Create, edit, and delete
-              Security Notification rules.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
@@ -55988,8 +55982,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Create a monitor notification rule
       tags:
       - Monitors
@@ -56045,8 +56037,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Delete a monitor notification rule
       tags:
       - Monitors
@@ -56160,8 +56150,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Update a monitor notification rule
       tags:
       - Monitors
@@ -56464,8 +56452,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Create a monitor user template
       tags:
       - Monitors
@@ -56516,8 +56502,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Validate a monitor user template
       tags:
       - Monitors
@@ -56552,8 +56536,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Delete a monitor user template
       tags:
       - Monitors
@@ -56651,8 +56633,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Update a monitor user template to a new version
       tags:
       - Monitors
@@ -56701,8 +56681,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Validate an existing monitor user template
       tags:
       - Monitors
@@ -62408,8 +62386,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - appsec_vm_read
       summary: List vulnerable assets
       tags:
       - Security Monitoring
@@ -62573,8 +62549,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - appsec_vm_read
       summary: List assets SBOMs
       tags:
       - Security Monitoring
@@ -62644,8 +62618,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - appsec_vm_read
       summary: Get SBOM
       tags:
       - Security Monitoring
@@ -62669,8 +62641,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_read
       summary: Get the list of signal-based notification rules
       tags:
       - Security Monitoring
@@ -62714,8 +62684,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_write
       summary: Create a new signal-based notification rule
       tags:
       - Security Monitoring
@@ -62765,8 +62733,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_write
       summary: Delete a signal-based notification rule
       tags:
       - Security Monitoring
@@ -62805,8 +62771,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_read
       summary: Get details of a signal-based notification rule
       tags:
       - Security Monitoring
@@ -62854,8 +62818,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_write
       summary: Patch a signal-based notification rule
       tags:
       - Security Monitoring
@@ -63254,8 +63216,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - appsec_vm_read
       summary: List vulnerabilities
       tags:
       - Security Monitoring
@@ -63279,8 +63239,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_read
       summary: Get the list of vulnerability notification rules
       tags:
       - Security Monitoring
@@ -63324,8 +63282,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_write
       summary: Create a new vulnerability-based notification rule
       tags:
       - Security Monitoring
@@ -63375,8 +63331,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_write
       summary: Delete a vulnerability-based notification rule
       tags:
       - Security Monitoring
@@ -63415,8 +63369,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_read
       summary: Get details of a vulnerability notification rule
       tags:
       - Security Monitoring
@@ -63464,8 +63416,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_write
       summary: Patch a vulnerability-based notification rule
       tags:
       - Security Monitoring
