@@ -114,7 +114,7 @@ To delete a budget, click the trash icon on the Budgets page.
 
 ## Add a budget to a dashboard
 
-Learn how to create a budget report and add budgets to dashboards.
+You can create a budget report and add budgets to dashboards.
 
 {{< img src="cloud_cost/budgets/budget-dashboard.png" alt="A budget report that has been added to a dashboard"  style="width:100%;">}}
 
