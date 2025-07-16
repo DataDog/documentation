@@ -13,7 +13,7 @@ further_reading:
   tag: 'Documentation'
   text: 'Learn about Continuous Testing'
 - link: '/continuous_testing/guide'
-  tag: 'Documentation'
+  tag: 'Guide'
   text: 'Continuous Testing Guides'
 - link: '/synthetics/private_locations/#scale-your-private-location'
   tag: 'Documentation'

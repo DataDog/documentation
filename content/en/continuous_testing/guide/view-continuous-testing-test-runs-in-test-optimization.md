@@ -33,27 +33,27 @@ Use this feature to search, filter, and analyze Continuous Testing test runs, co
 
 For example:
 
-- Use the **Flaky**, **New Flaky** and **Known Flaky** facets to identify flaky test runs.
+- Use the **Flaky**, **New Flaky**, and **Known Flaky** facets to identify flaky test runs.
 - Use the **Synthetics Teams** facet to analyze test run status and performance by team.
-- Use the **@test.name** column to export a list of test runs and their names.
+- Click **Export** and include the **@test.name** column to export a list of test runs and their names.
 
 Select a Continuous Testing test run in the Test Optimization Explorer to view detailed information about that test run:
 
 {{< img src="continuous_testing/guide/view-continuous-testing-test-runs-in-test-optimization/test_optimization_test_run_detail.png" alt="Test Optimization Test Runs details view" style="width:100%" >}}
 
-This opens a side panel where you can:
+Use these tabs on the side panel:
 
-- Use the **Overview** tab to troubleshoot a flaky test by viewing the first and last commit it flaked.
-- Use the **History** tab to visualize past runs by status and branch.
-- Use the **Performance** tab to track the mean, minimum, maximum, p95, and trends for test run durations over time.
+- **Overview**: Troubleshoot a flaky test by viewing the first and last commit it flaked.
+- **History**: Visualize past runs by status and branch.
+- **Performance**: Track the mean, minimum, maximum, p95, and trends for test run durations over time.
 
 ## Viewing test runs
 
-To view a Continuous Testing test run in Synthetic Monitoring from Test Optimization, click **View in Synthetics** from the details panel of a test run on Test Optimization page.
+From the Test Optimization Explorer, you can jump to a test run in the Synthetic Monitoring page. Click **View in Synthetics** from the details panel of a test run on the Test Optimization page.
 
 {{< img src="continuous_testing/guide/view-continuous-testing-test-runs-in-test-optimization/view_in_synthetics.png" alt="Test Optimization Test Runs details view, highlighting View in Synthetics button" style="width:100%" >}}
 
-To view a Continuous Testing test run in Test Optimization from Synthetic Monitoring, click **View in Test Optimization** from the details panel of a test run on the Synthetic Monitoring page:
+Similarly, from the Synthetic Monitoring page, you jump to a test run in the Test Optimization Explorer. Click **View in Test Optimization** from the details panel of a test run on the Synthetic Monitoring page:
 
 {{< img src="continuous_testing/guide/view-continuous-testing-test-runs-in-test-optimization/continuous_testing_test_run_detail.png" alt="Synthetics Test Runs details view, highlighting View in Test Optimization button"  style="width:100%" >}}
 
