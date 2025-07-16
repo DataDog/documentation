@@ -231,7 +231,7 @@ After your application restarts, go to Datadog's [APM Service page][1] and searc
 To configure your application to submit custom metrics, follow the appropriate steps for your runtime:
 
 - [Java][3]
-- [Node.js][4] (external link)
+- [Node.js][4] ↗️
 - [.NET][5]
 - [PHP][6]
 - [Python][7]
