@@ -73,7 +73,7 @@ Azure Table Storage 메트릭을 얻으면 다음을 할 수 있습니다.
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_table_storage" >}}
+{{< get-metrics-from-git "azure-table-storage" >}}
 
 
 ### 이벤트

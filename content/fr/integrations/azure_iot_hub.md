@@ -43,7 +43,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft�
 ## Real User Monitoring
 
 ### Analyse d'entonnoirs
-{{< get-metrics-from-git "azure_iot_hub" >}}
+{{< get-metrics-from-git "azure-iot-hub" >}}
 
 
 ### Aide

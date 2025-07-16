@@ -71,7 +71,7 @@ Si aún no lo has hecho, configura la [integración Microsoft Azure][1]. No es n
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_queue_storage" >}}
+{{< get-metrics-from-git "azure-queue-storage" >}}
 
 
 ### Eventos
