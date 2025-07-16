@@ -29,7 +29,7 @@ further_reading:
 
 The RUM Browser SDK generates events that have associated telemetry and attributes. Every RUM event has all of the [default attributes](#default-attributes), for example, the URL of the page (`view.url`) and user information such as their device type (`device.type`) and their country (`geo.country`).
 
-There are additional [telemetry and attributes specific to a given event type](#event-specific-telemetry-and-attributes). For example, the `view.loading_time` telemetry is associated with view events, and the `resource.method` attribute is associated with resource events.
+There are additional [attributes specific to a given event type](#event-specific-attributes). For example, the `view.loading_time` telemetry is associated with view events, and the `resource.method` attribute is associated with resource events.
 
 | Event Type     | Retention | Description                                                                                                                                                                                                                                                   |
 |----------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
