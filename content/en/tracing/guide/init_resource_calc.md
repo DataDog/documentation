@@ -22,7 +22,7 @@ Effective CPU/Memory request =
 </code></pre>
 </div>
 
-Because init containers run before application containers (and don't overlap), they can temporarily use more resources without increasing the pod's effective request, as long as no single init container requests more than the pod can tolerate.
+Since init containers run before application containers (and don't overlap with them), they can temporarily use more resources without increasing the pod's effective request. This works as long as no single init container requests more resources than the pod can tolerate.
 
 ### Override default behavior
 
