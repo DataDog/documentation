@@ -74,8 +74,8 @@ watch-cdocs:
 
 start:
 	@make setup-build-scripts ## Build and run docs including external content.
-	@make update_websites_sources_module
 	@make dependencies
+	@make update_websites_sources_module
 	@make server
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
