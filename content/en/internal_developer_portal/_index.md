@@ -2,7 +2,7 @@
 title: Internal Developer Portal
 disable_toc: false
 further_reading:
-- link: "'getting_started/internal_developer_portal/"
+- link: "getting_started/internal_developer_portal/"
   tag: "Documentation"
   text: "Getting Started with Internal Developer Portal"
 - link: "https://www.datadoghq.com/blog/software-catalog"
