@@ -54,10 +54,10 @@ For usage examples you can run from a Jupyter notebook, see the [LLM Observabili
 {{% /tab %}}
 
 {{% tab "Java" %}}
-- You have downloaded the [`dd-trace-java` JAR][1]
+- You have downloaded the latest [`dd-trace-java` JAR][1]. The LLM Observability SDK is supported in `dd-trace-java` v1.51.0+.
 - A [Datadog API key][2]
 
-[1]: https://s3.us-east-1.amazonaws.com/dd-trace-java-builds/llmobs-java-sdk-integration/dd-java-agent.jar
+[1]: https://github.com/DataDog/dd-trace-java
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
