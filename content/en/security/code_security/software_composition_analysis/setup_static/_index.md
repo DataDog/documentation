@@ -37,12 +37,10 @@ For GitHub repositories, you can run Datadog SCA scans directly on Datadog infra
 [1]: https://app.datadoghq.com/security/configuration/code-security/setup
 
 <div class="alert alert-info">
-Datadog-hosted SCA does not support repositories that:
-<ul style="font-size: inherit;  color: inherit;">
-  <li/>use <a href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage">Git Large File Storage</a>
-  <li/>contain file paths with parent directory traversal (<code>..</code>)
-  <li/>contain file names longer than 255 characters
-</ul>
+Datadog-hosted SCA does not support repositories that:<br>
+- Use <a href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage">Git Large File Storage</a><br>
+- Contain file paths with parent directory traversal (<code>..</code>)<br>
+- Contain file names longer than 255 characters<br>
 Use CI Pipelines for these repositories.
 </div>
 
