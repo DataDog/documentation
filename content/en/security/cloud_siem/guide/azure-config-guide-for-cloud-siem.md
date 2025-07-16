@@ -23,7 +23,7 @@ This guide walks you through configuring Microsoft Azure to send logs to Datadog
 {{< tabs >}}
 {{% tab "Automated Installation" %}}
 
-<div class="alert alert-danger">The automated installation method of forwarding logs cannot be completed at the moment. This is due to an Azure change that is being investigated. Please use other methods on this page until further notice.</div>
+<div class="alert alert-danger">The automated installation method of forwarding logs cannot be completed at the moment. This is due to an Azure change that is being investigated. Use other methods on this page until further notice.</div>
 
 Click the button below and fill in the form on Azure portal. After completing the form, the Azure resources required to send activity logs into your Datadog account are deployed for you.
 

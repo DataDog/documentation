@@ -55,7 +55,7 @@ See [Azure Automated Log Forwarding Architecture and Configuration][206] for mor
 
 {{% tab "Event Hub" %}}
 
-<div class="alert alert-danger">The Event Hub method of forwarding logs cannot be completed at the moment. This is due to an Azure change that is being investigated. Please use other methods on this page until further notice.</div>
+<div class="alert alert-danger">The Event Hub method of forwarding logs cannot be completed at the moment. This is due to an Azure change that is being investigated. Use other methods on this page until further notice.</div>
 
 To get started, click the button below and fill in the form on Azure Portal. The Azure resources required to get activity logs streaming into your Datadog account will be deployed for you. To forward Activity Logs, set the **Send Activity Logs** option to true.
 
