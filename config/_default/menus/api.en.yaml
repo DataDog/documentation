@@ -6245,8 +6245,7 @@ menu:
           - v2
         operationids:
           - GetAggregatedConnections
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Cloudflare Integration
       url: /api/latest/cloudflare-integration/
