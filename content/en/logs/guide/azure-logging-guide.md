@@ -35,6 +35,8 @@ Starting April 30, 2025, Azure no longer supports Node.js 18. To ensure compatib
 
 {{% tab "Automated" %}}
 
+<div class="alert alert-danger">The Automated Log Forwarding ARM template method of forwarding logs cannot be completed at the moment. This is due to an Azure change that is being investigated. Use other methods on this page until further notice.</div>
+
 1. Open the [Automated Log Forwarding ARM template][201] in Azure.
 2. Configure your Azure project and instance details on the [Basics tab][202].
 3. Enter your Datadog credentials on the [Datadog Configuration tab][203].
@@ -52,6 +54,8 @@ See [Azure Automated Log Forwarding Architecture and Configuration][206] for mor
 {{% /tab %}}
 
 {{% tab "Event Hub" %}}
+
+<div class="alert alert-danger">The Event Hub method of forwarding logs cannot be completed at the moment. This is due to an Azure change that is being investigated. Use other methods on this page until further notice.</div>
 
 To get started, click the button below and fill in the form on Azure Portal. The Azure resources required to get activity logs streaming into your Datadog account will be deployed for you. To forward Activity Logs, set the **Send Activity Logs** option to true.
 
