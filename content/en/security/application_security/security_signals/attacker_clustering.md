@@ -69,6 +69,22 @@ Traffic associated with threat intelligence is also considered in the clustering
 
 The attacker clustering attributes selected are then shown as regular expressions that can be used to block with AAP's [In-App WAF][3] or to filter out traffic in AAP Traces explorer for investigation.
 
+## Custom attacker clustering
+
+If the automatic attacker clustering detection fails to identify the appropriate attributes, you can manually create attacker clusters by selecting attributes from the trace analysis side panel.
+
+To create a custom attacker cluster:
+
+1. Open the trace analysis panel from a security signal
+{{< img src="security/application_security/threats/create-custom-cluster.png" alt="Screenshot of the trace analysis panel to create a custom cluster"  >}}
+
+1. Select the specific attributes that correspond to the attacker's patterns
+2. Create a cluster based on your selected attributes
+
+This manual approach allows you to create more targeted blocking rules when the automatic detection doesn't capture the right patterns.
+
+{{< img src="security/application_security/threats/custom-cluster.png" alt="Screenshot of an AAP signal with custom cluster in the attacker attributes"  >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
