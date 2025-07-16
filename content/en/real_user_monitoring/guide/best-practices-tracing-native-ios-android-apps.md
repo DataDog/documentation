@@ -23,9 +23,9 @@ further_reading:
 
 Datadog's Trace SDK for [iOS][1] and [Android][2] lets you add APM spans to your mobile apps. This guide covers usage, key use cases, and sampling rates, with or without using the Datadog RUM SDK.
 
-Native mobile tracing gives you precise control over what operations are measured by manually instrumenting spans in your iOS or Android app code. This approach works independently of Datadog RUM, but can also be used alongside it for deeper visibility into user experiences and backend interactions. You can also use [OpenTelemetry for iOS][3] or [OpenTelemetry for Android][4] for custom instrumentation.
+Native mobile tracing gives you precise control over what operations are measured by manually instrumenting spans in your iOS or Android app code. This approach works independently of Datadog RUM, but can also be used alongside it for deeper visibility into user experiences, code level performance, and backend interactions. You can also use [OpenTelemetry for iOS][3] or [OpenTelemetry for Android][4] for custom instrumentation.
 
-**Note**: When using the Trace SDK independently (without the RUM SDK), backend APM traces do not automatically collect spans, so you need to manually start and stop spans.
+**Note**: When using the Trace SDK independently (without the RUM SDK), root spans for outgoing network requests do not get automatically created. Therefore, you need to manually start and stop spans on the client side to create frontend-to-backend distributed APM traces.
 
 This guide focuses on native iOS and Android apps. For other mobile platforms, see the following documentation:
 
@@ -40,7 +40,7 @@ For a comprehensive overview of correlating RUM with other telemetry data, see [
 
 ### Wrap a frontend-to-backend distributed trace under a native span
 
-You can create distributed traces that span from your mobile frontend to your backend services. This is possible with or without RUM. For example, you can wrap one or more frontend-to-backend traces under a manually created span using the Trace SDK.
+You can create distributed traces that span from your mobile frontend to your backend services. The RUM SDK provides an automated way to produce client spans for outgoing network requests. Our Trace SDK provide similar capability, but also allows you to wrap one or more frontend-to-backend traces under more manually created span.
 
 {{< tabs >}}
 {{% tab "iOS" %}}
@@ -103,7 +103,7 @@ The Trace SDK is independent from RUM, so you can track business processes or fl
 
 ## Sampling
 
-Sampling in native mobile tracing controls which spans and traces appear in the Datadog UI, helping you balance visibility with data volume. When you manually instrument spans in your app, sampling determines which ones are displayed for analysis in the Datadog interface.
+Sampling in native mobile tracing controls which spans and traces are ingested in Datadog, helping you balance visibility with data volume. When you manually instrument spans in your app, the ones that are sampled in go trough the APM retention filters which determine which ones end up being displayed for analysis in the Datadog interface.
 
 ### Sampling parameters
 
