@@ -71,8 +71,12 @@ In your Datadog Agent configuration, ensure the `DD_APM_FEATURES` environment va
 
 ### View correlated data in Datadog
 
-TODO
+After your application is sending traces, you can see the correlation in the APM Trace View:
 
+1. Navigate to [**APM** > **Traces**][3].
+2. Find and click on a trace from your instrumented service.
+3. In the trace's flame graph, select a database span (for example, a span with `span.type: sql`)
+4. In the details panel, click the **SQL Queries** tab. You should see the host metrics, like CPU and memory utilization, from the host that executed that part of the request.
 
 ## Further reading
 
@@ -80,3 +84,4 @@ TODO
 
 [1]: /opentelemetry/correlate/#prerequisite-unified-service-tagging
 [2]: /opentelemetry/integrations/host_metrics
+[3]: https://app.datadoghq.com/apm/traces

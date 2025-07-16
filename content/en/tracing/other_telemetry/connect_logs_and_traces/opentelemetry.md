@@ -114,9 +114,34 @@ Here is an example of a properly formatted JSON log entry:
 }
 ```
 
+## View correlated data in Datadog
+
+After your application is sending traces, you can navigate between them in Datadog.
+
+### From a trace to logs
+
+1. Navigate to [**APM** > **Traces**][3].
+2. Find and click on a trace from your instrumented service.
+3. Select any span in the flame graph to view its details.
+4. Click the **Logs** tab.
+
+Here, you can see all the logs generated during the execution of that specific span.
+
+### From a log to a trace
+
+1. Navigate to [**Logs** > **Explorer**][4].
+2. Find and click a log entry from your instrumented service.
+3. Click the **Trace** tab.
+
+Here, you can see a flame graph of the associated trace, with the span that generated the log. 
+
+Click **View Trace in APM** to pivot directly to the full APM trace associated with that log event, allowing you to see the context of the entire request.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/correlate/#prerequisite-unified-service-tagging
 [2]: https://github.com/DataDog/opentelemetry-examples
+[3]: https://app.datadoghq.com/apm/traces
+[4]: https://app.datadoghq.com/logs
