@@ -4,7 +4,7 @@ announcement_banner:
   background_color: "#6300D4"
   icon_color: "#ffffff"
   custom_classes: 'dash-announcement-banner'
-  external_link: https://www.datadoghq.com/about/latest-news/press-releases/datadog-launches-new-datacenter-in-australia
+  external_link: https://www.datadoghq.com/about/latest-news/press-releases/datadog-launches-new-availability-zone-in-australia
 disclaimer: 이 페이지는 아직 영어로 제공되지 않습니다. 번역 작업 중입니다. <br>현재 번역 프로젝트에 대한 질문이나 피드백이 있으신
   경우<a href="https://docs.datadoghq.com/ko/help/"> 언제든지 연락주시기 바랍니다.</a>
 meta_description: 클라우드 스케일 모니터링의 선두주자, Datadog
