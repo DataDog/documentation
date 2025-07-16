@@ -8,7 +8,7 @@ disable_toc: false
 
 Starting in Agent [v7.60+][1], Datadog uses dynamic resource calculation for init containers that inject tracing libraries. Instead of using fixed values, the init containers temporarily request all available CPU and memory for the pod, without affecting how the pod is scheduled. (Prior to v7.60, init containers used conservative defaults: `50m` for CPU and `20Mi` for memory.)
 
-This behavior improves tracer startup reliability while respecting Kubernetes scheduling rules. Init containers run sequentially and exit before application containers start, so they don't compete for runtime resources.
+This behavior improves tracer startup reliability while respecting Kubernetes scheduling rules. Since init containers run sequentially and exit before application containers start, they don't compete for runtime resources.
 
 ### Pod scheduling
 
