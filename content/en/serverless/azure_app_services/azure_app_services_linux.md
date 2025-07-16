@@ -139,14 +139,22 @@ See [Organization Settings > API Keys][301] in Datadog.<br>
 `DD_SITE`
 : **Value**: {{< region-param key="dd_site" code="true" >}}<br>
 Your [Datadog site][302]. Defaults to `datadoghq.com`.<br>
+Use the "Datadog Site" drop-down menu on this page's right navigation bar to select your site.<br>
 
 `DD_SERVICE`
 : **Value**: Your application's service name.<br>
 Defaults to the name field value in `package.json`.<br>
+See [Unified Service Tagging][303] for more information on the `service` tag.<br>
 
 `DD_ENV`
 : **Value**: Your application's environment name.<br>
 There is no default value for this field.<br>
+See [Unified Service Tagging][303] for more information on the `env` tag.<br>
+
+`DD_VERSION`
+: **Value**: Your application's version.<br>
+There is no default value for this field.<br>
+See [Unified Service Tagging][303] for more information on the `version` tag.<br>
 
 `DD_SERVERLESS_LOG_PATH`
 : **Value**: The log path the sidecar uses to collect logs.<br>
@@ -206,7 +214,7 @@ Path to the library that implements the Profiling API callbacks. Loaded by the .
 
 [301]: https://app.datadoghq.com/organization-settings/api-keys
 [302]: /getting_started/site/
-[303]: /profiler
+[303]: /getting_started/tagging/unified_service_tagging
 
 {{% /tab %}}
 {{< /tabs >}}
