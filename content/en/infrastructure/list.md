@@ -103,7 +103,7 @@ To view OpenTelemetry Collector configurations:
 2. In the host detail panel, select the **OTel Collector** tab
 3. View the build information and complete collector configuration
 
-The displayed configuration is scrubbed of sensitive information and shows only the settings you've configured. This includes collector version, build details, component information, and the full configuration structure.
+The displayed configuration is scrubbed of sensitive information. The data shown includes collector version, build details, component information, and the full configuration structure in YAML format.
 
 {{< img src="infrastructure/index/infra-list-config-otel.png" alt="View OpenTelemetry Collector configurations in infrastructure list" style="width:100%;">}}
 
