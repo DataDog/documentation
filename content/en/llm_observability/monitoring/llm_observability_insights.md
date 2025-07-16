@@ -5,7 +5,7 @@ aliases:
 
 ## Overview
 
-LLM Observability Insights provides a powerful monitoring experience that helps users quickly identify anomalies in their operational metrics—such as latency (duration), error rates, and out-of-the-box (OOTB) evaluation results.
+LLM Observability Insights provides a powerful monitoring experience that helps users identify anomalies in their operational metrics—such as latency (duration), error rates, and out-of-the-box (OOTB) evaluation results.
 
 Outlier detection is performed across key dimensions, including:
 - Span name
