@@ -413,7 +413,7 @@ To use SSI with a private container registry:
 
 1. Follow [these instructions][34] to mirror Datadog's container images to your private registry. 
 
-   You need only the images for the languages you plan to instrument. If you're not sure which ones you'll need, here's a baseline that covers most use cases:
+   You only need the images for the languages you are instrumenting. If you're not sure which ones you need, here's a baseline that covers most use cases:
 
    - `apm-inject`
    - `dd-lib-java-init`
