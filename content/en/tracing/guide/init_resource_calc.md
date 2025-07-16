@@ -26,7 +26,7 @@ Since init containers run before application containers (and don't overlap with 
 
 ### Override default behavior
 
-If needed, you can override init container resource usage by setting the following environment variables in the Cluster Agent configuration:
+If needed, you can override the default init container resource usage by setting the following environment variables in the Cluster Agent configuration:
   - `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_INIT_RESOURCES_CPU`
   - `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_INIT_RESOURCES_MEMORY`
 
