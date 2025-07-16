@@ -56981,13 +56981,13 @@ paths:
         schema:
           type: string
       - description: The number of connections to be returned. The maximum value is
-          5000.
+          7500.
         in: query
         name: limit
         schema:
           default: 100
           format: int32
-          maximum: 5000
+          maximum: 7500
           minimum: 1
           type: integer
       responses:
