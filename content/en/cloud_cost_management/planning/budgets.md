@@ -26,7 +26,7 @@ To create a basic budget:
 
 1. Navigate to [**Cloud Cost > Plan > Budgets**][1], or create a budget through the [API][2] or [Terraform][3].
 1. Click the **Create a New Budget** button.
-1. Click **Basic** to a basic budget.
+1. Click **Basic** to create a basic budget.
 1. You can either add budget information by **uploading a CSV** using the provided template in the UI, or **enter your budget directly** using the details below.
 
    {{< img src="cloud_cost/budgets/budget-upload-your-csv.mp4" alt="Choose whether to add budget information by uploading a CSV or enter it directly within the UI" video="true">}}
@@ -94,13 +94,13 @@ You cannot view budget versus actuals before 15 months, since cost metrics are r
 
    {{< img src="cloud_cost/budgets/budget-status-month-2.png" alt="Budget Status View: view current month">}}
 
-- Or can view the budget status for the **entire duration (all)**:
+- Or you can view the budget status for the **entire duration (all)**:
 
    {{< img src="cloud_cost/budgets/budget-status-all-2.png" alt="Budget Status View: view total budget">}}
 
 To investigate budgets:
-1. From the individual budget page, filter budgets using the dropdown at the top, or "Apply filter" in the table to investigate dimensions that are over budget.
-   {{< img src="cloud_cost/budgets/budget-investigate-3.png" alt="Use the dropdown filter or Apply Filter option in the table to investigate over-budget dimensions. ">}}
+1. From the individual budget page, filter budgets using the dropdown at the top, or "Apply filter" in the table to investigate the dimensions that are over budget.
+   {{< img src="cloud_cost/budgets/budget-investigate-3.png" alt="Use the dropdown filter or Apply Filter option in the table to investigate over-budget dimensions.">}}
 2. Click **Copy Link** to share the budget with others to help understand why budgets are going over. Or, share budgets with finance so that they can understand how you're tracking against budgets.
 
 ## Modify or delete a budget
