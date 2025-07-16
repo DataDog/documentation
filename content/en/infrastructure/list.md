@@ -96,7 +96,7 @@ To access Agent configurations, use the **Open Host** dropdown button in the top
 
 When the [Datadog Extension][14] is configured with your OpenTelemetry Collector, you can view collector configuration and build information directly in the infrastructure list host detail panel. The Datadog Extension provides visibility into your collector fleet from within the Datadog UI, making it easier to manage and debug your OpenTelemetry Collector deployments.
 
-<div class="alert alert-info">The <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/datadogextension">Datadog Extension</a> must be enabled and configured in your OpenTelemetry Collector. This component is only available in OpenTelemetry Collector Contrib version 0.129.0 or greater.</div>
+<div class="alert alert-info">The <a href="/opentelemetry/integrations/datadog_extension/">Datadog Extension</a> must be enabled and configured in your OpenTelemetry Collector. This component is only available in OpenTelemetry Collector Contrib version 0.129.0 or greater.</div>
 
 To view OpenTelemetry Collector configurations:
 1. Click on any host running the OpenTelemetry Collector in the infrastructure list
