@@ -1,5 +1,6 @@
 ---
-title: Init container resource usage
+title: Init Container Resource Usage
+Learn how Datadog Agent v7.60+ automatically manages resource allocation for init containers that set up tracing, ensuring reliable tracer startup without impacting pod scheduling.
 disable_toc: false
 ---
 
