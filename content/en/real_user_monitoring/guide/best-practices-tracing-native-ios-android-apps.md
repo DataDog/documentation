@@ -40,7 +40,7 @@ For a comprehensive overview of correlating RUM with other telemetry data, see [
 
 ### Wrap a frontend-to-backend distributed trace under a native span
 
-You can create distributed traces that span from your mobile frontend to your backend services. The RUM SDK provides an automated way to produce client spans for outgoing network requests. Our Trace SDK provide similar capability, but also allows you to wrap one or more frontend-to-backend traces under more manually created span.
+You can create distributed traces that span from your mobile frontend to your backend services. The RUM SDK provides an automated way to produce client spans for outgoing network requests. Datadog's Trace SDK provides similar capability, but also allows you to wrap one or more frontend-to-backend traces under manually created spans.
 
 {{< tabs >}}
 {{% tab "iOS" %}}
@@ -99,7 +99,7 @@ See [more Android examples][1].
 
 ## Sampling
 
-Sampling in native mobile tracing controls which spans and traces are ingested in Datadog, helping you balance visibility with data volume. When you manually instrument spans in your app, the ones that are sampled in go trough the APM retention filters which determine which ones end up being displayed for analysis in the Datadog interface.
+Sampling in native mobile tracing controls which spans and traces are ingested in Datadog, helping you balance visibility with data volume. When you manually instrument spans in your app, the ones that are sampled in go through the APM retention filters which determine which ones end up being displayed for analysis in the Datadog interface.
 
 ### Sampling parameters
 
@@ -141,7 +141,7 @@ Sampling rates are applied independently. The most restrictive rate determines w
 - If you set a high trace sample rate but a low RUM sample rate, you may see traces without corresponding RUM data.
 
 **Example scenario:**  
-To sample 1% of all app sessions and trace all API networks within those sessions:
+To sample 1% of all app sessions and trace all API network requests within those sessions:
 - Set `RUM.sessionSampleRate = 1` (controls RUM session sampling only)
 - Set `urlSessionTracking.firstPartyHostsTracing.sampleRate = 100` (controls trace sampling for network requests)
 
