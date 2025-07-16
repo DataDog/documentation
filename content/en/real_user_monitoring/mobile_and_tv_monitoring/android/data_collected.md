@@ -14,11 +14,11 @@ further_reading:
 
 ## Overview
 
-The RUM Android SDK generates events that have associated telemetry and attributes. Telemetry are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice telemetry values (group by) in analytics. 
+The RUM Android SDK generates events that have associated attributes. Those can have quantifiable values and can be used for measurements related to the event, others are non-quantifiable values used to slice telemetry values (group by) in analytics. 
 
 Every RUM event has all of the [default attributes](#default-attributes), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`). 
 
-There are additional [telemetry and attributes that are specific to a given event type](#event-specific-telemetry-and-attributes). For example, the telemetry `view.time_spent` is associated with "view" events and the attribute `resource.method` is associated with "resource" events. 
+There are additional [attributes that are specific to a given event type](#event-specific-attributes). For example, the `view.time_spent` attribute is associated with "view" events and the `resource.method` one is associated with "resource" events. 
 
 | Event Type     | Retention | Description                                                                                                                                                                                                                                                   |
 |----------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

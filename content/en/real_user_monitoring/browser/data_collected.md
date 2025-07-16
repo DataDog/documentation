@@ -48,11 +48,11 @@ The following diagram illustrates the RUM event hierarchy:
 
 See a complete list of [Standard Attributes][1] for RUM Browser. By default, the attributes are attached to each event type, so you can use them regardless of the RUM event type being queried.
 
-## Event-specific telemetry and attributes
+## Event-specific attributes
 
-### Session KPIs
+### Session attributes
 
-| KPI  | Type   | Description                |
+| Attribute  | Type   | Description                |
 |------------|--------|----------------------------|
 | `session.time_spent` | number (ns) | Duration of the user session. |
 | `session.view.count`        | number      | Count of all views collected for this session. |
@@ -83,7 +83,7 @@ See a complete list of [Standard Attributes][1] for RUM Browser. By default, the
 | `session.last_view.url_query` | object | The query string parts of the URL decomposed as query params key/value attributes. |
 | `session.last_view.url_scheme` | object | The scheme part of the URL. |
 
-### View timing telemetry
+### View timing attributes
 
 **Note**: View timing telemetry includes time that a page is open in the background.
 
@@ -110,16 +110,16 @@ See a complete list of [Standard Attributes][1] for RUM Browser. By default, the
 | `view.resource.count`           | number      | Count of all resources collected for this view.                                                                                                                                                                       |
 | `view.action.count`             | number      | Count of all actions collected for this view.                                                                                                                                                                         |
 
-### Resource timing telemetry
+### Resource timing attributes
 
 Detailed network timing data for the loading of an application's resources are collected with the [Performance Resource Timing API][10].
 
-| Telemetry                              | Type           | Description                                                                                                                               |
+| Attribute                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | `resource.duration`            | number         | Entire time spent loading the resource.                                                                                                   |
 | `resource.size`                | number (bytes) | Resource size.                                                                                                                            |
 | `resource.connect.duration`    | number (ns)    | Time spent establishing a connection to the server (connectEnd - connectStart).                                                            |
-| `resource.ssl.duration`        | number (ns)    | Time spent for the TLS handshake. If the last request is not over HTTPS, this telemetry does not appear (connectEnd - secureConnectionStart). |
+| `resource.ssl.duration`        | number (ns)    | Time spent for the TLS handshake. If the last request is not over HTTPS, this attribute does not appear (connectEnd - secureConnectionStart). |
 | `resource.dns.duration`        | number (ns)    | Time spent resolving the DNS name of the last request (domainLookupEnd - domainLookupStart).                                               |
 | `resource.redirect.duration`   | number (ns)    | Time spent on subsequent HTTP requests (redirectEnd - redirectStart).                                                                      |
 | `resource.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - RequestStart).                                           |
@@ -141,9 +141,9 @@ Detailed network timing data for the loading of an application's resources are c
 | `resource.provider.domain` | string | The resource provider domain.                                                                        |
 | `resource.provider.type`   | string | The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).                |
 
-### Long task timing telemetry
+### Long task timing attributes
 
-| Telemetry  | Type   | Description                |
+| Attribute  | Type   | Description                |
 |------------|--------|----------------------------|
 | `long_task.duration` | number | Duration of the long task. |
 
@@ -164,9 +164,9 @@ Source errors include code-level information about the error. For more informati
 |-----------------|--------|-------------------------------------------------------------------|
 | `error.type`    | string | The error type (or error code in some cases).                   |
 
-### Action timing telemetry
+### Action timing attributes
 
-| Telemetry    | Type   | Description              |
+| Attribute    | Type   | Description              |
 |--------------|--------|--------------------------|
 | `action.loading_time` | number (ns) | The loading time of the action. See how it is calculated in the [Tracking User Actions documentation][13]. |
 | `action.long_task.count`        | number      | Count of all long tasks collected for this action. |
