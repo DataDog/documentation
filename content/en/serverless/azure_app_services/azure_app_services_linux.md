@@ -160,17 +160,21 @@ Setting this environment variable to `true` allows the `/home/` mount to persist
 
 For .NET applications, the following environment variables are **required**:
 
-`DD_DOTNET_TRACER_HOME=/home/site/wwwroot/datadog`
-: Path to the .NET tracing libraries.
+`DD_DOTNET_TRACER_HOME`
+: **Value**: `/home/site/wwwroot/datadog`<br>
+Path to the .NET tracing libraries.<br>
 
-`DD_TRACE_LOG_DIRECTORY=/home/LogFiles/dotnet`
-: Path where tracing library will write its logs.
+`DD_TRACE_LOG_DIRECTORY`
+: **Value**: `/home/LogFiles/dotnet`<br>
+Path where tracing library will write its logs.<br>
 
-`CORECLR_ENABLE_PROFILING=1`
-: Used by the .NET runtime to enable the Profiling API.
+`CORECLR_ENABLE_PROFILING`
+: **Value**: `1`<br>
+Used by the .NET runtime to enable the Profiling API.<br>
 
-`CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}`
-: Used by the .NET runtime to identify the CLR Profiler's GUID.
+`CORECLR_PROFILER`
+: **Value**: `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`<br>
+Used by the .NET runtime to identify the CLR Profiler's GUID.<br>
 
 `CORECLR_PROFILER_PATH`
 : **Value for glibc-based distros**:<br>
@@ -178,7 +182,7 @@ For .NET applications, the following environment variables are **required**:
 **Value for Alpine Linux and other musl-based distros**:<br>
 `/home/site/wwwroot/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so`<br>
 Path to the library that implements the Profiling API callbacks. Loaded by the .NET runtime.<br>
-**Note**: This path is determined by OS and architecture. See the [Nuget package's README file][1] for more details.
+**Note**: This path is determined by OS and architecture. See the [Nuget package's README file][1] for more details.<br>
 
 [1]: https://www.nuget.org/packages/Datadog.Trace.Bundle#readme-body-tab
 
