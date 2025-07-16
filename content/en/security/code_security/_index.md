@@ -12,7 +12,7 @@ Code Security scans your first-party code and open source libraries used in your
 - [Runtime Code Analysis (IAST)][3] for identifying vulnerabilities in the first-party code within your services
 - [Secret Scanning][8] for identifying and validating leaked secrets (in Preview)
 - [Infrastructure as Code (IaC) Security][10] for identifying security misconfigurations in Terraform files stored in your repositories
-- [Supply Chain Security](## Supply Chain Security) for preventing malicious packages from entering your development environment and code repositories 
+- [Supply Chain Security](#-supply-chain-security) for preventing malicious packages from entering your development environment and code repositories 
 
 Code Security helps teams implement DevSecOps throughout the organization:
 - **Developers:** early vulnerability detection, code quality improvements, faster development as developers spend less time debugging and patching.
