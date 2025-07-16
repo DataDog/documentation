@@ -28,7 +28,7 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 | [Google GenAI](#google-genai)              | >= 1.21.1          | >= 3.11.0         |
 | [Google GenerativeAI](#google-generativeai)| >= 0.7.2           | >= 2.14.0         |
 | [Vertex AI](#vertex-ai)                    | >= 1.71.1          | >= 2.18.0         |
-| [LangGraph](#langgraph)                    | >= 0.2.23          | >= 3.5.0          |
+| [LangGraph](#langgraph)                    | >= 0.2.23          | >= 3.10.1         |
 | [Crew AI](#crew-ai)                        | >= 0.105.0         | >= 3.5.0          |
 | [OpenAI Agents](#openai-agents)            | >= 0.0.2           | >= 3.5.0          |
 | [LiteLLM](#litellm)                        | >= 1.70.0          | >= 3.9.0          |
