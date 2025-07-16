@@ -30,7 +30,6 @@ LLM Observability requires a Datadog API key if you don't have an Agent running.
    DD_LLMOBS_ENABLED=1 \
    DD_LLMOBS_ML_APP=quickstart-app \
    DD_API_KEY=<YOUR_DATADOG_API_KEY> \
-   DD_LLMOBS_AGENTLESS_ENABLED=1 \
    ddtrace-run <your application command>
    ```
 
@@ -53,7 +52,6 @@ LLM Observability requires a Datadog API key if you don't have an Agent running.
    DD_LLMOBS_ENABLED=1 \
    DD_LLMOBS_ML_APP=quickstart-app \
    DD_API_KEY=<YOUR_DATADOG_API_KEY> \
-   DD_LLMOBS_AGENTLESS_ENABLED=1 \
    NODE_OPTIONS="--import dd-trace/initialize.mjs" <your application command>
    ```
 
@@ -69,7 +67,11 @@ LLM Observability requires a Datadog API key if you don't have an Agent running.
 
 Make requests to your application triggering LLM calls and then view traces in the **Traces** tab [of the **LLM Observability** page][3] in Datadog. If you don't see any traces, make sure you are using a supported library. Otherwise, you may need to instrument your application's LLM calls manually.
 
-## Simple example
+
+## Example "Hello World" application
+
+See below for a simple application that can be used to begin exploring the LLM Observability product.
+
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -84,7 +86,7 @@ Make requests to your application triggering LLM calls and then view traces in t
 
    oai_client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
    completion = oai_client.chat.completions.create(
-       model="gpt-4o",
+       model="gpt-4o-mini",
        messages=[
         {"role": "system", "content": "You are a helpful customer assistant for a furniture store."},
         {"role": "user", "content": "I'd like to buy a chair for my living room."},
