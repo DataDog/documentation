@@ -2,7 +2,7 @@
 title: LLM Observabilty Insights
 aliases:
   - /llm_observability/llm_observability_insights
-
+---
 ## Overview
 
 LLM Observability Insights provides a monitoring experience that helps users identify anomalies in their operational metrics—such as duration and error rate—and their out-of-the-box (OOTB) evaluations.
