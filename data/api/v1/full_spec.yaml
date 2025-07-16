@@ -24767,6 +24767,8 @@ components:
             code_analysis_read: View Code Analysis.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
+            coterm_read: Read terminal recordings.
+            coterm_write: Write terminal recordings.
             create_webhooks: Create webhooks integrations.
             dashboards_embed_share: Create, modify, and delete shared dashboards with
               share type 'embed'.
@@ -24803,10 +24805,6 @@ components:
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View a list of findings that include
               both misconfigurations and identity risks.
-            security_monitoring_notification_profiles_read: View Rule Security Notification
-              rules.
-            security_monitoring_notification_profiles_write: Create, edit, and delete
-              Security Notification rules.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
