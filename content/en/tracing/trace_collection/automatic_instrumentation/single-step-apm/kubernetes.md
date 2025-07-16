@@ -44,7 +44,7 @@ Use the following advanced options to customize how Single Step Instrumentation 
 
 ### Target specific workloads
 
-By default, SSI instruments all services in all namespaces in your cluster. To refine which services are instrumented and how, use one of the following configuration methods, depending on your Agent version. 
+By default, SSI instruments all services in all namespaces in your cluster. Depending on your Agent version, use one of the following configuration methods to refine which services are instrumented and how.
 
 {{< tabs >}}
 
