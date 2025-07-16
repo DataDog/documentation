@@ -237,10 +237,14 @@ Check that the OpenLineage environment variables are correctly set on the Astron
 **Note**: Using the `.env` file to add the environment variables does not work because the variables are only applied to the local Airflow environment.
 {{% /tab %}}
 {{% tab "Google Cloud Composer" %}}
+<div class="alert alert-warning">
+Data Jobs Monitoring is not compatible yet with <a href=https://cloud.google.com/composer/docs/composer-2/lineage-integration> Dataplex</a> for data lineage. Setting up OpenLineage for Data Jobs Monitoring will override your existing Dataplex transport configuration.
+</div>
+
 ## Requirements
 
 * [Cloud Composer 2][1] or later
-* [apache-airflow-providers-openlineage][2] or [openlineage-airflow][8] depending on your Airflow version
+* [apache-airflow-providers-openlineage][2]
 
 ## Setup
 
@@ -252,7 +256,7 @@ To get started, follow the instructions below.
    - In Section 1, enter `openlineage`
    - In Key 1, enter `transport`
    - In Value 1, enter the follows:
-     ```
+     ```text
      {
       "type": "http", 
       "url": "<DD_DATA_OBSERVABILITY_INTAKE>", 
@@ -268,19 +272,11 @@ To get started, follow the instructions below.
 
    Check official [Airflow][4] and [Composer][3] documentation pages for other supported configurations of `openlineage` provider in Google Cloud Composer.
 
-2. After starting the Composer environment, install `openlineage` provider by editing the Pypi packages tab in your environment page.
-
-    For **Airflow 2.7 or later**, add:
-
+2. After starting the Composer environment, install `openlineage` provider by adding the following package in the the Pypi packages tab of your environment page:
       ```text
       apache-airflow-providers-openlineage
       ```
 
-    For **Airflow 2.5 & 2.6**, add:
-
-      ```text
-      openlineage-airflow
-      ```
 
 [1]: https://cloud.google.com/composer/docs/composer-versioning-overview
 [2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
@@ -288,7 +284,6 @@ To get started, follow the instructions below.
 [4]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html#configuration-openlineage
 [5]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
 [7]: https://app.datadoghq.com/data-jobs/
-[8]: https://openlineage.io/docs/integrations/airflow/
 
 ## Validation
 
