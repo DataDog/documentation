@@ -33,6 +33,29 @@ For DBM correlation to work, your database spans must include the following attr
 | `db.name`      | The logical database or schema name being queried.                                                  | `user_accounts`                    |
 | `span.type`    | **Required (Datadog-specific).** The type of span such as `sql`,`postgres`, `mysql`, or `sql.query` | `sql`                              |
 
+#### Example
+
+The method for adding these attributes depends on your setup. If you are using an OpenTelemetry auto-instrumentation library for your database client, see its documentation for configuration options. If you are manually creating spans with the OpenTelemetry SDK, you can set the attributes directly in your code. For more information, see the [OpenTelemetry documentation][4].
+
+The following is a conceptual example of manual instrumentation using Python's OpenTelemetry SDK:
+
+```python
+from opentelemetry import trace
+
+tracer = trace.get_tracer("my-app.instrumentation")
+
+# When making a database call, create a span and set attributes
+with tracer.start_as_current_span("postgres.query") as span:
+    # Set attributes required for DBM correlation
+    span.set_attribute("span.type", "sql")
+    span.set_attribute("db.system", "postgres")
+    span.set_attribute("db.statement", "SELECT * FROM users WHERE id = ?")
+    span.set_attribute("db.name", "user_accounts")
+
+    # Your actual database call would go here
+    # db_cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))
+```
+
 ### Step 2: Configure your ingest path
 
 Depending on how you send traces to Datadog, you may need to enable specific feature gates to ensure database spans are processed correctly.
@@ -85,3 +108,4 @@ After your application is sending traces, you can see the correlation in the APM
 [1]: /opentelemetry/correlate/#prerequisite-unified-service-tagging
 [2]: /opentelemetry/integrations/host_metrics
 [3]: https://app.datadoghq.com/apm/traces
+[4]: https://opentelemetry.io/docs/languages/
