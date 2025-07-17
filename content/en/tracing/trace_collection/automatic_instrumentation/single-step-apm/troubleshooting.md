@@ -6,21 +6,21 @@ further_reading:
   text: "Single Step APM Instrumentation"
 ---
 
-# Troubleshooting Single Step APM
+## Overview
 
-If you experience challenges with enabling APM through Simple Step Implementation, use this guide to resolve issues. If you continue to have trouble, contact [Datadog Support][1] for further assistance. 
+Single Step Instrumentation (SSI) allows you to instrument applications at the host or Kubernetes level without modifying application dependencies or images. If you experience challenges enabling APM with SSI, use this guide to diagnose and resolve common issues. If problems persist, contact [Datadog Support][1] for further assistance. 
 
-Single Step Instrumentation (SSI) allows you to instrument applications at the host or Kubernetes level without modifying application dependencies or images. This document provides troubleshooting steps for common issues encountered with SSI.
+## Host and Docker instrumentation
 
-## Host (and containers on host) single step instrumentation troubleshooting
+### Host injection doesn't apply to existing shells
 
-### Host Injection not working on a running shell
+The preload library only injects into newly launched processes. Start a new shell session or log out and log back in to apply instrumentation. 
 
-The preload library only injects into newly launched processes. For instrumentation to take effect, a new shell must be created. This can be done by launching a new shell inside the current one, or by logging out and logging in again. Note: Docker injection does not have this limitation.  
+**Note:** Docker-based injection does not have this limitation.  
 
-### Undersized Instance
+### Instance is too small
 
-The preload library allows the analyzer one second to complete its work. On small VM instances with multiple services (for example, `t2.micro`), this might exceed one second. The recommended solution is to use a larger instance size (for example, `t2.small`).  
+The preload library allows the analyzer one second to complete its work. On small VM instances running multiple services (for example, `t2.micro`), this time limit may be exceeded. To overcome this issue, use a larger instance size, such as `t2.small`.  
 
 ### Issues after attempting to uninstall host injection manually
 
