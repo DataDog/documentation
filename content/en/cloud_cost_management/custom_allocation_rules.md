@@ -21,9 +21,9 @@ The following allocation methods are available:
  | Even  | Split costs evenly among all destinations. | Scenarios where each team, project, or environment should be charged the same amount for a shared cost. | Untagged support costs are allocated evenly to teams `teamA`, `teamB`, and `teamC`. |
  | Custom  | Split costs to each destination based on percentages you define. | Scenarios where business rules or agreements dictate how much each team should pay. | Untagged support costs are allocated 60% to `teamA`, 30% to `teamB`, and 10% to `teamC`. |
  | Proportional by spend | Split costs based on each destination's share of total spend. | Scenarios where teams should pay in proportion to their actual spend. | Untagged support costs are allocated to teams `teamA`, `teamB`, and `teamC` based on their proportion of total spend on Amazon EC2.|
- | Dynamic by metric  | Split costs based each destination's share of total usage. | Scenarios where teams should pay in proportion to their actual usage. | Shared PostgreSQL costs are allocated by total query execution time per team. |
+ | Dynamic by metric  | Split costs based on each destination's share of total usage. | Scenarios where teams should pay in proportion to their actual usage. | Shared PostgreSQL costs are allocated by total query execution time per team. |
 
-Custom allocation rules runs after [Tag Pipelines][1], enabling cost allocations on the latest user-defined tags. Costs are allocated on a daily basis. Cost allocations can be applied to AWS, Google Cloud, and Azure costs.
+Custom allocation rules run after [Tag Pipelines][1], enabling cost allocations on the latest user-defined tags. Costs are allocated on a daily basis. Cost allocations can be applied to AWS, Google Cloud, and Azure costs.
 
 ## Create a custom allocation rule
 
@@ -129,10 +129,7 @@ Before creating this type of rule, be aware:
 
 {{% /collapse-content %}}
 
-- **Result limits** - Some data sources limit how many results they can show. The allocation rule automatically uses your highest-costing items first. For 
-example, if your query editor shows a limit of 100 group bys but you have 
-101 results, the allocation rule distributes costs across the top 100 
-highest-costing group bys and ignore the remaining 1 completely. 
+- **Result limits** - Some data sources limit how many results they can show. The allocation rule automatically uses your highest-costing items first. For example, if your query editor shows a limit of 100 group bys but you have 101 results, the allocation rule distributes costs across the top 100 highest-costing group bys and ignores the remaining 1 completely. 
 - **Update frequency** - While CCM has 15 months of retention overall, individual data sources have different update patterns:
   - Metrics data updates daily for the past 60 days
   - Other data sources backfill 60 days at rule creation, then update daily for the past 7 days
@@ -160,7 +157,7 @@ To create a rule for this allocation, you could:
 
 ### Step 3 - Choose the destination(s) to split costs across
 
-1. Select the destinations you want to allocate costs to, such as `team`, `department`, or `service`, receive the allocated costs.
+1. Select the destinations you want to allocate costs to, such as `team`, `department`, or `service`, that receive the allocated costs.
 
    You can select multiple values for your destination tag. For instance, if you select the `team` tag, you can choose specific teams like `teamA`, `teamB`, and `teamC` to receive the allocated costs.
 
