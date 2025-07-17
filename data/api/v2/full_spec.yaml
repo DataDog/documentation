@@ -15359,11 +15359,13 @@ components:
       enum:
       - logs
       - rum
+      - dora
       example: logs
       type: string
       x-enum-varnames:
       - LOGS
       - RUM
+      - DORA
     EventsGroupBy:
       description: A dimension on which to split a query's results.
       properties:
