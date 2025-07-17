@@ -70,7 +70,7 @@ Visualize infrastructure spend alongside related utilization metrics with a rete
 
 When creating a dashboard, select **Cloud Cost** as the data source for your search query.
 
-{{< img src="cloud_cost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation" style="width:100%;" >}}
+{{< img src="cloud_cost/cloud_cost_data_source-1.png" alt="Cloud Cost available as a data source in dashboard widget creation" style="width:80%;" >}}
 
 Optionally, you can programmatically export a timeseries graph of your cloud cost data by using the [Metrics API][2].
 
@@ -80,7 +80,7 @@ Visualize daily Datadog spending alongside related utilization metrics with a re
 
 When creating a dashboard, select **Cloud Cost** as the data source for your search query.
 
-{{< img src="cloud_cost/datadog_costs/dashboard.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:100%;" >}}
+{{< img src="cloud_cost/datadog_costs/dashboard-updated.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:80%;" >}}
 
 Optionally, you can programmatically export a timeseries graph of your Datadog cost data by using the [Metrics API][2].
 
