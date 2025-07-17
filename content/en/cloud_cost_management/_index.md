@@ -100,7 +100,7 @@ Proactively manage and optimize your cloud spending by creating a [Cloud Cost Mo
 
 ## Allocate costs
 
-Use [Container Cost Allocation metrics][4] to discover costs associated with clusters and workloads across Kubernetes, AWS ECS, Azure, and Google Cloud. Gain visibility into pod-level costs, identify idle resource costs, and analyze costs by resource type.
+Use [Container Cost Allocation metrics][4] to discover costs associated with clusters and workloads across Kubernetes, Amazon ECS, Azure, and Google Cloud. Gain visibility into pod-level costs, identify idle resource costs, and analyze costs by resource type.
 
 ## Permissions
 Two permissions are available:
