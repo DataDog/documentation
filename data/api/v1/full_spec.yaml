@@ -17434,7 +17434,7 @@ components:
       description: Object describing the extra options for a Synthetic test.
       properties:
         accept_self_signed:
-          description: 'For SSL test, whether or not the test should allow self signed
+          description: 'For SSL tests, whether or not the test should allow self signed
 
             certificates.'
           type: boolean
@@ -17443,7 +17443,7 @@ components:
             test.
           type: boolean
         checkCertificateRevocation:
-          description: For SSL test, whether or not the test should fail on revoked
+          description: For SSL tests, whether or not the test should fail on revoked
             certificate in stapled OCSP.
           type: boolean
         ci:
@@ -17454,6 +17454,10 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsDeviceID'
           type: array
+        disableAiaIntermediateFetching:
+          description: For SSL tests, whether or not the test should disable fetching
+            intermediate certificates from AIA.
+          type: boolean
         disableCors:
           description: Whether or not to disable CORS mechanism.
           type: boolean
@@ -17697,6 +17701,9 @@ components:
           description: A protobuf file that needs to be gzipped first then base64
             encoded.
           type: string
+        disableAiaIntermediateFetching:
+          description: Disable fetching intermediate certificates from AIA.
+          type: boolean
         dnsServer:
           description: DNS server to use for DNS tests.
           type: string
@@ -24760,6 +24767,8 @@ components:
             code_analysis_read: View Code Analysis.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
+            coterm_read: Read terminal recordings.
+            coterm_write: Write terminal recordings.
             create_webhooks: Create webhooks integrations.
             dashboards_embed_share: Create, modify, and delete shared dashboards with
               share type 'embed'.
@@ -24796,10 +24805,6 @@ components:
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View a list of findings that include
               both misconfigurations and identity risks.
-            security_monitoring_notification_profiles_read: View Rule Security Notification
-              rules.
-            security_monitoring_notification_profiles_write: Create, edit, and delete
-              Security Notification rules.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
@@ -26107,6 +26112,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - dashboards_public_share
+      - AuthZ:
+        - dashboards_embed_share
+      - AuthZ:
+        - dashboards_invite_share
       summary: Create a shared dashboard
       tags:
       - Dashboards
@@ -26125,6 +26134,8 @@ paths:
         operator: OR
         permissions:
         - dashboards_public_share
+        - dashboards_embed_share
+        - dashboards_invite_share
       x-undo:
         operationId: DeletePublicDashboard
         parameters:
@@ -26169,6 +26180,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - dashboards_public_share
+      - AuthZ:
+        - dashboards_embed_share
+      - AuthZ:
+        - dashboards_invite_share
       summary: Revoke a shared dashboard URL
       tags:
       - Dashboards
@@ -26177,6 +26192,8 @@ paths:
         operator: OR
         permissions:
         - dashboards_public_share
+        - dashboards_embed_share
+        - dashboards_invite_share
       x-undo:
         type: idempotent
     get:
@@ -26292,6 +26309,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - dashboards_public_share
+      - AuthZ:
+        - dashboards_embed_share
+      - AuthZ:
+        - dashboards_invite_share
       summary: Update a shared dashboard
       tags:
       - Dashboards
@@ -26301,6 +26322,8 @@ paths:
         operator: OR
         permissions:
         - dashboards_public_share
+        - dashboards_embed_share
+        - dashboards_invite_share
       x-undo:
         type: idempotent
   /api/v1/dashboard/public/{token}/invitation:
@@ -26350,7 +26373,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - dashboards_public_share
+        - dashboards_invite_share
       summary: Revoke shared dashboard invitations
       tags:
       - Dashboards
@@ -26359,7 +26382,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - dashboards_invite_share
       x-undo:
         type: idempotent
     get:
@@ -26412,7 +26435,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - dashboards_public_share
+        - dashboards_invite_share
       summary: Get all invitations for a shared dashboard
       tags:
       - Dashboards
@@ -26420,7 +26443,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - dashboards_invite_share
       x-undo:
         type: safe
     post:
@@ -26480,7 +26503,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - dashboards_public_share
+        - dashboards_invite_share
       summary: Send shared dashboard invitation email
       tags:
       - Dashboards
@@ -26498,7 +26521,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - dashboards_invite_share
       x-undo:
         operationId: DeletePublicDashboardInvitation
         parameters:

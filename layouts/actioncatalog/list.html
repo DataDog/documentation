@@ -106,7 +106,7 @@
         </div>
         <div class="group-{{ $workflow_title }} mb-2 ms-4 d-none">
           {{ range $action_name, $action_data := .actions }}
-            {{ $base_url := "https://app.datadoghq.com/workflow/action-catalog#/" }}
+            {{ $base_url := "https://app.datadoghq.com/actions/action-catalog#" }}
             {{ $full_url := print $base_url $workflow_name "/" $workflow_name "." $action_name }}
 
             <a class="mb-1 font-semibold mix js-single-rule" href="{{ $full_url }}" data-name="{{ lower $workflow_title }} {{ lower $action_name }} {{ .File.TranslationBaseName }}">
