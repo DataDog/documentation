@@ -640,6 +640,11 @@
     },
     {
       "group": "logs_pipelines",
+      "suffix": "_3336967838",
+      "description": "Create a pipeline with Decoder Processor returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
       "suffix": "_2707101123",
       "description": "Create a pipeline with Span Id Remapper returns \"OK\" response"
     }

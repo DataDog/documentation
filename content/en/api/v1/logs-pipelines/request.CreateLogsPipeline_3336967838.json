@@ -1,0 +1,18 @@
+{
+  "filter": {
+    "query": "source:python"
+  },
+  "name": "testDecoderProcessor",
+  "processors": [
+    {
+      "type": "decoder-processor",
+      "is_enabled": true,
+      "name": "test_decoder",
+      "source": "encoded_message",
+      "target": "decoded_message",
+      "binary_to_text_encoding": "base16",
+      "input_representation": "utf_8"
+    }
+  ],
+  "tags": []
+}
