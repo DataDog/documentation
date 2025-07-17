@@ -16,6 +16,11 @@ The instrumenter must be deployed to every region and account where you want to 
 - Your user account has the following roles:
    - Serverless AWS Instrumentation Read
    - Serverless AWS Instrumentation Write
+- Your API key must have [Remote Configuration access][4]
+
+  {{<img src="agent/remote_config/RC_Key_updated.png" alt="API Key properties with Remote Configuration capability Enable button." width="90%" style="center">}}
+
+
 
 ## Setup
 
@@ -40,6 +45,9 @@ The instrumenter must be deployed to every region and account where you want to 
 
 1. Confirm your function selections. You can also set the layer version, which is used for all future instrumentation. This version remains fixed until you manually update it. Updates can take a few minutes to be applied.
 
+
+<div class="alert alert-info">Functions that already have at least 1 layer on them will be skipped from Remote Instrumentation to avoid conflicts and marked with a 'Manual' tag.</div>
+
 ## Verification
 
 To confirm that your functions are instrumented with Datadog, open your AWS Console and ensure that two layers (Datadog Lambda extension and `datadog-lambda-python` or `datadog-lambda-js`) have been added to each selected function.
@@ -60,3 +68,4 @@ If you see issues related to IAM roles, ensure that you have permission to creat
 [1]: /integrations/amazon_web_services
 [2]: https://app.datadoghq.com/integrations/amazon-web-services?panel=resource-collection
 [3]: https://app.datadoghq.com/functions?cloud=aws
+[4]: /agent/remote_config/?tab=configurationyamlfile#setup
