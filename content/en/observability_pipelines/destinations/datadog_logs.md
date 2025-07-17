@@ -29,13 +29,13 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 
 ## AWS PrivateLink
 
-If you would like to send logs from Observability Pipelines to Datadog using AWS PrivateLink, see [Connect to Datadog over AWS PrivateLink][3] for setup instructions. The two endpoints that you need to set up are:
+To send logs from Observability Pipelines to Datadog using AWS PrivateLink, see [Connect to Datadog over AWS PrivateLink][3] for setup instructions. The two endpoints you need to set up are:
 
 - Logs (User HTTP intake): `http-intake.logs.datadoghq.com`
 - Remote Configuration: `config.datadoghq.com`
 
 **Notes**:
-- If you are a PCI-compliant organization, the Worker sends logs over `http-intake-pci.logs.datadoghq.com`, which is not available as AWS PrivateLink endpoint.
+- If you are a PCI-compliant organization, the Worker sends logs over `http-intake-pci.logs.datadoghq.com`, which is not available as an AWS PrivateLink endpoint.
 - The `obpipeline-intake.datadoghq.com` endpoint is used for Live Capture and is not available as a PrivateLink endpoint.
 
 [1]: https://app.datadoghq.com/observability-pipelines
