@@ -26,11 +26,12 @@ Datadog Disaster Recovery requires Datadog Agent version **7.54 or above**.
 ### Supported telemetry types and products
 The Agent-based failover supports the following telemetry types and products:
 
-|Supported telemetry |Supported products       |
-|--------------------|-------------------------|
-|Metrics             |Infrastructure Monitoring|
-|Traces              |APM                      |
-|Logs                |Logs                     |
+|Supported telemetry |Supported products          |Agent version required | 
+|--------------------|----------------------------| ----------------------|
+|Logs                |Logs                        | v7.54+                |
+|Metrics             |Infrastructure Monitoring   | v7.54+                |
+|Traces              |APM                         | v7.68+                |
+
 
 
 <div class="alert alert-info">
