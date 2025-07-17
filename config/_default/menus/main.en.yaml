@@ -7464,26 +7464,31 @@ menu:
       parent: rum
       identifier: rum_correlate_with_other_telemetry
       weight: 7
+    - name: Correlate LLM with RUM
+      url: /real_user_monitoring/correlate_with_other_telemetry/llm_observability
+      parent: rum_correlate_with_other_telemetry
+      identifier: rum_correlate_with_other_telemetry_llm
+      weight: 701
     - name: Correlate Logs with RUM
       url: /real_user_monitoring/correlate_with_other_telemetry/logs
       parent: rum_correlate_with_other_telemetry
       identifier: rum_correlate_with_other_telemetry_logs
-      weight: 701
-    - name: Correlate Traces with RUM
-      url: /real_user_monitoring/correlate_with_other_telemetry/apm
-      parent: rum_correlate_with_other_telemetry
-      identifier: rum_correlate_with_other_telemetry_apm
       weight: 702
-    - name: Correlate Synthetics with RUM
-      url: real_user_monitoring/correlate_with_other_telemetry/synthetics/
-      parent: rum_correlate_with_other_telemetry
-      identifier: rum_correlate_with_other_telemetry_synthetics
-      weight: 703
     - name: Correlate Profiling with RUM
       url: real_user_monitoring/correlate_with_other_telemetry/profiling/
       parent: rum_correlate_with_other_telemetry
       identifier: rum_correlate_with_other_telemetry_profiling
+      weight: 703
+    - name: Correlate Synthetics with RUM
+      url: real_user_monitoring/correlate_with_other_telemetry/synthetics/
+      parent: rum_correlate_with_other_telemetry
+      identifier: rum_correlate_with_other_telemetry_synthetics
       weight: 704
+    - name: Correlate Traces with RUM
+      url: /real_user_monitoring/correlate_with_other_telemetry/apm
+      parent: rum_correlate_with_other_telemetry
+      identifier: rum_correlate_with_other_telemetry_apm
+      weight: 705
     - name: Feature Flag Tracking
       url: real_user_monitoring/feature_flag_tracking
       parent: rum
