@@ -181,6 +181,7 @@ Once profiling is enabled, the following profile types are collected for [suppor
 
 CPU
 : The time each function spent running on the CPU, including JavaScript and native code.<br />
+: CPU profiling is available on Linux and macOS. The feature is not available on Windows.
 
 Wall Time
 : The elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.

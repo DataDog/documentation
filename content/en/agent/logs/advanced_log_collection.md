@@ -32,7 +32,7 @@ After you set up [log collection][1], you can customize your collection configur
   - [Exclude at match](#exclude-at-match)
   - [Include at match](#include-at-match)
 - [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
-- [Multi-line aggregation](#multi-line-aggregation)
+- [Multi-line aggregation](#manually-aggregate-multi-line-logs)
 - [Automatically aggregate multi-line logs](#automatically-aggregate-multi-line-logs)
 - [Commonly used log processing rules](#commonly-used-log-processing-rules)
 - [Tail directories using wildcards](#tail-directories-using-wildcards)

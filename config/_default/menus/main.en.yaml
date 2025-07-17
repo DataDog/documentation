@@ -800,56 +800,61 @@ menu:
       identifier: otel_apache_metrics
       parent: otel_integrations
       weight: 801
+    - name: Apache Spark Metrics
+      url: opentelemetry/integrations/spark_metrics/
+      identifier: otel_apache_spark_metrics
+      parent: otel_integrations
+      weight: 802
     - name: Collector Health Metrics
       url: opentelemetry/integrations/collector_health_metrics/
       identifier: otel_health_metrics
       parent: otel_integrations
-      weight: 802
+      weight: 803
     - name: Docker Metrics
       url: opentelemetry/integrations/docker_metrics/
       identifier: otel_docker_metrics
       parent: otel_integrations
-      weight: 803
+      weight: 804
     - name: HAProxy Metrics
       url: opentelemetry/integrations/haproxy_metrics/
       identifier: otel_haproxy_metrics
       parent: otel_integrations
-      weight: 804
+      weight: 805
     - name: Host Metrics
       url: opentelemetry/integrations/host_metrics/
       identifier: otel_host_metrics
       parent: otel_integrations
-      weight: 805
+      weight: 806
     - name: IIS Metrics
       url: opentelemetry/integrations/iis_metrics/
       identifier: otel_iis_metrics
       parent: otel_integrations
-      weight: 806
+      weight: 807
     - name: Kafka Metrics
       url: opentelemetry/integrations/kafka_metrics/
       identifier: otel_kafka_metrics
       parent: otel_integrations
-      weight: 807
+      weight: 808
     - name: MySQL Metrics
       url: opentelemetry/integrations/mysql_metrics/
       identifier: otel_mysql_metrics
       parent: otel_integrations
-      weight: 808
+      weight: 809
     - name: NGINX Metrics
       url: opentelemetry/integrations/nginx_metrics/
       identifier: otel_nginx_metrics
       parent: otel_integrations
-      weight: 809
+      weight: 810
     - name: Runtime Metrics
       url: opentelemetry/integrations/runtime_metrics/
       identifier: otel_runtime_metrics
       parent: otel_integrations
-      weight: 810
+      weight: 811
     - name: Trace Metrics
       url: opentelemetry/integrations/trace_metrics/
       identifier: otel_trace_metrics
       parent: otel_integrations
-      weight: 811
+      weight: 812
     - name: Troubleshooting
       url: opentelemetry/troubleshooting/
       identifier: otel_troubleshooting
@@ -3949,25 +3954,30 @@ menu:
       parent: trace_explorer
       identifier: span_query_syntax
       weight: 602
+    - name: Trace Queries
+      url: tracing/trace_explorer/trace_queries/
+      parent: trace_explorer
+      weight: 603
     - name: Span Tags and Attributes
       url: tracing/trace_explorer/span_tags_attributes/
       parent: trace_explorer
       identifier: span_attributes
-      weight: 603
+      weight: 604
     - name: Span Visualizations
       url: tracing/trace_explorer/visualize/
       parent: trace_explorer
       identifier: visualize_spans
-      weight: 604
+      weight: 605
     - name: Trace View
       identifier: tracing_trace_explorer_trace_view
       url: tracing/trace_explorer/trace_view/
       parent: trace_explorer
-      weight: 605
-    - name: Trace Queries
-      url: tracing/trace_explorer/trace_queries/
-      parent: trace_explorer
       weight: 606
+    - name: Tag Analysis
+      identifier: tracing_tag_analysis
+      url: tracing/trace_explorer/tag_analysis/
+      parent: trace_explorer
+      weight: 607
     - name: Recommendations
       url: tracing/recommendations/
       parent: tracing
@@ -5231,66 +5241,71 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_datadog_agent
       weight: 903
+    - name: Filebeat
+      url: observability_pipelines/sources/filebeat/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_filebeat
+      weight: 904
     - name: Fluent
       url: observability_pipelines/sources/fluent/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_fluent
-      weight: 904
+      weight: 905
     - name: Google Pub/Sub
       url: observability_pipelines/sources/google_pubsub/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_google_pubsub
-      weight: 905
+      weight: 906
     - name: HTTP Client
       url: observability_pipelines/sources/http_client/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_client
-      weight: 906
+      weight: 907
     - name: HTTP Server
       url: observability_pipelines/sources/http_server/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_server
-      weight: 907
+      weight: 908
     - name: Lambda Forwarder
       url: observability_pipelines/sources/lambda_forwarder/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_lambda_forwarder
-      weight: 908
+      weight: 909
     - name: Kafka
       url: observability_pipelines/sources/kafka/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_kafka
-      weight: 909
+      weight: 910
     - name: Logstash
       url: observability_pipelines/sources/logstash/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_logstash
-      weight: 910
+      weight: 911
     - name: Socket
       url: observability_pipelines/sources/socket/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_socket
-      weight: 911
+      weight: 912
     - name: Splunk HEC
       url: observability_pipelines/sources/splunk_hec/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_hec
-      weight: 912
+      weight: 913
     - name: Splunk TCP
       url: observability_pipelines/sources/splunk_tcp/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_tcp
-      weight: 913
+      weight: 914
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/sources/sumo_logic/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_sumo_logic
-      weight: 914
+      weight: 915
     - name: Syslog
       url: observability_pipelines/sources/syslog/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_syslog
-      weight: 915
+      weight: 916
     - name: Processors
       url: observability_pipelines/processors/
       parent: observability_pipelines
@@ -6294,7 +6309,7 @@ menu:
       parent: application_security
       identifier: application_security_security_signals
       weight: 5
-    - name: Attacker Explorer
+    - name: Attackers Explorer
       url: security/application_security/security_signals/attacker-explorer/
       parent: application_security_security_signals
       identifier: threats_attackers
@@ -6858,11 +6873,16 @@ menu:
       parent: continuous_testing
       identifier: continuous_testing_metrics
       weight: 5
+    - name: Guides
+      url: continuous_testing/guide/
+      parent: continuous_testing
+      identifier: continuous_testing_guides
+      weight: 6      
     - name: Troubleshooting
       url: continuous_testing/troubleshooting/
       parent: continuous_testing
       identifier: continuous_testing_troubleshooting
-      weight: 6
+      weight: 7
     - name: Real User Monitoring
       url: real_user_monitoring/
       pre: rum
@@ -7464,6 +7484,11 @@ menu:
       parent: rum_correlate_with_other_telemetry
       identifier: rum_correlate_with_other_telemetry_synthetics
       weight: 703
+    - name: Correlate Profiling with RUM
+      url: real_user_monitoring/correlate_with_other_telemetry/profiling/
+      parent: rum_correlate_with_other_telemetry
+      identifier: rum_correlate_with_other_telemetry_profiling
+      weight: 704
     - name: Feature Flag Tracking
       url: real_user_monitoring/feature_flag_tracking
       parent: rum
