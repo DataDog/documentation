@@ -322,7 +322,7 @@ http-intake.logs.datadoghq.com.	60 IN	A	172.31.20.174
 http-intake.logs.datadoghq.com.	60 IN	A	172.31.34.135
 ```
 
-If logs are not being sent over PrivateLink, the `ANSWER SECTION` of the output shows the load balancer (`4-logs-http-s1-e721f9c2a0e65948.elb.us-east-1.amazonaws.com.`) to which the logs are getting sent.
+If logs are not being sent over PrivateLink, the `ANSWER SECTION` of the output shows the load balancer (`4-logs-http-s1-e721f9c2a0e65948.elb.us-east-1.amazonaws.com`) to which the logs are getting sent.
 
 ```
 ;; ANSWER SECTION:
