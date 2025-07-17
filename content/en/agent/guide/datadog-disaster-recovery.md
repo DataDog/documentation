@@ -198,14 +198,14 @@ multi_region_failover:
   enabled: true
   failover_metrics: false
   failover_logs: false
-  failover_traces: false
+  failover_apm: false
   site: <DDR_SITE>  # For example "site: us5.datadoghq.com" for a US5 site
   api_key: <DDR_SITE_API_KEY>
 ```
 
 Setting the **enabled** field to `true` enables the Agent to ship Agent metadata to the DDR Datadog site so you can view Agents and your Infra Hosts in the DDR org. Note that while you can see your Agents and Infra Hosts in the DDR org, you will not receive telemetry until DDR failover is activated.
 
-During the preview, we recommend having `failover_metrics`, `failover_logs` and `failover_traces` set to **false** when in passive phases. 
+During the preview, we recommend having `failover_metrics`, `failover_logs` and `failover_apm` set to **false** when in passive phases. 
 
 Your Datadog customer success manager will work with you on scheduling dedicated time windows for failover testing to measure performance and Recovery Time Objective (RTO).
 {{% /collapse-content %}} <br>
@@ -225,7 +225,7 @@ For Agent deployments in non-containerized environments, use the below Agent CLI
 ```shell
 agent config set multi_region_failover.failover_metrics true
 agent config set multi_region_failover.failover_logs true
-agent config set multi_region_failover.failover_traces true
+agent config set multi_region_failover.failover_apm true
 ```
 {{% /tab %}}
 
@@ -246,7 +246,7 @@ Below is an example of using `kubectl` to fail over metrics and logs for a Datad
 ```shell
 kubectl exec <POD_NAME> -c agent -- agent config set multi_region_failover.failover_metrics true
 kubectl exec <POD_NAME> -c agent -- agent config set multi_region_failover.failover_logs true
-kubectl exec <POD_NAME> -c agent -- agent config set multi_region_failover.failover_traces true
+kubectl exec <POD_NAME> -c agent -- agent config set multi_region_failover.failover_apm true
 ```
 <br>
 
@@ -258,7 +258,7 @@ multi_region_failover:
   enabled: true
   failover_metrics: true
   failover_logs: true
-  failover_traces: true
+  failover_apm: true
   site: NEW_ORG_SITE
   api_key: NEW_SITE_API_KEY
 ```
@@ -272,7 +272,7 @@ You can make similar changes with either the official Helm chart or Datadog Oper
 DD_MULTI_REGION_FAILOVER_ENABLED=true
 DD_MULTI_REGION_FAILOVER_METRICS=true
 DD_MULTI_REGION_FAILOVER_LOGS=true
-DD_MULTI_REGION_FAILOVER_TRACES=true
+DD_MULTI_REGION_FAILOVER_APM=true
 DD_MULTI_REGION_FAILOVER_SITE=ADD_NEW_ORG_SITE
 DD_MULTI_REGION_FAILOVER_API_KEY=ADD_NEW_SITE_API_KEY
 ```
@@ -431,7 +431,7 @@ multi_region_failover:
   enabled: true
   failover_metrics: false
   failover_logs: false
-  failover_traces: false
+  failover_apm: false
   site: <DDR_SITE>
   api_key: <DDR_API_KEY>
 ```
@@ -447,7 +447,7 @@ multi_region_failover:
 ```bash
 agent config set multi_region_failover.failover_metrics true
 agent config set multi_region_failover.failover_logs true
-agent config set multi_region_failover.failover_traces true
+agent config set multi_region_failover.failover_apm true
 ```
 
 ### Agents (Kubernetes or Containers)
