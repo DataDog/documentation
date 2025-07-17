@@ -9,7 +9,7 @@ algolia:
 ---
 
 # Overview
-Correlate RUM and LLM Observability sessions in order to gain more visibility on how your web application interacts with AI Agents.
+Correlate RUM and LLM Observability sessions to gain more visibility on how your web application interacts with AI Agents.
 
 The link between RUM and LLM Observability is created by forwarding the RUM Session ID to the LLM Observability SDK.
 
@@ -85,7 +85,7 @@ async def agent_loop(
   # Rest of your agent code
 ```
 
-# Navigating between RUM and LLM Observability
+# Navigating between RUM and LLM observability
 You can access the LLM Traces associated with your RUM Session right from the RUM Session Side Panel by clicking the `LLM Traces` button in the side panel header.
 
 Similarly, on an LLM Trace you can access the matching RUM Session replay.
