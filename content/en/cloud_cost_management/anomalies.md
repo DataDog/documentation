@@ -21,7 +21,10 @@ Our algorithm takes into account seasonality, distinguishing true anomalies from
 
 To further reduce noise, anomalies with low cost impact are automatically filtered out, ensuring your attention stays focused on the largest anomalies.
 
+Once anomalies are detected, to troubleshoot the root cause we are using the same concept as [Watchdog Explains][2]. It will automatically analyzes your cost data to identify which specific tags or dimensions are responsible for the anomalous behavior, helping you get the related service, team, environment, account, and other factors driving the cost spike. This accelerates your investigation and resolution process by quickly pinpointing the source of unexpected costs.
+
 [1]: https://app.datadoghq.com/cost/analyze/anomalies
+[2]: /dashboards/graph_insights/watchdog_explains
 
 ## View cost anomalies
 
@@ -38,9 +41,24 @@ This is an example of the list of anomalies detected in your infrastructure:
 
 {{< img src="cloud_cost/anomalies/cost_anomalies_new_list.png" alt="List of cost anomalies automatically detected" style="width:90%;" >}}
 
-## Take action on anomalies
+<!-- TODO: add img with watchdog explains popover -->
 
-Click an anomaly to view the services, teams, environments, and resource IDs that may be driving the cost anomaly.
+When hovering over the graph, you can see two graphs: one with and one without the tags identified by the Watchdog Explains engine, it shows how removing XXX:XXX flattens the spike, confirming the impact on the cost.
+
+## Investigate an anomaly
+
+When you open an anomaly, the investigation panel provides:
+
+- **Impact summary and drivers**: A comprehensive overview summarizing the impact and identifying the key drivers responsible for the cost anomaly.
+- **Related driver graphs**: Visual representations showing graphs from the related drivers that contributed to the anomalous behavior.
+- **Usage vs. unit price analysis**: A dedicated section to help you understand whether the unexpected change is due to increased usage, unit price changes, or both.
+- **Resource investigation table**: A detailed table allowing you to investigate potential impactful resource IDs that may be contributing to the cost spike.
+
+<!-- TODO: add img with new layout -->
+<!-- TODO: add img for usage & unit price -->
+<!-- TODO: add img for resource ids -->
+
+## Take action on anomalies
 
 Investigate the anomaly further, and by any additional dimensions, by viewing the costs in Explorer or saving the query to a Notebook. You can also send the anomaly, Explorer link, or Notebook to the associated service owners or teams. This enables teams to provide context for why the anomaly occurred, and if it's expected.
 
@@ -48,6 +66,7 @@ You can also create a cost anomaly monitor to get alerted of similar cost anomal
 
 This is the side panel where you can take action on your cost anomaly:
 
+<!-- TODO: update img with new design -->
 {{< img src="cloud_cost/anomalies/cost_anomalies_side-panel.png" alt="In the side panel you can take action on your cost anomaly" style="width:90%;" >}}
 
 ## Resolve anomalies
@@ -58,4 +77,5 @@ Mark anomalies as significant or insignificant to give feedback and help improve
 
 This is an example of how to mark a cost anomaly as significant and explain why it's an anomaly:
 
+<!-- TODO: update img with new design -->
 {{< img src="cloud_cost/anomalies/cost_anomalies_side-panel_is-significant.png" alt="You can mark cost anomaly as significant and write an explanation about why it's an anomaly  and then resolve it" style="width:90%;" >}}
