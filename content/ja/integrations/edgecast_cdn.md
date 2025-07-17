@@ -88,7 +88,7 @@ Edgecast は、エッジコンピューティング、アプリケーション�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "edgecast_cdn" >}}
+{{< get-metrics-from-git "edgecast-cdn" >}}
 
 
 ### イベント

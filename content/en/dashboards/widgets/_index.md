@@ -164,22 +164,24 @@ Widgets not linked to global time show the data for their local time frame as ap
 
 <div class="alert alert-warning">Enable <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Static Public Data Sharing</strong></a> in your Organization Settings to use this feature.</div>
 
-Widgets can be copied on [Dashboards][4], [Notebooks][5], [APM Service][6], and the [APM resource][7] page by using `Ctrl + C` (`Cmd + C` for Mac), or by selecting the share icon and choosing "Copy".
+Widgets can be copied on [Dashboards][4], [Notebooks][5], [APM Service][6], and the [APM resource][7] page by using <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>C</kbd>, or by selecting the share icon and choosing "Copy".
 
-The copied widgets can be pasted within Datadog by using `Ctrl + V` (`Cmd + V` for Mac) on:
+The copied widgets can be pasted within Datadog by using <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>V</kbd>:
 
 * **Dashboards**: Adds a new widget positioned under your mouse cursor.
 * **Notebooks**: Adds a new cell at the end of the notebook.
 
 You can also paste the widget into your favorite chat program that displays link previews (like Slack or Microsoft Teams). This displays a snapshot image of your graph along with a direct link to your widget.
 
+For more information, see [Datadog Clipboard][12].
+
 ### Groups of widgets
 
-Timeboard group widgets can be copied by hovering over the group widget area and using `Ctrl + C` (`Cmd + C` for Mac) or by selecting the share icon and choosing "Copy".
+Timeboard group widgets can be copied by hovering over the group widget area and using <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>C</kbd> or by selecting the share icon and choosing "Copy".
 
 **Note**: When pasting graphs to screenboards or notebooks, individual widgets within the group are pasted.
 
-To copy multiple screenboard widgets (edit mode only), `shift + click` on the widgets and use `Ctrl + C` (`Cmd + C` for Mac).
+To copy multiple screenboard widgets (edit mode only), <kbd>Shift</kbd> + click on the widgets and use <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>C</kbd>.
 
 **Note**: This only works when sharing within Datadog. It does not generate a preview image.
 
@@ -223,3 +225,4 @@ Click on any dashboard graph to open an options menu:
 [9]: /tracing/trace_explorer/
 [10]: /profiler/profile_visualizations/
 [11]: /dashboards/guide/custom_time_frames/
+[12]: /service_management/incident_management/datadog_clipboard/

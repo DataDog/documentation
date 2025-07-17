@@ -156,6 +156,23 @@ Code Changes Detection for deployments of the `shopist` service will only consid
 
 If the source code patterns for a service are defined in both a link and an extension, only the extension is considered when filtering the commits.
 
+#### Use service file path patterns to track changes across the entire repository
+To detect changes across the entire repository, use appropriate file path patterns. For example, `"**"` matches all files.
+
+**Example (schema version v2.2):**
+
+```yaml
+extensions:
+  datadoghq.com/cd-visibility:
+    source_patterns:
+      - "**"
+```
+
+In this case, Code Changes Detection for deployments of the `shopist` service will consider the Git commits that include changes in the whole repository tree.  
+
+<div class="alert alert-warning">If a pattern is exactly <code>**</code> or begins with it, enclose it in quotes, as <code>*</code> is reserved in YAML for anchors.</div>  
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

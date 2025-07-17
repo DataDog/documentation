@@ -45,7 +45,7 @@ Bits is able to run investigations on monitors that fulfill all three of the fol
    - A service tag on the monitor
 
 3. **Telemetry links**: For metric, anomaly, forecast, integration, and outlier monitors, the monitor message must include at least one helpful Datadog link:
-   - A Datadog dashboard: A custom or an integration dashboard. Host dashboards are not supported.
+   - A Datadog dashboard
    - A logs query
    - A trace query
    - A Datadog notebook with helpful widgets

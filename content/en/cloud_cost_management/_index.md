@@ -100,7 +100,7 @@ Proactively manage and optimize your cloud spending by creating a [Cloud Cost Mo
 
 ## Allocate costs
 
-Use [Container Cost Allocation metrics][4] to discover costs associated with clusters and workloads across Kubernetes, AWS ECS, Azure, and Google Cloud. Gain visibility into pod-level costs, identify idle resource costs, and analyze costs by resource type.
+Use [Container Cost Allocation metrics][4] to discover costs associated with clusters and workloads across Kubernetes, Amazon ECS, Azure, and Google Cloud. Gain visibility into pod-level costs, identify idle resource costs, and analyze costs by resource type.
 
 ## Permissions
 Two permissions are available:
@@ -120,6 +120,7 @@ The table below describes the impact of these permissions in both Cloud Cost Man
 | CCM Settings Page - Tag Pipelines     | Permission Required                         | Permission Required to create tag pipelines       |
 | CCM Settings Page - SaaS Integrations | Permission Required                         | Permission Required to enable integration for CCM |
 | CCM Settings Page - Accounts          | Permission Required                         | Permission Required to modify or create accounts  |
+| CCM Settings Page - Configure Recommendations          | Permission Required                         | Permission Required to customize recommendations  |
 | Dashboards/Notebooks (external)   | Permission Required to create and view data | N/A                                               |
 | Monitors (external)               | Permission Required to create CCM monitors  | N/A                                               |
 | Service Catalog (external)        | Permission Required to view cost data       | N/A                                               |
