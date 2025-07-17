@@ -256,6 +256,7 @@ To get started, follow the instructions below.
    - In Section 1, enter `openlineage`.
    - In Key 1, enter `transport`.
    - In Value 1, enter the following:
+
      ```text
      {
       "type": "http", 
@@ -265,6 +266,7 @@ To get started, follow the instructions below.
          "api_key": "<DD_API_KEY>"
       }
      }
+     ```
 
    * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * Replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
