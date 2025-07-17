@@ -713,6 +713,10 @@
     "request_description": "",
     "request_schema_description": "The object sent with the request to retrieve a list of events from your organization."
   },
+  "GetEvent": {
+    "description": "Get the details of an event by `event_id`.",
+    "summary": "Get an event"
+  },
   "ListIncidents": {
     "description": "Get all incidents for the user's organization.",
     "summary": "Get a list of incidents"
