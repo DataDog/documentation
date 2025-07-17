@@ -56,7 +56,7 @@ You can monitor App and API Protection for Go apps running in Docker, Kubernetes
 
 4. **Recompile your program** with Orchestrion with the `appsec` build:
    ```console
-   $ orchestrion go build -tags appsec my-program
+   $ orchestrion go build -tags=appsec my-program
    ```
   More options on how to use orchestrion can be found in the [Orchestrion usage][7].
 
