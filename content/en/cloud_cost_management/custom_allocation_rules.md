@@ -27,25 +27,15 @@ Custom allocation rules runs after [Tag Pipelines][1], enabling cost allocations
 
 ## Create a custom allocation rule
 
-Before creating your rule, be aware:
-- **Result limits**: Some data sources limit how many results they can show. The allocation rule automatically uses your highest-costing items first.
-- **Update frequency**: 
-  - Metrics data updates daily for the past 60 days
-  - Other data sources update daily for the past 7 days
-
-If you need more frequent updates or longer retention, consider using the Metrics data source.
-
-For more information, see [Data source limitations](#data-source-limitations).
-
 ### Step 1 - Define the source
 
 1. Navigate to [Cloud Cost > Settings > Custom Allocation Rules][2] and click **Add New Rule** to start.
-1. Under **Define the source**, select the cost provider, and use the filters under **Define the costs to split (source)** to narrow down the data source.
+1. Under **Define the source**, select the cost provider.
 1. Each data source you add creates a separate grouping for the data.
 
    _For example, you may want to apply the allocation rule to a specific subset of your cloud spend, such as the `production` environment._
 
-### Step 2 - Choose a split method
+### Step 2 - Choose an allocation method
 
 Below is a description of how each allocation method works with examples.
 
@@ -82,7 +72,7 @@ In the preceding diagram, the pink bar represents a filter on the cost allocatio
 To create a rule for this allocation, you can:
 
 - Define the costs to allocate (source): **EC2 support fees** (`aws_product:support`). Use filters to narrow down the data source. Each source you add creates a separate grouping for the data.
-- Choose the split method: **Proportional by spend**.
+- Choose the allocation method: **Proportional by spend**.
 - Choose the [destination tag](#step-3---define-the-destination) to split your costs by: **User** (`User A`, `User B`, `User C`).
 - Create suballocations by [partitioning](#step-4---optional-apply-a-partition) the allocation rule: **environment** (`env`).
 
@@ -100,13 +90,13 @@ Metrics-based allocation provides the ability to split up costs based on Datadog
 
 For example, this PostgreSQL metrics query `sum:postgresql.queries.time{*} by {user}.as_count()` tracks the total query execution time per user. The relative values are then used to determine what proportion of total PostgreSQL costs should be allocated to each user.
 
-To create a rule for this allocation, you could:
+### Data source limitations
 
-- Define the costs to allocate (source): **Database costs** (`aws_product:rds`). Use filters to narrow down the data source. Each source you add creates a separate grouping for the data.
+Before creating this type of rule, be aware:
 
-  This allocation rule works with specific data sources, listed below.
+- **Data sources support** - The dynamic by metric allocation method only supports specific data sources, listed in the dropdown below.
 
-{{% collapse-content title="Supported data sources" level="h4" expanded=false id="supported-data-sources" %}}
+{{% collapse-content title="List of supported data sources" level="h4" expanded=false id="supported-data-sources" %}}
 
 - APM Metrics
 - Application Security
@@ -139,14 +129,30 @@ To create a rule for this allocation, you could:
 
 {{% /collapse-content %}}
 
-- Choose the split method: **Dynamic by metric**
-- Choose the data source: **Database Queries**. Tip: Review available metrics and tags in the [Metrics Summary][4].
+- **Result limits** - Some data sources limit how many results they can show. The allocation rule automatically uses your highest-costing items first. For 
+example, if your query editor shows a limit of 100 group bys but you have 
+101 results, the allocation rule distributes costs across the top 100 
+highest-costing group bys and ignore the remaining 1 completely. 
+- **Update frequency** - While CCM has 15 months of retention overall, individual data sources have different update patterns:
+  - Metrics data updates daily for the past 60 days
+  - Other data sources backfill 60 days at rule creation, then update daily for the past 7 days
+
+  If you need more frequent updates or longer retention, consider using the _Metrics_ data source.
+
+### Create a dynamic by metric allocation rule
+
+To create a rule for this allocation, you could:
+
+- Define the costs to allocate (source): **Database costs** (`aws_product:rds`). Use filters to narrow down the data source. Each source you add creates a separate grouping for the data.
+- Choose the allocation method: **Dynamic by metric**
+- Choose the data source: **Database Queries**. Tip: Review available metrics and tags in the [Metrics Summary][2].
 - Choose the [destination tag](#step-3---define-the-destination) to split your costs by: **Service** (`trace.caller.service`).
 - Create suballocations by [partitioning](#step-4---optional-apply-a-partition) the allocation rule: **environment** (`env`).
 
 {{< img src="cloud_cost/custom_allocation_rules/ui-dynamic-by-metric-4.png" alt="The dynamic by metric split strategy as seen in Datadog" style="width:90%;" >}}
 
 [1]: /metrics/#querying-metrics
+[2]: https://app.datadoghq.com/metric/summary
 
 {{% /tab %}}
 
@@ -208,31 +214,9 @@ Changes to custom allocation rules may take up to 24 hours to be applied. After 
 
 {{< img src="cloud_cost/custom_allocation_rules/visualize_your_allocations-1.png" alt="See your allocations throughout Datadog" style="width:90%;" >}}
 
-## Data source limitations
-### Some data sources limit the number of group bys 
-available. When this limit is reached, the allocation rule distributes costs 
-across the available group bys in sorted order (highest cost first). For 
-example, if your query editor shows a limit of 100 group bys but you have 
-101 results, the allocation rule distributes costs across the top 100 
-highest-costing group bys and ignore the remaining 1 completely. Similarly, 
-if you have 3 total results but a limit of 2, the allocation rule 
-distributes costs across the top 2 highest-costing group bys (for example, 
-50% and 50%) and ignores the third result completely.
-
-### Retention period
-While CCM has 15 months of retention overall, individual data sources have different update patterns:
-- **Metrics data source**: Updates the past 60 days daily
-- **All other data sources**: Backfill 60 days at rule creation, then 
-  update the past 7 days daily
-
-### Supported data sources for dynamic allocation
-
-The dynamic by metric allocation method only supports a [specific set of data sources](#supported-data-sources).
-
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /cloud_cost_management/tag_pipelines
 [2]: https://app.datadoghq.com/cost/settings/custom-allocation-rules
 [3]: https://www.datadoghq.com/support/
-[4]: https://app.datadoghq.com/metric/summary
