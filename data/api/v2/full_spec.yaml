@@ -2318,6 +2318,88 @@ components:
       - id
       - base_severity
       type: object
+    AlertEventAttributes:
+      description: Alert event attributes.
+      properties:
+        aggregation_key:
+          $ref: '#/components/schemas/V2EventAggregationKey'
+        custom:
+          description: JSON object of custom attributes.
+          example: {}
+          type: object
+        evt:
+          $ref: '#/components/schemas/EventSystemAttributes'
+        links:
+          description: The links related to the event.
+          example:
+          - category: runbook
+            title: Runbook Link
+            url: https://app.datadoghq.com/runbook
+          items:
+            $ref: '#/components/schemas/AlertEventAttributesLinksItem'
+          type: array
+        priority:
+          $ref: '#/components/schemas/AlertEventAttributesPriority'
+        service:
+          $ref: '#/components/schemas/V2EventService'
+        status:
+          $ref: '#/components/schemas/AlertEventAttributesStatus'
+        timestamp:
+          $ref: '#/components/schemas/V2EventTimestamp'
+        title:
+          $ref: '#/components/schemas/V2EventTitle'
+      type: object
+    AlertEventAttributesLinksItem:
+      description: A link.
+      properties:
+        category:
+          $ref: '#/components/schemas/AlertEventAttributesLinksItemCategory'
+        title:
+          description: The display text of the link.
+          type: string
+        url:
+          description: The URL of the link.
+          type: string
+      type: object
+    AlertEventAttributesLinksItemCategory:
+      description: The category of the link.
+      enum:
+      - runbook
+      - documentation
+      - dashboard
+      type: string
+      x-enum-varnames:
+      - RUNBOOK
+      - DOCUMENTATION
+      - DASHBOARD
+    AlertEventAttributesPriority:
+      description: The priority of the alert.
+      enum:
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      example: '5'
+      type: string
+      x-enum-varnames:
+      - PRIORITY_ONE
+      - PRIORITY_TWO
+      - PRIORITY_THREE
+      - PRIORITY_FOUR
+      - PRIORITY_FIVE
+    AlertEventAttributesStatus:
+      description: The status of the alert.
+      enum:
+      - warn
+      - error
+      - ok
+      example: error
+      type: string
+      x-enum-varnames:
+      - WARN
+      - ERROR
+      - OK
     AlertEventCustomAttributes:
       additionalProperties: false
       description: Alert event attributes.
@@ -7157,6 +7239,116 @@ components:
           format: int64
           type: integer
       type: object
+    ChangeEventAttributes:
+      description: Change event attributes.
+      properties:
+        aggregation_key:
+          $ref: '#/components/schemas/V2EventAggregationKey'
+        author:
+          $ref: '#/components/schemas/ChangeEventAttributesAuthor'
+        change_metadata:
+          description: JSON object of change metadata.
+          example:
+            dd:
+              team: datadog_team
+              user_email: datadog@datadog.com
+              user_id: datadog_user_id
+              user_name: datadog_username
+          type: object
+        changed_resource:
+          $ref: '#/components/schemas/ChangeEventAttributesChangedResource'
+        evt:
+          $ref: '#/components/schemas/EventSystemAttributes'
+        impacted_resources:
+          description: A list of resources impacted by this change.
+          example:
+          - name: service-name
+            type: service
+          items:
+            $ref: '#/components/schemas/ChangeEventAttributesImpactedResourcesItem'
+          type: array
+        new_value:
+          description: The new state of the changed resource.
+          example:
+            enabled: true
+            percentage: 50%
+            rule:
+              datacenter: devcycle.us1.prod
+          type: object
+        prev_value:
+          description: The previous state of the changed resource.
+          example:
+            enabled: true
+            percentage: 10%
+            rule:
+              datacenter: devcycle.us1.prod
+          type: object
+        service:
+          $ref: '#/components/schemas/V2EventService'
+        timestamp:
+          $ref: '#/components/schemas/V2EventTimestamp'
+        title:
+          $ref: '#/components/schemas/V2EventTitle'
+      type: object
+    ChangeEventAttributesAuthor:
+      description: The entity that made the change.
+      properties:
+        name:
+          description: The name of the user or system that made the change.
+          example: example@datadog.com
+          type: string
+        type:
+          $ref: '#/components/schemas/ChangeEventAttributesAuthorType'
+      type: object
+    ChangeEventAttributesAuthorType:
+      description: The type of the author.
+      enum:
+      - user
+      - system
+      - api
+      - automation
+      example: user
+      type: string
+      x-enum-varnames:
+      - USER
+      - SYSTEM
+      - API
+      - AUTOMATION
+    ChangeEventAttributesChangedResource:
+      description: A uniquely identified resource.
+      properties:
+        name:
+          description: The name of the changed resource.
+          type: string
+        type:
+          $ref: '#/components/schemas/ChangeEventAttributesChangedResourceType'
+      type: object
+    ChangeEventAttributesChangedResourceType:
+      description: The type of the changed resource.
+      enum:
+      - feature_flag
+      - configuration
+      example: feature_flag
+      type: string
+      x-enum-varnames:
+      - FEATURE_FLAG
+      - CONFIGURATION
+    ChangeEventAttributesImpactedResourcesItem:
+      description: A uniquely identified resource.
+      properties:
+        name:
+          description: The name of the impacted resource.
+          type: string
+        type:
+          $ref: '#/components/schemas/ChangeEventAttributesImpactedResourcesItemType'
+      type: object
+    ChangeEventAttributesImpactedResourcesItemType:
+      description: The type of the impacted resource.
+      enum:
+      - service
+      type: string
+      x-enum-varnames:
+      - SERVICE
     ChangeEventCustomAttributes:
       additionalProperties: false
       description: Change event attributes.
@@ -15069,6 +15261,44 @@ components:
       - USER_UPDATE
       - RECOMMENDATION
       - SNAPSHOT
+    EventSystemAttributes:
+      description: JSON object of event system attributes.
+      properties:
+        category:
+          $ref: '#/components/schemas/EventSystemAttributesCategory'
+        id:
+          description: Event identifier. This field is deprecated and will be removed
+            in a future version. Use the `uid` field instead.
+          type: string
+        integration_id:
+          $ref: '#/components/schemas/EventSystemAttributesIntegrationId'
+        source_id:
+          description: The source type ID of the event.
+          format: int64
+          type: integer
+        uid:
+          description: A unique identifier for the event. You can use this identifier
+            to query or reference the event.
+          type: string
+      type: object
+    EventSystemAttributesCategory:
+      description: Event category identifying the type of event.
+      enum:
+      - change
+      - alert
+      example: change
+      type: string
+      x-enum-varnames:
+      - CHANGE
+      - ALERT
+    EventSystemAttributesIntegrationId:
+      description: Integration ID sourced from integration manifests.
+      enum:
+      - custom-events
+      example: custom-events
+      type: string
+      x-enum-varnames:
+      - CUSTOM_EVENTS
     EventType:
       default: event
       description: Type of the event.
@@ -42255,6 +42485,70 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+    V2Event:
+      description: An event object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/V2EventAttributes'
+        id:
+          description: The event's ID.
+          example: ''
+          type: string
+        type:
+          description: Entity type.
+          example: event
+          type: string
+      type: object
+    V2EventAggregationKey:
+      description: Aggregation key of the event.
+      example: aggregation-key
+      type: string
+    V2EventAttributes:
+      description: Event attributes.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/V2EventAttributesAttributes'
+        message:
+          description: Free-form text associated with the event.
+          example: The event message
+          type: string
+        tags:
+          description: A list of tags associated with the event.
+          example:
+          - env:api_client_test
+          items:
+            description: A tag.
+            type: string
+          type: array
+        timestamp:
+          description: Timestamp when the event occurred.
+          example: '2017-01-15T01:30:15.010000Z'
+          type: string
+      type: object
+    V2EventAttributesAttributes:
+      description: JSON object for category-specific attributes.
+      oneOf:
+      - $ref: '#/components/schemas/ChangeEventAttributes'
+      - $ref: '#/components/schemas/AlertEventAttributes'
+    V2EventResponse:
+      description: Get an event response.
+      properties:
+        data:
+          $ref: '#/components/schemas/V2Event'
+      type: object
+    V2EventService:
+      description: Service that triggered the event.
+      example: service-name
+      type: string
+    V2EventTimestamp:
+      description: POSIX timestamp of the event.
+      example: 175019386627
+      format: int64
+      type: integer
+    V2EventTitle:
+      description: The title of the event.
+      example: The event title
+      type: string
     ValidationError:
       description: Represents a single validation error, including a human-readable
         title and metadata.
@@ -43057,9 +43351,6 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
-            appsec_vm_read: View infrastructure, application code, and library vulnerabilities.
-              This does not restrict API or inventory SQL access to the vulnerability
-              data source.
             billing_read: View your organization's billing information.
             cases_read: View Cases.
             cases_write: Create and update cases.
@@ -43074,6 +43365,8 @@ components:
             code_analysis_read: View Code Analysis.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
+            coterm_read: Read terminal recordings.
+            coterm_write: Write terminal recordings.
             create_webhooks: Create webhooks integrations.
             dashboards_embed_share: Create, modify, and delete shared dashboards with
               share type 'embed'.
@@ -43095,7 +43388,6 @@ components:
             incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
-            monitor_config_policy_write: Edit and delete monitor configuration.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in
               an organization. Mute and unmute monitors. The ability to write monitors
               is not required to set downtimes.
@@ -43111,10 +43403,6 @@ components:
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View a list of findings that include
               both misconfigurations and identity risks.
-            security_monitoring_notification_profiles_read: View Rule Security Notification
-              rules.
-            security_monitoring_notification_profiles_write: Create, edit, and delete
-              Security Notification rules.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
@@ -49915,9 +50203,7 @@ paths:
         for more details.\n\n\u274C For use cases involving other event categories,
         use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).\n\n\u274C
         Notifications are not yet supported for events sent to this endpoint. Use
-        the V1 endpoint for notification functionality.\n\n\u274C This endpoint is
-        not available for the Government (US1-FED) site. Contact your account representative
-        for more information."
+        the V1 endpoint for notification functionality."
       operationId: CreateEvent
       requestBody:
         content:
@@ -50079,6 +50365,49 @@ paths:
         type: safe
     x-merge-override:
       post: false
+  /api/v2/events/{event_id}:
+    get:
+      description: Get the details of an event by `event_id`.
+      operationId: GetEvent
+      parameters:
+      - description: The UID of the event.
+        in: path
+        name: event_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2EventResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - events_read
+      summary: Get an event
+      tags:
+      - Events
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - events_read
+      x-undo:
+        type: safe
   /api/v2/incidents:
     get:
       description: Get all incidents for the user's organization.
@@ -55988,8 +56317,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Create a monitor notification rule
       tags:
       - Monitors
@@ -56045,8 +56372,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Delete a monitor notification rule
       tags:
       - Monitors
@@ -56160,8 +56485,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Update a monitor notification rule
       tags:
       - Monitors
@@ -56464,8 +56787,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Create a monitor user template
       tags:
       - Monitors
@@ -56516,8 +56837,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Validate a monitor user template
       tags:
       - Monitors
@@ -56552,8 +56871,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Delete a monitor user template
       tags:
       - Monitors
@@ -56651,8 +56968,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Update a monitor user template to a new version
       tags:
       - Monitors
@@ -56701,8 +57016,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Validate an existing monitor user template
       tags:
       - Monitors
@@ -56981,13 +57294,13 @@ paths:
         schema:
           type: string
       - description: The number of connections to be returned. The maximum value is
-          5000.
+          7500.
         in: query
         name: limit
         schema:
           default: 100
           format: int32
-          maximum: 5000
+          maximum: 7500
           minimum: 1
           type: integer
       responses:
@@ -62408,8 +62721,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - appsec_vm_read
       summary: List vulnerable assets
       tags:
       - Security Monitoring
@@ -62573,8 +62884,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - appsec_vm_read
       summary: List assets SBOMs
       tags:
       - Security Monitoring
@@ -62644,8 +62953,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - appsec_vm_read
       summary: Get SBOM
       tags:
       - Security Monitoring
@@ -62669,8 +62976,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_read
       summary: Get the list of signal-based notification rules
       tags:
       - Security Monitoring
@@ -62714,8 +63019,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_write
       summary: Create a new signal-based notification rule
       tags:
       - Security Monitoring
@@ -62765,8 +63068,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_write
       summary: Delete a signal-based notification rule
       tags:
       - Security Monitoring
@@ -62805,8 +63106,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_read
       summary: Get details of a signal-based notification rule
       tags:
       - Security Monitoring
@@ -62854,8 +63153,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_write
       summary: Patch a signal-based notification rule
       tags:
       - Security Monitoring
@@ -63254,8 +63551,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - appsec_vm_read
       summary: List vulnerabilities
       tags:
       - Security Monitoring
@@ -63279,8 +63574,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_read
       summary: Get the list of vulnerability notification rules
       tags:
       - Security Monitoring
@@ -63324,8 +63617,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_write
       summary: Create a new vulnerability-based notification rule
       tags:
       - Security Monitoring
@@ -63375,8 +63666,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_write
       summary: Delete a vulnerability-based notification rule
       tags:
       - Security Monitoring
@@ -63415,8 +63704,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_read
       summary: Get details of a vulnerability notification rule
       tags:
       - Security Monitoring
@@ -63464,8 +63751,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_write
       summary: Patch a vulnerability-based notification rule
       tags:
       - Security Monitoring
