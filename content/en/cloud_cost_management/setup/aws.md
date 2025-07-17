@@ -62,7 +62,7 @@ Enter the following details for your Cost and Usage Report:
 
 **Notes**:
 - These values either locate your existing Cost and Usage Report, or define the settings for newly created resources.
-- It may take between 48 and 72 hours for all available data to populate in your Datadog organization after a complete Cost and Usage Report is generated. If 62 hours have passed and the data has still not yet populated, contact [Datadog Support][18].
+- It may take between 48 and 72 hours for all available data to populate in your Datadog organization after a complete Cost and Usage Report is generated. If 72 hours have passed and the data has still not yet populated, contact [Datadog Support][18].
 
 [100]: https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html
 
@@ -173,7 +173,7 @@ Attach the new S3 policy to the Datadog integration role.
 4. Enter the name of the S3 bucket policy created above.
 5. Click **Attach policy**.
 
-**Note**: It may take between 48 and 72 hours for all available data to populate in your Datadog organization after a complete Cost and Usage Report is generated. If 62 hours have passed and the data has still not yet populated, contact [Datadog Support][18].
+**Note**: It may take between 48 and 72 hours for all available data to populate in your Datadog organization after a complete Cost and Usage Report is generated. If 72 hours have passed and the data has still not yet populated, contact [Datadog Support][18].
 
 [201]: https://docs.aws.amazon.com/cur/latest/userguide/dataexports-create-legacy.html
 [204]: https://docs.aws.amazon.com/cur/latest/userguide/dataexports-view.html
