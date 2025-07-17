@@ -26112,6 +26112,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - dashboards_public_share
+      - AuthZ:
+        - dashboards_embed_share
+      - AuthZ:
+        - dashboards_invite_share
       summary: Create a shared dashboard
       tags:
       - Dashboards
@@ -26130,6 +26134,8 @@ paths:
         operator: OR
         permissions:
         - dashboards_public_share
+        - dashboards_embed_share
+        - dashboards_invite_share
       x-undo:
         operationId: DeletePublicDashboard
         parameters:
@@ -26174,6 +26180,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - dashboards_public_share
+      - AuthZ:
+        - dashboards_embed_share
+      - AuthZ:
+        - dashboards_invite_share
       summary: Revoke a shared dashboard URL
       tags:
       - Dashboards
@@ -26182,6 +26192,8 @@ paths:
         operator: OR
         permissions:
         - dashboards_public_share
+        - dashboards_embed_share
+        - dashboards_invite_share
       x-undo:
         type: idempotent
     get:
@@ -26297,6 +26309,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - dashboards_public_share
+      - AuthZ:
+        - dashboards_embed_share
+      - AuthZ:
+        - dashboards_invite_share
       summary: Update a shared dashboard
       tags:
       - Dashboards
@@ -26306,6 +26322,8 @@ paths:
         operator: OR
         permissions:
         - dashboards_public_share
+        - dashboards_embed_share
+        - dashboards_invite_share
       x-undo:
         type: idempotent
   /api/v1/dashboard/public/{token}/invitation:
@@ -26355,7 +26373,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - dashboards_public_share
+        - dashboards_invite_share
       summary: Revoke shared dashboard invitations
       tags:
       - Dashboards
@@ -26364,7 +26382,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - dashboards_invite_share
       x-undo:
         type: idempotent
     get:
@@ -26417,7 +26435,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - dashboards_public_share
+        - dashboards_invite_share
       summary: Get all invitations for a shared dashboard
       tags:
       - Dashboards
@@ -26425,7 +26443,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - dashboards_invite_share
       x-undo:
         type: safe
     post:
@@ -26485,7 +26503,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - dashboards_public_share
+        - dashboards_invite_share
       summary: Send shared dashboard invitation email
       tags:
       - Dashboards
@@ -26503,7 +26521,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - dashboards_invite_share
       x-undo:
         operationId: DeletePublicDashboardInvitation
         parameters:
