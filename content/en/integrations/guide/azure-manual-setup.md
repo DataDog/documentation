@@ -164,8 +164,6 @@ azure role assignment create --objectId <OBJECT_ID> -o "Monitoring Reader" -c /s
 {{< tabs >}}
 {{% tab "ARM template" %}}
 
-<div class="alert alert-danger">The Azure Portal method of adding an app registration cannot be completed at the moment. This is due to an Azure change that is being investigated. Use other methods on this page until further notice.</div>
-
 1. In the Azure integration tile, select **Configuration** > **New App Registration** > **Using Azure Portal**.
 
 2. Select **Management Group (Auto-Discover)** or **Individual Subscriptions**.
