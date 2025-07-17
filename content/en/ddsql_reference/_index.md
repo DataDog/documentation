@@ -462,36 +462,11 @@ Querying Logs and Metrics through DDSQL is in Preview. Use this form to request 
 
 Table functions are used to query Logs and Metrics
 
-| Function      | Description                                                                                  | Example                                                                                                  |
-|---------------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| `dd.logs(
-  filter => varchar,
-  columns => array < varchar >,
-  indexes ? => array < varchar >,
-  from_timestamp ? => timestamp,
-  to_timestamp ? => timestamp
-) AS (column_name type [, ...])`<br> | Returns log data as a table. The columns parameter specifies which log fields to extract, and the AS clause defines the schema of the returned table. Optional: filtering by index or time range. When time isn’t specified, we default to the past 1 hour of data. | {{< code-block lang="sql" >}}SELECT timestamp, host, service, message
-FROM dd.logs(
-    filter  => 'source:java',
-    columns => ARRAY['timestamp','host',
-'service','message']
-) AS (
-    timestamp TIMESTAMP,
-    host      VARCHAR,
-    service   VARCHAR,
-    message   VARCHAR
-) {{< /code-block >}} |
-| `dd.metric_scalar(
-  query varchar,
-  reducer varchar [, from_timestamp timestamp, to_timestamp timestamp]
-)`<br> | Returns metric data as a scalar value. The function accepts a metrics query (with optional grouping), a reducer to determine how values are aggregated (avg, max, etc.), and optional timestamp parameters (default 1 hour) to define the time range. | {{< code-block lang="sql" >}}SELECT *
-FROM dd.metric_scalar(
-    'avg:system.cpu.user{*} by {service}',
-    'avg',
-    TIMESTAMP '2025-07-10 00:00:00.000-04:00',
-    TIMESTAMP '2025-07-17 00:00:00.000-04:00'
-  )
-ORDER BY value DESC; {{< /code-block >}} |
+| Function | Description | Example |
+|----------|-------------|---------|
+| {{< code-block lang="sql" >}}dd.logs(<br>&nbsp;&nbsp;filter => varchar,<br>&nbsp;&nbsp;columns => array &lt; varchar &gt;,<br>&nbsp;&nbsp;indexes ? => array &lt; varchar &gt;,<br>&nbsp;&nbsp;from_timestamp ? => timestamp,<br>&nbsp;&nbsp;to_timestamp ? => timestamp<br>) AS (column_name type [, ...]){{< /code-block >}} | Returns log data as a table. The `columns` parameter specifies which log fields to extract, and the `AS` clause defines the schema of the returned table. Optional: filtering by index or time range. When time isn’t specified, it defaults to the past 1 hour of data. | {{< code-block lang="sql" >}}SELECT timestamp, host, service, message<br>FROM dd.logs(<br>&nbsp;&nbsp;filter  => 'source:java',<br>&nbsp;&nbsp;columns => ARRAY['timestamp','host','service','message']<br>) AS (<br>&nbsp;&nbsp;timestamp TIMESTAMP,<br>&nbsp;&nbsp;host      VARCHAR,<br>&nbsp;&nbsp;service   VARCHAR,<br>&nbsp;&nbsp;message   VARCHAR<br>){{< /code-block >}} |
+| {{< code-block lang="sql" >}}dd.metric_scalar(<br>&nbsp;&nbsp;query varchar,<br>&nbsp;&nbsp;reducer varchar [, from_timestamp timestamp, to_timestamp timestamp]<br>){{< /code-block >}} | Returns metric data as a scalar value. The function accepts a metrics query (with optional grouping), a reducer to determine how values are aggregated (`avg`, `max`, etc.), and optional timestamp parameters (default 1 hour) to define the time range. | {{< code-block lang="sql" >}}SELECT *<br>FROM dd.metric_scalar(<br>&nbsp;&nbsp;'avg:system.cpu.user{*} by {service}',<br>&nbsp;&nbsp;'avg',<br>&nbsp;&nbsp;TIMESTAMP '2025-07-10 00:00:00.000-04:00',<br>&nbsp;&nbsp;TIMESTAMP '2025-07-17 00:00:00.000-04:00'<br>)<br>ORDER BY value DESC;{{< /code-block >}} |
+
 
 ## Tags
 
