@@ -1,6 +1,8 @@
 ---
 title: Security Operational Metrics
 disable_toc: false
+aliases:
+  - /security/cloud_siem/security_operational_metrics
 further_reading:
 - link: "security/cloud_siem/investigate_security_signals"
   tag: "Documentation"
