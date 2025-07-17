@@ -6021,6 +6021,11 @@ menu:
       parent: cloud_siem
       identifier: siem_guides
       weight: 11
+    - name: Data Security
+      url: data_security/cloud_siem/
+      parent: cloud_siem
+      identifier: siem_data_security
+      weight: 12
     - name: Cloud Security
       url: security/cloud_security_management
       parent: security_platform_heading
@@ -7925,46 +7930,51 @@ menu:
       url: data_security/agent/
       parent: data_security
       weight: 1
-    - name: Tracing
-      identifier: data_security_tracing
-      url: /tracing/configure_data_security/
+    - name: Cloud SIEM
+      identifier: data_security_cloud_siem
+      url: data_security/cloud_siem/
       parent: data_security
       weight: 2
-    - name: Log Management
-      identifier: data_security_log_management
-      url: data_security/logs/
-      parent: data_security
-      weight: 3
     - name: Kubernetes
       identifier: data_security_kubernetes
       url: data_security/kubernetes
       parent: data_security
       weight: 4
-    - name: Synthetic Monitoring
-      identifier: data_security_synthetic_monitoring
-      url: data_security/synthetics/
+    - name: Log Management
+      identifier: data_security_log_management
+      url: data_security/logs/
       parent: data_security
-      weight: 5
+      weight: 4
     - name: Real User Monitoring
       identifier: data_security_real_user_monitoring
       url: data_security/real_user_monitoring/
       parent: data_security
+      weight: 5
+    - name: Synthetic Monitoring
+      identifier: data_security_synthetic_monitoring
+      url: data_security/synthetics/
+      parent: data_security
       weight: 6
+    - name: Tracing
+      identifier: data_security_tracing
+      url: /tracing/configure_data_security/
+      parent: data_security
+      weight: 7
     - name: PCI Compliance
       identifier: data_security_pci_compliance
       url: data_security/pci_compliance/
       parent: data_security
-      weight: 7
+      weight: 8
     - name: HIPAA Compliance
       identifier: data_security_hipaa_compliance
       url: data_security/hipaa_compliance/
       parent: data_security
-      weight: 8
+      weight: 9
     - name: Data Retention Periods
       identifier: data_retention_periods
       url: data_security/data_retention_periods/
       parent: data_security
-      weight: 9
+      weight: 10
     - name: Guides
       identifier: data_security_guide
       url: data_security/guide/
