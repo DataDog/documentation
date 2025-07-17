@@ -312,7 +312,7 @@ After setting up PrivateLink, to verify that data is getting sent using PrivateL
 dig http-intake.logs.datadoghq.com
 ```
 
-If logs are being sent over PrivateLink, the `ANSWER Section` section of the output shows `http-intake.logs.datadoghq.com` like in the following example. **Note**: The IP addresses you see are going to be different.
+If logs are being sent over PrivateLink, the `ANSWER Section` section of the output shows `http-intake.logs.datadoghq.com` like in the following example. **Note**: The IP addresses you get back should be in [private IP space][1].
 
 ```
 ;; ANSWER SECTION:
@@ -336,3 +336,5 @@ l4-logs-http-s1-e721f9c2a0e65948.elb.us-east-1.amazonaws.com. 42 IN A 3.233.158.
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://en.wikipedia.org/wiki/Private_network#Private_IPv4_addresses
