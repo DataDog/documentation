@@ -43,11 +43,10 @@ The instrumenter must be deployed to every region and account where you want to 
 
 1. Confirm your function selections. You can also set the layer version, which is used for all future instrumentation. This version remains fixed until you manually update it. Updates can take a few minutes to be applied.
 
-## Skipped Functions
-Datadog recommends that you only instrument Lambda functions with a memory size greater than 256 MB. If you are comfortable with adding layers to smaller lambdas, you can change the setting in the Cloudformation template. 
+## Skipped functions
+Datadog recommends that you only instrument Lambda functions with a memory size greater than 256 MB. If you are comfortable with adding layers to smaller Lambdas, you can change the setting in the CloudFormation template. 
 
-The remote instrumenter will also mark functions that have at least one layer with the tag 'manual' and skip instrumentation to ensure there are no layer conflicts. 
-<
+The remote instrumenter also marks functions that have at least one layer with the tag `manual` and skips instrumentation to ensure there are no layer conflicts. 
 
 ## Verification
 
