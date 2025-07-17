@@ -1,38 +1,52 @@
 {{/*  
-    Uses the "products" frontmatter (list)
+    Displays a list of products related to the current page. Use the "names" parameter to specify and show a subset of products.
 
-    *FORMAT* 
-    products: 
-    - name: "Product Name 1"
-      url: "/product-path1"
-      icon: "product-icon-name1"
-    - name: "Product Name 2"
-      url: "/product-path2"
-      icon: "product-icon-name2"
+    @param products: array.<{name:string, url:string, icon:string}> - (frontmatter data) list of products.
+      - name: name of product. should be unique to the array.
+      - url: path to product documentation
+      - icon: icon name from our iconfont (websites-modules)
+    @param names: str - (named parameter) a comma-separated list of product names. Each name must match a product in the products list. Do not include spaces between names.
 
     *EXAMPLE*
-    products:
-    - name: Cloud SIEM
-      url: /security/cloud_siem/
-      icon: siem
-    - name: CSM Threats
-      url: /security/threats/
-      icon: cloud-security-management
+      products:
+      - name: Cloud SIEM
+        url: /security/cloud_siem/
+        icon: siem
+      - name: Workload Protection
+        url: /security/threats/
+        icon: cloud-security-management
+      - name: DDSQL Editor
+        url: /ddsql_editor/
+        icon: ddsql
+
+      {{< product-availability >}} <-- shows all products
+      OR
+      {{< product-availability names="Cloud SIEM,DDSQL Editor" >}} <-- only shows 2 of the 3 products
+
 */}}
+
+{{ $products := .Page.Params.products }}
+{{ $names := .Get "names" }}
+
+{{ if $names }}
+  {{/*  if subset of products is requested  */}}
+  {{ $products = where $products "name" "in" (split $names ",") }}
+{{ end }}
+
+{{ $len := len $products }}
 
 <div class="product-availability container mb-3 p-0">
     <div class="d-flex">
         <strong class="p-0">{{ i18n "available_for"}}:</strong>
-        <p class="mb-0 p-0">
-            {{ $len := len .Page.Params.products}}
-            {{ range $idx, $product := .Page.Params.products }}
+        <p class="mb-0 p-0 d-flex flex-wrap">
+            {{ range $idx, $product := $products }}
                 <span class="product-wrapper">
                     <span class="product position-relative">
                         {{ partial "icon" (dict "name" $product.icon "size" "14px")}}
                         <span>{{$product.name}}</span>
-                        <a class="border border-0 stretched-link" href="{{$product.url}}"></a>
+                        <a class="border-0 stretched-link" href="{{$product.url}}"></a>
                     </span>
-                    <span>{{ if ne $idx (sub $len 1) }}|{{ end }}</span>
+                    <span class="separator">{{ if ne $idx (sub $len 1) }}|{{ end }}</span>
                 </span>
             {{ end }}
         </p>

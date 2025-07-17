@@ -72,41 +72,13 @@ DDRUMMonitor *rum = [DDRUMMonitor shared];
 {{% /tab %}}
 {{< /tabs >}}
 
-For more details and available options, filter the [relevant file on GitHub][9] for the `DDRUMMonitor` class.
-
-### Add your own performance timing
-
-In addition to RUM's default attributes, you can measure where your application is spending its time by using the `addTiming(name:)` API. The timing measure is relative to the start of the current RUM view.
-
-For example, you can time how long it takes for your hero image to appear:
-
-{{< tabs >}}
-{{% tab "Swift" %}}
-```swift
-func onHeroImageLoaded() {
-    let rum = RUMMonitor.shared()
-    rum.addTiming(name: "hero_image")
-}
-```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
-```objective-c
-- (void)onHeroImageLoad {
-    [[DDRUMMonitor shared] addTimingWithName:@"hero_image"];
-}
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-Once you set the timing, it is accessible as `@view.custom_timings.<timing_name>`. For example, `@view.custom_timings.hero_image`.
-
-To create visualizations in your dashboards, [create a measure][4] first.
+For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
 ### Custom Actions
 
 In addition to [tracking actions automatically](#automatically-track-user-actions), you can track specific custom user actions (taps, clicks, and scrolls) with the `addAction(type:name:)` API.
 
-To manually register instantaneous RUM actions such as `.tap` on `RUMMonitor.shared()`, use `.addAction(type:name:)`. For continuous RUM actions such as `.scroll`, use `.startAction(type:name:)` or `.stopAction(type:name:)`.
+To manually register instantaneous RUM actions such as `.tap` on `RUMMonitor.shared()`, use `.addAction(type:name:)`. For continuous RUM actions such as `.scroll`, use `.startAction(type:name:)` or `.stopAction(type:)`.
 
 For example:
 
@@ -137,9 +109,9 @@ let rum = RUMMonitor.shared()
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: When using `.startAction(type:name:)` and `.stopAction(type:name:)`, the action `type` must be the same. This is necessary for the RUM iOS SDK to match an action start with its completion.
+**Note**: When using `.startAction(type:name:)` and `.stopAction(type:)`, the action `type` must be the same. This is necessary for the RUM iOS SDK to match an action start with its completion.
 
-Find more details and available options in the [`DDRUMMonitor` class][9].
+For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
 ### Custom Resources
 
@@ -189,11 +161,14 @@ rum.stopResource(
 
 **Note**: The `String` used for `resourceKey` in both calls must be unique for the resource you are calling. This is necessary for the RUM iOS SDK to match a resource's start with its completion.
 
-Find more details and available options in the [`DDRUMMonitor` class][9].
+For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
 ### Custom Errors
 
-To track specific errors, notify `RUMMonitor` when an error occurs with the message, source, exception, and additional attributes. Refer to the [Error Attributes documentation][5].
+To track specific errors, notify `RUMMonitor.shared()` when an error occurs using one of following methods:
+
+- `.addError(message:)`
+- `.addError(error:)`
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -209,13 +184,15 @@ rum.addError(message: "error message.")
 {{% /tab %}}
 {{< /tabs >}}
 
-For more details and available options, refer to the code documentation comments in the [`DDRUMMonitor` class][9].
+For more details and available options, see [`RUMMonitorProtocol` in GitHub][4] and the [Error Attributes documentation][5].
 
 ## Track custom global attributes
 
-In addition to the [default RUM attributes][7] captured by the RUM iOS SDK automatically, you can choose to add additional contextual information (such as custom attributes) to your RUM events to enrich your observability within Datadog.
+In addition to the [default RUM attributes][6] captured by the RUM iOS SDK automatically, you can choose to add additional contextual information (such as custom attributes) to your RUM events to enrich your observability within Datadog.
 
 Custom attributes allow you to filter and group information about observed user behavior (such as the cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, and network health).
+
+<div class="alert alert-info">Custom attributes are intended for small, targeted pieces of information (e.g., IDs, flags, or short labels). Avoid attaching large objects such as full HTTP response payloads. This can significantly increase event size and impact performance.</div>
 
 ### Set a custom global attribute
 
@@ -224,6 +201,8 @@ To set a custom global attribute, use `RUMMonitor.shared().addAttribute(forKey:v
 * To add an attribute, use `RUMMonitor.shared().addAttribute(forKey: "<KEY>", value: "<VALUE>")`.
 * To update the value, use `RUMMonitor.shared().addAttribute(forKey: "<KEY>", value: "<UPDATED_VALUE>")`.
 * To remove the key, use `RUMMonitor.shared().removeAttribute(forKey: "<KEY_TO_REMOVE>")`.
+
+For better performance in bulk operations (modifying multiple attributes at once), use `.addAttributes(_:)` and `.removeAttributes(forKeys:)`.
 
 **Note**: You can't create facets on custom attributes if you use spaces or special characters in your key names. For example, use `forKey: "store_id"` instead of `forKey: "Store ID"`.
 
@@ -237,21 +216,21 @@ Adding user information to your RUM sessions makes it easy to:
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI" >}}
 
-The following attributes are **optional**, you should provide **at least one** of them:
+| Attribute   | Type   | Description                                                                     |
+| ----------- | ------ | ------------------------------------------------------------------------------- |
+| `usr.id`    | String | (Required) Unique user identifier.                                              |
+| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
+| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
 
-| Attribute   | Type   | Description                                                                                              |
-|-------------|--------|----------------------------------------------------------------------------------------------------------|
-| `usr.email` | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
-| `usr.id`    | String | Unique user identifier.                                                                                  |
-| `usr.name`  | String | User friendly name, displayed by default in the RUM UI.                                                  
-
-To identify user sessions, use the `setUserInfo(id:name:email:)` API.
+To identify user sessions, use the `Datadog.setUserInfo(id:name:email:)` API.
 
 For example:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
+import DatadogCore
+
 Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
 ```
 {{% /tab %}}
@@ -261,6 +240,26 @@ Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+## Track background events
+
+<div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
+</div>
+
+You can track events such as crashes and network requests when your application is in the background (for example, no active view is available).
+
+To track background events, add the following snippet during initialization in your Datadog configuration:
+
+```swift
+import DatadogRUM
+
+RUM.enable(
+  with: RUM.Configuration(
+    ...
+    trackBackgroundEvents: true
+  )
+)
+```
 
 ## Initialization Parameters
 
@@ -288,7 +287,7 @@ You can use the following properties in `Datadog.Configuration` when creating th
 : A proxy configuration attribute which can be used to enable a custom proxy for uploading tracked data to Datadog's intake.
 
 `serverDateProvider`
-: A custom NTP synchronization interface. By default, the Datadog SDK synchronizes with dedicated NTP pools provided by the [NTP Pool Project][13]. Using different pools or setting a no operation `ServerDateProvider` implementation results in a de-synchronization of the SDK instance and the Datadog servers. This can lead to significant time shifts in RUM sessions or distributed traces.
+: A custom NTP synchronization interface. By default, the Datadog SDK synchronizes with dedicated NTP pools provided by the [NTP Pool Project][7]. Using different pools or setting a no operation `ServerDateProvider` implementation results in a de-synchronization of the SDK instance and the Datadog servers. This can lead to significant time shifts in RUM sessions or distributed traces.
 
 `service`
 : The service name associated with data sent to Datadog. The default value is the application bundle identifier.
@@ -307,7 +306,7 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 : Sets the data scrubbing callback for actions. This can be used to modify or drop action events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
 
 `appHangThreshold`
-: Sets the threshold for reporting when an app hangs. The minimum allowed value for this option is `0.1` seconds. To disable reporting, set this value to `nil`. For more information, see [Add app hang reporting][10].
+: Sets the threshold for reporting when an app hangs. The minimum allowed value for this option is `0.1` seconds. To disable reporting, set this value to `nil`. For more information, see [Add app hang reporting][8].
 
 `applicationID`
 : The RUM application identifier.
@@ -324,6 +323,12 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 `longTaskThreshold`
 : The threshold for RUM long tasks tracking (in seconds). By default, this is sent to `0.1` seconds.
 
+`networkSettledResourcePredicate`
+: The predicate used to classify "initial" resources for the Time-to-Network-Settled (TNS) view timing calculation.
+
+`nextViewActionPredicate`
+: The predicate used to classify the "last" action for the Interaction-to-Next-View (INV) timing calculation.
+
 `onSessionStart`
 : (Optional) The method that gets called when RUM starts the session.
 
@@ -335,6 +340,9 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 
 `telemetrySampleRate`
 : The sampling rate for the SDK internal telemetry utilized by Datadog. This rate controls the number of requests reported to the tracing system. This must be a value between `0` and `100`. By default, this is set to `20`.
+
+`trackAnonymousUser`
+: When enabled, the SDK generates a unique, non-personal anonymous user ID that is persisted across app launches. This ID will be attached to each RUM Session, allowing you to link sessions originating from the same user/device without collecting personal data. By default, this is set to `true`.
 
 `trackFrustrations`
 : Determines whether automatic tracking of user frustrations is enabled. By default, this is set to `true`.
@@ -362,6 +370,10 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 
 ### Automatically track views
 
+You can automatically track views with UIKit and SwiftUI.
+
+{{% collapse-content title="UIKit" level="h4" expanded=true id="auto-track-views-uikit" %}}
+
 To automatically track views (`UIViewControllers`), use the `uiKitViewsPredicate` option when enabling RUM. By default, views are named with the view controller's class name. To customize it, provide your own implementation of the `predicate` which conforms to `UIKitRUMViewsPredicate` protocol:
 
 {{< tabs >}}
@@ -382,7 +394,7 @@ public protocol DDUIKitRUMViewsPredicate: AnyObject {
 {{% /tab %}}
 {{< /tabs >}}
 
-Inside the `rumView(for:)` implementation, your app should decide if a given `UIViewController` instance should start the RUM view (return value) or not (return `nil`). The returned `RUMView` value must specify the `name` and may provide additional `attributes` for the created RUM view.
+Inside the `rumView(for:)` implementation, your app should decide if a given `UIViewController` instance should start a RUM view (return a value) or not (return `nil`). The returned `RUMView` value must specify the `name` and may provide additional `attributes` for the created RUM view.
 
 For instance, you can configure the predicate to use explicit type check for each view controller in your app:
 
@@ -466,11 +478,136 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: The RUM iOS SDK calls `rumView(for:)` many times while your app is running. It is recommended to keep its implementation fast and single-threaded.
+**Note**: The RUM iOS SDK calls `rumView(for:)` many times while your app is running. Datadog recommends keeping its implementation fast and single-threaded.
+{{% /collapse-content %}}
+
+{{% collapse-content title="SwiftUI" level="h4" expanded=true id="auto-track-views-swiftui" %}}
+
+To automatically track views with SwiftUI, use the `swiftUIViewsPredicate` option when enabling RUM.
+
+The mechanism to extract a SwiftUI view name relies on reflection. As a result, view names may not always be meaningful. If a meaningful name cannot be extracted, a generic name such as `AutoTracked_HostingController_Fallback` or `AutoTracked_NavigationStackController_Fallback` is used.
+
+You can use the default predicate (`DefaultSwiftUIRUMViewsPredicate`) or provide your own implementation of the `SwiftUIRUMViewsPredicate` protocol to customize or filter view names.
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+public protocol SwiftUIRUMViewsPredicate {
+    func rumView(for extractedViewName: String) -> RUMView?
+}
+
+// Example: Custom predicate to ignore fallback names and rename views
+class CustomSwiftUIPredicate: SwiftUIRUMViewsPredicate {
+    func rumView(for extractedViewName: String) -> RUMView? {
+        if extractedViewName == "AutoTracked_HostingController_Fallback" ||
+           extractedViewName == "AutoTracked_NavigationStackController_Fallback" {
+            return nil // Ignore fallback names
+        }
+        if extractedViewName == "MySpecialView" {
+            return RUMView(name: "Special")
+        }
+        return RUMView(name: extractedViewName)
+    }
+}
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+@protocol DDSwiftUIRUMViewsPredicate <NSObject>
+- (DDRUMView * _Nullable)rumViewFor:(NSString * _Nonnull)extractedViewName;
+@end
+
+@interface CustomSwiftUIPredicate : NSObject <DDSwiftUIRUMViewsPredicate>
+@end
+
+@implementation CustomSwiftUIPredicate
+- (DDRUMView * _Nullable)rumViewFor:(NSString * _Nonnull)extractedViewName {
+    if ([extractedViewName isEqualToString:@"AutoTracked_HostingController_Fallback"] ||
+        [extractedViewName isEqualToString:@"AutoTracked_NavigationStackController_Fallback"]) {
+        return nil; // Ignore fallback names
+    }
+    if ([extractedViewName isEqualToString:@"MySpecialView"]) {
+        return [[DDRUMView alloc] initWithName:@"Special" attributes:@{}];
+    }
+    return [[DDRUMView alloc] initWithName:extractedViewName attributes:@{}];
+}
+@end
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+**Notes:**
+- Datadog recommends enabling UIKit view tracking as well, even if your app is built entirely with SwiftUI.
+- Tab bars are not tracked automatically. Use [manual tracking](#custom-views) for each tab view to ensure they are tracked.
+- If you use both automatic and manual tracking, you may see duplicate events. To avoid this, rely on a single instrumentation method or use a custom predicate to filter out duplicates.
+{{% /collapse-content %}}
 
 ### Automatically track user actions
 
-To automatically track user tap actions, set the `uiKitActionsPredicate` option when enabling RUM.
+#### UIKit
+
+To automatically track user tap actions with UIKit, set the `uiKitActionsPredicate` option when enabling RUM.
+
+#### SwiftUI
+
+To automatically track user tap actions in SwiftUI, enable the `swiftUIActionsPredicate` option when enabling RUM.
+
+**Notes:**
+- Datadog recommends enabling UIKit action tracking as well even for pure SwiftUI apps as many interactive components are UIKit under the hood.
+- On tvOS, only press interactions on the remote are tracked. Only a UIKit predicate is needed for this. If you have a pure SwiftUI app but want to track remote presses on tvOS, you should also enable UIKit instrumentation.
+- The implementation differs between iOS 18+ and iOS 17 and below:
+  - **iOS 18 and above:** Most interactions are reliably tracked with correct component names (e.g., `SwiftUI_Button`, `SwiftUI_NavigationLink`).
+  - **iOS 17 and below:** The SDK cannot distinguish between interactive and non-interactive components (for example, Button vs. Label). For that reason, actions are reported as `SwiftUI_Unidentified_Element`.
+- You can use the default predicate, `DefaultSwiftUIRUMActionsPredicate`, or provide your own to filter or rename actions. You can also disable legacy detection (iOS 17 and below) if you only want reliable iOS 18+ tracking:
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+// Use the default predicate by disabling iOS 17 and below detection
+let predicate = DefaultSwiftUIRUMActionsPredicate(isLegacyDetectionEnabled: false)
+
+// Use your own predicate
+class CustomSwiftUIActionsPredicate: SwiftUIRUMActionsPredicate {
+    func rumAction(for componentName: String) -> RUMAction? {
+        // Custom logic to filter or rename actions
+        return RUMAction(name: componentName)
+    }
+}
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+// Use the default predicate by disabling iOS 17 and below detection
+DDDefaultSwiftUIRUMActionsPredicate *swiftUIActionsPredicate = [[DDDefaultSwiftUIRUMActionsPredicate alloc] initWithIsLegacyDetectionEnabled:NO];
+
+// Use your own predicate
+@protocol DDSwiftUIRUMActionsPredicate <NSObject>
+- (DDRUMAction * _Nullable)rumActionFor:(NSString * _Nonnull)componentName;
+@end
+
+@interface CustomSwiftUIActionsPredicate : NSObject <DDSwiftUIRUMActionsPredicate>
+@end
+
+@implementation CustomSwiftUIActionsPredicate
+- (DDRUMAction * _Nullable)rumActionFor:(NSString * _Nonnull)componentName {
+    // Custom logic to filter or rename actions
+    return [[DDRUMAction alloc] initWithName:componentName attributes:@{}];
+}
+@end
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Action reporting by iOS version
+
+The table below shows how iOS 17 and iOS 18 report different user interactions.
+
+| **Component**    | **iOS 18 reported name**                          | **iOS 17 reported name**             |
+|------------------|---------------------------------------------------|--------------------------------------|
+| Button           | SwiftUI_Button                                    | SwiftUI_Unidentified_Element         |
+| NavigationLink   | NavigationLink                                    | SwiftUI_Unidentified_Element         |
+| Menu             | SwiftUI_Menu (and its items as _UIContextMenuCell)| SwiftUI_Menu (and its items as _UIContextMenuCell) |
+| Link             | SwiftUI_Button                                    | SwiftUI_Unidentified_Element         |
 
 ### Automatically track network requests
 
@@ -542,8 +679,8 @@ let session = URLSession(
 
 This tracks all requests sent with the instrumented `session`. Requests matching the `example.com` domain are marked as "first party" and tracing information is sent to your backend to [connect the RUM resource with its Trace][1].
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
 
+[1]: https://docs.datadoghq.com/real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
@@ -729,18 +866,19 @@ Returning `nil` from the error, resource, or action mapper drops the event entir
 
 Depending on the event's type, only some specific properties can be modified:
 
-| Event Type       | Attribute key                     | Description                             |
-|------------------|-----------------------------------|-----------------------------------------|
-| RUMActionEvent   | `RUMActionEvent.action.target?.name` | Name of the action.                      |
-|                  | `RUMActionEvent.view.url`            | URL of the view linked to this action.   |
-| RUMErrorEvent    | `RUMErrorEvent.error.message`        | Error message.                           |
-|                  | `RUMErrorEvent.error.stack`          | Stacktrace of the error.                 |
-|                  | `RUMErrorEvent.error.resource?.url`  | URL of the resource the error refers to. |
-|                  | `RUMErrorEvent.view.url`             | URL of the view linked to this error.    |
-| RUMResourceEvent | `RUMResourceEvent.resource.url`      | URL of the resource.                     |
-|                  | `RUMResourceEvent.view.url`          | URL of the view linked to this resource. |
-| RUMViewEvent     | `RUMViewEvent.view.name`             | Name of the view.                        |
-|                  | `RUMViewEvent.view.url`              | URL of the view.                         |
+| Event Type       | Attribute key                        | Description                                      |
+| ---------------- | ------------------------------------ | ------------------------------------------------ |
+| RUMActionEvent   | `RUMActionEvent.action.target?.name` | Name of the action.                              |
+|                  | `RUMActionEvent.view.url`            | URL of the view linked to this action.           |
+| RUMErrorEvent    | `RUMErrorEvent.error.message`        | Error message.                                   |
+|                  | `RUMErrorEvent.error.stack`          | Stacktrace of the error.                         |
+|                  | `RUMErrorEvent.error.resource?.url`  | URL of the resource the error refers to.         |
+|                  | `RUMErrorEvent.view.url`             | URL of the view linked to this error.            |
+| RUMResourceEvent | `RUMResourceEvent.resource.url`      | URL of the resource.                             |
+|                  | `RUMResourceEvent.view.url`          | URL of the view linked to this resource.         |
+| RUMViewEvent     | `RUMViewEvent.view.name`             | Name of the view.                                |
+|                  | `RUMViewEvent.view.url`              | URL of the view.                                 |
+|                  | `RUMViewEvent.view.referrer`         | URL that linked to the initial view of the page. |
 
 ## Retrieve the RUM session ID
 
@@ -773,69 +911,39 @@ For example, if the current tracking consent is `.pending`:
 
 ## Add user properties
 
-You can use the `addUserExtraInfo` API to append extra user properties to previously set properties.
+You can use the `Datadog.addUserExtraInfo(_:)` API to append extra user properties to previously set properties.
 
 ```swift
-   public static func addUserExtraInfo(
-       _ extraInfo: [AttributeKey: AttributeValue?],
-       in core: DatadogCoreProtocol = CoreRegistry.default
-   ) {
-       let core = core as? DatadogCore
-       core?.addUserExtraInfo(extraInfo)
-   }
+import DatadogCore
+
+Datadog.addUserExtraInfo(["company": "Foo"])
 ```
 
 ## Data management
 
-The iOS SDK first stores events locally and only uploads events when the [intake specifications][11] conditions are met.
+The iOS SDK first stores events locally and only uploads events when the [intake specifications][9] conditions are met.
 
 ### Clear all data
 
-You have the option of deleting all unsent data stored by the SDK with the `clearAllData` API.
+You have the option of deleting all unsent data stored by the SDK with the `Datadog.clearAllData()` API.
 
 ```swift
-   public static func clearAllData(in core: DatadogCoreProtocol = CoreRegistry.default) {
-       let core = core as? DatadogCore
-       core?.clearAllData()
-   }
+import DatadogCore
+
+Datadog.clearAllData()
 ```
 
 ### Stop data collection
 
-You can use the `StopInstance` API to stop a named SDK instance (or the default instance if the name is null) from collecting and uploading data further.
+You can use the `Datadog.stopInstance()` API to stop a named SDK instance (or the default instance if the name is `nil`) from collecting and uploading data further.
 
 ```swift
-   public static func stopInstance(named instanceName: String = CoreRegistry.defaultInstanceName) {
-       let core = CoreRegistry.unregisterInstance(named: instanceName) as? DatadogCore
-       core?.stop()
-   }
+import DatadogCore
+
+Datadog.stopInstance()
 ```
 
-### Set remote log threshold
-
-You can define the minimum log level (priority) at which to send events to Datadog in a logger instance. If the log's priority is below the one you set in this threshold, the log does not get sent. The default value is `debug` (send all logs).
-
-```swift
-public init(
-    service: String? = nil,
-    name: String? = nil,
-    networkInfoEnabled: Bool = false,
-    bundleWithRumEnabled: Bool = true,
-    bundleWithTraceEnabled: Bool = true,
-    remoteSampleRate: Float = 100,
-    remoteLogThreshold: LogLevel = .debug,
-    consoleLogFormat: ConsoleLogFormat? = nil
-) {
-    self.service = service
-    self.name = name
-    self.networkInfoEnabled = networkInfoEnabled
-    self.bundleWithRumEnabled = bundleWithRumEnabled
-    self.bundleWithTraceEnabled = bundleWithTraceEnabled
-    self.remoteSampleRate = remoteSampleRate
-    self.remoteLogThreshold = remoteLogThreshold
-    self.consoleLogFormat = consoleLogFormat
-}
-```
+Calling this method disables the SDK and all active features, such as RUM. To resume data collection, you must reinitialize the SDK. You can use this API if you want to change configurations dynamically
 
 ## Further Reading
 
@@ -844,12 +952,9 @@ public init(
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/mobile_and_tv_monitoring/ios
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/
-[4]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
+[4]: https://github.com/DataDog/dd-sdk-ios/blob/master/DatadogRUM/Sources/RUMMonitorProtocol.swift
 [5]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/?tab=error#error-attributes
-[6]: /real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/?tab=session#default-attributes
-[9]: https://github.com/DataDog/dd-sdk-ios/blob/56e972a6d3070279adbe01850f51cb8c0c929c52/DatadogObjc/Sources/RUM/RUM%2Bobjc.swift
-[10]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
-[11]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup
-[12]: https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411499-connectionproxydictionary
-[13]: https://www.ntppool.org/en/
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/?tab=session#default-attributes
+[7]: https://www.ntppool.org/en/
+[8]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup

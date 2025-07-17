@@ -40,7 +40,7 @@ draft: false
 git_integration_title: avi_vantage
 integration_id: avi-vantage
 integration_title: Avi Vantage
-integration_version: 5.1.0
+integration_version: 5.3.0
 is_public: true
 manifest_version: 2.0.0
 name: avi_vantage
@@ -98,7 +98,7 @@ No es necesaria ninguna instalación adicional en tu servidor.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "avi_vantage" >}}
+{{< get-metrics-from-git "avi-vantage" >}}
 
 
 ### Eventos

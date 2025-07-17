@@ -61,7 +61,7 @@ See [PCI DSS Compliance][1] for more information. To enable PCI compliance for A
 
 {{< /site-region >}}
 
-{{< site-region region="us3,us5,eu,gov,ap1" >}}
+{{< site-region region="us3,us5,eu,gov,ap1,ap2" >}}
 
 PCI DSS compliance for Log Management is not available for the {{< region-param key="dd_site_name" >}} site.
 
@@ -86,6 +86,6 @@ All log submission endpoints are encrypted. These legacy endpoints are still sup
 [4]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
 [5]: /logs/explorer/#share-views
 [6]: https://www.datadoghq.com/legal/hipaa-eligible-services/
-[7]: /sensitive_data_scanner/
+[7]: /security/sensitive_data_scanner/
 [8]: /observability_pipelines/processors/sensitive_data_scanner
 [9]: /observability_pipelines/

@@ -14,6 +14,10 @@ further_reading:
   text: "Learn about CI Monitors"
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/code-coverage/" >}}
+Datadog is building a new dedicated Code Coverage product. Sign up for the Preview!
+{{< /callout >}}
+
 ## Overview
 
 Code coverage is a measure of the total code coverage percentage that a module or session exercises.
@@ -294,8 +298,6 @@ This feature is enabled by default. Use `DD_CIVISIBILITY_SIMPLECOV_INSTRUMENTATI
 {{% /tab %}}
 
 {{% tab "Go" %}}
-
-<div class="alert alert-info">Test optimization for Go is in Preview.</div>
 
 ### Compatibility
 

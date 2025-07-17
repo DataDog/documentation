@@ -35,7 +35,7 @@ yarn add @datadog/mobile-react-navigation
 ```
 
 ### Rastrear la navegación de la vista
-Para realizar un rastreo de los cambios en la navegación como Vistas de RUM, configura la devolución de llamada `onready` de tu componente `NavigationContainer` como se indica a continuación. Puedes utilizar el parámetro opcional `ViewNamePredicate` para sustituir el nombre de la vista detectada automáticamente por algo más relevante para tu caso de uso.
+Para realizar un rastreo de los cambios en la navegación como Vistas de RUM, configura la devolución de llamada `onReady` de tu componente `NavigationContainer` como se indica a continuación. Puedes utilizar el parámetro opcional `ViewNamePredicate` para sustituir el nombre de la vista detectada automáticamente por algo más relevante para tu caso de uso.
 
 Si se vuelve a `null` en `ViewNamePredicate` se impide la creación de la nueva Vista de RUM. La vista de RUM anterior permanece activa.
 
@@ -124,12 +124,12 @@ Si inicializas tu `ApolloClient` con el parámetro `uri`, inicialízalo con un `
 ```javascript
 import { ApolloClient, HttpLink } from '@apollo/client';
 
-// antes
+// before
 const apolloClient = new ApolloClient({
     uri: 'https://my.api.com/graphql'
 });
 
-// después
+// after
 const apolloClient = new ApolloClient({
     link: new HttpLink({ uri: 'https://my.api.com/graphql' })
 });
@@ -146,7 +146,7 @@ import { DatadogLink } from '@datadog/mobile-react-native-apollo-client';
 const apolloClient = new ApolloClient({
     link: from([
         new DatadogLink(),
-        new HttpLink({ uri: 'https://my.api.com/graphql' }) // siempre en la última posición
+        new HttpLink({ uri: 'https://my.api.com/graphql' }) // always in last position
     ])
 });
 ```
@@ -168,7 +168,7 @@ const datadogConfiguration = new DatadogProviderConfiguration(
 );
 
 datadogConfiguration.resourceEventMapper = event => {
-    // Las variables se almacenan en event.context['_dd.graphql.variables'] como una cadena de JSON cuando está presente
+    // Variables are stored in event.context['_dd.graphql.variables'] as a JSON string when present
     if (event.context['_dd.graphql.variables']) {
         const variables = JSON.parse(event.context['_dd.graphql.variables']);
         if (variables.password) {

@@ -13,13 +13,10 @@ further_reading:
 - link: "/observability_pipelines/"
   tag: "Documentation"
   text: "Forward logs directly from your environment with Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/microsoft-sentinel-logs/"
+  tag: "Blog"
+  text: "Centrally process and govern your logs in Datadog before sending them to Microsoft Sentinel"
 ---
-
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">
-Log forwarding is not available for the Government site. Contact your account representative for more information.
-</div>
-{{% /site-region %}}
 
 ## Overview
 
@@ -89,8 +86,6 @@ The following metrics report on logs that have been forwarded successfully, incl
 {{% /tab %}}
 
 {{% tab "Microsoft Sentinel" %}}
-
-<div class="alert alert-info">Log forwarding to Microsoft Sentinel is in Preview. To access this feature, <a href="https://www.datadoghq.com/product-preview/log-forwarding-to-microsoft-sentinel/">register here.</a></div>
 
 7. Enter a name for the destination.
 8. Authentication for the Microsoft Sentinel Forwarder requires configuring an App Registration through the Datadog Azure Integration.

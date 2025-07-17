@@ -2,7 +2,7 @@
 SHELL = /bin/bash
 # MAKEFLAGS := --jobs=$(shell nproc)
 # MAKEFLAGS += --output-sync --no-print-directory
-.PHONY: help clean-all clean start-preserve-build dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs source-dd-source vector_data
+.PHONY: help clean-all clean start-preserve-build dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs vector_data
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -27,12 +27,7 @@ EXAMPLES_DIR = $(shell pwd)/examples/content/en/api
 EXAMPLES_REPOS := datadog-api-client-go datadog-api-client-java datadog-api-client-python datadog-api-client-ruby datadog-api-client-typescript datadog-api-client-rust
 
 # Set defaults when no makefile.config or missing entries
-# Use DATADOG_API_KEY if set, otherwise try DD_API_KEY and lastly fall back to false
 GITHUB_TOKEN ?= ""
-DD_API_KEY ?= false
-DD_APP_KEY ?= false
-DATADOG_API_KEY ?= $(DD_API_KEY)
-DATADOG_APP_KEY ?= $(DD_APP_KEY)
 FULL_BUILD ?= false
 CONFIGURATION_FILE ?= "./local/bin/py/build/configurations/pull_config_preview.yaml"
 
@@ -66,20 +61,39 @@ server:
 	  yarn run prestart && yarn run start; \
 	fi;
 
-# Download all dependencies and run the site
-start: setup-build-scripts ## Build and run docs including external content.
+# compile .mdoc.md files to HTML
+# so Hugo can include them in the site
+build-cdocs:
+	@echo "Compiling .mdoc files to HTML";
+	@node ./local/bin/js/cdocs-build.js;
+
+# build .mdoc.md files, then watch for changes
+watch-cdocs:
+	@echo "Compiling .mdoc files to HTML";
+	@node ./local/bin/js/cdocs-build.js --watch;
+
+start:
+	@make setup-build-scripts ## Build and run docs including external content.
 	@make dependencies
 	@make update_websites_sources_module
 	@make server
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
 start-no-pre-build: node_modules  ## Build and run docs excluding external content.
+	@make setup-build-scripts
+	@make build-cdocs
 	@make server
 
 # Leave build scripts as is for local testing
 # This is useful for testing changes to the build scripts locally
 start-preserve-build: dependencies
 	@make update_websites_sources_module
+	@make server
+
+# Leave build scripts in place, but skip dependencies and sources_module
+# Useful for testing local changes to the CDOCS build script
+start-cdocs-preserve-build:
+	@make build-cdocs
 	@make server
 
 start-docker: clean  ## Build and run docs including external content via docker
@@ -100,17 +114,9 @@ find-int: hugpython ## Find the source for an integration (downloads/updates int
 node_modules: package.json yarn.lock
 	@yarn install --immutable
 
-source-dd-source:
-	$(call source_repo,dd-source,https://github.com/DataDog/dd-source.git,main,true,domains/workflow/actionplatform/documentation/stable_bundles.json)
-
 # All the requirements for a full build
-dependencies: clean source-dd-source
-	make hugpython all-examples data/permissions.json update_pre_build node_modules placeholders
-
-# builds permissions json from rbac
-# Always run if PULL_RBAC_PERMISSIONS or we are running in gitlab e.g CI_COMMIT_REF_NAME exists
-data/permissions.json: hugpython
-	@. hugpython/bin/activate && ./local/bin/py/build/pull_rbac.py "$(DATADOG_API_KEY)" "$(DATADOG_APP_KEY)"
+dependencies: clean
+	make hugpython all-examples update_pre_build node_modules build-cdocs
 
 integrations_data/extracted/vector:
 	$(call source_repo,vector,https://github.com/vectordotdev/vector.git,master,true,website/)
@@ -128,7 +134,7 @@ placeholders: hugpython update_pre_build
 hugpython: local/etc/requirements3.txt
 	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<;\
 	if [[ "$(CI_COMMIT_REF_NAME)" != "" ]]; then \
-		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.43732323-py3-none-any.whl; \
+		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.70443877-py3-none-any.whl; \
 	fi
 
 update_pre_build: hugpython
@@ -147,6 +153,13 @@ update_websites_sources_module:
 	node_modules/hugo-bin/vendor/hugo mod clean
 	node_modules/hugo-bin/vendor/hugo mod tidy
 	cat go.mod
+	@if [ -n "$(CI_COMMIT_REF_NAME)" ]; then \
+		echo "In ci, vendoring integrations pages for placeholder generation"; \
+		node_modules/hugo-bin/vendor/hugo mod vendor; \
+		cp -rpv _vendor/github.com/DataDog/websites-sources/content/en/integrations/. content/en/integrations/; \
+		rm -rf _vendor; \
+	fi
+
 #######################################################################################################################
 # API Code Examples
 #######################################################################################################################

@@ -19,7 +19,7 @@ further_reading:
 - link: "/real_user_monitoring/session_replay/browser/privacy_options"
   tag: "Documentation"
   text: "Session Replay Privacy Options"
-- link: "/sensitive_data_scanner/"
+- link: "/security/sensitive_data_scanner/"
   tag: "Documentation"
   text: "Sensitive Data Scanner"
 cascade:
@@ -86,7 +86,7 @@ The Datadog tracing libraries are used to instrument your applications, services
 - Application Performance Monitoring (APM)
 - Continuous Profiler
 - CI Visibility
-- Application Security Management
+- App and API Protection
 
 For detailed information about how tracing-library sourced data is managed, default basic security settings, and custom obfuscating, scrubbing, excluding, and modifying of trace-related elements, read [Configuring Agent and Tracer for trace data security][18].
 
@@ -150,7 +150,7 @@ Continuous Integration pipelines and tests
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles
 [8]: /integrations/azure/
 [9]: /integrations/google_cloud_platform/
-[10]: /sensitive_data_scanner/
+[10]: /security/sensitive_data_scanner/
 [11]: /data_security/logs/
 [12]: /logs/guide/control-sensitive-logs-data/
 [13]: /agent/logs/advanced_log_collection

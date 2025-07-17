@@ -10,11 +10,8 @@ further_reading:
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
+site_support_id: rum_roku
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">RUM for Roku is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -156,7 +153,7 @@ RUM action, error, resource, and long task events contain information about the 
 
 | Metric                         | Type           | Description                                                                                                                                |
 | ------------------------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `duration`                     | number (ns)    | Entire time spent loading the resource.                                                                                                    |
+| `resource.duration`            | number (ns)    | Entire time spent loading the resource.                                                                                                    |
 | `resource.size`                | number (bytes) | Resource size.                                                                                                                             |
 | `resource.connect.duration`    | number (ns)    | Time spent establishing a connection to the server (connectEnd - connectStart).                                                            |
 | `resource.ssl.duration`        | number (ns)    | Time spent for the TLS handshake. If the last request is not over HTTPS, this metric does not appear (connectEnd - secureConnectionStart). |

@@ -67,6 +67,9 @@ The default facets include the following:
 | `Notification` | The handle used by the Synthetic test for notifications.                      |
 | `Env`          | The environment the Synthetic test is running on.                             |
 | `CI/CD Execution Rule` | The status of the test run: `Blocking`, `Non-blocking`, or `Skipped`. |
+| `Endpoint`     | The url or domain the test is targeting.                                      |
+
+<div class="alert alert-info"> Note: You might see facet values originating from tests you don't have access to. </div>
 
 The **Tags** panel below **Synthetic Filters** lists several default tags you can use to identify your tests. 
 
@@ -101,9 +104,9 @@ To search on a type of Synthetics test, select the test type under the **Type** 
 
 ### Bulk actions
 
-Manage your Synthetic tests in bulk by selecting one or more tests on the [Synthetic Tests page][1] and clicking **Edit Tags**, **Run Tests Now**, or **Delete**. 
+Manage your Synthetic tests in bulk by selecting one or more tests on the [Synthetic Tests page][1], then choose actions such as `Run Tests Now`, `Pause/Resume Scheduling`, `Download CSV`, `Edit Tags`, `Edit Envs`, `Edit Teams`, or `Delete`. 
 
-{{< img src="synthetics/search/edit_tags_2.mp4" alt="Edit bulk tags of Synthetic tests" video=true >}}
+{{< img src="synthetics/search/edit_tags_3.mp4" alt="Edit bulk tags of Synthetic tests" video=true >}}
 
 ### Test actions
 

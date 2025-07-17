@@ -5,8 +5,8 @@ app_id: agentil-software-sap-businessobjects
 app_uuid: cac9d777-3bd1-40a1-aef3-28a8141804f1
 assets:
   dashboards:
-    SAP BusinessObjects overview: assets/dashboards/agentil_software_sap_businessobjects_global_overview.json
-    SAP BusinessObjects system dashboard: assets/dashboards/agentil_software_sap_businessobjects_system.json
+    SAP BusinessObjects dashboard: assets/dashboards/agentil_software_sap_businessobjects_system.json
+    SAP BusinessObjects global overview: assets/dashboards/agentil_software_sap_businessobjects_global_overview.json
   integration:
     auto_install: false
     configuration: {}
@@ -27,7 +27,7 @@ author:
   support_email: support@agentil-software.com
   vendor_id: agentil-software
 categories:
-- マーケットプレイス
+- marketplace
 - sap
 custom_kind: インテグレーション
 dependencies: []
@@ -100,7 +100,7 @@ SAP BusinessObjects インテグレーションは、SAP **BusinessObjects** シ
 - スケジュールとレポート
 - CMC と監査警告
 
-## Agent
+## サポート
 サポートや機能のリクエストについては、AGENTIL Software (support@agentil-software.com) までお問い合わせください。
 
 *SAP や他のプラットフォームとの特定のインテグレーションのための信頼できるパートナーをお探しなら、ぜひ当社にご連絡ください。*

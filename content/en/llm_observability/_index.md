@@ -12,11 +12,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/vllm-integration/"
   tag: "Blog"
   text: "Optimize LLM application performance with Datadog's vLLM integration"
+- link: "https://www.datadoghq.com/blog/datadog-gpu-monitoring/"
+  tag: "Blog"
+  text: "Optimize and troubleshoot AI infrastructure with Datadog GPU Monitoring"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -67,8 +66,6 @@ The [LLM Observability SDK for Python][3] integrates with frameworks such as Ope
 For more information, see the [Auto Instrumentation documentation][8].
 
 ## Ready to start?
-
-<div class="alert alert-warning">By using LLM Observability, you acknowledge that Datadog is authorized to share your company's data with OpenAI LLC for the purpose of providing and improving LLM Observability. OpenAI will not use your data for training or tuning purposes. If you have any questions or want to opt out of features that depend on OpenAI, reach out to your account representative.</div>
 
 See the [Setup documentation][5] for instructions on instrumenting your LLM application or follow the [Trace an LLM Application guide][6] to generate a trace using the [LLM Observability SDK for Python][3].
 

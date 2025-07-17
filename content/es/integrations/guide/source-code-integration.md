@@ -227,7 +227,7 @@ Si utilizas un host, tienes dos opciones: utilizar Microsoft SourceLink o config
 <div class="alert alert-info">Se requiere la biblioteca cliente Node.js versión 3.21.0 o posterior.
 </br>
 </br>
-La visualización de enlaces y fragmentos de código para aplicaciones TypeScript requiere que tu aplicación Node se ejecute con: 
+La visualización de enlaces y fragmentos de código para aplicaciones TypeScript requiere que tu aplicación Node se ejecute con:
 </br>
 <a href="https://nodejs.org/dist/v12.22.12/docs/api/cli.html#cli_enable_source_maps"><code>--enable-source-maps</code></a>.
 </div>
@@ -390,13 +390,13 @@ La integración del código fuente admite los siguientes proveedores Git:
 
 | Proveedor | Compatibilidad con enlaces contextuales | Compatibilidad con fragmentos de código |
 |---|---|---|
-| SaaS GitHub (github.com) | Sí | Accede a dashboards preconfigurados |
-| GitHub Enterprise Server | Sí | Accede a dashboards preconfigurados |
-| SaaS GitLab (gitlab.com) | Sí | Accede a dashboards preconfigurados |
-| GitLab autogestionado | Accede a dashboards preconfigurados | {{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}} |
-| Bitbucket | Accede a dashboards preconfigurados | {{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}} |
-| Servicios Azure DevOps | Accede a dashboards preconfigurados | {{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}} |
-| Azure DevOps Server | Accede a dashboards preconfigurados | {{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}} |
+| SaaS GitHub (github.com) | Sí | Sí |
+| GitHub Enterprise Server | Sí | Sí |
+| SaaS GitLab (gitlab.com) | Sí | Sí |
+| GitLab autogestionado | Sí | No |
+| Bitbucket | Sí | No |
+| Servicios Azure DevOps | Sí | No |
+| Azure DevOps Server | Sí | No |
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
@@ -522,7 +522,7 @@ También puedes ver los enlaces de los marcos de perfiles hasta su repositorio d
 {{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="Enlace a GitHub desde Continuous Profiler" style="width:100%;">}}
 
 [1]: /es/profiler/
-[2]: https://app.datadoghq.com/profiling/search
+[2]: https://app.datadoghq.com/profiling/explorer
 {{% /tab %}}
 {{% tab "Serverless Monitoring" %}}
 
@@ -586,7 +586,7 @@ Si utilizas la integración GitHub, haz clic en **Connect to preview** en los ma
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configurar tests de API y tests de API multupaso
+## Para leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -69,7 +69,7 @@ El entorno de la aplicación, por ejemplo: prod, pre-prod y staging. Sigue los [
 
 `applicationId`
 : Obligatorio<br/>
-**Tipo**: Cadena<br/>
+**Tipo**: cadena<br/>
 El ID de la aplicación de RUM.
 
 `trackInteractions`
@@ -124,7 +124,7 @@ Habilita [la recopilación automática de frustraciones del usuario][11]. Solo s
 Activa el informe de fallos para plataformas nativas (iOS, Android).
 
 `sampleRate`
-: Opcional - **Obsoleto**<br/>
+: opcional - **Obsoleto**<br/>
 **Tipo**: número<br/>
 **Predeterminado**: `100`<br/>
 Consulta `sessionSampleRate`.
@@ -166,7 +166,7 @@ Habilita el rastreo de interacciones nativas. Establécelo en `true` si deseas r
 Lista de tus hosts de backends para habilitar el rastreo. Para obtener más información, consulta [Conectar RUM y trazas][12].
 
 `telemetrySampleRate`
-: Opcional<br/>
+: opcional<br/>
 **Tipo**: número<br/>
 **Predeterminado**: `20`<br/>
 Se envían datos de telemetría (como errores y logs de depuración) sobre la ejecución de SDK a Datadog para detectar y solucionar posibles problemas. Establece esta opción en `0` si no quieres activar la recopilación de telemetría.
@@ -217,6 +217,18 @@ Habilita el rastreo de eventos RUM cuando no hay ninguna vista de RUM activa. Po
 **Tipo**: booleano<br/>
 **Predeterminado**: `true`<br/>
 Determina si las etiquetas (labels) de accesibilidad se utilizan para nombrar las acciones de RUM (por defecto es true).
+
+`bundleLogsWithRum`
+: opcional<br/>
+**Tipo**: booleano<br/>
+**Predeterminado**: `true`<br/>
+Habilita la correlación de RUM con logs (por defecto es true).
+
+`bundleLogsWithTraces`
+: opcional<br/>
+**Tipo**: booleano<br/>
+**Predeterminado**: `true`<br/>
+Habilita la correlación de trazas con logs (por defecto es true).
 
 ## Instrumentación manual
 
@@ -305,7 +317,7 @@ DdSdkReactNative.setUser({
 });
 ```
 
-Si deseas añadir o modificar la información del usuario, puedes modificar las detalles del usuario existante, como se indica a continuación:
+Si quieres añadir o actualizar la información del usuario, puedes utilizar el siguiente código para modificar los datos del usuario existente.
 
 ```js
 DdSdkReactNative.addUserExtraInfo({
@@ -331,6 +343,14 @@ DdSdkReactNative.setAttributes({
 });
 ```
 
+## Borrar todos los datos
+
+Utiliza `clearAllData` para borrar todos los datos que no se hayan enviado a Datadog.
+
+```js
+DdSdkReactNative.clearAllData();
+```
+
 ## Modificar o descartar eventos de RUM
 
 Para modificar los atributos de un evento de RUM antes de que se envíe a Datadog, o para eliminar un evento por completo, utiliza la API de asignadores de evento al configurar el SDK de RUM React Native:
@@ -340,9 +360,9 @@ const config = new DdSdkReactNativeConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
-    true, // rastrear interacciones de usuario (como clics en botones)
-    true, // rastrear recursos XHR
-    true // rastrear errores
+    true, // track user interactions (such as a tap on buttons)
+    true, // track XHR resources
+    true // track errors
 );
 config.logEventMapper = (event) => event;
 config.errorEventMapper = (event) => event;
@@ -465,7 +485,7 @@ const datadogAutoInstrumentation = {
 };
 
 const initializeApp = async () => {
-    const configuration = await fetchDatadogConfiguration(); // Toma la configuración de uno de tus servidores
+    const configuration = await fetchDatadogConfiguration(); // Fetches the configuration from one of your servers
     await DatadogProvider.initialize(configuration);
 };
 
@@ -489,16 +509,16 @@ const configuration = {
     clientToken: '<CLIENT_TOKEN>',
     env: '<ENVIRONMENT_NAME>',
     applicationId: '<RUM_APPLICATION_ID>',
-    sessionSamplingRate: 80, // Opcional: sesiones de RUM de ejemplo (aquí, el 80% de la sesión se enviará a Datadog). Predeterminado = 100%
+    sessionSamplingRate: 80, // Optional: sample RUM sessions (here, 80% of session will be sent to Datadog). Default = 100%
     site: 'US1', // Optional: specify Datadog site. Default = 'US1'
-    verbosity: SdkVerbosity.WARN, // Opcional: deja que el SDK imprima logs internos (en un nivel superior o igual al proporcionado). Predeterminado = undefined (no logs)
-    serviceName: 'com.myapp', // Opcional: establece el nombre de servicio informado. Predeterminado = package name / bundleIdentifier of your Android / iOS app respectively
-    nativeCrashReportEnabled: true, // Opcional: activa informes de fallos nativos. Predefinido = false
-    version: '1.0.0', // Opcional: consulta cómo sobreescribir la versión informada en la documentación. Predeterminado = VersionName / Version of your Android / iOS app respectively
-    versionSuffix: 'codepush.v3', // Opcional: consulta cómo sobreescribir la versión informada en la documentación. Predeterminado = undefined
-    trackingConsent: TrackingConsent.GRANTED, // Opcional: desactiva la recopilación si el usuario no ha aceptado el rastreo. Predeterminado = TrackingConsent.GRANTED
-    nativeViewTracking: true, // Opcional: activa el rastreo de vistas nativas. Predeterminado = false
-    proxyConfig: new ProxyConfig() // Opcional: envía solicitudes mediante un proxy. Predeterminado = undefined
+    verbosity: SdkVerbosity.WARN, // Optional: let the SDK print internal logs (above or equal to the provided level). Default = undefined (no logs)
+    serviceName: 'com.myapp', // Optional: set the reported service name. Default = package name / bundleIdentifier of your Android / iOS app respectively
+    nativeCrashReportEnabled: true, // Optional: enable native crash reports. Default = false
+    version: '1.0.0', // Optional: see overriding the reported version in the documentation. Default = VersionName / Version of your Android / iOS app respectively
+    versionSuffix: 'codepush.v3', // Optional: see overriding the reported version in the documentation. Default = undefined
+    trackingConsent: TrackingConsent.GRANTED, // Optional: disable collection if user has not granted consent for tracking. Default = TrackingConsent.GRANTED
+    nativeViewTracking: true, // Optional: enables tracking of native views. Default = false
+    proxyConfig: new ProxyConfig() // Optional: send requests through a proxy. Default = undefined
 };
 ```
 

@@ -29,11 +29,11 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- コンテナ
+- incident-teams
 - kubernetes
 - ログの収集
 - ネットワーク
-- orchestration
+- オーケストレーション
 custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/README.md
@@ -42,7 +42,7 @@ draft: false
 git_integration_title: nginx_ingress_controller
 integration_id: nginx-ingress-controller
 integration_title: nginx-ingress-controller
-integration_version: 4.0.0
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: nginx_ingress_controller
@@ -159,7 +159,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "nginx_ingress_controller" >}}
+{{< get-metrics-from-git "nginx-ingress-controller" >}}
 
 
 ### イベント
@@ -172,7 +172,7 @@ NGINX Ingress Controller には、サービスのチェック機能は含まれ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 
 [1]: https://kubernetes.github.io/ingress-nginx

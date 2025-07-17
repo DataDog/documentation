@@ -15,10 +15,10 @@ products:
 - name: Cloud SIEM
   url: /security/cloud_siem/
   icon: siem
-- name: Cloud Security Management
+- name: Cloud Security
   url: /security/cloud_security_management/
   icon: cloud-security-management
-- name: Application Security Management
+- name: App and API Protection
   url: /security/application_security/
   icon: app-sec
 ---
@@ -46,6 +46,9 @@ To create a notification rule, specify the conditions under which the rule shoul
 1. Specify the tags and attributes that must be present in order for the notification rule to be triggered.
 1. Click **Add Recipient**.
 1. Specify the recipients you want to notify when the notification rule is triggered. You can notify individuals, teams, create Jira issues, and more. See [Notification channels][2] for more information.
+1. To test notifications for this rule, click ** Test Notifications**. **Note: This is not available for Cloud Security Vulnerabilities.
+  1. In the modal, select the security products you want to test.
+  1. Click **Run Test**.
 1. Click **Save**.
 
 {{< img src="security/notification-rules-setup.png" alt="Setup page for creating a notification rule" style="width:100%;" >}}

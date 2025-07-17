@@ -8,6 +8,8 @@ further_reading:
 
 [Data Jobs Monitoring][9] gives visibility into the performance and reliability of Apache Spark applications on Amazon EMR.
 
+If you are using [EMR on EKS][13], follow these [instructions for setting up DJM on Kubernetes][14].
+
 ## Requirements
 
 [Amazon EMR Release 6.0.1][10] or later is required.
@@ -97,24 +99,36 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
    #!/bin/bash
 
    # Set required parameter DD_SITE
-   DD_SITE={{< region-param key="dd_site" code="true" >}}
+   export DD_SITE={{< region-param key="dd_site" code="true" >}}
 
    # Set required parameter DD_API_KEY with Datadog API key.
    # The commands below assumes the API key is stored in AWS Secrets Manager, with the secret name as datadog/dd_api_key and the key as dd_api_key.
    # IMPORTANT: Modify if you choose to manage and retrieve your secret differently.
    SECRET_NAME=datadog/dd_api_key
-   DD_API_KEY=$(aws secretsmanager get-secret-value --secret-id $SECRET_NAME | jq -r .SecretString | jq -r '.["dd_api_key"]')
+   export DD_API_KEY=$(aws secretsmanager get-secret-value --secret-id $SECRET_NAME | jq -r .SecretString | jq -r '.["dd_api_key"]')
 
-   # Optional parameters
-   # Uncomment the following line to allow adding init script logs when reporting a failure back to Datadog. A failure is reported when the init script fails to start the Datadog Agent successfully.
-   # export DD_DJM_ADD_LOGS_TO_FAILURE_REPORT=true
+   # Optional: uncomment to send spark driver and worker logs to Datadog
+   # export DD_EMR_LOGS_ENABLED=true
 
    # Download and run the latest init script
-   DD_SITE=$DD_SITE DD_API_KEY=$DD_API_KEY bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/emr/emr_init_latest.sh)" || true
+   curl -L https://install.datadoghq.com/scripts/install-emr.sh > djm-install-script; bash djm-install-script || true
 
    ```
 
-   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the file name in the URL with `emr_init_1.4.0.sh` to use the last stable version.
+   Optionally, the script can be configured adding the following environment variables:
+   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-emr-0.13.5.sh` to use version `0.13.5`, for example. The source code used to generate this script, and the changes between script versions can be found on the [Datadog Agent repository][12].
+
+   Optionally, the script can be configured by adding the following environment variables:
+
+| Variable                 | Description                                                                                                                                                      | Default |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| DD_TAGS                  | Add tags to EMR cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][15]. Example: `env:staging,team:data_engineering` |         |
+| DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.   |         |
+| DD_EMR_LOGS_ENABLED      | Send Spark driver and worker logs to Datadog.                                                                                                                  | false   |
+| DD_LOGS_CONFIG_PROCESSING_RULES | Filter the logs collected with processing rules. See [Advanced Log Collection][16] for more details. |         |
+
+[15]: /getting_started/tagging/
+[16]: /agent/logs/advanced_log_collection/?tab=environmentvariable#global-processing-rules
 
 1. On the **Create Cluster** page, find the **Bootstrap actions** section. Click **Add** to bring up the **Add bootstrap action** dialog.
    {{< img src="data_jobs/emr/add_bootstrap_action_without_arguments.png" alt="Amazon EMR console, Create Cluster, Add Bootstrap Action dialog. Text fields for name, script location, and arguments." style="width:80%;" >}}
@@ -167,3 +181,6 @@ In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your da
 [9]: /data_jobs
 [10]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-601-release.html
 [11]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-iam-role-for-ec2.html
+[12]: https://github.com/DataDog/datadog-agent/blob/main/pkg/fleet/installer/setup/djm/emr.go
+[13]: https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html
+[14]: /data_jobs/kubernetes/

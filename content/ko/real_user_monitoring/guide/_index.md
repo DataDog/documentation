@@ -9,19 +9,19 @@ private: true
 title: 실제 사용자 모니터링 및 세션 재생 가이드
 ---
 
-{{< whatsnext desc="RUM 일반 사항:" >}}
-    {{< nextlink href="real_user_monitoring/guide/understanding-the-rum-event-hierarchy" >}}RUM 이벤트 계층 이해{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/compute-apdex-with-rum-data" >}}RUM 데이터로 Apdex와 커스텀 성능 지표 계산{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}RUM 데이터로 알림 생성{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/alerting-with-conversion-rates" >}}전환율 알림 생성{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}RUM 사용량 모니터링{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/track-rum-usage-with-attribution-tags" >}}사용량 속성 태그로 RUM 사용량 추적{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/rum-for-product-analytics" >}}제품 분석에 RUM & 세션 재생 사용{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly" >}}LaunchDarkly를 사용해 원격으로 RUM 구성{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}RUM 배포 추적 시작하기{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}기능 플래그 추적 시작하기{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}RUM으로 키오스크 세션 모니터링{{< /nextlink >}}
+{{< whatsnext desc="General RUM:" >}}
+    {{< nextlink href="real_user_monitoring/guide/understanding-the-rum-event-hierarchy" >}}RUM 이벤트 계층 구조 이해{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/ompute-apdex-with-rum-data" >}}RUM 데이터로 애플리케이션 성능지표(Apdex) 및 커스텀 성능 지표 계산{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/alert-with-rum" >}}RUM 데이터로 알림 만들기{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/alert-with-conversion-rates" >}}전환율에 대한 알림 생성{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}RUM 사용량 ㅗ모니터링{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/track-rum-usage-with-attribution-tag" >}}사용 어트리뷰션으로 RUM 사용량 추적 태그{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly" >}}LaunchDarkly로 원격 RUM 설정{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}RUM 배포 추적 사용 시작하기{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}기능 플래그 추적 사용 시작하기{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/모니터링하다-kiosk-sessions-using-rum" >}}RUM 모니터를 사용한 키오스크 세션{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/best-practices-for-rum-sampling" >}}RUM 샘플링 모범 사례{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/debug-symbols" >}}RUM 디버그 기호로 난독화된 스택 트레이스 조사{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="브라우저 RUM:" >}}
@@ -39,6 +39,7 @@ title: 실제 사용자 모니터링 및 세션 재생 가이드
     {{< nextlink href="/real_user_monitoring/guide/enable-rum-woocommerce-store/" >}}WordPress + WooCommerce 스토어에서 RUM 활성화{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-your-nextjs-app-with-rum/" >}}RUM으로 Next.js 애플리케이션 모니터링{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk/" >}}브라우저 SDK를 사용하여 Electron 애플리케이션 모니터링{{< /nextlink >}}
+{{< nextlink href="/real_user_monitoring/guide/monitor-capacitor-applications-using-browser-sdk/" >}}브라우저 SDK를 사용해 Capacitor 애플리케이션 모니터링{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="모바일 RUM:" >}}

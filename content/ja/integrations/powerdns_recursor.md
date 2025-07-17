@@ -40,7 +40,7 @@ draft: false
 git_integration_title: powerdns_recursor
 integration_id: powerdns
 integration_title: Power DNS Recursor
-integration_version: 4.0.0
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: powerdns_recursor
@@ -216,7 +216,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "powerdns_recursor" >}}
+{{< get-metrics-from-git "powerdns" >}}
 
 
 ### イベント
@@ -224,7 +224,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 PowerDNS Recursor チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "powerdns_recursor" >}}
+{{< get-service-checks-from-git "powerdns" >}}
 
 
 ## トラブルシューティング

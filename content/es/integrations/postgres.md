@@ -1,95 +1,95 @@
 ---
-"app_id": "postgres"
-"app_uuid": "e6b3c5ec-b293-4a22-9145-277a12a9abd4"
-"assets":
-  "dashboards":
-    "postgresql": "assets/dashboards/postgresql_dashboard.json"
-    "postgresql_screenboard": "assets/dashboards/postgresql_screenboard_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
-      - "postgresql.connections"
-      - "postgresql.max_connections"
-      "metadata_path": "metadata.csv"
-      "prefix": "postgresql."
-    "process_signatures":
-    - "postgres -D"
-    - "pg_ctl start -l logfile"
-    - "postgres -c 'pg_ctl start -D -l"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "28"
-    "source_type_name": "Postgres"
-  "monitors":
-    "Connection pool is reaching saturation point": "assets/monitors/percent_usage_connections.json"
-    "Replication delay is high": "assets/monitors/replication_delay.json"
-  "saved_views":
-    "operations": "assets/saved_views/operations.json"
-    "postgres_pattern": "assets/saved_views/postgres_pattern.json"
-    "postgres_processes": "assets/saved_views/postgres_processes.json"
-    "sessions_by_host": "assets/saved_views/sessions_by_host.json"
-    "slow_operations": "assets/saved_views/slow_operations.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "data stores"
-- "log collection"
-- "notifications"
-- "tracing"
-"custom_kind": "integración"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/postgres/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "postgres"
-"integration_id": "postgres"
-"integration_title": "Postgres"
-"integration_version": "22.0.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "postgres"
-"public_title": "Postgres"
-"short_description": "Recopila una importante cantidad de métricas del rendimiento y el estado de las bases de datos."
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Almacenes de datos"
-  - "Category::Recopilación de logs"
-  - "Category::Notificaciones"
-  - "Category::Rastreo"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Offering::Integración"
-  "configuration": "README.md#Configuración"
-  "description": "Recopila una importante cantidad de métricas del rendimiento y el estado de las bases de datos."
-  "media": []
-  "overview": "README.md#Información general"
-  "resources":
-  - "resource_type": "documentación"
-    "url": "https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/"
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/100x-faster-postgres-performance-by-changing-1-line"
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/postgresql-monitoring"
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/postgresql-monitoring-tools"
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/collect-postgresql-data-with-datadog"
-  "support": "README.md#Soporte"
-  "title": "Postgres"
+app_id: postgres
+app_uuid: e6b3c5ec-b293-4a22-9145-277a12a9abd4
+assets:
+  dashboards:
+    postgresql: assets/dashboards/postgresql_dashboard.json
+    postgresql_screenboard: assets/dashboards/postgresql_screenboard_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - postgresql.connections
+      - postgresql.max_connections
+      metadata_path: metadata.csv
+      prefix: postgresql.
+    process_signatures:
+    - postgres -D
+    - pg_ctl start -l logfile
+    - postgres -c 'pg_ctl start -D -l
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: !!int 28
+    source_type_name: Postgres
+  monitors:
+    Connection pool is reaching saturation point: assets/monitors/percent_usage_connections.json
+    Replication delay is high: assets/monitors/replication_delay.json
+  saved_views:
+    operations: assets/saved_views/operations.json
+    postgres_pattern: assets/saved_views/postgres_pattern.json
+    postgres_processes: assets/saved_views/postgres_processes.json
+    sessions_by_host: assets/saved_views/sessions_by_host.json
+    slow_operations: assets/saved_views/slow_operations.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- data stores
+- log collection
+- notifications
+- tracing
+custom_kind: integración
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/postgres/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: postgres
+integration_id: postgres
+integration_title: Postgres
+integration_version: 22.0.1
+is_public: true
+manifest_version: 2.0.0
+name: postgres
+public_title: Postgres
+short_description: Recopila una importante cantidad de métricas del rendimiento y el estado de las bases de datos.
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Almacenes de datos
+  - Category::Recopilación de logs
+  - Category::Notificaciones
+  - Category::Rastreo
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integración
+  configuration: README.md#Configuración
+  description: Recopila una importante cantidad de métricas del rendimiento y el estado de las bases de datos.
+  media: []
+  overview: README.md#Información general
+  resources:
+  - resource_type: documentación
+    url: https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/100x-faster-postgres-performance-by-changing-1-line
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/postgresql-monitoring
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/postgresql-monitoring-tools
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/collect-postgresql-data-with-datadog
+  support: README.md#Soporte
+  title: Postgres
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->

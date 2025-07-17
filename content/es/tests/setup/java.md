@@ -1,8 +1,8 @@
 ---
 aliases:
-- /continuous_integration/setup_tests/java
-- /continuous_integration/tests/java
-- /continuous_integration/tests/setup/java
+- /es/continuous_integration/setup_tests/java
+- /es/continuous_integration/tests/java
+- /es/continuous_integration/tests/setup/java
 code_lang: java
 code_lang_weight: 10
 further_reading:
@@ -27,10 +27,6 @@ further_reading:
 title: Tests de Java
 type: multi-code-lang
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">En este momento, CI Visibility no está disponible en el sitio ({{< region-param key="dd_site_name" >}}) seleccionado.</div>
-{{< /site-region >}}
 
 ## Compatibilidad
 

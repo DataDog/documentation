@@ -18,13 +18,16 @@ title: ブラウザログ収集
 - 実際のクライアント IP アドレスとユーザーエージェントを記録する。
 - 自動一括ポストによってネットワークの利用を最適化する。
 
+**注**: 
+- **RUM SDK とは独立**: Browser Logs SDK は RUM SDK がなくても利用できます。
+
 ## セットアップ
 
 **Datadog クライアントトークン**: セキュリティ上の理由から、[API キー][1] を使用してブラウザログ SDK を構成することはできません。JavaScript コードでクライアント側に公開されるためです。ウェブブラウザーからログを収集するには、[クライアントトークン][2]を使用する必要があります。詳細は、[クライアントトークンに関するドキュメント][2]を参照してください。
 
 **Datadog ブラウザログ SDK**: [NPM](#npm) を使用して SDK を構成するか、head タグで [CDN 非同期](#cdn-async) または [CDN 同期](#cdn-sync) コードスニペットを使用します。
 
-**対応ブラウザ**: ブラウザログ SDK は、IE11 を含む最新のデスクトップブラウザとモバイルブラウザをすべてサポートします。下記の[ブラウザサポート][4]表をご参照ください。
+**サポートされているブラウザ**: ブラウザログ SDK は、すべての最新のデスクトップおよびモバイルブラウザをサポートしています。[Browser Support][4] テーブルを参照してください。
 
 ### 適切なインストール方法の選択
 
@@ -57,13 +60,13 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Example to send logs to Datadog</title>
+    <title>Datadog へのログ送信サンプル</title>
       <script>
       (function(h,o,u,n,d) {
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js','DD_LOGS')
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-logs.js','DD_LOGS')
       window.DD_LOGS.onReady(function() {
           window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
@@ -81,13 +84,13 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Example to send logs to Datadog</title>
+    <title>Datadog へのログ送信サンプル</title>
       <script>
       (function(h,o,u,n,d) {
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v5/datadog-logs.js','DD_LOGS')
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v6/datadog-logs.js','DD_LOGS')
       DD_LOGS.onReady(function() {
           DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
@@ -101,17 +104,41 @@ datadogLogs.init({
 </html>
 ```
 {{</ site-region>}}
-{{< site-region region="eu" >}}
+{{< site-region region="ap2" >}}
 ```html
 <html>
   <head>
-    <title>Example to send logs to Datadog</title>
+    <title>Datadog へのログ送信サンプル</title>
       <script>
       (function(h,o,u,n,d) {
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v5/datadog-logs.js','DD_LOGS')
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/ap2/v6/datadog-logs.js','DD_LOGS')
+      DD_LOGS.onReady(function() {
+          DD_LOGS.init({
+            clientToken: '<DATADOG_CLIENT_TOKEN>',
+            site: 'ap2.datadoghq.com',
+            forwardErrorsToLogs: true,
+            sessionSampleRate: 100,
+          })
+        })
+      </script>
+  </head>
+</html>
+```
+{{</ site-region>}}
+{{< site-region region="eu" >}}
+```html
+<html>
+  <head>
+    <title>Datadog へのログ送信サンプル</title>
+      <script>
+      (function(h,o,u,n,d) {
+        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+        d=o.createElement(u);d.async=1;d.src=n
+        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v6/datadog-logs.js','DD_LOGS')
       window.DD_LOGS.onReady(function() {
           window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
@@ -129,13 +156,13 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Example to send logs to Datadog</title>
+    <title>Datadog へのログ送信サンプル</title>
       <script>
       (function(h,o,u,n,d) {
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v5/datadog-logs.js','DD_LOGS')
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v6/datadog-logs.js','DD_LOGS')
       window.DD_LOGS.onReady(function() {
           window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
@@ -153,13 +180,13 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Example to send logs to Datadog</title>
+    <title>Datadog へのログ送信サンプル</title>
       <script>
       (function(h,o,u,n,d) {
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v5/datadog-logs.js','DD_LOGS')
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v6/datadog-logs.js','DD_LOGS')
       window.DD_LOGS.onReady(function() {
           window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
@@ -177,13 +204,13 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Example to send logs to Datadog</title>
+    <title>Datadog へのログ送信サンプル</title>
       <script>
       (function(h,o,u,n,d) {
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-logs-v5.js','DD_LOGS')
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-logs-v6.js','DD_LOGS')
       window.DD_LOGS.onReady(function() {
           window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
@@ -209,8 +236,8 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js"></script>
+    <title>Datadog へのログ送信サンプル</title>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
         window.DD_LOGS.init({
@@ -228,8 +255,8 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v5/datadog-logs.js"></script>
+    <title>Datadog へのログ送信サンプル</title>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v6/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
         DD_LOGS.init({
@@ -243,12 +270,31 @@ datadogLogs.init({
 </html>
 ```
 {{</ site-region>}}
+{{< site-region region="ap2" >}}
+```html
+<html>
+  <head>
+    <title>Datadog へのログ送信サンプル</title>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap2/v6/datadog-logs.js"></script>
+    <script>
+      window.DD_LOGS &&
+        DD_LOGS.init({
+          clientToken: '<DATADOG_CLIENT_TOKEN>',
+          site: 'ap2.datadoghq.com',
+          forwardErrorsToLogs: true,
+          sessionSampleRate: 100,
+        })
+    </script>
+  </head>
+</html>
+```
+{{</ site-region>}}
 {{< site-region region="eu" >}}
 ```html
 <html>
   <head>
-    <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v5/datadog-logs.js"></script>
+    <title>Datadog へのログ送信サンプル</title>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v6/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
         window.DD_LOGS.init({
@@ -266,8 +312,8 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v5/datadog-logs.js"></script>
+    <title>Datadog へのログ送信サンプル</title>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v6/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
         window.DD_LOGS.init({
@@ -285,8 +331,8 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v5/datadog-logs.js"></script>
+    <title>Datadog へのログ送信サンプル</title>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v6/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
         window.DD_LOGS.init({
@@ -304,8 +350,8 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v5.js"></script>
+    <title>Datadog へのログ送信サンプル</title>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v6.js"></script>
     <script>
       window.DD_LOGS &&
         window.DD_LOGS.init({
@@ -347,7 +393,7 @@ window.DD_LOGS.init({
 
 以下のパラメーターを使用して、Datadog にログを送信するように Datadog ブラウザログ SDK を構成できます。
 
-| パラメーター                  | タイプ                                                                      | 必須 | デフォルト         | 説明                                                                                                                                                                           |
+| パラメーター                  | タイプ                                                                      | 必須 | Default         | 説明                                                                                                                                                                            |
 |----------------------------|---------------------------------------------------------------------------|----------|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `clientToken`              | 文字列                                                                    | はい      |                 | [Datadog クライアントトークン][2]。                                                                                                                                                          |
 | `site`                     | 文字列                                                                    | はい      | `datadoghq.com` | 組織の Datadog サイトパラメーター][9]。                                                                                                                                 |
@@ -358,26 +404,30 @@ window.DD_LOGS.init({
 | `forwardConsoleLogs`       | `"all"` または `"log"` `"debug"` `"info"` `"warn"` `"error"` の配列      | いいえ       | `[]`            | `console.*` のログを Datadog に転送します。全てを転送する場合は `"all"` を、サブセットのみを転送する場合はコンソール API 名の配列を使用します。                                                |
 | `forwardReports`           | `"all"` または `"intervention"` `"deprecation"` `"csp_violation"` の配列 | いいえ       | `[]`            | [Reporting API][8] から Datadog にレポートを転送します。すべてを転送する場合は `"all"` を、サブセットのみを転送する場合はレポートタイプの配列を使用します。                                       |
 | `sampleRate`               | 数値                                                                    | いいえ       | `100`           | **非推奨** - `sessionSampleRate` を参照してください。                                                                                                                                             |
-| `sessionSampleRate`        | 数値                                                                    | いいえ       | `100`           | 追跡するセッションの割合。`100` は全てを、`0` は皆無を意味します。追跡されたセッションのみがログを送信します。                                                                                    |
+| `sessionSampleRate`        | 数値                                                                    | いいえ       | `100`           | 追跡するセッションの割合: `100` はすべて、`0` はなし。追跡対象セッションのみがログを送信します。この設定は Browser Logs SDK で収集されたログにのみ適用され、RUM データとは独立しています。                                                                                    |
 | `trackingConsent`          | `"granted"` または `"not-granted"`                                            | いいえ       | `"granted"`     | ユーザー追跡同意の初期状態を設定します。[ユーザー追跡に関する同意][15]を参照してください。                                                                                                         |
 | `silentMultipleInit`       | Boolean                                                                   | いいえ       |                 | 複数の init を使用しながらログエラーを防ぎます。                                                                                                                                    |
-| `proxy`                    | 文字列                                                                    | いいえ       |                 | オプションのプロキシ URL (例: https://www.proxy.com/path)。詳細については、完全な[プロキシ設定ガイド][6]を参照してください。                                                                        |
+| `proxy`                    | 文字列                                                                    | いいえ       |                 | 任意のプロキシ URL (例: `https://www.proxy.com/path`)。詳細は [プロキシ設定ガイド][6]を参照してください。                                                                        |
 | `telemetrySampleRate`      | 数値                                                                    | いいえ       | `20`            | SDK の実行に関するテレメトリーデータ (エラー、デバッグログ) は、潜在的な問題を検出して解決するために、Datadog に送信されます。このオプションを `0` に設定すると、テレメトリー収集がオプトアウトされます。 |
 | `storeContextsAcrossPages` | Boolean                                                                   | いいえ       |                 | グローバルコンテキストとユーザーコンテキストを `localStorage` に格納して、ユーザーナビゲーションに沿って保存します。詳細と具体的な制限については[コンテキストのライフサイクル][11]を参照してください。          |
 | `allowUntrustedEvents`     | Boolean                                                                   | いいえ       |                 | [信頼できないイベント][13] ( 例えば自動 UI テストなど) のキャプチャを許可します。                                                                                                           |
 | `sendLogsAfterSessionExpiration` | Boolean                                                             | いいえ       |                 | セッションが期限切れになった後もログの送信を続けます。
+| `allowedTrackingOrigins`   | Array                                                                     | いいえ       |                 | SDK が実行を許可されているオリジンの一覧です。 |
 
 
 `RUM` SDK を使用するときに一致するコンフィギュレーションが必要なオプション:
 
-| パラメーター                              | タイプ    | 必須 | デフォルト | 説明                                                                                                                                                              |
-|----------------------------------------| ------- | -------- | ------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `trackSessionAcrossSubdomains`         | Boolean | いいえ       | `false` | 同じサイトのサブドメイン間でセッションを保持します。                                                                                                                |
-| `useSecureSessionCookie`               | Boolean | いいえ       | `false` | 安全なセッション Cookie を使用します。これにより、安全でない (HTTPS 以外の) 接続で送信されるログが無効になります。                                                                                |
-| `usePartitionedCrossSiteSessionCookie` | Boolean | いいえ       | `false` | 分割された安全なクロスサイトセッション Cookie を使用します。これにより、サイトが別のサイト (iframe) から読み込まれたときにも、logs SDK が実行されます。`useSecureSessionCookie` を意味します。 |
-| `useCrossSiteSessionCookie`            | Boolean | いいえ       | `false` | **非推奨**: `usePartitionedCrossSiteSessionCookie` を参照してください。                                                                                                              |
 
-## 使用方法
+| パラメーター                              | タイプ                            | 必須 | Default    | 説明                                                                                                                                                                                                                                                               |
+| -------------------------------------- | ------------------------------- | -------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `sessionPersistence`                    | `"cookie"` または `"local-storage"`  | いいえ       | `"cookie"`  | セッションを保持するために使用するストレージ戦略を指定します。`cookie` または `local-storage` のいずれかを指定できます。                                                                                                                                                                        |
+| `trackAnonymousUser`                    | Boolean                         | いいえ       | `true`     | セッションをまたいだ匿名ユーザー ID の収集を有効にします。                                                                                                                                                                        |
+| `trackSessionAcrossSubdomains`         | Boolean                         | いいえ       | `false`    | 同じサイトのサブドメイン間でセッションを保持します。                                                                                                                                                                                                                |
+| `useSecureSessionCookie`               | Boolean                         | いいえ       | `false`    | 安全なセッション Cookie を使用します。これにより、安全でない (HTTPS 以外の) 接続で送信されるログが無効になります。                                                                                                                                                                                |
+| `usePartitionedCrossSiteSessionCookie` | Boolean                         | いいえ       | `false`    | 分割された安全なクロスサイトセッション Cookie を使用します。これにより、サイトが別のサイト (iframe) から読み込まれたときにも、logs SDK が実行されます。`useSecureSessionCookie` を意味します。                                                                                                 |
+| `usePciIntake`                          | Boolean                         | いいえ       | `false`    | ログを [PCI 準拠のインテーク][16]に転送するには、`true` に設定します。PCI 準拠のインテークは US1 サイトの Datadog 組織でのみ利用可能です。`usePciIntake` を `true` に設定していて、サイトが US1 (datadoghq.com) 以外の場合は、ログはデフォルトのインテークに送信されます。 |
+
+## 使用状況
 
 ### カスタムログ
 
@@ -568,7 +618,7 @@ window.DD_LOGS && window.DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>
 
 上記例のプレースホルダーは、以下に説明されています。
 
-| プレースホルダー         | 説明                                                                             |
+| プレースホルダー         | 説明                                                                              |
 | ------------------- | --------------------------------------------------------------------------------------- |
 | `<MESSAGE>`         | Datadog によって完全にインデックス化されたログメッセージ。                               |
 | `<JSON_ATTRIBUTES>` | `<MESSAGE>` に付随するすべての属性を含む有効な JSON オブジェクト。         |
@@ -581,7 +631,18 @@ window.DD_LOGS && window.DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>
 
 ブラウザログに編集が必要な機密情報が含まれている場合は、ブラウザログコレクターを初期化するときに `beforeSend` コールバックを使用して、機密シーケンスをスクラブするように Browser SDK を構成します。
 
-`beforeSend` コールバック関数を使用すると、Datadog に送信される前に Browser SDK によって収集された各ログにアクセスでき、プロパティを更新できます。
+`beforeSend` コールバック関数は `log` イベントと `context` の 2 つの引数で呼び出されます。この関数を使うと、Browser SDK が Datadog に送信する前に収集した各ログへアクセスでき、context を利用してログのプロパティを調整できます。context にはイベントに直接含まれていない場合もある追加情報が入っています。通常、この情報を使ってイベントを[強化][18]したり[破棄][19]したりできます。
+
+```javascript
+function beforeSend(log, context)
+```
+
+潜在的な `context` 値は次のとおりです。
+
+| 値 | データ型 | 使用例 |
+|-------|---------|------------|
+| `isAborted` | Boolean | ネットワークログイベントの場合、このプロパティは失敗したリクエストがアプリケーションによって中断されたかどうかを示します。意図的に中断された可能性があるため、このイベントを送信しない選択をすることもできます。 |
+| `handlingStack` | 文字列 | ログイベントがどこで処理されたかのスタックトレース。この情報により、ログがどの[マイクロフロントエンド][17]から送信されたかを特定できます。 |
 
 Web アプリケーションの URL からメールアドレスを編集するには
 
@@ -631,7 +692,7 @@ window.DD_LOGS &&
 
 次のプロパティは SDK によって自動的に収集され、機密データが含まれる可能性があります。
 
-| 属性       | タイプ   | 説明                                                                                      |
+| 属性       | タイプ   | 説明                                                                                       |
 | --------------- | ------ | ------------------------------------------------------------------------------------------------ |
 | `view.url`      | 文字列 | アクティブな Web ページの URL。                                                                  |
 | `view.referrer` | 文字列 | 現在リクエストされているページへのリンクがたどられた前のウェブページの URL。 |
@@ -1261,3 +1322,7 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
 [14]: /ja/integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [15]: #user-tracking-consent
+[16]: https://docs.datadoghq.com/ja/data_security/logs/#pci-dss-compliance-for-log-management
+[17]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#micro-frontend
+[18]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
+[19]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#discard-a-rum-event

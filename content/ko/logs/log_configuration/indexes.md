@@ -1,7 +1,7 @@
 ---
 aliases:
-- /logs/dynamic_volume_control
-- /logs/indexes/
+- /ko/logs/dynamic_volume_control
+- /ko/logs/indexes/
 description: Datadog로 인덱싱된 로그 볼륨 제어
 further_reading:
 - link: /logs/explorer/#visualize

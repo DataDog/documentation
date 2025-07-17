@@ -24,12 +24,7 @@ If your front-end JavaScript source code is minified, upload your source maps to
 Configure your JavaScript bundler such that when minifying your source code, it generates source maps that directly include the related source code in the `sourcesContent` attribute. 
 
 <div class="alert alert-warning">
-{{< site-region region="us,us3,us5,eu" >}}
-Ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **300** MB.
-{{< /site-region >}}
-{{< site-region region="ap1,gov" >}}
-Ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **50** MB.
-{{< /site-region >}}
+Ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **500 MB**.
 </div>
 
 See the following configurations for popular JavaScript bundlers.
@@ -88,12 +83,7 @@ See the following example:
 ```
 
 <div class="alert alert-warning">
-{{< site-region region="us,us3,us5,eu" >}}
-If the sum of the file size for <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds the <b>the **300** MB</b> limit, reduce it by configuring your bundler to split the source code into multiple smaller chunks. For more information, see <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
-{{< /site-region >}}
-{{< site-region region="ap1,gov" >}}
-If the sum of the file size for <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds the <b>the **50** MB</b> limit, reduce it by configuring your bundler to split the source code into multiple smaller chunks. For more information, see <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
-{{< /site-region >}}
+If the sum of the file size for <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds the <b>the 500 MB</b> limit, reduce it by configuring your bundler to split the source code into multiple smaller chunks. For more information, see <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
 </div>
 
 ## Upload your source maps
@@ -107,25 +97,25 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
-     --service=my-service \
-     --release-version=v35.2395005 \
-     --minified-path-prefix=https://hostname.com/static/js
+     --service my-service \
+     --release-version v35.2395005 \
+     --minified-path-prefix https://hostname.com/static/js
    ```
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 
-{{< site-region region="eu,us3,us5,gov,ap1" >}}
+{{< site-region region="eu,us3,us5,gov,ap1,ap2" >}}
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
 2. [Create a dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
 3. Configure the CLI to upload files to the {{<region-param key="dd_site_name">}} site by exporting two environment variables: `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} and `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}.
 4. Run the following command once per service in your application:
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
-     --service=my-service \
-     --release-version=v35.2395005 \
-     --minified-path-prefix=https://hostname.com/static/js
+     --service my-service \
+     --release-version v35.2395005 \
+     --minified-path-prefix https://hostname.com/static/js
    ```
 
 

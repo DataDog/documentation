@@ -4,6 +4,7 @@ aliases:
 categories:
 - cloud
 - azure
+custom_kind: integration
 dependencies: []
 description: Surveillez des métriques clés d'Azure Application Gateway.
 doc_link: https://docs.datadoghq.com/integrations/azure_application_gateway/
@@ -14,7 +15,6 @@ integration_id: azure-applicationgateway
 integration_title: Microsoft Azure Application Gateway
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_application_gateway
 public_title: Intégration Datadog/Microsoft Azure Application Gateway
@@ -23,33 +23,33 @@ version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## Présentation
+## Section Overview
 
 Azure Application Gateway est un équilibreur de charge du trafic Web qui vous permet de gérer le trafic vers vos applications Web.
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'Azure Application Gateway.
 
-## Formule et utilisation
+## Configuration
 
-### Liste des infrastructures
+### Installation
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
-## Real User Monitoring
+## Données collectées
 
-### Analyse d'entonnoirs
-{{< get-metrics-from-git "azure_application_gateway" >}}
+### Métriques
+{{ get-metrics-from-git "azure-applicationgateway" }}
 
 
-### Aide
+### Événements
 
 L'intégration Azure Application Gateway n'inclut aucun événement.
 
-### Aide
+### Checks de service
 
 L'intégration Azure Application Gateway n'inclut aucun check de service.
 
-## Aide
+## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

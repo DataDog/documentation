@@ -24,7 +24,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- contenedores
+- rastreo
 - recopilación de logs
 custom_kind: integración
 dependencies:
@@ -34,25 +34,25 @@ draft: false
 git_integration_title: harbor
 integration_id: harbor
 integration_title: Harbor
-integration_version: 5.0.0
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: harbor
 public_title: Harbor
 short_description: Monitoriza el estado del registro de contenedores de Harbor
 supported_os:
-- linux
-- macos
-- windows
+- Linux
+- macOS
+- Windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Containers
-  - Category::Log Collection
-  - Offering::Integration
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::macOS
+  - Sistema operativo compatible::Windows
+  - Categoría::Contenedores
+  - Categoría::Recopilación de logs
+  - Oferta::Integración
   configuration: README.md#Configuración
   description: Monitoriza el estado del registro de contenedores de Harbor
   media: []
@@ -81,7 +81,7 @@ El check de Harbor está incluido en el paquete del [Datadog Agent][2]. No se ne
 
 #### Host
 
-A fin de configurar este check para un Agent que se ejecuta en un host:
+Para configurar este check para un Agent que se ejecuta en un host:
 
 ##### Recopilación de métricas
 
@@ -93,7 +93,7 @@ A fin de configurar este check para un Agent que se ejecuta en un host:
 
 ##### Recopilación de logs
 
-_Disponible para la versión 6.0 o posterior del Agent_
+_Disponible para la versión 6.0 o posteriores del Agent_
 
 1. La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent; debes habilitarla en el archivo `datadog.yaml`:
 
@@ -117,9 +117,9 @@ _Disponible para la versión 6.0 o posterior del Agent_
 [2]: https://github.com/DataDog/integrations-core/blob/master/harbor/datadog_checks/harbor/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Contenedorizado" %}}
+{{% tab "Contenedores" %}}
 
-#### En contenedores
+#### Contenedores
 
 En el caso de los entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][1] para obtener orientación sobre la aplicación de los parámetros que se indican a continuación.
 
@@ -133,9 +133,9 @@ En el caso de los entornos en contenedores, consulta las [plantillas de integrac
 
 ##### Recopilación de logs
 
-_Disponible para la versión 6.0 o posterior del Agent_
+_Disponible para la versión 6.0 o posteriores del Agent_
 
-La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Para habilitarla, consulta [Recopilación de logs de Kubernetes][2].
+La recopilación de logs está desactivada por defecto en el Datadog Agent. Para activarla, consulta [Recopilación de logs de Kubernetes][2].
 
 | Parámetro      | Valor                                               |
 | -------------- | --------------------------------------------------- |
@@ -160,7 +160,7 @@ La recopilación de logs se encuentra deshabilitada de manera predeterminada en 
 
 La integración de Harbor no incluye eventos.
 
-### Checks de servicio
+### Checks de servicios
 {{< get-service-checks-from-git "harbor" >}}
 
 

@@ -21,7 +21,7 @@ short_description: Rastrea las métricas principales de Azure Automation.
 version: '1.0'
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  FUENTE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Azure Automation ofrece un servicio de configuración y automatización basado en la nube que proporciona una gestión consistente en los entornos que son de Azure y que no son de Azure.
@@ -32,12 +32,12 @@ Utiliza la integración de Azure con Datadog para recopilar métricas de Azure A
 
 ### Instalación
 
-Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1]. No es necesario realizar ningún otro paso de instalación.
+Si aún no lo has hecho, configura primero [Microsoft Azure integración][1]. No hay otros pasos de instalación.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_automation" >}}
+{{< get-metrics-from-git "azure-automation" >}}
 
 
 ### Eventos
@@ -48,9 +48,9 @@ La integración Azure Automation no incluye ningún evento.
 
 La integración Azure Automation no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_automation/azure_automation_metadata.csv

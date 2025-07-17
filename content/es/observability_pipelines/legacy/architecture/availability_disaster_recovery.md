@@ -4,10 +4,6 @@ aliases:
 title: (LEGACY) Alta disponibilidad y recuperación ante desastres
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines no está disponible en el sitio US1-FED de Datadog.</div>
-{{< /site-region >}}
-
 <div class="alert alert-info">
 Esta guía es para grandes despliegues a nivel de producción.
 </div>

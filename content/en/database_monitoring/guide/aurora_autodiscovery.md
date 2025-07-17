@@ -59,6 +59,8 @@ By default, the listener discovers all Aurora clusters in the account and region
 
 You must apply these tags to the DB cluster (Role: `Regional cluster`). For more information on tagging RDS resources, see the [AWS documentation][7].
 
+If you configure `tags` as an empty array, Autodiscovery will discovery all clusters in the account and region.
+
 ### Configure the Datadog Agent
 
 Autodiscovery uses an Agent service listener, which discovers all database host endpoints in an Aurora cluster and forwards discovered endpoints to the existing Agent check scheduling pipeline. You can configure the listener in the `datadog.yaml` file:
@@ -91,6 +93,16 @@ database_monitoring:
       enabled: true
       tags:
         - "my-cluster-tag-key:value"
+```
+
+To monitor all clusters in the account and region:
+
+```yaml
+database_monitoring:
+  autodiscovery:
+    aurora:
+      enabled: true
+      tags: []
 ```
 
 The listener queries the AWS API for the list of hosts in a loop. The frequency with which the listener queries the AWS API, in seconds, is configurable in the `datadog.yaml` file:
@@ -163,6 +175,7 @@ instances:
 
 The template variable `%%extra_managed_authentication_enabled%%` resolves to `true` if the instance is using IAM authentication.
 
+[2]: /database_monitoring/guide/managed_authentication/?tab=aurora#configure-iam-authentication
 {{% /tab %}}
 {{% tab "MySQL" %}}
 
@@ -208,10 +221,9 @@ For more information on configuring Autodiscovery with integrations, see the [Au
 | %%port%%                                 | The port of the Aurora instance                                                                                                               |
 | %%extra_region%%                         | The AWS region where the instance is located                                                                                                  |
 | %%extra_dbclusteridentifier%%            | The cluster identifier of the discovered Aurora cluster                                                                                       |
-| %%extra_managed_authentication_enabled%% | Whether IAM authentication enabled on the cluster. <br/>This is used to determine if managed authentication should be used for Postgres. |
+| %%extra_managed_authentication_enabled%% | Whether IAM authentication enabled on the cluster. <br/>This is used to determine if managed authentication should be used for the connection. |
 
 [1]: /database_monitoring/setup_postgres/aurora/?tab=postgres10
-[2]: /database_monitoring/guide/managed_authentication/#configure-iam-authentication
 [3]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AmazonRDSReadOnlyAccess.html
 [4]: /getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
 [5]: /containers/docker/integrations/?tab=dockeradv2

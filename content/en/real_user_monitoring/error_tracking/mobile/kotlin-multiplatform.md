@@ -3,9 +3,11 @@ title: Kotlin Multiplatform Crash Reporting and Error Tracking
 description: Set up Error Tracking for your Kotlin Multiplatform applications.
 aliases:
     - /real_user_monitoring/error_tracking/kotlin-multiplatform
+    - /real_user_monitoring/error_tracking/kotlin_multiplatform
+    - /error_tracking/frontend/mobile/kotlin_multiplatform/
 type: multi-code-lang
 code_lang: kotlin-multiplatform
-code_lang_weight: 10
+code_lang_weight: 50
 further_reading:
 - link: '/real_user_monitoring/error_tracking/'
   tag: 'Documentation'
@@ -93,7 +95,7 @@ Use the following guides to see how you can upload mapping files (Android) or dS
 
 ### File sizing
 
-Individual debug symbols (mapping files and dSYMs) are limited to 500 MB each.
+Mapping files are limited in size to **500 MB** each, while dSYM files can go up to **2 GB** each.
 
 ### Collection
 

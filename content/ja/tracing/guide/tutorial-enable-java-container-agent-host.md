@@ -221,7 +221,7 @@ docker-compose -f service-docker-compose.yaml up notes
 
 しばらく待って、Datadog の [**APM > Traces**][11] にアクセスすると、API 呼び出しに対応するトレースの一覧が表示されます。
 
-{{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="APM トレースエクスプローラーのサンプルアプリのトレース" style="width:100%;" >}}
 
 `h2` はこのチュートリアルのために埋め込まれたメモリ内データベースで、`notes` は Spring Boot アプリケーションです。トレースリストには、すべてのスパン、いつ開始したか、どのリソースがスパンで追跡されたか、どれくらいの時間がかかったか、が表示されます。
 

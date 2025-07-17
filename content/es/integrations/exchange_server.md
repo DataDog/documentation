@@ -26,7 +26,7 @@ author:
 categories:
 - log collection
 - windows
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/exchange_server/README.md
 display_on_public_website: true
@@ -34,7 +34,7 @@ draft: false
 git_integration_title: exchange_server
 integration_id: exchange-server
 integration_title: Microsoft Exchange Server
-integration_version: 4.0.0
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: exchange_server
@@ -119,7 +119,7 @@ El check de Exchange está incluido en el paquete del [Datadog Agent][1], por lo
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "exchange_server" >}}
+{{< get-metrics-from-git "exchange-server" >}}
 
 
 ### Eventos

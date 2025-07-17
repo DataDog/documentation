@@ -339,7 +339,6 @@ docker run --cgroupns host \
 -v /etc/yum/vars:/host/etc/yum/vars:ro \
 -v /etc/dnf/vars:/host/etc/dnf/vars:ro \
 -v /etc/rhsm:/host/etc/rhsm:ro \
--e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
 -e HOST_ROOT=/host/root \
 --security-opt apparmor:unconfined \
 --cap-add=SYS_ADMIN \
@@ -793,7 +792,7 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 
 {{< collapse-content title="Go TLS Monitoring" level="h4" >}}
 <div class="alert alert-info">
-Universal Service Monitoring is available in <strong>beta</strong> to monitor TLS encrypted traffic from services implemented in Golang.
+Universal Service Monitoring is in Preview to monitor TLS encrypted traffic from services implemented in Golang.
 </div>
 
 <strong>Note</strong>:
@@ -842,7 +841,7 @@ agents:
 {{< collapse-content title="Node.js TLS Monitoring" level="h4" >}}
 
 <div class="alert alert-info">
-Universal Service Monitoring is available in <strong>beta</strong> to monitor HTTP, HTTP/2, and gRPC requests from services implemented in Node.js.
+Universal Service Monitoring is in Preview to monitor HTTP, HTTP/2, and gRPC requests from services implemented in Node.js.
 </div>
 
 Requires Agent version 7.54 or greater.

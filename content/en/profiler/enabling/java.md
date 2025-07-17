@@ -32,10 +32,13 @@ Supported operating systems:
 - Linux
 
 Minimum JDK versions:
-- OpenJDK 8u352+, 11.0.17+, 17.0.5+ (including builds on top of it: Amazon Corretto, Azul Zulu, and others)
-- Oracle JDK 8u351+, 11.0.17+, 17.0.5+
+- OpenJDK 8u352+, 11.0.17+, 17.0.5+, 21+ (including builds on top of it: Amazon Corretto, Azul Zulu, and others)
+- Oracle JDK 8u351+, 11.0.17+, 17.0.5+, 21+
 - OpenJ9 JDK 8u372+, 11.0.18+, 17.0.6+ (used on Eclipse OpenJ9, IBM JDK, IBM Semeru Runtime). The profiler is disabled by default for OpenJ9 due to the possibility of crashing JVM caused by a subtle bug in JVTMI implementation. If you are not experiencing any crashes, you can enable the profiler by adding `-Ddd.profiling.ddprof.enabled=true`.
 - Azul Platform Prime 23.05.0.0+ (formerly Azul Zing)
+
+
+**Note:** The Datadog Profiler is disabled on the GraalVM compiler (JVMCI) and needs to be enabled explicitly with `-Ddd.profiling.ddprof.enabled=true` or `DD_PROFILING_DDPROF_ENABLED=true`.
 
 The Datadog Profiler uses the JVMTI `AsyncGetCallTrace` function, in which there is a [known issue][1] prior to JDK release 17.0.5. This fix was backported to 11.0.17 and 8u352. The Datadog Profiler is not enabled unless the JVM the profiler is deployed into has this fix. Upgrade to at least 8u352, 11.0.17, 17.0.5, or the latest non-LTS JVM version to use the Datadog Profiler.
 
@@ -163,7 +166,7 @@ The Datadog profiler consists of several profiling engines, including CPU, wallc
 
 {{< tabs >}}
 {{% tab "Datadog Profiler" %}}
-_Requires JDK 11+._
+_Please refer to the Minimum JDK version requirements for enabling DataDog profiler._
 
 The Datadog profiler is enabled by default in dd-trace-java versions 1.7.0+. Datadog CPU profiling is scheduled through perf events and is more accurate than JFR CPU profiling. To enable CPU profiling:
 
@@ -357,3 +360,4 @@ The [Getting Started with Profiler][11] guide takes a sample service with a perf
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /profiler/enabling/supported_versions/
 [14]: /tracing/trace_collection/compatibility/java/?tab=graalvm#setup
+[15]: https://docs.datadoghq.com/profiler/enabling/java/?tab=datadogprofiler#

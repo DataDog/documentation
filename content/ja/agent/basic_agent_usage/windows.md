@@ -196,7 +196,7 @@ Windows に Agent をインストールする際、以下の各構成オプシ�
 | `PROXY_USER`                                | 文字列  | (プロキシを使っている場合) プロキシユーザーを設定します。[Datadog Agent でのプロキシの使用についてさらに詳しく][4]。                                                                                                                                 |
 | `PROXY_PASSWORD`                            | 文字列  | (プロキシを使っている場合) プロキシパスワードを設定します。プロセス/コンテナ Agent の場合は、認証パスワードの受け渡しのためにこの変数は必須で、名前を変えることはできません。[Datadog Agent でのプロキシの使用についてさらに詳しく][4]。 |
 | `EC2_USE_WINDOWS_PREFIX_DETECTION`          | Boolean | EC2 上の Windows ホストの EC2 インスタンス ID を使用します。_(v7.28.0+)_                                                                                                                                                                      |
-| [非推奨] `ADDLOCAL` | 文字列 | 追加の Agent コンポーネントを有効にします。`"MainApplication,NPM"` に設定すると、[ネットワークパフォーマンスモニタリング][5]のドライバーコンポーネントがインストールされます。_(バージョン 7.44.0 以前)_ |
+| [非推奨] `ADDLOCAL` | 文字列 | 追加の Agent コンポーネントを有効にします。`"MainApplication,NPM"` に設定すると、[Cloud Network Monitoring][5] のドライバーコンポーネントがインストールされます。_(バージョン 7.44.0 以前)_ |
 
 **注:**
 Agent 7 は Python 3 のみをサポートします。アップグレードする前に、カスタムチェックが Python 3 と互換性があることを確認します。詳細については、[Python 3 カスタムチェックの移行][1]ガイドを参照してください。カスタムチェックを使用していないか、既に互換性を確認している場合は、通常通りアップグレードします。
@@ -397,7 +397,7 @@ process_config:
 [2]: /ja/agent/supported_platforms/?tab=windows
 [3]: /ja/agent/faq/windows-agent-ddagent-user/
 [4]: /ja/agent/configuration/proxy/
-[5]: /ja/network_monitoring/performance
+[5]: /ja/network_monitoring/cloud_network_monitoring
 [6]: /ja/agent/guide/datadog-agent-manager-windows/
 [7]: /ja/integrations/wmi_check/
 [8]: https://app.datadoghq.com/monitors/create/integration

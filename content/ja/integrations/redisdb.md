@@ -45,7 +45,7 @@ draft: false
 git_integration_title: redisdb
 integration_id: redis
 integration_title: Redis
-integration_version: 7.0.0
+integration_version: 7.3.0
 is_public: true
 manifest_version: 2.0.0
 name: redisdb
@@ -443,7 +443,7 @@ Agent コンテナで必要な環境変数
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "redisdb" >}}
+{{< get-metrics-from-git "redis" >}}
 
 
 ### イベント
@@ -451,7 +451,7 @@ Agent コンテナで必要な環境変数
 Redis チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "redisdb" >}}
+{{< get-service-checks-from-git "redis" >}}
 
 
 ## トラブルシューティング

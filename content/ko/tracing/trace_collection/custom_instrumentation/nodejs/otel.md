@@ -1,7 +1,7 @@
 ---
 aliases:
-- /tracing/trace_collection/otel_instrumentation/nodejs/
-- /tracing/trace_collection/custom_instrumentation/otel_instrumentation/nodejs
+- /ko/tracing/trace_collection/otel_instrumentation/nodejs/
+- /ko/tracing/trace_collection/custom_instrumentation/otel_instrumentation/nodejs
 code_lang: otel
 code_lang_weight: 2
 description: OpenTelemetry API를 사용하여 Node.js 애플리케이션을 계측하고 Datadog로 트레이스를 전송합니다.

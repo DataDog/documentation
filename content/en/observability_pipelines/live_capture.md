@@ -7,10 +7,6 @@ further_reading:
   text: "Set up pipelines"
 ---
 
-{{< beta-callout url="" header="false" btn_hidden="true">}}
-Live Capture is in Preview.
-{{< /beta-callout >}}
-
 ## Overview
 
 Use Live Capture to see the data a source sends through the pipeline and also the data a processor receives and sends out.
@@ -22,9 +18,15 @@ Specifically, the following information is shown:
     - Dropped
     - Reduced
 
+## Permissions
+
+Only users with the `Observability Pipelines Live Capture Write` permission can set up captures. Users with the `Observability Pipelines Live Capture Read` permission can only view the events that have already been captured. See [Observability Pipelines Permissions][1] for a list of permissions for Observability Pipelines assets.
+
+Admins have read and write permissions by default. Standard users only have read permission by default. See [Access Control][2] for more information about default Datadog roles and how to create custom roles.
+
 ## Capture events
 
-1. Navigate to [Observability Pipelines][1].
+1. Navigate to [Observability Pipelines][3].
 1. Select your pipeline.
 1. Click the cog for the source or processor that you want to capture events for.
 1. Select **Capture and view events** in the side panel.
@@ -39,5 +41,6 @@ Specifically, the following information is shown:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/observability-pipelines
-
+[1]: /account_management/rbac/permissions/#observability-pipelines
+[2]: /account_management/rbac/
+[3]: https://app.datadoghq.com/observability-pipelines

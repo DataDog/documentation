@@ -1,12 +1,13 @@
 ---
 title: Kotlin Multiplatform Monitoring Setup
-is_beta: true
-private: true
 description: Collect RUM and Error Tracking data from your Kotlin Multiplatform projects.
 aliases:
     - /real_user_monitoring/kotlin-multiplatform/
+    - /real_user_monitoring/kotlin_multiplatform/
     - /real_user_monitoring/kotlin-multiplatform/setup
+    - /real_user_monitoring/kotlin_multiplatform/setup
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin-multiplatform
+    - /real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin_multiplatform
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-kotlin-multiplatform
   tag: "Source Code"
@@ -17,10 +18,6 @@ further_reading:
 
 ---
 ## Overview
-
-{{< beta-callout url="#" btn_hidden="true" >}}
-Kotlin Multiplatform Monitoring is in Preview.
-{{< /beta-callout >}}
 
 This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Kotlin Multiplatform SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking) or Error Tracking if you have purchased it as a standalone product.
 
@@ -70,6 +67,10 @@ Add the following Datadog iOS SDK dependencies, which are needed for the linking
 | 0.0.2                                    | 2.17.0                  |
 | 0.0.3                                    | 2.17.0                  |
 | 0.4.0                                    | 2.20.0                  |
+| 0.5.0                                    | 2.22.1                  |
+| 1.0.0                                    | 2.23.0                  |
+| 1.1.0                                    | 2.26.0                  |
+| 1.2.0                                    | 2.29.0                  |
 
 #### Adding native iOS dependencies using the CocoaPods plugin
 
@@ -85,12 +86,12 @@ cocoapods {
 
    pod("DatadogObjc") {
      linkOnly = true
-     version = 2.17.0
+     version = 2.29.0
    }
 
    pod("DatadogCrashReporting") {
      linkOnly = true
-     version = 2.17.0
+     version = 2.29.0
    }
 }
 ```
@@ -115,7 +116,7 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Kotlin Multiplatform Data Collected][2].
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/kotlin-multiplatform/data_collected/
+[2]: /real_user_monitoring/kotlin_multiplatform/data_collected/
 
 {{% /tab %}}
 {{% tab "Error Tracking" %}}
@@ -125,7 +126,7 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Kotlin Multiplatform Data Collected][2].
 
 [1]: https://app.datadoghq.com/error-tracking/settings/setup/client
-[2]: /real_user_monitoring/kotlin-multiplatform/data_collected/
+[2]: /real_user_monitoring/kotlin_multiplatform/data_collected/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -276,6 +277,28 @@ fun initializeDatadog(context: Any? = null) {
 }
 ```
 {{< /site-region >}}
+{{< site-region region="ap2" >}}
+```kotlin
+// in common source set
+fun initializeDatadog(context: Any? = null) {
+    // context should be application context on Android and can be null on iOS
+    val appClientToken = <CLIENT_TOKEN>
+    val appEnvironment = <ENV_NAME>
+    val appVariantName = <APP_VARIANT_NAME>
+
+    val configuration = Configuration.Builder(
+            clientToken = appClientToken,
+            env = appEnvironment,
+            variant = appVariantName
+    )
+        .useSite(DatadogSite.AP2)
+        .trackCrashes(true)
+        .build()
+
+    Datadog.initialize(context, configuration, trackingConsent)
+}
+```
+{{< /site-region >}}
 
 ### Sample RUM sessions
 
@@ -346,7 +369,7 @@ To update the tracking consent after the SDK is initialized, call `Datadog.setTr
 
 ### Initialize the RUM Ktor plugin to track network events made with Ktor
 
-1. Add the Gradle dependency to the `dd-sdk-kotlin-multiplatform-ktor` library in the your `build.gradle.kts` file:
+1. In your `build.gradle.kts` file, add the Gradle dependency to `dd-sdk-kotlin-multiplatform-ktor` for Ktor 2.x, or `dd-sdk-kotlin-multiplatform-ktor3` for Ktor 3.x:
 
 ```kotlin
 kotlin {
@@ -354,7 +377,10 @@ kotlin {
     sourceSets {
         // ...
         commonMain.dependencies {
+            // Use this line if you are using Ktor 2.x
             implementation("com.datadoghq:dd-sdk-kotlin-multiplatform-ktor:x.x.x")
+            // Use this line if you are using Ktor 3.x
+            // implementation("com.datadoghq:dd-sdk-kotlin-multiplatform-ktor3:x.x.x")
         }
     }
 }
@@ -370,25 +396,13 @@ val ktorClient = HttpClient {
                 "example.com" to setOf(TracingHeaderType.DATADOG),
                 "example.eu" to setOf(TracingHeaderType.DATADOG)
             ),
-            traceSamplingRate = 100f
+            traceSampleRate = 100f
         )
     )
 }
 ```
 
 This records each request processed by the `HttpClient` as a resource in RUM, with all the relevant information automatically filled (URL, method, status code, and error). Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][11] or enable [background view tracking](#track-background-events).
-
-## Track background events
-
-You can track events such as crashes and network requests when your application is in the background (for example, no active view is available). 
-
-Add the following snippet during RUM configuration:
-
-```kotlin
-.trackBackgroundEvents(true)
-```
-<div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
-</div>
 
 ## Track errors
 
@@ -412,10 +426,10 @@ This means that even if users open your application while offline, no data is lo
 [4]: /account_management/api-app-keys/#api-keys
 [5]: /account_management/api-app-keys/#client-tokens
 [6]: /getting_started/tagging/using_tags/
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform/#initialization-parameters
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin_multiplatform/#initialization-parameters
 [8]: https://app.datadoghq.com/rum/application/create
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform/#automatically-track-views
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin_multiplatform/#automatically-track-views
 [10]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/integrations/ktor
-[11]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform/#custom-views
-[12]: /real_user_monitoring/error_tracking/kotlin-multiplatform/
+[11]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin_multiplatform/#custom-views
+[12]: /real_user_monitoring/error_tracking/kotlin_multiplatform/
 [13]: /real_user_monitoring/explorer/

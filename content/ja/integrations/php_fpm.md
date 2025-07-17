@@ -45,7 +45,7 @@ draft: false
 git_integration_title: php_fpm
 integration_id: php-fpm
 integration_title: PHP FPM
-integration_version: 5.0.0
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: php_fpm
@@ -207,7 +207,7 @@ PHP-FPM インストールが Unix ソケットを使用する場合、`status_u
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "php_fpm" >}}
+{{< get-metrics-from-git "php-fpm" >}}
 
 
 ### イベント
@@ -215,7 +215,7 @@ PHP-FPM インストールが Unix ソケットを使用する場合、`status_u
 PHP-FPM チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "php_fpm" >}}
+{{< get-service-checks-from-git "php-fpm" >}}
 
 
 ## トラブルシューティング

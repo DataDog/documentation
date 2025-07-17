@@ -133,9 +133,9 @@ You may create a test using one of the following options:
 
    {{% tab "Javascript" %}}
 
-   Define variables for your HTTP API tests with JavaScript:
+Define variables for your HTTP API tests with JavaScript:
 
-  {{< img src="synthetics/api_tests/http_javascript.png" alt="Define HTTP API test with Javascript" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/http_javascript.png" alt="Define HTTP API test with Javascript" style="width:90%;" >}}
 
    {{% /tab %}}
 
@@ -182,8 +182,8 @@ HTTP tests can run:
 
 ## One-click
 
-API test creation suggests endpoints from the [API Catalog][17] and existing API tests to prefill your test form with relevant options.
-Use existing Datadog data sources such as APM traces, API Catalog endpoints discovery, and existing similar Synthetic tests created by users.
+API test creation suggests endpoints from the [Software Catalog][17] and existing API tests to prefill your test form with relevant options.
+Use existing Datadog data sources such as APM traces, Software Catalog endpoints discovery, and existing similar Synthetic tests created by users.
 
 Start typing in the API test **URL** input to get endpoint suggestions or similar tests in Synthetic Monitoring:
 
@@ -237,7 +237,7 @@ The most common errors include the following:
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
 
 `MALFORMED_RESPONSE`
-: The remote server responded with a payload that does not comply with HTTP specifications.
+: The remote server responded with a payload that does not comply with HTTP specifications. This error can happen when remote servers differ in their HTTP support. To prevent issues, run tests with a consistent HTTP version: either HTTP/2 (if available) or HTTP/1.1.
 
 ## Permissions
 

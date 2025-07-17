@@ -41,21 +41,36 @@ HTTP テストは、ネットワークの外部または内部からのテスト
 
 ## 構成
 
-`HTTP` テストの作成を選択した後、テストのリクエストを定義します。
+You may create a test using one of the following options:
 
-### リクエストを定義する
+   - **Create a test from a template**:
 
-1. **HTTP Method** を選択し、クエリする **URL** を指定します。使用可能なメソッドは、`GET`、`POST`、`PATCH`、`PUT`、`HEAD`、`DELETE`、`OPTIONS` です。`http` と `https` の両方の URL がサポートされています。
+     1. あらかじめ用意されたテンプレートの上にマウスカーソルを置き、**View Template** をクリックします。すると、「Test Details」「Request Details」「Assertions」「Alert Conditions」「Monitor Settings」など、あらかじめ設定された構成情報が表示されるサイドパネルが開きます。
+     2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+     3. **Save Details** をクリックして、API テストを送信します。<br /><br>
 
-   <div class="alert alert-info">その他のオプションについては、<a href=#advanced-options>高度なオプション</a>をご覧ください。</div>
+        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
-2. HTTP テストに**名前**を付けます。
+  - **Build a test from scratch**:
 
-3. HTTP テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring & Continuous Testing ページ][3]で Synthetic テストをフィルタリングできます。
+     1. テストを一から作成するには、**+ Start from scratch** テンプレートをクリックし、`HTTP` リクエストタイプを選択し、クエリする **URL** を指定します。
+        使用可能なメソッドは、`GET`、`POST`、`PATCH`、`PUT`、`HEAD`、`DELETE`、`OPTIONS` です。`http` と `https` の両方の URL がサポートされています。
 
-   {{< img src="synthetics/api_tests/http_test_config.png" alt="HTTP リクエストを定義する" style="width:90%;" >}}
+        <div class="alert alert-info">その他のオプションについては、<a href=#advanced-options>高度なオプション</a>をご覧ください。</div>
 
-**Test URL** をクリックして、リクエストのコンフィギュレーションをテストします。画面の右側に応答プレビューが表示されます。
+     2. HTTP テストに**名前**を付けます。
+
+     3. HTTP テストに Environment **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring & Continuous Testing ページ][3]で Synthetic テストをフィルタリングできます。
+
+     4. **Send** をクリックして、リクエストの構成をテストします。画面の右側に応答プレビューが表示されます。<br /><br>
+
+       {{< img src="getting_started/synthetics/api-test-config-4.png" alt="HTTP リクエストを定義する" style="width:90%;" >}}
+
+     5. Click **Create Test** to submit your API test.
+
+### スニペット
+
+{{% synthetics-api-tests-snippets %}}
 
 ### 高度なオプション
 
@@ -85,7 +100,7 @@ HTTP テストは、ネットワークの外部または内部からのテスト
    * **NTLM**: NTLM 認証の資格情報を追加します。NTLMv2 と NTLMv1 の両方をサポートします。
    * **AWS Signature v4**: Access Key ID と Secret Access Key を入力します。Datadog は、リクエストの署名を生成します。このオプションは、SigV4 の基本的な実装を使用します。Amazon S3 などの特定の署名はそのままではサポートされていません。
      Amazon S3 バケットへの "Single Chunk" 転送リクエストの場合、リクエストの本文を sha256 エンコードした値を含む `x-amz-content-sha256` ヘッダーを追加します (本文が空の場合は、`x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` を使用します)。
-   * **OAuth 2.0**: クライアント資格情報またはリソース所有者のパスワードのどちらかを付与するかを選択し、アクセストークンの URL を入力します。選択内容に応じて、クライアント ID とシークレット、またはユーザー名とパスワードを入力します。ドロップダウンメニューから、API トークンを基本認証ヘッダーとして送信するか、クライアント資格情報を本文に送信するかを選択します。オプションで、オーディエンス、リソース、スコープなどの追加情報を提供できます (**Resource Owner Password** を選択した場合は、クライアント ID とシークレットも提供します)。 
+   * **OAuth 2.0**: クライアント資格情報またはリソース所有者のパスワードのどちらかを付与するかを選択し、アクセストークンの URL を入力します。選択内容に応じて、クライアント ID とシークレット、またはユーザー名とパスワードを入力します。ドロップダウンメニューから、API トークンを基本認証ヘッダーとして送信するか、クライアント資格情報を本文に送信するかを選択します。オプションで、オーディエンス、リソース、スコープなどの追加情報を提供できます (**Resource Owner Password** を選択した場合は、クライアント ID とシークレットも提供します)。
 
    {{% /tab %}}
 
@@ -156,7 +171,7 @@ HTTP テストでは、`br`、`deflate`、`gzip`、`identity` の `content-encod
 
 HTTP テストを実行する**ロケーション**を選択します。HTTP テストは、ネットワークの外部または内部のどちらからテストを実行するかの好みによって、管理ロケーションと[プライベートロケーション][1]の両方から実行できます。
 
-{{% managed-locations %}} 
+{{% managed-locations %}}
 
 ### テストの頻度を指定する
 
@@ -170,7 +185,7 @@ HTTP テストは次の頻度で実行できます。
 
 ## ワンクリック
 
-API テストの作成は、[API カタログ][17]と既存の API テストからエンドポイントを提案し、テストフォームに関連するオプションを自動入力します。Datadog の既存データソースを使用してください (APM トレース、API カタログエンドポイントの発見、およびユーザーが作成した既存の同様の Synthetic テストなど)。
+API テストの作成は、[ソフトウェアカタログ][17]と既存の API テストからエンドポイントを提案し、テストフォームに関連するオプションを自動入力します。既存の Datadog データソース (APM トレース、Software Catalog で検出されたエンドポイント、ユーザーが作成した類似の Synthetic テストなど) を活用します。
 
 Synthetic Monitoring の API テスト **URL** 入力に入力を開始すると、エンドポイントの提案や類似テストを取得できます。
 
@@ -192,9 +207,12 @@ HTTP テストの URL、高度なオプション、アサーションで、[**Se
 
 ## テストの失敗
 
-テストが 1 つ以上のアサーションを満たさない場合、またはリクエストが途中で失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対するアサーションをテストせずにテストが実際に失敗することがあります。
+テストが 1 つ以上のアサーションを満たさない場合、またはリクエストが時期尚早に失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対してアサーションをテストすることなくテストが実際に失敗することがあります。
 
 よくあるエラーは以下の通りです。
+
+`AUTHENTICATION_ERROR`
+:Synthetic Monitoring は認証失敗が発生した場合、自動的にテストのリトライを無効にします。この安全策は、有効な認証情報を使ってテストを更新するまで継続されます。これにより、不要なテスト実行が行われ、誤アラートが発生したり課金対象の使用量が増加したりすることを防ぎます。
 
 `CONNREFUSED`
 : ターゲットマシーンが積極的に拒否したため、接続できませんでした。
@@ -208,7 +226,7 @@ HTTP テストの URL、高度なオプション、アサーションで、[**Se
 `Error performing HTTP/2 request`
 : リクエストを実行できませんでした。詳細は専用の[エラー][16]ページを参照してください。
 
-`INVALID_REQUEST` 
+`INVALID_REQUEST`
 : テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。
 
 `SSL`
@@ -220,7 +238,7 @@ HTTP テストの URL、高度なオプション、アサーションで、[**Se
   各リクエストについて、ネットワークウォーターフォールに表示されるのは、リクエストの完了したステージのみです。例えば、`Total response time` だけが表示されている場合、DNS の解決中にタイムアウトが発生したことになります。
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.`  は、テスト時間 (リクエスト＋アサーション) が最大時間 (60.5s) に達したことを示しています。
 
-`MALFORMED_RESPONSE` 
+`MALFORMED_RESPONSE`
 : リモートサーバーが HTTP 仕様に準拠していないペイロードで応答しました。
 
 ## 権限
@@ -231,11 +249,7 @@ HTTP テストの URL、高度なオプション、アサーションで、[**Se
 
 ### アクセス制限
 
-アカウントに[カスタムロール][15]を使用しているお客様は、アクセス制限が利用可能です。
-
-組織内の役割に基づいて、HTTP テストへのアクセスを制限することができます。HTTP テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
-
-{{< img src="synthetics/settings/restrict_access_1.png" alt="テストの権限の設定" style="width:70%;" >}}
+{{% synthetics_grace_permissions %}}
 
 ## その他の参考資料
 

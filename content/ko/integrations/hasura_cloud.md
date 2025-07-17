@@ -44,7 +44,7 @@ name: hasura_cloud
 public_title: Hasura Cloud
 short_description: Hasura Cloud 프로젝트 모니터링
 supported_os:
-- 리눅스
+- linux
 - 윈도우즈(Windows)
 - macos
 tile:
@@ -96,7 +96,7 @@ Hasura Cloud 프로젝트를 위해 Datadog 통합을 설정하는 방법은 [Ha
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "hasura_cloud" >}}
+{{< get-metrics-from-git "hasura-cloud" >}}
 
 
 ### 서비스 점검
@@ -113,6 +113,6 @@ Hasura Cloud 통합은 서비스 점검에 포함되어 있지 않습니다.
 
 [1]: https://hasura.io/cloud/
 [2]: https://hasura.io/docs/latest/observability/integrations/datadog/
-[3]: http://app.datadoghq.com/logs
+[3]: https://app.datadoghq.com/logs
 [4]: https://docs.datadoghq.com/ko/logs/explorer/facets/#create-facets
 [5]: https://docs.datadoghq.com/ko/help/

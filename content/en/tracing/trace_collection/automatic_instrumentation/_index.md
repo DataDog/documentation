@@ -30,7 +30,7 @@ Follow the relevant documentation for your automatic instrumentation approach to
 {{< tabs >}}
 {{% tab "Single Step Instrumentation" %}}
 
-If you install or update a Datadog Agent with the **Enable APM Instrumentation (beta)** option selected, the Agent is installed and configured to enable APM. This allows you to automatically instrument your application, without any additional installation or configuration steps.
+If you install or update a Datadog Agent with the **Enable APM Instrumentation** option selected, the Agent is installed and configured to enable APM. This allows you to automatically instrument your application, without any additional installation or configuration steps.
 
 To get started, read the [Single Step Instrumentation][1] documentation.
 
@@ -72,7 +72,7 @@ For containerized environments, follow the links below to enable trace collectio
 
    Similarly, the trace client attempts to send stats to the `/var/run/datadog/dsd.socket` Unix domain socket. If the socket does not exist, then stats are sent to `http://localhost:8125`.
 
-{{< site-region region="us3,us5,eu,gov,ap1" >}}
+{{< site-region region="us3,us5,eu,gov,ap1,ap2" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 

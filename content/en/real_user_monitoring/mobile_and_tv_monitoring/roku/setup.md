@@ -16,11 +16,8 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-roku-with-rum/
   tag: Blog
   text: Monitor your Roku channels with Datadog RUM
+site_support_id: rum_roku
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">RUM and Error Tracking for Roku are not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -189,19 +186,39 @@ end sub
 ```
 {{< /site-region >}}
 
-#### Sample session rates
+{{< site-region region="ap2" >}}
+```brightscript
+sub RunUserInterface(args as dynamic)
+    screen = CreateObject("roSGScreen")
+    scene = screen.CreateScene("MyScene")
+    screen.show()
 
-<div class="alert alert-warning">Configuring the session sample rate does not apply to Error Tracking.</div>
+    datadogroku_initialize({
+        clientToken: "<CLIENT_TOKEN>",
+        applicationId: "<APPLICATION_ID>"
+        site: "ap2",
+        env: "<ENV_NAME>",
+        sessionSampleRate: 100, ' the percentage (integer) of sessions to track
+        launchArgs: args
+    })
+
+    ' complete your channel setup here
+end sub
+```
+{{< /site-region >}}
+
+#### Sample session rates
 
 To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Roku SDK][8]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
-### Step 4 - Instrument the channel
 
-See [**Track RUM Resources**][9] to enable automatic tracking of all your resources, and [**Enrich user sessions**][10] to add custom global or user information to your events.
+## Instrument the channel
 
-#### Track Views
+See [**Track RUM Resources**](#track-rum-resources) to enable automatic tracking of all your resources, and [**Enrich user sessions**](#enrich-user-sessions) to add custom global or user information to your events.
 
-To split [user sessions][11] into logical steps, manually start a View using the following code. Every navigation to a new screen within your channel should correspond to a new View.
+### Track Views
+
+To split [user sessions][9] into logical steps, manually start a View using the following code. Every navigation to a new screen within your channel should correspond to a new View.
 
 ```brightscript
     viewName = "VideoDetails"
@@ -209,7 +226,7 @@ To split [user sessions][11] into logical steps, manually start a View using the
     m.global.datadogRumAgent.callfunc("startView", viewName, viewUrl)
 ```
 
-#### Track RUM Actions
+### Track RUM Actions
 
 RUM Actions represent the interactions your users have with your channel. You can forward actions to Datadog as follows:
 
@@ -219,7 +236,7 @@ RUM Actions represent the interactions your users have with your channel. You ca
     m.global.datadogRumAgent.callfunc("addAction", { target: targetName, type: actionType})
 ```
 
-#### Track RUM errors
+### Track RUM errors
 
 Whenever you perform an operation that might throw an exception, you can forward the error to Datadog as follows:
 
@@ -251,6 +268,4 @@ This means that even if users open your application while offline, no data is lo
 [6]: /account_management/api-app-keys/#client-tokens
 [7]: /getting_started/tagging/using_tags/#rum--session-replay
 [8]: /real_user_monitoring/mobile_and_tv_monitoring/roku/advanced_configuration/#enrich-user-sessions
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/roku/advanced_configuration/#track-rum-resources
-[10]: /real_user_monitoring/mobile_and_tv_monitoring/roku/advanced_configuration/#enrich-user-sessions
-[11]: /real_user_monitoring/mobile_and_tv_monitoring/roku/data_collected
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/roku/data_collected

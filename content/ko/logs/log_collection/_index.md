@@ -115,7 +115,7 @@ Datadog 통합과 로그 수집은 서로 연결되어 있습니다. 통합의 �
 
 ## 데이터 전송 수수료 절감
 
-Datadog의 [Network Performance Monitoring][7]을 사용하여 조직에서 처리량이 가장 많은 애플리케이션을 파악하세요. 지원되는 프라이빗 연결을 통해 Datadog에 연결하고 프라이빗 네트워크를 통해 데이터를 전송함으로써 공용 인터넷을 사용하지 않고 데이터 전송 수수료를 절감할 수 있습니다. 프라이빗 링크로 전환한 후에는 Datadog의 [Cloud Cost Management][8] 도구를 사용하여 클라우드 비용의 감소와 영향을 모니터링하세요.
+Datadog의 [Cloud Network Monitoring][7]을 사용하여 조직에서 처리량이 가장 많은 애플리케이션을 파악하세요. 지원되는 프라이빗 연결을 통해 Datadog에 연결하고 프라이빗 네트워크를 통해 데이터를 전송함으로써 공용 인터넷을 사용하지 않고 데이터 전송 수수료를 절감할 수 있습니다. 프라이빗 링크로 전환한 후에는 Datadog의 [Cloud Cost Management][8] 도구를 사용하여 클라우드 비용의 감소와 영향을 모니터링하세요.
 
 자세한 내용은 [데이터 전송 비용을 절감하면서 Datadog에 로그를 보내는 방법][9]을 참조하세요.
 
@@ -125,7 +125,7 @@ Datadog의 [Network Performance Monitoring][7]을 사용하여 조직에서 처�
 [4]: /ko/agent/kubernetes/log/#autodiscovery
 [5]: /ko/agent/docker/log/#log-integrations
 [6]: /ko/integrations/#cat-log-collection
-[7]: /ko/network_monitoring/performance/
+[7]: /ko/network_monitoring/cloud_network_monitoring/
 [8]: /ko/cloud_cost_management/
 [9]: /ko/logs/guide/reduce_data_transfer_fees/
 
@@ -214,7 +214,7 @@ Datadog 사이트에서 지원되는 엔드포인트를 보려면 페이지 오�
 | AP1  | HTTPS | `http-intake.logs.ap1.datadoghq.com`                                      | 443  | 커스텀 포워더가 HTTPS를 통해 JSON 또는 일반 텍스트 형식으로 로그를 보내는 데 사용됩니다. [Logs HTTP API 문서][1]를 참조하세요. |
 | AP1  | HTTPS | `lambda-http-intake.logs.ap1.datadoghq.com`                               | 443  | Lambda 함수가 HTTPS를 통해 원시값, Syslog 또는 JSON 형식으로 로그를 전송하는 데 사용됩니다.                                         |
 | AP1  | HTTPS | `agent-http-intake.logs.ap1.datadoghq.com`                                | 443  | Agent가 HTTPS를 통해 JSON 형식으로 로그를 보내는 데 사용됩니다. [Host Agent Log 수집 문서][2]를 참조하세요.          |
-| AP1  | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Browser SDK에서 HTTPS를 통해 JSON 형식으로 로그를 보내는 데 사용됩니다.                                                          |
+| AP1  | HTTPS | {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}        | 443  | Browser SDK에서 HTTPS를 통해 JSON 형식으로 로그를 보내는 데 사용됩니다.                                                          |
 
 [1]: /ko/api/latest/logs/#send-logs
 [2]: /ko/agent/logs/#send-logs-over-https

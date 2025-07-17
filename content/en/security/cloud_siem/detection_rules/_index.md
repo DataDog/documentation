@@ -33,15 +33,30 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
   tag: "Blog"
   text: "Monitor 1Password with Datadog Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/content-anomaly-detection-cloud-siem/"
+  tag: "Blog"
+  text: "Detect anomalies beyond spikes and new values with Content Anomaly Detection in Cloud SIEM"
 ---
 
 ## Overview
 
-To create a log detection rule in Datadog, navigate to the [Detection Rules page][1] and click **New Rule**.
+Cloud SIEM detection rules analyze logs, Audit Trail events, and events from Event Management to generate security signals when threats are detected. You can use [out-of-the-box detections rules](#out-of-the-box-detection-rules) or [create custom detection rules](#custom-detection-rules). This document walks you through how to create a custom detection rule.
 
-## Rule Type
+### Out-of-the-box detection rules
 
-For Cloud SIEM (Security Information and Event Management), select **Log Detection** to analyze ingested logs in real-time.
+After you set up Cloud SIEM, [OOTB detection rules][6] automatically begin analyzing your logs, Audit Trail events, and events from Event Management. You can edit OOTB detection rules and:
+- Change the name of the rule.
+- Extend the query. The original query cannot be edited, but you can add a custom query to it.
+- Change the severity setting in the **Set conditions** section.
+- Modify the playbook.
+
+### Custom detection rules
+
+To create a detection rule in Datadog, navigate to the [Detection Rules page][1] and click **New Rule**.
+
+## Detection mechanism
+
+Select whether you want to generate security signals from a **Real-Time Rule** or a **Historical job**. See [Historical Jobs][5] for more information on the one-time search job for historical logs or audit events.
 
 ## Detection methods
 
@@ -57,7 +72,11 @@ Detect when an attribute changes to a new value. For example, if you create a tr
 
 When configuring a specific threshold isn't an option, you can define an anomaly detection rule instead. With anomaly detection, a dynamic threshold is automatically derived from the past observations of the events.
 
-### Impossible Travel
+### Content anomaly
+
+While the anomaly method detects anomalies in volume and is ideal for identifying spikes in log or event activity, content anomaly detection analyzes the content of logs. The rule determines a similarity score for incoming values by comparing them to previous values. The similarity score helps determine whether the incoming value is an outlier. See [How an event is determined to be anomalous](#how-an-event-is-determined-to-be-anomalous) for more information.
+
+### Impossible travel
 
 Impossible travel detects access from different locations whose distance is greater than the distance a human can travel in the time between the two access events.
 
@@ -72,9 +91,9 @@ Third Party allows you to forward alerts from an outside vendor or application. 
 
 ### Search query
 
-{{< img src="security/security_monitoring/detection_rules/threshold_20240904.png" alt="Define the search query" style="width:100%;" >}}
+{{< img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" >}}
 
-Construct a search query using the same logic as a [Log Explorer search][1].
+Cloud SIEM can analyze logs, Audit Trail events, and events from Event Management. To search Audit Trail events, click the down arrow next to **Logs** and select **Audit Trail**. Construct a search query for your logs or audit events using the [Log Explorer search syntax][1].
 
 Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given time frame. The defined Group By generates a signal for each `group by` value. Typically, the `group by` is an entity (like user, or IP). The Group By is also used to [join the queries together](#joining-queries).
 
@@ -97,9 +116,12 @@ The Detection Rules join the logs together using a `group by` value. The `group 
 
 ### Search query
 
-{{< img src="security/security_monitoring/detection_rules/new_value.png" alt="Define the search query" style="width:100%;" >}}
+{{< img src="security/security_monitoring/detection_rules/new_value_20250310.png" alt="Define the search query" style="width:100%;" >}}
 
-Construct a search query using the same logic as a [Log Explorer search][1]. Each query has a label, which is a lowercase ASCII letter. The query name can be changed from an ASCII letter by clicking the pencil icon.
+
+Cloud SIEM can analyze logs, Audit Trail events, and events from Event Management. To search Audit Trail events, click the down arrow next to **Logs** and select **Audit Trail**. Construct a search query for your logs or audit events using the [Log Explorer search syntax][1].
+
+Each query has a label, which is a lowercase ASCII letter. The query name can be changed from an ASCII letter by clicking the pencil icon.
 
 **Note**: The query applies to all ingested logs.
 
@@ -118,7 +140,7 @@ You can also identify users and entities using multiple values in a single query
 
 ### Search query
 
-Construct a search query using the same logic as a Log Explorer search.
+Cloud SIEM can analyze logs, Audit Trail events, and events from Event Management. To search Audit Trail events, click the down arrow next to **Logs** and select **Audit Trail**. Construct a search query for your logs or audit events using the [Log Explorer search syntax][1].
 
 Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each `group by` value. Typically, the `group by` is an entity (like user, or IP).
 
@@ -126,13 +148,38 @@ Anomaly detection inspects how the `group by` attribute has behaved in the past.
 
 **Note**: The query applies to all ingested logs.
 
+[1]: /logs/search_syntax/
 {{% /tab %}}
 
-{{% tab "Impossible Travel" %}}
+{{% tab "Content anomaly" %}}
 
 ### Search query
 
-Construct a search query using the same logic as a [Log Explorer search][1]. All logs matching this query are analyzed for a potential impossible travel. You can use the `preview` section to see which logs are matched by the current query.
+1. Cloud SIEM can analyze logs, Audit Trail events, and events from Event Management. To search Audit Trail events, click the down arrow next to **Logs** and select **Audit Trail**. Construct a search query for your logs or audit events using the [Log Explorer search syntax][1].
+1. In the **Detect anomaly** field, specify the fields whose values you want to analyze.
+1. In the **Group by** field, specify the fields you want to group by.
+1. In the **Learn for** dropdown menu, select the number of days for the learning period. During the learning period, the rule sets a baseline of normal field values and does not generate any signals.
+  **Note**: If the detection rule is modified, the learning period restarts at day `0`.
+1. In the **Other parameters** section, you can specify the parameters to assess whether a log is anomalous or not. See [How an event is determined to be anomalous](#how-an-event-is-determined-to-be-anomalous) for more information.
+
+#####  How an event is determined to be anomalous
+
+Content anomaly detection balances precision and sensitivity using several rule parameters that you can set:
+
+1. Similarity threshold: Defines how dissimilar a field value must be to be considered anomalous (default: `70%`).
+1. Minimum similar items: Sets how many similar historical logs must exist for a value to be considered normal (default: `1`).
+1. Evaluation window: The time frame during which anomalies are counted toward a signal (for example, a 10-minute time frame).
+
+These parameters help to identify field content that is both unusual and rare, filtering out minor or common variations.
+
+[1]: /logs/search_syntax/
+{{% /tab %}}
+
+{{% tab "Impossible travel" %}}
+
+### Search query
+
+Cloud SIEM can analyze logs, Audit Trail events, and events from Event Management. To search Audit Trail events, click the down arrow next to **Logs** and select **Audit Trail**. Construct a search query for your logs or audit events using the [Log Explorer search syntax][1]. All logs matching this query are analyzed for a potential impossible travel. You can use the `preview` section to see which logs are matched by the current query.
 
 #### User attribute
 
@@ -158,7 +205,7 @@ Do not click the checkbox if you want Datadog to detect all impossible travel be
 
 ### Root query
 
-Construct a search query using the same logic as a [Log Explorer search][1]. The trigger defined for each new attribute generates a signal for each new value of that attribute over a 24-hour roll-up period.
+Cloud SIEM can analyze logs, Audit Trail events, and events from Event Management. To search Audit Trail events, click the down arrow next to **Logs** and select **Audit Trail**. Construct a search query for your logs or audit events using the [Log Explorer search syntax][1]. The trigger defined for each new attribute generates a signal for each new value of that attribute over a 24-hour roll-up period.
 
 Click **Add Query** to add additional queries.
 
@@ -273,7 +320,27 @@ A signal "closes" once the time exceeds the maximum signal duration, regardless 
 
 {{% /tab %}}
 
-{{% tab "Impossible Travel" %}}
+{{% tab "Content anomaly" %}}
+
+### Severity and notification
+
+{{% security-rule-severity-notification %}}
+
+In the **Anomaly count** field, enter the condition for how many anomalous logs are required to trigger a signal. For example, if the condition is `a >= 3` where `a` is the query, a signal is triggered if there are at least three anomalous logs within the evaluation window.
+
+**Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
+
+### Time windows
+
+Datadog automatically detects the seasonality of the data and generates a security signal when the data is determined to be anomalous.
+
+After a signal is generated, the signal remains "open" if the data remains anomalous and the last updated timestamp is updated for the anomalous duration.
+
+A signal "closes" once the time exceeds the maximum signal duration, regardless of whether or not the anomaly is still anomalous. This time is calculated from the first seen timestamp.
+
+{{% /tab %}}
+
+{{% tab "Impossible travel" %}}
 
 The impossible travel detection method does not require setting a rule case.
 
@@ -333,6 +400,26 @@ Optionally, add a suppression rule to prevent a signal from getting generated. F
 
 Additionally, in the suppression rule, you can add a log exclusion query to exclude logs from being analyzed. These queries are based on **log attributes**. **Note**: The legacy suppression was based on log exclusion queries, but it is now included in the suppression rule's **Add a suppression query** step.
 
+## Rule Version History
+
+{{< img src="/security/security_monitoring/detection_rules/rule_version_history_20250207.png" alt="The version history for a GitHub OAuth access token compromise showing" style="width:80%;" >}}
+
+Use Rule Version History to:
+- See past versions of a detection rule and understand the changes over time.
+- See who made the changes for improved collaboration.
+- Compare versions with diffs to analyze the modifications and impact of the changes.
+
+To see the version history of a rule:
+1. Navigate to [Detection Rules][4].
+1. Click on the rule you are interested in.
+1. In the rule editor, click **Version History** to see past changes.
+1. Click a specific version to see what changes were made.
+1. Click **Open Version Comparison** to see what changed between versions.
+1. Select the two versions you want to compare.
+    - Data highlighted in red indicates data that was modified or removed.
+    - Data highlighted in green indicates data that was added.
+1. Click **Unified** if you want to see the comparison in the same panel.
+
 ## Rule deprecation
 
 Regular audits of all out-of-the-box detection rules are performed to maintain high fidelity signal quality. Deprecated rules are replaced with an improved rule.
@@ -351,3 +438,6 @@ The rule deprecation process is as follows:
 [1]: https://app.datadoghq.com/security/configuration/siem/rules
 [2]: /security/detection_rules/#clone-a-rule
 [3]: https://app.datadoghq.com/logs/
+[4]: https://app.datadoghq.com/security/rules
+[5]: /security/cloud_siem/historical_jobs/
+[6]: /security/default_rules/?category=cat-cloud-siem-log-detection#all

@@ -38,10 +38,9 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
    ```
 1. Create a [Kubernetes Secret][3] to store your Datadog API key.
    ```shell
-   kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY> --from-literal app-key=<DATADOG_APP_KEY>
+   kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY>
    ```
-   - Replace `<DATADOG_API_KEY>` with your [Datadog API key][4].
-   - Replace `<DATADOG_APP_KEY>` with your [Datadog app key][6].
+   Replace `<DATADOG_API_KEY>` with your [Datadog API key][4].
 1. Create a file, `datadog-agent.yaml`, that contains the following configuration:
 
    ```yaml
@@ -59,15 +58,16 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
        admissionController:
          enabled: true
          mutateUnlabelled: false
+       # (Optional) Uncomment the next three lines to enable logs collection
+       # logCollection:
+         # enabled: true
+         # containerCollectAll: true
      global:
        site: <DATADOG_SITE>
        credentials:
          apiSecret:
            secretName: datadog-secret
            keyName: api-key
-         appSecret:
-           secretName: datadog-secret
-           keyName: app-key
      override:
        nodeAgent:
          image:
@@ -76,6 +76,8 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
    Replace `<DATADOG_SITE>` with your [Datadog site][5]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 
    Replace `<DATADOG_AGENT_VERSION>` with version `7.55.0` or later.
+
+   **Optional**: Uncomment the `logCollection` section to start collecting application logs which will be correlated to Spark job run traces. Once enabled, logs are collected from all discovered containers by default. See the [Kubernetes log collection documentation][7] for more details on the setup process.
 1. Deploy the Datadog Agent with the above configuration file:
    ```shell
    kubectl apply -f /path/to/your/datadog-agent.yaml
@@ -85,25 +87,27 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
 [3]: https://kubernetes.io/docs/concepts/configuration/secret/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: /getting_started/site
-[6]: https://app.datadoghq.com/organization-settings/application-keys
+[7]: /containers/kubernetes/log/?tab=datadogoperator#log-collection
 {{% /tab %}}
 {{% tab "Helm" %}}
 
 1. Create a [Kubernetes Secret][1] to store your Datadog API key.
    ```shell
-   kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY> --from-literal app-key=<DATADOG_APP_KEY>
+   kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY>
    ```
-   - Replace `<DATADOG_API_KEY>` with your [Datadog API key][2].
-   - Replace `<DATADOG_APP_KEY>` with your [Datadog app key][3].
+   Replace `<DATADOG_API_KEY>` with your [Datadog API key][2].
 1. Create a file, `datadog-values.yaml`, that contains the following configuration:
    ```yaml
    datadog:
      apiKeyExistingSecret: datadog-secret
-     appKeyExistingSecret: datadog-secret
      site: <DATADOG_SITE>
      apm:
        portEnabled: true
        port: 8126
+     # (Optional) Uncomment the next three lines to enable logs collection
+     # logs:
+       # enabled: true
+       # containerCollectAll: true
 
    agents:
      image:
@@ -117,6 +121,8 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
    Replace `<DATADOG_SITE>` with your [Datadog site][4]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 
    Replace `<DATADOG_AGENT_VERSION>` with version `7.55.0` or later.
+
+   **Optional**: Uncomment the logs section to start collecting application logs which will be correlated to Spark job run traces. Once enabled, logs are collected from all discovered containers by default. See the [Kubernetes log collection documentation][5] for more details on the setup process.
 1. Run the following command:
    ```shell
    helm install <RELEASE_NAME> \
@@ -131,8 +137,8 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
 
 [1]: https://kubernetes.io/docs/concepts/configuration/secret/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: /getting_started/site
+[5]: /containers/kubernetes/log/?tab=helm#log-collection
 {{% /tab %}}
 {{< /tabs >}}
 

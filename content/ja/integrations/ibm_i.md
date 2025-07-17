@@ -33,7 +33,7 @@ draft: false
 git_integration_title: ibm_i
 integration_id: ibm-i
 integration_title: IBM i
-integration_version: 4.0.0
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: ibm_i
@@ -120,7 +120,7 @@ IBM i ODBC ドライバーの名前は、IBM i のチェックを構成するた
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "ibm_i" >}}
+{{< get-metrics-from-git "ibm-i" >}}
 
 
 ### イベント

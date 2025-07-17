@@ -39,7 +39,7 @@ It's important to understand what is sent in an assertion before turning on mapp
 When a user logs in who has the specified identity provider attribute, they are automatically assigned the Datadog role. Likewise, if someone has that identity provider attribute removed, they lose access to the role (unless another mapping adds it).
 
 <div class="alert alert-warning">
-  <strong>Important:</strong> If a user does <i>not</i> match any mapping, they lose any roles they had previously and are prevented from logging into the org with SAML. Double-check your mapping definitions and inspect your own assertions before enabling Mappings to prevent any scenarios where your users are unable to login.
+  <strong>Important:</strong> If a user does <i>not</i> match any mapping, they lose any roles they had previously and are prevented from logging into the org with SAML. This includes roles that may be set with Just-In-Time provisioning. Double-check your mapping definitions and inspect your own assertions before enabling Mappings to prevent any scenarios where your users are unable to login.
 </div>
 
 Make changes to a mapping by clicking the pencil (**Edit**) icon, or remove a mapping by clicking the garbage (**Delete**) icon. These actions affect only the mapping, not the identity provider attributes or the Datadog roles.

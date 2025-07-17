@@ -75,7 +75,13 @@ You can use [Carthage][1] to install `dd-sdk-ios`:
 github "DataDog/dd-sdk-ios"
 ```
 
-In Xcode, link the following frameworks:
+**Note**: Datadog does not provide prebuilt Carthage binaries. This means Carthage will build the SDK from source.
+To build and integrate the SDK, run:
+```
+carthage bootstrap --use-xcframeworks --no-use-binaries
+```
+
+After building, add the following XCFrameworks to your Xcode project (in the "Frameworks, Libraries, and Embedded Content" section):
 ```
 DatadogInternal.xcframework
 DatadogCore.xcframework
@@ -320,11 +326,41 @@ configuration.site = [DDSite ap1];
 {{< /tabs >}}
 {{< /site-region >}}
 
+{{< site-region region="ap2" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+import DatadogCore
+
+Datadog.initialize(
+  with: Datadog.Configuration(
+    clientToken: "<client token>",
+    env: "<environment>",
+    site: .ap2,
+    service: "<service name>"
+  ),
+  trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+@import DatadogObjc;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite ap2];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
 The iOS SDK automatically tracks user sessions depending on options provided at the SDK initialization. To add GDPR compliance for your EU users and other [initialization parameters][6] to the SDK configuration, see the [Set tracking consent documentation](#set-tracking-consent-gdpr-compliance).
 
 #### Sample session rates
-
-<div class="alert alert-warning">Configuring the session sample rate does not apply to Error Tracking.</div>
 
 To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM iOS SDK][7]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
@@ -380,6 +416,8 @@ RUM.enable(
     applicationID: "<rum application id>",
     uiKitViewsPredicate: DefaultUIKitRUMViewsPredicate(),
     uiKitActionsPredicate: DefaultUIKitRUMActionsPredicate(),
+    swiftUIViewsPredicate: DefaultSwiftUIRUMViewsPredicate(),
+    swiftUIActionsPredicate: DefaultSwiftUIRUMActionsPredicate(isLegacyDetectionEnabled: true),
     urlSessionTracking: RUM.Configuration.URLSessionTracking()
   )
 )
@@ -392,6 +430,8 @@ RUM.enable(
 DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
 configuration.uiKitViewsPredicate = [DDDefaultUIKitRUMViewsPredicate new];
 configuration.uiKitActionsPredicate = [DDDefaultUIKitRUMActionsPredicate new];
+configuration.swiftUIViewsPredicate = [DDDefaultSwiftUIRUMViewsPredicate new];
+configuration.swiftUIActionsPredicate = [[DDDefaultSwiftUIRUMActionsPredicate alloc] initWithIsLegacyDetectionEnabled:YES];
 [configuration setURLSessionTracking:[DDRUMURLSessionTracking new]];
 
 [DDRUM enableWith:configuration];
@@ -433,7 +473,7 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 
 ### Instrument views
 
-The Datadog iOS SDK for allows you to instrument views of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications.
+The Datadog iOS SDK allows you to instrument views of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications.
 
 To instrument a `SwiftUI.View`, add the following method to your view declaration:
 
@@ -458,6 +498,8 @@ The `trackRUMView(name:)` method starts and stops a view when the `SwiftUI` view
 
 The Datadog iOS SDK allows you to instrument tap actions of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications.
 
+<div class="alert alert-warning">Using <code>.trackRUMTapAction(name:)</code> for <code>SwiftUI</code> controls inside a <code>List</code> can break its default gestures. For example, it may disable the <code>Button</code> action or break <code>NavigationLink</code>. To track taps in a <code>List</code> element, use the <a href="/real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration#custom-actions">Custom Actions</a> API instead.</div>
+
 To instrument a tap action on a `SwiftUI.View`, add the following method to your view declaration:
 
 ```swift
@@ -475,26 +517,6 @@ struct BarView: View {
 }
 ```
 
-## Track background events
-
-<div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
-</div>
-
-You can track events such as crashes and network requests when your application is in the background (for example, no active view is available).
-
-Add the following snippet during initialization in your Datadog configuration:
-
-```swift
-import DatadogRUM
-
-RUM.enable(
-  with: RUM.Configuration(
-    ...
-    trackBackgroundEvents: true
-  )
-)
-```
-
 ## Track iOS errors
 
 [iOS Crash Reporting and Error Tracking][8] displays any issues in your application and the latest available errors. You can view error details and attributes including JSON in the [RUM Explorer][9].
@@ -509,7 +531,7 @@ This means that even if users open your application while offline, no data is lo
 
 ## Supported versions
 
-See [Supported versions][10] for a list operating system versions and platforms that are compatible with the RUM iOS SDK.
+See [Supported versions][10] for a list operating system versions and platforms that are compatible with the iOS SDK.
 
 ## Further Reading
 

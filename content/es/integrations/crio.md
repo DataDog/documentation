@@ -24,8 +24,8 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- contenedores
-custom_kind: integration
+- rastreo
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/crio/README.md
 display_on_public_website: true
@@ -33,33 +33,33 @@ draft: false
 git_integration_title: crio
 integration_id: cri-o
 integration_title: CRI-O
-integration_version: 4.0.0
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: crio
 public_title: CRI-O
 short_description: Seguimiento de todas tus métricas de CRI-O con Datadog
 supported_os:
-- Linux
-- macOS
-- Windows
+- linux
+- macos
+- windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::macOS
-  - Sistema operativo compatible::Windows
-  - Categoría::Contenedores
-  - Oferta::Integración
-  configuration: README.md#Configuración
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Containers
+  - Offering::Integration
+  configuration: README.md#Setup
   description: Seguimiento de todas tus métricas de CRI-O con Datadog
   media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: CRI-O
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -70,7 +70,7 @@ Este check monitoriza [CRI-O][1].
 
 ### Instalación
 
-La integración se basa en la opción `--enable-metrics` de CRI-O desactivada por defecto, cuando se exponen métricas activadas en`127.0.0.1:9090/métricas`.
+La integración se basa en la opción `--enable-metrics` de CRI-O desactivada por defecto, cuando se exponen métricas activadas en`127.0.0.1:9090/metrics`.
 
 ### Configuración
 
@@ -80,7 +80,7 @@ La integración se basa en la opción `--enable-metrics` de CRI-O desactivada po
 
 ### Validación
 
-[Ejecuta el subcomando de estado del Agent][4] y busca  en la sección **Checks**.
+[Ejecuta el subcomando de estado del Agent][4] y busca `crio` en la sección **Checks**.
 
 ## Datos recopilados
 
@@ -88,16 +88,16 @@ CRI-O recopila métricas del recuento y la latencia de las operaciones realizada
 La integración CRI-O en Datadog recopila el uso de CPU y de memoria del propio binario CRI-O golang.
 
 ### Métricas
-{{< get-metrics-from-git "crio" >}}
+{{< get-metrics-from-git "cri-o" >}}
 
 
 ### Checks de servicio
-{{< get-service-checks-from-git "crio" >}}
+{{< get-service-checks-from-git "cri-o" >}}
 
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][7].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][7].
 
 
 [1]: http://cri-o.io

@@ -33,7 +33,7 @@ draft: false
 git_integration_title: datadog_cluster_agent
 integration_id: datadog-cluster-agent
 integration_title: Datadog Cluster Agent
-integration_version: 5.2.0
+integration_version: 5.5.0
 is_public: true
 manifest_version: 2.0.0
 name: datadog_cluster_agent
@@ -91,7 +91,7 @@ Datadog Cluster Agent チェックは、ほとんどのシナリオで自動的�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "datadog_cluster_agent" >}}
+{{< get-metrics-from-git "datadog-cluster-agent" >}}
 
 
 ### イベント
@@ -99,7 +99,7 @@ Datadog Cluster Agent チェックは、ほとんどのシナリオで自動的�
 Datadog_Cluster_Agent インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "datadog_cluster_agent" >}}
+{{< get-service-checks-from-git "datadog-cluster-agent" >}}
 
 
 ## トラブルシューティング
