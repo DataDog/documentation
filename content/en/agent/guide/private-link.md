@@ -312,7 +312,7 @@ After setting up PrivateLink, to verify that data is getting sent using PrivateL
 dig http-intake.logs.datadoghq.com
 ```
 
-If logs are being sent over PrivateLink, the `ANSWER Section` section of the output shows `http-intake.logs.datadoghq.com` like this:
+If logs are being sent over PrivateLink, the `ANSWER Section` section of the output shows `http-intake.logs.datadoghq.com` like in the following example. **Note**: The IP addresses you see are going to be different.
 
 ```
 ;; ANSWER SECTION:
