@@ -238,7 +238,7 @@ Check that the OpenLineage environment variables are correctly set on the Astron
 {{% /tab %}}
 {{% tab "Google Cloud Composer" %}}
 <div class="alert alert-warning">
-Data Jobs Monitoring is not compatible yet with <a href=https://cloud.google.com/composer/docs/composer-2/lineage-integration> Dataplex</a> for data lineage. Setting up OpenLineage for Data Jobs Monitoring overrides your existing Dataplex transport configuration.
+Data Jobs Monitoring for Airflow is not yet compatible with <a href=https://cloud.google.com/composer/docs/composer-2/lineage-integration>Dataplex</a> data lineage. Setting up OpenLineage for Data Jobs Monitoring overrides your existing Dataplex transport configuration.
 </div>
 
 ## Requirements
