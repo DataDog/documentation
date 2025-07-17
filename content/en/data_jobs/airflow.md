@@ -251,7 +251,7 @@ Data Jobs Monitoring for Airflow is not yet compatible with <a href=https://clou
 To get started, follow the instructions below.
 
 
-1. In the Advanced Configuration tab, under "Airflow configuration override", click on "Add Airflow configuration override" and configure as follows:
+1. In the Advanced Configuration tab, under **Airflow configuration override**, click **Add Airflow configuration override** and configure these settings:
 
    - In Section 1, enter `openlineage`
    - In Key 1, enter `transport`
