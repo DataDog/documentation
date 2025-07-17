@@ -49909,9 +49909,7 @@ paths:
         for more details.\n\n\u274C For use cases involving other event categories,
         use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).\n\n\u274C
         Notifications are not yet supported for events sent to this endpoint. Use
-        the V1 endpoint for notification functionality.\n\n\u274C This endpoint is
-        not available for the Government (US1-FED) site. Contact your account representative
-        for more information."
+        the V1 endpoint for notification functionality."
       operationId: CreateEvent
       requestBody:
         content:
