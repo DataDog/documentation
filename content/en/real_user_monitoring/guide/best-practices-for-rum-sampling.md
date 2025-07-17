@@ -37,7 +37,7 @@ You can set the sampling rate with the SDK ([Browser][3], [Android][4], [iOS][5]
 
 With RUM without Limits, server-side sampling rate defines which sessions you want to keep in Datadog (see details about the [retention period][11]).
 
-The server-side sampling rate is defined as part of the retention filters for your sessions. When a retention filter matches a session or matches one of the events making up the sessions (view/action/error/resource, and so on), the whole session is stored alongside all its events (and including the ones that proceeded the sampling decision). The retention rate allows you to store only a specific percentage of sessions that meet the filter criteria and discard the rest. Learn more about [how retention filters work][12].
+The server-side sampling rate is defined as part of the retention filters for your sessions. When a retention filter matches a session or matches one of the events making up the sessions (view/action/error/resource, and so on), the whole session is stored alongside all its events (and including the ones that preceded the sampling decision). The retention rate allows you to store only a specific percentage of sessions that meet the filter criteria and discard the rest. Learn more about [how retention filters work][12].
 
 ### The effect of sampling on data and metrics that are available in RUM
 
