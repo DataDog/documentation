@@ -5962,17 +5962,17 @@ menu:
       identifier: cloud_siem_ingest_and_enrich
       weight: 1
     - name: Content Packs
-      url: security/cloud_siem/content_packs
+      url: security/cloud_siem/ingest_and_enrich/content_packs
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_content_packs
       weight: 101
     - name: Threat Intelligence
-      url: security/cloud_siem/threat_intelligence
+      url: security/cloud_siem/ingest_and_enrich/threat_intelligence
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_threat_intelligence
       weight: 102
     - name: Open Cybersecurity Schema Framework
-      url: security/cloud_siem/open_cybersecurity_schema_framework
+      url: security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_open_cybersecurity_schema_framework
       weight: 103
@@ -6037,7 +6037,7 @@ menu:
       identifier: cloud_siem_respond_and_report
       weight: 4
     - name: Security Operational Metrics
-      url: security/cloud_siem/security_operational_metrics/
+      url: security/cloud_siem/respond_and_report/security_operational_metrics
       parent: cloud_siem_respond_and_report
       identifier: siem_security_operational_metrics
       weight: 401
