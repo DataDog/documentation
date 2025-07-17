@@ -244,7 +244,7 @@ When `span_name_as_resource_name` is set to `false`, the operation name is deriv
 
 **Solution**: If you want to disable the `span_name_as_resource_name` option in the Datadog OTLP traces intake endpoint to match the behavior of the Datadog Agent or OpenTelemetry Collector, follow these steps:
 
-1. Refer to [Map or filter span names](#map-or-filter-span-names) in this document.
+1. Refer to [Map or filter span names](#optional-map-or-filter-span-names) in this document.
 1. Set the `span_name_as_resource_name` option to `false` in the `dd-otel-span-mapping` header.
 
 For example:
