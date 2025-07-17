@@ -348,7 +348,10 @@ Evaluations must be joined to a unique span. You can identify the target span us
           "timestamp_ms": 1609479200,
           "metric_type": "score",
           "label": "Accuracy",
-          "score_value": 3
+          "score_value": 3,
+          "metadata": {
+            "flagged_segments": ["harmful part of output", "some other harmful part of output"]
+          }
         }
       ]
     }
@@ -380,6 +383,7 @@ Evaluations must be joined to a unique span. You can identify the target span us
 | categorical_value [*required if the metric_type is "categorical"*]    | string | A string representing the category that the evaluation belongs to. |
 | score_value [*required if the metric_type is "score"*]    | number | A score value of the evaluation. |
 | tags        | [[Tag](#tag)] | A list of tags to apply to this particular evaluation metric.       |
+| metadata    | Dict | Additional data relevant to the evaluation. |
 
 #### JoinOn
 
