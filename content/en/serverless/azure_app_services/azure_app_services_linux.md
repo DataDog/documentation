@@ -185,12 +185,8 @@ Enables the instrumentation APIs in the .NET runtime.<br>
 Identifier for Datadog's .NET the instrumentation library.<br>
 
 `CORECLR_PROFILER_PATH`
-: **Value for glibc-based Linux distros**:<br>
-`/home/site/wwwroot/datadog/`<br>
-`linux-x64/Datadog.Trace.ClrProfiler.Native.so`<br>
-**Value for Alpine Linux and other musl-based distros**:<br>
-`/home/site/wwwroot/datadog/`<br>
-`linux-musl-x64/Datadog.Trace.ClrProfiler.Native.so`<br>
+: **Value**: `/home/site/wwwroot/datadog/`<br>
+`linux-x64/Datadog.Trace.ClrProfiler.Native.so` (single line)<br>
 Path to the instrumentation library loaded by the .NET runtime.<br>
 
 [1]: https://www.nuget.org/packages/Datadog.Trace.Bundle#readme-body-tab
