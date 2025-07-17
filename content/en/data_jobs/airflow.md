@@ -253,9 +253,9 @@ To get started, follow the instructions below.
 
 1. In the Advanced Configuration tab, under **Airflow configuration override**, click **Add Airflow configuration override** and configure these settings:
 
-   - In Section 1, enter `openlineage`
-   - In Key 1, enter `transport`
-   - In Value 1, enter the follows:
+   - In Section 1, enter `openlineage`.
+   - In Key 1, enter `transport`.
+   - In Value 1, enter the following:
      ```text
      {
       "type": "http", 
@@ -270,9 +270,9 @@ To get started, follow the instructions below.
    * Replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
    
 
-   Check official [Airflow][4] and [Composer][3] documentation pages for other supported configurations of `openlineage` provider in Google Cloud Composer.
+   Check official [Airflow][4] and [Composer][3] documentation pages for other supported configurations of the `openlineage` provider in Google Cloud Composer.
 
-2. After starting the Composer environment, install `openlineage` provider by adding the following package in the Pypi packages tab of your environment page:
+2. After starting the Composer environment, install the `openlineage` provider by adding the following package in the Pypi packages tab of your environment page:
       ```text
       apache-airflow-providers-openlineage
       ```
@@ -291,7 +291,7 @@ In Datadog, view the [Data Jobs Monitoring][7] page to see a list of your Airflo
 
 ## Troubleshooting
 
-Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` in the Environment variables tab of the Composer page for OpenLineage client and its child modules. This can be useful in troubleshooting during the configuration of `openlineage` provider.
+Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` in the Environment variables tab of the Composer page for OpenLineage client and its child modules. This can be useful in troubleshooting as you configure the `openlineage` provider.
 
 {{% /tab %}}
 {{< /tabs >}}
