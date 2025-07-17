@@ -238,7 +238,7 @@ Check that the OpenLineage environment variables are correctly set on the Astron
 {{% /tab %}}
 {{% tab "Google Cloud Composer" %}}
 <div class="alert alert-warning">
-Data Jobs Monitoring is not compatible yet with <a href=https://cloud.google.com/composer/docs/composer-2/lineage-integration> Dataplex</a> for data lineage. Setting up OpenLineage for Data Jobs Monitoring will override your existing Dataplex transport configuration.
+Data Jobs Monitoring is not compatible yet with <a href=https://cloud.google.com/composer/docs/composer-2/lineage-integration> Dataplex</a> for data lineage. Setting up OpenLineage for Data Jobs Monitoring overrides your existing Dataplex transport configuration.
 </div>
 
 ## Requirements
@@ -272,7 +272,7 @@ To get started, follow the instructions below.
 
    Check official [Airflow][4] and [Composer][3] documentation pages for other supported configurations of `openlineage` provider in Google Cloud Composer.
 
-2. After starting the Composer environment, install `openlineage` provider by adding the following package in the the Pypi packages tab of your environment page:
+2. After starting the Composer environment, install `openlineage` provider by adding the following package in the Pypi packages tab of your environment page:
       ```text
       apache-airflow-providers-openlineage
       ```
