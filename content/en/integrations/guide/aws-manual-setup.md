@@ -90,7 +90,7 @@ Datadog assumes this role to collect data on your behalf.
 {{< site-region region="gov" >}}
 3. If the AWS account you want to integrate is a GovCloud account, enter `065115117704` as the `Account ID`, otherwise enter `392588925713`. This is Datadog's account ID, and grants Datadog access to your AWS data.
 {{< /site-region >}}
-- **Note**: Ensure that the Datadog site selector on the right of this documentation page is set to your Datadog site before copying the account ID above.
+**Note**: Ensure that the Datadog site selector on the right of this documentation page is set to your Datadog site before copying the account ID above.
 
 4. Select **Require external ID** and enter the external ID copied in the previous section.
 Leave `Require MFA` disabled. For more details, see the [Access to AWS accounts owned by third parties][3] page in the AWS documentation.
