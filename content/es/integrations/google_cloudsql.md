@@ -1,63 +1,63 @@
 ---
-app_id: "google-cloudsql"
-app_uuid: "78424ece-59a2-4965-87a9-ab3dd5eb0ddf"
-assets:
-  dashboards:
-    gcp_sql_screen: "assets/dashboards/gcp_sql_screen.json"
-  integration:
-    auto_install: false
-    events:
-      creates_events: false
-    metrics:
-      check: "gcp.cloudsql.database.uptime"
-      metadata_path: "metadata.csv"
-      prefix: "gcp.cloudsql."
-    service_checks:
-      metadata_path: "assets/service_checks.json"
-    source_type_id: 185
-    source_type_name: "Google CloudSQL"
-author:
-  homepage: "https://www.datadoghq.com"
-  name: "Datadog"
-  sales_email: "info@datadoghq.com"
-  support_email: "help@datadoghq.com"
-categories:
+"app_id": "google-cloudsql"
+"app_uuid": "78424ece-59a2-4965-87a9-ab3dd5eb0ddf"
+"assets":
+  "dashboards":
+    "gcp_sql_screen": "assets/dashboards/gcp_sql_screen.json"
+  "integration":
+    "auto_install": falso
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": "gcp.cloudsql.database.uptime"
+      "metadata_path": "metadata.csv"
+      "prefix": "gcp.cloudsql."
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "185"
+    "source_type_name": "Google CloudSQL"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
 - "cloud"
 - "data stores"
 - "google cloud"
 - "log collection"
-custom_kind: "integration"
-dependencies: []
-description: "Realiza el seguimiento de las métricas de rendimiento, estado y replicación de la base de datos"
-display_on_public_website: true
-doc_link: "https://docs.datadoghq.com/integrations/google_cloudsql/"
-draft: false
-git_integration_title: "google_cloudsql"
-has_logo: true
-integration_id: "google-cloudsql"
-integration_title: "Google CloudSQL"
-integration_version: ""
-is_public: true
-manifest_version: "2.0.0"
-name: "google_cloudsql"
-public_title: "Google CloudSQL"
-short_description: "Sencillo servicio de base de datos relacional totalmente gestionada Postges, MySQL y SQL Server"
-supported_os: []
-tile:
-  changelog: "CHANGELOG.md"
-  classifier_tags:
+"custom_kind": "integración"
+"dependencies": []
+"description": "Realiza el seguimiento de las métricas de rendimiento, estado y replicación de la base de datos".
+"display_on_public_website": verdadero
+"doc_link": "https://docs.datadoghq.com/integrations/google_cloudsql/"
+"draft": falso
+"git_integration_title": "google_cloudsql"
+"has_logo": verdadero
+"integration_id": "google-cloudsql"
+"integration_title": "Google CloudSQL"
+"integration_version": ""
+"is_public": verdadero
+"manifest_version": "2.0.0"
+"name": "google_cloudsql"
+"public_title": "Google CloudSQL"
+"short_description": "Sencillo servicio de base de datos relacional totalmente gestionada Postges, MySQL y SQL Server"
+"supported_os": []
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
   - "Category::Cloud"
   - "Category::Almacenes de datos"
   - "Category::Google Cloud"
   - "Category::Recopilación de logs"
   - "Offering::Integration"
-  configuration: "README.md#Setup"
-  description: "Sencillo servicio de base de datos relacional totalmente gestionada Postges, MySQL y SQL Server"
-  media: []
-  overview: "README.md#Overview"
-  support: "README.md#Support"
-  title: "Google CloudSQL"
-version: "1.0"
+  "configuration": "README.md#Setup"
+  "description": "Sencillo servicio de base de datos relacional totalmente gestionada Postges, MySQL y SQL Server"
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "Google CloudSQL"
+"version": "1.0"
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->

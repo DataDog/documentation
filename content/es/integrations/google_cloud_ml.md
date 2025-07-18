@@ -3,9 +3,9 @@
 "app_uuid": "ed0cf686-2653-4082-bf00-1ad5d1dcd379"
 "assets":
   "integration":
-    "auto_install": false
+    "auto_install": falso
     "events":
-      "creates_events": false
+      "creates_events": falso
     "metrics":
       "check": "gcp.ml.training.cpu.utilization"
       "metadata_path": "metadata.csv"
@@ -24,26 +24,26 @@
 - "google cloud"
 - "log collection"
 - "ai/ml"
-"custom_kind": "integration"
+"custom_kind": "integración"
 "dependencies": []
-"description": "Realiza el seguimiento de las métricas clave de Google Cloud Machine Learning."
-"display_on_public_website": true
+"description": Realiza el seguimiento de las métricas clave de Google Cloud Machine Learning.
+"display_on_public_website": verdadero
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloud_ml/"
-"draft": false
+"draft": falso
 "further_reading":
 - "link": "https://www.datadoghq.com/blog/ml-model-monitoring-in-production-best-practices/"
   "tag": "Blog"
   "text": "Prácticas recomendadas para la monitorización de modelos de ML en producción"
 "git_integration_title": "google_cloud_ml"
-"has_logo": true
-"integration_id": "google_cloud_ml"
+"has_logo": verdadero
+"integration_id": "google-cloud-ml"
 "integration_title": "Google Cloud ML"
 "integration_version": ""
-"is_public": true
+"is_public": verdadero
 "manifest_version": "2.0.0"
 "name": "google_cloud_ml"
 "public_title": "Google Cloud ML"
-"short_description": "Un servicio gestionado para crear fácilmente modelos aprendizaje automático para datos de cualquier tipo o tamaño."
+"short_description": "Un servicio gestionado para crear fácilmente modelos aprendizaje automático para datos de cualquier tipo o tamaño".
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -54,7 +54,7 @@
   - "Category::IA/ML"
   - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "Un servicio gestionado para crear fácilmente modelos aprendizaje automático para datos de cualquier tipo o tamaño."
+  "description": "Un servicio gestionado para crear fácilmente modelos aprendizaje automático para datos de cualquier tipo o tamaño".
   "media": []
   "overview": "README.md#Overview"
   "resources":

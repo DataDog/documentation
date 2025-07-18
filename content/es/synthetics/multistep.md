@@ -129,7 +129,7 @@ De forma predeterminada, se pueden crear hasta 10 pasos de test. Para aumentar e
 
    {{% /tab %}}
 
-{{< /tabs >}}
+{{< tabs >}}
 
 ### Añadir configuración de ejecución
 
