@@ -42,7 +42,7 @@ When hovering over the graph, you can see two graphs: one with and one without t
 
 ## Understand what's driving anomalies
 
-CCM automatically uses Watchdog Explains[2], an investigation assistant, to help you identify who is driving cost anomalies. Watchdog Explains analyzes and identifies the specific:
+CCM automatically uses Watchdog Explains[2], an investigation assistant, to help you identify what is driving cost anomalies. Watchdog Explains analyzes and identifies the specific:
 
 - accounts
 - teams
