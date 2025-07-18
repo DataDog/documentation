@@ -67,7 +67,7 @@ To further investigate and share anomalies with the relevant owners, you can ope
 
 ## Take action on anomalies
 
-To further investigate anomalies by additional dimensions, view the anomaly in Cost Explorer or a Datadog Notebook. 
+To further investigate anomalies by using additional dimensions, view the anomaly in Cost Explorer or a Datadog Notebook. 
 
 <!-- TODO: update img with new design, highlight the "next steps" section specifically -->
 
