@@ -1,7 +1,7 @@
 ---
 title: Correlate LLM Observability with RUM
 further_reading:
-  - link: "llm_observability/sdk"
+  - link: "/llm_observability/sdk"
     tag: "Documentation"
     text: "LLM Observability SDK Reference"
 algolia:
@@ -115,7 +115,7 @@ After configuration is complete, you can navigate between correlated data:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: real_user_monitoring/browser/setup/
-[2]: llm_observability/setup/
-[3]: real_user_monitoring/browser/
-[4]: llm_observability/
+[1]: /real_user_monitoring/browser/setup/
+[2]: /llm_observability/setup/
+[3]: /real_user_monitoring/browser/
+[4]: /llm_observability/
