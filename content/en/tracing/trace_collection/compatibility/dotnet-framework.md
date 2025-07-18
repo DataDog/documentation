@@ -57,7 +57,7 @@ Note that instrumenting x86 applications is supported on Windows x64.
 
 ## Supported operating systems
 
-The .NET Tracer supports automatic instrumentation of .NET Framework on Windows operating systems.
+The .NET Tracer supports automatic instrumentation of .NET Framework applications on Windows operating systems.
 
 ### Windows
 
@@ -68,8 +68,6 @@ The .NET Tracer supports automatic instrumentation of .NET Framework on Windows 
 | Nano Server (x64)            | < 2012      | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
 | Windows Server (x64)         | < 2012      | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
 | Windows Server (x86)         | All versions| [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
-
-Additional information on the operating systems supported by .NET and .NET Core can be found in the [.NET release notes][19]
 
 ## Integrations
 
