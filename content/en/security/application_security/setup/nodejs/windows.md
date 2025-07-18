@@ -1,5 +1,5 @@
 ---
-title: Setup App and API Protection for Node.js on Windows
+title: Set up App and API Protection for Node.js on Windows
 code_lang: windows
 type: multi-code-lang
 code_lang_weight: 50
@@ -22,7 +22,7 @@ further_reading:
 - Node.js application
 - Administrator privileges for some configuration steps
 - Your Datadog API key
-- Datadog Node.js tracing library (see version requirements [here][1])
+- Datadog Node.js tracing library (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
