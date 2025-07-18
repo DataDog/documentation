@@ -7,6 +7,9 @@ further_reading:
   - link: /tracing/metrics/runtime_metrics/
     tag: Documentation
     text: Enable Runtime Metrics
+  - link: /tracing/guide/init_resource_calc/
+    tag: Documentation
+    text: Learn about init container resource usage
 ---
 
 ## Overview
@@ -40,15 +43,17 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 
 ## Advanced options
 
-When you run the one-line installation command, there are a few options to customize your experience:
+Use the following advanced options to customize how Single Step Instrumentation behaves in your environment. These settings are optional and typically only needed in specialized setups.
+
+### Target specific workloads
+
+By default, SSI instruments all services in all namespaces in your cluster. Depending on your Agent version, use one of the following configuration methods to refine which services are instrumented and how.
 
 {{< tabs >}}
 
 {{% tab "Agent v7.64+ (Recommended)" %}}
 
-### Configure instrumentation for namespaces and pods
-
-By default, Single Step Instrumentation instruments all services in all namespaces in your cluster. Alternatively, you can create targeting blocks with the `targets` label to specify which workloads to instrument and what configurations to apply.
+Create targeting blocks with the `targets` label to specify which workloads to instrument and what configurations to apply.
 
 Each target block has the following keys:
 
@@ -217,13 +222,13 @@ This configuration enables APM for all pods except those that have either of the
 
 {{% tab "Agent <=v7.63 (Legacy)" %}}
 
-### Enable or disable instrumentation for namespaces
+#### Enable or disable instrumentation for namespaces
 
 You can choose to enable or disable instrumentation for applications in specific namespaces. You can only set enabledNamespaces or disabledNamespaces, not both.
 
 The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
 
-{{< collapse-content title="Datadog Operator" level="h4" >}}
+{{< collapse-content title="Datadog Operator" level="h5" >}}
 
 To enable instrumentation for specific namespaces, add `enabledNamespaces` configuration to `datadog-agent.yaml`:
 
@@ -251,7 +256,7 @@ To disable instrumentation for specific namespaces, add `disabledNamespaces` con
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="Helm" level="h4" >}}
+{{< collapse-content title="Helm" level="h5" >}}
 
 To enable instrumentation for specific namespaces, add `enabledNamespaces` configuration to `datadog-values.yaml`:
 
@@ -279,7 +284,7 @@ To disable instrumentation for specific namespaces, add `disabledNamespaces` con
 
 {{< /collapse-content >}}
 
-### Specify tracing library versions
+#### Specify tracing library versions
 
 <div class="alert alert-info">Starting with Datadog Cluster Agent v7.52.0+, you can automatically instrument a subset of your applications, based on the tracing libraries you specify.</div>
 
@@ -290,7 +295,7 @@ Specify Datadog tracing libraries and their versions to automatically instrument
 
 **Default**: If you don't specify any library versions, applications written in supported languages are automatically instrumented using the latest tracing library versions.
 
-#### Specify at the service level
+##### Specify at the service level
 
 To automatically instrument applications in specific pods, add the appropriate language annotation and library version for your application in your pod spec:
 
@@ -303,7 +308,7 @@ To automatically instrument applications in specific pods, add the appropriate l
 | Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"`   |
 | PHP        | `admission.datadoghq.com/php-lib.version: "<CONTAINER IMAGE TAG>"`   |
 
-Replace `<CONTAINER IMAGE TAG>` with the desired library version. Available versions are listed in the [Datadog container registries](#container-registries) and tracer source repositories for each language:
+Replace `<CONTAINER IMAGE TAG>` with the desired library version. Available versions are listed in the [Datadog container registries](#change-the-default-image-registry) and tracer source repositories for each language:
 
 - [Java][34]
 - [Node.js][35]
@@ -332,13 +337,13 @@ spec:
         - # ...
 {{< /highlight >}}
 
-#### Specify at the cluster level
+##### Specify at the cluster level
 
 If you don't enable automatic instrumentation for specific pods using annotations, you can specify which languages to instrument across the entire cluster using the Single Step Instrumentation configuration. When `apm.instrumentation.libVersions` is set, only applications written in the specified languages will be instrumented, using the specified library versions.
 
 The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
 
-{{< collapse-content title="Datadog Operator" level="h4" >}}
+{{< collapse-content title="Datadog Operator" level="h5" >}}
 
 For example, to instrument .NET, Python, and Node.js applications, add the following configuration to your `datadog-agent.yaml` file:
 
@@ -355,7 +360,7 @@ For example, to instrument .NET, Python, and Node.js applications, add the follo
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="Helm" level="h4" >}}
+{{< collapse-content title="Helm" level="h5" >}}
 
 For example, to instrument .NET, Python, and Node.js applications, add the following configuration to your `datadog-values.yaml` file:
 
@@ -372,7 +377,19 @@ For example, to instrument .NET, Python, and Node.js applications, add the follo
 
 {{< /collapse-content >}}
 
-#### Container registries
+
+[34]: https://github.com/DataDog/dd-trace-java/releases
+[35]: https://github.com/DataDog/dd-trace-js/releases
+[36]: https://github.com/DataDog/dd-trace-py/releases
+[37]: https://github.com/DataDog/dd-trace-dotnet/releases
+[38]: https://github.com/DataDog/dd-trace-rb/releases
+[39]: https://github.com/DataDog/dd-trace-php/releases
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Change the default image registry
 
 Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and Amazon ECR:
 
@@ -391,36 +408,57 @@ You can pull the tracing library from a different registry by changing it to `do
 
 For instructions on changing your container registry, see [Changing Your Container Registry][33].
 
-[11]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
-[15]: http://gcr.io/datadoghq/dd-lib-java-init
-[16]: http://hub.docker.com/r/datadog/dd-lib-java-init
-[17]: http://gallery.ecr.aws/datadog/dd-lib-java-init
-[18]: http://gcr.io/datadoghq/dd-lib-js-init
-[19]: http://hub.docker.com/r/datadog/dd-lib-js-init
-[20]: http://gallery.ecr.aws/datadog/dd-lib-js-init
-[21]: http://gcr.io/datadoghq/dd-lib-python-init
-[22]: http://hub.docker.com/r/datadog/dd-lib-python-init
-[23]: http://gallery.ecr.aws/datadog/dd-lib-python-init
-[24]: http://gcr.io/datadoghq/dd-lib-dotnet-init
-[25]: http://hub.docker.com/r/datadog/dd-lib-dotnet-init
-[26]: http://gallery.ecr.aws/datadog/dd-lib-dotnet-init
-[27]: http://gcr.io/datadoghq/dd-lib-ruby-init
-[28]: http://hub.docker.com/r/datadog/dd-lib-ruby-init
-[29]: http://gallery.ecr.aws/datadog/dd-lib-ruby-init
-[30]: http://gcr.io/datadoghq/dd-lib-php-init
-[31]: http://hub.docker.com/r/datadog/dd-lib-php-init
-[32]: http://gallery.ecr.aws/datadog/dd-lib-php-init
-[33]: /containers/guide/changing_container_registry/
-[34]: https://github.com/DataDog/dd-trace-java/releases
-[35]: https://github.com/DataDog/dd-trace-js/releases
-[36]: https://github.com/DataDog/dd-trace-py/releases
-[37]: https://github.com/DataDog/dd-trace-dotnet/releases
-[38]: https://github.com/DataDog/dd-trace-rb/releases
-[39]: https://github.com/DataDog/dd-trace-php/releases
+### Use a private container registry
 
+If your organization does not allow direct pulls from public registries (such as `gcr.io`, `docker.io`, or `public.ecr.aws`), you can host the required Datadog images internally and configure the Admission Controller to use them.
 
-{{% /tab %}}
-{{< /tabs >}}
+To use SSI with a private container registry:
+
+1. Follow [these instructions][34] to mirror Datadog's container images to your private registry. 
+
+   You only need the images for the languages you are instrumenting. If you're not sure which ones you need, here's a baseline that covers most use cases:
+
+   - `apm-inject`
+   - `dd-lib-java-init`
+   - `dd-lib-python-init`
+   - `dd-lib-dotnet-init`
+   - `dd-lib-php-init`
+   - `dd-lib-ruby-init`
+   - `dd-lib-js-init`
+
+   You can find these images on [gcr.io][12], [Docker Hub][13], or [Amazon ECR Public Gallery][14].
+
+2. Tag the images according to your configuration.
+
+   The versions you mirror must match the versions configured in your workloads, which might be set in one of the following ways:
+   - globally in the Agent config using `ddTraceVersions`, or
+   - per-pod using annotations like `admission.datadoghq.com/java-lib.version`.
+
+   If no version is explicitly configured, the default version (`0`) is used.
+
+   For example:
+
+   ```
+   apm:
+     instrumentation:
+       enabled: true
+       targets:
+         - name: "default-target"
+           ddTraceVersions:
+             java: "1"
+             python: "3"
+   ```
+
+   This configuration requires the following image tags:
+   - `apm-inject:0`
+   - `dd-lib-java-init:1`
+   - `dd-lib-python-init:3`
+
+3. Update the Cluster Agent configuration to use your private registry.
+
+   Set the `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in your Cluster Agent config to use your private registry. 
+
+For more details on changing your container registry, see [Changing Your Container Registry][33].
 
 ## Remove Single Step APM instrumentation from your Agent
 
@@ -605,6 +643,29 @@ targets:
 [3]: /tracing/glossary/#instrumentation
 [4]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes/?tab=agentv764recommended#configure-instrumentation-for-namespaces-and-pods
 [11]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
+[12]: https://gcr.io/datadoghq
+[13]: https://hub.docker.com/u/datadog
+[14]: https://gallery.ecr.aws/datadog
+[15]: http://gcr.io/datadoghq/dd-lib-java-init
+[16]: http://hub.docker.com/r/datadog/dd-lib-java-init
+[17]: http://gallery.ecr.aws/datadog/dd-lib-java-init
+[18]: http://gcr.io/datadoghq/dd-lib-js-init
+[19]: http://hub.docker.com/r/datadog/dd-lib-js-init
+[20]: http://gallery.ecr.aws/datadog/dd-lib-js-init
+[21]: http://gcr.io/datadoghq/dd-lib-python-init
+[22]: http://hub.docker.com/r/datadog/dd-lib-python-init
+[23]: http://gallery.ecr.aws/datadog/dd-lib-python-init
+[24]: http://gcr.io/datadoghq/dd-lib-dotnet-init
+[25]: http://hub.docker.com/r/datadog/dd-lib-dotnet-init
+[26]: http://gallery.ecr.aws/datadog/dd-lib-dotnet-init
+[27]: http://gcr.io/datadoghq/dd-lib-ruby-init
+[28]: http://hub.docker.com/r/datadog/dd-lib-ruby-init
+[29]: http://gallery.ecr.aws/datadog/dd-lib-ruby-init
+[30]: http://gcr.io/datadoghq/dd-lib-php-init
+[31]: http://hub.docker.com/r/datadog/dd-lib-php-init
+[32]: http://gallery.ecr.aws/datadog/dd-lib-php-init
+[33]: /containers/guide/changing_container_registry/
+[34]: /containers/guide/sync_container_images/#copy-an-image-to-another-registry-using-crane
 
 
 
