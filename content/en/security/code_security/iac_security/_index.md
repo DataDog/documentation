@@ -11,10 +11,6 @@ further_reading:
     text: "Configure IaC Security Exclusions"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/iac-security/" >}}
-  Infrastructure as Code (IaC) Security is in Preview. To request access, complete the form.
-{{< /callout >}}
-
 {{< img src="/security/infrastructure_as_code/iac_misconfiguration_side_panel.png" alt="IaC misconfiguration side panel showing details for the high severity IMDSv1 Enabled issue, including a security summary, code snippet, detection timestamps, and remediation steps." width="100%">}}
 
 Infrastructure as Code (IaC) Security automatically analyzes your Terraform files for security misconfigurations. With IaC Security, you can:

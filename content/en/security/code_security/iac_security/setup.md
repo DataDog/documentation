@@ -14,10 +14,6 @@ further_reading:
     text: "Configure IaC Security Exclusions"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/iac-security/" >}}
-  Infrastructure as Code (IaC) Security is in Preview. To request access, complete the form.
-{{< /callout >}}
-
 Use the following instructions to enable Infrastructure as Code (IaC) Security for Code Security.
 
 <div class="alert alert-info">IaC Security supports GitHub for version control and Terraform for infrastructure as code.</div>
