@@ -260,7 +260,9 @@ In general:
 
 ## Tag enrichment
 
-Datadog adds tags to the ingested cost data using many sources, described in detail below.
+Datadog automatically enriches your AWS cost data with tags from multiple sources. For a comprehensive overview of how tags are applied to cost data, see [Tags][18].
+
+The following tag sources are available for AWS:
 
 - Cost and Usage Report columns
 - AWS Resource tags
@@ -404,7 +406,7 @@ _Requires [container cost allocation][11], and applies only to `shared.resources
 
 ### Tag pipelines
 
-Finally, all of your [tag pipeline][15] rulesets are applied, providing complete cost allocation when infrastructure tagging is not possible.
+Finally, all of your [tag pipeline][15] rulesets are applied, providing complete cost allocation when infrastructure tagging is not possible. Tag pipelines are the final enrichment layer and can override tags from other sources.
 
 ## Billing conductor
 [AWS Billing Conductor][16] is a custom billing service for AWS Marketplace Channel Partners (Partners) and organizations that have chargeback requirements.
@@ -434,6 +436,7 @@ After the billing conductor CUR is created, follow the Cloud Cost Management ins
 [12]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
 [13]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html
 [14]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
-[15]: /cloud_cost_management/tag_pipelines
+[15]: /cloud_cost_management/tags/tag_pipelines
 [16]: https://docs.aws.amazon.com/billingconductor/latest/userguide/what-is-billingconductor.html
 [17]: https://app.datadoghq.com/cost/settings/accounts
+[18]: /cloud_cost_management/tags

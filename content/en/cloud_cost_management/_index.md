@@ -19,12 +19,9 @@ further_reading:
   - link: "/monitors/types/cloud_cost/"
     tag: "Documentation"
     text: "Create a Cloud Cost monitor"
-  - link: "/cloud_cost_management/tag_pipelines/"
+  - link: "/cloud_cost_management/tags/"
     tag: "Documentation"
-    text: "Learn about Tag Pipelines"
-  - link: "/cloud_cost_management/tag_pipelines"
-    tag: "Documentation"
-    text: "Standardize tags across Cloud Cost Management with Tag Pipelines"
+    text: "Learn about Tags in Cloud Cost Management"
   - link: "https://www.datadoghq.com/blog/cloud-costs-study-learnings/"
     tag: "Blog"
     text: "Key learnings from the State of Cloud Costs study"
@@ -84,11 +81,9 @@ When creating a dashboard, select **Cloud Cost** as the data source for your sea
 
 Optionally, you can programmatically export a timeseries graph of your Datadog cost data by using the [Metrics API][2].
 
-## Create tag rules
+## Tagging and cost allocation
 
-Use [Tag Pipelines][5] to ensure comprehensive cost tracking by standardizing the tags across all cloud resources. This prevents any cost data from being overlooked.
-
-{{< img src="cloud_cost/tags_addnew.png" alt="Create a tag rule in Tag Pipelines to ensure your cloud resources use standard tags" style="width:60%;" >}}
+Use the [Tags documentation][5] to understand how tags are sourced, enriched, and managed in Cloud Cost Management.
 
 You can create tag rules to correct missing or incorrect tags and add inferred tags that align with your organization's business logic.
 
@@ -135,4 +130,4 @@ The table below describes the impact of these permissions in both Cloud Cost Man
 [2]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
 [3]: /monitors/types/cloud_cost/
 [4]: /cloud_cost_management/container_cost_allocation
-[5]: /cloud_cost_management/tag_pipelines
+[5]: /cloud_cost_management/tags/
