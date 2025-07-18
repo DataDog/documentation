@@ -38,7 +38,7 @@ You can install the Datadog CSI Driver by using a public Helm chart.
 <strong>Notes</strong>:
 <ul>
 <li/>Requires <a href="https://helm.sh">Helm</a>.
-<li/>CSI driver needs to run with privileged security context in order to mount volumes from the host file system to the user pods.
+<li/>The Datadog CSI Driver needs to run with privileged security context. This is required for the Datadog CSI Driver to mount volumes from the host file system to the user pods.
 </ul>
 </div>
 
