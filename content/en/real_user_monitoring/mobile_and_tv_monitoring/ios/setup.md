@@ -133,7 +133,7 @@ For more information about setting up a client token, see the [Client token docu
 
 In the initialization snippet, set an environment name, service name, and client token.
 
-The SDK should be initialized as early as possible in the app lifecycle, specifically in the `AppDelegate`'s `application(_:didFinishLaunchingWithOptions:)` callback.  This ensures all measurements, including application startup duration, are captured correctly. For apps built with SwiftUI, you can use `@UIApplicationDelegateAdaptor` to hook into the `AppDelegate`.
+The SDK should be initialized as early as possible in the app lifecycle, specifically in the `AppDelegate`'s `application(_:didFinishLaunchingWithOptions:)` callback. This ensures all measurements, including application startup duration, are captured correctly. For apps built with SwiftUI, you can use `@UIApplicationDelegateAdaptor` to hook into the `AppDelegate`.
 
 <div class="alert alert-warning">Initializing the SDK elsewhere (for example later during view loading) may result in inaccurate or missing telemetry, especially around app startup performance.</div>
 
