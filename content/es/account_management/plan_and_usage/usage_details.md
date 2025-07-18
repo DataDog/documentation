@@ -1,6 +1,7 @@
 ---
 aliases:
 - /es/account_management/billing/usage_details/
+kind: documentación
 title: Detalles de uso
 ---
 

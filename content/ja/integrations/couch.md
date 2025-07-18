@@ -6,7 +6,6 @@ assets:
     couchdb: assets/dashboards/CouchDB-overview_dashboard.json
     couchdb-v1: assets/dashboards/CouchDBv1-overview_dashboard.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -21,8 +20,9 @@ assets:
     - couchjs
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 20
     source_type_name: CouchDB
+  logs:
+    source: couchdb
   saved_views:
     couchdb_processes: assets/saved_views/couchdb_processes.json
 author:
@@ -32,9 +32,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - caching
-- data stores
+- data store
 - log collection
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/couch/README.md
 display_on_public_website: true
@@ -42,10 +41,12 @@ draft: false
 git_integration_title: couch
 integration_id: couchdb
 integration_title: CouchDB
-integration_version: 8.3.0
+integration_version: 5.2.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: couch
+oauth: {}
 public_title: CouchDB
 short_description: CouchDB のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
 supported_os:
@@ -56,24 +57,19 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::キャッシュ
-  - Category::Data Stores
+  - Category::データストア
   - Category::ログの収集
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: CouchDB のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
   media: []
   overview: README.md#Overview
-  resources:
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/monitoring-couchdb-with-datadog
   support: README.md#Support
   title: CouchDB
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![CouchDB ダッシュボード][1]
@@ -93,14 +89,14 @@ Datadog で CouchDB データをキャプチャすると、以下のことが可
 
 CouchDB チェックは [Datadog Agent][2] パッケージに含まれています。CouchDB サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
@@ -120,7 +116,7 @@ CouchDB チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 2. [Agent を再起動します][3]。
 
-##### ログ収集
+##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -148,7 +144,7 @@ _Agent バージョン 6.0 以降で利用可能_
 [2]: https://github.com/DataDog/integrations-core/blob/master/couch/datadog_checks/couch/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -158,11 +154,11 @@ _Agent バージョン 6.0 以降で利用可能_
 
 | パラメーター            | 値                                |
 | -------------------- | ------------------------------------ |
-| `<INTEGRATION_NAME>` | `couch`                              |
-| `<INIT_CONFIG>`      | 空白または `{}`                        |
-| `<INSTANCE_CONFIG>`  | `{"server": "http://%%host%%:5984"}` |
+| `<インテグレーション名>` | `couch`                              |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                        |
+| `<インスタンスコンフィギュレーション>`  | `{"server": "http://%%host%%:5984"}` |
 
-##### ログ収集
+##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -184,15 +180,15 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "couchdb" >}}
+{{< get-metrics-from-git "couch" >}}
 
 
 ### イベント
 
 Couch チェックには、イベントは含まれません。
 
-### サービスチェック
-{{< get-service-checks-from-git "couchdb" >}}
+### サービスのチェック
+{{< get-service-checks-from-git "couch" >}}
 
 
 ## トラブルシューティング
@@ -205,7 +201,7 @@ Couch チェックには、イベントは含まれません。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/couch/images/couchdb_dashboard.png
-[2]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/
 [5]: https://www.datadoghq.com/blog/monitoring-couchdb-with-datadog

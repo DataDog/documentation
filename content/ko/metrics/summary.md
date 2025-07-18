@@ -10,6 +10,7 @@ further_reading:
 - link: /metrics/distributions/
   tag: 설명서
   text: 메트릭 배포
+kind: 설명서
 title: 메트릭 요약
 ---
 

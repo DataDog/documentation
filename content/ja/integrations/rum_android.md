@@ -1,19 +1,15 @@
 ---
 app_id: rum-android
 app_uuid: a70b6926-49a8-4f90-8190-315170e97e4f
-assets: {}
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- ログの収集
-- モニター
-- apm
-- ネットワーク
-- tracing
-custom_kind: インテグレーション
+- メトリクス
+- モバイル
+- トレーシング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_android/README.md
 display_on_public_website: true
@@ -23,8 +19,10 @@ integration_id: rum-android
 integration_title: Android
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: rum_android
+oauth: {}
 public_title: Android
 short_description: Datadog RUM を使用した Android アプリケーションの監視とメトリクス生成
 supported_os:
@@ -32,25 +30,18 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Log Collection
   - Category::Metrics
   - Category::Mobile
-  - Category::Network
   - Category::Tracing
   - Supported OS::Android
-  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog RUM を使用した Android アプリケーションの監視とメトリクス生成
   media: []
   overview: README.md#Overview
-  resources:
-  - resource_type: documentation
-    url: https://docs.datadoghq.com/real_user_monitoring/android/
   support: README.md#Support
   title: Android
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -97,7 +88,7 @@ Android インテグレーションには、メトリクスは含まれていま
 
 イベントや属性の詳細については、[RUM Android データ収集][7]を参照してください。
 
-### サービスチェック
+### サービスのチェック
 
 Android インテグレーションには、サービスのチェック機能は含まれません。
 

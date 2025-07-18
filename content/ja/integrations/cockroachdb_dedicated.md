@@ -3,22 +3,17 @@ app_id: cockroach-cloud
 app_uuid: e0ab9a47-da5b-4008-8571-3842ac318f74
 assets:
   dashboards:
-    cockroach_cloud_dedicated_overview: assets/dashboards/cockroach_cloud_dedicated_overview.json
-    cockroach_cloud_serverless_overview: assets/dashboards/cockroach_cloud_serverless_overview.json
+    cockroach_cloud_overview: assets/dashboards/cockroach_cloud_overview.json
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
     metrics:
-      check:
-      - crdb_dedicated.sys.uptime
-      - crdb_cloud.sys.uptime
+      check: crdb_dedicated.sys.rss
       metadata_path: metadata.csv
-      prefix: crdb_
+      prefix: crdb_dedicated.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10274
     source_type_name: CockroachDB Dedicated
   logs:
     source: cockroach-cloud
@@ -28,20 +23,21 @@ author:
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- data stores
-custom_kind: integration
+- data store
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cockroachdb_dedicated/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: cockroachdb_dedicated
 integration_id: cockroach-cloud
-integration_title: Cockroach Cloud
+integration_title: CockroachDB Dedicated
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: cockroachdb_dedicated
-public_title: Cockroach Cloud
+oauth: {}
+public_title: CockroachDB Dedicated
 short_description: Cockroach Cloud のメトリクスを DataDog に送信します。
 supported_os:
 - linux
@@ -50,25 +46,23 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Data Stores
+  - Category::Data Store
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: Cockroach Cloud のメトリクスを DataDog に送信します。
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Cockroach Cloud
+  title: CockroachDB Dedicated
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
 
-The CockroachDB Cloud integration for Datadog enables data collection and alerting on a subset of CockroachDB metrics using the Datadog platform.
+Datadog の Cockroach Cloud インテグレーションは、Datadog プラットフォームを利用して、[Prometheus エンドポイント][1]で利用できる CockroachDB メトリックのサブセットに関するデータ収集とアラートを可能にします。
 
 ## セットアップ
 
@@ -76,7 +70,7 @@ The CockroachDB Cloud integration for Datadog enables data collection and alerti
 
 Cockroach Cloud クラスターに対して Datadog のモニタリングを有効にするには
 
-1. On the cluster's **Monitoring** > [**Tools** page][1].
+1. クラスターの **Monitoring** ページで、**Datadog** パネルの **Setup** をクリックします。
 
 2. **API key** と **Datadog Site** のフィールドに、対応する値を入力します。
     - **API key** は、Datadog の組織と関連付けられています。Cockroach Cloud クラスターで使用する API キーをお持ちでない場合は、作成する必要があります。手順については、[Datadog のドキュメント][2]を参照してください。
@@ -86,20 +80,18 @@ Cockroach Cloud クラスターに対して Datadog のモニタリングを有�
 
 4. Datadog に登録されると、Datadog の[インフラストラクチャーリスト][4]にクラスターが表示されます。これには最大で数分かかることがあります。
 
-### 構成
+### コンフィギュレーション
 
-Open your Datadog [Dashboard List][5]. There are two out of the box dashboards that present CockroachDB metrics
-- CockroachDB Cloud Serverless (Limited Preview)
-- CockroachDB Cloud Dedicated
+Datadog [Dashboard List][5] を開き、`CockroachDB Dedicated Overview` をクリックします。このダッシュボードには、CockroachDB Dedicated Overview のメトリクスが表示されます。
 
-To create your own Cockroach Cloud dashboard, you can either [clone][6] the default `CockroachDB Cloud Dedicated` dashboard and edit the widgets, or [create a new dashboard][7].
+独自の Cockroach Cloud ダッシュボードを作成するには、デフォルトの `CockroachDB Dedicated Overview` ダッシュボードを[複製][6]してウィジェットを編集するか、または[新しいダッシュボードを作成][7]します。
 
-The [available metrics][8] are intended for use as building blocks for your own charts.
+[利用可能なメトリクス][8]は、CockroachDB [Prometheus エンドポイント][1]から直接取得したもので、独自のグラフの構成要素として使用することを想定しています。
 
 収集されるメトリクスをプレビューするには、以下の方法があります。
 
 - [インフラストラクチャーリスト][4]のクラスターのエントリーをクリックすると、利用可能な各メトリクスの時系列グラフが表示されます。
-- Use the [Metrics Explorer][9] to search for and view `crdb_cloud` or `crdb_dedicated` metrics.
+- [メトリクスエクスプローラー][9]を使って `crdb_dedicated` メトリクスを検索・表示します。
 
 ### 検証
 
@@ -116,7 +108,7 @@ CockroachDB からのメトリクスエクスポートは、以下のような�
 - API キーが古くなっている。この場合、インテグレーションのステータスは `Unhealthy` になります。この問題を解決するには、新しい API キーを使って[インテグレーションを更新](#update-integration)してください。
 - CockroachDB が一時的に使用できない。この場合、インテグレーションのステータスは `Active` のままです。この問題を解決するには、**Datadog** パネルからインテグレーションを[非アクティブ化](#deactivate-integration)して再アクティブ化してみてください。それでも問題が解決しない場合は、[サポートチームにご連絡ください][10]。
 
-To monitor the health of metrics export, you can create a custom Monitor in Datadog.
+メトリクスエクスポートの健全性を監視するには、Datadog で[カスタムモニターを作成する](#monitor-health-of-metrics-export)ことができます。
 
 ### インテグレーションの更新
 
@@ -139,30 +131,30 @@ To monitor the health of metrics export, you can create a custom Monitor in Data
 ## 収集データ
 
 ### メトリクス
+{{< get-metrics-from-git "cockroachdb_dedicated" >}}
 
-- `crdb_cloud` & `crdb_dedicated` [Metrics][12]
 
-### サービスチェック
+### サービスのチェック
 
-The Cockroach Cloud integration does not include any service checks.
+CockroachDB Dedicated インテグレーションには、サービスのチェック機能は含まれません。
 
 ### イベント
 
-The Cockroach Cloud integration does not include any events.
+CockroachDB Dedicated インテグレーションには、イベントは含まれません。
 
 ## サポート
 
 ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 
 
-[1]: https://www.cockroachlabs.com/docs/cockroachcloud/tools-page
+[1]: https://www.cockroachlabs.com/docs/stable/monitoring-and-alerting.html#prometheus-endpoint
 [2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#add-an-api-key-or-client-token
 [3]: https://docs.datadoghq.com/ja/getting_started/site/
 [4]: https://docs.datadoghq.com/ja/infrastructure/list/
-[5]: https://app.datadoghq.com/dashboard/lists
-[6]: https://docs.datadoghq.com/ja/dashboards/configure/#configuration-actions
+[5]: https://docs.datadoghq.com/ja/dashboards/#dashboard-list
+[6]: https://docs.datadoghq.com/ja/dashboards/#clone-dashboard
 [7]: https://docs.datadoghq.com/ja/dashboards/#new-dashboard
-[8]: https://docs.datadoghq.com/ja/integrations/cockroachdb_dedicated/#data-collected
+[8]: https://docs.datadoghq.com/ja/integrations/cockroachdb_dedicated
 [9]: https://docs.datadoghq.com/ja/metrics/explorer/
 [10]: https://support.cockroachlabs.com/
 [11]: https://docs.datadoghq.com/ja/developers/guide/data-collection-resolution-retention/

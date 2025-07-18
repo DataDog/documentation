@@ -3,7 +3,6 @@ app_id: cacti
 app_uuid: b18f92f2-2aa5-435e-b04e-84ce3538fa2d
 assets:
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -14,8 +13,9 @@ assets:
       prefix: cacti.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 25
     source_type_name: Cacti
+  logs:
+    source: cacti
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -24,7 +24,6 @@ author:
 categories:
 - developer tools
 - log collection
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cacti/README.md
 display_on_public_website: true
@@ -32,10 +31,12 @@ draft: false
 git_integration_title: cacti
 integration_id: cacti
 integration_title: Cacti
-integration_version: 4.0.0
+integration_version: 1.11.1
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: cacti
+oauth: {}
 public_title: Cacti
 short_description: Cacti RRD を Datadog に転送して豊富なアラート機能や美しいグラフを活用。
 supported_os:
@@ -46,7 +47,6 @@ tile:
   - Category::Developer Tools
   - Category::ログの収集
   - Supported OS::Linux
-  - Offering::Integration
   configuration: README.md#Setup
   description: Cacti RRD を Datadog に転送して豊富なアラート機能や美しいグラフを活用。
   media: []
@@ -55,7 +55,6 @@ tile:
   title: Cacti
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -96,7 +95,7 @@ sudo yum install rrdtool-devel
 sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
 ```
 
-### 構成
+### コンフィギュレーション
 
 #### Datadog ユーザーの作成
 
@@ -181,7 +180,7 @@ sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
 {{< get-metrics-from-git "cacti" >}}
 
 
-### ログ収集
+### ログの収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -206,7 +205,7 @@ sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
 
 Cacti チェックには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Cacti チェックには、サービスのチェック機能は含まれません。
 
@@ -220,7 +219,7 @@ Cacti チェックには、サービスのチェック機能は含まれませ�
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest
+[1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/integrations-core/blob/master/cacti/datadog_checks/cacti/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

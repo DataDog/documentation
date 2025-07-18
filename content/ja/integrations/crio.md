@@ -5,7 +5,6 @@ assets:
   dashboards:
     crio: assets/dashboards/overview.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -16,7 +15,6 @@ assets:
       prefix: crio.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10044
     source_type_name: CRI-O
 author:
   homepage: https://www.datadoghq.com
@@ -24,8 +22,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- incident-teams
-custom_kind: インテグレーション
+- コンテナ
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/crio/README.md
 display_on_public_website: true
@@ -33,10 +30,12 @@ draft: false
 git_integration_title: crio
 integration_id: cri-o
 integration_title: CRI-O
-integration_version: 4.1.0
+integration_version: 2.4.1
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: crio
+oauth: {}
 public_title: CRI-O
 short_description: CRI-O のすべてのメトリクスを Datadog で追跡
 supported_os:
@@ -50,7 +49,6 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Containers
-  - Offering::Integration
   configuration: README.md#Setup
   description: CRI-O のすべてのメトリクスを Datadog で追跡
   media: []
@@ -59,7 +57,6 @@ tile:
   title: CRI-O
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -72,7 +69,7 @@ tile:
 
 このインテグレーションは、CRI-O の `--enable-metrics` オプションに依存します。このオプションはデフォルトでは無効です。有効にした場合は、`127.0.0.1:9090/metrics` でメトリクスが公開されます。
 
-### 構成
+### コンフィギュレーション
 
 1. CRI-Oのパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `crio.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル crio.d/conf.yaml][2] を参照してください。
 
@@ -88,16 +85,16 @@ CRI-O は、ランタイムによって実行される操作のカウントと�
 さらに、Datadog-CRI-O インテグレーションは、CRI-O Golang バイナリ自体の CPU 使用率とメモリ使用量を収集します。
 
 ### メトリクス
-{{< get-metrics-from-git "cri-o" >}}
+{{< get-metrics-from-git "crio" >}}
 
 
-### サービスチェック
-{{< get-service-checks-from-git "cri-o" >}}
+### サービスのチェック
+{{< get-service-checks-from-git "crio" >}}
 
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
 
 [1]: http://cri-o.io

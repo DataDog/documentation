@@ -5,14 +5,22 @@ cascade:
     rank: 20
     subcategory: CI Visibility 가이드
 disable_toc: true
+kind: guide
 private: true
 title: CI Visibility 가이드
 ---
 
-{{< whatsnext desc="Pipeline Visibility Guides:" >}}
-    {{< nextlink href="/continuous_integration/guides/ingestion_control" >}}수집 제어를 위한 제외 필터 생성{{< /nextlink >}}
-    {{< nextlink href="/continuous_integration/guides/pipeline_data_model" >}}파이프라인 데이터 모델과 실행 유형 이해{{< /nextlink >}}
-    {{< nextlink href="/continuous_integration/guides/infrastructure_metrics_with_gitlab" >}}Datadog에서 인프라스트럭처 메트릭과 GitLab 작업 연계{{< /nextlink >}}
-    {{< nextlink href="/account_management/billing/ci_visibility/" >}}CI Visibility 요금 고려 사항{{< /nextlink >}}
-    {{< nextlink href="/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/" >}}중요 경로에서 CI 작업 파악해 파이프라인 기간 줄이기{{< /nextlink >}}
+{{< whatsnext desc="Test Visibility 가이드:" >}}
+    {{< nextlink href="/continuous_integration/guides/flaky_test_management" >}}불안정한 테스트 관리{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/test_configurations" >}}테스트 설정{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/rum_integration" >}}RUM으로 브라우저 테스트 계측{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/rum_swift_integration" >}}RUM으로 Swift 테스트 계측 {{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/pull_request_comments" >}}GitHub Pull Request Comments에서 Test Summaries 활성화{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/developer_workflows" >}}Datadog으로 Developer Workflows 개선{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/add_custom_metrics" >}}테스트에 커스텀 메트릭 추가{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Pipeline Visibility 가이드:" >}}
+{{< nextlink href="/continuous_integration/guides/ingestion_control" >}}수집 제어를 위한 제외 필터 생성{{< /nextlink >}}
+{{< nextlink href="/continuous_integration/guides/pipeline_data_model" >}}파이프라인 데이터 모델 및 실행 유형 이해하기{{< /nextlink >}}
 {{< /whatsnext >}}

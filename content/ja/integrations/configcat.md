@@ -3,7 +3,6 @@ app_id: configcat
 app_uuid: 22b2d616-b246-457e-8883-a79bee8c467d
 assets:
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -13,7 +12,6 @@ assets:
       prefix: configcat.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10094
     source_type_name: ConfigCat
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -21,10 +19,9 @@ author:
   sales_email: developer@configcat.com
   support_email: developer@configcat.com
 categories:
-- 構成とデプロイ
-- notifications
+- 構成 & デプロイ
+- notification
 - プロビジョニング
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/configcat/README.md
 display_on_public_website: true
@@ -34,8 +31,10 @@ integration_id: configcat
 integration_title: ConfigCat
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: configcat
+oauth: {}
 public_title: ConfigCat
 short_description: Datadog により追跡する設定変更イベント
 supported_os:
@@ -46,12 +45,11 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Configuration & Deployment
-  - Category::Notifications
+  - Category::Notification
   - Category::Provisioning
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog により追跡する設定変更イベント
   media: []
@@ -60,7 +58,6 @@ tile:
   title: ConfigCat
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -101,7 +98,7 @@ ConfigCat インテグレーションには、メトリクスは含まれませ�
 
 ![フィルタリング][9]
 
-### サービスチェック
+### サービスのチェック
 
 ConfigCat インテグレーションには、サービスのチェック機能は含まれません。
 

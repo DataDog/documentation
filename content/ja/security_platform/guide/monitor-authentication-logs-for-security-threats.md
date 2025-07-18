@@ -5,6 +5,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/
   tag: ブログ
   text: モニター認証ログに関する詳細
+kind: ガイド
 title: モニター認証ログによるセキュリティ対策
 ---
 

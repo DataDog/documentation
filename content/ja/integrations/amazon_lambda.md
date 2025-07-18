@@ -7,7 +7,6 @@ categories:
 - cloud
 - log collection
 - tracing
-custom_kind: インテグレーション
 dependencies: []
 description: Lambda の実行、エラー、呼び出しの回数などを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_lambda/
@@ -28,14 +27,19 @@ integration_id: amazon-lambda
 integration_title: AWS Lambda
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
+monitors:
+  lambda_high_error_rate: assets/monitors/lambda_high_error_rate.json
+  lambda_high_iterator_rate: assets/monitors/lambda_high_iterator_rate.json
+  lambda_high_throttles: assets/monitors/lambda_high_throttles.json
+  lambda_timeout: assets/monitors/lambda_timeout.json
 name: amazon_lambda
 public_title: Datadog-AWS Lambda インテグレーション
 short_description: Lambda の実行、エラー、呼び出しの回数などを追跡
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 <div class="alert alert-warning">このページは、Amazon CloudWatch からの AWS Lambda メトリクスの取り込みに特化された文書となっています。Lambda 関数から直接リアルタイムにテレメトリーを収集することについては、<a href="/serverless">Datadog サーバーレスドキュメント</a>を参照してください。</div>
 
 ## 概要
@@ -81,7 +85,7 @@ AWS から取得される各メトリクスには、関数名やセキュリテ�
 
 AWS Lambda インテグレーションは、[Datadog サーバーレスデプロイの追跡][9]を有効にすると、AWS CloudTrail から Lambda のデプロイイベントを収集することができます。
 
-### サービスチェック
+### サービスのチェック
 
 AWS Lambda インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -93,7 +97,7 @@ AWS Lambda インテグレーションには、サービスのチェック機能
 
 詳細は、[サーバーレスドキュメント][11]でご確認ください。
 
-### 収集データ
+### ログの収集
 
 詳細は、[サーバーレスドキュメント][12]でご確認ください。
 
@@ -107,7 +111,7 @@ Datadog は、Lambda のメトリクスに `at_edge`、`edge_master_name`、`edg
 
 Lambda@Edge 関数では、分散型トレーシングは_サポートされていません_。
 
-## すぐに使える監視
+## すぐに使えるモニタリング
 
 AWS Lambda インテグレーションは、パフォーマンスを監視し最適化するために、すぐに使える監視機能を提供します。
 
@@ -124,19 +128,19 @@ AWS Lambda インテグレーションは、パフォーマンスを監視し最
 
 
 
-[1]: https://app.datadoghq.com/integrations/amazon_web_services/
+[1]: /ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://app.datadoghq.com/integrations/amazon_web_services/#installation
+[3]: /ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-permissions.html
 [5]: https://app.datadoghq.com/integrations/amazon-lambda
 [6]: https://app.datadoghq.com/functions
-[7]: https://app.datadoghq.com/serverless
+[7]: /ja/serverless
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_lambda/amazon_lambda_metadata.csv
-[9]: https://app.datadoghq.com/serverless/deployment_tracking
-[10]: https://app.datadoghq.com/serverless/enhanced_lambda_metrics/
-[11]: https://app.datadoghq.com/serverless/custom_metrics/#custom-metrics
-[12]: https://app.datadoghq.com/serverless/forwarder/
-[13]: https://app.datadoghq.com/serverless/distributed_tracing/
+[9]: /ja/serverless/deployment_tracking
+[10]: /ja/serverless/enhanced_lambda_metrics/
+[11]: /ja/serverless/custom_metrics/#custom-metrics
+[12]: /ja/serverless/forwarder/
+[13]: /ja/serverless/distributed_tracing/
 [14]: https://app.datadoghq.com/screen/integration/98/aws-lambda
 [15]: https://app.datadoghq.com/monitors/recommended
-[16]: https://app.datadoghq.com/help/
+[16]: /ja/help/

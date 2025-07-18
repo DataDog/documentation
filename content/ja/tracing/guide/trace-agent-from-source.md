@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ja/tracing/faq/trace-agent-from-source/
+kind: ガイド
 title: トレース Agent をソースからインストールする
 ---
 

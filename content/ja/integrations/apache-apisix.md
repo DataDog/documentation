@@ -5,7 +5,6 @@ assets:
   dashboards:
     Apache APISIX Dashboard: assets/dashboards/apache-apisix_overview.json
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -21,7 +20,6 @@ assets:
       prefix: apisix.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10244
     source_type_name: Apache APISIX
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -30,8 +28,7 @@ author:
   support_email: dev@apisix.apache.org
 categories:
 - クラウド
-- モニター
-custom_kind: インテグレーション
+- メトリクス
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/apache-apisix/README.md
 display_on_public_website: true
@@ -41,8 +38,10 @@ integration_id: apache-apisix
 integration_title: Apache APISIX
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: apache-apisix
+oauth: {}
 public_title: Apache APISIX
 short_description: Datadog-APISIX インテグレーション
 supported_os:
@@ -57,19 +56,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog-APISIX インテグレーション
   media: []
   overview: README.md#Overview
-  resources:
-  - resource_type: blog
-    url: https://apisix.apache.org/blog/2021/11/12/apisix-datadog
   support: README.md#Support
   title: Apache APISIX
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -165,7 +159,7 @@ Apache APISIX チェックにはイベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料
 

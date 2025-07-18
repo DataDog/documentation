@@ -3,6 +3,7 @@ further_reading:
 - link: /getting_started/agent/
   tag: Documentation
   text: Agent の概要
+kind: ドキュメント
 title: IoT Agent
 ---
 
@@ -25,7 +26,7 @@ IoT Agent には、以下のシステムチェックが含まれています。I
 - 埋め込み [DogStatsD][6] サーバーを使用したカスタムメトリクスの収集
 - [ファイルテーリング][7]、[TCP/UDP][8]、[journald][9] を使用したログ収集
 
-IoT Agent には、Python インタープリターおよび標準 Agent にパッケージ化されているその他のインテグレーションは含まれません。また、APM のトレース、ライブプロセスモニタリング、Cloud Network Monitoring もサポートしていません。
+IoT Agent には、Python インタープリターおよび標準 Agent にパッケージ化されているその他のインテグレーションは含まれません。また、APM のトレース、ライブプロセスモニタリング、ネットワークパフォーマンスモニタリングもサポートしていません。
 
 ## セットアップ
 
@@ -51,7 +52,7 @@ IoT Agent は、x64、arm64 (ARMv8)、ARMv7 アーキテクチャで実行中の
 ご使用中のオペレーティングシステムおよびチップセットアーキテクチャに適切な IoT Agent を自動的にダウンロードしてインストールするには、以下のコマンドを使用します。
 
 ```shell
-DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGENT_FLAVOR=datadog-iot-agent bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGENT_FLAVOR=datadog-iot-agent bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
 #### 手動
@@ -73,7 +74,6 @@ Debian ベースのオペレーティングシステムに IoT Agent を手動�
     sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
 
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    curl https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
@@ -98,7 +98,7 @@ Debian ベースのオペレーティングシステムに IoT Agent を手動�
 
 6. Datadog サイトを {{< region-param key="dd_site" code="true" >}} に設定します。デフォルトは `datadoghq.com`。
     ```shell
-    sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml"
+    sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml
     ```
 
 7. IoT Agent を起動します。
@@ -120,7 +120,6 @@ RPM ベースのオペレーティングシステムに IoT Agent を手動で�
     gpgcheck=1
     repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
-           https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
@@ -146,7 +145,7 @@ RPM ベースのオペレーティングシステムに IoT Agent を手動で�
 
 4. Datadog サイトを {{< region-param key="dd_site" code="true" >}} に設定します。デフォルトは `datadoghq.com`。
     ```shell
-    sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml"
+    sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml
     ```
 
 5. IoT Agent を起動します。

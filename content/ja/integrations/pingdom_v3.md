@@ -13,7 +13,6 @@ assets:
       prefix: pingdom.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 615
     source_type_name: Pingdom
 author:
   homepage: https://www.datadoghq.com
@@ -22,8 +21,9 @@ author:
   support_email: help@datadoghq.com
 categories:
 - メトリクス
-- notifications
-custom_kind: integration
+- モニタリング
+- notification
+- web
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -32,8 +32,10 @@ integration_id: pingdom-v3
 integration_title: Pingdom
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: pingdom_v3
+oauth: {}
 public_title: Pingdom
 short_description: Pingdom が収集したアップタイム、応答時間、アラートを Datadog で参照
 supported_os:
@@ -47,8 +49,9 @@ tile:
   - Supported OS::Windows
   - Supported OS::macOS
   - Category::Metrics
-  - Category::Notifications
-  - Offering::Integration
+  - Category::Monitoring
+  - Category::Notification
+  - Category::Web
   configuration: README.md#Setup
   description: Pingdom が収集したアップタイム、応答時間、アラートを Datadog で参照
   media: []
@@ -57,14 +60,11 @@ tile:
   title: Pingdom
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 他のイベントやメトリクスに関連付けて、ユーザー中心の Pingdom パフォーマンスメトリクスを Datadog で追跡します。
 
-Pingdom V3 インテグレーションは [Datadog Pingdom インテグレーション (非推奨)][1] と同様の動作をしますが、[Pingdom API][2] のバージョン 3.1 を使用します。
-
-{{< img src="integrations/pingdom/pingdom_dashboard.png" alt="Datadog ダッシュボード上の Pingdom グラフ" popup="true">}}
+Pingdom V3 インテグレーションは [Datadog Pingdom インテグレーション (非推奨)][1] と同様の動作をしますが、[Pingdom API][2] のバージョン 3.1 を使用します
 
 ## セットアップ
 
@@ -83,14 +83,14 @@ Pingdom V3 インテグレーションは [Datadog Pingdom インテグレーシ
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "pingdom-v3" >}}
+{{< get-metrics-from-git "pingdom_v3" >}}
 
 
 ### イベント
 
 Pingdom インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Pingdom インテグレーションは、トランザクションチェックを取得し、それをサービスチェックとしてレポートします。
 

@@ -6,6 +6,7 @@ further_reading:
 - link: /real_user_monitoring/browser/
   tag: ドキュメント
   text: RUM ブラウザモニタリングについて
+kind: ガイド
 title: Browser RUM および Browser RUM & セッションリプレイのサンプリングのためのセットアップの構成
 ---
 
@@ -24,21 +25,16 @@ title: Browser RUM および Browser RUM & セッションリプレイのサン�
 <blockquote class="alert alert-info">
 Datadog ブラウザ SDK v4.20.0 では、<code>sessionReplaySampleRate</code> 初期化パラメーターが導入され、<code>premiumSampleRate</code> と <code>replaySampleRate</code> 初期化パラメーターは非推奨となりました。
 </blockquote>
-<blockquote class="alert alert-info">
-Datadog Browser SDK v5.0.0 では、2 つの主要な動作変更が導入されています。
 
-- リプレイが記録されたセッションのみが Browser RUM & Session Replay と見なされます
-- <code>sessionReplaySampleRate</code> 初期化パラメーターのデフォルト値は `0` です。以前の SDK バージョンでは `100` を使用しています。
-</blockquote>
 セッションが作成されると、RUM はそのセッションを次のいずれかとして追跡します。
 
-- [**Browser RUM**][2]: セッション、ビュー、アクション、リソース、ロングタスク、エラーが収集されます。
-- [**Browser RUM & Session Replay**][2]: Browser RUM のすべてのデータに加えて、リプレイ録画も収集されます。
+- [**Browser RUM**][2]: セッション、ビュー、アクション、リソース、ロングタスクおよびエラーが収集されます。`startSessionReplayRecording()` への呼び出しは無視されます。
+- [**Browser RUM & セッションリプレイ**][2]: リプレイ記録を含む、Browser RUM からのすべての情報が収集されます。リプレイ記録を収集するには、`startSessionReplayRecording()` を呼び出します。
 
 セッションの追跡方法を制御するために、2 つの初期化パラメーターが利用可能です。
 
 - `sessionSampleRate` は、追跡されるセッション全体の割合を制御します。デフォルトは `100%` で、すべてのセッションが追跡されます。
-- `sessionReplaySampleRate` は全体のサンプリングレートが適用された **後** に適用され、Browser RUM & Session Replay として追跡されるセッションの割合を制御します。Datadog Browser SDK v5.0.0 からはデフォルトで `0` となり、デフォルトでは Browser RUM & Session Replay として追跡されるセッションはありません。
+- `sessionReplaySampleRate` は、全体のサンプルレートの**後に**適用され、Browser RUM & セッションリプレイとして追跡されるセッションの割合を制御します。デフォルトは `100%` で、すべてのセッションがデフォルトで Browser RUM & セッションリプレイとして追跡されます。
 
 セッションの 100% を Browser RUM として追跡する場合
 
@@ -207,25 +203,9 @@ datadogRum.init({
 
 </details>
 
-v5.0.0 以降、カスタムステートに到達したセッションを 100% Browser RUM & Session Replay として追跡するには:
-
-```
-datadogRum.init({
-    ....
-    sessionSampleRate: 100,
-    sessionReplaySampleRate: 100,
-    startSessionReplayRecordingManually: true,
-});
-
-// カスタムステートに到達したとき
-datadogRum.startSessionReplayRecording()
-```
-
-`startSessionReplayRecordingManually: true` を使用する場合、`startSessionReplayRecording()` を呼び出さないセッションは Browser RUM と見なされます。
-
 タグ付けや属性の確認については、[ブラウザモニタリング][3]を参照してください。
 
-## 参考資料
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -1,6 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
+kind: 도움말
 title: help_text를 사용해 모델 열 문서화하기
 ---
 ## 메타데이터

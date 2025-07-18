@@ -5,25 +5,24 @@ categories:
 - cloud
 - aws
 - log collection
-custom_kind: integration
 dependencies: []
-description: Amazon Polly のキーメトリクスを追跡します。
+description: AWS Polly のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_polly/
 draft: false
 git_integration_title: amazon_polly
 has_logo: true
-integration_id: ''
+integration_id: amazon-polly
 integration_title: Amazon Polly
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_polly
 public_title: Datadog-Amazon Polly インテグレーション
-short_description: Amazon Polly のキーメトリクスを追跡します。
+short_description: AWS Polly のキーメトリクスを追跡。
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Polly は、文章をリアルな音声に変換するサービスです。
@@ -39,9 +38,9 @@ Amazon Polly は、文章をリアルな音声に変換するサービスです�
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Polly` が有効になっていることを確認します。
-2. [Datadog - Amazon Polly インテグレーション][3]をインストールします。
+2. [Datadog - AWS Polly インテグレーション][3]をインストールします。
 
-### 収集データ
+### ログの収集
 
 #### ログの有効化
 
@@ -67,11 +66,11 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-Amazon Polly インテグレーションには、イベントは含まれません。
+AWS Polly インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
-Amazon Polly インテグレーションには、サービスのチェック機能は含まれません。
+AWS Polly インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

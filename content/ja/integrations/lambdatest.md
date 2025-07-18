@@ -5,7 +5,6 @@ assets:
   dashboards:
     LambdaTest: assets/dashboards/overview.json
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -15,11 +14,9 @@ assets:
       prefix: lambdatest.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10243
     source_type_name: LambdaTest
   logs:
     source: lambdatest
-  oauth: assets/oauth_clients.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: LambdaTest
@@ -31,7 +28,6 @@ categories:
 - インシデント
 - 問題追跡
 - テスト
-custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/lambdatest/README.md
 display_on_public_website: true
@@ -41,8 +37,10 @@ integration_id: lambdatest
 integration_title: LambdaTest
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: lambdatest
+oauth: {}
 public_title: LambdaTest
 short_description: 最も強力な自動テストプラットフォーム
 supported_os:
@@ -60,7 +58,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: 最も強力な自動テストプラットフォーム
   media: []
@@ -70,7 +67,6 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -94,7 +90,7 @@ LambdaTest でできることは以下の通りです。
 
 構成はすべて LambdaTest ダッシュボード上で行われます。[LambdaTest-Datadog インテグレーション][1]セットアップドキュメントを参照してください。
 
-### 構成
+### コンフィギュレーション
 
 LambdaTest を使用して Datadog でインシデントを追跡する方法を紹介します。
 

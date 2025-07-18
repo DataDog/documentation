@@ -1,42 +1,44 @@
 ---
-aliases:
-- /ko/error_tracking/standalone_frontend/collecting_browser_errors
 further_reading:
-- link: /error_tracking/explorer/
-  tag: Documentation
-  text: Explore your Errors within Datadog
-- link: /error_tracking/monitors/
-  tag: Documentation
-  text: Proactively alert on impactful issues
-- link: /real_user_monitoring
-  tag: Documentation
-  text: Measure performance and user impact
-title: Collecting Browser Errors
+- link: /real_user_monitoring/error_tracking/
+  tag: 설명서
+  text: 오류 추적
+- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
+  tag: 블로그
+  text: 실제 사용자 모니터링(RUM)
+- link: /real_user_monitoring/explorer/
+  tag: 설명서
+  text: Datadog에서 보기 탐색
+- link: /real_user_monitoring/explorer/visualize/
+  tag: 설명서
+  text: 이벤트에 시각화 적용
+- link: /real_user_monitoring/dashboards/
+  tag: 설명서
+  text: RUM 대시보드
+kind: 설명서
+title: 브라우저 오류 수집
 ---
 ## 개요
 
-프론트엔드 오류는 브라우저 SDK을 사용하여 수집됩니다. 사용 가능한 경우 오류 메시지와 스택 트레이스가 포함됩니다.
+프론트 엔드 오류는 실제 사용자 모니터링(RUM)을 사용하여 수집됩니다. 오류 메시지와 스택 트레이스는 사용 가능한 경우 포함됩니다.
 
-## 오류 소스
-프런트엔드 오류는 다음과 같은 여러 원인으로 인해 발생합니다.
+## 오류 발생지
+프론트 엔드 오류는 `error.origin`에 따라 네 가지 카테고리로 분류됩니다.
 
-- **에이전트**: SDK 실행 시
-- **콘솔**: `console.error()` API 호출 시
-- **커스텀**: [`addError` API]와 함께 전송 시(#collect-errors-manually)
-- **보고**: `ReportingObserver` API에서
-- **소스**: 소스 코드에서 처리되지 않은 예외 또는 처리되지 않은 약속 거부 발생 시
+- **source**: 처리되지 않은 예외 또는 처리되지 않은 약속 거부 (소스 코드 관련).
+- **console**: `console.error()`API 호출.
+- **custom**: [RUM `addError`API](#collect-errors-manually)와 함께 전송된 오류.
 
 ## 오류 속성
 
-모든 이벤트 유형의 기본 속성에 대한 내용은 [수집된 데이터][1]를 참조하세요. 샘플링 또는 글로벌 컨텍스트 설정에 대한 내용은 [데이터 및 콘텍스트 수정하기][2]를 참조하세요.
+모든 RUM 이벤트 유형의 기본 속성에 대한 내용은 [수집된 데이터][1]를 참조하세요. 샘플링 또는 글로벌 컨텍스트 구성에 대한 내용은 [RUM 데이터 및 콘텍스트 수정하기][2]를 참조하세요.
 
 | 속성       | 유형   | 설명                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
 | `error.source`  | 문자열 | 오류가 발생한 곳 (예:`console`).         |
 | `error.type`    | 문자열 | 오류 유형(또는 경우에 따라 오류 코드).                     |
-| `error.message` | 문자열 | 이벤트를 설명하는 간결하고 사람이 읽을 수 있는 한 줄 메시지. |
-| `error.stack`   | 문자열 | 스택 트레이스 또는 오류에 대한 보완 정보.     |
-| `error.causes` | [어레이][12] | 추가 컨텍스트를 제공하는 선택 사항 목록입니다. 이 속성은 별도로 오류를 표시하기 위해 사용되고 서식을 향상합니다. 자세한 정보는 [MDN 설명서][13]를 참고하세요. |
+| `error.message` | 문자열 | 이벤트를 설명하는 간결하고 사람이 읽을 수 있는 한 줄 메시지입니다. |
+| `error.stack`   | 문자열 | 스택 트레이스 또는 오류에 대한 보완 정보입니다.     |
 
 ### 소스 오류
 
@@ -48,7 +50,7 @@ title: Collecting Browser Errors
 
 ## 수동으로 오류 수집
 
-처리된 예외, 처리된 프라미스 거부 및 Browser SDK에서 자동으로 추적되지 않는 기타 오류를 `addError()` API로 모니터링하세요.
+처리된 예외, 처리된 약속 거부 및 RUM Browser SDK에서 자동으로 추적되지 않는 기타 오류를 `addError()`API를 통해 모니터링하세요:
 
 {{< code-block lang="javascript" >}}
 addError(
@@ -57,7 +59,7 @@ addError(
 );
 {{< /code-block >}}
 
-**참고**: [오류 추적][4]은 `custom`, `source` 또는 `report`, 또는 `console`로 설정된 소스를 전송하는 오류 및 스택 트레이스가 포함된 오류를 처리합니다. 오류 추적은 다른 소스(예: `network`) 또는 브라우저 확장 프로그램으로 전송된 오류는 처리하지 않습니다.
+**참고**: [오류 추적][4] 기능은 소스가 `custom` 또는 `source`로 설정되어 있고 스택 트레이스가 포함되어 전송된 오류를 처리합니다. 다른 소스(예: `console`)로 전송된 오류는 오류 추적에서 처리되지 않습니다.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -217,20 +219,20 @@ class ErrorBoundary extends React.Component {
 {{< /tabs >}}
 
 
-## 트러블슈팅
+## 문제 해결
 
 ### 스크립트 오류
 
-보안상의 이유로 브라우저는 크로스 오리진 스크립트에 의해 트리거된 오류의 세부 정보를 숨깁니다. 이 경우 Error Details 탭에 "Script error"라는 최소한의 메시지와 함께 오류가 표시됩니다.
+보안상의 이유로 브라우저는 교차 출처 스크립트에 의해 트리거된 오류의 세부 정보를 숨깁니다. 이 경우 Error Details 탭에 "Script error"라는 최소한의 메시지와 함께 오류가 표시됩니다.
 
 {{< img src="real_user_monitoring/browser/script-error.png" alt="실제 사용자 모니터링 스크립트 오류 예시" style="width:75%;" >}}
 
-크로스 오리진 스크립트 및 세부 정보가 숨겨지는 이유에 대한 자세한 내용은 [CORS][7] 및 [글로벌 이벤트 핸들러에 대한 이 참고 사항][8]을 참조하세요. 이 오류의 원인은 다음과 같습니다:
+교차 출처 스크립트 및 세부 정보가 숨겨지는 이유에 대한 자세한 내용은 [CORS][7] 및 [글로벌 이벤트 핸들러에 대한 이 참고 사항][8]을 참조하세요. 이 오류의 원인은 다음과 같습니다:
 - JavaScript 파일은 다른 호스트 이름(예: `example.com`은 `static.example.com`의 어셋 포함)에서 호스팅됩니다.
 - 귀하의 웹사이트에는 CDN에서 호스팅되는 JavaScript 라이브러리가 포함되어 있습니다.
 - 귀하의 웹사이트에는 공급자의 서버에서 호스팅되는 타사 JavaScript 라이브러리가 포함되어 있습니다.
 
-다음 두 단계를 수행하여 크로스 오리진 스크립트에 대한 가시성을 확보하세요:
+다음 두 단계를 수행하여 교차 출처 스크립트에 대한 가시성을 확보하세요:
 1. [`crossorigin="anonymous"`][9]로 JavaScript 라이브러리를 호출하세요.
 
    `crossorigin="anonymous"`를 사용하면 스크립트 가져오기 요청은 안전하게 수행됩니다. 쿠키나 HTTP 인증을 통해 민감한 데이터가 전달되지 않습니다.
@@ -246,7 +248,7 @@ class ErrorBoundary extends React.Component {
 
 
 [1]: /ko/real_user_monitoring/browser/data_collected/
-[2]: /ko/real_user_monitoring/browser/advanced_configuration/
+[2]: /ko/real_user_monitoring/browser/modifying_data_and_context/
 [3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [4]: /ko/real_user_monitoring/error_tracking
 [5]: https://legacy.reactjs.org/docs/error-boundaries.html
@@ -256,5 +258,3 @@ class ErrorBoundary extends React.Component {
 [9]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
 [10]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin
 [11]: /ko/real_user_monitoring/guide/upload-javascript-source-maps/?tab=webpackjs
-[12]: https://github.com/DataDog/rum-events-format/blob/69147431d689b3e59bff87e15bb0088a9bb319a9/lib/esm/generated/rum.d.ts#L185-L203
-[13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause

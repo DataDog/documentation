@@ -3,12 +3,13 @@ further_reading:
 - link: https://www.datadoghq.com/blog/managing-datadog-with-terraform/
   tag: GitHub
   text: Datadog を Terraform で管理する
+kind: documentation
 title: Terraform の概要
 ---
 
 ## 概要
 
- [Datadog Terraform プロバイダー][2]を使用すると、Datadog リソースを作成し、プログラムで管理することができます。このガイドでは、Terraform を使い始めるための概要を説明し、特定のユースケースに対応した Terraform リソースやチュートリアルへのリンクも掲載しています。
+Terraform を使用すると、Datadog リソースを作成し、プログラムで管理することができます。このガイドでは、Terraform を使い始めるための概要を説明し、特定のユースケースに対応した Terraform リソースやチュートリアルへのリンクも掲載しています。
 
 ## セットアップ
 
@@ -22,26 +23,17 @@ title: Terraform の概要
 
 [AWS インテグレーションリソース][9]、[Azure インテグレーションリソース][10]、[Google Cloud Project インテグレーションリソース][11]は、それぞれ [AWS][12]、[Azure][13]、[Google Cloud][14] からデータを Datadog アカウントに素早く流し込む接続設定をすることができます。AWS インテグレーションを使用している場合、関連する IAM ロールや権限と一緒にインテグレーションを設定する例については、[AWS と Terraform のインテグレーション][27]ガイドを参照してください。
 
-### ログとメトリクス
-
-Terraform でログとメトリクスを管理する手順については、[Terraform によるログとメトリクスの管理][20] を参照してください。
-
-### モニター
+### アラート設定
 
 Datadog アカウントに流れるデータで、予期せぬ変化や異常な動作について通知を受けるために、[Datadog モニターによるアラート][8]を実装します。モニターの作成と管理には[モニターリソース][4]を、モニターの JSON 定義には [モニター JSON リソース][5]を使用します。[Live Process モニター][7]を作成する `monitor.tf` ファイルの例については、Terraform のメインドキュメントの[モニターを作成する][6]のセクションを参照してください。
 
 ### アカウントの管理
 
-Terraform で Datadog アカウントを管理する手順については、[Terraform による Datadog 管理ガイド][19] を参照してください。
+チームや組織が大きくなっても、Terraform を使って Datadog をニーズに合わせて拡張することができます。[ユーザー][19]リソースでユーザーを作成し、[ロールリソース][20]でカスタマイズされた[権限セット][21]を割り当てます。また、[API キーリソース][23]と[アプリケーションキーリソース][24]でアカウントの [API キーとアプリケーションキー][22]を作成および管理し、[子組織のリソース][26]で[子組織][25]を追加することも可能です。
 
-### ダッシュボード
+### ダッシュボード  
 
 データをさらに分析したり、オーディエンスのために表示したりするには、[Datadog ダッシュボード][18]を作成します。Terraform はこのために[ダッシュボードリソース][15]を提供しますが、[ダッシュボード JSON リソース][16]を使用して JSON 定義でダッシュボードを作成することができます。また、制限付きロールを構成することで、[ダッシュボードの編集を制限する][17]ことができます。
-
-### Synthetic テスト
-
-   - API テストについては、**API で API テストを作成する**ページの [Terraform セクション][21]を参照してください。
-   - ブラウザテストについては、**プログラムによるブラウザテストの管理**ページの [Terraform セクション][22]を参照してください。
 
 ### Webhook
 
@@ -65,7 +57,7 @@ Datadog Agent を搭載した Kubernetes アプリケーションの例や [Synt
 [8]: /ja/monitors/
 [9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
 [10]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_azure
-[11]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_gcp_sts
+[11]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_gcp
 [12]: /ja/integrations/amazon_web_services/
 [13]: /ja/integrations/azure/
 [14]: /ja/integrations/google_cloud_platform/
@@ -73,10 +65,14 @@ Datadog Agent を搭載した Kubernetes アプリケーションの例や [Synt
 [16]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/dashboard_json
 [17]: /ja/dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
 [18]: /ja/dashboards/
-[19]: /ja/account_management/guide/manage-datadog-with-terraform/
-[20]: /ja/logs/guide/manage_logs_and_metrics_with_terraform/
-[21]: /ja/synthetics/guide/create-api-test-with-the-api/#terraform
-[22]: /ja/synthetics/guide/manage-browser-tests-through-the-api/#manage-your-browser-tests-with-terraform
+[19]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/user
+[20]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/role
+[21]: /ja/account_management/rbac/permissions/
+[22]: /ja/account_management/api-app-keys/
+[23]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/api_key
+[24]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/application_key
+[25]: /ja/account_management/multi_organization/
+[26]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/child_organization
 [27]: /ja/integrations/guide/aws-terraform-setup
 [28]: https://developer.hashicorp.com/terraform/tutorials/use-case/datadog-provider
 [29]: /ja/integrations/webhooks/

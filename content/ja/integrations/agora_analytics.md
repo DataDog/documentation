@@ -5,7 +5,6 @@ assets:
   dashboards:
     Agora Analytics Overview: assets/dashboards/agora_analytics_overview.json
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -24,7 +23,6 @@ assets:
       prefix: agora.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10335
     source_type_name: Agora Analytics
 author:
   homepage: https://www.agora.io
@@ -33,7 +31,6 @@ author:
   support_email: support@agora.io
 categories:
 - コラボレーション
-custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/agora_analytics/README.md
 display_on_public_website: true
@@ -43,8 +40,10 @@ integration_id: agora-analytics
 integration_title: Agora Analytics
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: agora_analytics
+oauth: {}
 public_title: Agora Analytics
 short_description: Datadog で Agora Analytics Collector のメトリクスを表示する
 supported_os:
@@ -71,7 +70,6 @@ tile:
   title: Agora Analytics
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -94,11 +92,11 @@ Agora Analytics は Datadog にメトリクスを送信します。
 
 Agora Analytics には、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Agora Analytics には、サービスのチェック機能は含まれません。
 
-## Agent
+## サポート
 
 ヘルプが必要な場合は、[Agora サポート][2]までお問い合わせください。
 

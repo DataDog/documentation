@@ -10,9 +10,10 @@ further_reading:
 - link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
-- link: /monitors/status/
+- link: /monitors/manage/status/
   tag: ドキュメント
   text: モニターステータスの参照
+kind: documentation
 title: 予測値モニター
 ---
 
@@ -103,7 +104,7 @@ Datadog は、選択したメトリクスを自動的に分析して、複数の
 
 ### 通知
 
-**Configure notifications and automations** セクション (通知と自動化の構成) の詳細な手順については、[通知][8]のページをご覧ください。
+**Say what's happening** セクションと **Notify your team** セクションの詳細については、[通知][8]ページをご確認ください。
 
 ## API
 
@@ -118,7 +119,7 @@ Datadog は、選択したメトリクスを自動的に分析して、複数の
 ```
 
 * `aggregator`: 予測値が閾値を下回ったらアラートをトリガーするようにする場合は、`min` を使用します。予測値が閾値を上回ったらアラートをトリガーするようにするには、`max` を使用します。
-* `query_window`: タイムフレーム。例: `next_4h` または `next_7d`。
+* `query_window`: `last_4h` や `last_7d` などのタイムフレーム。通知のグラフに表示される時間ウィンドウ。`alert_window` の約 5 倍にすることが推奨されますが、少なくとも `alert_window` と同じ大きさである必要があります。このパラメーターは、通知に含まれるグラフに表示される時間範囲を制御します。
 * `metric_query`: 標準の Datadog メトリクスクエリ (例: `min:system.disk.free{service:database,device:/data}by{host}`)
 * `algorithm`: `linear` または `seasonal`
 * `deviations`: 1 と等しい、または 1 より大きい数。このパラメーターは、信頼限界のサイズを制御し、モニターの秘密度を調整できます。
@@ -138,7 +139,7 @@ Datadog は、選択したメトリクスを自動的に分析して、複数の
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors/create/forecast
+[1]: https://app.datadoghq.com/monitors#create/forecast
 [2]: /ja/monitors/types/metric/#define-the-metric
 [3]: /ja/monitors/guide/recovery-thresholds/
 [4]: /ja/monitors/guide/how-to-update-anomaly-monitor-timezone/
@@ -147,5 +148,5 @@ Datadog は、選択したメトリクスを自動的に分析して、複数の
 [7]: /ja/monitors/types/metric/#data-window
 [8]: /ja/monitors/notify/
 [9]: /ja/api/v1/monitors/#create-a-monitor
-[10]: /ja/monitors/status/#settings
+[10]: /ja/monitors/manage/status/#settings
 [11]: /ja/api/v1/monitors/

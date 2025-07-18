@@ -13,6 +13,7 @@ further_reading:
 - link: /agent/kubernetes/metrics/
   tag: documentation
   text: Kubernetes メトリクス
+kind: ガイド
 title: Kubernetes のレガシーバージョン
 ---
 

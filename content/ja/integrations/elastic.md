@@ -6,7 +6,6 @@ assets:
     elasticsearch: assets/dashboards/overview.json
     elasticsearch_timeboard: assets/dashboards/metrics.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -19,15 +18,14 @@ assets:
     - java org.elasticsearch.bootstrap.Elasticsearch
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 37
     source_type_name: Elasticsearch
+  logs:
+    source: elasticsearch
   monitors:
-    Average Search Query Latency is High: assets/monitors/elastic_average_search_latency.json
-    Current Indexing Load is High: assets/monitors/elastic_indexing_load.json
-    Latency is high: assets/monitors/elastic_query_latency_high.json
-    Number of pending tasks is high: assets/monitors/elastic_pending_tasks_high.json
-    Query load is high: assets/monitors/elastic_query_load_high.json
-    Unsuccessful requests rate is high: assets/monitors/elastic_requests.json
+    '[ElasticSearch] Number of pending tasks is high': assets/monitors/elastic_pending_tasks_high.json
+    '[ElasticSearch] Query load is high': assets/monitors/elastic_query_load_high.json
+    '[ElasticSearch] Time spent on queries is high': assets/monitors/elastic_query_latency_high.json
+    '[ElasticSearch] Unsuccessful requests rate is high': assets/monitors/elastic_requests.json
   saved_views:
     elasticsearch_processes: assets/saved_views/elasticsearch_processes.json
 author:
@@ -36,22 +34,23 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- data stores
+- data store
 - log collection
 - tracing
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/elastic/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: elastic
 integration_id: elasticsearch
-integration_title: Elasticsearch
-integration_version: 8.1.0
+integration_title: ElasticSearch
+integration_version: 5.5.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: elastic
-public_title: Elasticsearch
+oauth: {}
+public_title: ElasticSearch
 short_description: クラスター全体のステータスから JVM のヒープ使用量まで、すべてを監視
 supported_os:
 - linux
@@ -60,32 +59,23 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Data Stores
+  - Category::データストア
   - Category::ログの収集
   - Category::Tracing
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Submitted Data Type::Metrics
-  - Submitted Data Type::Logs
-  - Submitted Data Type::Traces
-  - Submitted Data Type::Events
-  - Offering::Integration
   configuration: README.md#Setup
   description: クラスター全体のステータスから JVM のヒープ使用量まで、すべてを監視
   media: []
   overview: README.md#Overview
-  resources:
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/monitor-elasticsearch-performance-metrics
   support: README.md#Support
-  title: Elasticsearch
+  title: ElasticSearch
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Elasticsearch dashboard][1]
+![Elastic search ダッシュボード][1]
 
 ## 概要
 
@@ -99,14 +89,14 @@ Datadog Agent の Elasticsearch チェックは、検索とインデックス化
 
 Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれています。追加のインストールは必要ありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
@@ -145,7 +135,7 @@ Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれて�
       - Amazon ES コンフィギュレーション API へのすべてのリクエストには、署名が必要です。詳細は、[OpenSearch サービスリクエストの作成と署名][4]を参照してください。
       - `aws` の認証タイプは、[boto3][5] に依存して `.aws/credentials` から自動的に AWS 認証情報を収集します。`conf.yaml` で `auth_type: basic` を使用して、認証情報を `username: <USERNAME>`、`password: <PASSWORD>` で定義します。
       - 監視するためには、適切な権限を持つユーザーとロール (まだ持っていない場合) を Elasticsearch で作成する必要があります。これは、Elasticsearch が提供する REST API、または Kibana UI を通じて行うことができます。
-      - If you have enabled security features in Elasticsearch, you can use `monitor` or `manage` privilege while using the API to make the calls to the Elasticsearch indices.
+      - Elastic Search のセキュリティ機能を有効にしている場合、API を使用して Elastic Search のインデックスを呼び出す際に、`monitor` または `manage` 権限を使用することができます。
       - 作成したロールに以下のプロパティを含めます。
         ```json
         name = "datadog"
@@ -166,9 +156,9 @@ Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれて�
 
 ###### カスタムクエリ
 
-The Elasticsearch integration allows you to collect custom metrics through custom queries by using the `custom_queries` configuration option.
+ElasticSearch とのインテグレーションでは、`custom_queries` 構成オプションを使用することで、カスタムクエリによるカスタムメトリクスの収集が可能です。
 
-**Note:** When running custom queries, use a read only account to ensure that the Elasticsearch instance does not change.
+**注:** カスタムクエリを実行する際は、ElasticSearch のインスタンスが変更されないよう、読み取り専用アカウントを使用してください。
 
 ```yaml
 custom_queries:
@@ -209,9 +199,9 @@ custom_queries:
 Datadog APM は、Elasticsearch と統合して分散システム全体のトレースを確認します。Datadog Agent v6 以降では、トレースの収集はデフォルトで有効化されています。トレースの収集を開始するには、以下の手順に従います。
 
 1. [Datadog でトレースの収集を有効にします][9]。
-2. [Instrument your application that makes requests to Elasticsearch][10].
+2. [ElasticSearch へのリクエストを作成するアプリケーションをインスツルメントします][10]。
 
-##### ログ収集
+##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -309,7 +299,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"url": "http://%%host%%:9200"}]'
 ```
 
-##### ログ収集
+##### ログの収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
@@ -399,7 +389,7 @@ spec:
     - name: elasticsearch
 ```
 
-##### ログ収集
+##### ログの収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
@@ -469,7 +459,7 @@ Agent コンテナで必要な環境変数
 }
 ```
 
-##### ログ収集
+##### ログの収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][2]を参照してください。
@@ -529,15 +519,15 @@ Agent コンテナで必要な環境変数
 - `slm_stats` は、**elasticsearch.slm.\*** メトリクスを送信します
 
 ### メトリクス
-{{< get-metrics-from-git "elasticsearch" >}}
+{{< get-metrics-from-git "elastic" >}}
 
 
 ### イベント
 
 Elasticsearch チェックは、Elasticsearch クラスターの全体的なステータスが赤、黄、緑に変化するたびに、Datadog にイベントを送信します。
 
-### サービスチェック
-{{< get-service-checks-from-git "elasticsearch" >}}
+### サービスのチェック
+{{< get-service-checks-from-git "elastic" >}}
 
 
 ## トラブルシューティング

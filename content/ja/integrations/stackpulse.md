@@ -5,7 +5,6 @@ assets:
   dashboards:
     StackPulse: assets/dashboards/stackpulse_overview.json
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -15,7 +14,6 @@ assets:
       prefix: stackpulse.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10173
     source_type_name: StackPulse
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -26,9 +24,8 @@ categories:
 - 自動化
 - コラボレーション
 - インシデント
-- notifications
+- notification
 - orchestration
-custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/stackpulse/README.md
 display_on_public_website: true
@@ -38,8 +35,10 @@ integration_id: stackpulse
 integration_title: StackPulse
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: stackpulse
+oauth: {}
 public_title: StackPulse
 short_description: アラートの応答を自動化し、イベントストリームでプレイブックの実行を追跡します
 supported_os:
@@ -52,12 +51,11 @@ tile:
   - Category::Automation
   - Category::Collaboration
   - Category::Incidents
-  - Category::Notifications
+  - Category::Notification
   - Category::Orchestration
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: アラートの応答を自動化し、イベントストリームでプレイブックの実行を追跡します
   media: []
@@ -66,7 +64,6 @@ tile:
   title: StackPulse
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -154,13 +151,13 @@ StackPulse インテグレーションは、メトリクスを提供しません
 
 StackPulse インテグレーションでは、[Datadog ポストイベント][6]ステップを使用して Datadog のイベントストリームにイベントを送信することができます。このステップをプレイブックと併用し、問題の軽減に成功した場合や実行に失敗した場合に Datadog に通知したり、加工したアラートデータを Datadog に返送することもできます。
 
-### サービスチェック
+### サービスのチェック
 
 StackPulse インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
 [1]: https://stackpulse.com
 [2]: https://stackpulse.com/get-started/

@@ -8,6 +8,7 @@ further_reading:
 - link: /agent/cluster_agent/clusterchecks
   tag: Documentation
   text: クラスターチェック
+kind: ガイド
 title: Cluster Agent のネットワークデバイスモニタリング
 ---
 
@@ -34,7 +35,7 @@ Agent のオートディスカバリーを DCA と組み合わせるとスケー
     helm install datadog-monitoring --set datadog.apiKey=<YOUR_DD_API_KEY> -f cluster-agent-values.yaml datadog/datadog
     ```
 
-### 構成
+### コンフィギュレーション
 
 以下は、`cluster-agent-values.yaml` の例です。
 
@@ -207,9 +208,11 @@ clusterAgent:
   ## Datadog Cluster Agent のコンフィグにカスタムコンテンツを指定します (datadog-cluster.yaml)。
   #
   datadog_cluster_yaml:
+    listeners:
+      - name: snmp
 
-    # すべての `network_devices.autodiscovery` 構成はこちらを参照: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-    autodiscovery:
+    # すべての `snmp_listener` コンフィグはこちらを参照: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+    snmp_listener:
       workers: 2
       discovery_interval: 10
       configs:

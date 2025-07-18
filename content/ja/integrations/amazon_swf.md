@@ -6,17 +6,17 @@ categories:
 - configuration & deployment
 - aws
 - log collection
-custom_kind: integration
 dependencies: []
 description: Amazon Simple Workflow Service のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_swf/
 draft: false
 git_integration_title: amazon_swf
 has_logo: true
-integration_id: ''
+integration_id: amazon-swf
 integration_title: Amazon Simple Workflow Service
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_swf
 public_title: Datadog-Amazon Simple Workflow Service インテグレーション
@@ -24,7 +24,6 @@ short_description: Amazon Simple Workflow Service のキーメトリクスを追
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon SWF は、並列ステップまたは順次ステップからなるバックグラウンドジョブを構築、実行、スケーリングする開発者を支援します。
@@ -40,9 +39,9 @@ Amazon SWF は、並列ステップまたは順次ステップからなるバッ
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `SWF` が有効になっていることを確認します。
-2. [Datadog - Amazon SWF インテグレーション][3]をインストールします。
+2. [Datadog - AWS SWF インテグレーション][3]をインストールします。
 
-### 収集データ
+### ログの収集
 
 #### ログの有効化
 
@@ -68,11 +67,11 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-Amazon SWF インテグレーションには、イベントは含まれません。
+AWS SWF インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
-Amazon SWF インテグレーションには、サービスのチェック機能は含まれません。
+AWS SWF インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

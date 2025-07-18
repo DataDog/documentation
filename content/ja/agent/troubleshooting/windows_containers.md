@@ -7,8 +7,9 @@ further_reading:
   tag: Documentation
   text: Kubernetes Agent
 - link: /agent/troubleshooting/
-  tag: ドキュメント
+  tag: Agent のトラブルシューティング
   text: Agent のトラブルシューティング
+kind: ドキュメント
 title: Windows コンテナ問題
 ---
 
@@ -35,9 +36,9 @@ Hyper-V 分離モードはサポートされていません。
 
 ## Kubernetes の問題
 
-Live processes do not appear in containers (except for the Datadog Agent).
+ライブプロセスはコンテナに表示されません (Datadog Agent を除く)。
 
-### Mixed clusters (Linux + Windows)
+### 複合クラスター (Linux + Windows)
 
 複合クラスターに Datadog Agent をデプロイするには、Helm チャートの 2 つのインストールを異なる `targetSystem` で実行することが推奨されます。
 

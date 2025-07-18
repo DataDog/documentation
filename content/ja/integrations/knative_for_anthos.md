@@ -1,13 +1,12 @@
 ---
 categories:
-- クラウド
-- 構成とデプロイ
-- incident-teams
+- cloud
+- 構成 & デプロイ
+- コンテナ
 - google cloud
 - kubernetes
 - ログの収集
 - オーケストレーション
-custom_kind: インテグレーション
 dependencies: []
 description: Knative for Anthos クラスターからメトリクスおよびログを収集し、Datadog で分析
 doc_link: https://docs.datadoghq.com/integrations/knative_for_anthos/
@@ -18,6 +17,7 @@ integration_id: knative-for-anthos
 integration_title: Knative for Anthos
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: '1.0'
 name: knative_for_anthos
 public_title: Datadog- Knative for Anthos インテグレーション
@@ -25,7 +25,6 @@ short_description: Knative for Anthos クラスターからメトリクスおよ
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Knative for Anthos は、ハイブリッドおよびマルチクラウド環境のための柔軟なサーバーレス開発プラットフォームです。Knative for Anthos は、[Knative][1] サービスをフルサポートする、Google のマネージドサービスです。
@@ -46,17 +45,17 @@ Workload Identity を有効にしていない場合、Knative メトリクスの
 
 セットアップの詳しい手順については、[Google Cloud Workload Identity][3] をご覧ください。
 
-### ログ収集
+### ログの収集
 
-Knative for Anthos は[サービスログ][4]を公開します。
-Knative のログは Google Cloud Logging で収集し、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信することができます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][5]。
+Knative for Anthos は、[サービスログ][4]も公開します。
+Knative のログは、Google Cloud Logging を使用して収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。Cloud Pub/Sub をまだセットアップしていない場合は、[HTTP プッシュフォワーダーを使用してセットアップ][5]してください。
 
 これが完了したら、Google Cloud Run のログを Google Cloud Logging から Pub/Sub へエクスポートします。
 
 1. [Knative for Anthos][6] へ移動し、希望するサービスをクリックして **Logs** タブを開きます。
 2. **View in Logs Explorer** をクリックして **Google Cloud Logging Page** へ移動します。
 2. **シンクを作成**し、シンクに適宜名前を付けます。
-3. エクスポート先として「Cloud Pub/Sub」を選び、その目的で作成された Pub/Sub を選択してください。**注**: この Pub/Sub は別のプロジェクトに置くこともできます。
+3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 
     {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
 
@@ -72,13 +71,13 @@ Knative のログは Google Cloud Logging で収集し、Cloud Pub/Sub トピッ
 
 Knative for Anthos インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Knative for Anthos インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料
 

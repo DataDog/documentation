@@ -3,7 +3,8 @@ further_reading:
 - link: /synthetics/browser_tests
   tag: ドキュメント
   text: ブラウザテストの詳細
-title: Shadow DOM を使用したアプリケーションのテスト実行
+kind: ガイド
+title: ブラウザテストで Shadow DOM を使用する
 ---
 
 ## 概要

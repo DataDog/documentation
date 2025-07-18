@@ -3,6 +3,7 @@ further_reading:
 - link: developers/integrations/agent_integration
   tag: ドキュメント
   text: Datadog インテグレーションを作成する
+kind: ガイド
 title: Datadog インテグレーションをリクエストする
 ---
 
@@ -24,7 +25,7 @@ Datadog の既存ツールでニーズに見合うものがない場合は、[Da
 
 - リクエスト送信者の名前、役職、連絡先情報
 - リクエストの緊急度: 緊急、優先、通常
-- The name of technology and a link to their website
+- テクノロジー名とウェブサイトのリンク
 - 収集・監視したい特殊なメトリクス
 - 情報収集のユースケース
 - 現在、目標をどのように達成しているかの説明

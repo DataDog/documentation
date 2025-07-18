@@ -1,7 +1,4 @@
 ---
-cascade:
-  algolia:
-    rank: 70
 further_reading:
 - link: /data_security/logs/
   tag: ドキュメント
@@ -15,15 +12,16 @@ further_reading:
 - link: /tracing/configure_data_security/
   tag: ドキュメント
   text: トレースのデータセキュリティ
-- link: /data_security/real_user_monitoring/
+- link: /real_user_monitoring/browser/modifying_data_and_context/
   tag: ドキュメント
   text: RUM のデータセキュリティ
-- link: /real_user_monitoring/session_replay/browser/privacy_options
+- link: /real_user_monitoring/session_replay/privacy_options
   tag: ドキュメント
   text: セッションリプレイのプライバシーオプション
-- link: /security/sensitive_data_scanner/
+- link: /sensitive_data_scanner/
   tag: ドキュメント
   text: センシティブ データ スキャナー
+kind: documentation
 title: データ関連リスクの低減
 ---
 
@@ -83,10 +81,10 @@ Datadog の目的は、お客様のインフラストラクチャーやサービ
 
 Datadog のトレーシングライブラリは、アプリケーション、サービス、テスト、パイプラインをインスツルメントし、Agent を通じて Datadog にパフォーマンスデータを送信するために使用されます。トレースとスパンのデータ (およびその他多数) は、以下の製品で使用するために生成されます。
 
-- Application Performance Monitoring (APM)
+- アプリケーションパフォーマンスモニタリング (APM)
 - Continuous Profiler
-- CI Visibility
-- App and API Protection
+- CI Visibility （CI/CDの可視化）
+- Application Security Management
 
 トレーシングライブラリのソースデータの管理方法、デフォルトの基本的なセキュリティ設定、トレース関連要素のカスタム難読化、スクラビング、除外、および変更についての詳細情報は、[トレースデータのセキュリティのための Agent とトレーサーの構成][18]を参照してください。
 
@@ -94,7 +92,7 @@ Datadog のトレーシングライブラリは、アプリケーション、サ
 
 Datadog を使用すると、AWS Lambda 関数の JSON リクエストおよびレスポンスのペイロードを収集し、視覚化することができます。リクエストまたはレスポンスの JSON オブジェクト内の機密データ (アカウント ID やアドレスなど) が Datadog に送信されないようにするには、特定のパラメーターが Datadog に送信されないようにスクラブすることができます。詳しくは、[AWS Lambda のペイロードコンテンツの難読化][19]をお読みください。
 
-### Synthetic Monitoring
+### Synthetic モニタリング
 
 Synthetic テストは、世界中のテスト拠点からのリクエストとビジネストランザクションをシミュレートします。構成、アセット、結果、資格情報の暗号化に関する考慮事項や、テストのプライバシーオプションの使用方法については、[Synthetic モニタリングのデータセキュリティ][20]をお読みください。
 
@@ -104,7 +102,7 @@ Synthetic テストは、世界中のテスト拠点からのリクエストと�
 
 セッションリプレイのプライバシー オプションのデフォルトは、エンドユーザーのプライバシーを保護し、組織の機密情報が収集されないようにすることです。セッションリプレイの要素のマスク、オーバーライド、非表示については、[セッションリプレイのプライバシー オプション][22]を参照してください。
 
-### Database Monitoring
+### データベース モニタリング
 
 データベースモニタリング Agent は、Datadog インテークに送信されたすべてのクエリのバインドパラメータを難読化します。このため、データベースに保存されているパスワード、PII (個人を特定できる情報) などの機密情報は、クエリのメトリクス、クエリサンプル、または説明プランで表示不可能になります。データベースのパフォーマンスモニタリングに関わる他の種類のデータに対するリスク軽減については、[データベースモニタリングデータの収集][23]をお読みください。
 
@@ -145,12 +143,12 @@ Continuous Integration のパイプラインとテスト
 [2]: https://www.datadoghq.com/legal/privacy/
 [3]: /ja/developers/dogstatsd/
 [4]: /ja/data_security/agent/
-[5]: /ja/agent/configuration/secrets-management/
+[5]: /ja/agent/guide/secrets-management/
 [6]: /ja/integrations/amazon_web_services/
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles
 [8]: /ja/integrations/azure/
 [9]: /ja/integrations/google_cloud_platform/
-[10]: /ja/security/sensitive_data_scanner/
+[10]: /ja/sensitive_data_scanner/
 [11]: /ja/data_security/logs/
 [12]: /ja/logs/guide/control-sensitive-logs-data/
 [13]: /ja/agent/logs/advanced_log_collection
@@ -161,8 +159,8 @@ Continuous Integration のパイプラインとテスト
 [18]: /ja/tracing/configure_data_security/
 [19]: /ja/serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /ja/data_security/synthetics/
-[21]: /ja/real_user_monitoring/browser/advanced_configuration/
-[22]: /ja/real_user_monitoring/session_replay/browser/privacy_options
+[21]: /ja/real_user_monitoring/browser/modifying_data_and_context/
+[22]: /ja/real_user_monitoring/session_replay/privacy_options
 [23]: /ja/database_monitoring/data_collected/#sensitive-information
 [24]: /ja/getting_started/tagging/
 [25]: /ja/tracing/glossary/

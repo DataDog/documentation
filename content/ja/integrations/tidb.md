@@ -5,7 +5,6 @@ assets:
   dashboards:
     TiDB Overview: assets/dashboards/overview.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -16,7 +15,6 @@ assets:
       prefix: tidb_cluster
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10172
     source_type_name: TiDB
   logs:
     source: tidb
@@ -26,10 +24,9 @@ author:
   sales_email: xuyifan02@pingcap.com
   support_email: xuyifan02@pingcap.com
 categories:
-- data stores
+- data store
 - cloud
 - ログの収集
-custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/tidb/README.md
 display_on_public_website: true
@@ -39,8 +36,10 @@ integration_id: tidb
 integration_title: TiDB
 integration_version: 2.1.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: tidb
+oauth: {}
 public_title: TiDB
 short_description: TiDB クラスター用インテグレーション
 supported_os:
@@ -53,10 +52,9 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Data Stores
+  - Category::Data Store
   - Category::Cloud
   - Category::Log Collection
-  - Offering::Integration
   configuration: README.md#Setup
   description: TiDB クラスター用インテグレーション
   media: []
@@ -65,7 +63,6 @@ tile:
   title: TiDB
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -78,7 +75,7 @@ tile:
 
 > **注**:
 >
-> - このインテグレーションには TiDB 4.0 以降が必要です。
+> - このインテグレーションには TiDB 4.0 以降が必要です。 
 > - TiDB Cloud の場合は、[TiDB Cloud インテグレーション][2]をご覧ください。
 
 ## セットアップ
@@ -91,7 +88,7 @@ tile:
 
 `datadog-agent integration install -t datadog-tidb==<INTEGRATION_VERSION>` を実行します。
 
-### 構成
+### コンフィギュレーション
 
 ##### メトリクスの収集
 
@@ -132,7 +129,7 @@ tile:
 
 3. [Agent を再起動します][6]。
 
-##### ログ収集
+##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -212,7 +209,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 TiDB チェックには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "tidb" >}}
 
 
@@ -239,7 +236,7 @@ Since there are many important metrics in a TiDB クラスターには多くの�
 
 [1]: https://docs.pingcap.com/tidb/stable
 [2]: https://docs.datadoghq.com/ja/integrations/tidb_cloud/
-[3]: https://app.datadoghq.com/account/settings/agent/latest
+[3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent
 [5]: https://github.com/DataDog/integrations-extras/blob/master/tidb/datadog_checks/tidb/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent

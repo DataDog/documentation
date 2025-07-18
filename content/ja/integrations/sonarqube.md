@@ -5,7 +5,6 @@ assets:
   dashboards:
     Sonarqube Overview: assets/dashboards/overview.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -14,15 +13,13 @@ assets:
       check: sonarqube.server.database.pool_active_connections
       metadata_path: metadata.csv
       prefix: sonarqube.
-    process_signatures:
-    - java org.sonar.server.app.WebServer
-    - java org.sonar.ce.app.CeServer
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10132
     source_type_name: SonarQube
+  logs:
+    source: sonarqube
   monitors:
-    Sonarqube has vulnerabilities: assets/monitors/vulnerabilities.json
+    SonarQube vulnerabilities: assets/recommended_monitors/vulnerabilities.json
   saved_views:
     status_overview: assets/saved_views/status_overview.json
 author:
@@ -34,7 +31,6 @@ categories:
 - 自動化
 - ログの収集
 - セキュリティ
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md
 display_on_public_website: true
@@ -42,10 +38,12 @@ draft: false
 git_integration_title: sonarqube
 integration_id: sonarqube
 integration_title: SonarQube
-integration_version: 5.2.0
+integration_version: 2.2.5
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: sonarqube
+oauth: {}
 public_title: SonarQube
 short_description: SonarQube のサーバーとプロジェクトを監視します。
 supported_os:
@@ -61,7 +59,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: SonarQube のサーバーとプロジェクトを監視します。
   media: []
@@ -70,7 +67,6 @@ tile:
   title: SonarQube
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -84,7 +80,7 @@ tile:
 SonarQube チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 SonarQube は、Web API および JMX の 2 つのソースからのメトリクスを公開します。
 [以下で指定されたメトリクス](#metrics)のすべてを収集するには、このチェックの 3 つのインスタンスを構成します。SonarQube の
@@ -190,11 +186,11 @@ instances:
 ```
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
@@ -202,16 +198,16 @@ instances:
    SonarQube データの収集を開始します。
    使用可能なすべてのコンフィギュレーションオプションについては、[サンプル  sonarqube.d/conf.yaml][1] を参照してください。
 
-   このチェックでは、JMX インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、[ステータスページ][2]に表示されます。
+   このチェックでは、JMX インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、情報ページに表示されます。
    以下で説明する構成を編集することで、関心があるメトリクスを指定できます。
-   収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][3]で詳細な手順を参照してください。
-   制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][4]までお問い合わせください。
+   収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][2]で詳細な手順を参照してください。
+    制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][3]までお問い合わせください。
 
-2. [Agent を再起動します][5]。
+2. [Agent を再起動します][4]。
 
-##### ログ収集
+##### ログの収集
 
-1. SonarQube の[ログ収集][6]を有効化します。
+1. SonarQube [ログの収集][5]を有効化します。
 
 2. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -256,16 +252,15 @@ instances:
            pattern: \d{4}\.\d{2}\.\d{2}
    ```
 
-5. [Agent を再起動します][5]。
+5. [Agent を再起動します][4]。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/sonarqube/datadog_checks/sonarqube/data/conf.yaml.example
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://docs.datadoghq.com/ja/integrations/java/
-[4]: https://docs.datadoghq.com/ja/help/
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.sonarqube.org/latest/instance-administration/system-info/
+[2]: https://docs.datadoghq.com/ja/integrations/java/
+[3]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.sonarqube.org/latest/instance-administration/system-info/
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -273,7 +268,7 @@ instances:
 
 コンテナ環境の場合は、[JMX を使用したオートディスカバリー][1]のガイドを参照してください。
 
-##### ログ収集
+##### ログの収集
 
 Datadog Agent では、ログの収集がデフォルトで無効になっています。これを有効にするには、[Docker ログの収集][2]を参照してください。
 
@@ -388,7 +383,7 @@ Collector
 
 SonarQube には、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "sonarqube" >}}
 
 
@@ -403,10 +398,10 @@ SonarQube には、イベントは含まれません。
 
 
 [1]: https://www.sonarqube.org
-[2]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/sonarqube/datadog_checks/sonarqube/data/metrics.yaml
-[4]: https://docs.sonarqube.org/latest/server-upgrade-and-maintenance/monitoring/instance/#exposed-jmx-mbeans
-[5]: https://docs.sonarsource.com/sonarqube/latest/instance-administration/monitoring/instance/#how-do-i-activate-jmx
+[4]: https://docs.sonarqube.org/latest/instance-administration/monitoring/
+[5]: https://docs.sonarqube.org/latest/instance-administration/monitoring/#header-4
 [6]: https://docs.datadoghq.com/ja/integrations/java/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://docs.datadoghq.com/ja/help/

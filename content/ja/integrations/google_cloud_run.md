@@ -5,7 +5,6 @@ categories:
 - google cloud
 - ログの収集
 - オーケストレーション
-custom_kind: integration
 dependencies: []
 description: クラスターからメトリクス、トレース、ログを収集し、Datadog で分析します。
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_run/
@@ -23,6 +22,7 @@ integration_id: google-cloud-run
 integration_title: Google Cloud Run
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: google_cloud_run
 public_title: Datadog-Google Cloud Run インテグレーション
@@ -30,7 +30,6 @@ short_description: クラスターからメトリクス、トレース、ログ�
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Cloud Run は、HTTP リクエストを使って呼び出し可能なステートレスコンテナを実行できるマネージド型のコンピューティングプラットフォームです。
@@ -47,17 +46,17 @@ Cloud Run for Anthos の詳細については、[Google Cloud Run for Anthos ド
 
 [Google Cloud Platform インテグレーション][2]をセットアップして、すぐに使えるメトリクスの収集を開始します。カスタムメトリクスを設定するには、[Serverless ドキュメント][3]を参照してください。
 
-### 収集データ
+### ログの収集
 
 #### インテグレーション
-Google Cloud Run は[監査ログ][4]も公開します。
-Google Cloud Run のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][5]。
+Google Cloud Run は、[監査ログ][4]も公開します。
+Google Cloud Run のログは、Google Cloud Logging を使用して収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。Cloud Pub/Sub をまだセットアップしていない場合は、[HTTP プッシュフォワーダーを使用してセットアップ][5]してください。
 
-これが完了したら、Google Cloud Run のログを Google Cloud Logging から Pub/Sub トピックへエクスポートします。
+これが完了したら、Google Cloud Run のログを Google Cloud Logging から Pub/Sub へエクスポートします。
 
 1. [Google Cloud Logging のページ][6]に移動し、Google Cloud Run のログを絞り込みます。
 2. **シンクを作成**し、シンクに適宜名前を付けます。
-3. 宛先として "Cloud Pub/Sub" を選択し、その目的で作成された Pub/Sub トピックを選択します。**注**: Pub/Sub トピックは別のプロジェクトに配置できます。
+3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 
     {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
 
@@ -73,14 +72,14 @@ Cloud Run サービスから Datadog へのアプリケーションの直接ロ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google-cloud-run" >}}
+{{< get-metrics-from-git "google_cloud_run" >}}
 
 
 ### イベント
 
 Google Cloud Functions インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Google Cloud Functions インテグレーションには、サービスのチェック機能は含まれません。
 

@@ -11,8 +11,13 @@ further_reading:
 - link: /continuous_integration/pipelines/custom_tags_and_metrics/
   tag: 설명서
   text: 커스텀 태그 및 메트릭을 추가하여 Pipeline Visibility 확장
+kind: 설명서
 title: GitLab 파이프라인에서 트레이스 설정
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">현재 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 CI Visibility를 사용할 수 없습니다.</div>
+{{< /site-region >}}
 
 ## 호환성
 

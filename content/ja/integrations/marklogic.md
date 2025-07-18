@@ -5,7 +5,6 @@ assets:
   dashboards:
     MarkLogic - Overview: assets/dashboards/overview.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -18,12 +17,13 @@ assets:
     - MarkLogic
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10124
     source_type_name: MarkLogic
+  logs:
+    source: marklogic
   monitors:
-    Active requests are taking too long: assets/monitors/marklogic_long_requests.json
-    Cache is not large enough: assets/monitors/marklogic_low_cache.json
-    Forest processing load is high: assets/monitors/marklogic_high_load.json
+    Marklogic high load: assets/recommended_monitors/marklogic_high_load.json
+    Marklogic long requests: assets/recommended_monitors/marklogic_long_requests.json
+    Marklogic low cache: assets/recommended_monitors/marklogic_low_cache.json
   saved_views:
     marklogic_processes: assets/saved_views/marklogic_processes.json
 author:
@@ -32,9 +32,8 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- data stores
+- data store
 - ログの収集
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/marklogic/README.md
 display_on_public_website: true
@@ -42,10 +41,12 @@ draft: false
 git_integration_title: marklogic
 integration_id: marklogic
 integration_title: MarkLogic
-integration_version: 6.1.1
+integration_version: 3.2.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: marklogic
+oauth: {}
 public_title: MarkLogic
 short_description: MarkLogic のデータベース、 フォレスト、ホスト、サーバーに関するメトリクスを追跡します。
 supported_os:
@@ -58,9 +59,8 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Data Stores
+  - Category::Data Store
   - Category::Log Collection
-  - Offering::Integration
   configuration: README.md#Setup
   description: MarkLogic のデータベース、 フォレスト、ホスト、サーバーに関するメトリクスを追跡します。
   media: []
@@ -69,7 +69,6 @@ tile:
   title: MarkLogic
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -129,7 +128,7 @@ API または Admin インターフェイスで、Datadog Agent に [`manage-use
 
 4. 作成されたユーザーに十分な権限があることを確認するには、`<USER>` および `<PASSWORD>` を使用して `http://<HOSTNAME>:8002` (デフォルトポート) で認証します。
 
-### 構成
+### コンフィギュレーション
 
 #### ホスト
 
@@ -137,7 +136,7 @@ API または Admin インターフェイスで、Datadog Agent に [`manage-use
 
 2. [Agent を再起動します][9]。
 
-#### ログ収集
+#### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -177,7 +176,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 MarkLogic には、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "marklogic" >}}
 
 
@@ -188,7 +187,7 @@ MarkLogic には、イベントは含まれません。
 
 [1]: https://www.marklogic.com
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations
-[3]: https://app.datadoghq.com/account/settings/agent/latest
+[3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://docs.marklogic.com/guide/admin/pre_def_roles#id_64197
 [5]: https://docs.marklogic.com/guide/admin/pre_def_roles#id_28243
 [6]: https://docs.marklogic.com/REST/POST/manage/v2/users

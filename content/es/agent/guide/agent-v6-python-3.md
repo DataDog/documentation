@@ -3,6 +3,7 @@ further_reading:
 - link: /agent/versions/upgrade_to_agent_v7/
   tag: Documentación
   text: Actualizar el Agent a la versión 7
+kind: guía
 title: Gestión de las versiones de Python
 ---
 
@@ -54,7 +55,7 @@ Para pasar de Python 2 a Python 3, actualiza la etiqueta de imagen utilizada p
 {{% tab "Helm" %}}
 De forma predeterminada, el [Helm chart de Datadog][1] utiliza la imagen del Agent 7 que integra el tiempo de ejecución de Python 3.
 
-Para mantener actualizado el Datadog Agent , edita tu `datadog-values.yaml` para eliminar cualquier información de las secciones `agent.image` y `clusterChecksRunner.image`.
+Si quieres mantener actualizado el Datadog Agent, edita tu `values.yaml` para eliminar cualquier información que aparezca en las secciones `agent.image` y `clusterChecksRunner.image`.
 
 Si quieres utilizar un registro de contenedor concreto, configúralo con `agent.image.repository` y `clusterChecksRunner.image.repository`. Comprueba que las etiquetas `agents.image.tag` y `clusterChecksRunner.image.tag` no estén definidas.
 
@@ -108,6 +109,7 @@ Si ya has anclado la versión de la imagen:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -124,6 +126,7 @@ o utilizas `image.name`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -150,6 +153,7 @@ Si has habilitado la implementación de los ejecutores de checks del clúster, a
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -173,6 +177,7 @@ Si necesitas utilizar una imagen JMX del Agent, puedes configurarla sin especifi
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -191,7 +196,7 @@ spec:
 
 [1]: https://github.com/DataDog/datadog-operator
 {{% /tab %}}
-{{% tab "Manual (DaemonSet)" %}}
+{{% tab "DaemonSet" %}}
 
 En el manifiesto de tu DaemoSet, actualiza la etiqueta de imagen de cada definición de contenedor:
 
@@ -204,6 +209,7 @@ Por ejemplo, si el valor de la imagen anterior era `gcr.io/datadoghq/agent:6.33.
 
 ```yaml
 apiVersion: apps/v1
+kind: DaemonSet
 spec:
   template:
     spec:
@@ -218,6 +224,7 @@ spec:
 
 ```yaml
 apiVersion: apps/v1
+kind: DaemonSet
 spec:
   template:
     spec:
@@ -272,10 +279,10 @@ datadog_config:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Referencias adicionales
+## Leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/agent/versions/upgrade_to_agent_v7/?tab=linux
-[2]: /es/agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[3]: /es/agent/configuration/agent-commands/#restart-the-agent
+[2]: /es/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[3]: /es/agent/guide/agent-commands/#restart-the-agent

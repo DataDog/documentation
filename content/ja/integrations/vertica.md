@@ -5,7 +5,6 @@ assets:
   dashboards:
     Vertica Overview: assets/dashboards/overview.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -16,19 +15,19 @@ assets:
       prefix: vertica.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10072
     source_type_name: Vertica
+  logs:
+    source: vertica
   monitors:
-    Vertica Nodes down above K-safety level: assets/monitors/vertica_replication_safety.json
+    '[Vertica] Nodes down above K-safety level': assets/monitors/vertica_replication_safety.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- data stores
+- data store
 - ログの収集
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/vertica/README.md
 display_on_public_website: true
@@ -36,10 +35,12 @@ draft: false
 git_integration_title: vertica
 integration_id: vertica
 integration_title: Vertica
-integration_version: 6.1.0
+integration_version: 3.4.1
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: vertica
+oauth: {}
 public_title: Vertica
 short_description: Vertica のプロジェクションストレージやライセンスの使用状況などを監視します。
 supported_os:
@@ -52,9 +53,8 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Data Stores
+  - Category::Data Store
   - Category::Log Collection
-  - Offering::Integration
   configuration: README.md#Setup
   description: Vertica のプロジェクションストレージやライセンスの使用状況などを監視します。
   media: []
@@ -63,7 +63,6 @@ tile:
   title: Vertica
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -76,7 +75,7 @@ tile:
 
 Vertica チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 vertica のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `vertica.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、サンプル [vertica.d/conf.yaml][3] を参照してください。
 
@@ -104,7 +103,7 @@ GRANT SYSMONITOR TO datadog WITH ADMIN OPTION;
 
 [Agent を再起動][8]すると、Datadog への Vertica メトリクスの送信が開始されます。
 
-#### ログ収集
+#### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -140,7 +139,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 Vertica には、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "vertica" >}}
 
 
@@ -150,7 +149,7 @@ Vertica には、イベントは含まれません。
 
 
 [1]: https://www.vertica.com
-[2]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/vertica/datadog_checks/vertica/data/conf.yaml.example
 [4]: https://www.vertica.com/docs/9.2.x/HTML/Content/Authoring/Glossary/vsql.htm
 [5]: https://www.vertica.com/docs/9.2.x/HTML/Content/Authoring/AdministratorsGuide/DBUsersAndPrivileges/Roles/SYSMONITORROLE.htm

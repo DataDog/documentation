@@ -1,4 +1,5 @@
 ---
+kind: documentation
 title: AWS (EC2 または EKS) 上の Kubernetes によるホストの重複
 ---
 

@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ko/graphing/functions/rollup/
+kind: 설명서
 title: 롤업
 ---
 

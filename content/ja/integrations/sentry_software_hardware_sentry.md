@@ -9,7 +9,6 @@ assets:
     Hardware Sentry - Main: assets/dashboards/main.json
     Hardware Sentry - Site: assets/dashboards/site.json
   integration:
-    auto_install: false
     configuration: {}
     events:
       creates_events: false
@@ -19,7 +18,6 @@ assets:
       prefix: hardware_sentry.
     service_checks:
       metadata_path: service_checks.json
-    source_type_id: 10286
     source_type_name: Hardware Sentry
   logs: {}
   monitors:
@@ -54,7 +52,6 @@ categories:
 - コスト管理
 - マーケットプレイス
 - ネットワーク
-custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -63,10 +60,12 @@ integration_id: hardware-sentry
 integration_title: Hardware Sentry
 integration_version: ''
 is_public: true
+kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: sentry_software_hardware_sentry
+oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -78,8 +77,7 @@ pricing:
   unit_label: 監視ホスト
   unit_price: 8
 public_title: Hardware Sentry
-short_description: Hardware & sustainability metrics for 100+ systems (Cisco, Dell
-  EMC, HPE, Hitachi, Lenovo, NetApp, NVIDIA, Pure, etc.)
+short_description: サーバー、ネットワーク、ストレージのハードウェアとその二酸化炭素排出量の監視
 supported_os:
 - linux
 - windows
@@ -92,11 +90,8 @@ tile:
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
-  - Submitted Data Type::Metrics
-  - Submitted Data Type::Logs
   configuration: README.md#Setup
-  description: Hardware & sustainability metrics for 100+ systems (Cisco, Dell EMC,
-    HPE, Hitachi, Lenovo, NetApp, NVIDIA, Pure, etc.)
+  description: サーバー、ネットワーク、ストレージのハードウェアとその二酸化炭素排出量の監視
   media:
   - caption: Hardware Sentry のメインダッシュボードでは、すべてのデータセンターとサーバールームのエネルギー使用量と二酸化炭素排出量の概要が表示されます。これは、Hardware
       Sentry OpenTelemetry Collector によって収集されたメトリクスを活用したものです。
@@ -124,7 +119,6 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -148,7 +142,7 @@ tile:
 
 **100% ソフトウェア開発**: 電力センサーを内蔵していないシステムでも、スマート PDU は不要です。
 
-### ダッシュボード
+### ダッシュボード  
 
 このインテグレーションには、**[Hardware Sentry OpenTelemetry Collector][4]** が収集したメトリクスを活用するダッシュボードのセットが付属しています。
 
@@ -158,7 +152,7 @@ tile:
 | Hardware Sentry - サイト | 1 つの*サイト* (データセンターまたはサーバールーム) とその監視対象*ホスト*に関連するメトリクス |
 | Hardware Sentry - ホスト | 1 つの*ホスト*とその内部デバイスに関連するメトリクス |
 
-## Agent
+## サポート
 
 Datadog Marketplace を通じた **Hardware Sentry** のサブスクリプションにより、[Sentry Desk][12] が提供するすべてのサービスにアクセスすることができるようになります。
 

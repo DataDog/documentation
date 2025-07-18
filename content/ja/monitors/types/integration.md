@@ -13,6 +13,7 @@ further_reading:
 - link: /monitors/manage/status/
   tag: ドキュメント
   text: モニターステータスを確認
+kind: documentation
 title: インテグレーションモニター
 ---
 
@@ -26,12 +27,18 @@ Datadog で[インテグレーションモニター][2]を作成するには
 
 1. メインナビゲーションで、*Monitors --> New Monitor --> Integration* の順に選択します。
 2. インテグレーションを検索するか、一覧または画像から選択します。
+3. **Integration Metric** モニターまたは **Integration Status** モニターを選択します。
+    {{< img src="monitors/monitor_types/integration/metric_or_status.png" alt="メトリクスまたはステータス" style="width:90%;">}}
 
 ### インテグレーションのメトリクス
 
 [メトリクスモニター][3]ドキュメントの手順に従って、インテグレーションメトリクスモニターを作成します。モニタータイプにインテグレーションメトリクスを選択すると、[モニターの管理][4] ページで、確実にインテグレーションモニタータイプのファセットでモニターを選択できるようになります。
 
-**Note**: To configure an integration monitor, ensure that the integration submits metrics or service checks.
+### インテグレーションステータス
+
+インテグレーションにサービスチェックが含まれている場合、**Integration Status** タブのステータスはアクティブです。
+
+**注**: インテグレーションがメトリクスまたはサービスチェックを送信しない場合、"Misconfigured" と表示されます。
 
 #### チェックを選択する
 
@@ -98,7 +105,7 @@ Datadog で[インテグレーションモニター][2]を作成するには
 
 #### 通知
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][9] page.
+**Say what's happening** と **Notify your team** のセクションに関する詳しい説明は、[通知][9] のページを参照してください。
 
 ## その他の参考資料
 

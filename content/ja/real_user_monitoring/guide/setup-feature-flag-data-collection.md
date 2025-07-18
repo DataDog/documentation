@@ -10,8 +10,14 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: RUM エクスプローラーで RUM データを視覚化する
+kind: ガイド
 title: RUM の機能フラグデータの概要
 ---
+
+<div class="alert alert-warning">
+    機能フラグ追跡はベータ版です。
+</div>
+
 
 ## 概要
 機能フラグデータにより、どのユーザーに特定の機能が表示されているか、導入した変更がユーザー体験に影響を与えているか、パフォーマンスに悪影響を与えているかを判断できるため、ユーザー体験やパフォーマンス監視の可視性が高まります。
@@ -89,7 +95,7 @@ window.DD_RUM &&
 
 機能フラグの追跡は、Flutter アプリケーションで利用可能です。開始するには、[RUM Flutter モニタリング][1]をセットアップします。Flutter プラグインバージョン 1.3.2 以上が必要です。
 
-[1]: https://docs.datadoghq.com/ja/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
+[1]: https://docs.datadoghq.com/ja/real_user_monitoring/flutter/
 {{% /tab %}}
 {{% tab "React Native" %}}
 
@@ -109,12 +115,12 @@ Datadog は、以下とのインテグレーションをサポートしていま
 
 </br>
 
-### Amplitude integration
+### Amplitude インテグレーション
 
 {{< tabs >}}
 {{% tab "ブラウザ" %}}
 
-Initialize Amplitude's SDK and create an exposure listener reporting feature flag evaluations to Datadog using the following snippet of code:
+Amplitude の SDK を初期化し、以下に示すコードスニペットを使用して Datadog に機能フラグの評価を報告する露出リスナーを作成します。
 
 Amplitude の SDK の初期化については、[Amplitude の JavaScript SDK ドキュメント][1]を参照してください。
 
@@ -122,7 +128,7 @@ Amplitude の SDK の初期化については、[Amplitude の JavaScript SDK �
   const experiment = Experiment.initialize("CLIENT_DEPLOYMENT_KEY", {
     exposureTrackingProvider: {
       track(exposure: Exposure)  {
-        // Send the feature flag when Amplitude reports the exposure
+        // Amplitude が露出を報告したときに機能フラグを送信します
         datadogRum.addFeatureFlagEvaluation(exposure.flag_key, exposure.variant);
       }
     }
@@ -135,21 +141,21 @@ Amplitude の SDK の初期化については、[Amplitude の JavaScript SDK �
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Initialize Amplitude's SDK and create an inspector reporting feature flag evaluations to Datadog using the snippet of code below.
+Amplitude の SDK を初期化し、以下に示すコードスニペットを使用して、Datadog に機能フラグの評価を報告するインスペクターを作成します。
 
-For more information about initializing Amplitude's SDK, see Amplitude's [iOS SDK documentation][1].
+Amplitude の SDK の初期化については、Amplitude の [iOS SDK ドキュメント][1]を参照してください。
 
 ```swift
   class DatadogExposureTrackingProvider : ExposureTrackingProvider {
     func track(exposure: Exposure) {
-      // Send the feature flag when Amplitude reports the exposure
+      // Amplitude が露出を報告したときに機能フラグを送信します
       if let variant = exposure.variant {
-        RUMMonitor.shared().addFeatureFlagEvaluation(name: exposure.flagKey, value: variant)
+        Global.rum.addFeatureFlagEvaluation(name: exposure.flagKey, value: variant)
       }
     }
   }
 
-  // In initialization:
+  // 初期化時:
   ExperimentConfig config = ExperimentConfigBuilder()
     .exposureTrackingProvider(DatadogExposureTrackingProvider(analytics))
     .build()
@@ -161,9 +167,9 @@ For more information about initializing Amplitude's SDK, see Amplitude's [iOS SD
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Initialize Amplitude's SDK and create an inspector reporting feature flag evaluations to Datadog using the snippet of code below.
+Amplitude の SDK を初期化し、以下に示すコードスニペットを使用して、Datadog に機能フラグの評価を報告するインスペクターを作成します。
 
-For more information about initializing Amplitude's SDK, see Amplitude's [Android SDK documentation][1].
+Amplitude の SDK の初期化については、Amplitude の [Android SDK ドキュメント][1]を参照してください。
 
 ```kotlin
   internal class DatadogExposureTrackingProvider : ExposureTrackingProvider {
@@ -188,122 +194,8 @@ For more information about initializing Amplitude's SDK, see Amplitude's [Androi
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Amplitude does not support this integration. Create a ticket with Amplitude to request this feature.
+Amplitude はこのインテグレーションをサポートしていません。この機能をリクエストするには、Amplitude にチケットを作成してください。
 
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### ConfigCat integration
-
-{{< tabs >}}
-{{% tab "ブラウザ" %}}
-
-When initializing the ConfigCat Javascript SDK, subscribe to the `flagEvaluated` event and report feature flag evaluations to Datadog:
-
-```javascript
-const configCatClient = configcat.getClient(
-  '#YOUR-SDK-KEY#',
-  configcat.PollingMode.AutoPoll,
-  {
-    setupHooks: (hooks) =>
-      hooks.on('flagEvaluated', (details) => {
-        datadogRum.addFeatureFlagEvaluation(details.key, details.value);
-      })
-  }
-);
-```
-
-For more information about initializing the ConfigCat Javascript SDK, see ConfigCat's [JavaScript SDK documentation][1].
-
-[1]: https://configcat.com/docs/sdk-reference/js
-
-
-{{% /tab %}}
-{{% tab "iOS" %}}
-
-When initializing the ConfigCat Swift iOS SDK, subscribe to the `flagEvaluated` event and report feature flag evaluations to Datadog:
-
-```swift
-  let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
-    options.hooks.addOnFlagEvaluated { details in
-        RUMMonitor.shared().addFeatureFlagEvaluation(featureFlag: details.key, variation: details.value)
-    }
-  }
-```
-
-For more information about initializing the ConfigCat Swift (iOS) SDK, see ConfigCat's[Swift iOS SDK documentation][1].
-
-[1]: https://configcat.com/docs/sdk-reference/ios
-
-
-{{% /tab %}}
-{{% tab "Android" %}}
-
-When initializing the ConfigCat Android SDK, subscribe to the `flagEvaluated` event and report feature flag evaluations to Datadog:
-
-```java
-  ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
-    options.hooks().addOnFlagEvaluated(details -> {
-        GlobalRumMonitor.get().addFeatureFlagEvaluation(details.key, details.value);
-    });
-  });
-```
-
-For more information about initializing the ConfigCat Android SDK, see ConfigCat's [Android SDK documentation][1].
-
-[1]: https://configcat.com/docs/sdk-reference/android
-
-
-{{% /tab %}}
-{{% tab "Flutter" %}}
-
-When initializing the ConfigCat Dart SDK, subscribe to the `flagEvaluated` event and report feature flag evaluations to Datadog:
-
-```dart
-  final client = ConfigCatClient.get(
-    sdkKey: '#YOUR-SDK-KEY#',
-    options: ConfigCatOptions(
-        pollingMode: PollingMode.autoPoll(),
-        hooks: Hooks(
-            onFlagEvaluated: (details) => {
-              DatadogSdk.instance.rum?.addFeatureFlagEvaluation(details.key, details.value);
-            }
-        )
-    )
-  );
-```
-
-For more information about initializing the ConfigCat Dart (Flutter) SDK, see ConfigCat's [Dart SDK documentation][1].
-
-[1]: https://configcat.com/docs/sdk-reference/dart
-
-
-{{% /tab %}}
-
-
-{{% tab "React Native" %}}
-
-When initializing the ConfigCat React SDK, subscribe to the `flagEvaluated` event and report feature flag evaluations to Datadog:
-
-```typescript
-<ConfigCatProvider
-  sdkKey="YOUR_SDK_KEY"
-  pollingMode={PollingMode.AutoPoll}
-  options={{
-    setupHooks: (hooks) =>
-      hooks.on('flagEvaluated', (details) => {
-        DdRum.addFeatureFlagEvaluation(details.key, details.value);
-      }),
-  }}
->
-  ...
-</ConfigCatProvider>
-```
-
-For more information about initializing the ConfigCat React SDK, see ConfigCat's [React SDK documentation][1].
-
-[1]: https://configcat.com/docs/sdk-reference/react
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -325,7 +217,7 @@ datadogRum.addFeatureFlagEvaluation(key, value);
 機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
 
    ```swift
-   RUMMonitor.shared().addFeatureFlagEvaluation(key, value);
+   Global.rum.addFeatureFlagEvaluation(key, value);
    ```
 
 {{% /tab %}}
@@ -357,14 +249,14 @@ datadogRum.addFeatureFlagEvaluation(key, value);
 {{% /tab %}}
 {{< /tabs >}}
 
-### DevCycle integration
+### DevCycle インテグレーション
 
 {{< tabs >}}
 {{% tab "ブラウザ" %}}
 
-Initialize DevCycle's SDK and subscribe to the `variableEvaluated` event, choosing to subscribe to all variable evaluations `variableEvaluated:*` or particular variable evaluations `variableEvaluated:my-variable-key`.
+DevCycle の SDK を初期化し、`variableEvaluated` イベントにサブスクライブします。すべての変数評価 `variableEvaluated:*` または特定の変数評価 `variableEvaluated:my-variable-key` にサブスクライブすることを選択します。
 
-For more information about initializing DevCycle's SDK, see [DevCycle's JavaScript SDK documentation][5] and for more information about DevCycle's event system, see [DevCycle's SDK Event Documentation][6].
+DevCycle の SDK の初期化については、[DevCycle の JavaScript SDK ドキュメント][5]を、DevCycle のイベントシステムについては、[DevCycle の SDK イベントドキュメント][6]を参照してください。
 
 ```javascript
 const user = { user_id: "<USER_ID>" };
@@ -394,126 +286,30 @@ dvcClient.subscribe(
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
+DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
+DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
 
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
+DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
 
 
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
+DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
 
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Eppo integration
-
-{{< tabs >}}
-{{% tab "ブラウザ" %}}
-
-Initialize Eppo's SDK and create an assignment logger that additionally reports feature flag evaluations to Datadog using the snippet of code shown below.
-
-For more information about initializing Eppo's SDK, see [Eppo's JavaScript SDK documentation][1].
-
-```typescript
-const assignmentLogger: IAssignmentLogger = {
-  logAssignment(assignment) {
-    datadogRum.addFeatureFlagEvaluation(assignment.featureFlag, assignment.variation);
-  },
-};
-
-await eppoInit({
-  apiKey: "<API_KEY>",
-  assignmentLogger,
-});
-```
-
-[1]: https://docs.geteppo.com/sdks/client-sdks/javascript
-{{% /tab %}}
-{{% tab "iOS" %}}
-
-Initialize Eppo's SDK and create an assignment logger that additionally reports feature flag evaluations to Datadog using the snippet of code shown below.
-
-For more information about initializing Eppo's SDK, see [Eppo's iOS SDK documentation][1].
-
-```swift
-func IAssignmentLogger(assignment: Assignment) {
-  RUMMonitor.shared().addFeatureFlagEvaluation(featureFlag: assignment.featureFlag, variation: assignment.variation)
-}
-
-let eppoClient = EppoClient(apiKey: "mock-api-key", assignmentLogger: IAssignmentLogger)
-```
-
-[1]: https://docs.geteppo.com/sdks/client-sdks/ios
-
-{{% /tab %}}
-{{% tab "Android" %}}
-
-Initialize Eppo's SDK and create an assignment logger that additionally reports feature flag evaluations to Datadog using the snippet of code shown below.
-
-For more information about initializing Eppo's SDK, see [Eppo's Android SDK documentation][1].
-
-```java
-AssignmentLogger logger = new AssignmentLogger() {
-    @Override
-    public void logAssignment(Assignment assignment) {
-      GlobalRumMonitor.get().addFeatureFlagEvaluation(assignment.getFeatureFlag(), assignment.getVariation());
-    }
-};
-
-EppoClient eppoClient = new EppoClient.Builder()
-    .apiKey("YOUR_API_KEY")
-    .assignmentLogger(logger)
-    .application(application)
-    .buildAndInit();
-```
-
-
-[1]: https://docs.geteppo.com/sdks/client-sdks/android
-
-{{% /tab %}}
-{{% tab "Flutter" %}}
-
-Eppo does not support this integration. [Contact Eppo][1] to request this feature.
-
-[1]: mailto:support@geteppo.com
-
-{{% /tab %}}
-{{% tab "React Native" %}}
-
-Initialize Eppo's SDK and create an assignment logger that additionally reports feature flag evaluations to Datadog using the snippet of code shown below.
-
-For more information about initializing Eppo's SDK, see [Eppo's React native SDK documentation][1].
-
-```typescript
-const assignmentLogger: IAssignmentLogger = {
-  logAssignment(assignment) {
-    DdRum.addFeatureFlagEvaluation(assignment.featureFlag, assignment.variation);
-  },
-};
-
-await eppoInit({
-  apiKey: "<API_KEY>",
-  assignmentLogger,
-});
-```
-
-[1]: https://docs.geteppo.com/sdks/client-sdks/react-native
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ### Flagsmith インテグレーション
 
@@ -540,18 +336,18 @@ Flagsmith の SDK に `datadogRum` オプションを付けて初期化すると
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Flagsmith does not support this integration. Create a ticket with Flagsmith to request this feature.
+Flagsmith は、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Flagsmith does not support this integration. Create a ticket with Flagsmith to request this feature.
+Flagsmith は、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Flagsmith does not support this integration. Create a ticket with Flagsmith to request this feature.
+Flagsmith は、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
 
 {{% /tab %}}
 {{% tab "React Native" %}}
@@ -589,19 +385,19 @@ const client = LDClient.initialize("<CLIENT_SIDE_ID>", "<CONTEXT>", {
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-LaunchDarkly does not support this integration. Create a ticket with LaunchDarkly to request this feature.
+LaunchDarkly は、このインテグレーションをサポートしていません。この機能をリクエストするには、LaunchDarkly でチケットを作成してください。
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-LaunchDarkly does not support this integration. Create a ticket with LaunchDarkly to request this feature.
+LaunchDarkly は、このインテグレーションをサポートしていません。この機能をリクエストするには、LaunchDarkly でチケットを作成してください。
 
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-LaunchDarkly does not support this integration. Create a ticket with LaunchDarkly to request this feature.
+LaunchDarkly は、このインテグレーションをサポートしていません。この機能をリクエストするには、LaunchDarkly でチケットを作成してください。
 
 
 {{% /tab %}}
@@ -654,11 +450,11 @@ Split の SDK の初期化については、[Split の iOS SDK ドキュメン�
 
 ```swift
   let config = SplitClientConfig()
-  // Send the feature flag when Split reports the impression
+  // Split がインプレッションを報告する際に機能フラグを送信します
   config.impressionListener = { impression in
       if let feature = impression.feature,
           let treatment = impression.treatment {
-          RUMMonitor.shared().addFeatureFlagEvaluation(name: feature, value: treatment)
+          Global.rum.addFeatureFlagEvaluation(name: feature, value: treatment)
       }
   }
 ```
@@ -699,11 +495,11 @@ Split の SDK の初期化については、[Split の Android SDK ドキュメ�
 
 Split の SDK を初期化し、以下に示すコードスニペットを使用して、Datadog に機能フラグの評価を報告するインスペクターを作成します。
 
-For more information about initializing Split's SDK, see Split's [Flutter plugin documentation][1].
+Split の SDK の初期化については、Split の [Flutter プラグインのドキュメント][1]を参照してください。
 
 ```dart
   StreamSubscription<Impression> impressionsStream = _split.impressionsStream().listen((impression) {
-    // Send the feature flag when Split reports the impression
+    // Split がインプレッションを報告する際に機能フラグを送信します
     final split = impression.split;
     final treatment = impression.treatment;
     if (split != null && treatment != null) {
@@ -751,7 +547,7 @@ const client = factory.client();
 {{< tabs >}}
 {{% tab "ブラウザ" %}}
 
-Initialize Statsig's SDK with `statsig.initialize`.
+機能フラグ追跡は、RUM ブラウザ SDK で利用可能です。詳細なセットアップ方法は、[RUM での機能フラグデータの概要](https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection)をご覧ください。
 
 1. ブラウザ RUM SDK バージョン 4.25.0 以上に更新します。
 2. RUM SDK を初期化し、`["feature_flags"]` で `enableExperimentalFeatures` 初期化パラメーターを構成します。
@@ -760,12 +556,12 @@ Initialize Statsig's SDK with `statsig.initialize`.
    ```javascript
     await statsig.initialize('client-<STATSIG CLIENT KEY>',
     {userID: '<USER ID>'},
-    {
+    {     
         gateEvaluationCallback: (key, value) => {
             datadogRum.addFeatureFlagEvaluation(key, value);
         }
     }
-    );
+    ); 
    ```
 
 [1]: https://docs.statsig.com/client/jsClientSDK
@@ -844,11 +640,10 @@ Statsig は現在このインテグレーションをサポートしていませ
 datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
 ```
 
-
 ## その他の参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/browser/setup
+[1]: /ja/real_user_monitoring/browser/#setup
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /ja/dashboards/
 [4]: /ja/monitors/#create-monitors

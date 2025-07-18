@@ -3,6 +3,7 @@ further_reading:
 - link: https://docs.datadoghq.com/api/latest/service-accounts/
   tag: Documentación
   text: Referencia de API de cuentas de servicio
+kind: documentación
 title: Cuentas de servicio
 ---
 
@@ -18,7 +19,7 @@ Las cuentas de servicio se encuentran en [Organization Settings][1] (Parámetros
 
 Para acceder a las cuentas de servicio en la IU:
 
-1. Dirígete a **Organization Settings** (Parámetros de organización) desde el menú de tu cuenta.
+1. Accede a **Organization Settings** (Parámetros de organización) desde el menú de tu cuenta.
 2. En **Accounts** (Cuentas), selecciona **Service Accounts** (Cuentas de servicio).
 
 La [página Service Accounts][2] (Cuentas de servicio) contiene una lista de todas las cuentas de servicio de tu organización. Los usuarios con permiso de escritura para cuentas de servicio, incluidos los usuarios que tienen el rol de administrador de Datadog, pueden crear cuentas de servicio. Los usuarios que no tienen este permiso tienen acceso a una vista de solo lectura.
@@ -56,9 +57,7 @@ Para modificar una cuenta de servicio, haz clic en ella en la lista de cuentas d
 2. Actualiza los campos que quieras modificar. Puedes editar el nombre, la dirección de correo electrónico, el estado y los roles.
 3. Haz clic en **Save** (Guardar).
 
-Para desactivar una cuenta de servicio, el usuario debe tener el permiso User Manage Access además de Service Account Write.
-
-Para desactivar una cuenta de servicio, sigue el procedimiento anterior para editar la cuenta de servicio y establece el estado en **Disabled** (Desactivado).
+Si quieres desactivar una cuenta de servicio, sigue el procedimiento anterior para editarla y establecer su estado como **Disabled** (Desactivada).
 
 ### Crear o revocar claves de aplicación
 
@@ -94,7 +93,7 @@ A la hora de crear una cuenta de servicio, puedes otorgarle cualquier subcojunto
 ## Notificaciones
 
 Datadog envía una notificación a la dirección de correo electrónico asociada a la cuenta de servicio cuando se realizan las siguientes acciones:
-- Crear una clave de aplicación
+- Se crea una clave de aplicación
 - Se revoca una clave de aplicación
 - Se desactiva la cuenta de servicio
 

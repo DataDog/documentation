@@ -1,19 +1,19 @@
 ---
 categories:
-- クラウド
+- cloud
 - aws
 - ログの収集
-custom_kind: インテグレーション
 dependencies: []
 description: Amazon Elastic Transcoder のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_elastic_transcoder/
 draft: false
 git_integration_title: amazon_elastic_transcoder
 has_logo: true
-integration_id: ''
+integration_id: amazon-elastic-transcoder
 integration_title: Amazon Elastic Transcoder
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_elastic_transcoder
 public_title: Datadog-Amazon Elastic Transcoder インテグレーション
@@ -21,7 +21,6 @@ short_description: Amazon Elastic Transcoder のキーメトリクスを追跡
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Elastic Transcoder を使用すると、Amazon S3 に保存したメディアファイルを、市販再生デバイスに対応した形式のメディアファイルに変換できます。
@@ -39,7 +38,7 @@ Amazon Elastic Transcoder を使用すると、Amazon S3 に保存したメデ�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Elastic Transcoder` が有効になっていることを確認します。
 2. [Datadog - Amazon Elastic Transcoder インテグレーション][3]をインストールします。
 
-### ログ収集
+### ログの収集
 
 #### ログの有効化
 
@@ -65,19 +64,19 @@ Amazon Elastic Transcoder から S3 バケットまたは CloudWatch のいず�
 
 Amazon Elastic Transcoder インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Amazon Elastic Transcoder インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-elastic-transcoder
 [4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_elastic_transcoder/amazon_elastic_transcoder_metadata.csv
 [8]: https://docs.datadoghq.com/ja/help/

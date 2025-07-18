@@ -3,6 +3,7 @@ further_reading:
 - link: /account_management/plan_and_usage/
   tag: 설명서
   text: 플랜 및 사용량 설정
+kind: 가이드
 title: V1 월간 사용량 API에서 V2로 마이그레이션
 ---
 
@@ -32,8 +33,8 @@ v2 API는 제품군 및 사용량 유형의 개념을 도입합니다. 제품군
     * `analyzed_logs`
 - **application_security**
     * `app_sec_host_count`
-- **audit_trail**
-    * `enabled`
+- **audit_logs**
+    * `lines_indexed`
 - **serverless**
     * `func_count`
     * `invocations_sum`
@@ -42,20 +43,6 @@ v2 API는 제품군 및 사용량 유형의 개념을 도입합니다. 제품군
     * `ci_test_indexed_spans`
     * `ci_visibility_pipeline_committers`
     * `ci_visibility_test_committers`
-- **cloud_cost_management**
-    * `host_count`
-- **csm_container_enterprise**
-    * `cws_count`
-    * `compliance_count`
-    * `total_count`
-- **csm_host_enterprise**
-    * `total_host_count`
-    * `compliance_hosts`
-    * `cws_hosts`
-    * `aas_host_count`
-    * `azure_host_count`
-    * `aws_host_count`
-    * `gcp_host_count`
 - **cspm**
     * `aas_host_count`
     * `azure_host_count`
@@ -130,7 +117,6 @@ v2 API는 제품군 및 사용량 유형의 개념을 도입합니다. 제품군
     * `billable_ingested_bytes`
     * `indexed_events_count`
     * `ingested_events_bytes`
-    * `logs_forwarding_events_bytes`
     * `logs_live_indexed_count`
     * `logs_live_ingested_bytes`
     * `logs_rehydrated_indexed_count`
@@ -158,7 +144,6 @@ v2 API는 제품군 및 사용량 유형의 개념을 도입합니다. 제품군
     * `session_count_android`
     * `session_count_ios`
     * `session_count_reactnative`
-    * `session_count_flutter`
 - **sds**
     * `logs_scanned_bytes`
     * `total_scanned_bytes`
@@ -168,8 +153,6 @@ v2 API는 제품군 및 사용량 유형의 개념을 도입합니다. 제품군
     * `check_calls_count`
 - **synthetics_browser**
     * `browser_check_calls_count`
-- **synthetics_mobile**
-    * `test_runs`
 - **timeseries**
     * `num_custom_input_timeseries`
     * `num_custom_output_timeseries`
@@ -326,7 +309,7 @@ v2 시간별 사용량 API로의 매핑에 대한 예시는 아래를 참조하�
 
 `https://api.datadoghq.com/api/v1/usage/hosts?start_hr=2022-06-01T00&end_hr=2022-06-01T01`
 
-##### 참고
+##### 비고
 
 * 제품은 `hosts` 경로의 요소입니다.
 * 시간 범위는 `start_hr` 및 `end_hr` 파라미터로 컨트롤됩니다.
@@ -358,7 +341,7 @@ v2 시간별 사용량 API로의 매핑에 대한 예시는 아래를 참조하�
 }
 ```
 
-##### 참고
+##### 비고
 
 * 각 시간의 사용량은 사용량 배열의 오브젝트로 표시됩니다.
 * 사용량 유형은 오브젝트의 키이며, 해당 사용량 유형에 대해 측정된 사용량은 해당 값을 가리킵니다.
@@ -370,7 +353,7 @@ v2 시간별 사용량 API로의 매핑에 대한 예시는 아래를 참조하�
 
 `https://api.datadoghq.com/api/v2/usage/hourly_usage?filter[timestamp][start]=2022-06-01T00&filter[timestamp][end]=2022-06-01T01&filter[product_families]=infra_hosts`
 
-##### 참고
+##### 비고
 
 * 제품은 쿼리 파라미터 `filter[product_families]=infra_hosts`(으)로 전달됩니다.
 * 시간 범위는 `filter[timestamp][start]` 및 `filter[timestamp][end]` 파라미터로 컨트롤됩니다.
@@ -449,7 +432,7 @@ v2 시간별 사용량 API로의 매핑에 대한 예시는 아래를 참조하�
 }
 ```
 
-#### 참고
+#### 비고
 
 * 데이터 배열의 오브젝트는 각 제품 및 각 조직에 대한 시간당 사용량을 나타냅니다.
     * V1 API는 요청 1건에서 여러 제품 또는 여러 조직을 지원하지 않았습니다.

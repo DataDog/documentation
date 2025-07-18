@@ -10,7 +10,8 @@ further_reading:
 - link: /synthetics/metrics/
   tag: ドキュメント
   text: Synthetic モニタリングメトリクスについて
-title: 推定使用量メトリクスを使用する
+kind: ガイド
+title: Synthetic メトリクスをモニターで使用する
 ---
 
 ## 概要

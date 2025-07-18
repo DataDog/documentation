@@ -5,7 +5,6 @@ assets:
   dashboards:
     Containers: assets/dashboards/containers.json
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -15,7 +14,6 @@ assets:
       prefix: container.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10242
     source_type_name: コンテナ
 author:
   homepage: https://www.datadoghq.com
@@ -25,7 +23,6 @@ author:
 categories:
 - containers
 - kubernetes
-custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/container/README.md
 display_on_public_website: true
@@ -35,8 +32,10 @@ integration_id: コンテナ
 integration_title: コンテナ
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: 2.0.0
-name: container
+name: コンテナ
+oauth: {}
 public_title: コンテナ
 short_description: コンテナのメトリクスを Datadog で追跡
 supported_os:
@@ -49,7 +48,6 @@ tile:
   - Category::Kubernetes
   - Supported OS::Linux
   - Supported OS::Windows
-  - Offering::Integration
   configuration: README.md#Setup
   description: コンテナのメトリクスを Datadog で追跡
   media: []
@@ -58,7 +56,6 @@ tile:
   title: コンテナ
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -79,7 +76,7 @@ tile:
 
 `container` チェックには、自動アクティベーションのためフォルダーのマウントが必要です。これは公式 Helm Chart および Datadog Operator により管理され、セットアップは Kubernetes、Docker、ECS、ECS Fargate 用に文書化されています。
 
-### 構成
+### コンフィギュレーション
 
 `container` チェックにより公開されるコンフィギュレーション設定はありません。共通フィールドをカスタマイズまたは `container` チェックのアクティベーションを強制するには、以下の手順に従います。
 

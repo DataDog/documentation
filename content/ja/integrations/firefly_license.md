@@ -15,7 +15,6 @@ categories:
 - クラウド
 - 構成 & デプロイ
 - マーケットプレイス
-custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -24,10 +23,12 @@ integration_id: firefly-license
 integration_title: Firefly
 integration_version: ''
 is_public: true
+kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: firefly_license
+oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -75,7 +76,6 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -94,11 +94,11 @@ Infrastructure-as-Code と実際のクラウドの状態に差異がある場合
 ### ポリシー違反の検出と修正
 Firefly の統合ポリシーエンジンにより、危険な構成ミスやコストのかかる使用不足を発見し、カスタムポリシーと既成ポリシーの両方でポリシー違反のアラートを受け取ることができます。
 
-## Agent
+## サポート
 何か質問はありますか？メール [contact@gofirefly.io][1] またはアプリ内チャットをご利用ください。
 
 [1]: mailto:contact@gofirefly.io
 [2]: https://app.datadoghq.com/integrations/firefly
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/firefly-license" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/firefly-license" target="_blank">こちらをクリック</a>してください。

@@ -4,6 +4,7 @@ further_reading:
 - link: /dashboards/functions/smoothing
   tag: Documentation
   text: スムーシング
+kind: ガイド
 title: weighted() の仕組みは？
 ---
 
@@ -56,7 +57,7 @@ title: weighted() の仕組みは？
 
 `weighted()` 関数は、送信率に対して関数を重み付けすることで、短命なタグの矛盾した挙動を改善します
 
-## 参考資料
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

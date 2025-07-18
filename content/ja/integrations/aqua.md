@@ -5,7 +5,6 @@ assets:
   dashboards:
     aqua: assets/dashboards/overview.json
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -15,7 +14,6 @@ assets:
       prefix: aqua.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10042
     source_type_name: Aqua
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -23,10 +21,9 @@ author:
   sales_email: oran.moshai@aquasec.com
   support_email: oran.moshai@aquasec.com
 categories:
-- incident-teams
+- コンテナ
 - ログの収集
-- security
-custom_kind: インテグレーション
+- セキュリティ
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/aqua/README.md
 display_on_public_website: true
@@ -34,10 +31,12 @@ draft: false
 git_integration_title: aqua
 integration_id: aqua
 integration_title: Aqua
-integration_version: 1.0.1
+integration_version: 1.0.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: aqua
+oauth: {}
 public_title: Aqua
 short_description: コンテナおよびクラウドネイティブアプリケーションの開発から運用までをフルカバーするセキュリティソリューション
 supported_os:
@@ -53,7 +52,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: コンテナおよびクラウドネイティブアプリケーションの開発から運用までをフルカバーするセキュリティソリューション
   media: []
@@ -62,7 +60,6 @@ tile:
   title: Aqua
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -87,7 +84,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Aqua チェッ
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### 構成
+### コンフィギュレーション
 
 #### メトリクスの収集
 
@@ -104,7 +101,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Aqua チェッ
 
 2. [Agent を再起動します][7]。
 
-#### ログ収集
+#### ログの収集
 
 Aqua によって生成されるログには、次の 2 種類があります。
 
@@ -152,7 +149,7 @@ Aqua エンフォーサーログを収集するには、以下のようにしま
 
 Aqua には、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "aqua" >}}
 
 
@@ -162,7 +159,7 @@ Aqua には、イベントは含まれません。
 
 
 [1]: https://www.aquasec.com
-[2]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://docs.datadoghq.com/ja/agent/faq/agent-configuration-files/#agent-configuration-directory

@@ -15,6 +15,7 @@ further_reading:
 - link: /synthetics/api_tests/
   tag: Documentation
   text: APIテストの設定
+kind: ドキュメント
 title: Synthetic ボットの特定
 ---
 

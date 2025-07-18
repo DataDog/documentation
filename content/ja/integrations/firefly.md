@@ -8,12 +8,11 @@ author:
   sales_email: contact@gofirefly.io
   support_email: contact@gofirefly.io
 categories:
-- automation
-- cloud
-- 構成とデプロイ
+- 自動化
+- クラウド
+- 構成 & デプロイ
 - developer tools
-- notifications
-custom_kind: integration
+- notification
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/firefly/README.md
 display_on_public_website: true
@@ -23,8 +22,10 @@ integration_id: firefly
 integration_title: Firefly
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: firefly
+oauth: {}
 public_title: Firefly
 short_description: クラウドを規約に準拠させる
 supported_os:
@@ -38,7 +39,7 @@ tile:
   - Category::Cloud
   - Category::Configuration & Deployment
   - Category::Developer Tools
-  - Category::Notifications
+  - Category::Notification
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
@@ -63,7 +64,6 @@ tile:
   title: Firefly
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要

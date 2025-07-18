@@ -3,7 +3,6 @@ app_id: aws-pricing
 app_uuid: 74fb11c5-4dea-4b17-acac-2c2453ea6331
 assets:
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -13,7 +12,6 @@ assets:
       prefix: aws.pricing.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10085
     source_type_name: AWS Pricing
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -22,9 +20,8 @@ author:
   support_email: tsein@brightcove.com
 categories:
 - aws
-- クラウド
+- cloud
 - コスト管理
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/README.md
 display_on_public_website: true
@@ -34,8 +31,10 @@ integration_id: aws-pricing
 integration_title: AWS Pricing
 integration_version: 1.0.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: aws_pricing
+oauth: {}
 public_title: AWS Pricing
 short_description: サービスの AWS Pricing 情報をレートコードごとに収集
 supported_os:
@@ -51,7 +50,6 @@ tile:
   - Category::AWS
   - Category::Cloud
   - Category::Cost Management
-  - Offering::Integration
   configuration: README.md#Setup
   description: サービスの AWS Pricing 情報をレートコードごとに収集
   media: []
@@ -60,7 +58,6 @@ tile:
   title: AWS Pricing
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -83,7 +80,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い AWS Pricing �
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### 構成
+### コンフィギュレーション
 
 1. AWS Pricing データの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `aws_pricing.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、サンプル [aws_pricing.d/conf.yaml][5] を参照してください。
 
@@ -96,15 +93,15 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い AWS Pricing �
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "aws-pricing" >}}
+{{< get-metrics-from-git "aws_pricing" >}}
 
 
 ### イベント
 
 AWS Pricing には、イベントは含まれません。
 
-### サービスチェック
-{{< get-service-checks-from-git "aws-pricing" >}}
+### サービスのチェック
+{{< get-service-checks-from-git "aws_pricing" >}}
 
 
 ## トラブルシューティング
@@ -113,7 +110,7 @@ AWS Pricing には、イベントは含まれません。
 
 
 [1]: https://aws.amazon.com/pricing/
-[2]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/datadog_checks/aws_pricing/data/conf.yaml.example

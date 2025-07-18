@@ -21,6 +21,7 @@ further_reading:
 - link: /agent/kubernetes/tag/
   tag: ドキュメント
   text: コンテナから送信された全データにタグを割り当て
+kind: documentation
 title: 収集された Kubernetes データ
 ---
 
@@ -54,35 +55,35 @@ title: 収集された Kubernetes データ
 
 ### Kubernetes DNS
 
-{{< get-metrics-from-git "kube-dns" >}}
+{{< get-metrics-from-git "kube_dns" >}}
 
 ### Kubernetes プロキシ
 
-{{< get-metrics-from-git "kube-proxy" >}}
+{{< get-metrics-from-git "kube_proxy" >}}
 
 ### Kubernetes API server
 
 詳しくは、[Kubernetes API server][3] インテグレーションのドキュメントをご覧ください。
 
-{{< get-metrics-from-git "kube-apiserver-metrics" >}}
+{{< get-metrics-from-git "kube_apiserver_metrics" >}}
 
 ### Kubernetes controller manager
 
 詳しくは、[Kubernetes controller manager][2] インテグレーションのドキュメントをご覧ください。
 
-{{< get-metrics-from-git "kube-controller-manager" >}}
+{{< get-metrics-from-git "kube_controller_manager" >}}
 
 ### Kubernetes metrics server
 
 詳しくは、[Kubernetes metrics server][4] インテグレーションのドキュメントをご覧ください。
 
-{{< get-metrics-from-git "kubernetes_state_core" >}}
+{{< get-metrics-from-git "kube_metrics_server" >}}
 
 ### Kubernetes scheduler
 
 詳しくは、[Kubernetes scheduler][5] インテグレーションのドキュメントをご覧ください。
 
-{{< get-metrics-from-git "kube-scheduler" >}}
+{{< get-metrics-from-git "kube_scheduler" >}}
 
 
 ## イベント
@@ -126,19 +127,19 @@ title: 収集された Kubernetes データ
 
 詳しくは、[Kubernetes controller manager][2] インテグレーションのドキュメントをご覧ください。
 
-{{< get-service-checks-from-git "kube-controller-manager" >}}
+{{< get-service-checks-from-git "kube_controller_manager" >}}
 
 ### Kubernetes metrics server
 
 詳しくは、[Kubernetes metrics server][4] インテグレーションのドキュメントをご覧ください。
 
-{{< get-service-checks-from-git "kubernetes_state_core" >}}
+{{< get-service-checks-from-git "kube_metrics_server" >}}
 
 ### Kubernetes scheduler
 
 詳しくは、[Kubernetes scheduler][5] インテグレーションのドキュメントをご覧ください。
 
-{{< get-service-checks-from-git "kube-scheduler" >}}
+{{< get-service-checks-from-git "kube_scheduler" >}}
 
 ### Kubernetes state metrics core
 

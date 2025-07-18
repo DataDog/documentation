@@ -2,14 +2,18 @@
 description: Roku チャンネルからログを収集します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-roku
-  tag: ソースコード
-  text: dd-sdk-roku のソースコード
+  tag: GitHub
+  text: dd-sdk-roku ソースコード
 - link: logs/explorer
   tag: Documentation
   text: ログの調査方法
+kind: documentation
 title: Roku ログ収集
-site_support_id: rum_roku
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Roku ログ収集は、US1-FED Datadog サイトではご利用いただけません。</div>
+{{< /site-region >}}
 
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 <div class="alert alert-info">Roku ログ収集はベータ版です。</div>
@@ -144,7 +148,7 @@ site_support_id: rum_roku
 
    ```brightscript
    ' 0 = none; 1 = error; 2 = warning; 3 = info; 4 = verbose;
-   m.globalNode.addFields({ datadogVerbosity: 2 })
+   m.globalNode.addFields({ datadogVerbosity: 2 }) 
    ```
 
 4. 次のいずれかの関数で、カスタムログエントリを Datadog に直接送信します。
@@ -167,8 +171,8 @@ site_support_id: rum_roku
 
    ```brightscript
     m.global.datadogLogsAgent.callfunc(
-        "logInfo",
-        "Video started",
+        "logInfo", 
+        "Video started", 
         { video_id: 42, video_type: "advert"}
     )
    ```
@@ -190,6 +194,6 @@ SDK がディスク容量を使いすぎないように、ディスク上のデ�
 [3]: /ja/account_management/api-app-keys/#api-keys
 [4]: /ja/logs/processing/attributes_naming_convention/
 [5]: /ja/tagging/
-[6]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/roku/?tab=us
+[6]: /ja/real_user_monitoring/roku/?tab=us
 [7]: https://github.com/DataDog/dd-sdk-roku/releases
 [8]: https://developer.roku.com/fr-fr/docs/developer-program/getting-started/architecture/file-system.md#cachefs

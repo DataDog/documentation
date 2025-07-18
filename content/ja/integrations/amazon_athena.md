@@ -1,19 +1,19 @@
 ---
 categories:
-- クラウド
+- cloud
 - aws
 - ログの収集
-custom_kind: インテグレーション
 dependencies: []
 description: Amazon Athena のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_athena/
 draft: false
 git_integration_title: amazon_athena
 has_logo: true
-integration_id: ''
+integration_id: amazon-athena
 integration_title: Amazon Athena
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_athena
 public_title: Datadog-Amazon Athena インテグレーション
@@ -21,7 +21,6 @@ short_description: Amazon Athena のキーメトリクスを追跡
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Athena は、標準 SQL を使用して Amazon Simple Storage Service (Amazon S3) でデータを直接、簡単に分析できるようにするインタラクティブなクエリサービスです。
@@ -42,20 +41,20 @@ Amazon Athena は、標準 SQL を使用して Amazon Simple Storage Service (Am
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-athena" >}}
+{{< get-metrics-from-git "amazon_athena" >}}
 
 
 ### イベント
 
 Amazon Athena インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Amazon Athena インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services

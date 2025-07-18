@@ -24,54 +24,44 @@ further_reading:
 - link: /synthetics/guide/synthetic-test-monitors
   tag: ドキュメント
   text: Synthetic テストモニターについて
+kind: documentation
 title: API テストの概要
 ---
 
 ## 概要
 
-API テストは、**最も重要なサービス**がいつでもどこからでも利用できることを**プロアクティブに監視**します。[シングル API テスト][1]には、システムのさまざまなネットワーク層 (`HTTP`、`SSL`、`DNS`、`WebSocket`、`TCP`、`UDP`、`ICMP`、`gRPC`) でリクエストを起動できる 8 つのサブタイプがあります。[マルチステップ API テスト][2]では、API テストを順番に実行して、API レベルで主要なジャーニーのアップタイムを監視できます。
+API テストは、**最も重要なサービス**がいつでもどこからでも利用できることを**プロアクティブに監視**します。[シングル API テスト][1]には、システムのさまざまなネットワーク層 (`HTTP`、`SSL`、`DNS`、`WebSocket`、`TCP`、`UDP`、`ICMP`、`gRPC`) でリクエストを起動できる 8 つのサブタイプがあります。[マルチステップ API テスト][2]では、HTTP テストを順番に実行して、API レベルで主要なジャーニーのアップタイムを監視できます。
 
 ## 単一の API テストを作成する
 
 HTTP テストは、API エンドポイントを監視し、レスポンス遅延が大きい場合や、期待される HTTP ステータスコード、レスポンスヘッダー、レスポンス本文の内容など、定義した条件を満たさない場合に警告を発します。
 
+{{< img src="getting_started/synthetics/api-test.png" alt="Synthetics HTTP テストの概要" style="width:100%;" >}}
+
 以下の例では、[シングル API テスト][1]のサブタイプである [HTTP テスト][3]を作成する方法を示しています。
 
-1. Datadog サイトで、**Digital Experience** にカーソルを合わせ、**[Tests][4]** (**Synthetic Monitoring & Testing** の下) を選択します。
+### リクエストを定義する
 
+1. Datadog サイトで、**UX Monitoring** にカーソルを合わせ、**[Synthetic Tests][4]** を選択します。
 2. **New Test** > **[New API test][5]** をクリックします。
+3. `HTTP` リクエストタイプを選択します。
+4. リクエストを定義します。
 
-3. テストを作成するには、以下のいずれかのオプションを使用できます。
+    - 監視するエンドポイントの URL を追加します。何から始めればよいかわからない場合は、テスト用の e コマースウェブアプリケーションである `https://www.shopist.io/` を使用できます。テストするエンドポイントを定義すると、テストの名前が `Test on www.shopist.io` に自動的に入力されます。
+    - **Advanced Options** を選択すると、カスタムリクエストオプション、証明書、認証情報などを設定することができます。
 
-   - **テンプレートからテストを作成する**:
+      **注:** 資格情報を保存するための安全な[グローバル変数][6]を作成し、リクエストペイロードで使用する動的タイムスタンプを生成するための[ローカル変数][7]を作成できます。これらの変数を作成した後、関連するフィールドに `{{` と入力し、変数を選択して、テストオプションにその値を挿入します。
 
-      1. あらかじめ用意されたテンプレートの上にマウスカーソルを置き、**View Template** をクリックします。すると、「Test Details」「Request Details」「Assertions」「Alert Conditions」「Monitor Settings」など、あらかじめ設定された構成情報が表示されるサイドパネルが開きます。
-      2. **+Create Test** をクリックして **Define Request** ページを開き、あらかじめ設定された構成オプションを確認および編集します。ここで提示されるフィールドは、テストを一から作成する場合と同じです。
-      3. **Save Details** をクリックして、API テストを送信します。<br /><br>
+      この例では、特定の詳細オプションは必要ありません。
+    - テストでは、`env:prod` や `app:shopist` などのタグを設定できます。タグを使用すると、テストスイートを整理し、ホームページで興味のあるテストをすばやく見つけることができます。
 
-        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="テンプレートが用意された Synthetics API テストのランディングページの動画" video="true" >}}
+5. **Test URL** をクリックして、サンプルのテスト実行をトリガーします。
 
-   - **テストを一から作成する**:
-
-      1. テストを一から作成するには、**+ Start from scratch** テンプレートをクリックし、`HTTP` リクエストタイプを選択します。
-
-      2. 監視対象のエンドポイントの URL を追加します。何から始めればよいかわからない場合は、テスト用の e コマース Web アプリケーションである `https://www.shopist.io/` を使用できます。Shopist のテスト URL を使用すると、テスト名が自動的に `Test on shopist.io` と入力されます。
-
-      3. オプションとして、**Advanced Options** を選択してカスタムリクエストオプションを設定したり、証明書や認証情報を追加したり、動的入力用の安全な [global variables][6] や [local variables][7] を作成したりできます。
-
-         **注**: 任意のフィールドで `{{` と入力して変数を選択し、その値をテストオプションに挿入できます。
-
-      4. テストでは、`env:prod` や `app:shopist` などのタグをオプションで設定できます。タグを使用すると、テストスイートを整理し、ホームページで興味のあるテストをすばやく見つけることができます。
-
-      5. **Send** をクリックして、サンプルのテスト実行をトリガーします。
-
-         {{< img src="getting_started/synthetics/api-test-config-4.png" alt="API テスト構成" style="width:90%;">}}
-
-      6. **Create Test** をクリックして、API テストを送信します。
+{{< img src="getting_started/synthetics/api-test-config-3.png" alt="API テストコンフィギュレーション" style="width:100%;">}}
 
 ### アサーションを定義する
 
-**Send** をクリックすると、エンドポイントの応答に関する基本的なアサーションが自動的に入力されます。アサーションは、成功したテスト実行が何であるかを定義します。
+**Test URL** をクリックすると、エンドポイントの応答に関する基本的なアサーションが自動的に入力されます。アサーションは、成功したテスト実行が何であるかを定義します。
 
 この例では、サンプルのテスト実行をトリガーした後、3 つのデフォルトのアサーションが設定されます。
 
@@ -121,7 +111,7 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 {{< img src="getting_started/synthetics/multistep-api-test.png" alt="マルチステップ Synthetics API テストの概要" style="width:100%;" >}}
 
-[API テスト][3]と同様に、マルチステップ API テストは、エンドポイントが遅くなりすぎたり、定義した条件を満たせなくなったりしたときに警告を発します。個々のステップ応答から変数を作成し、後続のステップでそれらの値を再注入して、アプリケーションまたはサービスの動作を模倣する方法でステップをチェーン化することもできます。
+[HTTP テスト][3]と同様に、マルチステップ API テストは、エンドポイントが遅くなりすぎたり、定義した条件を満たせなくなったりしたときに警告を発します。個々のステップ応答から変数を作成し、後続のステップでそれらの値を再注入して、アプリケーションまたはサービスの動作を模倣する方法でステップをチェーン化することもできます。
 
 以下のテスト例は、カートへのアイテムの追加を監視するマルチステップ API テストの作成を示しています。このテストには、次の 3 つのステップが含まれます。
 
@@ -219,7 +209,7 @@ Datadog の [APM と Synthetic モニタリングのインテグレーション]
 [1]: /ja/synthetics/api_tests/
 [2]: /ja/synthetics/multistep
 [3]: /ja/synthetics/api_tests/http_tests
-[4]: https://app.datadoghq.com/synthetics/tests
+[4]: https://app.datadoghq.com/synthetics/list
 [5]: https://app.datadoghq.com/synthetics/create
 [6]: /ja/synthetics/settings/#global-variables
 [7]: /ja/synthetics/api_tests/http_tests#variables
@@ -230,4 +220,3 @@ Datadog の [APM と Synthetic モニタリングのインテグレーション]
 [12]: https://app.datadoghq.com/synthetics/multi-step/create
 [13]: /ja/synthetics/guide/synthetic-test-monitors
 [14]: /ja/synthetics/apm/
-[15]: /ja/synthetics/api_tests/grpc_tests

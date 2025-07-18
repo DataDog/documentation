@@ -5,7 +5,6 @@ assets:
   dashboards:
     Kubernetes Metrics Server - Overview: assets/dashboards/overview.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -16,7 +15,6 @@ assets:
       prefix: kube_metrics_server.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10061
     source_type_name: Kube メトリクスサーバー
 author:
   homepage: https://www.datadoghq.com
@@ -27,7 +25,6 @@ categories:
 - コンテナ
 - kubernetes
 - orchestration
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/README.md
 display_on_public_website: true
@@ -35,10 +32,12 @@ draft: false
 git_integration_title: kube_metrics_server
 integration_id: kube-metrics-server
 integration_title: Kubernetes Metrics Server
-integration_version: 5.1.0
+integration_version: 3.0.1
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: kube_metrics_server
+oauth: {}
 public_title: Kubernetes Metrics Server
 short_description: Kubernetes Metrics Server の監視
 supported_os:
@@ -54,7 +53,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: Kubernetes Metrics Server の監視
   media: []
@@ -63,7 +61,6 @@ tile:
   title: Kubernetes Metrics Server
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -76,14 +73,14 @@ tile:
 
 Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 1. kube_metrics_server のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `kube_metrics_server.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル kube_metrics_server.d/conf.yaml][1] を参照してください。
 
@@ -92,7 +89,7 @@ Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含ま�
 [1]: https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/datadog_checks/kube_metrics_server/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -100,9 +97,9 @@ Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含ま�
 
 | パラメーター            | 値                                                |
 | -------------------- | ---------------------------------------------------- |
-| `<INTEGRATION_NAME>` | `kube_metrics_server `                                         |
-| `<INIT_CONFIG>`      | 空白または `{}`                                        |
-| `<INSTANCE_CONFIG>`  | `{"prometheus_url": "https://%%host%%:443/metrics"}` |
+| `<インテグレーション名>` | `kube_metrics_server `                                         |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                        |
+| `<インスタンスコンフィギュレーション>`  | `{"prometheus_url": "https://%%host%%:443/metrics"}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
@@ -125,25 +122,25 @@ Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含ま�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "kubernetes_state_core" >}}
+{{< get-metrics-from-git "kube_metrics_server" >}}
 
 
 ### イベント
 
 kube_metrics_server には、イベントは含まれません。
 
-### サービスチェック
-{{< get-service-checks-from-git "kubernetes_state_core" >}}
+### サービスのチェック
+{{< get-service-checks-from-git "kube_metrics_server" >}}
 
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 
 
 [1]: https://github.com/kubernetes-incubator/metrics-server
-[2]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/ja/help/

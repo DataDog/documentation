@@ -3,10 +3,8 @@ app_id: spark
 app_uuid: 5cb22455-9ae2-44ee-ae05-ec21c27b3292
 assets:
   dashboards:
-    Databricks Spark Overview: assets/dashboards/databricks_overview.json
     spark: assets/dashboards/spark_dashboard.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,14 +13,11 @@ assets:
       check: spark.job.count
       metadata_path: metadata.csv
       prefix: spark.
-    process_signatures:
-    - java org.apache.spark.deploy.SparkSubmit
-    - java org.apache.spark.deploy.worker.Worker
-    - java org.apache.spark.deploy.master.Master
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 142
     source_type_name: Spark
+  logs:
+    source: spark
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -30,7 +25,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/spark/README.md
 display_on_public_website: true
@@ -38,10 +32,12 @@ draft: false
 git_integration_title: spark
 integration_id: spark
 integration_title: Spark
-integration_version: 6.4.0
+integration_version: 3.2.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: spark
+oauth: {}
 public_title: Spark
 short_description: タスクの失敗率、シャッフルされたバイト数などを追跡します。
 supported_os:
@@ -55,31 +51,15 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: タスクの失敗率、シャッフルされたバイト数などを追跡します。
   media: []
   overview: README.md#Overview
-  resources:
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/data-jobs-monitoring/
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/data-observability-monitoring/
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/monitoring-spark
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/spark-emr-monitoring/
   support: README.md#Support
   title: Spark
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
-
-<div class="alert alert-warning">
-<a href="https://docs.datadoghq.com/data_jobs/">Data Jobs Monitoring</a> は、Spark および Databricks のジョブやクラスターを監視、トラブルシューティング、コスト最適化するのに役立ちます。<br/><br/>
-このページでは、Spark のメトリクスおよびログの取り込み方法のみを説明します。
-</div>
 
 ![Spark のグラフ][1]
 
@@ -98,14 +78,14 @@ tile:
 
 Spark チェックは [Datadog Agent][3] パッケージに含まれています。Mesos マスター（Mesos の Spark）、YARN ResourceManager（YARN の Spark）、Spark マスター（Spark Standalone）に追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `spark.d/conf.yaml` ファイルを編集します。以下のパラメーターは、更新が必要な場合があります。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル spark.d/conf.yaml][2] を参照してください。
 
@@ -134,7 +114,7 @@ Spark チェックは [Datadog Agent][3] パッケージに含まれています
 [2]: https://github.com/DataDog/integrations-core/blob/master/spark/datadog_checks/spark/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -142,15 +122,15 @@ Spark チェックは [Datadog Agent][3] パッケージに含まれています
 
 | パラメーター            | 値                                                             |
 | -------------------- | ----------------------------------------------------------------- |
-| `<INTEGRATION_NAME>` | `spark`                                                           |
-| `<INIT_CONFIG>`      | 空白または `{}`                                                     |
-| `<INSTANCE_CONFIG>`  | `{"spark_url": "%%host%%:8080", "cluster_name":"<CLUSTER_NAME>"}` |
+| `<インテグレーション名>` | `spark`                                                           |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                                     |
+| `<インスタンスコンフィギュレーション>`  | `{"spark_url": "%%host%%:8080", "cluster_name":"<CLUSTER_NAME>"}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
-### ログ収集
+### ログの収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -191,15 +171,15 @@ Agent の [status サブコマンド][7]を実行し、Checks セクションで
 
 Spark チェックには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "spark" >}}
 
 
 ## トラブルシューティング
 
-### Amazon EMR 上の Spark
+### AWS EMR 上の Spark
 
-Amazon EMR 上の Spark のメトリクスを受信するには、[ブートストラップアクションを使用][8]して [Datadog Agent][9] をインストールします。
+AWS EMR 上の Spark のメトリクスを受信するには、[ブートストラップアクションを使用][8]して [Datadog Agent][9] をインストールします。
 
 Agent v5 の場合は、[各 EMR ノードに正しい値が指定][10]された `/etc/dd-agent/conf.d/spark.yaml` 構成ファイルを作成します。
 
@@ -214,12 +194,11 @@ Spark インテグレーションは、実行中のアプリに関するメト�
 お役に立つドキュメント、リンクや記事:
 
 - [Datadog を使用した Hadoop と Spark の監視][11]
-- [Amazon EMR 上で動作する Apache Spark アプリケーションの監視][12]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/spark/images/sparkgraph.png
 [2]: https://spark.apache.org/
-[3]: https://app.datadoghq.com/account/settings/agent/latest
+[3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/spark/datadog_checks/spark/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/docker/log/
@@ -228,4 +207,3 @@ Spark インテグレーションは、実行中のアプリに関するメト�
 [9]: https://docs.datadoghq.com/ja/agent/
 [10]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-connect-master-node-ssh.html
 [11]: https://www.datadoghq.com/blog/monitoring-spark
-[12]: https://www.datadoghq.com/blog/spark-emr-monitoring/

@@ -3,7 +3,6 @@ app_id: zenduty
 app_uuid: 0f2dea25-5757-477c-ad92-d459133d8b05
 assets:
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -13,7 +12,6 @@ assets:
       prefix: zenduty.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10305
     source_type_name: Zenduty
 author:
   homepage: https://www.zenduty.com
@@ -22,11 +20,10 @@ author:
   support_email: shubham@zenduty.com
 categories:
 - アラート設定
-- コラボレーション
-- インシデント
 - 問題追跡
-- notifications
-custom_kind: integration
+- コラボレーション
+- notification
+- モニタリング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/zenduty/README.md
 display_on_public_website: true
@@ -36,26 +33,28 @@ integration_id: zenduty
 integration_title: Zenduty
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: zenduty
+oauth: {}
 public_title: Zenduty
 short_description: Datadog アラートのインシデントレスポンスおよび通知パートナーとして Zenduty を使用する
 supported_os:
 - linux
-- windows
 - macos
+- windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Alerting
-  - Category::Collaboration
-  - Category::Incidents
-  - Category::Issue Tracking
-  - Category::Notifications
-  - Offering::Integration
   - Supported OS::Linux
-  - Supported OS::Windows
   - Supported OS::macOS
+  - Supported OS::Windows
+  - Offering::Integration
+  - Category::Alerting
+  - Category::Issue Tracking
+  - Category::Collaboration
+  - Category::Notification
+  - Category::Monitoring
   configuration: README.md#Setup
   description: Datadog アラートのインシデントレスポンスおよび通知パートナーとして Zenduty を使用する
   media:
@@ -79,7 +78,6 @@ tile:
   title: Zenduty
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 ## 概要
 
 Zenduty インテグレーションを使用して、Datadog アラートを適切なチームに送信し、オンコールスケジュールに従って通知し、インシデントを迅速に修復して解決できるようにします。メール、Slack、Microsoft Teams、SMS、電話、Android、iOS のプッシュメッセージで通知を送信します。
@@ -136,7 +134,7 @@ Zenduty インテグレーションには、メトリクスは含まれません
 
 トリガーされたイベント、承認されたイベント、解決されたイベントは Zenduty のダッシュボードに表示されます。
 
-### サービスチェック
+### サービスのチェック
 
 Zenduty インテグレーションには、サービスのチェック機能は含まれません。
 

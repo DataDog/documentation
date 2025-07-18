@@ -1,15 +1,11 @@
 ---
-algolia:
-  tags:
-  - Gestión de integraciones
+kind: guía
 title: Gestión de integraciones
 ---
 
 ## Información general
 
-El Agent viene con una serie de integraciones oficiales de Datadog para que los usuarios puedan monitorizar sus aplicaciones de forma rápida. Estas integraciones están disponibles como paquetes individuales de Python y pueden actualizarse por separado.
-
-**Nota**: Las integraciones Community, Partner y Marketplace no se conservan cuando se actualiza Agent. Estas integraciones deben volver a instalarse al actualizar la versión del Agent.
+El Agent viene con una serie de integraciones oficiales de Datadog para que los usuarios puedan monitorizar sus aplicaciones rápidamente. Estas integraciones están disponibles como paquetes individuales de Python y pueden actualizarse por separado.
 
 Para el Agent 6.8 o versiones posteriores, el comando `datadog-agent integration` permite a los usuarios gestionar las integraciones oficiales de Datadog que están disponibles para el Agent. Incluye los siguientes subcomandos:
 

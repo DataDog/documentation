@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ko/monitors/faq/how-can-i-export-alert-history
+kind: 가이드
 title: 모니터링 경고를 CSV로 내보내기
 ---
 
@@ -17,7 +18,7 @@ curl을 사용하여 CSV를 가져오려면 다음을 사용하세요.
 
 ```shell
 api_key=<DATADOG_API_KEY>
-app_key=<DATADOG_APPLICATION_KEY>
+app_key = <DATADOG_APPLICATION_KEY>
 
 curl -G \
     "https://app.datadoghq.com/report/hourly_data/monitor" \
@@ -34,7 +35,7 @@ hour,host_name,alert_name,user,cnt
 ```
 {{< /site-region >}}
 
-{{< site-region region="eu,gov,us3,us5,ap1" >}}
+{{< site-region region="eu,gov,us3,us5" >}}
 
 해당 기능은 지원되지 않습니다.
 

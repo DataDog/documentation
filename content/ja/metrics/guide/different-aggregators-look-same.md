@@ -6,6 +6,7 @@ further_reading:
 - link: /metrics/introduction/#combining-time-series
   tag: ドキュメント
   text: 空間集計
+kind: faq
 title: sum/min/max/avg の集計を切り替えても、値が変化しない
 ---
 
@@ -31,6 +32,6 @@ title: sum/min/max/avg の集計を切り替えても、値が変化しない
 
 この例で `host` **と** `path` でグループ化すると、このデータの最も細かいレベルである `sum`/`min`/`max`/`avg` が系列ごとに同じになる 4 つの系列が得られます。
 
-## 参考資料
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

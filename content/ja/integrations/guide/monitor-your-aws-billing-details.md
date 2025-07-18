@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ja/integrations/faq/how-do-i-monitor-my-aws-billing-details
+kind: ガイド
 title: AWS の請求の詳細を監視する
 ---
 

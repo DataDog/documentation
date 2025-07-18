@@ -4,6 +4,7 @@ further_reading:
 - link: /monitors/create/types/real_user_monitoring/
   tag: ドキュメント
   text: RUM モニターについて
+kind: ガイド
 title: コンバージョン率でアラートを出す
 ---
 
@@ -13,19 +14,23 @@ title: コンバージョン率でアラートを出す
 
 ## RUM エクスプローラーでファネルを作成する
 
-Datadog で [Digital Experience > Product Analytics > Funnels][1] に移動します。
+ビューとアクションに基づいてファネル視覚化を作成するには、[**UX Monitoring** > **Analytics**][2] に移動し、`Visualize as` フィールドの **Funnel** をクリックします。
 
-{{< img src="real_user_monitoring/funnel_analysis/rum-funnel-creation-2.png" alt="主要なアクションがハイライトされたファネル作成ページ" style="width:100%;" >}}
+次の例は、ファネル内の `Product` ステップのコンバージョン率にアラートするモニターを作成する方法を示しています。
 
-**Define steps for measuring conversion** セクションで、ビューとアクションからステップを作成します。バーグラフをクリックすると、ユーザーのコンバージョンと離脱に関する分析を表示するサイドパネルが開きます。ファネルに後続のビューまたはアクションを追加するには、**+** をクリックして、よく使用される次のステップから選択します。
+{{< img src="real_user_monitoring/guide/alerting-with-conversion-rates/second-step-in-funnel.png" alt="ファネルの第 2 ステップのコンバージョン率に関するモニターを作成する" style="width:100%;" >}}
 
-## コンバージョン率グラフをエクスポートする
+ビューとアクションからいくつかのステップを作成します。棒グラフをクリックすると、ユーザーのコンバージョンとドロップオフに関する分析結果が表示されたサイドパネルが表示されます。ファネルに後続のビューまたはアクションを追加するには、**+** をクリックし、頻繁に行われる次のステップから選択します。
+
+## コンバージョン率グラフのエクスポート
 
 ファネルには、全体のコンバージョン率とドロップオフ率、コンバージョンまたはドロップオフセッションの数、コンバージョンまたはドロップオフセッションのパーセンテージが表示されます。
 
-**Save to Dashboard** ボタンをクリックし、ドロップダウンメニューから既存のダッシュボードを選択してグラフをエクスポートします。必要に応じて、**New Dashboard** をクリックしてダッシュボードを作成します。
+{{< img src="real_user_monitoring/guide/alerting-with-conversion-rates/funnel-widget-export.mp4" alt="既存のダッシュボードまたは新しいダッシュボードにファネルウィジェットをエクスポートする" video=true >}}
 
-## コンバージョン率クエリを編集する
+**Export** ボタンをクリックし、グラフをエクスポートする既存のダッシュボードをドロップダウンメニューから選択します。オプションで、**New Dashboard** をクリックして、ダッシュボードを作成します。
+
+## コンバージョン率クエリの編集
 
 ダッシュボードでは、ウィジェットを編集し、**Graph your data** の下でコンバージョン率のクエリにアクセスすることができます。
 
@@ -47,7 +52,7 @@ Datadog で [Digital Experience > Product Analytics > Funnels][1] に移動し�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/rum/funnels
+[1]: /ja/real_user_monitoring/explorer/visualize/#funnel
 [2]: https://app.datadoghq.com/rum/explorer?viz=timeseries
 [3]: https://app.datadoghq.com/monitors/create/rum
-[4]: /ja/monitors/types/real_user_monitoring/
+[4]: /ja/monitors/create/types/real_user_monitoring/

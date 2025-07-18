@@ -3,7 +3,6 @@ app_id: neutrona
 app_uuid: f44f84d4-1436-4ab1-8023-b952850b64c8
 assets:
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -13,7 +12,6 @@ assets:
       prefix: neutrona.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10051
     source_type_name: Neutrona
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -23,7 +21,6 @@ author:
 categories:
 - クラウド
 - ネットワーク
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/neutrona/README.md
 display_on_public_website: true
@@ -33,8 +30,10 @@ integration_id: neutrona
 integration_title: Neutrona
 integration_version: 1.0.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: neutrona
+oauth: {}
 public_title: Neutrona
 short_description: Neutrona Telemetry
 supported_os:
@@ -49,7 +48,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: Neutrona Telemetry
   media: []
@@ -58,7 +56,6 @@ tile:
   title: Neutrona
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -83,7 +80,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Neutrona チ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### 構成
+### コンフィギュレーション
 
 1. Neutrona の[メトリクス](#metrics)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `neutrona.d/conf.yaml` ファイルを編集します。
    使用可能なすべてのコンフィギュレーションオプションについては、[サンプル neutrona.d/conf.yaml][6] を参照してください。
@@ -100,7 +97,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Neutrona チ�
 {{< get-metrics-from-git "neutrona" >}}
 
 
-### サービスチェック
+### サービスのチェック
 
 現時点で、Neutrona には、サービスのチェック機能は含まれません。
 
@@ -113,7 +110,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Neutrona チ�
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 [1]: https://telemetry.neutrona.com
-[2]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

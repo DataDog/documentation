@@ -1,10 +1,10 @@
 ---
 aliases:
-- /ja/integrations/azure_hdinsight
+  - /ja/integrations/azure_hdinsight
 categories:
-- cloud
-- azure
-custom_kind: integration
+  - cloud
+  - azure
+ddtype: crawler
 dependencies: []
 description: Azure HDInsight のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_hd_insight/
@@ -15,14 +15,13 @@ integration_id: azure-hdinsight
 integration_title: Microsoft Azure HDInsight
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: azure_hd_insight
 public_title: Datadog-Microsoft Azure HDInsight インテグレーション
 short_description: Azure HDInsight のキーメトリクスを追跡
 version: '1.0'
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure HDInsight は、膨大な量のデータを簡単、迅速かつコスト効率よく処理できるようにするクラウドサービスです。
@@ -38,14 +37,14 @@ Datadog Azure インテグレーションを使用すると、Azure HDInsight �
 ## 収集データ
 
 ### メトリクス
-{{ get-metrics-from-git "azure-hdinsight" }}
+{{< get-metrics-from-git "azure_hd_insight" >}}
 
 
 ### イベント
 
 Azure HDInsight インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Azure HDInsight インテグレーションには、サービスのチェック機能は含まれません。
 

@@ -5,7 +5,6 @@ assets:
   dashboards:
     Harbor Overview: assets/dashboards/overview.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -16,17 +15,17 @@ assets:
       prefix: harbor.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10063
     source_type_name: Harbor
+  logs:
+    source: harbor
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- incident-teams
+- コンテナ
 - ログの収集
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/harbor/README.md
 display_on_public_website: true
@@ -34,10 +33,12 @@ draft: false
 git_integration_title: harbor
 integration_id: harbor
 integration_title: Harbor
-integration_version: 5.1.0
+integration_version: 2.2.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: harbor
+oauth: {}
 public_title: Harbor
 short_description: Harbor コンテナレジストリの健全性を監視
 supported_os:
@@ -52,7 +53,6 @@ tile:
   - Supported OS::Windows
   - Category::Containers
   - Category::Log Collection
-  - Offering::Integration
   configuration: README.md#Setup
   description: Harbor コンテナレジストリの健全性を監視
   media: []
@@ -61,7 +61,6 @@ tile:
   title: Harbor
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -74,14 +73,14 @@ tile:
 
 Harbor チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
@@ -91,7 +90,7 @@ Harbor チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 2. [Agent を再起動します][3]。
 
-##### ログ収集
+##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -117,7 +116,7 @@ _Agent バージョン 6.0 以降で利用可能_
 [2]: https://github.com/DataDog/integrations-core/blob/master/harbor/datadog_checks/harbor/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -127,11 +126,11 @@ _Agent バージョン 6.0 以降で利用可能_
 
 | パラメーター            | 値                                                                                 |
 | -------------------- | ------------------------------------------------------------------------------------- |
-| `<INTEGRATION_NAME>` | `harbor`                                                                              |
-| `<INIT_CONFIG>`      | 空白または `{}`                                                                         |
-| `<INSTANCE_CONFIG>`  | `{"url": "https://%%host%%", "username": "<ユーザー_ID>", "password": "<ユーザーパスワード>"}` |
+| `<インテグレーション名>` | `harbor`                                                                              |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                         |
+| `<インスタンスコンフィギュレーション>`  | `{"url": "https://%%host%%", "username": "<ユーザー_ID>", "password": "<ユーザーパスワード>"}` |
 
-##### ログ収集
+##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -160,7 +159,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 Harbor インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "harbor" >}}
 
 
@@ -171,6 +170,6 @@ Harbor インテグレーションには、イベントは含まれません。
 
 
 [1]: https://goharbor.io
-[2]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

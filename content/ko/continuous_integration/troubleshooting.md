@@ -9,8 +9,13 @@ further_reading:
 - link: /continuous_integration/intelligent_test_runner
   tag: 설명서
   text: Intelligent Test Runner에 대해 알아보기
+kind: 설명서
 title: CI Visibility 트러블슈팅
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">선택하신 사이트({{<region-param key="dd_site_name">}})에서 현재 CIVisibility를 사용할 수 없습니다.</div>
+{{< /site-region >}}
 
 ## 개요
 
@@ -211,6 +216,6 @@ Intelligent Test Runner는 코드 범위를 기반으로 테스트 영향 분석
 [8]: https://github.com/travisjeffery/timecop
 [9]: https://github.com/spulec/freezegun
 [10]: /ko/continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
-[11]: https://app.datadoghq.com/source-code/repositories
+[11]: https://app.datadoghq.com/ci/settings/repository
 [12]: /ko/continuous_integration/intelligent_test_runner/
 [13]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui

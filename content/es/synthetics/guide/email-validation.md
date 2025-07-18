@@ -1,6 +1,6 @@
 ---
-description: Verifica un correo electrónico y su contenido con los pasos del test
-  del navegador.
+description: Verifica el correo electrónico y su contenido con los pasos de los tests
+  de navegador
 further_reading:
 - link: /synthetics/browser_tests/actions
   tag: Documentación
@@ -8,7 +8,8 @@ further_reading:
 - link: /synthetics/browser_tests/advanced_options/
   tag: Documentación
   text: Configurar opciones avanzadas en los pasos
-title: Utiliza la validación de correo electrónico en los tests de navegador
+kind: documentación
+title: Validar correos electrónicos con tests de navegador
 ---
 
 ## Información general
@@ -62,6 +63,6 @@ En este ejemplo, el test de navegador mira en el correo electrónico `Welcome to
 Para finalizar el test de navegador, crea una aserción que confirme que el contenido de `div` activa la verificación de cuenta correcta. Por ejemplo, que la página contiene `Your account is now verified`.
 
 
-## Referencias adicionales
+## Leer más
 
 {{< partial name="whats-next/whats-next.html" >}}

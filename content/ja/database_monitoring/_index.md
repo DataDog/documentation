@@ -14,9 +14,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/sql-server-and-azure-managed-services-database-monitoring/
   tag: ブログ
   text: Datadog DBM で SQL Server や Azure のマネージドデータベースを監視する
-- link: https://www.datadoghq.com/blog/mongodb-database-monitoring/
-  tag: ブログ
-  text: MongoDB のパフォーマンスを追跡してトラブルシューティング
 - link: /database_monitoring/data_collected/
   tag: ドキュメント
   text: 収集データ
@@ -25,23 +22,21 @@ further_reading:
   text: トラブルシューティング
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
-  text: 対話型セッションに参加して Database Monitoring を強化しましょう
-- link: https://www.datadoghq.com/blog/mongodb-database-monitoring/
-  tag: ブログ
-  text: Datadog Database Monitoring を使用して MongoDB のパフォーマンスを追跡およびトラブルシューティング
+  text: データベースモニタリングのレベルアップのためのインタラクティブなセッションに参加できます
+kind: documentation
 title: データベース モニタリング
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
+{{< /site-region >}}
 
-
-{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Database">}}
-  Database Monitoring を使って、コストのかかるクエリや遅いクエリをすばやく特定する方法を学びましょう。ボトルネックに対処するために、実行の詳細を正確に調べましょう。
-{{< /learning-center-callout >}}
+{{< img src="database_monitoring/dbm-main.png" alt="Database Monitoring" style="width:100%;">}}
 
 Datadog Database Monitoring は、すべてのホストにわたるデータベースの詳細な可視性を提供します。データベースの正常性とパフォーマンスを理解し、問題が発生したときにトラブルシューティングを行うために、過去のクエリパフォーマンスメトリクスを掘り下げ、計画とホストレベルのメトリクスをすべて 1 か所で説明します。
 
 ## はじめに
 
-Datadog Database Monitoring は、**Postgres**、**MySQL**、**Oracle**、**SQL Server**、**MongoDB**、および **Amazon DocumentDB** のセルフホスト型およびクラウド管理型バージョンに対応しています。Datadog Database Monitoring を開始するには、まずデータベースを構成し、Datadog Agent をインストールしてください。セットアップ手順については、ご利用のデータベース技術を選択してください。
+Datadog Database Monitoring は、**Postgres**、**MySQL**、**SQL Server** のセルフホストおよびマネージドクラウドバージョンをサポートします。Datadog Database Monitoring の使用を開始するには、データベースを構成し、Datadog Agent をインストールします。セットアップ手順については、データベーステクノロジーを選択してください。
 
 ### Postgres
 
@@ -53,29 +48,14 @@ Datadog Database Monitoring は、**Postgres**、**MySQL**、**Oracle**、**SQL 
 {{< partial name="dbm/dbm-setup-mysql" >}}
 <p></p>
 
-### Oracle
-
-{{< partial name="dbm/dbm-setup-oracle" >}}
-<p></p>
-
 ### SQL Server
 
 {{< partial name="dbm/dbm-setup-sql-server" >}}
 <p></p>
 
-### MongoDB
-
-{{< partial name="dbm/dbm-setup-mongodb" >}}
-<p></p>
-
-### Amazon DocumentDB
-
-{{< partial name="dbm/dbm-setup-documentdb" >}}
-<p></p>
-
 ## Datadog Database Monitoring の調査
 
-Datadog の [Database Monitoring][1] に移動します。
+UI で **[APM > Databases][1]** をクリックして、Database Monitoring に移動します。
 
 ### クエリパフォーマンスメトリクスを掘り下げる
 
@@ -85,7 +65,7 @@ Datadog の [Database Monitoring][1] に移動します。
 - 更新/返された行など、APM によってキャプチャされないデータベースレベルのメトリクスを表示します。
 - チーム、ユーザー、クラスター、ホストなどの任意のディメンションでクエリをフィルタリングおよびグループ化します。
 
-{{< img src="database_monitoring/dbm-query-metrics-2.png" alt="Database Monitoring" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-query-metrics.png" alt="Database Monitoring" style="width:100%;">}}
 
 ### クエリサンプルを確認する
 
@@ -95,7 +75,7 @@ Datadog の [Database Monitoring][1] に移動します。
 - クエリの実行時間または実行コストの外れ値を見つけます。
 - 特定のクエリ実行をユーザー、アプリケーション、またはクライアントホストに関連付けます。
 
-{{< img src="database_monitoring/dbm-query-sample-2.png" alt="Database Monitoring" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-query-sample.png" alt="Database Monitoring" style="width:100%;">}}
 
 ### 実行する前に理解する
 
@@ -105,7 +85,7 @@ Datadog の [Database Monitoring][1] に移動します。
 - クエリの効率を改善し、大きなテーブルでのコストのかかる順次スキャンを節約します。
 - クエリの計画が時間の経過とともにどのように変化するかを確認します。
 
-{{< img src="database_monitoring/dbm-explain-plan-3.png" alt="Database Monitoring" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-explain-plan2.png" alt="Database Monitoring" style="width:100%;">}}
 
 ### 強化されたダッシュボードですべてを視覚化
 
@@ -113,24 +93,7 @@ Datadog の [Database Monitoring][1] に移動します。
 
 {{< img src="database_monitoring/dbm-dashboard-postgres.png" alt="Database Monitoring" style="width:100%;">}}
 
-### ホストの健全性とパフォーマンスを最適化する
-
-[Databases ページ][1]では、データベースホストの健全性とアクティビティを評価できます。リストを並べ替えたりフィルタリングしたりすることで、トリガーされたアラートがあるホスト、クエリ量が多いホスト、その他の基準に優先順位を付けることができます。個々のホストをクリックすると、構成、一般的なブロッキングクエリ、呼び出し元のサービスなどの詳細が表示されます。詳細については、[データベースホストの探索][5]を参照してください。
-
-{{< img src="database_monitoring/databases-list.png" alt="Datadog の Databases ページ" style="width:90%;" >}}
-
-### 最適化に関する推奨事項を表示
-
-[Recommendations ページ][6]は、問題点や最適化の機会を明確化し、重要度に応じた優先順位付けによって時間の節約に役立ちます。推奨事項を選択すると、問題の概要や対応に必要な次のステップなどの詳細を確認できます。
-
-{{< img src="database_monitoring/recommendations-page.png" alt="Datadog の Recommendations ページ" style="width:90%;" >}}
-
-
 ## その他の参考資料
-
-{{< learning-center-callout header="ラーニングセンターで Datadog DBM による Postgres データベースの監視をお試しください" btn_title="今すぐ登録" btn_url="https://learn.datadoghq.com/courses/database-monitoring">}}
-  Datadog ラーニングセンターは、このトピックに関する実践的なコースが充実しており、無料で参加することで Postgres データベースの非効率性を特定し、最適化することができます。
-{{< /learning-center-callout >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -138,5 +101,3 @@ Datadog の [Database Monitoring][1] に移動します。
 [2]: /ja/database_monitoring/query_metrics/
 [3]: /ja/database_monitoring/query_samples/
 [4]: /ja/database_monitoring/query_metrics/#explain-plans
-[5]: /ja/database_monitoring/database_hosts/
-[6]: /ja/database_monitoring/recommendations/

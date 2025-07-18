@@ -1,6 +1,10 @@
 ---
+kind: ガイド
 title: SQL ステートメントのタグ付け
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
+{{< /site-region >}}
 
 このガイドでは、[Database Monitoring][1] を構成していることを前提にしています。
 
@@ -23,11 +27,6 @@ SQL ステートメントの実行をサポートする任意のデータベー�
 
 ```sql
 /*key='val'*/ SELECT * from FOO
-```
-
-複数のタグをカンマで区切ります。
-```sql
-/*key1='val1',key2='val2'*/ SELECT * from FOO
 ```
 
 完全な例:
@@ -53,7 +52,7 @@ func main() {
 
 ## DBM でタグを探る
 
-[Samples ページ][4]で、カスタムタグを使用して **Explain Plans** ビュー と **Query Samples** ビュー をフィルタリングします。
+[**DBM > Samples**][4] ページで、**Explain Plans** および **Query Samples** ビューをカスタムタグでフィルターします。
 
 {{< img src="database_monitoring/dbm_filter_explain_plans_by_custom_tag.png" alt="カスタムタグで実行計画をフィルターします。">}}
 
@@ -68,4 +67,4 @@ func main() {
 [1]: /ja/database_monitoring/#getting-started
 [2]: https://google.github.io/sqlcommenter
 [3]: https://github.com/basecamp/marginalia
-[4]: https://app.datadoghq.com/databases/samples
+[4]: /ja/database_monitoring/query_samples/

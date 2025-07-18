@@ -9,24 +9,22 @@ further_reading:
 - link: /synthetics/browser_tests/
   tag: ドキュメント
   text: ブラウザテストの設定
-- link: /mobile_app_testing/mobile_app_tests/
-  tag: ドキュメント
-  text: モバイルアプリテストの構成
 - link: /synthetics/guide/explore-rum-through-synthetics/
   tag: ドキュメント
   text: Synthetics で RUM とセッションリプレイを確認する
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
-  tag: 外部サイト
+  tag: Terraform
   text: Terraform でテストを作成・管理する
+kind: documentation
 title: Continuous Testing 設定
 ---
 {{< jqmath-vanilla >}}
 
 ## 概要
 
-You can access Continuous Testing settings on the [Synthetic Monitoring & Testing Settings page][1].
+Continuous Testing の設定は、[Synthetic Monitoring & Continuous Testing Settings ページ][1]で行うことができます。
 
-{{< img src="continuous_testing/settings/parallelization.png" alt="Set parallelization for your Continuous Testing tests on the Settings page" style="width:100%;">}}
+{{< img src="continuous_testing/continuous_testing_settings_default.png" alt="Continuous Testing のデフォルト設定" style="width:100%;">}}
 
 デフォルトでは、CI/CD パイプラインで実行されるすべてのテストは、順次実行されます (1 つずつ実行されます)。この動作を変更するには、[並列化値](#set-parallelization)を設定し、選択を保存してください。
 
@@ -59,9 +57,9 @@ $$\text"estimated parallelization" = {\text"CI バッチあたりの平均テス
 3. **Save Selection** をクリックします。
 4. 選択内容を確認します。
 
-{{< img src="continuous_testing/settings/parallelization.png" alt="Parallelization settings for 25 parallel Continuous Testing test runs" style="width:100%;">}}
+{{< img src="continuous_testing/continuous_testing_settings_parallelization.png" alt="Continuous Testing のための並列化の設定" style="width:100%;">}}
 
-## 権限
+## アクセス許可
 
 Continuous Testing の並列化をカスタマイズするには、`billing_edit` 権限が必要です。
 
@@ -69,7 +67,7 @@ Continuous Testing の並列化をカスタマイズするには、`billing_edit
 
 詳しくは、[Datadog ロール権限][2]を参照してください。
 
-## 参考資料
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

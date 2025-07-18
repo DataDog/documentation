@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ko/graphing/functions/rank/
+kind: 설명서
 title: 순위
 ---
 

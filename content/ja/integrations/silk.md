@@ -5,7 +5,6 @@ assets:
   dashboards:
     Silk - Overview: assets/dashboards/silk_overview.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -16,10 +15,9 @@ assets:
       prefix: silk.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10250
     source_type_name: Silk
   monitors:
-    Latency is high: assets/monitors/latency_high.json
+    Latency high: assets/recommended_monitors/latency_high.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -27,9 +25,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - cloud
-- data stores
+- data store
 - プロビジョニング
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/silk/README.md
 display_on_public_website: true
@@ -37,10 +34,12 @@ draft: false
 git_integration_title: silk
 integration_id: silk
 integration_title: Silk
-integration_version: 4.1.0
+integration_version: 1.2.3
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: silk
+oauth: {}
 public_title: Silk
 short_description: Silk のパフォーマンスとシステム統計情報を監視します。
 supported_os:
@@ -54,9 +53,8 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Cloud
-  - Category::Data Stores
+  - Category::Data Store
   - Category::Provisioning
-  - Offering::Integration
   configuration: README.md#Setup
   description: Silk のパフォーマンスとシステム統計情報を監視します。
   media: []
@@ -65,7 +63,6 @@ tile:
   title: Silk
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -81,7 +78,7 @@ tile:
 Silk チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 1. Silk のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `silk.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル silk.d/conf.yaml][4] を参照してください。
 
@@ -109,7 +106,7 @@ Silk インテグレーションは、Silk サーバーから発信されるイ�
 | `CRITICAL`                | `error`                            |
 
 
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "silk" >}}
 
 
@@ -120,7 +117,7 @@ Silk インテグレーションは、Silk サーバーから発信されるイ�
 
 [1]: https://silk.us/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings/agent/latest
+[3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/silk/datadog_checks/silk/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

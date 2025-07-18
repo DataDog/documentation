@@ -1,7 +1,7 @@
 ---
 core_product:
 - security
-- csm
+- cspm
 title: 診断結果
 ---
 

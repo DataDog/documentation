@@ -4,8 +4,12 @@ further_reading:
 - link: /developers/authorization/
   tag: Documentation
   text: OAuth2 認可について
+kind: documentation
 title: OAuth2 認可エンドポイントリファレンス
 ---
+{{< callout btn_hidden="true" >}}
+  Datadog Developer Platform は現在ベータ版です。アクセス権をお持ちでない場合は、apps@datadoghq.com までご連絡ください。
+{{< /callout >}} 
 
 ## 概要
 
@@ -29,7 +33,7 @@ title: OAuth2 認可エンドポイントリファレンス
 |---------------------------------------------|-----------------------------------------------------------------------------------------------------------|
 | `redirect_uri`                                | ユーザーがアクセスを許可または拒否した後の、アプリケーションのリダイレクトエンドポイント。                              |
 | `client_id`                                   | OAuth2 クライアントの Client ID。                                                                       |
-| `response_type`                               | この認可フローでは、レスポンスタイプを `code` にする必要があります。                                                        |
+| `response_type`                               | レスポンスタイプは、この付与フロー用のコードでなければなりません。                                                        |
 | `code_challenge`  (PKCE が有効な場合)        | `code_verifier` の変換。Datadog は `SHA-256` を使用してコードチャレンジを計算することを推奨します。     |
 | `code_challenge_method`  (PKCE が有効な場合) | コードチャレンジの計算に使用する方式。`SHA-256`、または `S256` がサポートされています。  |
 
@@ -42,7 +46,7 @@ https://app.datadoghq.com/oauth2/v1/authorize?redirect_uri=http://localhost:500/
 
 #### 成功レスポンス
 
-ユーザーがアクセス要求を承認すると、アプリケーションは[認可コードを取得](#obtain-an-authorization-code)し、認可 `code` と `domain` パラメーターをクエリコンポーネントに含めてユーザーをリダイレクト URI へリダイレクトします。
+ユーザーがアクセスリクエストの許可に成功した場合、アプリケーションは[認可コードを取得](#obtain-an-authorization-code)し、クエリコンポーネントに `site` パラメーターと同様に認可 `code` を指定してリダイレクト URI にユーザーをリダイレクトさせます。
 
 #### エラーレスポンス
 

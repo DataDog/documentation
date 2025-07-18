@@ -16,6 +16,7 @@ further_reading:
 - link: /dashboards/functions/exclusion/
   tag: Documentation
   text: 除外関数
+kind: documentation
 title: 高度なフィルタリング
 ---
 
@@ -69,10 +70,11 @@ avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
 
 ## ワイルドカードでフィルタリングされたクエリ
 
-プレフィックス、サフィックス、および部分文字列のワイルドカードによるタグフィルタリングがサポートされています。
+タグ値のプレフィックスとサフィックスのワイルドカードマッチングがサポートされています。
 -  `pod_name: web-*` 
 -  `cluster:*-trace`
--  `node:*-prod-*`
+
+**注**: 同じフィルターでのプレフィックスとサフィックスのワイルドカードマッチングはサポートされていません。
 
 ### ワイルドカードでフィルタリングされたクエリの例
 
@@ -80,19 +82,12 @@ avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
 avg:system.disk.in_use{!device:/dev/loop*} by {device}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcard_suffix_example.png" alt="サフィックスとして使用されるワイルドカード" style="width:100%;" >}}
-
+{{< img src="metrics/advanced-filtering/wildcard_suffix.png" alt="サフィックスとして使用されるワイルドカード" style="width:100%;" >}}
 ```
 sum:kubernetes.pods.running{service:*-canary} by {service}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcard_prefix_example.png" alt="プレフィックスとして使用されるワイルドカード" style="width:100%;" >}}
-
-```
-avg:system.disk.utilized{region:*east*} by {region}
-```
-
-{{< img src="metrics/advanced-filtering/wildcard_infix.png" alt="接中辞として使用されるワイルドカード" style="width:100%;" >}}
+{{< img src="metrics/advanced-filtering/wildcard_prefix.png" alt="プレフィックスとして使用されるワイルドカード" style="width:100%;" >}}
 
 ## 除外関数
 

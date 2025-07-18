@@ -1,59 +1,30 @@
 ---
-app_id: azure-appserviceplan
-app_uuid: a44b7b0f-fd60-4a5a-8a18-03498111db31
-assets:
-  integration:
-    auto_install: true
-    events:
-      creates_events: false
-    metrics:
-      check: azure.web_serverfarms.cpu_percentage
-      metadata_path: metadata.csv
-      prefix: azure.web_serverfarms
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 279
-    source_type_name: Azure App Service Plan
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
+aliases:
+- /ja/integrations/azure_appserviceplan
 categories:
-- クラウド
+- cloud
 - azure
-custom_kind: インテグレーション
 dependencies: []
-display_on_public_website: true
+description: Azure App Service Plan のキーメトリクスを追跡
+doc_link: https://docs.datadoghq.com/integrations/azure_app_service_plan/
 draft: false
 git_integration_title: azure_app_service_plan
+has_logo: true
 integration_id: azure-appserviceplan
-integration_title: Azure App Service Plan
+integration_title: Microsoft Azure App Service Plan
 integration_version: ''
 is_public: true
-manifest_version: 2.0.0
+kind: インテグレーション
+manifest_version: '1.0'
 name: azure_app_service_plan
-public_title: Azure App Service Plan
+public_title: Datadog-Microsoft Azure App Service Plan インテグレーション
 short_description: Azure App Service Plan のキーメトリクスを追跡
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cloud
-  - Category::Azure
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Azure App Service Plan のキーメトリクスを追跡
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Azure App Service Plan
+version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
-Azure App Service Plan defines a set of compute resources used to run a web app, similar to a server farm in traditional web hosting. 
+Azure App Service Plan は、1 つの Web アプリを実行するためのコンピューティングリソース一式を定義します。これらのコンピューティングリソースは、従来の Web ホスティングのサーバーファームに相当します。
 
 Datadog Azure インテグレーションを使用して、Azure App Service Plan からメトリクスを収集できます。
 
@@ -61,19 +32,19 @@ Datadog Azure インテグレーションを使用して、Azure App Service Pla
 
 ### インストール
 
-If you haven't already, set up the [Microsoft Azure integration][1]. No additional installation steps are required.
+[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
 ## 収集データ
 
 ### メトリクス
-{{ get-metrics-from-git "azure-appserviceplan" }}
+{{< get-metrics-from-git "azure_app_service_plan" >}}
 
 
 ### イベント
 
 Azure App Service Plan インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Azure App Service Plan インテグレーションには、サービスのチェック機能は含まれません。
 

@@ -5,7 +5,6 @@ assets:
   dashboards:
     Gitea Overview Dashboard: assets/dashboards/gitea_overview.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -16,7 +15,6 @@ assets:
       prefix: gitea.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10283
     source_type_name: Gitea
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -26,7 +24,6 @@ author:
 categories:
 - コラボレーション
 - ソースコントロール
-custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gitea/README.md
 display_on_public_website: true
@@ -34,10 +31,12 @@ draft: false
 git_integration_title: gitea
 integration_id: gitea
 integration_title: Gitea
-integration_version: 1.0.2
+integration_version: 1.0.1
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: gitea
+oauth: {}
 public_title: Gitea
 short_description: Gitea のすべてのメトリクスを Datadog で追跡
 supported_os:
@@ -52,7 +51,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: Gitea のすべてのメトリクスを Datadog で追跡
   media: []
@@ -61,7 +59,6 @@ tile:
   title: Gitea
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -97,7 +94,7 @@ datadog-agent integration install -t datadog-gitea==<INTEGRATION_VERSION>
 
 2. Agent ベースの[インテグレーション][5]と同様にインテグレーションを構成します。
 
-### 構成
+### コンフィギュレーション
 
 1. Gitea データの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `gitea.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル gitea.d/conf.yaml][6] を参照してください。
 
@@ -117,7 +114,7 @@ datadog-agent integration install -t datadog-gitea==<INTEGRATION_VERSION>
 
 Gitea チェックには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "gitea" >}}
 
 
@@ -127,7 +124,7 @@ Gitea チェックには、イベントは含まれません。
 
 [1]: https://docs.gitea.io/en-us/
 [2]: https://docs.datadoghq.com/ja/agent/
-[3]: https://app.datadoghq.com/account/settings/agent/latest
+[3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [5]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [6]: https://github.com/DataDog/integrations-extras/blob/master/gitea/datadog_checks/gitea/data/conf.yaml.example

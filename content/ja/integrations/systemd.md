@@ -5,7 +5,6 @@ assets:
   dashboards:
     Systemd Overview: assets/dashboards/overview.json
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -15,7 +14,6 @@ assets:
       prefix: systemd.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10066
     source_type_name: Systemd
 author:
   homepage: https://www.datadoghq.com
@@ -24,7 +22,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - OS & システム
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/systemd/README.md
 display_on_public_website: true
@@ -34,8 +31,10 @@ integration_id: systemd
 integration_title: Systemd
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: systemd
+oauth: {}
 public_title: Systemd
 short_description: Systemd および Systemd によって管理されるユニットに関するメトリクスを取得
 supported_os:
@@ -45,7 +44,6 @@ tile:
   classifier_tags:
   - Supported OS::Linux
   - Category::OS & System
-  - Offering::Integration
   configuration: README.md#Setup
   description: Systemd および Systemd によって管理されるユニットに関するメトリクスを取得
   media: []
@@ -54,7 +52,6 @@ tile:
   title: Systemd
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -70,14 +67,14 @@ tile:
 
 Systemd チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `systemd.d/conf.yaml` ファイルを編集して、
    Systemd パフォーマンスデータの収集を開始します。
@@ -88,7 +85,7 @@ Systemd チェックは [Datadog Agent][2] パッケージに含まれていま�
 [1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/systemd.d/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -102,37 +99,6 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -e DD_API_KEY=<YOUR_API_KEY> \
               datadog/agent:latest
 ```
-
-#### Helm
-
-Helm 構成では、Datadog Agent をセットアップして、`kubelet.service` や `ssh.service` などの systemd ユニットを監視できます。これは、コンテナー内で systemd 関連のファイルやディレクトリにアクセスするための volumeMount と volume を定義することで実現します。例:
-
-```bash
-datadog:
-  #(...)
-  confd:      
-    # SystemD 用のカスタム構成ファイル
-    # 例: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/systemd.d/conf.yaml.example
-
-    systemd.yaml: |-
-      init_config:
-      instances:
-        - unit_names:
-            - kubelet.service
-            - ssh.service
-
-agents:
-  # SystemD ソケット (/run/systemd/private) 用のカスタム マウント
-  volumeMounts:
-    - name: systemd
-      mountPath: /host/run/systemd/ # ボリュームがコンテナ内でマウントされるパス
-
-  volumes:
-    - name: systemd
-      hostPath:
-        path: /run/systemd/ # ホスト マシン上でコンテナにマウントされるパス
-```
-
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -163,7 +129,7 @@ agents:
 
 Systemd チェックには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "systemd" >}}
 
 
@@ -174,6 +140,6 @@ Systemd チェックには、イベントは含まれません。
 
 
 [1]: https://www.freedesktop.org/wiki/Software/systemd/
-[2]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

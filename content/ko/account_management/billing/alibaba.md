@@ -1,4 +1,5 @@
 ---
+kind: 설명서
 title: Alibaba 통합 요금 청구
 ---
 

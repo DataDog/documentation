@@ -4,6 +4,7 @@ further_reading:
 - link: /integrations/oracle/
   tag: 설명서
   text: 기본 Oracle 통합
+kind: 도움말
 title: Oracle RAC용 데이터베이스 모니터링 설정
 ---
 

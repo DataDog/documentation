@@ -3,20 +3,20 @@ aliases:
 - /ja/integrations/awsdynamo/
 categories:
 - cloud
-- data stores
+- data store
 - aws
 - log collection
-custom_kind: integration
 dependencies: []
 description: テーブルサイズ、読み取り/書き込み容量、リクエストレイテンシーなどの追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_dynamodb/
 draft: false
 git_integration_title: amazon_dynamodb
 has_logo: true
-integration_id: ''
+integration_id: amazon-dynamodb
 integration_title: Amazon DynamoDB
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_dynamodb
 public_title: Datadog-Amazon DynamoDB インテグレーション
@@ -24,8 +24,7 @@ short_description: テーブルサイズ、読み取り/書き込み容量、リ
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-{{< img src="integrations/amazon_dynamodb/dynamodb.png" alt="DynamoDB のデフォルトダッシュボード" popup="true">}}
+{{< img src="integrations/amazon_dynamodb/dynamodb.png" alt="DynamoDB デフォルトダッシュボード" popup="true">}}
 
 ## 概要
 
@@ -48,7 +47,7 @@ Amazon DynamoDB は、AWS ポートフォリオに含まれる、フルマネー
 
     詳細については、AWS ウェブサイト上の [DynamoDB ポリシー][4]を参照してください。
 
-3. [Datadog - Amazon DynamoDB インテグレーション][5]をインストールします。
+3. [Datadog - AWS DynamoDB インテグレーション][5]をインストールします。
 
 ### ログの収集
 
@@ -72,18 +71,18 @@ AWS Services のログを収集する方法については、[Datadog Lambda 関
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-dynamodb" >}}
+{{< get-metrics-from-git "amazon_dynamodb" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 ### イベント
 
-Amazon DynamoDB インテグレーションには、イベントは含まれません。
+AWS DynamoDB インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-Amazon DynamoDB インテグレーションには、サービスのチェック機能は含まれません。
+AWS DynamoDB インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

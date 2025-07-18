@@ -8,16 +8,17 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/intro-to-slo
   tag: ラーニングセンター
   text: サービスレベル目標入門
-- link: /service_management/service_level_objectives/guide/slo_types_comparison/
-  tag: ドキュメント
-  text: Comparison of Datadog SLO Types
+kind: ガイド
 title: SLO チェックリスト
 ---
 
+<div class="alert alert-info">
+このページの PDF 版は<a href="https://www.datadoghq.com/pdf/SLOChecklist_200619.pdf">こちら</a>よりご覧いただけます。
+</div>
 
 ## はじめに
 
-1. Navigate to the [SLO Manage page][1].
+1. SLO ページを開きます: [Monitors › Service Level Objectives][1]
 
 2. ユーザーの目線から考えてみてください:
 
@@ -32,7 +33,7 @@ title: SLO チェックリスト
 
 #### 応答 / リクエスト
 
-|  Type of SLI |  説明                                                   |
+|              |                                                                |
 | ------------ | -------------------------------------------------------------- |
 | 可用性 | サーバーはリクエストに正常に応答しましたか？          |
 | レイテンシー      | サーバーがリクエストに応答するまでにどれぐらい時間がかかりましたか？ |
@@ -40,7 +41,7 @@ title: SLO チェックリスト
 
 #### Storage
 
-|  Type of SLI |  説明                                 |
+|              |                                              |
 | ------------ | -------------------------------------------- |
 | 可用性 | データにオンデマンドでアクセスできますか？          |
 | レイテンシー      | データの読み書きにどれぐらい時間がかかりますか？ |
@@ -48,44 +49,32 @@ title: SLO チェックリスト
 
 #### パイプライン
 
-| Type of SLI |   説明                                                      |
+|             |                                                                    |
 | ----------- | ------------------------------------------------------------------ |
 | 正確性 | 正しいデータが返されましたか？                                       |
 | 鮮度   | 新しいデータまたは処理された結果が表示されるまでにどれぐらい時間がかかりますか？ |
 
 ### ステップ 2
 
-**Do you require an SLI calculation that is time-based or count-based?**
+**タイムベースまたは計数ベース SLI のどちらが必要ですか？**
 
-The following SLO types are available in Datadog: 
-
-**Metric-based SLOs**
-
-_例: リクエストの 99% は、30 日間で 250 ms 未満で完了する必要があります。_
-
-- Count-based SLI calculation
-- SLI is calculated as the sum of good events divided by the sum of total events
-
-**Monitor-based SLOs**
+**タイムベースの SLI は Datadog モニターを使用します**:
 
 _例: すべてのユーザーリクエストのタイムレイテンシーの 99% は、いずれの 30 日の範囲内でも250 ms 未満で
 ある必要があります。_
 
-- Time-based SLI calculation
-- SLI calculated based on the underlying Monitor’s uptime
-- You can select a single monitor, multiple monitors (up to 20), or a single multi alert monitor with groups
+1. 単一のモニター、
+2. 複数のモニター (最大 20) 、または
+3. 単一のマルチアラートモニターを選択し、特定のモニターグループ (最大20) で
+   SLO 計算に含めるものを選びます
 
 新しいモニターの作成が必要な場合は [Monitor create][2] ページを開きます。
 
-**Time Slice SLOs**
+**計数ベースの SLI は Datadog アカウント内のメトリクスを使用します。モニターは必要ありません**:
 
-_例: すべてのユーザーリクエストのタイムレイテンシーの 99% は、いずれの 30 日の範囲内でも250 ms 未満で
-ある必要があります。_
+_例: リクエストの 99% は、30 日間で 250 ms 未満で完了する必要があります。_
 
-- Time-based SLI calculation
-- SLI calculated based on your custom uptime definition using a metric query
-
-## Implement your SLIs
+## SLI の実装
 
 1. [カスタムメトリクス][3] (例: カウンター)
 2. [インテグレーションメトリクス][4] (例: ロードバランサー、HTTP リクエスト)
@@ -94,8 +83,8 @@ _例: すべてのユーザーリクエストのタイムレイテンシーの 9
 
 ## ターゲット目標および時間枠の設定
 
-1. Select your target: `99%`, `99.5%`, `99.9%`, `99.95%`, or any other target value that makes sense for your requirements.
-2. Select your time window: over the last rolling `7`, `30`, or `90 days`
+1. ターゲットを選択します: `99%`、`99.5%`、`99.9%`、`99.95%` から選択するか、要件に合致するものを選びます。
+2. 時間枠を選択します: 過去 `7`、`30` または `90 日間`
 
 ## SLO の名前、説明、タグの追加
 
@@ -111,7 +100,7 @@ _例: すべてのユーザーリクエストのタイムレイテンシーの 9
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/slo/manage
+[1]: https://app.datadoghq.com/slo
 [2]: https://app.datadoghq.com/monitors#create/metric
 [3]: /ja/metrics
 [4]: /ja/integrations

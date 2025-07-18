@@ -10,7 +10,6 @@ assets:
     RapDev InfluxDB System: assets/dashboards/RapDevInfluxDBSystem.json
     RapDev InfluxDB Tasks and Services: assets/dashboards/RapDevInfluxDBTasksandServices.json
   integration:
-    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -21,7 +20,6 @@ assets:
       prefix: rapdev.influxdb.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10292
     source_type_name: RapDev InfluxDB
 author:
   homepage: https://www.rapdev.io
@@ -30,10 +28,9 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- data stores
+- data store
 - マーケットプレイス
 - メトリクス
-custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -42,10 +39,12 @@ integration_id: rapdev-influxdb
 integration_title: InfluxDB
 integration_version: ''
 is_public: true
+kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_influxdb
+oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -67,11 +66,10 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Data Stores
+  - Category::Data Store
   - Category::Marketplace
   - Category::Metrics
   - Offering::Integration
-  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: InfluxDB インスタンスの健全性とアクティビティを監視する
   media:
@@ -90,18 +88,17 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
 
 このインテグレーションは、[InfluxDB][1] v2.0+ の健全性と運用に関するメトリクスを報告します。
 
-### ダッシュボード
+### ダッシュボード  
 
 このインテグレーションでは、**InfluxDB Summary**、**InfluxDB API Statistics**、**InfluxDB System**、**InfluxDB Tasks and Services** という名前の、すぐに使えるダッシュボードをいくつか 提供します。これらのダッシュボードは、インテグレーションによって生成されたメトリクスを表示し、異なるカテゴリーに分割します。
 
-## Agent
+## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 - サポート: support@rapdev.io
 - セールス: sales@rapdev.io
@@ -120,4 +117,4 @@ tile:
 [4]: mailto:support@rapdev.io
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-influxdb" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-influxdb" target="_blank">こちらをクリック</a>してください。

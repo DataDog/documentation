@@ -4,7 +4,6 @@ categories:
 - configuration & deployment
 - network
 - azure
-custom_kind: integration
 dependencies: []
 description: トリガーワークフロー、アクションのレイテンシー、失敗したアクションなどを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_logic_app/
@@ -15,6 +14,7 @@ integration_id: azure-logic-app
 integration_title: Microsoft Azure Logic App
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: azure_logic_app
 public_title: Datadog-Microsoft Azure Logic App インテグレーション
@@ -22,7 +22,6 @@ short_description: トリガーワークフロー、アクションのレイテ�
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Logic App を使用して、開発者はトリガーと一連の手順で目的を明確化するワークフローを設計できます。
@@ -41,14 +40,14 @@ Azure Logic App からメトリクスを取得すると、以下のことがで�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure-logic-app" >}}
+{{< get-metrics-from-git "azure_logic_app" >}}
 
 
 ### イベント
 
 Azure Logic App インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Azure Logic App インテグレーションには、サービスのチェック機能は含まれません。
 

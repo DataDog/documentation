@@ -4,8 +4,7 @@ aliases:
 categories:
 - azure
 - クラウド
-- data stores
-custom_kind: インテグレーション
+- data store
 dependencies: []
 description: Azure DB for MySQL のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_db_for_mysql/
@@ -16,6 +15,7 @@ integration_id: azure-db-for-mysql
 integration_title: Microsoft Azure DB for MySQL
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: azure_db_for_mysql
 public_title: Datadog-Microsoft Azure DB for MySQL インテグレーション
@@ -23,7 +23,6 @@ short_description: Azure DB for MySQL のキーメトリクスを追跡
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Database for MySQL は、サービスとしてエンタープライズ対応のフルマネージド型コミュニティ MySQL データベースを提供します。
@@ -42,14 +41,14 @@ Azure Database for MySQL からメトリクスを取得すると、以下のこ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure-db-for-mysql" >}}
+{{< get-metrics-from-git "azure_db_for_mysql" >}}
 
 
 ### イベント
 
 Azure Database for MySQL インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Azure Database for MySQL インテグレーションには、サービスのチェック機能は含まれません。
 

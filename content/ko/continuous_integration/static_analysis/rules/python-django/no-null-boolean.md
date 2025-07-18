@@ -1,6 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
+kind: 도움말
 title: NullBooleanField를 사용하지 마십시오.
 ---
 ## 메타데이터

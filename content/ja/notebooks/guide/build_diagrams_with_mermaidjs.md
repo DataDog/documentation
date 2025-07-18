@@ -1,5 +1,6 @@
 ---
 disable_toc: false
+kind: ガイド
 title: Mermaid JS で図を構築する
 ---
 

@@ -7,7 +7,6 @@ assets:
   dashboards:
     Reporter: assets/dashboards/reporter_dashboard.json
   integration:
-    auto_install: false
     configuration: {}
     events:
       creates_events: false
@@ -17,7 +16,6 @@ assets:
       prefix: ''
     service_checks:
       metadata_path: service_checks.json
-    source_type_id: 10110
     source_type_name: Reporter
 author:
   homepage: https://www.rapdev.io
@@ -26,8 +24,7 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- marketplace
-custom_kind: インテグレーション
+- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -36,10 +33,12 @@ integration_id: rapdev-reporter
 integration_title: Reporter
 integration_version: ''
 is_public: true
+kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: reporter
+oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -77,7 +76,6 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -102,4 +100,4 @@ Datadog Reporter を使用すると、レポートをスケジュールして、
 *お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-reporter" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-reporter" target="_blank">こちらをクリック</a>してください。

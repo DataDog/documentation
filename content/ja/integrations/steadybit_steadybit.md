@@ -12,9 +12,8 @@ author:
   vendor_id: steadybit
 categories:
 - マーケットプレイス
-- logs-restriction-queries-update-a-restriction-query
+- インシデント
 - テスト
-custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -23,10 +22,12 @@ integration_id: steadybit-steadybit
 integration_title: Steadybit
 integration_version: ''
 is_public: true
+kind: インテグレーション
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: steadybit_steadybit
+oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -75,7 +76,6 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -90,25 +90,18 @@ tile:
 このマーケットプレイス製品では、1 チーム分の[プロフェッショナルプラン][3]ライセンスを提供しています。別のニーズがある場合は、[office@steadybit.com][4] までご連絡いただき、プライベートオファーについてご相談ください。
 
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Steadybit にお問い合わせください。
 
  - メール: [Steadybit Support][7].
 
-## その他の参考資料
-
-お役に立つドキュメント、リンクや記事:
-
-- [Monitor your chaos engineering experiments with Steadybit's offering in the Datadog Marketplace][8]
-
 [1]: https://steadybit.com/?utm_campaign=datadogmarketplace&utm_source=datadog&utm_medium=marketplace-readme
-[2]: https://hub.steadybit.com/extension/com.steadybit.extension_datadog?utm_campaign=datadogmarketplace&utm_source=datadog&utm_medium=marketplace-readme
+[2]: https://hub.steadybit.com/extension/com.github.steadybit.extension_datadog?utm_campaign=datadogmarketplace&utm_source=datadog&utm_medium=marketplace-readme
 [3]: https://steadybit.com/pricing?utm_campaign=datadogmarketplace&utm_source=datadog&utm_medium=marketplace-readme
 [4]: office@steadybit.com
 [5]: https://signup.steadybit.io/?utm_campaign=datadogmarketplace&utm_source=datadog&utm_medium=marketplace-readme
-[6]: https://hub.steadybit.com/extension/com.steadybit.extension_datadog?utm_campaign=datadogmarketplace&utm_source=datadog&utm_medium=marketplace-readme#content-installation
+[6]: https://hub.steadybit.com/extension/com.github.steadybit.extension_datadog?utm_campaign=datadogmarketplace&utm_source=datadog&utm_medium=marketplace-readme#content-installation
 [7]: mailto:support@steadybit.com
-[8]: https://www.datadoghq.com/blog/steadybit-datadog-marketplace/
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/steadybit-steadybit" target="_blank">こちらをクリック</a>してください。

@@ -1,17 +1,9 @@
 ---
 aliases:
 - /ko/network_performance_monitoring/devices/data/
-disable_toc: true
-title: SNMP 메트릭 참조
+kind: 설명서
+title: 수집된 NDM 데이터
 ---
-
-## 이벤트
-
-네트워크 장치 모니터링에는 이벤트가 포함되지 않습니다.
-
-## 서비스 검사
-
-{{< get-service-checks-from-git "snmp" >}}
 
 ## 메트릭
 
@@ -20,5 +12,12 @@ title: SNMP 메트릭 참조
 
 {{< get-metrics-from-git "snmp" >}}
 
+## 이벤트
+
+네트워크 장치 모니터링에는 이벤트가 포함되지 않습니다.
+
+## 서비스 점검
+
+{{< get-service-checks-from-git "snmp" >}}
 
 [1]: http://oidref.com

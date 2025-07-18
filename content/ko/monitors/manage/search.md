@@ -1,5 +1,6 @@
 ---
 description: 패싯 검색을 사용해 모니터 목록을 필터링하세요.
+kind: 설명서
 title: 모니터 검색
 ---
 
@@ -7,8 +8,7 @@ title: 모니터 검색
 
 ## 검색창
 
-간단한 텍스트를 사용하여 모든 모니터 제목과 알림 메시지를 검색하세요. 예를 들어, `*postgresql*`를 검색하면 제목 또는 알림 메시지에서 `postgresql`이 포함된 모든 모니터가 반환됩니다.
-
+모든 모니터 이름과 알림 메시지에 대해 단순한 텍스트를 사용해 검색하세요. 예를 들어 `*postgresql*`을 검색하면 이름이나 알림 메시지에 `postgresql`이 포함된 모든 모니터가 반환됩니다.
 
 검색을 제한하려면 필드 이름을 지정하세요.
 
@@ -19,14 +19,12 @@ title: 모니터 검색
 
 또한, ID를 사용하여 검색할 수 있습니다. 예를 들어 `1234567`을 사용할 수 있습니다. 모니터 ID는 [모니터 상태 페이지][1]에 있습니다.
 
-<div class="alert alert-info">모니터 그룹을 필터링하는 방법은 <a href="/monitors/manage/status/">Monitor Status 페이지</a>에서 자세히 확인하세요.</div>
-
-### 쿼리
+### 질문
 
 부울 연산자(`AND`, `OR`, `NOT`)와 괄호를 사용해 검색 쿼리를 향상하세요. 검색 구문은 [Elasticsearch][2]와 유사하며 다음 예외가 적용됩니다.
 
 * 정규식은 지원되지 않습니다.
-* 단일 문자 와일드카드(`?`)와 일반 와일드카드(`*`) 모두 지원됩니다.
+* 단일 문자의 와일드카드(`?`)는 지원되지 않지만 일반적인 와일드카드(`*`)는 지원됩니다.
 * 근접 검색은 지원되지 않지만 [퍼지][3] 연산자는 지원됩니다.
 * 범위는 지원되지 않습니다.
 * 부스팅(Boosting)은 지원되지 않습니다.
@@ -49,7 +47,7 @@ title: 모니터 검색
 | 유형         | Datadog [모니터 유형][4]                                                                   |
 | 생성자      | 모니터 생성자                                                                      |
 | 서비스      | 양식 `service:<VALUE>`에서 사용자가 사용한 서비스 태그입니다.                                         |
-| 태그          | 모니터에 할당된 [태그][5]                                               |
+| 태그          | 모니터에 할당된 [태그](#monitor-tags)                                               |
 | Env          | 양식 `env:<VALUE>`에서 사용자가 사용한 환경 태그입니다.                                         |
 | 범위        | 검색 태그가 모니터 쿼리의 `from`필드에 나와 있습니다.                                   |
 | 메트릭/점검 | 모니터링되는 메트릭 또는 서비스                                                      |
@@ -92,8 +90,7 @@ UI에서 작업을 완료하거나 다른 설정을 포함하는 모니터 관�
 * 현재 파라미터를 사용해 기본 보기를 **업데이트**합니다.
 * 완전한 재시작을 위해 기본 보기를 Datadog 기본값으로 **재설정**합니다.
 
-[1]: /ko/monitors/status/#properties
+[1]: /ko/monitors/manage/status/#properties
 [2]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax
 [3]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
 [4]: /ko/monitors/
-[5]: /ko/monitors/manage/#monitor-tags

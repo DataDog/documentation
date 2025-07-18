@@ -3,6 +3,7 @@ further_reading:
 - link: https://docs.datadoghq.com/api/latest/service-accounts/
   tag: ドキュメント
   text: サービスアカウント API リファレンス
+kind: documentation
 title: サービスアカウント
 ---
 
@@ -35,7 +36,7 @@ UI でサービスアカウントにアクセスするには
 - 作成日および最終修正日
 - ロール
 - アプリケーションキー
-- 権限
+- アクセス許可
 
 ### サービスアカウントを作成する
 
@@ -54,11 +55,9 @@ Datadog ユーザーのメールアドレスとは異なり、サービスアカ
 
 1. サイドパネルで、サービスアカウント名の横にある **Edit** をクリックします。ダイアログボックスが表示されます。
 2. 変更したいフィールドを更新します。名前、メールアドレス、ステータス、ロールを編集することができます。
-3. **Save** をクリックします。
+3. **保存**をクリックします。
 
-To disable a service account, the user must have the User Manage Access permission in addition to Service Account Write.
-
-To disable a service account, follow the previous procedure to edit the service account and set the status to **Disabled**.
+サービスアカウントを無効にするには、上記の手順でサービスアカウントを編集し、ステータスを **Disabled** に設定します。
 
 ### アプリケーションキーの作成・失効
 
@@ -82,7 +81,7 @@ Datadog API でサービスアカウントを利用する場合は、[サービ�
 
 サービスアカウントのアプリケーションキーは、作成直後に一度だけ閲覧することができます。アプリケーションキーへのアクセスを制限することで、他のユーザーがそのキーにアクセスしたときに発生する可能性のある問題を防ぐことができます。サービスアカウントのキーを紛失したり、忘れたりした場合は、キーを失効させて新しいキーを作成してください。
 
-## 権限
+## アクセス許可
 
 サービスアカウントを作成することで、自分に代わって Datadog と対話するアクターが作成されます。サービスアカウントページでの機能は、Datadog のロールと権限によって異なります。
 
@@ -94,12 +93,12 @@ Datadog API でサービスアカウントを利用する場合は、[サービ�
 ## 通知
 
 Datadog は、以下のアクションが発生すると、サービスアカウントに関連付けられたメールアドレスに通知を送信します。
-- アプリケーションキーを作成
+- アプリケーションキーの作成
 - アプリケーションキーの失効
 - サービスアカウントの無効化
 
 
-## 参考資料
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

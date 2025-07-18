@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ja/graphing/functions/arithmetic/
+kind: documentation
 title: 算術演算
 ---
 

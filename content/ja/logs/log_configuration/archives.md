@@ -17,6 +17,7 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: Documentation
   text: Logging without Limits* について
+kind: documentation
 title: ログアーカイブ
 ---
 
@@ -24,29 +25,32 @@ title: ログアーカイブ
 
 Datadog アカウントを構成して、独自のクラウドストレージシステムへ収集されたすべてのログ ([インデックス化][1]の有無にかかわらず) を転送します。ストレージに最適化されたアーカイブにログを長期間保管し、コンプライアンス要件を満たすことができると同時に、アドホック調査のための監査適合性を[リハイドレート][2]で維持できます。
 
-{{< img src="logs/archives/log_forwarding_archives_122024.png" alt="Log Forwarding ページの Archives タブ" style="width:100%;">}}
+{{< img src="logs/archives/log_forwarding_archives_tab.png" alt="Log Forwarding ページの Archives タブ" style="width:100%;">}}
 
-[**Log Forwarding** ページ][3]に移動して、取り込んだログを自分のクラウドホストのストレージバケットに転送するためのアーカイブをセットアップします。
+[**Log Forwarding** ページ][14]に移動して、取り込んだログをクラウドホストのストレージバケットに転送するためのアーカイブをセットアップします。
 
 1. まだの場合は、お使いのクラウドプロバイダーと Datadogの[インテグレーション](#set-up-an-integration)を設定してください。
 2. [ストレージバケット](#create-a-storage-bucket)を作成します。
-3. そのアーカイブへの `read` および `write` [権限](#set-permissions)を設定します。
+3. そのアーカイブへの `read` および `write` [許可](#set-permissions)を設定します。
 4. アーカイブへ、およびアーカイブから[ログをルーティング](#route-your-logs-to-a-bucket)します。
 5. 暗号化、ストレージクラス、タグなどの[詳細設定](#advanced-settings)を構成します。
 6. 設定を[検証](#validation)し、Datadog で検出される可能性のある構成ミスがないか確認します。
 
-環境から直接ストレージに最適化されたアーカイブにログをルーティングしたい場合は、[Observability Pipelines でログをアーカイブする][4]方法を参照してください。
+## ログアーカイブの構成
 
-## ログアーカイブを構成します
-
-### インテグレーションを設定します
+### インテグレーションを設定
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">AWS Role Delegation は、Datadog for Government site でサポートされていません。アクセスキーを使用する必要があります。</div>
+{{< /site-region >}}
+
 まだ構成されていない場合は、S3 バケットを保持する AWS アカウントの [AWS インテグレーション][1]をセットアップします。
-   * 一般的なケースでは、これには、Datadog が AWS S3 との統合に使用できるロールの作成が含まれます。
-   * 特に AWS China アカウントの場合は、ロール委任の代わりにアクセスキーを使用します。
+
+* 一般的なケースでは、これには、Datadog が AWS S3 との統合に使用できるロールの作成が含まれます。
+* 特に AWS GovCloud または China アカウントの場合は、ロール委任の代わりにアクセスキーを使用します。
 
 [1]: /ja/integrations/amazon_web_services/?tab=automaticcloudformation#setup
 {{% /tab %}}
@@ -71,33 +75,28 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 
 ### ストレージバケットを作成
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">アーカイブへのログの送信は、Datadog GovCloud 環境の外部であり、Datadog の管理外です。Datadog は、Datadog GovCloud 環境から出たログについて、FedRAMP、DoD Impact Levels、ITAR、輸出コンプライアンス、データレジデンシー、または当該ログに適用される類似の規制に関連するユーザーの義務または要件を含むが、これらに限定されることなく、一切の責任を負わないものとします。</div>
-{{< /site-region >}}
-
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
 [AWS コンソール][1]にアクセスし、アーカイブを転送する [S3 バケットを作成][2]します。
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning"> Datadog アーカイブは、仮想ホスト型アドレッシングに依存する S3 FIPS エンドポイントとの統合時、バケット名にドット (.) を含む場合はサポートされません。詳細は AWS のドキュメント、<a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> および <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS バーチャルホスティング</a>をご参照ください。</div>
-{{< /site-region >}}
-
 **注:**
 
-- バケットを公開読み取り可能にしないでください。
-- [US1、US3、US5 サイト][3]については、地域間データ転送料とクラウドストレージコストへの影響について、[AWS Pricing][4] を参照してください。地域間のデータ転送料を管理するために、ストレージバケットを `us-east-1` に作成することを検討してください。
+- バケットは一般ユーザーが読み取り可能になるよう設定してください。
+- まれに最後のデータを書き換える必要があるため、[オブジェクトロック][3]を設定しないでください (通常はタイムアウト)。
+
+- [US1、US3、US5 サイト][4]の場合、地域間データ転送料とクラウドストレージコストへの影響については、[AWS Pricing][5] を参照してください。地域間のデータ転送料を管理するために、ストレージバケットを `us-east-1` に作成することを検討してください。
 
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
-[3]: /ja/getting_started/site/
-[4]: https://aws.amazon.com/s3/pricing/
+[3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-overview.html
+[4]: /ja/getting_started/site/
+[5]: https://aws.amazon.com/s3/pricing/
 {{% /tab %}}
 
 {{% tab "Azure Storage" %}}
 
-* [Azure ポータル][1]にアクセスし、アーカイブを転送する[ストレージアカウントを作成][2]します。標準パフォーマンスまたは **Block blobs** プレミアムアカウントタイプを選択し、**hot** または **cool** アクセス層を選択します。
+* [Azure ポータル][1]にアクセスし、アーカイブを転送する[ストレージアカウントを作成][2]します。ストレージアカウントの名前を指定し、標準パフォーマンスまたは **Block blob** プレミアムアカウントタイプのいずれかを選択し、**hot** または **cool** アクセス層を選択します。
 * そのストレージアカウントに **container** サービスを作成します。Datadog アーカイブページに追加する必要があるため、コンテナ名をメモしてください。
 
 **注:** まれに最後のデータを書き換える必要があるため、[不変性ポリシー][3]を設定しないでください (通常はタイムアウト)。
@@ -109,7 +108,7 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 
 {{% tab "Google Cloud Storage" %}}
 
-[Google Cloud アカウント][1]にアクセスし、アーカイブを転送するための [GCS バケットを作成][2]します。**Choose how to control access to objects** セクションで、**Set object-level and bucket-level permissions** を選択してください。
+[Google Cloud アカウント][1]にアクセスし、アーカイブを転送する [GCS バケットを作成][2]します。「**Choose how to control access to objects**」で、「**Set object-level and bucket-level permissions**」を選択します。
 
 **注:** まれに最後のデータを書き換える必要があるため、[保持ポリシー][3]を追加しないでください (通常はタイムアウト)。
 
@@ -119,9 +118,9 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 {{% /tab %}}
 {{< /tabs >}}
 
-### 権限を設定する
+### アクセス許可を設定
 
-[`logs_write_archive` 権限][5]のある Datadog ユーザーだけがログアーカイブ構成を作成、変更、または削除できます。
+[`logs_write_archive` 権限][3]のある Datadog ユーザーだけがログアーカイブ構成を作成、変更、または削除できます。
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
@@ -153,8 +152,8 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
      ]
    }
    ```
-     * `GetObject` および `ListBucket` の権限を設定すると、[アーカイブからのリハイドレート][2]が可能になります。
-     * アーカイブをアップロードするには、`PutObject` 権限で十分です。
+     * `GetObject` および `ListBucket` アクセス許可は、[アーカイブからリハイドレート][2]を可能にします。
+     * アーカイブのアップロードには、`PutObject` アクセス許可で十分です。
      * `s3:PutObject` と `s3:GetObject` アクションのリソース値は `/*` で終わっていることを確認してください。これらの権限はバケット内のオブジェクトに適用されるからです。
 
 2. バケット名を編集します。
@@ -172,7 +171,7 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
-1. Datadog アプリに、ストレージアカウントへの書き込みおよびリハイドレートを行うための権限を付与します。
+1. Datadog アプリに、ストレージアカウントへ書き込み、ここからリハイドレートするための許可を与えます。
 2. [ストレージアカウントのページ][1]でストレージアカウントを選択し、**Access Control (IAM)** で **Add -> Add Role Assignment** を選択します。
 3. Role に **Storage Blob Data Contributor** を入力し、Azure と統合するために作成した Datadog アプリを選択して、保存します。
 
@@ -182,7 +181,7 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 {{% /tab %}}
 {{% tab "Google Cloud Storage" %}}
 
-1. Datadog Google Cloud サービスアカウントに、アーカイブをバケットに書き込むための権限を付与します。
+1. Datadog Google Cloud サービスアカウントに、バケットへアーカイブを書き込むための許可を与えます。
 2. [Google Cloud IAM Admin ページ][1]から Datadog の Google Cloud サービスアカウントのプリンシパルを選択し、**Edit principal** を選択します。
 3. **ADD ANOTHER ROLE** をクリックし、**Storage Object Admin** ロールを選択し、保存します。
 
@@ -194,30 +193,70 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 
 ### ログをバケットにルーティング
 
-[Log Forwarding ページ][6]に移動し、**Archives** タブで **Add a new archive** を選択します。
+[Log Forwarding ページ][5]に移動し、**Archives** タブで **Add a new archive** を選択します。
 
-**注:**
-* [`logs_write_archive` 権限][5]のある Datadog ユーザーだけがこの手順と次の手順を完了させることができます。
-* Azure Blob Storage へのログのアーカイブには、App Registration が必要です。[Azure インテグレーションページ][7]の手順を参照し、ドキュメントページの右側にある「サイト」を「US」に設定してください。アーカイブ目的で作成された App Registration は、"Storage Blob Data Contributor" ロールのみが必要です。ストレージバケットが Datadog Resource を通じて監視されているサブスクリプションにある場合、App Registration が冗長である旨の警告が表示されます。この警告は無視することができます。
-* バケットでネットワークアクセスを特定の IP に制限している場合は、{{< region-param key="ip_ranges_url" link="true" text="IP 範囲リスト">}}から Webhook の IP を許可リストに追加してください。
-* **US1-FED サイト**の場合、Datadog を構成して、ログを Datadog GovCloud 環境外の宛先に送信することができます。Datadog は、Datadog GovCloud 環境を離れたログに対して一切の責任を負いません。また、これらのログが GovCloud 環境を離れた後に適用される FedRAMP、DoD 影響レベル、ITAR、輸出コンプライアンス、データ居住地、またはそれに類する規制に関する義務や要件についても、Datadog は一切の責任を負いません。
+**注:** 
+* [`logs_write_archive` 権限][3]のある Datadog ユーザーだけがこの手順と次の手順を完了させることができます。
+* Azure Blob Storage へのログのアーカイブには、App Registration が必要です。[Azure インテグレーションページ][6]の手順を参照し、ドキュメントページの右側にある「サイト」を「US」に設定してください。アーカイブ目的で作成された App Registration は、"Storage Blob Data Contributor" ロールのみが必要です。ストレージバケットが Datadog Resource を通じて監視されているサブスクリプションにある場合、App Registration が冗長である旨の警告が表示されます。この警告は無視することができます。
+* バケットでネットワークアクセスを特定の IP に制限している場合は、[IP 範囲リスト][4]から Webhook の IP を許可リストに追加してください。
 
-| サービス                  | ステップ                                                                                                                                                      |
-|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Amazon S3**               | - S3 バケットに適した AWS アカウントとロールの組み合わせを選択します。<br>- バケット名を入力します。<br>**オプション**: ログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力できます。 |
-| **Azure Storage**        | - **Azure Storage** アーカイブタイプを選択し、ストレージアカウントで Storage Blob Data Contributor ロールのある Datadog アプリ用の Azure テナントとクライアントを選択します。<br>- ストレージアカウント名とアーカイブのコンテナ名を入力します。<br>**オプション**: ログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力できます。 |
-| **Google Cloud Storage** | - **Google Cloud Storage** のアーカイブタイプを選択し、ストレージバケットに書き込む権限を持つ GCS サービスアカウントを選択します。<br>- バケット名を入力します。<br>**オプション**: ログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力できます。 |
+{{< tabs >}}
+{{% tab "AWS S3" %}}
+
+S3 バケットに適した AWS アカウントとロールの組み合わせを選択します。
+
+バケット名を入力します。**任意**: ログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力します。
+
+{{< img src="logs/archives/logs_archive_aws_setup.png" alt="Datadog で S3 バケットの情報を設定" style="width:75%;">}}
+
+{{% /tab %}}
+{{% tab "Azure Storage" %}}
+
+**Azure Storage** アーカイブタイプを選択し、ストレージアカウントで Storage Blob Data Contributor ロールのある Datadog アプリ用の Azure テナントとクライアントを選択します。
+
+ストレージアカウント名とアーカイブのコンテナ名を入力します。**任意**: ログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力します。
+
+{{< img src="logs/archives/logs_archive_azure_setup.png" alt="Datadog で Azure ストレージアカウントの情報を設定" style="width:75%;">}}
+
+
+{{% /tab %}}
+{{% tab "Google Cloud Storage" %}}
+
+**GCS** のアーカイブタイプを選択し、ストレージバケットに書き込む権限を持つ GCS サービスアカウントを選択します。バケット名を入力します。
+
+バケット名を入力します。**任意**: ログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力します。
+
+{{< img src="logs/archives/logs_archive_gcp_setup.png" alt="Datadog で Azure ストレージアカウントの情報を設定" style="width:75%;">}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### 高度な設定
 
-{{< img src="/logs/archives/log_archives_advanced_settings.png" alt="オプションのタグを追加し、最大スキャンサイズを定義するための高度な設定" style="width:100%;" >}}
+#### Datadog のアクセス許可
+
+デフォルト:
+
+* すべての Datadog 管理者ユーザーは、アーカイブの作成、編集、並べ替えができます。詳しくは、[複数アーカイブの構成](#multiple-archives)を参照してください。
+* すべての Datadog 監理者および標準ユーザーは、アーカイブからリハイドレーションできます。
+* Datadog の読み取り専用ユーザーを含むすべてのユーザーは、リハイドレーションされたログにアクセスできます。
+
+オプションで、コンフィギュレーションステップを使用し、アーカイブにロールを割り当て、以下を実行できるユーザーを設定できます。
+
+* そのアーカイブの構成を編集します。[`logs_write_archive`][7] 権限を参照してください。
+* そのアーカイブからリハイドレートします。[`logs_read_archives`][8] と [`logs_write_historical_view`][9] 権限を参照してください。
+* レガシーな [`read_index_data` 権限][10]を使用する場合に、リハイドレートされたログにアクセスします。
+
+{{< img src="logs/archives/archive_restriction.png" alt="アーカイブおよびリハイドレート済みログへのアクセスを制限" style="width:75%;">}}
 
 #### Datadog タグ
 
 以下のためにこのオプションの構成ステップを使用します。
 
 * アーカイブ内のすべてのログタグを含める (デフォルトでは、すべての新規アーカイブに有効化されています)。**注**: 結果のアーカイブサイズが増大します。
-* リハイドレートされたログに、制限クエリポリシーに従ってタグを追加します。[`logs_read_data`][13] 権限を参照してください。
+* リハイドレートされたログに、制限クエリポリシーに従ってタグを追加します。[`logs_read_data`][11] 権限を参照してください。
+
+{{< img src="logs/archives/tags_in_out.png" alt="アーカイブタグの構成" style="width:75%;">}}
 
 #### 最大スキャンサイズを定義する
 
@@ -225,18 +264,8 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 
 最大スキャンサイズが定義されているアーカイブの場合、すべてのユーザーは、リハイドレートを開始する前にスキャンサイズを推定する必要があります。推定されたスキャンサイズがそのアーカイブで許可されているものより大きい場合、ユーザーはリハイドレートを要求する時間範囲を狭めなければなりません。時間範囲を減らすと、スキャンサイズが小さくなり、ユーザーがリハイドレートを開始できるようになります。
 
-{{< site-region region="us3" >}}
-#### ファイアウォールルール
+{{< img src="logs/archives/max_scan_size.png" alt="アーカイブの最大スキャンサイズを設定する" style="width:75%;">}}
 
-{{< tabs >}}
-{{% tab "Azure ストレージ" %}}
-
-ファイアウォールルールはサポートされていません。
-
-{{% /tab %}}
-{{< /tabs >}}
-
-{{< /site-region >}}
 #### ストレージクラス
 
 {{< tabs >}}
@@ -250,13 +279,11 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 * S3 Standard-IA
 * S3 One Zone-IA
 * S3 Glacier Instant Retrieval
-* S3 Intelligent-Tiering、[オプションの非同期アーカイブアクセス階層][3]が両方とも無効化されている場合のみ。
 
 他のストレージクラスにあるアーカイブからリハイドレートする場合は、まず上記のサポートされているストレージクラスのいずれかに移動させる必要があります。
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 [2]: /ja/logs/archives/rehydrating/
-[3]: https://aws.amazon.com/s3/storage-classes/intelligent-tiering/
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
@@ -346,7 +373,7 @@ S3 バケットが SSE-S3 で暗号化されていることを確認するには
 
 3. S3 バケットの **Properties** タブに移動し、**Default Encryption** を選択します。"AWS-KMS" オプション、CMK ARN の順に選択して保存します。
 
-既存の KMS キーに変更を加える場合は、[Datadog サポート][3]にお問い合わせください。
+既存の KSM キーに変更を加える場合は、[Datadog サポート][3]にお問い合わせください。
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
@@ -357,15 +384,15 @@ S3 バケットが SSE-S3 で暗号化されていることを確認するには
 
 ### 検証
 
-Datadog アカウントでアーカイブ設定が正常に構成された時点から、処理パイプラインは Datadog に取り込まれたすべてのログを加工し始めます。その後アーカイブに転送されます。
+Datadog アカウントでアーカイブ設定が正常に構成された時点から、処理パイプラインは Datadog が収集したすべてのログを加工し始めます。その後アーカイブに転送されます。
 
 ただし、アーカイブの構成を作成または更新した後、次のアーカイブのアップロードが試行されるまでに数分かかることがあります。アーカイブがアップロードされる頻度は、さまざまです。アーカイブが Datadog アカウントから正常にアップロードされていることを確認するために、**15 分後にストレージバケットを再確認**してください。
 
-その後、アーカイブがまだ保留状態である場合、包含フィルターを確認して、クエリが有効で、[Live Tail][14] のログイベントに一致することを確認します。設定や権限の意図しない変更により、Datadog が外部アーカイブへのログのアップロードに失敗した場合、構成ページで該当する Log Archive がハイライトされます。
+その後、アーカイブがまだ保留状態である場合、包含フィルターを確認して、クエリが有効で、[Live Tail][12] のログイベントに一致することを確認します。設定や権限の意図しない変更により、Datadog が外部アーカイブへのログのアップロードに失敗した場合、構成ページで該当する Log Archive がハイライトされます。
 
 {{< img src="logs/archives/archive_errors_details.png" alt="アーカイブが正しく設定されているか確認する" style="width:100%;">}}
 
-アーカイブにカーソルを合わせると、エラーの詳細と問題を解決するためのアクションが表示されます。また、[イベントエクスプローラー][15]にイベントが生成されます。これらのイベントに対するモニターを作成することで、障害を迅速に検出し、修復することができます。
+アーカイブにカーソルを合わせると、エラーの詳細と問題を解決するためのアクションが表示されます。また、[イベントエクスプローラー][13]にイベントが生成されます。これらのイベントに対するモニターを作成することで、障害を迅速に検出し、修復することができます。
 
 ## 複数のアーカイブ
 
@@ -411,16 +438,15 @@ Datadog がストレージバケットに転送するログアーカイブは、
 
 [1]: /ja/logs/indexes/#exclusion-filters
 [2]: /ja/logs/archives/rehydrating/
-[3]: https://app.datadoghq.com/logs/pipelines/log-forwarding
-[4]: /ja/observability_pipelines/archive_logs/
-[5]: /ja/account_management/rbac/permissions/?tab=ui#logs_write_archives
-[6]: https://app.datadoghq.com/logs/pipelines/archives
-[7]: /ja/integrations/azure/
-[8]: https://ip-ranges.datadoghq.com/
-[9]: /ja/account_management/rbac/permissions#logs_write_archives
-[10]: /ja/account_management/rbac/permissions#logs_read_archives
-[11]: /ja/account_management/rbac/permissions#logs_write_historical_view
-[12]: /ja/account_management/rbac/permissions#logs_read_index_data
-[13]: /ja/account_management/rbac/permissions#logs_read_data
-[14]: /ja/logs/explorer/live_tail/
-[15]: /ja/service_management/events/explorer/
+[3]: /ja/account_management/rbac/permissions/?tab=ui#logs_write_archives
+[4]: https://ip-ranges.datadoghq.com/
+[5]: https://app.datadoghq.com/logs/pipelines/archives
+[6]: /ja/integrations/azure/
+[7]: /ja/account_management/rbac/permissions#logs_write_archives
+[8]: /ja/account_management/rbac/permissions#logs_read_archives
+[9]: /ja/account_management/rbac/permissions#logs_write_historical_view
+[10]: /ja/account_management/rbac/permissions#logs_read_index_data
+[11]: /ja/account_management/rbac/permissions#logs_read_data
+[12]: /ja/logs/explorer/live_tail/
+[13]: /ja/service_management/events/explorer/
+[14]: https://app.datadoghq.com/logs/pipelines/log-forwarding

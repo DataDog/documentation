@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ja/monitors/guide/as-count-monitor-evaluation
+kind: ガイド
 title: モニター評価での as_count()
 ---
 

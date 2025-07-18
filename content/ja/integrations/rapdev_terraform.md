@@ -7,7 +7,6 @@ assets:
   dashboards:
     RapDev Terraform Dashboard: assets/dashboards/rapdev_terraform_overview.json
   integration:
-    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -18,7 +17,6 @@ assets:
       prefix: rapdev.terraform.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10193
     source_type_name: RapDev Terraform
   logs: {}
 author:
@@ -31,7 +29,6 @@ categories:
 - 構成 & デプロイ
 - developer tools
 - マーケットプレイス
-custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -40,10 +37,12 @@ integration_id: rapdev-terraform
 integration_title: Terraform
 integration_version: ''
 is_public: true
+kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_terraform
+oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -66,18 +65,11 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: terraform アカウントと失敗した実行を監視する
   media:
-  - caption: Terraform の組織とワークスペースの実行
-    image_url: images/1.jpg
-    media_type: image
-  - caption: Terraform の組織トークンと権限
-    image_url: images/2.jpg
-    media_type: image
-  - caption: Terraform の権限監査と Agent
-    image_url: images/3.jpg
+  - caption: Terraform ダッシュボード
+    image_url: images/terraform_dashboard.png
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
@@ -85,14 +77,13 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
 
 Terraform とのインテグレーションにより、組織は Terraform のアカウントをアクティブに監視し、その動作状況や使用頻度をよりよく理解することができます。このインテグレーションはさらに権限の監査も提供します。
 
-### ダッシュボード
+### ダッシュボード  
 
 1. RapDev Terraform ダッシュボード
 
@@ -114,4 +105,4 @@ Terraform とのインテグレーションにより、組織は Terraform の�
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-terraform" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-terraform" target="_blank">こちらをクリック</a>してください。

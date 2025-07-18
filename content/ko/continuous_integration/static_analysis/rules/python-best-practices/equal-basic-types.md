@@ -1,6 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
+kind: 도움말
 title: equal을 사용할 때 기본 유형이 일치하는지 확인하기
 ---
 ## 메타데이터

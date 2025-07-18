@@ -3,7 +3,6 @@ app_id: go-expvar
 app_uuid: cac5ebe3-fa36-49f7-93c5-22116c745e80
 assets:
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -14,7 +13,6 @@ assets:
       prefix: go_expvar.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 77
     source_type_name: Go Expvar
 author:
   homepage: https://www.datadoghq.com
@@ -23,7 +21,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - languages
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/go_expvar/README.md
 display_on_public_website: true
@@ -31,10 +28,12 @@ draft: false
 git_integration_title: go_expvar
 integration_id: go-expvar
 integration_title: Go-Expvar
-integration_version: 4.1.0
+integration_version: 2.2.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: go_expvar
+oauth: {}
 public_title: Go-Expvar
 short_description: Go サービスから expvar で計測されたメトリクスとメモリ統計を収集
 supported_os:
@@ -48,19 +47,14 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::言語
-  - Offering::Integration
   configuration: README.md#Setup
   description: Go サービスから expvar で計測されたメトリクスとメモリ統計を収集
   media: []
   overview: README.md#Overview
-  resources:
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/instrument-go-apps-expvar-datadog
   support: README.md#Support
   title: Go-Expvar
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Go グラフ][1]
@@ -77,18 +71,18 @@ Go サービスのメモリ使用量を追跡し、Go の expvar パッケージ
 
 Go Expvar チェックは Agent にパッケージ化されているため、メトリクスを収集するには、Go サービスを実行している場所に [Agent をインストール][3]します。
 
-### 構成
+### コンフィギュレーション
 
 #### サービスの準備
 
 Go サービスで [expvar パッケージ][4]をまだ使用していない場合は、これをインポートします (`import "expvar"`)。expvar を使用して独自のメトリクスを計測しない場合 (サービスのメモリメトリクスのみを収集する場合) は、空の識別子を使用してパッケージをインポートします (`import _ "expvar"`)。サービスがまだ (http パッケージを使用して) HTTP リクエストをリスニングしていない場合は、ローカルで Datadog Agent のみを[リスニングするように設定][5]します。
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### Agent の接続
 
@@ -107,7 +101,7 @@ Go サービスで [expvar パッケージ][4]をまだ使用していない場�
 [5]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
 [6]: https://docs.datadoghq.com/ja/help/
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -115,9 +109,9 @@ Go サービスで [expvar パッケージ][4]をまだ使用していない場�
 
 | パラメーター            | 値                                    |
 | -------------------- | ---------------------------------------- |
-| `<INTEGRATION_NAME>` | `go_expvar`                              |
-| `<INIT_CONFIG>`      | 空白または `{}`                            |
-| `<INSTANCE_CONFIG>`  | `{"expvar_url": "http://%%host%%:8080"}` |
+| `<インテグレーション名>` | `go_expvar`                              |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                            |
+| `<インスタンスコンフィギュレーション>`  | `{"expvar_url": "http://%%host%%:8080"}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
@@ -130,20 +124,20 @@ Go サービスで [expvar パッケージ][4]をまだ使用していない場�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "go-expvar" >}}
+{{< get-metrics-from-git "go_expvar" >}}
 
 
 ### イベント
 
 Go-Expvar チェックには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Go-Expvar チェックには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
 ## その他の参考資料
 
@@ -152,7 +146,7 @@ Go-Expvar チェックには、サービスのチェック機能は含まれま�
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/go_expvar/images/go_graph.png
 [2]: https://github.com/DataDog/datadog-go
-[3]: https://app.datadoghq.com/account/settings/agent/latest
+[3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://golang.org/pkg/expvar
 [5]: https://golang.org/pkg/net/http/#ListenAndServe
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

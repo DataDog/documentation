@@ -1,20 +1,20 @@
 ---
 categories:
-- aws
+- AWS
 - クラウド
 - ログの収集
-- apm
-custom_kind: インテグレーション
+- モバイル
 dependencies: []
 description: Amazon Cognito のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_cognito/
 draft: false
 git_integration_title: amazon_cognito
 has_logo: true
-integration_id: ''
+integration_id: amazon-cognito
 integration_title: Amazon Cognito
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_cognito
 public_title: Datadog-Amazon Cognito インテグレーション
@@ -22,7 +22,6 @@ short_description: Amazon Cognito のキーメトリクスを追跡
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Cognito は、ユーザーの一意 ID の作成、ID プロバイダーによるユーザー ID の認証、AWS Cloud へのモバイルユーザーデータの保存を行うことができるサービスです。
@@ -42,7 +41,7 @@ Amazon Cognito は、ユーザーの一意 ID の作成、ID プロバイダー�
 
 **注**: AWS で Advanced Security を有効にする必要があります。[User Pool に Advanced Security][4] を追加するには、AWS のドキュメントを参照してください。
 
-### ログ収集
+### ログの収集
 
 #### ログの有効化
 
@@ -63,14 +62,14 @@ Amazon Cognito から S3 バケットまたは CloudWatch のいずれかにロ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-cognito" >}}
+{{< get-metrics-from-git "amazon_cognito" >}}
 
 
 ### イベント
 
 Amazon Cognito インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Amazon Cognito インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -83,7 +82,7 @@ Amazon Cognito インテグレーションには、サービスのチェック�
 [3]: https://app.datadoghq.com/integrations/amazon-cognito
 [4]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
 [5]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
-[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_cognito/amazon_cognito_metadata.csv
 [9]: https://docs.datadoghq.com/ja/help/

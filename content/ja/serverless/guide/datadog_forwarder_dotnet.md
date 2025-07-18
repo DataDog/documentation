@@ -1,4 +1,5 @@
 ---
+kind: ガイド
 title: Datadog Forwarder を使用した .NET サーバーレスアプリケーションのインスツルメンテーション
 ---
 ## 概要

@@ -2,7 +2,6 @@
 categories:
 - 構成 & デプロイ
 - コンテナ
-custom_kind: integration
 dependencies: []
 description: Datadog を使用した Docker メトリクスの監視
 doc_link: https://docs.datadoghq.com/integrations/docker/
@@ -20,6 +19,7 @@ integration_id: docker
 integration_title: Docker
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: '1.0'
 name: docker
 public_title: Datadog-Docker インテグレーション
@@ -27,7 +27,6 @@ short_description: Datadog を使用した Docker メトリクスの監視
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Docker は、ソフトウェアコンテナ内のアプリケーションのデプロイを自動化するオープンソースプロジェクトです。

@@ -5,10 +5,9 @@ app_id: agentil-software-sap-businessobjects
 app_uuid: cac9d777-3bd1-40a1-aef3-28a8141804f1
 assets:
   dashboards:
-    SAP BusinessObjects dashboard: assets/dashboards/agentil_software_sap_businessobjects_system.json
-    SAP BusinessObjects global overview: assets/dashboards/agentil_software_sap_businessobjects_global_overview.json
+    SAP BusinessObjects overview: assets/dashboards/agentil_software_sap_businessobjects_global_overview.json
+    SAP BusinessObjects system dashboard: assets/dashboards/agentil_software_sap_businessobjects_system.json
   integration:
-    auto_install: false
     configuration: {}
     events:
       creates_events: true
@@ -18,7 +17,6 @@ assets:
       prefix: agentil_software
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10252
     source_type_name: AGENTIL Software SAP BusinessObjects
 author:
   homepage: https://www.agentil-software.com
@@ -27,9 +25,8 @@ author:
   support_email: support@agentil-software.com
   vendor_id: agentil-software
 categories:
-- marketplace
+- マーケットプレイス
 - sap
-custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -38,10 +35,12 @@ integration_id: agentil-software-sap-businessobjects
 integration_title: SAP BusinessObjects
 integration_version: ''
 is_public: true
+kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: agentil_software_sap_businessobjects
+oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -62,8 +61,6 @@ tile:
   - Category::SAP
   - Offering::Integration
   - Supported OS::Linux
-  - Submitted Data Type::Metrics
-  - Submitted Data Type::Events
   configuration: README.md#Setup
   description: SAP ビジネスオブジェクトシステムの監視
   media:
@@ -79,7 +76,6 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -110,4 +106,4 @@ SAP BusinessObjects インテグレーションは、SAP **BusinessObjects** シ
 
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/agentil-software-sap-businessobjects" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/agentil-software-sap-businessobjects" target="_blank">こちらをクリック</a>してください。

@@ -2,10 +2,7 @@
 app_id: flagsmith
 app_uuid: 0ad66873-2958-4ca5-ae25-ee893b4c6e31
 assets:
-  dashboards:
-    Flagsmith Dashboard: assets/dashboards/flagsmith-dashboard.json
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -15,7 +12,6 @@ assets:
       prefix: flagsmith.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10137
     source_type_name: Flagsmith
 author:
   homepage: https://flagsmith.com/
@@ -25,7 +21,6 @@ author:
 categories:
 - 問題追跡
 - developer tools
-custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/flagsmith/README.md
 display_on_public_website: true
@@ -35,8 +30,10 @@ integration_id: flagsmith
 integration_title: Flagsmith
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: flagsmith
+oauth: {}
 public_title: Flagsmith
 short_description: Flagsmith のフラグ変更イベントが Datadog に表示されます
 supported_os:
@@ -52,6 +49,7 @@ tile:
   - Category::Issue Tracking
   - Category::Developer Tools
   - Offering::UI Extension
+  - Offering::Integration
   configuration: README.md#Setup
   description: Flagsmith のフラグ変更イベントが Datadog に表示されます
   media: []
@@ -60,7 +58,6 @@ tile:
   title: Flagsmith
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -100,7 +97,7 @@ Flagsmith のダッシュボードウィジェットを使用すると、Flagsmi
 
 Flagsmith インテグレーションには、メトリクスは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Flagsmith インテグレーションには、サービスのチェック機能は含まれません。
 

@@ -4,9 +4,6 @@ aliases:
 - /ja/monitors/create/types/event/
 description: Datadog によって収集されたイベントを監視する
 further_reading:
-- link: /service_management/events/
-  tag: ドキュメント
-  text: Event Management Overview
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の設定
@@ -16,14 +13,13 @@ further_reading:
 - link: /monitors/manage/status/
   tag: ドキュメント
   text: モニターステータスを確認
+kind: documentation
 title: イベントモニター
 ---
 
 ## 概要
 
-Datadog automatically creates events from various products including monitors, Watchdog, and Error Tracking. You can also track events generated from the Agent and installed integrations and ingest events from sources, including alert events from third parties, change requests, deployments, configuration changes.
-
-Event monitors alert on ingested events that match a search query, allowing you to focus attention on the events that matter most to your team.
+イベントモニターを使用すると、検索クエリと一致するイベントが発生したときにアラートを生成できます。
 
 ## モニターの作成
 
@@ -43,14 +39,6 @@ Datadog で[イベントモニター][1]を作成するには、**Monitors** > *
     * **Simple alert**: すべてのソースをまとめて集計します。集計値が設定条件を満たすと、1 件のアラートを受け取ります。これは、単一のホストから受け取るメトリクスまたは多くのホストからの合計メトリクスを監視する場合に最適です。通知件数を減らしたい場合にこの方法を選択します。
     * **Multi Alert**: グループパラメーターに従い、複数のアラートを各ソースに適用します (最大 1000 件の一致するグループ)。アラートイベントは、設定された条件を満たすと各グループに生成されます。例えば、`host` でグループ化し、各ホストに対して別々のアラートを受信することができます。
 
-4. Group events by multiple dimensions (optional): 
-
-   All events matching the query are aggregated into groups based on the value of up to four event facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. Dimensions limit depends on the total number of dimensions:
-   * **ファセット 1 個**: 上位値 1000
-   * **ファセット 2 個**: ファセットごとに上位値 30 (最大 900 グループ)
-   * **ファセット 3 個**: ファセットごとに上位値 10 (最大 1000 グループ)
-   * **ファセット 4 個**: ファセットごとに上位値 5 (最大 625 グループ)
-
 ### アラートの条件を設定する
 
 * カウントが `above`、`above or equal to`、`below`、または `below or equal to` の時
@@ -65,7 +53,7 @@ Datadog で[イベントモニター][1]を作成するには、**Monitors** > *
 
 ### 通知
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][5] page.
+**Say what's happening** と **Notify your team** のセクションに関する詳しい説明は、[通知][5] のページを参照してください。
 
 #### イベントテンプレート変数
 
@@ -94,7 +82,7 @@ For detailed instructions on the **Configure notifications and automations** sec
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/event
-[2]: /ja/service_management/events/explorer/searching
+[2]: /ja/service_management/events/explorer/#search-syntax
 [3]: /ja/help/
 [4]: /ja/monitors/configuration/#advanced-alert-conditions
 [5]: /ja/monitors/notify/

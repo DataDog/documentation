@@ -5,7 +5,6 @@ assets:
   dashboards:
     openstack: assets/dashboards/openstack_dashboard.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -18,8 +17,9 @@ assets:
     - stack.sh
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 125
     source_type_name: OpenStack
+  logs:
+    source: openstack
   saved_views:
     openstack_processes: assets/saved_views/openstack_processes.json
 author:
@@ -31,9 +31,6 @@ categories:
 - cloud
 - log collection
 - network
-- provisioning
-- configuration & deployment
-custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openstack/README.md
 display_on_public_website: true
@@ -41,10 +38,12 @@ draft: false
 git_integration_title: openstack
 integration_id: openstack
 integration_title: OpenStack (レガシー)
-integration_version: 4.0.0
+integration_version: 1.13.2
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: openstack
+oauth: {}
 public_title: OpenStack (レガシー)
 short_description: ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡
 supported_os:
@@ -60,34 +59,21 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Category::プロビジョニング
-  - Category::構成 & デプロイ
-  - Submitted Data Type::Metrics
-  - Submitted Data Type::Logs
-  - Offering::Integration
   configuration: README.md#Setup
   description: ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡
   media: []
   overview: README.md#Overview
-  resources:
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/openstack-monitoring-nova
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/install-openstack-in-two-commands
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/openstack-host-aggregates-flavors-availability-zones
   support: README.md#Support
   title: OpenStack (レガシー)
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![OpenStack のデフォルトのダッシュボード][1]
 
 ## 概要
 
-**注**: このインテグレーションは OpenStack v12 以下に限定されます。OpenStack v13 以上からメトリクスを収集する場合は、[OpenStack Controller インテグレーション][2]を使用してください。
+**注**: このインテグレーションは、OpenStack v12 以下 (コンテナ化されていないOpenStack) にのみ適用されます。OpenStack v13+ (コンテナ化された OpenStack) からメトリクスを収集する場合は、[OpenStack Controller インテグレーション][2]を使用してください。
 
 OpenStack サービスからメトリクスをリアルタイムに取得して、以下のことができます。
 
@@ -100,7 +86,7 @@ OpenStack サービスからメトリクスをリアルタイムに取得して�
 
 OpenStack メトリクスをキャプチャするには、ハイパーバイザーを実行しているホストに [Agent をインストール][3]します。
 
-### 構成
+### コンフィギュレーション
 
 #### OpenStack の準備
 
@@ -196,7 +182,7 @@ openstack role add datadog_monitoring \
 
 2. [Agent を再起動します][6]。
 
-##### ログ収集
+##### ログの収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にできます。
 
@@ -230,7 +216,7 @@ openstack role add datadog_monitoring \
 
 OpenStack チェックには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "openstack" >}}
 
 
@@ -248,7 +234,7 @@ OpenStack チェックには、イベントは含まれません。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/openstack/images/openstack_dashboard.png
 [2]: https://docs.datadoghq.com/ja/integrations/openstack_controller
-[3]: https://app.datadoghq.com/account/settings/agent/latest
+[3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [5]: https://github.com/DataDog/integrations-core/blob/master/openstack/datadog_checks/openstack/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

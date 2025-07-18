@@ -4,7 +4,6 @@ categories:
 - containers
 - google cloud
 - log collection
-custom_kind: integration
 dependencies: []
 description: GCE コンテナのリソースの使用状況を監視。
 doc_link: https://docs.datadoghq.com/integrations/google_container_engine/
@@ -15,6 +14,7 @@ integration_id: google-container-engine
 integration_title: Google Container Engine
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: google_container_engine
 public_title: Datadog-Google Container Engine インテグレーション
@@ -22,7 +22,6 @@ short_description: GCE コンテナのリソースの使用状況を監視。
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 <div class="alert alert-warning">
@@ -32,14 +31,14 @@ version: '1.0'
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google-container-engine" >}}
+{{< get-metrics-from-git "google_container_engine" >}}
 
 
 ### イベント
 
 Google Container Engine インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Google Container Engine インテグレーションには、サービスのチェック機能は含まれません。
 

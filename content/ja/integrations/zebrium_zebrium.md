@@ -11,10 +11,9 @@ author:
   support_email: support@zebrium.com
   vendor_id: zebrium
 categories:
-- notifications
+- notification
 - 自動化
 - マーケットプレイス
-custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -23,10 +22,12 @@ integration_id: zebrium-zebrium
 integration_title: Zebrium Root Cause as a Service
 integration_version: ''
 is_public: true
+kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: zebrium_zebrium
+oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -48,7 +49,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Notifications
+  - Category::Notification
   - Category::Automation
   - Category::Marketplace
   - Offering::Software License
@@ -69,15 +70,11 @@ tile:
     image_url: images/Zebrium_Root_Cause_Report_Details.png
     media_type: image
   overview: README.md#Overview
-  resources:
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/find-the-root-cause-faster-with-zebrium/
   support: README.md#Support
   title: Zebrium Root Cause as a Service
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -88,7 +85,7 @@ tile:
 
 Zebrium の使用方法は簡単です。トラブルシューティングを行う際、あちこち調べるのではなく、Datadog のダッシュボードで Zebrium アプリにスクロールし、対応する検出を見るだけでいいのです。
 
-Once you are a Zebrium customer, you can begin using the two points of integration between Zebrium and Datadog: 1) a Zebrium Datadog App with a custom dashboard widget and 2) a Datadog integration that sends in events and metrics from Zebrium. For installation, visit the [Integrations page][4] and search for Zebrium.
+Zebrium のお客様になると、Zebrium と Datadog の 2 点のインテグレーションを使い始めることができます。1) カスタムダッシュボードウィジェットを持つ Zebrium Datadog アプリと、2) Zebrium からイベントやメトリクスを送信するデータインテグレーションです。インストールは、[インテグレーションページ][4]から Zebrium を検索してください。
 
 ## サポート
 
@@ -107,6 +104,5 @@ Once you are a Zebrium customer, you can begin using the two points of integrati
 [3]: https://cloud.zebrium.com
 [4]: https://app.datadoghq.com/integrations
 [5]: https://www.datadoghq.com/blog/find-the-root-cause-faster-with-zebrium/
-
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/zebrium-zebrium" target="_blank">こちらをクリック</a>してください。

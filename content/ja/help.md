@@ -1,5 +1,6 @@
 ---
 title: ヘルプ
+kind: documentation
 customclass: help
 ---
 

@@ -1,12 +1,11 @@
 ---
 categories:
-- クラウド
-- data stores
+- cloud
+- data store
 - aws
-- log collection
-custom_kind: integration
+- ログの収集
 dependencies: []
-description: Amazon DocumentDB のメトリクスとログを監視
+description: AWS DocumentDB のメトリクスとログを監視
 doc_link: https://docs.datadoghq.com/integrations/amazon_documentdb/
 draft: false
 further_reading:
@@ -15,18 +14,18 @@ further_reading:
   text: Amazon DocumentDB のメトリクスとログを Datadog で収集
 git_integration_title: amazon_documentdb
 has_logo: true
-integration_id: ''
+integration_id: amazon-documentdb
 integration_title: Amazon DocumentDB
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_documentdb
 public_title: Datadog-Amazon DocumentDB インテグレーション
-short_description: Amazon DocumentDB のメトリクスとログを監視
+short_description: AWS DocumentDB のメトリクスとログを監視
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon DocumentDB は、MongoDB のワークロードをサポートする、高速で、スケーラブル、高可用性、フルマネージド型のドキュメントデータベースサービスです。
@@ -40,9 +39,9 @@ Amazon DocumentDB は、MongoDB のワークロードをサポートする、高
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `DocumentDB` が有効になっていることを確認します。
-2. [Datadog - Amazon DocumentDB インテグレーション][3]をインストールします。
+2. [Datadog - AWS DocumentDB インテグレーション][3]をインストールします。
 
-### ログ収集
+### ログの収集
 
 #### ログの有効化
 
@@ -58,7 +57,7 @@ Amazon DocumentDB から S3 バケットまたは CloudWatch のいずれかに�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## 収集されるデータ
+## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "amazon_documentdb" >}}
@@ -68,15 +67,15 @@ AWS から取得される各メトリクスには、dbinstanceidentifier、dbclu
 
 ### イベント
 
-Amazon DocumentDB インテグレーションには、イベントは含まれません。
+AWS DocumentDB インテグレーションには、イベントは含まれません。
 
-### サービス チェック
+### サービスのチェック
 
-Amazon DocumentDB インテグレーションには、サービスのチェック機能は含まれません。
+AWS DocumentDB インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料
 
@@ -86,7 +85,7 @@ Amazon DocumentDB インテグレーションには、サービスのチェッ�
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-documentdb
 [4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_documentdb/amazon_documentdb_metadata.csv
 [8]: https://docs.datadoghq.com/ja/help/

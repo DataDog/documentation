@@ -29,17 +29,18 @@ categories:
 - ログの収集
 dependencies: []
 display_on_public_website: true
-draft: true
+draft: false
 git_integration_title: scadamods_kepserver
 integration_id: scadamods-kepserver
 integration_title: ScadaMods Kepserver
 integration_version: ''
 is_public: true
-custom_kind: integration
+kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: scadamods_kepserver
+oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -100,7 +101,7 @@ Scadamods Kepserver インテグレーションは、チャンネル、デバイ
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "scadamods-kepserver" >}}
+{{< get-metrics-from-git "scadamods_kepserver" >}}
 
 
 ### イベント

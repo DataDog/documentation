@@ -1,7 +1,6 @@
 ---
 app_id: rum-javascript
 app_uuid: d2496eee-ced1-4bf2-a85d-b8277b4952cf
-assets: {}
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -11,7 +10,6 @@ categories:
 - 言語
 - メトリクス
 - トレーシング
-custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_javascript/README.md
 display_on_public_website: true
@@ -21,8 +19,10 @@ integration_id: rum-javascript
 integration_title: JavaScript
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: rum_javascript
+oauth: {}
 public_title: JavaScript
 short_description: Datadog RUM を使用した JavaScript アプリケーションの監視とメトリクス生成
 supported_os:
@@ -34,7 +34,6 @@ tile:
   - Category::Metrics
   - Category::Tracing
   - Supported OS::Any
-  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog RUM を使用した JavaScript アプリケーションの監視とメトリクス生成
   media: []
@@ -43,7 +42,6 @@ tile:
   title: JavaScript
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -95,7 +93,7 @@ JavaScript インテグレーションには、サービスのチェック機能
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
-## その他の参考資料
+## その他の参考資料 
 
 お役に立つドキュメント、リンクや記事:
 

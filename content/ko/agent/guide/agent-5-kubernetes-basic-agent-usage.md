@@ -1,11 +1,12 @@
 ---
 aliases:
 - /ko/agent/faq/agent-5-kubernetes-basic-agent-usage
+kind: 가이드
 private: true
 title: Agent v5의 쿠버네티스(Kubernetes) Agent 기본 사용법
 ---
 
-{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" >}}
+{{< img src="integrations/kubernetes/k8sdashboard.png" alt="쿠버네티스 대시보드"  >}}
 
 <div class="alert alert-warning">
 Datadog Agent v5는 최대 쿠버네티스 버전 1.8까지 지원합니다. 최신 버전의 쿠버네티스는 Datadog Agent v6를 사용해야 합니다.
@@ -16,14 +17,13 @@ Datadog Agent v5는 최대 쿠버네티스 버전 1.8까지 지원합니다. 최
 쿠버네티스에서 실시간 메트릭을 받아 다음과 같이 활용할 수 있습니다.
 
 * 쿠버네티스 상태 시각화 및 모니터링
-* Kubernetes 실패 복구 및 이벤트 알림 확인
-
+* 쿠버네티스 실패 복구(failover) 및 이벤트 알림 확인
 
 쿠버네티스의 경우, [Agent를 DaemonSet][1]로 실행하시길 권장합니다. [도커(Docker) 이미지][2]는 활성화된 도커와 쿠버네티스 통합 모두에서 사용할 수 있습니다.
 
 또한, [호스트에서 Datadog Agent를 실행][3]하고 설정하여 쿠버네티스 메트릭을 수집할 수 있습니다.
 
-## Kubernetes 설정
+## 쿠버네티스 설정
 
 ### 설치
 
@@ -40,6 +40,7 @@ Datadog Agent v5는 최대 쿠버네티스 버전 1.8까지 지원합니다. 최
 ```yaml
 
 apiVersion: extensions/v1beta1
+kind: DaemonSet
 metadata:
   name: dd-agent
 spec:
@@ -152,6 +153,7 @@ kube-state-metrics를 실행하려면 kube-state-metrics 서비스를 배포하�
 
 ```yaml
 apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
   name: kube-state-metrics
 spec:
@@ -176,6 +178,7 @@ spec:
             cpu: 200m
 ---
 apiVersion: v1
+kind: Service
 metadata:
   annotations:
     prometheus.io/scrape: 'true'
@@ -218,9 +221,9 @@ kubectl create -f kube-state-metrics.yaml
 kubectl get daemonset
 ```
 
-Agent가 배포되면 아래 텍스트와 유사한 출력이 표시됩니다. 여기서 **desired** 및 **current**는  클러스터에서 실행 중인 노드 수와 같습니다.
+Agent가 배포되었다면 아래 텍스트와 비슷한 출력값이 표시됩니다. 여기서 **desired** 및 **current**는 클러스터에서 실행 중인 노드 개수와 동일합니다.
 
-```bash
+```shell
 NAME       DESIRED   CURRENT   NODE-SELECTOR   AGE
 dd-agent   3         3         <none>          11h
 ```
@@ -229,7 +232,7 @@ dd-agent   3         3         <none>          11h
 
 [Agent의 info 하위 명령어를 실행][11]하고 점검(Checks) 섹션의 `kubernetes_state`를 찾습니다.
 
-```bash
+```shell
 Checks
 ======
     kubernetes_state
@@ -255,6 +258,7 @@ Checks
 ```yaml
 
 apiVersion: v1
+kind: Pod
 metadata:
   annotations:
     service-discovery.datadoghq.com/kubedns.check_names: '["kube_dns"]'
@@ -271,7 +275,7 @@ metadata:
 
 [Agent의 info 하위 명령어를 실행][11]하고 점검(Checks) 섹션의 `kube_dns`를 찾습니다.
 
-```bash
+```shell
 Checks
 ======
     kube_dns
@@ -290,10 +294,10 @@ Checks
 [8]: https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables
 [9]: /ko/getting_started/agent/autodiscovery/
 [10]: https://github.com/DataDog/integrations-core/blob/master/kubernetes/datadog_checks/kubernetes/data/conf.yaml.example
-[11]: /ko/agent/configuration/agent-commands/#agent-status-and-information
+[11]: /ko/agent/guide/agent-commands/#agent-status-and-information
 [12]: https://github.com/kubernetes/kube-state-metrics
 [13]: https://quay.io/coreos/kube-state-metrics
 [14]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example
 [15]: https://yum.datadoghq.com/stable/6/x86_64
-[16]: /ko/agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
+[16]: /ko/agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity/
 [17]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/data/conf.yaml.example

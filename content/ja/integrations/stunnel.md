@@ -1,19 +1,18 @@
 ---
 categories:
-- ログの収集
-custom_kind: integration
-dependencies:
-- https://github.com/DataDog/documentation/blob/master/content/en/integrations/stunnel.md
+  - ログの収集
 description: Stunnel プロキシからログを収集して Datadog に送信。
 has_logo: true
-integration_id: stunnel
 integration_title: Stunnel
 is_public: true
+kind: インテグレーション
 name: Stunnel
 public_title: Datadog-Stunnel インテグレーション
 short_description: Stunnel プロキシからログを収集して Datadog に送信。
+dependencies:
+  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/stunnel.md
+integration_id: stunnel
 ---
-
 ## 概要
 
 Stunnel は、既存のクライアントおよびサーバーに、プログラムコードの変更なしで TLS 暗号化機能を追加できるよう設計されたプロキシです。
@@ -59,7 +58,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 [Agent の `status` サブコマンドを実行][4]し、Checks セクションで `stunnel` を検索します。
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest
+[1]: https://app.datadoghq.com/account/settings#agent
 [2]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /ja/agent/guide/agent-commands/#start-stop-restart-the-agent
 [4]: /ja/agent/guide/agent-commands/#agent-status-and-information

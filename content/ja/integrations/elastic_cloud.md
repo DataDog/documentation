@@ -15,7 +15,6 @@ assets:
       prefix: elastic_cloud.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10315
     source_type_name: Elastic Cloud
 author:
   homepage: https://www.datadoghq.com
@@ -23,8 +22,8 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- モニター
-custom_kind: integration
+- web
+- メトリクス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -33,16 +32,18 @@ integration_id: elastic-cloud
 integration_title: Elastic Cloud
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: elastic_cloud
+oauth: {}
 public_title: Elastic Cloud
 short_description: Elastic Cloud でホストされている Elasticsearch サービスのメトリクスモニターです。
 supported_os: []
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Web
   - Category::Metrics
-  - Offering::Integration
   configuration: README.md#Setup
   description: Elastic Cloud でホストされている Elasticsearch サービスのメトリクスモニターです。
   media: []
@@ -51,7 +52,6 @@ tile:
   title: Elastic Cloud
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Elastic Cloud とインテグレーションすることで、ホスティングされた Elasticsearch のサービスを常に最新の状態に保つことができます。
@@ -69,7 +69,7 @@ Elastic Cloud とインテグレーションすることで、ホスティング
 
 必要なインストール手順はありません。
 
-### 構成
+### コンフィギュレーション
 
 #### メトリクスの収集
 
@@ -135,10 +135,10 @@ Datadog の IP プレフィックスを含める方法
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "elastic-cloud" >}}
+{{< get-metrics-from-git "elastic_cloud" >}}
 
 
-### Logs
+### ログ管理
 
 Elastic Cloud インテグレーションには、ログは含まれません。
 
@@ -146,13 +146,13 @@ Elastic Cloud インテグレーションには、ログは含まれません。
 
 Elastic Cloud インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Elastic Cloud インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 
 

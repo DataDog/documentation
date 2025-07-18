@@ -5,7 +5,6 @@ assets:
   dashboards:
     NeoLoad Performance Testing: assets/dashboards/neoload_overview.json
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -15,7 +14,6 @@ assets:
       prefix: NeoLoad.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10317
     source_type_name: neoload
   logs: {}
 author:
@@ -24,9 +22,8 @@ author:
   sales_email: sales@tricentis.com
   support_email: support@tricentis.com
 categories:
-- notifications
-- testing
-custom_kind: integration
+- notification
+- テスト
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/neoload/README.md
 display_on_public_website: true
@@ -36,8 +33,10 @@ integration_id: neoload
 integration_title: NeoLoad
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: neoload
+oauth: {}
 public_title: NeoLoad
 short_description: NeoLoad によるパフォーマンステスト結果のモニタリングと分析
 supported_os:
@@ -47,14 +46,14 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Notifications
+  - Category::Notification
   - Category::Testing
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
   configuration: README.md#Setup
-  description: NeoLoad によるパフォーマンステスト結果のモニタリングと分析
+  description: NeoLoad によるパフォーマンステストの結果のモニタリングと分析
   media:
   - caption: NeoLoad パフォーマンステストダッシュボード
     image_url: images/neoload-dashboard.png
@@ -64,7 +63,6 @@ tile:
   title: NeoLoad
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -78,7 +76,7 @@ NeoLoad インテグレーションを使用すると、NeoLoad テストのパ�
 
 ## セットアップ
 
-### 構成
+### コンフィギュレーション
 
 NeoLoad の構成の詳細な手順については、[NeoLoad に関するドキュメント][3]に従ってください。NeoLoad バージョン 9.1 からは、NeoLoad 内にある Datadog Connector の **Push Counters** 構成で、どのメトリクスを送信するかを選択できるようになりました。
 
@@ -102,7 +100,7 @@ NeoLoad は、テストの終了時と開始時に Datadog API  にイベント�
 ヘルプが必要ですか？[Datadog サポート][6]または [Tricentis NeoLoad サポート][7]にお問い合わせください。
 
 [1]: https://www.tricentis.com/products/performance-testing-neoload
-[2]: https://docs.datadoghq.com/ja/metrics/explorer
+[2]: /ja/metrics/explorer
 [3]: https://documentation.tricentis.com/neoload/latest/en/content/reference_guide/datadog.htm
 [4]: https://github.com/DataDog/integrations-extras/blob/master/neoload/metadata.csv
 [5]: https://docs.datadoghq.com/ja/events/

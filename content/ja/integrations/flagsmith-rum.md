@@ -8,10 +8,9 @@ author:
   sales_email: support@flagsmith.com
   support_email: support@flagsmith.com
 categories:
-- 構成とデプロイ
+- 構成 & デプロイ
 - 問題追跡
-- 開発ツール
-custom_kind: インテグレーション
+- developer tools
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/flagsmith-rum/README.md
 display_on_public_website: true
@@ -21,8 +20,10 @@ integration_id: flagsmith-rum
 integration_title: Flagsmith
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: flagsmith-rum
+oauth: {}
 public_title: Flagsmith
 short_description: Flagsmith の機能フラグで RUM データを強化
 supported_os:
@@ -53,7 +54,6 @@ tile:
   title: Flagsmith
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要

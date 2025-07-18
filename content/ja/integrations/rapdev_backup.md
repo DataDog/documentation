@@ -5,7 +5,6 @@ app_id: rapdev-backup
 app_uuid: f0a2c15e-9c53-4645-aedc-5a28af130308
 assets:
   integration:
-    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -16,7 +15,6 @@ assets:
       prefix: rapdev.backup
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10194
     source_type_name: RapDev Backup
 author:
   homepage: https://www.rapdev.io
@@ -25,8 +23,7 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- marketplace
-custom_kind: インテグレーション
+- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -35,10 +32,12 @@ integration_id: rapdev-backup
 integration_title: Backup Automator
 integration_version: ''
 is_public: true
+kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_backup
+oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -68,7 +67,6 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -81,7 +79,7 @@ tile:
 
 このインテグレーションには、メトリクスは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 このインテグレーションには、Agent が Datadog API と通信できる場合は `OK` を返すサービスチェック `rapdev.backup.can_connect` があり、それ以外の場合は `CRITICAL` を報告します。
 
@@ -114,4 +112,4 @@ tile:
 [10]: https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-backup" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-backup" target="_blank">こちらをクリック</a>してください。

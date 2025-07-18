@@ -9,6 +9,7 @@ further_reading:
 - link: /continuous_integration/setup_pipelines/jenkins/
   tag: 설명서
   text: Jenkins 파이프라인에서 트레이스 설정
+kind: 설명서
 title: Jenkins
 ---
 

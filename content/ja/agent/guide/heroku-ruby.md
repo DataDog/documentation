@@ -6,6 +6,7 @@ further_reading:
 - link: /logs/guide/collect-heroku-logs
   tag: ドキュメント
   text: Heroku ログの収集
+kind: ガイド
 title: Datadog で Heroku の Ruby on Rails アプリケーションをインスツルメント
 ---
 
@@ -615,12 +616,12 @@ APM Agent
 
 {{< img src="agent/guide/heroku_ruby/traces.png" alt="Datadog の Ruby アプリケーショントレース" >}}
 
-[ソフトウェアカタログ][20]に移動して、アプリケーションのすべてのサービスとアプリケーションサービスビューを確認してください。
+[Service list][20] では、アプリケーションのすべてのサービスとアプリケーションサービスビューを確認できます。
 
-{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Datadog のソフトウェアカタログ" >}}
-{{< img src="agent/guide/heroku_ruby/service_page.png" alt="Datadog の Ruby アプリケーションサービス詳細ページ" >}}
+{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Datadog のサービスリストビュー" >}}
+{{< img src="agent/guide/heroku_ruby/service_page.png" alt="Datadog の Ruby アプリケーションサービスビュー" >}}
 
-## Logs
+## ログ管理
 
 次に、Heroku ログドレインの設定により、ログを有効にします。
 
@@ -784,7 +785,7 @@ Logs -> Generate Metrics へ移動し "+ New Metric" ボタンをクリックし
 
 {{< img src="agent/guide/heroku_ruby/log_trace_correlation.png" alt="ログとトレースの相関" >}}
 
-## サマリー
+## Summary
 
 このガイドでは、サンプル Rails アプリケーションを使用して Heroku にデプロイし、Datadog でインスツルメントしてメトリクス、dyno システムメトリクス、ログ、トレース、そしてインテグレーションの取得をセットアップしました。
 
@@ -855,7 +856,7 @@ Agent (v7.27.0)
 [17]: https://elements.heroku.com/addons/memcachedcloud
 [18]: https://docs.datadoghq.com/ja/getting_started/tagging/unified_service_tagging/
 [19]: https://app.datadoghq.com/apm/traces
-[20]: https://app.datadoghq.com/services
+[20]: https://app.datadoghq.com/apm/services
 [21]: https://devcenter.heroku.com/articles/log-runtime-metrics/
 [22]: https://app.datadoghq.com/logs/livetail
 [23]: https://devcenter.heroku.com/articles/log-runtime-metrics#cpu-load-averages

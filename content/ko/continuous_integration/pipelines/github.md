@@ -14,8 +14,13 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-github-actions-ci-visibility/
   tag: 블로그
   text: Datadog CI Visibility로 GitHub Actions 워크플로 모니터링
+kind: 설명서
 title: GitHub Actions 워크플로에 트레이스 설정
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">선택한 Datadog 사이트 ({{< region-param key="dd_site_name" >}})는 지원되지 않습니다.</div>
+{{< /site-region >}}
 
 ## 호환성
 - **지원되는 GitHub 버전**:

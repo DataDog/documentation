@@ -1,13 +1,14 @@
 ---
 dependencies:
 - https://github.com/DataDog/datadog-formula/blob/main/README.md
+kind: 설명서
 title: SaltStack
 ---
 Datadog SaltStack 공식은 Datadog Agent와 Agent 기반 통합(점검)을 설치할 때 사용합니다. SaltStack 공식을 자세히 알아보려면 [Salt 공식 설치 및 사용 가이드][1]를 참조하시기 바랍니다.
 
-## 설정
+## 구성
 
-### 필수 조건
+### 요건
 
 Datadog SaltStack 공식은 데비안(Debian) 기반 및 레드햇(RedHat) 기반 시스템에서만 설치가 지원됩니다.
 
@@ -57,7 +58,7 @@ file_roots:
     - /srv/formulas/datadog-formula/
 ```
 
-### 디플로이먼트
+### 배포
 
 호스트에 Datadog Agent를 배포하는 방법은 다음과 같습니다.
 

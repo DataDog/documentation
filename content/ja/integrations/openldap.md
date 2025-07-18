@@ -5,7 +5,6 @@ assets:
   dashboards:
     OpenLDAP Overview: assets/dashboards/openldap_overview.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -16,17 +15,17 @@ assets:
       prefix: openldap.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10040
     source_type_name: OpenLDAP
+  logs:
+    source: openldap
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- data stores
+- data store
 - ログの収集
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openldap/README.md
 display_on_public_website: true
@@ -34,10 +33,12 @@ draft: false
 git_integration_title: openldap
 integration_id: openldap
 integration_title: OpenLDAP
-integration_version: 3.0.0
+integration_version: 1.10.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: openldap
+oauth: {}
 public_title: OpenLDAP
 short_description: cn=monitor バックエンドを使用して OpenLDAP サーバーからメトリクスを収集
 supported_os:
@@ -50,9 +51,8 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Data Stores
+  - Category::Data Store
   - Category::Log Collection
-  - Offering::Integration
   configuration: README.md#Setup
   description: cn=monitor バックエンドを使用して OpenLDAP サーバーからメトリクスを収集
   media: []
@@ -61,7 +61,6 @@ tile:
   title: OpenLDAP
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -77,7 +76,7 @@ OpenLDAP インテグレーションは Agent とパッケージ化されてい�
 1. OpenLDAP サーバーで `cn=Monitor` バックエンドを構成します。
 2. OpenLDAP サーバーに [Agent をインストール][1]します。
 
-### 構成
+### コンフィギュレーション
 
 #### OpenLDAP の準備
 
@@ -131,11 +130,11 @@ OpenLDAP インテグレーションは Agent とパッケージ化されてい�
 #### OpenLDAP インテグレーションの構成
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ###### メトリクスの収集
 
@@ -164,7 +163,7 @@ OpenLDAP インテグレーションは Agent とパッケージ化されてい�
 
 2. [Agent を再起動します][2]。
 
-###### ログ収集
+###### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -191,7 +190,7 @@ _Agent バージョン 6.0 以降で利用可能_
 [1]: https://github.com/DataDog/integrations-core/blob/master/openldap/datadog_checks/openldap/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -201,11 +200,11 @@ _Agent バージョン 6.0 以降で利用可能_
 
 | パラメーター            | 値                                                                                           |
 | -------------------- | ----------------------------------------------------------------------------------------------- |
-| `<INTEGRATION_NAME>` | `openldap`                                                                                      |
-| `<INIT_CONFIG>`      | 空白または `{}`                                                                                   |
-| `<INSTANCE_CONFIG>`  | `{"url":"ldaps://%%host%%:636","username":"<ユーザーの識別名>","password":"<パスワード>"}` |
+| `<インテグレーション名>` | `openldap`                                                                                      |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                   |
+| `<インスタンスコンフィギュレーション>`  | `{"url":"ldaps://%%host%%:636","username":"<ユーザーの識別名>","password":"<パスワード>"}` |
 
-###### ログ収集
+###### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -238,7 +237,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 openldap チェックには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "openldap" >}}
 
 
@@ -248,6 +247,6 @@ openldap チェックには、イベントは含まれません。
 
 
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest
+[1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://docs.datadoghq.com/ja/help/

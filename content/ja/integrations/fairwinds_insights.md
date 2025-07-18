@@ -7,7 +7,6 @@ assets:
   dashboards:
     Insights Overview: assets/dashboards/overview.json
   integration:
-    auto_install: false
     configuration: {}
     events:
       creates_events: true
@@ -17,7 +16,6 @@ assets:
       prefix: fairwinds.insights.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10112
     source_type_name: Fairwinds Insights
 author:
   homepage: https://www.fairwinds.com
@@ -26,13 +24,12 @@ author:
   support_email: insights@fairwinds.com
   vendor_id: fairwinds
 categories:
-- incident-teams
+- コンテナ
 - コスト管理
 - kubernetes
-- marketplace
+- マーケットプレイス
 - プロビジョニング
-- security
-custom_kind: インテグレーション
+- セキュリティ
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -41,10 +38,12 @@ integration_id: fairwinds-insights
 integration_title: Fairwinds Insights
 integration_version: ''
 is_public: true
+kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: fairwinds_insights
+oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -70,11 +69,10 @@ tile:
   - Category::Provisioning
   - Category::Security
   - Offering::Integration
+  - Offering::Software License
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Submitted Data Type::Metrics
-  - Submitted Data Type::Events
   configuration: README.md#Setup
   description: 業務の遂行に不可欠な Kubernetes アプリケーションを保護、最適化します
   media:
@@ -108,17 +106,11 @@ tile:
     image_url: images/Fairwinds_Insights_VulnerabilityScanning_Image_v1.png
     media_type: image
   overview: README.md#Overview
-  resources:
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/fairwinds-insights-datadog-marketplace/
-  - resource_type: documentation
-    url: https://insights.docs.fairwinds.com/
   support: README.md#Support
   title: Fairwinds Insights
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -152,7 +144,7 @@ tile:
 
 Fairwinds Insights インサイトのアクションアイテムは、タグと共に Datadog に表示されるため、必要な分析を行うことができます。
 
-### サービスチェック
+### サービスのチェック
 
 Fairwinds Insights にサービスのチェックは含まれません。
 
@@ -215,4 +207,4 @@ Fairwinds Insights は月々の定額利用で提供されるため、お客様�
 [2]: https://www.datadoghq.com/blog/fairwinds-insights-datadog-marketplace/
 [3]: https://insights.docs.fairwinds.com/
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/fairwinds-insights" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/fairwinds-insights" target="_blank">こちらをクリック</a>してください。

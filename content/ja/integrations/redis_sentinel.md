@@ -3,7 +3,6 @@ app_id: redis-sentinel
 app_uuid: 207e2b2c-5fad-40a4-a4fc-09f119e142d3
 assets:
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -13,7 +12,6 @@ assets:
       prefix: redis.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10210
     source_type_name: Redis Sentinel
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -22,7 +20,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
-custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/README.md
 display_on_public_website: true
@@ -32,8 +29,10 @@ integration_id: redis-sentinel
 integration_title: Redis Sentinel
 integration_version: 1.1.1
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: redis_sentinel
+oauth: {}
 public_title: Redis Sentinel
 short_description: Redis Sentinel は Redis に高可用性を提供します。
 supported_os:
@@ -47,7 +46,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: Redis Sentinel は Redis に高可用性を提供します。
   media: []
@@ -56,7 +54,6 @@ tile:
   title: Redis Sentinel
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -82,7 +79,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Redis Sentinel
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### 構成
+### コンフィギュレーション
 
 1. Redis Sentinel の[メトリクス](#metrics)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `redis_sentinel.d/conf.yaml` ファイルを編集します。
    使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル upsc.d/conf.yaml][5] を参照してください。
@@ -96,15 +93,15 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Redis Sentinel
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "redis-sentinel" >}}
+{{< get-metrics-from-git "redis_sentinel" >}}
 
 
 ### イベント
 
 Redis の Sentinel チェックには、イベントは含まれません。
 
-### サービスチェック
-{{< get-service-checks-from-git "redis-sentinel" >}}
+### サービスのチェック
+{{< get-service-checks-from-git "redis_sentinel" >}}
 
 
 ## トラブルシューティング
@@ -112,7 +109,7 @@ Redis の Sentinel チェックには、イベントは含まれません。
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest
+[1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [3]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

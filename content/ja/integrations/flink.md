@@ -5,7 +5,6 @@ assets:
   dashboards:
     Flink Overview: assets/dashboards/overview.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -14,24 +13,11 @@ assets:
       check: flink.taskmanager.Status.JVM.CPU.Load
       metadata_path: metadata.csv
       prefix: flink.
-    process_signatures:
-    - java org.apache.flink.client.python.PythonShellParser
-    - java org.apache.flink.container.entrypoint.StandaloneApplicationClusterEntryPoint
-    - java org.apache.flink.kubernetes.entrypoint.KubernetesSessionClusterEntrypoint
-    - java org.apache.flink.kubernetes.entrypoint.KubernetesApplicationClusterEntrypoint
-    - java org.apache.flink.kubernetes.taskmanager.KubernetesTaskExecutorRunner
-    - java org.apache.flink.kubernetes.cli.KubernetesSessionCli
-    - java org.apache.flink.runtime.taskexecutor.TaskManagerRunner
-    - java org.apache.flink.runtime.zookeeper.FlinkZooKeeperQuorumPeer
-    - java org.apache.flink.runtime.webmonitor.history.HistoryServer
-    - java org.apache.flink.runtime.entrypoint.StandaloneSessionClusterEntrypoint
-    - java org.apache.flink.table.gateway.SqlGateway
-    - java org.apache.flink.table.client.SqlClient
-    - java org.apache.flink.yarn.cli.FlinkYarnSessionCli
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10088
     source_type_name: flink
+  logs:
+    source: flink
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -39,7 +25,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/flink/README.md
 display_on_public_website: true
@@ -47,10 +32,12 @@ draft: false
 git_integration_title: flink
 integration_id: flink
 integration_title: Flink
-integration_version: 3.0.0
+integration_version: 1.4.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: flink
+oauth: {}
 public_title: Flink
 short_description: Flink ジョブのメトリクスを追跡する。
 supported_os:
@@ -64,7 +51,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: Flink ジョブのメトリクスを追跡する。
   media: []
@@ -73,7 +59,6 @@ tile:
   title: Flink
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -87,7 +72,7 @@ tile:
 Flink チェックは [Datadog Agent][4] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 #### メトリクスの収集
 
@@ -98,7 +83,7 @@ Flink チェックは [Datadog Agent][4] パッケージに含まれています
     ```yaml
     metrics.reporter.dghttp.factory.class: org.apache.flink.metrics.datadog.DatadogHttpReporterFactory
     metrics.reporter.dghttp.apikey: <DATADOG_API_KEY>
-    metrics.reporter.dghttp.dataCenter: US #(optional) The data center (EU/US) to connect to, defaults to US.
+    metrics.reporter.dghttp.dataCenter: {{< region-param key="dd_datacenter" >}}
     ```
 
 2. `<FLINK_HOME>/conf/flink-conf.yaml` で、システムのスコープを再マッピングします。
@@ -124,7 +109,7 @@ Flink チェックは [Datadog Agent][4] パッケージに含まれています
 
 4. Flink を再起動すると、Flink のメトリクスが Datadog に送信されます。
 
-#### ログ収集
+#### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -173,7 +158,7 @@ _Agent バージョン 6.0 以降で利用可能_
 {{< get-metrics-from-git "flink" >}}
 
 
-### サービスチェック
+### サービスのチェック
 
 Flink には、サービスのチェック機能は含まれません。
 
@@ -189,7 +174,7 @@ Flink には、イベントは含まれません。
 [1]: https://flink.apache.org/
 [2]: https://nightlies.apache.org/flink/flink-docs-release-1.16/docs/deployment/metric_reporters/#datadog
 [3]: https://docs.datadoghq.com/ja/api/?lang=bash#api-reference
-[4]: https://app.datadoghq.com/account/settings/agent/latest
+[4]: https://app.datadoghq.com/account/settings#agent
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://nightlies.apache.org/flink/flink-docs-release-1.16/docs/deployment/advanced/logging/
 [7]: https://github.com/apache/flink/tree/release-1.16/flink-dist/src/main/flink-bin/conf

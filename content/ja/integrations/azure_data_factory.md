@@ -4,8 +4,7 @@ aliases:
 categories:
 - azure
 - クラウド
-- data stores
-custom_kind: インテグレーション
+- data store
 dependencies: []
 description: Azure Data Factory のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_data_factory/
@@ -16,6 +15,7 @@ integration_id: azure-datafactory
 integration_title: Microsoft Azure Data Factory
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: azure_data_factory
 public_title: Datadog-Microsoft Azure Data Factory インテグレーション
@@ -23,7 +23,6 @@ short_description: Azure Data Factory のキーメトリクスを追跡
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Data Factory は、データの保管・移動・処理サービスを自動化されたデータパイプラインとして構築するクラウドデータ統合サービスです。
@@ -39,14 +38,14 @@ Datadog Azure インテグレーションを使用して、Data Factory から�
 ## 収集データ
 
 ### メトリクス
-{{ get-metrics-from-git "azure-datafactory" }}
+{{< get-metrics-from-git "azure_data_factory" >}}
 
 
 ### イベント
 
 Azure Data Factory インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Azure Data Factory インテグレーションには、サービスのチェック機能は含まれません。
 

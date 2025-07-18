@@ -1,11 +1,8 @@
 ---
-algolia:
-  subcategory: Marketplace インテグレーション
 app_id: statsig-statsig
 app_uuid: 289b74cb-ad37-4a0e-98f5-4d5c6f3e3d19
 assets:
   integration:
-    auto_install: false
     configuration: {}
     events:
       creates_events: true
@@ -15,7 +12,6 @@ assets:
       prefix: statsig.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10188
     source_type_name: Statsig ライセンス
 author:
   homepage: https://www.statsig.com
@@ -26,7 +22,6 @@ author:
 categories:
 - 構成 & デプロイ
 - マーケットプレイス
-custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -35,10 +30,12 @@ integration_id: statsig-statsig
 integration_title: Statsig
 integration_version: ''
 is_public: true
+kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: statsig-statsig
+oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -79,15 +76,11 @@ tile:
     image_url: images/tile_datadog_dashboard.png
     media_type: image
   overview: README.md#Overview
-  resources:
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/feature-monitoring-statsig-datadog-marketplace/
   support: README.md#Support
   title: Statsig
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -135,4 +128,4 @@ Statsig インテグレーションにより、Statsig でのコンフィギュ�
 [6]: https://www.datadoghq.com/blog/feature-monitoring-statsig-datadog-marketplace/
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/statsig-statsig" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/statsig-statsig" target="_blank">こちらをクリック</a>してください。

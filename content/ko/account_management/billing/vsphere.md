@@ -1,4 +1,5 @@
 ---
+kind: 설명서
 title: vSphere 통합 빌링
 ---
 

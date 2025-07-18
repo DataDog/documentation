@@ -5,7 +5,6 @@ categories:
 - azure
 - クラウド
 - ネットワーク
-custom_kind: インテグレーション
 dependencies: []
 description: Azure Network Interface のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_network_interface/
@@ -16,6 +15,7 @@ integration_id: azure-networkinterface
 integration_title: Microsoft Azure Network Interface
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: azure_network_interface
 public_title: Datadog-Microsoft Azure Network Interface インテグレーション
@@ -23,7 +23,6 @@ short_description: Azure Network Interface のキーメトリクスを追跡
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Network Interface によって、Azure 仮想マシンがインターネット、Azure、オンプレミスリソースなどと通信できるようになります。
@@ -39,14 +38,14 @@ Datadog Azure インテグレーションを使用して、Azure Network Interfa
 ## 収集データ
 
 ### メトリクス
-{{ get-metrics-from-git "azure-networkinterface" }}
+{{< get-metrics-from-git "azure_network_interface" >}}
 
 
 ### イベント
 
 Azure Network Interface インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Azure Network Interface インテグレーションには、サービスのチェック機能は含まれません。
 

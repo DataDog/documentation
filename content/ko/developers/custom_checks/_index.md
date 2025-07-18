@@ -1,5 +1,6 @@
 ---
 description: Datadog을 사용하여 커스텀 검사 설정
+kind: 설명서
 title: 커스텀 검사
 ---
 

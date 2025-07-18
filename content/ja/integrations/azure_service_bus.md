@@ -1,8 +1,7 @@
 ---
 categories:
-- クラウド
+- cloud
 - azure
-custom_kind: インテグレーション
 dependencies: []
 description: Azure Service Bus のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_service_bus/
@@ -13,6 +12,7 @@ integration_id: azure-service-bus
 integration_title: Microsoft Azure Service Bus
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: azure_service_bus
 public_title: Datadog-Microsoft Azure Service Bus インテグレーション
@@ -20,7 +20,6 @@ short_description: Azure Service Bus のキーメトリクスを追跡
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Microsoft Azure Service Bus は、フルマネージド型のエンタープライズ統合メッセージブローカーです。
@@ -39,14 +38,14 @@ Azure Service Bus からメトリクスを取得すると、以下のことが�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure-service-bus" >}}
+{{< get-metrics-from-git "azure_service_bus" >}}
 
 
 ### イベント
 
 Azure Service Bus インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Azure Service Bus インテグレーションには、サービスのチェック機能は含まれません。
 

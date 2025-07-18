@@ -1,3 +1,0 @@
----
-title: Asignaciones de AuthN
----

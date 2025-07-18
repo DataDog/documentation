@@ -1,6 +1,7 @@
 ---
 dependencies:
-- https://github.com/DataDog/datadog-formula/blob/main/README.md
+  - https://github.com/DataDog/datadog-formula/blob/main/README.md
+kind: ドキュメント
 title: SaltStack
 ---
 Datadog SaltStack Formula は、Datadog Agent および Agent ベースのインテグレーション (チェック) のインストールに使用する計算式です。SaltStack Formula について詳しくは、[Salt 計算式のインストールと使用方法][1]を参照してください。
@@ -87,7 +88,7 @@ file_roots:
         - datadog
     ```
 
-### 設定
+### 構成
 
 計算式のコンフィギュレーションはピラーファイルの `datadog` キー内に記述する必要があります。これには `config`、 `install_settings`、`checks` の 3 つが含まれます。
 
@@ -127,7 +128,7 @@ file_roots:
 
 ホストに Agent インテグレーションを追加するには、`checks` 変数とチェックの名前を合わせてキーとして使用します。各チェックに 2 つのオプションが存在します。
 
-| オプション    | 説明                                                                                                                                                              |
+| オプション    | 説明                                                                                                                                                             |
 |-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `config`  | チェックのコンフィギュレーションファイルに書き込むためのコンフィギュレーションオプションを追加します。<br>Agent v6 & v7: <confd_path>/<check>.d/conf.yaml`<br>Agent v5: `<confd_path>/<check>.yaml` |
 | `version` | Agent v6 & v7 環境でインストールするチェックのバージョン (デフォルトは Agent にバンドルされたバージョンとなります) 。                                                                |
@@ -204,7 +205,7 @@ datadog:
 
 Salt Formula には Salt の状態が事前に記述されています。Datadog Formula で利用可能な状態は以下の通りです。
 
-| 状態               | 説明                                                                                              |
+| 状態               | 説明                                                                                             |
 |---------------------|---------------------------------------------------------------------------------------------------------|
 | `datadog`           | Datadog Agent サービスをインストール、構成、起動します。                                             |
 | `datadog.install`   | Datadog Agent の適切なリポジトリとインストールを構成します。                                             |

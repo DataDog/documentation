@@ -5,7 +5,6 @@ assets:
   dashboards:
     Cloudsmith: assets/dashboards/cloudsmith_overview.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -16,7 +15,6 @@ assets:
       prefix: cloudsmith.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10208
     source_type_name: Cloudsmith
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -26,7 +24,6 @@ author:
 categories:
 - クラウド
 - メトリクス
-custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cloudsmith/README.md
 display_on_public_website: true
@@ -36,8 +33,10 @@ integration_id: cloudsmith
 integration_title: Cloudsmith
 integration_version: 0.0.2
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: cloudsmith
+oauth: {}
 public_title: Cloudsmith
 short_description: Cloudsmith メトリクスを監視する
 supported_os:
@@ -52,7 +51,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: Cloudsmith メトリクスを監視する
   media: []
@@ -61,7 +59,6 @@ tile:
   title: Cloudsmith
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -86,7 +83,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Cloudsmith チ
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### 構成
+### コンフィギュレーション
 
 1. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `cloudsmith.d/conf.yaml` ファイルを編集し、Cloudsmith のパフォーマンスデータを収集します。使用可能なすべてのコンフィギュレーションオプションについては、[cloudsmith.d/conf.yaml のサンプル][5]を参照してください。
 
@@ -118,7 +115,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Cloudsmith チ
 ご不明な点は、[Cloudsmith サポート][10]までお問い合わせください。
 
 [1]: https://cloudsmith.com
-[2]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/cloudsmith/datadog_checks/cloudsmith/data/conf.yaml.example

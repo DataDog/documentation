@@ -15,8 +15,13 @@ further_reading:
 - link: /continuous_integration/troubleshooting/
   tag: 설명서
   text: CI Visibility 문제 해결
+kind: 설명서
 title: Datadog의 Pipeline Visibility
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">선택한 사이트 ({{< region-param key="dd_site_name" >}})에서는 현재 CI Visibility를 사용할 수 없습니다.</div>
+{{< /site-region >}}
 
 ## 개요
 

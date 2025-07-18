@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ja/agent/guide/build-container-agent
+kind: ガイド
 title: Datadog Agent イメージのビルド
 ---
 

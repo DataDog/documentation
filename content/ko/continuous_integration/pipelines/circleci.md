@@ -14,8 +14,13 @@ further_reading:
 - link: /continuous_integration/pipelines/custom_tags_and_metrics/
   tag: 설명서
   text: 커스텀 태그 및 메트릭을 추가하여 Pipeline Visibility 확장
+kind: 설명서
 title: CircleCI 워크플로우에서 트레이스 설정
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">선택하신 사이트({{<region-param key="dd_site_name">}})에서 현재 CIVisibility를 사용할 수 없습니다.</div>
+{{< /site-region >}}
 
 ## 호환성
 

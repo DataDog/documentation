@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ja/integrations/faq/how-to-retrieve-wmi-metrics
+kind: ガイド
 title: WMI メトリクスの取得
 ---
 

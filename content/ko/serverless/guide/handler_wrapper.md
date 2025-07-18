@@ -1,4 +1,5 @@
 ---
+kind: 설명서
 title: Lambda 핸들러를 코드로 래핑
 ---
 

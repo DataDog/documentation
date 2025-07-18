@@ -1,5 +1,6 @@
 ---
 description: Azure App Services の Datadog サポート
+kind: faq
 title: Azure App Services のサポート
 ---
 
@@ -9,7 +10,7 @@ title: Azure App Services のサポート
 | IL | Azure インテグレーションログ |
 | T | トレーシング |
 | CM | カスタムメトリクス |
-| P | プロファイリング |
+| P | Profiling |
 | DL | 直接ロギング |
 
 ### Windows
@@ -20,7 +21,7 @@ title: Azure App Services のサポート
         <th>プラン</th>
         <th>.NET</th>
         <th>Java</th>
-        <th>Node.js</th>
+        <th>Node</th>
         <th>PHP</th>
         <th>コンテナ</th>
     </tr>

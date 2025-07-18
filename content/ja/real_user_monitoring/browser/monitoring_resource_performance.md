@@ -9,9 +9,10 @@ further_reading:
 - link: /real_user_monitoring/explorer/visualize/
   tag: Documentation
   text: イベントへの視覚化の適用
-- link: /real_user_monitoring/platform/dashboards/
+- link: /real_user_monitoring/dashboards/
   tag: Documentation
   text: RUM ダッシュボード
+kind: documentation
 title: リソースパフォーマンスの監視
 ---
 
@@ -37,7 +38,7 @@ RUM リソースは、収集時にアクティブな RUM ビューに関連す�
 
 | 属性                              | タイプ           | 説明                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `resource.duration`            | 数値         | リソースのロードにかかった全時間。                                                                                                   |
+| `duration`                             | 数値         | リソースのロードにかかった全時間。                                                                                                   |
 | `resource.size`                | 数値（バイト） | リソースのサイズ。                                                                                                                            |
 | `resource.connect.duration`    | 数値（ns）    | サーバーへの接続が確立されるまでにかかった時間 (connectEnd - connectStart)。                                                           |
 | `resource.ssl.duration`        | 数値（ns）    | TLS ハンドシェイクにかかった時間。最後のリクエストが HTTPS 経由ではなかった場合、このメトリクスは収集されません (connectEnd - secureConnectionStart)。|
@@ -79,6 +80,6 @@ RUM は、リソース URL ホスト部分からリソースプロバイダー�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[2]: /ja/real_user_monitoring/platform/connect_rum_and_traces
+[2]: /ja/real_user_monitoring/connect_rum_and_traces
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/Resource_Timing_API/Using_the_Resource_Timing_API#Coping_with_CORS

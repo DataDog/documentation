@@ -3,7 +3,6 @@ app_id: resin
 app_uuid: ff99886d-87b7-407a-aa90-7bea5ca27564
 assets:
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -14,7 +13,6 @@ assets:
       prefix: resin.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10203
     source_type_name: Resin
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -22,8 +20,8 @@ author:
   sales_email: brent@bmontague.com
   support_email: brent@bmontague.com
 categories:
+- web
 - ログの収集
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/resin/README.md
 display_on_public_website: true
@@ -33,22 +31,24 @@ integration_id: resin
 integration_title: Resin
 integration_version: 1.0.0
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: resin
+oauth: {}
 public_title: Resin
 short_description: Resin 内のスレッドプールと接続プールの設定を追跡
 supported_os:
 - linux
-- windows
 - macos
+- windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Log Collection
   - Supported OS::Linux
-  - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
+  - Supported OS::Windows
+  - Category::Web
+  - Category::Log Collection
   configuration: README.md#Setup
   description: Resin 内のスレッドプールと接続プールの設定を追跡
   media: []
@@ -57,7 +57,6 @@ tile:
   title: Resin
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -70,7 +69,7 @@ tile:
 
 Resin チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### 構成
+### コンフィギュレーション
 
 1. 以下の JVM 引数を追加して [Resin のデフォルトサーバー][3]を構成し、JMX を有効にします。
 
@@ -89,7 +88,7 @@ Resin チェックは [Datadog Agent][2] パッケージに含まれていない
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `resin` を探します。
 
-### ログ収集
+### ログの収集
 
 Linux プラットフォームの場合は、`/etc/datadog-agent/datadog.yaml` で Datadog Agent のログ収集を有効にします。その他のプラットフォームの場合は、[Agent コンフィギュレーションファイルガイド][6]を参照し、コンフィギュレーションファイルの場所を調べてください。
 
@@ -115,7 +114,7 @@ logs_enabled: true
 
 Resin には、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "resin" >}}
 
 

@@ -4,9 +4,7 @@ app_uuid: 49dc62d7-7e0c-4c46-b90f-dfd4d5c35d53
 assets:
   dashboards:
     Envoy - Overview: assets/dashboards/envoy_overview.json
-    Envoy Openmetrics Overview: assets/dashboards/openmetrics_overview.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -19,15 +17,9 @@ assets:
     - envoy
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10012
     source_type_name: Envoy
-  monitors:
-    Envoy instance disconnected from control plane: assets/monitors/connected_state.json
-  saved_views:
-    envoy_4xx: assets/saved_views/envoy_4xx.json
-    envoy_5xx: assets/saved_views/envoy_5xx.json
-    envoy_error_grouped: assets/saved_views/envoy_error_grouped.json
-    envoy_overview: assets/saved_views/envoy_overview.json
+  logs:
+    source: envoy
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -36,8 +28,6 @@ author:
 categories:
 - cloud
 - log collection
-- network
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/envoy/README.md
 display_on_public_website: true
@@ -45,10 +35,12 @@ draft: false
 git_integration_title: envoy
 integration_id: envoy
 integration_title: Envoy
-integration_version: 5.1.0
+integration_version: 2.6.1
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: envoy
+oauth: {}
 public_title: Envoy
 short_description: Envoy はオープンソースのエッジ/サービスプロキシを提供
 supported_os:
@@ -63,10 +55,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Category::ネットワーク
-  - Submitted Data Type::Metrics
-  - Submitted Data Type::Logs
-  - Offering::Integration
   configuration: README.md#Setup
   description: Envoy はオープンソースのエッジ/サービスプロキシを提供
   media: []
@@ -75,7 +63,6 @@ tile:
   title: Envoy
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -166,14 +153,14 @@ static_resources:
             port_value: 8001
 ```
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
@@ -193,7 +180,7 @@ static_resources:
 2. Datadog Agent が Envoy の[管理エンドポイント][3]にアクセスできるかを確認します。
 3. [Agent を再起動します][4]。
 
-##### ログ収集
+##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -220,7 +207,7 @@ _Agent バージョン 6.0 以降で利用可能_
 [3]: https://www.envoyproxy.io/docs/envoy/latest/operations/admin
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -230,12 +217,12 @@ _Agent バージョン 6.0 以降で利用可能_
 
 | パラメーター            | 値                                       |
 | -------------------- | ------------------------------------------- |
-| `<INTEGRATION_NAME>` | `envoy`                                     |
-| `<INIT_CONFIG>`      | 空白または `{}`                               |
-| `<INSTANCE_CONFIG>`  | `{"openmetrics_endpoint": "http://%%host%%:80/stats/prometheus"}` |
+| `<インテグレーション名>` | `envoy`                                     |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                               |
+| `<インスタンスコンフィギュレーション>`  | `{"openmetrics_endpoint": "http://%%host%%:80/stats/prometheus"}` |
  **注**: 現行バージョンのチェック (1.26.0+) は、メトリクスの収集に [OpenMetrics][2] を使用し、これには Python 3 が必要です。Python 3 の使用が不可能なホストの場合や、このチェックのレガシーバージョンを使用する場合は、以下の[コンフィグ][3]を参照してください。
 
-##### ログ収集
+##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -268,7 +255,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 Envoy チェックには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "envoy" >}}
 
 
@@ -285,7 +272,7 @@ Envoy チェックには、イベントは含まれません。
 
 
 [1]: https://www.envoyproxy.io
-[2]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://istio.io
 [4]: https://www.envoyproxy.io/docs/envoy/latest/operations/admin
 [5]: https://gist.github.com/ofek/6051508cd0dfa98fc6c13153b647c6f8

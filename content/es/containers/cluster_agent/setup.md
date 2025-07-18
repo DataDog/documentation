@@ -20,13 +20,38 @@ further_reading:
 - link: /agent/cluster_agent/troubleshooting/
   tag: Documentación
   text: Solucionar problemas del Datadog Cluster Agent
+kind: documentación
 title: Configurar el Datadog Cluster Agent
 ---
 
 Si despliegas el Datadog Agent usando Helm chart v2.7.0 o Datadog Operator v0.7.0 (o sus respectivas versiones posteriores), el Cluster Agent estará habilitado de forma predeterminada.
 
+Si utilizas otros métodos, como DaemonSet, sigue estos pasos:
+
 {{< tabs >}}
-{{% tab "Datadog Operator" %}}
+{{% tab "Helm" %}}
+
+El Cluster Agent está habilitado de forma predeterminada a partir de Helm chart v2.7.0.
+
+Para habilitarlo en versiones anteriores, o si utilizas un [datadog-values.yaml][1] personalizado que anula la clave `clusterAgent`, debes actualizar tu archivo [datadog-values.yaml][1] con la siguiente configuración del Cluster Agent:
+
+  ```yaml
+  clusterAgent:
+    # clusterAgent.enabled -- Set this to false to disable Datadog Cluster Agent
+    enabled: true
+  ```
+
+A continuación, actualiza el Helm chart de Datadog.
+
+Esto actualiza automáticamente los archivos de configuración del control de acceso basado en roles (RBAC) necesarios para el Cluster Agent y el Datadog Agent. Ambos Agents utilizan la misma clave de API.
+
+Para garantizar la comunicación, también se genera automáticamente un token aleatorio en un `Secret` compartido por el Cluster Agent y el Datadog Agent. Puedes especificar manualmente este token a través de la configuración de `clusterAgent.token`. Alternativamente, puedes establecerlo indicando el nombre de un `Secret` existente que contenga un valor `token` a través de la configuración de `clusterAgent.tokenExistingSecret`.
+
+Cuando se configura manualmente, este token debe estar compuesto por 32 caracteres alfanuméricos.
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{% tab "Operator" %}}
 
 El Cluster Agent está habilitado de forma predeterminada a partir del Datadog Operator v1.0.0. El Operator configura los controles de acceso basado en roles necesarios, implementa el Cluster Agent y modifica la configuración del DaemonSet del Agent.
 
@@ -50,29 +75,7 @@ Cuando se configura manualmente, este token debe estar compuesto por 32 caracte
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md#override
 {{% /tab %}}
-{{% tab "Helm" %}}
-
-El Cluster Agent está habilitado de forma predeterminada a partir de Helm chart v2.7.0.
-
-Para habilitarlo en versiones anteriores, o si utilizas un [datadog-values.yaml][1] personalizado que anula la clave `clusterAgent`, debes actualizar tu archivo [datadog-values.yaml][1] con la siguiente configuración del Cluster Agent:
-
-  ```yaml
-  clusterAgent:
-    # clusterAgent.enabled -- Set this to false to disable Datadog Cluster Agent
-    enabled: true
-  ```
-
-A continuación, actualiza el Helm chart de Datadog.
-
-Esto actualiza automáticamente los archivos de configuración del control de acceso basado en roles (RBAC) necesarios para el Cluster Agent y el Datadog Agent. Ambos Agents utilizan la misma clave de API.
-
-Para garantizar la comunicación, también se genera automáticamente un token aleatorio en un `Secret` compartido por el Cluster Agent y el Datadog Agent. Puedes especificar manualmente este token a través de la configuración de `clusterAgent.token`. Alternativamente, puedes establecerlo indicando el nombre de un `Secret` existente que contenga un valor `token` a través de la configuración de `clusterAgent.tokenExistingSecret`.
-
-Cuando se configura manualmente, este token debe estar compuesto por 32 caracteres alfanuméricos.
-
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "Manual (DaemonSet)" %}}
+{{% tab "DaemonSet" %}}
 
 Para configurar el Datadog Cluster Agent usando un DaemonSet:
 1. [Configura los permisos de control de acceso basado en roles del Cluster Agent](#configure-cluster-agent-rbac-permissions).
@@ -255,7 +258,7 @@ El Datadog Cluster Agent solo se puede implementar en nodos de Linux.
 
 Para monitorizar los contenedores de Windows, utiliza dos instalaciones del Helm chart en un clúster mixto. El primer Helm chart despliega el Datadog Cluster Agent y el Agent DaemonSet en los nodos de Linux (con `targetSystem: linux`). El segundo Helm chart (con `targetSystem: windows`) despliega el Agent solo en los nodos de Windows y se conecta al Cluster Agent desplegado como parte del primer Helm chart.
 
-Utiliza el siguiente archivo `datadog-values.yaml` para configurar la comunicación entre Agents desplegados en nodos de Windows y el Cluster Agent.
+Para configurar la comunicación entre los Agents desplegados en nodos Windows y el Cluster Agent, utiliza el siguiente archivo `values.yaml`.
 
 ```yaml
 targetSystem: windows
@@ -277,9 +280,9 @@ Para obtener más información, consulta la documentación acerca de cómo [solu
 
 ## Monitorizar servicios gestionados de AWS
 
-Para monitorizar un servicio gestionado por AWS como Amazon Managed Streaming para Apache Kafka (MSK), ElastiCache, o Relational Database Service (RDS), configura `clusterChecksRunner` en tu Helm chart para crear un pod con un rol de IAM asignado a través de `serviceAccountAnnotation`. A continuación, establece las configuraciones de integración en `clusterAgent.confd`.
+Para monitorizar un servicio gestionado de AWS, como MSK, ElastiCache o RDS, configura `clusterChecksRunner` para crear un pod con un rol de IAM asignado a través del serviceAccountAnnotation del Helm chart. A continuación, establece las configuraciones de integración en `clusterAgent.confd`.
 
-{{< code-block lang="yaml" filename="datadog-values.yaml">}}
+{{< code-block lang="yaml" >}}
 clusterChecksRunner:
   enabled: true
   rbac:
@@ -297,9 +300,9 @@ clusterAgent:
           region_name: us-west-2
 {{< /code-block >}}
 
-## Para leer más
+## Leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/es/agent/configuration/agent-commands/?tab=agentv6v7#agent-information
+[1]: https://docs.datadoghq.com/es/agent/guide/agent-commands/?tab=agentv6v7#agent-information
 [2]: https://docs.datadoghq.com/es/agent/troubleshooting/windows_containers/#mixed-clusters-linux--windows

@@ -5,13 +5,11 @@ app_id: blink-blink
 app_uuid: eaa3426f-383b-44b4-a7f9-ff9706ed37f8
 assets:
   integration:
-    auto_install: false
     configuration: {}
     events:
       creates_events: false
     service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10327
+      metadata_path: ./assets/service_checks.json
     source_type_name: Blink_blink
 author:
   homepage: https://blinkops.com
@@ -21,12 +19,11 @@ author:
   vendor_id: blink-subscription
 categories:
 - orchestration
-- notifications
+- notification
 - 自動化
 - クラウド
 - セキュリティ
 - マーケットプレイス
-custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -35,10 +32,12 @@ integration_id: blink-blink
 integration_title: Blink
 integration_version: ''
 is_public: true
+kind: integration
 legal_terms:
-  eula: assets/eula.pdf
+  eula: ./assets/eula.pdf
 manifest_version: 2.0.0
 name: blink_blink
+oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -58,7 +57,7 @@ tile:
   - Supported OS::Windows
   - Supported OS::macOS
   - Category::Orchestration
-  - Category::Notifications
+  - Category::Notification
   - Category::Automation
   - Category::Cloud
   - Category::Security
@@ -68,16 +67,16 @@ tile:
   description: Blink は、セキュリティとインフラストラクチャーのためのノーコード自動化プラットフォームです
   media:
   - caption: Blink のインタラクティブなワークフローを使用して、Datadog のインシデントを自動的に作成および更新します。
-    image_url: images/incident.png
+    image_url: ./images/incident.png
     media_type: image
   - caption: Blink オートメーション内から、すべてのアクティブな Datadog インシデントのリストを素早く参照することができます。
-    image_url: images/list-incidents.png
+    image_url: ./images/list-incidents.png
     media_type: image
   - caption: Blink インテグレーションを接続し、Datadog のインシデントに対応したアクションを実行するオートメーションの作成を開始します。
-    image_url: images/connection-creation.png
+    image_url: ./images/connection-creation.png
     media_type: image
   - caption: スケジュールされた Blink オートメーションを使用して、定期的なイベントに対して Datadog のインシデントを自動的に作成します。
-    image_url: images/new-incident.png
+    image_url: ./images/new-incident.png
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
@@ -85,7 +84,6 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -103,7 +101,7 @@ tile:
 
 Blink の詳細については、[Blink ドキュメント][3]を参照してください。
 
-## Agent
+## サポート
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

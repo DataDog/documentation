@@ -1,6 +1,7 @@
 ---
 aliases:
 - /es/agent/faq/heroku-troubleshooting/
+kind: guía
 title: Solucionar problemas del paquete de compilación Datadog-Heroku
 ---
 

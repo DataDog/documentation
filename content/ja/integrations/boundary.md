@@ -5,7 +5,6 @@ assets:
   dashboards:
     Boundary Overview: assets/dashboards/boundary_overview.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -16,8 +15,9 @@ assets:
       prefix: boundary.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10280
     source_type_name: Boundary
+  logs:
+    source: boundary
   monitors:
     '[Boundary] High active connections': assets/monitors/active_connections.json
 author:
@@ -28,7 +28,6 @@ author:
 categories:
 - 構成 & デプロイ
 - ログの収集
-custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/boundary/README.md
 display_on_public_website: true
@@ -36,10 +35,12 @@ draft: false
 git_integration_title: boundary
 integration_id: boundary
 integration_title: Boundary
-integration_version: 2.2.3
+integration_version: 1.2.0
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: boundary
+oauth: {}
 public_title: Boundary
 short_description: Boundary コントローラーとワーカーを監視します。
 supported_os:
@@ -54,7 +55,6 @@ tile:
   - Supported OS::macOS
   - Category::Configuration & Deployment
   - Category::Log Collection
-  - Offering::Integration
   configuration: README.md#Setup
   description: Boundary コントローラーとワーカーを監視します。
   media: []
@@ -63,7 +63,6 @@ tile:
   title: Boundary
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -136,11 +135,11 @@ controller {
 
 Boundary インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "boundary" >}}
 
 
-### ログ収集
+### ログの収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -148,7 +147,7 @@ Boundary インテグレーションには、イベントは含まれません�
     logs_enabled: true
     ```
 
-2. To start collecting your Boundary logs, add this configuration block to your `boundary.d/conf.yaml` file:
+2. Boundary のログの収集を開始するには、次のコンフィギュレーションブロックを `boundary.d/conf.yaml` ファイルに追加します。
 
     ```yaml
     logs:
@@ -157,7 +156,7 @@ Boundary インテグレーションには、イベントは含まれません�
          path: /var/log/boundary/events.ndjson
     ```
 
-    Change the `path` parameter value based on your environment. See the [sample `boundary.d/conf.yaml` file][4] for all available configuration options.
+    `path` パラメーターの値を環境に合わせて変更します。使用可能なすべてのコンフィギュレーションオプションについては、[`boundary.d/conf.yaml` ファイルのサンプル][4]を参照してください。
 
 ## トラブルシューティング
 
@@ -165,7 +164,7 @@ Boundary インテグレーションには、イベントは含まれません�
 
 [1]: https://www.boundaryproject.io
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings/agent/latest
+[3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/boundary/datadog_checks/boundary/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

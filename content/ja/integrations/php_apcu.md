@@ -3,7 +3,6 @@ app_id: php-apcu
 app_uuid: ec09379e-851f-4ecc-be78-de5297087994
 assets:
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -14,11 +13,10 @@ assets:
       prefix: php_apcu.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10139
     source_type_name: PHP APCu
   monitors:
-    Cache is Full: assets/monitors/php-apcu_expunges.json
-    Cache usage is high: assets/monitors/php-apcu_high_usage.json
+    '[php_apcu] Cache Full has been detected': assets/monitors/php-apcu_expunges.json
+    '[php_apcu] Detected High Cache Usage': assets/monitors/php-apcu_high_usage.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: コミュニティ
@@ -26,7 +24,6 @@ author:
   support_email: noname@withgod.jp
 categories:
 - キャッシュ
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/php_apcu/README.md
 display_on_public_website: true
@@ -36,8 +33,10 @@ integration_id: php-apcu
 integration_title: PHP APCu
 integration_version: 0.0.2
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: php_apcu
+oauth: {}
 public_title: PHP APCu
 short_description: PHP APCu のメモリ内データキャッシュを監視します。
 supported_os:
@@ -51,7 +50,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: PHP APCu のメモリ内データキャッシュを監視します。
   media: []
@@ -60,7 +58,6 @@ tile:
   title: PHP APCu
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -101,7 +98,7 @@ Alias /apcu-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/datad
 </Location>
 ```
 
-### 構成
+### コンフィギュレーション
 
 1. `php_apcu` のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `php_apcu.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル `php_apcu.d/conf.yaml` ファイル][5]を参照してください。
     ```
@@ -118,15 +115,15 @@ Alias /apcu-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/datad
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "php-apcu" >}}
+{{< get-metrics-from-git "php_apcu" >}}
 
 
 ### イベント
 
 PHP APCu インテグレーションには、イベントは含まれません。
 
-### サービスチェック
-{{< get-service-checks-from-git "php-apcu" >}}
+### サービスのチェック
+{{< get-service-checks-from-git "php_apcu" >}}
 
 
 ## トラブルシューティング
@@ -135,7 +132,7 @@ PHP APCu インテグレーションには、イベントは含まれません�
 
 
 [1]: https://www.php.net/manual/en/book.apcu.php
-[2]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/php_apcu/datadog_checks/php_apcu/data/conf.yaml.example

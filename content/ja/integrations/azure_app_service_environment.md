@@ -1,56 +1,27 @@
 ---
-app_id: azure-appserviceenvironment
-app_uuid: 918d0126-a4b0-4d8d-b38b-718c6115938d
-assets:
-  integration:
-    auto_install: true
-    events:
-      creates_events: false
-    metrics:
-      check: azure.web_hostingenvironments_multirolepools.cpu_percentage
-      metadata_path: metadata.csv
-      prefix: azure.web_hostingenv
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 278
-    source_type_name: Azure App Service Environment
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
+aliases:
+- /ja/integrations/azure_appserviceenvironment
 categories:
-- クラウド
+- cloud
 - azure
-custom_kind: インテグレーション
 dependencies: []
-display_on_public_website: true
+description: Azure App Service Environment のキーメトリクスを追跡
+doc_link: https://docs.datadoghq.com/integrations/azure_app_service_environment/
 draft: false
 git_integration_title: azure_app_service_environment
+has_logo: true
 integration_id: azure-appserviceenvironment
-integration_title: Azure App Service Environment
+integration_title: Microsoft Azure App Service Environment
 integration_version: ''
 is_public: true
-manifest_version: 2.0.0
+kind: インテグレーション
+manifest_version: '1.0'
 name: azure_app_service_environment
-public_title: Azure App Service Environment
+public_title: Datadog-Microsoft Azure App Service Environment インテグレーション
 short_description: Azure App Service Environment のキーメトリクスを追跡
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cloud
-  - Category::Azure
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Azure App Service Environment のキーメトリクスを追跡
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Azure App Service Environment
+version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Azure App Service Environment は、App Service アプリを大規模かつ安全に実行するために完全に分離された専用の環境を提供する Azure App Service の機能です。
@@ -66,14 +37,14 @@ Datadog Azure インテグレーションを使用して、Azure App Service Env
 ## 収集データ
 
 ### メトリクス
-{{ get-metrics-from-git "azure-appserviceenvironment" }}
+{{< get-metrics-from-git "azure_app_service_environment" >}}
 
 
 ### イベント
 
 Azure App Service Environment インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Azure App Service Environment インテグレーションには、サービスのチェック機能は含まれません。
 

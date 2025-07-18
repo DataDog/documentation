@@ -3,6 +3,7 @@ aliases:
 - /ja/developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
 dependencies:
 - https://github.com/DataDog/heroku-buildpack-datadog/blob/master/README.md
+kind: documentation
 title: Datadog Heroku ビルドパック
 ---
 [Heroku ビルドパック][1]は、Datadog Agent を Heroku dyno にインストールして、システムメトリクス、カスタムアプリケーションメトリクス、トレースを収集します。カスタムアプリケーションメトリクスとトレースを収集するには、[DogStatsD または Datadog APM ライブラリ][2]をアプリケーションに含める必要があります。
@@ -102,7 +103,7 @@ git commit --allow-empty -m "Rebuild slug"
 git push heroku main
 ```
 
-## 構成
+## コンフィギュレーション
 
 上で示した環境変数のほかにも、いくつか設定できる変数があります。
 
@@ -183,10 +184,6 @@ heroku config:set DD_ENABLE_HEROKU_REDIS=true
 接続 URL が別の環境変数で定義されている場合、または複数の Redis インスタンスを構成したい場合は、`DD_REDIS_URL_VAR` 環境変数に接続文字列の変数名をカンマ区切りで設定します。例えば、Heroku Redis と Redis Enterprise Cloud の両方を利用している場合は、それに従って `DD_REDIS_URL_VAR` を設定します。
 
 ```
-heroku config:set REDIS_URL="redis://aaaaa:bbbbb@redis-url"
-heroku config:set REDISCLOUD_URL="redis://xxxxx:yyyyy@redis-cloud-url"
-
-# この環境変数は他の環境変数を指す必要があります。
 heroku config:set DD_REDIS_URL_VAR=REDIS_URL,REDISCLOUD_URL
 ```
 
@@ -203,10 +200,6 @@ heroku config:set DD_ENABLE_HEROKU_POSTGRES=true
 接続 URL が別の環境変数で定義されている場合、または複数の Postgres インスタンスを構成したい場合は、`DD_POSTGRES_URL_VAR` 環境変数に接続文字列の変数名をカンマ区切りで設定します。例えば、Postgres インスタンスが 2 つあり、接続文字列が `POSTGRES_URL1` と `POSTGRES_URL2` に格納されている場合は、それに従って `DD_POSTGRES_URL_VAR` を設定します。
 
 ```
-heroku config:set POSTGRES_URL1="postgres://aaaaa:bbbbb@postgres-url-1:5432/dbname"
-heroku config:set POSTGRES_URL2="postgres://xxxxx:yyyyy@postgres-url-2:5432/dbname"
-
-# この環境変数は他の環境変数を指す必要があります。
 heroku config:set DD_POSTGRES_URL_VAR=POSTGRES_URL1,POSTGRES_URL2
 ```
 
@@ -217,52 +210,6 @@ heroku config:set DD_ENABLE_DBM=true
 ```
 
 データベースモニタリングは、Datadog Agent のデータベース資格情報を作成する必要があるため、Heroku Postgres Essential Tier プランでは DBM は利用できません。
-
-### Dogstatsd Mapper プロファイルを有効にする (Sidekiq)
-
-[Sidekiq](https://docs.datadoghq.com/integrations/sidekiq/) のようないくつかのインテグレーションでは、 [DogStatsD Mapper](https://docs.datadoghq.com/developers/dogstatsd/dogstatsd_mapper/) プロファイルが必要です。
-
-新しい DogStatsD Mapper プロファイルを追加するには、[prerun.sh スクリプト](#prerun-script)に次のスニペットを追加してください:
-
-```
-cat << 'EOF' >> "$DATADOG_CONF"
-
-dogstatsd_mapper_profiles:
-  - name: '<PROFILE_NAME>'
-    prefix: '<PROFILE_PREFIX>'
-    mappings:
-      - match: '<METRIC_TO_MATCH>'
-        match_type: '<MATCH_TYPE>'
-        name: '<MAPPED_METRIC_NAME>'
-        tags:
-          '<TAG_KEY>': '<TAG_VALUE_TO_EXPAND>'
-EOF
-```
-
-例えば、Sidekiq インテグレーションを有効にするには、次のスニペットを追加してください:
-
-```
-cat << 'EOF' >> "$DATADOG_CONF"
-
-dogstatsd_mapper_profiles:
-  - name: sidekiq
-    prefix: "sidekiq."
-    mappings:
-      - match: 'sidekiq\.sidekiq\.(.*)'
-        match_type: "regex"
-        name: "sidekiq.$1"
-      - match: 'sidekiq\.jobs\.(.*)\.perform'
-        name: "sidekiq.jobs.perform"
-        match_type: "regex"
-        tags:
-          worker: "$1"
-      - match: 'sidekiq\.jobs\.(.*)\.(count|success|failure)'
-        name: "sidekiq.jobs.worker.$2"
-        match_type: "regex"
-        tags:
-          worker: "$1"
-EOF
-```
 
 ### その他のインテグレーションを有効にする
 
@@ -287,40 +234,6 @@ instances:
 ```
 
 **注**: 使用可能なすべての構成オプションの詳細については、サンプル [mcache.d/conf.yaml][22] を参照してください。
-
-#### prerun.sh スクリプトを使用してインテグレーション構成を動的に変更する
-
-環境変数に構成の詳細 (データベース構成やシークレットなど) が保存されている場合、[prerun.sh スクリプト](#prerun-script)を使用して、Agent が開始する前にこれらを Datadog Agent 構成に動的に追加することができます。
-
-例えば、Postgres インテグレーションを有効にするには、アプリケーションのルートにプレースホルダ付きのファイル `datadog/conf.d/postgres.d/conf.yaml` を追加します (または、この[構成オプション](#configuration)を変更している場合は `/$DD_HEROKU_CONF_FOLDER/conf.d/postgres.d/conf.yaml` を使用します)。
-
-```yaml
-init_config:
-
-instances:
-  - host: <YOUR HOSTNAME>
-    port: <YOUR PORT>
-    username: <YOUR USERNAME>
-    password: <YOUR PASSWORD>
-    dbname: <YOUR DBNAME>
-    ssl: True
-```
-
-その後、`prerun.sh` スクリプトを使用して、これらのプレースホルダを環境変数から取得した実際の値に置き換えます。
-
-```bash
-# Heroku アプリケーションの環境変数を使用して、Postgres の構成を上記の設定から更新します
-if [ -n "$DATABASE_URL" ]; then
-  POSTGREGEX='^postgres://([^:]+):([^@]+)@([^:]+):([^/]+)/(.*)$'
-  if [[ $DATABASE_URL =~ $POSTGREGEX ]]; then
-    sed -i "s/<YOUR HOSTNAME>/${BASH_REMATCH[3]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
-    sed -i "s/<YOUR USERNAME>/${BASH_REMATCH[1]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
-    sed -i "s/<YOUR PASSWORD>/${BASH_REMATCH[2]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
-    sed -i "s/<YOUR PORT>/${BASH_REMATCH[4]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
-    sed -i "s/<YOUR DBNAME>/${BASH_REMATCH[5]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
-  fi
-fi
-```
 
 ### コミュニティのインテグレーション
 
@@ -410,7 +323,7 @@ heroku config:add DD_LOG_LEVEL=ERROR
 
 スラグサイズを削減するには、APM 機能を使用していない場合は `DD_APM_ENABLED` を `false` に設定し、プロセスモニタリングを使用していない場合は `DD_PROCESS_AGENT` を `true` に設定します。
 
-## デバッグ
+## デバッグ作業
 
 [情報またはデバッグコマンド][26]のいずれかを実行するには、`agent-wrapper` コマンドを使用します。
 
@@ -455,10 +368,8 @@ RUN sh -c "echo 'deb [signed-by=${DATADOG_APT_KEYRING}] https://apt.datadoghq.co
 RUN touch ${DATADOG_APT_KEYRING}
 RUN curl -o /tmp/DATADOG_APT_KEY_CURRENT.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_CURRENT.public" && \
     gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_CURRENT.public
-RUN curl -o /tmp/DATADOG_APT_KEY_06462314.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_06462314.public" && \
-    gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_06462314.public
 RUN curl -o /tmp/DATADOG_APT_KEY_C0962C7D.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_C0962C7D.public" && \
-    gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_C0962C7D.public
+gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_C0962C7D.public
 RUN curl -o /tmp/DATADOG_APT_KEY_F14F620E.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_F14F620E.public" && \
     gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_F14F620E.public
 RUN curl -o /tmp/DATADOG_APT_KEY_382E94DE.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_382E94DE.public" && \
@@ -474,7 +385,7 @@ COPY entrypoint.sh /
 # DogStatsD および trace-agent ポートを公開
 EXPOSE 8125/udp 8126/tcp
 
-# Datadog 構成をコピー
+# Datadog コンフィギュレーションをコピー
 COPY datadog-config/ /etc/datadog-agent/
 
 CMD ["/entrypoint.sh"]
@@ -537,7 +448,7 @@ Agent (v7.27.0)
 
 ```
 
-### デバッグ
+### デバッグ作業
 
 #### Datadog にデータがない
 

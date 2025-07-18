@@ -6,7 +6,6 @@ assets:
     memcached: assets/dashboards/memcached_dashboard.json
     memcached_screenboard: assets/dashboards/memcached_screenboard.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -19,8 +18,9 @@ assets:
     - memcached
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 32
     source_type_name: Memcached
+  logs:
+    source: memcached
   saved_views:
     memcached_processes: assets/saved_views/memcached_processes.json
 author:
@@ -32,7 +32,6 @@ categories:
 - caching
 - log collection
 - tracing
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mcache/README.md
 display_on_public_website: true
@@ -40,10 +39,12 @@ draft: false
 git_integration_title: mcache
 integration_id: memcached
 integration_title: Memcache
-integration_version: 6.1.0
+integration_version: 3.3.1
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: mcache
+oauth: {}
 public_title: Memcache
 short_description: メモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡する。
 supported_os:
@@ -57,23 +58,14 @@ tile:
   - Category::Tracing
   - Supported OS::Linux
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: メモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡する。
   media: []
   overview: README.md#Overview
-  resources:
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/speed-up-web-applications-memcached
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/instrument-memcached-performance-metrics-dogstatsd
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached
   support: README.md#Support
   title: Memcache
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -86,7 +78,7 @@ Agent の Memcache チェックを使用して、Memcache のメモリ使用量�
 
 Memcache チェックは [Datadog Agent][1] パッケージに含まれています。Memcache サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
 
@@ -95,11 +87,11 @@ Memcache サーバーを起動する際に、バインディングプロトコ�
 #### メトリクスの収集
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `mcache.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル mcache.d/conf.yaml][2] を参照してください。
 
@@ -128,7 +120,7 @@ Datadog APM は、Memcache と統合して分散システム全体のトレー�
 [4]: https://docs.datadoghq.com/ja/tracing/send_traces/
 [5]: https://docs.datadoghq.com/ja/tracing/setup/
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -136,9 +128,9 @@ Datadog APM は、Memcache と統合して分散システム全体のトレー�
 
 | パラメーター            | 値                                 |
 | -------------------- | ------------------------------------- |
-| `<INTEGRATION_NAME>` | `mcache`                              |
-| `<INIT_CONFIG>`      | 空白または `{}`                         |
-| `<INSTANCE_CONFIG>`  | `{"url": "%%host%%","port": "11211"}` |
+| `<インテグレーション名>` | `mcache`                              |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                         |
+| `<インスタンスコンフィギュレーション>`  | `{"url": "%%host%%","port": "11211"}` |
 
 ##### トレースの収集
 
@@ -156,7 +148,7 @@ Agent コンテナで必要な環境変数
 
 次に、[アプリケーションコンテナをインスツルメント][4]し、Agent コンテナの名前に `DD_AGENT_HOST` を設定します。
 
-#### ログ収集
+#### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -189,7 +181,7 @@ _Agent バージョン 6.0 以降で利用可能_
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "memcached" >}}
+{{< get-metrics-from-git "mcache" >}}
 
 
 `mcache.d/conf.yaml` で `options.slabs: true` と設定している場合、チェックは `memcache.slabs.*` メトリクスのみを収集します。同様に、`options.items: true` と設定している場合、チェックは `memcache.items.*` メトリクスのみを収集します。
@@ -198,8 +190,8 @@ _Agent バージョン 6.0 以降で利用可能_
 
 Mcache チェックには、イベントは含まれません。
 
-### サービスチェック
-{{< get-service-checks-from-git "memcached" >}}
+### サービスのチェック
+{{< get-service-checks-from-git "mcache" >}}
 
 
 ## トラブルシューティング
@@ -213,7 +205,7 @@ Mcache チェックには、イベントは含まれません。
 - [Redis または Memcached を使用した ElastiCache のパフォーマンスメトリクスの監視][6]
 
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest
+[1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://docs.datadoghq.com/ja/help/
 [4]: https://www.datadoghq.com/blog/speed-up-web-applications-memcached

@@ -3,17 +3,18 @@ aliases:
 - /ja/tracing/advanced/setting_primary_tags_to_scope/
 further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces/
-  tag: ドキュメント
+  tags: トレースの加工
   text: ログとトレースの接続
 - link: /tracing/manual_instrumentation/
-  tag: ドキュメント
+  tags: トレースの加工
   text: 手動でアプリケーションのインスツルメンテーションを行いトレースを作成します。
 - link: /tracing/opentracing/
-  tag: ドキュメント
+  tags: トレースの加工
   text: アプリケーション全体に Opentracing を実装します。
 - link: /tracing/glossary/
-  tag: ドキュメント
+  tag: APM の UI を利用する
   text: サービス、リソース、トレースの詳細
+kind: documentation
 title: プライマリタグをスコープに設定
 ---
 
@@ -149,7 +150,7 @@ DD_APM_FEATURES=enable_cid_stats
 
 Agent を再起動します。[APM 設定][6]ページに移動し、使用する第 2 プライマリタグを選択します。この設定の変更が反映されるまで、最大で 2 時間かかることがあります。
 
-これで、[サービスカタログ][7]で、コンテナ化されたサービスから送信されるタグによって、サービスをフィルターすることができます。ダッシュボードやモニターで使用されるトレースメトリクスも、コンテナのプライマリタグで集計することができます。
+これで、[Service List][7] で、コンテナ化されたサービスから送信されるタグによって、サービスをフィルターすることができます。ダッシュボードやモニターで使用されるトレースメトリクスも、コンテナのプライマリタグで集計することができます。
 
 ### タグとしてのカスタムラベル
 
@@ -172,6 +173,6 @@ Agent を再起動します。[APM 設定][6]ページに移動し、使用す�
 [4]: /ja/getting_started/tagging/assigning_tags/#traces
 [5]: /ja/tracing/metrics/metrics_namespace/
 [6]: https://app.datadoghq.com/apm/settings
-[7]: https://app.datadoghq.com/services
+[7]: https://app.datadoghq.com/apm/services
 [8]: /ja/getting_started/tagging/assigning_tags
 [9]: /ja/tracing/troubleshooting/#data-volume-guidelines

@@ -1,25 +1,25 @@
 ---
-aliases:
-- /ja/network_performance_monitoring/devices/guide/tags-with-regex/
-further_reading:
-- link: /network_monitoring/devices/snmp_metrics
-  tag: Documentation
-  text: Network Device Monitoring の SNMP メトリクス
-- link: /getting_started/tagging
-  tag: Documentation
-  text: タグの使用を開始する
 title: 正規表現を使用した NDM タグ
+kind: ガイド
+aliases:
+  - /ja/network_performance_monitoring/devices/guide/tags-with-regex/
+further_reading:
+  - link: /network_monitoring/devices/setup
+    tag: Documentation
+    text: ネットワークデバイスモニタリングのセットアップ
+  - link: /getting_started/tagging
+    tag: Documentation
+    text: タグの使用を開始する
 ---
-
 Datadog ネットワークデバイスモニタリング (NDM) は、正規表現に対応し `<KEY>:<VALUE>` の形式でメトリクスタグを作成します。
 
 ## セットアップ
 
 ### インストール
 
-[セットアップ手順][1]に従って Datadog Network Device Monitoring をインストールし、SNMP メトリクスとトラップの収集を開始します。
+[セットアップ手順][1]に従い Datadog NDM をインストールします。
 
-### 構成
+### コンフィギュレーション
 
 [SNMP conf.yaml][2] で、OID から `metric_tags` を指定します。デバイスに対し複数のタグを作成するには、正規表現を使用して結果の値を複数のタグに分けるか、正規表現の [Python エンジン][3]を使用して部分文字列を取得します。
 
@@ -56,7 +56,7 @@ metrics:
           name: ifDescr
         match: '(\w)(\w+)'
         tags:
-         - prefix: '\1'
+         - prefix: '\1' 
          - suffix: '\2'
 ```
 
@@ -65,6 +65,6 @@ metrics:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/network_monitoring/devices/snmp_metrics
+[1]: /ja/network_monitoring/devices/setup
 [2]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/conf.yaml.example
 [3]: https://docs.python.org/3/library/re.html

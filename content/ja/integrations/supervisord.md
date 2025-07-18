@@ -3,7 +3,6 @@ app_id: supervisord
 app_uuid: c4ee3618-f4b4-48b8-9515-a4a2f4091c0d
 assets:
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,8 +16,9 @@ assets:
     - supervisord
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 116
     source_type_name: Supervisord
+  logs:
+    source: supervisord
   saved_views:
     supervisord_processes: assets/saved_views/supervisord_processes.json
 author:
@@ -29,7 +29,6 @@ author:
 categories:
 - os & system
 - log collection
-custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/supervisord/README.md
 display_on_public_website: true
@@ -37,10 +36,12 @@ draft: false
 git_integration_title: supervisord
 integration_id: supervisord
 integration_title: Supervisord
-integration_version: 2.6.0
+integration_version: 2.5.1
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: supervisord
+oauth: {}
 public_title: Supervisord
 short_description: Supervisor 管理プロセスのステータス、アップタイム、数を監視。
 supported_os:
@@ -55,19 +56,14 @@ tile:
   - Supported OS::Windows
   - Category::OS とシステム
   - Category::ログの収集
-  - Offering::Integration
   configuration: README.md#Setup
   description: Supervisor 管理プロセスのステータス、アップタイム、数を監視。
   media: []
   overview: README.md#Overview
-  resources:
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/supervisor-monitors-your-processes-datadog-monitors-supervisor
   support: README.md#Support
   title: Supervisord
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Supervisor イベント][1]
@@ -78,11 +74,11 @@ tile:
 
 ## セットアップ
 
-### Installation
+### インストール
 
 Supervisor チェックは [Datadog Agent][2] パッケージに含まれています。Supervisor が実行されているサーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 #### supervisord の準備
 
@@ -122,11 +118,11 @@ Supervisor がルートとして実行されている場合は、非ルートユ
 `supervisord` を再度読み込みます。
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 [Agent の構成ディレクトリ][1]のルートにある `conf.d/` フォルダーの `supervisord.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル supervisord.d/conf.yaml][2] を参照してください。
 
@@ -153,7 +149,7 @@ instances:
 [2]: https://github.com/DataDog/integrations-core/blob/master/supervisord/datadog_checks/supervisord/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -161,15 +157,15 @@ instances:
 
 | パラメーター            | 値                                                                                                              |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `<INTEGRATION_NAME>` | `supervisord`                                                                                                      |
-| `<INIT_CONFIG>`      | 空白または `{}`                                                                                                      |
-| `<INSTANCE_CONFIG>`  | `{"name":"<SUPERVISORD_SERVER_NAME>", "host":"%%host%%", "port":"9001", "username":"<USERNAME>", "password":"<PASSWORD>"}` |
+| `<インテグレーション名>` | `supervisord`                                                                                                      |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                                      |
+| `<インスタンスコンフィギュレーション>`  | `{"name":"<SUPERVISORD_SERVER_NAME>", "host":"%%host%%", "port":"9001", "username":"<USERNAME>", "password":"<PASSWORD>"}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
-#### ログ収集
+#### ログの収集
 
 
 
@@ -207,7 +203,7 @@ instances:
 
 Supervisor チェックには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "supervisord" >}}
 
 

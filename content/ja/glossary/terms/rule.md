@@ -1,7 +1,7 @@
 ---
 core_product:
 - security
-- csm
+- cspm
 synonyms:
 - 検出ルール
 - コンプライアンスルール

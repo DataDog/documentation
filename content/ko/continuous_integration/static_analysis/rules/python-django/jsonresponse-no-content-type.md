@@ -1,6 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
+kind: 도움말
 title: JsonResponse에 콘텐츠 유형을 지정하지 마십시오.
 ---
 ## 메타데이터

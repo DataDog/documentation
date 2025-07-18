@@ -3,24 +3,19 @@ app_id: vsphere
 app_uuid: d9b9104f-ffd1-42be-8e18-d8a3aa289b98
 assets:
   dashboards:
-    VMware vSphere - Property Metrics: assets/dashboards/vmware_vsphere-_property_metrics.json
     VMware vSphere TKG - Overview: assets/dashboards/vmware_vsphere_tkg_-_overview.json
     vsphere-overview: assets/dashboards/vsphere_overview.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
       creates_events: true
     metrics:
-      check:
-      - vsphere.cpu.usage.avg
-      - vsphere.vm.count
+      check: vsphere.vm.count
       metadata_path: metadata.csv
       prefix: vsphere.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 85
     source_type_name: vSphere
 author:
   homepage: https://www.datadoghq.com
@@ -30,7 +25,6 @@ author:
 categories:
 - cloud
 - network
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/vsphere/README.md
 display_on_public_website: true
@@ -38,10 +32,12 @@ draft: false
 git_integration_title: vsphere
 integration_id: vsphere
 integration_title: vSphere
-integration_version: 8.0.1
+integration_version: 6.3.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: vsphere
+oauth: {}
 public_title: vSphere
 short_description: vSphere のリソース使用状況がアプリケーションに与える影響を把握
 supported_os:
@@ -56,19 +52,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: vSphere のリソース使用状況がアプリケーションに与える影響を把握
   media: []
   overview: README.md#Overview
-  resources:
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/unified-vsphere-app-monitoring-datadog/#auto-discovery-across-vm-and-app-layers
   support: README.md#Support
   title: vSphere
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Vsphere のグラフ][1]
@@ -83,7 +74,7 @@ tile:
 
 vSphere チェックは [Datadog Agent][2] パッケージに含まれています。vCenter サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 vCenter の **Administration** セクションで、`datadog-readonly` という読み取り専用のユーザーを追加し、監視が必要なリソースに読み取り専用のユーザー権限を適用します。リソース階層内のすべての子オブジェクトを監視するには、"Propagate to children” オプションを選択します。
 
@@ -128,21 +119,9 @@ collect_per_instance_filters:
 
 `disk` メトリクスは、ホストの各ディスクに特定されるため、収集するには `collect_per_instance_filters` を使用してこのメトリクスを有効にする必要があります。
 
-#### プロパティメトリクスの収集
-
-vSphere インテグレーションでは、プロパティベースのメトリクスも収集可能です。例えば、ホストがメンテナンスモードかどうか、またはクラスターが DRS に構成されているかなどの構成プロパティが該当します。
-
-プロパティメトリクスを有効にするには、次のオプションを構成してください。
-```
-collect_property_metrics: true
-```
-
-プロパティメトリクスにはリソース名がプレフィックスとして付与されます。例えば、ホストのプロパティメトリクスには `vsphere.host.*` が、VM のプロパティメトリクスには `vsphere.vm.*` が付与されます。利用可能なプロパティメトリクスの一覧は [metadata.csv][8] でご確認ください。
-
-
 ### イベント
 
-このチェックは vCenter イベントマネージャーでイベントを監視し、それを Datadog に送信します。デフォルトで、以下のタイプのイベントを送信します。
+このチェックは vCenter イベントマネージャーでイベントを監視し、それを Datadog に送信します。以下のイベントタイプを送信します。
 
 - AlarmStatusChangedEvent
 - VmBeingHotMigratedEvent
@@ -154,9 +133,7 @@ collect_property_metrics: true
 - VmSuspendedEvent
 - VmPoweredOffEvent
 
-追加のイベントを `vim.event` クラスから収集するには、[サンプル vsphere.d/conf.yaml][4] 内の `include_events` パラメータセクションを使用してください。
-
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "vsphere" >}}
 
 
@@ -178,7 +155,7 @@ Datadog vSphere インテグレーションは、[TKG][12] VM とコントロー
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/vsphere/images/vsphere_graph.png
-[2]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/vsphere/datadog_checks/vsphere/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

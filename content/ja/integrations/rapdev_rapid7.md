@@ -8,7 +8,6 @@ assets:
     RapDev rapid7 Investigations: assets/dashboards/rapdev_rapid7_investigations.json
     RapDev rapid7 Overview: assets/dashboards/rapdev_rapid7_overview.json
   integration:
-    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -19,7 +18,6 @@ assets:
       prefix: rapdev.rapid7.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10191
     source_type_name: RapDev Rapid7
   logs:
     source: rapid7
@@ -31,9 +29,8 @@ author:
   vendor_id: rapdev
 categories:
 - ログの収集
-- marketplace
-- security
-custom_kind: インテグレーション
+- マーケットプレイス
+- セキュリティ
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -42,10 +39,12 @@ integration_id: rapdev-rapid7
 integration_title: Rapid7
 integration_version: ''
 is_public: true
+kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_rapid7
+oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -68,9 +67,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Submitted Data Type::Metrics
-  - Submitted Data Type::Events
-  - Submitted Data Type::Logs
   configuration: README.md#Setup
   description: Rapid7 ログおよび調査アクティビティを監視します
   media:
@@ -86,7 +82,6 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -94,7 +89,7 @@ tile:
 
 チェックのログ部分 (有効な場合) は、Rapid7 REST API を使用して IDR ログストリームをクエリします。このインテグレーションは、Rapid7 プラットフォームレベルのログとみなされないすべてのログを返します。これらのログは Datadog に送信されます。**注:** これらのログの提出には、[Datadog ログ管理の価格体系](https://www.datadoghq.com/pricing/?product=log-management#log-management)に記載されているように、Datadog の価格プランに基づく追加料金が発生する場合があります。これらのログは、通常、Rapid7 エンドポイントエージェントのサマリーおよび特定の時間におけるプロセスのステータスで構成されています。
 
-### ダッシュボード
+### ダッシュボード  
 1. このインテグレーションには、Rapid 7 Investigations を要約したすぐに使えるダッシュボードが含まれています。
 2. このインテグレーションには、ログに基づくダッシュボードの例も含まれています。このダッシュボードはインテグレーションのインストール時に利用可能ですが、データの流れを確認するために、R7 ログソースのファセットを作成する必要があります。
 
@@ -104,7 +99,7 @@ tile:
 ### メトリクス
 各チェックで処理されるログの数が、メトリクスとして報告されます。
 
-### ログ収集
+### ログの収集
 ログ収集はオプションで、デフォルトでは無効になっています。
 このインテグレーションでは、Rapid7 ログ API を呼び出し、最終インターバルで利用可能なすべてのログをクエリします。デフォルトのインターバル時間は最新の分数です。Rapid7 insightIDR [ログ検索ドキュメント][5]で詳しく説明されているとおり、特定の[ログセット][4]を指定して、そのログのみを取得することができます。
 
@@ -128,4 +123,4 @@ tile:
 [5]: https://docs.rapid7.com/insightidr/log-search/
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-rapid7" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-rapid7" target="_blank">こちらをクリック</a>してください。

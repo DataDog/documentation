@@ -3,27 +3,27 @@ aliases:
 - /ja/agent/autodiscovery/ad_identifiers
 - /ja/agent/guide/ad_identifiers
 further_reading:
-- link: /containers/kubernetes/integrations/
+- link: /agent/kubernetes/integrations/
   tag: Documentation
-  text: Configure integrations with Autodiscovery on Kubernetes
-- link: /containers/docker/integrations/
-  tag: Documentation
-  text: Configure integrations with Autodiscovery on Docker
+  text: オートディスカバリーのインテグレーションテンプレートの作成とロード
 - link: /agent/guide/autodiscovery-management/
-  tag: ドキュメント
+  tag: Documentation
   text: Agent オートディスカバリーに含めるコンテナの管理
+kind: documentation
 title: オートディスカバリーコンテナ識別子
 ---
 
-This document explains how to apply an [Autodiscovery][1] configuration template to a specific container. The `ad_identifiers` parameter can match a container image name or a custom identifier.
+オートディスカバリーコンテナ識別子、すなわち `ad_identifiers` を使用すると、オートディスカバリーコンフィギュレーションファイルテンプレートを特定のコンテナに適用できます。それには[コンテナイメージの短い名前](#short-image-container-identifiers)を使用する方法と、[カスタムなオートディスカバリーコンテナ識別子](#custom-autodiscovery-container-identifiers)を使用する方法があります。
 
-## Container image name
+**注**: 他のコンフィギュレーションタイプ（key-value ストア、Docker ラベル、または Kubernetes ポッドアノテーション）の場合、インテグレーションのコンフィギュレーションテンプレートとコンテナとのマッチングには、key-value ストア、ラベル、またはアノテーションコンフィギュレーションに含まれる `<CONTAINER_IDENTIFIER>` が使用されます。
 
-To apply the following Autodiscovery configuration template to a given container, replace `<AUTODISCOVERY_IDENTIFIER>` with the [short][2] container image name:
+## ショートイメージによるコンテナ識別子
+
+以下のオートディスカバリーコンフィギュレーションテンプレートを特定のコンテナに適用するために、`<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` に**コンテナイメージの短い名前**を指定します。
 
 ```yaml
 ad_identifiers:
-  <AUTODISCOVERY_IDENTIFIER>
+  <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 
 init_config:
   <INIT_CONFIG>
@@ -32,7 +32,7 @@ instances:
   <INSTANCES_CONFIG>
 ```
 
-**Example**: The following Apache Autodiscovery configuration template applies to a container image named `httpd`:
+たとえば、以下の Apache オートディスカバリーコンフィギュレーションテンプレートを Agent に使用するとします。
 
 ```yaml
 ad_identifiers:
@@ -45,9 +45,15 @@ logs:
   service: webapp
 ```
 
-This matches **any** `httpd` container image on your host. If you have one container running `foo/httpd:latest` and another running `bar/httpd:v2`, the Agent applies the above template to both containers.
+これにより、ホスト上の**すべての** `httpd` コンテナがマッチします。あるコンテナが `library/httpd:latest` で稼働し、別のコンテナが `<WHATEVER>/httpd:v2` で稼働しているとすると、Agent は上記のテンプレートを両方のコンテナに適用します。これはたとえば、コンテナイメージに `library/httpd:latest` ではなく `httpd` という短い名前を指定しているからです。
 
-When using short image names as Autodiscovery container identifiers, the Agent cannot distinguish between identically named images from different sources or with different tags.
+オートディスカバリーコンテナ識別子に短いイメージの名前を指定すると、**Agent はその名前にマッチするイメージの中で、ソースが異なる、またはタグが異なるものを区別できません。**
+
+## 標準ラベルからタグを追加
+
+カスタム構成ファイル内でオートディスカバリーコンフィギュレーションが定義されているとしても、 `env`、`service`、`version` をタグ付けする標準ラベルは併用できます。
+
+既存のコンテナでこれらのラベルを構成する方法については、[統合サービスタグ付け][1]を参照してください。
 
 ### 複数の識別子
 
@@ -59,58 +65,46 @@ ad_identifiers:
   - my-custom-httpd-image
 ```
 
-This matches **any** container images on your host that match `httpd` **or** `my-custom-httpd-image`.
-
 ## カスタムなオートディスカバリーコンテナ識別子
 
-If you want to apply different configuration templates to containers running the same image, use custom container identifiers. 
+同じイメージを実行しているコンテナに異なるオートディスカバリーコンフィギュレーションテンプレートを適用するには、カスタムな値の `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` を使用し、それを `com.datadoghq.ad.check.id` ラベルで指定してコンテナを識別します。以下のコンフィギュレーションファイルを使用する場合、
 
-1. Supply a custom container identifier to your container using a Docker label or Kubernetes annotation.
+```yaml
+ad_identifiers:
+  <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 
-   **Example**: 
-   Apply a Docker label or Kubernetes annotation to identify your container as `foo`:
+init_config:
+  <INIT_CONFIG>
 
-   {{< tabs >}}
-   {{% tab "Docker label" %}}
+instances:
+  <INSTANCES_CONFIG>
+```
 
-   ```yaml
-   LABEL com.datadoghq.ad.check.id="foo"
-   ```
+コンテナに対して有効にするには
 
-   **Note**: The `com.datadoghq.ad.check.id` label takes precedence over the image name.
+{{< tabs >}}
+{{% tab "Docker" %}}
+このオートディスカバリー構成テンプレートを docker の特定のコンテナに適用するために、以下のラベルを追加します。
 
-   {{% /tab %}}
-   {{% tab "Kubernetes annotation" %}}
+```yaml
+com.datadoghq.ad.check.id: <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
+```
+**注**: `com.datadoghq.ad.check.id` ラベルはイメージの名前よりも優先されます。
 
-   ```text
-   ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id: 'foo'
-   ```
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+Kubernetes に以下のアノテーションを追加して、このオートディスカバリー構成を適用します (`<CONTAINER_IDENTIFIER>` はポッド内のコンテナ名です)。
 
-   Replace `<CONTAINER_IDENTIFIER>` with the container name within the pod.
+```text
+ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id: <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
+```
 
-   **Note**: Supported in Datadog Agent v6.25+ and v7.25. The `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id` label takes precedence over the image name.
-   {{% /tab %}}
-   {{< /tabs >}}
-
-2. Reference this custom value in your Autodiscovery configuration template.
-
-   **Example**: 
-   The following Apache Autodiscovery configuration template designates a container image with the custom name `foo`:
-
-   ```yaml
-   ad_identifiers:
-     - foo
-   init_config:
-   instances:
-     - apache_status_url: http://%%host%%/server-status?auto
-   logs:
-     source: apache
-     service: webapp
-   ```
+**注**: このアノテーションは、バージョン `6.25.0` と `7.25.0` 以降にのみ適用されます。`ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id` ラベルはイメージ/名前より優先されます。
+{{% /tab %}}
+{{< /tabs >}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/getting_started/containers/autodiscovery
-[2]: /ja/glossary/#short-image
+[1]: /ja/getting_started/tagging/unified_service_tagging

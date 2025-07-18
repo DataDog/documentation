@@ -1,69 +1,30 @@
 ---
-app_id: pusher
-app_uuid: 5ee7a117-c7d9-4389-ab02-1566c904a896
-assets:
-  dashboards:
-    pusher: assets/dashboards/pusher_dashboard.json
-  integration:
-    auto_install: true
-    events:
-      creates_events: false
-    metrics:
-      check:
-      - pusher.messages
-      metadata_path: metadata.csv
-      prefix: pusher.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 165
-    source_type_name: Pusher
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
-- metrics
-- message queues
-custom_kind: integration
+- processing
+- messaging
 dependencies: []
-display_on_public_website: true
+description: Pusher から Datadog にメトリクスを取り込み、アプリエンゲージメントを参照および監視。
+doc_link: https://docs.datadoghq.com/integrations/pusher/
 draft: false
 git_integration_title: pusher
+has_logo: true
 integration_id: pusher
 integration_title: Pusher
 integration_version: ''
 is_public: true
-manifest_version: 2.0.0
+kind: インテグレーション
+manifest_version: '1.0'
 name: pusher
-public_title: Pusher
+public_title: Datadog-Pusher インテグレーション
 short_description: Pusher から Datadog にメトリクスを取り込み、アプリエンゲージメントを参照および監視。
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Metrics
-  - Category::Message Queues
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Pusher から Datadog にメトリクスを取り込み、アプリエンゲージメントを参照および監視。
-  media: []
-  overview: README.md#Overview
-  resources:
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/pusher-monitoring/
-  support: README.md#Support
-  title: Pusher
+version: '1.0'
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-{{< img src="integrations/pusher/pusher_dashboard.png" alt="Pusher ダッシュボード" popup="true">}}
 
 ## 概要
 
 Pusher アプリ全体のリアルタイムメッセージと接続分析を監視して、以下のことができます。
 
-- 同時接続をリアルタイムに視覚化します。
+- 同時接続をリアルタイムに可視化
 - ブロードキャスト、クライアントイベント、Webhook、API メッセージなどのタイプ別に、送信されたメッセージを追跡できます。
 - 平均値、中央値、最大値、95 パーセンタイルなど、メッセージサイズの統計詳細データを取得できます。
 - 課金タイムテーブル内の使用状況を監視できます。
@@ -76,9 +37,9 @@ Pusher からのメトリクスを監視するには、以下の手順に従っ�
 
 1. [Datadog API キー][1]をコピーします。
 
-2. Pusher アカウント設定に移動して**Datadog インテグレーション**を選択するか、[サインイン][2]します。
+2. Pusher アカウント設定に移動してDatadog インテグレーションを選択するか、[サインイン][2]します。
 
-3. Datadog API キーを貼り付け、**Save** をクリックします。
+3. Datadog API キーを貼り付け、Save をクリックします。
 
 4. Datadog ダッシュボードに戻り、デフォルトの Pusher ダッシュボードビューにメトリクスの表示が開始されたことを確認します。
 
@@ -96,7 +57,7 @@ Pusher からのメトリクスを監視するには、以下の手順に従っ�
 
 Pusher インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Pusher インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -104,14 +65,7 @@ Pusher インテグレーションには、サービスのチェック機能は�
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
-## その他の参考資料
-
-お役に立つドキュメント、リンクや記事:
-
-- [Pusher のリアルタイムモニタリングの導入][5]
-
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://dashboard.pusher.com/accounts/sign_in
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/pusher/pusher_metadata.csv
 [4]: https://docs.datadoghq.com/ja/help/
-[5]: https://www.datadoghq.com/blog/pusher-monitoring/

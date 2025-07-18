@@ -1,7 +1,7 @@
 ---
 core_product:
 - security
-- cloud security
+- cspm
 title: コントロール
 ---
 

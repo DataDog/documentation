@@ -4,7 +4,6 @@ categories:
 - クラウド
 - コスト管理
 - ネットワーク
-custom_kind: インテグレーション
 dependencies: []
 description: Azure の各サブスクリプションリソース (コンピューティング、ネットワーク、ストレージ) について、事前に構成された上限に照らして使用状況を追跡します
 doc_link: https://docs.datadoghq.com/integrations/azure_usage_and_quotas/
@@ -15,6 +14,7 @@ integration_id: azure-usage-and-quotas
 integration_title: Microsoft Azure Usage and Quotas
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: azure_usage_and_quotas
 public_title: Datadog-Microsoft Azure Usage and Quotas インテグレーション
@@ -22,7 +22,6 @@ short_description: Azure の使用状況を、事前に構成された上限に�
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure では、サブスクリプションリソースに対して事前に構成された上限を設定しています。予期せぬプロビジョニングの失敗を防ぐには、この上限を念頭に置いて Azure 環境の設計やスケーリングを行ってください。Azure Usage and Quotas からメトリクスを取得して、以下を行うことができます。
@@ -39,14 +38,14 @@ Azure では、サブスクリプションリソースに対して事前に構�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure-usage-and-quotas" >}}
+{{< get-metrics-from-git "azure_usage_and_quotas" >}}
 
 
 ### イベント
 
 Azure Quota インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Azure Quota インテグレーションには、サービスのチェック機能は含まれません。
 

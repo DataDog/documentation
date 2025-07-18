@@ -1,9 +1,8 @@
 ---
 categories:
-- apm
-custom_kind: インテグレーション
+- web
 dependencies: []
-description: アプリのクラッシュの監視と詳細なランタイムパフォーマンスメトリクスの収集
+description: アプリのクラッシュの監視と詳細なランタイムパフォーマンスメトリクスの収集。
 doc_link: https://docs.datadoghq.com/integrations/mparticle/
 draft: false
 git_integration_title: mparticle
@@ -12,14 +11,14 @@ integration_id: mparticle
 integration_title: mParticle
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: mparticle
 public_title: Datadog-mParticle インテグレーション
-short_description: アプリのクラッシュの監視と詳細なランタイムパフォーマンスメトリクスの収集
+short_description: アプリのクラッシュの監視と詳細なランタイムパフォーマンスメトリクスの収集。
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 mParticle により、実行時のパフォーマンスデータの詳細をモバイルアプリで追跡できます。mParticle SDK は、CPU 負荷、メモリー使用量、電池残量など実行時のパフォーマンスデータを自動的に収集します。mParticle を Datadog につなげ、Datadog ダッシュボードで次の情報をリアルタイムに確認できます。
@@ -51,13 +50,13 @@ mParticle についての詳細は、[ブログ][1]や[ドキュメント][2]を
 
 mParticle インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 mParticle インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 [1]: https://www.datadoghq.com/blog/track-detailed-run-time-performance-data-with-mparticle-and-datadog/
 [2]: https://docs.mparticle.com/integrations/datadog/event/

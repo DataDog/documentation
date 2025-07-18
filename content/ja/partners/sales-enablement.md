@@ -1,5 +1,6 @@
 ---
 description: Datadog のセールスエンジニアリングプロセスをリードできるようになるための、新しい MSP のためのトレーニングロードマップ
+kind: documentation
 private: true
 title: パートナーセールスイネーブルメントガイド
 ---

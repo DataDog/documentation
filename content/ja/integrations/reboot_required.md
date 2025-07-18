@@ -3,7 +3,6 @@ app_id: reboot-required
 app_uuid: 673a1136-68ad-46f4-ba6f-4203df10db6a
 assets:
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -13,7 +12,6 @@ assets:
       prefix: 再起動が必要です。
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10209
     source_type_name: Reboot required
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -23,7 +21,6 @@ author:
 categories:
 - developer tools
 - os & system
-custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/reboot_required/README.md
 display_on_public_website: true
@@ -33,8 +30,10 @@ integration_id: reboot-required
 integration_title: Reboot Required
 integration_version: 1.0.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: reboot_required
+oauth: {}
 public_title: Reboot Required
 short_description: ソフトウェアアップデートの後に再起動が必要なシステムを監視
 supported_os:
@@ -45,7 +44,6 @@ tile:
   - Category::Developer Tools
   - Category::OS とシステム
   - Supported OS::Linux
-  - Offering::Integration
   configuration: README.md#Setup
   description: ソフトウェアアップデートの後に再起動が必要なシステムを監視
   media: []
@@ -54,7 +52,6 @@ tile:
   title: Reboot Required
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -77,7 +74,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Reboot Require
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### 構成
+### コンフィギュレーション
 
 1. [Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `reboot_required.d/conf.yaml` を編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル reboot_required.d/conf.yaml][5] を参照してください。
 
@@ -104,8 +101,8 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Reboot Require
 
 reboot_required チェックには、イベントは含まれません。
 
-### サービスチェック
-{{< get-service-checks-from-git "reboot-required" >}}
+### サービスのチェック
+{{< get-service-checks-from-git "reboot_required" >}}
 
 
 ## トラブルシューティング
@@ -113,7 +110,7 @@ reboot_required チェックには、イベントは含まれません。
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest
+[1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [3]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

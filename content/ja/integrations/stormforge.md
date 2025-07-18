@@ -31,12 +31,13 @@ categories:
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/stormforge/README.md
 display_on_public_website: true
-draft: true
+draft: false
 git_integration_title: stormforge
 integration_id: stormforge
 integration_title: StormForge
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: stormforge
 oauth: {}

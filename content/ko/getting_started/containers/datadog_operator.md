@@ -9,6 +9,7 @@ further_reading:
 - link: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
   tag: GitHub
   text: 'Datadog Operator: 설정'
+kind: 설명서
 title: Datadog Operator 시작하기
 ---
 

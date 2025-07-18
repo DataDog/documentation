@@ -3,7 +3,6 @@ app_id: appkeeper
 app_uuid: fc54f5f2-0ce1-4d4e-b1e0-191eece029d3
 assets:
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -13,7 +12,6 @@ assets:
       prefix: AppKeeper.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10130
     source_type_name: AppKeeper
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -21,10 +19,9 @@ author:
   sales_email: rd-pd-1@sios.com
   support_email: rd-pd-1@sios.com
 categories:
-- aws
-- クラウド
-- notifications
-custom_kind: インテグレーション
+- AWS
+- cloud
+- notification
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/appkeeper/README.md
 display_on_public_website: true
@@ -34,8 +31,10 @@ integration_id: appkeeper
 integration_title: AppKeeper
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: appkeeper
+oauth: {}
 public_title: AppKeeper
 short_description: Datadog からのアラートに基づき Appkeeper でサービスを再起動
 supported_os:
@@ -46,10 +45,9 @@ tile:
   classifier_tags:
   - Category::AWS
   - Category::Cloud
-  - Category::Notifications
+  - Category::Notification
   - Supported OS::Linux
   - Supported OS::Windows
-  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog からのアラートに基づき Appkeeper でサービスを再起動
   media: []
@@ -58,7 +56,6 @@ tile:
   title: AppKeeper
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -102,15 +99,17 @@ AppKeeper によるリカバリ結果は、AppKeeper の GUI にリストアッ�
 
 ![スナップショット][6]
 
+詳細については、[AppKeeper のインテグレーションドキュメント][7]を参照してください。
+
 ## 収集データ
 
 ### メトリクス
 
-このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][7] を参照してください。
+このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][8] を参照してください。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/get_token.jpg
 [2]: https://app.datadoghq.com/account/settings#integrations/webhooks
@@ -118,5 +117,6 @@ AppKeeper によるリカバリ結果は、AppKeeper の GUI にリストアッ�
 [4]: https://app.datadoghq.com/synthetics/list
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/synthetic_test_params.png
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/history.jpg
-[7]: https://github.com/DataDog/integrations-extras/blob/master/appkeeper/metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+[7]: https://sioscoati.zendesk.com/hc/en-us/articles/900000978443-Integration
+[8]: https://github.com/DataDog/integrations-extras/blob/master/appkeeper/metadata.csv
+[9]: https://docs.datadoghq.com/ja/help/

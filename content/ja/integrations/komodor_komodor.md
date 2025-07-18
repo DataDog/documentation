@@ -18,11 +18,12 @@ integration_id: komodor-komodor
 integration_title: Komodor
 integration_version: ''
 is_public: true
-custom_kind: integration
+kind: integration
 legal_terms:
   eula: assets/Terms of Use.pdf
 manifest_version: 2.0.0
 name: komodor_komodor
+oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true

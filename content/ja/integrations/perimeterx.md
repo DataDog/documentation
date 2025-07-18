@@ -5,7 +5,6 @@ assets:
   dashboards:
     PerimeterX Overview: assets/dashboards/PerimeterX_Bot_Defender_Dashboard.json
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -15,7 +14,6 @@ assets:
       prefix: perimeterx.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10105
     source_type_name: PerimeterX
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -25,7 +23,6 @@ author:
 categories:
 - ログの収集
 - セキュリティ
-custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/perimeterx/README.md
 display_on_public_website: true
@@ -35,8 +32,10 @@ integration_id: perimeterx
 integration_title: PerimeterX
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: perimeterx
+oauth: {}
 public_title: PerimeterX
 short_description: PerimeterX のログとメトリクスを Datadog と統合
 supported_os:
@@ -51,7 +50,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: PerimeterX のログとメトリクスを Datadog と統合
   media: []
@@ -60,7 +58,6 @@ tile:
   title: PerimeterX
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -69,13 +66,13 @@ tile:
 
 ## セットアップ
 
-すべてのコンフィギュレーションは PerimeterX 側で行われます。サードパーティインテグレーションについて詳しくは、[PerimeterX のドキュメント][2]を参照してください。
+すべてのコンフィギュレーションは PerimeterX 側で行われます。サードパーティインテグレーションについて詳しくは、[PerimeterX のドキュメント][2]を参照してください。 
 
 ### インストール
 
 ホストでのインストールは必要ありません。
 
-### 構成
+### コンフィギュレーション
 
 1. [Datadog ポータル][3] で新しいインテグレーションの API キーを生成します。
 2. [PerimeterX サポート][4]でサポートチケットを開き、Datadog のログエクスポートとのインテグレーションをリクエストします。このとき、サポートに以下の情報を提供する必要があります。
@@ -98,7 +95,7 @@ PerimeterX サポートから Datadog とのインテグレーション完了通
 
 PerimeterX には、[リクエスト][5]用のメトリクスは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 PerimeterX にはサービスチェックは含まれません。
 
@@ -111,7 +108,7 @@ PerimeterX にはイベントは含まれません。
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 [1]: https://www.perimeterx.com/
-[2]: https://edocs.humansecurity.com/docs/configuring-the-export-via-portal
+[2]: https://docs.perimeterx.com/pxconsole/docs/data-integration-to-third-party-apps
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: mailto:support@perimeterx.com
 [5]: https://docs.perimeterx.com/pxconsole/docs/data-schema-metrics

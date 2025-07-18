@@ -6,7 +6,6 @@ categories:
 - kubernetes
 - ログの収集
 - ネットワーク
-custom_kind: integration
 dependencies: []
 description: GKE リソースの使用状況を監視します。
 doc_link: https://docs.datadoghq.com/integrations/google_kubernetes_engine/
@@ -17,6 +16,7 @@ integration_id: google-kubernetes-engine
 integration_title: Google Kubernetes Engine, Cloud
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: '1.0'
 name: google_kubernetes_engine
 public_title: Datadog-Google Kubernetes Engine, Cloud インテグレーション
@@ -24,7 +24,6 @@ short_description: GKE リソースの使用状況を監視します。
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Google Kubernetes Engine (GKE)  は、Docker コンテナを実行するための強力なクラスターマネージャーおよびオーケストレーションシステムです。
@@ -47,7 +46,7 @@ Google Kubernetes Engine からメトリクスを取得して、以下のこと�
 
 ### メトリクスの収集
 
-#### Installation
+#### インストール
 
 1. まだの方は、まず[Google Cloud Platform とのインテグレーション][1]を設定してください。標準のメトリクスとプリセットダッシュボードについては、他のインストール手順はありません。
 
@@ -55,15 +54,15 @@ Google Kubernetes Engine からメトリクスを取得して、以下のこと�
 
 3. コントロールプレーンメトリクスを入力するには、[GKE コントロールプレーンメトリクスを有効にする][3]必要があります。コントロールプレーンメトリクスは、Google が GKE で管理している Kubernetes コントロールプレーンの動作を可視化するものです。
 
-### 収集データ
+### ログの収集
 
-Google Kubernetes Engine のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][4]。
+Google Kubernetes Engine のログは Google Cloud Logging により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][4] をまだセットアップしていない場合は、これをセットアップしてください。
 
-これが完了したら、Google Kubernetes Engine のログを Google Cloud Logging から Pub/Sub トピックへエクスポートします。
+これが完了したら、Google Kubernetes Engine のログを Google Cloud Logging から Pub/Sub へエクスポートします。
 
 1. [GCP Logs Explorer ページ][5]にアクセスし、Kubernetes と GKE のログをフィルタリングします。
 2. **シンクを作成**し、シンクに適宜名前を付けます。
-3. 宛先として "Cloud Pub/Sub" を選択し、その目的で作成された Pub/Sub トピックを選択します。**注**: Pub/Sub トピックは別のプロジェクトに配置できます。
+3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 
     {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
 
@@ -72,14 +71,14 @@ Google Kubernetes Engine のログは Google Cloud Logging で収集され、Clo
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google-kubernetes-engine" >}}
+{{< get-metrics-from-git "google_kubernetes_engine" >}}
 
 
 ### イベント
 
 Google Kubernetes Engine インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Google Kubernetes Engine インテグレーションには、サービスのチェック機能は含まれません。
 

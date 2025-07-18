@@ -13,12 +13,7 @@ further_reading:
 - link: /monitors/manage/status/
   tag: Documentation
   text: モニターステータスの参照
-- link: https://www.datadoghq.com/blog/ccm-cost-monitors/
-  tag: ブログ
-  text: Datadog クラウドコストマネジメントのコストモニターでコスト超過に迅速に対応
-- link: https://www.datadoghq.com/blog/google-cloud-cost-management/
-  tag: ブログ
-  text: Datadog でエンジニアが Google Cloud のコストを管理するための権限を与える
+kind: documentation
 title: クラウドコストモニター
 ---
 
@@ -26,8 +21,6 @@ title: クラウドコストモニター
 コスト変化を事前に通知することで、予期せぬクラウド利用を抑制することができます。クラウドコストモニターは、コスト変動を迅速に特定し、その原因を調査するのに役立ちます。アラートを構成することで、予期せぬ変化をキャッチすることができます。
 
 クラウドコストモニターを構成するためには、[クラウドコストマネジメント][1]をセットアップする必要があります。設定後、コストの増減をアラートするモニターを構成することができます。
-
-Cloud Cost monitors are evaluated with a 48 hour delayed evaluation window, because Cloud Cost data is not guaranteed to be available until 48 hours after usage. For example, a monitor with a lookback of 7 days being evaluated on January 15 examines cost data from January 6 through January 13.
 
 ## モニターの作成
 
@@ -53,9 +46,9 @@ Datadog に報告されているコストタイプやメトリクスはすべて
 | 手順                              | 必須 | デフォルト              | 例             |
 |-----------------------------------|----------|----------------------|---------------------|
 | コストメトリクスを選択する                 | はい      | `aws.cost.amortized` | `azure.cost.actual` |
-| `filter by` を定義する            | いいえ       | すべての条件           | `aws_product:s3`    |
-| グループ化                          | いいえ       | すべての条件           | `aws_availability_zone` |
-| 観測可能性メトリクスの追加 | いいえ      | `system.cpu.user` | `aws.s3.all_requests` |
+| `filter by` を定義する            | ✕       | すべての条件           | `aws_product:s3`    |
+| グループ化                          | ✕       | すべての条件           | `aws_availability_zone` |
+| 観測可能性メトリクスの追加 | ✕      | `system.cpu.user` | `aws.s3.all_requests` |
 
 {{< img src="monitors/monitor_types/cloud_cost/ccm_metrics_source.png" alt="追跡するコストを指定するための、クラウドコストとメトリクスのデータソースオプション" style="width:100%;" >}}
 
@@ -68,9 +61,9 @@ Datadog に報告されているコストタイプやメトリクスはすべて
 **注**: **Percentage Change** では、あるドルのしきい値以下の変化をフィルターで除外することも可能です。
 例: 500 ドル以上の変更に対して、5% 以上のコスト変更があった場合にアラートを出す
 
-## 通知と自動化の構成
+## チームへの通知
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][3] page.
+**Notify your team** セクションの詳しい説明は、[通知][3]のページをご覧ください。
 
 ## その他の参考資料
 

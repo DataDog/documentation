@@ -1,4 +1,5 @@
 ---
+kind: 설명서
 title: Java Lambda 함수용 계측 업그레이드
 ---
 

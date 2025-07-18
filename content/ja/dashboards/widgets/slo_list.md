@@ -8,21 +8,19 @@ further_reading:
 - link: /ja/dashboards/graphing_json/
   tag: ドキュメント
   text: JSON を使用したダッシュボードの構築
+kind: documentation
 title: SLO リストウィジェット
-widget_type: slo_list
 ---
 
-SLOs (service-level objectives) are an agreed-upon target that must be achieved for each activity, function, and process to provide the best opportunity for customer success. SLOs represent the performance or health of a service.
+SLO リストウィジェットは、[SLO][1] のサブセットを主要タイムウィンドウに表示します。その他の構成されたタイムウィンドウはすべて、SLO ページの SLO のサイドパネルで利用できます。
 
-The SLO List widget displays a subset of SLOs over their primary time window. All other configured time windows are available in the SLO's side panel on the SLO page. For more information, see the [SLO][1] documentation.
-
-{{< img src="dashboards/widgets/slo_list/slo-list-widget-latest.png" alt="The SLO List widget displaying a list of SLOs" style="width:90%;" >}}
+{{< img src="dashboards/widgets/slo_list/slo_list_widget_v2.png" alt="SLO の一覧を表示する SLO リストウィジェット" style="width:90%;" >}}
 
 ## セットアップ
 
-{{< img src="dashboards/widgets/slo_list/slo-list-widget-editor-latest.png" alt="A search query defining the service as web-store in the SLO List widget editor" style="width:90%;" >}}
+{{< img src="dashboards/widgets/slo_list/slo_list_editor_v2.png" alt="SLO リストウィジェットエディタでサービスを Web ストアとして定義する検索クエリ" style="width:90%;" >}}
 
-### 構成
+### コンフィギュレーション
 
 1. ダッシュボードに SLO リストウィジェットを追加します。
 2. タグを使用して、SLO の一覧をフィルターします (`service:foo, env:prod` など)。テンプレート変数がサポートされています。
@@ -33,7 +31,9 @@ The SLO List widget displays a subset of SLOs over their primary time window. Al
 
 ## API
 
-このウィジェットは **[Dashboards API][2]** で使用できます。[ウィジェット JSON スキーマ定義][3]については、以下の表を参照してください。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][2] ドキュメントをご参照ください。
+
+SLO リストウィジェットの[ウィジェット JSON スキーマ定義][3]は次のとおりです。
 
 {{< dashboards-widgets-api >}}
 
@@ -42,5 +42,5 @@ The SLO List widget displays a subset of SLOs over their primary time window. Al
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/service_management/service_level_objectives/
-[2]: /ja/api/latest/dashboards/
+[2]: /ja/api/v1/dashboards/
 [3]: /ja/dashboards/graphing_json/widget_json/

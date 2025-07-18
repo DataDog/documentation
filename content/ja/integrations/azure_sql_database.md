@@ -1,10 +1,9 @@
 ---
 categories:
 - cloud
-- data stores
+- data store
 - caching
 - azure
-custom_kind: integration
 dependencies: []
 description: Azure SQL Database の主要メトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_sql_database/
@@ -15,6 +14,7 @@ integration_id: azure-sql-database
 integration_title: Microsoft Azure SQL Database
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: azure_sql_database
 public_title: Datadog-Microsoft Azure SQL Database インテグレーション
@@ -22,7 +22,6 @@ short_description: Azure SQL Database の主要メトリクスを追跡。
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure SQL Database は、需要に応じて柔軟にスケーリングできるロバストなデータストアを提供します。
@@ -41,14 +40,14 @@ Azure SQL Database からメトリクスを取得すると、以下のことが�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure-sql-database" >}}
+{{< get-metrics-from-git "azure_sql_database" >}}
 
 
 ### イベント
 
 Azure SQL Database インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Azure SQL Database インテグレーションには、サービスのチェック機能は含まれません。
 

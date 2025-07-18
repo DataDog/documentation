@@ -5,7 +5,6 @@ assets:
   dashboards:
     varnish: assets/dashboards/varnish_dashboard.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -19,8 +18,9 @@ assets:
     - varnishd
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 29
     source_type_name: Varnish
+  logs:
+    source: varnish
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
@@ -36,7 +36,6 @@ categories:
 - caching
 - log collection
 - network
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/varnish/README.md
 display_on_public_website: true
@@ -44,10 +43,12 @@ draft: false
 git_integration_title: varnish
 integration_id: varnish
 integration_title: Varnish
-integration_version: 4.0.0
+integration_version: 1.14.4
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: varnish
+oauth: {}
 public_title: Varnish
 short_description: クライアントとバックエンドの接続数、キャッシュミス数、エビクション数などを追跡。
 supported_os:
@@ -63,23 +64,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: クライアントとバックエンドの接続数、キャッシュミス数、エビクション数などを追跡。
   media: []
   overview: README.md#Overview
-  resources:
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/top-varnish-performance-metrics
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/how-to-collect-varnish-metrics
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/monitor-varnish-using-datadog
   support: README.md#Support
   title: Varnish
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Varnish のデフォルトのダッシュボード][1]
@@ -101,7 +93,7 @@ tile:
 
 Varnish チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 ##### Varnish の準備
 
@@ -111,11 +103,11 @@ Varnish 4.1 以上を実行している場合は、以下を使用して、`dd-a
 sudo usermod -G varnish -a dd-agent
 ```
 
-`secretfile` を使用する場合は、`dd-agent` ユーザーがそれを読み取れるようにする必要があります。
+もし `secretfile` を使用する場合は、`dd-agent` ユーザーが読めるようにする必要があります。
 
 ##### メトリクスの収集
 
-1. [Agent の構成ディレクトリ][3]のルートにある `conf.d/` フォルダーの `varnish.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションについては、[サンプル varnish.d/conf.yaml][4] を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `varnish.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル varnish.d/conf.yaml][4] を参照してください。
 
    ```yaml
    init_config:
@@ -133,7 +125,7 @@ sudo usermod -G varnish -a dd-agent
 
 2. [Agent を再起動します][5]。
 
-##### ログ収集
+##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -169,7 +161,7 @@ _Agent バージョン 6.0 以降で利用可能_
        service: varnish
    ```
 
-    `path` パラメーターと `service` パラメーターの値を変更し、環境に応じて構成します。使用可能なすべての構成オプションについては、[サンプル varnish.yaml][4] を参照してください。
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に応じて構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル varnish.yaml][4] を参照してください。
 
 6. [Agent を再起動します][5]。
 
@@ -188,7 +180,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 Varnish チェックには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "varnish" >}}
 
 

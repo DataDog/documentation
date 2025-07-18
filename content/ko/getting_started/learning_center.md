@@ -33,6 +33,7 @@ aliases:
 - /ko/videos/apm
 - /ko/videos/aws
 - /ko/videos/host-map
+kind: 설명서
 title: Datadog 학습 센터
 ---
 

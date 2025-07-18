@@ -1,6 +1,7 @@
 ---
 dependencies:
 - https://github.com/DataDog/puppet-datadog-agent/blob/main/README.md
+kind: documentation
 title: Puppet
 ---
 このモジュールは、Datadog Agent をインストールし、Puppet レポートを Datadog に送信します。
@@ -27,7 +28,7 @@ puppet module install datadog-datadog_agent
 - `conf_dir` と `conf6_dir` はすべての Agent バージョンで `conf_dir` になります。
 - Linux で作成されたリポジトリファイルの名前は、すべての Agent バージョンで `datadog5`/`datadog6` ではなく `datadog` になりました。
 
-### 構成
+### コンフィギュレーション
 
 `datadog_agent` モジュールが `puppetserver`/`puppetmaster`（またはマスターレスホスト）にインストールされたら、次の構成手順に従います。
 
@@ -207,7 +208,7 @@ Datadog Agent Network Performance Monitoring (NPM) 機能を有効にするに�
 
 ```conf
 class { 'datadog_agent::system_probe':
-    network_enabled => true,
+    network_enabled => true, 
 }
 ```
 
@@ -217,7 +218,7 @@ Datadog Agent Universal Service Monitoring (USM) を有効にするには、`dat
 
 ```conf
 class { 'datadog_agent::system_probe':
-    service_monitoring_enabled => true,
+    service_monitoring_enabled => true, 
 }
 ```
 
@@ -279,7 +280,7 @@ datadog_agent::tags:
 ```conf
 class { "datadog_agent":
   api_key            => "<YOUR_DD_API_KEY>",
-  facts_to_tags      => ["os.family","networking.domain","my_custom_fact"],
+  facts_to_tags      => ["osfamily","networking.domain","my_custom_fact"],
 }
 ```
 

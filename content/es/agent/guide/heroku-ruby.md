@@ -6,6 +6,7 @@ further_reading:
 - link: /logs/guide/collect-heroku-logs
   tag: Documentación
   text: Recopilar logs de Heroku
+kind: guía
 title: Instrumentar una aplicación de Ruby on Rails en Heroku con Datadog
 ---
 
@@ -615,10 +616,10 @@ Dirígete a la [sección de trazas de APM][19] para ver tus trazas:
 
 {{< img src="agent/guide/heroku_ruby/traces.png" alt="Trazas de aplicaciones de Ruby en Datadog" >}}
 
-Ve al [Catálogo de software][20] para ver todos los servicios de tu aplicación y la vista de servicios de tu aplicación:
+Accede a la [lista de servicios][20] para ver todos los servicios de tu aplicación y su vista:
 
-{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Catálogo de software en Datadog" >}}
-{{< img src="agent/guide/heroku_ruby/service_page.png" alt="Página de información de servicios de aplicaciones en Datadog" >}}
+{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Vista de la lista de servicios en Datadog" >}}
+{{< img src="agent/guide/heroku_ruby/service_page.png" alt="Vista de los servicios de la aplicación de Ruby en Datadog" >}}
 
 ## Logs
 
@@ -832,7 +833,7 @@ Agent (v7.27.0)
 [...]
 ```
 
-## Referencias adicionales
+## Leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -855,7 +856,7 @@ Agent (v7.27.0)
 [17]: https://elements.heroku.com/addons/memcachedcloud
 [18]: https://docs.datadoghq.com/es/getting_started/tagging/unified_service_tagging/
 [19]: https://app.datadoghq.com/apm/traces
-[20]: https://app.datadoghq.com/services
+[20]: https://app.datadoghq.com/apm/services
 [21]: https://devcenter.heroku.com/articles/log-runtime-metrics/
 [22]: https://app.datadoghq.com/logs/livetail
 [23]: https://devcenter.heroku.com/articles/log-runtime-metrics#cpu-load-averages

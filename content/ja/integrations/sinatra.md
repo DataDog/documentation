@@ -1,26 +1,25 @@
 ---
-aliases:
-- /ja/logs/log_collection/nxlog
-categories:
-- ログの収集
-custom_kind: integration
-dependencies:
-- https://github.com/DataDog/documentation/blob/master/content/en/integrations/sinatra.md
+title: Sinatra
+name: Sinatra
+kind: インテグレーション
 description: Sinatra アプリケーションログを収集
+short_description: Sinatra アプリケーションログを収集
+categories:
+  - ログの収集
+aliases:
+  - /ja/logs/log_collection/nxlog
 has_logo: true
-integration_id: sinatra
 integration_title: Sinatra
 is_public: true
-name: Sinatra
 public_title: Datadog-Sinatra インテグレーション
-short_description: Sinatra アプリケーションログを収集
+dependencies:
+  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/sinatra.md
 supported_os:
-- linux
-- mac_os
-- windows
-title: Sinatra
+  - linux
+  - mac_os
+  - windows
+integration_id: sinatra
 ---
-
 ## 概要
 
 このインテグレーションを使用すると、[Sinatra][1] アプリケーションから Web アクセスログを取得して、以下を監視できます。
@@ -58,6 +57,8 @@ get '/' do
 end
 ```
 
+詳細については、[Rack レシピのドキュメント][6]を参照してください。
+
 このロガーは、一般的な Apache アクセス形式を使用して、次の形式でログを生成します。
 
 ```text
@@ -75,7 +76,7 @@ _Agent バージョン 6.0 以降で利用可能_
     logs_enabled: true
     ```
 
-2. Sinatra アプリケーションログの収集を開始するには、[Agent の構成ディレクトリ][6]のルートにある `sinatra.d/conf.yaml` ファイルに次の構成ブロックを追加します。
+2. Sinatra アプリケーションログの収集を開始するには、[Agent の構成ディレクトリ][7]のルートにある `sinatra.d/conf.yaml` ファイルに次の構成ブロックを追加します。
 
     ```yaml
     logs:
@@ -87,12 +88,13 @@ _Agent バージョン 6.0 以降で利用可能_
 
       `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。
 
-3. [Agent を再起動します][7]。
+3. [Agent を再起動します][8]。
 
 [1]: http://sinatrarb.com
-[2]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: http://sinatrarb.com/intro.html#Logging
 [4]: http://rack.github.io
 [5]: https://www.rubydoc.info/github/rack/rack/Rack/CommonLogger
-[6]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[7]: /ja/agent/guide/agent-commands/#restart-the-agent
+[6]: http://recipes.sinatrarb.com/p/middleware/rack_commonlogger
+[7]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[8]: /ja/agent/guide/agent-commands/#restart-the-agent

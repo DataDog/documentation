@@ -1,20 +1,21 @@
 ---
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
-  tag: ドキュメント
+  tags: ドキュメント
   text: トレーシングライブラリの追加構成オプション
 - link: /tracing/trace_collection/dd_libraries/python/
-  tag: ドキュメント
+  tags: ドキュメント
   text: トレーシングライブラリの詳細設定手順
 - link: /tracing/trace_collection/compatibility/python/
-  tag: ドキュメント
+  tags: ドキュメント
   text: 自動インスツルメンテーションのためにサポートされている Python フレームワーク
 - link: /tracing/trace_collection/custom_instrumentation/python/
-  tag: ドキュメント
+  tags: ドキュメント
   text: トレースとスパンを手動で構成する
 - link: https://github.com/DataDog/dd-trace-php
-  tag: ソースコード
+  tags: GitHub
   text: トレーシングライブラリオープンソースコードリポジトリ
+kind: ガイド
 title: チュートリアル - コンテナ内の Python アプリケーションと Datadog Agent のトレースを有効にする
 ---
 
@@ -363,7 +364,7 @@ def create_note(self, desc, add_date=None):
 もし、期待通りのトレースが受信できない場合は、Python パッケージの `ddtrace` でデバッグモードを設定してください。詳しくは[デバッグモードの有効化][13]を読んでください。
 
 
-## 参考資料
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

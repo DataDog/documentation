@@ -7,7 +7,6 @@ assets:
   dashboards:
     RapDev Sophos Dashboard: assets/dashboards/rapdev_sophos_dashboard.json
   integration:
-    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -18,12 +17,11 @@ assets:
       prefix: rapdev.sophos.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10192
     source_type_name: RapDev Sophos
   logs: {}
   monitors:
-    Endpoint is no longer in good health: assets/monitors/sophos_endpoint_health.json
-    Sophos Service is stopped: assets/monitors/sophos_service_running.json
+    '[RapDev Sophos] Managed Endpoint Health has Changed': assets/monitors/sophos_endpoint_health.json
+    '[RapDev Sophos] Sophos Service on Managed Endpoint is Stopped': assets/monitors/sophos_service_running.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -31,9 +29,8 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- marketplace
-- security
-custom_kind: インテグレーション
+- マーケットプレイス
+- セキュリティ
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -42,10 +39,12 @@ integration_id: rapdev-sophos
 integration_title: Sophos
 integration_version: ''
 is_public: true
+kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_sophos
+oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -70,7 +69,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: Sophos が管理するエンドポイントの健全性を監視
   media:
@@ -83,18 +81,17 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
 
 Sophos インテグレーションは、Sophos が管理するエンドポイント全体の健全性を監視し、管理対象デバイスが健全な状態にあることを確認します。このインテグレーションには、デバイスの健全性を監視するために使用できる複数のメトリクスの概要を提供する 1 つのダッシュボードがあらかじめ組み込まれています。また、Sophos インテグレーションには 2 つのモニターが付属しており、デバイスの健全性が悪くなった場合や、デバイス上の Sophos サービスの 1 つが停止した場合に、アラートを出すことができます。
 
-### モニター
+### アラート設定
 1. 管理対象エンドポイントの健全性が変化した
 2. 管理対象エンドポイントの Sophos サービスが停止している
 
-### ダッシュボード
+### ダッシュボード  
 1. RapDev Sophos ダッシュボード
 
 ## サポート
@@ -116,4 +113,4 @@ Sophos インテグレーションは、Sophos が管理するエンドポイン
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-sophos" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-sophos" target="_blank">こちらをクリック</a>してください。

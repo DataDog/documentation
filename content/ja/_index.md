@@ -1,5 +1,6 @@
 ---
 title: Datadog Docs
+kind: documentation
 aliases:
   - /ja/basic_agent_usage/
   - /ja/guides/

@@ -5,7 +5,6 @@ assets:
   dashboards:
     ceph: assets/dashboards/overview.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -20,8 +19,9 @@ assets:
     - ceph-osd
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 138
     source_type_name: Ceph
+  logs:
+    source: ceph
   saved_views:
     ceph_processes: assets/saved_views/ceph_processes.json
 author:
@@ -30,10 +30,9 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- data stores
+- data store
 - os & system
 - log collection
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ceph/README.md
 display_on_public_website: true
@@ -41,10 +40,12 @@ draft: false
 git_integration_title: ceph
 integration_id: ceph
 integration_title: Ceph
-integration_version: 4.1.0
+integration_version: 2.7.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: ceph
+oauth: {}
 public_title: Ceph
 short_description: プールごとのパフォーマンスメトリクスを収集し、クラスター状態全体を監視。
 supported_os:
@@ -55,22 +56,17 @@ tile:
   classifier_tags:
   - Supported OS::Linux
   - Supported OS::macOS
-  - Category::Data Stores
+  - Category::データストア
   - Category::OS とシステム
   - Category::ログの収集
-  - Offering::Integration
   configuration: README.md#Setup
   description: プールごとのパフォーマンスメトリクスを収集し、クラスター状態全体を監視。
   media: []
   overview: README.md#Overview
-  resources:
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/monitor-ceph-datadog
   support: README.md#Support
   title: Ceph
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Ceph ダッシュボード][1]
@@ -89,7 +85,7 @@ Datadog-Ceph インテグレーションを有効にすると、以下のこと�
 
 Ceph チェックは [Datadog Agent][2] パッケージに含まれています。Ceph サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `ceph.d/conf.yaml` ファイルを編集します。
 使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル ceph.d/conf.yaml][4] を参照してください。
@@ -108,7 +104,7 @@ instances:
 dd-agent ALL=(ALL) NOPASSWD:/path/to/your/ceph
 ```
 
-#### ログ収集
+#### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -146,7 +142,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 Ceph チェックには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "ceph" >}}
 
 
@@ -159,7 +155,7 @@ Ceph チェックには、イベントは含まれません。
 - [Ceph の監視: ノードステータスからクラスター全体のパフォーマンスまで][10]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/ceph/images/ceph_dashboard.png
-[2]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/ceph/datadog_checks/ceph/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

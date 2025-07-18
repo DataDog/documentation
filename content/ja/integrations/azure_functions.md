@@ -3,7 +3,6 @@ categories:
 - azure
 - クラウド
 - プロビジョニング
-custom_kind: インテグレーション
 dependencies: []
 description: Azure Functions のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_functions/
@@ -14,6 +13,7 @@ integration_id: ''
 integration_title: Microsoft Azure Functions
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: azure_functions
 public_title: Datadog-Microsoft Azure Functions インテグレーション
@@ -21,7 +21,6 @@ short_description: Azure Functions のキーメトリクスを追跡。
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Functions は、イベント駆動型のサーバーレスコンピューティングプラットフォームです。複雑なオーケストレーション問題も解決します。追加のセットアップなしでローカルでビルドおよびデバッグし、クラウドで大規模にデプロイおよび運用が可能なうえ、トリガーとバインドによりサービスを統合します。
@@ -47,7 +46,7 @@ Azure Functions からメトリクスを取得すると、以下のことがで�
 
 Azure Functions インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Azure Functions インテグレーションには、サービスのチェック機能は含まれません。
 

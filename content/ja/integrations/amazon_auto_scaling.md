@@ -9,17 +9,17 @@ categories:
 - configuration & deployment
 - log collection
 - provisioning
-custom_kind: integration
 dependencies: []
 description: Auto Scaling グループ内のインスタンスのステータスとカウントを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_auto_scaling/
 draft: false
 git_integration_title: amazon_auto_scaling
 has_logo: true
-integration_id: ''
+integration_id: amazon-auto-scaling
 integration_title: AWS Auto Scaling
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_auto_scaling
 public_title: Datadog-AWS Auto Scaling インテグレーション
@@ -27,7 +27,6 @@ short_description: Auto Scaling グループ内のインスタンスのステー
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS Auto Scaling は、ユーザー定義のポリシーに基づいて EC2 インスタンスを自動的に起動または終了するサービスです。
@@ -59,7 +58,7 @@ AWS Auto Scaling は、ユーザー定義のポリシーに基づいて EC2 イ�
 
 4. [Datadog - AWS Auto Scaling インテグレーション][6]をインストールします。
 
-### 収集データ
+### ログの収集
 
 #### ログの有効化
 
@@ -78,7 +77,7 @@ S3 バケットまたは CloudWatch のいずれかにログを送信するよ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-auto-scaling" >}}
+{{< get-metrics-from-git "amazon_auto_scaling" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
@@ -89,7 +88,7 @@ AWS Auto-Scaling インテグレーションには、EC2 インスタンスを�
 
 {{< img src="integrations/amazon_auto_scaling/aws_auto_scaling_events.png" alt="AWS Auto-Scaling イベント" >}}
 
-### サービスチェック
+### サービスのチェック
 
 AWS Auto-Scaling インテグレーションには、サービスのチェック機能は含まれません。
 

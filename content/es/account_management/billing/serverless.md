@@ -1,4 +1,5 @@
 ---
+kind: documentación
 title: Facturación de serverless
 ---
 

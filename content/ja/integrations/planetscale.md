@@ -5,7 +5,6 @@ assets:
   dashboards:
     planetscale_overview: assets/dashboards/planetscale_overview.json
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -15,7 +14,6 @@ assets:
       prefix: planetscale.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10264
     source_type_name: PlanetScale
 author:
   homepage: http://www.planetscale.com
@@ -23,8 +21,7 @@ author:
   sales_email: sales@planetscale.com
   support_email: support@planetscale.com
 categories:
-- data stores
-custom_kind: integration
+- data store
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/planetscale/README.md
 display_on_public_website: true
@@ -34,16 +31,17 @@ integration_id: planetscale
 integration_title: PlanetScale
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: planetscale
+oauth: {}
 public_title: PlanetScale
 short_description: PlanetScale のメトリクスを DataDog に送信します。
 supported_os: []
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Data Stores
-  - Offering::Integration
+  - Category::Data Store
   configuration: README.md#Setup
   description: PlanetScale のメトリクスを DataDog に送信します。
   media: []
@@ -52,7 +50,6 @@ tile:
   title: PlanetScale
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -74,7 +71,7 @@ PlanetScale は、Datadog にメトリクスをプッシュして、データベ
 {{< get-metrics-from-git "planetscale" >}}
 
 
-### サービスチェック
+### サービスのチェック
 
 Planetscale には、サービスのチェック機能は含まれません。
 
@@ -84,7 +81,7 @@ Planetscale には、イベントは含まれません。
 
 ## サポート
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys

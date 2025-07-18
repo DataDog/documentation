@@ -5,6 +5,7 @@ further_reading:
 - link: /dashboards/guide/widget_colors/#categorical-palettes
   tag: Documentation
   text: グラフに適した色の選択
+kind: ガイド
 title: 互換性のあるセマンティックタグ
 ---
 
@@ -36,6 +37,6 @@ title: 互換性のあるセマンティックタグ
 
 {{% semantic-color %}}
 
-## 参考資料
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

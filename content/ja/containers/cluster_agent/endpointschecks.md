@@ -10,9 +10,10 @@ further_reading:
 - link: /containers/cluster_agent/clusterchecks/
   tag: ドキュメント
   text: クラスターチェック
-- link: /containers/troubleshooting/cluster-and-endpoint-checks
+- link: /containers/cluster_agent/troubleshooting#endpoint-checks
   tag: ドキュメント
   text: エンドチェックのトラブルシューティング
+kind: documentation
 title: オートディスカバリーによるエンドポイントチェック
 ---
 
@@ -79,7 +80,7 @@ kubectl get endpoints nginx -o yaml
 ## エンドポイントチェックのディスパッチを設定する
 
 {{< tabs >}}
-{{% tab "Datadog Operator" %}}
+{{% tab "Operator" %}}
 
 エンドポイントチェックのディスパッチは、Cluster Agent の Operator デプロイメントで `features.clusterChecks.enabled` 構成キーを使用して有効にします。
 ```yaml
@@ -111,7 +112,7 @@ clusterAgent:
 
 この構成では、Cluster Agent と Agent との間で、クラスターチェックとエンドポイントチェックの両方のディスパッチが可能です。
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "DaemonSet" %}}
 ### Cluster Agent の設定
@@ -159,7 +160,7 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 [Agent を再起動][2]して、構成の変更を適用します。
 
 [1]: /ja/agent/cluster_agent/clusterchecks/
-[2]: /ja/agent/configuration/agent-commands/
+[2]: /ja/agent/guide/agent-commands/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -175,32 +176,8 @@ Cluster Agent v1.18.0 からは、Kubernetes エンドポイントを対象と�
 Kubernetes サービスのエンドポイントに対して [HTTP チェック][9]を実行する場合
 
 {{< tabs >}}
-{{% tab "Datadog Operator" %}}
-
-チェック設定を定義するには、`spec.override.clusterAgent.extraConfd.configDataMap` セクションを使用します:
-
-```yaml
-spec:
-#(...)
-  override:
-    clusterAgent:
-      extraConfd:
-        configDataMap:
-          <INTEGRATION_NAME>.yaml: |-
-            advanced_ad_identifiers:
-              - kube_endpoints:
-                  name: "<ENDPOINTS_NAME>"
-                  namespace: "<ENDPOINTS_NAMESPACE>"
-            cluster_check: true
-            init_config:
-            instances:
-              - url: "http://%%host%%"
-                name: "<EXAMPLE_NAME>"
-```
-
-{{% /tab %}}
 {{% tab "Helm" %}}
-Use the `clusterAgent.confd` field to define your check configuration:
+`clusterAgent.confd` フィールドを使用して、チェックの構成を定義します。
 
 ```yaml
 #(...)

@@ -1,19 +1,19 @@
 ---
-aliases:
-- /ja/agent/autodiscovery/troubleshooting
-further_reading:
-- link: /agent/troubleshooting/
-  tag: ドキュメント
-  text: Agent のトラブルシューティング
-- link: /agent/troubleshooting/debug_mode/
-  tag: ドキュメント
-  text: Agent デバッグモード
-- link: /agent/troubleshooting/send_a_flare/
-  tag: ドキュメント
-  text: Agent フレアの送信
 title: オートディスカバリーのトラブルシューティング
+kind: ドキュメント
+aliases:
+  - /ja/agent/autodiscovery/troubleshooting
+further_reading:
+  - link: /agent/troubleshooting/
+    tag: ドキュメント
+    text: Agent のトラブルシューティング
+  - link: /agent/troubleshooting/debug_mode/
+    tag: ドキュメント
+    text: Agent デバッグモード
+  - link: /agent/troubleshooting/send_a_flare/
+    tag: ドキュメント
+    text: Agent フレアの送信
 ---
-
 Docker Agent オートディスカバリーのトラブルシューティングを開始するには、`configcheck` 初期化スクリプトコマンドを実行します。
 
 ```shell

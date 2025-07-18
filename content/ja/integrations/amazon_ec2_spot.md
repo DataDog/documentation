@@ -3,17 +3,17 @@ categories:
 - cloud
 - aws
 - ログの収集
-custom_kind: integration
 dependencies: []
 description: Amazon EC2 スポットのキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_ec2_spot/
 draft: false
 git_integration_title: amazon_ec2_spot
 has_logo: true
-integration_id: ''
+integration_id: amazon-ec2-spot
 integration_title: Amazon EC2 スポット
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_ec2_spot
 public_title: Datadog-Amazon EC2 スポットインテグレーション
@@ -21,7 +21,6 @@ short_description: Amazon EC2 スポットのキーメトリクスを追跡
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon EC2 スポットインスタンスを使用すると、AWS クラウド内の使用されていない EC2 容量を活用できます。
@@ -39,7 +38,7 @@ Amazon EC2 スポットインスタンスを使用すると、AWS クラウド�
 1. [AWS インテグレーションページ][3]で、`Metric Collection` タブの下にある `EC2 Spot` が有効になっていることを確認します。
 2. [Datadog - Amazon EC2 Spot インテグレーション][4]をインストールします。
 
-### 収集データ
+### ログの収集
 
 [Datadog Agent][5] または [Rsyslog][6] のような別のログシッパーを使用して、Datadog にログを送信します。
 
@@ -53,7 +52,7 @@ Amazon EC2 スポットインスタンスを使用すると、AWS クラウド�
 
 Amazon EC2 Spot インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Amazon EC2 Spot インテグレーションには、サービスのチェック機能は含まれません。
 

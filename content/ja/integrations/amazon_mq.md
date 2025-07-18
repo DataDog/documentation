@@ -5,7 +5,6 @@ categories:
 - cloud
 - aws
 - log collection
-custom_kind: インテグレーション
 dependencies: []
 description: AWS MQ のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_mq/
@@ -16,10 +15,11 @@ further_reading:
   text: Datadog で Amazon MQ のメトリクスを監視
 git_integration_title: amazon_mq
 has_logo: true
-integration_id: ''
+integration_id: amazon-mq
 integration_title: Amazon MQ
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_mq
 public_title: Datadog-Amazon MQ インテグレーション
@@ -27,7 +27,6 @@ short_description: AWS MQ のキーメトリクスを追跡。
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon MQ は、クラウドでメッセージブローカーを容易にセットアップして運用できる、Apache ActiveMQ 向けのマネージド型メッセージブローカーサービスです。
@@ -46,7 +45,7 @@ Amazon MQ は、クラウドでメッセージブローカーを容易にセッ�
 
 2. [Datadog - AWS Amazon MQ インテグレーション][3]をインストールします。
 
-### 収集データ
+### ログの収集
 
 #### ログの有効化
 
@@ -74,7 +73,7 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 AWS Amazon MQ インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 AWS Amazon MQ インテグレーションには、サービスのチェック機能は含まれません。
 

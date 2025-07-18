@@ -3,7 +3,6 @@ app_id: vespa
 app_uuid: 9e31df30-189f-468f-88c7-9c73caf4cdca
 assets:
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -13,7 +12,6 @@ assets:
       prefix: vespa.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10212
     source_type_name: Vespa
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -21,8 +19,7 @@ author:
   sales_email: dd@vespa.ai
   support_email: dd@vespa.ai
 categories:
-- data stores
-custom_kind: integration
+- data store
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/vespa/README.md
 display_on_public_website: true
@@ -32,8 +29,10 @@ integration_id: vespa
 integration_title: Vespa
 integration_version: 1.1.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: vespa
+oauth: {}
 public_title: Vespa
 short_description: ビッグデータサービングエンジン Vespa の健全性とパフォーマンスの監視
 supported_os:
@@ -42,8 +41,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Category::Data Stores
-  - Offering::Integration
+  - Category::Data Store
   configuration: README.md#Setup
   description: ビッグデータサービングエンジン Vespa の健全性とパフォーマンスの監視
   media: []
@@ -52,7 +50,6 @@ tile:
   title: Vespa
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -78,7 +75,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Vespa チェ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### 構成
+### コンフィギュレーション
 
 Vespa チェックを構成するには
 
@@ -104,7 +101,7 @@ Vespa チェックを構成するには
 
 Vespa インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "vespa" >}}
 
 
@@ -114,7 +111,7 @@ Vespa インテグレーションには、イベントは含まれません。
 
 
 [1]: https://vespa.ai/
-[2]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

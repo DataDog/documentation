@@ -1,56 +1,27 @@
 ---
-app_id: azure-publicipaddress
-app_uuid: a829d4e6-53b4-4cd2-8e83-941066bca46b
-assets:
-  integration:
-    auto_install: true
-    events:
-      creates_events: false
-    metrics:
-      check: azure.network_publicipaddresses.byte_count
-      metadata_path: metadata.csv
-      prefix: azure.network_publicipaddresses
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 299
-    source_type_name: Azure Public IP Address
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
+aliases:
+- /ja/integrations/azure_publicipaddress
 categories:
-- クラウド
+- cloud
 - azure
-custom_kind: インテグレーション
 dependencies: []
-display_on_public_website: true
+description: Azure パブリック IP アドレスのキーメトリクスを追跡
+doc_link: https://docs.datadoghq.com/integrations/azure_public_ip_address/
 draft: false
 git_integration_title: azure_public_ip_address
+has_logo: true
 integration_id: azure-publicipaddress
-integration_title: Azure Public IP Address
+integration_title: Microsoft Azure パブリック IP アドレス
 integration_version: ''
 is_public: true
-manifest_version: 2.0.0
+kind: インテグレーション
+manifest_version: '1.0'
 name: azure_public_ip_address
-public_title: Azure Public IP Address
+public_title: Datadog-Microsoft Azure Public IP Address インテグレーション
 short_description: Azure パブリック IP アドレスのキーメトリクスを追跡
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cloud
-  - Category::Azure
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Azure パブリック IP アドレスのキーメトリクスを追跡
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Azure Public IP Address
+version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Azure パブリック IP アドレスがリソースに割り当てられると、インターネットとのインバウンド通信およびアウトバウンド接続が可能になります。
@@ -66,14 +37,14 @@ Datadog Azure インテグレーションを使用して、Azure パブリック
 ## 収集データ
 
 ### メトリクス
-{{ get-metrics-from-git "azure-publicipaddress" }}
+{{< get-metrics-from-git "azure_public_ip_address" >}}
 
 
 ### イベント
 
 Azure Public IP Address インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Azure Public IP Address インテグレーションには、サービスのチェック機能は含まれません。
 

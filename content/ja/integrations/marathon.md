@@ -5,7 +5,6 @@ assets:
   dashboards:
     marathon-overview: assets/dashboards/marathon-overview_dashboard.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -18,8 +17,9 @@ assets:
     - start --master mesos marathon
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 82
     source_type_name: Marathon
+  logs:
+    source: marathon
   saved_views:
     marathon_processes: assets/saved_views/marathon_processes.json
 author:
@@ -31,7 +31,6 @@ categories:
 - configuration & deployment
 - containers
 - log collection
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/marathon/README.md
 display_on_public_website: true
@@ -39,10 +38,12 @@ draft: false
 git_integration_title: marathon
 integration_id: marathon
 integration_title: Marathon
-integration_version: 4.1.0
+integration_version: 2.1.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: marathon
+oauth: {}
 public_title: Marathon
 short_description: 必要なメモリとディスク、インスタンス数などのアプリケーションメトリクスを追跡。
 supported_os:
@@ -56,7 +57,6 @@ tile:
   - Category::構成 & デプロイ
   - Category::コンテナ
   - Category::ログの収集
-  - Offering::Integration
   configuration: README.md#Setup
   description: 必要なメモリとディスク、インスタンス数などのアプリケーションメトリクスを追跡。
   media: []
@@ -65,7 +65,6 @@ tile:
   title: Marathon
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -81,16 +80,16 @@ Agent の Marathon チェックを使用して、以下のことができます�
 
 Marathon チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
@@ -116,7 +115,7 @@ Marathon チェックは [Datadog Agent][1] パッケージに含まれていま
 
 2. [Agent を再起動します][3]。
 
-##### ログ収集
+##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -177,7 +176,7 @@ _Agent バージョン 6.0 以降で利用可能_
 [2]: https://github.com/DataDog/integrations-core/blob/master/marathon/datadog_checks/marathon/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -187,11 +186,11 @@ _Agent バージョン 6.0 以降で利用可能_
 
 | パラメーター            | 値                                  |
 | -------------------- | -------------------------------------- |
-| `<INTEGRATION_NAME>` | `marathon`                             |
-| `<INIT_CONFIG>`      | 空白または `{}`                          |
-| `<INSTANCE_CONFIG>`  | `{"url": "https://%%host%%:%%port%%"}` |
+| `<インテグレーション名>` | `marathon`                             |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                          |
+| `<インスタンスコンフィギュレーション>`  | `{"url": "https://%%host%%:%%port%%"}` |
 
-##### ログ収集
+##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -220,7 +219,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 Marathon チェックには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "marathon" >}}
 
 
@@ -230,6 +229,6 @@ Marathon チェックには、イベントは含まれません。
 
 
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest
+[1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://docs.datadoghq.com/ja/help/

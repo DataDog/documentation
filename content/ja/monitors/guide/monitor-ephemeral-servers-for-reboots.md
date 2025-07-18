@@ -8,6 +8,7 @@ further_reading:
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の設定
+kind: ガイド
 title: エフェメラルサーバーの再起動を監視する
 ---
 

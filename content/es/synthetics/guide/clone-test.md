@@ -5,6 +5,7 @@ further_reading:
 - link: /synthetics/
   tag: Documentación
   text: Más información sobre Synthetic Monitorig
+kind: guía
 title: Clonar tests de Synthetics
 ---
 

@@ -1,10 +1,10 @@
 ---
 categories:
-- azure
 - cloud
+- processing
+- notification
+- azure
 - log collection
-- notifications
-custom_kind: integration
 dependencies: []
 description: Azure Event Hub のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_event_hub/
@@ -15,6 +15,7 @@ integration_id: azure-event-hub
 integration_title: Microsoft Azure Event Hub
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: azure_event_hub
 public_title: Datadog-Microsoft Azure Event Hub インテグレーション
@@ -22,7 +23,6 @@ short_description: Azure Event Hub のキーメトリクスを追跡。
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Event Hub は、マネージド型の大規模データストリーミングサービスです。
@@ -42,7 +42,7 @@ Azure Event Hub からメトリクスを取得すると、以下のことがで�
 
 [Azure インテグレーションタイル][1]のメトリクス収集で、`Event Hub` をオンにします。
 
-### 収集データ
+### ログの収集
 
 イベントハブからログを収集するには、以下の手順に従ってください。
 
@@ -55,14 +55,14 @@ Azure Event Hub からメトリクスを取得すると、以下のことがで�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure-event-hub" >}}
+{{< get-metrics-from-git "azure_event_hub" >}}
 
 
 ### イベント
 
 Azure Event Hub インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Azure Event Hub インテグレーションには、サービスのチェック機能は含まれません。
 

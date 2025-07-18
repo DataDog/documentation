@@ -9,8 +9,7 @@ author:
   support_email: support@devcycle.com
 categories:
 - 構成 & デプロイ
-- notifications
-custom_kind: integration
+- 通知
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/devcycle/README.md
 display_on_public_website: true
@@ -20,8 +19,10 @@ integration_id: devcycle
 integration_title: DevCycle
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: devcycle
+oauth: {}
 public_title: DevCycle
 short_description: コード通りに動作する機能フラグ
 supported_os:
@@ -32,7 +33,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Configuration & Deployment
-  - Category::Notifications
+  - Category::Notification
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
@@ -41,16 +42,10 @@ tile:
   description: コード通りに動作する機能フラグ
   media: []
   overview: README.md#Overview
-  resources:
-  - resource_type: その他
-    url: https://devcycle.com
-  - resource_type: documentation
-    url: https://docs.devcycle.com/tools-and-integrations/datadog-rum
   support: README.md#Support
   title: DevCycle
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -65,7 +60,7 @@ DevCycle の機能フラグ追跡インテグレーションは、RUM データ�
 
 ### 機能フラグ追跡の設定
 
-機能フラグ追跡は、RUM ブラウザ SDK で利用可能です。詳細なセットアップ方法は、[RUM での機能フラグデータの概要][1]ガイドをご覧ください。
+機能フラグ追跡は、RUM ブラウザ SDK で利用可能です。詳細なセットアップ方法は、[RUM での機能フラグデータの概要][5]ガイドをご覧ください。
 
 1. ブラウザ RUM SDK バージョン 4.25.0 以上に更新します。
 2. RUM SDK を初期化し、`["feature_flags"]` で `enableExperimentalFeatures` 初期化パラメーターを構成します。
@@ -76,7 +71,7 @@ DevCycle の機能フラグ追跡インテグレーションは、RUM データ�
 
 const user = { user_id: "my_user" };
 const dvcOptions = { logLevel: "debug" };
-const dvcClient = initialize("<DVC_CLIENT_SDK_KEY>", user, dvcOptions);
+const dvcClient = initialize("<DVC_CLIENT_SDK_KEY>", user, dvcOptions); 
 
 // すべての変数評価に対して
 
@@ -107,7 +102,7 @@ DevCycle インテグレーションには、メトリクスは含まれませ�
 
 DevCycle インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 DevCycle インテグレーションには、サービスのチェック機能は含まれません。
 

@@ -1,16 +1,21 @@
 ---
-description: CI Visibility で処理しないために特定のイベントを除外する条件の定義方法をご紹介します。
+description: 特定のイベントを CI Visibility で処理しないための条件を定義する方法について説明します
 further_reading:
 - link: https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/
   tag: ブログ
-  text: Datadog Test Impact Analysis で CI テストを効率化
-- link: /continuous_integration/pipelines
-  tag: ドキュメント
-  text: Pipeline Visibility について
-title: CI Visibility の取り込み制御の設定
+  text: Datadog Intelligent Test Runner による CI テストの効率化
+- link: https://www.datadoghq.com/pricing/?product=ci-visibility#ci-visibility
+  tag: 料金
+  text: CI Visibility の価格を見る
+kind: ガイド
+title: CI Visibility の取り込み制御
 ---
 
 ## 概要
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
+{{< /site-region >}}
 
 除外フィルターは、特定のイベントを Datadog の処理対象から除外する条件を 1 つ以上定義することで、CI Visibility の予算をきめ細かく制御することができます。
 
@@ -77,7 +82,7 @@ git author のメールアドレス (`@git.commit.author.email`) をフィルタ
 
 {{< img src="ci/exclusion-filter-delete.png" alt="取り込み制御の除外フィルター削除ボタン" style="width:90%;">}}
 
-## 参考資料
+## その他の参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/account_management/rbac/permissions/#ci-visibility

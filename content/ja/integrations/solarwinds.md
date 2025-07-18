@@ -1,8 +1,7 @@
 ---
 categories:
-- イベント管理
-- notifications
-custom_kind: integration
+- event management
+- 通知
 dependencies: []
 description: SolarWinds Orion から Datadog イベントストリームにアラートを取り込みます。
 doc_link: https://docs.datadoghq.com/integrations/solarwinds/
@@ -13,6 +12,7 @@ integration_id: ''
 integration_title: SolarWinds
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: '1.0'
 name: solarwinds
 public_title: Datadog-SolarWinds インテグレーション
@@ -20,7 +20,6 @@ short_description: SolarWinds Orion から Datadog イベントストリーム�
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 SolarWinds Orion からアラートを受け取り、一元化された場所でアラートを集約してトリアージします。
@@ -115,7 +114,7 @@ SolarWinds のインテグレーションにメトリクスは含まれません
 
 SolarWinds インテグレーションはイベントストリームで SolarWinds アラートを集めます。
 
-### サービス チェック
+### サービスのチェック
 
 SolarWinds のインテグレーションにサービスチェックは含まれません。
 

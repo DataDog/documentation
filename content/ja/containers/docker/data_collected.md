@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ja/agent/docker/data_collected
+kind: documentation
 title: Docker の収集データ
 ---
 
@@ -10,7 +11,7 @@ title: Docker の収集データ
 
 Docker コンテナにデプロイされた Agent が収集するメトリクス:
 
-{{< get-metrics-from-git "docker" >}}
+{{< get-metrics-from-git "docker_daemon" >}}
 
 ### イベント
 
@@ -36,7 +37,7 @@ Docker Agent は以下のイベントを生成します。
 ## コンテナインテグレーション
 
 ### メトリクス
-{{< get-metrics-from-git "docker" >}}
+{{< get-metrics-from-git "コンテナ" >}}
 
 ## Containerd インテグレーション
 

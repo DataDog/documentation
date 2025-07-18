@@ -1,11 +1,12 @@
 ---
 further_reading:
-- link: /security/threats/workload_security_rules
+- link: /security/cloud_workload_security/workload_security_rules
   tag: Documentation
   text: CSM Threats ルールの管理
-- link: /security/threats/agent_expressions
+- link: /security/cloud_workload_security/agent_expressions
   tag: Documentation
   text: Agent 式の構文
+kind: ガイド
 title: カスタム CSM Threats ルールの記述のためのガイドライン
 ---
 
@@ -45,5 +46,5 @@ CSM Threats は、ポリシー内のどのルールもトリガーすべきで�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/security/threats/workload_security_rules
-[2]: /ja/security/threats/agent_expressions/#operators
+[1]: /ja/security/cloud_workload_security/workload_security_rules
+[2]: /ja/security/cloud_workload_security/agent_expressions/#operators

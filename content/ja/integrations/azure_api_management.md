@@ -1,58 +1,27 @@
 ---
-app_id: azure-apimanagement
-app_uuid: 122539f9-dc11-4099-9d64-cbd6f50159a5
-assets:
-  dashboards:
-    azure_api_management: assets/dashboards/azure_api_management.json
-  integration:
-    auto_install: true
-    events:
-      creates_events: false
-    metrics:
-      check: azure.apimanagement_service.capacity
-      metadata_path: metadata.csv
-      prefix: azure.apimanagement_service
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 277
-    source_type_name: Azure API Management
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
+aliases:
+  - /ja/integrations/azure_apimanagement
 categories:
-- クラウド
-- azure
-custom_kind: インテグレーション
+  - cloud
+  - azure
+ddtype: crawler
 dependencies: []
-display_on_public_website: true
+description: Azure API Management のキーメトリクスを追跡
+doc_link: https://docs.datadoghq.com/integrations/azure_api_management/
 draft: false
 git_integration_title: azure_api_management
+has_logo: true
 integration_id: azure-apimanagement
-integration_title: Azure API Management
+integration_title: Microsoft Azure API Management
 integration_version: ''
 is_public: true
-manifest_version: 2.0.0
+kind: インテグレーション
+manifest_version: '1.0'
 name: azure_api_management
-public_title: Azure API Management
+public_title: Datadog-Microsoft Azure API Management インテグレーション
 short_description: Azure API Management のキーメトリクスを追跡
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cloud
-  - Category::Azure
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Azure API Management のキーメトリクスを追跡
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Azure API Management
+version: '1.0'
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Azure API Management は、顧客が API を公開、セキュリティ保護、変換、保守、および監視できるフルマネージド型サービスです。
@@ -68,14 +37,14 @@ Datadog Azure インテグレーションを使用して、Azure API Management 
 ## 収集データ
 
 ### メトリクス
-{{ get-metrics-from-git "azure-apimanagement" }}
+{{< get-metrics-from-git "azure_api_management" >}}
 
 
 ### イベント
 
 Azure API Management インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Azure API Management インテグレーションには、サービスのチェック機能は含まれません。
 

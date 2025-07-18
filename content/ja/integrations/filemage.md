@@ -5,7 +5,6 @@ assets:
   dashboards:
     Filemage Overview Dashboard: assets/dashboards/overview.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -16,7 +15,6 @@ assets:
       prefix: filemage.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10319
     source_type_name: filemage
   logs:
     source: filemage
@@ -27,7 +25,6 @@ author:
   support_email: tmoore@dopensource.com
 categories:
 - クラウド
-custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/filemage/README.md
 display_on_public_website: true
@@ -37,8 +34,10 @@ integration_id: filemage
 integration_title: FileMage
 integration_version: 1.0.0
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: filemage
+oauth: {}
 public_title: FileMage
 short_description: FileMage サービス用モニタリング Agent
 supported_os:
@@ -52,7 +51,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: FileMage サービス用モニタリング Agent
   media:
@@ -64,7 +62,6 @@ tile:
   title: FileMage
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -86,7 +83,7 @@ datadog-agent integration install -t datadog-filemage==1.0.0
 
 2. Agent ベースの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### 構成
+### コンフィギュレーション
 
 1. FileMage の[メトリクス](#metrics)の収集を開始するには、[Agent の構成ディレクトリ][4]のルートにある `conf.d/` フォルダーの `filemage.d/conf.yaml.example` ファイルを編集します。
    完了したら、変更したファイルを `filemage.d/conf.yaml` という名前で保存します。

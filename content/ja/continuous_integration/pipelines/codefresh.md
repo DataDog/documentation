@@ -7,28 +7,28 @@ further_reading:
   text: パイプラインの実行結果とパフォーマンスを確認する
 - link: /continuous_integration/troubleshooting/
   tag: ドキュメント
-  text: CI Visibility のトラブルシューティング
+  text: トラブルシューティング CI
+kind: documentation
 title: Codefresh パイプラインでトレースを設定する
 ---
 
-## 概要
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
+{{< /site-region >}}
 
-[Codefresh][1] is a continuous integration and delivery platform built for Kubernetes which offers automation features that streamline the building, testing, and deploying of your applications. 
+## 互換性
 
-Set up tracing in Codefresh to collect data on each step of your pipelines, analyze performance bottlenecks, troubleshoot operational challenges, and monitor your deployment workflows.
+- **Partial pipelines**: 部分リトライとダウンストリームパイプラインの実行を表示します
 
-### 互換性
+- **Manual steps**: 手動でトリガーされたパイプラインを表示します
 
-| Pipeline Visibility | プラットフォーム | 定義 |
-|---|---|---|
-| [Partial retries][7] | Partial pipelines | View partially retried pipeline executions. |
-| [Manual steps][8] | Manual steps | View manually triggered pipelines. |
-| [Parameters][9] | パラメーター | Set custom parameters (for example, [Codefresh variables][6]) when a pipeline is triggered. |
-| [Pipeline failure reasons][10] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
+- **Parameters**: パイプラインのトリガー時にカスタムパラメーター (例えば、[Codefresh 変数][6]) を設定します
+
+- **Pipeline failure reasons**: エラーメッセージからパイプラインの障害理由を特定します
 
 ## Datadog インテグレーションの構成
 
-To set up the Datadog integration for [Codefresh][1]:
+[Codefresh][1] の Datadog インテグレーションを有効にする手順は以下の通りです。
 
 1. Codefresh の **[Account Settings > Configuration > Integrations][2]** に移動し、Datadog の行の **CONFIGURE** をクリックします。
 2. **ADD INTEGRATION** をクリックします。
@@ -39,11 +39,11 @@ To set up the Datadog integration for [Codefresh][1]:
 
 ## Datadog でパイプラインデータを視覚化する
 
-The [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the pipelines finish.
+パイプラインが終了した後、[Pipelines][4] ページと [Pipeline Executions][5] ページにデータが入力されます。
 
-The **CI Pipeline List** page shows data for only the default branch of each repository.
+**注**: Pipelines ページには、各リポジトリのデフォルトブランチのデータのみが表示されます。
 
-## 参考資料
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -53,7 +53,3 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
 [6]: https://codefresh.io/docs/docs/codefresh-yaml/variables/#user-provided-variables
-[7]: /ja/glossary/#partial-retry
-[8]: /ja/glossary/#manual-step
-[9]: /ja/glossary/#parameter
-[10]: /ja/glossary/#pipeline-failure

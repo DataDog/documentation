@@ -1,3 +1,0 @@
----
-title: Medición del uso
----

@@ -3,7 +3,6 @@ app_id: exim
 app_uuid: c84e4868-f96b-49b6-8243-2031dde179af
 assets:
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -14,16 +13,13 @@ assets:
       prefix: exim.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10291
     source_type_name: exim
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: コミュニティ
   sales_email: JeanFred1@gmail.com
   support_email: JeanFred1@gmail.com
-categories:
-- メッセージキュー
-custom_kind: integration
+categories: []
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/exim/README.md
 display_on_public_website: true
@@ -33,8 +29,10 @@ integration_id: exim
 integration_title: Exim
 integration_version: 1.0.0
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: exim
+oauth: {}
 public_title: Exim
 short_description: メールキューを監視する Exim インテグレーション
 supported_os:
@@ -44,11 +42,9 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Message Queues
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: メールキューを監視する Exim インテグレーション
   media: []
@@ -57,7 +53,6 @@ tile:
   title: Exim
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -80,7 +75,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い exim チェッ
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### 構成
+### コンフィギュレーション
 
 1. exim のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `exim.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル exim.d/conf.yaml][5] を参照してください。
 
@@ -100,7 +95,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い exim チェッ
 
 Exim インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 {{< get-service-checks-from-git "exim" >}}
 
 

@@ -4,8 +4,6 @@ categories:
 - クラウド
 - 構成 & デプロイ
 - developer tools
-- メトリクス
-custom_kind: integration
 dependencies: []
 description: Travis CI に接続して、ビルド時間、ビルドステータス、ジョブなどに関するメトリクスを表示
 doc_link: https://docs.datadoghq.com/integrations/travis_ci/
@@ -16,6 +14,7 @@ integration_id: ''
 integration_title: Travis CI
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: travis_ci
 public_title: Datadog-Travis CI インテグレーション
@@ -24,10 +23,9 @@ team: web-integrations
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
-Travis CI は、ソフトウェアプロジェクトのビルドとテストに使用される、ホスト型の継続的インテグレーションサービスです。Travis CI に接続すると、ビルド時間、ビルドステータス、ジョブなどに関するメトリクスを表示することができます。
+Travis CI に接続して、ビルド時間、ビルドステータス、ジョブなどに関するメトリクスを表示
 
 ## セットアップ
 
@@ -35,7 +33,7 @@ Travis CI は、ソフトウェアプロジェクトのビルドとテストに�
 
 Travis CI インテグレーションは、[インテグレーションタイル][1]からインストールできます。
 
-### 構成
+### コンフィギュレーション
 
 1. アカウント名、API トークン (Travis CI の Profile タブにあります)、プロジェクトタイプを追加します。プロジェクトタイプは以下のように決定されます。
 
@@ -60,7 +58,7 @@ Travis CI インテグレーションは、[インテグレーションタイル
 
 Travis CI インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Travis CI インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -68,6 +66,6 @@ Travis CI インテグレーションには、サービスのチェック機能�
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
-[1]: https://app.datadoghq.com/integrations/travis_ci
+[1]: https://app.datadoghq.com/account/settings#integrations/travis_ci
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/travis_ci/travis_ci_metadata.csv
 [3]: https://docs.datadoghq.com/ja/help/

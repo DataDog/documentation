@@ -14,6 +14,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: ブログ
   text: Datadog Audit Trail で、チーム全体のコンプライアンス、ガバナンス、透明性を構築します
+kind: ガイド
 title: 機密ログデータの管理
 ---
 
@@ -26,7 +27,7 @@ title: 機密ログデータの管理
 
 すべてのデータを管理することは、特に大規模なコラボレーションプラットフォームにおいては、困難な場合があります。このガイドでは、Datadog に取り込まれる機密データを発見し、管理するためのさまざまなオプションについて説明します。
 
-## Sensitive Data Scanner
+## センシティブ データ スキャナー
 
 [機密データスキャナー][2]は、ストリームベースのパターンマッチングサービスであり、機密データを識別、タグ付け、およびオプションで編集またはハッシュするために使用できます。この機能により、セキュリティチームとコンプライアンスチームは、機密データが組織の外部に漏洩するのを防ぐための防衛線を導入できます。機密データスキャナーは、[組織設定][3]で利用できます。
 
@@ -94,9 +95,9 @@ title: 機密ログデータの管理
 
 この手順により、機密データを含むログ (すでに送信されたログと流入し続ける可能性のあるログの両方) を Datadog (Explorer、Dashboard、Livetail) でクエリできないようにします。
 
-[Data Access 構成ページ][17]と Sensitive Outline クエリを使って[制限][18]を定義し、組織内の[ロール][22]に適用します。 例: `version:x.y.z source:python status:debug`  また、`@timestamp` 属性を使って期間で制限をかけることもできます。 例: `@timestamp:[1731597125165 TO 1731597125200]`
+[データアクセスコンフィギュレーションページ][17]と機密性の高いアウトラインクエリを使用して、組織内の全員に適用される[制限][18]を定義します。例えば、上記のクエリは、`version:x.y.z source:python status:debug` です。
 
-**注:** 機密性の高いアウトラインクエリで **NOT** を使用する場合、クエリに一致するログへのアクセスは制限され、クエリに一致しないログのみがユーザーに表示されるようになります。
+**注:** 機密性の高いアウトラインクエリの**否定**を使用すると、一致するログ以外は表示されなくなります。
 
 {{< img src="logs/guide/sensitive/sensitive_data_access.png" alt="機密データアクセス" style="width:80%;" >}}
 
@@ -120,7 +121,7 @@ title: 機密ログデータの管理
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/logs/guide/logs-rbac/
-[2]: /ja/security/sensitive_data_scanner/
+[2]: /ja/sensitive_data_scanner/
 [3]: /ja/account_management/org_settings/
 [4]: /ja/logs/search_syntax/
 [5]: /ja/logs/indexes
@@ -140,4 +141,3 @@ title: 機密ログデータの管理
 [19]: /ja/logs/archives/?tab=awss3#format-of-the-archives
 [20]: /ja/help/
 [21]: https://www.datadoghq.com/blog/sensitive-data-scanner/
-[22]: /ja/account_management/rbac/

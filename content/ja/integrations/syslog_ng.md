@@ -2,8 +2,7 @@
 aliases:
 - /ja/logs/log_collection/syslog_ng
 categories:
-- log collection
-custom_kind: integration
+- ログの収集
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/syslog_ng.md
 description: Syslog-ng を構成して、ホスト、コンテナ、サービスからログを収集
@@ -12,6 +11,7 @@ has_logo: true
 integration_id: syslog_ng
 integration_title: syslog_ng
 is_public: true
+kind: インテグレーション
 name: syslog_ng
 public_title: Datadog-Syslog-ng インテグレーション
 short_description: Syslog-ng を構成して、ホスト、コンテナ、サービスからログを収集
@@ -27,7 +27,7 @@ Syslog-ng を構成して、ホスト、コンテナ、サービスからログ�
 
 ## セットアップ
 
-### ログ収集
+### ログの収集
 
 1. `/etc/syslog-ng/syslog-ng.conf` 内のシステムログとログファイルを収集し、ソースが正しく定義されていることを確認してください。
 

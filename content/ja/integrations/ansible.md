@@ -1,13 +1,11 @@
 ---
 categories:
-- 自動化
-- 構成とデプロイ
-- ログの収集
-- オーケストレーション
-- プロビジョニング
-custom_kind: インテグレーション
+- provisioning
+- orchestration
+- configuration & deployment
+- log collection
 dependencies: []
-description: 失敗したタスクを追跡し、イベントストリームにプレイブックの実行を表示
+description: 失敗したタスクを追跡し、イベントストリームにプレイブックの実行を表示。
 doc_link: https://docs.datadoghq.com/integrations/ansible/
 draft: false
 git_integration_title: ansible
@@ -16,14 +14,14 @@ integration_id: ansible
 integration_title: Ansible
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: ansible
 public_title: Datadog-Ansible インテグレーション
-short_description: 失敗したタスクを追跡し、イベントストリームにプレイブックの実行を表示
+short_description: 失敗したタスクを追跡し、イベントストリームにプレイブックの実行を表示。
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< img src="integrations/ansible/ansibledashboard.png" alt="Ansible ダッシュボード" popup="true">}}
 
 ## 概要
@@ -58,7 +56,7 @@ Datadog の Ansible インテグレーションの使用方法については、
 
 Ansible を使用して Datadog Agent をインストールするには、[Agent インストール手順][3]を参照してください。
 
-### ログ収集
+### ログの収集
 
 Ansible を使用して、ログ収集を有効にして Datadog Agent をインストールする方法については、[こちらのプレイブックの例を参照][4]してください。
 
@@ -72,7 +70,7 @@ Ansible を使用して、ログ収集を有効にして Datadog Agent をイン
 
 [ansible-datadog-callback][2] が実行中のプレイブックから Ansible のイベントを取得します。
 
-### サービスチェック
+### サービスのチェック
 
 Ansible インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -82,7 +80,7 @@ Ansible インテグレーションには、サービスのチェック機能は
 
 [1]: https://www.datadoghq.com/blog/ansible-datadog-monitor-your-automation-automate-your-monitoring
 [2]: https://github.com/datadog/ansible-datadog-callback
-[3]: https://app.datadoghq.com/account/settings/agent/latest?platform=ansible
+[3]: https://app.datadoghq.com/account/settings#agent/ansible
 [4]: https://github.com/DataDog/ansible-datadog#example-playbooks
 [5]: https://github.com/DataDog/dogweb/blob/prod/integration/ansible/ansible_metadata.csv
 [6]: https://docs.datadoghq.com/ja/help/

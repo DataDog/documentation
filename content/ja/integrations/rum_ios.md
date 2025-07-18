@@ -1,7 +1,6 @@
 ---
 app_id: rum-ios
 app_uuid: 53933f32-091c-4b8d-83a5-bd53ac9eacdb
-assets: {}
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -11,7 +10,6 @@ categories:
 - メトリクス
 - モバイル
 - トレーシング
-custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_ios/README.md
 display_on_public_website: true
@@ -21,8 +19,10 @@ integration_id: rum-ios
 integration_title: iOS
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: rum_ios
+oauth: {}
 public_title: iOS
 short_description: Datadog RUM を使用した iOS アプリケーションの監視とメトリクス生成
 supported_os:
@@ -34,7 +34,6 @@ tile:
   - Category::Mobile
   - Category::Tracing
   - Supported OS::iOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog RUM を使用した iOS アプリケーションの監視とメトリクス生成
   media: []
@@ -43,7 +42,6 @@ tile:
   title: iOS
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -98,7 +96,7 @@ iOS インテグレーションには、サービスのチェック機能は含�
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
-## その他の参考資料
+## その他の参考資料 
 
 お役に立つドキュメント、リンクや記事:
 

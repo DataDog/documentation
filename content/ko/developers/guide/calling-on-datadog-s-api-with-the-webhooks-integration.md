@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ko/developers/faq/calling-on-datadog-s-api-with-the-webhooks-integration
+kind: 가이드
 title: 웹훅 통합으로 Datadog API 호출하기
 ---
 

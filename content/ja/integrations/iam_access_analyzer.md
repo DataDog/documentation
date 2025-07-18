@@ -3,7 +3,6 @@ app_id: iam-access-analyzer
 app_uuid: 13a88901-3d20-43b3-9a3c-3b20b2adf1cc
 assets:
   integration:
-    auto_install: true
     events:
       creates_events: false
     metrics:
@@ -12,7 +11,6 @@ assets:
       prefix: iam_access_analyzer.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10081
     source_type_name: AWS IAM Access Analyzer
 author:
   homepage: https://www.datadoghq.com
@@ -20,8 +18,8 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- セキュリティ
-custom_kind: integration
+- ログの収集
+- security
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/iam_access_analyzer/README.md
 display_on_public_website: true
@@ -31,8 +29,10 @@ integration_id: iam-access-analyzer
 integration_title: AWS IAM Access Analyzer
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: iam_access_analyzer
+oauth: {}
 public_title: AWS IAM Access Analyzer
 short_description: AWS IAM Access Analyzer は、一般にアクセス可能なリソースを特定します。
 supported_os:
@@ -42,11 +42,11 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Log Collection
   - Category::Security
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: AWS IAM Access Analyzer は、一般にアクセス可能なリソースを特定します。
   media: []
@@ -55,22 +55,21 @@ tile:
   title: AWS IAM Access Analyzer
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
-Use AWS Identity and Access Management (IAM) Access Analyzer across your Amazon account to continuously analyze IAM permissions granted with any of your account policies. Datadog integrates with Amazon IAM Access Analyzer using a Lambda function that ships its findings as logs to Datadog.
+Amazon アカウント全体で AWS Identity and Access Management (IAM) Access Analyzer 使用し、アカウントポリシーで付与された IAM アクセス許可を継続的に分析します。Datadog はログを Datadogに送信する Lambda 関数を使い、Amazon IAM Access Analyzer と統合します。
 
 ## セットアップ
 
-### ログ収集
+### ログの収集
 
 1. [Datadog Forwarder][1] Lambda 関数をまだセットアップしていない場合は、セットアップします。
 
-2. Create a new rule with type `Rule with an event pattern` in AWS EventBridge.
+2. AWS EventBridge で新しい規則を作成します。
 
-3. For the event source configuration, select `Other`. For `Creation method`, select `Custom pattern (JSON editor)`. For `Event pattern`, copy and paste the following JSON:
+3. 以下を使用し、カスタムイベントパターンを定義します。
 
     ```json
     {
@@ -78,34 +77,34 @@ Use AWS Identity and Access Management (IAM) Access Analyzer across your Amazon 
     }
     ```
 
-4. Select `AWS service` to use as the target type. Select `Lambda function` as the target and select the Datadog Forwarder Lambda or enter the ARN.
+4. イベントバスを選択し、Datadog Lambda 関数をターゲットとして定義します。
 
 5. 規則を保存します。
 
-6. AWS Access Analyzer が実行されて結果が出ると、`source:access-analyzer` でタグ付けされた Datadog Lambda Forwarder によってイベントが拾われます。ログを確認するには、[ログエクスプローラー][2]をご覧ください。
+6. [ログエクスプローラー][2]を参照して、ログを確認します。
 
 ## 収集データ
 
 ### メトリクス
 
-このインテグレーションには、メトリクスは含まれません。
+このインテグレーションはメトリクスを収集しません
 
-### サービスチェック
+### サービスのチェック
 
 このインテグレーションには、サービスのチェック機能は含まれません。
 
-### Logs
+### ログ管理
 
-This integration can be configured to send logs.
+このインテグレーションは、ログを送信するように構成できます。
 
 ### イベント
 
-このインテグレーションには、イベントは含まれません。
+このインテグレーションは、イベントを送信しません
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: /ja/logs/guide/forwarder/
-[2]: https://app.datadoghq.com/logs?query=source%3Aaccess-analyzer
+[2]: https://app.datadoghq.com/logs
 [3]: https://docs.datadoghq.com/ja/help

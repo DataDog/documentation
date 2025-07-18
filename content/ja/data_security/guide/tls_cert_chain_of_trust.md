@@ -1,4 +1,5 @@
 ---
+kind: ガイド
 title: Datadog の TLS 証明書の信頼チェーンに関する変更点
 ---
 
@@ -75,6 +76,6 @@ Datadog のお客様のほとんどは何もする必要がありません。Dig
 新しいルートと ICA を手動で追加する必要がある場合は、[DigiCert の Web サイトから DigiCert Trusted Root Authority Certificates をダウンロードする][4]ことができます。
 
 [1]: https://changelogs.ubuntu.com/changelogs/pool/main/c/ca-certificates/ca-certificates_20211016ubuntu0.22.04.1/changelog
-[2]: /ja/agent/configuration/proxy
+[2]: /ja/agent/proxy
 [3]: https://global-root-g2.chain-demos.digicert.com
 [4]: https://www.digicert.com/kb/digicert-root-certificates.htm

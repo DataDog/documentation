@@ -4,7 +4,6 @@ categories:
 - aws
 - log collection
 - security
-custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_guardduty.md
 description: Amazon GuardDuty ログを収集します。
@@ -13,6 +12,7 @@ has_logo: true
 integration_id: amazon-guardduty
 integration_title: Amazon GuardDuty
 is_public: true
+kind: integration
 name: amazon_guardduty
 public_title: Datadog-Amazon GuardDuty インテグレーション
 short_description: Amazon GuardDuty ログを収集します。

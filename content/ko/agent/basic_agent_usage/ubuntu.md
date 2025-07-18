@@ -11,6 +11,7 @@ further_reading:
 - link: /tracing/
   tag: 설명서
   text: 트레이스 수집
+kind: 설명서
 platform: 우분투(Ubuntu)
 title: 우분투(Ubuntu) Agent의 기본 사용법
 ---

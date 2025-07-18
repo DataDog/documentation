@@ -7,6 +7,7 @@ further_reading:
 - link: /synthetics/browser_tests/advanced_options/
   tag: Documentación
   text: Configurar las opciones avanzadas de los pasos
+kind: documentación
 title: Grabar pasos con una cadena user-agent personalizada
 ---
 

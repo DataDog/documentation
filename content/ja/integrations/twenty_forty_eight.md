@@ -8,7 +8,6 @@ author:
   sales_email: sales@datadog.com
   support_email: help@datadoghq.com
 categories: []
-custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/twenty_forty_eight/README.md
 display_on_public_website: true
@@ -18,8 +17,10 @@ integration_id: twenty-forty-eight
 integration_title: Twenty Forty Eight
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: twenty_forty_eight
+oauth: {}
 public_title: Twenty Forty Eight
 short_description: Datadog ダッシュボードに追加できる楽しいパズルゲーム
 supported_os:
@@ -44,7 +45,6 @@ tile:
   title: Twenty Forty Eight
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要

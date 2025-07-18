@@ -1,10 +1,9 @@
 ---
 categories:
 - cloud
-- data stores
+- data store
 - google cloud
 - log collection
-custom_kind: integration
 dependencies: []
 description: パフォーマンス、健全性、レプリケーションに関するデータベースメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/google_cloudsql/
@@ -15,6 +14,7 @@ integration_id: google-cloudsql
 integration_title: Google Cloud SQL
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: google_cloudsql
 public_title: Datadog-Google Cloud SQL インテグレーション
@@ -22,7 +22,6 @@ short_description: パフォーマンス、健全性、レプリケーション�
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Google Cloud SQL は、クラウド内の SQL データベースを簡単にセットアップ、保守、運用、管理できるようにするフルマネージド型のデータベースサービスです。
@@ -40,11 +39,11 @@ Google Cloud SQL からメトリクスを取得して、以下のことができ
 
 [Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-#### 構成
+#### コンフィギュレーション
 
 カスタム Cloud SQL ラベルをタグとして収集するには、Cloud Asset Inventory のアクセス権を有効にします。
 
-#### 収集データ
+#### ログの収集
 
 {{< site-region region="us3" >}}
 
@@ -54,13 +53,13 @@ Google Cloud SQL からメトリクスを取得して、以下のことができ
 
 {{< site-region region="us,eu,gov" >}}
 
-Google Cloud SQL のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][2]。
+Google Cloud SQL のログは Google Cloud Logging により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][2] をまだセットアップしていない場合は、これをセットアップしてください。
 
-これが完了したら、Google Cloud SQL のログを Google Cloud Logging から Pub/Sub トピックへエクスポートします。
+これが完了したら、Google Cloud SQL のログを Google Cloud Logging から Pub/Sub へエクスポートします。
 
 1. [Google Cloud Logging のページ][3]に移動し、Google Cloud SQL のログを絞り込みます。
 2. **シンクを作成**し、シンクに適宜名前を付けます。
-3. 宛先として "Cloud Pub/Sub" を選択し、その目的で作成された Pub/Sub トピックを選択します。**注**: Pub/Sub トピックは別のプロジェクトに配置できます。
+3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 
 [2]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/#log-collection
@@ -71,14 +70,14 @@ Google Cloud SQL のログは Google Cloud Logging で収集され、Cloud Pub/S
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google-cloudsql" >}}
+{{< get-metrics-from-git "google_cloudsql" >}}
 
 
 ### イベント
 
 Google Cloud SQL インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 **gcp.cloudsql.database.state**
 Cloud SQL インスタンスの現在のサービス状態。

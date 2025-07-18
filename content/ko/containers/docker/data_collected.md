@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ko/agent/docker/data_collected
+kind: 설명서
 title: 수집된 도커 데이터
 ---
 
@@ -10,7 +11,7 @@ title: 수집된 도커 데이터
 
 에이전트가 도커 컨테이너에 배포할 때 수집한 메트릭:
 
-{{< get-metrics-from-git "docker" >}}
+{{< get-metrics-from-git "docker_daemon" >}}
 
 ### 이벤트
 

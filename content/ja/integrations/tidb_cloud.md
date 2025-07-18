@@ -5,7 +5,6 @@ assets:
   dashboards:
     TiDB Cloud Overview: assets/dashboards/overview.json
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -15,7 +14,6 @@ assets:
       prefix: tidb_cloud.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10247
     source_type_name: TiDB Cloud
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -24,8 +22,7 @@ author:
   support_email: xuyifan02@pingcap.com
 categories:
 - cloud
-- data stores
-custom_kind: integration
+- data store
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/tidb_cloud/README.md
 display_on_public_website: true
@@ -35,8 +32,10 @@ integration_id: tidb-cloud
 integration_title: TiDB Cloud
 integration_version: ''
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: tidb_cloud
+oauth: {}
 public_title: TiDB Cloud
 short_description: Datadog による TiDB Cloud クラスターのモニタリング
 supported_os:
@@ -50,8 +49,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Cloud
-  - Category::Data Stores
-  - Offering::Integration
+  - Category::Data Store
   configuration: README.md#Setup
   description: Datadog による TiDB Cloud クラスターのモニタリング
   media: []
@@ -60,7 +58,6 @@ tile:
   title: TiDB Cloud
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -82,10 +79,10 @@ TiDB Cloud プロジェクトの Datadog インテグレーションを構成す
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "tidb-cloud" >}}
+{{< get-metrics-from-git "tidb_cloud" >}}
 
 
-### サービスチェック
+### サービスのチェック
 
 TiDB Cloud インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -95,7 +92,7 @@ TiDB Cloud インテグレーションには、イベントは含まれません
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 [1]: https://tidbcloud.com
 [2]: https://docs.datadoghq.com/ja/integrations/tidb/

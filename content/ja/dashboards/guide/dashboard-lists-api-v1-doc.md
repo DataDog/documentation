@@ -2,6 +2,7 @@
 aliases:
 - /ja/graphing/faq/dashboard-lists-api-doc
 - /ja/graphing/guide/dashboard-lists-api-v1-doc
+kind: ガイド
 title: ダッシュボードリスト API (v1)
 ---
 
@@ -623,7 +624,7 @@ curl -X ADD -H "Content-type: application/json" \
 {{% /tab %}}
 {{< /tabs >}}
 
-## ダッシュボードリストの項目を更新
+## ダッシュボードリストのアイテムを更新する
 
 <div class="alert alert-danger">
 このエンドポイントは旧バージョンです。代わりに、<a href="https://docs.datadoghq.com/api#update-items-of-a-dashboard-list">ダッシュボードリストのアイテムを更新する v2 エンドポイント</a>を使用してください。
@@ -876,7 +877,7 @@ curl -X UPDATE -H "Content-type: application/json" \
 {{% /tab %}}
 {{< /tabs >}}
 
-## ダッシュボードリストから項目を削除
+## ダッシュボードリストからアイテムを削除する
 
 <div class="alert alert-danger">
 このエンドポイントは旧バージョンです。代わりに、<a href="https://docs.datadoghq.com/api#delete-items-from-a-dashboard-list">ダッシュボードリストからアイテムを削除する v2 エンドポイント</a>を使用してください。

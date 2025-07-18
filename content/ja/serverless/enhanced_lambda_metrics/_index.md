@@ -2,6 +2,7 @@
 aliases:
 - /ja/serverless/real-time-enhanced-metrics
 - /ja/serverless/real_time_enhanced_metrics
+kind: ドキュメント
 title: 拡張 Lambda メトリクス
 ---
 

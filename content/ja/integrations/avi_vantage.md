@@ -5,7 +5,6 @@ assets:
   dashboards:
     Avi Vantage - Overview: assets/dashboards/overview.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -20,10 +19,9 @@ assets:
       prefix: avi_vantage.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10189
     source_type_name: Avi Vantage
   monitors:
-    Virtual service has a high number of errors: assets/monitors/error_rate_monitor.json
+    Avi Vantage - Error Rate Monitor: assets/monitors/error_rate_monitor.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -32,7 +30,6 @@ author:
 categories:
 - クラウド
 - ネットワーク
-custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/avi_vantage/README.md
 display_on_public_website: true
@@ -40,10 +37,12 @@ draft: false
 git_integration_title: avi_vantage
 integration_id: avi-vantage
 integration_title: Avi Vantage
-integration_version: 5.3.0
+integration_version: 3.3.0
 is_public: true
+kind: integration
 manifest_version: 2.0.0
 name: avi_vantage
+oauth: {}
 public_title: Avi Vantage
 short_description: Avi Vantage インスタンスの健全性とパフォーマンスを監視。
 supported_os:
@@ -58,7 +57,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
   configuration: README.md#Setup
   description: Avi Vantage インスタンスの健全性とパフォーマンスを監視。
   media: []
@@ -67,7 +65,6 @@ tile:
   title: Avi Vantage
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -83,7 +80,7 @@ tile:
 Avi Vantage チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 1. avi_vantage のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `avi_vantage.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル avi_vantage.d/conf.yaml][4] を参照してください。
 
@@ -96,7 +93,7 @@ Avi Vantage チェックは [Datadog Agent][3] パッケージに含まれてい
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "avi-vantage" >}}
+{{< get-metrics-from-git "avi_vantage" >}}
 
 
 ### イベント
@@ -109,7 +106,7 @@ Avi Vantage には、イベントは含まれません。
 
 [1]: https://avinetworks.com/why-avi/multi-cloud-load-balancing/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings/agent/latest
+[3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/avi_vantage/datadog_checks/avi_vantage/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
