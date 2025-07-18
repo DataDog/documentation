@@ -1,5 +1,5 @@
 ---
-title: Google Cloud Run Functions
+title: Cloud Run Functions
 further_reading:
 
   - link: 'https://cloud.google.com/blog/products/serverless/google-cloud-functions-is-now-cloud-run-functions'
@@ -10,13 +10,17 @@ further_reading:
 
 ## Overview
 
+<div class="alert alert-info">
+<strong>Looking for 1st Gen Functions?</strong> If you're using legacy Cloud Run Functions (1st generation), see the <a href="/serverless/google_cloud_run/functions_1st_gen">1st Gen Functions documentation</a> for setup instructions.
+</div>
+
+<div class="alert alert-info">
+<strong>Have you set up your <a href="/integrations/google-cloud-platform/">Google Cloud integration</a>?</strong> We recommend starting with the integration tile first before moving on. Remember to add the <code>cloud asset viewer</code> role to your service account and Enable CAI to enjoy full serverless support for your cloud run service.
+</div>
+
 Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run functions Gen 2 ([formerly Cloud Functions v2][1]) through the Datadog Agent in a sidecar container.
 
-This page is **only for 2nd Gen Cloud Run Functions**. For 1st Gen support, see [1st Gen Functions][2], and to collect additional metrics, install the [Google Cloud integration][3].
-
 [1]: https://cloud.google.com/blog/products/serverless/google-cloud-functions-is-now-cloud-run-functions
-[2]:/serverless/google_cloud_run/functions_gen1
-[3]:/integrations/google_cloud_platform/
 
 ## Setup
 
@@ -82,7 +86,7 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
 |-----------| ----- |
 | `JAVA_TOOL_OPTIONS` | `-javaagent:/path/to/dd-java-agent.jar` |
 
-   Cloud Run Function code runs with a classpath that includes the function code and its dependencies. 
+   Cloud Run Function code runs with a classpath that includes the function code and its dependencies.
    If [invoking the Functions Framework directly](https://github.com/GoogleCloudPlatform/functions-framework-java?tab=readme-ov-file#function-classpath) with the Datadog Agent, update the `--classpath` and `--target` options, along with the Java agent flag to the path of your jar files:
 
    To run your app from an IDE, Maven, or Gradle application script, or `java -javaagent` command, add the `-javaagent` JVM argument and the following configuration options, as applicable:
@@ -202,7 +206,7 @@ If you are deploying a new Cloud Run function for the first time through the con
    - `DD_HEALTH_PORT`: The port you selected for the startup check in the previous step.
    - `FUNCTION_TARGET`: The entry point of your function. For example, `gcfv2.HelloworldApplication`.
    - `JAVA_TOOL_OPTIONS`: `-javaagent:/path/to/dd-java-agent.jar` (_Java only_).
-   
+
    For a list of all environment variables, including additional tags, see [Environment variables](#environment-variables).
 
 #### Main container
@@ -217,7 +221,7 @@ If you are deploying a new Cloud Run function for the first time through the con
 
 Tag your GCP entity with the `service` label to correlate your traces with your service:
 
-Add the same value from `DD_SERVICE` to a `service` label on your cloud function, inside the info panel of your function. 
+Add the same value from `DD_SERVICE` to a `service` label on your cloud function, inside the info panel of your function.
 
 | Name      | Value                                                       |
 |-----------|-------------------------------------------------------------|
@@ -756,5 +760,5 @@ public class Function : IHttpFunction
 [11]: /tracing/other_telemetry/connect_logs_and_traces/go
 [12]: /tracing/other_telemetry/connect_logs_and_traces/ruby
 [13]: /getting_started/tagging/unified_service_tagging/
-[14]: /serverless/guide/gcr_serverless_init
+[14]: /serverless/google_cloud/google_cloud_run_in_process
 [15]: https://cloud.google.com/run/docs/configuring/services/labels

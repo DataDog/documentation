@@ -1,5 +1,5 @@
 ---
-title: Google Cloud Run with serverless-init
+title: Google Cloud Run In-Process
 further_reading:
 
 - link: 'https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/'
@@ -10,7 +10,12 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-info">If you are running multiple containers per Google Cloud Run application, Datadog recommends using the Datadog sidecar: <a href="/serverless/google_cloud_run">Instrument Google Cloud Run</a>.</div>
+
+<div class="alert alert-info">To instrument your Google Cloud Run applications with Sidecar, see <a href="/serverless/google_cloud_run/containers">Instrument Google Cloud Run with Sidecar</a>.</div>
+
+<div class="alert alert-info">
+<strong>Have you set up your <a href="/integrations/google-cloud-platform/">Google Cloud integration</a>?</strong> We recommend starting with the integration tile first before moving on. Remember to add the <code>cloud asset viewer</code> role to your service account and Enable CAI to enjoy full serverless support for your cloud run service.
+</div>
 
 Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through the [Google Cloud integration][1]. Datadog also provides a solution for instrumenting your Cloud Run applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
