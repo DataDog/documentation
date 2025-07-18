@@ -23580,6 +23580,61 @@ components:
             type: string
           type: array
       type: object
+    MetricTagCardinalitiesData:
+      description: A list of tag cardinalities associated with the given metric.
+      items:
+        $ref: '#/components/schemas/MetricTagCardinality'
+      type: array
+    MetricTagCardinalitiesMeta:
+      description: Response metadata object.
+      properties:
+        metric_name:
+          description: 'The name of metric for which the tag cardinalities are returned.
+
+            This matches the metric name provided in the request.
+
+            '
+          type: string
+      type: object
+    MetricTagCardinalitiesResponse:
+      description: 'Response object that includes an array of objects representing
+        the cardinality details of a metric''s tags.
+
+        '
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricTagCardinalitiesData'
+        meta:
+          $ref: '#/components/schemas/MetricTagCardinalitiesMeta'
+      readOnly: true
+      type: object
+    MetricTagCardinality:
+      description: Object containing metadata and attributes related to a specific
+        tag key associated with the metric.
+      example:
+        attributes:
+          cardinality_delta: 25
+        id: http.request.latency
+        type: tag_cardinality
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricTagCardinalityAttributes'
+        id:
+          description: The name of the tag key.
+          type: string
+        type:
+          default: tag_cardinality
+          description: This describes the endpoint action.
+          type: string
+      type: object
+    MetricTagCardinalityAttributes:
+      description: An object containing properties related to the tag key
+      properties:
+        cardinality_delta:
+          description: This describes the recent change in the tag keys cardinality
+          format: int64
+          type: integer
+      type: object
     MetricTagConfiguration:
       description: Object for a single metric tag configuration.
       example:
@@ -55991,6 +56046,53 @@ paths:
       x-permission:
         operator: OPEN
         permissions: []
+      x-undo:
+        type: safe
+  /api/v2/metrics/{metric_name}/tag-cardinalities:
+    get:
+      description: Returns the cardinality details of tags for a specific metric.
+      operationId: GetMetricTagCardinalityDetails
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricTagCardinalitiesResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      summary: Get tag key cardinality details
+      tags:
+      - Metrics
+      x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+        - metrics_read
       x-undo:
         type: safe
   /api/v2/metrics/{metric_name}/tags:
