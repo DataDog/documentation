@@ -201,11 +201,15 @@ Workload selection enables injection based on Kubernetes labels and selectors. R
 
 ### Java
 
-- `JAVA_TOOL_OPTIONS` too long: The `JAVA_TOOLS_OPTIONS` environment variable has a JVM-hard-coded limit of 1024 characters. If this limit is exceeded, 
+- `JAVA_TOOL_OPTIONS` too long
 
-#### JAVA\_TOOL\_OPTIONS length
+   The `JAVA_TOOL_OPTIONS` environment variable has a JVM-enforced limit of 1024 characters. During injection, Datadog appends the -javaagent flag to this variable to enable tracing. If the combined value exceeds the limit, the JVM emits a warning and ignores the variable, preventing injection.
 
-The `JAVA\_TOOL\_OPTIONS` environment variable has a JVM hard-coded limit of 1024 characters. If appending the \-javaagent flag exceeds this, a warning is emitted, and the process is not injected. The current solution is to not use injection for that process.  
+   To avoid this issue, exclude the affected process from injection.
+
+- `JAVA_TOOL_OPTIONS` changes program output
+
+   
 
 #### Setting JAVA\_TOOL\_OPTIONS changes Java program output
 
