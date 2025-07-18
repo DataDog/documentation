@@ -7,10 +7,6 @@ further_reading:
   text: "Remap reserved attributes"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/migrate-historical-logs-with-custom-processors/" btn_hidden="false" >}}
-The Custom Processor is in Preview. Fill out the form to request access.
-{{< /callout >}}
-
 {{% observability_pipelines/processors/custom_processor %}}
 
 ## Custom functions
