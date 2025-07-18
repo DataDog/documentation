@@ -39,7 +39,7 @@ Update your web application to include the RUM Session ID in every call to your 
  * Example call to an AI Agent.
  *
  * We send the `session_id` in the body of the request. If the call to the AI agent
- * needs to be a GET Request, the `session_id` can be sent as a query param.
+ * needs to be a GET request, the `session_id` can be sent as a query param.
  */
  const response = await fetch("/ai-agent-endpoint", {
   method: "POST",
