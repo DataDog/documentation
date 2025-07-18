@@ -8,21 +8,21 @@ further_reading:
 
 ## Overview
 
-Single Step Instrumentation (SSI) allows you to instrument applications at the host or Kubernetes level without modifying application dependencies or images. If you experience challenges enabling APM with SSI, use this guide to diagnose and resolve common issues. If problems persist, contact [Datadog Support][1] for further assistance. 
+Single Step Instrumentation (SSI) allows you to instrument applications at the host or Kubernetes level without modifying application dependencies or images. If you encounter problems enabling APM with SSI, use this guide to troubleshoot and resolve common issues. Contact [Datadog Support][1] if you need further assistance. 
 
 ## Host and Docker instrumentation
 
-### Host injection doesn't apply to existing shells
+### Host injection does not apply to existing processes
 
 The preload library only injects into newly launched processes. Start a new shell session or log out and log back in to apply instrumentation. 
 
 **Note:** Docker-based injection does not have this limitation.  
 
-### Instance is too small
+### Injection fails on small instance types
 
 The preload library allows the analyzer one second to complete its work. On small VM instances running multiple services (for example, `t2.micro`), this time limit may be exceeded. To overcome this issue, use a larger instance size, such as `t2.small`.  
 
-### Errors after manual uninstallation
+### Errors after manual uninstallation of agent files
 
 If you manually delete agent files, you may see errors like: 
 ```
@@ -36,11 +36,11 @@ To properly uninstall SSI, follow the platform-specific instructions:
 * [Linux][3]
 * [Windows][3]
 
-### Rootless Docker
+### Injection not working with rootless Docker
 
-When using rootless Docker, update `/etc/datadog-agent/inject/docker\_config.yaml` to set `docker\_socket` to the path of the Docker socket for the user running Docker (default: `/run/user/$UID/docker.sock`). No reboot is required.  
+When using rootless Docker, set `docker_socket` in `/etc/datadog-agent/inject/docker_config.yaml` to the path of the Docker socket used by the current user (typically `/run/user/$UID/docker.sock`). No reboot is required.  
 
-### Custom launchers
+### Injection fails with statically linked launchers
 
 If a custom launcher is statically linked (common with Go), the preload library might not be invoked. Injection can still succeed if:
 - The launcher's command line includes the language name
@@ -50,29 +50,27 @@ However, direct process launches from statically linked binaries are not injecte
 
 ## Kubernetes instrumentation
 
-### Admission Controller not configured or running
+### Ensure the Admission Controller is configured and running
 
 The Datadog Admission Controller must be deployed and configured before application pods are created; it cannot modify existing pods. 
 
 To troubleshoot Admission Controller issues:
 
-1. Verify Cluster Agent pod health:
+1. Check Cluster Agent pod health:
    ```
    kubectl get pods
    kubectl get deployments
    ```  
 1. Check the Cluster Agent leader logs for INFO messages indicating successful Admission Controller startup. For example:
+
    ```
    Group version 'admissionregistration.k8s.io/v1' is available, Starting secrets controller, Starting webhook controller
    ```
 
-1. Run the `agent status` command on the Cluster Agent. The output includes admission controller and webhooks sections, which are also 
-
-
-1. Check the Cluster Agent's Admission Controller status by doing one of the following:
+1. Check the Admission Controller status by doing one of the following:
 
    - Run `agent status` inside the Cluster Agent pod to get a live status output. 
-   - Check `status.log` within a flare if troubleshooting after the fact. The system runs `agent status` when it generates a flare and captures the output in `status.log`. 
+   - Check `status.log` within a flare if troubleshooting after the fact. When a flare is generated, the system runs `agent status` and stores the output in `status.log`.
 
    In both cases, find the Admission Controller and Webhooks sections, and verify the following:
    - All expected `MutatingWebhookConfiguration` resources are listed (for auto-instrumentation, configuration injection, and tag injection). 
@@ -87,13 +85,13 @@ To troubleshoot Admission Controller issues:
    
    Look for `admission_webhooks_library_injection_attempts` to see injection attempts by language.
 
-### Injection mutation failures
+### Failed mutations
 
 The Cluster Agent logs warnings and errors for injection failures, typically from `admission/server.go`. For example, a warning might appear if `JAVA_TOOL_OPTIONS` is set using `valueFrom`. 
 
 Use the metric `datadog.cluster_agent.admission_webhooks.library_injection_errors` for further debugging. 
 
-#### Label annotation failure due to Kubernetes string limits
+#### Language annotation cannot be applied
 
 During setup, SSI detects the application language of your service and applies a service label in the form `internal.dd.datadoghq.com/service-name.detected_langs`. 
 
@@ -106,19 +104,19 @@ languagedetection/patcher.go:231 in handleDeploymentEvent) | failed to handle de
 
 String limit violations are common if service tags are not explicitly set through [Unified Service Tagging][8], in which case default image names are used. 
 
-#### No errors but no injection
+#### Injection appears successful but no traces reported
 
-If logs show no issues but traces are missing, there may be an application-side misconfiguration. 
-- Check annotations and labels 
-- Confirm [Unified Service Tagging][8] is set up correctly
-- Verify allow/deny lists for workload selection 
+If logs show no issues but traces are missing, there may be an application-side misconfiguration. Verify that:
+- Required annotations and labels are present
+- [Unified Service Tagging][8] is set up correctly
+- Allow/deny lists for workload selection are properly defined
 
-## Debugging the injection process
+## Debug the injection process
 
 After verifying webhook injection, verify the following in the application container:
 
-1. `/etc/ld.so.preload` includes: `/opt/datadog-packages/datadog-apm-inject/stable/inject/launcher.preload.so`  
-2. `LD\_PRELOAD` environment variable is set to the same value
+1. `/etc/ld.so.preload` includes the following entry: `/opt/datadog-packages/datadog-apm-inject/stable/inject/launcher.preload.so`  
+2. `LD_PRELOAD` environment variable is set to the same value
 3. The directory `/opt/datadog-packages/datadog-apm-inject` exists, with `stable` and `$version` subdirectories
 4. Language-specific directories exist (for example, `/opt/datadog/apm/library/java/` for Java)
 
@@ -126,38 +124,42 @@ To enable debug logs:
 1. Set `DD_APM_INSTRUMENTATION_DEBUG: true` in the deployment/pod/container spec.
 2. Delete the pod to enable debug logs during injection.
 
-## Strict pod security rules  
+## Environments with strict Pod Security settings
 
 If Pod Security Rules block the Datadog init container, you may see errors like:
 ```
 Privilege escalation container is not allowed or violates PodSecurity "restricted: latest": allowPrivilegeEscalation is false
 ```
 
-To resolve this, configure the Datadog Cluster Agent by setting one of the following:
+To resolve this, set one of the following Cluster Agent options:
 - `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_INIT_SECURITY_CONTEXT`
 - `admission_controller.auto_instrumentation.init_security_context`
 
 The value should be a JSON string that applies the necessary security context to the Datadog init containers.  
 
-## Upgrading or downgrading the injector version
+## Upgrade or downgrade the injector version
 
 To set the injector version:
 - At the cluster level:
   
-  Set in `values.yaml` under `datadog.apm.instrumentation.injector.imageTag`
+  Set in `values.yaml` under `datadog.apm.instrumentation.injector.imageTag`.
 
 - At the pod level:
  
-  Set with the annotation `admission.datadoghq.com/apm-inject.version`
+  Set with the annotation `admission.datadoghq.com/apm-inject.version`.
 
 
-For host/Docker injection, modifying the `auto_inject`  version is not recommended. 
+For host/Docker injection, modifying the `auto_inject` version is not recommended. 
 
-If the installation script was already run, update the injector version with:
-```sudo datadog-installer install "oci://install.datadoghq.com/apm-inject-package: \<VERSION\>-1"
+To manually update the injector version, run:
 ```
+sudo datadog-installer install "oci://install.datadoghq.com/apm-inject-package: <VERSION>-1"
+```
+
 Alternatively, set the following in the installation script:
-```DD_INSTALLER_DEFAULT_PKG_VERSION_DATADOG_APM_INJECT=<VERSION>-1```
+```
+DD_INSTALLER_DEFAULT_PKG_VERSION_DATADOG_APM_INJECT=<VERSION>-1
+```
 
 ## Process deny lists
 
@@ -182,9 +184,9 @@ To define a custom policy:
    sudo /opt/datadog-packages/datadog-apm-inject/stable/inject/process apply-config
    ```
 
-### `apm-inject` container flagged by security scanners
+### Injection container flagged by security scanners
 
-Security tools may flag the `apm-inject` container because it runs an executable at startup, which resembles malicious software. 
+Security tools may flag the `apm-inject` container because it runs an executable at startup, which can resemble malicious software. 
 
 The container's behavior is expected and safe; the executable configures the environment for auto-instrumentation. 
 
@@ -197,68 +199,67 @@ Workload selection enables injection based on Kubernetes labels and selectors. R
 1. `disabledNamespaces` always takes precedence.
 2. When a pod initializes, the target list is checked from top to bottom. Only the first matching rule applies per pod.
 
-## Language specific issues
+## Language-specific troubleshooting
 
 ### Java
 
-- `JAVA_TOOL_OPTIONS` too long
+#### `JAVA_TOOL_OPTIONS` is too long
 
-   The `JAVA_TOOL_OPTIONS` environment variable has a JVM-enforced limit of 1024 characters. During injection, Datadog appends the -javaagent flag to this variable to enable tracing. If the combined value exceeds the limit, the JVM emits a warning and ignores the variable, preventing injection.
+The `JAVA_TOOL_OPTIONS` environment variable has a JVM-enforced limit of 1024 characters. During injection, Datadog appends a `-javaagent` flag to this variable to enable tracing. If the combined value exceeds the limit, the JVM emits a warning and ignores the variable, preventing injection.
 
-   To avoid this issue, exclude the affected process from injection.
+To avoid this issue, exclude the affected process from injection.
 
-- `JAVA_TOOL_OPTIONS` changes program output
+####  `JAVA_TOOL_OPTIONS` changes program output
 
+When `JAVA_TOOL_OPTIONS` is set, the JVM prints a message to stdout—such as `Picked up JAVA_TOOL_OPTIONS: -Xmx1024m`. If a process reads and depends on this output, it may be affected.
+
+As of version 0.12.2, injection is skipped for `java -version` to avoid interfering with processes that parse its output.
+
+#### Multiple Java sites report under the same service name
    
+By default, Single Step sets the `DD_SERVICE` environment variable, which applies a single service name across all web applications running on the same server (such as Tomcat or WebLogic). As a result, all sites report under the same name.
 
-#### Setting JAVA\_TOOL\_OPTIONS changes Java program output
+Use one of the following options to enable **split-by-tags** so that each site reports under its own name:
+- JVM system property: `-Ddd.trace.split-by-tags=servlet.context`
+- Environment variable: `DD_TRACE_SPLIT_BY_TAGS=servlet.context`
 
-When `JAVA\_TOOL\_OPTIONS` is set, the JVM prints a message to the command line (for example, `Picked up JAVA\_TOOL\_OPTIONS: \-Xmx1024m)`. If a process reads this output, it may be affected. As of version 0.12.2, injection no longer occurs for java \-version.  
+#### Tracer already exists
 
-#### DD\_SERVICE sets one service name for all sites in application servers
-
-Single Step always injects `DD\_SERVICE`, causing all sites in application servers (like Tomcat, Weblogic) to report under the same name. To override this, enable split by tags (for example, `\-Ddd.trace.split-by-tags=servlet.context` or `DD\_TRACE\_SPLIT\_BY\_TAGS=servlet.context`) so each site reports its own name.
-
-#### Existing `javaagent` configuration
-
-SSI does not inject into an application with existing tracing running. 
+SSI does not inject into applications that already use a `-javaagent` option or other tracing configuration.
 
 ### Ruby
 
-#### Ruby gemfile modifications
+Ruby injection modifies the `Gemfile` to add the Datadog tracing library. If injection support is later removed, the application may fail to start due to the missing dependency. 
 
-Ruby injection modifies the Gemfile to add the Datadog tracing library. If injection support is removed, the application may error. Restoring the Gemfile to its original state resolves this. If APM is still desired after removal, run bundle install to download the gem.
+To resolve this, restore the original `Gemfile`. If you still want to use APM after removing injection, run `bundle install` to download the gem.
 
 ### Python
 
-#### Protobuf dependency issues
+Versions <=2.7.5 contain a pre-packaged protobuf dependency that can conflict with system libraries.
 
-Versions 2.7.5 and below contain a pre-packaged protobuf dependency that can conflict with a user's installation.
+## Custom instrumentation
 
-## SSI with custom instrumentation
+Custom instrumentation still requires you to import the tracing library. Configuration variables like .NET's `DD_TRACE_METHODS` remain available for defining custom spans.
 
-Users with custom instrumentation still need to import the library as usual. Library configuration environment variables (for example, .NET's `DD\_TRACE\_METHODS`) are still available for adding custom spans.  
+## Use private registries with SSI
 
-## Private registries and mirroring SSI images
+To use SSI with a private container registry, follow the instructions in [Synchronize Datadog's images with a private registry][5].
 
-Should you wish to set up private registries for the SSI images, follow the documentation provided in [Synchronize Datadog's images with a private registry][5].
+The required images vary based on the languages you configure, but typically include:
+- `gcr.io/datadoghq/apm-inject` 
+- `gcr.io/datadoghq/dd-lib-<lang>-init`
+  - `gcr.io/datadoghq/dd-lib-dotnet-init`
+  - `gcr.io/datadoghq/dd-lib-java-init`
+  - `gcr.io/datadoghq/dd-lib-js-init`
+  - `gcr.io/datadoghq/dd-lib-python-init`
+  - `gcr.io/datadoghq/dd-lib-ruby-init`
 
-The required images depend on configured languages but generally include `gcr.io/datadoghq/apm-inject` and `gcr.io/datadoghq/dd-lib-\<lang\>-init` images. 
+### Version mirroring for private registries
 
-The images that need to exist depend on the languages configured. Here is a reasonable default list:
+Each language-specific tracer image must be available in your private registry at the version specified during workload selection.
 
-* `gcr.io/datadoghq/apm-inject`
-* `gcr.io/datadoghq/dd-lib-dotnet-init`
-* `gcr.io/datadoghq/dd-lib-java-init`
-* `gcr.io/datadoghq/dd-lib-js-init`
-* `gcr.io/datadoghq/dd-lib-python-init`
-* `gcr.io/datadoghq/dd-lib-ruby-init`
+By default, the injector uses version `0` unless a different version is configured in the Cluster Agent. If you are using annotations to specify tracer versions, those versions must also be mirrored and available in your private registry.
 
-### Version mirroring 
-
-The version of each language library needs to match the versions configured as part of workload selection. Unless overridden in the cluster agent configuration, the injector has a default version of `0`. If you are using annotations to set the tracer versions, those versions also need to exist in the private registry.
-
-### Example for SSI Image Mirroring
 For example, this configuration:
 
     apm:
@@ -276,27 +277,60 @@ Would require the following image tags to exist in the private registry:
 * `gcr.io/datadoghq/dd-lib-java-init:1`
 * `gcr.io/datadoghq/dd-lib-python-init:3`
 
-If the user does not mirror these images in their private registry, they may run into an error similar to this:
+If the user does not mirror these images in their private registry, they may run into an error like the following:
 
-`Failed to pull image "...." rpc error: code = Unknown`
+```
+Failed to pull image "...." rpc error: code = Unknown
+```
  
 ## Asking for support 
 
+When contacting support about injection issues, collect the following information to speed up troubleshooting:
+
 1. Are you using host injection, Docker injection, or both?  
-2. Do the /opt/datadog-packages/datadog-apm\* directories exist?  
-3. For host injection, check for the existence and permissions of /etc/ld.so.preload using sudo ls \-l /etc/ld.so.preload. It should be owned by root with 644 permissions (-rw-r--r--).  
-4. Enable Injector Debug Logs by setting the environment variable DD\_APM\_INSTRUMENTATION\_DEBUG to true. Debug output goes to stderr.  
-   * For host injection, route logs to a file using DD\_APM\_INSTRUMENTATION\_OUTPUT\_PATHS=\<log\_file\_path\>.  
-   * For Docker injection, logs are sent to stderr and can be viewed with docker logs or docker compose logs.  
-5. Provide an Agent flare.
+1. Verify that the `/opt/datadog-packages/datadog-apm*` directories exist. 
+1. For host injection, check for the existence and permissions of `/etc/ld.so.preload`:
 
-Collect the following information for Kubernetes injection issues:
+   ```
+   sudo ls -l /etc/ld.so.preload
+   ```
+   
+   It should be owned by `root` with `644` permissions (`-rw-r--r--`).  
 
-* Commands/Helm chart/Datadog Operator used for Cluster Agent deployment.  
-* Deployment files for the application pod.  
-* Node Agent flare and Cluster Agent flare in DEBUG mode.  
-* Output of kubectl describe pod \<app pod\>.  
-* Injector Debug Logs: Enabled by setting DD\_APM\_INSTRUMENTATION\_DEBUG: true on the application container. Logs are printed to stderr by default, or can be routed to a file through DD\_APM\_INSTRUMENTATION\_OUTPUT\_PATHS=\<log\_file\_path\>.
+1. Enable injector debug logs by setting the environment variable:
+
+   ```
+   DD_APM_INSTRUMENTATION_DEBUG=true
+   ```
+   
+   By default, logs are written to stderr.
+
+   - For host injection, you can send logs to a file:
+     ```
+     DD_APM_INSTRUMENTATION_OUTPUT_PATHS=<log_file_path>
+     ```
+
+   - For Docker injection, logs can be viewed using `docker logs` or `docker compose logs`.  
+
+1. Provide an Agent flare.
+
+### Additional information for Kubernetes-based injection
+
+Collect the following details if troubleshooting injection in a Kubernetes environment:
+
+- The method used to deploy the Cluster Agent (for example, Helm, Datadog Operator, kubectl commands).
+- Deployment files for the application pod.  
+- Flares from both the Node Agent and the Cluster Agent, ideally with DEBUG mode enabled. 
+- Output of:
+  ```
+  kubectl describe pod <app pod>
+  ```
+- Injector debug logs from the application container: 
+  - Set `DD_APM_INSTRUMENTATION_DEBUG: true`
+  - Logs are printed to stderr by default, or can be routed to a file through: 
+    ```
+    DD_APM_INSTRUMENTATION_OUTPUT_PATHS=<log_file_path>
+    ```
 
 ## Further reading
 
