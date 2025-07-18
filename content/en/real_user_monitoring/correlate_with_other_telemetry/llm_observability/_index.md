@@ -95,6 +95,9 @@ async def agent_loop(
 ```
 
 # Navigating between RUM and LLM observability
-You can access the LLM Traces associated with your RUM Session right from the RUM Session Side Panel by clicking the `LLM Traces` button in the side panel header.
+Once configured, you can navigate between correlated data:
+
+- **From RUM to LLM**: In a RUM session, click the "LLM Traces" button in the side panel header to view associated AI interactions.
+- **From LLM to RUM**: In an LLM trace, click the "RUM Session" link to view the corresponding user session replay.
 
 Similarly, on an LLM Trace you can access the matching RUM Session replay.
