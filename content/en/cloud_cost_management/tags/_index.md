@@ -18,7 +18,11 @@ further_reading:
 
 ## Overview
 
-Tags help you organize, filter, and allocate your cloud costs effectively. With proper tagging, you can see exactly who's spending what, identify optimization opportunities, and create accurate chargeback reports. Cloud Cost Management automatically enriches your cost data with tags from multiple sources, so you can focus on using tags to drive insights rather than managing the technical details.
+Tags help you organize, filter, and allocate your cloud costs effectively. Cloud Cost Management automatically enriches your cost data with tags from multiple sources, so you can focus on using tags to drive insights rather than managing the technical details.
+
+- **Track costs by team, service, or environment** - See exactly who's spending what and identify optimization opportunities
+- **Allocate shared costs fairly** - Distribute costs across teams and projects for accurate chargeback and showback
+- **Create accurate reports** - Generate detailed cost reports for stakeholders and budget planning
 
 ## Getting started
 
@@ -29,11 +33,6 @@ Get started with tags in three steps:
 3. **Add missing tags** - Use [Tag Pipelines][4] to automatically add tags based on your business logic.
 
 {{< img src="cloud_cost/tag_explorer/aws_1.png" alt="Tag Explorer interface showing available AWS tags and their usage" style="width:80%;" >}}
-
-## Common scenarios
-
-- **Track costs by team, service, or environment** - See exactly who's spending what and identify optimization opportunities
-- **Allocate shared costs fairly** - Distribute costs across teams and projects for accurate chargeback and showback
 
 ## Where your tags come from
 
