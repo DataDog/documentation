@@ -309,7 +309,7 @@ multifiltersearch:
       resource_type: EBS
       recommendation_type: Over-provisioned EBS Volume IOPS
       recommendation_description: EBS Volumes where the amount of IOPS exceeds what is being used.
-      recommendation_prerequisites: "*[Amazon EC2 integration](/integrations/amazon_ec2/)"
+      recommendation_prerequisites: "[Amazon EC2 integration](/integrations/amazon_ec2/)"
     - category: Over-provisioned resource
       cloud_provider: AWS
       resource_type: RDS IOPS
@@ -321,19 +321,25 @@ multifiltersearch:
       resource_type: EBS IOPS
       recommendation_type: Over-provisioned EBS IOPS
       recommendation_description: An EBS volume using less than 80% of the provisioned IOPS for reads and writes.
-      recommendation_prerequisites: "*[Amazon EC2 integration](/integrations/amazon_ec2/)"
+      recommendation_prerequisites: "[Amazon EC2 integration](/integrations/amazon_ec2/)"
     - category: Over-provisioned resource
       cloud_provider: AWS
       resource_type: EBS Storage
       recommendation_type: Over-provisioned EBS Storage
       recommendation_description: An EBS volume with less than 20% of its storage capacity used.
-      recommendation_prerequisites: "*[Amazon EC2 integration](/integrations/amazon_ec2/)"
+      recommendation_prerequisites: "[Amazon EC2 integration](/integrations/amazon_ec2/)"
     - category: Over-provisioned resource
       cloud_provider: AWS
       resource_type: EBS Throughput
       recommendation_type: Over-provisioned EBS Throughput
       recommendation_description: An EBS volume using less than 80% of the provisioned throughput for reads and writes.
-      recommendation_prerequisites: "*[Amazon EC2 integration](/integrations/amazon_ec2/)"
+      recommendation_prerequisites: "[Amazon EC2 integration](/integrations/amazon_ec2/)"
+    - category: Over-provisioned resource
+      cloud_provider: AWS
+      resource_type: ECS Task Definition
+      recommendation_type: Downsize ECS Task Size
+      recommendation_description: An ECS task using less than 50% of its requested CPU or memory.
+      recommendation_prerequisites: "[Container Monitoring](/containers/)"
     - category: Over-provisioned resource
       cloud_provider: AWS
       resource_type: DynamoDB
