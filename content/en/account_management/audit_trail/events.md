@@ -2,6 +2,8 @@
 title: Audit Trail Events
 aliases:
     - /account_management/audit_trail_events/
+disable_edit: true
+disable_toc: true
 further_reading:
 - link: "/account_management/audit_trail/"
   tag: "Documentation"
