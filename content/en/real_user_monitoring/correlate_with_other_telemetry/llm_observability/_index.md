@@ -27,13 +27,14 @@ import { datadogRum } from '@datadog/browser-rum'
 datadogRum.init({
   /* RUM Browser SDK configuration */
 });
+```
 
-/**
 ### Step 2: Modify your frontend AI calls
 
 Update your web application to include the RUM Session ID in every call to your AI Agent. For more information about RUM session management, see the [RUM Browser Documentation][3].
 
 ```javascript
+ /**
  * Example call to an AI Agent.
  *
  * We send the `session_id` in the body of the request. If the call to the AI agent
@@ -81,6 +82,7 @@ class MessagesHandler:
 ```
 
 Use the LLMObs SDK to instrument your agent and tools and tell the LLMObs SDK what the `session_id` should be.
+
 ### Step 4: Instrument your AI agent
 
 Use the LLM Observability SDK to instrument your agent and associate it with the RUM session. For detailed reference, see the [LLM Observability SDK documentation][4].
