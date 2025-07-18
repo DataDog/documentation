@@ -28,7 +28,6 @@ datadogRum.init({
   /* RUM Browser SDK configuration */
 });
 
-
 /**
 ### Step 2: Modify your frontend AI calls
 
