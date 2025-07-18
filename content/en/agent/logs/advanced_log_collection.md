@@ -636,6 +636,59 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 
 **Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the Agent's [status subcommand][6] to troubleshoot any issues.
 
+## Agent-Added Tags
+
+The Datadog Agent automatically adds certain tags to all logs it collects before sending them to Datadog. These tags are added **pre-ingestion**, and are included in the payload that gets delivered to Datadog.
+
+### Automatically Added Tags
+
+The following tags are automatically added to logs by the Datadog Agent:
+
+| Tag | Description | 
+|-----|-------------|
+| `source` | The source of the log (file path, integration name, etc.) 
+| `service` | The service name if configured in the log collection 
+| `env` | The environment tag if configured globally 
+| `version` | The Agent version
+| `filename` | Base name of the tailed file
+| `dirname` | Directory containing the tailed file  
+| `source_host` | IP address of the socket source host
+| `event_type` | Type of the Windows event  
+| `event_source` | Source of the Windows event  
+| `event_id` | Windows Event ID if configured  
+| `sid` | Windows Security identifier if configured
+| `truncated` | Source of truncation if configured
+| `multiline` | Source of multiline aggregation if configured
+| `aggregated_json` | Indicates that the log was aggregated from multiple JSON log entries
+
+**Note**: Some tags are only added for specific log sources and some tags can be optionally enabled/disabled via configurations.
+
+### Pre-ingestion Processing
+
+Since these tags are added pre-ingestion, they:
+
+* Are included in all log data delivered to Datadog
+* Increase the overall size of your log data
+* Are available for filtering, searching, and aggregation in the Log Explorer
+* Can be used in log-based metrics and queries
+
+### Best Practices
+
+1. **Monitor tag cardinality**: High cardinality tags (tags with many unique values) can impact data volume
+2. **Use tag filtering**: Exclude unnecessary tags to optimize data collection
+3. **Standardize tag values**: Use consistent tag values across your infrastructure
+4. **Review tag usage**: Regularly review which tags are being added and their impact on data volume
+
+### Further Configuration
+
+For more advanced tag management, see:
+- [Tagging Best Practices][9]
+- [Agent Configuration Files][5]
+- [Container Tagging][10]
+
+[9]: /getting_started/tagging/
+[10]: /agent/docker/tag/
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
