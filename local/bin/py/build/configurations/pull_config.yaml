@@ -413,7 +413,7 @@
           - 'docs/cloud-workload-security/linux_expressions.md'
           - 'docs/cloud-workload-security/windows_expressions.md'
           options:
-            dest_dir: '/security/threats/'
+            dest_dir: '/security/workload_protection/'
             path_to_remove: 'docs/cloud-workload-security/'
 
       - repo_name: web-ui
