@@ -195,4 +195,4 @@ Some resources have specific tags. The following tags are available in addition 
 [8]: /infrastructure/containers/orchestrator_explorer/?tab=manual#query-filter-details
 [9]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments
 [10]: /integrations/amazon_web_services/#resource-collection
-[11]: https://docs.datadoghq.com/integrations/aws-fargate/?tab=webui#fluent-bit-and-firelens
+[11]: /integrations/aws-fargate/?tab=webui#fluent-bit-and-firelens
