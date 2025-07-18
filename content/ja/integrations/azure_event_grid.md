@@ -1,28 +1,56 @@
 ---
-aliases:
-- /ja/integrations/azure_eventgrid
+app_id: azure-eventgrid
+app_uuid: 55b5c82c-bba0-4bb5-b9a7-50096b97f0bb
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.eventgrid_topics.publish_success_count
+      metadata_path: metadata.csv
+      prefix: azure.eventgrid
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 291
+    source_type_name: Azure Event Grid
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - クラウド
 - azure
 custom_kind: インテグレーション
 dependencies: []
-description: Azure Event Grid のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_event_grid/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_event_grid
-has_logo: true
 integration_id: azure-eventgrid
-integration_title: Microsoft Azure Event Grid
+integration_title: Azure Event Grid
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_event_grid
-public_title: Datadog-Microsoft Azure Event Grid インテグレーション
+public_title: Azure Event Grid
 short_description: Azure Event Grid のキーメトリクスを追跡
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Azure
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Azure Event Grid のキーメトリクスを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Event Grid
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Azure Event Grid は、公開/サブスクライブモデルを使用して均一なイベント消費を可能にするフルマネージド型のインテリジェントなイベントルーティングサービスです。
@@ -38,7 +66,7 @@ Datadog Azure インテグレーションを使用して、Azure Event Grid か�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_event_grid" >}}
+{{ get-metrics-from-git "azure-eventgrid" }}
 
 
 ### イベント

@@ -58,7 +58,7 @@ Una vez hecho esto, exporta tus logs de Google Cloud Machine Learning de Google 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "google_cloud_ml" >}}
+{{< get-metrics-from-git "google-cloud-ml" >}}
 
 
 ### Eventos

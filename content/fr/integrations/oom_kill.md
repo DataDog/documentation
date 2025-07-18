@@ -159,7 +159,7 @@ spec:
 ## Real User Monitoring
 
 ### Analyse d'entonnoirs
-{{< get-metrics-from-git "oom_kill" >}}
+{{< get-metrics-from-git "oom-kill" >}}
 
 
 ### Aide

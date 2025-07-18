@@ -192,7 +192,7 @@ Ejecuta el [subcomando de estado del Agent][7] y busca `sap_hana` en la sección
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "sap_hana" >}}
+{{< get-metrics-from-git "sap-hana" >}}
 
 
 ### Eventos
@@ -200,7 +200,7 @@ Ejecuta el [subcomando de estado del Agent][7] y busca `sap_hana` en la sección
 SAP HANA no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "sap_hana" >}}
+{{< get-service-checks-from-git "sap-hana" >}}
 
 
 ## Solucionar problemas

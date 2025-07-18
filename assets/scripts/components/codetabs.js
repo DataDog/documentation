@@ -192,12 +192,11 @@ const initCodeTabs = () => {
     };
 
     const scrollToAnchor = (tab, anchorname) => {
-        const anchor = document.querySelectorAll(`[data-lang='${tab}'] ${anchorname}`)[0];
+        const anchor =
+            document.querySelectorAll(`[data-lang='${tab}'] ${anchorname}`)[0] || document.querySelector(anchorname);
 
         if (anchor) {
             anchor.scrollIntoView();
-        } else {
-            document.querySelector(anchorname).scrollIntoView();
         }
     };
 
@@ -223,13 +222,11 @@ const initCodeTabs = () => {
                         scrollToAnchor(tabQueryParameter, window.location.hash);
                     }, 300);
                 }
-            } else {
+            } else if (firstTab) {
                 activateCodeTab(firstTab);
             }
-        } else {
-            if (codeTabsList.length > 0) {
-                activateCodeTab(firstTab);
-            }
+        } else if (firstTab) {
+            activateCodeTab(firstTab);
         }
     };
 

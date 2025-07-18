@@ -21,16 +21,7 @@ The segments page includes a list of all of the segments you have created. You c
 
 The [User Profiles][3] page allows you to track and analyze the behavioral patterns of key users. You can scope down to specific users' behavioral data to help inform your decisions on product optimization and feature adoption. 
 
-{{< img src="product_analytics/segmentation/user_profiles_pana.png" alt="A view of the User profiles page." >}}
-
-<div class="alert" style="background: #f2ecfc">
-<h3 class="text-black">Example: See users who dropped before buying</h3>
-<p class="text-black">With the filtering capability on the User Profiles page, you can determine which users almost bought an item, but dropped before checking out. <br><br> Use the <code>Last Seen</code> and <code>Last Seen Application</code> attributes and specify the sessions that reached <code>Cart</code> but dropped before reaching the <code>click on CHECKOUT</code> step. Optionally, select the <code>Device Type</code> to further narrow this down.</p>
-
-{{< img src="product_analytics/segmentation/almost-bought_pana-2.png" alt="Definition of a segment grouping people who almost bought an item.">}}
-
-</div>
-<br>
+{{< img src="product_analytics/segmentation/userprofiles_pana-ga.png" alt="A view of the User profiles page." >}}
 
 ### User profile attributes
 
@@ -131,34 +122,57 @@ The RUM SDK allows you to identify users by setting attributes such as User ID, 
 ### Navigating the user profiles page 
 The User Profiles page shows information on individual users. Select an individual user from the list to see details on their usage, including their most visited pages, frequent actions, and a history of their sessions. 
 
-{{< img src="product_analytics/segmentation/user_profiles/session_history-userProfile-2.mp4" alt="Explore the user profile page and its session history." video=true >}}
+{{< img src="product_analytics/segmentation/pana_user_profile_video.mp4" alt="Explore the user profile page and its session history." video=true >}}
 
 
 From the session history, you can identify where frustrations are detected and follow the link to the analytics details of these frustrations. 
 
-{{< img src="product_analytics/segmentation/user_profiles/UserProfile_frustration.png" alt="Explore the user profiles page and its session history." style="width:70%;">}}
+{{< img src="product_analytics/segmentation/pana_frustration_detected.png" alt="Explore the user profiles page and its session history." style="width:90%;">}}
 <br>
 
 ## Build a segment
 
-To create a new segment, navigate to **[Digital Experience Monitoring > Product Analytics > User Segments][1]** from the navigation. You have two sources you can choose from when building a new segment:
+To create a new segment, navigate to **[Digital Experience Monitoring > Product Analytics > Segments][1]** from the navigation. You have two sources you can choose from when building a new segment:
 
 - Product Analytics data
 - External data (upload a Reference Table)
 
-{{< img src="product_analytics/segmentation/segmentation-1.png" alt="Create a user segment based on Product Analytics or external data.">}}
+{{< img src="product_analytics/segmentation/user_profile_example_2.png" alt="Create a user segment based on Product Analytics or external data." style="width:55%;">}}
+
 
 ### Using Product Analytics data
 
 To create a new segment using Product Analytics data:
 
-1. Choose the user attribute you want to connect your data with. In the below example, it is `usr.id`, but you can use any user attribute available, such as `usr.email` or `usr.name`.
+1. Navigate to the **[Segments](https://app.datadoghq.com/product-analytics/segments)** tab on the Users & Segments page
 
-2. Under the **Filter your segment** section, you can filter on any attribute collected by the SDK, or custom attributes you added to create a granular user segment.
+2. Under the **Select a data source** section, choose **Product Analytics** to filter on any attribute collected by the SDK, or custom attributes you added to create a granular user segment.
 
-   In the below example, the segment is filtered to all users who were on the `/cart` page and then clicked on the checkout button (and did so from Brazil):
+   In the below image, the segment is filtered to all users who were on the `/cart` page and then clicked on the checkout button (and did so from Brazil):
 
-   {{< img src="product_analytics/segmentation/segmentation-2.png" alt="Filter to all users from Brazil who were on the `/cart` page and clicked on the checkout button.">}}
+   {{< img src="product_analytics/segmentation/pana_example_users_brazil-2.png" alt="Filter to all users from Brazil who were on the `/cart` page and clicked on the checkout button." style="width:100%;">}}
+
+<div class="alert" style="background: #f2ecfc">
+<h3 class="text-black">Example: See users who dropped before buying</h3>
+<p class="text-black">With the filtering and segmentation capabilities on the <strong>Users & Segments</strong> page, you can determine, for example, which users almost bought an item, but dropped before checking out. <br><br> To begin, you can first filter your users on the <a href="https://app.datadoghq.com/product-analytics/profiles">User Profiles </a> page, then add additional event properties using the <strong> Create Segment</strong> button...
+{{< img src="product_analytics/segmentation/user_profile_example_0.png" alt="Definition of a segment grouping people who almost bought an item." style="width:100%">}}
+
+
+Or you directly click on the <strong> Create Segment</strong> button to select your data source:
+
+
+{{< img src="product_analytics/segmentation/pana_segment_data_source.png" alt="Definition of a segment grouping people who almost bought an item." style="width:100%">}}
+
+On the <a href="https://app.datadoghq.com/product-analytics/segments/create">Create a new Segments</a> page, add the properties specifying the users: <br>
+– who **viewed** the <code>/cart</code> page <br>
+– **then** <code> did not</code> ...  <br>
+– perform the **action** of <code> click on CHECKOUT</code> <br>
+
+{{< img src="product_analytics/segmentation/user_profile_example_1.png" alt="Definition of a segment grouping people who almost bought an item." style="width:80%">}}
+
+You can define additional attributes, such as the <code> device type</code>, to further specify your users. 
+</div>
+<br>
 
 ### Using external or third-party data
 

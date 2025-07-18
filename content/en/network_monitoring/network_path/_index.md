@@ -7,11 +7,6 @@ further_reading:
   tag: "Blog"
   text: "Get end-to-end network visibility with Datadog Network Path"
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Path is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-<div class="alert alert-info">Network Path is in Limited Availability. Reach out to your Datadog representative to sign up.</div>
 
 ## Overview
 

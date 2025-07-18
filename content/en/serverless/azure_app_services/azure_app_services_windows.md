@@ -105,7 +105,7 @@ For example:
 ### Application logging
 
 You can send logs from your application in Azure App Service to Datadog in one of the following ways:
-1. [Agentless logging with automatic instrumentation][7]
+1. Use the [installation steps](#installation) above to enable APM with the Datadog APM extension, then [enable Agentless logging][7]
 2. [Agentless logging with the Serilog sink][8]
 
 Both methods allow trace ID injection, making it possible to connect logs and traces in Datadog. To enable trace ID injection with the extension, add the application setting `DD_LOGS_INJECTION:true`.
@@ -154,7 +154,7 @@ Learn more about [custom metrics][12].
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: /profiler/enabling/dotnet/?tab=azureappservice
 [6]: /tracing/trace_collection/library_config/dotnet-framework/#additional-optional-configuration
-[7]: /logs/log_collection/csharp/#agentless-logging-with-apm
+[7]: /logs/log_collection/csharp/#enable-agentless-logging
 [8]: /logs/log_collection/csharp/#agentless-logging-with-serilog-sink
 [9]: /developers/dogstatsd
 [10]: https://www.nuget.org/packages/DogStatsD-CSharp-Client

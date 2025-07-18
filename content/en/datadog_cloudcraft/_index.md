@@ -4,11 +4,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-architecture-diagrams-cost-compliance-cloudcraft-datadog/"
   tag: "Blog"
   text: "Plan new architectures and track your cloud footprint with Cloudcraft (Standalone)"
+- link: "https://www.datadoghq.com/blog/introducing-cloudcraft/"
+  tag: "Blog"
+  text: "Create rich, up-to-date visualizations of your AWS infrastructure with Cloudcraft in Datadog"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloudcraft in Datadog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -24,7 +23,7 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 - Onboard new team members.
 - Accelerate incident MTTR and proactive governance tasks by simplifying infrastructure navigation.
 
-{{< img src="datadog_cloudcraft/cloudcraft_with_ccm.mp4" alt="Cloudcraft in Datadog video" video=true >}}
+{{< img src="datadog_cloudcraft/cloudcraft_with_ccm_2.mp4" alt="Cloudcraft in Datadog video" video=true >}}
 
 <div class="alert alert-info">Cloudcraft in Datadog is currently only available for AWS accounts.</a></div>
 
@@ -32,9 +31,11 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 
 - [Resource collection][2] must be enabled for your AWS accounts.
 - For the best experience, Datadog strongly recommends using the AWS-managed [`SecurityAudit`][5] policy, or the more permissive [`ReadOnlyAccess`][6] policy.
-- To view security misconfigurations on the [Security findings overlay](#security-findings), [Cloud Security][3] must be enabled.
+- Viewing content on the [Security overlay][10] requires additional products to be enabled:
+  - To view security misconfigurations and identity risks, [Cloud Security][3] must be enabled.
+  - To view sensitive data, [Sensitive Data Scanner][12] must be enabled. For a user to turn the layer on, they must have the [`data_scanner_read`][13] permission.
 
-**Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you opt to not grant permission to list S3 buckets, the diagram will simply exclude those buckets. If permissions block certain resources, an alert is displayed in the UI.
+**Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you don't grant permission to list S3 buckets, the diagram excludes those buckets. If permissions block certain resources, an alert displays in the UI.
 
 ## Getting started
 
@@ -42,7 +43,7 @@ To get started using Cloudcraft, use the following steps:
 1. Navigate to [**Infrastructure > Resources > Cloudcraft**][7]. 
 2. Select one or more accounts, regions, and resources. The diagram automatically displays the Infrastructure diagram.
 
-{{< img src="datadog_cloudcraft/getting_started_2.mp4" alt="Video showing getting started in Cloudcraft by selecting the Account, Region, and Resource" video=true;" >}}
+{{< img src="datadog_cloudcraft/getting_started_3.mp4" alt="Video showing getting started in Cloudcraft by selecting the Account, Region, and Resource" video=true;" >}}
 
 **Note**: The account name in the **Account** dropdown originates from your AWS account tags in the AWS integration tile.
 
@@ -52,7 +53,7 @@ With Group By, Cloudcraft divides your diagram into distinct sections based on d
 
 Enable the **Show All Controls** toggle to display the available **Group By** options. You can also remove specific groupings by unchecking options like VPC and Region. To view the current nesting structure and add the Network ACL (Network Access Control List) layer, click the **More** dropdown.
 
-{{< img src="datadog_cloudcraft/cloudcraft_group_by_with_ccm.mp4" alt="Video showing the Group by feature in Cloudcraft" video=true >}}
+{{< img src="datadog_cloudcraft/cloudcraft_group_by_with_ccm.png" alt="Group by feature in Cloudcraft, highlighting the Group By menu" >}}
 
 ### Saved views 
 
@@ -69,7 +70,7 @@ To apply a saved view to your diagram:
 
 Use the zoom and hover features to pinpoint the most critical resources. As you zoom in, additional resource names become visible. Hovering over a resource displays a panel with basic information, while clicking on a resource opens a side panel with observability, cost, and security data, along with cross-links to other relevant Datadog products.
 
-{{< img src="datadog_cloudcraft/cloudcraft_with_ccm.mp4" alt="Video showing the zoom and hover feature in Cloudcraft and clicking on a resource to open the side panel" video=true >}}
+{{< img src="datadog_cloudcraft/cloudcraft_with_ccm_2.mp4" alt="Video showing the zoom and hover feature in Cloudcraft and clicking on a resource to open the side panel" video=true >}}
 
 ### Filtering and search
 
@@ -77,7 +78,7 @@ Diagrams can be filtered by tags, such as team, application, or service, allowin
 
 Click the **\+Filter** menu to quickly filter your resources by commonly used tags such as service, team, region, and more. Additionally, click the **More Filters** option to filter by AWS tags, custom tags, and terraform tags. The filter option reloads the diagram to display only the infrastructure that matches the filter criteria.
 
-{{< img src="datadog_cloudcraft/cloudcraft_filter_2.mp4" alt="Video showing the Filter feature in Cloudcraft" video=true >}}
+{{< img src="datadog_cloudcraft/cloudcraft_filter.png" alt="Filter feature in Cloudcraft" >}}
 
 ### Search and highlight
 
@@ -90,7 +91,7 @@ Use the search bar to locate resources on the diagram by name, ID, or tag. This 
 Learn how to navigate between [built-in overlays][4] to view your architecture from different perspectives. Each overlay is designed to support specific operational goals, such as:
 
 - [Infrastructure][8]: High-level view of services and resources.
-- [Agent][9]: Visualize where the Datadog Agent is installed and reporting from.
+- [Observability][9]: Indicates which hosts have the Agent installed and what observability features are enabled.
 - [Security][10]: IAM, firewall, and security group visibility.
 - [Cloud Cost Management][11]: Track and optimize resource spend.
 
@@ -106,6 +107,8 @@ Learn how to navigate between [built-in overlays][4] to view your architecture f
 [6]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ReadOnlyAccess.html
 [7]: https://app.datadoghq.com/cloud-maps
 [8]: /datadog_cloudcraft/overlays#infrastructure
-[9]: /datadog_cloudcraft/overlays#agent
+[9]: /datadog_cloudcraft/overlays#observability
 [10]: /datadog_cloudcraft/overlays#security
 [11]: /datadog_cloudcraft/overlays#cloud-cost-management
+[12]: /security/sensitive_data_scanner
+[13]: /account_management/rbac/permissions/#compliance

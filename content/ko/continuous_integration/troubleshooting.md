@@ -12,10 +12,6 @@ further_reading:
 title: CI Visibility 트러블슈팅
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">선택하신 사이트({{<region-param key="dd_site_name">}})에서 현재 CIVisibility를 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 ## 개요
 
 이 페이지는 CI Visibility 문제 해결에 도움이 되는 정보를 제공합니다. 추가적인 도움이 필요하시면 [Datadog 지원팀][2]에 문의하세요.

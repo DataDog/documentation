@@ -75,7 +75,13 @@ You can use [Carthage][1] to install `dd-sdk-ios`:
 github "DataDog/dd-sdk-ios"
 ```
 
-In Xcode, link the following frameworks:
+**Note**: Datadog does not provide prebuilt Carthage binaries. This means Carthage will build the SDK from source.
+To build and integrate the SDK, run:
+```
+carthage bootstrap --use-xcframeworks --no-use-binaries
+```
+
+After building, add the following XCFrameworks to your Xcode project (in the "Frameworks, Libraries, and Embedded Content" section):
 ```
 DatadogInternal.xcframework
 DatadogCore.xcframework
@@ -320,6 +326,38 @@ configuration.site = [DDSite ap1];
 {{< /tabs >}}
 {{< /site-region >}}
 
+{{< site-region region="ap2" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+import DatadogCore
+
+Datadog.initialize(
+  with: Datadog.Configuration(
+    clientToken: "<client token>",
+    env: "<environment>",
+    site: .ap2,
+    service: "<service name>"
+  ),
+  trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+@import DatadogObjc;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite ap2];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
 The iOS SDK automatically tracks user sessions depending on options provided at the SDK initialization. To add GDPR compliance for your EU users and other [initialization parameters][6] to the SDK configuration, see the [Set tracking consent documentation](#set-tracking-consent-gdpr-compliance).
 
 #### Sample session rates
@@ -378,6 +416,8 @@ RUM.enable(
     applicationID: "<rum application id>",
     uiKitViewsPredicate: DefaultUIKitRUMViewsPredicate(),
     uiKitActionsPredicate: DefaultUIKitRUMActionsPredicate(),
+    swiftUIViewsPredicate: DefaultSwiftUIRUMViewsPredicate(),
+    swiftUIActionsPredicate: DefaultSwiftUIRUMActionsPredicate(isLegacyDetectionEnabled: true),
     urlSessionTracking: RUM.Configuration.URLSessionTracking()
   )
 )
@@ -390,6 +430,8 @@ RUM.enable(
 DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
 configuration.uiKitViewsPredicate = [DDDefaultUIKitRUMViewsPredicate new];
 configuration.uiKitActionsPredicate = [DDDefaultUIKitRUMActionsPredicate new];
+configuration.swiftUIViewsPredicate = [DDDefaultSwiftUIRUMViewsPredicate new];
+configuration.swiftUIActionsPredicate = [[DDDefaultSwiftUIRUMActionsPredicate alloc] initWithIsLegacyDetectionEnabled:YES];
 [configuration setURLSessionTracking:[DDRUMURLSessionTracking new]];
 
 [DDRUM enableWith:configuration];
