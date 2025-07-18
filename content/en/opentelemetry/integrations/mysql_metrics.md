@@ -21,13 +21,14 @@ To collect MySQL metrics with OpenTelemetry for use with Datadog:
 1. Configure the [MySQL receiver][1] in your OpenTelemetry Collector configuration.
 2. Optionally configure the [host metrics receiver][6] if your OpenTelemetry Collector is running on the same server as your MySQL database.
 3. Optionally configure the [file log receiver][7] if your OpenTelemetry Collector is running on the same server as your MySQL database.
-4. Ensure the OpenTelemetry Collector is [configured to export to Datadog][5].
+4. Configure service pipelines.
+5. Ensure the OpenTelemetry Collector is [configured to export to Datadog][5].
 
 ### MySQL Receiver
 
 ```yaml:
 receivers:
-  mysql:
+  mysql/mysql-host-1:
     endpoint: "<HOST>:<PORT>"
     username: "<USERNAME>"
     password: "<PASSWORD>"
@@ -41,26 +42,28 @@ receivers:
         enabled: true
       mysql.query.slow.count:
         enabled: true
+      mysql.max_used_connections:
+        enabled: true
 
 processors:
-  transform/metrics:
+  resource/mysql-host-1:
+    attributes:
+      - action: insert
+        key: datadog.host.name
+        value: <HOST>
+  transform/mysql-host-1:
     metric_statements:
-      - context: resource
-        statements:
-          - set(attributes["datadog.host.name"], <"HOST">)
       - convert_sum_to_gauge() where metric.name == "mysql.locks"
-
   cumulativetodelta: {}
-
   deltatorate:
-   metrics:
-     - mysql.connection.count
-     - mysql.commands
-     - mysql.operations
-     - mysql.query.slow.count
-     - mysql.connection.errors
-     - system.network.io
-
+    metrics:
+      - mysql.connection.count
+      - mysql.commands
+      - mysql.operations
+      - mysql.query.slow.count
+      - mysql.connection.errors
+      - mysql.log_operations
+      - system.network.io
 ```
 
 See the [MySQL receiver documentation][1] for detailed configuration options and requirements.
@@ -104,6 +107,23 @@ processors:
           - set(attributes["datadog.log.source"], "mysql")
 
   batch: {}
+```
+
+### Service pipelines
+
+```yaml
+service:
+  pipelines:
+    metrics/mysql-host-1:
+      receivers: [mysql/mysql-host-1]
+      exporters: [datadog/exporter]
+      processors: [resource/mysql-host-1,cumulativetodelta,deltatorate,transform/mysql-host-1]
+```
+
+Add `hostmetrics` and `filelog` receiver if you configured them, for example:
+
+```yaml
+      receivers: [mysql/mysql-host-1,hostmetrics,filelog]
 ```
 
 ## Data collected
