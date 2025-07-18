@@ -1,5 +1,5 @@
 ---
-title: Setup App and API Protection for Node.js in Docker
+title: Set up App and API Protection for Node.js in Docker
 code_lang: docker
 type: multi-code-lang
 code_lang_weight: 10
@@ -23,7 +23,7 @@ further_reading:
 - Docker installed on your host
 - Node.js application containerized with Docker
 - Your Datadog API key
-- Datadog Node.js tracing library (see version requirements [here][1])
+- Datadog Node.js tracing library (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -99,8 +99,8 @@ CMD ["node", "--require", "dd-trace/init", "app.js"]
 Build your image and then run your container.
 
 When running your container, make sure to:
-1. Connect it to the same Docker network as the Datadog Agent
-2. Set the required environment variables
+1. Connect it to the same Docker network as the Datadog Agent.
+2. Set the required environment variables.
 
 ```bash
 docker run -d \
