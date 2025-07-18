@@ -95,27 +95,26 @@ For instructions on using mirrored or air-gapped repositories, see:
 
 ### Downgrading Agents
 
-If you need to downgrade an Agent, follow the steps in [Upgrade your Agents](#upgrade-your-agents) and specify the version you wish to downgrade to. Datadog recommends using the latest version of the Agent and upgrading your Agents regularly to make sure you have access to the latest features.
+If you need to downgrade an Agent, follow the steps in [Upgrade your Agents](#upgrade-your-agents) and specify the version you wish to downgrade to. Datadog recommends using the latest Agent version and upgrading your Agents regularly to make sure you have access to the latest features.
 
 ## Incompatible Datadog Installer with Agent (Pre-7.66)
+If you were a Preview customer and set up remote Agent management before Agent version 7.66, your Datadog Installer might be incompatible with the Agent. Since the Datadog Installer is used to deploy Datadog packages, a version mismatch could prevent proper updates and functionality.
 
-If you were a Preview customer and set up remote agent management before Agent version 7.66, your Datadog Installer may be incompatible with the Agent. The Datadog installer is a tool used to install Datadog packages within your environment, and this version mismatch could prevent proper updates and functionality.
-
-### Which Hosts are Impacted:
+### Which hosts are impacted:
 To identify affected hosts, you can use this [query in Fleet Automation][13]:
  `support_remote_upgrade:datadog-installer -os:Windows`
  
-### Action Required:
-If your setup is impacted, you’ll need to [manually upgrade (re-run install script)][14] to Agent version 7.66 or higher. This ensures full compatibility with Remote Agent Management features.
+### Action required:
+If your setup is impacted, you'll need to [manually upgrade (re-run install script)][14] to Agent version 7.66 or higher. This ensures full compatibility with Remote Agent Management features.
 
-### Why This Is Happening:
-In making remote Agent Upgrades generally available, we’ve bundled the installer component with the Agent starting from version 7.66. This ensures that both components are kept up-to-date together, preventing versioning mismatches that could lead to downstream compatibility issues.
+### Why this is happening:
+To support general availability of remote Agent upgrades, the installer component was bundled with the Agent starting in version 7.66. This change ensures both components stay up to date together, preventing version mismatches and related compatibility issues.
 
-### What happens if I don’t upgrade to Agent 7.66+?
-There will be no impact on your existing agent. However, you will not be able to remotely upgrade that Agent until it is upgraded to version 7.66 or higher.
+### What happens if the Agent isn't upgraded to version 7.66 or later?
+No impact occurs on your existing Agent. However, remote upgrades remain unavailable until the Agent is updated to version 7.66 or higher.
 
-### Will I need to manually upgrade the Agent again after this?
-No, this is the last breaking change. Future upgrades will be handled automatically without requiring manual intervention.
+### Is another manual Agent upgrade required after this?
+No, this is the last breaking change. Future upgrades are handled automatically without requiring manual intervention.
 
 ## Uninstall Remote Agent Management 
 ### Uninstalling on Linux
