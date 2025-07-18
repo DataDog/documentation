@@ -20,7 +20,7 @@ CMD ["dotnet", "helloworld.dll"]
    COPY --from=datadog/serverless-init:1 / /app/
    ```
 
-2. Copy the Datadog .NET tracer into your Docker image. If the Github requests made by the script are rate limited, pass a Github token saved in the environment variable
+2. Copy the Datadog .NET tracer into your Docker image. If the GitHub requests made by the script are rate limited, pass a Github token saved in the environment variable
    `GITHUB_TOKEN` as a [Docker build secret][2] `--secret id=github-token,env=GITHUB_TOKEN`.
    For linux/amd64, include the following:
    ```dockerfile
