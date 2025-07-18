@@ -62,6 +62,8 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 
 * Datadog collects all the pages visited by your end users along with the telemetry that matters: resources loading (XHRs, images, CSS files, JS scripts, etc), frontend errors, and long tasks. All of this is included in the user session. Datadog charges per one thousand (1,000) sessions ingested in the Datadog Real User Monitoring (RUM) service.
 
+**Note**: With [RUM without Limits][10], you are charged for all sessions ingested into the Datadog Real User Monitoring (RUM) service, regardless of how many sessions are retained through retention filters.
+
 ## Continuous Profiler
 
 * Datadog records the number of unique Continuous Profiler hosts you are concurrently monitoring with the Datadog Continuous Profiler service once per hour.
@@ -97,3 +99,4 @@ Contact [Sales][8] or your [Customer Success][9] Manager to discuss hourly prici
 [7]: /help/
 [8]: mailto:sales@datadoghq.com
 [9]: mailto:success@datadoghq.com
+[10]: /real_user_monitoring/rum_without_limits/
