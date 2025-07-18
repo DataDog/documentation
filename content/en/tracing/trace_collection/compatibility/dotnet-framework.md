@@ -33,11 +33,11 @@ The .NET Tracer supports automatic and custom instrumentation on the following .
 | 4.7.1                   |                       | [GA](#support-ga)                   | latest                     |                     |
 | 4.7                     |                       | [GA](#support-ga)                   | latest                     |                     |
 | 4.6.2                   |                       | [GA](#support-ga)                   | latest                     |                     |
-| 4.6.1                   | 04/26/2022            | [GA](#support-ga)                   | latest                     |                     |
-| 4.6                     | 04/26/2022            | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
-| 4.5.2                   | 04/26/2022            | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
-| 4.5.1                   | 01/12/2016            | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
-| 4.5                     | 01/12/2016            | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
+| 4.6.1                   | April 26, 2022        | [GA](#support-ga)                   | latest                     |                     |
+| 4.6                     | April 26, 2022        | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
+| 4.5.2                   | April 26, 2022        | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
+| 4.5.1                   | January 12, 2016      | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
+| 4.5                     | January 12, 2016      | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
 
 Additional information can be found in [Microsoft's .NET Framework Lifecycle Policy][4] and in [.NET runtime support policy](#net-runtime-support-policy).
 
@@ -53,7 +53,23 @@ The .NET Tracer supports automatic instrumentation on the following architecture
 | Windows x64 (`win-x64`) | [GA](#support-ga)   | latest                |
 | Windows x86 (`win-x86`) | [EOL](#support-eol) | < 3.0.0 (e.g. 2.56.0) |
 
-Note that running x86 applications on Windows x64 is supported.
+Note that instrumenting x86 applications is supported on Windows x64.
+
+## Supported operating systems
+
+The .NET Tracer supports automatic instrumentation of .NET Framework on Windows operating systems.
+
+### Windows
+
+| Operating System             | Version     | Support level         | Package version                        |
+| -----------------------------|-------------|-----------------------|----------------------------------------|
+| Windows Server (x64)         | 2012+       | [GA](#support-ga)     | latest                                 |
+| Windows Client (x64)         | 8.1+        | [GA](#support-ga)     | latest                                 |
+| Nano Server (x64)            | < 2012      | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
+| Windows Server (x64)         | < 2012      | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
+| Windows Server (x86)         | All versions| [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
+
+Additional information on the operating systems supported by .NET and .NET Core can be found in the [.NET release notes][19]
 
 ## Integrations
 
