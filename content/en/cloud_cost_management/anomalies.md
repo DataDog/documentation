@@ -21,8 +21,6 @@ Our algorithm takes into account seasonality, distinguishing true anomalies from
 
 To further reduce noise, anomalies with low cost impact are automatically filtered out, ensuring your attention stays focused on the largest anomalies.
 
-[1]: https://app.datadoghq.com/cost/analyze/anomalies
-
 ## View cost anomalies
 
 On the [Anomalies tab of the Cloud Cost page in Datadog][1], you can view the anomalies and filter them to Active, Past, or Resolved:
@@ -38,17 +36,46 @@ This is an example of the list of anomalies detected in your infrastructure:
 
 {{< img src="cloud_cost/anomalies/cost_anomalies_new_list.png" alt="List of cost anomalies automatically detected" style="width:90%;" >}}
 
+<!-- TODO: add img with watchdog explains popover -->
+
+When hovering over the graph, you can see two graphs: one with and one without the tags identified by the Watchdog Explains engine. This shows how removing XXX:XXX flattens the spike, confirming the impact on the cost.
+
+## Understand what's driving anomalies
+
+CCM automatically uses Watchdog Explains[2], an investigation assistant, to help you identify what is driving cost anomalies. Watchdog Explains analyzes and identifies the specific:
+
+- accounts
+- teams
+- services
+- Kubernetes or ECS clusters
+- regions
+
+where the anomaly happened, reducing manual investigation steps. Before you even click on the anomaly, you can hover over the anomaly graph and see the costs with and without tags identified as influential by Watchdog Explains, to confirm that the identified tags are indeed driving the anomaly.
+
+<!-- TODO: add img with Watchdog Explains hover state -->
+
+To further investigate and share anomalies with the relevant owners, you can open an anomaly for more details. The investigation panel provides:
+
+- **Impact summary and drivers**: A comprehensive overview summarizing the impact and identifying the key drivers responsible for the cost anomaly.
+- **Related driver graphs**: Visual representations showing graphs from the related drivers that contributed to the anomalous behavior.
+- **Usage versus unit price analysis**: A dedicated section to help you understand whether the unexpected change is due to increased usage, unit price changes, or both. Usage-driven anomalies should be shared with the responsible engineering teams identified by Watchdog Explains to help explain the cause for the change in usage. Unit price changes are often caused by changes in commitment programs or contracted discounts.
+- **Resource investigation table**: A detailed table allowing you to investigate potential impactful resource IDs that may be contributing to the cost spike.
+
+<!-- TODO: add img with updated side panel -->
+<!-- TODO: add img for usage & unit price -->
+<!-- TODO: add img for resource ids -->
+
 ## Take action on anomalies
 
-Click an anomaly to view the services, teams, environments, and resource IDs that may be driving the cost anomaly.
+To further investigate anomalies by using additional dimensions, view the anomaly in Cost Explorer or a Datadog Notebook. 
 
-Investigate the anomaly further, and by any additional dimensions, by viewing the costs in Explorer or saving the query to a Notebook. You can also send the anomaly, Explorer link, or Notebook to the associated service owners or teams. This enables teams to provide context for why the anomaly occurred, and if it's expected.
+<!-- TODO: update img with new design, highlight the "next steps" section specifically -->
+
+You can also send the anomaly, Explorer link, or Notebook to the service owners or teams identified by Watchdog Explains. This enables teams to resolve anomalies with context for why the anomaly occurred and whether it's expected.
 
 You can also create a cost anomaly monitor to get alerted of similar cost anomalies in the future.
 
-This is the side panel where you can take action on your cost anomaly:
-
-{{< img src="cloud_cost/anomalies/cost_anomalies_side-panel.png" alt="In the side panel you can take action on your cost anomaly" style="width:90%;" >}}
+<!-- TODO: add screenshot of anomaly monitors -->
 
 ## Resolve anomalies
 
@@ -58,4 +85,8 @@ Mark anomalies as significant or insignificant to give feedback and help improve
 
 This is an example of how to mark a cost anomaly as significant and explain why it's an anomaly:
 
+<!-- TODO: update img with new design -->
 {{< img src="cloud_cost/anomalies/cost_anomalies_side-panel_is-significant.png" alt="You can mark cost anomaly as significant and write an explanation about why it's an anomaly  and then resolve it" style="width:90%;" >}}
+
+[1]: https://app.datadoghq.com/cost/analyze/anomalies
+[2]: /dashboards/graph_insights/watchdog_explains
