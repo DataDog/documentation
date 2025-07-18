@@ -135,7 +135,7 @@ In the initialization snippet, set an environment name, service name, and client
 
 The SDK should be initialized as early as possible in the app lifecycle, specifically in the `AppDelegate`'s `application(_:didFinishLaunchingWithOptions:)` callback.  This ensures all measurements, including application startup duration, are captured correctly. For apps built with SwiftUI, you can use `@UIApplicationDelegateAdaptor` to hook into the `AppDelegate`.
 
-<div class="alert alert-warning">Initializing the SDK elsewhere (e.g., later during view loading) may result in inaccurate or missing telemetry, especially around app startup performance.</div>
+<div class="alert alert-warning">Initializing the SDK elsewhere (for example later during view loading) may result in inaccurate or missing telemetry, especially around app startup performance.</div>
 
 For more information, see [Using Tags][5].
 
