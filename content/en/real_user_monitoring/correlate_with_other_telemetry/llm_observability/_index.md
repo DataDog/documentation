@@ -48,7 +48,9 @@ Update your web application to include the RUM Session ID in every call to your 
 });
 ```
 
-**On the server**
+### Step 3: Update your backend handler
+
+Modify your server-side code to extract the session ID and pass it to the LLM Observability SDK. For detailed LLM Observability setup, see the [LLM Observability Setup Guide][4].
 
 ```python
 # Read the session_id from the incoming request
