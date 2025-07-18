@@ -4,45 +4,46 @@ title: Datadog CSI Driver
 
 ## Overview
 
-This page provides an overview of the Datadog CSI driver and installation instructions on a Kubernetes cluster.
+This page provides an overview of the Datadog CSI Driver and installation instructions on a Kubernetes cluster.
 
-More information about Kubernetes Container Storage Interface (CSI) can be found [here](https://kubernetes-csi.github.io/docs/introduction.html).
+For more information about Kubernetes Container Storage Interface (CSI), see the [Kubernetes CSI documentation][4].
 
-Datadog CSI driver is open source; the driver implementation is available [here](https://github.com/DataDog/datadog-csi-driver).
+The Datadog CSI Driver is [open source][1].
 
 <div class="alert alert-info">
-   Datadog CSI Driver is not supported on Windows.
+   The Datadog CSI Driver is not supported on Windows.
 </div>
 
-## How It Works
+## How it works
 
-Datadog CSI driver is a DaemonSet that runs a gRPC server implementing the CSI specifications on each node of your Kubernetes cluster.
+The Datadog CSI Driver is a DaemonSet that runs a gRPC server implementing the CSI specifications on each node of your Kubernetes cluster.
 
-Installing Datadog CSI driver on a Kubernetes cluster allows users to leverage CSI volumes by specifying Datadog's CSI driver name.
+Installing Datadog CSI driver on a Kubernetes cluster allows you to use CSI volumes by specifying the Datadog CSI driver's name.
 
-Datadog CSI node server will be responsible for managing Datadog CSI's volume lifecycle.
+The Datadog CSI node server is responsible for managing Datadog CSI's volume lifecycle.
 
 ## Why use Datadog CSI Driver?
 
-Datadog CSI driver allows the agent to share the trace agent and DogStatsD Unix Domain Sockets with user pods regardless of the namespace [pod security standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/).
+The Datadog CSI Driver allows the Datadog Agent to share the Trace Agent and DogStatsD Unix Domain Sockets with user pods regardless of the namespace [pod security standards][4].
 
-If CSI volumes are not used, the UDS sockets need to be shared with the user pod via hostpath volumes. If the user pod is running in a namespace having a non-privileged pod security standard, the pod will fail to start because hostpath volumes are not permitted in such contexts.
+If CSI volumes are not used, the UDS sockets need to be shared with the user pod through hostpath volumes. If the user pod is running in a namespace that has non-privileged pod security standards, the pod fails to start because hostpath volumes are not permitted in that context.
 
-Datadog CSI driver shifts the hostpath volume from the user application to the CSI node server; the CSI daemonset runs in a separate privileged namespace and allows injecting UDS sockets into user pods with a Datadog CSI volume, allowing user pods to run in namespaces with `baseline` or `restricted` pod security standards.
+The Datadog CSI Driver shifts the hostpath volume from the user application to the CSI node server: the CSI DaemonSet runs in a separate privileged namespace and allows injecting UDS sockets into user pods with a Datadog CSI volume, which allows user pods to run in namespaces with `baseline` or `restricted` pod security standards.
 
 ## Installation
 
-Datadog CSI driver can be installed using the public helm chart.
-
-<div class="alert alert-info">Requires <a href="https://helm.sh">Helm</a>.</div>
-
-<br />
+You can install the Datadog CSI Driver by using a public Helm chart.
 
 <div class="alert alert-info">
-CSI driver needs to run with privileged security context in order to mount volumes from the host file system to the user pods.
+<strong>Notes</strong>:
+<ul>
+<li/>Requires <a href="https://helm.sh">Helm</a>.
+<li/>CSI driver needs to run with privileged security context in order to mount volumes from the host file system to the user pods.
+</ul>
 </div>
 
-1. **Add the Datadog CSI Helm repository**
+
+1. **Add the Datadog CSI Helm repository.**
 
    Run:
    ```shell
@@ -50,7 +51,7 @@ CSI driver needs to run with privileged security context in order to mount volum
    helm repo update
    ```
 
-2. **Deploy Datadog CSI Driver**
+2. **Deploy the Datadog CSI Driver.**
 
    Run:
 
@@ -58,13 +59,13 @@ CSI driver needs to run with privileged security context in order to mount volum
    helm install datadog-csi-driver datadog/datadog-csi-driver
    ```
 
-## Datadog CSI Volumes
+## Datadog CSI volumes
 
 <div class="alert alert-info">
-   Starting from version 7.67, Datadog agent admission controller can automatically mount datadog UDS sockets to mutated pods by setting the injection config mode to `csi` as indicated <a href="/containers/cluster_agent/admission_controller#configure-apm-and-dogstatsd-communication-mode">here</a>.
+With Datadog Agent v7.67+, the Admission Controller can automatically mount Datadog UDS sockets to mutated pods by setting the injection config mode to <code>csi</code>. For more information, see <a href="/containers/cluster_agent/admission_controller#configure-apm-and-dogstatsd-communication-mode">Admission Controller: Configure APM and DogStatsD Communication Mode</a>.
 </div>
 
-CSI volumes processed by Datadog CSI driver must have the following format:
+CSI volumes processed by the Datadog CSI Driver must have the following format:
 
 ```yaml
 csi:
@@ -73,7 +74,6 @@ csi:
         type: <volume-type>
 name: <volume-name>
 ```
-
 
 For example:
 
@@ -106,15 +106,15 @@ spec:
           type: APMSocketDirectory
 ```
 
-Currently, 4 types are supported:
-* APMSocket
-* APMSocketDirectory
-* DSDSocket
-* DSDSocketDirectory
+Four types of CSI volume are supported:
+* [APMSocket](#apmsocket)
+* [APMSocketDirectory](#apmsocketdirectory)
+* [DSDSocket](#dsdsocket)
+* [DSDSocketDirectory](#dsdsocketdirectory)
 
 ### APMSocket
 
-This type is useful for mounting a trace agent UDS socket file.
+This type is useful for mounting a Trace Agent UDS socket file.
 
 For example:
 
@@ -126,11 +126,11 @@ csi:
 name: datadog-apm
 ```
 
-In case the indicated socket doesn't exist, the mount operation will fail, and the pod will be blocked in `ContainerCreating` phase.
+If the indicated socket doesn't exist, the mount operation fails, and the pod is blocked in the `ContainerCreating` phase.
 
 ### APMSocketDirectory
 
-This mode is useful for mounting the directory containing the apm socket.
+This type is useful for mounting the directory containing the APM socket.
 
 For example:
 
@@ -145,7 +145,7 @@ name: datadog
 
 ### DSDSocket
 
-This type is useful for mounting a dogstatsd UDS socket file.
+This type is useful for mounting a DogStatsD UDS socket file.
 
 For example:
 
@@ -157,11 +157,11 @@ csi:
 name: datadog-dsd
 ```
 
-In case the indicated socket doesn't exist, the mount operation will fail, and the pod will be blocked in `ContainerCreating` phase.
+If the indicated socket doesn't exist, the mount operation fails, and the pod is blocked in the `ContainerCreating` phase.
 
 ### DSDSocketDirectory
 
-This mode is useful for mounting the directory containing the dogstatsd socket.
+This type is useful for mounting the directory containing the DogStatsD socket.
 
 For example:
 
@@ -174,24 +174,26 @@ csi:
 name: datadog
 ```
 
-## Security Considerations
+## Security considerations
 
-The Datadog CSI driver requires elevated privileges and specific host access to function properly.
+The Datadog CSI Driver requires elevated privileges and specific host access
 
-### Privileged Security Context:
-The CSI driver must run as a privileged container to perform mount operations and access the host filesystem.
+### Privileged security context
+The Datadog CSI Driver must run as a privileged container to perform mount operations and access the host filesystem.
 
-### Access to /var/lib/kubelet/pods:
-The driver needs read-write access to this directory because it is where Kubernetes manages pod volumes. This access is essential for injecting Datadog Unix Domain Sockets into user pods.
+### Access to /var/lib/kubelet/pods
+The Datadog CSI Driver needs read-write access to the `/var/lib/kubelet/pods` directory because Kubernetes manages pod volumes using this directory. The Datadog CSI Driver must access `/var/lib/kubelet/pods` to inject Datadog Unix Domain Sockets into user pods.
 
-### Bidirectional Mount Propagation:
-Required to ensure that volume mounts from the CSI node server are visible to both the host and the user pods. Without this, the shared sockets would not propagate correctly into pods.
+### Bidirectional mount propagation
+Bidirectional mount propagation is required to ensure that volume mounts from the Datadog CSI node server are visible to both the host and the user pods. Without bidirectional mount propagation, the shared sockets cannot propagate correctly into pods.
 
-By isolating the CSI driver in a privileged namespace, Kubernetes clusters can safely share Datadog sockets with user pods running under strict Pod Security Standards like baseline or restricted, while minimizing security risks.
+By isolating the Datadog CSI Driver in a privileged namespace, Kubernetes clusters can safely share Datadog sockets with user pods running under strict Pod Security Standards like baseline or restricted, while minimizing security risks.
 
 <div class="alert alert-info">
-   Limit access to the CSI driver's namespace and configuration to trusted operators, as the driver’s elevated privileges could be exploited if misconfigured.
+   Limit access to the Datadog CSI Driver's namespace and configuration to trusted operators. If the Datadog CSI Driver's elevated privileges are misconfigured, these privileges can be exploited.
 </div>
 
 [1]: https://github.com/DataDog/datadog-csi-driver
 [2]: https://hub.docker.com/r/datadog/csi-driver
+[3]: https://kubernetes-csi.github.io/docs/introduction.html
+[4]: https://kubernetes.io/docs/concepts/security/pod-security-standards/
