@@ -31,15 +31,7 @@ AAP runs qualification rules (closed-source) on every trace. There are four poss
 
 ### Trace sidepanel
 
-The qualification result can also be seen when viewing the details of an individual trace. </br>
-Example of a trace that AAP has qualified as safe:
-
-
-Example of a trace that AAP has qualified as harmful:
+The qualification result can also be seen when viewing the details of an individual trace.
 
 
 [1]: https://app.datadoghq.com/security/appsec/traces
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
