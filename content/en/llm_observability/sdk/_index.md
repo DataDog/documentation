@@ -1234,6 +1234,10 @@ The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
 `tags`
 : optional - _dictionary_
 <br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags][2].
+
+`metadata`
+: optional - _dictionary_
+<br />A JSON serializable dictionary of key-value metadata pairs relevant to the evaluation metric.
 {{% /collapse-content %}}
 
 #### Example
@@ -1262,6 +1266,7 @@ def llm_call():
         metric_type="score",
         value=10,
         tags={"evaluation_provider": "ragas"},
+        metadata={"flagged_segments": ["harmful part of output", "some other harmful part of output"]}
     )
 
     # joining an evaluation to a span via span ID and trace ID
@@ -1273,6 +1278,7 @@ def llm_call():
         metric_type="score",
         value=10,
         tags={"evaluation_provider": "ragas"},
+        metadata={"flagged_segments": ["harmful part of output", "some other harmful part of output"]}
     )
     return completion
 {{< /code-block >}}
@@ -1314,6 +1320,10 @@ The `evaluationOptions` object can contain the following:
 `tags`
 : optional - _dictionary_
 <br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags][1].
+
+`metadata`
+: optional - _dictionary_
+<br />A JSON serializable dictionary of key-value metadata pairs relevant to the evaluation metric.
 {{% /collapse-content %}}
 
 #### Example
@@ -1326,7 +1336,8 @@ function llmCall () {
     label: "harmfulness",
     metricType: "score",
     value: 10,
-    tags: { evaluationProvider: "ragas" }
+    tags: { evaluationProvider: "ragas" },
+    metadata: { flaggedSegments: ["harmful part of output", "some other harmful part of output"] }
   })
   return completion
 }
