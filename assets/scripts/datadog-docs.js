@@ -153,7 +153,7 @@ function getVisibleParentPath(ancestralEl, path){
 function hasParentLi(el) {
     while (el) {
         if (el.classList) {
-            if (el.classList.contains('sidenav-nav-main')) {
+            if (el.classList.contains('sidenav-nav-js-load')) {
                 break;
             }
 
@@ -174,7 +174,7 @@ function hasParentLi(el) {
 
 function getPathElement(event = null) {
     let path = window.location.pathname;
-    const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active');
+    const activeMenus = document.querySelectorAll('.side .sidenav-nav-js-load .active, header .sidenav-nav-js-load .active');
 
     // remove active class from all sidenav links to close all open menus
     for (let i = 0; i < activeMenus.length; i++) {
@@ -237,8 +237,8 @@ function getPathElement(event = null) {
 
 // remove open class from li elements and active class from <a> elements
 function closeNav() {
-    const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active');
-    const openMenus = document.querySelectorAll('.side .sidenav-nav-main .open, header .sidenav-nav-main .open');
+    const activeMenus = document.querySelectorAll('.side .sidenav-nav-js-load .active, header .sidenav-nav-js-load .active');
+    const openMenus = document.querySelectorAll('.side .sidenav-nav-js-load .open, header .sidenav-nav-js-load .open');
 
     for (let i = 0; i < activeMenus.length; i++) {
         activeMenus[i].classList.remove('active');
@@ -293,8 +293,8 @@ function updateSidebar(event) {
     }
 }
 
-const sideNav = document.querySelector('.side .sidenav-nav-main');
-const mobileNav = document.querySelector('header .sidenav-nav-main');
+const sideNav = document.querySelector('.side .sidenav-nav-js-load');
+const mobileNav = document.querySelector('header .sidenav-nav-js-load');
 
 if (sideNav) {
     sideNav.addEventListener('click', navClickEventHandler);
