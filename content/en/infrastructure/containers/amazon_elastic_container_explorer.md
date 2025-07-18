@@ -59,9 +59,9 @@ ecs_task_collection_enabled: true
 {{% /tab %}}
 {{< /tabs >}}
 
-## Log Tagging
+### Logs
 
-For ECS on Fargate, it is recommended to use the [AWS FireLens integration][11] built on Datadog’s Fluent Bit output plugin to send logs to Datadog. To ensure that logs are properly correlated between ECS resources and the log explorer, apply the following log configuration to set `ecs_service_name` and `ecs_cluster_name` tags:
+For ECS on Fargate, it is recommended to use the [AWS FireLens integration][11] built on Datadog’s Fluent Bit output plugin to send logs to Datadog. To ensure that logs are properly correlated between ECS resources and the log explorer, apply the following log configuration to apply the `aws_account` tag:
 ```
 {
   "logConfiguration": {
@@ -73,7 +73,7 @@ For ECS on Fargate, it is recommended to use the [AWS FireLens integration][11] 
       "dd_service": "...",
       "dd_source": "...",
       "dd_message_key": "log",
-      "dd_tags": "ecs_service_name:SERVICE_NAME, ecs_cluster_name: CLUSTER_NAME",
+      "dd_tags": "aws_account:<ACCOUNT_ID>",
       "TLS": "on",
       "provider": "ecs"
     }
