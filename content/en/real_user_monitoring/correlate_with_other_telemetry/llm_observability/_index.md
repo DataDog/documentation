@@ -19,7 +19,7 @@ The link between RUM and LLM Observability is created by forwarding the RUM Sess
 
 Ensure your RUM Browser SDK is properly initialized in your web application. For detailed setup instructions, see the [RUM Browser Setup Guide][1].
 
-**On the client**
+You need to send your RUM Session ID in every call from your web application to an AI Agent. See examples below.
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum'
