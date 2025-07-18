@@ -14,7 +14,10 @@ Correlate RUM and LLM Observability sessions to gain more visibility on how your
 The link between RUM and LLM Observability is created by forwarding the RUM Session ID to the LLM Observability SDK.
 
 # Setup
-You need to send your RUM Session ID in every call from your web application to an AI Agent. See example below
+
+## Step 1: Configure your RUM Browser SDK
+
+Ensure your RUM Browser SDK is properly initialized in your web application. For detailed setup instructions, see the [RUM Browser Setup Guide][1].
 
 **On the client**
 
