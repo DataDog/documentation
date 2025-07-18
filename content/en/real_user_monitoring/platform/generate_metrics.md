@@ -64,7 +64,7 @@ To create a custom metric from a search query in the [RUM Explorer][5], click th
 
 Your RUM-based custom metric appears in the list below **Custom RUM Metrics**, and there may be a short delay for your metric to become available in [dashboards][9] and [monitors][10]. 
 
-Data points are not created for metrics with historical data. Data points for your RUM-based custom metric generate on a ten second interval. Metrics data is retained for 15 months. 
+Datapoints are not created for metrics with historical data. Datapoints for your RUM-based custom metric generate on a ten second interval. Metrics data is retained for 15 months. 
 
 ### Add a RUM-based metric on sessions and views
 
@@ -91,7 +91,7 @@ Because you cannot rename an existing metric, Datadog recommends creating anothe
 
 ### Delete a RUM-based custom metric
 
-In order to stop the computing of data points from your custom metric and billing, hover over a metric and click the **Delete** icon to the right hand corner. 
+In order to stop the computing of datapoints from your custom metric and billing, hover over a metric and click the **Delete** icon to the right hand corner. 
 
 ## Usage
 
