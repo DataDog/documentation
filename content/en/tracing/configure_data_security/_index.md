@@ -445,7 +445,7 @@ apm_config:
 ```
 - `credit_cards.enabled`: Set to false to disable this obfuscator.
   - Environment Variable: `DD_APM_OBFUSCATION_CREDIT_CARDS_ENABLED`
-- `credit_cards.luhn`: Set to true to enable a Luhn checksum check in order to eliminate false positives. This increases CPU usage and the performance cost of this check.
+- `credit_cards.luhn`: Set to true to enable a Luhn checksum check to eliminate false positives. This increases CPU usage and the performance cost of this check.
   - Environment Variable: `DD_APM_OBFUSCATION_CREDIT_CARDS_LUHN`
 
 {{% /tab %}}
