@@ -11,10 +11,6 @@ further_reading:
       text: "Set up IaC Security for Code Security"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/iac-security/" >}}
-  Infrastructure as Code (IaC) Security is in Preview. To request access, complete the form.
-{{< /callout >}}
-
 Infrastructure as Code (IaC) Security detects security misconfigurations in Terraform files. Exclusions allow you to control which findings appear in scan results by ignoring specific rules, files, or issue categories.
 
 ## Exclusion methods
