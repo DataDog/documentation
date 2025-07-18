@@ -5,10 +5,6 @@ aliases:
 title: Referencia de la API de LLM Observability
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 La API de LLM Observability proporciona una interfaz para que los desarrolladores envíen información relacionada con trazas (traces) y tramos (spans) de LLM a Datadog. Si tu aplicación está escrita en Python, puedes utilizar el [SDK de LLM Observability para Python][1].
@@ -239,7 +235,7 @@ El nombre puede tener hasta 193 caracteres y no puede contener guiones bajos con
 Utiliza este endpoint para enviar evaluaciones asociadas a un determinado tramo a Datadog.
 
 Endpoint
-: `https://api.{{< region-param key="dd_site" code="true" >}}/api/intake/llm-obs/v1/eval-metric`
+: `https://api.{{< region-param key="dd_site" code="true" >}}/api/intake/llm-obs/v2/eval-metric`
 
 Método
 : `POST`

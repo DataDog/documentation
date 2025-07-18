@@ -92,7 +92,7 @@ Configura Amazon OpenSearch Service para enviar logs a un bucket de S3 o a Cloud
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_es" >}}
+{{< get-metrics-from-git "amazon-es" >}}
 
 
 ### Eventos

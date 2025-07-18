@@ -80,9 +80,7 @@ Display only issues that have an AI generated fix available to quickly remediate
 
 #### Teams filters
 
-Issue Team Ownership helps you quickly identify issues and focus on relevant errors by using Git `CODEOWNERS`. Datadog will automatically filter your issues so your team can cut through noise and prioritize what matters.
-
-Issue ownership is derived from the `CODEOWNERS` files of your repositories. To use this feature, you need to link your Datadog teams to their GitHub counterparts. All errors coming from RUM and APM are eligible for Team Ownership.
+[Issue Team Ownership][2] helps you quickly identify issues relevant to your team by using Git `CODEOWNERS` and service owners.
 
 #### Assigned to
 
@@ -119,6 +117,7 @@ You can directly export your search query from the explorer to create an Error T
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /events
+[2]: /error_tracking/issue_team_ownership
 [3]: /error_tracking/suspected_causes
 [4]: /real_user_monitoring/explorer/search/#event-types
 [5]: /error_tracking/issue_states

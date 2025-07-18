@@ -102,7 +102,7 @@ HDFS DataNode 점검은 [Datadog 에이전트][3] 패키지에 포함되어 있�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "hdfs_datanode" >}}
+{{< get-metrics-from-git "hdfs-datanode" >}}
 
 
 ### 이벤트
@@ -110,7 +110,7 @@ HDFS DataNode 점검은 [Datadog 에이전트][3] 패키지에 포함되어 있�
 HDFS-datanode 점검에는 이벤트가 포함되지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "hdfs_datanode" >}}
+{{< get-service-checks-from-git "hdfs-datanode" >}}
 
 
 ## 트러블슈팅
@@ -223,7 +223,7 @@ HDFS NameNode 점검은 [Datadog 에이전트][3] 패키지에 포함되어 있�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "hdfs_namenode" >}}
+{{< get-metrics-from-git "hdfs-namenode" >}}
 
 
 ### 이벤트
@@ -231,7 +231,7 @@ HDFS NameNode 점검은 [Datadog 에이전트][3] 패키지에 포함되어 있�
 HDFS-namenode 점검에는 이벤트가 포함되지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "hdfs_namenode" >}}
+{{< get-service-checks-from-git "hdfs-namenode" >}}
 
 
 ## 트러블슈팅

@@ -24,26 +24,29 @@ further_reading:
 
 [Azure App Service][1] hosts web applications, REST APIs, and mobile backends.
 
-Datadog provides the following monitoring capabilities for all Azure App Service resource types:
+To get started with monitoring Azure App Service, install the Azure integration for metrics and logs, and Azure App Service instrumentation for APM and custom metrics.
 
-- Azure Monitor [metrics][2] for web apps, using the [Azure integration][3].
-- The [Azure App Service View][4] in Datadog, where you can quickly spot issues, map relationships between your Azure App Service resources, and gain insights into cost and performance.
-- Submit custom metrics through the API.
-- Submit [resource logs][5] through [Event Hub][6].
+### Azure Integration
 
-Datadog provides additional monitoring capabilities for the following Azure App Service workload runtimes on Basic, Standard, and Premium plans:
+The [Azure integration][2] provides [enriched metrics][3] and resource metadata for Azure App Service, and are required for the [Azure App Service View][4] in Datadog. Follow the [Azure integration setup instructions][5] to install the Azure integration.
 
-| OS | Runtime |Documentation| 
-|----|---------|-----|
-|Windows|.NET|[Windows .NET setup][7]|
-|Windows|Java|[Windows Java setup][8]|
-|Windows|Node|[Windows Node setup][13]|
-|Linux|.NET|[Linux .NET setup][9]|
-|Linux|Node|[Linux Node setup][9]|
-|Linux|PHP|[Linux PHP setup][9]|
-|Linux|Java|[Linux Java setup][10]|
-|Linux|Python|[Linux Python setup][9]|
-|Linux|Container|[Linux Container setup][12]|
+Additionally, [set up Azure log forwarding][6] to automatically collect and send Azure App Service resource and application logs to Datadog.
+
+### Azure App Service Instrumentation
+
+To monitor Azure App Service workloads with APM and custom metrics, install instrumentation on your Azure App Service workloads. This instrumentation is available for both Windows and Linux App Services, and supports the following runtimes on Basic, Standard, and Premium plans:
+
+| OS      | Runtime   | Documentation               |
+|---------|-----------|-----------------------------|
+| Windows | .NET      | [Windows .NET setup][7]     |
+| Windows | Java      | [Windows Java setup][8]     |
+| Windows | Node.js   | [Windows Node.js setup][9]  |
+| Linux   | .NET      | [Linux .NET setup][10]      |
+| Linux   | Java      | [Linux Java setup][11]      |
+| Linux   | Node.js   | [Linux Node.js setup][12]   |
+| Linux   | PHP       | [Linux PHP setup][13]       |
+| Linux   | Python    | [Linux Python setup][14]    |
+| Linux   | Container | [Linux Container setup][15] |
 
 
 Capabilities:
@@ -51,22 +54,26 @@ Capabilities:
 - Customized APM service and trace views showing relevant Azure App Service metrics and metadata
 - Manual APM instrumentation to customize spans
 - `Trace_ID` injection into application logs
-- Custom metrics with [DogStatsD][11]
+- Custom metrics with [DogStatsD][16]
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://learn.microsoft.com/en-us/azure/app-service/overview
-[2]: /integrations/azure_app_services/#metrics
-[3]: /integrations/azure/
-[4]: https://app.datadoghq.com/functions?search=&cloud=azure&entity_view=app_service_plan
-[5]: /integrations/azure/#log-collection
-[6]: https://learn.microsoft.com/azure/event-hubs/
-[7]: /serverless/azure_app_services/azure_app_services_windows?tab=net#setup
-[8]: /serverless/azure_app_services/azure_app_services_windows?tab=java#setup
-[9]: /serverless/azure_app_services/azure_app_services_linux?tab=nodenetphppython
-[10]: /serverless/azure_app_services/azure_app_services_linux?tab=java
-[11]: /developers/dogstatsd/
-[12]: /serverless/azure_app_services/azure_app_services_container
-[13]: /serverless/azure_app_services/azure_app_services_windows?tab=nodejs#setup
+[2]: /integrations/azure/
+[3]: /integrations/azure_app_services/#metrics
+[4]: https://app.datadoghq.com/serverless/azure/app-service-plan
+[5]: /integrations/azure/#setup
+[6]: /logs/guide/azure-logging-guide/
+[7]: /serverless/azure_app_services/azure_app_services_windows?tab=net
+[8]: /serverless/azure_app_services/azure_app_services_windows?tab=java
+[9]: /serverless/azure_app_services/azure_app_services_windows?tab=nodejs
+[10]: /serverless/azure_app_services/azure_app_services_linux?tab=net
+[11]: /serverless/azure_app_services/azure_app_services_linux?tab=java
+[12]: /serverless/azure_app_services/azure_app_services_linux/?tab=nodejs
+[13]: /serverless/azure_app_services/azure_app_services_linux/?tab=php
+[14]: /serverless/azure_app_services/azure_app_services_linux/?tab=python
+[15]: /serverless/azure_app_services/azure_app_services_container
+[16]: /developers/dogstatsd/
+

@@ -2,7 +2,7 @@
 algolia:
   tags:
   - secretos
-  - secretos ejecutables
+  - ejecutable de secretos
   - proveedor de secretos
   - lista de secretos
 aliases:
@@ -15,156 +15,254 @@ further_reading:
 title: Gestión de secretos
 ---
 
-Para evitar que se guarden secretos como texto sin formato en los archivos de configuración del Agent, puedes utilizar el paquete de gestión de secretos.
+## Información general
 
-El Agent puede utilizar el paquete `secrets` para invocar un archivo ejecutable proporcionado por el usuario, con el objetivo de gestionar la recuperación y el descifrado de secretos, que luego el mismo Agent suele cargar en su memoria. Este proceso permite al usuario utilizar cualquier servicio de backend de gestión de secretos (como HashiCorp Vault o AWS Secrets Manager) y elegir su método de autenticación preferido para establecer el proceso de confianza inicial. Para facilitar las cosas, los [scripts auxiliares](#helper-scripts-for-autodiscovery) que pueden utilizarse para este archivo ejecutable incluyen de base despliegues contenedorizados del Agent.
+El Datadog Agent permite gestionar secretos de forma segura mediante la integración con cualquier solución externa de gestión de secretos (como HashiCorp Vault, AWS Secrets Manager, Azure Key Vault o una solución personalizada). En lugar de codificar valores confidenciales como claves de API o contraseñas en texto plano en los archivos de configuración, el Agent puede recuperarlos dinámicamente en tiempo de ejecución.
 
-A partir de la versión 6.12, el paquete de gestión de secretos suele estar disponible en Linux para métricas, APM y monitorización de procesos, y en Windows, para métricas y APM.
+### Cómo funciona
 
-## Uso de los secretos
+Para hacer referencia a un secreto en tu configuración, utiliza la notación `ENC[<secret_id>]`. Esto indica al Agent que resuelva el valor utilizando el ejecutable de recuperación de secretos configurado. El secreto se obtiene y se carga en la memoria, pero nunca se escribe en el disco ni se envía al backend de Datadog.
 
-### Definir los secretos en las configuraciones
-
-Utiliza la notación `ENC[]` para indicar un secreto como valor de un campo YAML en tu configuración.
-
-Los secretos son compatibles con cualquier backend de configuración (p. ej., files, etcd o consul) y con todas las variables de entorno.
-
-También son compatibles con `datadog.yaml`. El Agent carga primero la configuración principal y, después de descifrar los datos secretos, la vuelve a cargar de nuevo. De esta forma, dichos secretos no se pueden utilizar en los parámetros `secret_*`.
-
-Los secretos siempre son cadenas, así que no puedes utilizarlos para definir un entero o un valor boleano.
-
-Ejemplo:
-
-```yaml
+Por ejemplo, la siguiente configuración muestra dos secretos definidos con `ENC[]`:
+```
 instances:
   - server: db_prod
-    # two valid secret handles
     user: "ENC[db_prod_user]"
     password: "ENC[db_prod_password]"
-
-    # The `ENC[]` handle must be the entire YAML value, which means that
-    # the following is NOT detected as a secret handle:
-    password2: "db-ENC[prod_password]"
 ```
 
-Este ejemplo incluye dos secretos: `db_prod_user` y `db_prod_password`. Se trata de los _identificadores_ de secretos, y sirven para determinarlos de forma única dentro de tu backend de gestión de secretos.
+El controlador de secreto debe constituir el valor completo del campo YAML y siempre se resuelve como cadenas. Esto significa que configuraciones como `password: "db-ENC[prod_password]"` no se reconocen como secretos.
 
-Entre paréntesis, puedes añadir todo tipo de caracteres, siempre y cuando la configuración del YAML sea válida. Por esta razón, las comillas deben utilizarse como secuencia de escape. Ejemplo:
-
-```text
+Puedes utilizar cualquier carácter entre los corchetes de `ENC[]` siempre que el YAML sea válido. Si tu ID de secreto incluye caracteres especiales o es una cadena JSON, asegúrate de escaparlo correctamente. Por ejemplo:
+```
 "ENC[{\"env\": \"prod\", \"check\": \"postgres\", \"id\": \"user_password\"}]"
 ```
 
-En el ejemplo anterior, la cadena `{"env": "prod", "check": "postgres", "id": "user_password"}` es el identificador de secretos.
-
-No es necesario establecer una secuencia de escape para los caracteres `[` y `]` de la expresión. Ejemplo:
-
-```text
-"ENC[user_array[1234]]"
+También es posible utilizar variables de [Autodiscovery][1] en los controladores de secretos. El Agent resuelve estas variables antes de resolver el secreto. Por ejemplo:
 ```
-
-En el ejemplo anterior, la cadena `user_array[1234]` es el identificador de secretos.
-
-Los secretos se determinan una vez que se determinan las variables de plantilla de [Autodiscovery][1]. Esto te permite usarlos en un identificador de secretos. Ejemplo:
-
-```yaml
 instances:
   - server: %%host%%
     user: ENC[db_prod_user_%%host%%]
     password: ENC[db_prod_password_%%host%%]
 ```
 
-### Proporcionar un archivo ejecutable
+**Nota**: No puedes utilizar la sintaxis `ENC[]` en configuraciones de `secret_*` como `secret_backend_command`.
 
-Para ver los secretos, es necesario que proporciones un ejecutable que pueda autenticarse en tu backend de gestión de secretos y permita recuperarlos.
+### Requisitos de seguridad del Agent
 
-El Agent oculta secretos internamente en su memoria para reducir la cantidad de invocaciones (lo cual es útil en entornos contenedorizados, por ejemplo). El Agent invoca el ejecutable siempre que accede a un archivo de configuración de un check que contiene al menos un identificador de secretos, si dichos secretos no están cargados en la memoria. Concretamente, si los secretos ya se han cargado en la memoria, no se activan las invocaciones adicionales del ejecutable. En la práctica, lo que ocurre es que el Agent invoca el ejecutable proporcionado por el usuario una vez por cada archivo si, al iniciar el archivo, detecta que contiene un identificador de secretos. Además, puede que vuelva a invocarlo posteriormente si el Agent o la instancia se reinician o si el Agent carga de forma dinámica un nuevo check que contenga un identificador de secretos (por ejemplo, de Autodiscovery).
-
-APM y Process Monitoring ejecutan su propio proceso/servicio y, como los procesos no comparten memoria, cada uno debe poder cargar o descifrar sus correspondientes secretos. De hecho, si  `datadog.yaml` contiene secretos, cada proceso podría invocar el ejecutable una vez. Por ejemplo, si guardas `api_key` como secreto en el archivo `datadog.yaml` y tienes activadas las herramientas APM y Process Monitoring, se podría invocar el backend de secretos tres veces.
-
-De forma predeterminada, el ejecutable que proporciona el usuario debe incluir los mecanismos necesarios de gestión de errores. En cambio, el Agent debe reiniciarse si un secreto se tiene que actualizar en la memoria (por ejemplo, si se revoca una contraseña).
-
-El uso de un ejecutable proporcionado por el usuario presenta varias ventajas:
-
-* Garantiza que el Agent no intente cargar parámetros en la memoria para los que no existe un identificador de secretos.
-* Permite al usuario limitar la visibilidad del Agent a los secretos que necesita (por ejemplo, restringe la lista de secretos a los que puede acceder en el backend de gestión de claves).
-* Te da flexibilidad y libertad para que autorices a los usuarios a utilizar cualquier backend de gestión de secretos sin tener que volver a crear el Agent.
-* Habilita que los usuarios resuelvan el problema de confianza inicial del Agent en sus backends de gestión de secretos. Este proceso permite aplicar el método de autenticación preferido del usuario y se ajusta a su flujo de integración continuo.
-
-#### Configuración
-
-Establece la siguiente variable en `datadog.yaml`:
-
-```yaml
-secret_backend_command: <EXECUTABLE_PATH>
-```
-
-#### Requisitos de seguridad del Agent
-
-El Agent ejecuta el ejecutable `secret_backend_command` como un subproceso. Los patrones de ejecución son diferentes para Linux y Windows.
+El Agent ejecuta el ejecutable proporcionado como un subproceso. Los patrones de ejecución difieren en Linux y Windows.
 
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-En Linux, el ejecutable configurado como `secret_backend_command`:
+En Linux, el ejecutable debe:
 
-* debe pertenecer al mismo usuario que está ejecutando el Agent (`dd-agent` de forma predeterminada o `root` dentro de un contenedor);
-* no debe tener derechos para un grupo u otro tipo de elemento;
+* debe pertenecer al mismo usuario que está ejecutando el Agent (`dd-agent` de forma predeterminada o `root` en un contenedor);
+* No debe tener derechos para `group` o `other`.
 * debe contar, como mínimo, con derechos de ejecución para el propietario.
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-En Windows, el ejecutable configurado como `secret_backend_command`:
+En Windows, el ejecutable debe:
 
 * debe tener derechos de lectura/ejecución para `ddagentuser` (el usuario que se utiliza para ejecutar el Agent);
-* no debe tener derechos para ningún usuario o grupo, excepto el grupo `Administrators`, la cuenta integrada del sistema local o el contexto de usuario del Agent (por defecto, `ddagentuser`);
-* debe ser una aplicación Win32 válida para que el Agent pueda ejecutarla (por ejemplo, un script PowerShell o Python no funcionaría).
+* No debe tener derechos para ningún usuario ni grupo excepto para el grupo `Administrators`, la cuenta incorporada `Local System` o el contexto de usuario del Agent (`ddagentuser` en forma predeterminada)
+* Ser una aplicación Win32 válida para que el Agent pueda ejecutarla (por ejemplo, un script de PowerShell o Python no funciona).
 
 {{% /tab %}}
 {{< /tabs >}}
 
 **Nota**: El ejecutable comparte las mismas variables de entorno que el Agent.
 
-Nunca indiques información confidencial en `stderr`. Si el archivo binario tiene un código de estado distinto de `0`, el Agent creará un log de salida de error estándar del ejecutable para facilitar la resolución del problema.
+## Proporcionar un ejecutable de recuperación de secretos
 
-#### La API del ejecutable
+Para recuperar secretos, el Agent utiliza un ejecutable externo que tú le proporcionas. El ejecutable se utiliza cuando se descubren nuevos
+secretos y se almacena en caché durante el ciclo de vida del Agent. Si necesitas actualizar o rotar un secreto, debes reiniciar el Agent para recargarlo.
 
-El ejecutable sigue una API simple, significa que lee el JSON de la entrada estándar y produce un JSON de salida con los secretos descifrados que se añade a la salida estándar.
+El Agent envía a este ejecutable una carga JSON a través de la entrada estándar que contiene una lista de controladores de secretos. El ejecutable obtiene cada secreto y lo devuelve en formato JSON a través de la salida estándar.
 
-Si el código de salida del ejecutable es distinto de `0`, la configuración de la integración que se está descifrando se considera errónea y se descarta.
-
-##### Ejemplo de entrada de la API
-
-El ejecutable recibe una carga útil JSON procedente de la entrada estándar que contiene la lista de secretos que hay que recuperar:
-
-```json
-{"version": "1.0", "secrets": ["secret1", "secret2"]}
+Esto es lo que el Agent envía a tu ejecutable en STDIN:
 ```
-
-* `version`: es una cadena que contiene la versión de formato (actualmente, 1.0).
-* `secrets`: es una lista de cadenas; cada cadena representa un identificador de una configuración correspondiente a un secreto que hay que recuperar.
-
-##### Ejemplo de salida de la API
-
-Se espera que el ejecutable genere una carga útil JSON en la salida estándar que contenga los secretos recuperados:
-
-```json
 {
-  "secret1": {"value": "secret_value", "error": null},
-  "secret2": {"value": null, "error": "could not fetch the secret"}
+  "version": "1.0",
+  "secrets": ["secret1", "secret2"]
 }
 ```
 
-La carga útil prevista es un objeto JSON, donde cada una de las claves representa uno de los identificadores solicitados en la carga útil de entrada. El valor de cada uno de esos indicadores es un objeto JSON con 2 campos:
+* `version` (cadena): la versión del formato.
+* `secrets` (lista de cadenas): cada cadena es un controlador de un secreto a recuperar.
 
-* `value` (cadena): el valor del secreto que debe utilizarse en las configuraciones del check (puede ser "null" en caso de error).
-* `error` (cadena): el mensaje de error, si corresponde. Si el error no es "null", la configuración de integración que utiliza este identificador se considera errónea y se descarta.
 
-##### Ejemplo de ejecutable
+El ejecutable debe responder a través de STDOUT:
+```
+{
+  "secret1": {"valor": "valor_descifrado", "error": null},
+  "secret2": {"valor": null, "error": "could not fetch the secret"}
+}
+```
 
-A continuación, te presentamos un programa Go de prueba en el que se añade un prefijo `decrypted_` a cada secreto:
+* `value` (cadena): el valor del secreto que se utilizará en las configuraciones. Esto puede ser `null` en caso de error.
+* `error` (cadena): un mensaje de error o `null`.
 
+Si un secreto no se resuelve (ya sea devolviendo un código de salida distinto de cero o un error no nulo), el Agent ignora la configuración relacionada.
+
+**Nunca envíes información confidencial a `stderr`**. Si el binario sale con un código de estado diferente al de `0`, el Agent registra la salida de error estándar del ejecutable para facilitar la resolución de problemas.
+
+## Opciones para recuperar secretos
+
+### Opción 1: Utilizar el script incorporado para Kubernetes y Docker
+
+Para entornos en contenedores, las imágenes de contenedor del Datadog Agent incluyen un script incorporado `/readsecret_multiple_providers.sh` a partir de la versión v7.32.0. Este script es compatible con la lectura de secretos de:
+
+* Archivos: utilizar `ENC[file@/path/to/file]`
+* Kubernetes Secrets: utilizar `ENC[k8s_secret@namespace/secret-name/key]`
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+Para utilizar este ejecutable con un Helm chart, configúralo como se indica a continuación:
+```yaml
+datadog:
+  [...]
+  secretBackend:
+    command: "/readsecret_multiple_providers.sh"
+```
+
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+
+Para utilizar este ejecutable, define la variable de entorno `DD_SECRET_BACKEND_COMMAND` como se indica a continuación:
+```
+DD_SECRET_BACKEND_COMMAND=/readsecret_multiple_providers.sh
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Ejemplo: Lectura de archivos montados
+
+Kubernetes admite [exponer Secretos como archivos][2] en un pod que el Agent puede leer para resolver secretos.
+
+En Kubernetes, puedes montar un Secreto como un volumen así:
+```yaml
+  containers:
+    - name: agent
+      #(...)
+      volumeMounts:
+        - name: secret-volume
+          mountPath: /etc/secret-volume
+  #(...)
+  volumes:
+    - name: secret-volume
+      secret:
+        secretName: test-secret
+```
+
+A continuación, puedes hacer referencia al secreto de la siguiente manera:
+```
+password: ENC[file@/etc/secret-volume/password]
+```
+
+**Notas:**
+- El secreto debe existir en el mismo espacio de nombres que el pod en el que se va a integrar.
+- El script puede acceder a todas las subcarpetas, así como al contenido confidencial de `/var/run/secrets/kubernetes.io/serviceaccount/token`. Por este motivo, Datadog recomienda utilizar una carpeta exclusiva en vez de `/var/run/secrets`.
+
+Los [secretos de enjambre de Docker][3] se montan en la carpeta `/run/secrets`. Por ejemplo, el secreto de Docker `db_prod_passsword` está en `/run/secrets/db_prod_password` en el contenedor del Agent. A esto se haría referencia en la configuración con `ENC[file@/run/secrets/db_prod_password]`.
+
+#### Ejemplo: Lectura de un secreto de Kubernetes en todos los espacios de nombres
+
+Si deseas que el Agent lea un secreto de un espacio de nombres diferente, utiliza el prefijo `k8s_secret@`. Por ejemplo:
+```
+password: ENC[k8s_secret@database/database-secret/password]
+```
+
+En este case (incidencia), debes configurar manualmente RBAC para permitir que la cuenta de servicio del Agent lea el secreto:
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: datadog-secret-reader
+  namespace: database
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    resourceNames: ["database-secret"]
+    verbs: ["get", "watch", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: datadog-read-secrets
+  namespace: database
+subjects:
+  - kind: ServiceAccount
+    name: datadog-agent
+    apiGroup: ""
+    namespace: default
+roleRef:
+  kind: Role
+  name: datadog-secret-reader
+  apiGroup: ""
+```
+
+Este `Role` permite acceder al `Secret: database-secret` en el `Namespace: database`. El `RoleBinding` asocia este permiso a la `ServiceAccount: datadog-agent` en el `Namespace: default`. Es necesario que lo añadas manualmente a tu clúster en lo que respecta a los recursos desplegados.
+
+### Opción 2: Utilizar un ejecutable precompilado
+
+Si estás utilizando un proveedor de secretos estándar como `AWS Secrets Manager`, `AWS SSM` u otro, puedes utilizar el ejecutable [datadog-secret-backend][4] predefinido.
+
+Este es un ejemplo de cómo configurarlo:
+
+1. **Crea tu secreto** en AWS Secrets Manager. Los secretos `ARN` en AWS son el controlador del secretos. Ejemplo:
+  ```
+  arn:aws:secretsmanager:us-east-2:111122223333:secret:AgentAPIKey
+  ```
+2. **Otorga a tu instancia EC2 permisos IAM** para leer el secreto:
+   ```
+   {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Effect": "Allow",
+         "Action": [
+           "secretsmanager:GetSecretValue"
+         ],
+         "Resource": [
+           "arn:aws:secretsmanager:us-east-2:111122223333:secret:AgentAPIKey"
+         ]
+       }
+     ]
+   }
+   ```
+
+3. Descarga la última versión de [datadog-secret-backend][5] en tu instancia EC2 y crea tu configuración `datadog-secret-backend.yaml` junto al binario. En el siguiente ejemplo se muestra una configuración para un backend de tipo `aws.secrets` con el nombre `staging-aws`:
+   ```
+   backends:
+     staging-aws:
+       backend_type: aws.secrets
+   ```
+4. Configura los derechos de acceso correctos para el binario como se describe en [requisitos de seguridad del Agent](#agent-security-requirements):
+   ```sh
+   chown dd-agent:dd-agent datadog-secret-backend
+   chmod 500 datadog-secret-backend
+   ```
+5. Configura el Agent para que utilice el binario para resolver secretos y utilice el secreto de AWS (aquí como la `api_key`):
+   ```
+   api_key: ENC[staging-aws:arn:aws:secretsmanager:us-east-2:111122223333:secret:AgentAPIKey]
+
+   secret_backend_command: /path/to/datadog-secret-backend
+   ```
+   El prefijo `staging-aws:` coincide con la clave definida en la configuración de tu backend.
+6. Reinicia el Agent.
+
+Puedes ver qué secretos ha resuelto el Agent ejecutando el comando `datadog-agent secrets` localmente en tu instancia EC2.
+
+### Opción 3: Crear tu propio ejecutable personalizado
+
+También puedes crear tu propio ejecutable de recuperación de secretos utilizando cualquier lenguaje. El único requisito es que siga el formato de entrada/salida descrito anteriormente.
+
+He aquí un ejemplo Go que devuelve secretos ficticios:
 ```go
 package main
 
@@ -206,7 +304,7 @@ func main() {
 }
 ```
 
-Esta acción actualiza la configuración (en el archivo del check):
+Esto transforma tu configuración:
 
 ```yaml
 instances:
@@ -215,7 +313,7 @@ instances:
     password: ENC[db_prod_password]
 ```
 
-con lo siguiente (en la memoria del Agent):
+En lo siguiente en la memoria:
 
 ```yaml
 instances:
@@ -224,135 +322,35 @@ instances:
     password: decrypted_db_prod_password
 ```
 
-## Scripts auxiliares para Autodiscovery
+## Actualización de claves de API/aplicación en tiempo de ejecución
 
-Muchas de las integraciones de Datadog requieren de credenciales para recuperar métricas. Para evitar tener que codificarlas en una [plantilla del Autodiscovery][1], puedes separarlas de la propia plantilla mediante la gestión de secretos.
+A partir de la versión v7.67 del Agent, puedes configurar el Agent para que actualice sus claves de API y aplicación en intervalos regulares sin necesidad de reiniciar. Esto depende de que la clave API y la clave de la aplicación se extraigan como secretos.
 
-A partir de la versión 7.32.0, el [script auxiliar][2] está disponible en la imagen del contenedor del Agent como `/readsecret_multiple_providers.sh`, y puedes utilizarlo para recuperar secretos de archivos, además de secretos de Kubernetes. Los dos scripts de las versiones anteriores (`readsecret.sh` y  `readsecret.py`) también son compatibles, pero solo pueden leer secretos de archivos.
-
-### Script para leer secretos de varios proveedores
-
-#### Uso de varios proveedores
-El script `readsecret_multiple_providers.sh` puede utilizarse para leer secretos de ambos archivos, así como secretos de Kubernetes, que deben tener el formato `ENC[provider@some/path]`. Ejemplo:
-
-| Proveedor               | Formato                                           |
-|------------------------|--------------------------------------------------|
-| Lectura de archivos        | `ENC[file@/path/to/file]`                        |
-| Secretos de Kubernetes     | `ENC[k8s_secret@some_namespace/some_name/a_key]` |
-
-{{< tabs >}}
-{{% tab "Helm" %}}
-
-Para utilizar este ejecutable con un Helm chart, configúralo como se indica a continuación:
+Para activarlo, configura `secret_refresh_interval` (en segundos) en tu archivo `datadog.yaml`:
 ```yaml
-datadog:
-  [...]
-  secretBackend:
-    command: "/readsecret_multiple_providers.sh"
+api_key: ENC[<secret_handle>]
+
+secret_backend_command: /path/to/your/executable
+secret_refresh_interval: 3600  # refresh every hour
 ```
 
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
+En forma predeterminada, el Agent distribuye de manera aleatoria tu primera actualización en la ventana `secret_refresh_interval` especificada. Esto significa que
+significa que resuelve la clave de API al inicio, luego la actualiza en el primer intervalo y en cada intervalo posterior.
+Esto evita tener una flota de Agents actualizando tu clave de API/aplicación al mismo tiempo.
 
-Para utilizar este ejecutable, define la variable de entorno `DD_SECRET_BACKEND_COMMAND` como se indica a continuación:
-```
-DD_SECRET_BACKEND_COMMAND=/readsecret_multiple_providers.sh
-```
+Para evitar tiempos de inactividad, sólo invalida la clave de API y la clave de la aplicación anteriores cuando toda tu flota de Agents haya
+extraído las claves actualizadas de tu solución de gestión de secretos. Puedes realizar un rastreo del uso de tus claves de API en la page (página) [Fleet
+Management] (https://app.datadoghq.com/fleet).
 
-{{% /tab %}}
-{{< /tabs >}}
-
-#### Ejemplo de lectura de un archivo
-El Agent puede leer un archivo específico teniendo en cuenta la ruta indicada. Este archivo puede recuperarse a partir de [secretos de Kubernetes](#kubernetes-secrets), [secretos de Docker Swarm](#docker-swarm-secrets) o mediante cualquier otro método personalizado.
-
-Si el contenedor del Agent incluye un archivo `/etc/secret-volume/password` compuesto por una contraseña de texto sin formato, puedes hacer referencia a este fichero con una notación como `ENC[file@/etc/secret-volume/password]`.
-
-##### Secretos de Kubernetes
-Con Kubernetes, puedes [exponer los secretos como archivos][3] dentro de un pod. Por ejemplo, si un secreto como`Secret: test-secret` incluye los datos `db_prod_password: example`, dicho secreto se integra en el contenedor del Agent con la siguiente configuración:
+Puedes desactivar este comportamiento configurando:
 ```yaml
-  containers:
-    - name: agent
-      #(...)
-      volumeMounts:
-        - name: secret-volume
-          mountPath: /etc/secret-volume
-  #(...)
-  volumes:
-    - name: secret-volume
-      secret:
-        secretName: test-secret
-```
-En este ejemplo, el contenedor del Agent incluye el archivo `/etc/secret-volume/db_prod_password` con el contenido de `example`. Para referirnos a él en la configuración, se utiliza `ENC[file@/etc/secret-volume/db_prod_password]`.
-
-**Notas:**
-- El secreto debe existir en el mismo espacio de nombres que el pod en el que se va a integrar.
-- El script puede acceder a todas las subcarpetas, así como al contenido confidencial de `/var/run/secrets/kubernetes.io/serviceaccount/token`. Por este motivo, Datadog recomienda utilizar una carpeta exclusiva en vez de `/var/run/secrets`.
-
-##### Secretos de Docker Swarm
-Los [secretos de Docker Swarm][4] se integran en la carpeta `/run/secrets`. Por ejemplo, el secreto de Docker `db_prod_passsword` se ubica en `/run/secrets/db_prod_password`, en el contenedor del Agent. En la configuración, podríamos referirnos a él con `ENC[file@/run/secrets/db_prod_password]`.
-
-#### Ejemplo de lectura de un secreto de Kubernetes
-La siguiente configuración permite al Agent leer secretos de Kubernetes directamente en su propio espacio de nombres, así como en *otros*. Ten en cuenta que, para hacer esto, la `ServiceAccount` del Agent debe tener los `Roles` y `RoleBindings` apropiados.
-
-Si `Secret: database-secret` existe en `Namespace: database` y contiene los datos `password: example`, nos referiremos a él en la configuración con `ENC[k8s_secret@database/database-secret/password]`. Esta configuración permite al Agent recuperar el secreto directamente desde el Kubernetes, lo que resulta particularmente útil cuando nos referimos a un secreto que está en un espacio de nombres diferente al del Agent.
-
-Para realizar esta acción, tendrás que conceder permisos adicionales manualmente a la cuenta de servicio del Agent. Puedes tomar la siguiente política de configuración del control de acceso basado en roles (RBAC) como ejemplo:
-```yaml
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: datadog-secret-reader
-  namespace: database
-rules:
-  - apiGroups: [""]
-    resources: ["secrets"]
-    resourceNames: ["database-secret"]
-    verbs: ["get", "watch", "list"]
----
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: datadog-read-secrets
-  namespace: database
-subjects:
-  - kind: ServiceAccount
-    name: datadog-agent
-    apiGroup: ""
-    namespace: default
-roleRef:
-  kind: Role
-  name: datadog-secret-reader
-  apiGroup: ""
-```
-Este `Role` permite acceder al `Secret: database-secret` en el `Namespace: database`. El `RoleBinding` asocia esta autorización a la `ServiceAccount: datadog-agent` en el `Namespace: default`. Es necesario que lo añadas manualmente a tu clúster en lo que respecta a los recursos desplegados.
-
-Además de estos permisos, tienes que activar el script para que pueda leer secretos de varios proveedores `"/readsecret_multiple_providers.sh"` al usar el proveedor de secretos de Kubernetes.
-
-### Scripts (legacy) para leer secretos de archivos
-Datadog Agent v7.32 incluye el script `readsecret_multiple_providers.sh`. Datadog recomienda que utilices este script en lugar de los scripts `/readsecret.py` y `/readsecret.sh` del Agent v6.12. No obstante, ten en cuenta que `/readsecret.py` y `/readsecret.sh` siguen estando disponibles en el Agent para leer archivos.
-
-#### Java
-Estos scripts necesitan una carpeta como argumento. Los identificadores secretos se interpretan como nombres de archivo relativos a esta carpeta. Para evitar la filtración de información sensible, estos scripts rechazan el acceso a cualquier archivo fuera de la carpeta raíz especificada (incluidos los objetivos de enlaces simbólicos).
-
-Estos scripts no son compatibles con las [operaciones SCC restringidas de OpenShift][5] y requieren que el Agent se ejecute como usuario `root`.
-
-##### Docker
-[Los secretos de Docker Swarm][4] se integran en la carpeta `/run/secrets`. Para leerlos, es necesario que pases las siguientes variables de entorno a tu contenedor del Agent:
-
-```
-DD_SECRET_BACKEND_COMMAND=/readsecret.py
-DD_SECRET_BACKEND_ARGUMENTS=/run/secrets
+secret_refresh_scatter: false
 ```
 
-Con esta configuración, el Datadog Agent lee los archivos de secretos ubicados en el directorio `/run/secrets`. Por ejemplo, la configuración `ENC[password]` serviría para que el Agent busque el archivo `/run/secrets/password`.
-
-##### Sensitive Data Scanner
-Con Kubernetes, puedes [exponer los secretos como archivos][3] dentro de un pod. Por ejemplo, si tus secretos se integran en `/etc/secret-volume`, utiliza las siguientes variables de entorno:
-
+Para actualizar manualmente, utiliza:
 ```
-DD_SECRET_BACKEND_COMMAND=/readsecret.py
-DD_SECRET_BACKEND_ARGUMENTS=/etc/secret-volume
+datadog-agent secret refresh
 ```
-
-Con esta configuración, el Datadog Agent lee los archivos de secretos ubicados en el directorio `/etc/secret-volume`. Por ejemplo, la configuración `ENC[password]` serviría para que el Agent busque el archivo `/etc/secret-volume/password`.
 
 ## Solucionar problemas
 
@@ -367,8 +365,8 @@ En Linux, el comando dicta la modalidad de archivo, el propietario y el grupo de
 
 Ejemplo en Linux:
 
-```shell
-$> datadog-agent secret
+```sh
+datadog-agent secret
 === Checking executable rights ===
 Executable path: /path/to/you/executable
 Check Rights: OK, the executable has the correct rights
@@ -421,7 +419,6 @@ Secrets handle decrypted:
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ### Consultar las configuraciones después de introducir los secretos
 
 Para consultar cómo se resuelven las configuraciones del check, puedes utilizar el comando `configcheck`:
@@ -456,7 +453,7 @@ Para probar un comando o depurarlo fuera del Agent, puedes imitar la forma en qu
 
 {{< tabs >}}
 {{% tab "Linux" %}}
-#### Linux
+**Linux**
 
 ```bash
 sudo -u dd-agent bash -c "echo '{\"version\": \"1.0\", \"secrets\": [\"secret1\", \"secret2\"]}' | /path/to/the/secret_backend_command"
@@ -464,14 +461,12 @@ sudo -u dd-agent bash -c "echo '{\"version\": \"1.0\", \"secrets\": [\"secret1\"
 
 El usuario `dd-agent` se crea durante la instalación del Datadog Agent.
 
-
 {{% /tab %}}
 {{% tab "Windows" %}}
-#### Windows
 
-##### Errores relacionados con derechos
+##### Errores relacionados con los derechos
 
-Si te encuentras con uno de los siguientes errores, entonces algo falta en tu configuración. Consulta las [instrucciones de Windows](#Windows).
+Los siguientes errores indican que falta algo en tu configuración.
 
 1. Si más grupos o usuarios de los necesarios tienen derechos sobre el ejecutable, se generará un log de error similar al siguiente:
    ```
@@ -487,6 +482,35 @@ Si te encuentras con uno de los siguientes errores, entonces algo falta en tu co
    ```
    error while running 'C:\decrypt.py': fork/exec C:\decrypt.py: %1 is not a valid Win32 application.
    ```
+
+Datadog tiene un [script de Powershell][8] para ayudarte a configurar el permiso correcto en tu ejecutable. Ejemplo de cómo usarlo:
+
+```powershell
+.\Set-SecretPermissions.ps1 -SecretBinaryPath C:\secrets\decrypt_secrets.exe
+ddagentuser SID: S-1-5-21-3139760116-144564943-2741514060-1076
+=== Checking executable permissions ===
+Executable path: C:\secrets\decrypt_secrets.exe
+Executable permissions: OK, the executable has the correct permissions
+
+Permissions Detail:
+
+stdout:
+Path   : Microsoft.PowerShell.Core\FileSystem::C:\secrets\decrypt_secrets.exe
+Owner  : BUILTIN\Administrators
+Group  : BUILTIN\Administrators
+Access : NT AUTHORITY\SYSTEM Allow  FullControl
+         BUILTIN\Administrators Allow  FullControl
+         DESKTOP-V03BB2P\ddagentuser Allow  ReadAndExecute, Synchronize
+Audit  :
+Sddl   : O:BAG:BAD:PAI(A;;FA;;;SY)(A;;FA;;;BA)(A;;0x1200a9;;;S-1-5-21-3139760116-144564943-2741514
+         060-1076)
+stderr:
+
+
+=== Secrets stats ===
+Number of secrets resolved: 0
+Secrets handle resolved:
+```
 
 ##### Probar el ejecutable
 
@@ -526,10 +550,11 @@ stderr: None
 exit code:
 0
 ```
+[7]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/secrets_tester.ps1
+[8]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/Set-SecretPermissions.ps1
 
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ### El Agent no se inicia
 
@@ -547,7 +572,7 @@ Al leer secretos directamente de Kubernetes, puedes comprobar tus permisos con e
 kubectl auth can-i get secret/<SECRET_NAME> -n <SECRET_NAMESPACE> --as system:serviceaccount:<AGENT_NAMESPACE>:<AGENT_SERVICE_ACCOUNT>
 ```
 
-Toma el [ejemplo de los secretos de Kubernetes](#read-from-kubernetes-secret-example) anterior, en el que el secreto `Secret:database-secret` está en el `Namespace: database` y la cuenta de servicio `ServiceAccount:datadog-agent` en el `Namespace: default`.
+Considera el ejemplo anterior [Kubernetes Secrets](#example-reading-a-kubernetes-secret-across-namespaces), donde el secreto `Secret:database-secret` existe en `Namespace: database` y la cuenta de servicio `ServiceAccount:datadog-agent` existe en `Namespace: default`.
 
 En este caso, utiliza el siguiente comando:
 
@@ -557,14 +582,13 @@ kubectl auth can-i get secret/database-secret -n database --as system:serviceacc
 
 Este comando indica si el Agent tiene los permisos correctos para ver este secreto.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/agent/kubernetes/integrations/
-[2]: https://github.com/DataDog/datadog-agent/blob/main/Dockerfiles/agent/secrets-helper/readsecret_multiple_providers.sh
-[3]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#create-a-pod-that-has-access-to-the-secret-data-through-a-volume
-[4]: https://docs.docker.com/engine/swarm/secrets/
-[5]: https://github.com/DataDog/datadog-agent/blob/6.4.x/Dockerfiles/agent/OPENSHIFT.md#restricted-scc-operations
+[2]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#create-a-pod-that-has-access-to-the-secret-data-through-a-volume
+[3]: https://docs.docker.com/engine/swarm/secrets/
+[4]: https://github.com/DataDog/datadog-secret-backend
+[5]: https://github.com/DataDog/datadog-secret-backend/blob/main/docs/aws/secrets.md
 [6]: /es/agent/configuration/agent-commands/#restart-the-agent
-[7]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1

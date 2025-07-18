@@ -68,7 +68,7 @@ Datadog Azure インテグレーションを使用して、Azure API Management 
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_api_management" >}}
+{{ get-metrics-from-git "azure-apimanagement" }}
 
 
 ### イベント

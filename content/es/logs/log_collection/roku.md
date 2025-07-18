@@ -10,10 +10,6 @@ further_reading:
 title: Recopilación de logs de Roku
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La recopilación de logs de Roku no está disponible en el sitio de Datadog US1-FED.</div>
-{{< /site-region >}}
-
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 <div class="alert alert-info">La recopilación de logs de Roku está en fase beta.</div>
 {{< /site-region >}}

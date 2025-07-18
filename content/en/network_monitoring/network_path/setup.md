@@ -11,15 +11,9 @@ further_reading:
   text: "Learn more about the Path View in Network Path"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Path is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-<div class="alert alert-info">Network Path is in Limited Availability. Reach out to your Datadog representative to sign up, and then use the following instructions to configure the Datadog Agent to gather network path data.</div>
-
 ## Overview
 
-Setting up Network Path involves configuring your Linux environment to monitor and trace the network routes between your services and endpoints. This helps identify bottlenecks, latency issues, and potential points of failure in your network infrastructure. Network Path allows you to manually configure individual network paths or automatically discover them, depending on your needs.
+Setting up Network Path involves configuring your environment to monitor and trace the network routes between your services and endpoints. This helps identify bottlenecks, latency issues, and potential points of failure in your network infrastructure. Network Path allows you to manually configure individual network paths or automatically discover them, depending on your needs.
 
 **Note**: If your network configuration restricts outbound traffic, follow the setup instructions on the [Agent proxy configuration][2] documentation.
 
@@ -135,14 +129,14 @@ Agent `v7.61+` is required.
 
 **Note**: Windows only supports TCP traceroutes.
 
-1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
+1. Enable the `system-probe` traceroute module in `%ProgramData%\Datadog\system-probe.yaml` by adding the following:
 
    ```
    traceroute:
      enabled: true
    ```
 
-2. Enable `network_path` to monitor new destinations from this Agent by creating or editing the `/etc/datadog-agent/conf.d/network_path.d/conf.yaml` file:
+2. Enable `network_path` to monitor new destinations from this Agent by creating or editing the `%ProgramData%\Datadog\conf.d\network_path.d\conf.yaml` file:
 
    ```yaml
    init_config:
@@ -182,6 +176,18 @@ instances:
   - hostname: api.datadoghq.eu # endpoint hostname or IP
     protocol: TCP
     port: 443 # optional port number, default is 80
+```
+
+**Note**: In Windows Client OS environments, raw packets are not supported. To work around this, ensure the protocol is TCP, and use `syn_socket` tcp_method (Agent `v7.67+` is required). For example:
+
+```yaml
+init_config:
+  min_collection_interval: 60 # in seconds, default 60 seconds
+instances:
+  - hostname: api.datadoghq.eu # endpoint hostname or IP
+    protocol: TCP
+    port: 443 # optional port number, default is 80
+    tcp_method: syn_socket
 ```
 
 [4]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
@@ -288,6 +294,8 @@ spec:
 {{< /tabs >}}
 
 ### Network traffic paths (experimental)
+
+<div class="alert alert-info">Network traffic paths is in Limited Availability. Reach out to your Datadog representative to sign up, and then use the following instructions to configure the Datadog Agent to gather network traffic paths data.</div>
 
 **Prerequisites**: [CNM][1] must be enabled.
 

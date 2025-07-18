@@ -7,6 +7,9 @@ further_reading:
 - link: "/observability_pipelines/guide/strategies_for_reducing_log_volume/"
   tag: "documentation"
   text: "Strategies for Reducing Log Volume"
+private: true
+cascade:
+    private: true
 ---
 
 ## Overview
@@ -34,6 +37,7 @@ Select a log source to get started:
 - [Logstash][6]
 - [Splunk HTTP Event Collector (HEC)][7]
 - [Splunk Heavy or Universal Forwarders (TCP)][8]
+- [Socket (TCP or UDP)][14]
 - [Sumo Logic Hosted Collector][9]
 - [rsyslog or syslog-ng][10]
 
@@ -54,3 +58,4 @@ Select a log source to get started:
 [11]: /observability_pipelines/set_up_pipelines/log_volume_control/amazon_s3
 [12]: /observability_pipelines/set_up_pipelines/log_volume_control/amazon_data_firehose
 [13]: /observability_pipelines/set_up_pipelines/log_volume_control/kafka
+[14]: /observability_pipelines/set_up_pipelines/log_volume_control/socket

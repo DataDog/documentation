@@ -36,7 +36,7 @@ Datadog Azure 통합을 사용해 Azure Cognitive Search 메트릭을 수집할 
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_search" >}}
+{{ get-metrics-from-git "azure-ai-search" }}
 
 
 ### 이벤트

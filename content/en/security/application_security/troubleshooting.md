@@ -558,11 +558,17 @@ Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRAC
 
 ## Disabling AAP
 
-To disable AAP, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
+To disable AAP, use one of the following methods.
 
-If no `DD_APPSEC_ENABLED=true` environment variable is set for your service, do one of the following:
-* If it's a PHP service: explicitly set the environment variable to `DD_APPSEC_ENABLED=false`, and restart your service.
-* If AAP was activated using [Remote Configuration][16], do the following: 
+### DD_APPSEC_ENABLED
+
+If the `DD_APPSEC_ENABLED=true` environment variable is set for your service, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
+
+If your service is a PHP service, explicitly set the environment variable to `DD_APPSEC_ENABLED=false`, and if applicable, comment out the flag `datadog.appsec.enabled = On` from your `php.ini` configuration file. Then, restart your service. 
+
+### Remote Configuration
+
+If AAP was activated using [Remote Configuration][16], do the following: 
   1. Go to [Services][15].
   2. Select **Threat Management in Monitoring Mode**.
   3. In the **Threat Management** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
@@ -571,7 +577,9 @@ If no `DD_APPSEC_ENABLED=true` environment variable is set for your service, do 
 
 <div class="alert alert-info">If AAP was activated using <a href="https://app.datadoghq.com/organization-settings/remote-config">Remote Configuration</a>, you can use a <strong>Deactivate</strong> button. If AAP was activated using local configuration, the <strong>Deactivate</strong> button is not an option.</div>
 
-* To disable AAP on your services in bulk, do the following: 
+### Bulk disable
+
+To disable AAP on your services in bulk, do the following: 
   1. Go to [Services][15].
   2. In the **Threat Management** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
   3. Select the check boxes for the services where you want to disable threat detection.

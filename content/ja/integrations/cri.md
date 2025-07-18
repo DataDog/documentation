@@ -56,7 +56,7 @@ tile:
   title: CRI
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+<!-- SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -126,7 +126,7 @@ spec:
 {{< get-metrics-from-git "cri" >}}
 
 
-### サービスチェック
+### サービス チェック
 
 CRI には、サービスのチェック機能は含まれません。
 

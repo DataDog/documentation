@@ -5,7 +5,9 @@ further_reading:
 - link: "/integrations/mysql/"
   tag: "Documentation"
   text: "Basic MySQL Integration"
-
+- link: "/database_monitoring/guide/rds_autodiscovery"
+  tag: "Documenation"
+  text: "Autodiscovery for RDS"
 ---
 
 Database Monitoring provides deep visibility into your MySQL databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.
