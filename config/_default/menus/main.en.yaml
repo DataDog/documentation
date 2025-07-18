@@ -4654,11 +4654,6 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_agent_monitoring
       weight: 703
-    - name: LLM Observability Insights
-      url: llm_observability/monitoring/llm_observability_insights
-      parent: llm_obs_monitoring
-      identifier: llm_obs_llm_observability_insights
-      weight: 704
     - name: Evaluations
       url: llm_observability/evaluations/
       parent: llm_obs
