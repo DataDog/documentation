@@ -56,10 +56,10 @@ If you're new to IDP, start with the [Getting Started guide][5], which walks thr
 
 Use [Datadog Teams][6] to enable team-based features in IDP:
 
-- Track your teams in Datadog and automatically sync with your external sources of truth, 
-- Assign teams as owners of services and other entities, 
-- Create hierarchies to have parent-child relationships between your teams, and
-- Filter views by teams throughout IDP (for example, in Software Catalog, Scorecards, and Engineering Reports).
+- Track your teams in Datadog and automatically sync with your external sources of truth 
+- Assign teams as owners of services and other entities 
+- Create hierarchies to have parent-child relationships between your teams
+- Filter views by teams throughout IDP (for example, in Software Catalog, Scorecards, and Engineering Reports)
 
 If your organization manages team structure in GitHub, join the preview for GitHub Integration for Teams to automatically sync GitHub teams to Datadog.
 
