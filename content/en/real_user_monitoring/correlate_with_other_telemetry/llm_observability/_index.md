@@ -13,6 +13,7 @@ Correlate RUM and LLM Observability sessions to gain more visibility on how your
 
 The link between RUM and LLM Observability is created by forwarding the RUM Session ID to the LLM Observability SDK.
 
+# Setup
 ## Prerequisites
 
 Before you begin, ensure you have:
@@ -20,7 +21,6 @@ Before you begin, ensure you have:
 - [LLM Observability SDK][2] installed in your backend service
 - Datadog account with [RUM][3] and [LLM Observability][4] enabled
 - AI Agent endpoint that your web application can call
-# Setup
 
 ## Step 1: Configure your RUM Browser SDK
 
