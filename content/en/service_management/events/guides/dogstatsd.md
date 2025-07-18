@@ -115,7 +115,7 @@ public class DogStatsdClient {
           .withTitle("An error occurred")
           .withText("Error message")
           .withAlertType(Event.AlertType.ERROR)
-          .withTags("env:prod", "tagkey:value")  // Tags added here
+          .withTags("env:prod", "tagkey:value")
           .build();
 
         Statsd.recordEvent(event);
