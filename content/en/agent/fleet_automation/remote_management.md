@@ -105,7 +105,7 @@ To identify affected hosts, you can use this [query in Fleet Automation][13]:
  `support_remote_upgrade:datadog-installer -os:Windows`
  
 ### Action required:
-If your setup is impacted, you'll need to [manually upgrade (re-run install script)][14] to Agent version 7.66 or higher. This ensures full compatibility with Remote Agent Management features.
+If your setup is impacted, [manually upgrade (re-run install script)][14] to Agent version 7.66 or higher. This ensures full compatibility with Remote Agent Management features.
 
 ### Why this is happening:
 To support general availability of remote Agent upgrades, the installer component was bundled with the Agent starting in version 7.66. This change ensures both components stay up to date together, preventing version mismatches and related compatibility issues.
@@ -125,7 +125,7 @@ To uninstall the agent after installing it with Remote Agent Management, in a sh
 ### Uninstalling on Windows
 There are no steps needed to uninstall Remote Agent Management on Windows, it is packaged with the Agent itself.
 To disable Remote Agent Management, configure `remote_updates: false` in `datadog.yaml`.
-To uninstall the Agent, refer to [Uninstall the Agent][15].
+To uninstall the Agent, see [Uninstall the Agent][15].
 
 ## Further reading
 
