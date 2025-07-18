@@ -9,7 +9,7 @@ algolia:
 ---
 
 # Overview
-Correlate RUM and LLM Observability sessions to gain more visibility on how your web application interacts with AI Agents.
+Correlate RUM and LLM Observability sessions to gain more visibility on how your web application interacts with AI Agents. This correlation helps you understand the complete user journey by connecting frontend user interactions with backend AI processing.
 
 The link between RUM and LLM Observability is created by forwarding the RUM Session ID to the LLM Observability SDK.
 
