@@ -9,8 +9,6 @@ further_reading:
     text: Enable Runtime Metrics
 ---
 
-<div class="alert alert-info"> Single Step APM Instrumentation on Windows is in Preview.</div>
-
 ## Overview
 
 With Single Step Instrumentation (SSI), you can automatically enable APM for your .NET Framework and .NET Core applications running on Windows IIS, using a single MSI command during the Datadog Agent installation. No separate SDK installation or code changes are required.

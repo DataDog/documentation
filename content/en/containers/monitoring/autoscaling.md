@@ -13,9 +13,6 @@ further_reading:
 - link: "/agent/remote_config/"
   tag: "Documentation"
   text: "Remote Configuration"
-- link: "https://www.datadoghq.com/blog/datadog-kubernetes-autoscaling/"
-  tag: "Blog"
-  text: "Rightsize workloads and reduce costs with Datadog Kubernetes Autoscaling"
 ---
 
 {{< site-region region="gov" >}}
