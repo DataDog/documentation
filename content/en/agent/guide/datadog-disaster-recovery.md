@@ -309,7 +309,7 @@ Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datado
 
 
 --------------------------------------
-
+<!-- 
 ## Datadog Disaster Recovery (DDR) Setup Guide
 
 This guide outlines how to set up, configure, and test a Datadog Disaster Recovery (DDR) organization.
@@ -497,4 +497,4 @@ DD_MULTI_REGION_FAILOVER_API_KEY=<DDR_API_KEY>
 ---
 
 Would you like this exported as a downloadable `.md` file? Or turned into a GitHub-ready README?
-```
+``` -->
