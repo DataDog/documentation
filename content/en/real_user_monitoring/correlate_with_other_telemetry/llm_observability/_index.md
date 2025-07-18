@@ -34,7 +34,6 @@ datadogRum.init({
 Update your web application to include the RUM Session ID in every call to your AI Agent. For more information about RUM session management, see the [RUM Browser Documentation][3].
 
 ```javascript
-/**
  * Example call to an AI Agent.
  *
  * We send the `session_id` in the body of the request. If the call to the AI agent
