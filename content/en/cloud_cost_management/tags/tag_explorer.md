@@ -1,5 +1,7 @@
 ---
 title: Tag Explorer
+aliases:
+  - /cloud_cost_management/tag_explorer
 description: Search and manage all cost-related tags, including those from your bills, with insights into their sources.
 further_reading:
 - link: "/cloud_cost_management/"
@@ -14,7 +16,7 @@ further_reading:
 - link: "/cloud_cost_management/setup/saas_costs"
   tag: "Documentation"
   text: "Learn about SaaS Cost Integrations"
-- link: "/cloud_cost_management/tag_pipelines"
+- link: "/cloud_cost_management/tags/tag_pipelines"
   tag: "Documentation"
   text: "Learn about Tag Pipelines"
 ---
@@ -152,7 +154,7 @@ For Twilio tags, select **Twilio** from the dropdown menu on the top right corne
 
 [1]: /cloud_cost_management/
 [2]: https://app.datadoghq.com/cost/tags
-[3]: /cloud_cost_management/tag_pipelines
+[3]: /cloud_cost_management/tags/tag_pipelines
 [4]: /cloud_cost_management/setup/custom
 [5]: /cloud_cost_management/datadog_costs
 [6]: /cloud_cost_management/setup/saas_costs

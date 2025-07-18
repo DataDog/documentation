@@ -3638,46 +3638,51 @@ menu:
       parent: cloud_cost_planning
       identifier: cloud_cost_planning_commitment_programs
       weight: 502
-    - name: Tag Pipelines
-      url: cloud_cost_management/tag_pipelines
+    - name: Tags
+      url: cloud_cost_management/tags
       parent: cloud_cost
-      identifier: cloud_cost_tag_pipelines
+      identifier: cloud_cost_tags
       weight: 6
     - name: Tag Explorer
-      url: cloud_cost_management/tag_explorer
-      parent: cloud_cost
+      url: cloud_cost_management/tags/tag_explorer
+      parent: cloud_cost_tags
       identifier: cloud_cost_tag_explorer
-      weight: 7
+      weight: 601
+    - name: Tag Pipelines
+      url: cloud_cost_management/tags/tag_pipelines
+      parent: cloud_cost_tags
+      identifier: cloud_cost_tag_pipelines
+      weight: 602
     - name: Multisource Querying
       url: cloud_cost_management/multisource_querying
       parent: cloud_cost
       identifier: cloud_cost_multisource_querying
-      weight: 8
+      weight: 7
     - name: Reports
       url: /cloud_cost_management/reports
       parent: cloud_cost
       identifier: cloud_cost_reports
-      weight: 9
+      weight: 8
     - name: Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost
       identifier: cloud_cost_recommendations
-      weight: 10
+      weight: 9
     - name: Custom Recommendations
       url: cloud_cost_management/recommendations/custom_recommendations
       parent: cloud_cost_recommendations
       identifier: cloud_cost_custom_recommendations
-      weight: 1001
+      weight: 901
     - name: Monitors
       url: /cloud_cost_management/monitors
       parent: cloud_cost
       identifier: cloud_cost_monitors
-      weight: 11
+      weight: 10
     - name: Anomalies
       url: /cloud_cost_management/anomalies
       parent: cloud_cost
       identifier: cloud_cost_anomalies
-      weight: 12
+      weight: 11
     - name: APM
       url: tracing/
       pre: apm
