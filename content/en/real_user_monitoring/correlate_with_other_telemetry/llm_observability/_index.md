@@ -81,7 +81,9 @@ class MessagesHandler:
 ```
 
 Use the LLMObs SDK to instrument your agent and tools and tell the LLMObs SDK what the `session_id` should be.
+### Step 4: Instrument your AI agent
 
+Use the LLM Observability SDK to instrument your agent and associate it with the RUM session. For detailed reference, see the [LLM Observability SDK documentation][4].
 ```python
 async def agent_loop(
   session_id,
