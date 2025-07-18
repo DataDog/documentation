@@ -13785,14 +13785,21 @@ components:
           type: string
       type: object
     EntityV3APIVersion:
-      description: The schema version of entity type. The field is known as schema-version
-        in the previous version.
+      description: The version of the schema data that was used to populate this entity's
+        data. This could be via the API, Terraform, or YAML file in a repository.
+        The field is known as schema-version in the previous version.
       enum:
       - v3
+      - v2.2
+      - v2.1
+      - v2
       example: v3
       type: string
       x-enum-varnames:
       - V3
+      - V2_2
+      - V2_1
+      - V2
     EntityV3DatadogCodeLocationItem:
       additionalProperties: false
       description: Code location item.
@@ -27133,6 +27140,7 @@ components:
       required:
       - source
       - match_rules
+      - support_rules
       type: object
     ObservabilityPipelineParseGrokProcessorRuleMatchRule:
       description: 'Defines a Grok parsing rule, which extracts structured fields
