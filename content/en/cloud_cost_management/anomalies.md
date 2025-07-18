@@ -38,7 +38,7 @@ This is an example of the list of anomalies detected in your infrastructure:
 
 <!-- TODO: add img with watchdog explains popover -->
 
-When hovering over the graph, you can see two graphs: one with and one without the tags identified by the Watchdog Explains engine, it shows how removing XXX:XXX flattens the spike, confirming the impact on the cost.
+When hovering over the graph, you can see two graphs: one with and one without the tags identified by the Watchdog Explains engine. This shows how removing XXX:XXX flattens the spike, confirming the impact on the cost.
 
 ## Understand what's driving anomalies
 
