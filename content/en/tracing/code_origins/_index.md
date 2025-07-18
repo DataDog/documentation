@@ -49,7 +49,7 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 |---|---|---|
 | Java | 1.47.0+ | Spring Boot/Data, gRPC servers, Micronaut 4, Kafka consumers|
 | Python | 2.15.0+ | Django, Flask, Starlette and derivatives|
-| Node.js | 4.49.0+ | Fastify|
+| Node.js | 4.49.0+ | Fastify, Express (5.54.0+)|
 | .NET | 3.15.0+ | ASP.NET, ASP.NET Core| 
 
 ### Enable Code Origins
