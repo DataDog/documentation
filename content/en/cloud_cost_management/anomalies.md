@@ -71,7 +71,7 @@ To further investigate anomalies by additional dimensions, view the anomaly in C
 
 <!-- TODO: update img with new design, highlight the "next steps" section specifically -->
 
-You can also send the anomaly, Explorer link, or Notebook to the service owners or teams identified by Watchdog Explains. This enables teams to resolve anomalies with context for why the anomaly occurred, and if it's expected.
+You can also send the anomaly, Explorer link, or Notebook to the service owners or teams identified by Watchdog Explains. This enables teams to resolve anomalies with context for why the anomaly occurred and whether it's expected.
 
 You can also create a cost anomaly monitor to get alerted of similar cost anomalies in the future.
 
