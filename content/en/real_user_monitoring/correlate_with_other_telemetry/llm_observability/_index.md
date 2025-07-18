@@ -36,7 +36,7 @@ datadogRum.init({
 });
 ```
 
-### Step 2: Modify your frontend AI calls
+## Step 2: Modify your frontend AI calls
 
 Update your web application to include the RUM Session ID in every call to your AI Agent. For more information about RUM session management, see the [RUM Browser Documentation][3].
 
@@ -56,7 +56,7 @@ Update your web application to include the RUM Session ID in every call to your 
 });
 ```
 
-### Step 3: Update your backend handler
+## Step 3: Update your backend handler
 
 Modify your server-side code to extract the session ID and pass it to the LLM Observability SDK. For detailed LLM Observability setup, see the [LLM Observability Setup Guide][4].
 
@@ -90,7 +90,7 @@ class MessagesHandler:
 
 Use the LLMObs SDK to instrument your agent and tools and tell the LLMObs SDK what the `session_id` should be.
 
-### Step 4: Instrument your AI agent
+## Step 4: Instrument your AI agent
 
 Use the LLM Observability SDK to instrument your agent and associate it with the RUM session. For detailed reference, see the [LLM Observability SDK documentation][4].
 ```python
@@ -111,7 +111,7 @@ Once configured, you can navigate between correlated data:
 - **From RUM to LLM**: In a RUM session, click the "LLM Traces" button in the side panel header to view associated AI interactions.
 - **From LLM to RUM**: In an LLM trace, click the "RUM Session" link to view the corresponding user session replay.
 
-## Further reading
+# Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
