@@ -97,6 +97,37 @@ For instructions on using mirrored or air-gapped repositories, see:
 
 If you need to downgrade an Agent, follow the steps in [Upgrade your Agents](#upgrade-your-agents) and specify the version you wish to downgrade to. Datadog recommends using the latest version of the Agent and upgrading your Agents regularly to make sure you have access to the latest features.
 
+## Incompatible Datadog Installer with Agent (Pre-7.66)
+
+If you were a Preview customer and set up remote agent management before Agent version 7.66, your Datadog Installer may be incompatible with the Agent. The Datadog installer is a tool used to install Datadog packages within your environment, and this version mismatch could prevent proper updates and functionality.
+
+### Which Hosts are Impacted:
+To identify affected hosts, you can use this [query in Fleet Automation][13]:
+ `support_remote_upgrade:datadog-installer -os:Windows`
+ 
+### Action Required:
+If your setup is impacted, you’ll need to [manually upgrade (re-run install script)][14] to Agent version 7.66 or higher. This ensures full compatibility with Remote Agent Management features.
+
+### Why This Is Happening:
+In making remote Agent Upgrades generally available, we’ve bundled the installer component with the Agent starting from version 7.66. This ensures that both components are kept up-to-date together, preventing versioning mismatches that could lead to downstream compatibility issues.
+
+### What happens if I don’t upgrade to Agent 7.66+?
+There will be no impact on your existing agent. However, you will not be able to remotely upgrade that Agent until it is upgraded to version 7.66 or higher.
+
+### Will I need to manually upgrade the Agent again after this?
+No, this is the last breaking change. Future upgrades will be handled automatically without requiring manual intervention.
+
+## Uninstall Remote Agent Management 
+### Uninstalling on Linux
+To uninstall Remote Agent Management from your Linux environment, follow the steps below. Ensure that you have the necessary permissions to perform the uninstall process.
+
+To uninstall the agent after installing it with Remote Agent Management, in a shell, run `sudo datadog-installer purge`.
+
+### Uninstalling on Windows
+There are no steps needed to uninstall Remote Agent Management on Windows, it is packaged with the Agent itself.
+To disable Remote Agent Management, configure `remote_updates: false` in `datadog.yaml`.
+To uninstall the Agent, refer to [Uninstall the Agent][15].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -113,3 +144,6 @@ If you need to downgrade an Agent, follow the steps in [Upgrade your Agents](#up
 [10]: https://app.datadoghq.com/fleet/deployments
 [11]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/group-managed-service-accounts-overview
 [12]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/?tab=installationinactivedirectorydomains
+[13]: https://app.datadoghq.com/fleet?query=support_remote_upgrade%3Adatadog-installer
+[14]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
+[15]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/#uninstall-the-agent
