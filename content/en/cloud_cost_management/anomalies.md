@@ -50,7 +50,7 @@ CCM automatically uses Watchdog Explains[2], an investigation assistant, to help
 - Kubernetes or ECS clusters
 - regions
 
-Where the anomaly happened, reducing manual investigation steps. Before you even click on the anomaly, you can hover over the anomaly graph and see the costs with and without tags identified as influential by Watchdog Explains, to confirm that the identified tags are indeed driving the anomaly.
+where the anomaly happened, reducing manual investigation steps. Before you even click on the anomaly, you can hover over the anomaly graph and see the costs with and without tags identified as influential by Watchdog Explains, to confirm that the identified tags are indeed driving the anomaly.
 
 <!-- TODO: add img with Watchdog Explains hover state -->
 
