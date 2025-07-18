@@ -19,12 +19,12 @@ For more information, see the OpenTelemetry project documentation for the [MySQL
 To collect MySQL metrics with OpenTelemetry for use with Datadog:
 
 1. Configure the [MySQL receiver][1] in your OpenTelemetry Collector configuration.
-2. Optionally configure the [host metrics receiver][6] if your OpenTelemetry Collector is running on the same server as your MySQL database.
-3. Optionally configure the [file log receiver][7] if your OpenTelemetry Collector is running on the same server as your MySQL database.
+2. Optionally, configure the [host metrics receiver][6] if your OpenTelemetry Collector is running on the same server as your MySQL database.
+3. Optionally, configure the [file log receiver][7] if your OpenTelemetry Collector is running on the same server as your MySQL database.
 4. Configure service pipelines.
 5. Ensure the OpenTelemetry Collector is [configured to export to Datadog][5].
 
-### MySQL Receiver
+### MySQL receiver
 
 ```yaml:
 receivers:
@@ -103,7 +103,7 @@ processors:
     log_statements:
       - context: resource
         statements:
-          - set(attributes["datadog.host.name"], <"HOST>)
+          - set(attributes["datadog.host.name"], "<HOST>")
           - set(attributes["datadog.log.source"], "mysql")
 
   batch: {}
@@ -141,4 +141,4 @@ See [OpenTelemetry Metrics Mapping][2] for more information.
 [4]: https://app.datadoghq.com/dash/integration/12/mysql---overview
 [5]: /opentelemetry/setup/collector_exporter/
 [6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
-[7]: http://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/filelogreceiver
+[7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/filelogreceiver
