@@ -105,6 +105,8 @@ Refer to the below diagram to understand what data is retained with extended ret
 
 {{< img src="real_user_monitoring/session_replay/replay-extended-retention.png" alt="Diagram of what data is retained with extended retention" style="width:100%;" >}}
 
+**Note**: To preserve any [15-month session replays][11] after enabling _Extended Retention_ on individual session replays, add them to [Playlists][10]. This ensures that the session replays can be found after the associated RUM sessions have expired.
+
 ## Playback history
 
 You can see who has watched a given session replay by clicking the **watched** count displayed on the player page. This feature allows you to check whether someone you'd like to share the recording with has already watched it.
@@ -129,6 +131,8 @@ Learn more about the [Session Replay for Mobile][5].
 [4]: /real_user_monitoring/browser/
 [5]: /real_user_monitoring/session_replay/mobile/
 [6]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
-[7]: https://docs.datadoghq.com/account_management/audit_trail/
-[8]: https://docs.datadoghq.com/notebooks/
+[7]: /account_management/audit_trail/
+[8]: /notebooks/
 [9]: https://app.datadoghq.com/rum/replay/playlists/my-watch-history
+[10]: /real_user_monitoring/session_replay/playlists
+[11]: /real_user_monitoring/session_replay/browser/#retention
