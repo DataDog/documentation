@@ -37,7 +37,7 @@ further_reading:
 
 The Datadog extension for VS Code and Cursor brings Datadog to your code editor to accelerate your development.
 
-{{< img src="/developers/ide_plugins/vscode/datadog-vscode-3.png" alt="The Datadog for VS Code extension" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/vscode/datadog-vscode-3.png" alt="Datadog extension for VS Code and Cursor" style="width:100%;" >}}
 
 The extension includes these features:
 
@@ -209,7 +209,7 @@ The **Fix in Chat** button appears in several contexts when the extension identi
 
 ## License
 
-Read the [End-User License Agreement][12] carefully before downloading or using the Datadog Visual Studio Code extension.
+Read the [End-User License Agreement][12] carefully before downloading or using this extension.
 
 ## Data and telemetry
 
