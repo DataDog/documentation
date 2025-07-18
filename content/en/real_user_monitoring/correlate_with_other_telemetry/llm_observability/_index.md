@@ -80,7 +80,7 @@ class MessagesHandler:
             handler.send_error(500, str(e))
 ```
 
-Use the LLMObs SDK to instrument your agent and tools and let the LLMObs SDK what the session_id should be.
+Use the LLMObs SDK to instrument your agent and tools and tell the LLMObs SDK what the `session_id` should be.
 
 ```python
 async def agent_loop(
