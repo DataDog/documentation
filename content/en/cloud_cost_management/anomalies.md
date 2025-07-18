@@ -58,7 +58,7 @@ To further investigate and share anomalies with the relevant owners, you can ope
 
 - **Impact summary and drivers**: A comprehensive overview summarizing the impact and identifying the key drivers responsible for the cost anomaly.
 - **Related driver graphs**: Visual representations showing graphs from the related drivers that contributed to the anomalous behavior.
-- **Usage vs. unit price analysis**: A dedicated section to help you understand whether the unexpected change is due to increased usage, unit price changes, or both. Usage driven anomalies should be shared with the responsible engineering teams identified by Watchdog Explains to help explain the cause for the change in usage. Unit price changes are often caused by changes in commitment programs or contracted discounts.
+- **Usage versus unit price analysis**: A dedicated section to help you understand whether the unexpected change is due to increased usage, unit price changes, or both. Usage-driven anomalies should be shared with the responsible engineering teams identified by Watchdog Explains to help explain the cause for the change in usage. Unit price changes are often caused by changes in commitment programs or contracted discounts.
 - **Resource investigation table**: A detailed table allowing you to investigate potential impactful resource IDs that may be contributing to the cost spike.
 
 <!-- TODO: add img with updated side panel -->
