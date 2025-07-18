@@ -127,8 +127,8 @@ The table below describes the impact of these permissions in both Cloud Cost Man
 | Resource Catalog (external)       | Permission Required to view cost data       | N/A                                               |
 | API Queries for Cost Data     | Permission Required                           | N/A                                               |
 
-### Data Access Controls Preview
-More granular tag-level restrictions are available as part of the [Data Access Controls Preview][6]. To request preview access,
+### Data Access Control Preview
+More granular tag-level restrictions are available as part of the [Data Access Control Preview][6]. To request preview access,
 please fill out [this form][7].
 
 ## Further reading
