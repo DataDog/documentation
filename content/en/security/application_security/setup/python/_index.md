@@ -1,17 +1,18 @@
 ---
-title: Enabling App and API Protection for Java
+title: Enabling App and API Protection for Python
 aliases:
-  - /security_platform/application_security/getting_started/java
-  - /security/application_security/getting_started/java
-  - /security/application_security/threats/setup/threat_detection/java
-  - /security/application_security/threats_detection/java
+  - /security_platform/application_security/getting_started/python
+  - /security/application_security/getting_started/python
+  - /security/application_security/threats/setup/threat_detection/python
+  - /security/application_security/threats_detection/python
+  - /security/application_security/setup/aws/fargate/python
 further_reading:
-- link: "/security/application_security/add-user-info/"
+- link: "/security/application_security/how-it-works/add-user-info/?tab=python"
   tag: "Documentation"
   text: "Adding user information to traces"
-- link: 'https://github.com/DataDog/dd-trace-java'
+- link: 'https://github.com/DataDog/dd-trace-py'
   tag: "Source Code"
-  text: 'Java Datadog library source code'
+  text: 'Python Datadog library source code'
 - link: "/security/default_rules/?category=cat-application-security"
   tag: "Documentation"
   text: "OOTB App and API Protection Rules"
@@ -21,7 +22,7 @@ further_reading:
 ---
 {{< partial name="app_and_api_protection/callout.html" >}}
 
-{{% app_and_api_protection_java_overview showSetup="false" %}}
+{{% app_and_api_protection_python_overview showSetup="false" %}}
 
 ## Environments
 
@@ -46,8 +47,5 @@ further_reading:
 
 ## Additional Resources
 
-- [Troubleshooting Guide][1]
-- [Compatibility Information][2]
-
-[1]: /security/application_security/setup/java/troubleshooting
-[2]: /security/application_security/setup/java/compatibility
+- [Troubleshooting Guide](/security/application_security/setup/python/troubleshooting)
+- [Compatibility Information](/security/application_security/setup/python/compatibility)
