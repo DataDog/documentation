@@ -59,14 +59,14 @@
 {{ range $menu }}
     <!-- check if on /partners/ top level section page, don't generate sub anchors if true -->
     {{ if and (.HasChildren) (ne $currentPage.CurrentSection.RelPermalink "/partners/" ) }}
-        <li class="{{ if or ($currentPage.IsMenuCurrent $partnersMenu .) ($currentPage.HasMenuCurrent $partnersMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
+        <li class="js-load {{ if or ($currentPage.IsMenuCurrent $partnersMenu .) ($currentPage.HasMenuCurrent $partnersMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
             {{$url_without_anchor = ((index (split .URL "#") 0) | relLangURL)}}
             <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}" data-path='{{ trim (print $branchPath $url_without_anchor) "/" }}'>
                 <span>{{ .Name }}</span>
             </a>
             <ul class="nav">
                 {{ range .Children }}
-                    <li class="row nav-item {{ if $currentPage.IsMenuCurrent $partnersMenu . }}active{{ end }}">
+                    <li class="js-load row nav-item {{ if $currentPage.IsMenuCurrent $partnersMenu . }}active{{ end }}">
                         {{$identifier := .Identifier}}
                         {{/*
                             lookup english equivalent of non-english menu item identifier attr.
@@ -86,7 +86,7 @@
             </ul>
         </li>
     {{ else }}
-        <li class="{{ if or ($currentPage.IsMenuCurrent $partnersMenu .) ($currentPage.HasMenuCurrent $partnersMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
+        <li class="js-load {{ if or ($currentPage.IsMenuCurrent $partnersMenu .) ($currentPage.HasMenuCurrent $partnersMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
             <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}">
                 <span>{{ .Name }}</span>
             </a>
