@@ -25971,6 +25971,7 @@ components:
       - $ref: '#/components/schemas/ObservabilityPipelineEnrichmentTableProcessor'
       - $ref: '#/components/schemas/ObservabilityPipelineReduceProcessor'
       - $ref: '#/components/schemas/ObservabilityPipelineThrottleProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessor'
     ObservabilityPipelineConfigSourceItem:
       description: A data source for the pipeline.
       oneOf:
@@ -26080,6 +26081,80 @@ components:
       type: string
       x-enum-varnames:
       - DATADOG_LOGS
+    ObservabilityPipelineDatadogTagsProcessor:
+      description: The `datadog_tags` processor includes or excludes specific Datadog
+        tags in your logs.
+      properties:
+        action:
+          $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessorAction'
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (for example, as the `input`
+            to downstream components).
+          example: datadog-tags-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        keys:
+          description: A list of tag keys.
+          example:
+          - env
+          - service
+          - version
+          items:
+            type: string
+          type: array
+        mode:
+          $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessorMode'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - mode
+      - action
+      - keys
+      - inputs
+      type: object
+    ObservabilityPipelineDatadogTagsProcessorAction:
+      description: The action to take on tags with matching keys.
+      enum:
+      - include
+      - exclude
+      example: include
+      type: string
+      x-enum-varnames:
+      - INCLUDE
+      - EXCLUDE
+    ObservabilityPipelineDatadogTagsProcessorMode:
+      description: The processing mode.
+      enum:
+      - filter
+      example: filter
+      type: string
+      x-enum-varnames:
+      - FILTER
+    ObservabilityPipelineDatadogTagsProcessorType:
+      default: datadog_tags
+      description: The processor type. The value should always be `datadog_tags`.
+      enum:
+      - datadog_tags
+      example: datadog_tags
+      type: string
+      x-enum-varnames:
+      - DATADOG_TAGS
     ObservabilityPipelineDecoding:
       description: The decoding format used to interpret incoming logs.
       enum:
