@@ -1,0 +1,18 @@
+{
+  "name": "postgres",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@aws-sdk/client-rds": "3.814.0",
+    "@aws-sdk/client-secrets-manager": "3.812.0",
+    "cfn-response": "1.0.1",
+    "pg": "8.16.0"
+  }
+}
