@@ -97,7 +97,7 @@ Protection mode is **on** by default and is a toggle available to quickly disabl
 As important as it is for you to be able to apply protection granularly and reduce the likelihood of legitimate users getting blocked, you sometimes need a simple off switch to quickly stop **all** blocking across **all** services. To turn off protection, navigate to **Security > App and API Protection > Protection > [In-App WAF][9]** and toggle **Allow Request Blocking** to off.
 
 [1]: /security/application_security/setup/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[2]: /tracing/guide/remote_config
 [3]: /agent/versions/upgrade_between_agent_minor_versions
 [4]: /security/application_security/how-it-works/add-user-info/#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
 [5]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&view=signal

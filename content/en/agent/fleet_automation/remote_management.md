@@ -5,7 +5,7 @@ further_reading:
 - link: "/agent/fleet_automation/"
   tag: "Documentation"
   text: "Fleet Automation"
-- link: "/agent/remote_config/"
+- link: "/remote_configuration"
   tag: "Documentation"
   text: "Remote Configuration"
 ---
@@ -20,7 +20,7 @@ Remote Agent Management simplifies the process of upgrading your Agent fleet by 
 ## Setup
 
 To enable Remote Agent Management:
-1. If you haven't enabled Remote Configuration on the Agent, follow the [configuration instructions][1] to enable it.
+1. Ensure that [Remote Configuration is enabled for your organization][1].
 1. Go to the [Datadog Agent install page][3] for your platform or configuration management tool.
 1. Enable **Remote Agent Management**. Enabling Remote Agent Management adds the `DD_REMOTE_UPDATES` environment variable to the generated Agent installation command.
 
@@ -81,7 +81,7 @@ The Agent ensures that the appropriate permissions are set for these files. No c
 
 ### Upgrade precedence
 
-For the most consistent upgrade experience, Datadog recommends managing upgrades from one source at a time. Use either Fleet Automation or a configuration management tool. If you run a configuration management tool on an Agent that has already been upgraded using Fleet Automation, the upgrade reverts the Agent to the [`DD_AGENT_MINOR_VERSION`][9]  specified in your configuration. If no `DD_AGENT_MINOR_VERSION` is set, the Agent is upgraded to the latest available version .
+For the most consistent upgrade experience, Datadog recommends managing upgrades from one source at a time. Use either Fleet Automation or a configuration management tool. If you run a configuration management tool on an Agent that has already been upgraded using Fleet Automation, the upgrade reverts the Agent to the [`DD_AGENT_MINOR_VERSION`][9]  specified in your configuration. If no `DD_AGENT_MINOR_VERSION` is set, the Agent is upgraded to the latest available version.
 
 ### Mirrors and proxies
 
@@ -101,7 +101,7 @@ If you need to downgrade an Agent, follow the steps in [Upgrade your Agents](#up
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/remote_config/#enabling-remote-configuration
+[1]: https://app.datadoghq.com/organization-settings/remote-config
 [2]: /account_management/rbac/permissions#fleet-automation
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://app.datadoghq.com/fleet/agent-upgrades
