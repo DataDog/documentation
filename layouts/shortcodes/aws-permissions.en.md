@@ -206,6 +206,8 @@ The following permissions included in the policy document use wild cards such as
                 "s3:Get*",
                 "s3:ListAllMyBuckets",
                 "s3:PutBucketNotification",
+                "sagemaker:Describe*",
+                "sagemaker:List*",
                 "savingsplans:DescribeSavingsPlanRates",
                 "savingsplans:DescribeSavingsPlans",
                 "scheduler:GetSchedule",
