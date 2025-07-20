@@ -5966,6 +5966,11 @@ menu:
       parent: cloud_siem
       identifier: cloud_siem_detection_rules
       weight: 2
+    - name: Threshold
+      url: security/cloud_siem/detection_rules/threshold
+      parent: cloud_siem_detection_rules
+      identifier: cloud_siem_detection_threshold
+      weight: 20300
     - name: Signal Correlation Rules
       url: security/cloud_siem/detection_rules/signal_correlation_rules
       parent: cloud_siem_detection_rules
