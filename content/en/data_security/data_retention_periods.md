@@ -24,7 +24,8 @@ attributes:
        - **Spans**: 90 days
   - product: Audit Trail
     data_type: |
-       - **Audit logs**: 90 days
+       - **Audit logs (Audit Trail enabled)**: 90 days
+       - **Audit logs (Audit Trail disabled)**: 7 days
   - product: Browser RUM
     data_type: |
        - **Events**: 30 days
