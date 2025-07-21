@@ -35,8 +35,6 @@ Click on one of the following tiles to learn how to set up SSI for your deployme
 
 <div class="alert alert-info">To see requirements for compatible languages, operating systems, and architectures, see <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">Single Step Instrumentation compatibility.</a></div>
 
-<div class="alert alert-info"> Single Step APM Instrumentation on Windows is in Preview.</div>
-
 ## Configure Unified Service Tags
 
 Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data.

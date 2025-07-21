@@ -7,10 +7,6 @@ further_reading:
   text: "Remap reserved attributes"
 ---
 
-{{< callout src="#" btn_hidden="true" >}}
-The Custom Processor is in Preview. Reach out to your account manager to request access.
-{{< /callout >}}
-
 {{% observability_pipelines/processors/custom_processor %}}
 
 ## Custom functions
