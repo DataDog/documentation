@@ -31,7 +31,7 @@ See [Connect RUM and Traces][2] for information about setting up this feature.
 
 {{< img src="real_user_monitoring/browser/resource_performance_graph.png" alt="APM Trace information for a RUM Resource" >}}
 
-## Resource timing and telemetry
+## Resource attributes
 
 Detailed network timing data for resources is collected from the Fetch and XHR native browser methods and from the [Performance Resource Timing API][3].
 
