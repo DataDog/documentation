@@ -61,7 +61,7 @@ To troubleshoot Admission Controller issues:
    kubectl get pods
    kubectl get deployments
    ```  
-1. Check the Cluster Agent leader logs for INFO messages indicating successful Admission Controller startup. For example:
+1. Check the Cluster Agent leader logs for `INFO` messages indicating successful Admission Controller startup. For example:
 
    ```
    Group version 'admissionregistration.k8s.io/v1' is available, Starting secrets controller, Starting webhook controller
@@ -70,7 +70,7 @@ To troubleshoot Admission Controller issues:
 1. Check the Admission Controller status by doing one of the following:
 
    - Run `agent status` inside the Cluster Agent pod to get a live status output. 
-   - Check `status.log` within a flare if troubleshooting after the fact. When a flare is generated, the system runs `agent status` and stores the output in `status.log`.
+   - If troubleshooting retrospectively, check `status.log` within a flare. When a flare is generated, the system runs `agent status` and stores the output in `status.log`.
 
    In both cases, find the Admission Controller and Webhooks sections, and verify the following:
    - All expected `MutatingWebhookConfiguration` resources are listed (for auto-instrumentation, configuration injection, and tag injection). 
@@ -93,9 +93,7 @@ Use the metric `datadog.cluster_agent.admission_webhooks.library_injection_error
 
 #### Language annotation cannot be applied
 
-During setup, SSI detects the application language of your service and applies a service label in the form `internal.dd.datadoghq.com/service-name.detected_langs`. 
-
-If the label cannot be applied, injection fails. 
+During setup, SSI detects the application language of your service and applies a service label in the form `internal.dd.datadoghq.com/service-name.detected_langs`. If the label cannot be applied, injection fails. 
 
 Sometimes, labeling errors occur because a service name breaks Kubernetes string limits ([63 characters][6]). For example:
 ```
@@ -104,24 +102,27 @@ languagedetection/patcher.go:231 in handleDeploymentEvent) | failed to handle de
 
 String limit violations are common if service tags are not explicitly set through [Unified Service Tagging][8], in which case default image names are used. 
 
-#### Injection appears successful but no traces reported
+#### Injection appears successful but traces are missing
 
 If logs show no issues but traces are missing, there may be an application-side misconfiguration. Verify that:
-- Required annotations and labels are present
-- [Unified Service Tagging][8] is set up correctly
-- Allow/deny lists for workload selection are properly defined
+- Required annotations and labels are present.
+- [Unified Service Tagging][8] is set up correctly.
+- Allow/deny lists for workload selection are properly defined.
 
 ## Debug the injection process
 
 After verifying webhook injection, verify the following in the application container:
 
-1. `/etc/ld.so.preload` includes the following entry: `/opt/datadog-packages/datadog-apm-inject/stable/inject/launcher.preload.so`  
-2. `LD_PRELOAD` environment variable is set to the same value
-3. The directory `/opt/datadog-packages/datadog-apm-inject` exists, with `stable` and `$version` subdirectories
-4. Language-specific directories exist (for example, `/opt/datadog/apm/library/java/` for Java)
+1. `/etc/ld.so.preload` includes the following entry: 
+   ```
+   /opt/datadog-packages/datadog-apm-inject/stable/inject/launcher.preload.so
+   ``` 
+2. The `LD_PRELOAD` environment variable is set to the same value.
+3. The directory `/opt/datadog-packages/datadog-apm-inject` exists, with `stable` and `$version` subdirectories.
+4. Language-specific directories exist (for example, `/opt/datadog/apm/library/java/` for Java).
 
 To enable debug logs:
-1. Set `DD_APM_INSTRUMENTATION_DEBUG: true` in the deployment/pod/container spec.
+1. Set `DD_APM_INSTRUMENTATION_DEBUG: true` in the pod spec.
 2. Delete the pod to enable debug logs during injection.
 
 ## Environments with strict Pod Security settings
@@ -149,7 +150,7 @@ To set the injector version:
   Set with the annotation `admission.datadoghq.com/apm-inject.version`.
 
 
-For host/Docker injection, modifying the `auto_inject` version is not recommended. 
+For host or Docker injection, modifying the `auto_inject` version is not recommended. 
 
 To manually update the injector version, run:
 ```
@@ -170,14 +171,14 @@ Datadog maintains an internal deny list to prevent injection into certain proces
 ### Custom deny list entries (Linux only)  
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSdMu6WAsUCD3djkl_oN0Qh7fQmBCiKYyUvuqlYWRyObebAc6Q/viewform" header="Join the Preview!">}}
-Custom process-level policies are available for Linux-based apps through a limited availability preview. To configure allow or deny rules for process injection, sign up for preview access.
+Workload selection is available for Linux-based apps through a limited availability preview. To configure allow or deny rules for process injection, sign up for preview access.
 {{< /callout >}}
 
 ### Injection container flagged by security scanners
 
 Security tools may flag the `apm-inject` container because it runs an executable at startup, which can resemble malicious software. 
 
-The container's behavior is expected and safe; the executable configures the environment for auto-instrumentation. 
+The container's behavior is expected and safe; the executable configures the environment for auto-instrumentation.
 
 Datadog adheres to security best practices and is working with security vendors to whitelist this container.
 
@@ -200,7 +201,7 @@ To avoid this issue, exclude the affected process from injection.
 
 ####  `JAVA_TOOL_OPTIONS` changes program output
 
-When `JAVA_TOOL_OPTIONS` is set, the JVM prints a message to stdout—such as `Picked up JAVA_TOOL_OPTIONS: -Xmx1024m`. If a process reads and depends on this output, it may be affected.
+When `JAVA_TOOL_OPTIONS` is set, the JVM prints a message to stdout, such as `Picked up JAVA_TOOL_OPTIONS: -Xmx1024m`. If a process reads and depends on this output, it may be affected.
 
 As of version 0.12.2, injection is skipped for `java -version` to avoid interfering with processes that parse its output.
 
@@ -230,11 +231,11 @@ Versions <=2.7.5 contain a pre-packaged protobuf dependency that can conflict wi
 
 Custom instrumentation still requires you to import the tracing library. Configuration variables like .NET's `DD_TRACE_METHODS` remain available for defining custom spans.
 
-## Use private registries with SSI
+## Use SSI with private registries
 
 To use SSI with a private container registry, follow the instructions in [Synchronize Datadog's images with a private registry][5].
 
-The required images vary based on the languages you configure, but typically include:
+The required images vary depending on the language(s) you configure, but typically include:
 - `gcr.io/datadoghq/apm-inject` 
 - `gcr.io/datadoghq/dd-lib-<lang>-init`
   - `gcr.io/datadoghq/dd-lib-dotnet-init`
@@ -249,7 +250,7 @@ Each language-specific tracer image must be available in your private registry a
 
 By default, the injector uses version `0` unless a different version is configured in the Cluster Agent. If you are using annotations to specify tracer versions, those versions must also be mirrored and available in your private registry.
 
-For example, this configuration:
+For example:
 
     apm:
       instrumentation:
@@ -260,7 +261,7 @@ For example, this configuration:
               java: "1"
               python: "3"
  
-Would require the following image tags to exist in the private registry:
+This configuration would require the following image tags to exist in the private registry:
 
 * `gcr.io/datadoghq/apm-inject:0`
 * `gcr.io/datadoghq/dd-lib-java-init:1`
@@ -274,7 +275,7 @@ Failed to pull image "...." rpc error: code = Unknown
  
 ## Asking for support 
 
-When contacting support about injection issues, collect the following information to speed up troubleshooting:
+When contacting support about injection issues, collect the following information to assist troubleshooting:
 
 1. Are you using host injection, Docker injection, or both?  
 1. Verify that the `/opt/datadog-packages/datadog-apm*` directories exist. 
@@ -294,7 +295,7 @@ When contacting support about injection issues, collect the following informatio
    
    By default, logs are written to stderr.
 
-   - For host injection, you can send logs to a file:
+   - For host injection, you can send logs to a file by setting:
      ```
      DD_APM_INSTRUMENTATION_OUTPUT_PATHS=<log_file_path>
      ```
@@ -307,9 +308,9 @@ When contacting support about injection issues, collect the following informatio
 
 Collect the following details if troubleshooting injection in a Kubernetes environment:
 
-- The method used to deploy the Cluster Agent (for example, Helm, Datadog Operator, kubectl commands).
+- The method used to deploy the Cluster Agent (for example, Helm, Datadog Operator, or kubectl commands).
 - Deployment files for the application pod.  
-- Flares from both the Node Agent and the Cluster Agent, ideally with DEBUG mode enabled. 
+- Flares from both the Node Agent and the Cluster Agent, ideally with `DEBUG` mode enabled. 
 - Output of:
   ```
   kubectl describe pod <app pod>
