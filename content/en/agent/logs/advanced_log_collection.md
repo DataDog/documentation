@@ -644,24 +644,22 @@ The Datadog Agent automatically adds certain tags to all logs it collects before
 
 The following tags are automatically added to logs by the Datadog Agent:
 
-| Tag | Description | 
-|-----|-------------|
-| `source` | The source of the log (file path, integration name, etc.) 
-| `service` | The service name if configured in the log collection 
-| `env` | The environment tag if configured globally 
-| `version` | The Agent version
-| `filename` | Base name of the tailed file
-| `dirname` | Directory containing the tailed file  
-| `source_host` | IP address of the socket source host
-| `event_type` | Type of the Windows event  
-| `event_source` | Source of the Windows event  
-| `event_id` | Windows Event ID if configured  
-| `sid` | Windows Security identifier if configured
-| `truncated` | Source of truncation if configured
-| `multiline` | Source of multiline aggregation if configured
-| `aggregated_json` | Indicates that the log was aggregated from multiple JSON log entries
-
-**Note**: Some tags are only added for specific log sources and some tags can be optionally enabled/disabled via configurations.
+| Tag | Description | Conditions |
+|-----|-------------|-------------|
+| `source` | The source of the log (file path, integration name, etc.) | Always when available |
+| `service` | The service name if configured in the log collection | Always when available |
+| `env` | The environment tag if configured globally | Always when available |
+| `version` | The Agent version | Always when available |
+| `filename` | Base name of the tailed file | File-based sources only |
+| `dirname` | Directory containing the tailed file | File-based sources only |
+| `source_host` | IP address of the socket source host | Socket sources (TCP/UDP) only |
+| `event_type` | Type of the Windows event | Windows events only |
+| `event_source` | Source of the Windows event | Windows events only |
+| `event_id` | Windows Event ID | Windows events only, if `tag_event_id: true` |
+| `sid` | Windows Security identifier | Windows events only, if `tag_sid: true` |
+| `truncated` | Source of truncation | If `logs_config.tag_truncated_logs: true` |
+| `multiline` | Source of multiline aggregation | If `logs_config.tag_multi_line_logs: true` |
+| `aggregated_json` | Indicates that the log was aggregated from multiple JSON log entries | If `logs_config.auto_multi_line.tag_aggregated_json: true` |
 
 ### Pre-ingestion Processing
 
@@ -671,13 +669,6 @@ Since these tags are added pre-ingestion, they:
 * Increase the overall size of your log data
 * Are available for filtering, searching, and aggregation in the Log Explorer
 * Can be used in log-based metrics and queries
-
-### Best Practices
-
-1. **Monitor tag cardinality**: High cardinality tags (tags with many unique values) can impact data volume
-2. **Use tag filtering**: Exclude unnecessary tags to optimize data collection
-3. **Standardize tag values**: Use consistent tag values across your infrastructure
-4. **Review tag usage**: Regularly review which tags are being added and their impact on data volume
 
 ### Further Configuration
 
