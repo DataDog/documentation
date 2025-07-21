@@ -4615,7 +4615,7 @@ menu:
       identifier: llm_obs_instrumentation
       weight: 3
     - name: LLM Obs SDK
-      url: llm_observability/sdk
+      url: llm_observability/sdk/
       parent: llm_obs_instrumentation
       identifier: llm_obs_sdk
       weight: 301

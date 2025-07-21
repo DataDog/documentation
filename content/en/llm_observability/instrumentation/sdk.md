@@ -6,15 +6,12 @@ aliases:
     - /llm_observability/setup/sdk/python
     - /llm_observability/setup/sdk/nodejs
     - /llm_observability/setup/sdk
-    - /llm_observability/instrumentation
 ---
 
 ## Overview
 
 Datadog's LLM Observability SDK provides automatic instrumentation as well as manual APIs that give you deep and rich insights into the cost, health and quality of your LLM applications.
 
-
-For information about LLM Observability's integration support, see [Auto Instrumentation][13].
 
 You can install and configure tracing of various operations such as workflows, tasks, and API calls with function decorators or context managers. You can also annotate these traces with metadata for deeper insights into the performance and behavior of your applications, supporting multiple LLM services or models from the same environment.
 
@@ -28,17 +25,17 @@ You can install and configure tracing of various operations such as workflows, t
 
 ## Manual Instrumentation
 
-### Capturing LLM Operations
+### Capturing LLM operations
 
 #### Distributed workflows
 
-#### Annotating LLM Operations
+#### Annotating LLM operations
 
-#### Tagging User Sessions
+#### Tagging user sessions
 
-### Submitting Evaluations
+### Submitting evaluations
 
-### Modifying Operation Input and Output
+### Modifying operation input and output
 
 ### Prerequisites
 
@@ -1648,12 +1645,20 @@ tracer.use('http', false) // disable the http integration
 {{< /tabs >}}
 
 
-### Supported runtimes
+### Compatibility
+
+#### Supported runtimes
 
 | Runtime | Version |
 | ------- | ------- |
-| Python  | 3.7+    |
+| Python  | 3.8+    |
 | Node.js | 16+     |
+| Java    | 18+     |
+
+
+#### Supported LLM integrations
+
+
 
 
 [1]: https://github.com/openai/openai-python
