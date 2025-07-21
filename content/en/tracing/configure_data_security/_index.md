@@ -421,9 +421,9 @@ This can also be enabled with the environment variable `DD_APM_OBFUSCATION_REMOV
 {{% /tab %}}
 {{% tab "Credit Card" %}}
 
-Scans all span metadata for numbers that appear to be credit card numbers. Any values that match are replaced with `?`. This check affects all span types and is enabled by default.
+Scans all span metadata for numbers that appear to be credit card numbers. Any values that match are replaced with `?`. This check affects all span types and is enabled by default. Because this initial scan is based on patterns, it can sometimes cause false positives by redacting other long numbers. To improve accuracy, you can enable the `credit_cards.luhn` option described below.
 
-**Note**: Scanning looks for values that are exactly credit card numbers (allowing for internal whitespace). If a metavalue has additional string data, this obfuscator determine that value is not a credit card number. For example:
+**Note**: Scanning looks for values that are exactly credit card numbers (allowing for internal whitespace). If a metavalue has additional string data, this obfuscator determines that value is not a credit card number. For example:
 
 - A metavalue of `4111 1111 1111 1111` is redacted to `?`.
 - A metavalue of `CC-4111 1111 1111 1111` is **not** redacted.
@@ -445,7 +445,7 @@ apm_config:
 ```
 - `credit_cards.enabled`: Set to false to disable this obfuscator.
   - Environment Variable: `DD_APM_OBFUSCATION_CREDIT_CARDS_ENABLED`
-- `credit_cards.luhn`: Set to true to enable a Luhn checksum check to eliminate false positives. This increases CPU usage and the performance cost of this check.
+- `credit_cards.luhn`: Set to true to enable a Luhn checksum check that validates numbers to eliminate false positives. This increases CPU usage and the performance cost of this check.
   - Environment Variable: `DD_APM_OBFUSCATION_CREDIT_CARDS_LUHN`
 
 {{% /tab %}}
