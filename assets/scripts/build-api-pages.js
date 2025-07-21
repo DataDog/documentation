@@ -465,23 +465,28 @@ const outputExample = (chosenExample, inputkey) => {
     if(chosenExample instanceof Array) {
       // if array of strings use them
       // if array of objects try match keys
+      const arrayItems = [];
       chosenExample.forEach((item, key, arr) => {
         if(item instanceof Array) {
           // if nested array pass back through
-          ex = `[${outputExample(item, inputkey)}]`;
+          arrayItems.push(`[${outputExample(item, inputkey)}]`);
         } else if(typeof item === 'object') {
           // output 1 level of example array
           if (inputkey && item !== null && inputkey in item) {
             if (item[inputkey] instanceof Array) {
-              ex = `[${outputExample(item[inputkey])}]`;
+              arrayItems.push(`[${outputExample(item[inputkey])}]`);
             } else {
-              ex = `${outputExample(item[inputkey])}`;
+              arrayItems.push(`${outputExample(item[inputkey])}`);
             }
+          } else {
+            // Handle objects without inputkey - stringify the entire object
+            arrayItems.push(safeJsonStringify(item, null, 2));
           }
         } else {
-          ex += outputValue(item, !Object.is(arr.length - 1, key));
+          arrayItems.push(outputValue(item, false));
         }
       });
+      ex = `[${arrayItems.join(', ')}]`;
     } else if(typeof chosenExample === 'object') {
       if(chosenExample.value instanceof Array) {
         chosenExample.value.forEach((item, key, arr) => {
