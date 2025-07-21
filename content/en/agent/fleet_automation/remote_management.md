@@ -102,7 +102,7 @@ If you were a Preview customer and set up remote Agent management before Agent v
 
 ### Which hosts are impacted:
 To identify affected hosts, you can use this [query in Fleet Automation][13]:
- `support_remote_upgrade:datadog-installer -os:Windows`
+ `support_remote_upgrade:datadog-installer`
  
 ### Action required:
 If your setup is impacted, [manually upgrade (re-run install script)][14] to Agent version 7.66 or higher. This ensures full compatibility with Remote Agent Management features.
@@ -117,15 +117,25 @@ No impact occurs on your existing Agent. However, remote upgrades remain unavail
 No, this is the last breaking change. Future upgrades are handled automatically without requiring manual intervention.
 
 ## Uninstall Remote Agent Management 
-### Uninstalling on Linux
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
 To uninstall Remote Agent Management from your Linux environment, follow the steps below. Ensure that you have the necessary permissions to perform the uninstall process.
 
 To uninstall the agent after installing it with Remote Agent Management, in a shell, run `sudo datadog-installer purge`.
 
-### Uninstalling on Windows
+{{% /tab %}}
+{{% tab "Windows" %}}
+
 There are no steps needed to uninstall Remote Agent Management on Windows, it is packaged with the Agent itself.
 To disable Remote Agent Management, configure `remote_updates: false` in `datadog.yaml`.
-To uninstall the Agent, see [Uninstall the Agent][15].
+To uninstall the Agent, see [Uninstall the Agent][1].
+
+[1]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/#uninstall-the-agent
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further reading
 
@@ -145,4 +155,3 @@ To uninstall the Agent, see [Uninstall the Agent][15].
 [12]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/?tab=installationinactivedirectorydomains
 [13]: https://app.datadoghq.com/fleet?query=support_remote_upgrade%3Adatadog-installer
 [14]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
-[15]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/#uninstall-the-agent
