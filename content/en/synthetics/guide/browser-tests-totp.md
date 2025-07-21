@@ -20,6 +20,10 @@ Multi-factor authentication methods such as TFA and MFA help protect your applic
 
 Datadog Synthetic MFA global variables allow you to test your application's TOTP-based MFA modules and critical user journeys without disabling critical security measures or manually entering authentication codes with disparate tools. You do not need to create or maintain dedicated environments to test MFA-enabled user journeys.
 
+**Note:** If your TOTP token works in Google Authenticator, it will likely work with Datadog.
+
+However, some MFA providers, such as Duo and Okta, generate QR codes that are restricted to their own apps (e.g., Duo Mobile, Okta Verify) and may not work with general TOTP tools like Google Authenticator or Datadog. This limitation is set by the provider. To ensure compatibility, use a QR code or TOTP secret that follows standard TOTP protocols.
+
 ## Store your secret key or QR code in a global variable
 
 Create a global variable where you enter a secret key or upload a QR code from your authentication provider. In the **Global Variables** tab of your **Settings** page, click **Create Global Variable**.
