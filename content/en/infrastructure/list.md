@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-The Infrastructure list shows all of your hosts monitored by Datadog with activity during the last two hours (default) and up to one week. Search your hosts or group them by tags. In Datadog, navigate to [**Infrastructure > Hosts**][10] to view the Infrastructure list. This list should not be used to estimate your infrastructure host billing. See the [billing][11] page to learn about billing. 
+The Infrastructure list shows all of your hosts monitored by Datadog with activity during the last two hours (default) and up to one week. Search your hosts or group them by tags. In Datadog, navigate to [**Infrastructure > Hosts**][10] to view the Infrastructure list. This list should not be used to estimate your infrastructure host billing. See the [billing][11] page to learn about billing.
 
 ## Hosts
 
@@ -47,7 +47,7 @@ Load 15
 Apps
 : The Datadog integrations reporting metrics for the host.
 
-Operating System 
+Operating System
 : The tracked operating system.
 
 Cloud Platform
@@ -74,6 +74,7 @@ Click on any host to view more details including:
 - [containers][4]
 - [logs][5] (if enabled)
 - [Agent configuration](#agent-configuration) (if enabled)
+- [OpenTelemetry Collector configuration](#opentelemetry-collector-configuration) (if enabled)
 
 {{< img src="infrastructure/index/infra-list2.png" alt="Infrastructure list host details" style="width:100%;">}}
 
@@ -85,17 +86,28 @@ Datadog creates aliases for host names when there are multiple uniquely identifi
 
 #### Agent configuration
 
-The Agent can send its own configuration to Datadog to be displayed in the `Agent Configuration` section of the host detail panel.
+With the [General Availability (GA) release of Fleet Automation][12], the Agent Configuration section has moved to [Fleet Automation][13] and is no longer displayed in the infrastructure list host detail panel. You can now view and manage Agent configurations across your entire infrastructure with enhanced visibility and control through Fleet Automation.
 
-The Agent configuration is scrubbed of any sensitive information and only contains configuration you've set using the configuration file or environment variables. The configuration changes are updated every 10 minutes.
+To access Agent configurations, use the **Open Host** dropdown button in the top-right corner of the host detail panel and select "View Agent Configurations" to go directly to the Fleet Automation UI. This provides advanced configuration management capabilities and fleet-wide visibility.
 
-The Agent configuration view is enabled by default in Agent version >= 7.47.0/6.47.0. In Agent versions >= 7.39/6.39, you can enable it manually:
+{{< img src="infrastructure/index/infra-list-config-4.png" alt="View Agent configurations in Fleet Automation" style="width:100%;">}}
 
-To enable or disable the configuration view:
-- Set the value of `inventories_configuration_enabled` in your [Agent configuration file][6] to `true` to enable the configuration view, or `false` to disable it.
-- Alternatively, use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable to enable or disable the configuration view.
+#### OpenTelemetry Collector configuration
 
-{{< img src="infrastructure/index/infra-list-config3.png" alt="The Agent configuration view" style="width:100%;">}}
+When the [Datadog Extension][14] is configured with your OpenTelemetry Collector, you can view collector configuration and build information directly in the infrastructure list host detail panel. The Datadog Extension provides visibility into your collector fleet from within the Datadog UI, making it easier to manage and debug your OpenTelemetry Collector deployments.
+
+<div class="alert alert-info">The <a href="/opentelemetry/integrations/datadog_extension/">Datadog Extension</a> must be enabled and configured in your OpenTelemetry Collector. This component is only available in OpenTelemetry Collector Contrib or custom-built collector versions 0.129.0 or greater.</div>
+
+<div class="alert alert-warning"><strong>Hostname Matching:</strong> If your telemetry contains <a href="https://docs.datadoghq.com/opentelemetry/config/hostname_tagging/?tab=host">host attributes</a> and you have manually set the extension hostname, ensure they match. The Datadog Extension does not have access to pipeline telemetry and cannot infer hostnames from incoming spans—it only obtains hostnames from system/cloud provider APIs or manual configuration. If telemetry has different hostname attributes than extension, the telemetry will not be correlated to the host and you may see duplicate hosts in the infrastructure list.</div>
+
+To view OpenTelemetry Collector configurations:
+1. Click on any host running the OpenTelemetry Collector in the infrastructure list
+2. In the host detail panel, select the **OTel Collector** tab
+3. View the build information and complete collector configuration
+
+The displayed configuration is scrubbed of sensitive information. The data shown includes collector version, build details, component information, and the full configuration structure in YAML format.
+
+{{< img src="infrastructure/index/infra-list-config-otel.png" alt="View OpenTelemetry Collector configurations in infrastructure list" style="width:100%;">}}
 
 ### Export
 
@@ -153,3 +165,6 @@ for host in infra['rows']:
 [9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
 [10]: https://app.datadoghq.com/infrastructure
 [11]: https://docs.datadoghq.com/account_management/billing/
+[12]: https://app.datadoghq.com/release-notes/fleet-automation-is-now-generally-available
+[13]: https://docs.datadoghq.com/agent/fleet_automation
+[14]: /opentelemetry/integrations/datadog_extension/
