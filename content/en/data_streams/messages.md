@@ -5,7 +5,7 @@ title: Messages
 Use the Messages feature to view Kafka messages directly and troubleshoot your data streams efficiently. You can view messages at specific offsets within Kafka. Inspecting these messages can be crucial when troubleshooting issues related to specific services or data streams.
 
 ## Setup
-Before diving into detailed configuration steps, here's a quick overview of what's involved in setting up the Messages feature:
+Before diving into detailed configuration steps, here's an overview of what's involved in setting up the Messages feature:
 
 | Step               | Description                                                                                                                                       | Setup Guide              |
 |--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
