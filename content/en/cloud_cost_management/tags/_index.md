@@ -18,11 +18,7 @@ further_reading:
 
 ## Overview
 
-Tags help you organize, filter, and allocate your cloud costs effectively. Cloud Cost Management automatically enriches your cost data with tags from multiple sources, so you can focus on using tags to drive insights rather than managing the technical details.
-
-- **Track costs by team, service, or environment** - See exactly who's spending what and identify optimization opportunities
-- **Allocate shared costs fairly** - Distribute costs across teams and projects for accurate chargeback and showback
-- **Create accurate reports** - Generate detailed cost reports for stakeholders and budget planning
+Tags help you organize, filter, and allocate your cloud costs effectively. Cloud Cost Management automatically enriches your cost data with tags from multiple sources, so you can focus on using tags to drive insights rather than managing the technical details. Using tags, you can allocate shared costs fairly, create accurate reports, and track costs by team, service, or environment.
 
 ## Getting started
 
