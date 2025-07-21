@@ -27,7 +27,7 @@ There are additional [metrics and attributes that are specific to a given event 
 | Resource   | 15 days   | A resource represents network requests to first-party hosts, APIs, and third-party providers in your mobile application. All requests generated during a user session are attached to the view with a unique `resource.id`.                                                                       |
 | Error      | 30 days   | An error represents an exception or crash emitted by the mobile application attached to the view it is generated in.                                                                                                                                                                                        |
 | Action     | 30 days   | An action represents user activity in your mobile application (for example, application launch, tap, swipe, or back). Each action is attached with a unique `action.id` attached to the view it gets generated in. When an action is being tracked, other actions within the next `100 ms` do not get sent, unless they are [custom actions][1].                                                                                                                                                 |
-| Long Task | 15 days | A long task event is generated for any task in the application that blocks the main thread for more than the specified duration threshold. |
+| Long task | 15 days | A long task event is generated for any task in the application that blocks the main thread for more than the specified duration threshold. |
 
 
 The following diagram illustrates the RUM event hierarchy:
@@ -260,11 +260,11 @@ Network errors include information about failing HTTP requests. The following fa
 | `action.name`        | string | Name of the user action.                                                        |
 | `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions. |
 
-## Data Storage
+## Data storage
 
 Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][10], which can't be read by any other app installed on the device.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
