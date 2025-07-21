@@ -193,7 +193,7 @@ The following diagram represents an example of this kind of setup:
 
 The [`datadog-ci deployment correlate-image` command][14] can be used to correlate an image with an application repository commit. When an Argo CD deployment occurs, the configuration commit information in the deployment event is replaced with the related application repository commit obtained by looking at the deployed images, if any.
 
-To enable this correlation, you also need to add the `dd_k8s_cluster` annotation to your Argo CD application, specifying the name of the Kubernetes cluster that the application deploys to. The name must match the name reported in the [Datadog Kubernetes product][16].
+To enable this correlation, you also need to add the `dd_k8s_cluster` annotation to your Argo CD application, specifying the name of the Kubernetes cluster that the application deploys to. The name must match the name reported in the [Datadog Kubernetes product][16]. The image name must also contain the service name it relates to. This helps us discard irrelevant images on a deployment.
 
 Here is an example on how you can run the command when generating the image that will later be deployed by Argo CD:
 ```yaml
