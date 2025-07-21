@@ -56,7 +56,7 @@ Una vez hecho esto, exporta tus logs de Google Cloud Storage de Google Cloud Log
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "google_cloud_storage" >}}
+{{< get-metrics-from-git "google-cloud-storage" >}}
 
 
 ### Eventos

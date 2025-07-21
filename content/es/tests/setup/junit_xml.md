@@ -16,12 +16,6 @@ title: Carga de archivos de informes de tests JUnit en Datadog
 type: lenguaje de código múltiple
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-El sitio Datadog seleccionado ({{< region-param key="dd_site_name" >}}) no es compatible.
-</div>
-{{< /site-region >}}
-
 <div class="alert alert-warning">
  <strong>Nota</strong>: Datadog recomienda la instrumentación nativa de los tests sobre la carga de archivos XML JUnit,
   ya que la instrumentación nativa proporciona resultados de tiempo más precisos, admite trazas distribuidas en tests de integraciones 

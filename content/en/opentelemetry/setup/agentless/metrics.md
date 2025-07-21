@@ -22,15 +22,12 @@ further_reading:
   - link: "/metrics/otlp/?tab=summary#mapping"
     tag: "Documentation"
     text: "OTLP Metrics Mapping in Datadog"
+site_support_id: otlp_agentless
 ---
 
 {{< callout header="false" btn_hidden="true">}}
   The Datadog OTLP metrics intake endpoint is in Preview. To request access, contact your account representative.
 {{< /callout >}}
-
-{{< site-region region="ap1,gov" >}}
-<div class="alert alert-warning">Datadog OTLP metrics intake endpoint is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -76,10 +73,15 @@ If you are using [OpenTelemetry automatic instrumentation][3], set the following
 ```shell
 export OTEL_EXPORTER_OTLP_METRICS_PROTOCOL="http/protobuf"
 export OTEL_EXPORTER_OTLP_METRICS_ENDPOINT="{{< region-param key="otlp_metrics_endpoint" >}}"
-export OTEL_EXPORTER_OTLP_METRICS_HEADERS="dd-api-key=${DD_API_KEY},dd-otlp-source=${YOUR_SITE}"
+export OTEL_EXPORTER_OTLP_METRICS_HEADERS="dd-api-key=${DD_API_KEY},dd-otlp-source=${PARTNER_ID}"
 export OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE="delta"
 ```
-<div class="alert alert-info">The value for <code>dd-otlp-source</code> should be provided to you by Datadog after being allowlisted for the intake endpoint. This is a specific identifier assigned to your organization.</div>
+
+<div class="alert alert-info">
+  The <code>dd-otlp-source</code> header is <strong>only required for Datadog platform partners</strong> who receive a specific identifier from Datadog for multi-tenant data ingestion.
+  <br>
+  <strong>Datadog customers</strong> whose organizations are allowlisted for OTLP metrics intake should <strong>omit this header</strong>. Contact your Datadog representative if unsure.
+</div>
 
 #### Manual instrumentation
 
@@ -98,8 +100,8 @@ const exporter = new OTLPMetricExporter({
   temporalityPreference: AggregationTemporalityPreference.DELTA, // Ensure delta temporality
   headers: {
     'dd-api-key': process.env.DD_API_KEY,
-    'dd-otel-metric-config': '{resource_attributes_as_tags: true}',
-    'dd-otlp-source': '${YOUR_SITE}', // Replace with the specific value provided by Datadog for your organization
+    'dd-otel-metric-config': '{"resource_attributes_as_tags": true}',
+    'dd-otlp-source': '${PARTNER_ID}', // For Datadog platform partners only. Use the ID provided by Datadog.
   },
 });
 ```
@@ -120,8 +122,8 @@ OtlpHttpMetricExporter exporter = OtlpHttpMetricExporter.builder()
     .setAggregationTemporalitySelector(
 			AggregationTemporalitySelector.deltaPreferred()) // Ensure delta temporality
     .addHeader("dd-api-key", System.getenv("DD_API_KEY"))
-    .addHeader("dd-otel-metric-config", "{resource_attributes_as_tags: true}")
-    .addHeader("dd-otlp-source", "${YOUR_SITE}") // Replace with the specific value provided by Datadog for your organization
+    .addHeader("dd-otel-metric-config", "{\"resource_attributes_as_tags\": true}")
+    .addHeader("dd-otlp-source", "${PARTNER_ID}") // For Datadog platform partners only. Use the ID provided by Datadog.
     .build();
 ```
 
@@ -144,8 +146,8 @@ metricExporter, err := otlpmetrichttp.New(
 	otlpmetrichttp.WithHeaders(
 		map[string]string{
 			"dd-api-key": os.Getenv("DD_API_KEY"),
-			"dd-otel-metric-config": "{resource_attributes_as_tags: true}",
-      "dd-otlp-source": "${YOUR_SITE}", // Replace with the specific value provided by Datadog for your organization
+			"dd-otel-metric-config": "{\"resource_attributes_as_tags\": true}",
+      "dd-otlp-source": "${PARTNER_ID}", // For Datadog platform partners only. Use the ID provided by Datadog.
 		}),
 )
 ```
@@ -166,8 +168,8 @@ exporter = OTLPMetricExporter(
     preferred_temporality=deltaTemporality, # Ensure delta temporality
     headers={
         "dd-api-key": os.environ.get("DD_API_KEY"),
-        "dd-otel-metric-config": "{resource_attributes_as_tags: true}",
-        "dd-otlp-source": "${YOUR_SITE}" # Replace with the specific value provided by Datadog for your organization
+        "dd-otel-metric-config": '{"resource_attributes_as_tags": true}',
+        "dd-otlp-source": "${PARTNER_ID}" # Replace with the specific value provided by Datadog for your organization
     },
 )
 ```
@@ -237,8 +239,8 @@ exporters:
     metrics_endpoint: {{< region-param key="otlp_metrics_endpoint" >}}
     headers:
       dd-api-key: ${env:DD_API_KEY}
-      dd-otel-metric-config: "{resource_attributes_as_tags: true}"
-      dd-otlp-source: "${YOUR_SITE}", # Replace with the specific value provided by Datadog for your organization
+      dd-otel-metric-config: '{"resource_attributes_as_tags": true}'
+      dd-otlp-source: "${PARTNER_ID}", # For Datadog platform partners only. Use the ID provided by Datadog.
 ...
 
 service:
@@ -260,7 +262,10 @@ If you receive a `403 Forbidden` error when sending metrics to the Datadog OTLP 
    **Solution**: To request access, contact your account representative.
 
 - The `dd-otlp-source` header is missing or has an incorrect value.  
-   **Solution**: Ensure that the `dd-otlp-source` header is set with the proper value for your site. You should have received an allowlisted value for this header from Datadog if you are a platform partner.
+   **Solution**: This error can relate to the <code>dd-otlp-source</code> header:
+    - <i>Datadog Platform Partners</i>: Verify <code>dd-otlp-source</code> is set to the unique identifier provided by Datadog.
+    - <i>Individual Datadog Customers</i>: If your organization is allowlisted, this header should be omitted. Remove <code>dd-otlp-source</code> from your configuration.
+    - If the error persists, contact your Datadog representative to confirm if <code>dd-otlp-source</code> is required for your organization and, if so, its correct value.
 
 - The endpoint URL is incorrect for your organization.  
    **Solution**: Use the correct endpoint URL for your organization. Your site is {{< region-param key=dd_datacenter code="true" >}}, so you need to use the {{< region-param key="otlp_metrics_endpoint" code="true" >}} endpoint.

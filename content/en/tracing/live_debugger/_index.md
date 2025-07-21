@@ -7,6 +7,9 @@ further_reading:
 - link: "/dynamic_instrumentation/expression-language/"
   tag: "Documentation"
   text: "Dynamic Instrumentation Expression Language"
+- link: "/developers/ide_plugins/idea/live_debugger/"
+  tag: "Documentation"
+  text: "Live Debugger for JetBrains IDEs"
 - link: "/dynamic_instrumentation/sensitive-data-scrubbing/"
   tag: "Documentation"
   text: "Sensitive Data Scrubbing"
@@ -29,6 +32,8 @@ further_reading:
 ## Overview
 
 With Live Debugger, you can debug running applications in real time, without redeploying code or interrupting service. Powered by Datadog's [Dynamic Instrumentation][1], Live Debugger uses logpoints&mdash;auto-expiring, "non-breaking breakpoints"&mdash;to collect information from running applications without pausing execution. This makes it ideal for investigating issues in environments where traditional debugging methods aren't practical.
+
+{{< img src="tracing/live_debugger/live-debugger-demo-2025050702.mp4" alt="Live Debugger Product Demo" video="true" >}}
 
 ## Key capabilities
 
@@ -80,6 +85,8 @@ When you enable or disable Live Debugger, the same action applies to Dynamic Ins
 
 ## Using Live Debugger
 
+<div class="alert alert-info">Try using Live Debugger from your JetBrains IDE! <a href="/developers/ide_plugins/idea/live_debugger/">Click here</a> to learn more.</div>
+
 ### Creating and using a Debug Session
 
 Debug Sessions let you inspect your code at runtime with auto-expiring logpoints. To create and use a Debug Session:
@@ -91,7 +98,6 @@ Debug Sessions let you inspect your code at runtime with auto-expiring logpoints
 3. Add, remove, and modify logpoints within the session.
 
 Debug Sessions automatically expire after 48 hours. You can manually disable and re-enable both sessions and individual logpoints at any time.
-
 
 ### Creating logpoints
 

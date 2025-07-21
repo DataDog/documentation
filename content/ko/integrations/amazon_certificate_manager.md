@@ -1,29 +1,64 @@
 ---
+app_id: amazon-certificate-manager
+app_uuid: 9eda4833-a2c0-4dcb-bf1c-7a868a0a59c3
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: aws.certificatemanager.days_to_expiry
+      metadata_path: assets/metrics/metric-spec.yaml
+      prefix: aws.certificatemanager.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 330
+    source_type_name: Amazon Certificate Manager
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - aws
-- cloud
+- 클라우드
 - 설정 및 배포
 - 로그 수집
 - 프로비저닝
+custom_kind: 통합
 dependencies: []
-description: 주요 AWS Certificate Manager 메트릭을 추적합니다.
-doc_link: https://docs.datadoghq.com/integrations/amazon_certificate_manager/
+display_on_public_website: true
 draft: false
 git_integration_title: amazon_certificate_manager
-has_logo: true
-integration_id: ''
+integration_id: amazon-certificate-manager
 integration_title: AWS Certificate Manager
 integration_version: ''
 is_public: true
-custom_kind: 통합
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: amazon_certificate_manager
-public_title: Datadog-AWS Certificate Manager 통합
-short_description: 주요 AWS Certificate Manager 메트릭을 추적합니다.
-version: '1.0'
+public_title: AWS Certificate Manager
+short_description: AWS Certificate Manager lets you easily provision, manage, and
+  deploy public and private SSL/TLS certificates.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::AWS
+  - Category::Cloud
+  - Category::Configuration & Deployment
+  - Category::Log Collection
+  - Category::Provisioning
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: AWS Certificate Manager lets you easily provision, manage, and deploy
+    public and private SSL/TLS certificates.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: AWS Certificate Manager
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 개요
 
 AWS Certificate Manager를 사용하면 AWS 서비스 및 내부에 연결된 리소스에 사용할 SSL/TLS 인증서를 프로비저닝, 관리 및 배포할 수 있습니다.
@@ -34,7 +69,7 @@ Datadog에서 모든 Certificate Manager 메트릭을 보려면 이 통합을 �
 
 ### 설치
 
-이미 하지 않은 경우 먼저 [Amazon Web Services 통합][1]을 설정하세요.
+아직 설정하지 않은 경우 먼저 [Amazon Web Services 통합][1]을 설정하세요.
 
 ### 메트릭 수집
 
@@ -44,7 +79,7 @@ Datadog에서 모든 Certificate Manager 메트릭을 보려면 이 통합을 �
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_certificate_manager" >}}
+{{< get-metrics-from-git "amazon-certificate-manager" >}}
 
 
 ### 이벤트
@@ -62,5 +97,5 @@ AWS Certificate Manager 통합에는 서비스 점검이 포함되지 않습니�
 [1]: https://docs.datadoghq.com/ko/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-certificate-manager
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_certificate_manager/amazon_certificate_manager_metadata.csv
+[4]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_certificate_manager/assets/metrics/metric-spec.yaml
 [5]: https://docs.datadoghq.com/ko/help/

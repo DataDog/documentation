@@ -9,12 +9,6 @@ further_reading:
   text: "Analytics on cases"
 ---
 
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">
-Event Correlation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
-</div>
-{{% /site-region %}}
-
 ## Overview
 
 There are two types of correlations: 

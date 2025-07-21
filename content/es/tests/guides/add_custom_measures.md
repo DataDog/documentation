@@ -13,11 +13,6 @@ further_reading:
 title: Añadir medidas personalizadas a los tests
 ---
 
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Antes de empezar, asegúrate de que la [Visibilidad de tests][1] ya esté configurada para tu lenguaje. En esta guía se explica cómo personalizar medidas y añadirlas a los tests.

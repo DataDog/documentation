@@ -5,10 +5,6 @@ aliases:
     - /llm_observability/api
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 The LLM Observability API provides an interface for developers to send LLM-related traces and spans to Datadog. If your application is written in Python or Node.js, you can use the [LLM Observability SDKs][1].
@@ -197,6 +193,7 @@ If the request is successful, the API responds with a 202 network code and an em
 | duration  [*required*]     | float64           | The span's duration in nanoseconds.          |
 | meta [*required*]         | [Meta](#meta)              | The core content relative to the span.       |
 | status      | string            | Error status (`"ok"` or `"error"`). Defaults to `"ok"`.      |
+| apm_trace_id | string      | The ID of the associated APM trace. Defaults to match the `trace_id` field.   |
 | metrics     | [Metrics](#metrics)           | Datadog metrics to collect.         |
 | session_id  | string     | The span's `session_id`. Overrides the top-level `session_id` field.    |
 | tags        | [[Tag](#tag)] | A list of tags to apply to this particular span.       |

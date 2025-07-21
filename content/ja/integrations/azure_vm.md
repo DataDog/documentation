@@ -110,7 +110,7 @@ Azure VM がシャットダウンまたは停止したモニターをミュー�
 ご不明な点は、<a href="https://docs.datadoghq.com/help/" target="_blank">Datadog サポート</a>までお問い合わせください。</div>
 
 ### メトリクス
-{{< get-metrics-from-git "azure_vm" >}}
+{{< get-metrics-from-git "azure-vm" >}}
 
 
 ### イベント

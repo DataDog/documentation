@@ -44,8 +44,8 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Containers
-  - Category::Kubernetes
+  - Categoría::Contenedores
+  - Categoría::Kubernetes
   - Supported OS::Linux
   - Offering::Integration
   configuration: README.md#Setup
@@ -56,7 +56,7 @@ tile:
   title: CRI
 ---
 
-<!--  FUENTE https://github.com/DataDog/integrations-core -->
+<!--  CON ORIGEN EN https://github.com/DataDog/integrations-core -->
 
 
 ## Información general

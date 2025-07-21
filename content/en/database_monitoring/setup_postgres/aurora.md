@@ -19,7 +19,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13, 14, 15, 16
+: 9.6, 10, 11, 12, 13, 14, 15, 16, 17
 
 Supported Agent versions
 : 7.36.1+
@@ -190,7 +190,10 @@ To monitor Aurora hosts, install the Datadog Agent in your infrastructure and co
 
 ### Autodiscovery setup (recommended)
 
-The Datadog Agent supports Autodiscovery of all Aurora endpoints in a cluster. Unless you want different configurations for different instances, or want to find and list Aurora endpoints manually, follow the [Autodiscovery setup instructions for Aurora DB clusters][9] instead of the manual setup section below.
+The Datadog Agent supports Autodiscovery for all Aurora endpoints within a cluster.
+
+If you require different configurations for specific instances, or prefer to manually specify Aurora endpoints, follow the manual setup section below.
+Otherwise, Datadog recommends using the [Autodiscovery setup instructions for Aurora DB clusters][9].
 
 {{< tabs >}}
 {{% tab "Host" %}}

@@ -20,13 +20,13 @@ aliases:
 
 ### Supported libraries
 
-| Technology     | Library                                                      | Minimal tracer version | Recommended tracer version |
-|----------------|--------------------------------------------------------------|------------------------|----------------------------|
-| Kafka          | [confluent-kafka](https://pypi.org/project/confluent-kafka/) | 1.16.0                 | 2.11.0 or later            |
-| RabbitMQ       | [Kombu](https://pypi.org/project/kombu/)                     | 2.6.0                  | 2.6.0 or later             |
-| Amazon SQS     | [Botocore](https://pypi.org/project/botocore/)               | 1.20.0                 | 2.8.0 or later             |
-| Amazon Kinesis | [Botocore](https://pypi.org/project/botocore/)               | 1.20.0                 | 2.8.0 or later             |
-| Amazon SNS     | [Botocore](https://pypi.org/project/botocore/)               | 1.20.0                 | 2.8.0 or later             |
+| Technology     | Library                                                      | Minimal tracer version                                                        | Recommended tracer version                                                        |
+|----------------|--------------------------------------------------------------|-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| Kafka          | [confluent-kafka](https://pypi.org/project/confluent-kafka/) | {{< dsm-tracer-version lang="python" lib="confluent-kafka" type="minimal" >}} | {{< dsm-tracer-version lang="python" lib="confluent-kafka" type="recommended" >}} |
+| RabbitMQ       | [Kombu](https://pypi.org/project/kombu/)                     | {{< dsm-tracer-version lang="python" lib="kombu" type="minimal" >}}           | {{< dsm-tracer-version lang="python" lib="kombu" type="recommended" >}}           |
+| Amazon SQS     | [Botocore](https://pypi.org/project/botocore/)               | {{< dsm-tracer-version lang="python" lib="botocore" type="minimal" >}}        | {{< dsm-tracer-version lang="python" lib="botocore" type="recommended" >}}        |
+| Amazon Kinesis | [Botocore](https://pypi.org/project/botocore/)               | {{< dsm-tracer-version lang="python" lib="botocore" type="minimal" >}}        | {{< dsm-tracer-version lang="python" lib="botocore" type="recommended" >}}        |
+| Amazon SNS     | [Botocore](https://pypi.org/project/botocore/)               | {{< dsm-tracer-version lang="python" lib="botocore" type="minimal" >}}        | {{< dsm-tracer-version lang="python" lib="botocore" type="recommended" >}}        |
 
 ### Installation
 
@@ -36,6 +36,7 @@ For example:
 ```yaml
 environment:
   - DD_DATA_STREAMS_ENABLED: "true"
+  - DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
 ```
 
 {{% data_streams/monitoring-kafka-pipelines %}}
