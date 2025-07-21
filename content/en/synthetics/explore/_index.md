@@ -120,7 +120,7 @@ Creating, adding, and deleting Synthetic tests, global variables, and private lo
 
 {{< img src="synthetics/search/synthetic_events_2.png" alt="Synthetic test alerts in the Events Explorer" style="width:100%" >}}
 
-Find all Synthetic Monitoring-related changes by searching for your test monitors' alerts in the search bar, or by selecting an event type under the **Event** template variable. For example, `Event Type:synthetics_alert`.
+Find all Synthetic Monitoring related changes by searching for your test monitors' alerts in the search bar, or by selecting an event type under the **Event** template variable. For example, `Event Type:synthetics_alert`.
 
 ## Further Reading
 
