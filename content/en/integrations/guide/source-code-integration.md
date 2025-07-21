@@ -624,6 +624,7 @@ To disable PR Comments for Test Optimization, head to the [Test Optimization Adv
 [101]: https://app.datadoghq.com/ci/settings/test-optimization/advanced-features
 
 {{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
