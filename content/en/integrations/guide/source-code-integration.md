@@ -47,16 +47,16 @@ To use most source code-related features, you must connect your Git repositories
 
 ### Source code management providers
 
-Datadog supports the following features for the following source code management (SCM) providers. See the Usage section for more details about each feature:
+Datadog supports the following features for the following source code management (SCM) providers. See [Usage](#usage) for more details about each feature:
 
 | Feature | GitHub | GitLab | Azure DevOps | Bitbucket |
 |---|---|---|---|---|
-| Connect SaaS Instance | Yes (GitHub.com) | Yes (GitLab.com) | Yes (Azure DevOps Services) | No (Bitbucket.org) |
-| Connect On-Prem Instance | Yes (GitHub Enterprise Server) | Yes (GitLab Self-Managed/Dedicated) | No (Azure DevOps Server) | No (Bitbucket Data Center/Server)|
-| Context Links | Yes | Yes | Yes | Yes |
-| Code Snippets | Yes | Yes | Yes | No | 
-| PR Comments | Yes | Yes | Yes | No | 
-| Datadog-Hosted Scans | Yes | Yes | No | No |
+| **Connect SaaS Instance** | Yes <br />(GitHub.com) | Yes <br />(GitLab.com) | Yes <br />(Azure DevOps Services) | No <br />(Bitbucket.org) |
+| **Connect On-Prem Instance** | Yes <br />(GitHub Enterprise Server) | Yes <br />(GitLab Self-Managed/Dedicated) | No <br />(Azure DevOps Server) | No <br />(Bitbucket Data Center/Server)|
+| **Context Links** | Yes | Yes | Yes | Yes |
+| **Code Snippets** | Yes | Yes | Yes | No | 
+| **PR Comments** | Yes | Yes | Yes | No | 
+| **Datadog-Hosted Scans** | Yes | Yes | No | No |
 
 {{< tabs >}}
 {{% tab "GitHub (SaaS & On-Prem)" %}}
@@ -65,7 +65,7 @@ Datadog supports the following features for the following source code management
 Repositories from GitHub instances are supported for both GitHub.com (SaaS) and GitHub Enterprise Server (On-Prem). For GitHub Enterprise Server, your instance must be accessible from the internet. If needed, you can allowlist <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">Datadog's <code>webhooks</code> IP addresses</a> to allow Datadog to connect to your instance.
 </div>
 
-Install Datadog's [GitHub integration][101] using the [GitHub integration tile][102] or as part of various products' onboarding pages to allow Datadog to connect to your GitHub repositories.
+Install Datadog's [GitHub integration][101] using the [integration tile][102] or while onboarding other Datadog products to connect to your GitHub repositories.
 
 [101]: https://docs.datadoghq.com/integrations/github/
 [102]: https://app.datadoghq.com/integrations/github/
@@ -77,7 +77,7 @@ Install Datadog's [GitHub integration][101] using the [GitHub integration tile][
 Repositories from GitLab instances are supported in closed Preview. Repositories from GitLab instances are supported for both GitLab.com (SaaS) and GitLab Self-Managed/Dedicated (On-Prem). For GitLab Self-Managed, your instance must be accessible from the internet. If needed, you can allowlist <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">Datadog's <code>webhooks</code> IP addresses</a> to allow Datadog to connect to your instance. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.
 </div>
 
-Install Datadog's [GitLab Source Code integration][101] using the [GitLab Source Code integration tile][102] or as part of various products' onboarding pages to allow Datadog to connect to your GitLab repositories.
+Install Datadog's [GitLab Source Code integration][101] using the [integration tile][102] or while onboarding other Datadog products to connect to your GitLab repositories.
 
 [101]: https://docs.datadoghq.com/integrations/gitlab-source-code/
 [102]: https://app.datadoghq.com/integrations/gitlab-source-code/
@@ -89,7 +89,7 @@ Install Datadog's [GitLab Source Code integration][101] using the [GitLab Source
 Repositories from Azure DevOps are supported in closed Preview. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
 </div>
 
-Install Datadog's Azure DevOps Source Code integration while onboarding to [Datadog Code Security][101]. This integration's functionality is currently limited to Code Security.
+Install Datadog's Azure DevOps Source Code integration while onboarding to [Datadog Code Security][101]. This integration's functionality is limited to Code Security.
 
 [101]: https://app.datadoghq.com/security/configuration/code-security/setup?provider=azure-devops&steps=static
 
@@ -470,7 +470,7 @@ You can see links from stack frames to their source repository in [Error Trackin
 
 1. Navigate to [**APM** > **Error Tracking**][2].
 2. Click on an issue. The **Issue Details** panel appears on the right.
-3. Under **Latest Event**, if you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can always click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+3. Under **Latest Event**, if you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
 
 {{< img src="integrations/guide/source_code_integration/error-tracking-panel-full.png" alt="A view repository button with three options (view file, view blame, and view commit) available on the right side of an error stack trace in Error Tracking, along with inline code snippets in the stack trace" style="width:100%;">}}
 
@@ -485,7 +485,7 @@ You can see a source code preview for profile frames in the [Continuous Profiler
 1. Navigate to [**APM** > **Profile Search**][2].
 2. Hover your cursor over a method in the flame graph.
 3. If needed, press `Opt` or `Alt` to enable the preview.
-4. If you're using the GitHub or GitLab integrations, click **Connect to preview** so you can see inline code snippets directly in the flame graph.
+4. If you're using the GitHub or GitLab integrations, click **Connect to preview** to see inline code snippets directly in the flame graph.
 
 {{< img src="integrations/guide/source_code_integration/profiler-source-code-preview.png" alt="Source code preview in the Continuous Profiler" style="width:100%;">}}
 
@@ -506,7 +506,7 @@ You can see links from errors in your Lambda functions' associated stack traces 
 
 1. Navigate to [**Infrastructure** > **Serverless**][101] and click on the **AWS** tab.
 2. Click on a Lambda function and click the **Open Trace** button for an invocation with an associated stack trace.
-3. If you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can always click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+3. If you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
 
 {{< img src="integrations/guide/source_code_integration/serverless-aws-function-errors.mp4" alt="Link to GitHub from Serverless Monitoring" video="true" >}}
 
@@ -518,7 +518,7 @@ You can see links from errors in your Lambda functions' associated stack traces 
 You can see links from failed test runs to their source repository in **Test Optimization**.
 
 1. Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select a failed test run.
-2. If you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can always click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+2. If you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
 
 {{< img src="integrations/guide/source_code_integration/test_run_blurred.png" alt="Link to GitHub from the CI Visibility Explorer" style="width:100%;">}}
 
@@ -533,7 +533,7 @@ For more information, see [Enhancing Developer Workflows with Datadog][102].
 You can see links from failed Static Analysis and Software Composition Analysis scans to their source repository in **Code Security**.
 
 1. Navigate to [**Software Delivery** > **Code Security**][101] and select a repository.
-2. In the **Code Vulnerabilities** or **Code Quality** view, click on a code vulnerability or violation. In the **Details** section, if you're using the GitHub or GitLab integrations, click **Connect to preview**. You can see inline code snippets highlighting the exact lines of code that triggered the vulnerability or violation. Otherwise, you can always click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+2. In the **Code Vulnerabilities** or **Code Quality** view, click on a code vulnerability or violation. In the **Details** section, if you're using the GitHub or GitLab integrations, click **Connect to preview**. You can see inline code snippets highlighting the exact lines of code that triggered the vulnerability or violation. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
 
 {{< img src="integrations/guide/source_code_integration/code-analysis-scan.png" alt="Link to GitHub from the Code Security Code Vulnerabilities view" style="width:100%;">}}
 
@@ -549,7 +549,7 @@ You can see links from errors in your security signals' associated stack traces 
 
 1. Navigate to [**Security** > **App and API Protection**][101] and select a security signal.
 2. Scroll down to the **Traces** section on the **Related Signals** tab and click on an associated stack trace.
-3. If you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can always click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+3. If you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
 
 {{< img src="integrations/guide/source_code_integration/asm-signal-trace-blur.png" alt="Link to GitHub from App and API Protection Monitoring" style="width:100%;">}}
 
@@ -586,18 +586,18 @@ For more information, see the [Dynamic Instrumentation documentation][102].
 
 {{< tabs >}}
 {{% tab "CI Visibility" %}}
-Enabled by default if the GitHub or GitLab integrations are installed correctly, you will recieve a comment summarizing the failed jobs detected in your pull request. 
+CI Visibility comments are enabled by default if the GitHub or GitLab integration is installed correctly. The integration posts a comment summarizing the failed jobs detected in your pull request. 
 
 {{< img src="integrations/guide/source_code_integration/ci-visibility-pr-comment.png" alt="PR Comment summarizing failed jobs detected by CI Visibility" style="width:100%;">}}
 
-To disable PR Comments for CI Visibility, head to the [CI Visibility Repository Settings][101].
+To disable PR comments for CI Visibility, go to the [CI Visibility Repository Settings][101].
 
 [101]: https://app.datadoghq.com/ci/settings/ci-visibility
 
 {{% /tab %}}
 {{% tab "Code Security" %}}
 
-Enabled by default if the GitHub, GitLab, or Azure DevOps integrations are installed correctly, you will recieve two types of comments on your pull requests: 
+Code Security comments are enabled by default if the GitHub, GitLab, or Azure DevOps integration is installed correctly. The integration posts two types of comments on your pull requests: 
 
 1. A single comment summarizing the new violations detected in your pull request. 
 
@@ -607,18 +607,18 @@ Enabled by default if the GitHub, GitLab, or Azure DevOps integrations are insta
 
 {{< img src="integrations/guide/source_code_integration/code-security-inline-pr-comment.png" alt="Inline comment for a specific violation detected by Code Security" style="width:100%;">}}
 
-To disable PR Comments for Code Security, head to the [Code Security Repository Settings][101].
+To disable PR comments for Code Security, go to the [Code Security Repository Settings][101].
 
 [101]: https://app.datadoghq.com/security/configuration/code-security/settings
 
 {{% /tab %}}
 {{% tab "Test Optimization" %}}
 
-Enabled by default if the GitHub or GitLab integrations are installed correctly, you will recieve a comment summarizing the failed and flaky tests detected in your pull request. 
+Test Optimization comments are enabled by default if the GitHub or GitLab integration is installed correctly. The integration posts a comment summarizing the failed and flaky tests detected in your pull request. 
 
 {{< img src="integrations/guide/source_code_integration/test-optimization-pr-comment.png" alt="PR Comment summarizing failed and flaky tests detected by Test Optimization" style="width:100%;">}}
 
-To disable PR Comments for Test Optimization, head to the [Test Optimization Advanced Features Settings][101].
+To disable PR comments for Test Optimization, go to the [Test Optimization Advanced Features Settings][101].
 
 [101]: https://app.datadoghq.com/ci/settings/test-optimization/advanced-features
 
