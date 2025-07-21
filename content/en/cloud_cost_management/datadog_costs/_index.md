@@ -36,7 +36,7 @@ You can view daily Datadog costs in [Cloud Cost Management][1](CCM), and access 
 
 There is **no additional charge** for Datadog Costs, and it is available for both CCM and non-CCM customers with a direct contract through Datadog or an External Marketplace drawdown contract.
 
-## Enabling Datadog Costs (opt-in)
+## Enabling Datadog Costs
 
 ### Required permissions
 
