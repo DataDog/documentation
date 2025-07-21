@@ -31,7 +31,7 @@ With routing rules, you can define granular logic to control how alerts reach yo
 - Trigger workflows (coming soon): Use routing rules to trigger automated workflows in response to matching alerts.
 
 ## Send Pages to Slack or Microsoft Teams
-{{< img src="service_management/oncall/schedule.png" alt="A sample routing rule, which routes all incoming Pages to Slack and Microsoft Teams." style="width:100%;" >}}
+{{< img src="service_management/oncall/page_in_slack_or_ms_teams.png" alt="A sample routing rule, which routes all incoming Pages to Slack and Microsoft Teams." style="width:100%;" >}}
 
 When you route Pages to Slack or Microsoft Teams, Datadog sends a notification to the configured channel and creates a corresponding Page object in the On-Call platform. From Slack, team members can use interactive buttons to acknowledge, resolve, escalate, or declare an incident. This streamlines incident response without leaving the chat environment.
 
