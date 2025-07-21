@@ -267,7 +267,7 @@ This configuration would require the following image tags to exist in the privat
 * `gcr.io/datadoghq/dd-lib-java-init:1`
 * `gcr.io/datadoghq/dd-lib-python-init:3`
 
-If the user does not mirror these images in their private registry, they may run into an error like the following:
+If these images are not mirrored in your private registry, you may run into an error like the following:
 
 ```
 Failed to pull image "...." rpc error: code = Unknown
