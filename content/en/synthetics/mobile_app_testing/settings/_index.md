@@ -63,7 +63,7 @@ To add a mobile application, navigate to the [**Mobile Applications List** tab][
 To edit or delete a mobile application, hover over a mobile application in the **Mobile Applications List** and click on the respective icon.
 
 <div class="alert alert-info">
-  <strong>Note:</strong> As of July 2025, React Native applications are officially supported for Mobile Application Testing. No action is needed for React Native applications that were uploaded before official support: tests continue to run as expected. Mobile Application Testing does not provide full support for Flutter applications.
+  <strong>Note</strong>: As of July 2025, React Native applications are officially supported for Mobile Application Testing. No action is needed for React Native applications that were uploaded before official support: tests continue to run as expected. Mobile Application Testing does not provide full support for Flutter applications.
 </div>
 
 ## Manage application versions
