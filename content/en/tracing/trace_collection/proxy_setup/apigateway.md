@@ -37,11 +37,21 @@ Datadog APM can create **inferred spans** for requests that pass through Amazon 
   export DD_TRACE_INFERRED_PROXY_SERVICES_ENABLED=true
   {{< /code-block >}}
   
-  Or enable it through the Datadog ECS Fargate CDK construct:
+  Alternatively, enable it through the Datadog ECS Fargate CDK construct:
   {{< code-block lang="typescript" >}}
   new DatadogECSFargate(this, 'Datadog', {
     apm: { isEnabled: true, traceInferredProxyServices: true },
   });
+  {{< /code-block >}}
+  
+  Or enable it through the Datadog ECS Fargate Terraform module:
+  {{< code-block lang="typescript" >}}
+  module "ecs_fargate_task" { 
+    dd_apm = {
+      enabled = true,
+      trace_inferred_proxy_services = true
+    }
+  }
   {{< /code-block >}}
 
 - Your underlying application is running a [supported web framework](#supported-versions-and-web-frameworks).
