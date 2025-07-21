@@ -16,6 +16,12 @@ This is an XML example where the tag `recipe` has the attribute `type`:
 </recipe>
 ```
 
+The following image shows a Windows Event 4625 log in XML, next to the same log parsed and output in JSON. By parsing the XML log, the size of the log event was reduced by approximately 30%.
+
+<figure class="text-center">
+<img src="{{ .Site.Params.img_url}}images/observability_pipelines/processors/xml-side-by-side.png" alt="The XML log and the resulting parsed log in JSON" width="80%">
+</figure>
+
 To set up this processor:
 
 1. Define a filter query. Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.

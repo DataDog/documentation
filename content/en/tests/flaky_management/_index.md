@@ -17,10 +17,6 @@ further_reading:
 <div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/flaky-test-management/" >}}
-Flaky Test Management is in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 The [Flaky Test Management][1] page provides a centralized view to track, triage, and remediate flaky tests across your organization. You can view every test's status along with key impact metrics like number of pipeline failures, CI time wasted, and failure rate.

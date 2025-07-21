@@ -39,11 +39,12 @@ The fastest way to configure Storage Monitoring is through the [Add Buckets][501
    1. **Allow Datadog to read from your destination buckets.** Add the following permissions to the Datadog IAM integration role for the account that owns the destination buckets:
       - `s3:GetObject`
       - `s3:ListBucket`
-      
-      Scope these read-only permissions to only the destination buckets containing your S3 inventory files.
-      
+      - `s3:PutInventoryConfiguration`
+
+      Scope these permissions to only the destination buckets containing your S3 inventory files.
+
    1. **Allow source buckets to write to destination buckets.** The destination buckets must include a policy that allows the source buckets to write inventory data. See [Creating a destination bucket policy][502] in the AWS documentation for details.
-   
+
    Example source-bucket policy:
 
       ```json
@@ -75,11 +76,44 @@ The fastest way to configure Storage Monitoring is through the [Add Buckets][501
 
    - Source bucket: The S3 bucket you want to monitor with Storage Monitoring
    - Destination bucket: Used to store inventory reports (one per AWS region, can be reused)
-6. Complete the configuration. The inventory generation process will start within AWS within 24 hours of the first report.
-7. Return to **Infrastructure > Storage Monitoring** to see your bucket(s) appear.
+
+6. Complete the inventory configuration. The inventory generation process starts within AWS within 24 hours of the first report.
+
+7. **Enable S3 Access Logs for prefix-level request and latency metrics:** To get prefix-level access metrics including request counts, server-side latency, and cold data identification for cost optimization, follow these additional steps:
+
+   1. **Set up the Datadog Lambda Forwarder** (if not already configured):
+      - Follow the [Datadog Forwarder installation instructions][503] to deploy the Datadog Lambda function in your AWS account
+      - This Lambda function collects and forwards your S3 access logs to Datadog
+
+   2. **Configure S3 Access Logs** for each source bucket:
+      - Go to your S3 bucket properties in the AWS Console
+      - Navigate to **Server access logging**
+      - Enable logging and specify your destination bucket (for simplicity, you can use the destination bucket for your inventory files)
+      - Set the target prefix to `access-logs/` to organize log files separately from inventory data
+
+   3. **Set up the Lambda trigger**:
+
+      **Option A: Automatic (Recommended)**
+        - In the Datadog AWS integration page, navigate to the **[Log Collection][504]** tab
+        - Enable automatic log collection for S3 by checking the S3 Access Logs checkbox
+        - Datadog [automatically configures triggers][505] on your Forwarder Lambda function for S3 access logs
+
+       **Option B: Manual**
+        - In the AWS console, go to your Datadog Forwarder Lambda function
+        - Click **Add trigger** and select **S3**
+        - Select the bucket containing your access logs
+        - Set the event type to **All object create events**
+        - Set the prefix to `access-logs/` (matching your access log prefix)
+
+
+8. Return to **Infrastructure > Storage Monitoring** to see any new buckets.
 
 [501]: https://app.datadoghq.com/storage-monitoring?mConfigure=true
 [502]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html#configure-inventory-destination-bucket-policy
+[503]: https://docs.datadoghq.com/logs/guide/forwarder/?tab=cloudformation
+[504]: https://app.datadoghq.com/integrations/amazon-web-services
+[505]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#automatically-set-up-triggers
+
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
@@ -156,7 +190,7 @@ After completing the CloudFormation setup, fill out the [post-setup form][105] w
 
 {{% tab "Terraform" %}}
 
-You can use the Terraform [aws_s3_bucket_inventory][403] resource to set up Storage Monitoring. 
+You can use the Terraform [aws_s3_bucket_inventory][403] resource to set up Storage Monitoring.
 
 The following example shows how to enable daily inventory on an S3 bucket for Datadog monitoring. To use this example:
 
