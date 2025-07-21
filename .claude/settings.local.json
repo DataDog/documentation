@@ -1,9 +1,3 @@
 {
-  "permissions": {
-    "allow": [
-      "Bash(find:*)",
-      "Bash(ls:*)"
-    ],
-    "deny": []
-  }
+  "permissions": {}
 }
