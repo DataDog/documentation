@@ -14,9 +14,9 @@ further_reading:
 
 Google Cloud Run is a fully managed compute platform that lets you run stateless containers and serverless functions with automatic scaling, built-in load balancing, and pay-only-for-what-you-use billing.
 
-First, install the [Google Cloud integration][1]. Then, continue below to start monitoring your Cloud Run apps.
+Datadog provides monitoring and log collection for Cloud Run through the [Google Cloud integration][1].
 
-[1]:/integrations/google_cloud_platform/
+For instrumentation, select your workload below for instructions.
 
 ## Choose your workload
 
@@ -25,3 +25,5 @@ First, install the [Google Cloud integration][1]. Then, continue below to start 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]:/integrations/google_cloud_platform/

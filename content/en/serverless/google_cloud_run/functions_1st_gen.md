@@ -1,20 +1,23 @@
 ---
-title: Legacy Cloud Run Functions Gen 1
+title: Instrumenting 1st Gen Cloud Run Functions
 ---
 
 ## Overview
 
+This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Cloud Run functions (1st gen), previously known as Cloud Functions.
+
 <div class="alert alert-warning">
-<strong>Migrating to 2nd Gen Functions?</strong> We recommend using <a href="/serverless/google_cloud_run/functions">2nd Gen Cloud Run Functions</a> which offer improved performance, better scaling, and better monitoring with Datadog.
+<strong>Migrating to 2nd gen Cloud Run functions</strong> 
+<br/>
+Datadog recommends using 2nd gen <a href="/serverless/google_cloud_run/functions">Cloud Run functions</a>, which offer improved performance, better scaling, and better monitoring with Datadog.
+<br/><br/>
+Google has integrated Cloud Run functions into the Cloud Run UI. Starting August 2025, creating 1st gen functions will only be possible using the Google Cloud CLI, API, or Terraform. Datadog recommends upgrading your Cloud Run function for more features and Datadog support.
 </div>
 
 <div class="alert alert-info">
-<strong>Have you set up your <a href="/integrations/google-cloud-platform/">Google Cloud integration</a>?</strong> We recommend starting with the integration tile first before moving on. Remember to add the <code>cloud asset viewer</code> role to your service account and Enable CAI to enjoy full serverless support for your cloud run service.
+<strong>Have you set up your <a href="/integrations/google-cloud-platform/">Google Cloud integration</a>?</strong> Datadog recommends setting up the integration, which collects metrics and logs from Google Cloud services, before proceeding on to instrumentation. Remember to add the <code>cloud asset viewer</code> role to your service account and enable the Cloud Asset Inventory API in Google Cloud.
 </div>
 
-This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Cloud Run Functions Gen 1 (formerly known as Cloud Functions) utilizing serverless compatibility layer.
-
-<div class="alert alert-info">Google has integrated Cloud Run functions into Cloud Run UI. Starting August 2025, creating legacy 1st Gen functions will only be possible using the Google Cloud CLI, API, or Terraform. Datadog recommends upgrading your cloud run function to Gen 2 for more features and Datadog support. Reach out to Google for more information on the migration to Cloud Run.</div>
 
 ## Setup
 
@@ -184,8 +187,8 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 
    For more information on how to add labels, see Google Cloud's [Configure labels for services][12] documentation.
 
-## Example Functions
-The following example contains a sample function with tracing and metrics set up.
+## Example functions
+The following examples contain a sample function with tracing and metrics set up.
 
 {{< programming-lang-wrapper langs="nodejs,python,java,go" >}}
 {{< programming-lang lang="nodejs" >}}
