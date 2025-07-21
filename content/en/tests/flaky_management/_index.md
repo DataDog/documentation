@@ -73,6 +73,31 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
    - If all retries pass, updates the test's status to `Fixed`.
    - If any retry fails, keeps the test's current status (`Active`, `Quarantined`, or `Disabled`).
 
+## AI-Powered Flaky Test Categorization
+
+Flaky Test Management uses AI to automatically assign a root cause category to each flaky test based on execution patterns and error signals. This helps you filter, triage, and prioritize flaky tests more effectively.
+
+<div class="alert alert-info"><strong>Note:</strong> A test must have at least one failed execution that includes both <code>@error.message</code> and <code>@error.stack</code> tags to be eligible for categorization. If the test was recently detected, categorization may take some time to complete.</div>
+
+### Categories
+
+| Category | Description |
+|----------|-------------|
+| **Concurrency** | Failures from unsafe thread interactions or race conditions. |
+| **Randomness** | Relies on random values; edge cases may trigger failures. |
+| **Floating Point** | Precision issues or rounding errors affect comparisons. |
+| **Unordered Collection** | Assumes a fixed iteration order for unordered data. |
+| **Too Restrictive Range** | Assertions miss valid edge-case outputs. |
+| **Timeout** | Exceeds time limits due to variable execution time. |
+| **Order Dependency** | Relies on shared state from other tests. |
+| **Resource Leak** | Does not release memory, files, or sockets. |
+| **Asynchronous Wait** | Uses fixed delays instead of awaiting completion. |
+| **IO** | Impacted by disk, file, or device conditions. |
+| **Network** | Depends on unstable external network services. |
+| **Time** | Sensitive to timezone or clock-based shifts. |
+| **Environment Dependency** | Behaves differently across OS, libraries, or hardware. |
+| **Unknown** | Cause unclear for categorization. |
+
 ## Compatibility
 
 To use Flaky Test Management features, you must use Datadog's native instrumentation for your test framework. The table below outlines the minimum versions of each Datadog tracing library required to quarantine, disable, and attempt to fix flaky tests. Click a language name for setup information:
