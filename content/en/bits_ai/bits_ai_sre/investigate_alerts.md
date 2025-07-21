@@ -7,25 +7,25 @@ You can configure Bits to automatically investigate when a monitor triggers an a
 
 ### Enable Bits on monitors for automated investigations
 
-There are a few ways to enable Bits for automated investigations: 
+There are a few ways to enable Bits for automated investigations:
 - **Option 1: Use the Bits-Enabled Monitors list**
-  1. In Bits AI, go to the [**Bits-Enabled Monitors**][5] page. 
+  1. In Bits AI, go to the [**Bits-Enabled Monitors**][5] page.
   1. In the **Monitors** tab, select one or more monitors, then click **Enable Bits AI**.
 - **Option 2: Add the Bits AI tag to a single monitor**
   1. Open a monitor, click on the gear icon in the upper right corner, and select **Edit**.
-  1. Add the `bitsai:enabled` tag. 
+  1. Add the `bitsai:enabled` tag.
   1. Save your changes.
 - **Option 3: Add the Bits AI tag in bulk**
   1. In the **Monitor List**, select multiple monitors, then click **Edit tags**.
   1. Add the `bitsai:enabled` tag to the selected monitors.
 
-You can also add the tag to your desired monitors using the Datadog API or Terraform. 
+You can also add the tag to your desired monitors using the Datadog API or Terraform.
 
 An investigation initiates when a monitor transitions to the alert state. Transitions to the warn or no data state, [renotifications][12], and test notifications do not trigger investigations. Additionally, noisy monitors are automatically rate-limited to avoid unnecessary investigations and protect your budget.
 
 ### Manually start an investigation
 
-Alternatively, you can manually invoke Bits on an individual monitor event. 
+Alternatively, you can manually invoke Bits on an individual monitor alert or warn event.
 
 - **Option 1: Monitor Status Page**
   -  On the monitor status page, select an alert event, then click **Investigate with Bits AI**.
@@ -33,7 +33,7 @@ Alternatively, you can manually invoke Bits on an individual monitor event.
   -  On the monitor event side panel, click **Investigate with Bits AI**.
 - **Option 3: Slack**
   - In Slack, reply to a monitor notification with `@Datadog Investigate this alert`.
- 
+
 ### Monitor requirements for Bits AI SRE
 
 Bits is able to run investigations on monitors that fulfill all three of the following requirements:
@@ -41,7 +41,7 @@ Bits is able to run investigations on monitors that fulfill all three of the fol
 
 2. **Service scope**: The monitor must have one of the following:
    - A monitor query filtered by a service
-   - A monitor query grouped by a service  
+   - A monitor query grouped by a service
    - A service tag on the monitor
 
 3. **Telemetry links**: For metric, anomaly, forecast, integration, and outlier monitors, the monitor message must include at least one helpful Datadog link:
@@ -50,7 +50,7 @@ Bits is able to run investigations on monitors that fulfill all three of the fol
    - A trace query
    - A Datadog notebook with helpful widgets
 
-Think of the first page you'd navigate to in Datadog if this monitor were to fire. These links provide Bits with valuable context to kickstart its investigation. Links are not required for APM and log monitors. 
+Think of the first page you'd navigate to in Datadog if this monitor were to fire. These links provide Bits with valuable context to kickstart its investigation. Links are not required for APM and log monitors.
 
 {{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
 
@@ -110,14 +110,14 @@ Reviewing Bits' findings not only validates their accuracy, but also helps Bits 
 
 ### During the investigation
 You can guide Bits' learning by:
-- **Improving a step**: Share a link to a better query Bits should have made. 
-- **Remembering a step**: Tell Bits to remember any helpful queries it generated. This instructs Bits to prioritize running these queries the next time the same monitor fires. 
+- **Improving a step**: Share a link to a better query Bits should have made.
+- **Remembering a step**: Tell Bits to remember any helpful queries it generated. This instructs Bits to prioritize running these queries the next time the same monitor fires.
 ### After the investigation
 At the end of an investigation, let Bits know if the conclusion it made was correct or not. If it was inaccurate, provide Bits with the correct root cause so that it can learn from the discrepancy.
 
 {{< img src="bits_ai/help_bits_ai_learn.png" alt="An investigation conclusion with buttons to rate the conclusion helpful or unhelpful highlighted" style="width:100%;" >}}
 
-### Manage memories 
+### Manage memories
 Every piece of feedback you give generates a **memory**. Bits uses these memories to enhance future investigations by recalling relevant patterns, queries, and corrections. You can navigate to [Bits-Enabled Monitors][3] to view and delete memories in the **Memories** column.
 
 [2]: https://app.datadoghq.com/bits-ai/investigations
