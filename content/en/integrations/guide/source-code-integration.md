@@ -62,20 +62,19 @@ Datadog supports the following features for the following source code management
 {{% tab "GitHub (SaaS & On-Prem)" %}}
 
 <div class="alert alert-info">
-Repositories from GitHub instances are supported for both GitHub.com (SaaS) and GitHub Enterprise Server (On-Prem). For GitHub Enterprise Server, your instance must be accessible from the internet. If needed, you can allowlist [Datadog's "webhook" IP addresses][103] to allow Datadog to connect to your instance.
+Repositories from GitHub instances are supported for both GitHub.com (SaaS) and GitHub Enterprise Server (On-Prem). For GitHub Enterprise Server, your instance must be accessible from the internet. If needed, you can allowlist <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">Datadog's <code>webhooks</code> IP addresses</a> to allow Datadog to connect to your instance.
 </div>
 
 Install Datadog's [GitHub integration][101] using the [GitHub integration tile][102] or as part of various products' onboarding pages to allow Datadog to connect to your GitHub repositories.
 
 [101]: https://docs.datadoghq.com/integrations/github/
 [102]: https://app.datadoghq.com/integrations/github/
-[103]: https://docs.datadoghq.com/api/latest/ip-ranges/
 
 {{% /tab %}}
 {{% tab "GitLab (SaaS & On-Prem)" %}}
 
 <div class="alert alert-warning">
-Repositories from GitLab instances are supported in closed Preview. Repositories from GitLab instances are supported for both GitLab.com (SaaS) and GitLab Self-Managed/Dedicated (On-Prem). For GitLab Self-Managed, your instance must be accessible from the internet. If needed, you can allowlist [Datadog's "webhook" IP addresses][103] to allow Datadog to connect to your instance. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.
+Repositories from GitLab instances are supported in closed Preview. Repositories from GitLab instances are supported for both GitLab.com (SaaS) and GitLab Self-Managed/Dedicated (On-Prem). For GitLab Self-Managed, your instance must be accessible from the internet. If needed, you can allowlist <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">Datadog's <code>webhooks</code> IP addresses</a> to allow Datadog to connect to your instance. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.
 </div>
 
 Install Datadog's [GitLab Source Code integration][101] using the [GitLab Source Code integration tile][102] or as part of various products' onboarding pages to allow Datadog to connect to your GitLab repositories.
