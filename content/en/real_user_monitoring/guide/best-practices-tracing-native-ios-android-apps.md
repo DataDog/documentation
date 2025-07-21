@@ -132,7 +132,7 @@ The following sampling rate parameters control different aspects of data collect
 
 Sampling affects different types of spans you create in your mobile app:
 
-- **Local span sampling** applies to manually instrumented spans (like business spans or performance profiling spans). It's controlled by the `Trace.sampleRate` parameter. For example, if you set this rate to 50, all manually created spans are sent to Datadog, but only 50% are visible in the UI. Each span event includes the `_dd.agent_psr` field (the sampling rate) and `metrics._sampling_priority_v1` (1 for sampled, 0 for not sampled).
+- **Local span sampling** applies to manually instrumented spans (like performance profiling spans). It's controlled by the `Trace.sampleRate` parameter. For example, if you set this rate to 50, the Trace SD produces spans in 50% of the cases, and send all of those to Datadog. Visibility of those spans in the UI depends on your APM retention filters. Each span event includes the `_dd.agent_psr` field (the sampling rate) and `metrics._sampling_priority_v1` (1 for sampled, 0 for not sampled).
 
 - **Distributed trace sampling** applies to traces that cross service boundaries, such as network requests to your backend (relevant for the "Wrap a frontend-to-backend distributed trace" use case). This is controlled by the `urlSessionTracking.firstPartyHostsTracing.sampleRate` parameter for iOS and `DatadogInterceptor.Builder.setTraceSampler` parameter for Android. If set to 50, only half of backend requests have the sampled flag set to true, as indicated by the [W3C trace context][7]. All Datadog agents honor this decision, so you see 50% of distributed traces in the UI.
 
