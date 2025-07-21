@@ -21,7 +21,7 @@ further_reading:
    - Check Agent status: `datadog-agent status`
 
 2. **Check Python tracer version**
-   - Confirm you're using Python tracer v1.9.0 or higher
+   - Confirm you're using Python tracer v2.21 or a recent version on v3.0.0
    - Check version: `python -c "import ddtrace; print(ddtrace.__version__)"`
 
 3. **Verify environment variables**
