@@ -423,10 +423,10 @@ This can also be enabled with the environment variable `DD_APM_OBFUSCATION_REMOV
 
 Scans all span metadata for numbers that appear to be credit card numbers. Any values that match are replaced with `?`. This check affects all span types and is enabled by default.
 
-**Note**: Scanning looks for values that are exactly credit card numbers (allowing for internal whitespace). If a meta value has additional string data, this obfuscator considers that value to not be a credit card number. For example:
+**Note**: Scanning looks for values that are exactly credit card numbers (allowing for internal whitespace). If a metavalue has additional string data, this obfuscator determine that value is not a credit card number. For example:
 
-- A meta value of `4111 1111 1111 1111` is redacted to `?`.
-- A meta value of `CC-4111 1111 1111 1111` is **not** redacted.
+- A metavalue of `4111 1111 1111 1111` is redacted to `?`.
+- A metavalue of `CC-4111 1111 1111 1111` is **not** redacted.
 
 ```yaml
 apm_config:
