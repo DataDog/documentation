@@ -57,4 +57,4 @@ For sending Pages to Slack, have a look at [Routing Rules][3]
 
 [1]: /service_management/on-call/teams
 [2]: https://app.datadoghq.com/on-call/teams
-[3]: /service_management/on-call/routing_rules/
+[3]: /service_management/on-call/routing_rules/#send-pages-to-slack-or-microsoft-teams
