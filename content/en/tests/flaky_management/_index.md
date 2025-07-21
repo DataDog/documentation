@@ -82,22 +82,22 @@ Flaky Test Management uses AI to automatically assign a root cause category to e
 
 ### Categories
 
-| Category | Description |
-|----------|-------------|
-| **Concurrency** | Failures from unsafe thread interactions or race conditions. |
-| **Randomness** | Relies on random values; edge cases may trigger failures. |
-| **Floating Point** | Precision issues or rounding errors affect comparisons. |
-| **Unordered Collection** | Assumes a fixed iteration order for unordered data. |
-| **Too Restrictive Range** | Assertions miss valid edge-case outputs. |
-| **Timeout** | Exceeds time limits due to variable execution time. |
-| **Order Dependency** | Relies on shared state from other tests. |
-| **Resource Leak** | Does not release memory, files, or sockets. |
-| **Asynchronous Wait** | Uses fixed delays instead of awaiting completion. |
-| **IO** | Impacted by disk, file, or device conditions. |
-| **Network** | Depends on unstable external network services. |
-| **Time** | Sensitive to timezone or clock-based shifts. |
-| **Environment Dependency** | Behaves differently across OS, libraries, or hardware. |
-| **Unknown** | Cause unclear for categorization. |
+| Category                | Description |
+|-------------------------|-------------|
+| **Concurrency**         | Test that invokes multiple threads interacting in an unsafe or unanticipated manner. Flakiness is caused by, for example, race conditions resulting from implicit assumptions about the ordering of execution, leading to deadlocks in certain test runs. |
+| **Randomness**          | Test uses the result of a random data generator. If the test does not account for all possible cases, then the test may fail intermittently, e.g., only when the result of a random number generator is zero. |
+| **Floating Point**      | Test uses the result of a floating-point operation. Floating-point operations can suffer from precision over- and under-flows, non-associative addition, etc., which—if not properly accounted for—can result in inconsistent outcomes (e.g., comparing a floating-point result to an exact real value in an assertion). |
+| **Unordered Collection**| Test assumes a particular iteration order for an unordered-collection object. Since no order is specified, tests that assume a fixed order will likely be flaky for various reasons (e.g., collection-class implementation). |
+| **Too Restrictive Range**| Test whose assertions accept only part of the valid output range. It intermittently fails on unhandled corner cases. |
+| **Timeout**             | Test fails due to time limitations, either at the individual test level or as part of a suite. This includes tests that exceed their execution time limit (e.g., single test or the whole suite) and fail intermittently due to varying execution times. |
+| **Order Dependency**    | Test depends on a shared value or resource modified by another test. Changing the test-run order can break those dependencies and produce inconsistent outcomes. |
+| **Resource Leak**       | Test improperly handles an external resource (e.g., failing to release memory). Subsequent tests that reuse the resource may become flaky. |
+| **Asynchronous Wait**   | Test makes an asynchronous call or waits for elements to load/render and does not explicitly wait for completion (often using a fixed delay). If the call or rendering takes longer than the delay, the test fails. |
+| **IO**                  | Test is flaky due to its handling of input/output—for example, failing when disk space runs out during a write. |
+| **Network**             | Test depends on network availability (e.g., querying a server). If the network is unavailable or congested, the test may fail. |
+| **Time**                | Test relies on system time and may be flaky due to precision or timezone discrepancies (e.g., failing when midnight passes in UTC). |
+| **Environment Dependency** | Test depends on specific OS, library versions, or hardware. It may pass on one environment but fail on another, especially in cloud-CI environments where machines vary nondeterministically. |
+| **Unknown**             | Test is flaky for an unknown reason. |
 
 ## Compatibility
 
