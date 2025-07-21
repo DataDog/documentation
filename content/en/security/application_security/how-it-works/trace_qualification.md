@@ -2,13 +2,6 @@
 title: Trace Qualification
 aliases:
   - /security/application_security/threats/trace_qualification
-further_reading:
-- link: "/security/application_security/"
-  tag: "Documentation"
-  text: "Protect against threats with Datadog App and API Protection"
-- link: "/security/application_security/how-it-works//"
-  tag: "Documentation"
-  text: "How App and API Protection Works"
 ---
 
 ## Overview
