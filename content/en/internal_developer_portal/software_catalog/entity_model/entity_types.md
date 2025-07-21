@@ -405,7 +405,7 @@ Learn more about [peer tags and inferred entities][4].
 In Software Catalog, a frontend (`kind:frontend`) represents a frontend application—such as a browser-based SPA or mobile app—that interacts with services and APIs. Frontend entities offer a structured way to model user-facing applications in the same catalog alongside backend services.
 
 ### Example YAML definitions
-{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+```
 apiVersion: v3
 kind: frontend
 metadata:
@@ -433,7 +433,7 @@ dependsOn:
 - service:payment-service
 componentOf:
 - system:shopist-checkout-platform
-{{< /code-block >}}
+```
 
 When this definition is created:
 
