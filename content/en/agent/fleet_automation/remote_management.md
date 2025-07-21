@@ -104,13 +104,15 @@ If you need to downgrade an Agent, follow the steps in [Upgrade your Agents](#up
 
 To uninstall Remote Agent Management from your Linux environment, follow the steps below. Ensure that you have the necessary permissions to perform the uninstall process.
 
-To uninstall the agent after installing it with Remote Agent Management, in a shell, run `sudo datadog-installer purge`.
+To uninstall the Agent after installing it with Remote Agent Management, in a shell, run `sudo datadog-installer purge`.
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
 There are no steps needed to uninstall Remote Agent Management on Windows, it is packaged with the Agent itself.
+
 To disable Remote Agent Management, configure `remote_updates: false` in `datadog.yaml`.
+
 To uninstall the Agent, see [Uninstall the Agent][1].
 
 [1]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/#uninstall-the-agent
