@@ -96,7 +96,7 @@ To access Agent configurations, use the **Open Host** dropdown button in the top
 
 When the [Datadog Extension][14] is configured with your OpenTelemetry Collector, you can view collector configuration and build information directly in the infrastructure list host detail panel. The Datadog Extension provides visibility into your collector fleet from within the Datadog UI, making it easier to manage and debug your OpenTelemetry Collector deployments.
 
-<div class="alert alert-info">The <a href="/opentelemetry/integrations/datadog_extension/">Datadog Extension</a> must be enabled and configured in your OpenTelemetry Collector. This component is only available in OpenTelemetry Collector Contrib version 0.129.0 or greater.</div>
+<div class="alert alert-info">The <a href="/opentelemetry/integrations/datadog_extension/">Datadog Extension</a> must be enabled and configured in your OpenTelemetry Collector. This component is only available in OpenTelemetry Collector Contrib or custom-built collector versions 0.129.0 or greater.</div>
 
 <div class="alert alert-warning"><strong>Hostname Matching:</strong> If your telemetry contains <a href="https://docs.datadoghq.com/opentelemetry/config/hostname_tagging/?tab=host">host attributes</a> and you have manually set the extension hostname, ensure they match. The Datadog Extension does not have access to pipeline telemetry and cannot infer hostnames from incoming spans—it only obtains hostnames from system/cloud provider APIs or manual configuration. If telemetry has different hostname attributes than extension, the telemetry will not be correlated to the host and you may see duplicate hosts in the infrastructure list.</div>
 
