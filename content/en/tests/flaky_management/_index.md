@@ -73,7 +73,7 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
    - If all retries pass, updates the test's status to `Fixed`.
    - If any retry fails, keeps the test's current status (`Active`, `Quarantined`, or `Disabled`).
 
-## AI-Powered Flaky Test Categorization
+## AI-powered flaky test categorization
 
 Flaky Test Management uses AI to automatically assign a root cause category to each flaky test based on execution patterns and error signals. This helps you filter, triage, and prioritize flaky tests more effectively.
 
