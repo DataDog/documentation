@@ -39,7 +39,7 @@ To add a mobile application, navigate to the [**Mobile Applications List** tab][
 [101]: https://app.datadoghq.com/synthetics/tests
 [102]: https://developer.android.com/tools/bundletool
 
-{{< img src="mobile_app_testing/mobile_app_react_native.png" alt="Create a mobile app test with Android and React Native highlighted" height="400px" >}}
+{{< img src="mobile_app_testing/mobile_app_react_native_android.png" alt="Create a mobile app test with Android and React Native highlighted" height="400px" >}}
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -55,7 +55,7 @@ To add a mobile application, navigate to the [**Mobile Applications List** tab][
 
 [101]: https://app.datadoghq.com/synthetics/tests
 
-{{< img src="mobile_app_testing/mobile_app_ios_react_native.png" alt="Create a mobile app test with iOS and React Native highlighted" height="400px" >}}
+{{< img src="mobile_app_testing/mobile_app_ios_react_native_2.png" alt="Create a mobile app test with iOS and React Native highlighted" height="400px" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
