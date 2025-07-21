@@ -63,7 +63,7 @@ To set up the AWS integration manually, create an IAM policy and IAM role in you
 
 1. In the [AWS integration configuration page][1], click **Add AWS Account(s)**, and then select **Manually**.
 2. Choose which AWS partition your AWS account is scoped to. The partition is either `aws` for commercial regions, `aws-cn` for China*, or `aws-us-gov` for GovCloud. See [Partitions][2] in the AWS documentation for more information.
-{{< site-region region="us,us3,us5,eu,ap1" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 3. Select `Role Delegation` for the access type. Role delegation is only supported for AWS accounts scoped to AWS commercial regions.
 {{< /site-region >}}
 {{< site-region region="gov" >}}
@@ -84,9 +84,14 @@ Datadog assumes this role to collect data on your behalf.
 {{< site-region region="ap1" >}}
 3. Enter `417141415827` as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
 {{< /site-region >}}
+{{< site-region region="ap2" >}}
+3. Enter `412381753143` as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
+{{< /site-region >}}
 {{< site-region region="gov" >}}
 3. If the AWS account you want to integrate is a GovCloud account, enter `065115117704` as the `Account ID`, otherwise enter `392588925713`. This is Datadog's account ID, and grants Datadog access to your AWS data.
 {{< /site-region >}}
+**Note**: Ensure that the **DATADOG SITE** selector on the right of this documentation page is set to your Datadog site before copying the account ID above.
+
 4. Select **Require external ID** and enter the external ID copied in the previous section.
 Leave `Require MFA` disabled. For more details, see the [Access to AWS accounts owned by third parties][3] page in the AWS documentation.
 5. Click **Next**.

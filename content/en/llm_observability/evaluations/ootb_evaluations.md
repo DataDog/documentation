@@ -8,11 +8,10 @@ further_reading:
 - link: "/llm_observability/setup"
   tag: "Documentation"
   text: "Learn how to set up LLM Observability"
+- link: "https://www.datadoghq.com/blog/llm-observability-hallucination-detection/"
+  tag: "Blog"
+  text: "Detect hallucinations in your RAG LLM applications with Datadog LLM Observability"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -24,7 +23,7 @@ LLM Observability out-of-the-box evaluations leverage LLMs. To connect your LLM 
 
 ## Connect your LLM provider account
 
-Configure the LLM provider you would like to use for bring-your-own-key evaluations. You only have to complete this step once.
+Configure the LLM provider you would like to use for bring-your-own-key (BYOK) evaluations. You only have to complete this step once.
 
 {{< tabs >}}
 {{% tab "OpenAI" %}}
@@ -47,7 +46,7 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key. LLM O
 
 <div class="alert alert-info">Azure OpenAI is not supported for HIPAA organizations with a Business Associate Agreement (BAA) with Datadog.</div>
 
-Connect your Azure OpenAI account to LLM Observability with your OpenAI API key. We strongly recommend using the `GPT-4o mini` model for evaluations.
+Connect your Azure OpenAI account to LLM Observability with your OpenAI API key. Datadog strongly recommends using the `GPT-4o mini` model for evaluations. The selected model version must support [structured output][8].
 
 1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
 1. Select **Connect** on the Azure OpenAI tile.
@@ -58,6 +57,7 @@ Connect your Azure OpenAI account to LLM Observability with your OpenAI API key.
 {{< img src="llm_observability/configuration/azure-openai-tile.png" alt="The Azure OpenAI configuration tile in LLM Observability. Lists instructions for configuring Azure OpenAI and providing your API Key, Resource Name, Deployment ID, and API Version." style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
+[8]: https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/structured-outputs
 {{% /tab %}}
 {{% tab "Anthropic" %}}
 
@@ -89,6 +89,9 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 {{% /tab %}}
 {{< /tabs >}}
+
+If your LLM provider restricts IP addresses, you can obtain the required IP ranges by visiting [Datadog's IP ranges documentation][5], selecting your `Datadog Site`, pasting the `GET` URL into your browser, and copying the `webhooks` section.
+
 ## Select and enable evaluations
 
 1. Navigate to [**LLM Observability > Settings > Evaluations**][2].
@@ -108,7 +111,9 @@ After you click **Save**, LLM Observability uses the LLM account you connected t
 
 ### Estimated token usage
 
-LLM Observability provides metrics to help you monitor and manage the token usage associated with evaluations that power LLM Observability. The following metrics allow you to track the LLM resources consumed to power evaluations:
+You can monitor the token usage of your BYOK out-of-the-box evaluations using [this dashboard][7].
+
+If you need more details, the following metrics allow you to track the LLM resources consumed to power evaluations:
 
 
 - `ml_obs.estimated_usage.llm.input.tokens`
@@ -181,6 +186,10 @@ def generate_answer():
 {{< /code-block >}}
 
 The variables dictionary should contain the key-value pairs your app uses to construct the LLM input prompt (for example, the messages for an OpenAI chat completion request). Set `rag_query_variables` and `rag_context_variables` to indicate which variables constitute the query and the context, respectively. A list of variables is allowed to account for cases where multiple variables make up the context (for example, multiple articles retrieved from a knowledge base).
+
+Hallucination detection does not run if either the rag query, the rag context, or the span output is empty.
+
+You can find more examples of instrumentation in the [SDK documentation][6].
 
 ##### Hallucination configuration
 
@@ -277,3 +286,6 @@ This check ensures that sensitive information is handled appropriately and secur
 [2]: https://app.datadoghq.com/llm/settings/evaluations
 [3]: https://app.datadoghq.com/llm/applications
 [4]: /security/sensitive_data_scanner/
+[5]: https://docs.datadoghq.com/api/latest/ip-ranges/
+[6]: https://docs.datadoghq.com/llm_observability/setup/sdk/
+[7]: https://app.datadoghq.com/dash/integration/llm_byok_token_usage

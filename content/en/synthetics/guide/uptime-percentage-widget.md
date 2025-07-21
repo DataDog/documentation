@@ -11,6 +11,9 @@ further_reading:
     - link: '/getting_started/synthetics/'
       tag: 'Documentation'
       text: 'Getting Started with Synthetic Monitoring'
+    - link: "https://www.datadoghq.com/blog/slo-synthetic-monitoring/"
+      tag: "Blog"
+      text: "Improve SLO accuracy and performance with Datadog Synthetic Monitoring"
 ---
 
 ## Overview
@@ -19,7 +22,7 @@ Maintaining service level agreements with external or internal customers often r
 
 This guide shows you how to achieve that using Datadog [Synthetic Monitoring][1] and the [SLO widget][2] with an example website, `http://example.com/`.
 
-## Create a Synthetics test
+## Create a Synthetic Monitoring test
 
 To create a [Synthetic API test][3] with `http://example.com/`, see [Create a single API test][4].
 

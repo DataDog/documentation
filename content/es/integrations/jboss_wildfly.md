@@ -154,7 +154,7 @@ La recopilación de logs se encuentra deshabilitada de manera predeterminada en 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "jboss_wildfly" >}}
+{{< get-metrics-from-git "jboss-wildfly" >}}
 
 
 ### Eventos
@@ -162,7 +162,7 @@ La recopilación de logs se encuentra deshabilitada de manera predeterminada en 
 La integración JBoss/WildFly no incluye ningún evento.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "jboss_wildfly" >}}
+{{< get-service-checks-from-git "jboss-wildfly" >}}
 
 
 ### Recopilación de métricas con JMXFetch

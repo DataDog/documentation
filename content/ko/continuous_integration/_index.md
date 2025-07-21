@@ -44,10 +44,6 @@ further_reading:
 title: 지속적 통합 가시성
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">현재 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 CI Visibility를 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 이 페이지에서는 연속적인 통합(CI) 메트릭과 데이터를 Datadog 대시보드로 가져오는 방법에 대해 설명합니다. CI 파이프라인에서 Continuous Testing 테스트를 실행하려면 <a href="/continuous_testing/cicd_integrations/" target="_blank">Continuous Testing 및 CI/CD</a> 섹션을 참조하세요.
 
 {{< learning-center-callout header="활성화 웨비나 세션에 참가하세요" hide_image="true" btn_title="등록" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=CI">}}

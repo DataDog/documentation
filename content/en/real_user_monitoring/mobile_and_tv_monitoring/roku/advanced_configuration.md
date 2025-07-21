@@ -10,16 +10,14 @@ further_reading:
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
+site_support_id: rum_roku
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">RUM for Roku is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
 
 ## Overview
 
 If you have not set up the SDK yet, follow the [in-app setup instructions][1] or refer to the [Roku RUM setup documentation][2]. 
 
-## Track RUM Resources
+## Track RUM resources
 
 ### `roUrlTransfer`
 
@@ -129,7 +127,7 @@ In addition to the default attributes captured by the SDK automatically, you can
     m.global.setField("datadogContext", { foo: "Some value", bar: 123})
 ```
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

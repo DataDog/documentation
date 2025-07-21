@@ -153,7 +153,7 @@ Además de [rastrear recursos automáticamente][6], también puedes rastrear rec
 
 ### Errores personalizados
 
-Para realizar un rastreo de errores específicos, notifica al monitor cuando se produzca un error con el mensaje, el origen, la excepción y atributos adicionales. Consulta la [documentación sobre atributos de error][5].
+Para realizar un rastreo de errores específicos, notifica al monitor cuando se produzca un error con el mensaje, el origen, la excepción y atributos adicionales. Consulta la [documentación sobre atributos de error][7].
 
 ```kotlin
    GlobalRumMonitor.get().addError(message, source, throwable, attributes)
@@ -235,13 +235,11 @@ Al añadir información de usuario a tus sesiones de RUM, simplificas lo siguien
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="API de usuario en la interfaz de usuario de RUM" >}}
 
-Los siguientes atributos son **opcionales**. Debes indicar **al menos uno**:
-
-| Atributo  | Tipo | Descripción                                                                                              |
-|------------|------|----------------------------------------------------------------------------------------------------|
-| usr.id    | Cadena | Identificador de usuario único.                                                                                  |
-| usr.name  | Cadena | Nombre descriptivo, que se muestra por defecto en la interfaz de usuario de RUM.                                                  |
-| usr.email | Cadena | Correo electrónico del usuario, que se muestra en la interfaz de usuario de RUM si el nombre de usuario no está presente. También se usa para obtener Gravatars. |
+| Atributo   | Tipo   | Descripción                                                                     |
+| ----------- | ------ | ------------------------------------------------------------------------------- |
+| `usr.id`    | Cadena | (Obligatorio) Identificador único de usuario.                                              |
+| `usr.name`  | Cadena | (Opcional) Nombre de usuario sencillo, mostrado por defecto en la interfaz de usuario RUM.              |
+| `usr.email` | Cadena | (Opcional) Correo electrónico del usuario, mostrado en la interfaz de usuario RUM, si el nombre de usuario no está presente. |
 
 Para identificar las sesiones de usuario, utiliza, por ejemplo, la API `setUserInfo`:
 
@@ -362,6 +360,9 @@ Puedes utilizar los siguientes métodos en `RumConfiguration.Builder` al crear l
 
 `useCustomEndpoint`
 : utiliza RUM para apuntar a un servidor personalizado.
+
+`trackAnonymousUser`
+: Cuando se habilita, el SDK genera un ID de usuario anónimo, único y no personal que se conserva durante el lanzamiento de la aplicación. Este ID se adjuntará a cada sesión RUM, lo que te permitirá vincular sesiones originadas por el mismo usuario/dispositivo sin recopilar datos personales. Por defecto, se configura como `true`.
 
 ### Rastrear vistas automáticamente
 
@@ -556,32 +557,32 @@ Para modificar algunos atributos en tus eventos de RUM, o para descartar algunos
 
   Al implementar la interfaz `EventMapper<T>`, solo se pueden modificar algunos atributos para cada tipo de evento:
 
-   | Tipo de evento    | Clave de atributo      | Descripción                                     |
-   |---------------|--------------------|-------------------------------------------------|
+   | Tipo de evento    | Clave de atributo        | Descripción                                      |
+   | ------------- | -------------------- | ------------------------------------------------ |
    | ViewEvent     | `view.referrer`      | URL vinculada con la vista inicial de la página. |
    |               | `view.url`           | URL de la vista.                                 |
-   |               | `view.name`           | Nombre de la vista.                                |
-   | ActionEvent   |                    |                                                 |
+   |               | `view.name`          | Nombre de la vista.                                |
+   | ActionEvent   |                      |                                                  |
    |               | `action.target.name` | Nombre de destino.                                     |
    |               | `view.referrer`      | URL vinculada con la vista inicial de la página. |
    |               | `view.url`           | URL de la vista.                                 |
-   |               | `view.name`           | Nombre de la vista.                               |
-   | ErrorEvent    |                      |                                                 |
+   |               | `view.name`          | Nombre de la vista.                                |
+   | ErrorEvent    |                      |                                                  |
    |               | `error.message`      | Mensaje de error.                                   |
    |               | `error.stack`        | Stack trace del error.                         |
    |               | `error.resource.url` | URL del recurso.                             |
    |               | `view.referrer`      | URL vinculada con la vista inicial de la página. |
    |               | `view.url`           | URL de la vista.                                 |
-   |               | `view.name`           | Nombre de la vista.                                |
-   | ResourceEvent |                    |                                                 |
+   |               | `view.name`          | Nombre de la vista.                                |
+   | ResourceEvent |                      |                                                  |
    |               | `resource.url`       | URL del recurso.                             |
    |               | `view.referrer`      | URL vinculada con la vista inicial de la página. |
    |               | `view.url`           | URL de la vista.                                 |
-   |               | `view.name`           | Nombre de la vista.                                |
-   | LongTaskEvent |                    |                                                 |
-   |               | `view.referrer`       | URL vinculada con la vista inicial de la página. |
-   |               | `view.url`            | URL de la vista.                                 |
-   |               | `view.name`           | Nombre de la vista.                                |
+   |               | `view.name`          | Nombre de la vista.                                |
+   | LongTaskEvent |                      |                                                  |
+   |               | `view.referrer`      | URL vinculada con la vista inicial de la página. |
+   |               | `view.url`           | URL de la vista.                                 |
+   |               | `view.name`          | Nombre de la vista.                                |
 
    **Nota**: Al devolver el parámetro `null` desde la implementación de `EventMapper<T>`, se descarta el evento.
 

@@ -90,7 +90,7 @@ For example, to capture 100% of traces for the resource `GET /checkout` from the
 
 ```
 # using system property
-java -Ddd.trace.sampling.rules='[{\"service\": \"my-service\", \"resource\": \"GET /checkout\", \"sample_rate\":1},{\"service\": \"my-service\", \"sample_rate\":0.2}]' -javaagent:dd-java-agent.jar -jar my-app.jar
+java -Ddd.trace.sampling.rules='[{"service": "my-service", "resource": "GET /checkout", "sample_rate":1},{"service": "my-service", "sample_rate":0.2}]' -javaagent:dd-java-agent.jar -jar my-app.jar
 
 # using environment variables
 export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "resource":"GET /checkout", "sample_rate": 1},{"service": "my-service", "sample_rate": 0.2}]'
@@ -488,6 +488,8 @@ end
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
+{{% tracing-go-v2 %}}
+
 Manually keep a trace:
 
 ```Go
@@ -496,10 +498,8 @@ package main
 import (
     "log"
     "net/http"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext" // 1.x
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/ext" // 2.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/ext" 
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -523,10 +523,8 @@ import (
     "log"
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext" // 1.x
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/ext" // 2.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/ext"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {

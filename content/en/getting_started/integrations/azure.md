@@ -56,7 +56,7 @@ See the following table for a summary of the various configuration options avail
 
 ## Setup
 
-{{% site-region region="us,us5,eu,ap1,us-fed" %}}
+{{% site-region region="us,us5,eu,ap1,gov,ap2" %}}
 
 Follow the instructions on this page to set up the **Standard Azure integration**, which is available for all Datadog sites. 
 
@@ -99,7 +99,7 @@ You can find your Azure metrics in the metrics summary page in the Datadog platf
 
 
 ## Log collection 
-{{% site-region region="us,us5,eu,ap1,us-fed" %}}
+{{% site-region region="us,us5,eu,ap1,ap2,gov" %}}
 
 Follow the instructions on this page to set up log collection through the **Standard Azure integration**. 
 If you are on the US3 site and use the Azure Native Integration, use the site selector on the right side of this page to select `US3` for instructions on [log collection using the Azure Native integration][18]. 

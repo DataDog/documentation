@@ -42,6 +42,7 @@ Unified Service Tags (USTs) connect traces, metrics, and logs by applying consis
 Learn how to set USTs for:
 - [Linux][14]
 - [Docker][15]
+- [Windows][18]
 - [Kubernetes][16]
 
    **Note**: In Kubernetes, USTs must be set on both the Deployment object and the Pod template spec.
@@ -87,6 +88,16 @@ The available setup methods depend on your platform:
 [10]: /tracing/trace_collection/library_config/
 
 {{% /tab %}}
+
+{{% tab "Windows" %}}
+
+| Configuration method | Description | Supported platforms |
+|:---|:---|:---|
+| [Set environment variables][10] | Enable products by setting environment variables directly in your application configuration. | Linux, Kubernetes, Windows, Docker |
+
+[10]: /tracing/trace_collection/library_config/
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Troubleshooting
@@ -117,3 +128,4 @@ Single Step Instrumentation automatically disables when it detects [custom instr
 [15]: /getting_started/tagging/unified_service_tagging/?tab=docker#containerized-environment
 [16]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [17]: /tracing/trace_collection/automatic_instrumentation/configure_apm_features_linux/
+[18]: /integrations/windows_service/#tags

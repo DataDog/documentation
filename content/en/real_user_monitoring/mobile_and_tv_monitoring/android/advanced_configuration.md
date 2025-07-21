@@ -19,7 +19,7 @@ If you have not set up the SDK yet, follow the [in-app setup instructions][1] or
 
 Android RUM automatically tracks attributes such as user activity, screens, errors, and network requests. See the [RUM Data Collection documentation][3] to learn about the RUM events and default attributes. You can further enrich user session information and gain finer control over the attributes collected by tracking custom events.
 
-### Custom Views
+### Custom views
 
 In addition to [tracking views automatically][4], you can also track specific distinct views (such as activities and fragments) when they become visible and interactive in the `onResume()` lifecycle. Stop tracking when the view is no longer visible. Most often, this method should be called in the frontmost `Activity` or `Fragment`:
 
@@ -49,7 +49,7 @@ In addition to [tracking views automatically][4], you can also track specific di
 {{% /tab %}}
 {{< /tabs >}}
 
-### Custom Actions
+### Custom actions
 
 In addition to [tracking actions automatically][5], you can also track specific custom user actions (such as taps, clicks, and scrolls) with `RumMonitor#addAction`. For continuous action tracking (for example, tracking a user scrolling a list), use `RumMonitor#startAction` and `RumMonitor#stopAction`.
 
@@ -118,7 +118,7 @@ public class CustomRumResourceAttributesProvider implements RumResourceAttribute
 {{% /tab %}}
 {{< /tabs >}}
 
-### Custom Resources
+### Custom resources
 
 In addition to [tracking resources automatically][6], you can also track specific custom resources (such as network requests and third-party provider APIs) with methods (such as `GET` and `POST`) while loading the resource with `RumMonitor#startResource`. Stop tracking with `RumMonitor#stopResource` when it is fully loaded, or `RumMonitor#stopResourceWithError` if an error occurs while loading the resource.
 
@@ -151,7 +151,7 @@ In addition to [tracking resources automatically][6], you can also track specifi
 {{% /tab %}}
 {{< /tabs >}}
 
-### Custom Errors
+### Custom errors
 
 To track specific errors, notify the monitor when an error occurs with the message, source, exception, and additional attributes. Refer to the [Error Attributes documentation][7].
 
@@ -226,9 +226,9 @@ You can define the minimum log level (priority) to send events to Datadog in a l
 
 In addition to the [default RUM attributes][3] captured by the RUM Android SDK automatically, you can choose to add additional contextual information, such as custom attributes, to your RUM events to enrich your observability within Datadog. Custom attributes allow you to filter and group information about observed user behavior (such as cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, and network health).
 
-### Track User Sessions
+### Track user sessions
 
-Adding user information to your RUM sessions makes it easy to:
+Adding user information to your RUM sessions makes it possible to:
 * Follow the journey of a given user
 * Know which users are the most impacted by errors
 * Monitor performance for your most important users
@@ -261,7 +261,6 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
  
 Widgets are not automatically tracked with the SDK. To send UI interactions from your widgets manually, call the Datadog API. [See example][10].
 
-
 ## Initialization parameters
 
 You can use the following methods in `Configuration.Builder` when creating the Datadog configuration to initialize the library:
@@ -270,7 +269,7 @@ You can use the following methods in `Configuration.Builder` when creating the D
 : Defines hosts that have tracing enabled and have RUM resources categorized as `first-party`. **Note**: If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the tracer in use.
 
 `useSite(DatadogSite)` 
-: Switches target data to EU1, US1, US3, US5, US1_FED and AP1 sites.
+: Switches target data to EU1, US1, US3, US5, US1_FED, AP1 and AP2 sites.
 
 `setFirstPartyHostsWithHeaderType`
 : Sets the list of first party hosts and specifies the type of HTTP headers used for distributed tracing.
@@ -379,7 +378,6 @@ To automatically track your views (such as activities and fragments), provide a 
 
 `NavigationViewTrackingStrategy`
 : Recommended for Android Jetpack Navigation library users. Each Navigation destination is considered a distinct view.
-
 
 For instance, to set each fragment as a distinct view, use the following configuration in your [setup][1]:
 
@@ -598,7 +596,7 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 }
 ```
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -1,5 +1,6 @@
 ---
 title: Querying Tags in DDSQL (Preview)
+private: true
 aliases:
 - /dashboards/ddsql_editor/reference/tags/
 - /ddsql_editor/reference/tags/
