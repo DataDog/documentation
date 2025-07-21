@@ -4678,12 +4678,12 @@ menu:
       url: llm_observability/terms/
       parent: llm_obs
       identifier: llm_obs_terms
-      weight: 1
+      weight: 10
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 10
+      weight: 11
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
@@ -6872,7 +6872,7 @@ menu:
       url: continuous_testing/guide/
       parent: continuous_testing
       identifier: continuous_testing_guides
-      weight: 6      
+      weight: 6
     - name: Troubleshooting
       url: continuous_testing/troubleshooting/
       parent: continuous_testing
