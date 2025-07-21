@@ -30,20 +30,6 @@ By the end of this tutorial, you will be able to:
 * You have telemetry such as APM trace data or request duration metrics.
 * You are familiar with basic Datadog widgets and dashboards and can [add a widget and edit it][4].
 
-## Understand the Key Concepts
-
-Before building your first visualization, it's helpful to understand two core Vega-Lite concepts: **encoding** and **layering**.
-
-Encodings
-: An encoding maps data to a visual element. You define these mappings in the "Define visual" tab of the Wildcard widget. For example: <br>
-    * X position → p50 latency
-    * Y position → p95 latency
-    * Color → endpoint
-    * Shape → service
-
-Layering
-: Layering allows you to stack different mark types (text, points, bars) to create composite visualizations.
-
 ## Step 1: Import an existing query
 
 Rather than starting from scratch, import a request from an existing widget. Copy the query from a widget you're interested in exploring further (such as a Top List). To get started, you can use widgets from your [prebuilt dashboards][5].
@@ -104,7 +90,7 @@ For more information, see [Using Vega-Lite with Wildcard Widgets in Datadog][6].
 Wildcard widgets support a wide range of customizations, including:
 - [Adjusting the thickness of lines to show weight and intensity][7]
 - [Adding images to visually represent values][8]
-- [Layering visualizations for richer context[9]
+- [Layering visualizations for richer context][9]
 
 For more inspiration, see [Datadog Wildcard widget examples][10] and [Vega-Lite Examples][11].
 
