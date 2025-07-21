@@ -219,11 +219,11 @@ Network errors include information about failing HTTP requests. The following fa
 | `action.name`        | string | Name of the user action.                                                         |
 | `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions. |
 
-## Data Storage
+## Data storage
 
 Before data is uploaded to Datadog, it is stored in cleartext in your channel's [cache directory][6], meaning that this data can't be read by other applications. Note that the OS can evict the data at any time, which could result in data loss in some rare cases. 
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
