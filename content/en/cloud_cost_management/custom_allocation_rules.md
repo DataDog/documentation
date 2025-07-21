@@ -31,9 +31,9 @@ Custom allocation rules run after [Tag Pipelines][1], enabling cost allocations 
 
 1. Navigate to [Cloud Cost > Settings > Custom Allocation Rules][2] and click **Add New Rule** to start.
 1. Under **Define the source**, select the cost provider.
-1. Each data source you add creates a separate grouping for the data.
+1. Under **Define the costs to split**, select the shared costs you want to allocate.
 
-   _For example, you may want to apply the allocation rule to a specific subset of your cloud spend, such as the `production` environment._
+_Example: Untagged support costs, shared database costs._
 
 ### Step 2 - Choose an allocation method
 
@@ -45,7 +45,7 @@ Below is a description of how each allocation method works with examples.
 
 {{< img src="cloud_cost/custom_allocation_rules/even_diagram.png" alt="Diagram illustrating the even split strategy" style="width:70%;" >}}
 
-With the even strategy, costs are allocated evenly towards your destination tags.
+With the even strategy, costs are allocated evenly towards your destination tags. [Apply a filter](#step-4---optional-apply-filters) to refine which part of the bill determines the proportions.
 
 {{< img src="cloud_cost/custom_allocation_rules/ui-even-1.png" alt="The even split strategy as seen in Datadog" style="width:90%;" >}}
 
@@ -71,9 +71,10 @@ In the preceding diagram, the pink bar represents a filter on the cost allocatio
 
 To create a rule for this allocation, you can:
 
-- Define the costs to allocate (source): **EC2 support fees** (`aws_product:support`). Use filters to narrow down the data source. Each source you add creates a separate grouping for the data.
+- Define the costs to allocate (source): **EC2 support fees** (`aws_product:support`). 
 - Choose the allocation method: **Proportional by spend**.
 - Choose the [destination tag](#step-3---define-the-destination) to split your costs by: **User** (`User A`, `User B`, `User C`).
+- Refine the allocation by applying [filters](#step-4---optional-apply-filters): **EC2** (`aws_product:ec2`).
 - Create suballocations by [partitioning](#step-4---optional-apply-a-partition) the allocation rule: **environment** (`env`).
 
 You can also specify how cost proportions should be partitioned to ensure segment-specific allocations. For example, if you partition your costs by environment using tags like `staging` and `production`, the proportions are calculated separately for each environment. This ensures allocations are based on the specific proportions within each partition.
@@ -88,7 +89,7 @@ You can also specify how cost proportions should be partitioned to ensure segmen
 
 Metrics-based allocation provides the ability to split up costs based on Datadog's [metrics queries][1]. By using performance metrics to allocate expenses, you can more accurately allocate costs based on application usage patterns.
 
-For example, this PostgreSQL metrics query `sum:postgresql.queries.time{*} by {user}.as_count()` tracks the total query execution time per user. The relative values are then used to determine what proportion of total PostgreSQL costs should be allocated to each user.
+For example, the Network query `sum:network.bytes_written[server_gateway_id:nat-*] by client_service and server_gateway_id` (shown below) tracks the total traffic volume through NAT gateways by service. The relative values are then used to determine what proportion of total NAT gateway costs should be allocated to each service.
 
 ### Data source limitations
 
@@ -140,10 +141,11 @@ Before creating this type of rule, be aware:
 
 To create a rule for this allocation, you could:
 
-- Define the costs to allocate (source): **Database costs** (`aws_product:rds`). Use filters to narrow down the data source. Each source you add creates a separate grouping for the data.
+- Define the costs to allocate (source): **NAT gateway costs** (`aws_operation:NatGateway`). 
 - Choose the allocation method: **Dynamic by metric**
-- Choose the data source: **Database Queries**. Tip: Review available metrics and tags in the [Metrics Summary][2].
-- Choose the [destination tag](#step-3---define-the-destination) to split your costs by: **Service** (`trace.caller.service`).
+- Choose the data source: **Network**. Tip: Review available metrics and tags in the [Metrics Summary][2].
+- Refine the allocation by applying a [filter](#step-4---optional-apply-filters):**NAT Gateway** (`server_gateway_id:nat-*`). This filters the metric to only return data for your NAT Gateway usage. 
+- Choose the [destination tag](#step-3---define-the-destination) to split your costs by applying a group by. In Network, do this by filling out the `View clients as` section: **service** (`client_service`). This groups the metric by service. 
 - Create suballocations by [partitioning](#step-4---optional-apply-a-partition) the allocation rule: **environment** (`env`).
 
 {{< img src="cloud_cost/custom_allocation_rules/ui-dynamic-by-metric-4.png" alt="The dynamic by metric split strategy as seen in Datadog" style="width:90%;" >}}
