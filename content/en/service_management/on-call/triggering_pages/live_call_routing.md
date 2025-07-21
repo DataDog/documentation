@@ -102,5 +102,5 @@ If your route isn't accepting calls:
 ### Voicemail and page issues
 
 If voicemail isn't converting to pages:
-- For **voicemail routing**: Confirm that your routing type is set to voicemail, the on-call team is properly configured, and team members have valid notification preferences configured to receive pages.
 - For **direct call routing**: If calls fall back to voicemail or fail to page, confirm that the on-call team is properly configured and that team members have valid notification preferences in place.
+- For **voicemail routing**: Confirm that your routing type is set to voicemail, the on-call team is properly configured, and team members have valid notification preferences configured to receive pages.
