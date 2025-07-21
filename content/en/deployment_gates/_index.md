@@ -44,6 +44,6 @@ For setup instructions, see [Set up Deployment Gates][4]. After the setup is com
 
 [1]: /deployment_gates/setup/#create-a-deployment-gate
 [2]: /deployment_gates/setup/?tab=monitors#rule-types
-[3]: /deployment_gates/setup/?tab=apm_faulty_deployment_detection#rule-types
+[3]: /deployment_gates/setup/?tab=apmfaultydeploymentdetection#rule-types
 [4]: /deployment_gates/setup
 [5]: /deployment_gates/explore

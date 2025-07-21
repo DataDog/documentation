@@ -2043,11 +2043,13 @@ components:
       description: The definition of `ActionConnectionIntegration` object.
       oneOf:
       - $ref: '#/components/schemas/AWSIntegration'
+      - $ref: '#/components/schemas/DatadogIntegration'
       - $ref: '#/components/schemas/HTTPIntegration'
     ActionConnectionIntegrationUpdate:
       description: The definition of `ActionConnectionIntegrationUpdate` object.
       oneOf:
       - $ref: '#/components/schemas/AWSIntegrationUpdate'
+      - $ref: '#/components/schemas/DatadogIntegrationUpdate'
       - $ref: '#/components/schemas/HTTPIntegrationUpdate'
     ActionQuery:
       description: An action query. This query type is used to trigger an action,
@@ -12241,6 +12243,103 @@ components:
           $ref: '#/components/schemas/StartStepNames'
       required:
       - databaseMonitoringTrigger
+      type: object
+    DatadogAPIKey:
+      description: The definition of the `DatadogAPIKey` object.
+      properties:
+        api_key:
+          description: The `DatadogAPIKey` `api_key`.
+          example: ''
+          type: string
+        app_key:
+          description: The `DatadogAPIKey` `app_key`.
+          example: ''
+          type: string
+        datacenter:
+          description: The `DatadogAPIKey` `datacenter`.
+          example: ''
+          type: string
+        subdomain:
+          description: Custom subdomain used for Datadog URLs generated with this
+            Connection. For example, if this org uses `https://acme.datadoghq.com`
+            to access Datadog, set this field to `acme`. If this field is omitted,
+            generated URLs will use the default site URL for its datacenter (see [https://docs.datadoghq.com/getting_started/site](https://docs.datadoghq.com/getting_started/site)).
+          type: string
+        type:
+          $ref: '#/components/schemas/DatadogAPIKeyType'
+      required:
+      - type
+      - datacenter
+      - api_key
+      - app_key
+      type: object
+    DatadogAPIKeyType:
+      description: The definition of the `DatadogAPIKey` object.
+      enum:
+      - DatadogAPIKey
+      example: DatadogAPIKey
+      type: string
+      x-enum-varnames:
+      - DATADOGAPIKEY
+    DatadogAPIKeyUpdate:
+      description: The definition of the `DatadogAPIKey` object.
+      properties:
+        api_key:
+          description: The `DatadogAPIKeyUpdate` `api_key`.
+          type: string
+        app_key:
+          description: The `DatadogAPIKeyUpdate` `app_key`.
+          type: string
+        datacenter:
+          description: The `DatadogAPIKeyUpdate` `datacenter`.
+          type: string
+        subdomain:
+          description: Custom subdomain used for Datadog URLs generated with this
+            Connection. For example, if this org uses `https://acme.datadoghq.com`
+            to access Datadog, set this field to `acme`. If this field is omitted,
+            generated URLs will use the default site URL for its datacenter (see [https://docs.datadoghq.com/getting_started/site](https://docs.datadoghq.com/getting_started/site)).
+          type: string
+        type:
+          $ref: '#/components/schemas/DatadogAPIKeyType'
+      required:
+      - type
+      type: object
+    DatadogCredentials:
+      description: The definition of the `DatadogCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/DatadogAPIKey'
+    DatadogCredentialsUpdate:
+      description: The definition of the `DatadogCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/DatadogAPIKeyUpdate'
+    DatadogIntegration:
+      description: The definition of the `DatadogIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/DatadogCredentials'
+        type:
+          $ref: '#/components/schemas/DatadogIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    DatadogIntegrationType:
+      description: The definition of the `DatadogIntegrationType` object.
+      enum:
+      - Datadog
+      example: Datadog
+      type: string
+      x-enum-varnames:
+      - DATADOG
+    DatadogIntegrationUpdate:
+      description: The definition of the `DatadogIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/DatadogCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/DatadogIntegrationType'
+      required:
+      - type
       type: object
     Dataset:
       description: Dataset object.
@@ -57706,6 +57805,7 @@ paths:
             default: navy.oncall.datadoghq.com
             description: The globally available endpoint for On-Call.
             enum:
+            - lava.oncall.datadoghq.com
             - saffron.oncall.datadoghq.com
             - navy.oncall.datadoghq.com
             - coral.oncall.datadoghq.com
@@ -57765,6 +57865,7 @@ paths:
             default: navy.oncall.datadoghq.com
             description: The globally available endpoint for On-Call.
             enum:
+            - lava.oncall.datadoghq.com
             - saffron.oncall.datadoghq.com
             - navy.oncall.datadoghq.com
             - coral.oncall.datadoghq.com
@@ -57824,6 +57925,7 @@ paths:
             default: navy.oncall.datadoghq.com
             description: The globally available endpoint for On-Call.
             enum:
+            - lava.oncall.datadoghq.com
             - saffron.oncall.datadoghq.com
             - navy.oncall.datadoghq.com
             - coral.oncall.datadoghq.com
@@ -57883,6 +57985,7 @@ paths:
             default: navy.oncall.datadoghq.com
             description: The globally available endpoint for On-Call.
             enum:
+            - lava.oncall.datadoghq.com
             - saffron.oncall.datadoghq.com
             - navy.oncall.datadoghq.com
             - coral.oncall.datadoghq.com
