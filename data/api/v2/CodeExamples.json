@@ -411,13 +411,6 @@
       "description": "Update items of a dashboard list returns \"OK\" response"
     }
   ],
-  "CreateDataDeletionRequest": [
-    {
-      "group": "data_deletion",
-      "suffix": "",
-      "description": "Creates a data deletion request returns \"OK\" response"
-    }
-  ],
   "PatchDomainAllowlist": [
     {
       "group": "domain_allowlist",
