@@ -17,7 +17,7 @@ site_support_id: rum_roku
 
 If you have not set up the SDK yet, follow the [in-app setup instructions][1] or refer to the [Roku RUM setup documentation][2]. 
 
-## Track RUM Resources
+## Track RUM resources
 
 ### `roUrlTransfer`
 
@@ -127,7 +127,7 @@ In addition to the default attributes captured by the SDK automatically, you can
     m.global.setField("datadogContext", { foo: "Some value", bar: 123})
 ```
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
