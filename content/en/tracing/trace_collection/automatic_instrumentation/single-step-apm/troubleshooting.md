@@ -169,20 +169,9 @@ Datadog maintains an internal deny list to prevent injection into certain proces
 
 ### Custom deny list entries (Linux only)  
 
-**Note**: Custom deny lists require Datadog Injector version `v0.26.0+`. 
-
-To define a custom policy:
-1. Edit `/etc/datadog-agent/inject/policies.yaml`. Policy schema fields:
-
-   * `version`: Must be `1`.  
-   * `instrument_default_supported_processes`: `true` (**allow** by default), or `false` (**block** by default)
-   * `instrument`: A list of processes to allow, with match rules (exact or prefix) for command line or executable paths
-   * `deny`: A list of processes to block, with match rules (exact or prefix) for command line or executable paths
-
-2. Run the following:
-   ```
-   sudo /opt/datadog-packages/datadog-apm-inject/stable/inject/process apply-config
-   ```
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSdMu6WAsUCD3djkl_oN0Qh7fQmBCiKYyUvuqlYWRyObebAc6Q/viewform" header="Join the Preview!">}}
+Custom process-level policies are available for Linux-based apps through a limited availability preview. To configure allow or deny rules for process injection, sign up for preview access.
+{{< /callout >}}
 
 ### Injection container flagged by security scanners
 
@@ -192,7 +181,7 @@ The container's behavior is expected and safe; the executable configures the env
 
 Datadog adheres to security best practices and is working with security vendors to whitelist this container.
 
-### Workload selection issues  
+### Kubernetes workload selection issues  
 
 Workload selection enables injection based on Kubernetes labels and selectors. Rules to consider:
 
