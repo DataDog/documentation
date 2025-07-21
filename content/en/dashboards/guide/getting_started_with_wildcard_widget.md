@@ -48,7 +48,7 @@ Layering
 
 Rather than starting from scratch, import a request from an existing widget. Copy the query from a widget you're interested in exploring further (such as a Top List). To get started, you can use widgets from your [prebuilt dashboards][5].
 
-1. Navigate to an existing dashboard with a useful widget (Top list of database queries)
+1. Navigate to an existing dashboard with a useful widget (Top List of database queries).
 2. Use the widget menu or use the keyboard shortcut (<kbd>Ctrl</kbd>/<kbd>CMD</kbd> + <kbd>C</kbd>) to copy the widget.
 3. In a new dashboard, add a Wildcard widget.
 4. In the editor, clear the default query ({{< img src="/icons/cancel-circle.png" alt="X icon to clear the query" inline="true" width="40px">}}).
@@ -61,7 +61,7 @@ Rather than starting from scratch, import a request from an existing widget. Cop
 In the query editor:
 
 1. Expand the **Data Preview** to identify the fields returned from the query.
-2. Next to your query, click **As** to add an alias to your query. This adds clarity, for example, rename `p50:trace.http.request{*} by {service}`→ `p50`
+2. Next to your query, click **As** to add an alias to your query. This adds clarity, for example, rename `p50:trace.http.request{*} by {service}`→ `p50`.
 
 {{< img src="/dashboards/guide/analyze_p50_vs_p95_latency_with_the_wildcard_widget/refine_query_walkthrough.mp4" alt="Walkthrough of refining a query in the Wildcard widget, including renaming fields and adding a P95 formula" video=true >}}
 
@@ -101,10 +101,10 @@ For more information, see [Using Vega-Lite with Wildcard Widgets in Datadog][6].
 
 ## Next Steps
 
-You can do any number of customizations with Wildcard widgets:
-- [Change the thickness of lines to show weight and intensity][7]
-- [Add images to represent values][8]
-- [Layer visualizations][9]
+Wildcard widgets support a wide range of customizations, including:
+- [Adjusting the thickness of lines to show weight and intensity][7]
+- [Adding images to visually represent values][8]
+- [Layering visualizations for richer context[9]
 
 For more inspiration, see [Datadog Wildcard widget examples][10] and [Vega-Lite Examples][11].
 
