@@ -44,7 +44,7 @@ Datadog APM can create **inferred spans** for requests that pass through Amazon 
   });
   {{< /code-block >}}
   
-  Or enable it through the Datadog ECS Fargate Terraform module:
+  Or you can enable it through the Datadog ECS Fargate Terraform module:
   {{< code-block lang="typescript" >}}
   module "ecs_fargate_task" { 
     dd_apm = {
