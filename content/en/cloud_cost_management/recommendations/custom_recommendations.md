@@ -52,7 +52,7 @@ Adjust the evaluation time frame to match your business's seasonality or operati
 
 You can select whether to apply the rule to **All Resources** or **Some Resources** in your environment.
 
-If you choose to apply the rule to Some Resources, you can filter resources by their tag (team, service, environment) for more specific parts of your business.
+If you select **Some Resources**, you can filter resources by tag (for example, `team`, `service`, or `environment`) to target specific parts of your business.
 
 ### Step 4: (optional) Label and document the customization
 
