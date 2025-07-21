@@ -163,7 +163,7 @@ This endpoint provides:
 ## Important Notes
 
 <div class="alert alert-warning">
-<strong>Hostname Matching</strong>: If you specify a custom <code>hostname</code> in the Datadog Extension, it must match the <code>hostname</code> value in the Datadog Exporter configuration. If left unset in both components, the auto-detected hostname will match correctly.
+<strong>Hostname Matching</strong>: If you specify a custom <code>hostname</code> in the Datadog Extension, it must match the <code>hostname</code> value in the Datadog Exporter configuration. If left unset in both components, the auto-detected hostname will match correctly. It should also match any [hostname telemetry resource attributes][2] on telemetry received by the Exporter to ensure full correlation throughout the Datadog application.
 </div>
 
 <div class="alert alert-info">
@@ -190,3 +190,4 @@ The Datadog Extension is in Preview and functionality may change as Datadog infr
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
+[2]: /opentelemetry/config/hostname_tagging/
