@@ -128,8 +128,7 @@ You can enable [tracking user info][10] globally to collect and apply user attri
 | `user.id`     | string | Identifier of the user. |
 | `usr.name` | string | Name of the user. |
 
-
-## Event-specific attributes 
+## Event-specific attributes
 
 Telemetry are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice telemetry values (group by) in analytics. 
 

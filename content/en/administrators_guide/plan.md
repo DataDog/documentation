@@ -18,7 +18,7 @@ When you plan a new software installation, its crucial to understand its capabil
 
 ### Scoping exercise
 
-Setting a clear goal is critical for installing Datadog. However, in a practical world, it is impossible to predict everything you might need at the outset. Product engineers iterate their rollouts and systems operators control their changes, all to control risk. Implementing a large-scale Datadog installation will benefit from standard project management practices. As part of that process, there are certain Datadog elements that you should include. Send your engineering organization a survey outline to size and whiteboard your needs.
+Setting a clear goal is critical for installing Datadog. However, in a practical world, it is impossible to predict everything you might need at the outset. Product engineers iterate their rollouts and systems operators control their changes, all to control risk. Implementing a large-scale Datadog installation will benefit from standard project management practices. As part of that process, there are certain Datadog elements that you should include. 
 
 **Recommendations:**   
 Start collecting and consolidating a survey of your organization early. Create a comprehensive view of your ecosystems, application languages, data storage, networking, and infrastructure.

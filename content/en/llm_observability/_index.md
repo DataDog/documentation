@@ -57,6 +57,19 @@ Automatically scan and redact any sensitive data in your AI applications and ide
 
 {{< img src="llm_observability/prompt_injection.png" alt="An example of a prompt-injection attempt detected by LLM Observability" style="width:100%;" >}}
 
+## See anomalies highlighted as insights
+
+LLM Observability Insights provides a monitoring experience that helps users identify anomalies in their operational metrics—such as duration and error rate—and their out-of-the-box (OOTB) evaluations.
+
+Outlier detection is performed across key dimensions:
+- Span name
+- Workflow type
+- Cluster input/output topics
+
+These outliers are analyzed over the past week and automatically surfaced in the corresponding time window selected by the user. This enables teams to proactively detect regressions, performance drifts, or unexpected behavior in their LLM applications.
+
+{{< img src="llm_observability/llm-insights.png" alt="An 'Insights' banner across the top of the LLM Observability Monitor page. The banner displays 10 insights and has a View Insights button that leads to a side panel with further details." style="width:100%;" >}}
+
 ## Use integrations with LLM Observability
 
 The [LLM Observability SDK for Python][3] integrates with frameworks such as OpenAI, LangChain, AWS Bedrock, and Anthropic. It automatically traces and annotate LLM calls, capturing latency, errors, and token usage metrics—without code changes.

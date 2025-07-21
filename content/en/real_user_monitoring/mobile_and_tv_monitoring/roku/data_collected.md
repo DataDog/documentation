@@ -202,7 +202,7 @@ Before data is uploaded to Datadog, it is stored in cleartext in your channel's 
 
 **Note**: The OS can evict the data at any time, which could result in data loss in some rare cases. 
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
