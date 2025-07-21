@@ -21,7 +21,7 @@ With private locations, you have a set of out-of-the-box [metrics][1] to keep tr
 
 {{<img src="synthetics/private_locations/pl_monitoring_table_reporting_1.png" alt="Private location monitor list" style="width:100%;">}}
 
-In [**Synthetics Settings**][2], the **Private Locations** tab displays your private locations along with their reporting status and monitor status. 
+In [**Synthetic Monitoring Settings**][2], the **Private Locations** tab displays your private locations along with their reporting status and monitor status. 
 
 When you click on a private location, a panel containing **Health** and **Metadata** details appears. The table in the **Health** tab displays all reporting workers and the image version they are running. You can get a sense of how many workers you need to pull for the new image version. 
 

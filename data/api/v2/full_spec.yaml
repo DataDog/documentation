@@ -58032,6 +58032,7 @@ paths:
             default: navy.oncall.datadoghq.com
             description: The globally available endpoint for On-Call.
             enum:
+            - lava.oncall.datadoghq.com
             - saffron.oncall.datadoghq.com
             - navy.oncall.datadoghq.com
             - coral.oncall.datadoghq.com
@@ -58091,6 +58092,7 @@ paths:
             default: navy.oncall.datadoghq.com
             description: The globally available endpoint for On-Call.
             enum:
+            - lava.oncall.datadoghq.com
             - saffron.oncall.datadoghq.com
             - navy.oncall.datadoghq.com
             - coral.oncall.datadoghq.com
@@ -58150,6 +58152,7 @@ paths:
             default: navy.oncall.datadoghq.com
             description: The globally available endpoint for On-Call.
             enum:
+            - lava.oncall.datadoghq.com
             - saffron.oncall.datadoghq.com
             - navy.oncall.datadoghq.com
             - coral.oncall.datadoghq.com
@@ -58209,6 +58212,7 @@ paths:
             default: navy.oncall.datadoghq.com
             description: The globally available endpoint for On-Call.
             enum:
+            - lava.oncall.datadoghq.com
             - saffron.oncall.datadoghq.com
             - navy.oncall.datadoghq.com
             - coral.oncall.datadoghq.com

@@ -239,7 +239,7 @@ exporters:
     metrics_endpoint: {{< region-param key="otlp_metrics_endpoint" >}}
     headers:
       dd-api-key: ${env:DD_API_KEY}
-      dd-otel-metric-config: "{resource_attributes_as_tags: true}"
+      dd-otel-metric-config: '{"resource_attributes_as_tags": true}'
       dd-otlp-source: "${PARTNER_ID}", # For Datadog platform partners only. Use the ID provided by Datadog.
 ...
 
