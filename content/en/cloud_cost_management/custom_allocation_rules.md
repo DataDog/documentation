@@ -165,7 +165,7 @@ To create a rule for this allocation, you could:
 
 1. Define the custom percentages for each of the tags you've selected for cost allocation.
 
-### Step 4 - (optional) Apply a partition
+### Step 5 - (optional) Apply a partition
 
 Partitioning allows you to split a single allocation rule into multiple sub-allocations. For example, instead of creating separate rules for each environment (like production and staging), you can create one rule that is partitioned by `environment`. Each partitioned sub-allocation uses the same allocation structure, but applies only to costs matching that tag value.
 
