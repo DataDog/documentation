@@ -97,6 +97,25 @@ For instructions on using mirrored or air-gapped repositories, see:
 
 If you need to downgrade an Agent, follow the steps in [Upgrade your Agents](#upgrade-your-agents) and specify the version you wish to downgrade to. Datadog recommends using the latest version of the Agent and upgrading your Agents regularly to make sure you have access to the latest features.
 
+## Troubleshooting
+
+### Datadog Installer incompatible with Agent (pre-7.66)
+
+If you were a Preview customer and set up remote Agent Management before Agent version 7.66, your Datadog Installer might be incompatible with the Agent.
+
+To support general availability of remote Agent upgrades, the installer component was bundled with the Agent starting in version 7.66. This change ensures that both components stay up to date together, preventing version mismatches and related compatibility issues. Earlier versions of the Agent did not bundle these components, resulting in a possible version mismatch that could prevent automatic updates and remote Agent Management functionality.
+
+To diagnose and fix the issue:
+1. Use the following [query in Fleet Automation][13] to identify affected hosts:
+   ```txt
+   support_remote_upgrade:datadog-installer
+   ```
+1. If your setup is impacted, [re-run the install script][14] on each affected Agent to manually upgrade them to Agent version 7.66 or higher. This ensures full compatibility with Remote Agent Management features.
+
+Manual Agent upgrades are not required after you've updated to 7.66 or higher. Future upgrades are handled automatically without requiring manual intervention.
+
+If you don't upgrade an earlier Agent version to 7.66 or higher, there is no impact on your existing Agent. However, remote upgrades remain unavailable until you update the Agent.
+
 ## Uninstall Remote Agent Management
 
 {{< tabs >}}
@@ -119,25 +138,6 @@ To uninstall the Agent, see [Uninstall the Agent][1].
 
 {{% /tab %}}
 {{< /tabs >}}
-
-## Troubleshooting
-
-### Datadog Installer incompatible with Agent (pre-7.66)
-
-If you were a Preview customer and set up remote Agent Management before Agent version 7.66, your Datadog Installer might be incompatible with the Agent.
-
-To support general availability of remote Agent upgrades, the installer component was bundled with the Agent starting in version 7.66. This change ensures that both components stay up to date together, preventing version mismatches and related compatibility issues. Earlier versions of the Agent did not bundle these components, resulting in a possible version mismatch that could prevent automatic updates and remote Agent Management functionality.
-
-To diagnose and fix the issue:
-1. Use the following [query in Fleet Automation][13] to identify affected hosts:
-   ```txt
-   support_remote_upgrade:datadog-installer
-   ```
-1. If your setup is impacted, [re-run the install script][14] on each affected Agent to manually upgrade them to Agent version 7.66 or higher. This ensures full compatibility with Remote Agent Management features.
-
-Manual Agent upgrades are not required after you've updated to 7.66 or higher. Future upgrades are handled automatically without requiring manual intervention.
-
-If you don't upgrade an earlier Agent version to 7.66 or higher, there is no impact on your existing Agent. However, remote upgrades remain unavailable until you update the Agent.
 
 ## Further reading
 
