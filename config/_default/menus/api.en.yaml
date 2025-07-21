@@ -5892,6 +5892,18 @@ menu:
           - UpdatePriority
         unstable: []
         order: 5
+    - name: Update case attributes
+      url: '#update-case-attributes'
+      identifier: case-management-update-case-attributes
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAttributes
+        unstable: []
+        order: 10
     - name: Assign case
       url: '#assign-case'
       identifier: case-management-assign-case
