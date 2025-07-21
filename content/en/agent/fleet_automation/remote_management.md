@@ -124,9 +124,9 @@ To uninstall the Agent, see [Uninstall the Agent][1].
 
 ### Datadog Installer incompatible with Agent (pre-7.66)
 
-If you were a Preview customer and set up remote Agent management before Agent version 7.66, your Datadog Installer might be incompatible with the Agent.
+If you were a Preview customer and set up remote Agent Management before Agent version 7.66, your Datadog Installer might be incompatible with the Agent.
 
-To support general availability of remote Agent upgrades, the installer component was bundled with the Agent starting in version 7.66. This change ensures that both components stay up to date together, preventing version mismatches and related compatibility issues. Earlier versions of the Agent did not bundle these components, resulting in a possible version mismatch that could prevent automatic updates and functionality remote Agent management functionality.
+To support general availability of remote Agent upgrades, the installer component was bundled with the Agent starting in version 7.66. This change ensures that both components stay up to date together, preventing version mismatches and related compatibility issues. Earlier versions of the Agent did not bundle these components, resulting in a possible version mismatch that could prevent automatic updates and remote Agent Management functionality.
 
 To diagnose and fix the issue:
 1. Use the following [query in Fleet Automation][13] to identify affected hosts:
