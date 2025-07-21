@@ -166,10 +166,6 @@ This endpoint provides:
 <strong>Hostname Matching</strong>: If you specify a custom <code>hostname</code> in the Datadog Extension, it must match the <code>hostname</code> value in the Datadog Exporter configuration. If left unset in both components, the auto-detected hostname will match correctly. It should also match any <a href="/opentelemetry/config/hostname_tagging/?tab=host">hostname telemetry resource attributes</a> on telemetry received by the Exporter to ensure full correlation throughout the Datadog application.
 </div>
 
-<div class="alert alert-info">
-The Datadog Extension is in Preview and functionality may change as Datadog infrastructure monitoring features evolve. For the latest updates, watch the <a href="https://www.datadoghq.com/blog/">Datadog blog</a> and the <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib">OpenTelemetry Collector Contrib repository</a>.
-</div>
-
 ## Troubleshooting
 
 ### Configuration Not Appearing
