@@ -1,5 +1,7 @@
 ---
-title: Triggering Pages
+title: Trigger a Page
+aliases:
+- /service_management/on-call/pages
 further_reading:
 - link: '/service_management/on-call/'
   tag: 'Documentation'
@@ -29,8 +31,9 @@ To page a team through email:
  1. Navigate to the on-call team's page and scroll down to "Custom Triggering Sources".
  1. Click "Generate" under the email trigger section. This generates a unique email address that can be used to trigger a page directly to the team's on-call responders.
 
-### Trigger Pages via calls 
-You can also trigger a Page through live call routing, which lets users initiate a Page by dialing and calling a Datadog-provided phone number. This provides an additional channel for urgent situations where immediate attention is needed. For setup instructions, see [Live Call Routing][3].
+### Trigger Pages through calls
+
+You can also trigger Pages via live call routing, allowing Pages to be initiated through a phone call. This provides an additional channel for urgent notifications, especially when immediate attention is required. To read more about setting up and using live call routing, see [here][3].
 
 
 ### Page manually
