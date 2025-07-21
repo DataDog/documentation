@@ -18,6 +18,6 @@ Descubre cómo Teams utiliza Datadog el Portal interno para desarrolladores para
     {{< nextlink href="/internal_developer_portal/use_cases/dev_onboarding" >}}Acelerar la incorporación de desarrolladores{{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/use_cases/dependency_management" >}}Gestionar y asignar dependencias{{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/use_cases/production_readiness" >}}Evaluar la preparación para la producción{{< /nextlink >}}
-    {{< nextlink href="/internal_developer_portal/use_cases/incident_response" >}}Mejorar la respuesta de incident (incidente) {< /nextlink >}}
+    {{< nextlink href="/internal_developer_portal/use_cases/incident_response" >}}Mejorar la respuesta de incident (incidente) {{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/use_cases/pipeline_visibility" >}}Agilizar el ciclo de vida de desarrollo con CI visibility{{< /nextlink >}}
 {{< /whatsnext >}}

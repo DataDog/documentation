@@ -15,7 +15,7 @@ title: Guías
 ## Guías para la migración
 
 {{< whatsnext desc=" " >}}
-{{< nextlink href="/opentelemetry/migrate/collector_0_120_0" >}}Migrar a OpenTelemetry Collector versión 0.120.0+{< /nextlink >}}
+{{< nextlink href="/opentelemetry/migrate/collector_0_120_0" >}}Migrar a OpenTelemetry Collector versión 0.120.0+{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/migrate/collector_0_95_0" >}}Migrar a OpenTelemetry Collector Versión 0.95.0+{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/migrate/migrate_operation_names" >}}Migrar a nuevas asignaciones de nombres de operación{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/migrate/ddot_collector" >}}Migrar a la distribución de Datadog de OpenTelemetry Collector
