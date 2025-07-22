@@ -50,7 +50,7 @@ Introduce la siguiente información según los destinos de logs que hayas selecc
 
 {{% observability_pipelines/destination_settings/amazon_security_lake %}}
 
-{{% /tab %}} --&gt;
+{{% /tab %}} -->
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_settings/chronicle %}}
