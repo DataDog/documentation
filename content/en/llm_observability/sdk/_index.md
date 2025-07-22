@@ -1354,7 +1354,7 @@ The SDK provides several methods to annotate spans with inputs, outputs, metrics
 
 ### Annotating inputs and outputs
 
-Use the `annotateIO()` member method of the `LLMObsSpan` interface to add structured input and output data to an `LLMObsSpan`. This inclues optional arguments and LLM messae objects.
+Use the `annotateIO()` member method of the `LLMObsSpan` interface to add structured input and output data to an `LLMObsSpan`. This includes optional arguments and LLM message objects.
 
 #### Arguments
 
