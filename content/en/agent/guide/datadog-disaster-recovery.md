@@ -27,7 +27,7 @@ Datadog Disaster Recovery requires Datadog Agent version **7.54 or above**.
 The Agent-based failover supports the following telemetry types and products:
 
 |Supported telemetry |Supported products          |Agent version required | 
-|--------------------|----------------------------| ----------------------|
+|--------------------|----------------------------|-----------------------|
 |Logs                |Logs                        | v7.54+                |
 |Metrics             |Infrastructure Monitoring   | v7.54+                |
 |Traces              |APM                         | v7.68+                |
@@ -42,11 +42,13 @@ Datadog is continuously evaluating customer requests to support DDR for addition
 ## Setup 
 To enable Datadog Disaster Recovery, follow these steps:
 
-### 1. Create a new DDR org and link it to your primary
+### 1. Create a new DDR org and link it to your primary org
 
 <div class="alert alert-info">If required, Datadog can set this up for you.</div>
 
-#### Create the DDR org
+{{% collapse-content title="Create and share your DDR org" level="h5" %}}
+
+**To create your DDR org:**
 
   - Go to [Get Started with Datadog](https://app.datadoghq.com/signup)
   - Choose a different Datadog site than your primary (for example if you're on `US1`, choose `EU` or `US5`)
@@ -55,31 +57,27 @@ To enable Datadog Disaster Recovery, follow these steps:
 
 All Datadog sites are geographically separated. Reference the [Datadog Site List](https://docs.datadoghq.com/getting_started/site#access-the-datadog-site) for options. 
 
-If you are also sending telemetry to Datadog using cloud provider integrations, you must add your cloud provider accounts in the DDR org. Datadog does not use cloud providers to receive telemetry data while the DDR site is not in failover.
+If you are also sending telemetry to Datadog using cloud provider integrations, you must add your cloud provider accounts in the DDR org. Datadog does not use cloud providers to receive telemetry data while the DDR site is passive (not in failover).
 
-#### Share the DDR org information
+**To share the DDR org information with Datadog:**
 
 - Email your DDR org name to your [Customer Success Manager](mailto:success@datadoghq.com)
 - Your Customer Success Manager sets this new org as your **DDR failover organization**
 
-<!-- Share your DDR organization name with your Datadog [Customer Success Manager](mailto:success@datadoghq.com) so they can configure it to be your DDR failover organization. 
 
-Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datadog Support](https://www.datadoghq.com/support/) if you need help to select the DDR Datadog site and configure your new organization to be your DDR failover organization. -->
-
-
-Although this organization appears in your Datadog billing hierarchy, all usage and cost associated is _not_  billed during the Preview period.
+**Note:** Although this organization appears in your Datadog billing hierarchy, all usage and cost associated is _not_  billed during the Preview period.
+{{% /collapse-content %}}
 
 
-#### Retrieve the public IDs
+{{% collapse-content title="Retrieve the public IDs and link your DDR and primary orgs " level="h5" %}}
 
 After the Datadog team has has set your DDR org, use the cURL commands from the Datadog [public API endpoint][8] to retrieve the public IDs of the primary and DDR org. 
 
 
-#### Link the DDR org to the primary org
+To link your DDR and primary orgs, run these commands replacing the placeholders for their values:
 
 <div class="alert alert-warning"> For security reasons, Datadog is unable to link the orgs on your behalf. </div>
 
-To link your DDR and primary orgs, run these commands replacing the placeholders for their values:
 
 ```shell
 export PRIMARY_DD_API_KEY=<PRIMARY_ORG_API_KEY>
@@ -95,7 +93,7 @@ curl -v -H "Content-Type: application/json" -H
 "dd-api-key:${PRIMARY_DD_API_KEY}" -H 
 "dd-application-key:${PRIMARY_DD_APP_KEY}" --data "${CONNECTION}" --request POST ${PRIMARY_DD_API_URL}/api/v2/hamr
 ```
-
+{{% /collapse-content %}}
 
 <br>
 
@@ -124,7 +122,7 @@ You must invite each of your users to your Disaster Recovery organization and gi
 
 {{% collapse-content title=" Set up your cloud integrations (AWS, Azure, Google Cloud)" level="h5" %}}
 
-Your cloud integrations must be configured in both Primary and DDR organizations. Because these integrations only run in one Datacenter at a time, **the integrations must run only in the Primary data center.**
+Your cloud integrations must be configured in both primary and DDR organizations. Because these integrations only run in one data center at a time, **the integrations must run only in the primary data center.**
 
 During testing, integration telemetry will be spread over both organizations and cancelling a failover testing returns the integrations to running in the Primary data center.
 
@@ -181,9 +179,9 @@ Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datado
 {{% collapse-content title="Enable Remote Configuration [**RECOMMENDED]" level="h5" %}}
 [Remote configuration (RC)][7] allows you to remotely configure and change the behavior of Datadog Agents deployed in your infrastructure. 
 
-Remote Configuration will be turned on by default on your new organization and you can create new API keys that are RC-enabled by default for use with your Agent. See the documentation for [Remote configuration][7] for more information.
+Remote Configuration is enabled by default for new organizations, this includes your DDR org. Any new API keys you create will be RC-enabled for use with your Agent. For more details, see the [Remote Configuration documentation][7].
 
-Remote Configuration is strongly recommended for a more seamless failover control. Alternatively, you can configure your Agents manually or using configuration management tools like Puppet, Ansible, Chef, etc. 
+Using Remote Configuration is strongly recommended for a more seamless failover control. As an alternative to RC, you can manually configure your Agents or use configuration management tools such as Puppet, Ansible, or Chef.
 
 {{% /collapse-content %}}
 
@@ -208,7 +206,7 @@ Setting the **enabled** field to `true` enables the Agent to ship Agent metadata
 
 During the preview, we recommend having `failover_metrics`, `failover_logs` and `failover_apm` set to **false** when in passive phases. 
 
-Your Datadog customer success manager will work with you on scheduling dedicated time windows for failover testing to measure performance and Recovery Time Objective (RTO).
+Your Datadog Customer Success Manager will work with you to schedule dedicated time windows for failover testing to measure performance and Recovery Time Objective (RTO).
 {{% /collapse-content %}} <br>
 
 
