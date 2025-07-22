@@ -529,7 +529,7 @@ For more information, see [Enhancing Developer Workflows with Datadog][102].
 You can see links from failed Static Analysis and Software Composition Analysis scans to their source repository in **Code Security**.
 
 1. Navigate to [**Software Delivery** > **Code Security**][101] and select a repository.
-2. In the **Code Vulnerabilities** or **Code Quality** view, click on a code vulnerability or violation. In the **Details** section, if you're using the GitHub or GitLab integrations, click **Connect to preview**. You can see inline code snippets highlighting the exact lines of code that triggered the vulnerability or violation. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+2. In the **Code Vulnerabilities** or **Code Quality** view, click on a code vulnerability or violation. In the **Details** section, if you're using the GitHub, GitLab, or Azure DevOps integrations, click **Connect to preview**. You can see inline code snippets highlighting the exact lines of code that triggered the vulnerability or violation. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
 
 {{< img src="integrations/guide/source_code_integration/code-analysis-scan.png" alt="Link to GitHub from the Code Security Code Vulnerabilities view" style="width:100%;">}}
 
@@ -582,7 +582,7 @@ For more information, see the [Dynamic Instrumentation documentation][102].
 
 {{< tabs >}}
 {{% tab "CI Visibility" %}}
-CI Visibility comments are enabled by default if the GitHub or GitLab integration is installed correctly. The integration posts a comment summarizing the failed jobs detected in your pull request. 
+PR comments are enabled by default when first onboarding to CI Visibility if the GitHub or GitLab integration is installed correctly. These integrations post a comment summarizing the failed jobs detected in your pull request. 
 
 {{< img src="integrations/guide/source_code_integration/ci-visibility-pr-comment.png" alt="PR Comment summarizing failed jobs detected by CI Visibility" style="width:100%;">}}
 
@@ -593,7 +593,7 @@ To disable PR comments for CI Visibility, go to the [CI Visibility Repository Se
 {{% /tab %}}
 {{% tab "Code Security" %}}
 
-Code Security comments are enabled by default if the GitHub, GitLab, or Azure DevOps integration is installed correctly. The integration posts two types of comments on your pull requests: 
+PRcomments are enabled by default when first onboarding to Code Security if the GitHub, GitLab, or Azure DevOps integration is installed correctly. These integrations post two types of comments on your pull requests: 
 
 1. A single comment summarizing the new violations detected in your pull request. 
 
@@ -610,7 +610,7 @@ To disable PR comments for Code Security, go to the [Code Security Repository Se
 {{% /tab %}}
 {{% tab "Test Optimization" %}}
 
-Test Optimization comments are enabled by default if the GitHub or GitLab integration is installed correctly. The integration posts a comment summarizing the failed and flaky tests detected in your pull request. 
+PR comments are enabled by default when first onboarding to Test Optimization if the GitHub or GitLab integration is installed correctly. The integration posts a comment summarizing the failed and flaky tests detected in your pull request. 
 
 {{< img src="integrations/guide/source_code_integration/test-optimization-pr-comment.png" alt="PR Comment summarizing failed and flaky tests detected by Test Optimization" style="width:100%;">}}
 
