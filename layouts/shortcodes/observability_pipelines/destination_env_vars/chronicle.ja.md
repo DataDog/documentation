@@ -1,0 +1,1 @@
+Google Chronicle エンドポイント URL を入力します。たとえば `https://chronicle.googleapis.com` です。

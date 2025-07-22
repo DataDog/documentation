@@ -1,0 +1,3 @@
+Hay procesadores preseleccionados que se añaden a tu grupo de procesadores automáticamente. Puedes añadir procesadores adicionales o eliminar los existentes según tus necesidades de procesamiento.
+
+Los grupos de procesadores se ejecutan de arriba hacia abajo. El orden de los procesadores es importante porque cada procesador revisa los logs, pero solo se procesan aquellos que coinciden con los filtros del procesador. Para modificar el orden de los procesadores, utiliza el asa de arrastre situada en la esquina superior izquierda del procesador que deseas mover.

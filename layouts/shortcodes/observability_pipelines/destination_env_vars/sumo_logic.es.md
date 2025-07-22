@@ -1,0 +1,1 @@
+Introduce la URL del collector HTTP de Sumo Logic. Consulta [los requisitos previos](#prerequisites) para obtener más información.

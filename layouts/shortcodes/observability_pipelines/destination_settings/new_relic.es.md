@@ -1,0 +1,1 @@
+Selecciona la región del centro de datos (**EE. UU.** o **UE**) de tu cuenta de New Relic.

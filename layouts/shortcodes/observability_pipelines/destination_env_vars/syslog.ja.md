@@ -1,0 +1,1 @@
+rsyslog または syslog-ng のエンドポイント URL を入力します。たとえば `127.0.0.1:9997` です。Observability Pipelines Worker は、ログをこのアドレスとポートに送信します。

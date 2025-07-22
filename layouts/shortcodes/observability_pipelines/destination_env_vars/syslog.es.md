@@ -1,0 +1,1 @@
+Introduce la URL del endpoint rsyslog o syslog-ng. Por ejemplo, `127.0.0.1:9997`. El Observability Pipelines Workerenvía logs a esta dirección y puerto.
