@@ -17,15 +17,14 @@ further_reading:
 
 # Introduction
 
-App and API Protection for Go installation requirements can be abstract. Moreover the Go toolchain
-cross-compilation and CGO capabilities can make it hard to understand what has to be done precisely.
+App and API Protection (AAP) for Go installation requirements can be abstract and the Go toolchain
+cross-compilation and CGO capabilities can make precise installation steps difficult to understand.
 
-In these cases, a more precise way to materialize these examples like a Dockerfile can be interesting.
-The goal of this guide is to be a step-by-step guide to a working Dockerfile, tailor-fitted for your usecase.
+The goal of this guide is to provide a step-by-step guide to a working Dockerfile customized for your use case.
 
 ## Walkthrough
 
-A lot of Dockerfiles found in this guide come from [appsec-go-test-app][4] repository. To try it out, first clone the repository:
+Many Dockerfiles found in this guide come from the [appsec-go-test-app][4] repository. To try it out, first clone the repository:
 
 ```sh
 git clone https://github.com/DataDog/appsec-go-test-app.git
@@ -51,14 +50,13 @@ ENV DD_APPSEC_ENABLED=true
 ENTRYPOINT [ "/usr/local/bin/main" ]
 ```
 
-This constitutes the simplest version of a working Dockerfile for a Go application with Datadog's WAF enabled. If this is your first use of [Orchestrion][5]. This dockerfile requires to run `orchestrion pin` beforehand and commit the resulting changes for it to work. Please refer to our [Getting Started for Go][-]
+This is the simplest version of a working Dockerfile for a Datadog WAF-enabled Go application. If this is your first use of [Orchestrion][5], note that this dockerfile requires you run `orchestrion pin` beforehand and commit the resulting changes. See [Getting Started for Go][6].
 
 This Dockerfile is split into two stages:
-1. The build stage builds from an Debian image the Go application using the [Orchestrion][5] tool to instrument it with App and API Protection features.
+1. The build stage uses a Debian image to build the Go application, and uses the [Orchestrion][5] tool to instrument the application with App and API Protection features.
 2. The runtime stage copies the built application into a minimal Ubuntu image and sets the environment variable `DD_APPSEC_ENABLED` to `true` to enable App and API Protection.
 
-This two-stage build process is beneficial because it allows you to keep the final image small and free of unnecessary build tools.
-While still ensuring that your application is instrumented correctly for App and API Protection.
+This two-stage build process allows you to keep the final image small and free of unnecessary build tools while still ensuring that your application is instrumented correctly for App and API Protection.
 
 The following sections show different Dockerfile scenarios, each with their specific considerations and complete examples.
 
@@ -68,7 +66,9 @@ Two main dimensions impact your Dockerfile choice for App and API Protection:
 * **libc implementation**: glibc (Debian/Ubuntu) or musl (Alpine)
 * **CGO**: enabled or disabled (with the env var `CGO_ENABLED`).
 
-These dimensions affect both build requirements and runtime compatibility. The Datadog WAF requires specific shared libraries (`libc.so.6` and `libpthread.so.0`) at runtime, and the build approach varies depending on these choices. Those dependencies are required by all programs built with CGO enabled, so the Datadog WAF will work out-of-the-box on runtime environments that support such programs. When CGO is disabled however, Go usually produces a fully statically linked binary that does not require these libraries but this is not true when using the Datadog WAF, which is why when CGO is disabled, the `-tags=appsec` flag needs to be passed in order for the Datadog WAF to be enabled.
+These dimensions affect both build requirements and runtime compatibility. The Datadog WAF requires specific shared libraries (`libc.so.6` and `libpthread.so.0`) at runtime and the build approach varies depending on these choices. Those dependencies are required by all programs built with CGO enabled, so the Datadog WAF will work out-of-the-box on runtime environments that support such programs. 
+
+When CGO is disabled, however, Go usually produces a fully, statically linked binary that does not require these libraries. but this is not true when using the Datadog WAF. This is why, when CGO is disabled, the `-tags=appsec` flag needs to be passed to enable the Datadog WAF.
 
 ### Standard glibc-based Dockerfile
 
@@ -118,11 +118,11 @@ ENTRYPOINT [ "/usr/local/bin/main" ]
 **Key considerations:**
 * No `appsec` build tag required
 * `apk add libc6-compat` adds symlinks where necessary for a glibc-built binary to work on Alpine
-* This setup may require installing more packages at runtime if other libraries than Datadog use CGO.
+* This setup may require installing more packages at runtime if other libraries than Datadog use CGO
 
 ### Alpine-based Dockerfile (CGO disabled)
 
-For minimal build and runtime size, using CGO disabled builds which is the default on Alpine:
+For minimal build and runtime size, using CGO disabled builds (the default on Alpine):
 
 ```dockerfile
 FROM golang:1-alpine AS build
