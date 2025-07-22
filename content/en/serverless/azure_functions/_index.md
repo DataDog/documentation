@@ -93,8 +93,9 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 
    Datadog recommends regularly upgrading to the latest version of `Datadog.AzureFunctions` to ensure you have access to enhancements and bug fixes.
 
-2. **Start the Datadog Serverless Compatibility Layer**. Add the following lines to your main application entry point file:
-   If your Azure Function app uses the Isolated Worker model
+2. **Start the Datadog Serverless Compatibility Layer**.
+
+   If your Azure Function app uses the Isolated Worker model, add the following lines to your main application entry point file:
    ```csharp
    Datadog.Serverless.CompatibilityLayer.Start();
    ```
