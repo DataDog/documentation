@@ -38,9 +38,6 @@ Datadog's Source Code Integration allows you to connect your Git repositories to
 
 {{< img src="integrations/guide/source_code_integration/inline-code-snippet.png" alt="Inline code snippet of a Java RuntimeException with a button to view the code in GitHub" style="width:100%;">}}
 
-
-## Setup
-
 ## Connect your Git repositories to Datadog
 
 To use most source code-related features, you must connect your Git repositories to Datadog. By default, when synchronizing your repositories, Datadog doesn't store the actual content of files in your repository, only the Git commit and tree objects.
