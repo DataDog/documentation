@@ -147,62 +147,64 @@ Both the Datadog Agent or the OpenTelemetry Collector can receive OTLP logs.
 
 This approach is useful if you have a requirement to keep local log files for compliance or other tooling.
 
-1. **Configure your Application to Output JSON Logs**: In your OpenTelemetry SDK setup, configure a `ConsoleLogRecordExporter` to format logs as JSON and write them to `stdout` or a file.
+1. **Configure your Application to Output JSON Logs**: Use a standard logging library to write logs as JSON to a file or `stdout`. The following Python example uses the standard `logging` library.
+2. **Manually Inject Trace Context**: In your application code, retrieve the current span context from the OpenTelemetry tracer and add the `trace_id` and `span_id` to your log records. Datadog requires the IDs to be formatted as hexadecimal strings.  
+Here is a Python example showing how to create a custom logging.Filter to automatically add the active IDs:
+
    ```python
-   # In your OTel SDK setup for Python
    import logging
-   from opentelemetry.sdk._logs import LoggerProvider, LoggingHandler
-   from opentelemetry.sdk._logs.export import ConsoleLogRecordExporter, SimpleLogRecordProcessor
-   from opentelemetry.sdk.extension.opentelemetry_log_formatter import JSONLogRecordFormatter
+   import sys
+   from opentelemetry import trace
+   from pythonjsonlogger import jsonlogger
    
-   # Configure the exporter to write JSON to the console (stdout)
-   formatter = JSONLogRecordFormatter()
-   exporter = ConsoleLogRecordExporter(formatter=formatter)
+   # 1. Create a filter to inject trace context
+   class TraceContextFilter(logging.Filter):
+       def filter(self, record):
+           span = trace.get_current_span()
+           if span.is_recording():
+               span_context = span.get_span_context()
+               record.trace_id = f'{span_context.trace_id:032x}'
+               record.span_id = f'{span_context.span_id:016x}'
+           else:
+               record.trace_id = "0"
+               record.span_id = "0"
+           return True
    
-   log_provider = LoggerProvider()
-   log_provider.add_log_record_processor(SimpleLogRecordProcessor(exporter))
+   # 2. Configure a JSON logger
+   logger = logging.getLogger("my-json-logger")
+   logger.setLevel(logging.DEBUG)
    
-   # Attach to the root logger
-   handler = LoggingHandler(level=logging.INFO, logger_provider=log_provider)
-   logging.getLogger().addHandler(handler)
-   ```
-
-2. **Verify the Log Output**: After configuring your logging library, your JSON logs should contain `trace_id` and `span_id` attributes. Datadog uses these to link the log to the exact trace and span that was active when the log was generated. Here is an example of a properly formatted JSON log entry:
-
-   ```json
-   {
-     "timestamp": 1720557413000,
-     "level": "INFO",
-     "message": "Processing user request",
-     "service": "my-service",
-     "env": "production",
-     "version": "1.2.3",
-     "trace_id": "8738839999436033394",
-     "span_id": "1006654203791334032"
-   }
+   # 3. Add the filter to the logger
+   logger.addFilter(TraceContextFilter())
+   
+   handler = logging.StreamHandler(sys.stdout)
+   formatter = jsonlogger.JsonFormatter(
+       '%(asctime)s %(name)s %(levelname)s %(message)s %(trace_id)s %(span_id)s'
+   )
+   handler.setFormatter(formatter)
+   logger.addHandler(handler)
+   
+   # Logs will now contain the trace_id and span_id
+   logger.info("Processing user request with trace context.")
    ```
 3. **Configure the Collector to Scrape Log Files**: In your Collector's `config.yaml`, enable the `filelog` receiver. Configure it to find your log files and parse them as JSON.
    ```yaml
-   receivers:
-     filelog:
-       include: [ /var/log/my-app/*.log ] # Path to your log files
-       operators:
-         - type: json_parser # Parse the log line as JSON
-           # Note: The `parse_from` keys below must exactly match the
-           # field names present in your JSON log output.
-           timestamp:
-             parse_from: attributes.timestamp
-             layout_type: epoch
-             layout: ms
-        severity:
-          parse_from: attributes.level
-
-   service:
-     pipelines:
-       logs:
-         receivers: [filelog]
-         # ...
+  receivers:
+    filelog:
+      include: [ /var/log/my-app/*.log ] # Path to your log files
+      operators:
+        - type: json_parser
+          # The timestamp and severity fields should match your JSON output
+          timestamp:
+            parse_from: attributes.asctime 
+            layout: '%Y-%m-%d %H:%M:%S,%f'
+          severity:
+            parse_from: attributes.levelname
+  # ... your logs pipeline ...
    ```
+
+This manual approach gives you full control over the log format, ensuring it is clean and easily parsable by the Collector or Datadog Agent.
+
 
 #### Collect logs using the Datadog Agent
 
