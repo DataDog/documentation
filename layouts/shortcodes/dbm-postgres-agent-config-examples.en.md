@@ -1,6 +1,9 @@
 ### One agent connecting to multiple hosts
 It is common to configure a single Agent host to connect to multiple remote database instances (see [Agent installation architectures](/database_monitoring/architecture/) for DBM). To connect to multiple hosts, create an entry for each host in the Postgres integration config.
-An agent with 4 CPUs and 16GB of RAM can monitor up to 30 databases with the same resources each.
+
+Datadog recommends using one Agent to monitor no more than 30 database instances.
+
+Previous benchmarks show that one Agent running on a `t4g.medium` EC2 instance (2 CPUs and 4GB of RAM) can successfully monitor 30 RDS `db.t3.medium` instances (2 CPUs and 4GB of RAM).
 ```yaml
 init_config:
 instances:
