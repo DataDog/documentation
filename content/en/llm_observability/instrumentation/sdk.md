@@ -6,11 +6,12 @@ aliases:
     - /llm_observability/setup/sdk/python
     - /llm_observability/setup/sdk/nodejs
     - /llm_observability/setup/sdk
+    - /llm_observability/sdk
 ---
 
 ## Overview
 
-Datadog's LLM Observability SDK for enhances the observability of your LLM applications. The SDK supports Python versions 3.7 and newer. 
+Datadog's LLM Observability SDK for enhances the observability of your LLM applications.
 
 ### Supported runtimes
 
@@ -841,7 +842,7 @@ getRelevantDocs = llmobs.wrap({ kind: 'retrieval' }, getRelevantDocs)
 
 ## Tracking user sessions
 
-Session tracking allows you to associate multiple interactions with a given user. 
+Session tracking allows you to associate multiple interactions with a given user.
 
 {{< tabs >}}
 {{% tab "Python" %}}

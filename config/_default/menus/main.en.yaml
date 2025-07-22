@@ -4609,36 +4609,36 @@ menu:
       identifier: llm_obs
       parent: ai_observability_heading
       weight: 10000
-    - name: Terms and Concepts
-      url: llm_observability/terms/
-      parent: llm_obs
-      identifier: llm_obs_terms
-      weight: 1
     - name: Quickstart
       url: llm_observability/quickstart/
       parent: llm_obs
       identifier: llm_obs_quickstart
       weight: 2
-    - name: Setup
-      url: llm_observability/setup/
+    - name: Instrumentation
+      url: llm_observability/instrumentation/
       parent: llm_obs
-      identifier: llm_obs_setup
+      identifier: llm_obs_instrumentation
       weight: 3
-    - name: LLM Obs SDK
-      url: llm_observability/sdk
-      parent: llm_obs
-      identifier: llm_obs_sdk
-      weight: 4
-    - name: Auto Instrumentation
+    - name: Automatic Instrumentation
       url: llm_observability/sdk/auto_instrumentation
-      parent: llm_obs_sdk
-      identifier: llm_obs_setup_auto_instrumentation
-      weight: 401
+      parent: llm_obs_instrumentation
+      identifier: llm_obs_sdk_auto_instrumentation
+      weight: 301
+    - name: Custom Instrumentation
+      url: llm_observability/trace_an_llm_application
+      parent: llm_obs_instrumentation
+      identifier: llm_obs_trace_an_llm_application
+      weight: 302
+    - name: SDK Reference
+      url: llm_observability/sdk
+      parent: llm_obs_instrumentation
+      identifier: llm_obs_sdk
+      weight: 303
     - name: LLM Obs API
       url: llm_observability/setup/api/
-      parent: llm_obs
+      parent: llm_obs_instrumentation
       identifier: llm_obs_api
-      weight: 6
+      weight: 303
     - name: Monitoring
       url: llm_observability/monitoring
       parent: llm_obs
@@ -4689,11 +4689,16 @@ menu:
       parent: llm_obs
       identifier: llm_obs_experiments
       weight: 9
+    - name: Terms and Concepts
+      url: llm_observability/terms/
+      parent: llm_obs
+      identifier: llm_obs_terms
+      weight: 10
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 10
+      weight: 11
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
@@ -6882,7 +6887,7 @@ menu:
       url: continuous_testing/guide/
       parent: continuous_testing
       identifier: continuous_testing_guides
-      weight: 6      
+      weight: 6
     - name: Troubleshooting
       url: continuous_testing/troubleshooting/
       parent: continuous_testing
