@@ -19132,6 +19132,14 @@ components:
           description: The total account usage.
           format: int64
           type: integer
+        account_committed_usage:
+          description: The total account committed usage.
+          format: int64
+          type: integer
+        account_on_demand_usage:
+          description: The total account on-demand usage.
+          format: int64
+          type: integer
         elapsed_usage_hours:
           description: Elapsed usage hours for some billable product.
           format: int64
