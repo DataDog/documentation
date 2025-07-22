@@ -16,9 +16,9 @@ function navigateToUrl(url) {
         window.history.pushState({}, '', url);
         
         // Close search dropdown since we're staying on the same page
-        const hitsContainer = document.querySelector('.search-searchbar-hits-container');
-        if (hitsContainer) {
-            hitsContainer.classList.add('d-none');
+        const hitsContainerContainer = document.querySelector('.hits-container');
+        if (hitsContainerContainer) {
+            hitsContainerContainer.classList.add('d-none');
         }
         
         // If there's an anchor, scroll to it
