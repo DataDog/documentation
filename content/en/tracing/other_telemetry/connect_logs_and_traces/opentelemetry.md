@@ -145,10 +145,10 @@ The OpenTelemetry Collector and the Datadog Agent can both receive OTLP logs.
 
 This approach is useful if you have a requirement to keep local log files for compliance or other tooling.
 
-**Required fields for logs**
 For Datadog to correlate your logs and traces, your JSON log files must contain specific fields formatted correctly:
 - `trace_id`: The ID of the trace. It must be a 32-character lowercase hexadecimal string.
-- `span_id`: The ID of the span. It must be a 16-character lowercase hexadecimal string.
+- `span_id`: The ID of the span. It must be a 16-character lowercase hexadecimal string.  
+
 The OpenTelemetry SDK typically provides these as integers, which must be formatted into hexadecimal strings without any <code>0x</code> prefix.
 
 1. **Configure your Application to Output JSON Logs**: Use a standard logging library to write logs as JSON to a file or `stdout`. The following Python example uses the standard `logging` library.
