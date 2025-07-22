@@ -12,7 +12,7 @@ aliases:
 
 ## Overview
 
-Datadog's LLM Observability SDK for enhances the observability of your LLM applications.
+Datadog's LLM Observability SDK enhances the observability of your LLM applications.
 
 ### Supported runtimes
 
@@ -79,7 +79,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_SITE`
 : required - _string_
-<br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}.
+<br />Destination Datadog site for LLM data submission. Your site is {{< region-param key="dd_site" code="true" >}}.
 
 `DD_LLMOBS_ENABLED`
 : required - _integer or string_
@@ -146,7 +146,7 @@ You can supply the following parameters as environment variables (for example, `
 
 `DD_SITE` or `dd.site`
 : required - _string_
-<br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}.
+<br />Destination Datadog site for LLM data submission. Your site is {{< region-param key="dd_site" code="true" >}}.
 
 `DD_LLMOBS_ENABLED` or `dd.llmobs.enabled`
 : required - _integer or string_
@@ -384,7 +384,7 @@ app.use(myAgentMiddleware)
 
 ### Starting a span
 
-There are several different methods to start a span, based on the kind of span that you are starting. See the [Span Kinds documentation][1] for a list of supported span kinds.
+There are multiple methods to start a span, based on the kind of span that you are starting. See the [Span Kinds documentation][1] for a list of supported span kinds.
 
 All spans are started as an object instance of `LLMObsSpan`. Each span has methods that you can use to interact with the span and record data.
 
@@ -392,7 +392,7 @@ All spans are started as an object instance of `LLMObsSpan`. Each span has metho
 
 Spans must be finished for the trace to be submitted and visible in the Datadog app.
 
-Spans can be finished by calling `finish()` on a span object instance. It is recommended, if possible, to wrap the span with a `try/finally` block, to ensure the span is submitted in case of exceptions.
+To finish a span, call `finish()` on a span object instance. If possible, wrap the span in a `try/finally` block to ensure the span is submitted even if an exception occurs.
 
 #### Example
 ```java
@@ -405,7 +405,7 @@ Spans can be finished by calling `finish()` on a span object instance. It is rec
     }
 ```
 
-[1]: /llm_observability/terms/
+[1]: /llm_observability/terms/#span-kinds
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -416,17 +416,6 @@ Spans can be finished by calling `finish()` on a span object instance. It is rec
 {{< tabs >}}
 {{% tab "Python" %}}
 To trace an LLM span, use the function decorator `ddtrace.llmobs.decorators.llm()`.
-
-#### Example
-
-{{< code-block lang="python" >}}
-from ddtrace.llmobs.decorators import llm
-
-@llm(model_name="claude", name="invoke_llm", model_provider="anthropic")
-def llm_call():
-    completion = ... # user application logic to invoke LLM
-    return completion
-{{< /code-block >}}
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="llm-span-arguments" %}}
 
@@ -450,20 +439,21 @@ def llm_call():
 <br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 
 {{% /collapse-content %}}
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import llm
+
+@llm(model_name="claude", name="invoke_llm", model_provider="anthropic")
+def llm_call():
+    completion = ... # user application logic to invoke LLM
+    return completion
+{{< /code-block >}}
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
 To trace an LLM span, specify the span kind as `llm`, and optionally specify the following arguments on the options object.
-
-#### Example
-
-{{< code-block lang="javascript" >}}
-function llmCall () {
-  const completion = ... // user application logic to invoke LLM
-  return completion
-}
-llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', modelProvider: 'anthropic' }, llmCall)
-{{< /code-block >}}
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="llm-span-arguments" %}}
 
@@ -489,6 +479,16 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 
 {{% /collapse-content %}}
 
+#### Example
+
+{{< code-block lang="javascript" >}}
+function llmCall () {
+  const completion = ... // user application logic to invoke LLM
+  return completion
+}
+llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', modelProvider: 'anthropic' }, llmCall)
+{{< /code-block >}}
+
 {{% /tab %}}
 {{% tab "Java" %}}
 To trace an LLM span, import and call the following method with the arguments listed below:
@@ -497,6 +497,30 @@ To trace an LLM span, import and call the following method with the arguments li
 import datadog.trace.api.llmobs.LLMObs;
 LLMObs.startLLMSpan(spanName, modelName, modelProvider, mlApp, sessionID);
 ```
+
+{{% collapse-content title="Arguments" level="h4" expanded=false id="llm-span-arguments" %}}
+
+`spanName`
+: optional - _String_
+<br/>The name of the operation. If not provided, `spanName` defaults to the span kind.
+
+`modelName`
+: optional - _String_ - **default**: `"custom"`
+<br/>The name of the invoked LLM.
+
+`modelProvider`
+: optional - _String_ - **default**: `"custom"`
+<br/>The name of the model provider.
+
+`mlApp`
+: optional - _String_
+<br/>The name of the ML application that the operation belongs to. Supplying a non-null value overrides the ML app name supplied at the start of the application. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
+
+`sessionId`
+: optional - _String_
+<br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
+
+{{% /collapse-content %}}
 
 #### Example
 
@@ -514,30 +538,6 @@ public class MyJavaClass {
 }
 {{< /code-block >}}
 
-{{% collapse-content title="Arguments" level="h4" expanded=false id="llm-span-arguments" %}}
-
-`spanName`
-: optional - `String`
-<br/>The name of the operation. If not provided, `spanName` defaults to the kind of the span.
-
-`modelName`
-: optional - `String` - **default**: `"custom"`
-<br/>The name of the invoked LLM.
-
-`modelProvider`
-: optional - `String` - **default**: `"custom"`
-<br/>The name of the model provider.
-
-`mlApp`
-: optional - `String`
-<br/>The name of the ML application that the operation belongs to. Supplying a non null value overrides the ML app name supplied at the start of the application. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
-
-`sessionId`
-: optional - `String`
-<br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
-
-{{% /collapse-content %}}
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -547,17 +547,6 @@ public class MyJavaClass {
 {{< tabs >}}
 {{% tab "Python" %}}
 To trace a workflow span, use the function decorator `ddtrace.llmobs.decorators.workflow()`.
-
-#### Example
-
-{{< code-block lang="python" >}}
-from ddtrace.llmobs.decorators import workflow
-
-@workflow
-def process_message():
-    ... # user application logic
-    return
-{{< /code-block >}}
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="workflow-span-arguments" %}}
 `name`
@@ -574,21 +563,22 @@ def process_message():
 
 {{% /collapse-content %}}
 
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import workflow
+
+@workflow
+def process_message():
+    ... # user application logic
+    return
+{{< /code-block >}}
+
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
 
 To trace a workflow span, specify the span kind as `workflow`, and optionally specify arguments on the options object.
-
-#### Example
-
-{{< code-block lang="javascript" >}}
-function processMessage () {
-  ... // user application logic
-  return
-}
-processMessage = llmobs.wrap({ kind: 'workflow' }, processMessage)
-{{< /code-block >}}
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="workflow-span-arguments" %}}
 
@@ -606,6 +596,16 @@ processMessage = llmobs.wrap({ kind: 'workflow' }, processMessage)
 
 {{% /collapse-content %}}
 
+#### Example
+
+{{< code-block lang="javascript" >}}
+function processMessage () {
+  ... // user application logic
+  return
+}
+processMessage = llmobs.wrap({ kind: 'workflow' }, processMessage)
+{{< /code-block >}}
+
 {{% /tab %}}
 {{% tab "Java" %}}
 To trace a workflow span, import and call the following method with the arguments listed below:
@@ -614,6 +614,22 @@ To trace a workflow span, import and call the following method with the argument
 import datadog.trace.api.llmobs.LLMObs;
 LLMObs.startWorkflowSpan(spanName, mlApp, sessionID);
 ```
+
+{{% collapse-content title="Arguments" level="h4" expanded=false id="workflow-span-arguments" %}}
+
+`spanName`
+: optional - _String_
+<br/>The name of the operation. If not provided, `spanName` defaults to the span kind.
+
+`mlApp`
+: optional - _String_
+<br/>The name of the ML application that the operation belongs to. Supplying a non-null value overrides the ML app name supplied at the start of the application. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
+
+`sessionId`
+: optional - _String_
+<br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
+
+{{% /collapse-content %}}
 
 #### Example
 
@@ -631,22 +647,6 @@ public class MyJavaClass {
 }
 {{< /code-block >}}
 
-{{% collapse-content title="Arguments" level="h4" expanded=false id="workflow-span-arguments" %}}
-
-`spanName`
-: optional - `String`
-<br/>The name of the operation. If not provided, `spanName` defaults to the kind of the span.
-
-`mlApp`
-: optional - `String`
-<br/>The name of the ML application that the operation belongs to. Supplying a non null value overrides the ML app name supplied at the start of the application. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
-
-`sessionId`
-: optional - `String`
-<br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
-
-{{% /collapse-content %}}
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -656,17 +656,6 @@ public class MyJavaClass {
 {{< tabs >}}
 {{% tab "Python" %}}
 To trace an agent span, use the function decorator `ddtrace.llmobs.decorators.agent()`.
-
-#### Example
-
-{{< code-block lang="python" >}}
-from ddtrace.llmobs.decorators import agent
-
-@agent
-def react_agent():
-    ... # user application logic
-    return
-{{< /code-block >}}
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="agent-span-arguments" %}}
 
@@ -683,20 +672,21 @@ def react_agent():
 <br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 {{% /collapse-content %}}
 
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import agent
+
+@agent
+def react_agent():
+    ... # user application logic
+    return
+{{< /code-block >}}
+
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
 To trace an agent span, specify the span kind as `agent`, and optionally specify arguments on the options object.
-
-#### Example
-
-{{< code-block lang="javascript" >}}
-function reactAgent () {
-  ... // user application logic
-  return
-}
-reactAgent = llmobs.wrap({ kind: 'agent' }, reactAgent)
-{{< /code-block >}}
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="agent-span-arguments" %}}
 
@@ -714,6 +704,16 @@ reactAgent = llmobs.wrap({ kind: 'agent' }, reactAgent)
 
 {{% /collapse-content %}}
 
+#### Example
+
+{{< code-block lang="javascript" >}}
+function reactAgent () {
+  ... // user application logic
+  return
+}
+reactAgent = llmobs.wrap({ kind: 'agent' }, reactAgent)
+{{< /code-block >}}
+
 {{% /tab %}}
 {{% tab "Java" %}}
 To trace an agent span, import and call the following method with the arguments listed below
@@ -725,15 +725,15 @@ LLMObs.startAgentSpan(spanName, mlApp, sessionID);
 {{% collapse-content title="Arguments" level="h4" expanded=false id="agent-span-arguments" %}}
 
 `spanName`
-: optional - `String`
+: optional - _String_
 <br/>The name of the operation. If not provided, `spanName` defaults to the name of the traced function.
 
 `mlApp`
-: optional - `String`
-<br/>The name of the ML application that the operation belongs to. Supplying a non null value overrides the ML app name supplied at the start of the application. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
+: optional - _String_
+<br/>The name of the ML application that the operation belongs to. Supplying a non-null value overrides the ML app name supplied at the start of the application. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 
 `sessionId`
-: optional - `String`
+: optional - _String_
 <br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
 
 {{% /collapse-content %}}
@@ -747,17 +747,6 @@ LLMObs.startAgentSpan(spanName, mlApp, sessionID);
 {{% tab "Python" %}}
 To trace a tool span, use the function decorator `ddtrace.llmobs.decorators.tool()`.
 
-#### Example
-
-{{< code-block lang="python" >}}
-from ddtrace.llmobs.decorators import tool
-
-@tool
-def call_weather_api():
-    ... # user application logic
-    return
-{{< /code-block >}}
-
 {{% collapse-content title="Arguments" level="h4" expanded=false id="tool-span-arguments" %}}
 
 `name`
@@ -773,20 +762,22 @@ def call_weather_api():
 <br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 
 {{% /collapse-content %}}
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import tool
+
+@tool
+def call_weather_api():
+    ... # user application logic
+    return
+{{< /code-block >}}
+
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
 To trace a tool span, specify the span kind as `tool`, and optionally specify arguments on the options object.
-
-#### Example
-
-{{< code-block lang="javascript" >}}
-function callWeatherApi () {
-  ... // user application logic
-  return
-}
-callWeatherApi = llmobs.wrap({ kind: 'tool' }, callWeatherApi)
-{{< /code-block >}}
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="tool-span-arguments" %}}
 
@@ -803,6 +794,17 @@ callWeatherApi = llmobs.wrap({ kind: 'tool' }, callWeatherApi)
 <br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 
 {{% /collapse-content %}}
+
+#### Example
+
+{{< code-block lang="javascript" >}}
+function callWeatherApi () {
+  ... // user application logic
+  return
+}
+callWeatherApi = llmobs.wrap({ kind: 'tool' }, callWeatherApi)
+{{< /code-block >}}
+
 {{% /tab %}}
 {{% tab "Java" %}}
 To trace a tool span, import and call the following method with the arguments listed below:
@@ -815,15 +817,15 @@ LLMObs.startToolSpan(spanName, mlApp, sessionID);
 {{% collapse-content title="Arguments" level="h4" expanded=false id="tool-span-arguments" %}}
 
 `spanName`
-: optional - `String`
+: optional - _String_
 <br/>The name of the operation. If not provided, `spanName` defaults to the name of the traced function.
 
 `mlApp`
-: optional - `String`
-<br/>The name of the ML application that the operation belongs to. Supplying a non null value overrides the ML app name supplied at the start of the application. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
+: optional - _String_
+<br/>The name of the ML application that the operation belongs to. Supplying a non-null value overrides the ML app name supplied at the start of the application. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 
 `sessionId`
-: optional - `String`
+: optional - _String_
 <br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
 
 {{% /collapse-content %}}
@@ -837,18 +839,6 @@ LLMObs.startToolSpan(spanName, mlApp, sessionID);
 {{% tab "Python" %}}
 To trace a task span, use the function decorator `LLMObs.task()`.
 
-
-#### Example
-
-{{< code-block lang="python" >}}
-from ddtrace.llmobs.decorators import task
-
-@task
-def sanitize_input():
-    ... # user application logic
-    return
-{{< /code-block >}}
-
 {{% collapse-content title="Arguments" level="h4" expanded=false id="task-span-arguments" %}}
 
 `name`
@@ -864,21 +854,22 @@ def sanitize_input():
 <br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 
 {{% /collapse-content %}}
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import task
+
+@task
+def sanitize_input():
+    ... # user application logic
+    return
+{{< /code-block >}}
+
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
 To trace a task span, specify the span kind as `task`, and optionally specify arguments on the options object.
-
-
-#### Example
-
-{{< code-block lang="javascript" >}}
-function sanitizeInput () {
-  ... // user application logic
-  return
-}
-sanitizeInput = llmobs.wrap({ kind: 'task' }, sanitizeInput)
-{{< /code-block >}}
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="task-span-arguments" %}}
 
@@ -895,6 +886,17 @@ sanitizeInput = llmobs.wrap({ kind: 'task' }, sanitizeInput)
 <br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 
 {{% /collapse-content %}}
+
+#### Example
+
+{{< code-block lang="javascript" >}}
+function sanitizeInput () {
+  ... // user application logic
+  return
+}
+sanitizeInput = llmobs.wrap({ kind: 'task' }, sanitizeInput)
+{{< /code-block >}}
+
 {{% /tab %}}
 {{% tab "Java" %}}
 To trace a task span, import and call the following method with the arguments listed below:
@@ -907,15 +909,15 @@ LLMObs.startTaskSpan(spanName, mlApp, sessionID);
 {{% collapse-content title="Arguments" level="h4" expanded=false id="task-span-arguments" %}}
 
 `spanName`
-: optional - `String`
+: optional - _String_
 <br/>The name of the operation. If not provided, `spanName` defaults to the name of the traced function.
 
 `mlApp`
-: optional - `String`
-<br/>The name of the ML application that the operation belongs to. Supplying a non null value overrides the ML app name supplied at the start of the application. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
+: optional - _String_
+<br/>The name of the ML application that the operation belongs to. Supplying a non-null value overrides the ML app name supplied at the start of the application. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 
 `sessionId`
-: optional - `String`
+: optional - _String_
 <br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
 
 
@@ -931,17 +933,6 @@ LLMObs.startTaskSpan(spanName, mlApp, sessionID);
 To trace an embedding span, use the function decorator `LLMObs.embedding()`.
 
 **Note**: Annotating an embedding span's input requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify embedding inputs.
-
-#### Example
-
-{{< code-block lang="python" >}}
-from ddtrace.llmobs.decorators import embedding
-
-@embedding(model_name="text-embedding-3", model_provider="openai")
-def perform_embedding():
-    ... # user application logic
-    return
-{{< /code-block >}}
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="embedding-span-arguments" %}}
 
@@ -965,22 +956,24 @@ def perform_embedding():
 <br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 
 {{% /collapse-content %}}
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import embedding
+
+@embedding(model_name="text-embedding-3", model_provider="openai")
+def perform_embedding():
+    ... # user application logic
+    return
+{{< /code-block >}}
+
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
 To trace an embedding span, specify the span kind as `embedding`, and optionally specify arguments on the options object.
 
 **Note**: Annotating an embedding span's input requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify embedding inputs.
-
-#### Example
-
-{{< code-block lang="javascript" >}}
-function performEmbedding () {
-  ... // user application logic
-  return
-}
-performEmbedding = llmobs.wrap({ kind: 'embedding', modelName: 'text-embedding-3', modelProvider: 'openai' }, performEmbedding)
-{{< /code-block >}}
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="embedding-span-arguments" %}}
 
@@ -1005,6 +998,18 @@ performEmbedding = llmobs.wrap({ kind: 'embedding', modelName: 'text-embedding-3
 <br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 
 {{% /collapse-content %}}
+
+#### Example
+
+{{< code-block lang="javascript" >}}
+function performEmbedding () {
+  ... // user application logic
+  return
+}
+performEmbedding = llmobs.wrap({ kind: 'embedding', modelName: 'text-embedding-3', modelProvider: 'openai' }, performEmbedding)
+{{< /code-block >}}
+
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1015,6 +1020,22 @@ performEmbedding = llmobs.wrap({ kind: 'embedding', modelName: 'text-embedding-3
 To trace a retrieval span, use the function decorator `ddtrace.llmobs.decorators.retrieval()`.
 
 **Note**: Annotating a retrieval span's output requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify retrieval outputs.
+
+{{% collapse-content title="Arguments" level="h4" expanded=false id="retrieval-span-arguments" %}}
+
+`name`
+: optional - _string_
+<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
+
+`session_id`
+: optional - _string_
+<br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
+
+`ml_app`
+: optional - _string_
+<br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
+
+{{% /collapse-content %}}
 
 #### Example
 
@@ -1033,22 +1054,6 @@ def get_relevant_docs(question):
     return
 {{< /code-block >}}
 
-{{% collapse-content title="Arguments" level="h4" expanded=false id="retrieval-span-arguments" %}}
-
-`name`
-: optional - _string_
-<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
-
-`session_id`
-: optional - _string_
-<br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
-
-`ml_app`
-: optional - _string_
-<br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
-
-{{% /collapse-content %}}
-
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -1056,6 +1061,22 @@ def get_relevant_docs(question):
 To trace a retrieval span, specify the span kind as `retrieval`, and optionally specify the following arguments on the options object.
 
 **Note**: Annotating a retrieval span's output requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify retrieval outputs.
+
+{{% collapse-content title="Arguments" level="h4" expanded=false id="retrieval-span-arguments" %}}
+
+`name`
+: optional - _string_
+<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
+
+`sessionId`
+: optional - _string_
+<br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
+
+`mlApp`
+: optional - _string_
+<br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
+
+{{% /collapse-content %}}
 
 #### Example
 
@@ -1077,22 +1098,6 @@ function getRelevantDocs (question) {
 }
 getRelevantDocs = llmobs.wrap({ kind: 'retrieval' }, getRelevantDocs)
 {{< /code-block >}}
-
-{{% collapse-content title="Arguments" level="h4" expanded=false id="retrieval-span-arguments" %}}
-
-`name`
-: optional - _string_
-<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
-
-`sessionId`
-: optional - _string_
-<br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
-
-`mlApp`
-: optional - _string_
-<br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
-
-{{% /collapse-content %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -1349,32 +1354,32 @@ The SDK provides several methods to annotate spans with inputs, outputs, metrics
 
 ### Annotating inputs and outputs
 
-The `annotateIO()` member method of the `LLMObsSpan` interface accepts the following arguments:
+Use the `annotateIO()` member method of the `LLMObsSpan` interface to add structured input and output data to an `LLMObsSpan`. This inclues optional arguments and LLM messae objects.
 
 #### Arguments
 
 If an argument is null or empty, nothing happens. For example, if `inputData` is a non-empty string while `outputData` is null, then only `inputData` is recorded.
 
 `inputData`
-: optional - `String` or `List<LLMObs.LLMMessage>`
+: optional - _String_ or _List<LLMObs.LLMMessage>_
 <br />Either a string (for non-LLM spans) or a list of `LLMObs.LLMMessage`s for LLM spans.
 
 `outputData`
-: optional - `String` or `List<LLMObs.LLMMessage>`
+: optional - _String_ or _List<LLMObs.LLMMessage>_
 <br />Either a string (for non-LLM spans) or a list of `LLMObs.LLMMessage`s for LLM spans.
 
 #### LLM Messages
 LLM spans must be annotated with LLM Messages using the `LLMObs.LLMMessage` object.
 
-The `LLMObs.LLMMessage` object can be instantiated by callling `LLMObs.LLMMessage.from()` with the following arguments:
+The `LLMObs.LLMMessage` object can be instantiated by calling `LLMObs.LLMMessage.from()` with the following arguments:
 
 `role`
-: required - `String`
-<br />A string describing the role of the author of the message
+: required - _String_
+<br />A string describing the role of the author of the message.
 
 `content`
-: required - `String`
-<br />A string containing the content of the message
+: required - _String_
+<br />A string containing the content of the message.
 
 #### Example
 
@@ -1410,8 +1415,8 @@ The `setMetrics()` member method of the `LLMObsSpan` interface accepts the follo
 ##### Arguments
 
 `metrics`
-: required - `Map<String, Number>`
-<br /> A map of JSON serializable keys and numeric values that users can add as metrics relevant to the operation described by the span (input_tokens, output_tokens, total_tokens, etc.).
+: required - _Map<String, Number>_
+<br /> A map of JSON-serializable keys and numeric values that users can add to record metrics relevant to the operation described by the span (for example, `input_tokens`, `output_tokens`, or `total_tokens`).
 
 #### Add a single metric
 
@@ -1420,12 +1425,12 @@ The `setMetric()` member method of the `LLMObsSpan` interface accepts the follow
 ##### Arguments
 
 `key`
-: required - `CharSequence`
-<br /> The name of the metric
+: required - _CharSequence_
+<br /> The name of the metric.
 
 `value`
-: required - `int`, `long`, or `double`
-<br /> The value of the metric
+: required - _int_, _long_, or _double_
+<br /> The value of the metric.
 
 #### Examples
 
@@ -1460,8 +1465,8 @@ The `setTags()` member method of the `LLMObsSpan` interface accepts the followin
 ##### Arguments
 
 `tags`
-: required - `Map<String, Object>`
-<br /> A map of JSON serializable key-value pairs that users can add as tags regarding the span's context (session, environment, system, versioning, etc.).
+: required - _Map<String, Object>_
+<br /> A map of JSON-serializable key-value pairs that users can add as tags to describe the span's context (for example, `session`, `environment`, `system`, or `version`).
 
 #### Add a single tag
 
@@ -1470,12 +1475,12 @@ The `setTag()` member method of the `LLMObsSpan` interface accepts the following
 ##### Arguments
 
 `key`
-: required - `String`
-<br /> The key of the tag
+: required - _String_
+<br /> The key of the tag.
 
 `value`
-: required - `int`, `long`, `double`, `boolean`, or `String`
-<br /> The value of the tag
+: required - _int_, _long_, _double_, _boolean_, or _String_
+<br /> The value of the tag.
 
 #### Examples
 
@@ -1499,14 +1504,14 @@ public class MyJavaClass {
 
 ### Annotating errors
 
-#### Adding a Throwable (Recommended)
+#### Adding a Throwable (recommended)
 
 The `addThrowable()` member method of the `LLMObsSpan` interface accepts the following argument to attach a throwable with a stack trace:
 
 ##### Arguments
 
 `throwable`
-: required - `Throwable`
+: required - _Throwable_
 <br /> The throwable/exception that occurred.
 
 #### Adding an error message
@@ -1516,8 +1521,8 @@ The `setErrorMessage()` member method of the `LLMObsSpan` interface accepts the 
 ##### Arguments
 
 `errorMessage`
-: required - `String`
-<br /> The message of the error
+: required - _String_
+<br /> The message of the error.
 
 #### Setting an error flag
 
@@ -1526,8 +1531,8 @@ The `setError()` member method of the `LLMObsSpan` interface accepts the followi
 ##### Arguments
 
 `error`
-: required - `boolean`
-<br /> `true` if the span errored
+: required - _boolean_
+<br /> `true` if the span errored.
 
 #### Examples
 
@@ -1556,8 +1561,8 @@ public class MyJavaClass {
 The `setMetadata()` member method of the `LLMObsSpan` interface accepts the following arguments:
 
 `metadata`
-: required - `Map<String, Object>`
-<br />A map of JSON serializable key-value pairs that contains metadata information relevant to the input or output operation described by the span
+: required - _Map<String, Object>_
+<br />A map of JSON-serializable key-value pairs that contains metadata relevant to the input or output operation described by the span.
 
 #### Example
 ```java
@@ -1858,20 +1863,20 @@ The `LLMObs.SubmitEvaluation()` method accepts the following arguments:
 {{% collapse-content title="Arguments" level="h4" expanded=false id="submit-evals-arguments" %}}
 
 `llmObsSpan`
-: required - `LLMObsSpan`
+: required - _LLMObsSpan_
 <br />The span context to associate the evaluation with.
 
 `label`
-: required - `String`
+: required - _String_
 <br />The name of the evaluation.
 
 `categoricalValue` or `scoreValue`
-: required - `String` or `double`
+: required - _String_ or _double_
 <br />The value of the evaluation. Must be a string (for categorical evaluations) or a double (for score evaluations).
 
 `tags`
-: optional - `Map<String, Object>`
-<br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags][3].
+: optional - _Map<String, Object>_
+<br />A dictionary of string key-value pairs used to tag the evaluation. For more information about tags, see [Getting Started with Tags][1].
 {{% /collapse-content %}}
 
 #### Example
