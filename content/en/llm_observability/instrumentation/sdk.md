@@ -8,6 +8,7 @@ aliases:
     - /llm_observability/setup/sdk
     - /llm_observability/setup/sdk/java
     - /llm_observability/sdk/java
+    - /llm_observability/sdk/
 ---
 
 ## Overview
@@ -221,7 +222,7 @@ LLMObs.enable(
 : optional - _string_
 <br />The name of the service used for your application. If not provided, this defaults to the value of `DD_SERVICE`.
 
-[1]: /llm_observability/setup/auto_instrumentation/
+[1]: /llm_observability/instrumentation/auto_instrumentation/
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -411,7 +412,7 @@ To finish a span, call `finish()` on a span object instance. If possible, wrap t
 
 ### LLM span
 
-<div class="alert alert-info">If you are using any LLM providers or frameworks that are supported by <a href="/llm_observability/sdk/auto_instrumentation/">Datadog's LLM integrations</a>, you do not need to manually start an LLM span to trace these operations.</div>
+<div class="alert alert-info">If you are using any LLM providers or frameworks that are supported by <a href="/llm_observability/instrumentation/auto_instrumentation/">Datadog's LLM integrations</a>, you do not need to manually start an LLM span to trace these operations.</div>
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -2217,7 +2218,7 @@ tracer.use('http', false) // disable the http integration
 [10]: https://github.com/DataDog/llm-observability
 [11]: /tracing/trace_collection/compatibility/python/#integrations
 [12]: /tracing/trace_collection/compatibility/python/#library-compatibility
-[13]: /llm_observability/setup/auto_instrumentation/
+[13]: /llm_observability/instrumentation/auto_instrumentation/
 [14]: /serverless/aws_lambda/installation/python/?tab=custom#installation
 [15]: /llm_observability/quickstart?tab=python#trace-an-llm-application-in-aws-lambda
 [16]: https://app.datadoghq.com/llm/settings/evaluations

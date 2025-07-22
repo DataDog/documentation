@@ -1,8 +1,9 @@
 ---
-title: Set up LLM Observability
+title: LLM Observability Custom Instrumentation
 aliases:
     - /tracing/llm_observability/trace_an_llm_application
-    - /llm_observability/trace_an_llm_application
+    - /llm_observability/
+    - /llm_observability/setup
 further_reading:
     - link: 'https://www.datadoghq.com/blog/llm-observability-chain-tracing/'
       tag: 'Blog'
@@ -13,18 +14,17 @@ further_reading:
 ---
 
 ## Overview
+Datadog's LLM Observability SDK provides advanced capabilities for custom instrumentation of your LLM applications beyond auto-instrumentation. Custom instrumentation gives you granular control over tracing and enables access to additional features, including:
 
-To start sending data to LLM Observability, instrument your application with the [LLM Observability SDK for Python][1] or by calling the [LLM Observability API][2]. 
+- Creating custom spans to track specific operations and workflows
+- Nesting spans to build detailed traces showing relationships between operations
+- Annotating spans with rich metadata, metrics, and tags
+- Tracking user sessions and application state
+- Supporting multiple LLM applications or experiments
 
-You can visualize the interactions and performance data of your LLM applications on the [**LLM Observability Traces** page][3], where each request fulfilled by your application is represented as a trace.
-
-{{< img src="llm_observability/traces.png" alt="An LLM Observability trace displaying each span of a request" style="width:100%;" >}}
-
-For more information about traces, see [Terms and Concepts][4] and decide which instrumentation option best suits your application's needs.
+This page explains how to use the Datadog LLM Observability SDK's custom instrumentation features to get deeper visibility into your LLM applications' behavior and performance.
 
 ## Instrument an LLM application
-
-Datadog provides [auto-instrumentation][4] to capture LLM calls for specific LLM provider libraries. However, manually instrumenting your LLM application using the LLM Observability SDK for Python enables access to additional LLM Observability features.
 
 <div class="alert alert-info">These instructions use the <a href="/llm_observability/setup/sdk">LLM Observability SDK for Python</a>. If your application is running in a serverless environment, follow the <a href="/llm_observability/setup/sdk/#aws-lambda-setup">serverless setup instructions</a>. </br></br> If your application is not written in Python, you can complete the steps below with API requests instead of SDK function calls.</div>
 
@@ -188,20 +188,20 @@ By default, only users with the [Datadog Read role][16] can view LLM Observabili
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /llm_observability/setup/sdk
-[2]: /llm_observability/setup/api
+[1]: /llm_observability/instrumentation/sdk
+[2]: /llm_observability/instrumentation/api
 [3]: https://app.datadoghq.com/llm/traces
 [4]: /llm_observability/terms
-[5]: /llm_observability/sdk#installation
-[6]: /llm_observability/sdk#command-line-setup
-[7]: /llm_observability/sdk#in-code-setup
+[5]: /llm_observability/instrumentation/sdk#installation
+[6]: /llm_observability/instrumentation/sdk#command-line-setup
+[7]: /llm_observability/instrumentation/sdk#in-code-setup
 [8]: /llm_observability/quickstart
-[9]: /llm_observability/sdk#tracing-spans
+[9]: /llm_observability/instrumentation/sdk#tracing-spans
 [10]: https://app.datadoghq.com/dash/integration/llm_analytics
-[11]: /llm_observability/sdk#tracking-user-sessions
-[12]: /llm_observability/sdk#tracking-user-sessions
-[13]: /llm_observability/sdk#persisting-a-span-across-contexts
-[14]: /llm_observability/sdk#tracing-multiple-applications
+[11]: /llm_observability/instrumentation/sdk#tracking-user-sessions
+[12]: /llm_observability/instrumentation/sdk#tracking-user-sessions
+[13]: /llm_observability/instrumentation/sdk#persisting-a-span-across-contexts
+[14]: /llm_observability/instrumentation/sdk#tracing-multiple-applications
 [15]: /llm_observability/evaluations/submit_evaluations
 [16]: /account_management/rbac/#datadog-default-roles
 [17]: /account_management/rbac/permissions/#llm-observability
