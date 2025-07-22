@@ -139,7 +139,7 @@ This ensures complete cost accuracy by allowing periodic cost calculations again
 ### Configure Cloud Cost in Datadog
 Navigate to [Setup & Configuration][3] and follow the steps.
 
-### Backfilling historical Azure cost data
+### Getting historical data
 Datadog will automatically ingest up to 15 months of available historical cost data.
 
 If you created a new cost export for CCM, Azure will begin exporting data from the current month. In that case, you can manually backfill up to 12 months of Azure cost data using the Azure Cost Exports UI.
