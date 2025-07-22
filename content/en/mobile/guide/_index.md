@@ -10,5 +10,6 @@ cascade:
 ---
 
 {{< whatsnext desc="General guides:">}}
-    {{< nextlink href="CHANGE" >}}Set up your mobile device for Datadog On-Call{{< /nextlink >}}
+    {{< nextlink href="/mobile/guide/setup_mobile_device" >}}Set Up Your Mobile Device for the First Time
+{{< /nextlink >}}
 {{< /whatsnext >}}
