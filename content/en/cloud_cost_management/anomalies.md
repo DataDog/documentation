@@ -42,7 +42,7 @@ On the [Anomalies tab of the Cloud Cost page in Datadog][1], you can view and fi
 - **Resolved**: Anomalies that you've marked as resolved with context
 
 Each anomaly card shows:
-- Service name ('rds', for example)
+- Service name (`rds`, for example)
 - Usage type
 - Cloud accounts affected
 - Expected vs. actual costs
@@ -55,7 +55,10 @@ Anomalies are sorted by cost impact, with the most significant changes at the to
 Follow these steps to investigate and resolve anomalies:
 
 1. Click **See more** on an anomaly to open the side panel.
-2. **Review the details** for services affected, teams involved, environments impacted, or resource IDs that may be driving the cost anomaly.
+
+   {{< img src="cloud_cost/anomalies/cost_anomalies-tag-influence.png" alt="Click See More to see side panel showing anomaly details, investigation options, and action buttons" style="width:80;" >}}
+
+2. **Review the details** for services affected, teams involved, environments impacted, resource IDs, or how usage and unit price may be driving the cost anomaly.
 3. **Investigate further**:
    - View costs in Explorer
    - Save the query to a Notebook
@@ -74,9 +77,9 @@ Tag Influence in Datadog automatically analyzes your cost anomalies to identify:
 
 The feature is part of the anomaly investigation workflow, where you can see this analysis in the side panel when you click **See more** on an anomaly.
 
-{{< img src="cloud_cost/anomalies/cost_anomalies-tag-influence.png" alt="Click See More to see side panel showing anomaly details, investigation options, and action buttons" style="width:80;" >}}
+{{< img src="cloud_cost/anomalies/cost_anomalies-investigation-workflow.png" alt=" see how Tag Influence analyzes the following tags by default" style="width:80;" >}}
 
-Under the **What happened** and **Why this happened** sections, you can see how Tag Influence analyzes the following tags by default:
+Under the **What happened** and **Where the anomaly happened** sections, you can see how Tag Influence analyzes the following tags by default:
 - Region name
 - Service name
 - Subaccount name
