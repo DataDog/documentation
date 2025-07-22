@@ -46,7 +46,7 @@ For complete, working applications, see the [Datadog OpenTelemetry Examples repo
 {{< tabs >}}
 {{% tab "Go" %}}
 
-For Go applications using a structured logger such as `zap`, use a bridge such as `otelzap`. This wraps your logger and automatically injects the active `trace_id` and `span_id` into every log message.
+The following examples for Go and Java use logging bridges. These bridges intercept logs from common logging libraries (suchg as `zap` and `Logback`), convert them into the OpenTelemetry log data model, and forward them to the OpenTelemetry SDK. This process automatically enriches the logs with the active trace context.
 
 First, ensure you have an initialized OpenTelemetry `LoggerProvider`. Then, use it to create your `zap` logger instance:
 
