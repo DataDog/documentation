@@ -2043,11 +2043,13 @@ components:
       description: The definition of `ActionConnectionIntegration` object.
       oneOf:
       - $ref: '#/components/schemas/AWSIntegration'
+      - $ref: '#/components/schemas/DatadogIntegration'
       - $ref: '#/components/schemas/HTTPIntegration'
     ActionConnectionIntegrationUpdate:
       description: The definition of `ActionConnectionIntegrationUpdate` object.
       oneOf:
       - $ref: '#/components/schemas/AWSIntegrationUpdate'
+      - $ref: '#/components/schemas/DatadogIntegrationUpdate'
       - $ref: '#/components/schemas/HTTPIntegrationUpdate'
     ActionQuery:
       description: An action query. This query type is used to trigger an action,
@@ -12242,6 +12244,103 @@ components:
       required:
       - databaseMonitoringTrigger
       type: object
+    DatadogAPIKey:
+      description: The definition of the `DatadogAPIKey` object.
+      properties:
+        api_key:
+          description: The `DatadogAPIKey` `api_key`.
+          example: ''
+          type: string
+        app_key:
+          description: The `DatadogAPIKey` `app_key`.
+          example: ''
+          type: string
+        datacenter:
+          description: The `DatadogAPIKey` `datacenter`.
+          example: ''
+          type: string
+        subdomain:
+          description: Custom subdomain used for Datadog URLs generated with this
+            Connection. For example, if this org uses `https://acme.datadoghq.com`
+            to access Datadog, set this field to `acme`. If this field is omitted,
+            generated URLs will use the default site URL for its datacenter (see [https://docs.datadoghq.com/getting_started/site](https://docs.datadoghq.com/getting_started/site)).
+          type: string
+        type:
+          $ref: '#/components/schemas/DatadogAPIKeyType'
+      required:
+      - type
+      - datacenter
+      - api_key
+      - app_key
+      type: object
+    DatadogAPIKeyType:
+      description: The definition of the `DatadogAPIKey` object.
+      enum:
+      - DatadogAPIKey
+      example: DatadogAPIKey
+      type: string
+      x-enum-varnames:
+      - DATADOGAPIKEY
+    DatadogAPIKeyUpdate:
+      description: The definition of the `DatadogAPIKey` object.
+      properties:
+        api_key:
+          description: The `DatadogAPIKeyUpdate` `api_key`.
+          type: string
+        app_key:
+          description: The `DatadogAPIKeyUpdate` `app_key`.
+          type: string
+        datacenter:
+          description: The `DatadogAPIKeyUpdate` `datacenter`.
+          type: string
+        subdomain:
+          description: Custom subdomain used for Datadog URLs generated with this
+            Connection. For example, if this org uses `https://acme.datadoghq.com`
+            to access Datadog, set this field to `acme`. If this field is omitted,
+            generated URLs will use the default site URL for its datacenter (see [https://docs.datadoghq.com/getting_started/site](https://docs.datadoghq.com/getting_started/site)).
+          type: string
+        type:
+          $ref: '#/components/schemas/DatadogAPIKeyType'
+      required:
+      - type
+      type: object
+    DatadogCredentials:
+      description: The definition of the `DatadogCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/DatadogAPIKey'
+    DatadogCredentialsUpdate:
+      description: The definition of the `DatadogCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/DatadogAPIKeyUpdate'
+    DatadogIntegration:
+      description: The definition of the `DatadogIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/DatadogCredentials'
+        type:
+          $ref: '#/components/schemas/DatadogIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    DatadogIntegrationType:
+      description: The definition of the `DatadogIntegrationType` object.
+      enum:
+      - Datadog
+      example: Datadog
+      type: string
+      x-enum-varnames:
+      - DATADOG
+    DatadogIntegrationUpdate:
+      description: The definition of the `DatadogIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/DatadogCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/DatadogIntegrationType'
+      required:
+      - type
+      type: object
     Dataset:
       description: Dataset object.
       properties:
@@ -13785,14 +13884,21 @@ components:
           type: string
       type: object
     EntityV3APIVersion:
-      description: The schema version of entity type. The field is known as schema-version
-        in the previous version.
+      description: The version of the schema data that was used to populate this entity's
+        data. This could be via the API, Terraform, or YAML file in a repository.
+        The field is known as schema-version in the previous version.
       enum:
       - v3
+      - v2.2
+      - v2.1
+      - v2
       example: v3
       type: string
       x-enum-varnames:
       - V3
+      - V2_2
+      - V2_1
+      - V2
     EntityV3DatadogCodeLocationItem:
       additionalProperties: false
       description: Code location item.
@@ -15359,11 +15465,13 @@ components:
       enum:
       - logs
       - rum
+      - dora
       example: logs
       type: string
       x-enum-varnames:
       - LOGS
       - RUM
+      - DORA
     EventsGroupBy:
       description: A dimension on which to split a query's results.
       properties:
@@ -23570,6 +23678,61 @@ components:
             description: Actively queried tag keys.
             type: string
           type: array
+      type: object
+    MetricTagCardinalitiesData:
+      description: A list of tag cardinalities associated with the given metric.
+      items:
+        $ref: '#/components/schemas/MetricTagCardinality'
+      type: array
+    MetricTagCardinalitiesMeta:
+      description: Response metadata object.
+      properties:
+        metric_name:
+          description: 'The name of metric for which the tag cardinalities are returned.
+
+            This matches the metric name provided in the request.
+
+            '
+          type: string
+      type: object
+    MetricTagCardinalitiesResponse:
+      description: 'Response object that includes an array of objects representing
+        the cardinality details of a metric''s tags.
+
+        '
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricTagCardinalitiesData'
+        meta:
+          $ref: '#/components/schemas/MetricTagCardinalitiesMeta'
+      readOnly: true
+      type: object
+    MetricTagCardinality:
+      description: Object containing metadata and attributes related to a specific
+        tag key associated with the metric.
+      example:
+        attributes:
+          cardinality_delta: 25
+        id: http.request.latency
+        type: tag_cardinality
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricTagCardinalityAttributes'
+        id:
+          description: The name of the tag key.
+          type: string
+        type:
+          default: tag_cardinality
+          description: This describes the endpoint action.
+          type: string
+      type: object
+    MetricTagCardinalityAttributes:
+      description: An object containing properties related to the tag key
+      properties:
+        cardinality_delta:
+          description: This describes the recent change in the tag keys cardinality
+          format: int64
+          type: integer
       type: object
     MetricTagConfiguration:
       description: Object for a single metric tag configuration.
@@ -34806,9 +34969,22 @@ components:
           format: int64
           minimum: 0
           type: integer
+        flaggedIPType:
+          $ref: '#/components/schemas/SecurityMonitoringRuleCaseActionOptionsFlaggedIPType'
         userBehaviorName:
           $ref: '#/components/schemas/SecurityMonitoringRuleCaseActionOptionsUserBehaviorName'
       type: object
+    SecurityMonitoringRuleCaseActionOptionsFlaggedIPType:
+      description: Used with the case action of type 'flag_ip'. The value specified
+        in this field is applied as a flag to the IP addresses.
+      enum:
+      - SUSPICIOUS
+      - FLAGGED
+      example: FLAGGED
+      type: string
+      x-enum-varnames:
+      - SUSPICIOUS
+      - FLAGGED
     SecurityMonitoringRuleCaseActionOptionsUserBehaviorName:
       description: Used with the case action of type 'user_behavior'. The value specified
         in this field is applied as a risk tag to all users affected by the rule.
@@ -34819,11 +34995,13 @@ components:
       - block_ip
       - block_user
       - user_behavior
+      - flag_ip
       type: string
       x-enum-varnames:
       - BLOCK_IP
       - BLOCK_USER
       - USER_BEHAVIOR
+      - FLAG_IP
     SecurityMonitoringRuleCaseCreate:
       description: Case when signal is generated.
       properties:
@@ -45836,8 +46014,9 @@ paths:
       - AuthN Mappings
       x-menu-order: 4
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
     post:
@@ -45969,8 +46148,9 @@ paths:
       - AuthN Mappings
       x-menu-order: 1
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
     patch:
@@ -47175,6 +47355,8 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - ci_visibility_read
+      - AuthZ:
+        - test_optimization_read
       summary: Aggregate tests events
       tags:
       - CI Visibility Tests
@@ -47184,6 +47366,7 @@ paths:
         operator: OR
         permissions:
         - ci_visibility_read
+        - test_optimization_read
       x-undo:
         type: safe
   /api/v2/ci/tests/events:
@@ -47262,6 +47445,8 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - ci_visibility_read
+      - AuthZ:
+        - test_optimization_read
       summary: Get a list of tests events
       tags:
       - CI Visibility Tests
@@ -47275,6 +47460,7 @@ paths:
         operator: OR
         permissions:
         - ci_visibility_read
+        - test_optimization_read
       x-undo:
         type: safe
   /api/v2/ci/tests/events/search:
@@ -47311,6 +47497,8 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - ci_visibility_read
+      - AuthZ:
+        - test_optimization_read
       summary: Search tests events
       tags:
       - CI Visibility Tests
@@ -47325,6 +47513,7 @@ paths:
         operator: OR
         permissions:
         - ci_visibility_read
+        - test_optimization_read
       x-undo:
         type: safe
   /api/v2/cloud_security_management/custom_frameworks:
@@ -48640,16 +48829,14 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-        - billing_read
       summary: Get Monthly Cost Attribution
       tags:
       - Usage Metering
       x-menu-order: 5
       x-permission:
-        operator: AND
+        operator: OR
         permissions:
         - usage_read
-        - billing_read
       x-undo:
         type: safe
   /api/v2/csm/onboarding/agents:
@@ -49301,14 +49488,16 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: Get all datasets
       tags:
       - Datasets
       x-menu-order: 3
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
     post:
@@ -49350,15 +49539,17 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_manage
       summary: Create a dataset
       tags:
       - Datasets
       x-codegen-request-body-name: body
       x-menu-order: 1
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         operationId: DeleteDataset
         parameters:
@@ -49446,6 +49637,8 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - org_management
+      - AuthZ:
+        - monitors_write
       summary: Get Domain Allowlist
       tags:
       - Domain Allowlist
@@ -49454,6 +49647,10 @@ paths:
         operator: OR
         permissions:
         - org_management
+        - monitors_write
+        - generate_dashboard_reports
+        - generate_log_reports
+        - manage_log_reports
       x-undo:
         type: safe
     patch:
@@ -49479,6 +49676,8 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - org_management
+      - AuthZ:
+        - monitors_write
       summary: Sets Domain Allowlist
       tags:
       - Domain Allowlist
@@ -49487,6 +49686,10 @@ paths:
         operator: OR
         permissions:
         - org_management
+        - monitors_write
+        - generate_dashboard_reports
+        - generate_log_reports
+        - manage_log_reports
       x-undo:
         type: idempotent
   /api/v2/dora/deployment:
@@ -54456,8 +54659,8 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - logs_read_data
         - logs_read_config
+        - logs_read_data
       x-undo:
         type: safe
     post:
@@ -54568,8 +54771,8 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - logs_read_data
         - logs_read_config
+        - logs_read_data
       x-undo:
         type: safe
     patch:
@@ -55959,6 +56162,53 @@ paths:
         permissions: []
       x-undo:
         type: safe
+  /api/v2/metrics/{metric_name}/tag-cardinalities:
+    get:
+      description: Returns the cardinality details of tags for a specific metric.
+      operationId: GetMetricTagCardinalityDetails
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricTagCardinalitiesResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      summary: Get tag key cardinality details
+      tags:
+      - Metrics
+      x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+        - metrics_read
+      x-undo:
+        type: safe
   /api/v2/metrics/{metric_name}/tags:
     delete:
       description: 'Deletes a metric''s tag configuration. Can only be used with application
@@ -56314,9 +56564,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Create a monitor notification rule
       tags:
       - Monitors
@@ -56369,9 +56616,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Delete a monitor notification rule
       tags:
       - Monitors
@@ -56482,9 +56726,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Update a monitor notification rule
       tags:
       - Monitors
@@ -56755,6 +56996,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
@@ -56784,9 +57029,6 @@ paths:
           description: Bad Request
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Create a monitor user template
       tags:
       - Monitors
@@ -56804,6 +57046,10 @@ paths:
               \     \"tags\": [\"category:test\"]\n    }\n  }\n}"
           step: there is a valid "monitor_user_template" in the system
       x-menu-order: 21
+      x-permission:
+        operator: OR
+        permissions:
+        - monitor_config_policy_write
       x-undo:
         operationId: DeleteMonitorUserTemplate
         parameters:
@@ -56834,13 +57080,14 @@ paths:
           description: Bad Request
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Validate a monitor user template
       tags:
       - Monitors
       x-menu-order: 24
+      x-permission:
+        operator: OR
+        permissions:
+        - monitor_config_policy_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
@@ -56868,13 +57115,14 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Delete a monitor user template
       tags:
       - Monitors
       x-menu-order: 23
+      x-permission:
+        operator: OR
+        permissions:
+        - monitor_config_policy_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
@@ -56923,6 +57171,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 19
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
@@ -56965,13 +57217,14 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Update a monitor user template to a new version
       tags:
       - Monitors
       x-menu-order: 22
+      x-permission:
+        operator: OR
+        permissions:
+        - monitor_config_policy_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
@@ -57013,13 +57266,14 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Validate an existing monitor user template
       tags:
       - Monitors
       x-menu-order: 25
+      x-permission:
+        operator: OR
+        permissions:
+        - monitor_config_policy_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
@@ -57566,6 +57820,7 @@ paths:
             default: navy.oncall.datadoghq.com
             description: The globally available endpoint for On-Call.
             enum:
+            - lava.oncall.datadoghq.com
             - saffron.oncall.datadoghq.com
             - navy.oncall.datadoghq.com
             - coral.oncall.datadoghq.com
@@ -57625,6 +57880,7 @@ paths:
             default: navy.oncall.datadoghq.com
             description: The globally available endpoint for On-Call.
             enum:
+            - lava.oncall.datadoghq.com
             - saffron.oncall.datadoghq.com
             - navy.oncall.datadoghq.com
             - coral.oncall.datadoghq.com
@@ -57684,6 +57940,7 @@ paths:
             default: navy.oncall.datadoghq.com
             description: The globally available endpoint for On-Call.
             enum:
+            - lava.oncall.datadoghq.com
             - saffron.oncall.datadoghq.com
             - navy.oncall.datadoghq.com
             - coral.oncall.datadoghq.com
@@ -57743,6 +58000,7 @@ paths:
             default: navy.oncall.datadoghq.com
             description: The globally available endpoint for On-Call.
             enum:
+            - lava.oncall.datadoghq.com
             - saffron.oncall.datadoghq.com
             - navy.oncall.datadoghq.com
             - coral.oncall.datadoghq.com
@@ -60873,18 +61131,15 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Aggregate RUM events
       tags:
       - RUM
       x-codegen-request-body-name: body
       x-menu-order: 3
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - rum_apps_read
       x-undo:
         type: safe
   /api/v2/rum/applications:
@@ -61476,10 +61731,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get a list of RUM events
       tags:
       - RUM
@@ -61490,8 +61741,9 @@ paths:
         limitParam: page[limit]
         resultsPath: data
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - rum_apps_read
       x-undo:
         type: safe
   /api/v2/rum/events/search:
@@ -61525,10 +61777,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Search RUM events
       tags:
       - RUM
@@ -61540,8 +61788,9 @@ paths:
         limitParam: body.page.limit
         resultsPath: data
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - rum_apps_read
       x-undo:
         type: safe
   /api/v2/saml_configurations/idp_metadata:
@@ -68472,16 +68721,14 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-        - billing_read
       summary: Get cost across multi-org account
       tags:
       - Usage Metering
       x-menu-order: 45
       x-permission:
-        operator: AND
+        operator: OR
         permissions:
         - usage_read
-        - billing_read
       x-undo:
         type: safe
   /api/v2/usage/estimated_cost:
@@ -68581,16 +68828,14 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-        - billing_read
       summary: Get estimated cost across your account
       tags:
       - Usage Metering
       x-menu-order: 6
       x-permission:
-        operator: AND
+        operator: OR
         permissions:
         - usage_read
-        - billing_read
       x-undo:
         type: safe
   /api/v2/usage/historical_cost:
@@ -68667,16 +68912,14 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-        - billing_read
       summary: Get historical cost across your account
       tags:
       - Usage Metering
       x-menu-order: 5
       x-permission:
-        operator: AND
+        operator: OR
         permissions:
         - usage_read
-        - billing_read
       x-undo:
         type: safe
   /api/v2/usage/hourly_usage:
@@ -69016,16 +69259,14 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-        - billing_read
       summary: Get projected cost across your account
       tags:
       - Usage Metering
       x-menu-order: 7
       x-permission:
-        operator: AND
+        operator: OR
         permissions:
         - usage_read
-        - billing_read
       x-undo:
         type: safe
   /api/v2/user_invitations:

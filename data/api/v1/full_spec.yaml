@@ -19132,6 +19132,14 @@ components:
           description: The total account usage.
           format: int64
           type: integer
+        account_committed_usage:
+          description: The total account committed usage.
+          format: int64
+          type: integer
+        account_on_demand_usage:
+          description: The total account on-demand usage.
+          format: int64
+          type: integer
         elapsed_usage_hours:
           description: Elapsed usage hours for some billable product.
           format: int64
@@ -30225,6 +30233,10 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Search logs
       tags:
       - Logs
@@ -30332,10 +30344,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all indexes
       tags:
       - Logs Indexes
@@ -31615,7 +31623,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - monitors_write
+        - monitors_read
       summary: Validate a monitor
       tags:
       - Monitors
@@ -31624,7 +31632,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - monitors_write
+        - monitors_read
       x-undo:
         type: idempotent
   /api/v1/monitor/{monitor_id}:
@@ -32069,7 +32077,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - monitors_write
+        - monitors_read
       summary: Validate an existing monitor
       tags:
       - Monitors
@@ -32078,7 +32086,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - monitors_write
+        - monitors_read
       x-undo:
         type: idempotent
   /api/v1/monthly_custom_reports:
@@ -32994,14 +33002,16 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - metrics_read
       summary: Search metrics
       tags:
       - Metrics
       x-menu-order: 4
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - metrics_read
       x-undo:
         type: safe
   /api/v1/security_analytics/signals/{signal_id}/add_to_incident:
@@ -35606,7 +35616,7 @@ paths:
           default: 50
           format: int64
           type: integer
-      - description: The sort order for the results (e.g., 'name,asc' or 'name,desc').
+      - description: The sort order for the results (e.g., `name,asc` or `name,desc`).
         in: query
         name: sort
         required: false
@@ -36188,6 +36198,8 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_global_variable_read
+      - AuthZ:
+        - apm_api_catalog_read
       summary: Get all global variables
       tags:
       - Synthetics
@@ -36196,6 +36208,7 @@ paths:
         operator: OR
         permissions:
         - synthetics_global_variable_read
+        - apm_api_catalog_read
       x-undo:
         type: safe
     post:
