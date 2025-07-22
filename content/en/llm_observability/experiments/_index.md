@@ -66,6 +66,7 @@ You can create a new dataset using `LLMObs.create_dataset()`:
 
 ```python
 from ddtrace.llmobs import LLMObs
+from typing import Dict, Any, Optional, List
 
 dataset = LLMObs.create_dataset(
     name="capitals-of-the-world",
@@ -152,29 +153,15 @@ from ddtrace.llmobs import LLMObs
 def task(input_data, config=None):
     """Process a single dataset record.
 
-    Args:
-        input_data (dict): The input data from the dataset record
-        config (dict, optional): Configuration for the task
-
-    Returns:
-        Any: The output that will be compared with expected_output
-    """
+def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
+    """Process a single dataset record."""
     question = input_data["question"]
     # Your LLM or processing logic here
     return "Beijing" if "China" in question else "Unknown"
 
-def evaluator(input_data, output_data, expected_output):
-    """Evaluate the output against expected output.
-
-    Args:
-        input_data (dict): The input data from the dataset record
-        output_data (Any): The output from the task function
-        expected_output (Any): The expected output from the dataset
-
-    Returns:
-        float: Score between 0 and 1, or any other metric
-    """
-    return 1.0 if output_data == expected_output else 0.0
+def evaluator(input_data: Dict[str, Any], output: str, expected_output: str) -> float:
+    """Return a score between 0 and 1."""
+    return 1.0 if output == expected_output else 0.0
 
 # Create the experiment
 experiment = LLMObs.experiment(
@@ -184,7 +171,7 @@ experiment = LLMObs.experiment(
     evaluators=[evaluator],
     description="Testing capital cities knowledge",
     tags=["model:gpt-4", "version:1.0"],
-    project_name="my-project"  # Optional: Override DD_LLMOBS_PROJECT_NAME
+    project_name="my-project",
 )
 ```
 
@@ -193,43 +180,392 @@ experiment = LLMObs.experiment(
 Run the experiment and get results:
 
 ```python
-# Run on all dataset records
-results = experiment.run()
+# Run the experiment
+results = experiment.run()  # Run on all dataset records
+results = experiment.run(jobs=4)  # Run with parallel processing
+results = experiment.run(sample_size=10, raise_errors=True)  # Test on subset
 
-# Run with parallel processing
-results = experiment.run(jobs=4)
-
-# Run on a subset of records for testing
-results = experiment.run(sample_size=10, raise_errors=True)
-```
-
-#### Experiment Results
-
-The experiment results contain detailed information about each record's execution:
-
-```python
+# Process results
 for result in results:
-    print(f"Record {result['idx']}:")
+    print(f"Record {result['idx']}")
     print(f"Input: {result['input']}")
     print(f"Output: {result['output']}")
-    print(f"Expected: {result['expected_output']}")
-    print(f"Evaluations: {result['evaluations']}")
+    print(f"Score: {result['evaluations']['evaluator']['value']}")
     if result['error']['message']:
         print(f"Error: {result['error']['message']}")
-    print("---")
+
+# Result fields:
+# - idx: Record number
+# - record_id: Dataset record ID
+# - span_id, trace_id: For tracing
+# - timestamp: Processing time
+# - input: Dict with input data
+# - output: Model output
+# - expected_output: Expected output
+# - evaluations: Dict with scores
+# - metadata: Extra information
+# - error: Any errors
 ```
 
-Each result contains:
-- `idx`: Index of the record in the dataset
-- `record_id`: ID of the dataset record
-- `span_id` and `trace_id`: For tracing in Datadog
-- `timestamp`: When the record was processed
-- `input`: Input data from the dataset
-- `output`: Output from your task function
-- `expected_output`: Expected output from the dataset
-- `evaluations`: Results from your evaluator functions
-- `metadata`: Additional information about the experiment
-- `error`: Any errors that occurred during processing
+## Usage: LLM Observability Experiments API
+
+### Postman quickstart
+
+Datadog highly recommends importing the [Experiments Postman collection][7] into [Postman][8]. Postman's _View documentation_ feature can help you better understand this API.
+
+### Request format
+
+| Field | Type | Description |
+| --------- | ---- | ----------- |
+| `data`    | [Object: Data](#object-data) | The request body is nested within a top level `data` field.|
+
+**Example**: Creating a project
+
+```json
+{
+  "data": {
+    "type": "projects",  # request type
+    "attributes": {
+        "name": "Project example",
+        "description": "Description example"
+    }
+  }
+}
+```
+
+### Response format
+
+| Field | Type | Description |
+| --------- | ---- | ----------- |
+| `data`    | [Object: Data](#object-data) | The request body of an experimentation API is nested within a top level `data` field.|
+| `meta`    | [Object: Page](#object-page) | Pagination attributes. |
+
+**Example**: Retrieving projects
+
+```json
+{
+    "data": [
+        {
+            "id": "4ac5b6b2-dcdb-40a9-ab29-f98463f73b4z",
+            "type": "projects",
+            "attributes": {
+                "created_at": "2025-02-19T18:53:03.157337Z",
+                "description": "Description example",
+                "name": "Project example",
+                "updated_at": "2025-02-19T18:53:03.157337Z"
+            }
+        }
+    ],
+    "meta": {
+        "after": ""
+    }
+}
+```
+
+#### Object: Data
+
+| Field | Type | Description |
+| --------- | ---- | ----------- |
+| `id`    | string | The ID of an experimentation entity. <br/>**Note**: Set your ID field reference at this level. |
+| `type`    | string | Identifies the kind of resource an object represents. For example: `projects`, `experiments`, `datasets`, etc. |
+| `attributes` | json | Contains all the resource's data except for the ID. |
+
+#### Object: Page
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `after` | string | The cursor to use to get the next results, if any. Provide the `page[cursor]` query parameter in your request to get the next results. |
+
+### Projects API
+
+**Request type**: `projects`
+
+{{% collapse-content title="GET /api/unstable/llm-obs/v1/projects" level="h4" expanded=false id="api-projects-get" %}}
+
+List all projects, sorted by creation date. The most recently-created projects are first.
+
+**Query parameters**
+
+| Parameter | Type | Description |
+| ---- | ---- | --- |
+| `filter[name]` | string | The name of a project to search for. |
+| `filter[id]` | string | The ID of a project to search for. |
+| `page[cursor]` | string | List results with a cursor provided in the previous query. |
+| `page[limit]` | int | Limits the number of results. |
+
+**Response**
+
+| Field | Type | Description |
+| ---- | ---- | --- |
+| _within [Data](#object-data)_ | [][Project](#object-project) | List of projects. |
+
+#### Object: Project
+
+| Field | Type | Description |
+| ---- | ---- | ---- |
+| `id` | string | Unique project ID. Set at the top level `id` field within the [Data](#object-data) object. |
+| `ml_app` | string | ML app name. |
+| `name` | string | Unique project name. |
+| `description` | string | Project description. |
+| `created_at` | timestamp | Timestamp representing when the resource was created. |
+| `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="POST /api/unstable/llm-obs/v1/projects" level="h4" expanded=false id="api-projects-post" %}}
+
+Create a project. If there is an existing project with the same name, the API returns the existing project unmodified.
+
+**Request**
+
+| Field | Type | Description |
+| ---- | ---- | ---- |
+| `name` (_required_) | string | Unique project name. |
+| `ml_app` | string | ML app name. |
+| `description` | string | Project description. |
+
+**Response**
+
+| Field | Type | Description |
+| ---- | ---- | ---- |
+| `id` | UUID | Unique ID for the project. Set at the top level `id` field within the [Data](#object-data) object. |
+| `ml_app` | string | ML app name. |
+| `name` | string | Unique project name. |
+| `description` | string | Project description. |
+| `created_at` | timestamp | Timestamp representing when the resource was created. |
+| `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="PATCH /api/unstable/llm-obs/v1/projects/{project_id}" level="h4" expanded=false id="api-projects-patch" %}}
+
+Partially update a project object. Specify the fields to update in the payload.
+
+**Request**
+
+| Field | Type | Description |
+| ---- | ---- | ---- |
+| `name` | string | Unique project name. |
+| `ml_app` | string | ML app name. |
+| `description` | string | Project description. |
+
+**Response**
+
+| Field | Type | Description |
+| ---- | ---- | ---- |
+| `id` | UUID | Unique ID for the project. Set at the top level `id` field within the [Data](#object-data) object. |
+| `ml_app` | string | ML app name. |
+| `name` | string | Unique project name. |
+| `description` | string | Project description. |
+| `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="POST /api/unstable/llm-obs/v1/projects/delete" level="h4" expanded=false id="api-projects-batch-delete" %}}
+
+Batch delete operation.
+
+**Request**
+
+| Field | Type | Description |
+| ---- | ---- | ---- |
+| `project_ids` (_required_) | []string | List of project IDs to delete. |
+
+**Response**
+
+200 - OK
+
+{{% /collapse-content %}}
+
+### Datasets API
+
+**Request type**: `datasets`
+
+{{% collapse-content title="GET /api/unstable/llm-obs/v1/datasets" level="h4" expanded=false id="api-datasets-get" %}}
+
+List all datasets, sorted by creation date. The most recently-created datasets are first.
+
+**Query parameters**
+
+| Parameter | Type | Description |
+| ---- | ---- | --- |
+| `filter[name]` | string | The name of a dataset to search for. |
+| `filter[id]` | string | The ID of a dataset to search for. |
+| `page[cursor]` | string | List results with a cursor provided in the previous query. |
+| `page[limit]` | int | Limits the number of results. |
+
+**Response**
+
+| Field | Type | Description |
+| ---- | ---- | --- |
+| _within [Data](#object-data)_ | [][Dataset](#object-dataset) | List of datasets. |
+
+#### Object: Dataset
+
+| Field | Type | Description |
+| ---- | ---- | ---- |
+| `id` | string | Unique dataset ID. Set at the top level `id` field within the [Data](#object-data) object. |
+| `name` | string | Unique dataset name. |
+| `description` | string | Dataset description. |
+| `metadata` | json | Arbitrary user-defined metadata |
+| `created_at` | timestamp | Timestamp representing when the resource was created. |
+| `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="POST /api/unstable/llm-obs/v1/datasets" level="h4" expanded=false id="api-datasets-post" %}}
+
+Create a dataset. If there is an existing dataset with the same name, the API returns the existing dataset unmodified.
+
+**Request**
+
+| Field | Type | Description |
+| ---- | ---- | ---- |
+| `name` (_required_) | string | Unique dataset name. |
+| `description` | string | Dataset description. |
+| `metadata` | json | Arbitrary user-defined metadata. |
+
+**Response**
+
+| Field | Type | Description |
+| ---- | ---- | ---- |
+| `id` | UUID | Unique ID for the dataset. Set at the top level `id` field within the [Data](#object-data) object. |
+| `name` | string | Unique dataset name. |
+| `description` | string | Dataset description. |
+| `metadata` | json | Arbitrary user-defined metadata. |
+| `created_at` | timestamp | Timestamp representing when the resource was created. |
+| `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="GET /api/unstable/llm-obs/v1/datasets/{dataset_id}/records" level="h4" expanded=false id="api-datasets-list-records" %}}
+
+List all dataset records, sorted by creation date. The most recently-created records are first.
+
+**Query parameters**
+
+| Parameter | Type | Description |
+| ---- | ---- | --- |
+| `filter[version]` | string | List results for a given dataset version. |
+| `page[cursor]` | string | List results with a cursor provided in the previous query. |
+| `page[limit]` | int | Limits the number of results. |
+
+**Response**
+
+| Field | Type | Description |
+| ---- | ---- | --- |
+| _within [Data](#object-data)_ | [][Record](#object-record) | List of dataset records. |
+
+#### Object: Record
+
+| Field | Type | Description |
+| ---- | ---- | ---- |
+| `id` | string | Unique record ID. |
+| `dataset_id` | string | Unique dataset ID. |
+| `input_data` | any (string, number, Boolean, object, array) | Data that serves as the starting point for an experiment. |
+| `expected_output` | any (string, number, Boolean, object, array) | Expected output |
+| `metadata` | json | Arbitrary user-defined metadata. |
+| `created_at` | timestamp | Timestamp representing when the resource was created. |
+| `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="POST /api/unstable/llm-obs/v1/datasets/{dataset_id}/records" level="h4" expanded=false id="api-datasets-append-records" %}}
+
+Appends records for a given dataset.
+
+**Request**
+
+| Field | Type | Description |
+| ---- | ---- | --- |
+| `records` (_required_) | [][RecordReq](#object-recordreq) | List of records to create. |
+
+#### Object: RecordReq
+
+| Field | Type | Description |
+| ---- | ---- | ---- |
+| `input_data` (_required_) | any (string, number, Boolean, object, array) | Data that serves as the starting point for an experiment. |
+| `expected_output` | any (string, number, Boolean, object, array) | Expected output |
+| `metadata` | json | Arbitrary user-defined metadata. |
+
+**Response**
+
+| Field | Type | Description |
+| ---- | ---- | --- |
+| `records` | [][Record](#object-record) | List of created records. |
+
+{{% /collapse-content %}}
+
+### Experiments API
+
+**Request type**: `experiments`
+
+{{% collapse-content title="GET /api/unstable/llm-obs/v1/experiments" level="h4" expanded=false id="api-experiments-get" %}}
+
+List all experiments, sorted by creation date. The most recently-created experiments are first.
+
+**Query parameters**
+
+| Parameter | Type | Description |
+| ---- | ---- | --- |
+| `filter[project_id]` (_required_ if dataset not provided) | string | The ID of a project to retrieve experiments for. |
+| `filter[dataset_id]` | string | The ID of a dataset to retrieve experiments for. |
+| `filter[id]` | string | The ID(s) of an experiment to search for. To query for multiple experiments, use `?filter[id]=<>&filter[id]=<>`. |
+| `filter[name]` | string | The name of an experiment to search for. |
+| `page[cursor]` | string | List results with a cursor provided in the previous query. |
+| `page[limit]` | int | Limits the number of results. |
+
+**Response**
+
+| Field | Type | Description |
+| ---- | ---- | --- |
+| _within [Data](#object-data)_ | [][Experiment](#object-experiment) | List of experiments. |
+
+#### Object: Experiment
+
+| Field | Type | Description |
+| ---- | ---- | ---- |
+| `id` | UUID | Unique experiment ID. Set at the top level `id` field within the [Data](#object-data) object. |
+| `project_id` | string | Unique project ID. |
+| `dataset_id` | string | Unique dataset ID. |
+| `name` | string | Unique experiment name. |
+| `description` | string | Experiment description. |
+| `metadata` | json | Arbitrary user-defined metadata |
+| `created_at` | timestamp | Timestamp representing when the resource was created. |
+| `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="POST /api/unstable/llm-obs/v1/experiments" level="h4" expanded=false id="api-experiments-post" %}}
+
+Create an experiment. If there is an existing experiment with the same name, the API returns the existing experiment unmodified.
+
+**Request**
+
+| Field | Type | Description |
+| ---- | ---- | ---- |
+| `project_id` (_required_) | string | Unique project ID. |
+| `dataset_id` (_required_) | string | Unique dataset ID. |
+| `dataset_version` | int | Dataset version. |
+| `name` (_required_) | string | Unique experiment name. |
+| `description` | string | Experiment description. |
+| `metadata` | json | Arbitrary user-defined metadata |
+| `ensure_unique` | bool | If `true`, Datadog generates a new experiment with a unique name in the case of a conflict. Datadog recommends you set this field to `true`. |
+
+**Response**
+
+| Field | Type | Description |
+| ---- | ---- | ---- |
+| `id` | UUID | Unique experiment ID. Set at the top level `id` field within the [Data](#object-data) object. |
+| `project_id` | string | Unique project ID. |
+| `dataset_id` | string | Unique dataset ID. |
+| `name` | string | Unique experiment name. |
+| `description` | string | Experiment description. |
+| `metadata` | json | Arbitrary user-defined metadata |
+| `created_at` | timestamp | Timestamp representing when the resource was created. |
+| `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
+
+{{% /collapse-content %}}
 
 ## Further reading
 
@@ -239,4 +575,6 @@ Each result contains:
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: /getting_started/site/
+[7]: https://github.com/DataDog/llm-observability/tree/main/preview/experiments
+[8]: https://www.postman.com/
 [9]: https://app.datadoghq.com/llm/testing/experiments
