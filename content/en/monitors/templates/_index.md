@@ -15,7 +15,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/azure-recommended-monitors/"
   tag: "Blog"
   text: "Enable preconfigured alerts with Recommended Monitors for Azure"
-- link: "https://docs.datadoghq.com/developers/integrations/create-an-integration-recommended-monitor"
+- link: "https://docs.datadoghq.com/developers/integrations/create-an-integration-monitor-template/"
   tag: "Documentation"
   text: "Create an Integration-Monitor Template"
 ---
