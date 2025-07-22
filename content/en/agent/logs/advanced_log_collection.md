@@ -31,7 +31,6 @@ After you set up [log collection][1], you can customize your collection configur
 - [Filter logs](#filter-logs)
   - [Exclude at match](#exclude-at-match)
   - [Include at match](#include-at-match)
-  - [Exclude truncated](#exclude-truncated)
 - [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
 - [Multi-line aggregation](#manually-aggregate-multi-line-logs)
 - [Automatically aggregate multi-line logs](#automatically-aggregate-multi-line-logs)
@@ -264,84 +263,6 @@ spec:
 ```
 
 **Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
-
-**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Exclude truncated
-
-| Parameter           | Description                                                        |
-|---------------------|--------------------------------------------------------------------|
-| `exclude_truncated` | When present, it excludes truncated logs and does not send to Datadog. |
-
-For example, to **filter out** truncated logs:
-
-{{< tabs >}}
-{{% tab "Configuration file" %}}
-
-```yaml
-logs:
-  - type: file
-    path: /my/test/file.log
-    service: cardpayment
-    source: java
-    log_processing_rules:
-    - type: exclude_truncated
-```
-
-{{% /tab %}}
-{{% tab "Docker" %}}
-
-In a Docker environment, use the label `com.datadoghq.ad.logs` on the container that is sending the logs you want to filter, to specify the `log_processing_rules`. For example:
-
-```yaml
- labels:
-    com.datadoghq.ad.logs: >-
-      [{
-        "source": "java",
-        "service": "cardpayment",
-        "log_processing_rules": [{
-          "type": "exclude_truncated"
-        }]
-      }]
-```
-
-**Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
-
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
-
-In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`. For example:
-
-```yaml
-apiVersion: apps/v1
-metadata:
-  name: cardpayment
-spec:
-  selector:
-    matchLabels:
-      app: cardpayment
-  template:
-    metadata:
-      annotations:
-        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
-          [{
-            "source": "java",
-            "service": "cardpayment",
-            "log_processing_rules": [{
-              "type": "exclude_truncated"
-            }]
-          }]
-      labels:
-        app: cardpayment
-      name: cardpayment
-    spec:
-      containers:
-        - name: '<CONTAINER_NAME>'
-          image: cardpayment:latest
-```
 
 **Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -714,6 +635,21 @@ datadog:
 All the logs collected by the Datadog Agent are impacted by the global processing rules.
 
 **Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the Agent's [status subcommand][6] to troubleshoot any issues.
+
+## Multi-line log aggregation FAQ
+
+**1. When should I use manual multi-line rules vs. automatic multi-line detection?**
+
+If you know the format of your logs, you should use manual multi-line rules for precise control. 
+If you are sending lots of multi-line logs, and you are unsure of their format or don't have the means to configure all sources individually, you should use automatic multi-line detection.
+
+**2. What happens when a multi-line pattern doesn't match any logs?**
+
+All non-JSON log lines are processed individually as separate log entries.
+All JSON-formatted log lines are treated as a single line of logs, and only the first valid JSON format enters the intake; the rest are dropped.
+
+**3. What happens when there are both global rules and integration-specific rules?**
+Integration-specific rules completely override global rules for the particular integration.
 
 ## Further Reading
 

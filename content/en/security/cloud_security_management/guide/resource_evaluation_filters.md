@@ -37,18 +37,16 @@ The allowlist enables you to specify tags that must be applied to a resource in 
 {{< tabs >}}
 {{% tab "AWS" %}}
 
-1. On the [**Cloud Security Setup** page][1], click **Cloud accounts**.
-2. Expand the **AWS** section.
-3. Under **Resource Evaluation Filters (Optional)**, click the **Plus** (+) icon for the account you want to add the filter to.
-4. Enter a comma-separated list of `key:value` pairs for the tags you want to allowlist or blocklist.
-5. Click **Save**.
+1. On the [**Cloud Security Setup** page][1], click **Cloud Integrations**.
+1. Expand the **AWS** section and click the account you want to create resource evaluation filters for. A side panel with configuration options for that account opens.
+1. Under **Evaluation Filters**, click **Limit to Specific Resources**. Then, click **Add Resource Tags**, add `key:value` tags as required, and click **Save**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 
 {{% /tab %}}
 {{% tab "Azure" %}}
 
-1. On the [**Cloud Security Setup** page][1], click **Cloud accounts**.
+1. On the [**Cloud Security Setup** page][1], click **Cloud Integrations**.
 2. Expand the **Azure** section.
 3. Expand a subscription.
 3. Under **Resource Evaluation Filters (Optional)**, click the **Plus** (+) icon.
@@ -60,7 +58,7 @@ The allowlist enables you to specify tags that must be applied to a resource in 
 {{% /tab %}}
 {{% tab "Google Cloud" %}}
 
-1. On the [**Cloud Security Setup** page][1], click **Cloud accounts**.
+1. On the [**Cloud Security Setup** page][1], click **Cloud Integrations**.
 2. Expand the **GCP** section.
 3. Expand a project.
 3. Under **Resource Evaluation Filters (Optional)**, click the **Plus** (+) icon.
