@@ -110,7 +110,7 @@ To configure On-Call notifications on your mobile device, see the guide to [Set 
 {{% /tab %}}
 {{< /tabs >}}
 
-On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also declare and edit incidents, and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see the [Datadog Incident Management documentation][12].
+On the Incidents page, you can view, search, and filter all incidents that you have access to in your Datadog account to ensure response and resolution from anywhere. You can also declare and edit incidents, and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see [Datadog Incident Management][12].
 
 ### Create an incident
 
