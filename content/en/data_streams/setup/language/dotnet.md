@@ -28,16 +28,18 @@ aliases:
 
 .NET uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. 
 
-Starting with version 3.22.0 of the .NET tracer, Data Streams Monitoring is enabled by default.
-
 {{< tabs >}}
-{{% tab ".NET Tracer version 3.22.0 and above" %}}
+{{% tab ".NET Tracer > v3.22.0 (Recommended)" %}}
 
-Data Streams Monitoring is enabled by default, with the following default behavior:
+Starting with version 3.22.0 of the .NET tracer, Data Streams Monitoring is **enabled by default**, and `DD_DATA_STREAMS_ENABLED` does not need to be set.
+
+In default mode, the following caveats apply:
 
 * Schema tracking is disabled.
+* Data Streams is not enabled when running in a serverless environment (AWS Lambda, Azure Functions).
+* Data Streams information is not propagated for small messages. See [below](#small-messages) for more details.
 
-These features can still be enabled by explicitly setting `DD_DATA_STREAMS_ENABLED` to `true` on your services.
+These features can be enabled by explicitly setting `DD_DATA_STREAMS_ENABLED` to `true` on your services.
 
 ```yaml
 environment:
@@ -45,10 +47,16 @@ environment:
   - DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
 ```
 
-To disable Data Streams Monitoring, set `DD_DATA_STREAMS_ENABLED` to `false` on your services.
+When `DD_DATA_STREAMS_ENABLED` is set to `true`, then:
+
+* Schema tracking is enabled.
+* Data Streams is enabled for serverless environments.
+* Data Streams information is sent for **all** messages.
+
+To disable Data Streams Monitoring completely, set `DD_DATA_STREAMS_ENABLED` to `false` on your services.
 
 {{% /tab %}}
-{{% tab ".NET Tracer version below 3.22.0" %}}
+{{% tab ".NET Tracer < v3.22.0 (Legacy)" %}}
 
 To enable Data Streams Monitoring, set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on services sending messages to (or consuming messages from) your streaming applications.
 
@@ -82,6 +90,23 @@ environment:
 
 #### Confluent Cloud connectors
 {{% data_streams/dsm-confluent-connectors %}}
+
+## Small messages
+
+Data Streams Monitoring does not instrument certain small messages to avoid performance overhead that would be disproportionate for the message size.
+
+The following size thresholds apply when Data Streams Monitoring is enabled in default mode:
+
+- **Kafka**
+  - Messages less than X bytes are not instrumented by default.
+
+- **RabbitMQ**
+  - Messages less than Y bytes are note instrumented by default.
+
+- **Amazon Kinesis**
+  - Messages less than Z bytes are note instrumented by default.
+
+**Note:** When `DD_DATA_STREAMS_ENABLED` is explicitly set to `true`, all messages are instrumented regardless of size.
 
 ## Further reading
 
