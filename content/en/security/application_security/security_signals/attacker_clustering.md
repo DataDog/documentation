@@ -75,15 +75,15 @@ If the automatic attacker clustering detection fails to identify the appropriate
 
 To create a custom attacker cluster:
 
-1. Open the trace analysis panel from a security signal
-2. Select the specific attributes that correspond to the attacker's patterns
-3. Create a cluster based on your selected attributes
+1. Open the trace analysis panel from a security signal.
+2. Select the specific attributes that correspond to the attacker's patterns.
+3. Create a cluster based on your selected attributes.
 
-{{< img src="security/application_security/threats/create-custom-cluster.png" alt="Screenshot of the trace analysis panel to create a custom cluster"  >}}
+{{< img src="security/application_security/threats/create-custom-cluster.png" alt="The trace analysis panel with the create cluster from search button highlighted>}}
 
 This manual approach allows you to create more targeted blocking rules when the automatic detection doesn't capture the right patterns.
 
-{{< img src="security/application_security/threats/custom-clusters.png" alt="Screenshot of an AAP signal with custom cluster in the attacker attributes"  >}}
+{{< img src="security/application_security/threats/custom-clusters.png" alt="An AAP signal with custom clusters sorted by the attacker attributes"  >}}
 
 ## Further reading
 
