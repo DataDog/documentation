@@ -78,7 +78,7 @@ ddtrace-run python app.py
 
 ## 3. Run your application
 
-Start your Python application with above settings.
+Start your Python application with the settings described above.
 
 {{% app_and_api_protection_verify_setup %}}
 
