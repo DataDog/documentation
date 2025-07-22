@@ -19,19 +19,20 @@ further_reading:
 
 Datadog's [LLM Observability Python SDK][16] provides integrations that automatically trace and annotate calls to LLM frameworks and libraries. Without changing your code, you can get out-of-the-box traces and observability for calls that your LLM application makes to the following frameworks:
 
-| Framework                                  | Supported Versions | Tracer Version    |
-|--------------------------------------------|--------------------|-------------------|
-| [OpenAI](#openai), [Azure OpenAI](#openai) | >= 0.26.5          | >= 2.9.0          |
-| [Langchain](#langchain)                    | >= 0.0.192         | >= 2.9.0          |
-| [Amazon Bedrock](#amazon-bedrock)          | >= 1.31.57         | >= 2.9.0          |
-| [Anthropic](#anthropic)                    | >= 0.28.0          | >= 2.10.0         |
-| [Google GenAI](#google-genai)              | >= 1.21.1          | >= 3.11.0         |
-| [Google GenerativeAI](#google-generativeai)| >= 0.7.2           | >= 2.14.0         |
-| [Vertex AI](#vertex-ai)                    | >= 1.71.1          | >= 2.18.0         |
-| [LangGraph](#langgraph)                    | >= 0.2.23          | >= 3.10.1         |
-| [Crew AI](#crew-ai)                        | >= 0.105.0         | >= 3.5.0          |
-| [OpenAI Agents](#openai-agents)            | >= 0.0.2           | >= 3.5.0          |
-| [LiteLLM](#litellm)                        | >= 1.70.0          | >= 3.9.0          |
+| Framework                                       | Supported Versions | Tracer Version |
+|-------------------------------------------------|--------------------|----------------|
+| [OpenAI](#openai), [Azure OpenAI](#openai)      | >= 0.26.5          | >= 2.9.0       |
+| [Langchain](#langchain)                         | >= 0.0.192         | >= 2.9.0       |
+| [Amazon Bedrock](#amazon-bedrock)               | >= 1.31.57         | >= 2.9.0       |
+| [Amazon Bedrock Agents](#amazon-bedrock-agents) | >= 1.38.26         | >= 3.10.0      |
+| [Anthropic](#anthropic)                         | >= 0.28.0          | >= 2.10.0      |
+| [Google GenAI](#google-genai)                   | >= 1.21.1          | >= 3.11.0      |
+| [Google GenerativeAI](#google-generativeai)     | >= 0.7.2           | >= 2.14.0      |
+| [Vertex AI](#vertex-ai)                         | >= 1.71.1          | >= 2.18.0      |
+| [LangGraph](#langgraph)                         | >= 0.2.23          | >= 3.10.1      |
+| [Crew AI](#crew-ai)                             | >= 0.105.0         | >= 3.5.0       |
+| [OpenAI Agents](#openai-agents)                 | >= 0.0.2           | >= 3.5.0       |
+| [LiteLLM](#litellm)                             | >= 1.70.0          | >= 3.9.0       |
 
 
 You can programmatically enable automatic tracing of LLM calls to a supported LLM model like OpenAI or a framework like LangChain by setting `integrations_enabled` to `true` in the `LLMOBs.enable()` function. In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
@@ -118,6 +119,20 @@ The Amazon Bedrock integration instruments the following methods:
   - `ConverseStream` (requires ddtrace>=3.5.0)
 
 **Note:** The Amazon Bedrock integration does not yet support tracing embedding calls
+
+## Amazon Bedrock Agents
+
+The Amazon Bedrock Agents integration provides automatic tracing for the Amazon Bedrock Agents Runtime Python SDK's agent invoke calls (using [Boto3][5]/[Botocore][6]).
+
+### Traced methods
+
+The Amazon Bedrock Agents integration instruments the following methods:
+
+- [Invoke Agent][53]:
+  - `InvokeAgent` (requires ddtrace>=3.10.0)
+
+**Note:** The Amazon Bedrock Agents integration will only trace the overall `InvokeAgent` method by default. To enable
+tracing intra-agent steps, you must set `enableTrace=True` in the `InvokeAgent` request parameters.
 
 ## Anthropic
 
@@ -305,6 +320,7 @@ The LiteLLM integration instruments the following methods:
 [50]: https://platform.openai.com/docs/api-reference/responses
 [51]: https://ai.google.dev/api/embeddings#method:-models.embedcontent
 [52]: https://github.com/google-gemini/deprecated-generative-ai-python
+[53]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
