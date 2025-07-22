@@ -26,6 +26,11 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    const tracer = require('dd-trace').init()
    ```
 
+3. **Configure the Datadog Node.js tracer**
+
+   [Configuring the Node.js Tracing Library][1]
+
+[1]:/tracing/trace_collection/library_config/nodejs
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 1. **Install dependencies**. Run the following commands:
@@ -45,6 +50,11 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    start()
    ```
 
+3. **Configure the Datadog Python tracer**
+
+   [Configuring the Python Tracing Library][1]
+
+[1]:/tracing/trace_collection/library_config/python
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 1. **Install dependencies**. Download the Datadog JARs and deploy them with your function:
@@ -64,8 +74,13 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 
    **Note**: the environment variable to set JVM options depends on the hosting plan (example, Consumption, Elastic Premium, Dedicated). See [Azure Functions Java developer guide][2] for more details on the appropriate environment variable for your hosting plan.
 
+3. **Configure the Datadog Java tracer**
+
+   [Configuring the Java Tracing Library][3]
+
 [1]: https://repo1.maven.org/maven2/com/datadoghq/dd-serverless-compat-java-agent/
 [2]: https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-java?tabs=bash%2Cconsumption#customize-jvm
+[3]: /tracing/trace_collection/library_config/java
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 1. **Install dependencies**. Run the following commands:
@@ -136,6 +151,13 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 
    ```
 
+4. **Configure the Datadog .NET tracer**
+
+   - [Configuring the .NET Core Tracing Library][1]
+   - [Configuring the .NET Framework Tracing Library][2]
+
+[1]:/tracing/trace_collection/library_config/dotnet-core
+[2]:/tracing/trace_collection/library_config/dotnet-framework
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
