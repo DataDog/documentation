@@ -197,9 +197,6 @@ Create an experiment using `LLMObs.experiment()`:
 ```python
 from ddtrace.llmobs import LLMObs
 
-def task(input_data, config=None):
-    """Process a single dataset record.
-
 def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
     """Process a single dataset record."""
     question = input_data["question"]
