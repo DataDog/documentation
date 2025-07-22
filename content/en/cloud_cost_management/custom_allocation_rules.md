@@ -163,7 +163,13 @@ To create a rule for this allocation, you could:
 
    You can select multiple values for your destination tag. For instance, if you select the `team` tag, you can choose specific teams like `teamA`, `teamB`, and `teamC` to receive the allocated costs.
 
-1. Define the custom percentages for each of the tags you've selected for cost allocation.
+### Step 4 - (optional) Apply filter(s)
+
+Apply a filter across the entire allocation rule. Filters help you target the allocation rule to the relevant subset of your cloud spend.
+
+- **Proportional by spend**: You can add filters to narrow the scope of your allocation. For example, filter by `aws_product:ec2` to create an allocation that only applies to EC2 costs, then proportionally distribute those costs based on each team's EC2 spend.
+
+- **Dynamic by metric**: You can filter your metric query to focus on specific data. For example, add `environment:production` to your metric query so the allocation is based only on production environment usage data.
 
 ### Step 5 - (optional) Apply a partition
 
