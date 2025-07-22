@@ -25,7 +25,7 @@ further_reading:
 - kubectl configured to access your cluster
 - Helm (recommended for Agent installation)
 - Your Datadog API key
-- Datadog Python tracing library (see version requirements [here][1])
+- Datadog Python tracing library (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
