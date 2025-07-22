@@ -30,7 +30,7 @@ By proactively scanning for sensitive data, LLM Observability ensures that conve
 
 ### Permissions
 
-To configure evaluations, [LLM Observability Write permissions][6] are necessary.
+[LLM Observability Write permissions][6] are necessary to configure evaluations.
 
 [1]: /llm_observability/evaluations/ootb_evaluations
 [2]: /llm_observability/evaluations/submit_evaluations
