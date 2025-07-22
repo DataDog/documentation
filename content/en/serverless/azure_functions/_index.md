@@ -26,12 +26,6 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    const tracer = require('dd-trace').init()
    ```
 
-3. (Optional) **Enable runtime metrics**. See [Node.js Runtime Metrics][1].
-
-4. (Optional) **Enable custom metrics**. See [Metric Submission: DogStatsD][2].
-
-[1]: /tracing/metrics/runtime_metrics/?tab=nodejs#environment-variables
-[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=nodejs
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 1. **Install dependencies**. Run the following commands:
@@ -51,12 +45,6 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    start()
    ```
 
-3. (Optional) **Enable runtime metrics**. See [Python Runtime Metrics][1].
-
-4. (Optional) **Enable custom metrics**. See [Metric Submission: DogStatsD][2].
-
-[1]: /tracing/metrics/runtime_metrics/?tab=python#code-based-configuration
-[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 1. **Install dependencies**. Download the Datadog JARs and deploy them with your function:
@@ -64,7 +52,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    wget -O dd-serverless-compat-java-agent.jar 'https://dtdg.co/latest-serverless-compat-java-agent'
    ```
-   See Datadog's [Maven Repository][3] for any specific version of the Datadog Serverless Compatibility Layer.
+   See Datadog's [Maven Repository][1] for any specific version of the Datadog Serverless Compatibility Layer.
 
    Datadog recommends regularly upgrading to the latest versions of both `dd-serverless-compat-java-agent` and `dd-java-agent` to ensure you have access to enhancements and bug fixes.
 
@@ -74,16 +62,10 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    -javaagent:/path/to/dd-serverless-compat-java-agent.jar -javaagent:/path/to/dd-java-agent.jar
    ```
 
-   **Note**: the environment variable to set JVM options depends on the hosting plan (example, Consumption, Elastic Premium, Dedicated). See [Azure Functions Java developer guide][4] for more details on the appropriate environment variable for your hosting plan.
+   **Note**: the environment variable to set JVM options depends on the hosting plan (example, Consumption, Elastic Premium, Dedicated). See [Azure Functions Java developer guide][2] for more details on the appropriate environment variable for your hosting plan.
 
-3. (Optional) **Enable runtime metrics**. See [Java Runtime Metrics][1].
-
-4. (Optional) **Enable custom metrics**. See [Metric Submission: DogStatsD][2].
-
-[1]: /tracing/metrics/runtime_metrics/?tab=java#environment-variables
-[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=java
-[3]: https://repo1.maven.org/maven2/com/datadoghq/dd-serverless-compat-java-agent/
-[4]: https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-java?tabs=bash%2Cconsumption#customize-jvm
+[1]: https://repo1.maven.org/maven2/com/datadoghq/dd-serverless-compat-java-agent/
+[2]: https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-java?tabs=bash%2Cconsumption#customize-jvm
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 1. **Install dependencies**. Run the following commands:
@@ -154,12 +136,6 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 
    ```
 
-4. (Optional) **Enable runtime metrics**. See [.NET Runtime Metrics][1].
-
-5. (Optional) **Enable custom metrics**. See [Metric Submission: DogStatsD][2].
-   
-[1]: /tracing/metrics/runtime_metrics/?tab=net#environment-variables
-[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=dotnet
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -172,14 +148,13 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    | `DD_API_KEY` | Your [Datadog API key][1]. |
    | `DD_SITE` | Your [Datadog site][2]. For example, {{< region-param key=dd_site code="true" >}}. |
 
-7. **Configure Unified Service Tagging**. You can collect metrics from your Azure Functions by installing the [Datadog Azure integration][5]. To correlate these metrics with your traces, first set the `env`, `service`, and `version` tags on your resource in Azure. Then, configure the following environment variables. You can add custom tags as `DD_TAGS`.
+7. **Configure Unified Service Tagging**. You can collect metrics from your Azure Functions by installing the [Datadog Azure integration][5]. To correlate these metrics with your traces, first set the `env`, `service`, and `version` tags on your resource in Azure. Then, configure the following environment variables.
 
    | Name | Value |
    | ---- | ----- |
    | `DD_ENV` | How you want to tag your env for [Unified Service Tagging][7]. For example, `prod`. |
    | `DD_SERVICE` | How you want to tag your service for [Unified Service Tagging][7].  |
    | `DD_VERSION` | How you want to tag your version for [Unified Service Tagging][7]. |
-   | `DD_TAGS` | Your comma-separated custom tags. For example, `key1:value1,key2:value2`.  |
 
 ## What's next?
 
