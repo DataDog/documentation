@@ -59,15 +59,7 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
 6. Enter an "Export prefix" for the new exports. For example, enter `datadog` to avoid conflicts with existing exports.
 
-7. Click **Edit** on each export and confirm the following details:
-    - Frequency: **Daily export of month-to-date costs**
-    - Dataset version:
-      - Supported versions: `2021-10-01`, `2021-01-01`, `2020-01-01`
-      - Unsupported versions: `2019-10-01`
-
-   {{< img src="cloud_cost/improved_export.png" alt="Export details with Metric: Actual, Export type: Daily, and Dataset Version" style="width:100%" >}}
-
-8. In the **Destination** tab, select the following details:
+7. In the **Destination** tab, select the following details:
     - Choose **Azure blob storage** as the storage type.
     - Choose a storage account, container, and directory for the exports.
         - **Note:** Do not use special characters like `.` in these fields.
@@ -80,9 +72,8 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
    {{< img src="cloud_cost/improved_export_destination_2.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}
 
-9. On the **Review + create** tab, select **Create**.
-
-For faster processing, generate the first exports manually by clicking **Run Now**.
+8. On the **Review + create** tab, select **Create**.
+9. For faster processing, generate the first exports manually by clicking **Run Now**.
 
 {{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports" style="width:50%" >}}
 
