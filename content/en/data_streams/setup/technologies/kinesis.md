@@ -5,7 +5,6 @@ title: Data Streams Monitoring for Amazon Kinesis
 ### Prerequisites
 
 * [Datadog Agent v7.34.0 or later][1]
-* [Datadog Lambda Extension v80 or below][6]
 
 <table>
   <thead>
@@ -66,4 +65,3 @@ See setup instructions for [Java][2], [Node.js][3], [Python][4],  or [.NET][5].
 [3]: /data_streams/setup/language/nodejs
 [4]: /data_streams/setup/language/python
 [5]: /data_streams/setup/language/dotnet
-[6]: /serverless/libraries_integrations/extension/

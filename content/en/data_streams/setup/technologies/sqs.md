@@ -5,7 +5,6 @@ title: Data Streams Monitoring for Amazon SQS
 ### Prerequisites
 
 * [Datadog Agent v7.34.0 or later][1]
-* [Datadog Lambda Extension v80 or below][6]
 
 <table>
   <thead>
@@ -73,4 +72,3 @@ To measure the number of messages in a DLQ, ensure your AWS integration has the 
 [3]: /data_streams/setup/language/nodejs
 [4]: /data_streams/setup/language/python
 [5]: /data_streams/setup/language/dotnet
-[6]: /serverless/libraries_integrations/extension/

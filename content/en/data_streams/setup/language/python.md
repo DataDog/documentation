@@ -17,7 +17,6 @@ aliases:
 ### Prerequisites
 
 * [Datadog Agent v7.34.0 or later][1]
-* [Datadog Lambda Extension v80 or below][7]
 
 ### Supported libraries
 
@@ -67,4 +66,3 @@ Data Streams Monitoring propagates context through message headers. If you are u
 [3]: https://pypi.org/project/confluent-kafka/
 [5]: https://pypi.org/project/kombu/
 [6]: /data_streams/manual_instrumentation/?tab=python
-[7]: /serverless/libraries_integrations/extension/
