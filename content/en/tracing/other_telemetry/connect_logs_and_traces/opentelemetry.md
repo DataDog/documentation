@@ -33,9 +33,9 @@ Before you begin, ensure you have configured [unified service tagging][1]. This 
 
 To correlate OpenTelemetry traces and logs in Datadog, you must:
 
-- **Inject Trace Context**: Your application's logger must be configured to inject the `trace_id` and `span_id` of the active trace into your logs.
+- **Inject Trace Context**: Your application's logger must be configured to enrich your logs with the `trace_id` and `span_id` from the active trace. The recommended approach is to use an OpenTelemetry-aware logging library or appender. These tools automatically capture the active trace context and embed the `trace_id` and `span_id` as top-level fields in your log records, which is the standard method for correlation.
 
-- **Send Logs to Datadog**: Your logs, now enriched with trace context, must be collected and sent to Datadog.
+- **Send Logs to Datadog**: Your logs, enriched with trace context, must be collected and sent to Datadog.
 
 #### 1. Inject trace context into your logs
 
