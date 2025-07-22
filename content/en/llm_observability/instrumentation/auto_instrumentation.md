@@ -4,6 +4,7 @@ aliases:
     - /tracing/llm_observability/auto_instrumentation
     - /llm_observability/auto_instrumentation
     - /llm_observability/setup/auto_instrumentation
+    - /llm_observability/sdk/auto_instrumentation
 further_reading:
     - link: '/llm_observability/setup/sdk/python'
       tag: 'Documentation'
