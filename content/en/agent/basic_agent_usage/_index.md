@@ -26,10 +26,13 @@ further_reading:
 ### Managing the Agent with Fleet Automation (recommended)
 [Fleet Automation][15] is the primary, in-app workflow for installing, upgrading, configuring, and troubleshooting the Datadog Agent at scale.
 
-- **View configuration & history** – View every Agent in your fleet, its version, enabled products, configuration files, and historical changes from a single page.
-- **[Upgrade outdated Agents][13]** – Trigger remote upgrades for your Agents to keep your fleet updated in a few clicks.
-- **[Send a flare for support][14]** – From the Support tab of a host, generate a flare and attach it to an existing or new Support case without using no command line required.
-- **Audit API-key usage** – Identify which Agents are using a specific API key and rotate keys safely.
+{{< img src="/agent/basic_agent_usage/basic_agent_2_july_25.png" alt="The Fleet Automation view that allows you to centrally manage your Datadog Agents in one place." style="width:100%;">}}
+
+
+- **View configuration & history**: View every Agent in your fleet, its version, enabled products, configuration files, and historical changes from a single page.
+- **[Upgrade outdated Agents][13]**: Trigger remote upgrades for your Agents to keep your fleet updated in a few clicks.
+- **[Send a flare for support][14]**: From the Support tab of a host, generate a flare and attach it to an existing or new Support case without having to use the command line.
+- **Audit API-key usage**: Identify which Agents are using a specific API key and rotate keys safely.
 
 
 ### Datadog Agent Manager GUI
