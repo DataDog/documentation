@@ -114,8 +114,8 @@ On the Incidents page, you can view, search, and filter all incidents that you h
 
 ### Create an incident
 
-1. Navigate to the incident list by clicking on the Incidents Tab in the bottom bar.
-2. Click the **+** button in the top right corner.
+1. Navigate to the incident list by tapping on the Incidents Tab in the bottom bar.
+2. Tap the **+** button in the top right corner.
 3. Give your incident a title, severity, and commander.
 
 ## Notification Center
