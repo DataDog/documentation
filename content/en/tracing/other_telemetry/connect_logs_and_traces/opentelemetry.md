@@ -39,11 +39,9 @@ To correlate OpenTelemetry traces and logs in Datadog, you must:
 
 #### 1. Inject trace context into your logs
 
-The recommended approach is to configure your logging library to automatically inject the standard OpenTelemetry `trace_id` and `span_id` attributes into your logs. The following examples show how to configure common logging libraries to do this.
+The following examples for Go and Java use logging bridges. These bridges intercept logs from common logging libraries (such as `zap` and `Logback`), convert them into the OpenTelemetry log data model, and forward them to the OpenTelemetry SDK. This process automatically enriches the logs with the active trace context.
 
 For complete, working applications, see the [Datadog OpenTelemetry Examples repository][2].
-
-The following examples for Go and Java use logging bridges. These bridges intercept logs from common logging libraries (such as `zap` and `Logback`), convert them into the OpenTelemetry log data model, and forward them to the OpenTelemetry SDK. This process automatically enriches the logs with the active trace context.
 
 {{< tabs >}}
 {{% tab "Go" %}}
@@ -143,13 +141,18 @@ The OpenTelemetry Collector and the Datadog Agent can both receive OTLP logs.
          exporters: [datadog]
    ```
    
-#### Scrape logs from files
+#### Scrape logs from files 
 
 This approach is useful if you have a requirement to keep local log files for compliance or other tooling.
 
+**Required fields for logs**
+For Datadog to correlate your logs and traces, your JSON log files must contain specific fields formatted correctly:
+- `trace_id`: The ID of the trace. It must be a 32-character lowercase hexadecimal string.
+- `span_id`: The ID of the span. It must be a 16-character lowercase hexadecimal string.
+The OpenTelemetry SDK typically provides these as integers, which must be formatted into hexadecimal strings without any <code>0x</code> prefix.
+
 1. **Configure your Application to Output JSON Logs**: Use a standard logging library to write logs as JSON to a file or `stdout`. The following Python example uses the standard `logging` library.
-2. **Manually Inject Trace Context**: In your application code, retrieve the current span context from the OpenTelemetry tracer and add the `trace_id` and `span_id` to your log records. Datadog requires the IDs to be formatted as hexadecimal strings.  
-Here is a Python example showing how to create a custom logging.Filter to automatically add the active IDs:
+2. **Manually Inject Trace Context**: In your application code, retrieve the current span context and add the `trace_id` and `span_id` to your log records. The following Python example shows how to create a custom logging.Filter to do this automatically:
 
    ```python
    import logging
@@ -187,30 +190,34 @@ Here is a Python example showing how to create a custom logging.Filter to automa
    # Logs will now contain the trace_id and span_id
    logger.info("Processing user request with trace context.")
    ```
+   
 3. **Configure the Collector to Scrape Log Files**: In your Collector's `config.yaml`, enable the `filelog` receiver. Configure it to find your log files and parse them as JSON.
    ```yaml
-  receivers:
-    filelog:
-      include: [ /var/log/my-app/*.log ] # Path to your log files
-      operators:
-        - type: json_parser
-          # The timestamp and severity fields should match your JSON output
-          timestamp:
-            parse_from: attributes.asctime 
-            layout: '%Y-%m-%d %H:%M:%S,%f'
-          severity:
-            parse_from: attributes.levelname
-  # ... your logs pipeline ...
+   receivers:
+     filelog:
+       include: [ /var/log/my-app/*.log ] # Path to your log files
+       operators:
+         - type: json_parser
+           # The timestamp and severity fields should match your JSON output
+           timestamp:
+             parse_from: attributes.asctime 
+             layout: '%Y-%m-%d %H:%M:%S,%f'
+           severity:
+             parse_from: attributes.levelname
+   # ... your logs pipeline ...
    ```
 
 This manual approach gives you full control over the log format, ensuring it is clean and easily parsable by the Collector or Datadog Agent.
 
 #### Collect logs using the Datadog Agent
 
-If you collect logs directly with the Datadog Agent instead of sending them through the OpenTelemetry Collector, two things change:
+If you collect logs directly with the Datadog Agent (without sending them through the OpenTelemetry Collector), you must ensure the trace IDs in your logs use the Datadog format.
 
-- **Attribute Name**: Correlation relies on the `dd.trace_id` attribute instead of the standard OTel `trace_id`.
-- **Attribute Mapping**: The Datadog Agent does not automatically perform the same OTel-to-Datadog convention conversions as the Datadog Exporter. You may need to manually remap resource attributes (like `service.name`) to Datadog's standard tags in the log processing pipeline.
+- **Trace ID format**: The Datadog Agent requires the trace ID to be in the `dd.trace_id` field.
+  - If you are using **Datadog's tracing libraries** (like `dd-trace-py`), this is handled for you automatically.
+  - If you are generating logs with OpenTelemetry `trace_id` and `span_id` (as shown in the [file-scraping example](#scrape-logs-from-files)), you must use a [Log Processing Rule][5] in Datadog to remap your `trace_id` attribute to `dd.trace_id`.
+
+- **Attribute Mapping**: The Datadog Agent does not automatically convert OTel resource attributes (for example, `service.name`) to Datadog's standard tags. You may need to manually remap these attributes in your log processing pipeline to maintain unified service tagging.
 
 ## View correlated data in Datadog
 
@@ -243,3 +250,4 @@ Click **View Trace in APM** to pivot directly to the full APM trace associated w
 [2]: https://github.com/DataDog/opentelemetry-examples
 [3]: https://app.datadoghq.com/apm/traces
 [4]: https://app.datadoghq.com/logs
+[5]: /logs/log_configuration/processors
