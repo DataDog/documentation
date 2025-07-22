@@ -1,1 +1,1 @@
-There are no environment variables to configure for the Amazon Security Lake destination.
+Amazon Security Lake の宛先に関して設定する環境変数はありません。

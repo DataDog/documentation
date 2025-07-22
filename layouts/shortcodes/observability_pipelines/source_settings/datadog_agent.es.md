@@ -1,0 +1,1 @@
+En este paso no hay parámetros para configurar.

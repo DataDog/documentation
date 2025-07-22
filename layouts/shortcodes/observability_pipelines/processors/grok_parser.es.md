@@ -1,26 +1,26 @@
-Este procesador analiza logs mediante las reglas de parseo grok disponibles para un conjunto de orígenes. Las reglas se aplican automáticamente a logs basándose en el origen del log. Por lo tanto, los logs deben tener un campo `source` con el nombre del origen. Si este campo no se añade cuando el log se envía al worker de pipelines de observabilidad, puedes utilizar el procesador **Add field** (Añadir campo) para añadirlo.
+Este procesador analiza los logs con las reglas de análisis de grok disponibles para un conjunto de fuentes. Las reglas se aplican automáticamente a los logs según su fuente. Por lo tanto, los logs deben tener un campo `source` con el nombre de la fuente. Si este campo no se añade cuando el log se envía al Observability Pipelines Worker, puedes usar el procesador **Añadir campo** para agregarlo.
 
-Si el campo `source` de un log coincide con uno de los conjuntos de reglas de parseo grok, el campo `message` del log se comprueba con esas reglas. Si una regla coincide, los datos analizados resultantes se añaden al campo `message` como un objeto JSON, sobrescribiendo el `message` original.
+Si el campo `source` de un log coincide con uno de los conjuntos de reglas de análisis sintáctico de grok, se verifica el campo `message` del registro con esas reglas. Si una regla coincide, los datos analizados resultantes se añaden en el campo `message` como un objeto JSON, sobrescribiendo el original `message`.
 
-Si no hay un campo `source` en el log, o ninguna regla coincide con el log `message`, entonces no se realizan cambios en el log y se envía al siguiente paso del pipeline.
+Si no hay un campo `source` en el log o ninguna regla coincide con este `message`, entonces no se realizan cambios en el log y se envía al siguiente paso del pipeline.
 
 
-Para configurar el analizador sintáctico grok, define un **filtro de consulta**. Sólo se procesan los logs que coincidan con la [consulta de filtro] especificada (#filter-query-syntax). Todos los logs, independientemente de si coinciden o no con la consulta de filtro, se envían al siguiente paso del pipeline.
+Para configurar el parseo grok, define una **consulta de filtro**. Solo se procesan los logs que coinciden con la [consulta de filtro](#filter-query-syntax) especificada. Todos los logs, independientemente de si coinciden con la consulta del filtro o no, se envían al siguiente paso del pipeline.
 
-Para probar muestras de log para las reglas predefinidas:
-1. Haz clic en el botón **Preview Library Rules** (Previsualizar reglas de biblioteca).
+Para probar las muestras del log con reglas predefinidas:
+1. Haz clic en el botón **Preview Library Rules (Reglas de la biblioteca de vista previa)**.
 1. Busca o selecciona un origen en el menú desplegable.
-1. Introduce una muestra de log para probar las reglas de parseo para ese origen.
+1. Introduce una muestra del log para probar las reglas de parseo para ese origen.
 
 Para añadir una regla personalizada de parseo:
 
-1. Haz clic en **Add Custom Rule** (Añadir regla personalizada).
-1. Si deseas clonar una regla de biblioteca, selecciona **Clone library rule** (Clonar regla de biblioteca) y, a continuación, el origen de biblioteca en el menú desplegable.
-1. Si deseas crear una regla personalizada, selecciona **Custom** (Personalizada) y, a continuación, introduce el `source`. Las reglas de parseo se aplican a logs con ese `source`.
-1. Introduce muestras de log para probar las reglas de parseo.
-1. Introduce las reglas para el parseo de los logs. Consulta [Parseo][10031] para obtener más información sobre la escritura de reglas de parseo.<br>**Nota**: Los filtros `url`, `useragent` y `csv` no están disponibles.
-1. Haz clic en **Advanced Settings** (Configuración avanzada) si deseas añadir reglas auxiliares. Consulta [Uso de reglas auxiliares para factorizar varias reglas de parseo][10032] para obtener más información.
-1. Haz clic en **Add Rule** (Añadir regla).
+1. Haz clic en **Añadir regla personalizada**.
+2. Si quieres clonar una regla de biblioteca, selecciona **Clonar regla de biblioteca** y luego el origen de la biblioteca en el menú desplegable.
+3. Si quieres crear una regla personalizada, selecciona **Personalizada** y luego introduce el `source`. Las reglas de análisis se aplican a los logs con `source`.
+4. Introduce muestras de log para probar las reglas de parseo.
+5. Introduce las reglas para analizar los logs. Consulta [Análisis][10031] para obtener más información sobre cómo escribir reglas de análisis.<br>**Nota**: Los filtros `url`, `useragent` y `csv` no están disponibles.
+6. Haz clic en **Advanced Settings (Configuración avanzada)** si quieres añadir reglas auxiliares. Consulta [Uso de reglas auxiliares para factorizar múltiples reglas de análisis][10032] para obtener más información.
+7. Haz clic en **Add Rule (Añadir regla)**.
 
-[10031]: /es/logs/log_configuration/parsing/
-[10032]: /es/logs/log_configuration/parsing/?tab=matchers#using-helper-rules-to-factorize-multiple-parsing-rules
+[10031]: /logs/log_configuration/parsing/
+[10032]: /logs/log_configuration/parsing/?tab=matchers#using-helper-rules-to-factorize-multiple-parsing-rules

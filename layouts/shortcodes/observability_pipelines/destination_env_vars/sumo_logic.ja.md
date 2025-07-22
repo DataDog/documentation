@@ -1,1 +1,1 @@
-Sumo Logic HTTP コレクター の URLを入力します。詳細は、[前提条件](#prerequisites)を参照してください。
+Sumo Logic HTTP コレクターの URL を入力します。詳細については、[前提条件](#prerequisites)を参照してください。

@@ -1,0 +1,1 @@
+Introduce el ID de la clave de acceso de AWS y la clave de acceso secreta de AWS para el bucket de archivo de S3 que creaste anteriormente.
