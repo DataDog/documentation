@@ -31,6 +31,12 @@
           "options": {
             "userBehaviorName": "behavior"
           }
+        },
+        {
+          "type": "flag_ip",
+          "options": {
+            "flaggedIPType": "FLAGGED"
+          }
         }
       ]
     }
