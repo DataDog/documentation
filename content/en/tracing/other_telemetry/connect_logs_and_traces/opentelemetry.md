@@ -43,10 +43,10 @@ The recommended approach is to configure your logging library to automatically i
 
 For complete, working applications, see the [Datadog OpenTelemetry Examples repository][2].
 
+The following examples for Go and Java use logging bridges. These bridges intercept logs from common logging libraries (such as `zap` and `Logback`), convert them into the OpenTelemetry log data model, and forward them to the OpenTelemetry SDK. This process automatically enriches the logs with the active trace context.
+
 {{< tabs >}}
 {{% tab "Go" %}}
-
-The following examples for Go and Java use logging bridges. These bridges intercept logs from common logging libraries (suchg as `zap` and `Logback`), convert them into the OpenTelemetry log data model, and forward them to the OpenTelemetry SDK. This process automatically enriches the logs with the active trace context.
 
 First, ensure you have an initialized OpenTelemetry `LoggerProvider`. Then, use it to create your `zap` logger instance:
 
@@ -101,7 +101,7 @@ Once your logs are instrumented with trace context, you need to send them to Dat
 
 This is the simplest and most direct method. Your application sends logs directly to an OTLP endpoint, avoiding the complexity of writing to and parsing local files.
 
-Both the Datadog Agent or the OpenTelemetry Collector can receive OTLP logs.
+The OpenTelemetry Collector and the Datadog Agent can both receive OTLP logs.
 
 1. **Configure your Application to Export Logs using OTLP**: In your OpenTelemetry SDK setup, configure a `LogRecordProcessor` to use an `OTLPLogExporter`. The following example shows how to do this in Python:
    ```python
@@ -204,7 +204,6 @@ Here is a Python example showing how to create a custom logging.Filter to automa
    ```
 
 This manual approach gives you full control over the log format, ensuring it is clean and easily parsable by the Collector or Datadog Agent.
-
 
 #### Collect logs using the Datadog Agent
 
