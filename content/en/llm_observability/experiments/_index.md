@@ -34,12 +34,16 @@ pip install ddtrace>=3.11
 
 Specify the following environment variables in your application startup command:
 
-| Variable | Description |
-| -------- | ----------- |
-| `DD_API_KEY` | Your [Datadog API key][2] |
-| `DD_APP_KEY` | Your [Datadog application key][3] |
-| `DD_SITE` | Your [Datadog site][4]. Defaults to `datadoghq.com`. |
-| `DD_LLMOBS_PROJECT_NAME` | The name of your project for experiments |
+| Variable | Description | Required |
+| -------- | ----------- | -------- |
+| `DD_API_KEY` | Your [Datadog API key][2] | Yes |
+| `DD_APP_KEY` | Your [Datadog application key][3] | Yes |
+| `DD_SITE` | Your [Datadog site][4]. Defaults to `datadoghq.com`. | No |
+| `DD_LLMOBS_PROJECT_NAME` | The name of your project for experiments | No* |
+| `DD_LLMOBS_ENABLED` | Set to `true` to enable LLM Observability. Defaults to `true`. | No |
+| `DD_LLMOBS_ML_APP` | The name of your ML application. Required if not set in `LLMObs.enable()`. | No* |
+
+\* Can be set via `LLMObs.enable()` instead
 
 #### Project initialization
 
@@ -138,6 +142,49 @@ for record in dataset:
 # Get dataset length
 print(len(dataset))
 ```
+
+#### Working with CSV Files
+
+You can create datasets from CSV files and export datasets to pandas DataFrames. Note that pandas is required for these operations - install it via `pip install pandas`.
+
+```python
+# Create dataset from CSV
+dataset = LLMObs.create_dataset_from_csv(
+    csv_path="questions.csv",
+    dataset_name="geography-quiz",
+    input_data_columns=["question", "category"],  # Columns to use as input
+    expected_output_columns=["answer"],           # Columns to use as expected output
+    metadata_columns=["difficulty"],              # Optional: Additional columns as metadata
+    csv_delimiter=",",                           # Optional: Defaults to comma
+    description="Geography quiz dataset"          # Optional: Dataset description
+)
+
+# Example CSV format:
+# question,category,answer,difficulty
+# What is the capital of Japan?,geography,Tokyo,medium
+# What is the capital of Brazil?,geography,Brasília,medium
+
+# Convert dataset to pandas DataFrame
+df = dataset.as_dataframe()
+print(df.head())
+
+# DataFrame output:
+#                                    input_data          expected_output  metadata
+#                                    question category         answer    difficulty
+# 0  What is the capital of Japan?  geography         Tokyo      medium
+# 1  What is the capital of Brazil? geography      Brasília      medium
+```
+
+The DataFrame will have a MultiIndex structure with the following columns:
+- `input_data`: Contains all input fields from `input_data_columns`
+- `expected_output`: Contains all output fields from `expected_output_columns`
+- `metadata`: Contains any additional fields from `metadata_columns`
+
+Notes:
+- CSV files must have a header row
+- Maximum field size is 10MB
+- All columns not specified in `input_data_columns` or `expected_output_columns` are automatically treated as metadata
+- The dataset is automatically pushed to Datadog after creation
 
 ### Experiment class
 
