@@ -188,20 +188,20 @@ By default, only users with the [Datadog Read role][16] can view LLM Observabili
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /llm_observability/setup/sdk
-[2]: /llm_observability/setup/api
+[1]: /llm_observability/instrumentation/sdk
+[2]: /llm_observability/instrumentation/api
 [3]: https://app.datadoghq.com/llm/traces
 [4]: /llm_observability/terms
-[5]: /llm_observability/sdk#installation
-[6]: /llm_observability/sdk#command-line-setup
-[7]: /llm_observability/sdk#in-code-setup
+[5]: /llm_observability/instrumentation/sdk#installation
+[6]: /llm_observability/instrumentation/sdk#command-line-setup
+[7]: /llm_observability/instrumentation/sdk#in-code-setup
 [8]: /llm_observability/quickstart
-[9]: /llm_observability/sdk#tracing-spans
+[9]: /llm_observability/instrumentation/sdk#tracing-spans
 [10]: https://app.datadoghq.com/dash/integration/llm_analytics
-[11]: /llm_observability/sdk#tracking-user-sessions
-[12]: /llm_observability/sdk#tracking-user-sessions
-[13]: /llm_observability/sdk#persisting-a-span-across-contexts
-[14]: /llm_observability/sdk#tracing-multiple-applications
+[11]: /llm_observability/instrumentation/sdk#tracking-user-sessions
+[12]: /llm_observability/instrumentation/sdk#tracking-user-sessions
+[13]: /llm_observability/instrumentation/sdk#persisting-a-span-across-contexts
+[14]: /llm_observability/instrumentation/sdk#tracing-multiple-applications
 [15]: /llm_observability/evaluations/submit_evaluations
 [16]: /account_management/rbac/#datadog-default-roles
 [17]: /account_management/rbac/permissions/#llm-observability
