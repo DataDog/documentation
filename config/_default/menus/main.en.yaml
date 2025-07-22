@@ -5936,7 +5936,7 @@ menu:
     - name: Threat Intelligence
       url: security/threat_intelligence
       parent: security_platform
-      idenfier: security_threat_intelligence
+      identifier: security_threat_intelligence
       weight: 6
     - name: Audit Trail
       url: security/audit_trail
