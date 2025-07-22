@@ -9,6 +9,9 @@ further_reading:
 - link: /metrics/distributions/
   tag: Documentación
   text: Distribuciones de métricas
+- link: /dashboards/guide/quick-graphs/
+  tag: Documentación
+  text: Quick Graphs
 title: Explorador de métricas
 ---
 
@@ -51,13 +54,21 @@ También puedes añadir funciones a tu consulta utilizando el botón de función
 
 Exporta tu gráfico a un dashboard o notebook con los botones de la parte superior derecha. También puedes utilizar **Split Graph in Notebook** (Dividir gráfico en notebook) para ver los datos divididos en gráficos individuales por elementos como región, servicio, o entorno.
 
-## Lectura adicional
+### Quick Graphs
+
+Con Quick Graphs, tienes más opciones para visualizar tus datos, sin necesidad de crear un [dashboard][4] o [notebook][2]. Estos gráficos son útiles para entender y solucionar problemas cuestiones sin crear dashboards permanentes o configuraciones de visualización complejas.
+
+Para más información, consulta la documentación de [Quick Graphs][7].
+
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: https://app.datadoghq.com/metric/explorer
 [2]: /es/notebooks/
 [3]: /es/dashboards/#screenboards
 [4]: /es/dashboards/#get-started
 [5]: /es/metrics/introduction/#space-aggregation
-[6]: https://docs.datadoghq.com/es/dashboards/querying/#advanced-graphing
+[6]: /es/dashboards/querying/#advanced-graphing
+[7]: /es/dashboards/guide/quick-graphs/
