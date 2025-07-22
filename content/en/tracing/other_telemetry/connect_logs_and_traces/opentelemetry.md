@@ -37,8 +37,6 @@ To correlate OpenTelemetry traces and logs in Datadog, you must:
 
 - **Send Logs to Datadog**: Your logs, now enriched with trace context, must be collected and sent to Datadog.
 
-<div class="alert alert-info">For logs collected directly by the Datadog Agent (instead of through the OpenTelemetry Collector), automatic correlation relies on the <code>dd.trace_id</code> attribute.</div>
-
 #### 1. Inject trace context into your logs
 
 The recommended approach is to configure your logging library to automatically inject the standard OpenTelemetry `trace_id` and `span_id` attributes into your logs. The following examples show how to configure common logging libraries to do this.
