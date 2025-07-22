@@ -105,6 +105,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    dotnet package add Microsoft.Azure.Functions.Extensions
    ```
 
+   And add the following `.cs` file to your application:
    ```csharp
    using Datadog.Serverless;
    using Microsoft.Azure.Functions.Extensions.DependencyInjection;
