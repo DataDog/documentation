@@ -79,7 +79,7 @@ To create a custom attacker cluster:
 2. Select the specific attributes that correspond to the attacker's patterns.
 3. Create a cluster based on your selected attributes.
 
-{{< img src="security/application_security/threats/create-custom-cluster.png" alt="The trace analysis panel with the create cluster from search button highlighted>}}
+{{< img src="security/application_security/threats/create-custom-cluster.png" alt="The trace analysis panel with the create cluster from search button highlighted" >}}
 
 This manual approach allows you to create more targeted blocking rules when the automatic detection doesn't capture the right patterns.
 
