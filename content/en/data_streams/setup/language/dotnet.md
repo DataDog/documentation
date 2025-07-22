@@ -36,8 +36,9 @@ Starting with version 3.22.0 of the .NET tracer, Data Streams Monitoring is **en
 In default mode, the following caveats apply:
 
 * Schema tracking is disabled.
-* Data Streams is not enabled when running in a serverless environment (AWS Lambda, Azure Functions).
-* Data Streams information is not propagated for small messages. See [below](#small-messages) for more details.
+* Data Streams is not enabled when running in a serverless environment.
+* Data Streams information is not propagated for certain messages which are too small or too large. See [below](#message-sizes) for more details.
+* Message sizes are not tracked.
 
 These features can be enabled by explicitly setting `DD_DATA_STREAMS_ENABLED` to `true` on your services.
 
@@ -52,6 +53,7 @@ When `DD_DATA_STREAMS_ENABLED` is set to `true`, then:
 * Schema tracking is enabled.
 * Data Streams is enabled for serverless environments.
 * Data Streams information is sent for **all** messages.
+* Message sizes are tracked.
 
 To disable Data Streams Monitoring completely, set `DD_DATA_STREAMS_ENABLED` to `false` on your services.
 
@@ -91,20 +93,20 @@ environment:
 #### Confluent Cloud connectors
 {{% data_streams/dsm-confluent-connectors %}}
 
-## Small messages
+## Message sizes
 
-Data Streams Monitoring does not instrument certain small messages to avoid performance overhead that would be disproportionate for the message size.
+When Data Streams Monitoring is enabled in default mode, some messages are not instrumented when they are too small, or too large.
 
 The following size thresholds apply when Data Streams Monitoring is enabled in default mode:
 
 - **Kafka**
-  - Messages less than X bytes are not instrumented by default.
+  - Messages less than 34 bytes are not instrumented by default.
 
 - **RabbitMQ**
-  - Messages less than Y bytes are note instrumented by default.
+  - Messages greater than 128 kilobytes are not instrumented by default.
 
 - **Amazon Kinesis**
-  - Messages less than Z bytes are note instrumented by default.
+  - Messages less than 34 bytes are not instrumented by default.
 
 **Note:** When `DD_DATA_STREAMS_ENABLED` is explicitly set to `true`, all messages are instrumented regardless of size.
 
