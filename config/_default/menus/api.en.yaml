@@ -850,6 +850,7 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - GetEvent
         unstable: []
@@ -1594,6 +1595,18 @@ menu:
           - DeleteTagConfiguration
         unstable: []
         order: 4
+    - name: Get tag key cardinality details
+      url: '#get-tag-key-cardinality-details'
+      identifier: metrics-get-tag-key-cardinality-details
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMetricTagCardinalityDetails
+        unstable: []
+        order: 13
     - name: Tag Configuration Cardinality Estimator
       url: '#tag-configuration-cardinality-estimator'
       identifier: metrics-tag-configuration-cardinality-estimator
