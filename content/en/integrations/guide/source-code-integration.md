@@ -53,7 +53,6 @@ Datadog supports the following features for the following source code management
 | **Context Links** | Yes | Yes | Yes | Yes |
 | **Code Snippets** | Yes | Yes | Yes | No | 
 | **PR Comments** | Yes | Yes | Yes | No | 
-| **Datadog-Hosted Scans** | Yes | Yes | No | No |
 
 {{< tabs >}}
 {{% tab "GitHub (SaaS & On-Prem)" %}}
