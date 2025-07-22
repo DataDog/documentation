@@ -194,8 +194,8 @@ This approach is useful if you have a requirement to keep local log files for co
              parse_from: attributes.timestamp
              layout_type: epoch
              layout: ms
-                      severity:
-                        parse_from: attributes.level
+        severity:
+          parse_from: attributes.level
 
    service:
      pipelines:
