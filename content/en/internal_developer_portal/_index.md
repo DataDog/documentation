@@ -2,7 +2,7 @@
 title: Internal Developer Portal
 disable_toc: false
 further_reading:
-- link: "'getting_started/internal_developer_portal/"
+- link: "getting_started/internal_developer_portal/"
   tag: "Documentation"
   text: "Getting Started with Internal Developer Portal"
 - link: "https://www.datadoghq.com/blog/software-catalog"
@@ -56,13 +56,17 @@ If you're new to IDP, start with the [Getting Started guide][5], which walks thr
 
 Use [Datadog Teams][6] to enable team-based features in IDP:
 
-- Track your teams in Datadog and automatically sync with your external sources of truth
-- Assign teams as owners of services and other entities
-- Filter views by team throughout IDP (for example, in Software Catalog, Scorecards, and Engineering Reports)
+- Track your teams in Datadog and automatically sync with your external sources of truth 
+- Assign teams as owners of services and other entities 
+- Create hierarchies to have parent-child relationships between your teams
+- Filter views by teams throughout IDP (for example, in Software Catalog, Scorecards, and Engineering Reports)
 
 If your organization manages team structure in GitHub, join the preview for GitHub Integration for Teams to automatically sync GitHub teams to Datadog.
 
-{{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" d_target="#signupModal" btn_hidden="false" header="Join the preview for GitHub Integration for Teams!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" d_target="#signupModal" btn_hidden="false" header="Join the preview for GitHub Integration for Teams" >}}
+{{< /callout >}}
+
+{{< callout url="https://www.datadoghq.com/product-preview/teams-hierarchy/" d_target="#signupModal" btn_hidden="false" header="Join the preview for the Teams hierarchy feature" >}}
 {{< /callout >}}
 
 

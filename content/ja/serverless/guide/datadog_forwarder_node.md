@@ -253,7 +253,7 @@ Datadog Lambda ライブラリは、レイヤーまたは JavaScript パッケ�
 以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][8]します。
 
 ```
-# us、us3、us5、eu リージョンの場合
+# us、us3、us5、eu、ap1、ap2 リージョンの場合
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 
 # 米国政府リージョンの場合
