@@ -100,7 +100,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    Datadog.Serverless.CompatibilityLayer.Start();
    ```
 
-   If your Azure Function app uses the In-Process model
+   If your Azure Function app uses the In-Process model, add a NuGet package reference to `Microsoft.Azure.Functions.Extensions`:
    ```shell
    dotnet package add Microsoft.Azure.Functions.Extensions
    ```
