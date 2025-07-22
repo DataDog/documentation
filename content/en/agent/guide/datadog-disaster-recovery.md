@@ -21,7 +21,7 @@ DDR also allows you to periodically conduct disaster recovery drills to not only
 
 
 ## Prerequisites 
-Datadog Disaster Recovery requires Datadog Agent version **7.54 or above**. 
+Datadog Disaster Recovery requires Datadog Agent version **7.54 or above**. The APM product support requires a **v7.68 or above**.
 
 ### Supported telemetry types and products
 The Agent-based failover supports the following telemetry types and products:
