@@ -99,7 +99,9 @@ Once your logs are instrumented with trace context, you need to send them to Dat
 
 #### Send logs using OTLP
 
-This is the simplest and most direct method. Your application sends logs to the Collector over the network, avoiding the complexity of writing to and parsing local files.
+This is the simplest and most direct method. Your application sends logs directly to an OTLP endpoint, avoiding the complexity of writing to and parsing local files.
+
+Both the Datadog Agent or the OpenTelemetry Collector can receive OTLP logs.
 
 1. **Configure your Application to Export Logs using OTLP**: In your OpenTelemetry SDK setup, configure a `LogRecordProcessor` to use an `OTLPLogExporter`. The following example shows how to do this in Python:
    ```python
@@ -118,7 +120,7 @@ This is the simplest and most direct method. Your application sends logs to the 
    log_provider.add_log_record_processor(BatchLogRecordProcessor(exporter))
    
    # Attach to the root logger
-   handler = LoggingHandler(level=logging.INFO, logger_provider=log_provider)
+   handler = LoggingHandler(logger_provider=log_provider)
    logging.getLogger().addHandler(handler)
    ```
 2. **Configure the Collector to Receive OTLP Logs**: In your Collector's `config.yaml`, enable the `otlp` receiver and add it to your `logs` pipeline:
