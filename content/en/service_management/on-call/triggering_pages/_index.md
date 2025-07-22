@@ -56,7 +56,7 @@ Manually paging a Team through Datadog always results in a `high` urgency Page.
 
 Manually paging a Team from Slack always results in a `high` urgency Page.
 
-To send Pages to Slack, see [Routing Rules][3].
+To send Pages to Slack, see [Routing Rules][4].
 
 ## Further Reading
 
@@ -64,4 +64,5 @@ To send Pages to Slack, see [Routing Rules][3].
 
 [1]: /service_management/on-call/teams
 [2]: https://app.datadoghq.com/on-call/teams
-[3]: /service_management/on-call/routing_rules/#send-pages-to-slack-or-microsoft-teams[3]: /service_management/on-call/triggering_pages/live-call-routing
+[3]: /service_management/on-call/routing_rules/#send-pages-to-slack-or-microsoft-teams
+[4]: /service_management/on-call/triggering_pages/live-call-routing
