@@ -96,8 +96,6 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 2. **Start the Datadog Serverless Compatibility Layer**. Add the following lines to your main application entry point file:
    If your Azure Function app uses the Isolated Worker model
    ```csharp
-   using Datadog.Serverless;
-   ...
    Datadog.Serverless.CompatibilityLayer.Start();
    ```
 
