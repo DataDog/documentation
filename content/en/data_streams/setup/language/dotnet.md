@@ -33,13 +33,14 @@ aliases:
 
 Starting with version 3.22.0 of the .NET tracer, Data Streams Monitoring is **enabled by default**, and `DD_DATA_STREAMS_ENABLED` does not need to be set.
 
-See [Default Enabled Mode](#default-enabled-mode) for more information on the default-enabled mode.
+See [Default Enabled Mode](#default-enabled-mode) for more information.
 
 {{% /tab %}}
 {{% tab ".NET Tracer < v3.22.0 (Legacy)" %}}
 
 To enable Data Streams Monitoring, set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on services sending messages to (or consuming messages from) your streaming applications.
 
+For example:
 ```yaml
 environment:
   - DD_DATA_STREAMS_ENABLED: "true"
