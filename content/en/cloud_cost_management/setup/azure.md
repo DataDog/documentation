@@ -135,7 +135,7 @@ Datado automatically ingests up to 15 months of available historical cost data.
 
 If you created a new cost export for CCM, Azure exports data starting from the current month. In that case, you can manually backfill up to 12 months of Azure cost data using the Azure Cost Exports UI.
 
-1. Follow the instructions in the Setup section above to set up the Azure CCM integration.
+1. Complete the instructions in the **Setup** and **Configure Cloud Cost in Datadog** sections above.
 2. Wait for data to appear in CCM to ensure the integration is working end-to-end before beginning the backfill process.
 3. Manually export an **actual** and **amortized** report for each calendar month. For example, for June 2025:
     1. Edit the Export
