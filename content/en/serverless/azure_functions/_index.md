@@ -139,7 +139,6 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 
    DD_DOTNET_TRACER_HOME=C:\home\site\wwwroot\datadog
 
-   DD_TRACE_HTTP_CLIENT_EXCLUDED_URL_SUBSTRINGS=monitor.azure, applicationinsights.azure, metadata/instance/compute, admin/host, AzureFunctionsRpcMessages.FunctionRpc
    ```
 
    If your Azure Function app runs on Linux, add the following environment variables to your Function app:
