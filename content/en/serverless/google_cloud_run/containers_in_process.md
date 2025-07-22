@@ -1,5 +1,5 @@
 ---
-title: Google Cloud Run with serverless-init
+title: Instrumenting Google Cloud Run In-Process
 further_reading:
 
 - link: 'https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/'
@@ -10,9 +10,15 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-info">If you are running multiple containers per Google Cloud Run application, Datadog recommends using the Datadog sidecar: <a href="/serverless/google_cloud_run">Instrument Google Cloud Run</a>.</div>
+Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. 
 
-Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through the [Google Cloud integration][1]. Datadog also provides a solution for instrumenting your Cloud Run applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
+This page provides instructions for instrumenting your Google Cloud Run containers with the Datadog Agent, which enables tracing, custom metrics, and direct log collection.
+
+<div class="alert alert-info">To instrument your Google Cloud Run applications with the Datadog Agent running in a sidecar, see <a href="/serverless/google_cloud_run/containers">Instrument Google Cloud Run with Sidecar</a>.</div>
+
+<div class="alert alert-info">
+<strong>Have you set up your <a href="/integrations/google-cloud-platform/">Google Cloud integration</a>?</strong> Datadog recommends setting up the integration, which collects metrics and logs from Google Cloud services, before proceeding on to instrumentation. Remember to add the <code>cloud asset viewer</code> role to your service account and enable the Cloud Asset Inventory API in Google Cloud.
+</div>
 
 ### Prerequisites
 
@@ -106,7 +112,7 @@ gcr.io/<YOUR_PROJECT>/<YOUR_APP_NAME>
 
 ## Configure your application
 
-Once the container is built and pushed to your registry, the last step is to set the required environment variables for the Datadog Agent:
+After the container is built and pushed to your registry, set the required environment variables for the Datadog Agent:
 - `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Google Cloud Secret][11] for privacy and safety.
 - `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
 
@@ -126,17 +132,17 @@ See [all arguments and flags for `gcloud run deploy`][26].
 
 ## Results
 
-Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to **Infrastructure > Serverless** to see your serverless metrics and traces.
+After the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to **Infrastructure > Serverless** to see your serverless metrics and traces.
 
 ## Additional configurations
 
-- **Advanced Tracing:** The Datadog Agent already provides some basic tracing for popular frameworks. Follow the [advanced tracing guide][2] for more information.
+- **Advanced tracing:** The Datadog Agent already provides some basic tracing for popular frameworks. Follow the [advanced tracing guide][2] for more information.
 
 - **Logs:** If you use the [Google Cloud integration][1], your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
 
-- **Custom Metrics:** You can submit custom metrics using a [DogStatsD client][4]. For monitoring Cloud Run and other serverless applications, use [distribution][9] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][11]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
+- **Custom metrics:** You can submit custom metrics using a [DogStatsD client][4]. For monitoring Cloud Run and other serverless applications, use [distribution][9] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][11]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
 
-### Environment Variables
+### Environment variables
 
 | Variable | Description |
 | -------- | ----------- |
@@ -157,7 +163,6 @@ This integration depends on your runtime having a full SSL implementation. If yo
 ```
 RUN apt-get update && apt-get install -y ca-certificates
 ```
-
 
 ## Further reading
 
