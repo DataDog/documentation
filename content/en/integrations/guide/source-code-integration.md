@@ -49,7 +49,7 @@ Datadog supports the following features for the following source code management
 | Feature | GitHub | GitLab | Azure DevOps | Bitbucket |
 |---|---|---|---|---|
 | **Connect SaaS Instance** | Yes <br />(GitHub.com) | Yes <br />(GitLab.com) | Yes <br />(Azure DevOps Services) | No <br />(Bitbucket.org) |
-| **Connect On-Prem Instance** | Yes <br />(GitHub Enterprise Server) | Yes <br />(GitLab Self-Managed/Dedicated) | No <br />(Azure DevOps Server) | No <br />(Bitbucket Data Center/Server)|
+| **Connect On-Prem Instance** | Yes <br />(GitHub Enterprise Server) | Yes <br />(GitLab Self-Managed or Dedicated) | No <br />(Azure DevOps Server) | No <br />(Bitbucket Data Center or Server)|
 | **Context Links** | Yes | Yes | Yes | Yes |
 | **Code Snippets** | Yes | Yes | Yes | No | 
 | **PR Comments** | Yes | Yes | Yes | No | 
