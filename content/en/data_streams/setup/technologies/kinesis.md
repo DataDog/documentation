@@ -14,7 +14,7 @@ title: Data Streams Monitoring for Amazon Kinesis
       <th>Library</th>
       <th>Minimal tracer version</th>
       <th>Recommended tracer version</th>
-      <th>Minimal Lambda Library tracer version</th>
+      <th>Minimal Lambda Library version</th>
     </tr>
   </thead>
   <tbody>
@@ -43,7 +43,7 @@ title: Data Streams Monitoring for Amazon Kinesis
       <td><a href="https://pypi.org/project/botocore/">Botocore</a></td>
       <td>{{< dsm-tracer-version lang="python" lib="botocore" type="minimal" >}}</td>
       <td>{{< dsm-tracer-version lang="python" lib="botocore" type="recommended" >}}</td>
-      <td>112</td>
+      <td><a href="https://github.com/DataDog/datadog-lambda-python/releases/tag/v7.112.0">112</a></td>
     </tr>
     <tr>
       <td><a href="/data_streams/dotnet">.NET</a></td>
