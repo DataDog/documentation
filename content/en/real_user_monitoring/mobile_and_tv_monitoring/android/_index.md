@@ -34,5 +34,5 @@ To get started with RUM for Android, create an application and configure the And
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/android/troubleshooting">}}
   <u>Troubleshooting</u>: Common troubleshooting Android SDK issues.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/android/jetpack_compose_instrumentation">}}<u>Jetpack Compose Instrumentation</u>: Instrument Jetpack Compose manually or automatically using the Datadog Gradle Plugin. {{< /nextlink >}}
-{{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/android/performance_overhead">}}<u>Performance overhead</u>: Learn about how SDK impacts performance of your application. {{< /nextlink >}}
+{{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/android/sdk_performance_impact">}}<u>SDK Performance Impact</u>: Learn about how the SDK impacts performance of your application. {{< /nextlink >}}
 {{< /whatsnext >}}
