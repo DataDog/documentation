@@ -34969,9 +34969,22 @@ components:
           format: int64
           minimum: 0
           type: integer
+        flaggedIPType:
+          $ref: '#/components/schemas/SecurityMonitoringRuleCaseActionOptionsFlaggedIPType'
         userBehaviorName:
           $ref: '#/components/schemas/SecurityMonitoringRuleCaseActionOptionsUserBehaviorName'
       type: object
+    SecurityMonitoringRuleCaseActionOptionsFlaggedIPType:
+      description: Used with the case action of type 'flag_ip'. The value specified
+        in this field is applied as a flag to the IP addresses.
+      enum:
+      - SUSPICIOUS
+      - FLAGGED
+      example: FLAGGED
+      type: string
+      x-enum-varnames:
+      - SUSPICIOUS
+      - FLAGGED
     SecurityMonitoringRuleCaseActionOptionsUserBehaviorName:
       description: Used with the case action of type 'user_behavior'. The value specified
         in this field is applied as a risk tag to all users affected by the rule.
@@ -34982,11 +34995,13 @@ components:
       - block_ip
       - block_user
       - user_behavior
+      - flag_ip
       type: string
       x-enum-varnames:
       - BLOCK_IP
       - BLOCK_USER
       - USER_BEHAVIOR
+      - FLAG_IP
     SecurityMonitoringRuleCaseCreate:
       description: Case when signal is generated.
       properties:

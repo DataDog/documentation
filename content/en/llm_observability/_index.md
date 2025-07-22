@@ -15,6 +15,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-gpu-monitoring/"
   tag: "Blog"
   text: "Optimize and troubleshoot AI infrastructure with Datadog GPU Monitoring"
+- link: "https://www.datadoghq.com/blog/llm-observability-bedrock-agents/"
+  tag: "Blog"
+  text: "Monitor agents built on Amazon Bedrock with Datadog LLM Observability"
 ---
 
 ## Overview
