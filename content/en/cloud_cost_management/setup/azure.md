@@ -140,27 +140,27 @@ This ensures complete cost accuracy by allowing periodic cost calculations again
 Navigate to [Setup & Configuration][3] and follow the steps.
 
 ### Getting historical data
-Datadog will automatically ingest up to 15 months of available historical cost data.
+Datado automatically ingests up to 15 months of available historical cost data.
 
-If you created a new cost export for CCM, Azure will begin exporting data from the current month. In that case, you can manually backfill up to 12 months of Azure cost data using the Azure Cost Exports UI.
+If you created a new cost export for CCM, Azure exports data starting from the current month. In that case, you can manually backfill up to 12 months of Azure cost data using the Azure Cost Exports UI.
 
 1. Follow the instructions in the Setup section above to set up the Azure CCM integration.
 2. Wait for data to appear in CCM to ensure the integration is working end-to-end before beginning the backfill process.
 3. Manually export an **actual** and **amortized** report for each calendar month. For example, for June 2025:
     1. Edit the Export
-    2. Change Export Type to “One-time export”
+    2. Change Export Type to "One-time export"
     3. Set From to 06-01-2025 **Note:** This must be the first day of the month.
     4. Set End to 06-30-2025 **Note:** This must be the last day of the month.
-    5. Save the export **Note:** This will automatically run the export
+    5. Save the export **Note:** This automatically runs the export
     6. Wait for the export to finish running
 4. Revert both the **actual** and **amortized** exports to their original state to resume daily exports
-      1. Edit the Export
-      2. Change Export Type to “Daily export of month-to-date costs”
-      3. Save the export
+    1. Edit the Export
+    2. Change Export Type to "Daily export of month-to-date costs"
+    3. Save the export
 
-CCM will automatically discover and ingest this data, and it should appear in Datadog within 24 hours.
+Datadog automatically discovers and ingests this data, and it should appear in Datadog within 24 hours.
 
-You can also create historical data in your storage account using the [Microsoft API][6] or by creating a [support ticket with Microsoft][7] to have them backfill cost data. Ensure the file structure and partitioning follows the format of scheduled exports.
+You can also create historical data in your storage account using the [Microsoft API][6] or by creating a [support ticket with Microsoft][7]. Ensure the file structure and partitioning follows the format of scheduled exports.
 
 ### Cost types
 
