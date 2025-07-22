@@ -169,7 +169,7 @@ You can store Autodiscovery templates as local files inside the mounted `/conf.d
 
    **docker run**
    ```shell
-   docker run -d --name datadog-agent \
+   docker run -d --name dd-agent \
      [...]
      -v <PATH_TO_LOCAL_FOLDER>/conf.d:/conf.d \
    ```

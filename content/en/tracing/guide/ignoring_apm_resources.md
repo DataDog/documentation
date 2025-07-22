@@ -293,7 +293,7 @@ For multiple values:
 In your docker run command to spin up the Datadog Agent, add `DD_APM_IGNORE_RESOURCES`:
 
 {{< code-block lang="shell" >}}
-docker run -d --name datadog-agent \
+docker run -d --name dd-agent \
               --cgroupns host \
               --pid host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \

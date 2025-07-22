@@ -51,13 +51,13 @@ To run a [Docker container][1] that embeds the Datadog Agent to monitor your hos
 For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" code="true">}}:
 
 ```shell
-docker run -d --name datadog-agent \
+docker run -d --name dd-agent \
            --cgroupns host \
            --pid host \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
-           -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
+           -e DD_CONTAINER_EXCLUDE="name:dd-agent" \
            -e DD_SITE=<DD_SITE> \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
@@ -70,13 +70,13 @@ docker run -d --name datadog-agent \
 ### Windows
 For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" code="true">}}:
 ```shell
-docker run -d --name datadog-agent \
+docker run -d --name dd-agent \
            --cgroupns host \
            --pid host \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
-           -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
+           -e DD_CONTAINER_EXCLUDE="name:dd-agent" \
            -e DD_SITE=<DD_SITE> \
            -v \\.\pipe\docker_engine:\\.\pipe\docker_engine \
            -v c:\programdata\docker\containers:c:\programdata\docker\containers:ro
@@ -88,14 +88,14 @@ Add the path `/opt/datadog-agent/run` under Docker Desktop -> Settings -> Resour
 
 For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" code="true">}}:
 ```shell
-docker run -d --name datadog-agent \
+docker run -d --name dd-agent \
            --cgroupns host \
            --pid host \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true \
-           -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
+           -e DD_CONTAINER_EXCLUDE="name:dd-agent" \
            -e DD_SITE=<DD_SITE> \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
@@ -116,7 +116,7 @@ The commands related to log collection are:
 `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`         
 : To prevent loss of container logs during restarts or network issues, the last log line collected for each container in this directory is stored on the host.
 
-`-e DD_CONTAINER_EXCLUDE="name:datadog-agent"`                
+`-e DD_CONTAINER_EXCLUDE="name:dd-agent"`                
 : Prevents the Datadog Agent from collecting and sending its own logs and metrics. Remove this parameter if you want to collect the Datadog Agent logs or metrics. This parameter value supports regular expressions.
 
 `-v /var/run/docker.sock:/var/run/docker.sock:ro`             

@@ -57,7 +57,7 @@ If you're using the Docker containerized Agent, set the following environment va
 Here's an example of how you can include these settings in your Docker run command:
 
 ```shell
-docker run -d --name datadog-agent \
+docker run -d --name dd-agent \
            --cgroupns host \
            --pid host \
            -e DD_API_KEY=<DATADOG_API_KEY> \
