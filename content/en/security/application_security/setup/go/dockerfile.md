@@ -237,7 +237,7 @@ ENTRYPOINT [ "/usr/local/bin/main" ]
 
 ## Try it out
 
-Most of these Dockerfiles are availabe in [appsec-go-test-app][4], trying them out is very easy:
+Most of these Dockerfiles are available in [appsec-go-test-app][4], trying them out is very easy:
 
 ```sh
 docker build -f ./examples/alpine/Dockerfile -t appsec-go-test-app .
