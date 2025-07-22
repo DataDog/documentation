@@ -58,7 +58,7 @@ further_reading:
 
 {{< img src="05_security_overview.png" alt="The Cloud SIEM home page showing the Security Overview module with KPIs for signals by severity, a sankey graph for understanding signal activity across severity, sources, and resolution status, and mean time to respond (MTTR) metrics." >}}
 
-Datadog Cloud SIEM (Security Information and Event Management) is an easy-to-use, yet powerful, security data analysis and correlation system which your entire Security Operations team can use for visibility, detection, investigation, and response. Cloud SIEM is built for cloud environments and uses Datadog's proven platform to scale to the highest log volumes. And while Cloud SIEM is built for cloud scale, it is also adept at detecting threats in hybrid environments using Datadog's configurable, unified agent.
+Datadog Cloud SIEM (Security Information and Event Management) is a security data analysis and correlation system that your entire security operations team can use to view, detect, investigate, and respond to security issues. Cloud SIEM is built for cloud environments and uses Datadog's platform to scale to the highest log volumes. And while Cloud SIEM is built for cloud scale, it can also detect threats in hybrid environments using the Datadog Agent.
 
 Ready to see how Cloud SIEM empowers your security engineering practice? Start your [free 14‑day trial][1] today and experience threat hunting with unmatched speed and precision—wherever your data lives.
 
