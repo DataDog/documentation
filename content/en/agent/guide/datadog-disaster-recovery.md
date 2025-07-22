@@ -297,9 +297,9 @@ Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datado
 [1]: https://app.datadoghq.com/organization-settings/users
 [2]: /account_management/saml/#just-in-time-jit-provisioning
 [3]: https://github.com/DataDog/datadog-sync-cli
-[4]: https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site
+[4]: /getting_started/site/#access-the-datadog-site
 [5]: https://github.com/DataDog/datadog-sync-cli/blob/main/README.md 
-[6]: https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#overview
-[7]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile
-[8]: https://docs.datadoghq.com/api/latest/organizations/#get-organization-information 
-[9]: https://docs.datadoghq.com/account_management/saml/#overview
+[6]: /logs/log_configuration/attributes_naming_convention/#overview
+[7]: /agent/remote_config/?tab=configurationyamlfile
+[8]: /api/latest/organizations/?code-lang=curl#get-organization-information 
+[9]: /account_management/saml/#overview
