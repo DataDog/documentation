@@ -219,7 +219,7 @@ Cuando se te pida una contraseña, utiliza la que introdujiste al crear el usuar
 Para monitorizar hosts de RDS, instala el Datadog Agent en tu infraestructura y configúralo para conectarse a cada endpoint de instancia de forma remota. El Agent no necesita ejecutarse en la base de datos, sólo necesita conectarse a ella. Para conocer otros métodos de instalación del Agent no mencionados aquí, consulta las [instrucciones de instalación del Agent][10].
 
 {{< tabs >}}
-{{% pestaña "Host" %}}
+{{% tab "Host" %}}
 Para configurar la recopilación de métricas de Database Monitoring para un Agent que se ejecuta en un host, por ejemplo, cuando se aprovisiona una instancia EC2 pequeña para que el Agent recopile de una base de datos RDS:
 
 1. Edita el archivo `postgres.d/conf.yaml` para que apunte a tu `host` / `port` y configura los principales para la monitorización. Para conocer todas las opciones de configuración disponibles, consulta la [muestra postgres.d/conf.yaml][1].
