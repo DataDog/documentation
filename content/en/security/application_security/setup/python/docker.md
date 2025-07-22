@@ -23,7 +23,7 @@ further_reading:
 - Docker installed on your host
 - Python application containerized with Docker
 - Your Datadog API key
-- Datadog Python tracing library (see version requirements [here][1])
+- Datadog Python tracing library (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
