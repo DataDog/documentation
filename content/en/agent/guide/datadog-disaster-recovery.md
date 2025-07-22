@@ -42,7 +42,7 @@ Datadog is continuously evaluating customer requests to support DDR for addition
 ## Setup 
 To enable Datadog Disaster Recovery, follow these steps:
 
-### 1. Create a new DDR org and link it to your primary org
+### 1. Create a DDR org and link it to your primary org
 
 <div class="alert alert-info">If required, Datadog can set this up for you.</div>
 
@@ -71,7 +71,7 @@ If you are also sending telemetry to Datadog using cloud provider integrations, 
 
 {{% collapse-content title="Retrieve the public IDs and link your DDR and primary orgs " level="h5" %}}
 
-After the Datadog team has has set your DDR org, use the cURL commands from the Datadog [public API endpoint][8] to retrieve the public IDs of the primary and DDR org. 
+After the Datadog team has set your DDR org, use the cURL commands from the Datadog [public API endpoint][8] to retrieve the public IDs of the primary and DDR org. 
 
 
 To link your DDR and primary orgs, run these commands replacing the placeholders for their values:
@@ -124,9 +124,9 @@ You must invite each of your users to your Disaster Recovery organization and gi
 
 Your cloud integrations must be configured in both primary and DDR organizations. Because these integrations only run in one data center at a time, **the integrations must run only in the primary data center.**
 
-During testing, integration telemetry will be spread over both organizations and cancelling a failover testing returns the integrations to running in the Primary data center.
+During testing, integration telemetry is spread over both organizations and cancelling a failover testing returns the integrations to running in the Primary data center.
 
-During an integration failover, integrations will run only in the DDR data center.
+During an integration failover, integrations runs only in the DDR data center.
 
 
 {{% /collapse-content %}}
@@ -164,7 +164,7 @@ datadog-sync import –config config –resources users,roles,logs_pipelines,log
 datadog-sync sync –config config –resources users,roles,logs_pipelines,logs_pipelines_order,logs_indexes,logs_indexes_order,logs_metrics,logs_restriction_queries –cleanup=Force
 ```
 
-<div class="alert alert-warning"> <strong>Sync-cli Limitation for Log Standard Attributes </strong><br>Sync-cli is regularly being updated with new resources. At this time, syncing Log standard attributes is not supported for private beta. If you use standard attributes with your log pipelines and are remapping your logs, attributes are a dependency that you need to manually re-configure in your DDR org. You can refer to the Datadog <a href="https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#overview">standard attribute documentation</a> for support.
+<div class="alert alert-warning"> <strong>Sync-cli Limitation for Log Standard Attributes </strong><br>Sync-cli is regularly being updated with new resources. At this time, syncing Log standard attributes is not supported for private beta. If you use standard attributes with your log pipelines and are remapping your logs, attributes are a dependency that you need to manually re-configure in your DDR org. See the Datadog <a href="https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#overview">standard attribute documentation</a> for support.
 </div>
 
 #### Verify availability at the DDR site
@@ -179,7 +179,7 @@ Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datado
 {{% collapse-content title="Enable Remote Configuration [**RECOMMENDED]" level="h5" %}}
 [Remote configuration (RC)][7] allows you to remotely configure and change the behavior of Datadog Agents deployed in your infrastructure. 
 
-Remote Configuration is enabled by default for new organizations, this includes your DDR org. Any new API keys you create will be RC-enabled for use with your Agent. For more details, see the [Remote Configuration documentation][7].
+Remote Configuration is enabled by default for new organizations, this includes your DDR org. Any new API keys you create is RC-enabled for use with your Agent. For more details, see the [Remote Configuration documentation][7].
 
 Using Remote Configuration is strongly recommended for a more seamless failover control. As an alternative to RC, you can manually configure your Agents or use configuration management tools such as Puppet, Ansible, or Chef.
 
@@ -202,11 +202,11 @@ multi_region_failover:
   api_key: <DDR_SITE_API_KEY>
 ```
 
-Setting the **enabled** field to `true` enables the Agent to ship Agent metadata to the DDR Datadog site so you can view Agents and your Infra Hosts in the DDR org. Note that while you can see your Agents and Infra Hosts in the DDR org, you will not receive telemetry until DDR failover is activated.
+Setting the **enabled** field to `true` allows the Agent to ship metadata to the DDR Datadog site, so you can view Agents and your Infra Hosts in the DDR org. Although you can see Agents and Hosts appear in the DDR org, the system does not receive telemetry unless DDR failover is activated.
 
-During the preview, we recommend having `failover_metrics`, `failover_logs` and `failover_apm` set to **false** when in passive phases. 
+During the Preview period, Datadog recommends having `failover_metrics`, `failover_logs` and `failover_apm` set to **false** when in passive phases (when not in failover). 
 
-Your Datadog Customer Success Manager will work with you to schedule dedicated time windows for failover testing to measure performance and Recovery Time Objective (RTO).
+Connect with your Datadog Customer Success Manager to schedule dedicated time windows for failover testing to measure performance and Recovery Time Objective (RTO).
 {{% /collapse-content %}} <br>
 
 
