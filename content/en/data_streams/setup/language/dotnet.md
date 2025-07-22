@@ -27,16 +27,17 @@ aliases:
 ### Installation
 
 .NET uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. 
-Starting with version 3.22.0 of the .NET tracer, *Data Streams Monitoring is enabled by default*. For tracer versions below this, Data Streams Monitoring must be explicitly enabled.
+
+Starting with version 3.22.0 of the .NET tracer, Data Streams Monitoring is enabled by default.
 
 {{< tabs >}}
 {{% tab ".NET Tracer version 3.22.0 and above" %}}
 
 Data Streams Monitoring is enabled by default, with the following default behavior:
 
-* Schema tracking is disabled
+* Schema tracking is disabled.
 
-Thse features can be enabled by explicitly setting `DD_DATA_STREAMS_ENABLED` to `true` on your services.
+These features can still be enabled by explicitly setting `DD_DATA_STREAMS_ENABLED` to `true` on your services.
 
 ```yaml
 environment:
@@ -44,7 +45,7 @@ environment:
   - DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
 ```
 
-Data Streams Monitoring can still be disabled by setting `DD_DATA_STREAMS_ENABLED` to `false` on your services.
+To disable Data Streams Monitoring, set `DD_DATA_STREAMS_ENABLED` to `false` on your services.
 
 {{% /tab %}}
 {{% tab ".NET Tracer version below 3.22.0" %}}
