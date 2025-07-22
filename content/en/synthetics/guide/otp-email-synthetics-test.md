@@ -31,7 +31,7 @@ This guide walks you through how to configure the OTP extraction for a Synthetic
 
 ### Step 1 - Create an email variable
 
-Follow the steps below to create an email variable for the [Browser Test][3]. This generates a unique [Datadog Synthetics email address][7] for the Synthetic Test run.
+Follow the steps below to create an email variable for the [Browser Test][3]. This generates a unique [Datadog Synthetic Monitoring email address][7] for the Synthetic Test run.
 
 1. On a new or existing Browser Test, under **Variables** click **Add Variable**.
 2. Next, select **Email Address** from the dropdown menu.

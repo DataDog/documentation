@@ -14,11 +14,11 @@ further_reading:
 
 ## Overview
 
-The RUM iOS SDK generates events that have associated metrics and attributes. Metrics are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice metrics data (group by) in analytics. 
+The RUM iOS SDK generates events that have associated telemetry and attributes. Telemetry are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice telemetry values (group by) in analytics. 
 
 Every RUM event has all of the [default attributes](#default-attributes), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`).
 
-There are additional [metrics and attributes that are specific to a given event type](#event-specific-metrics-and-attributes). For example, the metric `view.time_spent` is associated with "view" events and the attribute `resource.method` is associated with "resource" events.
+There are additional [attributes specific to a given event type](#event-specific-attributes). For example, the `view.loading_time` telemetry is associated with view events, and the `resource.method` attribute is associated with resource events.
 
 | Event Type | Retention | Description                         |
 |------------|-----------|-------------------------------------|
@@ -65,7 +65,7 @@ RUM collects common attributes for all events and attributes specific to each ev
 |------------------|---------|------------------------------------------------------------------------------------|
 | `date`           | integer | Start of the event in milliseconds from epoch.                                               |
 | `type`           | string  | The type of the event (for example, `view` or `resource`).                         |
-| `service`        | string  | The [unified service name][7] for this application used to corelate user sessions. |
+| `service`        | string  | The [unified service name][7] for this application used to correlate user sessions. |
 | `application.id` | string  | The Datadog application ID.                                                        |
 | `application.name` | string  | The Datadog application name.                                                        |
 
@@ -89,7 +89,7 @@ The following network-related attributes are attached automatically to Resource 
 |------------------------------------------|--------|-------------------------------------------------|
 | `connectivity.status`                | string | Status of device network reachability (`connected`, `not connected`, `maybe`).                           |
 | `connectivity.interfaces`            | string | The list of available network interfaces (for example, `bluetooth`, `cellular`, `ethernet`, or `wifi`). |
-| `connectivity.cellular.technology`   | string | The type of a radio technology used for cellular connection.                                              |
+| `connectivity.cellular.technology`   | string | The type of radio technology used for cellular connection.                                              |
 | `connectivity.cellular.carrier_name` | string | The name of the SIM carrier.                                                                              |
 
 
@@ -106,7 +106,7 @@ The following OS-related attributes are attached automatically to all events col
 
 ### Geo-location
 
-The below attributes are related to the geo-location of IP addresses.
+The following attributes are related to the geo-location of IP addresses.
 
 **Note:** If you want to stop collecting geo-location attributes, change the setting in your [application details][8].
 
@@ -131,86 +131,67 @@ You can enable [tracking user info][7] globally to collect and apply user attrib
 | `usr.email`    | string | Email of the user.      |
 
 
-## Event-specific metrics and attributes
-
-### Session metrics
-
-| Metric                    | Type        | Description                                         |
-|---------------------------|-------------|-----------------------------------------------------|
-| `session.time_spent`      | number (ns) | Time spent on a session.                            |
-| `session.view.count`      | number      | Count of all views collected for this session.      |
-| `session.error.count`     | number      | Count of all errors collected for this session.     |
-| `session.resource.count`  | number      | Count of all resources collected for this session.  |
-| `session.action.count`    | number      | Count of all actions collected for this session.    |
-| `session.long_task.count` | number      | Count of all long tasks collected for this session. |
-| `session.has_replay` | boolean | Indicates if the session has a captured Session Replay recording attached to visually play the user experience. |
-
+## Event-specific attributes
 
 ### Session attributes
 
-| Attribute name               | Type   | Description                                                                |
-|------------------------------|--------|----------------------------------------------------------------------------|
+| Attribute                    | Type        | Description                                         |
+|---------------------------|-------------|-----------------------------------------------------|
+| `session.action.count`    | number      | Count of all actions collected for this session.    |
+| `session.error.count`     | number      | Count of all errors collected for this session.     |
+| `session.long_task.count` | number      | Count of all long tasks collected for this session. |
+| `session.has_replay` | boolean | Indicates if the session has a captured Session Replay recording attached to visually play the user experience. |
 | `session.id`                 | string | Unique ID of the session.                                                  |
-| `session.type`               | string | Type of the session (`user`).                                              |
-| `session.is_active`          | boolean | Indicates if the session is currently active. The session ends if a user navigates away from the application or closes the browser window, and expires after 4 hours of activity or 15 minutes of inactivity.                               |
 | `session.initial_view.url`   | string | URL of the initial view of the session.                                     |
 | `session.initial_view.name` | string | Name of the initial view of the session.                                    |
+| `session.ip`                 | string | IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting this attribute, change the setting in your [application details][9]. |
+| `session.is_active`          | boolean | Indicates if the session is currently active. The session ends if a user navigates away from the application or closes the browser window, and expires after 4 hours of activity or 15 minutes of inactivity.                               |
 | `session.last_view.url`      | string | URL of the last view of the session.                                        |
 | `session.last_view.name`     | string | Name of the last view of the session.                                       |
-| `session.ip`                 | string | IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting this attribute, change the setting in your [application details][9]. |
+| `session.resource.count`  | number      | Count of all resources collected for this session.  |
+| `session.time_spent`      | number (ns) | Time spent on a session.                            |
+| `session.type`               | string | Type of the session (`user`).                                              |
 | `session.useragent`          | string | System user agent info to interpret device info.                            |
-
-
-### View metrics
-
-RUM action, error, resource, and long task events contain information about the active RUM view event at the time of collection.
-
-| Metric                | Type        | Description                                                                  |
-|-----------------------|-------------|------------------------------------------------------------------------------|
-| `view.time_spent`     | number (ns) | Time spent on this view.                                                     |
-| `view.long_task.count`        | number      | Count of all long tasks collected for this view.                     |
-| `view.error.count`    | number      | Count of all errors collected for this view.                                 |
-| `view.resource.count` | number      | Count of all resources collected for this view.                              |
-| `view.action.count`   | number      | Count of all actions collected for this view.                                |
-| `view.is_active`      | boolean     | Indicates whether the view corresponding to this event is considered active. |
+| `session.view.count`      | number      | Count of all views collected for this session.      |
 
 ### View attributes
 
-| Attribute name | Type   | Description                                                     |
-|----------------|--------|-----------------------------------------------------------------|
+RUM action, error, resource, and long task events contain information about the active RUM view event at the time of collection.
+
+| Attribute                | Type        | Description                                                                  |
+|-----------------------|-------------|------------------------------------------------------------------------------|
+| `view.action.count`   | number      | Count of all actions collected for this view.                                |
+| `view.error.count`    | number      | Count of all errors collected for this view.                                 |
+| `view.is_active`      | boolean     | Indicates whether the view corresponding to this event is considered active. |
 | `view.id`      | string | Unique ID of the initial view corresponding to the event.  |
-| `view.url`     | string | URL of the `UIViewController` class corresponding to the event. |
-| `view.name`    | string | Customizable name of the view corresponding to the event.       |
 | `view.loading_time` | number (ns) | Time it took for the view to load, set by addViewLoadingTime(override:) call. |
-| `view.network_settled_time` | number (ns) | Time it took for a view to be fully initiated at the start of the view. | 
+| `view.long_task.count`        | number      | Count of all long tasks collected for this view.                     |
 | `view.interaction_to_next_view_time` | number (ns) | Time between the last user interaction in the previous view and start of this (current) view. |
-
-### Resource metrics
-
-| Metric                         | Type           | Description                                                                                     |
-|--------------------------------|----------------|-------------------------------------------------------------------------------------------------|
-| `resource.duration`            | number         | Entire time spent loading the resource.                                                         |
-| `resource.size`                | number (bytes) | Resource size.                                                                                  |
-| `resource.connect.duration`    | number (ns)    | Time spent establishing a connection to the server (connectEnd - connectStart).                  |
-| `resource.ssl.duration`        | number (ns)    | Time spent for the TLS handshake.                                                               |
-| `resource.dns.duration`        | number (ns)    | Time spent resolving the DNS name of the last request (domainLookupEnd - domainLookupStart).     |
-| `resource.redirect.duration`   | number (ns)    | Time spent on subsequent HTTP requests (redirectEnd - redirectStart).                            |
-| `resource.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - requestStart). |
-| `resource.download.duration`   | number (ns)    | Time spent downloading the response (responseEnd - responseStart).                               |
+| `view.name`    | string | Customizable name of the view corresponding to the event.       |
+| `view.network_settled_time` | number (ns) | Time it took for a view to be fully initiated at the start of the view. | 
+| `view.resource.count` | number      | Count of all resources collected for this view.                              |
+| `view.time_spent`     | number (ns) | Time spent on this view.                                                     |
+| `view.url`     | string | URL of the `UIViewController` class corresponding to the event. |
 
 ### Resource attributes
-
-| Attribute                  | Type   | Description                                                                              |
-|----------------------------|--------|------------------------------------------------------------------------------------------|
+| Attribute                         | Type           | Description                                                                                     |
+|--------------------------------|----------------|-------------------------------------------------------------------------------------------------|
+| `resource.connect.duration`    | number (ns)    | Time spent establishing a connection to the server (connectEnd - connectStart).                  |
+| `resource.dns.duration`        | number (ns)    | Time spent resolving the DNS name of the last request (domainLookupEnd - domainLookupStart).     |
+| `resource.download.duration`   | number (ns)    | Time spent downloading the response (responseEnd - responseStart).                               |
+| `resource.duration`            | number         | Entire time spent loading the resource.                                                         |
+| `resource.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - requestStart). |
 | `resource.id`              | string | Unique identifier of the resource.                                                       |
-| `resource.type`            | string | The type of resource being collected (for example, `xhr`, `image`, `font`, `css`, or `js`). |
 | `resource.method`          | string | The HTTP method (for example, `POST`, `GET`, `PATCH`, or `DELETE`).                       |
-| `resource.status_code`     | number | The response status code.                                                                |
-| `resource.url`             | string | The resource URL.                                                                        |
 | `resource.provider.name`   | string | The resource provider name. Default is `unknown`.                                        |
 | `resource.provider.domain` | string | The resource provider domain.                                                            |
 | `resource.provider.type`   | string | The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).        |
-
+| `resource.redirect.duration`   | number (ns)    | Time spent on subsequent HTTP requests (redirectEnd - redirectStart).                            |
+| `resource.size`                | number (bytes) | Resource size.                                                                        |
+| `resource.ssl.duration`        | number (ns)    | Time spent for the TLS handshake.                                                               |
+| `resource.status_code`     | number | The response status code.                                                                |
+| `resource.type`            | string | The type of resource being collected (for example, `xhr`, `image`, `font`, `css`, or `js`). |
+| `resource.url`             | string | The resource URL.                                                                        |
 
 ### Error attributes
 
@@ -242,23 +223,18 @@ Network errors include information about failing HTTP requests. The following fa
 | `error.resource.provider.type`   | string | The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`). |
 
 
-### Action metrics
-
-| Metric                  | Type        | Description                                   |
-|-------------------------|-------------|-----------------------------------------------|
-| `action.loading_time`   | number (ns) | The loading time of the action.               |
-| `action.long_task.count`        | number      | Count of all long tasks collected for this action. |
-| `action.resource.count` | number      | Count of all resources issued by this action. |
-| `action.error.count`    | number      | Count of all errors issued by this action.    |
-
 ### Action attributes
 
-| Attribute            | Type   | Description                                                                     |
-|----------------------|--------|---------------------------------------------------------------------------------|
+| Attribute                  | Type        | Description                                   |
+|-------------------------|-------------|-----------------------------------------------|
+| `action.error.count`    | number      | Count of all errors issued by this action.    |
 | `action.id`          | string | UUID of the user action.                                                        |
-| `action.type`        | string | Type of the user action (for example, `tap` or `application_start`).                           |
+| `action.loading_time`   | number (ns) | The loading time of the action.               |
+| `action.long_task.count`        | number      | Count of all long tasks collected for this action. |
 | `action.name`        | string | Name of the user action.                                                        |
+| `action.resource.count` | number      | Count of all resources issued by this action. |
 | `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions. |
+| `action.type`        | string | Type of the user action (for example, `tap` or `application_start`).                           |
 
 ## Data storage
 

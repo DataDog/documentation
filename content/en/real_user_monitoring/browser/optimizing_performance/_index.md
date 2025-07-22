@@ -21,7 +21,7 @@ further_reading:
 
 {{< img src="real_user_monitoring/browser/optimizing_performance/optimization-workflow.mp4" alt="RUM Performance Optimization helps you find the root cause of browser performance issues based on real user traffic." video="true" >}}
 
-The Optimization page helps to identify the root cause of browser performance issues using real user traffic data. Troubleshoot the causes of slow pages using browser metrics such as [Core Web Vitals][1] (CWV) and Datadog's custom [Loading Time][2] metric, which evaluates full-page load time from the user's perspective.
+The Optimization page helps to identify the root cause of browser performance issues using real user traffic data. Troubleshoot the causes of slow pages using browser KPIs such as [Core Web Vitals][1] (CWV) and Datadog's custom [Loading Time][2] KPI, which evaluates full-page load time from the user's perspective.
 
 For deeper analysis, the Optimization page provides granular breakdowns of Core Web Vitals by user demographics such as browser, region, and app version. You can use this information to track performance trends over time, understand which user groups are most affected, and prioritize optimizations with precision.
 
@@ -45,10 +45,10 @@ From this view, there are two ways to select a page or vital:
 
 Available vitals include:
 
-- **[Loading Time (LT)][2]**: Datadog's custom metric that measures the time for a page to load from a user's perspective.
+- **[Loading Time (LT)][2]**: Datadog's custom KPI that measures the time for a page to load from a user's perspective.
 - **[Largest Contentful Paint (LCP)][8]**: Measures how quickly the largest visual element on your page loads, which is a critical factor in both user experience and SEO rankings. A slow LCP can frustrate users, increase bounce rates, and hurt search visibility.
 - **[First Contentful Paint (FCP)][9]**: Measures the time from when the user first navigated to the page to when any part of the page's content is rendered on the screen. A fast FCP helps reassure the user that something is happening.
-- **[Cumulative Layout Shift (CLS)][10]**: Measures the largest burst of unexpected layout shifts that occur during a page's life cycle. A layout shift happens when a visible element moves from one rendered frame to the next without any user interaction, disrupting the visual stability of the page. An important metric for measuring visual stability because it helps quantify how often users experience unexpected layout shifts. A low CLS helps ensure that the page is delightful.
+- **[Cumulative Layout Shift (CLS)][10]**: Measures the largest burst of unexpected layout shifts that occur during a page's life cycle. A layout shift happens when a visible element moves from one rendered frame to the next without any user interaction, disrupting the visual stability of the page. An important KPI for measuring visual stability because it helps quantify how often users experience unexpected layout shifts. A low CLS helps ensure that the page is delightful.
 - **[Interaction to Next Paint (INP)][11]**: Measures how long it takes for a page to visually respond after a user interacts with the page.
 
 ## Filter and evaluate
