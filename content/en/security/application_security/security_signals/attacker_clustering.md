@@ -83,7 +83,7 @@ To create a custom attacker cluster:
 
 This manual approach allows you to create more targeted blocking rules when the automatic detection doesn't capture the right patterns.
 
-{{< img src="security/application_security/threats/custom-clusters.png" alt="Screenshot of an AAP signal with custom cluster in the attacker attributes"  >}}
+{{< img src="security/application_security/threats/custom-clusters.png" alt="An AAP signal with custom clusters sorted by the attacker attributes"  >}}
 
 ## Further reading
 
