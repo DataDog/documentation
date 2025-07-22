@@ -29,7 +29,7 @@ aliases:
 .NET uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. 
 
 {{< tabs >}}
-{{% tab ".NET Tracer > v3.22.0 (Recommended)" %}}
+{{% tab ".NET Tracer >= v3.22.0 (Recommended)" %}}
 
 Starting with version 3.22.0 of the .NET tracer, Data Streams Monitoring is **enabled by default**, and `DD_DATA_STREAMS_ENABLED` does not need to be set.
 
