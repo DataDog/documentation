@@ -257,7 +257,7 @@ Datadog Agent を構成し、Observability Pipelines をセットアップして
 
 {{% observability_pipelines/destination_env_vars/amazon_security_lake %}}
 
-{{% /tab %}} --&gt;
+{{% /tab %}} -->
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_env_vars/chronicle %}}

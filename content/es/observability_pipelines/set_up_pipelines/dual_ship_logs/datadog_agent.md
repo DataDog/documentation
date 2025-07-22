@@ -257,7 +257,7 @@ Para configurar el destino, sigue las instrucciones del proveedor de la nube que
 
 {{% observability_pipelines/destination_env_vars/amazon_security_lake %}}
 
-{{% /tab %}} --&gt;
+{{% /tab %}} -->
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_env_vars/chronicle %}}
