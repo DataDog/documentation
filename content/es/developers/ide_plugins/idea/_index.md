@@ -71,9 +71,9 @@ Después de instalar el complemento de Datadog y reiniciar el IDE, inicia sesió
 1. Haz clic en **Log in...** (Iniciar sesión...).
 1. En la ventana del navegador que se abre, selecciona tu sitio y organización y, luego, autoriza el acceso a la plataforma.
 
-**Nota**: For most users, one login is all that is required. If you're using a multi-org setup, check to ensure that the correct account is active. To find out which login your IDE is using, click **Settings** -> **Tools** -> **Datadog**, and check which account is active.
+**Nota**: Para la mayoría de los usuarios, solo se requiere un inicio de sesión. Si estás utilizando una configuración de varias organizaciones, asegúrate de que la cuenta correcta está activa. Para saber qué nombre de usuario está utilizando tu entorno de desarrollo integrado, haz clic en *Settings** -> **Tools** -> **Datadog** (Configuración -> Herramientas -> Datadog), y comprueba qué cuenta está activa.
 
-### Link a service
+### Vincular un servicio
 
 Para proporcionar los datos relevantes de la plataforma de Datadog, añade servicios relacionados a tu proyecto:
 1. Con tu proyecto abierto en el IDE, abre la ventana de la herramienta **Datadog** y selecciona **Manage Linked Services...** (Administrar servicios vinculados...) del menú **Options** (Opciones).
