@@ -26,7 +26,39 @@ aliases:
 
 ### Installation
 
-.NET uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. To enable Data Streams Monitoring, set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on services sending messages to (or consuming messages from) Kafka or RabbitMQ.
+.NET uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. 
+Starting with version 3.22.0 of the .NET tracer, *Data Streams Monitoring is enabled by default*. For tracer versions below this, Data Streams Monitoring must be explicitly enabled.
+
+{{< tabs >}}
+{{% tab ".NET Tracer version 3.22.0 and above" %}}
+
+Data Streams Monitoring is enabled by default, with the following default behavior:
+
+* Schema tracking is disabled
+
+Thse features can be enabled by explicitly setting `DD_DATA_STREAMS_ENABLED` to `true` on your services.
+
+```yaml
+environment:
+  - DD_DATA_STREAMS_ENABLED: "true"
+  - DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
+```
+
+Data Streams Monitoring can still be disabled by setting `DD_DATA_STREAMS_ENABLED` to `false` on your services.
+
+{{% /tab %}}
+{{% tab ".NET Tracer version below 3.22.0" %}}
+
+To enable Data Streams Monitoring, set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on services sending messages to (or consuming messages from) your streaming applications.
+
+```yaml
+environment:
+  - DD_DATA_STREAMS_ENABLED: "true"
+  - DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 For example:
 ```yaml
