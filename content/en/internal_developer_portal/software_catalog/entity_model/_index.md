@@ -527,8 +527,8 @@ integrations:
 Custom extensions allow you to attach organization-specific metadata to entities, enabling support for custom tooling and workflows. For example, use the `extensions` field to include release notes, compliance tags, or ownership models in your entity definitions. 
 
 Datadog also supports specific extension keys for certain features. These include:
-- `datadoghq.com/dora-metrics`: Used to define source code path patterns for filtering Git commits when calculating [DORA metrics][21].
-- `datadoghq.com/cd-visibility`: Used to control which commits are considered as part of a deployment in [CD Visibility][22].
+- `datadoghq.com/dora-metrics`: Define source code path patterns for filtering Git commits when calculating [DORA metrics][21].
+- `datadoghq.com/cd-visibility`: Control which commits are considered as part of a deployment in [CD Visibility][22].
 
 The following example defines a custom extension used to manage release scheduling across environments:
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
