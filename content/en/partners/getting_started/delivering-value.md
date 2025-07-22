@@ -39,9 +39,9 @@ As a service provider, management of monitors for you and your clients is best a
 
 Ensure that you [tag monitors][13] to make the management of large numbers of monitors easier.
 
-### Recommended monitors
+### Monitor templates
 
-You might run into technologies your clients operate that you do not have a lot of experience with. Datadog offers [Recommended Monitors][14] to help you onboard new technologies quickly and confidently.
+You might run into technologies your clients operate that you do not have a lot of experience with. Datadog offers [Recommended Monitors][14] help you onboard new technologies quickly and confidently.
 
 To find out more about monitors, see:
 - [Manage Monitors][15]
