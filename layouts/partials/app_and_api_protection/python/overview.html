@@ -1,12 +1,29 @@
 <h2>Overview</h2>
 
 <p>Datadog Application Security Management (ASM) provides App and API Protection (AAP) capabilities including:</p>
+<h3>Key capabilities</h3>
+
+<h4>API discovery and posture management</h4>
 <ul>
-  <li><strong>Application Security Monitoring</strong>: Real-time threat detection and protection against attacks like SQL injection, XSS, and more</li>
-  <li><strong>Software Composition Analysis (SCA)</strong>: Identification of vulnerable dependencies in your codebase</li>
-  <li><strong>Interactive Application Security Testing (IAST)</strong>: Runtime vulnerability detection during testing</li>
+  <li>Automatically detect all APIs exposed by your services.</li>
+  <li>Identify unprotected, undocumented, or overly permissive endpoints.</li>
+  <li>Get detailed, contextual findings tied to specific endpoints, misconfigurations, and observed behavior.</li>
+  <li>Evaluate API configurations against posture rules based on security best practices and compliance frameworks (e.g., OWASP API Top 10).</li>
 </ul>
 
-<p>ASM works by leveraging the Datadog Python tracing library to monitor HTTP requests, analyze patterns, and detect security threats in real-time. The library integrates seamlessly with your existing application without requiring code changes.</p>
+<h4>Runtime threat detection and protection</h4>
+<ul>
+  <li>Detect real-time threats such as injection attacks, account takeover attempts, and application abuse.</li>
+  <li>Correlate multi-signal attack patterns into actionable insights.</li>
+  <li>Block malicious traffic with In-App WAF rules using attributes like IP, user agent, headers, and more.</li>
+</ul>
+
+<h3>Use cases</h3>
+<ul>
+  <li>Protect customer data in production APIs</li>
+  <li>Detect and block credential stuffing and ATO attacks</li>
+  <li>Maintain API posture compliance across teams and environments</li>
+  <li>Investigate incidents with correlated trace, log, and security data</li>
+</ul>
 
 <p>For detailed compatibility information, including supported Python versions, frameworks, and deployment environments, see <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/?tab=python#tracer-libraries">Single Step Instrumentation Compatibility</a>.</p>
