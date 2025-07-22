@@ -131,7 +131,7 @@ This ensures complete cost accuracy by allowing periodic cost calculations again
 Navigate to [Setup & Configuration][3] and follow the steps.
 
 ### Getting historical data
-Datado automatically ingests up to 15 months of available historical cost data.
+Datadog automatically ingests up to 15 months of available historical cost data.
 
 Azure exports cost data starting from the month you created the export. You can manually backfill up to 12 months of Azure cost data using the Azure Cost Exports UI.
 
