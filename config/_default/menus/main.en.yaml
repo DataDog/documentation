@@ -3156,41 +3156,46 @@ menu:
       identifier: containers_datadog_operator_crd_slo
       parent: containers_datadog_operator
       weight: 710
+    - name: Datadog CSI Driver
+      url: containers/csi_driver
+      parent: containers
+      identifier: csi_driver
+      weight: 8
     - name: Troubleshooting
       url: containers/troubleshooting/
       parent: containers
       identifier: containers_troubleshooting
-      weight: 8
+      weight: 9
     - name: Duplicate hosts
       url: containers/troubleshooting/duplicate_hosts
       parent: containers_troubleshooting
       identifier: containers_troubleshooting_duplicate_hosts
-      weight: 801
+      weight: 901
     - name: Cluster Agent
       url: containers/troubleshooting/cluster-agent
       parent: containers_troubleshooting
       identifier: containers_troubleshooting_cluster_agent
-      weight: 802
+      weight: 902
     - name: Cluster Checks
       url: containers/troubleshooting/cluster-and-endpoint-checks
       parent: containers_troubleshooting
       identifier: containers_troubleshooting_cluster_and_endpoint_checks
-      weight: 803
+      weight: 903
     - name: HPA and Metrics Provider
       url: containers/troubleshooting/hpa
       parent: containers_troubleshooting
       identifier: containers_troubleshooting_hpa
-      weight: 804
+      weight: 904
     - name: Admission Controller
       url: containers/troubleshooting/admission-controller
       parent: containers_troubleshooting
       identifier: containers_troubleshooting_admission_controller
-      weight: 805
+      weight: 905
     - name: Guides
       url: containers/guide
       parent: containers
       identifier: containers_guide
-      weight: 9
+      weight: 10
     - name: Processes
       url: infrastructure/process
       identifier: process
