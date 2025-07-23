@@ -7,10 +7,8 @@ further_reading:
 - link: "watchdog/faulty_deployment_detection/"
   tag: "Documentation"
   text: "Learn about Watchdog Faulty Service Deployment Detections"
+site_support_id: watchdog_faulty_service_deployment
 ---
-{{< site-region region="us3,us5,eu,ap1,gov" >}}
-<div class="alert alert-warning">Watchdog Faulty Service Deployment Detections are not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -44,7 +42,7 @@ Watchdog monitors the status of the following external providers' APIs:
 | Envoy | api.envoy.com |
 | Facebook | graph.facebook.com |
 | GitHub | api.github.com |
-| Google | developers.google.com |
+| Google APIs | *.googleapis.com |
 | Hubspot | api.hubspot.com |
 | Intercom | api.intercom.io |
 | Mapbox | api.mapbox.com |

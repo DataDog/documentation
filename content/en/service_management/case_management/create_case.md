@@ -6,12 +6,6 @@ further_reading:
   text: "View and Manage Cases"
 ---
 
-{{% site-region region="gov,ap1" %}}
-<div class="alert alert-warning">
-Case Management is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
-</div>
-{{% /site-region %}}
-
 ## Overview
 
 Cases can be created [manually](#manual-case-creation), [automatically](#automatic-case-creation) from across Datadog, or [programmatically](#api) with the API. There are two types of cases: standard and security. Cases created from security signals and Sensitive Data Scanner are automatically made security cases. The security case type has all the features of the standard case type, along with a mandatory field for specifying the reason for closing a case (testing, false positive, or one time exception). 

@@ -204,8 +204,10 @@ For sample stacks and additional code examples, see [CDK Examples for Instrument
    ```
 
 For additional settings, [see the documentation on GitHub][2].
+
 [1]: /logs/guide/forwarder
 [2]: https://github.com/DataDog/datadog-cloudformation-macro/blob/main/serverless/README.md
+
 {{% /tab %}}
 {{< /tabs >}}
 

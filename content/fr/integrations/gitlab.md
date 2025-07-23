@@ -216,7 +216,7 @@ Modifiez le fichier `gitlab_runner.d/conf.yaml` dans le dossier `conf.d/` à la 
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "gitlab_runner" >}}
+{{< get-metrics-from-git "gitlab-runner" >}}
 
 
 ### Collecte de logs

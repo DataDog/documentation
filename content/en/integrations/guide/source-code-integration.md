@@ -225,9 +225,7 @@ If you are using a host, you have two options: using Microsoft SourceLink or con
   The Node.js client library version 3.21.0 or later is required.
   </br>
   </br>
-  Displaying code links and snippets for TypeScript applications requires your Node application to be run with: 
-  </br>
-  <a href="https://nodejs.org/dist/v12.22.12/docs/api/cli.html#cli_enable_source_maps"><code>--enable-source-maps</code></a>.
+  For transpiled Node.js applications (for example, TypeScript), make sure to generate and publish source maps with the deployed application, and to run Node.js with the <a href="https://nodejs.org/docs/latest/api/cli.html#--enable-source-maps"><code>--enable-source-maps</code></a> flag. Otherwise, code links and snippets will not work.
 </div>
 
 #### Containers
@@ -401,7 +399,7 @@ The source code integration supports the following Git providers:
 
 Install Datadog's [GitHub integration][101] on the [GitHub integration tile][102] to allow Datadog to synchronize your repository metadata automatically. When specifying permissions on the integration tile, select at least **Read** permissions for **Contents**.
 
-Setting up the GitHub integration also allows you to see inline code snippets in [**Error Tracking**][103], [**Continuous Profiler**][104], [**Serverless Monitoring**][105], [**CI Visibility**][106], and [**Application Security Monitoring**][107].
+Setting up the GitHub integration also allows you to see inline code snippets in [**Error Tracking**][103], [**Continuous Profiler**][104], [**Serverless Monitoring**][105], [**CI Visibility**][106], and [**App and API Protection Monitoring**][107].
 
 [101]: https://docs.datadoghq.com/integrations/github/
 [102]: https://app.datadoghq.com/integrations/github/
@@ -424,7 +422,7 @@ When you run `datadog-ci git-metadata upload` within a Git repository, Datadog r
 
 Run this command for every commit that you need to be synchronized with Datadog.
 
-If you are using [gitlab.com][1], this also allows you to see inline code snippets in [**Error Tracking**][3], [**Continuous Profiler**][4], [**Serverless Monitoring**][5], [**CI Visibility**][6], and [**Application Security Monitoring**][7].
+If you are using [gitlab.com][1], this also allows you to see inline code snippets in [**Error Tracking**][3], [**Continuous Profiler**][4], [**Serverless Monitoring**][5], [**CI Visibility**][6], and [**App and API Protection Monitoring**][7].
 
 ### Validation
 
@@ -520,7 +518,7 @@ You can also see links from profile frames to their source repository. This is s
 {{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="Link to GitHub from the Continuous Profiler" style="width:100%;">}}
 
 [1]: /profiler/
-[2]: https://app.datadoghq.com/profiling/search
+[2]: https://app.datadoghq.com/profiling/explorer
 {{% /tab %}}
 {{% tab "Serverless Monitoring" %}}
 
@@ -567,17 +565,17 @@ For more information, see the [Code Security documentation][102].
 [102]: /security/code_security/
 
 {{% /tab %}}
-{{% tab "Application Security Monitoring" %}}
+{{% tab "App and API Protection Monitoring" %}}
 
-You can see links from errors in your security signals' associated stack traces to their source repository in **Application Security Monitoring**.
+You can see links from errors in your security signals' associated stack traces to their source repository in **App and API Protection Monitoring**.
 
-1. Navigate to [**Security** > **Application Security**][101] and select a security signal.
+1. Navigate to [**Security** > **App and API Protection**][101] and select a security signal.
 2. Scroll down to the **Traces** section on the **Related Signals** tab and click on an associated stack trace.
 3. Click **View Code** to open the error in its source code repository.
 
 If you're using the GitHub integration, click **Connect to preview** on error frames. You can see inline code snippets directly in the security signal's stack trace.
 
-{{< img src="integrations/guide/source_code_integration/asm-signal-trace-blur.png" alt="Link to GitHub from Application Security Monitoring" style="width:100%;">}}
+{{< img src="integrations/guide/source_code_integration/asm-signal-trace-blur.png" alt="Link to GitHub from App and API Protection Monitoring" style="width:100%;">}}
 
 [101]: https://app.datadoghq.com/security/appsec
 

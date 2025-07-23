@@ -15,10 +15,6 @@ further_reading:
   text: 観測可能性パイプラインによる安心・安全なローカル処理
 title: (レガシー) Datadog で Observability Pipelines をセットアップする
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines は US1-FED Datadog サイト では利用できません。</div> 
-{{< /site-region >}} 
  
 {{% observability_pipelines/legacy_warning %}} 
  

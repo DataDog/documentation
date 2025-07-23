@@ -216,7 +216,7 @@ La recopilación de logs está desactivada por defecto en Datadog Agent. Para ac
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "powerdns_recursor" >}}
+{{< get-metrics-from-git "powerdns" >}}
 
 
 ### Eventos
@@ -224,7 +224,7 @@ La recopilación de logs está desactivada por defecto en Datadog Agent. Para ac
 El check del PowerDNS Recursor no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "powerdns_recursor" >}}
+{{< get-service-checks-from-git "powerdns" >}}
 
 
 ## Solucionar problemas

@@ -40,7 +40,7 @@ The environment name sent to Datadog. You can use `env` to filter events by envi
 `site`
 : Required<br/>
 **Type**: Enum<br/>
-The Datadog site that data is sent to. Enum values: `us1`, `us3`, `us5`, `eu1`, `us1Fed`, and `ap1`.
+The Datadog site that data is sent to. Enum values: `us1`, `us3`, `us5`, `eu1`, `us1Fed`, `ap1`, and `ap2`.
 
 `nativeCrashReportEnabled`
 : Optional<br/>

@@ -5,13 +5,13 @@ further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
-- link: "/cloud_cost_management/custom"
+- link: "/cloud_cost_management/setup/custom"
   tag: "Documentation"
   text: "Learn about Custom Costs"
 - link: "/cloud_cost_management/datadog_costs"
   tag: "Documentation"
   text: "Learn about Datadog Costs"
-- link: "/cloud_cost_management/saas_costs"
+- link: "/cloud_cost_management/setup/saas_costs"
   tag: "Documentation"
   text: "Learn about SaaS Cost Integrations"
 - link: "/cloud_cost_management/tag_pipelines"
@@ -153,6 +153,6 @@ For Twilio tags, select **Twilio** from the dropdown menu on the top right corne
 [1]: /cloud_cost_management/
 [2]: https://app.datadoghq.com/cost/tags
 [3]: /cloud_cost_management/tag_pipelines
-[4]: /cloud_cost_management/custom
+[4]: /cloud_cost_management/setup/custom
 [5]: /cloud_cost_management/datadog_costs
-[6]: /cloud_cost_management/saas_costs
+[6]: /cloud_cost_management/setup/saas_costs

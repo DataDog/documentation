@@ -26,7 +26,7 @@ author:
 categories:
 - almacenes de datos
 - recopilación de logs
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mapr/README.md
 display_on_public_website: true
@@ -34,7 +34,7 @@ draft: false
 git_integration_title: mapr
 integration_id: mapr
 integration_title: MapR
-integration_version: 1.11.0
+integration_version: 3.0.0
 is_public: true
 manifest_version: 2.0.0
 name: mapr
@@ -62,7 +62,7 @@ tile:
 
 ## Información general
 
-Este check monitoriza [MapR][1] 6.1+ a través del Datadog Agent.
+Este check monitoriza [MapR][1] v6.1 o posterior a través del Datadog Agent.
 
 ## Configuración
 
@@ -118,16 +118,16 @@ Luego, actualiza `/opt/mapr/fluentd/fluentd-<VERSION>/etc/fluentd/fluentd.conf` 
 ```text
 <match *>
   @type copy
-  <store> # Esta sección está aquí de manera predeterminada y envía los logs a ElasticCache for Kibana.
+  <store> # This section is here by default and sends the logs to ElasticCache for Kibana.
     @include /opt/mapr/fluentd/fluentd-<VERSION>/etc/fluentd/es_config.conf
     include_tag_key true
     tag_key service_name
   </store>
-  <store> # Esta sección también reenvía todos los logs a Datadog:
+  <store> # This section also forwards all the logs to Datadog:
     @type datadog
     @id dd_agent
     include_tag_key true
-    dd_source mapr  # Establece "source: mapr" en cada log para permitir el parseo automático en Datadog.
+    dd_source mapr  # Sets "source: mapr" on every log to allow automatic parsing on Datadog.
     dd_tags "<KEY>:<VALUE>"
     service <YOUR_SERVICE_NAME>
     api_key <YOUR_API_KEY>
@@ -138,7 +138,7 @@ Consulta el [fluent_datadog_plugin][10] para obtener más detalles sobre las opc
 
 ### Validación
 
-[Ejecuta el subcomando de estado del Agent][11] y busca `mapr` en la sección Checks.
+Ejecuta el [subcomando de estado del Agent][11] y busca `mapr` en la sección Checks.
 
 ## Datos recopilados
 
@@ -158,7 +158,7 @@ El check de MapR no incluye eventos.
 
 - **El Agent entra en un bucle de error luego de configurar la integración de MapR.**
 
-  Ha habido algunos casos en los que la biblioteca de C dentro de _mapr-streams-python_ genera errores de segmentación debido a problemas de permisos. Asegúrate de que el usuario del `dd-agent` tenga permiso de lectura en el archivo del ticket y que dicho usuario del `dd-agent` pueda ejecutar comandos de la `maprcli` cuando la variable de entorno`MAPR_TICKETFILE_LOCATION` esté apuntando hacia el ticket.
+  Ha habido algunos casos en los que la biblioteca de C dentro de _mapr-streams-python_ genera errores de segmentación debido a problemas de permisos. Asegúrate de que el usuario del `dd-agent` tenga permiso de lectura en el archivo del ticket y que dicho usuario del `dd-agent` pueda ejecutar comandos de la `maprcli` cuando la variable de entorno `MAPR_TICKETFILE_LOCATION` esté apuntando hacia el ticket.
 
 - **La integración parece funcionar correctamente, pero no envía ninguna métrica.**
 

@@ -10,10 +10,6 @@ title: 保存ビュー
 Quality Gates はプレビュー版です。
 {{< /callout >}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では、現在 Quality Gates は利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 保存ビューを使用すると、[**Quality Gate Executions** ページ][1]上の [Quality Gates Explorer][2] の状態を保存でき、特定の条件に絞ったクエリや関連するファセット、可視化オプション、時間範囲などへのアクセスを通じて、効果的なトラブルシューティングが可能になります。

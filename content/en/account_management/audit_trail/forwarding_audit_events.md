@@ -13,7 +13,7 @@ Audit Event Forwarding is not available in the US1-FED site.
 </div>
 {{% /site-region %}}
 
-{{% site-region region="us,us3,us5,eu,ap1" %}}
+{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
 <div class="alert alert-warning">
 Audit Event Forwarding is in Preview.
 </div>

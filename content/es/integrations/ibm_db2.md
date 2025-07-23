@@ -26,7 +26,7 @@ author:
 categories:
 - almacenes de datos
 - recopilación de logs
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_db2/README.md
 display_on_public_website: true
@@ -34,7 +34,7 @@ draft: false
 git_integration_title: ibm_db2
 integration_id: ibm-db2
 integration_title: IBM Db2
-integration_version: 2.2.0
+integration_version: 4.0.1
 is_public: true
 manifest_version: 2.0.0
 name: ibm_db2
@@ -88,7 +88,7 @@ Se necesita la biblioteca de cliente [ibm_db][4]. Para instalarla, asegúrate de
 ##### Unix
 
 ```text
-sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install ibm_db==3.1.0
+sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install ibm_db==3.2.3
 ```
 
 Nota: Si utilizas el Agent con Python 2, usa `ibm_db==3.0.1` en lugar de `ibm_db=3.1.0`.
@@ -107,10 +107,16 @@ Para las versiones del Agent entre la 6.12 y la 7.0:
 "C:\Program Files\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" -m pip install ibm_db==3.0.1
 ```
 
-Para las versiones del Agent posteriores a la 7.0:
+Para versiones del Agent 7.0 o posteriores y anteriores a 7.58:
 
 ```text
-"C:\Program Files\Datadog\Datadog Agent\embedded3\python.exe" -m pip install ibm_db==3.2.2
+"C:\Program Files\Datadog\Datadog Agent\embedded3\python.exe" -m pip install ibm_db==3.1.4
+```
+
+Para versiones del Agent 7.58 o posteriores:
+
+```text
+"C:\Program Files\Datadog\Datadog Agent\embedded3\python.exe" -m pip install ibm_db==3.2.3
 ```
 
 En Linux, puede ser necesaria la funcionalidad XML. Si encuentras errores durante
@@ -132,7 +138,7 @@ Para monitorizar una instancia de Db2, crea un usuario de Db2 con el permiso `EX
 * Autoridad `DBADM`
 * Autoridad `SQLADM`
 
-Para monitorizar el estado de una instancia, sus bases de datos asociadas y los objetos de base de datos, habilita los interruptores de monitorización del sistema de base de datos para cada uno de los objetos que quieras monitorizar: 
+Para monitorizar el estado de una instancia, sus bases de datos asociadas y los objetos de base de datos, habilita los interruptores de monitorización del sistema de base de datos para cada uno de los objetos que quieras monitorizar:
 * Sentencia
 * Bloqueo
 * Tablas
@@ -169,7 +175,7 @@ Luego, ejecuta `get dbm cfg` y deberías ver lo siguiente:
 
 #### Host
 
-Para configurar este check para un Agent que se ejecuta en un host, haz lo siguiente:
+Para configurar este check para un Agent que se ejecuta en un host:
 
 ##### Recopilación de métricas
 
@@ -179,9 +185,9 @@ Para configurar este check para un Agent que se ejecuta en un host, haz lo sigui
 
 ##### Recopilación de logs
 
-_Disponible para las versiones del Agent a partir de la 6.0_
+Disponible para la versión 6.0 o posteriores del Agent
 
-1. La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent; habilítala en el archivo `datadog.yaml`:
+1. La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Habilítala en tu archivo `datadog.yaml`:
 
    ```yaml
    logs_enabled: true
@@ -206,11 +212,11 @@ _Disponible para las versiones del Agent a partir de la 6.0_
 [1]: https://github.com/DataDog/integrations-core/blob/master/ibm_db2/datadog_checks/ibm_db2/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
-{{% tab "Contenedorizado" %}}
+{{% tab "Contenedores" %}}
 
 #### Contenedores
 
-En el caso de los entornos en contenedores, consulta las [Plantillas de integración de Autodiscovery][1] para obtener orientación sobre la aplicación de los parámetros que se indican abajo.
+Para entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][1] para obtener orientación sobre la aplicación de los parámetros que se indican a continuación.
 
 ##### Recopilación de métricas
 
@@ -222,7 +228,7 @@ En el caso de los entornos en contenedores, consulta las [Plantillas de integrac
 
 ##### Recopilación de logs
 
-_Disponible para las versiones del Agent a partir de la 6.0_
+Disponible para la versión 6.0 o posteriores del Agent
 
 La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Para habilitarla, consulta [Recopilación de logs de Kubernetes][2].
 
@@ -242,7 +248,7 @@ La recopilación de logs se encuentra deshabilitada de manera predeterminada en 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "ibm_db2" >}}
+{{< get-metrics-from-git "ibm-db2" >}}
 
 
 ### Eventos
@@ -250,7 +256,7 @@ La recopilación de logs se encuentra deshabilitada de manera predeterminada en 
 - `ibm_db2.tablespace_state_change` se activa cada vez que cambia el estado de un espacio de tablas.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "ibm_db2" >}}
+{{< get-service-checks-from-git "ibm-db2" >}}
 
 
 ## Solucionar problemas

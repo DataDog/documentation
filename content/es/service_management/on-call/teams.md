@@ -6,10 +6,6 @@ further_reading:
 title: Incorporar un equipo
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call no es compatible con el <a href="/getting_started/site">sitio de Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Los Teams (Equipos) son la unidad organizativa central de [Datadog On-Call][2]. Las Páginas se envían a un Equipo y los cronogramas del Equipo o las políticas de escalada dirigen la Página a un miembro apropiado del Equipo.
 
 Los Equipos de On-Call son una extensión de [Datadog Teams][1]. Los Equipos On-Call aparecen en la página de descripción general de [Teams][3] (Equipos), junto a los equipos que no realizan tareas de guardia. Datadog recomienda que utilices Equipos existentes para tu configuración de On-Call siempre que sea posible, ya que esto aumenta la visibilidad de tu Equipo On-Call.

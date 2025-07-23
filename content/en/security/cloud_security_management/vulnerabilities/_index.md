@@ -85,7 +85,7 @@ Use these tables to decide which solution to start with:
 | Container image                           | OS packages and app packages, mapped to image | OS packages                    |
 | Cloud provider                            | AWS, [Azure (Preview)][15]                    | AWS, Azure, GCP, on-prem, etc. |
 | Operating system                          | Linux                                         | Linux, Windows                 |
-| Serverless                                | AWS Lambda                                    | Not applicable                 |
+| Serverless                                | AWS Lambda, AWS ECS Fargate                   | Not applicable                 |
 | Container registries                      | Amazon ECR                                    | Not applicable                 |
 
 For more information on compatibility, see [Cloud Security Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or reach out to support@datadoghq.com.
@@ -98,6 +98,10 @@ Focus on exploitable vulnerabilities first, using the Datadog Severity Score, co
 For vulnerabilities with available fixes, the Findings page provides guided remediation steps to assist Dev and Ops teams in resolving issues more quickly and effectively. You can also triage, mute, comment, and assign vulnerabilities to manage their lifecycle.
 
 {{< img src="security/vulnerabilities/csm-vm-explorer-actionability-2.png" alt="The Cloud Security Vulnerabilities Findings page displaying a vulnerability and the actions a user can take to remediate it" width="100%">}}
+
+In [Container Images][7], you can trace vulnerabilities found in an image to specific layers, so you can pinpoint and remediate your security risks faster.
+
+{{< img src="infrastructure/containerimages/image_layer_vulnerabilities.png" alt="A list of vulnerabilities associated with each layer of an image" width="100%">}}
 
 ## Automation and Jira integration
 Make Cloud Security Vulnerabilities part of your daily workflow by setting up [security notification rules][17] and [automation pipelines (in Preview)][20]:
@@ -118,7 +122,7 @@ The [Infrastructure Packages Catalog][19] provides a real-time inventory of all 
 
 Quickly assess the impact of a critical emerging vulnerability by searching for affected package versions and identifying all of the resources that use it.
 
-{{< img src="security/vulnerabilities/csm_package_explorer_2.png" alt="The inventory of packages deployed in the infrastructure with vulnerability context and pivot to resources using them" width="100%">}}
+{{< img src="security/vulnerabilities/csm_package_explorer_3.png" alt="The inventory of packages deployed in the infrastructure with vulnerability context and pivot to resources using them" width="100%">}}
 
 [1]: https://app.datadoghq.com/security/csm/vm
 [2]: https://app.datadoghq.com/containers/images
@@ -126,6 +130,7 @@ Quickly assess the impact of a critical emerging vulnerability by searching for 
 [4]: https://app.datadoghq.com/security/infra-vulnerability?query=asset_type%3AHost&group=none
 [5]: /security/code_security/software_composition_analysis/
 [6]: https://www.datadoghq.com/product/infrastructure-monitoring/
+[7]: https://app.datadoghq.com/container-images
 [9]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 [10]: /security/code_security/iast/
 [11]: /security/cloud_security_management/setup/agentless_scanning/

@@ -4,7 +4,7 @@ title: トラブルシューティング
 
 {{% site-region region="gov,ap1" %}}
 <div class="alert alert-warning">
-Case Management is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
+Case Management は現在、{{< region-param key=dd_datacenter code="true" >}} サイトでは利用できません。
 </div>
 {{% /site-region %}}
 

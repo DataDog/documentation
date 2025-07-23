@@ -109,7 +109,7 @@ Asegúrate de que se generan eventos Cybersixgill en el [Explorador de eventos d
 ## Datos recopilados
 
 ### Checks de servicio
-{{< get-service-checks-from-git "cybersixgill_actionable_alerts" >}}
+{{< get-service-checks-from-git "cybersixgill-actionable-alerts" >}}
 
 
 ### Eventos

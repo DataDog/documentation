@@ -95,7 +95,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 [6]: /agent/versions/upgrade_between_agent_minor_versions/
 
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title=".NET" level="h4" %}}
 
@@ -175,7 +175,7 @@ spec:
           env:
             - name: DD_IAST_ENABLED
               value: "true"
-``` 
+```
 
 #### AWS ECS
 
@@ -211,7 +211,7 @@ If you need additional assistance, contact [Datadog support][5].
 [4]: /security/code_security/iast/setup/
 [5]: /help
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Node.js" level="h4" %}}
 
@@ -287,7 +287,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 [5]: https://app.datadoghq.com/security/appsec/vm/code
 [6]: /help
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Python" level="h4" %}}
 
@@ -380,7 +380,7 @@ using the CPython API, or on intermediate language systems like Cython, the resu
 [5]: /help
 [6]: /agent/versions/upgrade_between_agent_minor_versions/
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 ### Finishing setup
 
@@ -440,10 +440,12 @@ The Java Tracer supports automatic instrumentation for the following Oracle JDK 
 
 | JVM versions | Operating Systems                                                                     | Support level                       | Tracer version |
 | -------------| ------------------------------------------------------------------------------------- | ----------------------------------- | -------------- |
-| 8 to 17      | Windows (x86-64)<br>Linux (glibc, musl) (arm64, x86-64)<br>MacOS (arm64, x86-64)      | Supported                           | Latest         |
+| 8 to 21      | Windows (x86-64)<br>Linux (glibc, musl) (arm64, x86-64)<br>MacOS (arm64, x86-64)      | Supported                           | Latest         |
 
 
 Datadog does not officially support any early-access versions of Java.
+
+Versions 22 and above are supported as in Preview.
 
 #### Web framework compatibility
 ##### Code Security Capability Notes
@@ -515,7 +517,7 @@ Datadog does not officially support any early-access versions of Java.
 [2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [3]: /security/code_security/software_composition_analysis/
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title=".NET" level="h4" %}}
 
@@ -610,7 +612,7 @@ These are supported on the following architectures:
 [3]: /agent/remote_config/#enabling-remote-configuration
 
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Node.js" level="h4" %}}
 
@@ -739,7 +741,7 @@ Datastore tracing provides:
 [44]: https://www.npmjs.com/package/apollo-server-core
 
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Python" level="h4" %}}
 
@@ -748,9 +750,9 @@ Datastore tracing provides:
 The following code security capabilities are supported in the Python library, for the specified tracer version:
 
 | Code Security capability                    | Minimum Python tracer version |
-| ------------------------------------------- | ----------------------------- |
+| ------------------------------------------- |-------------------------------|
 | Runtime Software Composition Analysis (SCA) | 1.5.0                         |
-| Runtime Code Analysis (IAST)                | Preview (2.9.3)               |
+| Runtime Code Analysis (IAST)                | Preview (2.21.0)              |
 
 #### Supported deployment types
 | Type        | Runtime Code Analysis (IAST)      |
@@ -770,18 +772,25 @@ The Python Application Security Client library follows a [versioning policy][3] 
 
 Two release branches are supported:
 
-| Release    | Support level         |
-|------------|---------------------- |
-| `<1`       | Maintenance           |
-| `>=1.0,<2` | General Availability  |
+| Release    | Support level                              | Minimum Datadog Agent |
+|------------|--------------------------------------------|-----------------------|
+| `>=3.0,<4` | General Availability   7.28                |
+| `>=2.0,<3` | Maintenance (End of Life October 31, 2025) | 7.28                  |
+|    `<2`    | End of Life                                |                       |
 
 And the library supports the following runtimes:
 
-| OS      | CPU                   | Runtime | Runtime version | Support ddtrace versions |
-|---------|-----------------------|---------|-----------------|--------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                     |
+| OS      | CPU                   | Runtime | Runtime version | Supported ddtrace versions |
+|---------|-----------------------|---------|-----------------|----------------------------|
+| Linux   | x86-64, i686, AArch64 | CPython | 3.8+            | `>=3,<4`                   |
+| MacOS   | Intel, Apple Silicon  | CPython | 3.8+            | `>=3,<4`                   |
+| Windows | 64bit, 32bit          | CPython | 3.8+            | `>=3,<4`                   |
+| Linux   | x86-64, i686, AArch64 | CPython | 3.7-3.13        | `>=2,<3`                   |
+| MacOS   | Intel, Apple Silicon  | CPython | 3.7-3.13        | `>=2,<3`                   |
+| Windows | 64bit, 32bit          | CPython | 3.7-3.13        | `>=2,<3`                   |
+| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                       |
+| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                       |
+| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                       |
 
 
 #### Web framework compatibility
@@ -819,4 +828,4 @@ The Python library supports the [database API specifications][4] and supports al
 [4]: https://peps.python.org/pep-0249/
 
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}

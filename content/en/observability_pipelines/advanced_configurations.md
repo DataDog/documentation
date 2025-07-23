@@ -48,6 +48,16 @@ To set bootstrap options, do one of the following:
 
 The following is a list of bootstrap options, their related pipeline environment variables, and which variables have a higher precedence (priority).
 
+`api`
+: **Pipeline environment variable**: `DD_OP_API_ENABLED`
+: **Priority**: `DD_OP_API_ENABLED`
+: An example configuration:
+: &nbsp;&nbsp;&nbsp;&nbsp;`api`:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`enabled`: `true`<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`address`: `"127.0.0.1:8686" # optional`
+: Note: Setting `address` is optional. It is the network address to which the API should bind. If you're running the Worker in a Docker container, bind to `0.0.0.0`. Otherwise, the API is not exposed outside of the container.
+: **Description**: Enable the Observability Pipelines Worker API so you can see the Worker's processes with the `tap` or `top` command. See [Run, tap, or top the Worker][8] for more information. If you are using the Helm charts provided when you [set up a pipeline][7], then the API has already been enabled. Otherwise, make sure the environment variable `DD_OP_API_ENABLED` is set to `true` in `/etc/observability-pipelines-worker/bootstrap.yaml`, which:
+: - Sets up the API to listen on `localhost` and port `8686`, which is what the CLI for `tap` is expecting.
+: - Exposes the `/health` endpoint. Configure a load balancer's health check with the `/health` endpoint to check that the Worker is up and running.
+
 `api_key`
 : **Pipeline environment variable**: `DD_API_KEY`
 : **Priority**: `DD_API_KEY`
@@ -105,3 +115,5 @@ The following is a list of bootstrap options, their related pipeline environment
 [4]: /agent/configuration/proxy/?tab=linux#environment-variables
 [5]: https://en.wikipedia.org/wiki/HTTP_tunnel
 [6]: /agent/remote_config/
+[7]: /observability_pipelines/set_up_pipelines/
+[8]: /observability_pipelines/install_the_worker/worker_commands/#run-tap-or-top-the-worker

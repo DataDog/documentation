@@ -83,6 +83,5 @@ See the full feature comparison table below.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#products
-[2]: /product_analytics/journeys/#conversion
+[1]: https://www.datadoghq.com/pricing/?product=real-user-monitoring#products
 [3]: https://app.datadoghq.com/rum/list?

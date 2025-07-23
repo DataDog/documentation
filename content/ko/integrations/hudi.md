@@ -31,7 +31,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - 로그 수집
-custom_kind: integration
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/hudi/README.md
 display_on_public_website: true
@@ -39,15 +39,15 @@ draft: false
 git_integration_title: hudi
 integration_id: hudi
 integration_title: Hudi
-integration_version: 2.3.0
+integration_version: 4.0.0
 is_public: true
 manifest_version: 2.0.0
 name: hudi
 public_title: Hudi
 short_description: Hudi 구성에 대한 메트릭을 추적하세요.
 supported_os:
-- 리눅스
-- windows
+- linux
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
@@ -56,7 +56,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - 제공::통합
+  - Offering::Integration
   configuration: README.md#Setup
   description: Hudi 구성에 대한 메트릭을 추적하세요.
   media: []
@@ -80,7 +80,7 @@ Hudi [버전][2] `0.10.0` 이상과 호환됩니다.
 Hudi 점검은 [Datadog Agent][3] 패키지에 포함되어 있습니다.
 서버에 추가 설치가 필요하지 않습니다.
 
-### 구성
+### 설정
 
 1. Hudi에서 [JMX Metrics Reporter][5]를 [구성합니다][4]:
 
@@ -117,7 +117,7 @@ Hudi 점검은 [Datadog Agent][3] 패키지에 포함되어 있습니다.
 
 ### 로그 수집
 
-_Agent 버전 6.0 이상에서 사용 가능_
+_에이전트 버전 > 6.0에서 사용 가능_
 
 1. Hudi는 기본적으로 `log4j` 로거를 사용합니다. 형식을 사용자 정의하려면 [Flink][13] 또는 [Spark][14] `conf` 디렉터리에서 `log4j.properties` 파일을 편집하세요. 예제 `log4j.properties` 파일은 다음과 같습니다:
 
@@ -140,7 +140,7 @@ _Agent 버전 6.0 이상에서 사용 가능_
 
    형식이 다른 경우 [통합 파이프라인][15]을 복제하고 편집합니다.
 
-3. Datadog 에이전트에서 로그 수집은 기본적으로 사용하지 않도록 설정되어 있습니다. `datadog.yaml`파일에서 로그 수집을 사용하도록 설정합니다.
+3. 로그 수집은 Datadog 에이전트에서 기본적으로 비활성화되어 있습니다. `datadog.yaml` 파일에서 활성화합니다.
 
    ```yaml
    logs_enabled: true

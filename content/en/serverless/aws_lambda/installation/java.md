@@ -17,6 +17,8 @@ aliases:
 
 <div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
 
+<div class="alert alert-info">For FIPS compliance, use the Datadog FIPS-compliant extension layer, but note that the Java runtime layer does not require additional configuration. While the FIPS-compliant Lambda components work with any Datadog site, end-to-end FIPS compliance requires using the US1-FED site. See <a href="/serverless/aws_lambda/fips-compliance">AWS Lambda FIPS Compliance</a> for more details.</div>
+
 To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (`java8.al2`), Java 11 (`java11`), Java 17 (`java17`), or Java 21 (`java21`) runtimes with at least 1024 MB of memory.
 
 If your Lambda functions are deployed in a VPC without access to the public internet, you can send data either [using AWS PrivateLink][6] for the `datadoghq.com` [Datadog site][7], or [using a proxy][8] for all other sites.
@@ -277,7 +279,7 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "2.0.0"
+  version = "3.1.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -287,8 +289,8 @@ module "lambda-datadog" {
     "DD_VERSION" : "<VERSION>"
   }
 
-  datadog_extension_layer_version = 67
-  datadog_java_layer_version = 15
+  datadog_extension_layer_version = 81
+  datadog_java_layer_version = 21
 
   # aws_lambda_function arguments
 }
@@ -313,8 +315,8 @@ module "lambda-datadog" {
 4. Select the versions of the Datadog Extension Lambda layer and Datadog Java Lambda layer to use. If left blank the latest layer versions will be used.
 
 ```
-  datadog_extension_layer_version = 67
-  datadog_java_layer_version = 15
+  datadog_extension_layer_version = 81
+  datadog_java_layer_version = 21
 ```
 
 [1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
@@ -382,7 +384,7 @@ Enabling any of these features cause the extension to default back to the fully 
 
 ## What's next?
 
-- You can now view metrics, logs, and traces on the [Serverless Homepage][1].
+- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
 - Turn on [threat monitoring][11] to get alerted on attackers targeting your service.
 - Submit a [custom metric][2] or [APM span][3] to monitor your business logic.
 - See the [troubleshooting guide][4] if you have trouble collecting the telemetry

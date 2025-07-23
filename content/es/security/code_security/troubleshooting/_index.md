@@ -192,7 +192,7 @@ Para desactivar IAST, elimina la variable de entorno `DD_IAST_ENABLED=true` de t
 [1]: /es/help/
 [2]: /es/security/code_security/static_analysis/github_actions
 [3]: /es/security/code_security/static_analysis/github_actions#inputs
-[4]: https://app.datadoghq.com/ci/settings/repository
+[4]: https://app.datadoghq.com/source-code/repositories
 [5]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
 [6]: https://docs.datadoghq.com/es/security/code_security/static_analysis/setup/#diff-aware-scanning
 [7]: https://github.com/DataDog/osv-scanner

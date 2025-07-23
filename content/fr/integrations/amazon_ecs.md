@@ -59,7 +59,7 @@ Lorsque la collecte de métriques est activée, un [dashboard prêt à l'emploi]
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_ecs" >}}
+{{< get-metrics-from-git "amazon-ecs" >}}
 
 
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
@@ -75,7 +75,7 @@ Pour réduire les données parasites, l'intégration Amazon ECS est automatique
 Pour supprimer la liste d'inclusion et recevoir tous les événements générés par votre intégration Datadog/Amazon ECS, contactez l'[assistance Datadog][6].
 
 ### Checks de service
-{{< get-service-checks-from-git "amazon_ecs" >}}
+{{< get-service-checks-from-git "amazon-ecs" >}}
 
 
 ## Dépannage

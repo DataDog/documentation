@@ -9,10 +9,6 @@ further_reading:
 title: On-Call
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">El servicio On-Call no es compatible con el <a href="/getting_started/site">sitio de Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Datadog On-Call integra la monitorización, la localización de personas y la respuesta a incidencias en una sola plataforma.
 
 {{< img src="service_management/oncall/oncall_overview.png" alt="Información general sobre cómo las páginas se enrutan. Desde un monitor, incidencia, señal de seguridad o llamada a la API, la página se envía a un equipo (por ejemplo, 'payments-team'), a continuación, a las reglas de procesamiento (por ejemplo, según prioridad), a continuación, a las políticas de escalada. A continuación, se puede enviar a un cronograma o directamente a un usuario." style="width:100%;" >}}

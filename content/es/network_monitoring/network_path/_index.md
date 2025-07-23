@@ -16,9 +16,6 @@ further_reading:
 is_beta: true
 title: Ruta de red
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La Ruta de red para Datadog Cloud Network Monitoring no es compatible con tu <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 <div class="alert alert-info">La Ruta de red para Datadog Cloud Network Monitoring tiene disponibilidad limitada. Ponte en contacto con tu representante de Datadog para inscribirte.</div>
 

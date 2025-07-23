@@ -36,7 +36,10 @@ Datadog's Admission Controller is `MutatingAdmissionWebhook` type. For more deta
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-To enable the Admission Controller for the Datadog Operator, set the parameter `features.admissionController.enabled` to `true` in your `DatadogAgent` configuration:
+The Datadog Operator enables the Datadog Admission Controller by default. No extra configuration is needed to enable the Admission Controller.
+
+
+If you disabled Admission Controller, you can re-enable it by setting the parameter `features.admissionController.enabled` to `true` in your `DatadogAgent` configuration:
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" disable_copy="false" >}}
 apiVersion: datadoghq.com/v2alpha1
@@ -52,7 +55,7 @@ spec:
 {{< /code-block >}}
 {{% /tab %}}
 {{% tab "Helm" %}}
-Starting from Helm chart v2.35.0, Datadog Admission controller is activated by default. No extra configuration is needed to enable the Admission Controller.
+Starting from Helm chart v2.35.0, Datadog Admission Controller is enabled by default. No extra configuration is needed to enable the Admission Controller.
 
 To enable the Admission Controller for Helm chart v2.34.6 and earlier, set the parameter `clusterAgent.admissionController.enabled` to `true`:
 

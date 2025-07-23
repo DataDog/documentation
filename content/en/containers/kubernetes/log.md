@@ -156,9 +156,11 @@ The Datadog Agent in Kubernetes is deployed by a DaemonSet (managed by the Datad
 
 When "Container Collect All" is enabled you can configure which containers you want to collect logs from. This can be useful to prevent the collection of the Datadog Agent logs, if desired. You can do this by passing configurations to the Datadog Agent to control what it pulls, or by passing configurations to the Kubernetes Pod to exclude certain logs more explicitly.
 
-When "Container Collect All" is disabled (default) this is not necessary as you enable log configurations by Autodiscovery annotations or config files.
+When filtering out logs through methods like `DD_CONTAINER_EXCLUDE_LOGS` or `ad.datadoghq.com/logs_exclude`, the Agent ignores log collection regardless of explicitly defined log collection configurations in [Autodiscovery annotations][19] or [Autodiscovery configuration files][20].
 
-See [Container Discovery Management][8] to learn more.
+When "Container Collect All" is disabled (default) you don't need to add any filtering because everything is excluded by default. To include collection for only selected pods, you can enable the log configuration by [Autodiscovery annotations][19] or [Autodiscovery configuration files][20] for the desired pods.
+
+See [Container Discovery Management][8] to learn more about filtering.
 
 ### Tagging
 
@@ -541,3 +543,5 @@ datadog:
 [16]: https://app.datadoghq.com/logs/pipelines/pipeline/library
 [17]: /containers/guide/template_variables/
 [18]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/
+[19]: /containers/kubernetes/log/?tab=helm#autodiscovery-annotations
+[20]: /containers/kubernetes/log/?tab=helm#autodiscovery-configuration-files

@@ -143,7 +143,7 @@ OpenStack Controller インテグレーションは、すべてのコンピュ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "openstack_controller" >}}
+{{< get-metrics-from-git "openstack-controller" >}}
 
 
 ### イベント
@@ -151,7 +151,7 @@ OpenStack Controller インテグレーションは、すべてのコンピュ�
 OpenStack Controller には、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "openstack_controller" >}}
+{{< get-service-checks-from-git "openstack-controller" >}}
 
 
 ## トラブルシューティング

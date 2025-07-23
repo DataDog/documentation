@@ -6,10 +6,6 @@ further_reading:
 title: 페이지 전송
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call은 선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다.</div>
-{{< /site-region >}}
-
 페이지는 팀으로 전송되고 이후 해당 팀의 에스컬레이션 정책 및 스케줄을 통해 라우팅됩니다. 팀의 [Datadog On-Call 온보딩][1]이 끝나면 페이징을 시작할 수 있습니다.
 
 ### 알림에서 페이지 전송

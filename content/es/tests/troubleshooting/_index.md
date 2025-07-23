@@ -3,10 +3,6 @@ null
 ...
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">En este momento, CI Visibility no está disponible en el sitio ({{< region-param key="dd_site_name" >}}) seleccionado.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Esta página proporciona información para ayudarte a solucionar problemas de visibilidad de tests. Si necesita más ayuda, ponte en contacto con el [servicio de asistencia de Datadog][2].
@@ -163,7 +159,7 @@ La mejor forma de solucionar este problema es asegurarse de que los parámetros 
 [8]: https://github.com/travisjeffery/timecop
 [9]: https://github.com/spulec/freezegun
 [10]: /es/continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
-[11]: https://app.datadoghq.com/ci/settings/repository
+[11]: https://app.datadoghq.com/source-code/repositories
 [12]: /es/continuous_integration/intelligent_test_runner/
 [13]: /es/tests/#parameterized-test-configurations
 [14]: /es/tests/#supported-features

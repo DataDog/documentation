@@ -17,10 +17,6 @@ further_reading:
   text: "Trigger workflows"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Test a monitor trigger
 
 You can test a monitor trigger during workflow creation. Testing a monitor generates a snippet that you can paste into your monitor notification window to trigger the workflow.

@@ -7,14 +7,13 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/on-call-paging/'
   tag: 'Blog'
   text: 'How to create an effective paging strategy'
+- link: "https://www.datadoghq.com/blog/incidents-ai-workbench-status-page/"
+  tag: "Blog"
+  text: "Unify remediation and communication with Datadog Incident Response"
 cascade:
     algolia:
         rank: 70
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 Datadog On-Call integrates monitoring, paging, and incident response into one platform.
 
@@ -47,7 +46,7 @@ A schedule defines specific times when Team members are assigned to respond to P
 To get started with On-Call, [onboard an On-Call Team][1] and ensure that all Team members configure their [On-Call profile settings][2] to receive notifications.
 
 {{< whatsnext desc="This section includes the following topics:">}}
-  {{< nextlink href="/service_management/on-call/teams">}}<u>Onboard a Team</u>: Create a new On-Call Team, add an existing Datadog Team to On-Call, or import a team from PagerDuty or Opsgenie.{{< /nextlink >}}
+  {{< nextlink href="/service_management/on-call/teams">}}<u>Onboard a Team</u>: Create a new On-Call Team, add an existing Datadog Team to On-Call, or import a team from PagerDuty.{{< /nextlink >}}
   {{< nextlink href="/service_management/on-call/pages">}}<u>Send a Page</u>: Page a team through monitors, incidents, security signals, etc.; or manually send a Page through Datadog, Slack, Microsoft Teams, or the Datadog API. {{< /nextlink >}}
   {{< nextlink href="/service_management/on-call/escalation_policies">}}<u>Escalation Policies</u>: Define steps for how a Page is sent to different schedules. {{< /nextlink >}}
   {{< nextlink href="/service_management/on-call/schedules">}}<u>Schedules</u>: Define timetables for Team members' on-call rotations.{{< /nextlink >}}

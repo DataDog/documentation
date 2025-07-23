@@ -13,10 +13,6 @@ further_reading:
   text: "Build Apps"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 This page provides an example of how to use the custom chart component in your App Builder apps.
 
 The basic workflow for creating a custom chart is as follows:
