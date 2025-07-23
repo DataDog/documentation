@@ -35581,6 +35581,12 @@ paths:
       description: Search for Synthetic tests and Test Suites.
       operationId: SearchTests
       parameters:
+      - description: The search query.
+        in: query
+        name: text
+        required: false
+        schema:
+          type: string
       - description: If true, include the full configuration for each test in the
           response.
         in: query
