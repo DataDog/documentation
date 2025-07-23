@@ -139,15 +139,14 @@ Before creating this type of rule, be aware:
 
 ### Create a dynamic by metric allocation rule
 
-To create a rule for this allocation, you could:
+To create a rule for this allocation, you could, for example:
 
-- Define the costs to allocate (source): **NAT gateway costs** (`aws_operation:NatGateway`). 
-- Choose the allocation method: **Dynamic by metric**
-- Choose the data source: **Network**. Tip: Review available metrics and tags in the [Metrics Summary][2].
-- Refine the allocation by applying a [filter](#step-4---optional-apply-filters):**NAT Gateway** (`server_gateway_id:nat-*`). This filters the metric to only return data for your NAT Gateway usage. 
-- Choose the [destination tag](#step-3---define-the-destination) to split your costs by applying a group by. In Network, do this by filling out the `View clients as` section: **service** (`client_service`). This groups the metric by service. 
-- Create suballocations by [partitioning](#step-4---optional-apply-a-partition) the allocation rule: **environment** (`env`).
-
+- Under "Define the source", define the costs to allocate: **NAT gateway costs** (`aws_operation:NatGateway`). 
+- Under "Choose split method", select the allocation method: **Dynamic by metric**
+  - Choose the data source: **Network**. Tip: Review available metrics and tags in the [Metrics Summary][2].
+  - Refine the allocation by applying a [filter](#step-4---optional-apply-filters):**NAT Gateway** (`server_gateway_id:nat-*`). This filters the metric to only return data for your NAT Gateway usage. 
+- Under "Choose the destination(s) to split costs across", select the [destination tag](#step-3---define-the-destination) to split your costs by applying a group by. In Network, do this by filling out the `View clients as` section: **service** (`client_service`). This groups the metric by service. 
+  - Create suballocations by [partitioning](#step-4---optional-apply-a-partition) the allocation rule. To do this, first apply another group by to the metric. In Network, do this by filling out the `View servers as` section:  **Gateway ID** (`gateway_id`). This groups the metric by gateway_id. Then, select `server_gateway_id` in the **Partition source costs by** section. 
 {{< img src="cloud_cost/custom_allocation_rules/ui-dynamic-by-metric-4.png" alt="The dynamic by metric split strategy as seen in Datadog" style="width:90%;" >}}
 
 [1]: /metrics/#querying-metrics
