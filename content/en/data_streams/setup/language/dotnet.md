@@ -65,9 +65,9 @@ environment:
 #### Confluent Cloud connectors
 {{% data_streams/dsm-confluent-connectors %}}
 
-### Default Enabled Mode
+### Default enabled mode
 
-Starting with version 3.22.0 of the .NET tracer, Data Streams Monitoring is in a default-enabled state. As long as you pay for the Data Streams Monitoring product (i.e. through APM Pro), you will start seeing metrics and data.
+Starting with version 3.22.0 of the .NET tracer, Data Streams Monitoring is in a default-enabled state. As long as you pay for the Data Streams Monitoring product (for example, APM Pro), you will start seeing metrics and data.
 
 In default mode, the following caveats apply:
 
@@ -111,11 +111,11 @@ The following size thresholds apply when Data Streams Monitoring is enabled in d
 **Note:** When `DD_DATA_STREAMS_ENABLED` is explicitly set to `true`, all messages are instrumented regardless of size.
 
 
-#### Additional Notes
+#### Additional notes
 
-**Mixed tracer environments:** When Data Streams Monitoring is in default mode, data is only forwarded to the DSM backend when **all** services in your environment are using compatible tracers with default-enabled functionality. If you have a mixed environment, DSM will not forward any data to ensure data completeness and accuracy.
+**Mixed tracer environments:** When Data Streams Monitoring is in default mode, data is only forwarded to the DSM backend when **all** services in your environment are using compatible tracers with default-enabled functionality. If you have a mixed environment, DSM does not forward any data to ensure data completeness and accuracy.
 
-If you want to receive partial .NET data in a mixed tracer environment, please reach out here.
+If you want to receive partial .NET data in a mixed tracer environment, reach out here.
 
 ## Further reading
 
