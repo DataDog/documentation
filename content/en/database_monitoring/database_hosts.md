@@ -24,12 +24,90 @@ In addition to a filterable graph of active connections for that host, the host 
 | [Configuration details](#configuration-details) | {{< X >}} | {{< X >}}  | {{< X >}} |           |
 
 ## Cluster grouping
-When you view the list of database hosts, a **Group into clusters** toggle might appear if we detect some cluster topologies. This is powered by the tagging information done by an integration or the agent.
-Currently, here are the supported cluster topologies:
+A **Group into clusters** toggle appears with the list of database hosts if host tags indicate the presence of cluster topology. Enable this toggle to group hosts into clusters within the list.
 
-- Amazon RDS with the <a href="https://docs.datadoghq.com/integrations/amazon_rds/?tab=standard">RDS integration</a> enabled. Datadog uses the <code>dbclusteridentifier</code> and <code>region</code> tags to group hosts into clusters.
-- PostgreSQL's physical replication. Agent 7.58+ uses the <code>system_identifier</code> tag to group hosts into clusters.
-- MySQL's traditional replication. Agent 7.68+ uses the <code>cluster_uuid</code> tag to group hosts into clusters.
+Cluster rows display a **Cluster** badge and show the number of instances in the cluster. Columns for cluster rows display aggregated data from all instances within the cluster. Select a cluster row to expand it and view a list of all instances that the cluster contains.
+
+Cluster grouping supports the following database technology and cluster topologies:
+
+<table>
+  <colgroup>
+    <col style="width:15%">
+    <col style="width:20%">
+    <col style="width:30%">
+    <col style="width:35%">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Database</th>
+      <th>Topologies</th>
+      <th>Grouping Tags</th>
+      <th>Cluster Name Source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Amazon RDS<br><em>(AWS integration required)</em></td>
+      <td>
+        <ul>
+          <li>Multi-AZ clusters</li>
+          <li>Read replicas</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><code>dbclusteridentifier</code></li>
+          <li><code>region</code></li>
+          <li><code>aws_account</code></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><code>dbclusteridentifier</code></li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>PostgreSQL<br><em>(Agent v7.58+ required)</em></td>
+      <td>
+        <ul>
+          <li>Physical replication</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><code>system_identifier</code></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><code>postgresql_cluster_name</code> (from instance <code>cluster_name</code> config)</li>
+          <li>Primary instance name</li>
+          <li><code>system_identifier</code></li>
+        </ul>
+      </td>
+    </tr>
+        <tr>
+      <td>MySQL<br><em>(Agent v7.68+ required)</em></td>
+      <td>
+        <ul>
+          <li>Regular replication (not group replication)</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><code>cluster_uuid</code></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Primary instance name</li>
+          <li><code>cluster_uuid</code></li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Top queries
 
