@@ -17,9 +17,9 @@ further_reading:
 ## Database identifier
 Each database instance monitored with Datadog has a unique identifier. For Postgres, MySQL, SQL Server and Oracle this identifier can be configured using the `database_identifier.template` path in the integration configuration.
 
-The default value for this is `$reported_hostname`, which will identify the database with the resolved hostname of its host. Most users can leave this option as the default. Changing the value  is primarily useful when multiple database instances are hosted on one machine.
+The default value for this is `$reported_hostname`, which identifies the database with the resolved hostname of its host. Most users can leave this option as the default. Changing the value is primarily useful when multiple database instances are hosted on one machine.
 
-| When setting a non-default value for the database identifier, each distinct instance identifier will be billed as a host for Database Monitoring.
+| When setting a non-default value for the database identifier, each distinct instance identifier is billed as a host for Database Monitoring.
 
 ## Reported hostname
 The `reported_hostname` configuration allows users to override the automatic resolution of `host` for a single database instance. This is useful when connecting to a database through a proxy, or when host resolution produces a different name than the one associated with the Datadog infrastructure host.
