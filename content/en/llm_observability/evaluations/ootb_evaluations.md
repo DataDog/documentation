@@ -257,6 +257,51 @@ This check evaluates whether your LLM chatbot can successfully carry out a full 
 
 For optimal evaluation accuracy, it is preferable to send a tag when the conversation is finished and configure the evaluation to run only on conversations with this tag. The evaluation returns a detailed breakdown including resolved intentions, unresolved intentions, and reasoning for the assessment. A conversation is considered incomplete if more than 50% of identified intentions remain unresolved.
 
+##### Instrumentation
+
+To enable Conversation Completeness evaluation, you need to instrument your application to track conversation sessions and their completion status. This evaluation works by analyzing complete conversations to determine if all user intentions were successfully addressed.
+
+The evaluation requires sending a span with a specific tag when the session ends. This signal allows the evaluation to identify conversation boundaries and trigger the completeness assessment:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import llm
+
+# Call this function whenever your session has ended
+@llm(model_name="model_name", model_provider="model_provider")
+def send_session_ended_span(input_data, output_data) -> None:
+    """Send a span to indicate the chat session has ended."""
+    LLMObs.annotate(
+        input_data=input_data,
+        output_data=output_data,
+        tags={"session_status": "completed"}
+    )
+{{< /code-block >}}
+
+Replace `session_status` and `completed` with your preferred tag key and value. Common patterns include:
+- `conversation_ended: true`
+- `session_complete: finished`
+- `chat_status: terminated`
+
+The span should contain meaningful `input_data` and `output_data` that represent the final state of the conversation. This helps the evaluation understand the conversation's context and outcomes when assessing completeness.
+
+##### Conversation Completeness configuration
+
+After instrumenting your application to send session-end spans, configure the evaluation to run only on conversations with your specific tag. This targeted approach ensures the evaluation analyzes complete conversations rather than partial interactions.
+
+1. Navigate to [**LLM Observability > Settings > Evaluations**][2].
+1. Click on **Conversation Completeness**.
+1. Select **Configure Evaluation** or click the edit icon for your specific application.
+1. Choose your LLM provider (OpenAI, Azure OpenAI, Anthropic, or Amazon Bedrock) and account.
+1. Configure the evaluation data:
+   - Select **spans** as the data type since Conversation Completeness runs on individual spans.
+   - Choose the span name that corresponds to your session-end function (for example, `send_session_ended_span`).
+   - In the **tags** section, specify the tag you configured in your instrumentation (for example, `session_status:completed`).
+   - Set the **sampling percentage** to 100% to ensure all completed conversations are evaluated.
+
+This configuration ensures the evaluation only triggers when a conversation reaches completion, providing accurate assessments of how well your LLM application resolves user intentions throughout entire conversation sessions.
+
+
 ### Security and Safety evaluations
 
 #### Toxicity
