@@ -1,5 +1,7 @@
 ---
-title: Send a Page
+title: Trigger a Page
+aliases:
+- /service_management/on-call/pages
 further_reading:
 - link: '/service_management/on-call/'
   tag: 'Documentation'
@@ -29,6 +31,11 @@ To page a team through email:
  1. Navigate to the on-call team's page and scroll down to "Custom Triggering Sources".
  1. Click "Generate" under the email trigger section. This generates a unique email address that can be used to trigger a page directly to the team's on-call responders.
 
+### Trigger Pages through calls
+
+You can also trigger a Page through live call routing, which lets users initiate a Page by calling a dedicated phone number. This provides an additional channel for urgent situations. For setup instructions, see [Live Call Routing][3].
+
+
 ### Page manually
 
 You can manually send a Page directly in the Datadog platform, or through a tool like Slack or Microsoft Teams. This lets you alert a Datadog team or an individual directly (even if they aren't On-Call).
@@ -49,7 +56,7 @@ Manually paging a Team through Datadog always results in a `high` urgency Page.
 
 Manually paging a Team from Slack always results in a `high` urgency Page.
 
-To send Pages to Slack, see [Routing Rules][3].
+To send Pages to Slack, see [Routing Rules][4].
 
 ## Further Reading
 
@@ -58,3 +65,4 @@ To send Pages to Slack, see [Routing Rules][3].
 [1]: /service_management/on-call/teams
 [2]: https://app.datadoghq.com/on-call/teams
 [3]: /service_management/on-call/routing_rules/#send-pages-to-slack-or-microsoft-teams
+[4]: /service_management/on-call/triggering_pages/live-call-routing

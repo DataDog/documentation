@@ -2473,11 +2473,16 @@ menu:
       parent: oncall
       identifier: oncall_teams
       weight: 1
-    - name: Send a Page
-      url: service_management/on-call/pages/
+    - name: Trigger a Page
+      url: service_management/on-call/triggering_pages/
       parent: oncall
-      identifier: oncall_pages
+      identifier: oncall_triggering_pages
       weight: 2
+    - name: Live Call Routing
+      url: service_management/on-call/triggering_pages/live_call_routing
+      identifier: oncall_live_call_routing
+      parent: oncall_triggering_pages
+      weight: 201
     - name: Routing Rules
       url: service_management/on-call/routing_rules/
       parent: oncall
