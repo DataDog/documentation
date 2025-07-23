@@ -62,7 +62,7 @@ dotnet add package Datadog.Trace.Bundle --version 3.21.0
 {{% tab "PHP" %}}
 
 Run the following script to install Datadog's PHP tracing library:
-
+startup.sh:
 ```bash
 #!/usr/bin/env bash
 
@@ -78,10 +78,13 @@ else
     return
 fi
 
-cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload
+# This line is can be uncommented if the project contains an nginx configuration in the project root
+# cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload
+
+service nginx reload
 ```
 
-This script is intended to run as the startup command, which installs the tracing module into PHP and then restarts the application. 
+This bash script is intended to run as the startup command, which installs the tracing module into PHP and then restarts the nginx service. 
 
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -164,6 +167,12 @@ Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFile
 : **Value**: `true`<br>
 Setting this environment variable to `true` allows the `/home/` mount to persist and be shared with the sidecar.<br>
 
+`DD_AAS_INSTANCE_LOGGING_ENABLED`
+: **Value**: false <br>
+When `true`, log collection is automatically configured for an additional file path: `/home/LogFiles/*$COMPUTERNAME*.log`
+
+<div class="alert alert-info">If your application has multiple instances, make sure that your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicated logs from multiple instances reading the same file.</div>
+    
 {{% collapse-content title=".NET: Additional required environment variables" level="h4" id="dotnet-additional-settings" %}}
 
 For .NET applications, the following environment variables are **required**. See the `Datadog.Tracer.Bundle` [Nuget package README file][1] for more details.
