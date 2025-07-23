@@ -279,9 +279,9 @@ def send_session_ended_span(input_data, output_data) -> None:
 {{< /code-block >}}
 
 Replace `session_status` and `completed` with your preferred tag key and value. Common patterns include:
-- `conversation_ended: true`
-- `session_complete: finished`
-- `chat_status: terminated`
+- `conversation_ended: "true"`
+- `session_complete: "finished"`  
+- `chat_status: "terminated"`
 
 The span should contain meaningful `input_data` and `output_data` that represent the final state of the conversation. This helps the evaluation understand the conversation's context and outcomes when assessing completeness.
 
