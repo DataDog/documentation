@@ -24,7 +24,9 @@ further_reading:
 ---
 {{< partial name="app_and_api_protection/callout.html" >}}
 
-{{< app_and_api_protection_dotnet_setup_options platform="linux">}}
+{{% app_and_api_protection_dotnet_overview showSetup="true" %}}
+
+<!-- {{< app_and_api_protection_dotnet_setup_options platform="linux">}} -->
 
 ## Environments
 
