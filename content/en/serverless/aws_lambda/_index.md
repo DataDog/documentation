@@ -28,6 +28,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/identifying-deprecated-lambda-functions/"
   tag: "Blog"
   text: "Identify deprecated Lambda functions with Datadog"
+- link: "https://www.datadoghq.com/blog/monitoring-lwa-with-datadog/"
+  tag: "Blog"
+  text: "Monitor Lambda-hosted web apps with the Lambda Web Adapter integration"
 ---
 
 Datadog Serverless Monitoring for AWS Lambda gives you visibility into your Lambda functions.

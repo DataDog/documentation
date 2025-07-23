@@ -48,9 +48,11 @@ Metric thresholds that cannot be customized appear grayed out.
 
 Adjust the evaluation time frame to match your business's seasonality or operational patterns. Options include: 1 week, 2 weeks, 15 days, 3 weeks, 1 month, 2 months, and 3 months.
 
-### Step 3: Apply this rule to all resources
+### Step 3: Apply this rule to all resources or add a filter
 
-The rule applies to all resources in your environment.
+You can select whether to apply the rule to **All Resources** or **Some Resources** in your environment.
+
+If you select **Some Resources**, you can filter resources by tag (for example, `team`, `service`, or `environment`) to target specific parts of your business.
 
 ### Step 4: (optional) Label and document the customization
 

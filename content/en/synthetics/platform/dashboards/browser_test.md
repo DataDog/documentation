@@ -19,14 +19,14 @@ The [browser test performance dashboard][1] provides insights about your browser
 
 - **Synthetic test web performance**: If you have Datadog RUM enabled, use the [RUM integration][2] to examine core web vitals and a list of third-party provider test resources.  
   
-  {{< img src="synthetics/dashboards/browser_test_web_performance.png" alt="Synthetic test web performance section of the Synthetics Browser test performance dashboard" style="width:100%" >}}
+  {{< img src="synthetics/dashboards/browser_test_web_performance.png" alt="Synthetic test web performance section of the Synthetic Monitoring Browser test performance dashboard" style="width:100%" >}}
 
 - **Events**: Explore outstanding events from your Synthetic test alerts.
 
-  {{< img src="synthetics/dashboards/browser_test_events.png" alt="Events section of the Synthetics Browser test performance dashboard" style="width:100%" >}}
+  {{< img src="synthetics/dashboards/browser_test_events.png" alt="Events section of the Synthetic Monitoring Browser test performance dashboard" style="width:100%" >}}
 
 
-{{< img src="synthetics/dashboards/browser_test_performance.png" alt="Out-of-the-box Synthetics Browser test performance dashboard" style="width:100%" >}}
+{{< img src="synthetics/dashboards/browser_test_performance.png" alt="Out-of-the-box Synthetic Monitoring Browser test performance dashboard" style="width:100%" >}}
 
 For more information about the data displayed, see [Synthetic Monitoring Metrics][4].
 

@@ -170,7 +170,7 @@ Synthetic Monitoring is a full synthetic testing suite, which includes testing f
 
 - Identify the API endpoints and user journeys that are central to your business and test those frequently.
 - Develop a roadmap of business transactions to test.
-- Use Synthetics in conjunction with [APM and RUM][49].
+- Use Synthetic Monitoring in conjunction with [APM and RUM][49].
 - Review [Synthetic monitoring consumption considerations][23].
 - Reduce test maintenance by using [subtests][24].
 - Make intentional choices in test location selection. Test from where your customers actually are.     
@@ -289,7 +289,7 @@ To begin mapping out your installation patterns, combine the information you gat
 |  | Dev | QA | Staging | Prod |
 | :---- | :---- | :---- | :---- | :---- |
 | **APM** | Deny/Allow | Allow | Allow | Allow |
-| **Synthetics** | Deny | Deny/Allow | Allow | Allow |
+| **Synthetic Monitoring** | Deny | Deny/Allow | Allow | Allow |
 | **Log Management** | Allow | Allow | Allow | Allow |
 | **RUM** | Deny | Deny/Allow |  Allow | Allow |
 | **DBM** | Deny/Allow | Deny/Allow | Allow | Allow |

@@ -28,7 +28,7 @@ To set up Browser Monitoring manually, create an application in Datadog:
 
 1. In Datadog, navigate to the [**Digital Experience** > **Add an Application**][1] page and select the JavaScript (JS) application type.
    - By default, automatic user data collection is enabled. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Browser Data Collected][2].
-   - Enter a name for your application and click **Generate Client Token**. This generates a `clientToken` and an `applicationId` for your application.
+   - Enter a name for your application. This generates a `clientToken` and an `applicationId` for your application automatically.
    - Choose the installation type for the RUM Browser SDK: [npm](#npm), or a hosted version ([CDN async](#cdn-async) or [CDN sync](#cdn-sync)).
    - Define the environment name and service name for your application to use unified service tagging for [RUM & Session Replay][3]. Set a version number for your deployed application in the initialization snippet. For more information, see [Tagging](#tagging).
    - Set the sampling rate of total user sessions collected and use the slider to set the percentage of total [Browser RUM & Session Replay][4] sessions collected. Browser RUM & Session Replay sessions include resources, long tasks, and replay recordings. For more information about configuring the percentage of Browser RUM & Session Replay sessions collected from the total amount of user sessions, see [Configure Your Setup For Browser and Browser RUM & Session Replay Sampling][4].

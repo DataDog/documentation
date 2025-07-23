@@ -1,13 +1,23 @@
 ---
-title: Legacy Google Cloud Run Functions Gen 1
+title: Instrumenting 1st Gen Cloud Run Functions
 ---
 
 ## Overview
-This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Cloud Run Functions Gen 1 (formerly known as Cloud Functions) utilizing serverless compatibility layer. 
 
-This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support, see [2nd Gen Functions][8], and to collect additional metrics, install the [Google Cloud integration][6].
+This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Cloud Run functions (1st gen), previously known as Cloud Functions.
 
-<div class="alert alert-info">Google has integrated Cloud Run functions into Cloud Run UI. Starting August 2025, creating legacy 1st Gen functions will only be possible using the Google Cloud CLI, API, or Terraform. Datadog recommends upgrading your cloud run function to Gen 2 for more features and Datadog support. Reach out to Google for more information on the migration to Cloud Run.</div>
+<div class="alert alert-warning">
+<strong>Migrating to 2nd gen Cloud Run functions</strong> 
+<br/>
+Datadog recommends using 2nd gen <a href="/serverless/google_cloud_run/functions">Cloud Run functions</a>, which offer improved performance, better scaling, and better monitoring with Datadog.
+<br/><br/>
+Google has integrated Cloud Run functions into the Cloud Run UI. Starting August 2025, creating 1st gen functions will only be possible using the Google Cloud CLI, API, or Terraform. Datadog recommends upgrading your Cloud Run function for more features and Datadog support.
+</div>
+
+<div class="alert alert-info">
+<strong>Have you set up your <a href="/integrations/google-cloud-platform/">Google Cloud integration</a>?</strong> Datadog recommends setting up the integration, which collects metrics and logs from Google Cloud services, before proceeding on to instrumentation. Remember to add the <code>cloud asset viewer</code> role to your service account and enable the Cloud Asset Inventory API in Google Cloud.
+</div>
+
 
 ## Setup
 
@@ -20,7 +30,7 @@ This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support,
    ```
 
    Datadog recommends pinning the package versions and regularly upgrading to the latest versions of both `@datadog/serverless-compat` and `dd-trace` to ensure you have access to enhancements and bug fixes.
-   
+
    For more information, see [Tracing Node.js Applications][1].
 
 
@@ -29,7 +39,7 @@ This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support,
    ```js
    require('@datadog/serverless-compat').start();
 
-   // This line must come before importing any instrumented module. 
+   // This line must come before importing any instrumented module.
    const tracer = require('dd-trace').init()
    ```
 
@@ -74,19 +84,19 @@ This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support,
 {{< programming-lang lang="java" >}}
 1. **Install dependencies**. Download the Datadog Java tracer and serverless compatibility layer:
 
-   
+
    Download `dd-java-agent.jar` and `dd-serverless-compat-java-agent.jar` that contains the latest tracer class files, to a folder that is accessible by your Datadog user:
    ```shell
    wget -O /path/to/dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    wget -O /path/to/dd-serverless-compat-java-agent.jar 'https://dtdg.co/latest-serverless-compat-java-agent'
    ```
    For alternative ways to download the agent, see the [Datadog Java Agent documentation][4].
-   
+
    Datadog recommends using the latest versions of both `datadog-serverless-compat` and `dd-java-agent` to ensure you have access to enhancements and bug fixes.
 
 
 2. **Initialize the Datadog Java tracer and serverless compatibility layer**. Add `JAVA_TOOL_OPTIONS` to your runtime environment variable:
-   
+
    Implement and [Auto instrument][1] the Java tracer by setting the Runtime environment variable to instrument your Java cloud function with the Datadog Java tracer and the serverless compatibility layer.
 
    | Name      | Value |
@@ -123,7 +133,7 @@ This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support,
           "github.com/DataDog/datadog-serverless-compat-go/datadogserverlesscompat"
           "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
       )
-      
+
       func init() {
          datadogserverlesscompat.Start()
          tracer.Start(tracer.WithAgentAddr("127.0.0.1:8126"))
@@ -170,21 +180,21 @@ This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support,
 
 8. **Add Service Label in the info panel**. Tag your GCP entity with the `service` label to correlate your traces with your service:
 
-   Add the same value from `DD_SERVICE` to a `service` label on your cloud function, inside the info panel of your function. 
+   Add the same value from `DD_SERVICE` to a `service` label on your cloud function, inside the info panel of your function.
    | Name      | Value                                                       |
    |-----------|-------------------------------------------------------------|
    | `service` | The name of your service matching the `DD_SERVICE` env var. |
-   
+
    For more information on how to add labels, see Google Cloud's [Configure labels for services][12] documentation.
 
-## Example Functions
-The following example contains a sample function with tracing and metrics set up.
+## Example functions
+The following examples contain a sample function with tracing and metrics set up.
 
 {{< programming-lang-wrapper langs="nodejs,python,java,go" >}}
 {{< programming-lang lang="nodejs" >}}
 ```js
 // Example of a simple Cloud Run Function with traces and custom metrics
-// dd-trace must come before any other import. 
+// dd-trace must come before any other import.
 const tracer = require('dd-trace').init()
 
 require('@datadog/serverless-compat').start();
@@ -307,7 +317,7 @@ You can also install the tracer using the following Maven dependency:
                     </execution>
                 </executions>
             </plugin>
-            
+
         </plugins>
     </build>
 </project>
@@ -344,7 +354,7 @@ func init() {
 func helloHTTP(w http.ResponseWriter, r *http.Request) {
 	span := tracer.StartSpan("TEST-SPAN")
 	defer span.Finish()
- 
+
 	err := dogstatsdClient.Incr("nina.test.counter", []string{"runtime:go"}, 1)
 	if err != nil {
 		log.Println("Error incrementing dogstatsd counter: ", err)
@@ -360,15 +370,6 @@ func helloHTTP(w http.ResponseWriter, r *http.Request) {
 - You can view your Cloud Run Functions traces in [Trace Explorer][4]. Search for the service name you set in the `DD_SERVICE` environment variable to see your traces.
 - You can use the [Serverless > Cloud Run Functions][5] page to see your traces enriched with telemetry collected by the [Google Cloud integration][6].
 
-### Enable/disable trace metrics
-
-[Trace metrics][3] are enabled by default. To configure trace metrics, use the following environment variable:
-
-`DD_TRACE_STATS_COMPUTATION_ENABLED`
-: Enables (`true`) or disables (`false`) trace metrics. Defaults to `true`.
-
-  **Values**: `true`, `false`
-
 ## Troubleshooting
 
 ### Enable debug logs
@@ -378,7 +379,7 @@ You can collect [debug logs][7] for troubleshooting. To configure debug logs, us
 `DD_TRACE_DEBUG`
 : Enables (`true`) or disables (`false`) debug logging for the Datadog Tracing Library. Defaults to `false`.
 
-  **Values**: `true`, `false` 
+  **Values**: `true`, `false`
 
 `DD_LOG_LEVEL`
 : Sets logging level for the Datadog Serverless Compatibility Layer. Defaults to `info`.
@@ -393,7 +394,7 @@ You can collect [debug logs][7] for troubleshooting. To configure debug logs, us
 [5]: https://app.datadoghq.com/functions?cloud=gcp&entity_view=cloud_functions
 [6]: /integrations/google_cloud_platform/
 [7]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
-[8]: /serverless/google_cloud_run/functions
+[8]: /serverless/google_cloud/google_cloud_run_functions
 [9]: /getting_started/tagging/unified_service_tagging/
 [10]: https://cloud.google.com/functions/1stgendocs/deploy
 [11]: https://cloud.google.com/sdk/gcloud/reference/functions/deploy

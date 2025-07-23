@@ -106,6 +106,10 @@ The following tags are added for [Docker][3]. It is important to note that [card
 
 Origin detection in non-Kubernetes environments is based on an extension of the DogStatsD protocol in [Datagram Format and Shell Usage][2]. To enable the feature in the Agent, set the `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT` environment variable to `true`.
 
+<div class="alert alert-warning">
+  By default, origin detection is enabled in all DogStatsD clients, but it is not enabled by default in the Datadog Agent. To disable origin detection in a client, see the documentation for the specific DogStatsD library you're using.
+</div>
+
 **Note**: Origin detection is not supported for Fargate environments.
 
 [1]: /developers/dogstatsd/unix_socket/

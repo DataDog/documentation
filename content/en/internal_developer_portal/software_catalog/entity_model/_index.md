@@ -44,6 +44,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/service-catalog-schema-v3/"
   tag: "Blog"
   text: "Improve developer experience and collaboration with Service Catalog schema version 3.0"
+algolia:
+  tags: [ "codeLocations" ]
 ---
 
 {{< site-region region="gov" >}}
