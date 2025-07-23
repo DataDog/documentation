@@ -8,7 +8,7 @@ further_reading:
       text: 'Learn about LLM Observability'
     - link: '/llm_observability/evaluations'
       tag: 'Evaluations'
-      text: 'Configure Evaluations to measure quality'
+      text: 'Configure Evaluations on your application'
     - link: '/llm_observability/instrumentation/custom'
       tag: 'Custom Instrumentation'
       text: 'Custom instrumentation'
