@@ -17,7 +17,7 @@ algolia:
 ## Overview
 The [Datadog UNIX Agent][4] brings host-level monitoring to IBM AIX (PowerPC 8 +) so you can visualize system metrics, enable additional Datadog products, and troubleshoot services that still run on-prem.
 
-Currently, the UNIX Agent supports Infrastructure Monitoring and Custom Metrics using [DogStatsD][11]. Other products like APM, Live Process Monitoring, Cloud Network Monitoring, and Log Management are not supported on UNIX Agent. See [Supported Platforms][5] for the complete list of supported AIX versions.
+The UNIX Agent supports Infrastructure Monitoring and Custom Metrics using [DogStatsD][11]. Other products like APM, Live Process Monitoring, Cloud Network Monitoring, and Log Management are not supported on UNIX Agent. See [Supported Platforms][5] for the complete list of supported AIX versions.
 
 This page walks you through installing, operating, and removing the Datadog UNIX Agent on AIX.
 
@@ -31,7 +31,7 @@ This page walks you through installing, operating, and removing the Datadog UNIX
 
 ### Install Agent
 
-To install the Agent on AIX, follow the [in-app instructions in Fleet Automation][6], and simply run the generated script on your hosts.
+To install the Agent on AIX, follow the [in-app instructions in Fleet Automation][6], and run the generated script on your hosts.
 
 {{< img src="/agent/basic_agent_usage/aix_img_july_25.png" alt="The Datadog Agent installation step for hosts AIX." style="width:90%;">}}
 
@@ -56,10 +56,10 @@ You can find the Agent installation log in the `dd-aix-install.log` file. To dis
 ## Configure the Agent
 
 The [Datadog Agent configuration file][7] is located in `/etc/datadog-agent/datadog.yaml`. This YAML file holds the host-wide connection details used to send data to Datadog including:
- * `api_key`: your organization’s [Datadog API key][8]  
+ * `api_key`: your organization's [Datadog API key][8]  
  - `site`: target Datadog region (`datadoghq.com`, - `datadoghq.eu`, `us3.datadoghq.com`, `us5.datadoghq.com`, `ddog-gov.com`)  
 * `proxy`: HTTP/HTTPS proxy endpoints for outbound traffic (see [Datadog Agent Proxy Configuration][9])  
- Default tags, log level, and Datadog product configurations.
+ Default tags, log level, and Datadog configurations.
 
 A fully commented reference file, located in `/etc/datadog-agent/datadog.yaml.example`, lists every available option for comparison or copy-paste. 
 
@@ -92,7 +92,7 @@ Additional integrations
 : `ibm_was` (WebSphere Application Server)
 
 
-**Note:** Metric coverage can differ from the Unix, Linux, Windows, and macOS integrations.
+**Note:** Metric coverage can differ from the UNIX, Linux, Windows, and macOS integrations.
 
 
 ## Monitor Agent uptime
