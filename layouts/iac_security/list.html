@@ -22,7 +22,7 @@
     {{ $pad := newScratch }}
 
     <!-- Build slice of unique cloud_providers to validate against url param `cloud_providers` on page load -->
-    {{ range ($list.GroupByParam "group-id") }}
+    {{ range ($list.GroupByParam "group_id") }}
         {{ range .Pages }}
             {{ $pad.Set "providers" ( union ($pad.Get "providers") (slice (( .Params.meta.cloud_provider ))) ) }}
             {{ $pad.Set "frameworks" ( union ($pad.Get "frameworks") (slice (( .Params.meta.framework ))) ) }}
@@ -233,7 +233,7 @@
         {{/*  DATA TABLE  */}}
         <div class="col-12 order-1">
             <div class="ps-0">
-                {{ range $list.GroupByParam "group-id" }}
+                {{ range $list.GroupByParam "group_id" }}
                 {{ $group_id := .Key }}
                 {{ $ruleset_title := index (index $ruleset_params.rulesets .Key) "title"}}
                 <div
