@@ -41,9 +41,11 @@ Install the Datadog Agent by following the [setup instructions for Linux hosts][
 {{< tabs >}}
 {{% tab "AMD 64 Platforms" %}}
 
-Download the latest [.NET Tracer package][3] that supports your operating system and architecture.
+Download the latest [Datadog .NET Tracer package][3] that supports your operating system and architecture.
 
-**Note on version**: replace <TRACER_VERSION> with the latest three component version of the library (ej: 3.21.0)
+<div class="alert alert-warning">
+  *Note on version:* replace *<TRACER_VERSION>* with the latest three component version of the library (ej: 3.21.0)
+</div>
 
 ```bash
 wget -O datadog-dotnet-apm-<TRACER_VERSION>.tar.gz 'https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>'
@@ -73,6 +75,12 @@ sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.arm64.tar.gz &
 
 {{% /tab %}}
 {{< /tabs >}}
+
+<div class="alert alert-warning">
+  If you are having issues installing the Tracer library check the [Tracer Installation guide][5]
+  *Note on version:* replace *<TRACER_VERSION>* with the latest three component version of the library (ej: 3.21.0)
+</div>
+
 
 {{% collapse-content title="APM Tracing Enabled" level="h4" %}}
 Set the required environment variables and start your .NET application:
@@ -121,3 +129,4 @@ If you encounter issues while setting up App and API Protection for your Java ap
 [2]: /agent/?tab=Linux
 [3]: https://github.com/DataDog/dd-trace-dotnet/releases
 [4]: /security/application_security/setup/dotnet/troubleshooting
+[5]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=linux
