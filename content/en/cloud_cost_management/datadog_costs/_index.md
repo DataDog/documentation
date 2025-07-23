@@ -38,19 +38,28 @@ There is **no additional charge** for Datadog Costs, and it is available for bot
 
 ## Required permissions
 
-Datadog Costs requires specific permissions to ensure proper access control and data security. To enable Datadog Costs, you must have the following permissions:
+Datadog Costs requires different permissions depending on whether you're enabling the feature or viewing the data:
+
+### To enable Datadog Costs (opt-in)
+To activate Datadog Costs for your organization, you must have the following permissions:
 
 | Permission | Description |
 |------------|-------------|
 | `billing_read` | Read access to billing information. |
 | `usage_read` | Read access to usage data. |
-| `cloud_cost_management_read` | Read access to Cloud Cost Management (included in the Datadog Admin role). **Required to view Datadog Costs data in Cloud Cost Management.** |
+
+### To view Datadog Costs in Cloud Cost Management
+After Datadog Costs is enabled, users need the following permission to view the data:
+
+| Permission | Description | Available Roles |
+|------------|-------------|-----------------|
+| `cloud_cost_management_read` | Read access to Cloud Cost Management. **Required to view Datadog Costs data in Cloud Cost Management.** | • Datadog Admin<br>• Datadog Read Only (default)<br>• Custom roles with CCM read access |
 
 ## Enabling Datadog Costs
 
 To activate Datadog Costs, navigate to the [**Plan & Usage** page][7] and click **Get Started** in the modal to "View Datadog Costs in Cloud Cost Management". Alternatively, you can contact your account representative or [Datadog Support][8].
 
-After opting in to Datadog Costs, a confirmation message appears and cost data starts populating in the CCM Explorer within 2-3 hours. For more information, see the [Cost Details documentation][9].
+After opting in to Datadog Costs, a confirmation message appears and cost data starts populating in the CCM Explorer within 2-3 hours.
 
 ## Data availability to sub-organizations
 
@@ -87,4 +96,3 @@ You can use out-of-the-box tags to break down and allocate your Datadog cost dat
 [6]: /account_management/plan_and_usage/cost_details/#cost-chargebacks
 [7]: https://app.datadoghq.com/billing/usage
 [8]: /help/
-[9]: /account_management/billing/usage_attribution/
