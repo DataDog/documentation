@@ -2,7 +2,6 @@
 title: LLM Observability Custom Instrumentation
 aliases:
     - /tracing/llm_observability/trace_an_llm_application
-    - /llm_observability/
     - /llm_observability/setup
 further_reading:
     - link: 'https://www.datadoghq.com/blog/llm-observability-chain-tracing/'
