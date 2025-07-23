@@ -15,7 +15,7 @@ Live call routing is provisioned by Datadog. To enable it for your organization,
 
 Live call routing connects phone calls to your On-Call team. When someone calls your dedicated number, the system handles the call according to your configuration. 
 
-Datadog On-Call supports two route types:
+Datadog On-Call supports two routing types:
 
 - **Direct call routing**: Connects the caller to an active responder, following the escalation policy for the On-Call team. Enables real-time coordination during critical incidents.
 - **Voicemail routing**: Prompts the caller to leave a voicemail, then converts the voice message to a page for the On-Call team. Useful for non-technical callers or third-party vendors who need to report issues without a live conversation.
