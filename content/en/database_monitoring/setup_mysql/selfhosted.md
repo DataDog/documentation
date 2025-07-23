@@ -209,7 +209,7 @@ instances:
 
 To configure an integration for an Agent running in a Docker container, you have a couple of methods available, all of which are covered in detail in the [Docker Configuration Documentation][1].
 
-The examples below show how to use [Docker Labels][2] and [Autodiscovery Templates][3] to configure the Postgres integration.
+The examples below show how to use [Docker Labels][2] and [Autodiscovery Templates][3] to configure the MySQL integration.
 
 **Note**: The Agent must have read access to the Docker socket for label-based Autodiscovery to work.
 
@@ -243,7 +243,7 @@ You can also specify labels in a `Dockerfile`, allowing you to build and deploy 
 ```Dockerfile
 FROM gcr.io/datadoghq/agent:<AGENT_VERSION>
 
-LABEL "com.datadoghq.ad.checks"='{"mysql": {"init_config": {}, "instances": [{"dbm": true, "host": "<HOST>", "port": 5432, "username": "datadog", "password": "ENC[datadog_user_database_password]"}]}}'
+LABEL "com.datadoghq.ad.checks"='{"mysql": {"init_config": {}, "instances": [{"dbm": true, "host": "<HOST>", "port": <PORT>, "username": "datadog", "password": "ENC[datadog_user_database_password]"}]}}'
 ```
 
 To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][5] and declare the password using the `ENC[]` syntax. Alternatively, see the [Autodiscovery template variables documentation][6] to provide the password as an environment variable.
@@ -314,7 +314,7 @@ Using the [Operator instructions in Kubernetes and Integrations][3] as a referen
     ```shell
     kubectl apply -f datadog-agent.yaml
     ```
-  
+
 ### Helm
 
 Using the [Helm instructions in Kubernetes and Integrations][4] as a reference, follow the steps below to set up the MySQL integration:
@@ -397,12 +397,12 @@ metadata:
             }
           ]
         }
-      }      
+      }
 spec:
   ports:
-  - port: 5432
+  - port: <PORT>
     protocol: TCP
-    targetPort: 5432
+    targetPort: <PORT>
     name: mysql
 ```
 
