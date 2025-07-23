@@ -122,9 +122,7 @@ instances:
 ### One Agent connecting to multiple hosts
 It is common to configure a single Agent host to connect to multiple remote database instances (see [Agent installation architectures][1006] for DBM). To connect to multiple hosts, create an entry for each host in the SQL Server integration config.
 
-Datadog recommends using one Agent to monitor no more than 30 database instances.
-
-Previous benchmarks show that one Agent running on a `t4g.medium` EC2 instance (2 CPUs and 4GB of RAM) can successfully monitor 30 RDS `db.t3.medium` instances (2 CPUs and 4GB of RAM).
+<div class="alert alert-info">Datadog recommends using one Agent to monitor no more than 30 database instances.<br /><br />Benchmarks show that one Agent running on a `t4g.medium` EC2 instance (2 CPUs and 4GB of RAM) can successfully monitor 30 RDS `db.t3.medium` instances (2 CPUs and 4GB of RAM).</div>
 
 ```yaml
 init_config:
