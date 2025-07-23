@@ -120,7 +120,7 @@ You can add a budget to dashboards in two ways:
 
   {{< img src="cloud_cost/budgets/budget-share-dashboard-cropped.png" alt="Click Share and Save to dashboard to add a budget report to a dashboard"  style="width:100%;">}}
 
-- From a dashboard, add the Budget Summary widget.
+- From a dashboard, add the **Budget Summary** widget.
 
   {{< img src="cloud_cost/budgets/budget-add-widget-cropped.png" alt="Search and add the Budget Summary widget from any dashboard"  style="width:100%;">}}
 
