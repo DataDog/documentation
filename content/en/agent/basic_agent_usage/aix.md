@@ -77,19 +77,19 @@ Each integration has its own sub-directory, `<INTEGRATION>.d/`, that contains:
 ## Available integrations
 
 Out of the box integrations
-: cpu
-: filesystem
-: iostat
-: load
-: memory
-: uptime
-: disk
-: network
+: `cpu`
+: `filesystem`
+: `iostat`
+: `load`
+: `memory`
+: `uptime`
+: `disk`
+: `network`
 
 Additional integrations
-: process
-: lparstats
-: ibm_was (WebSphere Application Server)
+: `process`
+: `lparstats`
+: `ibm_was` (WebSphere Application Server)
 
 
 **Note:** Metric coverage can differ from the Unix, Linux, Windows, and macOS integrations.
