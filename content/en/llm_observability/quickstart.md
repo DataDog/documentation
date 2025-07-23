@@ -9,7 +9,7 @@ further_reading:
     - link: '/llm_observability/evaluations'
       tag: 'Evaluations'
       text: 'Configure Evaluations on your application'
-    - link: '/llm_observability/instrumentation/custom'
+    - link: '/llm_observability/instrumentation/custom_instrumentation'
       tag: 'Custom Instrumentation'
       text: 'Custom instrumentation'
 ---
