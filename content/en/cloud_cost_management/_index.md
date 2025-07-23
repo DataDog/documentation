@@ -70,7 +70,7 @@ Visualize infrastructure spend alongside related utilization metrics with a rete
 
 When creating a dashboard, select **Cloud Cost** as the data source for your search query.
 
-{{< img src="cloud_cost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation" style="width:100%;" >}}
+{{< img src="cloud_cost/cloud_cost_data_source-1.png" alt="Cloud Cost available as a data source in dashboard widget creation" style="width:80%;" >}}
 
 Optionally, you can programmatically export a timeseries graph of your cloud cost data by using the [Metrics API][2].
 
@@ -80,7 +80,7 @@ Visualize daily Datadog spending alongside related utilization metrics with a re
 
 When creating a dashboard, select **Cloud Cost** as the data source for your search query.
 
-{{< img src="cloud_cost/datadog_costs/dashboard.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:100%;" >}}
+{{< img src="cloud_cost/datadog_costs/dashboard-updated.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:80%;" >}}
 
 Optionally, you can programmatically export a timeseries graph of your Datadog cost data by using the [Metrics API][2].
 
@@ -127,6 +127,10 @@ The table below describes the impact of these permissions in both Cloud Cost Man
 | Resource Catalog (external)       | Permission Required to view cost data       | N/A                                               |
 | API Queries for Cost Data     | Permission Required                           | N/A                                               |
 
+### Data Access Control Preview
+More granular tag-level restrictions are available as part of the [Data Access Control Preview][6]. To request preview access,
+please fill out [this form][7].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -136,3 +140,5 @@ The table below describes the impact of these permissions in both Cloud Cost Man
 [3]: /monitors/types/cloud_cost/
 [4]: /cloud_cost_management/container_cost_allocation
 [5]: /cloud_cost_management/tag_pipelines
+[6]: /account_management/rbac/data_access/
+[7]: https://www.datadoghq.com/product-preview/data-access-control/
