@@ -247,7 +247,7 @@ This check helps understand the overall mood of the conversation, gauge user sat
 |---|---|---|
 | Evaluated on Input and Output | Evaluated using LLM | Sentiment flags the emotional tone or attitude expressed in the text, categorizing it as positive, negative, or neutral.   |
 
-#### Conversation Completeness
+#### Conversation completeness
 
 This check evaluates whether your LLM chatbot can successfully carry out a full conversation by effectively meeting the user's needs from start to finish. This conversational measure serves as a proxy for gauging user satisfaction over the course of a conversation and is especially valuable for LLM chatbot applications.
 
@@ -285,7 +285,7 @@ Replace `session_status` and `completed` with your preferred tag key and value. 
 
 The span should contain meaningful `input_data` and `output_data` that represent the final state of the conversation. This helps the evaluation understand the conversation's context and outcomes when assessing completeness.
 
-##### Conversation Completeness configuration
+##### Conversation completeness configuration
 
 After instrumenting your application to send session-end spans, configure the evaluation to run only on conversations with your specific tag. This targeted approach ensures the evaluation analyzes complete conversations rather than partial interactions.
 
@@ -299,7 +299,7 @@ After instrumenting your application to send session-end spans, configure the ev
    - In the **tags** section, specify the tag you configured in your instrumentation (for example, `session_status:completed`).
    - Set the **sampling percentage** to 100% to ensure all completed conversations are evaluated.
 
-This configuration ensures the evaluation only triggers when a conversation reaches completion, providing accurate assessments of how well your LLM application resolves user intentions throughout entire conversation sessions.
+This configuration ensures evaluations run only on complete conversations. This provides accurate assessments of user intention resolution.
 
 
 ### Security and Safety evaluations
