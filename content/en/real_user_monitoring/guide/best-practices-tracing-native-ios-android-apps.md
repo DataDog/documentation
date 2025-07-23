@@ -23,9 +23,9 @@ further_reading:
 
 Datadog's Trace SDK for [iOS][1] and [Android][2] lets you add APM spans to your mobile apps. This guide covers usage, key use cases, and sampling rates, with or without using the Datadog RUM SDK.
 
-Native mobile tracing gives you precise control over what operations are measured by manually instrumenting spans in your iOS or Android app code. This approach works independently of Datadog RUM, but can also be used alongside it for deeper visibility into user experiences, code level performance, and backend interactions. You can also use [OpenTelemetry for iOS][3] or [OpenTelemetry for Android][4] for custom instrumentation.
-
 **Note**: When using the Trace SDK independently (without the RUM SDK), root spans for outgoing network requests do not get automatically created. Therefore, you need to manually start and stop spans on the client side to create frontend-to-backend distributed APM traces.
+
+Native mobile tracing gives you precise control over what operations are measured by manually instrumenting spans in your iOS or Android app code. This approach works independently of Datadog RUM, but can also be used alongside it for deeper visibility into user experiences, code level performance, and backend interactions. You can also use [OpenTelemetry for iOS][3] or [OpenTelemetry for Android][4] for custom instrumentation.
 
 This guide focuses on native iOS and Android apps. For other mobile platforms, see the following documentation:
 
@@ -44,18 +44,18 @@ You can create distributed traces that span from your mobile frontend to your ba
 
 {{< tabs >}}
 {{% tab "iOS" %}}
-Use the [manual context propagation][1] to inject trace headers into network requests. Use `setActive()` to link child spans to a parent span ([API reference][2]).
+Use the [manual context propagation][1] (see step 8) to inject trace headers into network requests. Use `setActive()` to link child spans to a parent span ([API reference][2]).
 
-[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/ios?tab=swiftpackagemanagerspm#:~:text=(Optional)%20To%20distribute%20traces%20between%20your%20environments%2C%20for%20example%20frontend%20%2D%20backend%2C%20you%20can%20either%20do%20it%20manually%20or%20leverage%20our%20auto%20instrumentation.%20In%20both%20cases%2C%20network%20traces%20are%20sampled%20with%20an%20adjustable%20sampling%20rate.%20A%20sampling%20of%2020%25%20is%20applied%20by%20default
-[2]: https://swiftpackageindex.com/datadog/dd-sdk-ios/develop/documentation/datadogtrace/otspan/setactive/
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/ios?tab=swiftpackagemanagerspm
+[2]: https://swiftpackageindex.com/datadog/dd-sdk-ios/develop/documentation/datadogtrace/otspan/setactive()
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Use [OkHttp parent span helpers][1] or [OpenTelemetry addParentSpan][2] to link spans across threads.
+Use [OkHttp parent span helpers][1] (see step 10) or [OpenTelemetry addParentSpan][2] to link spans across threads.
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/android/?tab=kotlin#okhttp
-[2]: /tracing/trace_collection/custom_instrumentation/android/otel/?tab=kotlin#:~:text=(Optional)%20Add%20local%20parent%20span%20to%20the%20span%20generated%20around%20the%20OkHttp%20request%20in%20RUM%3A
+[2]: /tracing/trace_collection/custom_instrumentation/android/otel/?tab=kotlin
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -101,40 +101,15 @@ See [more Android examples][1].
 
 Sampling in native mobile tracing controls which spans and traces are ingested in Datadog, helping you balance visibility with data volume. When you manually instrument spans in your app, the ones that are sampled in go through the APM retention filters which determine which ones end up being displayed for analysis in the Datadog interface.
 
-### Sampling parameters
-
-The following sampling rate parameters control different aspects of data collection:
-
-{{< tabs >}}
-{{% tab "iOS" %}}
-
-| Parameter                                   | Description                                                      |
-|---------------------------------------------|------------------------------------------------------------------|
-| `Trace.Configuration.sampleRate`                          | Controls the percentage of manually instrumented spans collected by the tracer.|
-| `urlSessionTracking.firstPartyHostsTracing.sampleRate` | Controls the percentage of network requests traced for first-party hosts. |
-
-**Note**: `RUM.sessionSampleRate` controls RUM session sampling and does not affect trace sampling rates. When using the Trace SDK independently of RUM, trace sampling is controlled only by the parameters listed above.
-
-{{% /tab %}}
-{{% tab "Android" %}}
-
-| Parameter                                   | Description                                                      |
-|---------------------------------------------|------------------------------------------------------------------|
-| `AndroidTracer.Builder.setSampleRate`                          | Controls the percentage of manually instrumented spans collected by the tracer.|
-| `DatadogInterceptor.Builder.setTraceSampler` | Controls the percentage of network requests traced for first-party hosts. |
-
-**Note**: `RUM.sessionSampleRate` controls RUM session sampling and does not affect trace sampling rates. When using the Trace SDK independently of RUM, trace sampling is controlled only by the parameters listed above.
-
-{{% /tab %}}
-{{< /tabs >}}
-
 ### How sampling works
 
 Sampling affects different types of spans you create in your mobile app:
 
-- **Local span sampling** applies to manually instrumented spans (like performance profiling spans). It's controlled by the `Trace.sampleRate` parameter. For example, if you set this rate to 50, the Trace SD produces spans in 50% of the cases, and send all of those to Datadog. Visibility of those spans in the UI depends on your APM retention filters. Each span event includes the `_dd.agent_psr` field (the sampling rate) and `metrics._sampling_priority_v1` (1 for sampled, 0 for not sampled).
+**Note**: The sampling behavior described below applies to iOS SDK `v2.9.0+` and Android SDK `v1.18.0+`. For earlier versions, see the respective SDK documentation for platform-specific sampling behavior.
 
-- **Distributed trace sampling** applies to traces that cross service boundaries, such as network requests to your backend (relevant for the "Wrap a frontend-to-backend distributed trace" use case). This is controlled by the `urlSessionTracking.firstPartyHostsTracing.sampleRate` parameter for iOS and `DatadogInterceptor.Builder.setTraceSampler` parameter for Android. If set to 50, only half of backend requests have the sampled flag set to true, as indicated by the [W3C trace context][7]. All Datadog agents honor this decision, so you see 50% of distributed traces in the UI.
+- **Local span sampling** applies to manually instrumented spans (like performance profiling spans). It's controlled by the `Trace.sampleRate` parameter. For example, if you set this rate to 50, the Trace SD produces spans in 50% of the cases, and sends all of those to Datadog. Visibility of those spans in the UI depends on your APM retention filters. Each span event includes the `_dd.agent_psr` field (the sampling rate) and `metrics._sampling_priority_v1` (1 for sampled, 0 for not sampled).
+
+- **Distributed trace sampling** applies to traces that cross service boundaries, such as network requests to your backend (relevant for the "Wrap a frontend-to-backend distributed trace" use case). This is controlled by the `urlSessionTracking.firstPartyHostsTracing.sampleRate` parameter for iOS and `DatadogInterceptor.Builder.setTraceSampler` parameter for Android. If set to 50, only half of backend requests have the sampled flag set to true, as indicated by the [W3C trace context][7]. All Datadog Agents honor this decision, so you see 50% of distributed traces in the UI.
 
 Sampling rates are applied independently. The most restrictive rate determines what data is visible in the UI for a given session or trace. For example:
 - If you set a low RUM session sample rate (for example, 1%), only 1% of user sessions are recorded for RUM, but you can still trace all network requests within those sessions by setting the network tracing sample rate to 100%.
@@ -147,7 +122,32 @@ To sample 1% of all app sessions and trace all API network requests within those
 
 Sampling decisions are communicated through trace headers, ensuring all services in a distributed trace use the same sampling choice.
 
-**Note**: The sampling behavior described above applies to iOS SDK `v2.9.0+` and Android SDK `v1.18.0+`. For earlier versions, see the respective SDK documentation for platform-specific sampling behavior.
+### Sampling parameters
+
+The following sampling rate parameters control different aspects of data collection:
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+| Parameter                                   | Description                                                      | Example |
+|---------------------------------------------|------------------------------------------------------------------|---------|
+| `Trace.Configuration.sampleRate`                          | Controls the percentage of manually instrumented spans collected by the tracer. | `50` = 50% of spans |
+| `urlSessionTracking.firstPartyHostsTracing.sampleRate` | Controls the percentage of network requests traced for first-party hosts. | `100` = 100% of requests |
+
+**Note**: `RUM.sessionSampleRate` controls RUM session sampling and does not affect trace sampling rates. When using the Trace SDK independently of RUM, trace sampling is controlled only by the parameters listed above.
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+| Parameter                                   | Description                                                      | Example |
+|---------------------------------------------|------------------------------------------------------------------|---------|
+| `AndroidTracer.Builder.setSampleRate`                          | Controls the percentage of manually instrumented spans collected by the tracer. | `50` = 50% of spans |
+| `DatadogInterceptor.Builder.setTraceSampler` | Controls the percentage of network requests traced for first-party hosts. | `100` = 100% of requests |
+
+**Note**: `RUM.sessionSampleRate` controls RUM session sampling and does not affect trace sampling rates. When using the Trace SDK independently of RUM, trace sampling is controlled only by the parameters listed above.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further reading
 
@@ -164,4 +164,4 @@ Sampling decisions are communicated through trace headers, ensuring all services
 [9]: /real_user_monitoring/flutter/
 [10]: /real_user_monitoring/kotlin_multiplatform/
 [11]: /real_user_monitoring/unity/
-[12]: /real_user_monitoring/correlate_with_other_telemetry/apm/
+[12]: /real_user_monitoring/correlate_with_other_telemetry/
