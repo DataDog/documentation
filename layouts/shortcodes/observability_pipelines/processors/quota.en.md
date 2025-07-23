@@ -19,6 +19,9 @@ To set up the quota processor:
         - Click **Download as CSV** for an example of how to structure the CSV.  
         - Drag and drop your overrides CSV to upload it. You can also click **Browse** to select the file to upload it. See the [Overrides example](#overrides-example) for more information.  
     b. Click **Add Field** if you want to add another partition.
+1. In the **When quota is met** dropdown menu, select if you want to **drop events**, **keep events**, or **send events to overflow destination**, when the quota has been met.
+    1. If you select **send events to overflow destination**, an overflow destination is added with the following cloud storage options: **Amazon S3**, **Azure Blob**, and **Google Cloud**.
+    1. Select the cloud storage you want to send overflow logs to. See the setup instructions for your cloud storage: [Amazon S3][5002], [Azure Blog Storage][5003], or [Google Cloud Storage][5004].
 
 #### Examples
 
@@ -57,3 +60,6 @@ If you are partitioning by `service` and have two services: `a` and `b`, you can
 |  `b`    | Events | 50    |
 
 [5001]: /monitors/types/metric/?tab=threshold
+[5002]: /observability_pipelines/destinations/amazon_s3/
+[5003]: /observability_pipelines/destinations/azure_storage/
+[5004]: /observability_pipelines/destinations/google_cloud_storage/
