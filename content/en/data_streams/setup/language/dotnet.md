@@ -14,15 +14,15 @@ aliases:
 
 ### Supported libraries
 
-| Technology        | Library                         | Minimal tracer version | Recommended tracer version |
-|-------------------|---------------------------------|------------------------|----------------------------|
-| Kafka             | [Confluent.Kafka][3]            | 2.28.0                 | 2.41.0 or later            |
-| RabbitMQ          | [RabbitMQ.Client][4]            | 2.28.0                 | 2.37.0 or later            |
-| Amazon SQS        | [Amazon SQS SDK][5]             | 2.48.0                 | 2.48.0 or later            |
-| Amazon SNS        | [Amazon SNS SDK][6]             | 3.6.0                  | 3.6.0 or later             |
-| Amazon Kinesis    | [Amazon Kinesis SDK][7]         | 3.7.0                  | 3.7.0 or later             |
-| IBM MQ            | [IBMMQDotnetClient][8]          | 2.49.0                 | 2.49.0 or later            |
-| Azure Service Bus <br><br> (requires [additional setup][9]) | [Azure.Messaging.ServiceBus][10] | 2.53.0                 | 2.53.0 or later            |
+| Technology                                                  | Library                          | Minimal tracer version                                                                   | Recommended tracer version                                                                   |
+|-------------------------------------------------------------|----------------------------------|------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| Kafka                                                       | [Confluent.Kafka][3]             | {{< dsm-tracer-version lang="dotnet" lib="confluent-kafka" type="minimal" >}}            | {{< dsm-tracer-version lang="dotnet" lib="confluent-kafka" type="recommended" >}}            |
+| RabbitMQ                                                    | [RabbitMQ.Client][4]             | {{< dsm-tracer-version lang="dotnet" lib="rabbitmq-client" type="minimal" >}}            | {{< dsm-tracer-version lang="dotnet" lib="rabbitmq-client" type="recommended" >}}            |
+| Amazon SQS                                                  | [Amazon SQS SDK][5]              | {{< dsm-tracer-version lang="dotnet" lib="amazon-sqs-sdk" type="minimal" >}}             | {{< dsm-tracer-version lang="dotnet" lib="amazon-sqs-sdk" type="recommended" >}}             |
+| Amazon SNS                                                  | [Amazon SNS SDK][6]              | {{< dsm-tracer-version lang="dotnet" lib="amazon-sns-sdk" type="minimal" >}}             | {{< dsm-tracer-version lang="dotnet" lib="amazon-sns-sdk" type="recommended" >}}             |
+| Amazon Kinesis                                              | [Amazon Kinesis SDK][7]          | {{< dsm-tracer-version lang="dotnet" lib="amazon-kinesis-sdk" type="minimal" >}}         | {{< dsm-tracer-version lang="dotnet" lib="amazon-kinesis-sdk" type="recommended" >}}         |
+| IBM MQ                                                      | [IBMMQDotnetClient][8]           | {{< dsm-tracer-version lang="dotnet" lib="ibmmqdotnetclient" type="minimal" >}}          | {{< dsm-tracer-version lang="dotnet" lib="ibmmqdotnetclient" type="recommended" >}}          |
+| Azure Service Bus <br><br> (requires [additional setup][9]) | [Azure.Messaging.ServiceBus][10] | {{< dsm-tracer-version lang="dotnet" lib="azure-messaging-servicebus" type="minimal" >}} | {{< dsm-tracer-version lang="dotnet" lib="azure-messaging-servicebus" type="recommended" >}} |
 
 ### Installation
 

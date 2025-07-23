@@ -85,7 +85,7 @@ For an overview of your Cloud Security and App and API Protection findings, sort
 
 To get more detail, use [Findings][7] to review and remediate your organization's security findings concerning misconfigurations, vulnerabilities, and identity risks. View detailed information about a finding, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
 
-{{< img src="security/csm/findings_page_1.png" alt="Cloud Security Findings page" width="100%">}}
+{{< img src="security/csm/findings_page_2.png" alt="Cloud Security Findings page" width="100%">}}
 
 ## Investigate resources
 
