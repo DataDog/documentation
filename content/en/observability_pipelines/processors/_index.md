@@ -15,7 +15,7 @@ Use Observability Pipelines' processors to parse, structure, and enrich your log
 
 You can organize your processors into logical groups to help you manage them. Each processor group has a Group Filter so that those processors are only applied to specific logs. For example, if you want the group processors to only process logs coming from `vpc`, then use the group filter `source:vpc`. You can also add filters for each individual processor.
 
-Processor groups and the processors within each group are executed from top to bottom. The order of the processors is important because logs are checked by each processor, but only logs that match the processor's filters are processed. To modify the order of the processors, use the drag handle on the top left corner of the processor you want to move.
+Processor groups and the processors within each group are executed from top to bottom. The order of the processors is important because logs are checked by each processor, but only logs that match the processor's filters are processed. To change the order of the processors, use the drag handle on the top left corner of the processor you want to move.
 
 **Notes**:
 - Adding multiple processor groups for a destination is in Preview and only available for Worker versions 2.7 and later.

@@ -21,7 +21,7 @@ To set up the quota processor:
     b. Click **Add Field** if you want to add another partition.
 1. In the **When quota is met** dropdown menu, select if you want to **drop events**, **keep events**, or **send events to overflow destination**, when the quota has been met.
     1. If you select **send events to overflow destination**, an overflow destination is added with the following cloud storage options: **Amazon S3**, **Azure Blob**, and **Google Cloud**.
-    1. Select the cloud storage you want to send overflow logs to. See the setup instructions for your cloud storage: [Amazon S3][5002], [Azure Blog Storage][5003], or [Google Cloud Storage][5004].
+    1. Select the cloud storage you want to send overflow logs to. See the setup instructions for your cloud storage: [Amazon S3][5002], [Azure Blob Storage][5003], or [Google Cloud Storage][5004].
 
 #### Examples
 
