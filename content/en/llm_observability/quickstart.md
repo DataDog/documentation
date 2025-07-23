@@ -159,4 +159,4 @@ See below for a simple application that can be used to begin exploring the LLM O
 [2]: /llm_observability/setup/sdk/nodejs
 [3]: https://app.datadoghq.com/llm/traces
 [4]: /llm_observability/evaluations
-[5]: /llm_observability/instrumentation/custom
+[5]: /llm_observability/instrumentation/custom_instrumentation
