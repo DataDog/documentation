@@ -31,7 +31,7 @@ Datadog provides five [built-in case types][1], each designed for common workflo
 
 ##### Create a custom case type
 
-1. Navigate to **Settings > Shared Settings > Case Types** [2].
+1. Navigate to [**Settings > Shared Settings > Case Types**][2].
 2. Click **+ Create Case Type**.
 3. Provide a **Name** and an optional **Description**.
 4. Save your new case type.
@@ -57,7 +57,7 @@ Your new case type is available for:
 * API-based creation
 * Automated case creation through Workflows
 
-## Custom Attributes
+## Custom attributes
 
 Custom attributes allow you to capture the structured data your team needs to work efficiently and report effectively. All case types, whether Datadog-provided or custom, include five reserved attributes that cannot be removed or modified:
 
@@ -69,7 +69,7 @@ Custom attributes allow you to capture the structured data your team needs to wo
 
 {{< img src="/service_management/case_management/customization/add_custom_attribute.png" alt="Add a custom attribute to a case type" style="width:100%;" >}}
 
-You can add attributes that reflect your team's specific needs, such as escalation levels, component owners, business impact, or external links. To add a Custom Attribute:
+You can add attributes that reflect your team's specific needs, such as escalation levels, component owners, business impact, or external links. To add a custom attribute:
 
 1. Navigate to [**Settings > Shared Settings > Case Types**][2].
 2. Click the desired case type.
@@ -83,8 +83,6 @@ You can add attributes that reflect your team's specific needs, such as escalati
      * URL
      * Number
    * Choose whether to allow multiple values for this attribute.
-
-After this is saved, the attribute is available for use.
 
 ## Further reading
 
