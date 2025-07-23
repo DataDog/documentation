@@ -84,7 +84,7 @@ fi
 service nginx reload
 ```
 
-This bash script is intended to run as the startup command, which installs the tracing module into PHP and then restarts the nginx service. 
+This bash script is intended to run as the startup command, which installs the tracing module into PHP and then restarts the NGINX service. 
 
 {{% /tab %}}
 {{% tab "Python" %}}
