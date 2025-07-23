@@ -109,7 +109,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "go_expvar" >}}
+{{< get-metrics-from-git "go-expvar" >}}
 
 
 ### Événements

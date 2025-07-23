@@ -18,8 +18,8 @@ La siguiente explicación supone que estás ejecutando Datadog Agent v7.61.0+.
 
 Si tu dispositivo no está visible en la página [Dispositivos][2]:
 
-1. Ejecuta el comando [datadog-agent status][3] y busca la sección snmp, que contiene la IP de monitorización de tu dispositivo. Después de iniciar el Agent, NDM puede tardar hasta un minuto en detectar los dispositivos configurados individualmente. Si tu Agent está configurado para escanear un gran número de dispositivos, puede tardar más tiempo. 
-El resultado debería ser similar al siguiente: 
+1. Ejecuta el comando [datadog-agent status][3] y busca la sección snmp, que contiene la IP de monitorización de tu dispositivo. Después de iniciar el Agent, NDM puede tardar hasta un minuto en detectar los dispositivos configurados individualmente. Si tu Agent está configurado para escanear un gran número de dispositivos, puede tardar más tiempo.
+El resultado debería ser similar al siguiente:
 
    ```
    snmp
@@ -34,15 +34,15 @@ El resultado debería ser similar al siguiente:
      Average Execution Time : 0s
      Last Execution Date : 2024-11-13 13:12:09 PST / 2024-11-13 21:12:09 UTC (1731532329000)
      Last Successful Execution Date : Never
-     Error: <ERROR MESSAGE> 
+     Error: <ERROR MESSAGE>
      No traceback
    ```
 
-2. Si tu dispositivo no aparece en la lista y estás utilizando Autodiscovery, probablemente significa que el Agent no pudo conectarse a tu dispositivo. 
+2. Si tu dispositivo no aparece en la lista y estás utilizando Autodiscovery, probablemente significa que el Agent no pudo conectarse a tu dispositivo.
 
    - Ejecuta el comando `datadog-agent status` y espera a que la sección `autodiscovery` informe de que se han escaneado todas las IP de dispositivos posibles. En redes grandes, esto puede tardar varios minutos. La salida debe ser similar a la siguiente:
 
-    ``` 
+    ```
     Autodiscovery
     =============
     Subnet 127.0.0.1/24 is queued for scanning.
@@ -57,9 +57,9 @@ El resultado debería ser similar al siguiente:
 
     Si Autodiscovery se ha completado y tu dispositivo sigue sin aparecer en la página [Dispositivos][2], significa que el Agent no ha podido conectarse a tu dispositivo.
 
-   - Ejecuta un `snmp walk` en la IP de administrador del dispositivo para determinar por qué el Agent no puede conectarse a tu dispositivo. 
+   - Ejecuta un `snmp walk` en la IP de administrador del dispositivo para determinar por qué el Agent no puede conectarse a tu dispositivo.
 
-   **Nota**: Proporciona tus credenciales directamente en la CLI. Si no se proporcionan las credenciales, el Agent intentará localizarlas en los archivos de configuración del Agent que se estén ejecutando. 
+   **Nota**: Proporciona tus credenciales directamente en la CLI. Si no se proporcionan las credenciales, el Agent intentará localizarlas en los archivos de configuración del Agent que se estén ejecutando.
 
    **Linux**: <br />
      SNMP v2:
@@ -70,12 +70,12 @@ El resultado debería ser similar al siguiente:
       ```
       sudo -u dd-agent datadog-agent snmp walk <IP Address> -A <AUTH_KEY> -a <AUTH_PROTOCOL> -X <PRIV_KEY> -x <PRIV_PROTOCOL>
       ```
-      **Windows**:   
+      **Windows**:
       ```
       agent snmp walk <IP Address>[:Port]
 
-      Example:           
-      agent.exe snmp walk  10.143.50.30 1.3.6 
+      Example:
+      agent.exe snmp walk  10.143.50.30 1.3.6
       ```
 
     Consulta la documentación específica de tu proveedor para obtener información adicional sobre la ejecución de estos comandos.
@@ -117,7 +117,7 @@ Si ves un error de permiso denegado mientras enlazas puertos en logs del Agent, 
    **Error**:
    ```
    Error: an authentication method needs to be provided
-   ``` 
+   ```
 
    **Solución**:
 
@@ -154,7 +154,7 @@ Si ves un error de permiso denegado mientras enlazas puertos en logs del Agent, 
    ```
 
    **Solución**:
-   Añade una capacidad de enlace de red al binario del Agent, que permite al Agent enlazarse a puertos reservados: 
+   Añade una capacidad de enlace de red al binario del Agent, que permite al Agent enlazarse a puertos reservados:
 
    ```
    sudo setcap 'cap_net_bind_service=+ep' /opt/datadog-agent/bin/agent/agent
@@ -166,7 +166,7 @@ Si ves un error de permiso denegado mientras enlazas puertos en logs del Agent, 
 
    {{< img src="/network_device_monitoring/troubleshooting/ndm_troubleshooting_dashboard.png" alt="La página de Network Device Monitoring muestra el menú desplegable de Dashboard con el dashboard Solucionar problemas de NDM resaltado." style="width:80%;" >}}
 
-2. Desplázate hasta el widget de Trampas y observa el gráfico **Traps incorrectly formated** (Trampas formateadas incorrectamente). Si es distinto de cero, probablemente significa que la autenticación en el recopilador de NDM y el dispositivo no coinciden. 
+2. Desplázate hasta el widget de Trampas y observa el gráfico **Traps incorrectly formated** (Trampas formateadas incorrectamente). Si es distinto de cero, probablemente significa que la autenticación en el recopilador de NDM y el dispositivo no coinciden.
 
    {{< img src="/network_device_monitoring/troubleshooting/ndm_traps_dashboard.png" alt="El dashboard de Solucionar problemas de NDM qemuestra la sección del widget Trampas." style="width:100%;" >}}
 
@@ -212,7 +212,7 @@ Si ves un error de permiso denegado mientras enlazas puertos en logs del Agent, 
 
 
 [1]: /es/help
-[2]: https://app.datadoghq.com/infrastructure/devices
+[2]: https://app.datadoghq.com/devices
 [3]: /es/agent/configuration/agent-commands/#agent-information
 [4]: /es/api/latest/network-device-monitoring/
 [5]: /es/api/latest/network-device-monitoring/#get-the-list-of-interfaces-of-the-device

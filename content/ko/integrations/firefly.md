@@ -9,11 +9,11 @@ author:
   support_email: contact@gofirefly.io
 categories:
 - 자동화
-- cloud
+- 클라우드
 - 설정 및 배포
 - 개발 툴
 - 알림
-custom_kind: integration
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/firefly/README.md
 display_on_public_website: true
@@ -28,14 +28,14 @@ name: firefly
 public_title: Firefly
 short_description: 클라우드를 최신 코드로 구현하세요
 supported_os:
-- 리눅스
-- windows
+- linux
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Automation
-  - "\b카테고리::클라우드"
+  - 카테고리::자동화
+  - Category::Cloud
   - Category::Configuration & Deployment
   - Category::Developer Tools
   - Category::Notifications

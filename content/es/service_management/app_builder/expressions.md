@@ -9,10 +9,6 @@ further_reading:
 title: Expresiones de JavaScript
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder no es compatible con el <a href="/getting_started/site">sitio de Datadog </a> ({{< region-param key="dd_site_name" >}}) seleccionado.</div>
-{{< /site-region >}}
-
 Puedes utilizar expresiones de JavaScript (JS) en cualquier parte de App Builder para crear interacciones personalizadas entre las diferentes partes de tu aplicación. Al iniciar una expresión, App Builder ofrece sugerencias de autocompletar basadas en las consultas y componentes existentes en tu aplicación. Haz clic en una sugerencia de autocompletar para utilizarla en tu expresión, o utiliza las teclas de flecha del teclado y haz una selección con la tecla Intro.
 
 {{< img src="service_management/app_builder/app-builder-variable.png" alt="Si no estás seguro sobre qué ingresar como una expresión, escribe $[ para abrir un menú de sugerencia con todas las expresiones disponibles" style="width:70%;" >}}

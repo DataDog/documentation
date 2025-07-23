@@ -113,7 +113,7 @@ También puedes configurar un consumidor, como Amazon Data Firehose, para enviar
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_cloudfront" >}}
+{{< get-metrics-from-git "amazon-cloudfront" >}}
 
 
 A cada una de las métricas recuperadas de AWS se le asignan las mismas etiquetas que aparecen en la consola de AWS, incluidas, entre otras, `aws_account`, `region` y `distributionid`.

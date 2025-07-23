@@ -91,7 +91,7 @@ Les métriques sont recueillies sous les espaces de nommage suivants :
 
 ### Métriques
 
-{{< get-metrics-from-git "amazon_elb" >}}
+{{< get-metrics-from-git "amazon-elb" >}}
 
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
 

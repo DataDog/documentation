@@ -276,17 +276,17 @@ For information about valid values and using the following configuration options
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **Configuration**: `tracePropagationStyle.inject`<br>
-**Default**: `Datadog,tracecontext`<br>
+**Default**: `Datadog,tracecontext,baggage`<br>
 A comma-separated list of header formats to include to propagate distributed traces between services.
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **Configuration**: `tracePropagationStyle.extract`<br>
-**Default**: `Datadog,tracecontext`<br>
+**Default**: `Datadog,tracecontext,baggage`<br>
 A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.
 
 `DD_TRACE_PROPAGATION_STYLE`
 : **Configuration**: `tracePropagationStyle`<br>
-**Default**: `Datadog,tracecontext`<br>
+**Default**: `Datadog,tracecontext,baggage`<br>
 A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `DD_TRACE_PROPAGATION_STYLE_INJECT` and `DD_TRACE_PROPAGATION_STYLE_EXTRACT` configurations take priority when present.
 
 For more examples of how to work with the library see [API documentation][2].

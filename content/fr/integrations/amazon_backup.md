@@ -42,7 +42,7 @@ Si vous ne l'avez pas déjà fait, configurez [l'intégration Amazon Web Servi
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_backup" >}}
+{{< get-metrics-from-git "amazon-backup" >}}
 
 
 ### Événements

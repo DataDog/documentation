@@ -17,10 +17,6 @@ further_reading:
 title: Términos y conceptos
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog Application Security no es compatible con el <a href="/getting_started/site">sitio Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Datadog Application Security monitoriza las amenazas y ofrece protección contra los ataques a nivel de aplicación que pretenden explotar vulnerabilidades a nivel de código. Aprovecha el contexto de ejecución del código en tiempo de ejecución, los datos de trazas y de errores, así como la atribución al usuario.
 
 ## Términos generales de seguridad de las aplicaciones

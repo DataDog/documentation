@@ -61,7 +61,7 @@ See [PCI DSS Compliance][1] for more information. To enable PCI compliance for A
 
 {{< /site-region >}}
 
-{{< site-region region="us3,us5,eu,gov,ap1" >}}
+{{< site-region region="us3,us5,eu,gov,ap1,ap2" >}}
 
 PCI DSS compliance for Log Management is not available for the {{< region-param key="dd_site_name" >}} site.
 

@@ -16,10 +16,6 @@ aliases:
 disable_toc: false
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation and App Builder are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Because actions connect with external software systems, you may need to authenticate your Datadog account to the corresponding integration. An app or workflow can run successfully only if every action that requires authentication can verify the identity of your Datadog account. When granting permissions to Datadog, ensure that you're following security best practice and only granting the permissions necessary for an app or workflow to run.
 
 Actions can be authenticated in two ways:

@@ -5,7 +5,7 @@ further_reading:
 - link: "security/application_security/terms/"
   tag: "Documentation"
   text: "AAP Terms and Concepts"
-- link: "security/application_security/threats/add-user-info/?tab=set_user"
+- link: "security/application_security/how-it-works/add-user-info/?tab=set_user"
   tag: "Documentation"
   text: "User Monitoring and Protection"
 - link: "security/application_security/guide/"
@@ -266,7 +266,7 @@ To receive targeted and compromised user IDs with a webhook, set up a webhook us
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/security/application_security/threats/add-user-info/
+[1]: https://docs.datadoghq.com/security/application_security/how-it-works/add-user-info/
 [2]: https://app.datadoghq.com/security/configuration/asm/rules?query=type%3Aapplication_security%20defaultRule%3Atrue%20dependency%3A%28business_logic.users.%2A%29%20&deprecated=hide&groupBy=none&sort=rule_name
 [3]: https://app.datadoghq.com/security/configuration/asm/rules?query=type%3Aapplication_security%20defaultRule%3Atrue%20dependency%3A%28business_logic.users.%2A%29%20&deprecated=hide&groupBy=none&sort=rule_name
 [4]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration

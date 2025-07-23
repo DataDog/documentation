@@ -25,7 +25,7 @@ short_description: Monitoriza implementaciones de Canary en Azure Deployment Man
 version: '1.0'
 ---
 
-<!--  FUENTE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Azure Deployment Manager (ADM) permite gestionar un despliegue por etapas para implementar aplicaciones complejas de forma segura.
@@ -205,7 +205,7 @@ Azure Deployment Manager no incluye ningún check de servicios.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][6].
+¿Necesitas ayuda? Ponte en contacto con [asistencia técnica de Datadog][6].
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-tutorial
 [2]: https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/

@@ -415,6 +415,14 @@ The following configuration values should generally not be modified, but may be 
 
 {{< /site-region >}}
 
+{{< site-region region="ap2" >}}
+
+`DD_LOGS_DIRECT_SUBMISSION_URL`
+: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
+**Default**: `https://http-intake.logs.ap2.datadoghq.com:443` (based on `DD_SITE`)
+
+{{< /site-region >}}
+
 {{< site-region region="eu" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`

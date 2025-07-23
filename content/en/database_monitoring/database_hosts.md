@@ -4,7 +4,10 @@ description: Explore and dig into your database host health and configuration
 
 ---
 
-{{< img src="database_monitoring/databases-list-2.png" alt="The Databases page in Datadog" style="width:90%;" >}}
+{{< img src="database_monitoring/databases-list-3.png" alt="The Databases page in Datadog" style="width:100%;" >}}
+
+<div class="alert alert-info">
+If you are using Amazon RDS with the <a href="https://docs.datadoghq.com/integrations/amazon_rds/?tab=standard">RDS integration</a> enabled, Datadog automatically receives the <code>dbclusteridentifier</code> tag from AWS. When this tag is present, a <strong>Group my RDS clusters</strong> toggle appears, grouping related RDS instances into clusters based on the identifier. No additional setup or manual tagging is required.</div>
 
 On the [Databases page][1], you can assess the health and activity of your database hosts. Sort and filter the list to prioritize hosts with triggered alerts, high query volume, and other criteria. Click on any host in the list to open a details panel:
 
@@ -19,7 +22,7 @@ In addition to a filterable graph of active connections for that host, the host 
 | [Metrics](#metrics)                             | {{< X >}} | {{< X >}}  |           |           |
 | [Active connections](#active-connections)       | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |
 | [Schema](#schema)                               | {{< X >}} | {{< X >}}  |           |           |
-| [Blocking queries](#blocking-queries)           | {{< X >}} | {{< X >}}  |           | {{< X >}} |
+| [Blocking queries](#blocking-queries)           | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |
 | [Calling services](#calling-services)           | {{< X >}} | {{< X >}}  | {{< X >}} |           |
 | [Configuration details](#configuration-details) | {{< X >}} | {{< X >}}  | {{< X >}} |           |
 

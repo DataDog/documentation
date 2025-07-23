@@ -6,12 +6,6 @@ further_reading:
   text: "View and Manage Cases"
 ---
 
-{{% site-region region="gov,ap1" %}}
-<div class="alert alert-warning">
-Case Management is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
-</div>
-{{% /site-region %}}
-
 ## Overview
 
 Cases can be created [manually](#manual-case-creation), [automatically](#automatic-case-creation) from across Datadog, or [programmatically](#api) with the API. There are two types of cases: standard and security. Cases created from security signals and Sensitive Data Scanner are automatically made security cases. The security case type has all the features of the standard case type, along with a mandatory field for specifying the reason for closing a case (testing, false positive, or one time exception). 
@@ -44,9 +38,10 @@ You can also create cases manually from the following products:
 Configure the following products to automatically create cases:
 | Product | Instructions    | 
 | ------  | ----------- | 
-| Monitors | Navigate to the [Project Settings page][4], click **Integrations** > **Datadog Monitors**, and click on the toggle to get your @case-<project_handle>. <br><br> When creating a monitor, include `@case-{project_handle}` in the **Configure notifications and automations** section. Cases are automatically created when the monitor transitions to a different status. To only create cases for certain monitor transitions, use [conditional variables][3]. As an example, to create cases only when a monitor triggers, wrap the `@case` mention with `{{#is_alert}}` and `{{/is_alert}}`. |
+| Monitors | Navigate to the [Project Settings page][4], click **Integrations** > **Datadog Monitors**, and click on the toggle to get your @case-<project_handle>. <br><br> When creating a monitor, include `@case-{project_handle}` in the **Configure notifications and automations** section. Cases are automatically created when the monitor transitions to a different status. To only create cases for certain monitor transitions, use [conditional variables][3]. As an example, to create cases only when a monitor triggers, wrap the `@case` mention with `{{#is_alert}}` and `{{/is_alert}}`.<br><br> Toggle on **Auto-close cases when the monitor group resolves** to reduce manual cleanup.|
 | Event Management (Correlations) | In Event Management, correlations configured to aggregate events from Datadog and third-party sources automatically create cases.   |
 | Workflow Automation | 1. In a new or existing workflow, add a step in the Workflow builder and search for "Case Management."<br> 2. Select the **Create Case** action.<br> 3. If the workflow is configured to run based on a monitor or security signal trigger, add the relevant workflow triggers and ensure that you've added the workflow handle to the desired resources. For more information, see [Trigger a workflow][6].|
+| Error Tracking | In Error Tracking, cases are automatically created when an issue is commented on or assigned. |
 
 ## API
 

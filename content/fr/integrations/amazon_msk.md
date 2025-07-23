@@ -67,7 +67,7 @@ Configurez Amazon MSK de façon à ce que ses logs soient envoyés vers un comp
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_msk" >}}
+{{< get-metrics-from-git "amazon-msk" >}}
 
 
 ### Events

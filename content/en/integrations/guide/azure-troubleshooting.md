@@ -52,25 +52,15 @@ Turning on Diagnostics allows ARM deployed VMs to collect logging information wh
 
 If you have Azure resources with the same resource name as one of the default parameters, it can lead to naming conflicts. Azure does not allow resources to share resource names within an individual subscription. Datadog recommends renaming the default parameter with a unique name that does not already exist within your environment.
 
-For example, use the -EventhubName flag to change the default name of the Eventhub resource, if you already possess an Eventhub named `datadog-eventhub`. 
-
-{{< code-block lang="powershell" filename="Example" >}}
-
-./resource_deploy.ps1 -ApiKey <your_api_key> -SubscriptionId <your_subscription_id> -EventhubName <new-name>
-
-{{< /code-block >}}
-
-**Note:** Navigate to the [Optional Parameters][4] section to find the list of configurable parameters. 
-
-**Note:** If you are re-running the script due to this failure, it is also advised that you remove the entire resource group to create a fresh execution. 
+**Note:** If you are re-running the template due to this failure, it is also advised that you remove the entire resource group to create a fresh deployment. 
 
 ### Unregistered resource provider
 
-If your script execution is failing due to the error **The subscription is not registered to use namespace 'Microsoft.EventHub'**:
+If your template deployment is failing due to the error **The subscription is not registered to use namespace 'Microsoft.EventHub'**:
 
 Azure has resource providers for each of its services, for example: `Microsoft.EventHub` for the Azure EventHub. If your Azure subscription is not registered to a required resource provider the script fails. You can fix this issue by registering with the resource provider. Run this command in CloudShell. 
 
-{{< code-block lang="powershell" filename="Example" >}}
+{{< code-block lang="shell" filename="Example" >}}
 
 az provider register --namespace Microsoft.EventHub
 
@@ -80,7 +70,7 @@ az provider register --namespace Microsoft.EventHub
 
 Did you install the script successfully, but you are still not seeing activity/platform logs within the Logs Explorer? 
 
-Ensure that you have not exceeded your [daily quota][5] for log retention.
+Ensure that you have not exceeded your [daily quota][4] for log retention.
 
 **Note:** It is advised that you take at least five minutes after the execution of the script to start looking for logs in the Logs Explorer.
 
@@ -91,5 +81,4 @@ Ensure that you have not exceeded your [daily quota][5] for log retention.
 [1]: https://portal.azure.com
 [2]: https://manage.windowsazure.com
 [3]: /help/
-[4]: /integrations/azure/?tab=azurecliv20#optional-parameters
-[5]: /logs/indexes/#set-daily-quota
+[4]: /logs/indexes/#set-daily-quota

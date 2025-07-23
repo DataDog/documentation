@@ -12,6 +12,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
   tag: "Blog"
   text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/soar/"
+  tag: "Blog"
+  text: "Automate identity protection, threat containment, and threat intelligence with Datadog SOAR workflows"
 - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
   tag: "Blog"
   text: "Build compliance, governance, and transparency across your teams with Datadog Audit Trail"
@@ -39,6 +42,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/risky-behavior-cloud-environments/"
   tag: "Blog"
   text: "Identify risky behavior in cloud environments"
+- link: "https://www.datadoghq.com/blog/detect-phishing-activity-amazon-ses/"
+  tag: "Blog"
+  text: "Amazon SES monitoring: Detect phishing campaigns in the cloud"
+- link: "https://www.datadoghq.com/blog/detection-as-code-cloud-siem/"
+  tag: "Blog"
+  text: "Build, test, and scale detections as code with Datadog Cloud SIEM"
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Security">}}

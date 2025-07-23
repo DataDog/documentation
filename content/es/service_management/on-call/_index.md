@@ -9,10 +9,6 @@ further_reading:
 title: On-Call
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">El servicio On-Call no es compatible con el <a href="/getting_started/site">sitio de Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Datadog On-Call integra la monitorización, la localización de personas y la respuesta a incidencias en una sola plataforma.
 
 {{< img src="service_management/oncall/oncall_overview.png" alt="Información general sobre cómo las páginas se enrutan. Desde un monitor, incidencia, señal de seguridad o llamada a la API, la página se envía a un equipo (por ejemplo, 'payments-team'), a continuación, a las reglas de procesamiento (por ejemplo, según prioridad), a continuación, a las políticas de escalada. A continuación, se puede enviar a un cronograma o directamente a un usuario." style="width:100%;" >}}
@@ -45,7 +41,7 @@ Para empezar con On-Call [incorpora un equipo de On-Call][1] y asegúrate de que
 
 {{< whatsnext desc="Esta sección incluye los siguientes temas:">}}
   {{< nextlink href="/service_management/on-call/teams">}}<u>Incorporar un Equipo</u>: crea un nuevo equipo de On-Call, añade un Equipo de Datadog existente a On-Call o importa un equipo desde PagerDuty o Opsgenie.{{< /nextlink >}}
-  {{< nextlink href="/service_management/on-call/pages">}}<u>Enviar una Página</u>: llama a un equipo mediante monitores, incidencias, señales de seguridad, etc.; o envía de forma manual una Página mediante Datadog, Slack, Microsoft Teams, o la API de Datadog. {{< /nextlink >}}
+  {{< nextlink href="/service_management/on-call/triggering_pages">}}<u>Enviar una Página</u>: llama a un equipo mediante monitores, incidencias, señales de seguridad, etc.; o envía de forma manual una Página mediante Datadog, Slack, Microsoft Teams, o la API de Datadog. {{< /nextlink >}}
   {{< nextlink href="/service_management/on-call/escalation_policies">}}<u>Políticas de escalada</u>: define pasos para cómo se debe enviar una Página a diferentes cronogramas. {{< /nextlink >}}
   {{< nextlink href="/service_management/on-call/schedules">}}<u>Cronogramas</u>: define las tablas temporales para miembros del Equipo.{{< /nextlink >}}
   {{< nextlink href="/service_management/on-call/profile_settings">}}<u>Ajustes del perfil</u>: configura tu método de contacto y preferencias de notificación para asegurar que recibas las Páginas de forma puntal y eficaz.{{< /nextlink >}}

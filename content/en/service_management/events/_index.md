@@ -25,10 +25,6 @@ further_reading:
   text: "Ensure high service availability with Datadog Service Management"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Event Management is not supported for this site.</div>
-{{< /site-region >}}
-
 {{< img src="service_management/events/correlation/event_management.png" alt="what is event management" style="width:100%;" >}}
 
 ## Overview

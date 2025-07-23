@@ -21,7 +21,7 @@ further_reading:
 - link: /real_user_monitoring/session_replay/browser/privacy_options
   tag: ドキュメント
   text: セッションリプレイのプライバシーオプション
-- link: /sensitive_data_scanner/
+- link: /security/sensitive_data_scanner/
   tag: ドキュメント
   text: センシティブ データ スキャナー
 title: データ関連リスクの低減
@@ -75,7 +75,7 @@ Datadog の目的は、お客様のインフラストラクチャーやサービ
 
 ログデータのセキュリティに関するリスクを低減するための重要なアプローチは、アクセス制御です。Datadog でこれを行う方法については、[ログに RBAC を設定する方法][14]と[ログの RBAC 権限][15]をお読みください。
 
-### Live processes and containers
+### ライブプロセスとコンテナ
 
 ライブプロセスやライブコンテナを監視しているときに機密データが漏れるのを防ぐために、Datadog はプロセスの引数や Helm チャートで、いくつかのデフォルトの機密キーワードスクラビングを提供します。[`custom_sensitive_words` 設定][16]を使用してプロセスコマンドまたは引数内の追加の機密シーケンスを難読化し、[`DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS` 環境変数][17]を使用してコンテナスクラビングワードリストに追加できます。
 
@@ -86,7 +86,7 @@ Datadog のトレーシングライブラリは、アプリケーション、サ
 - Application Performance Monitoring (APM)
 - Continuous Profiler
 - CI Visibility
-- Application Security Management
+- App and API Protection
 
 トレーシングライブラリのソースデータの管理方法、デフォルトの基本的なセキュリティ設定、トレース関連要素のカスタム難読化、スクラビング、除外、および変更についての詳細情報は、[トレースデータのセキュリティのための Agent とトレーサーの構成][18]を参照してください。
 
@@ -150,7 +150,7 @@ Continuous Integration のパイプラインとテスト
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles
 [8]: /ja/integrations/azure/
 [9]: /ja/integrations/google_cloud_platform/
-[10]: /ja/sensitive_data_scanner/
+[10]: /ja/security/sensitive_data_scanner/
 [11]: /ja/data_security/logs/
 [12]: /ja/logs/guide/control-sensitive-logs-data/
 [13]: /ja/agent/logs/advanced_log_collection

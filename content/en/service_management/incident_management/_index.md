@@ -28,6 +28,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadogs-approach-sre-security/"
     tag: "Blog"
     text: "Security and SRE: How Datadog's combined approach aims to tackle security and reliability challenges"
+  - link: "https://www.datadoghq.com/blog/incidents-ai-workbench-status-page/"
+    tag: "Blog"
+    text: "Unify remediation and communication with Datadog Incident Response"
 ---
 
 
@@ -59,7 +62,7 @@ To view your incidents, go to the [Incidents][1] page to see a feed of all ongoi
 
 You can also view your Incidents list from your mobile device home screen and manage/create incidents by downloading the [Datadog Mobile App][3], available on the [Apple App Store][4] and [Google Play Store][5].
 
-{{< img src="service_management/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidents on Mobile App">}}
+{{< img src="service_management/mobile/iOS_Incident_V2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Two views in the Datadog Mobile App: one showing an incidents list with high-level details about each incident, and one showing a detailed panel for a single incident">}}
 
 
 ## Describing the incident
@@ -88,6 +91,7 @@ In addition to integrating with [Slack][11], Incident Management also integrates
 - [Webhooks][16] to send incident notifications using webhooks (for example, [sending SMS to Twilio][17]).
 - [Statuspage][18] to create and update Statuspage incidents.
 - [ServiceNow][19] to create a ServiceNow ticket for an incident.
+- [Confluence][22] to generate incident postmortems.
 
 
 ## Further Reading
@@ -115,3 +119,4 @@ In addition to integrating with [Slack][11], Incident Management also integrates
 [19]: /integrations/servicenow/
 [20]: /service_management/incident_management/describe
 [21]: /coterm
+[22]: /integrations/confluence/

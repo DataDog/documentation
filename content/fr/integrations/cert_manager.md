@@ -142,7 +142,7 @@ Pour installer le check cert_manager sur votre host :
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "cert_manager" >}}
+{{< get-metrics-from-git "cert-manager" >}}
 
 
 ### Événements
@@ -150,7 +150,7 @@ Pour installer le check cert_manager sur votre host :
 cert_manager n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "cert_manager" >}}
+{{< get-service-checks-from-git "cert-manager" >}}
 
 
 ## Dépannage

@@ -19,12 +19,6 @@ title: Tests Swift
 type: lenguaje de código múltiple
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-El sitio Datadog seleccionado ({{< region-param key="dd_site_name" >}}) no es compatible.
-</div>
-{{< /site-region >}}
-
 ## Compatibilidad
 
 Lenguajes compatibles:

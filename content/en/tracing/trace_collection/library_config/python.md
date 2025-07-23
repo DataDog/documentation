@@ -108,11 +108,11 @@ Enable [connecting logs and trace injection][6].
 ## Trace context propagation
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
-: **Default**: `tracecontext,Datadog`<br>
+: **Default**: `tracecontext,Datadog,baggage`<br>
 Propagation styles to use when injecting tracing headers. For example, use `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,B3` to inject both Datadog and B3 format headers.
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
-: **Default**: Value of `DD_TRACE_PROPAGATION_STYLE_INJECT` (`tracecontext,Datadog`)<br>
+: **Default**: Value of `DD_TRACE_PROPAGATION_STYLE_INJECT` (`tracecontext,Datadog,baggage`)<br>
 Propagation styles to use when extracting tracing headers. When multiple values are given, it uses the first header match found. The order of matching is based on the order of values given. For example, `DD_TRACE_PROPAGATION_STYLE_EXTRACT=B3,Datadog` looks for `B3` headers first, and only uses `Datadog` headers if those are not available.
 
 ## Further Reading

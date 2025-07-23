@@ -83,5 +83,5 @@ These tutorials walk you through setting up a sample multi-service application w
     {{< nextlink href="/tracing/guide/aws_payload_tagging/" >}}Capture requests and responses from AWS services automatically{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/service_overrides/" >}}Service Overrides{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/injectors/" >}}Understanding injector behavior with Single Step Instrumentation{{< /nextlink >}}
-    {{< nextlink href="/tracing/guide/code_origins/" >}}Code Origins for Spans{{< /nextlink >}}
+    {{< nextlink href="/tracing/code_origins/" >}}Code Origins for Spans{{< /nextlink >}}
 {{< /whatsnext >}}

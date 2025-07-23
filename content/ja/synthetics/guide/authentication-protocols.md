@@ -15,7 +15,7 @@ title: API およびマルチステップ API テストでの認証使用
 
 ## 概要
 
-[API tests][1] allow you to send requests to your applications' API endpoints to verify responses and defined conditions, such as overall response time, expected status code, header, or body content. [Multistep API tests][2] allow you to chain requests to proactively monitor sophisticated journeys on your key services, and ensure they are available at any time and from any managed or private location.
+[API テスト][1] を使用すると、アプリケーションの API エンドポイントにリクエストを送信し、総合的な応答時間、期待されるステータス コード、ヘッダー、ボディ内容などの応答および定義済み条件を検証できます。[マルチステップ API テスト][2] を使用すると、リクエストを連鎖させて主要サービスの高度なジャーニーを積極的に監視し、管理対象ロケーションやプライベート ロケーションを問わず、いつでも利用可能であることを保証できます。
 
 このガイドでは、Synthetic API およびマルチステップ API テストで利用可能なさまざまな認証プロトコルに ついて説明します。ブラウザテストにおける認証の詳細については、[認証が必要なアプリケーションでテストを実行する][3]を参照してください。
 

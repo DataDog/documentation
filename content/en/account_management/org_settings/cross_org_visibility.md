@@ -1,5 +1,8 @@
 ---
 title: Cross-Organization Visibility
+description: Share data and perform queries between different organizations in the same account.
+algolia:
+  tags: ["cross org", "cross-org", "cross organization"]
 ---
 
 {{< callout url="#" btn_hidden="true">}}
@@ -22,7 +25,12 @@ This document explains:
 
 ### Organization connection
 
-A _source_ organization exposes data to a _destination_ organization through an _organization connection_. The source and destination Datadog organizations must be in the same [account][1]. A source organization can have multiple destinations, and a destination organization can have multiple sources.
+A _source_ organization exposes data to a _destination_ organization through an _organization connection_. A source organization can have multiple destinations, and a destination organization can have multiple sources.
+
+The following limitations apply to organization connections:
+- The source and destination organizations must be in the same [account][1]
+- The source and destination organizations must be in the same [site][11].
+- One organization can share with up to 5 other organizations.
 
 Note that once the connection is established, the destination organization can query the source organization's data in the same ways it can query its own data. This means that the source organization's data—including sensitive data—may be queried and displayed as permitted by the destination organization's access-control and other settings. This may include, for example, the destination organization's ability to create [public Dashboards][10] using the source organization's data even if the source organization's own settings do not permit the creation of public Dashboards.
 
@@ -30,7 +38,7 @@ After you set up an organization connection, the exposed data is still stored in
 
 ### Scope
 
-Cross-organization visibility supports Metrics telemetry in [Dashboard and Notebook widgets][2].
+Cross-organization visibility supports Metrics and Log Management telemetry in [Dashboard and Notebook widgets][2].
 
 All types of metrics are supported, including [custom metrics][3], [trace metrics][4], and [metrics generated from logs][5].
 
@@ -38,11 +46,11 @@ All types of metrics are supported, including [custom metrics][3], [trace metric
 
 ### List connections
 
-To browse connections, navigate to the [cross-organization visibility page][6] in Organization Settings. The table lists all of your cross-organization connections. Listing connections requires the _Org Connections Read_ permission.
+To browse connections, navigate to the [cross-organization visibility page][6] in Organization Settings. The table lists all of your cross-organization connections.
 
 ### Create a connection
 
-Creating a cross-organization connection allows you to query metrics from the source organization in the destination organization. Creating connections requires the _Org Connections Write_ permission.
+Creating a cross-organization connection allows you to query metrics from the source organization in the destination organization.
 
 1. Make sure you are signed in to the _source_ organization that contains the data you want to expose.
 1. On the [cross-organization visibility page][6], click **New Connection**. The **New Connection** dialog box appears.
@@ -51,7 +59,7 @@ Creating a cross-organization connection allows you to query metrics from the so
 
 ### Delete a connection
 
-Deleting a connection disables cross-organization querying from the destination organization of the source organization's metrics. Deleting connections requires the _Org Connections Write_ permission.
+Deleting a connection disables cross-organization querying from the destination organization of the source organization's metrics.
 
 1. Navigate to the [cross-organization visibility page][6] in Organization Settings.
 1. Hover over the connection you wish to delete. A trash can (**Delete**) icon appears on the right.
@@ -79,12 +87,12 @@ If the previous conditions are true, an organization drop-down selector appears 
 
 The following screenshot shows an example of a cross-organization formula query. The widget graphs the number of ingested events per service. To get the total number of events, the cross-organization formula query sums the data from organization A (in the query **a**) and organization B (in the query **b**).
 
-{{< img src="account_management/org_settings/cross_org_visibility/cross_org_query.png" alt="Screenshot showing configuration of a Dashboard widget with a cross-organization query" >}}
+{{< img src="account_management/org_settings/cross_org_visibility/cross_org_query-1.png" alt="Screenshot showing configuration of a Dashboard widget with a cross-organization query" >}}
 
 ### In the API
 
 <div class="alert alert-info">
-The <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs">Datadog Terraform Provider</a> does not support creation of cross-organization connections. But a dashboard with widgets with cross-org queries may be Terraformed through proper JSON export.
+The <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs">Datadog Terraform Provider</a> does not support creation of cross-organization connections. However, you can manage a dashboard containing widgets with cross-org queries through Terraform by exporting the dashboard to JSON.
 </div>
 
 You can define cross-organization queries in the following endpoint:
@@ -137,6 +145,31 @@ Note the `cross_org_uuids` parameter in the JSON widget definition payload.
 - Use the organization identifier, which you can recover from the [Organizations endpoint][9], to identify the organization on which the query runs.
 - Though this parameter accepts an array, the array must contain only one element. Adding multiple elements to the `cross_org_uuids` array results in a 400 error.
 
+## Permissions
+By default, only users attached to roles with the _Org Connection Read_ permission can see the list of cross-organization connections. Users attached to roles with the _Org Connection Write_ permission can create and delete cross-organization connections. 
+
+### Granular access controls
+Use [granular access controls][12] to limit the teams, roles, or users that can edit or query a cross-organization connection:
+
+1. Navigate to the [cross-organization visibility page][6] in Organization Settings.
+1. Hover over the cross-organization connection on which you would like to set granular permissions. **Permissions** and **Delete** icons appear on the right.
+1. Click on the padlock (**Permissions**) icon.
+1. Select **Restrict Access**.
+1. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. Use the dropdown to select one or more teams, roles, or users that may edit the cross-organization connection.
+1. Click **Add**.
+1. The dialog box updates to show that the role you selected has the **Editor** permission.
+1. Click **Save**.
+
+**Note**: To maintain your edit access to the cross-organization connection, the system requires you to include at least one role or team that you are a member of before saving.
+
+To restore general access to a cross-organization connection with restricted access, follow the steps below:
+
+1. In the cross-organization visibility page, hover over the cross-organization connection you would like to restore general access to. **Permissions** and **Delete** icons appear on the right.
+1. Click on the padlock (**Permissions**) icon.
+1. Click **Restore Full Access**.
+1. Click **Save**.
+
 [1]: /account_management/multi_organization/
 [2]: /dashboards/widgets
 [3]: /metrics/custom_metrics/#overview
@@ -147,3 +180,5 @@ Note the `cross_org_uuids` parameter in the JSON widget definition payload.
 [8]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
 [9]: /api/latest/organizations/#list-your-managed-organizations
 [10]: /dashboards/sharing/shared_dashboards/#public-shared-dashboards
+[11]: /getting_started/site
+[12]: /account_management/rbac/granular_access

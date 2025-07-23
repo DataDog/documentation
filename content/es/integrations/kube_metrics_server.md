@@ -125,7 +125,7 @@ Si tu endpoint es seguro, se requiere una configuración adicional:
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "kube_metrics_server" >}}
+{{< get-metrics-from-git "kubernetes_state_core" >}}
 
 
 ### Eventos
@@ -133,7 +133,7 @@ Si tu endpoint es seguro, se requiere una configuración adicional:
 kube_metrics_server no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "kube_metrics_server" >}}
+{{< get-service-checks-from-git "kubernetes_state_core" >}}
 
 
 ## Solucionar problemas

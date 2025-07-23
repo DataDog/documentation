@@ -48,7 +48,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud IoT depui
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "google_cloud_iot" >}}
+{{< get-metrics-from-git "google-cloud-iot" >}}
 
 
 ### Événements

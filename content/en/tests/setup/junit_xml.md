@@ -16,12 +16,6 @@ further_reading:
       text: "Troubleshooting Test Optimization"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
-</div>
-{{< /site-region >}}
-
 <div class="alert alert-warning">
   <strong>Note</strong>: Datadog recommends the native instrumentation of tests over uploading JUnit XML files,
   as the native instrumentation provides more accurate time results, supports distributed traces on integration tests
@@ -348,7 +342,7 @@ To add [codeowners][9] information to your JUnit XML tests, you can use the [Git
 
 As a result, the JUnit XML tests have a `test.codeowners` tag with the owner of those tests.
 
-### Using the GitHub integration (recommended)
+### Using the GitHub integration
 
 To automatically add the `test.codeowners` tag to your tests, you need to:
 1. Have a `CODEOWNERS` file [in one of the allowed locations][11] in your repository.
@@ -385,8 +379,7 @@ The JUnit XML uses a private [GitHub App][12] to read the `CODEOWNERS` file.
 6. Give the app a name, for example, `Datadog Test Optimization`.
 7. Click **Install GitHub App** and follow the instructions on GitHub.
 
-### Manually providing the `test.source.file` tag
-This is an alternative to using the GitHub integration.
+#### Manually providing the `test.source.file` tag
 
 For those plugins that do not provide the `file` attribute in the XML report, you can provide the `test.source.file` tag.
 There is no need to provide the exact path to a specific file, [you can use any syntax you would use in the CODEOWNERS file][14]

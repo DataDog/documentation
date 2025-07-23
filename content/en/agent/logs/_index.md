@@ -75,6 +75,11 @@ On **Windows**, use the path `<DRIVE_LETTER>:\\<PATH_LOG_FILE>\\<LOG_FILE_NAME>.
 
 {{% tab "TCP/UDP" %}}
 
+To collect the sender IP address and associate with the log message payload, add the following configuration to your `datadog.yaml` file: 
+```yaml
+ logs_config:
+   use_sourcehost_tag: true
+```
 To gather logs from your `<APP_NAME>` application that forwards its logs to TCP port **10518**, create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][1] with the following content:
 
 ```yaml

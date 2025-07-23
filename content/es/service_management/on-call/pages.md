@@ -6,10 +6,6 @@ further_reading:
 title: Enviar una página
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call no es compatible con el <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Una Página se envía a un Equipo y, posteriormente, se enruta a través de las políticas de escalado y los cronogramas de ese Equipo. Una vez que tu equipo esté [integrado en Datadog On-Call][1], puedes empezar a enviar páginas.
 
 ### Página de notificaciones

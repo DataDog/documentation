@@ -25,10 +25,6 @@ integration_id: "syslog_ng"
 
 Configure Syslog-ng to gather logs from your host, containers, & services.
 
-{{< site-region region="us3,ap1" >}}
-<div class="alert alert-warning">Log collection for <code>syslog-ng</code> is not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Setup
 
 ### Log collection

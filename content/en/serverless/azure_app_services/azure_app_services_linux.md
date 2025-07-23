@@ -7,91 +7,232 @@ further_reading:
 ---
 ## Overview
 
-This instrumentation method provides the following additional monitoring capabilities for Linux Azure App Service workloads:
+This solution uses a sidecar container and Application Settings for Linux Azure App Service to instrument the application and manage its configuration.
 
-- Fully distributed APM tracing using automatic instrumentation.
-- Customized APM service and trace views showing relevant Azure App Service metrics and metadata.
-- Support for manual APM instrumentation to customize spans.
-- `Trace_ID` injection into application logs.
-- Support for submitting custom metrics using [DogStatsD][1].
+If you would prefer to not use the sidecar approach (Not Recommended), you can instead follow the instructions to [Instrument Azure App Service - Linux Code Deployment with the Datadog wrapper][1].
 
-This solution uses the startup command setting and Application Settings for Linux Azure App Service to instrument the application and manage its configuration. Java, Node, .NET, PHP, and Python are supported.
+**Supported runtimes**: Java, Node.js, .NET, PHP, Python
 
-### Setup
-#### Set application settings
-To instrument your application, begin by adding the following key-value pairs under **App settings** in your Azure "Environment variables" settings.
+## Setup
 
-{{< img src="serverless/azure_app_service/application-settings.jpg" alt="Azure App Service Configuration: the Application Settings, under the Configuration section of Settings in the Azure UI. Three settings are listed: DD_API_KEY, DD_SERVICE, and DD_START_APP." style="width:80%;" >}}
+### Application
 
-- `DD_API_KEY` is your Datadog API key.
-- `DD_CUSTOM_METRICS_ENABLED` (optional) enables [custom metrics](#custom-metrics).
-- `DD_SITE` is the Datadog site [parameter][2]. Your site is {{< region-param key="dd_site" code="true" >}}. This value defaults to `datadoghq.com`.
-- `DD_SERVICE` is the service name used for this program. Defaults to the name field value in `package.json`.
-- `DD_START_APP` is the command used to start your application. For example, `node ./bin/www` (unnecessary for applications running in Tomcat).
-- `DD_PROFILING_ENABLED` (optional) Enables the [Continuous Profiler][15], specific to .NET.
-
-### Identifying your startup command
-
-Linux Azure App Service Web Apps built using the code deployment option on built-in runtimes depend on a startup command that varies by language. The default values are outlined in [Azure's documentation][7]. Examples are included below.
-
-Set these values in the `DD_START_APP` environment variable. Examples below are for an application named `datadog-demo`, where relevant.
-
-| Runtime   | `DD_START_APP` Example Value                                                               | Description                                                                                                                                                                                                                        |
-|-----------|--------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Node.js   | `node ./bin/www`                                                                           | Runs the [Node PM2 configuration file][12], or your script file.                                                                                                                                                                   |
-| .NET Core | `dotnet datadog-demo.dll`                                                                  | Runs a `.dll` file that uses your Web App name by default. <br /><br /> **Note**: The `.dll` file name in the command should match the file name of your `.dll` file. In certain cases, this might not match your Web App.         |
-| PHP       | `cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload` | Copies script to correct location and starts application.                                                                                                                                                                           |
-| Python    | `gunicorn --bind=0.0.0.0 --timeout 600 quickstartproject.wsgi`                             | Custom [startup script][13]. This example shows a Gunicorn command for starting a Django app.                                                                                                                                      |
-| Java      | `java -jar /home/site/wwwroot/datadog-demo.jar`                                            | The command to start your app. This is not required for applications running in Tomcat.                                                                                                                                                                                                  |
-
-[7]: https://learn.microsoft.com/en-us/troubleshoot/azure/app-service/faqs-app-service-linux#what-are-the-expected-values-for-the-startup-file-section-when-i-configure-the-runtime-stack-
-[12]: https://learn.microsoft.com/en-us/azure/app-service/configure-language-nodejs?pivots=platform-linux#configure-nodejs-server
-[13]: https://learn.microsoft.com/en-us/azure/app-service/configure-language-php?pivots=platform-linux#customize-start-up
-[15]: /profiler/enabling/dotnet/?tab=azureappservice
-
-
-**Note**: The application restarts when new settings are saved.
-
-#### Set General Settings
+Install the tracing library for your language:
 
 {{< tabs >}}
-{{% tab "Node, .NET, PHP, Python" %}}
-Go to **General settings** and add the following to the **Startup Command** field:
-
-```
-curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.11.0/datadog_wrapper | bash
-```
-
-{{< img src="serverless/azure_app_service/startup-command-1.jpeg" alt="Azure App Service Configuration: the Stack settings, under the Configuration section of Settings in the Azure UI. Underneath the stack, major version, and minor version fields is a 'Startup Command' field that is populated by the above curl command." style="width:100%;" >}}
-{{% /tab %}}
 {{% tab "Java" %}}
-Download the [`datadog_wrapper`][8] file from the releases and upload it to your application with the Azure CLI command:
 
-```
-  az webapp deploy --resource-group <group-name> --name <app-name> --src-path <path-to-datadog-wrapper> --type=startup
+Java supports adding instrumentation code through the use of a command line argument, `javaagent`.
+
+1. Download the [latest version of Datadog's Java tracing library][101].
+1. Place the tracing library inside your project. It must be included with your deployment. 
+   If you are using the `azure-webapp-maven` plugin, you can add the Java tracing library as a resource entry with type `lib`. 
+1. Set the environment variable `JAVA_OPTS` with `--javaagent:/home/site/lib/dd-java-agent.jar`. When your application is deployed, the Java tracer is copied to `/home/site/lib/dd-java-agent.jar`.
+
+Instrumentation starts when the application is launched.
+
+[101]: https://dtdg.co/latest-java-tracer
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+1. Add the `ddtrace` package to your project using your package manager.
+1. Initialize the tracer by doing one of the following:
+   - Set `NODE_OPTIONS` with `--require=dd-trace/init`
+   - Include the tracer in your application's entrypoint file:
+     ```javascript
+     const tracer = require('dd-trace').init({ logInjection: true, });
+     ```
+     This also configures trace log correlation.
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Add the `Datadog.Trace.Bundle` Nuget package to your project. See [the Nuget package page for more details][102].
+
+For example:
+
+```shell
+dotnet add package Datadog.Trace.Bundle --version 3.21.0
 ```
 
-[8]: https://github.com/DataDog/datadog-aas-linux/releases
+[102]: https://www.nuget.org/packages/Datadog.Trace.Bundle#readme-body-tab
+
+{{% /tab %}} 
+{{% tab "PHP" %}}
+
+Run the following script to install Datadog's PHP tracing library:
+
+```bash
+#!/usr/bin/env bash
+
+echo "Setting up Datadog tracing for PHP"
+DD_PHP_TRACER_VERSION=1.8.3
+DD_PHP_TRACER_URL=https://github.com/DataDog/dd-trace-php/releases/download/${DD_PHP_TRACER_VERSION}/datadog-setup.php
+
+echo "Installing PHP tracer from ${DD_PHP_TRACER_URL}"
+if curl -LO --fail "${DD_PHP_TRACER_URL}"; then
+    eval "php datadog-setup.php --php-bin=all"
+else
+    echo "Downloading the tracer was unsuccessful"
+    return
+fi
+
+cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload
+```
+
+This script is intended to run as the startup command, which installs the tracing module into PHP and then restarts the application. 
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+1. Add `ddtrace` to your project.
+1. Modify your startup command. Your new command should run `ddtrace-run` with your old command as an argument. That is: if your startup command is `foo`, modify it to run `ddtrace-run foo`.
+
+   For example:
+   ```ssh
+   ddtrace-run gunicorn --bind=0.0.0.0 --timeout 600 quickstartproject.wsgi
+   ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
-### Viewing traces
+### Instrumentation
 
-When new Application Settings are saved, Azure restarts the application. However, if a startup command is added and saved, a restart may be required.
+{{< tabs >}}
+{{% tab "Automated" %}}
 
-After the application restarts, you can view traces by searching for the service name (`DD_SERVICE`) in the [APM Service page][4] of Datadog.
+First, install the [Datadog CLI][201] and [Azure CLI][202].
+
+Login to your Azure account using the Azure CLI:
+
+{{< code-block lang="shell" >}}
+az login
+{{< /code-block >}}
+
+Then, run the following command to set up the sidecar container:
+
+{{< code-block lang="shell" >}}
+export DD_API_KEY=<DATADOG_API_KEY>
+export DD_SITE=<DATADOG_SITE>
+datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
+{{< /code-block >}}
+
+Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
+
+Additional flags, like `--service` and `--env`, can be used to set the service and environment tags. For a full list of options, run `datadog-ci aas instrument --help`.
+
+
+[201]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
+[202]: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
+
+{{% /tab %}}
+{{% tab "Manual" %}}
+
+1. **Configure environment variables**.
+   In Azure, add the following key-value pairs in **Settings** > **Configuration** > **Application settings**:
+
+`DD_API_KEY`
+: **Value**: Your Datadog API key.<br>
+See [Organization Settings > API Keys][301] in Datadog.<br>
+
+`DD_SITE`
+: **Value**: {{< region-param key="dd_site" code="true" >}}<br>
+Your [Datadog site][302]. Defaults to `datadoghq.com`.<br>
+Use the "Datadog Site" drop-down menu on this page's right navigation bar to select your site.<br>
+
+`DD_SERVICE`
+: **Value**: Your application's service name.<br>
+Defaults to the name field value in `package.json`.<br>
+See [Unified Service Tagging][303] for more information on the `service` tag.<br>
+
+`DD_ENV`
+: **Value**: Your application's environment name.<br>
+There is no default value for this field.<br>
+See [Unified Service Tagging][303] for more information on the `env` tag.<br>
+
+`DD_VERSION`
+: **Value**: Your application's version.<br>
+There is no default value for this field.<br>
+See [Unified Service Tagging][303] for more information on the `version` tag.<br>
+
+`DD_SERVERLESS_LOG_PATH`
+: **Value**: The log path the sidecar uses to collect logs.<br>
+Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFiles/myapp/*.log`.<br>
+
+`WEBSITES_ENABLE_APP_SERVICE_STORAGE`
+: **Value**: `true`<br>
+Setting this environment variable to `true` allows the `/home/` mount to persist and be shared with the sidecar.<br>
+
+{{% collapse-content title=".NET: Additional required environment variables" level="h4" id="dotnet-additional-settings" %}}
+
+For .NET applications, the following environment variables are **required**. See the `Datadog.Tracer.Bundle` [Nuget package README file][1] for more details.
+
+`DD_DOTNET_TRACER_HOME`
+: **Value**: `/home/site/wwwroot/datadog`<br>
+Path to the directory containing the .NET tracing libraries.<br>
+
+`DD_TRACE_LOG_DIRECTORY`
+: **Value**: `/home/LogFiles/dotnet`<br>
+Path where the .NET tracing library will write its logs.<br>
+
+`CORECLR_ENABLE_PROFILING`
+: **Value**: `1`<br>
+Enables the instrumentation APIs in the .NET runtime.<br>
+
+`CORECLR_PROFILER`
+: **Value**: `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`<br>
+Identifier for Datadog's .NET the instrumentation library.<br>
+
+`CORECLR_PROFILER_PATH`
+: **Value**: `/home/site/wwwroot/datadog/`<br>
+`linux-x64/Datadog.Trace.ClrProfiler.Native.so` (single line)<br>
+Path to the instrumentation library loaded by the .NET runtime.<br>
+
+[1]: https://www.nuget.org/packages/Datadog.Trace.Bundle#readme-body-tab
+
+{{% /collapse-content %}}
+
+2. **Configure a sidecar container for Datadog**.
+
+   1. In Azure, navigate to **Deployment** > **Deployment Center**. Select the **Containers** tab.
+   1. Click **Add** and select **Custom container**.
+   1. In the **Edit container** form, provide the following:
+      - **Image source**: Other container registries
+      - **Image type**: Public
+      - **Registry server URL**: `index.docker.io`
+      - **Image and tag**: `datadog/serverless-init:latest`
+      - **Port**: 8126
+   1. Select **Apply**.
+
+3. **Restart your application**.
+
+   If you modified a startup command, restart your application. Azure automatically restarts the application when new Application Settings are saved. 
+
+[301]: https://app.datadoghq.com/organization-settings/api-keys
+[302]: /getting_started/site/
+[303]: /getting_started/tagging/unified_service_tagging
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### View traces in Datadog
+
+After your application restarts, go to Datadog's [APM Service page][1] and search for the service name you set for your application (`DD_SERVICE`).
 
 ### Custom metrics
 
-To enable custom metrics for your application with DogStatsD, add  `DD_CUSTOM_METRICS_ENABLED` and set it as `true` in your Application Settings.
+To configure your application to submit custom metrics, follow the appropriate steps for your runtime:
 
-To configure your application to submit metrics, follow the appropriate steps for your runtime.
+- [Java][3]
+- [Node.js][4]
+- [.NET][5]
+- [PHP][6]
+- [Python][7]
 
-- [Java][9]
-- [Node][5]
-- [.NET][6]
-- [PHP][10]
-- [Python][11]
+### Continuous Profiler
+
+To enable the Continuous Profiler, set the environment variable `DD_PROFILING_ENABLED=true`. For more information, see the [Continuous Profiler documentation][8].
 
 ## Deployment
 
@@ -99,22 +240,24 @@ To configure your application to submit metrics, follow the appropriate steps fo
 
 ## Troubleshooting
 
-If you are not receiving traces or custom metric data as expected, enable **App Service logs** to receive debugging logs.
+If you are not receiving traces or custom metric data as expected, enable agent debug logging by setting `DD_LOG_LEVEL` in the sidecar configuration options. For tracer debugging set `DD_TRACE_DEBUG` to true. This generates logs additional debug logs for the sidecar and tracing library.
+
+Be sure to enable **App Service logs** to receive debugging logs.
 
 {{< img src="serverless/azure_app_service/app-service-logs.png" alt="Azure App Service Configuration: App Service logs, under the Monitoring section of Settings in the Azure UI. The 'Application logging' option is set to 'File System'." style="width:100%;" >}}
+ 
+Share the content of the **Log stream** with [Datadog Support][9].
 
-Share the content of the **Log stream** with [Datadog Support][14].
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd
-[2]: /getting_started/site/#access-the-datadog-site
-[3]: https://www.datadoghq.com/blog/azure-app-service-datadog-serverless-view/
-[4]: /tracing/services/service_page/
-[5]: https://github.com/brightcove/hot-shots
-[6]: /developers/dogstatsd/?tab=hostagent&code-lang=dotnet#code
-[9]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=java
-[10]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=php
-[11]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=python
-[14]: /help
+[1]: /serverless/guide/azure_app_service_linux_code_wrapper_script
+[2]: /tracing/services/service_page/
+[3]: /developers/dogstatsd/?tab=java#dogstatsd-client
+[4]: https://github.com/brightcove/hot-shots
+[5]: /developers/dogstatsd/?tab=dotnet#dogstatsd-client
+[6]: /developers/dogstatsd/?tab=php#dogstatsd-client
+[7]: /developers/dogstatsd/?tab=python#dogstatsd-client
+[8]: /profiler/
+[9]: /help

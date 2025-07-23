@@ -12,9 +12,6 @@ further_reading:
     tag: Documentation
     text: Dépannage
 ---
-{{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
-{{< /site-region >}}
 
 La vue Query Samples vous aide à identifier les requêtes qui s'exécutent à un instant donné. Comparez chaque exécution aux performances moyennes de la requête et des requêtes connexes.
 

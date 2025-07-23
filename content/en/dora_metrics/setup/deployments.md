@@ -22,12 +22,6 @@ further_reading:
   text: "Learn about Deployment Visibility"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
-<div class="alert alert-warning">DORA Metrics is in Preview.</div>
-
 ## Overview
 
 Deployment events are used to compute [deployment frequency](#calculating-deployment-frequency), [change lead time](#calculating-change-lead-time), and [change failure rate](#calculating-change-failure-rate).
@@ -75,6 +69,7 @@ You can optionally add the following attributes to the deployment events:
 - `env`: Filter your DORA metrics by environment on the [DORA Metrics][25] page.
 - `id`: Identify a deployment. This attribute is user-generated; when not provided, the endpoint returns a Datadog-generated UUID.
 - `version`: The deployment version.
+- `custom_tags`: Tags in the form `key:value` that can be used to filter events on the [DORA Metrics][25] page.
 
 
 ### API (cURL) Example
@@ -100,7 +95,8 @@ For the following example, replace `<DD_SITE>` in the URL with {{< region-param 
         },
         "env": "prod",
         "team": "backend",
-        "version": "v1.12.07"
+        "version": "v1.12.07",
+        "custom_tags": ["department:engineering", "app_type:backend"]
       }
     }
   }
@@ -214,7 +210,7 @@ To confirm that the setup is valid, select your GitHub application in the [GitHu
 {{% /tab %}}
 
 {{% tab "GitLab" %}}
-<div class="alert alert-warning">Datadog's GitLab integration is in Preview. To request access to Datadog's GitLab integration for your organization, reach out to <a href="https://www.datadoghq.com/support/">Datadog Support</a>.</div>
+<div class="alert alert-warning">Repositories from GitLab instances are supported in closed Preview. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.</div>
 
 After your organization has access, follow the [GitLab installation guide][1].
 
@@ -299,14 +295,22 @@ If the two metadata entries are defined for a service, only `extensions[datadogh
 - Change lead time is not available for the first deployment of a service that includes Git information.
 - Change lead time is not available if the most recent deployment of a service was more than 60 days ago.
 - The Change Lead Time calculation includes a maximum of 5000 commits per deployment.
-- For rebased branches, *change lead time* calculations consider the new commits created during the rebase, not the original commits.
 - When using "Squash" to merge pull requests:
   - For GitHub and GitLab: Metrics are emitted for the original commits.
   - For other Git providers: Metrics are emitted for the new commit added to the target branch.
+- When using "Rebase", either manually or to merge pull requests:
+  - For all Git providers: Metrics are emitted based on the original commit timestamps, while the displayed SHA corresponds to the newly created rebased commit.
 
 ## Calculating change failure rate
 
 Change failure rate is calculated by dividing the number of failure events over the number of deployment events for the same services and/or teams associated to both a failure and a deployment event.
+
+## Custom tags
+
+If the service associated with the deployment is registered in the [Software Catalog][1] with metadata set up (see [Adding Metadata][2]), the `languages` of the service and any `tags` are automatically retrieved and associated with the deployment event.
+
+[1]: /tracing/software_catalog
+[2]: /tracing/software_catalog/adding_metadata
 
 ## Further Reading
 
