@@ -81,7 +81,7 @@ Audit Event Forwarding allows you to send audit events from Datadog to custom de
 {{% /tab %}}
 {{% tab "Microsoft Sentinel" %}}
 
-<div class="alert alert-info">Log forwarding to Microsoft Sentinel is in Preview.</a></div>
+<div class="alert alert-info">Log forwarding to Microsoft Sentinel is in Preview.</div>
 
 6. Enter a name for the destination.
 7. Authentication for the Microsoft Sentinel Forwarder requires configuring an App Registration through the Datadog Azure Integration.
