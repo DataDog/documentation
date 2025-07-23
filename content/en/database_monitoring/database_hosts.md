@@ -4,9 +4,9 @@ description: Explore and dig into your database host health and configuration
 
 ---
 
-{{< img src="database_monitoring/databases-list-3.png" alt="The Databases page in Datadog" style="width:100%;" >}}
+{{< img src="database_monitoring/databases-list-4.png" alt="The Databases page in Datadog" style="width:100%;" >}}
 
-On the [Databases page][1], you can assess the health and activity of your database hosts. Sort and filter the list to prioritize hosts with triggered alerts, high query volume, and other criteria. Click on any host in the list to open a details panel:
+On the [Databases page][1], you can assess the health and activity of your database hosts and [clusters](#cluster-grouping). Sort and filter the list to prioritize hosts and clusters with triggered alerts, high query volume, and other criteria. Click on any host in the list to open a details panel:
 
 {{< img src="database_monitoring/db-list-details-panel-cropped-2.png" alt="The details panel for a single database host on the Databases page" style="width:90%;" >}}
 
