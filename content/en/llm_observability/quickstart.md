@@ -14,7 +14,7 @@ further_reading:
       text: 'Custom instrumentation'
 ---
 
-This page demonstrates using Datadog's LLM Observability SDK to instrument a "Hello World" LLM application.
+This page demonstrates using Datadog's LLM Observability SDK to instrument a Python or Node.js LLM application.
 
 ### Prerequisites
 
