@@ -30,21 +30,6 @@ pip install ddtrace>=3.11
 
 ### Setup
 
-#### Environment variables
-
-Specify the following environment variables in your application startup command:
-
-| Variable | Description | Required |
-| -------- | ----------- | -------- |
-| `DD_API_KEY` | Your [Datadog API key][2] | Yes |
-| `DD_APP_KEY` | Your [Datadog application key][3] | Yes |
-| `DD_SITE` | Your [Datadog site][4]. Defaults to `datadoghq.com`. | No |
-| `DD_LLMOBS_PROJECT_NAME` | The name of your project for experiments | No* |
-| `DD_LLMOBS_ENABLED` | Set to `true` to enable LLM Observability. Defaults to `true`. | No |
-| `DD_LLMOBS_ML_APP` | The name of your ML application. Required if not set in `LLMObs.enable()`. | No* |
-
-\* Can be set via `LLMObs.enable()` instead
-
 #### Project initialization
 
 Enable LLM Observability and configure your project:
@@ -53,10 +38,11 @@ Enable LLM Observability and configure your project:
 from ddtrace.llmobs import LLMObs
 
 LLMObs.enable(
-    ml_app="my-app",  # Required: Name of your ML application
-    project_name="my-project",  # Optional: Override DD_LLMOBS_PROJECT_NAME
-    app_key="<YOUR_APP_KEY>",  # Optional: Override DD_APP_KEY
-    site="datadoghq.com"  # Optional: Override DD_SITE
+    ml_app="my-app",
+    project_name="my-project",
+    api_key="<YOUR_API_KEY>",
+    app_key="<YOUR_APP_KEY>",
+    site="datadoghq.com"
 )
 ```
 
@@ -88,14 +74,6 @@ dataset = LLMObs.create_dataset(
         }
     ]
 )
-```
-
-#### Retrieving a Dataset
-
-To retrieve an existing dataset from Datadog:
-
-```python
-dataset = LLMObs.pull_dataset("capitals-of-the-world")
 ```
 
 #### Managing Dataset Records
@@ -142,6 +120,16 @@ for record in dataset:
 # Get dataset length
 print(len(dataset))
 ```
+
+
+#### Retrieving a Dataset
+
+To retrieve an existing dataset from Datadog:
+
+```python
+dataset = LLMObs.pull_dataset("capitals-of-the-world")
+```
+
 
 #### Working with CSV Files
 
