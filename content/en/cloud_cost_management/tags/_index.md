@@ -34,7 +34,7 @@ Get started with tags in three steps:
 
 Datadog applies tags to cost data using the following sources:
 
-- **[Out-of-the-box tags][1]** - Standardized tags that Datadog automatically generates from some billing data columns (like `aws_product` and `aws_region`) in your cost and usage report.
+- **[Out-of-the-box tags][1]** - Standardized tags that Datadog automatically generates from some billing data columns (like `aws_product` and `aws_region`) in your cost and usage report
 - **[Container allocation tags][2]** - Tags from your container workloads
 - **[Resource and account tags][3]** - Tags you've applied to your cloud resources
 - **[Tag pipelines][4]** - Custom rules you create to add missing tags
