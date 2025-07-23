@@ -38,9 +38,9 @@ title: Troubleshooting .NET App and API Protection
 
 If you're still experiencing problems:
 1. Check the [Application Security Monitoring troubleshooting guide][1]
-2. Review the [Java tracer documentation][2]
+2. Review the [.NET tracer documentation][2]
 3. Contact [Datadog support][3]
 
 [1]: /security/application_security/troubleshooting
-[2]: /tracing/trace_collection/compatibility/dotnet
+[2]: /tracing/trace_collection/compatibility/dotnet-core
 [3]: /help
