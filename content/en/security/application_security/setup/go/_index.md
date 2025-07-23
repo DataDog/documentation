@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-App and API Protection leverages the [Datadog Go library][5] to monitor and secure your Go service. The library integrate seemlessly into your workflow using [Orchestrion][6] compile-time instrumentation without requiring any code changes.
+App and API Protection (AAP) leverages the [Datadog Go library][5] to monitor and secure your Go service. The library integrates seamlessly into your workflow using [Orchestrion][6], an automatic compile-time instrumentation of Go code that does not require code changes. 
 
 For detailed compatibility information, including supported Go versions, frameworks, and deployment environments, see [Go Compatibility Requirements][2].
 
