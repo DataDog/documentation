@@ -2043,11 +2043,13 @@ components:
       description: The definition of `ActionConnectionIntegration` object.
       oneOf:
       - $ref: '#/components/schemas/AWSIntegration'
+      - $ref: '#/components/schemas/DatadogIntegration'
       - $ref: '#/components/schemas/HTTPIntegration'
     ActionConnectionIntegrationUpdate:
       description: The definition of `ActionConnectionIntegrationUpdate` object.
       oneOf:
       - $ref: '#/components/schemas/AWSIntegrationUpdate'
+      - $ref: '#/components/schemas/DatadogIntegrationUpdate'
       - $ref: '#/components/schemas/HTTPIntegrationUpdate'
     ActionQuery:
       description: An action query. This query type is used to trigger an action,
@@ -12241,6 +12243,103 @@ components:
           $ref: '#/components/schemas/StartStepNames'
       required:
       - databaseMonitoringTrigger
+      type: object
+    DatadogAPIKey:
+      description: The definition of the `DatadogAPIKey` object.
+      properties:
+        api_key:
+          description: The `DatadogAPIKey` `api_key`.
+          example: ''
+          type: string
+        app_key:
+          description: The `DatadogAPIKey` `app_key`.
+          example: ''
+          type: string
+        datacenter:
+          description: The `DatadogAPIKey` `datacenter`.
+          example: ''
+          type: string
+        subdomain:
+          description: Custom subdomain used for Datadog URLs generated with this
+            Connection. For example, if this org uses `https://acme.datadoghq.com`
+            to access Datadog, set this field to `acme`. If this field is omitted,
+            generated URLs will use the default site URL for its datacenter (see [https://docs.datadoghq.com/getting_started/site](https://docs.datadoghq.com/getting_started/site)).
+          type: string
+        type:
+          $ref: '#/components/schemas/DatadogAPIKeyType'
+      required:
+      - type
+      - datacenter
+      - api_key
+      - app_key
+      type: object
+    DatadogAPIKeyType:
+      description: The definition of the `DatadogAPIKey` object.
+      enum:
+      - DatadogAPIKey
+      example: DatadogAPIKey
+      type: string
+      x-enum-varnames:
+      - DATADOGAPIKEY
+    DatadogAPIKeyUpdate:
+      description: The definition of the `DatadogAPIKey` object.
+      properties:
+        api_key:
+          description: The `DatadogAPIKeyUpdate` `api_key`.
+          type: string
+        app_key:
+          description: The `DatadogAPIKeyUpdate` `app_key`.
+          type: string
+        datacenter:
+          description: The `DatadogAPIKeyUpdate` `datacenter`.
+          type: string
+        subdomain:
+          description: Custom subdomain used for Datadog URLs generated with this
+            Connection. For example, if this org uses `https://acme.datadoghq.com`
+            to access Datadog, set this field to `acme`. If this field is omitted,
+            generated URLs will use the default site URL for its datacenter (see [https://docs.datadoghq.com/getting_started/site](https://docs.datadoghq.com/getting_started/site)).
+          type: string
+        type:
+          $ref: '#/components/schemas/DatadogAPIKeyType'
+      required:
+      - type
+      type: object
+    DatadogCredentials:
+      description: The definition of the `DatadogCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/DatadogAPIKey'
+    DatadogCredentialsUpdate:
+      description: The definition of the `DatadogCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/DatadogAPIKeyUpdate'
+    DatadogIntegration:
+      description: The definition of the `DatadogIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/DatadogCredentials'
+        type:
+          $ref: '#/components/schemas/DatadogIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    DatadogIntegrationType:
+      description: The definition of the `DatadogIntegrationType` object.
+      enum:
+      - Datadog
+      example: Datadog
+      type: string
+      x-enum-varnames:
+      - DATADOG
+    DatadogIntegrationUpdate:
+      description: The definition of the `DatadogIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/DatadogCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/DatadogIntegrationType'
+      required:
+      - type
       type: object
     Dataset:
       description: Dataset object.
@@ -23580,6 +23679,61 @@ components:
             type: string
           type: array
       type: object
+    MetricTagCardinalitiesData:
+      description: A list of tag cardinalities associated with the given metric.
+      items:
+        $ref: '#/components/schemas/MetricTagCardinality'
+      type: array
+    MetricTagCardinalitiesMeta:
+      description: Response metadata object.
+      properties:
+        metric_name:
+          description: 'The name of metric for which the tag cardinalities are returned.
+
+            This matches the metric name provided in the request.
+
+            '
+          type: string
+      type: object
+    MetricTagCardinalitiesResponse:
+      description: 'Response object that includes an array of objects representing
+        the cardinality details of a metric''s tags.
+
+        '
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricTagCardinalitiesData'
+        meta:
+          $ref: '#/components/schemas/MetricTagCardinalitiesMeta'
+      readOnly: true
+      type: object
+    MetricTagCardinality:
+      description: Object containing metadata and attributes related to a specific
+        tag key associated with the metric.
+      example:
+        attributes:
+          cardinality_delta: 25
+        id: http.request.latency
+        type: tag_cardinality
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricTagCardinalityAttributes'
+        id:
+          description: The name of the tag key.
+          type: string
+        type:
+          default: tag_cardinality
+          description: This describes the endpoint action.
+          type: string
+      type: object
+    MetricTagCardinalityAttributes:
+      description: An object containing properties related to the tag key
+      properties:
+        cardinality_delta:
+          description: This describes the recent change in the tag keys cardinality
+          format: int64
+          type: integer
+      type: object
     MetricTagConfiguration:
       description: Object for a single metric tag configuration.
       example:
@@ -34815,9 +34969,22 @@ components:
           format: int64
           minimum: 0
           type: integer
+        flaggedIPType:
+          $ref: '#/components/schemas/SecurityMonitoringRuleCaseActionOptionsFlaggedIPType'
         userBehaviorName:
           $ref: '#/components/schemas/SecurityMonitoringRuleCaseActionOptionsUserBehaviorName'
       type: object
+    SecurityMonitoringRuleCaseActionOptionsFlaggedIPType:
+      description: Used with the case action of type 'flag_ip'. The value specified
+        in this field is applied as a flag to the IP addresses.
+      enum:
+      - SUSPICIOUS
+      - FLAGGED
+      example: FLAGGED
+      type: string
+      x-enum-varnames:
+      - SUSPICIOUS
+      - FLAGGED
     SecurityMonitoringRuleCaseActionOptionsUserBehaviorName:
       description: Used with the case action of type 'user_behavior'. The value specified
         in this field is applied as a risk tag to all users affected by the rule.
@@ -34828,11 +34995,13 @@ components:
       - block_ip
       - block_user
       - user_behavior
+      - flag_ip
       type: string
       x-enum-varnames:
       - BLOCK_IP
       - BLOCK_USER
       - USER_BEHAVIOR
+      - FLAG_IP
     SecurityMonitoringRuleCaseCreate:
       description: Case when signal is generated.
       properties:
@@ -55993,6 +56162,53 @@ paths:
         permissions: []
       x-undo:
         type: safe
+  /api/v2/metrics/{metric_name}/tag-cardinalities:
+    get:
+      description: Returns the cardinality details of tags for a specific metric.
+      operationId: GetMetricTagCardinalityDetails
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricTagCardinalitiesResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      summary: Get tag key cardinality details
+      tags:
+      - Metrics
+      x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+        - metrics_read
+      x-undo:
+        type: safe
   /api/v2/metrics/{metric_name}/tags:
     delete:
       description: 'Deletes a metric''s tag configuration. Can only be used with application
@@ -57604,6 +57820,7 @@ paths:
             default: navy.oncall.datadoghq.com
             description: The globally available endpoint for On-Call.
             enum:
+            - lava.oncall.datadoghq.com
             - saffron.oncall.datadoghq.com
             - navy.oncall.datadoghq.com
             - coral.oncall.datadoghq.com
@@ -57663,6 +57880,7 @@ paths:
             default: navy.oncall.datadoghq.com
             description: The globally available endpoint for On-Call.
             enum:
+            - lava.oncall.datadoghq.com
             - saffron.oncall.datadoghq.com
             - navy.oncall.datadoghq.com
             - coral.oncall.datadoghq.com
@@ -57722,6 +57940,7 @@ paths:
             default: navy.oncall.datadoghq.com
             description: The globally available endpoint for On-Call.
             enum:
+            - lava.oncall.datadoghq.com
             - saffron.oncall.datadoghq.com
             - navy.oncall.datadoghq.com
             - coral.oncall.datadoghq.com
@@ -57781,6 +58000,7 @@ paths:
             default: navy.oncall.datadoghq.com
             description: The globally available endpoint for On-Call.
             enum:
+            - lava.oncall.datadoghq.com
             - saffron.oncall.datadoghq.com
             - navy.oncall.datadoghq.com
             - coral.oncall.datadoghq.com
@@ -70193,13 +70413,18 @@ tags:
     for more information.
   name: Incidents
 - description: 'Manage your Datadog API and application keys. You need an API key
-    and
+    and an
 
-    an application key for a user with the required permissions to interact
+    application key for a user with the required permissions to interact with these
+    endpoints.
 
-    with these endpoints. The full list of API and application keys can be
 
-    seen on your [Datadog API page](https://app.datadoghq.com/account/settings#api).'
+    Consult the following pages to view and manage your keys:
+
+
+    - [API Keys](https://app.datadoghq.com/organization-settings/api-keys)
+
+    - [Application Keys](https://app.datadoghq.com/personal-settings/application-keys)'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/api-app-keys/

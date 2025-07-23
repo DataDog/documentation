@@ -19132,6 +19132,14 @@ components:
           description: The total account usage.
           format: int64
           type: integer
+        account_committed_usage:
+          description: The total account committed usage.
+          format: int64
+          type: integer
+        account_on_demand_usage:
+          description: The total account on-demand usage.
+          format: int64
+          type: integer
         elapsed_usage_hours:
           description: Elapsed usage hours for some billable product.
           format: int64
@@ -35573,6 +35581,12 @@ paths:
       description: Search for Synthetic tests and Test Suites.
       operationId: SearchTests
       parameters:
+      - description: The search query.
+        in: query
+        name: text
+        required: false
+        schema:
+          type: string
       - description: If true, include the full configuration for each test in the
           response.
         in: query
@@ -39658,13 +39672,18 @@ tags:
 - description: Get a list of IP prefixes belonging to Datadog.
   name: IP Ranges
 - description: 'Manage your Datadog API and application keys. You need an API key
-    and
+    and an
 
-    an application key for a user with the required permissions to interact
+    application key for a user with the required permissions to interact with these
+    endpoints.
 
-    with these endpoints. The full list of API and application keys can be
 
-    seen on your [Datadog API page](https://app.datadoghq.com/account/settings#api).'
+    Consult the following pages to view and manage your keys:
+
+
+    - [API Keys](https://app.datadoghq.com/organization-settings/api-keys)
+
+    - [Application Keys](https://app.datadoghq.com/personal-settings/application-keys)'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/api-app-keys/
