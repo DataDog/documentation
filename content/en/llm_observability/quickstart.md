@@ -14,9 +14,7 @@ further_reading:
       text: 'Custom instrumentation'
 ---
 
-
-Quickly get started with LLM Observability by using our SDKs to instrument your Python or Node.js LLM application.
-
+This page demonstrates using Datadog's LLM Observability SDK to instrument a "Hello World" LLM application.
 
 ### Prerequisites
 
@@ -79,10 +77,10 @@ Make requests to your application triggering LLM calls and then view traces in t
 
 ### Next steps
 
-Once traces are being submitted from your application you can:
+After traces are being submitted from your application, you can:
 
 - [Configure evaluations][4] that you can use to assess the effectiveness of your LLM application.
-- [Custom instrument][5] your application further to extract data that automatic instrumentation cannot.
+- Add [custom instrumentation][5] to your application and extract data that automatic instrumentation cannot.
 
 
 ## Example "Hello World" application
