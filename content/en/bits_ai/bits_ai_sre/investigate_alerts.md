@@ -21,7 +21,14 @@ There are a few ways to enable Bits for automated investigations:
 
 You can also add the tag to your desired monitors using the Datadog API or Terraform.
 
-An investigation initiates when a monitor transitions to the alert state. Transitions to the warn or no data state, [renotifications][12], and test notifications do not trigger investigations. Additionally, noisy monitors are automatically rate-limited to avoid unnecessary investigations and protect your budget.
+An investigation initiates when a monitor transitions to the alert state. Transitions to the warn or no data state, [renotifications][12], and test notifications do not trigger investigations.
+
+#### Rate limits
+
+|  Type         | Description                                                                                   | Limit                                      |
+|--------------------|----------------------------------------------------------------------------------------------|--------------------------------------------|
+| Monitor limits     | Each individual monitor can execute investigations up to 2 times every 30 minutes.<br>A monitor is considered "noisy" if it triggers alerts on 12 or more of the last 14 days, or fires in more than 15% of an hour interval. Noisy monitors are automatically rate-limited. | 2 executions per 30 minutes per monitor     |
+| Organization limits| The total number of monitor investigations that can be executed across the organization.      | 5 executions per hour per organization     |
 
 ### Manually start an investigation
 
