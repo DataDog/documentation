@@ -33,7 +33,7 @@ To page a team through email:
 
 ### Trigger Pages through calls
 
-You can also trigger a Page through live call routing, which lets users initiate a Page by dialing and calling up a dedicated phone number. This provides an additional channel for urgent situations where immediate attention is needed. For setup instructions, see [Live Call Routing][3].
+You can also trigger a Page through live call routing, which lets users initiate a Page by calling a dedicated phone number. This provides an additional channel for urgent situations. For setup instructions, see [Live Call Routing][3].
 
 
 ### Page manually
