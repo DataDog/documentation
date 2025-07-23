@@ -1,5 +1,5 @@
 ---
-title: LLM Observability Custom Instrumentation
+title: Custom Instrumentation
 aliases:
     - /tracing/llm_observability/trace_an_llm_application
     - /llm_observability/setup

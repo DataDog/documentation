@@ -8,11 +8,12 @@ further_reading:
       text: 'Learn about LLM Observability'
     - link: '/llm_observability/evaluations'
       tag: 'Evaluations'
-      text: 'Configure Evaluations'
+      text: 'Configure Evaluations to measure quality'
     - link: '/llm_observability/instrumentation/custom'
       tag: 'Custom Instrumentation'
       text: 'Custom instrumentation'
 ---
+
 
 Quickly get started with LLM Observability by using our SDKs to instrument your Python or Node.js LLM application.
 
