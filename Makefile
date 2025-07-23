@@ -126,7 +126,7 @@ vector_data: integrations_data/extracted/vector
 	@cue export $(shell find integrations_data/extracted/vector -type f -name "*.cue") > integrations_data/extracted/vector/cue.json; \
 	node ./assets/scripts/reference-process.js
 
-# only build placeholders in ci
+# only build placeholders in CI
 placeholders: hugpython update_pre_build
 	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml"
 
