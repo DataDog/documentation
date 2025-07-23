@@ -451,7 +451,6 @@ List all datasets, sorted by creation date. The most recently-created datasets a
 | `id` | string | Unique dataset ID. Set at the top level `id` field within the [Data](#object-data) object. |
 | `name` | string | Unique dataset name. |
 | `description` | string | Dataset description. |
-| `metadata` | json | Arbitrary user-defined metadata |
 | `created_at` | timestamp | Timestamp representing when the resource was created. |
 | `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
 
@@ -467,7 +466,6 @@ Create a dataset. If there is an existing dataset with the same name, the API re
 | ---- | ---- | ---- |
 | `name` (_required_) | string | Unique dataset name. |
 | `description` | string | Dataset description. |
-| `metadata` | json | Arbitrary user-defined metadata. |
 
 **Response**
 
@@ -476,7 +474,6 @@ Create a dataset. If there is an existing dataset with the same name, the API re
 | `id` | UUID | Unique ID for the dataset. Set at the top level `id` field within the [Data](#object-data) object. |
 | `name` | string | Unique dataset name. |
 | `description` | string | Dataset description. |
-| `metadata` | json | Arbitrary user-defined metadata. |
 | `created_at` | timestamp | Timestamp representing when the resource was created. |
 | `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
 
@@ -508,7 +505,6 @@ List all dataset records, sorted by creation date. The most recently-created rec
 | `dataset_id` | string | Unique dataset ID. |
 | `input_data` | any (string, number, Boolean, object, array) | Data that serves as the starting point for an experiment. |
 | `expected_output` | any (string, number, Boolean, object, array) | Expected output |
-| `metadata` | json | Arbitrary user-defined metadata. |
 | `created_at` | timestamp | Timestamp representing when the resource was created. |
 | `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
 
@@ -530,7 +526,6 @@ Appends records for a given dataset.
 | ---- | ---- | ---- |
 | `input_data` (_required_) | any (string, number, Boolean, object, array) | Data that serves as the starting point for an experiment. |
 | `expected_output` | any (string, number, Boolean, object, array) | Expected output |
-| `metadata` | json | Arbitrary user-defined metadata. |
 
 **Response**
 
@@ -574,7 +569,6 @@ List all experiments, sorted by creation date. The most recently-created experim
 | `dataset_id` | string | Unique dataset ID. |
 | `name` | string | Unique experiment name. |
 | `description` | string | Experiment description. |
-| `metadata` | json | Arbitrary user-defined metadata |
 | `created_at` | timestamp | Timestamp representing when the resource was created. |
 | `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
 
@@ -593,7 +587,6 @@ Create an experiment. If there is an existing experiment with the same name, the
 | `dataset_version` | int | Dataset version. |
 | `name` (_required_) | string | Unique experiment name. |
 | `description` | string | Experiment description. |
-| `metadata` | json | Arbitrary user-defined metadata |
 | `ensure_unique` | bool | If `true`, Datadog generates a new experiment with a unique name in the case of a conflict. Datadog recommends you set this field to `true`. |
 
 **Response**
@@ -605,7 +598,6 @@ Create an experiment. If there is an existing experiment with the same name, the
 | `dataset_id` | string | Unique dataset ID. |
 | `name` | string | Unique experiment name. |
 | `description` | string | Experiment description. |
-| `metadata` | json | Arbitrary user-defined metadata |
 | `created_at` | timestamp | Timestamp representing when the resource was created. |
 | `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
 
