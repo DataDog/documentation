@@ -80,7 +80,7 @@ And the library supports the following runtimes:
 
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 -
-The Python library supports the [database API specifications][4] and supports all generic SQL databases. This includes databases such as SQLite, Mysql, Postgres and MariaDB.
+The Python library supports the [database API specifications][4] and supports all generic SQL databases. This includes databases such as SQLite, MySQL, PostgreSQL, and MariaDB.
 
 ### User Authentication Frameworks compatibility
 
