@@ -382,7 +382,7 @@ Surveillez les logs Fargate avec le pilote de logs `awslogs` et une fonction Lam
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "ecs_fargate" >}}
+{{< get-metrics-from-git "aws-fargate" >}}
  Les descriptions précisent également lorsqu'une métrique est uniquement disponible sur Linux.
 
 ### Événements
@@ -390,7 +390,7 @@ Surveillez les logs Fargate avec le pilote de logs `awslogs` et une fonction Lam
 Le check ECS Fargate n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "ecs_fargate" >}}
+{{< get-service-checks-from-git "aws-fargate" >}}
 
 
 ## Dépannage

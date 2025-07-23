@@ -1,43 +1,28 @@
-{{ $params := .Params }}
-
-{{ $integration_name := .Page.Params.git_integration_title }}
-
-{{ if (.Get 0 ) }}
-
-  {{ $.Scratch.Set "integration" (.Get 0) }}
-
-{{ else }}
-
-  {{ $.Scratch.Set "integration" $integration_name }}
-
-{{ end }}
-
-{{ $integration := $.Scratch.Get "integration" }}
-
-{{ if or (not (eq $.Page.Site.Params.environment "development")) ($.Page.Site.Data.service_checks) }}
-
-  <!-- get lang specific data file -->
-  {{ $.Scratch.Set "data" "" }}
-  {{ if ne $.Page.Lang "en"}}
-      {{ if (fileExists (print "data/service_checks/" $integration "." $.Page.Lang ".json")) }}
-        {{ $.Scratch.Set "data" (index $.Page.Site.Data.service_checks (print $integration "." $.Page.Lang)) }}
-      {{ else }}
-        {{ $.Scratch.Set "data" (index $.Page.Site.Data.service_checks $integration) }}
+{{- $int_name := (.Get 0 ) -}}
+{{- if $int_name -}}
+  <!-- if the page is a draft we can skip -->
+  {{- if not .Page.Draft -}}
+    <!-- if non english page load from english integration -->
+    {{- $page := "" -}}
+    {{ with where .Site.Sites "Language.Lang" "eq" "en" }}
+      {{ with index . 0 }}
+        {{ $page = .GetPage (print "/integrations/" $int_name ".md") }}
       {{ end }}
-  {{ else }}
-      {{ $.Scratch.Set "data" (index $.Page.Site.Data.service_checks $integration) }}
-  {{ end }}
-  {{ $data := ($.Scratch.Get "data") }}
-
-  {{ range $data }}
-
-    <p>
-      <strong>{{ .check }}</strong><br>
-      {{ .description | markdownify }}<br>
-      {{ with .statuses }}<i>Statuses: {{ range $i, $e := . }}{{ if $i }}, {{ end }}{{ $e }}{{ end }}</i>{{ end }}
-    </p>
-
-  {{ end }}
-
-
-{{ end }}
+    {{ end }}
+    {{- if not $page -}}
+      {{ warnf "Integration page for '%s' not found in get-service-checks-from-git shortcode." $int_name }}
+    {{- else -}}
+      {{- $pattern := `(?s)### Service Checks\n(.*?)(#{2,3}\s)` -}}
+      {{- $matches := findRE $pattern $page.RawContent 1 -}}
+      {{- if not $matches -}}
+        {{ warnf "No ### Service Checks section found in '%s' integration documentation (get-service-checks-from-git shortcode)." $int_name }}
+      {{- else -}}
+        {{- range $matches -}}
+          {{- $content := strings.TrimPrefix "### Service Checks\n" . | strings.TrimSuffix (index (findRE "(#{2,3}\\s)$" . 1) 0) -}}
+          {{- $content := replaceRE `\{\{<[^>]+>\}\}` "" $content -}}
+          {{- $content | markdownify -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

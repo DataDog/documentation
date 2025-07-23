@@ -186,13 +186,13 @@ For example:
 }
 ```
 
-To start collecting process information in ECS Fargate, add the [`PidMode` parameter][3] to the Task Definition and set it to `task` as follows:
+To start collecting process information in ECS Fargate, add the [`pidMode` parameter][3] to the Task Definition and set it to `task` as follows:
 
 ```text
 "pidMode": "task"
 ```
 
-Once enabled, use the `AWS Fargate` Containers facet on the [Live Processes page][1] to filter processes by ECS, or enter `fargate:ecs` in the search query.
+Once enabled, use the `AWS Fargate` Containers facet on the [Live Processes page][1] to filter for processes running in ECS, or enter `fargate:ecs` in the search query.
 
 {{< img src="infrastructure/process/fargate_ecs.png" alt="Processes in AWS Fargate" >}}
 
@@ -207,7 +207,7 @@ For more information about installing the Datadog Agent with AWS ECS Fargate, se
 
 ### I/O stats
 
-I/O and open files stats can be collected by the Datadog system-probe, which runs with elevated privileges. To enable the process module of the system-probe, use the following configuration:
+I/O and open files stats can be collected by the Datadog system-probe, which runs with elevated privileges. To collect these stats, enable the process module of the system-probe:
 
 1. Copy the system-probe example configuration:
 
@@ -232,8 +232,10 @@ I/O and open files stats can be collected by the Datadog system-probe, which run
    **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
 
 
-### Optimize footprint for process collection
-By default, the Datadog Agent has a separate Process Agent for container and process collection. You can consolidate container and process collection to the core Agent if you're running a Linux environment.
+### Optimized process collection footprint
+As of Agent v7.65.0, container and process collection run in the core Datadog Agent by default on Linux, reducing the Agent's overall footprint.
+
+For verification, you can explicitly enable this feature.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -272,6 +274,8 @@ process_config:
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+ Explicitly setting the config flag to false will cause container and process collection to run in the separate Process Agent. Note that container and process collection always run in the separate Process Agent in non-Linux environments.
 
 
 ### Process arguments scrubbing
@@ -391,8 +395,8 @@ You can also filter your processes using Datadog [tags][3], such as `host`, `pod
 Datadog automatically generates a `command` tag, so that you can filter for:
 
 - Third-party software, for example: `command:mongod`, `command:nginx`
-- Container management software, for example:  `command:docker`, `command:kubelet`)
-- Common workloads, for example:  `command:ssh`, `command:CRON`)
+- Container management software, for example:  `command:docker`, `command:kubelet`
+- Common workloads, for example:  `command:ssh`, `command:CRON`
 
 #### Containerized environment tags
 
@@ -405,14 +409,13 @@ Furthermore, processes in ECS containers are also tagged by:
 Processes in Kubernetes containers are tagged by:
 
 - `pod_name`
-- `kube_pod_ip`
 - `kube_service`
 - `kube_namespace`
 - `kube_replica_set`
 - `kube_daemon_set`
 - `kube_job`
 - `kube_deployment`
-- `Kube_cluster`
+- `kube_cluster_name`
 
 If you have configuration for [Unified Service Tagging][4] in place, `env`, `service`, and `version` are picked up automatically.
 Having these tags available lets you tie together APM, logs, metrics, and process data.
@@ -422,24 +425,24 @@ Having these tags available lets you tie together APM, logs, metrics, and proces
 
 You can create rule definitions to add manual tags to processes based on the command line.
 
-1. On the **Manage Process Tags** tab, select _New Process Tag Rule_ button
+1. On the **Manage Process Tags** tab, select the _New Process Tag Rule_ button
 2. Select a process to use as a reference
 3. Define the parsing and match criteria for your tag
 4. If validation passes, create a new rule
 
-After a rule is created, tags are available for all process command line values that match the rule criteria. These tags are be available in search and can be used in the definition of [Live Process Monitors][6] and [Custom Metrics][13].
+After a rule is created, tags are available for all process command line values that match the rule criteria. These tags are available in search and can be used in the definition of [Live Process Monitors][6] and [Custom Metrics][13].
 
 ## Scatter plot
 
 Use the scatter plot analytic to compare two metrics with one another in order to better understand the performance of your containers.
 
-To access the scatter plot analytic [in the Processes page][5] click on the _Show Summary graph_ button the select the "Scatter Plot" tab:
+To access the scatter plot analytic [in the Processes page][5] click on the _Show Summary graph_ button then select the "Scatter Plot" tab:
 
 {{< img src="infrastructure/process/scatterplot_selection.png" alt="Scatter plot selection" style="width:60%;">}}
 
-By default, the graph groups by the `command` tag key. The size of each dot represents the number of processes in that group, and clicking on a dot displays the individual pids and containers that contribute to the group.
+By default, the graph groups by the `command` tag key. The size of each dot represents the number of processes in that group, and clicking on a dot displays the individual processes and containers that contribute to the group.
 
-The query at the top of the scatter plot analytic allows you to control your scatter plot analytic:
+The options at the top of the graph allow you to control your scatter plot analytic:
 
 - Selection of metrics to display.
 - Selection of the aggregation method for both metrics.
@@ -491,7 +494,7 @@ You can customize integration views (for example, when aggregating a query for N
 
 ## Processes across the platform
 
-### Live containers
+### Live Containers
 
 Live Processes adds extra visibility to your container deployments by monitoring the processes running on each of your containers. Click on a container in the [Live Containers][9] page to view its process tree, including the commands it is running and their resource consumption. Use this data alongside other container metrics to determine the root cause of failing containers or deployments.
 
@@ -510,7 +513,7 @@ Processes are normally collected at 10s resolution. While actively working with 
 ## Additional information
 
 - Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
-- In container deployments, the `/etc/passwd` file mounted into the `docker-dd-agent` is necessary to collect usernames for each process. This is a public file and the Process Agent does not use any fields except the username. All features except the `user` metadata field function without access to this file. **Note**: Live Processes only uses the host `passwd` file and does not perform username resolution for users created within containers.
+- In container deployments, the `/etc/passwd` file mounted into the `docker-dd-agent` is necessary to collect usernames for each process. This is a public file and the Process Agent does not use any fields except the username. If the Agent is running unprivileged, the mount does not occur. Even without access to the `/etc/passwd` file, all features except the `user` metadata field still function. **Note**: Live Processes only uses the host `passwd` file and does not perform username resolution for users created within containers.
 
 ## Further Reading
 

@@ -16,10 +16,6 @@ further_reading:
 title: (レガシー) Splunk 環境で Observability Pipelines をセットアップする
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines は US1-FED Datadog サイトでは利用できません。</div>
-{{< /site-region >}}
-
 {{% observability_pipelines/legacy_warning %}}
 
 <div class="alert alert-info">Observability Pipelines は Splunk の HTTP Event Collector (HEC) プロトコルのみをサポートしています。</div>

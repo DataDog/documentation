@@ -38,10 +38,21 @@ For more information on AWS network reachability, see the [AWS documentation][34
 
 An [S3 bucket][1] (`aws_s3_bucket`) is considered publicly accessible if:
 
+* _Public by bucket policy:_
+
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
 |The bucket policy allows the `s3:GetObject` permission unconditionally, with resource and principal set to `"*"`. |This defines a public policy on the bucket, meaning that unauthenticated access is allowed. `"*"` is a wildcard, meaning access is given to any resource and principal. |
 | None of the bucket's `public_access_block_configuration` and the AWS account's public access block (`aws_s3_account_public_access_block`) have `restrict_public_buckets` set to `true`. | None of the buckets or accounts explicitly block public access, meaning that the public bucket policy takes effect. |
+
+***OR***
+
+* _Public by Access Control List (ACL):_
+
+| **Criteria** | **Explanation** |
+|--------------|-----------------|
+|The bucket has ACL grants that allow insecure permissions to public grantees. |The bucket's ACL grants one or more of the following permissions (`full_control`, `read`, `write`, `write_acp`) to either authenticated users (`http://acs.amazonaws.com/groups/global/authenticatedusers`) or all users (`http://acs.amazonaws.com/groups/global/allusers`). |
+| None of the bucket's `public_access_block_configuration` and the AWS account's public access block (`aws_s3_account_public_access_block`) have `ignore_public_acls` set to `true`. | None of the buckets or accounts explicitly ignore public ACLs, meaning that the public ACL grants take effect. |
 
 See [Blocking public access to your Amazon S3 storage][2] for more information.
 

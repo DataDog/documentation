@@ -39,7 +39,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft�
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "azure_file_storage" >}}
+{{ get-metrics-from-git "azure-filestorage" }}
 
 
 ### Événements

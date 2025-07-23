@@ -10,10 +10,6 @@ further_reading:
   text: "Variables and parameters"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 JavaScript is available in Workflows using inline expressions or through the dedicated JS **Function** and **Expression** actions.
 
 ## Inline JavaScript expressions

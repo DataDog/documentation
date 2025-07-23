@@ -4,7 +4,6 @@ further_reading:
 - link: https://docs.datadoghq.com/integrations/azure/
   tag: 설명서
   text: Azure 통합
-
 title: Azure 통합 아키텍처 및 설정
 ---
 
@@ -117,12 +116,12 @@ Monitoring Reader 역할 아래로 액세스를 제한하면 다음과 같은 �
 
   - 모니터링 데이터의 일부 또는 전체 손실
   - 리소스 메트릭에 대한 태그 형태 메타데이터의 부분적 또는 전체 손실
-  - [클라우드 보안 관리 잘못된 구성(CSM 잘못된 구성)][3] 또는 [리소스 카탈로그][4]에 대한 데이터의 부분적 또는 전체 손실
+  - [Cloud Security Misconfigurations][3] 또는 [Resource Catalog][4]에 대한 데이터의 부분적 또는 전체 손실
   - Datadog에서 생성된 메트릭의 부분적 또는 전체 손실
 
 Azure AD 역할을 제한하거나 생략하면 다음과 같은 의미가 있습니다.
 
-  - CSM 잘못된 구성으로 인해 Azure AD 리소스에 대한 메타데이터의 부분적 또는 전체 손실
+  - Cloud Security Misconfigurations에서 Azure AD 리소스에 대한 메타데이터의 부분적 또는 전체 손실
   - Azure AD 리소스에 대한 크리덴셜 만료 모니터링의 부분적 또는 전체 손실
 
 [1]: /ko/getting_started/site/

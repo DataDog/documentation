@@ -47,7 +47,7 @@ Amazon Managed Workflows for Apache Airflow (MWAA) は、クラウド上でワ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_mwaa" >}}
+{{< get-metrics-from-git "amazon-mwaa" >}}
 
 
 ### イベント
