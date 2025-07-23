@@ -18,11 +18,11 @@ When integrating any SDK into your Android application, understanding its perfor
 
 ### Android SDK
 
-To simulate the typical usage of Datadog SDK it was integrated into the [Docile-Alligator/Infinity-For-Reddit][5] application and typical user behavior (scrolling the feed, browsing reddits) was simulated.
+To simulate the typical usage of the Datadog SDK, it was integrated into the [Docile-Alligator/Infinity-For-Reddit][5] application and typical user behavior (in other words, scrolling the feed, browsing subreddits) was simulated.
 
 Below are the results of the measurements.
 
-| Measurement       | with SDK                       | w/o SDK        |
+| Measurement       | with SDK                       | without SDK    |
 |-------------------|--------------------------------|----------------|
 | Peak CPU Usage    | 26.8%                          | 25.2%          |
 | Peak Memory Usage | 432.6 MB                       | 437 MB         |
@@ -34,17 +34,17 @@ You can read the following [page][1] for more details about these benchmarks.
 
 ### iOS SDK
 
-To simulate the typical usage of Datadog SDK it was integrated into the [Beam][6] application and typical user behavior (scrolling the feed, browsing reddits) was simulated.
+To simulate the typical usage of Datadog SDK, it was integrated into the [Beam][6] application and typical user behavior (scrolling the feed, browsing reddits) was simulated.
 
 Below are the results of the measurements.
 
-| Measurement       | with SDK                        | w/o SDK  |
-|-------------------|---------------------------------|----------|
-| Peak CPU Usage    | 44%                             | 40%      |
-| Peak Memory Usage | 72.4 MB                         | 67.96 MB |
-| App startup time  | 0.894 ms                        | 0.649 ms |
-| Bundle size       | 23.6 MB                         | 22.2 MB  |
-| Network usage     | 21.88 KB sent, 1.68 KB received | n/a      |
+| Measurement       | with SDK                        | without SDK |
+|-------------------|---------------------------------|-------------|
+| Peak CPU Usage    | 44%                             | 40%         |
+| Peak Memory Usage | 72.4 MB                         | 67.96 MB    |
+| App startup time  | 0.894 ms                        | 0.649 ms    |
+| Bundle size       | 23.6 MB                         | 22.2 MB     |
+| Network usage     | 21.88 KB sent, 1.68 KB received | n/a         |
 
 You can read the following [page][2] for more details about these benchmarks.
 
