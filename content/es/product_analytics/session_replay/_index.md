@@ -18,8 +18,8 @@ further_reading:
     Session Replay
 - link: /integrations/content_security_policy_logs
   tag: Documentación
-  text: Detectar y agregar infracciones de CSP con Datadog
-title: Session Replay
+  text: Detectar y agregar las infracciones de la CSP con Datadog
+title: Reproducción de la actividad del usuario
 ---
 
 
@@ -61,9 +61,9 @@ Puedes crear una lista de reproducción de Session Replays para organizarlas seg
 
 [1]: https://github.com/DataDog/browser-sdk
 [2]: https://www.rrweb.io/
-[3]: /es/real_user_monitoring/session_replay/browser/
-[4]: /es/real_user_monitoring/session_replay/mobile/
+[3]: /es/product_analytics/session_replay/browser/
+[4]: /es/product_analytics/session_replay/mobile/
 [5]: https://docs.datadoghq.com/es/notebooks/
 [6]: https://docs.datadoghq.com/es/account_management/audit_trail/
 [7]: https://app.datadoghq.com/rum/replay/playlists/my-watch-history
-[8]: /es/real_user_monitoring/session_replay/playlists
+[8]: /es/product_analytics/session_replay/playlists

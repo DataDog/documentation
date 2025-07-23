@@ -38,7 +38,7 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
     <tr>
         <td>Fargate Infrastructure</td>
         <td>Infrastructure Monitoring</td>
-        <td>Not yet supported</td>
+        <td>Cloud Security</td>
         <td>Workload Protection</td>
     </tr>
 </table>
@@ -242,9 +242,16 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
 aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-agent-ecs-fargate.json
 {{< /code-block >}}
 
+#### Datadog Cloud Security
+1. In Datadog, navigate to [Cloud Security > Setup > Cloud Integrations > AWS][9].
+2. Enable Vulnerability Management by deploying the [Datadog Agentless scanner][10] on your AWS accounts hosting your Amazon ECR.
+
 [6]: /integrations/eks_fargate/?tab=manual#amazon-eks-fargate-rbac
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
+[9]: https://app.datadoghq.com/security/configuration/csm/setup?active_steps=cloud-accounts&active_sub_step=aws&vuln_container_enabled=true&vuln_host_enabled=true&vuln_lambda_enabled=true
+[10]: /security/cloud_security_management/setup/agentless_scanning/enable/?tab=existingawsaccount#set-up-aws-cloudformation
+
 
 {{% /tab %}}
 
