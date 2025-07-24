@@ -558,6 +558,7 @@ To automatically track user tap actions in SwiftUI, enable the `swiftUIActionsPr
 - The implementation differs between iOS 18+ and iOS 17 and below:
   - **iOS 18 and above:** Most interactions are reliably tracked with correct component names (e.g., `SwiftUI_Button`, `SwiftUI_NavigationLink`).
   - **iOS 17 and below:** The SDK cannot distinguish between interactive and non-interactive components (for example, Button vs. Label). For that reason, actions are reported as `SwiftUI_Unidentified_Element`.
+- If you use both automatic and manual tracking, you may see duplicate events. This is a known limitation. To avoid this, use only one instrumentation type - either automatic or manual.
 - You can use the default predicate, `DefaultSwiftUIRUMActionsPredicate`, or provide your own to filter or rename actions. You can also disable legacy detection (iOS 17 and below) if you only want reliable iOS 18+ tracking:
 
 {{< tabs >}}
