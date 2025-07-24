@@ -21,11 +21,11 @@ further_reading:
 
 # Overview
 
+Native mobile tracing gives you precise control over what operations are measured by manually instrumenting spans in your iOS or Android app code. This approach works independently of Datadog RUM, but can also be used alongside it for deeper visibility into user experiences, code level performance, and backend interactions. You can also use [OpenTelemetry for iOS][3] or [OpenTelemetry for Android][4] for custom instrumentation.
+
 Datadog's Trace SDK for [iOS][1] and [Android][2] lets you add APM spans to your mobile apps. This guide covers usage, key use cases, and sampling rates, with or without using the Datadog RUM SDK.
 
 **Note**: When using the Trace SDK independently (without the RUM SDK), root spans for outgoing network requests do not get automatically created. Therefore, you need to manually start and stop spans on the client side to create frontend-to-backend distributed APM traces.
-
-Native mobile tracing gives you precise control over what operations are measured by manually instrumenting spans in your iOS or Android app code. This approach works independently of Datadog RUM, but can also be used alongside it for deeper visibility into user experiences, code level performance, and backend interactions. You can also use [OpenTelemetry for iOS][3] or [OpenTelemetry for Android][4] for custom instrumentation.
 
 This guide focuses on native iOS and Android apps. For other mobile platforms, see the following documentation:
 
