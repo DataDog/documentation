@@ -52,7 +52,7 @@ Use the [manual context propagation][1] (see step 8) to inject trace headers int
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Use [OkHttp parent span helpers][1] (see step 10) or [OpenTelemetry addParentSpan][2] to link spans across threads.
+Use [OkHttp parent span helpers][1] (see step 10 on the linked page) or [OpenTelemetry addParentSpan][2] to link spans across threads.
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/android/?tab=kotlin#okhttp
 [2]: /tracing/trace_collection/custom_instrumentation/android/otel/?tab=kotlin
