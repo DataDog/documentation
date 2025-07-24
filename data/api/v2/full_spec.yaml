@@ -57574,7 +57574,8 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+      x-unstable: '**Note**: This endpoint is in Preview. To request access or provide
+        feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/on-call/escalation-policies:
