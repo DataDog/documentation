@@ -269,7 +269,7 @@ This check identifies attempts by unauthorized or malicious authors to manipulat
 |---|---|---|
 | Evaluated on Input | Evaluated using LLM | [Prompt Injection][13] flags any unauthorized or malicious insertion of prompts or cues into the conversation by an external party or user. |
 
-##### Prompt Injection Configuration
+##### Prompt injection configuration
 Users can configure this evaluation by selecting specific subcategories to be surfaced as prompt injection attempts. This feature is only available if OpenAI or Azure OpenAI is selected as the LLM provider.
 
 | Configuration Option | Description | Example(s) |
