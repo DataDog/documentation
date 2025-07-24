@@ -28,10 +28,6 @@ For other Lambda runtimes (or to instrument your Node.js or Python functions wit
 
 {{< partial name="serverless/getting-started-languages.html" >}}
 
-## FIPS Compliance Support
-
-Datadog provides FIPS-compliant monitoring for AWS Lambda functions through dedicated FIPS-compliant Lambda extension layers and runtime-specific configurations. The FIPS-compliant components implement FIPS-certified cryptography and work with any Datadog site, but end-to-end FIPS compliance requires using the US1-FED site. If you need to maintain FIPS compliance while monitoring your Lambda functions, see the [AWS Lambda FIPS Compliance][4] documentation page for details.
-
 ## Advanced Configurations
 
 After you're done with installation and you've set up telemetry collection, you can use [advanced configurations][3] to:
