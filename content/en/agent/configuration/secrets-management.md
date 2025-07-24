@@ -598,4 +598,4 @@ This command returns whether the permissions are valid for the Agent to view thi
 [4]: https://github.com/DataDog/datadog-secret-backend
 [5]: https://github.com/DataDog/datadog-secret-backend/blob/main/docs/aws/secrets.md
 [6]: /agent/configuration/agent-commands/#restart-the-agent
-[7]: https://docs.datadoghq.com/opentelemetry/setup/ddot_collector/
+[7]: /opentelemetry/setup/ddot_collector/
