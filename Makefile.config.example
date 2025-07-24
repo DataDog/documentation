@@ -6,6 +6,6 @@ FULL_BUILD := false
 CONFIGURATION_FILE := "./local/bin/py/build/configurations/pull_config_preview.yaml"
 
 #build script env vars
-BUILD_SCRIPT_BRANCH := 
+BUILD_SCRIPT_BRANCH := main
 BUILD_SCRIPT_REPO_URL := 
 BUILD_SCRIPT_SOURCE_DIR := 
