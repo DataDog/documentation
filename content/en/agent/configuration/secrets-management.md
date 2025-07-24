@@ -349,7 +349,7 @@ datadog-agent secret refresh
 ```
 
 ### Enabling DDOT collector refresh
-If you are using DDOT collector and want to enable API/APP refresh you must add the following additional configuration to your `datadog.yaml` file:
+If you are using [DDOT collector](https://docs.datadoghq.com/opentelemetry/setup/ddot_collector/) and want to enable API/APP refresh you must add the following additional configuration to your `datadog.yaml` file:
 ```
 agent_ipc:
   port: 5051
