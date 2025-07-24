@@ -15,9 +15,9 @@ algolia:
 ---
 
 ## Overview
-The [Datadog UNIX Agent][4] brings host-level monitoring to IBM AIX (PowerPC 8 +) so you can visualize system metrics, enable additional Datadog products, and troubleshoot services that still run on-prem.
+The [Datadog UNIX Agent][4] brings host-level monitoring to IBM AIX (PowerPC 8+) so you can visualize system metrics, enable additional Datadog products, and troubleshoot services that still run on-prem.
 
-The UNIX Agent supports Infrastructure Monitoring and Custom Metrics using [DogStatsD][11]. Other products like APM, Live Process Monitoring, Cloud Network Monitoring, and Log Management are not supported on UNIX Agent. See [Supported Platforms][5] for the complete list of supported AIX versions.
+The UNIX Agent supports Infrastructure Monitoring and Custom Metrics using [DogStatsD][11]. Other products like APM, Live Process Monitoring, Cloud Network Monitoring, and Log Management are not supported on the UNIX Agent. See [Supported Platforms][5] for the complete list of supported AIX versions.
 
 This page walks you through installing, operating, and removing the Datadog UNIX Agent on AIX.
 
@@ -26,14 +26,14 @@ This page walks you through installing, operating, and removing the Datadog UNIX
 ### Prerequisites 
 - Root privileges (or sudo) on each host  
 - Outbound HTTPS (443) to `.datadoghq.com`  
-- curl / ksh (shipped on AIX by default)  
+- curl or ksh (shipped on AIX by default)  
 - Verify your host meet the Supported AIX platforms 
 
-### Install Agent
+### Install the Agent
 
 To install the Agent on AIX, follow the [in-app instructions in Fleet Automation][6], and run the generated script on your hosts.
 
-{{< img src="/agent/basic_agent_usage/aix_img_july_25.png" alt="The Datadog Agent installation step for hosts AIX." style="width:90%;">}}
+{{< img src="/agent/basic_agent_usage/aix_img_july_25.png" alt="The Datadog Agent installation step for AIX hosts." style="width:90%;">}}
 
 
 
@@ -56,22 +56,22 @@ You can find the Agent installation log in the `dd-aix-install.log` file. To dis
 ## Configure the Agent
 
 The [Datadog Agent configuration file][7] is located in `/etc/datadog-agent/datadog.yaml`. This YAML file holds the host-wide connection details used to send data to Datadog including:
- * `api_key`: your organization's [Datadog API key][8]  
- - `site`: target Datadog region (`datadoghq.com`, - `datadoghq.eu`, `us3.datadoghq.com`, `us5.datadoghq.com`, `ddog-gov.com`)  
+ * `api_key`: Your organization's [Datadog API key][8]  
+ - `site`: Target Datadog region (`datadoghq.com`, - `datadoghq.eu`, `us3.datadoghq.com`, `us5.datadoghq.com`, `ddog-gov.com`)  
 * `proxy`: HTTP/HTTPS proxy endpoints for outbound traffic (see [Datadog Agent Proxy Configuration][9])  
  Default tags, log level, and Datadog configurations.
 
-A fully commented reference file, located in `/etc/datadog-agent/datadog.yaml.example`, lists every available option for comparison or copy-paste. 
+A fully commented reference file, located in `/etc/datadog-agent/datadog.yaml.example`, lists every available option for comparison or to copy and paste. 
 
 Alternatively, see the [datadog.yaml.example file][10] for all available configuration options.
 
 
 ### Integration files
 
-Configuration files for integrations live in `/etc/datadog-agent/conf.d/`.
-Each integration has its own sub-directory, `<INTEGRATION>.d/`, that contains:
-- `conf.yaml`: the active configuration controlling how the integration gathers metrics and logs  
-- `conf.yaml.example`: a sample illustrating supported keys and defaults
+Configuration files for integrations exist in `/etc/datadog-agent/conf.d/`.
+Each integration has its own subdirectory, `<INTEGRATION>.d/`, that contains:
+- `conf.yaml`: The active configuration controlling how the integration gathers metrics and logs  
+- `conf.yaml.example`: A sample illustrating supported keys and defaults
 
 
 ## Available integrations
