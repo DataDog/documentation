@@ -24,9 +24,7 @@ further_reading:
 ---
 {{< partial name="app_and_api_protection/callout.html" >}}
 
-{{% app_and_api_protection_dotnet_overview showSetup="true" %}}
-
-<!-- {{< app_and_api_protection_dotnet_setup_options platform="linux">}} -->
+{{% app_and_api_protection_dotnet_overview showSetup="true"%}}
 
 ## Environments
 
@@ -34,7 +32,7 @@ further_reading:
 {{< appsec-integrations >}}
   {{< appsec-integration name="Linux" avatar="linux" link="./linux" >}}
   <!--{{< appsec-integration name="macOS" avatar="apple" link="./macos" >}}-->
-  <!--{{< appsec-integration name="Windows" avatar="windows" link="./windows" >}}-->
+  {{< appsec-integration name="Windows" avatar="windows" link="./windows" >}}
 {{< /appsec-integrations >}}
 <!--
 ### Cloud and Container Platforms

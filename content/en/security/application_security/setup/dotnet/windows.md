@@ -1,6 +1,6 @@
 ---
-title: Set up App and API Protection for .NET on Linux
-code_lang: linux
+title: Set up App and API Protection for .NET on Windows
+code_lang: windows
 type: multi-code-lang
 code_lang_weight: 30
 further_reading:
@@ -20,17 +20,16 @@ further_reading:
 
 ## Prerequisites
 
-- Linux operating system
+- Windows operating system
 - .NET application
-- Root or sudo privileges
-- Systemd (for service management)
+- Administrator privileges for some configuration steps
 - Your Datadog API key
 - Datadog .NET tracing library (see version requirements [here][1])
 
 ## 1. Installing the Datadog Agent
 
-Install the Datadog Agent by following the [setup instructions for Linux hosts][2].
-
+Install the Datadog Agent by following the [setup instructions for Windows hosts][2].
+<!--
 ## 2. Enabling App and API Protection monitoring
 
 {{% app_and_api_protection_navigation_menu %}}
@@ -114,7 +113,7 @@ export DD_APM_TRACING_ENABLED=false
 ```
 
 {{% /collapse-content %}}
-
+-->
 ## 3. Run your application
 
 Start your .NET application with above settings.
@@ -123,14 +122,14 @@ Start your .NET application with above settings.
 
 ## Troubleshooting
 
-If you encounter issues while setting up App and API Protection for your Java application, see the [.NET App and API Protection troubleshooting guide][4].
+If you encounter issues while setting up App and API Protection for your .NET application, see the [.NET App and API Protection troubleshooting guide][4].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/application_security/setup/dotnet/compatibility
-[2]: /agent/?tab=Linux
+[2]: /agent/?tab=Windows
 [3]: https://github.com/DataDog/dd-trace-dotnet/releases
 [4]: /security/application_security/setup/dotnet/troubleshooting
 [5]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=linux
