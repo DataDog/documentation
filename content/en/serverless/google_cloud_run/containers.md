@@ -17,7 +17,7 @@ further_reading:
 
 To instrument your Google Cloud Run containers with Datadog, choose one of two options:
 
-{{< partial name="serverless/google-cloud-run-container-options.html" >}}
+{{% google-cloud-run-container-options %}}
 
 - [**In-process**][1]: Wraps your application container with the Datadog Agent. Choose this option for a simpler setup, lower cost overhead, and direct log piping. 
 - [**Sidecar**][2]: Deploys the Datadog Agent in a separate container alongside your app container. Choose this option if you have multiple containers in a single service, if you prefer strict isolation of the Datadog Agent, or if you have performance-sensitive workloads.
