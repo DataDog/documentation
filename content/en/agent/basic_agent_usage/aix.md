@@ -27,7 +27,7 @@ This page walks you through installing, operating, and removing the Datadog UNIX
 - Root privileges (or sudo) on each host  
 - Outbound HTTPS (443) to `.datadoghq.com`  
 - curl or ksh (shipped on AIX by default)  
-- Verify your host meet the Supported AIX platforms 
+- Verify your host is running a [Supported AIX version][5]
 
 ### Install the Agent
 
