@@ -264,18 +264,7 @@ To enable Conversation Completeness evaluation, you need to instrument your appl
 The evaluation requires sending a span with a specific tag when the session ends. This signal allows the evaluation to identify conversation boundaries and trigger the completeness assessment:
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
-from ddtrace.llmobs.decorators import llm
-
-# Call this function whenever your session has ended
-@llm(model_name="model_name", model_provider="model_provider")
-def send_session_ended_span(input_data, output_data) -> None:
-    """Send a span to indicate the chat session has ended."""
-    LLMObs.annotate(
-        input_data=input_data,
-        output_data=output_data,
-        tags={"session_status": "completed"}
-    )
+...
 {{< /code-block >}}
 
 Replace `session_status` and `completed` with your preferred tag key and value. Common patterns include:
