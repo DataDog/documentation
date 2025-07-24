@@ -53,6 +53,9 @@ Available versions are listed in source repositories for each language:
 - [Ruby][12] (`ruby`)
 - [PHP][13] (`php`)
 
+## Configure Unified Service Tags
+
+Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data. Learn how to [set USTs for Docker services][16].
 
 ## Remove Single Step APM instrumentation from your Agent
 
@@ -96,5 +99,6 @@ To stop producing traces, uninstall APM and restart the infrastructure:
 [14]: /tracing/glossary/#instrumentation
 [15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=docker
 [16]: /getting_started/tagging/unified_service_tagging/?tab=docker#containerized-environment
+
 
 

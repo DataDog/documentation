@@ -38,6 +38,12 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 1. Deploy the Agent using the generated configuration file.
 1. Restart your applications.
 
+## Configure Unified Service Tags
+
+Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data. Learn how to [set USTs for Kubernetes services][5].
+
+**Note**: In Kubernetes, USTs must be set on both the Deployment object and the Pod template spec.
+
 ## Advanced options
 
 When you run the one-line installation command, there are a few options to customize your experience:
@@ -604,6 +610,7 @@ targets:
 [2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [3]: /tracing/glossary/#instrumentation
 [4]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes/?tab=agentv764recommended#configure-instrumentation-for-namespaces-and-pods
+[5]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [11]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
 
 

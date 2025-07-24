@@ -52,6 +52,10 @@ Available versions are listed in source repositories for each language:
 - [Ruby][12] (`ruby`)
 - [PHP][13] (`php`)
 
+## Configure Unified Service Tags
+
+Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data. Learn how to [set USTs for Linux services][16].
+
 ## Remove Single Step APM instrumentation from your Agent
 
 To stop producing traces for all services on your infrastructure:
@@ -74,5 +78,6 @@ To stop producing traces for all services on your infrastructure:
 [13]: https://github.com/DataDog/dd-trace-php/releases
 [14]: /tracing/glossary/#instrumentation
 [15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
+[16]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#non-containerized-environment
 
 

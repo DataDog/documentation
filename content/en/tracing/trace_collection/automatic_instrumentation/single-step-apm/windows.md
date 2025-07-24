@@ -33,6 +33,10 @@ To enable APM with Single Step Instrumentation on Windows:
 
 After installation, the Agent automatically loads the Datadog .NET SDK into supported application processes to enable distributed tracing.
 
+## Configure Unified Service Tags
+
+Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data. Learn how to [set USTs for Windows services][2].
+
 ## Remove Single Step APM instrumentation from your Agent
 
 To disable SSI for .NET on your host, run:
@@ -46,3 +50,4 @@ To disable SSI for .NET on your host, run:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
+[2]: /integrations/windows_service/#tags
