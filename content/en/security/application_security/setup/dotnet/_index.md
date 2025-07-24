@@ -24,28 +24,15 @@ further_reading:
 ---
 {{< partial name="app_and_api_protection/callout.html" >}}
 
-{{% app_and_api_protection_dotnet_overview showSetup="true"%}}
+{{% app_and_api_protection_dotnet_overview showSetup="false"%}}
 
 ## Environments
 
 ### Hosts
 {{< appsec-integrations >}}
   {{< appsec-integration name="Linux" avatar="linux" link="./linux" >}}
-  <!--{{< appsec-integration name="macOS" avatar="apple" link="./macos" >}}-->
   {{< appsec-integration name="Windows" avatar="windows" link="./windows" >}}
 {{< /appsec-integrations >}}
-<!--
-### Cloud and Container Platforms
-{{< appsec-integrations >}}
-{{< appsec-integration name="Docker" avatar="docker" link="./docker" >}}
-{{< appsec-integration name="Kubernetes" avatar="kubernetes" link="./kubernetes" >}}
-{{< /appsec-integrations >}}
-
-### AWS
-{{< appsec-integrations >}}
-{{< appsec-integration name="AWS Fargate" avatar="amazon-ecs" link="./aws_fargate" >}}
-{{< /appsec-integrations >}}
--->
 ## Additional Resources
 
 - [Troubleshooting Guide](dotnet/troubleshooting)

@@ -29,7 +29,6 @@ further_reading:
 ## 1. Installing the Datadog Agent
 
 Install the Datadog Agent by following the [setup instructions for Windows hosts][2].
-<!--
 ## 2. Enabling App and API Protection monitoring
 
 {{% app_and_api_protection_navigation_menu %}}
@@ -37,90 +36,76 @@ Install the Datadog Agent by following the [setup instructions for Windows hosts
 
 ### Manually enabling App and API Protection monitoring
 
-Download and install the latest [Datadog .NET Tracer package][3] that supports your operating system and architecture.
+**Download the latest [Datadog .NET Tracer MSI Installer][3]** that supports your operating system and architecture and install it with *Administrator privileges*.
+
+{{% collapse-content title="APM Tracing Enabled" level="h4" %}}
+To enable AAP alongside with APM, add the following Environment Variables:
+
+```
+DD_APPSEC_ENABLED=true
+```
+{{% /collapse-content %}}
+
+{{% collapse-content title="APM Tracing Disabled" level="h4" %}}
+To disable APM tracing while keeping App and API Protection enabled, add the following Environment Variables:
+
+```
+DD_APPSEC_ENABLED=true
+DD_APM_TRACING_ENABLED=false
+```
+
+{{% /collapse-content %}}
+
+## 3. Run your application
+
+Start your .NET application with above settings.
 
 {{< tabs >}}
-{{% tab "AMD 64 Platforms" %}}
+{{% tab "IIS" %}}
 
-Download and install the latest [Datadog .NET Tracer package][3] that supports your operating system and architecture.
+Restart IIS
 
-<div class="alert alert-warning">
-  <strong>Note on version:</strong> replace <strong>&#60;TRACER_VERSION&#62;<strong> with the latest three component version of the library (ej: 3.21.0)
-</div>
-
-```bash
-wget -O datadog-dotnet-apm-<TRACER_VERSION>.tar.gz 'https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>'
+```cmd
+net stop /y was
+net start w3svc
+# Also, start any other services that were stopped when WAS was shut down.
 ```
 
-Run the following command to install the package and create the .NET tracer log directory `/var/log/datadog/dotnet` with the appropriate permissions:
-
-```bash
-sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.tar.gz && /opt/datadog/createLogPath.sh
-```
 {{% /tab %}}
-{{% tab "ARM 64 Platforms" %}}
-
-Download and install the latest [Datadog .NET Tracer package][3] that supports your operating system and architecture.
+{{% tab "Standalone apps *(.NET Framework)*" %}}
 
 <div class="alert alert-warning">
-  <strong>Note on version:</strong> replace <strong>&#60;TRACER_VERSION&#62;<strong> with the latest three component version of the library (ej: 3.21.0)
+  <strong>Note:</strong> The .NET runtime tries to load the .NET library into <em>any</em> .NET process that is started with these environment variables set. You should limit instrumentation to only the applications that need to be instrumented. <strong>Don't set these environment variables globally as this causes <em>all</em> .NET processes on the host to be instrumented.</strong>
 </div>
 
-```bash
-wget -O datadog-dotnet-apm-<TRACER_VERSION>.arm64.tar.gz 'https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>'
+Set the following required environment variables for automatic instrumentation to attach to your application and relaunch it:
+
+   ```
+   COR_ENABLE_PROFILING=1
+   ```
+
+{{% /tab %}}
+{{% tab "Standalone apps *(.NET Core)*" %}}
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> The .NET runtime tries to load the .NET library into <em>any</em> .NET process that is started with these environment variables set. You should limit instrumentation to only the applications that need to be instrumented. <strong>Don't set these environment variables globally as this causes <em>all</em> .NET processes on the host to be instrumented.</strong>
+</div>
+
+Set the following required environment variables for automatic instrumentation to attach to your application and relaunch it:
+
 ```
-
-Run the following command to install the package and create the .NET tracer log directory `/var/log/datadog/dotnet` with the appropriate permissions:
-
-```bash
-sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.arm64.tar.gz && /opt/datadog/createLogPath.sh
+CORECLR_ENABLE_PROFILING=1
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning">
-  If you are having issues installing the Tracer library check the [Tracer Installation guide][5]
-  *Note on version:* replace *<TRACER_VERSION>* with the latest three component version of the library (ej: 3.21.0)
-</div>
-
-
-{{% collapse-content title="APM Tracing Enabled" level="h4" %}}
-Set the required environment variables and start your .NET application:
-
-```bash
-export CORECLR_ENABLE_PROFILING=1
-export CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-export CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-export DD_DOTNET_TRACER_HOME=/opt/datadog
-export DD_SERVICE=<MY_SERVICE>
-export DD_ENV=<MY_ENV>
-export DD_APPSEC_ENABLED=true
-```
-{{% /collapse-content %}}
-
-{{% collapse-content title="APM Tracing Disabled" level="h4" %}}
-To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
-```bash
-export CORECLR_ENABLE_PROFILING=1
-export CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-export CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-export DD_DOTNET_TRACER_HOME=/opt/datadog
-export DD_SERVICE=<MY_SERVICE>
-export DD_ENV=<MY_ENV>
-export DD_APPSEC_ENABLED=true
-export DD_APM_TRACING_ENABLED=false
-```
-
-{{% /collapse-content %}}
--->
-## 3. Run your application
-
-Start your .NET application with above settings.
 
 {{% app_and_api_protection_verify_setup %}}
 
 ## Troubleshooting
+
+For a more detailed info go to [the Datadog Tracer installation guide for .NET Framework][5] or [the Datadog Tracer installation guide for .NET Core][6]
 
 If you encounter issues while setting up App and API Protection for your .NET application, see the [.NET App and API Protection troubleshooting guide][4].
 
@@ -132,4 +117,5 @@ If you encounter issues while setting up App and API Protection for your .NET ap
 [2]: /agent/?tab=Windows
 [3]: https://github.com/DataDog/dd-trace-dotnet/releases
 [4]: /security/application_security/setup/dotnet/troubleshooting
-[5]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=linux
+[5]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-framework/?tab=windows
+[6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=windows

@@ -38,12 +38,12 @@ Install the Datadog Agent by following the [setup instructions for Linux hosts][
 
 ### Manually enabling App and API Protection monitoring
 
-Go to [Datadog .NET Tracer package][3] to find out the latest release to download.
+**Go to [Datadog .NET Tracer package][3]** to find out the latest release to download.
 
 {{< tabs >}}
 {{% tab "AMD 64 Platforms" %}}
 
-Download and install the latest *Datadog .NET Tracer package* that supports your operating system and architecture.
+**Download and install** the latest *Datadog .NET Tracer package* that supports your operating system and architecture.
 
 <div class="alert alert-warning">
   <strong>Note on version:</strong> replace <strong>&#60;TRACER_VERSION&#62;</strong> with the latest three component version of the library (ej: 3.21.0)
@@ -61,7 +61,7 @@ sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.tar.gz && /opt
 {{% /tab %}}
 {{% tab "ARM 64 Platforms" %}}
 
-Download and install the latest *Datadog .NET Tracer package* that supports your operating system and architecture.
+**Download and install** the latest *Datadog .NET Tracer package* that supports your operating system and architecture.
 
 <div class="alert alert-warning">
   <strong>Note on version:</strong> replace <strong>&#60;TRACER_VERSION&#62;</strong> with the latest three component version of the library (ej: 3.21.0)
