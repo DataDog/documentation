@@ -36,7 +36,7 @@ You can set up [parallelization][24], which allows you to execute multiple tests
 To improve your developer workflow with Continuous Testing, you can:
 
 * Use the [`datadog-ci` NPM package][6] to run tests directly in your CI pipeline.
-* Use the [Datadog Synthetic Monitoring VS Code Integration][7] to run tests directly in your IDE.
+* Use the [Datadog Synthetics VS Code Integration][7] to run tests directly in your IDE.
 
 Continuous Testing accelerates your organization's application development by automating end-to-end testing across the entire software lifecycle. You can run tests in local and staging environments, parallelize test runs, and integrate with CI providers.
 
