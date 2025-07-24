@@ -1,8 +1,6 @@
-<div class="alert alert-warning">The Google Cloud Storage destination only supports <a href = "https://cloud.google.com/storage/docs/access-control/lists">Access Control Lists</a>.</div>
-
 1. Enter the name of your Google Cloud storage bucket. If you configured Log Archives, it's the bucket you created earlier.
-1. Optionally, enter the path to your credentials JSON file. If you configured Log Archives it's the credentials you downloaded [earlier](#create-a-service-account-to-allow-workers-to-write-to-the-bucket).
-    - You can also use the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to provide the credential path. If you're using [workload identity][10053] on Google Kubernetes Engine (GKE), the `GOOGLE_APPLICATION_CREDENTIALS` is provided for you.
+1. If you have a credentials JSON file, enter the path to your credentials JSON file. If you configured Log Archives it's the credentials you downloaded [earlier](#create-a-service-account-to-allow-workers-to-write-to-the-bucket). The credentials file must be placed under `DD_OP_DATA_DIR/config`. Alternatively, you can use the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to provide the credential path.
+    - If you're using [workload identity][10053] on Google Kubernetes Engine (GKE), the `GOOGLE_APPLICATION_CREDENTIALS` is provided for you.
     - The Worker uses standard [Google authentication methods][10052].
 1. Select the storage class for the created objects.
 1. Select the access level of the created objects.
