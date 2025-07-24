@@ -25,24 +25,21 @@ LLM Observability [Experiments][9] supports the entire lifecycle of building LLM
 Install Datadog's LLM Observability Python SDK:
 
 ```shell
-pip install ddtrace>=3.11
+pip install ddtrace==3.11.0rc2
 ```
 
 ### Setup
 
-#### Project initialization
-
-Enable LLM Observability and configure your project:
+Enable LLM Observability:
 
 ```python
 from ddtrace.llmobs import LLMObs
 
 LLMObs.enable(
     ml_app="my-app",
-    project_name="my-project",
-    api_key="<YOUR_API_KEY>",
-    app_key="<YOUR_APP_KEY>",
-    site="datadoghq.com"
+    api_key="<YOUR_API_KEY>",  # defaults to DD_API_KEY environment variable
+    app_key="<YOUR_APP_KEY>",  # defaults to DD_APP_KEY environment variable
+    site="datadoghq.com"  # defaults to DD_SITE environment variable
 )
 ```
 
@@ -119,6 +116,9 @@ for record in dataset:
 
 # Get dataset length
 print(len(dataset))
+
+# View dataset in Datadog UI
+print(f"View dataset: {dataset.url}")
 ```
 
 
@@ -156,7 +156,7 @@ dataset = LLMObs.create_dataset_from_csv(
 df = dataset.as_dataframe()
 print(df.head())
 
-# DataFrame output:
+# DataFrame output with MultiIndex columns:
 #                                    input_data          expected_output  metadata
 #                                    question category         answer    difficulty
 # 0  What is the capital of Japan?  geography         Tokyo      medium
@@ -202,16 +202,13 @@ experiment = LLMObs.experiment(
     dataset=dataset,
     evaluators=[evaluator],
     description="Testing capital cities knowledge",
-    tags=["model:gpt-4", "version:1.0"],
-    project_name="my-project",
+    tags={
+        "model": "gpt-4",
+        "version": "1.0"
+    },  # Tags as key-value pairs
+    project_name="my-project"  # Optional: Override DD_LLMOBS_PROJECT_NAME
 )
-```
 
-#### Running an Experiment
-
-Run the experiment and get results:
-
-```python
 # Run the experiment
 results = experiment.run()  # Run on all dataset records
 results = experiment.run(jobs=4)  # Run with parallel processing
@@ -225,18 +222,6 @@ for result in results:
     print(f"Score: {result['evaluations']['evaluator']['value']}")
     if result['error']['message']:
         print(f"Error: {result['error']['message']}")
-
-# Result fields:
-# - idx: Record number
-# - record_id: Dataset record ID
-# - span_id, trace_id: For tracing
-# - timestamp: Processing time
-# - input: Dict with input data
-# - output: Model output
-# - expected_output: Expected output
-# - evaluations: Dict with scores
-# - metadata: Extra information
-# - error: Any errors
 ```
 
 ## Usage: LLM Observability Experiments API
