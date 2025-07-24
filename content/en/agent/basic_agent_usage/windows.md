@@ -35,7 +35,7 @@ See [Supported Platforms][15] for the complete list of supported Linux distribut
 
 ## Installation
 
-To install the Datadog Agent on your Windows hosts, follow the [guided in-app flow within Fleet Automation][16], copy and run the installation command. The Datadog Agents run under the `ddagentuser`. See [Datadog Windows Agent User][17] documentation for more information. 
+To install the Datadog Agent on your Windows hosts, follow the [guided in-app flow within Fleet Automation][16], then copy and run the installation command. The Datadog Agents run under the `ddagentuser`. See [Datadog Windows Agent User][17] documentation for more information. 
 
 
 {{< img src="/agent/basic_agent_usage/windows_img2_july_25.png" alt="In-app installation steps for the Datadog Agent on a Windows host." style="width:90%;">}}
@@ -114,8 +114,8 @@ Configuration files for integrations are in:
 `C:\ProgramData\Datadog\conf.d\` There may also be an alternative legacy location: `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`.
 
 Each integration has a subdirectory `<INTEGRATION>.d\` that contains:
-- `conf.yaml`: the active settings for the integration
-* `conf.yaml.example`: a sample file showing what configuration keys are supported 
+- `conf.yaml`: The active settings for the integration
+* `conf.yaml.example`: A sample file showing what configuration keys are supported 
 
 When making configuration changes, be sure to restart the Agent to ensure the changes take effect.
 
