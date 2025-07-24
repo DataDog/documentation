@@ -48,7 +48,7 @@ Supported .NET runtimes (64-bit applications)
 .NET 9
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> For containers, <strong>at least one core</strong> is required. Read the <a href="/profiler/profiler_troubleshooting/dotnet#linux-containers">Troubleshooting documentation</a> for more details.
+  <strong>Note:</strong> For containers, <strong>more than one core</strong> is required. Read the <a href="/profiler/profiler_troubleshooting/dotnet#linux-containers">Troubleshooting documentation</a> for more details.
 </div>
 
 Supported languages

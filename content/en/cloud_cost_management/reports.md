@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Datadog's Cloud Cost Monitoring (CCM) Reports empower financial operations and finance teams to efficiently manage cloud costs. This feature provides a centralized platform for detailed cost analysis, allowing you to explore, analyze, and share cloud cost data.
+Datadog's Cloud Cost Monitoring (CCM) Reports empower financial operations and finance teams to efficiently manage cloud costs. This feature provides a centralized platform for detailed cost analysis, allowing you to explore, analyze, and share cloud cost or budget data.
 
 With Reports, you can:
 
@@ -18,11 +18,12 @@ With Reports, you can:
 - **Filter and group**: Filter by provider, tags, regions, and group by service, provider, or custom tags.
 - **Visualize graphs**: Use bar charts, summaries, and day-over-day views to spot trends and anomalies.
 - **Use advanced controls**: Switch between cost types, toggle container allocation, and focus on usage charges or all spend.
+- **Create budget reports**: Build budget reports in addition to cost reports to track spending against budget targets and forecast future costs.
 - **Collaborate and share**: Save, star, export, and share reports with your team.
 
-## Create a cost report
+## Create a CCM report
 
- Go to [**Cloud Cost > Analyze > Reports**][5] in Datadog.
+1. Go to [**Cloud Cost > Analyze > Reports**][5] in Datadog.
 1. Click **New Report** to start from scratch, or select a template from the gallery to accelerate your workflow.
 
    {{< img src="cloud_cost/cost_reports/create-new-report.png" alt="Create a new report or from a template." style="width:100%;" >}}
@@ -35,7 +36,14 @@ With Reports, you can:
 
 ## Customizing your report
 
-{{< img src="cloud_cost/cost_reports/customization-options-aws.png" alt="Customize your report by selecting cloud providers, filtering, grouping, changing the visualization, and using advanced options." style="width:100%;" >}}
+{{< img src="cloud_cost/cost_reports/customization-options-aws-1.png" alt="Customize your report by selecting cloud providers, filtering, grouping, changing the visualization, and using advanced options." style="width:100%;" >}}
+
+### Select the type of report
+
+Select the type of report you want to build:
+
+- **Cost**: Understand where your money is being spent across services, regions, teams, and so on.
+- **Budget**: Track spending against predefined budget targets and forecast future costs.
 
 ### Apply filters
 

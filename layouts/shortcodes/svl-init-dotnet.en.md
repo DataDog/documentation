@@ -3,7 +3,8 @@ Add the following instructions and arguments to your Dockerfile.
 ```dockerfile
 # For alpine or arm64 builds, refer to the explanation section
 COPY --from=datadog/serverless-init:1 / /app/
-RUN chmod +x /app/dotnet.sh && /app/dotnet.sh
+RUN --mount=type=secret,id=github-token,env=GITHUB_TOKEN \
+    chmod +x /app/dotnet.sh && /app/dotnet.sh
 
 ENV DD_SERVICE=datadog-demo-run-dotnet
 ENV DD_ENV=datadog-demo
@@ -19,10 +20,12 @@ CMD ["dotnet", "helloworld.dll"]
    COPY --from=datadog/serverless-init:1 / /app/
    ```
 
-2. Copy the Datadog .NET tracer into your Docker image.
+2. Copy the Datadog .NET tracer into your Docker image. If the GitHub requests made by the script are rate limited, pass a GitHub token saved in the environment variable
+   `GITHUB_TOKEN` as a [Docker build secret][2] `--secret id=github-token,env=GITHUB_TOKEN`.
    For linux/amd64, include the following:
    ```dockerfile
-   RUN chmod +x /app/dotnet.sh && /app/dotnet.sh
+   RUN --mount=type=secret,id=github-token,env=GITHUB_TOKEN \
+       chmod +x /app/dotnet.sh && /app/dotnet.sh
    ```
 
    For other architecture types, configure your Dockerfile like so:
@@ -60,7 +63,8 @@ If you already have an entrypoint defined inside your Dockerfile, you can instea
 ```dockerfile
 # For alpine or arm64 builds, refer to tracer installation of the explanation section
 COPY --from=datadog/serverless-init:1 / /app/
-RUN chmod +x /app/dotnet.sh && /app/dotnet.sh
+RUN --mount=type=secret,id=github-token,env=GITHUB_TOKEN \
+    chmod +x /app/dotnet.sh && /app/dotnet.sh
 
 ENV DD_SERVICE=datadog-demo-run-dotnet
 ENV DD_ENV=datadog-demo
@@ -73,7 +77,8 @@ If you require your entrypoint to be instrumented as well, you can swap your ent
 ```dockerfile
 # For alpine or arm64 builds, refer to tracer installation of the explanation section
 COPY --from=datadog/serverless-init:1 / /app/
-RUN chmod +x /app/dotnet.sh && /app/dotnet.sh
+RUN --mount=type=secret,id=github-token,env=GITHUB_TOKEN \
+    chmod +x /app/dotnet.sh && /app/dotnet.sh
 
 ENV DD_SERVICE=datadog-demo-run-dotnet
 ENV DD_ENV=datadog-demo
@@ -85,3 +90,4 @@ CMD ["your_entrypoint.sh", "dotnet", "helloworld.dll"]
 As long as your command to run is passed as an argument to `datadog-init`, you will receive full instrumentation.
 
 [1]: /tracing/trace_collection/dd_libraries/dotnet-core/?tab=linux#custom-instrumentation
+[2]: https://docs.docker.com/build/building/secrets/
