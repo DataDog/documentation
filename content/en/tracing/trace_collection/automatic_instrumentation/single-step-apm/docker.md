@@ -91,6 +91,10 @@ To stop producing traces, uninstall APM and restart the infrastructure:
    ```
    Or use the equivalent for your environment.
 
+## Troubleshooting
+
+If you encounter problems enabling APM with SSI, see the [SSI troubleshooting guide][17].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -106,6 +110,7 @@ To stop producing traces, uninstall APM and restart the infrastructure:
 [14]: /tracing/glossary/#instrumentation
 [15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=docker
 [16]: /getting_started/tagging/unified_service_tagging/?tab=docker#containerized-environment
+[17]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 
 
 

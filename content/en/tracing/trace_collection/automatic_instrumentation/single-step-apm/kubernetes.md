@@ -653,6 +653,9 @@ targets:
 
 {{% /collapse-content %}}
 
+## Troubleshooting
+
+If you encounter problems enabling APM with SSI, see the [SSI troubleshooting guide][35].
 
 ## Further reading
 
@@ -689,6 +692,7 @@ targets:
 [32]: http://gallery.ecr.aws/datadog/dd-lib-php-init
 [33]: /containers/guide/changing_container_registry/
 [34]: /containers/guide/sync_container_images/#copy-an-image-to-another-registry-using-crane
+[35]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 
 
 

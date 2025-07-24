@@ -80,6 +80,10 @@ To stop producing traces for all services on your infrastructure:
    ```
 2. Restart the services on the host or VM.
 
+## Troubleshooting
+
+If you encounter problems enabling APM with SSI, see the [SSI troubleshooting guide][19].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -95,5 +99,6 @@ To stop producing traces for all services on your infrastructure:
 [16]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#non-containerized-environment
 [17]: /tracing/trace_collection/library_config/
 [18]: /tracing/trace_collection/automatic_instrumentation/configure_apm_features_linux/
+[19]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 
 

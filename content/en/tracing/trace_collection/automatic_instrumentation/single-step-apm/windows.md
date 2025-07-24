@@ -51,6 +51,10 @@ To disable SSI for .NET on your host, run:
 &"C:\Program Files\Datadog\Datadog Agent\bin\datadog-installer.exe" remove datadog-apm-library-dotnet
 ```
 
+## Troubleshooting
+
+If you encounter problems enabling APM with SSI, see the [SSI troubleshooting guide][4].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -58,3 +62,4 @@ To disable SSI for .NET on your host, run:
 [1]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
 [2]: /integrations/windows_service/#tags
 [3]: /tracing/trace_collection/library_config/
+[4]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting

@@ -42,7 +42,7 @@ Click on one of the following tiles to learn how to set up SSI for your deployme
 
 ## Troubleshooting
 
-
+If you encounter problems enabling APM with SSI, see the [SSI troubleshooting guide][15].
 
 ## Further reading
 
@@ -62,4 +62,5 @@ Click on one of the following tiles to learn how to set up SSI for your deployme
 [12]: /tracing/software_catalog/
 [13]: /tracing/glossary/#instrumentation
 [14]: /getting_started/tagging/unified_service_tagging
+[15]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [17]: /tracing/trace_collection/automatic_instrumentation/configure_apm_features_linux/
