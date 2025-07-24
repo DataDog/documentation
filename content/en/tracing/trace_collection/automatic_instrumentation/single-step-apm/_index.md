@@ -22,7 +22,10 @@ Single Step Instrumentation (SSI) automatically installs the Datadog SDKs with n
 
 To learn more about how it works, see the [injector guide for Single Step Instrumentation][8].
 
-<div class="alert alert-warning">Before using SSI, remove any <a href="https://docs.datadog.com/tracing/trace_collection/custom_instrumentation/">custom instrumentation code</a> from your application and restart it. SSI automatically disables when it detects custom instrumentation.</a></div>
+## Prerequisites
+
+1. Remove any custom instrumentation code from your application and restart your it. SSI automatically disables when it detects custom instrumentation.
+1. Confirm environment compatibility by reviewing the [SSI compatibility guide][18] for supported languages, operating systems, and architectures.
 
 ## Instrument SDKs across applications
 
@@ -37,8 +40,6 @@ Click on one of the following tiles to learn how to set up SSI for your deployme
 {{< partial name="apm/apm-single-step.html" >}} 
 
 <br>
-
-<div class="alert alert-info">To see requirements for compatible languages, operating systems, and architectures, see <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">Single Step Instrumentation compatibility.</a></div>
 
 ## Troubleshooting
 
@@ -63,4 +64,6 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [13]: /tracing/glossary/#instrumentation
 [14]: /getting_started/tagging/unified_service_tagging
 [15]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
+[16]: /tracing/trace_collection/custom_instrumentation/
 [17]: /tracing/trace_collection/automatic_instrumentation/configure_apm_features_linux/
+[18]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/

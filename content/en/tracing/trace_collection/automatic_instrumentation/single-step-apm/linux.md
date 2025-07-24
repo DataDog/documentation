@@ -17,7 +17,7 @@ On a Linux host or VM, use Single Step Instrumentation (SSI) for APM to install 
 
 To enable APM on a Linux host:
 
-1. In the Datadog app, go to the [Install the Datadog Agent on Linux][15] page.
+1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
 1. In the **Customize your observability coverage** section, go to **Additional features** > **Application Observability**, and turn on **APM Instrumentation**.
    
    {{< img src="tracing/trace_collection/linux-apm-instrumentation-toggle.png" alt="The 'Customize your observability coverage' section of in-app instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
@@ -33,7 +33,7 @@ You may want to customize SDK versions based on your application's language vers
 
 To customize tracer versions:
 
-1. In the Datadog app, go to the [Install the Datadog Agent on Linux][15] page.
+1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
 1. After you turn on **APM Instrumentation**, click **Customize library versions**.
 
    {{< img src="tracing/trace_collection/apm-instrumentation-version-pinning.png" alt="The 'Customize library versions' drop-down in the instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
@@ -54,11 +54,11 @@ Available versions are listed in source repositories for each language:
 
 ## Configure Unified Service Tags
 
-Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data. Learn how to [set USTs for Linux services][16].
+Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. Learn how to [set USTs for Linux services][16].
 
 ## Enable SDK-dependent products and features
 
-Once SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
+After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
 
 Use one of the following setup methods:
 

@@ -17,7 +17,7 @@ In a Docker Linux container, use Single Step Instrumentation (SSI) for APM to in
 
 To enable APM in a Docker Linux container:
 
-1. In the Datadog app, go to the [Install the Datadog Agent on Docker][15] page.
+1. In Datadog, go to the [Install the Datadog Agent on Docker][15] page.
 1. In the **Customize my agent install command** section, go to **Additional configuration** > **Application Observability**, and turn on **APM Instrumentation**.
 
   
@@ -34,7 +34,7 @@ You may want to customize SDK versions based on your application's language vers
 
 To customize tracer versions:
 
-1. In the Datadog app, go to the [Install the Datadog Agent on Docker][15] page.
+1. In Datadog, go to the [Install the Datadog Agent on Docker][15] page.
 1. After you turn on **APM Instrumentation**, click **Customize library versions**.
 
    {{< img src="tracing/trace_collection/apm-instrumentation-version-pinning.png" alt="The 'Customize library versions' drop-down in the instructions for installing the Datadog Agent on Docker" style="width:100%;" >}}
@@ -59,7 +59,7 @@ Unified Service Tags (USTs) connect traces, metrics, and logs by applying consis
 
 ## Enable SDK-dependent products and features
 
-Once SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
+After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
 
 To enable products, [set environment variables][3] in your application configuration.
 

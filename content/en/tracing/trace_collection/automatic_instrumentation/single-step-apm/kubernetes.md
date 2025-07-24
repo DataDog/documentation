@@ -32,7 +32,7 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 
 **Note:** To instrument only specific namespaces or pods, see [Advanced options](#advanced-options).
 
-1. In the Datadog app, go to the [Install the Datadog Agent on Kubernetes][11] page.
+1. In Datadog, go to the [Install the Datadog Agent on Kubernetes][11] page.
 1. Follow the on-screen instructions to choose your installation method, select an API key, and set up the Operator or Helm repository.
 1. In the **Configure `datadog-agent.yaml`** section, go to **Additional configuration** > **Application Observability**, and turn on **APM Instrumentation**.
    
@@ -49,7 +49,7 @@ Unified Service Tags (USTs) connect traces, metrics, and logs by applying consis
 
 ## Enable SDK-dependent products and features
 
-Once SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
+After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
 
 Use one of the following setup methods:
 
@@ -359,7 +359,7 @@ spec:
 
 ##### Specify at the cluster level
 
-If you don't enable automatic instrumentation for specific pods using annotations, you can specify which languages to instrument across the entire cluster using the Single Step Instrumentation configuration. When `apm.instrumentation.libVersions` is set, only applications written in the specified languages will be instrumented, using the specified library versions.
+If you don't enable automatic instrumentation for specific pods using annotations, you can specify which languages to instrument across the entire cluster using the SSI configuration. When `apm.instrumentation.libVersions` is set, only applications written in the specified languages are instrumented, using the specified library versions.
 
 The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
 
@@ -563,7 +563,7 @@ To control where APM is activated and reduce overhead, consider the following be
 #### Default vs. opt-in instrumentation
 | Mode    | Behavior    | When to use |
 | ---  | ----------- | ----------- |
-| Default | All supported processes in the cluster are instrumented. | Small clusters or quick prototypes. |
+| Default | All supported processes in the cluster are instrumented. | Small clusters or prototypes. |
 | Opt-in | Use [workload selection][4] to restrict instrumentation to specific namespaces or pods. | Production clusters, staged rollouts, or cost‑sensitive use cases. |
 
 #### Example: Enable instrumentation for specific pods
