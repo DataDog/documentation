@@ -5,7 +5,7 @@ GITHUB_TOKEN := $(shell ddtool auth github token)
 FULL_BUILD := false
 CONFIGURATION_FILE := "./local/bin/py/build/configurations/pull_config_preview.yaml"
 
-#build-script env vars
+#build script env vars
 BUILD_SCRIPT_BRANCH := main
-BUILD_SCRIPT_REPO_URL := 
-BUILD_SCRIPT_SOURCE_DIR := 
+BUILD_SCRIPT_REPO_URL := https://github.com/DataDog/websites-images.git 
+BUILD_SCRIPT_SOURCE_DIR := services/webops-site-build/bin/docs-ci
