@@ -1,5 +1,5 @@
 ---
-title: API Reference
+title: HTTP API Reference
 aliases:
     - /tracing/llm_observability/api
     - /llm_observability/api
@@ -8,7 +8,7 @@ aliases:
 
 ## Overview
 
-The LLM Observability API provides an interface for developers to send LLM-related traces and spans to Datadog. If your application is written in Python or Node.js, you can use the [LLM Observability SDKs][1].
+The LLM Observability HTTP API provides an interface for developers to send LLM-related traces and spans to Datadog. If your application is written in Python or Node.js, you can use the [LLM Observability SDKs][1].
 
 ## Spans API
 

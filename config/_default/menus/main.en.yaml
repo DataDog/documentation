@@ -4647,7 +4647,7 @@ menu:
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_custom
       weight: 202
-    - name: API
+    - name: HTTP API
       url: llm_observability/instrumentation/api
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_api

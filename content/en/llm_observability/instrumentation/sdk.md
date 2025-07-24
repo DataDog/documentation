@@ -283,9 +283,6 @@ Set the following values as environment variables. They cannot be configured pro
 
 {{% /collapse-content %}}
 
-### AWS Lambda setup
-
-See [Quickstart: Trace an LLM application in AWS Lambda][15].
 
 ### Application naming guidelines
 
@@ -1106,7 +1103,7 @@ getRelevantDocs = llmobs.wrap({ kind: 'retrieval' }, getRelevantDocs)
 
 ## Tracking user sessions
 
-Session tracking allows you to associate multiple interactions with a given user. 
+Session tracking allows you to associate multiple interactions with a given user.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -2219,6 +2216,3 @@ tracer.use('http', false) // disable the http integration
 [11]: /tracing/trace_collection/compatibility/python/#integrations
 [12]: /tracing/trace_collection/compatibility/python/#library-compatibility
 [13]: /llm_observability/instrumentation/auto_instrumentation/
-[14]: /serverless/aws_lambda/installation/python/?tab=custom#installation
-[15]: /llm_observability/quickstart?tab=python#trace-an-llm-application-in-aws-lambda
-[16]: https://app.datadoghq.com/llm/settings/evaluations
