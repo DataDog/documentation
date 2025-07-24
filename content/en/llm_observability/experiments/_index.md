@@ -185,15 +185,17 @@ Create an experiment using `LLMObs.experiment()`:
 ```python
 from ddtrace.llmobs import LLMObs
 
+# Define a task function that processes a single dataset record.
 def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
-    """Process a single dataset record."""
     question = input_data["question"]
     # Your LLM or processing logic here
     return "Beijing" if "China" in question else "Unknown"
 
-def evaluator(input_data: Dict[str, Any], output: str, expected_output: str) -> float:
-    """Return a score between 0 and 1."""
-    return 1.0 if output == expected_output else 0.0
+
+# Define an evaluator function that compares the output to the expected output.
+def evaluator(input_data: Dict[str, Any], output_data: str, expected_output: str) -> float:
+    return 1.0 if output_data == expected_output else 0.0
+
 
 # Create the experiment
 experiment = LLMObs.experiment(
@@ -235,14 +237,14 @@ Datadog highly recommends importing the [Experiments Postman collection][7] into
 | --------- | ---- | ----------- |
 | `data`    | [Object: Data](#object-data) | The request body is nested within a top level `data` field.|
 
-**Example**: Creating a project
+**Example**: Creating a dataset
 
 ```json
 {
   "data": {
-    "type": "projects",  # request type
+    "type": "datasets",  # request type
     "attributes": {
-        "name": "Project example",
+        "name": "Dataset example",
         "description": "Description example"
     }
   }
@@ -256,18 +258,18 @@ Datadog highly recommends importing the [Experiments Postman collection][7] into
 | `data`    | [Object: Data](#object-data) | The request body of an experimentation API is nested within a top level `data` field.|
 | `meta`    | [Object: Page](#object-page) | Pagination attributes. |
 
-**Example**: Retrieving projects
+**Example**: Retrieving datasets
 
 ```json
 {
     "data": [
         {
             "id": "4ac5b6b2-dcdb-40a9-ab29-f98463f73b4z",
-            "type": "projects",
+            "type": "datasets",
             "attributes": {
                 "created_at": "2025-02-19T18:53:03.157337Z",
                 "description": "Description example",
-                "name": "Project example",
+                "name": "Dataset example",
                 "updated_at": "2025-02-19T18:53:03.157337Z"
             }
         }
