@@ -44,6 +44,20 @@ Unified Service Tags (USTs) connect traces, metrics, and logs by applying consis
 
 **Note**: In Kubernetes, USTs must be set on both the Deployment object and the Pod template spec.
 
+## Enable SDK-dependent products and features
+
+Once SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
+
+Use one of the following setup methods:
+
+- **[Configure with workload targeting][6]**:
+
+  By default, Single Step Instrumentation instruments all services in all namespaces. Use workload targeting to limit instrumentation to specific namespaces, pods, or workloads, and apply custom configurations.
+
+- **[Set environment variables][7]**:
+
+  Enable products by setting environment variables directly in your application configuration. 
+
 ## Advanced options
 
 When you run the one-line installation command, there are a few options to customize your experience:
@@ -611,6 +625,8 @@ targets:
 [3]: /tracing/glossary/#instrumentation
 [4]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes/?tab=agentv764recommended#configure-instrumentation-for-namespaces-and-pods
 [5]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
+[6]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes/?tab=installingwithdatadogoperator#configure-instrumentation-for-namespaces-and-pods
+[7]: /tracing/trace_collection/library_config/
 [11]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
 
 

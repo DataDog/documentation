@@ -57,6 +57,12 @@ Available versions are listed in source repositories for each language:
 
 Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data. Learn how to [set USTs for Docker services][16].
 
+## Enable SDK-dependent products and features
+
+Once SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
+
+To enable products, [set environment variables][3] in your application configuration.
+
 ## Remove Single Step APM instrumentation from your Agent
 
 If you don't want to collect trace data for a particular service, host, VM, or container, complete the following steps:
@@ -90,6 +96,7 @@ To stop producing traces, uninstall APM and restart the infrastructure:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /tracing/trace_collection/library_config/
 [8]: https://github.com/DataDog/dd-trace-java/releases
 [9]: https://github.com/DataDog/dd-trace-js/releases
 [10]: https://github.com/DataDog/dd-trace-py/releases

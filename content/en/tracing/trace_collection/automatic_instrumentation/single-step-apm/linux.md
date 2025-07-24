@@ -56,6 +56,20 @@ Available versions are listed in source repositories for each language:
 
 Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data. Learn how to [set USTs for Linux services][16].
 
+## Enable SDK-dependent products and features
+
+Once SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
+
+Use one of the following setup methods:
+
+- **[Configure in `application_monitoring.yaml`][18]**:
+
+  Enable products across all services on a host without modifying application command lines.
+
+- **[Set environment variables][17]**:
+
+  Enable products by setting environment variables directly in your application configuration. 
+
 ## Remove Single Step APM instrumentation from your Agent
 
 To stop producing traces for all services on your infrastructure:
@@ -79,5 +93,7 @@ To stop producing traces for all services on your infrastructure:
 [14]: /tracing/glossary/#instrumentation
 [15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
 [16]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#non-containerized-environment
+[17]: /tracing/trace_collection/library_config/
+[18]: /tracing/trace_collection/automatic_instrumentation/configure_apm_features_linux/
 
 

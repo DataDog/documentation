@@ -37,6 +37,12 @@ After installation, the Agent automatically loads the Datadog .NET SDK into supp
 
 Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data. Learn how to [set USTs for Windows services][2].
 
+## Enable SDK-dependent products and features
+
+Once SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
+
+To enable products, [set environment variables][3] in your application configuration.
+
 ## Remove Single Step APM instrumentation from your Agent
 
 To disable SSI for .NET on your host, run:
@@ -51,3 +57,4 @@ To disable SSI for .NET on your host, run:
 
 [1]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
 [2]: /integrations/windows_service/#tags
+[3]: /tracing/trace_collection/library_config/
