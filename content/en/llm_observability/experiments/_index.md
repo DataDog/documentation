@@ -285,7 +285,7 @@ Datadog highly recommends importing the [Experiments Postman collection][7] into
 | Field | Type | Description |
 | --------- | ---- | ----------- |
 | `id`    | string | The ID of an experimentation entity. <br/>**Note**: Set your ID field reference at this level. |
-| `type`    | string | Identifies the kind of resource an object represents. For example: `projects`, `experiments`, `datasets`, etc. |
+| `type`    | string | Identifies the kind of resource an object represents. For example: `experiments`, `datasets`, etc. |
 | `attributes` | json | Contains all the resource's data except for the ID. |
 
 #### Object: Page
@@ -294,106 +294,6 @@ Datadog highly recommends importing the [Experiments Postman collection][7] into
 | ----- | ---- | ----------- |
 | `after` | string | The cursor to use to get the next results, if any. Provide the `page[cursor]` query parameter in your request to get the next results. |
 
-### Projects API
-
-**Request type**: `projects`
-
-{{% collapse-content title="GET /api/unstable/llm-obs/v1/projects" level="h4" expanded=false id="api-projects-get" %}}
-
-List all projects, sorted by creation date. The most recently-created projects are first.
-
-**Query parameters**
-
-| Parameter | Type | Description |
-| ---- | ---- | --- |
-| `filter[name]` | string | The name of a project to search for. |
-| `filter[id]` | string | The ID of a project to search for. |
-| `page[cursor]` | string | List results with a cursor provided in the previous query. |
-| `page[limit]` | int | Limits the number of results. |
-
-**Response**
-
-| Field | Type | Description |
-| ---- | ---- | --- |
-| _within [Data](#object-data)_ | [][Project](#object-project) | List of projects. |
-
-#### Object: Project
-
-| Field | Type | Description |
-| ---- | ---- | ---- |
-| `id` | string | Unique project ID. Set at the top level `id` field within the [Data](#object-data) object. |
-| `ml_app` | string | ML app name. |
-| `name` | string | Unique project name. |
-| `description` | string | Project description. |
-| `created_at` | timestamp | Timestamp representing when the resource was created. |
-| `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
-
-{{% /collapse-content %}}
-
-{{% collapse-content title="POST /api/unstable/llm-obs/v1/projects" level="h4" expanded=false id="api-projects-post" %}}
-
-Create a project. If there is an existing project with the same name, the API returns the existing project unmodified.
-
-**Request**
-
-| Field | Type | Description |
-| ---- | ---- | ---- |
-| `name` (_required_) | string | Unique project name. |
-| `ml_app` | string | ML app name. |
-| `description` | string | Project description. |
-
-**Response**
-
-| Field | Type | Description |
-| ---- | ---- | ---- |
-| `id` | UUID | Unique ID for the project. Set at the top level `id` field within the [Data](#object-data) object. |
-| `ml_app` | string | ML app name. |
-| `name` | string | Unique project name. |
-| `description` | string | Project description. |
-| `created_at` | timestamp | Timestamp representing when the resource was created. |
-| `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
-
-{{% /collapse-content %}}
-
-{{% collapse-content title="PATCH /api/unstable/llm-obs/v1/projects/{project_id}" level="h4" expanded=false id="api-projects-patch" %}}
-
-Partially update a project object. Specify the fields to update in the payload.
-
-**Request**
-
-| Field | Type | Description |
-| ---- | ---- | ---- |
-| `name` | string | Unique project name. |
-| `ml_app` | string | ML app name. |
-| `description` | string | Project description. |
-
-**Response**
-
-| Field | Type | Description |
-| ---- | ---- | ---- |
-| `id` | UUID | Unique ID for the project. Set at the top level `id` field within the [Data](#object-data) object. |
-| `ml_app` | string | ML app name. |
-| `name` | string | Unique project name. |
-| `description` | string | Project description. |
-| `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
-
-{{% /collapse-content %}}
-
-{{% collapse-content title="POST /api/unstable/llm-obs/v1/projects/delete" level="h4" expanded=false id="api-projects-batch-delete" %}}
-
-Batch delete operation.
-
-**Request**
-
-| Field | Type | Description |
-| ---- | ---- | ---- |
-| `project_ids` (_required_) | []string | List of project IDs to delete. |
-
-**Response**
-
-200 - OK
-
-{{% /collapse-content %}}
 
 ### Datasets API
 
