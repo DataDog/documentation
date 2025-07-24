@@ -26,10 +26,6 @@ Make sure you have a [Datadog API key][7] and are using a programming language [
 
 ## Instrument your application
 
-You can instrument your application in one of two ways: [Dockerfile](#dockerfile) or [buildpack](#buildpack).
-
-### Dockerfile
-
 Datadog publishes new releases of the `serverless-init` container image to Google’s gcr.io, AWS’s ECR, and on Docker Hub:
 
 | dockerhub.io | gcr.io | public.ecr.aws |
@@ -87,6 +83,8 @@ To get full instrumentation, ensure you are calling `datadog-init` as the first 
 {{< /programming-lang-wrapper >}}
 
 ### Buildpack
+
+<div class="alert alert-info">Buildpack instrumentation is deprecated.</div>
 
 [`Pack Buildpacks`][3] provide a convenient way to package your container without using a Dockerfile.
 
