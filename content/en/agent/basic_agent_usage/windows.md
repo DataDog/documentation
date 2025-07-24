@@ -38,10 +38,10 @@ See [Supported Platforms][15] for the complete list of supported Linux distribut
 To install the Datadog Agent on your Windows hosts, follow the [guided in-app flow within Fleet Automation][16], copy and run the installation command. The Datadog Agents run under the `ddagentuser`. See [Datadog Windows Agent User][17] documentation for more information. 
 
 
-{{< img src="/agent/basic_agent_usage/windows_img_july_25.png" alt="In-app installation steps for the Datadog Agent on a Windows host." style="width:90%;">}}
+{{< img src="/agent/basic_agent_usage/windows_img2_july_25.png" alt="In-app installation steps for the Datadog Agent on a Windows host." style="width:90%;">}}
 
 
-## ALternative installation methods
+## Alternative installation methods
 
 ### Install with the Agent Manager GUI
 
