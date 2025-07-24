@@ -52,7 +52,7 @@
         contents:
 
         - action: integrations
-          branch: prod
+          branch: justin-lesko/eks-fargate-native-logging
           globs:
           - integration/*/*_metadata.csv
           - integration/*/manifest.json
