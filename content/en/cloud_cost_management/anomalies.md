@@ -13,14 +13,14 @@ further_reading:
 
 Datadog Cloud Cost Management (CCM) continuously monitors your environment to detect and prioritize unexpected cost changes, enabling you to share, investigate, and resolve anomalies. Cost anomalies are available for AWS, and do not require any additional setup after CCM is set up.
 
-{{< img src="cloud_cost/anomalies/cost_anomalies_new_list-2.png" alt="List of cost anomalies showing service names, usage types, and cost impacts" style="width:80;" >}}
+{{< img src="cloud_cost/anomalies/cost_anomalies_new_list-3.png" alt="List of cost anomalies showing service names, usage types, and cost impacts" style="width:80;" >}}
 
-## Getting started
+A typical workflow could be the following:
 
-1. Navigate to the [Anomalies tab][1] of the Cloud Cost page in Datadog.
-2. Review the list of active anomalies, sorted by cost impact.
-3. Click on an anomaly to investigate and take action.
-4. Use the filters to view Active, Past, or Resolved anomalies across different dimensions, such as service name, team, or environment.
+1. **View** anomalies on the Anomalies tab
+2. **Investigate** using Watchdog Explains to understand what's driving the cost changes
+3. **Take action** by reviewing details, investigating further, or setting up monitoring
+4. **Resolve** anomalies that are expected or not significant
 
 ## How anomalies are defined
 
@@ -37,9 +37,9 @@ For example, if your system automatically scales up every Sunday night for weekl
 
 On the [Anomalies tab of the Cloud Cost page in Datadog][1], you can view and filter anomalies:
 
-- **Active**: Anomalies from the last full day of cost data (typically 2-3 days prior)
-- **Past**: Anomalies that lasted more than 7 days or are no longer detected as anomalous
-- **Resolved**: Anomalies that you've marked as resolved with context
+- **Active**: Anomalies from the last full day of cost data (typically 2-3 days prior).
+- **Past**: Anomalies that lasted more than 7 days or are no longer detected as anomalous. Past anomalies can be useful to report on, but are often less urgent and actionable.
+- **Resolved**: Anomalies that you've marked as resolved with context.
 
 Each anomaly card shows:
 - Service name (`rds`, for example)
@@ -50,7 +50,21 @@ Each anomaly card shows:
 
 Anomalies are sorted by cost impact, with the most significant changes at the top.
 
-## Take action on anomalies
+## Investigate anomalies
+
+### Understand what drives anomalies
+
+CCM automatically uses [Watchdog Explains][2], an investigation assistant, to help you identify what is driving cost anomalies. Watchdog Explains analyzes and identifies the specific:
+
+- accounts
+- teams
+- services
+- Kubernetes or ECS clusters
+- regions
+
+where the anomaly happened, reducing manual investigation steps. When hovering over the anomaly graph, you can see two graphs: one with and one without the tags identified by Watchdog Explains. This shows how removing specific tags flattens the spike, confirming the impact on the cost.
+
+### Take action on anomalies
 
 Follow these steps to investigate and resolve anomalies:
 
@@ -58,50 +72,26 @@ Follow these steps to investigate and resolve anomalies:
 
    {{< img src="cloud_cost/anomalies/cost_anomalies-tag-influence.png" alt="Click See More to see side panel showing anomaly details, investigation options, and action buttons" style="width:80;" >}}
 
-2. **Review the details** for services affected, teams involved, environments impacted, resource IDs, or how usage and unit price may be driving the cost anomaly.
-3. **Investigate further**:
-   - View costs in Explorer
-   - Save the query to a Notebook
-   - Share with service owners or teams
-4. **Set up monitoring**:
-   - Create a cost anomaly monitor for similar patterns
-   - Configure alerts for future anomalies
+1.  **Review the details** for services affected, teams involved, environments impacted, resource IDs, or how usage and unit price may be driving the cost anomaly.
+1. **Investigate further**: View the anomaly in Cost Explorer or a Datadog Notebook to further investigate anomalies by using additional dimensions. You can then send the anomaly, Explorer link, or Notebook to the service owners or teams identified by Watchdog Explains. This enables teams to resolve anomalies with context for why the anomaly occurred and whether it's expected.
 
-### Tag Influence
-
-Tag Influence in Datadog automatically analyzes your cost anomalies to identify:
-
-- Which resources are driving the cost changes
-- Which teams or services to contact about the changes
-- The impact of different tags on the cost anomaly
-
-The feature is part of the anomaly investigation workflow, where you can see this analysis in the side panel when you click **See more** on an anomaly.
-
-{{< img src="cloud_cost/anomalies/cost_anomalies-investigation-workflow.png" alt=" see how Tag Influence analyzes the following tags by default" style="width:80;" >}}
-
-Under the **What happened** and **Where the anomaly happened** sections, you can see how Tag Influence analyzes the following tags by default:
-- Region name
-- Service name
-- Subaccount name
-- Team
-- Service
-- Environment
-
-This automated analysis helps you identify the root cause of cost changes, know who to contact about cost anomalies, understand the impact of different infrastructure components, and reduce manual investigation time.
+   {{< img src="cloud_cost/anomalies/anomalies-take-action.png" alt="Click Take Action to view the anomaly in Cost Explorer or add it to a Notebook" style="width:80;" >}}
+1. **Set up monitoring**: Create a cost anomaly monitor for similar patterns or configure alerts for future anomalies.
+   {{< img src="cloud_cost/anomalies/anomalies-create-monitor.png" alt="Create a cost anomaly monitor" style="width:80;" >}}
 
 ## Resolve anomalies
 
-As you investigate anomalies, you may find anomalies that are not significant, were actually expected costs, or are otherwise not considered an anomaly.
+As you investigate anomalies, you may find some that are not significant, were actually expected costs, or are otherwise not considered anomalies.
 
 To resolve an anomaly:
 
 1. Click **Resolve Anomaly** to open the resolution popup.
-2. Select one of the following resolutions to help improve the algorithm:
+1. Select one of the following resolutions to help improve the algorithm:
    - The anomaly amount was too small
    - This is an unexpected increase
    - This is an expected increase
-2. **Add context** about why it is or is not an anomaly.
-3. Click **Resolve** to move it to the Resolved tab.
+1. **Add context** about why it is or is not an anomaly.
+1. Click **Resolve** to move it to the Resolved tab.
 
 This is an example of how to mark a cost anomaly as significant and explain why it's an anomaly:
 
@@ -110,12 +100,17 @@ This is an example of how to mark a cost anomaly as significant and explain why 
 ## Troubleshooting
 
 If you're not seeing expected anomalies:
-- Verify that CCM is [properly set up][2]
+- Verify that CCM is [properly set up][3]
 - Check that you have the necessary permissions for AWS
 - Review the time range of your anomaly view
 
-For more help, contact [Datadog Support][3].
+For more help, contact [Datadog Support][4].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/analyze/anomalies
-[2]: /cloud_cost_management/setup/
-[3]: /help/
+[2]: /dashboards/graph_insights/watchdog_explains
+[3]: /cloud_cost_management/setup/
+[4]: /help/
