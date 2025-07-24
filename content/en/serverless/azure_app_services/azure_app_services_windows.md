@@ -90,6 +90,7 @@ For example:
     - Set the `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
     - Set `DD_ENV` to group your traces and custom statistics.
     - Set `DD_SERVICE` to specify a service name (defaults to your app name).
+    - Set `DD_SOURCE` to the language of the application (eg. `csharp` for .NET) (recommended) for proper log processing.
     - Set `DD_LOGS_INJECTION:true` for correlation with application logs from your app.
     - Set `DD_PROFILING_ENABLED:true` to enable .NET [Continuous Profiler][5].
     - Set `DD_APPSEC_ENABLED:true` to enable [App and API Protection][15].
@@ -109,6 +110,24 @@ You can send logs from your application in Azure App Service to Datadog in one o
 2. [Agentless logging with the Serilog sink][8]
 
 Both methods allow trace ID injection, making it possible to connect logs and traces in Datadog. To enable trace ID injection with the extension, add the application setting `DD_LOGS_INJECTION:true`.
+
+**Environment Variables for Logging**
+
+Configure these environment variables in your Azure App Service Application Settings for optimal log collection:
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `DD_SOURCE` | Identifies the log source for proper processing | `azure-app-service` |
+| `DD_SERVICE` | Your application's service name | `my-web-app` |
+| `DD_ENV` | Your application's environment | `production`, `staging`, `development` |
+| `DD_LOGS_INJECTION` | Enable trace-log correlation | `true` |
+
+**Logging Best Practices**
+
+1. **Enable trace correlation**: Set `DD_LOGS_INJECTION=true` to correlate logs with traces
+2. **Set proper service names**: Use `DD_SERVICE` to ensure logs appear with the correct service name
+3. **Configure log sources**: Set `DD_SOURCE=<APPLICATION_LANGUAGE>` for proper log processing, such as `csharp` for Dotnet logs, `python`, `nodejs` etc 
+4. **Use structured logging**: Implement structured logging in your application for better log parsing
 
 **Note**: Since this occurs inside your application, any Azure Platform logs you submit with diagnostic settings do not include the trace ID.
 

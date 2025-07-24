@@ -135,6 +135,8 @@ Additional flags, like `--service` and `--env`, can be used to set the service a
 1. **Configure environment variables**.
    In Azure, add the following key-value pairs in **Settings** > **Configuration** > **Application settings**:
 
+**Required Environment Variables**
+
 `DD_API_KEY`
 : **Value**: Your Datadog API key.<br>
 See [Organization Settings > API Keys][301] in Datadog.<br>
@@ -143,6 +145,8 @@ See [Organization Settings > API Keys][301] in Datadog.<br>
 : **Value**: {{< region-param key="dd_site" code="true" >}}<br>
 Your [Datadog site][302]. Defaults to `datadoghq.com`.<br>
 Use the "Datadog Site" drop-down menu on this page's right navigation bar to select your site.<br>
+
+**Logging and Service Configuration**
 
 `DD_SERVICE`
 : **Value**: Your application's service name.<br>
@@ -159,17 +163,32 @@ See [Unified Service Tagging][303] for more information on the `env` tag.<br>
 There is no default value for this field.<br>
 See [Unified Service Tagging][303] for more information on the `version` tag.<br>
 
+`DD_SOURCE`
+: **Value**: `azure-app-service` (recommended)<br>
+Identifies the log source for proper processing in Datadog.<br>
+This helps with log parsing and filtering.<br>
+
+**Log Collection Configuration**
+
 `DD_SERVERLESS_LOG_PATH`
 : **Value**: The log path the sidecar uses to collect logs.<br>
 Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFiles/myapp/*.log`.<br>
+**Important**: Write your application logs to `/home/LogFiles/` for persistence across restarts.<br>
+
+`DD_LOGS_INJECTION`
+: **Value**: `true` (recommended)<br>
+Enables trace-log correlation by injecting trace IDs into your application logs.<br>
+This allows you to correlate logs with traces in the Datadog UI.<br>
+
+`DD_AAS_INSTANCE_LOGGING_ENABLED`
+: **Value**: `false` (default)<br>
+When `true`, log collection is automatically configured for an additional file path: `/home/LogFiles/*$COMPUTERNAME*.log`<br>
+
+**Azure App Service Configuration**
 
 `WEBSITES_ENABLE_APP_SERVICE_STORAGE`
 : **Value**: `true`<br>
 Setting this environment variable to `true` allows the `/home/` mount to persist and be shared with the sidecar.<br>
-
-`DD_AAS_INSTANCE_LOGGING_ENABLED`
-: **Value**: false <br>
-When `true`, log collection is automatically configured for an additional file path: `/home/LogFiles/*$COMPUTERNAME*.log`
 
 <div class="alert alert-info">If your application has multiple instances, make sure that your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicated logs from multiple instances reading the same file.</div>
     
@@ -225,6 +244,91 @@ Path to the instrumentation library loaded by the .NET runtime.<br>
 {{% /tab %}}
 {{< /tabs >}}
 
+### Logging Setup
+
+The sidecar container automatically collects logs from your application. To ensure proper log collection:
+
+1. **Write logs to the correct location**: Write your application logs to `/home/LogFiles/` directory
+2. **Enable trace correlation**: Set `DD_LOGS_INJECTION=true` to correlate logs with traces
+3. **Configure log paths**: Use `DD_SERVERLESS_LOG_PATH` to specify custom log file patterns
+
+**Language-Specific Logging Examples**
+
+{{< tabs >}}
+{{% tab "Java" %}}
+
+```java
+// Using Logback with trace correlation
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+Logger logger = LoggerFactory.getLogger(MyClass.class);
+logger.info("Processing request for user: {}", userId);
+```
+
+**Logback Configuration** (`logback.xml`):
+```xml
+<configuration>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>/home/LogFiles/application.log</file>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>
+```
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+```javascript
+// Using Winston with trace correlation
+const winston = require('winston');
+const fs = require('fs');
+
+const logger = winston.createLogger({
+    level: 'info',
+    format: winston.format.combine(
+        winston.format.timestamp(),
+        winston.format.json()
+    ),
+    transports: [
+        new winston.transports.File({ 
+            filename: '/home/LogFiles/application.log' 
+        })
+    ]
+});
+
+logger.info('Processing request', { userId: userId });
+```
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+```python
+import logging
+import os
+
+# Configure logging to write to /home/LogFiles/
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('/home/LogFiles/application.log'),
+        logging.StreamHandler()
+    ]
+)
+
+logger = logging.getLogger(__name__)
+logger.info(f"Processing request for user: {user_id}")
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ### View traces in Datadog
 
 After your application restarts, go to Datadog's [APM Service page][1] and search for the service name you set for your application (`DD_SERVICE`).
@@ -256,6 +360,22 @@ Be sure to enable **App Service logs** to receive debugging logs.
 {{< img src="serverless/azure_app_service/app-service-logs.png" alt="Azure App Service Configuration: App Service logs, under the Monitoring section of Settings in the Azure UI. The 'Application logging' option is set to 'File System'." style="width:100%;" >}}
  
 Share the content of the **Log stream** with [Datadog Support][9].
+
+### Common Logging Issues
+
+**No logs appearing in Datadog**
+- Verify `DD_SERVERLESS_LOG_PATH` is set correctly
+- Check that logs are being written to `/home/LogFiles/`
+- Ensure `WEBSITES_ENABLE_APP_SERVICE_STORAGE=true`
+
+**Missing trace correlation**
+- Set `DD_LOGS_INJECTION=true`
+- Verify your logging library supports trace correlation
+- Check that the tracer is properly initialized
+
+**Incorrect service names in logs**
+- Set `DD_SERVICE` to your desired service name
+- Verify the environment variable is applied after restart
 
 ## Further reading
 
