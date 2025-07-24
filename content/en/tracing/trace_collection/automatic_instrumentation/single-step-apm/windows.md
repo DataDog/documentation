@@ -60,6 +60,6 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
-[2]: /integrations/windows_service/#tags
+[2]: /integrations/windows-service/#tags
 [3]: /tracing/trace_collection/library_config/
 [4]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting

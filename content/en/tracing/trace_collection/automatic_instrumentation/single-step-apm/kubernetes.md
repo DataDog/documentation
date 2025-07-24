@@ -53,7 +53,7 @@ After SSI loads the Datadog SDK into your applications and enables distributed t
 
 Use one of the following setup methods:
 
-- **[Configure with workload targeting][6]**:
+- **[Configure with workload targeting](#target-specific-workloads)**:
 
   By default, Single Step Instrumentation instruments all services in all namespaces. Use workload targeting to limit instrumentation to specific namespaces, pods, or workloads, and apply custom configurations.
 
@@ -665,8 +665,7 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [3]: /tracing/glossary/#instrumentation
 [4]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes/?tab=agentv764recommended#configure-instrumentation-for-namespaces-and-pods
-[5]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
-[6]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes/?tab=installingwithdatadogoperator#configure-instrumentation-for-namespaces-and-pods
+[5]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#containerized-environment
 [7]: /tracing/trace_collection/library_config/
 [11]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
 [12]: https://gcr.io/datadoghq

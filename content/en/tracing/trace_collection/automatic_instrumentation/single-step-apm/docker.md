@@ -101,6 +101,7 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /tracing/trace_collection/library_config/
+[3]: /tracing/trace_collection/library_config/
 [8]: https://github.com/DataDog/dd-trace-java/releases
 [9]: https://github.com/DataDog/dd-trace-js/releases
 [10]: https://github.com/DataDog/dd-trace-py/releases
