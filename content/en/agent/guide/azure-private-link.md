@@ -40,7 +40,8 @@ You can configure Azure Private Link to expose a private IP address for each Dat
 8. On the **Review + create** page, review your configuration settings. Then, select **Create**.
 9. After your private endpoint is created, find it in the list. Take note of this endpoint's **Private IP**, as this is used in the next section. The Connection Status field should be Pending.
 10. Next, Datadog's approval is necessary and manual. Reach out to Datadog Support and request approval of your private link endpoint, include your endpoint name.
-11. Once Datadog Support has confirmed that the endpoint is created, confirm that it is fully working. In the Azure portal navigate to Home > Private Endpoints > Click the endpoint name, the Connection Status should show Approved. Then navigate to Monitoring > Metrics, the `Bytes In` and `Bytes Out` metrics should be non-zero. These metrics should also be captured by the Datadog Azure Integration as `azure.network_privateendpoints.pe_bytes_[in/out]`.
+11. After Datadog Support has confirmed that the endpoint is created, confirm that it is fully working. In the Azure portal navigate to **Home > Private Endpoints**. Click the endpoint name, and confirm that the Connection Status shows **Approved**. 
+12. Navigate to **Monitoring > Metrics**. Confirm the `Bytes In` and `Bytes Out` metrics are non-zero. These metrics should also be captured by the Datadog Azure Integration as `azure.network_privateendpoints.pe_bytes_[in/out]`.
 
 ### Create a Private DNS zone
 1. In the Azure portal, go to **Private DNS zones**.
