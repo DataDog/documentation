@@ -33,7 +33,7 @@ This page walks you through installing, operating, and removing the Datadog UNIX
 
 To install the Agent on AIX, follow the [in-app instructions in Fleet Automation][6], and run the generated script on your hosts.
 
-{{< img src="/agent/basic_agent_usage/aix_img_july_25.png" alt="The Datadog Agent installation step for AIX hosts." style="width:90%;">}}
+{{< img src="/agent/basic_agent_usage/aix_img2_july_25.png" alt="The Datadog Agent installation step for AIX hosts." style="width:90%;">}}
 
 
 
