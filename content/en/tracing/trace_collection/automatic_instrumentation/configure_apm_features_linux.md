@@ -62,8 +62,8 @@ The following minimum SDK versions support configuration via `application_monito
 | Node.js    | v5.41.0             |           
 | .NET       | Not yet supported   |
 | PHP        | v1.8.0              |
-| Ruby       | Not yet supported   |
-| Go         | Not yet supported   |
+| Ruby       | v2.18.0             |
+| Go         | v2.1.0              |
 
 
 

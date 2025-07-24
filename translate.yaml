@@ -21,6 +21,7 @@ ignores:
   - "content/en/api/v1/**/*.md"
   - "content/en/api/v2/**/*.md"
   - "config/_default/menus/menus.en.yaml"
+  - "**/*.mdoc.md"
   - "**/*.fr.md"
   - "**/*.fr.yaml"
   - "**/*.fr.json"

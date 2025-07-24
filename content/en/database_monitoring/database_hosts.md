@@ -19,7 +19,7 @@ In addition to a filterable graph of active connections for that host, the host 
 | [Metrics](#metrics)                             | {{< X >}} | {{< X >}}  |           |           |
 | [Active connections](#active-connections)       | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |
 | [Schema](#schema)                               | {{< X >}} | {{< X >}}  |           |           |
-| [Blocking queries](#blocking-queries)           | {{< X >}} | {{< X >}}  |           | {{< X >}} |
+| [Blocking queries](#blocking-queries)           | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |
 | [Calling services](#calling-services)           | {{< X >}} | {{< X >}}  | {{< X >}} |           |
 | [Configuration details](#configuration-details) | {{< X >}} | {{< X >}}  | {{< X >}} |           |
 
