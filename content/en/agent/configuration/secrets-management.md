@@ -349,7 +349,7 @@ datadog-agent secret refresh
 ```
 
 ### Enabling DDOT collector refresh
-If you are using [DDOT collector](https://docs.datadoghq.com/opentelemetry/setup/ddot_collector/) and want to enable API/APP refresh you must add the following additional configuration to your `datadog.yaml` file:
+If you are using [DDOT collector][7] and want to enable API/APP refresh you must add the following additional configuration to your `datadog.yaml` file:
 ```
 agent_ipc:
   port: 5051
@@ -598,3 +598,4 @@ This command returns whether the permissions are valid for the Agent to view thi
 [4]: https://github.com/DataDog/datadog-secret-backend
 [5]: https://github.com/DataDog/datadog-secret-backend/blob/main/docs/aws/secrets.md
 [6]: /agent/configuration/agent-commands/#restart-the-agent
+[7]: https://docs.datadoghq.com/opentelemetry/setup/ddot_collector/
