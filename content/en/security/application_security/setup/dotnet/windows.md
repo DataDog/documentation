@@ -84,8 +84,6 @@ Set the following required environment variables for automatic instrumentation t
    COR_ENABLE_PROFILING=1
    ```
 
-For a more detailed guide go to [the Datadog Tracer installation guide for .NET Framework][5]
-
 {{% /tab %}}
 {{% tab "Standalone apps *(.NET Core)*" %}}
 
@@ -99,8 +97,6 @@ Set the following required environment variables for automatic instrumentation t
 CORECLR_ENABLE_PROFILING=1
 ```
 
-For a more detailed guide go to [the Datadog Tracer installation guide for .NET Framework][6]
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -108,6 +104,8 @@ For a more detailed guide go to [the Datadog Tracer installation guide for .NET 
 {{% app_and_api_protection_verify_setup %}}
 
 ## Troubleshooting
+
+For a more detailed info go to [the Datadog Tracer installation guide for .NET Framework][5] or [the Datadog Tracer installation guide for .NET Core][6]
 
 If you encounter issues while setting up App and API Protection for your .NET application, see the [.NET App and API Protection troubleshooting guide][4].
 

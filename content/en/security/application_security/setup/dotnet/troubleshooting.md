@@ -22,7 +22,9 @@ title: Troubleshooting .NET App and API Protection
 ### Application fails to start
 
 1. Check logs for errors:
-   - Logs are located at `/var/log/datadog/dotnet/`
+   - Logs are located at
+     - Linux: `/var/log/datadog/dotnet/`
+     - Windows: `%PROGRAMDATA%\Datadog .NET Tracer\logs\`
 
 ### Performance impact
 
