@@ -59,7 +59,7 @@ The [Datadog Agent configuration file][7] is located in `/etc/datadog-agent/data
  * `api_key`: Your organization's [Datadog API key][8]  
  - `site`: Target Datadog region (`datadoghq.com`, - `datadoghq.eu`, `us3.datadoghq.com`, `us5.datadoghq.com`, `ddog-gov.com`)  
 * `proxy`: HTTP/HTTPS proxy endpoints for outbound traffic (see [Datadog Agent Proxy Configuration][9])  
- Default tags, log level, and Datadog configurations.
+- Default tags, log level, and Datadog configurations.
 
 A fully commented reference file, located in `/etc/datadog-agent/datadog.yaml.example`, lists every available option for comparison or to copy and paste. 
 
