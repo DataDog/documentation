@@ -70,13 +70,13 @@ Configuration files for integrations live in `/etc/datadog-agent/conf.d/`. Each 
 To uninstall the Agent, run the command for the appropriate Linux environment.
 
 
-### CentOS, Rocky, AlmaLinux, Amazon Linux, Oracle Linux, Red Hat
+### For CentOS, Rocky, AlmaLinux, Amazon Linux, Oracle Linux, and Red Hat
 
 ```shell
 sudo yum remove datadog-agent
 ```
 
-### Debian, Ubuntu
+### For Debian, Ubuntu
 ```shell
 sudo apt-get remove datadog-agent -y
 ```
@@ -86,15 +86,16 @@ sudo apt-get remove datadog-agent -y
 sudo zypper remove datadog-agent
 ```
 
-This command removes the Agent, but does not remove:
+<div class="alert alert-info">
+
+**The above commands remove the Agent, but do not remove**:
 * The `datadog.yaml` configuration file
 * User-created files in the `/etc/datadog-agent` configuration folder
 * User-created files in the `/opt/datadog-agent` folder
 * The `dd-agent` user
 * Datadog log files
 
-If you also want to remove these elements, run this command after removing the Agent:
-
+**If you also want to remove these elements, run this command after removing the Agent:**
 ```shell
 sudo userdel dd-agent \
 && sudo rm -rf /opt/datadog-agent/ \
@@ -102,11 +103,14 @@ sudo userdel dd-agent \
 && sudo rm -rf /var/log/datadog/
 ```
 
-**Note:** To uninstall remaining Agent artifacts for Debian and Ubuntu run:
+**Note:** To uninstall remaining Agent artifacts for `Debian` and `Ubuntu` run:
 
 ```shell
 sudo apt-get remove --purge datadog-agent -y
 ```
+
+</div>
+
 
 ### Uninstall Single Step APM Instrumentation
 If you installed the Agent with Single Step APM Instrumentation, and you want to uninstall the Agent, you need to run additional commands to uninstall APM Instrumentation.
