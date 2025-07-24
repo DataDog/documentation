@@ -180,7 +180,7 @@ Security tools may flag the `apm-inject` container because it runs an executable
 
 The container's behavior is expected and safe; the executable configures the environment for auto-instrumentation.
 
-Datadog adheres to security best practices and is working with security vendors to whitelist this container.
+Datadog adheres to security best practices and is working with security vendors to allow this container.
 
 ### Kubernetes workload selection issues  
 
