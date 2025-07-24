@@ -141,7 +141,7 @@ Datadog にトレースを送信するアプリケーションをテストしま
 
 1. Datadog で [**APM** > **Services**][3] に移動します。すると `hello` という Python サービスが見つかるはずです。
 
-   {{< img src="/getting_started/apm/service-catalog.png" alt="Software Catalog shows the new Python service." style="width:100%;" >}}
+   {{< img src="/getting_started/apm/service-catalog.png" alt="Software Catalog に新しい Python サービスが表示されている" style="width:100%;" >}}
 
 1. サービスを選択して、レイテンシー、スループット、エラー率などのパフォーマンスメトリクスを表示します。
 1. [**APM** > **Traces**][4] に移動します。`hello` サービスのトレースが表示されるはずです。

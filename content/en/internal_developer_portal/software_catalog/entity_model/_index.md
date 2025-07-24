@@ -44,6 +44,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/service-catalog-schema-v3/"
   tag: "Blog"
   text: "Improve developer experience and collaboration with Service Catalog schema version 3.0"
+algolia:
+  tags: [ "codeLocations" ]
 ---
 
 {{< site-region region="gov" >}}
@@ -100,6 +102,7 @@ For detailed information about each version, including full schemas and example 
 - **Enhanced relationship mapping**: With APM and USM data, you can automatically detect dependencies among components. v3.0 supports manual declaration to augment auto-detected system topology to ensure a complete overview of how components interact within your systems.
 - **Inheritance of system metadata**: Components within a system automatically inherit the system's metadata. It's no longer necessary to declare metadata for all related components one-by-one as in v2.1 and v2.2. 
 - **Precise code location**: Add the mapping of your code location for your service. The `codeLocations` section in v3.0 specifies the locations of the code with the repository that contains the code and its associated `paths`. The `paths` attribute is a list of [globs][4] that should match paths in the repository.
+- **Filtered logs & events**: Declare saved logs and event queries for a `system` through the `logs` and `events` sections and view results on the System page.  
 - **Custom entities**: Define custom entity types beyond Service, System, Datastore, Queue, and API. Scope scorecards and actions to specific entity types.
 - **(Upcoming) Integrations**: Integrate with third-party tools to dynamically source information related to your components (for example, GitHub pull requests, PagerDuty incidents, and GitLab pipelines). Report on and write scorecard rules against any third-party source.
 - **(Upcoming) Group by product or domain**: Organize components by product, enabling multiple layers of hierarchical grouping.

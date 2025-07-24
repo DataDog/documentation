@@ -1,5 +1,5 @@
 ---
-title: Connect RUM and Profiling
+title: Correlate RUM and Profiling
 further_reading:
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"

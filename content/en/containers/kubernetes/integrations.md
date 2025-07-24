@@ -259,6 +259,7 @@ spec:
             logs:
               <LOGS_CONFIG>
 ```
+<div class="alert alert-info">When multiple deployed <code>DatadogAgent</code> CRDs use <code>configDataMap</code>, each CRD writes to a shared ConfigMap named <code>nodeagent-extra-confd</code>. This can cause configurations to override each other. </div>
 
 To monitor a [Cluster Check][1], add an override `extraConfd.configDataMap` to the `clusterAgent` component. You must also enable cluster checks by setting `features.clusterChecks.enabled: true`. 
 
