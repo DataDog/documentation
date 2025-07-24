@@ -1,5 +1,5 @@
 ---
-title: Instrumenting Google Cloud Run In-Process
+title: Instrumenting Google Cloud Run Containers In-Process
 further_reading:
 
 - link: 'https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/'
@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. 
+Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications.
 
 This page provides instructions for instrumenting your Google Cloud Run containers with the Datadog Agent, which enables tracing, custom metrics, and direct log collection.
 
