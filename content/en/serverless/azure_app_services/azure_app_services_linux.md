@@ -170,25 +170,44 @@ This helps with log parsing and filtering.<br>
 
 **Log Collection Configuration**
 
+{{< tabs >}}
+{{% tab "Single Instance" %}}
+
 `DD_SERVERLESS_LOG_PATH`
 : **Value**: The log path the sidecar uses to collect logs.<br>
 Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFiles/myapp/*.log`.<br>
 **Important**: Write your application logs to `/home/LogFiles/` for persistence across restarts.<br>
+
+`DD_AAS_INSTANCE_LOGGING_ENABLED`
+: **Value**: `false`<br>
+When `false`, log collection uses the path specified in `DD_SERVERLESS_LOG_PATH`.<br>
+
+{{% /tab %}}
+{{% tab "Multiple Instances" %}}
+
+`DD_SERVERLESS_LOG_PATH`
+: **Value**: Do NOT set this variable<br>
+When using multiple instances, let the sidecar automatically detect log files.<br>
+
+`DD_AAS_INSTANCE_LOGGING_ENABLED`
+: **Value**: `true`<br>
+When `true`, log collection is automatically configured for file paths: `/home/LogFiles/*$COMPUTERNAME*.log`<br>
+**Important**: Ensure your application log filenames include the `$COMPUTERNAME` variable to prevent duplicate logs from multiple instances reading the same file.<br>
+
+{{% /tab %}}
+{{< /tabs >}}
 
 `DD_LOGS_INJECTION`
 : **Value**: `true` (recommended)<br>
 Enables trace-log correlation by injecting trace IDs into your application logs.<br>
 This allows you to correlate logs with traces in the Datadog UI.<br>
 
-`DD_AAS_INSTANCE_LOGGING_ENABLED`
-: **Value**: `false` (default)<br>
-When `true`, log collection is automatically configured for an additional file path: `/home/LogFiles/*$COMPUTERNAME*.log`<br>
-
 **Azure App Service Configuration**
 
 `WEBSITES_ENABLE_APP_SERVICE_STORAGE`
 : **Value**: `true`<br>
 Setting this environment variable to `true` allows the `/home/` mount to persist and be shared with the sidecar.<br>
+**Required for both single and multiple instance configurations.**
 
 <div class="alert alert-info">If your application has multiple instances, make sure that your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicated logs from multiple instances reading the same file.</div>
     
@@ -364,9 +383,19 @@ Share the content of the **Log stream** with [Datadog Support][9].
 ### Common Logging Issues
 
 **No logs appearing in Datadog**
+
+*For Single Instance:*
 - Verify `DD_SERVERLESS_LOG_PATH` is set correctly
 - Check that logs are being written to `/home/LogFiles/`
 - Ensure `WEBSITES_ENABLE_APP_SERVICE_STORAGE=true`
+- Verify `DD_AAS_INSTANCE_LOGGING_ENABLED=false`
+
+*For Multiple Instances:*
+- Ensure `DD_SERVERLESS_LOG_PATH` is NOT set
+- Check that logs are being written to `/home/LogFiles/`
+- Ensure `WEBSITES_ENABLE_APP_SERVICE_STORAGE=true`
+- Verify `DD_AAS_INSTANCE_LOGGING_ENABLED=true`
+- Ensure log filenames include `$COMPUTERNAME` variable
 
 **Missing trace correlation**
 - Set `DD_LOGS_INJECTION=true`
@@ -376,6 +405,11 @@ Share the content of the **Log stream** with [Datadog Support][9].
 **Incorrect service names in logs**
 - Set `DD_SERVICE` to your desired service name
 - Verify the environment variable is applied after restart
+
+**Duplicate logs from multiple instances**
+- Ensure `DD_AAS_INSTANCE_LOGGING_ENABLED=true` for multiple instances
+- Verify log filenames include the `$COMPUTERNAME` variable
+- Do not set `DD_SERVERLESS_LOG_PATH` when using multiple instances
 
 ## Further reading
 
