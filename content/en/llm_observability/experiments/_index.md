@@ -205,8 +205,7 @@ experiment = LLMObs.experiment(
     tags={
         "model": "gpt-4",
         "version": "1.0"
-    },  # Tags as key-value pairs
-    project_name="my-project"  # Optional: Override DD_LLMOBS_PROJECT_NAME
+    },
 )
 
 # Run the experiment
