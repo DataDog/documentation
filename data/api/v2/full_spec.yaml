@@ -70413,13 +70413,18 @@ tags:
     for more information.
   name: Incidents
 - description: 'Manage your Datadog API and application keys. You need an API key
-    and
+    and an
 
-    an application key for a user with the required permissions to interact
+    application key for a user with the required permissions to interact with these
+    endpoints.
 
-    with these endpoints. The full list of API and application keys can be
 
-    seen on your [Datadog API page](https://app.datadoghq.com/account/settings#api).'
+    Consult the following pages to view and manage your keys:
+
+
+    - [API Keys](https://app.datadoghq.com/organization-settings/api-keys)
+
+    - [Application Keys](https://app.datadoghq.com/personal-settings/application-keys)'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/api-app-keys/

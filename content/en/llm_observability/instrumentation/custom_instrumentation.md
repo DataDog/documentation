@@ -1,8 +1,8 @@
 ---
-title: Set up LLM Observability
+title: Custom Instrumentation
 aliases:
     - /tracing/llm_observability/trace_an_llm_application
-    - /llm_observability/trace_an_llm_application
+    - /llm_observability/setup
 further_reading:
     - link: 'https://www.datadoghq.com/blog/llm-observability-chain-tracing/'
       tag: 'Blog'
@@ -13,18 +13,17 @@ further_reading:
 ---
 
 ## Overview
+Datadog's LLM Observability SDK provides advanced capabilities for custom instrumentation of your LLM applications beyond auto-instrumentation. Custom instrumentation gives you granular control over tracing and enables access to additional features, including:
 
-To start sending data to LLM Observability, instrument your application with the [LLM Observability SDK for Python][1] or by calling the [LLM Observability API][2]. 
+- Creating custom spans to track specific operations and workflows
+- Nesting spans to build detailed traces showing relationships between operations
+- Annotating spans with rich metadata, metrics, and tags
+- Tracking user sessions and application state
+- Supporting multiple LLM applications or experiments
 
-You can visualize the interactions and performance data of your LLM applications on the [**LLM Observability Traces** page][3], where each request fulfilled by your application is represented as a trace.
-
-{{< img src="llm_observability/traces.png" alt="An LLM Observability trace displaying each span of a request" style="width:100%;" >}}
-
-For more information about traces, see [Terms and Concepts][4] and decide which instrumentation option best suits your application's needs.
+This page explains how to use the Datadog LLM Observability SDK's custom instrumentation features to get deeper visibility into your LLM applications' behavior and performance.
 
 ## Instrument an LLM application
-
-Datadog provides [auto-instrumentation][4] to capture LLM calls for specific LLM provider libraries. However, manually instrumenting your LLM application using the LLM Observability SDK for Python enables access to additional LLM Observability features.
 
 <div class="alert alert-info">These instructions use the <a href="/llm_observability/setup/sdk">LLM Observability SDK for Python</a>. If your application is running in a serverless environment, follow the <a href="/llm_observability/setup/sdk/#aws-lambda-setup">serverless setup instructions</a>. </br></br> If your application is not written in Python, you can complete the steps below with API requests instead of SDK function calls.</div>
 
@@ -37,13 +36,13 @@ To instrument an LLM application:
 
 To trace an LLM application:
 
-1. [Create spans](#creating-spans) in your LLM application code to represent your application's operations. For more information about spans, see [Terms and Concepts][4]. 
-   
+1. [Create spans](#creating-spans) in your LLM application code to represent your application's operations. For more information about spans, see [Terms and Concepts][4].
+
    You can [nest spans](#nesting-spans) to create more useful traces. For additional examples and detailed usage, see [Trace an LLM Application][8] and the [SDK documentation][9].
 
 1. [Annotate your spans](#annotating-spans) with input data, output data, metadata (such as `temperature`), metrics (such as `input_tokens`), and key-value tags (such as `version:1.0.0`).
 1. Optionally, add [advanced tracing features](#advanced-tracing), such as user sessions.
-1. Run your LLM application. 
+1. Run your LLM application.
     - If you used the command-line setup method, the command to run your application should use `ddtrace-run`, as described in [those instructions][6].
     - If you used the in-code setup method, run your application as you normally would.
 
@@ -51,7 +50,7 @@ You can access the resulting traces in the **Traces** tab on the [**LLM Observab
 
 ### Creating spans
 
-To create a span, the LLM Observability SDK provides two options: using a function decorator or using a context manager inline. 
+To create a span, the LLM Observability SDK provides two options: using a function decorator or using a context manager inline.
 
 Using a function decorator is the preferred method. Using a context manager is more advanced and allows more fine-grained control over tracing.
 
@@ -178,7 +177,7 @@ Depending on the complexity of your LLM application, you can also:
 - [Track user sessions][12] by specifying a `session_id`.
 - [Persist a span between contexts or scopes][13] by manually starting and stopping it.
 - [Track multiple LLM applications][14] when starting a new trace, which can be useful for differentiating between services or running multiple experiments.
-- [Submit custom evaluations][15] such as feedback from the users of your LLM application (for example, rating from 1 to 5) with the [SDK][1] or the [API][2]. 
+- [Submit custom evaluations][15] such as feedback from the users of your LLM application (for example, rating from 1 to 5) with the [SDK][1] or the [API][2].
 
 ## Permissions
 
@@ -188,20 +187,20 @@ By default, only users with the [Datadog Read role][16] can view LLM Observabili
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /llm_observability/setup/sdk
-[2]: /llm_observability/setup/api
+[1]: /llm_observability/instrumentation/sdk
+[2]: /llm_observability/instrumentation/api
 [3]: https://app.datadoghq.com/llm/traces
 [4]: /llm_observability/terms
-[5]: /llm_observability/sdk#installation
-[6]: /llm_observability/sdk#command-line-setup
-[7]: /llm_observability/sdk#in-code-setup
+[5]: /llm_observability/instrumentation/sdk#installation
+[6]: /llm_observability/instrumentation/sdk#command-line-setup
+[7]: /llm_observability/instrumentation/sdk#in-code-setup
 [8]: /llm_observability/quickstart
-[9]: /llm_observability/sdk#tracing-spans
+[9]: /llm_observability/instrumentation/sdk#tracing-spans
 [10]: https://app.datadoghq.com/dash/integration/llm_analytics
-[11]: /llm_observability/sdk#tracking-user-sessions
-[12]: /llm_observability/sdk#tracking-user-sessions
-[13]: /llm_observability/sdk#persisting-a-span-across-contexts
-[14]: /llm_observability/sdk#tracing-multiple-applications
+[11]: /llm_observability/instrumentation/sdk#tracking-user-sessions
+[12]: /llm_observability/instrumentation/sdk#tracking-user-sessions
+[13]: /llm_observability/instrumentation/sdk#persisting-a-span-across-contexts
+[14]: /llm_observability/instrumentation/sdk#tracing-multiple-applications
 [15]: /llm_observability/evaluations/submit_evaluations
 [16]: /account_management/rbac/#datadog-default-roles
 [17]: /account_management/rbac/permissions/#llm-observability

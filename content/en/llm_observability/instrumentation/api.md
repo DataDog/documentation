@@ -1,8 +1,9 @@
 ---
-title: LLM Observability API Reference
+title: API Reference
 aliases:
     - /tracing/llm_observability/api
     - /llm_observability/api
+    - /llm_observability/setup/api
 ---
 
 ## Overview
