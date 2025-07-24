@@ -55,7 +55,7 @@ Available versions are listed in source repositories for each language:
 
 ## Configure Unified Service Tags
 
-Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data. Learn how to [set USTs for Docker services][16].
+Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. Learn how to [set USTs for Docker services][16].
 
 ## Enable SDK-dependent products and features
 

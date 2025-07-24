@@ -43,7 +43,7 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 
 ## Configure Unified Service Tags
 
-Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data. Learn how to [set USTs for Kubernetes services][5].
+Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. Learn how to [set USTs for Kubernetes services][5].
 
 **Note**: In Kubernetes, USTs must be set on both the Deployment object and the Pod template spec.
 

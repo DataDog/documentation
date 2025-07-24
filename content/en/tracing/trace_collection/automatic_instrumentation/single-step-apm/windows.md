@@ -35,7 +35,7 @@ After installation, the Agent automatically loads the Datadog .NET SDK into supp
 
 ## Configure Unified Service Tags
 
-Unified Service Tags (USTs) connect traces, metrics, and logs by applying consistent tags across your telemetry. This makes it easier to navigate your observability data. Learn how to [set USTs for Windows services][2].
+Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. Learn how to [set USTs for Windows services][2].
 
 ## Enable SDK-dependent products and features
 
