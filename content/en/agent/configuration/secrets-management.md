@@ -356,7 +356,7 @@ agent_ipc:
   config_refresh_interval: 3600
 ```
 
-This ensures the DDOT collector remains in sync with the Agent after secrets are refreshed. Just like the Agent periodically verifies its configuration state, the DDOT collector uses this setting to regularly check for updated values from the Agent.
+This ensures the DDOT collector remains in-sync with the Agent after secrets are refreshed. Just like the Agent periodically verifies its configuration state, the DDOT collector uses this setting to regularly check for updated values from the Agent.
 
 ## Troubleshooting
 
