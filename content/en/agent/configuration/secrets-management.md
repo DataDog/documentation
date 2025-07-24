@@ -348,8 +348,8 @@ To refresh manually, use:
 datadog-agent secret refresh
 ```
 
-### Enabling DDOT collector refresh
-If you are using DDOT collector and want to enable API refresh you must add the following additional configuration to your `datadog.yaml` file
+### Enabling [DDOT collector](https://docs.datadoghq.com/opentelemetry/setup/ddot_collector/) refresh
+If you are using DDOT collector and want to enable API/APP refresh you must add the following additional configuration to your `datadog.yaml` file:
 ```
 agent_ipc:
   port: 5051
