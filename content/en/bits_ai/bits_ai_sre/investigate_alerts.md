@@ -27,7 +27,7 @@ An investigation initiates when a monitor transitions to the alert state. Transi
 
 | Type              | Description                                                                                   |
 |-------------------|-----------------------------------------------------------------------------------------------|
-| Monitor limit     | Up to two investigations every 30 minutes per monitor.<br><br>In addition, "noisy" monitors are automatically rate-limited. A monitor is considered noisy if it:<br>• Triggers alerts on 12+ of the last 14 days, OR<br>• Fires in more than 15% of an hour interval |
+| Monitor limit     | Up to two investigations every 30 minutes per monitor.<br><br>In addition, "noisy" monitors are automatically rate-limited. A monitor is considered noisy if it:<br>• Triggers alerts on 12+ of the last 14 days, OR<br>• Stays in alert state for more than 15% of an hour interval |
 | Organization limit| Up to five investigations per hour per organization.                                           |
 
 ### Manually start an investigation
