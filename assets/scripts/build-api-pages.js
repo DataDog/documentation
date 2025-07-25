@@ -6,6 +6,7 @@ const marked = require('marked');
 const slugify = require('slugify');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const safeJsonStringify = require('safe-json-stringify');
+const oneOfLimit = 50;
 
 const supportedLangs = ['en'];
 
@@ -303,7 +304,7 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = [], l
             }
 
             // for items -> oneOf
-            if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < 20) {
+            if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < oneOfLimit) {
               // if we have an example use that otherwise choose the first one oneof
               if(!parentExample) {
                 if (Object.keys(value.items.oneOf).length !== 0) {
