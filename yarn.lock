@@ -7600,16 +7600,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docs-llms-txt@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/llms-txt-v1/docs-llms-txt-v1.0.6.tgz":
-  version: 1.0.6
-  resolution: "docs-llms-txt@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/llms-txt-v1/docs-llms-txt-v1.0.6.tgz"
+"docs-llms-txt@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/llms-txt-v1/docs-llms-txt-v1.0.7.tgz":
+  version: 1.0.7
+  resolution: "docs-llms-txt@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/llms-txt-v1/docs-llms-txt-v1.0.7.tgz"
   dependencies:
     js-yaml: ^4.1.0
     rimraf: ^5.0.5
     simple-git: ^3.28.0
     uuid: ^11.1.0
     zod: ^3.22.4
-  checksum: d9754d3bdf5f86379e5da70a078f946cb79791c5e49ef9313b1fd8fe5a9231c59ad977e28dc0bfc05e4a6534df94cc487acdc55a14a1bbce61dc85a8ae467b3e
+  checksum: 823772308e7e90732c9b9aef0a90f40ec354bcd80b88e292198e169c86f5388559213d3490f75f4fc81d385538c16b1ef4a67bd3b1d069156ddfc89d2a1917c4
   languageName: node
   linkType: hard
 
@@ -7633,7 +7633,7 @@ __metadata:
     cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v1.4.0.tgz"
     cross-env: ^5.2.1
     del: 4.1.1
-    docs-llms-txt: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/llms-txt-v1/docs-llms-txt-v1.0.6.tgz"
+    docs-llms-txt: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/llms-txt-v1/docs-llms-txt-v1.0.7.tgz"
     eslint: ^6.8.0
     eslint-config-airbnb: ^18.2.1
     eslint-config-prettier: ^6.15.0
