@@ -1,7 +1,6 @@
 ---
 title: Enabling App and API Protection for Istio
 code_lang: istio
-type: multi-code-lang
 code_lang_weight: 50
 aliases:
   - /security/application_security/threats_detection/istio

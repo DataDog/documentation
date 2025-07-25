@@ -1,7 +1,6 @@
 ---
 title: Enabling App and API Protection for GCP Service Extensions
 code_lang: gcp-service-extensions
-type: multi-code-lang
 code_lang_weight: 50
 aliases:
   - /security/application_security/threats/setup/threat_detection/gcp-service-extensions

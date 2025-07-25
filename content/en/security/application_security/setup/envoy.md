@@ -1,7 +1,6 @@
 ---
 title: Enabling AAP for Envoy
 code_lang: envoy
-type: multi-code-lang
 code_lang_weight: 50
 aliases:
   - /security/application_security/threats/setup/threat_detection/envoy

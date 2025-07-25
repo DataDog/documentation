@@ -1,7 +1,6 @@
 ---
 title: Enabling AAP for Nginx
 code_lang: nginx
-type: multi-code-lang
 code_lang_weight: 50
 aliases:
   - /security_platform/application_security/getting_started/nginx
