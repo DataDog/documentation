@@ -8,6 +8,7 @@ aliases:
   - /quality_gates/explorer/search_syntax/
   - /quality_gates/explorer/facets/
   - /quality_gates/explorer/saved_views/
+  - /quality_gates/search/
 further_reading:
 - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
   tag: "Release Notes"
@@ -99,6 +100,8 @@ To create a PR Gate rule, see the [Setup documentation][2].
 ## Manage rules
 
 You can evaluate and update quality control processes by accessing PR Gates rules on the [**PR Gates Rules**][6] page. Improve your deployment practices based on your project requirements and desired performance outcomes. 
+
+This view is useful for developers who want to keep an eye on the PR gates for their build pipelines. You can see all of the rules defined by the organization.
 
 {{< img src="pr_gates/rules_list_3.png" alt="List of PR Gate rules in Datadog" style="width:100%" >}}
 

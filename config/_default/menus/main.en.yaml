@@ -5132,16 +5132,11 @@ menu:
       parent: pr_gates
       identifier: pr_gates_setup
       weight: 1
-    - name: Search and Manage
-      url: pr_gates/search
-      parent: pr_gates
-      identifier: pr_gates_search
-      weight: 2
     - name: Guides
       url: pr_gates/guide
       parent: pr_gates
       identifier: pr_gates_guide
-      weight: 3
+      weight: 2
     - name: DORA Metrics
       url: dora_metrics/
       pre: ci
