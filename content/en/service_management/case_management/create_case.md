@@ -20,15 +20,7 @@ Cases can be created [manually](#manual-case-creation), [automatically](#automat
 1. Select a project to create the case in. **Note**: A case can only belong to a single project.
 1. Click **New Case**.
 1. Fill in a title for the case.
-1. Select from one of the available case type:
-   | Case Type       | Description                                                                 |
-|------------------|-----------------------------------------------------------------------------|
-| Standard         | A general-purpose case for operational tasks, investigations, and more.     |
-| Change Request   | Used in change management workflows to track planned or approved changes.   |
-| Event Management | Integrated with the Event Management product to house correlated events.    |
-| Security         | Used by security teams and products to manage investigations or alerts.     |
-| Error Tracking   | Linked to the Error Tracking product to track and remediate application issues. |
-| Custom Type      | Add a custom case type. For more information, see [Case Customization][7]. |
+1. Select a [case type](#case-types).
 1. Add a title.
 1. (Optional) Add a description.
 1. Click **Create Case** to complete.
@@ -55,6 +47,19 @@ Configure the following products to automatically create cases:
 | Event Management (Correlations) | In Event Management, correlations configured to aggregate events from Datadog and third-party sources automatically create cases.   |
 | Workflow Automation | 1. In a new or existing workflow, add a step in the Workflow builder and search for "Case Management."<br> 2. Select the **Create Case** action.<br> 3. If the workflow is configured to run based on a monitor or security signal trigger, add the relevant workflow triggers and ensure that you've added the workflow handle to the desired resources. For more information, see [Trigger a workflow][6].|
 | Error Tracking | In Error Tracking, cases are automatically created when an issue is commented on or assigned. |
+
+## Case types
+
+Add case types when you are creating a case. Not all case types are available for configuration between manual and automativ creation. For example, only `Standard`, `Security` and `Change Request`, `Event Management` types are available when creating cases manually.
+
+| Case Type       | Description                                                                 |
+|------------------|-----------------------------------------------------------------------------|
+| Standard         | A general-purpose case for operational tasks, investigations, and more.     |
+| Change Request   | Used in change management workflows to track planned or approved changes.   |
+| Event Management | Integrated with the Event Management product to house correlated events.    |
+| Security         | Used by security teams and products to manage investigations or alerts.     |
+| Error Tracking   | Linked to the Error Tracking product to track and remediate application issues. |
+| Custom Type      | Add a custom case type. For more information, see [Case Customization][7]. |
 
 ## API
 
