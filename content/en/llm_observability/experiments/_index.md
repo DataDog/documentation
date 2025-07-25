@@ -25,7 +25,7 @@ LLM Observability [Experiments][9] supports the entire lifecycle of building LLM
 Install Datadog's LLM Observability Python SDK:
 
 ```shell
-pip install ddtrace==3.11.0rc2
+pip install ddtrace>=3.11.0
 ```
 
 ### Setup
@@ -214,6 +214,9 @@ experiment = LLMObs.experiment(
 results = experiment.run()  # Run on all dataset records
 results = experiment.run(jobs=4)  # Run with parallel processing
 results = experiment.run(sample_size=10, raise_errors=True)  # Test on subset
+
+# View experiment in Datadog UI
+print(f"View experiment: {experiment.url}")
 
 # Process results
 for result in results:
