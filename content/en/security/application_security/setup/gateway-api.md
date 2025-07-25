@@ -18,9 +18,9 @@ further_reading:
       text: "Troubleshooting App and API Protection"
 ---
 
-{{< callout url="#" btn_hidden="true" header="AAP for Gateway API is experimental" >}}
-To try the experimental version of AAP for Gateway API, follow the setup instructions below.
-{{< /callout >}}.
+<div class="alert alert-warning">
+  AAP for Gateway API is experimental. Please follow the instructions below to try it out.
+</div>
 
 ## Overview
 
