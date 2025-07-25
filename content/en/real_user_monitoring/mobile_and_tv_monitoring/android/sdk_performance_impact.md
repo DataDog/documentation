@@ -20,6 +20,16 @@ When integrating any SDK into your Android application, understanding its perfor
 
 To simulate the typical usage of the Datadog SDK, it was integrated into the [Docile-Alligator/Infinity-For-Reddit][5] application and typical user behavior (in other words, scrolling the feed, browsing subreddits) was simulated.
 
+The following SDK modules were added to the application:
+
+* `dd-sdk-android-logs`
+* `dd-sdk-android-trace`
+* `dd-sdk-android-rum`
+* `dd-sdk-android-okhttp`
+* `dd-sdk-android-glide`
+
+The SDK was set up with default settings.
+
 Below are the results of the measurements.
 
 | Measurement       | with SDK                       | without SDK    |
@@ -35,6 +45,11 @@ You can read the following [page][1] for more details about these benchmarks.
 ### iOS SDK
 
 To simulate the typical usage of Datadog SDK, it was integrated into the [Beam][6] application and typical user behavior (scrolling the feed, browsing reddits) was simulated.
+
+The SDK features that were used:
+1. Basic RUM instrumentation for tracking views, actions, and resources
+2. Logging
+3. Tracing
 
 Below are the results of the measurements.
 
