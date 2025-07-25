@@ -406,7 +406,34 @@ describe(`filterExampleJson`, () => {
       "type": "array"
     };
     const actual = bp.filterExampleJson("response", mockSchema);
-    const expected = ["namespace1", "namespace2", "namespace3"];
+    const expected = {
+        "value": [
+            "namespace1",
+            "namespace2",
+            "namespace3"
+        ]
+    };
+    expect(actual).toEqual(expected);
+  });
+
+  it('should show example data when array', () => {
+    const mockSchema = {
+      "example": [
+          "namespace1",
+          "namespace2",
+          "namespace3"
+      ],
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    };
+    const actual = bp.filterExampleJson("response", mockSchema);
+    const expected = [
+        "namespace1",
+        "namespace2",
+        "namespace3"
+    ];
     expect(actual).toEqual(expected);
   });
 
