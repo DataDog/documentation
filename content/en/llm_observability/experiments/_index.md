@@ -165,7 +165,7 @@ print(df.head())
 # 1  What is the capital of Brazil? geography      Brasília      medium
 ```
 
-The DataFrame will have a MultiIndex structure with the following columns:
+The DataFrame has a MultiIndex structure with the following columns:
 - `input_data`: Contains all input fields from `input_data_columns`
 - `expected_output`: Contains all output fields from `expected_output_columns`
 - `metadata`: Contains any additional fields from `metadata_columns`
