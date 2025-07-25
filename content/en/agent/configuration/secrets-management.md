@@ -48,7 +48,17 @@ instances:
 
 ### Option 1: Using the datadog_secret_backend executable embedded in the Agent
 
-<TBD>
+Starting in agent version 7.69, the [datadog-secret-backend](https://github.com/DataDog/datadog-secret-backend) executable will be shipped within the Datadog Agent. The major change in this option is that the backend executable is now configured directly by setting the [secret_backend_type](https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml#L867) and [secret_backend_config](https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml#L880) options in the datadog.yaml file. 
+
+`secret_backend_type` is where the type of the backend is specified, and `secret_backend_config` is where additional configuration relevant for pulling secrets is included. To use this embedded executable, in your datadog.yaml file, add:
+
+```yaml
+secret_backend_type: <backend_type>
+secret_backend_config:
+  <KEY_1>: <VALUE_1>
+```
+
+More specific setup instructions will depend on the backend type used. Refer to the appropriate link for further information: [AWS Secrets](https://github.com/DataDog/datadog-secret-backend/blob/main/docs/aws/secrets.md), [AWS SSM](https://github.com/DataDog/datadog-secret-backend/blob/main/docs/aws/ssm.md), [Azure Keyvault](https://github.com/DataDog/datadog-secret-backend/blob/main/docs/azure/keyvault.md), [Hashicorp Vault](https://github.com/DataDog/datadog-secret-backend/blob/main/docs/hashicorp/vault.md), [JSON](https://github.com/DataDog/datadog-secret-backend/blob/main/docs/file/json.md), [YAML](https://github.com/DataDog/datadog-secret-backend/blob/main/docs/file/yaml.md).
 
 ### Option 2: Using the built-in Script for Kubernetes and Docker
 
