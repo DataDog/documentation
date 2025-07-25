@@ -17,7 +17,7 @@ The Datadog Agent allows you to securely manage secrets by integrating with any 
 
 ### How it works
 
-To reference a secret in your configuration, use the `ENC[<secret_id>]` notation. This tells the Agent to resolve the value using your configured secret retrieval executable. The secret is fetched and loaded into memory but is never written to disk or sent to the Datadog backend.
+To reference a secret in your configuration, use the `ENC[<secret_id>]` notation. This tells the Agent to resolve the value using either the embedded [datadog-secret-backend](https://github.com/DataDog/datadog-secret-backend) or your configured secret retrieval executable. The backend resolves the placeholder using your secret store and injects the plain-text value into the config at runtime. The secret is fetched and loaded into memory but is never written to disk or sent to the Datadog backend.
 
 For example, the following configuration shows two secrets defined with `ENC[]`:
 ```
@@ -44,70 +44,13 @@ instances:
 
 **Note**: You cannot use the `ENC[]` syntax in `secret_*` settings like `secret_backend_command`.
 
-### Agent security requirements
-
-The Agent runs the provided executable as a sub-process. The execution patterns differ on Linux and Windows.
-
-{{< tabs >}}
-{{% tab "Linux" %}}
-
-On Linux, the executable must:
-
-* Belong to the same user running the Agent (`dd-agent` by default, or `root` inside a container).
-* Have no rights for `group` or `other`.
-* Have at least exec rights for the owner.
-
-{{% /tab %}}
-{{% tab "Windows" %}}
-
-On Windows, the executable must:
-
-* Have read/exec for `ddagentuser` (the user used to run the Agent).
-* Have no rights for any user or group except for the `Administrators` group, the built-in `Local System` account, or the Agent user context (`ddagentuser` by default)
-* Be a valid Win32 application so the Agent can execute it (for example, a PowerShell or Python script doesn't work).
-
-{{% /tab %}}
-{{< /tabs >}}
-
-**Note**: The executable shares the same environment variables as the Agent.
-
-## Providing a secret retrieval executable
-
-To retrieve secrets, the Agent uses an external executable that you provide. The executable is used when new
-secrets are discovered and are cached for the lifecycle of the Agent. If you need to update or rotate a secret, you must restart the Agent to reload it.
-
-The Agent sends this executable a JSON payload over standard input containing a list of secret handles. The executable fetches each secret and returns them in a JSON format through standard output.
-
-Here's what the Agent sends to your executable on STDIN:
-```
-{
-  "version": "1.0",
-  "secrets": ["secret1", "secret2"]
-}
-```
-
-* `version` (string): the format version.
-* `secrets` (list of strings): each string is a handle for a secret to fetch.
-
-
-The executable should respond through STDOUT:
-```
-{
-  "secret1": {"value": "decrypted_value", "error": null},
-  "secret2": {"value": null, "error": "could not fetch the secret"}
-}
-```
-
-* `value` (string): the secret value to be used in the configurations. This can be `null` in the case of an error.
-* `error` (string): an error message or `null`.
-
-If a secret fails to resolve (either by returning a non-zero exit code or a non-null error), the related configuration is ignored by the Agent.
-
-**Never output sensitive information on `stderr`**. If the binary exits with a different status code than `0`, the Agent logs the standard error output of the executable to ease troubleshooting.
-
 ## Options for retrieving secrets
 
-### Option 1: Using the built-in Script for Kubernetes and Docker
+### Option 1: Using the datadog_secret_backend executable embedded in the Agent
+
+<TBD>
+
+### Option 2: Using the built-in Script for Kubernetes and Docker
 
 For containerized environments, the Datadog Agent's container images include a built-in script `/readsecret_multiple_providers.sh` starting with version v7.32.0. This script supports reading secrets from:
 
@@ -204,57 +147,39 @@ roleRef:
 
 This `Role` gives access to the `Secret: database-secret` in the `Namespace: database`. The `RoleBinding` links up this permission to the `ServiceAccount: datadog-agent` in the `Namespace: default`. This needs to be manually added to your cluster with respect to your resources deployed.
 
-### Option 2: Using a prebuilt executable
-
-If you're using a standard secrets provider like `AWS Secrets Manager`, `AWS SSM` or other, you can use the prebuilt [datadog-secret-backend][4] executable.
-
-Here's an example showing how to set it up:
-
-1. **Create your secret** in AWS Secrets Manager. The secrets `ARN` in AWS is the secrets handle. example:
-  ```
-  arn:aws:secretsmanager:us-east-2:111122223333:secret:AgentAPIKey
-  ```
-2. **Grant your EC2 instance IAM permissions** to read the secret:
-   ```
-   {
-     "Version": "2012-10-17",
-     "Statement": [
-       {
-         "Effect": "Allow",
-         "Action": [
-           "secretsmanager:GetSecretValue"
-         ],
-         "Resource": [
-           "arn:aws:secretsmanager:us-east-2:111122223333:secret:AgentAPIKey"
-         ]
-       }
-     ]
-   }
-   ```
-
-3. Download the latest release of [datadog-secret-backend][5] on your EC2 instance and create its configuration `datadog-secret-backend.yaml` next to the binary. The following example shows a configuration for a backend of type `aws.secrets` under the name `staging-aws`:
-   ```
-   backends:
-     staging-aws:
-       backend_type: aws.secrets
-   ```
-4. Set the correct access rights for the binary as described in [Agent security requirements](#agent-security-requirements):
-   ```sh
-   chown dd-agent:dd-agent datadog-secret-backend
-   chmod 500 datadog-secret-backend
-   ```
-5. Configure the Agent to use the binary to resolve secrets and use the AWS secret (here as the `api_key`):
-   ```
-   api_key: ENC[staging-aws:arn:aws:secretsmanager:us-east-2:111122223333:secret:AgentAPIKey]
-
-   secret_backend_command: /path/to/datadog-secret-backend
-   ```
-   The `staging-aws:` prefix matches the key defined in your backend configuration.
-6. Restart the Agent.
-
-You can see which secrets the Agent has resolved by running the `datadog-agent secrets` command locally on your EC2 instance.
-
 ### Option 3: Creating your own custom executable
+
+To retrieve secrets, the Agent uses an external executable that you provide. The executable is used when new
+secrets are discovered and are cached for the lifecycle of the Agent. If you need to update or rotate a secret, you must restart the Agent to reload it.
+
+The Agent sends this executable a JSON payload over standard input containing a list of secret handles. The executable fetches each secret and returns them in a JSON format through standard output.
+
+Here's what the Agent sends to your executable on STDIN:
+```
+{
+  "version": "1.0",
+  "secrets": ["secret1", "secret2"]
+}
+```
+
+* `version` (string): the format version.
+* `secrets` (list of strings): each string is a handle for a secret to fetch.
+
+
+The executable should respond through STDOUT:
+```
+{
+  "secret1": {"value": "decrypted_value", "error": null},
+  "secret2": {"value": null, "error": "could not fetch the secret"}
+}
+```
+
+* `value` (string): the secret value to be used in the configurations. This can be `null` in the case of an error.
+* `error` (string): an error message or `null`.
+
+If a secret fails to resolve (either by returning a non-zero exit code or a non-null error), the related configuration is ignored by the Agent.
+
+**Never output sensitive information on `stderr`**. If the binary exits with a different status code than `0`, the Agent logs the standard error output of the executable to ease troubleshooting.
 
 You can also build your own secret retrieval executable using any language. The only requirement is that it follows the input/output format described previously.
 
@@ -318,6 +243,38 @@ instances:
     password: decrypted_db_prod_password
 ```
 
+You can configure the Agent to use the binary to resolve secrets by adding the following:
+```
+secret_backend_command: /path/to/datadog-secret-backend
+```
+
+### Agent security requirements
+
+The Agent runs the provided executable as a sub-process. The execution patterns differ on Linux and Windows.
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+On Linux, the executable must:
+
+* Belong to the same user running the Agent (`dd-agent` by default, or `root` inside a container).
+* Have no rights for `group` or `other`.
+* Have at least exec rights for the owner.
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+On Windows, the executable must:
+
+* Have read/exec for `ddagentuser` (the user used to run the Agent).
+* Have no rights for any user or group except for the `Administrators` group, the built-in `Local System` account, or the Agent user context (`ddagentuser` by default)
+* Be a valid Win32 application so the Agent can execute it (for example, a PowerShell or Python script doesn't work).
+
+{{% /tab %}}
+{{< /tabs >}}
+
+**Note**: The executable shares the same environment variables as the Agent.
+
 ## Refreshing API/APP keys at runtime
 
 Starting in Agent version v7.67, you can configure the Agent to refresh its API and APP keys at regular intervals without requiring a restart. This relies on the API key and APP key being pulled as secrets.
@@ -326,7 +283,6 @@ To enable this, set `secret_refresh_interval` (in seconds) in your `datadog.yaml
 ```yaml
 api_key: ENC[<secret_handle>]
 
-secret_backend_command: /path/to/your/executable
 secret_refresh_interval: 3600  # refresh every hour
 ```
 
