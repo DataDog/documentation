@@ -31,9 +31,25 @@ aliases:
 {{< tabs >}}
 {{% tab ".NET Tracer >= v3.22.0 (Recommended)" %}}
 
-Starting with version 3.22.0 of the .NET tracer, Data Streams Monitoring is **enabled by default**, and `DD_DATA_STREAMS_ENABLED` does not need to be set.
+Starting with version 3.22.0 of the .NET tracer, Data Streams Monitoring is in a default-enabled state. Applications with the APM tracer will automatically send DSM telemetry, allowing teams to try DSM without an added instrumentation step. If your organization has APM Enterprise, APM Pro or DSM in the contract, the data is processed and stored, enabling DSM views and metrics automatically.
 
-See [Default Enabled Mode](#default-enabled-mode) for more information.
+When `DD_DATA_STREAMS_ENABLED` is **not set**, then:
+
+* Schema tracking is disabled.
+* Data Streams is not enabled when running in a serverless environment.
+* Data Streams information is not propagated for certain messages which are too small or too large. See [Message sizes](#message-sizes) for more details.
+* Message sizes are not tracked.
+
+When `DD_DATA_STREAMS_ENABLED` is set to `true`, then:
+
+* Schema tracking is enabled.
+* Data Streams is enabled for serverless environments.
+* Data Streams information is sent for **all** messages.
+* Message sizes are tracked.
+
+When `DD_DATA_STREAMS_ENABLED` is set to `false`, then all Data Streams Manager functionality is disabled.
+
+If you have any questions reagarding default-enabled behaviour, reach out to your Customer Success Manager.
 
 {{% /tab %}}
 {{% tab ".NET Tracer < v3.22.0 (Legacy)" %}}
@@ -65,35 +81,7 @@ environment:
 #### Confluent Cloud connectors
 {{% data_streams/dsm-confluent-connectors %}}
 
-### Default enabled mode
-
-Starting with version 3.22.0 of the .NET tracer, Data Streams Monitoring is in a default-enabled state. As long as you pay for the Data Streams Monitoring product (for example, APM Pro), you will start seeing metrics and data.
-
-In default mode, the following caveats apply:
-
-* Schema tracking is disabled.
-* Data Streams is not enabled when running in a serverless environment.
-* Data Streams information is not propagated for certain messages which are too small or too large. See [Message sizes](#message-sizes) for more details.
-* Message sizes are not tracked.
-
-These features can be enabled by explicitly setting `DD_DATA_STREAMS_ENABLED` to `true` on your services.
-
-```yaml
-environment:
-  - DD_DATA_STREAMS_ENABLED: "true"
-  - DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
-```
-
-When `DD_DATA_STREAMS_ENABLED` is set to `true`, then:
-
-* Schema tracking is enabled.
-* Data Streams is enabled for serverless environments.
-* Data Streams information is sent for **all** messages.
-* Message sizes are tracked.
-
-To disable Data Streams Monitoring completely, set `DD_DATA_STREAMS_ENABLED` to `false` on your services.
-
-#### Message sizes
+### Message sizes
 
 When Data Streams Monitoring is enabled in default mode, some messages are not instrumented when they are too small, or too large.
 
@@ -107,15 +95,6 @@ The following size thresholds apply when Data Streams Monitoring is enabled in d
 
 - **Amazon Kinesis**
   - Messages less than 34 bytes are not instrumented by default.
-
-**Note:** When `DD_DATA_STREAMS_ENABLED` is explicitly set to `true`, all messages are instrumented regardless of size.
-
-
-#### Additional notes
-
-**Mixed tracer environments:** When Data Streams Monitoring is in default mode, data is only forwarded to the DSM backend when **all** services in your environment are using compatible tracers with default-enabled functionality. If you have a mixed environment, DSM does not forward any data to ensure data completeness and accuracy.
-
-If you want to receive partial .NET data in a mixed tracer environment, reach out here.
 
 ## Further reading
 
