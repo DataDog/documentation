@@ -2138,7 +2138,7 @@ describe(`filterExampleJson`, () => {
     expect(actual).toEqual(expected);
   })
 
-  it('should foo bar baz', () => {
+  it('should make top level example take precedence if it exists and its response', () => {
     const mockSchema = {
         "description": "List of aggregated DNS flows.",
         "properties": {
@@ -2232,48 +2232,6 @@ describe(`filterExampleJson`, () => {
                         },
                         "type": "object"
                       },
-                      "example": [
-                          {
-                            "key": "dns_total_requests",
-                            "value": 100
-                          },
-                          {
-                            "key": "dns_failures",
-                            "value": 6
-                          },
-                          {
-                            "key": "dns_successful_responses",
-                            "value": 95
-                          },
-                          {
-                            "key": "dns_failed_responses",
-                            "value": 4
-                          },
-                          {
-                            "key": "dns_timeouts",
-                            "value": 2
-                          },
-                          {
-                            "key": "dns_responses.nxdomain",
-                            "value": 1
-                          },
-                          {
-                            "key": "dns_responses.servfail",
-                            "value": 1
-                          },
-                          {
-                            "key": "dns_responses.other",
-                            "value": 3
-                          },
-                          {
-                            "key": "dns_success_latency_percentile",
-                            "value": 50
-                          },
-                          {
-                            "key": "dns_failure_latency_percentile",
-                            "value": 75
-                          }
-                      ],
                       "type": "array"
                     }
                   },
@@ -2302,70 +2260,132 @@ describe(`filterExampleJson`, () => {
             "type": "array"
           }
         },
+        "example": {
+            "data": [
+                {
+                    "attributes": {
+                        "group_bys": [
+                            {
+                                "key": "network.dns_query",
+                                "value": [
+                                    "foo-bar.com"
+                                ]
+                            },
+                            {
+                                "key": "client_service",
+                                "value": [
+                                    "foo-resolver"
+                                ]
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "key": "dns_total_requests",
+                                "value": 1652837
+                            },
+                            {
+                                "key": "dns_failures",
+                                "value": 0
+                            },
+                            {
+                                "key": "dns_successful_responses",
+                                "value": 1652837
+                            },
+                            {
+                                "key": "dns_failed_responses",
+                                "value": 0
+                            },
+                            {
+                                "key": "dns_timeouts",
+                                "value": 0
+                            },
+                            {
+                                "key": "dns_responses.nxdomain",
+                                "value": 0
+                            },
+                            {
+                                "key": "dns_responses.servfail",
+                                "value": 0
+                            },
+                            {
+                                "key": "dns_responses.other",
+                                "value": 0
+                            },
+                            {
+                                "key": "dns_success_latency_percentile",
+                                "value": 493
+                            }
+                        ]
+                    },
+                    "id": "network.dns_query:foo-bar.com,client_service:foo-resolver",
+                    "type": "aggregated_dns"
+                }
+            ]
+        },
         "type": "object"
     };
     const actual = bp.filterExampleJson('response', mockSchema);
     const expected = {
-      "data": [
-        {
-          "attributes": {
-            "group_bys": [
-              {
-                "key": "client_team",
-                "value": "networks"
-              },
-              {
-                "key": "server_service",
-                "value": "hucklebuck"
-              }
-            ],
-            "metrics": [
-              {
-                "key": "dns_total_requests",
-                "value": 100
-              },
-              {
-                "key": "dns_failures",
-                "value": 6
-              },
-              {
-                "key": "dns_successful_responses",
-                "value": 95
-              },
-              {
-                "key": "dns_failed_responses",
-                "value": 4
-              },
-              {
-                "key": "dns_timeouts",
-                "value": 2
-              },
-              {
-                "key": "dns_responses.nxdomain",
-                "value": 1
-              },
-              {
-                "key": "dns_responses.servfail",
-                "value": 1
-              },
-              {
-                "key": "dns_responses.other",
-                "value": 3
-              },
-              {
-                "key": "dns_success_latency_percentile",
-                "value": 50
-              },
-              {
-                "key": "dns_failure_latency_percentile",
-                "value": 75
-              }
-            ]
-          },
-          "id": "client_service:example-service,network.dns_query:example.com",
-          "type": "aggregated_dns"
-        }
-      ]
+        "data": [
+            {
+                "attributes": {
+                    "group_bys": [
+                        {
+                            "key": "network.dns_query",
+                            "value": [
+                                "foo-bar.com"
+                            ]
+                        },
+                        {
+                            "key": "client_service",
+                            "value": [
+                                "foo-resolver"
+                            ]
+                        }
+                    ],
+                    "metrics": [
+                        {
+                            "key": "dns_total_requests",
+                            "value": 1652837
+                        },
+                        {
+                            "key": "dns_failures",
+                            "value": 0
+                        },
+                        {
+                            "key": "dns_successful_responses",
+                            "value": 1652837
+                        },
+                        {
+                            "key": "dns_failed_responses",
+                            "value": 0
+                        },
+                        {
+                            "key": "dns_timeouts",
+                            "value": 0
+                        },
+                        {
+                            "key": "dns_responses.nxdomain",
+                            "value": 0
+                        },
+                        {
+                            "key": "dns_responses.servfail",
+                            "value": 0
+                        },
+                        {
+                            "key": "dns_responses.other",
+                            "value": 0
+                        },
+                        {
+                            "key": "dns_success_latency_percentile",
+                            "value": 493
+                        }
+                    ]
+                },
+                "id": "network.dns_query:foo-bar.com,client_service:foo-resolver",
+                "type": "aggregated_dns"
+            }
+        ]
     };
     expect(actual).toEqual(expected);
   })
