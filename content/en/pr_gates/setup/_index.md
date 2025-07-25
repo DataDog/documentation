@@ -17,7 +17,7 @@ further_reading:
 
 To use Datadog PR Gates, you can define one or more rules on the [**PR Gate Rules** page][2] and integrate them in your CI pipeline with the [`datadog-ci gate evaluate` command][4].
 
-{{< img src="pr_gates/rules_list_2.png" alt="PR Gates page in Datadog" style="width:100%" >}}
+{{< img src="pr_gates/rules_list_3.png" alt="PR Gates page in Datadog" style="width:100%" >}}
 
 PR Gates ensures that only the code that meets your quality standards is deployed, automating your quality assurance processes and enhancing software reliability.
 
@@ -43,7 +43,7 @@ To create a PR Gates rule in Datadog:
 
    Select **Static Analysis** for the rule type and click `Always evaluate` for the rule scope. 
 
-   {{< img src="pr_gates/setup/static_analysis_2.png" alt="A Static Analysis rule that fails when any code quality violations with an error status are contained in any service" style="width:100%" >}}
+   {{< img src="pr_gates/setup/static_analysis_3.png" alt="A Static Analysis rule that fails when any code quality violations with an error status are contained in any service" style="width:100%" >}}
 
    In the **Define rule conditions** section, select `code quality violations` from the dropdown menu. Then, select the `error` status type, select `above or equal to`, and enter the value of `1`. 
 
