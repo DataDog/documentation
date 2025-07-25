@@ -232,7 +232,7 @@ If needed, configure the tracing library to send application performance telemet
 [9]: /tracing/trace_collection/library_config/java/
 [10]: /tracing/trace_collection/compatibility/java/#supported-jvm-runtimes
 [11]: /tracing/trace_collection/library_injection_local/
-[16]: /agent/remote_config/
+[16]: /tracing/guide/remote_config
 [17]: https://app.datadoghq.com/services
 [18]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
 [19]: https://docs.oracle.com/en/java/javase/11/tools/jdeps.html
