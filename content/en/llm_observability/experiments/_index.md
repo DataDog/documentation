@@ -133,7 +133,9 @@ print(len(dataset))
 
 #### Working with CSV Files
 
-You can create datasets from CSV files and export datasets to pandas DataFrames. Note that pandas is required for these operations - install it via `pip install pandas`.
+You can create datasets from CSV files and export datasets to pandas DataFrames. 
+
+**Note**: Pandas is required for these operations; install it with `pip install pandas`.
 
 ```python
 # Create dataset from CSV
