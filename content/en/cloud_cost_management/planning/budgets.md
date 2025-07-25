@@ -114,9 +114,15 @@ To delete a budget, click the trash icon on the Budgets page.
 
 ## Add a budget to a dashboard
 
-You can create a budget report and add budgets to dashboards.
+You can add a budget to dashboards in two ways:
 
-{{< img src="cloud_cost/budgets/budget-dashboard.png" alt="A budget report that has been added to a dashboard"  style="width:100%;">}}
+- Create a budget report and click **Share > Save to dashboard**.
+
+  {{< img src="cloud_cost/budgets/budget-share-from-dashboard.png" alt="Click Share and Save to dashboard to add a budget report to a dashboard"  style="width:100%;">}}
+
+- From a dashboard, add the **Budget Summary** widget.
+
+  {{< img src="cloud_cost/budgets/budgets-widgets.png" alt="Search and add the Budget Summary widget from any dashboard"  style="width:100%;">}}
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}

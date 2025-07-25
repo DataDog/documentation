@@ -12342,7 +12342,14 @@ components:
       - type
       type: object
     Dataset:
-      description: Dataset object.
+      description: "Dataset object.\n\n### Datasets Constraints\n- **Tag Limit per
+        Dataset**:\n  - Each restricted dataset supports a maximum of 10 key:value
+        pairs per product.\n\n- **Tag Key Rules per Telemetry Type**:\n  - Only one
+        tag key or attribute may be used to define access within a single telemetry
+        type.\n  - The same or different tag key may be used across different telemetry
+        types.\n\n- **Tag Value Uniqueness**:\n  - Tag values must be unique within
+        a single dataset.\n  - A tag value used in one dataset cannot be reused in
+        another dataset of the same telemetry type."
       properties:
         attributes:
           $ref: '#/components/schemas/DatasetAttributes'
@@ -12414,6 +12421,14 @@ components:
       type: object
     DatasetResponseSingle:
       description: Response containing a single dataset object.
+      properties:
+        data:
+          $ref: '#/components/schemas/Dataset'
+      required:
+      - data
+      type: object
+    DatasetUpdateRequest:
+      description: Edit request for a dataset.
       properties:
         data:
           $ref: '#/components/schemas/Dataset'
@@ -16194,10 +16209,9 @@ components:
           type: array
         product:
           description: 'Name of the product the dataset is for. Possible values are
-            ''apm'', ''rum'', ''synthetics'',
+            ''apm'', ''rum'',
 
-            ''metrics'', ''logs'', ''sd_repoinfo'', ''error_tracking'', ''cloud_cost'',
-            and ''ml_obs''.'
+            ''metrics'', ''logs'', ''error_tracking'', and ''cloud_cost''.'
           example: logs
           type: string
       required:
@@ -22841,8 +22855,19 @@ components:
       readOnly: true
       type: object
     MetricAssetAttributes:
-      description: Assets related to the object, including title and url.
+      description: Assets related to the object, including title, url, and tags.
       properties:
+        tags:
+          description: List of tag keys used in the asset.
+          example:
+          - env
+          - service
+          - host
+          - datacenter
+          items:
+            description: Tag key used in assets.
+            type: string
+          type: array
         title:
           description: Title of the asset.
           type: string
@@ -49619,6 +49644,47 @@ paths:
         permissions: []
       x-undo:
         type: safe
+    put:
+      description: Edits the dataset associated with the ID.
+      operationId: UpdateDataset
+      parameters:
+      - $ref: '#/components/parameters/DatasetID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatasetUpdateRequest'
+        description: Dataset payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetResponseSingle'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Edit a dataset
+      tags:
+      - Datasets
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-permission:
+        operator: OPEN
+        permissions: []
+      x-undo:
+        type: idempotent
   /api/v2/domain_allowlist:
     get:
       description: Get the domain allowlist for an organization.
@@ -70413,13 +70479,18 @@ tags:
     for more information.
   name: Incidents
 - description: 'Manage your Datadog API and application keys. You need an API key
-    and
+    and an
 
-    an application key for a user with the required permissions to interact
+    application key for a user with the required permissions to interact with these
+    endpoints.
 
-    with these endpoints. The full list of API and application keys can be
 
-    seen on your [Datadog API page](https://app.datadoghq.com/account/settings#api).'
+    Consult the following pages to view and manage your keys:
+
+
+    - [API Keys](https://app.datadoghq.com/organization-settings/api-keys)
+
+    - [Application Keys](https://app.datadoghq.com/personal-settings/application-keys)'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/api-app-keys/
