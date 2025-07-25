@@ -88,5 +88,5 @@ You can add attributes that reflect your team's specific needs, such as escalati
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/case_management/create_case#manual-case-creation
+[1]: /service_management/case_management/create_case#case-types
 [2]: https://app.datadoghq.com/cases/settings?type=shared
