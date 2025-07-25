@@ -23,7 +23,10 @@
         "deploy:live": "./node_modules/.bin/hugo deploy --target live -e live --maxDeletes -1 --workers 100 --logLevel info --debug",
         "build:apiPages": "node -e 'require(\"./assets/scripts/build-api-pages.js\").init()'",
         "dereference": "node ./assets/scripts/dereference.js",
-        "jest-test": "./node_modules/.bin/jest ./assets/scripts/tests"
+        "jest-test": "./node_modules/.bin/jest ./assets/scripts/tests",
+        "postinstall": "husky",
+        "prepack": "pinst --disable",
+        "postpack": "pinst --enable"
     },
     "repository": {
         "type": "git",
@@ -96,7 +99,9 @@
         "eslint-plugin-react": "^7.34.1",
         "eslint-plugin-react-hooks": "^2.5.1",
         "eslint-plugin-standard": "^4.1.0",
+        "husky": "^9.1.7",
         "jest": "^25.5.4",
+        "pinst": "^3.0.0",
         "postcss-import": "^12.0.1",
         "postcss-preset-env": "^6.7.2",
         "prettier": "^2.8.8",

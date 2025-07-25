@@ -12,10 +12,6 @@ further_reading:
       text: "Ingestion Controls"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/" header="Request access to the Preview!" >}}
-Adaptive sampling is in Preview. To request access, complete the form.
-{{< /callout >}}
-
 ## Overview
 
 Datadog **adaptive sampling** helps you capture more relevant traces while remaining close to a specific budget (ingested gigabytes).
@@ -115,6 +111,8 @@ The table includes:
   - `CONFIGURED LOCAL`: [Sampling rule][7] set locally in the tracing library.
   - `CONFIGURED REMOTE`: Remote sampling rule set from the Datadog UI.
   - `ADAPTIVE REMOTE`: Adaptive sampling rules set by Datadog.
+
+Once a service is onboarded to adaptive sampling, the sampling rates are adjusted and recomputed every 10 minutes.
 
 ### Onboard a service to adaptive sampling
 

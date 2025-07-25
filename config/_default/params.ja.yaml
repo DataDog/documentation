@@ -1,7 +1,10 @@
 announcement_banner:
-  desktop_message: "Join us in NYC for the observability event of the year, DASH! June 10-11"
-  mobile_message: "Join us in NYC for DASH! June 10-11"
-  external_link: "https://www.dashcon.io/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=summit-202506dash&utm_term=banner"
+  desktop_message: '<i class="icon-right-arrow-slim text-white"></i><span>NOW LIVE: Datadog launches availability zone in Australia to support local data residency</span><span>Learn More</span>'
+  mobile_message: 'Datadog launches availability zone in Australia'
+  background_color: "#6300D4"
+  icon_color: "#ffffff"
+  custom_classes: 'dash-announcement-banner'
+  external_link: https://www.datadoghq.com/about/latest-news/press-releases/datadog-launches-new-availability-zone-in-australia
 disclaimer: このページは日本語には対応しておりません。随時翻訳に取り組んでいます。<br>翻訳に関してご質問やご意見ございましたら、<a href="https://docs.datadoghq.com/ja/help/">お気軽にご連絡ください</a>。
 meta_description: Datadogが大規模なクラウドのモニタリングサービスをリードします。
 meta_title: Datadogを始めてみましょう

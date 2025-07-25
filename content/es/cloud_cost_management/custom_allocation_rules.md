@@ -4,6 +4,9 @@ further_reading:
 - link: https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview
   tag: Documentación
   text: Cloud Cost Management
+- link: https://www.datadoghq.com/blog/finops-at-datadog/
+  tag: Blog
+  text: Cómo hemos creado una práctica de FinOps exitosa en Datadog
 title: Reglas de asignación personalizadas
 ---
 
@@ -69,7 +72,7 @@ Para crear una regla para esta asignación, puedes:
 
 - Definir los costes a asignar (fuente): **tarifas de apoyo a EC2** (`aws_product:support`).
 - Elige el método de asignación: **Proporcional por gastos**.
-- Elige la [etiqueta de destino](#step-3---define-the-destination) para dividir tus costos por: **Usuario** (`User A`, `User B`, `User C`).
+- Elige la [etiqueta de destino](#step-3---define-the-destination) para dividir los costos por: **Usuario** (`User A`, `User B`, `User C`).
 - Ajusta la asignación aplicando [filtros](##step-4---optional-apply-filters): **EC2** (`aws_product:ec2`).
 - Crea subasignaciones [al particionar](#step-5---optional-apply-a-partition) la regla de asignación: **entorno** (`env`).
 

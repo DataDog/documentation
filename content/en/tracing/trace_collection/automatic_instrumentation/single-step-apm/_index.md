@@ -12,6 +12,9 @@ further_reading:
   - link: /tracing/guide/injectors
     tag: Documentation
     text: Understanding injector behavior with Single Step Instrumentation
+  - link: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting/
+    tag: Documentation
+    text: "Troubleshooting Single Step APM"
 ---
 ## Overview
 
@@ -34,8 +37,6 @@ Click on one of the following tiles to learn how to set up SSI for your deployme
 <br>
 
 <div class="alert alert-info">To see requirements for compatible languages, operating systems, and architectures, see <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">Single Step Instrumentation compatibility.</a></div>
-
-<div class="alert alert-info"> Single Step APM Instrumentation on Windows is in Preview.</div>
 
 ## Configure Unified Service Tags
 

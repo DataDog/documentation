@@ -9,6 +9,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/define-and-manage-slos/#monitor-based-slo
   tag: Blog
   text: Mejores prácticas para gestionar tus SLOs con Datadog
+- link: https://www.datadoghq.com/blog/slo-synthetic-monitoring/
+  tag: Blog
+  text: Mejora la precisión y el rendimiento de SLO con Datadog Synthetic Monitoring
 title: SLOs basados en monitor
 ---
 
@@ -26,7 +29,7 @@ Para crear un SLO basado en monitor, necesitas un monitor Datadog existente. Par
 Los SLOs basados en monitor Datadog soportan los siguientes tipos de monitores:
 - Tipos de Monitores de métrica (métrica, integración, métrica APM, anomalía, predicción, outlier)
 - Synthetic
-- Checks de servicios
+- Checks de servicio
 
 ## Configuración
 
@@ -120,7 +123,7 @@ Cuando se crea un monitor de check de servicio, se elige si se envía una alerta
 
 Si pausas una prueba de Synthetic, el SLO elimina de su cálculo el período con datos faltantes. En la interfaz de usuario, estos períodos aparecen marcados en gris claro en la barra de estado del SLO.
 
-## Para leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

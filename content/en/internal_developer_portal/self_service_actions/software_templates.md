@@ -20,10 +20,6 @@ further_reading:
 
 Create Software Templates within Software Catalog to help developers quickly provision infrastructure and create microservices that align with your best practices. 
 
-{{< callout url="https://forms.gle/6Er52qd3BCERhotg7" d_target="#signupModal" btn_hidden="false">}}
-  Software Templates are in Preview. Complete the form to request access.
-{{< /callout >}} 
-
 ## Create a Software Template
 
 A Software Template is stored in a Git repository and serves as a reusable framework. [Build apps][2] to collect inputs and pass them into the template repository to generate customized configurations.
