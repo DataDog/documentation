@@ -25,7 +25,7 @@ algolia:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for Linux environments. See [Supported Platforms][5] for the complete list of supported Linux distributions and versions. 
+This page outlines the basic features of the Datadog Agent for Linux environments. See the [Supported Platforms][5] documentation for the complete list of supported Linux distributions and versions. 
 
 ## Install the Agent
 To install the Agent on Linux, follow the [in-app instructions in Fleet Automation][6], and run the generated script on your hosts.
@@ -36,7 +36,7 @@ To install the Agent on Linux, follow the [in-app instructions in Fleet Automati
 ## Configure the Agent
 The Datadog Agent configuration file is located in `/etc/datadog-agent/datadog.yaml`. This YAML file holds the host-wide connection details used to send data to Datadog including:
 - `api_key`: Your organization’s [Datadog API key][7] 
-- `site`: Target Datadog region (`datadoghq.com`, `datadoghq.eu`, `us3.datadoghq.com`, `us5.datadoghq.com`, `ddog-gov.com`)  
+- `site`: Target Datadog region (for example `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`)  
 - `proxy`: HTTP/HTTPS proxy endpoints for outbound traffic (see [Datadog Agent Proxy Configuration][8])  
 - Default tags, log level, and Datadog product configurations.
 
@@ -67,7 +67,7 @@ Configuration files for integrations live in `/etc/datadog-agent/conf.d/`. Each 
 
 ## Uninstall the Agent
 
-To uninstall the Agent, run the command for the appropriate Linux environment.
+To uninstall the Agent, run the command for the appropriate Linux environment:
 
 
 ### For CentOS, Rocky, AlmaLinux, Amazon Linux, Oracle Linux, and Red Hat
@@ -113,7 +113,7 @@ sudo apt-get remove --purge datadog-agent -y
 
 
 ### Uninstall Single Step APM Instrumentation
-If you installed the Agent with Single Step APM Instrumentation, and you want to uninstall the Agent, you need to run additional commands to uninstall APM Instrumentation.
+If you installed the Agent with Single Step APM Instrumentation, and you want to uninstall the Agent, you need to [run additional commands][9] to uninstall APM Instrumentation. Ensure you follow the steps for your [specific environement][10]. 
 
 
 ## Troubleshooting
@@ -138,3 +138,5 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 [6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linuxs
 [7]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: https://docs.datadoghq.com/agent/configuration/proxy/
+[9]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
+[10]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/linux
