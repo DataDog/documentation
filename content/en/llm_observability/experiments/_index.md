@@ -122,7 +122,7 @@ print(f"View dataset: {dataset.url}")
 ```
 
 
-#### Retrieving a Dataset
+#### Retrieving a dataset
 
 To retrieve an existing dataset from Datadog:
 
