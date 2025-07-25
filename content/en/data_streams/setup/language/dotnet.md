@@ -33,7 +33,7 @@ aliases:
 
 Starting with version 3.22.0 of the .NET tracer, Data Streams Monitoring is in a default-enabled state. Applications with the APM tracer will automatically send DSM telemetry, allowing teams to try DSM without an added instrumentation step. If your organization has APM Enterprise, APM Pro or DSM in the contract, the data is processed and stored, enabling DSM views and metrics automatically.
 
-When `DD_DATA_STREAMS_ENABLED` is **not set**, then:
+When `DD_DATA_STREAMS_ENABLED` is not set, then:
 
 * Schema tracking is disabled.
 * Data Streams is not enabled when running in a serverless environment.
