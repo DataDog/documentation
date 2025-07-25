@@ -45,7 +45,8 @@ LLMObs.enable(
 
 ### Dataset class
 
-A _dataset_ is a collection of _inputs_ and _expected outputs_. You can construct datasets from production data, from staging data, or manually. You can also push and retrieve datasets from Datadog.
+A _dataset_ is a collection of _inputs_ and _expected outputs_, and optionally _metadata_.  
+You can construct datasets from production data in the UI by hitting "Add to Dataset" in any span page, as well as programatically using the SDK. You can use the SDK to push and retrieve datasets from Datadog.
 
 #### Creating a Dataset
 
@@ -53,7 +54,6 @@ You can create a new dataset using `LLMObs.create_dataset()`:
 
 ```python
 from ddtrace.llmobs import LLMObs
-from typing import Dict, Any, Optional, List
 
 dataset = LLMObs.create_dataset(
     name="capitals-of-the-world",
@@ -71,6 +71,9 @@ dataset = LLMObs.create_dataset(
         }
     ]
 )
+
+# View dataset in Datadog UI
+print(f"View dataset: {dataset.url}")
 ```
 
 #### Managing Dataset Records
@@ -113,12 +116,6 @@ records = dataset[1:3]
 # Iterate through records
 for record in dataset:
     print(record["input_data"])
-
-# Get dataset length
-print(len(dataset))
-
-# View dataset in Datadog UI
-print(f"View dataset: {dataset.url}")
 ```
 
 
@@ -128,6 +125,9 @@ To retrieve an existing dataset from Datadog:
 
 ```python
 dataset = LLMObs.pull_dataset("capitals-of-the-world")
+
+# Get dataset length
+print(len(dataset))
 ```
 
 
@@ -175,37 +175,70 @@ Notes:
 - The dataset is automatically pushed to Datadog after creation
 
 ### Experiment class
+An experiment is a collection of traces used to test the behavior of an LLM application or agent against a dataset. The dataset provides the input data, and the outputs are the final generations produced by the application under test.
 
-An _experiment_ is a collection of traces that tests the behavior of an LLM feature or LLM application against a dataset. The input data comes from the dataset, and the outputs are the final generations of the feature or application that is being tested.
+#### Task
+The task defines the core workflow you want to evaluate. It can range from a single LLM call to a more complex flow involving multiple LLM calls and RAG steps. The task is executed sequentially across all records in the dataset.
+
+#### Evaluators
+Evaluators are functions that measure how well the model or agent performs by comparing the output to either the expected_output or the original input. Datadog supports the following evaluator types:
+- boolean – returns true or false
+- score – returns a numeric value (float)
+- categorical – returns a labeled category (string)
 
 #### Creating an Experiment
 
 Create an experiment using `LLMObs.experiment()`:
 
+1. Load a dataset
 ```python
 from ddtrace.llmobs import LLMObs
+from typing import Dict, Any, Optional, List
 
-# Define a task function that processes a single dataset record.
+dataset = LLMObs.pull_dataset("capitals-of-the-world")
+```
+
+2. Define a task function that processes a single dataset record.
+```python
 def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
     question = input_data["question"]
     # Your LLM or processing logic here
     return "Beijing" if "China" in question else "Unknown"
+```
+
+You can trace the different parts of your Experiment task (workflow, tool calls...) using the [same tracing decorators](https://docs.datadoghq.com/llm_observability/instrumentation/custom_instrumentation?tab=decorators#trace-an-llm-application) you use in production.
+If you use a [supported framework](https://docs.datadoghq.com/llm_observability/instrumentation/auto_instrumentation?tab=python) (e.g openAI, ...), LLMObs will automatically trace and annotate calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
 
 
-# Define an evaluator function that compares the output to the expected output.
-def evaluator(input_data: Dict[str, Any], output_data: str, expected_output: str) -> float:
-    return 1.0 if output_data == expected_output else 0.0
+3. Define evaluator functions
+```python 
+def exact_match(input_data: Dict[str, Any], output_data: str, expected_output: str) -> bool:
+    return output_data == expected_output
 
+def overlap(input_data: Dict[str, Any], output_data: str, expected_output: str) -> float:
+    expected_output_set = set(expected_output)
+    output_set = set(output_data)
 
-# Create the experiment
+    intersection = len(output_set.intersection(expected_output_set))
+    union = len(output_set.union(expected_output_set))
+
+    return intersection / union
+
+def fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> str:
+    fake_llm_call = "excellent"
+    return fake_llm_call
+```
+
+4. Create and run the experiment
+```python
 experiment = LLMObs.experiment(
     name="capital-cities-test",
     task=task,
     dataset=dataset,
-    evaluators=[evaluator],
+    evaluators=[exact_match, overlap, fake_llm_as_a_judge],
     description="Testing capital cities knowledge",
-    tags={
-        "model": "gpt-4",
+    config={
+        "model_name": "gpt-4",
         "version": "1.0"
     },
 )
