@@ -170,8 +170,7 @@ This helps with log parsing and filtering.<br>
 
 **Log Collection Configuration**
 
-{{< tabs >}}
-{{% tab "Single Instance" %}}
+**Single Instance Configuration**
 
 `DD_SERVERLESS_LOG_PATH`
 : **Value**: The log path the sidecar uses to collect logs.<br>
@@ -182,8 +181,7 @@ Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFile
 : **Value**: `false`<br>
 When `false`, log collection uses the path specified in `DD_SERVERLESS_LOG_PATH`.<br>
 
-{{% /tab %}}
-{{% tab "Multiple Instances" %}}
+**Multiple Instances Configuration**
 
 `DD_SERVERLESS_LOG_PATH`
 : **Value**: Do NOT set this variable<br>
@@ -193,9 +191,6 @@ When using multiple instances, let the sidecar automatically detect log files.<b
 : **Value**: `true`<br>
 When `true`, log collection is automatically configured for file paths: `/home/LogFiles/*$COMPUTERNAME*.log`<br>
 **Important**: Ensure your application log filenames include the `$COMPUTERNAME` variable to prevent duplicate logs from multiple instances reading the same file.<br>
-
-{{% /tab %}}
-{{< /tabs >}}
 
 `DD_LOGS_INJECTION`
 : **Value**: `true` (recommended)<br>
