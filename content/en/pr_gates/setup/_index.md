@@ -15,43 +15,44 @@ further_reading:
 
 ## Overview
 
-To use Datadog PR Gates, you can define one or more rules on the [**PR Gate Rules** page][2] and integrate them in your CI pipeline with the [`datadog-ci gate evaluate` command][4].
+To use Datadog PR Gates, you can define one or more rules on the [**PR Gate Rules**][2] page and integrate them in your CI pipeline with the [`datadog-ci gate evaluate` command][4].
 
 {{< img src="pr_gates/rules_list_3.png" alt="PR Gates page in Datadog" style="width:100%" >}}
 
-PR Gates ensures that only the code that meets your quality standards is deployed, automating your quality assurance processes and enhancing software reliability.
+PR Gates ensure that only the code that meets your quality standards is deployed, automating your quality assurance processes and enhancing software reliability.
 
 ## Create a rule
 
 To create a PR Gates rule in Datadog:
 
-1. Navigate to [**Software Delivery** > **PR Gates** > **PR Gate Rules**][2] and click **+ New Rule**.
-2. Select a type of rule: `Test`, `Static Analysis`, or `Software Composition Analysis`.
-3. Set the rule scope, which defines when the rule should be evaluated, by selecting `Always evaluate` or `Select when to evaluate`. You can add branches or repositories to include or exclude from the rule scope, or add a custom scope.
+1. Navigate to [**Software Delivery** > **PR Gates** > **PR Gate Rules**][2] and click **New Rule**.
 
-   {{< img src="pr_gates/setup/custom_scope_1.png" alt="Adding a custom scope to a rule scope in PR Gates" style="width:80%;">}}
+1. Under **Select your source**, select a rule type:
+   - Static Code Analysis
+   - Software Composition Analysis
+   - Code Coverage
+   - Infrastructure as Code Scanning
 
-   You can create a rule that is evaluated only on specific repositories and branches. To customize the rule scope, click `Select when to evaluate` and specify the branch or repository that should be included or excluded.
+1. Under **Define condition**, set the conditions that will cause the rule to fail, which also fails the related pipeline. Each rule type has its own condition options, and you can use the existing default condition settings when you select a rule type.
 
-   To add a custom scope (such as a team name), click **+ Add Filter** and select **Custom scope**. Enter a tag name without spaces (such as `documentation` or `team-documentation`) and click **Add Custom Scope**. Enter values that should be included or excluded. 
-   
-   When adding a custom scope to a rule, custom scopes must be passed to the `datadog-ci gate evaluate` command using the `--scope` option. For more information, see [Understanding Rule Scopes][13].
+1. Under **Define scope**, set which repositories the rule should evaluate:
+   - **All repositories**: The rule evaluates all repositories configured for the rule type.
+   - **Selected repositories**: The rule evaluates only the repositories you specify. Use `IN` to include only specified repositories, or `NOT IN` to evaluate all configured repositories _except_ the ones you specify.
 
-4. Define the rule conditions. The rule condition states in which scenario the rule fails, failing the related pipeline (if the rule is blocking). You can select one of the existing rule conditions for the rule type you have selected. If the rule scope is set to `always evaluate`, the rule is evaluated on all repositories and branches.
-   
-   The following example demonstrates how to create a Static Analysis rule that fails when one or more Static Analysis code quality violations with `error` status are contained within a repository.
+   The following example illustrates a Static Code Analysis rule that fails when a pull request introduces at least one Static Code Analysis code vulnerability violation with at least `Critical` severity. The rule evaluates all repositories configured for Static Code Analysis:
 
-   Select **Static Analysis** for the rule type and click `Always evaluate` for the rule scope. 
+   {{< img src="pr_gates/setup/static_analysis_3.png" alt="A Static Analysis rule that runs on all repos and fails when a PR has at least one Static Code Analysis code vulnerability with at least `Critical` severity" style="width:100%" >}}
 
-   {{< img src="pr_gates/setup/static_analysis_3.png" alt="A Static Analysis rule that fails when any code quality violations with an error status are contained in any service" style="width:100%" >}}
+   <!-- 1. Integrate the PR Gate rule into your build configuration by including the [`datadog-ci gate evaluate` command](#integrate-pr-gates-in-your-cicd-pipeline). -->
 
-   In the **Define rule conditions** section, select `code quality violations` from the dropdown menu. Then, select the `error` status type, select `above or equal to`, and enter the value of `1`. 
+1. Under **Preview checks**, select your CI provider to preview the [status check](#enable-github-check-creation) to be added to pull requests. To set the check so it blocks the pipeline when it fails, follow your provider's instructions for making a status check _required_:
 
-5. Specify a rule name that describes the rule that you are creating.
-6. Select whether the rule should block the pipeline when it fails. Non-blocking rules are helpful when you roll out a new rule and want to verify its behavior before making it blocking.
-7. Integrate the PR Gate rule into your build configuration by including the [`datadog-ci gate evaluate` command](#integrate-pr-gates-in-your-cicd-pipeline).
-8. Enable a [GitHub status check](#enable-github-check-creation) for your PR Gate rule by setting the appropriate permissions (such as `Checks: Write`) in your GitHub apps. To set this check as blocking in your pull requests, you must click the **Required** checkbox in your GitHub app's [Protected Branches settings][14].
-9. Click **Create Rule**.
+   - [GitHub][14]
+   - [Azure DevOps][15]
+
+   Non-blocking rules can be helpful when you roll out a new rule and want to verify its behavior before making it blocking.
+
+1. Click **Create Rule**.
 
 ### Integrate PR Gates in your CI/CD pipeline
 
@@ -118,11 +119,9 @@ After the permission is granted, you can see the checks in GitHub.
 
 ## Manage rules
 
-You can edit and delete PR Gates rules by hovering over a rule on the [**PR Gates Rules** page][2]. 
+You can edit or delete a PR Gates rule by hovering over it on the [**PR Gates Rules**][2] list and clicking the **Edit** or **Delete** icon.
 
-{{< img src="pr_gates/setup/delete_2.png" alt="Edit, clone, or delete a PR Gates rule" style="width:100%;">}}
-
-Alternatively, click on a rule from the list and click the **Edit**, **Clone**, or **Delete** icons.
+{{< img src="pr_gates/setup/delete_3.png" alt="Edit, clone, or delete a PR Gates rule" style="width:100%;">}}
 
 ## Permissions
 
@@ -135,7 +134,7 @@ For more information, see the [RBAC Permissions documentation][1].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/rbac/permissions
-[2]: https://app.datadoghq.com/ci/quality-gates
+[2]: https://app.datadoghq.com/ci/pr-gates
 [3]: /account_management/audit_trail/events/#ci-visibility-events
 [4]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/gate/README.md
 [5]: https://app.datadoghq.com/organization-settings/api-keys
@@ -148,3 +147,4 @@ For more information, see the [RBAC Permissions documentation][1].
 [12]: /getting_started/site/
 [13]: /pr_gates/guide/understanding_rule_scopes
 [14]: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches
+[15]: https://learn.microsoft.com/en-us/azure/devops/repos/git/pr-status-policy?view=azure-devops
