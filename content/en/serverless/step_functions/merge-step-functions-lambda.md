@@ -26,7 +26,7 @@ Your State Machine definition must use `JSONata` as the query language. To enabl
 
 #### Setup
 
-On the Lambda Task, set the `Payload` in the `Arguments` field as follows: 
+On the Lambda Task, set the `Payload` in the `Arguments` field as follows:
 
 {{< highlight json "hl_lines=7-7" >}}
 "Lambda Invoke": {
@@ -188,7 +188,7 @@ For additional code examples in TypeScript and Go, see [CDK Examples for Instrum
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-On the Lambda Task, set the `Parameters` key as follows: 
+On the Lambda Task, set the `Parameters` key as follows:
 
 ```json
 "Parameters": {
@@ -244,9 +244,10 @@ Follow these instructions if your Step Function indirectly invokes a Lambda thro
 
 #### Requirements
 
-| Runtime | Requirement |
-| ------- | ----------- |
-| Python  | Datadog Lambda Library for Python layer v107+ |
+| Runtime | Requirement                                    |
+| ------- |------------------------------------------------|
+| Python  | Datadog Lambda Library for Python layer v107+  |
+| Node.js | Datadog Lambda Library for Node.js layer v127+ |
 
 Your State Machine definition must use [JSONata][1] as the query language. To enable this, set your definition's top-level `QueryLanguage` field to `JSONata`.
 
@@ -254,7 +255,7 @@ Merging Step Functions with Lambda traces through managed services is only suppo
 
 #### EventBridge
 
-If an EventBridge rule has a Lambda function as a target, edit your EventBridge PutEvents Task to set `_datadog` in the `Detail` field as follows: 
+If an EventBridge rule has a Lambda function as a target, edit your EventBridge PutEvents Task to set `_datadog` in the `Detail` field as follows:
 
 {{< highlight json "hl_lines=10-10" >}}
 "EventBridge PutEvents": {
@@ -279,7 +280,7 @@ If an EventBridge rule has a Lambda function as a target, edit your EventBridge 
 
 #### SQS
 
-If an SQS queue has a Lambda trigger, edit your SQS SendMessage Task to set `_datadog` in the `MessageAttributes` field as follows: 
+If an SQS queue has a Lambda trigger, edit your SQS SendMessage Task to set `_datadog` in the `MessageAttributes` field as follows:
 
 {{< highlight json "hl_lines=8-11" >}}
 "SQS SendMessage": {
@@ -300,7 +301,7 @@ If an SQS queue has a Lambda trigger, edit your SQS SendMessage Task to set `_da
 
 #### SNS
 
-If there is a Lambda subscription on the topic, edit the SNS Publish Task to set `_datadog` in the `MessageAttributes` field as follows: 
+If there is a Lambda subscription on the topic, edit the SNS Publish Task to set `_datadog` in the `MessageAttributes` field as follows:
 
 {{< highlight json "hl_lines=8-11" >}}
 "SNS Publish": {
@@ -323,7 +324,7 @@ If there is a Lambda subscription on the topic, edit the SNS Publish Task to set
 
 ### With JSONata
 
-Edit the Step Functions Task to set `_datadog` in the `Input` field as follows: 
+Edit the Step Functions Task to set `_datadog` in the `Input` field as follows:
 
 {{< highlight json "hl_lines=7-7" >}}
 "Step Functions StartExecution": {
