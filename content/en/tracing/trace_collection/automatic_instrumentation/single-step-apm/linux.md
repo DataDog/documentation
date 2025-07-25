@@ -17,7 +17,7 @@ On a Linux host or VM, use Single Step Instrumentation (SSI) for APM to install 
 
 To enable APM on a Linux host:
 
-1. In the Datadog app, go to the [Install the Datadog Agent on Linux][15] page.
+1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
 1. In the **Customize your observability coverage** section, go to **Additional features** > **Application Observability**, and turn on **APM Instrumentation**.
    
    {{< img src="tracing/trace_collection/linux-apm-instrumentation-toggle.png" alt="The 'Customize your observability coverage' section of in-app instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
@@ -33,7 +33,7 @@ You may want to customize SDK versions based on your application's language vers
 
 To customize tracer versions:
 
-1. In the Datadog app, go to the [Install the Datadog Agent on Linux][15] page.
+1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
 1. After you turn on **APM Instrumentation**, click **Customize library versions**.
 
    {{< img src="tracing/trace_collection/apm-instrumentation-version-pinning.png" alt="The 'Customize library versions' drop-down in the instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
@@ -52,6 +52,24 @@ Available versions are listed in source repositories for each language:
 - [Ruby][12] (`ruby`)
 - [PHP][13] (`php`)
 
+## Configure Unified Service Tags
+
+Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. Learn how to [set USTs for Linux services][16].
+
+## Enable SDK-dependent products and features
+
+After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
+
+Use one of the following setup methods:
+
+- **[Configure in `application_monitoring.yaml`][18]**:
+
+  Enable products across all services on a host without modifying application command lines.
+
+- **[Set environment variables][17]**:
+
+  Enable products by setting environment variables directly in your application configuration. 
+
 ## Remove Single Step APM instrumentation from your Agent
 
 To stop producing traces for all services on your infrastructure:
@@ -61,6 +79,10 @@ To stop producing traces for all services on your infrastructure:
    dd-host-install --uninstall
    ```
 2. Restart the services on the host or VM.
+
+## Troubleshooting
+
+If you encounter problems enabling APM with SSI, see the [SSI troubleshooting guide][19].
 
 ## Further reading
 
@@ -74,5 +96,9 @@ To stop producing traces for all services on your infrastructure:
 [13]: https://github.com/DataDog/dd-trace-php/releases
 [14]: /tracing/glossary/#instrumentation
 [15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
+[16]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#non-containerized-environment
+[17]: /tracing/trace_collection/library_config/
+[18]: /tracing/trace_collection/automatic_instrumentation/configure_apm_features_linux/
+[19]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 
 
