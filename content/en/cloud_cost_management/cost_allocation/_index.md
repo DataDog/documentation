@@ -30,11 +30,6 @@ CCM offers multiple cost allocation methods to help you understand your cloud sp
 
 Automatically allocate the costs of your cloud clusters to individual services and workloads running in those clusters. Use cost metrics enriched with tags from pods, nodes, containers, and tasks to visualize container workload cost in the context of your entire cloud bill.
 
-**Supported platforms:**
-- **AWS**: ECS clusters, EKS clusters, and all Kubernetes clusters
-- **Azure**: AKS clusters and all Kubernetes clusters  
-- **Google Cloud**: GKE clusters and all Kubernetes clusters
-
 Learn more about [Container Cost Allocation][1].
 
 ### BigQuery cost allocation
@@ -42,51 +37,6 @@ Learn more about [Container Cost Allocation][1].
 Allocate BigQuery costs to individual queries, users, and projects to understand your data warehouse spending at a granular level. Track query performance costs, storage costs, and slot utilization across your organization.
 
 Learn more about [BigQuery Cost Allocation][2].
-
-## How cost allocation works
-
-Cost allocation divides host compute and other resource costs from your cloud provider into individual workloads associated with them. These divided costs are then enriched with tags from related resources so you can break down costs by any associated dimensions.
-
-### Resource allocation methods
-
-CCM uses different allocation methods depending on the resource type:
-
-| Resource Type | Allocation Method | Description |
-|---------------|-------------------|-------------|
-| **Compute** | Resource-based | Allocates costs based on CPU, memory, and GPU usage with configurable splits (for example, `60:40` for `CPU:memory`) |
-| **Storage** | Usage-based | Allocates costs based on actual storage usage, IOPS, and throughput |
-| **Data Transfer** | Traffic-based | Allocates costs based on network traffic volume and bandwidth usage |
-| **Managed Services** | Attribution-based | Allocates costs based on service usage and API calls |
-
-### Tag enrichment
-
-All allocated costs are enriched with tags from various sources:
-
-- **Kubernetes tags**: Pod labels, node labels, namespace information
-- **Cloud provider tags**: AWS tags, Azure tags, Google Cloud labels
-- **Custom tags**: Business-specific tags for team, project, environment
-- **Out-of-the-box tags**: Automatically applied tags for orchestration platform, cluster name, etc.
-
-## Understanding spend types
-
-CCM categorizes costs into different spend types to help you understand resource utilization:
-
-| Spend Type | Description |
-|------------|-------------|
-| **Usage** | Cost of resources actually used by workloads |
-| **Workload Idle** | Cost of resources reserved but not used by workloads |
-| **Cluster Idle** | Cost of resources not reserved by any workloads |
-| **Not Monitored** | Cost of resources not monitored by Datadog |
-
-## Cost metrics
-
-When cost allocation is enabled, the following metrics become available:
-
-- `aws.cost.amortized.shared.resources.allocated` (AWS)
-- `azure.cost.amortized.shared.resources.allocated` (Azure)  
-- `gcp.cost.amortized.shared.resources.allocated` (Google Cloud)
-
-These metrics include all your cloud costs and allow you to visualize spending across different dimensions and resources.
 
 ## Getting started
 
