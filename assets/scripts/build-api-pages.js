@@ -773,7 +773,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
               newRequiredFields = (value.items.required) ? value.items.required : [];
             }
             // for items -> oneOf
-            if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < 20) {
+            if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < oneOfLimit) {
               childData = value.items.oneOf
               .map((obj, indx) => {
                 return {[`Option ${indx + 1}`]: value.items.oneOf[indx]}
@@ -796,7 +796,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
           }
         } else if (typeof value === 'object' && "oneOf" in value) {
           // for properties -> oneOf
-          if(value.oneOf instanceof Array && value.oneOf.length < 20) {
+          if(value.oneOf instanceof Array && value.oneOf.length < oneOfLimit) {
             childData = value.oneOf
               .map((obj, indx) => {
                 return {[`Option ${indx + 1}`]: value.oneOf[indx]}
