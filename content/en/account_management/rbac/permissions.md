@@ -41,8 +41,6 @@ Some permissions appear in "preview mode" before becoming fully enforced. During
 
 Preview mode gives your organization's administrators the ability to opt into certain new permissions, so they can prevent losing access to resources that were previously unrestricted. Release notes associated with each preview mode permission indicate when the permission is created and when it will be enforced. While these permissions don't restrict access during preview, Datadog recommends updating role configurations before they become enforced to prevent disruption.
 
-To see a complete list of active previews, get more information, and sign up to participate, go to [Datadog Product Preview Program][4].
-
 ## Roles
 
 ### Managed roles
@@ -81,4 +79,3 @@ Each managed role inherits all of the permissions from the less powerful roles. 
 [1]: /account_management/rbac/granular_access
 [2]: /account_management/users/#edit-a-user-s-roles
 [3]: /api/latest/roles/#list-permissions
-[4]: https://www.datadoghq.com/product-preview/
