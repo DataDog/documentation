@@ -39137,37 +39137,6 @@ components:
       - AGGREGATED_CONNECTION
     SingleAggregatedDnsResponseArray:
       description: List of aggregated DNS flows.
-      example:
-        data:
-        - attributes:
-            group_bys:
-            - key: client_team
-              value: networks
-            - key: server_service
-              value: hucklebuck
-            metrics:
-            - key: dns_total_requests
-              value: 100
-            - key: dns_failures
-              value: 6
-            - key: dns_successful_responses
-              value: 95
-            - key: dns_failed_responses
-              value: 4
-            - key: dns_timeouts
-              value: 2
-            - key: dns_responses.nxdomain
-              value: 1
-            - key: dns_responses.servfail
-              value: 1
-            - key: dns_responses.other
-              value: 3
-            - key: dns_success_latency_percentile
-              value: 50
-            - key: dns_failure_latency_percentile
-              value: 75
-          id: client_team:networks, server_service:hucklebuck
-          type: aggregated_dns
       properties:
         data:
           description: Array of aggregated DNS objects.
@@ -39194,37 +39163,11 @@ components:
       properties:
         group_bys:
           description: The key, value pairs for each group by.
-          example:
-          - key: client_service
-            value: example-service
-          - key: network.dns_query
-            value: example.com
           items:
             $ref: '#/components/schemas/SingleAggregatedDnsResponseDataAttributesGroupByItems'
           type: array
         metrics:
           description: Metrics associated with an aggregated DNS flow.
-          example:
-          - key: dns_total_requests
-            value: 100
-          - key: dns_failures
-            value: 7
-          - key: dns_successful_responses
-            value: 93
-          - key: dns_failed_responses
-            value: 5
-          - key: dns_timeouts
-            value: 2
-          - key: dns_responses.nxdomain
-            value: 1
-          - key: dns_responses.servfail
-            value: 1
-          - key: dns_responses.other
-            value: 3
-          - key: dns_success_latency_percentile
-            value: 50
-          - key: dns_failure_latency_percentile
-            value: 75
           items:
             $ref: '#/components/schemas/SingleAggregatedDnsResponseDataAttributesMetricsItems'
           type: array
@@ -39234,21 +39177,22 @@ components:
       properties:
         key:
           description: The group by key.
+          example: client_team
           type: string
         value:
-          additionalProperties:
-            items:
-              type: string
-            type: array
           description: The group by value.
+          example: networks
+          type: string
       type: object
     SingleAggregatedDnsResponseDataAttributesMetricsItems:
       description: Metrics associated with an aggregated DNS flow.
       properties:
         key:
           $ref: '#/components/schemas/DnsMetricKey'
+          example: dns_total_requests
         value:
           description: The metric value.
+          example: 100
           format: int64
           type: integer
       type: object
