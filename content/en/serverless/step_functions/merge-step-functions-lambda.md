@@ -251,7 +251,7 @@ Follow these instructions if your Step Function indirectly invokes a Lambda thro
 
 Your State Machine definition must use [JSONata][1] as the query language. To enable this, set your definition's top-level `QueryLanguage` field to `JSONata`.
 
-Merging Step Functions with Lambda traces through managed services is only supported for Python runtimes.
+Only Python and Node.js runtimes are supported for merging Step Functions with Lambda traces through managed services.
 
 #### EventBridge
 
