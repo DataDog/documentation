@@ -22841,8 +22841,19 @@ components:
       readOnly: true
       type: object
     MetricAssetAttributes:
-      description: Assets related to the object, including title and url.
+      description: Assets related to the object, including title, url, and tags.
       properties:
+        tags:
+          description: List of tag keys used in the asset.
+          example:
+          - env
+          - service
+          - host
+          - datacenter
+          items:
+            description: Tag key used in assets.
+            type: string
+          type: array
         title:
           description: Title of the asset.
           type: string
@@ -34969,9 +34980,22 @@ components:
           format: int64
           minimum: 0
           type: integer
+        flaggedIPType:
+          $ref: '#/components/schemas/SecurityMonitoringRuleCaseActionOptionsFlaggedIPType'
         userBehaviorName:
           $ref: '#/components/schemas/SecurityMonitoringRuleCaseActionOptionsUserBehaviorName'
       type: object
+    SecurityMonitoringRuleCaseActionOptionsFlaggedIPType:
+      description: Used with the case action of type 'flag_ip'. The value specified
+        in this field is applied as a flag to the IP addresses.
+      enum:
+      - SUSPICIOUS
+      - FLAGGED
+      example: FLAGGED
+      type: string
+      x-enum-varnames:
+      - SUSPICIOUS
+      - FLAGGED
     SecurityMonitoringRuleCaseActionOptionsUserBehaviorName:
       description: Used with the case action of type 'user_behavior'. The value specified
         in this field is applied as a risk tag to all users affected by the rule.
@@ -34982,11 +35006,13 @@ components:
       - block_ip
       - block_user
       - user_behavior
+      - flag_ip
       type: string
       x-enum-varnames:
       - BLOCK_IP
       - BLOCK_USER
       - USER_BEHAVIOR
+      - FLAG_IP
     SecurityMonitoringRuleCaseCreate:
       description: Case when signal is generated.
       properties:
@@ -70398,13 +70424,18 @@ tags:
     for more information.
   name: Incidents
 - description: 'Manage your Datadog API and application keys. You need an API key
-    and
+    and an
 
-    an application key for a user with the required permissions to interact
+    application key for a user with the required permissions to interact with these
+    endpoints.
 
-    with these endpoints. The full list of API and application keys can be
 
-    seen on your [Datadog API page](https://app.datadoghq.com/account/settings#api).'
+    Consult the following pages to view and manage your keys:
+
+
+    - [API Keys](https://app.datadoghq.com/organization-settings/api-keys)
+
+    - [Application Keys](https://app.datadoghq.com/personal-settings/application-keys)'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/api-app-keys/
