@@ -63,6 +63,14 @@ Cloud Security leverages both the Datadog Agent and Agentless. It includes a var
 - [**Identity Risks**][8]: Provides in-depth visibility into your organization's AWS IAM, Azure, and GCP risks, and enables you to detect and resolve identity risks on an ongoing basis.
 - [**Vulnerabilities**][9]: Continuously detect, prioritize, and remediate exploitable vulnerabilities in your container images, host images, and hosts running in your infrastructure.
 
+Cloud Security also includes access to Datadog Security features, including:
+- [Detection Rules][18]
+- [Notifications][6]
+- [Automation Pipelines][19]
+- [Security Inbox][14]
+- [Audit Trail][20]
+- [Security Research Feed][16]
+
 {{< callout url="#" btn_hidden="true" header="false">}}
   The new Cloud Security Summary shown below is in Preview. To get started, contact your Customer Success representative.
 {{< /callout >}} 
@@ -134,3 +142,6 @@ To get started with Cloud Security, navigate to the [**Cloud Security Setup**][3
 [15]: https://app.datadoghq.com/security/feed
 [16]: /security/research_feed
 [17]: /security/cloud_security_management/security_graph
+[18]: /security/detection_rules/
+[19]: /security/automation_pipelines/
+[20]: /security/audit_trail/
