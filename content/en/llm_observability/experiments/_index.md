@@ -186,7 +186,7 @@ Evaluators are functions that measure how well the model or agent performs by co
 - score – returns a numeric value (float)
 - categorical – returns a labeled category (string)
 
-#### Creating an Experiment
+#### Creating an experiment
 
 Create an experiment using `LLMObs.experiment()`:
 
