@@ -91,9 +91,6 @@ Platform logs are collected through the [Azure integration][2] and [Azure log fo
 
 Application logs are collected through Datadog instrumentation and depend on your runtime:
 
-{{< tabs >}}
-{{% tab "Language-Specific Setup" %}}
-
 **Environment Variables for All Languages**
 
 Set these environment variables in your Azure App Service Application Settings:
@@ -120,8 +117,7 @@ Set these environment variables in your Azure App Service Application Settings:
 [20]: /logs/log_collection/python/
 [21]: /logs/log_collection/php/
 
-{{% /tab %}}
-{{% tab "Operating System Comparison" %}}
+**Operating System Comparison**
 
 **Windows App Service**
 - Uses Datadog extension for APM and log collection
@@ -141,8 +137,7 @@ Set these environment variables in your Azure App Service Application Settings:
 - Logs written to stdout/stderr or mounted volumes
 - Sidecar container collects logs from multiple sources
 
-{{% /tab %}}
-{{% tab "Azure Settings Configuration" %}}
+**Azure Settings Configuration**
 
 **Azure App Service Settings That Affect Logging**
 
@@ -163,9 +158,6 @@ Set these environment variables in your Azure App Service Application Settings:
 | `DD_SERVICE` | Override service name | When default name is not desired |
 | `DD_ENV` | Set environment tag | For environment-based filtering |
 | `DD_VERSION` | Set version tag | For version-based filtering |
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ### Expected Behavior in Datadog UI
 
