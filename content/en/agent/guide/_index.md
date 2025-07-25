@@ -10,6 +10,7 @@ cascade:
 ---
 
 {{< header-list header="Configuration guides" >}}
+    {{< nextlink href="agent/guide/setup_remote_config" >}}Set up Remote Configuration for Fleet Automation{{< /nextlink >}}
     {{< nextlink href="agent/guide/environment-variables" >}}Agent Environment Variables{{< /nextlink >}}
     {{< nextlink href="agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity" >}}Installing the Agent on a server with limited internet connectivity{{< /nextlink >}}
     {{< nextlink href="agent/guide/ansible_standalone_role/" >}}Set up Ansible Using a Standalone Datadog Role{{< /nextlink >}}

@@ -18,15 +18,17 @@ further_reading:
 
 This page covers configuring Remote Configuration for Fleet Automation. The following Fleet Automation features require Remote Configuration:
 
-- **[Agent flares][9]**: Send a flare from the Datadog site using Fleet Automation.
-- **[Remote Agent upgrades][10]**: (**{{< tooltip glossary="preview" case="title" >}}**) Remotely upgrade your Agents.
-- **[Remote Agent configuration][11]**: (**{{< tooltip glossary="preview" case="title" >}}**) Remotely configure your Agents.
+| Feature | Description | Required Agent Version |
+|---------|-------------|------------------------|
+| **[Agent flares][9]** | Send a flare from the Datadog site using Fleet Automation | `7.47.0` or later |
+| **[Remote Agent upgrades][10]**<br>(**{{< tooltip glossary="preview" case="title" >}}**) | Remotely upgrade your Agents | `7.66` or later |
+| **[Remote Agent configuration][11]**<br>(**{{< tooltip glossary="preview" case="title" >}}**) | Remotely configure your Agents | `7.47.0` or later |
 
 Datadog recommends upgrading your Agents regularly to make sure you have access to the latest features.
 
 ## Prerequisites
 
-- Datadog Agent version `7.47.0` or later.
+- Datadog Agent version `7.66` or later. While earlier versions of 
 - Ensure your RBAC permissions include [`org_management`][1], so you can enable Remote Configuration for your organization.
 - Ensure your RBAC permissions include [`api_keys_write`][2], so you can create a new API key with the Remote Configuration capability, or add the capability to an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. A key with this capability allows you to authenticate and authorize your Agent to use Remote Configuration.
 - Ensure that [Remote Configuration is enabled for your organization][3].
