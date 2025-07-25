@@ -76,7 +76,7 @@ dataset = LLMObs.create_dataset(
 print(f"View dataset: {dataset.url}")
 ```
 
-#### Managing Dataset Records
+#### Managing dataset records
 
 The Dataset class provides methods to manage records:
 
@@ -102,7 +102,7 @@ dataset.delete(1)  # Deletes the second record
 dataset.push()
 ```
 
-#### Accessing Dataset Records
+#### Accessing dataset records
 
 You can access dataset records using standard Python indexing:
 
@@ -131,7 +131,7 @@ print(len(dataset))
 ```
 
 
-#### Working with CSV Files
+#### Working with CSV files
 
 You can create datasets from CSV files and export datasets to pandas DataFrames. 
 
