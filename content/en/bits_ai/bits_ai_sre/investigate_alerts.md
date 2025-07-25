@@ -25,10 +25,10 @@ An investigation initiates when a monitor transitions to the alert state. Transi
 
 #### Rate limits
 
-|  Type         | Description                                                                                   | Limit                                      |
-|--------------------|----------------------------------------------------------------------------------------------|--------------------------------------------|
-| Monitor limit     | A monitor can trigger up to 2 investigations every 30 minutes.<br>If a monitor is "noisy"&mdash;  that is, if it triggers alerts on 12 or more of the last 14 days, or fires in more than 15% of an hour interval&mdash; it is automatically rate-limited. | 2 executions per 30 minutes per monitor     |
-| Organization limit| The total number of monitor investigations that can be executed across the organization.      | 5 executions per hour per organization     |
+| Type              | Description                                                                                                                                                                                                                  |
+|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Monitor limit     | A monitor can trigger up to 2 investigations every 30 minutes.<br>Additionally, if a monitor is "noisy"&mdash;that is, if it triggers alerts on 12 or more of the last 14 days, or fires in more than 15% of an hour interval&mdash;it is automatically rate-limited. |
+| Organization limit| Five investigations per hour per organization.                                                                                                                                    |
 
 ### Manually start an investigation
 
