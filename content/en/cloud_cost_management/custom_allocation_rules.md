@@ -16,12 +16,12 @@ Custom allocation rules let you split and assign shared costs to any available t
 
 The following allocation methods are available:
 
- | Allocation Method | Description | Use Case | Example |
- | ----------------  | ----------- | -------- | --------|
- | Even  | Split costs evenly among all destinations. | Scenarios where each team, project, or environment should be charged the same amount for a shared cost. | Untagged support costs are allocated evenly to teams `teamA`, `teamB`, and `teamC`. |
- | Custom  | Split costs to each destination based on percentages you define. | Scenarios where business rules or agreements dictate how much each team should pay. | Untagged support costs are allocated 60% to `teamA`, 30% to `teamB`, and 10% to `teamC`. |
- | Proportional by spend | Split costs based on each destination's share of total spend. | Scenarios where teams should pay in proportion to their actual spend. | Untagged support costs are allocated to teams `teamA`, `teamB`, and `teamC` based on their proportion of total spend on Amazon EC2.|
- | Dynamic by metric  | Split costs based on each destination's share of total usage. | Scenarios where teams should pay in proportion to their actual usage. | Shared PostgreSQL costs are allocated by total query execution time per team. |
+ | Allocation Method | Description | Use Case |
+ | ----------------  | ----------- | -------- |
+ | Even  | Split costs evenly among all destinations. | Scenarios where each team, project, or environment should be charged the same amount for a shared cost. |
+ | Custom  | Split costs to each destination based on percentages you define. | Scenarios where business rules or agreements dictate how much each team should pay. |
+ | Proportional by spend | Split costs based on each destination's share of total spend. | Scenarios where teams should pay in proportion to their actual spend. |
+ | Dynamic by metric  | Split costs based on each destination's share of total usage. | Scenarios where teams should pay in proportion to their actual usage. |
 
 Custom allocation rules run after [Tag Pipelines][1], enabling cost allocations on the latest user-defined tags. Costs are allocated on a daily basis. Cost allocations can be applied to AWS, Google Cloud, and Azure costs.
 
@@ -47,7 +47,7 @@ Below is a description of how each allocation method works with examples.
 
 With the even strategy, costs are allocated evenly towards your destination tags. [Apply a filter](#step-4---optional-apply-filters) to refine which part of the bill determines the proportions.
 
-{{< img src="cloud_cost/custom_allocation_rules/ui-even-1.png" alt="The even split strategy as seen in Datadog" style="width:90%;" >}}
+{{< img src="cloud_cost/custom_allocation_rules/ui-even.png" alt="The even split strategy as seen in Datadog" style="width:90%;" >}}
 
 {{% /tab %}}
 
@@ -139,14 +139,17 @@ Before creating this type of rule, be aware:
 
 ### Create a dynamic by metric allocation rule
 
-To create a rule for this allocation, you could, for example:
+To create a rule for this allocation, you can, for example:
 
-- Under "Define the source", define the costs to allocate: **NAT gateway costs** (`aws_operation:NatGateway`). 
-- Under "Choose split method", select the allocation method: **Dynamic by metric**
+- Define the source or costs to allocate (for example, **NAT gateway costs** (`aws_operation:NatGateway`)). 
+- Select the allocation method: **Dynamic by metric**
   - Choose the data source: **Network**. Tip: Review available metrics and tags in the [Metrics Summary][2].
-  - Refine the allocation by applying a [filter](#step-4---optional-apply-filters):**NAT Gateway** (`server_gateway_id:nat-*`). This filters the metric to only return data for your NAT Gateway usage. 
-- Under "Choose the destination(s) to split costs across", select the [destination tag](#step-3---define-the-destination) to split your costs by applying a group by. In Network, do this by filling out the `View clients as` section: **service** (`client_service`). This groups the metric by service. 
-  - Create suballocations by [partitioning](#step-4---optional-apply-a-partition) the allocation rule. To do this, first apply another group by to the metric. In Network, do this by filling out the `View servers as` section:  **Gateway ID** (`gateway_id`). This groups the metric by gateway_id. Then, select `server_gateway_id` in the **Partition source costs by** section. 
+- In the **"Define the metric to split the source costs"** section (which uses the same interface as the Metrics Explorer query editor):
+  - **Filters**: Apply filters to refine your metric query. For example, add `server_gateway_id:nat-*` to filter the metric to only return data for your NAT Gateway usage. These filters become the filter for your allocation.
+  - **Group bys**: Select group bys to define your destination and partition:
+    - **Destination**: The primary group by becomes your destination tag. For example, group by `client_service` to split costs by service.
+    - **Partition**: Additional group bys become your partition. For example, add another group by for `gateway_id` to create suballocations by Gateway ID.
+- In section 3, **"Choose the destination(s) to split costs across"**, specify which group by tag is your destination and which will be your partition. 
 {{< img src="cloud_cost/custom_allocation_rules/ui-dynamic-by-metric-4.png" alt="The dynamic by metric split strategy as seen in Datadog" style="width:90%;" >}}
 
 [1]: /metrics/#querying-metrics
