@@ -45,6 +45,18 @@
           # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/azure_services.go
           - networks/model/domain/azure_services.go
 
+      - repo_name: integrations-core
+        contents:
+
+        - action: integrations
+          branch: justin-lesko/eks-fargate-native-logging
+          globs:
+          - "*/metadata.csv"
+          - "*/manifest.json"
+          - "*/assets/service_checks.json"
+          - "*/README.md"
+          - "*/datadog_checks/*/__about__.py"
+
       # Some dogweb integrations are not migrated to APW yet, this is here for reviewing upstream changes locally.
       # Please don't add this to pull_config.yaml / production.
       - repo_name: dogweb
@@ -52,7 +64,7 @@
         contents:
 
         - action: integrations
-          branch: justin-lesko/eks-fargate-native-logging
+          branch: prod
           globs:
           - integration/*/*_metadata.csv
           - integration/*/manifest.json
