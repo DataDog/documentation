@@ -89,7 +89,6 @@ For more detailed instructions, select your runtime below:
 - Full support is available only for applications built with Python, Java, .NET.
 - Limited previews are ongoing for applications built with Node.js, Ruby, and PHP.
 - While the Java tracer library does support Kotlin, it does not currently support Kotlin coroutines due to technical limitations.
-  technical limitations. Work is being done to address these limitations but there is currently no expected timeframe for a fix.
 
 ## Explore Dynamic Instrumentation
 
