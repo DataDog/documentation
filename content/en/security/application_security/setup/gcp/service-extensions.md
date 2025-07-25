@@ -492,16 +492,6 @@ The GCP Service Extensions have the following limitations:
 
 * The request body is not inspected, regardless of its content type.
 
-## Using AAP without APM tracing
-
-If you want to use App and API Protection without APM tracing functionality, you can deploy with tracing disabled:
-
-1. Configure your tracing library with the `DD_APM_TRACING_ENABLED=false` environment variable in addition to the `DD_APPSEC_ENABLED=true` environment variable.
-2. This configuration will reduce the amount of APM data sent to Datadog to the minimum required by App and API Protection products.
-
-For more details, see [Standalone App and API Protection][standalone_billing_guide].
-[standalone_billing_guide]: /security/application_security/guide/standalone_application_security/
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
