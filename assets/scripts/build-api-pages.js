@@ -350,19 +350,7 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = [], l
           if (actionType === "curl" && !iterationHasRequiredKeyMatches) {
             // skip output
           } else {
-            // If there's a direct example on the array, try use it
-            if (value.example && typeof value.example !== 'undefined' && Array.isArray(value.example) && value.example.length > 0 && value.example[0] instanceof Object) {
-                const reference = Object.keys(value.example[0]).sort().join(',');
-                if (value.example.every(obj => obj instanceof Object && Object.keys(obj).sort().join(',') === reference)) {
-                  // All objects have the same keys lets just straight up output the array
-                  jsondata += `"${key}": ${safeJsonStringify(value.example, null, 2)},`;
-                } else {
-                  jsondata += `"${key}": ${prefixType}${jstring}${suffixType},`;
-                }
-
-            } else {
-              jsondata += `"${key}": ${prefixType}${jstring}${suffixType},`;
-            }
+            jsondata += `"${key}": ${prefixType}${jstring}${suffixType},`;
           }
         } else {
           // choose the example to use
@@ -458,7 +446,7 @@ const outputValue = (value, trailingComma = false) => {
       out = `${value}`;
       break;
     case "string":
-      out = `"${value.replace(/\r?\n|\r/g, '\\n')}"`;
+      out = `"${value.replace(/\r?\n|\r/g, '\\n').replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')}"`;
       break;
     default:
       out = `"${value}"`;
@@ -476,13 +464,6 @@ const outputExample = (chosenExample, inputkey) => {
   let ex = '';
   if(typeof chosenExample !== 'undefined' && chosenExample !== null) {
     if(chosenExample instanceof Array) {
-      // Check if this is an array of objects that should be returned as-is
-      // (like schema-level examples that contain complete data structures)
-      /*if (chosenExample.length > 0 && typeof chosenExample[0] === 'object' &&
-          chosenExample[0] !== null && !inputkey) {
-        return safeJsonStringify(chosenExample);
-      }*/
-
       // if array of strings use them
       // if array of objects try match keys
       chosenExample.forEach((item, key, arr) => {
@@ -497,18 +478,11 @@ const outputExample = (chosenExample, inputkey) => {
             } else {
               ex = `${outputExample(item[inputkey])}`;
             }
-            // Add comma separator if not the last item
-            /*if (key < arr.length - 1) {
-              ex += ',';
-            }*/
           }
         } else {
           ex += outputValue(item, !Object.is(arr.length - 1, key));
         }
       });
-
-      //ex = safeJsonStringify(chosenExample);
-
     } else if(typeof chosenExample === 'object') {
       if(chosenExample.value instanceof Array) {
         chosenExample.value.forEach((item, key, arr) => {
