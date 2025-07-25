@@ -625,6 +625,12 @@
     "description": "Retrieves the dataset associated with the ID.",
     "summary": "Get a single dataset by ID"
   },
+  "UpdateDataset": {
+    "description": "Edits the dataset associated with the ID.",
+    "summary": "Edit a dataset",
+    "request_description": "Dataset payload",
+    "request_schema_description": "Edit request for a dataset."
+  },
   "GetDomainAllowlist": {
     "description": "Get the domain allowlist for an organization.",
     "summary": "Get Domain Allowlist"
