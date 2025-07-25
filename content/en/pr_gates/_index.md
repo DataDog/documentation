@@ -4,6 +4,10 @@ description: Learn how to use PR Gates to enable your team to control what code 
 is_beta: false
 aliases:
   - /quality_gates/
+  - /quality_gates/explorer/
+  - /quality_gates/explorer/search_syntax/
+  - /quality_gates/explorer/facets/
+  - /quality_gates/explorer/saved_views/
 further_reading:
 - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
   tag: "Release Notes"
