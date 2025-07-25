@@ -170,7 +170,7 @@ The DataFrame will have a MultiIndex structure with the following columns:
 - `expected_output`: Contains all output fields from `expected_output_columns`
 - `metadata`: Contains any additional fields from `metadata_columns`
 
-Notes:
+**Notes**:
 - CSV files must have a header row
 - Maximum field size is 10MB
 - All columns not specified in `input_data_columns` or `expected_output_columns` are automatically treated as metadata
