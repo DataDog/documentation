@@ -299,6 +299,3 @@ content/en/**/*.ast.json
 
 # Cursor editor configuration
 .cursor/
-
-# Generated files for agents
-static/llms.txt
