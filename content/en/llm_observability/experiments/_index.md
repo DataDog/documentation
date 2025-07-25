@@ -48,7 +48,7 @@ LLMObs.enable(
 A _dataset_ is a collection of _inputs_ and _expected outputs_, and optionally _metadata_.  
 You can construct datasets from production data in the UI by hitting "Add to Dataset" in any span page, as well as programatically using the SDK. You can use the SDK to push and retrieve datasets from Datadog.
 
-#### Creating a Dataset
+#### Creating a dataset
 
 You can create a new dataset using `LLMObs.create_dataset()`:
 
