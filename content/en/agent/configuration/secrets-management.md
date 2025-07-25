@@ -348,6 +348,16 @@ To refresh manually, use:
 datadog-agent secret refresh
 ```
 
+### Enabling DDOT collector refresh
+If you are using [DDOT collector][7] and want to enable API/APP refresh you must add the following additional configuration to your `datadog.yaml` file:
+```
+agent_ipc:
+  port: 5051
+  config_refresh_interval: 3600
+```
+
+This ensures the DDOT collector remains in-sync with the Agent after secrets are refreshed. Similar to how the Agent periodically verifies its configuration state, the DDOT collector uses this setting to regularly check for updated values from the Agent.
+
 ## Troubleshooting
 
 ### Listing detected secrets
@@ -588,3 +598,4 @@ This command returns whether the permissions are valid for the Agent to view thi
 [4]: https://github.com/DataDog/datadog-secret-backend
 [5]: https://github.com/DataDog/datadog-secret-backend/blob/main/docs/aws/secrets.md
 [6]: /agent/configuration/agent-commands/#restart-the-agent
+[7]: /opentelemetry/setup/ddot_collector/

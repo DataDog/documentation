@@ -12,6 +12,9 @@ further_reading:
   - link: /tracing/guide/injectors
     tag: Documentation
     text: Understanding injector behavior with Single Step Instrumentation
+  - link: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting/
+    tag: Documentation
+    text: "Troubleshooting Single Step APM"
 ---
 ## Overview
 

@@ -7,7 +7,7 @@ further_reading:
 - link: /tracing/trace_collection/
   tag: Documentación
   text: Aprende a configurar APM tracing con su aplicación
-- link: /tracing/service_catalog/
+- link: /tracing/software_catalog/
   tag: Documentación
   text: Descubrir y catalogar los servicios de informes a Datadog
 - link: /tracing/services/service_page/
@@ -43,12 +43,13 @@ Para más definiciones y descripciones de términos importantes de APM, como _sp
 | [Filtros de retención](#retention-filters) | Los filtros de retención son controles basados en etiquetas establecidos en la interfaz de usuario de Datadog que determinan qué tramos se indexar en Datadog durante 15 días.                                                                                              |
 | [Controles de ingesta](#ingestion-controls) | Los controles de ingesta se utilizan para el envío de hasta el 100% de las trazas a Datadog para buscar en directo y analizar durante 15 minutos.
 | [Instrumentación](#instrumentation) | La instrumentación es el proceso de añadir código a tu aplicación para capturar e informar los datos de observabilidad. |
+| [Equipaje](#baggage) | El equipaje es información contextual que se pasa entre trazas, métricas y logs en forma de pares clave-valor. |
 
 ## Servicios
 
-Después de [instrumentar tu aplicación][3], el [Catálogo de servicios][4] es tu página de inicio principal para los datos de APM.
+Después de [instrumentar tu aplicación][3], el [Software Catalog][4] es tu página de inicio principal para los datos de APM.
 
-{{< img src="tracing/visualization/service_catalog.png" alt="Catálogo de servicios" >}}
+{{< img src="tracing/visualization/software_catalog.png" alt="Software Catalog" >}}
 
 Los servicios son los componentes básicos de las arquitecturas de microservicios modernas: en términos generales, un servicio agrupa endpoints, consultas o trabajos con el fin de escalar instancias. Algunos ejemplos son:
 
@@ -60,7 +61,7 @@ La siguiente captura de pantalla es un sistema distribuido de microservicios par
 
 {{< img src="tracing/visualization/service_map.png" alt="Mapa de servicios" >}}
 
-Todos los servicios pueden encontrarse en el [Catálogo de servicios][4] y representarse visualmente en el [Mapa de servicios][5]. Cada servicio tiene su propia [Página de servicios][6] donde puedes ver y analizar [métricas de traza](#trace-metrics) como el rendimiento, la latencia y las tasas de error. Utiliza estas métricas para crear widgets de dashboard, monitores y ver el rendimiento de cada recurso, como un endpoint web o una consulta de base de datos perteneciente al servicio.
+Todos los servicios pueden encontrarse en el [Software Catalog][4] y representarse visualmente en el [Mapa de servicios][5]. Cada servicio tiene su propia [Página de servicios][6] donde puedes ver y analizar [métricas de traza](#trace-metrics) como el rendimiento, la latencia y las tasas de error. Utiliza estas métricas para crear widgets de dashboard, monitores y ver el rendimiento de cada recurso, como un endpoint web o una consulta de base de datos perteneciente al servicio.
 
 {{< img src="tracing/visualization/service_page.mp4" video="true" alt="Página de servicios" >}}
 
@@ -106,13 +107,19 @@ Puedes utilizar la instrumentación personalizada al incrustar código de rastre
 
 Para saber más, lee [Instrumentación de aplicación][26].
 
-## Leer más
+## Equipaje
+
+El equipaje te permite propagar pares clave-valor (también conocidos como elementos de equipaje) a través de los límites de servicio en un sistema distribuido. A diferencia del contexto de traza, que se centra en los identificadores de traza, el equipaje permite transmitir datos empresariales y otra información contextual junto con trazas. 
+
+Para obtener más información, lee los [formatos de propagación][28] compatibles con el lenguaje de tu aplicación.
+
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /es/developers/guide/data-collection-resolution-retention/
+[2]: /es/developers/guide/data-collection-resolution/
 [3]: /es/tracing/setup/
-[4]: /es/tracing/service_catalog/
+[4]: /es/tracing/software_catalog/
 [5]: /es/tracing/services/services_map/
 [6]: /es/tracing/services/service_page/
 [7]: /es/tracing/services/resource_page/
@@ -125,7 +132,7 @@ Para saber más, lee [Instrumentación de aplicación][26].
 [14]: /es/tracing/trace_pipeline/trace_retention/#trace-search-and-analytics-on-indexed-spans
 [15]: /es/tracing/metrics/metrics_namespace/
 [16]: https://app.datadoghq.com/metric/summary
-[17]: https://app.datadoghq.com/monitors#/create
+[17]: https://app.datadoghq.com/monitors/create
 [18]: /es/tracing/trace_explorer/query_syntax/#facets
 [19]: /es/tracing/trace_pipeline/trace_retention/#retention-filters
 [20]: /es/tracing/trace_pipeline/ingestion_controls/
@@ -136,3 +143,4 @@ Para saber más, lee [Instrumentación de aplicación][26].
 [25]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/
 [26]: /es/tracing/trace_collection/
 [27]: /es/tracing/trace_collection/trace_context_propagation
+[28]: /es/tracing/trace_collection/trace_context_propagation/#supported-formats

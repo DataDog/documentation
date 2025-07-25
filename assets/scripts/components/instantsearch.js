@@ -7,6 +7,56 @@ import { searchpageHits } from './instantsearch/searchpageHits';
 import { customPagination } from './instantsearch/customPagination';
 import { debounce } from '../utils/debounce';
 
+// Helper function to handle navigation with proper anchor scrolling
+function navigateToUrl(url) {
+    const urlObj = new URL(url, window.location.origin);
+    
+    // Check if we're navigating to the same page
+    if (window.location.pathname === urlObj.pathname) {
+        window.history.pushState({}, '', url);
+        
+        // Close search dropdown since we're staying on the same page
+        const hitsContainerContainer = document.querySelector('.hits-container');
+        if (hitsContainerContainer) {
+            hitsContainerContainer.classList.add('d-none');
+        }
+        
+        // If there's an anchor, scroll to it
+        if (urlObj.hash) {
+            setTimeout(() => {
+                const targetElement = document.getElementById(urlObj.hash.substring(1));
+                if (targetElement) {
+                    // Calculate offset from fixed header and any page-specific nav
+                    const header = document.querySelector('.navbar');
+                    const glossaryNav = document.querySelector('.glossary-nav');
+                    let offset = 20; // Base padding
+                    
+                    if (header) offset += header.offsetHeight;
+                    if (glossaryNav) offset += glossaryNav.offsetHeight;
+                    
+                    const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                    window.scrollTo({
+                        top: elementTop - offset,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 50);
+        }
+        return;
+    }
+    
+    // Check if this is a glossary page with an anchor for cross-page navigation
+    if (urlObj.pathname.includes('/glossary/') && urlObj.hash) {
+        // For cross-page navigation, store the anchor in sessionStorage and navigate
+        sessionStorage.setItem('glossaryScrollTarget', urlObj.hash.substring(1));
+        window.location.href = url;
+    } else {
+        // For other cross-page navigation, use normal navigation
+        window.history.pushState({}, '', url);
+        window.location.reload();
+    }
+}
+
 const { env } = document.documentElement.dataset;
 const pageLanguage = getPageLanguage();
 const typesenseConfig = getConfig(env).typesense;
@@ -294,8 +344,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
 
                     if (target && target.href && targetIsDescendant) {
                         sendSearchRumAction(search.helper.state.query, target.href);
-                        window.history.pushState({}, '', target.href);
-                        window.location.reload();
+                        navigateToUrl(target.href);
                     }
 
                     target = target.parentNode;
@@ -319,12 +368,11 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                         const page = search.helper.state.page;
                         const clickPosition = getSearchResultClickPosition(target.href, hitsArray, numHits, page);
                         sendSearchRumAction(search.helper.state.query, target.href, clickPosition);
-                        window.history.pushState({}, '', target.href);
 
                         if (e.metaKey || e.ctrlKey) {
                             window.open(target.href, '_blank');
                         } else {
-                            window.location.reload();
+                            navigateToUrl(target.href);
                         }
                     }
 

@@ -22841,8 +22841,19 @@ components:
       readOnly: true
       type: object
     MetricAssetAttributes:
-      description: Assets related to the object, including title and url.
+      description: Assets related to the object, including title, url, and tags.
       properties:
+        tags:
+          description: List of tag keys used in the asset.
+          example:
+          - env
+          - service
+          - host
+          - datacenter
+          items:
+            description: Tag key used in assets.
+            type: string
+          type: array
         title:
           description: Title of the asset.
           type: string

@@ -1,5 +1,5 @@
 ---
-title: Instrumenting Google Cloud Run In-Process
+title: Instrumenting Google Cloud Run Containers In-Process
 further_reading:
 
 - link: 'https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/'
@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. 
+Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications.
 
 This page provides instructions for instrumenting your Google Cloud Run containers with the Datadog Agent, which enables tracing, custom metrics, and direct log collection.
 
@@ -25,10 +25,6 @@ This page provides instructions for instrumenting your Google Cloud Run containe
 Make sure you have a [Datadog API key][7] and are using a programming language [supported by a Datadog tracing library][2].
 
 ## Instrument your application
-
-You can instrument your application in one of two ways: [Dockerfile](#dockerfile) or [buildpack](#buildpack).
-
-### Dockerfile
 
 Datadog publishes new releases of the `serverless-init` container image to Google’s gcr.io, AWS’s ECR, and on Docker Hub:
 
@@ -87,6 +83,8 @@ To get full instrumentation, ensure you are calling `datadog-init` as the first 
 {{< /programming-lang-wrapper >}}
 
 ### Buildpack
+
+<div class="alert alert-info">Buildpack instrumentation is deprecated.</div>
 
 [`Pack Buildpacks`][3] provide a convenient way to package your container without using a Dockerfile.
 

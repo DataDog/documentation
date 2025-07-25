@@ -45,6 +45,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
   tag: ブログ
   text: ネットワークとセキュリティ分析のための DNS ログの監視
+- link: https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/
+  tag: アーキテクチャセンター
+  text: Datadog を使用したログ管理のインデックス戦略ガイド
+- link: https://www.datadoghq.com/blog/archive-search/
+  tag: ブログ
+  text: Datadog Archive Search を使用して、履歴ログをより効率的に検索
 title: ログ管理
 ---
 
@@ -88,6 +94,8 @@ Logging without Limits\* は、[ログエクスプローラー][1]でトラブ�
 ## 確認
 
 [ログエクスプローラー][1]でインジェストしたログの確認を開始します。
+
+**ヒント**: Datadog のグローバル検索から Log Explorer を開くには、<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> を押し、`logs` を検索してください。
 
 {{< img src="/logs/explore.png" alt="取り込んだログを確認する" style="width:80%;">}}
 

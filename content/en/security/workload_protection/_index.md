@@ -8,6 +8,28 @@ aliases:
   - /security/threats/security_profiles
   - /security/threats/runtime_anomaly_detection
   - /security/threats/
+cascade:
+- _target:
+    path: /security/workload_protection/agent_expressions
+  aliases:
+    - /security/threats/agent_expressions
+- _target:
+    path: /security/workload_protection/backend_linux
+  aliases:
+    - /security/threats/backend_linux
+- _target:
+    path: /security/workload_protection/backend_windows
+  aliases:
+    - /security/threats/backend_windows
+- _target:
+    path: /security/workload_protection/linux_expressions
+  aliases:
+    - /security/threats/linux_expressions
+- _target:
+    path: /security/workload_protection/windows_expressions
+  aliases:
+    - /security/threats/windows_expressions
+
 ---
 
 Workload Protection monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of Workload Protection with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.

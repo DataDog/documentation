@@ -17,17 +17,12 @@ further_reading:
 - link: '/real_user_monitoring/session_replay'
   tag: 'Documentation'
   text: 'Learn about Session Replay'
-- link: '/software_catalog/endpoints/'
-  tag: 'Documentation'
-  text: 'Learn about the Endpoints list'
 ---
 
 ## Overview
 
-Explore your testing suite's Synthetic test coverage of RUM browser actions or API endpoints on the [**Test Coverage** page][1], which you can find under **Digital Experience** > **Synthetic Monitoring & Testing**.
+Explore your testing suite's Synthetic test coverage of RUM browser actions on the [**Test Coverage** page][1], which you can find under **Digital Experience** > **Synthetic Monitoring & Testing**.
 
-{{< tabs >}}
-{{% tab "Browser Actions" %}}
 The [**Test Coverage** page][1] provides actionable insight into the overall testing coverage of your [RUM applications][2]. It uses [data collected from the Browser RUM SDK][3] and [results from Synthetic browser tests][4].
 
 {{< img src="synthetics/test_coverage/browser_actions.png" alt="Test Coverage page with an Overview section, Untested Actions section, and a Tested Actions section" style="width:100%" >}}
@@ -93,9 +88,6 @@ Add the most popular sections of your application to a new or existing browser t
 [7]: /real_user_monitoring/session_replay/browser/
 [8]: https://app.datadoghq.com/rum/explorer/
 [9]: /continuous_testing/
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Further Reading
 
