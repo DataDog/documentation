@@ -1,6 +1,6 @@
 ---
 title: Enabling AAP for Gateway API for Kubernetes
-code_lang: gateway_api
+code_lang: gateway-api
 type: multi-code-lang
 code_lang_weight: 50
 aliases:
