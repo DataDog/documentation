@@ -27,7 +27,7 @@ Learn how to set up App and API Protection (AAP) on your AWS Fargate tasks by se
 </div>
 
 {{< appsec-integrations >}}
-  {{< appsec-integration name="Python" avatar="python" link="/security/application_security/setup/python" >}}
+  {{< appsec-integration name="Python" avatar="python" link="/security/application_security/setup/python/aws-fargate" >}}
   {{< appsec-integration name="Node.js" avatar="node" link="/security/application_security/setup/nodejs" >}}
   {{< appsec-integration name="Java" avatar="java" link="/security/application_security/setup/java/aws-fargate" >}}
   {{< appsec-integration name="Go" avatar="go" link="/security/application_security/setup/go" >}}
