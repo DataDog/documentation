@@ -28,23 +28,25 @@ algolia:
 
 This page outlines the basic features of the Datadog Agent for macOS. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
 
-By default, the Agent is installed in a sandbox located at `/opt/datadog-agent`. You can move this folder anywhere; however, this documentation assumes a default installation location.
+See the [Supported Platforms][5] documentation for the complete list of supported macOS distributions and versions.
 
-## Supported macOS versions
+## Install the Agent 
+To install the Agent on macOS, follow the [in-app instructions in Fleet Automation][6], and simply run the generated script on your hosts.
 
-| macOS version       | Supported Agent versions                                            |
-|---------------------|---------------------------------------------------------------------|
-| macOS 10.10 & 10.11 | Agent v5                                                            |
-| macOS 10.12         | Agent v5, Agent v6 until v6.34.0, Agent v7 until v7.34.0            |
-| macOS 10.13         | Agent v5, Agent v6 until v6.38.2, Agent v7 until v7.38.2            |
-| macOS 10.14+        | Agent v5, Agent v6, Agent v7                                        |
+{{< img src="/agent/basic_agent_usage/macos_img_july_25.png" alt="In-app installation steps for the Datadog Agent on a MacOS host." style="width:90%;">}}
+
+<div class="alert alert-info">
+By default, the Agent is installed in a sandbox located at <code>/opt/datadog-agent</code>. You can move this folder anywhere; however, this documentation assumes a default installation location.
+</div>
+
 
 ## Commands
 
-In Agent v6 and v7, the `launchctl` service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run through the Agent binary directly. Alternatively, lifecycle commands can also be managed through the systray app, and other commands can be executed with the web GUI.
+The `launchctl` service manager controls the Agent lifecycle, while other commands can be executed through the Agent binary, menu bar app, or web GUI.
 
-| Description                        | Command                                              |
-|------------------------------------|------------------------------------------------------|
+
+| Description          | Command          |
+|----------------------|------------------|
 | Start Agent as a service           | `launchctl start com.datadoghq.agent` or systray app |
 | Stop Agent running as a service    | `launchctl stop com.datadoghq.agent` or systray app  |
 | Restart Agent running as a service | Stop and then start the Agent with:<br>`launchctl stop com.datadoghq.agent`<br>`launchctl start com.datadoghq.agent`<br>Or use the systray app |
@@ -54,21 +56,30 @@ In Agent v6 and v7, the `launchctl` service manager provided by the operating sy
 | Display command usage              | `datadog-agent --help`                               |
 | Run a check                        | `datadog-agent check <CHECK_NAME>`                   |
 
+
 ## Configuration
 
-The configuration files and folders for the Agent are located in:
+The [Datadog Agent configuration file][7] is located in `/etc/datadog-agent/datadog.yaml`. This YAML file holds the host-wide connection details used to send data to Datadog including:
 
-* `~/.datadog-agent/datadog.yaml`
+- `api_key`: your organization’s [Datadog API key][8] 
+- `site`: target Datadog region (for example `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`)  
+- `proxy`: HTTP/HTTPS proxy endpoints for outbound traffic (see [Datadog Agent Proxy Configuration][9])  
+- Default tags, log level, and Datadog product configurations.
 
-Configuration files for [Integrations][4]:
+A fully commented reference file, located in `/etc/datadog-agent/datadog.yaml.example`, lists every available option for comparison or copy-paste. Alternatively, see the [sample config_template.yaml file][10] for all available configuration options.
 
-* `~/.datadog-agent/conf.d/`
+### Integration Files
+Configuration files for Integrations live in `/etc/datadog-agent/conf.d/`. Each integration has its own sub-directory, `<INTEGRATION>.d/`, that contains:
+- `conf.yaml` — the active configuration controlling how the integration gathers metrics and logs  
+-  `conf.yaml.example` — a sample illustrating supported keys and defaults
+
+
 
 ## Uninstall the Agent
 
 To uninstall the Agent, run the following command:
 
-**Single user installation**
+### Single user installation
 
 To remove the Agent and all Agent configuration files:
 1. Stop and close the Datadog Agent with the bone icon in the tray.
@@ -83,7 +94,7 @@ To remove the Agent and all Agent configuration files:
     ```
 4. Reboot your machine for the changes to take effect.
 
-**System-wide LaunchDaemon installation**
+### System-wide LaunchDaemon installation
 
 To remove the Agent and all Agent configuration files:
 1. Drag the Datadog application from the application folder to the trash bin.
@@ -101,7 +112,7 @@ To remove the Agent and all Agent configuration files:
 
 ## Troubleshooting
 
-See the [Agent Troubleshooting documentation][2].
+See the [Agent Troubleshooting documentation][2] for troubleshooting steps.
 
 ## Working with the embedded Agent
 
@@ -117,3 +128,9 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 [2]: /agent/troubleshooting/
 [3]: /developers/guide/custom-python-package/
 [4]: /integrations/
+[5]: https://docs.datadoghq.com/agent/supported_platforms/?tab=macos
+[6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
+[7]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[8]: https://app.datadoghq.com/organization-settings/api-keys
+[9]: /agent/configuration/proxy/
+[10]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
