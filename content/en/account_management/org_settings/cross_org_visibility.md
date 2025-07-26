@@ -12,14 +12,14 @@ algolia:
 
 ## Overview
 
-Some companies rely on multiple Datadog [organizations][1]  to isolate data for compliance or other reasons.
+Some companies rely on multiple Datadog [organizations][1] to separate data for compliance or other reasons.
 
 Cross-organization visibility allows customers to share data between different organizations in the same account, and show insights from multiple organizations in one place.
 
 This document explains: 
 - What cross-organization visibility [enables](#capabilities) 
-- How to [expose](#create-a-connection) data across organizations
-- How to create a [Dashboard and Notebook widget](#create-a-widget-with-cross-organization-data) with data from other organizations
+- How to [share](#create-a-connection) data across your organizations
+- How to create a [Dashboard and Notebook widget](#create-a-widget-with-cross-organization-data) with data from your other organizations
 
 ## Capabilities
 
@@ -32,13 +32,13 @@ The following limitations apply to organization connections:
 - The source and destination organizations must be in the same [site][11].
 - One organization can share with up to 5 other organizations.
 
-Note that once the connection is established, the destination organization can query the source organization's data in the same ways it can query its own data. This means that the source organization's data—including sensitive data—may be queried and displayed as permitted by the destination organization's access-control and other settings. This may include, for example, the destination organization's ability to create [public Dashboards][10] using the source organization's data even if the source organization's own settings do not permit the creation of public Dashboards.
+Note that once the connection is established, the destination organization can query the source organization's data in the same ways it can query its own data. This means that the source organization's data—including sensitive data—may be queried and displayed as permitted by the _destination organization's_ access-control and other settings. This may include, for example, the destination organization's ability to create [public Dashboards][10] using the source organization's data even if the source organization's own settings do not permit the creation of public Dashboards.
 
 After you set up an organization connection, the exposed data is still stored in the source organization and does not move to the destination. Instead, the destination organization queries the data from the source. Connections do not duplicate the data, and do not incur extra charges. The destination organization can query source data from any time range supported by the source data, including prior to the date of the creation of the connection. If you remove the connection, the destination can no longer access any data from the source and any queries or Dashboards created from the source organization's data may no longer function.
 
 ### Scope
 
-Cross-organization visibility supports Metrics and Log Management telemetry in [Dashboard and Notebook widgets][2].
+Cross-organization visibility supports Metrics and Log Management telemetry in [Dashboard and Notebook widgets][2]. HIPAA-enabled organizations cannot use cross-organization visibility.
 
 All types of metrics are supported, including [custom metrics][3], [trace metrics][4], and [metrics generated from logs][5].
 
