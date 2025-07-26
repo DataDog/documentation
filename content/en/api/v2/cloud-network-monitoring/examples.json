@@ -6,23 +6,28 @@
           "data": [
             {
               "attributes": {
-                "bytes_sent_by_client": "integer",
-                "bytes_sent_by_server": "integer",
+                "bytes_sent_by_client": 100,
+                "bytes_sent_by_server": 200,
                 "group_bys": {
-                  "<any-key>": []
+                  "client_team": [
+                    "networks"
+                  ],
+                  "server_service": [
+                    "hucklebuck"
+                  ]
                 },
-                "packets_sent_by_client": "integer",
-                "packets_sent_by_server": "integer",
-                "rtt_micro_seconds": "integer",
-                "tcp_closed_connections": "integer",
-                "tcp_established_connections": "integer",
-                "tcp_refusals": "integer",
-                "tcp_resets": "integer",
-                "tcp_retransmits": "integer",
-                "tcp_timeouts": "integer"
+                "packets_sent_by_client": 10,
+                "packets_sent_by_server": 20,
+                "rtt_micro_seconds": 800,
+                "tcp_closed_connections": 30,
+                "tcp_established_connections": 40,
+                "tcp_refusals": 7,
+                "tcp_resets": 5,
+                "tcp_retransmits": 30,
+                "tcp_timeouts": 6
               },
-              "id": "string",
-              "type": "string"
+              "id": "client_team:networks, server_service:hucklebuck",
+              "type": "aggregated_connection"
             }
           ]
         },
