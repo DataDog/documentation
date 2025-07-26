@@ -6889,7 +6889,7 @@ components:
       description: A case
       properties:
         attributes:
-          $ref: '#/components/schemas/CaseAttributes'
+          $ref: '#/components/schemas/CaseResourceAttributes'
         id:
           description: Case's identifier
           example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
@@ -6947,52 +6947,11 @@ components:
       - data
       type: object
     CaseAttributes:
-      description: Case attributes
-      properties:
-        archived_at:
-          description: Timestamp of when the case was archived
-          format: date-time
-          nullable: true
-          readOnly: true
+      additionalProperties:
+        items:
           type: string
-        closed_at:
-          description: Timestamp of when the case was closed
-          format: date-time
-          nullable: true
-          readOnly: true
-          type: string
-        created_at:
-          description: Timestamp of when the case was created
-          format: date-time
-          readOnly: true
-          type: string
-        description:
-          description: Description
-          type: string
-        jira_issue:
-          $ref: '#/components/schemas/JiraIssue'
-        key:
-          description: Key
-          example: CASEM-4523
-          type: string
-        modified_at:
-          description: Timestamp of when the case was last modified
-          format: date-time
-          nullable: true
-          readOnly: true
-          type: string
-        priority:
-          $ref: '#/components/schemas/CasePriority'
-        service_now_ticket:
-          $ref: '#/components/schemas/ServiceNowTicket'
-        status:
-          $ref: '#/components/schemas/CaseStatus'
-        title:
-          description: Title
-          example: Memory leak investigation on API
-          type: string
-        type:
-          $ref: '#/components/schemas/CaseType'
+        type: array
+      description: The definition of `CaseAttributes` object.
       type: object
     CaseCreate:
       description: Case creation data
@@ -7090,6 +7049,56 @@ components:
         project:
           $ref: '#/components/schemas/ProjectRelationship'
       type: object
+    CaseResourceAttributes:
+      description: Case resource attributes
+      properties:
+        archived_at:
+          description: Timestamp of when the case was archived
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        attributes:
+          $ref: '#/components/schemas/CaseAttributes'
+        closed_at:
+          description: Timestamp of when the case was closed
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        created_at:
+          description: Timestamp of when the case was created
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          description: Description
+          type: string
+        jira_issue:
+          $ref: '#/components/schemas/JiraIssue'
+        key:
+          description: Key
+          example: CASEM-4523
+          type: string
+        modified_at:
+          description: Timestamp of when the case was last modified
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        priority:
+          $ref: '#/components/schemas/CasePriority'
+        service_now_ticket:
+          $ref: '#/components/schemas/ServiceNowTicket'
+        status:
+          $ref: '#/components/schemas/CaseStatus'
+        title:
+          description: Title
+          example: Memory leak investigation on API
+          type: string
+        type:
+          $ref: '#/components/schemas/CaseType'
+      type: object
     CaseResourceType:
       default: case
       description: Case resource type
@@ -7154,6 +7163,33 @@ components:
       type: string
       x-enum-varnames:
       - STANDARD
+    CaseUpdateAttributes:
+      description: Case update attributes
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseUpdateAttributesAttributes'
+        type:
+          $ref: '#/components/schemas/CaseResourceType'
+      required:
+      - attributes
+      - type
+      type: object
+    CaseUpdateAttributesAttributes:
+      description: Case update attributes attributes
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseAttributes'
+      required:
+      - attributes
+      type: object
+    CaseUpdateAttributesRequest:
+      description: Case update attributes request
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseUpdateAttributes'
+      required:
+      - data
+      type: object
     CaseUpdatePriority:
       description: Case priority status
       properties:
@@ -46596,6 +46632,47 @@ paths:
       tags:
       - Case Management
       x-menu-order: 6
+      x-undo:
+        type: idempotent
+  /api/v2/cases/{case_id}/attributes:
+    post:
+      description: Update case attributes
+      operationId: UpdateAttributes
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseUpdateAttributesRequest'
+        description: Case attributes update payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Update case attributes
+      tags:
+      - Case Management
+      x-menu-order: 10
       x-undo:
         type: idempotent
   /api/v2/cases/{case_id}/priority:
