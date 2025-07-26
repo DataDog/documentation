@@ -37,6 +37,7 @@ from ddtrace.llmobs import LLMObs
 
 LLMObs.enable(
     ml_app="my-app",
+    project_name="my-project",
     api_key="<YOUR_API_KEY>",  # defaults to DD_API_KEY environment variable
     app_key="<YOUR_APP_KEY>",  # defaults to DD_APP_KEY environment variable
     site="datadoghq.com"  # defaults to DD_SITE environment variable
@@ -45,7 +46,7 @@ LLMObs.enable(
 
 ### Dataset class
 
-A _dataset_ is a collection of _inputs_ and _expected outputs_, and optionally _metadata_.  
+A _dataset_ is a collection of _inputs_, and _expected outputs_ (optional) and _metadata_ (optional).
 You can construct datasets from production data in the UI by hitting "Add to Dataset" in any span page, as well as programatically using the SDK. You can use the SDK to push and retrieve datasets from Datadog.
 
 #### Creating a dataset
@@ -133,7 +134,7 @@ print(len(dataset))
 
 #### Working with CSV files
 
-You can create datasets from CSV files and export datasets to pandas DataFrames. 
+You can create datasets from CSV files and export datasets to pandas DataFrames.
 
 **Note**: Pandas is required for these operations; install it with `pip install pandas`.
 
@@ -213,7 +214,7 @@ If you use a [supported framework](https://docs.datadoghq.com/llm_observability/
 
 
 3. Define evaluator functions
-```python 
+```python
 def exact_match(input_data: Dict[str, Any], output_data: str, expected_output: str) -> bool:
     return output_data == expected_output
 
