@@ -61,6 +61,10 @@ server:
 	  yarn run prestart && yarn run start; \
 	fi;
 
+build-llms-txt:
+	@echo "Building the llms.txt file";
+	node ./assets/scripts/build-llms-txt.js
+
 # compile .mdoc.md files to HTML
 # so Hugo can include them in the site
 build-cdocs:
@@ -76,12 +80,14 @@ start:
 	@make setup-build-scripts ## Build and run docs including external content.
 	@make dependencies
 	@make update_websites_sources_module
+	@make build-llms-txt
 	@make server
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
 start-no-pre-build: node_modules  ## Build and run docs excluding external content.
 	@make setup-build-scripts
 	@make build-cdocs
+	@make build-llms-txt
 	@make server
 
 # Leave build scripts as is for local testing
