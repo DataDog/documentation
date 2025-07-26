@@ -23254,6 +23254,17 @@ components:
           maximum: 5
           minimum: 0
           type: number
+        tags:
+          description: List of tag keys used in the asset.
+          example:
+          - env
+          - service
+          - host
+          - datacenter
+          items:
+            description: Tag key used in assets.
+            type: string
+          type: array
         title:
           description: Title of the asset.
           type: string
