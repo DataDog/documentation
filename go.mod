@@ -1,9 +1,11 @@
 module documentation
 
-go 1.14
+go 1.24.4
+
+toolchain go1.24.5
 
 require (
-	github.com/DataDog/websites-modules v1.4.244 // indirect
+	github.com/DataDog/websites-modules v1.5.1-0.20250728163436-2783c7230598 // indirect
 	github.com/DataDog/websites-sources v0.0.0-20250725130558-4b13439577aa // indirect
 )
 
