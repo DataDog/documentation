@@ -3,5 +3,5 @@
 {{- with .Site.GetPage $page -}}
     {{ .Content }}
 {{- else -}}
-    {{ errorf "[include-markdown shortcode] Page %s not found" $page }}
+    {{ errorf "[include-markdown shortcode] Page %s not found in %s" $page .Page.File.Path }}
 {{- end -}}
