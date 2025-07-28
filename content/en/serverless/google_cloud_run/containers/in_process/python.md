@@ -25,7 +25,7 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "path/to/your/python/app.py"]
 ```
 
-#### Explanation
+{{< collapse "Explanation" >}}
 
 1. Copy the Datadog `serverless-init` into your Docker image.
 
@@ -45,13 +45,16 @@ CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "path/to/your/python/app.py"
    CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "path/to/your/python/app.py"]
    ```
 
-#### Alternative configuration {#alt-python}
+{{< /collapse >}}
+
+{{< collapse "Alternative configuration" >}}
 If you already have an entrypoint defined inside your Dockerfile, you can instead modify the CMD argument.
 
 ```dockerfile
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 CMD ["/app/datadog-init", "/dd_tracer/python/bin/ddtrace-run", "python", "path/to/your/python/app.py"]
 ```
+{{< /collapse >}}
 
 ## 3. Setup Logs
 
