@@ -34,13 +34,13 @@ You have two options for instrumenting your Cloud Run containers with Datadog:
 {{< programming-lang-wrapper langs="In-Process,Sidecar" >}}
 
 {{< programming-lang lang="In-Process" >}}
-[//]: # (TODO temp)
-{{< partial name="serverless/getting-started-languages.html" >}}
+Choose a language to instrument in-process.
+{{< partial name="serverless/in-process-languages.html" >}}
 {{< /programming-lang >}}
 
 {{< programming-lang lang="Sidecar" >}}
-[//]: # (TODO temp)
-{{< partial name="serverless/getting-started-languages.html" >}}
+Choose a language to instrument via sidecar.
+{{< partial name="serverless/sidecar-languages.html" >}}
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
