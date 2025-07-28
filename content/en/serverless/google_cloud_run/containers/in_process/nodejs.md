@@ -68,10 +68,7 @@ If you already have an entrypoint defined inside your Dockerfile, you can instea
 
 ```dockerfile
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-RUN npm install --prefix /dd_tracer/node dd-trace  --save
-ENV DD_SERVICE=datadog-demo-run-nodejs
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
+RUN npm install --prefix /dd_tracer/node dd-trace --save
 CMD ["/app/datadog-init", "/nodejs/bin/node", "/path/to/your/app.js"]
 ```
 
