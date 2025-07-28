@@ -1,8 +1,7 @@
 ---
-title: LLM Observability Custom Instrumentation
+title: Custom Instrumentation
 aliases:
     - /tracing/llm_observability/trace_an_llm_application
-    - /llm_observability/
     - /llm_observability/setup
 further_reading:
     - link: 'https://www.datadoghq.com/blog/llm-observability-chain-tracing/'
@@ -37,13 +36,13 @@ To instrument an LLM application:
 
 To trace an LLM application:
 
-1. [Create spans](#creating-spans) in your LLM application code to represent your application's operations. For more information about spans, see [Terms and Concepts][4]. 
-   
+1. [Create spans](#creating-spans) in your LLM application code to represent your application's operations. For more information about spans, see [Terms and Concepts][4].
+
    You can [nest spans](#nesting-spans) to create more useful traces. For additional examples and detailed usage, see [Trace an LLM Application][8] and the [SDK documentation][9].
 
 1. [Annotate your spans](#annotating-spans) with input data, output data, metadata (such as `temperature`), metrics (such as `input_tokens`), and key-value tags (such as `version:1.0.0`).
 1. Optionally, add [advanced tracing features](#advanced-tracing), such as user sessions.
-1. Run your LLM application. 
+1. Run your LLM application.
     - If you used the command-line setup method, the command to run your application should use `ddtrace-run`, as described in [those instructions][6].
     - If you used the in-code setup method, run your application as you normally would.
 
@@ -51,7 +50,7 @@ You can access the resulting traces in the **Traces** tab on the [**LLM Observab
 
 ### Creating spans
 
-To create a span, the LLM Observability SDK provides two options: using a function decorator or using a context manager inline. 
+To create a span, the LLM Observability SDK provides two options: using a function decorator or using a context manager inline.
 
 Using a function decorator is the preferred method. Using a context manager is more advanced and allows more fine-grained control over tracing.
 
@@ -178,7 +177,7 @@ Depending on the complexity of your LLM application, you can also:
 - [Track user sessions][12] by specifying a `session_id`.
 - [Persist a span between contexts or scopes][13] by manually starting and stopping it.
 - [Track multiple LLM applications][14] when starting a new trace, which can be useful for differentiating between services or running multiple experiments.
-- [Submit custom evaluations][15] such as feedback from the users of your LLM application (for example, rating from 1 to 5) with the [SDK][1] or the [API][2]. 
+- [Submit custom evaluations][15] such as feedback from the users of your LLM application (for example, rating from 1 to 5) with the [SDK][1] or the [API][2].
 
 ## Permissions
 
