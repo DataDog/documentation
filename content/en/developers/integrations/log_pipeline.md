@@ -71,11 +71,11 @@ Important: Ensure logs sent through the integration are tagged before being inge
    - Attribute Remapper - Maps from custom log attributes to standard Datadog attributes.
    - Service Remapper - Ensures logs are linked to the correct service name.
    - Date Remapper - Assigns the correct timestamp to logs.
-   - Status Remapper - Maps log statuses to standard Datadog attribute.
+   - Status Remapper - Maps log statuses to standard Datadog attributes.
    - Message Remapper - Assigns logs to the correct message attribute.
-4. If logs are not in JSON format, use a Grok Processor to extract attributes. Grok processors parse out attributes and enrich logs prior to remapping or further processing.
+4. If logs are not in JSON format, use a grok parser processor to extract attributes. Grok processors parse out attributes and enrich logs prior to remapping or further processing.
 
-For advanced processing, conider:
+For advanced processing, consider:
 - Arithmetic Profecessor - Performs calculations on log attributes.
 - String Builder Processor - Concatenates multiple string attributes.
 
@@ -189,7 +189,7 @@ Exporting your log pipeline includes two YAML files:
 Note: Depending on your browser, you may need to adjust your setting to allow file downloads.
 
 ## Upload your log pipeline
-Navigate to the **Integration Developer Platform**, under the Data tab > Submitted logs, specify the log source and upload the two files exported from the previous step.
+Navigate to the Integration Developer Platform, and under the **Data** tab > **Submitted logs**, specify the log source and upload the two files exported from the previous step.
 
 "placeholder for image of data page in pub plat"
 

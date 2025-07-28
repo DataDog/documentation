@@ -31,7 +31,6 @@ Agent integrations are best suited for collecting data from systems or applicati
 - Virtual Private Cloud (VPC)
 Agent-based integrations require publishing and deploying as a Python wheel (.whl).
 
-Agent-based integrations use the [Datadog Agent][17] to submit data through checks written by the developer. Checks can emit [metrics][34], [events][18], and [service checks][25] into a customer's Datadog account. The Agent itself can submit [logs][26] as well, but that is configured outside of the check.
 
 ## Development process
 
@@ -43,14 +42,14 @@ The process to build an Agent-based integration looks like this:
    - Request a Datadog sandbox account through the Datadog Partner Network portal.
    - Install the necessary development tools.
 3. Create your integration
-   - Within your Datadog sandbox, navigate to the **Developer Platform** to **add a new listing**
+   - Within your Datadog sandbox, navigate to **Developer Platform** > **add a new listing**.
    - Fill in the details describing your integration.
 4. Build your agent check and test your integration
-   - Create your Agent Check following the steps below. 
+   - Create your Agent Check following [these steps](#write-an-agent-check). 
 4. Submit for review
-   - Submit your integration content through the **Developer Platform**
-   - Open a GitHub Pull Request with the code for your Agent Check
-   - The Datadog team will schedule a final demo to review your integration
+   - Submit your integration content through the Developer Platform.
+   - Open a GitHub pull request with the code for your Agent check.
+   - The Datadog team will schedule a final demo to review your integration.
 
 ## Prerequisites
 

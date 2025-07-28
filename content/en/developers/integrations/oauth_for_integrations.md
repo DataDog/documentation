@@ -55,7 +55,7 @@ You can include OAuth in a new integration (or add it to an existing integration
 The client is the component of an application that enables users to authorize the application access to the customer's Datadog data. To gain access, the client requires the appropriate access token. 
 1. Before setting up OAuth, follow the Integration Developer Platform documentation to set up your integration. When selecting a configuration method, select **API with OAuth**.
 2. Enter your client details such as the name, onboarding URL, and redirect URIs.
-3. Generate your OAuth client secret
+3. Generate your OAuth client secret.
 4. Save your client secret as it won't show again. You can regenerate a new secret if you lost it.
   > The client you create in this step is a private version of the client, whose credentials you can use for testing. It allows only internal organization authorization. When your integration is published, a published version of this client is created, and you will receive a new set of credentials that enable authorization across any Datadog organization.
 5. Select the appropriate scopes
@@ -82,8 +82,8 @@ To test your OAuth client, complete the following steps:
 
 #### Test that authorization is working properly
 
-7. Within the OAuth client page in the Developer Platform, select **Test Authorization**. This directs you to the onboarding URL and starts the authorization flow from a user's perspective. By clicking this button, the 'domain' parameter is provided on the redirect to the 'onboarding_url'.
-8. Go through the OAuth flow and authorize your integration.
+1. Within the OAuth client page in the Developer Platform, select **Test Authorization**. This directs you to the onboarding URL and starts the authorization flow from a user's perspective. By clicking this button, the `domain` parameter is provided on the redirect to the `onboarding_url`.
+2. Go through the OAuth flow and authorize your integration.
 
 #### Create an API Key
 
@@ -116,10 +116,10 @@ Ensure that you are able to send data in, pull data out, or edit data for each s
 ### Publish the OAuth client
 
 #### Submit your Integration and OAuth client for review
-9. After you’ve completed all the required fields for your integration, submit it for review.
-10. Upon submitting, you will receive a new set of credentials for the public version of your integration. **These credentials are not shown again. Copy them to a secure location.**
-11. When your integration is approved by Datadog and is ready to be released, at that point your OAuth client gets published as well. Once published, your integration tile will be available in your sandbox account but not to any customers. Additionally, your OAuth client can be authorized by any Datadog organization, not just your Sandbox organization.
-12. At this point, Datadog recommends doing final testing with your OAuth client to ensure authorization is working smoothly.
+1. After you’ve completed all the required fields for your integration, submit it for review.
+2. Upon submitting, you will receive a new set of credentials for the public version of your integration. **These credentials are not shown again. Copy them to a secure location.**
+3. When your integration is approved by Datadog and is ready to be released, at that point your OAuth client gets published as well. Once published, your integration tile will be available in your sandbox account but not to any customers. Additionally, your OAuth client can be authorized by any Datadog organization, not just your sandbox organization.
+4. At this point, Datadog recommends doing final testing with your OAuth client to ensure authorization is working smoothly.
 
 #### Making changes after submitting your client for publishing
 

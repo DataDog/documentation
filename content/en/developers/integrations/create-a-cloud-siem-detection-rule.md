@@ -31,7 +31,7 @@ Follow [best practices](#configuration-best-practices) outlined in this guide to
 
 ### Upload your Detection Rule
 
-Within your integration in the Integration Developer Platform, navigate to the Content tab. From here, select **'Import Detection Rule'** to choose from a list of available detection rules. You can select up to 10 detection rules to include with your integration.
+Within your integration in the Integration Developer Platform, navigate to the Content tab. From here, select **Import Detection Rule** to choose from a list of available detection rules. You can select up to 10 detection rules to include with your integration.
 
 << placeholder image for pub plat content tab >> 
 

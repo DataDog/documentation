@@ -10,15 +10,15 @@ further_reading:
 
 This page provides steps for creating an out-of-the-box (OOTB) integration dashboard in Datadog and best practices to follow during the creation process.
 
-[Datadog Dashboards][1] enable you to efficiently monitor your infrastructure and integrations by displaying and tracking key metrics. Datadog provides a set of OOTB dashboards for many features and integrations. You can access these by viewing your [Dashboard List][12].
+[Datadog Dashboards][1] enable you to monitor your infrastructure and integrations by displaying and tracking key metrics. Datadog provides a set of OOTB dashboards for many features and integrations. You can access these by viewing your [Dashboard List][12].
 
-If you have [created a Datadog integration][2], you must create an out-of-the-box dashboard to help your integration's users more quickly find value in your integration.
+If you have [created a Datadog integration][2], you must create an out-of-the-box dashboard to help your integration's users find value in your integration.
 
 ## Create an integration dashboard
 
 ### Create a dashboard
 
-In your Datadog sandbox, from the [**Dashboard List**][12], click **+ New Dashboard**.
+In your Datadog sandbox, from the [**Dashboard List**][12], click **New Dashboard**.
 
 {{< img src="dashboards/create_dashboard.png" alt="Create a dashboard for your integration" width="80%">}}
 
