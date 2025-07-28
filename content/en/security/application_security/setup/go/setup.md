@@ -6,9 +6,9 @@ aliases:
   - /security/application_security/threats/setup/threat_detection/go
   - /security/application_security/threats_detection/go
 further_reading:
-- link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/appsec"
+- link: "/security/application_security/setup/go/sdk"
   tag: "Documentation"
-  text: "Go Security API docs"
+  text: "App & API Protecion SDK for Go"
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
   text: "Adding user information to traces"
