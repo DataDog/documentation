@@ -38,7 +38,7 @@ Azure Batch Service は、Azure アプリケーション用のマネージド型
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_batch" >}}
+{{< get-metrics-from-git "azure-batch" >}}
 
 
 ### イベント

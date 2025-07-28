@@ -1,13 +1,23 @@
 ---
 title: Entity Types
 disable_toc: false
+further_reading:
+- link: "/internal_developer_portal/software_catalog/set_up/create_entities"
+  tag: "Documentation"
+  text: "Create entities in Software Catalog"
+- link: "/internal_developer_portal/software_catalog/set_up/discover_entities"
+  tag: "Documentation"
+  text: "Learn how entities are discovered in Software Catalog"
+- link: "/internal_developer_portal/software_catalog/set_up/import_entities"
+  tag: "Documentation"
+  text: "Import entities into Software Catalog"
 ---
 
 ## Overview
 
 In Software Catalog, an entity represents the smallest building block of modern microservice-based architecture. As of [schema definition v3.0][1]+, an entity can be an instrumented APM service, a datastore, a system, an API, a queue, or even a custom-defined entity. 
 
-See GitHub for [full schema definitions][1]. 
+See GitHub for [full schema definitions][2]. 
 
 ## Entity types
 
@@ -395,10 +405,12 @@ Learn more about [peer tags and inferred entities][4].
 
 You can define custom entity types beyond service, system, datastore, queue, and API. Custom entities allow you to represent any component or resource that is important to your organization but does not fit into the standard categories.
 
+First, define the kinds you want to use with [this API][1]. Only entities of the kinds you've explicitly set up are accepted. After you've defined the allowed kinds, entities of that kind can be defined in the UI or programmatically sent through the existing [Software Catalog APIs][2], [GitHub integration][4], and [Terraform module][3]. In the example below, a user is declaring a library with links, tags, and owning teams.
+
 Example YAML:
   {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
   apiVersion: v3
-  kind: custom.library
+  kind: library
   metadata:
     name: my-library
     displayName: My Library
@@ -433,10 +445,21 @@ Example YAML:
         type: operator
   {{< /code-block >}}
 
+[1]: /api/latest/software-catalog/#create-or-update-kinds
+[2]: /api/latest/software-catalog/#create-or-update-entities
+[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/software_catalog
+[4]: /integrations/github/
+
 {{% /tab %}}
 
 {{< /tabs >}}
 
+[1]: /internal_developer_portal/software_catalog/entity_model
+[2]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
+[3]: https://docs.datadoghq.com/api/latest/software-catalog/#create-or-update-entities
 
-[1]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
-[2]: /tracing/services/inferred_services/?tab=agentv7551#naming-inferred-entities
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+

@@ -1550,6 +1550,13 @@ components:
           example: host
           nullable: true
           type: string
+        type:
+          description: The type of variable. This is to differentiate between filter
+            variables (interpolated in query) and group by variables (interpolated
+            into group by).
+          example: group
+          nullable: true
+          type: string
       required:
       - name
       type: object
@@ -4271,7 +4278,10 @@ components:
           type: array
       type: object
     HourlyUsageAttributionUsageType:
-      description: Supported products for hourly usage attribution requests.
+      description: 'Supported products for hourly usage attribution requests.
+
+        The following values have been **deprecated**: `estimated_indexed_spans_usage`,
+        `estimated_ingested_spans_usage`.'
       enum:
       - api_usage
       - apm_fargate_usage
@@ -4314,6 +4324,7 @@ components:
       - ingested_spans_bytes_usage
       - invocations_usage
       - lambda_traced_invocations_usage
+      - llm_observability_usage
       - logs_indexed_15day_usage
       - logs_indexed_180day_usage
       - logs_indexed_1day_usage
@@ -4328,14 +4339,20 @@ components:
       - mobile_app_testing_usage
       - ndm_netflow_usage
       - npm_host_usage
+      - network_device_wireless_usage
       - obs_pipeline_bytes_usage
       - obs_pipelines_vcpu_usage
       - online_archive_usage
+      - product_analytics_session_usage
       - profiled_container_usage
       - profiled_fargate_usage
       - profiled_host_usage
+      - published_app
       - rum_browser_mobile_sessions_usage
+      - rum_ingested_usage
+      - rum_investigate_usage
       - rum_replay_sessions_usage
+      - rum_session_replay_add_on_usage
       - sca_fargate_usage
       - sds_scanned_bytes_usage
       - serverless_apps_usage
@@ -4388,6 +4405,7 @@ components:
       - INGESTED_SPANS_BYTES_USAGE
       - INVOCATIONS_USAGE
       - LAMBDA_TRACED_INVOCATIONS_USAGE
+      - LLM_OBSERVABILITY_USAGE
       - LOGS_INDEXED_15DAY_USAGE
       - LOGS_INDEXED_180DAY_USAGE
       - LOGS_INDEXED_1DAY_USAGE
@@ -4401,15 +4419,21 @@ components:
       - LOGS_INDEXED_CUSTOM_RETENTION_USAGE
       - MOBILE_APP_TESTING_USAGE
       - NDM_NETFLOW_USAGE
+      - NETWORK_DEVICE_WIRELESS_USAGE
       - NPM_HOST_USAGE
       - OBS_PIPELINE_BYTES_USAGE
       - OBS_PIPELINE_VCPU_USAGE
       - ONLINE_ARCHIVE_USAGE
+      - PRODUCT_ANALYTICS_SESSION_USAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_FARGATE_USAGE
       - PROFILED_HOST_USAGE
+      - PUBLISHED_APP_USAGE
       - RUM_BROWSER_MOBILE_SESSIONS_USAGE
+      - RUM_INGESTED_USAGE
+      - RUM_INVESTIGATE_USAGE
       - RUM_REPLAY_SESSIONS_USAGE
+      - RUM_SESSION_REPLAY_ADD_ON_USAGE
       - SCA_FARGATE_USAGE
       - SDS_SCANNED_BYTES_USAGE
       - SERVERLESS_APPS_USAGE
@@ -5263,6 +5287,143 @@ components:
       type: string
       x-enum-varnames:
       - ARITHMETIC_PROCESSOR
+    LogsArrayProcessor:
+      description: 'A processor for extracting, aggregating, or transforming values
+        from JSON arrays within your logs.
+
+        Supported operations are:
+
+        - Select value from matching element
+
+        - Compute array length
+
+        - Append a value to an array'
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        operation:
+          $ref: '#/components/schemas/LogsArrayProcessorOperation'
+        type:
+          $ref: '#/components/schemas/LogsArrayProcessorType'
+      required:
+      - operation
+      - type
+      type: object
+    LogsArrayProcessorOperation:
+      description: Configuration of the array processor operation to perform.
+      oneOf:
+      - $ref: '#/components/schemas/LogsArrayProcessorOperationAppend'
+      - $ref: '#/components/schemas/LogsArrayProcessorOperationLength'
+      - $ref: '#/components/schemas/LogsArrayProcessorOperationSelect'
+    LogsArrayProcessorOperationAppend:
+      description: Operation that appends a value to a target array attribute.
+      properties:
+        preserve_source:
+          default: true
+          description: Remove or preserve the remapped source element.
+          type: boolean
+        source:
+          description: Attribute path containing the value to append.
+          example: network.client.ip
+          type: string
+        target:
+          description: Attribute path of the array to append to.
+          example: sourceIps
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsArrayProcessorOperationAppendType'
+      required:
+      - type
+      - source
+      - target
+      type: object
+    LogsArrayProcessorOperationAppendType:
+      description: Operation type.
+      enum:
+      - append
+      example: append
+      type: string
+      x-enum-varnames:
+      - APPEND
+    LogsArrayProcessorOperationLength:
+      description: Operation that computes the length of a `source` array and stores
+        the result in the `target` attribute.
+      properties:
+        source:
+          description: Attribute path of the array to measure.
+          example: tags
+          type: string
+        target:
+          description: Attribute that receives the computed length.
+          example: tagCount
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsArrayProcessorOperationLengthType'
+      required:
+      - type
+      - source
+      - target
+      type: object
+    LogsArrayProcessorOperationLengthType:
+      description: Operation type.
+      enum:
+      - length
+      example: length
+      type: string
+      x-enum-varnames:
+      - LENGTH
+    LogsArrayProcessorOperationSelect:
+      description: Operation that finds an object in a `source` array using a `filter`,
+        and then extracts a specific value into the `target` attribute.
+      properties:
+        filter:
+          description: Filter condition expressed as `key:value` used to find the
+            matching element.
+          example: name:Referrer
+          type: string
+        source:
+          description: Attribute path of the array to search into.
+          example: httpRequest.headers
+          type: string
+        target:
+          description: Attribute that receives the extracted value.
+          example: referrer
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsArrayProcessorOperationSelectType'
+        value_to_extract:
+          description: Key of the value to extract from the matching element.
+          example: value
+          type: string
+      required:
+      - type
+      - source
+      - target
+      - filter
+      - value_to_extract
+      type: object
+    LogsArrayProcessorOperationSelectType:
+      description: Operation type.
+      enum:
+      - select
+      example: select
+      type: string
+      x-enum-varnames:
+      - SELECT
+    LogsArrayProcessorType:
+      default: array-processor
+      description: Type of logs array processor.
+      enum:
+      - array-processor
+      example: array-processor
+      type: string
+      x-enum-varnames:
+      - ARRAY_PROCESSOR
     LogsAttributeRemapper:
       description: 'The remapper processor remaps any source attribute(s) or tag to
         another target attribute or tag.
@@ -5493,6 +5654,72 @@ components:
       type: string
       x-enum-varnames:
       - DATE_REMAPPER
+    LogsDecoderProcessor:
+      description: 'The decoder processor decodes any source attribute containing
+        a
+
+        base64/base16-encoded UTF-8/ASCII string back to its original value, storing
+        the
+
+        result in a target attribute.'
+      properties:
+        binary_to_text_encoding:
+          $ref: '#/components/schemas/LogsDecoderProcessorBinaryToTextEncoding'
+        input_representation:
+          $ref: '#/components/schemas/LogsDecoderProcessorInputRepresentation'
+        is_enabled:
+          default: false
+          description: Whether the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        source:
+          description: Name of the log attribute with the encoded data.
+          example: encoded.field
+          type: string
+        target:
+          description: Name of the log attribute that contains the decoded data.
+          example: decoded.field
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsDecoderProcessorType'
+      required:
+      - source
+      - target
+      - binary_to_text_encoding
+      - input_representation
+      - type
+      type: object
+    LogsDecoderProcessorBinaryToTextEncoding:
+      description: The encoding used to represent the binary data.
+      enum:
+      - base64
+      - base16
+      example: base64
+      type: string
+      x-enum-varnames:
+      - BASE64
+      - BASE16
+    LogsDecoderProcessorInputRepresentation:
+      description: The original representation of input string.
+      enum:
+      - utf_8
+      - integer
+      example: utf_8
+      type: string
+      x-enum-varnames:
+      - UTF_8
+      - INTEGER
+    LogsDecoderProcessorType:
+      default: decoder-processor
+      description: Type of logs decoder processor.
+      enum:
+      - decoder-processor
+      example: decoder-processor
+      type: string
+      x-enum-varnames:
+      - DECODER_PROCESSOR
     LogsExclusion:
       description: Represents the index exclusion filter object from configuration
         API.
@@ -6160,6 +6387,8 @@ components:
       - $ref: '#/components/schemas/ReferenceTableLogsLookupProcessor'
       - $ref: '#/components/schemas/LogsTraceRemapper'
       - $ref: '#/components/schemas/LogsSpanRemapper'
+      - $ref: '#/components/schemas/LogsArrayProcessor'
+      - $ref: '#/components/schemas/LogsDecoderProcessor'
     LogsQueryCompute:
       description: Define computation for a log query.
       properties:
@@ -8236,10 +8465,14 @@ components:
       - invocations_percentage
       - lambda_traced_invocations_usage
       - lambda_traced_invocations_percentage
+      - llm_observability_usage
+      - llm_observability_percentage
       - mobile_app_testing_percentage
       - mobile_app_testing_usage
       - ndm_netflow_usage
       - ndm_netflow_percentage
+      - network_device_wireless_usage
+      - network_device_wireless_percentage
       - npm_host_usage
       - npm_host_percentage
       - obs_pipeline_bytes_usage
@@ -8248,12 +8481,16 @@ components:
       - obs_pipelines_vcpu_percentage
       - online_archive_usage
       - online_archive_percentage
+      - product_analytics_session_usage
+      - product_analytics_session_percentage
       - profiled_container_usage
       - profiled_container_percentage
       - profiled_fargate_usage
       - profiled_fargate_percentage
       - profiled_host_usage
       - profiled_host_percentage
+      - published_app_usage
+      - published_app_percentage
       - serverless_apps_usage
       - serverless_apps_percentage
       - snmp_usage
@@ -8296,8 +8533,14 @@ components:
       - logs_indexed_3day_percentage
       - logs_indexed_1day_usage
       - logs_indexed_1day_percentage
+      - rum_ingested_usage
+      - rum_ingested_percentage
+      - rum_investigate_usage
+      - rum_investigate_percentage
       - rum_replay_sessions_usage
       - rum_replay_sessions_percentage
+      - rum_session_replay_add_on_usage
+      - rum_session_replay_add_on_percentage
       - rum_browser_mobile_sessions_usage
       - rum_browser_mobile_sessions_percentage
       - ingested_spans_bytes_usage
@@ -8379,10 +8622,14 @@ components:
       - INVOCATIONS_PERCENTAGE
       - LAMBDA_TRACED_INVOCATIONS_USAGE
       - LAMBDA_TRACED_INVOCATIONS_PERCENTAGE
+      - LLM_OBSERVABILITY_USAGE
+      - LLM_OBSERVABILITY_PERCENTAGE
       - MOBILE_APP_TESTING_USAGE
       - MOBILE_APP_TESTING_PERCENTAGE
       - NDM_NETFLOW_USAGE
       - NDM_NETFLOW_PERCENTAGE
+      - NETWORK_DEVICE_WIRELESS_USAGE
+      - NETWORK_DEVICE_WIRELESS_PERCENTAGE
       - NPM_HOST_USAGE
       - NPM_HOST_PERCENTAGE
       - OBS_PIPELINE_BYTES_USAGE
@@ -8391,12 +8638,16 @@ components:
       - OBS_PIPELINES_VCPU_PERCENTAGE
       - ONLINE_ARCHIVE_USAGE
       - ONLINE_ARCHIVE_PERCENTAGE
+      - PRODUCT_ANALYTICS_SESSION_USAGE
+      - PRODUCT_ANALYTICS_SESSION_PERCENTAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_CONTAINER_PERCENTAGE
       - PROFILED_FARGATE_USAGE
       - PROFILED_FARGATE_PERCENTAGE
       - PROFILED_HOST_USAGE
       - PROFILED_HOST_PERCENTAGE
+      - PUBLISHED_APP_USAGE
+      - PUBLISHED_APP_PERCENTAGE
       - SERVERLESS_APPS_USAGE
       - SERVERLESS_APPS_PERCENTAGE
       - SNMP_USAGE
@@ -8439,8 +8690,14 @@ components:
       - LOGS_INDEXED_3DAY_PERCENTAGE
       - LOGS_INDEXED_1DAY_USAGE
       - LOGS_INDEXED_1DAY_PERCENTAGE
+      - RUM_INGESTED_USAGE
+      - RUM_INGESTED_PERCENTAGE
+      - RUM_INVESTIGATE_USAGE
+      - RUM_INVESTIGATE_PERCENTAGE
       - RUM_REPLAY_SESSIONS_USAGE
       - RUM_REPLAY_SESSIONS_PERCENTAGE
+      - RUM_SESSION_REPLAY_ADD_ON_USAGE
+      - RUM_SESSION_REPLAY_ADD_ON_PERCENTAGE
       - RUM_BROWSER_MOBILE_SESSIONS_USAGE
       - RUM_BROWSER_MOBILE_SESSIONS_PERCENTAGE
       - INGESTED_SPANS_BYTES_USAGE
@@ -8455,7 +8712,10 @@ components:
       - SCA_FARGATE_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
-      description: Fields in Usage Summary by tag(s).
+      description: 'Fields in Usage Summary by tag(s).
+
+        The following values have been **deprecated**: `estimated_indexed_spans_usage`,
+        `estimated_indexed_spans_percentage`, `estimated_ingested_spans_usage`, `estimated_ingested_spans_percentage`.'
       properties:
         api_percentage:
           description: The percentage of synthetic API test usage by tag(s).
@@ -8776,6 +9036,14 @@ components:
           description: The Serverless APM usage by tag(s).
           format: double
           type: number
+        llm_observability_percentage:
+          description: The percentage of LLM Observability usage by tag(s).
+          format: double
+          type: number
+        llm_observability_usage:
+          description: The LLM Observability usage by tag(s).
+          format: double
+          type: number
         logs_indexed_15day_percentage:
           description: The percentage of Indexed Logs (15-day Retention) usage by
             tag(s).
@@ -8890,6 +9158,14 @@ components:
           description: The Network Device Monitoring NetFlow usage by tag(s).
           format: double
           type: number
+        network_device_wireless_percentage:
+          description: The percentage of network device wireless usage by tag(s).
+          format: double
+          type: number
+        network_device_wireless_usage:
+          description: The network device wireless usage by tag(s).
+          format: double
+          type: number
         npm_host_percentage:
           description: The percentage of network host usage by tag(s).
           format: double
@@ -8923,6 +9199,14 @@ components:
           description: The online archive usage by tag(s).
           format: double
           type: number
+        product_analytics_session_percentage:
+          description: The percentage of Product Analytics session usage by tag(s).
+          format: double
+          type: number
+        product_analytics_session_usage:
+          description: The Product Analytics session usage by tag(s).
+          format: double
+          type: number
         profiled_container_percentage:
           description: The percentage of profiled container usage by tag(s).
           format: double
@@ -8947,6 +9231,14 @@ components:
           description: The profiled hosts usage by tag(s).
           format: double
           type: number
+        published_app_percentage:
+          description: The percentage of published application usage by tag(s).
+          format: double
+          type: number
+        published_app_usage:
+          description: The published application usage by tag(s).
+          format: double
+          type: number
         rum_browser_mobile_sessions_percentage:
           description: The percentage of RUM Browser and Mobile usage by tag(s).
           format: double
@@ -8955,12 +9247,36 @@ components:
           description: The total RUM Browser and Mobile usage by tag(s).
           format: double
           type: number
+        rum_ingested_percentage:
+          description: The percentage of RUM Ingested usage by tag(s).
+          format: double
+          type: number
+        rum_ingested_usage:
+          description: The total RUM Ingested usage by tag(s).
+          format: double
+          type: number
+        rum_investigate_percentage:
+          description: The percentage of RUM Investigate usage by tag(s).
+          format: double
+          type: number
+        rum_investigate_usage:
+          description: The total RUM Investigate usage by tag(s).
+          format: double
+          type: number
         rum_replay_sessions_percentage:
           description: The percentage of RUM Session Replay usage by tag(s).
           format: double
           type: number
         rum_replay_sessions_usage:
           description: The total RUM Session Replay usage by tag(s).
+          format: double
+          type: number
+        rum_session_replay_add_on_percentage:
+          description: The percentage of RUM Session Replay Add-On usage by tag(s).
+          format: double
+          type: number
+        rum_session_replay_add_on_usage:
+          description: The total RUM Session Replay Add-On usage by tag(s).
           format: double
           type: number
         sca_fargate_percentage:
@@ -11072,19 +11388,24 @@ components:
       example: {}
       properties:
         aggr:
+          deprecated: true
           description: Query aggregator function.
           type: string
         expression:
+          deprecated: true
           description: Query expression.
           type: string
         metric:
+          deprecated: true
           description: Query metric used.
           type: string
         query_index:
+          deprecated: true
           description: Query index from original combined query.
           format: int64
           type: integer
         scope:
+          deprecated: true
           description: Query scope.
           type: string
         unit:
@@ -12679,6 +13000,12 @@ components:
           type: string
         prefix:
           description: The tag/attribute key associated with the template variable.
+          type: string
+        type:
+          description: The type of variable. This is to differentiate between filter
+            variables (interpolated in query) and group by variables (interpolated
+            into group by).
+          nullable: true
           type: string
         visible_tags:
           description: List of visible tag values on the shared dashboard.
@@ -14343,11 +14670,23 @@ components:
       enum:
       - http
       - grpc
+      - ssl
+      - dns
+      - tcp
+      - udp
+      - icmp
+      - websocket
       example: http
       type: string
       x-enum-varnames:
       - HTTP
       - GRPC
+      - SSL
+      - DNS
+      - TCP
+      - UDP
+      - ICMP
+      - WEBSOCKET
     SyntheticsAPITestType:
       default: api
       description: Type of the Synthetic test, `api`.
@@ -15009,9 +15348,6 @@ components:
           description: Username to use for the basic authentication.
           example: my_username
           type: string
-      required:
-      - password
-      - username
       type: object
     SyntheticsBasicAuthWebType:
       default: web
@@ -16396,6 +16732,7 @@ components:
       - name
       - options
       - type
+      - message
       type: object
     SyntheticsMobileTestConfig:
       description: Configuration object for a Synthetic mobile test.
@@ -16944,6 +17281,7 @@ components:
       - assertRequests
       - click
       - extractFromJavascript
+      - extractFromEmailBody
       - extractVariable
       - goToEmailLink
       - goToUrl
@@ -16973,6 +17311,7 @@ components:
       - ASSERT_REQUESTS
       - CLICK
       - EXTRACT_FROM_JAVASCRIPT
+      - EXTRACT_FROM_EMAIL_BODY
       - EXTRACT_VARIABLE
       - GO_TO_EMAIL_LINK
       - GO_TO_URL
@@ -17162,7 +17501,7 @@ components:
       description: Object describing the extra options for a Synthetic test.
       properties:
         accept_self_signed:
-          description: 'For SSL test, whether or not the test should allow self signed
+          description: 'For SSL tests, whether or not the test should allow self signed
 
             certificates.'
           type: boolean
@@ -17171,7 +17510,7 @@ components:
             test.
           type: boolean
         checkCertificateRevocation:
-          description: For SSL test, whether or not the test should fail on revoked
+          description: For SSL tests, whether or not the test should fail on revoked
             certificate in stapled OCSP.
           type: boolean
         ci:
@@ -17182,6 +17521,10 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsDeviceID'
           type: array
+        disableAiaIntermediateFetching:
+          description: For SSL tests, whether or not the test should disable fetching
+            intermediate certificates from AIA.
+          type: boolean
         disableCors:
           description: Whether or not to disable CORS mechanism.
           type: boolean
@@ -17414,6 +17757,9 @@ components:
             example: ''
             type: string
           type: array
+        checkCertificateRevocation:
+          description: Check for certificate revocation.
+          type: boolean
         compressedJsonDescriptor:
           description: A protobuf JSON descriptor that needs to be gzipped first then
             base64 encoded.
@@ -17422,20 +17768,31 @@ components:
           description: A protobuf file that needs to be gzipped first then base64
             encoded.
           type: string
+        disableAiaIntermediateFetching:
+          description: Disable fetching intermediate certificates from AIA.
+          type: boolean
         dnsServer:
           description: DNS server to use for DNS tests.
           type: string
         dnsServerPort:
+          $ref: '#/components/schemas/SyntheticsTestRequestDNSServerPort'
           description: DNS server port to use for DNS tests.
-          type: string
         files:
-          description: Files to be used as part of the request in the test.
+          description: Files to be used as part of the request in the test. Only valid
+            if `bodyType` is `multipart/form-data`.
           items:
             $ref: '#/components/schemas/SyntheticsTestRequestBodyFile'
           type: array
         follow_redirects:
           description: Specifies whether or not the request follows redirects.
           type: boolean
+        form:
+          additionalProperties:
+            description: A single form entry.
+            type: string
+          description: Form to be used as part of the request in the test. Only valid
+            if `bodyType` is `multipart/form-data`.
+          type: object
         headers:
           $ref: '#/components/schemas/SyntheticsTestHeaders'
         host:
@@ -17443,6 +17800,9 @@ components:
           type: string
         httpVersion:
           $ref: '#/components/schemas/SyntheticsTestOptionsHTTPVersion'
+        isMessageBase64Encoded:
+          description: Whether the message is base64 encoded.
+          type: boolean
         message:
           description: Message to send for UDP or WebSocket tests.
           type: string
@@ -17570,6 +17930,15 @@ components:
           description: Date of update of the certificate or key, ISO format.
           type: string
       type: object
+    SyntheticsTestRequestDNSServerPort:
+      description: DNS server port to use for DNS tests.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsTestRequestNumericalDNSServerPort'
+      - $ref: '#/components/schemas/SyntheticsTestRequestVariableDNSServerPort'
+    SyntheticsTestRequestNumericalDNSServerPort:
+      description: Integer DNS server port number to use when performing the test.
+      format: int64
+      type: integer
     SyntheticsTestRequestNumericalPort:
       description: Integer Port number to use when performing the test.
       format: int64
@@ -17591,6 +17960,10 @@ components:
       required:
       - url
       type: object
+    SyntheticsTestRequestVariableDNSServerPort:
+      description: String DNS server port number to use when performing the test.
+        Supports templated variables.
+      type: string
     SyntheticsTestRequestVariablePort:
       description: String Port number to use when performing the test. Supports templated
         variables.
@@ -18824,6 +19197,14 @@ components:
       properties:
         account_billable_usage:
           description: The total account usage.
+          format: int64
+          type: integer
+        account_committed_usage:
+          description: The total account committed usage.
+          format: int64
+          type: integer
+        account_on_demand_usage:
+          description: The total account on-demand usage.
           format: int64
           type: integer
         elapsed_usage_hours:
@@ -20729,6 +21110,16 @@ components:
             in the current date all organizations.
           format: int64
           type: integer
+        llm_observability_min_spend_sum:
+          description: Sum of all LLM observability minimum spend over all hours in
+            the current date for all organizations.
+          format: int64
+          type: integer
+        llm_observability_sum:
+          description: Sum of all LLM observability sessions over all hours in the
+            current date for all organizations.
+          format: int64
+          type: integer
         mobile_rum_lite_session_count_sum:
           deprecated: true
           description: Shows the sum of all mobile lite sessions over all hours in
@@ -20796,6 +21187,11 @@ components:
             2024).
           format: int64
           type: integer
+        network_device_wireless_top99p:
+          description: Shows the 99th percentile of all Network Device Monitoring
+            wireless devices over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         npm_host_top99p:
           description: Shows the 99th percentile of all distinct Cloud Network Monitoring
             hosts (formerly known as Network hosts) over all hours in the current
@@ -20839,6 +21235,11 @@ components:
           items:
             $ref: '#/components/schemas/UsageSummaryDateOrg'
           type: array
+        product_analytics_sum:
+          description: Sum of all product analytics sessions over all hours in the
+            current date for all organizations.
+          format: int64
+          type: integer
         profiling_aas_count_top99p:
           description: Shows the 99th percentile of all profiled Azure app services
             over all hours in the current date for all organizations.
@@ -20847,6 +21248,11 @@ components:
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
             within the current date for all organizations.
+          format: int64
+          type: integer
+        published_app_hwm:
+          description: Shows the high-water mark of all published applications over
+            all hours in the current date for all organizations.
           format: int64
           type: integer
         rum_browser_and_mobile_session_count:
@@ -20871,6 +21277,16 @@ components:
           description: Shows the sum of all browser RUM Session Replay counts over
             all hours in the current date for all organizations (To be introduced
             on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_indexed_sessions_sum:
+          description: Sum of all RUM indexed sessions over all hours in the current
+            date for all organizations.
+          format: int64
+          type: integer
+        rum_ingested_sessions_sum:
+          description: Sum of all RUM ingested sessions over all hours in the current
+            date for all organizations.
           format: int64
           type: integer
         rum_lite_session_count_sum:
@@ -20980,6 +21396,11 @@ components:
           description: Shows the sum of all browser RUM lite sessions over all hours
             in the current date for all organizations (To be deprecated on October
             1st, 2024).
+          format: int64
+          type: integer
+        rum_session_replay_add_on_sum:
+          description: Sum of all RUM session replay add-on sessions over all hours
+            in the current date for all organizations.
           format: int64
           type: integer
         rum_total_session_count_sum:
@@ -21622,6 +22043,16 @@ components:
             in the current date for the given org.
           format: int64
           type: integer
+        llm_observability_min_spend_sum:
+          description: Shows the sum of all LLM Observability minimum spend over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
+        llm_observability_sum:
+          description: Shows the sum of all LLM observability sessions over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         mobile_rum_lite_session_count_sum:
           deprecated: true
           description: Shows the sum of all mobile lite sessions over all hours in
@@ -21689,6 +22120,11 @@ components:
             the current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        network_device_wireless_top99p:
+          description: Shows the 99th percentile of all Network Device Monitoring
+            wireless devices over all hours in the current date for the given org.
+          format: int64
+          type: integer
         npm_host_top99p:
           description: Shows the 99th percentile of all distinct Cloud Network Monitoring
             hosts (formerly known as Network hosts) over all hours in the current
@@ -21727,6 +22163,11 @@ components:
             date for the given org.
           format: int64
           type: integer
+        product_analytics_sum:
+          description: Shows the sum of all product analytics sessions over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         profiling_aas_count_top99p:
           description: Shows the 99th percentile of all profiled Azure app services
             over all hours in the current date for all organizations.
@@ -21740,6 +22181,11 @@ components:
         public_id:
           description: The organization public id.
           type: string
+        published_app_hwm:
+          description: Shows the high-water mark of all published applications over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
         region:
           description: The region of the organization.
           type: string
@@ -21765,6 +22211,16 @@ components:
           description: Shows the sum of all browser RUM Session Replay counts over
             all hours in the current date for the given org (To be introduced on October
             1st, 2024).
+          format: int64
+          type: integer
+        rum_indexed_sessions_sum:
+          description: Shows the sum of all RUM indexed sessions over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
+        rum_ingested_sessions_sum:
+          description: Shows the sum of all RUM ingested sessions over all hours in
+            the current date for the given org.
           format: int64
           type: integer
         rum_lite_session_count_sum:
@@ -21874,6 +22330,11 @@ components:
           description: Shows the sum of all browser RUM lite sessions over all hours
             in the current date for the given org (To be deprecated on October 1st,
             2024).
+          format: int64
+          type: integer
+        rum_session_replay_add_on_sum:
+          description: Shows the sum of all RUM session replay add-on sessions over
+            all hours in the current date for the given org.
           format: int64
           type: integer
         rum_total_session_count_sum:
@@ -22533,6 +22994,16 @@ components:
             1, 2020).
           format: int64
           type: integer
+        llm_observability_agg_sum:
+          description: Sum of all LLM observability sessions for all hours in the
+            current month for all organizations.
+          format: int64
+          type: integer
+        llm_observability_min_spend_agg_sum:
+          description: Minimum spend for LLM observability sessions for all hours
+            in the current month for all organizations.
+          format: int64
+          type: integer
         logs_by_retention:
           $ref: '#/components/schemas/LogsByRetention'
         mobile_rum_lite_session_count_agg_sum:
@@ -22603,6 +23074,11 @@ components:
             2024).
           format: int64
           type: integer
+        network_device_wireless_top99p_sum:
+          description: Shows the 99th percentile of all Network Device Monitoring
+            wireless devices over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         npm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct Cloud Network Monitoring
             hosts (formerly known as Network hosts) over all hours in the current
@@ -22641,6 +23117,11 @@ components:
             month for all organizations.
           format: int64
           type: integer
+        product_analytics_agg_sum:
+          description: Sum of all product analytics sessions for all hours in the
+            current month for all organizations.
+          format: int64
+          type: integer
         profiling_aas_count_top99p_sum:
           description: Shows the 99th percentile of all profiled Azure app services
             over all hours in the current month for all organizations.
@@ -22654,6 +23135,11 @@ components:
         profiling_host_count_top99p_sum:
           description: Shows the 99th percentile of all profiled hosts over all hours
             in the current month for all organizations.
+          format: int64
+          type: integer
+        published_app_hwm_sum:
+          description: Shows the high-water mark of all published applications over
+            all hours in the current month for all organizations.
           format: int64
           type: integer
         rehydrated_indexed_events_agg_sum:
@@ -22691,6 +23177,16 @@ components:
           description: Shows the sum of all browser RUM Session Replay counts over
             all hours in the current month for all organizations (To be introduced
             on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_indexed_sessions_agg_sum:
+          description: Sum of all RUM indexed sessions for all hours in the current
+            month for all organizations.
+          format: int64
+          type: integer
+        rum_ingested_sessions_agg_sum:
+          description: Sum of all RUM ingested sessions for all hours in the current
+            month for all organizations.
           format: int64
           type: integer
         rum_lite_session_count_agg_sum:
@@ -22800,6 +23296,11 @@ components:
           description: Shows the sum of all browser RUM lite sessions over all hours
             in the current month for all organizations (To be deprecated on October
             1st, 2024).
+          format: int64
+          type: integer
+        rum_session_replay_add_on_agg_sum:
+          description: Sum of all RUM session replay add-on sessions for all hours
+            in the current month for all organizations.
           format: int64
           type: integer
         rum_total_session_count_agg_sum:
@@ -24327,6 +24828,7 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            billing_read: View your organization's billing information.
             cases_read: View Cases.
             cases_write: Create and update cases.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
@@ -24340,6 +24842,8 @@ components:
             code_analysis_read: View Code Analysis.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
+            coterm_read: Read terminal recordings.
+            coterm_write: Write terminal recordings.
             create_webhooks: Create webhooks integrations.
             dashboards_embed_share: Create, modify, and delete shared dashboards with
               share type 'embed'.
@@ -24376,10 +24880,6 @@ components:
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View a list of findings that include
               both misconfigurations and identity risks.
-            security_monitoring_notification_profiles_read: View Rule Security Notification
-              rules.
-            security_monitoring_notification_profiles_write: Create, edit, and delete
-              Security Notification rules.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
@@ -24484,6 +24984,7 @@ paths:
             - us3.datadoghq.com
             - us5.datadoghq.com
             - ap1.datadoghq.com
+            - ap2.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -25686,6 +26187,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - dashboards_public_share
+      - AuthZ:
+        - dashboards_embed_share
+      - AuthZ:
+        - dashboards_invite_share
       summary: Create a shared dashboard
       tags:
       - Dashboards
@@ -25704,6 +26209,8 @@ paths:
         operator: OR
         permissions:
         - dashboards_public_share
+        - dashboards_embed_share
+        - dashboards_invite_share
       x-undo:
         operationId: DeletePublicDashboard
         parameters:
@@ -25748,6 +26255,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - dashboards_public_share
+      - AuthZ:
+        - dashboards_embed_share
+      - AuthZ:
+        - dashboards_invite_share
       summary: Revoke a shared dashboard URL
       tags:
       - Dashboards
@@ -25756,6 +26267,8 @@ paths:
         operator: OR
         permissions:
         - dashboards_public_share
+        - dashboards_embed_share
+        - dashboards_invite_share
       x-undo:
         type: idempotent
     get:
@@ -25871,6 +26384,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - dashboards_public_share
+      - AuthZ:
+        - dashboards_embed_share
+      - AuthZ:
+        - dashboards_invite_share
       summary: Update a shared dashboard
       tags:
       - Dashboards
@@ -25880,6 +26397,8 @@ paths:
         operator: OR
         permissions:
         - dashboards_public_share
+        - dashboards_embed_share
+        - dashboards_invite_share
       x-undo:
         type: idempotent
   /api/v1/dashboard/public/{token}/invitation:
@@ -25929,7 +26448,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - dashboards_public_share
+        - dashboards_invite_share
       summary: Revoke shared dashboard invitations
       tags:
       - Dashboards
@@ -25938,7 +26457,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - dashboards_invite_share
       x-undo:
         type: idempotent
     get:
@@ -25991,7 +26510,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - dashboards_public_share
+        - dashboards_invite_share
       summary: Get all invitations for a shared dashboard
       tags:
       - Dashboards
@@ -25999,7 +26518,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - dashboards_invite_share
       x-undo:
         type: safe
     post:
@@ -26059,7 +26578,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - dashboards_public_share
+        - dashboards_invite_share
       summary: Send shared dashboard invitation email
       tags:
       - Dashboards
@@ -26077,7 +26596,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - dashboards_invite_share
       x-undo:
         operationId: DeletePublicDashboardInvitation
         parameters:
@@ -27070,7 +27589,10 @@ paths:
         type: safe
   /api/v1/graph/snapshot:
     get:
-      description: 'Take graph snapshots.
+      description: 'Take graph snapshots. Snapshots are PNG images generated by rendering
+        a specified widget in a web page and capturing it once the data is available.
+        The image is then uploaded to cloud storage.
+
 
         **Note**: When a snapshot is created, there is some delay before it is available.'
       operationId: GetGraphSnapshot
@@ -27263,7 +27785,10 @@ paths:
 
         Retention is 7 days.
 
-        Results are paginated with a max of 1000 results at a time.'
+        Results are paginated with a max of 1000 results at a time.
+
+        **Note:** If the host is an Amazon EC2 instance, `id` is replaced with `aws_id`
+        in the response.'
       operationId: ListHosts
       parameters:
       - description: String to filter search results.
@@ -29775,6 +30300,10 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Search logs
       tags:
       - Logs
@@ -29882,10 +30411,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all indexes
       tags:
       - Logs Indexes
@@ -31165,7 +31690,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - monitors_write
+        - monitors_read
       summary: Validate a monitor
       tags:
       - Monitors
@@ -31174,7 +31699,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - monitors_write
+        - monitors_read
       x-undo:
         type: idempotent
   /api/v1/monitor/{monitor_id}:
@@ -31619,7 +32144,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - monitors_write
+        - monitors_read
       summary: Validate an existing monitor
       tags:
       - Monitors
@@ -31628,7 +32153,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - monitors_write
+        - monitors_read
       x-undo:
         type: idempotent
   /api/v1/monthly_custom_reports:
@@ -32544,14 +33069,16 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - metrics_read
       summary: Search metrics
       tags:
       - Metrics
       x-menu-order: 4
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - metrics_read
       x-undo:
         type: safe
   /api/v1/security_analytics/signals/{signal_id}/add_to_incident:
@@ -35116,6 +35643,95 @@ paths:
         - synthetics_write
       x-undo:
         type: idempotent
+  /api/v1/synthetics/tests/search:
+    get:
+      description: Search for Synthetic tests and Test Suites.
+      operationId: SearchTests
+      parameters:
+      - description: The search query.
+        in: query
+        name: text
+        required: false
+        schema:
+          type: string
+      - description: If true, include the full configuration for each test in the
+          response.
+        in: query
+        name: include_full_config
+        required: false
+        schema:
+          type: boolean
+      - description: If true, returns suites instead of tests.
+        in: query
+        name: search_suites
+        required: false
+        schema:
+          type: boolean
+      - description: If true, return only facets instead of full test details.
+        in: query
+        name: facets_only
+        required: false
+        schema:
+          type: boolean
+      - description: The offset from which to start returning results.
+        in: query
+        name: start
+        required: false
+        schema:
+          default: 0
+          format: int64
+          type: integer
+      - description: The maximum number of results to return.
+        in: query
+        name: count
+        required: false
+        schema:
+          default: 50
+          format: int64
+          type: integer
+      - description: The sort order for the results (e.g., `name,asc` or `name,desc`).
+        in: query
+        name: sort
+        required: false
+        schema:
+          default: name,asc
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsListTestsResponse'
+          description: OK - Returns the list of Synthetic tests matching the search.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: Search Synthetic tests
+      tags:
+      - Synthetics
+      x-menu-order: 34
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
+      x-undo:
+        type: safe
   /api/v1/synthetics/tests/trigger:
     post:
       description: Trigger a set of Synthetic tests.
@@ -35655,6 +36271,8 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_global_variable_read
+      - AuthZ:
+        - apm_api_catalog_read
       summary: Get all global variables
       tags:
       - Synthetics
@@ -35663,6 +36281,7 @@ paths:
         operator: OR
         permissions:
         - synthetics_global_variable_read
+        - apm_api_catalog_read
       x-undo:
         type: safe
     post:
@@ -36834,7 +37453,9 @@ paths:
         schema:
           format: date-time
           type: string
-      - description: Usage type to retrieve.
+      - description: 'Usage type to retrieve. The following values have been **deprecated**:
+
+          `estimated_indexed_spans_usage`, `estimated_ingested_spans_usage`.'
         in: query
         name: usage_type
         required: true
@@ -37408,8 +38029,13 @@ paths:
         schema:
           format: date-time
           type: string
-      - description: Comma-separated list of usage types to return, or `*` for all
+      - description: 'Comma-separated list of usage types to return, or `*` for all
           usage types.
+
+          The following values have been **deprecated**:
+
+          `estimated_indexed_spans_usage`, `estimated_indexed_spans_percentage`, `estimated_ingested_spans_usage`,
+          `estimated_ingested_spans_percentage`.'
         in: query
         name: fields
         required: true
@@ -37421,7 +38047,12 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/UsageSortDirection'
-      - description: The field to sort by.
+      - description: 'The field to sort by.
+
+          The following values have been **deprecated**:
+
+          `estimated_indexed_spans_usage`, `estimated_indexed_spans_percentage`, `estimated_ingested_spans_usage`,
+          `estimated_ingested_spans_percentage`.'
         in: query
         name: sort_name
         required: false
@@ -38895,6 +39526,7 @@ paths:
             - us3.datadoghq.com
             - us5.datadoghq.com
             - ap1.datadoghq.com
+            - ap2.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -39002,6 +39634,7 @@ servers:
       - us3.datadoghq.com
       - us5.datadoghq.com
       - ap1.datadoghq.com
+      - ap2.datadoghq.com
       - datadoghq.eu
       - ddog-gov.com
     subdomain:
@@ -39106,13 +39739,18 @@ tags:
 - description: Get a list of IP prefixes belonging to Datadog.
   name: IP Ranges
 - description: 'Manage your Datadog API and application keys. You need an API key
-    and
+    and an
 
-    an application key for a user with the required permissions to interact
+    application key for a user with the required permissions to interact with these
+    endpoints.
 
-    with these endpoints. The full list of API and application keys can be
 
-    seen on your [Datadog API page](https://app.datadoghq.com/account/settings#api).'
+    Consult the following pages to view and manage your keys:
+
+
+    - [API Keys](https://app.datadoghq.com/organization-settings/api-keys)
+
+    - [Application Keys](https://app.datadoghq.com/personal-settings/application-keys)'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/api-app-keys/
@@ -39268,13 +39906,21 @@ tags:
   name: Slack Integration
 - description: Take graph snapshots using the API.
   name: Snapshots
-- description: "Datadog Synthetic Monitoring uses simulated user requests and browser
-    rendering to help you ensure uptime,\nidentify regional issues, and track your
-    application performance. Synthetic tests come in\ntwo different flavors, [API
-    tests](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)\nand [browser
-    tests](https://docs.datadoghq.com/synthetics/browser_tests). You can use Datadog\u2019s
-    API to\nmanage both test types programmatically.\n\nFor more information, see
-    the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/)."
+- description: 'Datadog Synthetic Monitoring uses simulated user requests and browser
+    rendering to help you ensure uptime,
+
+    identify regional issues, and track your application performance. Synthetic tests
+    come in
+
+    two different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)
+
+    and [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You
+    can use Datadog''s API to
+
+    manage both test types programmatically.
+
+
+    For more information, see the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/).'
   name: Synthetics
 - description: 'The tag endpoint allows you to assign tags to hosts,
 

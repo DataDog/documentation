@@ -21,7 +21,7 @@ If you have not set up the RUM iOS SDK yet, follow the [in-app setup instruction
 
 iOS RUM automatically tracks attributes such as user activity, screens, errors, and network requests. See the [RUM Data Collection documentation][3] to learn about the RUM events and default attributes. You can further enrich user session information and gain finer control over the attributes collected by tracking custom events.
 
-### Custom Views
+### Custom views
 
 In addition to [tracking views automatically](#automatically-track-views), you can also track specific distinct views such as `viewControllers` when they become visible and interactive. Stop tracking when the view is no longer visible using the following methods in `RUMMonitor.shared()`:
 
@@ -74,7 +74,7 @@ DDRUMMonitor *rum = [DDRUMMonitor shared];
 
 For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
-### Custom Actions
+### Custom actions
 
 In addition to [tracking actions automatically](#automatically-track-user-actions), you can track specific custom user actions (taps, clicks, and scrolls) with the `addAction(type:name:)` API.
 
@@ -113,7 +113,7 @@ let rum = RUMMonitor.shared()
 
 For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
-### Custom Resources
+### Custom resources
 
 In addition to [tracking resources automatically](#automatically-track-network-requests), you can also track specific custom resources such as network requests or third-party provider APIs. Use the following methods on `RUMMonitor.shared()` to manually collect RUM resources:
 
@@ -163,7 +163,7 @@ rum.stopResource(
 
 For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
-### Custom Errors
+### Custom errors
 
 To track specific errors, notify `RUMMonitor.shared()` when an error occurs using one of following methods:
 
@@ -261,7 +261,7 @@ RUM.enable(
 )
 ```
 
-## Initialization Parameters
+## Initialization parameters
 
 You can use the following properties in `Datadog.Configuration` when creating the Datadog configuration to initialize the library:
 
@@ -370,6 +370,10 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 
 ### Automatically track views
 
+You can automatically track views with UIKit and SwiftUI.
+
+{{% collapse-content title="UIKit" level="h4" expanded=true id="auto-track-views-uikit" %}}
+
 To automatically track views (`UIViewControllers`), use the `uiKitViewsPredicate` option when enabling RUM. By default, views are named with the view controller's class name. To customize it, provide your own implementation of the `predicate` which conforms to `UIKitRUMViewsPredicate` protocol:
 
 {{< tabs >}}
@@ -390,7 +394,7 @@ public protocol DDUIKitRUMViewsPredicate: AnyObject {
 {{% /tab %}}
 {{< /tabs >}}
 
-Inside the `rumView(for:)` implementation, your app should decide if a given `UIViewController` instance should start the RUM view (return value) or not (return `nil`). The returned `RUMView` value must specify the `name` and may provide additional `attributes` for the created RUM view.
+Inside the `rumView(for:)` implementation, your app should decide if a given `UIViewController` instance should start a RUM view (return a value) or not (return `nil`). The returned `RUMView` value must specify the `name` and may provide additional `attributes` for the created RUM view.
 
 For instance, you can configure the predicate to use explicit type check for each view controller in your app:
 
@@ -474,11 +478,137 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: The RUM iOS SDK calls `rumView(for:)` many times while your app is running. It is recommended to keep its implementation fast and single-threaded.
+**Note**: The RUM iOS SDK calls `rumView(for:)` many times while your app is running. Datadog recommends keeping its implementation fast and single-threaded.
+{{% /collapse-content %}}
+
+{{% collapse-content title="SwiftUI" level="h4" expanded=true id="auto-track-views-swiftui" %}}
+
+To automatically track views with SwiftUI, use the `swiftUIViewsPredicate` option when enabling RUM.
+
+The mechanism to extract a SwiftUI view name relies on reflection. As a result, view names may not always be meaningful. If a meaningful name cannot be extracted, a generic name such as `AutoTracked_HostingController_Fallback` or `AutoTracked_NavigationStackController_Fallback` is used.
+
+You can use the default predicate (`DefaultSwiftUIRUMViewsPredicate`) or provide your own implementation of the `SwiftUIRUMViewsPredicate` protocol to customize or filter view names.
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+public protocol SwiftUIRUMViewsPredicate {
+    func rumView(for extractedViewName: String) -> RUMView?
+}
+
+// Example: Custom predicate to ignore fallback names and rename views
+class CustomSwiftUIPredicate: SwiftUIRUMViewsPredicate {
+    func rumView(for extractedViewName: String) -> RUMView? {
+        if extractedViewName == "AutoTracked_HostingController_Fallback" ||
+           extractedViewName == "AutoTracked_NavigationStackController_Fallback" {
+            return nil // Ignore fallback names
+        }
+        if extractedViewName == "MySpecialView" {
+            return RUMView(name: "Special")
+        }
+        return RUMView(name: extractedViewName)
+    }
+}
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+@protocol DDSwiftUIRUMViewsPredicate <NSObject>
+- (DDRUMView * _Nullable)rumViewFor:(NSString * _Nonnull)extractedViewName;
+@end
+
+@interface CustomSwiftUIPredicate : NSObject <DDSwiftUIRUMViewsPredicate>
+@end
+
+@implementation CustomSwiftUIPredicate
+- (DDRUMView * _Nullable)rumViewFor:(NSString * _Nonnull)extractedViewName {
+    if ([extractedViewName isEqualToString:@"AutoTracked_HostingController_Fallback"] ||
+        [extractedViewName isEqualToString:@"AutoTracked_NavigationStackController_Fallback"]) {
+        return nil; // Ignore fallback names
+    }
+    if ([extractedViewName isEqualToString:@"MySpecialView"]) {
+        return [[DDRUMView alloc] initWithName:@"Special" attributes:@{}];
+    }
+    return [[DDRUMView alloc] initWithName:extractedViewName attributes:@{}];
+}
+@end
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+**Notes:**
+- Datadog recommends enabling UIKit view tracking as well, even if your app is built entirely with SwiftUI.
+- Tab bars are not tracked automatically. Use [manual tracking](#custom-views) for each tab view to ensure they are tracked.
+- If you use both automatic and manual tracking, you may see duplicate events. To avoid this, rely on a single instrumentation method or use a custom predicate to filter out duplicates.
+{{% /collapse-content %}}
 
 ### Automatically track user actions
 
-To automatically track user tap actions, set the `uiKitActionsPredicate` option when enabling RUM.
+#### UIKit
+
+To automatically track user tap actions with UIKit, set the `uiKitActionsPredicate` option when enabling RUM.
+
+#### SwiftUI
+
+To automatically track user tap actions in SwiftUI, enable the `swiftUIActionsPredicate` option when enabling RUM.
+
+**Notes:**
+- Datadog recommends enabling UIKit action tracking as well even for pure SwiftUI apps as many interactive components are UIKit under the hood.
+- On tvOS, only press interactions on the remote are tracked. Only a UIKit predicate is needed for this. If you have a pure SwiftUI app but want to track remote presses on tvOS, you should also enable UIKit instrumentation.
+- The implementation differs between iOS 18+ and iOS 17 and below:
+  - **iOS 18 and above:** Most interactions are reliably tracked with correct component names (e.g., `SwiftUI_Button`, `SwiftUI_NavigationLink`).
+  - **iOS 17 and below:** The SDK cannot distinguish between interactive and non-interactive components (for example, Button vs. Label). For that reason, actions are reported as `SwiftUI_Unidentified_Element`.
+- If you use both automatic and manual tracking, you may see duplicate events. This is a known limitation. To avoid this, use only one instrumentation type - either automatic or manual.
+- You can use the default predicate, `DefaultSwiftUIRUMActionsPredicate`, or provide your own to filter or rename actions. You can also disable legacy detection (iOS 17 and below) if you only want reliable iOS 18+ tracking:
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+// Use the default predicate by disabling iOS 17 and below detection
+let predicate = DefaultSwiftUIRUMActionsPredicate(isLegacyDetectionEnabled: false)
+
+// Use your own predicate
+class CustomSwiftUIActionsPredicate: SwiftUIRUMActionsPredicate {
+    func rumAction(for componentName: String) -> RUMAction? {
+        // Custom logic to filter or rename actions
+        return RUMAction(name: componentName)
+    }
+}
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+// Use the default predicate by disabling iOS 17 and below detection
+DDDefaultSwiftUIRUMActionsPredicate *swiftUIActionsPredicate = [[DDDefaultSwiftUIRUMActionsPredicate alloc] initWithIsLegacyDetectionEnabled:NO];
+
+// Use your own predicate
+@protocol DDSwiftUIRUMActionsPredicate <NSObject>
+- (DDRUMAction * _Nullable)rumActionFor:(NSString * _Nonnull)componentName;
+@end
+
+@interface CustomSwiftUIActionsPredicate : NSObject <DDSwiftUIRUMActionsPredicate>
+@end
+
+@implementation CustomSwiftUIActionsPredicate
+- (DDRUMAction * _Nullable)rumActionFor:(NSString * _Nonnull)componentName {
+    // Custom logic to filter or rename actions
+    return [[DDRUMAction alloc] initWithName:componentName attributes:@{}];
+}
+@end
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Action reporting by iOS version
+
+The table below shows how iOS 17 and iOS 18 report different user interactions.
+
+| **Component**    | **iOS 18 reported name**                          | **iOS 17 reported name**             |
+|------------------|---------------------------------------------------|--------------------------------------|
+| Button           | SwiftUI_Button                                    | SwiftUI_Unidentified_Element         |
+| NavigationLink   | NavigationLink                                    | SwiftUI_Unidentified_Element         |
+| Menu             | SwiftUI_Menu (and its items as _UIContextMenuCell)| SwiftUI_Menu (and its items as _UIContextMenuCell) |
+| Link             | SwiftUI_Button                                    | SwiftUI_Unidentified_Element         |
 
 ### Automatically track network requests
 
@@ -816,7 +946,7 @@ Datadog.stopInstance()
 
 Calling this method disables the SDK and all active features, such as RUM. To resume data collection, you must reinitialize the SDK. You can use this API if you want to change configurations dynamically
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

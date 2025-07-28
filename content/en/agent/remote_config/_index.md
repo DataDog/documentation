@@ -20,10 +20,6 @@ algolia:
   tags: ['remote config', 'remote configuration']
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Remote Configuration is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 Remote Configuration is a Datadog capability that allows you to remotely configure and change the behavior of Datadog components (for example, Agents, tracing libraries, and Observability Pipelines Worker) deployed in your infrastructure, for select product features. Use Remote Configuration to apply configurations to Datadog components in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating issue resolution times.
 
@@ -91,10 +87,6 @@ The following products and features are supported with Remote Configuration:
 
 - **Remotely deploy and update [Observability Pipelines Workers][4] (OPW)**: Build and edit pipelines in the Datadog UI, rolling out your configuration changes to OPW instances running in your environment.
 
-### Sensitive Data Scanner (SDS) through the Datadog Agent
-
-- **Redact sensitive information in your logs within your premises (Preview)**: Remotely configure and deploy OOTB Sensitive Data Scanning rules to the Datadog Agent in your environment. See [Sensitive Data Scanner][28] for more information.
-
 ## Security considerations
 
 Datadog implements the following safeguards to protect the confidentiality, integrity, and availability of configurations received and applied by your Datadog components:
@@ -161,8 +153,8 @@ To enable Remote Configuration:
    ```yaml
    datadog:
      apiKey: xxx
-   remoteConfiguration:
-     enabled: true
+     remoteConfiguration:
+       enabled: true
    ```
 
    {{% /tab %}}

@@ -160,11 +160,11 @@ Allocations (v2.3.0+)
 : The number of objects allocated by each method during the profiling period (default: 60s), including allocations which were subsequently freed. This is useful for investigating garbage collection load.<br />
 _Requires:_ [Manual enablement][2]
 
-Heap Live Objects (alpha, v2.3.0+)
+Heap Live Objects (Preview, v2.18.0+)
 : The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
 _Requires: Ruby 3.1+_ and [manual enablement][2]
 
-Heap Live Size (alpha, v2.3.0+)
+Heap Live Size (Preview, v2.18.0+)
 : The amount of heap memory allocated by each method that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
 _Requires: Ruby 3.1+_ and [manual enablement][2]
 
@@ -181,6 +181,7 @@ Once profiling is enabled, the following profile types are collected for [suppor
 
 CPU
 : The time each function spent running on the CPU, including JavaScript and native code.<br />
+: CPU profiling is available on Linux and macOS. The feature is not available on Windows.
 
 Wall Time
 : The elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
@@ -215,6 +216,18 @@ _Requires: .NET Framework (requires Datadog Agent 7.51+) / .NET 5+_
 Live Heap (in beta, v2.22+)
 : A subset of the allocated objects (with their class name) that are still in memory.<br />
 _Requires: .NET 7+_
+
+Outgoing HTTP requests (in Timeline) (in beta v3.19+)
+: Start and end of outgoing HTTP requests with the duration of the different phases (DNS, security handshake, socket, request/response) and possible unexpected redirections.<br />
+_Requires: .NET 7+_
+
+Thread lifetime (in Timeline) (v3.19+)
+: Start and end of threads life to easily detect ThreadPool starvation and short lived threads.<br />
+_Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 5+_
+
+Garbage Collector CPU consumption (v3.19+)
+: The time garbage collector's threads spent running on the CPU.<br />
+_Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 5+_
 
 Note: **Allocations** and **Live Heap** profiling are in beta until .NET 10, where required better statistical allocation sampling will be available.
 

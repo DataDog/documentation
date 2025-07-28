@@ -95,7 +95,7 @@ Hasura Cloud プロジェクトのログ、メトリクス、トレースは、�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "hasura_cloud" >}}
+{{< get-metrics-from-git "hasura-cloud" >}}
 
 
 ### サービスチェック

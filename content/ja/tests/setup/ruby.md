@@ -19,10 +19,6 @@ title: Ruby テスト
 type: multi-code-lang
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">現在、選択されたサイト ({{< region-param key="dd_site_name" >}}) では、CI Visibility はご利用いただけません。</div>
-{{< /site-region >}}
-
 ## 互換性
 
 サポートされている言語:

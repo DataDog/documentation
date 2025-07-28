@@ -14,10 +14,6 @@ further_reading:
 title: RUM을 사용하여 Swift 테스트 계측하기
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility는 현재 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 ## 개요
 
 [테스트 가시성][3]이 Swift에 이미 설정되어 있는지 확인합니다.

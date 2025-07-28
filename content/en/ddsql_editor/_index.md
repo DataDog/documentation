@@ -3,13 +3,17 @@ title: DDSQL Editor
 aliases:
 - /dashboards/ddsql_editor/
 further_reading:
-- link: "/ddsql_editor/guide/ddsql_use_cases"
-  tag: "Guide"
-  text: "Common queries and use cases"
-- link: "/ddsql_reference/ddsql_preview"
+- link: "ddsql_reference/ddsql_default"
   tag: "Documentation"
-  text: "DDSQL Reference (Preview)"
+  text: "DDSQL Reference"
+- link: "https://www.datadoghq.com/blog/advanced-analysis-tools/"
+  tag: "Blog"
+  text: "Explore your data with Sheets, DDSQL Editor, and Notebooks for advanced analysis in Datadog"
 ---
+
+{{< callout url="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/" >}}
+Querying Logs and Metrics through DDSQL is in Preview. Use this form to request access.
+{{< /callout >}} 
 
 ## Overview
 
@@ -25,28 +29,28 @@ Type your question into the search box, and Datadog builds the SQL query for you
 
 ## Use SQL syntax (DDSQL)
 
-DDSQL is a query language for Datadog data. It implements several standard SQL operations, such as `SELECT`, and allows queries against unstructured data, such as [tags][2]. Get exactly the data you want by writing your own `SELECT` statement. Query tags as if they are standard table columns. 
-
-<div class="alert alert-warning">
-  There are two different <strong>variants</strong> of DDSQL. See the syntax documented in <a href="/ddsql_reference/">DDSQL Reference</a>.
-</div>
+DDSQL is a query language for Datadog data. It implements several standard SQL operations, such as `SELECT`, and allows queries against unstructured data, such as [tags][2]. Get exactly the data you want by writing your own `SELECT` statement. Query tags as if they are standard table columns. For more information, see the [DDSQL Reference][6].
 
 {{< code-block lang="sql" >}}
 SELECT instance_type, count(instance_type)
 FROM aws.ec2_instance
-WHERE tags->'region' = 'us-east-1' -- env is a tag, not a column
+WHERE tags->'region' = 'us-east-1' -- region is a tag, not a column
 GROUP BY instance_type
 {{< /code-block >}}
 
-## Explore your infrastructure data
+## Explore your telemetry
 
-View and filter the list of tables and fields in the schema side panel:
+<div class="alert alert-warning">Querying Logs and Metrics through DDSQL is in Preview. Use this <a href="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/">form</a> to request access.</div>
+
+View, filter, and built queries in the Data Explorer.
 
 {{< img src="/ddsql_editor/data-tab-available-tables.png" alt="Side panel showing a list of available tables for querying in the DDSQL Editor" style="width:90%;" >}}
 
 Click a table name to view its columns and relationships:
 
 {{< img src="ddsql_editor/data-tab.png" alt="The data tab showing table information for aws.ec2_instance" style="width:70%;" >}}
+
+For Logs and Metrics, use the query builder to help you generate table functions.
 
 ## Save and share queries
 
@@ -69,7 +73,8 @@ To access the DDSQL Editor app, users need the `ddsql_editor_read` permission. T
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ddsql/editor
-[2]: /ddsql_reference/ddsql_preview/tags
+[2]: /ddsql_reference/ddsql_default/#tags
 [3]: /account_management/rbac/
 [4]: /bits_ai
 [5]: /help/
+[6]: /ddsql_reference/ddsql_default/

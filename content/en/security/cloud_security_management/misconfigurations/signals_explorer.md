@@ -13,7 +13,7 @@ further_reading:
   text: "Learn about supported frameworks and industry benchmarks"
 ---
 
-<div class="alert alert-warning">Due to <a href="/security/upcoming_changes_notification_rules">changes in how notification rules are configured</a>, cloud configuration and infrastructure configuration signals will be deprecated in early 2025.</div>
+<div class="alert alert-warning">Due to <a href="/security/upcoming_changes_notification_rules">changes in how notification rules are configured</a>, cloud configuration and infrastructure configuration signals will be deprecated in the second half of 2025.</div>
 
 ## Overview
 

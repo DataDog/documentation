@@ -303,6 +303,13 @@
       "description": "Create Cloud Cost Management Azure configs returns \"OK\" response"
     }
   ],
+  "CreateCostGCPUsageCostConfig": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Create Cloud Cost Management GCP Usage Cost config returns \"OK\" response"
+    }
+  ],
   "UpdateCostAWSCURConfig": [
     {
       "group": "cloud_cost_management",
@@ -315,6 +322,13 @@
       "group": "cloud_cost_management",
       "suffix": "",
       "description": "Update Cloud Cost Management Azure config returns \"OK\" response"
+    }
+  ],
+  "UpdateCostGCPUsageCostConfig": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Update Cloud Cost Management GCP Usage Cost config returns \"OK\" response"
     }
   ],
   "UploadCustomCostsFile": [
@@ -423,6 +437,13 @@
       "group": "downtimes",
       "suffix": "",
       "description": "Update a downtime returns \"OK\" response"
+    }
+  ],
+  "CreateEvent": [
+    {
+      "group": "events",
+      "suffix": "",
+      "description": "Post an event returns \"OK\" response"
     }
   ],
   "SearchEvents": [
@@ -714,6 +735,11 @@
     },
     {
       "group": "logs_custom_destinations",
+      "suffix": "_1735989579",
+      "description": "Create a Microsoft Sentinel custom destination returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
       "suffix": "_1288180912",
       "description": "Create a Splunk custom destination returns \"OK\" response"
     },
@@ -838,6 +864,13 @@
       "description": "Create a monitor notification rule returns \"OK\" response"
     }
   ],
+  "CreateMonitorUserTemplate": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Create a monitor user template returns \"OK\" response"
+    }
+  ],
   "UpdateMonitorConfigPolicy": [
     {
       "group": "monitors",
@@ -850,6 +883,27 @@
       "group": "monitors",
       "suffix": "",
       "description": "Update a monitor notification rule returns \"OK\" response"
+    }
+  ],
+  "UpdateMonitorUserTemplate": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Update a monitor user template to a new version returns \"OK\" response"
+    }
+  ],
+  "ValidateMonitorUserTemplate": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Validate a monitor user template returns \"OK\" response"
+    }
+  ],
+  "ValidateExistingMonitorUserTemplate": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Validate an existing monitor user template returns \"OK\" response"
     }
   ],
   "UpdateDeviceUserTags": [

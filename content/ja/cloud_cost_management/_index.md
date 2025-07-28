@@ -42,10 +42,6 @@ further_reading:
 title: クラウド コスト マネジメント
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Cloud Cost Management はサポートされていません。</div>
-{{< /site-region >}}
-
 
 {{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Cloud+Cost+Management">}}
 クラウドプロバイダーのコストを調査し、リアルタイムのテレメトリーデータと相関付けることで、クラウドコストの発生源、変動、最適化の機会についての具体的な洞察とアラートを得ることができます。

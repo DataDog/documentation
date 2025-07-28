@@ -57,7 +57,7 @@ Pour obtenir des options de surveillance supplémentaires, notamment pour l'inje
 ## Real User Monitoring
 
 ### Analyse d'entonnoirs
-{{< get-metrics-from-git "azure_app_services" >}}
+{{< get-metrics-from-git "azure-app-services" >}}
 
 
 ### Aide

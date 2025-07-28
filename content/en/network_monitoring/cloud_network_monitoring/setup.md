@@ -97,7 +97,7 @@ Cloud Network Monitoring is designed to analyze traffic _between_ network endpoi
 
 To enable Cloud Network Monitoring with the Datadog Agent, use the following configurations:
 
-1. **If you are using an agent older than v6.14+**, enable [live process collection][1] first, otherwise skip this step.
+1. **If you are using an Agent older than v6.14**, enable [live process collection][1] first, otherwise skip this step.
 
 2. Copy the system-probe example configuration:
 
@@ -481,8 +481,6 @@ To set up CNM on Amazon ECS, see the [Amazon ECS][1] documentation page.
 {{% /tab %}}
 
 {{% tab "ECS Fargate" %}}
-
-<div class="alert alert-info">ECS Fargate for CNM is in Preview. Reach out to your Datadog representative to sign up.</div>
 
 To enable Cloud Network Monitoring on ECS Fargate, use the following instructions:
 

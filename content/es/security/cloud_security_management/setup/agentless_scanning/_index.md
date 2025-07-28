@@ -9,10 +9,6 @@ further_reading:
 title: Activación de de Agentless Scanning
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Agentless Scanning para Cloud Security Management no es compatible con el <a href="/getting_started/site">sitioDatadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Agentless Scanning proporciona visibilidad de las vulnerabilidades que existen dentro de tu infraestructura de nube, sin necesidad de instalar el Datadog Agent. Para obtener más información sobre las capacidades y el funcionamiento de Agentless Scanning, consulta la documentación de [Agentless Scanning][12].
 
 ## Requisitos previos

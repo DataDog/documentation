@@ -126,7 +126,7 @@ Solo los usuarios de Datadog con el [permiso`logs_write_archive`][5] pueden crea
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-1. [Crear una política][1] con las siguientes sentencias de permiso:  
+1. [Crear una política][1] con las siguientes sentencias de permiso:
 
    ```json
    {
@@ -160,7 +160,7 @@ Solo los usuarios de Datadog con el [permiso`logs_write_archive`][5] pueden crea
 2. Edita los nombres de los buckets.
 3. Opcionalmente, especifica las rutas que contienen tus archivos de log.
 4. Adjunta la nueva política al rol de integración de Datadog.
-   * Ve a **Roles** en la consola de AWS IAM.  
+   * Ve a **Roles** en la consola de AWS IAM.
    * Localiza el rol utilizado por la integración de Datadog. Por defecto se llama **DatadogIntegrationRole**, pero el nombre puede variar si tu organización le ha cambiado el nombre. Haz clic en el nombre del rol para abrir la página de resumen del rol.
    * Haz clic en **Add permissions** (Añadir permisos), y luego en **Attach policies** (Adjuntar políticas).
    * Introduce el nombre de la política creada anteriormente.
@@ -391,7 +391,7 @@ Como alternativa, Datadog admite el cifrado del lado del servidor con una CMK de
 
 3. Ve a la pestaña **Properties** (Propiedades) en tu bucket de S3 y selecciona **Default Encryption** (Cifrado por defecto). Elige la opción "AWS-KMS", selecciona tu ARN de CMK y selecciona guardar.
 
-Para cualquier cambio en las claves de KSM existentes, ponte en contacto con el [soporte de Datadog][3] para obtener más ayuda.
+Para cualquier cambio en las claves de KMS existentes, ponte en contacto con el [soporte de Datadog][3] para obtener más ayuda.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
@@ -405,7 +405,7 @@ Para cualquier cambio en las claves de KSM existentes, ponte en contacto con el 
 
 Una vez que los ajustes del archivo se hayan configurado correctamente en tu cuenta de Datadog, tus pipelines de procesamiento comenzarán a enriquecer todos los logs que se ingieran en Datadog. Estos logs se reenvían posteriormente a tu archivo.
 
-Sin embargo, después de crear o actualizar las configuraciones de los archivos, pueden pasar varios minutos antes de que se intente la siguiente carga de archivos. La frecuencia con la que se cargan los archivos puede variar. **Consulta tu bucket de almacenamiento de nuevo en 15 minutos** para asegurarte de que los archivos se están cargando correctamente desde tu cuenta de Datadog. 
+Sin embargo, después de crear o actualizar las configuraciones de los archivos, pueden pasar varios minutos antes de que se intente la siguiente carga de archivos. La frecuencia con la que se cargan los archivos puede variar. **Consulta tu bucket de almacenamiento de nuevo en 15 minutos** para asegurarte de que los archivos se están cargando correctamente desde tu cuenta de Datadog.
 
 Después, si el archivo sigue en estado pendiente, comprueba tus filtros de inclusión para asegurarte de que la consulta es válida y coincide con eventos de log en [Live Tail][14]. Cuando Datadog no consigue cargar logs en un archivo externo, debido a cambios involuntarios en la configuración o los permisos, el archivo de log correspondiente aparece resaltado en la página de configuración.
 

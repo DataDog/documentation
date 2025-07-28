@@ -25,7 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - recopilación de logs
-- so y sistema
+- sistema operativo y sistema
 custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_was/README.md
@@ -42,17 +42,17 @@ public_title: IBM WAS
 short_description: IBM Websphere Application Server es un marco que aloja aplicaciones
   Java.
 supported_os:
-- linux
-- windows
-- macos
+- Linux
+- Windows
+- macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Categoría::Recopilación de logs
-  - Categoría::SO y sistema
-  - SO compatible::Linux
-  - SO compatible::Windows
-  - SO compatible::macOS
+  - Categoría::Sistema operativo y sistema
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::Windows
+  - Sistema operativo compatible::macOS
   - Oferta::Integración
   configuration: README.md#Configuración
   description: IBM Websphere Application Server es un marco que aloja aplicaciones
@@ -63,7 +63,7 @@ tile:
   title: IBM WAS
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+<!--  FUENTE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -72,7 +72,7 @@ Este check monitoriza [IBM Websphere Application Server (WAS)][1] a través del 
 
 ## Configuración
 
-Sigue las instrucciones de abajo para instalar y configurar este check para un Agent que se ejecuta en un host. En el caso de entornos en contenedores, consulta las [Plantillas de integración de Autodiscovery][2] para obtener orientación sobre la aplicación de estas instrucciones.
+Sigue las instrucciones a continuación para instalar y configurar este check para un Agent que se ejecuta en un host. Para entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][2] para obtener orientación sobre la aplicación de estas instrucciones.
 
 La integración de IBM WAS de Datadog recopila los contadores de PMI habilitados del entorno de WebSphere Application Server. La configuración requiere la habilitación del PerfServlet, que brinda una manera para que Datadog recupere datos de rendimiento de WAS.
 
@@ -105,7 +105,7 @@ Una vez realizado este cambio, haz clic en "Apply" (Aplicar) para guardar la con
 
 #### Host
 
-Para configurar este check para un Agent que se ejecuta en un host, haz lo siguiente:
+Para configurar este check para un Agent que se ejecuta en un host:
 
 ##### Recopilación de métricas
 
@@ -115,9 +115,9 @@ Para configurar este check para un Agent que se ejecuta en un host, haz lo sigui
 
 ##### Recopilación de logs
 
-_Disponible para las versiones del Agent a partir de la 6.0_
+_Disponible para la versión 6.0 o posteriores del Agent_
 
-1. La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent; habilítala en el archivo `datadog.yaml`:
+1. La recopilación de logs está deshabilitada por defecto en el Datadog Agent; habilítala en tu archivo `datadog.yaml`:
 
    ```yaml
    logs_enabled: true
@@ -138,11 +138,11 @@ _Disponible para las versiones del Agent a partir de la 6.0_
 [1]: https://github.com/DataDog/integrations-core/blob/master/ibm_was/datadog_checks/ibm_was/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Contenedorizado" %}}
+{{% tab "Contenedores" %}}
 
 #### Contenedores
 
-En el caso de los entornos en contenedores, consulta las [Plantillas de integración de Autodiscovery][1] para obtener orientación sobre la aplicación de los parámetros que se indican abajo.
+En el caso de los entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][1] para obtener orientación sobre la aplicación de los parámetros que se indican a continuación.
 
 ##### Recopilación de métricas
 
@@ -154,9 +154,9 @@ En el caso de los entornos en contenedores, consulta las [Plantillas de integrac
 
 ##### Recopilación de logs
 
-_Disponible para las versiones del Agent a partir de la 6.0_
+_Disponible para la versión 6.0 o posteriores del Agent_
 
-La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Para habilitarla, consulta [Recopilación de logs de Kubernetes][2].
+La recopilación de logs está desactivada por defecto en el Datadog Agent. Para activarla, consulta [Recopilación de logs de Kubernetes][2].
 
 | Parámetro      | Valor                                                |
 | -------------- | ---------------------------------------------------- |
@@ -174,20 +174,20 @@ La recopilación de logs se encuentra deshabilitada de manera predeterminada en 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "ibm_was" >}}
+{{< get-metrics-from-git "ibm-was" >}}
 
 
 ### Eventos
 
 IBM WAS no incluye eventos.
 
-### Checks de servicio
-{{< get-service-checks-from-git "ibm_was" >}}
+### Checks de servicios
+{{< get-service-checks-from-git "ibm-was" >}}
 
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][6].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][6].
 
 
 [1]: https://www.ibm.com/cloud/websphere-application-platform

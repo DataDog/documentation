@@ -13,10 +13,6 @@ further_reading:
   text: "Accelerate security investigations with Datadog Threat Intelligence"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog App and API Protection is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Datadog App and API Protection monitors threats and provides protection against application-level attacks that aim to exploit code-level vulnerabilities. It leverages runtime code execution context, trace and error data, and user attribution.
 
 ## General App and API Protection terms
@@ -78,11 +74,11 @@ threat intelligence
 
 suspicious attackers
 : A precursor to Flagged IPs. Suspicious IPs have met a minimum threshold of attack traffic to be classified as suspicious, but not the threshold for Flagged. Thresholds are not user-configurable.
-: See [Attacker Explorer][17]
+: See [Attackers Explorer][17]
 
 flagged attackers
 : IPs that send large amounts of attack traffic. We recommend reviewing and blocking Flagged IPs. Thresholds are not user-configurable.
-: See [Attacker Explorer][17]
+: See [Attackers Explorer][17]
 
 attacker fingerprint
 : Identifiers computed from request characteristics to track an attacker across multiple requests.

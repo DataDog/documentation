@@ -32,7 +32,7 @@ After you set up [log collection][1], you can customize your collection configur
   - [Exclude at match](#exclude-at-match)
   - [Include at match](#include-at-match)
 - [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
-- [Multi-line aggregation](#multi-line-aggregation)
+- [Multi-line aggregation](#manually-aggregate-multi-line-logs)
 - [Automatically aggregate multi-line logs](#automatically-aggregate-multi-line-logs)
 - [Commonly used log processing rules](#commonly-used-log-processing-rules)
 - [Tail directories using wildcards](#tail-directories-using-wildcards)
@@ -79,6 +79,10 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
+<div class="alert alert-info">
+For more information on Agent Configuration, see <a href="/containers/guide/container-discovery-management/?tab=datadogoperator#agent-configuration">Container Discovery Management</a>.
+</div>
+
 In a Docker environment, use the label `com.datadoghq.ad.logs` on the **container sending the logs you want to filter** in order to specify the `log_processing_rules`, for example:
 
 ```yaml
@@ -101,6 +105,10 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
+
+<div class="alert alert-info">
+For more information on Agent Configuration, see <a href="/containers/guide/container-discovery-management/?tab=datadogoperator#agent-configuration">Container Discovery Management</a>.
+</div>
 
 To configure using Autodiscovery to collect container logs on a given container (with the name `CONTAINER_NAME`) within your pod, add the following annotations to your pod's `log_processing_rules`:
 
@@ -362,7 +370,17 @@ For instance, to scrub user information from the log `User email: foo.bar@exampl
 
 This sends the following log to Datadog: `User email: masked_user@example.com`
 
-## Multi-line aggregation
+## Automatically aggregate multi-line logs
+
+Automatic multi-line detection is helpful when you have many log sources with complex formats or when you don't have time to configure each source individually. This feature automatically detects and aggregates multi-line logs without requiring you to write custom regex patterns.
+
+See the [Auto Multi-line Detection and Aggregation][7] documentation.
+
+For legacy support of the feature, see the [Automatic Multi-line Detection and Aggregation (Legacy)][8] documentation.
+
+## Manually aggregate multi-line logs
+
+Manual multi-line rules give you precise control over log aggregation when you know your log formats. This approach is ideal for ensuring consistent log processing with custom regex patterns tailored to your specific log structure.
 
 If your logs are not sent in JSON and you want to aggregate several lines into a single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line. Use the `multi_line` type in the `log_processing_rules` parameter to aggregates all lines into a single entry until the given pattern is detected again.
 
@@ -467,9 +485,6 @@ More examples:
 | 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}`     |
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                    |
 
-## Automatically aggregate multi-line logs
-
-See the dedicated [Auto Multi-line Detection and Aggregation][7] documentation.
 
 ## Commonly used log processing rules
 
@@ -621,6 +636,21 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 
 **Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the Agent's [status subcommand][6] to troubleshoot any issues.
 
+## Multi-line log aggregation FAQ
+
+**1. When should I use manual multi-line rules vs. automatic multi-line detection?**
+
+If you know the format of your logs, you should use manual multi-line rules for precise control. 
+If you are sending lots of multi-line logs, and you are unsure of their format or don't have the means to configure all sources individually, you should use automatic multi-line detection.
+
+**2. What happens when a multi-line pattern doesn't match any logs?**
+
+All non-JSON log lines are processed individually as separate log entries.
+All JSON-formatted log lines are treated as a single line of logs, and only the first valid JSON format enters the intake; the rest are dropped.
+
+**3. What happens when there are both global rules and integration-specific rules?**
+Integration-specific rules completely override global rules for the particular integration.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -635,3 +665,4 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 [5]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [6]: /agent/configuration/agent-commands/#agent-information
 [7]: /agent/logs/auto_multiline_detection
+[8]: /agent/logs/auto_multiline_detection_legacy

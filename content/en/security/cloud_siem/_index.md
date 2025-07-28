@@ -45,6 +45,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/detect-phishing-activity-amazon-ses/"
   tag: "Blog"
   text: "Amazon SES monitoring: Detect phishing campaigns in the cloud"
+- link: "https://www.datadoghq.com/blog/detection-as-code-cloud-siem/"
+  tag: "Blog"
+  text: "Build, test, and scale detections as code with Datadog Cloud SIEM"
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Security">}}

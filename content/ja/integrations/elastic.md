@@ -166,7 +166,7 @@ Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれて�
 
 ###### カスタムクエリ
 
-The Elasticsearch integration allows you to collect custom metrics through custom queries by using the `custom_queries` configuration option. 
+The Elasticsearch integration allows you to collect custom metrics through custom queries by using the `custom_queries` configuration option.
 
 **Note:** When running custom queries, use a read only account to ensure that the Elasticsearch instance does not change.
 
@@ -529,7 +529,7 @@ Agent コンテナで必要な環境変数
 - `slm_stats` は、**elasticsearch.slm.\*** メトリクスを送信します
 
 ### メトリクス
-{{< get-metrics-from-git "elastic" >}}
+{{< get-metrics-from-git "elasticsearch" >}}
 
 
 ### イベント
@@ -537,7 +537,7 @@ Agent コンテナで必要な環境変数
 Elasticsearch チェックは、Elasticsearch クラスターの全体的なステータスが赤、黄、緑に変化するたびに、Datadog にイベントを送信します。
 
 ### サービスチェック
-{{< get-service-checks-from-git "elastic" >}}
+{{< get-service-checks-from-git "elasticsearch" >}}
 
 
 ## トラブルシューティング

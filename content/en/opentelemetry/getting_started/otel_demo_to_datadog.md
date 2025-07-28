@@ -88,7 +88,6 @@ Complete the following steps to configure these three components.
         command:
           - "--config=/etc/otelcol-config.yml"
           - "--config=/etc/otelcol-config-extras.yml"
-          - "--feature-gates=exporter.datadogexporter.UseLogsAgentExporter"
         environment:
           - DD_SITE_PARAMETER=<Your API Site>
           - DD_API_KEY=<Your API Key>
@@ -100,7 +99,7 @@ Complete the following steps to configure these three components.
     exporters:
       datadog:
         traces:
-          span_name_as_resource_name: true
+          compute_stats_by_span_kind: true
           trace_buffer: 500
         hostname: "otel-collector-docker"
         api:
@@ -117,7 +116,7 @@ Complete the following steps to configure these three components.
     connectors:
       datadog/connector:
         traces:
-          span_name_as_resource_name: true
+          compute_stats_by_span_kind: true
 
     service:
       pipelines:
@@ -174,12 +173,12 @@ Complete the following steps to configure these three components.
         exporters:
           datadog:
             traces:
-              span_name_as_resource_name: true
+              compute_stats_by_span_kind: true
               trace_buffer: 500
             hostname: "otelcol-helm"
             api:
-              site: ${DD_SITE_PARAMETER}
-              key: ${DD_API_KEY}
+              site: ${env:DD_SITE_PARAMETER}
+              key: ${env:DD_API_KEY}
 
         processors:
           resource:
@@ -191,7 +190,7 @@ Complete the following steps to configure these three components.
         connectors:
           datadog/connector:
             traces:
-              span_name_as_resource_name: true
+              compute_stats_by_span_kind: true
 
         service:
           pipelines:
@@ -297,7 +296,7 @@ View all services that are part of the OTel Demo:
 
 {{< img src="/getting_started/opentelemetry/otel_demo/software_catalog_flow.png" alt="View Service Map Flow with all services connected" style="width:90%;" >}}
 
-3. Select the **List** view, then select a service to view a performance summary in the side panel.
+3. Select the **Catalog** view, then select a service to view a performance summary in the side panel.
 
 {{< img src="/getting_started/opentelemetry/otel_demo/software_catalog_service.png" alt="View summary of performance and setup guidance from specific service" style="width:90%;" >}}
 
@@ -311,7 +310,7 @@ Explore traces received from the OTel Demo:
 
 2. Select an indexed span to view the full trace details for this transaction.
 
-{{< img src="/getting_started/opentelemetry/otel_demo/trace_flamegraph.png" alt="Trace view with all spans belonging to that specific transaction" style="width:90%;" >}}
+{{< img src="/getting_started/opentelemetry/otel_demo/trace_waterfall.png" alt="Trace view with all spans belonging to that specific transaction" style="width:90%;" >}}
 
 3. Navigate through the tabs to view additional details:
    - Infrastructure metrics for the services reporting Host Metrics.

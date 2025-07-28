@@ -26,9 +26,6 @@ further_reading:
     Monitoring
 title: Database Monitoring
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
-{{< /site-region >}}
 
 {{< img src="database_monitoring/dbm-overview.png" alt="Database Monitoring" style="width:100%;">}}
 

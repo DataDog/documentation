@@ -131,7 +131,7 @@ Para entornos en contenedores, consulta las [plantillas de integración de Autod
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "ssh_check" >}}
+{{< get-metrics-from-git "ssh" >}}
 
 
 ### Eventos
@@ -139,7 +139,7 @@ Para entornos en contenedores, consulta las [plantillas de integración de Autod
 El check de SSH no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "ssh_check" >}}
+{{< get-service-checks-from-git "ssh" >}}
 
 
 ## Solucionar problemas

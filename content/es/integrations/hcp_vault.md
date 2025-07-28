@@ -58,7 +58,7 @@ tile:
   title: HCP Vault
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -108,7 +108,7 @@ Para activar el streaming de métricas:
 
 Para obtener más detalles sobre contextos e interpretación de métricas, consulta la [guía sobre métricas de HCP Vault][1].
 
-### Checks de servicio
+### Checks de servicios
 
 La integración HCP Vault no incluye checks de servicio.
 
@@ -118,7 +118,7 @@ La integración HCP Vault no incluye eventos.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][6].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][6].
 
 [1]: https://learn.hashicorp.com/collections/vault/cloud
 [2]: https://docs.datadoghq.com/es/account_management/api-app-keys/

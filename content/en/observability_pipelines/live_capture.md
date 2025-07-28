@@ -7,10 +7,6 @@ further_reading:
   text: "Set up pipelines"
 ---
 
-{{< beta-callout url="" header="false" btn_hidden="true">}}
-Live Capture is in Preview.
-{{< /beta-callout >}}
-
 ## Overview
 
 Use Live Capture to see the data a source sends through the pipeline and also the data a processor receives and sends out.

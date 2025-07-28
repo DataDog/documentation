@@ -21,6 +21,7 @@ further_reading:
 - link: "watchdog"
   tag: "Documentation"
   text: "Watchdog"
+site_support_id: overview_pages
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/developer-overview-page/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for the Developer Overview Page!" >}}
@@ -38,7 +39,7 @@ Datadog's Internal Developer Platform (IDP) ships with **overview pages** that s
 
 The developer overview page centralizes the following information about your team and services:
 - Your team's Monitors, Incidents, and SLOs
-- Your Jira tickets and GitHub PRs
+- Your GitHub PRs
 - Your team's Services and Scorecard performance
 - Your Issues, Errors, and Watchdog alerts
 
@@ -46,11 +47,11 @@ The developer overview page centralizes the following information about your tea
 
 #### Get started
 
-The widgets displayed on the developer overview page are powered by [Datadog App Builder][9] and initially show demo data.
+The "My Pull Requests" widget displayed on the developer overview page are powered by [Datadog App Builder][9] and initially show demo data.
 
 To use the developer overview page with your data, [connect your data sources][10]:
 1. Find the developer overview page by selecting the **Overview** tab in IDP and selecting **My Workspace** in the left-hand menu. 
-1. For each widget:
+1. For this widget:
 
    1. Click **+ Connect Data**.
    1. Create a new connection or select an existing one. 
@@ -58,17 +59,16 @@ To use the developer overview page with your data, [connect your data sources][1
    <br>
    After you save your selection, the widget displays data from your connection. You can change the selected connection by clicking Change Connection in the widget.
 
-**Note**: Connecting data is a one-time setup task; the selected connections apply for your entire team.
+<div class="alert alert-info">Connecting data is a one-time setup task; the selected connections apply for your entire team.</div>
    
 #### Personalize your view
 
 Provide values for the filters at the top of the page to personalize your view:
 - **Team**: Name of your [Datadog Team][8] 
 - **Github_Org**: Name of your GitHub Organization
-- **Github_Team**: Name of your GitHub Team
 - **Github_Username**: Your GitHub username
 
-**Note**: These filters persist when you return to **My Workspace**. 
+<div class="alert alert-info">These filter values persist when you return to "My Workspace".</div>
 
 ### Page features
 
@@ -78,15 +78,9 @@ The following widgets are included by default on the developer overview page.
 
 Shows live signals from Datadog [Monitors][6], [Incident Management][3], and [SLOs][7]. Widgets remain empty until these products are enabled.
 
-#### Jira Tickets
+#### GitHub pull requests
 
-Lists open Jira issues assigned to your email. Tickets with the status **Done** are excluded.
-
-#### GitHub PRs
-
-- **My open PRs**: Pull requests you have created.  
-- **My assigned PRs**: Pull requests you are assigned to review.
-- **My team's PRs**: Pull requests opened by teammates in the selected GitHub team.
+Lists open pull requests that you have created and those you are assigned to review, based on the GitHub organization and username you've provided.
 
 #### Team services and scorecard performance
 

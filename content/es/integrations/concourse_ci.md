@@ -90,7 +90,7 @@ Metric Emitter (Datadog):
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "concourse_ci" >}}
+{{< get-metrics-from-git "concourse-ci" >}}
 
 
 ### Eventos

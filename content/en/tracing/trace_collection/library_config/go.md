@@ -7,7 +7,7 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
   tag: "Source Code"
   text: "Source code"
-- link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
+- link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace"
   tag: "External Site"
   text: "Package page"
 - link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace"
@@ -24,7 +24,7 @@ further_reading:
   text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-After you [set up the tracing library with your code, configure the Agent to collect APM data, and activate the Go integration][1], start the tracer and configure the library as desired.
+After you [set up the tracing library with your code, configure the Agent to collect APM data, and activate the Go integration][1], start the tracer and configure the library as desired. {{% tracing-go-v2 %}}
 
 Datadog recommends using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
 
@@ -36,8 +36,7 @@ You may also elect to provide `env`, `service`, and `version` through the tracer
 package main
 
 import (
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
@@ -63,7 +62,7 @@ func main() {
 ```
 
 The Go tracer supports additional environment variables and functions for configuration.
-See all available options in the [configuration documentation][3] (or [configuration documentation v2][20]).
+See all available options in the [configuration documentation][20] (or [configuration documentation v1][3]).
 
 ### Unified service tagging
 
@@ -173,7 +172,7 @@ Configures trace header injection and extraction style. See [Propagating Go Trac
 
 ## Configure APM environment name
 
-The [APM environment name][7] may be configured [in the Agent][8] or using the [WithEnv][3] start option of the tracer.
+The [APM environment name][7] may be configured [in the Agent][8] or using the [WithEnv][20] start option of the tracer.
 
 ## Further reading
 
@@ -197,3 +196,4 @@ The [APM environment name][7] may be configured [in the Agent][8] or using the [
 [19]: /opentelemetry/interoperability/environment_variable_support
 [20]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartOption
 [21]: /tracing/trace_collection/library_config/#traces
+[22]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/contrib

@@ -38,7 +38,7 @@
 
 ### Using AlwaysOn
 
-For AlwaysOn users, the Agent must be installed on a separate server and connected to the cluster through the listener endpoint. This is because information about Availability Group (AG) secondary replicas is collected from the primary replica. Additionally, installing the Agent in this way helps to keep it up and running in the event of a failover.
+For AlwaysOn users, the Agent should be installed on each replica server and connected directly to each replica. The full set of AlwaysOn telemetry is collected from each individual replica, in addition to host-based telemetry (CPU, disk, memory, and so on) for each server.
 
 ```yaml
 instances:
@@ -121,7 +121,9 @@ instances:
 
 ### One Agent connecting to multiple hosts
 It is common to configure a single Agent host to connect to multiple remote database instances (see [Agent installation architectures][1006] for DBM). To connect to multiple hosts, create an entry for each host in the SQL Server integration config.
-In these cases, Datadog recommends limiting the number of instances per Agent to a maximum of 10 database instances to guarantee reliable performance.
+
+<div class="alert alert-info">Datadog recommends using one Agent to monitor no more than 30 database instances.<br /><br />Benchmarks show that one Agent running on a t4g.medium EC2 instance (2 CPUs and 4GB of RAM) can successfully monitor 30 RDS db.t3.medium instances (2 CPUs and 4GB of RAM).</div>
+
 ```yaml
 init_config:
 instances:

@@ -109,14 +109,13 @@ For information and options, read [the .NET tracer documentation][1].
 
 {{< programming-lang lang="go" >}}
 
-The Go tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For more options, see [the Go tracer documentation][1] (or [v2 documentation][2]).
+The Go tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For more options, see [the Go tracer documentation][2] (or [v1 documentation][1]).
 
-This example shows how to retrieve the current tracer span, use it to set user monitoring tags, and enable user blocking capability:
+This example shows how to retrieve the current tracer span, use it to set user monitoring tags, and enable user blocking capability. {{% tracing-go-v2 %}}
 
 ```go
 import (
-  "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/appsec // 2.x
+  "github.com/DataDog/dd-trace-go/v2/appsec"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -130,6 +129,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#SetUser
 [2]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#SetUser
+
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
@@ -485,13 +485,12 @@ void OnUserSignupComplete(string userId, ...)
 
 Starting in dd-trace-go v1.47.0, you can use the Go tracer's API to track user events.
 
-The following examples show how to track login events or custom events (using signup as an example).
+The following examples show how to track login events or custom events (using signup as an example). {{% tracing-go-v2 %}}
 
 {{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```go
 import (
-  "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/appsec" // 2.x
+  "github.com/DataDog/dd-trace-go/v2/appsec"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -512,8 +511,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{% collapse-content title="Login failure" level="h4" expanded="false" id="go-login-failure" %}}
 ```go
 import (
-  "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/appsec" // 2.x
+  "github.com/DataDog/dd-trace-go/v2/appsec"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -530,8 +528,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{% collapse-content title="Custom business logic" level="h4" expanded="false" id="go-custom-business" %}}
 ```go
 import (
-  "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/appsec" // 2.x
+  "github.com/DataDog/dd-trace-go/v2/appsec"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {

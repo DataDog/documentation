@@ -1,6 +1,6 @@
 
 {{/*  Carousel Modal  */}}
-{{ $media := .Params.tile.media | default slice}}
+{{ $media := .Params.media | default slice}}
 {{ $asset_len := ($media | default slice) | len  }}
 {{ $title := .Params.integration_title | default .Title}}
 {{ $app_id := .Params.app_id | default "" }}

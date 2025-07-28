@@ -1,5 +1,7 @@
 ---
 title: Policies
+aliases:
+  - /security/application_security/threats/protection
 disable_toc: false
 ---
 

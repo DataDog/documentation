@@ -106,7 +106,7 @@ The following table shows which RUM capabilities are supported on each platform:
 | Monitor platform-specific vitals | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
 | Global context/attribute tracking in Logs  | {{< X >}} |  |  |  |  |  |  |
 | Client side tracing |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
-| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | Mobile Session Replay is in Preview for native mobile apps. |
+| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  |
 | Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Only partially supported for all **mobile** and **Roku** devices |
 
 ## Supported endpoints for SDK domains
@@ -121,6 +121,7 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 | EU1  | `https://browser-intake-datadoghq.eu`         |
 | US1-FED  | `https://browser-intake-ddog-gov.com`     |
 | AP1  | `https://browser-intake-ap1-datadoghq.com`    |
+| AP2  | `https://browser-intake-ap2-datadoghq.com`    |
 
 ## Explore Datadog RUM
 
@@ -140,7 +141,7 @@ Select an application from the top navigation, or follow the setup instructions 
 
 The [RUM Performance Monitoring summary][1] page provides relevant and actionable insights for both web and mobile applications. You have a tailored experience for each platform that helps you:
 
-- **Focus on key data points** by platform, such as the UI latency for web or mobile crashes
+- **Focus on key datapoints** by platform, such as the UI latency for web or mobile crashes
 - **Monitor application health** through familiar KPIs, such as Core Web Vitals for web apps or hang rate for iOS, to assess app reliability
 - **Dive into investigations directly** from interactive widgets without leaving the page
 

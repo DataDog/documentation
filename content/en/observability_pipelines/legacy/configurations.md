@@ -14,10 +14,6 @@ further_reading:
     text: Set up Observability Pipelines
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
-
 ## Overview
 
 Observability Pipelines Worker configurations can collect, transform, and route your logs from any source to any destination. The configuration file supports YAML, TOML, and JSON. The three main configuration components are sources, transforms, and sinks.

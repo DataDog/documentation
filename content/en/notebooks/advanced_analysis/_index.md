@@ -9,9 +9,11 @@ further_reading:
   text: "Getting Started with Analysis Features"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!">}} 
-  Advanced Analysis is in Preview. To enable, reach out to your Customer Success Manager.
-{{< /callout >}}
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+Notebooks Advanced Analysis is not available in the <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
+</div>
+{{% /site-region %}}
 
 ## Overview
 

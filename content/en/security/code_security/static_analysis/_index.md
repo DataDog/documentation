@@ -50,7 +50,7 @@ To get started, go to the [**Code Security** setup page][12] or see the [Setup d
 {{< /whatsnext >}}
 
 ## Search and filter results
-After setting up Static Code Analysis, a scan is ran upon each commit to a scanned repository. Violations are summarized per repository on the [**Code Security Repositories** page][1]. Click on a repository to analyze **Code Vulnerabilities** and **Code Quality** results from Static Code Analysis.
+After setting up Static Code Analysis, a scan is run on each commit to a scanned repository. Violations are summarized per repository on the [**Code Security Repositories** page][1]. Click on a repository to analyze **Code Vulnerabilities** and **Code Quality** results from Static Code Analysis.
 
 * The **Code Vulnerabilities** tab contains the violations found by Datadog's rules in the [Security category][2].
 * The **Code Quality** tab contains the violations found by Datadog's rules in the [Best Practices, Code Style, Error Prone, or Performance categories][3].
