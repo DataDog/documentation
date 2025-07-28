@@ -3363,22 +3363,18 @@ menu:
       parent: serverless
       identifier: serverless_gcr
       weight: 7
-    - name: Containers (Sidecar)
+    - name: Containers
       url: serverless/google_cloud_run/containers
       parent: serverless_gcr
       weight: 701
-    - name: Containers (In-Process)
-      url: serverless/google_cloud_run/containers_in_process
-      parent: serverless_gcr
-      weight: 702
     - name: Functions
       url: serverless/google_cloud_run/functions
       parent: serverless_gcr
-      weight: 703
+      weight: 702
     - name: Functions (1st generation)
       url: serverless/google_cloud_run/functions_1st_gen
       parent: serverless_gcr
-      weight: 704
+      weight: 703
     - name: Glossary
       url: serverless/glossary
       parent: serverless
@@ -7602,11 +7598,11 @@ menu:
       parent: rum_without_limits
       identifier: rum_without_limits_retention
       weight: 1002
-    # - name: Ownership of Views
-    #   url: real_user_monitoring/ownership_of_views/
-    #   parent: rum
-    #   identifier: rum_ownership_of_views
-    #   weight: 11
+    - name: Ownership of Views
+      url: real_user_monitoring/ownership_of_views/
+      parent: rum
+      identifier: rum_ownership_of_views
+      weight: 11
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum

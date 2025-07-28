@@ -32,8 +32,8 @@ To learn more about how it works, see the [injector guide for Single Step Instru
 When you [install or update the Datadog Agent][1] with **APM Instrumentation** enabled, the Agent instruments your applications by loading the Datadog SDK into supported processes. This enables distributed tracing by capturing and sending trace data from your services without requiring code changes.
 
 After instrumentation, you can optionally:
-- [Configure Unified Service Tags (USTs)][14]
-- Enable additional SDK-dependent products and features, such as Continuous Profiler or Application Security Monitoring
+- [configure Unified Service Tags (USTs)][14]
+- enable additional SDK-dependent products and features, such as Continuous Profiler or Application Security Monitoring
 
 Click on one of the following tiles to learn how to set up SSI for your deployment type:
 

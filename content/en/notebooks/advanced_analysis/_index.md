@@ -15,10 +15,6 @@ Notebooks Advanced Analysis is not available in the <a href="/getting_started/si
 </div>
 {{% /site-region %}}
 
-{{< callout btn_hidden="true" header="Join the Preview!">}} 
-  Advanced Analysis is in Preview. To enable, reach out to your Customer Success Manager.
-{{< /callout >}}
-
 ## Overview
 
 The analysis feature in Notebooks allows you to perform advanced analysis on your Datadog data. You can join multiple datasets, chain queries, and transform your data using either predefined transformations or SQL, while retaining the full capabilities that Notebooks provide.
