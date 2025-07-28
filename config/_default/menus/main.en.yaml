@@ -7598,11 +7598,11 @@ menu:
       parent: rum_without_limits
       identifier: rum_without_limits_retention
       weight: 1002
-    # - name: Ownership of Views
-    #   url: real_user_monitoring/ownership_of_views/
-    #   parent: rum
-    #   identifier: rum_ownership_of_views
-    #   weight: 11
+    - name: Ownership of Views
+      url: real_user_monitoring/ownership_of_views/
+      parent: rum
+      identifier: rum_ownership_of_views
+      weight: 11
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
