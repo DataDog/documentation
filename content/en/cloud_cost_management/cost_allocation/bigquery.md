@@ -32,14 +32,15 @@ The following table presents the list of collected features and the minimal Agen
 
 Cost allocation divides BigQuery costs from your cloud provider into individual queries and workloads associated with them. These divided costs are enriched with tags from queries, projects, and reservations so you can break down costs by any associated dimensions.
 
-### Record enrichment and tagging for understanding costs
+### Query-level tag extraction
 
-CCM enriches BigQuery cost records with several key pieces of information:
+CCM extracts the following tags from BigQuery query logs, allowing you to aggregate on these fields in the explorer:
 
-1. **User identification**: Records are enriched with `user_email` to track which user or service account executed the query
-2. **Reservation tracking**: Records include `reservation_id` to identify which reservation pool provided the compute resources
-3. **Scheduled queries**: Records are tagged with `dts_config_id` for identifying scheduled queries and data transfers
-4. **Orchestration platform**: All BigQuery query-related records are tagged with `orchestrator:bigquery`
+| Tag | Description |
+|---|---|
+| `reservation_id` | The reservation pool that provided compute resources |
+| `user_email` | The user or service account that executed the query |
+| `dts_config_id` | Identifier for scheduled queries and data transfers |
 
 Additionally, CCM provides two special tags for detailed cost analysis:
 
@@ -50,16 +51,8 @@ Additionally, CCM provides two special tags for detailed cost analysis:
 2. **`allocated_resource`**: Indicates the resource type being measured:
    - `slots`: For reservation-based queries
    - `bytes_processed`: For on-demand queries
-
-### Query-level tag extraction
-
-CCM extracts the following tags from BigQuery query logs, allowing you to aggregate on these fields in the explorer:
-
-| Tag | Description |
-|---|---|
-| `reservation_id` | The reservation pool that provided compute resources |
-| `user_email` | The user or service account that executed the query |
-| `dts_config_id` | Identifier for scheduled queries and data transfers |
+   
+All BigQuery query-related records are tagged with `orchestrator:BigQuery`.
 
 ### Compute allocation
 
