@@ -130,7 +130,7 @@ If the gate evaluation was successfully started, a 202 HTTP status code is retur
        "id": "<random_response_uuid>",
         "type": "deployment_gates_evaluation_response",
         "attributes": {
-            "evaluation_id": "6fb8f722-b16d-4aa0-95db-744c85030d60"
+            "evaluation_id": "e9d2f04f-4f4b-494b-86e5-52f03e10c8e9"
         }
     }
 }
@@ -141,7 +141,7 @@ The field `data.attributes.evaluation_id` contains the unique identifier for thi
 An additional API endpoint allows to fetch the gate evaluation status. You can poll this endpoint using the Gate Evaluation ID to fetch the Gate Evaluation status:
 
 ```bash
-curl -X GET "https://api.{{< region-param key="dd_site" >}}/api/unstable/deployments/gates/evaluation/6fb8f722-b16d-4aa0-95db-744c85030d60" \
+curl -X GET "https://api.{{< region-param key="dd_site" >}}/api/unstable/deployments/gates/evaluation/e9d2f04f-4f4b-494b-86e5-52f03e10c8e9" \
 -H "DD-API-KEY: <YOUR_API_KEY>" \
 -H "DD-APPLICATION-KEY: <YOUR_APP_KEY>"
 ```
@@ -157,8 +157,8 @@ When a 200 HTTP response is returned, it has the following format:
        "type": "deployment_gates_evaluation_result_response",
        "attributes": {
            "dry_run": false,
-           "evaluation_id": "6fb8f722-b16d-4aa0-95db-744c85030d60",
-           "evaluation_url": "https://app.{{< region-param key="dd_site" >}}/ci/deployment-gates/evaluations?index=cdgates&query=level%3Agate+%40evaluation_id%3A6fb8f722-b16d-4aa0-95db-744c85030d60",
+           "evaluation_id": "e9d2f04f-4f4b-494b-86e5-52f03e10c8e9",
+           "evaluation_url": "https://app.{{< region-param key="dd_site" >}}/ci/deployment-gates/evaluations?index=cdgates&query=level%3Agate+%40evaluation_id%3Ae9d2f14f-4f4b-494b-86e5-52f03e10c8e9",
            "gate_id": "e140302e-0cba-40d2-978c-6780647f8f1c",
            "gate_status": "pass",
            "rules": [
