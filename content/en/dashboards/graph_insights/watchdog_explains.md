@@ -18,7 +18,7 @@ further_reading:
 
 Watchdog Explains is an investigation assistant that guides you to the root cause of anomalies on timeseries graphs.
 
-In Datadog, an investigation typically starts with graphs, then branches out into investigating individual assets. Watchdog Explains makes investigations more efficient by automatically showing which individual tags account could be responsible for a given spike. This allows you to focus your investigation on problematic areas of your infrastructure or software stack.
+Watchdog Explains makes investigations more efficient by automatically showing which individual tags could be responsible for a given spike. This allows you to focus your investigation on problematic areas of your infrastructure or software stack.
 
 To disable Watchdog Explains, see [Disabling anomaly detection](#disabling-anomaly-detection).
 
@@ -36,7 +36,7 @@ Anomalies can be sharp spikes or drops, but may also be more subtle trends like 
 
 {{< img src="/dashboards/graph_insights/watchdog_explains/investigate_anomaly.png" alt="Watchdog Explains investigation view showing anomaly detection on a dashboard" style="width:100%;" >}}
 
-You can start your investigation from any timeseries graph that uses metric data. When Watchdog Explains detects an anomaly, it highlights the affected region with a pink box. To begin investigating, click **Investigate Anomaly** or click on a datapoint inside a pink highlight, and select **Investigate anomaly root cause**.
+You can start your investigation from any timeseries graph that uses metric data. When Watchdog Explains detects an anomaly, it highlights the affected region with a pink box. To begin investigating, click **Investigate Anomaly**.
 
 This opens a full-screen investigation view where Watchdog analyzes the anomaly and surfaces any tag groups that significantly contributed to the shape or scale of the anomaly. Click on a tag to see how removing or isolating that dimension affects the graph, this can help identify root causes like specific customers, services, or environments.
 
@@ -65,7 +65,8 @@ In this example, Watchdog's tag breakdown makes it clear that this was not a gen
 
 ## Disabling anomaly detection
 
-<div class="alert alert-info">Turning off anomaly detection is a <strong>local view-only change</strong>. Disabling anomalies on a graph affects <strong>only your view</strong> and does not impact what other users see.</div>
+<div class="alert alert-info">You can disable anomaly scanning on any dashboard. This will only affect your view, other dashboard viewers will still see anomalies unless they turn it off
+</div>
 
 {{< img src="/dashboards/graph_insights/watchdog_explains/disable_anomaly_detection.png" alt="Disabling anomaly detection in Watchdog Explains" style="width:100%;" >}}
 
