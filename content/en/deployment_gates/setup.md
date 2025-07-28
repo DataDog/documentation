@@ -188,7 +188,7 @@ Use this script as a starting point. For the API_URL variable, be sure to replac
 # Configuration
 MAX_RETRIES=3
 DELAY_SECONDS=5
-POLL_INTERVAL=10
+POLL_INTERVAL_SECONDS=10
 MAX_POLL_TIME_SECONDS=10800 # 3 hours
 API_URL="https://api.<YOUR_DD_SITE>/api/unstable/deployments/gates/evaluation"
 API_KEY="<YOUR_API_KEY>"
@@ -209,13 +209,14 @@ EOF
 )
 
 # Step 1: Request evaluation
+echo "Requesting evaluation..."
 current_attempt=0
 while [ $current_attempt -lt $MAX_RETRIES ]; do
    current_attempt=$((current_attempt + 1))
    RESPONSE=$(curl -s -w "%{http_code}" -o response.txt -X POST "$API_URL" \
        -H "Content-Type: application/json" \
        -H "DD-API-KEY: $API_KEY" \
-       -H "DD-APP-KEY: $APP_KEY" \
+       -H "DD-APPLICATION-KEY: $APP_KEY" \
        -d "$PAYLOAD")
 
    # Extracts the last 3 digits of the status code
@@ -229,7 +230,7 @@ while [ $current_attempt -lt $MAX_RETRIES ]; do
        continue
 
    elif [ ${HTTP_CODE} -ge 400 ] && [ ${HTTP_CODE} -le 499 ]; then
-       # 4xx errors (except 404) are client errors and not retriable
+       # 4xx errors are client errors and not retriable
        echo "Client error ($HTTP_CODE): $RESPONSE_BODY"
        exit 1
    fi
@@ -251,6 +252,7 @@ if [ $current_attempt -eq $MAX_RETRIES ]; then
 fi
 
 # Step 2: Poll for results
+echo "Polling for results..."
 start_time=$(date +%s)
 poll_count=0
 
@@ -267,19 +269,19 @@ while true; do
 
   RESPONSE=$(curl -s -w "%{http_code}" -o response.txt -X GET "$API_URL/$EVALUATION_ID" \
       -H "DD-API-KEY: $API_KEY" \
-      -H "DD-APP-KEY: $APP_KEY")
+      -H "DD-APPLICATION-KEY: $APP_KEY")
 
   HTTP_CODE=$(echo "$RESPONSE" | tail -c 4)
   RESPONSE_BODY=$(cat response.txt)
 
   if [ ${HTTP_CODE} -eq 404 ]; then
       # Evaluation might not have started yet, retry after a short delay
-      echo "Evaluation not ready yet (404), retrying in $POLL_INTERVAL seconds... (attempt $poll_count, elapsed: ${elapsed_time}s)"
-      sleep $POLL_INTERVAL
+      echo "Evaluation not ready yet (404), retrying in $POLL_INTERVAL_SECONDS seconds... (attempt $poll_count, elapsed: ${elapsed_time}s)"
+      sleep $POLL_INTERVAL_SECONDS
       continue
   elif [ ${HTTP_CODE} -ge 500 ]  &&  [ ${HTTP_CODE} -le 599 ]; then
-      echo "Server error ($HTTP_CODE) while polling, retrying in $POLL_INTERVAL seconds... (attempt $poll_count, elapsed: ${elapsed_time}s)"
-      sleep $POLL_INTERVAL
+      echo "Server error ($HTTP_CODE) while polling, retrying in $POLL_INTERVAL_SECONDS seconds... (attempt $poll_count, elapsed: ${elapsed_time}s)"
+      sleep $POLL_INTERVAL_SECONDS
       continue
   elif [ ${HTTP_CODE} -ge 400 ] && [ ${HTTP_CODE} -le 499 ]; then
       # 4xx errors (except 404) are client errors and not retriable
@@ -298,8 +300,8 @@ while true; do
       exit 1
   else
       # Treat any other status (in_progress, unexpected, etc.) as still in progress
-      echo "Evaluation still in progress (status: $GATE_STATUS), retrying in $POLL_INTERVAL seconds... (attempt $poll_count, elapsed: ${elapsed_time}s)"
-      sleep $POLL_INTERVAL
+      echo "Evaluation still in progress (status: $GATE_STATUS), retrying in $POLL_INTERVAL_SECONDS seconds... (attempt $poll_count, elapsed: ${elapsed_time}s)"
+      sleep $POLL_INTERVAL_SECONDS
       continue
   fi
 done
