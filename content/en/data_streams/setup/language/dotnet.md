@@ -49,7 +49,7 @@ When `DD_DATA_STREAMS_ENABLED` is set to `true`, then:
 
 When `DD_DATA_STREAMS_ENABLED` is set to `false`, then all Data Streams Manager functionality is disabled.
 
-If you have any questions reagarding default-enabled behavior, reach out to your Customer Success Manager.
+If you have any questions regarding default-enabled behavior, reach out to your Customer Success Manager.
 
 {{% /tab %}}
 {{% tab ".NET Tracer < v3.22.0 (Legacy)" %}}
