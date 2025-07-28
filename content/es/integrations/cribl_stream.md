@@ -130,7 +130,7 @@ Utiliza la opción [eliminar el dashboard][10] en la configuración del dashboar
 
 ## Datos recopilados
 ### Métricas
-{{< get-metrics-from-git "cribl_stream" >}}
+{{< get-metrics-from-git "cribl-stream" >}}
 
 ### Eventos
 La integración de Cribl Stream no incluye ningún evento.

@@ -54,38 +54,38 @@ title: 수집된 쿠버네티스(Kubernetes) 데이터
 
 ### 쿠버네티스 DNS
 
-{{< get-metrics-from-git "kube_dns" >}}
+{{< get-metrics-from-git "kube-dns" >}}
 
 ### 쿠버네티스 프록시
 
-{{< get-metrics-from-git "kube_proxy" >}}
+{{< get-metrics-from-git "kube-proxy" >}}
 
 ### Kubernetes API 서버
 
 자세한 내용은 [Kubernetes API 서버][3] 통합 설명서를 참조하세요.
 
-{{< get-metrics-from-git "kube_apiserver_metrics" >}}
+{{< get-metrics-from-git "kube-apiserver-metrics" >}}
 
 ### Kubernetes 컨트롤러 매니저
 
 자세한 내용은 [Kubernetes 컨트롤러 매니저][2] 통합 설명서를 참조하세요.
 
-{{< get-metrics-from-git "kube_controller_manager" >}}
+{{< get-metrics-from-git "kube-controller-manager" >}}
 
 ### Kubernetes 메트릭 서버
 
 자세한 내용은 [Kubernetes 메트릭 서버][4] 통합 설명서를 참조하세요.
 
-{{< get-metrics-from-git "kube_metrics_server" >}}
+{{< get-metrics-from-git "kubernetes_state_core" >}}
 
 ### Kubernetes 스케줄러
 
 자세한 내용은 [Kubernetes 스케줄러][5] 통합 설명서를 참조하세요.
 
-{{< get-metrics-from-git "kube_scheduler" >}}
+{{< get-metrics-from-git "kube-scheduler" >}}
 
 
-## 이벤트 
+## 이벤트
 
 - Backoff
 - Conflict
@@ -126,19 +126,19 @@ title: 수집된 쿠버네티스(Kubernetes) 데이터
 
 자세한 내용은 [Kubernetes 컨트롤러 매니저][2] 통합 설명서를 참조하세요.
 
-{{< get-service-checks-from-git "kube_controller_manager" >}}
+{{< get-service-checks-from-git "kube-controller-manager" >}}
 
 ### Kubernetes 메트릭 서버
 
 자세한 내용은 [Kubernetes 메트릭 서버][4] 통합 설명서를 참조하세요.
 
-{{< get-service-checks-from-git "kube_metrics_server" >}}
+{{< get-service-checks-from-git "kubernetes_state_core" >}}
 
 ### Kubernetes 스케줄러
 
 자세한 내용은 [Kubernetes 스케줄러][5] 통합 설명서를 참조하세요.
 
-{{< get-service-checks-from-git "kube_scheduler" >}}
+{{< get-service-checks-from-git "kube-scheduler" >}}
 
 ### Kubernetes 상태 메트릭 코어
 
@@ -159,7 +159,7 @@ title: 수집된 쿠버네티스(Kubernetes) 데이터
 : 노드의 디스크가 부족한지 여부입니다. 태그: `node` `condition` `status`.
 
 `kubernetes_state.node.disk_pressure`
-: 노드에 디스크 압력이 가해지고 있는지 여부입니다. 태그: `node` `condition` `status`. 
+: 노드에 디스크 압력이 가해지고 있는지 여부입니다. 태그: `node` `condition` `status`.
 
 `kubernetes_state.node.network_unavailable`
 : 노드 네트워크를 사용할 수 없는지 여부입니다. 태그: `node` `condition` `status`.

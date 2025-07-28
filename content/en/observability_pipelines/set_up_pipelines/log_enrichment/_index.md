@@ -3,6 +3,9 @@ title: Log Enrichment
 disable_toc: false
 aliases:
     - /observability_pipelines/log_enrichment/
+private: true
+cascade:
+    private: true
 ---
 
 ## Overview

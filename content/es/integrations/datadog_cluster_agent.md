@@ -91,7 +91,7 @@ Si necesitas configurar el check:
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "datadog_cluster_agent" >}}
+{{< get-metrics-from-git "datadog-cluster-agent" >}}
 
 
 ### Eventos
@@ -99,7 +99,7 @@ Si necesitas configurar el check:
 La integración Datadog Cluster Agent no incluye eventos.
 
 ### Checks de servicios
-{{< get-service-checks-from-git "datadog_cluster_agent" >}}
+{{< get-service-checks-from-git "datadog-cluster-agent" >}}
 
 
 ## Solucionar problemas

@@ -4,7 +4,7 @@ aliases:
 title: Añadir archivos de logs de eventos a la clase Win32_NTLogEvent WMI
 ---
 
-No todos los logs de eventos se encuentran en la clase Win32_NTLogEvent WMI. Debido a que la integración del Visor de eventos sólo puede recopilar eventos de esta clase, debes modificar el Registro de Windows para agregar logs de eventos que se encuentren fuera del contexto de esta clase.
+No todos los logs de eventos están en la clase Win32_NTLogEvent WMI. Debido a que la integración Visor de eventos sólo puede recopilar eventos de esta clase, necesitas modificar el Windows Registry para añadir logs de eventos fuera del contexto de esta clase.
 
 El primer paso es confirmar si se puede o no acceder al archivo de logs a través de Win32_NTLogEvent utilizando la siguiente consulta WMI en Powershell. (Se trata de la misma consulta que el Agent ejecuta para recopilar estos eventos)
 

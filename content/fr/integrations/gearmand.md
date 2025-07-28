@@ -134,7 +134,7 @@ Consultez la section [Collecte de logs Kubernetes][4] pour découvrir comment co
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "gearmand" >}}
+{{< get-metrics-from-git "gearman" >}}
 
 
 ### Événements
@@ -142,7 +142,7 @@ Consultez la section [Collecte de logs Kubernetes][4] pour découvrir comment co
 Le check Gearman n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "gearmand" >}}
+{{< get-service-checks-from-git "gearman" >}}
 
 
 ## Dépannage

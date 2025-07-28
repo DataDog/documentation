@@ -37,7 +37,11 @@ For GitHub repositories, you can run Datadog SCA scans directly on Datadog infra
 [1]: https://app.datadoghq.com/security/configuration/code-security/setup
 
 <div class="alert alert-info">
-Datadog-hosted SCA does not support repositories using <a href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage">Git Large File Storage</a> or file paths with parent directory traversal (<code>..</code>).<br/>Instead, use <b>run SCA scans in your CI Pipelines</b> for these repositories.
+Datadog-hosted SCA does not support repositories that:<br>
+- Use <a href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage">Git Large File Storage</a><br>
+- Contain file paths with parent directory traversal (<code>..</code>)<br>
+- Contain file names longer than 255 characters<br>
+Use CI Pipelines for these repositories.
 </div>
 
 {{% /tab %}}
@@ -412,8 +416,7 @@ This functionality is supported only when using the [Datadog SBOM Generator][1] 
 
 Reachability analysis is available exclusively for Java projects and applies only to a defined set of vetted security advisories. Vulnerabilities not included in this set are excluded from reachability evaluation.
 
-#### Supported advisories
-
+{{% collapse-content title="Supported advisories" level="h4" expanded=true id="id-for-anchoring" %}}
 Static reachability analysis is available for the following advisories:
 - [GHSA-h7v4-7xg3-hxcc](https://osv.dev/vulnerability/GHSA-h7v4-7xg3-hxcc)
 - [GHSA-jfh8-c2jp-5v3q](https://osv.dev/vulnerability/GHSA-jfh8-c2jp-5v3q)
@@ -440,6 +443,22 @@ Static reachability analysis is available for the following advisories:
 - [GHSA-mw36-7c6c-q4q2](https://osv.dev/vulnerability/GHSA-mw36-7c6c-q4q2)
 - [GHSA-hph2-m3g5-xxv4](https://osv.dev/vulnerability/GHSA-hph2-m3g5-xxv4)
 - [GHSA-j9h8-phrw-h4fh](https://osv.dev/vulnerability/GHSA-j9h8-phrw-h4fh)
+- [GHSA-3gm7-v7vw-866c](https://osv.dev/vulnerability/GHSA-3gm7-v7vw-866c)
+- [GHSA-645p-88qh-w398](https://osv.dev/vulnerability/GHSA-645p-88qh-w398)
+- [GHSA-g5h3-w546-pj7f](https://osv.dev/vulnerability/GHSA-g5h3-w546-pj7f)
+- [GHSA-c27h-mcmw-48hv](https://osv.dev/vulnerability/GHSA-c27h-mcmw-48hv)
+- [GHSA-r4x2-3cq5-hqvp](https://osv.dev/vulnerability/GHSA-r4x2-3cq5-hqvp)
+- [GHSA-24rp-q3w6-vc56](https://osv.dev/vulnerability/GHSA-24rp-q3w6-vc56)
+- [GHSA-c9hw-wf7x-jp9j](https://osv.dev/vulnerability/GHSA-c9hw-wf7x-jp9j)
+- [GHSA-4gq5-ch57-c2mg](https://osv.dev/vulnerability/GHSA-4gq5-ch57-c2mg)
+- [GHSA-vmfg-rjjm-rjrj](https://osv.dev/vulnerability/GHSA-vmfg-rjjm-rjrj)
+- [GHSA-crg9-44h2-xw35](https://osv.dev/vulnerability/GHSA-crg9-44h2-xw35)
+- [GHSA-qmqc-x3r4-6v39](https://osv.dev/vulnerability/GHSA-qmqc-x3r4-6v39)
+- [GHSA-4w82-r329-3q67](https://osv.dev/vulnerability/GHSA-4w82-r329-3q67)
+- [GHSA-qr7j-h6gg-jmgc](https://osv.dev/vulnerability/GHSA-qr7j-h6gg-jmgc)
+- [GHSA-9mxf-g3x6-wv74](https://osv.dev/vulnerability/GHSA-9mxf-g3x6-wv74)
+- [GHSA-f3j5-rmmp-3fc5](https://osv.dev/vulnerability/GHSA-f3j5-rmmp-3fc5)
+{{% /collapse-content %}}
 
 [1]: /security/code_security/software_composition_analysis/
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup

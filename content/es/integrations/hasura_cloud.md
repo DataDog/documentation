@@ -96,7 +96,7 @@ Los logs, las métricas, y las trazas de tu proyecto Hasura Cloud se envían aut
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "hasura_cloud" >}}
+{{< get-metrics-from-git "hasura-cloud" >}}
 
 
 ### Checks de servicios

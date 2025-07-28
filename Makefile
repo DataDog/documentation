@@ -68,7 +68,7 @@ build-cdocs:
 	@node ./local/bin/js/cdocs-build.js;
 
 # build .mdoc.md files, then watch for changes
-watch-cdocs: 
+watch-cdocs:
 	@echo "Compiling .mdoc files to HTML";
 	@node ./local/bin/js/cdocs-build.js --watch;
 
@@ -116,7 +116,7 @@ node_modules: package.json yarn.lock
 
 # All the requirements for a full build
 dependencies: clean
-	make hugpython all-examples update_pre_build node_modules build-cdocs placeholders
+	make hugpython all-examples update_pre_build node_modules build-cdocs
 
 integrations_data/extracted/vector:
 	$(call source_repo,vector,https://github.com/vectordotdev/vector.git,master,true,website/)
@@ -134,7 +134,7 @@ placeholders: hugpython update_pre_build
 hugpython: local/etc/requirements3.txt
 	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<;\
 	if [[ "$(CI_COMMIT_REF_NAME)" != "" ]]; then \
-		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.59352473-py3-none-any.whl; \
+		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.70443877-py3-none-any.whl; \
 	fi
 
 update_pre_build: hugpython
@@ -153,6 +153,13 @@ update_websites_sources_module:
 	node_modules/hugo-bin/vendor/hugo mod clean
 	node_modules/hugo-bin/vendor/hugo mod tidy
 	cat go.mod
+	@if [ -n "$(CI_COMMIT_REF_NAME)" ]; then \
+		echo "In ci, vendoring integrations pages for placeholder generation"; \
+		node_modules/hugo-bin/vendor/hugo mod vendor; \
+		cp -rpv _vendor/github.com/DataDog/websites-sources/content/en/integrations/. content/en/integrations/; \
+		rm -rf _vendor; \
+	fi
+
 #######################################################################################################################
 # API Code Examples
 #######################################################################################################################

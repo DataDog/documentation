@@ -195,7 +195,7 @@ The `is_exact_match` conditional variable also supports an empty string for the 
 ```text
 {{#is_exact_match "host.datacenter" ""}}
   This displays if the attribute or tag does not exist or if it's empty
-{{/is_match}}
+{{/is_exact_match}}
 ```
 
 

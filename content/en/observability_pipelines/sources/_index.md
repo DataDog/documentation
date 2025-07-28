@@ -15,18 +15,9 @@ further_reading:
 
 ## Overview
 
-Use Observability Pipelines' sources to receive logs from your different log sources.
+Use Observability Pipelines' sources to receive logs from your different log sources. Sources have different prerequisites and settings. Some sources also need to be configured to send logs to the Observability Pipelines Worker.
 
-Select and set up your source when you build a pipeline in the UI. This is step 3 in the pipeline setup process:
-
-1. Navigate to [Observability Pipelines][1].
-1. Select a template.
-1. Select and set up your source.
-1. Select and set up your destinations.
-1. Set up your processors.
-1. Install the Observability Pipelines Worker.
-
-Sources have different prerequisites and settings. Some sources also need to be configured to send logs to the Observability Pipelines Worker.
+Select a source in the left navigation menu to see more information about it.
 
 ## Standard metadata fields
 

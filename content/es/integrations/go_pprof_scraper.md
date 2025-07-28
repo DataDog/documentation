@@ -104,7 +104,7 @@ La integración de Go-pprof-scraper no crea ninguna métrica.
 La integración de Go-pprof-scraper no incluye ningún evento.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "go_pprof_scraper" >}}
+{{< get-service-checks-from-git "go-pprof-scraper" >}}
 
 
 ## Solucionar problemas

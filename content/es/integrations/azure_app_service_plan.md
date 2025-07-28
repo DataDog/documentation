@@ -66,7 +66,7 @@ Si aún no lo ha hecho, configure [Microsoft Azure integración][1]. No se requi
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_app_service_plan" >}}
+{{ get-metrics-from-git "azure-appserviceplan" }}
 
 
 ### Eventos

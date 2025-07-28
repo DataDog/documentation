@@ -43,7 +43,7 @@ By default, the `mask_all` setting is enabled for all data. With this setting en
 
 #### Mask sensitive inputs
 
-With the `mask_sensitive_inputs` setting enabled, all text and inputs are shown except those considered sensitive, such as password fields.
+With the `mask_sensitive_inputs` setting enabled, all text and inputs are shown except those considered sensitive (passwords, emails, and phone numbers).
 
 <!-- Android -->
 {% if equals($platform, "android") %}
@@ -453,12 +453,6 @@ Privacy overrides affect views and their descendants. This means that even if an
 
 Overrides operate using a "nearest parent" principle: if a view has an override, it uses that setting. Otherwise, it inherits the privacy level from the closest parent in the hierarchy with an override. If no parent has an override, the view defaults to the application's general masking level.
 
-<!-- iOS -->
-{% if equals($platform, "ios") %}
-{% alert %}
-Privacy overrides are not supported in SwiftUI.
-{% /alert %}
-{% /if %}
 
 <!-- Android or iOS -->
 {% if or(equals($platform, "android"), equals($platform, "ios")) %}
@@ -491,13 +485,33 @@ Text(modifier = Modifier
 
 <!-- iOS -->
 {% if equals($platform, "ios") %}
-To override text and input privacy, use `dd.sessionReplayOverrides.textAndInputPrivacy` on a view instance and set a value from the `TextAndInputPrivacyLevel` enum. Setting it to `nil` removes the override.
+To override text and input privacy in UIKit views, use `dd.sessionReplayOverrides.textAndInputPrivacy` on a view instance and set a value from the `TextAndInputPrivacyLevel` enum. Setting it to `nil` removes the override.
 
 ```swift {% filename="AppDelegate.swift" collapsible=true %}
 // Set a text and input override on your view
 myView.dd.sessionReplayOverrides.textAndInputPrivacy = .maskSensitiveInputs
 // Remove a text and input override from your view
 myView.dd.sessionReplayOverrides.textAndInputPrivacy = nil
+```
+
+To override text and input privacy in SwiftUI, wrap your content with `SessionReplayPrivacyView` and configure the `textAndInputPrivacy` parameter. You can combine this with other privacy settings in the same view for better performance.
+
+```swift {% filename="ContentView.swift" collapsible=true %}
+struct ContentView: View {
+    @State private var username = ""
+    @State private var password = ""
+    
+    var body: some View {
+        // Set a text and input override on your SwiftUI content
+        SessionReplayPrivacyView(textAndInputPrivacy: .maskAllInputs) {
+            VStack {
+                Text("User Profile")
+                TextField("Enter name", text: $username)
+                SecureField("Password", text: $password)
+            }
+        }
+    }
+}
 ```
 {% /if %}
 <!-- end iOS -->
@@ -531,13 +545,40 @@ Image(modifier = Modifier
 
 <!-- iOS -->
 {% if equals($platform, "ios") %}
-To override image privacy, use `dd.sessionReplayOverrides.imagePrivacy` on a view instance and set a value from the `ImagePrivacyLevel` enum. Setting it to `nil` removes the override.
+To override image privacy in UIKit views, use `dd.sessionReplayOverrides.imagePrivacy` on a view instance and set a value from the `ImagePrivacyLevel` enum. Setting it to `nil` removes the override.
 
 ```swift {% filename="AppDelegate.swift" collapsible=true %}
 // Set an image override on your view
 myView.dd.sessionReplayOverrides.imagePrivacy = .maskAll
 // Remove an image override from your view
 myView.dd.sessionReplayOverrides.imagePrivacy = nil
+```
+
+To override image privacy in SwiftUI, wrap your content with `SessionReplayPrivacyView` and configure the `imagePrivacy` parameter.
+
+```swift {% filename="ContentView.swift" collapsible=true %}
+struct ProfileView: View {
+    let profileImageURL = URL(string: "https://example.com/profile.jpg")
+    
+    var body: some View {
+        // Set an image privacy override on your SwiftUI content
+        SessionReplayPrivacyView(imagePrivacy: .maskAll) {
+            VStack {
+                Image("userAvatar")
+                    .resizable()
+                    .frame(width: 60, height: 60)
+                    .clipShape(Circle())
+                
+                AsyncImage(url: profileImageURL) { image in
+                    image.resizable()
+                } placeholder: {
+                    ProgressView()
+                }
+                .frame(width: 100, height: 100)
+            }
+        }
+    }
+}
 ```
 {% /if %}
 <!-- end iOS -->
@@ -570,13 +611,41 @@ Column(modifier = Modifier
 
 <!-- iOS -->
 {% if equals($platform, "ios") %}
-To override touch privacy, use `dd.sessionReplayOverrides.touchPrivacy` on a view instance and set a value from the `TouchPrivacyLevel` enum. Setting it to `nil` removes the override.
+To override touch privacy in UIKit views, use `dd.sessionReplayOverrides.touchPrivacy` on a view instance and set a value from the `TouchPrivacyLevel` enum. Setting it to `nil` removes the override.
 
 ```swift {% filename="AppDelegate.swift" collapsible=true %}
 // Set a touch override on your view
 myView.dd.sessionReplayOverrides.touchPrivacy = .hide
 // Remove a touch override from your view
 myView.dd.sessionReplayOverrides.touchPrivacy = nil
+```
+
+To override touch privacy in SwiftUI, wrap your content with `SessionReplayPrivacyView` and configure the `touchPrivacy` parameter.
+
+```swift {% filename="ContentView.swift" collapsible=true %}
+struct SettingsView: View {
+    @State private var sliderValue = 0.5
+    
+    var body: some View {
+        // Set a touch privacy override on your SwiftUI content
+        SessionReplayPrivacyView(touchPrivacy: .hide) {
+            VStack(spacing: 20) {
+                Button("Some Action") {
+                    // Handle action
+                }
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(8)
+                
+                Slider(value: $sliderValue, in: 0...1) {
+                    Text("Some Value")
+                }
+            }
+            .padding()
+        }
+    }
+}
 ```
 {% /if %}
 <!-- end iOS -->
@@ -614,6 +683,7 @@ Column(modifier = Modifier
 
 <!-- iOS -->
 {% if equals($platform, "ios") %}
+In UIKit views, use `dd.sessionReplayOverrides.hide` to hide the element:
 
 ```swift {% filename="AppDelegate.swift" collapsible=true %}
 // Mark a view as hidden
@@ -622,7 +692,104 @@ myView.dd.sessionReplayOverrides.hide = true
 myView.dd.sessionReplayOverrides.hide = false
 ```
 
-**Note**: Setting the `hidden` override to `nil` has the same effect as setting it to `false`—it disables the override.
+In SwiftUI, wrap your content with `SessionReplayPrivacyView` and set the `hide` parameter to `true`:
+
+```swift {% filename="ContentView.swift" collapsible=true %}
+struct PaymentView: View {
+    @State private var cardNumber = ""
+    @State private var cvv = ""
+    
+    var body: some View {
+        // Mark SwiftUI content as hidden
+        SessionReplayPrivacyView(hide: true) {
+            VStack(spacing: 16) {
+                Text("Payment Information")
+                    .font(.headline)
+                
+                TextField("Card Number", text: $cardNumber)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+                SecureField("CVV", text: $cvv)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+                Text("Card ending in 1234")
+                    .foregroundColor(.secondary)
+            }
+            .padding()
+        }
+    }
+}
+```
+
+**Note**: Setting the `hidden` override to `nil` or `false` has the same effect—it disables the override.
+
+### Combining privacy settings in SwiftUI
+
+Combine multiple privacy settings in one `SessionReplayPrivacyView` for different configurations. Datadog recommends **combining options in a single view rather than nesting multiple instances** to avoid adding unnecessary view layers.
+
+```swift {% filename="ContentView.swift" collapsible=true %}
+struct UserProfileView: View {
+    @State private var userBio = ""
+    @State private var cardNumber = ""
+    
+    var body: some View {
+        VStack(spacing: 30) {
+            // Preferred: Combine multiple privacy settings in one view
+            SessionReplayPrivacyView(
+                textAndInputPrivacy: .maskSensitiveInputs,
+                imagePrivacy: .maskNonBundledOnly,
+                touchPrivacy: .show
+            ) {
+                VStack(spacing: 20) {
+                    // User profile section
+                    HStack {
+                        AsyncImage(url: URL(string: "https://example.com/profile.jpg")) { image in
+                            image.resizable()
+                        } placeholder: {
+                            Circle().fill(Color.gray.opacity(0.3))
+                        }
+                        .frame(width: 60, height: 60)
+                        .clipShape(Circle())
+                        
+                        VStack(alignment: .leading) {
+                            Text("John Doe")
+                                .font(.headline)
+                            TextField("Enter bio", text: $userBio)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                        }
+                    }
+                    
+                    Button("Save Profile") {
+                        // Save action
+                        print("Profile saved")
+                    }
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+                }
+                .padding()
+            }
+            
+            // For completely different privacy requirements, use separate `SessionReplayPrivacyView` instances
+            SessionReplayPrivacyView(hide: true) {
+                VStack(spacing: 16) {
+                    Text("Credit Card Information")
+                        .font(.headline)
+                    TextField("Card Number", text: $cardNumber)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                }
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(8)
+            }
+        }
+        .padding()
+    }
+}
+```
+
+**Note**: Each `SessionReplayPrivacyView` introduces an additional native view layer. For optimal performance, prefer combining privacy settings instead of nesting multiple privacy views when possible.
 {% /if %}
 <!-- end iOS -->
 

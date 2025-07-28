@@ -68,7 +68,7 @@ Si vous ne l'avez pas déjà fait, configurez l'[intégration Microsoft Azure][
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "azure_container_apps" >}}
+{{< get-metrics-from-git "azure-container-apps" >}}
 
 
 ### Événements

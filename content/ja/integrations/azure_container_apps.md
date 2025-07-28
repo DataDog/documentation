@@ -68,7 +68,7 @@ Azure Container Apps を使用すると、サーバーレスコンテナを使�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_container_apps" >}}
+{{< get-metrics-from-git "azure-container-apps" >}}
 
 
 ### イベント

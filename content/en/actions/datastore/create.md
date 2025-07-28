@@ -85,6 +85,7 @@ The **Table Options** button allows you to:
 
 Datastores have the following limitations:
 
+- Your organization can have up to 50 datastores.
 - A datastore can contain up to 5,000 rows.
 - A primary key column of type `string` is required and must uniquely identify each row.
 - Each row can be up to 100 KB in size.

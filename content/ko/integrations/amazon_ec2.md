@@ -220,7 +220,7 @@ Datadog에서는 AWS Marketplace에서 Datadog 에이전트용 EC2 Image Builder
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_ec2" >}}
+{{< get-metrics-from-git "amazon-ec2" >}}
 
 
 AWS에서 검색된 각 메트릭에는 AWS 콘솔에 나타나는 것과 동일한 태그가 할당됩니다, 호스트 이름, 보안 그룹 등을 포함하되 이에 국한되지 않습니다.
@@ -230,7 +230,7 @@ AWS에서 검색된 각 메트릭에는 AWS 콘솔에 나타나는 것과 동일
    - `aws.ec2.host_ok`는 기본적으로 수집됩니다. Amazon EC2 통합 메트릭 수집을 비활성화한 경우에도 인프라스트럭처 목록에 예기치 않은 호스트가 나타날 수 있습니다. 원하는 호스트만 모니터링하려면 `datadog:true` 등 AWS 태그를 해당 EC2 인스턴스에 할당합니다. 그런 다음 [Datadog AWS 통합 페이지][2]의 **메트릭 수집** 탭의 **메트릭 수집을 특정 리소스로 제한**에서 해당 태그를 지정합니다. 
 
 ### 서비스 점검
-{{< get-service-checks-from-git "amazon_ec2" >}}
+{{< get-service-checks-from-git "amazon-ec2" >}}
 
 
 ## 즉시 사용 가능한 모니터링

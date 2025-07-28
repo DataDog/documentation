@@ -28,7 +28,32 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 ### Configure the Datadog-Databricks integration
 
 {{< tabs >}}
-{{% tab "Use a Personal Access Token" %}}
+
+{{% tab "Use a Service Principal for OAuth" %}}
+
+<div class="alert alert-warning">New workspaces must authenticate using OAuth. Workspaces integrated with a Personal Access Token continue to function and can switch to OAuth at any time. After a workspace starts using OAuth, it cannot revert to a Personal Access Token.</div>
+
+1. In your Databricks account, click on **User Management** in the left menu. Then, under the **Service principals** tab, click **Add service principal**.
+1. Under the **Credentials & secrets** tab, click **Generate secret**. Set **Lifetime (days)** to the maximum value allowed (730), then click **Generate**. Take note of your client ID and client secret. Also take note of your account ID, which can be found by clicking on your profile in the upper-right corner.
+  {{< img src="data_jobs/databricks/client-id-secret.png" alt="In Databricks, a modal showing the client ID and secret associated with a new OAuth secret is displayed." style="width:70%;" >}}
+  {{< img src="data_jobs/databricks/account-id.png" alt="In Databricks, a drop-down menu showing the user's account ID is displayed." style="width:70%;" >}}
+1. Click **Workspaces** in the left menu, then select the name of your workspace.
+1. Go to the **Permissions** tab and click **Add permissions**.
+1. Search for the service principal you created and assign it the **Admin** permission.
+1. In Datadog, open the Databricks integration tile.
+1. On the **Configure** tab, click **Add Databricks Workspace**.
+1. Enter a workspace name, your Databricks workspace URL, account ID, and the client ID and secret you generated.
+   {{< img src="data_jobs/databricks/configure-workspace-form-m2m.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, account ID, client ID, and client secret." style="width:100%;" >}}
+1. In the **Select products to set up integration** section, ensure that Data Jobs Monitoring is **Enabled**.
+1. In the **Datadog Agent Setup** section, choose either
+    - [Managed by Datadog (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog installs and manages the Agent with a global init script in the workspace.
+    - [Manually](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent): Follow the [instructions below](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent) to install and manage the init script for installing the Agent globally or on specific Databricks clusters.
+
+{{% /tab %}}
+
+{{% tab "Use a Personal Access Token (Legacy)" %}}
+
+<div class="alert alert-warning">This option is only available for workspaces created before July 7, 2025. New workspaces must authenticate using OAuth.</div>
 
 1. In your Databricks workspace, click on your profile in the top right corner and go to **Settings**. Select **Developer** in the left side bar. Next to **Access tokens**, click **Manage**.
 1. Click **Generate new token**, enter "Datadog Integration" in the **Comment** field, set the **Lifetime (days)** value to the maximum allowed (730 days), and create a reminder to update the token before it expires. Then click **Generate**. Take note of your token.
@@ -54,27 +79,6 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 
 {{% /tab %}}
 
-{{% tab "Use a Service Principal for OAuth (Preview)" %}}
-
-<div class="alert alert-warning">New workspaces must authenticate using OAuth. Workspaces integrated with a Personal Access Token continue to function and can switch to OAuth at any time. After a workspace starts using OAuth, it cannot revert to a Personal Access Token.</div>
-
-1. In your Databricks account, click on **User Management** in the left menu. Then, under the **Service principals** tab, click **Add service principal**.
-1. Under the **Credentials & secrets** tab, click **Generate secret**. Set **Lifetime (days)** to the maximum value allowed (730), then click **Generate**. Take note of your client ID and client secret. Also take note of your account ID, which can be found by clicking on your profile in the upper-right corner.
-  {{< img src="data_jobs/databricks/client-id-secret.png" alt="In Databricks, a modal showing the client ID and secret associated with a new OAuth secret is displayed." style="width:70%;" >}}
-  {{< img src="data_jobs/databricks/account-id.png" alt="In Databricks, a drop-down menu showing the user's account ID is displayed." style="width:70%;" >}}
-1. Click **Workspaces** in the left menu, then select the name of your workspace.
-1. Go to the **Permissions** tab and click **Add permissions**.
-1. Search for the service principal you created and assign it the **Admin** permission.
-1. In Datadog, open the Databricks integration tile.
-1. On the **Configure** tab, click **Add Databricks Workspace**.
-1. Enter a workspace name, your Databricks workspace URL, account ID, and the client ID and secret you generated.
-   {{< img src="data_jobs/databricks/configure-workspace-form-m2m.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, account ID, client ID, and client secret." style="width:100%;" >}}
-1. In the **Select products to set up integration** section, ensure that Data Jobs Monitoring is **Enabled**.
-1. In the **Datadog Agent Setup** section, choose either
-    - [Managed by Datadog (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog installs and manages the Agent with a global init script in the workspace.
-    - [Manually](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent): Follow the [instructions below](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent) to install and manage the init script for installing the Agent globally or on specific Databricks clusters.
-
-{{% /tab %}}
 {{< /tabs >}}
 
 ### Install the Datadog Agent

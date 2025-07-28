@@ -8,10 +8,10 @@ author:
   sales_email: contact@gofirefly.io
   support_email: contact@gofirefly.io
 categories:
-- 自動化
-- クラウド
+- automation
+- cloud
 - 構成とデプロイ
-- 開発ツール
+- developer tools
 - notifications
 custom_kind: integration
 dependencies:

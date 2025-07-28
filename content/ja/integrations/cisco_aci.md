@@ -175,7 +175,7 @@ Cisco ACI チェックは Agent にパッケージ化されているので、ネ
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "cisco_aci" >}}
+{{< get-metrics-from-git "cisco-aci" >}}
 
 
 ### イベント
@@ -183,7 +183,7 @@ Cisco ACI チェックは Agent にパッケージ化されているので、ネ
 Cisco ACI チェックはテナントの障害をイベントとして送信します。
 
 ### サービスチェック
-{{< get-service-checks-from-git "cisco_aci" >}}
+{{< get-service-checks-from-git "cisco-aci" >}}
 
 
 ## トラブルシューティング

@@ -4,12 +4,15 @@ aliases:
 - /logs/workspaces/sql_reference
 - /ddsql_reference/ddsql_default
 products:
-- name: Log Workspaces
-  url: /logs/workspaces/
-  icon: logs
 - name: DDSQL Editor
   url: /ddsql_editor/
   icon: ddsql
+- name: Log Workspaces
+  url: /logs/workspaces/
+  icon: logs
+- name: Notebooks
+  url: /notebooks/
+  icon: notebook
 further_reading:
 - link: "/logs/workspaces/"
   tag: "Documentation"
@@ -23,13 +26,14 @@ further_reading:
 
 ## Overview
 
-DDSQL is a query language for Datadog data. It implements several standard SQL operations, such as `SELECT`, and allows queries against unstructured data. You can perform actions like getting exactly the data you want by writing your own `SELECT` statement, or querying tags as if they are standard table columns.
+DDSQL is SQL for Datadog data. It implements several standard SQL operations, such as `SELECT`, and allows queries against unstructured data. You can perform actions like getting exactly the data you want by writing your own `SELECT` statement, or querying tags as if they are standard table columns.
 
-SQL in [Analysis cells][1] allows you to analyze and manipulate data. This documentation covers the SQL support available and includes:
+This documentation covers the SQL support available and includes:
 - [Syntax compatible with PostgreSQL](#syntax)
 - [SQL functions](#functions)
 - [Window functions](#window-functions)
 - [JSON functions](#json-functions-and-operators)
+- [Table functions](#table-functions)
 - [Tags](#tags)
 
 
@@ -450,6 +454,77 @@ This table provides an overview of the supprted window functions. For comprehens
 | json_extract_path_text(text json, text path…) | text | Extracts a JSON sub-object as text, defined by the path. Its behavior is equivalent to the [Postgres function with the same name][3]. For example, `json_extract_path_text(col, ‘forest')` returns the value of the key `forest` for each JSON object in `col`. See the example below for a JSON array syntax.|
 | json_extract_path(text json, text path…) | JSON | Same functionality as `json_extract_path_text`, but returns a column of JSON type instead of text type.|
 
+## Table functions
+
+{{< callout url="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/" >}}
+Querying Logs and Metrics through DDSQL is in Preview. Use this form to request access.
+{{< /callout >}} 
+
+Table functions are used to query Logs and Metrics
+
+<table style="width: 100%; table-layout: fixed;">
+  <thead>
+    <tr>
+      <th style="width: 33%;">Function</th>
+      <th style="width: 33%;">Description</th>
+      <th style="width: 33%;">Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <pre>
+dd.logs(
+    filter => varchar,
+    columns => array < varchar >,
+    indexes ? => array < varchar >,
+    from_timestamp ? => timestamp,
+    to_timestamp ? => timestamp
+) AS (column_name type [, ...])</pre>
+      </td>
+      <td>Returns log data as a table. The columns parameter specifies which log fields to extract, and the AS clause defines the schema of the returned table. Optional: filtering by index or time range. When time is not specified, we default to the past 1 hour of data.</td>
+      <td>
+        {{< code-block lang="sql" >}}
+SELECT timestamp, host, service, message
+FROM dd.logs(
+    filter  => 'source:java',
+    columns => ARRAY['timestamp','host', 'service','message']
+) AS (
+    timestamp TIMESTAMP,
+    host      VARCHAR,
+    service   VARCHAR,
+    message   VARCHAR
+){{< /code-block >}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <pre>
+dd.metric_scalar(
+    query varchar,
+    reducer varchar [, from_timestamp timestamp, to_timestamp timestamp]
+)</pre>
+      </td>
+      <td>Returns metric data as a scalar value. The function accepts a metrics query (with optional grouping), a reducer to determine how values are aggregated (avg, max, etc.), and optional timestamp parameters (default 1 hour) to define the time range.</td>
+      <td>
+        {{< code-block lang="sql" >}}
+SELECT *
+FROM dd.metric_scalar(
+    'avg:system.cpu.user{*} by {service}',
+    'avg',
+    TIMESTAMP '2025-07-10 00:00:00.000-04:00',
+    TIMESTAMP '2025-07-17 00:00:00.000-04:00'
+)
+ORDER BY value DESC;{{< /code-block >}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
 ## Tags
 
 DDSQL exposes tags as an `hstore` type, which you can query using the PostgreSQL arrow operator. For example:
@@ -478,3 +553,4 @@ ON da.tags = de.tags -- for a specific tag: da.tags->'app' = de.tags->'app'
 [1]: /logs/workspaces/#analysis-cell
 [2]: https://www.postgresql.org/docs/current/functions-window.html
 [3]: https://www.postgresql.org/docs/current/functions-json.html
+[4]: /ddsql_editor/

@@ -96,7 +96,7 @@ Hasura Cloud 프로젝트를 위해 Datadog 통합을 설정하는 방법은 [Ha
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "hasura_cloud" >}}
+{{< get-metrics-from-git "hasura-cloud" >}}
 
 
 ### 서비스 점검

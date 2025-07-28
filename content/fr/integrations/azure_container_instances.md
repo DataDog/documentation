@@ -40,7 +40,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft�
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "azure_container_instances" >}}
+{{ get-metrics-from-git "azure-containerinstances" }}
 
 
 ### Événements
