@@ -97,7 +97,7 @@ Datadog implements the following safeguards to protect the confidentiality, inte
 - Only users with the [`api_keys_write`][5] permissions are authorized to enable or disable Remote Configuration capability on API keys and use the supported product features.
 - Your configuration changes submitted through the Datadog UI are signed and validated by the requesting Datadog component, verifying the integrity of the configuration.
 
-## Enabling Remote Configuration
+## Enable Remote Configuration
 
 In most cases, Remote Configuration is enabled by default for your organization. You can check if Remote Configuration is enabled on your organization from the [Remote Configuration][8] settings page. If you need to enable it:
 1. Ensure your RBAC permissions include [`org_management`][7], so you can enable Remote Configuration for your organization.

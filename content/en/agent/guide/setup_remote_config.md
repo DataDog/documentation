@@ -1,5 +1,5 @@
 ---
-title: Set up Remote Configuration for Fleet Automation
+title: Remote Configuration for Fleet Automation
 disable_toc: false
 further_reading:
 - link: "/remote_configuration"
@@ -16,26 +16,30 @@ further_reading:
   text: "Centrally govern and remotely manage Datadog Agents at scale with Fleet Automation"
 ---
 
-This page covers configuring Remote Configuration for Fleet Automation. The following Fleet Automation features require Remote Configuration:
-
-| Feature | Description | Required Agent Version |
+This page covers configuring and using {{< tooltip glossary="Remote Configuration" case="title" >}} with [Fleet Automation][11]. The following Fleet Automation features require Remote Configuration:
+| Feature | Description | Minimum Agent Version |
 |---------|-------------|------------------------|
-| **[Agent flares][9]** | Send a flare from the Datadog site using Fleet Automation | `7.47.0` or later |
-| **[Remote Agent upgrades][10]**<br>(**{{< tooltip glossary="preview" case="title" >}}**) | Remotely upgrade your Agents | `7.66` or later |
-| **[Remote Agent configuration][11]**<br>(**{{< tooltip glossary="preview" case="title" >}}**) | Remotely configure your Agents | `7.47.0` or later |
+| **[Agent flares][9]** | Send a flare from the Datadog site using Fleet Automation | 7.47+<br>7.66+ recommended |
+| **[Remote Agent upgrades][10]**<br>(**{{< tooltip glossary="preview" case="title" >}}**) | Remotely upgrade your Agents | 7.66+ |
+| **[Remote Agent configuration][11]**<br>(**{{< tooltip glossary="preview" case="title" >}}**) | Remotely configure your Agents | 7.66+ |
 
 Datadog recommends upgrading your Agents regularly to make sure you have access to the latest features.
 
 ## Prerequisites
 
-- Datadog Agent version `7.66` or later. While earlier versions of 
+- Datadog recommends Datadog Agent version `7.66` or later. Although some features might work with earlier versions of the Agent, version `7.66` introduced [breaking changes][12] to Remote Agent Management.
 - Ensure your RBAC permissions include [`org_management`][1], so you can enable Remote Configuration for your organization.
-- Ensure your RBAC permissions include [`api_keys_write`][2], so you can create a new API key with the Remote Configuration capability, or add the capability to an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. A key with this capability allows you to authenticate and authorize your Agent to use Remote Configuration.
-- Ensure that [Remote Configuration is enabled for your organization][3].
+- Ensure your RBAC permissions include [`api_keys_write`][2], so you can create a new API key with the Remote Configuration capability, or add the capability to an existing API key. The Contact your organization's Datadog administrator to update your permissions if you don't have it. A key with this capability allows you to authenticate and authorize your Agent to use Remote Configuration.
+
+## Enable Remote Configuration
+
+In most cases, Remote Configuration is enabled by default for your organization. You can check if Remote Configuration is enabled on your organization from the [Remote Configuration][8] settings page. If you need to enable it:
+1. Ensure your RBAC permissions include [`org_management`][7], so you can enable Remote Configuration for your organization.
+1. From your Organization Settings page, enable [Remote Configuration][8]. This enables Datadog components across your organization to receive configurations from Datadog.
 
 ## Agent Remote Configuration status
 
-Gain visibility into the Remote Configuration status of your Agent through the [Remote Configuration UI][3].
+You can gain visibility into the Remote Configuration status of your Agent using the [Remote Configuration UI][3].
 
 The following table describes the meaning of each Agent status:
 
@@ -50,7 +54,10 @@ The following table describes the meaning of each Agent status:
 
 ## Opting out of Remote Configuration for Fleet Automation
 
-You can disable Remote Configuration capabilities at the API key level and Agent level.
+You can disable Remote Configuration capabilities:
+- at the API key level
+- at the Agent level
+- at the organization level (**not recommended**)
 
 ### At the API key level
 
@@ -90,13 +97,23 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
+### At the organization level
+
+<div class="alert alert-danger"><strong>Datadog does not recommend disabling Remote Configuration at the organization level. Disabling Remote Configuration at the organization level disables Datadog components in several products across your organization from receiving configurations from Datadog.</strong></div>
+
+To disable Remote Configuration at the organization level:
+1. Ensure you have the required `org_management` permission.
+1. Go to the [Remote Configuration][8] settings page. 
+1. Click **Disable**. 
+1. When the warning message appears, click **Disable** again.
+
 ## Troubleshooting
 
-If you experience issues using Remote Configuration, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][6].
+If you experience issues using Remote Configuration with your Agents, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][6].
 
 ### Restart the Agent
 
-After the Agent configuration is updated in the [`datadog.yaml`][16] file, restart the Agent for th change to take effect.
+After the Agent configuration is updated in the [`datadog.yaml`][16] file, restart the Agent for the change to take effect.
 
 ### Ensure Datadog Remote Configuration endpoints are reachable from your environment
 
@@ -118,7 +135,8 @@ To authenticate and authorize the Agent to receive configuration, enable Remote 
 [8]: /agent/configuration/proxy/
 [9]: /agent/troubleshooting/send_a_flare/#send-a-flare-from-the-datadog-site
 [10]: /agent/fleet_automation/remote_management#remotely-upgrade-your-agents
-[11]: /agent/fleet_automation
+[11]: /agent/fleet_automation/
+[12]: /agent/fleet_automation/remote_management#datadog-installer-incompatible-with-agent-pre-766
 
 ## Further reading
 
