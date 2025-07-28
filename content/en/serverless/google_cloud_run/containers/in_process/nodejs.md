@@ -1,5 +1,8 @@
 ---
 title: Instrumenting a Node.js Cloud Run Container In-Process
+code_lang: nodejs
+type: multi-code-lang
+code_lang_weight: 20
 further_reading:
 - link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/'
   tag: 'Documentation'
