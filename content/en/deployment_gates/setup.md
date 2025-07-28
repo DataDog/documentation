@@ -189,7 +189,9 @@ The [datadog-ci][1] `deployment gate` command encapsulates all the required logi
 datadog-ci deployment gate --service transaction-backend --env staging
 ```
 
-**Note**: The `deployment gate` command is available in datadog-ci versions v3.17.0 and above.
+**Notes**:
+* The `deployment gate` command is available in datadog-ci versions v3.17.0 and above.
+* The `deployment gate` command is a beta command, so it needs the `DD_BETA_COMMANDS_ENABLED=1` environment variable to run.
 
 The command has the following characteristics:
 * It sends a request to start the evaluation and polls the evaluation status endpoint using the evaluation_id until the evaluation is complete.
