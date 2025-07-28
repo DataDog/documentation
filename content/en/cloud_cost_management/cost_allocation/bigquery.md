@@ -16,7 +16,7 @@ CCM allocates costs for BigQuery resources for both types of Analysis costs (on-
 
 ## Prerequisites
 
-The following table presents the list of collected features and the minimal Agent versions required:
+The following table presents the list of collected features and the minimal requirements:
 
 | Feature | Requirements |
 |---|---|
@@ -32,7 +32,7 @@ The following table presents the list of collected features and the minimal Agen
 
 Cost allocation divides BigQuery costs from GCP into individual queries and workloads associated with them. These divided costs are enriched with tags from queries, projects, and reservations so you can break down costs by any associated dimensions. 
 
-For reservation-based BigQuery costs, CCM allocates costs proportionally based on slot usage. Each query's cost is determined by its share of the total slot usage within the reservation. For example, if a query uses 25% of the total consumed slots in a reservation during a given period, it will be allocated 25% of that reservation's total cost for that period. The cost per-query is calculated using the following formula:
+For reservation-based BigQuery costs, CCM allocates costs proportionally based on slot usage. Each query's cost is determined by its share of the total slot usage within the project's reservations. For example, if a query uses 25% of the total consumed slots in a project's reservation during a given period, it will be allocated 25% of that project's total reservation cost for that period. The cost per-query is calculated using the following formula:
 
 ```
 cost_per_query = (query_slot_usage / total_reservation_slot_usage) * total_reservation_cost
@@ -40,10 +40,10 @@ cost_per_query = (query_slot_usage / total_reservation_slot_usage) * total_reser
 
 Where:
 - `query_slot_usage`: The number of slot-seconds consumed by an individual query
-- `total_reservation_slot_usage`: The total slot-seconds used across all queries in the reservation
-- `total_reservation_cost`: The total cost of the reservation for the time period
+- `total_reservation_slot_usage`: The total slot-seconds used across all queries in the project's reservations
+- `total_reservation_cost`: The total cost of the reservations for the time period
 
-Any difference between the total billed reservation cost and the sum of allocated query costs is categorized as `cluster_idle` cost, representing unused reservation capacity.
+Any difference between the total billed reservation cost and the sum of allocated query costs is categorized as a project's `cluster_idle` cost, representing unused reservation capacity.
 
 
 ### Query-level tag extraction
