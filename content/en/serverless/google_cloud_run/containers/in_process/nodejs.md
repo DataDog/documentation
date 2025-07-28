@@ -1,7 +1,7 @@
 ---
 title: Instrumenting a Node.js Cloud Run Container In-Process
 further_reading:
-- link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#getting-started'
+- link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/'
   tag: 'Documentation'
   text: 'Tracing Node.js Applications'
 ---
@@ -21,7 +21,7 @@ const tracer = require('dd-trace').init({
 });
 ```
 
-For more information, see [Tracing Node.js applications](https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#getting-started).
+For more information, see [Tracing Node.js applications][1].
 
 ## 2. Install Serverless-Init
 
@@ -30,9 +30,6 @@ Add the following instructions and arguments to your Dockerfile.
 ```dockerfile
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 ENV NODE_OPTIONS="--require dd-trace/init"
-ENV DD_SERVICE=datadog-demo-run-nodejs
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 ```
@@ -51,22 +48,14 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
    ENV NODE_OPTIONS="--require dd-trace/init"
    ```
 
-3. (Optional) Add Datadog tags.
-
-   ```dockerfile
-   ENV DD_SERVICE=datadog-demo-run-nodejs
-   ENV DD_ENV=datadog-demo
-   ENV DD_VERSION=1
-   ```
-
-4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process.
+3. Change the entrypoint to wrap your application in the Datadog `serverless-init` process.
    **Note**: If you already have an entrypoint defined inside your Dockerfile, see the [alternative configuration](#alt-node).
 
    ```dockerfile
    ENTRYPOINT ["/app/datadog-init"]
    ```
 
-5. Execute your binary application wrapped in the entrypoint. Adapt this line to your needs.
+4. Execute your binary application wrapped in the entrypoint. Adapt this line to your needs.
    ```dockerfile
    CMD ["node", "/path/to/your/app.js"]
    ```
@@ -99,10 +88,19 @@ const logger = createLogger({
   exitOnError: false,
   format: format.json(),
   transports: [
-    new transports.File({ filename: `/shared-volume/logs/app.log` }),
     new transports.Console()
   ],
 });
 
 logger.info(`Hello world!`);
 ```
+
+## 4. Configure your application
+
+{{% gcr-configure-env-vars %}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
