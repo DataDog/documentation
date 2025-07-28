@@ -669,6 +669,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 | Framework | Versions | Runtime Code Analysis (IAST)     |
 |-----------|----------|----------------------------------|
 | express   | >=4      | <i class="icon-check-bold"></i>  |
+| fastify   | >=2      | <i class="icon-check-bold"></i>  |
 | nextjs    | >=11.1   |                                  |
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities or for your Node.js framework, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
