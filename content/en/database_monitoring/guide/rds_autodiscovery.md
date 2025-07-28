@@ -114,6 +114,20 @@ database_monitoring:
       discovery_interval: 300
 ```
 
+The listener provides an `%%extra_dbm%%` variable that can be used to enable or disable DBM for the instance. This value defaults to `true` if the tag `datadoghq.com/dbm:true` is present. To specify a custom tag for this value use `dbm_tag`:
+
+```yaml
+database_monitoring:
+  autodiscovery:
+    rds:
+      enabled: true
+      dbm_tag:
+        - "use_dbm:true"
+```
+
+The `%%extra_dbm%%` value is true if the tag is present, and false otherwise. It does not set its value to the value of the tag.
+
+
 ### Create a configuration template
 
 The Datadog Agent supports configuration templates for the Postgres and MySQL integrations. Define a configuration template for the RDS instances you wish to monitor.
@@ -142,7 +156,7 @@ instances:
   - host: "%%host%%"
     port: "%%port%%"
     username: datadog
-    dbm: true
+    dbm: "%%extra_dbm%%"
     aws:
       instance_endpoint: "%%host%%"
       region: "%%extra_region%%"
@@ -151,7 +165,7 @@ instances:
     - "region:%%extra_region%%"
 ```
 
-In this example, the template variables `%%host%%`, `%%port%%`, and `%%extra_region%%` are dynamically populated with information from the RDS instance.
+In this example, the template variables `%%host%%`, `%%port%%`, `%%extra_dbinstanceidentifier%%`, `%%extra_dbm%%`, and `%%extra_region%%` are dynamically populated with information from the RDS instance.
 
 #### IAM authentication
 
@@ -165,7 +179,7 @@ instances:
   - host: "%%host%%"
     port: "%%port%%"
     username: datadog
-    dbm: true
+    dbm: "%%extra_dbm%%"
     aws:
       instance_endpoint: "%%host%%"
       region: "%%extra_region%%"
@@ -203,7 +217,7 @@ instances:
   - host: "%%host%%"
     port: "%%port%%"
     username: datadog
-    dbm: true
+    dbm: "%%extra_dbm%%"
     aws:
       instance_endpoint: "%%host%%"
     tags:
@@ -211,7 +225,7 @@ instances:
     - "region:%%extra_region%%"
 ```
 
-In this example, the template variables `%%host%%`, `%%port%%`, and `%%extra_region%%` are dynamically populated with information from the RDS instance.
+In this example, the template variables `%%host%%`, `%%port%%`, `%%extra_dbinstanceidentifier%%`, `%%extra_dbm%%`, and `%%extra_region%%` are dynamically populated with information from the RDS instance.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -227,6 +241,7 @@ For more information on configuring Autodiscovery with integrations, see the [Au
 | %%extra_region%%                         | The AWS region where the instance is located                                                                                                  |
 | %%extra_dbinstanceidentifier%%            | The instance identifier of the discovered RDS instance                                                                                       |
 | %%extra_dbclusteridentifier%%            | The cluster identifier of the discovered RDS instance, if one exists                                                                                       |
+| %%extra_dbm%% | Whether DBM is enabled on the instance. Determined by the presence of `dbm_tag`, which defaults to `datadoghq.com/dbm:true`.                                              |
 | %%extra_managed_authentication_enabled%% | Whether IAM authentication enabled on the instance. <br/>This is used to determine if managed authentication should be used for the connection. |
 
 [1]: /database_monitoring/setup_postgres/rds/?tab=postgres10

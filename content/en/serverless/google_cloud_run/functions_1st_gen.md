@@ -370,15 +370,6 @@ func helloHTTP(w http.ResponseWriter, r *http.Request) {
 - You can view your Cloud Run Functions traces in [Trace Explorer][4]. Search for the service name you set in the `DD_SERVICE` environment variable to see your traces.
 - You can use the [Serverless > Cloud Run Functions][5] page to see your traces enriched with telemetry collected by the [Google Cloud integration][6].
 
-### Enable/disable trace metrics
-
-[Trace metrics][3] are enabled by default. To configure trace metrics, use the following environment variable:
-
-`DD_TRACE_STATS_COMPUTATION_ENABLED`
-: Enables (`true`) or disables (`false`) trace metrics. Defaults to `true`.
-
-  **Values**: `true`, `false`
-
 ## Troubleshooting
 
 ### Enable debug logs
