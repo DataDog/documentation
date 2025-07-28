@@ -43,20 +43,20 @@ nav_sections:
       link: watchdog/
       title: Datadog Watchdog
     - desc: Ver alertas de Datadog, incidentes y más en tu dispositivo móvil
-      icon: ''
+      icon: mobile
       link: mobile/
       title: Aplicación móvil
     - desc: Identificar, analizar y mitigar incidencias críticas en tu organización
-      icon: ''
-      link: ''
+      icon: incidents
+      link: service_management/incident_management
       title: Gestión de incidencias
     - desc: Dar seguimiento a los cambios y alertas en tus aplicaciones e infraestructura
-      icon: rastreo
+      icon: events
       link: events/
       title: Eventos
     - desc: Automatizar y orquestar procesos en todo tu stack tecnológico
-      icon: rastreo
-      link: ''
+      icon: workflows
+      link: service_management/workflows/
       title: Automatización de flujos de trabajo
     - desc: Cree aplicaciones de bajo código para agilizar sus herramientas internas
       icon: app-builder
@@ -66,7 +66,7 @@ nav_sections:
   - name: Productos
   - navtiles:
     - desc: Supervisar tus hosts, contenedores, procesos y funciones serverless
-      icon: ''
+      icon: host-map
       link: infrastructure/
       title: Infraestructura
     - desc: Detectar y solucionar problemas de rendimiento en tus aplicaciones serverless
@@ -75,13 +75,13 @@ nav_sections:
       title: Serverless
     - desc: Usar objetos etiquetados para recopilar y generar gráficos de datos sobre
         el tráfico de tu red
-      icon: ''
-      link: ''
+      icon: network
+      link: network_monitoring/
       title: Monitorización de red
     - desc: Controla tu gasto en la nube con datos unificados sobre observabilidad
         y costos
-      icon: ''
-      link: ''
+      icon: cloud-cost-management
+      link: cloud_cost_management/
       title: Gestión de costos en la nube
     - desc: Explorar dashboards de rendimiento listos para usar y trazas distribuidas
       icon: apm
@@ -93,25 +93,25 @@ nav_sections:
       title: Continuous Profiler
     - desc: Explorar dashboards enriquecidos, métricas de consultas y ejemplos de
         consultas
-      icon: ''
-      link: tracing/trace_explorer/
+      icon: database-2
+      link: database_monitoring/
       title: Monitorización de bases de datos
     - desc: Rastrear y mejorar el rendimiento de tus pipelines de streaming de datos
-      icon: ''
+      icon: datastreams-monitoring
       link: data_streams/
       title: Data Streams Monitoring
     - desc: Monitorizar y optimizar tus trabajos de procesamiento de datos
-      icon: ''
+      icon: data-jobs-monitoring
       link: data_jobs/
       title: Monitorización de trabajos de datos
     - desc: Descubrir, asignar y monitorizar servicios sin cambiar el código
       icon: usm
-      link: ''
+      link: universal_service_monitoring/
       title: Universal Service Monitoring
     - desc: Garantizar el tiempo de actividad, avisar de problemas regionales y probar
         el rendimiento de aplicaciones
-      icon: rum
-      link: ''
+      icon: synthetics
+      link: synthetics/
       title: Monitorización Synthetic
     - desc: Identificar los errores críticos y acelerar la resolución en la web, los
         dispositivos móviles y el backend.
@@ -119,7 +119,7 @@ nav_sections:
       link: error_tracking/
       title: Rastreo de errores
     - desc: Capturar, observar y analizar la experiencia del usuario de tus aplicaciones
-      icon: cog-2
+      icon: rum
       link: real_user_monitoring/
       title: Real User Monitoring
     - desc: Obtener información sobre el comportamiento de los usuarios y tomar decisiones
@@ -129,7 +129,7 @@ nav_sections:
       title: Análisis de productos
     - desc: Monitorizar recorridos del usuario y transacciones comerciales en aplicaciones
         móviles
-      icon: ''
+      icon: mobile
       link: mobile_app_testing/
       title: Test de aplicaciones móviles
     - desc: Hacer tests de un extremo a otro y de integración sin código con proveedores
@@ -151,7 +151,7 @@ nav_sections:
       link: security/
       title: Seguridad
     - desc: Explorar, buscar y crear distribuciones para tus métricas
-      icon: ''
+      icon: metric
       link: metrics/
       title: Métricas
     - desc: Procesar, monitorizar y archivar tus logs ingeridos
@@ -163,7 +163,7 @@ nav_sections:
       link: observability_pipelines/
       title: Pipelines de observabilidad
     - desc: Rastrear, monitorizar y asegurar tus solicitudes de LLM
-      icon: ''
+      icon: llm-observability
       link: llm_observability/
       title: Observabilidad de LLM
     - desc: Unificar la telemetría, los metadatos y los flujos de trabajo para acelerar
