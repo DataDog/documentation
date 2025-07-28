@@ -7,10 +7,10 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/'
     tag: 'Blog'
     text: 'Collect traces, logs, and custom metrics from Cloud Run services'
-  - link: "/serverless/google_cloud_run/containers_in_process/"
+  - link: "/serverless/google_cloud_run/containers/in_process/"
     tag: 'Documentation'
     text: 'Instrument your container with the in-process approach'
-  - link: "/serverless/google_cloud_run/containers_sidecar/"
+  - link: "/serverless/google_cloud_run/containers/sidecar/"
     tag: 'Documentation'
     text: 'Instrument your container with the sidecar approach'
 ---
@@ -49,5 +49,5 @@ Choose a language to instrument via sidecar.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /serverless/google_cloud_run/containers_in_process
-[2]: /serverless/google_cloud_run/containers_sidecar
+[1]: /serverless/google_cloud_run/containers/in_process
+[2]: /serverless/google_cloud_run/containers/sidecar
