@@ -20,13 +20,17 @@ LLM Observability [Experiments][9] supports the entire lifecycle of building LLM
 - Run and manage experiments
 - Compare results to evaluate impact
 
-### Installation
+## Installation
 
 Install Datadog's LLM Observability Python SDK:
 
 ```shell
 pip install ddtrace>=3.11.0
 ```
+
+### Cookbooks
+
+To see in-depth examples of what you can do with LLM Experiments, you can check these [jupyter notebooks](https://github.com/DataDog/llm-observability/tree/main/preview/experiments/notebooks)
 
 ### Setup
 
@@ -37,19 +41,18 @@ from ddtrace.llmobs import LLMObs
 
 LLMObs.enable(
     ml_app="my-app",
-    project_name="my-project",
     api_key="<YOUR_API_KEY>",  # defaults to DD_API_KEY environment variable
     app_key="<YOUR_APP_KEY>",  # defaults to DD_APP_KEY environment variable
     site="datadoghq.com"  # defaults to DD_SITE environment variable
 )
 ```
 
-### Dataset class
+## Datasets
 
 A _dataset_ is a collection of _inputs_, and _expected outputs_ (optional) and _metadata_ (optional).
 You can construct datasets from production data in the UI by hitting "Add to Dataset" in any span page, as well as programatically using the SDK. You can use the SDK to push and retrieve datasets from Datadog.
 
-#### Creating a dataset
+### Creating a dataset
 
 You can create a new dataset using `LLMObs.create_dataset()`:
 
@@ -77,7 +80,7 @@ dataset = LLMObs.create_dataset(
 print(f"View dataset: {dataset.url}")
 ```
 
-#### Managing dataset records
+### Managing dataset records
 
 The Dataset class provides methods to manage records:
 
@@ -103,7 +106,7 @@ dataset.delete(1)  # Deletes the second record
 dataset.push()
 ```
 
-#### Accessing dataset records
+### Accessing dataset records
 
 You can access dataset records using standard Python indexing:
 
@@ -120,7 +123,7 @@ for record in dataset:
 ```
 
 
-#### Retrieving a dataset
+### Retrieving a dataset
 
 To retrieve an existing dataset from Datadog:
 
@@ -132,7 +135,7 @@ print(len(dataset))
 ```
 
 
-#### Working with CSV files
+### Working with CSV files
 
 You can create datasets from CSV files and export datasets to pandas DataFrames.
 
@@ -177,19 +180,19 @@ The DataFrame has a MultiIndex structure with the following columns:
 - All columns not specified in `input_data_columns` or `expected_output_columns` are automatically treated as metadata
 - The dataset is automatically pushed to Datadog after creation
 
-### Experiment class
+## Experiments
 An experiment is a collection of traces used to test the behavior of an LLM application or agent against a dataset. The dataset provides the input data, and the outputs are the final generations produced by the application under test.
 
-#### Task
+### Task
 The task defines the core workflow you want to evaluate. It can range from a single LLM call to a more complex flow involving multiple LLM calls and RAG steps. The task is executed sequentially across all records in the dataset.
 
-#### Evaluators
+### Evaluators
 Evaluators are functions that measure how well the model or agent performs by comparing the output to either the expected_output or the original input. Datadog supports the following evaluator types:
 - Boolean: returns true or false
 - score: returns a numeric value (float)
 - categorical: returns a labeled category (string)
 
-#### Creating an experiment
+### Creating an experiment
 
 Create an experiment using `LLMObs.experiment()`:
 
@@ -264,7 +267,7 @@ for result in results:
         print(f"Error: {result['error']['message']}")
 ```
 
-## Usage: LLM Observability Experiments API
+## LLM Experiments API
 
 ### Postman quickstart
 
