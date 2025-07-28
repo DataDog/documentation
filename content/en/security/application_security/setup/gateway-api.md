@@ -1,5 +1,5 @@
 ---
-title: Enabling AAP for Gateway API for Kubernetes
+title: Enabling AAP for Gateway API in Kubernetes
 code_lang: gateway-api
 type: multi-code-lang
 code_lang_weight: 50
@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview
 
-The **Datadog AppSec Gateway API Request Mirror** enhances application security by leveraging the **RequestMirror** functionality in Kubernetes Gateway APIs to duplicate traffic to a Datadog App &API Protection endpoint. This allows real-time detection and analysis of potential application-level attacks, API endpoint discovery and more without affecting the primary request flow.
+The **Datadog AppSec Gateway API Request Mirror** enhances application security by leveraging the **RequestMirror** functionality in Kubernetes Gateway APIs to duplicate traffic to a Datadog App &API Protection endpoint. This enables real-time detection and analysis of potential application-level attacks, API endpoint discovery, and more, all without impacting the primary request flow.
 
 ## Prerequisites
 
@@ -58,7 +58,7 @@ The **Datadog AppSec Gateway API Request Mirror** enhances application security 
    go run github.com/DataDog/dd-trace-go/contrib/k8s.io/gateway-api/cmd/patch-gateways@latest
    ```
 
-   Use the `-help` flag to see available options for customizing the patching behavior.
+   Use the `-help` flag to see options for customizing the patching behavior.
 
 6. **Patch your HTTPRoute resources** to redirect traffic to the service:
 
@@ -66,9 +66,9 @@ The **Datadog AppSec Gateway API Request Mirror** enhances application security 
    go run github.com/DataDog/dd-trace-go/contrib/k8s.io/gateway-api/cmd/patch-httproutes@latest
    ```
 
-   This command adds a [`RequestMirror`][14] filter to all `HTTPRoute` resources found in all namespaces. Use the `-help` flag for configuration options.
+   This command adds a [RequestMirror][14] filter to all `HTTPRoute` resources in all namespaces. Use the `-help` flag for configuration options.
 
-   **Note**: Running this command regularly ensures that any new `HTTPRoute` resources created in the future will also have the `RequestMirror` filter added. Consider adding the resulting patch to your CI/CD pipeline where HTTPRoute resources are modified.
+   **Note**: Regularly running this command ensures any newly created `HTTPRoute` resources automatically include the `RequestMirror` filter. Consider adding the resulting patch to your CI/CD pipeline where `HTTPRoute` resources are modified.
 
 {{% appsec-getstarted-2-plusrisk %}}
 
@@ -158,7 +158,7 @@ The Gateway API integration uses the [Datadog Go Tracer][6] and inherits all env
 
 By default, the request mirror traces won't enable Datadog's APM product. If you want to use Application & API Protection without APM tracing functionality, this is the default behavior. 
 
-To enable APM tracing, you can set the environment variable `DD_APM_TRACING_ENABLED=true` in the request mirror deployment.
+To enable APM tracing, set the environment variable `DD_APM_TRACING_ENABLED=true` in the request mirror deployment.
 
 If you want to explicitly disable APM tracing while using App and API Protection:
 
@@ -175,7 +175,7 @@ The Gateway API integration has the following limitations:
 - No request blocking can be applied
 - Only json is supported for analysing HTTP request bodies.
 
-Please make sure to try out other AAP integrations if you need finer-grained analysis and other AAP features.
+For finer-grained analysis and other AAP features, consider trying other AAP integrations.
 
 ## Further Reading
 
