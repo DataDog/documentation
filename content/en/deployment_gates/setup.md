@@ -211,7 +211,7 @@ For complete configuration options and detailed usage examples, refer to the [`d
 {{% tab "Argo Rollouts" %}}
 To call Deployment Gates from an Argo Rollouts Kubernetes Resource, you can create an [AnalysisTemplate][1] or a [ClusterAnalysisTemplate][1]. The template should contain a Kubernetes job that is used to perform the analysis.
 
-Use this script as a starting point. For the API_URL variable, be sure to replace `<YOUR_DD_SITE>` with your [Datadog site name][3] (for example, {{< region-param key="dd_site" code="true" >}}).
+Use this script as a starting point. For the API_URL variable, be sure to replace `<YOUR_DD_SITE>` with your [Datadog site name][2] (for example, {{< region-param key="dd_site" code="true" >}}).
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -239,23 +239,24 @@ spec:
                       - name: DD_BETA_COMMANDS_ENABLED
                         value: "1"
                       - name: DD_SITE
-                        value: "{{< region-param key="dd_site" >}}"
+                        value: "{{< region-param key="dd_site" code="true" >}}"
                       - name: DD_API_KEY
                         valueFrom:
                           secretKeyRef:
-                            name: datadog-keys
+                            name: datadog
                             key: api-key
                       - name: DD_APP_KEY
                         valueFrom:
                           secretKeyRef:
-                            name: datadog-keys
+                            name: datadog
                             key: app-key
                     command: ["/bin/sh", "-c"]
                     args:
                       - datadog-ci deployment gate --service {{ args.service }} --env {{ args.env }}
 ```
 
-* The analysis template can receive arguments from the Rollout resource. In this case, the arguments are `service`, `env`, and any other optional fields needed (such as `version`). For more information, see the [official Argo Rollouts docs][2].
+* The safest way to pass the API and Application keys to the analysis template is by using [Kubernetes Secrets][3]. This example relies on a secret called `datadog` holding two data: `api-key` and `app-key`. Alternatively, you can also pass the value in plain text using `value` instead of `valueFrom`.
+* The analysis template can receive arguments from the Rollout resource. In this case, the arguments are `service` and `env`. Add any other optional fields if needed (such as `version`). For more information, see the [official Argo Rollouts docs][4].
 * The `ttlSecondsAfterFinished` field removes the finished jobs after 5 minutes.
 * The `backoffLimit` field is set to 0 as the job might fail if the gate evaluation fails, and it should not be retried in that case.
 
@@ -296,8 +297,9 @@ spec:
 ```
 
 [1]: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-progressive-delivery
-[2]: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-template-arguments
-[3]: /getting_started/site/
+[2]: /getting_started/site/
+[3]: https://kubernetes.io/docs/concepts/configuration/secret/
+[4]: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-template-arguments
 
 {{% /tab %}}
 {{% tab "Generic script" %}}
