@@ -274,8 +274,8 @@ module "lambda-datadog" {
     "DD_VERSION" : "<VERSION>"
   }
 
-  datadog_extension_layer_version = 83
-  datadog_python_layer_version = 112
+  datadog_extension_layer_version = {{< latest-lambda-layer-version layer="extension" >}}
+  datadog_python_layer_version = {{< latest-lambda-layer-version layer="python" >}}
 
   # aws_lambda_function arguments
 }
@@ -300,8 +300,8 @@ module "lambda-datadog" {
 4. Select the versions of the Datadog Extension Lambda layer and Datadog Python Lambda layer to use. If left blank the latest layer versions will be used.
 
 ```
-  datadog_extension_layer_version = 83
-  datadog_python_layer_version = 112
+  datadog_extension_layer_version = {{< latest-lambda-layer-version layer="extension" >}}
+  datadog_python_layer_version = {{< latest-lambda-layer-version layer="python" >}}
 ```
 
 [1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
