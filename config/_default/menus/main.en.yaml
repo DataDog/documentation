@@ -424,26 +424,31 @@ menu:
       identifier: agent_logs
       parent: agent
       weight: 5
+    - name: Agent tags
+      url: agent/logs/agent_tags/
+      parent: agent
+      identifier: agent_tags
+      weight: 501
     - name: Advanced Configurations
       identifier: agent_logs_advanced_log_collection
       url: agent/logs/advanced_log_collection
       parent: agent_logs
-      weight: 501
+      weight: 502
     - name: Proxy
       identifier: agent_logs_proxy
       url: agent/logs/proxy
       parent: agent_logs
-      weight: 502
+      weight: 503
     - name: Transport
       identifier: agent_logs_transport
       url: agent/logs/log_transport
       parent: agent_logs
-      weight: 503
+      weight: 504
     - name: Multi-Line Detection
       identifier: multi_line_detection
       url: agent/logs/auto_multiline_detection
       parent: agent_logs
-      weight: 505
+      weight: 506
     - name: Configuration
       url: agent/configuration
       parent: agent

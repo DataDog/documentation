@@ -2,6 +2,9 @@
 title: Host Agent Log collection
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
+- link: "agent/logs/agent_tags/"
+  tag: "Documentation"
+  text: "Agent tags automatically added to logs"
 - link: "agent/logs/advanced_log_collection/#filter-logs"
   tag: "Documentation"
   text: "Filter logs sent to Datadog"
