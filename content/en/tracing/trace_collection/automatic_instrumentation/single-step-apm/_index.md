@@ -24,7 +24,7 @@ To learn more about how it works, see the [injector guide for Single Step Instru
 
 ## Prerequisites
 
-1. Remove any custom instrumentation code from your application and restart your it. SSI automatically disables when it detects custom instrumentation.
+1. Remove any custom instrumentation code from your application and restart it. SSI is automatically disabled if custom instrumentation is detected.
 1. Confirm environment compatibility by reviewing the [SSI compatibility guide][18] for supported languages, operating systems, and architectures.
 
 ## Instrument SDKs across applications
