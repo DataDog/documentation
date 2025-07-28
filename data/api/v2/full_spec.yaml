@@ -57614,7 +57614,8 @@ paths:
         schema:
           format: int64
           type: integer
-      - description: Comma-separated list of fields to group connections by.
+      - description: Comma-separated list of fields to group connections by. The maximum
+          number of group_by(s) is 10.
         in: query
         name: group_by
         schema:
