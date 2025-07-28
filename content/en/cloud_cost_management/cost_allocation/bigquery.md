@@ -35,13 +35,13 @@ Cost allocation divides BigQuery costs from GCP into individual queries and work
 For reservation-based BigQuery costs, CCM allocates costs proportionally based on slot usage. Each query's cost is determined by its share of the total slot usage within the project's reservations. For example, if a query uses 25% of the total consumed slots in a project's reservation during a given period, it will be allocated 25% of that project's total reservation cost for that period. The cost per-query is calculated using the following formula:
 
 ```
-cost_per_query = (query_slot_usage / total_reservation_slot_usage) * total_reservation_cost
+cost_per_query = (query_slot_usage / total_slot_usage) * total_project_reservation_cost
 ```
 
 Where:
 - `query_slot_usage`: The number of slot-seconds consumed by an individual query
-- `total_reservation_slot_usage`: The total slot-seconds used across all queries in the project's reservations
-- `total_reservation_cost`: The total cost of the reservations for the time period
+- `total_slot_usage`: The total slot-seconds used across all queries in the project's reservations
+- `total_project_reservation_cost`: The total cost of the reservations in a given project for the time period
 
 Any difference between the total billed reservation cost and the sum of allocated query costs is categorized as a project's `cluster_idle` cost, representing unused reservation capacity.
 
