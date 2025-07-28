@@ -48,7 +48,7 @@ Any difference between the total billed reservation cost and the sum of allocate
 
 ### Query-level tag extraction
 
-CCM extracts the following tags from BigQuery query logs, allowing you to aggregate on these fields in the explorer:
+CCM extracts the following tags from BigQuery query logs via the Data Observability platform:
 
 | Tag | Description |
 |---|---|
@@ -56,17 +56,13 @@ CCM extracts the following tags from BigQuery query logs, allowing you to aggreg
 | `user_email` | The user or service account that executed the query |
 | `dts_config_id` | Identifier for scheduled queries and data transfers |
 
-Additionally, CCM provides two special tags for detailed cost analysis:
+Additionally, CCM adds the following tags for cost analysis:
 
-1. **`allocated_spend_type`**: Categorizes costs as either:
-   - `usage`: Active query execution costs
-   - `cluster_idle`: Unused reservation capacity costs
-
-2. **`allocated_resource`**: Indicates the resource type being measured:
-   - `slots`: For reservation-based queries
-   - `bytes_processed`: For on-demand queries
-   
-All BigQuery query-related records are tagged with `orchestrator:BigQuery`.
+| Tag | Description |
+|---|---|
+| `allocated_spend_type` | Categorizes costs as either `usage` (active query execution) or `cluster_idle` (unused reservation capacity) |
+| `allocated_resource` | Indicates resource measurement type - `slots` for reservation-based queries or `bytes_processed` for on-demand queries |
+| `orchestrator` | Set to `BigQuery` for all BigQuery query-related records |
 
 ### Compute allocation
 
