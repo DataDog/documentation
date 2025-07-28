@@ -407,6 +407,55 @@ window.addEventListener('click', (event) => {
 window.onload = function () {
     getPathElement();
     setMobileNav();
+    
+    // Handle glossary anchor scrolling from search results
+    if (window.location.pathname.includes('/glossary/')) {
+        const scrollTarget = sessionStorage.getItem('glossaryScrollTarget');
+        if (scrollTarget) {
+            sessionStorage.removeItem('glossaryScrollTarget');
+            // Use requestAnimationFrame to ensure DOM is fully rendered
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    const targetElement = document.getElementById(scrollTarget);
+                    if (targetElement) {
+                        const header = document.querySelector('.navbar');
+                        const glossaryNav = document.querySelector('.glossary-nav');
+                        let offset = 20;
+                        
+                        if (header) offset += header.offsetHeight;
+                        if (glossaryNav) offset += glossaryNav.offsetHeight;
+                        
+                        const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        window.scrollTo({
+                            top: elementTop - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 300); // Longer delay for Chrome's rendering
+            });
+        } else if (window.location.hash) {
+            // Handle direct hash navigation with Chrome-compatible timing
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    const targetElement = document.getElementById(window.location.hash.substring(1));
+                    if (targetElement) {
+                        const header = document.querySelector('.navbar');
+                        const glossaryNav = document.querySelector('.glossary-nav');
+                        let offset = 20;
+                        
+                        if (header) offset += header.offsetHeight;
+                        if (glossaryNav) offset += glossaryNav.offsetHeight;
+                        
+                        const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        window.scrollTo({
+                            top: elementTop - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 300);
+            });
+        }
+    }
 };
 
 function replaceURL(inputUrl) {
