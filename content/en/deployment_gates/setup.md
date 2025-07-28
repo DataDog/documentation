@@ -143,7 +143,7 @@ An additional API endpoint allows to fetch the gate evaluation status. You can p
 ```bash
 curl -X GET "https://api.{{< region-param key="dd_site" >}}/api/unstable/deployments/gates/evaluation/6fb8f722-b16d-4aa0-95db-744c85030d60" \
 -H "DD-API-KEY: <YOUR_API_KEY>" \
--H "DD-APP-KEY: <YOUR_APP_KEY>"
+-H "DD-APPLICATION-KEY: <YOUR_APP_KEY>"
 ```
 
 **Note**: If you call this endpoint too quickly after requesting the evaluation, a 404 HTTP response may be returned because the evaluation did not start yet. If this is the case, retry a few seconds later.
