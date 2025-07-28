@@ -149,7 +149,7 @@ For Datadog to correlate your logs and traces, your JSON log files must contain 
 - `trace_id`: The ID of the trace. It must be a 32-character lowercase hexadecimal string.
 - `span_id`: The ID of the span. It must be a 16-character lowercase hexadecimal string.  
 
-The OpenTelemetry SDK typically provides these as integers, which must be formatted into hexadecimal strings without any <code>0x</code> prefix.
+The OpenTelemetry SDK typically provides these in a raw format (such as an integer or byte array), which must be formatted into hexadecimal strings without any <code>0x</code> prefix.
 
 1. **Configure your Application to Output JSON Logs**: Use a standard logging library to write logs as JSON to a file or `stdout`. The following Python example uses the standard `logging` library.
 2. **Manually Inject Trace Context**: In your application code, retrieve the current span context and add the `trace_id` and `span_id` to your log records. The following Python example shows how to create a custom logging.Filter to do this automatically:
@@ -168,9 +168,6 @@ The OpenTelemetry SDK typically provides these as integers, which must be format
                span_context = span.get_span_context()
                record.trace_id = f'{span_context.trace_id:032x}'
                record.span_id = f'{span_context.span_id:016x}'
-           else:
-               record.trace_id = "0"
-               record.span_id = "0"
            return True
    
    # 2. Configure a JSON logger
