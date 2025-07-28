@@ -28,9 +28,23 @@ The following table presents the list of collected features and the minimal Agen
 2. Enable BigQuery monitoring in your Google Cloud project.
 3. For reservation cost allocation, configure BigQuery reservations in your project.
 
-## Allocate costs
+## Allocating costs
 
-Cost allocation divides BigQuery costs from your cloud provider into individual queries and workloads associated with them. These divided costs are enriched with tags from queries, projects, and reservations so you can break down costs by any associated dimensions.
+Cost allocation divides BigQuery costs from GCP into individual queries and workloads associated with them. These divided costs are enriched with tags from queries, projects, and reservations so you can break down costs by any associated dimensions. 
+
+For reservation-based BigQuery costs, CCM calculates the cost per-query using the following formula:
+
+```
+cost_per_query = (query_slot_usage / total_reservation_slot_usage) * total_reservation_cost
+```
+
+Where:
+- `query_slot_usage`: The number of slot-seconds consumed by an individual query
+- `total_reservation_slot_usage`: The total slot-seconds used across all queries in the reservation
+- `total_reservation_cost`: The total cost of the reservation for the time period
+
+Any difference between the total billed reservation cost and the sum of allocated query costs is categorized as `cluster_idle` cost, representing unused reservation capacity.
+
 
 ### Query-level tag extraction
 
