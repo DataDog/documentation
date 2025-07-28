@@ -188,8 +188,11 @@ Use this script as a starting point. For the API_URL variable, be sure to replac
 # Configuration
 MAX_RETRIES=3
 DELAY_SECONDS=5
-API_URL="https://api.<YOUR_DD_SITE>/api/unstable/deployments/gates/evaluate"
+POLL_INTERVAL=10
+MAX_POLL_TIME_SECONDS=10800 # 3 hours
+API_URL="https://api.<YOUR_DD_SITE>/api/unstable/deployments/gates/evaluation"
 API_KEY="<YOUR_API_KEY>"
+APP_KEY="<YOUR_APP_KEY>"
 
 PAYLOAD=$(cat <<EOF
 {
@@ -205,12 +208,14 @@ PAYLOAD=$(cat <<EOF
 EOF
 )
 
+# Step 1: Request evaluation
 current_attempt=0
 while [ $current_attempt -lt $MAX_RETRIES ]; do
    current_attempt=$((current_attempt + 1))
    RESPONSE=$(curl -s -w "%{http_code}" -o response.txt -X POST "$API_URL" \
        -H "Content-Type: application/json" \
        -H "DD-API-KEY: $API_KEY" \
+       -H "DD-APP-KEY: $APP_KEY" \
        -d "$PAYLOAD")
 
    # Extracts the last 3 digits of the status code
@@ -223,38 +228,98 @@ while [ $current_attempt -lt $MAX_RETRIES ]; do
        sleep $DELAY_SECONDS
        continue
 
-   elif [ ${HTTP_CODE} -ne 200 ]; then
-       # Only 200 is an expected status code
-       echo "Unexpected HTTP Code ($HTTP_CODE): $RESPONSE_BODY"
+   elif [ ${HTTP_CODE} -ge 400 ] && [ ${HTTP_CODE} -le 499 ]; then
+       # 4xx errors (except 404) are client errors and not retriable
+       echo "Client error ($HTTP_CODE): $RESPONSE_BODY"
        exit 1
    fi
 
-   # At this point, we have received a 200 status code. So, we check the gate status returned
-   GATE_STATUS=$(echo "$RESPONSE_BODY" | jq -r '.data.attributes.gate_status')
-
-   if [[ "$GATE_STATUS" == "pass" ]]; then
-       echo "Gate evaluation PASSED"
-       exit 0
-   else
-       echo "Gate evaluation FAILED"
+   # Successfully started evaluation, extract evaluation_id
+   EVALUATION_ID=$(echo "$RESPONSE_BODY" | jq -r '.data.attributes.evaluation_id')
+   if [ "$EVALUATION_ID" = "null" ] || [ -z "$EVALUATION_ID" ]; then
+       echo "Failed to extract evaluation_id from response: $RESPONSE_BODY"
        exit 1
    fi
+
+   echo "Evaluation started with ID: $EVALUATION_ID"
+   break
 done
 
-# If we arrive here, it means that we received several 5xx errors from the API. To not block deployments, we can treat this case as a success
-echo "All retries exhausted, but treating 5xx errors as success."
-exit 0
+if [ $current_attempt -eq $MAX_RETRIES ]; then
+   echo "All retries exhausted for evaluation request, but treating 5xx errors as success."
+   exit 0
+fi
+
+# Step 2: Poll for results
+start_time=$(date +%s)
+poll_count=0
+
+while true; do
+  poll_count=$((poll_count + 1))
+  current_time=$(date +%s)
+  elapsed_time=$((current_time - start_time))
+
+  # Check if we've exceeded the maximum polling time
+  if [ $elapsed_time -ge $MAX_POLL_TIME_SECONDS ]; then
+      echo "Evaluation polling timeout after ${MAX_POLL_TIME_SECONDS} seconds"
+      exit 1
+  fi
+
+  RESPONSE=$(curl -s -w "%{http_code}" -o response.txt -X GET "$API_URL/$EVALUATION_ID" \
+      -H "DD-API-KEY: $API_KEY" \
+      -H "DD-APP-KEY: $APP_KEY")
+
+  HTTP_CODE=$(echo "$RESPONSE" | tail -c 4)
+  RESPONSE_BODY=$(cat response.txt)
+
+  if [ ${HTTP_CODE} -eq 404 ]; then
+      # Evaluation might not have started yet, retry after a short delay
+      echo "Evaluation not ready yet (404), retrying in $POLL_INTERVAL seconds... (attempt $poll_count, elapsed: ${elapsed_time}s)"
+      sleep $POLL_INTERVAL
+      continue
+  elif [ ${HTTP_CODE} -ge 500 ]  &&  [ ${HTTP_CODE} -le 599 ]; then
+      echo "Server error ($HTTP_CODE) while polling, retrying in $POLL_INTERVAL seconds... (attempt $poll_count, elapsed: ${elapsed_time}s)"
+      sleep $POLL_INTERVAL
+      continue
+  elif [ ${HTTP_CODE} -ge 400 ] && [ ${HTTP_CODE} -le 499 ]; then
+      # 4xx errors (except 404) are client errors and not retriable
+      echo "Client error ($HTTP_CODE) while polling: $RESPONSE_BODY"
+      exit 1
+  fi
+
+  # Check gate status
+  GATE_STATUS=$(echo "$RESPONSE_BODY" | jq -r '.data.attributes.gate_status')
+
+  if [ "$GATE_STATUS" = "pass" ]; then
+      echo "Gate evaluation PASSED"
+      exit 0
+  elif [ "$GATE_STATUS" = "fail" ]; then
+      echo "Gate evaluation FAILED"
+      exit 1
+  else
+      # Treat any other status (in_progress, unexpected, etc.) as still in progress
+      echo "Evaluation still in progress (status: $GATE_STATUS), retrying in $POLL_INTERVAL seconds... (attempt $poll_count, elapsed: ${elapsed_time}s)"
+      sleep $POLL_INTERVAL
+      continue
+  fi
+done
 ```
 
 The script has the following characteristics:
 
 * It receives three inputs: `service`, `environment`, and `version` (optionally add `identifier` and `primary_tag` if needed). The `version` is only required if one or more APM Faulty Deployment Detection rules are evaluated.
-* It sends a request to the Deployment Gate API and writes the output to the `response.txt` file.
-* It checks the HTTP response status code of the response, and does the following depending on the response code:
-  * 5xx: Retries the call (up to 3 times) with a delay of 5 seconds.
-  * Not 200 (for example, 404): Prints the resulting error and fails.
-  * 200: Checks the gate evaluation status returned (under `data.attributes.gate_status`) and passes or fails the script based on its value.
-* If all the retries are exhausted (that is, several 5xx responses returned), the script does not return a failure to be resilient to API failures.
+* It sends a request to start the evaluation and records the evaluation_id. Handles various HTTP response codes appropriately:
+  * 5xx: Server errors, retries with delay.
+  * 4xx: Client error, evaluation fails.
+  * 2xx: Evaluation started successfully.
+* It polls the evaluation status endpoint using the evaluation_id until the evaluation is complete.
+* It handles various HTTP response codes appropriately:
+  * 5xx: Server errors, retries with delay.
+  * 404: Gate evaluation not started yet, retries with delay.
+  * 4xx errors (except 404): Client error, evaluation fails.
+  * 2xx: Successful response, check for gate status and retry with delay if not complete yet.
+* The script polls every 10 seconds indefinitely until the evaluation completes or the maximum polling time (10800 seconds = 3 hours by default) is reached.
+* If all the retries are exhausted for the initial request (5xx responses), the script treats this as success to be resilient to API failures.
 
 This is a general behavior, and you should change it based on your personal use case and preferences. The script uses `curl` (to perform the request) and `jq` (to process the returned JSON). If those commands are not available, install them at the beginning of the script (for example, by adding `apk add --no-cache curl jq`).
 
