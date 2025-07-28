@@ -16,7 +16,7 @@ Google Cloud Run is a fully managed serverless platform for deploying and scalin
 
 This page provides instructions for instrumenting your Google Cloud Run containers with the Datadog Agent, which enables tracing, custom metrics, and direct log collection. The Datadog Agent runs in a sidecar container.
 
-<div class="alert alert-info">To instrument your Google Cloud Run applications with an in-process approach, see <a href="/serverless/google_cloud_run/containers_in_process">Instrument Google Cloud Run In-Process</a>.</div>
+<div class="alert alert-info">To instrument your Google Cloud Run applications with an in-process approach, see <a href="/serverless/google_cloud_run/containers/in_process">Instrument Google Cloud Run In-Process</a>.</div>
 
 <div class="alert alert-info">
 <strong>Have you set up your <a href="/integrations/google-cloud-platform/">Google Cloud integration</a>?</strong> Datadog recommends setting up the integration, which collects metrics and logs from Google Cloud services, before proceeding on to instrumentation. Remember to add the <code>cloud asset viewer</code> role to your service account and enable the Cloud Asset Inventory API in Google Cloud.
