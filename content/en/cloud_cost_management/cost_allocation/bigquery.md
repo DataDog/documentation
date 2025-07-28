@@ -1,6 +1,6 @@
 ---
 title: BigQuery Cost Allocation
-description: 
+description: Learn how to allocate Cloud Cost Management spending across your organization with BigQuery Cost Allocation.
 further_reading:
   - link: "/cloud_cost_management/"
     tag: "Documentation"
@@ -8,12 +8,95 @@ further_reading:
 ---
 
 ## Overview
-This is the overview for BigQuery Allocation
 
-## 
+Datadog Cloud Cost Management (CCM) automatically allocates the costs of your Google BigQuery resources to individual queries and workloads. Use cost metrics enriched with tags from queries, projects, and reservations to visualize BigQuery workload costs in the context of your entire cloud bill.
+
+Resources
+CCM allocates costs for BigQuery resources for both types of Analysis costs (on-demand and reservation-based).
+
+CCM displays costs for resources including query-level analysis, storage, and data transfer on the [**BigQuery** dashboard][1].
+
+## Prerequisites
+
+The following table presents the list of collected features and the minimal Agent versions required:
+
+| Feature | Requirements |
+|---|---|
+| BigQuery Cost Allocation | Google Cloud Cost Management integration configured |
+| Query-Level Cost Attribution | BigQuery monitoring enabled |
+| Reservation Cost Allocation | BigQuery reservations configured |
+
+1. Configure the Google Cloud Cost Management integration on the [Cloud Cost Setup page][2].
+2. Enable BigQuery monitoring in your Google Cloud project.
+3. For reservation cost allocation, configure BigQuery reservations in your project.
+
+## Allocate costs
+
+Cost allocation divides BigQuery costs from your cloud provider into individual queries and workloads associated with them. These divided costs are enriched with tags from queries, projects, and reservations so you can break down costs by any associated dimensions.
+
+### Record enrichment and tagging for understanding costs
+
+CCM enriches BigQuery cost records with several key pieces of information:
+
+1. **User identification**: Records are enriched with `user_email` to track which user or service account executed the query
+2. **Reservation tracking**: Records include `reservation_id` to identify which reservation pool provided the compute resources
+3. **Scheduled queries**: Records are tagged with `dts_config_id` for identifying scheduled queries and data transfers
+4. **Orchestration platform**: All BigQuery query-related records are tagged with `orchestrator:bigquery`
+
+Additionally, CCM provides two special tags for detailed cost analysis:
+
+1. **`allocated_spend_type`**: Categorizes costs as either:
+   - `usage`: Active query execution costs
+   - `cluster_idle`: Unused reservation capacity costs
+
+2. **`allocated_resource`**: Indicates the resource type being measured:
+   - `slots`: For reservation-based queries
+   - `bytes_processed`: For on-demand queries
+
+### Query-level tag extraction
+
+CCM extracts the following tags from BigQuery query logs, allowing you to aggregate on these fields in the explorer:
+
+| Tag | Description |
+|---|---|
+| `reservation_id` | The reservation pool that provided compute resources |
+| `user_email` | The user or service account that executed the query |
+| `dts_config_id` | Identifier for scheduled queries and data transfers |
+
+### Compute allocation
+
+For BigQuery compute allocation, CCM handles two pricing models:
+
+**On-demand pricing**:
+- Costs are directly attributed to individual queries based on bytes processed
+- Includes query-level tags for detailed cost attribution
+
+**Reservation-based pricing**:
+- Costs of reserved slots are allocated proportionally to queries using those slots
+- Allocation based on slot consumption (total_slot_ms) per query
+- Includes idle cost calculation for unused reservation capacity
+
+### Compute
+
+Costs are allocated into the following spend types:
+
+| Spend type | Description |
+|---|---|
+| Usage | Cost of query execution based on bytes processed (on-demand) or slot consumption (reservation) |
+| Cluster idle | Cost of reserved slots allocated but not utilized by queries |
+
+### Storage
+
+Storage costs are categorized as:
+
+| Spend type | Description |
+|---|---|
+| Active | Cost of actively used storage |
+| Long-term | Cost of infrequently accessed storage |
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: 
+[1]: https://app.datadoghq.com/dashboard/ecm-es8-agw/bigquery-allocation
+[2]: https://app.datadoghq.com/cost/setup 
