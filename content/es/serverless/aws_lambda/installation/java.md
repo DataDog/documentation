@@ -273,7 +273,7 @@ El módulo de Terraform [`lambda-datadog`][1] envuelve el recurso [`aws_lambda_f
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "2.0.0"
+  version = "3.2.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -283,8 +283,8 @@ module "lambda-datadog" {
     "DD_VERSION" : "<VERSION>"
   }
 
-  datadog_extension_layer_version = 67
-  datadog_java_layer_version = 15
+  datadog_extension_layer_version = {{< latest-lambda-layer-version layer="extension" >}}
+  datadog_java_layer_version = {{< latest-lambda-layer-version layer="dd-trace-java" >}}
 
   # los argumentos de aws_lambda_function
 }
@@ -309,8 +309,8 @@ module "lambda-datadog" {
 4. Selecciona las versiones de la capa de Lambda de la Datadog Extension y de la capa de Lambda de Datadog para Java que quieres usar. Si las dejas en blanco, se utilizarán las últimas versiones de las capas.
 
 ```
-  datadog_extension_layer_version = 67
-  datadog_java_layer_version = 15
+  datadog_extension_layer_version = {{< latest-lambda-layer-version layer="extension" >}}
+  datadog_java_layer_version = {{< latest-lambda-layer-version layer="dd-trace-java" >}}
 ```
 
 [1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
