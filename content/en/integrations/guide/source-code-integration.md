@@ -75,7 +75,7 @@ Repositories from GitLab instances are supported in closed Preview. Repositories
 
 Install Datadog's [GitLab Source Code integration][101] using the [integration tile][102] or while onboarding other Datadog products to connect to your GitLab repositories.
 
-[101]: https://docs.datadoghq.com/integrations/gitlab-source-code/
+[101]: https://www.datadoghq.com/product-preview/gitlab-source-code-integration/
 [102]: https://app.datadoghq.com/integrations/gitlab-source-code/
 
 {{% /tab %}}
