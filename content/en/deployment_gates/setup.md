@@ -22,7 +22,10 @@ Setting up Deployment Gates involves two steps:
      - Allow different deployment strategies (example: `fast-deploy` vs `default`)
      - Distinguish deployment phases (example: `pre-deploy` vs `post-deploy`)
      - Define canary stages (example: `pre-deploy` vs `canary-20pct`)
-   - **Evaluation Mode**: Enable `Dry Run` to test gate behavior without impacting deployments. The evaluation of a dry run gate always responds with a pass status, but the in-app result is the real status based on rules evaluation. This is particularly useful when performing an initial evaluation of the gate behavior without impacting the deployment pipeline.
+   - **Evaluation Mode**: Enable `Dry Run` to test gate behavior without impacting deployments. The evaluation of
+a dry run gate always responds with a pass status, but the in-app result is the real status based
+on rules evaluation. This is particularly useful when performing an initial evaluation of the
+gate behavior without impacting the deployment pipeline.
 
 ## Add rules to a gate
 
@@ -92,8 +95,8 @@ This rule type uses Watchdog's [APM Faulty Deployment Detection][1] to compare t
 
 Deployment Gate evaluations are asynchronous, as the evaluation process can take some time to complete. This means that when you trigger an evaluation, the a process is started in the background and provides you with an evaluation ID to track its progress.
 
-- First, you must request a deployment gate evaluation, which initiates the process and returns an evaluation ID.
-- Then, you need to poll the evaluation status endpoint using the evaluation ID to retrieve the result once the evaluation is complete.
+- First, request a deployment gate evaluation, which initiates the process and returns an evaluation ID.
+- Then, poll the evaluation status endpoint using the evaluation ID to retrieve the result once the evaluation is complete.
 
 After a gate is configured with at least one rule, you can request a gate evaluation while deploying the related service with an API call:
 
