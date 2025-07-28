@@ -1,7 +1,6 @@
 ---
 title: Ownership of Views
 description: A guide on how to use view-based ownership in Real User Monitoring to filter event data for views your team owns.
-private: true
 further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'
   tag: 'Documentation'

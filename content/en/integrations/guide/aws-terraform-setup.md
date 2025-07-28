@@ -13,7 +13,7 @@ Using [Terraform][1], you can create the Datadog IAM role, policy document, and 
 
 1. Configure the [Datadog Terraform provider][2] to interact with the Datadog API through a Terraform configuration.
     * If you haven't already, configure `api_url` to your Datadog site's API URL.
-**Note**: The `datadog_integration_aws_account` resource replaced the `datadog_integration_aws` resource in version `3.50.0` of the Datadog Terraform provider. To upgrade from the `datadog_integration_aws` resource, see [Upgrading from datadog_integration_aws resources][3].
+    * **Note**: The `datadog_integration_aws_account` resource replaced the `datadog_integration_aws` resource in version `3.50.0` of the Datadog Terraform provider. To upgrade from the `datadog_integration_aws` resource, see [Upgrading from datadog_integration_aws resources][3].
 
 {{< site-region region="us,us3,us5,eu" >}}
 2. Set up your Terraform configuration file using the example below as a base template. Ensure to update the following parameters before you apply the changes:
