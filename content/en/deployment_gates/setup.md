@@ -104,7 +104,7 @@ After a gate is configured with at least one rule, you can request a gate evalua
 curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/unstable/deployments/gates/evaluation" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: <YOUR_API_KEY>" \
--H "DD-APP-KEY: <YOUR_APP_KEY>" \
+-H "DD-APPLICATION-KEY: <YOUR_APP_KEY>" \
 -d @- << EOF
 {
   "data": {
@@ -189,17 +189,20 @@ The [datadog-ci][1] `deployment gate` command encapsulates all the required logi
 datadog-ci deployment gate --service transaction-backend --env staging
 ```
 
-**Notes**:
-* The `deployment gate` command is available in datadog-ci versions v3.17.0 and above.
-* The `deployment gate` command is a beta command, so it needs the `DD_BETA_COMMANDS_ENABLED=1` environment variable to run.
-
 The command has the following characteristics:
 * It sends a request to start the evaluation and polls the evaluation status endpoint using the evaluation_id until the evaluation is complete.
 * It provides a configurable timeout to determine the maximum amount of time to wait for an evaluation to complete.
 * It implements automatic retries for errors.
 * It allows to customize the behavior on unexpected errors, allowing to consider Datadog failures as either an evaluation pass or a fail.
 
-Refer to the [`deployment gate` command documentation][2] for more details.
+Note that the `deployment gate` command is available in datadog-ci versions v3.17.0 and above.
+
+**Required environment variables**:
+* `DD_API_KEY`: API key used to authenticate the requests.
+* `DD_APP_KEY`: Application key used to authenticate the requests.
+* `DD_BETA_COMMANDS_ENABLED=1`: The `deployment gate` command is a beta command, so datadog-ci needs to be ran with beta commands enabled.
+
+For complete configuration options and detailed usage examples, refer to the [`deployment gate` command documentation][2].
 
 [1]: https://github.com/DataDog/datadog-ci
 [2]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#gate
