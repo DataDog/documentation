@@ -179,6 +179,162 @@ When a 200 HTTP response is returned, it has the following format:
 ### Integration examples
 
 {{< tabs >}}
+{{% tab "datadog-ci CLI" %}}
+The [datadog-ci][1] `deployment gate` command encapsulates all the required logic to evaluate Deployment Gates in a single command:
+
+```bash
+datadog-ci deployment gate --service transaction-backend --env staging
+```
+
+**Note**: The `deployment gate` command is available in datadog-ci versions v3.17.0 and above.
+
+The command has the following characteristics:
+* It sends a request to start the evaluation and polls the evaluation status endpoint using the evaluation_id until the evaluation is complete.
+* It provides a configurable timeout to determine the maximum amount of time to wait for an evaluation to complete.
+* It implements automatic retries for errors.
+* It allows to customize the behavior on unexpected errors, allowing to consider Datadog failures as either an evaluation pass or a fail.
+
+Refer to the [`deployment gate` command documentation][2] for more details.
+
+[1]: https://github.com/DataDog/datadog-ci
+[2]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#gate
+
+{{% /tab %}}
+{{% tab "Argo Rollouts" %}}
+To call Deployment Gates from an Argo Rollouts Kubernetes Resource, you can create an [AnalysisTemplate][1] or a [ClusterAnalysisTemplate][1]. The template should contain a Kubernetes job that is used to perform the analysis.
+
+Use this script as a starting point. For the API_URL variable, be sure to replace `<YOUR_DD_SITE>` with your [Datadog site name][3] (for example, {{< region-param key="dd_site" code="true" >}}).
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: ClusterAnalysisTemplate
+metadata:
+  name: datadog-job-analysis
+spec:
+  args:
+    - name: service
+    - name: env
+  metrics:
+    - name: datadog-job
+      provider:
+        job:
+          spec:
+            ttlSecondsAfterFinished: 300
+            backoffLimit: 0
+            template:
+              spec:
+                restartPolicy: Never
+                containers:
+                  - name: datadog-check
+                    image: alpine:latest
+                    command: ["/bin/sh", "-c"]
+                    args:
+                      - |
+                        apk add --no-cache curl jq
+
+                        # Configuration
+                        MAX_RETRIES=3
+                        DELAY_SECONDS=5
+                        API_URL="https://api.<YOUR_DD_SITE>/api/unstable/deployments/gates/evaluate"
+                        API_KEY="<YOUR_API_KEY>"
+
+                        PAYLOAD='{
+                          "data": {
+                            "type": "deployment_gates_evaluation_request",
+                            "attributes": {
+                              "service": "{{ args.service }}",
+                              "env": "{{ args.env }}",
+                              "version": "{{ args.version }}",
+                            }
+                          }
+                        }'
+
+                        current_attempt=0
+                        while [ $current_attempt -lt $MAX_RETRIES ]; do
+                          current_attempt=$((current_attempt + 1))
+                          RESPONSE=$(curl -s -w "%{http_code}" -o response.txt -X POST "$API_URL" \
+                              -H "Content-Type: application/json" \
+                              -H "DD-API-KEY: $API_KEY" \
+                              -d "$PAYLOAD")
+
+                          # Extracts the last 3 digits of the status code
+                          HTTP_CODE=$(echo "$RESPONSE" | tail -c 4)
+                          RESPONSE_BODY=$(cat response.txt)
+
+                          if [ ${HTTP_CODE} -ge 500 ]  &&  [ ${HTTP_CODE} -le 599 ]; then
+                              # Status code 5xx indicates a server error, so the call is retried
+                              echo "Attempt $current_attempt: 5xx Error ($HTTP_CODE). Retrying in $DELAY_SECONDS seconds..."
+                              sleep $DELAY_SECONDS
+                              continue
+
+                          elif [ ${HTTP_CODE} -ne 200 ]; then
+                              # Only 200 is an expected status code
+                              echo "Unexpected HTTP Code ($HTTP_CODE): $RESPONSE_BODY"
+                              exit 1
+                          fi
+
+                          # At this point, we have received a 200 status code. So, we check the gate status returned
+                          GATE_STATUS=$(echo "$RESPONSE_BODY" | jq -r '.data.attributes.gate_status')
+
+                          if [[ "$GATE_STATUS" == "pass" ]]; then
+                              echo "Gate evaluation PASSED"
+                              exit 0
+                          else
+                              echo "Gate evaluation FAILED"
+                              exit 1
+                          fi
+                        done
+
+                        # If we arrive here, it means that we received several 5xx errors from the API. To not block deployments, we can treat this case as a success
+                        echo "All retries exhausted, but treating 5xx errors as success."
+                        exit 0
+```
+
+* The analysis template can receive arguments from the Rollout resource. In this case, the arguments are `service`, `env`, and any other optional fields needed (such as `version`). For more information, see the [official Argo Rollouts docs][2].
+* The `ttlSecondsAfterFinished` field removes the finished jobs after 5 minutes.
+* The `backoffLimit` field is set to 0 as the job might fail if the gate evaluation fails, and it should not be retried in that case.
+
+After you have created the analysis template, reference it from the Argo Rollouts strategy:
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: rollouts-demo
+  labels:
+    tags.datadoghq.com/service: transaction-backend
+    tags.datadoghq.com/env: dev
+spec:
+  replicas: 5
+  strategy:
+    canary:
+      steps:
+        ...
+        - analysis:
+            templates:
+              - templateName: datadog-job-analysis
+                clusterScope: true # Only needed for cluster analysis
+            args:
+              - name: env
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.labels['tags.datadoghq.com/env']
+              - name: service
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.labels['tags.datadoghq.com/service']
+              - name: version #Only required if one or more APM Faulty Deployment Detection rules are evaluated
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.labels['tags.datadoghq.com/version']
+        - ...
+```
+
+[1]: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-progressive-delivery
+[2]: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-template-arguments
+[3]: /getting_started/site/
+
+{{% /tab %}}
 {{% tab "Generic script" %}}
 Use this script as a starting point. For the API_URL variable, be sure to replace `<YOUR_DD_SITE>` with your [Datadog site name][1] (for example, {{< region-param key="dd_site" code="true" >}}).
 
@@ -326,141 +482,6 @@ The script has the following characteristics:
 This is a general behavior, and you should change it based on your personal use case and preferences. The script uses `curl` (to perform the request) and `jq` (to process the returned JSON). If those commands are not available, install them at the beginning of the script (for example, by adding `apk add --no-cache curl jq`).
 
 [1]: /getting_started/site/
-{{% /tab %}}
-{{% tab "Argo Rollouts" %}}
-To call Deployment Gates from an Argo Rollouts Kubernetes Resource, you can create an [AnalysisTemplate][1] or a [ClusterAnalysisTemplate][1]. The template should contain a Kubernetes job that is used to perform the analysis.
-
-Use this script as a starting point. For the API_URL variable, be sure to replace `<YOUR_DD_SITE>` with your [Datadog site name][3] (for example, {{< region-param key="dd_site" code="true" >}}).
-
-```yaml
-apiVersion: argoproj.io/v1alpha1
-kind: ClusterAnalysisTemplate
-metadata:
-  name: datadog-job-analysis
-spec:
-  args:
-    - name: service
-    - name: env
-  metrics:
-    - name: datadog-job
-      provider:
-        job:
-          spec:
-            ttlSecondsAfterFinished: 300
-            backoffLimit: 0
-            template:
-              spec:
-                restartPolicy: Never
-                containers:
-                  - name: datadog-check
-                    image: alpine:latest
-                    command: ["/bin/sh", "-c"]
-                    args:
-                      - |
-                        apk add --no-cache curl jq
-
-                        # Configuration
-                        MAX_RETRIES=3
-                        DELAY_SECONDS=5
-                        API_URL="https://api.<YOUR_DD_SITE>/api/unstable/deployments/gates/evaluate"
-                        API_KEY="<YOUR_API_KEY>"
-
-                        PAYLOAD='{
-                          "data": {
-                            "type": "deployment_gates_evaluation_request",
-                            "attributes": {
-                              "service": "{{ args.service }}",
-                              "env": "{{ args.env }}",
-                              "version": "{{ args.version }}",
-                            }
-                          }
-                        }'
-
-                        current_attempt=0
-                        while [ $current_attempt -lt $MAX_RETRIES ]; do
-                          current_attempt=$((current_attempt + 1))
-                          RESPONSE=$(curl -s -w "%{http_code}" -o response.txt -X POST "$API_URL" \
-                              -H "Content-Type: application/json" \
-                              -H "DD-API-KEY: $API_KEY" \
-                              -d "$PAYLOAD")
-
-                          # Extracts the last 3 digits of the status code
-                          HTTP_CODE=$(echo "$RESPONSE" | tail -c 4)
-                          RESPONSE_BODY=$(cat response.txt)
-
-                          if [ ${HTTP_CODE} -ge 500 ]  &&  [ ${HTTP_CODE} -le 599 ]; then
-                              # Status code 5xx indicates a server error, so the call is retried
-                              echo "Attempt $current_attempt: 5xx Error ($HTTP_CODE). Retrying in $DELAY_SECONDS seconds..."
-                              sleep $DELAY_SECONDS
-                              continue
-
-                          elif [ ${HTTP_CODE} -ne 200 ]; then
-                              # Only 200 is an expected status code
-                              echo "Unexpected HTTP Code ($HTTP_CODE): $RESPONSE_BODY"
-                              exit 1
-                          fi
-
-                          # At this point, we have received a 200 status code. So, we check the gate status returned
-                          GATE_STATUS=$(echo "$RESPONSE_BODY" | jq -r '.data.attributes.gate_status')
-
-                          if [[ "$GATE_STATUS" == "pass" ]]; then
-                              echo "Gate evaluation PASSED"
-                              exit 0
-                          else
-                              echo "Gate evaluation FAILED"
-                              exit 1
-                          fi
-                        done
-
-                        # If we arrive here, it means that we received several 5xx errors from the API. To not block deployments, we can treat this case as a success
-                        echo "All retries exhausted, but treating 5xx errors as success."
-                        exit 0
-```
-
-* The analysis template can receive arguments from the Rollout resource. In this case, the arguments are `service`, `env`, and any other optional fields needed (such as `version`). For more information, see the [official Argo Rollouts docs][2].
-* The `ttlSecondsAfterFinished` field removes the finished jobs after 5 minutes.
-* The `backoffLimit` field is set to 0 as the job might fail if the gate evaluation fails, and it should not be retried in that case.
-
-After you have created the analysis template, reference it from the Argo Rollouts strategy:
-
-```yaml
-apiVersion: argoproj.io/v1alpha1
-kind: Rollout
-metadata:
-  name: rollouts-demo
-  labels:
-    tags.datadoghq.com/service: transaction-backend
-    tags.datadoghq.com/env: dev
-spec:
-  replicas: 5
-  strategy:
-    canary:
-      steps:
-        ...
-        - analysis:
-            templates:
-              - templateName: datadog-job-analysis
-                clusterScope: true # Only needed for cluster analysis
-            args:
-              - name: env
-                valueFrom:
-                  fieldRef:
-                    fieldPath: metadata.labels['tags.datadoghq.com/env']
-              - name: service
-                valueFrom:
-                  fieldRef:
-                    fieldPath: metadata.labels['tags.datadoghq.com/service']
-              - name: version #Only required if one or more APM Faulty Deployment Detection rules are evaluated
-                valueFrom:
-                  fieldRef:
-                    fieldPath: metadata.labels['tags.datadoghq.com/version']
-        - ...
-```
-
-[1]: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-progressive-delivery
-[2]: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-template-arguments
-[3]: /getting_started/site/
-
 {{% /tab %}}
 {{< /tabs >}}
 
