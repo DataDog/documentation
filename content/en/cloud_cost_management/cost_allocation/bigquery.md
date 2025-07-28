@@ -32,7 +32,7 @@ The following table presents the list of collected features and the minimal Agen
 
 Cost allocation divides BigQuery costs from GCP into individual queries and workloads associated with them. These divided costs are enriched with tags from queries, projects, and reservations so you can break down costs by any associated dimensions. 
 
-For reservation-based BigQuery costs, CCM calculates the cost per-query using the following formula:
+For reservation-based BigQuery costs, CCM allocates costs proportionally based on slot usage. Each query's cost is determined by its share of the total slot usage within the reservation. For example, if a query uses 25% of the total consumed slots in a reservation during a given period, it will be allocated 25% of that reservation's total cost for that period. The cost per-query is calculated using the following formula:
 
 ```
 cost_per_query = (query_slot_usage / total_reservation_slot_usage) * total_reservation_cost
