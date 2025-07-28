@@ -15,7 +15,10 @@ further_reading:
     text: 'Instrument your container with the sidecar approach'
 ---
 
-You have two options for instrumenting your Cloud Run containers with Datadog:
+To instrument your Google Cloud Run containers with Datadog, choose one of two options:
+
+{{% google-cloud-run-container-options %}}
+
 - [**In-process**][1]: Wraps your application container with the Datadog Agent. Choose this option for a simpler setup, lower cost overhead, and direct log piping.
 - [**Sidecar**][2]: Deploys the Datadog Agent in a separate container alongside your app container. Choose this option if you have multiple containers in a single service, if you prefer strict isolation of the Datadog Agent, or if you have performance-sensitive workloads.
 
@@ -29,22 +32,6 @@ You have two options for instrumenting your Cloud Run containers with Datadog:
 | Logging                       | Direct stdout/stderr access.                             | Shared volume + log library routing to a log file. Uncaught errors require extra handling, since they are not automatically handled by your logging library. |
 | Failure isolation             | In rare cases, Datadog Agent bugs can affect your app.   | Datadog Agent faults are isolated.                                                                                                                           |
 | Observing multiple containers | Not supported                                            | Supported                                                                                                                                                    |
-## Installation
-
-{{< programming-lang-wrapper langs="In-Process,Sidecar" >}}
-
-{{< programming-lang lang="In-Process" >}}
-Choose a language to instrument in-process.
-{{< partial name="serverless/in-process-languages.html" >}}
-{{< /programming-lang >}}
-
-{{< programming-lang lang="Sidecar" >}}
-Choose a language to instrument via sidecar.
-{{< partial name="serverless/sidecar-languages.html" >}}
-{{< /programming-lang >}}
-
-{{< /programming-lang-wrapper >}}
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
