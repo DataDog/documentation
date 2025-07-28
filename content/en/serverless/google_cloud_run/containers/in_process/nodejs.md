@@ -70,10 +70,17 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 If you already have an entrypoint defined inside your Dockerfile, you can instead modify the CMD argument.
 
 ```dockerfile
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-RUN npm install --prefix /dd_tracer/node dd-trace --save
 CMD ["/app/datadog-init", "/nodejs/bin/node", "/path/to/your/app.js"]
 ```
+
+If you require your entrypoint to be instrumented as well, you can swap your entrypoint and CMD arguments instead.
+
+```dockerfile
+ENTRYPOINT ["/app/datadog-init"]
+CMD ["/your_entrypoint.sh", "/nodejs/bin/node", "/path/to/your/app.js"]
+```
+
+As long as your command to run is passed as an argument to datadog-init, you will receive full instrumentation.
 
 {{% /collapse-content %}}
 

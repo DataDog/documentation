@@ -59,9 +59,17 @@ CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "path/to/your/python/app.py"
 If you already have an entrypoint defined inside your Dockerfile, you can instead modify the CMD argument.
 
 ```dockerfile
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 CMD ["/app/datadog-init", "/dd_tracer/python/bin/ddtrace-run", "python", "path/to/your/python/app.py"]
 ```
+
+If you require your entrypoint to be instrumented as well, you can swap your entrypoint and CMD arguments instead.
+
+```dockerfile
+ENTRYPOINT ["/app/datadog-init"]
+CMD ["/your_entrypoint.sh", "/dd_tracer/python/bin/ddtrace-run", "python", "path/to/your/python/app.py"]
+```
+
+As long as your command to run is passed as an argument to datadog-init, you will receive full instrumentation.
 
 {{% /collapse-content %}}
 
