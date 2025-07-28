@@ -210,7 +210,7 @@ def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) ->
 ```
 
 You can trace the different parts of your Experiment task (workflow, tool calls...) using the [same tracing decorators](https://docs.datadoghq.com/llm_observability/instrumentation/custom_instrumentation?tab=decorators#trace-an-llm-application) you use in production.
-If you use a [supported framework](https://docs.datadoghq.com/llm_observability/instrumentation/auto_instrumentation?tab=python) (e.g openAI, ...), LLMObs will automatically trace and annotate calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
+If you use a [supported framework](https://docs.datadoghq.com/llm_observability/instrumentation/auto_instrumentation?tab=python) (e.g openAI, ...), LLMObs automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
 
 
 3. Define evaluator functions
