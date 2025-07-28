@@ -19,24 +19,12 @@ gcloud run deploy <APP_NAME>
 
 | Variable | Description |
 | -------- | ----------- |
-| `DD_API_KEY` | [Datadog API key][1] - **Required**|
-| `DD_SITE` | [Datadog site][2] - **Required** |
+| `DD_API_KEY` | [Datadog API key](/account_management/api-app-keys/#api-keys) - **Required**|
+| `DD_SITE` | [Datadog site](/getting_started/site/) - **Required** |
 | `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
-| `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][4], [Node.js][5], [.NET][6], and [PHP][7]. See additional docs for [Python][8], [Go][9], and [Ruby][10]. |
-| `DD_SERVICE`      | See [Unified Service Tagging][3].                                  |
-| `DD_VERSION`      | See [Unified Service Tagging][3].                                  |
-| `DD_ENV`          | See [Unified Service Tagging][3].                                  |
-| `DD_SOURCE`       | See [Unified Service Tagging][3].                                  |
-| `DD_TAGS`         | See [Unified Service Tagging][3].                                  |
-
-
-[1]: /account_management/api-app-keys/#api-keys
-[2]: /getting_started/site/
-[3]: /getting_started/tagging/unified_service_tagging/
-[4]: /tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2
-[5]: /tracing/other_telemetry/connect_logs_and_traces/nodejs
-[6]: /tracing/other_telemetry/connect_logs_and_traces/dotnet?tab=serilog
-[7]: /tracing/other_telemetry/connect_logs_and_traces/php
-[8]: /tracing/other_telemetry/connect_logs_and_traces/python
-[9]: /tracing/other_telemetry/connect_logs_and_traces/go
-[10]: /tracing/other_telemetry/connect_logs_and_traces/ruby
+| `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java](/tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2), [Node.js](/tracing/other_telemetry/connect_logs_and_traces/nodejs), [.NET](/tracing/other_telemetry/connect_logs_and_traces/dotnet?tab=serilog), and [PHP](/tracing/other_telemetry/connect_logs_and_traces/php). See additional docs for [Python](/tracing/other_telemetry/connect_logs_and_traces/python), [Go](/tracing/other_telemetry/connect_logs_and_traces/go), and [Ruby](/tracing/other_telemetry/connect_logs_and_traces/ruby). |
+| `DD_SERVICE`      | See [Unified Service Tagging](/getting_started/tagging/unified_service_tagging/).                                  |
+| `DD_VERSION`      | See [Unified Service Tagging](/getting_started/tagging/unified_service_tagging/).                                  |
+| `DD_ENV`          | See [Unified Service Tagging](/getting_started/tagging/unified_service_tagging/).                                  |
+| `DD_SOURCE`       | See [Unified Service Tagging](/getting_started/tagging/unified_service_tagging/).                                  |
+| `DD_TAGS`         | See [Unified Service Tagging](/getting_started/tagging/unified_service_tagging/).                                  |
