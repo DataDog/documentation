@@ -1,5 +1,5 @@
 ---
-title: Instrumenting Google Cloud Run Containers In-Process
+title: Instrumenting Containers In-Process
 type: multi-code-lang
 aliases:
   - /serverless/google_cloud_run/containers/in_process/
