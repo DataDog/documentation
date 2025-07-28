@@ -11,10 +11,8 @@ further_reading:
 
 Datadog Cloud Cost Management (CCM) automatically allocates the costs of your Google BigQuery resources to individual queries and workloads. Use cost metrics enriched with tags from queries, projects, and reservations to visualize BigQuery workload costs in the context of your entire cloud bill.
 
-Resources
-CCM allocates costs for BigQuery resources for both types of Analysis costs (on-demand and reservation-based).
-
-CCM displays costs for resources including query-level analysis, storage, and data transfer on the [**BigQuery** dashboard][1].
+## Resources
+CCM allocates costs for BigQuery resources for both types of Analysis costs (on-demand and reservation-based). CCM displays costs for resources including query-level analysis, storage, and data transfer on the [**BigQuery** dashboard][1].
 
 ## Prerequisites
 
