@@ -11,7 +11,7 @@ This guide covers setting up and using Remote Configuration with your tracing li
 ## Prerequisites
 
 - [Datadog Agent][2] 7.47.0 or higher installed on your hosts or containers.
-- Upgrade your tracing libraries to a Remote Configuration-compatible version. For more information, see the [Supported configuration options](#supported-configuration-options) section.
+- Upgrade your tracing libraries to a Remote Configuration-compatible version. For more information, see the [Supported configuration options][7] section.
 - Ensure your RBAC permissions include [`org_management`][3], so you can enable Remote Configuration for your organization.
 - Ensure your RBAC permissions include [`api_keys_write`][4], so you can create a new API key with the Remote Configuration capability, or add the capability to an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. A key with this capability allows you to authenticate and authorize your Agent to use Remote Configuration.
 - Ensure you have the `APM Remote Configuration Read` and `APM Remote Configuration Write` [permissions][3].
@@ -52,3 +52,4 @@ The following table describes the meaning of each Tracing library status:
 [4]: /account_management/rbac/permissions#api-and-application-keys
 [5]: https://app.datadoghq.com/organization-settings/remote-config
 [6]: /agent/configuration/network
+[7]: /tracing/trace_collection/runtime_config/#supported-configuration-options
