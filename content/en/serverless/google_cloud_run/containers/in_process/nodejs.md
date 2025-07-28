@@ -37,7 +37,8 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 ```
 
-{{< collapse "Explanation" >}}
+<details>
+<summary>Explanation</summary>
 
 1. Copy the Datadog `serverless-init` into your Docker image.
 
@@ -63,9 +64,11 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
    CMD ["node", "/path/to/your/app.js"]
    ```
 
-{{< /collapse >}}
+</details>
 
-{{< collapse "Alternative configuration" >}}
+<details>
+<summary>Alternative configuration</summary>
+
 If you already have an entrypoint defined inside your Dockerfile, you can instead modify the CMD argument.
 
 ```dockerfile
@@ -73,7 +76,8 @@ COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 RUN npm install --prefix /dd_tracer/node dd-trace --save
 CMD ["/app/datadog-init", "/nodejs/bin/node", "/path/to/your/app.js"]
 ```
-{{< /collapse >}}
+
+</details>
 
 ## 3. Setup Logs
 
