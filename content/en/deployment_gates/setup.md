@@ -174,10 +174,13 @@ When a 200 HTTP response is returned, it has the following format:
 }
 ```
 
-**Notes**:
+The field `data.attributes.gate_status` contains the result of the evaluation. It can contain one of these values:
 
-* If the field `data.attributes.gate_status` is `in_progress`, this means the Gate Evaluation is still in progress and you should retry later.
-* If the field `data.attributes.dry_run` is `true`, the field `data.attributes.gate_status` is always `pass`.
+* `in_progress`: The Deployment Gate evaluation is still in progress, you should continue polling.
+* `pass`: The Deployment Gate evaluation passed.
+* `fail`: The Deployment Gate evaluation failed.
+
+**Note**: If the field `data.attributes.dry_run` is `true`, the field `data.attributes.gate_status` is always `pass`.
 
 ### Integration examples
 
