@@ -425,7 +425,7 @@ menu:
       parent: agent
       weight: 5
     - name: Agent tags
-      url: agent/agent_tags/
+      url: agent/logs/agent_tags/
       parent: agent
       identifier: agent_tags
       weight: 501

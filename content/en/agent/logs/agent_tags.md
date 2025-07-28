@@ -43,7 +43,7 @@ The following tags are automatically added to logs by the Datadog Agent:
 | `event_id` | Windows Event ID | Windows events only, if `tag_event_id: true` |
 | `sid` | Windows Security identifier | Windows events only, if `tag_sid: true` |
 | `truncated` | Source of truncation | If `logs_config.tag_truncated_logs: true` |
-| `multiline` | Source of multiline aggregation | If `logs_config.tag_multi_line_logs: true` |
+| `multiline` | Source of multi-line aggregation | If `logs_config.tag_multi_line_logs: true` |
 | `aggregated_json` | Indicates that the log was aggregated from multiple JSON log entries | If `logs_config.auto_multi_line.tag_aggregated_json: true` |
 
 ## Further reading
