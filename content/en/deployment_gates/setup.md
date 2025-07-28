@@ -234,68 +234,25 @@ spec:
                 restartPolicy: Never
                 containers:
                   - name: datadog-check
-                    image: alpine:latest
+                    image: datadog/ci:v3.17.0
+                    env:
+                      - name: DD_BETA_COMMANDS_ENABLED
+                        value: "1"
+                      - name: DD_SITE
+                        value: "{{< region-param key="dd_site" >}}"
+                      - name: DD_API_KEY
+                        valueFrom:
+                          secretKeyRef:
+                            name: datadog-keys
+                            key: api-key
+                      - name: DD_APP_KEY
+                        valueFrom:
+                          secretKeyRef:
+                            name: datadog-keys
+                            key: app-key
                     command: ["/bin/sh", "-c"]
                     args:
-                      - |
-                        apk add --no-cache curl jq
-
-                        # Configuration
-                        MAX_RETRIES=3
-                        DELAY_SECONDS=5
-                        API_URL="https://api.<YOUR_DD_SITE>/api/unstable/deployments/gates/evaluate"
-                        API_KEY="<YOUR_API_KEY>"
-
-                        PAYLOAD='{
-                          "data": {
-                            "type": "deployment_gates_evaluation_request",
-                            "attributes": {
-                              "service": "{{ args.service }}",
-                              "env": "{{ args.env }}",
-                              "version": "{{ args.version }}",
-                            }
-                          }
-                        }'
-
-                        current_attempt=0
-                        while [ $current_attempt -lt $MAX_RETRIES ]; do
-                          current_attempt=$((current_attempt + 1))
-                          RESPONSE=$(curl -s -w "%{http_code}" -o response.txt -X POST "$API_URL" \
-                              -H "Content-Type: application/json" \
-                              -H "DD-API-KEY: $API_KEY" \
-                              -d "$PAYLOAD")
-
-                          # Extracts the last 3 digits of the status code
-                          HTTP_CODE=$(echo "$RESPONSE" | tail -c 4)
-                          RESPONSE_BODY=$(cat response.txt)
-
-                          if [ ${HTTP_CODE} -ge 500 ]  &&  [ ${HTTP_CODE} -le 599 ]; then
-                              # Status code 5xx indicates a server error, so the call is retried
-                              echo "Attempt $current_attempt: 5xx Error ($HTTP_CODE). Retrying in $DELAY_SECONDS seconds..."
-                              sleep $DELAY_SECONDS
-                              continue
-
-                          elif [ ${HTTP_CODE} -ne 200 ]; then
-                              # Only 200 is an expected status code
-                              echo "Unexpected HTTP Code ($HTTP_CODE): $RESPONSE_BODY"
-                              exit 1
-                          fi
-
-                          # At this point, we have received a 200 status code. So, we check the gate status returned
-                          GATE_STATUS=$(echo "$RESPONSE_BODY" | jq -r '.data.attributes.gate_status')
-
-                          if [[ "$GATE_STATUS" == "pass" ]]; then
-                              echo "Gate evaluation PASSED"
-                              exit 0
-                          else
-                              echo "Gate evaluation FAILED"
-                              exit 1
-                          fi
-                        done
-
-                        # If we arrive here, it means that we received several 5xx errors from the API. To not block deployments, we can treat this case as a success
-                        echo "All retries exhausted, but treating 5xx errors as success."
-                        exit 0
+                      - datadog-ci deployment gate --service {{ args.service }} --env {{ args.env }}
 ```
 
 * The analysis template can receive arguments from the Rollout resource. In this case, the arguments are `service`, `env`, and any other optional fields needed (such as `version`). For more information, see the [official Argo Rollouts docs][2].
