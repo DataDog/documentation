@@ -61,15 +61,15 @@ Fleet Automation
 : - [Upgrade your Agents][29] (Preview).
 
 App and API Protection (AAP)
-: - 1-click AAP activation: Enable AAP in 1-click from the Datadog UI.
-: - In-App attack patterns updates: Receive the newest Web Application Firewall (WAF) attack patterns automatically as Datadog releases them, following newly disclosed vulnerabilities or attack vectors.
-: - Protect: Block attackers' IPs, authenticated users, and suspicious requests that are flagged in AAP Security Signals and Traces temporarily or permanently through the Datadog UI.
+: - [1-click AAP activation][33]: Enable AAP in 1-click from the Datadog UI.
+: - [In-App attack patterns updates][34]: Receive the newest Web Application Firewall (WAF) attack patterns automatically as Datadog releases them, following newly disclosed vulnerabilities or attack vectors.
+: - [Protect][34]: Block attackers' IPs, authenticated users, and suspicious requests that are flagged in AAP Security Signals and Traces temporarily or permanently through the Datadog UI.
 
 Application Performance Monitoring (APM)
 : - Configuration at runtime (Preview): Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the Software Catalog UI, without having to restart the service. Read [Configuration at Runtime][22] for more information.
-: - Remotely set Agent sampling rate (Preview): Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
+: - [Remotely set Agent sampling rate][35] (Preview): Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
 
-Dynamic Instrumentation
+[Dynamic Instrumentation][36]
 : - Send critical metrics, traces, and logs from your live applications with no code changes.
 
 Workload Protection
@@ -167,3 +167,7 @@ Instead of disabling Remote Configuration globally, Datadog recommends opting ou
 [30]: /actions/private_actions/use_private_actions/
 [31]: /agent/guide/setup_remote_config
 [32]: https://app.datadoghq.com/organization-settings/remote-config/setup?page_id=api-key-enablement-step&standalone=1
+[33]: /security/application_security/setup/
+[34]: /security/application_security/
+[35]: /tracing/trace_pipeline/adaptive_sampling/
+[36]: /tracing/dynamic_instrumentation/#explore-dynamic-instrumentation
