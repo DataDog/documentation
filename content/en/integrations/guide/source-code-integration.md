@@ -73,9 +73,9 @@ Install Datadog's [GitHub integration][101] using the [integration tile][102] or
 Repositories from <a href="https://docs.datadoghq.com/integrations/gitlab-source-code/">GitLab instances</a> are supported in closed Preview. Repositories from GitLab instances are supported for both GitLab.com (SaaS) and GitLab Self-Managed/Dedicated (On-Prem). For GitLab Self-Managed, your instance must be accessible from the internet. If needed, you can allowlist <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">Datadog's <code>webhooks</code> IP addresses</a> to allow Datadog to connect to your instance. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.
 </div>
 
-Install Datadog's [GitLab Source Code integration][101] using the [integration tile][102] or while onboarding other Datadog products to connect to your GitLab repositories.
+Install Datadog's [GitLab Source Code][101] [integration](https://docs.datadoghq.com/integrations/gitlab-source-code) using the [integration tile][102] or while onboarding other Datadog products to connect to your GitLab repositories.
 
-[101]: https://www.datadoghq.com/product-preview/gitlab-source-code-integration/
+[101]: https://docs.datadoghq.com/integrations/gitlab-source-code/
 [102]: https://app.datadoghq.com/integrations/gitlab-source-code/
 
 {{% /tab %}}
