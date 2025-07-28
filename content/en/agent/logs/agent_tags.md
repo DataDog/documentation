@@ -1,5 +1,5 @@
 ---
-title: Agent tags
+title: Log Agent tags
 further_reading:
 - link: "/getting_started/tagging/"
   tag: "Documentation"
