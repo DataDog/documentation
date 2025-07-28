@@ -625,6 +625,12 @@
     "description": "Retrieves the dataset associated with the ID.",
     "summary": "Get a single dataset by ID"
   },
+  "UpdateDataset": {
+    "description": "Edits the dataset associated with the ID.",
+    "summary": "Edit a dataset",
+    "request_description": "Dataset payload",
+    "request_schema_description": "Edit request for a dataset."
+  },
   "GetDomainAllowlist": {
     "description": "Get the domain allowlist for an organization.",
     "summary": "Get Domain Allowlist"
@@ -712,6 +718,10 @@
     "summary": "Search events",
     "request_description": "",
     "request_schema_description": "The object sent with the request to retrieve a list of events from your organization."
+  },
+  "GetEvent": {
+    "description": "Get the details of an event by `event_id`.",
+    "summary": "Get an event"
   },
   "ListIncidents": {
     "description": "Get all incidents for the user's organization.",
@@ -1322,6 +1332,10 @@
   "EstimateMetricsOutputSeries": {
     "description": "Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations configuration using Metrics without Limits&trade;.",
     "summary": "Tag Configuration Cardinality Estimator"
+  },
+  "GetMetricTagCardinalityDetails": {
+    "description": "Returns the cardinality details of tags for a specific metric.",
+    "summary": "Get tag key cardinality details"
   },
   "DeleteTagConfiguration": {
     "description": "Deletes a metric's tag configuration. Can only be used with application\nkeys from users with the `Manage Tags for Metrics` permission.",

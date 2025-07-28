@@ -744,31 +744,19 @@
           "data": [
             {
               "attributes": {
-                "created_at": 1738258683590,
-                "created_by": "00000000-0a0a-0a0a-aaa0-00000000000a",
+                "created_at": 1741011342772,
+                "created_by": "user1",
                 "end_month": 202502,
-                "entries": [
-                  {
-                    "amount": 500,
-                    "month": 202501,
-                    "tag_filters": [
-                      {
-                        "tag_key": "service",
-                        "tag_value": "ec2"
-                      }
-                    ]
-                  }
-                ],
                 "metrics_query": "aws.cost.amortized{service:ec2} by {service}",
                 "name": "my budget",
                 "org_id": 123,
                 "start_month": 202501,
                 "total_amount": 1000,
-                "updated_at": 1738258683590,
-                "updated_by": "00000000-0a0a-0a0a-aaa0-00000000000a"
+                "updated_at": 1741011342772,
+                "updated_by": "user2"
               },
-              "id": "string",
-              "type": "string"
+              "id": "00000000-0a0a-0a0a-aaa0-00000000000a",
+              "type": "budget"
             }
           ]
         },

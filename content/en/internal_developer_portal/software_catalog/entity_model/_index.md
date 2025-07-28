@@ -44,6 +44,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/service-catalog-schema-v3/"
   tag: "Blog"
   text: "Improve developer experience and collaboration with Service Catalog schema version 3.0"
+algolia:
+  tags: [ "codeLocations" ]
 ---
 
 {{< site-region region="gov" >}}
@@ -522,15 +524,39 @@ integrations:
 
 ## Build custom extensions
 
-<div class="alert alert-info">Custom extensions are in Limited Availability.</div>
+<div class="alert alert-info">Custom extensions are in Limited Availability for all schema versions.</div>
 
-The `extensions` field is supported in all versions. You can incorporate this custom field into deployment processes to standardize and codify best practices.
+Custom extensions allow you to attach organization-specific metadata to entities, enabling support for custom tooling and workflows. For example, use the `extensions` field to include release notes, compliance tags, or ownership models in your entity definitions. 
 
+Datadog also supports specific extension keys for certain features. These include:
+- `datadoghq.com/dora-metrics`: Define source code path patterns for filtering Git commits when calculating [DORA metrics][21].
+- `datadoghq.com/cd-visibility`: Control which commits are considered as part of a deployment in [CD Visibility][22].
+
+The following example defines a custom extension used to manage release scheduling across environments:
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
-schema-version: v2.2
-dd-service: web-store
-team: shopist
-...
+apiVersion: v3
+kind: system
+metadata:
+  name: payment-platform
+  displayName: "Payment Platform"
+  links:
+    - name: Runbook
+      type: runbook
+      url: https://runbook/payment-platform
+  contacts:
+    - name: Payment Team
+      type: team
+      contact: https://www.slack.com/archives/payments
+
+owner: payments-team
+additionalOwners:
+  - name: finance-team
+    type: stakeholder
+spec:
+  components:
+    - service:payment-api
+    - queue:payment-requests
+    - datastore:payment-db
 extensions:
   shopist.com/release-scheduler:
     release-manager:
@@ -573,3 +599,5 @@ The [JSON schema for Datadog definitions][20] is registered with the open source
 [18]: http://json-schema.org/
 [19]: https://www.schemastore.org
 [20]: https://raw.githubusercontent.com/DataDog/schema/refs/heads/main/service-catalog/service.schema.json
+[21]: /dora_metrics/setup/deployments?tab=apmdeploymenttracking#handling-multiple-services-in-the-same-repository
+[22]: /continuous_delivery/features/code_changes_detection?tab=github#specify-service-file-path-patterns
