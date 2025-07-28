@@ -187,7 +187,7 @@ The task defines the core workflow you want to evaluate. It can range from a sin
 Evaluators are functions that measure how well the model or agent performs by comparing the output to either the expected_output or the original input. Datadog supports the following evaluator types:
 - boolean: returns true or false
 - score – returns a numeric value (float)
-- categorical – returns a labeled category (string)
+- categorical: returns a labeled category (string)
 
 #### Creating an experiment
 
