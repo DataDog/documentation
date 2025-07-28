@@ -643,7 +643,7 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 {{< /tabs >}}
 
 <div class="alert alert-info">Be mindful of delegate retention. 
-While our instrumentation does not create memory leaks directly, it relies on `URLSession` delegates. According to [Apple's documentation][10]:
+While Datadog instrumentation does not create memory leaks directly, it relies on `URLSession` delegates. According to [Apple's documentation][10]:
 "The session object keeps a strong reference to the delegate until your app exits or explicitly invalidates the session. If you do not invalidate the session by calling the `invalidateAndCancel()` or `finishTasksAndInvalidate()` method, your app leaks memory until it exits."
 To avoid memory leaks, make sure to invalidate any `URLSession` instances you no longer need.</div>
 
