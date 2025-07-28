@@ -17,17 +17,19 @@ further_reading:
 ## Database identifier
 Each database instance monitored with Datadog has a unique identifier. For Postgres, MySQL, SQL Server and Oracle this identifier can be configured using the `database_identifier.template` path in the integration configuration.
 
-The default value for this is `$reported_hostname`, which identifies the database with the resolved hostname of its host. Most users can leave this option as the default. Changing the value is primarily useful when multiple database instances are hosted on one machine.
+The default value for this is `$resolved_hostname`, which identifies the database with the resolved hostname of its host. This is typically the same as the specified connection `host`, but for example, if `host` is `localhost` then `$resolved_hostname` will be the `hostname` of the host.
 
-| When setting a non-default value for the database identifier, each distinct instance identifier is billed as a host for Database Monitoring.
+Most users can leave this option as the default. Changing the value of `template` is primarily useful when multiple database instances are hosted on one machine.
+
+| Each distinct instance identifier is billed as a host for Database Monitoring.
 
 ## Reported hostname
-The `reported_hostname` configuration allows users to override the automatic resolution of `host` for a single database instance. This is useful when connecting to a database through a proxy, or when host resolution produces a different name than the one associated with the Datadog infrastructure host.
+The `reported_hostname` configuration allows users to override the automatic resolution of `host` for a single database instance. This is useful when connecting to a database through a proxy.
 
 
 ## Examples
 
-Multiple Postgres instances each on different port:
+Multiple Postgres instances on one host each on a different port:
 ```
 database_identifier:
   template: $resolved_hostname:$port
@@ -36,16 +38,16 @@ database_identifier:
 SQL Server host with multiple instances:
 ```
 database_identifier:
-  template: $resolved_hostname:$instance_name
+  template: $resolved_hostname/$instance_name
 ```
 
-Azure pool (requires 7.68+):
+Azure pool with each database monitored separately ([requires 7.68+](https://github.com/DataDog/integrations-core/blob/7.68.x/sqlserver/assets/configuration/spec.yaml#L101)):
 ```
 database_identifier:
   template: $azure_name/$database
 ```
 
-MySQL instance with the same hostname running in multiple environments:
+MySQL instance with the same hostname running in multiple environments, where each is tagged with `env`, for example, `mydatabase.com.local` on `env:prod` and `env:staging` :
 ```
 database_identifier:
   template: $env-$resolved_hostname
