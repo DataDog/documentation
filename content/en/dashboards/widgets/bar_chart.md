@@ -20,7 +20,7 @@ further_reading:
 
 {{< img src="/dashboards/widgets/bar_chart/bar_chart.png" alt="Bar chart widget example visualization" style="width:100%;" >}}
 
-The Bar Chart widget is part of the same data family as the Top List and Pie Chart widgets, using categorical axes rather than temporal axes like timeseries bar graphs. It displays categorical data using vertical bars, allowing you to compare values across different categories or groups. Unlike the horizontal top list widget, the bar chart uses a vertical orientation which is particularly useful for dashboards with wide and short aspect ratios, or when you want to focus on value comparison rather than ranking.
+The Bar Chart widget is part of the same data family as the Top List, Treemap, and Pie Chart widgets, using categorical axes rather than temporal axes like timeseries bar graphs. It displays categorical data using vertical bars, allowing you to compare values across different categories or groups. Unlike the horizontal top list widget, the bar chart uses a vertical orientation which is particularly useful for dashboards with wide and short aspect ratios, or when you want to focus on value comparison rather than ranking.
 
 Use the Bar Chart when visual comparison across categories matters more than reading exact tag values. Use the Top List to prioritize label readability (such as long tag names) or need a ranked list format.
 
