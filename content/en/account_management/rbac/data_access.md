@@ -46,7 +46,7 @@ In order to create a Restricted Dataset, identify the data to be restricted with
 {{< img src="/account_management/rbac/restricted_dataset.png" alt="Create a Restricted Dataset dialog. Selects data in RUM, APM, Logs, and Metrics matching the tag service:hr. Grants access to a Privileged access team.">}}
 
 Name Dataset
-: A descriptive name to help users understand what data is contained in the dataset. 
+: A descriptive name to help users understand what data is contained in the dataset.
 
 Select data to be included in this Dataset
 : The boundary definition that describes which data to restrict to a specific set of users. Boundaries are query statements with limitations that allow an access manager to define the scope of sensitive data to be protected. The [supported telemetry types][10] are custom metrics, RUM sessions, APM traces, logs, cloud costs, error tracking issues, and CI Visibility pipelines.
@@ -61,7 +61,7 @@ After completing all the fields to define the dataset, click **Create Restricted
 You may create a maximum of 100 Restricted Datasets. If you need a higher limit, reach out to Support.
 
 ### API
-The Data Access Control API is under development and should be considered unstable. Future versions may be backward incompatible. 
+The Data Access Control API is under development and should be considered unstable. Future versions may be backward incompatible.
 
 Terraform support will be announced after Data Access Control is generally available.
 
@@ -92,6 +92,9 @@ Playlists are collections of Session Replays you can aggregate in a folder-like 
 ### Logs
 Data Access Control is separate from the existing [Logs RBAC permissions][11] feature, also known as log restriction queries. To use Data Access Control with Log Management, first request access to Data Access Control. Next, manually migrate your configuration from Log Management permissions to Data Access Control.
 
+### LLM Observability
+lorem ipsum
+
 ## Select tags for access
 
 Each Restricted Dataset can control access to multiple types of data, such as metrics. You are free to use the same or different tags across multiple types of telemetry. Within each telemetry type, you must use a _single_ tag or attribute to define your access strategy.
@@ -101,7 +104,7 @@ If you have too many combinations of tags or attributes to fit within these cons
 ### Supported example
 
 #### Restricted Dataset 1
-- Telemetry Type: RUM  
+- Telemetry Type: RUM
    - Filters: `@application.id:ABCD`
 
 #### Restricted Dataset 2
@@ -112,23 +115,23 @@ If you have too many combinations of tags or attributes to fit within these cons
 
 ### Not supported example
 
-#### Restricted Dataset 1: 
-* Telemetry type: RUM 
+#### Restricted Dataset 1:
+* Telemetry type: RUM
     * Filters: `@application.id:ABCD`
 
 #### Restricted Dataset 2:
-* Telemetry type: RUM 
+* Telemetry type: RUM
     * Filters: `env:prod`
 
 Restricted Dataset 1 uses `@application.id` as the tag for RUM data, so a new Restricted Dataset can't change to a different tag. Instead, consider reconfiguring Restricted Dataset 2 to use `@application.id`, or changing all of your Restricted Datasets with RUM data to use another tag.
 
 ### Not supported example
 
-#### Restricted Dataset 1: 
-* Telemetry type: RUM 
+#### Restricted Dataset 1:
+* Telemetry type: RUM
     * Filters: `@application.id:ABCD`
 
-#### Restricted Dataset 2: 
+#### Restricted Dataset 2:
 * Telemetry type: RUM
     * Filters: `@application.id:IJKL` `env:prod`
 
@@ -150,7 +153,7 @@ For example, if you have a single application that is instrumented with Real Use
     * Telemetry type: RUM
         * Filters: `@application.id:<rum-app-id>`
 * **Grant access:**
-    * Teams or roles of users who can see this RUM data      
+    * Teams or roles of users who can see this RUM data
 
 This configuration example would protect the RUM data from this application, and keep other data from this application available to existing users in your organization.
 
