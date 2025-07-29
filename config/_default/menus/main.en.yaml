@@ -3218,8 +3218,8 @@ menu:
       parent: serverless
       identifier: serverless_aws_lambda
       weight: 1
-    - name: Installation
-      url: serverless/aws_lambda/installation
+    - name: Instrumentation
+      url: serverless/aws_lambda/instrumentation
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_installation
       weight: 101

@@ -13,6 +13,7 @@ further_reading:
 aliases:
     - /serverless/datadog_lambda_library/java/
     - /serverless/installation/java
+    - /serverless/aws_lambda/instrumentation/java
 ---
 
 <div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>

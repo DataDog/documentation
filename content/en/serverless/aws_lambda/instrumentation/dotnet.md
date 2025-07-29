@@ -2,6 +2,7 @@
 title: Instrumenting .NET Serverless Applications
 aliases:
     - /serverless/installation/dotnet
+    - /serverless/aws_lambda/instrumentation/dotnet
 further_reading:
     - link: '/serverless/configuration'
       tag: 'Documentation'
