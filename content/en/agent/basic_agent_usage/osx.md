@@ -31,9 +31,9 @@ This page outlines the basic features of the Datadog Agent for macOS. If you hav
 See the [Supported Platforms][5] documentation for the complete list of supported macOS distributions and versions.
 
 ## Install the Agent 
-To install the Agent on macOS, follow the [in-app instructions in Fleet Automation][6], and simply run the generated script on your hosts.
+To install the Agent on macOS, follow the [in-app instructions in Fleet Automation][6], and run the generated script on your hosts.
 
-{{< img src="/agent/basic_agent_usage/macos_img_july_25.png" alt="In-app installation steps for the Datadog Agent on a MacOS host." style="width:90%;">}}
+{{< img src="/agent/basic_agent_usage/macos_img_installation.png" alt="In-app installation steps for the Datadog Agent on a MacOS host." style="width:90%;">}}
 
 <div class="alert alert-info">
 By default, the Agent is installed in a sandbox located at <code>/opt/datadog-agent</code>. You can move this folder anywhere; however, this documentation assumes a default installation location.
@@ -42,7 +42,7 @@ By default, the Agent is installed in a sandbox located at <code>/opt/datadog-ag
 
 ## Commands
 
-The `launchctl` service manager controls the Agent lifecycle, while other commands can be executed through the Agent binary, menu bar app, or web GUI.
+The `launchctl` service manager controls the Agent lifecycle, while other commands can be executed through the Agent binary, systray app, or web GUI.
 
 
 | Description          | Command          |
@@ -61,17 +61,17 @@ The `launchctl` service manager controls the Agent lifecycle, while other comman
 
 The [Datadog Agent configuration file][7] is located in `/etc/datadog-agent/datadog.yaml`. This YAML file holds the host-wide connection details used to send data to Datadog including:
 
-- `api_key`: your organization’s [Datadog API key][8] 
+- `api_key`: your organization's [Datadog API key][8] 
 - `site`: target Datadog region (for example `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`)  
 - `proxy`: HTTP/HTTPS proxy endpoints for outbound traffic (see [Datadog Agent Proxy Configuration][9])  
-- Default tags, log level, and Datadog product configurations.
+- Default tags, log levels, and Datadog configurations.
 
 A fully commented reference file, located in `/etc/datadog-agent/datadog.yaml.example`, lists every available option for comparison or copy-paste. Alternatively, see the [sample config_template.yaml file][10] for all available configuration options.
 
-### Integration Files
-Configuration files for Integrations live in `/etc/datadog-agent/conf.d/`. Each integration has its own sub-directory, `<INTEGRATION>.d/`, that contains:
-- `conf.yaml` — the active configuration controlling how the integration gathers metrics and logs  
--  `conf.yaml.example` — a sample illustrating supported keys and defaults
+### Integration files
+Configuration files for integrations live in `/etc/datadog-agent/conf.d/`. Each integration has its own sub-directory, `<INTEGRATION>.d/`, that contains:
+- `conf.yaml`: the active configuration controlling how the integration gathers metrics and logs  
+-  `conf.yaml.example`: a sample illustrating supported keys and defaults
 
 
 
@@ -94,7 +94,7 @@ To remove the Agent and all Agent configuration files:
     ```
 4. Reboot your machine for the changes to take effect.
 
-### System-wide LaunchDaemon installation
+## Uninstall the Agent
 
 To remove the Agent and all Agent configuration files:
 1. Drag the Datadog application from the application folder to the trash bin.
@@ -129,7 +129,7 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 [3]: /developers/guide/custom-python-package/
 [4]: /integrations/
 [5]: https://docs.datadoghq.com/agent/supported_platforms/?tab=macos
-[6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
+[6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=macos
 [7]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [8]: https://app.datadoghq.com/organization-settings/api-keys
 [9]: /agent/configuration/proxy/
