@@ -954,7 +954,7 @@ The Decoder processor translates binary-to-text encoded string fields (such as B
 {{< tabs >}}
 {{% tab "UI" %}}
 
-{< img src="logs/log_configuration/processor/decoder-processor.png" alt="Decoder processor - Append" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/decoder-processor.png" alt="Decoder processor - Append" style="width:80%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
