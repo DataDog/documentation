@@ -38,11 +38,11 @@ The Datadog Agent configuration file is located in `/etc/datadog-agent/datadog.y
 - `api_key`: Your organization's [Datadog API key][7] 
 - `site`: Target Datadog region (for example `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`)  
 - `proxy`: HTTP/HTTPS proxy endpoints for outbound traffic (see [Datadog Agent Proxy Configuration][8])  
-- Default tags, log level, and Datadog product configurations.
+- Default tags, log level, and Datadog configurations
 
 A fully commented reference file, located in `/etc/datadog-agent/datadog.yaml.example`, lists every available option for comparison or to copy and paste. Alternatively, see the sample `config_template.yaml` file for all available configuration options.
 
-### Integration Files
+### Integration files
 Configuration files for integrations live in `/etc/datadog-agent/conf.d/`. Each integration has its own sub-directory, `<INTEGRATION>.d/`, that contains:
 - `conf.yaml`: The active configuration controlling how the integration gathers metrics and logs  
 - `conf.yaml.example`: A sample illustrating supported keys and defaults
@@ -62,7 +62,7 @@ Configuration files for integrations live in `/etc/datadog-agent/conf.d/`. Each 
 | Display command usage              | `sudo datadog-agent --help`                            |
 | Run a check                        | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` |
 
-**Note:** For upstart-based systems, such as `CentOS/RHEL 6` or `SUSE 11`, swap `systemctl <action>` with just `<action>`. For example, when starting an Agent as a service on a `SUSE 11` system, use `sudo start datadog-agent`.
+**Note**: For upstart-based systems, such as `CentOS/RHEL 6` or `SUSE 11`, swap `systemctl <action>` with `<action>`. For example, when starting an Agent as a service on a `SUSE 11` system, use `sudo start datadog-agent`.
 
 
 ## Uninstall the Agent
@@ -95,7 +95,7 @@ sudo zypper remove datadog-agent
 * The `dd-agent` user
 * Datadog log files
 
-**If you also want to remove these elements, run this command after removing the Agent:**
+**To remove these elements, run this command after removing the Agent:**
 ```shell
 sudo userdel dd-agent \
 && sudo rm -rf /opt/datadog-agent/ \
@@ -103,7 +103,7 @@ sudo userdel dd-agent \
 && sudo rm -rf /var/log/datadog/
 ```
 
-**Note:** To uninstall remaining Agent artifacts for `Debian` and `Ubuntu` run:
+To uninstall remaining Agent artifacts for `Debian` and `Ubuntu` run:
 
 ```shell
 sudo apt-get remove --purge datadog-agent -y
@@ -113,12 +113,12 @@ sudo apt-get remove --purge datadog-agent -y
 
 
 ### Uninstall Single Step APM Instrumentation
-If you installed the Agent with Single Step APM Instrumentation, and you want to uninstall the Agent, you need to [run additional commands][9] to uninstall APM Instrumentation. Ensure you follow the steps for your [specific environement][10]. 
+If you installed the Agent with Single Step APM Instrumentation and want to uninstall it, you need to [run additional commands][9] to remove APM Instrumentation. Follow the steps for your [specific environment][10]. 
 
 
 ## Troubleshooting
 
-See the [Agent Troubleshooting documentation][2] for troubleshooting steps.
+For detailed steps, see [Agent Troubleshooting][2].
 
 ## Working with the embedded Agent
 
