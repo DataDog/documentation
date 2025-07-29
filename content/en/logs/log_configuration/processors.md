@@ -954,14 +954,14 @@ The Decoder processor translates binary-to-text encoded string fields (such as B
 {{< tabs >}}
 {{% tab "UI" %}}
 
+1. Set the source attribute: Provide the attribute path that contains the encoded string, such as `encoded.base64`.
+2. Select the source encoding: Choose the binary-to-text encoding of the source: `base64` or `base16/hex`. For `Base16/Hex`: Choose the output format: `string (UTF-8)` or `integer`.
+3. Set the target attribute: Enter the attribute path where the decoded result will be stored.
+   
 {{< img src="logs/log_configuration/processor/decoder-processor.png" alt="Decoder processor - Append" style="width:80%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
-
-1. Set the source attribute: Provide the attribute path that contains the encoded string, such as `encoded.base64`.
-2. Select the source encoding: Choose the binary-to-text encoding of the source: `base64` or `base16/hex`. For `Base16/Hex`: Choose the output format: `string (UTF-8)` or `integer`.
-3. Set the target attribute: Enter the attribute path where the decoded result will be stored.
 
 ## Threat intel processor
 
