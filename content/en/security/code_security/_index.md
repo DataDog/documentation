@@ -1,6 +1,10 @@
 ---
 title: Code Security
 disable_toc: false
+further_reading:
+- link: "https://www.datadoghq.com/blog/monitor-mcp-servers/"
+  tag: "Blog"
+  text: "Identify common security risks in MCP servers"
 aliases:
 - /code_analysis/
 ---
@@ -54,6 +58,11 @@ Developers are being actively targeted with supply chain attacks. Prevent malici
 {{< callout url="https://docs.google.com/forms/d/1Xqh5h1n3-jC7au2t30fdTq732dkTJqt_cb7C7T-AkPc" >}}
   To enroll as a design partner, click Request Access.
 {{< /callout >}}
+
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/code_security/static_analysis/
 [2]: /security/code_security/software_composition_analysis/
