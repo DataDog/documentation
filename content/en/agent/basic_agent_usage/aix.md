@@ -57,7 +57,7 @@ You can find the Agent installation log in the `dd-aix-install.log` file. To dis
 
 The [Datadog Agent configuration file][7] is located in `/etc/datadog-agent/datadog.yaml`. This YAML file holds the host-wide connection details used to send data to Datadog including:
  * `api_key`: Your organization's [Datadog API key][8]  
- - `site`: Target Datadog region (`datadoghq.com`, - `datadoghq.eu`, `us3.datadoghq.com`, `us5.datadoghq.com`, `ddog-gov.com`)  
+ - `site`: Target Datadog region (see [Datadog Sites][1])  
 * `proxy`: HTTP/HTTPS proxy endpoints for outbound traffic (see [Datadog Agent Proxy Configuration][9])  
 - Default tags, log level, and Datadog configurations.
 
@@ -112,7 +112,7 @@ installp -e dd-aix-uninstall.log -uv datadog-unix-agent
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
+[1]: /getting_started/site/#access-the-datadog-site
 [4]: https://github.com/DataDog/datadog-unix-agent/blob/master/README.md
 [5]: /agent/supported_platforms/?tab=unix
 [6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
