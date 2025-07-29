@@ -1,6 +1,11 @@
-The quota processor measures the logging traffic for logs that match the filter you specify. When the configured daily quota is met inside the 24-hour rolling window, the processor can either drop additional logs or send an alert using a Datadog monitor. You can configure the processor to track the total volume or the total number of events. The pipeline uses the name of the quota to identify the quota across multiple Remote Configuration deployments of the Worker.
+The quota processor measures the logging traffic for logs that match the filter you specify. When the configured daily quota is met inside the 24-hour rolling window, the processor can either keep or drop additional logs, or send them to a storage bucket. You can configure the processor to track the total volume or the total number of events. For example, you can configure this processor to drop new logs or trigger an alert without dropping logs after the processor has received 10 million events from a certain service in the last 24 hours.
 
-As an example, you can configure this processor to drop new logs or trigger an alert without dropping logs after the processor has received 10 million events from a certain service in the last 24 hours.
+You can also use field-based partitioning, such as `service`, `env`, `status`. Each unique fields uses a separate quota bucket with its own daily quota limit. See [Partition example](#partition-example) for more information.
+
+**Notes**:
+- Each Worker can have up to 1000 buckets. If you need to increase the bucket limit, contact your account manager.
+- The pipeline uses the name of the quota to identify the quota across multiple Remote Configuration deployments of the Worker.
+
 
 To set up the quota processor:
 1. Enter a name for the quota processor.
@@ -9,10 +14,7 @@ To set up the quota processor:
     - Logs that do not match the quota filter are sent to the next step of the pipeline.
 1. In the **Unit for quota** dropdown menu, select if you want to measure the quota by the number of `Events` or by the `Volume` in bytes.
 1. Set the daily quota limit and select the unit of magnitude for your desired quota.
-1. Check the **Drop events** checkbox if you want to drop all events when your quota is met. Leave it unchecked if you plan to set up a [monitor][5001] that sends an alert when the quota is met.
-    - If logs that match the quota filter are received after the daily quota has been met and the **Drop events** option is selected, then those logs are dropped. In this case, only logs that did not match the filter query are sent to the next step in the pipeline.
-    - If logs that match the quota filter are received after the daily quota has been met and the **Drop events** option is not selected, then those logs and the logs that did not match the filter query are sent to the next step in the pipeline.
-1. Optional: Click **Add Field** if you want to set a quota on a specific service or region field.  
+1. Optional, Click **Add Field** if you want to set a quota on a specific service or region field.  
     a. Enter the field name you want to partition by. See the [Partition example](#partition-example) for more information.  
         i. Select the **Ignore when missing** if you want the quota applied only to events that match the partition. See the [Ignore when missing example](#example-for-the-ignore-when-missing-option) for more information.  
         ii. Optional: Click **Overrides** if you want to set different quotas for the partitioned field.  
