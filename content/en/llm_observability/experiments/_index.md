@@ -30,7 +30,7 @@ pip install ddtrace>=3.11.0
 
 ### Cookbooks
 
-To see in-depth examples of what you can do with LLM Experiments, you can check these [jupyter notebooks](https://github.com/DataDog/llm-observability/tree/main/preview/experiments/notebooks)
+To see in-depth examples of what you can do with LLM Experiments, you can check these [jupyter notebooks][10]
 
 ### Setup
 
@@ -530,3 +530,4 @@ Create an experiment. If there is an existing experiment with the same name, the
 [7]: https://github.com/DataDog/llm-observability/tree/main/preview/experiments
 [8]: https://www.postman.com/
 [9]: https://app.datadoghq.com/llm/testing/experiments
+[10]: https://github.com/DataDog/llm-observability/tree/main/preview/experiments/notebooks
