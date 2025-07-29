@@ -19,26 +19,26 @@ title: Data Streams Monitoring for RabbitMQ
     <tr>
       <td><a href="/data_streams/java">Java</a></td>
       <td><a href="https://mvnrepository.com/artifact/com.rabbitmq/amqp-client">amqp-client</a></td>
-      <td>1.9.0</td>
-      <td>1.42.2 or later</td>
+      <td>{{< dsm-tracer-version lang="java" lib="amqp-client" type="minimal" >}}</td>
+      <td>{{< dsm-tracer-version lang="java" lib="amqp-client" type="recommended" >}}</td>
     </tr>
     <tr>
       <td><a href="/data_streams/nodejs">Node.js</a></td>
       <td><a href="https://www.npmjs.com/package/amqplib">amqplib</a></td>
-      <td>3.48.0 or 4.27.0 or 5.3.0</td>
-      <td>5.3.0 or later</td>
+      <td>{{< dsm-tracer-version lang="nodejs" lib="amqplib" type="minimal" >}}</td>
+      <td>{{< dsm-tracer-version lang="nodejs" lib="amqplib" type="recommended" >}}</td>
     </tr>
     <tr>
       <td><a href="/data_streams/python">Python</a></td>
       <td><a href="https://pypi.org/project/kombu/">Kombu</a></td>
-      <td>2.6.0</td>
-      <td>2.6.0 or later</td>
+      <td>{{< dsm-tracer-version lang="python" lib="kombu" type="minimal" >}}</td>
+      <td>{{< dsm-tracer-version lang="python" lib="kombu" type="recommended" >}}</td>
     </tr>
     <tr>
       <td><a href="/data_streams/dotnet">.NET</a></td>
       <td><a href="https://www.nuget.org/packages/RabbitMQ.Client">RabbitMQ.Client</a></td>
-      <td>2.28.0</td>
-      <td>2.37.0 or later</td>
+      <td>{{< dsm-tracer-version lang="dotnet" lib="rabbitmq-client" type="minimal" >}}</td>
+      <td>{{< dsm-tracer-version lang="dotnet" lib="rabbitmq-client" type="recommended" >}}</td>
     </tr>
   </tbody>
 </table>

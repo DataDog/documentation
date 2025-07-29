@@ -6,10 +6,10 @@ further_reading:
   text: "Set up Deployment Gates"
 ---
 
-To explore your Deployment Gates and rules evaluations, navigate to [**Software Delivery > Deployment Gates > Evaluations**][1]. 
+To explore your Deployment Gates and rules evaluations, navigate to [**Software Delivery > Deployment Gates > Evaluations**][1].
 
 On this page you can:
-* View recent gate evaluations and failure reasons
+* View recently completed gate evaluations and failure reasons
 * Identify frequently failing rules and gates
 * Analyze common failure patterns
 * Track evaluation trends over time
