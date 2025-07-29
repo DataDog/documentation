@@ -8,9 +8,9 @@ You can configure Bits to automatically investigate when a monitor triggers an a
 ### Enable Bits on monitors for automated investigations
 
 There are a few ways to enable Bits for automated investigations:
-- **Option 1: Use the Bits-Enabled Monitors list**
-  1. In Bits AI, go to the [**Bits-Enabled Monitors**][5] page.
-  1. In the **Monitors** tab, select one or more monitors, then click **Enable Bits AI**.
+- **Option 1: Use the Bits AI SRE Monitors list**
+  1. In Bits AI SRE, go to the [**Monitors**][5] page.
+  1. In the **Ready for Bits** tab, select one or more monitors, then click **Enable Automatic Investigations**.
 - **Option 2: Add the Bits AI tag to a single monitor**
   1. Open a monitor, click on the gear icon in the upper right corner, and select **Edit**.
   1. Add the `bitsai:enabled` tag.
@@ -21,7 +21,7 @@ There are a few ways to enable Bits for automated investigations:
 
 You can also add the tag to your desired monitors using the Datadog API or Terraform.
 
-An investigation initiates when a monitor transitions to the alert state. Transitions to the warn or no data state, [renotifications][12], and test notifications do not trigger investigations. Additionally, noisy monitors are automatically rate-limited to avoid unnecessary investigations and protect your budget.
+An investigation initiates when a monitor transitions to the alert state. Transitions to the warn or no data state, [renotifications][12], and test notifications do not trigger automatic investigations. Additionally, noisy monitors are automatically rate-limited to avoid unnecessary investigations and protect your budget.
 
 ### Manually start an investigation
 
@@ -32,7 +32,7 @@ Alternatively, you can manually invoke Bits on an individual monitor alert or wa
 - **Option 2: Monitor Event Side Panel**
   -  On the monitor event side panel, click **Investigate with Bits AI**.
 - **Option 3: Slack**
-  - In Slack, reply to a monitor notification with `@Datadog Investigate this alert`.
+  - In Slack, reply to a monitor notification with `@Datadog Investigate this alert`. 
 
 ### Monitor requirements for Bits AI SRE
 
@@ -64,19 +64,27 @@ Additionally, if you have already configured `@slack` or `@case` [notifications 
 
 {{% collapse-content title="Slack" level="h5" expanded=false id="slack" %}}
 1. Ensure the [Datadog Slack app][7] is installed in your workspace.
-1. Go to [**Bits AI** > **Settings** > **Integrations**][9] and connect your Slack workspace.
+1. Go to [**Bits AI** > **Settings** > **Integrations**][9] and connect your Slack workspace. 
 1. Go to a monitor. Under **Configure notifications and automations**, add the `@slack-{channel-name}` handle to send results to Slack.
 {{% /collapse-content %}}
 {{% collapse-content title="Case Management" level="h5" expanded=false id="case-management" %}}
 In the **Configure notifications and automations** section, add the `@case-{project-name}` handle.
 {{% /collapse-content %}}
 
+### Configure knowledge base integrations
+
+Bits integrates with Confluence to find relevant documentation and runbooks to support its investigations, and also allows you to interact with your Confluence content directly through chat. 
+1. Connect your Confluence Cloud account by following the instructions in our [Confluence integration tile][13].
+1. Optionally enable account crawling to make Confluence a data source within Bits’ chat interface. This is not required for Bits to utilize Confluence when generating its investigation plan.
+1. Link specific Confluence pages to your monitor's message to guide Bits during investigations. When an alert triggers, Bits will automatically scan the linked Confluence page for useful Datadog links to support its analysis.
+1. You can view all connected Confluence accounts on the [Bits Settings page][9].
+
 ## How Bits AI SRE investigates
 
 Investigations happen in two phases:
 
 1. **Initial context gathering**
-   - Bits begins by identifying any Datadog links that you have added to the monitor's message and uses them as entry points into the investigation.
+   - Bits begins by identifying any Datadog or Confluence links that you have added to the monitor's message and uses them as entry points into the investigation.
    - It also automatically queries your Datadog environment to gather additional context about what's happening around the alert.
    - If you have previously interacted with an investigation for the same monitor, Bits will recall any [memories](#help-bits-ai-sre-learn) associated with the monitor to inform and accelerate the current investigation.
 1. **Root cause hypothesis generation and testing**
@@ -87,8 +95,6 @@ Investigations happen in two phases:
       - Dashboards
       - [Change events][4]
       - Watchdog alerts
-      - Monitor alerts
-      - Incidents
    - Hypotheses can end in one of three states: validated, invalidated, or inconclusive.
 
 ## Chat with Bits AI SRE about the investigation
@@ -131,3 +137,4 @@ Every piece of feedback you give generates a **memory**. Bits uses these memorie
 [10]: /service_management/on-call/pages/#page-from-notifications
 [11]: /account_management/rbac
 [12]: /monitors/notify/#renotify
+[13]: https://app.datadoghq.com/integrations/confluence
