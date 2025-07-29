@@ -91,7 +91,7 @@ This rule type uses Watchdog's [APM Faulty Deployment Detection][1] to compare t
 {{% /tab %}}
 {{< /tabs >}}
 
-## Add evaluations into your CD flow
+## Evaluate Deployment Gates
 
 Deployment Gates can be evaluated in various ways, as outlined in the examples below.
 
