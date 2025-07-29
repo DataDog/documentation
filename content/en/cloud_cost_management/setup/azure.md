@@ -40,8 +40,8 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
 1. Navigate to [Cost Management | Configuration][5] under Azure portal's **Tools** > **Cost Management** > **Settings** > **Configuration** and click **Exports**.
   {{< img src="cloud_cost/azure_export_path.png" alt="In Azure portal highlighting Exports option in navigation" style="width:100%" >}}
-2. Select the export scope located next to the search filter. 
-    
+2. Select the export scope located next to the search filter.
+
    **Note:** The scope must be **billing account**, **subscription**, or **resource group**.
 3. After the scope is selected, click **Schedule export**.
 
@@ -135,16 +135,15 @@ Datadog automatically ingests up to 15 months of available historical cost data.
 
 Azure exports cost data starting from the month you created the export. You can manually backfill up to 12 months of Azure cost data using the Azure Cost Exports UI.
 
-1. Complete the instructions in the **Setup** and **Configure Cloud Cost in Datadog** sections above.
-2. Wait up to 24 hours for cost data to appear in Datadog to ensure the integration is working end-to-end before beginning the backfill process.
-3. Manually export an **actual** and **amortized** report for each calendar month. For example, for June 2025:
+1. Complete the instructions in the **Setup** and **Configure Cloud Cost in Datadog** sections above, you have to wait up to 24 hours for cost data to appear in Datadog to ensure the integration is working end-to-end before beginning the backfill process. If you have already completed setup and cost data is appearing in Datadog, you can proceed directly to the backfill steps below.
+2. Manually export an **actual** and **amortized** report for each calendar month. For example, for June 2025:
     1. Edit the Export
     2. Change Export Type to "One-time export"
     3. Set From to 06-01-2025 **Note:** This must be the first day of the month.
     4. Set End to 06-30-2025 **Note:** This must be the last day of the month.
     5. Save the export **Note:** This automatically runs the export
     6. Wait for the export to finish running
-4. Revert both the **actual** and **amortized** exports to their original state to resume daily exports
+3. Revert both the **actual** and **amortized** exports to their original state to resume daily exports
     1. Edit the Export
     2. Change Export Type to "Daily export of month-to-date costs"
     3. Save the export
