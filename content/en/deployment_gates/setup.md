@@ -51,8 +51,8 @@ This rule type evaluates the state of your monitors for a configurable period of
 * **Query**: Enter a monitor query using [Search Monitor syntax][1]. Use the following syntax to filter on specific tags:
   * Monitor static tags - `service:transaction-backend`
   * Tags within the monitor's query - `scope:"service:transaction-backend"`
-  * [Tags within monitor "group by"][2] - `group:"service:transaction-backend"`
-* **Duration**: Enter the period of time (in seconds), for which the monitors should remain in `OK` state.
+  * Tags within a [monitor grouping][2] - `group:"service:transaction-backend"`
+* **Duration**: Enter the period of time (in seconds), for which the monitors should be evaluated.
 
 #### Example queries
 
@@ -76,7 +76,7 @@ This rule type uses Watchdog's [APM Faulty Deployment Detection][1] to compare t
 #### Configuration settings
 
 * **Operation Name**: Auto-populated from the service's [APM primary operation][3] settings.
-* **Duration**: Time (in seconds) that the rule should wait before performing the evaluation. For optimal analysis confidence, this value should be at least 900 seconds (15 minutes) after a deployment starts.
+* **Duration**: Enter the period of time (in seconds) for which the analysis should be done. For optimal analysis confidence, this value should be at least 900 seconds (15 minutes) after a deployment starts.
 * **Excluded Resources**: Enter a comma-separated list of [APM resources][2] to ignore (such as low-volume or low-priority endpoints).
 
 #### Notes
@@ -93,10 +93,10 @@ This rule type uses Watchdog's [APM Faulty Deployment Detection][1] to compare t
 
 ## Evaluate a Deployment Gate
 
-Deployment Gate evaluations are asynchronous, as the evaluation process can take some time to complete. This means that when you trigger an evaluation, the a process is started in the background and provides you with an evaluation ID to track its progress.
+Deployment Gate evaluations are asynchronous, as the evaluation process can take some time to complete. This means that when you trigger an evaluation, it's started in the background, and the API returns an evaluation ID to track its progress. 
 
-- First, request a deployment gate evaluation, which initiates the process and returns an evaluation ID.
-- Then, poll the evaluation status endpoint using the evaluation ID to retrieve the result once the evaluation is complete.
+- First, request a Deployment Gate evaluation, which initiates the process and returns an evaluation ID.
+- Then, periodically poll the evaluation status endpoint using the evaluation ID to retrieve the result when the evaluation is complete.
 
 After a gate is configured with at least one rule, you can request a gate evaluation while deploying the related service with an API call:
 
@@ -138,10 +138,10 @@ If the gate evaluation was successfully started, a 202 HTTP status code is retur
 
 The field `data.attributes.evaluation_id` contains the unique identifier for this gate evaluation.
 
-An additional API endpoint allows to fetch the gate evaluation status. You can poll this endpoint using the Gate Evaluation ID to fetch the Gate Evaluation status:
+You can fetch the status of a gate evaluation by polling an additional API endpoint using the gate evaluation ID:
 
 ```bash
-curl -X GET "https://api.{{< region-param key="dd_site" >}}/api/unstable/deployments/gates/evaluation/e9d2f04f-4f4b-494b-86e5-52f03e10c8e9" \
+curl -X GET "https://api.{{< region-param key="dd_site" >}}/api/unstable/deployments/gates/evaluation/<evaluation_id>" \
 -H "DD-API-KEY: <YOUR_API_KEY>" \
 -H "DD-APPLICATION-KEY: <YOUR_APP_KEY>"
 ```
@@ -176,7 +176,7 @@ When a 200 HTTP response is returned, it has the following format:
 
 The field `data.attributes.gate_status` contains the result of the evaluation. It can contain one of these values:
 
-* `in_progress`: The Deployment Gate evaluation is still in progress, you should continue polling.
+* `in_progress`: The Deployment Gate evaluation is still in progress; you should continue polling.
 * `pass`: The Deployment Gate evaluation passed.
 * `fail`: The Deployment Gate evaluation failed.
 
@@ -186,7 +186,7 @@ The field `data.attributes.gate_status` contains the result of the evaluation. I
 
 {{< tabs >}}
 {{% tab "datadog-ci CLI" %}}
-The [datadog-ci][1] `deployment gate` command encapsulates all the required logic to evaluate Deployment Gates in a single command:
+The [datadog-ci][1] `deployment gate` command includes all the required logic to evaluate Deployment Gates in a single command:
 
 ```bash
 datadog-ci deployment gate --service transaction-backend --env staging
@@ -196,14 +196,14 @@ The command has the following characteristics:
 * It sends a request to start the evaluation and polls the evaluation status endpoint using the evaluation_id until the evaluation is complete.
 * It provides a configurable timeout to determine the maximum amount of time to wait for an evaluation to complete.
 * It implements automatic retries for errors.
-* It allows to customize the behavior on unexpected errors, allowing to consider Datadog failures as either an evaluation pass or a fail.
+* It allows you to customize the behavior on unexpected errors, allowing you to consider Datadog failures as either an evaluation pass or a fail.
 
 Note that the `deployment gate` command is available in datadog-ci versions v3.17.0 and above.
 
 **Required environment variables**:
 * `DD_API_KEY`: API key used to authenticate the requests.
 * `DD_APP_KEY`: Application key used to authenticate the requests.
-* `DD_BETA_COMMANDS_ENABLED=1`: The `deployment gate` command is a beta command, so datadog-ci needs to be ran with beta commands enabled.
+* `DD_BETA_COMMANDS_ENABLED=1`: The `deployment gate` command is a beta command, so datadog-ci needs to be run with beta commands enabled.
 
 For complete configuration options and detailed usage examples, refer to the [`deployment gate` command documentation][2].
 
@@ -216,7 +216,7 @@ To call Deployment Gates from an Argo Rollouts Kubernetes Resource, you can crea
 
 Use this script as a starting point. For the DD_SITE environment variable, be sure to replace `<YOUR_DD_SITE>` with your [Datadog site name][2] (for example, {{< region-param key="dd_site" code="true" >}}).
 
-The script needs an API and an Application key to be executed. The safest way to provide them is by using [Kubernetes Secrets][3]. This example relies on a secret called `datadog` holding two data: `api-key` and `app-key`. Alternatively, you can also pass the value in plain text using `value` instead of `valueFrom` in the script below.
+The script requires an API key and application key. The safest way to provide them is by using [Kubernetes Secrets][3]. This example relies on a secret called `datadog` holding two data values: `api-key` and `app-key`. Alternatively, you can also pass the values in plain text using `value` instead of `valueFrom` in the script below.
 
 
 ```yaml
@@ -438,7 +438,7 @@ done
 The script has the following characteristics:
 
 * It receives three inputs: `service`, `environment`, and `version` (optionally add `identifier` and `primary_tag` if needed). The `version` is only required if one or more APM Faulty Deployment Detection rules are evaluated.
-* It sends a request to start the evaluation and records the evaluation_id. Handles various HTTP response codes appropriately:
+* It sends a request to start the evaluation and records the evaluation_id. It handles various HTTP response codes appropriately:
   * 5xx: Server errors, retries with delay.
   * 4xx: Client error, evaluation fails.
   * 2xx: Evaluation started successfully.
