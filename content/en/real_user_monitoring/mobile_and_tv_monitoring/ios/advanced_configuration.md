@@ -642,6 +642,12 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-info">Be mindful of delegate retention. 
+While Datadog instrumentation does not create memory leaks directly, it relies on `URLSession` delegates. According to [Apple's documentation][10]:
+"The session object keeps a strong reference to the delegate until your app exits or explicitly invalidates the session. If you do not invalidate the session by calling the `invalidateAndCancel()` or `finishTasksAndInvalidate()` method, your app leaks memory until it exits."
+To avoid memory leaks, make sure to invalidate any `URLSession` instances you no longer need.</div>
+
+
 If you have more than one delegate type in your app that you want to instrument, you can call `URLSessionInstrumentation.enable(with:)` for each delegate type.
 
 Also, you can configure first party hosts using `urlSessionTracking`. This classifies resources that match the given domain as "first party" in RUM and propagates tracing information to your backend (if you have enabled Tracing). Network traces are sampled with an adjustable sampling rate. A sampling of 20% is applied by default.
@@ -959,3 +965,4 @@ Calling this method disables the SDK and all active features, such as RUM. To re
 [7]: https://www.ntppool.org/en/
 [8]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
 [9]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup
+[10]: https://developer.apple.com/documentation/foundation/urlsession/init(configuration:delegate:delegatequeue:)#parameters

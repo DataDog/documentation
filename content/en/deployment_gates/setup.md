@@ -22,10 +22,10 @@ Setting up Deployment Gates involves two steps:
      - Allow different deployment strategies (example: `fast-deploy` vs `default`)
      - Distinguish deployment phases (example: `pre-deploy` vs `post-deploy`)
      - Define canary stages (example: `pre-deploy` vs `canary-20pct`)
-   - **Evaluation Mode**: Enable `Dry Run` to test gate behavior without impacting deployments. The evaluation of 
-a dry run gate always responds with a pass status, but the in-app result is the real status based 
-on rules evaluation. This is particularly useful when performing an initial evaluation of the 
-gate behavior without impacting the deployment pipeline. 
+   - **Evaluation Mode**: Enable `Dry Run` to test gate behavior without impacting deployments. The evaluation of
+a dry run gate always responds with a pass status, but the in-app result is the real status based
+on rules evaluation. This is particularly useful when performing an initial evaluation of the
+gate behavior without impacting the deployment pipeline.
 
 ## Add rules to a gate
 
@@ -41,17 +41,18 @@ Each gate requires one or more rules. All rules must pass for the gate to succee
 
 {{< tabs >}}
 {{% tab "Monitors" %}}
-This rule type evaluates the state of your monitors. The evaluation fails if:
+This rule type evaluates the state of your monitors for a configurable period of time. It will fail if at any time during the duration period:
 - No monitors match the query.
 - More than 50 monitors match the query.
 - Any matching monitor is in `ALERT` or `NO_DATA` state.
 
 #### Configuration settings
 
-In the **Query** field, enter a monitor query using [Search Monitor syntax][1]. Use the following syntax to filter on specific tags:
-* Monitor static tags - `service:transaction-backend`
-* Tags within the monitor's query - `scope:"service:transaction-backend"`
-* [Tags within monitor "group by"][2] - `group:"service:transaction-backend"`
+* **Query**: Enter a monitor query using [Search Monitor syntax][1]. Use the following syntax to filter on specific tags:
+  * Monitor static tags - `service:transaction-backend`
+  * Tags within the monitor's query - `scope:"service:transaction-backend"`
+  * Tags within a [monitor grouping][2] - `group:"service:transaction-backend"`
+* **Duration**: Enter the period of time (in seconds), for which the matching monitors should be evaluated.
 
 #### Example queries
 
@@ -75,10 +76,10 @@ This rule type uses Watchdog's [APM Faulty Deployment Detection][1] to compare t
 #### Configuration settings
 
 * **Operation Name**: Auto-populated from the service's [APM primary operation][3] settings.
+* **Duration**: Enter the period of time (in seconds) for which the analysis should be done. For optimal analysis confidence, this value should be at least 900 seconds (15 minutes) after a deployment starts.
 * **Excluded Resources**: Enter a comma-separated list of [APM resources][2] to ignore (such as low-volume or low-priority endpoints).
 
 #### Notes
-- For optimal analysis confidence, wait at least 15 minutes after a deployment starts before evaluating the gate.
 - The rule is evaluated for each [additional primary tag][4] value as well as an aggregate analysis. If you only want to consider a single primary tag, you can specify it in the [evaluation query](#evaluate-a-deployment-gate) (see below).
 - New errors and error rate increases are detected at the resource level.
 - This rule type does not support services marked as `database` or `inferred service`.
@@ -90,147 +91,46 @@ This rule type uses Watchdog's [APM Faulty Deployment Detection][1] to compare t
 {{% /tab %}}
 {{< /tabs >}}
 
-## Evaluate a Deployment Gate
+## Evaluate Deployment Gates
 
-After a gate is configured with at least one rule, you can evaluate the gate while deploying the related service with an API call: 
-
-```bash
-curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/unstable/deployments/gates/evaluate" \
--H "Content-Type: application/json" \
--H "DD-API-KEY: <YOUR_API_KEY>" \
--d @- << EOF
-{
-  "data": {
-    "type": "deployment_gates_evaluation_request",
-    "attributes": {
-      "service": "transaction-backend",
-      "env": "staging",
-      "identifier": "my-custom-identifier", # Optional, defaults to "default"
-      "version": "v123-456",                # Required for APM Faulty Deployment Detection rules
-      "primary_tag": "region:us-central-1"  # Optional, scopes down APM Faulty Deployment Detection rules analysis to the selected primary tag
-    }
-  }
-}'
-```
-
-**Note**: A 404 HTTP response can be because the gate was not found, or because the gate was found but has no rules.
-
-If a 200 HTTP status code is returned, the response is in the following format:
-
-```json
-{
-   "data": {
-       "id": "<random_response_uuid>",
-       "type": "deployment_gates_evaluation_response",
-       "attributes": {
-           "dry_run": false,
-           "evaluation_id": "e9d2f04f-4f4b-494b-86e5-52f03e10c8e9",
-           "evaluation_url": "https://app.{{< region-param key="dd_site" >}}/ci/deployment-gates/evaluations?index=cdgates&query=level%3Agate+%40evaluation_id%3Ae9d2f14f-4f4b-494b-86e5-52f03e10c8e9",
-           "gate_id": "e140302e-0cba-40d2-978c-6780647f8f1c",
-           "gate_status": "pass",
-           "rules": [
-               {
-                   "name": "Check service monitors",
-                   "status": "fail",
-                   "reason": "One or more monitors in ALERT state: https://app.{{< region-param key="dd_site" >}}/monitors/34330981",
-                   "dry_run": true
-               }
-           ]
-       }
-   }
-}
-```
-
-If the field `data.attributes.dry_run` is `true`, the field `data.attributes.gate_status` is always `pass`. 
-
-### Integration examples
+Deployment Gates can be evaluated in various ways, as outlined in the examples below.
 
 {{< tabs >}}
-{{% tab "Generic script" %}}
-Use this script as a starting point. For the API_URL variable, be sure to replace `<YOUR_DD_SITE>` with your [Datadog site name][1] (for example, {{< region-param key="dd_site" code="true" >}}).
+{{% tab "datadog-ci CLI" %}}
+The [datadog-ci][1] `deployment gate` command includes all the required logic to evaluate Deployment Gates in a single command:
 
 ```bash
-#!/bin/sh
-
-# Configuration
-MAX_RETRIES=3
-DELAY_SECONDS=5
-API_URL="https://api.<YOUR_DD_SITE>/api/unstable/deployments/gates/evaluate"
-API_KEY="<YOUR_API_KEY>"
-
-PAYLOAD=$(cat <<EOF
-{
-  "data": {
-    "type": "deployment_gates_evaluation_request",
-    "attributes": {
-      "service": "$1",
-      "env": "$2",
-      "version": "$3"
-    }
-  }
-}
-EOF
-)
-
-current_attempt=0
-while [ $current_attempt -lt $MAX_RETRIES ]; do
-   current_attempt=$((current_attempt + 1))
-   RESPONSE=$(curl -s -w "%{http_code}" -o response.txt -X POST "$API_URL" \
-       -H "Content-Type: application/json" \
-       -H "DD-API-KEY: $API_KEY" \
-       -d "$PAYLOAD")
-   
-   # Extracts the last 3 digits of the status code
-   HTTP_CODE=$(echo "$RESPONSE" | tail -c 4)
-   RESPONSE_BODY=$(cat response.txt)
-   
-   if [ ${HTTP_CODE} -ge 500 ]  &&  [ ${HTTP_CODE} -le 599 ]; then
-       # Status code 5xx indicates a server error, so the call is retried
-       echo "Attempt $current_attempt: 5xx Error ($HTTP_CODE). Retrying in $DELAY_SECONDS seconds..."
-       sleep $DELAY_SECONDS
-       continue
-   
-   elif [ ${HTTP_CODE} -ne 200 ]; then
-       # Only 200 is an expected status code
-       echo "Unexpected HTTP Code ($HTTP_CODE): $RESPONSE_BODY"
-       exit 1
-   fi
-   
-   # At this point, we have received a 200 status code. So, we check the gate status returned
-   GATE_STATUS=$(echo "$RESPONSE_BODY" | jq -r '.data.attributes.gate_status')
-   
-   if [[ "$GATE_STATUS" == "pass" ]]; then
-       echo "Gate evaluation PASSED"
-       exit 0
-   else
-       echo "Gate evaluation FAILED"
-       exit 1
-   fi
-done
-
-# If we arrive here, it means that we received several 5xx errors from the API. To not block deployments, we can treat this case as a success
-echo "All retries exhausted, but treating 5xx errors as success."
-exit 0
+datadog-ci deployment gate --service transaction-backend --env staging
 ```
 
-The script has the following characteristics:
+If the Deployment Gate being evaluated has APM Faulty Deployment Detection rules, you must also specify the version, for example `--version 1.0.1`.
 
-* It receives three inputs: `service`, `environment`, and `version` (optionally add `identifier` and `primary_tag` if needed). The `version` is only required if one or more APM Faulty Deployment Detection rules are evaluated.  
-* It sends a request to the Deployment Gate API and writes the output to the `response.txt` file.
-* It checks the HTTP response status code of the response, and does the following depending on the response code:
-  * 5xx: Retries the call (up to 3 times) with a delay of 5 seconds.
-  * Not 200 (for example, 404): Prints the resulting error and fails.
-  * 200: Checks the gate evaluation status returned (under `data.attributes.gate_status`) and passes or fails the script based on its value.  
-* If all the retries are exhausted (that is, several 5xx responses returned), the script does not return a failure to be resilient to API failures.
+The command has the following characteristics:
+* It sends a request to start the evaluation and polls the evaluation status endpoint using the evaluation_id until the evaluation is complete.
+* It provides a configurable timeout to determine the maximum amount of time to wait for an evaluation to complete.
+* It implements automatic retries for errors.
+* It allows you to customize the behavior on unexpected errors, allowing you to consider Datadog failures as either an evaluation pass or a fail.
 
-This is a general behavior, and you should change it based on your personal use case and preferences. The script uses `curl` (to perform the request) and `jq` (to process the returned JSON). If those commands are not available, install them at the beginning of the script (for example, by adding `apk add --no-cache curl jq`).
+Note that the `deployment gate` command is available in datadog-ci versions v3.17.0 and above.
 
-[1]: /getting_started/site/
+**Required environment variables**:
+* `DD_API_KEY`: API key used to authenticate the requests.
+* `DD_APP_KEY`: Application key used to authenticate the requests.
+* `DD_BETA_COMMANDS_ENABLED=1`: The `deployment gate` command is a beta command, so datadog-ci needs to be run with beta commands enabled.
+
+For complete configuration options and detailed usage examples, refer to the [`deployment gate` command documentation][2].
+
+[1]: https://github.com/DataDog/datadog-ci
+[2]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#gate
+
 {{% /tab %}}
 {{% tab "Argo Rollouts" %}}
 To call Deployment Gates from an Argo Rollouts Kubernetes Resource, you can create an [AnalysisTemplate][1] or a [ClusterAnalysisTemplate][1]. The template should contain a Kubernetes job that is used to perform the analysis.
 
-Use this script as a starting point. For the API_URL variable, be sure to replace `<YOUR_DD_SITE>` with your [Datadog site name][3] (for example, {{< region-param key="dd_site" code="true" >}}).
+Use this template as a starting point. For the DD_SITE environment variable, be sure to replace `<YOUR_DD_SITE>` with your [Datadog site name][2] (for example, {{< region-param key="dd_site" code="true" >}}).
+
+The command requires an API key and application key. The safest way to provide them is by using [Kubernetes Secrets][3]. This example relies on a secret called `datadog` holding two data values: `api-key` and `app-key`. Alternatively, you can also pass the values in plain text using `value` instead of `valueFrom` in the script below.
+
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -253,71 +153,28 @@ spec:
                 restartPolicy: Never
                 containers:
                   - name: datadog-check
-                    image: alpine:latest
+                    image: datadog/ci:v3.17.0
+                    env:
+                      - name: DD_BETA_COMMANDS_ENABLED
+                        value: "1"
+                      - name: DD_SITE
+                        value: "<YOUR_DD_SITE>"
+                      - name: DD_API_KEY
+                        valueFrom:
+                          secretKeyRef:
+                            name: datadog
+                            key: api-key
+                      - name: DD_APP_KEY
+                        valueFrom:
+                          secretKeyRef:
+                            name: datadog
+                            key: app-key
                     command: ["/bin/sh", "-c"]
                     args:
-                      - |
-                        apk add --no-cache curl jq
-
-                        # Configuration
-                        MAX_RETRIES=3
-                        DELAY_SECONDS=5
-                        API_URL="https://api.<YOUR_DD_SITE>/api/unstable/deployments/gates/evaluate"
-                        API_KEY="<YOUR_API_KEY>"
-
-                        PAYLOAD='{
-                          "data": {
-                            "type": "deployment_gates_evaluation_request",
-                            "attributes": {
-                              "service": "{{ args.service }}",
-                              "env": "{{ args.env }}",
-                              "version": "{{ args.version }}",
-                            }
-                          }
-                        }'
-
-                        current_attempt=0
-                        while [ $current_attempt -lt $MAX_RETRIES ]; do
-                          current_attempt=$((current_attempt + 1))
-                          RESPONSE=$(curl -s -w "%{http_code}" -o response.txt -X POST "$API_URL" \
-                              -H "Content-Type: application/json" \
-                              -H "DD-API-KEY: $API_KEY" \
-                              -d "$PAYLOAD")
-                          
-                          # Extracts the last 3 digits of the status code
-                          HTTP_CODE=$(echo "$RESPONSE" | tail -c 4)
-                          RESPONSE_BODY=$(cat response.txt)
-                          
-                          if [ ${HTTP_CODE} -ge 500 ]  &&  [ ${HTTP_CODE} -le 599 ]; then
-                              # Status code 5xx indicates a server error, so the call is retried
-                              echo "Attempt $current_attempt: 5xx Error ($HTTP_CODE). Retrying in $DELAY_SECONDS seconds..."
-                              sleep $DELAY_SECONDS
-                              continue
-                          
-                          elif [ ${HTTP_CODE} -ne 200 ]; then
-                              # Only 200 is an expected status code
-                              echo "Unexpected HTTP Code ($HTTP_CODE): $RESPONSE_BODY"
-                              exit 1
-                          fi
-                          
-                          # At this point, we have received a 200 status code. So, we check the gate status returned
-                          GATE_STATUS=$(echo "$RESPONSE_BODY" | jq -r '.data.attributes.gate_status')
-                          
-                          if [[ "$GATE_STATUS" == "pass" ]]; then
-                              echo "Gate evaluation PASSED"
-                              exit 0
-                          else
-                              echo "Gate evaluation FAILED"
-                              exit 1
-                          fi
-                        done
-
-                        # If we arrive here, it means that we received several 5xx errors from the API. To not block deployments, we can treat this case as a success
-                        echo "All retries exhausted, but treating 5xx errors as success."
-                        exit 0
+                      - datadog-ci deployment gate --service {{ args.service }} --env {{ args.env }}
 ```
 
-* The analysis template can receive arguments from the Rollout resource. In this case, the arguments are `service`, `env`, and any other optional fields needed (such as `version`). For more information, see the [official Argo Rollouts docs][2].
+* The analysis template can receive arguments from the Rollout resource. In this case, the arguments are `service` and `env`. Add any other optional fields if needed (such as `version`). For more information, see the [official Argo Rollouts docs][4].
 * The `ttlSecondsAfterFinished` field removes the finished jobs after 5 minutes.
 * The `backoffLimit` field is set to 0 as the job might fail if the gate evaluation fails, and it should not be retried in that case.
 
@@ -350,7 +207,7 @@ spec:
                 valueFrom:
                   fieldRef:
                     fieldPath: metadata.labels['tags.datadoghq.com/service']
-              - name: version #Only required if one or more APM Faulty Deployment Detection rules are evaluated  
+              - name: version #Only required if one or more APM Faulty Deployment Detection rules are evaluated
                 valueFrom:
                   fieldRef:
                     fieldPath: metadata.labels['tags.datadoghq.com/version']
@@ -358,8 +215,252 @@ spec:
 ```
 
 [1]: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-progressive-delivery
-[2]: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-template-arguments
-[3]: /getting_started/site/
+[2]: /getting_started/site/
+[3]: https://kubernetes.io/docs/concepts/configuration/secret/
+[4]: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-template-arguments
+
+{{% /tab %}}
+{{% tab "Generic script" %}}
+
+
+Use this script as a starting point. For the API_URL variable, be sure to replace `<YOUR_DD_SITE>` with your [Datadog site name][1] (for example, {{< region-param key="dd_site" code="true" >}}).
+
+```bash
+#!/bin/sh
+
+# Configuration
+MAX_RETRIES=3
+DELAY_SECONDS=5
+POLL_INTERVAL_SECONDS=15
+MAX_POLL_TIME_SECONDS=10800 # 3 hours
+API_URL="https://api.<YOUR_DD_SITE>/api/unstable/deployments/gates/evaluation"
+API_KEY="<YOUR_API_KEY>"
+APP_KEY="<YOUR_APP_KEY>"
+
+PAYLOAD=$(cat <<EOF
+{
+  "data": {
+    "type": "deployment_gates_evaluation_request",
+    "attributes": {
+      "service": "$1",
+      "env": "$2",
+      "version": "$3"
+    }
+  }
+}
+EOF
+)
+
+# Step 1: Request evaluation
+echo "Requesting evaluation..."
+current_attempt=0
+while [ $current_attempt -lt $MAX_RETRIES ]; do
+   current_attempt=$((current_attempt + 1))
+   RESPONSE=$(curl -s -w "%{http_code}" -o response.txt -X POST "$API_URL" \
+       -H "Content-Type: application/json" \
+       -H "DD-API-KEY: $API_KEY" \
+       -H "DD-APPLICATION-KEY: $APP_KEY" \
+       -d "$PAYLOAD")
+
+   # Extracts the last 3 digits of the status code
+   HTTP_CODE=$(echo "$RESPONSE" | tail -c 4)
+   RESPONSE_BODY=$(cat response.txt)
+
+   if [ ${HTTP_CODE} -ge 500 ]  &&  [ ${HTTP_CODE} -le 599 ]; then
+       # Status code 5xx indicates a server error, so the call is retried
+       echo "Attempt $current_attempt: 5xx Error ($HTTP_CODE). Retrying in $DELAY_SECONDS seconds..."
+       sleep $DELAY_SECONDS
+       continue
+
+   elif [ ${HTTP_CODE} -ge 400 ] && [ ${HTTP_CODE} -le 499 ]; then
+       # 4xx errors are client errors and not retriable
+       echo "Client error ($HTTP_CODE): $RESPONSE_BODY"
+       exit 1
+   fi
+
+   # Successfully started evaluation, extract evaluation_id
+   EVALUATION_ID=$(echo "$RESPONSE_BODY" | jq -r '.data.attributes.evaluation_id')
+   if [ "$EVALUATION_ID" = "null" ] || [ -z "$EVALUATION_ID" ]; then
+       echo "Failed to extract evaluation_id from response: $RESPONSE_BODY"
+       exit 1
+   fi
+
+   echo "Evaluation started with ID: $EVALUATION_ID"
+   break
+done
+
+if [ $current_attempt -eq $MAX_RETRIES ]; then
+   echo "All retries exhausted for evaluation request, but treating 5xx errors as success."
+   exit 0
+fi
+
+# Step 2: Poll for results
+echo "Polling for results..."
+start_time=$(date +%s)
+poll_count=0
+
+while true; do
+  poll_count=$((poll_count + 1))
+  current_time=$(date +%s)
+  elapsed_time=$((current_time - start_time))
+
+  # Check if we've exceeded the maximum polling time
+  if [ $elapsed_time -ge $MAX_POLL_TIME_SECONDS ]; then
+      echo "Evaluation polling timeout after ${MAX_POLL_TIME_SECONDS} seconds"
+      exit 1
+  fi
+
+  RESPONSE=$(curl -s -w "%{http_code}" -o response.txt -X GET "$API_URL/$EVALUATION_ID" \
+      -H "DD-API-KEY: $API_KEY" \
+      -H "DD-APPLICATION-KEY: $APP_KEY")
+
+  HTTP_CODE=$(echo "$RESPONSE" | tail -c 4)
+  RESPONSE_BODY=$(cat response.txt)
+
+  if [ ${HTTP_CODE} -eq 404 ]; then
+      # Evaluation might not have started yet, retry after a short delay
+      echo "Evaluation not ready yet (404), retrying in $POLL_INTERVAL_SECONDS seconds... (attempt $poll_count, elapsed: ${elapsed_time}s)"
+      sleep $POLL_INTERVAL_SECONDS
+      continue
+  elif [ ${HTTP_CODE} -ge 500 ]  &&  [ ${HTTP_CODE} -le 599 ]; then
+      echo "Server error ($HTTP_CODE) while polling, retrying in $POLL_INTERVAL_SECONDS seconds... (attempt $poll_count, elapsed: ${elapsed_time}s)"
+      sleep $POLL_INTERVAL_SECONDS
+      continue
+  elif [ ${HTTP_CODE} -ge 400 ] && [ ${HTTP_CODE} -le 499 ]; then
+      # 4xx errors (except 404) are client errors and not retriable
+      echo "Client error ($HTTP_CODE) while polling: $RESPONSE_BODY"
+      exit 1
+  fi
+
+  # Check gate status
+  GATE_STATUS=$(echo "$RESPONSE_BODY" | jq -r '.data.attributes.gate_status')
+
+  if [ "$GATE_STATUS" = "pass" ]; then
+      echo "Gate evaluation PASSED"
+      exit 0
+  elif [ "$GATE_STATUS" = "fail" ]; then
+      echo "Gate evaluation FAILED"
+      exit 1
+  else
+      # Treat any other status (in_progress, unexpected, etc.) as still in progress
+      echo "Evaluation still in progress (status: $GATE_STATUS), retrying in $POLL_INTERVAL_SECONDS seconds... (attempt $poll_count, elapsed: ${elapsed_time}s)"
+      sleep $POLL_INTERVAL_SECONDS
+      continue
+  fi
+done
+```
+
+The script has the following characteristics:
+
+* It receives three inputs: `service`, `environment`, and `version` (optionally add `identifier` and `primary_tag` if needed). The `version` is only required if one or more APM Faulty Deployment Detection rules are evaluated.
+* It sends a request to start the evaluation and records the evaluation_id. It handles various HTTP response codes appropriately:
+  * 5xx: Server errors, retries with delay.
+  * 4xx: Client error, evaluation fails.
+  * 2xx: Evaluation started successfully.
+* It polls the evaluation status endpoint using the evaluation_id until the evaluation is complete.
+* It handles various HTTP response codes appropriately:
+  * 5xx: Server errors, retries with delay.
+  * 404: Gate evaluation not started yet, retries with delay.
+  * 4xx errors (except 404): Client error, evaluation fails.
+  * 2xx: Successful response, check for gate status and retry with delay if not complete yet.
+* The script polls every 10 seconds indefinitely until the evaluation completes or the maximum polling time (10800 seconds = 3 hours by default) is reached.
+* If all the retries are exhausted for the initial request (5xx responses), the script treats this as success to be resilient to API failures.
+
+This is a general behavior, and you should change it based on your personal use case and preferences. The script uses `curl` (to perform the request) and `jq` (to process the returned JSON). If those commands are not available, install them at the beginning of the script (for example, by adding `apk add --no-cache curl jq`).
+
+[1]: /getting_started/site/
+
+{{% /tab %}}
+{{% tab "Direct API calls" %}}
+
+Deployment Gate evaluations are asynchronous, as the evaluation process can take some time to complete. When you trigger an evaluation, it's started in the background, and the API returns an evaluation ID that can be used to track its progress. The high-level interaction with the Deployment Gates API is the following:
+
+- First, request a Deployment Gate evaluation, which initiates the process and returns an evaluation ID.
+- Then, periodically poll the evaluation status endpoint using the evaluation ID to retrieve the result when the evaluation is complete. Polling every 10-20 seconds is recommended.
+
+A Deployment Gate evaluation can be requested with an API call:
+
+```bash
+curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/unstable/deployments/gates/evaluation" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: <YOUR_API_KEY>" \
+-H "DD-APPLICATION-KEY: <YOUR_APP_KEY>" \
+-d @- << EOF
+{
+  "data": {
+    "type": "deployment_gates_evaluation_request",
+    "attributes": {
+      "service": "transaction-backend",
+      "env": "staging",
+      "identifier": "my-custom-identifier", # Optional, defaults to "default"
+      "version": "v123-456",                # Required for APM Faulty Deployment Detection rules
+      "primary_tag": "region:us-central-1"  # Optional, scopes down APM Faulty Deployment Detection rules analysis to the selected primary tag
+    }
+  }
+}'
+```
+
+**Note**: A 404 HTTP response can be because the gate was not found, or because the gate was found but has no rules.
+
+If the gate evaluation was successfully started, a 202 HTTP status code is returned. The response is in the following format:
+
+```json
+{
+   "data": {
+       "id": "<random_response_uuid>",
+        "type": "deployment_gates_evaluation_response",
+        "attributes": {
+            "evaluation_id": "e9d2f04f-4f4b-494b-86e5-52f03e10c8e9"
+        }
+    }
+}
+```
+
+The field `data.attributes.evaluation_id` contains the unique identifier for this gate evaluation.
+
+You can fetch the status of a gate evaluation by polling an additional API endpoint using the gate evaluation ID:
+
+```bash
+curl -X GET "https://api.{{< region-param key="dd_site" >}}/api/unstable/deployments/gates/evaluation/<evaluation_id>" \
+-H "DD-API-KEY: <YOUR_API_KEY>" \
+-H "DD-APPLICATION-KEY: <YOUR_APP_KEY>"
+```
+
+**Note**: If you call this endpoint too quickly after requesting the evaluation, a 404 HTTP response may be returned because the evaluation did not start yet. If this is the case, retry a few seconds later.
+
+When a 200 HTTP response is returned, it has the following format:
+
+```json
+{
+   "data": {
+       "id": "<random_response_uuid>",
+       "type": "deployment_gates_evaluation_result_response",
+       "attributes": {
+           "dry_run": false,
+           "evaluation_id": "e9d2f04f-4f4b-494b-86e5-52f03e10c8e9",
+           "evaluation_url": "https://app.{{< region-param key="dd_site" >}}/ci/deployment-gates/evaluations?index=cdgates&query=level%3Agate+%40evaluation_id%3Ae9d2f14f-4f4b-494b-86e5-52f03e10c8e9",
+           "gate_id": "e140302e-0cba-40d2-978c-6780647f8f1c",
+           "gate_status": "pass",
+           "rules": [
+               {
+                   "name": "Check service monitors",
+                   "status": "fail",
+                   "reason": "One or more monitors in ALERT state: https://app.{{< region-param key="dd_site" >}}/monitors/34330981",
+                   "dry_run": true
+               }
+           ]
+       }
+   }
+}
+```
+
+The field `data.attributes.gate_status` contains the result of the evaluation. It can contain one of these values:
+
+* `in_progress`: The Deployment Gate evaluation is still in progress; you should continue polling.
+* `pass`: The Deployment Gate evaluation passed.
+* `fail`: The Deployment Gate evaluation failed.
+
+**Note**: If the field `data.attributes.dry_run` is `true`, the field `data.attributes.gate_status` is always `pass`.
 
 {{% /tab %}}
 {{< /tabs >}}
