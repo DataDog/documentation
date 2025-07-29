@@ -1,5 +1,5 @@
 ---
-title: Building your Go application with Datadog's WAF
+title: Building your Go application for App & API Protection
 code_lang: docker
 type: multi-code-lang
 code_lang_weight: 10
@@ -17,7 +17,7 @@ further_reading:
 
 # Introduction
 
-App and API Protection (AAP) for Go installation requirements can be abstract and the Go toolchain
+App and API Protection for Go installation requirements can be abstract and the Go toolchain
 cross-compilation and CGO capabilities can make precise installation steps difficult to understand.
 
 The goal of this guide is to provide a step-by-step guide to a working Dockerfile customized for your use case.
@@ -244,7 +244,15 @@ docker build -f ./examples/alpine/Dockerfile -t appsec-go-test-app .
 docker run appsec-go-test-app
 ```
 
-{{% app_and_api_protection_verify_setup %}}
+### Verify your setup
+
+To verify that App and API Protection is working correctly:
+   
+To see App and API Protection threat detection in action, send known attack patterns to your application. For example, trigger the [Security Scanner Detected][9] rule by running a file that contains the following curl script:
+<div>
+<pre><code>for ((i=1;i<=250;i++)); <br>do<br># Target existing service’s routes<br>curl https://your-application-url/existing-route -A Arachni/v1.0;<br># Target non existing service’s routes<br>curl https://your-application-url/non-existing-route -A Arachni/v1.0;<br>done</code></pre></div>
+
+A few minutes after you enable your application and exercise it, **threat information appears in the [Application Trace and Signals Explorer][8] in Datadog**.
 
 ## Further Reading
 
@@ -256,3 +264,5 @@ docker run appsec-go-test-app
 [5]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go/?tab=compiletimeinstrumentation
 [6]: /security/application_security/setup/go/setup
 [7]: https://github.com/GoogleContainerTools/distroless
+[8]: https://app.datadoghq.com/security/appsec
+[9]: /security/default_rules/security-scan-detected/
