@@ -114,7 +114,11 @@ datadog:
               value: "staging"
 ```
 
-This approach is preferred when your pods use consistent labeling. If your setup doesn't use labels suitable for UST extraction, you can [set USTs directly in your deployment manifests][5].
+### Alternative: Configure USTs in deployment manifests
+
+If your setup doesn't use labels suitable for UST extraction, you can set USTs directly in your deployment manifests using environment variables. This approach requires modifying each deployment individually but offers precise control.
+
+For complete instructions, see [setting USTs for Kubernetes services][5].
 
 ## Enable SDK-dependent products and features
 
