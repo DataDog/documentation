@@ -13,7 +13,7 @@ further_reading:
 
 Automations allow you to trigger actions based on events in On-Call. There are two types:
 - **Handover automations**: Triggered automatically when an on-call shift changes.
-- **[Workflow automations][1]**: A low-code/no-code solution that can include on-call actions (such as paging, creating incidents, or updating schedules) within automated workflows. For all On-Call related actions, see [here][5].
+- **[Workflow automations][1]**: A low-code/no-code solution that can include on-call actions (such as paging, or updating schedules) within automated workflows. For all On-Call related actions, see [here][5].
 
 
 ## Handover automations
