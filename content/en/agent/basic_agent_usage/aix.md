@@ -113,9 +113,6 @@ installp -e dd-aix-uninstall.log -uv datadog-unix-agent
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=aix
-[2]: https://github.com/DataDog/datadog-unix-agent/releases
-[3]: https://github.com/DataDog/datadog-unix-agent/blob/master/checks/bundled/ibm_was/README.md
 [4]: https://github.com/DataDog/datadog-unix-agent/blob/master/README.md
 [5]: /agent/supported_platforms/?tab=unix
 [6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
