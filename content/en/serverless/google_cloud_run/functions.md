@@ -757,6 +757,6 @@ public class Function : IHttpFunction
 [11]: /tracing/other_telemetry/connect_logs_and_traces/go
 [12]: /tracing/other_telemetry/connect_logs_and_traces/ruby
 [13]: /getting_started/tagging/unified_service_tagging/
-[14]: /serverless/google_cloud/google_cloud_run_in_process
+[14]: /serverless/google_cloud_run/containers_in_process
 [15]: https://cloud.google.com/run/docs/configuring/services/labels
 [16]: https://cloud.google.com/blog/products/serverless/google-cloud-functions-is-now-cloud-run-functions
