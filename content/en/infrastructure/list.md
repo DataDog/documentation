@@ -100,6 +100,8 @@ When the [Datadog Extension][14] is configured with your OpenTelemetry Collector
 
 <div class="alert alert-warning"><strong>Hostname Matching:</strong> If your telemetry contains <a href="https://docs.datadoghq.com/opentelemetry/config/hostname_tagging/?tab=host">host attributes</a> and you have manually set the extension hostname, ensure they match. The Datadog Extension does not have access to pipeline telemetry and cannot infer hostnames from incoming spans—it only obtains hostnames from system/cloud provider APIs or manual configuration. If telemetry has different hostname attributes than extension, the telemetry will not be correlated to the host and you may see duplicate hosts in the infrastructure list.</div>
 
+<div class="alert alert-info"><strong>Pipeline Configuration:</strong> For OpenTelemetry Collectors to appear in the Host list, the <a href="/opentelemetry/setup/collector_exporter/">Datadog Exporter</a> must be configured in either the traces pipeline, the metrics pipeline, or both. A future update to the Datadog Exporter will enable compatibility between the Datadog Extension and logs-only OpenTelemetry Collector deployments.</div>
+
 To view OpenTelemetry Collector configurations:
 1. Click on any host running the OpenTelemetry Collector in the infrastructure list
 2. In the host detail panel, select the **OTel Collector** tab

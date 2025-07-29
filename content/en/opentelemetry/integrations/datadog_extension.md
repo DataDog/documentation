@@ -166,6 +166,10 @@ This endpoint provides:
 <strong>Hostname Matching</strong>: If you specify a custom <code>hostname</code> in the Datadog Extension, it must match the <code>hostname</code> value in the Datadog Exporter configuration. If left unset in both components, the auto-detected hostname will match correctly. It should also match any <a href="/opentelemetry/config/hostname_tagging/?tab=host">hostname telemetry resource attributes</a> on telemetry received by the Exporter to ensure full correlation throughout the Datadog application.
 </div>
 
+<div class="alert alert-info">
+<strong>Pipeline Configuration</strong>: For OpenTelemetry Collectors to appear in the Infrastructure List and Resource Catalog, the <a href="/opentelemetry/setup/collector_exporter/">Datadog Exporter</a> must be configured in either the traces pipeline, the metrics pipeline, or both. A future update to the Datadog Exporter will enable compatibility between the Datadog Extension and logs-only OpenTelemetry Collector deployments.
+</div>
+
 ## Troubleshooting
 
 ### Configuration Not Appearing
