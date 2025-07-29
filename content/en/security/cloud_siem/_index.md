@@ -79,7 +79,7 @@ TKTK
 
 ## Cloud SIEM Overview Page
 
-Navigate to the [Cloud SIEM Overview dashboard][2]. Use this dashboard to see key security insights and act on common workflows for security analysts, security and detection engineers, and Security Operations Center (SOC) managers. From the overview page, you can:
+Navigate to the [Cloud SIEM Overview dashboard][2]. Use this dashboard to see key security insights and act on common workflows for security analysts, security and detection engineers, and Security Operations Center (SOC) managers. From the Overview page, you can:
 - Access important signals, open cases, and high-risk entities.
 - Complete onboarding tasks and review content‑pack health.
 - View and investigate top signals by geography or ISP.
