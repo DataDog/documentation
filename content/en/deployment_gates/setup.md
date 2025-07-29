@@ -318,7 +318,7 @@ Use this script as a starting point. For the API_URL variable, be sure to replac
 # Configuration
 MAX_RETRIES=3
 DELAY_SECONDS=5
-POLL_INTERVAL_SECONDS=10
+POLL_INTERVAL_SECONDS=15
 MAX_POLL_TIME_SECONDS=10800 # 3 hours
 API_URL="https://api.<YOUR_DD_SITE>/api/unstable/deployments/gates/evaluation"
 API_KEY="<YOUR_API_KEY>"
