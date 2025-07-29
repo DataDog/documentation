@@ -34,7 +34,7 @@ CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "path/to/your/python/app.py"
 
 {{% collapse-content title="Explanation" level="h4" %}}
 
-1. Copy the Datadog `serverless-init` into your Docker image.
+1. Install `serverless-init`, and stay on the latest major version with the `:1` tag. Alternatively, you can pin to a specific version tag or use `:latest`.
 
    ```dockerfile
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -79,9 +79,9 @@ To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This all
 
 We also recommend the following environment variables:
 - `ENV PYTHONUNBUFFERED=1`: Ensure Python outputs appear immediately in container logs instead of being buffered.
-- `ENV DD_SOURCE=python`: Enable Datadog log parsing. For more information, see [Correlating Python Logs and Traces][2].
+- `ENV DD_SOURCE=python`: Enable advanced Datadog log parsing.
 
-If you want multiline logs to be preserved in a single log message, we recommend writing your logs in JSON format. For example:
+If you want multiline logs to be preserved in a single log message, we recommend writing your logs in JSON format. For example, you can use a third-party logging library such as `structlog`:
 ```python
 import structlog
 
@@ -102,6 +102,8 @@ logger = structlog.get_logger()
 
 logger.info("Hello world!")
 ```
+
+For more information, see [Correlating Python Logs and Traces][2].
 
 ## 4. Configure your application
 

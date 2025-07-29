@@ -39,7 +39,7 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 
 {{% collapse-content title="Explanation" level="h4" %}}
 
-1. Copy the Datadog `serverless-init` into your Docker image.
+1. Install `serverless-init`, and stay on the latest major version with the `:1` tag. Alternatively, you can pin to a specific version tag or use `:latest`.
 
    ```dockerfile
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -88,7 +88,7 @@ As long as your command to run is passed as an argument to datadog-init, you wil
 
 To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows serverless-init to read logs from stdout and stderr.
 
-If you want multiline logs to be preserved in a single log message, we recommend writing your logs in JSON format. For example:
+If you want multiline logs to be preserved in a single log message, we recommend writing your logs in JSON format. For example, you can use a third-party logging library such as `winston`:
 ```javascript
 const tracer = require('dd-trace').init({
   logInjection: true,
@@ -107,6 +107,8 @@ const logger = createLogger({
 logger.info(`Hello world!`);
 ```
 
+For more information, see [Correlating Node.js Logs and Traces][2].
+
 ## 4. Configure your application
 
 {{% gcr-configure-env-vars %}}
@@ -116,3 +118,4 @@ logger.info(`Hello world!`);
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
+[2]: tracing/other_telemetry/connect_logs_and_traces/nodejs/
