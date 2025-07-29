@@ -43,7 +43,7 @@ To get started using Cloudcraft, use the following steps:
 1. Navigate to [**Infrastructure > Resources > Cloudcraft**][7]. 
 2. A real-time diagram of the resources is displayed in your environment.
 
- **Note:**: If your environment contains more than 10,000 resources, Cloudcraft requires you to select an account and region before displaying the diagram.
+ **Note**: For environments with more than 10,000 resources, you must filter the diagram by account, region, or tags before it can be displayed.
 
 {{< img src="datadog_cloudcraft/getting_started_3.mp4" alt="Video showing getting started in Cloudcraft by selecting the Account, Region, and Resource" video=true;" >}}
 
