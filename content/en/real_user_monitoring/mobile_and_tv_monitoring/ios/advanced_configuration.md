@@ -967,4 +967,3 @@ Calling this method disables the SDK and all active features, such as RUM. To re
 [7]: https://www.ntppool.org/en/
 [8]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
 [9]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup
-[10]: https://developer.apple.com/documentation/foundation/urlsession/init(configuration:delegate:delegatequeue:)#parameters
