@@ -165,7 +165,7 @@ If you want to explicitly disable APM tracing while using App and API Protection
 1. Configure your deployment with the `DD_APM_TRACING_ENABLED=false` environment variable in addition to the `DD_APPSEC_ENABLED=true` environment variable.
 2. This configuration will reduce the amount of APM data sent to Datadog to the minimum required by App and API Protection products.
 
-For more details, see [Standalone App and API Protection][standalone_billing_guide].
+For more details, see [Standalone App and API Protection][15].
 
 ## Limitations
 
@@ -182,14 +182,14 @@ For finer-grained analysis and other AAP features, consider trying other AAP int
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [6]: https://github.com/DataDog/dd-trace-go
-[7]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
-[8]: https://docs.datadoghq.com/security/application_security/policies/library_configuration/
+[7]: /tracing/trace_collection/library_config/go/
+[8]: /security/application_security/policies/library_configuration/
 [9]: https://gateway-api.sigs.k8s.io/guides/#installing-gateway-api
 [10]: https://gateway-api.sigs.k8s.io/implementations
 [11]: https://go.dev/doc/install
-[12]: https://docs.datadoghq.com/containers/kubernetes/installation/
-[13]: https://docs.datadoghq.com/tracing/guide/setting_up_apm_with_kubernetes_service/
+[12]: /containers/kubernetes/installation/
+[13]: /tracing/guide/setting_up_apm_with_kubernetes_service/
 [14]: https://gateway-api.sigs.k8s.io/guides/http-request-mirroring/
-[standalone_billing_guide]: /security/application_security/guide/standalone_application_security/
+[15]: /security/application_security/setup/standalone/
