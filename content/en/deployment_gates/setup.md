@@ -52,7 +52,7 @@ This rule type periodically evaluates the state of your monitors for a configura
   * Monitor static tags - `service:transaction-backend`
   * Tags within the monitor's query - `scope:"service:transaction-backend"`
   * Tags within a [monitor grouping][2] - `group:"service:transaction-backend"`
-* **Duration**: Enter the period of time (in seconds), for which the monitors should be evaluated.
+* **Duration**: Enter the period of time (in seconds), for which the matching monitors should be evaluated.
 
 #### Example queries
 
