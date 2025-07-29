@@ -1,6 +1,6 @@
 ---
 title: Bar Chart Widget
-widget_type: bar_chart
+widget_type: "bar_chart"
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
@@ -8,6 +8,9 @@ further_reading:
 - link: "/dashboards/widgets/top_list"
   tag: "Documentation"
   text: "Top List Widget"
+- link: "/dashboards/widgets/treemap"
+  tag: "Documentation"
+  text: "Treemap Widget"
 - link: "/dashboards/widgets/pie_chart"
   tag: "Documentation"
   text: "Pie Chart Widget"
@@ -49,6 +52,6 @@ The bar chart widget supports multiple levels of grouping with stacked visualiza
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/latest/dashboards/
-[2]: /dashboards/graphing_json/widget_json/
-[3]: /dashboards/guide/context-links/
+[1]: /dashboards/querying
+[2]: /logs/explorer/search_syntax/
+[3]: /dashboards/functions/
