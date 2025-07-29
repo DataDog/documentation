@@ -558,6 +558,7 @@ To automatically track user tap actions in SwiftUI, enable the `swiftUIActionsPr
 - The implementation differs between iOS 18+ and iOS 17 and below:
   - **iOS 18 and above:** Most interactions are reliably tracked with correct component names (e.g., `SwiftUI_Button`, `SwiftUI_NavigationLink`).
   - **iOS 17 and below:** The SDK cannot distinguish between interactive and non-interactive components (for example, Button vs. Label). For that reason, actions are reported as `SwiftUI_Unidentified_Element`.
+- If you use both automatic and manual tracking, you may see duplicate events. This is a known limitation. To avoid this, use only one instrumentation type - either automatic or manual.
 - You can use the default predicate, `DefaultSwiftUIRUMActionsPredicate`, or provide your own to filter or rename actions. You can also disable legacy detection (iOS 17 and below) if you only want reliable iOS 18+ tracking:
 
 {{< tabs >}}
@@ -640,6 +641,12 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+<div class="alert alert-info">Be mindful of delegate retention. 
+While Datadog instrumentation does not create memory leaks directly, it relies on `URLSession` delegates. According to [Apple's documentation][10]:
+"The session object keeps a strong reference to the delegate until your app exits or explicitly invalidates the session. If you do not invalidate the session by calling the `invalidateAndCancel()` or `finishTasksAndInvalidate()` method, your app leaks memory until it exits."
+To avoid memory leaks, make sure to invalidate any `URLSession` instances you no longer need.</div>
+
 
 If you have more than one delegate type in your app that you want to instrument, you can call `URLSessionInstrumentation.enable(with:)` for each delegate type.
 
@@ -958,3 +965,4 @@ Calling this method disables the SDK and all active features, such as RUM. To re
 [7]: https://www.ntppool.org/en/
 [8]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
 [9]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup
+[10]: https://developer.apple.com/documentation/foundation/urlsession/init(configuration:delegate:delegatequeue:)#parameters
