@@ -21,7 +21,7 @@ DDR also allows you to periodically conduct disaster recovery drills to not only
 
 
 ## Prerequisites 
-Datadog Disaster Recovery requires Datadog Agent version **7.54 or above**. The APM product support requires a **v7.68 or above**.
+Datadog Disaster Recovery requires Datadog Agent version **7.54+**. The APM product support requires a **v7.68+**.
 
 ### Supported telemetry types and products
 The Agent-based failover supports the following telemetry types and products:
@@ -40,19 +40,19 @@ Datadog is continuously evaluating customer requests to support DDR for addition
 <br>
 
 ## Setup 
-To enable Datadog Disaster Recovery, follow these steps:
+To enable Datadog Disaster Recovery, follow these steps. If you have any questions about any of the steps, contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datadog Support](https://www.datadoghq.com/support/).
 
 ### 1. Create a DDR org and link it to your primary org
 
-<div class="alert alert-info">If required, Datadog can set this up for you.</div>
-
 {{% collapse-content title="Create and share your DDR org" level="h5" %}}
+
+<div class="alert alert-info">If required, Datadog can set this up for you.</div>
 
 **To create your DDR org:**
 
-  - Go to [Get Started with Datadog](https://app.datadoghq.com/signup)
-  - Choose a different Datadog site than your primary (for example if you're on `US1`, choose `EU` or `US5`)
-  - Follow the prompts to create an account
+  1. Go to [Get Started with Datadog](https://app.datadoghq.com/signup). You may need to logout of your current session, or use incognito mode to access this page.
+  2. Choose a different Datadog site than your primary (for example, if you're on `US1`, choose `EU` or `US5`)
+  3. Follow the prompts to create an account.
 
 
 All Datadog sites are geographically separated. Reference the [Datadog Site List](https://docs.datadoghq.com/getting_started/site#access-the-datadog-site) for options. 
@@ -71,12 +71,11 @@ If you are also sending telemetry to Datadog using cloud provider integrations, 
 
 {{% collapse-content title="Retrieve the public IDs and link your DDR and primary orgs " level="h5" %}}
 
+<div class="alert alert-warning"> For security reasons, Datadog is unable to link the orgs on your behalf. </div>
+
 After the Datadog team has set your DDR org, use the cURL commands from the Datadog [public API endpoint][8] to retrieve the public IDs of the primary and DDR org. 
 
-
 To link your DDR and primary orgs, run these commands replacing the placeholders for their values:
-
-<div class="alert alert-warning"> For security reasons, Datadog is unable to link the orgs on your behalf. </div>
 
 
 ```shell
@@ -102,17 +101,8 @@ curl -v -H "Content-Type: application/json" -H
 
 ### 2. Set up access, integrations, syncing, and agents
 
-{{% collapse-content title="Create your Datadog API and App key for syncing" level="h5" %}}
-In DDR Datadog org, create a set of `API key` **and** `App key`. These are useful for copying dashboards and monitors between Datadog sites. 
-
-<div class="alert alert-info">
-Datadog can help copy the API key signatures for your Agents to the DDR back-up account. Contact your <a href="mailto:success@datadoghq.com">Customer Success Manager</a> for any questions regarding this.
-</div>
-{{% /collapse-content %}}
-
-
-{{% collapse-content title="Configure Single Sign On for the Datadog App" level="h5" %}}
-Go to your [Organization Settings][1] to configure [SAML][9] or Google Login for your users. 
+{{% collapse-content title="Configure Single Sign On for the DDR org" level="h5" %}}
+Go to the [Organization Settings][1] in your DDR org to configure [SAML][9] or Google Login for your users. 
 
 **Datadog recommends using Single Sign On (SSO)** to enable all your users to seamlessly login to your Disaster Recovery organization during an outage.
 
@@ -122,25 +112,30 @@ You must invite each of your users to your Disaster Recovery organization and gi
 
 {{% collapse-content title=" Set up your cloud integrations (AWS, Azure, Google Cloud)" level="h5" %}}
 
+See the [AWS][10], [Azure][11], and [Google Cloud][12] integrations for setup steps. 
+
 Your cloud integrations must be configured in both primary and DDR organizations. Because these integrations only run in one data center at a time, **the integrations must run only in the primary data center.**
 
-During testing, integration telemetry is spread over both organizations and cancelling a failover testing returns the integrations to running in the Primary data center.
-
-During an integration failover, integrations runs only in the DDR data center.
-
+See the [Cloud integrations failover][13] section for details on the cloud failover process. 
 
 {{% /collapse-content %}}
 
+{{% collapse-content title="Create your Datadog API and App key for syncing" level="h5" %}}
+In your DDR Datadog org, create an `API key` **and** `App key` set. These are useful for copying dashboards and monitors between Datadog sites. 
 
+<div class="alert alert-info">
+Datadog can help copy the API key signatures for your Agents to the DDR backup account. Contact your <a href="mailto:success@datadoghq.com">Customer Success Manager</a> for any questions regarding this.
+</div>
+{{% /collapse-content %}}
 
-{{% collapse-content title="Set up Resources syncing and scheduler" level="h5" id="using-sync-cli-tool" %}}
-Use Datadog's [datadog sync-cli][3] tool to copy your dashboards, monitors, and other configurations from your primary organization to your secondary organization. Regular syncing is essential to ensure that your secondary organization is up-to-date in the event of a disaster. 
+{{% collapse-content title="Set up resource syncing on a schedule" level="h5" id="using-sync-cli-tool" %}}
+Use the [datadog-sync-cli][3] tool to copy your dashboards, monitors, and other configurations from your primary organization to your secondary organization. Regular syncing is essential to ensure that your secondary organization is up-to-date in the event of a disaster. 
 
 Datadog recommends performing this operation on a daily basis; you can determine the frequency and timing of syncing based on your business requirements. For information on setting up and running the backup process, see the [datadog-sync-cli README][5]. 
 
-Sync-cli is primarily intended for unidirectional copying and updating resources from your primary org to your DDR org. Resources copied to the DDR organization can be edited, but any new syncing overrides changes that differ from the source in the primary organization.
+the datadog-sync-cli tool is primarily intended for unidirectional copying and updating resources from your primary org to your DDR org. Resources copied to the DDR organization can be edited, but any new syncing overrides changes that differ from the source in the primary organization.
 
-Use the sync-cli configuration available in the documentation to add each item to the sync scope. Here's an example of a configuration file for syncing specific dashboards and monitors using name and tag filtering from an `EU` site to a `US5` site.
+Use the `datadog-sync-cli` configuration available in the documentation to add each item to the sync scope. Here's an example of a configuration file for syncing specific dashboards and monitors using name and tag filtering from an `EU` site to a `US5` site.
 
 ```shell 
 destination_api_url="https://api.us5.datadoghq.com"
@@ -155,17 +150,17 @@ filter=["Type=Dashboards;Name=title","Type=Monitors;Name=tags;Value=sync:true"]
 http_client_retry_timeout=600
 ```
 
-Here's an example of a sync-cli command for syncing log configurations:
+Here's an example of a datadog-sync-cli command for syncing log configurations:
 
 ```shell
 datadog-sync migrate –config config –resources="users,roles,logs_pipelines,logs_pipelines_order,logs_indexes,logs_indexes_order,logs_metrics,logs_restriction_queries" –cleanup=Force
 ```
 
-<div class="alert alert-warning"> <strong>Sync-cli Limitation for Log Standard Attributes </strong><br>Sync-cli is regularly being updated with new resources. At this time, syncing Log standard attributes is not supported for private beta. If you use standard attributes with your log pipelines and are remapping your logs, attributes are a dependency that you need to manually re-configure in your DDR org. See the Datadog <a href="https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#overview">standard attribute documentation</a> for support.
+<div class="alert alert-warning"> <strong>datadog-sync-cli limitation for log standard attributes </strong><br> The datadog-sync-cli is regularly being updated with new resources. At this time, syncing log standard attributes is not supported for private beta. If you use standard attributes with your log pipelines and are remapping your logs, attributes are a dependency that you need to manually re-configure in your DDR org. See the Datadog <a href="https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#overview">standard attribute documentation</a> for support.
 </div>
 
 #### Verify availability at the DDR site
-Verify that your DDR org is accessible and that your Dashboards and Monitors are copied from your primary org to your DDR org.
+Verify that your DDR org is accessible and that your dashboards and monitors are copied from your primary org to your DDR org.
 
 Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datadog Support](https://www.datadoghq.com/support/) if you need assistance.
 
@@ -209,7 +204,7 @@ Connect with your Datadog Customer Success Manager to schedule dedicated time wi
 
 <!-- ------------------------------- -->
 
-### 3. Test	Run failover tests in various environments
+### 3. Test	run failover tests in various environments
 {{% collapse-content title="Activate and test DDR failover in Agent-based environments" level="h5" %}}
 Use the steps appropriate for your environment to activate/test the DDR failover. 
 
@@ -237,7 +232,7 @@ If you are running the Agent in a containerized environment like Kubernetes, the
 
  ##### Using kubectl
 
-Below is an example of using `kubectl` to fail over metrics and logs for a Datadog Agent pod deployed via either the official Helm chart or Datadog Operator. The `<POD_NAME>` should be replaced with the name of the Agent pod:
+Below is an example of using `kubectl` to fail over metrics and logs for a Datadog Agent pod deployed with either the official Helm chart or Datadog Operator. The `<POD_NAME>` should be replaced with the name of the Agent pod:
 
 ```shell
 kubectl exec <POD_NAME> -c agent -- agent config set multi_region_failover.failover_metrics true
@@ -280,11 +275,11 @@ DD_MULTI_REGION_FAILOVER_API_KEY=ADD_NEW_SITE_API_KEY
 
 {{% collapse-content title="Activate and test DDR failover in cloud integrations" level="h5" %}}
 
-##### Cloud integrations failover
-
 Failing over cloud integrations is a separate and distinct action available on the disaster recovery landing page in the DDR region.
 
-Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datadog Support](https://www.datadoghq.com/support/) if you have any questions.
+During testing, integration telemetry is spread over both organizations and cancelling a failover testing returns the integrations to running in the Primary data center.
+
+During an integration failover, integrations run only in the DDR data center.
 
 {{% /collapse-content %}}<br>
 
@@ -298,5 +293,9 @@ Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datado
 [5]: https://github.com/DataDog/datadog-sync-cli/blob/main/README.md 
 [6]: /logs/log_configuration/attributes_naming_convention/#overview
 [7]: /agent/remote_config/?tab=configurationyamlfile
-[8]: /api/latest/organizations/?code-lang=curl#get-organization-information 
+[8]: /api/latest/organizations/#list-your-managed-organizations
 [9]: /account_management/saml/#overview
+[10]: /integrations/amazon-web-services/
+[11]: /integrations/azure/
+[12]: /integrations/google-cloud-platform/?tab=organdfolderlevelprojectdiscovery#overview
+[13]: /agent/guide/datadog-disaster-recovery/?tab=agentinnoncontainerizedenvironments#cloud-integrations-failover
