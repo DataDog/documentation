@@ -39,15 +39,53 @@ For example:
 
    ```yaml
    http_filters:
-     # ... other filters
+     # This filter should be the first filter in the filter chain
      - name: envoy.filters.http.ext_proc
        typed_config:
          "@type": type.googleapis.com/envoy.extensions.filters.http.ext_proc.v3.ExternalProcessor
-         config:
-           grpc_service:
-             envoy_grpc:
-               cluster_name: datadog_ext_proc_cluster
-               timeout: 1s
+         grpc_service:
+           envoy_grpc:
+             cluster_name: datadog_ext_proc_cluster
+
+           ## Mandatory: Correctly show the service as an Envoy proxy in the UI.
+           initial_metadata:
+             - key: x-datadog-envoy-integration
+               value: '1'
+
+           ## A timeout configuration for the grpc connection exist but is not useful in our case.
+           ## This timeout is for all the request lifetime. A timeout on the route is preferred.
+           #timeout: 0s
+
+         ## Mandatory: Only enable the request and response header modes.
+         ## If you want to enable body processing, please see the section below.
+         processing_mode:
+           request_header_mode: SEND
+           response_header_mode: SEND
+
+         ## Optional for headers analysis only but **mandatory** for body processing.
+         ## The external processor can dynamically override the processing mode as needed instructing
+         ## Envoy to forward request and response bodies to the external processor. Body processing is
+         ## enabled when DD_APPSEC_BODY_PARSING_SIZE_LIMIT is set on the external processor container.
+         allow_mode_override: true
+
+         ## Optional: Set a timeout by processing message. Default is 200ms.
+         ## There is a maxium of 2 messages per requests with headers only and 4 messages maximum
+         ## with body processing enabled.
+         ## Note: This timeout also includes the data communication between Envoy and the external processor.
+         ## Optional: When the body processing is enabled, the timeout should be adjusted to accommodate
+         ## the additional possible processing time. Larger payloads will require a longer timeout. 
+         #message_timeout: 200ms
+
+         ## Optional: Enable asynchronous mode analysis. Default is false.
+         ## This mode will disable all blocking capabilities. The callout container should also be
+         ## configured with the DD_SERVICE_EXTENSION_OBSERVABILITY_MODE environment variable.
+         #observability_mode: true
+         ## Optional: When in asynchronous mode, the message_timeout is not used. This deferred
+         ## timeout starts when the http request is finished, to let the External Processor
+         ## process all processing messages. Default is 5s.
+         #deferred_close_timeout: 5s
+
+     # ... other filters
 
    clusters:
        # ... other clusters
