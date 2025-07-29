@@ -426,8 +426,8 @@ menu:
       weight: 5
     - name: Log Agent tags
       url: agent/logs/agent_tags/
-      parent: agent
-      identifier: agent_tags
+      parent: agent_logs
+      identifier: agent_logs_tags
       weight: 501
     - name: Advanced Configurations
       identifier: agent_logs_advanced_log_collection
