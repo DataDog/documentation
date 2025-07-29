@@ -24,6 +24,11 @@ const tracer = require('dd-trace').init({
 });
 ```
 
+Finally, set the following environment variable to specify that the `dd-trace/init` module is required when the Node.js process starts:
+```dockerfile
+ENV NODE_OPTIONS="--require dd-trace/init"
+```
+
 For more information, see [Tracing Node.js applications][1].
 
 ## 2. Install Serverless-Init
@@ -32,7 +37,6 @@ Add the following instructions and arguments to your Dockerfile.
 
 ```dockerfile
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-ENV NODE_OPTIONS="--require dd-trace/init"
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 ```
@@ -45,20 +49,14 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-2. Specify that the `dd-trace/init` module is required when the Node.js process starts.
-
-   ```dockerfile
-   ENV NODE_OPTIONS="--require dd-trace/init"
-   ```
-
-3. Change the entrypoint to wrap your application in the Datadog `serverless-init` process.
+2. Change the entrypoint to wrap your application in the Datadog `serverless-init` process.
    **Note**: If you already have an entrypoint defined inside your Dockerfile, see the [alternative configuration](#alt-node).
 
    ```dockerfile
    ENTRYPOINT ["/app/datadog-init"]
    ```
 
-4. Execute your binary application wrapped in the entrypoint. Adapt this line to your needs.
+3. Execute your binary application wrapped in the entrypoint. Adapt this line to your needs.
    ```dockerfile
    CMD ["node", "/path/to/your/app.js"]
    ```
