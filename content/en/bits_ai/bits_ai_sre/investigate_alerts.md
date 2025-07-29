@@ -74,9 +74,9 @@ In the **Configure notifications and automations** section, add the `@case-{proj
 ### Configure knowledge base integrations
 
 Bits integrates with Confluence to find relevant documentation and runbooks to support its investigations, and also allows you to interact with your Confluence content directly through chat. 
-1. Connect your Confluence Cloud account by following the instructions in our [Confluence integration tile][13].
-1. Optionally enable account crawling to make Confluence a data source within Bits’ chat interface. This is not required for Bits to utilize Confluence when generating its investigation plan.
-1. Link specific Confluence pages to your monitor's message to guide Bits during investigations. When an alert triggers, Bits will automatically scan the linked Confluence page for useful Datadog links to support its analysis.
+1. Connect your Confluence Cloud account by following the instructions in the [Confluence integration tile][13].
+1. Optionally, enable account crawling to make Confluence a data source within Bits' chat interface. This is not required for Bits to use Confluence when generating its investigation plan.
+1. Link specific Confluence pages to your monitor's message to guide Bits during investigations. When an alert triggers, Bits automatically scans the linked Confluence page for useful Datadog links to support its analysis.
 1. You can view all connected Confluence accounts on the [Bits Settings page][9].
 
 ## How Bits AI SRE investigates
