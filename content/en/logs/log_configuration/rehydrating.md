@@ -16,7 +16,7 @@ Log Rehydration* enables you to capture log events from customer-owned storage-o
 
 ### Historical views
 
-With historical views, teams rehydrate archived log events precisely by timeframe and query filter to meet specific, unexpected use cases efficiently. By creating historical views with specific queries (for example, over one or more services, URL endpoints, or customer IDs), you can reduce the time and cost involved in rehydrating your logs. This is especially helpful when rehydrating over wider time ranges.
+With historical views, teams rehydrate archived log events by time frame and query filter to meet specific, unexpected use cases efficiently. By creating historical views with specific queries (for example, over one or more services, URL endpoints, or customer IDs), you can reduce the time and cost involved in rehydrating your logs. This is especially helpful when rehydrating over wider time ranges.
 
 **Key features:**
 - Rehydrate up to 1 billion log events per historical view
@@ -47,7 +47,7 @@ Only archives with proper authentication are available for rehydrating. For deta
 2. Click **New Historical View**.
 3. Select the time period for rehydration.
 4. Choose the archive you want to rehydrate log events from. Only archives that are [configured to use role delegation](#permissions) are available for rehydrating.
-5. (Optional) Estimate scan size and get the total amount of compressed data that is contained in your archive for the selected timeframe.
+5. (Optional) Estimate scan size and get the total amount of compressed data that is contained in your archive for the selected time frame.
 6. Name your historical view. Names must begin with a lowercase letter and can only contain lowercase letters, numbers, and the `-` character.
 7. Set the indexing query using the [Log Explorer search syntax][4]. Make sure your logs are [archived with their tags][5] if you use tags (such as `env:prod` or `version:x.y.z`) in the rehydration query.
 8. Define the log limit (maximum logs to rehydrate). When the limit of the rehydration is reached, log reloading stops, but you still have access to the rehydrated logs.
@@ -97,7 +97,7 @@ View deleted historical views for up to 1 year in the past using the `View` drop
 
 Events are triggered automatically when a rehydration starts and finishes. These events are available in your [Events Explorer][7].
 
-During the creation of a historical view, you can use the built-in template variables to customize the notification triggered at the end of the rehydration:
+You can use the built-in template variables to customize the notification triggered at the end of the rehydration:
 
 | Variable                      | Description                                                                  |
 |-------------------------------|------------------------------------------------------------------------------|
@@ -151,7 +151,7 @@ In order to rehydrate log events from your archives, Datadog uses the IAM Role i
 }
 ```
 
-### Adding role delegation to S3 archives
+#### Adding role delegation to S3 archives
 
 Datadog only supports rehydrating from archives that have been configured to use role delegation to grant access. Once you have modified your Datadog IAM role to include the IAM policy above, ensure that each archive in your [archive configuration page][3] has the correct AWS Account + Role combination.
 
@@ -185,9 +185,9 @@ In order to rehydrate log events from your archives, Datadog uses a service acco
 
 ## Understanding Rehydration scan sizes
 
-The query is applied _after_ the files matching the time period are downloaded from your archive. As a result, the rehydration scan size is based on **total volume of logs retrieved from the archive**, not just the number of logs matching the query. Archive storage is time-base, so queries scoped to specific filters (such as `service:A`) still retrieve all logs within the selected time window, including those from other services (such as `service:A` and `service:B`).
+The query is applied _after_ the files matching the time period are downloaded from your archive. As a result, the Rehydration scan size is based on **total volume of logs retrieved from the archive**, not the number of logs matching the query. Archive storage is time-based, so queries scoped to specific filters (such as `service:A`) still retrieve all logs within the selected time window. This includes logs from other services (such as `service:A` and `service:B`).
 
-Because query filters are applied post-download, reducing the date range is the most effective way to limit scan size and reduce cloud data transfer costs.
+Reducing the date range is the most effective way to limit scan size and minimize cloud data transfer costs, because query filters are applied after data is downloaded
 
 ## Further reading
 
