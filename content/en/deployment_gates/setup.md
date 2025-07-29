@@ -93,7 +93,7 @@ This rule type uses Watchdog's [APM Faulty Deployment Detection][1] to compare t
 
 ## Evaluate a Deployment Gate
 
-After a gate is configured with at least one rule, you can request a gate evaluation while deploying the related service. Deployment Gate evaluations are asynchronous, as the evaluation process can take some time to complete. This means that when you trigger an evaluation, it's started in the background, and the API returns an evaluation ID to track its progress.
+After a gate is configured with at least one rule, you can request a gate evaluation while deploying the related service. Deployment Gate evaluations are asynchronous, as the evaluation process can take some time to complete. When you trigger an evaluation, it's started in the background, and the API returns an evaluation ID that can be used to track its progress. The high-level interaction with the Deployment Gates API is the following:
 
 - First, request a Deployment Gate evaluation, which initiates the process and returns an evaluation ID.
 - Then, periodically poll the evaluation status endpoint using the evaluation ID to retrieve the result when the evaluation is complete. Polling every 10-20 seconds is recommended.
