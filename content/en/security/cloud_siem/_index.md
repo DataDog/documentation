@@ -58,7 +58,7 @@ further_reading:
 
 Datadog Cloud SIEM (Security Information and Event Management) is a security data analysis and correlation system that your entire security operations team can use to view, detect, investigate, and respond to security issues. Cloud SIEM is built for cloud environments and uses Datadog's platform to scale to the highest log volumes. And while Cloud SIEM is built for cloud scale, it can also detect threats in hybrid environments, where the Datadog Agent is installed on-premises and in the cloud.
 
-In cloud-scale environments, effective security response demands speed, context, insight, and automation. Datadog helps you meet that need by collecting telemetry across cloud and on-premises systems using the Datadog Agent and API-based integrations. Cloud SIEM continuously analyzes this data, detecting threats in real time and generating security signals. These signals are enriched and correlated with numerous sources, empowering Security teams to quickly understand what is happening and take action.
+In cloud-scale environments, effective security response demands speed, context, insight, and automation. Datadog helps you meet that need by collecting telemetry across cloud and on-premises systems using the Datadog Agent and API-based integrations. Cloud SIEM continuously analyzes this data, detecting threats in real time and generating security signals. These signals are enriched and correlated with numerous sources, empowering security teams to quickly understand what is happening and take action.
 
 To keep your team on top of the latest attacks Datadog also has a team of threat researchers who analyze petabytes of telemetry across cloud and on-premises systems to identify emerging threats and attacker behaviors. See [Datadog Security Labs][1] to read articles about their recent investigations.
 
@@ -76,18 +76,10 @@ See the [Getting Started Guide][4] for more detailed setup instructions.
 
 TKTK
 
-### Flexible Cost Control
-
-As organizations scale, controlling observability costs without compromising visibility is critical. Datadog offers a range of flexible, enterprise-grade cost control options including:
-
-- High-performance, short-term [standard indexes][]
-- Cost-effective, yet responsive [Flex Logs][] storage
-- [Log Archives][] for long term, low cost storage
-
 
 ## Cloud SIEM Overview Page
 
-Navigate to the [Cloud SIEM Overview dashboard][2] and see key security insights and act on common workflows for security analysts, security and detection engineers, and Security Operations Center (SOC) managers. You can:
+Navigate to the [Cloud SIEM Overview dashboard][2]. Use this dashboard to see key security insights and act on common workflows for security analysts, security and detection engineers, and Security Operations Center (SOC) managers. From the overview page, you can:
 - Access important signals, open cases, and high-risk entities.
 - Complete onboarding tasks and review content‑pack health.
 - View and investigate top signals by geography or ISP.
@@ -95,15 +87,15 @@ Navigate to the [Cloud SIEM Overview dashboard][2] and see key security insights
 - Track detection performance (MTTD, false‑positive rates).
 - Read the latest [Security Labs][1] research and release notes.
 
-Click **Customize Page** to customize your view by reordering or hiding modules.
+Click **Customize Page** to reorder or hide modules so you can see what is important to you.
 
-Learn more about each of the sections below.
+Learn more below about each section of the Overview page.
 
 ### Security coverage
 
 {{< img src="security/security_monitoring/landing/01_security_coverage.png" alt="Security coverage sections showing 11 active and 1 broken content packs and a bar graph of logs analyzed by Cloud SIEM" style="width:100%;" >}}
 
-Remain aware of any data processing issues or coverage gaps with:
+Remain aware of any data processing issues or coverage gaps.
 
 - *Enabled Content Packs and Integrations:* View enabled content packs and integrations across the critical categories for providing comprehensive security coverage. Hover over each section of the horizontal bar to see which content packs are enabled in each category.
 - *Content Pack and Logs Health KPIs:* See whether any content packs or integrations are in warning or broken states so that you can quickly resolve any coverage gaps. Click the KPIs to view the affected content packs.
