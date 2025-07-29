@@ -91,98 +91,9 @@ This rule type uses Watchdog's [APM Faulty Deployment Detection][1] to compare t
 {{% /tab %}}
 {{< /tabs >}}
 
-## Evaluate a Deployment Gate
+## Add evaluations into your CD flow
 
-After a gate is configured with at least one rule, you can request a gate evaluation while deploying the related service. Deployment Gate evaluations are asynchronous, as the evaluation process can take some time to complete. When you trigger an evaluation, it's started in the background, and the API returns an evaluation ID that can be used to track its progress. The high-level interaction with the Deployment Gates API is the following:
-
-- First, request a Deployment Gate evaluation, which initiates the process and returns an evaluation ID.
-- Then, periodically poll the evaluation status endpoint using the evaluation ID to retrieve the result when the evaluation is complete. Polling every 10-20 seconds is recommended.
-
-A Deployment Gate evaluation can be requested with an API call:
-
-```bash
-curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/unstable/deployments/gates/evaluation" \
--H "Content-Type: application/json" \
--H "DD-API-KEY: <YOUR_API_KEY>" \
--H "DD-APPLICATION-KEY: <YOUR_APP_KEY>" \
--d @- << EOF
-{
-  "data": {
-    "type": "deployment_gates_evaluation_request",
-    "attributes": {
-      "service": "transaction-backend",
-      "env": "staging",
-      "identifier": "my-custom-identifier", # Optional, defaults to "default"
-      "version": "v123-456",                # Required for APM Faulty Deployment Detection rules
-      "primary_tag": "region:us-central-1"  # Optional, scopes down APM Faulty Deployment Detection rules analysis to the selected primary tag
-    }
-  }
-}'
-```
-
-**Note**: A 404 HTTP response can be because the gate was not found, or because the gate was found but has no rules.
-
-If the gate evaluation was successfully started, a 202 HTTP status code is returned. The response is in the following format:
-
-```json
-{
-   "data": {
-       "id": "<random_response_uuid>",
-        "type": "deployment_gates_evaluation_response",
-        "attributes": {
-            "evaluation_id": "e9d2f04f-4f4b-494b-86e5-52f03e10c8e9"
-        }
-    }
-}
-```
-
-The field `data.attributes.evaluation_id` contains the unique identifier for this gate evaluation.
-
-You can fetch the status of a gate evaluation by polling an additional API endpoint using the gate evaluation ID:
-
-```bash
-curl -X GET "https://api.{{< region-param key="dd_site" >}}/api/unstable/deployments/gates/evaluation/<evaluation_id>" \
--H "DD-API-KEY: <YOUR_API_KEY>" \
--H "DD-APPLICATION-KEY: <YOUR_APP_KEY>"
-```
-
-**Note**: If you call this endpoint too quickly after requesting the evaluation, a 404 HTTP response may be returned because the evaluation did not start yet. If this is the case, retry a few seconds later.
-
-When a 200 HTTP response is returned, it has the following format:
-
-```json
-{
-   "data": {
-       "id": "<random_response_uuid>",
-       "type": "deployment_gates_evaluation_result_response",
-       "attributes": {
-           "dry_run": false,
-           "evaluation_id": "e9d2f04f-4f4b-494b-86e5-52f03e10c8e9",
-           "evaluation_url": "https://app.{{< region-param key="dd_site" >}}/ci/deployment-gates/evaluations?index=cdgates&query=level%3Agate+%40evaluation_id%3Ae9d2f14f-4f4b-494b-86e5-52f03e10c8e9",
-           "gate_id": "e140302e-0cba-40d2-978c-6780647f8f1c",
-           "gate_status": "pass",
-           "rules": [
-               {
-                   "name": "Check service monitors",
-                   "status": "fail",
-                   "reason": "One or more monitors in ALERT state: https://app.{{< region-param key="dd_site" >}}/monitors/34330981",
-                   "dry_run": true
-               }
-           ]
-       }
-   }
-}
-```
-
-The field `data.attributes.gate_status` contains the result of the evaluation. It can contain one of these values:
-
-* `in_progress`: The Deployment Gate evaluation is still in progress; you should continue polling.
-* `pass`: The Deployment Gate evaluation passed.
-* `fail`: The Deployment Gate evaluation failed.
-
-**Note**: If the field `data.attributes.dry_run` is `true`, the field `data.attributes.gate_status` is always `pass`.
-
-### Integration examples
+Deployment Gates can be evaluated in various ways, as outlined in the examples below.
 
 {{< tabs >}}
 {{% tab "datadog-ci CLI" %}}
@@ -310,6 +221,8 @@ spec:
 
 {{% /tab %}}
 {{% tab "Generic script" %}}
+
+
 Use this script as a starting point. For the API_URL variable, be sure to replace `<YOUR_DD_SITE>` with your [Datadog site name][1] (for example, {{< region-param key="dd_site" code="true" >}}).
 
 ```bash
@@ -456,6 +369,99 @@ The script has the following characteristics:
 This is a general behavior, and you should change it based on your personal use case and preferences. The script uses `curl` (to perform the request) and `jq` (to process the returned JSON). If those commands are not available, install them at the beginning of the script (for example, by adding `apk add --no-cache curl jq`).
 
 [1]: /getting_started/site/
+
+{{% /tab %}}
+{{% tab "Direct API calls" %}}
+
+After a gate is configured with at least one rule, you can request a gate evaluation while deploying the related service. Deployment Gate evaluations are asynchronous, as the evaluation process can take some time to complete. When you trigger an evaluation, it's started in the background, and the API returns an evaluation ID that can be used to track its progress. The high-level interaction with the Deployment Gates API is the following:
+
+- First, request a Deployment Gate evaluation, which initiates the process and returns an evaluation ID.
+- Then, periodically poll the evaluation status endpoint using the evaluation ID to retrieve the result when the evaluation is complete. Polling every 10-20 seconds is recommended.
+
+A Deployment Gate evaluation can be requested with an API call:
+
+```bash
+curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/unstable/deployments/gates/evaluation" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: <YOUR_API_KEY>" \
+-H "DD-APPLICATION-KEY: <YOUR_APP_KEY>" \
+-d @- << EOF
+{
+  "data": {
+    "type": "deployment_gates_evaluation_request",
+    "attributes": {
+      "service": "transaction-backend",
+      "env": "staging",
+      "identifier": "my-custom-identifier", # Optional, defaults to "default"
+      "version": "v123-456",                # Required for APM Faulty Deployment Detection rules
+      "primary_tag": "region:us-central-1"  # Optional, scopes down APM Faulty Deployment Detection rules analysis to the selected primary tag
+    }
+  }
+}'
+```
+
+**Note**: A 404 HTTP response can be because the gate was not found, or because the gate was found but has no rules.
+
+If the gate evaluation was successfully started, a 202 HTTP status code is returned. The response is in the following format:
+
+```json
+{
+   "data": {
+       "id": "<random_response_uuid>",
+        "type": "deployment_gates_evaluation_response",
+        "attributes": {
+            "evaluation_id": "e9d2f04f-4f4b-494b-86e5-52f03e10c8e9"
+        }
+    }
+}
+```
+
+The field `data.attributes.evaluation_id` contains the unique identifier for this gate evaluation.
+
+You can fetch the status of a gate evaluation by polling an additional API endpoint using the gate evaluation ID:
+
+```bash
+curl -X GET "https://api.{{< region-param key="dd_site" >}}/api/unstable/deployments/gates/evaluation/<evaluation_id>" \
+-H "DD-API-KEY: <YOUR_API_KEY>" \
+-H "DD-APPLICATION-KEY: <YOUR_APP_KEY>"
+```
+
+**Note**: If you call this endpoint too quickly after requesting the evaluation, a 404 HTTP response may be returned because the evaluation did not start yet. If this is the case, retry a few seconds later.
+
+When a 200 HTTP response is returned, it has the following format:
+
+```json
+{
+   "data": {
+       "id": "<random_response_uuid>",
+       "type": "deployment_gates_evaluation_result_response",
+       "attributes": {
+           "dry_run": false,
+           "evaluation_id": "e9d2f04f-4f4b-494b-86e5-52f03e10c8e9",
+           "evaluation_url": "https://app.{{< region-param key="dd_site" >}}/ci/deployment-gates/evaluations?index=cdgates&query=level%3Agate+%40evaluation_id%3Ae9d2f14f-4f4b-494b-86e5-52f03e10c8e9",
+           "gate_id": "e140302e-0cba-40d2-978c-6780647f8f1c",
+           "gate_status": "pass",
+           "rules": [
+               {
+                   "name": "Check service monitors",
+                   "status": "fail",
+                   "reason": "One or more monitors in ALERT state: https://app.{{< region-param key="dd_site" >}}/monitors/34330981",
+                   "dry_run": true
+               }
+           ]
+       }
+   }
+}
+```
+
+The field `data.attributes.gate_status` contains the result of the evaluation. It can contain one of these values:
+
+* `in_progress`: The Deployment Gate evaluation is still in progress; you should continue polling.
+* `pass`: The Deployment Gate evaluation passed.
+* `fail`: The Deployment Gate evaluation failed.
+
+**Note**: If the field `data.attributes.dry_run` is `true`, the field `data.attributes.gate_status` is always `pass`.
+
 {{% /tab %}}
 {{< /tabs >}}
 
