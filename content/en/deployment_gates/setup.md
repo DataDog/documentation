@@ -216,9 +216,9 @@ For complete configuration options and detailed usage examples, refer to the [`d
 {{% tab "Argo Rollouts" %}}
 To call Deployment Gates from an Argo Rollouts Kubernetes Resource, you can create an [AnalysisTemplate][1] or a [ClusterAnalysisTemplate][1]. The template should contain a Kubernetes job that is used to perform the analysis.
 
-Use this script as a starting point. For the DD_SITE environment variable, be sure to replace `<YOUR_DD_SITE>` with your [Datadog site name][2] (for example, {{< region-param key="dd_site" code="true" >}}).
+Use this template as a starting point. For the DD_SITE environment variable, be sure to replace `<YOUR_DD_SITE>` with your [Datadog site name][2] (for example, {{< region-param key="dd_site" code="true" >}}).
 
-The script requires an API key and application key. The safest way to provide them is by using [Kubernetes Secrets][3]. This example relies on a secret called `datadog` holding two data values: `api-key` and `app-key`. Alternatively, you can also pass the values in plain text using `value` instead of `valueFrom` in the script below.
+The command requires an API key and application key. The safest way to provide them is by using [Kubernetes Secrets][3]. This example relies on a secret called `datadog` holding two data values: `api-key` and `app-key`. Alternatively, you can also pass the values in plain text using `value` instead of `valueFrom` in the script below.
 
 
 ```yaml
