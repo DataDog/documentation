@@ -75,6 +75,7 @@ Terraform support will be announced after Data Access Control is generally avail
 - Error Tracking issues
 - Logs
 - RUM sessions
+- LLM Observability
 
 ## Usage constraints
 
@@ -92,8 +93,6 @@ Playlists are collections of Session Replays you can aggregate in a folder-like 
 ### Logs
 Data Access Control is separate from the existing [Logs RBAC permissions][11] feature, also known as log restriction queries. To use Data Access Control with Log Management, first request access to Data Access Control. Next, manually migrate your configuration from Log Management permissions to Data Access Control.
 
-### LLM Observability
-lorem ipsum
 
 ## Select tags for access
 
