@@ -14,7 +14,7 @@ further_reading:
 
 ## 1. Install the Tracer
 
-In your main application, add `dd-trace-go`.
+In your main application, add the tracing library from `dd-trace-go`.
 
 ```shell
 go get github.com/DataDog/dd-trace-go/v2/ddtrace/tracer
@@ -26,7 +26,7 @@ tracer.Start()
 defer tracer.Stop()
 ```
 
-Additionally, you can add additional packages:
+You can also add additional packages:
 ```shell
 # Enable Profiling
 go get github.com/DataDog/dd-trace-go/v2/profiler
@@ -74,7 +74,7 @@ CMD ["./your-binary"]
 If you already have an entrypoint defined inside your Dockerfile, you can instead modify the CMD argument.
 
 ```dockerfile
-CMD ["/app/datadog-init", "/nodejs/bin/node", "/path/to/your/app.js"]
+CMD ["/app/datadog-init", "./your-binary"]
 ```
 
 If you require your entrypoint to be instrumented as well, you can swap your entrypoint and CMD arguments instead.
