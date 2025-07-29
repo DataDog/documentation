@@ -18,16 +18,11 @@ further_reading:
 
 ## Overview
 
-{{< img src="/dashboards/widgets/bar_chart/bar_chart_viz.png" alt="Bar chart widget example visualization" style="width:100%;" >}}
+{{< img src="/dashboards/widgets/bar_chart/bar_chart.png" alt="Bar chart widget example visualization" style="width:100%;" >}}
 
 The Bar Chart widget is part of the same data family as the Top List and Pie Chart widgets, using categorical axes rather than temporal axes like timeseries bar graphs. It displays categorical data using vertical bars, allowing you to compare values across different categories or groups. Unlike the horizontal top list widget, the bar chart uses a vertical orientation which is particularly useful for dashboards with wide and short aspect ratios, or when you want to focus on value comparison rather than ranking.
 
-**Use Cases:**
-- HTTP status code distribution by service
-- Performance metrics comparison across environments
-- Resource utilization by team or department
-- Error rates by application component
-- Any categorical data that benefits from vertical bar visualization
+Use the Bar Chart when visual comparison across categories matters more than reading exact tag values. Use the Top List to prioritize label readability (such as long tag names) or need a ranked list format.
 
 ## Setup
 
@@ -49,13 +44,6 @@ The bar chart widget supports multiple levels of grouping with stacked visualiza
 - **Flat mode**: Displays individual bars for each group.
 - **Relative mode**: Shows values as percentages of the total (only for scalar data).
 - **Absolute mode**: Shows raw count values.
-
-
-<!-- ## API
-
-This widget can be used with the **[Dashboards API][1]**. See the following table for the [widget JSON schema definition][2]:
-
-{{< dashboards-widgets-api >}} -->
 
 ## Further reading
 
