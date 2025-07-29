@@ -62,7 +62,7 @@ Configura lo siguiente en el [grupo de parámetros de base de datos][3] y luego 
 | `performance_schema_max_sql_text_length` | `4096` | Debe coincidir con `max_digest_length`. |
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-{{< tabs >}}
+{{% /tab %}}
 {{% tab "MySQL 5.6" %}}
 | Parámetro | Valor | Descripción |
 | --- | --- | --- |
