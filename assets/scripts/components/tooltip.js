@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+function initializeTooltips() {
   const tooltipContainers = document.querySelectorAll('.tooltip-container');
   let activeTooltip = null;
   let hideTimeout = null;
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     positionTooltip(tooltip, trigger);
     activeTooltip = tooltip;
   }
-  
+
   function setHideTimeout(tooltip) {
     hideTimeout = setTimeout(() => {
       hideTooltip(tooltip);
@@ -84,11 +84,15 @@ document.addEventListener('DOMContentLoaded', () => {
     activeTooltip = null;
   }
 
-  tooltipContainers.forEach((container) => {
+  function attachTooltipListeners(container) {
     const trigger = container.querySelector('.tooltip-trigger');
     const tooltip = container.querySelector('.tooltip-content');
-    
+
     if (!trigger || !tooltip) return;
+
+    // Skip if already initialized (check for a data attribute)
+    if (trigger.hasAttribute('data-tooltip-initialized')) return;
+    trigger.setAttribute('data-tooltip-initialized', 'true');
 
     trigger.addEventListener('mouseenter', () => showTooltip(tooltip, trigger));
     trigger.addEventListener('mouseleave', () => setHideTimeout(tooltip));
@@ -106,6 +110,34 @@ document.addEventListener('DOMContentLoaded', () => {
         showTooltip(tooltip, trigger);
       }
     }, { passive: false });
+  }
+
+  // Initialize existing tooltips
+  tooltipContainers.forEach(attachTooltipListeners);
+
+  // Watch for new tooltips being added to the DOM
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach((node) => {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          // Check if the node itself is a tooltip container
+          if (node.classList && node.classList.contains('tooltip-container')) {
+            attachTooltipListeners(node);
+          }
+          // Check for tooltip containers within the added node
+          const newTooltips = node.querySelectorAll && node.querySelectorAll('.tooltip-container');
+          if (newTooltips) {
+            newTooltips.forEach(attachTooltipListeners);
+          }
+        }
+      });
+    });
+  });
+
+  // Start observing
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
   });
 
   // Close tooltip when tapping outside
@@ -122,4 +154,23 @@ document.addEventListener('DOMContentLoaded', () => {
       positionTooltip(activeTooltip, trigger);
     }
   });
-});
+}
+
+// Initialize tooltips when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeTooltips);
+} else {
+  // DOM already loaded, initialize immediately
+  initializeTooltips();
+}
+
+// Also reinitialize after a short delay to catch any tooltips that might be processed later
+setTimeout(() => {
+  const uninitializedTooltips = document.querySelectorAll('.tooltip-container .tooltip-trigger:not([data-tooltip-initialized])');
+  uninitializedTooltips.forEach(trigger => {
+    const container = trigger.closest('.tooltip-container');
+    if (container) {
+      attachTooltipListeners(container);
+    }
+  });
+}, 500); // 500ms delay to catch late-rendered tooltips
