@@ -190,7 +190,7 @@ Importing custom attributes from a reference table follow the same steps as impo
 
 ## How to query your custom attributes
 
-You can filter these custom attributes throughout the product analytics platform without needing to first add them to a [segment][]. For example, you can create an analytics chart to view a time series of all users originating from a specific `org_id`. 
+You can filter these custom attributes throughout the product analytics platform without needing to first add them to a [segment][6]. For example, you can create an analytics chart to view a time series of all users originating from a specific `org_id`. 
 
 {{< img src="product_analytics/query_custom_attribute_analytics_july_25.png" alt="Query your custom attributes in an analytics chart." style="width:80%;" >}}
 
