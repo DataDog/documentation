@@ -1,9 +1,9 @@
 ---
 title: Getting Started with API Tests
 further_reading:
-- link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
+- link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
   tag: 'Learning Center'
-  text: 'Introduction to Synthetic Tests'
+  text: 'Getting Started with Synthetic Browser Testing'
 - link: '/api/latest/synthetics/#create-an-api-test'
   tag: 'API'
   text: 'Create an API test programmatically'

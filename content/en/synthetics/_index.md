@@ -8,15 +8,6 @@ further_reading:
 - link: "https://app.datadoghq.com/release-notes?category=Synthetic%20Monitoring"
   tag: "Release Notes"
   text: "Check out the latest Datadog Synthetic Monitoring releases! (App login required)"
-- link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
-  tag: "Blog"
-  text: "Introduction to Datadog Synthetic Monitoring"
-- link: "https://www.datadoghq.com/blog/monitor-cdn-performance-with-synthetic-testing/"
-  tag: "Blog"
-  text: "Monitor CDN performance within your Synthetic tests"
-- link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
-  tag: "Blog"
-  text: "Best practices for monitoring static web applications"
 - link: "https://www.datadoghq.com/blog/api-test-coverage-monitoring-datadog-synthetics/"
   tag: "Blog"
   text: "Improve your API test coverage with Datadog Synthetic Monitoring"
@@ -111,6 +102,10 @@ Optimize your test suite by [ensuring that your application's most critical work
 
 {{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}}
 
+## Version History
+
+Use [Version History in Synthetic Monitoring][23] to run a previous version of a test, restore your test to any saved version, or clone a version to create a new Synthetic Monitoring test.
+
 ## Ready to start?
 
 See [Getting Started with Synthetic Monitoring][18] for instructions on creating your first Synthetic test and monitoring your web applications. Then, explore [Getting Started with Private Locations][19] for instructions on creating your private location and running Synthetic tests with your private location.
@@ -142,3 +137,4 @@ See [Getting Started with Synthetic Monitoring][18] for instructions on creating
 [20]: /continuous_testing/explorer/
 [21]: /mobile_testing
 [22]: /synthetics/test_coverage
+[23]: /synthetics/guide/version_history/

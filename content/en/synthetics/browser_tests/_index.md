@@ -5,9 +5,9 @@ aliases:
   - /synthetics/browser_check
   - /synthetics/browser_test
 further_reading:
-- link: "https://www.datadoghq.com/blog/browser-tests/"
-  tag: "Blog"
-  text: "User experience monitoring with browser tests"
+- link: "/synthetics/guide/version_history/"
+  tag: "Doc"
+  text: "Version History for Synthetic Monitoring"
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
   text: "Best practices for creating end-to-end tests"
@@ -16,7 +16,7 @@ further_reading:
   text: 'Datadog Learning Center: Getting started with Synthetic Browser Testing'
 - link: "/getting_started/synthetics/browser_test"
   tag: "Documentation"
-  text: "Getting started with browser tests"
+  text: "Getting started with Browser Tests"
 - link: "/synthetics/guide/synthetic-test-monitors"
   tag: "Documentation"
   text: "Learn about Synthetic test monitors"
