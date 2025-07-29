@@ -17,6 +17,12 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/"
       tag: "Blog"
       text: "Datadog CNM now supports Consul networking"
+    - link: "https://www.datadoghq.com/blog/cnm-kubernetes-egress/"
+      tag: "Blog"
+      text: "How Datadog Cloud Network Monitoring helps you move to a deny-by-default network egress policy at scale"
+
+      
+
 ---
 
 Datadog Cloud Network Monitoring (CNM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog so you can:

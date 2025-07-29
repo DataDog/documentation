@@ -761,11 +761,10 @@ components:
       schema:
         type: string
     ResourceID:
-      description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
-        `dashboard`, `integration-account`, `integration-service`, `integration-webhook`,
-        `notebook`, `reference-table`, `security-rule`, `slo`, `workflow`, `app-builder-app`,
-        `connection`, `connection-group`, `rum-application`, `cross-org-connection`,
-        `spreadsheet`.'
+      description: 'Identifier, formatted as `type:id`. Supported types: `dashboard`,
+        `integration-service`, `integration-webhook`, `notebook`, `reference-table`,
+        `security-rule`, `slo`, `workflow`, `app-builder-app`, `connection`, `connection-group`,
+        `rum-application`, `cross-org-connection`, `spreadsheet`.'
       example: dashboard:abc-def-ghi
       in: path
       name: resource_id
@@ -23290,6 +23289,17 @@ components:
           maximum: 5
           minimum: 0
           type: number
+        tags:
+          description: List of tag keys used in the asset.
+          example:
+          - env
+          - service
+          - host
+          - datacenter
+          items:
+            description: Tag key used in assets.
+            type: string
+          type: array
         title:
           description: Title of the asset.
           type: string
@@ -57764,7 +57774,8 @@ paths:
         schema:
           format: int64
           type: integer
-      - description: Comma-separated list of fields to group connections by.
+      - description: Comma-separated list of fields to group connections by. The maximum
+          number of group_by(s) is 10.
         in: query
         name: group_by
         schema:
@@ -60614,8 +60625,6 @@ paths:
 
         - Dashboards: `dashboard`
 
-        - Integration Accounts: `integration-account`
-
         - Integration Services: `integration-service`
 
         - Integration Webhooks: `integration-webhook`
@@ -60660,8 +60669,6 @@ paths:
         ----------------------------|--------------------------
 
         Dashboards                  | `viewer`, `editor`
-
-        Integration Accounts        | `viewer`, `editor`
 
         Integration Services        | `viewer`, `editor`
 

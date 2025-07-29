@@ -266,7 +266,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "2.0.0"
+  version = "3.2.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -276,8 +276,8 @@ module "lambda-datadog" {
     "DD_VERSION" : "<VERSION>"
   }
 
-  datadog_extension_layer_version = 67
-  datadog_node_layer_version = 117
+  datadog_extension_layer_version = {{< latest-lambda-layer-version layer="extension" >}}
+  datadog_node_layer_version = {{< latest-lambda-layer-version layer="node" >}}
 
   # aws_lambda_function arguments
 }
@@ -302,8 +302,8 @@ module "lambda-datadog" {
 4. 使用する Datadog 拡張機能 Lambda レイヤーと Datadog Node.js Lambda レイヤーのバージョンを選択します。デフォルトは、レイヤーの最新バージョンになります。
 
 ```
-  datadog_extension_layer_version = 67
-  datadog_node_layer_version = 117
+  datadog_extension_layer_version = {{< latest-lambda-layer-version layer="extension" >}}
+  datadog_node_layer_version = {{< latest-lambda-layer-version layer="node" >}}
 ```
 
 [1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
