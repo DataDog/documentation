@@ -9,7 +9,7 @@ further_reading:
   tag: "Blog"
   text: "Best practices for creating end-to-end tests"
 - link: "/synthetics/guide/version_history/"
-  tag: "Doc"
+  tag: "Guide"
   text: "Version History for Synthetic Monitoring"
 - link: "/synthetics/mobile_app_testing/"
   tag: "Documentation"

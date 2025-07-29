@@ -6,7 +6,7 @@ aliases:
   - /synthetics/browser_test
 further_reading:
 - link: "/synthetics/guide/version_history/"
-  tag: "Doc"
+  tag: "Guide"
   text: "Version History for Synthetic Monitoring"
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"

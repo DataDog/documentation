@@ -12,7 +12,7 @@ further_reading:
   tag: "Doc"
   text: "Version History for Synthetic Monitoring"
 - link: "/getting_started/synthetics/api_test"
-  tag: "Documentation"
+  tag: "Guide"
   text: "Get started with API tests"
 - link: "/synthetics/private_locations"
   tag: "Documentation"

@@ -9,7 +9,7 @@ further_reading:
   tag: 'Blog'
   text: 'Introducing Datadog Synthetic Monitoring'
 - link: "/synthetics/guide/version_history/"
-  tag: "Doc"
+  tag: "Guide"
   text: "Version History for Synthetic Monitoring"
 - link: 'https://www.datadoghq.com/blog/api-test-coverage-monitoring-datadog-synthetics/'
   tag: 'Blog'
