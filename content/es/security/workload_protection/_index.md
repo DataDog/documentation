@@ -6,6 +6,28 @@ aliases:
 - /es/security/cloud_workload_security/backend/
 - /es/security/threats/security_profiles
 - /es/security/threats/runtime_anomaly_detection
+- /es/security/threats/
+cascade:
+- _target:
+    path: /security/workload_protection/agent_expressions
+  aliases:
+  - /security/threats/agent_expressions
+- _target:
+    path: /seguridad/carga_protección/backend_linux
+  aliases:
+  - /seguridad/amenazas/backend_linux
+- _target:
+    path: /security/workload_protection/backend_windows
+  aliases:
+  - /security/threats/backend_windows
+- _target:
+    path: /seguridad/carga_proteccion/expresiones_linux
+  aliases:
+  - /seguridad/amenazas/expresiones_linux
+- _target:
+    path: /seguridad/carga_protección/expresiones_windows
+  aliases:
+  - /seguridad/amenazas/expresiones_windows
 title: Workload Protection
 ---
 
@@ -22,7 +44,7 @@ Workload Protection Threats utiliza el Datadog Agent para monitorizar tu entorno
 3. **Monitorización de actividad de DNS** para controlar el tráfico de red en busca de actividad maliciosa en hosts y contenedores en tiempo real.
 4. **Monitorización de actividad del kernel** para controlar en tiempo real ataques a la capa del kernel como hijacking de procesos, entrada forzada a contenedores y otros.
 
-{{< img src="security/csm/csm_overview_3.png" alt="Buzón de entrada en la información general de Cloud Security, que muestra una lista de los problemas de seguridad priorizados que se deben corregir" width="100%">}}
+<!-- {{< img src="security/csm/csm_overview_3.png" alt="Buzón de entrada en la información general de Cloud Security Management, que muestra una lista de los problemas de seguridad priorizados que se deben corregir" width="100%">}} -->
 
 ## Bloquear de forma proactiva las amenazas con Active Protection
 
@@ -34,9 +56,9 @@ Por defecto, todas las reglas de detección de amenazas de minería de criptomon
 
 Workload Protection Threats viene con más de 50 reglas de detección predefinidas que son mantenidas por un equipo de expertos en seguridad. Las reglas identifican los riesgos más importantes para que puedas tomar medidas correctivas de inmediato. Las reglas de expresión del Agent definen las actividades de carga de trabajo que deben recopilarse para el análisis, mientras que las reglas de detección de backend analizan las actividades e identifican técnicas de ataque y otros patrones de comportamiento peligrosos.
 
-Utiliza la [Configuración remota][7] para desplegar automáticamente reglas nuevas y actualizadas en el Agent. [Personaliza las reglas][5] definiendo cómo cada regla monitoriza la actividad de proceso, red y archivos, [crea reglas personalizadas][6], y [configura notificaciones en tiempo real](#set-up-real-time-notificaciones) para nuevas señales.
+Utiliza la [configuración remota][7] para desplegar automáticamente reglas nuevas y actualizadas en el Agent. [Personaliza las reglas][5] definiendo cómo cada regla monitoriza la actividad de proceso, red y archivos, [crea reglas personalizadas][6], y [configura notificaciones en tiempo real](#set-up-real-time-notifications) para nuevas señales.
 
-{{< img src="security/cws/threats_detection_rules.png" alt="Reglas de detección de Workload Protection en la aplicación de Datadog" width="100%">}}
+<!-- {{< img src="security/cws/threats_detection_rules.png" alt="Reglas de detección de Workload Protection en la aplicación Datadog" width="100%">}} -->
 
 ## Configuración de notificaciones en tiempo real
 
@@ -48,7 +70,7 @@ Utiliza variables de plantilla y Markdown para [personalizar los mensajes de not
 
 Investiga y clasifica las señales de seguridad en el [Signals Explorer][8]. Consulta información detallada sobre los archivos o procesos afectados, logs y señales relacionadas y los pasos para solucionar el problema.
 
-{{< img src="security/cws/signals_explorer.png" alt="Página del Cloud Security Signals Explorer" width="100%">}}
+<!-- {{< img src="security/cws/signals_explorer.png" alt="Página del Explorador de señales CSM" width="100%">}} -->
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSfzQARsTPr3tiJDnS_4bGx7w35LDfAbGUggaUzHYoL0dIUMWQ/viewform" btn_hidden="false" header="Active Protection">}}
 
@@ -62,7 +84,7 @@ Datadog está introduciendo una nueva función llamada Active Protection para ha
   {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Permisos de roles de Datadog para Workload Protection{{< /nextlink >}}
   {{< nextlink href="/security/workload_protection/workload_security_rules">}}Más información sobre las reglas de detección de Workload Protection{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-workload-security">}}Empieza a utilizar reglas de detección de Workload Protection predefinidas{{< /nextlink >}}
-  {{< nextlink href="/getting_started/cloud_security_management">}}Empezando con Cloud Security{{< /nextlink >}}
+  {{< nextlink href="/getting_started/cloud_security_management">}}Empezando con Cloud Security Management{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /es/security/threats/setup/?tab=kuberneteshelm#prerequisites
