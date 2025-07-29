@@ -121,7 +121,8 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    }
    ```
 
-3. Configure Automatic Instrumentation
+3. **Configure Automatic Instrumentation**
+
    If your Azure Function app runs on Windows, add the following environment variables to your Function app:
    ```
    CORECLR_ENABLE_PROFILING=1
