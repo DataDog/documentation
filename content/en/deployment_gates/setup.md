@@ -41,7 +41,7 @@ Each gate requires one or more rules. All rules must pass for the gate to succee
 
 {{< tabs >}}
 {{% tab "Monitors" %}}
-This rule type evaluates the state of your monitors for a configurable period of time. It periodically evaluates monitors that match your query and will fail if, at any time during the duration period:
+This rule type periodically evaluates the state of your monitors for a configurable period of time. It will fail if at any time during the duration period:
 - No monitors match the query.
 - More than 50 monitors match the query.
 - Any matching monitor is in `ALERT` or `NO_DATA` state.
@@ -93,12 +93,12 @@ This rule type uses Watchdog's [APM Faulty Deployment Detection][1] to compare t
 
 ## Evaluate a Deployment Gate
 
-Deployment Gate evaluations are asynchronous, as the evaluation process can take some time to complete. This means that when you trigger an evaluation, it's started in the background, and the API returns an evaluation ID to track its progress. 
+After a gate is configured with at least one rule, you can request a gate evaluation while deploying the related service. Deployment Gate evaluations are asynchronous, as the evaluation process can take some time to complete. This means that when you trigger an evaluation, it's started in the background, and the API returns an evaluation ID to track its progress.
 
 - First, request a Deployment Gate evaluation, which initiates the process and returns an evaluation ID.
-- Then, periodically poll the evaluation status endpoint using the evaluation ID to retrieve the result when the evaluation is complete.
+- Then, periodically poll the evaluation status endpoint using the evaluation ID to retrieve the result when the evaluation is complete. Polling every 10-20 seconds is recommended.
 
-After a gate is configured with at least one rule, you can request a gate evaluation while deploying the related service with an API call:
+A Deployment Gate evaluation can be requested with an API call:
 
 ```bash
 curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/unstable/deployments/gates/evaluation" \
@@ -191,6 +191,8 @@ The [datadog-ci][1] `deployment gate` command includes all the required logic to
 ```bash
 datadog-ci deployment gate --service transaction-backend --env staging
 ```
+
+If the Deployment Gate being evaluated has APM Faulty Deployment Detection rules, you must also specify the version, for example `--version 1.0.1`.
 
 The command has the following characteristics:
 * It sends a request to start the evaluation and polls the evaluation status endpoint using the evaluation_id until the evaluation is complete.
