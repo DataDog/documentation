@@ -1,7 +1,7 @@
 After the container is built and pushed to your registry, set the required environment variables for the Datadog Agent:
 
 - `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a Google Cloud Secret for privacy and safety.
-- `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page.
+- `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. See valid [Datadog Sites](https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site).
 
 For more environment variables and their function, see [Environment Variables](#environment-variables).
 
