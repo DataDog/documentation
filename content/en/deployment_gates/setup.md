@@ -41,7 +41,7 @@ Each gate requires one or more rules. All rules must pass for the gate to succee
 
 {{< tabs >}}
 {{% tab "Monitors" %}}
-This rule type periodically evaluates the state of your monitors for a configurable period of time. It will fail if at any time during the duration period:
+This rule type evaluates the state of your monitors for a configurable period of time. It will fail if at any time during the duration period:
 - No monitors match the query.
 - More than 50 monitors match the query.
 - Any matching monitor is in `ALERT` or `NO_DATA` state.
