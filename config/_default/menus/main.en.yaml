@@ -7714,21 +7714,26 @@ menu:
       parent: pa_session_replay_browser
       identifier: pa_session_replay_browser_troubleshooting
       weight: 104
-    - name: Analyzing users and segments
+    - name: Segments
       url: product_analytics/segmentation/
       parent: product_analytics
       identifier: pa_segmentation
       weight: 6
+    - name: Managing Profiles
+      url: product_analytics/profiles
+      parent: product_analytics
+      identifier: pa_profiles
+      weight: 7
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
       identifier: pa_guides
-      weight: 7
+      weight: 8
     - name: Troubleshooting
       url: product_analytics/troubleshooting/
       parent: product_analytics
       identifier: pa_troubleshooting
-      weight: 8
+      weight: 9
     - name: Account Management
       url: account_management/
       pre: cog-2
