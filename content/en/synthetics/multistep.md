@@ -9,10 +9,10 @@ further_reading:
   tag: 'Learning Center'
   text: 'Getting Started with Synthetic Browser Testing'
 - link: "/synthetics/guide/version_history/"
-  tag: "Doc"
+  tag: "Guide"
   text: "Version History for Synthetic Monitoring"
 - link: "/getting_started/synthetics/api_test"
-  tag: "Guide"
+  tag: "Documentation"
   text: "Get started with API tests"
 - link: "/synthetics/private_locations"
   tag: "Documentation"
