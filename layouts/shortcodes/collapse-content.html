@@ -1,6 +1,15 @@
 {{- $headingLevel := default "h3" (.Get "level") -}}
 {{- $isExpanded := default false (.Get "expanded") -}}
 {{- $accordionId := default "" (.Get "id") -}}
+{{ if ne (printf "%T" $isExpanded) "bool" }}
+{{ errorf "The 'expanded' parameter must be a Boolean value. (Page: %s)" .Page.Path }}
+{{ end -}}
+{{ if ne (printf "%T" $headingLevel) "string" }}
+{{ errorf "The 'level' parameter must be a string." }}
+{{ end -}}
+{{ if ne (printf "%T" $accordionId) "string" }}
+{{ errorf "The 'id' parameter must be a string." }}
+{{ end -}}
 <details class="collapsible-section" {{ if $isExpanded }}open{{ end }} {{ if ne $accordionId "" }}id="{{ $accordionId }}"{{- end -}}>
   <summary class="collapsible-header" tabindex="0" aria-expanded="{{ $isExpanded }}">
     <div class="header-content">
