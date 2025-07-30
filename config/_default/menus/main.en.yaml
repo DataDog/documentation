@@ -4683,11 +4683,6 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_agent_monitoring
       weight: 304
-    - name: Data Access Controls
-      url: llm_observability/monitoring/data_access_controls
-      parent: llm_obs_monitoring
-      identifier: llm_obs_data_access_controls
-      weight: 305
     - name: Evaluations
       url: llm_observability/evaluations/
       parent: llm_obs
@@ -4718,16 +4713,26 @@ menu:
       parent: llm_obs
       identifier: llm_obs_experiments
       weight: 5
+    - name: Data Security and RBAC
+      url: llm_observability/data_security_and_rbac
+      parent: llm_obs
+      identifier: llm_obs_data_security_and_rbac
+      weight: 6
+    - name: Data Access Controls
+      url: llm_observability/data_security_and_rbac/data_access_controls
+      parent: llm_obs_data_security_and_rbac
+      identifier: llm_obs_data_access_controls
+      weight: 601
     - name: Terms and Concepts
       url: llm_observability/terms/
       parent: llm_obs
       identifier: llm_obs_terms
-      weight: 6
+      weight: 7
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 7
+      weight: 8
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
