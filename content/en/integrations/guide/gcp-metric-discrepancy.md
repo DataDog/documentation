@@ -35,7 +35,7 @@ Datadog ingests the most granular raw values from Google Cloud Platform (GCP). A
    - Namespace: Cloud Memorystore Redis Instance
    - Metric name: CPU Seconds 
    - Filter: (most granular dimensions) project_id, region, instance_id, node_id, role, space, relationship.
-   - Aggregation: Sum (should show the same values when using mean, min, max, sum or none if using most granular dimensions)
+   - Aggregation: Sum (should show the same values when using mean, min, max, sum, or none if using most granular dimensions)
    - Min interval: 1m
 
    {{< img src="integrations/guide/gcp-metric-discrepancy/gcp_metric_explorer.png" alt="gcp metric explorer" >}}
