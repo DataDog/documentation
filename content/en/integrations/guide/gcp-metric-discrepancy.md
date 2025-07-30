@@ -62,7 +62,7 @@ Datadog ingests the most granular raw values from Google Cloud Platform (GCP). A
 
    {{< img src="integrations/guide/gcp-metric-discrepancy/gcp_rate.png" alt="gcp rate" >}}
 
-6. Adjust the Alignment Function in GCP.
+6. Adjust the alignment function in Google Cloud.
 
    You can change the alignment function to `delta`, `min`, `max`, `sum` or `mean` and it should show the same values if you are using the most granular dimensions, for example using `delta` alignment. You can see the value matches Datadog now.
 
