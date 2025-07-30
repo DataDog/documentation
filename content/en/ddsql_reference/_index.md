@@ -126,7 +126,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `DATE_TRUNC(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.  |
 | `REGEXP_LIKE(string s, pattern p)`               | boolean                               | Evaluates whether a string matches a regular expression pattern.            |
 | `REGEXP_MATCH(string s, pattern p)`              | array of strings                      | Returns substrings of the first pattern match in the string.                |
-| `REGEXP_REPLACE(string s, pattern p, string replace)`| string                            | Replaces the first occurrence of pattern in string with replacement.        |
+| `REGEXP_REPLACE(string s, pattern p, string replacement)`| string                            | Replaces the first occurrence of the pattern in a string with the replacement.        |
 | `CARDINALITY(array a)`                           | integer                               | Returns the number of elements in the array.                                |
 | `ARRAY_POSITION(array a, typeof_array value)`    | integer                               | Returns the index of the first occurrence of the value found in the array, or null if value is not found. |
 | `STRING_TO_ARRAY(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter. |
