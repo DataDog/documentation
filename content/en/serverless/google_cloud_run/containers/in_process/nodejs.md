@@ -69,4 +69,4 @@ For more information, see [Correlating Node.js Logs and Traces][2].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
-[2]: tracing/other_telemetry/connect_logs_and_traces/nodejs/
+[2]: /tracing/other_telemetry/connect_logs_and_traces/nodejs/
