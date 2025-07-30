@@ -1,5 +1,5 @@
 ---
-title: Building your Go application for App & API Protection
+title: Building your Go application for App and API Protection
 code_lang: docker
 type: multi-code-lang
 code_lang_weight: 10

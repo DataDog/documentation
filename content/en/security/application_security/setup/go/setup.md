@@ -26,7 +26,7 @@ further_reading:
   text: "Troubleshooting App and API Protection"
 ---
 
-## Enabling Application & API Protection
+## Enabling App and API Protection
 
 ### Prerequisite
 
@@ -57,7 +57,7 @@ further_reading:
 
 Note: If you are building without [CGO][9] on Linux, see [Building Go applications with CGO disabled][6].
 
-5. Redeploy your Go service and enable App & API Protection by setting the `DD_APPSEC_ENABLED` environment variable to `true`:
+5. Redeploy your Go service and enable App and API Protection by setting the `DD_APPSEC_ENABLED` environment variable to `true`:
 
 {{< tabs >}}
 {{% tab "Environment Variable" %}}
@@ -75,7 +75,7 @@ Add the following environment variable value to your Docker command line:
 $ docker run -e DD_APPSEC_ENABLED=true [...]
 ```
 
-For more information on how to create a fitting  docker image, See [Creating a Dockerfile for App & API Protection for Go][3].
+For more information on how to create a fitting  docker image, See [Creating a Dockerfile for App and API Protection for Go][3].
 
 {{% /tab %}}
 {{% tab "Dockerfile" %}}
@@ -105,7 +105,7 @@ spec:
               value: "true"
 ```
 
-For more information on how to create a fitting  docker image, See [Creating a Dockerfile for App & API Protection for Go][3].
+For more information on how to create a fitting  docker image, See [Creating a Dockerfile for App and API Protection for Go][3].
 
 {{% /tab %}}
 {{% tab "Amazon ECS" %}}
@@ -122,7 +122,7 @@ Update your application's ECS task definition JSON file using this environment s
 ]
 ```
 
-For more information on how to create a fitting docker image, See [Creating a Dockerfile for App & API Protection for Go][3].
+For more information on how to create a fitting docker image, See [Creating a Dockerfile for App and API Protection for Go][3].
 
 {{% /tab %}}
 
@@ -142,7 +142,7 @@ A few minutes after you enable your application and exercise it, **threat inform
 
 ### Building without CGO
 
-If you are building your Go application without [CGO][9], you can still enable App & API Protection by following these steps:
+If you are building your Go application without [CGO][9], you can still enable App and API Protection by following these steps:
 
 1. Add the `appsec` build tag when compiling your application:
    ```console
