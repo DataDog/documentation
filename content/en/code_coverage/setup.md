@@ -6,6 +6,10 @@ further_reading:
     text: "Code Coverage"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Code Coverage is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
 Setting up Code Coverage involves the following steps:
 
 1. Configure integration with your source code provider in the Datadog UI.

@@ -9,7 +9,7 @@ algolia:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Code Coverage is available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">Code Coverage is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 {{< callout url="http://datadoghq.com/product-preview/code-coverage" >}}
