@@ -31,7 +31,7 @@ Datadog ingests the most granular raw values from Google Cloud Platform (GCP). A
 3. Graph the metric in the Google Cloud Metrics Explorer.
 
    Search for `redis.googleapis.com/stats/cpu_utilization`.
-   - Time: ideally in UTC for 1 hour.
+   - Time: Past 1 hour
    - Namespace: Cloud Memorystore Redis Instance
    - Metric name: CPU Seconds 
    - Filter: (most granular dimensions) project_id, region, instance_id, node_id, role, space, relationship.
