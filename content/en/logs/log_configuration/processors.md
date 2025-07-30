@@ -947,7 +947,7 @@ The Decoder processor translates binary-to-text encoded string fields (such as B
 
 - Truncated strings: The processor handles partially truncated Base64/Base16 strings gracefully by trimming or padding as needed.
 
-- Hex output format: Hex input can be decoded into either a string (UTF-8) or an integer.
+- Hex format: Hex input can be decoded into either a string (UTF-8) or an integer.
 
 - Failure handling: If decoding fails (invalid input), the processor skips the transformation, and the log remains unchanged
 
