@@ -14,8 +14,6 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-warning">Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+</div>
-
 In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][3] your applications with the Datadog APM SDKs in one step.
 
 ## Requirements
@@ -45,8 +43,9 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 
 Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data.
 
-### Prerequisites
+### Recommended: Configure USTs with ddTraceConfigs as part of [workload targeting](#advanced-options).
 
+With SSI, you can automatically extract UST values from pod labels and metadata without modifying individual deployments:
 To use the recommended ddTraceConfigs approach, ensure you have the following software components:
 
 | Component | Minimum Version | Notes |
@@ -55,9 +54,7 @@ To use the recommended ddTraceConfigs approach, ensure you have the following so
 | datadog-operator | 1.16.0+ | 1.13.0+ works with Agent version override |
 | datadog-helm-chart | 3.120.0+ | Added valueFrom support |
 
-### Recommended: Configure USTs with ddTraceConfigs
-
-With SSI, you can automatically extract UST values from pod labels and metadata without modifying individual deployments:
+**Note**: Replace `app-name` with any label that contains your service name (e.g., `service`, `app`, `component`). You can configure multiple labels this way.
 
 ```yaml
 datadog:
@@ -80,7 +77,6 @@ datadog:
       targets:
         - name: my-services
           podSelector:
-            # matchLabels: ...
             matchExpressions:
             - key: app-name           # Target pods with this label
               operator: Exists
@@ -93,29 +89,7 @@ datadog:
             # DD_ENV inherited from cluster-level tags above
 ```
 
-**For namespace-based environments**, create separate targets:
-
-```yaml
-datadog:
-  apm:
-    instrumentation:
-      enabled: true
-      targets:
-        - name: production-services
-          namespaceSelector:
-            matchNames: [prod, production]
-          ddTraceConfigs:
-            - name: DD_ENV
-              value: "production"
-        - name: staging-services
-          namespaceSelector:
-            matchNames: [staging, stage]
-          ddTraceConfigs:
-            - name: DD_ENV
-              value: "staging"
-```
-
-### Alternative: Configure USTs in deployment manifests
+### Configure USTs in deployment manifests
 
 If your setup doesn't use labels suitable for UST extraction, you can set USTs directly in your deployment manifests using environment variables. This approach requires modifying each deployment individually, but offers precise control.
 
