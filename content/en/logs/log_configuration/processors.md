@@ -941,7 +941,7 @@ Add an attribute value to the end of a target array attribute in the log.
 
 ## Decoder processor
 
-The Decoder processor translates binary-to-text encoded string fields (such as Base64 or Hex/Base16) into their original representation. This allows the data to be interpreted in its native context, whether as a UTF-8 string, ASCII command, or a numeric value (for example, an integer derived from a hex string). This is especially useful for analyzing encoded commands, logs from specific systems, or evasion techniques used by threat actors
+The Decoder processor translates binary-to-text encoded string fields (such as Base64 or Hex/Base16) into their original representation. This allows the data to be interpreted in its native context, whether as a UTF-8 string, ASCII command, or a numeric value (for example, an integer derived from a hex string). The Decoder processor is especially useful for analyzing encoded commands, logs from specific systems, or evasion techniques used by threat actors.
 
 **Notes**:
 
