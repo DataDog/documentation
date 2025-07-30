@@ -8,10 +8,6 @@ algolia:
   tags: ["code coverage"]
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Code Coverage is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 {{< callout url="http://datadoghq.com/product-preview/code-coverage/" >}}
 Code Coverage is in Preview. This product replaces Test Optimization's <a href="https://docs.datadoghq.com/tests/code_coverage">code coverage</a> feature, which is being deprecated. Complete the form to request access for the new Code Coverage product.
 {{< /callout >}}
