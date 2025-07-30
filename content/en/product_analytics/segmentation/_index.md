@@ -9,9 +9,9 @@ further_reading:
 
 ## Overview
 
-Analyze and understand individual users or segments (groups based on common characteristics) of your user base using the [Segments][1] features. 
+Analyze and understand individual users or segments (groups based on common characteristics) of your user base using the [Segments][1] feature. 
 
-You can use the [user profile attributes](#user-profile-attributes) to filter on the users you want, or [create a segment](#build-a-segment), to better analyze and understand usage of your product across a group. 
+You can use [user profile attributes](#user-profile-attributes) to filter on the users you want, or [create a segment](#build-a-segment) to better analyze and understand usage of your product across a group. 
 
 The Segments page displays all the user segments you’ve created and also allows you to create new ones. Segmenting helps you focus on specific user groups based on characteristics or behaviors, enabling you to uncover insights, identify trends, and make data-driven decisions to optimize your product and user experience.
 

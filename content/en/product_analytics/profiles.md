@@ -150,7 +150,7 @@ You can customize the Account Profiles page to include additional attributes, gi
 
 Use integrations to automatically import custom attribute data into profiles. This data is synced on a regular schedule, reflecting the latest values from the source system to ensure that profiles remain up-to-date and accurate.
 
-On the [integrations page][4], you can explore the integrations that are compatible and/or have been configured to add custom attributes.
+On the [Integrations page][4], you can explore the integrations that are compatible with custom attributes.
 
 On this same page, you can select the [Custom Attributes][5] tab to view imported attributes for user and account profiles.
 
@@ -159,7 +159,7 @@ On this same page, you can select the [Custom Attributes][5] tab to view importe
 To import attibutes from an integration such as Salesforce or Snowflake, select the **Add Attributes** button and choose whether the attributes are for user or account profiles. Then, follow the prompts to: 
 
 
-{{< img src="product_analytics/add_attribute_july_25.png" alt="Add new attributes using to enrich your profiles." style="width:80%;" >}}
+{{< img src="product_analytics/add_attribute2_button.png" alt="Add new attributes using to enrich your profiles." style="width:80%;" >}}
 
 
 1. Choose a **source of the data** to be imported.
