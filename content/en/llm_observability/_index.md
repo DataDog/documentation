@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/llm-observability-bedrock-agents/"
   tag: "Blog"
   text: "Monitor agents built on Amazon Bedrock with Datadog LLM Observability"
+- link: "https://www.datadoghq.com/blog/monitor-mcp-servers/"
+  tag: "Blog"
+  text: "Identify common security risks in MCP servers"
 ---
 
 ## Overview
