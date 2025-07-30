@@ -100,7 +100,7 @@ Cuando configures un nuevo test de navegador de Synthetic Monitoring, utiliza fr
 
 [1]: /es/synthetics/guide/identify_synthetics_bots/?tab=apitests
 [2]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie
-   {{% /tab %}}
+{{% /tab %}}
 
 {{% tab "Certificado" %}}
 
@@ -129,13 +129,13 @@ Selecciona **Ignorar error de certificado del servidor** para indicar al test qu
 
 [1]: /es/synthetics/browser_tests/advanced_options#prevent-screenshot-capture
 [2]: /es/data_security/synthetics
-   {{% /tab %}}
+{{% /tab %}}
 
 {{% tab "URL de inicio" %}}
 
 Introduce una cantidad de tiempo en segundos que el test deberá esperar antes de declarar el paso de test inicial como fallido.
 
-   {{% /tab %}}
+{{% /tab %}}
 
 {{% tab "Hora e idioma" %}}
 
@@ -143,9 +143,9 @@ Introduce una cantidad de tiempo en segundos que el test deberá esperar antes d
 
 [1]: https://www.loc.gov/standards/iso639-2/php/code_list.php
 
-   {{% /tab %}}
+{{% /tab %}}
 
-   {{% tab "Blocked Requests" %}}
+{{% tab "Blocked Requests" %}}
 
    Introduce uno o más patrones de solicitud para bloquear el proceso de carga mientras se ejecuta el test. Introduce un patrón de solicitud por línea utilizando el [formato de patrón coincidente][1]. Se admiten comodines (por ejemplo, `*://*.example.com/*`).
 
@@ -153,9 +153,9 @@ Introduce una cantidad de tiempo en segundos que el test deberá esperar antes d
 
 [1]: https://developer.chrome.com/docs/extensions/develop/concepts/match-patterns
 
-   {{% /tab %}}
+{{% /tab %}}
 
-{{< tabs >}}
+{{< /tabs >}}
 
 {{% synthetics-variables %}}
 

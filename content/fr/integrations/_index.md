@@ -14,7 +14,7 @@ aliases:
     - /integrations/pingdom_v3/
 description: Rassembler des données de tous vos systèmes, toutes vos applications et tous vos services
 algolia:
-    tags: ['intégration', 'configuration de l'intégration']
+    tags: ["intégration", "configuration de l'intégration"]
 cascade:
 - _target:
     path: /intégrations/akamai-datastream-2

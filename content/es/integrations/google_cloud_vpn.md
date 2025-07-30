@@ -26,7 +26,7 @@
 - "log collection"
 "custom_kind": "integración"
 "dependencies": []
-"description": "Monitoriza el estado, el rendimiento, el recuento de sesiones del túnel VPN y más".
+"description": "Monitoriza el estado, el rendimiento, el recuento de sesiones del túnel VPN y más"
 "display_on_public_website": verdadero
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloud_vpn/"
 "draft": falso

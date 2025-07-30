@@ -31,7 +31,7 @@ Para visualizar o alertar sobre el uso de Synthetic Monitoring, utiliza las sigu
 
 * [Tests de navegador][4]: `sum:datadog.estimated_usage.synthetics.browser_test_runs{*}.as_count()`.
 
-  **Nota:** El precio de los navegadores {{< información de herramienta glosario="test run">}}s se basa en el número de pasos. Consulta la [Documentación sobre precios][7] para obtener más información.
+  **Nota:** El precio de los navegadores {{< tooltip glossary="test run">}}s se basa en el número de pasos. Consulta la [Documentación sobre precios][7] para obtener más información.
 
 Para conseguir una mayor precisión, acota o agrupa las métricas por las etiquetas asociadas al test; por ejemplo, `team` o `application`.
 

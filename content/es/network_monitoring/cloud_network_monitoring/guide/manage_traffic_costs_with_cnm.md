@@ -31,7 +31,7 @@ Cuando Datadog migró a Kubernetes, el proceso de traslado de servicios sin esta
 
     La consulta anterior destaca todos los servicios que se comunican de `us-east-1a` a `us-east-1c`. Dado que la tabla ya está ordenada por volumen, las primeras filas muestran los servicios más activos que contribuyen a la mayor parte del tráfico entre zonas de disponibilidad. Si deseas inspeccionar los efectos de infraestructura cruzada de uno de estos culpables, ordena por el nombre del servicio entre las zonas de disponibilidad.
 
-    {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_cnm/single_service_2.png" alt=Buscar un único servicio, ordenado por zona de disponibilidad.">}}
+    {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_cnm/single_service_2.png" alt="Buscar un único servicio, ordenado por zona de disponibilidad.">}}
 
 3. Del mismo modo, puedes utilizar la etiqueta (tag) de equipo para identificar, por ejemplo, equipos de ingeniería que generan más tráfico interregional.
 

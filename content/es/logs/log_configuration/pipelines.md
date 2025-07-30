@@ -55,7 +55,7 @@ El preprocesamiento de logs JSON viene con una configuración predeterminada que
 2. Cambia la asignación por defecto en función del atributo reservado:
 
 {{< tabs >}}
-{{% tab "Source" (Origen) %}}
+{{% tab "Source" %}}
 
 #### Atributo de origen
 
@@ -78,7 +78,7 @@ El uso de Datadog Agent o del formato RFC5424 configura automáticamente el valo
 * `syslog.hostname`
 
 {{% /tab %}}
-{{% tab "Date" (Fecha) %}}
+{{% tab "Date" %}}
 
 #### Atributo de fecha
 
@@ -104,7 +104,7 @@ Los formatos de fecha reconocidos son: <a href="https://www.iso.org/iso-8601-dat
 
 [1]: /es/logs/log_configuration/processors/#log-date-remapper
 {{% /tab %}}
-{{% tab "Message" (Mensaje) %}}
+{{% tab "Message" %}}
 
 #### Atributo de mensaje
 
@@ -117,7 +117,7 @@ Especifica los atributos alternativos que se utilizarán como origen del mensaje
 [2]: /es/logs/explorer/#filters-logs
 [3]: /es/logs/log_configuration/processors/#log-message-remapper
 {{% /tab %}}
-{{% tab "Status" (Estado) %}}
+{{% tab "Status" %}}
 
 #### Atributo de estado
 
@@ -132,7 +132,7 @@ Especifica los atributos alternativos que se utilizarán como origen del estado 
 
 [1]: /es/logs/log_configuration/processors/#log-status-remapper
 {{% /tab %}}
-{{% tab "Service" (Servicio) %}}
+{{% tab "Service" %}}
 
 #### Atributo de servicio
 
@@ -146,7 +146,7 @@ Especifica los atributos alternativos que se utilizarán como origen del servici
 
 [1]: /es/logs/log_configuration/processors/#service-remapper
 {{% /tab %}}
-{{% tab "Trace ID" (ID de rastreo) %}}
+{{% tab "Trace ID" %}}
 
 #### Atributo de ID de rastreo
 

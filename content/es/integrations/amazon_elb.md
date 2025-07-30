@@ -40,7 +40,7 @@
 "manifest_version": "2.0.0"
 "name": "amazon_elb"
 "public_title": "Amazon Elastic Load Balancing"
-"short_description": "Amazon ELB distribuye automáticamente el tráfico entre varias instancias de EC2".
+"short_description": "Amazon ELB distribuye automáticamente el tráfico entre varias instancias de EC2"
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -50,7 +50,7 @@
   - "Category::Cloud"
   - "Offering::Integration"
   "configuration": "README.md#Configuración"
-  "description": "Amazon ELB distribuye automáticamente el tráfico entre varias instancias de EC2".
+  "description": "Amazon ELB distribuye automáticamente el tráfico entre varias instancias de EC2"
   "media": []
   "overview": "README.md#Información general"
   "support": "README.md#Soporte"
