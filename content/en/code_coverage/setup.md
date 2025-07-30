@@ -65,10 +65,10 @@ Update your CI pipeline to upload code coverage report files to Datadog.
 
 ### Supported coverage report formats
 
-Datadog supports the following coverage data formats:
-<details>
-  <summary>LCOV</summary>
-  <pre>
+Datadog supports the following coverage data formats—expand for examples:
+
+{{% collapse-content title="LCOV" level="h4" expanded=false id="lcov" %}}
+{{< code-block lang="text" >}}
 TN:
 SF:src/example.c
 FN:3,add
@@ -87,123 +87,123 @@ BRDA:4,0,1,0
 BRF:2
 BRH:1
 end_of_record
-</pre>
-</details>
-<details>
-  <summary>Cobertura XML</summary>
-  <pre>
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE coverage SYSTEM &quot;http://cobertura.sourceforge.net/xml/coverage-04.dtd&quot;&gt;
-&lt;coverage lines-valid=&quot;5&quot; lines-covered=&quot;3&quot; line-rate=&quot;0.6&quot; branches-valid=&quot;2&quot; branches-covered=&quot;1&quot; branch-rate=&quot;0.5&quot; timestamp=&quot;1690658886&quot; version=&quot;1.9&quot;&gt;
-  &lt;sources&gt;
-    &lt;source&gt;src&lt;/source&gt;
-  &lt;/sources&gt;
-  &lt;packages&gt;
-    &lt;package name=&quot;example&quot; line-rate=&quot;0.6&quot; branch-rate=&quot;0.5&quot;&gt;
-      &lt;classes&gt;
-        &lt;class name=&quot;Example&quot; filename=&quot;example/Example.java&quot; line-rate=&quot;0.6&quot; branch-rate=&quot;0.5&quot;&gt;
-          &lt;methods&gt;
-            &lt;method name=&quot;add&quot; signature=&quot;(II)I&quot; line-rate=&quot;1.0&quot; branch-rate=&quot;1.0&quot;&gt;
-              &lt;lines&gt;
-                &lt;line number=&quot;3&quot; hits=&quot;5&quot;/&gt;
-                &lt;line number=&quot;4&quot; hits=&quot;5&quot; branch=&quot;true&quot; condition-coverage=&quot;50% (1/2)&quot;/&gt;
-                &lt;line number=&quot;5&quot; hits=&quot;5&quot;/&gt;
-              &lt;/lines&gt;
-            &lt;/method&gt;
-          &lt;/methods&gt;
-          &lt;lines&gt;
-            &lt;line number=&quot;3&quot; hits=&quot;5&quot;/&gt;
-            &lt;line number=&quot;4&quot; hits=&quot;5&quot; branch=&quot;true&quot; condition-coverage=&quot;50% (1/2)&quot;/&gt;
-            &lt;line number=&quot;5&quot; hits=&quot;5&quot;/&gt;
-            &lt;line number=&quot;8&quot; hits=&quot;0&quot;/&gt;
-            &lt;line number=&quot;9&quot; hits=&quot;0&quot;/&gt;
-          &lt;/lines&gt;
-        &lt;/class&gt;
-      &lt;/classes&gt;
-    &lt;/package&gt;
-  &lt;/packages&gt;
-&lt;/coverage&gt;
-</pre>
-</details>
-<details>
-  <summary>Jacoco XML</summary>
-  <pre>
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;report name=&quot;Example&quot;&gt;
-  &lt;sessioninfo id=&quot;SessionId&quot; start=&quot;1690658886000&quot; dump=&quot;1690658887000&quot;/&gt;
-  &lt;package name=&quot;example&quot;&gt;
-    &lt;sourcefile name=&quot;Example.java&quot;&gt;
-      &lt;line nr=&quot;3&quot; mi=&quot;0&quot; ci=&quot;5&quot;/&gt;
-      &lt;line nr=&quot;4&quot; mi=&quot;0&quot; ci=&quot;5&quot; mb=&quot;1&quot; cb=&quot;1&quot;/&gt;
-      &lt;line nr=&quot;5&quot; mi=&quot;0&quot; ci=&quot;5&quot;/&gt;
-      &lt;line nr=&quot;8&quot; mi=&quot;1&quot; ci=&quot;0&quot;/&gt;
-      &lt;line nr=&quot;9&quot; mi=&quot;1&quot; ci=&quot;0&quot;/&gt;
-    &lt;/sourcefile&gt;
-  &lt;/package&gt;
-&lt;/report&gt;
-</pre>
-</details>
-<details>
-  <summary>Clover XML</summary>
-  <pre>
-&lt;coverage generated=&quot;1661852015&quot;&gt;
-    &lt;project timestamp=&quot;1661852015&quot;&gt;
-        &lt;file name=&quot;/var/www/html/src/App/Console/CronjobRunnerCommand.php&quot;&gt;
-            &lt;class name=&quot;App\Console\CronjobRunnerCommand&quot; namespace=&quot;global&quot;&gt;
-                &lt;metrics complexity=&quot;3&quot; methods=&quot;3&quot; coveredmethods=&quot;0&quot; conditionals=&quot;0&quot; coveredconditionals=&quot;0&quot; statements=&quot;4&quot; coveredstatements=&quot;0&quot; elements=&quot;7&quot; coveredelements=&quot;0&quot;/&gt;
-            &lt;/class&gt;
-            &lt;line num=&quot;18&quot; type=&quot;method&quot; name=&quot;__construct&quot; visibility=&quot;public&quot; complexity=&quot;1&quot; crap=&quot;2&quot; count=&quot;0&quot;/&gt;
-            &lt;line num=&quot;20&quot; type=&quot;stmt&quot; count=&quot;1&quot;/&gt;
-            &lt;line num=&quot;27&quot; type=&quot;stmt&quot; count=&quot;0&quot;/&gt;
-            &lt;line num=&quot;30&quot; type=&quot;method&quot; name=&quot;execute&quot; visibility=&quot;protected&quot; complexity=&quot;1&quot; crap=&quot;2&quot; count=&quot;0&quot;/&gt;
-            &lt;line num=&quot;32&quot; type=&quot;stmt&quot; count=&quot;0&quot;/&gt;
-            &lt;metrics loc=&quot;35&quot; ncloc=&quot;35&quot; classes=&quot;1&quot; methods=&quot;3&quot; coveredmethods=&quot;0&quot; conditionals=&quot;0&quot; coveredconditionals=&quot;0&quot; statements=&quot;4&quot; coveredstatements=&quot;0&quot; elements=&quot;7&quot; coveredelements=&quot;0&quot;/&gt;
-        &lt;/file&gt;
-        &lt;file name=&quot;/var/www/html/src/App/Console/CronjobRunnerCommand2.php&quot;&gt;
-            &lt;line num=&quot;42&quot; type=&quot;stmt&quot; count=&quot;1&quot;/&gt;
-        &lt;/file&gt;
-    &lt;/project&gt;
-&lt;/coverage&gt;
-</pre>
-</details>
-<details>
-  <summary>OpenCover XML</summary>
-  <pre>
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;CoverageSession xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
-  &lt;Modules&gt;
-    &lt;Module hash=&quot;ABC123&quot;&gt;
-      &lt;ModulePath&gt;Example.dll&lt;/ModulePath&gt;
-      &lt;Files&gt;
-        &lt;File uid=&quot;1&quot; fullPath=&quot;src\example\Example.cs&quot; /&gt;
-      &lt;/Files&gt;
-      &lt;Classes&gt;
-        &lt;Class&gt;
-          &lt;Methods&gt;
-            &lt;Method visited=&quot;true&quot; cyclomaticComplexity=&quot;1&quot; sequenceCoverage=&quot;100&quot;&gt;
-              &lt;FileRef uid=&quot;1&quot;/&gt;
-              &lt;SequencePoints&gt;
-                &lt;SequencePoint vc=&quot;5&quot; sl=&quot;3&quot; /&gt;
-                &lt;SequencePoint vc=&quot;5&quot; sl=&quot;4&quot; /&gt;
-                &lt;SequencePoint vc=&quot;5&quot; sl=&quot;5&quot; /&gt;
-                &lt;SequencePoint vc=&quot;0&quot; sl=&quot;9&quot; /&gt;
-              &lt;/SequencePoints&gt;
-              &lt;BranchPoints&gt;
-                &lt;BranchPoint vc=&quot;5&quot; sl=&quot;4&quot; path=&quot;0&quot;/&gt;
-                &lt;BranchPoint vc=&quot;0&quot; sl=&quot;4&quot; path=&quot;1&quot;/&gt;
-              &lt;/BranchPoints&gt;
-            &lt;/Method&gt;
-          &lt;/Methods&gt;
-        &lt;/Class&gt;
-      &lt;/Classes&gt;
-    &lt;/Module&gt;
-  &lt;/Modules&gt;
-&lt;/CoverageSession&gt;
-</pre>
-</details>
-<details>
-  <summary>Simplecov JSON</summary>
-  <pre>
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Cobertura XML" level="h4" expanded=false id="cobertura-xml" %}}
+{{< code-block lang="xml" >}}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+<coverage lines-valid="5" lines-covered="3" line-rate="0.6" branches-valid="2" branches-covered="1" branch-rate="0.5" timestamp="1690658886" version="1.9">
+  <sources>
+    <source>src</source>
+  </sources>
+  <packages>
+    <package name="example" line-rate="0.6" branch-rate="0.5">
+      <classes>
+        <class name="Example" filename="example/Example.java" line-rate="0.6" branch-rate="0.5">
+          <methods>
+            <method name="add" signature="(II)I" line-rate="1.0" branch-rate="1.0">
+              <lines>
+                <line number="3" hits="5"/>
+                <line number="4" hits="5" branch="true" condition-coverage="50% (1/2)"/>
+                <line number="5" hits="5"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="3" hits="5"/>
+            <line number="4" hits="5" branch="true" condition-coverage="50% (1/2)"/>
+            <line number="5" hits="5"/>
+            <line number="8" hits="0"/>
+            <line number="9" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Jacoco XML" level="h4" expanded=false id="jacoco-xml" %}}
+{{< code-block lang="xml" >}}
+<?xml version="1.0" encoding="UTF-8"?>
+<report name="Example">
+  <sessioninfo id="SessionId" start="1690658886000" dump="1690658887000"/>
+  <package name="example">
+    <sourcefile name="Example.java">
+      <line nr="3" mi="0" ci="5"/>
+      <line nr="4" mi="0" ci="5" mb="1" cb="1"/>
+      <line nr="5" mi="0" ci="5"/>
+      <line nr="8" mi="1" ci="0"/>
+      <line nr="9" mi="1" ci="0"/>
+    </sourcefile>
+  </package>
+</report>
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Clover XML" level="h4" expanded=false id="clover-xml" %}}
+{{< code-block lang="xml" >}}
+<coverage generated="1661852015">
+    <project timestamp="1661852015">
+        <file name="/var/www/html/src/App/Console/CronjobRunnerCommand.php">
+            <class name="App\Console\CronjobRunnerCommand" namespace="global">
+                <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="7" coveredelements="0"/>
+            </class>
+            <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+            <line num="20" type="stmt" count="1"/>
+            <line num="27" type="stmt" count="0"/>
+            <line num="30" type="method" name="execute" visibility="protected" complexity="1" crap="2" count="0"/>
+            <line num="32" type="stmt" count="0"/>
+            <metrics loc="35" ncloc="35" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="7" coveredelements="0"/>
+        </file>
+        <file name="/var/www/html/src/App/Console/CronjobRunnerCommand2.php">
+            <line num="42" type="stmt" count="1"/>
+        </file>
+    </project>
+</coverage>
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="OpenCover XML" level="h4" expanded=false id="opencover-xml" %}}
+{{< code-block lang="xml" >}}
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageSession xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Modules>
+    <Module hash="ABC123">
+      <ModulePath>Example.dll</ModulePath>
+      <Files>
+        <File uid="1" fullPath="src\example\Example.cs" />
+      </Files>
+      <Classes>
+        <Class>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100">
+              <FileRef uid="1"/>
+              <SequencePoints>
+                <SequencePoint vc="5" sl="3" />
+                <SequencePoint vc="5" sl="4" />
+                <SequencePoint vc="5" sl="5" />
+                <SequencePoint vc="0" sl="9" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="5" sl="4" path="0"/>
+                <BranchPoint vc="0" sl="4" path="1"/>
+              </BranchPoints>
+            </Method>
+          </Methods>
+        </Class>
+      </Classes>
+    </Module>
+  </Modules>
+</CoverageSession>
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Simplecov JSON" level="h4" expanded=false id="simplecov-json" %}}
+{{< code-block lang="json" >}}
 {
   "meta": {
     "simplecov_version": "0.21.2"
@@ -233,9 +233,8 @@ end_of_record
     }
   }
 }
-
-</pre>
-</details>
+{{< /code-block >}}
+{{% /collapse-content %}}
 
 ### Install the datadog-ci CLI
 
