@@ -69,7 +69,7 @@ The [Datadog Agent configuration file][7] is located in `/etc/datadog-agent/data
 A fully commented reference file, located in `/etc/datadog-agent/datadog.yaml.example`, lists every available option for comparison or copy-paste. Alternatively, see the [sample config_template.yaml file][10] for all available configuration options.
 
 ### Integration files
-Configuration files for integrations live in `/etc/datadog-agent/conf.d/`. Each integration has its own sub-directory, `<INTEGRATION>.d/`, that contains:
+Configuration files for integrations are found in `/etc/datadog-agent/conf.d/`. Each integration has its own sub-directory, `<INTEGRATION>.d/`, which contains:
 - `conf.yaml`: the active configuration controlling how the integration gathers metrics and logs  
 -  `conf.yaml.example`: a sample illustrating supported keys and defaults
 
