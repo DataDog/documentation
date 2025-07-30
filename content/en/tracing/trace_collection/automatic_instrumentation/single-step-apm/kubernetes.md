@@ -30,7 +30,7 @@ In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to in
 
 Follow these steps to enable Single Step Instrumentation across your entire cluster. This automatically sends traces from all applications written in supported languages.
 
-**Note:** To instrument only specific namespaces or pods, seeworkload targeting in[Advanced options](#advanced-options).
+**Note:** To instrument only specific namespaces or pods, see workload targeting in [Advanced options](#advanced-options).
 
 1. In Datadog, go to the [Install the Datadog Agent on Kubernetes][11] page.
 1. Follow the on-screen instructions to choose your installation method, select an API key, and set up the Operator or Helm repository.
