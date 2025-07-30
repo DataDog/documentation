@@ -141,7 +141,7 @@ To customize interactions with data inline your generic widgets, see [Custom Lin
 
 ## Metrics info
 
-Click the kebab (three vertical dots) menu on a metric graph to find the **Metrics Info** option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
+On a metric graph, click the kebab (three vertical dots) menu to find the **Metrics Info** option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
 
 ## Unit override
 

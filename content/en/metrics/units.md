@@ -27,9 +27,9 @@ For example, if you have a datapoint that is 3,000,000,000:
 
 Click the full screen button on the top right-hand corner of the graph to see the units displayed at the bottom:
 
-{{< img src="metrics/units/metrics_units.png" alt="The units of a metrics graph in full screen mode" style="width:100%;">}}
+{{< img src="metrics/units/metrics_units.png" alt="The units of a metric graph in full screen mode" style="width:100%;">}}
 
-On a metric graph, use the **Metrics Info** option from the kebab (three vertical dots) menu to see a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
+On a metric graph, click the kebab (three vertical dots) menu to find the **Metrics Info** option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
 
 {{< img src="metrics/units/metrics_info.png" alt="The Metrics Info option from the expanded kebab (three vertical dots) menu" style="width:100%;">}}
 

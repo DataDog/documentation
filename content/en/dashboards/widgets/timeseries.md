@@ -141,7 +141,7 @@ For more information, see [Explore your data in full-screen graph mode][12].
 
 ### Metrics info
 
-Use the **Metrics Info** option from the kebab (three vertical dots) menu to see a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
+On a metric graph, click the kebab (three vertical dots) menu to find the **Metrics Info** option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
 
 ## API
 
