@@ -20,7 +20,7 @@ The following table presents the list of collected features and the minimal requ
 
 | Feature | Requirements |
 |---|---|
-| BigQuery Cost Allocation | Google Cloud Cost Management integration configured |
+| Retrieve tags from labels of a query | Supported without monitoring or reservations |
 | Query-Level Cost Attribution | BigQuery monitoring enabled |
 | Reservation Cost Allocation | BigQuery reservations configured |
 
