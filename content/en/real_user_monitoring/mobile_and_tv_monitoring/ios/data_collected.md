@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-The RUM iOS SDK generates events that have associated telemetry and attributes. Telemetry are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice telemetry values (group by) in analytics. 
+The RUM iOS SDK generates events that have associated telemetry and attributes. Telemetry are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice telemetry values (group by) in analytics.
 
 Every RUM event has all of the [default attributes](#default-attributes), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`).
 
@@ -75,11 +75,17 @@ The following device-related attributes are attached automatically to all events
 
 | Attribute name                       | Type   | Description                                                                                              |
 |--------------------------------------|--------|----------------------------------------------------------------------------------------------------------|
-| `device.type`                        | string | The device type as reported by the device (System User-Agent).                                            |
-| `device.brand`                       | string | The device brand as reported by the device (System User-Agent).                                           |
-| `device.model`                       | string | The device model as reported by the device (System User-Agent).                                           |
-| `device.name`                        | string | The device name as reported by the device (System User-Agent).                                            |
-| `device.architecture` | string | The CPU architecture of the device that is reporting the error. |
+| `device.architecture`                | string | The CPU architecture of the device that is reporting the error.                                          |
+| `device.batteryLevel`                | number | The current battery level of the device (0.0 to 1.0).                                                    |
+| `device.brand`                       | string | The device brand as reported by the device (System User-Agent).                                          |
+| `device.brightnessLevel`             | number | The current screen brightness level (0.0 to 1.0).                                                        |
+| `device.locale`                      | string | The user’s locale as a language tag combining language and region (e.g. 'en-US').                        |
+| `device.locales`                     | array (string) | Ordered list of the user’s preferred system languages as IETF language tags.                     |
+| `device.model`                       | string | The device model as reported by the device (System User-Agent).                                          |
+| `device.name`                        | string | The device name as reported by the device (System User-Agent).                                           |
+| `device.powerSavingMode`             | boolean | Whether the device is in power saving mode.                                                             |
+| `device.timeZone`                    | string | The device’s current time zone identifier.                                                               |
+| `device.type`                        | string | The device type as reported by the device (System User-Agent).                                           |
 
 ### Connectivity
 
@@ -99,9 +105,10 @@ The following OS-related attributes are attached automatically to all events col
 
 | Attribute name     | Type   | Description                                                               |
 |--------------------|--------|---------------------------------------------------------------------------|
-| `os.name`          | string | The OS name as reported by the device (System User-Agent).          |
-| `os.version`       | string | The OS version as reported by the device (System User-Agent).       |
-| `os.version_major` | string | The OS version major as reported by the device (System User-Agent). |
+| `os.build`         | string | The OS build number.                                                      |
+| `os.name`          | string | The OS name as reported by the device (System User-Agent).                |
+| `os.version`       | string | The OS version as reported by the device (System User-Agent).             |
+| `os.version_major` | string | The OS version major as reported by the device (System User-Agent).       |
 
 
 ### Geo-location
@@ -168,7 +175,7 @@ RUM action, error, resource, and long task events contain information about the 
 | `view.long_task.count`        | number      | Count of all long tasks collected for this view.                     |
 | `view.interaction_to_next_view_time` | number (ns) | Time between the last user interaction in the previous view and start of this (current) view. |
 | `view.name`    | string | Customizable name of the view corresponding to the event.       |
-| `view.network_settled_time` | number (ns) | Time it took for a view to be fully initiated at the start of the view. | 
+| `view.network_settled_time` | number (ns) | Time it took for a view to be fully initiated at the start of the view. |
 | `view.resource.count` | number      | Count of all resources collected for this view.                              |
 | `view.time_spent`     | number (ns) | Time spent on this view.                                                     |
 | `view.url`     | string | URL of the `UIViewController` class corresponding to the event. |
@@ -203,13 +210,13 @@ Front-end errors are collected with Real User Monitoring (RUM). The error messag
 | `error.type`     | string | The error type (or error code in some cases).                                    |
 | `error.message`  | string | A concise, human-readable, one-line message explaining the event.                |
 | `error.stack`    | string | The stack trace or complementary information about the error.                    |
-| `error.issue_id` | string | The stack trace or complementary information about the error.   
-| `error.category` | string | The high-level grouping for the type of error. Possible values are `Memory Warning`, `Watchdog Termination`, `App Hang`, or `Exception`. |
+| `error.issue_id` | string | The stack trace or complementary information about the error.
+| `error.category` | string | The high-level grouping for the type of error. Possible values are `ANR`, `App Hang`, `Exception`, `Watchdog Termination`, `Memory Warning` or `Network`. |
 | `error.file` | string | File where the issue found by Error Tracking occurred. |
 | `error.is_crash` | boolean | Indicates whether the error caused the application to crash. |
 | `freeze.duration` | int64 | Duration of the main thread freeze (in nanoseconds). This is only supported for App Hangs. |
 
-### Network errors 
+### Network errors
 
 Network errors include information about failing HTTP requests. The following facets are also collected:
 
