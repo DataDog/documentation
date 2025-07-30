@@ -286,38 +286,24 @@ Start-Process -FilePath "./datadog-ci.exe" -ArgumentList version
 
 To upload your code coverage reports to Datadog, run the following command, providing a valid [DD API key][7] and one or more file paths to either the coverage report files directly or directories containing them:
 
-<pre>
-<code class="language-bash" data-lang="bash">
-DD_API_KEY=&lt;api_key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci coverage upload .
-</code>
-</pre>
-
-Provided directories are recursively searched for supported coverage report files, so specifying the current directory `.` is usually sufficient.
-See the [Datadog CI CLI documentation][8] for more details on the `datadog-ci coverage upload` command.
-
-<div class="alert alert-warning">Make sure that this command runs in your CI even when your tests have failed. Usually, when tests fail, the CI job aborts execution, and the upload command does not run.</div>
-
 {{< tabs >}}
 {{% tab "GitHub Actions" %}}
-Use the [Status check functions][1]:
-
 <pre>
 <code class="language-yaml" data-lang="yaml">
 steps:
-- name: Run tests
-  run: ./run-tests.sh
 - name: Upload coverage reports to Datadog
-  if: always()
   run: datadog-ci coverage upload .
   env:
     DD_API_KEY: ${{ secrets.DD_API_KEY }}
     DD_SITE: {{< region-param key="dd_site" >}}
 </code>
 </pre>
-
 [1]: https://docs.github.com/en/actions/learn-github-actions/expressions#always
 {{% /tab %}}
 {{< /tabs >}}
+
+Provided directories are recursively searched for supported coverage report files, so specifying the current directory `.` is usually sufficient.
+See the [Datadog CI CLI documentation][8] for more details on the `datadog-ci coverage upload` command.
 
 If everything is configured correctly, you will see a PR comment from Datadog with code coverage percentage values shortly after the code coverage upload is finished.
 You will also be able to view your coverage data aggregated by pull request in the [Code Coverage page][9] in Datadog, with the ability to drill down into individual files and lines of code.
