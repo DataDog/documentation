@@ -18,11 +18,11 @@ Datadog ingests the most granular raw values from Google Cloud Platform (GCP). A
 
 1. Find the corresponding metric in GCP.
 
-   For the GCP integration, Datadog converts GCP metrics into the format `gcp.GCP_SERVICE_NAME.METRIC_NAME`. For the [example metric](https://cloud.google.com/monitoring/api/metrics_gcp_p_z#gcp-redis:~:text=of%20%5Bprimary%2C%20replica%5D.-,stats/cpu_utilization,-GA%20%E2%80%83(project)), the GCP service name is **redis**, and the metric name is **stats/cpu_utilization**. The full metric name is `redis.googleapis.com/stats/cpu_utilization`.
+   For the GCP integration, Datadog converts GCP metrics into the format `gcp.GCP_SERVICE_NAME.METRIC_NAME`. For the [example metric][1], the GCP service name is **redis**, and the metric name is **stats/cpu_utilization**. The full metric name is `redis.googleapis.com/stats/cpu_utilization`.
 
 2. Find the most granular dimensions.
 
-   These include all the **Resource labels**: `project_id`,`region`, `instance_id`, `node_id`, and **Metric labels**: `role`, `space`, `relationship`. Refer to the GCP documentation for other metrics.
+   These include all the **Resource labels**: `project_id`,`region`, `instance_id`, `node_id`, and **Metric labels**: `role`, `space`, `relationship`. Refer to the [GCP documentation][2] for other metrics.
    
    {{< img src="integrations/guide/gcp-metric-discrepancy/labels_definition.png" alt="labels definition in GCP documentation" >}}
 
@@ -56,7 +56,7 @@ Datadog ingests the most granular raw values from Google Cloud Platform (GCP). A
 
 5. Understand Google Cloud alignment functions.
 
-   This discrepancy occurs because by default, GCP applies a rate alignment for this metric. For details, see the Google cloud [alignment function](https://cloud.google.com/monitoring/api/v3/aggregation#alignment-intro) documentation. Click on `configure aligner` to see that the alignment function is automatically set to **rate**(0.108711 / 60 ≃ 0.0018119).
+   This discrepancy occurs because by default, GCP applies a rate alignment for this metric. For details, see the Google cloud [alignment function][3] documentation. Click on `configure aligner` to see that the alignment function is automatically set to **rate** (0.108711 / 60 ≃ 0.0018119).
 
    {{< img src="integrations/guide/gcp-metric-discrepancy/gcp_aligner.png" alt="gcp aligner" >}}
 
@@ -71,3 +71,7 @@ Datadog ingests the most granular raw values from Google Cloud Platform (GCP). A
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://cloud.google.com/monitoring/api/metrics_gcp_p_z#gcp-redis:~:text=of%20%5Bprimary%2C%20replica%5D.-,stats/cpu_utilization,-GA%20%E2%80%83(project)
+[2]: https://cloud.google.com/monitoring/api/metrics_gcp
+[3]: https://cloud.google.com/monitoring/api/v3/aggregation#alignment-intro
