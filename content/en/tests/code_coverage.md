@@ -15,7 +15,8 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/code-coverage/" >}}
-Datadog is building a new dedicated Code Coverage product. Sign up for the Preview!
+This documentation covers the code coverage feature of the Test Optimization product.
+This feature will soon be deprecated in favor of our dedicated Code Coverage product. Sign up for the Preview!
 {{< /callout >}}
 
 ## Overview
