@@ -543,7 +543,7 @@ The values that you send to Datadog are strings, so the facets are displayed in 
 
 {{< callout url="https://www.datadoghq.com/product-preview/code-coverage/" >}}
 This section covers the code coverage feature of the Test Optimization product.
-This feature will soon be deprecated in favor of our dedicated Code Coverage product. Sign up for the Preview!
+This feature is being deprecated and replaced by a new dedicated <a href="https://www.datadoghq.com/product-preview/code-coverage/">Code Coverage</a> product. Sign up for the Preview!
 {{< /callout >}}
 
 It is possible to report code coverage for a given JUnit report via the `--report-measures` option, by setting the `test.code_coverage.lines_pct` measure:

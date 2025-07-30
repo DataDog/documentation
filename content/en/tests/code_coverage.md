@@ -15,8 +15,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/code-coverage/" >}}
-This documentation covers the code coverage feature of the Test Optimization product.
-This feature will soon be deprecated in favor of our dedicated Code Coverage product. Sign up for the Preview!
+This Test Optimization feature is being deprecated and replaced by a new dedicated <a href="https://www.datadoghq.com/product-preview/code-coverage/">Code Coverage</a> product. Sign up for the Preview!
 {{< /callout >}}
 
 ## Overview
