@@ -54,7 +54,7 @@ Datadog ingests the most granular raw values from Google Cloud Platform (GCP). A
    {{< img src="integrations/guide/gcp-metric-discrepancy/datadog_value.png" alt="datadog value" >}}
 
 
-5. Understand GCP Alignment Functions.
+5. Understand Google Cloud alignment functions.
 
    This discrepancy occurs because by default GCP applies a rate alignement for this metric (see what is an alignement function in [GCP doc](https://cloud.google.com/monitoring/api/v3/aggregation#alignment-intro)). If you click on `configure aligner`, You’ll see that the alignment function is automatically set to rate (0.108711 / 60 ≃ 0.0018119)
 
