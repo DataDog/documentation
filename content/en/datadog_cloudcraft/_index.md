@@ -61,7 +61,7 @@ Enable the **Show All Controls** toggle to display the available **Group By** op
 
 You can group resources by AWS tags, such as app, service, team, or cost center, to organize your view by team or workload.
 
-**Note**: Grouping by tags is supported for AWS tags only. Tags from the Datadog Agent (for example `env`, or `team` tags from local configuration) are not supported.
+**Note**: Grouping by tags is supported for AWS tags only. Tags from the Datadog Agent (for example ,`env`, or `team` tags from local configuration) are not supported.
 
 {{< img src="datadog_cloudcraft/group_by_tag.mp4" alt="Group by tag feature in Cloudcraft, grouping by Team and Cost Center" video=true >}}
 
