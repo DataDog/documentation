@@ -4678,6 +4678,11 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_agent_monitoring
       weight: 303
+    - name: Data Access Controls
+      url: llm_observability/monitoring/data_access_controls
+      parent: llm_obs_monitoring
+      identifier: llm_obs_data_access_controls
+      weight: 304
     - name: Evaluations
       url: llm_observability/evaluations/
       parent: llm_obs
