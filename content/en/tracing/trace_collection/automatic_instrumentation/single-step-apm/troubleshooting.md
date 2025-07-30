@@ -8,7 +8,7 @@ further_reading:
 
 ## Overview
 
-Single Step Instrumentation (SSI) helps instrument applications by automatically loading application processes with the Datadog APM SDKs. This works for applications running on Linux hosts, in container environments such as Kubernetes and Docker, and for .NET applications served by Windows IIS—without requiring changes to application dependencies or images. If you encounter issues enabling APM with SSI, use this guide to troubleshoot and resolve common problems. For further assistance, contact [Datadog Support][1].
+Single Step Instrumentation (SSI) helps instrument applications by automatically loading application processes with the Datadog APM SDKs. SSI works for applications running on Linux hosts, in container environments such as Kubernetes and Docker, and for .NET applications served by Windows IIS—without requiring changes to application dependencies or images. If you encounter issues enabling APM with SSI, use this guide to troubleshoot and resolve common problems. For further assistance, contact [Datadog Support][1].
 ## Host and Docker instrumentation
 
 ### Host injection does not apply to existing processes
