@@ -6,7 +6,21 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD [{{ .Get "cmd" }}]
 ```
 
-{{% collapse-content title="Explanation" level="h4" %}}
+<!-- We can't use the collapse-content.html shortcode inside of another shortcode. -->
+<details class="collapsible-section">
+  <summary class="collapsible-header" tabindex="0" aria-expanded="false">
+    <div class="header-content">
+      <div class="header-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-chevron-right">
+          <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+        </svg>
+      </div>
+      <div class="header-text">
+        <h4 class='header-text-inner'>Explanation</h4>
+      </div>
+    </div>
+  </summary>
+  <div class="collapsible-content">
 
 1. Install `serverless-init`, and stay on the latest major version with the `:1` tag. Alternatively, you can pin to a specific version tag or use `:latest`.
 
@@ -26,9 +40,23 @@ CMD [{{ .Get "cmd" }}]
    CMD [{{ .Get "cmd" }}]
    ```
 
-{{% /collapse-content %}}
+  </div>
+</details>
 
-{{% collapse-content title="Alternative configuration" level="h4" id="alt" %}}
+<details class="collapsible-section" id="alt">
+  <summary class="collapsible-header" tabindex="0" aria-expanded="false">
+    <div class="header-content">
+      <div class="header-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-chevron-right">
+          <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+        </svg>
+      </div>
+      <div class="header-text">
+        <h4 class='header-text-inner'>Alternative configuration</h4>
+      </div>
+    </div>
+  </summary>
+  <div class="collapsible-content">
 
 If you already have an entrypoint defined inside your Dockerfile, you can instead modify the CMD argument.
 
@@ -45,4 +73,5 @@ CMD ["/your_entrypoint.sh", {{ .Get "cmd" }}]
 
 As long as your command to run is passed as an argument to datadog-init, you will receive full instrumentation.
 
-{{% /collapse-content %}}
+  </div>
+</details>
