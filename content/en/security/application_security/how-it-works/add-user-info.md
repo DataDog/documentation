@@ -591,6 +591,60 @@ Datadog::Kit::AppSec::Events.track(event_name, trace, span, metadata)
 ```
 {{% /collapse-content %}}
 
+#### Migrating to the new login success and failure methods
+
+The new methods in `Datadog::Kit::AppSec::Events::V2` introduce a more intuitive parameter order and clearer separation of concerns. Here are the key changes:
+
+1. The login identifier (email, username) is the first parameter and is mandatory.
+2. The user object/ID is optional in success events and has been removed from failure events.
+3. Metadata has been simplified and no longer requires the `usr.login` field.
+4. The trace and span parameters are no longer required and are automatically inferred.
+
+**Note**: the legacy methods `track_login_success` and `track_login_failure` are deprecated in favor of the new methods `track_user_login_success` and `track_user_login_failure`, respectively.
+
+In the following example, the commented code is no longer necessary.
+
+{{% collapse-content title="Login success" level="h4" expanded="true" id="ruby-v2-migration-login-success" %}}
+```ruby
+require 'datadog/kit/appsec/events/v2'
+
+# in a controller:
+login = 'user@some.com' # new mandatory argument
+user = {                # same as before, but now the object is optional
+  id: 'some-user-id',   # providing a user ID will nonetheless help with post-compromised activity correlation
+  email: 'user@some.com'
+}
+metadata = {
+# 'usr.login': 'user@some.com', this is no longer necessary in metadata, but became the required first parameter
+  'some.key': 'value'
+}
+
+# deprecated
+# Datadog::Kit::AppSec::Events.track_login_success(trace, span, user: user, **metadata)
+
+Datadog::Kit::AppSec::Events::V2.track_user_login_success(login, user, metadata)
+```
+{{% /collapse-content %}}
+
+{{% collapse-content title="Login failure" level="h4" expanded="false" id="ruby-v2-migration-login-failure" %}}
+```ruby
+require 'datadog/kit/appsec/events/v2'
+
+# in a controller:
+login = 'user@some.com' # new mandatory argument
+user_exists = true      # if the user login exists in database for example
+metadata = {
+# 'usr.login': 'user@some.com', this is no longer necessary in metadata, but became the required first parameter
+  'some.key': 'value'
+}
+
+# deprecated
+# Datadog::Kit::AppSec::Events.track_login_failure(trace, span, user_exists: user_exists, user_id: login, **metadata)
+
+Datadog::Kit::AppSec::Events::V2.track_user_login_failure(login, user_exists, metadata)
+```
+{{% /collapse-content %}}
+
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
