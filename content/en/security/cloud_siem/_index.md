@@ -56,11 +56,11 @@ further_reading:
 
 ## Overview
 
-Datadog Cloud SIEM (Security Information and Event Management) is a security data analysis and correlation system that your entire security operations team can use to view, detect, investigate, and respond to security issues. Cloud SIEM is built for cloud environments and uses Datadog's platform to scale to the highest log volumes. And while Cloud SIEM is built for cloud scale, it can also detect threats in hybrid environments, where the Datadog Agent is installed on-premises and in the cloud.
+Datadog Cloud SIEM (Security Information and Event Management) is a security data analysis and correlation system. It enables your entire security operations team to view, detect, investigate, and respond to security issues. Leveraging Datadog's scalable platform, Cloud SIEM ingests telemetry from both cloud and on‑premises systems using the Datadog Agent and API-based integrations.
 
-In cloud-scale environments, effective security response demands speed, context, insight, and automation. Datadog helps you meet that need by collecting telemetry across cloud and on-premises systems using the Datadog Agent and API-based integrations. Cloud SIEM continuously analyzes this data, detecting threats in real time and generating security signals. These signals are enriched and correlated with numerous sources, empowering security teams to quickly understand what is happening and take action.
+Effective security response requires speed, context, insight, and automation. By continuously analyzing incoming data, Cloud SIEM detects threats, generates actionable security signals, and correlates those signals across multiple sources. This empowers your team to investigate incidents and respond quickly.
 
-To keep your team on top of the latest attacks Datadog also has a team of threat researchers who analyze petabytes of telemetry across cloud and on-premises systems to identify emerging threats and attacker behaviors. See [Datadog Security Labs][1] to read articles about their recent investigations.
+To keep your team on top of the latest attacks, Datadog also has a team of threat researchers who analyze petabytes of telemetry across cloud and on-premises systems to identify emerging threats and attacker behaviors. See Datadog Security Labs to read articles about their recent investigations.
 
 ## Get started
 
