@@ -64,7 +64,9 @@ There are two options when configuring triggers on the Datadog Forwarder Lambda 
 
 ### Automatically set up triggers
 
-Datadog can automatically configure triggers on the Datadog Forwarder Lambda function to collect AWS logs from the following sources and locations:
+Datadog can automatically configure triggers on the Datadog Forwarder Lambda function to collect AWS logs. However, automatic subscription does not support creating triggers across different AWS accounts or regions. For scenarios where logs are published to S3 buckets in a separate account, we recommend manually creating a trigger in the same account as the bucket to work around this limitation.
+
+The following sources and locations are supported:
 
 | Source                      | Location       |
 | --------------------------- | -------------- |
