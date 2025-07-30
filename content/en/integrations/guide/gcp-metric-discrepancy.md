@@ -14,7 +14,7 @@ Use this guide to troubleshoot metric discrepancies between Google Cloud and Dat
 
 ## Metric discrepancies
 
-Datadog ingests the most granular raw values from Google Cloud Platform (GCP). All aggregation seen in Datadog happens on the Datadog side. We report the raw values from Google as gauges into Datadog's metrics intake, and any further aggregation is performed within Datadog. Take `gcp.redis.stats.cpu_utilization` as an example.
+Datadog ingests the most granular raw values from Google Cloud Platform (GCP). All aggregation seen in Datadog happens on the Datadog side. Datadog's metrics intake imports the raw values from Google as gauges, and any further aggregation is performed within Datadog. The following steps reconcile the metric `gcp.redis.stats.cpu_utilization` between Google Cloud and Datadog.
 
 1. Find the corresponding metric in GCP.
 
