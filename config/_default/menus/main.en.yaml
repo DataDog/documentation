@@ -4895,23 +4895,12 @@ menu:
       parent: cd
       identifier: cd_monitors
       weight: 4
-    - name: Code Coverage
-      url: code_coverage/
-      pre: ci
-      parent: software_delivery_heading
-      identifier: code_coverage
-      weight: 30000
-    - name: Setup
-      url: code_coverage/setup/
-      parent: code_coverage
-      identifier: code_coverage_setup
-      weight: 1
     - name: Deployment Gates
       url: deployment_gates/
       pre: ci
       parent: software_delivery_heading
       identifier: deployment_gates
-      weight: 40000
+      weight: 30000
     - name: Setup
       url: deployment_gates/setup/
       parent: deployment_gates
@@ -4927,7 +4916,7 @@ menu:
       pre: ci
       parent: software_delivery_heading
       identifier: tests
-      weight: 50000
+      weight: 40000
     - name: Setup
       url: tests/setup/
       parent: tests
@@ -5133,6 +5122,17 @@ menu:
       parent: tests
       identifier: tests_troubleshooting
       weight: 17
+    - name: Code Coverage
+      url: code_coverage/
+      pre: ci
+      parent: software_delivery_heading
+      identifier: code_coverage
+      weight: 50000
+    - name: Setup
+      url: code_coverage/setup/
+      parent: code_coverage
+      identifier: code_coverage_setup
+      weight: 1
     - name: Quality Gates
       url: quality_gates/
       pre: ci
