@@ -40,7 +40,7 @@ Datadog ingests the most granular raw values from Google Cloud Platform (GCP). A
 
    {{< img src="integrations/guide/gcp-metric-discrepancy/gcp_metric_explorer.png" alt="gcp metric explorer" >}}
 
-4. Graph the metric in Datadog Metrics explore. 
+4. Graph the metric in the Datadog Metrics Explorer. 
 
    {{< img src="integrations/guide/gcp-metric-discrepancy/datadog_metric_explorer.png" alt="datadog metric explorer" >}}
 
