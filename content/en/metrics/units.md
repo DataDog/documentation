@@ -29,9 +29,9 @@ Click the full screen button on the top right-hand corner of the graph to see th
 
 {{< img src="metrics/units/metrics_units.png" alt="The units of a metric graph in full screen mode" style="width:100%;">}}
 
-On a metric graph, click the kebab (three vertical dots) menu to find the **Metrics Info** option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
+On a metric graph, click on the context menu (three vertical dots) to find the **Metrics Info** option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
 
-{{< img src="metrics/units/metrics_info.png" alt="The Metrics Info option from the expanded kebab (three vertical dots) menu" style="width:100%;">}}
+{{< img src="metrics/units/metrics_info.png" alt="The Metrics Info option from the expanded context menu (three vertical dots)" style="width:100%;">}}
 
 To change a metric unit, navigate to the [metric summary][1] page and select a metric. Click **Edit** under **Metadata** and select a unit, such as `bit` or `byte` from the dropdown menu.
 
