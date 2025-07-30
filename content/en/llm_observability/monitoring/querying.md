@@ -9,36 +9,47 @@ further_reading:
 ## Overview
 This page discusses using Datadog's [LLM Observability Trace Explorer][1] to query your LLM application's spans and traces.
 
-In Datadog, a _span_ represents a unit of work representing a single operation in your LLM application. A _trace_ represents the end-to-end operations involved in processing a request in your LLM application, often consisting of one or more nested spans. For more information about this terminology, see [LLM Observability Terms and Concepts][2].
+#### Querying across spans versus traces
+In LLM Observability, a _span_ represents a unit of work representing a single operation in your LLM application. A _trace_ represents the end-to-end operations involved in processing a request in your LLM application, often consisting of one or more nested spans. For more information about this terminology, see [LLM Observability Terms and Concepts][2].
 
-To toggle between searching spans and traces, use the drop-down menu on the left of the query field. When searching traces, a query returns traces where the root span matches the query.
+To toggle between searching spans and traces, use the drop-down menu on the left of the query field on [LLM Observability Trace Explorer][1]. To search across traces where the root span matches the query, select **Traces**. To search across all your spans, including nested child spans, select **All Spans**. 
+
+Some search terms are only applicable to traces. For examples, see [Trace-level queries](#trace-level-queries).
 
 ### Query by attribute
-_Span attributes_ are structured, key-value metadata attached directly to each span, capturing details about the span’s execution, such as performance metrics, resource identifiers, or parameter values. 
+_Span attributes_ are key-value pairs attached directly to each span. Attributes capture details about the span's execution, such as performance metrics, resource identifiers, or parameter values. 
 
 Attribute queries take the form `@key:value`. All attribute keys are prepended with `@`.
 
-For example, the query `@duration:>5s` returns spans that took more than 5 seconds to complete.
+| Query | Match |
+| ----- | ----- |
+| `@duration:>5s` | Spans that took more than 5 seconds to complete |
 
 ### Query by tag
-_Span tags_ are high-level key-value pairs used to group, segment, and correlate telemetry data across spans, services, or environments. Tags often indicate broader context, such as application name, environment, or deployment region, and are attached to spans to enable efficient search and aggregation.
+_Span tags_ are key-value pairs used to group, segment, and correlate telemetry data across spans, services, or environments. Tags often indicate broader context, such as application name, environment, or deployment region, and are attached to spans to facilitate efficient search and aggregation.
 
 Tag queries take the form `key:value`. In contrast to attribute keys, tag keys are not prepended with `@`.
 
-For example, the query `ml_app:my_llm_app` returns spans from an application named `my_llm_app`.
+| Query | Match |
+| ----- | ----- |
+| `ml_app:my_llm_app` | Spans from an application named `my_llm_app` |
 
 ### Query LLM input and output
-You can also search for free text in the input and output of your LLM application's spans. Wrap your free text query with `"`.
+You can also use free text queries to search for specific keywords, phrases, or strings on any span that has an input or output pair. To use free text search, wrap your query with `"`.
 
-For example, the query `"what's the weather"` returns agent, workflow, or LLM spans that contain the string `what's the weather` in the input or output.
+| Query | Match |
+| ----- | ----- |
+| `"what's the weather"` | Agent, workflow, or LLM spans that contain the string `what's the weather` in the input or output |
 
-<div class="alert alert-info">Free text queries are limited to the first 20,500 characters of a trace's input or output.</div>
+<div class="alert alert-info">Free text queries are limited to the first 20,500 characters of a span's input or output.</div>
 
 ### Operators
 
 You can combine multiple search terms using the Boolean operators `AND` (intersection), `OR` (union), and `-` (exclusion).
 
-For example, the query `@duration:>5s AND -"foo"` returns spans that took more than 5 seconds to complete and do **not** contain the string `foo` in the input or output.
+| Query | Match |
+| ----- | ----- |
+| `@duration:>5s AND -"foo"` | Spans that took more than 5 seconds to complete and do **not** contain the string `foo` in the input or output |
 
 ### Query syntax
 
@@ -46,84 +57,66 @@ The LLM Observability Trace Explorer shares the same query syntax as Datadog's [
 
 ## Example queries
 
-`@status:error`
-: Finds spans or traces that have a status of `error`.
-
-`@meta.error.type:<error_type_name>`
-: Finds spans or traces by error type. For example, `<error_type_name>` could be `"Max turns exceeded"`.
-
-`@duration:>5s`
-: Finds spans or traces that took more than 5 seconds to complete.
-
-`@trace.total_tokens:>=1000`
-: Finds traces that consumed 1000 or more total tokens.
+| Query | Match |
+| ----- | ----- |
+| `@status:error` | Spans or traces that have a status of `error` |
+| `@meta.error.type:"Max turns exceeded"` | Spans or traces that have the error type `Max turns exceeded` |
+| `@duration:>5s` | Spans or traces that took more than 5 seconds to complete |
+| `@trace.total_tokens:>=1000` | Traces that consumed 1000 or more total tokens |
+| `ml_app:my_llm_app` | Spans or traces from an application named `my_llm_app` |
+| `"what's the weather"` | Agent, workflow, or LLM spans that contain the string `what's the weather` in the input or output |
 
 ### Evaluation queries
 
 Use the `@evaluations` attribute to find spans or traces by [evaluation][3] result.
 
-`@evaluations.failure_to_answer:"failed to answer"`
-: Finds spans or traces where the LLM failed to deliver an appropriate response.
+#### Custom evaluations
+You can search spans by the results of [custom evaluations][4]. For example, if you have a custom evaluation called `user_mood` with categorical values `happy`, `sad`, and `tired`, you could use the query: `@evaluations.custom.user_mood:happy`.
 
-`@evaluations.hallucination:"hallucination found"`
-: Finds spans or traces where a hallucination is detected.
+| Query | Match |
+| ----- | ----- |
+| `@evaluations.custom.user_satisfaction:>5` | Spans or traces that scored higher than 5 according to a custom evaluation called `user_satisfaction` |
+| `@evaluations.custom.user_mood:happy` | Spans or traces that were evaluated as `happy` according to a custom evaluation called `user_mood` that has the categorical values `happy`, `sad`, and `tired` |
 
-`@evaluations.input_sentiment:negative`
-: Finds spans or traces with negative input sentiment.
-
-`@evaluations.input_toxicity:toxic`
-: Finds spans or traces where harmful or inappropriate content is detected in the input.
-
-`@evaluations.language_mismatch:mismatched`
-: Finds spans or traces where the user's prompt and the LLM's response are in different languages.
-
-`@evaluations.output_sentiment:negative`
-: Finds spans or traces with negative output sentiment.
-
-`@evaluations.output_toxicity:toxic`
-: Finds spans or traces where harmful or inappropriate content is detected in the output.
-
-`@evaluations.prompt_injection:found`
-: Finds spans or traces where prompt injection is detected.
-
-`@evaluations.topic_relevancy:irrelevant`
-: Finds spans or traces where the prompt input diverges from the LLM application's intended topic.
-
-You can also search spans by the results of [custom evaluations][4]. For example, if you have a custom evaluation called `user_mood` with categorical values `happy`, `sad`, and `tired`, you could use the query: `@evaluations.custom.user_mood:happy`.
+#### Out-of-the-box evaluations
+| Query | Match |
+| ----- | ----- |
+| `@evaluations.failure_to_answer:"failed to answer"` | Spans or traces where the LLM failed to deliver an appropriate response |
+| `@evaluations.hallucination:"hallucination found"` | Spans or traces where a hallucination is detected |
+| `@evaluations.input_sentiment:negative` | Spans or traces with negative input sentiment |
+| `@evaluations.input_toxicity:toxic` | Spans or traces where harmful or inappropriate content is detected in the input |
+| `@evaluations.language_mismatch:mismatched` | Spans or traces where the user's prompt and the LLM's response are in different languages |
+| `@evaluations.output_sentiment:negative` | Spans or traces with negative output sentiment |
+| `@evaluations.output_toxicity:toxic` | Spans or traces where harmful or inappropriate content is detected in the output |
+| `@evaluations.prompt_injection:found` | Spans or traces where prompt injection is detected |
+| `@evaluations.topic_relevancy:irrelevant` | Spans or traces where the prompt input diverges from the LLM application's intended topic |
 
 ### Metadata queries
 
 Use the `@meta` attribute to find spans by metadata information.
 
-`@meta.span.kind:<span_kind>`
-: Finds spans by [_span kind_][5]. For example, `<span_kind>` could be `llm`, `workflow`, `tool`, etc. 
-
-`@meta.model_provider:openai`
-: Finds spans or traces where the model provider is OpenAI.
-
-`@meta.model_name:gpt-4.1`
-: Finds spans or traces where the model is GPT-4.1.
+| Query | Match |
+| ----- | ----- |
+| `@meta.span.kind:llm` | Spans of the `llm` [_span kind_][5]. |
+| `@meta.model_provider:openai` | Spans or traces where the model provider is OpenAI |
+| `@meta.model_name:gpt-4.1` | Spans or traces where the model is GPT-4.1 |
 
 ### Trace-level queries
 
 To search traces based on attributes of its nested spans, use the `@child` attribute.
 
-`@child.@evaluations.hallucination:"hallucination found"`
-: Finds traces with a hallucinating sub-span.
-
-`@child.@meta.span.name:retrieval AND @meta.span.kind:workflow`
-: Finds workflow traces that contain a retrieval span.
+| Query | Match |
+| ----- | ----- |
+| `@child.@evaluations.hallucination:"hallucination found"` | Traces with a hallucinating sub-span |
+| `@child.@meta.span.name:retrieval AND @meta.span. kind:workflow`| Workflow traces that contain a retrieval span |
 
 Use the `@trace` attribute to access trace-level information, such as estimated total cost, number of LLM calls, or number of tools.
 
-`@trace.llm_calls:>3`
-: Finds traces with more than 3 LLM calls.
-
-`@trace.tool_calls:>=4`
-: Finds traces with 4 or more tool calls.
-
-`@trace.number_of_tools:<5`
-: Finds traces that call fewer than 5 different tools.
+| Query | Match |
+| ----- | ----- |
+| `@trace.llm_calls:>3` | Traces with more than 3 LLM calls |
+| `@trace.tool_calls:>=4` | Traces with 4 or more tool calls |
+| `@trace.number_of_tools:<5` | Traces that call fewer than 5 different tools |
 
 ## Further reading
 
