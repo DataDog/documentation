@@ -551,14 +551,13 @@ The following examples show how to track login events or custom events (using si
 ```ruby
 require 'datadog/kit/appsec/events/v2'
 
-# in a controller:
 login = 'user@some.com'
-user = 'some-user-id'    # user could be an ID. If no ID is available, any unique identifier works (username, email...)
-user = {                 # or user could be an object with an id and other fields
+user = 'some-user-id'    # any unique string identifier (i.e. id, username or email)
+user = {                 # or user could be a Hash with an id and other fields
   id: 'some-user-id',    # id is mandatory
   email: 'user@some.com' # other fields are optional
 }
-metadata = { 'some.key': 'value' } # you can add arbitrary fields
+metadata = { 'some.key': 'value' } # any arbitrary key-value pairs
 
 Datadog::Kit::AppSec::Events::V2.track_user_login_success(login, user, metadata)
 ```
@@ -568,10 +567,9 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_success(login, user, metadata)
 ```ruby
 require 'datadog/kit/appsec/events/v2'
 
-# in a controller:
 login = 'user@some.com' # the string used by the user to log in
 user_exists = true      # if the user login exists in database for example
-metadata = { 'some.key': 'value' } # you can add arbitrary fields
+metadata = { 'some.key': 'value' } # any arbitrary key-value pairs
 
 Datadog::Kit::AppSec::Events::V2.track_user_login_failure(login, user_exists, metadata)
 ```
@@ -581,7 +579,6 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_failure(login, user_exists, me
 ```ruby
 require 'datadog/kit/appsec/events'
 
-# in a controller:
 span = nil
 trace = Datadog::Tracing.active_trace
 metadata = { 'usr.id': 'some-user-id' }
@@ -608,9 +605,8 @@ In the following example, the commented code is no longer necessary.
 ```ruby
 require 'datadog/kit/appsec/events/v2'
 
-# in a controller:
 login = 'user@some.com' # new mandatory argument
-user = {                # same as before, but now the object is optional
+user = {                # same as before, but now the Hash is optional
   id: 'some-user-id',   # providing a user ID will nonetheless help with post-compromised activity correlation
   email: 'user@some.com'
 }
@@ -630,7 +626,6 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_success(login, user, metadata)
 ```ruby
 require 'datadog/kit/appsec/events/v2'
 
-# in a controller:
 login = 'user@some.com' # new mandatory argument
 user_exists = true      # if the user login exists in database for example
 metadata = {
