@@ -31,7 +31,7 @@ Cloud Cost Monitors help you proactively identify cost changes, and understand i
 
 In order to configure Cloud Cost monitors, you need to have [Cloud Cost Management][1] set up.
 
-Cloud Cost monitors use a 48-hour delayed evaluation window, since cost data may not be available until 48 hours after usage. For example, a 7-day lookback evaluated on January 15 examines cost data from January 6 to January 13.
+Cloud Cost monitors use a 30-minute evaluation frequency and a 48-hour delayed evaluation window, since cost data may not be available until 48 hours after usage. For example, a 7-day lookback evaluated on January 15 examines cost data from January 6 to January 13.
 
 ## Create a monitor
 
