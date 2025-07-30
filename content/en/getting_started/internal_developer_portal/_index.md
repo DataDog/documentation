@@ -25,9 +25,6 @@ further_reading:
     - link: '/internal_developer_portal/eng_reports'
       tag: 'Documentation'
       text: 'Engineering Reports'
-    - link: '/internal_developer_portal/overview_pages'
-      tag: 'Documentation'
-      text: 'Overview Pages'
 ---
 
 {{< img src="tracing/internal_developer_portal/scrolling_the_catalog.mp4" alt="A video that scrolls through the Internal Developer Portal Catalog page and clicks on a service to show a dependency graph with parent and child services represented" video=true >}}

@@ -2133,11 +2133,6 @@ menu:
       parent: idp_eng_reports
       identifier: eng_reports_dora_metrics
       weight: 403
-    - name: Overview Pages
-      url: internal_developer_portal/overview_pages
-      parent: internal_developer_portal
-      identifier: idp_overview_pages
-      weight: 5
     - name: Integrations
       url: internal_developer_portal/integrations
       parent: internal_developer_portal
