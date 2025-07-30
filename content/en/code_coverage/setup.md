@@ -12,56 +12,58 @@ Code Coverage is in Preview. This product replaces Test Optimization's <a href="
 
 Setting up Code Coverage involves the following steps:
 
-1. Configure integration with your source code provider in the Datadog UI.
-2. Configure code coverage data access permissions in Datadog.
-3. Optionally, configure a PR Gate to block pull requests based on coverage thresholds.
-4. Update your CI pipeline to upload code coverage reports to Datadog.
+1. Configure the integration with your [source code provider](#integrate-with-source-code-provider) in the Datadog UI.
+2. Configure code coverage [data access permissions](#data-access-permissions) in Datadog.
+3. Optionally, configure a [PR Gate](#pr-gates) to block pull requests based on coverage thresholds.
+4. Update your CI pipeline to [upload code coverage reports](#upload-code-coverage-reports) to Datadog.
 
-## Source code provider integration
+## Integrate with source code provider
 
-GitHub is currently the only supported source code provider for Code Coverage.
+Code Coverage supports the following:
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
-Detailed instructions for integrating with GitHub are available in the [GitHub integration documentation][1].
+See the [GitHub integration documentation][1] for detailed instructions for integrating with GitHub.
 
 Code Coverage requires the following GitHub App permissions:
 | Permission | Access Level | Purpose |
 |---|---|---|
-| Contents | Read | To show source code in the detailed coverage UI. |
-| Pull Requests | Write | To show PR data in coverage UI and to write PR comments |
-| Checks | Write | To create coverage PR gates |
+| Contents | Read | Show source code in the detailed coverage UI. |
+| Pull Requests | Write | Show PR data in coverage UI and write PR comments. |
+| Checks | Write | Create coverage PR Gates. |
 
 The following webhooks are required:
 | Webhook | Purpose |
 |---|---|
-| Pull request | To receive PR data updates |
-| Pull request review | To receive PR data updates |
-| Pull request review comment | To receive PR data updates |
-| Push | To receive git commit metadata |
+| Pull request | Receive PR data updates. |
+| Pull request review | Receive PR data updates. |
+| Pull request review comment | Receive PR data updates. |
+| Push | Receive Git commit metadata. |
+
+<div class="alert alert-info">If you have a Datadog-managed Marketplace App or a custom app with default settings, the required permissions and webhooks are included.</div>
 
 [1]: /integrations/github/#github-apps-1
 {{% /tab %}}
 {{< /tabs >}}
 
-## Code coverage data access permissions
+## Data access permissions
 
-If you are using [custom roles][1] rather than [Datadog-managed roles][2], be sure to enable "Code Coverage Read" permission for the roles that need to be able to view code coverage data.
+If you are using [custom roles][1] rather than [Datadog-managed roles][2], be sure to enable the `Code Coverage Read` permission for the roles that need to view code coverage data.
 
-Navigate to [Roles settings][3], find the role you need, click `Edit`, add `Code Coverage Read` permission to the role, and save the changes.
+Navigate to [Roles settings][3], click `Edit` on the role you need, add the `Code Coverage Read` permission to the role, and save the changes.
 
-## Code coverage PR gating
+## PR Gates
 
-If you wish to gate on PR coverage, configure PR gating rules in Datadog.
+If you wish to gate on PR coverage, configure PR Gates rules in Datadog.
 
 Navigate to [PR Gates rule creation][4] and configure a rule to gate on total or patch coverage.
 
-## Code Coverage reports upload
+## Upload code coverage reports
 
 Update your CI pipeline to upload code coverage report files to Datadog.
 
-### Supported coverage formats
+### Supported coverage report formats
 
 Datadog supports the following coverage data formats:
 <details>
@@ -235,7 +237,7 @@ end_of_record
 </pre>
 </details>
 
-### Installing the Datadog CI CLI
+### Install the datadog-ci CLI
 
 Install the [`datadog-ci`][5] CLI globally using `npm`:
 
