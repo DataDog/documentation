@@ -543,46 +543,51 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-Starting in dd-trace-rb v1.9.0, you can use the Ruby tracer's API to track user events.
+Starting in dd-trace-rb v1.9.0, you can use the Ruby tracer's API to track user events. Version v2.19.0 of dd-trace-rb introduces new methods under the `Datadog::Kit::AppSec::Events::V2` namespace. Existing event tracking methods are retained for compatibility.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
-Traces containing login success/failure events can be queried using the following query `@appsec.security_activity:business_logic.users.login.success` or `@appsec.security_activity:business_logic.users.login.failure`.
-
 {{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```ruby
-require 'datadog/kit/appsec/events'
+require 'datadog/kit/appsec/events/v2'
 
-trace = Datadog::Tracing.active_trace
-# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
-Datadog::Kit::AppSec::Events.track_login_success(trace, user: { id: 'my_user_id' }, { 'usr.login': 'my_user_email' })
+# in a controller:
+login = 'user@some.com'
+user = 'some-user-id'    # user could be an ID. If no ID is available, any unique identifier works (username, email...)
+user = {                 # or user could be an object with an id and other fields
+  id: 'some-user-id',    # id is mandatory
+  email: 'user@some.com' # other fields are optional
+}
+metadata = { 'some.key': 'value' } # you can add arbitrary fields
+
+Datadog::Kit::AppSec::Events::V2.track_user_login_success(login, user, metadata)
 ```
 {{% /collapse-content %}}
 
 {{% collapse-content title="Login failure" level="h4" expanded="false" id="ruby-login-failure" %}}
 ```ruby
-require 'datadog/kit/appsec/events'
-trace = Datadog::Tracing.active_trace
+require 'datadog/kit/appsec/events/v2'
 
-# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
+# in a controller:
+login = 'user@some.com' # the string used by the user to log in
+user_exists = true      # if the user login exists in database for example
+metadata = { 'some.key': 'value' } # you can add arbitrary fields
 
-# if the user exists
-Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: true, { 'usr.login': 'my_user_email' })
-
-# if the user doesn't exist
-Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: false, { 'usr.login': 'my_user_email' })
+Datadog::Kit::AppSec::Events::V2.track_user_login_failure(login, user_exists, metadata)
 ```
 {{% /collapse-content %}}
 
 {{% collapse-content title="Custom business logic" level="h4" expanded="false" id="ruby-custom-business" %}}
 ```ruby
 require 'datadog/kit/appsec/events'
+
+# in a controller:
+span = nil
 trace = Datadog::Tracing.active_trace
+metadata = { 'usr.id': 'some-user-id' }
+event_name = 'users.signup'
 
-# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
-
-# Leveraging custom business logic tracking to track user signups
-Datadog::Kit::AppSec::Events.track('users.signup', trace, nil, { 'usr.id': 'my_user_id'})
+Datadog::Kit::AppSec::Events.track(event_name, trace, span, metadata)
 ```
 {{% /collapse-content %}}
 
