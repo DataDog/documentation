@@ -28,7 +28,7 @@ Datadog ingests the most granular raw values from Google Cloud Platform (GCP). A
 
    {{< img src="integrations/guide/gcp-metric-discrepancy/redis_instance.png" alt="redis_instance resource labels" >}}
 
-3. Graph the metric in GCP Metrics explorer.
+3. Graph the metric in the Google Cloud Metrics Explorer.
 
    You can search by `redis.googleapis.com/stats/cpu_utilization`.
    - Time: ideally in UTC for 1 hour.
