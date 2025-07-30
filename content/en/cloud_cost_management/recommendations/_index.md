@@ -309,7 +309,7 @@ multifiltersearch:
       resource_type: EBS
       recommendation_type: Over-provisioned EBS Volume IOPS
       recommendation_description: EBS Volumes where the amount of IOPS exceeds what is being used.
-      recommendation_prerequisites: "*[Amazon EC2 integration](/integrations/amazon_ec2/)"
+      recommendation_prerequisites: "[Amazon EC2 integration](/integrations/amazon_ec2/)"
     - category: Over-provisioned resource
       cloud_provider: AWS
       resource_type: RDS IOPS
@@ -321,19 +321,25 @@ multifiltersearch:
       resource_type: EBS IOPS
       recommendation_type: Over-provisioned EBS IOPS
       recommendation_description: An EBS volume using less than 80% of the provisioned IOPS for reads and writes.
-      recommendation_prerequisites: "*[Amazon EC2 integration](/integrations/amazon_ec2/)"
+      recommendation_prerequisites: "[Amazon EC2 integration](/integrations/amazon_ec2/)"
     - category: Over-provisioned resource
       cloud_provider: AWS
       resource_type: EBS Storage
       recommendation_type: Over-provisioned EBS Storage
       recommendation_description: An EBS volume with less than 20% of its storage capacity used.
-      recommendation_prerequisites: "*[Amazon EC2 integration](/integrations/amazon_ec2/)"
+      recommendation_prerequisites: "[Amazon EC2 integration](/integrations/amazon_ec2/)"
     - category: Over-provisioned resource
       cloud_provider: AWS
       resource_type: EBS Throughput
       recommendation_type: Over-provisioned EBS Throughput
       recommendation_description: An EBS volume using less than 80% of the provisioned throughput for reads and writes.
-      recommendation_prerequisites: "*[Amazon EC2 integration](/integrations/amazon_ec2/)"
+      recommendation_prerequisites: "[Amazon EC2 integration](/integrations/amazon_ec2/)"
+    - category: Over-provisioned resource
+      cloud_provider: AWS
+      resource_type: ECS Task Definition
+      recommendation_type: Downsize ECS Task Size
+      recommendation_description: An ECS task using less than 50% of its requested CPU or memory.
+      recommendation_prerequisites: "[Container Monitoring](/containers/)"
     - category: Over-provisioned resource
       cloud_provider: AWS
       resource_type: DynamoDB
@@ -542,7 +548,10 @@ The following are requirements necessary to receive Cloud Cost recommendations:
 For each cloud account that you would like to receive recommendations for:
 
 1. Configure [Cloud Cost Management][2] to send billing data to Datadog.
-1. Enable [resource collection][3] in the **Resource Collection** tab on the [AWS integration tile][4] or [Azure integration tile][8].
+   - For Azure, this requires using the App Registration method to collect billing data.
+1. Enable [resource collection][3] for recommendations.
+   - For AWS, enable resource collection in the **Resource Collection** tab on the [AWS integration tile][4].
+   - For Azure, enable resource collection with the appropriate integration. If your organization is on the Datadog US3 site, the [Azure Native Integration][9] enables this automatically through metrics collection. For all other sites, enabling resource collection within the [Azure integration tile][8] is required.
 1. Install the [Datadog Agent][5] (required for over-provisioned resource recommendations).
 
 **Note**: Cloud Cost Recommendations supports billing in customers' non-USD currencies.
@@ -570,4 +579,4 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [6]: /cloud_cost_management/container_cost_allocation/?tab=aws#cost-metrics
 [7]: /integrations/amazon_s3_storage_lens/
 [8]: https://app.datadoghq.com/integrations/azure
-[9]: /integrations/azure/#resource-collection
+[9]: /integrations/azure/
