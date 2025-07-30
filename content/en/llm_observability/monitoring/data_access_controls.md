@@ -1,7 +1,7 @@
 ---
-title: Access Controls
+title: Data Access Controls
 aliases:
-  - /llm_observability/access_controls
+  - /llm_observability/data_access_controls
 further_reading:
   - link: "https://www.datadoghq.com/blog/openai-agents-llm-observability/"
     tag: "Blog"
