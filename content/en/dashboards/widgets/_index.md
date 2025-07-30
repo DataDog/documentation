@@ -139,6 +139,10 @@ Custom links connect data values to URLs such as a Datadog page or your AWS cons
 
 To customize interactions with data inline your generic widgets, see [Custom Links][2].
 
+## Metrics info
+
+Click the kebab (three vertical dots) menu on a metric graph to find the **Metrics Info** option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
+
 ## Unit override
 
 Customize unit values displayed on widgets to add context to your data. For more use cases and information, see the [Customize your visualizations with unit overrides][3].
