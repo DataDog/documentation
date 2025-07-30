@@ -234,8 +234,8 @@ Click on the context menu (three vertical dots) of any dashboard graph to open a
 
 | Option                 | Description                                                        |
 |------------------------|--------------------------------------------------------------------|
-| Edit                              |  Edit the graph.                                        |
-| Clone                             |  Add an adjacent copy of the graph.                     |
+| Edit                              | Edit the graph.                                        |
+| Clone                             | Create an adjacent copy of the graph.                     |
 | Split graph                       | Create a [split graph][13].                             |
 | Create custom links               | Create [custom links](#custom-links).                   |
 | Create monitor                    | Create a monitor preconfigured with the graph's query.  |
