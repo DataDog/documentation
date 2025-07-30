@@ -189,15 +189,15 @@ To copy multiple screenboard widgets (edit mode only), <kbd>Shift</kbd> + click 
 
 **Note**: This only works when sharing within Datadog. It does not generate a preview image.
 
-## Widget graphs
+## Widget graph menus
 
-### Graph menus
+Hover your cursor over a graph to access the following menu options.
 
-#### View in full screen
+### View in full screen
 
 View the graph in [full screen mode](#full-screen).  
 
-#### Export
+### Export
 
 Click on the export icon of any dashboard graph to open an options menu:
 
@@ -206,7 +206,7 @@ Click on the export icon of any dashboard graph to open an options menu:
 | Copy                   | Create a copy of the dashboard graph.                              |
 | Share snapshot         | Create and send a snapshot of your graph.                          |
 
-##### Use within Datadog
+#### Use within Datadog
 
 | Option                 | Description                                                        |
 |------------------------|--------------------------------------------------------------------|
@@ -216,7 +216,7 @@ Click on the export icon of any dashboard graph to open an options menu:
 | Save to notebook       | Save the graph to a notebook.                                      |
 | Link to widget         | Get a link to the widget copied to your clipboard.                 |
 
-##### Share externally
+#### Share externally
 
 | Format | Instructions            |
 | -----  | ----------------------- |
@@ -224,11 +224,11 @@ Click on the export icon of any dashboard graph to open an options menu:
 | Download as SVG    | Download the widget in SVG format. |
 | Download as CSV    | Download the widget in CSV format. |
 
-#### Edit
+### Edit
 
 Click on the pencil icon of any dashboard graph to make edits.
 
-#### Additional options
+### Additional options
 
 Click on the context menu (three vertical dots) of any dashboard graph to open an options menu:
 
