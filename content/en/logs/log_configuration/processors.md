@@ -949,7 +949,7 @@ The Decoder processor translates binary-to-text encoded string fields (such as B
 
 - Hex format: Hex input can be decoded into either a string (UTF-8) or an integer.
 
-- Failure handling: If decoding fails (invalid input), the processor skips the transformation, and the log remains unchanged
+- Failure handling: If decoding fails (because of invalid input), the processor skips the transformation, and the log remains unchanged
 
 {{< tabs >}}
 {{% tab "UI" %}}
