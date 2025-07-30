@@ -761,11 +761,10 @@ components:
       schema:
         type: string
     ResourceID:
-      description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
-        `dashboard`, `integration-account`, `integration-service`, `integration-webhook`,
-        `notebook`, `reference-table`, `security-rule`, `slo`, `workflow`, `app-builder-app`,
-        `connection`, `connection-group`, `rum-application`, `cross-org-connection`,
-        `spreadsheet`.'
+      description: 'Identifier, formatted as `type:id`. Supported types: `dashboard`,
+        `integration-service`, `integration-webhook`, `notebook`, `reference-table`,
+        `security-rule`, `slo`, `workflow`, `app-builder-app`, `connection`, `connection-group`,
+        `rum-application`, `cross-org-connection`, `spreadsheet`.'
       example: dashboard:abc-def-ghi
       in: path
       name: resource_id
@@ -60399,8 +60398,6 @@ paths:
 
         - Dashboards: `dashboard`
 
-        - Integration Accounts: `integration-account`
-
         - Integration Services: `integration-service`
 
         - Integration Webhooks: `integration-webhook`
@@ -60445,8 +60442,6 @@ paths:
         ----------------------------|--------------------------
 
         Dashboards                  | `viewer`, `editor`
-
-        Integration Accounts        | `viewer`, `editor`
 
         Integration Services        | `viewer`, `editor`
 
