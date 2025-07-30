@@ -28,9 +28,9 @@ You can also customize these pages by adding attributes that matter most to your
 
 The [User Profiles][7] page lists the users who are interacting with your application. You can select a user to view detailed insights into their activity, including their most visited pages, frequent actions, and session history.
 
-{{< img src="product_analytics/user_profile2_july_25.png" alt="A view of the User profiles page." style="width:80%;" >}}
+{{< img src="product_analytics/user_profile2ui.png" alt="A view of the User profiles page." style="width:80%;" >}}
 
-Use the session history to identify [moments of frustration][9] and follow the **View Analytics** links to explore the related analytics.
+Use the session history to identify [moments of frustration][9] and follow the **View Analytics** links to explore the related analytics. 
 
 {{< img src="product_analytics/segmentation/pana_frustration_detected.png" alt="Explore the user profiles page and its session history." style="width:80%;">}}
 
@@ -127,7 +127,7 @@ Last Browser Version
 ### Account profiles 
 The Account Profiles page surfaces a list of the organizations interacting with your application.
 
-{{< img src="product_analytics/account_profile_july_25.png" alt="A view of the User profiles page." style="width:80%;" >}}
+{{< img src="product_analytics/account_profileui.png" alt="A view of the User profiles page." style="width:80%;" >}}
 
 Each profile includes four default attributes to help you identify and track account activity over time. These default attributes are:
 - `account_id`
@@ -154,7 +154,7 @@ On the [Integrations page][4], you can explore the integrations that are compati
 
 On this same page, you can select the [Custom Attributes][5] tab to view imported attributes for user and account profiles.
 
-{{< img src="product_analytics/integration_page3_july_25.png" alt="See the integrations that are compatible with Product Analytics." style="width:80%;" >}}
+{{< img src="product_analytics/integration_page3.png" alt="See the integrations that are compatible with Product Analytics." style="width:80%;" >}}
 
 To import attibutes from an integration such as Salesforce or Snowflake, select the **Add Attributes** button and choose whether the attributes are for user or account profiles. Then, follow the prompts to: 
 
@@ -164,17 +164,17 @@ To import attibutes from an integration such as Salesforce or Snowflake, select 
 
 1. Choose a **source of the data** to be imported.
 
-{{< img src="product_analytics/choose_integration_july_25.png" alt="Choose a source of the data to be imported." style="width:80%;" >}}
+{{< img src="product_analytics/choose_integration.png" alt="Choose a source of the data to be imported." style="width:80%;" >}}
 
 
 2. Select the **table** containing the desired user data, then select the **join keys** to merge the table with your profiles.
 
-{{< img src="product_analytics/add_table_and_key_july_25.png" alt="select the data to be merged with your profiles." style="width:80%;" >}}
+{{< img src="product_analytics/add_table_and_key.png" alt="select the data to be merged with your profiles." style="width:80%;" >}}
 
 
 3. Choose which **attributes from the integration** to add to your profiles.
 
-{{< img src="product_analytics/select_integration_attributes_july_25.png" alt="Add new attributes using to enrich your profiles." style="width:80%;" >}}
+{{< img src="product_analytics/select_integration_attributes.png" alt="Add new attributes using to enrich your profiles." style="width:80%;" >}}
 
 
 <br>
@@ -183,14 +183,14 @@ To import attibutes from an integration such as Salesforce or Snowflake, select 
 
 Importing custom attributes from a reference table follows the same steps as importing from an integration. The exception here is to select the reference table tile in step 1.
 
-{{< img src="product_analytics/choose_ref_table_july_25.png" alt="Choose the name of the reference table from which to import your data." style="width:80%;" >}}
+{{< img src="product_analytics/choose_ref_table.png" alt="Choose the name of the reference table from which to import your data." style="width:80%;" >}}
 
 
 ## How to query your custom attributes
 
 You can filter these custom attributes throughout the product analytics platform without needing to first add them to a [segment][6]. For example, you can create an analytics chart to view a time series of all users originating from a specific `org_id`. 
 
-{{< img src="product_analytics/query_custom_attribute_analytics_july_25.png" alt="Query your custom attributes in an analytics chart." style="width:80%;" >}}
+{{< img src="product_analytics/query_custom_attribute_analytics.png" alt="Query your custom attributes in an analytics chart." style="width:80%;" >}}
 
 
 ## Further reading
