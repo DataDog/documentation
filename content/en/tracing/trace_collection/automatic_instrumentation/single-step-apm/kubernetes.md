@@ -80,6 +80,7 @@ datadog:
       targets:
         - name: my-services
           podSelector:
+            # matchLabels: ...
             matchExpressions:
             - key: app-name           # Target pods with this label
               operator: Exists
