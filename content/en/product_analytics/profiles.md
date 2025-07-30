@@ -30,7 +30,7 @@ The [User Profiles][7] page lists the users who are interacting with your applic
 
 {{< img src="product_analytics/user_profile2_july_25.png" alt="A view of the User profiles page." style="width:80%;" >}}
 
-Use the session history to identify moments of [frustration][9] and follow the **View Analytics** links to explore the related analytics.
+Use the session history to identify [moments of frustration][9] and follow the **View Analytics** links to explore the related analytics.
 
 {{< img src="product_analytics/segmentation/pana_frustration_detected.png" alt="Explore the user profiles page and its session history." style="width:80%;">}}
 
