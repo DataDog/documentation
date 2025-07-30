@@ -49,6 +49,8 @@ For more information, see [Tracing Java Applications][1].
 
 To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows serverless-init to read logs from stdout and stderr.
 
+We also recommend setting the environment variable `DD_SOURCE=java` to enable advanced Datadog log parsing.
+
 If you want multiline logs to be preserved in a single log message, we recommend writing your logs in *compact* JSON format. For example, you can use a third-party logging library such as `Log4j 2`:
 ```java
 private static final Logger logger = LogManager.getLogger(App.class);

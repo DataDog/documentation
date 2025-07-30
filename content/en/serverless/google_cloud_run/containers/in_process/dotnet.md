@@ -36,6 +36,8 @@ For more information, see [Tracing .NET applications][2].
 
 To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows serverless-init to read logs from stdout and stderr.
 
+We also recommend setting the environment variable `DD_SOURCE=csharp` to enable advanced Datadog log parsing.
+
 If you want multiline logs to be preserved in a single log message, we recommend writing your logs in JSON format. For example, you can use a third-party logging library such as `Serilog`:
 ```csharp
 using Serilog;
