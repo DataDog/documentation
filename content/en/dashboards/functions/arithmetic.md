@@ -18,6 +18,12 @@ into this one `abs(sin{*})`:
 
 {{< img src="dashboards/functions/arithmetic/sinus_abs.png" alt="Sinus function with abs" style="width:80%;">}}
 
+## Exponent
+
+| Function | Description                             | Example                 |
+| :----    | :-------                                | :---------              |
+| `pow()`  | Graph the exponent of the metric. | `pow(<METRIC_NAME>{*}, INT)` |
+
 ## Logarithm
 
 ### Log base 2
