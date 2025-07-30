@@ -138,8 +138,8 @@ Use [Case Management][5] for signals of interest that require additional analysi
 Review the risky entities in your environment.
 
 - *Top Risky Entities:* See which entities have the highest risk scores at this time. Click on an entity to view more details and take action.
-- *Entity Type Breakdown:* Shows which types of entities are most common in your environment. Click to view a list of entities filtered by that type.
-- *Entities risk score breakdown:* View entities by severity. Click to view the entities explorer with a filtered view of entities by severity.
+- *Entity Type Breakdown:* See which types of entities are most common in your environment. Click on a pie chart wedge to view a list of entities filtered by that type.
+- *Entities risk score breakdown:* View entities by severity. Click a severity tile to see a list of entities with that severity.
 
 ### Threat map
 
@@ -148,17 +148,17 @@ Review the risky entities in your environment.
 Get insights from where the signals in your environment are getting generated.
 
 - *Top IPs by Country Distribution:* See which IPs are generating the most signals with a breakdown of important and less important signals. Also, use the map to see a list of signals by country.
-- *Signals by Country:* See the proportional breakdown from where signals are being generated. Click on the wedges to see signals by country and state/province, and spot signals being generated from unexpected countries.
-- *Signals by ISP Provider:* Review from which ISPs the signals are coming. Drill in by provider and location.
+- *Signals by Country:* See the proportional breakdown from where signals are being generated. Click on a pie chart wedge to see signals by country and state/province, and spot signals being generated from unexpected countries.
+- *Signals by ISP Provider:* Review from which ISPs the signals are coming. Click on a pie chart wedge to scope down by provider and location.
 
 ### Security overview
 
 {{< img src="security/security_monitoring/landing/05_security_overview.png" alt="" style="width:100%;" >}}
 
 A high-level overview of all signals.
-- *Signal Distribution:* On the left side of the page are a collection of KPIs showing signals by severity and trend over the selected time window.
-On the right is a graph allowing users to see a break down of signal activity by severity, source, and resolution. Click on any area to drill into a filtered view of the signal explorer.
-- *Mean Time to Respond to Signals:* Displays KPIs showing how quickly your team responds. Sets a signal to `under review` or `archive` by signal severity.
+- *Signal Distribution:* On the left side of the section, see signals grouped by severity and trend over the selected time window.
+On the right side, see a break down of signal activity by severity, source, and resolution. Click on a node in the sankey diagram to see signals in the Signal Explorer filtered to the specifics of that node.
+- *Mean Time to Respond to Signals:* See KPIs of how quickly your team responds. Sets a signal to `under review` or `archive` by signal severity.
 
 ### MITRE ATT&CK coverage
 
@@ -167,9 +167,9 @@ On the right is a graph allowing users to see a break down of signal activity by
 Detection rule coverage and signal activity by MITRE ATT&CK tactics and techniques.
 
 - *Techniques with at least 1 rule:* See how many techniques are covered by the detection rules currently enabled in your environment.
-- *Rule Density KPIs*: See how many techniques have high, medium, or low density or no rules at all. Click to view a filtered MITRE map.
-- *Signals per Tactic View:* See which MITRE ATT&CK tactics are generating signals. Click to view the signal explorer filtered by tactic. Use the toggle to show which tactics have the most rules mapped to it. When viewing by rule, clicking will create a filtered detection rule explorer view by that tactic.
-- *Signals per Technique View:* See which MITRE ATT&CK techniques are generating signals. Click to view the signal explorer filtered by technique. Use the toggle to show which techniques have the most rules mapped to it. When viewing by rule, clicking will create a filtered detection rule explorer view by that technique.
+- *Rule Density KPIs*: See how many techniques have high, medium, or low density or no rules at all. Click on a tile to view a filtered MITRE map.
+- *Signals per Tactic View:* See which MITRE ATT&CK tactics are generating signals. Click a pie chart wedge to view the Signal Explorer filtered by tactic. Click the dropdown and select **Rules count** to see which tactics have the most rules mapped to it. When viewing by rule count, clicking on a pie chart wedge creates a detection rule explorer view filtered by that tactic.
+- *Signals per Technique View:* See which MITRE ATT&CK techniques are generating signals. Click on a pie chart wedge to view the signal explorer filtered by technique. Click the dropdown and select **Rules count** to see which techniques have the most rules mapped to it. When viewing by rule count, clicking on a pie chart wedge creates a detection rule explorer view filtered by that technique.
 
 ### Detection rules performance
 
@@ -177,14 +177,14 @@ Detection rule coverage and signal activity by MITRE ATT&CK tactics and techniqu
 
 Gain a deeper understanding of detection rule performance. This section works best if you triage signals in Cloud SIEM.
 
-- *MTTD KPIs for Cloud SIEM:* See the Mean Time to Detect (MTTD) across all signals. The KPIs below show MTTD for critical, high, and medium signals.
-- *Signal Activity:* View signal trends over the selected time window. Click the filters at the bottom to drill in by severity, which can be useful for identifying unusual spikes or drops.
-- *Rules by Important Signal Change (1 week):* Shows which rules have increased important signal activity compared to the week prior. Clicking takes you to a filtered view of the Signal Explorer by that rule name.
-- *Signals by severity change (1 week):* View how the severities across all signals have changed compared to the week prior. Click to view a filtered view of the signal explorer by that severity.
-- *Important Signals by Archived Reason:* See how many signals were archived by each of the archive reasons. Click to view the Signal Explorer filtered by that archive reason.
-- *Rules Archived with True Positive (Malicious):* See which rules were archived as `True Positive: Malicious`. Click to view the signals in the signal explorer.
-- *Rules Archived with True Positive (Benign):* See which rules were archived as `True Positive: Benign`. Click to view the signals in the signal explorer.
-- *Rules by False Positive Rate:* Shows which rules are the noisiest by calculating the percentage of signals that are marked as false positive out of all the signals generated by a rule. Click to view a filtered view of the signal explorer by that rule.
+- *MTTD KPIs for Cloud SIEM:* See the Mean Time to Detect (MTTD) across all signals. The tiles below show MTTD for critical, high, and medium signals.
+- *Signal Activity:* View signal trends over the selected time window. Select the severity checkboxes at the bottom of the bar graph to scope by severity, which can be useful for identifying unusual spikes or drops.
+- *Rules by Important Signal Change (1 week):* See which rules have increased important signal activity compared to the week prior. Click a rule name to view signals in the Signal Explorer filtered by that rule name.
+- *Signals by severity change (1 week):* View how the severities across all signals have changed compared to the week prior. Click on a severity to view signals with that severity in the Signal Explorer.
+- *Important Signals by Archived Reason:* See how many signals were archived by archive reason. Click on a reason to view the Signal Explorer filtered by that archive reason.
+- *Rules Archived with True Positive (Malicious):* See which rules were archived as `True Positive: Malicious`. Click on a rule to view the signals in the Signal Explorer.
+- *Rules Archived with True Positive (Benign):* See which rules were archived as `True Positive: Benign`. Click on a rule to view the signals in the Signal Explorer.
+- *Rules by False Positive Rate:* See which rules are the noisiest by calculating the percentage of signals that are marked as false positive out of all the signals generated by a rule. Click on a rule to view signals for that rule in the Signal Explorer.
 
 ## Further reading
 
