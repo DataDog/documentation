@@ -60,7 +60,7 @@ Datadog Cloud SIEM (Security Information and Event Management) is a security dat
 
 Effective security response requires speed, context, insight, and automation. By continuously analyzing incoming data, Cloud SIEM detects threats, generates actionable security signals, and correlates those signals across multiple sources. This empowers your team to investigate incidents and respond quickly.
 
-To keep your team on top of the latest attacks, Datadog also has a team of threat researchers who analyze petabytes of telemetry across cloud and on-premises systems to identify emerging threats and attacker behaviors. See Datadog Security Labs to read articles about their recent investigations.
+To keep your team on top of the latest attacks, Datadog also has a team of threat researchers who analyze petabytes of telemetry across cloud and on-premises systems to identify emerging threats and attacker behaviors. See [Datadog Security Labs][1] to read articles about their recent investigations.
 
 ## Get started
 
