@@ -199,7 +199,7 @@ View the graph in [full screen mode](#full-screen).
 
 #### Export
 
-Click on the export icon of any dashboard graph to open an options menu.
+Click on the export icon of any dashboard graph to open an options menu:
 
 | Option                 | Description                                                        |
 |------------------------|--------------------------------------------------------------------|
@@ -230,7 +230,7 @@ Click on the pencil icon of any dashboard graph to make edits.
 
 #### Additional options
 
-Click on the context menu (three vertical dots) of any dashboard graph to open an options menu.
+Click on the context menu (three vertical dots) of any dashboard graph to open an options menu:
 
 | Option                 | Description                                                        |
 |------------------------|--------------------------------------------------------------------|
