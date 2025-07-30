@@ -124,7 +124,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `TO_TIMESTAMP(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.             |
 | `TO_CHAR(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.             |
 | `DATE_TRUNC(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.  |
-| `REGEXP_LIKE(string s, pattern p)`               | boolean                               | Evaluates whether a string matches a regular expression pattern.            |
+| `REGEXP_LIKE(string s, pattern p)`               | Boolean                               | Evaluates whether a string matches a regular expression pattern.            |
 | `REGEXP_MATCH(string s, pattern p)`              | array of strings                      | Returns substrings of the first pattern match in the string.                |
 | `REGEXP_REPLACE(string s, pattern p, string replacement)`| string                            | Replaces the first occurrence of the pattern in a string with the replacement.        |
 | `CARDINALITY(array a)`                           | integer                               | Returns the number of elements in the array.                                |
