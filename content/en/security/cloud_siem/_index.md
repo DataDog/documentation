@@ -111,7 +111,7 @@ View enabled content packs and integrations across the critical categories for p
 
 #### Content pack and logs health KPIs
 
-See whether any content packs or integrations are in warning or broken states so that you can quickly resolve any coverage gaps. Click a status tile to view the affected content packs.
+See whether any content packs or integrations are in warning or broken states so that you can resolve any coverage gaps. Click a status tile to view the affected content packs.
 
 #### Logs analyzed
 
@@ -184,7 +184,7 @@ Detection rule coverage and signal activity by MITRE ATT&CK tactics and techniqu
 
 #### Techniques with at least 1 rule
 
-See how many techniques are covered by the detection rules currently enabled in your environment.
+See how many techniques are covered by the detection rules enabled in your environment.
 
 #### Rule density KPIs
 
