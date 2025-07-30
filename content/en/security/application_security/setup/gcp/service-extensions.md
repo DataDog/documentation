@@ -495,14 +495,14 @@ Configure the container to send traces to your Datadog Agent using the following
 | `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                       |
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> The GCP Service Extensions integration is built on top of the Datadog Go Tracer. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
+  <strong>Note:</strong> The App and API Protection GCP Service Extensions integration is built on top of the Datadog Go Tracer. It generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.1.0</code>). In some cases, early release versions may be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
 </div>
 
 The GCP Service Extensions integration uses the [Datadog Go Tracer][6] and inherits all environment variables from the tracer. You can find more configuration options in [Configuring the Go Tracing Library][7] and [App and API Protection Library Configuration][8].
 
 ## Limitations
 
-The GCP Service Extensions have the following limitations:
+The GCP Service Extensions integration has the following limitations:
 
 * Inspection of request and response bodies is supported when using service extension callout image version `2.1.0` or later.
 

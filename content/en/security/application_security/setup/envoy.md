@@ -34,8 +34,10 @@ You can enable App and API Protection for the Envoy proxy. The Datadog Envoy int
 
 The App and API Protection Envoy integration uses the Envoy external processing filter.
 
-1. **Configure Envoy** to use the [external processing filter][3].
+1. **Update your Envoy configuration** to add the [external processing filter][3] to your `http_filters` list, and define the corresponding gRPC cluster in your `clusters` section.
 For example:
+
+   #### Http filters section
 
    ```yaml
    http_filters:
@@ -86,7 +88,11 @@ For example:
          #deferred_close_timeout: 5s
 
      # ... other filters
+   ```
 
+   #### Clusters section
+
+   ```yaml
    clusters:
        # ... other clusters
        - name: datadog_ext_proc_cluster
@@ -104,22 +110,21 @@ For example:
                  - endpoint:
                      address:
                        socket_address:
-                         address: Your Datadog image host from step 2
+                         address: 12.0.0.1 # Replace with the host address of the Datadog Envoy callout docker image (configured in the next step)
                          port_value: 443
    ```
 
-    **Note**: you need to replace `Your Datadog image host from step 2` in the above example with the host where the Datadog Envoy docker image is running. You will configure this host next.
-
-    You can find more configuration options available in the [Envoy external processor documentation][4].
+   **Note**: Please read the provided example carefully and adapt the configuration to match your infrastructure and environment. You can find more configuration options available in the [Envoy external processor documentation][4].
 
 2. **Run a new container with the Datadog Envoy Docker image.** The image is available on the [Datadog GitHub Registry][5].
 
    The Docker image exposes some settings specifically for the Envoy integration:
-   | Environment variable                   | Default value   | Description                                                       |
-   |----------------------------------------|-----------------|-------------------------------------------------------------------|
-   | `DD_SERVICE_EXTENSION_HOST`            | `0.0.0.0`       | gRPC server listening address.                                    |
-   | `DD_SERVICE_EXTENSION_PORT`            | `443`           | gRPC server port.                                                 |
-   | `DD_SERVICE_EXTENSION_HEALTHCHECK_PORT`| `80`            | HTTP server port for health checks.                               |
+   | Environment variable                   | Default value   | Description                                                                                                                              |
+   |----------------------------------------|-----------------|------------------------------------------------------------------------------------------------------------------------------------------|
+   | `DD_SERVICE_EXTENSION_HOST`            | `0.0.0.0`       | gRPC server listening address.                                                                                                           |
+   | `DD_SERVICE_EXTENSION_PORT`            | `443`           | gRPC server port.                                                                                                                        |
+   | `DD_SERVICE_EXTENSION_HEALTHCHECK_PORT`| `80`            | HTTP server port for health checks.                                                                                                      |
+   | `DD_APPSEC_BODY_PARSING_SIZE_LIMIT`    | `0`             | Maximum size of the bodies to be processed in bytes. If set to `0`, the bodies are not processed. (Recommended value: `10000000` (10MB)) |
 
    Configure the Datadog Agent to receive traces from the integration using the following environment variables:
    | Environment variable                   | Default value | Description                                                           |
@@ -133,17 +138,17 @@ For example:
 
 ## Datadog Go Tracer and Envoy integration
 
-  <div class="alert alert-warning">
-    <strong>Note:</strong> The App and API Protection Envoy integration is built on top of the Datadog Go Tracer. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
-  </div>
+<div class="alert alert-warning">
+  <strong>Note:</strong> The App and API Protection Envoy integration is built on top of the Datadog Go Tracer. It generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.1.0</code>). In some cases, early release versions may be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
+</div>
 
   The Envoy integration uses the [Datadog Go Tracer][6] and inherits all environment variables from the tracer. You can find more information in [Configuring the Go Tracing Library][7] and [App and API Protection Library Configuration][8].
 
 ## Limitations
 
-The available functionality for Envoy version `1.71.0` has the following important limitations:
+The Envoy integration has the following limitations:
 
-* The request body is not inspected, regardless of its content type.
+* Inspection of request and response bodies is supported when using service extension callout image version `2.1.0` or later.
 
 ## Further Reading
 
