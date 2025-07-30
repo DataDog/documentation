@@ -29,7 +29,7 @@ Click the full screen button on the top right-hand corner of the graph to see th
 
 {{< img src="metrics/units/metrics_units.png" alt="The units of a metrics graph in full screen mode" style="width:100%;">}}
 
-Use the **Metrics Info** option from the kebab (three vertical dots) menu to see a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
+On a metric graph, use the **Metrics Info** option from the kebab (three vertical dots) menu to see a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
 
 {{< img src="metrics/units/metrics_info.png" alt="The Metrics Info option from the expanded kebab (three vertical dots) menu" style="width:100%;">}}
 
