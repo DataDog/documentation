@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Use this guide to troubleshoot GCP metric discrepancy issues.
+Use this guide to troubleshoot metric discrepancies between Google Cloud and Datadog.
 
 ## Metric discrepancies
 
