@@ -16,7 +16,7 @@ further_reading:
 
 <div class="alert alert-warning">Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+</div>
 
-In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][3] instrument your applications with the Datadog APM SDKs, all together.
+In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][3] your applications with the Datadog APM SDKs in one step.
 
 ## Requirements
 
