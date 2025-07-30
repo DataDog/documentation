@@ -85,7 +85,7 @@ As your organization scales, controlling the ingestion cost of security logs wit
 - [Flex Logs][7] for logs that need to be retained long-term, but sometimes need to be queried urgently.
 - [Log Archives][8] for logs that are infrequently queried and need to be stored long-term, such as audit logs.
 
-## Cloud SIEM Overview Page
+## Cloud SIEM Overview page
 
 Navigate to the [Cloud SIEM Overview dashboard][2]. Use this dashboard to see key security insights and act on common workflows for security analysts, security and detection engineers, and Security Operations Center (SOC) managers. From the Overview page, you can:
 - Access important signals, open cases, and high-risk entities.
@@ -97,7 +97,7 @@ Navigate to the [Cloud SIEM Overview dashboard][2]. Use this dashboard to see ke
 
 Click **Customize Page** to reorder or hide modules so you can see what is important to you.
 
-Learn more below about each section of the Overview page.
+Learn more about each Cloud SIEM Overview page section below.
 
 ### Security coverage
 
