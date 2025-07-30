@@ -105,9 +105,17 @@ Learn more below about each section of the Overview page.
 
 Remain aware of any data processing issues or coverage gaps.
 
-- *Enabled Content Packs and Integrations:* View enabled content packs and integrations across the critical categories for providing comprehensive security coverage. Hover over each section of the horizontal bar to see which content packs are enabled in each category.
-- *Content Pack and Logs Health KPIs:* See whether any content packs or integrations are in warning or broken states so that you can quickly resolve any coverage gaps. Click a status tile to view the affected content packs.
-- *Logs Analyzed by Cloud SIEM:* View logging trends across your top log sources and quickly identify any unusual spikes or drops. Click on the legend at the bottom to explore trends on a per source basis.
+#### Enabled content packs and integrations
+
+View enabled content packs and integrations across the critical categories for providing comprehensive security coverage. Hover over each section of the horizontal bar to see which content packs are enabled in each category.
+
+#### Content pack and logs health KPIs
+
+See whether any content packs or integrations are in warning or broken states so that you can quickly resolve any coverage gaps. Click a status tile to view the affected content packs.
+
+#### Logs analyzed
+
+View logging trends across your top log sources and identify any unusual spikes or drops. Click on the legend at the bottom to explore trends on a per source basis.
 
 ### Important signals and cases
 
@@ -115,8 +123,13 @@ Remain aware of any data processing issues or coverage gaps.
 
 See important events happening in your environment, such as:
 
-- *Recent Open Signals Grouped By Rule:* See signals grouped by rule name and sorted by severity to get an overview of the most important signals in your environment. Click on a signal or a severity pill to see more details in a filtered view in the Signal Explorer.
-- *Recent Open Security Cases:* Use [Case Management][5] for signals of interest that require additional analysis. View the current security cases in your environment and click on a case to see more details.
+#### Recent open signals grouped by rule
+
+See signals grouped by rule name and sorted by severity to get an overview of the most important signals in your environment. Click on a signal or a severity pill to see more details in a filtered view in the Signal Explorer.
+
+#### Recent open security cases
+
+Use [Case Management][5] for signals of interest that require additional analysis. View the current security cases in your environment and click on a case to see more details.
 
 ### Risk insights
 
