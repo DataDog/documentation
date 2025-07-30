@@ -141,7 +141,7 @@ To customize interactions with data inline your generic widgets, see [Custom Lin
 
 ## Metrics info
 
-On a metric graph, click the kebab (three vertical dots) menu to find the **Metrics Info** option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
+On a metric graph, click the context menu (three vertical dots) to find the **Metrics Info** option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
 
 ## Unit override
 
@@ -191,28 +191,56 @@ To copy multiple screenboard widgets (edit mode only), <kbd>Shift</kbd> + click 
 
 ## Widget graphs
 
-### Export
+### Graph menus
 
-| Format | Instructions            |
-| -----  | ----------------------- |
-| PNG    | To download a widget in PNG format, click the export button in the upper right hand side of the widget, and select **Download as PNG**. |
-| CSV    | To download data from a timeseries, table, or top list widget in CSV format, click the export button in the upper right hand side of the widget, and select **Download as CSV**.|
+#### View in full screen
 
-### Graph menu
+View the graph in [full screen mode](#full-screen).  
 
-Click on any dashboard graph to open an options menu:
+#### Export
+
+Click on the export icon of any dashboard graph to open an options menu.
 
 | Option                 | Description                                                        |
 |------------------------|--------------------------------------------------------------------|
-| Send snapshot          | Create and send a snapshot of your graph.                          |
-| Find correlated metrics| Find correlations from APM services, integrations, and dashboards. |
-| View in full screen    | View the graph in [full screen mode][5].                           |
-| Lock cursor            | Lock the cursor in place on the page.                              |
-| View related processes | Jump to the [Live Processes][6] page scoped to your graph.         |
-| View related hosts     | Jump to the [Host Map][7] page scoped to your graph.               |
-| View related logs      | Jump to the [Log Explorer][8] page scoped to your graph.           |
-| View related traces    | Populate a [Traces][9] panel scoped to your graph.                 |
-| View related profiles  | Jump to the [Profiling][10] page scoped to your graph.             |
+| Copy                   | Create a copy of the dashboard graph.                              |
+| Share snapshot         | Create and send a snapshot of your graph.                          |
+
+##### Use within Datadog
+
+| Option                 | Description                                                        |
+|------------------------|--------------------------------------------------------------------|
+| Declare incident       | Declare an incident from the graph.                                |
+| Add to incident        | Add the graph to an existing incident.                             |
+| Create case            | Create a case from the graph.                                      |
+| Save to notebook       | Save the graph to a notebook.                                      |
+| Link to widget         | Get a link to the widget copied to your clipboard.                 |
+
+##### Share externally
+
+| Format | Instructions            |
+| -----  | ----------------------- |
+| Download as PNG    | Download the widget in PNG format. |
+| Download as SVG    | Download the widget in SVG format. |
+| Download as CSV    | Download the widget in CSV format. |
+
+#### Edit
+
+Click on the pencil icon of any dashboard graph to make edits.
+
+#### Additional options
+
+Click on the context menu (three vertical dots) of any dashboard graph to open an options menu.
+
+| Option                 | Description                                                        |
+|------------------------|--------------------------------------------------------------------|
+| Edit                              |  Edit the graph.                                        |
+| Clone                             |  Add an adjacent copy of the graph.                     |
+| Split graph                       | Create a [split graph][13].                             |
+| Create custom links               | Create [custom links](#custom-links).                   |
+| Create monitor                    | Create a monitor preconfigured with the graph's query.  |
+| Metrics info (metric graphs only) | Get a description of the metrics in this graph. You can click on the metric names to open them in the Metric Summary page.            |
+| Delete                            | Delete the graph.                                       |
 
 ## Further Reading
 
@@ -230,3 +258,4 @@ Click on any dashboard graph to open an options menu:
 [10]: /profiler/profile_visualizations/
 [11]: /dashboards/guide/custom_time_frames/
 [12]: /service_management/incident_management/datadog_clipboard/
+[13]: /dashboards/widgets/split_graph/
