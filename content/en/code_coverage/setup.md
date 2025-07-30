@@ -61,7 +61,7 @@ Navigate to [PR Gates rule creation][4] and configure a rule to gate on total or
 
 ## Upload code coverage reports
 
-Update your CI pipeline to upload code coverage report files to Datadog.
+Update your CI pipeline to upload code coverage report files to Datadog. This involves installing and running the `datadog-ci` CLI in your CI environment.
 
 ### Supported coverage report formats
 
@@ -285,7 +285,7 @@ Start-Process -FilePath "./datadog-ci.exe" -ArgumentList version
 
 ### Uploading coverage reports
 
-To upload your code coverage reports to Datadog, run the following command, providing a valid [DD API key][7] and one or more file paths to either the coverage report files directly or directories containing them:
+To upload your code coverage reports to Datadog, run the following command. Provide a valid [Datadog API key][7] (`DD_API_KEY`), and one or more file paths to either the coverage report files directly or directories containing them:
 
 {{< tabs >}}
 {{% tab "GitHub Actions" %}}
@@ -303,11 +303,11 @@ steps:
 {{% /tab %}}
 {{< /tabs >}}
 
-Provided directories are recursively searched for supported coverage report files, so specifying the current directory `.` is usually sufficient.
-See the [Datadog CI CLI documentation][8] for more details on the `datadog-ci coverage upload` command.
+The command recursively searches the specified directories for supported coverage report files, so specifying the current directory (`.`) is usually sufficient.
+See the [`datadog-ci` documentation][8] for more details on the `datadog-ci coverage upload` command.
 
-If everything is configured correctly, you will see a PR comment from Datadog with code coverage percentage values shortly after the code coverage upload is finished.
-You will also be able to view your coverage data aggregated by pull request in the [Code Coverage page][9] in Datadog, with the ability to drill down into individual files and lines of code.
+Shortly after the code coverage report upload is finished, Datadog adds a PR comment with code coverage percentage values.
+You can also view your coverage data aggregated by pull request in the [Code Coverage page][9] in Datadog, with the ability to examine individual files and lines of code.
 
 {{< img src="/code_coverage/pr_details.png" text="Code Coverage PR details page in Datadog" style="width:100%" >}}
 
