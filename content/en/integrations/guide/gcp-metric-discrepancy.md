@@ -18,7 +18,7 @@ Datadog ingests the most granular raw values from Google Cloud Platform (GCP). A
 
 1. Find the corresponding metric in GCP.
 
-   For GCP integration, Datadog converts GCP metrics into format gcp.`GCP_SERVICE_NAME`.`METRIC_NAME`. For the [example metric](https://cloud.google.com/monitoring/api/metrics_gcp_p_z#gcp-redis:~:text=of%20%5Bprimary%2C%20replica%5D.-,stats/cpu_utilization,-GA%20%E2%80%83(project)), the GCP service name is **redis** and the metric name is **stats/cpu_utilization**. The full metric name is `redis.googleapis.com/stats/cpu_utilization`.
+   For the GCP integration, Datadog converts GCP metrics into the format `gcp.GCP_SERVICE_NAME.METRIC_NAME`. For the [example metric](https://cloud.google.com/monitoring/api/metrics_gcp_p_z#gcp-redis:~:text=of%20%5Bprimary%2C%20replica%5D.-,stats/cpu_utilization,-GA%20%E2%80%83(project)), the GCP service name is **redis**, and the metric name is **stats/cpu_utilization**. The full metric name is `redis.googleapis.com/stats/cpu_utilization`.
 
 2. Find the most granular dimensions.
 
