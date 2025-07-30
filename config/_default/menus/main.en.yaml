@@ -4718,11 +4718,6 @@ menu:
       parent: llm_obs
       identifier: llm_obs_data_security_and_rbac
       weight: 6
-    - name: Data Access Controls
-      url: llm_observability/data_security_and_rbac/data_access_controls
-      parent: llm_obs_data_security_and_rbac
-      identifier: llm_obs_data_access_controls
-      weight: 601
     - name: Terms and Concepts
       url: llm_observability/terms/
       parent: llm_obs

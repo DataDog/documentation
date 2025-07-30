@@ -1,14 +1,16 @@
 ---
-title: Data Access Controls
-aliases:
-  - /llm_observability/data_access_controls
+title: Data Security and RBAC
 further_reading:
   - link: "/account_management/rbac/data_access"
     tag: "Documentation"
     text: "Learn more about data access controls"
 ---
+{{< whatsnext desc=" ">}}
+  {{< nextlink href="https://datadoghq.com/legal/hipaa-eligible-services">}}<u>HIPAA-Eligible Services</u>: Datadog Legal's list of HIPAA-eligible services{{< /nextlink >}}
+  {{< nextlink href="/llm_observability/evaluations/#sensitive-data-scanner-integration">}}<u>Sensitive Data Scanning for LLM Observability</u>: Redact sensitive information in your LLM application{{< /nextlink >}}
+{{< /whatsnext >}}
 
-## Overview
+## Data Access Control
 
 LLM Observability allows you to restrict access to potentially sensitive data associated with your ML applications to only certain teams and roles in your organization. This is particularly important when your LLM applications process sensitive information such as personal data, proprietary business information, or confidential user interactions.
 
