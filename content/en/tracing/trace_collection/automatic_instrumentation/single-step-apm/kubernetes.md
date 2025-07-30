@@ -47,7 +47,7 @@ Unified Service Tags (USTs) apply consistent tags across traces, metrics, and lo
 
 ### Prerequisites
 
-To use the recommended ddTraceConfigs approach, ensure you have:
+To use the recommended ddTraceConfigs approach, ensure you have the following software components:
 
 | Component | Minimum Version | Notes |
 |-----------|-----------------|-------|
