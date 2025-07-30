@@ -1,38 +1,5 @@
 ---
 app_id: consul
-app_uuid: d0b52e9d-6594-4ff5-9b66-800943f75756
-assets:
-  dashboards:
-    consul: assets/dashboards/consul_overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: true
-    metrics:
-      check: consul.peers
-      metadata_path: metadata.csv
-      prefix: consul.
-    process_signatures:
-    - consul agent
-    - consul_agent
-    - consul-agent
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 122
-    source_type_name: Consul
-  monitors:
-    consul: assets/monitors/consul_status.json
-  saved_views:
-    consul_errors: assets/saved_views/consul_errors.json
-    consul_overview: assets/saved_views/consul_overview.json
-    consul_processes: assets/saved_views/consul_processes.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
 - configuration & deployment
 - containers
@@ -41,61 +8,35 @@ categories:
 - notifications
 - orchestration
 custom_kind: integration
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/consul/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: consul
-integration_id: consul
-integration_title: Consul
-integration_version: 2.6.1
-is_public: true
-manifest_version: 2.0.0
-name: consul
-public_title: Consul
-short_description: Consul 健全性チェックのアラート、サービス/ノードマッピングの表示、その他
+description: Consul のヘルス チェックにアラートを設定し、サービスとノードのマッピングを表示 … more.
+further_reading:
+- link: https://docs.datadoghq.com/integrations/guide/hcp-consul
+  tag: documentation
+  text: Datadog を使用した HCP Consul の監視
+- link: https://www.datadoghq.com/blog/monitor-consul-health-and-performance-with-datadog
+  tag: blog
+  text: Datadog で Consul のヘルスとパフォーマンスを監視
+- link: https://www.datadoghq.com/blog/engineering/consul-at-datadog/
+  tag: blog
+  text: Consul at Datadog
+- link: https://www.datadoghq.com/blog/consul-metrics/
+  tag: blog
+  text: Consul を監視するキー メトリクス
+- link: https://www.datadoghq.com/blog/consul-monitoring-tools/
+  tag: blog
+  text: Consul 監視ツール
+- link: https://www.datadoghq.com/blog/consul-datadog/
+  tag: blog
+  text: Consul を Datadog で監視する方法
+integration_version: 5.0.0
+media: []
 supported_os:
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::構成 & デプロイ
-  - Category::コンテナ
-  - Category::Log Collection
-  - Category::ネットワーク
-  - Category::Notifications
-  - Category::オーケストレーション
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Consul 健全性チェックのアラート、サービス/ノードマッピングの表示、その他
-  media: []
-  overview: README.md#Overview
-  resources:
-  - resource_type: ドキュメント
-    url: https://docs.datadoghq.com/integrations/guide/hcp-consul
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/monitor-consul-health-and-performance-with-datadog
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/engineering/consul-at-datadog/
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/consul-metrics/
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/consul-monitoring-tools/
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/consul-datadog/
-  support: README.md#Support
-  title: Consul
+title: Consul
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
-
-
-![Consul ダッシュ][1]
+![Consul Dash](https://raw.githubusercontent.com/DataDog/integrations-core/master/consul/images/consul-dash.png)
 
 ## 概要
 
@@ -120,12 +61,13 @@ _Consul_ Agent は DogStatsD を使ってさらに多くのメトリクスを提
 
 ### インストール
 
-Datadog Agent の Consul チェックは [Datadog Agent][2] パッケージに含まれています。Consul ノードに追加でインストールする必要はありません。
+Datadog Agent の Consul チェックは [Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest) パッケージに含まれているため、Consul ノードに追加でインストールする必要はありません。
 
-### 構成
+### 設定
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+
+{{% tab "Host" %}}
 
 #### ホスト
 
@@ -133,7 +75,7 @@ Datadog Agent の Consul チェックは [Datadog Agent][2] パッケージに�
 
 ##### メトリクスの収集
 
-1. Consul のメトリクスの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `consul.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル consul.d/conf.yaml][2] を参照してください。
+1. Consul メトリクスの収集を開始するには、`conf.d/` フォルダーにある `consul.d/conf.yaml` ファイルを編集してください。[エージェントの設定ディレクトリ](https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory) のルートにあります。すべての設定オプションについては、[サンプル consul.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/conf.yaml.example) を参照してください。
 
    ```yaml
    init_config:
@@ -147,7 +89,7 @@ Datadog Agent の Consul チェックは [Datadog Agent][2] パッケージに�
      - url: http://localhost:8500
    ```
 
-2. [Agent を再起動します][3]。
+1. [Restart the Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ###### OpenMetrics
 
@@ -155,44 +97,45 @@ Datadog Agent の Consul チェックは [Datadog Agent][2] パッケージに�
 
 **注**: DogStatsD または Prometheus メソッドを使用し、同じインスタンスに両方を有効化しないようご注意ください。
 
-1. Consul を構成し、Prometheus のエンドポイントにメトリクスを公開します。[`prometheus_retention_time`][4] を、メインの Consul コンフィギュレーションファイルの最上位レベルの `telemetry` キーにネストするよう設定します。
+1. Prometheus エンドポイントへメトリクスを公開するよう Consul を構成します。メインの Consul 構成ファイルのトップレベル `telemetry` キー配下に [`prometheus_retention_time`](https://www.consul.io/docs/agent/options#telemetry-prometheus_retention_time) を設定してください。
 
-    ```conf
-    {
-      ...
-      "telemetry": {
-        "prometheus_retention_time": "360h"
-      },
-      ...
-    }
-    ```
+   ```conf
+   {
+     ...
+     "telemetry": {
+       "prometheus_retention_time": "360h"
+     },
+     ...
+   }
+   ```
 
-2. Prometheus エンドポイントの使用を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーで `consul.d/conf.yaml` ファイルを編集します。
-    ```yaml
-    instances:
-        - url: <EXAMPLE>
-          use_prometheus_endpoint: true
-    ```
+1. Prometheus エンドポイントを使用するには、[Agent 構成ディレクトリ](https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory) 直下の `conf.d/` フォルダーにある `consul.d/conf.yaml` を編集します。
 
-3. [Agent を再起動します][3]。
+   ```yaml
+   instances:
+       - url: <EXAMPLE>
+         use_prometheus_endpoint: true
+   ```
+
+1. [Restart the Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ##### DogStatsD
 
-Prometheus エンドポイントを使用する代わりに、[DogStatsD][5] を介して同じ追加メトリクスのセットを Agent に送信するように Consul を構成できます。
+Prometheus エンドポイントの代わりに、[DogStatsD](https://docs.datadoghq.com/developers/dogstatsd/) を使用して同じ追加メトリクスを Agent へ送信するよう Consul を構成できます。
 
 1. Consul のメインのコンフィギュレーションファイルで、最上位レベルの `telemetry` キーの下にネストした `dogstatsd_addr` を追加することで、DogStatsD メトリクスを送信するよう Consul を構成します。
 
-    ```conf
-    {
-      ...
-      "telemetry": {
-        "dogstatsd_addr": "127.0.0.1:8125"
-      },
-      ...
-    }
-    ```
+   ```conf
+   {
+     ...
+     "telemetry": {
+       "dogstatsd_addr": "127.0.0.1:8125"
+     },
+     ...
+   }
+   ```
 
-2. メトリクスが正しくタグ付けされるよう下記のコンフィギュレーションを追加し、[Datadog Agent のメインコンフィギュレーションファイル][6]である `datadog.yaml` を更新します。
+1. メトリクスに正しいタグを付与するため、[Datadog Agent メイン構成ファイル](https://docs.datadoghq.com/agent/guide/agent-configuration-files/) `datadog.yaml` を更新し、以下の設定を追加してください。
 
    ```yaml
    # dogstatsd_mapper_cache_size: 1000  # default to 1000
@@ -223,7 +166,7 @@ Prometheus エンドポイントを使用する代わりに、[DogStatsD][5] を
              peer_id: "$1"
    ```
 
-3. [Agent を再起動します][3]。
+1. [Restart the Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ##### ログ収集
 
@@ -235,7 +178,7 @@ _Agent バージョン 6.0 以降で利用可能_
    logs_enabled: true
    ```
 
-2. `consul.yaml` ファイルでこのコンフィギュレーションブロックを編集して、Consul ログを収集します。
+1. `consul.yaml` ファイルでこのコンフィギュレーションブロックを編集して、Consul ログを収集します。
 
    ```yaml
    logs:
@@ -246,22 +189,17 @@ _Agent バージョン 6.0 以降で利用可能_
    ```
 
    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。
-   使用可能なすべてのコンフィギュレーションオプションについては、[サンプル consul.d/conf.yaml][2] を参照してください。
+   利用可能なすべての設定オプションについては、[サンプル consul.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/conf.yaml.example) を参照してください。
 
-3. [Agent を再起動します][3]。
+1. [Restart the Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
-[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[2]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://www.consul.io/docs/agent/options#telemetry-prometheus_retention_time
-[5]: https://docs.datadoghq.com/ja/developers/dogstatsd/
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ化環境の場合は、パラメータの適用方法について [自動検出 インテグレーション テンプレート](https://docs.datadoghq.com/agent/kubernetes/integrations/) を参照してください。
 
 ##### メトリクスの収集
 
@@ -275,21 +213,19 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
+Datadog Agent ではログ収集はデフォルトで無効になっています。有効にするには、[Kubernetes のログ収集](https://docs.datadoghq.com/agent/kubernetes/log/) を参照してください。
 
 | パラメーター      | 値                                               |
 | -------------- | --------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "consul", "service": "<サービス名>"}` |
 
-
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
+
 {{< /tabs >}}
 
 ### 検証
 
-[Agent の status サブコマンドを実行][3]し、Checks セクションで `consul` を探します。
+[Agent の status サブコマンド](https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) を実行し、Checks セクションで `consul` を探します。
 
 **注**: Consul ノードでデバッグログが有効になっている場合は、Datadog Agent の通常のポーリングが Consul ログに以下を表示します。
 
@@ -315,49 +251,209 @@ udp        0      0 127.0.0.1:53874         127.0.0.1:8125          ESTABLISHED 
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "consul" >}}
 
+| | |
+| --- | --- |
+| **consul.catalog.nodes_critical** <br>(gauge) | \[Integration\] 登録済みノードのうち service ステータスが `critical` のノード数<br>_node として表示_ |
+| **consul.catalog.nodes_passing** <br>(gauge) | \[Integration\] 登録済みノードのうち service ステータスが `passing` のノード数<br>_node として表示_ |
+| **consul.catalog.nodes_up** <br>(gauge) | \[Integration\] ノード数<br>_node として表示_ |
+| **consul.catalog.nodes_warning** <br>(gauge) | \[Integration\] 登録済みノードのうち service ステータスが `warning` のノード数<br>_node として表示_ |
+| **consul.catalog.services_count** <br>(gauge) | \[Integration\] service タグ、ノード名、ステータスなどの条件に一致する service 数をカウントするメトリクス。`sum by` アグリゲータでクエリします。<br>_service として表示_ |
+| **consul.catalog.services_critical** <br>(gauge) | \[Integration\] ノード上の critical service 合計<br>_service として表示_ |
+| **consul.catalog.services_passing** <br>(gauge) | \[Integration\] ノード上の passing service 合計<br>_service として表示_ |
+| **consul.catalog.services_up** <br>(gauge) | \[Integration\] ノード上で登録されている service 合計<br>_service として表示_ |
+| **consul.catalog.services_warning** <br>(gauge) | \[Integration\] ノード上の warning service 合計<br>_service として表示_ |
+| **consul.catalog.total_nodes** <br>(gauge) | \[Integration\] Consul クラスターに登録されているノード数<br>_node として表示_ |
+| **consul.check.up** <br>(gauge) | サービス チェックのステータスを表すメトリクス。0 = unavailable、1 = passing、2 = warning、3 = critical。|
+| **consul.client.rpc** <br>(count) | \[DogStatsD\] \[Prometheus\] クライアント モードの Consul エージェントが Consul サーバーへ RPC リクエストを送信するたびにインクリメントされます。これは当該エージェントが Consul サーバーに与える負荷を示します。サーバーでは生成されず、クライアント モードのエージェントのみが生成します。<br>_request として表示_ |
+| **consul.client.rpc.failed** <br>(count) | \[DogStatsD\] \[Prometheus\] クライアント モードの Consul エージェントが Consul サーバーへ RPC リクエストを送信し失敗したときにインクリメントされます<br>_request として表示_ |
+| **consul.http.request** <br>(gauge) | \[DogStatsD\] 指定された HTTP リクエスト (メソッドとパス) を処理するのにかかった時間を計測します。README で説明されている DogStatsD マッパを使用すると、パスはタグにマッピングされ、service 名やキー名などの詳細は含まれません。これらのパスにはプレースホルダーとしてアンダースコアが含まれます (例: `http_method:GET, path:v1.kv._)`)<br>_millisecond として表示_ |
+| **consul.http.request.count** <br>(count) | \[Prometheus\] 指定された HTTP リクエスト (メソッドとパス) を処理するのにかかった時間のカウント。パスとメソッドのラベルを含みます。パスには service 名やキー名などの詳細は含まれず、プレースホルダーとしてアンダースコアが含まれます (例: `path=v1.kv._)`)<br>_millisecond として表示_ |
+| **consul.http.request.quantile** <br>(gauge) | \[Prometheus\] 指定された HTTP リクエスト (メソッドとパス) を処理するのにかかった時間の分位数。パスとメソッドのラベルを含みます。パスには service 名やキー名などの詳細は含まれず、プレースホルダーとしてアンダースコアが含まれます (例: `path=v1.kv._)`)<br>_millisecond として表示_ |
+| **consul.http.request.sum** <br>(count) | \[Prometheus\] 指定された HTTP リクエスト (メソッドとパス) を処理するのにかかった時間の合計。パスとメソッドのラベルを含みます。パスには service 名やキー名などの詳細は含まれず、プレースホルダーとしてアンダースコアが含まれます (例: `path=v1.kv._)`)<br>_millisecond として表示_ |
+| **consul.memberlist.degraded.probe** <br>(gauge) | \[DogStatsD\] \[Prometheus\] このメトリクスは Consul エージェントが低速プローブ レートで他エージェントへ障害検出を実行した回数をカウントします。エージェントは自身のヘルス メトリクスを指標とし、ヘルス スコアが低いほどノードは健全であることを示します。|
+| **consul.memberlist.gossip.95percentile** <br>(gauge) | \[DogStatsD\] ランダムに選択されたノード集合へブロードキャストされたゴシップ (メッセージ) 数の p95<br>_message として表示_ |
+| **consul.memberlist.gossip.avg** <br>(gauge) | \[DogStatsD\] ランダムに選択されたノード集合へブロードキャストされたゴシップ (メッセージ) 数の平均<br>_message として表示_ |
+| **consul.memberlist.gossip.count** <br>(count) | \[DogStatsD\] \[Prometheus\] consul.memberlist.gossip のサンプル数|
+| **consul.memberlist.gossip.max** <br>(gauge) | \[DogStatsD\] ランダムに選択されたノード集合へブロードキャストされたゴシップ (メッセージ) 数の最大値<br>_message として表示_ |
+| **consul.memberlist.gossip.median** <br>(gauge) | \[DogStatsD\] ランダムに選択されたノード集合へブロードキャストされたゴシップ (メッセージ) 数の中央値<br>_message として表示_ |
+| **consul.memberlist.gossip.quantile** <br>(gauge) | \[Prometheus\] ランダムに選択されたノード集合へブロードキャストされたゴシップ (メッセージ) 数の分位数<br>_message として表示_ |
+| **consul.memberlist.gossip.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] ランダムに選択されたノード集合へブロードキャストされたゴシップ (メッセージ) 数の合計<br>_message として表示_ |
+| **consul.memberlist.health.score** <br>(gauge) | \[DogStatsD\] \[Prometheus\] このメトリクスはプロトコルのソフト リアルタイム要件を満たす度合いに基づき、ノードが自身の健全性をどのように認識しているかを示します。値は 0〜8 で、0 は「完全に健全」を示します。詳細は Lifeguard ペーパー (セクション IV) を参照してください: https://arxiv.org/pdf/1707.00788.pdf|
+| **consul.memberlist.msg.alive** <br>(count) | \[DogStatsD\] \[Prometheus\] ネットワーク レイヤーのメッセージ情報に基づいて、これまでに把握した稼働中の Consul エージェント数をカウントします。|
+| **consul.memberlist.msg.dead** <br>(count) | \[DogStatsD\] \[Prometheus\] Consul エージェントが他エージェントを dead ノードとしてマークした回数をカウントします<br>_message として表示_ |
+| **consul.memberlist.msg.suspect** <br>(count) | \[DogStatsD\] \[Prometheus\] Consul エージェントがゴシップ プロトコルのプローブ中に他エージェントを失敗と疑った回数|
+| **consul.memberlist.probenode.95percentile** <br>(gauge) | \[DogStatsD\] 選択された Consul エージェントに対して 1 回の障害検出ラウンドを実行するのに要した時間の p95<br>_node として表示_ |
+| **consul.memberlist.probenode.avg** <br>(gauge) | \[DogStatsD\] 選択された Consul エージェントに対して 1 回の障害検出ラウンドを実行するのに要した時間の平均<br>_node として表示_ |
+| **consul.memberlist.probenode.count** <br>(count) | \[DogStatsD\] \[Prometheus\] consul.memberlist.probenode のサンプル数|
+| **consul.memberlist.probenode.max** <br>(gauge) | \[DogStatsD\] 選択された Consul エージェントに対して 1 回の障害検出ラウンドを実行するのに要した時間の最大値<br>_node として表示_ |
+| **consul.memberlist.probenode.median** <br>(gauge) | \[DogStatsD\] 選択された Consul エージェントに対して 1 回の障害検出ラウンドを実行するのに要した時間の中央値<br>_node として表示_ |
+| **consul.memberlist.probenode.quantile** <br>(gauge) | \[Prometheus\] 選択された Consul エージェントに対して 1 回の障害検出ラウンドを実行するのに要した時間の分位数<br>_node として表示_ |
+| **consul.memberlist.probenode.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] 選択された Consul エージェントに対して 1 回の障害検出ラウンドを実行するのに要した時間の合計<br>_node として表示_ |
+| **consul.memberlist.pushpullnode.95percentile** <br>(gauge) | \[DogStatsD\] このエージェントと状態を交換した Consul エージェント数の p95<br>_node として表示_ |
+| **consul.memberlist.pushpullnode.avg** <br>(gauge) | \[DogStatsD\] このエージェントと状態を交換した Consul エージェント数の平均<br>_node として表示_ |
+| **consul.memberlist.pushpullnode.count** <br>(count) | \[DogStatsD\] \[Prometheus\] consul.memberlist.pushpullnode のサンプル数|
+| **consul.memberlist.pushpullnode.max** <br>(gauge) | \[DogStatsD\] このエージェントと状態を交換した Consul エージェント数の最大値<br>_node として表示_ |
+| **consul.memberlist.pushpullnode.median** <br>(gauge) | \[DogStatsD\] このエージェントと状態を交換した Consul エージェント数の中央値<br>_node として表示_ |
+| **consul.memberlist.pushpullnode.quantile** <br>(gauge) | \[Prometheus\] このエージェントと状態を交換した Consul エージェント数の分位数|
+| **consul.memberlist.pushpullnode.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] このエージェントと状態を交換した Consul エージェント数の合計|
+| **consul.memberlist.tcp.accept** <br>(count) | \[DogStatsD\] \[Prometheus\] Consul エージェントが受信 TCP ストリーム接続を受け入れた回数をカウントします<br>_connection として表示_ |
+| **consul.memberlist.tcp.connect** <br>(count) | \[DogStatsD\] \[Prometheus\] Consul エージェントが他エージェントと push/pull 同期を開始した回数をカウントします<br>_connection として表示_ |
+| **consul.memberlist.tcp.sent** <br>(count) | \[DogStatsD\] \[Prometheus\] Consul エージェントが TCP プロトコルで送信したバイト総数を計測します<br>_byte として表示_ |
+| **consul.memberlist.udp.received** <br>(count) | \[DogStatsD\] \[Prometheus\] Consul エージェントが UDP プロトコルで送受信したバイト総数を計測します<br>_byte として表示_ |
+| **consul.memberlist.udp.sent** <br>(count) | \[DogStatsD\] \[Prometheus\] Consul エージェントが UDP プロトコルで送受信したバイト総数を計測します<br>_byte として表示_ |
+| **consul.net.node.latency.max** <br>(gauge) | \[Integration\] このノードから他のすべてのノードへの最大レイテンシー<br>_millisecond として表示_ |
+| **consul.net.node.latency.median** <br>(gauge) | \[Integration\] このノードから他のすべてのノードへの中央値レイテンシー<br>_millisecond として表示_ |
+| **consul.net.node.latency.min** <br>(gauge) | \[Integration\] このノードから他のすべてのノードへの最小レイテンシー<br>_millisecond として表示_ |
+| **consul.net.node.latency.p25** <br>(gauge) | \[Integration\] このノードから他のすべてのノードへの P25 レイテンシー<br>_millisecond として表示_ |
+| **consul.net.node.latency.p75** <br>(gauge) | \[Integration\] このノードから他のすべてのノードへの P75 レイテンシー<br>_millisecond として表示_ |
+| **consul.net.node.latency.p90** <br>(gauge) | \[Integration\] このノードから他のすべてのノードへの P90 レイテンシー<br>_millisecond として表示_ |
+| **consul.net.node.latency.p95** <br>(gauge) | \[Integration\] このノードから他のすべてのノードへの P95 レイテンシー<br>_millisecond として表示_ |
+| **consul.net.node.latency.p99** <br>(gauge) | \[Integration\] このノードから他のすべてのノードへの P99 レイテンシー<br>_millisecond として表示_ |
+| **consul.peers** <br>(gauge) | \[Integration\] ピア セット内のピア数|
+| **consul.raft.apply** <br>(count) | \[DogStatsD\] \[Prometheus\] 発生している Raft トランザクション数<br>_transaction として表示_ |
+| **consul.raft.commitTime.95percentile** <br>(gauge) | \[DogStatsD\] リーダーで Raft ログに新しいエントリをコミットするのに要する時間の p95<br>_millisecond として表示_ |
+| **consul.raft.commitTime.avg** <br>(gauge) | \[DogStatsD\] リーダーで Raft ログに新しいエントリをコミットするのに要する時間の平均<br>_millisecond として表示_ |
+| **consul.raft.commitTime.count** <br>(count) | \[DogStatsD\] \[Prometheus\] raft.commitTime のサンプル数|
+| **consul.raft.commitTime.max** <br>(gauge) | \[DogStatsD\] リーダーで Raft ログに新しいエントリをコミットするのに要する時間の最大値<br>_millisecond として表示_ |
+| **consul.raft.commitTime.median** <br>(gauge) | \[DogStatsD\] リーダーで Raft ログに新しいエントリをコミットするのに要する時間の中央値<br>_millisecond として表示_ |
+| **consul.raft.commitTime.quantile** <br>(gauge) | \[Prometheus\] リーダーで Raft ログに新しいエントリをコミットするのに要する時間の分位数<br>_millisecond として表示_ |
+| **consul.raft.commitTime.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] リーダーで Raft ログに新しいエントリをコミットするのに要する時間の合計<br>_millisecond として表示_ |
+| **consul.raft.leader.dispatchLog.95percentile** <br>(gauge) | \[DogStatsD\] リーダーがログ エントリをディスクに書き込むのに要する時間の p95<br>_millisecond として表示_ |
+| **consul.raft.leader.dispatchLog.avg** <br>(gauge) | \[DogStatsD\] リーダーがログ エントリをディスクに書き込むのに要する時間の平均<br>_millisecond として表示_ |
+| **consul.raft.leader.dispatchLog.count** <br>(count) | \[DogStatsD\] \[Prometheus\] raft.leader.dispatchLog のサンプル数|
+| **consul.raft.leader.dispatchLog.max** <br>(gauge) | \[DogStatsD\] リーダーがログ エントリをディスクに書き込むのに要する時間の最大値<br>_millisecond として表示_ |
+| **consul.raft.leader.dispatchLog.median** <br>(gauge) | \[DogStatsD\] リーダーがログ エントリをディスクに書き込むのに要する時間の中央値<br>_millisecond として表示_ |
+| **consul.raft.leader.dispatchLog.quantile** <br>(gauge) | \[Prometheus\] リーダーがログ エントリをディスクに書き込むのに要する時間の分位数<br>_millisecond として表示_ |
+| **consul.raft.leader.dispatchLog.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] リーダーがログ エントリをディスクに書き込むのに要する時間の合計<br>_millisecond として表示_ |
+| **consul.raft.leader.lastContact.95percentile** <br>(gauge) | \[DogStatsD\] フォロワーとのリースを最後に確認してから経過した時間の p95<br>_millisecond として表示_ |
+| **consul.raft.leader.lastContact.avg** <br>(gauge) | \[DogStatsD\] フォロワーとのリースを最後に確認してから経過した時間の平均<br>_millisecond として表示_ |
+| **consul.raft.leader.lastContact.count** <br>(count) | \[DogStatsD\] \[Prometheus\] raft.leader.lastContact のサンプル数|
+| **consul.raft.leader.lastContact.max** <br>(gauge) | \[DogStatsD\] フォロワーとのリースを最後に確認してから経過した時間の最大値<br>_millisecond として表示_ |
+| **consul.raft.leader.lastContact.median** <br>(gauge) | \[DogStatsD\] フォロワーとのリースを最後に確認してから経過した時間の中央値<br>_millisecond として表示_ |
+| **consul.raft.leader.lastContact.quantile** <br>(gauge) | \[Prometheus\] フォロワーとのリースを最後に確認してから経過した時間の分位数<br>_millisecond として表示_ |
+| **consul.raft.leader.lastContact.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] フォロワーとのリースを最後に確認してから経過した時間の合計<br>_millisecond として表示_ |
+| **consul.raft.replication.appendEntries.logs** <br>(count) | \[DogStatsD\] \[Prometheus\] エージェントへ複製されたログ エントリ数 (リーダーのログとの差分を解消するため)<br>_entry として表示_ |
+| **consul.raft.replication.appendEntries.rpc.count** <br>(count) | \[DogStatsD\] \[Prometheus\] append entries RFC がリーダー エージェントのログ エントリをフォロワー エージェントに複製するのに要した時間のカウント<br>_millisecond として表示_ |
+| **consul.raft.replication.appendEntries.rpc.quantile** <br>(gauge) | \[Prometheus\] append entries RFC がリーダー エージェントのログ エントリをフォロワー エージェントに複製するのに要した時間の分位数<br>_millisecond として表示_ |
+| **consul.raft.replication.appendEntries.rpc.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] append entries RFC がリーダー エージェントのログ エントリをフォロワー エージェントに複製するのに要した時間の合計<br>_millisecond として表示_ |
+| **consul.raft.replication.heartbeat.count** <br>(count) | \[DogStatsD\] \[Prometheus\] appendEntries をピアに呼び出すのに要した時間のカウント<br>_millisecond として表示_ |
+| **consul.raft.replication.heartbeat.quantile** <br>(gauge) | \[Prometheus\] appendEntries をピアに呼び出すのに要した時間の分位数<br>_millisecond として表示_ |
+| **consul.raft.replication.heartbeat.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] appendEntries をピアに呼び出すのに要した時間の合計<br>_millisecond として表示_ |
+| **consul.raft.state.candidate** <br>(count) | \[DogStatsD\] \[Prometheus\] 開始されたリーダー選挙の回数<br>_event として表示_ |
+| **consul.raft.state.leader** <br>(count) | \[DogStatsD\] \[Prometheus\] 完了したリーダー選挙の回数<br>_event として表示_ |
+| **consul.runtime.gc_pause_ns.95percentile** <br>(gauge) | \[DogStatsD\] Consul 起動以降の stop‑the‑world ガベージ コレクション (GC) ポーズに費やされたナノ秒数の p95<br>_nanosecond として表示_ |
+| **consul.runtime.gc_pause_ns.avg** <br>(gauge) | \[DogStatsD\] Consul 起動以降の stop‑the‑world ガベージ コレクション (GC) ポーズに費やされたナノ秒数の平均<br>_nanosecond として表示_ |
+| **consul.runtime.gc_pause_ns.count** <br>(count) | \[DogStatsD\] \[Prometheus\] consul.runtime.gc_pause_ns のサンプル数|
+| **consul.runtime.gc_pause_ns.max** <br>(gauge) | \[DogStatsD\] Consul 起動以降の stop‑the‑world ガベージ コレクション (GC) ポーズに費やされたナノ秒数の最大値<br>_nanosecond として表示_ |
+| **consul.runtime.gc_pause_ns.median** <br>(gauge) | \[DogStatsD\] Consul 起動以降の stop‑the‑world ガベージ コレクション (GC) ポーズに費やされたナノ秒数の中央値<br>_nanosecond として表示_ |
+| **consul.runtime.gc_pause_ns.quantile** <br>(gauge) | \[Prometheus\] Consul 起動以降の stop‑the‑world ガベージ コレクション (GC) ポーズに費やされたナノ秒数の分位数<br>_nanosecond として表示_ |
+| **consul.runtime.gc_pause_ns.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] Consul 起動以降の stop‑the‑world ガベージ コレクション (GC) ポーズに費やされたナノ秒数の合計<br>_nanosecond として表示_ |
+| **consul.serf.coordinate.adjustment_ms.95percentile** <br>(gauge) | \[DogStatsD\] ノード コーディネート 調整時間の p95 (ミリ秒)<br>_millisecond として表示_ |
+| **consul.serf.coordinate.adjustment_ms.avg** <br>(gauge) | \[DogStatsD\] ノード コーディネート 調整時間の平均 (ミリ秒)<br>_millisecond として表示_ |
+| **consul.serf.coordinate.adjustment_ms.count** <br>(count) | \[DogStatsD\] \[Prometheus\] consul.serf.coordinate.adjustment_ms のサンプル数|
+| **consul.serf.coordinate.adjustment_ms.max** <br>(gauge) | \[DogStatsD\] ノード コーディネート 調整時間の最大値 (ミリ秒)<br>_millisecond として表示_ |
+| **consul.serf.coordinate.adjustment_ms.median** <br>(gauge) | \[DogStatsD\] ノード コーディネート 調整時間の中央値 (ミリ秒)<br>_millisecond として表示_ |
+| **consul.serf.coordinate.adjustment_ms.quantile** <br>(gauge) | \[Prometheus\] ノード コーディネート 調整時間の分位数 (ミリ秒)<br>_millisecond として表示_ |
+| **consul.serf.coordinate.adjustment_ms.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] ノード コーディネート 調整時間の合計 (ミリ秒)<br>_millisecond として表示_ |
+| **consul.serf.events** <br>(count) | \[DogStatsD\] \[Prometheus\] Consul エージェントが serf イベントを処理するとインクリメントされます<br>_event として表示_ |
+| **consul.serf.member.failed** <br>(count) | \[DogStatsD\] \[Prometheus\] Consul エージェントが dead とマークされたときにインクリメントされます。これは、エージェントの過負荷、ネットワーク問題、または必須ポートで相互接続できない構成エラーを示す可能性があります。|
+| **consul.serf.member.flap** <br>(count) | \[DogStatsD\] \[Prometheus\] Consul エージェントが dead とマークされ、その後すぐに復帰した回数|
+| **consul.serf.member.join** <br>(count) | \[DogStatsD\] \[Prometheus\] Consul エージェントが join イベントを処理するとインクリメントされます<br>_event として表示_ |
+| **consul.serf.member.left** <br>(count) | \[DogStatsD\] \[Prometheus\] Consul エージェントがクラスターを離脱するとインクリメントされます|
+| **consul.serf.member.update** <br>(count) | \[DogStatsD\] \[Prometheus\] Consul エージェントが更新されるとインクリメントされます|
+| **consul.serf.msgs.received.95percentile** <br>(gauge) | \[DogStatsD\] serf メッセージ受信数の p95<br>_message として表示_ |
+| **consul.serf.msgs.received.avg** <br>(gauge) | \[DogStatsD\] serf メッセージ受信数の平均<br>_message として表示_ |
+| **consul.serf.msgs.received.count** <br>(count) | \[DogStatsD\] \[Prometheus\] serf メッセージ受信数のカウント|
+| **consul.serf.msgs.received.max** <br>(gauge) | \[DogStatsD\] serf メッセージ受信数の最大値<br>_message として表示_ |
+| **consul.serf.msgs.received.median** <br>(gauge) | \[DogStatsD\] serf メッセージ受信数の中央値<br>_message として表示_ |
+| **consul.serf.msgs.received.quantile** <br>(gauge) | \[Prometheus\] serf メッセージ受信数の分位数<br>_message として表示_ |
+| **consul.serf.msgs.received.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] serf メッセージ受信数の合計<br>_message として表示_ |
+| **consul.serf.msgs.sent.95percentile** <br>(gauge) | \[DogStatsD\] serf メッセージ送信数の p95<br>_message として表示_ |
+| **consul.serf.msgs.sent.avg** <br>(gauge) | \[DogStatsD\] serf メッセージ送信数の平均<br>_message として表示_ |
+| **consul.serf.msgs.sent.count** <br>(count) | \[DogStatsD\] \[Prometheus\] serf メッセージ送信数のカウント|
+| **consul.serf.msgs.sent.max** <br>(gauge) | \[DogStatsD\] serf メッセージ送信数の最大値<br>_message として表示_ |
+| **consul.serf.msgs.sent.median** <br>(gauge) | \[DogStatsD\] serf メッセージ送信数の中央値<br>_message として表示_ |
+| **consul.serf.msgs.sent.quantile** <br>(gauge) | \[Prometheus\] serf メッセージ送信数の分位数<br>_message として表示_ |
+| **consul.serf.msgs.sent.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] serf メッセージ送信数の合計<br>_message として表示_ |
+| **consul.serf.queue.event.95percentile** <br>(gauge) | \[DogStatsD\] serf イベント キュー サイズの p95|
+| **consul.serf.queue.event.avg** <br>(gauge) | \[DogStatsD\] serf イベント キュー サイズの平均|
+| **consul.serf.queue.event.count** <br>(count) | \[DogStatsD\] \[Prometheus\] serf イベント キュー内のアイテム数|
+| **consul.serf.queue.event.max** <br>(gauge) | \[DogStatsD\] serf イベント キュー サイズの最大値|
+| **consul.serf.queue.event.median** <br>(gauge) | \[DogStatsD\] serf イベント キュー サイズの中央値|
+| **consul.serf.queue.event.quantile** <br>(gauge) | \[Prometheus\] serf イベント キュー サイズの分位数|
+| **consul.serf.queue.intent.95percentile** <br>(gauge) | \[DogStatsD\] serf インテント キュー サイズの p95|
+| **consul.serf.queue.intent.avg** <br>(gauge) | \[DogStatsD\] serf インテント キュー サイズの平均|
+| **consul.serf.queue.intent.count** <br>(count) | \[DogStatsD\] \[Prometheus\] serf インテント キュー内のアイテム数|
+| **consul.serf.queue.intent.max** <br>(gauge) | \[DogStatsD\] serf インテント キュー サイズの最大値|
+| **consul.serf.queue.intent.median** <br>(gauge) | \[DogStatsD\] serf インテント キュー サイズの中央値|
+| **consul.serf.queue.intent.quantile** <br>(gauge) | \[Prometheus\] serf インテント キュー サイズの分位数|
+| **consul.serf.queue.query.95percentile** <br>(gauge) | \[DogStatsD\] serf クエリ キュー サイズの p95|
+| **consul.serf.queue.query.avg** <br>(gauge) | \[DogStatsD\] serf クエリ キュー サイズの平均|
+| **consul.serf.queue.query.count** <br>(count) | \[DogStatsD\] \[Prometheus\] serf クエリ キュー内のアイテム数|
+| **consul.serf.queue.query.max** <br>(gauge) | \[DogStatsD\] serf クエリ キュー サイズの最大値|
+| **consul.serf.queue.query.median** <br>(gauge) | \[DogStatsD\] serf クエリ キュー サイズの中央値|
+| **consul.serf.queue.query.quantile** <br>(gauge) | \[Prometheus\] serf クエリ キュー サイズの分位数|
+| **consul.serf.snapshot.appendline.95percentile** <br>(gauge) | \[DogStatsD\] Consul エージェントが既存ログへエントリを追加する時間の p95<br>_millisecond として表示_ |
+| **consul.serf.snapshot.appendline.avg** <br>(gauge) | \[DogStatsD\] Consul エージェントが既存ログへエントリを追加する時間の平均<br>_millisecond として表示_ |
+| **consul.serf.snapshot.appendline.count** <br>(count) | \[DogStatsD\] \[Prometheus\] consul.serf.snapshot.appendline のサンプル数|
+| **consul.serf.snapshot.appendline.max** <br>(gauge) | \[DogStatsD\] Consul エージェントが既存ログへエントリを追加する時間の最大値<br>_millisecond として表示_ |
+| **consul.serf.snapshot.appendline.median** <br>(gauge) | \[DogStatsD\] Consul エージェントが既存ログへエントリを追加する時間の中央値<br>_millisecond として表示_ |
+| **consul.serf.snapshot.appendline.quantile** <br>(gauge) | \[Prometheus\] Consul エージェントが既存ログへエントリを追加する時間の分位数<br>_millisecond として表示_ |
+| **consul.serf.snapshot.compact.95percentile** <br>(gauge) | \[DogStatsD\] Consul エージェントがログをコンパクトする時間の p95 (スナップショットが十分大きい場合のみ実行)<br>_millisecond として表示_ |
+| **consul.serf.snapshot.compact.avg** <br>(gauge) | \[DogStatsD\] Consul エージェントがログをコンパクトする時間の平均 (スナップショットが十分大きい場合のみ実行)<br>_millisecond として表示_ |
+| **consul.serf.snapshot.compact.count** <br>(count) | \[DogStatsD\] \[Prometheus\] consul.serf.snapshot.compact のサンプル数|
+| **consul.serf.snapshot.compact.max** <br>(gauge) | \[DogStatsD\] Consul エージェントがログをコンパクトする時間の最大値 (スナップショットが十分大きい場合のみ実行)<br>_millisecond として表示_ |
+| **consul.serf.snapshot.compact.median** <br>(gauge) | \[DogStatsD\] Consul エージェントがログをコンパクトする時間の中央値 (スナップショットが十分大きい場合のみ実行)<br>_millisecond として表示_ |
+| **consul.serf.snapshot.compact.quantile** <br>(gauge) | \[Prometheus\] Consul エージェントがログをコンパクトする時間の分位数 (スナップショットが十分大きい場合のみ実行)<br>_millisecond として表示_ |
 
-Consul Agent が DogStatsD に送信するメトリクスの詳細については、[Consul の Telemetry に関するドキュメント][4]を参照してください。
+DogStatsD が受信するメトリクスの説明については [Consul Telemetry ドキュメント](https://www.consul.io/docs/agent/telemetry.html) を参照してください。
 
-ネットワークレイテンシーメトリクスの計算方法については、[Consul のネットワーク座標系に関するドキュメント][5]を参照してください。
+ネットワーク レイテンシ メトリクスの計算方法については [Consul Network Coordinates ドキュメント](https://www.consul.io/docs/internals/coordinates.html) を参照してください。
 
 ### イベント
 
 **consul.new_leader**:<br>
 Datadog Agent は、Consul クラスターが新しいリーダーを選出すると、`prev_consul_leader`、`curr_consul_leader`、および `consul_datacenter` のタグを付けてイベントを送信します。
 
-### サービスチェック
-{{< get-service-checks-from-git "consul" >}}
+### サービス チェック
 
+**consul.check**
+
+サービスが稼働中であれば OK、問題があれば WARNING、停止していれば CRITICAL を返します。
+
+_ステータス: ok, warning, critical, unknown_
+
+**consul.up**
+
+Consul サーバーが稼働中であれば OK、それ以外は CRITICAL を返します。
+
+_Statuses: ok, critical_
+
+**consul.can_connect**
+
+Agent が Consul へ HTTP リクエストを送信できれば OK、できなければ CRITICAL を返します。
+
+_Statuses: ok, critical_
+
+**consul.prometheus.health**
+
+メトリクス エンドポイントへアクセスできない場合は `CRITICAL`、それ以外は `OK` を返します。
+
+_Statuses: ok, critical_
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+お問合せは、[Datadog サポート](https://docs.datadoghq.com/help/) まで。
 
 ## その他の参考資料
 
-お役に立つドキュメント、リンクや記事:
+役立つドキュメント、リンク、記事:
 
-- [Datadog を使用した HCP Consul の監視][7]
-- [Datadog を使用した Consul の健全性とパフォーマンスの監視][8]
-- [Datadog と Consul][9]
-- [Consul 監視のためのキーメトリクス][10]
-- [Consul 監視ツール][11]
-- [Datadog を使用した Consul の監視方法][12]
-- [Datadog NPM が Consul ネットワーキングに対応][13]
-
-
-[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/consul/images/consul-dash.png
-[2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://www.consul.io/docs/agent/telemetry.html
-[5]: https://www.consul.io/docs/internals/coordinates.html
-[6]: https://docs.datadoghq.com/ja/help/
-[7]: https://docs.datadoghq.com/ja/integrations/guide/hcp-consul
-[8]: https://www.datadoghq.com/blog/monitor-consul-health-and-performance-with-datadog
-[9]: https://engineering.datadoghq.com/consul-at-datadog
-[10]: https://www.datadoghq.com/blog/consul-metrics/
-[11]: https://www.datadoghq.com/blog/consul-monitoring-tools/
-[12]: https://www.datadoghq.com/blog/consul-datadog/
-[13]: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
+- [HCP Consul を Datadog で監視](https://docs.datadoghq.com/integrations/guide/hcp-consul)
+- [Datadog で Consul のヘルスとパフォーマンスを監視](https://www.datadoghq.com/blog/monitor-consul-health-and-performance-with-datadog)
+- [Consul at Datadog](https://engineering.datadoghq.com/consul-at-datadog)
+- [Consul を監視するキー メトリクス](https://www.datadoghq.com/blog/consul-metrics/)
+- [Consul 監視ツール](https://www.datadoghq.com/blog/consul-monitoring-tools/)
+- [Consul を Datadog で監視する方法](https://www.datadoghq.com/blog/consul-datadog/)
+- [Datadog CNM が Consul ネットワーキングをサポート](https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/)

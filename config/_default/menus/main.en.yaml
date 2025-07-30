@@ -424,26 +424,31 @@ menu:
       identifier: agent_logs
       parent: agent
       weight: 5
+    - name: Log Agent tags
+      url: agent/logs/agent_tags/
+      parent: agent_logs
+      identifier: agent_logs_tags
+      weight: 501
     - name: Advanced Configurations
       identifier: agent_logs_advanced_log_collection
       url: agent/logs/advanced_log_collection
       parent: agent_logs
-      weight: 501
+      weight: 502
     - name: Proxy
       identifier: agent_logs_proxy
       url: agent/logs/proxy
       parent: agent_logs
-      weight: 502
+      weight: 503
     - name: Transport
       identifier: agent_logs_transport
       url: agent/logs/log_transport
       parent: agent_logs
-      weight: 503
+      weight: 504
     - name: Multi-Line Detection
       identifier: multi_line_detection
       url: agent/logs/auto_multiline_detection
       parent: agent_logs
-      weight: 505
+      weight: 506
     - name: Configuration
       url: agent/configuration
       parent: agent
@@ -4658,21 +4663,26 @@ menu:
       parent: llm_obs
       identifier: llm_obs_monitoring
       weight: 3
+    - name: Querying spans and traces
+      url: llm_observability/monitoring/querying
+      parent: llm_obs_monitoring
+      identifier: llm_obs_monitoring_querying
+      weight: 301
     - name: Connect with APM
       url: llm_observability/monitoring/llm_observability_and_apm
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_apm
-      weight: 301
+      weight: 302
     - name: Cluster Map
       url: llm_observability/monitoring/cluster_map/
       parent: llm_obs_monitoring
       identifier: llm_obs_cluster_map
-      weight: 302
+      weight: 303
     - name: Agent Monitoring
       url: llm_observability/monitoring/agent_monitoring
       parent: llm_obs_monitoring
       identifier: llm_obs_agent_monitoring
-      weight: 303
+      weight: 304
     - name: Evaluations
       url: llm_observability/evaluations/
       parent: llm_obs
@@ -6227,11 +6237,6 @@ menu:
       parent: cspm
       identifier: cspm_kspm
       weight: 306
-    - name: Signals Explorer
-      url: /security/cloud_security_management/misconfigurations/signals_explorer/
-      parent: cspm
-      identifier: signals
-      weight: 307
     - name: Identity Risks
       url: security/cloud_security_management/identity_risks/
       parent: csm
