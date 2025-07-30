@@ -9,30 +9,34 @@ further_reading:
 ## Overview
 This page discusses using Datadog's [LLM Observability Trace Explorer][1] to query your LLM application's spans and traces.
 
-In Datadog, a _span_ represents an operation, and a _trace_ represents a request. Traces consist of one or more nested spans. For more information about this terminology, see [LLM Observability Terms and Concepts][2].
+In Datadog, a _span_ represents a unit of work representing a single operation in your LLM application. A _trace_ represents the end-to-end operations involved in processing a request in your LLM application, often consisting of one or more nested spans. For more information about this terminology, see [LLM Observability Terms and Concepts][2].
 
 To toggle between searching spans and traces, use the drop-down menu on the left of the query field. When searching traces, a query returns traces where the root span matches the query.
 
 ### Query by attribute
-_Span attributes_ are information collected from a span itself. Attribute queries take the form `@key:value`. All attribute keys are prepended with `@`.
+_Span attributes_ are structured, key-value metadata attached directly to each span, capturing details about the span’s execution, such as performance metrics, resource identifiers, or parameter values. 
+
+Attribute queries take the form `@key:value`. All attribute keys are prepended with `@`.
 
 For example, the query `@duration:>5s` returns spans that took more than 5 seconds to complete.
 
 ### Query by tag
-_Span tags_ are information collected from the context around a span. Tag queries take the form `key:value`. In contrast to attribute keys, tag keys are not prepended with `@`.
+_Span tags_ are high-level key-value pairs used to group, segment, and correlate telemetry data across spans, services, or environments. Tags often indicate broader context, such as application name, environment, or deployment region, and are attached to spans to enable efficient search and aggregation.
+
+Tag queries take the form `key:value`. In contrast to attribute keys, tag keys are not prepended with `@`.
 
 For example, the query `ml_app:my_llm_app` returns spans from an application named `my_llm_app`.
 
 ### Query LLM input and output
 You can also search for free text in the input and output of your LLM application's spans. Wrap your free text query with `"`.
 
-For example, the query `"what's the weather"` returns spans that contain the string `what's the weather` in the input or output.
+For example, the query `"what's the weather"` returns agent, workflow, or LLM spans that contain the string `what's the weather` in the input or output.
 
 <div class="alert alert-info">Free text queries are limited to the first 20,500 characters of a trace's input or output.</div>
 
 ### Operators
 
-You can combine multiple search terms using the boolean operators `AND` (intersection), `OR` (union), and `-` (exclusion).
+You can combine multiple search terms using the Boolean operators `AND` (intersection), `OR` (union), and `-` (exclusion).
 
 For example, the query `@duration:>5s AND -"foo"` returns spans that took more than 5 seconds to complete and do **not** contain the string `foo` in the input or output.
 
@@ -102,7 +106,7 @@ Use the `@meta` attribute to find spans by metadata information.
 
 ### Trace-level queries
 
-To search traces based on attributes of the spans that these traces contain, use the `@child` attribute.
+To search traces based on attributes of its nested spans, use the `@child` attribute.
 
 `@child.@evaluations.hallucination:"hallucination found"`
 : Finds traces with a hallucinating sub-span.
