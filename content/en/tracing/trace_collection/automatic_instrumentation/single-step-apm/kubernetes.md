@@ -52,7 +52,7 @@ To use the recommended ddTraceConfigs approach, ensure you have:
 | Component | Minimum Version | Notes |
 |-----------|-----------------|-------|
 | datadog-agent | 7.66+ | Required for valueFrom support |
-| datadog-operator | 1.16.0+ | 1.13.0+ works with agent version override |
+| datadog-operator | 1.16.0+ | 1.13.0+ works with Agent version override |
 | datadog-helm-chart | 3.120.0+ | Added valueFrom support |
 
 ### Recommended: Configure USTs with ddTraceConfigs
