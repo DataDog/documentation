@@ -9,9 +9,9 @@ further_reading:
 
 ## Overview
 
-The User Profiles and Account Profiles contain enriched data on the users and accounts interacting with your product. 
+The [User Profiles][7] and [Account Profiles][8] pages contain enriched data on the users and accounts interacting with your product. 
 
-These profile pages are built by integrating attributes extracted from collected events with information from third-party sources. Examples of these attributes include a user’s `first_seen` timestamp and an account’s `account_id`. Together, they help create comprehensive, centralized profiles.
+These profile pages integrate attributes extracted from collected events with information from third-party sources. Examples of these attributes include a user’s `first_seen` timestamp and an account’s `account_id`. Together, they help create comprehensive, centralized profiles.
 
 These enriched profiles enable more precise segmentation and deeper analysis of user behavior, helping you identify patterns over time, track key cohorts (for example, users active after six months), and guide product decisions and engagement strategies. 
 
@@ -19,22 +19,22 @@ These enriched profiles enable more precise segmentation and deeper analysis of 
 
 User and account profiles are generated from RUM events collected through the RUM SDK. Use `datadogRum.setUser` to [set user attributes][2] and `datadogRum.setAccount` to set [account attributes][3].
 
-User profiles are grouped by the `user_id` attribute, while account profiles are grouped by `account_id`. These identifiers ensure that users and accounts are accurately populated on their respective profile pages.
+User profiles are grouped by the `user_id` attribute, while account profiles are grouped by `account_id`.
 
 You can also customize these pages by adding attributes that matter most to your team. See the [Custom Attributes section](#use-custom-attributes-to-enrich-your-profiles) to learn how to tailor profile data to your needs. 
 
 
 ### User profiles 
 
-The User Profiles page lists the individual users who are interacting with your application. You can select a user to view detailed insights into their activity, including their most visited pages, frequent actions, and session history.
+The [User Profiles][7] page lists the users who are interacting with your application. You can select a user to view detailed insights into their activity, including their most visited pages, frequent actions, and session history.
 
 {{< img src="product_analytics/user_profile2_july_25.png" alt="A view of the User profiles page." style="width:80%;" >}}
 
-Use the session history to identify moments of frustration and follow the **View Analytics** links to explore the related analytics.
+Use the session history to identify moments of [frustration][9] and follow the **View Analytics** links to explore the related analytics.
 
 {{< img src="product_analytics/segmentation/pana_frustration_detected.png" alt="Explore the user profiles page and its session history." style="width:80%;">}}
 
-Each profile has attributes to help you better segment your users. You can conduct a full-text search, sort and filter based on any of these attributes. You can also customize this page with attributes relevant to your analytic needs. See the custom attributes section to learn how.  
+Each profile has attributes to help you better segment your users. You can conduct a full-text search or sort and filter based on any of these attributes. You can also customize this page with attributes relevant to your analytic needs. See the [Custom Attributes section](#use-custom-attributes-to-enrich-your-profiles) to learn how.  
 
 
 {{% collapse-content title="List of user profile attributes" level="h5" expanded=true id="id-for-anchoring" %}}
@@ -124,9 +124,6 @@ Last Browser Version
 <br>
 
 
-
-
-
 ### Account profiles 
 The Account Profiles page surfaces a list of the organizations interacting with your application.
 
@@ -138,11 +135,11 @@ Each profile includes four default attributes to help you identify and track acc
 - `first_seen`
 - `last_seen` 
 
-The account profiles page can be customized to include additional attributes, giving you the flexibility to tailor the view to your observability and product analysis needs.
+You can customize the Account Profiles page to include additional attributes, giving you the flexibility to tailor the view to your observability and product analysis needs.
 
 
 
-## Use custom attributes to enrich your profiles
+## Use custom attributes to enrich profiles
 
 {{< callout header="Join the Preview!" btn_hidden="true">}}
   Custom Attributes is in Preview!
@@ -151,30 +148,31 @@ The account profiles page can be customized to include additional attributes, gi
 
 ### How to configure custom attributes using integrations 
 
-Use integrations to automatically import custom attribute data into your profiles. This data is synced on a regular schedule, reflecting the latest values from the source system to ensure your profiles remain up-to-date and accurate.
+Use integrations to automatically import custom attribute data into profiles. This data is synced on a regular schedule, reflecting the latest values from the source system to ensure that profiles remain up-to-date and accurate.
 
 On the [integrations page][4], you can explore the integrations that are compatible and/or have been configured to add custom attributes.
 
-On this same page, you can select the [Custom Attributes][5] tabs to view imported attributes for both the user and account profiles.
+On this same page, you can select the [Custom Attributes][5] tab to view imported attributes for user and account profiles.
 
 {{< img src="product_analytics/integration_page3_july_25.png" alt="See the integrations that are compatible with Product Analytics." style="width:80%;" >}}
 
-To import attibutes from an integration such as Salesforce or Snowflake, select the **Add Attributes** button and choose whether the attributes are for the user or account profiles. Then, follow the prompt to: 
+To import attibutes from an integration such as Salesforce or Snowflake, select the **Add Attributes** button and choose whether the attributes are for user or account profiles. Then, follow the prompts to: 
 
 
 {{< img src="product_analytics/add_attribute_july_25.png" alt="Add new attributes using to enrich your profiles." style="width:80%;" >}}
 
 
-1. Choose a **source of the data** to be imported:
+1. Choose a **source of the data** to be imported.
+
 {{< img src="product_analytics/choose_integration_july_25.png" alt="Choose a source of the data to be imported." style="width:80%;" >}}
 
 
-2. Select the **table** containing the desired user data, then select the **join keys** to merge table with your profiles
+2. Select the **table** containing the desired user data, then select the **join keys** to merge the table with your profiles.
 
 {{< img src="product_analytics/add_table_and_key_july_25.png" alt="select the data to be merged with your profiles." style="width:80%;" >}}
 
 
-3. Choose which **attributes from the integration** to add to your profiles:
+3. Choose which **attributes from the integration** to add to your profiles.
 
 {{< img src="product_analytics/select_integration_attributes_july_25.png" alt="Add new attributes using to enrich your profiles." style="width:80%;" >}}
 
@@ -183,7 +181,7 @@ To import attibutes from an integration such as Salesforce or Snowflake, select 
 
 ### How to configure custom attributes using reference tables 
 
-Importing custom attributes from a reference table follow the same steps as importing from an integration. The exception here is to select the reference table tile in step 1: 
+Importing custom attributes from a reference table follows the same steps as importing from an integration. The exception here is to select the reference table tile in step 1.
 
 {{< img src="product_analytics/choose_ref_table_july_25.png" alt="Choose the name of the reference table from which to import your data." style="width:80%;" >}}
 
@@ -205,3 +203,6 @@ You can filter these custom attributes throughout the product analytics platform
 [4]: https://app.datadoghq.com/product-analytics/integrations
 [5]: https://app.datadoghq.com/product-analytics/integrations/custom-attributes
 [6]: https://app.datadoghq.com/product-analytics/segments
+[7]: https://app.datadoghq.com/product-analytics/profiles
+[8]: https://app.datadoghq.com/product-analytics/profiles/accounts
+[9]: https://app.datadoghq.com/product-analytics/explorer?query=%40session.frustration.count%3A%3E0%20%40type%3Asession&fromUser=false
