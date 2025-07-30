@@ -37,7 +37,7 @@ Gradle:
 implementation 'com.datadoghq:dd-trace-api:DD_TRACE_JAVA_VERSION_HERE'
 ```
 
-Finally, add the `@Trace` annotation on any method you want to trace.
+Finally, add the `@Trace` annotation to any method you want to trace.
 
 For more information, see [Tracing Java Applications][1].
 
