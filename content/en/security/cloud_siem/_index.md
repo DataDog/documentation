@@ -182,9 +182,15 @@ Review from which ISPs the signals are coming. Click on a pie chart wedge to sco
 {{< img src="security/security_monitoring/landing/05_security_overview.png" alt="" style="width:100%;" >}}
 
 A high-level overview of all signals.
-- *Signal Distribution:* On the left side of the section, see signals grouped by severity and trend over the selected time window.
+
+#### Signal Distribution
+
+On the left side of the section, see signals grouped by severity and trend over the selected time window.
 On the right side, see a break down of signal activity by severity, source, and resolution. Click on a node in the sankey diagram to see signals in the Signal Explorer filtered to the specifics of that node.
-- *Mean Time to Respond to Signals:* See KPIs of how quickly your team responds. Sets a signal to `under review` or `archive` by signal severity.
+
+#### Mean Time to Respond to Signals
+
+See KPIs of how quickly your team responds. Sets a signal to `under review` or `archive` by signal severity.
 
 ### MITRE ATT&CK coverage
 
