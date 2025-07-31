@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Custom allocation rules let you split and assign shared costs to any available tags, such as teams, projects, or environments, supporting accurate showback and chargeback.
+Custom allocation rules help you distribute shared cloud costs across teams, projects, or environments based on your business needs. This enables accurate cost attribution for showback and chargeback purposes.
 
 The following allocation methods are available:
 
@@ -30,10 +30,10 @@ Custom allocation rules run after [Tag Pipelines][1], enabling cost allocations 
 ### Step 1 - Define the source
 
 1. Navigate to [Cloud Cost > Settings > Custom Allocation Rules][2] and click **Add New Rule** to start.
-1. Under **Define the source**, select the cost provider.
+1. Under **Define the source**, select the cost provider (AWS, Google Cloud, or Azure).
 1. Under **Define the costs to split**, select the shared costs you want to allocate.
 
-_Example: Untagged support costs, shared database costs._
+**Examples**: Untagged support costs, shared database costs, or unallocated infrastructure expenses.
 
 ### Step 2 - Choose an allocation method
 
@@ -53,11 +53,11 @@ With the even strategy, costs are allocated evenly towards your destination tags
 
 {{% tab "Custom percentage" %}}
 
-{{< img src="cloud_cost/custom_allocation_rules/custom_percentage_diagram.png" alt="Diagram illustrating the even split strategy" style="width:70%;" >}}
+{{< img src="cloud_cost/custom_allocation_rules/custom_percentage_diagram.png" alt="Diagram illustrating the custom percentage split strategy" style="width:70%;" >}}
 
 With the custom percentage strategy, you can define static custom percentages for the destination tags you select. For example, if you have 3 destinations (`teamA`, `teamB`, `teamC`) you can allocate 60% to `teamA`, 30% to `teamB`, and 10% to `teamC`.
 
-{{< img src="cloud_cost/custom_allocation_rules/ui-custom-2.png" alt="The even split strategy as seen in Datadog" style="width:90%;" >}}
+{{< img src="cloud_cost/custom_allocation_rules/ui-custom-2.png" alt="The custom percentage split strategy as seen in Datadog" style="width:90%;" >}}
 
 {{% /tab %}}
 
@@ -73,9 +73,9 @@ To create a rule for this allocation, you can:
 
 - Define the costs to allocate (source): **EC2 support fees** (`aws_product:support`). 
 - Choose the allocation method: **Proportional by spend**.
-- Choose the [destination tag](#step-3---define-the-destination) to split your costs by: **User** (`User A`, `User B`, `User C`).
+- Choose the [destination tag](#step-3---choose-the-destinations-to-split-costs-across) to split your costs by: **team** (`teamA`, `teamB`, `teamC`).
 - Refine the allocation by applying [filters](#step-4---optional-apply-filters): **EC2** (`aws_product:ec2`).
-- Create suballocations by [partitioning](#step-4---optional-apply-a-partition) the allocation rule: **environment** (`env`).
+- Create suballocations by [partitioning](#step-5---optional-apply-a-partition) the allocation rule: **environment** (`env`).
 
 You can also specify how the cost allocation rule should be partitioned to create multiple suballocations. For example, if you partition your costs by the `environment` tag, the allocation rule is calculated separately for each environment. 
 
@@ -94,11 +94,6 @@ For example, the Network query `sum:network.bytes_written[server_gateway_id:nat-
 ### Data source limitations
 
 Before creating this type of rule, be aware:
-
-
-
-
-{{% /collapse-content %}}
 
 - **Result limits** - Some observability data sources limit how many results they can show. The allocation rule automatically uses your highest-costing items first. For example, if your query editor shows a limit of 1000 group bys but you have 1001 results, the allocation rule distributes costs across the top 1000 highest-costing destinations and ignores the remaining 1 destination completely. 
 - **Update frequency** - While CCM has 15 months of retention overall, individual data sources have different update patterns:
@@ -123,7 +118,7 @@ For example, create an allocation rule to split your shared NAT gateway costs:
 {{< img src="cloud_cost/custom_allocation_rules/ui-dynamic-by-metric-4.png" alt="The dynamic by metric split strategy as seen in Datadog" style="width:90%;" >}}
 
 [1]: /metrics/#querying-metrics
-[2]: https://app.datadoghq.com/metric/summary
+[2]: https://app.datadoghq.com/cost/settings/custom-allocation-rules
 
 {{% /tab %}}
 
@@ -137,16 +132,16 @@ For example, create an allocation rule to split your shared NAT gateway costs:
 
 ### Step 4 - (optional) Apply filter(s)
 
-Apply a filter across the entire allocation rule. Filters help you target the allocation rule to the relevant subset of your cloud spend.
+Apply a filter across the entire allocation rule to target specific subsets of your cloud spend. This helps ensure your allocation is based on the most relevant cost data.
 
-For example, let's take a **proportional by spend** allocation rule. Say you're allocating shared costs to the team tag. Filter by `aws_product:ec2` to create an allocation that proportionally distributes shared costs costs based on each team's EC2 spend.
+**Example**: For a **proportional by spend** allocation rule that distributes shared costs to teams, you could filter by `aws_product:ec2` to base the allocation on each team's EC2 spend rather than their total cloud spend.
 
 
 ### Step 5 - (optional) Apply a partition
 
-Partitioning allows you to split a single allocation rule into multiple sub-allocations. For example, instead of creating separate rules for each environment (like production and staging), you can create one rule that is partitioned by `environment`. Each partitioned sub-allocation uses the same allocation structure, but applies only to costs matching that tag value.
+Partitioning allows you to create multiple sub-allocations from a single rule. Instead of creating separate rules for each environment (like production and staging), you can create one rule partitioned by `environment`. Each partition uses the same allocation structure but applies only to costs matching that specific tag value.
 
-**Note**: For Dynamic by Metric, the tag you select to partition by must exist in both your cloud cost and metric data.
+**Note**: For Dynamic by Metric allocation, the tag you select to partition by must exist in both your cloud cost and metric data.
 
 {{< tabs >}}
 
