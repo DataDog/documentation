@@ -97,7 +97,7 @@ See the [Getting Started Guide][4] for more detailed setup instructions.
 
 ## Cloud SIEM Overview page
 
-Navigate to the [Cloud SIEM Overview dashboard][2]. Use this dashboard to see key security insights and act on common workflows for security analysts, security and detection engineers, and Security Operations Center (SOC) managers. From the Overview page, you can:
+Navigate to the [Cloud SIEM Overview dashboard][3]. Use this dashboard to see key security insights and act on common workflows for security analysts, security and detection engineers, and Security Operations Center (SOC) managers. From the Overview page, you can:
 - Access important signals, open cases, and high-risk entities.
 - Complete onboarding tasks and review content‑pack health.
 - View and investigate top signals by geography or ISP.
