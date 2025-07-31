@@ -33,6 +33,7 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 | [Crew AI](#crew-ai)                        | >= 0.105.0         | >= 3.5.0          |
 | [OpenAI Agents](#openai-agents)            | >= 0.0.2           | >= 3.5.0          |
 | [LiteLLM](#litellm)                        | >= 1.70.0          | >= 3.9.0          |
+| [Pydantic AI](#pydantic-ai)                | >= 0.3.0           | >= 3.11.0         |
 
 
 You can programmatically enable automatic tracing of LLM calls to a supported LLM model like OpenAI or a framework like LangChain by setting `integrations_enabled` to `true` in the `LLMOBs.enable()` function. In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
@@ -230,6 +231,21 @@ The LiteLLM integration instruments the following methods:
   - `router.Router.text_completion`
   - `router.Router.atext_completion`
 
+## Pydantic AI
+
+The Pydantic AI integration instruments agent invocations as well as tool calls made via the [Pydantic AI][50] agent framework.
+
+### Traced methods
+
+The Pydantic AI integration instruments the following methods:
+
+- [Agent Invocations][51]
+  - `agent.Agent.iter` (also traces `agent.Agent.run` and `agent.Agent.run_sync`)
+  - `agent.Agent.run_stream`
+- Tool Calls made via [Function Tools][52] or [Toolsets][53]
+  - `agent.ToolManager.handle_call`
+  - `tools.Tool.run`
+
 
 [1]: https://platform.openai.com/docs/api-reference/introduction
 [2]: https://platform.openai.com/docs/api-reference/completions
@@ -280,6 +296,10 @@ The LiteLLM integration instruments the following methods:
 [47]: https://docs.litellm.ai/docs/routing
 [48]: https://docs.litellm.ai/docs/completion
 [49]: https://docs.litellm.ai/docs/text_completion
+[50]: https://ai.pydantic.dev/
+[51]: https://ai.pydantic.dev/agents/
+[52]: https://ai.pydantic.dev/tools/
+[53]: https://ai.pydantic.dev/toolsets/
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
