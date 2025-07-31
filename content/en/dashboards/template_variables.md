@@ -27,7 +27,7 @@ further_reading:
 
 ## Overview
 
-Template variables allow you to dynamically filter one or more widgets in a dashboard. You can build saved views from your template variable selections to organize and navigate your visualizations through the dropdown selections.
+Template variables allow you to dynamically filter or group widgets in a dashboard. You can build saved views from your template variable selections to organize and navigate your visualizations through the dropdown selections.
 
 A template variable is defined by:
 
@@ -41,7 +41,7 @@ A template variable is defined by:
 **Note**: If you do not see the tag or attribute you're looking for, it may be because that data hasn't been reported to Datadog recently. For more information, see [Historical Data][4].
 
 ## Add a template variable
-If template variables are already defined, see [Edit a template variable](#edit-a-template-variable). If your dashboard does not have any template variables, click the question mark icon to open a help modal on how to use Dashboard Variables.
+If template variables are already defined, see [Edit a template variable](#edit-a-template-variable). If your dashboard does not have any template variables, you can click the question mark icon to open a help modal on how to use Dashboard Variables.
 
 {{< img src="/dashboards/template_variables/template_variable_menu.png" alt="Template variable menu showing the Configure Dropdown Values option" style="width:80%;" >}}
 
@@ -131,7 +131,7 @@ On log, APM, and RUM widgets, you can use wildcards in the middle of a value (fo
 
 ### Widgets
 
-When creating or editing a widget, existing template variables display as options in the `from` field. For example, if you configure the `environment` template variable, the `$environment` option is available as a dynamic variable in the widget.
+When creating or editing a widget, existing filter template variables display as options in the `from` field, and existing group by template variables display as options following the `by` field. For example, if you configure the `environment` template variable, the `$environment` option is available as a dynamic variable in the widget.
 
 {{< img src="dashboards/template_variables/dynamic_template_variable.png" alt="Template variable can be set dynamically in widgets" style="width:100%;">}}
 
