@@ -495,7 +495,7 @@ Configure the container to send traces to your Datadog Agent using the following
 | `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                       |
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> The App and API Protection GCP Service Extensions integration is built on top of the Datadog Go Tracer. It generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.1.0</code>). In some cases, early release versions may be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
+  <strong>Note:</strong> The App and API Protection GCP Service Extensions integration is built on top of the Datadog Go Tracer. It generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (e.g. <code>v2.1.0</code>). In some cases, early release versions may be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
 </div>
 
 The GCP Service Extensions integration uses the [Datadog Go Tracer][6] and inherits all environment variables from the tracer. You can find more configuration options in [Configuring the Go Tracing Library][7] and [App and API Protection Library Configuration][8].
@@ -511,10 +511,10 @@ The GCP Service Extensions integration has the following limitations:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [3]: https://cloud.google.com/service-extensions/docs/lb-extensions-overview#supported-lbs
 [4]: https://cloud.google.com/service-extensions/docs/configure-callout-backend-service
 [5]: https://cloud.google.com/service-extensions/docs/configure-traffic-extensions
 [6]: https://github.com/DataDog/dd-trace-go
-[7]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
-[8]: https://docs.datadoghq.com/security/application_security/policies/library_configuration/
+[7]: /tracing/trace_collection/library_config/go/
+[8]: /security/application_security/policies/library_configuration/

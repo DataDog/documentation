@@ -22,11 +22,6 @@ To try the preview of App and API Protection for Istio, follow the setup instruc
 
 You can enable App and API Protection for your services within an Istio service mesh. The Datadog Istio integration allows Datadog to inspect and protect your traffic for threat detection and blocking directly at the edge of your infrastructure. This can be applied at the Istio Ingress Gateway or at the sidecar level.
 
-## Limitations
-
-The Istio integration has the following limitations:
-
-* The request body is not inspected, regardless of its content type.
 ## Prerequisites
 
 Before you begin, ensure you have the following:
@@ -73,7 +68,7 @@ spec:
     spec:
       containers:
       - name: datadog-aap-extproc-container
-        image: ghcr.io/datadog/dd-trace-go/service-extensions-callout:v1.73.1 # Replace with the latest version version
+        image: ghcr.io/datadog/dd-trace-go/service-extensions-callout:v2.1.0 # Replace with the latest released version
         ports:
         - name: grpc
           containerPort: 443 # Default gRPC port for the external processor
@@ -119,15 +114,16 @@ spec:
   type: ClusterIP
 ```
 
-#### Environment Variables for the External Processor
+#### Configuration options for the External Processor
 
-You can configure the Datadog App and API Protection External Processor using the following environment variables:
+The Datadog External Processor exposes some settings:
 
-| Environment variable                   | Default value   | Description                                                                  |
-|----------------------------------------|-----------------|------------------------------------------------------------------------------|
-| `DD_SERVICE_EXTENSION_HOST`            | `0.0.0.0`       | gRPC server listening address.                              |
-| `DD_SERVICE_EXTENSION_PORT`            | `443`           | gRPC server port.                                           |
-| `DD_SERVICE_EXTENSION_HEALTHCHECK_PORT`| `80`            | HTTP server port for health checks.      |
+| Environment variable                   | Default value   | Description                                                                                                                              |
+|----------------------------------------|-----------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_SERVICE_EXTENSION_HOST`            | `0.0.0.0`       | gRPC server listening address.                                                                                                           |
+| `DD_SERVICE_EXTENSION_PORT`            | `443`           | gRPC server port.                                                                                                                        |
+| `DD_SERVICE_EXTENSION_HEALTHCHECK_PORT`| `80`            | HTTP server port for health checks.                                                                                                      |
+| `DD_APPSEC_BODY_PARSING_SIZE_LIMIT`    | `0`             | Maximum size of the bodies to be processed in bytes. If set to `0`, the bodies are not processed. (Recommended value: `10000000` (10MB)) |
 
 Configure the connection from the external processor to the Datadog Agent using these environment variables:
 
@@ -137,10 +133,10 @@ Configure the connection from the external processor to the Datadog Agent using 
 | `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                                  |
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> The External Processor is built on top of the Datadog Go Tracer. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
+  <strong>Note:</strong> The Datadog External Processor is built on top of the Datadog Go Tracer. It generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (e.g. <code>v2.1.0</code>). In some cases, early release versions may be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
 </div>
 
-You can find more configuration options in [Configuring the Go Tracing Library][7] and [App and API Protection Library Configuration][8].
+The External Processor is built on top of the [Datadog Go Tracer][7] and inherits all of its environment variables. For additional details, refer to [Configuring the Go Tracing Library][8] and [App and API Protection Library Configuration][9].
 
 ### 2. Configure an EnvoyFilter
 
@@ -153,7 +149,9 @@ Choose the appropriate configuration based on whether you want to apply App and 
 
 This configuration applies App and API Protection to all traffic passing through your Istio Ingress Gateway. This is a common approach to protect all North-South traffic entering your service mesh.
 
-Below is an example manifest (`datadog-aap-gateway-filter.yaml`) that targets the default Istio Ingress Gateway that typically runs in the `istio-system` namespace with the label `istio: ingressgateway`. You must update these settings to match your specific application.
+Below is an example manifest (`datadog-aap-gateway-filter.yaml`) that targets the default Istio Ingress Gateway that typically runs in the `istio-system` namespace with the label `istio: ingressgateway`.
+
+**Note**: Please read the provided example configuration carefully and adapt it to match your infrastructure and environment. You can find more configuration options available in the [Envoy external processor documentation][10].
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -168,7 +166,67 @@ spec:
   #   labels:
   #     istio: ingressgateway # Label for the default Istio Gateway implementation
   configPatches:
-    # Patch 1: Add the Cluster definition for the Datadog External Processing service
+    # Patch to add the External Processing Filter to the Gateway's HTTP connection manager
+    - applyTo: HTTP_FILTER
+      match:
+        context: GATEWAY
+        listener:
+          filterChain:
+            filter:
+              name: "envoy.filters.network.http_connection_manager"
+              subFilter:
+                name: "envoy.filters.http.router"
+      patch:
+        # Insert this filter before the router filter. This filter needs to be the earliest filter in the chain to process malicious traffic before the data is sent to an application.
+        operation: INSERT_BEFORE
+        value:
+          name: envoy.filters.http.ext_proc
+          typed_config:
+            "@type": type.googleapis.com/envoy.extensions.filters.http.ext_proc.v3.ExternalProcessor
+            grpc_service:
+              envoy_grpc:
+                cluster_name: datadog_ext_proc_cluster
+
+              ## Mandatory: Correctly show the service as an Envoy proxy in the UI.
+              initial_metadata:
+                - key: x-datadog-envoy-integration
+                  value: '1'
+
+              ## A timeout configuration for the grpc connection exist but is not useful in our case.
+              ## This timeout is for all the request lifetime. A timeout on the route is preferred.
+              #timeout: 0s
+
+            ## Mandatory: Only enable the request and response header modes.
+            ## If you want to enable body processing, please see the section below.
+            processing_mode:
+              request_header_mode: SEND
+              response_header_mode: SEND
+
+            ## Optional for headers analysis only but **mandatory** for body processing.
+            ## The external processor can dynamically override the processing mode as needed instructing
+            ## Envoy to forward request and response bodies to the external processor. Body processing is
+            ## enabled when DD_APPSEC_BODY_PARSING_SIZE_LIMIT is set on the external processor container.
+            allow_mode_override: true
+
+            ## Optional: Set a timeout by processing message. Default is 200ms.
+            ## There is a maxium of 2 messages per requests with headers only and 4 messages maximum
+            ## with body processing enabled.
+            ## Note: This timeout also includes the data communication between Envoy and the external processor.
+            ## Optional: When the body processing is enabled, the timeout should be adjusted to accommodate
+            ## the additional possible processing time. Larger payloads will require a longer timeout. 
+            #message_timeout: 200ms
+
+            ## Optional: Enable asynchronous mode analysis. Default is false.
+            ## This mode will disable all blocking capabilities. The callout container should also be
+            ## configured with the DD_SERVICE_EXTENSION_OBSERVABILITY_MODE environment variable.
+            #observability_mode: true
+            ## Optional: When in asynchronous mode, the message_timeout is not used. This deferred
+            ## timeout starts when the http request is finished, to let the External Processor
+            ## process all processing messages. Default is 5s.
+            #deferred_close_timeout: 5s
+
+
+    # Patch to add the cluster definition for the Datadog External Processing service
     - applyTo: CLUSTER
       match:
         context: GATEWAY
@@ -198,25 +256,6 @@ spec:
                       address: "datadog-aap-extproc-service.<your-preferred-namespace>.svc.cluster.local" # Adjust if your service name or namespace is different
                       port_value: 443
 
-    # Patch 2: Add the External Processing HTTP Filter to the Gateway's HTTP connection manager
-    - applyTo: HTTP_FILTER
-      match:
-        context: GATEWAY
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.filters.network.http_connection_manager"
-              subFilter:
-                name: "envoy.filters.http.router"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.http.ext_proc
-          typed_config:
-            "@type": type.googleapis.com/envoy.extensions.filters.http.ext_proc.v3.ExternalProcessor
-            grpc_service:
-              envoy_grpc:
-                cluster_name: "datadog_aap_ext_proc_cluster"
 ```
 
 {{% /tab %}}
@@ -298,6 +337,12 @@ After applying the chosen `EnvoyFilter`, traffic passing through your Istio Ingr
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 
+## Limitations
+
+The Istio integration has the following limitations:
+
+* Inspection of request and response bodies is supported when using the Datadog External Processor image version `2.1.0` or later.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -308,5 +353,6 @@ After applying the chosen `EnvoyFilter`, traffic passing through your Istio Ingr
 [4]: /tracing/guide/setting_up_apm_with_kubernetes_service/?tab=datadogoperator
 [5]: /tracing/guide/setting_up_apm_with_kubernetes_service/?tab=datadogoperator#cluster-agent-admission-controller
 [6]: https://github.com/DataDog/dd-trace-go/pkgs/container/dd-trace-go%2Fservice-extensions-callout
-[7]: /tracing/trace_collection/library_config/go/
-[8]: /security/application_security/setup/threat_detection/
+[7]: https://github.com/DataDog/dd-trace-go
+[8]: /tracing/trace_collection/library_config/go/
+[9]: /security/application_security/policies/library_configuration/
