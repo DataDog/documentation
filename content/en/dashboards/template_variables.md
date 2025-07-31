@@ -41,7 +41,7 @@ A template variable is defined by:
 **Note**: If you do not see the tag or attribute you're looking for, it may be because that data hasn't been reported to Datadog recently. For more information, see [Historical Data][4].
 
 ## Add a template variable
-If template variables are already defined, see [Edit a template variable](#edit-a-template-variabl). If your dashboard does not have any template variables, click the question mark icon to open a help modal on how to use Dashboard Variables.
+If template variables are already defined, see [Edit a template variable](#edit-a-template-variable). If your dashboard does not have any template variables, click the question mark icon to open a help modal on how to use Dashboard Variables.
 
 {{< img src="/dashboards/template_variables/template_variable_menu.png" alt="Template variable menu showing the Configure Dropdown Values option" style="width:80%;" >}}
 
