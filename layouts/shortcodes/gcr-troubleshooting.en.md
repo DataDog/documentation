@@ -3,3 +3,5 @@ This integration depends on your runtime having a full SSL implementation. If yo
 ```dockerfile
 RUN apt-get update && apt-get install -y ca-certificates
 ```
+
+To have your Cloud Run services appear in the [software catalog][/internal_developer_portal/software_catalog/], you will need to set the `DD_SERVICE`, `DD_VERSION`, and `DD_ENV` environment variables.
