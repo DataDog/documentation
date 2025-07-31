@@ -72,9 +72,16 @@ watch-cdocs:
 	@echo "Compiling .mdoc files to HTML";
 	@node ./local/bin/js/cdocs-build.js --watch;
 
+# compile .mdoc.md files to HTML
+# so Hugo can include them in the site
+build-llms-txt:
+	@echo "Makefile: Running build-llms-txt";
+	@node ./local/bin/js/build-llms-txt.js;
+
 start:
 	@make setup-build-scripts ## Build and run docs including external content.
 	@make dependencies
+	@make build-llms-txt
 	@make update_websites_sources_module
 	@make server
 
@@ -82,6 +89,7 @@ start:
 start-no-pre-build: node_modules  ## Build and run docs excluding external content.
 	@make setup-build-scripts
 	@make build-cdocs
+	@make build-llms-txt
 	@make server
 
 # Leave build scripts as is for local testing
