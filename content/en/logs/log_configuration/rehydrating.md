@@ -77,7 +77,7 @@ Cancel ongoing rehydrations from the [Rehydration][3] page to stop jobs with the
 
 Logs that have already been indexed remain queryable until the end of the retention period selected for the historical view. All scanned and indexed logs will still be billed.
 
-{{< img src="logs/archives/log_archives_cancel_ongoing_rehydration_settings.png" alt="Canceling Ongoing Rehydrations" width="90%" >}}
+{{< img src="logs/archives/log_archives_cancel_ongoing_rehydration_settings.png" alt="Canceling ongoing historical view rehydrations in Datadog" width="90%" >}}
 
 ### Deleting historical views
 
@@ -89,7 +89,7 @@ The historical view is permanently deleted one hour after the deletion is initia
 
 View deleted historical views for up to 1 year in the past using the `View` dropdown menu:
 
-{{< img src="logs/archives/log_archives_deleted_rehydrations_settings.png" alt="Deleting Historical Views" width="90%" >}}
+{{< img src="logs/archives/log_archives_deleted_rehydrations_settings.png" alt="Viewing deleted historical views in Datadog" width="90%" >}}
 
 ## Advanced configuration
 
@@ -110,7 +110,7 @@ You can use the built-in template variables to customize the notification trigge
 
 ### Default limit for historical views
 
-Admins with the `Logs Write Archives` permission can configure default controls to ensure efficient use of log rehydration across teams. Click **Settings** to configure:
+Admins with the `Logs Write Archives` permission can configure default controls to ensure efficient use of Log Rehydration* across teams. Click **Settings** to configure:
 
 - **Default Rehydration volume limit**: Define the default number of logs (in millions) that can be rehydrated per historical view. If the limit is reached, the rehydration automatically stops, but already rehydrated logs remain accessible. Admins can also allow this limit to be overridden during view creation.
 
@@ -183,9 +183,9 @@ In order to rehydrate log events from your archives, Datadog uses a service acco
 {{< /tabs >}}
 
 
-## Understanding Rehydration scan sizes
+## Understanding rehydration scan sizes
 
-The query is applied _after_ the files matching the time period are downloaded from your archive. As a result, the Rehydration scan size is based on **total volume of logs retrieved from the archive**, not the number of logs matching the query. Archive storage is time-based, so queries scoped to specific filters (such as `service:A`) still retrieve all logs within the selected time window. This includes logs from other services (such as `service:A` and `service:B`).
+The query is applied _after_ the files matching the time period are downloaded from your archive. As a result, the rehydration scan size is based on **total volume of logs retrieved from the archive**, not the number of logs matching the query. Archive storage is time-based, so queries scoped to specific filters (such as `service:A`) still retrieve all logs within the selected time window. This includes logs from other services (such as `service:A` and `service:B`).
 
 Reducing the date range is the most effective way to limit scan size and minimize cloud data transfer costs, because query filters are applied after data is downloaded
 
