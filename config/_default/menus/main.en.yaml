@@ -5133,6 +5133,11 @@ menu:
       parent: code_coverage
       identifier: code_coverage_setup
       weight: 1
+    - name: Data Collected
+      url: code_coverage/data_collected/
+      parent: code_coverage
+      identifier: code_coverage_data_collected
+      weight: 2
     - name: Quality Gates
       url: quality_gates/
       pre: ci
