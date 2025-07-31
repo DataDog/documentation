@@ -339,16 +339,8 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 ## What's next?
 
-- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
-- Turn on [threat monitoring][9] to get alerted on attackers targeting your service.
-- See the sample code to [monitor custom business logic](#monitor-custom-business-logic)
-- See the [troubleshooting guide][5] if you have trouble collecting the telemetry
-- See the [advanced configurations][6] to
-    - connect your telemetry using tags
-    - collect telemetry for Amazon API Gateway, SQS, etc.
-    - capture the Lambda request and response payloads
-    - link errors of your Lambda functions to your source code
-    - filter or scrub sensitive information from logs or traces
+- Add custom tags to your telemetry by using the `DD_TAGS` environment variable
+- See [advanced configurations][6] for further capabilities
 
 ### Monitor custom business logic
 

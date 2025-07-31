@@ -376,16 +376,9 @@ module "lambda-datadog" {
 
 ## What's next?
 
-- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
-- Turn on [threat monitoring][11] to get alerted on attackers targeting your service.
-- Submit a [custom metric][2] or [APM span][3] to monitor your business logic.
-- See the [troubleshooting guide][4] if you have trouble collecting the telemetry
-- See the [advanced configurations][5] to
-    - connect your telemetry using tags
-    - collect telemetry for Amazon API Gateway, SQS, etc.
-    - capture the Lambda request and response payloads
-    - link errors of your Lambda functions to your source code
-    - filter or scrub sensitive information from logs or traces
+- Add custom tags to your telemetry by using the `DD_TAGS` environment variable
+- Configure [payload collection][14] to capture your functions' JSON request and response payloads
+- See [advanced configurations][5] for further capabilities
 
 ## Further Reading
 
@@ -404,3 +397,4 @@ module "lambda-datadog" {
 [11]: /security/application_security/serverless/
 [12]: https://github.com/DataDog/datadog-lambda-extension
 [13]: https://github.com/DataDog/datadog-lambda-extension/issues
+[14]: /serverless/aws_lambda/configuration?tab=datadogcli#collect-the-request-and-response-payloads

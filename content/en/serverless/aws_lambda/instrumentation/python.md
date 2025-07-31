@@ -465,16 +465,9 @@ To configure Datadog using SST v3, follow these steps:
 
 ## What's next?
 
-- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
-- Turn on [threat monitoring][6] to get alerted on attackers targeting your service.
-- See the sample code to [monitor custom business logic](#monitor-custom-business-logic)
-- See the [troubleshooting guide][2] if you have trouble collecting the telemetry
-- See the [advanced configurations][3] to
-    - connect your telemetry using tags
-    - collect telemetry for Amazon API Gateway, SQS, etc.
-    - capture the Lambda request and response payloads
-    - link errors of your Lambda functions to your source code
-    - filter or scrub sensitive information from logs or traces
+- Add custom tags to your telemetry by using the `DD_TAGS` environment variable
+- Configure [payload collection][12] to capture your functions' JSON request and response payloads
+- See [advanced configurations][3] for further capabilities
 
 ### Monitor custom business logic
 
@@ -529,3 +522,4 @@ def get_message():
 [9]: /serverless/aws_lambda/distributed_tracing/#span-auto-linking
 [10]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
 [11]: /serverless/aws_lambda/remote_instrumentation
+[12]: /serverless/aws_lambda/configuration?tab=datadogcli#collect-the-request-and-response-payloads

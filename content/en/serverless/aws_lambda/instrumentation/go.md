@@ -256,15 +256,9 @@ func myHandler(ctx context.Context, _ events.APIGatewayProxyRequest) (string, er
 
 ## What's next?
 
-- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
-- Turn on [threat monitoring][4] to get alerted on attackers targeting your service
-- See the [troubleshooting guide][2] if you have trouble collecting the telemetry
-- See the [advanced configurations][3] to
-    - connect your telemetry using tags
-    - collect telemetry for Amazon API Gateway, SQS, etc.
-    - capture the Lambda request and response payloads
-    - link errors of your Lambda functions to your source code
-    - filter or scrub sensitive information from logs or traces
+- Add custom tags to your telemetry by using the `DD_TAGS` environment variable
+- Configure [payload collection][8] to capture your functions' JSON request and response payloads
+- See [advanced configurations][3] for further capabilities
 
 ## Further Reading
 
@@ -277,3 +271,4 @@ func myHandler(ctx context.Context, _ events.APIGatewayProxyRequest) (string, er
 [5]: https://github.com/DataDog/datadog-lambda-extension
 [6]: https://github.com/DataDog/datadog-lambda-extension/issues
 [7]: /tracing/trace_collection/custom_instrumentation/go/migration
+[8]: /serverless/aws_lambda/configuration?tab=datadogcli#collect-the-request-and-response-payloads

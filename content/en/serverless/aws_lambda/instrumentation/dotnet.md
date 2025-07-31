@@ -319,17 +319,9 @@ You can then add custom spans and span tags using the .NET tracer. For instructi
 
 {{% svl-lambda-vpc %}}
 
-## What's next?
-- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
-- Turn on [threat monitoring][6] to get alerted on attackers targeting your service.
-- Submit a [custom metric][2] or [APM span][3] to monitor your business logic.
-- See the [troubleshooting guide][4] if you have trouble collecting the telemetry
-- See the [advanced configurations][5] to
-    - connect your telemetry using tags
-    - collect telemetry for Amazon API Gateway, SQS, and so on.
-    - capture the Lambda request and response payloads
-    - link errors of your Lambda functions to your source code
-    - filter or scrub sensitive information from logs or traces
+- Add custom tags to your telemetry by using the `DD_TAGS` environment variable
+- Configure [payload collection][11] to capture your functions' JSON request and response payloads
+- See [advanced configurations][5] for further capabilities
 
 ## Further Reading
 
@@ -346,3 +338,4 @@ You can then add custom spans and span tags using the .NET tracer. For instructi
 [8]: https://github.com/DataDog/datadog-lambda-extension/issues
 [9]: https://github.com/DataDog/dd-trace-dotnet-aws-lambda-layer
 [10]: https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/dotnet/dd-api/
+[11]: /serverless/aws_lambda/configuration?tab=datadogcli#collect-the-request-and-response-payloads

@@ -431,41 +431,6 @@ To configure Datadog using SST v3, follow these steps:
 
 <div class="alert alert-warning">Do not install the Datadog Lambda Library as a layer <i>and</i> as a JavaScript package. If you installed the Datadog Lambda Library as a layer, do not include <code>datadog-lambda-js</code> in your <code>package.json</code>, or install it as a dev dependency and run <code>npm install --production</code> before deploying.</div>
 
-## Span Auto-linking
-
-When segments of your asynchronous requests cannot propagate trace context, Datadog's [Span Auto-linking][9] feature automatically detects linked spans. 
-
-### Configure Auto-linking for DynamoDB PutItem
-
-To enable Span Auto-linking for [DynamoDB Change Streams][10]'s `PutItem` operation, configure primary key names for your tables.
-
-This enables DynamoDB `PutItem` calls to be instrumented with span pointers. Many DynamoDB API calls do not include the item's primary key fields as separate values, so they need to be provided to the tracer separately. This field is structured as a `object` keyed by the table names as `strings`. Each value is an `array` of primary key fields (as `string`) for the associated table. The array can have exactly one or two elements, depending on the table's primary key schema.
-
-{{< tabs >}}
-{{% tab "Node.js" %}}
-```js
-// Initialize the tracer with the configuration
-const tracer = require('dd-trace').init({
-  dynamoDb: {
-    tablePrimaryKeys: {
-      'table_name': ['key1', 'key2'],
-      'other_table': ['other_key']
-    }
-  }
-})
-```
-{{% /tab %}}
-
-{{% tab "Environment variable" %}}
-```sh
-export DD_TRACE_DYNAMODB_TABLE_PRIMARY_KEYS='{
-    "table_name": ["key1", "key2"],
-    "other_table": ["other_key"]
-}'
-```
-{{% /tab %}}
-{{< /tabs >}}
-
 ## FIPS compliance
 
 {{% svl-lambda-fips %}}
@@ -476,16 +441,9 @@ export DD_TRACE_DYNAMODB_TABLE_PRIMARY_KEYS='{
 
 ## What's next?
 
-- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
-- Turn on [threat monitoring][6] to get alerted on attackers targeting your service.
-- See the sample code to [monitor custom business logic](#monitor-custom-business-logic)
-- See the [troubleshooting guide][2] if you have trouble collecting the telemetry
-- See the [advanced configurations][3] to
-    - connect your telemetry using tags
-    - collect telemetry for Amazon API Gateway, SQS, etc.
-    - capture the Lambda request and response payloads
-    - link errors of your Lambda functions to your source code
-    - filter or scrub sensitive information from logs or traces
+- Add custom tags to your telemetry by using the `DD_TAGS` environment variable
+- Configure [payload collection][12] to capture your functions' JSON request and response payloads
+- See [advanced configurations][3] for further capabilities
 
 ### Monitor custom business logic
 
@@ -544,3 +502,4 @@ exports.handler = async (event) => {
 [9]: /serverless/aws_lambda/distributed_tracing/#span-auto-linking
 [10]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
 [11]: /serverless/aws_lambda/remote_instrumentation
+[12]: /serverless/aws_lambda/configuration?tab=datadogcli#collect-the-request-and-response-payloads
