@@ -3643,9 +3643,9 @@ menu:
       identifier: cloud_cost_container_cost_allocation_google
       weight: 103
     - name: BigQuery Costs
-      url: cloud_cost_management/cost_allocation/bigquery_cost_allocation/
+      url: cloud_cost_management/cost_allocation/bigquery/
       parent: cloud_cost_cost_allocation
-      identifier: cloud_cost_bigquery_cost_allocation
+      identifier: cloud_cost_cost_allocationbigquery
       weight: 302
     - name: Custom Allocation Rules
       url: cloud_cost_management/custom_allocation_rules
