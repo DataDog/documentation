@@ -7,9 +7,9 @@
   "dashboards":
     "aws_codedeploy": "assets/dashboards/aws_codedeploy.json"
   "integration":
-    "auto_install": falso
+    "auto_install": false
     "events":
-      "creates_events": verdadero
+      "creates_events": true
     "metrics":
       "check": "aws.codedeploy.deployment"
       "metadata_path": "metadata.csv"
@@ -30,18 +30,18 @@
 - "configuration & deployment"
 - "log collection"
 - "provisioning"
-"custom_kind": "integración"
+"custom_kind": "integration"
 "dependencies": []
-"description": "Ve los despliegues a medida que se producen y controla el tiempo que tardan".
-"display_on_public_website": verdadero
+"description": "Ve los despliegues a medida que se producen y controla el tiempo que tardan"
+"display_on_public_website": true
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_codedeploy/"
-"draft": falso
+"draft": false
 "git_integration_title": "amazon_codedeploy"
-"has_logo": verdadero
+"has_logo": true
 "integration_id": "amazon-codedeploy"
 "integration_title": "AWS CodeDeploy"
 "integration_version": ""
-"is_public": verdadero
+"is_public": true
 "manifest_version": "2.0.0"
 "name": "amazon_codedeploy"
 "public_title": "AWS CodeDeploy"
