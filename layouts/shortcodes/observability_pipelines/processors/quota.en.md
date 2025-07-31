@@ -3,7 +3,7 @@ The quota processor measures the logging traffic for logs that match the filter 
 You can also use field-based partitioning, such as `service`, `env`, `status`. Each unique fields uses a separate quota bucket with its own daily quota limit. See [Partition example](#partition-example) for more information.
 
 **Notes**:
-- Each Worker can have up to 1000 buckets. If you need to increase the bucket limit, contact your account manager.
+- Each pipeline can have up to 1000 buckets. If you need to increase the bucket limit, contact your account manager.
 - The pipeline uses the name of the quota to identify the quota across multiple Remote Configuration deployments of the Worker.
 
 
