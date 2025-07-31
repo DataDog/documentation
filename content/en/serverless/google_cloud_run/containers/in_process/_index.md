@@ -12,4 +12,4 @@ Then, instrument your application using one of the following guides:
 
 {{< partial name="serverless/in-process-languages.html" >}}
 
-[1] /integrations/google-cloud-platform/
+[1]: /integrations/google-cloud-platform/
