@@ -1,5 +1,5 @@
 ---
-title: Monitoring AWS Lambda
+title: Serverless Monitoring for AWS Lambda
 further_reading:
 - link: '/serverless/configuration/'
   tag: 'Documentation'
@@ -33,7 +33,7 @@ further_reading:
   text: "Monitor Lambda-hosted web apps with the Lambda Web Adapter integration"
 ---
 
-Datadog Serverless Monitoring for AWS Lambda helps you troubleshoot your AWS Lambda applications with real-time telemetry.
+Datadog Serverless Monitoring for AWS Lambda gives you visibility into your Lambda functions.
 
 To get started, follow the [installation instructions][1] to collect metrics, traces, and logs from your serverless applications.
 
