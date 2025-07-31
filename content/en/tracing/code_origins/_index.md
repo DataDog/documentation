@@ -49,7 +49,7 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 |---|---|---|
 | Java | 1.47.0+ | Spring Boot/Data, gRPC servers, Micronaut 4, Kafka consumers|
 | Python | 2.15.0+ | Django, Flask, Starlette and derivatives|
-| Node.js | 4.49.0+ | Fastify|
+| Node.js | 4.49.0+ | Fastify, Express (5.54.0+)|
 | .NET | 3.15.0+ | ASP.NET, ASP.NET Core| 
 
 ### Enable Code Origins
@@ -61,7 +61,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 ```
 
 <div class="alert alert-info">
-  For transpiled Node.js applications (for example, TypeScript), make sure to generate and publish source maps with the deployed application, and to run Node.js with the <a href="https://nodejs.org/docs/latest/api/cli.html#--enable-source-maps"><code>--enable-source-maps</code></a> flag. Otherwise, code previews do not work. See the Node.js <a href="/integrations/guide/source-code-integration/?tab=nodejs#setup">Source Code Integration</a> documentation for more details.
+  For transpiled Node.js applications (for example, TypeScript), make sure to generate and publish source maps with the deployed application, run Node.js with the <a href="https://nodejs.org/docs/latest/api/cli.html#--enable-source-maps"><code>--enable-source-maps</code></a> flag, and use v5.59.0 or newer of the Node.js tracer. Otherwise, code previews do not work. See the Node.js <a href="/integrations/guide/source-code-integration/?tab=nodejs#setup">Source Code Integration</a> documentation for more details.
 </div>
 
 ## Using Code Origins
@@ -107,12 +107,10 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 
     {{< img src="tracing/code_origins/code_origin_service_entry_spans_filter.png" alt="Code Origins - Search for Service Entry Spans" style="width:100%;">}}
 
-- To search for all spans that include Code Origins, use the query `@_dd.code_origin.type:*` in the [APM Trace Explorer][1].
-
 ### Code preview is not visible or the file is not found
 
 - Ensure all [Source Code Integration][7] setup requirements are met, including your `DD_GIT_*` environment variables are configured with the correct values.
-- For transpiled Node.js applications (for example, TypeScript), make sure to generate and publish source maps with the deployed application, and to run Node.js with the [`--enable-source-maps`][10] flag. Otherwise, code previews will not work. See the Node.js [Source Code Integration][9] documentation for more details.
+- For transpiled Node.js applications (for example, TypeScript), make sure to generate and publish source maps with the deployed application, run Node.js with the [`--enable-source-maps`][10] flag, and use v5.59.0 or newer of the Node.js tracer. Otherwise, code previews will not work. See the Node.js [Source Code Integration][9] documentation for more details.
 - Code Origins is designed to reference user code only, but in some cases, third-party code references may slip through. You can report these cases to [Datadog support][13] and help improve these references.
 
 ## Further Reading
