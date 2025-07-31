@@ -75,6 +75,7 @@ The OpenAI integration instruments the following methods, including streamed cal
 - [Responses][50]:
    - `OpenAI().responses.create()`
    - `AsyncOpenAI().responses.create()`
+-  [Calls made to DeepSeek through the OpenAI Python SDK][54] (as of `ddtrace==3.1.0`)
 
 ## LangChain
 
@@ -322,6 +323,7 @@ The LiteLLM integration instruments the following methods:
 [51]: https://ai.google.dev/api/embeddings#method:-models.embedcontent
 [52]: https://github.com/google-gemini/deprecated-generative-ai-python
 [53]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
+[54]: https://api-docs.deepseek.com/
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -392,6 +394,7 @@ The OpenAI integration instruments the following methods, including streamed cal
   - `openai.chat.completions.create()`
 - [Embeddings][5]:
   - `openai.embeddings.create()`
+- [Calls made to DeepSeek through the OpenAI Node.js SDK][21] (as of `dd-trace@5.42.0`)
 
 ## LangChain
 
@@ -535,6 +538,7 @@ module.exports = {
 [18]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/nodejs/latest#send-text-prompt-requests
 [19]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/nodejs/latest#send-multiturn-chat-requests
 [20]: https://www.npmjs.com/package/@aws-sdk/client-bedrock-runtime
+[21]: https://api-docs.deepseek.com/
 {{% /tab %}}
 {{< /tabs >}}
 

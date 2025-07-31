@@ -13,7 +13,7 @@ author:
 categories:
 - マーケットプレイス
 - sap
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -77,4 +77,4 @@ Agentil は、2 つの SAP インテグレーションを提供しています�
 [1]: https://docs.datadoghq.com/ja/integrations/agentil_software_sap_businessobjects/
 [2]: https://docs.datadoghq.com/ja/integrations/agentil_software_sap_netweaver/
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/agentil-software-services-5-days" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/agentil-software-services-5-days" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

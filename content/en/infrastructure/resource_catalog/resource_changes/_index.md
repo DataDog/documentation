@@ -4,15 +4,6 @@ further_reading:
 - link: "/infrastructure/resource_catalog/"
   tag: "Documentation"
   text: "Datadog Resource Catalog Overview"
-- link: "/integrations/amazon_config/"
-  tag: "Documentation"
-  text: "AWS Config Integration"
-- link: "/integrations/google_cloud_platform/#resource-changes-collection"
-  tag: "Documentation"
-  text: "Google Cloud Platform Integration for Resource Changes"
-- link: "/integrations/azure/"
-  tag: "Documentation"
-  text: "Azure Integration for Resource Changes"
 ---
 
 {{< site-region region="gov" >}}
@@ -45,15 +36,7 @@ For a comprehensive list of supported resources, see the [Supported resources](#
 
 ## Setup
 
-To view configuration changes for your resources:
-
-1.  **Enable Resource Collection**: Ensure that resource collection is enabled for your cloud resources so they are visible within the Resource Catalog. You can manage this setting from the [Resource Catalog settings page][2] or the relevant [cloud provider integration tile][3]. This step automatically enables [Snapshot Changes](#snapshot-changes) for your resources.
-2.  **Cloud Provider Event Forwarding**: For real-time or more frequent change updates, configure event forwarding from your cloud provider:
-    - **AWS**: Set up change event forwarding through AWS Config. See the [AWS Config integration page][4] for details.
-    - **Azure**: Enable Resource Collection for your Azure subscriptions in the [Azure integration tile][5].
-    - **Google Cloud Platform**: Follow the instructions on the [Google Cloud Platform integration page][6] to receive resource events in Datadog when Google's Cloud Asset Inventory detects changes in your cloud resources.
-
- <div class="alert alert-info">If you enable only Resource Collection without setting up cloud provider event forwarding, Datadog identifies configuration changes using <strong>Snapshot Changes</strong>.</div>
+To view configuration changes for your resources, ensure that resource collection is enabled for your cloud resources so they are visible within the Resource Catalog. You can manage this setting from the [Resource Catalog settings page][2] or the relevant [cloud provider integration tile][3]. This step automatically enables [Snapshot Changes](#snapshot-changes) for your resources.
 
 ### Snapshot Changes
 
@@ -243,8 +226,5 @@ If you have a request for an additional resource type, contact [Datadog Support]
 [1]: https://app.datadoghq.com/infrastructure/catalog
 [2]: https://app.datadoghq.com/infrastructure/catalog/configuration
 [3]: https://app.datadoghq.com/integrations
-[4]: /integrations/amazon_config/#resource-changes-collection
-[5]: https://app.datadoghq.com/integrations/azure
-[6]: /integrations/google_cloud_platform/#resource-changes-collection
 [7]: /help/
 [8]: https://app.datadoghq.com/infrastructure/catalog/changes
