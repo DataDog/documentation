@@ -84,6 +84,9 @@ network_devices:
         - "key2:val2"
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Viewing VPN Tunnels
 
 To view VPN tunnels in the UI:
