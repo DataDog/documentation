@@ -14,8 +14,6 @@ Use this guide if:
 - You're not using Helm or the Datadog Operator, or prefer a lighter-weight integration method.
 - You want to control instrumentation directly in your pod specs, rather than through centralized configuration files.
 
-**Note:** This method still requires the Datadog Admission Controller to be deployed and enabled in your cluster.
-
 ## Requirements
 
 - Kubernetes v1.14+
