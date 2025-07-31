@@ -81,9 +81,9 @@ Cloud SIEM [Content Packs][9] are a curated set of Datadog integrations specific
 
 After a content pack is activated, the content pack gives you the integration's health status and provides troubleshooting steps if something goes wrong so you can get back up and operational as fast as possible.
 
-### Visual log search
+### Log search and analysis
 
-TKTK
+Build searches in the Log Explorer using facets or by clicking fields directly in the logs. Or use Bits AI and natural language search to find important security events. With built-in group-by and table lookup functions as well as pattern analysis and visualizations, security teams can get security insights from their data.  See [Log Search Syntax][10] for more information.
 
 ## Get started
 
