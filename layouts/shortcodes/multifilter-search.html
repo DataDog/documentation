@@ -17,21 +17,27 @@
 {{ $data := slice }}
 
 {{ $resource_path := (.Get "resource")}}
-{{ $resource := resources.Get $resource_path}}
+{{ $resource_asset := resources.Get $resource_path }}
+{{ $resource_data := index site.Data $resource_path }}
 
-{{/*  Determine data source, if any  */}}
-{{ if and (not (isset $.Page.Params "multifiltersearch")) (not $resource) }}
+{{/*  Determine multifiltersearch data source, if any  */}}
+{{ if and (not (isset $.Page.Params "multifiltersearch")) (not $resource_asset) (not $resource_data) }}
   {{ errorf "No data source provided for multifilter-search component on %s" $.Page.RelPermalink }}
 {{ else if isset $.Page.Params "multifiltersearch" }}
   {{/*  Get Frontmatter dataset  */}}
   {{ $headers = $.Page.Params.multifiltersearch.headers}}
   {{ $data = $.Page.Params.multifiltersearch.data}}
-{{ else if $resource }}
-  {{/*  Get JSON dataset  */}}
-  {{ $resource_data := unmarshal $resource}}
+{{ else if $resource_asset }}
+  {{/*  Get JSON dataset from assets directory */}}
+  {{ $resource := unmarshal $resource_asset}}
+  {{ $headers = (index $resource "multifiltersearch" "headers")}}
+  {{ $data = (index $resource "multifiltersearch" "data")}}
+{{ else if $resource_data }}
+  {{/*  Get JSON dataset from data directory */}}
   {{ $headers = (index $resource_data "multifiltersearch" "headers")}}
   {{ $data = (index $resource_data "multifiltersearch" "data")}}
 {{ end }}
+  
 
 
 <div 
