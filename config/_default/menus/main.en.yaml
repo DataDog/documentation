@@ -5122,12 +5122,23 @@ menu:
       parent: tests
       identifier: tests_troubleshooting
       weight: 17
+    - name: Code Coverage
+      url: code_coverage/
+      pre: ci
+      parent: software_delivery_heading
+      identifier: code_coverage
+      weight: 50000
+    - name: Setup
+      url: code_coverage/setup/
+      parent: code_coverage
+      identifier: code_coverage_setup
+      weight: 1
     - name: PR Gates
       url: pr_gates/
       pre: ci
       parent: software_delivery_heading
       identifier: pr_gates
-      weight: 50000
+      weight: 60000
     - name: Setup
       url: pr_gates/setup
       parent: pr_gates
@@ -5143,7 +5154,7 @@ menu:
       pre: ci
       parent: software_delivery_heading
       identifier: dora_metrics
-      weight: 60000
+      weight: 70000
     - name: Setup
       url: dora_metrics/setup
       parent: dora_metrics
