@@ -107,6 +107,8 @@ module:
        target: data
      - source: assets
        target: assets
+     - source: layouts/shortcodes
+       target: layouts/shortcodes
 
   mounts:
     # default mounts
