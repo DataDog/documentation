@@ -44,7 +44,7 @@ See [Datadog Source Code Integration][1] for more information about how Datadog 
 The `datadog-ci coverage upload` command sends the following data to Datadog:
 - **Coverage reports**: the report files, which contains the coverage data for your codebase. The data depends on the coverage tool and report format you are using, and normally includes file paths, line numbers, and coverage percentages.
 - **Git metadata**: git repository URL, branch name, commit SHA, timestamp, author information, and list of file paths that were changed in the commit. Git metadata upload can be disabled by adding `--skip-git-metadata-upload=1` to the command.
-- **Git diff summary**: list of file paths that were changed in the commit, along with the indices of added and removed lines. Diff data upload can be disabled by adding `--upload-git-diff=0` to the command.
+- **Git diff summary**: list of file paths that were changed in the commit, along with the numbers of added and removed lines. Diff data upload can be disabled by adding `--upload-git-diff=0` to the command.
 - **CI metadata**: information about the CI environment, such as the CI provider, job ID, and pipeline ID.
 
 No source code is uploaded to Datadog.
