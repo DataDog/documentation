@@ -305,6 +305,12 @@
     "request_description": "Assign case payload",
     "request_schema_description": "Case assign request"
   },
+  "UpdateAttributes": {
+    "description": "Update case attributes",
+    "summary": "Update case attributes",
+    "request_description": "Case attributes update payload",
+    "request_schema_description": "Case update attributes request"
+  },
   "UpdatePriority": {
     "description": "Update case priority",
     "summary": "Update case priority",
