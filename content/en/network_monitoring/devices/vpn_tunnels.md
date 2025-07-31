@@ -16,7 +16,7 @@ VPN monitoring provides visibility into your devices VPN tunnels within Network 
 
 When configured, the SNMP check collects VPN tunnel data from your devices. This can be configured for individual as well as Autodiscovered devices.
 
-## Limitations
+### Limitations
 
 - Only Cisco IPsec VPN tunnels are currently supported.
 
@@ -83,6 +83,29 @@ network_devices:
         - "key1:val1"
         - "key2:val2"
 ```
+
+## Viewing VPN Tunnels
+
+To view VPN tunnels in the UI:
+
+1. Select a monitored device in NDM that has VPN tunnels.
+2. Click on the **VPN Tunnels** tab in the device's side panel.
+
+### Metrics Collected
+
+The following metrics are made available after enabling VPN monitoring:
+
+| Metric Name                   | Description                                                                  |
+|-------------------------------|------------------------------------------------------------------------------|
+| snmp.cipSecTunActiveTime      | The duration the tunnel has been active in hundredths of seconds.            |
+| snmp.cipSecTunHcInOctets      | The number of octets received by the tunnel.                                 |
+| snmp.cipSecTunHcOutOctets     | The number of octets sent by the tunnel.                                     |
+| snmp.cipSecTunInPkts          | The number of packets received by the tunnel.                                |
+| snmp.cipSecTunOutPkts         | The number of packets sent by the tunnel.                                    |
+| snmp.cipSecTunInAuthFails     | The number of inbound authentications that ended in failure for the tunnel.  |
+| snmp.cipSecTunOutAuthFails    | The number of outbound authentications that ended in failure for the tunnel. |
+| snmp.cipSecTunInDecryptFails  | The number of inbound decryptions that ended in failure for the tunnel.      |
+| snmp.cipSecTunOutEncryptFails | The number of outbound encryptions that ended in failure for the tunnel.     |
 
 ## Troubleshooting
 
