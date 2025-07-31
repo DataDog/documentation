@@ -65,7 +65,7 @@ With the custom percentage strategy, you can define static custom percentages fo
 
 {{< img src="cloud_cost/custom_allocation_rules/proportional_diagram-2.png" alt="Diagram illustrating the proportional split strategy" style="width:70%;" >}}
 
-Costs are allocated based on the proportional spend of destination values. Similarly to even allocation, you can further customize your allocation by setting filters and partitions.
+Shared costs are allocated based on each destination's share of total spend. Similarly to even allocation, you can further customize your allocation by setting filters and partitions.
 
 In the preceding diagram, the pink bar represents a filter on the cost allocation. With this filter applied, EC2 support fees are split across teams _based on each team's share of overall EC2 spend_.
 
