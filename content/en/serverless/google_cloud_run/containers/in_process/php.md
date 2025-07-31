@@ -17,8 +17,8 @@ further_reading:
 Install the tracer in your Dockerfile:
 
 ```Dockerfile
-RUN curl -LO https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php
-RUN php datadog-setup.php --php-bin=all
+RUN curl -LO https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php \
+  && php datadog-setup.php --php-bin=all
 ```
 
 When running the `datadog-setup.php` script, you can also enable appsec and profiling via the `--enable-appsec` and `--enable-profiling` flags.
