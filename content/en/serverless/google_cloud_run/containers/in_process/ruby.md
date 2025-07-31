@@ -20,7 +20,7 @@ source 'https://rubygems.org'
 gem 'datadog'
 ```
 
-See [Tracing Ruby applications][1] for additional information on how to configure the tracer.
+See [Tracing Ruby applications][1] for additional information on how to configure the tracer and enable auto instrumentation.
 
 ## 2. Install Serverless-Init
 
