@@ -39,5 +39,5 @@ To pivot to related Static Analysis or Software Composition Analysis results in 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/ci/quality-gates
+[1]: https://app.datadoghq.com/ci/pr-gates/
 [2]: /security/code_security/

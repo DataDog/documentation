@@ -135,7 +135,7 @@ For more information, see the [RBAC Permissions documentation][1].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/rbac/permissions
-[2]: https://app.datadoghq.com/ci/quality-gates
+[2]: https://app.datadoghq.com/ci/pr-gates
 [3]: /account_management/audit_trail/events/#ci-visibility-events
 [4]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/gate/README.md
 [5]: https://app.datadoghq.com/organization-settings/api-keys

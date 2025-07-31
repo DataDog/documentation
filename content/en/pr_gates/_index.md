@@ -138,7 +138,7 @@ For more information, see the [Audit Trail documentation][4].
 [3]: /account_management/audit_trail/
 [4]: /account_management/audit_trail/events/#ci-visibility-events
 [5]: /pr_gates/search/
-[6]: https://app.datadoghq.com/ci/quality-gates
+[6]: https://app.datadoghq.com/ci/pr-gates
 [7]: https://github.com/DataDog/datadog-ci
 [8]: /pr_gates/explorer/
 [9]: /tests/
@@ -146,4 +146,4 @@ For more information, see the [Audit Trail documentation][4].
 [11]: /security/code_security/static_analysis
 [12]: /security/code_security/software_composition_analysis
 [13]: /integrations/github/
-[14]: https://app.datadoghq.com/ci/quality-gates/executions
+[14]: https://app.datadoghq.com/ci/pr-gates/
