@@ -1,5 +1,5 @@
 ---
-title: Instrumenting Google Cloud Run Containers with Sidecar
+title: Sidecar Instrumentation
 aliases:
   - /serverless/google_cloud_run/containers_sidecar/
 further_reading:

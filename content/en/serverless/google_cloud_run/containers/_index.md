@@ -1,5 +1,5 @@
 ---
-title: Choosing an Instrumentation Method
+title: Choosing an Instrumentation Method for Containers
 further_reading:
   - link: "/integrations/google-cloud-run/"
     tag: "Documentation"
