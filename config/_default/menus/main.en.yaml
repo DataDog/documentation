@@ -800,11 +800,6 @@ menu:
       identifier: otel_rum
       parent: otel_explore
       weight: 703
-    - name: DBM and Traces
-      url: /opentelemetry/correlate/dbm_and_traces/
-      identifier: otel_dbm
-      parent: otel_explore
-      weight: 704
     - name: Integrations
       url: opentelemetry/integrations/
       identifier: otel_integrations
