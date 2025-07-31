@@ -62,18 +62,6 @@ Effective security response requires speed, context, insight, and automation. By
 
 To keep your team on top of the latest attacks, Datadog also has a team of threat researchers who analyze petabytes of telemetry across cloud and on-premises systems to identify emerging threats and attacker behaviors. See [Datadog Security Labs][1] to read articles about their recent investigations.
 
-## Get started
-
-If you don't already have a Datadog account, sign up for a [free trial][2]. After you log in to your Datadog account:
-
-1. Navigate to [Cloud SIEM][3].
-1. Click **Enable Cloud SIEM**.
-1. Follow the onboarding steps.
-
-See the [Getting Started Guide][4] for more detailed setup instructions.
-
-## Key features
-
 ### Security and observability
 
 Cloud SIEM embeds both cloud and on-premises telemetry directly into security workflows to accelerate investigation and response. And with a shared platform that brings DevOps and Security teams together, organizations can break down silos and respond to threats collaboratively and efficiently.
@@ -84,6 +72,16 @@ As your organization scales, controlling the ingestion cost of security logs wit
 - [Standard indexing][6] for logs that need to be queried frequently and retained short term.
 - [Flex Logs][7] for logs that need to be retained long-term, but sometimes need to be queried urgently.
 - [Log Archives][8] for logs that are infrequently queried and need to be stored long-term.
+
+## Get started
+
+If you don't already have a Datadog account, sign up for a [free trial][2]. After you log in to your Datadog account:
+
+1. Navigate to [Cloud SIEM][3].
+1. Click **Enable Cloud SIEM**.
+1. Follow the onboarding steps.
+
+See the [Getting Started Guide][4] for more detailed setup instructions.
 
 ## Cloud SIEM Overview page
 
