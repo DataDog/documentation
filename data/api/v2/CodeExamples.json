@@ -275,6 +275,13 @@
       "description": "Unassign case returns \"OK\" response"
     }
   ],
+  "UpdateAttributes": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Update case attributes returns \"OK\" response"
+    }
+  ],
   "UpdatePriority": [
     {
       "group": "case_management",
