@@ -9,10 +9,19 @@ further_reading:
 
 ## Overview
 
-Datadog Cloud Cost Management (CCM) automatically allocates the costs of your Google BigQuery resources to individual queries and workloads. Use cost metrics enriched with tags from queries, projects, and reservations to visualize BigQuery workload costs in the context of your entire cloud bill.
+Datadog Cloud Cost Management (CCM) automatically allocates the costs of your Google BigQuery resources to individual queries and workloads. Use cost metrics enriched with tags from queries, projects, and reservations to visualize BigQuery workload costs in the context of your entire cloud bill. CCM displays costs for resources including query-level analysis, storage, and data transfer on the [**BigQuery** dashboard][1].
 
-## Resources
-CCM allocates costs for BigQuery resources for both types of Analysis costs (on-demand and reservation-based). CCM displays costs for resources including query-level analysis, storage, and data transfer on the [**BigQuery** dashboard][1].
+## BigQuery pricing models
+
+BigQuery offers two primary pricing models for query processing:
+
+**On-demand queries**: You pay per query based on the amount of data processed. Costs are directly attributed to individual queries with no upfront commitment.
+
+**Reservation-based queries**: You purchase dedicated processing capacity (slots) in advance at a fixed cost. Multiple queries can share this reserved capacity, making cost attribution more complex but potentially more cost-effective for consistent workloads.
+
+CCM allocates and enriches costs for both pricing models, providing detailed cost attribution and tagging regardless of which model you use.
+
+Learn more about BigQuery services and pricing models [**here**][3].
 
 ## Prerequisites
 
@@ -20,12 +29,13 @@ The following table presents the list of collected features and the minimal requ
 
 | Feature | Requirements |
 |---|---|
-| Retrieve tags from labels of a query | Supported without monitoring or reservations |
+| Retrieve tags from labels of a query | GCP CCM costs must be setup. Supported without monitoring or reservations. |
 | Query-Level Cost Attribution | BigQuery monitoring enabled |
 | Reservation Cost Allocation | BigQuery reservations configured |
 
 1. Configure the Google Cloud Cost Management integration on the [Cloud Cost Setup page][2].
-2. Enable BigQuery monitoring in your Google Cloud project.
+2. Enable BigQuery monitoring in your Google Cloud project. 
+[**Enable BigQuery monitoring here**][4]
 3. For reservation cost allocation, configure BigQuery reservations in your project.
 
 ## Allocating costs
@@ -43,7 +53,7 @@ Where:
 - `total_slot_usage`: The total slot-seconds used across all queries in the project's reservations
 - `total_project_reservation_cost`: The total cost of the reservations in a given project for the time period
 
-Any difference between the total billed reservation cost and the sum of allocated query costs is categorized as a project's `cluster_idle` cost, representing unused reservation capacity. 
+Any difference between the total billed reservation cost and the sum of allocated query costs is categorized as a project's idle cost, representing unused reservation capacity. These costs are tagged with `allocated_spend_type:cluster_idle`, while actual query execution costs (both reservation and on-demand) are tagged with `allocated_spend_type:usage`. 
 
 ### Understanding idle costs
 
@@ -110,3 +120,5 @@ Storage costs are categorized as:
 
 [1]: https://app.datadoghq.com/dashboard/ecm-es8-agw/bigquery-allocation
 [2]: https://app.datadoghq.com/cost/setup 
+[3]: https://cloud.google.com/bigquery/pricing?hl=en
+[4]: https://docs.datadoghq.com/integrations/google-cloud-bigquery/
