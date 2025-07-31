@@ -47,7 +47,7 @@ Contact [support][2] If you do not want the option to include triggering group-b
 
 ## Security rules can use webhooks
 
-<div class="alert alert-warn">If you are a <a href = "https://docs.datadoghq.com/data_security/hipaa_compliance/">HIPAA-enabled organization</a>, webhooks for security rules is disabled.</a></div>
+<div class="alert alert-warning">If you are a <a href = "https://docs.datadoghq.com/data_security/hipaa_compliance/">HIPAA-enabled organization</a>, webhooks for security rules is disabled.</a></div>
 
 Security notifications can be sent to [integrations][5], such as Jira, PagerDuty, and [webhooks][6]. Contact [support][2] if you do not want users to be able to send notifications to a third-party service using webhooks.
 
