@@ -101,15 +101,15 @@ To edit a metric's metadata:
 1. Select the metric you want to edit.
 1. Click **Edit** in the side panel.
 1. Apply the following updates:
-  - `k8s.pod.cpu.usage`
-      - **Metric Type**: `Gauge`
-      - **Unit**: `core`
-  - `k8s.pod.network.io`
-      - **Metric Type**: `Gauge`
-      - **Unit**: `byte per second`
-  - `k8s.pod.network.errors`
-      - **Metric Type**: `Gauge`
-      - **Unit**: `byte per second`
+   - `k8s.pod.cpu.usage`
+       - **Metric Type**: `Gauge`
+       - **Unit**: `core`
+   - `k8s.pod.network.io`
+       - **Metric Type**: `Gauge`
+       - **Unit**: `byte per second`
+   - `k8s.pod.network.errors`
+       - **Metric Type**: `Gauge`
+       - **Unit**: `byte per second`
 1. Click **Save**.
   
 ## Correlating traces with infrastructure metrics
