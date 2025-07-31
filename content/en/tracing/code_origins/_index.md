@@ -107,8 +107,6 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 
     {{< img src="tracing/code_origins/code_origin_service_entry_spans_filter.png" alt="Code Origins - Search for Service Entry Spans" style="width:100%;">}}
 
-- To search for all spans that include Code Origins, use the query `@_dd.code_origin.type:*` in the [APM Trace Explorer][1].
-
 ### Code preview is not visible or the file is not found
 
 - Ensure all [Source Code Integration][7] setup requirements are met, including your `DD_GIT_*` environment variables are configured with the correct values.
