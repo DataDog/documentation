@@ -2,7 +2,11 @@
   <div class="card justify-content-center h-100">
     <a href="{{ .Get "link" }}" aria-label="{{ .Get "name" }} datadog integration docs link">
       <div class="card-body text-center p-2">
-        <img class="img-fluid mx-auto my-auto" src="https://static.datadoghq.com/static/images/logos/{{ .Get "avatar" }}_avatar.svg" alt="{{ .Get "name" }} logo" loading="lazy">
+        {{ if .Get "src" }}
+          {{ partial "img.html" (dict "root" . "src" ( .Get "src" ) "class" "img-fluid mx-auto my-auto" "alt" ( .Get "name" ) "width" "400" "loading" "lazy") }}
+        {{ else }}
+          <img class="img-fluid mx-auto my-auto" src="https://static.datadoghq.com/static/images/logos/{{ .Get "avatar" }}_avatar.svg" alt="{{ .Get "name" }} logo" loading="lazy">
+        {{ end }}
         <div class="title mt-1 lh-1 fw-bold">{{ .Get "name" }}</div>
       </div>
     </a>

@@ -761,11 +761,10 @@ components:
       schema:
         type: string
     ResourceID:
-      description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
-        `dashboard`, `integration-account`, `integration-service`, `integration-webhook`,
-        `notebook`, `reference-table`, `security-rule`, `slo`, `workflow`, `app-builder-app`,
-        `connection`, `connection-group`, `rum-application`, `cross-org-connection`,
-        `spreadsheet`.'
+      description: 'Identifier, formatted as `type:id`. Supported types: `dashboard`,
+        `integration-service`, `integration-webhook`, `notebook`, `reference-table`,
+        `security-rule`, `slo`, `workflow`, `app-builder-app`, `connection`, `connection-group`,
+        `rum-application`, `cross-org-connection`, `spreadsheet`.'
       example: dashboard:abc-def-ghi
       in: path
       name: resource_id
@@ -6947,7 +6946,7 @@ components:
       - data
       type: object
     CaseAttributes:
-      description: Case attributes
+      description: Case resource attributes
       properties:
         archived_at:
           description: Timestamp of when the case was archived
@@ -6955,6 +6954,8 @@ components:
           nullable: true
           readOnly: true
           type: string
+        attributes:
+          $ref: '#/components/schemas/CaseObjectAttributes'
         closed_at:
           description: Timestamp of when the case was closed
           format: date-time
@@ -7059,6 +7060,13 @@ components:
       required:
       - data
       type: object
+    CaseObjectAttributes:
+      additionalProperties:
+        items:
+          type: string
+        type: array
+      description: The definition of `CaseObjectAttributes` object.
+      type: object
     CasePriority:
       default: NOT_DEFINED
       description: Case priority
@@ -7154,6 +7162,33 @@ components:
       type: string
       x-enum-varnames:
       - STANDARD
+    CaseUpdateAttributes:
+      description: Case update attributes
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseUpdateAttributesAttributes'
+        type:
+          $ref: '#/components/schemas/CaseResourceType'
+      required:
+      - attributes
+      - type
+      type: object
+    CaseUpdateAttributesAttributes:
+      description: Case update attributes attributes
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseObjectAttributes'
+      required:
+      - attributes
+      type: object
+    CaseUpdateAttributesRequest:
+      description: Case update attributes request
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseUpdateAttributes'
+      required:
+      - data
+      type: object
     CaseUpdatePriority:
       description: Case priority status
       properties:
@@ -12342,7 +12377,14 @@ components:
       - type
       type: object
     Dataset:
-      description: Dataset object.
+      description: "Dataset object.\n\n### Datasets Constraints\n- **Tag Limit per
+        Dataset**:\n  - Each restricted dataset supports a maximum of 10 key:value
+        pairs per product.\n\n- **Tag Key Rules per Telemetry Type**:\n  - Only one
+        tag key or attribute may be used to define access within a single telemetry
+        type.\n  - The same or different tag key may be used across different telemetry
+        types.\n\n- **Tag Value Uniqueness**:\n  - Tag values must be unique within
+        a single dataset.\n  - A tag value used in one dataset cannot be reused in
+        another dataset of the same telemetry type."
       properties:
         attributes:
           $ref: '#/components/schemas/DatasetAttributes'
@@ -12414,6 +12456,14 @@ components:
       type: object
     DatasetResponseSingle:
       description: Response containing a single dataset object.
+      properties:
+        data:
+          $ref: '#/components/schemas/Dataset'
+      required:
+      - data
+      type: object
+    DatasetUpdateRequest:
+      description: Edit request for a dataset.
       properties:
         data:
           $ref: '#/components/schemas/Dataset'
@@ -16194,10 +16244,9 @@ components:
           type: array
         product:
           description: 'Name of the product the dataset is for. Possible values are
-            ''apm'', ''rum'', ''synthetics'',
+            ''apm'', ''rum'',
 
-            ''metrics'', ''logs'', ''sd_repoinfo'', ''error_tracking'', ''cloud_cost'',
-            and ''ml_obs''.'
+            ''metrics'', ''logs'', ''error_tracking'', and ''cloud_cost''.'
           example: logs
           type: string
       required:
@@ -23240,6 +23289,17 @@ components:
           maximum: 5
           minimum: 0
           type: number
+        tags:
+          description: List of tag keys used in the asset.
+          example:
+          - env
+          - service
+          - host
+          - datacenter
+          items:
+            description: Tag key used in assets.
+            type: string
+          type: array
         title:
           description: Title of the asset.
           type: string
@@ -46584,6 +46644,47 @@ paths:
       x-menu-order: 6
       x-undo:
         type: idempotent
+  /api/v2/cases/{case_id}/attributes:
+    post:
+      description: Update case attributes
+      operationId: UpdateAttributes
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseUpdateAttributesRequest'
+        description: Case attributes update payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Update case attributes
+      tags:
+      - Case Management
+      x-menu-order: 10
+      x-undo:
+        type: idempotent
   /api/v2/cases/{case_id}/priority:
     post:
       description: Update case priority
@@ -49630,6 +49731,47 @@ paths:
         permissions: []
       x-undo:
         type: safe
+    put:
+      description: Edits the dataset associated with the ID.
+      operationId: UpdateDataset
+      parameters:
+      - $ref: '#/components/parameters/DatasetID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatasetUpdateRequest'
+        description: Dataset payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetResponseSingle'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Edit a dataset
+      tags:
+      - Datasets
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-permission:
+        operator: OPEN
+        permissions: []
+      x-undo:
+        type: idempotent
   /api/v2/domain_allowlist:
     get:
       description: Get the domain allowlist for an organization.
@@ -57548,7 +57690,8 @@ paths:
         schema:
           format: int64
           type: integer
-      - description: Comma-separated list of fields to group connections by.
+      - description: Comma-separated list of fields to group connections by. The maximum
+          number of group_by(s) is 10.
         in: query
         name: group_by
         schema:
@@ -58611,12 +58754,13 @@ paths:
         following fields are available for findings:\n- `external_id`: The resource
         external ID related to the finding.\n- `description`: The description and
         remediation steps for the finding.\n- `datadog_link`: The Datadog relative
-        link for the finding.\n\n### Response\n\nThe response includes an array of
-        finding objects, pagination metadata, and a count of items that match the
-        query.\n\nEach finding object contains the following:\n\n- The finding ID
-        that can be used in a `GetFinding` request to retrieve the full finding details.\n-
-        Core attributes, including status, evaluation, high-level resource details,
-        muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date`
+        link for the finding.\n- `ip_addresses`: The list of private IP addresses
+        for the resource related to the finding.\n\n### Response\n\nThe response includes
+        an array of finding objects, pagination metadata, and a count of items that
+        match the query.\n\nEach finding object contains the following:\n\n- The finding
+        ID that can be used in a `GetFinding` request to retrieve the full finding
+        details.\n- Core attributes, including status, evaluation, high-level resource
+        details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date`
         time stamps.\n- An array of associated tags.\n"
       operationId: ListFindings
       parameters:
@@ -58684,6 +58828,12 @@ paths:
       - description: Return only findings for the specified resource type.
         in: query
         name: filter[resource_type]
+        required: false
+        schema:
+          type: string
+      - description: Return only findings for the specified resource id.
+        in: query
+        name: filter[@resource_id]
         required: false
         schema:
           type: string
@@ -60332,8 +60482,6 @@ paths:
 
         - Dashboards: `dashboard`
 
-        - Integration Accounts: `integration-account`
-
         - Integration Services: `integration-service`
 
         - Integration Webhooks: `integration-webhook`
@@ -60378,8 +60526,6 @@ paths:
         ----------------------------|--------------------------
 
         Dashboards                  | `viewer`, `editor`
-
-        Integration Accounts        | `viewer`, `editor`
 
         Integration Services        | `viewer`, `editor`
 
