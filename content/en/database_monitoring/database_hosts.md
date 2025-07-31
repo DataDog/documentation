@@ -77,6 +77,7 @@ Cluster grouping supports the following database technology and cluster topologi
       <td>
         <ul>
           <li><code>system_identifier</code></li>
+          <li><code>env</code></li>
         </ul>
       </td>
       <td>
@@ -97,6 +98,7 @@ Cluster grouping supports the following database technology and cluster topologi
       <td>
         <ul>
           <li><code>cluster_uuid</code></li>
+          <li><code>env</code></li>
         </ul>
       </td>
       <td>
