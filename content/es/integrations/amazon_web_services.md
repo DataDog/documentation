@@ -1,77 +1,77 @@
 ---
-"app_id": "amazon-web-services"
-"app_uuid": "45508037-7831-469d-80da-20241f00cbed"
-"assets":
-  "dashboards":
-    "aws_advisor": "assets/dashboards/aws_advisor.json"
-    "aws_ebs": "assets/dashboards/aws_ebs.json"
-    "aws_event_bridge": "assets/dashboards/aws_event_bridge.json"
-    "aws_firehose": "assets/dashboards/aws_firehose.json"
-    "aws_overall": "assets/dashboards/aws_overall.json"
-    "aws_sns": "assets/dashboards/aws_sns.json"
-    "aws_sqs": "assets/dashboards/aws_sqs.json"
-  "integration":
-    "auto_install": falso
-    "events":
-      "creates_events": verdadero
-    "metrics":
-      "check":
+app_id: "amazon-web-services"
+app_uuid: "45508037-7831-469d-80da-20241f00cbed"
+assets:
+  dashboards:
+    aws_advisor: "assets/dashboards/aws_advisor.json"
+    aws_ebs: "assets/dashboards/aws_ebs.json"
+    aws_event_bridge: "assets/dashboards/aws_event_bridge.json"
+    aws_firehose: "assets/dashboards/aws_firehose.json"
+    aws_overall: "assets/dashboards/aws_overall.json"
+    aws_sns: "assets/dashboards/aws_sns.json"
+    aws_sqs: "assets/dashboards/aws_sqs.json"
+  integration:
+    auto_install: false
+    events:
+      creates_events: true
+    metrics:
+      check:
       - "aws.usage.call_count"
-      "metadata_path": "assets/metrics/metric-spec.yaml"
-      "prefix": "aws."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "10"
-    "source_type_name": "Amazon Web Services"
-  "monitors":
+      metadata_path: "assets/metrics/metric-spec.yaml"
+      prefix: "aws."
+    service_checks:
+      metadata_path: "assets/service_checks.json"
+    source_type_id: !!int "10"
+    source_type_name: "Amazon Web Services"
+  monitors:
     "Integration Health Status": "assets/monitors/aws_integration_status_monitor.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
+author:
+  homepage: "https://www.datadoghq.com"
+  name: "Datadog"
+  sales_email: "info@datadoghq.com"
+  support_email: "help@datadoghq.com"
+categories:
 - "aws"
 - "cloud"
 - "iot"
 - "log collection"
 - "event management"
-"custom_kind": "integración"
-"dependencies": []
-"display_on_public_website": verdadero
-"draft": falso
-"git_integration_title": "amazon_web_services"
-"integration_id": "amazon-web-services"
-"integration_title": "Amazon Web Services"
-"integration_version": ""
-"is_public": verdadero
-"manifest_version": "2.0.0"
-"name": "amazon_web_services"
-"public_title": "Amazon Web Services"
-"short_description": "Amazon Web Services (AWS) es un conjunto de servicios web que juntos conforman una plataforma de computación en la nube".
-"supported_os": []
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
+custom_kind: "integración"
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: "amazon_web_services"
+integration_id: "amazon-web-services"
+integration_title: "Amazon Web Services"
+integration_version: ""
+is_public: true
+manifest_version: "2.0.0"
+name: "amazon_web_services"
+public_title: "Amazon Web Services"
+short_description: "Amazon Web Services (AWS) es un conjunto de servicios web que juntos conforman una plataforma de computación en la nube"
+supported_os: []
+tile:
+  changelog: "CHANGELOG.md"
+  classifier_tags:
   - "Category::AWS"
   - "Category::Cloud"
   - "Category::IoT"
   - "Category::Recopilación de logs"
   - "Category::Event Management"
   - "Offering::Integration"
-  "configuration": "README.md#Setup"
-  "description": "Amazon Web Services (AWS) es un conjunto de servicios web que juntos conforman una plataforma de computación en la nube".
-  "media": []
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/monitor-aws-control-plane-api-usage-metrics/"
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/aws-reinvent-2022-recap/"
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/iam-least-privilege/"
-  "support": "README.md#Support"
-  "title": "Amazon Web Services"
+  configuration: "README.md#Setup"
+  description: "Amazon Web Services (AWS) es un conjunto de servicios web que juntos conforman una plataforma de computación en la nube"
+  media: []
+  overview: "README.md#Overview"
+  resources:
+  - resource_type: "blog"
+    url: "https://www.datadoghq.com/blog/monitor-aws-control-plane-api-usage-metrics/"
+  - resource_type: "blog"
+    url: "https://www.datadoghq.com/blog/aws-reinvent-2022-recap/"
+  - resource_type: "blog"
+    url: "https://www.datadoghq.com/blog/iam-least-privilege/"
+  support: "README.md#Support"
+  title: "Amazon Web Services"
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
@@ -113,7 +113,7 @@ Usa uno de los siguientes métodos para integrar tus cuentas de AWS en Datadog c
    * **Delegación de roles**
      Para configurar manualmente la integración AWS con delegación de roles, consulta la [guía de configuración manual][8].
 
-   * **Claves de acceso (sólo GovCloud o China)
+   * **Claves de acceso (sólo GovCloud o China)**
       Para configurar la integración de AWS con las claves de acceso, consulta la [guía de configuración manual][9].
 
       *\* Cualquier uso de los servicios Datadog en China continental (o relacionados con entornos de esta localización) está sujeto a la cláusula de exención de responsabilidad, publicada en la sección [Localizaciones con restricciones de servicio][10] de nuestro sitio web.*
