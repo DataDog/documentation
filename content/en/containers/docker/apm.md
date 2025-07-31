@@ -175,7 +175,7 @@ Then start the Agent and the application container, connected to the network pre
 
 ```bash
 # Datadog Agent
-docker run -d --name datadog-agent \
+docker run -d --name dd-agent \
               --network <NETWORK_NAME> \
               --cgroupns host \
               --pid host \
@@ -190,7 +190,7 @@ docker run -d --name datadog-agent \
 # Application
 docker run -d --name app \
               --network <NETWORK_NAME> \
-              -e DD_AGENT_HOST=datadog-agent \
+              -e DD_AGENT_HOST=dd-agent \
               company/app:latest
 ```
 
@@ -201,7 +201,7 @@ Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (d
 
 ```bash
 # Datadog Agent
-docker run -d --name datadog-agent \
+docker run -d --name dd-agent \
               --cgroupns host \
               --pid host \
               --network "<NETWORK_NAME>" \
@@ -213,7 +213,7 @@ docker run -d --name datadog-agent \
 # Application
 docker run -d --name app \
               --network "<NETWORK_NAME>" \
-              -e DD_AGENT_HOST=datadog-agent \
+              -e DD_AGENT_HOST=dd-agent \
               company/app:latest
 ```
 Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
@@ -221,10 +221,10 @@ Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (d
 {{% /tab %}}
 {{< /tabs >}}
 
-This exposes the hostname `datadog-agent` in your `app` container.
+This exposes the hostname `dd-agent` in your `app` container.
 If you're using `docker-compose`, `<NETWORK_NAME>` parameters are the ones defined under the `networks` section of your `docker-compose.yml`.
 
-Your application tracers must be configured to submit traces to this address. Set environment variables with the `DD_AGENT_HOST` as the Agent container name, and `DD_TRACE_AGENT_PORT` as the Agent Trace port in your application containers. The example above uses host `datadog-agent` and port `8126` (the default value so you don't have to set it).
+Your application tracers must be configured to submit traces to this address. Set environment variables with the `DD_AGENT_HOST` as the Agent container name, and `DD_TRACE_AGENT_PORT` as the Agent Trace port in your application containers. The example above uses host `dd-agent` and port `8126` (the default value so you don't have to set it).
 
 Alternately, see the examples below to set the Agent host manually in each supported language:
 
@@ -235,7 +235,7 @@ Alternately, see the examples below to set the Agent host manually in each suppo
 Either update the Java Agent configuration with environment variables:
 
 ```bash
-DD_AGENT_HOST=datadog-agent \
+DD_AGENT_HOST=dd-agent \
 DD_TRACE_AGENT_PORT=8126 \
 java -javaagent:/path/to/the/dd-java-agent.jar -jar /your/app.jar
 ```
@@ -244,7 +244,7 @@ or through system properties:
 
 ```bash
 java -javaagent:/path/to/the/dd-java-agent.jar \
-     -Ddd.agent.host=datadog-agent \
+     -Ddd.agent.host=dd-agent \
      -Ddd.agent.port=8126 \
      -jar /your/app.jar
 ```
@@ -257,7 +257,7 @@ java -javaagent:/path/to/the/dd-java-agent.jar \
 from ddtrace import tracer
 
 tracer.configure(
-    hostname='datadog-agent',
+    hostname='dd-agent',
     port=8126,
 )
 ```
@@ -268,7 +268,7 @@ tracer.configure(
 
 ```ruby
 Datadog.configure do |c|
-  c.agent.host = 'datadog-agent'
+  c.agent.host = 'dd-agent'
   c.agent.port = 8126
 end
 ```
@@ -287,7 +287,7 @@ import (
 )
 
 func main() {
-    tracer.Start(tracer.WithAgentAddr("datadog-agent:8126"))
+    tracer.Start(tracer.WithAgentAddr("dd-agent:8126"))
     defer tracer.Stop()
 }
 ```
@@ -298,7 +298,7 @@ func main() {
 
 ```javascript
 const tracer = require('dd-trace').init({
-    hostname: 'datadog-agent',
+    hostname: 'dd-agent',
     port: 8126
 });
 ```
@@ -317,7 +317,7 @@ export CORECLR_PROFILER_PATH=<SYSTEM_DEPENDENT_PATH>
 export DD_DOTNET_TRACER_HOME=/opt/datadog
 
 # For containers
-export DD_AGENT_HOST=datadog-agent
+export DD_AGENT_HOST=dd-agent
 export DD_TRACE_AGENT_PORT=8126
 
 # Start your application
@@ -358,7 +358,7 @@ To submit traces via socket, the socket should be mounted to the Agent container
 
 ```bash
 # Datadog Agent
-docker run -d --name datadog-agent \
+docker run -d --name dd-agent \
               --network <NETWORK_NAME> \
               --cgroupns host \
               --pid host \
