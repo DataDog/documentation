@@ -13,14 +13,7 @@ further_reading:
 
 {{< img src="/security/infrastructure_as_code/iac_misconfiguration_side_panel.png" alt="IaC misconfiguration side panel showing details for the high severity IMDSv1 Enabled issue, including a security summary, code snippet, detection timestamps, and remediation steps." width="100%">}}
 
-Datadog Infrastructure as Code (IaC) Security helps you detect misconfigurations in Terraform code before deployment. It scans your connected GitHub or GitLab repositories and flags risks such as missing encryption, overly permissive access, and insecure defaults.
-
-IaC Security supports:
-
-- Terraform
-- Terraform local modules (remote modules not yet supported)
-
-Scans run directly in Datadog using hosted scanning. GitHub and GitLab repositories are supported.
+Datadog Infrastructure as Code (IaC) Security detects misconfigurations in Terraform code before deployment. It scans files in your connected GitHub or GitLab repositories using hosted scanning and flags issues such as missing encryption or overly permissive access. Supported file types include standalone Terraform files and local modules.
 
 ## How it works
 
@@ -63,7 +56,7 @@ If you determine that a finding is a false positive, click **Mark as false posit
 
 1. [Set up IaC Security][1] in your environment.
 2. Configure [scanning exclusions][2] to reduce false positives or ignore expected results.
-3. Review and triage findings in the [Code Security Vulnerabilities][3] page.
+3. Review and triage findings on the [Code Security Vulnerabilities][3] page.
 
 ## Further reading
 
