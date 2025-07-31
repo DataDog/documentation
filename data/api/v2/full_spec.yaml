@@ -58677,12 +58677,13 @@ paths:
         following fields are available for findings:\n- `external_id`: The resource
         external ID related to the finding.\n- `description`: The description and
         remediation steps for the finding.\n- `datadog_link`: The Datadog relative
-        link for the finding.\n\n### Response\n\nThe response includes an array of
-        finding objects, pagination metadata, and a count of items that match the
-        query.\n\nEach finding object contains the following:\n\n- The finding ID
-        that can be used in a `GetFinding` request to retrieve the full finding details.\n-
-        Core attributes, including status, evaluation, high-level resource details,
-        muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date`
+        link for the finding.\n- `ip_addresses`: The list of private IP addresses
+        for the resource related to the finding.\n\n### Response\n\nThe response includes
+        an array of finding objects, pagination metadata, and a count of items that
+        match the query.\n\nEach finding object contains the following:\n\n- The finding
+        ID that can be used in a `GetFinding` request to retrieve the full finding
+        details.\n- Core attributes, including status, evaluation, high-level resource
+        details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date`
         time stamps.\n- An array of associated tags.\n"
       operationId: ListFindings
       parameters:
@@ -58750,6 +58751,12 @@ paths:
       - description: Return only findings for the specified resource type.
         in: query
         name: filter[resource_type]
+        required: false
+        schema:
+          type: string
+      - description: Return only findings for the specified resource id.
+        in: query
+        name: filter[@resource_id]
         required: false
         schema:
           type: string
