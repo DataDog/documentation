@@ -31,8 +31,15 @@ Mobile Session Replay only supports native frameworks. Within these frameworks, 
 - Advanced text styling
 
 ### Images do not render properly
-Depending on the SDK configuration of Mobile Session Replay, images may not always be displayed. 
-If privacy settings allow for it, Mobile Session Replay only captures Android images up to 100x100dp and iOS bundled images. All other images are replaced by a placeholder indicating the image size in the UI.
+Depending on the SDK configuration of Mobile Session Replay, images may not always be displayed.
+
+Image visibility depends on your SDK privacy configuration:
+- On iOS, if `maskNonBundledOnly` is enabled, only bundled images with UIKit and images up to 100x100 pts on SwiftUI are captured.
+- On Android, if `mask_large_only` is used, only images up to 100x100dp are captured.
+
+All other images are replaced by a "Content Image" placeholder in the UI.
+
+Learn more on image privacy settings [here](https://docs.datadoghq.com/real_user_monitoring/session_replay/mobile/privacy_options/?platform=ios&tab=as-wrappers#image-masking).
 
 Images follow a separate processing pipeline, which may introduce a small delay between uploading a replay and the image being available for rendering in the web player.
 In this case, wait a few minutes and then reload the replay. 
