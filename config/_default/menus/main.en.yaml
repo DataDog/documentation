@@ -3476,10 +3476,10 @@ menu:
       parent: ndm_setup
       identifier: ndm_sd-wan
       weight: 30005
-    - name: VPN Tunnels
-      url: network_monitoring/devices/vpn_tunnels
+    - name: VPN Monitoring
+      url: network_monitoring/devices/vpn_monitoring
       parent: ndm_setup
-      identifier: ndm_vpn_tunnels
+      identifier: ndm_vpn_monitoring
       weight: 30006
     - name: Profiles
       url: network_monitoring/devices/profiles
