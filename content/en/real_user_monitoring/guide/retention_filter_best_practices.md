@@ -57,7 +57,7 @@ Below we describe the set of default filters, suggested filters, and their typic
 | Session with user attributes | `@type:session user.tier:paid` | Use user information from a session to create a filter. For example, you can retain sessions for all your paid tier users. |
 | Sessions with a specific user | `@type:session user.id:XXXXX` | This filter can target sessions from specific users, such as a production test account or an executive who regularly tests the application. |
 | Sessions with a specific action | `@type:action @action.name:XXXXX` | You can retain all sessions with a specific action that the SDK automatically tracks out-of-the-box or a custom action that you instrumented in your code.
-| Sessions with a specific duration | `@session.view_count >= 3 OR @session.time_spent  > 15s` | If you notice many short sessions, like a user viewing a page for 10 seconds without further action or errors, they are typically not useful. You can use a duration retention filter to reduce these sessions. |
+| Sessions with a specific duration | `@session.view_count >= 3 OR @session.time_spent  > 15000000000` | If you notice many short sessions, like a user viewing a page for 15 seconds without further action or errors, they are typically not useful. You can use a duration retention filter to reduce these sessions. |
 | Sessions with a network error 4XX and 5XX | `@type:resource @resource.status_code:>=400` | Frontend applications often encounter issues with downstream services returning 4XX or 5XX status codes. Using this filter, you can capture all sessions with resource calls that result in error codes. |
 
 
