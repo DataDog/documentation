@@ -48,4 +48,3 @@ Set up your application to capture handled errors using one of the following off
 
 [1]: /error_tracking/backend/getting_started
 [2]: /error_tracking/apm
-[3]: /error_tracking/explorer/#facets
