@@ -74,7 +74,7 @@ For BigQuery compute allocation, CCM handles two pricing models:
 
 **Reservation-based pricing**:
 - Costs of reserved slots are allocated proportionally to queries using those slots
-- Allocation based on slot consumption (total_slot_ms) per query
+- Allocation based on slot consumption (`total_slot_ms`) per query
 - Includes idle cost calculation for unused reservation capacity
 
 ### Compute
@@ -83,8 +83,8 @@ Costs are allocated into the following spend types:
 
 | Spend type | Description |
 |---|---|
-| Usage | Cost of query execution based on bytes processed (on-demand) or slot consumption (reservation) |
-| Cluster idle | Cost of reserved slots allocated but not utilized by queries |
+| `Usage` | Cost of query execution based on bytes processed (on-demand) or slot consumption (reservation) |
+| `Cluster_idle` | Cost of reserved slots allocated but not utilized by queries |
 
 ### Storage
 
@@ -92,8 +92,8 @@ Storage costs are categorized as:
 
 | Spend type | Description |
 |---|---|
-| Active | Cost of actively used storage |
-| Long-term | Cost of infrequently accessed storage |
+| `Active` | Includes any table or table partition that has been modified in the last 90 days |
+| `Long-term` | Includes any table or table partition that has not been modified for 90 consecutive days. The price of storage for that table automatically drops by approximately 50%. There is no difference in performance, durability, or availability between active and long-term storage |
 
 ## Further reading
 
