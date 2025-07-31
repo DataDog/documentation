@@ -10,10 +10,6 @@ further_reading:
 title: Rastrear el uso de RUM con etiquetas de atribución de uso
 ---
 
-{{< callout url="#" btn_hidden="true" header="false">}}
-  <a href="/real_user_monitoring/guide/tracking-rum-usage-with-usage-attribution-tags/#enforce-tags-to-be-set-at-the-org-level">La atribución de uso de RUM impuesta</a> a nivel de la organización está en Vista previa. Para solicitar acceso, ponte en contacto con el <a href="https://docs.datadoghq.com/help/">servicio de asistencia de Datadog</a>.
-{{< /callout >}}
-
 ## Información general
 
 La página [Atribución de uso][1] proporciona información y funciones relacionadas con el uso de datos y los tipos de uso. Por defecto, el uso de datos se puede ver y filtrar por categorías más amplias como producto, organización o claves de etiqueta. Puedes definir hasta tres etiquetas de atribución de uso por organización y gestionarlas directamente desde la interfaz de usuario para cada aplicación RUM.

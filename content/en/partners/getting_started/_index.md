@@ -49,7 +49,7 @@ Explore other important resources to stay up to date with Datadog:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Datadog blog and social media" >}}
-    {{< nextlink href="www.datadoghq.com/blog/" >}}Datadog blog{{< /nextlink >}}
+    {{< nextlink href="https://www.datadoghq.com/blog/" >}}Datadog blog{{< /nextlink >}}
     {{< nextlink href="https://www.linkedin.com/company/datadog/" >}}LinkedIn{{< /nextlink >}}
     {{< nextlink href="https://twitter.com/datadoghq" >}}Twitter{{< /nextlink >}}
     {{< nextlink href="https://www.facebook.com/datadoghq/" >}}Facebook{{< /nextlink >}}

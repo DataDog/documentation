@@ -170,7 +170,7 @@ Añadido en la versión 1.17.0. <br>
 
 `DD_TRACE_LOGFILE_RETENTION_DAYS`
 : durante el inicio del rastreador, esta configuración utiliza el directorio de log actual del rastreador para borrar los archivos log de la misma antigüedad y más antiguos que el número de días dado. Añadido en la versión 2.19.0. <br>
-**Predeterminado**: `31`
+**Predeterminado**: `32`
 
 `DD_TRACE_LOGGING_RATE`
 : establece un límite de frecuencia para los mensajes de log. Si se establece, las líneas de log únicas se escriben una vez cada `x` segundos. Por ejemplo, para loguear un mensaje determinado una vez cada 60 segundos, establece `60`. Si estableces `0`, se desactiva la limitación de frecuencia de log. Añadido en la versión 1.24.0. Desactivado por defecto.

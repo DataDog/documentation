@@ -27,8 +27,6 @@ Migrating to `restricted_roles` can be done independently. For more information,
 
 Restriction Policies for Dashboards defines the access control rules for a resource. It maps a set of relations (editor and viewer) to a set of allowed principals (roles, teams, or users). 
 
-To participate in the beta for Restriction Policies, reach out to Datadog Support or your Customer Success Manager to enable Restriction Policies for Dashboards for your organization. 
-
 If you're managing Dashboards through Terraform: 
 1. Ensure that you're using Datadog Terraform Provider v3.27.0 or higher.
 2. Remove `is_read_only` and `restricted_role` from your Dashboard Terraform resources. 

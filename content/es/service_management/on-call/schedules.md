@@ -6,10 +6,6 @@ further_reading:
 title: Cronogramas
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call no es compatible con el <a href="/getting_started/site">sitio de Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 En Datadog On-Call, los cronogramas definen las horas concretas en las que los miembros del equipo están disponibles para responder a las consultas. Los cronogramas organizan y gestionan la disponibilidad de los miembros del equipo en diferentes zonas horarias y turnos.
 
 ### Conceptos

@@ -9,11 +9,8 @@ further_reading:
 - link: "/network_monitoring/devices/profiles"
   tag: "Documentation"
   text: "Read more about NDM Profiles"
+site_support_id: snmp_profile_manager
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">SNMP Profile Manager is not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/easily-onboard-and-start-monitoring-network-devices-to-datadog/" >}}
   SNMP Profile Manager is in Preview. Use this form to request access.

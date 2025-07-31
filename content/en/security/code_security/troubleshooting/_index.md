@@ -94,8 +94,7 @@ It means that you are either:
 
 ### Results are not being surfaced in the Datadog UI
 
-**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
-`master`, `main`, `prod`, or `production`). After you commit on your default branch, non-default branches are analyzed. You can always configure your default branch in-app under [Repository Settings][4].
+**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt a SARIF upload for your repository and then manually override the default branch in-app under [Repository Settings][4]. Afterwards, uploads from your non-default branches will succeed.
 
 If you are using Datadog's analyzer, [diff-aware scanning][6] is enabled by default. If you running the tool within your CI pipeline, make sure that `datadog-ci` runs **at the root** of the repository being analyzed.
 
@@ -124,7 +123,6 @@ For issues with Datadog Software Composition Analysis (SCA), include the followi
 While the [Datadog SBOM generator][7] is recommended, Datadog supports the ingestion of any SBOM files. Please ensure your files adhere to either the Cyclone-DX 1.4 or Cyclone-DX 1.5 formats.
 
 Ingestion of SBOM files is verified for the following third-party tools:
-- [osv-scanner][7]
 - [trivy][8]
 
 To ingest your SBOM file into Datadog, follow the steps below:
@@ -150,26 +148,35 @@ After updating either file on your default branch, it may take up to six hours f
 
 ### Results are not being surfaced in the Datadog UI
 
-**If you are running static scanning on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
-`master`, `main`, `prod`, or `production`). After you commit on your default branch, non-default branches are analyzed.
-
-You can always configure your default branch in-app under [Repository Settings][4].
+**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt an SBOM upload for your repository and then manually override the default branch in-app under [Repository Settings][4]. Afterwards, uploads from your non-default branches will succeed.
 
 ### No package detected for C# projects
 
-Our SBOM generator, ([`osv-scanner`][7]), extracts dependencies from a `packages.lock.json` file. If you do not have
+The Datadog SBOM generator, ([`datadog-sbom-generator`][7]), extracts dependencies from a `packages.lock.json` file. If you do not have
 this file, you can update your project definition to generate it. Follow these [instructions to update your project definition][9] to generate a `packages.lock.json` file.
 
-The generated lock file is used by [`osv-scanner`][7] to extract dependencies and generate an SBOM.
+The generated lock file is used by [`datadog-sbom-generator`][7] to extract dependencies and generate an SBOM.
 
-### No results from Datadog-hosted scans for a repository using `git-lfs`
+### No results from Datadog-hosted scans
 
-Datadog-hosted scanning for Software Composition Analysis (SCA) does not support repositories that use [Git Large File Storage][18] (`git-lfs`). If your repository uses `git-lfs`, [set up the analysis in a CI pipeline][19] and upload the results to Datadog instead.
+Datadog-hosted SCA scans do **not** support repositories that:
 
-### Datadog-hosted scan did not run for a repository with a backslash (`\`) in the file path
+- Use [Git Large File Storage][18] (`git-lfs`)
+- Contain invalid or reserved file paths (such as `/` or `\\`)
+- Contain file paths with parent directory traversal (`..`)
+- Contain file names longer than 255 characters
 
-Datadog-hosted scanning for Software Composition Analysis (SCA) does not support repositories containing files with paths that include backslashes (`\`). If your repository includes such paths,
-you can [set up the analysis in a CI pipeline][19] and upload the results to Datadog manually. Alternatively, you can update the affected file paths to remove the backslashes and continue using Datadog-hosted scanning.
+If any of these conditions apply to your repository, and you cannot update your repository to account for these constraints, [set up the analysis in a CI pipeline][19] to run SCA and upload results to Datadog.
+
+### Missing libraries
+
+To ensure data quality, Datadog applies validation rules during SBOM processing. Libraries that meet any of the following criteria are excluded:
+
+- **Missing version**: The library does not specify a version.
+- **Non-ASCII name**: The library name contains characters outside the ASCII character set.
+- **Empty purl**: The package URL (purl) field is missing or blank.
+- **Invalid purl**: The package URL is present but not in a valid purl format.
+- **Unsupported language**: The library is associated with a programming language that Datadog does not support.
 
 ## No vulnerabilities detected by Software Composition Analysis
 
@@ -242,7 +249,7 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [4]: https://app.datadoghq.com/source-code/repositories
 [5]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
 [6]: https://docs.datadoghq.com/security/code_security/static_analysis/setup/#diff-aware-scanning
-[7]: https://github.com/DataDog/osv-scanner
+[7]: https://github.com/DataDog/datadog-sbom-generator
 [8]: https://github.com/aquasecurity/trivy
 [9]: https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#enabling-the-lock-file
 [12]: https://app.datadoghq.com/security/appsec/vm/library
@@ -251,4 +258,4 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [16]: https://app.datadoghq.com/services?&lens=Security
 [17]: https://app.datadoghq.com/security/configuration/code-security/setup
 [18]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
-[19]: https://docs.datadoghq.com/security/code_security/software_composition_analysis/setup_static/#scan-in-ci-pipelines
+[19]: https://docs.datadoghq.com/security/code_security/software_composition_analysis/setup_static/?tab=datadog#running-options

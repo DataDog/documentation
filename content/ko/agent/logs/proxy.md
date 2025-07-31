@@ -291,12 +291,12 @@ stream {
 {{% /site-region %}}
 {{% /tab %}}
 {{< /tabs >}}
+{{% /site-region %}}
 
 
 ## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
-{{% /site-region %}}
 
 [1]: /ko/agent/logs/log_transport?tab=https
 [2]: /ko/agent/configuration/proxy/

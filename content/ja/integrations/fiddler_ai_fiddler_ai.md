@@ -14,7 +14,7 @@ categories:
 - アラート設定
 - マーケットプレイス
 - ai/ml
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -98,4 +98,4 @@ Fiddler では、お客様が高性能なモデルを提供し、責任ある AI
 * [Fiddler サポート](https://fiddlerlabs.zendesk.com/hc/en-us)に直接ご相談ください。
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/fiddler-ai-license" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/fiddler-ai-license" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

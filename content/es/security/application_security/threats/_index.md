@@ -15,10 +15,6 @@ further_reading:
 title: Gestión de las amenazas a las aplicaciones
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Application Security Management no es compatible con el <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 La gestión de amenazas de ASM utiliza la telemetría de trazas (traces) de las aplicaciones instrumentadas por APM para identificar amenazas y ataques en los servicios en ejecución comparando el comportamiento observado con patrones de ataque conocidos, o identificando el abuso de la lógica de negocio.
 
 Las señales de seguridad planteadas por la monitorización de amenazas se resumen y aparecen en las vistas que ya visitas habitualmente para monitorizar el estado y el rendimiento de los servicios. El [catálogo de servicios][1] y las páginas individuales de servicios en APM proporcionan información sobre las señales de amenazas de las aplicaciones, lo que te permite investigar vulnerabilidades, bloquear atacantes y revisar exposiciones a ataques.

@@ -94,9 +94,9 @@ To configure multiple unqueried metrics at once
 
 You have full control over the cardinality of your metrics without the need to change your applications nor the requirement of a remote-write setup. Below is an example of how eliminating timeseries that are rarely used can significantly reduce your custom metrics volumes and costs.
 
-In this example, the tag configuration modal shows a metric with a current volume of 13690031 indexed custom metrics. After you select Include tags… with an empty allowlist of tags, the modal shows an estimated new volume of 1. You can reduce the number of indexed custom metrics by 13690030.
+In this example, the tag configuration modal shows a metric with a current volume of 7,139 indexed custom metrics. After you select Include tags… with an allowlist of the tags queried in the past 30 days, the modal shows an estimated new volume of 3. You can reduce the number of indexed custom metrics by 7,136.
 
-{{< img src="metrics/volume/reduce_metric_vol_cost_tags.png" alt="Tag configuration modal showing an example metric with a current volume of 13690031 index metrics and an estimated new volume of 1, with an empty allowlist of tags" style="width:80%;" >}}
+{{< img src="metrics/volume/reduce_metric_vol_cost_tags_05292025.png" alt="Tag configuration modal showing an example metric with a current volume of 7,139 index metrics and an estimated new volume of 3, with an allowlist of suggested tags" style="width:80%;" >}}
 
 ## Analyze metrics' utility and relative value in Datadog
 Metrics without Limits™ allows you to find metrics that are underused in Datadog with the Metrics Related Assets feature. A metrics related asset refers to any dashboard, notebook, monitor, or SLO that queries a particular metric. Datadog's intelligent query insights surface the popularity and quantity of these related assets so you can evaluate metric utility within your organization. Use this information to make data-driven decisions. Identify how your team can use existing metrics to get more value from your observability spend and reduce metric volume and cost.

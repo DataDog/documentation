@@ -36,36 +36,38 @@ Los tests de navegador son escenarios ejecutados por Datadog en tus aplicaciones
 
 Puedes crear un test utilizando una de las siguientes opciones:
 
-- **Crea un test a partir de una plantilla**:
+### Crear un test a partir de una plantilla
 
-    1. Pasa el ratón por encima de una de las plantillas ya rellenadas y haz clic en **View Template** (Ver plantilla). Se abrirá un panel lateral en el que se mostrará la información de configuración rellenada previamente, que incluye: detalles de tests, condiciones de alerta, pasos e incluso variables.
-    2. Haz clic en **+Create Test** (+Crear test) para abrir la página de configuración, en la que podrás revisar y editar las opciones de configuración rellenadas previamente. Los campos presentados son idénticos a aquellos disponibles cuando se crea un test desde cero.
-    3. Haz clic en **Save & Quit** (Guardar y salir) en la esquina superior derecha para enviar tu test de navegador.<br /><br>
-       {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Vídeo de la página de inicio del test de navegador Synthetics con plantillas" video="true" >}}
+  1. Pasa el ratón por encima de una de las plantillas ya rellenadas y haz clic en **View Template** (Ver plantilla). Se abrirá un panel lateral en el que se mostrará la información de configuración rellenada previamente, que incluye: detalles de tests, condiciones de alerta, pasos e incluso variables.
+  2. Haz clic en **+Create Test** (+Crear test) para abrir la página de configuración, en la que podrás revisar y editar las opciones de configuración rellenadas previamente. Los campos presentados son idénticos a aquellos disponibles cuando se crea un test desde cero.
+  3. Haz clic en **Save & Quit** (Guardar y salir) en la esquina superior derecha para enviar tu test de navegador.<br /><br>
+       {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Vídeo de la página de inicio de un test de navegador Synthetic con plantillas" video="true" >}}
 
-- **Crea un test desde cero**:
+### Crear un test desde cero
 
-    1. Haz clic en la plantilla **+** para iniciar un nuevo test de navegador desde cero.
-    1. Introduce una **URL de inicio**: La URL desde la que tu test de navegador inicia el escenario.
-    1. Añade un **nombre**: El nombre del test de tu navegador.
-    1. Selecciona **etiquetas (tags) de entorno y adicionales**: Define la etiqueta `env` y otras etiquetas relacionadas, adjuntas a tu test de navegador. Utiliza el formato `<KEY>:<VALUE>` para filtrar por `<VALUE>` una `<KEY>` determinada.
+  1. Haz clic en la plantilla **+** para iniciar un nuevo test de navegador desde cero.
+  1. Introduce una **URL de inicio**: La URL desde la que tu test de navegador inicia el escenario.
+  1. Añade un **nombre**: El nombre del test de tu navegador.
+  1. Selecciona **etiquetas (tags) de entorno y adicionales**: Define la etiqueta `env` y otras etiquetas relacionadas, adjuntas a tu test de navegador. Utiliza el formato `<KEY>:<VALUE>` para filtrar por `<VALUE>` una `<KEY>` determinada.
 
-       <div class="alert alert-info">Para ver más opciones, consulta <a href=#advanced-options>Opciones avanzadas</a>.</div>
+  <div class="alert alert-info">Para ver más opciones, consulta <a href=#advanced-options>Opciones avanzadas</a>.</div>
 
-   1. Selecciona **navegadores y dispositivos**: Los navegadores (como `Chrome`, `Firefox` y `Edge`) y los dispositivos (como `Laptop Large`, `Tablet` y `Mobile Small`) en los que vas a ejecutar tu test.
+  5. Selecciona **navegadores y dispositivos**: Los navegadores (como `Chrome`, `Firefox` y `Edge`) y los dispositivos (como `Laptop Large`, `Tablet` y `Mobile Small`) en los que vas a ejecutar tu test.
 
       - Para un dispositivo portátil grande, las dimensiones son 1440 píxeles x 1100 píxeles.
       - Para una tableta, las dimensiones son 768 píxeles x 1020 píxeles.
       - Para un dispositivo móvil pequeño, las dimensiones son 320 píxeles x 550 píxeles.
 
-   1. Selecciona **managed and private locations** (localizaciones gestionadas y privadas): selecciona desde una lista de localizaciones en todo el mundo que estén gestionadas por Datadog o crea [localizaciones privadas][1] para ejecutar tu test de navegador desde localizaciones personalizadas o en redes privadas.
+  6. Selecciona **localizaciones gestionadas y privadas**: Selecciona entre una lista de [localizaciones](#locations) de todo el mundo, que son administradas por Datadog, o crea [localizaciones privadas][1] para ejecutar tu test de navegador desde localizaciones personalizadas o dentro de redes privadas.
 
-      {{% managed-locations %}}
+     **Nota**: También puedes utilizar el [túnel de Continuous Testing][2] para activar tests en tu configuración de desarrollo local o en tu pipeline CI/CD para probar entornos internos.
 
-      También puedes utilizar el [túnel de tests continuos][2] para activar tests en tu configuración de desarrollo local o en tu pipeline de CI/CD para realizar tests en entornos internos.<br /><br>
+  7. Ajusta la **frecuencia de los tests**: los intervalos varían de cada cinco minutos a una vez por semana. Para solicitar una frecuencia de un minuto, [ponte en contacto con el servicio de asistencia][3].
+  8. Haz clic en **Save & Edit Recording** (Guardar y editar grabación) para enviar tu test de navegador.
 
-   6. Ajusta la **frecuencia de los tests**: los intervalos varían de cada cinco minutos a una vez por semana. Para solicitar una frecuencia de un minuto, [ponte en contacto con el servicio de asistencia][3].
-   7. Haz clic en **Save & Edit Recording** (Guardar y editar grabación) para enviar tu test de navegador.
+### Localizaciones
+
+{{% managed-locations %}}
 
 ### Fragmentos
 
@@ -87,7 +89,7 @@ Cuando configures un nuevo test de navegador de Synthetic Monitoring, utiliza fr
 
 {{% tab "Opciones de solicitud" %}}
 
-Selecciona **Deshabilitar CORS** para evitar que la política de Uso compartido de recursos entre orígenes (CORS) bloquee tu test. Para evitar que la política de Seguridad del contenido (CSP) bloquee tu test, selecciona **Deshabilitar CSP**.
+   Selecciona **Deshabilitar CORS** para evitar que la política de uso compartido de recursos entre orígenes (CORS) bloquee tu test. Para evitar que la política de seguridad del contenido (CSP) bloquee tu test, selecciona **Deshabilitar CSP**.
 
    * **Cabeceras de solicitud**: Define las cabeceras en los campos **Nombre** y **Valor** para añadir o anular las cabeceras predeterminadas del navegador. Por ejemplo, puedes configurar el Agent de usuario en la cabecera para [identificar scripts de Datadog][1].
    * **Cookies**: Define cookies que añadir a las cookies predeterminadas del navegador. Introduce una cookie por línea, utilizando la sintaxis de [`Set-Cookie`][2].
@@ -98,7 +100,7 @@ Selecciona **Deshabilitar CORS** para evitar que la política de Uso compartido 
 
 [1]: /es/synthetics/guide/identify_synthetics_bots/?tab=apitests
 [2]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie
-   {{% /tab %}}
+{{% /tab %}}
 
 {{% tab "Certificado" %}}
 
@@ -123,17 +125,17 @@ Selecciona **Ignorar error de certificado del servidor** para indicar al test qu
 
    Seleccione **No realizar capturas de pantalla en este test** para evitar que se realicen capturas de pantalla en los pasos de tu test.
 
-   Esta opción de privacidad está disponible como [opción avanzada][1] en el nivel de cada paso del test y garantiza que no aparezcan datos confidenciales en los resultados del test. Si se impide que el test realice capturas de pantalla, será más difícil encontrar fallos y solucionarlos. Para obtener más información, consulta [Seguridad de los datos][2].
+   Esta opción de privacidad está disponible como [opción avanzada][1] en el nivel de cada paso del test y garantiza que no aparezcan datos confidenciales en los resultados del test. Si se impide que el test realice capturas de pantalla, será más difícil encontrar fallos y solucionarlos. Para obtener más información, consulta [Data Security][2].
 
 [1]: /es/synthetics/browser_tests/advanced_options#prevent-screenshot-capture
 [2]: /es/data_security/synthetics
-   {{% /tab %}}
+{{% /tab %}}
 
 {{% tab "URL de inicio" %}}
 
 Introduce una cantidad de tiempo en segundos que el test deberá esperar antes de declarar el paso de test inicial como fallido.
 
-   {{% /tab %}}
+{{% /tab %}}
 
 {{% tab "Hora e idioma" %}}
 
@@ -142,6 +144,17 @@ Introduce una cantidad de tiempo en segundos que el test deberá esperar antes d
 [1]: https://www.loc.gov/standards/iso639-2/php/code_list.php
 
 {{% /tab %}}
+
+{{% tab "Blocked Requests" %}}
+
+   Introduce uno o más patrones de solicitud para bloquear el proceso de carga mientras se ejecuta el test. Introduce un patrón de solicitud por línea utilizando el [formato de patrón coincidente][1]. Se admiten comodines (por ejemplo, `*://*.example.com/*`).
+
+   Las solicitudes bloqueadas se omiten durante la ejecución del test pero no afectan a la presentación de una página cuando se [registran pasos](/synthetics/browser_tests/actions). Consulta las solicitudes bloqueadas en la [pestaña Recursos](/synthetics/browser_tests/test_results#resources) de las ejecuciones de tests. Las solicitudes bloqueadas tienen el estado `blocked`.
+
+[1]: https://developer.chrome.com/docs/extensions/develop/concepts/match-patterns
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 {{% synthetics-variables %}}
@@ -188,7 +201,7 @@ Se envía una notificación según el conjunto de condiciones de alerta. Utiliza
     | `{{#is_priority}}`         | Mostrar cuando el monitor coincide con la prioridad (de P1 a P5).                  |
     | `{{^is_priority}}`         | Mostrar a menos que el monitor coincida con la prioridad (de P1 a P5).                |
 
-   Los mensajes de notificación incluyen el **mensaje** definido en esta sección e información sobre las localizaciones que fallan.
+    Los mensajes de notificación incluyen el **mensaje** definido en esta sección e información sobre las localizaciones que fallan.
 
 2. Selecciona los miembros del equipo y los servicios a los que notificar.
 3. Especifica una frecuencia de reenvío de notificaciones. Para evitar el reenvío de notificaciones en caso de tests fallidos, deja la opción como `Never renotify if the monitor has not been resolved`.
@@ -226,9 +239,9 @@ Utiliza el [control de acceso detallado][17] para limitar quién tiene acceso a 
 
 1. Abre la sección de permisos del formulario.
 2. Haz clic en **Edit Access** (Editar acceso).
-  {{< img src="synthetics/settings/grace_2.png" alt="Establecer permisos para tu test en el formulario de configuración de Localizaciones privadas" style="width:100%;" >}}
+  {{< img src="synthetics/settings/grace_2.png" alt="Establecer permisos para tu test en el formulario de configuración de localizaciones privadas" style="width:100%;" >}}
 3. Haz clic en **Restrict Access** (Restringir el acceso).
-4. Selecciona equipos, funciones o usuarios.
+4. Selecciona equipos, roles o usuarios.
 5. Haz clic en **Add** (Añadir).
 6. Selecciona el nivel de acceso que deseas asociar a cada uno de ellos.
 7. Haz clic en **Done** (Listo).

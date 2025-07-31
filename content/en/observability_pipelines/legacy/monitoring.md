@@ -3,10 +3,6 @@ title: (LEGACY) Monitoring
 disable_toc: false
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
-
 ## Overview
 
 In [Observability Pipelines][1], your pipelines are comprised of components that collect, process, and route your observability data. The health of your pipelines and components are indicated by health statuses and graphs, as well as resource utilization and data delivery graphs.

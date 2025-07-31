@@ -232,7 +232,7 @@ Cassandra 통합이 Cassandra Nodetool 로그를 수집합니다. [Cassandra 로
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "cassandra_nodetool" >}}
+{{< get-metrics-from-git "cassandra-nodetool" >}}
 
 
 ### 이벤트
@@ -240,7 +240,7 @@ Cassandra 통합이 Cassandra Nodetool 로그를 수집합니다. [Cassandra 로
 Cassandra_nodetool 점검은 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "cassandra_nodetool" >}}
+{{< get-service-checks-from-git "cassandra-nodetool" >}}
 
 
 ## 트러블슈팅

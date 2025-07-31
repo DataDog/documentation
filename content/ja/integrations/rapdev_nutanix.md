@@ -37,7 +37,7 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- マーケットプレイス
+- marketplace
 custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true

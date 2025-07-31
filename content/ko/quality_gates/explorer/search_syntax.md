@@ -10,10 +10,6 @@ further_reading:
 title: 품질 게이트(Quality Gates) 탐색기 검색 구문
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">품질 게이트는 현재 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 {{< callout url="#" btn_hidden="true" >}}
 품질 게이트는 퍼블릭 베타 서비스입니다.
 {{< /callout >}}

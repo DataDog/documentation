@@ -13,10 +13,6 @@ further_reading:
 title: Explorador de puertas de calidad
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Las puertas de calidad no se encuentran disponibles en el sitio ({{< region-param key="dd_site_name" >}}) seleccionado en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 El explorador de puertas de calidad te permite [buscar y filtrar](#search-and-filter), [visualizar](#visualize), y [exportar](#export) puertas de calidad o ejecuciones de reglas en varios niveles con cualquier etiqueta (tag).

@@ -87,7 +87,7 @@ If you are an admin in your Azure portal, you can configure Entra apps to connec
 4. Select the scan types you want to use.
 5. Select **Azure DevOps** as your source code management provider.
 6. If this is your first time connecting an Azure DevOps organization to Datadog, click **Connect Azure DevOps Account**.
-7. When connecting a Microsoft Entra tenant for the first time you will need to go to your [Azure Portal][2] to register a new application. During this creation process, ensure the following: 
+7. When connecting a Microsoft Entra tenant for the first time you will need to go to your [Azure Portal][2] to register a new application. During this creation process, ensure the following:
    1. You select **Accounts in this organizational directory only (Datadog, Inc. only - Single tenant)** as the account type.
    2. Set the redirect URI to **Web** and paste the URI given to you in the instructions.
 8. Copy the values for **Application (client) ID** and **Directory (tenant) ID** and paste them into Datadog.
@@ -107,7 +107,7 @@ First, set your environment variables (note: the Datadog UI will fill these valu
 ```shell
 export AZURE_DEVOPS_TOKEN="..."                 # Client Secret Value
 export DD_API_KEY="..."                         # Datadog API Key
-``` 
+```
 
 Then, replace the placeholders in the script below with your [Datadog Site][5] and Azure DevOps organization name to configure the necessary service hooks on your organization's projects:
 ```shell
@@ -473,6 +473,21 @@ datadog:
     - repositoryURL: https://github.com/myorganization/myrepo.git
       paths:
         - path/to/service/code/**
+{{< /code-block >}}
+
+
+If you want all the files in a repository to be associated with a service, you can use the glob `**` as follows:
+
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: service
+metadata:
+  name: my-service
+datadog:
+  codeLocations:
+    - repositoryURL: https://github.com/myorganization/myrepo.git
+      paths:
+        - "**"
 {{< /code-block >}}
 
 #### Detecting file usage patterns

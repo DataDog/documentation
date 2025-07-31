@@ -23,10 +23,6 @@ further_reading:
 title: モバイルアプリケーションのテストと監視
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">このサイトでは、Mobile Application Testing はサポートされていません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 Mobile Application Testing は、実際のデバイスを使用して Android および iOS アプリケーションの主要なビジネスフローをテストし、監視することができます。

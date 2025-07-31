@@ -37,6 +37,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/opentelemetry-runtime-metrics-datadog/"
   tag: "Blog"
   text: "Monitor runtime metrics from OTel-instrumented apps with Datadog APM"
+- link: "https://www.datadoghq.com/blog/otel-deployments/"
+  tag: "Blog"
+  text: "How to select your OpenTelemetry deployment"
 - link: "https://learn.datadoghq.com/courses/otel-with-datadog"
   tag: "Learning Center"
   text: "Introduction to OpenTelemetry with Datadog"
@@ -109,7 +112,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 ### Option 2: Use the Datadog Agent with DDOT Collector
 
-{{< img src="/opentelemetry/setup/ddot-collector.png" alt="Architecture overview for DDOT Collector, which is embedded in the Datadog Agent." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Architecture overview for DDOT Collector, which is embedded in the Datadog Agent." style="width:100%;" >}}
 
 **Best for**: Existing Datadog users or teams requiring Agent-based features such as:
 

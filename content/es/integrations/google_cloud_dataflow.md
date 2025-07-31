@@ -56,7 +56,7 @@ Una vez hecho esto, exporta tus logs de Google Cloud Dataflow desde Google Cloud
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "google_cloud_dataflow" >}}
+{{< get-metrics-from-git "google-cloud-dataflow" >}}
 
 
 <div class="alert alert-warning">

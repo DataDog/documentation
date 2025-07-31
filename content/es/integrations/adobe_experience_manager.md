@@ -29,10 +29,6 @@ supported_os:
 title: Adobe Experience Manager
 ---
 
-{{< site-region region="us3,ap1" >}}
-<div class="alert alert-warning">La integración de Adobe Experience Manager no está disponible en el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Información general
 
 Recopila logs de Adobe Experience Manager para realizar un seguimiento de errores, de tiempo de respuesta de solicitudes y de páginas web con un rendimiento deficiente.

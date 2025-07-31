@@ -21,9 +21,13 @@ aliases:
 
 <div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
 
+<div class="alert alert-info">Datadog provides FIPS-compliant monitoring for AWS Lambda functions. For GovCloud environments, the <code>DD_LAMBDA_FIPS_MODE</code> environment variable is enabled by default. When FIPS mode is enabled, AWS FIPS endpoints are used for Datadog API key lookups, and the Lambda metric helper function <code>Metric()</code> requires the FIPS-compliant extension for metric submission. While the FIPS-compliant Lambda components work with any Datadog site, end-to-end FIPS compliance requires using the US1-FED site. See <a href="/serverless/aws_lambda/fips-compliance">AWS Lambda FIPS Compliance</a> for more details.</div>
+
 ## Installation
 
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/product-management-service">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
+
+**Note**: Datadog recommends that you use Go tracer v1.73.1 for instrumenting AWS Lambda functions.
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
@@ -78,6 +82,92 @@ For more information and additional settings, see the [plugin documentation][1].
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: /serverless/configuration/
 {{% /tab %}}
+{{% tab "Terraform" %}}
+
+The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] resource and automatically configures your Lambda function for Datadog Serverless Monitoring by:
+
+- Adding the Datadog Lambda layers
+- Redirecting the Lambda handler
+- Enabling the collection and sending of metrics, traces, and logs to Datadog
+
+```tf
+module "lambda-datadog" {
+  source  = "DataDog/lambda-datadog/aws"
+  version = "3.2.0"
+
+  environment_variables = {
+    "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
+    "DD_ENV" : "<ENVIRONMENT>"
+    "DD_SERVICE" : "<SERVICE_NAME>"
+    "DD_SITE": "<DATADOG_SITE>"
+    "DD_VERSION" : "<VERSION>"
+  }
+
+  datadog_extension_layer_version = {{< latest-lambda-layer-version layer="extension" >}}
+
+  # aws_lambda_function arguments
+}
+```
+
+1. Replace the `aws_lambda_function` resource with the `lambda-datadog` Terraform module. Then, specify the `source` and `version` of the module.
+
+2. Set the `aws_lambda_function` arguments:
+
+   All of the arguments available in the `aws_lambda_function` resource are available in this Terraform module. Arguments defined as blocks in the `aws_lambda_function` resource are redefined as variables with their nested arguments.
+
+   For example, in `aws_lambda_function`, `environment` is defined as a block with a `variables` argument. In the `lambda-datadog` Terraform module, the value for the `environment_variables` is passed to the `environment.variables` argument in `aws_lambda_function`. See [inputs][3] for a complete list of variables in this module.
+
+3. Fill in the environment variable placeholders:
+
+   - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use the environment variable `DD_API_KEY` and set your Datadog API key in plaintext.
+   - Replace `<ENVIRONMENT>` with the Lambda function's environment, such as `prod` or `staging`
+   - Replace `<SERVICE_NAME>` with the name of the Lambda function's service
+   - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}}. (Ensure the correct [Datadog site][4] is selected on this page).
+   - Replace `<VERSION>` with the version number of the Lambda function
+
+4. Select the version of the Datadog Extension Lambda layer to use. If left blank the latest layer version will be used.
+
+```
+  datadog_extension_layer_version = {{< latest-lambda-layer-version layer="extension" >}}
+```
+
+[1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
+[2]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function
+[3]: https://github.com/DataDog/terraform-aws-lambda-datadog?tab=readme-ov-file#inputs
+[4]: /getting_started/site/
+{{% /tab %}}
+{{% tab "SST v3" %}}
+
+To configure Datadog using SST v3, follow these steps:
+
+```ts
+const app = new sst.aws.Function("MyApp", {
+  handler: "./src",
+  runtime: "go",
+  environment: {
+    DD_ENV: "<ENVIRONMENT>",
+    DD_SERVICE: "<SERVICE_NAME>",
+    DD_VERSION: "<VERSION>",
+    DATADOG_API_KEY_SECRET_ARN: "<DATADOG_API_KEY_SECRET_ARN>",
+    DD_SITE: "<DATADOG_SITE>",
+  },
+  layers: [
+    $interpolate`arn:aws:lambda:${aws.getRegionOutput().name}:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}`,
+  ],
+});
+```
+
+Fill in the environment variable placeholders:
+
+  - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use the environment variable `DD_API_KEY` and set your Datadog API key in plaintext.
+  - Replace `<ENVIRONMENT>` with the Lambda function's environment, such as `prod` or `staging`
+  - Replace `<SERVICE_NAME>` with the name of the Lambda function's service
+  - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}}. (Ensure the correct [Datadog site][1] is selected on this page).
+  - Replace `<VERSION>` with the version number of the Lambda function
+
+[1]: /getting_started/site/
+
+{{% /tab %}}
 {{% tab "Custom" %}}
 ### Install the Datadog Lambda Extension
 
@@ -128,10 +218,8 @@ import (
   ddlambda "github.com/DataDog/datadog-lambda-go"
   "github.com/aws/aws-lambda-go/events"
   "github.com/aws/aws-lambda-go/lambda"
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-  // httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2" // 2.x
-  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func main() {
@@ -159,8 +247,6 @@ func myHandler(ctx context.Context, _ events.APIGatewayProxyRequest) (string, er
 	s.Finish()
 	return "ok", nil
 }
-
-}
 ```
 
 ## Minimize cold start duration
@@ -176,7 +262,7 @@ Enabling any of these features cause the extension to default back to the fully 
 
 ## What's next?
 
-- Congratulations! You can now view metrics, logs, and traces on the [Serverless Homepage][1].
+- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
 - Turn on [threat monitoring][4] to get alerted on attackers targeting your service
 - See the [troubleshooting guide][2] if you have trouble collecting the telemetry
 - See the [advanced configurations][3] to
@@ -196,4 +282,4 @@ Enabling any of these features cause the extension to default back to the fully 
 [4]: /security/application_security/serverless/
 [5]: https://github.com/DataDog/datadog-lambda-extension
 [6]: https://github.com/DataDog/datadog-lambda-extension/issues
-
+[7]: /tracing/trace_collection/custom_instrumentation/go/migration

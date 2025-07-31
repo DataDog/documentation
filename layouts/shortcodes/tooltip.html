@@ -46,9 +46,5 @@
   {{- $displayText = upper $displayText -}}
 {{- end -}}
 
-<!-- Render tooltip -->
-{{- if or $shortDefMatch (and $text $tooltip) -}}
-<span class="tooltip-container"><button class="tooltip-trigger" aria-describedby="tooltip-{{- $displayText | anchorize -}}">{{- $displayText -}}</button><span id="tooltip-{{- $displayText | anchorize -}}" class="tooltip-content" role="tooltip">{{- $tooltipContent | safeHTML -}}{{- if $fullDefinitionLink -}}<a href="{{- $fullDefinitionLink -}}" class="tooltip-full-link" aria-label="View full definition">Glossary</a>{{- end -}}</span></span>
-{{- else -}}
-{{- $displayText -}}
-{{- end -}}
+<!-- Render tooltip (on one line to prevent unnecessary whitespace around tooltip) -->
+{{- if or $shortDefMatch (and $text $tooltip) -}}<span class="tooltip-container"><button class="tooltip-trigger" aria-describedby="tooltip-{{- $displayText | anchorize -}}">{{- $displayText -}}</button><span id="tooltip-{{- $displayText | anchorize -}}" class="tooltip-content" role="tooltip">{{- $tooltipContent | safeHTML -}}{{- if $fullDefinitionLink -}}<a href="{{- $fullDefinitionLink -}}" class="tooltip-full-link" aria-label="View full definition">Glossary</a>{{- end -}}</span></span>{{- else -}}{{- $displayText -}}{{- end -}}

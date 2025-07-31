@@ -15,7 +15,7 @@ categories:
 - rum
 - seguimiento de problemas
 - notificaciones
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/pagerduty/README.md
 display_on_public_website: true
@@ -116,11 +116,11 @@ PagerDuty, sin tener que cambiar de contexto entre las herramientas.
 
 ## Configuración
 
-1. En tu cuenta de Datadog, ve a ashboards. Selecciona el dashboard al que quieres añadir el widget Dashboard de estado o [crea un nuevo dashboard][1].
+1. En tu cuenta de Datadog, ve a Dashboards. Selecciona el dashboard al que quieres añadir el widget Dashboard de estado o [crea un nuevo dashboard][1].
 
-2. En el dashboard, haz clic en **+Añadir widgets** a la derecha del título del dashboard. Desplázate hacia la derecha por los widgets, luego arrastra y suelta el/los widget(s) de **PagerDuty** en la posición deseada en tu dashboard.
+2. En el dashboard, haz clic en **+Add Widgets** (+Añadir widgets) a la derecha del título del dashboard. Desplázate hacia la derecha por los widgets, luego arrastra y suelta el/los widget(s) de **PagerDuty** en la posición deseada en tu dashboard.
 
-3. En el modal del Editor de widgets personalizados, haz clic en **Conectar**. Selecciona tu **región de servicio** y luego **inicia sesión** en tu cuenta de PagerDuty. Una vez que se te redirija al Editor de widgets personalizados, aparecerá una vista previa de cómo se verá el widget. Debajo de la vista previa, en **Opciones de widgets**, también puedes seleccionar las funcionalidades adicionales que le gustaría que el dashboard tuviera por defecto. También puedes cambiar el **Título del widget**. Para añadir el widget a tu dashboard, haz clic en **Listo**.
+3. En el modal del Editor de widgets personalizados, haz clic en **Connect** (Conectar). Selecciona tu **región de servicio** y luego **inicia sesión** en tu cuenta de PagerDuty. Una vez que se te redirija al Editor de widgets personalizados, aparecerá una vista previa de cómo se verá el widget. Debajo de la vista previa, en **Opciones de widgets**, también puedes seleccionar las funcionalidades adicionales que le gustaría que el dashboard tuviera por defecto. También puedes cambiar el **Título del widget**. Para añadir el widget a tu dashboard, haz clic en **Done** (Listo).
 
 ## Agent
 

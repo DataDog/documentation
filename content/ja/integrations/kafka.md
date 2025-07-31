@@ -101,15 +101,17 @@ tile:
 それ以前のバージョンを使用している場合は、[Agent v5.2.x リリースサンプルファイル][3]を参照してください。
 - Kafka コンシューマーメトリクスを収集する方法については、[kafka_consumer チェック][4]を参照してください。
 
+Kafka インテグレーションを強化する手段として、[Data Streams Monitoring][5] の利用を検討してください。このソリューションではパイプラインを可視化し、ラグ (遅延) を追跡できるため、ボトルネックの特定と解消に役立ちます。
+
 ## セットアップ
 
 ### インストール
 
-Agent の Kafka チェックは [Datadog Agent][5] パッケージに含まれています。Kafka ノードに追加でインストールする必要はありません。
+Agent の Kafka チェックは [Datadog Agent][6] パッケージに含まれています。Kafka ノードに追加でインストールする必要はありません。
 
-チェックは、[JMXFetch][6] を使用して JMX からメトリクスを収集します。Agent が JMXFetch を実行できるように、各 kafka ノードで JVM が必要です。Kafka が使用しているのと同じ JVM を使用することができます。
+チェックは、[JMXFetch][7] を使用して JMX からメトリクスを収集します。Agent が JMXFetch を実行できるように、各 kafka ノードで JVM が必要です。Kafka が使用しているのと同じ JVM を使用することができます。
 
-**注**: Kafka チェックは Managed Streaming for Apache Kafka (Amazon MSK) と共に使用することはできません。代わりに [Amazon MSK インテグレーション][6]を使用してください。
+**注**: Kafka チェックは Managed Streaming for Apache Kafka (Amazon MSK) と共に使用することはできません。代わりに [Amazon MSK インテグレーション][8]を使用してください。
 
 ### 構成
 
@@ -204,7 +206,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### 検証
 
-[Agent の status サブコマンドを実行][8]し、**JMXFetch** セクションの `kafka` を探します。
+[Agent の status サブコマンドを実行][9]し、**JMXFetch** セクションの `kafka` を探します。
 
 ```text
 ========
@@ -236,15 +238,15 @@ Kafka チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-- [Kafka のトラブルシューティングと詳細な調査][9]
-- [Agent が RMIServer スタブの取得に失敗します][10]
+- [Kafka のトラブルシューティングと詳細な調査][10]
+- [Agent が RMIServer スタブの取得に失敗します][11]
 
 ## その他の参考資料
 
-- [Kafka パフォーマンスメトリクスの監視][11]
-- [Kafka パフォーマンスメトリクスの収集][12]
-- [Datadog を使用した Kafka の監視][13]
-- [ナレッジセンターの Kafka 概要][14]
+- [Kafka パフォーマンスメトリクスの監視][12]
+- [Kafka パフォーマンスメトリクスの収集][13]
+- [Datadog を使用した Kafka の監視][14]
+- [ナレッジセンターの Kafka 概要][15]
 
 
 
@@ -252,22 +254,22 @@ Kafka チェックには、イベントは含まれません。
 <!-- SOURCED FROM https://github.com/DataDog/integrations-core -->
 ## Kafka コンシューマーインテグレーション
 
-![Kafka ダッシュボード][15]
+![Kafka ダッシュボード][16]
 
 ## 概要
 
 この Agent インテグレーションは、Kafka コンシューマーからメッセージオフセットのメトリクスを収集します。このチェックでは、Kafka ブローカーからハイウォーターオフセットを取得し、Kafka (旧式のコンシューマーの場合は Zookeeper) に保存されているコンシューマーオフセットを取得して、ブローカーオフセットとコンシューマーオフセットの差であるコンシューマーラグを計算します。
 
 **注:** 
-- このインテグレーションでは、コンシューマーオフセットがブローカーオフセットの前にチェックされることが保証されます。最悪の場合、コンシューマーラグが少し過大評価されることがあります。これらのオフセットを逆の順序でチェックすると、コンシューマーラグが負の値になるまで過小評価される可能性があり、これは通常メッセージがスキップされていることを示す深刻なシナリオです。
-- Kafka ブローカーや Java ベースのコンシューマー/プロデューサーから JMX メトリクスを収集したい場合は、[Kafka Broker インテグレーション][16]を参照してください。
+- このインテグレーションでは、ブローカーオフセットより先にコンシューマーオフセットをチェックするよう保証されています。そのため最悪の場合でも、コンシューマーラグがわずかに過大評価される程度で済みます。これらのオフセットを逆の順序でチェックすると、コンシューマーラグが負の値になるまで過小評価される可能性があり、これは通常メッセージがスキップされていることを示す深刻なシナリオです。
+- Kafka ブローカーや Java ベースのコンシューマー/プロデューサーから JMX メトリクスを収集したい場合は、[Kafka Broker インテグレーション][17]を参照してください。
 
 
 ## セットアップ
 
 ### インストール
 
-Agent の Kafka コンシューマーチェックは、[Datadog Agent][5] パッケージに含まれています。Kafka ノードに追加インストールする必要はありません。
+Agent の Kafka コンシューマーチェックは、[Datadog Agent][6] パッケージに含まれています。Kafka ノードに追加インストールする必要はありません。
 
 ### 構成
 
@@ -280,20 +282,20 @@ Kafka コンシューマーが動作しているホスト上で Agent を実行�
 
 ##### メトリクスの収集
 
-1. [Agent のコンフィギュレーションディレクトリ][17]のルートにある `conf.d/` フォルダーの `kafka_consumer.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル kafka_consumer.d/conf.yaml][18] を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][18]のルートにある `conf.d/` フォルダーの `kafka_consumer.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル kafka_consumer.d/conf.yaml][19] を参照してください。
 
-2. [Agent を再起動します][19]。
+2. [Agent を再起動します][20]。
 
 ##### ログ収集
 
-このチェックは、その他のログを収集しません。Kafka ブローカーからログを収集するには、[Kafka のログコレクション手順][20]をご参照ください。
+このチェックは、その他のログを収集しません。Kafka ブローカーからログを収集するには、[Kafka のログコレクション手順][21]をご参照ください。
 
 <!-- xxz tab xxx -->
 <!-- xxx tab "コンテナ化" xxx -->
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][21]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][22]のガイドを参照して、次のパラメーターを適用してください。
 
 ##### メトリクスの収集
 
@@ -305,19 +307,19 @@ Kafka コンシューマーが動作しているホスト上で Agent を実行�
 
 ##### ログ収集
 
-このチェックは、その他のログを収集しません。Kafka ブローカーからログを収集するには、[Kafka のログコレクション手順][20]をご参照ください。
+このチェックは、その他のログを収集しません。Kafka ブローカーからログを収集するには、[Kafka のログコレクション手順][21]をご参照ください。
 
 <!-- xxz tab xxx -->
 <!-- xxz tabs xxx -->
 
 ### 検証
 
-[Agent の status サブコマンドを実行][8]し、Checks セクションで `kafka_consumer` を探します。
+[Agent の status サブコマンドを実行][9]し、Checks セクションで `kafka_consumer` を探します。
 
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "kafka_consumer" >}}
+{{< get-metrics-from-git "kafka-consumer" >}}
 
 
 ### イベント
@@ -331,8 +333,8 @@ Kafka コンシューマーチェックには、サービスのチェック機�
 
 ## トラブルシューティング
 
-- [Kafka のトラブルシューティングと詳細な調査][9]
-- [Agent が RMIServer スタブの取得に失敗します][10]
+- [Kafka のトラブルシューティングと詳細な調査][10]
+- [Agent が RMIServer スタブの取得に失敗します][11]
 
 **Kerberos GSSAPI 認証**
 
@@ -375,29 +377,30 @@ sudo service datadog-agent restart
 
 ## その他の参考資料
 
-- [Kafka パフォーマンスメトリクスの監視][11]
-- [Kafka パフォーマンスメトリクスの収集][12]
-- [Datadog を使用した Kafka の監視][13]
+- [Kafka パフォーマンスメトリクスの監視][12]
+- [Kafka パフォーマンスメトリクスの収集][13]
+- [Datadog を使用した Kafka の監視][14]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/kafka/images/kafka_dashboard.png
 [2]: https://docs.datadoghq.com/ja/integrations/java/
 [3]: https://raw.githubusercontent.com/DataDog/dd-agent/5.2.1/conf.d/kafka.yaml.example
 [4]: https://docs.datadoghq.com/ja/integrations/kafka/?tab=host#kafka-consumer-integration
-[5]: https://app.datadoghq.com/account/settings/agent/latest
-[6]: https://github.com/DataDog/jmxfetch
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_msk/#pagetitle
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://docs.datadoghq.com/ja/integrations/faq/troubleshooting-and-deep-dive-for-kafka/
-[10]: https://docs.datadoghq.com/ja/integrations/guide/agent-failed-to-retrieve-rmiserver-stub/
-[11]: https://www.datadoghq.com/blog/monitoring-kafka-performance-metrics
-[12]: https://www.datadoghq.com/blog/collecting-kafka-performance-metrics
-[13]: https://www.datadoghq.com/blog/monitor-kafka-with-datadog
-[14]: https://www.datadoghq.com/knowledge-center/apache-kafka/
-[15]: https://raw.githubusercontent.com/DataDog/integrations-core/master/kafka_consumer/images/kafka_dashboard.png
-[16]: https://app.datadoghq.com/integrations/kafka?search=kafka
-[17]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[18]: https://github.com/DataDog/integrations-core/blob/master/kafka_consumer/datadog_checks/kafka_consumer/data/conf.yaml.example
-[19]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[20]: https://docs.datadoghq.com/ja/integrations/kafka/#log-collection
-[21]: https://docs.datadoghq.com/ja/containers/kubernetes/integrations/
+[5]: https://docs.datadoghq.com/ja/data_streams/
+[6]: https://app.datadoghq.com/account/settings/agent/latest
+[7]: https://github.com/DataDog/jmxfetch
+[8]: https://docs.datadoghq.com/ja/integrations/amazon_msk/#pagetitle
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[10]: https://docs.datadoghq.com/ja/integrations/faq/troubleshooting-and-deep-dive-for-kafka/
+[11]: https://docs.datadoghq.com/ja/integrations/guide/agent-failed-to-retrieve-rmiserver-stub/
+[12]: https://www.datadoghq.com/blog/monitoring-kafka-performance-metrics
+[13]: https://www.datadoghq.com/blog/collecting-kafka-performance-metrics
+[14]: https://www.datadoghq.com/blog/monitor-kafka-with-datadog
+[15]: https://www.datadoghq.com/knowledge-center/apache-kafka/
+[16]: https://raw.githubusercontent.com/DataDog/integrations-core/master/kafka_consumer/images/kafka_dashboard.png
+[17]: https://app.datadoghq.com/integrations/kafka?search=kafka
+[18]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[19]: https://github.com/DataDog/integrations-core/blob/master/kafka_consumer/datadog_checks/kafka_consumer/data/conf.yaml.example
+[20]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[21]: https://docs.datadoghq.com/ja/integrations/kafka/#log-collection
+[22]: https://docs.datadoghq.com/ja/containers/kubernetes/integrations/

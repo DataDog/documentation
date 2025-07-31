@@ -39,7 +39,7 @@ The geomap widget visualizes geographic data with shaded regions or points. It c
   |Metric   | The group by tag must include a country ISO Code (alpha-2 ISO format) or a country subdivision ISO Code (ISO-3166-2 format). You can [generate metrics from ingested logs][4], or manually include the [tags on ingest][2]. See the [querying documentation][5] to configure a metric query.|
   |RUM   | See the [RUM documentation][6] to configure a RUM query. |
   |SLO | See the [SLO search documentation][7] to configure an SLO query. |
-  |Security Signals <br> Application Security <br> Audit Trail | See the [Log search documentation][3] to configure a query. |
+  |Security Signals <br> App and API Protection <br> Audit Trail | See the [Log search documentation][3] to configure a query. |
 
   [1]: /logs/log_configuration/processors/#geoip-parser
   [2]: /getting_started/tagging/#define-tags

@@ -82,7 +82,7 @@ Amazon MemoryDB for Redis は、高いインメモリパフォーマンスと複
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_memorydb" >}}
+{{< get-metrics-from-git "amazon-memorydb" >}}
 
 
 ### イベント

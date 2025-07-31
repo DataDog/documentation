@@ -3,8 +3,12 @@ meta_title: Débuter avec Datadog
 meta_description: Datadog, le principal prestataire de services de surveillance à l'échelle du cloud.
 disclaimer: Cette page n'est pas encore disponible en français, sa traduction est en cours. <br> Si vous avez des questions ou des retours sur notre projet  de traduction actuel, <a href="https://docs.datadoghq.com/fr/help/">n'hésitez pas à nous contacter</a>.
 announcement_banner:
-  desktop_message: "Commencez à explorer la plateforme dès à présent en activant votre essai gratuit de 14 jours\_!"
-  mobile_message: "Profitez de 14 jours de surveillance illimitée\_!"
-  external_link: https://www.datadoghq.com/fr/free-datadog-trial/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-coreplatform-emea-docs-announcement-trial-freetrial-fr
+  desktop_message: '<i class="icon-right-arrow-slim text-white"></i><span>NOW LIVE: Datadog launches availability zone in Australia to support local data residency</span><span>Learn More</span>'
+  mobile_message: 'Datadog launches availability zone in Australia'
+  background_color: "#6300D4"
+  icon_color: "#ffffff"
+  custom_classes: 'dash-announcement-banner'
+  external_link: https://www.datadoghq.com/about/latest-news/press-releases/datadog-launches-new-availability-zone-in-australia
 exclude: []
 translate_status_banner: Cette traduction n'est pas à jour. Pour consulter la dernière version en anglais, cliquez ici
+site_support_banner: "This product is not supported for your selected <a href=\"/getting_started/site\">Datadog site</a>."

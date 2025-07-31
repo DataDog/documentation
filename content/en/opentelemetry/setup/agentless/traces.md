@@ -14,14 +14,11 @@ further_reading:
   - link: "https://opentelemetry.io/docs/reference/specification/protocol/exporter/ "
     tag: "External Site"
     text: "OpenTelemetry Protocol Exporter"
+site_support_id: otlp_agentless
 ---
 {{< callout header="false" btn_hidden="true">}}
   The Datadog OTLP traces intake endpoint is in Preview. To request access, contact your account representative.
 {{< /callout >}}
-
-{{< site-region region="ap1,gov" >}}
-<div class="alert alert-warning">Datadog OTLP traces intake endpoint is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 

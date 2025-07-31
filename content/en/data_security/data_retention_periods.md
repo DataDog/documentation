@@ -86,7 +86,8 @@ attributes:
        - **Dashboards, Notebooks, Monitors**: Retained for the duration of the account
   - product: Error Tracking
     data_type: | 
-       - **Errors**: 1 year after last access
+       - **Error samples**: 15 days
+       - **Issues**: 1 year after last activity
   - product: Event Management
     data_type: | 
        - **Events**: 15 months

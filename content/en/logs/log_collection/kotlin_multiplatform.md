@@ -55,6 +55,7 @@ kotlin {
     | 0.5.0                                    | 2.22.1                  |
     | 1.0.0                                    | 2.23.0                  |
     | 1.1.0                                    | 2.26.0                  |
+    | 1.2.0                                    | 2.29.0                  |
 
     #### Adding native iOS dependencies using the CocoaPods plugin
 
@@ -70,12 +71,12 @@ kotlin {
 
         pod("DatadogObjc") {
             linkOnly = true
-            version = 2.26.0
+            version = 2.29.0
         }
 
         pod("DatadogCrashReporting") {
             linkOnly = true
-            version = 2.26.0
+            version = 2.29.0
         }
     }
     ```
@@ -222,6 +223,28 @@ kotlin {
                 variant = appVariantName
         )
             .useSite(DatadogSite.AP1)
+            .trackCrashes(true)
+            .build()
+
+        Datadog.initialize(context, configuration, trackingConsent)
+    }
+   ```
+   {{< /site-region >}}
+   {{< site-region region="ap2" >}}
+   ```kotlin
+    // in common source set
+    fun initializeDatadog(context: Any? = null) {
+        // context should be application context on Android and can be null on iOS
+        val appClientToken = <CLIENT_TOKEN>
+        val appEnvironment = <ENV_NAME>
+        val appVariantName = <APP_VARIANT_NAME>
+
+        val configuration = Configuration.Builder(
+                clientToken = appClientToken,
+                env = appEnvironment,
+                variant = appVariantName
+        )
+            .useSite(DatadogSite.AP2)
             .trackCrashes(true)
             .build()
 

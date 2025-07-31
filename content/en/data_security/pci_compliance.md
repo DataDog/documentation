@@ -10,7 +10,7 @@ further_reading:
   text: "CoTerm: Monitor terminal sessions and sensitive activities on local and remote systems"
 ---
 
-{{% site-region region="us3,us5,eu,ap1,gov" %}}
+{{% site-region region="us3,us5,eu,ap1,gov,ap2" %}}
 <div class="alert alert-warning">
 PCI DSS compliance for APM and Log Management is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
 </div>

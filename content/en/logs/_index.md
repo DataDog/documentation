@@ -43,6 +43,9 @@ further_reading:
   - link: "https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/"
     tag: "Architecture Center"
     text: "A guide to Log Management Indexing Strategies with Datadog"
+  - link: "https://www.datadoghq.com/blog/archive-search/"
+    tag: "Blog"
+    text: "Search your historical logs more efficiently with Datadog Archive Search"
 cascade:
     algolia:
         rank: 70

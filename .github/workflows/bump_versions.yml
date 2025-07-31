@@ -29,11 +29,11 @@ jobs:
               'integrations-core'
             ]
             const versions = await Promise.all(clients.map(async (repo) => {
-              const releases = await github.rest.repos.listReleases({
+              const release = await github.rest.repos.getLatestRelease({
                 owner: 'DataDog',
                 repo: repo
               })
-              return {client: repo, version: releases.data[0]["tag_name"]}
+              return {client: repo, version: release.data["tag_name"]}
             }))
             console.log(versions)
             return JSON.stringify(versions, null, 2)
