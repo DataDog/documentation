@@ -489,22 +489,23 @@ The Datadog App and API Protection Service Extension Docker image supports the f
 
 Configure the container to send traces to your Datadog Agent using the following environment variables:
 
-| Environment variable                   | Default value | Description                                                           |
-|----------------------------------------|---------------|-----------------------------------------------------------------------|
-| `DD_AGENT_HOST`                        | `localhost`   | Hostname where your Datadog Agent is running.                         |
-| `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                       |
+| Environment variable                   | Default value | Description                                                                      |
+|----------------------------------------|---------------|----------------------------------------------------------------------------------|
+| `DD_AGENT_HOST`                        | `localhost`   | Hostname or IP of your Datadog Agent.                                            |
+| `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                                  |
+
+The App and API Protection GCP Service Extensions integration is built on top of the [Datadog Go Tracer][6] and inherits all of its environment variables. For additional details, refer to [Configuring the Go Tracing Library][7] and [App and API Protection Library Configuration][8].
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> The App and API Protection GCP Service Extensions integration is built on top of the Datadog Go Tracer. It generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (e.g. <code>v2.1.0</code>). In some cases, early release versions may be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
+  <strong>Note:</strong> As the App and API Protection GCP Service Extensions integration is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (e.g. <code>v2.1.0</code>). In some cases, early release versions may be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
 </div>
-
-The GCP Service Extensions integration uses the [Datadog Go Tracer][6] and inherits all environment variables from the tracer. You can find more configuration options in [Configuring the Go Tracing Library][7] and [App and API Protection Library Configuration][8].
 
 ## Limitations
 
 The GCP Service Extensions integration has the following limitations:
 
 * Inspection of request and response bodies is supported when using service extension callout image version `2.1.0` or later.
+* Currently, GCP Service Extensions does not support an asynchronous (observability) mode.
 
 ## Further Reading
 

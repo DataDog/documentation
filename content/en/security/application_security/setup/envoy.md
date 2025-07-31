@@ -34,7 +34,27 @@ You can enable App and API Protection for the Envoy proxy. The Datadog Envoy int
 
 The App and API Protection Envoy integration uses the Envoy external processing filter.
 
-1. **Update your Envoy configuration** to add the [external processing filter][3] to your `http_filters` list, and define the corresponding gRPC cluster in your `clusters` section. For example:
+1. **Deploy a new container with the Datadog External Processor Docker image.** The image is available on the [Datadog GitHub Registry][5].
+
+   This service is a gRPC server that Envoy communicates with to have requests and responses analyzed by App and API Protection.
+
+   The Datadog External Processor exposes some settings:
+   | Environment variable                     | Default value   | Description                                                                                                                              |
+   |------------------------------------------|-----------------|------------------------------------------------------------------------------------------------------------------------------------------|
+   | `DD_SERVICE_EXTENSION_HOST`              | `0.0.0.0`       | gRPC server listening address.                                                                                                           |
+   | `DD_SERVICE_EXTENSION_PORT`              | `443`           | gRPC server port.                                                                                                                        |
+   | `DD_SERVICE_EXTENSION_HEALTHCHECK_PORT`  | `80`            | HTTP server port for health checks.                                                                                                      |
+   | `DD_APPSEC_BODY_PARSING_SIZE_LIMIT`      | `0`             | Maximum size of the bodies to be processed in bytes. If set to `0`, the bodies are not processed. The recommended value is `10000000` (10MB). (To fully enable body processing, the `allow_mode_override` option should also be set in the External Processing filter configuration) |
+   | `DD_SERVICE_EXTENSION_OBSERVABILITY_MODE`| `false`         | Enable asynchronous analysis. This also disables blocking capabilities. (To fully enable observability mode, this option should also be set in the External Processing filter configuration) |
+
+   Configure the Datadog Agent to receive traces from the external processor using the following environment variables:
+
+   | Environment variable                   | Default value | Description                                                                      |
+   |----------------------------------------|---------------|----------------------------------------------------------------------------------|
+   | `DD_AGENT_HOST`                        | `localhost`   | Hostname or IP of your Datadog Agent.                                            |
+   | `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                                  |
+
+2. **Update your Envoy configuration** to add the [external processing filter][3] to your `http_filters` list, and define the corresponding gRPC cluster in your `clusters` section. For example:
 
    #### Http filters section
 
@@ -46,7 +66,7 @@ The App and API Protection Envoy integration uses the Envoy external processing 
          "@type": type.googleapis.com/envoy.extensions.filters.http.ext_proc.v3.ExternalProcessor
          grpc_service:
            envoy_grpc:
-             cluster_name: datadog_ext_proc_cluster
+             cluster_name: datadog_aap_ext_proc_cluster
 
            ## Mandatory: Correctly show the service as an Envoy proxy in the UI.
            initial_metadata:
@@ -56,6 +76,12 @@ The App and API Protection Envoy integration uses the Envoy external processing 
            ## A timeout configuration for the grpc connection exist but is not useful in our case.
            ## This timeout is for all the request lifetime. A timeout on the route is preferred.
            #timeout: 0s
+
+         ## Optional: Enable fail open mode. Default is false.
+         ## Normally, if the external processor fails or times out, the filter fails and Envoy
+         ## returns a 5xx error to the downstream client. Setting this to true allows requests
+         ## to continue without error if a failure occurs.
+         failure_mode_allow: true # It won't cause 5xx error if an error occurs.
 
          ## Mandatory: Only enable the request and response header modes.
          ## If you want to enable body processing, please see the section below.
@@ -78,7 +104,7 @@ The App and API Protection Envoy integration uses the Envoy external processing 
          #message_timeout: 200ms
 
          ## Optional: Enable asynchronous mode analysis. Default is false.
-         ## This mode will disable all blocking capabilities. The callout container should also be
+         ## This mode will disable all blocking capabilities. The external processor should also be
          ## configured with the DD_SERVICE_EXTENSION_OBSERVABILITY_MODE environment variable.
          #observability_mode: true
          ## Optional: When in asynchronous mode, the message_timeout is not used. This deferred
@@ -94,7 +120,7 @@ The App and API Protection Envoy integration uses the Envoy external processing 
    ```yaml
    clusters:
        # ... other clusters
-       - name: datadog_ext_proc_cluster
+       - name: datadog_aap_ext_proc_cluster
          type: STRICT_DNS
          lb_policy: ROUND_ROBIN
          http2_protocol_options: {}
@@ -102,35 +128,19 @@ The App and API Protection Envoy integration uses the Envoy external processing 
            name: envoy.transport_sockets.tls
            typed_config:
              "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.UpstreamTlsContext
+             sni: "localhost"
          load_assignment:
-           cluster_name: datadog_ext_proc_cluster
+           cluster_name: datadog_aap_ext_proc_cluster
            endpoints:
              - lb_endpoints:
                  - endpoint:
                      address:
                        socket_address:
-                         address: 12.0.0.1 # Replace with the host address of the Datadog Envoy callout docker image (configured in the next step)
+                         address: 12.0.0.1 # Replace with the host address of the Datadog External Processor docker image (configured in the next step)
                          port_value: 443
    ```
 
    **Note**: Please read the provided example configuration carefully and adapt it to match your infrastructure and environment. You can find more configuration options available in the [Envoy external processor documentation][4].
-
-2. **Run a new container with the Datadog External Processor Docker image.** The image is available on the [Datadog GitHub Registry][5].
-
-   The Datadog External Processor exposes some settings:
-   | Environment variable                   | Default value   | Description                                                                                                                              |
-   |----------------------------------------|-----------------|------------------------------------------------------------------------------------------------------------------------------------------|
-   | `DD_SERVICE_EXTENSION_HOST`            | `0.0.0.0`       | gRPC server listening address.                                                                                                           |
-   | `DD_SERVICE_EXTENSION_PORT`            | `443`           | gRPC server port.                                                                                                                        |
-   | `DD_SERVICE_EXTENSION_HEALTHCHECK_PORT`| `80`            | HTTP server port for health checks.                                                                                                      |
-   | `DD_APPSEC_BODY_PARSING_SIZE_LIMIT`    | `0`             | Maximum size of the bodies to be processed in bytes. If set to `0`, the bodies are not processed. (Recommended value: `10000000` (10MB)) |
-
-   Configure the Datadog Agent to receive traces from the external processor using the following environment variables:
-
-   | Environment variable                   | Default value | Description                                                           |
-   |----------------------------------------|---------------|-----------------------------------------------------------------------|
-   | `DD_AGENT_HOST`                        | `localhost`   | Hostname where your Datadog Agent is running.                         |
-   | `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                       |
 
 {{% appsec-getstarted-2-plusrisk %}}
 
@@ -138,17 +148,17 @@ The App and API Protection Envoy integration uses the Envoy external processing 
 
 ## Datadog Go Tracer and Envoy integration
 
-<div class="alert alert-warning">
-  <strong>Note:</strong> The Datadog External Processor is built on top of the Datadog Go Tracer. It generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (e.g. <code>v2.1.0</code>). In some cases, early release versions may be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
-</div>
-
 The External Processor is built on top of the [Datadog Go Tracer][6] and inherits all of its environment variables. For additional details, refer to [Configuring the Go Tracing Library][7] and [App and API Protection Library Configuration][8].
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> As the Datadog External Processor is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (e.g. <code>v2.1.0</code>). In some cases, early release versions may be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
+</div>
 
 ## Limitations
 
 The Envoy integration has the following limitations:
 
-* Inspection of request and response bodies is supported when using the Datadog External Processor image version `2.1.0` or later.
+* Inspection of request and response bodies is supported when using the Datadog External Processor image version `v2.1.0` or later.
 
 ## Further Reading
 

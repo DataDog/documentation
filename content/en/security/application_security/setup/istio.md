@@ -118,25 +118,26 @@ spec:
 
 The Datadog External Processor exposes some settings:
 
-| Environment variable                   | Default value   | Description                                                                                                                              |
-|----------------------------------------|-----------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_SERVICE_EXTENSION_HOST`            | `0.0.0.0`       | gRPC server listening address.                                                                                                           |
-| `DD_SERVICE_EXTENSION_PORT`            | `443`           | gRPC server port.                                                                                                                        |
-| `DD_SERVICE_EXTENSION_HEALTHCHECK_PORT`| `80`            | HTTP server port for health checks.                                                                                                      |
-| `DD_APPSEC_BODY_PARSING_SIZE_LIMIT`    | `0`             | Maximum size of the bodies to be processed in bytes. If set to `0`, the bodies are not processed. (Recommended value: `10000000` (10MB)) |
+| Environment variable                   | Default value     | Description                                                                                                                              |
+|----------------------------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_SERVICE_EXTENSION_HOST`            | `0.0.0.0`         | gRPC server listening address.                                                                                                           |
+| `DD_SERVICE_EXTENSION_PORT`            | `443`             | gRPC server port.                                                                                                                        |
+| `DD_SERVICE_EXTENSION_HEALTHCHECK_PORT`| `80`              | HTTP server port for health checks.                                                                                                      |
+| `DD_APPSEC_BODY_PARSING_SIZE_LIMIT`      | `0`             | Maximum size of the bodies to be processed in bytes. If set to `0`, the bodies are not processed. The recommended value is `10000000` (10MB). (To fully enable body processing, the `allow_mode_override` option should also be set in the External Processing filter configuration) |
+| `DD_SERVICE_EXTENSION_OBSERVABILITY_MODE`| `false`         | Enable asynchronous analysis of requests. This also disables blocking capabilities. (To fully enable observability mode, this option should also be set in the External Processing filter configuration) |
 
 Configure the connection from the external processor to the Datadog Agent using these environment variables:
 
 | Environment variable                   | Default value | Description                                                                      |
 |----------------------------------------|---------------|----------------------------------------------------------------------------------|
-| `DD_AGENT_HOST`                        | `localhost`   | Hostname or IP of your Datadog Agent. |
+| `DD_AGENT_HOST`                        | `localhost`   | Hostname or IP of your Datadog Agent.                                            |
 | `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                                  |
 
-<div class="alert alert-warning">
-  <strong>Note:</strong> The Datadog External Processor is built on top of the Datadog Go Tracer. It generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (e.g. <code>v2.1.0</code>). In some cases, early release versions may be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
-</div>
-
 The External Processor is built on top of the [Datadog Go Tracer][7] and inherits all of its environment variables. For additional details, refer to [Configuring the Go Tracing Library][8] and [App and API Protection Library Configuration][9].
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> As the Datadog External Processor is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (e.g. <code>v2.1.0</code>). In some cases, early release versions may be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
+</div>
 
 ### 2. Configure an EnvoyFilter
 
@@ -185,7 +186,7 @@ spec:
             "@type": type.googleapis.com/envoy.extensions.filters.http.ext_proc.v3.ExternalProcessor
             grpc_service:
               envoy_grpc:
-                cluster_name: datadog_ext_proc_cluster
+                cluster_name: datadog_aap_ext_proc_cluster
 
               ## Mandatory: Correctly show the service as an Envoy proxy in the UI.
               initial_metadata:
@@ -195,6 +196,12 @@ spec:
               ## A timeout configuration for the grpc connection exist but is not useful in our case.
               ## This timeout is for all the request lifetime. A timeout on the route is preferred.
               #timeout: 0s
+
+            ## Optional: Enable fail open mode. Default is false.
+            ## Normally, if the external processor fails or times out, the filter fails and Envoy
+            ## returns a 5xx error to the downstream client. Setting this to true allows requests
+            ## to continue without error if a failure occurs.
+            failure_mode_allow: true # It won't cause 5xx error if an error occurs.
 
             ## Mandatory: Only enable the request and response header modes.
             ## If you want to enable body processing, please see the section below.
@@ -217,7 +224,7 @@ spec:
             #message_timeout: 200ms
 
             ## Optional: Enable asynchronous mode analysis. Default is false.
-            ## This mode will disable all blocking capabilities. The callout container should also be
+            ## This mode will disable all blocking capabilities. The external processor should also be
             ## configured with the DD_SERVICE_EXTENSION_OBSERVABILITY_MODE environment variable.
             #observability_mode: true
             ## Optional: When in asynchronous mode, the message_timeout is not used. This deferred
@@ -237,7 +244,6 @@ spec:
         value:
           name: "datadog_aap_ext_proc_cluster" # A unique name for this cluster configuration
           type: STRICT_DNS
-          connect_timeout: 0.2s
           lb_policy: ROUND_ROBIN
           http2_protocol_options: {}
           transport_socket:
@@ -255,7 +261,6 @@ spec:
                       # Address of the Datadog External Processor service
                       address: "datadog-aap-extproc-service.<your-preferred-namespace>.svc.cluster.local" # Adjust if your service name or namespace is different
                       port_value: 443
-
 ```
 
 {{% /tab %}}
@@ -276,37 +281,7 @@ spec:
     labels:
       app: <your-app-label> # Label of your application pods
   configPatches:
-    # Patch 1: Add the Cluster definition for the Datadog External Processing service
-    - applyTo: CLUSTER
-      match:
-        context: SIDECAR_INBOUND
-        cluster:
-          service: "*"
-      patch:
-        operation: ADD
-        value:
-          name: "datadog_aap_ext_proc_cluster" # A unique name for this cluster configuration
-          type: STRICT_DNS
-          connect_timeout: 0.2s
-          lb_policy: ROUND_ROBIN
-          http2_protocol_options: {}
-          transport_socket:
-            name: envoy.transport_sockets.tls
-            typed_config:
-              "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.UpstreamTlsContext
-              sni: "localhost"
-          load_assignment:
-            cluster_name: "datadog_aap_ext_proc_cluster"
-            endpoints:
-            - lb_endpoints:
-              - endpoint:
-                  address:
-                    socket_address:
-                      # Address of the Datadog External Processor service
-                      address: "datadog-aap-extproc-service.<extproc-service-namespace>.svc.cluster.local" # Adjust if your service name or namespace is different
-                      port_value: 443
-
-    # Patch 2: Add the External Processing HTTP Filter to the Sidecar's connection manager
+    # Patch to add the External Processing HTTP Filter to the Sidecar's connection manager
     - applyTo: HTTP_FILTER
       match:
         context: SIDECAR_INBOUND
@@ -324,8 +299,81 @@ spec:
             "@type": type.googleapis.com/envoy.extensions.filters.http.ext_proc.v3.ExternalProcessor
             grpc_service:
               envoy_grpc:
-                cluster_name: "datadog_aap_ext_proc_cluster"
-              timeout: 0.2s
+                cluster_name: datadog_aap_ext_proc_cluster
+
+              ## Mandatory: Correctly show the service as an Envoy proxy in the UI.
+              initial_metadata:
+                - key: x-datadog-envoy-integration
+                  value: '1'
+
+              ## A timeout configuration for the grpc connection exist but is not useful in our case.
+              ## This timeout is for all the request lifetime. A timeout on the route is preferred.
+              #timeout: 0s
+
+            ## Optional: Enable fail open mode. Default is false.
+            ## Normally, if the external processor fails or times out, the filter fails and Envoy
+            ## returns a 5xx error to the downstream client. Setting this to true allows requests
+            ## to continue without error if a failure occurs.
+            failure_mode_allow: true # It won't cause 5xx error if an error occurs.
+
+            ## Mandatory: Only enable the request and response header modes.
+            ## If you want to enable body processing, please see the section below.
+            processing_mode:
+              request_header_mode: SEND
+              response_header_mode: SEND
+
+            ## Optional for headers analysis only but **mandatory** for body processing.
+            ## The external processor can dynamically override the processing mode as needed instructing
+            ## Envoy to forward request and response bodies to the external processor. Body processing is
+            ## enabled when DD_APPSEC_BODY_PARSING_SIZE_LIMIT is set on the external processor container.
+            allow_mode_override: true
+
+            ## Optional: Set a timeout by processing message. Default is 200ms.
+            ## There is a maxium of 2 messages per requests with headers only and 4 messages maximum
+            ## with body processing enabled.
+            ## Note: This timeout also includes the data communication between Envoy and the external processor.
+            ## Optional: When the body processing is enabled, the timeout should be adjusted to accommodate
+            ## the additional possible processing time. Larger payloads will require a longer timeout. 
+            #message_timeout: 200ms
+
+            ## Optional: Enable asynchronous mode analysis. Default is false.
+            ## This mode will disable all blocking capabilities. The external processor should also be
+            ## configured with the DD_SERVICE_EXTENSION_OBSERVABILITY_MODE environment variable.
+            #observability_mode: true
+            ## Optional: When in asynchronous mode, the message_timeout is not used. This deferred
+            ## timeout starts when the http request is finished, to let the External Processor
+            ## process all processing messages. Default is 5s.
+            #deferred_close_timeout: 5s
+
+
+    # Patch to add the Cluster definition for the Datadog External Processing service
+    - applyTo: CLUSTER
+      match:
+        context: SIDECAR_INBOUND
+        cluster:
+          service: "*"
+      patch:
+        operation: ADD
+        value:
+          name: "datadog_aap_ext_proc_cluster" # A unique name for this cluster configuration
+          type: STRICT_DNS
+          lb_policy: ROUND_ROBIN
+          http2_protocol_options: {}
+          transport_socket:
+            name: envoy.transport_sockets.tls
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.UpstreamTlsContext
+              sni: "localhost"
+          load_assignment:
+            cluster_name: "datadog_aap_ext_proc_cluster"
+            endpoints:
+            - lb_endpoints:
+              - endpoint:
+                  address:
+                    socket_address:
+                      # Address of the Datadog External Processor service
+                      address: "datadog-aap-extproc-service.<your-preferred-namespace>.svc.cluster.local" # Adjust if your service name or namespace is different
+                      port_value: 443
 ```
 
 {{% /tab %}}
@@ -341,7 +389,7 @@ After applying the chosen `EnvoyFilter`, traffic passing through your Istio Ingr
 
 The Istio integration has the following limitations:
 
-* Inspection of request and response bodies is supported when using the Datadog External Processor image version `2.1.0` or later.
+* Inspection of request and response bodies is supported when using the Datadog External Processor image version `v2.1.0` or later.
 
 ## Further Reading
 
