@@ -134,7 +134,7 @@ Configurations for these strategies can be applied **Remotely** through the Data
 
 Using **Remote Configuration** for service ingestion rates has specific requirements.
 
-{{% collapse-content title="Remote Configuration requirements" level="h4" expanded="false" id="remote-configuration-requirements" %}}
+{{% collapse-content title="Remote Configuration requirements" level="h4"expanded=false id="remote-configuration-requirements" %}}
 
 - Datadog Agent [7.41.1][19] or higher.
 - [Remote Configuration][3]  enabled for your Agent.
