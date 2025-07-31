@@ -6946,7 +6946,7 @@ components:
       - data
       type: object
     CaseAttributes:
-      description: Case attributes
+      description: Case resource attributes
       properties:
         archived_at:
           description: Timestamp of when the case was archived
@@ -6954,6 +6954,8 @@ components:
           nullable: true
           readOnly: true
           type: string
+        attributes:
+          $ref: '#/components/schemas/CaseObjectAttributes'
         closed_at:
           description: Timestamp of when the case was closed
           format: date-time
@@ -7058,6 +7060,13 @@ components:
       required:
       - data
       type: object
+    CaseObjectAttributes:
+      additionalProperties:
+        items:
+          type: string
+        type: array
+      description: The definition of `CaseObjectAttributes` object.
+      type: object
     CasePriority:
       default: NOT_DEFINED
       description: Case priority
@@ -7153,6 +7162,33 @@ components:
       type: string
       x-enum-varnames:
       - STANDARD
+    CaseUpdateAttributes:
+      description: Case update attributes
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseUpdateAttributesAttributes'
+        type:
+          $ref: '#/components/schemas/CaseResourceType'
+      required:
+      - attributes
+      - type
+      type: object
+    CaseUpdateAttributesAttributes:
+      description: Case update attributes attributes
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseObjectAttributes'
+      required:
+      - attributes
+      type: object
+    CaseUpdateAttributesRequest:
+      description: Case update attributes request
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseUpdateAttributes'
+      required:
+      - data
+      type: object
     CaseUpdatePriority:
       description: Case priority status
       properties:
@@ -46608,6 +46644,47 @@ paths:
       x-menu-order: 6
       x-undo:
         type: idempotent
+  /api/v2/cases/{case_id}/attributes:
+    post:
+      description: Update case attributes
+      operationId: UpdateAttributes
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseUpdateAttributesRequest'
+        description: Case attributes update payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Update case attributes
+      tags:
+      - Case Management
+      x-menu-order: 10
+      x-undo:
+        type: idempotent
   /api/v2/cases/{case_id}/priority:
     post:
       description: Update case priority
@@ -58677,12 +58754,13 @@ paths:
         following fields are available for findings:\n- `external_id`: The resource
         external ID related to the finding.\n- `description`: The description and
         remediation steps for the finding.\n- `datadog_link`: The Datadog relative
-        link for the finding.\n\n### Response\n\nThe response includes an array of
-        finding objects, pagination metadata, and a count of items that match the
-        query.\n\nEach finding object contains the following:\n\n- The finding ID
-        that can be used in a `GetFinding` request to retrieve the full finding details.\n-
-        Core attributes, including status, evaluation, high-level resource details,
-        muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date`
+        link for the finding.\n- `ip_addresses`: The list of private IP addresses
+        for the resource related to the finding.\n\n### Response\n\nThe response includes
+        an array of finding objects, pagination metadata, and a count of items that
+        match the query.\n\nEach finding object contains the following:\n\n- The finding
+        ID that can be used in a `GetFinding` request to retrieve the full finding
+        details.\n- Core attributes, including status, evaluation, high-level resource
+        details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date`
         time stamps.\n- An array of associated tags.\n"
       operationId: ListFindings
       parameters:
@@ -58750,6 +58828,12 @@ paths:
       - description: Return only findings for the specified resource type.
         in: query
         name: filter[resource_type]
+        required: false
+        schema:
+          type: string
+      - description: Return only findings for the specified resource id.
+        in: query
+        name: filter[@resource_id]
         required: false
         schema:
           type: string
