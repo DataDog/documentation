@@ -850,6 +850,7 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - GetEvent
         unstable: []
@@ -1594,6 +1595,18 @@ menu:
           - DeleteTagConfiguration
         unstable: []
         order: 4
+    - name: Get tag key cardinality details
+      url: '#get-tag-key-cardinality-details'
+      identifier: metrics-get-tag-key-cardinality-details
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMetricTagCardinalityDetails
+        unstable: []
+        order: 13
     - name: Tag Configuration Cardinality Estimator
       url: '#tag-configuration-cardinality-estimator'
       identifier: metrics-tag-configuration-cardinality-estimator
@@ -2909,6 +2922,19 @@ menu:
         unstable:
           - v2
         order: 27
+    - name: List assets SBOMs
+      url: '#list-assets-sboms'
+      identifier: security-monitoring-list-assets-sboms
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAssetsSBOMs
+        unstable:
+          - v2
+        order: 28
     - name: List vulnerable assets
       url: '#list-vulnerable-assets'
       identifier: security-monitoring-list-vulnerable-assets
@@ -6543,6 +6569,70 @@ menu:
           - CreateDORADeployment
         unstable: []
         order: 1
+    - name: Datasets
+      url: /api/latest/datasets/
+      identifier: datasets
+      generated: true
+    - name: Edit a dataset
+      url: '#edit-a-dataset'
+      identifier: datasets-edit-a-dataset
+      parent: datasets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDataset
+        unstable: []
+        order: 4
+    - name: Get a single dataset by ID
+      url: '#get-a-single-dataset-by-id'
+      identifier: datasets-get-a-single-dataset-by-id
+      parent: datasets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDataset
+        unstable: []
+        order: 2
+    - name: Delete a dataset
+      url: '#delete-a-dataset'
+      identifier: datasets-delete-a-dataset
+      parent: datasets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDataset
+        unstable: []
+        order: 5
+    - name: Create a dataset
+      url: '#create-a-dataset'
+      identifier: datasets-create-a-dataset
+      parent: datasets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDataset
+        unstable: []
+        order: 1
+    - name: Get all datasets
+      url: '#get-all-datasets'
+      identifier: datasets-get-all-datasets
+      parent: datasets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAllDatasets
+        unstable: []
+        order: 3
     - name: Domain Allowlist
       url: /api/latest/domain-allowlist/
       identifier: domain-allowlist

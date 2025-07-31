@@ -1,6 +1,6 @@
 ---
 title: Create Datadog Events from Amazon SNS Emails
-
+site_support_id: events_from_sns_emails
 description: "Steps for sending events to Datadog with emails from Amazon SNS"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/amazon_web_services/"

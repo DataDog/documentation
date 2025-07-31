@@ -36,7 +36,7 @@ The following table lists the destinations and fields that support template synt
 
 If you want to route logs based on the log's application ID field (for example, `application_id`) to the Amazon S3 destination, use the event fields syntax in the **Prefix to apply to all object keys** field.
 
-{{< img src="observability_pipelines/amazon_s3_prefix.png" alt="The Amazon S3 destination showing the prefix field using the event fields syntax /application_id={{ application_id }}/" style="width:40%;" >}}
+{{< img src="observability_pipelines/amazon_s3_prefix_20250709.png" alt="The Amazon S3 destination showing the prefix field using the event fields syntax /application_id={{ application_id }}/" style="width:40%;" >}}
 
 ### Syntax
 

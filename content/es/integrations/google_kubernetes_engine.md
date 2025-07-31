@@ -1,4 +1,27 @@
 ---
+app_id: google-kubernetes-engine
+app_uuid: 5515ec7e-2aed-42dd-8bf7-ae3c4dfa4c37
+assets:
+  dashboards:
+    gke_enhanced: assets/dashboards/gke_enhanced.json
+    gke_standard: assets/dashboards/gke_standard.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check: gcp.gke.container.uptime
+      metadata_path: metadata.csv
+      prefix: gcp.gke.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 327
+    source_type_name: Google Kubernetes Engine
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - nube
 - contenedores
@@ -9,22 +32,42 @@ categories:
 custom_kind: integración
 dependencies: []
 description: Monitoriza el uso de recursos GKE.
+display_on_public_website: true
 doc_link: https://docs.datadoghq.com/integrations/google_kubernetes_engine/
 draft: false
 git_integration_title: google_kubernetes_engine
 has_logo: true
 integration_id: google-kubernetes-engine
-integration_title: Google Kubernetes Engine, Nube
+integration_title: Google Kubernetes Engine
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: google_kubernetes_engine
-public_title: Integración de Datadog y Google Kubernetes Engine, Nube
-short_description: Monitoriza el uso de recursos GKE.
+public_title: Google Kubernetes Engine
+short_description: Un potente gestor y sistema de orquestación clúster para ejecutar
+  tus aplicaciones en contenedores.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Categoría::Nube
+  - Category::Containers
+  - Categoría::Google Cloud
+  - Category::Kubernetes
+  - Category::Log Collection
+  - Category::Network
+  - Offering::Integration
+  configuration: README.md#Configuración
+  description: Un potente gestor y sistema de orquestación clúster para ejecutar tus
+    aplicaciones en contenedores.
+  media: []
+  overview: README.md#Información general
+  support: README.md#Soporte
+  title: Google Kubernetes Engine
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
 Google Kubernetes Engine (GKE) es un potente gestor de clústeres y un sistema de orquestación para la ejecución de tus contenedores Docker.
@@ -55,7 +98,7 @@ A diferencia de los clústeres Kubernetes autoalojados, el plano de control GKE 
 
 3. Para rellenar las métricas del plano de control, debes [habilitar las métricas del plano de control GKE][3]. Las métricas del plano de control te proporcionan visibilidad del funcionamiento del plano de control Kubernetes, gestionado por Google en GKE.
 
-### APM
+### Recopilación de logs
 
 Los logs de Google Kubernetes Engine se recopilan con Google Cloud Logging y se envían a una tarea de Dataflow a través de un tema Cloud Pub/Sub. Si aún no lo has hecho, [configura la generación de logs con la plantilla Dataflow de Datadog][4].
 
@@ -72,20 +115,20 @@ Una vez hecho esto, exporta tus logs de Google Kubernetes Engine desde Google Cl
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "google-kubernetes-engine" >}}
+{{< get-metrics-from-git "google_kubernetes_engine" >}}
 
 
 ### Eventos
 
 La integración Google Kubernetes Engine no incluye eventos.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración Google Kubernetes Engine no incluye checks de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][7].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][7].
 
 
 [1]: https://docs.datadoghq.com/es/integrations/google_cloud_platform/
