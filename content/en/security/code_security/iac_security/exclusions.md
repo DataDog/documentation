@@ -3,12 +3,15 @@ title: Configure IaC Security Exclusions
 aliases:
   - /security/cloud_security_management/setup/iac_scanning/iac_scanning_exclusions/
 further_reading:
-    - link: "/security/code_security/iac_security"
-      tag: "Documentation"
-      text: "IaC Security"
-    - link: "/security/code_security/iac_security/setup"
-      tag: "Documentation"
-      text: "Set up IaC Security for Code Security"
+  - link: "/security/code_security/iac_security"
+    tag: "Documentation"
+    text: "IaC Security"
+  - link: "/security/code_security/iac_security/setup"
+    tag: "Documentation"
+    text: "Set up IaC Security for Code Security"
+  - link: "/security/code_security/iac_security/iac_rules/"
+    tag: "Documentation"
+    text: "IaC Security Rules"
 ---
 
 Infrastructure as Code (IaC) Security detects security misconfigurations in Terraform files. Exclusions allow you to control which findings appear in scan results by ignoring specific rules, files, or issue categories.

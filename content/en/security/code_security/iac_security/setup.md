@@ -12,6 +12,9 @@ further_reading:
   - link: "/security/code_security/iac_security/exclusions"
     tag: "Documentation"
     text: "Configure IaC Security Exclusions"
+  - link: "/security/code_security/iac_security/iac_rules/"
+    tag: "Documentation"
+    text: "IaC Security Rules"
 ---
 
 Use the following instructions to enable Infrastructure as Code (IaC) Security for Code Security.

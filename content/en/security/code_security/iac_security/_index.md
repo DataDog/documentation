@@ -9,11 +9,14 @@ further_reading:
   - link: "/security/code_security/iac_security/exclusions"
     tag: "Documentation"
     text: "Configure IaC Security Exclusions"
+  - link: "/security/code_security/iac_security/iac_rules/"
+    tag: "Documentation"
+    text: "IaC Security Rules"
 ---
 
-{{< img src="/security/infrastructure_as_code/iac_misconfiguration_side_panel.png" alt="IaC misconfiguration side panel showing details for the high severity IMDSv1 Enabled issue, including a security summary, code snippet, detection timestamps, and remediation steps." width="100%">}}
-
 Datadog Infrastructure as Code (IaC) Security detects misconfigurations in Terraform code before deployment. It scans files in your connected GitHub or GitLab repositories using hosted scanning and flags issues such as missing encryption or overly permissive access. Supported file types include standalone Terraform files and local modules.
+
+{{< img src="/security/infrastructure_as_code/iac_misconfiguration_side_panel.png" alt="IaC misconfiguration side panel showing details for the high severity IMDSv1 Enabled issue, including a security summary, code snippet, detection timestamps, and remediation steps." width="100%">}}
 
 ## How it works
 
@@ -27,7 +30,7 @@ Datadog adds inline comments to GitHub and GitLab pull requests to flag any IaC 
 
 ### Triage and filtering
 
-After setting up IaC Security, each commit to a scanned repository triggers a scan. Findings are summarized on the [Code Security Vulnerabilities][3] page and grouped per repository on the [Code Security > Repositories][6] page.
+After setting up IaC Security, each commit to a scanned repository triggers a scan. Findings are summarized on the [Code Security Vulnerabilities][3] page and grouped per repository on the [Code Security Repositories][6] page.
 
 You can filter findings by:
 
@@ -52,7 +55,7 @@ You can create a bi-directional Jira ticket directly from any finding. This help
 
 If you determine that a finding is a false positive, click **Mark as false positive** in the finding details panel. This hides the finding and excludes it from reporting. You can review or restore false positives at any time using the Status filter on the [Code Security Vulnerabilities][3] page.
 
-## Getting started
+## Next steps
 
 1. [Set up IaC Security][1] in your environment.
 2. Configure [scanning exclusions][2] to reduce false positives or ignore expected results.
