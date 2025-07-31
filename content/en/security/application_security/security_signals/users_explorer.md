@@ -133,7 +133,7 @@ Overlap between users might indicate:
   * Centralized control (e.g., via a **command-and-control server**).
   * Account access from **known malicious IPs** (check threat feeds).
 
-### Summary table
+### Summary of comparison details
 
 | Detail                 | Value of Comparison                                |
 | ---------------------- | -------------------------------------------------- |
