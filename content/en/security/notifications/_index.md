@@ -58,7 +58,7 @@ Notifications can be sent to individuals and teams through email, Slack, Jira, P
 
 #### Create a webhook for security automation
 
-You can use webhooks to send alerts to other platforms, isuch as SOAR. To set up a webhook:
+You can use webhooks to send alerts to other platforms, such as SOAR. To set up a webhook:
 
 1. Navigate to the [Webhooks][4] integration.
 1. Click **+ New** in the **Webhooks** section.
