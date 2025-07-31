@@ -340,6 +340,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 ## What's next?
 
 - Add custom tags to your telemetry by using the `DD_TAGS` environment variable
+- If you are using the Datadog Lambda Extension, turn off the Datadog Forwarder's Lambda logs
 - See [advanced configurations][6] for further capabilities
 
 ### Monitor custom business logic

@@ -274,8 +274,7 @@ DD_APM_REPLACE_TAGS=[
       }
 ]
 ```
-
-
+To collect payloads from AWS services, see [Capture Requests and Responses from AWS Services][54].
 
 ## Collect traces from non-Lambda resources
 
@@ -728,13 +727,9 @@ To instrument AWS Lambda with the OpenTelemetry API, set the environment variabl
 
 Version 67+ of [the Datadog Extension][50] is optimized to significantly reduce cold start duration.
 
-To use the optimized extension, disable App and API Protection (AAP), Continuous Profiler for Lambda, and OpenTelemetry based tracing. Set the following environment variables to `false`:
+To use the optimized extension, set the `DD_SERVERLESS_APPSEC_ENABLED` environment variable to `false`.
 
-- `DD_TRACE_OTEL_ENABLED`
-- `DD_PROFILING_ENABLED`
-- `DD_SERVERLESS_APPSEC_ENABLED`
-
-Enabling any of these features cause the extension to default back to the fully compatible older version of the extension. You can also force your extension to use the older version by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog encourages you to report any feedback or bugs by adding an [issue on GitHub][51] and tagging your issue with `version/next`.
+When the `DD_SERVERLESS_APPSEC_ENABLED` environment variable is set to `true`, the Datadog Extension defaults to the fully compatible older version. You can also force your extension to use the older version by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog encourages you to report any feedback or bugs by adding an [issue on GitHub][51] and tagging your issue with `version/next`.
 
 ## Configure Auto-linking for DynamoDB PutItem
 _Available for Python and Node.js runtimes_.
@@ -839,3 +834,4 @@ If you have trouble configuring your installations, set the environment variable
 [51]: https://github.com/DataDog/datadog-lambda-extension/issues
 [52]: /serverless/aws_lambda/distributed_tracing/#span-auto-linking
 [53]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
+[54]: /tracing/guide/aws_payload_tagging/?code-lang=python&tab=nodejs

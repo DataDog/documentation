@@ -467,6 +467,7 @@ To configure Datadog using SST v3, follow these steps:
 
 - Add custom tags to your telemetry by using the `DD_TAGS` environment variable
 - Configure [payload collection][12] to capture your functions' JSON request and response payloads
+- If you are using the Datadog Lambda Extension, turn off the Datadog Forwarder's Lambda logs
 - See [advanced configurations][3] for further capabilities
 
 ### Monitor custom business logic
