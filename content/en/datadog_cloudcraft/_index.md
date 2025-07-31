@@ -41,7 +41,9 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 
 To get started using Cloudcraft, use the following steps:
 1. Navigate to [**Infrastructure > Resources > Cloudcraft**][7]. 
-2. Select one or more accounts, regions, and resources. The diagram automatically displays the Infrastructure diagram.
+2. A real-time diagram of the resources is displayed in your environment.
+
+ **Note**: For environments with more than 10,000 resources, you must filter the diagram by account, region, or tags before it can be displayed.
 
 {{< img src="datadog_cloudcraft/getting_started_3.mp4" alt="Video showing getting started in Cloudcraft by selecting the Account, Region, and Resource" video=true;" >}}
 
@@ -54,6 +56,14 @@ With Group By, Cloudcraft divides your diagram into distinct sections based on d
 Enable the **Show All Controls** toggle to display the available **Group By** options. You can also remove specific groupings by unchecking options like VPC and Region. To view the current nesting structure and add the Network ACL (Network Access Control List) layer, click the **More** dropdown.
 
 {{< img src="datadog_cloudcraft/cloudcraft_group_by_with_ccm.png" alt="Group by feature in Cloudcraft, highlighting the Group By menu" >}}
+
+#### Group by tags
+
+You can group resources by AWS tags, such as app, service, team, or cost center, to organize your view by team or workload.
+
+**Note**: Grouping by tags is supported for AWS tags only. Tags from the Datadog Agent (for example ,`env`, or `team` tags from local configuration) are not supported.
+
+{{< img src="datadog_cloudcraft/group_by_tag.mp4" alt="Group by tag feature in Cloudcraft, grouping by Team and Cost Center" video=true >}}
 
 ### Saved views 
 

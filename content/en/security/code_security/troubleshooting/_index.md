@@ -164,6 +164,7 @@ Datadog-hosted SCA scans do **not** support repositories that:
 - Use [Git Large File Storage][18] (`git-lfs`)
 - Contain invalid or reserved file paths (such as `/` or `\\`)
 - Contain file paths with parent directory traversal (`..`)
+- Contain file names longer than 255 characters
 
 If any of these conditions apply to your repository, and you cannot update your repository to account for these constraints, [set up the analysis in a CI pipeline][19] to run SCA and upload results to Datadog.
 

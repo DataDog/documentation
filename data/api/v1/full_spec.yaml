@@ -5654,6 +5654,72 @@ components:
       type: string
       x-enum-varnames:
       - DATE_REMAPPER
+    LogsDecoderProcessor:
+      description: 'The decoder processor decodes any source attribute containing
+        a
+
+        base64/base16-encoded UTF-8/ASCII string back to its original value, storing
+        the
+
+        result in a target attribute.'
+      properties:
+        binary_to_text_encoding:
+          $ref: '#/components/schemas/LogsDecoderProcessorBinaryToTextEncoding'
+        input_representation:
+          $ref: '#/components/schemas/LogsDecoderProcessorInputRepresentation'
+        is_enabled:
+          default: false
+          description: Whether the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        source:
+          description: Name of the log attribute with the encoded data.
+          example: encoded.field
+          type: string
+        target:
+          description: Name of the log attribute that contains the decoded data.
+          example: decoded.field
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsDecoderProcessorType'
+      required:
+      - source
+      - target
+      - binary_to_text_encoding
+      - input_representation
+      - type
+      type: object
+    LogsDecoderProcessorBinaryToTextEncoding:
+      description: The encoding used to represent the binary data.
+      enum:
+      - base64
+      - base16
+      example: base64
+      type: string
+      x-enum-varnames:
+      - BASE64
+      - BASE16
+    LogsDecoderProcessorInputRepresentation:
+      description: The original representation of input string.
+      enum:
+      - utf_8
+      - integer
+      example: utf_8
+      type: string
+      x-enum-varnames:
+      - UTF_8
+      - INTEGER
+    LogsDecoderProcessorType:
+      default: decoder-processor
+      description: Type of logs decoder processor.
+      enum:
+      - decoder-processor
+      example: decoder-processor
+      type: string
+      x-enum-varnames:
+      - DECODER_PROCESSOR
     LogsExclusion:
       description: Represents the index exclusion filter object from configuration
         API.
@@ -6322,6 +6388,7 @@ components:
       - $ref: '#/components/schemas/LogsTraceRemapper'
       - $ref: '#/components/schemas/LogsSpanRemapper'
       - $ref: '#/components/schemas/LogsArrayProcessor'
+      - $ref: '#/components/schemas/LogsDecoderProcessor'
     LogsQueryCompute:
       description: Define computation for a log query.
       properties:
@@ -19132,6 +19199,14 @@ components:
           description: The total account usage.
           format: int64
           type: integer
+        account_committed_usage:
+          description: The total account committed usage.
+          format: int64
+          type: integer
+        account_on_demand_usage:
+          description: The total account on-demand usage.
+          format: int64
+          type: integer
         elapsed_usage_hours:
           description: Elapsed usage hours for some billable product.
           format: int64
@@ -24767,6 +24842,8 @@ components:
             code_analysis_read: View Code Analysis.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
+            coterm_read: Read terminal recordings.
+            coterm_write: Write terminal recordings.
             create_webhooks: Create webhooks integrations.
             dashboards_embed_share: Create, modify, and delete shared dashboards with
               share type 'embed'.
@@ -24803,10 +24880,6 @@ components:
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View a list of findings that include
               both misconfigurations and identity risks.
-            security_monitoring_notification_profiles_read: View Rule Security Notification
-              rules.
-            security_monitoring_notification_profiles_write: Create, edit, and delete
-              Security Notification rules.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
@@ -26114,6 +26187,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - dashboards_public_share
+      - AuthZ:
+        - dashboards_embed_share
+      - AuthZ:
+        - dashboards_invite_share
       summary: Create a shared dashboard
       tags:
       - Dashboards
@@ -26132,6 +26209,8 @@ paths:
         operator: OR
         permissions:
         - dashboards_public_share
+        - dashboards_embed_share
+        - dashboards_invite_share
       x-undo:
         operationId: DeletePublicDashboard
         parameters:
@@ -26176,6 +26255,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - dashboards_public_share
+      - AuthZ:
+        - dashboards_embed_share
+      - AuthZ:
+        - dashboards_invite_share
       summary: Revoke a shared dashboard URL
       tags:
       - Dashboards
@@ -26184,6 +26267,8 @@ paths:
         operator: OR
         permissions:
         - dashboards_public_share
+        - dashboards_embed_share
+        - dashboards_invite_share
       x-undo:
         type: idempotent
     get:
@@ -26299,6 +26384,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - dashboards_public_share
+      - AuthZ:
+        - dashboards_embed_share
+      - AuthZ:
+        - dashboards_invite_share
       summary: Update a shared dashboard
       tags:
       - Dashboards
@@ -26308,6 +26397,8 @@ paths:
         operator: OR
         permissions:
         - dashboards_public_share
+        - dashboards_embed_share
+        - dashboards_invite_share
       x-undo:
         type: idempotent
   /api/v1/dashboard/public/{token}/invitation:
@@ -26357,7 +26448,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - dashboards_public_share
+        - dashboards_invite_share
       summary: Revoke shared dashboard invitations
       tags:
       - Dashboards
@@ -26366,7 +26457,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - dashboards_invite_share
       x-undo:
         type: idempotent
     get:
@@ -26419,7 +26510,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - dashboards_public_share
+        - dashboards_invite_share
       summary: Get all invitations for a shared dashboard
       tags:
       - Dashboards
@@ -26427,7 +26518,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - dashboards_invite_share
       x-undo:
         type: safe
     post:
@@ -26487,7 +26578,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - dashboards_public_share
+        - dashboards_invite_share
       summary: Send shared dashboard invitation email
       tags:
       - Dashboards
@@ -26505,7 +26596,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - dashboards_invite_share
       x-undo:
         operationId: DeletePublicDashboardInvitation
         parameters:
@@ -30209,6 +30300,10 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
       summary: Search logs
       tags:
       - Logs
@@ -30316,10 +30411,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all indexes
       tags:
       - Logs Indexes
@@ -31599,7 +31690,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - monitors_write
+        - monitors_read
       summary: Validate a monitor
       tags:
       - Monitors
@@ -31608,7 +31699,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - monitors_write
+        - monitors_read
       x-undo:
         type: idempotent
   /api/v1/monitor/{monitor_id}:
@@ -32053,7 +32144,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - monitors_write
+        - monitors_read
       summary: Validate an existing monitor
       tags:
       - Monitors
@@ -32062,7 +32153,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - monitors_write
+        - monitors_read
       x-undo:
         type: idempotent
   /api/v1/monthly_custom_reports:
@@ -32978,14 +33069,16 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - metrics_read
       summary: Search metrics
       tags:
       - Metrics
       x-menu-order: 4
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - metrics_read
       x-undo:
         type: safe
   /api/v1/security_analytics/signals/{signal_id}/add_to_incident:
@@ -35555,6 +35648,12 @@ paths:
       description: Search for Synthetic tests and Test Suites.
       operationId: SearchTests
       parameters:
+      - description: The search query.
+        in: query
+        name: text
+        required: false
+        schema:
+          type: string
       - description: If true, include the full configuration for each test in the
           response.
         in: query
@@ -35590,7 +35689,7 @@ paths:
           default: 50
           format: int64
           type: integer
-      - description: The sort order for the results (e.g., 'name,asc' or 'name,desc').
+      - description: The sort order for the results (e.g., `name,asc` or `name,desc`).
         in: query
         name: sort
         required: false
@@ -36172,6 +36271,8 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_global_variable_read
+      - AuthZ:
+        - apm_api_catalog_read
       summary: Get all global variables
       tags:
       - Synthetics
@@ -36180,6 +36281,7 @@ paths:
         operator: OR
         permissions:
         - synthetics_global_variable_read
+        - apm_api_catalog_read
       x-undo:
         type: safe
     post:
@@ -39637,13 +39739,18 @@ tags:
 - description: Get a list of IP prefixes belonging to Datadog.
   name: IP Ranges
 - description: 'Manage your Datadog API and application keys. You need an API key
-    and
+    and an
 
-    an application key for a user with the required permissions to interact
+    application key for a user with the required permissions to interact with these
+    endpoints.
 
-    with these endpoints. The full list of API and application keys can be
 
-    seen on your [Datadog API page](https://app.datadoghq.com/account/settings#api).'
+    Consult the following pages to view and manage your keys:
+
+
+    - [API Keys](https://app.datadoghq.com/organization-settings/api-keys)
+
+    - [Application Keys](https://app.datadoghq.com/personal-settings/application-keys)'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/api-app-keys/

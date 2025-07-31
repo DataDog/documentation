@@ -21,6 +21,10 @@ Search your metrics by metric name or tag using the **Metric** or **Tag** search
 
 {{< img src="metrics/summary/tag_advanced_filtering.png" alt="The metrics summary page with NOT team:* entered in the Tag search bar" style="width:75%;">}}
 
+You can also discover relevant metrics using enhanced fuzzy matching support in the Metrics search field:
+
+{{< img src="metrics/summary/metric_advanced_filtering_fuzzy.png" alt="The metrics summary page with fuzzy search searching shopist checkout" style="width:75%;">}}
+
 Tag filtering supports Boolean and wildcard syntax so that you can identify: 
 * Metrics that are tagged with a particular tag key, for example, `team`: `team:*`
 * Metrics that are missing a particular tag key, for example, `team`: `NOT team:*`
