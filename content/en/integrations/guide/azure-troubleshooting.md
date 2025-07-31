@@ -76,7 +76,7 @@ Ensure that you have not exceeded your [daily quota][4] for log retention.
 
 ## Monitoring multiple app registrations
 
-Subscriptions monitored by multiple app registrations can introduce overlapping access configurations. This setup is not recommended and may result in integration issues or system conflicts.
+Subscriptions monitored by multiple app registrations can introduce overlapping access configurations. This setup is not recommended and may result in integration issues or system conflicts, and may also increase your Azure Monitor costs.
 
 ## Further Reading
 
