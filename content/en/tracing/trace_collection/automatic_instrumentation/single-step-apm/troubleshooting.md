@@ -19,12 +19,12 @@ This feature is in preview for:
 <ul>
 <li>Languages: Python, Java, Node.js, Ruby, PHP, .NET</li>
 <li>Environments: Linux hosts, containers, Kubernetes</li>
-<li>Minimum Agent version: 7.68.2+</li>
+<li>Datadog Agent v7.68.2+</li>
 </ul>
-<p>To enable it, contact support or ensure the <code>apm-ssi-troubleshooting</code> feature flag is enabled.<p>
+<p>To enable it, contact support or turn on the <code>apm-ssi-troubleshooting</code> feature flag.<p>
 {{< /callout >}}
 
-Using Datadog, you can identify and troubleshoot SSI issues across your infrastructure. The UI shows:
+Using Datadog, you can identify and troubleshoot SSI issues across your infrastructure. You can see information like:
 - Which hosts have SSI enabled
 - Which processes failed instrumentation and why
 - Which services were instrumented successfully
@@ -49,10 +49,10 @@ The **SDK Installations** section lists processes that failed injection, with a 
 
 | Issue | Status | Reason | Suggested action |
 |-------|--------|--------|------------------|
-| Other Agent Already Attached  | Injection failed | Another tracer is already loaded in the process | Remove existing tracer and restart the process, or disable SSI for this service. |
-| Unsupported Runtime Version  | Injection failed | e.g., Node.js 16.14.2 detected (minimum: 18.x)  | Upgrade to a supported runtime version.                                                                   |
-| Permission Denied    | Injection failed | Insufficient privileges to inject into process  | Ensure the Agent has sufficient permissions. Check container security policies and capabilities.   |
-| Process not showing in APM despite SSI being enabled | —  | — | Check the SDK Installations table for a failure reason. Ensure the process is long-running and supported. |
+| Other Agent already attached | Injection failed | Another tracer is already loaded in the process | Remove existing tracer and restart the process, or disable SSI for this service. |
+| Unsupported runtime version | Injection failed | For example, Node.js 16.14.2 detected (minimum: 18.x) | Upgrade to a supported runtime version. |
+| Permission denied | Injection failed | Insufficient privileges to inject into process | Ensure the Agent has sufficient permissions. Check container security policies and capabilities. |
+| Process not showing in APM despite SSI being enabled | — | — | Check the SDK Installations table for a failure reason. Ensure the process is long-running and supported. |
 
 If a service is not instrumented and no failure reason is listed, check whether the process exited quickly or used a language that isn't yet supported.
 
