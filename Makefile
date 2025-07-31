@@ -75,7 +75,7 @@ watch-cdocs:
 # compile .mdoc.md files to HTML
 # so Hugo can include them in the site
 build-llms-txt:
-	@echo "Makefile: Running build-llms-txt";
+	@echo "Launching llms.txt build ...";
 	@node ./local/bin/js/build-llms-txt.js;
 
 start:
