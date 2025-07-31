@@ -87,14 +87,14 @@ network_devices:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Viewing VPN Tunnels
+## Viewing VPN tunnels
 
 To view VPN tunnels in the UI:
 
 1. Select a monitored device in NDM that has VPN tunnels.
 2. Click on the **VPN Tunnels** tab in the device's side panel.
 
-### Metrics Collected
+### Metrics collected
 
 The following metrics are made available after enabling VPN monitoring:
 
@@ -114,7 +114,7 @@ The following metrics are made available after enabling VPN monitoring:
 
 If you experience issues using VPN monitoring, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][3].
 
-### VPN Tunnels Not Displayed
+### VPN tunnels not displayed
 
 The VPN tunnel data is collected with SNMP. If VPN tunnels are missing on a device, ensure the following:
 
