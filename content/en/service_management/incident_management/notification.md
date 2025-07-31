@@ -11,7 +11,6 @@ further_reading:
 
 ## Overview
 
-All stakeholder notifications for an incident are consolidated in the incident's Notifications tab. You can manually create, save as draft, and send notifications directly from this page. Automated notifications sent by [Notification Rules][1] for the incident in question are also listed in this section.
 
 Effective incident response depends on notifying the right people at the right time. Datadog Incident Management provides two key ways to coordinate communication during an incident:
 
