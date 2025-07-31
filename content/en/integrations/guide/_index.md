@@ -64,7 +64,7 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="GCP guides:" >}}
-    {{< nextlink href="integrations/guide/gcp-metric-discrepancy" tag=" gcp" >}}GCP Metric Discrepancy{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/gcp-metric-discrepancy" tag=" gcp" >}}Google Cloud Metric Discrepancy{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="JMX guides:" >}}

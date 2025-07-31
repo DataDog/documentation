@@ -1,11 +1,11 @@
 ---
-title: GCP Metric Discrepancy
+title: Google Cloud Metric Discrepancy
 
 description: "Troubleshooting steps for the GCP metric discrepancy"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/google-cloud-platform/"
   tag: "Integration"
-  text: "GCP Integration"
+  text: "Google Cloud Integration"
 ---
 
 ## Overview
@@ -16,9 +16,9 @@ Use this guide to troubleshoot metric discrepancies between Google Cloud and Dat
 
 Datadog ingests the most granular raw values from Google Cloud. All aggregation seen in Datadog happens on the Datadog side. Datadog's metrics intake imports the raw values from Google as gauges, and any further aggregation is performed within Datadog. The following steps reconcile the metric `gcp.redis.stats.cpu_utilization` between Google Cloud and Datadog.
 
-1. Find the corresponding metric in GCP.
+1. Find the corresponding metric in Google Cloud.
 
-   For the Google Cloud integration, Datadog converts Google Cloud metrics into the format `gcp.GCP_SERVICE_NAME.METRIC_NAME`. For the [example metric][1], the Google Cloud service name is **redis**, and the metric name is **stats/cpu_utilization**. The full metric name is `redis.googleapis.com/stats/cpu_utilization`.
+   For the Google Cloud integration, Datadog converts Google Cloud metrics into the format `gcp.Google_Cloud_SERVICE_NAME.METRIC_NAME`. For the [example metric][1], the Google Cloud service name is **redis**, and the metric name is **stats/cpu_utilization**. The full metric name is `redis.googleapis.com/stats/cpu_utilization`.
 
 2. Find the most granular dimensions.
 
@@ -61,7 +61,7 @@ Datadog ingests the most granular raw values from Google Cloud. All aggregation 
 
 5. Understand Google Cloud alignment functions.
 
-   This discrepancy occurs because by default, GCP applies a rate alignment for this metric. For details, see the Google cloud [alignment function][6] documentation. Click on `configure aligner` to see that the alignment function is automatically set to **rate** (0.108711 / 60 ≃ 0.0018119).
+   This discrepancy occurs because by default, Google Cloud applies a rate alignment for this metric. For details, see the Google cloud [alignment function][6] documentation. Click on `configure aligner` to see that the alignment function is automatically set to **rate** (0.108711 / 60 ≃ 0.0018119).
 
    {{< img src="integrations/guide/gcp-metric-discrepancy/gcp_aligner.png" alt="gcp aligner" >}}
 
