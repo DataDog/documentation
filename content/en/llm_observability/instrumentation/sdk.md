@@ -2283,6 +2283,3 @@ tracer.use('http', false) // disable the http integration
 [11]: /tracing/trace_collection/compatibility/python/#integrations
 [12]: /tracing/trace_collection/compatibility/python/#library-compatibility
 [13]: /llm_observability/instrumentation/auto_instrumentation/
-[14]: /serverless/aws_lambda/installation/python/?tab=custom#installation
-[15]: /llm_observability/quickstart?tab=python#trace-an-llm-application-in-aws-lambda
-[16]: https://app.datadoghq.com/llm/settings/evaluations
