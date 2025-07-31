@@ -19,7 +19,7 @@ algolia:
   tags: ['python lambda traces']
 ---
 
-<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
+<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">Read more</a>.</div>
 
 ## Setup
 
@@ -449,44 +449,11 @@ To configure Datadog using SST v3, follow these steps:
 
 ## Span Auto-linking
 
-When segments of your asynchronous requests cannot propagate trace context, Datadog's [Span Auto-linking][9] feature automatically detects linked spans. 
+
 
 ### Configure Auto-linking for DynamoDB PutItem
 
-To enable Span Auto-linking for [DynamoDB Change Streams][10]'s `PutItem` operation, configure primary key names for your tables.
 
-{{< tabs >}}
-{{% tab "Python" %}}
-```python
-ddtrace.config.botocore['dynamodb_primary_key_names_for_tables'] = {
-    'table_name': {'key1', 'key2'},
-    'other_table': {'other_key'},
-}
-```
-{{% /tab %}}
-
-{{% tab "Environment variable" %}}
-```sh
-export DD_BOTOCORE_DYNAMODB_TABLE_PRIMARY_KEYS='{
-    "table_name": ["key1", "key2"],
-    "other_table": ["other_key"]
-}'
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-This enables DynamoDB `PutItem` calls to be instrumented with span pointers. Many DynamoDB API calls do not include the item's primary key fields as separate values, so they need to be provided to the tracer separately. This field is structured as a `dict` keyed by the table names as `str`. Each value is the set of primary key field names (as str) for the associated table. The set can have exactly one or two elements, depending on the table's primary key schema.
-
-## Minimize cold start duration
-Version 67+ of [the Datadog Extension][7] is optimized to significantly reduce cold start duration.
-
-To use the optimized extension, disable App and API Protection (AAP), Continuous Profiler for Lambda, and OpenTelemetry based tracing. Set the following environment variables to `false`:
-
-- `DD_TRACE_OTEL_ENABLED`
-- `DD_PROFILING_ENABLED`
-- `DD_SERVERLESS_APPSEC_ENABLED`
-
-Enabling any of these features cause the extension to default back to the fully compatible older version of the extension. You can also force your extension to use the older version by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog encourages you to report any feedback or bugs by adding an [issue on GitHub][8] and tagging your issue with `version/next`.
 
 ## FIPS compliance
 

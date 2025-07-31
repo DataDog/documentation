@@ -21,7 +21,7 @@ aliases:
 
 <div class="alert alert-warning">If you previously set up your Lambda functions using the Datadog Forwarder, see <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_ruby">instrumenting using the Datadog Forwarder</a>. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.</div>
 
-<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
+<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">Read more</a>.</div>
 
 ## Setup
 
@@ -328,17 +328,6 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
-
-## Minimize cold start duration
-Version 67+ of [the Datadog Extension][10] is optimized to significantly reduce cold start duration.
-
-To use the optimized extension, disable App and API Protection (AAP), Continuous Profiler for Lambda, and OpenTelemetry based tracing. Set the following environment variables to `false`:
-
-- `DD_TRACE_OTEL_ENABLED`
-- `DD_PROFILING_ENABLED`
-- `DD_SERVERLESS_APPSEC_ENABLED`
-
-Enabling any of these features cause the extension to default back to the fully compatible older version of the extension. You can also force your extension to use the older version by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog encourages you to report any feedback or bugs by adding an [issue on GitHub][11] and tagging your issue with `version/next`.
 
 ## FIPS compliance
 
