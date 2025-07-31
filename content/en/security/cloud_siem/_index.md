@@ -83,7 +83,7 @@ Cloud SIEM embeds both cloud and on-premises telemetry directly into security wo
 As your organization scales, controlling the ingestion cost of security logs without compromising visibility is critical. Cloud SIEM is integrated with Datadog Log Management so you can choose the retention and querying capability of your security logs to balance cost efficiency and your threat detection needs. The available options are:
 - [Standard indexing][6] for logs that need to be queried frequently and retained short term.
 - [Flex Logs][7] for logs that need to be retained long-term, but sometimes need to be queried urgently.
-- [Log Archives][8] for logs that are infrequently queried and need to be stored long-term, such as audit logs.
+- [Log Archives][8] for logs that are infrequently queried and need to be stored long-term.
 
 ## Cloud SIEM Overview page
 
