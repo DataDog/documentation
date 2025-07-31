@@ -272,7 +272,7 @@ Follow these steps to collect the custom resources that these CRDs define:
 
 1.  Select **Enable Indexing** to save.
 
-After the fields are indexed, you can add them as columns in the explorer or as part of Saved Views.
+After the fields are indexed, you can add them as columns in the explorer and sort them, or include them in Saved Views. You can also filter on indexed fields using the prefix `field#`.
 
 ### Indexing complex types
 
