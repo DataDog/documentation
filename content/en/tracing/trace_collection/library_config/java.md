@@ -235,8 +235,8 @@ When set to `false` http framework routes are not used for resource names. _This
 `dd.trace.http.server.path-resource-name-mapping`<br>
 : **Environment Variable**: `DD_TRACE_HTTP_SERVER_PATH_RESOURCE_NAME_MAPPING`<br>
 **Default**: `{}` (empty) <br>
-Maps HTTP request paths to custom resource names. Provide a comma???separated list of `pattern:resource_name` pairs:<br>
-&nbsp;&nbsp;&nbsp;&ndash; `pattern`: An [Ant???style path pattern][20] that must match the value of the `http.path_group` span tag.<br>
+Maps HTTP request paths to custom resource names. Provide a comma?separated list of `pattern:resource_name` pairs:<br>
+&nbsp;&nbsp;&nbsp;&ndash; `pattern`: An [Ant?style path pattern][20] that must match the value of the `http.path_group` span tag.<br>
 &nbsp;&nbsp;&nbsp;&ndash; `resource_name`: The custom resource name to assign if the pattern matches.<br>
 If `*` is used as the `resource_name` for a matching pattern, the original, unnormalized request path combined with the HTTP method is used as the resource name. For example, given the rule `/test/**:*`, a `GET` request for `/test/some/path` results in the resource name `GET /test/some/path`.<br>
 Mappings are evaluated in order of priority, and the first matching rule applies. Unmatched request paths use the default normalization behavior.<br>
