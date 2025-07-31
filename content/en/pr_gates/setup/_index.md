@@ -43,7 +43,7 @@ To create a PR Gates rule in Datadog:
 
    {{< img src="pr_gates/setup/static_analysis_3.png" alt="A Static Analysis rule that runs on all repos and fails when a PR has at least one Static Code Analysis code vulnerability with at least `Critical` severity" style="width:100%" >}}
 
-   <!-- 1. Integrate the PR Gate rule into your build configuration by including the [`datadog-ci gate evaluate` command](#integrate-pr-gates-in-your-cicd-pipeline). -->
+   1. Integrate the PR Gate rule into your build configuration by including the [`datadog-ci gate evaluate` command](#integrate-pr-gates-in-your-cicd-pipeline).
 
 1. Under **Preview checks**, select your CI provider to preview the [status check](#enable-github-check-creation) to be added to pull requests. To set the check so it blocks the pipeline when it fails, follow your provider's instructions for making a status check _required_:
 
