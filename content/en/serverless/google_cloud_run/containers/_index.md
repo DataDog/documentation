@@ -32,6 +32,8 @@ To instrument your Google Cloud Run containers with Datadog, choose one of two o
 | Logging                       | Direct stdout/stderr access.                             | Shared volume + log library routing to a log file. Uncaught errors require extra handling, since they are not automatically handled by your logging library. |
 | Failure isolation             | In rare cases, Datadog Agent bugs can affect your app.   | Datadog Agent faults are isolated.                                                                                                                           |
 | Observing multiple containers | Not supported                                            | Supported                                                                                                                                                    |
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
