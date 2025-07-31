@@ -47,6 +47,10 @@ For more information, see [Correlating PHP Logs and Traces][2].
 
 {{% gcr-configure-env-vars %}}
 
+## Troubleshooting
+
+{{% gcr-troubleshooting %}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

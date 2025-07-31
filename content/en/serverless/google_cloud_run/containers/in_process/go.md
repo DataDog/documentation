@@ -61,6 +61,10 @@ For more information, see [Correlating Go Logs and Traces][3].
 
 {{% gcr-configure-env-vars %}}
 
+## Troubleshooting
+
+{{% gcr-troubleshooting %}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
