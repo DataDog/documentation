@@ -101,7 +101,7 @@ ADD EVENT sqlserver.module_end( -- capture stored procedure completions
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
 WITH (
-    MAX_MEMORY = 2048 KB, -- do not exceed 2048, values above 2 MB may result in data loss due to SQLServer internals
+    MAX_MEMORY = 1024 KB, -- do not exceed 1024, values above 1 MB may result in data loss due to SQLServer internals
     TRACK_CAUSALITY = ON, -- allows datadog to correlate related events across activity ID
     EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
     MAX_DISPATCH_LATENCY = 30 SECONDS,
@@ -147,7 +147,7 @@ ADD EVENT sqlserver.attention(
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
 WITH (
-    MAX_MEMORY = 2048 KB, -- do not change, setting this larger than 2 MB may result in data loss due to SQLServer internals
+    MAX_MEMORY = 1024 KB, -- do not change, setting this larger than 1 MB may result in data loss due to SQLServer internals
     EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
     MAX_DISPATCH_LATENCY = 30 SECONDS,
     STARTUP_STATE = ON
@@ -243,7 +243,7 @@ ADD EVENT sqlserver.module_end( -- capture stored procedure completions
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
 WITH (
-    MAX_MEMORY = 2048 KB, -- do not exceed 2048, values above 2 MB may result in data loss due to SQLServer internals
+    MAX_MEMORY = 1024 KB, -- do not exceed 1024, values above 1 MB may result in data loss due to SQLServer internals
     TRACK_CAUSALITY = ON, -- allows datadog to correlate related events across activity ID
     EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
     MAX_DISPATCH_LATENCY = 30 SECONDS,
@@ -289,7 +289,7 @@ ADD EVENT sqlserver.attention(
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
 WITH (
-    MAX_MEMORY = 2048 KB, -- do not change, setting this larger than 2 MB may result in data loss due to SQLServer internals
+    MAX_MEMORY = 1024 KB, -- do not change, setting this larger than 1 MB may result in data loss due to SQLServer internals
     EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
     MAX_DISPATCH_LATENCY = 30 SECONDS,
     STARTUP_STATE = ON
@@ -337,10 +337,10 @@ The default query duration threshold is `duration > 1000000` (1 second). Adjust 
 <div class="alert alert-warning">Setting thresholds too low can result in excessive event collection that affects server performance, event loss due to buffer overflow, and incomplete data, as Datadog only collects the most recent 1000 events per collection interval.</div>
 
 ### Memory allocation
-- The default value is `MAX_MEMORY = 2048 KB`.
-- Do not exceed 2048 KB, as higher values may cause data loss due to [SQL Server internal limitations][3].
-- For high-volume servers, keeping this at a maximum of 2048 KB is recommended.
-- For lower-traffic servers, a setting of 1024 KB may be sufficient.
+- The default value is `MAX_MEMORY = 1024 KB`.
+- Do not exceed 1024 KB, as higher values may cause data loss due to [SQL Server internal limitations][3].
+- For high-volume servers, keeping this at a maximum of 1024 KB is recommended.
+- For lower-traffic servers, a setting of 512 KB may be sufficient.
 
 ### Event filtering {#event-filtering}
 
@@ -351,9 +351,8 @@ To reduce event volume, you can add filters to the `WHERE` clause. For example:
       sql_text <> '' AND
       duration > 1000000 AND
       -- Add custom filters here
-      database_name = 'YourImportantDB' -- Only track specific databases
-      -- OR --
-      username <> 'ReportUser' -- Exclude specific users
+      database_name = 'YourImportantDB' AND -- Only track specific databases
+      username <> 'datadog' -- Exclude Datadog Agent queries or specific users
   )
   ```
 

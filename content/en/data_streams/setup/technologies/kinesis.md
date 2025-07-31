@@ -13,6 +13,7 @@ title: Data Streams Monitoring for Amazon Kinesis
       <th>Library</th>
       <th>Minimal tracer version</th>
       <th>Recommended tracer version</th>
+      <th>Minimal Lambda Library version</th>
     </tr>
   </thead>
   <tbody>
@@ -21,29 +22,34 @@ title: Data Streams Monitoring for Amazon Kinesis
       <td><a href="https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-kinesis">Kinesis (v1)</a></td>
       <td>{{< dsm-tracer-version lang="java" lib="kinesis-v1" type="minimal" >}}</td>
       <td>{{< dsm-tracer-version lang="java" lib="kinesis-v1" type="recommended" >}}</td>
+      <td>Not supported</td>
     </tr>
     <tr>
       <td><a href="https://mvnrepository.com/artifact/software.amazon.awssdk/kinesis">Kinesis (v2)</a></td>
       <td>{{< dsm-tracer-version lang="java" lib="kinesis-v2" type="minimal" >}}</td>
       <td>{{< dsm-tracer-version lang="java" lib="kinesis-v2" type="recommended" >}}</td>
+      <td>Not supported</td>
     </tr>
     <tr>
       <td><a href="/data_streams/nodejs">Node.js</a></td>
       <td><a href="https://www.npmjs.com/package/@aws-sdk/client-kinesis">client-kinesis</a></td>
       <td>{{< dsm-tracer-version lang="nodejs" lib="client-kinesis" type="minimal" >}}</td>
       <td>{{< dsm-tracer-version lang="nodejs" lib="client-kinesis" type="recommended" >}}</td>
+      <td>Not supported</td>
     </tr>
     <tr>
       <td><a href="/data_streams/python">Python</a></td>
       <td><a href="https://pypi.org/project/botocore/">Botocore</a></td>
       <td>{{< dsm-tracer-version lang="python" lib="botocore" type="minimal" >}}</td>
       <td>{{< dsm-tracer-version lang="python" lib="botocore" type="recommended" >}}</td>
+      <td><a href="https://github.com/DataDog/datadog-lambda-python/releases/tag/v7.112.0">112</a></td>
     </tr>
     <tr>
       <td><a href="/data_streams/dotnet">.NET</a></td>
       <td><a href="https://www.nuget.org/packages/AWSSDK.Kinesis">Amazon Kinesis SDK</a></td>
       <td>{{< dsm-tracer-version lang="dotnet" lib="amazon-kinesis-sdk" type="minimal" >}}</td>
       <td>{{< dsm-tracer-version lang="dotnet" lib="amazon-kinesis-sdk" type="recommended" >}}</td>
+      <td>Not supported</td>
     </tr>
   </tbody>
 </table>

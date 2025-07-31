@@ -761,11 +761,10 @@ components:
       schema:
         type: string
     ResourceID:
-      description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
-        `dashboard`, `integration-account`, `integration-service`, `integration-webhook`,
-        `notebook`, `reference-table`, `security-rule`, `slo`, `workflow`, `app-builder-app`,
-        `connection`, `connection-group`, `rum-application`, `cross-org-connection`,
-        `spreadsheet`.'
+      description: 'Identifier, formatted as `type:id`. Supported types: `dashboard`,
+        `integration-service`, `integration-webhook`, `notebook`, `reference-table`,
+        `security-rule`, `slo`, `workflow`, `app-builder-app`, `connection`, `connection-group`,
+        `rum-application`, `cross-org-connection`, `spreadsheet`.'
       example: dashboard:abc-def-ghi
       in: path
       name: resource_id
@@ -2043,12 +2042,56 @@ components:
       description: The definition of `ActionConnectionIntegration` object.
       oneOf:
       - $ref: '#/components/schemas/AWSIntegration'
+      - $ref: '#/components/schemas/AnthropicIntegration'
+      - $ref: '#/components/schemas/AsanaIntegration'
+      - $ref: '#/components/schemas/AzureIntegration'
+      - $ref: '#/components/schemas/CircleCIIntegration'
+      - $ref: '#/components/schemas/ClickupIntegration'
+      - $ref: '#/components/schemas/CloudflareIntegration'
+      - $ref: '#/components/schemas/ConfigCatIntegration'
+      - $ref: '#/components/schemas/DatadogIntegration'
+      - $ref: '#/components/schemas/FastlyIntegration'
+      - $ref: '#/components/schemas/FreshserviceIntegration'
+      - $ref: '#/components/schemas/GCPIntegration'
+      - $ref: '#/components/schemas/GeminiIntegration'
+      - $ref: '#/components/schemas/GitlabIntegration'
+      - $ref: '#/components/schemas/GreyNoiseIntegration'
       - $ref: '#/components/schemas/HTTPIntegration'
+      - $ref: '#/components/schemas/LaunchDarklyIntegration'
+      - $ref: '#/components/schemas/NotionIntegration'
+      - $ref: '#/components/schemas/OktaIntegration'
+      - $ref: '#/components/schemas/OpenAIIntegration'
+      - $ref: '#/components/schemas/ServiceNowIntegration'
+      - $ref: '#/components/schemas/SplitIntegration'
+      - $ref: '#/components/schemas/StatsigIntegration'
+      - $ref: '#/components/schemas/VirusTotalIntegration'
     ActionConnectionIntegrationUpdate:
       description: The definition of `ActionConnectionIntegrationUpdate` object.
       oneOf:
       - $ref: '#/components/schemas/AWSIntegrationUpdate'
+      - $ref: '#/components/schemas/AnthropicIntegrationUpdate'
+      - $ref: '#/components/schemas/AsanaIntegrationUpdate'
+      - $ref: '#/components/schemas/AzureIntegrationUpdate'
+      - $ref: '#/components/schemas/CircleCIIntegrationUpdate'
+      - $ref: '#/components/schemas/ClickupIntegrationUpdate'
+      - $ref: '#/components/schemas/CloudflareIntegrationUpdate'
+      - $ref: '#/components/schemas/ConfigCatIntegrationUpdate'
+      - $ref: '#/components/schemas/DatadogIntegrationUpdate'
+      - $ref: '#/components/schemas/FastlyIntegrationUpdate'
+      - $ref: '#/components/schemas/FreshserviceIntegrationUpdate'
+      - $ref: '#/components/schemas/GCPIntegrationUpdate'
+      - $ref: '#/components/schemas/GeminiIntegrationUpdate'
+      - $ref: '#/components/schemas/GitlabIntegrationUpdate'
+      - $ref: '#/components/schemas/GreyNoiseIntegrationUpdate'
       - $ref: '#/components/schemas/HTTPIntegrationUpdate'
+      - $ref: '#/components/schemas/LaunchDarklyIntegrationUpdate'
+      - $ref: '#/components/schemas/NotionIntegrationUpdate'
+      - $ref: '#/components/schemas/OktaIntegrationUpdate'
+      - $ref: '#/components/schemas/OpenAIIntegrationUpdate'
+      - $ref: '#/components/schemas/ServiceNowIntegrationUpdate'
+      - $ref: '#/components/schemas/SplitIntegrationUpdate'
+      - $ref: '#/components/schemas/StatsigIntegrationUpdate'
+      - $ref: '#/components/schemas/VirusTotalIntegrationUpdate'
     ActionQuery:
       description: An action query. This query type is used to trigger an action,
         such as sending a HTTP request.
@@ -2318,6 +2361,88 @@ components:
       - id
       - base_severity
       type: object
+    AlertEventAttributes:
+      description: Alert event attributes.
+      properties:
+        aggregation_key:
+          $ref: '#/components/schemas/V2EventAggregationKey'
+        custom:
+          description: JSON object of custom attributes.
+          example: {}
+          type: object
+        evt:
+          $ref: '#/components/schemas/EventSystemAttributes'
+        links:
+          description: The links related to the event.
+          example:
+          - category: runbook
+            title: Runbook Link
+            url: https://app.datadoghq.com/runbook
+          items:
+            $ref: '#/components/schemas/AlertEventAttributesLinksItem'
+          type: array
+        priority:
+          $ref: '#/components/schemas/AlertEventAttributesPriority'
+        service:
+          $ref: '#/components/schemas/V2EventService'
+        status:
+          $ref: '#/components/schemas/AlertEventAttributesStatus'
+        timestamp:
+          $ref: '#/components/schemas/V2EventTimestamp'
+        title:
+          $ref: '#/components/schemas/V2EventTitle'
+      type: object
+    AlertEventAttributesLinksItem:
+      description: A link.
+      properties:
+        category:
+          $ref: '#/components/schemas/AlertEventAttributesLinksItemCategory'
+        title:
+          description: The display text of the link.
+          type: string
+        url:
+          description: The URL of the link.
+          type: string
+      type: object
+    AlertEventAttributesLinksItemCategory:
+      description: The category of the link.
+      enum:
+      - runbook
+      - documentation
+      - dashboard
+      type: string
+      x-enum-varnames:
+      - RUNBOOK
+      - DOCUMENTATION
+      - DASHBOARD
+    AlertEventAttributesPriority:
+      description: The priority of the alert.
+      enum:
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      example: '5'
+      type: string
+      x-enum-varnames:
+      - PRIORITY_ONE
+      - PRIORITY_TWO
+      - PRIORITY_THREE
+      - PRIORITY_FOUR
+      - PRIORITY_FIVE
+    AlertEventAttributesStatus:
+      description: The status of the alert.
+      enum:
+      - warn
+      - error
+      - ok
+      example: error
+      type: string
+      x-enum-varnames:
+      - WARN
+      - ERROR
+      - OK
     AlertEventCustomAttributes:
       additionalProperties: false
       description: Alert event attributes.
@@ -2458,6 +2583,75 @@ components:
         text:
           description: The `markdownTextAnnotation` `text`.
           type: string
+      type: object
+    AnthropicAPIKey:
+      description: The definition of the `AnthropicAPIKey` object.
+      properties:
+        api_token:
+          description: The `AnthropicAPIKey` `api_token`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/AnthropicAPIKeyType'
+      required:
+      - type
+      - api_token
+      type: object
+    AnthropicAPIKeyType:
+      description: The definition of the `AnthropicAPIKey` object.
+      enum:
+      - AnthropicAPIKey
+      example: AnthropicAPIKey
+      type: string
+      x-enum-varnames:
+      - ANTHROPICAPIKEY
+    AnthropicAPIKeyUpdate:
+      description: The definition of the `AnthropicAPIKey` object.
+      properties:
+        api_token:
+          description: The `AnthropicAPIKeyUpdate` `api_token`.
+          type: string
+        type:
+          $ref: '#/components/schemas/AnthropicAPIKeyType'
+      required:
+      - type
+      type: object
+    AnthropicCredentials:
+      description: The definition of the `AnthropicCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/AnthropicAPIKey'
+    AnthropicCredentialsUpdate:
+      description: The definition of the `AnthropicCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/AnthropicAPIKeyUpdate'
+    AnthropicIntegration:
+      description: The definition of the `AnthropicIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/AnthropicCredentials'
+        type:
+          $ref: '#/components/schemas/AnthropicIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    AnthropicIntegrationType:
+      description: The definition of the `AnthropicIntegrationType` object.
+      enum:
+      - Anthropic
+      example: Anthropic
+      type: string
+      x-enum-varnames:
+      - ANTHROPIC
+    AnthropicIntegrationUpdate:
+      description: The definition of the `AnthropicIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/AnthropicCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/AnthropicIntegrationType'
+      required:
+      - type
       type: object
     ApiID:
       description: API identifier.
@@ -3581,6 +3775,75 @@ components:
       - CREATED_AT_DESC
       - UPDATED_AT_DESC
       - USER_NAME_DESC
+    AsanaAccessToken:
+      description: The definition of the `AsanaAccessToken` object.
+      properties:
+        access_token:
+          description: The `AsanaAccessToken` `access_token`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/AsanaAccessTokenType'
+      required:
+      - type
+      - access_token
+      type: object
+    AsanaAccessTokenType:
+      description: The definition of the `AsanaAccessToken` object.
+      enum:
+      - AsanaAccessToken
+      example: AsanaAccessToken
+      type: string
+      x-enum-varnames:
+      - ASANAACCESSTOKEN
+    AsanaAccessTokenUpdate:
+      description: The definition of the `AsanaAccessToken` object.
+      properties:
+        access_token:
+          description: The `AsanaAccessTokenUpdate` `access_token`.
+          type: string
+        type:
+          $ref: '#/components/schemas/AsanaAccessTokenType'
+      required:
+      - type
+      type: object
+    AsanaCredentials:
+      description: The definition of the `AsanaCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/AsanaAccessToken'
+    AsanaCredentialsUpdate:
+      description: The definition of the `AsanaCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/AsanaAccessTokenUpdate'
+    AsanaIntegration:
+      description: The definition of the `AsanaIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/AsanaCredentials'
+        type:
+          $ref: '#/components/schemas/AsanaIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    AsanaIntegrationType:
+      description: The definition of the `AsanaIntegrationType` object.
+      enum:
+      - Asana
+      example: Asana
+      type: string
+      x-enum-varnames:
+      - ASANA
+    AsanaIntegrationUpdate:
+      description: The definition of the `AsanaIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/AsanaCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/AsanaIntegrationType'
+      required:
+      - type
+      type: object
     Asset:
       description: A single vulnerable asset
       properties:
@@ -4688,6 +4951,43 @@ components:
       required:
       - data
       type: object
+    AzureCredentials:
+      description: The definition of the `AzureCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/AzureTenant'
+    AzureCredentialsUpdate:
+      description: The definition of the `AzureCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/AzureTenantUpdate'
+    AzureIntegration:
+      description: The definition of the `AzureIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/AzureCredentials'
+        type:
+          $ref: '#/components/schemas/AzureIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    AzureIntegrationType:
+      description: The definition of the `AzureIntegrationType` object.
+      enum:
+      - Azure
+      example: Azure
+      type: string
+      x-enum-varnames:
+      - AZURE
+    AzureIntegrationUpdate:
+      description: The definition of the `AzureIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/AzureCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/AzureIntegrationType'
+      required:
+      - type
+      type: object
     AzureStorageDestination:
       description: The `azure_storage` destination forwards logs to an Azure Blob
         Storage container.
@@ -4730,6 +5030,88 @@ components:
       type: string
       x-enum-varnames:
       - AZURE_STORAGE
+    AzureTenant:
+      description: The definition of the `AzureTenant` object.
+      properties:
+        app_client_id:
+          description: 'The Client ID, also known as the Application ID in Azure,
+            is a unique identifier for an application. It''s used to identify the
+            application during the authentication process. Your Application (client)
+            ID is listed in the application''s overview page. You can navigate to
+            your application via the Azure Directory. '
+          example: ''
+          type: string
+        client_secret:
+          description: "The Client Secret is a confidential piece of information known
+            only to the application and Azure AD. It's used to prove the application's
+            identity. Your Client Secret is available from the application\u2019s
+            secrets page. You can navigate to your application via the Azure Directory."
+          example: ''
+          type: string
+        custom_scopes:
+          description: If provided, the custom scope to be requested from Microsoft
+            when acquiring an OAuth 2 access token. This custom scope is used only
+            in conjunction with the HTTP action. A resource's scope is constructed
+            by using the identifier URI for the resource and .default, separated by
+            a forward slash (/) as follows:{identifierURI}/.default.
+          type: string
+        tenant_id:
+          description: The Tenant ID, also known as the Directory ID in Azure, is
+            a unique identifier that represents an Azure AD instance. Your Tenant
+            ID (Directory ID) is listed in your Active Directory overview page under
+            the 'Tenant information' section.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/AzureTenantType'
+      required:
+      - type
+      - tenant_id
+      - app_client_id
+      - client_secret
+      type: object
+    AzureTenantType:
+      description: The definition of the `AzureTenant` object.
+      enum:
+      - AzureTenant
+      example: AzureTenant
+      type: string
+      x-enum-varnames:
+      - AZURETENANT
+    AzureTenantUpdate:
+      description: The definition of the `AzureTenant` object.
+      properties:
+        app_client_id:
+          description: 'The Client ID, also known as the Application ID in Azure,
+            is a unique identifier for an application. It''s used to identify the
+            application during the authentication process. Your Application (client)
+            ID is listed in the application''s overview page. You can navigate to
+            your application via the Azure Directory. '
+          type: string
+        client_secret:
+          description: "The Client Secret is a confidential piece of information known
+            only to the application and Azure AD. It's used to prove the application's
+            identity. Your Client Secret is available from the application\u2019s
+            secrets page. You can navigate to your application via the Azure Directory."
+          type: string
+        custom_scopes:
+          description: If provided, the custom scope to be requested from Microsoft
+            when acquiring an OAuth 2 access token. This custom scope is used only
+            in conjunction with the HTTP action. A resource's scope is constructed
+            by using the identifier URI for the resource and .default, separated by
+            a forward slash (/) as follows:{identifierURI}/.default.
+          type: string
+        tenant_id:
+          description: The Tenant ID, also known as the Directory ID in Azure, is
+            a unique identifier that represents an Azure AD instance. Your Tenant
+            ID (Directory ID) is listed in your Active Directory overview page under
+            the 'Tenant information' section.
+          type: string
+        type:
+          $ref: '#/components/schemas/AzureTenantType'
+      required:
+      - type
+      type: object
     AzureUCConfig:
       description: Azure config.
       properties:
@@ -6863,7 +7245,7 @@ components:
       - data
       type: object
     CaseAttributes:
-      description: Case attributes
+      description: Case resource attributes
       properties:
         archived_at:
           description: Timestamp of when the case was archived
@@ -6871,6 +7253,8 @@ components:
           nullable: true
           readOnly: true
           type: string
+        attributes:
+          $ref: '#/components/schemas/CaseObjectAttributes'
         closed_at:
           description: Timestamp of when the case was closed
           format: date-time
@@ -6975,6 +7359,13 @@ components:
       required:
       - data
       type: object
+    CaseObjectAttributes:
+      additionalProperties:
+        items:
+          type: string
+        type: array
+      description: The definition of `CaseObjectAttributes` object.
+      type: object
     CasePriority:
       default: NOT_DEFINED
       description: Case priority
@@ -7070,6 +7461,33 @@ components:
       type: string
       x-enum-varnames:
       - STANDARD
+    CaseUpdateAttributes:
+      description: Case update attributes
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseUpdateAttributesAttributes'
+        type:
+          $ref: '#/components/schemas/CaseResourceType'
+      required:
+      - attributes
+      - type
+      type: object
+    CaseUpdateAttributesAttributes:
+      description: Case update attributes attributes
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseObjectAttributes'
+      required:
+      - attributes
+      type: object
+    CaseUpdateAttributesRequest:
+      description: Case update attributes request
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseUpdateAttributes'
+      required:
+      - data
+      type: object
     CaseUpdatePriority:
       description: Case priority status
       properties:
@@ -7157,6 +7575,116 @@ components:
           format: int64
           type: integer
       type: object
+    ChangeEventAttributes:
+      description: Change event attributes.
+      properties:
+        aggregation_key:
+          $ref: '#/components/schemas/V2EventAggregationKey'
+        author:
+          $ref: '#/components/schemas/ChangeEventAttributesAuthor'
+        change_metadata:
+          description: JSON object of change metadata.
+          example:
+            dd:
+              team: datadog_team
+              user_email: datadog@datadog.com
+              user_id: datadog_user_id
+              user_name: datadog_username
+          type: object
+        changed_resource:
+          $ref: '#/components/schemas/ChangeEventAttributesChangedResource'
+        evt:
+          $ref: '#/components/schemas/EventSystemAttributes'
+        impacted_resources:
+          description: A list of resources impacted by this change.
+          example:
+          - name: service-name
+            type: service
+          items:
+            $ref: '#/components/schemas/ChangeEventAttributesImpactedResourcesItem'
+          type: array
+        new_value:
+          description: The new state of the changed resource.
+          example:
+            enabled: true
+            percentage: 50%
+            rule:
+              datacenter: devcycle.us1.prod
+          type: object
+        prev_value:
+          description: The previous state of the changed resource.
+          example:
+            enabled: true
+            percentage: 10%
+            rule:
+              datacenter: devcycle.us1.prod
+          type: object
+        service:
+          $ref: '#/components/schemas/V2EventService'
+        timestamp:
+          $ref: '#/components/schemas/V2EventTimestamp'
+        title:
+          $ref: '#/components/schemas/V2EventTitle'
+      type: object
+    ChangeEventAttributesAuthor:
+      description: The entity that made the change.
+      properties:
+        name:
+          description: The name of the user or system that made the change.
+          example: example@datadog.com
+          type: string
+        type:
+          $ref: '#/components/schemas/ChangeEventAttributesAuthorType'
+      type: object
+    ChangeEventAttributesAuthorType:
+      description: The type of the author.
+      enum:
+      - user
+      - system
+      - api
+      - automation
+      example: user
+      type: string
+      x-enum-varnames:
+      - USER
+      - SYSTEM
+      - API
+      - AUTOMATION
+    ChangeEventAttributesChangedResource:
+      description: A uniquely identified resource.
+      properties:
+        name:
+          description: The name of the changed resource.
+          type: string
+        type:
+          $ref: '#/components/schemas/ChangeEventAttributesChangedResourceType'
+      type: object
+    ChangeEventAttributesChangedResourceType:
+      description: The type of the changed resource.
+      enum:
+      - feature_flag
+      - configuration
+      example: feature_flag
+      type: string
+      x-enum-varnames:
+      - FEATURE_FLAG
+      - CONFIGURATION
+    ChangeEventAttributesImpactedResourcesItem:
+      description: A uniquely identified resource.
+      properties:
+        name:
+          description: The name of the impacted resource.
+          type: string
+        type:
+          $ref: '#/components/schemas/ChangeEventAttributesImpactedResourcesItemType'
+      type: object
+    ChangeEventAttributesImpactedResourcesItemType:
+      description: The type of the impacted resource.
+      enum:
+      - service
+      type: string
+      x-enum-varnames:
+      - SERVICE
     ChangeEventCustomAttributes:
       additionalProperties: false
       description: Change event attributes.
@@ -7323,6 +7851,144 @@ components:
           description: The product for which cost is being reported.
           example: infra_host
           type: string
+      type: object
+    CircleCIAPIKey:
+      description: The definition of the `CircleCIAPIKey` object.
+      properties:
+        api_token:
+          description: The `CircleCIAPIKey` `api_token`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/CircleCIAPIKeyType'
+      required:
+      - type
+      - api_token
+      type: object
+    CircleCIAPIKeyType:
+      description: The definition of the `CircleCIAPIKey` object.
+      enum:
+      - CircleCIAPIKey
+      example: CircleCIAPIKey
+      type: string
+      x-enum-varnames:
+      - CIRCLECIAPIKEY
+    CircleCIAPIKeyUpdate:
+      description: The definition of the `CircleCIAPIKey` object.
+      properties:
+        api_token:
+          description: The `CircleCIAPIKeyUpdate` `api_token`.
+          type: string
+        type:
+          $ref: '#/components/schemas/CircleCIAPIKeyType'
+      required:
+      - type
+      type: object
+    CircleCICredentials:
+      description: The definition of the `CircleCICredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/CircleCIAPIKey'
+    CircleCICredentialsUpdate:
+      description: The definition of the `CircleCICredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/CircleCIAPIKeyUpdate'
+    CircleCIIntegration:
+      description: The definition of the `CircleCIIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/CircleCICredentials'
+        type:
+          $ref: '#/components/schemas/CircleCIIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    CircleCIIntegrationType:
+      description: The definition of the `CircleCIIntegrationType` object.
+      enum:
+      - CircleCI
+      example: CircleCI
+      type: string
+      x-enum-varnames:
+      - CIRCLECI
+    CircleCIIntegrationUpdate:
+      description: The definition of the `CircleCIIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/CircleCICredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/CircleCIIntegrationType'
+      required:
+      - type
+      type: object
+    ClickupAPIKey:
+      description: The definition of the `ClickupAPIKey` object.
+      properties:
+        api_token:
+          description: The `ClickupAPIKey` `api_token`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/ClickupAPIKeyType'
+      required:
+      - type
+      - api_token
+      type: object
+    ClickupAPIKeyType:
+      description: The definition of the `ClickupAPIKey` object.
+      enum:
+      - ClickupAPIKey
+      example: ClickupAPIKey
+      type: string
+      x-enum-varnames:
+      - CLICKUPAPIKEY
+    ClickupAPIKeyUpdate:
+      description: The definition of the `ClickupAPIKey` object.
+      properties:
+        api_token:
+          description: The `ClickupAPIKeyUpdate` `api_token`.
+          type: string
+        type:
+          $ref: '#/components/schemas/ClickupAPIKeyType'
+      required:
+      - type
+      type: object
+    ClickupCredentials:
+      description: The definition of the `ClickupCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/ClickupAPIKey'
+    ClickupCredentialsUpdate:
+      description: The definition of the `ClickupCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/ClickupAPIKeyUpdate'
+    ClickupIntegration:
+      description: The definition of the `ClickupIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/ClickupCredentials'
+        type:
+          $ref: '#/components/schemas/ClickupIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    ClickupIntegrationType:
+      description: The definition of the `ClickupIntegrationType` object.
+      enum:
+      - Clickup
+      example: Clickup
+      type: string
+      x-enum-varnames:
+      - CLICKUP
+    ClickupIntegrationUpdate:
+      description: The definition of the `ClickupIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/ClickupCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/ClickupIntegrationType'
+      required:
+      - type
       type: object
     CloudConfigurationComplianceRuleOptions:
       additionalProperties: {}
@@ -8163,6 +8829,38 @@ components:
             $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleData'
           type: array
       type: object
+    CloudflareAPIToken:
+      description: The definition of the `CloudflareAPIToken` object.
+      properties:
+        api_token:
+          description: The `CloudflareAPIToken` `api_token`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/CloudflareAPITokenType'
+      required:
+      - type
+      - api_token
+      type: object
+    CloudflareAPITokenType:
+      description: The definition of the `CloudflareAPIToken` object.
+      enum:
+      - CloudflareAPIToken
+      example: CloudflareAPIToken
+      type: string
+      x-enum-varnames:
+      - CLOUDFLAREAPITOKEN
+    CloudflareAPITokenUpdate:
+      description: The definition of the `CloudflareAPIToken` object.
+      properties:
+        api_token:
+          description: The `CloudflareAPITokenUpdate` `api_token`.
+          type: string
+        type:
+          $ref: '#/components/schemas/CloudflareAPITokenType'
+      required:
+      - type
+      type: object
     CloudflareAccountCreateRequest:
       description: Payload schema when adding a Cloudflare account.
       properties:
@@ -8352,6 +9050,85 @@ components:
           items:
             $ref: '#/components/schemas/CloudflareAccountResponseData'
           type: array
+      type: object
+    CloudflareCredentials:
+      description: The definition of the `CloudflareCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/CloudflareAPIToken'
+      - $ref: '#/components/schemas/CloudflareGlobalAPIToken'
+    CloudflareCredentialsUpdate:
+      description: The definition of the `CloudflareCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/CloudflareAPITokenUpdate'
+      - $ref: '#/components/schemas/CloudflareGlobalAPITokenUpdate'
+    CloudflareGlobalAPIToken:
+      description: The definition of the `CloudflareGlobalAPIToken` object.
+      properties:
+        auth_email:
+          description: The `CloudflareGlobalAPIToken` `auth_email`.
+          example: ''
+          type: string
+        global_api_key:
+          description: The `CloudflareGlobalAPIToken` `global_api_key`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/CloudflareGlobalAPITokenType'
+      required:
+      - type
+      - auth_email
+      - global_api_key
+      type: object
+    CloudflareGlobalAPITokenType:
+      description: The definition of the `CloudflareGlobalAPIToken` object.
+      enum:
+      - CloudflareGlobalAPIToken
+      example: CloudflareGlobalAPIToken
+      type: string
+      x-enum-varnames:
+      - CLOUDFLAREGLOBALAPITOKEN
+    CloudflareGlobalAPITokenUpdate:
+      description: The definition of the `CloudflareGlobalAPIToken` object.
+      properties:
+        auth_email:
+          description: The `CloudflareGlobalAPITokenUpdate` `auth_email`.
+          type: string
+        global_api_key:
+          description: The `CloudflareGlobalAPITokenUpdate` `global_api_key`.
+          type: string
+        type:
+          $ref: '#/components/schemas/CloudflareGlobalAPITokenType'
+      required:
+      - type
+      type: object
+    CloudflareIntegration:
+      description: The definition of the `CloudflareIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/CloudflareCredentials'
+        type:
+          $ref: '#/components/schemas/CloudflareIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    CloudflareIntegrationType:
+      description: The definition of the `CloudflareIntegrationType` object.
+      enum:
+      - Cloudflare
+      example: Cloudflare
+      type: string
+      x-enum-varnames:
+      - CLOUDFLARE
+    CloudflareIntegrationUpdate:
+      description: The definition of the `CloudflareIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/CloudflareCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/CloudflareIntegrationType'
+      required:
+      - type
       type: object
     CodeLocation:
       description: Code vulnerability location.
@@ -8579,6 +9356,91 @@ components:
       - SEARCH
       - CONTAINER
       - CALLOUTVALUE
+    ConfigCatCredentials:
+      description: The definition of the `ConfigCatCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/ConfigCatSDKKey'
+    ConfigCatCredentialsUpdate:
+      description: The definition of the `ConfigCatCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/ConfigCatSDKKeyUpdate'
+    ConfigCatIntegration:
+      description: The definition of the `ConfigCatIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/ConfigCatCredentials'
+        type:
+          $ref: '#/components/schemas/ConfigCatIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    ConfigCatIntegrationType:
+      description: The definition of the `ConfigCatIntegrationType` object.
+      enum:
+      - ConfigCat
+      example: ConfigCat
+      type: string
+      x-enum-varnames:
+      - CONFIGCAT
+    ConfigCatIntegrationUpdate:
+      description: The definition of the `ConfigCatIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/ConfigCatCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/ConfigCatIntegrationType'
+      required:
+      - type
+      type: object
+    ConfigCatSDKKey:
+      description: The definition of the `ConfigCatSDKKey` object.
+      properties:
+        api_password:
+          description: The `ConfigCatSDKKey` `api_password`.
+          example: ''
+          type: string
+        api_username:
+          description: The `ConfigCatSDKKey` `api_username`.
+          example: ''
+          type: string
+        sdk_key:
+          description: The `ConfigCatSDKKey` `sdk_key`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/ConfigCatSDKKeyType'
+      required:
+      - type
+      - sdk_key
+      - api_username
+      - api_password
+      type: object
+    ConfigCatSDKKeyType:
+      description: The definition of the `ConfigCatSDKKey` object.
+      enum:
+      - ConfigCatSDKKey
+      example: ConfigCatSDKKey
+      type: string
+      x-enum-varnames:
+      - CONFIGCATSDKKEY
+    ConfigCatSDKKeyUpdate:
+      description: The definition of the `ConfigCatSDKKey` object.
+      properties:
+        api_password:
+          description: The `ConfigCatSDKKeyUpdate` `api_password`.
+          type: string
+        api_username:
+          description: The `ConfigCatSDKKeyUpdate` `api_username`.
+          type: string
+        sdk_key:
+          description: The `ConfigCatSDKKeyUpdate` `sdk_key`.
+          type: string
+        type:
+          $ref: '#/components/schemas/ConfigCatSDKKeyType'
+      required:
+      - type
+      type: object
     ConfluentAccountCreateRequest:
       description: Payload schema when adding a Confluent account.
       properties:
@@ -12050,8 +12912,112 @@ components:
       required:
       - databaseMonitoringTrigger
       type: object
+    DatadogAPIKey:
+      description: The definition of the `DatadogAPIKey` object.
+      properties:
+        api_key:
+          description: The `DatadogAPIKey` `api_key`.
+          example: ''
+          type: string
+        app_key:
+          description: The `DatadogAPIKey` `app_key`.
+          example: ''
+          type: string
+        datacenter:
+          description: The `DatadogAPIKey` `datacenter`.
+          example: ''
+          type: string
+        subdomain:
+          description: Custom subdomain used for Datadog URLs generated with this
+            Connection. For example, if this org uses `https://acme.datadoghq.com`
+            to access Datadog, set this field to `acme`. If this field is omitted,
+            generated URLs will use the default site URL for its datacenter (see [https://docs.datadoghq.com/getting_started/site](https://docs.datadoghq.com/getting_started/site)).
+          type: string
+        type:
+          $ref: '#/components/schemas/DatadogAPIKeyType'
+      required:
+      - type
+      - datacenter
+      - api_key
+      - app_key
+      type: object
+    DatadogAPIKeyType:
+      description: The definition of the `DatadogAPIKey` object.
+      enum:
+      - DatadogAPIKey
+      example: DatadogAPIKey
+      type: string
+      x-enum-varnames:
+      - DATADOGAPIKEY
+    DatadogAPIKeyUpdate:
+      description: The definition of the `DatadogAPIKey` object.
+      properties:
+        api_key:
+          description: The `DatadogAPIKeyUpdate` `api_key`.
+          type: string
+        app_key:
+          description: The `DatadogAPIKeyUpdate` `app_key`.
+          type: string
+        datacenter:
+          description: The `DatadogAPIKeyUpdate` `datacenter`.
+          type: string
+        subdomain:
+          description: Custom subdomain used for Datadog URLs generated with this
+            Connection. For example, if this org uses `https://acme.datadoghq.com`
+            to access Datadog, set this field to `acme`. If this field is omitted,
+            generated URLs will use the default site URL for its datacenter (see [https://docs.datadoghq.com/getting_started/site](https://docs.datadoghq.com/getting_started/site)).
+          type: string
+        type:
+          $ref: '#/components/schemas/DatadogAPIKeyType'
+      required:
+      - type
+      type: object
+    DatadogCredentials:
+      description: The definition of the `DatadogCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/DatadogAPIKey'
+    DatadogCredentialsUpdate:
+      description: The definition of the `DatadogCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/DatadogAPIKeyUpdate'
+    DatadogIntegration:
+      description: The definition of the `DatadogIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/DatadogCredentials'
+        type:
+          $ref: '#/components/schemas/DatadogIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    DatadogIntegrationType:
+      description: The definition of the `DatadogIntegrationType` object.
+      enum:
+      - Datadog
+      example: Datadog
+      type: string
+      x-enum-varnames:
+      - DATADOG
+    DatadogIntegrationUpdate:
+      description: The definition of the `DatadogIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/DatadogCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/DatadogIntegrationType'
+      required:
+      - type
+      type: object
     Dataset:
-      description: Dataset object.
+      description: "Dataset object.\n\n### Datasets Constraints\n- **Tag Limit per
+        Dataset**:\n  - Each restricted dataset supports a maximum of 10 key:value
+        pairs per product.\n\n- **Tag Key Rules per Telemetry Type**:\n  - Only one
+        tag key or attribute may be used to define access within a single telemetry
+        type.\n  - The same or different tag key may be used across different telemetry
+        types.\n\n- **Tag Value Uniqueness**:\n  - Tag values must be unique within
+        a single dataset.\n  - A tag value used in one dataset cannot be reused in
+        another dataset of the same telemetry type."
       properties:
         attributes:
           $ref: '#/components/schemas/DatasetAttributes'
@@ -12123,6 +13089,14 @@ components:
       type: object
     DatasetResponseSingle:
       description: Response containing a single dataset object.
+      properties:
+        data:
+          $ref: '#/components/schemas/Dataset'
+      required:
+      - data
+      type: object
+    DatasetUpdateRequest:
+      description: Edit request for a dataset.
       properties:
         data:
           $ref: '#/components/schemas/Dataset'
@@ -13593,14 +14567,21 @@ components:
           type: string
       type: object
     EntityV3APIVersion:
-      description: The schema version of entity type. The field is known as schema-version
-        in the previous version.
+      description: The version of the schema data that was used to populate this entity's
+        data. This could be via the API, Terraform, or YAML file in a repository.
+        The field is known as schema-version in the previous version.
       enum:
       - v3
+      - v2.2
+      - v2.1
+      - v2
       example: v3
       type: string
       x-enum-varnames:
       - V3
+      - V2_2
+      - V2_1
+      - V2
     EntityV3DatadogCodeLocationItem:
       additionalProperties: false
       description: Code location item.
@@ -15069,6 +16050,44 @@ components:
       - USER_UPDATE
       - RECOMMENDATION
       - SNAPSHOT
+    EventSystemAttributes:
+      description: JSON object of event system attributes.
+      properties:
+        category:
+          $ref: '#/components/schemas/EventSystemAttributesCategory'
+        id:
+          description: Event identifier. This field is deprecated and will be removed
+            in a future version. Use the `uid` field instead.
+          type: string
+        integration_id:
+          $ref: '#/components/schemas/EventSystemAttributesIntegrationId'
+        source_id:
+          description: The source type ID of the event.
+          format: int64
+          type: integer
+        uid:
+          description: A unique identifier for the event. You can use this identifier
+            to query or reference the event.
+          type: string
+      type: object
+    EventSystemAttributesCategory:
+      description: Event category identifying the type of event.
+      enum:
+      - change
+      - alert
+      example: change
+      type: string
+      x-enum-varnames:
+      - CHANGE
+      - ALERT
+    EventSystemAttributesIntegrationId:
+      description: Integration ID sourced from integration manifests.
+      enum:
+      - custom-events
+      example: custom-events
+      type: string
+      x-enum-varnames:
+      - CUSTOM_EVENTS
     EventType:
       default: event
       description: Type of the event.
@@ -15129,11 +16148,13 @@ components:
       enum:
       - logs
       - rum
+      - dora
       example: logs
       type: string
       x-enum-varnames:
       - LOGS
       - RUM
+      - DORA
     EventsGroupBy:
       description: A dimension on which to split a query's results.
       properties:
@@ -15630,6 +16651,38 @@ components:
       x-enum-varnames:
       - ADD
       - REPLACE
+    FastlyAPIKey:
+      description: The definition of the `FastlyAPIKey` object.
+      properties:
+        api_key:
+          description: The `FastlyAPIKey` `api_key`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/FastlyAPIKeyType'
+      required:
+      - type
+      - api_key
+      type: object
+    FastlyAPIKeyType:
+      description: The definition of the `FastlyAPIKey` object.
+      enum:
+      - FastlyAPIKey
+      example: FastlyAPIKey
+      type: string
+      x-enum-varnames:
+      - FASTLYAPIKEY
+    FastlyAPIKeyUpdate:
+      description: The definition of the `FastlyAPIKey` object.
+      properties:
+        api_key:
+          description: The `FastlyAPIKeyUpdate` `api_key`.
+          type: string
+        type:
+          $ref: '#/components/schemas/FastlyAPIKeyType'
+      required:
+      - type
+      type: object
     FastlyAccounResponseAttributes:
       description: Attributes object of a Fastly account.
       properties:
@@ -15757,6 +16810,43 @@ components:
             $ref: '#/components/schemas/FastlyAccountResponseData'
           type: array
       type: object
+    FastlyCredentials:
+      description: The definition of the `FastlyCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/FastlyAPIKey'
+    FastlyCredentialsUpdate:
+      description: The definition of the `FastlyCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/FastlyAPIKeyUpdate'
+    FastlyIntegration:
+      description: The definition of the `FastlyIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/FastlyCredentials'
+        type:
+          $ref: '#/components/schemas/FastlyIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    FastlyIntegrationType:
+      description: The definition of the `FastlyIntegrationType` object.
+      enum:
+      - Fastly
+      example: Fastly
+      type: string
+      x-enum-varnames:
+      - FASTLY
+    FastlyIntegrationUpdate:
+      description: The definition of the `FastlyIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/FastlyCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/FastlyIntegrationType'
+      required:
+      - type
+      type: object
     FastlyService:
       description: The schema representation of a Fastly service.
       properties:
@@ -15856,10 +16946,9 @@ components:
           type: array
         product:
           description: 'Name of the product the dataset is for. Possible values are
-            ''apm'', ''rum'', ''synthetics'',
+            ''apm'', ''rum'',
 
-            ''metrics'', ''logs'', ''sd_repoinfo'', ''error_tracking'', ''cloud_cost'',
-            and ''ml_obs''.'
+            ''metrics'', ''logs'', ''error_tracking'', and ''cloud_cost''.'
           example: logs
           type: string
       required:
@@ -16103,6 +17192,83 @@ components:
       - type
       - attributes
       type: object
+    FreshserviceAPIKey:
+      description: The definition of the `FreshserviceAPIKey` object.
+      properties:
+        api_key:
+          description: The `FreshserviceAPIKey` `api_key`.
+          example: ''
+          type: string
+        domain:
+          description: The `FreshserviceAPIKey` `domain`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/FreshserviceAPIKeyType'
+      required:
+      - type
+      - domain
+      - api_key
+      type: object
+    FreshserviceAPIKeyType:
+      description: The definition of the `FreshserviceAPIKey` object.
+      enum:
+      - FreshserviceAPIKey
+      example: FreshserviceAPIKey
+      type: string
+      x-enum-varnames:
+      - FRESHSERVICEAPIKEY
+    FreshserviceAPIKeyUpdate:
+      description: The definition of the `FreshserviceAPIKey` object.
+      properties:
+        api_key:
+          description: The `FreshserviceAPIKeyUpdate` `api_key`.
+          type: string
+        domain:
+          description: The `FreshserviceAPIKeyUpdate` `domain`.
+          type: string
+        type:
+          $ref: '#/components/schemas/FreshserviceAPIKeyType'
+      required:
+      - type
+      type: object
+    FreshserviceCredentials:
+      description: The definition of the `FreshserviceCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/FreshserviceAPIKey'
+    FreshserviceCredentialsUpdate:
+      description: The definition of the `FreshserviceCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/FreshserviceAPIKeyUpdate'
+    FreshserviceIntegration:
+      description: The definition of the `FreshserviceIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/FreshserviceCredentials'
+        type:
+          $ref: '#/components/schemas/FreshserviceIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    FreshserviceIntegrationType:
+      description: The definition of the `FreshserviceIntegrationType` object.
+      enum:
+      - Freshservice
+      example: Freshservice
+      type: string
+      x-enum-varnames:
+      - FRESHSERVICE
+    FreshserviceIntegrationUpdate:
+      description: The definition of the `FreshserviceIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/FreshserviceCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/FreshserviceIntegrationType'
+      required:
+      - type
+      type: object
     FullAPIKey:
       description: Datadog API key.
       properties:
@@ -16257,6 +17423,43 @@ components:
       - version
       - name
       - requirements
+      type: object
+    GCPCredentials:
+      description: The definition of the `GCPCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/GCPServiceAccount'
+    GCPCredentialsUpdate:
+      description: The definition of the `GCPCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/GCPServiceAccountUpdate'
+    GCPIntegration:
+      description: The definition of the `GCPIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/GCPCredentials'
+        type:
+          $ref: '#/components/schemas/GCPIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    GCPIntegrationType:
+      description: The definition of the `GCPIntegrationType` object.
+      enum:
+      - GCP
+      example: GCP
+      type: string
+      x-enum-varnames:
+      - GCP
+    GCPIntegrationUpdate:
+      description: The definition of the `GCPIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/GCPCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/GCPIntegrationType'
+      required:
+      - type
       type: object
     GCPMetricNamespaceConfig:
       description: Configuration for a GCP metric namespace.
@@ -16448,6 +17651,32 @@ components:
             $ref: '#/components/schemas/GCPSTSServiceAccount'
           type: array
       type: object
+    GCPServiceAccount:
+      description: The definition of the `GCPServiceAccount` object.
+      properties:
+        private_key:
+          description: The `GCPServiceAccount` `private_key`.
+          example: ''
+          type: string
+        service_account_email:
+          description: The `GCPServiceAccount` `service_account_email`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/GCPServiceAccountCredentialType'
+      required:
+      - type
+      - service_account_email
+      - private_key
+      type: object
+    GCPServiceAccountCredentialType:
+      description: The definition of the `GCPServiceAccount` object.
+      enum:
+      - GCPServiceAccount
+      example: GCPServiceAccount
+      type: string
+      x-enum-varnames:
+      - GCPSERVICEACCOUNT
     GCPServiceAccountMeta:
       description: Additional information related to your service account.
       properties:
@@ -16467,6 +17696,20 @@ components:
       type: string
       x-enum-varnames:
       - GCP_SERVICE_ACCOUNT
+    GCPServiceAccountUpdate:
+      description: The definition of the `GCPServiceAccount` object.
+      properties:
+        private_key:
+          description: The `GCPServiceAccountUpdate` `private_key`.
+          type: string
+        service_account_email:
+          description: The `GCPServiceAccountUpdate` `service_account_email`.
+          type: string
+        type:
+          $ref: '#/components/schemas/GCPServiceAccountCredentialType'
+      required:
+      - type
+      type: object
     GCPUsageCostConfig:
       description: GCP Usage Cost config.
       properties:
@@ -16684,6 +17927,75 @@ components:
           items:
             $ref: '#/components/schemas/GCPUsageCostConfig'
           type: array
+      type: object
+    GeminiAPIKey:
+      description: The definition of the `GeminiAPIKey` object.
+      properties:
+        api_key:
+          description: The `GeminiAPIKey` `api_key`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/GeminiAPIKeyType'
+      required:
+      - type
+      - api_key
+      type: object
+    GeminiAPIKeyType:
+      description: The definition of the `GeminiAPIKey` object.
+      enum:
+      - GeminiAPIKey
+      example: GeminiAPIKey
+      type: string
+      x-enum-varnames:
+      - GEMINIAPIKEY
+    GeminiAPIKeyUpdate:
+      description: The definition of the `GeminiAPIKey` object.
+      properties:
+        api_key:
+          description: The `GeminiAPIKeyUpdate` `api_key`.
+          type: string
+        type:
+          $ref: '#/components/schemas/GeminiAPIKeyType'
+      required:
+      - type
+      type: object
+    GeminiCredentials:
+      description: The definition of the `GeminiCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/GeminiAPIKey'
+    GeminiCredentialsUpdate:
+      description: The definition of the `GeminiCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/GeminiAPIKeyUpdate'
+    GeminiIntegration:
+      description: The definition of the `GeminiIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/GeminiCredentials'
+        type:
+          $ref: '#/components/schemas/GeminiIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    GeminiIntegrationType:
+      description: The definition of the `GeminiIntegrationType` object.
+      enum:
+      - Gemini
+      example: Gemini
+      type: string
+      x-enum-varnames:
+      - GEMINI
+    GeminiIntegrationUpdate:
+      description: The definition of the `GeminiIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/GeminiCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/GeminiIntegrationType'
+      required:
+      - type
       type: object
     GetActionConnectionResponse:
       description: The response for found connection
@@ -17014,6 +18326,144 @@ components:
           $ref: '#/components/schemas/StartStepNames'
       required:
       - githubWebhookTrigger
+      type: object
+    GitlabAPIKey:
+      description: The definition of the `GitlabAPIKey` object.
+      properties:
+        api_token:
+          description: The `GitlabAPIKey` `api_token`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/GitlabAPIKeyType'
+      required:
+      - type
+      - api_token
+      type: object
+    GitlabAPIKeyType:
+      description: The definition of the `GitlabAPIKey` object.
+      enum:
+      - GitlabAPIKey
+      example: GitlabAPIKey
+      type: string
+      x-enum-varnames:
+      - GITLABAPIKEY
+    GitlabAPIKeyUpdate:
+      description: The definition of the `GitlabAPIKey` object.
+      properties:
+        api_token:
+          description: The `GitlabAPIKeyUpdate` `api_token`.
+          type: string
+        type:
+          $ref: '#/components/schemas/GitlabAPIKeyType'
+      required:
+      - type
+      type: object
+    GitlabCredentials:
+      description: The definition of the `GitlabCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/GitlabAPIKey'
+    GitlabCredentialsUpdate:
+      description: The definition of the `GitlabCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/GitlabAPIKeyUpdate'
+    GitlabIntegration:
+      description: The definition of the `GitlabIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/GitlabCredentials'
+        type:
+          $ref: '#/components/schemas/GitlabIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    GitlabIntegrationType:
+      description: The definition of the `GitlabIntegrationType` object.
+      enum:
+      - Gitlab
+      example: Gitlab
+      type: string
+      x-enum-varnames:
+      - GITLAB
+    GitlabIntegrationUpdate:
+      description: The definition of the `GitlabIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/GitlabCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/GitlabIntegrationType'
+      required:
+      - type
+      type: object
+    GreyNoiseAPIKey:
+      description: The definition of the `GreyNoiseAPIKey` object.
+      properties:
+        api_key:
+          description: The `GreyNoiseAPIKey` `api_key`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/GreyNoiseAPIKeyType'
+      required:
+      - type
+      - api_key
+      type: object
+    GreyNoiseAPIKeyType:
+      description: The definition of the `GreyNoiseAPIKey` object.
+      enum:
+      - GreyNoiseAPIKey
+      example: GreyNoiseAPIKey
+      type: string
+      x-enum-varnames:
+      - GREYNOISEAPIKEY
+    GreyNoiseAPIKeyUpdate:
+      description: The definition of the `GreyNoiseAPIKey` object.
+      properties:
+        api_key:
+          description: The `GreyNoiseAPIKeyUpdate` `api_key`.
+          type: string
+        type:
+          $ref: '#/components/schemas/GreyNoiseAPIKeyType'
+      required:
+      - type
+      type: object
+    GreyNoiseCredentials:
+      description: The definition of the `GreyNoiseCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/GreyNoiseAPIKey'
+    GreyNoiseCredentialsUpdate:
+      description: The definition of the `GreyNoiseCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/GreyNoiseAPIKeyUpdate'
+    GreyNoiseIntegration:
+      description: The definition of the `GreyNoiseIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/GreyNoiseCredentials'
+        type:
+          $ref: '#/components/schemas/GreyNoiseIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    GreyNoiseIntegrationType:
+      description: The definition of the `GreyNoiseIntegrationType` object.
+      enum:
+      - GreyNoise
+      example: GreyNoise
+      type: string
+      x-enum-varnames:
+      - GREYNOISE
+    GreyNoiseIntegrationUpdate:
+      description: The definition of the `GreyNoiseIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/GreyNoiseCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/GreyNoiseIntegrationType'
+      required:
+      - type
       type: object
     GroupScalarColumn:
       description: A column containing the tag keys and values in a group.
@@ -20223,6 +21673,75 @@ components:
           format: int64
           type: integer
       type: object
+    LaunchDarklyAPIKey:
+      description: The definition of the `LaunchDarklyAPIKey` object.
+      properties:
+        api_token:
+          description: The `LaunchDarklyAPIKey` `api_token`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/LaunchDarklyAPIKeyType'
+      required:
+      - type
+      - api_token
+      type: object
+    LaunchDarklyAPIKeyType:
+      description: The definition of the `LaunchDarklyAPIKey` object.
+      enum:
+      - LaunchDarklyAPIKey
+      example: LaunchDarklyAPIKey
+      type: string
+      x-enum-varnames:
+      - LAUNCHDARKLYAPIKEY
+    LaunchDarklyAPIKeyUpdate:
+      description: The definition of the `LaunchDarklyAPIKey` object.
+      properties:
+        api_token:
+          description: The `LaunchDarklyAPIKeyUpdate` `api_token`.
+          type: string
+        type:
+          $ref: '#/components/schemas/LaunchDarklyAPIKeyType'
+      required:
+      - type
+      type: object
+    LaunchDarklyCredentials:
+      description: The definition of the `LaunchDarklyCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/LaunchDarklyAPIKey'
+    LaunchDarklyCredentialsUpdate:
+      description: The definition of the `LaunchDarklyCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/LaunchDarklyAPIKeyUpdate'
+    LaunchDarklyIntegration:
+      description: The definition of the `LaunchDarklyIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/LaunchDarklyCredentials'
+        type:
+          $ref: '#/components/schemas/LaunchDarklyIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    LaunchDarklyIntegrationType:
+      description: The definition of the `LaunchDarklyIntegrationType` object.
+      enum:
+      - LaunchDarkly
+      example: LaunchDarkly
+      type: string
+      x-enum-varnames:
+      - LAUNCHDARKLY
+    LaunchDarklyIntegrationUpdate:
+      description: The definition of the `LaunchDarklyIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/LaunchDarklyCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/LaunchDarklyIntegrationType'
+      required:
+      - type
+      type: object
     Layer:
       description: Encapsulates a layer resource, holding attributes like rotation
         details, plus relationships to the members covering that layer.
@@ -22503,8 +24022,19 @@ components:
       readOnly: true
       type: object
     MetricAssetAttributes:
-      description: Assets related to the object, including title and url.
+      description: Assets related to the object, including title, url, and tags.
       properties:
+        tags:
+          description: List of tag keys used in the asset.
+          example:
+          - env
+          - service
+          - host
+          - datacenter
+          items:
+            description: Tag key used in assets.
+            type: string
+          type: array
         title:
           description: Title of the asset.
           type: string
@@ -22891,6 +24421,17 @@ components:
           maximum: 5
           minimum: 0
           type: number
+        tags:
+          description: List of tag keys used in the asset.
+          example:
+          - env
+          - service
+          - host
+          - datacenter
+          items:
+            description: Tag key used in assets.
+            type: string
+          type: array
         title:
           description: Title of the asset.
           type: string
@@ -23340,6 +24881,61 @@ components:
             description: Actively queried tag keys.
             type: string
           type: array
+      type: object
+    MetricTagCardinalitiesData:
+      description: A list of tag cardinalities associated with the given metric.
+      items:
+        $ref: '#/components/schemas/MetricTagCardinality'
+      type: array
+    MetricTagCardinalitiesMeta:
+      description: Response metadata object.
+      properties:
+        metric_name:
+          description: 'The name of metric for which the tag cardinalities are returned.
+
+            This matches the metric name provided in the request.
+
+            '
+          type: string
+      type: object
+    MetricTagCardinalitiesResponse:
+      description: 'Response object that includes an array of objects representing
+        the cardinality details of a metric''s tags.
+
+        '
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricTagCardinalitiesData'
+        meta:
+          $ref: '#/components/schemas/MetricTagCardinalitiesMeta'
+      readOnly: true
+      type: object
+    MetricTagCardinality:
+      description: Object containing metadata and attributes related to a specific
+        tag key associated with the metric.
+      example:
+        attributes:
+          cardinality_delta: 25
+        id: http.request.latency
+        type: tag_cardinality
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricTagCardinalityAttributes'
+        id:
+          description: The name of the tag key.
+          type: string
+        type:
+          default: tag_cardinality
+          description: This describes the endpoint action.
+          type: string
+      type: object
+    MetricTagCardinalityAttributes:
+      description: An object containing properties related to the tag key
+      properties:
+        cardinality_delta:
+          description: This describes the recent change in the tag keys cardinality
+          format: int64
+          type: integer
       type: object
     MetricTagConfiguration:
       description: Object for a single metric tag configuration.
@@ -25112,6 +26708,75 @@ components:
       type: string
       x-enum-varnames:
       - NOTIFICATION_RULES
+    NotionAPIKey:
+      description: The definition of the `NotionAPIKey` object.
+      properties:
+        api_token:
+          description: The `NotionAPIKey` `api_token`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/NotionAPIKeyType'
+      required:
+      - type
+      - api_token
+      type: object
+    NotionAPIKeyType:
+      description: The definition of the `NotionAPIKey` object.
+      enum:
+      - NotionAPIKey
+      example: NotionAPIKey
+      type: string
+      x-enum-varnames:
+      - NOTIONAPIKEY
+    NotionAPIKeyUpdate:
+      description: The definition of the `NotionAPIKey` object.
+      properties:
+        api_token:
+          description: The `NotionAPIKeyUpdate` `api_token`.
+          type: string
+        type:
+          $ref: '#/components/schemas/NotionAPIKeyType'
+      required:
+      - type
+      type: object
+    NotionCredentials:
+      description: The definition of the `NotionCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/NotionAPIKey'
+    NotionCredentialsUpdate:
+      description: The definition of the `NotionCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/NotionAPIKeyUpdate'
+    NotionIntegration:
+      description: The definition of the `NotionIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/NotionCredentials'
+        type:
+          $ref: '#/components/schemas/NotionIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    NotionIntegrationType:
+      description: The definition of the `NotionIntegrationType` object.
+      enum:
+      - Notion
+      example: Notion
+      type: string
+      x-enum-varnames:
+      - NOTION
+    NotionIntegrationUpdate:
+      description: The definition of the `NotionIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/NotionCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/NotionIntegrationType'
+      required:
+      - type
+      type: object
     NullableRelationshipToUser:
       description: Relationship to user.
       nullable: true
@@ -28289,6 +29954,46 @@ components:
       required:
       - crt_file
       type: object
+    OktaAPIToken:
+      description: The definition of the `OktaAPIToken` object.
+      properties:
+        api_token:
+          description: The `OktaAPIToken` `api_token`.
+          example: ''
+          type: string
+        domain:
+          description: The `OktaAPIToken` `domain`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/OktaAPITokenType'
+      required:
+      - type
+      - domain
+      - api_token
+      type: object
+    OktaAPITokenType:
+      description: The definition of the `OktaAPIToken` object.
+      enum:
+      - OktaAPIToken
+      example: OktaAPIToken
+      type: string
+      x-enum-varnames:
+      - OKTAAPITOKEN
+    OktaAPITokenUpdate:
+      description: The definition of the `OktaAPIToken` object.
+      properties:
+        api_token:
+          description: The `OktaAPITokenUpdate` `api_token`.
+          type: string
+        domain:
+          description: The `OktaAPITokenUpdate` `domain`.
+          type: string
+        type:
+          $ref: '#/components/schemas/OktaAPITokenType'
+      required:
+      - type
+      type: object
     OktaAccount:
       description: Schema for an Okta account.
       properties:
@@ -28427,6 +30132,43 @@ components:
             $ref: '#/components/schemas/OktaAccountResponseData'
           type: array
       type: object
+    OktaCredentials:
+      description: The definition of the `OktaCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/OktaAPIToken'
+    OktaCredentialsUpdate:
+      description: The definition of the `OktaCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/OktaAPITokenUpdate'
+    OktaIntegration:
+      description: The definition of the `OktaIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/OktaCredentials'
+        type:
+          $ref: '#/components/schemas/OktaIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    OktaIntegrationType:
+      description: The definition of the `OktaIntegrationType` object.
+      enum:
+      - Okta
+      example: Okta
+      type: string
+      x-enum-varnames:
+      - OKTA
+    OktaIntegrationUpdate:
+      description: The definition of the `OktaIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/OktaCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/OktaIntegrationType'
+      required:
+      - type
+      type: object
     OnCallPageTargetType:
       description: The kind of target, `team_id` | `team_handle` | `user_id`.
       enum:
@@ -28468,6 +30210,75 @@ components:
       type: string
       x-enum-varnames:
       - ON_DEMAND_CONCURRENCY_CAP
+    OpenAIAPIKey:
+      description: The definition of the `OpenAIAPIKey` object.
+      properties:
+        api_token:
+          description: The `OpenAIAPIKey` `api_token`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/OpenAIAPIKeyType'
+      required:
+      - type
+      - api_token
+      type: object
+    OpenAIAPIKeyType:
+      description: The definition of the `OpenAIAPIKey` object.
+      enum:
+      - OpenAIAPIKey
+      example: OpenAIAPIKey
+      type: string
+      x-enum-varnames:
+      - OPENAIAPIKEY
+    OpenAIAPIKeyUpdate:
+      description: The definition of the `OpenAIAPIKey` object.
+      properties:
+        api_token:
+          description: The `OpenAIAPIKeyUpdate` `api_token`.
+          type: string
+        type:
+          $ref: '#/components/schemas/OpenAIAPIKeyType'
+      required:
+      - type
+      type: object
+    OpenAICredentials:
+      description: The definition of the `OpenAICredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/OpenAIAPIKey'
+    OpenAICredentialsUpdate:
+      description: The definition of the `OpenAICredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/OpenAIAPIKeyUpdate'
+    OpenAIIntegration:
+      description: The definition of the `OpenAIIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/OpenAICredentials'
+        type:
+          $ref: '#/components/schemas/OpenAIIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    OpenAIIntegrationType:
+      description: The definition of the `OpenAIIntegrationType` object.
+      enum:
+      - OpenAI
+      example: OpenAI
+      type: string
+      x-enum-varnames:
+      - OPENAI
+    OpenAIIntegrationUpdate:
+      description: The definition of the `OpenAIIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/OpenAICredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/OpenAIIntegrationType'
+      required:
+      - type
+      type: object
     OpenAPIEndpoint:
       description: Endpoint info extracted from an `OpenAPI` specification.
       properties:
@@ -34576,9 +36387,22 @@ components:
           format: int64
           minimum: 0
           type: integer
+        flaggedIPType:
+          $ref: '#/components/schemas/SecurityMonitoringRuleCaseActionOptionsFlaggedIPType'
         userBehaviorName:
           $ref: '#/components/schemas/SecurityMonitoringRuleCaseActionOptionsUserBehaviorName'
       type: object
+    SecurityMonitoringRuleCaseActionOptionsFlaggedIPType:
+      description: Used with the case action of type 'flag_ip'. The value specified
+        in this field is applied as a flag to the IP addresses.
+      enum:
+      - SUSPICIOUS
+      - FLAGGED
+      example: FLAGGED
+      type: string
+      x-enum-varnames:
+      - SUSPICIOUS
+      - FLAGGED
     SecurityMonitoringRuleCaseActionOptionsUserBehaviorName:
       description: Used with the case action of type 'user_behavior'. The value specified
         in this field is applied as a risk tag to all users affected by the rule.
@@ -34589,11 +36413,13 @@ components:
       - block_ip
       - block_user
       - user_behavior
+      - flag_ip
       type: string
       x-enum-varnames:
       - BLOCK_IP
       - BLOCK_USER
       - USER_BEHAVIOR
+      - FLAG_IP
     SecurityMonitoringRuleCaseCreate:
       description: Case when signal is generated.
       properties:
@@ -38390,6 +40216,91 @@ components:
             $ref: '#/components/schemas/ServiceDefinitionData'
           type: array
       type: object
+    ServiceNowBasicAuth:
+      description: The definition of the `ServiceNowBasicAuth` object.
+      properties:
+        instance:
+          description: The `ServiceNowBasicAuth` `instance`.
+          example: ''
+          type: string
+        password:
+          description: The `ServiceNowBasicAuth` `password`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceNowBasicAuthType'
+        username:
+          description: The `ServiceNowBasicAuth` `username`.
+          example: ''
+          type: string
+      required:
+      - type
+      - instance
+      - username
+      - password
+      type: object
+    ServiceNowBasicAuthType:
+      description: The definition of the `ServiceNowBasicAuth` object.
+      enum:
+      - ServiceNowBasicAuth
+      example: ServiceNowBasicAuth
+      type: string
+      x-enum-varnames:
+      - SERVICENOWBASICAUTH
+    ServiceNowBasicAuthUpdate:
+      description: The definition of the `ServiceNowBasicAuth` object.
+      properties:
+        instance:
+          description: The `ServiceNowBasicAuthUpdate` `instance`.
+          type: string
+        password:
+          description: The `ServiceNowBasicAuthUpdate` `password`.
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceNowBasicAuthType'
+        username:
+          description: The `ServiceNowBasicAuthUpdate` `username`.
+          type: string
+      required:
+      - type
+      type: object
+    ServiceNowCredentials:
+      description: The definition of the `ServiceNowCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/ServiceNowBasicAuth'
+    ServiceNowCredentialsUpdate:
+      description: The definition of the `ServiceNowCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/ServiceNowBasicAuthUpdate'
+    ServiceNowIntegration:
+      description: The definition of the `ServiceNowIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/ServiceNowCredentials'
+        type:
+          $ref: '#/components/schemas/ServiceNowIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    ServiceNowIntegrationType:
+      description: The definition of the `ServiceNowIntegrationType` object.
+      enum:
+      - ServiceNow
+      example: ServiceNow
+      type: string
+      x-enum-varnames:
+      - SERVICENOW
+    ServiceNowIntegrationUpdate:
+      description: The definition of the `ServiceNowIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/ServiceNowCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/ServiceNowIntegrationType'
+      required:
+      - type
+      type: object
     ServiceNowTicket:
       description: ServiceNow ticket attached to case
       nullable: true
@@ -39699,6 +41610,75 @@ components:
       - ONE_THREE
       - ONE_FOUR
       - ONE_FIVE
+    SplitAPIKey:
+      description: The definition of the `SplitAPIKey` object.
+      properties:
+        api_key:
+          description: The `SplitAPIKey` `api_key`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/SplitAPIKeyType'
+      required:
+      - type
+      - api_key
+      type: object
+    SplitAPIKeyType:
+      description: The definition of the `SplitAPIKey` object.
+      enum:
+      - SplitAPIKey
+      example: SplitAPIKey
+      type: string
+      x-enum-varnames:
+      - SPLITAPIKEY
+    SplitAPIKeyUpdate:
+      description: The definition of the `SplitAPIKey` object.
+      properties:
+        api_key:
+          description: The `SplitAPIKeyUpdate` `api_key`.
+          type: string
+        type:
+          $ref: '#/components/schemas/SplitAPIKeyType'
+      required:
+      - type
+      type: object
+    SplitCredentials:
+      description: The definition of the `SplitCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/SplitAPIKey'
+    SplitCredentialsUpdate:
+      description: The definition of the `SplitCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/SplitAPIKeyUpdate'
+    SplitIntegration:
+      description: The definition of the `SplitIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/SplitCredentials'
+        type:
+          $ref: '#/components/schemas/SplitIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    SplitIntegrationType:
+      description: The definition of the `SplitIntegrationType` object.
+      enum:
+      - Split
+      example: Split
+      type: string
+      x-enum-varnames:
+      - SPLIT
+    SplitIntegrationUpdate:
+      description: The definition of the `SplitIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/SplitCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/SplitIntegrationType'
+      required:
+      - type
+      type: object
     StartStepNames:
       description: A list of steps that run first after a trigger fires.
       example:
@@ -39759,6 +41739,75 @@ components:
       type: string
       x-enum-varnames:
       - STATEVARIABLE
+    StatsigAPIKey:
+      description: The definition of the `StatsigAPIKey` object.
+      properties:
+        api_key:
+          description: The `StatsigAPIKey` `api_key`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatsigAPIKeyType'
+      required:
+      - type
+      - api_key
+      type: object
+    StatsigAPIKeyType:
+      description: The definition of the `StatsigAPIKey` object.
+      enum:
+      - StatsigAPIKey
+      example: StatsigAPIKey
+      type: string
+      x-enum-varnames:
+      - STATSIGAPIKEY
+    StatsigAPIKeyUpdate:
+      description: The definition of the `StatsigAPIKey` object.
+      properties:
+        api_key:
+          description: The `StatsigAPIKeyUpdate` `api_key`.
+          type: string
+        type:
+          $ref: '#/components/schemas/StatsigAPIKeyType'
+      required:
+      - type
+      type: object
+    StatsigCredentials:
+      description: The definition of the `StatsigCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/StatsigAPIKey'
+    StatsigCredentialsUpdate:
+      description: The definition of the `StatsigCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/StatsigAPIKeyUpdate'
+    StatsigIntegration:
+      description: The definition of the `StatsigIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/StatsigCredentials'
+        type:
+          $ref: '#/components/schemas/StatsigIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    StatsigIntegrationType:
+      description: The definition of the `StatsigIntegrationType` object.
+      enum:
+      - Statsig
+      example: Statsig
+      type: string
+      x-enum-varnames:
+      - STATSIG
+    StatsigIntegrationUpdate:
+      description: The definition of the `StatsigIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/StatsigCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/StatsigIntegrationType'
+      required:
+      - type
+      type: object
     Step:
       description: A Step is a sub-component of a workflow. Each Step performs an
         action.
@@ -42255,6 +44304,70 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+    V2Event:
+      description: An event object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/V2EventAttributes'
+        id:
+          description: The event's ID.
+          example: ''
+          type: string
+        type:
+          description: Entity type.
+          example: event
+          type: string
+      type: object
+    V2EventAggregationKey:
+      description: Aggregation key of the event.
+      example: aggregation-key
+      type: string
+    V2EventAttributes:
+      description: Event attributes.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/V2EventAttributesAttributes'
+        message:
+          description: Free-form text associated with the event.
+          example: The event message
+          type: string
+        tags:
+          description: A list of tags associated with the event.
+          example:
+          - env:api_client_test
+          items:
+            description: A tag.
+            type: string
+          type: array
+        timestamp:
+          description: Timestamp when the event occurred.
+          example: '2017-01-15T01:30:15.010000Z'
+          type: string
+      type: object
+    V2EventAttributesAttributes:
+      description: JSON object for category-specific attributes.
+      oneOf:
+      - $ref: '#/components/schemas/ChangeEventAttributes'
+      - $ref: '#/components/schemas/AlertEventAttributes'
+    V2EventResponse:
+      description: Get an event response.
+      properties:
+        data:
+          $ref: '#/components/schemas/V2Event'
+      type: object
+    V2EventService:
+      description: Service that triggered the event.
+      example: service-name
+      type: string
+    V2EventTimestamp:
+      description: POSIX timestamp of the event.
+      example: 175019386627
+      format: int64
+      type: integer
+    V2EventTitle:
+      description: The title of the event.
+      example: The event title
+      type: string
     ValidationError:
       description: Represents a single validation error, including a human-readable
         title and metadata.
@@ -42310,6 +44423,75 @@ components:
       example: 1
       format: int64
       type: integer
+    VirusTotalAPIKey:
+      description: The definition of the `VirusTotalAPIKey` object.
+      properties:
+        api_key:
+          description: The `VirusTotalAPIKey` `api_key`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/VirusTotalAPIKeyType'
+      required:
+      - type
+      - api_key
+      type: object
+    VirusTotalAPIKeyType:
+      description: The definition of the `VirusTotalAPIKey` object.
+      enum:
+      - VirusTotalAPIKey
+      example: VirusTotalAPIKey
+      type: string
+      x-enum-varnames:
+      - VIRUSTOTALAPIKEY
+    VirusTotalAPIKeyUpdate:
+      description: The definition of the `VirusTotalAPIKey` object.
+      properties:
+        api_key:
+          description: The `VirusTotalAPIKeyUpdate` `api_key`.
+          type: string
+        type:
+          $ref: '#/components/schemas/VirusTotalAPIKeyType'
+      required:
+      - type
+      type: object
+    VirusTotalCredentials:
+      description: The definition of the `VirusTotalCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/VirusTotalAPIKey'
+    VirusTotalCredentialsUpdate:
+      description: The definition of the `VirusTotalCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/VirusTotalAPIKeyUpdate'
+    VirusTotalIntegration:
+      description: The definition of the `VirusTotalIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/VirusTotalCredentials'
+        type:
+          $ref: '#/components/schemas/VirusTotalIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    VirusTotalIntegrationType:
+      description: The definition of the `VirusTotalIntegrationType` object.
+      enum:
+      - VirusTotal
+      example: VirusTotal
+      type: string
+      x-enum-varnames:
+      - VIRUSTOTAL
+    VirusTotalIntegrationUpdate:
+      description: The definition of the `VirusTotalIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/VirusTotalCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/VirusTotalIntegrationType'
+      required:
+      - type
+      type: object
     VulnerabilitiesType:
       description: The JSON:API type.
       enum:
@@ -43057,9 +45239,6 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
-            appsec_vm_read: View infrastructure, application code, and library vulnerabilities.
-              This does not restrict API or inventory SQL access to the vulnerability
-              data source.
             billing_read: View your organization's billing information.
             cases_read: View Cases.
             cases_write: Create and update cases.
@@ -43074,6 +45253,8 @@ components:
             code_analysis_read: View Code Analysis.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
+            coterm_read: Read terminal recordings.
+            coterm_write: Write terminal recordings.
             create_webhooks: Create webhooks integrations.
             dashboards_embed_share: Create, modify, and delete shared dashboards with
               share type 'embed'.
@@ -43095,7 +45276,6 @@ components:
             incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
-            monitor_config_policy_write: Edit and delete monitor configuration.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in
               an organization. Mute and unmute monitors. The ability to write monitors
               is not required to set downtimes.
@@ -43111,10 +45291,6 @@ components:
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View a list of findings that include
               both misconfigurations and identity risks.
-            security_monitoring_notification_profiles_read: View Rule Security Notification
-              rules.
-            security_monitoring_notification_profiles_write: Create, edit, and delete
-              Security Notification rules.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
@@ -45548,8 +47724,9 @@ paths:
       - AuthN Mappings
       x-menu-order: 4
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
     post:
@@ -45681,8 +47858,9 @@ paths:
       - AuthN Mappings
       x-menu-order: 1
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
     patch:
@@ -46103,6 +48281,47 @@ paths:
       tags:
       - Case Management
       x-menu-order: 6
+      x-undo:
+        type: idempotent
+  /api/v2/cases/{case_id}/attributes:
+    post:
+      description: Update case attributes
+      operationId: UpdateAttributes
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseUpdateAttributesRequest'
+        description: Case attributes update payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Update case attributes
+      tags:
+      - Case Management
+      x-menu-order: 10
       x-undo:
         type: idempotent
   /api/v2/cases/{case_id}/priority:
@@ -46887,6 +49106,8 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - ci_visibility_read
+      - AuthZ:
+        - test_optimization_read
       summary: Aggregate tests events
       tags:
       - CI Visibility Tests
@@ -46896,6 +49117,7 @@ paths:
         operator: OR
         permissions:
         - ci_visibility_read
+        - test_optimization_read
       x-undo:
         type: safe
   /api/v2/ci/tests/events:
@@ -46974,6 +49196,8 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - ci_visibility_read
+      - AuthZ:
+        - test_optimization_read
       summary: Get a list of tests events
       tags:
       - CI Visibility Tests
@@ -46987,6 +49211,7 @@ paths:
         operator: OR
         permissions:
         - ci_visibility_read
+        - test_optimization_read
       x-undo:
         type: safe
   /api/v2/ci/tests/events/search:
@@ -47023,6 +49248,8 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - ci_visibility_read
+      - AuthZ:
+        - test_optimization_read
       summary: Search tests events
       tags:
       - CI Visibility Tests
@@ -47037,6 +49264,7 @@ paths:
         operator: OR
         permissions:
         - ci_visibility_read
+        - test_optimization_read
       x-undo:
         type: safe
   /api/v2/cloud_security_management/custom_frameworks:
@@ -48352,16 +50580,14 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-        - billing_read
       summary: Get Monthly Cost Attribution
       tags:
       - Usage Metering
       x-menu-order: 5
       x-permission:
-        operator: AND
+        operator: OR
         permissions:
         - usage_read
-        - billing_read
       x-undo:
         type: safe
   /api/v2/csm/onboarding/agents:
@@ -49013,14 +51239,16 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: Get all datasets
       tags:
       - Datasets
       x-menu-order: 3
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
     post:
@@ -49062,15 +51290,17 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_manage
       summary: Create a dataset
       tags:
       - Datasets
       x-codegen-request-body-name: body
       x-menu-order: 1
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - user_access_manage
       x-undo:
         operationId: DeleteDataset
         parameters:
@@ -49140,6 +51370,47 @@ paths:
         permissions: []
       x-undo:
         type: safe
+    put:
+      description: Edits the dataset associated with the ID.
+      operationId: UpdateDataset
+      parameters:
+      - $ref: '#/components/parameters/DatasetID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatasetUpdateRequest'
+        description: Dataset payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetResponseSingle'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Edit a dataset
+      tags:
+      - Datasets
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-permission:
+        operator: OPEN
+        permissions: []
+      x-undo:
+        type: idempotent
   /api/v2/domain_allowlist:
     get:
       description: Get the domain allowlist for an organization.
@@ -49158,6 +51429,8 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - org_management
+      - AuthZ:
+        - monitors_write
       summary: Get Domain Allowlist
       tags:
       - Domain Allowlist
@@ -49166,6 +51439,10 @@ paths:
         operator: OR
         permissions:
         - org_management
+        - monitors_write
+        - generate_dashboard_reports
+        - generate_log_reports
+        - manage_log_reports
       x-undo:
         type: safe
     patch:
@@ -49191,6 +51468,8 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - org_management
+      - AuthZ:
+        - monitors_write
       summary: Sets Domain Allowlist
       tags:
       - Domain Allowlist
@@ -49199,6 +51478,10 @@ paths:
         operator: OR
         permissions:
         - org_management
+        - monitors_write
+        - generate_dashboard_reports
+        - generate_log_reports
+        - manage_log_reports
       x-undo:
         type: idempotent
   /api/v2/dora/deployment:
@@ -49915,9 +52198,7 @@ paths:
         for more details.\n\n\u274C For use cases involving other event categories,
         use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).\n\n\u274C
         Notifications are not yet supported for events sent to this endpoint. Use
-        the V1 endpoint for notification functionality.\n\n\u274C This endpoint is
-        not available for the Government (US1-FED) site. Contact your account representative
-        for more information."
+        the V1 endpoint for notification functionality."
       operationId: CreateEvent
       requestBody:
         content:
@@ -50079,6 +52360,49 @@ paths:
         type: safe
     x-merge-override:
       post: false
+  /api/v2/events/{event_id}:
+    get:
+      description: Get the details of an event by `event_id`.
+      operationId: GetEvent
+      parameters:
+      - description: The UID of the event.
+        in: path
+        name: event_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2EventResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - events_read
+      summary: Get an event
+      tags:
+      - Events
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - events_read
+      x-undo:
+        type: safe
   /api/v2/incidents:
     get:
       description: Get all incidents for the user's organization.
@@ -54127,8 +56451,8 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - logs_read_data
         - logs_read_config
+        - logs_read_data
       x-undo:
         type: safe
     post:
@@ -54239,8 +56563,8 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - logs_read_data
         - logs_read_config
+        - logs_read_data
       x-undo:
         type: safe
     patch:
@@ -55630,6 +57954,53 @@ paths:
         permissions: []
       x-undo:
         type: safe
+  /api/v2/metrics/{metric_name}/tag-cardinalities:
+    get:
+      description: Returns the cardinality details of tags for a specific metric.
+      operationId: GetMetricTagCardinalityDetails
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricTagCardinalitiesResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      summary: Get tag key cardinality details
+      tags:
+      - Metrics
+      x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+        - metrics_read
+      x-undo:
+        type: safe
   /api/v2/metrics/{metric_name}/tags:
     delete:
       description: 'Deletes a metric''s tag configuration. Can only be used with application
@@ -55985,11 +58356,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Create a monitor notification rule
       tags:
       - Monitors
@@ -56042,11 +58408,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Delete a monitor notification rule
       tags:
       - Monitors
@@ -56157,11 +58518,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Update a monitor notification rule
       tags:
       - Monitors
@@ -56432,6 +58788,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
@@ -56461,11 +58821,6 @@ paths:
           description: Bad Request
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Create a monitor user template
       tags:
       - Monitors
@@ -56483,6 +58838,10 @@ paths:
               \     \"tags\": [\"category:test\"]\n    }\n  }\n}"
           step: there is a valid "monitor_user_template" in the system
       x-menu-order: 21
+      x-permission:
+        operator: OR
+        permissions:
+        - monitor_config_policy_write
       x-undo:
         operationId: DeleteMonitorUserTemplate
         parameters:
@@ -56513,15 +58872,14 @@ paths:
           description: Bad Request
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Validate a monitor user template
       tags:
       - Monitors
       x-menu-order: 24
+      x-permission:
+        operator: OR
+        permissions:
+        - monitor_config_policy_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
@@ -56549,15 +58907,14 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Delete a monitor user template
       tags:
       - Monitors
       x-menu-order: 23
+      x-permission:
+        operator: OR
+        permissions:
+        - monitor_config_policy_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
@@ -56606,6 +58963,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 19
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
@@ -56648,15 +59009,14 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Update a monitor user template to a new version
       tags:
       - Monitors
       x-menu-order: 22
+      x-permission:
+        operator: OR
+        permissions:
+        - monitor_config_policy_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
@@ -56698,15 +59058,14 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - monitor_config_policy_write
       summary: Validate an existing monitor user template
       tags:
       - Monitors
       x-menu-order: 25
+      x-permission:
+        operator: OR
+        permissions:
+        - monitor_config_policy_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
@@ -56970,7 +59329,8 @@ paths:
         schema:
           format: int64
           type: integer
-      - description: Comma-separated list of fields to group connections by.
+      - description: Comma-separated list of fields to group connections by. The maximum
+          number of group_by(s) is 10.
         in: query
         name: group_by
         schema:
@@ -56981,13 +59341,13 @@ paths:
         schema:
           type: string
       - description: The number of connections to be returned. The maximum value is
-          5000.
+          7500.
         in: query
         name: limit
         schema:
           default: 100
           format: int32
-          maximum: 5000
+          maximum: 7500
           minimum: 1
           type: integer
       responses:
@@ -57253,6 +59613,7 @@ paths:
             default: navy.oncall.datadoghq.com
             description: The globally available endpoint for On-Call.
             enum:
+            - lava.oncall.datadoghq.com
             - saffron.oncall.datadoghq.com
             - navy.oncall.datadoghq.com
             - coral.oncall.datadoghq.com
@@ -57312,6 +59673,7 @@ paths:
             default: navy.oncall.datadoghq.com
             description: The globally available endpoint for On-Call.
             enum:
+            - lava.oncall.datadoghq.com
             - saffron.oncall.datadoghq.com
             - navy.oncall.datadoghq.com
             - coral.oncall.datadoghq.com
@@ -57371,6 +59733,7 @@ paths:
             default: navy.oncall.datadoghq.com
             description: The globally available endpoint for On-Call.
             enum:
+            - lava.oncall.datadoghq.com
             - saffron.oncall.datadoghq.com
             - navy.oncall.datadoghq.com
             - coral.oncall.datadoghq.com
@@ -57430,6 +59793,7 @@ paths:
             default: navy.oncall.datadoghq.com
             description: The globally available endpoint for On-Call.
             enum:
+            - lava.oncall.datadoghq.com
             - saffron.oncall.datadoghq.com
             - navy.oncall.datadoghq.com
             - coral.oncall.datadoghq.com
@@ -58029,12 +60393,13 @@ paths:
         following fields are available for findings:\n- `external_id`: The resource
         external ID related to the finding.\n- `description`: The description and
         remediation steps for the finding.\n- `datadog_link`: The Datadog relative
-        link for the finding.\n\n### Response\n\nThe response includes an array of
-        finding objects, pagination metadata, and a count of items that match the
-        query.\n\nEach finding object contains the following:\n\n- The finding ID
-        that can be used in a `GetFinding` request to retrieve the full finding details.\n-
-        Core attributes, including status, evaluation, high-level resource details,
-        muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date`
+        link for the finding.\n- `ip_addresses`: The list of private IP addresses
+        for the resource related to the finding.\n\n### Response\n\nThe response includes
+        an array of finding objects, pagination metadata, and a count of items that
+        match the query.\n\nEach finding object contains the following:\n\n- The finding
+        ID that can be used in a `GetFinding` request to retrieve the full finding
+        details.\n- Core attributes, including status, evaluation, high-level resource
+        details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date`
         time stamps.\n- An array of associated tags.\n"
       operationId: ListFindings
       parameters:
@@ -58102,6 +60467,12 @@ paths:
       - description: Return only findings for the specified resource type.
         in: query
         name: filter[resource_type]
+        required: false
+        schema:
+          type: string
+      - description: Return only findings for the specified resource id.
+        in: query
+        name: filter[@resource_id]
         required: false
         schema:
           type: string
@@ -59750,8 +62121,6 @@ paths:
 
         - Dashboards: `dashboard`
 
-        - Integration Accounts: `integration-account`
-
         - Integration Services: `integration-service`
 
         - Integration Webhooks: `integration-webhook`
@@ -59796,8 +62165,6 @@ paths:
         ----------------------------|--------------------------
 
         Dashboards                  | `viewer`, `editor`
-
-        Integration Accounts        | `viewer`, `editor`
 
         Integration Services        | `viewer`, `editor`
 
@@ -60560,18 +62927,15 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Aggregate RUM events
       tags:
       - RUM
       x-codegen-request-body-name: body
       x-menu-order: 3
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - rum_apps_read
       x-undo:
         type: safe
   /api/v2/rum/applications:
@@ -61163,10 +63527,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get a list of RUM events
       tags:
       - RUM
@@ -61177,8 +63537,9 @@ paths:
         limitParam: page[limit]
         resultsPath: data
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - rum_apps_read
       x-undo:
         type: safe
   /api/v2/rum/events/search:
@@ -61212,10 +63573,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Search RUM events
       tags:
       - RUM
@@ -61227,8 +63584,9 @@ paths:
         limitParam: body.page.limit
         resultsPath: data
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - rum_apps_read
       x-undo:
         type: safe
   /api/v2/saml_configurations/idp_metadata:
@@ -62408,8 +64766,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - appsec_vm_read
       summary: List vulnerable assets
       tags:
       - Security Monitoring
@@ -62573,8 +64929,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - appsec_vm_read
       summary: List assets SBOMs
       tags:
       - Security Monitoring
@@ -62644,8 +64998,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - appsec_vm_read
       summary: Get SBOM
       tags:
       - Security Monitoring
@@ -62669,8 +65021,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_read
       summary: Get the list of signal-based notification rules
       tags:
       - Security Monitoring
@@ -62714,8 +65064,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_write
       summary: Create a new signal-based notification rule
       tags:
       - Security Monitoring
@@ -62765,8 +65113,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_write
       summary: Delete a signal-based notification rule
       tags:
       - Security Monitoring
@@ -62805,8 +65151,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_read
       summary: Get details of a signal-based notification rule
       tags:
       - Security Monitoring
@@ -62854,8 +65198,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_write
       summary: Patch a signal-based notification rule
       tags:
       - Security Monitoring
@@ -63254,8 +65596,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - appsec_vm_read
       summary: List vulnerabilities
       tags:
       - Security Monitoring
@@ -63279,8 +65619,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_read
       summary: Get the list of vulnerability notification rules
       tags:
       - Security Monitoring
@@ -63324,8 +65662,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_write
       summary: Create a new vulnerability-based notification rule
       tags:
       - Security Monitoring
@@ -63375,8 +65711,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_write
       summary: Delete a vulnerability-based notification rule
       tags:
       - Security Monitoring
@@ -63415,8 +65749,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_read
       summary: Get details of a vulnerability notification rule
       tags:
       - Security Monitoring
@@ -63464,8 +65796,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_notification_profiles_write
       summary: Patch a vulnerability-based notification rule
       tags:
       - Security Monitoring
@@ -68187,16 +70517,14 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-        - billing_read
       summary: Get cost across multi-org account
       tags:
       - Usage Metering
       x-menu-order: 45
       x-permission:
-        operator: AND
+        operator: OR
         permissions:
         - usage_read
-        - billing_read
       x-undo:
         type: safe
   /api/v2/usage/estimated_cost:
@@ -68296,16 +70624,14 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-        - billing_read
       summary: Get estimated cost across your account
       tags:
       - Usage Metering
       x-menu-order: 6
       x-permission:
-        operator: AND
+        operator: OR
         permissions:
         - usage_read
-        - billing_read
       x-undo:
         type: safe
   /api/v2/usage/historical_cost:
@@ -68382,16 +70708,14 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-        - billing_read
       summary: Get historical cost across your account
       tags:
       - Usage Metering
       x-menu-order: 5
       x-permission:
-        operator: AND
+        operator: OR
         permissions:
         - usage_read
-        - billing_read
       x-undo:
         type: safe
   /api/v2/usage/hourly_usage:
@@ -68731,16 +71055,14 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-        - billing_read
       summary: Get projected cost across your account
       tags:
       - Usage Metering
       x-menu-order: 7
       x-permission:
-        operator: AND
+        operator: OR
         permissions:
         - usage_read
-        - billing_read
       x-undo:
         type: safe
   /api/v2/user_invitations:
@@ -69887,13 +72209,18 @@ tags:
     for more information.
   name: Incidents
 - description: 'Manage your Datadog API and application keys. You need an API key
-    and
+    and an
 
-    an application key for a user with the required permissions to interact
+    application key for a user with the required permissions to interact with these
+    endpoints.
 
-    with these endpoints. The full list of API and application keys can be
 
-    seen on your [Datadog API page](https://app.datadoghq.com/account/settings#api).'
+    Consult the following pages to view and manage your keys:
+
+
+    - [API Keys](https://app.datadoghq.com/organization-settings/api-keys)
+
+    - [Application Keys](https://app.datadoghq.com/personal-settings/application-keys)'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/api-app-keys/
