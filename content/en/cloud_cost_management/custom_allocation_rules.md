@@ -77,7 +77,7 @@ To create a rule for this allocation, you can:
 - Refine the allocation by applying [filters](#step-4---optional-apply-filters): **EC2** (`aws_product:ec2`).
 - Create suballocations by [partitioning](#step-4---optional-apply-a-partition) the allocation rule: **environment** (`env`).
 
-You can also specify how cost proportions should be partitioned to ensure segment-specific allocations. For example, if you partition your costs by environment using tags like `staging` and `production`, the proportions are calculated separately for each environment. This ensures allocations are based on the specific proportions within each partition.
+You can also specify how the cost allocation rule should be partitioned to create multiple suballocations. For example, if you partition your costs by the `environment` tag, the allocation rule is calculated separately for each environment. 
 
 {{< img src="cloud_cost/custom_allocation_rules/ui-proportional-by-spend-2.png" alt="The proportional split strategy as seen in Datadog" style="width:90%;" >}}
 
@@ -89,67 +89,37 @@ You can also specify how cost proportions should be partitioned to ensure segmen
 
 Metrics-based allocation provides the ability to split up costs based on Datadog's [metrics queries][1]. By using performance metrics to allocate expenses, you can more accurately allocate costs based on application usage patterns.
 
-For example, the Network query `sum:network.bytes_written[server_gateway_id:nat-*] by client_service and server_gateway_id` (shown below) tracks the total traffic volume through NAT gateways by service. The relative values are then used to determine what proportion of total NAT gateway costs should be allocated to each service.
+For example, the Network query `sum:network.bytes_written[server_gateway_id:nat-*] by client_service and server_gateway_id` (shown below) tracks the total traffic volume through NAT gateways by service. The relative traffic volume per `client_service` and `server_gateway_id` is then used to determine what proportion of total NAT gateway costs should be allocated to each destination.
 
 ### Data source limitations
 
 Before creating this type of rule, be aware:
 
-- **Data sources support** - The dynamic by metric allocation method only supports specific data sources, listed in the dropdown below.
 
-{{% collapse-content title="List of supported data sources" level="h4" expanded=false id="supported-data-sources" %}}
 
-- APM Metrics
-- Application Security
-- Audit Trail
-- CI Pipelines
-- CI Tests
-- Cases
-- DORA Metrics
-- Database Queries
-- Deployment Gates
-- Events
-- Incidents
-- Kubernetes Troubleshooting
-- LLM Observability
-- Metrics
-- NetFlow
-- Network
-- Network Path
-- On-Call
-- Profiles
-- RUM
-- Recommendations
-- Security Signals
-- Software Composition Analysis
-- Synthetics CI Batches
-- Synthetics Runs
-- Usage
-- Workload Security
-- Workload Security Info
 
 {{% /collapse-content %}}
 
-- **Result limits** - Some data sources limit how many results they can show. The allocation rule automatically uses your highest-costing items first. For example, if your query editor shows a limit of 100 group bys but you have 101 results, the allocation rule distributes costs across the top 100 highest-costing group bys and ignores the remaining 1 completely. 
+- **Result limits** - Some observability data sources limit how many results they can show. The allocation rule automatically uses your highest-costing items first. For example, if your query editor shows a limit of 1000 group bys but you have 1001 results, the allocation rule distributes costs across the top 1000 highest-costing destinations and ignores the remaining 1 destination completely. 
 - **Update frequency** - While CCM has 15 months of retention overall, individual data sources have different update patterns:
   - Metrics data updates daily for the past 60 days
-  - Other data sources backfill 60 days at rule creation, then update daily for the past 7 days
+  - Other observability data sources backfill 60 days at rule creation, then update daily for the past 7 days
 
   If you need more frequent updates or longer retention, consider using the _Metrics_ data source.
 
 ### Create a dynamic by metric allocation rule
 
-To create a rule for this allocation, you can, for example:
+For example, create an allocation rule to split your shared NAT gateway costs:
 
 - Define the source or costs to allocate (for example, **NAT gateway costs** (`aws_operation:NatGateway`)). 
 - Select the allocation method: **Dynamic by metric**
-  - Choose the data source: **Network**. Tip: Review available metrics and tags in the [Metrics Summary][2].
-- In the **"Define the metric to split the source costs"** section (which uses the same interface as the Metrics Explorer query editor):
-  - **Filters**: Apply filters to refine your metric query. For example, add `server_gateway_id:nat-*` to filter the metric to only return data for your NAT Gateway usage. These filters become the filter for your allocation.
+  - Choose the data source: **Network**. 
+- In the **"Define the metric to split the source costs"** section:
+  - **Filters**: Apply filters to refine your metric query. For example, add `server_gateway_id:nat-*` to filter the Network query to NAT Gateway usage. This filter becomes the filter for your allocation.
   - **Group bys**: Select group bys to define your destination and partition:
-    - **Destination**: The primary group by becomes your destination tag. For example, group by `client_service` to split costs by service.
-    - **Partition**: Additional group bys become your partition. For example, add another group by for `gateway_id` to create suballocations by Gateway ID.
-- In section 3, **"Choose the destination(s) to split costs across"**, specify which group by tag is your destination and which will be your partition. 
+    - **Destination**: By default, the tag(s) you group by become the destination tag(s) for your allocation. For example, group by `client_service` to split costs by service.
+    - **Partition**: To define a partition, first group by the tag you wish to partition on. For example, add another group by for `gateway_id` to create suballocations by Gateway ID.
+- In section 3, **"Choose the destination(s) to split costs across"**, specify which group by tag is your partition tag. All group by tags are destination tags by default. 
 {{< img src="cloud_cost/custom_allocation_rules/ui-dynamic-by-metric-4.png" alt="The dynamic by metric split strategy as seen in Datadog" style="width:90%;" >}}
 
 [1]: /metrics/#querying-metrics
@@ -161,7 +131,7 @@ To create a rule for this allocation, you can, for example:
 
 ### Step 3 - Choose the destination(s) to split costs across
 
-1. Select the destinations you want to allocate costs to, such as `team`, `department`, or `service`, that receive the allocated costs.
+1. Select the destinations you want to allocate costs to, such as `team`, `department`, or `service`.
 
    You can select multiple values for your destination tag. For instance, if you select the `team` tag, you can choose specific teams like `teamA`, `teamB`, and `teamC` to receive the allocated costs.
 
@@ -169,9 +139,8 @@ To create a rule for this allocation, you can, for example:
 
 Apply a filter across the entire allocation rule. Filters help you target the allocation rule to the relevant subset of your cloud spend.
 
-- **Proportional by spend**: You can add filters to narrow the scope of your allocation. For example, filter by `aws_product:ec2` to create an allocation that only applies to EC2 costs, then proportionally distribute those costs based on each team's EC2 spend.
+For example, let's take a **proportional by spend** allocation rule. Say you're allocating shared costs to the team tag. Filter by `aws_product:ec2` to create an allocation that proportionally distributes shared costs costs based on each team's EC2 spend.
 
-- **Dynamic by metric**: You can filter your metric query to focus on specific data. For example, add `environment:production` to your metric query so the allocation is based only on production environment usage data.
 
 ### Step 5 - (optional) Apply a partition
 
