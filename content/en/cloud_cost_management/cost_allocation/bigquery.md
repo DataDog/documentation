@@ -92,8 +92,8 @@ Costs are allocated into the following spend types:
 
 | Spend type | Description |
 |---|---|
-| `Usage` | Cost of query execution based on bytes processed (on-demand) or slot consumption (reservation) |
-| `Cluster_idle` | Cost of reserved slots allocated within a project but not utilized by queries|
+| Usage | Cost of query execution based on bytes processed (on-demand) or slot consumption (reservation) |
+| Cluster_idle | Cost of reserved slots allocated within a project but not utilized by queries|
 
 ### Storage
 
@@ -101,8 +101,8 @@ Storage costs are categorized as:
 
 | Spend type | Description |
 |---|---|
-| `Active` | Includes any table or table partition that has been modified in the last 90 days |
-| `Long-term` | Includes any table or table partition that has not been modified for 90 consecutive days. The price of storage for that table automatically drops by approximately 50%. There is no difference in performance, durability, or availability between active and long-term storage |
+| Active | Includes any table or table partition that has been modified in the last 90 days |
+| Long-term | Includes any table or table partition that has not been modified for 90 consecutive days. The price of storage for that table automatically drops by approximately 50%. There is no difference in performance, durability, or availability between active and long-term storage |
 
 ## Further reading
  
