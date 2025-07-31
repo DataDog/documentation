@@ -66,12 +66,24 @@ To keep your team on top of the latest attacks, Datadog also has a team of threa
 
 Cloud SIEM embeds both cloud and on-premises telemetry directly into security workflows to accelerate investigation and response. And with a shared platform that brings DevOps and Security teams together, organizations can break down silos and respond to threats collaboratively and efficiently.
 
-### Flexible cost control
+### Flexible cost control for security data
 
 As your organization scales, controlling the ingestion cost of security logs without compromising visibility is critical. Cloud SIEM is integrated with Datadog Log Management so you can choose the retention and querying capability of your security logs to balance cost efficiency and your threat detection needs. The available options are:
-- [Standard indexing][6] for logs that need to be queried frequently and retained short term.
+- [Standard indexing][6] for logs that need to be queried frequently with the most compute
 - [Flex Logs][7] for logs that need to be retained long-term, but sometimes need to be queried urgently.
 - [Log Archives][8] for logs that are infrequently queried and need to be stored long-term.
+
+#### Guided security data onboarding
+
+Cloud SIEM [Content Packs][9] are a curated set of Datadog integrations specifically useful for security teams. Each content pack has instructions on how to configure the integration and what is included, such as detection rules, out-of-the-box interactive dashboards, parsers, and SOAR workflows. Content Packs highlight actionable insights specific to that integration to help you investigate security issues.
+
+### Content pack health monitoring
+
+After a content pack is activated, the content pack gives you the integration's health status and provides troubleshooting steps if something goes wrong so you can get back up and operational as fast as possible.
+
+### Visual log search
+
+TKTK
 
 ## Get started
 
