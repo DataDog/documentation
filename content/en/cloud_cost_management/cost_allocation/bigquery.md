@@ -43,8 +43,17 @@ Where:
 - `total_slot_usage`: The total slot-seconds used across all queries in the project's reservations
 - `total_project_reservation_cost`: The total cost of the reservations in a given project for the time period
 
-Any difference between the total billed reservation cost and the sum of allocated query costs is categorized as a project's `cluster_idle` cost, representing unused reservation capacity.
+Any difference between the total billed reservation cost and the sum of allocated query costs is categorized as a project's `cluster_idle` cost, representing unused reservation capacity. 
 
+### Understanding idle costs
+
+Idle costs represent the portion of reservation capacity that was paid for but not utilized by queries. These costs arise when the reserved slot capacity exceeds actual usage during a billing period.
+
+**Idle slot sharing considerations**: If your organization has enabled idle slot sharing between reservations, the idle cost calculation may appear different than expected. When queries from one project use idle slots from another project's reservation, those slot costs are attributed as "free" rather than to the consuming project. This means:
+
+- A project's reservation may show higher idle costs if other projects are using its unused capacity
+- The original project pays full reservation costs regardless of cross-project usage
+- No automatic cost-transfer: Sharing projects don't pay the reservation owner for consumed idle slots
 
 ### Query-level tag extraction
 
@@ -84,7 +93,7 @@ Costs are allocated into the following spend types:
 | Spend type | Description |
 |---|---|
 | `Usage` | Cost of query execution based on bytes processed (on-demand) or slot consumption (reservation) |
-| `Cluster_idle` | Cost of reserved slots allocated but not utilized by queries |
+| `Cluster_idle` | Cost of reserved slots allocated within a project but not utilized by queries|
 
 ### Storage
 
@@ -96,7 +105,7 @@ Storage costs are categorized as:
 | `Long-term` | Includes any table or table partition that has not been modified for 90 consecutive days. The price of storage for that table automatically drops by approximately 50%. There is no difference in performance, durability, or availability between active and long-term storage |
 
 ## Further reading
-
+ 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/dashboard/ecm-es8-agw/bigquery-allocation
