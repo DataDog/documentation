@@ -5,21 +5,44 @@ type: multi-code-lang
 code_lang_weight: 40
 ---
 
-The following table lists the support for App and API Protection capabilities in the Istio integration according to the specified tracer version:
+The following table lists the support for App and API Protection capabilities for the Istio integration according to the specified Datadog External Processor image version:
 
-| App and API Protection capability        | Minimum Istio image version  |
-|----------------------------------------|------------------------------|
-| Threat Detection                       | 1.71.0                       |
-| Threat Protection                      | 1.71.0                       |
-| Customize response to blocked requests | 1.71.0                       |
-| Automatic user activity event tracking | not supported                |
-| API Security                           | not supported                |
+| App and API Protection capability              | Minimum Datadog External Processor image version  |
+|------------------------------------------------|---------------------------------------------------|
+| Threat Detection                               | v1.71.0                                           |
+| Threat Protection                              | v1.71.0                                           |
+| Customize response to blocked requests         | v1.71.0                                           |
+| Non blocking asynchronous mode (observability) | v2.1.0                                            |
+| API Security                                   | v2.2.0                                            |
+| App and API Protection Standalone              | v2.2.0                                            |
+| Automatic user activity event tracking         | not supported                                     |
 
-Please review Istio integration version 1.71.0 [limitations][1].
+## Istio version support
 
-## Istio support
+### Supported Envoy Versions
 
-The Istio integration is in Preview.
+Istio’s data plane is based on Envoy. The following table shows the relationship between Istio versions and their corresponding Envoy release branches:
+
+| Istio version | Envoy release branch |
+|---------------|----------------------|
+| 1.26.x        | release/v1.34        |
+| 1.25.x        | release/v1.33        |
+| 1.24.x        | release/v1.32        |
+
+More information about relationship between Istio and Envoy versions can be found in the [Istio documentation][1].
+
+### Envoy version support
+
+The Datadog Envoy integration for App and API Protection relies on features that may not be present in every Envoy version. Refer to the table below to determine which Envoy versions support each feature.
+
+| Feature | Minimum Envoy version |
+|---------|-----------------------|
+| External Processing Filter | v1.27.0 |
+| Observability mode | v1.30.0 |
+
+## Istio Datadog External Processor support
+
+The Datadog Istio integration for App and API Protection is in Preview.
 
 Only the Linux version and both the arm64 and arm64 architectures are supported.
 
@@ -28,4 +51,4 @@ the unsupported capabilities, let us know! Fill out <a
 href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send
 details</a>.</div>
 
-[1]: /security/application_security/setup/istio
+[1]: https://istio.io/latest/docs/releases/supported-releases/

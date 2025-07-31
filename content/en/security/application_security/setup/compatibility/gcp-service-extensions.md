@@ -7,17 +7,18 @@ aliases:
   - /security/application_security/threats/setup/compatibility/gcp-service-extensions
 ---
 
-The following table lists the support for App and API Protection capabilities in the App and API Protection GCP Service Extensions according to the specified version:
+The following table lists the support for App and API Protection capabilities for GCP Service Extensions according to the specified Datadog Service Extensions callout image version:
 
-| App and API Protection capability        | Minimum App and API Protection Service Extensions image version  |
-|----------------------------------------|----------------------------------------------|
-| Threat Detection                       | 1.71.0                                       |
-| Threat Protection                      | 1.71.0                                       |
-| Customize response to blocked requests | 1.71.0                                       |
-| Automatic user activity event tracking | not supported                                |
-| API Security                           | not supported                                |
+| App and API Protection capability        | Minimum App and API Protection Service Extensions callout image version  |
+|------------------------------------------|--------------------------------------------------------------------------|
+| Threat Detection                         | 1.71.0                                                                   |
+| Threat Protection                        | 1.71.0                                                                   |
+| Customize response to blocked requests   | 1.71.0                                                                   |
+| API Security                             | v2.2.0                                                                   |
+| App and API Protection Standalone        | v2.2.0                                                                   |
+| Automatic user activity event tracking   | not supported                                                            |
 
-Please review App and API Protection GCP Service Extensions integration version 1.71.0 [limitations][1].
+Please refer to the [limitations][1] of the App and API Protection GCP Service Extensions integration.
 
 ## App and API Protection GCP Service Extensions support
 

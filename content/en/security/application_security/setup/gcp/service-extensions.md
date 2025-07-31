@@ -504,7 +504,7 @@ The App and API Protection GCP Service Extensions integration is built on top of
 
 The GCP Service Extensions integration has the following limitations:
 
-* Inspection of request and response bodies is supported when using service extension callout image version `2.1.0` or later.
+* Inspection of request and response bodies is supported when using service extension callout image version `v2.1.0` or later.
 * Currently, GCP Service Extensions does not support an asynchronous (observability) mode.
 
 ## Further Reading
