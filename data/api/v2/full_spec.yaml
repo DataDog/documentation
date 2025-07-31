@@ -27894,6 +27894,16 @@ components:
       description: The `sample` processor allows probabilistic sampling of logs at
         a fixed rate.
       properties:
+        group_by:
+          description: Optional list of fields to group events by. Each group will
+            be sampled independently
+          example:
+          - service
+          - host
+          items:
+            type: string
+          minItems: 1
+          type: array
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline (for example, as the `input`
