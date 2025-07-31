@@ -43,7 +43,7 @@ You can see aggregated data about PR gates over the selected time frame. Use the
 
 PR Gate data is available in dashboards and notebooks, enabling build engineering teams to customize their communication about high-priority work and CI trends over time.
 
-[101]: https://app.datadoghq.com/ci/quality-gates/executions
+[101]: https://app.datadoghq.com/ci/pr-gates/
 [102]: https://app.datadoghq.com/dashboard/lists
 [103]: https://app.datadoghq.com/notebook/list
 
@@ -73,7 +73,7 @@ You can see aggregated data about rule executions over the selected time frame. 
 
 PR Gate rules data is available in [dashboards][102] and [notebooks][103], enabling build engineering teams to customize their communication about high-priority work and CI trends over time.
 
-[101]: https://app.datadoghq.com/ci/quality-gates/executions
+[101]: https://app.datadoghq.com/ci/pr-gates/
 [102]: https://app.datadoghq.com/dashboard/lists
 [103]: https://app.datadoghq.com/notebook/list
 

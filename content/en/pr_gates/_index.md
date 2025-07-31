@@ -54,7 +54,7 @@ You can configure PR Gates rules for the following categories:
 | [**Static Code Analysis**][11] | <li> Code vulnerability violations <li> Code quality violations |
 | [**Software Composition Analysis**][12] | <li> Library vulnerability violations <li> Detected license violations |
 | [**Code Coverage**][15] | <li> Total code coverage threshold <li> Patch code coverage threshold |
-| [**Infrastructure as Code Scanning**][15] | <li> IaC vulnerability severity |
+| [**Infrastructure as Code Scanning**][16] | <li> IaC vulnerability severity |
 
 By integrating PR Gates [into your CI/CD pipelines][7] or allowing the [Datadog GitHub integration][13] to create status checks on your Pull Requests automatically (available for SCA rules only), you can create a robust framework for maintaining and improving software quality that aligns with your organization's operational goals and business objectives. 
 

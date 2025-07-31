@@ -62,5 +62,5 @@ From your current default saved view, take actions to update the view to a diffe
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/ci/quality-gates/executions
+[1]: https://app.datadoghq.com/ci/pr-gates/
 [2]: /pr_gates/explorer/
