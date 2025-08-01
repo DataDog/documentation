@@ -26,9 +26,9 @@ Code Coverage relies on the following GitHub webhooks:
 * Pull request review comment
 * Push
 
-None of the webhooks include your source code content, only metadata about the pull request, such as: title, description, author, labels, commit SHAs.
+None of the webhooks include your source code content; they only include metadata about the pull request, such as title, description, author, labels, and commit SHAs.
 
-You can check GitHub's [webhook events and payloads documentation][1] for detailed description of the data sent by these webhooks.
+See GitHub's [webhook events and payloads documentation][1] for a detailed description of the data sent by these webhooks.
 
 [1]: https://docs.github.com/en/webhooks/webhook-events-and-payloads
 
@@ -42,10 +42,10 @@ See [Datadog Source Code Integration][1] for more information about how Datadog 
 ## Code Coverage Report Upload
 
 The `datadog-ci coverage upload` command sends the following data to Datadog:
-- **Coverage reports**: the report files, which contain the coverage data for your codebase. The data depends on the coverage tool and report format you are using, and normally includes file paths, line numbers, and coverage percentages.
-- **Git metadata**: git repository URL, branch name, commit SHA, timestamp, author information, and list of file paths that were changed in the commit. Git metadata upload can be disabled by adding `--skip-git-metadata-upload=1` to the command.
-- **Git diff summary**: list of file paths that were changed in the commit, along with the numbers of added and removed lines. Diff data upload can be disabled by adding `--upload-git-diff=0` to the command.
-- **CI metadata**: information about the CI environment, such as the CI provider, job ID, and pipeline ID.
+- **Coverage reports**: The report files, which contain the coverage data for your codebase. The data depends on the coverage tool and report format you are using, and normally includes file paths, line numbers, and coverage percentages.
+- **Git metadata**: Git repository URL, branch name, commit SHA, timestamp, author information, and list of file paths that were changed in the commit. You can disable Git metadata upload by adding `--skip-git-metadata-upload=1` to the command.
+- **Git diff summary**: List of file paths that were changed in the commit, along with the numbers of added and removed lines. You can disable Diff data upload by adding `--upload-git-diff=0` to the command.
+- **CI metadata**: Information about the CI environment, such as the CI provider, job ID, and pipeline ID.
 
 No source code is uploaded to Datadog.
 

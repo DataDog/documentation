@@ -6,7 +6,7 @@ further_reading:
     text: "Set up Code Coverage"
   - link: "/code_coverage/data_collected"
     tag: "Documentation"
-    text: "Data Collected"
+    text: "Learn what data is collected for Code Coverage"
 algolia:
   tags: ["code coverage"]
 ---

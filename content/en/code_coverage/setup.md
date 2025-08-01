@@ -6,7 +6,7 @@ further_reading:
     text: "Code Coverage"
   - link: "/code_coverage/data_collected"
     tag: "Documentation"
-    text: "Data Collected"
+    text: "Learn what data is collected for Code Coverage"
 ---
 
 {{< callout url="http://datadoghq.com/product-preview/code-coverage/" >}}
@@ -44,7 +44,7 @@ The following webhooks are required:
 | Pull request review comment | Receive PR data updates. |
 | Push | Receive Git commit metadata. |
 
-If everything is configured correctly, you will see a green check mark in the [GitHub Integration][2] page in Datadog:
+If everything is configured correctly, a green check mark is displayed in Datadog's [GitHub Integration][2] page:
 {{< img src="/code_coverage/github_app_success.png" alt="GitHub App integration success check" style="width:100%" >}}
 
 <div class="alert alert-info">If you have a Datadog-managed Marketplace App or a custom app with default settings, the required permissions and webhooks are included.</div>
