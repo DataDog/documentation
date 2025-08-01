@@ -51340,9 +51340,9 @@ paths:
           - name: body
             origin: request
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"Security
-              Audit Dataset\",\n      \"principals\": [\n        \"role:94172442-be03-11e9-a77a-3b7612558ac1\"\n
+              Audit Dataset - {{ uuid }}\",\n      \"principals\": [\n        \"role:94172442-be03-11e9-a77a-3b7612558ac1\"\n
               \     ],\n      \"product_filters\": [\n        {\n          \"filters\":
-              [\n            \"@application.id:ABCD\"\n          ],\n          \"product\":
+              [\n            \"@application.id:{{ uuid }}\"\n          ],\n          \"product\":
               \"metrics\"\n        }\n      ]\n    },\n    \"type\": \"dataset\"\n
               \ }\n}"
           step: there is a valid "dataset" in the system
