@@ -9,7 +9,9 @@ further_reading:
 
 ## Overview
 
-Datadog Cloud Cost Management (CCM) automatically allocates the costs of your Google BigQuery resources to individual queries and workloads. Use cost metrics enriched with tags from queries, projects, and reservations to visualize BigQuery workload costs in the context of your entire cloud bill. CCM displays costs for resources including query-level analysis, storage, and data transfer on the [**BigQuery** dashboard][1].
+Datadog Cloud Cost Management (CCM) automatically allocates the costs of your Google BigQuery resources to individual queries and workloads. Use cost metrics enriched with tags from queries, projects, and reservations to visualize BigQuery workload costs in the context of your entire cloud bill. 
+
+CCM displays costs for resources including query-level analysis, storage, and data transfer on the [**BigQuery dashboard**][1].
 
 ## BigQuery pricing models
 
@@ -88,9 +90,40 @@ Additionally, CCM adds the following tags for cost analysis:
 | `allocated_spend_type` | Categorizes costs as either `usage` (active query execution) or `cluster_idle` (unused reservation capacity) |
 | `allocated_resource` | Indicates resource measurement type - `slots` for reservation-based queries or `bytes_processed` for on-demand queries |
 | `orchestrator` | Set to `BigQuery` for all BigQuery query-related records |
+
+The tags below are automatically tagged from the billing data CCM processes and can be especially useful in BigQuery cost analysis: 
 | `project_id` | GCP project ID where the BigQuery resource or job is located |
 | `google_location` | The specific Google Cloud region or zone where BigQuery resources are deployed (e.g., us-central1, europe-west1, asia-southeast1) |
 | `resource_name` | Full Google Cloud resource identifier |
+
+#### Using BigQuery labels for cost attribution
+
+BigQuery labels provide a powerful way to add custom metadata to your queries, jobs, datasets, and tables that automatically appear as tags in CCM. This enables highly granular cost attribution across teams, projects, applications, or any custom dimension you define.
+
+**What are BigQuery labels?**
+Labels are key-value pairs that you can attach to BigQuery resources. When you add labels to queries or jobs, they automatically become available as tags in CCM, allowing you to filter and group costs by these custom dimensions.
+
+**Adding labels to queries:**
+You can add labels to BigQuery queries using the `--label` flag with the `bq` command-line tool:
+
+```bash
+bq query --label department:engineering --label environment:production 'SELECT * FROM dataset.table'
+```
+
+**Adding labels in SQL sessions:**
+For queries within a session, you can set labels that apply to all subsequent queries:
+
+```sql
+SET @@query_label = "team:data_science,cost_center:analytics";
+```
+
+**Benefits for cost management:**
+- **Team attribution**: Tag queries with team names to track departmental BigQuery spending
+- **Environment tracking**: Separate development, staging, and production costs
+- **Application mapping**: Associate costs with specific applications or services
+- **Project categorization**: Group costs by business initiatives or customer projects
+
+Labels added to BigQuery resources automatically appear as tags in CCM, enabling powerful cost analysis and chargeback capabilities. [**Learn more about adding BigQuery labels**][10].
 
 ### Query-level allocation
 
@@ -145,3 +178,4 @@ Storage costs are categorized as:
 [7]: https://cloud.google.com/bigquery/docs/reservations-intro
 [8]: https://cloud.google.com/bigquery/docs/best-practices-performance-overview
 [9]: https://cloud.google.com/bigquery/docs/best-practices-storage
+[10]: https://cloud.google.com/bigquery/docs/adding-labels
