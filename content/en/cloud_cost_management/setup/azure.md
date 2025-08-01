@@ -137,7 +137,7 @@ Azure exports cost data starting from the month you created the export. You can 
 
 1. Complete the instructions in the **Setup** and **Configure Cloud Cost in Datadog** sections above.
 1. Wait up to 24 hours for cost data to appear in Datadog to ensure the integration is working end-to-end before beginning the backfill process. **Note:** If you have already completed setup, and cost data is appearing in Datadog, you can proceed directly to the backfill steps below.
-2. Manually export an **actual** and **amortized** report for each calendar month. For example, for June 2025:
+1. Manually export an **actual** and **amortized** report for each calendar month. For example, for June 2025:
     1. Edit the Export
     2. Change Export Type to "One-time export"
     3. Set From to 06-01-2025 **Note:** This must be the first day of the month.
