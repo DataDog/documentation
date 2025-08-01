@@ -131,4 +131,7 @@ sudo -u dd-agent datadog-agent snmp walk <DEVICE_IP> 1.3.6.1.4.1.9.9.171.1.3.2
 
 [1]: /agent
 [2]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
-[3]: /help
+[3]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[4]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2#monitoring-individual-devices
+[5]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2#autodiscovery
+[6]: /help
