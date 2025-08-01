@@ -65,15 +65,24 @@ Idle costs represent the portion of reservation capacity that was paid for but n
 - The original project pays full reservation costs regardless of cross-project usage
 - No automatic cost-transfer: Sharing projects don't pay the reservation owner for consumed idle slots
 
+[**Learn how to enable idle slot sharing for your reservations**][5]
+
 ### Query-level tag extraction
 
-CCM extracts the following tags from BigQuery query logs via the Data Observability platform:
+When the [Datadog Google BigQuery integration][4] is enabled, CCM extracts the following tags to add to your query costs:
 
 | Tag | Description |
 |---|---|
 | `reservation_id` | The reservation pool that provided compute resources |
 | `user_email` | The user or service account that executed the query |
 | `dts_config_id` | Identifier for scheduled queries and data transfers |
+
+To identify which BigQuery schedule a `DTS_CONFIG_ID` refers to:
+
+1.  Go to **BigQuery** in the [**GCP Console**][6].
+2.  Navigate to **Transfers > Schedules**.
+3.  Use the **search bar** or **Ctrl+F** to locate the `DTS_CONFIG_ID`.
+4.  Click the matched entry to view details about the query schedule, including source, frequency, and target dataset.
 
 Additionally, CCM adds the following tags for cost analysis:
 
@@ -82,10 +91,13 @@ Additionally, CCM adds the following tags for cost analysis:
 | `allocated_spend_type` | Categorizes costs as either `usage` (active query execution) or `cluster_idle` (unused reservation capacity) |
 | `allocated_resource` | Indicates resource measurement type - `slots` for reservation-based queries or `bytes_processed` for on-demand queries |
 | `orchestrator` | Set to `BigQuery` for all BigQuery query-related records |
+| `project_id` | GCP project ID where the BigQuery resource or job is located |
+| `google_location` | The specific Google Cloud region or zone where BigQuery resources are deployed (e.g., us-central1, europe-west1, asia-southeast1) |
+| `resource_name` | Full Google Cloud resource identifier |
 
 ### Compute allocation
 
-For BigQuery compute allocation, CCM handles two pricing models:
+For BigQuery compute allocation, CCM handles two [**pricing models**][3]:
 
 **On-demand pricing**:
 - Costs are directly attributed to individual queries based on bytes processed
@@ -102,8 +114,8 @@ Costs are allocated into the following spend types:
 
 | Spend type | Description |
 |---|---|
-| Usage | Cost of query execution based on bytes processed (on-demand) or slot consumption (reservation) |
-| Cluster_idle | Cost of reserved slots allocated within a project but not utilized by queries|
+| `allocated_spend_type`: Usage | Cost of query execution based on bytes processed (on-demand) or slot consumption (reservation) |
+| `allocated_spend_type`: Cluster_idle | Cost of reserved slots allocated within a project but not utilized by queries|
 
 ### Storage
 
@@ -111,14 +123,16 @@ Storage costs are categorized as:
 
 | Spend type | Description |
 |---|---|
-| Active | Includes any table or table partition that has been modified in the last 90 days |
-| Long-term | Includes any table or table partition that has not been modified for 90 consecutive days. The price of storage for that table automatically drops by approximately 50%. There is no difference in performance, durability, or availability between active and long-term storage |
+| `google_usage_type`: Active Logical Storage | Includes any table or table partition that has been modified in the last 90 days |
+| `google_usage_type`: Long Term Logical Storage | Includes any table or table partition that has not been modified for 90 consecutive days. The price of storage for that table automatically drops by approximately 50%. There is no difference in performance, durability, or availability between active and long-term storage |
 
 ## Further reading
  
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/dashboard/ecm-es8-agw/bigquery-allocation
-[2]: https://app.datadoghq.com/cost/setup 
+[1]: /dashboard/ecm-es8-agw/bigquery-allocation
+[2]: /cost/setup 
 [3]: https://cloud.google.com/bigquery/pricing?hl=en
 [4]: https://docs.datadoghq.com/integrations/google-cloud-bigquery/
+[5]: https://cloud.google.com/bigquery/docs/reservations-tasks
+[6]: https://console.cloud.google.com
