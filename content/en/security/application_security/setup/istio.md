@@ -20,7 +20,7 @@ further_reading:
 To try the preview of App and API Protection for Istio, follow the setup instructions below.
 {{< /callout >}}
 
-You can enable App and API Protection for your services within an Istio service mesh. The Datadog Istio integration allows Datadog to inspect and protect your traffic for threat detection and blocking directly at the edge of your infrastructure. This can be applied at the Istio Ingress Gateway or at the sidecar level.
+You can enable App and API Protection (AAP) for your services within an Istio service mesh. The Datadog Istio integration allows Datadog to inspect and protect your traffic for threat detection and blocking directly at the edge of your infrastructure. This can be applied at the Istio Ingress Gateway or at the sidecar level.
 
 ## Prerequisites
 
