@@ -40,7 +40,7 @@ Monitor and optimize your application's performance:
 Monitor the health and performance of your OpenTelemetry Collector:
 
 - [Collector Health Metrics][4] - Track the performance of your OpenTelemetry Collector
-- [Datadog Extension][17] - View collector configuration and build information in Datadog Infrastructure Monitoring
+- [Datadog Extension][17] - View Collector configuration and build information in Datadog Infrastructure Monitoring
 
 ### Containers and hosts
 
