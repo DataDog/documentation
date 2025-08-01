@@ -815,56 +815,61 @@ menu:
       identifier: otel_health_metrics
       parent: otel_integrations
       weight: 803
+    - name: Datadog Extension
+      url: opentelemetry/integrations/datadog_extension/
+      identifier: otel_datadog_extension
+      parent: otel_integrations
+      weight: 804
     - name: Docker Metrics
       url: opentelemetry/integrations/docker_metrics/
       identifier: otel_docker_metrics
       parent: otel_integrations
-      weight: 804
+      weight: 805
     - name: HAProxy Metrics
       url: opentelemetry/integrations/haproxy_metrics/
       identifier: otel_haproxy_metrics
       parent: otel_integrations
-      weight: 805
+      weight: 806
     - name: Host Metrics
       url: opentelemetry/integrations/host_metrics/
       identifier: otel_host_metrics
       parent: otel_integrations
-      weight: 806
+      weight: 807
     - name: IIS Metrics
       url: opentelemetry/integrations/iis_metrics/
       identifier: otel_iis_metrics
       parent: otel_integrations
-      weight: 807
+      weight: 808
     - name: Kafka Metrics
       url: opentelemetry/integrations/kafka_metrics/
       identifier: otel_kafka_metrics
       parent: otel_integrations
-      weight: 808
+      weight: 809
     - name: MySQL Metrics
       url: opentelemetry/integrations/mysql_metrics/
       identifier: otel_mysql_metrics
       parent: otel_integrations
-      weight: 809
+      weight: 810
     - name: NGINX Metrics
       url: opentelemetry/integrations/nginx_metrics/
       identifier: otel_nginx_metrics
       parent: otel_integrations
-      weight: 810
+      weight: 811
     - name: Podman Metrics
       url: opentelemetry/integrations/podman_metrics/
       identifier: otel_podman_metrics
       parent: otel_integrations
-      weight: 811
+      weight: 812
     - name: Runtime Metrics
       url: opentelemetry/integrations/runtime_metrics/
       identifier: otel_runtime_metrics
       parent: otel_integrations
-      weight: 812
+      weight: 813
     - name: Trace Metrics
       url: opentelemetry/integrations/trace_metrics/
       identifier: otel_trace_metrics
       parent: otel_integrations
-      weight: 813
+      weight: 814
     - name: Troubleshooting
       url: opentelemetry/troubleshooting/
       identifier: otel_troubleshooting
