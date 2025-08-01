@@ -15,9 +15,9 @@ CCM displays costs for resources including query-level analysis, storage, and da
 
 ## BigQuery pricing models
 
-BigQuery offers multiple pricing components, with CCM focusing on query-related processing costs:
+BigQuery offers multiple pricing components, with CCM focusing on query-related processing costs.
 
-**Query Processing:**
+### Query Processing
 
 **On-demand queries**: You pay per query based on the amount of data processed.
 - Costs are directly attributed to individual queries based on bytes processed
@@ -28,7 +28,7 @@ BigQuery offers multiple pricing components, with CCM focusing on query-related 
 - Allocation based on slot consumption (`total_slot_ms`) per query
 - Includes idle cost calculation for unused reservation capacity
 
-**Other BigQuery Costs (Not Currently Allocated):**
+**Other BigQuery Costs:**
 - **Storage**: Charges for data stored in BigQuery tables (active and long-term storage)
 - **Streaming**: Costs for real-time data ingestion via streaming inserts
 - **Data Transfer**: Charges for moving data between regions or exporting data
@@ -37,7 +37,7 @@ BigQuery offers multiple pricing components, with CCM focusing on query-related 
 
 CCM allocates and enriches costs for both query-processing pricing models, providing detailed cost attribution and tagging for your BigQuery analysis workloads. Learn more about BigQuery services and pricing models [**here**][3].
 
-[**Learn more about optimizing BigQuery performance and costs**][8]
+[**Learn more about optimizing BigQuery performance and costs.**][8]
 
 ## Prerequisites
 
@@ -52,7 +52,7 @@ The following table presents the list of collected features and the minimal requ
 1. Configure the Google Cloud Cost Management integration on the [Cloud Cost Setup page][2].
 2. Enable BigQuery monitoring in your Google Cloud project. 
 [**Enable BigQuery monitoring here**][4]
-3. For reservation cost allocation, configure BigQuery reservations in your project. [**Learn about BigQuery reservations**][7]
+3. For reservation cost allocation, configure BigQuery reservations in your project. [**Learn about BigQuery reservations.**][7]
 
 ## Allocating costs
 
@@ -91,11 +91,14 @@ Additionally, CCM adds the following tags for cost analysis:
 | `orchestrator` | Set to `BigQuery` for all BigQuery query-related records |
 
 The tags below are automatically tagged from the billing data CCM processes and can be especially useful in BigQuery cost analysis: 
+
+| Tag | Description |
+|---|---|
 | `project_id` | GCP project ID where the BigQuery resource or job is located |
 | `google_location` | The specific Google Cloud region or zone where BigQuery resources are deployed (e.g., us-central1, europe-west1, asia-southeast1) |
 | `resource_name` | Full Google Cloud resource identifier |
 
-#### Using BigQuery labels for cost attribution
+### Using BigQuery labels for cost attribution
 
 BigQuery labels provide a powerful way to add custom metadata to your queries, jobs, datasets, and tables that automatically appear as tags in CCM. This enables highly granular cost attribution across teams, projects, applications, or any custom dimension you define.
 
@@ -151,7 +154,7 @@ Idle costs represent the portion of reservation capacity that was paid for but n
 - The original project pays full reservation costs regardless of cross-project usage
 - No automatic cost-transfer: Sharing projects don't pay the reservation owner for consumed idle slots
 
-[**Learn how to enable idle slot sharing for your reservations**][5]
+[**Learn how to enable idle slot sharing for your reservations.**][5]
 
 ### Storage
 
@@ -162,7 +165,7 @@ Storage costs are categorized as:
 | `google_usage_type`: Active Logical Storage | Includes any table or table partition that has been modified in the last 90 days |
 | `google_usage_type`: Long Term Logical Storage | Includes any table or table partition that has not been modified for 90 consecutive days. The price of storage for that table automatically drops by approximately 50%. There is no difference in performance, durability, or availability between active and long-term storage |
 
-[**Learn about BigQuery storage best practices**][9]
+[**Learn more about BigQuery storage and best practices.**][9]
 
 ## Further reading
 
