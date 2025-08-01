@@ -20,7 +20,8 @@ The lookup processor performs the following actions:
 
 
 **Reference Table**
-    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Lookup processor" style="width:80%;" >}}
+    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Lookup processor" 
+    style="width:80%;">}}
 
 
  The size limit for the mapping table is 100Kb. This limit applies across all Lookup Processors on the platform. However, Reference Tables support larger file sizes.
