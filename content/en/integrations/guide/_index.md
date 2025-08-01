@@ -63,7 +63,7 @@ cascade:
     {{< nextlink href="integrations/guide/azure-graph-api-permissions" tag=" Azure" >}}Microsoft Graph API Permissions for Monitoring Azure{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="GCP guides:" >}}
+{{< whatsnext desc="Google Cloud guides:" >}}
     {{< nextlink href="integrations/guide/gcp-metric-discrepancy" tag=" gcp" >}}Google Cloud Metric Discrepancy{{< /nextlink >}}
 {{< /whatsnext >}}
 
