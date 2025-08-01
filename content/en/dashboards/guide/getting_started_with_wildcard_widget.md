@@ -22,7 +22,6 @@ By the end of this tutorial, you will be able to:
 
 * Use Vega-Lite concepts to define visualizations in Wildcard widgets.
 * Import a query from an existing widget.
-* Enable inter-widget interaction using a context menu.
 
 ### Prerequisites
 
@@ -67,21 +66,101 @@ Datadog automatically creates a visualization based on your query.
 <strong>Tip:</strong> Use the Command Palette (<kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>) to auto-select a chart type based on your query, add or edit encodings, or rotate axes/switch chart types.
 </div>
 
+{{% collapse-content title="Guided example of Auto-generate" level="h4" expanded=false %}}
+1. In a new Wildcard widget, click the JSON tab of the query editor and paste the following query:
+{{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
+    ```json
+    {
+      "response_format": "scalar",
+      "queries": [
+        {
+          "query":       "avg:system.cpu.user{*} by {env}",
+          "data_source": "metrics",
+          "name":        "query1",
+          "aggregator":  "last"
+        },
+        {
+          "query":       "max:system.cpu.user{*} by {env}",
+          "data_source": "metrics",
+          "name":        "query2",
+          "aggregator":  "last"
+        }
+      ],
+      "formulas": [
+        { "formula": "query1" },
+        { "formula": "query2" }
+      ],
+      "sort": {
+        "count": 15,
+        "order_by": [
+          {
+            "type":   "formula",
+            "index":  0,
+            "order":  "desc"
+          }
+        ]
+      }
+    }
+    ```
+1. Click **Save Edits**.
+2. At the top of your query editor, click the **Define Visual** tab.
+3. Press <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> (Mac) or <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> (Windows/Linux) to open the **Command Palette**.
+4. Select **Auto-select chart**. The graph should automatically change from a bar chart to a scatterplot.
+
+{{% /collapse-content %}}
+
 ## Step 4: Add a context menu
 
-To add interactivity to your graph, enable context menu support:
+To add interactivity to your graph, enable context menu support.
 
-1. In the visual JSON editor, add the following:
-   ```json
-    "params": [
-        {
-            "name": "datadogPointSelection",
-            "select": "point"
-        }
+1. In the visual JSON editor, copy and paste the following example bar chart widget to see how to add a context menu. This example includes a Tooltip and Context Menu configurations.
+   {{< highlight json "hl_lines=37-41" >}}
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Bar chart showing CPU usage by environment with Datadog context menu support",
+  "data": {
+    "name": "table1"
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "env",
+      "type": "nominal",
+      "sort": "-y",
+      "title": "Environment"
+    },
+    "y": {
+      "field": "query1",
+      "type": "quantitative",
+      "title": "CPU Usage (%)"
+    },
+    "tooltip": [
+      {
+        "field": "env",
+        "type": "nominal"
+      },
+      {
+        "field": "query1",
+        "type": "quantitative",
+        "title": "CPU Usage (%)"
+      },
+      {
+        "field": "timestamp",
+        "type": "temporal",
+        "title": "Timestamp"
+      }
     ]
-   ```
-2. Save and run the widget.
-3. Click any data point in your wildcard widget to bring up a **context menu** with dynamic filters.
+  },
+  "params": [
+    {
+      "name": "datadogPointSelection",
+      "select": "point"
+    }
+  ]
+}
+{{< /highlight >}}
+2. Run and save the widget.
+3. On your dashboard, find the widget you just created and click any data point in graph to bring up a **context menu**.
 
 For more information, see [Using Vega-Lite with Wildcard Widgets in Datadog][6].
 
