@@ -101,17 +101,52 @@ To view VPN tunnels in the UI:
 
 The following metrics are made available after enabling VPN monitoring:
 
-| Metric Name                     | Description                                                                  |
-|---------------------------------|------------------------------------------------------------------------------|
-| `snmp.cipSecTunActiveTime`      | The duration the tunnel has been active in hundredths of seconds.            |
-| `snmp.cipSecTunHcInOctets`      | The number of octets received by the tunnel.                                 |
-| `snmp.cipSecTunHcOutOctets`     | The number of octets sent by the tunnel.                                     |
-| `snmp.cipSecTunInPkts`          | The number of packets received by the tunnel.                                |
-| `snmp.cipSecTunOutPkts`         | The number of packets sent by the tunnel.                                    |
-| `snmp.cipSecTunInAuthFails`     | The number of inbound authentications that ended in failure for the tunnel.  |
-| `snmp.cipSecTunOutAuthFails`    | The number of outbound authentications that ended in failure for the tunnel. |
-| `snmp.cipSecTunInDecryptFails`  | The number of inbound decryptions that ended in failure for the tunnel.      |
-| `snmp.cipSecTunOutEncryptFails` | The number of outbound encryptions that ended in failure for the tunnel.     |
+<table style="width: 100%;">
+  <thead>
+    <tr>
+      <th style="width: 40%;">Metric Name</th>
+      <th style="width: 65%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>snmp.cipSecTunActiveTime</code></td>
+      <td>The duration the tunnel has been active in hundredths of seconds.</td>
+    </tr>
+    <tr>
+      <td><code>snmp.cipSecTunHcInOctets</code></td>
+      <td>The number of octets received by the tunnel.</td>
+    </tr>
+    <tr>
+      <td><code>snmp.cipSecTunHcOutOctets</code></td>
+      <td>The number of octets sent by the tunnel.</td>
+    </tr>
+    <tr>
+      <td><code>snmp.cipSecTunInPkts</code></td>
+      <td>The number of packets received by the tunnel.</td>
+    </tr>
+    <tr>
+      <td><code>snmp.cipSecTunOutPkts</code></td>
+      <td>The number of packets sent by the tunnel.</td>
+    </tr>
+    <tr>
+      <td><code>snmp.cipSecTunInAuthFails</code></td>
+      <td>The number of inbound authentications that ended in failure for the tunnel.</td>
+    </tr>
+    <tr>
+      <td><code>snmp.cipSecTunOutAuthFails</code></td>
+      <td>The number of outbound authentications that ended in failure for the tunnel.</td>
+    </tr>
+    <tr>
+      <td><code>snmp.cipSecTunInDecryptFails</code></td>
+      <td>The number of inbound decryptions that ended in failure for the tunnel.</td>
+    </tr>
+    <tr>
+      <td><code>snmp.cipSecTunOutEncryptFails</code></td>
+      <td>The number of outbound encryptions that ended in failure for the tunnel.</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Troubleshooting
 
@@ -124,7 +159,7 @@ The VPN tunnel data is collected with SNMP. If VPN tunnels are missing on a devi
 - Datadog Agent version 7.70 or later is installed.
 - Verify the device exposes the relevant VPN tunnel data with SNMP by running the following command:
 
-```bash
+```shell
 sudo -u dd-agent datadog-agent snmp walk <DEVICE_IP> 1.3.6.1.4.1.9.9.171.1.3.2
 ```
 
@@ -135,6 +170,6 @@ sudo -u dd-agent datadog-agent snmp walk <DEVICE_IP> 1.3.6.1.4.1.9.9.171.1.3.2
 [1]: /agent
 [2]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [3]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
-[4]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2#monitoring-individual-devices
-[5]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2#autodiscovery
+[4]: /network_monitoring/devices/vpn_monitoring/?tab=individual#configuration
+[5]: /network_monitoring/devices/vpn_monitoring/?tab=autodiscovery#configuration
 [6]: /help
