@@ -15,7 +15,8 @@ further_reading:
 VPN monitoring provides visibility into your devices' VPN tunnels within Network Device Monitoring (NDM). This feature allows you to keep track of critical data and metrics to examine the health of your VPN tunnels.
 
 When configured, the SNMP check collects VPN tunnel data from your devices. This can be configured for [individual][4] as well as [Autodiscovered][5] devices.
-## Prerequisites 
+
+## Prerequisites
 
 Agent version `7.70` or higher.
 ### Limitations
@@ -100,17 +101,17 @@ To view VPN tunnels in the UI:
 
 The following metrics are made available after enabling VPN monitoring:
 
-| Metric Name                   | Description                                                                  |
-|-------------------------------|------------------------------------------------------------------------------|
+| Metric Name                     | Description                                                                  |
+|---------------------------------|------------------------------------------------------------------------------|
 | `snmp.cipSecTunActiveTime`      | The duration the tunnel has been active in hundredths of seconds.            |
-| snmp.cipSecTunHcInOctets      | The number of octets received by the tunnel.                                 |
-| snmp.cipSecTunHcOutOctets     | The number of octets sent by the tunnel.                                     |
-| snmp.cipSecTunInPkts          | The number of packets received by the tunnel.                                |
-| snmp.cipSecTunOutPkts         | The number of packets sent by the tunnel.                                    |
-| snmp.cipSecTunInAuthFails     | The number of inbound authentications that ended in failure for the tunnel.  |
-| snmp.cipSecTunOutAuthFails    | The number of outbound authentications that ended in failure for the tunnel. |
-| snmp.cipSecTunInDecryptFails  | The number of inbound decryptions that ended in failure for the tunnel.      |
-| snmp.cipSecTunOutEncryptFails | The number of outbound encryptions that ended in failure for the tunnel.     |
+| `snmp.cipSecTunHcInOctets`      | The number of octets received by the tunnel.                                 |
+| `snmp.cipSecTunHcOutOctets`     | The number of octets sent by the tunnel.                                     |
+| `snmp.cipSecTunInPkts`          | The number of packets received by the tunnel.                                |
+| `snmp.cipSecTunOutPkts`         | The number of packets sent by the tunnel.                                    |
+| `snmp.cipSecTunInAuthFails`     | The number of inbound authentications that ended in failure for the tunnel.  |
+| `snmp.cipSecTunOutAuthFails`    | The number of outbound authentications that ended in failure for the tunnel. |
+| `snmp.cipSecTunInDecryptFails`  | The number of inbound decryptions that ended in failure for the tunnel.      |
+| `snmp.cipSecTunOutEncryptFails` | The number of outbound encryptions that ended in failure for the tunnel.     |
 
 ## Troubleshooting
 
