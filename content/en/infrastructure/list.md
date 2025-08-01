@@ -86,28 +86,26 @@ Datadog creates aliases for host names when there are multiple uniquely identifi
 
 #### Agent configuration
 
-With the [General Availability (GA) release of Fleet Automation][12], the Agent Configuration section has moved to [Fleet Automation][13] and is no longer displayed in the infrastructure list host detail panel. You can now view and manage Agent configurations across your entire infrastructure with enhanced visibility and control through Fleet Automation.
+You can view and manage Agent configurations across your entire infrastructure using [Fleet Automation][12].
 
-To access Agent configurations, use the **Open Host** dropdown button in the top-right corner of the host detail panel and select "View Agent Configurations" to go directly to the Fleet Automation UI. This provides advanced configuration management capabilities and fleet-wide visibility.
+To view Agent configurations:
+1. Click **Open Host**  in the top-right corner of the host detail panel.
+2. Select **View Agent Configurations** from the dropdown menu to go directly to Fleet Automation.
 
 {{< img src="infrastructure/index/infra-list-config-4.png" alt="View Agent configurations in Fleet Automation" style="width:100%;">}}
 
 #### OpenTelemetry Collector configuration
 
-When the [Datadog Extension][14] is configured with your OpenTelemetry Collector, you can view collector configuration and build information directly in the infrastructure list host detail panel. The Datadog Extension provides visibility into your collector fleet from within the Datadog UI, making it easier to manage and debug your OpenTelemetry Collector deployments.
+When the [Datadog Extension][14] is configured with your OpenTelemetry Collector, you can view Collector configuration and build information directly in the Infrastructure list host detail panel. The Datadog Extension provides visibility into your Collector fleet from within the Datadog UI, helping you manage and debug your OpenTelemetry Collector deployments.
 
 To view OpenTelemetry Collector configurations:
-1. Click on any host running the OpenTelemetry Collector in the infrastructure list
-2. In the host detail panel, select the **OTel Collector** tab
-3. View the build information and complete collector configuration
+1. Click on a host running the OpenTelemetry Collector in the Infrastructure list.
+2. In the host detail panel, select the **OTel Collector** tab to view the build information and complete Collector configuration.
 
-The displayed configuration is scrubbed of sensitive information. The data shown includes collector version, build details, component information, and the full configuration structure in YAML format.
+For detailed setup instructions and requirements, such as hostname matching and pipeline configuration, see the main [Datadog Extension documentation][14].
 
 {{< img src="infrastructure/index/infra-list-config-otel.png" alt="View OpenTelemetry Collector configurations in infrastructure list" style="width:100%;">}}
 
-<div class="alert alert-warning"><strong>Hostname Matching:</strong> If your telemetry contains <a href="https://docs.datadoghq.com/opentelemetry/config/hostname_tagging/?tab=host">host attributes</a> and you have manually set the extension hostname, ensure they match. The Datadog Extension does not have access to pipeline telemetry and cannot infer hostnames from incoming spans—it only obtains hostnames from system/cloud provider APIs or manual configuration. If telemetry has different hostname attributes than extension, the telemetry will not be correlated to the host and you may see duplicate hosts in the infrastructure list.</div>
-
-<div class="alert alert-info"><strong>Pipeline Configuration:</strong> For OpenTelemetry Collectors to appear in the Host list, the <a href="/opentelemetry/setup/collector_exporter/">Datadog Exporter</a> must be configured in either the traces pipeline, the metrics pipeline, or both. A future update to the Datadog Exporter will enable compatibility between the Datadog Extension and logs-only OpenTelemetry Collector deployments.</div>
 
 ### Export
 
@@ -166,5 +164,5 @@ for host in infra['rows']:
 [10]: https://app.datadoghq.com/infrastructure
 [11]: https://docs.datadoghq.com/account_management/billing/
 [12]: https://app.datadoghq.com/release-notes/fleet-automation-is-now-generally-available
-[13]: https://docs.datadoghq.com/agent/fleet_automation
+[13]: /agent/fleet_automation
 [14]: /opentelemetry/integrations/datadog_extension/

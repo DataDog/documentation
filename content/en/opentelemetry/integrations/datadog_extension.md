@@ -15,22 +15,22 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-info">The Datadog Extension is in Preview and is subject to change.</div>
+<div class="alert alert-info">The Datadog Extension is in Preview.</div>
 
-The Datadog Extension enables OpenTelemetry Collector configuration and build information to be viewed in the Datadog Infrastructure Monitoring application. When configured with the [Datadog Exporter][1], this extension provides visibility into your collector fleet directly within the Datadog UI.
+The Datadog Extension allows you to view OpenTelemetry Collector configuration and build information directly within Datadog on the [Infrastructure List][2] and [Resource Catalog][3]. When used with the [Datadog Exporter][1], this extension gives you visibility into your Collector fleet without leaving the Datadog UI.
 
 {{< img src="/opentelemetry/integrations/datadog_extension_hostlist.png" alt="OpenTelemetry Collector configuration shown in Datadog Host List" style="width:100%;" >}}
 
-## Key Features
+## Key features
 
-- **Collector Configuration Visibility**: View complete collector configuration in the Infrastructure List and Resource Catalog
-- **Build Information**: Display collector version, build details, and component information
-- **Fleet Management**: Monitor and manage your OpenTelemetry Collector fleet from the Datadog UI
-- **Local Inspection**: HTTP server endpoint for local debugging and configuration inspection
+- **Collector Configuration Visibility**: View the complete configuration for any Collector in your infrastructure.
+- **Build Information**: See Collector version, build details, and component information.
+- **Fleet Management**: Monitor and manage your OpenTelemetry Collector fleet from the Datadog UI.
+- **Local Inspection Endpoint**: Use an HTTP endpoint for local debugging and configuration verification.
 
 ## Setup
 
-### 1. Add the Datadog Extension to your collector configuration
+### 1. Add the Datadog Extension to your Collector configuration
 
 Configure the Datadog Extension in your OpenTelemetry Collector configuration file:
 
@@ -40,7 +40,7 @@ extensions:
     api:
       key: ${env:DD_API_KEY}
       site: {{< region-param key="dd_site" >}}
-    hostname: "my-collector-host"  # Optional: must match Datadog Exporter hostname if set
+    # hostname: "my-collector-host"  # Optional: must match Datadog Exporter hostname if set
 
 service:
   extensions: [datadog]
@@ -48,7 +48,7 @@ service:
 
 ### 2. Configure the Datadog Exporter
 
-Ensure your collector is also configured with the Datadog Exporter:
+This feature requires the Datadog Exporter to be configured and enabled in an active pipeline (`traces` or `metrics`). The extension uses the exporter's telemetry to associate the Collector's configuration with a specific host in Datadog.
 
 ```yaml
 exporters:
@@ -56,7 +56,7 @@ exporters:
     api:
       key: ${env:DD_API_KEY}
       site: {{< region-param key="dd_site" >}}
-    hostname: "my-collector-host"  # Optional: must match Datadog Extension hostname if set
+    # hostname: "my-collector-host"  # Optional: must match Datadog Extension hostname if set
 ```
 
 ### 3. Enable the extension in your service configuration
@@ -77,12 +77,12 @@ service:
       exporters: [datadog/exporter]
 ```
 
-## Configuration Options
+## Configuration options
 
 | Parameter | Description | Default |
 |-----------|-------------|---------|
 | `api.key` | Datadog API key (required) | - |
-| `api.site` | Datadog site (e.g., `us5.datadoghq.com`) | `datadoghq.com` |
+| `api.site` | Datadog site (for example, `us5.datadoghq.com`) | `datadoghq.com` |
 | `hostname` | Custom hostname for the collector | Auto-detected |
 | `http.endpoint` | Local HTTP server endpoint | `localhost:9875` |
 | `http.path` | HTTP server path for metadata | `/metadata` |
@@ -90,7 +90,10 @@ service:
 | `timeout` | Timeout for HTTP requests | `30s` |
 | `tls.insecure_skip_verify` | Skip TLS certificate verification | `false` |
 
-### Complete Configuration Example
+<div class="alert alert-warning">
+<strong>Hostname Matching</strong>: If you specify a custom <code>hostname</code> in the Datadog Extension, it <strong>must</strong> match the <code>hostname</code> value in the Datadog Exporter configuration. The Datadog Extension does not have access to pipeline telemetry and cannot infer hostnames from incoming spans. It only obtains hostnames from system/cloud provider APIs or manual configuration. If telemetry has different <a href="/opentelemetry/config/hostname_tagging/?tab=host">hostname attributes</a> than the hostname reported by the extension, the telemetry will not be correlated to the correct host, and you may see duplicate hosts in Datadog.
+</div>
+### Complete configuration example
 
 ```yaml
 extensions:
@@ -127,25 +130,24 @@ service:
       exporters: [datadog/exporter]
 ```
 
-## Viewing Collector Configuration
+## Viewing Collector configuration
 
 Once configured, you can view your OpenTelemetry Collector configuration and build information in two locations:
 
 ### Infrastructure List (Host List)
 
-1. Navigate to **Infrastructure > Hosts** in your Datadog account
-2. Click on any host running the OpenTelemetry Collector (note: filtering by `field:apps:otel` will show only collector instances)
-3. In the host details panel, select the **OTel Collector** tab
-4. View the build info and full collector configuration
+1. Navigate to **[Infrastructure > Hosts][2]** in your Datadog account.
+2. Click on any host running the OpenTelemetry Collector (**Note**: Filter by `field:apps:otel` to only show Collector instances).
+3. In the host details panel, select the **OTel Collector** tab to see build info and full Collector configuration.
 
 ### Resource Catalog
 
-1. Navigate to **Infrastructure > Resource Catalog** in your Datadog account
-2. Filter for hosts or search for your collector instances
-3. Click on any host running the OpenTelemetry Collector
-4. Scroll down to **Collector** to view build info and full configuration
+1. Navigate to **[Infrastructure > Resource Catalog][3]** in your Datadog account
+2. Filter for hosts or search for your Collector instances.
+3. Click on any host running the OpenTelemetry Collector.
+4. Scroll down to **Collector** to view build info and full configuration.
 
-## Local HTTP Server
+## Local HTTP server
 
 The Datadog Extension includes a local HTTP server for debugging and inspection:
 
@@ -160,33 +162,25 @@ This endpoint provides:
 - Active component list
 - Extension status
 
-## Important Notes
-
-<div class="alert alert-warning">
-<strong>Hostname Matching</strong>: If you specify a custom <code>hostname</code> in the Datadog Extension, it must match the <code>hostname</code> value in the Datadog Exporter configuration. If left unset in both components, the auto-detected hostname will match correctly. It should also match any <a href="/opentelemetry/config/hostname_tagging/?tab=host">hostname telemetry resource attributes</a> on telemetry received by the Exporter to ensure full correlation throughout the Datadog application.
-</div>
-
-<div class="alert alert-info">
-<strong>Pipeline Configuration</strong>: For OpenTelemetry Collectors to appear in the Infrastructure List and Resource Catalog, the <a href="/opentelemetry/setup/collector_exporter/">Datadog Exporter</a> must be configured in either the traces pipeline, the metrics pipeline, or both. A future update to the Datadog Exporter will enable compatibility between the Datadog Extension and logs-only OpenTelemetry Collector deployments.
-</div>
-
 ## Troubleshooting
 
-### Configuration Not Appearing
+### Configuration not appearing in Datadog
 
-1. **Check hostname matching**: Ensure hostnames match between Datadog Extension and Datadog Exporter
-2. **Verify API key**: Confirm the API key is valid and has appropriate permissions
-3. **Check collector logs**: Look for extension initialization and data submission logs
-4. **Confirm extension is enabled**: Verify the extension is listed in the service configuration
+1. **Check hostname matching**: Ensure hostnames match between the Datadog Extension and Datadog Exporter.
+2. **Verify API key**: Confirm the API key is valid and has appropriate permissions.
+3. **Check Collector logs**: Look for extension initialization and data submission logs.
+4. **Confirm extension is enabled**: Verify the extension is listed in the service configuration.
 
-### HTTP Server Issues
+### HTTP server issues
 
-1. **Port conflicts**: Ensure port 9875 is available or configure a different port
-2. **Network access**: Verify the HTTP server is accessible from your debug location
-3. **Check logs**: Review extension logs for HTTP server startup issues
+1. **Port conflicts**: Ensure port 9875 is available or configure a different port.
+2. **Network access**: Verify the HTTP server is accessible from your debug location.
+3. **Check logs**: Review extension logs for HTTP server startup issues.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
+[2]: https://app.datadoghq.com/infrastructure
+[3]: https://app.datadoghq.com/infrastructure/catalog
