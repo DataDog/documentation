@@ -5,12 +5,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-apis-with-datadog/"
   tag: "Blog"
   text: "Monitor your workflows with Datadog multistep API tests"
-- link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
-  tag: 'Learning Center'
-  text: 'Introduction to Synthetic Tests'
-- link: "/getting_started/synthetics/api_test"
-  tag: "Documentation"
-  text: "Get started with API tests"
+- link: "/synthetics/guide/version_history/"
+  tag: "Guide"
+  text: "Version History for Synthetic Monitoring"
 - link: "/synthetics/private_locations"
   tag: "Documentation"
   text: "Run Multistep API tests on internal endpoints"
