@@ -23,7 +23,7 @@ Use this page to create a rule, edit an existing rule, or click on a rule to inv
 
 ## Search for rules
 
-To see your PR gate rules, navigate to [**Software Delivery** > **PR Gates** > **PR Gate Rules**][1].
+To see your PR Gate rules, navigate to [**Software Delivery** > **PR Gates** > **PR Gate Rules**][1].
 
 You can filter the page by rule name to see the rules you're most concerned with. Click on a rule to investigate details that show, for example, what commit might have introduced a performance regression or build error. 
 

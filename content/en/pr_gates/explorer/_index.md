@@ -1,6 +1,6 @@
 ---
 title: PR Gates Explorer
-description: Learn about the PR Gates Explorer for PR gates and rule executions.
+description: Learn about the PR Gates Explorer for PR Gates and rule executions.
 aliases:
   - /continuous_integration/quality_gates/
   - /quality_gates/explorer/
@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-The PR Gates Explorer allows you to [search and filter](#search-and-filter), [visualize](#visualize), and [export](#export) PR gates or rule executions at multiple levels using any tag.
+The PR Gates Explorer allows you to [search and filter](#search-and-filter), [visualize](#visualize), and [export](#export) PR Gates or rule executions at multiple levels using any tag.
 
 {{< tabs >}}
 {{% tab "Gates" %}}
@@ -32,12 +32,12 @@ The **PR Gates** panel on the left lists default facets you can use to search fo
 
 | Facet           | Description                                                   |
 |-----------------|---------------------------------------------------------------|
-| Status       | The PR gate status: `Passed` or `Failed`.                   |
+| Status       | The PR Gate status: `Passed` or `Failed`.                   |
 | Gate ID      | The ID of the PR gate.                                      |
 
 ## PR Gate details
 
-You can see aggregated data about PR gates over the selected time frame. Use the search field and facets to filter the list to show the gates you want to investigate.
+You can see aggregated data about PR Gates over the selected time frame. Use the search field and facets to filter the list to show the gates you want to investigate.
 
 ### PR Gate data
 
@@ -58,12 +58,12 @@ The **PR Gates** panel on the left lists default facets you can use to search fo
 
 | Facet           | Description                                                   |
 |-----------------|---------------------------------------------------------------|
-| Status       | The PR gate status: `Passed` or `Failed`.                   |
+| Status       | The PR Gate status: `Passed` or `Failed`.                   |
 | Rule Name    | The user-given name to identify a particular rule.                                    |
 | Blocking Status | Determines whether or not the rule status will cause the CI workflow to fail: `true` or `false`.   |
-| Creator      | The user who created the PR gate rule.                                 |
+| Creator      | The user who created the PR Gate rule.                                 |
 | Data Source  | The source of data being evaluated for the rule (tests, static analysis).                             |
-| Gate ID      | The ID of the PR gate.                                      |
+| Gate ID      | The ID of the PR Gate.                                      |
 
 ## Rule executions details
 
@@ -82,14 +82,14 @@ PR Gate rules data is available in [dashboards][102] and [notebooks][103], enabl
 
 ## Search and filter
 
-You can narrow down, broaden, or shift your focus on a subset of PR gates or rule executions by clicking on the facets to the left or writing your own custom query in the search bar. When you select and deselect facets, the search bar automatically reflects your changes. Similarly, you can modify the search bar query or write a query from scratch.
+You can narrow down, broaden, or shift your focus on a subset of PR Gates or rule executions by clicking on the facets to the left or writing your own custom query in the search bar. When you select and deselect facets, the search bar automatically reflects your changes. Similarly, you can modify the search bar query or write a query from scratch.
 
-- To learn how to search for PR gate rules, see [Search and Manage][1].
+- To learn how to search for PR Gate rules, see [Search and Manage][1].
 - To learn how to create queries, see [Search Syntax][2].
 
 ## Analyze
 
-Group PR gates or rule executions into higher-level fields, patterns, and transactions to derive or consolidate information. You do not need to create a facet in order to search for an attribute. Use [facets][3] to:
+Group PR Gates or rule executions into higher-level fields, patterns, and transactions to derive or consolidate information. You do not need to create a facet in order to search for an attribute. Use [facets][3] to:
 
 - **Identify trends and patterns in PR Gate executions**: Understand which repositories or pipelines are being blocked most often.
 - **Identify trends and patterns in PR Gate Rule executions**: Understand which types of rules are failing most often across the organization.

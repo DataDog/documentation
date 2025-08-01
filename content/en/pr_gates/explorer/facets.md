@@ -24,7 +24,7 @@ PR Gates is in Preview.
 
 Facets are user-defined tags and attributes from your rules or executions. They are useful for both [qualitative](#qualitative-facets) and [quantitative](#quantitative-measures) data analysis. Facets allow you to manipulate your rules or executions in search queries that appear on [dashboards][2] and in [notebooks][3].
 
-[Creating facets](#creating-facets) is **not required** for [searching PR gates][5]. Autocomplete capabilities use existing facets, but also any input that matches incoming PR gates applies.
+[Creating facets](#creating-facets) is **not required** for [searching PR Gates][5]. Autocomplete capabilities use existing facets, but also any input that matches incoming PR Gates applies.
 
 The [PR Gates Explorer][4] includes out-of-the-box facets such as `Status` and `Gate ID`. You can use facets in the PR Gates Explorer to [search for and filter your PR gates][5].
 
@@ -34,7 +34,7 @@ Use qualitative facets to:
 
 - **Get relative insights** for values.
 - **Count unique values**.
-- Frequently **filter** your PR gates against particular values. For example, create a facet on an environment tag to scope troubleshooting down to development, staging, or production environments.<br>
+- Frequently **filter** your PR Gates against particular values. For example, create a facet on an environment tag to scope troubleshooting down to development, staging, or production environments.<br>
 
 **Note:** Although facets are not required for filtering on tags, defining facets for tags that you often use during investigations can help reduce your time to resolution.
 
@@ -42,9 +42,9 @@ Use qualitative facets to:
 
 Use quantitative measures to:
 
-- **Aggregate** values from multiple PR gates.
-- **Range filter** your PR gates.
-- **Sort** your PR gates against a value.
+- **Aggregate** values from multiple PR Gates.
+- **Range filter** your PR Gates.
+- **Sort** your PR Gates against a value.
 
 #### Types
 
@@ -80,7 +80,7 @@ You can create a facet directly from the facet panel by clicking **+ Add**.
 
 Define the underlying field (key) name for this facet:
 
-- Use the attribute path for PR gate attributes, with `@` prefix.
+- Use the attribute path for PR Gate attributes, with `@` prefix.
 
 Autocomplete based on the content in PR gates of the current views helps you to define the proper field name, but you can use virtually any value here.
 

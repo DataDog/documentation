@@ -104,7 +104,7 @@ To search for PR Gate rules, see the [Search and Manage documentation][5].
 
 ## Analyze executions in the PR Gates Explorer
 
-You can search and filter for PR gates or rule executions, create visualizations, and export saved views of your search query on the [**PR Gates Executions** page][14].
+You can search and filter for PR Gates or rule executions, create visualizations, and export saved views of your search query on the [**PR Gates Executions** page][14].
 
 {{< tabs >}}
 {{% tab "Gates" %}}
