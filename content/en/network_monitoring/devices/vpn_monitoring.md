@@ -114,7 +114,7 @@ The following metrics are made available after enabling VPN monitoring:
 
 ## Troubleshooting
 
-If you experience issues using VPN monitoring, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][3].
+If you experience issues using VPN monitoring, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][6].
 
 ### VPN tunnels not displayed
 
