@@ -1,6 +1,8 @@
 ---
 title: Content Packs
 disable_toc: true
+aliases:
+  - /security/cloud_siem/content_packs
 further_reading:
 - link: "/security/cloud_siem/detection_rules"
   tag: "Documentation"
