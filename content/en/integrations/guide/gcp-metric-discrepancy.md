@@ -52,7 +52,7 @@ Datadog ingests the most granular raw values from Google Cloud. All aggregation 
    In most cases, after completing steps 1–4, you see the exact same values in both Google Cloud and Datadog. However, in our example, a discrepancy appears at 01:40:00 PM.
 
    - **Datadog**: 108.71ms 
-   - **GCP**: 0.0018119s
+   - **Google Cloud**: 0.0018119s
 
    {{< img src="integrations/guide/gcp-metric-discrepancy/gcp_value.png" alt="gcp value" >}}
 
