@@ -244,7 +244,6 @@ The Pydantic AI integration instruments the following methods:
   - `agent.Agent.run_stream`
 - Tool Calls made via [Function Tools][52] or [Toolsets][53]
   - `agent.ToolManager.handle_call`
-  - `tools.Tool.run`
 
 
 [1]: https://platform.openai.com/docs/api-reference/introduction
