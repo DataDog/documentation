@@ -45,7 +45,7 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 1. Enter a workspace name, your Databricks workspace URL, account ID, and the client ID and secret you generated.
    {{< img src="data_jobs/databricks/configure-workspace-form-m2m.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, account ID, client ID, and client secret." style="width:100%;" >}}
 1. For getting visibility on your Databricks costs in Data Jobs Monitoring, provide a System Tables SQL Warehouse ID.
-   - The warehouse must have access to system tables (e.g., system.billing.usage).
+   - The warehouse must have access to system tables (`system.billing.usage` for example).
    - Grant your Service Principal the required USAGE and SELECT permissions on:
       - The SQL Warehouse
       - The system catalog, schema, and tables
@@ -78,7 +78,7 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 1. Enter a workspace name, your Databricks workspace URL, and the Databricks token you generated.
    {{< img src="data_jobs/databricks/configure-workspace-form.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, and API token." style="width:100%;" >}}
 1. For getting visibility on your Databricks costs in Data Jobs Monitoring, provide a System Tables SQL Warehouse ID.
-   - The warehouse must have access to system tables (e.g., system.billing.usage).
+   - The warehouse must have access to system tables (`system.billing.usage` for example).
    - Grant your PAT user the required USAGE and SELECT permissions on:
       - The SQL Warehouse
       - The system catalog, schema, and tables
