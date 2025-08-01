@@ -63,7 +63,8 @@ Granular access controls are available for the following On-Call resources:
 To restrict access to an On-Call resource:
 
 1. Navigate to the specific On-Call resource (schedule, escalation policy, or team routing rules).
-1. Click the **Permissions** icon.
+1. Click **Manage**.
+1. Select **Permissions** from the dropdown menu.
 1. Click **Restrict Access**.
 1. Select one or more roles, teams, or users from the dropdown menu.
 1. Click **Add**.
