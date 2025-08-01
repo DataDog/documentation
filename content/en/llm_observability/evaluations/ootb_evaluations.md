@@ -260,7 +260,7 @@ This check evaluates each input prompt from the user and the response from the L
 | Evaluated on Input and Output | Evaluated using LLM | Toxicity flags any language or behavior that is harmful, offensive, or inappropriate, including but not limited to hate speech, harassment, threats, and other forms of harmful communication. |
 
 ##### Toxicity configuration
-Users can configure this evaluation by selecting specific subcategories to be surfaced as toxicity. This feature is only available if OpenAI or Azure OpenAI is selected as the LLM provider.
+Users can configure this evaluation by selecting specific subcategories to be surfaced as toxicity. This feature is only available if OpenAI or Azure OpenAI is selected as the LLM provider. The enriched categories provided and the descriptions of these categories was informed by the Responsible AI literature in the space including the following works: [Banko et al. (2020)][14], [Inan et al. (2023)][15], [Ghosh et al. (2024)][16], [Zheng et al. (2024)][17].
 
 | Configuration Option | Description | Example(s) |
 |---|---|---|
@@ -320,3 +320,7 @@ This check ensures that sensitive information is handled appropriately and secur
 [11]: https://learnprompting.org/docs/prompt_hacking/offensive_measures/context-switching
 [12]: https://atlas.mitre.org/techniques/AML.T0054
 [13]: https://genai.owasp.org/llmrisk/llm01-prompt-injection/
+[14]: https://aclanthology.org/2020.alw-1.16.pdf
+[15]: https://arxiv.org/pdf/2312.06674
+[16]: https://arxiv.org/pdf/2404.05993
+[17]: https://arxiv.org/pdf/2309.11998
