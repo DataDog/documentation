@@ -116,7 +116,7 @@ By default, the DDOT Collector ships with the following Collector components. Yo
 {{% collapse-content title="Connectors" level="p" %}}
 
 - [datadogconnector][44]
-- [routingconnector][56]
+- [routingconnector][56] (available since version 7.68.0)
 - [spanmetricsconnector][45]
 
 {{% /collapse-content %}}
