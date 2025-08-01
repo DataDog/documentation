@@ -47,6 +47,7 @@ Gain insights into your containerized environments and host systems:
 
 - [Docker Metrics][5] - Monitor Docker container performance
 - [Host Metrics][6] - Track system metrics such as CPU, disk, and memory usage
+- [Kuberentes Metrics][17] - Monitor Kubernetes cluster health and performance
 - [Podman Metrics][16] - Monitor Podman container performance
 
 ### Web servers and proxies
@@ -91,3 +92,4 @@ Monitor big data processing frameworks:
 [14]: /opentelemetry/mapping/metrics_mapping/#metrics-mappings
 [15]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/dockerstatsreceiver/metadata.yaml
 [16]: /opentelemetry/integrations/podman_metrics/
+[17]: /opentelemetry/integrations/kubernetes_metrics/
