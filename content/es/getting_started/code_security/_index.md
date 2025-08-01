@@ -44,7 +44,7 @@ Instala los [complementos IDE de Datadog][5] para ejecutar análisis de Static C
 Para empezar a ejecutar análisis de código en tu IDE, consulta la documentación correspondiente al editor de código de tu elección.
 
 {{< whatsnext desc="Consulta la documentación para ver información sobre las siguientes integraciones:">}}
-    {{< nextlink href="developers/ide_plugins/idea/#static-analysis" >}}<u>IDE de JetBrains</u>: IntelliJ IDEA, GoLand, PhpStorm, and PyCharm{{< /nextlink >}}
+    {{< nextlink href="developers/ide_plugins/idea/#static-analysis" >}}<u>IDE de JetBrains</u>: IntelliJ IDEA, GoLand, PyCharm, WebStorm y PhpStorm{{< /nextlink >}}
     {{< nextlink href="developers/ide_plugins/vscode/#static-analysis" >}}<u>Visual Studio Code</u>{{< /nextlink >}}
     {{< nextlink href="developers/ide_plugins/visual_studio/#static-analysis" >}}<u>Visual Studio</u>{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -60,7 +60,7 @@ Datadog proporciona [Puertas de calidad][6] como una funcionalidad de la platafo
 
 Code Security ofrece **vistas centradas en las vulnerabilidades** de todas las vulnerabilidades de biblioteca y código detectadas, tanto a partir del análisis estático de repositorios como de la detección de servicios en tiempo de ejecución.
 
-### Explorar vulnerabilidades 
+### Explorar las vulnerabilidades
 
 Para las vulnerabilidades de biblioteca, cada fila de la tabla representa una vulnerabilidad específica que afecta a una versión de biblioteca. En función de si tienes activada la detección estática o en tiempo de ejecución, la columna **Detectado en** muestra los repositorios o servicios específicos afectados por esta vulnerabilidad.
 
@@ -72,7 +72,7 @@ En el panel lateral de una única vulnerabilidad de biblioteca en SCA, además d
 
  La gravedad se puntúa de la siguiente manera:
 | Puntuación CVSS    | Calificación cualitativa
-| --------------| -------------------|  
+| --------------| -------------------|
 |   `0.0`         | Sin gravedad                |
 |   `0.1 - 3.9`   | Baja                 |
 |   `4.0 - 6.9`   | Media              |
@@ -127,7 +127,7 @@ Puedes acceder a los informes sobre vulnerabilidades y localizar los archivos fu
 {{% /tab %}}
 {{< /tabs >}}
 
-## Notificar, corregir e informar 
+## Notificar, corregir e informar
 
 Code Security te ayuda a configurar flujos de trabajo para realizar un seguimiento y gestionar la corrección de los hallazgos:
 
@@ -135,6 +135,7 @@ Code Security te ayuda a configurar flujos de trabajo para realizar un seguimien
 - Haz un seguimiento de las vulnerabilidades por servicio y por equipo en la página **Resumen de Code Security**.
 
 ## Vincular resultados a servicios y equipos de Datadog
+
 ### Vincular resultados a servicios
 Datadog asocia los resultados del análisis del código y de la biblioteca con los servicios pertinentes mediante los siguientes mecanismos:
 
@@ -189,9 +190,9 @@ Datadog asocia automáticamente el equipo adjunto a un servicio cuando se detect
 está asociado a `myservice`, entonces el equipo `myservice` se asociará a cualquier infracción 
 detectada en este archivo.
 
-Si no se encuentran servicios o equipos, Datadog utiliza el archivo `CODEOWNERS` de tu repositorio. El archivo `CODEOWNERS` determina a qué equipo pertenece un archivo en tu proveedor Git. 
+Si no se encuentra ningún servicio o equipo, Datadog utiliza el archivo `CODEOWNERS` de tu repositorio. El archivo `CODEOWNERS` determina a qué equipo pertenece un archivo en tu proveedor Git.
 
-**Nota**: Para que esta característica funcione correctamente, debes asignar con precisión tus equipos de proveedores Git a tus [equipos de Datadog][10].
+**Nota**: Para que esta característica funcione correctamente, debes [asignar con precisión][13] tus equipos de proveedores Git a tus [equipos de Datadog][10].
 
 [1]: /es/security/code_security/software_composition_analysis/
 [2]: /es/security/code_security/dev_tool_int/github_pull_requests/
@@ -205,3 +206,4 @@ Si no se encuentran servicios o equipos, Datadog utiliza el archivo `CODEOWNERS`
 [10]: /es/account_management/teams/
 [11]: /es/security/code_security/static_analysis/setup/#customize-your-configuration
 [12]: https://docs.datadoghq.com/es/software_catalog/service_definitions/v3-0/
+[13]: /es/integrations/github/#connect-github-teams-to-datadog-teams

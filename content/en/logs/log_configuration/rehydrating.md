@@ -83,7 +83,7 @@ Logs that have already been indexed remain queryable until the end of the retent
 
 Historical views remain in Datadog until they exceed the selected retention period, unless you choose to delete them earlier. To delete a historical view manually, select the delete icon at the far right of the view and confirm the action.
 
-The historical view is permanently deleted one hour after the deletion is initiated. Until then, the team can cancel the deletion.
+The historical view is permanently deleted one day after the deletion is initiated. Until then, the team can cancel the deletion.
 
 ### Viewing deleted historical views
 
