@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-VPN monitoring provides visibility into your devices VPN tunnels within Network Device Monitoring (NDM). This feature allows you to keep track of critical data and metrics to examine the health of your VPN tunnels.
+VPN monitoring provides visibility into your devices' VPN tunnels within Network Device Monitoring (NDM). This feature allows you to keep track of critical data and metrics to examine the health of your VPN tunnels.
 
 When configured, the SNMP check collects VPN tunnel data from your devices. This can be configured for individual as well as Autodiscovered devices.
 
