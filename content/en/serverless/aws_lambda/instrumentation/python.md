@@ -14,23 +14,22 @@ aliases:
     - /serverless/datadog_lambda_library/python/
     - /serverless/guide/python/
     - /serverless/installation/python
+    - /serverless/aws_lambda/instrumentation/python
 algolia:
   tags: ['python lambda traces']
 ---
 
-<div class="alert alert-warning">If your Python Lambda functions are written in <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 or less</a>, or you previously set up your Lambda functions using the Datadog Forwarder, see <a href="/serverless/guide/datadog_forwarder_python">instrumenting using the Datadog Forwarder</a>. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.</div>
+<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">Read more</a>.</div>
 
-<div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/configuration/proxy/">using a proxy</a> for all other sites.</div>
+## Setup
 
-<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
+### Remote instrumentation
 
-<div class="alert alert-info">Datadog provides FIPS-compliant monitoring for AWS Lambda functions. For GovCloud environments, the <code>DD_LAMBDA_FIPS_MODE</code> environment variable is enabled by default. When FIPS mode is enabled, AWS FIPS endpoints are used for Datadog API key lookups, and the Lambda metric helper function <code>lambda_metric</code> requires the FIPS-compliant extension for metric submission. While the FIPS-compliant Lambda components work with any Datadog site, end-to-end FIPS compliance requires using the US1-FED site. See <a href="/serverless/aws_lambda/fips-compliance">AWS Lambda FIPS Compliance</a> for more details.</div>
+If you are instrumenting your Python AWS Lambda application for the first time, Datadog recommends that you use remote instrumentation. See [Remote instrumentation for AWS Lambda][11].
 
-## Installation
+### Other instrumentation methods
 
-Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
-
-To use remote instrumentation, see See [Remote instrumentation for AWS Lambda][11].
+If your application is deployed as a container image, use the _Container Image_ method.
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -450,57 +449,26 @@ To configure Datadog using SST v3, follow these steps:
 
 ## Span Auto-linking
 
-When segments of your asynchronous requests cannot propagate trace context, Datadog's [Span Auto-linking][9] feature automatically detects linked spans. 
+
 
 ### Configure Auto-linking for DynamoDB PutItem
 
-To enable Span Auto-linking for [DynamoDB Change Streams][10]'s `PutItem` operation, configure primary key names for your tables.
 
-{{< tabs >}}
-{{% tab "Python" %}}
-```python
-ddtrace.config.botocore['dynamodb_primary_key_names_for_tables'] = {
-    'table_name': {'key1', 'key2'},
-    'other_table': {'other_key'},
-}
-```
-{{% /tab %}}
 
-{{% tab "Environment variable" %}}
-```sh
-export DD_BOTOCORE_DYNAMODB_TABLE_PRIMARY_KEYS='{
-    "table_name": ["key1", "key2"],
-    "other_table": ["other_key"]
-}'
-```
-{{% /tab %}}
-{{< /tabs >}}
+## FIPS compliance
 
-This enables DynamoDB `PutItem` calls to be instrumented with span pointers. Many DynamoDB API calls do not include the item's primary key fields as separate values, so they need to be provided to the tracer separately. This field is structured as a `dict` keyed by the table names as `str`. Each value is the set of primary key field names (as str) for the associated table. The set can have exactly one or two elements, depending on the table's primary key schema.
+{{% svl-lambda-fips %}}
 
-## Minimize cold start duration
-Version 67+ of [the Datadog Extension][7] is optimized to significantly reduce cold start duration.
+## AWS Lambda and VPC
 
-To use the optimized extension, disable App and API Protection (AAP), Continuous Profiler for Lambda, and OpenTelemetry based tracing. Set the following environment variables to `false`:
-
-- `DD_TRACE_OTEL_ENABLED`
-- `DD_PROFILING_ENABLED`
-- `DD_SERVERLESS_APPSEC_ENABLED`
-
-Enabling any of these features cause the extension to default back to the fully compatible older version of the extension. You can also force your extension to use the older version by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog encourages you to report any feedback or bugs by adding an [issue on GitHub][8] and tagging your issue with `version/next`.
+{{% svl-lambda-vpc %}}
 
 ## What's next?
 
-- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
-- Turn on [threat monitoring][6] to get alerted on attackers targeting your service.
-- See the sample code to [monitor custom business logic](#monitor-custom-business-logic)
-- See the [troubleshooting guide][2] if you have trouble collecting the telemetry
-- See the [advanced configurations][3] to
-    - connect your telemetry using tags
-    - collect telemetry for Amazon API Gateway, SQS, etc.
-    - capture the Lambda request and response payloads
-    - link errors of your Lambda functions to your source code
-    - filter or scrub sensitive information from logs or traces
+- Add custom tags to your telemetry by using the `DD_TAGS` environment variable
+- Configure [payload collection][12] to capture your functions' JSON request and response payloads
+- If you are using the Datadog Lambda Extension, turn off the Datadog Forwarder's Lambda logs
+- See [advanced configurations][3] for further capabilities
 
 ### Monitor custom business logic
 
@@ -555,3 +523,4 @@ def get_message():
 [9]: /serverless/aws_lambda/distributed_tracing/#span-auto-linking
 [10]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
 [11]: /serverless/aws_lambda/remote_instrumentation
+[12]: /serverless/aws_lambda/configuration?tab=datadogcli#collect-the-request-and-response-payloads
