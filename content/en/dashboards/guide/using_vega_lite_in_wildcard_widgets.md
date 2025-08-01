@@ -155,7 +155,7 @@ With Datadog widgets, you have the ability to click on a graph datapoint to open
 
 To enable the context menu feature, include the following parameters in your Vega-Lite configuration:
 
-```
+```json
 "params": [
   {
     "name": "datadogPointSelection",
@@ -164,7 +164,43 @@ To enable the context menu feature, include the following parameters in your Veg
 ]
 ```
 
-<div class="alert alert-info">If the graph contains the <code>layer</code> key, the param  must be added to one of the layer objects, not to the root of the spec. The reason for this is that anything that appears in the JSON root gets repeated in every layer. This breaks the widget internally because it's not allowed to have params with repeated names.</div>
+If the graph contains the `layer` key, the param  must be added to one of the layer objects, not to the root of the spec. This is because parameters at the root are applied to all layers, which can cause conflicts. To avoid this, give each layer a uniquely named parameter by prefixing it with`datadogPointSelection_`, such as`datadogPointSelection_squares` or`datadogPointSelection_circles`. For example:
+
+```json
+"layer": [
+  {
+    "mark": "line",
+    "encoding": {
+      "x": { "field": "_time", "type": "temporal" },
+      "y": { "field": "cpu", "type": "quantitative" },
+      "color": { "field": "host", "type": "nominal" },
+      "opacity": { "value": 0.4 }
+    },
+    "params": [
+      {
+        "name": "datadogPointSelection_lines",
+        "select": { "type": "point", "on": "click" }
+      }
+    ]
+  },
+  {
+    "mark": "point",
+    "encoding": {
+      "x": { "field": "_time", "type": "temporal" },
+      "y": { "field": "cpu", "type": "quantitative" },
+      "color": { "field": "host", "type": "nominal" },
+      "size": { "value": 50 }
+    },
+    "params": [
+      {
+        "name": "datadogPointSelection_circles",
+        "select": { "type": "point", "on": "click" }
+      }
+    ]
+  }
+],
+```
+
 
 After you enable this feature, you can click on datapoints in the widget to open a context menu. Use the graph context menu with the context links of the graph editor. Context links bridge dashboard widgets with other pages in Datadog, as well as the third-party applications you have integrated into your workflows. For more information, see [Context Links][9].
 
