@@ -1481,6 +1481,10 @@
     "description": "Get all aggregated connections.",
     "summary": "Get all aggregated connections"
   },
+  "GetAggregatedDns": {
+    "description": "Get all aggregated DNS traffic.",
+    "summary": "Get all aggregated DNS traffic"
+  },
   "CreateOnCallEscalationPolicy": {
     "description": "Create a new On-Call escalation policy",
     "summary": "Create On-Call escalation policy",
