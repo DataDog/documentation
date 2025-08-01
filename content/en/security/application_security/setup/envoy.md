@@ -107,6 +107,8 @@ The App and API Protection Envoy integration uses the Envoy external processing 
          ## Optional: Enable asynchronous mode analysis. Default is false.
          ## This mode will disable all blocking capabilities. The external processor should also be
          ## configured with the DD_SERVICE_EXTENSION_OBSERVABILITY_MODE environment variable.
+         ## Beware, there is no flow control implemented in Envoy
+         ## (cf https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_proc/v3/ext_proc.proto#envoy-v3-api-field-extensions-filters-http-ext-proc-v3-externalprocessor-observability-mode)
          #observability_mode: true
          ## Optional: When in asynchronous mode, the message_timeout is not used. This deferred
          ## timeout starts when the http request is finished, to let the External Processor
