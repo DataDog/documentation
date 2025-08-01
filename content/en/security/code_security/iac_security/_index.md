@@ -51,9 +51,9 @@ Click any finding to open a side panel that shows:
 
 You can create a bi-directional Jira ticket directly from any finding to track and remediate issues in your existing workflows. Ticket status remains synced between Datadog and Jira. For more information, see [Bidirectional ticket syncing with Jira][4].
 
-### Mark findings as false positives
+### Mute findings
 
-If you determine that a finding is a false positive, click **Mark as false positive** in the finding details panel. This hides the finding and excludes it from reporting. You can review or restore false positives at any time using the Status filter on the [Code Security Vulnerabilities][3] page.
+To suppress a finding, such as when it's a false positive or not relevant, click **Mute** in the finding details panel. This hides the finding and excludes it from reports. To restore a muted finding, click **Unmute** in the details panel. You can also filter by **Status** on the [Code Security Vulnerabilities][3] page to review muted findings.
 
 ## Next steps
 
