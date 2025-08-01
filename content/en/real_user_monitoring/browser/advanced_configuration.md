@@ -802,6 +802,152 @@ window.DD_RUM && window.DD_RUM.clearUser()
 {{% /tab %}}
 {{< /tabs >}}
 
+## Account
+
+To group users into different set, use the account concept.
+
+The following attributes are available:
+
+| Attribute      | Type   | Required | Description                                                |
+|----------------|--------|----------|------------------------------------------------------------|
+| `account.id`   | String | Yes      | Unique account identifier.                                 |
+| `account.name` | String | No       | Account friendly name, displayed by default in the RUM UI. |
+
+### Identify account
+
+`datadogRum.setAccount(<ACCOUNT_CONFIG_OBJECT>)`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.setAccount({
+    id: '1234',
+    name: 'My Company Name',
+    ...
+})
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setAccount({
+        id: '1234',
+        name: 'My Company Name',
+        ...
+    })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.setAccount({
+    id: '1234',
+    name: 'My Company Name',
+    ...
+})
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Access account
+
+`datadogRum.getAccount()`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.getAccount()
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.getAccount()
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.getAccount()
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Add/Override account property
+
+`datadogRum.setAccountProperty('<ACCOUNT_KEY>', <ACCOUNT_VALUE>)`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.setAccountProperty('name', 'My Company Name')
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setAccountProperty('name', 'My Company Name')
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.setAccountProperty('name', 'My Company Name')
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Remove account property
+
+`datadogRum.removeAccountProperty('<ACCOUNT_KEY>')`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.removeAccountProperty('name')
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.removeAccountProperty('name')
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.removeAccountProperty('name')
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### Clear account properties
+
+`datadogRum.clearAccount()`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.clearAccount()
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.clearAccount()
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.clearAccount()
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Sampling
 
 By default, no sampling is applied on the number of collected sessions. To apply a relative sampling (in percent) to the number of sessions collected, use the `sessionSampleRate` parameter when initializing RUM.

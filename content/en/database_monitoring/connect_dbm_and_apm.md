@@ -224,6 +224,8 @@ Enable the prepared statements tracing for Postgres using **one** of the followi
 
 **Note**: The prepared statements instrumentation overwrites the `Application` property with the text `_DD_overwritten_by_tracer`, and causes an extra round trip to the database. This additional round trip normally has a negligible impact on the SQL statement execution time.
 
+<div class="alert alert-warning">Enabling prepared statements tracing may cause increased connection pinning when using Amazon RDS Proxy, which reduces connection pooling efficiency. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy-pinning.html">Connection pinning on RDS Proxy</a>.</div>
+
 **Tracer versions below 1.44**:
 Prepared statements are not supported in `full` mode for Postgres and MySQL, and all JDBC API calls that use prepared statements are automatically downgraded to `service` mode. Since most Java SQL libraries use prepared statements by default, this means that **most** Java applications are only able to use `service` mode.
 
