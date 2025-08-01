@@ -102,7 +102,7 @@ The following metrics are made available after enabling VPN monitoring:
 
 | Metric Name                   | Description                                                                  |
 |-------------------------------|------------------------------------------------------------------------------|
-| snmp.cipSecTunActiveTime      | The duration the tunnel has been active in hundredths of seconds.            |
+| `snmp.cipSecTunActiveTime`      | The duration the tunnel has been active in hundredths of seconds.            |
 | snmp.cipSecTunHcInOctets      | The number of octets received by the tunnel.                                 |
 | snmp.cipSecTunHcOutOctets     | The number of octets sent by the tunnel.                                     |
 | snmp.cipSecTunInPkts          | The number of packets received by the tunnel.                                |
