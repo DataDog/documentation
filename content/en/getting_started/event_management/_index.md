@@ -24,7 +24,7 @@ Case triage and investigation begins in the Triage Inbox, where you can sort, fi
 
 1. Navigate to **Service Management** → **Event Management** → **Triage Inbox**.    
 2. Select a project from the left-hand panel to display out-of-the-box status views such as **Open**, **In Progress**, **Closed**, and **Archived**.   
-3. Use the display settings icon to choose between **split view** (for detailed case investigation) or **table view** (for bulk case review and column configuration). Customize your inbox ranking with the **Sort By** dropdown-options include **Priority**, **Created at**, or **Last Updated**. Click **Save** to re-use your customized inbox future use.
+3. Use the display settings icon to choose between **split view** (for detailed case investigation) or **table view** (for bulk case review and column configuration). Customize your inbox ranking with the **Sort By** dropdown-options include **Priority**, **Created at**, or **Last Updated**. Click **Save** to re-use your customized inbox for future use.
 5. Update the status, priority, and assignment directly on case cards during triage.  
 6. Maximize screen space by collapsing the left-hand case project panel and the Datadog navigation bar.  
 7. Hover over the case card **alert** count to preview correlated alerts.  
@@ -38,9 +38,9 @@ Now that you've learned how to triage and investigate cases, use these tools to 
 On the right hand split-view side panel, you can perform the following:
   
 - **Tag and comment**: Collaborate with teammates in the case timeline by tagging users and adding notes.
-- **Send notifications**: Alert stakeholders via Slack, Microsoft Teams, email, or webhooks.
+- **Send notifications**: Alert stakeholders with Slack, Microsoft Teams, email, or webhooks.
 - **Escalate issues**: Trigger an incident or page an on-call responder using [Incident Management][1], [On-Call][2], [Workflow Automation][3], or third-party tools.
-- **Sync with external tools**: Keep Jira and ServiceNow records in sync to ensure external stakeholders stay up to date.
+- **Sync with external tools**: Keep Jira and ServiceNow records in-sync to ensure external stakeholders stay up to date.
 
 ## Take Action
 
