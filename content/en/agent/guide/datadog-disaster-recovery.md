@@ -196,7 +196,7 @@ Using Remote Configuration is strongly recommended for a more seamless failover 
 **Telemetry**
 : This is data that is sent to the Datadog platform. For example `logs`, `metrics`, `traces`. 
 
-You can configure Dual shipping to both your primary and failover orgs by using Fleet Automation or making manual changes to your `datadog.yaml` file. Datadog recommend using Fleet Automation. 
+You can configure Dual shipping to both your primary and failover orgs by using Fleet Automation or making manual changes to your `datadog.yaml` file. Datadog recommends using Fleet Automation. 
 
 {{< tabs >}}
 {{% tab "Using Fleet Automation (recommended)" %}}
