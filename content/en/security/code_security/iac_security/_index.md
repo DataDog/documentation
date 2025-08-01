@@ -53,7 +53,15 @@ You can create a bi-directional Jira ticket directly from any finding to track a
 
 ### Mute findings
 
-To suppress a finding, such as when it's a false positive or not relevant, click **Mute** in the finding details panel. This hides the finding and excludes it from reports. To restore a muted finding, click **Unmute** in the details panel. You can also filter by **Status** on the [Code Security Vulnerabilities][3] page to review muted findings.
+To suppress a finding, click **Mute** in the finding details panel. This opens a muting workflow where you can choose how to mute the finding. Muting a finding hides it and excludes it from reports. You can also [configure dynamic muting rules][8] to mute findings based on criteria such as environment or service tags.
+
+To restore a muted finding, click **Unmute** in the details panel. You can also use the **Status** filter on the [Code Security Vulnerabilities][3] page to review muted findings.
+
+### Exclude specific rules, files, or resources
+
+You can configure exclusions to prevent certain findings from appearing in scan results. Exclusions can be based on rule ID, file path, resource type, severity, or tag.
+
+Exclusions are managed through a configuration file or inline comments in your IaC code. For supported formats and usage examples, see [Configure IaC Security Exclusions][7].
 
 ## Next steps
 
@@ -71,3 +79,5 @@ To suppress a finding, such as when it's a false positive or not relevant, click
 [4]: /security/ticketing_integrations#bidirectional-ticket-syncing-with-jira
 [5]: /security/code_security/dev_tool_int/github_pull_requests/
 [6]: https://app.datadoghq.com/ci/code-analysis?
+[7]: /security/code_security/iac_security/exclusions/?tab=yaml
+[8]: /security/automation_pipelines/mute
