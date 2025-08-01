@@ -44,10 +44,20 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 1. On the **Configure** tab, click **Add Databricks Workspace**.
 1. Enter a workspace name, your Databricks workspace URL, account ID, and the client ID and secret you generated.
    {{< img src="data_jobs/databricks/configure-workspace-form-m2m.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, account ID, client ID, and client secret." style="width:100%;" >}}
+1. For getting visibility on your Databricks costs in Data Jobs Monitoring, provide a System Tables SQL Warehouse ID.
+   - The warehouse must have access to system tables (e.g., system.billing.usage).
+   - Grant your Service Principal the required USAGE and SELECT permissions on:
+      - The SQL Warehouse
+      - The system catalog, schema, and tables
+   - The warehouse should be a Pro or Serverless SQL Warehouse. Classic warehouses are not supported. We recommend setting a 2XS size and configuring Auto Stop after 5–10 minutes.
+
+   See the Datadog [Cloud Cost Management][18] page for full details on the required permissions and setup steps.
 1. In the **Select products to set up integration** section, ensure that Data Jobs Monitoring is **Enabled**.
 1. In the **Datadog Agent Setup** section, choose either
     - [Managed by Datadog (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog installs and manages the Agent with a global init script in the workspace.
     - [Manually](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent): Follow the [instructions below](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent) to install and manage the init script for installing the Agent globally or on specific Databricks clusters.
+
+[18]: https://docs.datadoghq.com/cloud_cost_management/setup/saas_costs/?tab=databricks#configure-your-saas-accounts
 
 {{% /tab %}}
 
@@ -67,6 +77,14 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 1. On the **Configure** tab, click **Add Databricks Workspace**.
 1. Enter a workspace name, your Databricks workspace URL, and the Databricks token you generated.
    {{< img src="data_jobs/databricks/configure-workspace-form.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, and API token." style="width:100%;" >}}
+1. For getting visibility on your Databricks costs in Data Jobs Monitoring, provide a System Tables SQL Warehouse ID.
+   - The warehouse must have access to system tables (e.g., system.billing.usage).
+   - Grant your PAT user the required USAGE and SELECT permissions on:
+      - The SQL Warehouse
+      - The system catalog, schema, and tables
+   - The warehouse should be a Pro or Serverless SQL Warehouse. Classic warehouses are not supported. We recommend setting a 2XS size and configuring Auto Stop after 5–10 minutes.
+
+   See the Datadog [Cloud Cost Management][18] page for full details on the required permissions and setup steps.
 1. In the **Select products to set up integration** section, make sure the Data Jobs Monitoring product is **Enabled**.
 1. In the **Datadog Agent Setup** section, choose either
     - [Managed by Datadog (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog installs and manages the Agent with a global init script in the workspace.
@@ -76,6 +94,7 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 [10]: https://docs.databricks.com/en/admin/users-groups/service-principals.html#manage-personal-access-tokens-for-a-service-principal
 [11]: https://docs.databricks.com/en/admin/users-groups/service-principals.html#what-is-a-service-principal
 [17]: https://docs.databricks.com/aws/en/security/auth/entitlements#entitlements-overview
+[18]: https://docs.datadoghq.com/cloud_cost_management/setup/saas_costs/?tab=databricks#configure-your-saas-accounts
 
 {{% /tab %}}
 
@@ -83,7 +102,7 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 
 ### Install the Datadog Agent
 
-The Datadog Agent must be installed on Databricks clusters to monitor Databricks jobs that run on all-purpose or job clusters.
+The Datadog Agent must be installed on Databricks clusters to monitor Databricks jobs that run on all-purpose or job clusters. This step is not required to monitor jobs on [serverless compute][4].
 
 {{< tabs >}}
 {{% tab "Datadog managed global init script (Recommended)" %}}
@@ -129,6 +148,7 @@ Optionally, you can add tags to your Databricks cluster and Spark performance me
 [1]: /getting_started/tagging/
 [2]: https://docs.databricks.com/api/workspace/clusters/edit#spark_env_vars
 [3]: /agent/logs/advanced_log_collection/?tab=environmentvariable#global-processing-rules
+[4]: https://docs.databricks.com/aws/en/compute/serverless/
 
 {{% /tab %}}
 
