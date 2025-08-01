@@ -1,7 +1,7 @@
 ---
 title: Google Cloud Metric Discrepancy
 
-description: "Troubleshooting steps for the GCP metric discrepancy"
+description: "Troubleshooting steps for the Google Cloud metric discrepancy"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/google-cloud-platform/"
   tag: "Integration"
