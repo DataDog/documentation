@@ -1,12 +1,8 @@
 announcement_banner:
-  background_color: '#6300D4'
-  custom_classes: dash-announcement-banner
-  desktop_message: '<i class="icon-right-arrow-slim text-white"></i><span>NOW LIVE:
-    Datadog launches availability zone in Australia to support local data residency</span><span>Learn
-    More</span>'
-  external_link: https://www.datadoghq.com/about/latest-news/press-releases/datadog-launches-new-availability-zone-in-australia
-  icon_color: '#ffffff'
-  mobile_message: Datadog launches availability zone in Australia
+  desktop_message: Datadog named a Leader in the Gartner® Magic Quadrant™ for Observability
+    Platforms
+  external_link: https://www.datadoghq.com/resources/gartner-magic-quadrant-observability-platforms-2025/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-apm-ww-announcement-corpsite-announcement-gartnermq2025-obsplat
+  mobile_message: Leader in the Gartner® Magic Quadrant™
 disclaimer: Esta página aún no está disponible en español. Estamos trabajando en su
   traducción. <br> Si tienes alguna pregunta o comentario sobre nuestro actual proyecto
   de traducción, <a href="https://docs.datadoghq.com/fr/help/">no dudes en ponerte
