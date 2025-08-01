@@ -92,7 +92,7 @@ curl -v -H "Content-Type: application/json" -H
 "dd-api-key:${PRIMARY_DD_API_KEY}" -H 
 "dd-application-key:${PRIMARY_DD_APP_KEY}" --data "${CONNECTION}" --request POST ${PRIMARY_DD_API_URL}/api/v2/hamr
 ```
-After DDR is successfully set up, the DDR org will have a banner, but the primary org will have no such banner.
+After linking your orgs, the failover org will have a banner. The primary org will **not** have this banner.
 
 {{< img src="agent/guide/ddr/ddr-banner.png" alt="The DDR banner in the DDR org" >}}
 
@@ -133,7 +133,10 @@ Datadog can help copy the API key signatures for your Agents to the DDR backup a
 </div>
 {{% /collapse-content %}}
 
-{{% collapse-content title="Set up resource syncing on a schedule" level="h5" id="using-sync-cli-tool" %}}
+
+{{% collapse-content title="Set up resource syncing on a schedule" level="h5" id="syncing-data" %}}
+
+##### Using the datadog-sync-cli tool
 Use the [datadog-sync-cli][3] tool to copy your dashboards, monitors, and other configurations from your primary organization to your secondary organization. Regular syncing is essential to ensure that your secondary organization is up-to-date in the event of a disaster. 
 
 Datadog recommends performing this operation on a daily basis; you can determine the frequency and timing of syncing based on your business requirements. For information on setting up and running the backup process, see the [datadog-sync-cli README][5]. 
@@ -169,6 +172,9 @@ Verify that your DDR org is accessible and that your dashboards and monitors are
 
 Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datadog Support](https://www.datadoghq.com/support/) if you need assistance.
 
+
+[3]: https://github.com/DataDog/datadog-sync-cli
+[5]: https://github.com/DataDog/datadog-sync-cli/blob/main/README.md 
 {{% /collapse-content %}}
 
 
@@ -179,27 +185,61 @@ Contact your [Customer Success Manager](mailto:success@datadoghq.com) or [Datado
 Remote Configuration is enabled by default for new organizations, this includes your DDR org. Any new API keys you create is RC-enabled for use with your Agent. For more details, see the [Remote Configuration documentation][7].
 
 Using Remote Configuration is strongly recommended for a more seamless failover control. As an alternative to RC, you can manually configure your Agents or use configuration management tools such as Puppet, Ansible, or Chef.
-
 {{% /collapse-content %}}
+
+
+{{% collapse-content title="Dual Ship telemetry to DDR org during failover or drills" level="h5" %}}
+
+**Metadata**
+: This is data about the Agent and the infrstructure host. For example `host name`, `host tags`, `Agent version`
+
+**Telemetry**
+: This is data that is sent to the Datadog platform. For example `logs`, `metrics`, `traces`. 
+
+You can configure Dual shipping to both your primary and failover orgs by using Fleet Automation or making manual changes to your `datadog.yaml` file. Datadog recommend using Fleet Automation. 
+
+{{< tabs >}}
+{{% tab "Using Fleet Automation (recommended)" %}}
 
 <!-- FLEET AUTOMATION START -->
-{{% collapse-content title="Enable Fleet Automation [**RECOMMENDED]" level="h5" %}}
+##### Using Fleet Automation (recommended)
 
+From the [Fleet Automation][14] page in your failover org, you can create a new failover policy or reuse an existing one and apply it to your fleet of Agents. Soon after, Agents begin dual-shipping telemetry to both the primary and secondary(failover) observability sites. 
 
-[Remote configuration (RC)][7] allows you to remotely configure and change the behavior of Datadog Agents deployed in your infrastructure. 
+{{< img src="/agent/guide/ddr/ddr-fa-policy.png" alt="Manage DDR policies" style="width:80%;" >}}
 
-Remote Configuration is enabled by default for new organizations, this includes your DDR org. Any new API keys you create is RC-enabled for use with your Agent. For more details, see the [Remote Configuration documentation][7].
+1. First create a failover policy by scoping the hosts and telemetry (Metrics, Logs, Traces) that you are required to failover.
 
-Using Remote Configuration is strongly recommended for a more seamless failover control. As an alternative to RC, you can manually configure your Agents or use configuration management tools such as Puppet, Ansible, or Chef.
+{{< img src="/agent/guide/ddr/ddr-fa-policy-scope.png" alt="Scope the hosts and telemetry required to failover" style="width:80%;" >}}
 
-{{% /collapse-content %}}
+2. To trigger a failover of your Agents you can click on one of the policies in Fleet Automation and then click “Enable” . The status of each host will be updated as the failover occurs.
+
+{{< img src="/agent/guide/ddr/ddr-fa-policy-enable.png" alt="Enable the failover policy in the DDR org" style="width:80%;" >}}
+
+The failover overview page contains the status of DDR as well as the capability to failover Cloud Integrations. 
+
+<div class="alert alert-warning">
+Be aware that Cloud Integrations can only run in either your primary or secondary Datadog site, but not both at the same time, so failing them over will cease Cloud Integration data in your primary site.
+</div>
+
+{{< img src="/agent/guide/ddr/ddr-failover-main-page.png" alt="Enable the failover policy in the DDR org" style="width:80%;" >}}
+
 
 <!-- FLEET AUTOMATION END -->
+[14]: https://app.datadoghq.com/fleet
+{{% /tab %}}
 
-{{% collapse-content title="Update your Datadog Agent configuration" level="h5" %}}
-This step requires that you are on the Agent version **7.54 or higher**. 
+{{% tab "Manually" %}}
 
-Agent **v7.54+** has a new configuration for Disaster Recovery which enables Datadog Agents to also send telemetry to the configured DDR Datadog site after DDR failover is activated. The Agent dual ships telemetry to support customers conducting periodic disaster recovery exercises/drills. 
+Agent **v7.54+** has a new configuration for Disaster Recovery which enables Datadog Agents to also send telemetry to the configured DDR Datadog site after DDR failover is activated. 
+
+**This is disabled by default**, but can be enabled to support periodic disaster recovery exercises/drills. 
+
+
+<div class="alert alert-info">
+During the Preview period, Datadog recommends having <code>failover_metrics</code>, <code>failover_logs</code> and <code>failover_apm</code> set to <strong>false</strong> when not in failover. 
+</div>
+
 
 Update your Datadog Agent's `datadog.yaml` configuration file as shown in the example below and restart the Agent.
 
@@ -213,11 +253,15 @@ multi_region_failover:
   api_key: <DDR_SITE_API_KEY>
 ```
 
-Setting the **enabled** field to `true` allows the Agent to ship metadata to the DDR Datadog site, so you can view Agents and your Infra Hosts in the DDR org. Although you can see Agents and Hosts appear in the DDR org, the system does not receive telemetry unless DDR failover is activated.
+Setting the **enabled** field to `true` allows the Agent to send metadata to the DDR Datadog site. so you can view Agents and your Infra hosts in the DDR org. This allows you to see your  Agents and infrastructure hosts in the failover organization. 
 
-During the Preview period, Datadog recommends having `failover_metrics`, `failover_logs` and `failover_apm` set to **false** when in passive phases (when not in failover). 
+**Note**: Telemetry (Logs, metrics, and traces) are not sent to the failover site unless DDR failover is activated.
+
+
 
 Connect with your Datadog Customer Success Manager to schedule dedicated time windows for failover testing to measure performance and Recovery Time Objective (RTO).
+{{% /tab %}}
+{{< /tabs >}}
 {{% /collapse-content %}} <br>
 
 
@@ -318,3 +362,4 @@ During an integration failover, integrations run only in the DDR data center.
 [11]: /integrations/azure/
 [12]: /integrations/google-cloud-platform/?tab=organdfolderlevelprojectdiscovery#overview
 [13]: /agent/guide/datadog-disaster-recovery/?tab=agentinnoncontainerizedenvironments#cloud-integrations-failover
+[14]: https://app.datadoghq.com/fleet
