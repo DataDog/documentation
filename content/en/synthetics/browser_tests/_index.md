@@ -43,7 +43,7 @@ You may create a test using one of the following options:
        {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Video of Synthetics Browser Test landing page with templates" video="true" >}}
 
 ### Build a test from scratch
-    
+
   1. Click the **+** template to start a new Browser Test from scratch.
   1. Enter a **Starting URL**: The URL from which your browser test starts the scenario.
   1. Add a **name**: The name of your browser test.
@@ -225,6 +225,74 @@ You can switch tabs in a browser test recording in order to perform an action on
 
    Datadog recommends ending your browser test with an **[assertion][12]** to confirm the journey executed by the browser test resulted in the expected state.
 6. Once you have finished your scenario, click **Save and Launch Test**.
+
+## Step replay
+
+Step replay allows you to re-run one or more steps of your browser test directly from the Datadog Synthetic Monitoring Chrome extension. This feature helps you establish the correct state when adding or editing steps in the middle of a long test, so you don't need to manually replay the entire test from the beginning.
+
+<div class="alert alert-warning">
+  <p>The current version of the extension<strong> <span style="font-weight: bold;">does not have Chrome's debugger permission</span></strong>, as a result:</p>
+  <ul>
+    <li>Some advanced actions are <strong>not supported</strong>.</li>
+    <li>Certain steps (like <strong>click</strong> or <strong>hover</strong>) may behave <strong>differently</strong> than in a full Synthetic Monitoring test run.</li>
+    <li><strong>JavaScript-based assertions or extractions, keystroke simulations, and email interactions</strong> are <strong> unavailable</strong>.</li>
+  </ul>
+</div>
+
+### How to use step replay
+
+You can replay steps in three ways:
+
+<strong>1. Single step replay:</strong> Re-execute a single step:
+{{< img src="synthetics/browser_tests/recording__replay--replay-one-step.mp4" alt="Single Step Replay" video="true" height="400px" >}}
+<p style="text-align: center;"><em>Hover over the step, and click on the play button to replay only this step.</em></p>
+
+<strong>2. Replay all steps:</strong> Run the entire sequence of steps as defined in the recorder:
+{{< img src="synthetics/browser_tests/recording__replay--replay-all-steps.mp4" alt="Replay All Steps" video="true" height="400px" >}}
+<p style="text-align: center;"><em>Click on the replay all icon (⏩︎) on top of the step list to replay all steps.</em></p>
+
+<strong>3. Replay selected steps:</strong> Run a subset of steps you select in the step list:
+{{< img src="synthetics/browser_tests/recording__replay--replay-selected-steps.mp4" alt="Replay Selected Steps" video="true">}}
+<p style="text-align: center;"><em>Select the steps you want to replay then click on the replay selected icon (⏩︎) on top of the step list.</em></p>
+
+### Step replay feature support
+
+The following table summarizes which Browser Test step types are supported by step replay:
+
+| Step type                | Supported by Step Replay | Notes |
+|--------------------------|:------------------------:|-------|
+| Extract variable         | {{< X >}}                       |       |
+| Go to URL                | {{< X >}}                       |       |
+| Refresh                  | {{< X >}}                       |       |
+| Scroll                   | {{< X >}}                       |       |
+| Select option            | {{< X >}}                       |       |
+| Wait                     | {{< X >}}                       |       |
+| Assert checkbox state    | {{< X >}}                       |       |
+| Assert current URL       | {{< X >}}                       |       |
+| Assert element attribute | {{< X >}}                       |       |
+| Assert element content   | {{< X >}}                       |       |
+| Assert element present   | {{< X >}}                       |       |
+| Assert file download     | {{< X >}}                       |       |
+| Assert page contains     | {{< X >}}                       |       |
+| Assert page lacks        | {{< X >}}                       |       |
+| Click                    | {{< X >}}*                      | *Click steps are supported, but may behave differently than in a full Synthetic Monitoring test run. |
+| Hover                    | {{< X >}}*                      | *Hover steps are supported, but may behave differently than in a full Synthetic Monitoring test run. |
+
+### Step types not supported by step replay
+
+| Step type                | Supported by step replay |
+|--------------------------|:------------------------:|
+| Assert email             | Not supported            |
+| Assert requests          | Not supported            |
+| Extract from email body  | Not supported            |
+| Go to email link         | Not supported            |
+| Upload files             | Not supported            |
+| Assert natural language  | Not supported            |
+| Run API test             | Not supported            |
+| Assert from JavaScript   | Not supported            |
+| Extract from JavaScript  | Not supported            |
+| Press key                | Not supported            |
+| Type text                | Not supported            |
 
 ## Permissions
 
