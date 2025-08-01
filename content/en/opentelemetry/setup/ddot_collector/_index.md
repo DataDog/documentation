@@ -116,6 +116,7 @@ By default, the DDOT Collector ships with the following Collector components. Yo
 {{% collapse-content title="Connectors" level="p" %}}
 
 - [datadogconnector][44]
+- [routingconnector][56]
 - [spanmetricsconnector][45]
 
 {{% /collapse-content %}}
@@ -224,3 +225,4 @@ This guide helps you migrate from an existing OpenTelemetry Collector setup to t
 [53]: /containers/kubernetes/tag/?tab=datadogoperator#out-of-the-box-tags
 [54]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [55]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/loadbalancingexporter/README.md
+[56]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/routingconnector/README.md
