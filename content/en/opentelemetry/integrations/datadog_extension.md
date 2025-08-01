@@ -145,7 +145,7 @@ Once configured, you can view your OpenTelemetry Collector configuration and bui
 1. Navigate to **[Infrastructure > Resource Catalog][3]** in your Datadog account
 2. Filter for hosts or search for your Collector instances.
 3. Click on any host running the OpenTelemetry Collector.
-4. Scroll down to **Collector** to view build info and full configuration.
+4. Scroll down to **Collector** to see build info and full Collector configuration.
 
 ## Local HTTP server
 
