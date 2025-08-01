@@ -36,36 +36,33 @@ The following table presents the list of collected features and the minimal requ
 1. Configure the Google Cloud Cost Management integration on the [Cloud Cost Setup page][2].
 2. Enable BigQuery monitoring in your Google Cloud project. 
 [**Enable BigQuery monitoring here**][4]
-3. For reservation cost allocation, configure BigQuery reservations in your project.
+3. For reservation cost allocation, configure BigQuery reservations in your project. [**Learn about BigQuery reservations**][7]
 
 ## Allocating costs
 
-Cost allocation divides BigQuery costs from GCP into individual queries and workloads associated with them. These divided costs are enriched with tags from queries, projects, and reservations so you can break down costs by any associated dimensions. 
+### Compute allocation
 
-For reservation-based BigQuery costs, CCM allocates costs proportionally based on slot usage. Each query's cost is determined by its share of the total slot usage within the project's reservations. For example, if a query uses 25% of the total consumed slots in a project's reservation during a given period, it will be allocated 25% of that project's total reservation cost for that period. The cost per-query is calculated using the following formula:
+For BigQuery compute allocation, CCM handles two [**pricing models**][3]:
 
-```
-cost_per_query = (query_slot_usage / total_slot_usage) * total_project_reservation_cost
-```
+**On-demand pricing**:
+- Costs are directly attributed to individual queries based on bytes processed
+- Includes query-level tags for detailed cost attribution
 
-Where:
-- `query_slot_usage`: The number of slot-seconds consumed by an individual query
-- `total_slot_usage`: The total slot-seconds used across all queries in the project's reservations
-- `total_project_reservation_cost`: The total cost of the reservations in a given project for the time period
+**Reservation-based pricing**:
+- Costs of reserved slots are allocated proportionally to queries using those slots
+- Allocation based on slot consumption (`total_slot_ms`) per query
+- Includes idle cost calculation for unused reservation capacity
 
-Any difference between the total billed reservation cost and the sum of allocated query costs is categorized as a project's idle cost, representing unused reservation capacity. These costs are tagged with `allocated_spend_type:cluster_idle`, while actual query execution costs (both reservation and on-demand) are tagged with `allocated_spend_type:usage`. 
+[**Learn more about optimizing BigQuery performance and costs**][8]
 
-### Understanding idle costs
+### Compute
 
-Idle costs represent the portion of reservation capacity that was paid for but not utilized by queries. These costs arise when the reserved slot capacity exceeds actual usage during a billing period.
+Costs are allocated into the following spend types:
 
-**Idle slot sharing considerations**: If your organization has enabled idle slot sharing between reservations, the idle cost calculation may appear different than expected. When queries from one project use idle slots from another project's reservation, those slot costs are attributed as "free" rather than to the consuming project. This means:
-
-- A project's reservation may show higher idle costs if other projects are using its unused capacity
-- The original project pays full reservation costs regardless of cross-project usage
-- No automatic cost-transfer: Sharing projects don't pay the reservation owner for consumed idle slots
-
-[**Learn how to enable idle slot sharing for your reservations**][5]
+| Spend type | Description |
+|---|---|
+| `allocated_spend_type`: Usage | Cost of query execution based on bytes processed (on-demand) or slot consumption (reservation) |
+| `allocated_spend_type`: Cluster_idle | Cost of reserved slots allocated within a project but not utilized by queries|
 
 ### Query-level tag extraction
 
@@ -95,27 +92,34 @@ Additionally, CCM adds the following tags for cost analysis:
 | `google_location` | The specific Google Cloud region or zone where BigQuery resources are deployed (e.g., us-central1, europe-west1, asia-southeast1) |
 | `resource_name` | Full Google Cloud resource identifier |
 
-### Compute allocation
+### Query-level allocation
 
-For BigQuery compute allocation, CCM handles two [**pricing models**][3]:
+Cost allocation divides BigQuery costs from GCP into individual queries and workloads associated with them. These divided costs are enriched with tags from queries, projects, and reservations so you can break down costs by any associated dimensions. 
 
-**On-demand pricing**:
-- Costs are directly attributed to individual queries based on bytes processed
-- Includes query-level tags for detailed cost attribution
+For reservation-based BigQuery costs, CCM allocates costs proportionally based on slot usage. Each query's cost is determined by its share of the total slot usage within the project's reservations. For example, if a query uses 25% of the total consumed slots in a project's reservation during a given period, it will be allocated 25% of that project's total reservation cost for that period. The cost per-query is calculated using the following formula:
 
-**Reservation-based pricing**:
-- Costs of reserved slots are allocated proportionally to queries using those slots
-- Allocation based on slot consumption (`total_slot_ms`) per query
-- Includes idle cost calculation for unused reservation capacity
+```
+cost_per_query = (query_slot_usage / total_slot_usage) * total_project_reservation_cost
+```
 
-### Compute
+Where:
+- `query_slot_usage`: The number of slot-seconds consumed by an individual query
+- `total_slot_usage`: The total slot-seconds used across all queries in the project's reservations
+- `total_project_reservation_cost`: The total cost of the reservations in a given project for the time period
 
-Costs are allocated into the following spend types:
+Any difference between the total billed reservation cost and the sum of allocated query costs is categorized as a project's idle cost, representing unused reservation capacity. These costs are tagged with `allocated_spend_type:cluster_idle`, while actual query execution costs (both reservation and on-demand) are tagged with `allocated_spend_type:usage`. 
 
-| Spend type | Description |
-|---|---|
-| `allocated_spend_type`: Usage | Cost of query execution based on bytes processed (on-demand) or slot consumption (reservation) |
-| `allocated_spend_type`: Cluster_idle | Cost of reserved slots allocated within a project but not utilized by queries|
+### Understanding idle costs
+
+Idle costs represent the portion of reservation capacity that was paid for but not utilized by queries. These costs arise when the reserved slot capacity exceeds actual usage during a billing period.
+
+**Idle slot sharing considerations**: If your organization has enabled idle slot sharing between reservations, the idle cost calculation may appear different than expected. When queries from one project use idle slots from another project's reservation, those slot costs are attributed as "free" rather than to the consuming project. This means:
+
+- A project's reservation may show higher idle costs if other projects are using its unused capacity
+- The original project pays full reservation costs regardless of cross-project usage
+- No automatic cost-transfer: Sharing projects don't pay the reservation owner for consumed idle slots
+
+[**Learn how to enable idle slot sharing for your reservations**][5]
 
 ### Storage
 
@@ -126,8 +130,10 @@ Storage costs are categorized as:
 | `google_usage_type`: Active Logical Storage | Includes any table or table partition that has been modified in the last 90 days |
 | `google_usage_type`: Long Term Logical Storage | Includes any table or table partition that has not been modified for 90 consecutive days. The price of storage for that table automatically drops by approximately 50%. There is no difference in performance, durability, or availability between active and long-term storage |
 
+[**Learn about BigQuery storage best practices**][9]
+
 ## Further reading
- 
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboard/ecm-es8-agw/bigquery-allocation
@@ -136,3 +142,6 @@ Storage costs are categorized as:
 [4]: https://docs.datadoghq.com/integrations/google-cloud-bigquery/
 [5]: https://cloud.google.com/bigquery/docs/reservations-tasks
 [6]: https://console.cloud.google.com
+[7]: https://cloud.google.com/bigquery/docs/reservations-intro
+[8]: https://cloud.google.com/bigquery/docs/best-practices-performance-overview
+[9]: https://cloud.google.com/bigquery/docs/best-practices-storage
