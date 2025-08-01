@@ -144,7 +144,7 @@ Azure exports cost data starting from the month you created the export. You can 
     4. Set End to 06-30-2025 **Note:** This must be the last day of the month.
     5. Save the export **Note:** This automatically runs the export
     6. Wait for the export to finish running
-3. Revert both the **actual** and **amortized** exports to their original state to resume daily exports
+1. Revert both the **actual** and **amortized** exports to their original state to resume daily exports:
     1. Edit the Export
     2. Change Export Type to "Daily export of month-to-date costs"
     3. Save the export
