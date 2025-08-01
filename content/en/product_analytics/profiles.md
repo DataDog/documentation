@@ -30,7 +30,7 @@ The [User Profiles][7] page lists the users who are interacting with your applic
 
 {{< img src="product_analytics/user_profile2ui.png" alt="A view of the User profiles page." style="width:80%;" >}}
 
-Each profile has attributes to help you better segment your users. You can conduct a full-text search or sort and filter based on any of these attributes. You can also customize this page with attributes relevant to your analytic needs. See the [Custom Attributes section](#use-custom-attributes-to-enrich-your-profiles) to learn how.  
+Each profile has attributes to help you better segment your users. You can conduct a full-text search or sort and filter based on any of these attributes. You can also customize this page with attributes relevant to your analytic needs. See the [Custom Attributes section](#use-custom-attributes-to-enrich-profiles) to learn how.  
 
 
 {{% collapse-content title="List of user profile attributes" level="h5" expanded=true id="id-for-anchoring" %}}
@@ -144,7 +144,7 @@ You can customize the Account Profiles page to include additional attributes, gi
 
 ### How to configure custom attributes using integrations 
 
-Use integrations to automatically import custom attribute data into profiles. This data is synced on a regular schedule, reflecting the latest values from the source system to ensure that profiles remain up-to-date and accurate.
+Use integrations or reference tables to automatically import custom attribute data into profiles. This data is synced on a regular schedule, reflecting the latest values from the source system to ensure that profiles remain up-to-date and accurate.
 
 On the [Integrations page][4], you can explore the integrations that are compatible with custom attributes.
 
@@ -152,7 +152,7 @@ On this same page, you can select the [Custom Attributes][5] tab to view importe
 
 {{< img src="product_analytics/integration_page3.png" alt="See the integrations that are compatible with Product Analytics." style="width:80%;" >}}
 
-To import attibutes from an integration such as Salesforce or Snowflake, select the **Add Attributes** button and choose whether the attributes are for user or account profiles. Then, follow the prompts to: 
+To import attibutes from a reference table or from an integration such as Salesforce or Snowflake, select the **Add Attributes** button and choose whether the attributes are for user or account profiles. Then, follow the prompts to: 
 
 
 {{< img src="product_analytics/add_attribute2_button.png" alt="Add new attributes using to enrich your profiles." style="width:80%;" >}}
@@ -168,32 +168,24 @@ To import attibutes from an integration such as Salesforce or Snowflake, select 
 {{< img src="product_analytics/add_table_and_key.png" alt="select the data to be merged with your profiles." style="width:80%;" >}}
 
 
-3. Choose which **attributes from the integration** to add to your profiles.
+3. Choose which **attributes from the reference table or integration** to add to your profiles.
 
 {{< img src="product_analytics/select_integration_attributes.png" alt="Add new attributes using to enrich your profiles." style="width:80%;" >}}
 
 
 <br>
 
-### How to configure custom attributes using reference tables 
-
-Importing custom attributes from a reference table follows the same steps as importing from an integration. The exception here is to select the reference table tile in step 1.
-
-{{< img src="product_analytics/choose_ref_table.png" alt="Choose the name of the reference table from which to import your data." style="width:80%;" >}}
-
-
 ## How to query your custom attributes
 
-You can filter these custom attributes throughout the product analytics platform without needing to first add them to a [segment][6]. For example, you can create an analytics chart to view a time series of all users originating from a specific `org_id`. 
+You can filter these custom attributes throughout the product analytics platform without needing to first add them to a [segment][6]. For example, you can create an analytics chart to view the volume of sessions for users that spent more than $100. 
 
-{{< img src="product_analytics/query_custom_attribute_analytics.png" alt="Query your custom attributes in an analytics chart." style="width:80%;" >}}
+{{< img src="product_analytics/query_custom_attribute_analytics3.png" alt="Query your custom attributes in an analytics chart." style="width:80%;" >}}
 
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#identify-user-session
 [2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#identify-user-session
 [3]: https://docs.datadoghq.com/real_user_monitoring/browser/advanced_configuration/?tab=npm#identify-account
 [4]: https://app.datadoghq.com/product-analytics/integrations
@@ -201,4 +193,3 @@ You can filter these custom attributes throughout the product analytics platform
 [6]: https://app.datadoghq.com/product-analytics/segments
 [7]: https://app.datadoghq.com/product-analytics/profiles
 [8]: https://app.datadoghq.com/product-analytics/profiles/accounts
-[9]: https://app.datadoghq.com/product-analytics/explorer?query=%40session.frustration.count%3A%3E0%20%40type%3Asession&fromUser=false
