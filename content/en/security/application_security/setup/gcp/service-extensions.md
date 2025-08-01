@@ -480,12 +480,13 @@ The service extension automatically inspects all traffic passing through your lo
 
 The Datadog App and API Protection Service Extension Docker image supports the following configuration settings:
 
-| Environment variable                   | Default value   | Description                                                                                                                              |
-|----------------------------------------|-----------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_SERVICE_EXTENSION_HOST`            | `0.0.0.0`       | gRPC server listening address.                                                                                                           |
-| `DD_SERVICE_EXTENSION_PORT`            | `443`           | gRPC server port.                                                                                                                        |
-| `DD_SERVICE_EXTENSION_HEALTHCHECK_PORT`| `80`            | HTTP server port for health checks.                                                                                                      |
-| `DD_APPSEC_BODY_PARSING_SIZE_LIMIT`    | `0`             | Maximum size of the bodies to be processed in bytes. If set to `0`, the bodies are not processed. (Recommended value: `10000000` (10MB)) |
+| Environment variable                    | Default value       | Description                                                                                                                              |
+|-----------------------------------------|---------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_SERVICE_EXTENSION_HOST`             | `0.0.0.0`           | gRPC server listening address.                                                                                                           |
+| `DD_SERVICE_EXTENSION_PORT`             | `443`               | gRPC server port.                                                                                                                        |
+| `DD_SERVICE_EXTENSION_HEALTHCHECK_PORT` | `80`                | HTTP server port for health checks.                                                                                                      |
+| `DD_APPSEC_BODY_PARSING_SIZE_LIMIT`     | `0`                 | Maximum size of the bodies to be processed in bytes. If set to `0`, the bodies are not processed. (Recommended value: `10000000` (10MB)) |
+| `DD_SERVICE`                            | `serviceextensions` | Service name shown in the Datadog UI.                                                                                                    |
 
 Configure the container to send traces to your Datadog Agent using the following environment variables:
 
