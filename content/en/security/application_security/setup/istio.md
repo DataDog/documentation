@@ -42,7 +42,7 @@ Enabling the threat detection for Istio involves two main steps:
 
 This service is a gRPC server that Envoy communicates with to have requests and responses analyzed by App and API Protection.
 
-Create a Kubernetes Deployment and Service for the Datadog External Processor. It's recommended to deploy this service in a namespace accessible by your Istio Ingress Gateway, such as `istio-system`, or a dedicated namespace.
+Create a Kubernetes Deployment and Service for the Datadog External Processor. It's recommended to deploy this service in a namespace accessible by your Istio Ingress Gateway.
 
 The Datadog External Processor Docker image is available on the [Datadog Go tracer GitHub Registry][6].
 
@@ -383,6 +383,8 @@ spec:
 
 After applying the chosen `EnvoyFilter`, traffic passing through your Istio Ingress Gateway or selected sidecars will be processed by the Datadog External Processor service, enabling App and API Protection features.
 
+### 3. Validation
+
 {{% appsec-getstarted-2-plusrisk %}}
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
@@ -392,6 +394,8 @@ After applying the chosen `EnvoyFilter`, traffic passing through your Istio Ingr
 The Istio integration has the following limitations:
 
 * Inspection of request and response bodies is supported when using the Datadog External Processor image version `v2.1.0` or later.
+
+For additional details on the Istio integration compatibilities, refer to the [Istio integration compatibility page][11].
 
 ## Further Reading
 
@@ -406,3 +410,5 @@ The Istio integration has the following limitations:
 [7]: https://github.com/DataDog/dd-trace-go
 [8]: /tracing/trace_collection/library_config/go/
 [9]: /security/application_security/policies/library_configuration/
+[10]: https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_proc/v3/ext_proc.proto
+[11]: /security/application_security/setup/compatibility/istio

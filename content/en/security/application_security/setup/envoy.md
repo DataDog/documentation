@@ -143,6 +143,8 @@ The App and API Protection Envoy integration uses the Envoy external processing 
 
    **Note**: Please read the provided example configuration carefully and adapt it to match your infrastructure and environment. You can find more configuration options available in the [Envoy external processor documentation][4].
 
+3. **Validation**
+
 {{% appsec-getstarted-2-plusrisk %}}
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
@@ -161,6 +163,8 @@ The Envoy integration has the following limitations:
 
 * Inspection of request and response bodies is supported when using the Datadog External Processor image version `v2.1.0` or later.
 
+For additional details on the Envoy integration compatibilities, refer to the [Envoy integration compatibility page][9].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -168,8 +172,9 @@ The Envoy integration has the following limitations:
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [3]: https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/ext_proc_filter
-[4]: https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_proc/v3/ext_proc.proto#extensions-filters-http-ext-proc-v3-externalprocessor
+[4]: https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_proc/v3/ext_proc.proto
 [5]: https://github.com/DataDog/dd-trace-go/pkgs/container/dd-trace-go%2Fservice-extensions-callout
 [6]: https://github.com/DataDog/dd-trace-go
 [7]: /tracing/trace_collection/library_config/go/
 [8]: /security/application_security/policies/library_configuration/
+[9]: /security/application_security/setup/compatibility/envoy
