@@ -39,6 +39,7 @@ Debugging information
 : Symbols should be available locally or can be uploaded in CI with `datadog-ci` 
 
 ## Installation
+<div class="alert alert-info">Always set <b>DD_SERVICE</b> for each service you want to profile and identify separately. This ensures accurate attribution and more actionable profiling data.</div>
 
 The Full-Host Profiler is distributed as a standalone executable.
 
@@ -72,8 +73,7 @@ To build the Full-Host Profiler directly on your machine, run:
    make
    ```
 
-## Caveats
-### Service Naming
+## Service Naming
 When using full-host profiling, Datadog captures profiles from all processes running on the host. The service name for each process is primarily determined by the `DD_SERVICE` environment variable.
 
 If `DD_SERVICE` is set, the profiler will use the value of `DD_SERVICE` as the service name. This is the recommended and most reliable approach.
@@ -83,7 +83,6 @@ If `DD_SERVICE` is not set, Datadog will infer a service name by using the binar
 
 If multiple services are running under the same interpreter (for example, two separate Java applications on the same host), and neither sets `DD_SERVICE`, they will be grouped together under the same service name (e.g., service:java). Datadog cannot distinguish between them without a unique service name being provided.
 
-#### Best Practice
 Always set `DD_SERVICE` for each service you want to profile and identify separately. This ensures accurate attribution and more actionable profiling data.
 
 ## What's next?
