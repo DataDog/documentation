@@ -164,7 +164,7 @@ To enable the context menu feature, include the following parameters in your Veg
 ]
 ```
 
-<div class="alert alert-info">If the graph contains the <code>layer</aocde> key , the param  must be added to one of the layer objects, not to the root of the spec. The reason for this is that anything that appears in the JSON root gets repeated in every layer. This breaks the widget internally because it's not allowed to have params with repeated names.</div>
+<div class="alert alert-info">If the graph contains the <code>layer</code> key, the param  must be added to one of the layer objects, not to the root of the spec. The reason for this is that anything that appears in the JSON root gets repeated in every layer. This breaks the widget internally because it's not allowed to have params with repeated names.</div>
 
 After you enable this feature, you can click on datapoints in the widget to open a context menu. Use the graph context menu with the context links of the graph editor. Context links bridge dashboard widgets with other pages in Datadog, as well as the third-party applications you have integrated into your workflows. For more information, see [Context Links][9].
 
