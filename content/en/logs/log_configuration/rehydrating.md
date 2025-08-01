@@ -52,9 +52,9 @@ Only archives with proper authentication are available for rehydrating. For deta
 7. Set the indexing query using the [Log Explorer search syntax][4]. Make sure your logs are [archived with their tags][5] if you use tags (such as `env:prod` or `version:x.y.z`) in the rehydration query.
 8. Define the log limit (maximum logs to rehydrate). When the limit of the rehydration is reached, log reloading stops, but you still have access to the rehydrated logs.
 9. Set the retention period of the rehydrated logs. This defines how long rehydrated logs stay searchable. Available retentions are based on your contract, default is 15 days.
-10. (Optional) [Configure completion notifications](#configuring-rehydration-notifications) through [integrations][6] with the @handle syntax.
+10. (Optional) [Configure completion notifications](#rehydration-notifications) through [integrations][6] with the @handle syntax.
 
-For more information on the rehydration scan size, see [Understanding scan size](#understanding-scan-size).
+For more information on the rehydration scan size, see [Understanding rehydration scan sizes](#understanding-rehydration-scan-sizes).
 
 
 ## Historical views management
@@ -67,13 +67,13 @@ After selecting "Rehydrate from Archive," the historical view is marked as "PEND
 After the content is rehydrated, the historical view is marked as "ACTIVE", and the link in the query column leads to the historical view in the Log Explorer.
 
 **From the Log Explorer**:
-Open the Index facet on the Log Explorer the index selector. Select the Historical indexes to include in your search.
+In the Log Explorer, open the Index facet in the index selector. Select the Historical indexes to include in your search.
 
 {{< img src="logs/archives/log_archives_historical_index_selector.png" alt="Log Explorer" width="90%">}}
 
 ### Canceling ongoing historical views
 
-Cancel ongoing rehydrations from the [Rehydration][3] page to stop jobs with the incorrect time ranges or typos in the indexing query.
+Cancel ongoing rehydrations from the [Rehydration][3] page to stop jobs with the incorrect time ranges or with typos in the indexing query.
 
 Logs that have already been indexed remain queryable until the end of the retention period selected for the historical view. All scanned and indexed logs will still be billed.
 
@@ -185,7 +185,7 @@ In order to rehydrate log events from your archives, Datadog uses a service acco
 
 ## Understanding rehydration scan sizes
 
-The query is applied _after_ the files matching the time period are downloaded from your archive. As a result, the rehydration scan size is based on **total volume of logs retrieved from the archive**, not the number of logs matching the query. Archive storage is time-based, so queries scoped to specific filters (such as `service:A`) still retrieve all logs within the selected time window. This includes logs from other services (such as `service:A` and `service:B`).
+The query is applied _after_ the files matching the time period are downloaded from your archive. As a result, the rehydration scan size is based on the **total volume of logs retrieved from the archive**, not the number of logs matching the query. Archive storage is time-based, so queries scoped to specific filters (such as `service:A`) still retrieve all logs within the selected time window. This includes logs from other services (such as `service:A` and `service:B`).
 
 Reducing the date range is the most effective way to limit scan size and minimize cloud data transfer costs, because query filters are applied after data is downloaded
 
