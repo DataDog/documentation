@@ -2681,26 +2681,31 @@ menu:
       parent: case_management
       identifier: case_management_create_case
       weight: 2
+    - name: Customization
+      url: service_management/case_management/customization
+      parent: case_management
+      identifier: case_management_customization
+      weight: 3
     - name: View and Manage Cases
       url: service_management/case_management/view_and_manage
       parent: case_management
       identifier: case_management_view_and_manage
-      weight: 3
+      weight: 4
     - name: Notifications and Integrations
       url: service_management/case_management/notifications_integrations
       parent: case_management
       identifier: case_management_notifications_and_integrations
-      weight: 4
+      weight: 5
     - name: Case Automation Rules
       url: service_management/case_management/automation_rules
       parent: case_management
       identifier: case_management_automation_rules
-      weight: 5
+      weight: 6
     - name: Troubleshooting
       url: service_management/case_management/troubleshooting
       parent: case_management
       identifier: case_management_troubleshooting
-      weight: 6
+      weight: 7
     - name: Workflow Automation
       url: actions/workflows/
       pre: workflows
