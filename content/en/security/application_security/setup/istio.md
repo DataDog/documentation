@@ -68,7 +68,7 @@ spec:
     spec:
       containers:
       - name: datadog-aap-extproc-container
-        image: ghcr.io/datadog/dd-trace-go/service-extensions-callout:v2.1.0 # Replace with the latest released version
+        image: ghcr.io/datadog/dd-trace-go/service-extensions-callout:v2.2.0 # Replace with the latest released version
         ports:
         - name: grpc
           containerPort: 443 # Default gRPC port for the external processor
@@ -138,7 +138,7 @@ Configure the connection from the external processor to the Datadog Agent using 
 The External Processor is built on top of the [Datadog Go Tracer][7] and inherits all of its environment variables. For additional details, refer to [Configuring the Go Tracing Library][8] and [App and API Protection Library Configuration][9].
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> As the Datadog External Processor is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (e.g. <code>v2.1.0</code>). In some cases, early release versions may be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
+  <strong>Note:</strong> As the Datadog External Processor is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (e.g. <code>v2.2.0</code>). In some cases, early release versions may be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
 </div>
 
 ### 2. Configure an EnvoyFilter
@@ -393,7 +393,7 @@ After applying the chosen `EnvoyFilter`, traffic passing through your Istio Ingr
 
 The Istio integration has the following limitations:
 
-* Inspection of request and response bodies is supported when using the Datadog External Processor image version `v2.1.0` or later.
+* Inspection of request and response bodies is supported when using the Datadog External Processor image version `v2.2.0` or later.
 
 For additional details on the Istio integration compatibilities, refer to the [Istio integration compatibility page][11].
 

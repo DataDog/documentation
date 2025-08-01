@@ -86,12 +86,12 @@ To set up the App and API Protection Service Extension in your GCP environment, 
 
     <br>
     <div class="alert alert-warning">
-      <strong>Note:</strong> By default, if the service extension fails or times out, the proxy will return a 500 error. To prevent this, enable the <code>fail_open</code> setting. When enabled, request or response processing continues without error even if the extension fails, ensuring your application remains available.
+      <strong>Note:</strong> By default, if the service extension fails or times out, the proxy will return a 5xx error. To prevent this, enable the <code>fail_open</code> setting. When enabled, request or response processing continues without error even if the extension fails, ensuring your application remains available.
     </div>
 
     <div class="alert alert-info">
       <p>
-        <strong>Note:</strong> If you select the <code>Request Body</code> and <code>Response Body</code> in the extension chain events, processing time will increase as the service extension will transfer and analyze the bodies for every request. To enable the body processing, only the Service Extension Callout needs to be configured to process the bodies. It will only transfert a body when is is relevant. When enabling body processing, please <strong>adjust your timeout</strong> settings to accommodate the additional processing time.
+        <strong>Note:</strong> When body processing is enabled, the service extension need to receive request and response bodies in addition to headers. This can increase processing time, especially for larger payloads. The service extension will only receive and analyze bodies when relevant, based on its configuration. If you enable body processing, make sure to <strong>adjust your timeout settings</strong> to allow for the additional processing time required for body inspection and transfer.
       </p>
     </div>
 </br>
@@ -222,7 +222,7 @@ The App and API Protection Service Extension deployment requires several compone
      source = "terraform-google-modules/container-vm/google"
 
      container = {
-       image = "ghcr.io/datadog/dd-trace-go/service-extensions-callout:v2.1.0" # Replace with the latest version
+       image = "ghcr.io/datadog/dd-trace-go/service-extensions-callout:v2.2.0" # Replace with the latest version
        env = [
          {
            name = "DD_AGENT_HOST",
@@ -498,15 +498,17 @@ Configure the container to send traces to your Datadog Agent using the following
 The App and API Protection GCP Service Extensions integration is built on top of the [Datadog Go Tracer][6] and inherits all of its environment variables. For additional details, refer to [Configuring the Go Tracing Library][7] and [App and API Protection Library Configuration][8].
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> As the App and API Protection GCP Service Extensions integration is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (e.g. <code>v2.1.0</code>). In some cases, early release versions may be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
+  <strong>Note:</strong> As the App and API Protection GCP Service Extensions integration is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (e.g. <code>v2.2.0</code>). In some cases, early release versions may be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
 </div>
 
 ## Limitations
 
 The GCP Service Extensions integration has the following limitations:
 
-* Inspection of request and response bodies is supported when using service extension callout image version `v2.1.0` or later.
+* Inspection of request and response bodies is supported when using service extension callout image version `v2.2.0` or later.
 * Currently, GCP Service Extensions does not support an asynchronous (observability) mode.
+
+For additional details on the GCP Service Extensions integration compatibilities, refer to the [GCP Service Extensions integration compatibility page][9].
 
 ## Further Reading
 
@@ -520,3 +522,4 @@ The GCP Service Extensions integration has the following limitations:
 [6]: https://github.com/DataDog/dd-trace-go
 [7]: /tracing/trace_collection/library_config/go/
 [8]: /security/application_security/policies/library_configuration/
+[9]: /security/application_security/setup/compatibility/gcp-service-extensions
