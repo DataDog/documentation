@@ -8,6 +8,9 @@
     - Prefixes are useful for partitioning objects. For example, you can use a prefix as an object key to store objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path; a trailing `/` is not automatically added.
     - See [template syntax][10051] if you want to route logs to different object keys based on specific fields in your logs.
 1. Optionally, click **Add Header** to add metadata.
+1. Optionally, toggle the switch to enable **Buffering Options**. If left disabled, the maximum size for buffering is 500 events. If enabled:
+	1. Select the buffer type you want to set (**Memory** or **Disk**).
+	1. Enter the buffer size and select the unit.
 
 [10051]: /observability_pipelines/destinations/#template-syntax
 [10052]: https://cloud.google.com/docs/authentication#auth-flowchart
