@@ -135,7 +135,8 @@ Datadog automatically ingests up to 15 months of available historical cost data.
 
 Azure exports cost data starting from the month you created the export. You can manually backfill up to 12 months of Azure cost data using the Azure Cost Exports UI.
 
-1. Complete the instructions in the **Setup** and **Configure Cloud Cost in Datadog** sections above, you have to wait up to 24 hours for cost data to appear in Datadog to ensure the integration is working end-to-end before beginning the backfill process. If you have already completed setup and cost data is appearing in Datadog, you can proceed directly to the backfill steps below.
+1. Complete the instructions in the **Setup** and **Configure Cloud Cost in Datadog** sections above.
+1. Wait up to 24 hours for cost data to appear in Datadog to ensure the integration is working end-to-end before beginning the backfill process. **Note:** If you have already completed setup, and cost data is appearing in Datadog, you can proceed directly to the backfill steps below.
 2. Manually export an **actual** and **amortized** report for each calendar month. For example, for June 2025:
     1. Edit the Export
     2. Change Export Type to "One-time export"
