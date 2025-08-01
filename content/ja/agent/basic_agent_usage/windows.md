@@ -261,7 +261,7 @@ Windows は `system.load.*` メトリクスを提供していませんが、デ�
 
 ```yaml
 process_config:
-  enabled: "true"
+  enabled: true
 ```
 
 構成が完了したら、[Agent を再起動][11]します。

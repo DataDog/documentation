@@ -1,81 +1,80 @@
 ---
-"app_id": "redis"
-"app_uuid": "15f0ff37-2b36-4165-9606-758271d4a16d"
-"assets":
-  "dashboards":
-    "redis": "assets/dashboards/overview.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "redis.net.clients"
-      "metadata_path": "metadata.csv"
-      "prefix": "redis".
-    "process_signatures":
+app_id: "redis"
+app_uuid: "15f0ff37-2b36-4165-9606-758271d4a16d"
+assets:
+  dashboards:
+    redis: "assets/dashboards/overview.json"
+  integration:
+    auto_install: true
+    configuration:
+      spec: "assets/configuration/spec.yaml"
+    events:
+      creates_events: false
+    metrics:
+      check: "redis.net.clients"
+      metadata_path: "metadata.csv"
+      prefix: "redis"
+    process_signatures:
     - "redis-server"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "21"
-    "source_type_name": "Redis"
-  "monitors":
+    service_checks:
+      metadata_path: "assets/service_checks.json"
+    source_type_id: !!int "21"
+    source_type_name: "Redis"
+  monitors:
     "Memory consumption is high": "assets/monitors/high_mem.json"
-  "saved_views":
-    "error_warning_status": "assets/saved_views/error_warning_status.json"
-    "pid_overview": "assets/saved_views/pid_overview.json"
-    "redis_pattern": "assets/saved_views/redis_pattern.json"
-    "redis_processes": "assets/saved_views/redis_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
+  saved_views:
+    error_warning_status: "assets/saved_views/error_warning_status.json"
+    pid_overview: "assets/saved_views/pid_overview.json"
+    redis_pattern: "assets/saved_views/redis_pattern.json"
+    redis_processes: "assets/saved_views/redis_processes.json"
+author:
+  homepage: "https://www.datadoghq.com"
+  name: "Datadog"
+  sales_email: "info@datadoghq.com"
+  support_email: "help@datadoghq.com"
+categories:
 - "caching"
 - "data stores"
 - "log collection"
 - "tracing"
-"custom_kind": "integración"
-"dependencies":
+custom_kind: "integración"
+dependencies:
 - "https://github.com/DataDog/integrations-core/blob/master/redisdb/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "redisdb"
-"integration_id": "redis"
-"integration_title": "Redis"
-"integration_version": "8.0.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "redisdb"
-"public_title": "Redis"
-"short_description": "Realiza un seguimiento del rendimiento de Redis, el uso de memoria, los clientes bloqueados, las claves desalojadas y más".
-"supported_os":
+display_on_public_website: true
+draft: false
+git_integration_title: "redisdb"
+integration_id: "redis"
+integration_title: "Redis"
+integration_version: "8.0.0"
+is_public: true
+manifest_version: "2.0.0"
+name: "redisdb"
+public_title: "Redis"
+short_description: "Realiza un seguimiento del rendimiento de Redis, el uso de memoria, los clientes bloqueados, las claves desalojadas y más"
+supported_os:
 - "linux"
 - "windows"
 - "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
+tile:
+  changelog: "CHANGELOG.md"
+  classifier_tags:
   - "Category::Almacenamiento en caché"
   - "Category::Almacenes de datos"
- 
   - "Category::Recopilación de logs"
   - "Category::Rastreo"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
   - "Offering::Integración"
-  "configuration": "README.md#Configuración"
-  "description": "Realiza un seguimiento del rendimiento de Redis, el uso de memoria, los clientes bloqueados, las claves desalojadas y más".
-  "media": []
-  "overview": "README.md#Información general"
-  "resources":
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/how-to-monitor-redis-performance-metrics"
-  "support": "README.md#Soporte"
-  "title": "Redis"
+  configuration: "README.md#Configuración"
+  description: "Realiza un seguimiento del rendimiento de Redis, el uso de memoria, los clientes bloqueados, las claves desalojadas y más"
+  media: []
+  overview: "README.md#Información general"
+  resources:
+  - resource_type: "blog"
+    url: "https://www.datadoghq.com/blog/how-to-monitor-redis-performance-metrics"
+  support: "README.md#Soporte"
+  title: "Redis"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->

@@ -11,8 +11,7 @@ further_reading:
 
 You can correlate Test Optimization data with [logs injected into Datadog][1], which allows you to view and analyze logs for specific test cases.
 
-{{< img src="continuous_integration/correlate_logs_and_tests.png"
-  alt="Examine logs for specific test cases with logs and tests correlation." style="width:90%" >}}
+{{< img src="continuous_integration/correlate_logs_and_tests.png" alt="Examine logs for specific test cases with logs and tests correlation." style="width:90%" >}}
 
 ## Setup
 

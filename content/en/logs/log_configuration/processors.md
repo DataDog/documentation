@@ -680,7 +680,7 @@ The lookup processor performs the following actions:
 
   * Optionally, if it does not find the value in the mapping table, it creates a target attribute with the value of the reference table. You can select a value for a [Reference Table][101] on the **Reference Table** tab.
 
-    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Lookup processor"
+    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Lookup processor" >}}
     style="width:80%;">}}
 
 
