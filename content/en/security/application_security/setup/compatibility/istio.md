@@ -40,7 +40,7 @@ The Datadog Envoy integration for App and API Protection relies on features that
 | External Processing Filter | v1.27.0 |
 | Observability mode | v1.30.0 |
 
-## Istio Datadog External Processor support
+## Datadog Istio integration support
 
 The Datadog Istio integration for App and API Protection is in Preview.
 
@@ -51,4 +51,4 @@ the unsupported capabilities, let us know! Fill out <a
 href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send
 details</a>.</div>
 
-[1]: https://istio.io/latest/docs/releases/supported-releases/
+[1]: https://istio.io/latest/docs/releases/supported-releases/#supported-envoy-versions

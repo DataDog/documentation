@@ -28,7 +28,7 @@ The Datadog Envoy integration for App and API Protection relies on features that
 | External Processing Filter | v1.27.0 |
 | Observability mode | v1.30.0 |
 
-## Envoy Datadog External Processor support
+## Datadog Envoy integration support
 
 The Datadog Envoy integration for App and API Protection is in Preview.
 
