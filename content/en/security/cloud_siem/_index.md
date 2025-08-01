@@ -83,7 +83,7 @@ After a content pack is activated, the content pack gives you the integration's 
 
 ### Log search and analysis
 
-Build searches in the Log Explorer using facets or by clicking fields directly in the logs. Or use Bits AI and natural language search to find important security events. With built-in group-by and table lookup functions as well as pattern analysis and visualizations, security teams can get security insights from their data.  See [Log Search Syntax][10] for more information.
+Build searches in the Log Explorer using facets or by clicking fields directly in the logs. Or use Bits AI and natural language search to find important security events. With built-in group-by and table lookup functions as well as pattern analysis and visualizations, security teams can get security insights from their data. See [Log Explorer][11] and [Log Search Syntax][10] for more information.
 
 ## Get started
 
@@ -97,12 +97,12 @@ See the [Getting Started Guide][4] for more detailed setup instructions.
 
 ## Cloud SIEM Overview page
 
-Navigate to the [Cloud SIEM Overview dashboard][3]. Use this dashboard to see key security insights and act on common workflows for security analysts, security and detection engineers, and Security Operations Center (SOC) managers. From the Overview page, you can:
+Navigate to the [Cloud SIEM Overview page][3]. Use this page to see key security insights and act on common workflows for security analysts, security and detection engineers, and Security Operations Center (SOC) managers. From the Overview page, you can:
 - Access important signals, open cases, and high-risk entities.
 - Complete onboarding tasks and review content‑pack health.
 - View and investigate top signals by geography or ISP.
 - Analyze signals and rules by MITRE ATT&CK tactics.
-- Track detection performance (MTTD, false‑positive rates).
+- Track detection performance (Mean Time to Detect (MTTD), false‑positive rates).
 - Read the latest [Security Labs][1] research and release notes.
 
 Click **Customize Page** to reorder or hide modules so you can see what is important to you.
@@ -266,3 +266,4 @@ See which rules are the noisiest by calculating the percentage of signals that a
 [8]: /logs/log_configuration/archives/
 [9]: /security/cloud_siem/content_packs/
 [10]: /logs/explorer/search_syntax/
+[11]: /logs/explorer/
