@@ -83,7 +83,7 @@ service:
 |-----------|-------------|---------|
 | `api.key` | Datadog API key (required) | - |
 | `api.site` | Datadog site (for example, `us5.datadoghq.com`) | `datadoghq.com` |
-| `hostname` | Custom hostname for the collector | Auto-detected |
+| `hostname` | Custom hostname for the Collector | Auto-detected |
 | `http.endpoint` | Local HTTP server endpoint | `localhost:9875` |
 | `http.path` | HTTP server path for metadata | `/metadata` |
 | `proxy_url` | HTTP proxy URL for outbound requests | - |
