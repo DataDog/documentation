@@ -3,9 +3,11 @@ title: Google Cloud Storage Destination
 disable_toc: false
 ---
 
-<div class="alert alert-warning">The Google Cloud Storage destination only supports <a href = "https://cloud.google.com/storage/docs/access-control/lists">Access Control Lists</a>.</div>
+<div class="alert alert-warning">For Worker versions 2.7 and later, the Google Cloud destination supports <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access">uniform bucket-level access</a>. Google <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access#should-you-use">recommends</a> using uniform bucket-level access. <br>For Worker version older than 2.7, only <a href = "https://cloud.google.com/storage/docs/access-control/lists">Access Control Lists</a> is supported.</div>
 
 Use the Google Cloud Storage destination to send your logs to a Google Cloud Storage bucket. If you want to send logs in Datadog-rehydratable format to Google Cloud Storage for [archiving][1] and [rehydration][2], you must [configure Log Archives](#configure-log-archives). If you want to send your logs directly to Google Cloud Storage, without converting them to Datadog-rehydratable format, skip to [Set up the destination for your pipeline](#set-up-the-destinations).
+
+The Observability Pipelines Worker uses standard Google authentication methods. See [Authentication methods at Google][6] for more information about choosing the authentication method for your use case.
 
 ## Configure Log Archives
 
@@ -42,3 +44,4 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [3]: /integrations/google_cloud_platform/#setup
 [4]: /observability_pipelines/archive_logs/
 [5]: /observability_pipelines/destinations/#event-batching
+[6]: https://cloud.google.com/docs/authentication#auth-flowchart

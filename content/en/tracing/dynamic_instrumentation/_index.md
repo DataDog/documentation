@@ -88,6 +88,7 @@ For more detailed instructions, select your runtime below:
 - Dynamic Instrumentation is not yet compatible with Azure App Services or serverless environments.
 - Full support is available only for applications built with Python, Java, .NET.
 - Limited previews are ongoing for applications built with Node.js, Ruby, and PHP.
+- The Java tracer library does not support Kotlin coroutines.
 
 ## Explore Dynamic Instrumentation
 
