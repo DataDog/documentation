@@ -79,7 +79,7 @@ Run type
 
 ### RUM sessions
 
-To view related sessions and available replays in the [RUM Explorer][22], click **View Session in RUM**. To access a user session for a particular action or step in [Session Replay][23], click **Replay Session**. For more information, see [Explore RUM & Session Replay in Synthetics][16].
+To view related sessions and available replays in the [RUM Explorer][22], click **View Session in RUM**. To access a user session for a particular action or step in [Session Replay][23], click **Replay Session**. For more information, see [Explore RUM & Session Replay in Synthetic Monitoring][16].
 
 ### Screenshots and actions
 
