@@ -53,7 +53,7 @@ You can create a bi-directional Jira ticket directly from any finding to track a
 
 ### Mute findings
 
-To suppress a finding, click **Mute** in the finding details panel. This opens a muting workflow where you can choose how to mute the finding. Muting a finding hides it and excludes it from reports. You can also [configure dynamic muting rules][8] to mute findings based on criteria such as environment or service tags.
+To suppress a finding, click **Mute** in the finding details panel. This opens a muting workflow where you can choose how to mute the finding. Muting a finding hides it and excludes it from reports.
 
 To restore a muted finding, click **Unmute** in the details panel. You can also use the **Status** filter on the [Code Security Vulnerabilities][3] page to review muted findings.
 
