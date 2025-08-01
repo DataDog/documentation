@@ -1,5 +1,5 @@
 ---
-title: Choosing an Instrumentation Method for Google Cloud Run Containers
+title: Choosing an Instrumentation Method for Containers
 further_reading:
   - link: "/integrations/google-cloud-run/"
     tag: "Documentation"
@@ -7,10 +7,10 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/'
     tag: 'Blog'
     text: 'Collect traces, logs, and custom metrics from Cloud Run services'
-  - link: "/serverless/google_cloud_run/containers_in_process/"
+  - link: "/serverless/google_cloud_run/containers/in_process/"
     tag: 'Documentation'
     text: 'Instrument your container with the in-process approach'
-  - link: "/serverless/google_cloud_run/containers_sidecar/"
+  - link: "/serverless/google_cloud_run/containers/sidecar/"
     tag: 'Documentation'
     text: 'Instrument your container with the sidecar approach'
 ---
@@ -19,7 +19,7 @@ To instrument your Google Cloud Run containers with Datadog, choose one of two o
 
 {{% google-cloud-run-container-options %}}
 
-- [**In-process**][1]: Wraps your application container with the Datadog Agent. Choose this option for a simpler setup, lower cost overhead, and direct log piping. 
+- [**In-process**][1]: Wraps your application container with the Datadog Agent. Choose this option for a simpler setup, lower cost overhead, and direct log piping.
 - [**Sidecar**][2]: Deploys the Datadog Agent in a separate container alongside your app container. Choose this option if you have multiple containers in a single service, if you prefer strict isolation of the Datadog Agent, or if you have performance-sensitive workloads.
 
 ## Comparison: in-process versus sidecar instrumentation
@@ -38,5 +38,5 @@ To instrument your Google Cloud Run containers with Datadog, choose one of two o
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /serverless/google_cloud_run/containers_in_process
-[2]: /serverless/google_cloud_run/containers_sidecar
+[1]: /serverless/google_cloud_run/containers/in_process
+[2]: /serverless/google_cloud_run/containers/sidecar
