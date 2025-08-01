@@ -156,5 +156,5 @@ kubectl cp datadog-<pod-name>:tmp/datadog-agent-<date-of-the-flare>.zip flare.zi
 
 [1]: https://github.com/DataDog/datadog-agent/tree/main/pkg/flare
 [2]: /agent/fleet_automation/
-[3]: /agent/remote_config#enabling-remote-configuration
+[3]: /agent/guide/setup_remote_config
 [4]: /tracing/troubleshooting/tracer_debug_logs/?code-lang=dotnet#data-collected

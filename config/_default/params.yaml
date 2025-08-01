@@ -290,6 +290,7 @@ unsupported_sites:
   overview_pages: [gov]
   quality_gates: [gov]
   remote_config: [gov]
+  remote_configuration: [gov]
   resource_catalog: [gov]
   roku_error_tracking: [gov]
   roku_log_collection: [gov]

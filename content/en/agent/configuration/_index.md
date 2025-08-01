@@ -27,6 +27,6 @@ This section covers information on configuring your Datadog Agents. For informat
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/remote_config/
+[1]: /remote_configuration
 [2]: /containers/
 [3]: /integrations/

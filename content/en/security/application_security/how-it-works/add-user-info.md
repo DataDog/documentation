@@ -1024,7 +1024,7 @@ This will open a menu in which you may define your custom WAF rule. By selecting
 Once saved, the rule is deployed to instances of the service that have Remote Configuration enabled.
 
 
-[1]: /agent/remote_config?tab=configurationyamlfile#application-security-management-asm
+[1]: /tracing/guide/remote_config
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
 
 ## Automatic user activity event tracking
@@ -1096,4 +1096,4 @@ For manual configuration, you can set the environment variable `DD_APPSEC_AUTOMA
 [12]: /security/default_rules/appsec-ato-bf/
 [13]: /security/default_rules/distributed-ato-ua-asn/
 [14]: https://app.datadoghq.com/security/appsec/inventory/services?tab=capabilities
-[15]: /agent/remote_config/
+[15]: /tracing/guide/remote_config

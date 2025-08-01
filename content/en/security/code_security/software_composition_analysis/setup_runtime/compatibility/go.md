@@ -56,7 +56,7 @@ The Go packages listed in this page are relevant for Code Security capabilities.
 - **Runtime Software Composition Analysis (SCA)** is supported on all frameworks
 
 
-[1]: /agent/remote_config/#enabling-remote-configuration
+[1]: /remote_configuration#enabling-remote-configuration
 [2]: https://github.com/DataDog/dd-trace-go
 [3]: https://github.com/DataDog/dd-trace-go#support-policy
 [4]: https://github.com/DataDog/dd-trace-go#support-maintenance
