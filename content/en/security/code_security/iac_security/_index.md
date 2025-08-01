@@ -14,25 +14,25 @@ further_reading:
     text: "IaC Security Rules"
 ---
 
-Datadog Infrastructure as Code (IaC) Security detects misconfigurations in Terraform code before deployment. It scans files in your connected GitHub or GitLab repositories using hosted scanning and flags issues such as missing encryption or overly permissive access. Supported file types include standalone Terraform files and local modules.
+Datadog Infrastructure as Code (IaC) Security detects misconfigurations in Terraform code before deployment. It flags issues such as missing encryption or overly permissive access in files stored in your connected GitHub or GitLab repositories. Supported file types include standalone Terraform files and local modules.
 
 {{< img src="/security/infrastructure_as_code/iac_misconfiguration_side_panel.png" alt="IaC misconfiguration side panel showing details for the high severity IMDSv1 Enabled issue, including a security summary, code snippet, detection timestamps, and remediation steps." width="100%">}}
 
 ## How it works
 
-IaC Security integrates directly with your GitHub or GitLab repositories. It scans every commit across all branches and performs a daily full scan of each configured repository. When a scan completes, findings are associated with the relevant repository, branch, and file path.
+IaC Security integrates with your GitHub or GitLab repositories to continuously scan for misconfigurations. It analyzes every commit across all branches and performs a daily full scan of each configured repository. Findings surface when violations are detected and are associated with the relevant repository, branch, and file path. This allows you to identify, prioritize, and fix misconfigurations directly at the source.
 
 ## Key capabilities
 
-### Pull request integration
+### Review and fix violations in pull requests
 
-Datadog adds inline comments to GitHub and GitLab pull requests to flag any IaC violations. When applicable, it also provides suggested fixes that can be applied directly in the pull request. You can also open a new pull request from Datadog to remediate a vulnerability or quality issue. For more information, see [GitHub Pull Requests][5].
+When a GitHub or GitLab pull request includes infrastructure-as-code changes, Datadog adds inline comments to flag any violations. Where applicable, it also suggests code fixes that can be applied directly in the pull request. You can also open a new pull request from Datadog to remediate a finding. For more information, see [GitHub Pull Requests][5].
 
-### Triage and filtering
+### View and filter findings
 
 After setting up IaC Security, each commit to a scanned repository triggers a scan. Findings are summarized on the [Code Security Vulnerabilities][3] page and grouped per repository on the [Code Security Repositories][6] page.
 
-You can filter findings by:
+Use filters to narrow results by:
 
 - Severity
 - Status (open, muted, fixed)
@@ -42,16 +42,16 @@ You can filter findings by:
 - Team
 - Repository
 
-Click a finding to open a side panel that shows:
+Click any finding to open a side panel that shows:
 
-- **Details**: A description and the relevant code that triggered the finding. (Configure the GitHub App to see the exact code snippet.)
-- **Remediation**: One or more code fixes you can apply to resolve the finding.
+- **Details**: A description and the relevant code that triggered the finding. (To view code snippets, install the GitHub App.)
+- **Remediation**: One or more suggested code fixes, when available.
 
-### Jira integration
+### Create Jira tickets from findings
 
-You can create a bi-directional Jira ticket directly from any finding. This helps teams track and remediate issues using their existing workflows. Tickets remain synced as changes occur in Datadog or Jira. For more information, see [Bidirectional ticket syncing with Jira][4].
+You can create a bi-directional Jira ticket directly from any finding to track and remediate issues in your existing workflows. Ticket status remains synced between Datadog and Jira. For more information, see [Bidirectional ticket syncing with Jira][4].
 
-### False positives
+### Mark findings as false positives
 
 If you determine that a finding is a false positive, click **Mark as false positive** in the finding details panel. This hides the finding and excludes it from reporting. You can review or restore false positives at any time using the Status filter on the [Code Security Vulnerabilities][3] page.
 

@@ -19,7 +19,7 @@ further_reading:
 
 Use the following instructions to enable Infrastructure as Code (IaC) Security for Code Security.
 
-<div class="alert alert-info">IaC Security supports GitHub for version control and Terraform for infrastructure as code.</div>
+<div class="alert alert-info">IaC Security supports Terraform for infrastructure as code, and integrates with GitHub and GitLab for version control.</div>
 
 ## Set up the GitHub integration
 
