@@ -25,7 +25,7 @@ If you can access your Observability Pipelines Workers locally, use the `tap` co
 
  The Observability Pipelines Worker API allows you to interact with the Worker's processes with the `tap` and `top` command. If you are using the Helm charts provided when you [set up a pipeline][4], then the API has already been enabled. Otherwise, make sure the environment variable `DD_OP_API_ENABLED` is set to `true` in `/etc/observability-pipelines-worker/bootstrap.yaml`. See [Bootstrap options][5] for more information. This sets up the API to listen on `localhost` and port `8686`, which is what the CLI for `tap` is expecting.
 
- **Note**: When `DD_OP_API_ENABLED` is set to `true`, the `/health` endpoint is also exposed. Configure load balancers to use the `/health` API endpoint to check that the Worker is up and running.
+ **Note**: See [Enable liveness and readiness probe][15] for instructions on how to expose the `/health` endpoint. After the endpoint is exposed, configure load balancers to use the `/health` API endpoint to check that the Worker is up and running.
 
 ### Use `top` to find the component ID
 
@@ -143,3 +143,4 @@ If the Worker is not starting, Worker logs are not sent to Datadog and are not v
 [12]: https://app.datadoghq.com/logs
 [13]: /observability_pipelines/install_the_worker/worker_commands/
 [14]: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/security_guide/sec-port_forwarding#sec-Adding_a_Port_to_Redirect
+[15]: /observability_pipelines/advanced_configurations/#enable-liveness-and-readiness-probe
