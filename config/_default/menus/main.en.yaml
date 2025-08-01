@@ -2133,11 +2133,6 @@ menu:
       parent: idp_eng_reports
       identifier: eng_reports_dora_metrics
       weight: 403
-    - name: Overview Pages
-      url: internal_developer_portal/overview_pages
-      parent: internal_developer_portal
-      identifier: idp_overview_pages
-      weight: 5
     - name: Integrations
       url: internal_developer_portal/integrations
       parent: internal_developer_portal
@@ -5127,12 +5122,28 @@ menu:
       parent: tests
       identifier: tests_troubleshooting
       weight: 17
+    - name: Code Coverage
+      url: code_coverage/
+      pre: ci
+      parent: software_delivery_heading
+      identifier: code_coverage
+      weight: 50000
+    - name: Setup
+      url: code_coverage/setup/
+      parent: code_coverage
+      identifier: code_coverage_setup
+      weight: 1
+    - name: Data Collected
+      url: code_coverage/data_collected/
+      parent: code_coverage
+      identifier: code_coverage_data_collected
+      weight: 2
     - name: Quality Gates
       url: quality_gates/
       pre: ci
       parent: software_delivery_heading
       identifier: quality_gates
-      weight: 50000
+      weight: 60000
     - name: Setup
       url: quality_gates/setup
       parent: quality_gates
@@ -5173,7 +5184,7 @@ menu:
       pre: ci
       parent: software_delivery_heading
       identifier: dora_metrics
-      weight: 60000
+      weight: 70000
     - name: Setup
       url: dora_metrics/setup
       parent: dora_metrics
@@ -7719,21 +7730,26 @@ menu:
       parent: pa_session_replay_browser
       identifier: pa_session_replay_browser_troubleshooting
       weight: 104
-    - name: Analyzing users and segments
+    - name: Segments
       url: product_analytics/segmentation/
       parent: product_analytics
       identifier: pa_segmentation
       weight: 6
+    - name: Managing Profiles
+      url: product_analytics/profiles
+      parent: product_analytics
+      identifier: pa_profiles
+      weight: 7
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
       identifier: pa_guides
-      weight: 7
+      weight: 8
     - name: Troubleshooting
       url: product_analytics/troubleshooting/
       parent: product_analytics
       identifier: pa_troubleshooting
-      weight: 8
+      weight: 9
     - name: Account Management
       url: account_management/
       pre: cog-2
