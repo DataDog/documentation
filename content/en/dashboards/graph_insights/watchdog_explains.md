@@ -38,7 +38,7 @@ Anomalies can be sharp spikes or drops, but may also be more subtle trends like 
 
 You can start your investigation from any timeseries graph that uses metric data. When Watchdog Explains detects an anomaly, it highlights the affected region with a pink box. To begin investigating, click **Investigate Anomaly**.
 
-This opens a full-screen investigation view where Watchdog analyzes the anomaly and surfaces any tag groups that significantly contributed to the shape or scale of the anomaly. Click on a tag to see how removing or isolating that dimension affects the graph. Use this to identify root causes like specific customers, services, or environments.
+This opens a full-screen investigation view. Watchdog analyzes the anomaly and surfaces any tag groups that significantly contributed to the shape or scale of the anomaly. Click on a tag to see how removing or isolating that dimension affects the graph. Use this to identify root causes like specific customers, services, or environments.
 
 ## Isolating the cause with tag breakdown
 
@@ -48,7 +48,7 @@ Watchdog Explains analyzes the tag dimensions of the query to determine what may
 
 By comparing the shape of the filtered timeseries with the overall graph, Watchdog Explains can infer which tag group had the greatest impact.
 
-When a tag is flagged, it means filtering by that tag significantly reduced or reshaped the anomaly. Contribution is determined by comparing the shape and scale of filtered timeseries against the original graph. Not every anomaly has an obvious root cause. If no tag group meaningfully contributes to the spike or dip, Watchdog Explains may surface a general anomaly without tag-level attribution.
+When a tag is flagged, it means filtering by that tag significantly reduced or reshaped the anomaly. Watchdog compares the filtered timeseries to the original graph to pinpoint which tags contributed to the anomaly most. Sometimes, an anomaly may not have an obvious root cause. If no tag group meaningfully contributes to the spike or dip, Watchdog Explains may surface a general anomaly without tag-level attribution.
 
 ## Example: Surge in traffic from a single tenant
 
