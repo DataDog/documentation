@@ -1,0 +1,7 @@
+{{ $dot := . }}
+{{ $language := .Get "language" }}
+
+{{ partial "serverless/azure-app-service-custom-metrics.html" (dict 
+    "language" $language
+    "context" $dot
+) }} 
