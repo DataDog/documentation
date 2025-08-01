@@ -37,6 +37,8 @@ If privacy settings allow for it, Mobile Session Replay only captures Android im
 Images follow a separate processing pipeline, which may introduce a small delay between uploading a replay and the image being available for rendering in the web player.
 In this case, wait a few minutes and then reload the replay. 
 
+On iOS, vector images are not supported in Session Replay. These will appear as an "Unsupported image type" placeholder in the replay. To work around this, you can disable the "Preserve Vector Data" option in your asset catalog. Xcode will then rasterize the image, allowing it to be captured correctly. Note that SF Symbols are also not supported and will not be rendered in the replay.
+
 ### The session replay rendering looks does not exactly mirror my application
 Mobile Session Replay's approach combines performance with usability. To achieve this, it's not a pixel-perfect recreation of your app, but instead it takes a hybrid approach to the visual: it displays a scaffold of the screen that can later be enriched with styling and contextual images.
 
