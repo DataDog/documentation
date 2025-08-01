@@ -17,13 +17,18 @@ CCM displays costs for resources including query-level analysis, storage, and da
 
 BigQuery offers two primary pricing models for query processing:
 
-**On-demand queries**: You pay per query based on the amount of data processed. Costs are directly attributed to individual queries with no upfront commitment.
+**On-demand queries**: You pay per query based on the amount of data processed.
+- Costs are directly attributed to individual queries based on bytes processed
+- Includes query-level tags for detailed cost attribution
 
 **Reservation-based queries**: You purchase dedicated processing capacity (slots) in advance at a fixed cost. Multiple queries can share this reserved capacity, making cost attribution more complex but potentially more cost-effective for consistent workloads.
+- Costs of reserved slots are allocated proportionally to queries using those slots
+- Allocation based on slot consumption (`total_slot_ms`) per query
+- Includes idle cost calculation for unused reservation capacity
 
-CCM allocates and enriches costs for both pricing models, providing detailed cost attribution and tagging regardless of which model you use.
+CCM allocates and enriches costs for both pricing models, providing detailed cost attribution and tagging regardless of which model you use. Learn more about BigQuery services and pricing models [**here**][3].
 
-Learn more about BigQuery services and pricing models [**here**][3].
+[**Learn more about optimizing BigQuery performance and costs**][8]
 
 ## Prerequisites
 
@@ -41,21 +46,6 @@ The following table presents the list of collected features and the minimal requ
 3. For reservation cost allocation, configure BigQuery reservations in your project. [**Learn about BigQuery reservations**][7]
 
 ## Allocating costs
-
-### Compute allocation
-
-For BigQuery compute allocation, CCM handles two [**pricing models**][3]:
-
-**On-demand pricing**:
-- Costs are directly attributed to individual queries based on bytes processed
-- Includes query-level tags for detailed cost attribution
-
-**Reservation-based pricing**:
-- Costs of reserved slots are allocated proportionally to queries using those slots
-- Allocation based on slot consumption (`total_slot_ms`) per query
-- Includes idle cost calculation for unused reservation capacity
-
-[**Learn more about optimizing BigQuery performance and costs**][8]
 
 ### Compute
 
