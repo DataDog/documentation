@@ -4,6 +4,9 @@ further_reading:
   - link: "/code_coverage/setup"
     tag: "Documentation"
     text: "Set up Code Coverage"
+  - link: "/code_coverage/data_collected"
+    tag: "Documentation"
+    text: "Learn what data is collected for Code Coverage"
 algolia:
   tags: ["code coverage"]
 ---

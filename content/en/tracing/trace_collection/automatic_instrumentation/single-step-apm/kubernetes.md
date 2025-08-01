@@ -10,6 +10,9 @@ further_reading:
   - link: /tracing/guide/init_resource_calc/
     tag: Documentation
     text: Learn about init container resource usage
+  - link: /tracing/guide/local_sdk_injection
+    tag: Documentation
+    text: Instrument your applications using local SDK injection
 ---
 
 ## Overview
