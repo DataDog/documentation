@@ -11,7 +11,7 @@ further_reading:
 
 The [User Profiles][7] and [Account Profiles][8] pages contain enriched data on the users and accounts interacting with your product. 
 
-These profile pages integrate attributes extracted from collected events with information from third-party sources. Examples of these attributes include a user’s `first_seen` timestamp and an account’s `account_id`. Together, they help create comprehensive, centralized profiles.
+These profile pages integrate attributes extracted from collected events with information from third-party sources. Examples of these attributes include a user’s `first_seen` timestamp or the ISO code of their `last_seen_country`. Together, they help create comprehensive, centralized profiles.
 
 These enriched profiles enable more precise segmentation and deeper analysis of user behavior, helping you identify patterns over time, track key cohorts (for example, users active after six months), and guide product decisions and engagement strategies. 
 
@@ -21,7 +21,7 @@ User and account profiles are generated from RUM events collected through the RU
 
 User profiles are grouped by the `user_id` attribute, while account profiles are grouped by `account_id`.
 
-You can also customize these pages by adding attributes that matter most to your team. See the [Custom Attributes section](#use-custom-attributes-to-enrich-your-profiles) to learn how to tailor profile data to your needs. 
+You can also customize these pages by adding attributes that matter most to your team. See the [Custom Attributes section](#use-custom-attributes-to-enrich-profiles) to learn how to tailor profile data to your needs. 
 
 
 ### User profiles 
@@ -29,10 +29,6 @@ You can also customize these pages by adding attributes that matter most to your
 The [User Profiles][7] page lists the users who are interacting with your application. You can select a user to view detailed insights into their activity, including their most visited pages, frequent actions, and session history.
 
 {{< img src="product_analytics/user_profile2ui.png" alt="A view of the User profiles page." style="width:80%;" >}}
-
-Use the session history to identify [moments of frustration][9] and follow the **View Analytics** links to explore the related analytics. 
-
-{{< img src="product_analytics/segmentation/pana_frustration_detected.png" alt="Explore the user profiles page and its session history." style="width:80%;">}}
 
 Each profile has attributes to help you better segment your users. You can conduct a full-text search or sort and filter based on any of these attributes. You can also customize this page with attributes relevant to your analytic needs. See the [Custom Attributes section](#use-custom-attributes-to-enrich-your-profiles) to learn how.  
 
