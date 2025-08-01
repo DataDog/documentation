@@ -299,3 +299,6 @@ content/en/**/*.ast.json
 
 # Cursor editor configuration
 .cursor/
+
+# Generated file for LLMs
+static/llms.txt
