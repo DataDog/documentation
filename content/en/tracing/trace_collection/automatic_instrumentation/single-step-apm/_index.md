@@ -15,6 +15,9 @@ further_reading:
   - link: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting/
     tag: Documentation
     text: "Troubleshooting Single Step APM"
+  - link: /tracing/guide/local_sdk_injection
+    tag: Documentation
+    text: Instrument your applications using local SDK injection
 ---
 ## Overview
 

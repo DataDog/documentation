@@ -6,7 +6,11 @@ further_reading:
   text: "Set up Deployment Gates"
 ---
 
-To explore your Deployment Gates and rules evaluations, navigate to [**Software Delivery > Deployment Gates > Evaluations**][1].
+{{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
+Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
+{{< /callout >}}
+
+To explore your Deployment Gates and rules evaluations, navigate to [**Software Delivery > Deployment Gates > Evaluations**][1]. 
 
 On this page you can:
 * View recently completed gate evaluations and failure reasons

@@ -7,6 +7,9 @@ further_reading:
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
     text: "Join an interactive session to unlock the full potential of metrics"
+  - link: '/metrics/units'
+    tag: 'Documentation'
+    text: 'Metrics Units'
 ---
 
 ## Overview

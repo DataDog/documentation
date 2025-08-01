@@ -11,8 +11,7 @@ title: Correlacionar logs y tests
 
 Puedes correlacionar los datos de Test Optimization con [logs inyectados en Datadog][1], lo que te permite ver y analizar logs para casos de tests específicos.
 
-{{< img src="continuous_integration/correlate_logs_and_tests.png"
-  alt="Examinar logs para casos de tests específicos con la correlación de logs y tests." style="width:90%" >}}
+{{< img src="continuous_integration/correlate_logs_and_tests.png" alt="Examinar logs para casos de tests específicos con la correlación de logs y tests." style="width:90%" >}}
 
 ## Configuración
 

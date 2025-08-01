@@ -40,7 +40,7 @@ draft: false
 git_integration_title: openstack_controller
 integration_id: openstack-controller
 integration_title: OpenStack Controller
-integration_version: 8.0.0
+integration_version: 8.6.0
 is_public: true
 manifest_version: 2.0.0
 name: openstack_controller
@@ -143,7 +143,7 @@ OpenStack Controller インテグレーションは、すべてのコンピュ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "openstack-controller" >}}
+{{< get-metrics-from-git "openstack_controller" >}}
 
 
 ### イベント
@@ -151,7 +151,7 @@ OpenStack Controller インテグレーションは、すべてのコンピュ�
 OpenStack Controller には、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "openstack-controller" >}}
+{{< get-service-checks-from-git "openstack_controller" >}}
 
 
 ## トラブルシューティング

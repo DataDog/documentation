@@ -8,6 +8,8 @@ AWS アカウントを Cloudcraft に接続すると、ライブ環境のサー�
 
 この記事では、AWS アカウントを Cloudcraft に接続する手順を説明します。
 
+<div class="alert alert-info">Datadog ユーザーは、自分の Datadog アカウントを Cloudcraft に接続することでこの手順をスキップできます。詳細は <a href="https://docs.datadoghq.com/cloudcraft/getting-started/datadog-integration/" title="Datadog Integration">Datadog Integration</a> を参照してください。</div>
+
 ## 要件
 
 - [オーナーまたは管理者ロール][1]を持つ Cloudcraft ユーザー。

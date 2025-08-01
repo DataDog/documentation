@@ -152,7 +152,7 @@ static/resources/yaml/observability_pipelines/                  @DataDog/observa
 
 content/en/synthetics/*.md                                      @Datadog/synthetics-app @Datadog/documentation
 content/en/continuous_testing/*.md                              @Datadog/synthetics-ct @Datadog/documentation
-content/en/mobile_app_testing/*.md                              @Datadog/synthetics-mobile @Datadog/documentation
+content/en/mobile_app_testing/*.md                              @Datadog/synthetics-executing-mobile @Datadog/documentation
 
 # Software Delivery
 

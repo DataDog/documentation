@@ -736,13 +736,13 @@
     "request_schema_description": "Attributes describing which incident to add the signal to."
   },
   "EditSecurityMonitoringSignalAssignee": {
-    "description": "Modify the triage assignee of a security signal.",
+    "description": "This endpoint is deprecated - Modify the triage assignee of a security signal.",
     "summary": "Modify the triage assignee of a security signal",
     "request_description": "Attributes describing the signal update.",
     "request_schema_description": "Attributes describing an assignee update operation over a security signal."
   },
   "EditSecurityMonitoringSignalState": {
-    "description": "Change the triage state of a security signal.",
+    "description": "This endpoint is deprecated - Change the triage state of a security signal.",
     "summary": "Change the triage state of a security signal",
     "request_description": "Attributes describing the signal update.",
     "request_schema_description": "Attributes describing the change of state for a given state."

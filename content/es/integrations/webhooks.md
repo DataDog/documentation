@@ -40,11 +40,14 @@ Ve al [cuadro de la integración de webhooks][1] e introduce la URL y el nombre 
 
 ## Uso
 
-Para utilizar tu webhook, añade `@webhook-<WEBHOOK_NAME>` en el texto de la alerta de métrica que quieres que active el webhook. Este activa una solicitud POST a la URL que defines con el siguiente contenido en formato JSON. El tiempo de espera para cualquier solicitud individual es de 15 segundos. Datadog sólo emite un reintento si se produce un error interno (mensaje de notificación mal formado) o si Datadog recibe una respuesta 5XX del endpoint del webhook. Las conexiones perdidas se reintentan 5 veces.
+Para utilizar tu webhook, añade `@webhook-<WEBHOOK_NAME>` en el texto de la alerta de métrica que quieras que active el webhook. Esto activa una solicitud POST a la URL que definas con el siguiente contenido en formato JSON.
 
-**Nota**: Las cabeceras personalizadas deben estar en formato JSON.
+Datadog sólo realiza un reintento si se produce un error interno (mensaje de notificación mal formado) o si Datadog recibe una respuesta 5XX del endpoint del webhook. El tiempo de espera para cualquier solicitud individual es de 15 segundos y las conexiones perdidas se reintentan 5 veces.
 
-Para añadir tus propios campos personalizados a la solicitud, también puedes especificar tu propia carga útil en el campo Carga útil. Si quieres que tu carga útil esté codificada como URL, selecciona la casilla **Encode as form** (Codificar como formulario) y especifica tu carga útil en formato JSON. Utiliza las variables de la sección siguiente.
+**Notas**: 
+
+- Los encabezados personalizados deben estar en formato JSON. Para añadir tus propios campos personalizados a la solicitud, también puedes especificar tu propia carga útil en el campo Payload (Carga útil). Si quieres que tu carga útil esté codificada como URL, selecciona la casilla **Encode as form** (Codificar como formulario) y especifica tu carga útil en formato JSON. Utiliza las variables de la sección siguiente.
+- Datadog no envía notificaciones de seguridad a través de webhooks debido a las restricciones de la HIPAA. En tus notificaciones de Datadog, si haces referencia a cualquier debilidad de seguridad en **Finding** (Búsqueda) o a cualquier producto de seguridad en **Signals** (Señales), no puedes utilizar `@webhook...` en la configuración **Notify the following recipients** (Notificar a los siguientes destinatarios). Las alertas de seguridad no serán enviadas al webhook para cuentas en conformidad con la HIPAA. Si deseas que se envíen estas alertas, ponte en contacto con tu equipo de cuentas de Datadog para solicitar una excepción.
 
 ### Variables
 
@@ -389,7 +392,7 @@ No selecciones la casilla **Encode as form** (Codificar como formulario).
 | `ci_pipelines_alert` | Pipelines CI |
 | `ci_tests_alert` | Tests CI |
 | `composite_monitor` | Compuesto |
-| `error_tracking_alert` | Seguimiento de errores |
+| `error_tracking_alert` | Error Tracking |
 | `event_alert` | Evento que utiliza el endpoint V1 |
 | `event_v2_alert` | Evento que utiliza el endpoint V2 |
 | `log_alert` | Logs |

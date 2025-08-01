@@ -255,6 +255,43 @@ title: Android ログの収集
    {{< /tabs >}}
    {{< /site-region >}}
 
+   {{< site-region region="ap2" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+       class SampleApplication : Application() {
+           override fun onCreate() {
+               super.onCreate()
+               val configuration = Configuration.Builder(
+                        clientToken = <CLIENT_TOKEN>,
+                        env = <ENV_NAME>,
+                        variant = <APP_VARIANT_NAME>
+                    )
+                    .useSite(DatadogSite.AP2)
+                    .build()
+               Datadog.initialize(this, configuration, trackingConsent)
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+       public class SampleApplication extends Application {
+           @Override
+           public void onCreate() {
+               super.onCreate();
+               Configuration configuration =
+                       new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                               .useSite(DatadogSite.AP2)
+                               .build();
+               Datadog.initialize(this, configuration, trackingConsent);
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
+
    GDPR 規制を遵守するため、SDK は初期化時に追跡に関する同意を求めます。
    追跡に関する同意は以下のいずれかの値で示されます。
    * `TrackingConsent.PENDING`: SDK はデータの収集とバッチ処理を開始しますが、データ
@@ -341,10 +378,10 @@ title: Android ログの収集
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-       try {
-           doSomething()
+       try { 
+           doSomething() 
        } catch (e: IOException) {
-           logger.e("Error while doing something", e)
+           logger.e("Error while doing something", e) 
        }
    ```
    {{% /tab %}}
@@ -407,7 +444,7 @@ title: Android ログの収集
 
 ログを Datadog に送信するようにロガーを初期化する際に、`Logger.Builder` の次のメソッドを使用できます。
 
-| メソッド                           | 説明                                                                                                                                                                                                                                                             |
+| メソッド                           | 説明                                                                                                                                                                                                                                                              |
 |----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `setNetworkInfoEnabled(true)`    | すべてのログに `network.client.connectivity` 属性を追加します。デフォルトで記録されるデータには、`connectivity` (`Wifi`、`3G`、`4G`...) と `carrier_name` (`AT&T - US`)です。`carrier_name` は Android API レベル 28 以降でのみ利用できます。                                     |
 | `setService(<SERVICE_NAME>)` | Datadog に送信されるすべてのログにアタッチされる `service` [標準属性][6]の値として `<SERVICE_NAME>` を設定します。                                                                                                                                                           |
@@ -415,7 +452,7 @@ title: Android ログの収集
 | `setBundleWithTraceEnabled(true)`| アプリケーションでアクティブなトレースとログをバンドルするには、`true` (デフォルト) に設定します。このパラメーターにより、Datadog ダッシュボードを使い指定されたトレース中に送信されたすべてのログを表示できます。                                                        |
 | `setBundleWithRumEnabled(true)`| アプリケーションで現在の RUM コンテキストとログをバンドルするには、`true` (デフォルト) に設定します。このパラメーターにより、Datadog RUM Explorer 使い指定されたビューがアクティブの間に送信されたすべてのログを表示できます。                                                        |
 | `setName(<LOGGER_NAME>)`   | Datadog に送信されるすべてのログに添付される `logger.name` 標準属性の値として `<ロガー名>` を設定します。                                                                                                                                                                  |
-| `setRemoteSampleRate(<SAMPLE_RATE>)`   | このロガーのサンプリングレートを設定します。ロガーインスタンスが生成するすべてのログは、指定されたサンプリングレートに従いランダムにサンプリングされます (デフォルト 1.0 = すべてのログ)。**注**: Logcat ログはサンプリングされません。            |
+| `setRemoteSampleRate(<SAMPLE_RATE>)`   | このロガーのサンプリングレートを設定します。ロガーインスタンスが生成するすべてのログは、指定されたサンプリングレートに従いランダムにサンプリングされます (デフォルト 100f = すべてのログ)。**注**: Logcat ログはサンプリングされません。            |
 | `build()`                        | すべてのオプションを設定して新しいロガーインスタンスをビルドします。                                                                                                                                                                                                                       |
 
 ### グローバルコンフィギュレーション
@@ -494,7 +531,7 @@ logger.removeAttribute("version_name")
 
 ## 拡張
 
-### Timber
+### Timber 
 
 既存のコードベースが Timber を使用している場合、 [専用ライブラリ][9]を使用してすべてのログを自動的に Datadog へ転送できます。
 

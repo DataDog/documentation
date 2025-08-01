@@ -488,6 +488,8 @@ To set up CNM on Amazon ECS, see the [Amazon ECS][1] documentation page.
 
 {{% tab "ECS Fargate" %}}
 
+<div class="alert alert-info">ECS Fargate for CNM is in Preview. Reach out to your Datadog representative to sign up.</div>
+
 To enable Cloud Network Monitoring on ECS Fargate, use the following instructions:
 
 **Requires Agent version `7.58` or higher**.

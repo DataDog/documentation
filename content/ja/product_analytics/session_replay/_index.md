@@ -15,7 +15,7 @@ further_reading:
 - link: /integrations/content_security_policy_logs
   tag: ドキュメント
   text: Datadog を使用して CSP 違反を検出および集約する
-title: セッションリプレイ
+title: ユーザー アクティビティの再生
 ---
 
 
@@ -57,9 +57,9 @@ Session Replay のプレイリストを作成して、気づいたパターン�
 
 [1]: https://github.com/DataDog/browser-sdk
 [2]: https://www.rrweb.io/
-[3]: /ja/real_user_monitoring/session_replay/browser/
-[4]: /ja/real_user_monitoring/session_replay/mobile/
+[3]: /ja/product_analytics/session_replay/browser/
+[4]: /ja/product_analytics/session_replay/mobile/
 [5]: https://docs.datadoghq.com/ja/notebooks/
 [6]: https://docs.datadoghq.com/ja/account_management/audit_trail/
 [7]: https://app.datadoghq.com/rum/replay/playlists/my-watch-history
-[8]: /ja/real_user_monitoring/session_replay/playlists
+[8]: /ja/product_analytics/session_replay/playlists

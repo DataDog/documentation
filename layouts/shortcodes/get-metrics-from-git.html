@@ -1,7 +1,7 @@
 {{- $int_name := (.Get 0 ) -}}
 {{- $metric_namespaces := (.Get 1 ) -}}
 {{- if and $metric_namespaces (not (reflect.IsSlice $metric_namespaces)) -}}
-  {{- $metric_namespaces = slice $metric_namespaces -}}
+  {{- $metric_namespaces = split $metric_namespaces " " -}}
 {{- end -}}
 
 {{- if $int_name -}}

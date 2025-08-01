@@ -264,6 +264,7 @@ unsupported_sites:
   bits_ai_sre: [gov, ap2]
   case_management: [gov,ap1,ap2]
   ci_visibility: [gov]
+  code_coverage: [gov]
   code_security: [gov]
   continuous_delivery: [gov]
   continuous_integration: [gov]

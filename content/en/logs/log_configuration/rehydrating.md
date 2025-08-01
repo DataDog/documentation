@@ -91,7 +91,7 @@ The logs already indexed will remain queryable until the end of the retention pe
 
 Historical views stay in Datadog until they have exceeded the selected retention period, or you can opt to delete them sooner if you no longer need the view. You can mark a historical view to be deleted by selecting and confirming the delete icon at the far right of the historical view.
 
-One hour later, the historical view is definitively deleted; until that time, the team is able to cancel the deletion.
+One day later, the historical view is definitively deleted; until that time, the team is able to cancel the deletion.
 
 {{< img src="logs/archives/log_archives_rehydrate_delete_settings.mp4" alt="Deleting Historical Views" video="true" width="75%" >}}
 

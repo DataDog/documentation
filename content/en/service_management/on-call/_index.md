@@ -41,6 +41,41 @@ A schedule defines specific times when Team members are assigned to respond to P
 
 {{< img src="service_management/oncall/schedule.png" alt="A sample schedule, with multiple layers for JP, EU, and US business hours." style="width:80%;" >}}
 
+## Granular access control
+
+Use [granular access controls][3] to limit the [roles][4], teams, or users that can access On-Call resources. By default, access to On-Call schedules, escalation policies, and team routing rules is unrestricted.
+
+Granular access controls are available for the following On-Call resources:
+- **Schedules**: Control who can view, edit, and override schedules
+- **Escalation policies**: Control who can view and edit escalation policies
+- **Team routing rules**: Control who can view and edit team routing rules
+
+### Supported resources and permissions
+
+| On-Call resource | Viewer | Overrider | Editor |
+|------------------|--------|-----------|--------|
+| **Schedules** | Can view schedules | Can view schedules and override shifts | Can view, edit schedules, and override shifts |
+| **Escalation policies** | Can view escalation policies | - | Can view and edit escalation policies |
+| **Team routing rules** | Can view team rules | - | Can view and edit team rules |
+
+### Restrict access to On-Call resources
+
+To restrict access to an On-Call resource:
+
+1. Navigate to the specific On-Call resource (schedule, escalation policy, or team routing rules).
+1. Click **Manage**.
+1. Select **Permissions** from the dropdown menu.
+1. Click **Restrict Access**.
+1. Select one or more roles, teams, or users from the dropdown menu.
+1. Click **Add**.
+1. Select the level of access you want to associate with each of them from the dropdown menu next to their name:
+   - **Viewer**: Read-only access to view the resource
+   - **Overrider** (schedules only): Can view and create schedule overrides
+   - **Editor**: Full access to view and modify the resource
+1. Click **Save**.
+
+**Note**: To maintain your edit access to the resource, Datadog requires you to include at least one role that you are a member of before saving.
+
 ## Start using Datadog On-Call
 
 To get started with On-Call, [onboard an On-Call Team][1] and ensure that all Team members configure their [On-Call profile settings][2] to receive notifications.
@@ -59,3 +94,5 @@ To get started with On-Call, [onboard an On-Call Team][1] and ensure that all Te
 
 [1]: /service_management/on-call/teams
 [2]: /service_management/on-call/profile_settings
+[3]: /account_management/rbac/granular_access/
+[4]: /account_management/rbac/#role-based-access-control
