@@ -39,9 +39,9 @@ further_reading:
   Explore and register for Foundation Enablement sessions. Learn how Datadog Incident Management enables DevOps teams and SREs to more effectively manage their incident response workflows from start to finish, saving time and reducing frustration when it matters most.
 {{< /learning-center-callout >}}
 
-Any event that may lead to a disruption in your organization's services can be described as an incident, and it is often necessary to have a set framework for handling these events. Datadog's Incident Management feature provides a system through which your organization can effectively identify and mitigate incidents.
+Datadog Incident Management helps your teams effectively collaborate on identification, mitigation, resolution, and analysis of disruptions and threats to your organization's services. With Incident Management, you can design an automation-enhanced response process that helps your organization quickly assemble the right people when incidents occur and have them collaborate using a shared framework and a rich set of tools. Incident Management also provides you with analytics and tools for evaluating the health of your incident response process.
 
-Incidents live in Datadog alongside the metrics, traces, and logs you are collecting. You can view and filter incidents that are relevant to you.
+Incidents live in Datadog alongside the metrics, traces, and logs you are collecting. Your teams can declare incidents from monitor alerts, security signals, events, cases, and more. You can also configure monitors and workflows to automatically declare incidents.
 
 ## Get Started
 
@@ -67,7 +67,7 @@ You can also view your Incidents list from your mobile device home screen and ma
 
 ## Describing the incident
 
-When declaring an incident, it is critical to provide a comprehensive description, detailing what happened, why it occurred, and related attributes to ensure all stakeholders in the incident management process are fully informed. The essential elements of an incident declaration include a title, severity level, incident commanders, and notifications. Effective incident management documentation includes:
+When declaring an incident, it is critical to provide a comprehensive description, detailing what happened, why it occurred, and related attributes to ensure all stakeholders in the incident management process are fully informed. The essential elements of an incident declaration include a title, severity level, incident commanders. Effective incident management documentation includes:
 - Updating incident details, including its status, impact, root cause, detection methods, and service impacts. 
 - Forming and managing a response team, using custom responder roles, and leveraging metadata attributes for detailed incident assessment. 
 - Configuring notifications to keep all stakeholders informed throughout the incident resolution process.
@@ -82,17 +82,29 @@ For more details on the measures collected and step-by-step graph configurations
 
 ## Integrations
 
-In addition to integrating with [Slack][11], Incident Management also integrates with:
+Incident Management integrates closely with other Datadog products, including:
 
-- [PagerDuty][12] and [OpsGenie][13] to send incident notifications to your on-call engineers.
+- [Datadog Status Pages][26] to create public or private status pages and connect them to incidents.
+- [Datadog On-Call][27] to escalate pages into incidents and manually or automatically page teams from an incident.
+- [Datadog Notebooks][28] to draft and review postmortems.
+- [Datadog Workflow Automation][29] to build and execute automations.
+
+### Third-party integrations
+
+In addition to integrating with [Slack][11] and [Microsoft Teams][23] for chat and video calls, Incident Management also integrates with:
+
+- [Atlassian Status Page][24] to create status pages connected to the incident.
+- [Confluence][22] to generate incident postmortems.
 - [CoScreen][14] to launch collaborative meetings with multi-user screen sharing, remote control, and built-in audio and video chat.
 - [CoTerm][21] to follow terminal-based incident remediation activities in real time.
 - [Jira][15] to create a Jira ticket for an incident.
-- [Webhooks][16] to send incident notifications using webhooks (for example, [sending SMS to Twilio][17]).
+- [Microsoft Teams][23] to create channels and video meetings for incidents.
+- [PagerDuty][12] and [OpsGenie][13] to page your on-call engineers and auto-resolve pages upon incident resolution.
+- [ServiceNow][19] to create a ServiceNow tickets for incidents.
+- [Slack][11] to create channels for incidents.
 - [Statuspage][18] to create and update Statuspage incidents.
-- [ServiceNow][19] to create a ServiceNow ticket for an incident.
-- [Confluence][22] to generate incident postmortems.
-
+- [Webhooks][16] to send incident notifications using webhooks (for example, [sending SMS to Twilio][17]).
+- [Zoom][23] to launch video calls for incidents.
 
 ## Further Reading
 
@@ -120,3 +132,10 @@ In addition to integrating with [Slack][11], Incident Management also integrates
 [20]: /service_management/incident_management/describe
 [21]: /coterm
 [22]: /integrations/confluence/
+[23]: /integrations/microsoft-teams/?tab=datadogapprecommended#datadog-incident-management-in-microsoft-teams
+[24]: /integrations/zoom-incident-management/
+[25]: /integrations/statuspage/
+[26]: /service_management/status_pages/
+[27]: /service_management/on-call/
+[28]: /notebooks/
+[29]: /actions/workflows/
