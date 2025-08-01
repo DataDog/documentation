@@ -15,7 +15,9 @@ CCM displays costs for resources including query-level analysis, storage, and da
 
 ## BigQuery pricing models
 
-BigQuery offers two primary pricing models for query processing:
+BigQuery offers multiple pricing components, with CCM focusing on query-related processing costs:
+
+**Query Processing:**
 
 **On-demand queries**: You pay per query based on the amount of data processed.
 - Costs are directly attributed to individual queries based on bytes processed
@@ -26,7 +28,14 @@ BigQuery offers two primary pricing models for query processing:
 - Allocation based on slot consumption (`total_slot_ms`) per query
 - Includes idle cost calculation for unused reservation capacity
 
-CCM allocates and enriches costs for both pricing models, providing detailed cost attribution and tagging regardless of which model you use. Learn more about BigQuery services and pricing models [**here**][3].
+**Other BigQuery Costs (Not Currently Allocated):**
+- **Storage**: Charges for data stored in BigQuery tables (active and long-term storage)
+- **Streaming**: Costs for real-time data ingestion via streaming inserts
+- **Data Transfer**: Charges for moving data between regions or exporting data
+- **BI Engine**: Costs for in-memory analytics acceleration
+- **Other services**: ML training, routine executions, and additional BigQuery features
+
+CCM allocates and enriches costs for both query-processing pricing models, providing detailed cost attribution and tagging for your BigQuery analysis workloads. Learn more about BigQuery services and pricing models [**here**][3].
 
 [**Learn more about optimizing BigQuery performance and costs**][8]
 
