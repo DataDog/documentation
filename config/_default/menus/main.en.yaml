@@ -5496,46 +5496,51 @@ menu:
       url: /observability_pipelines/destinations/google_cloud_storage/
       parent: observability_pipelines_destinations
       weight: 1109
+    - name: HTTP Client
+      url: observability_pipelines/destinations/http_client/
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_http_client
+      weight: 1110
     - name: Microsoft Sentinel
       identifier: observability_pipelines_microsoft_sentinel
       url: /observability_pipelines/destinations/microsoft_sentinel/
       parent: observability_pipelines_destinations
-      weight: 1110
+      weight: 1111
     - name: New Relic
       identifier: observability_pipelines_new_relic
       url: /observability_pipelines/destinations/new_relic/
       parent: observability_pipelines_destinations
-      weight: 1111
+      weight: 1112
     - name: OpenSearch
       url: observability_pipelines/destinations/opensearch
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
-      weight: 1112
+      weight: 1113
     - name: SentinelOne
       url: observability_pipelines/destinations/sentinelone
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sentinelone
-      weight: 1113
+      weight: 1114
     - name: Socket
       url: observability_pipelines/destinations/socket
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_socket
-      weight: 1114
+      weight: 1115
     - name: Splunk HEC
       url: observability_pipelines/destinations/splunk_hec
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_splunk_hec
-      weight: 1115
+      weight: 1116
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/destinations/sumo_logic_hosted_collector
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sumo_logic_hosted_collector
-      weight: 1116
+      weight: 1117
     - name: Syslog
       url: observability_pipelines/destinations/syslog
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_syslog
-      weight: 1117
+      weight: 1118
     - name: Environment Variables
       url: observability_pipelines/environment_variables/
       parent: observability_pipelines
