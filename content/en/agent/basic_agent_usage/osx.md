@@ -26,7 +26,7 @@ algolia:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for macOS. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
+This page outlines the basic features of the Datadog Agent for macOS.
 
 See the [Supported Platforms][5] documentation for the complete list of supported macOS distributions and versions.
 
