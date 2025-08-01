@@ -11,7 +11,7 @@ further_reading:
 
 The [User Profiles][7] and [Account Profiles][8] pages contain enriched data on the users and accounts interacting with your product. 
 
-These profile pages integrate attributes extracted from collected events with information from third-party sources. Examples of these attributes include a user’s `first_seen` timestamp or the ISO code of their `last_seen_country`. Together, they help create comprehensive, centralized profiles.
+These profile pages integrate attributes extracted from collected events with information from third-party sources. Examples of these attributes include a user’s `first_seen` timestamp or the ISO code of the user's `last_seen_country`. Together, they help create comprehensive, centralized profiles.
 
 These enriched profiles enable more precise segmentation and deeper analysis of user behavior, helping you identify patterns over time, track key cohorts (for example, users active after six months), and guide product decisions and engagement strategies. 
 
