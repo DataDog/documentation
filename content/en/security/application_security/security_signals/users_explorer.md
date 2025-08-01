@@ -155,7 +155,7 @@ Here are some investigation tips for comparing each datapoint across two (or mor
 2. Look for patterns.
   Compare ASN, IP, user agent, geo, domain. If multiple users share infrastructure, it's likely one actor or campaign.
 3. Geo anomalies matter more than location.
-  Ask whether the location is normal for this user?
+  The country of origin isn't as important as asking whether the location is normal for the user.
 4. Domains reveal the scope.
   The same attack across multiple users or domains can mean coordinated targeting, not random hits.
 5. IP/User Agent overlap equals attacker fingerprint.
