@@ -18,7 +18,7 @@ When configured, the SNMP check collects VPN tunnel data from your devices. This
 
 ### Limitations
 
-- Only Cisco IPsec VPN tunnels are currently supported.
+- Support is limited to Cisco IPsec VPN tunnels.
 
 ## Configuration
 
