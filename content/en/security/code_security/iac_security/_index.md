@@ -45,7 +45,7 @@ Use filters to narrow results by:
 Click any finding to open a side panel that shows:
 
 - **Details**: A description and the relevant code that triggered the finding. (To view code snippets, install the GitHub App.)
-- **Remediation**: One or more suggested code fixes, when available.
+- **Remediation**: If available, suggested code fixes are provided for findings that support remediation.
 
 ### Create Jira tickets from findings
 
