@@ -116,7 +116,7 @@ installp -e dd-aix-uninstall.log -uv datadog-unix-agent
 [1]: /getting_started/site/#access-the-datadog-site
 [4]: https://github.com/DataDog/datadog-unix-agent/blob/master/README.md
 [5]: /agent/supported_platforms/?tab=unix
-[6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
+[6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=aix
 [7]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [8]: https://app.datadoghq.com/organization-settings/api-keys
 [9]: /agent/configuration/proxy/
