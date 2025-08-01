@@ -63,6 +63,10 @@ cascade:
     {{< nextlink href="integrations/guide/azure-graph-api-permissions" tag=" Azure" >}}Microsoft Graph API Permissions for Monitoring Azure{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="Google Cloud guides:" >}}
+    {{< nextlink href="integrations/guide/gcp-metric-discrepancy" tag=" gcp" >}}Google Cloud Metric Discrepancy{{< /nextlink >}}
+{{< /whatsnext >}}
+
 {{< whatsnext desc="JMX guides:" >}}
     {{< nextlink href="integrations/guide/running-jmx-commands-in-windows" tag=" jmx" >}}Running JMX commands in Windows{{< /nextlink >}}
     {{< nextlink href="integrations/guide/collecting-composite-type-jmx-attributes" tag=" jmx" >}}Collecting composite-type JMX attributes{{< /nextlink >}}
