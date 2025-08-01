@@ -92,7 +92,12 @@ curl -v -H "Content-Type: application/json" -H
 "dd-api-key:${PRIMARY_DD_API_KEY}" -H 
 "dd-application-key:${PRIMARY_DD_APP_KEY}" --data "${CONNECTION}" --request POST ${PRIMARY_DD_API_URL}/api/v2/hamr
 ```
+After DDR is successfully set up, the DDR org will have a banner, but the primary org will have no such banner.
+
+{{< img src="agent/guide/ddr/ddr-banner.png" alt="The DDR banner in the DDR org" >}}
+
 {{% /collapse-content %}}
+
 
 <br>
 
@@ -176,6 +181,20 @@ Remote Configuration is enabled by default for new organizations, this includes 
 Using Remote Configuration is strongly recommended for a more seamless failover control. As an alternative to RC, you can manually configure your Agents or use configuration management tools such as Puppet, Ansible, or Chef.
 
 {{% /collapse-content %}}
+
+<!-- FLEET AUTOMATION START -->
+{{% collapse-content title="Enable Fleet Automation [**RECOMMENDED]" level="h5" %}}
+
+
+[Remote configuration (RC)][7] allows you to remotely configure and change the behavior of Datadog Agents deployed in your infrastructure. 
+
+Remote Configuration is enabled by default for new organizations, this includes your DDR org. Any new API keys you create is RC-enabled for use with your Agent. For more details, see the [Remote Configuration documentation][7].
+
+Using Remote Configuration is strongly recommended for a more seamless failover control. As an alternative to RC, you can manually configure your Agents or use configuration management tools such as Puppet, Ansible, or Chef.
+
+{{% /collapse-content %}}
+
+<!-- FLEET AUTOMATION END -->
 
 {{% collapse-content title="Update your Datadog Agent configuration" level="h5" %}}
 This step requires that you are on the Agent version **7.54 or higher**. 
