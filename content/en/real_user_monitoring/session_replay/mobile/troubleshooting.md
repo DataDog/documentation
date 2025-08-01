@@ -39,7 +39,7 @@ Image visibility depends on your SDK privacy configuration:
 
 All other images are replaced by a "Content Image" placeholder in the UI.
 
-Learn more on image privacy settings [here](https://docs.datadoghq.com/real_user_monitoring/session_replay/mobile/privacy_options/?platform=ios&tab=as-wrappers#image-masking).
+Learn more on [image privacy settings][1].
 
 Images follow a separate processing pipeline, which may introduce a small delay between uploading a replay and the image being available for rendering in the web player.
 In this case, wait a few minutes and then reload the replay. 
@@ -63,3 +63,4 @@ At any time during the lifetime of the host app, it's possible to change the tra
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+[1]: https://docs.datadoghq.com/real_user_monitoring/session_replay/mobile/privacy_options/?platform=ios&tab=as-wrappers#image-masking
