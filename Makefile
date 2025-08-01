@@ -76,7 +76,7 @@ watch-cdocs:
 # so Hugo can include them in the site
 build-llms-txt:
 	@echo "Launching llms.txt build ...";
-	@node ./local/bin/js/build-llms-txt.js;
+	@node ./local/bin/js/llms-txt-build.js;
 
 start:
 	@make setup-build-scripts ## Build and run docs including external content.
