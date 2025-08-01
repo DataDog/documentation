@@ -89,7 +89,7 @@ Datadog creates aliases for host names when there are multiple uniquely identifi
 You can view and manage Agent configurations across your entire infrastructure using [Fleet Automation][12].
 
 To view Agent configurations:
-1. Click **Open Host**  in the top-right corner of the host detail panel.
+1. Click **Open Host** in the top-right corner of the host detail panel.
 2. Select **View Agent Configurations** from the dropdown menu to go directly to Fleet Automation.
 
 {{< img src="infrastructure/index/infra-list-config-4.png" alt="View Agent configurations in Fleet Automation" style="width:100%;">}}
@@ -116,7 +116,7 @@ For a JSON formatted list of your hosts reporting to Datadog, use one of the fol
 
 #### Agent version
 
-At times it may also be prove useful to audit your Agent versions to ensure you are running the latest version. To accomplish this, use the [get_host_agent_list script][9], which leverages the JSON permalink to output the current running Agents with version numbers. There is also a `json_to_csv` script to convert the JSON output into a CSV file.
+It may be useful to audit your Agent versions to ensure you are running the latest version. To accomplish this, use the [get_host_agent_list script][9], which leverages the JSON permalink to output the current running Agents with version numbers. There is also a `json_to_csv` script to convert the JSON output into a CSV file.
 
 #### No Agent
 
