@@ -34,7 +34,6 @@ Agent version `7.70` or higher.
 
 To enable VPN monitoring to all _manually_ configured devices, add the `collect_vpn` configuration in the `init_config` section:
 
-```yaml
 {{< highlight yaml "hl_lines=4" >}}
 init_config:
   loader: core
@@ -47,11 +46,9 @@ instances:
     - 'key1:val1'
     - 'key2:val2'
 {{< /highlight >}}
-```
 
 Or, apply the `collect_vpn` configuration _per_ instance:
 
-```yaml
 {{< highlight yaml "hl_lines=10" >}}
 init_config:
   loader: core
@@ -64,7 +61,6 @@ instances:
       - 'key2:val2'
     collect_vpn: true        # (default false) enable collecting VPN tunnel data
 {{< /highlight >}}
-```
 
 {{% /tab %}}
 
@@ -72,7 +68,6 @@ instances:
 
 To enable VPN monitoring to all _Autodiscovery_ subnets, add the `collect_vpn` configuration under the `network_devices.autodiscovery` section:
 
-```yaml
 {{< highlight yaml "hl_lines=7" >}}
 network_devices:
   autodiscovery:
@@ -91,7 +86,6 @@ network_devices:
         - "key1:val1"
         - "key2:val2"
 {{< /highlight >}}
-```
 
 {{% /tab %}}
 {{< /tabs >}}
