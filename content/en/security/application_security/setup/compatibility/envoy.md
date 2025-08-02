@@ -19,6 +19,14 @@ The following table lists the support for App and API Protection capabilities fo
 | App and API Protection Standalone              | v2.2.0                                            |
 | Automatic user activity event tracking         | not supported                                     |
 
+### Body processing support
+
+The Datadog External Processor service supports the processing of request and response bodies for the following payload types:
+
+| Payload type | Minimum Datadog External Processor image version  |
+|--------------|---------------------------------------------------|
+| JSON         | v2.1.0                                            |
+
 ## Envoy version support
 
 The Datadog Envoy integration for App and API Protection relies on features that may not be present in every Envoy version. Refer to the table below to determine which Envoy versions support each feature.

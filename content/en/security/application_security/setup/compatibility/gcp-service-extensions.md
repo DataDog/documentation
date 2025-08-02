@@ -20,6 +20,14 @@ The following table lists the support for App and API Protection capabilities fo
 
 Please refer to the [limitations][1] of the App and API Protection GCP Service Extensions integration.
 
+### Body processing support
+
+The Datadog Service Extensions callout supports the processing of request and response bodies for the following payload types:
+
+| Payload type | Minimum App and API Protection Service Extensions callout image version  |
+|--------------|--------------------------------------------------------------------------|
+| JSON         | v2.1.0                                                                   |
+
 ## App and API Protection GCP Service Extensions support
 
 App and API Protection GCP Service Extensions is in Preview.
