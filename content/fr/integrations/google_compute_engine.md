@@ -73,7 +73,7 @@ Pour désactiver les monitors en cas d'arrêt planifié d'une instance GCE, coch
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "google_compute_engine" >}}
+{{< get-metrics-from-git "google-compute-engine" >}}
 
 
 ### Événements

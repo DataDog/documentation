@@ -20,10 +20,6 @@ algolia:
   tags: ['remote config', 'remote configuration']
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Remote Configuration is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 Remote Configuration is a Datadog capability that allows you to remotely configure and change the behavior of Datadog components (for example, Agents, tracing libraries, and Observability Pipelines Worker) deployed in your infrastructure, for select product features. Use Remote Configuration to apply configurations to Datadog components in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating issue resolution times.
 
@@ -63,7 +59,8 @@ Remote Configuration works in environments where the Datadog Agent is deployed. 
 The following products and features are supported with Remote Configuration:
 
 ### Fleet Automation
-**[Send flares][27] directly from the Datadog site**. Seamlessly troubleshoot the Datadog Agent without directly accessing the host.
+- **[Upgrade your entire fleet of Datadog Agents][29] directly from the Datadog site** in a few clicks.
+- **[Send flares][27] directly from the Datadog site**. Seamlessly troubleshoot the Datadog Agent without directly accessing the host.
 
 ### App and API Protection (AAP)
 
@@ -89,10 +86,6 @@ The following products and features are supported with Remote Configuration:
 ### Observability Pipelines
 
 - **Remotely deploy and update [Observability Pipelines Workers][4] (OPW)**: Build and edit pipelines in the Datadog UI, rolling out your configuration changes to OPW instances running in your environment.
-
-### Sensitive Data Scanner (SDS) through the Datadog Agent
-
-- **Redact sensitive information in your logs within your premises (Preview)**: Remotely configure and deploy OOTB Sensitive Data Scanning rules to the Datadog Agent in your environment. See [Sensitive Data Scanner][28] for more information.
 
 ## Security considerations
 
@@ -160,8 +153,8 @@ To enable Remote Configuration:
    ```yaml
    datadog:
      apiKey: xxx
-   remoteConfiguration:
-     enabled: true
+     remoteConfiguration:
+       enabled: true
    ```
 
    {{% /tab %}}
@@ -310,9 +303,10 @@ datadog:
 [20]: /dynamic_instrumentation/?tab=configurationyaml#prerequisites
 [21]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [22]: /tracing/trace_collection/runtime_config/
-[23]: /agent/remote_config/?tab=configurationyamlfile#opting-out-of-remote-configuration-at-the-agent-level
+[23]: /agent/remote_config/?tab=configurationyamlfile#opting-out-of-remote-configuration
 [24]: https://app.datadoghq.com/organization-settings/api-keys
 [25]: /agent/guide/
 [26]: https://app.datadoghq.com/organization-settings/remote-config/setup?page_id=org-enablement-step
 [27]: /agent/fleet_automation/#send-a-remote-flare
 [28]: /security/sensitive_data_scanner/?tab=usingtheagent
+[29]: /agent/fleet_automation/remote_management/#upgrade-your-agents

@@ -1,13 +1,17 @@
 ---
 title: WAF Integrations
 disable_toc: false
+aliases:
+  - /security/application_security/threats/waf-integration
 further_reading:
 - link: "https://www.datadoghq.com/blog/aws-waf-datadog/"
   tag: "Blog"
   text: "Monitor AWS WAF activity with Datadog"
 ---
 
-Protecting web applications and APIs requires a multi-layered approach that combines in-app monitoring and perimeter defenses. These complementary strategies enable you to have a defense-in-depth App and API Protection approach leveraging AWS Web Application Firewall (WAF) as the first line of defense, followed by App and API Protection to block attacks that slip by the WAF.
+Protecting web applications and APIs requires a multi-layered approach that combines in-app monitoring and perimeter defenses. These complementary strategies enable you to have a *defense-in-depth* App and API Protection approach that leverages AWS Web Application Firewall (WAF) as the first line of defense, followed by Exploit Prevention for blocking attacks that slip by the WAF.
+
+For details on how Exploit Prevention differs from In-App WAF, see [Exploit Prevention vs. In-App WAF][5].
 
 ### In-app monitoring: deep visibility with distributed tracing
 
@@ -60,3 +64,4 @@ There are two main use cases supported with this [integration][1]:
 [2]: /integrations/amazon_waf/#log-collection
 [3]: https://app.datadoghq.com/security?query=@workflow.rule.type:%22Application%20Security%22&product=appsec
 [4]: https://app.datadoghq.com/security/appsec/traces
+[5]: /security/application_security/#exploit-prevention-vs-in-app-waf

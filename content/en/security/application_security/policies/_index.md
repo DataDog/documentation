@@ -1,5 +1,7 @@
 ---
 title: Policies
+aliases:
+  - /security/application_security/threats/protection
 disable_toc: false
 ---
 
@@ -82,8 +84,6 @@ View blocked security traces in the [Trace Explorer][11] by filtering on the fac
 
 {{% asm-protection-page-configuration %}}
 
-{{< img src="/security/application_security/asm-blocking-page-html.png" alt="The page displayed as AAP blocks requests originating from blocked IPs" width="75%" >}}
-
 The default HTTP response status code while serving the deny page to attackers is `403 FORBIDDEN`. To customize the response, navigate to **Security > App and API Protection > Protection > In-App Waf > [Custom Responses][16]**.
 
 You can optionally mask the fact that the attacker has been detected and blocked by overriding the response code to be `200 OK` or `404 NOT FOUND` when the deny page is served.
@@ -96,10 +96,6 @@ Protection mode is **on** by default and is a toggle available to quickly disabl
 
 As important as it is for you to be able to apply protection granularly and reduce the likelihood of legitimate users getting blocked, you sometimes need a simple off switch to quickly stop **all** blocking across **all** services. To turn off protection, navigate to **Security > App and API Protection > Protection > [In-App WAF][9]** and toggle **Allow Request Blocking** to off.
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /security/application_security/setup/
 [2]: /agent/remote_config/#enabling-remote-configuration
 [3]: /agent/versions/upgrade_between_agent_minor_versions
@@ -109,7 +105,7 @@ As important as it is for you to be able to apply protection granularly and redu
 [7]: https://app.datadoghq.com/security/appsec/denylist
 [8]: https://app.datadoghq.com/security/appsec/passlist
 [9]: https://app.datadoghq.com/security/appsec/in-app-waf
-[10]: /security/application_security/threats/inapp_waf_rules/
+[10]: /security/application_security/policies/inapp_waf_rules/
 [11]: https://app.datadoghq.com/security/appsec/traces
 [12]: /security/application_security/setup/compatibility/
 [14]: https://app.datadoghq.com/security/appsec/detection-rules
@@ -117,4 +113,4 @@ As important as it is for you to be able to apply protection granularly and redu
 [16]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-responses
 [17]: https://docs.datadoghq.com/service_management/workflows/
 [18]: https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY
-[20]: /security/application_security/threats/security_signals/
+[20]: /security/application_security/security_signals/

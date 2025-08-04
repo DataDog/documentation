@@ -1,6 +1,8 @@
 ---
 title: Enabling AAP threat detection and protection using single step instrumentation
 external_redirect: /security/application_security/threats/threat_detection/
+aliases:
+  - /security/application_security/threats/setup/single_step
 ---
 
 <div class="alert alert-info">Enabling AAP threat detection and protection using single step instrumentation is in Preview.</div>
@@ -49,7 +51,7 @@ For an Ubuntu host:
 4. Restart the services on the host or VM.
 5. [Explore the performance observability of your services in Datadog][5].
 
-**Note:** To configure single-step for both AAP Threat Protection and Code Security, add the environment variables `DD_APPSEC_ENABLED=true` _and_ `DD_IAST_ENABLED=true` to your one-line installation command.
+**Note:** To configure single-step for AAP threat protection, add the environment variable `DD_APPSEC_ENABLED=true` to your one-line installation command.
 
 ### Specifying tracing library versions {#lib-linux}
 

@@ -50,7 +50,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud Machine L
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "google_cloud_ml" >}}
+{{< get-metrics-from-git "google-cloud-ml" >}}
 
 
 ### Événements

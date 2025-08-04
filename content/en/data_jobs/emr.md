@@ -116,7 +116,7 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
    ```
 
    Optionally, the script can be configured adding the following environment variables:
-   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-emr-0.12.9.sh` to use version `0.12.9`, for example. The source code used to generate this script, and the changes between script versions can be found on the [Datadog Agent repository][12].
+   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-emr-0.13.5.sh` to use version `0.13.5`, for example. The source code used to generate this script, and the changes between script versions can be found on the [Datadog Agent repository][12].
 
    Optionally, the script can be configured by adding the following environment variables:
 
@@ -125,8 +125,10 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
 | DD_TAGS                  | Add tags to EMR cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][15]. Example: `env:staging,team:data_engineering` |         |
 | DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.   |         |
 | DD_EMR_LOGS_ENABLED      | Send Spark driver and worker logs to Datadog.                                                                                                                  | false   |
+| DD_LOGS_CONFIG_PROCESSING_RULES | Filter the logs collected with processing rules. See [Advanced Log Collection][16] for more details. |         |
 
 [15]: /getting_started/tagging/
+[16]: /agent/logs/advanced_log_collection/?tab=environmentvariable#global-processing-rules
 
 1. On the **Create Cluster** page, find the **Bootstrap actions** section. Click **Add** to bring up the **Add bootstrap action** dialog.
    {{< img src="data_jobs/emr/add_bootstrap_action_without_arguments.png" alt="Amazon EMR console, Create Cluster, Add Bootstrap Action dialog. Text fields for name, script location, and arguments." style="width:80%;" >}}

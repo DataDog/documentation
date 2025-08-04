@@ -12,7 +12,7 @@ disable_toc: false
 further_reading:
 - link: /getting_started/workflow_automation/
   tag: Documentation
-  text: Débuter avec Workflow Automation
+  text: Débuter avec Workflow Automation
 - link: /integrations/
   tag: Documentation
   text: En savoir plus sur les intégrations
@@ -21,10 +21,6 @@ further_reading:
   text: Consultez la liste des actions de workflow
 title: Accès et authentification
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution Workflow Automation n'est pas prise en charge pour le <a href="/getting_started/site">site Datadog</a> ({{< region-param key="dd_site_name" >}}) que vous avez sélectionné.</div>
-{{< /site-region >}}
 
 Plusieurs outils permettent de contrôler l'accès et l'authentification à des workflows et à leurs composants.
 

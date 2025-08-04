@@ -25,25 +25,6 @@ To set up Cloud Cost Management in Datadog, you should:
 
 ## Setup
 
-### Prerequisite: generate a Cost and Usage Report
-
-[Create a Legacy Cost and Usage Report][1] in AWS under the **Data Exports** section.
-
-Select the Export type **Legacy CUR export**.
-
-Select the following content options:
-
-* Export type: **Legacy CUR export**
-* **Include resource IDs**
-* **Split cost allocation data** (Enables ECS Cost Allocation. You must also opt in to [AWS Split Cost Allocation][10] in Cost Explorer preferences).
-* **"Refresh automatically"**
-
-Select the following delivery options:
-
-* Time granularity: **Hourly**
-* Report versioning: **Create new report version**
-* Compression type: **GZIP** or **Parquet**
-
 ### Configure the AWS integration
 
 Navigate to [Setup & Configuration][7] and select an AWS account from the dropdown menu to pull costs from.
@@ -56,9 +37,63 @@ Navigate to [Setup & Configuration][7] and select an AWS account from the dropdo
 
 This ensures complete cost accuracy by allowing periodic cost calculations against the AWS Cost Explorer.
 
+{{< tabs >}}
+
+{{% tab "CloudFormation" %}}
+
+{{< img src="cloud_cost/setup/aws_cloudformation_setup.jpg" alt="Cloud Cost Management setup form in CloudFormation mode" style="width:100%" >}}
+
+### Select the resources to create
+
+The CloudFormation stack can be configured in three ways depending on your existing AWS resources:
+
+* **New setup**: Select **Create Cost and Usage Report** to create both the report and its S3 bucket
+* **Existing bucket**: Select **Create Cost and Usage Report** and unselect **Create S3 Bucket** to use an existing S3 bucket
+* **Existing report**: Unselect **Create Cost and Usage Report** to import an existing Cost and Usage Report
+
+### Configure the Cost and Usage Report settings
+
+Enter the following details for your Cost and Usage Report:
+
+* **Bucket Name**: The S3 bucket name where the report files are stored.
+* **Bucket Region**: The AWS [region code][100] of the region containing your S3 bucket. For example, `us-east-1`.
+* **Export Path Prefix**: The S3 path prefix where report files are stored.
+* **Export Name**: The name of your Cost and Usage Report.
+
+**Notes**:
+- These values either locate your existing Cost and Usage Report, or define the settings for newly created resources.
+- It may take between 48 and 72 hours for all available data to populate in your Datadog organization after a complete Cost and Usage Report is generated. If 72 hours have passed and the data has still not yet populated, contact [Datadog Support][18].
+
+[100]: https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html
+
+{{% /tab %}}
+
+{{% tab "Manual" %}}
+
+{{< img src="cloud_cost/setup/aws_manual_setup.jpg" alt="Cloud Cost Management setup form in manual mode" style="width:100%" >}}
+
+### Prerequisite: generate a Cost and Usage Report
+
+[Create a Legacy Cost and Usage Report][201] in AWS under the **Data Exports** section.
+
+Select the Export type **Legacy CUR export**.
+
+Select the following content options:
+
+* Export type: **Legacy CUR export**
+* **Include resource IDs**
+* **Split cost allocation data** (Enables ECS Cost Allocation. You must also opt in to [AWS Split Cost Allocation][210] in Cost Explorer preferences).
+* **"Refresh automatically"**
+
+Select the following delivery options:
+
+* Time granularity: **Hourly**
+* Report versioning: **Create new report version**
+* Compression type: **GZIP** or **Parquet**
+
 ### Locate the Cost and Usage Report
 
-If you have navigated away from the report that you created in the prerequisites section, follow AWS documentation to [view your Data Exports][4]. Select the legacy CUR export that you created, then select **Edit** to see the details of the export.
+If you have navigated away from the report that you created in the prerequisites section, follow AWS documentation to [view your Data Exports][204]. Select the legacy CUR export that you created, then select **Edit** to see the details of the export.
 
 To enable Datadog to locate the Cost and Usage Report, complete the fields with their corresponding details:
 
@@ -75,7 +110,7 @@ To enable Datadog to locate the Cost and Usage Report, complete the fields with 
 
 ### Configure access to the Cost and Usage Report
 
-[Create a policy][5] in AWS to ensure Datadog has permissions to access the CUR and the S3 bucket it is stored in. Use the following JSON:
+[Create a policy][205] in AWS to ensure Datadog has permissions to access the CUR and the S3 bucket it is stored in. Use the following JSON:
 
 {{< code-block lang="yaml" collapsible="true" >}}
 {
@@ -138,29 +173,28 @@ Attach the new S3 policy to the Datadog integration role.
 4. Enter the name of the S3 bucket policy created above.
 5. Click **Attach policy**.
 
-**Note:** Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
+**Note**: It may take between 48 and 72 hours for all available data to populate in your Datadog organization after a complete Cost and Usage Report is generated. If 72 hours have passed and the data has still not yet populated, contact [Datadog Support][18].
+
+[201]: https://docs.aws.amazon.com/cur/latest/userguide/dataexports-create-legacy.html
+[204]: https://docs.aws.amazon.com/cur/latest/userguide/dataexports-view.html
+[205]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
+[210]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ### Account filtering
 
 Use Account Filtering to control which AWS member accounts to pull into Cloud Cost Management. You do not incur any additional costs for accounts that you filter out.
 
-Using Account Filtering requires an AWS management account. You can configure account filters during setup and after an account has been configured in Cloud Cost Management.
+Using Account Filtering requires an AWS management account. You can configure account filters after an account has been configured in Cloud Cost Management.
 
 **Note:** Account filters are not supported for Recommendations or tag search.
 
-#### Configure account filters for a new account
-
-Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][18], and then click **Add Account** on the AWS account card.
-
-{{< img src="cloud_cost/account_filtering/add_account.png" alt="Add Account button on account card" style="width:100%;" >}}
-
-You can configure account filters in step 4 of the setup process.
-
-{{< img src="cloud_cost/account_filtering/account_filtering_setup.png" alt="Account Filtering UI to filter AWS member accounts during setup" style="width:100%;" >}}
-
 #### Configure account filters for an existing account
 
-Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][18], and then click **Manage Account** for the management account you want to filter.
+Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][17], and then click **Manage Account** for the management account you want to filter.
 
 {{< img src="cloud_cost/account_filtering/manage_account.png" alt="Manage Account button on account card" style="width:100%;" >}}
 
@@ -404,4 +438,5 @@ After the billing conductor CUR is created, follow the Cloud Cost Management ins
 [14]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
 [15]: /cloud_cost_management/tag_pipelines
 [16]: https://docs.aws.amazon.com/billingconductor/latest/userguide/what-is-billingconductor.html
-[18]: https://app.datadoghq.com/cost/settings/accounts
+[17]: https://app.datadoghq.com/cost/settings/accounts
+[18]: /help/

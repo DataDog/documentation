@@ -107,7 +107,7 @@ No se recopilan métricas.
 El check de reboot_required no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "reboot_required" >}}
+{{< get-service-checks-from-git "reboot-required" >}}
 
 
 ## Solucionar problemas

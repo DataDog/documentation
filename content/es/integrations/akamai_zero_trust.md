@@ -87,7 +87,7 @@ Akamai Zero Trust recopila logs tanto para Secure Internet Access (SIA) como par
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "akamai_zero_trust" >}}
+{{< get-metrics-from-git "akamai-zero-trust" >}}
 
 
 ### Logs

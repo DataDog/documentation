@@ -7,6 +7,9 @@ further_reading:
 - link: "/dynamic_instrumentation/expression-language/"
   tag: "Documentation"
   text: "Dynamic Instrumentation Expression Language"
+- link: "/developers/ide_plugins/idea/live_debugger/"
+  tag: "Documentation"
+  text: "Live Debugger for JetBrains IDEs"
 - link: "/dynamic_instrumentation/sensitive-data-scrubbing/"
   tag: "Documentation"
   text: "Sensitive Data Scrubbing"
@@ -81,6 +84,8 @@ Like Live Debugger, Dynamic Instrumentation allows users to create logpoints (in
 When you enable or disable Live Debugger, the same action applies to Dynamic Instrumentation for that service and environment. When disabled, all data capture stops from both active Debug Session logpoints and dynamic instrumentations.
 
 ## Using Live Debugger
+
+<div class="alert alert-info">Try using Live Debugger from your JetBrains IDE! <a href="/developers/ide_plugins/idea/live_debugger/">Click here</a> to learn more.</div>
 
 ### Creating and using a Debug Session
 

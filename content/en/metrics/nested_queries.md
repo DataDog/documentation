@@ -4,6 +4,9 @@ further_reading:
 - link: "/dashboards/querying/"
   tag: "Documentation"
   text: "Dashboard Querying"
+- link: "https://www.datadoghq.com/blog/nested-queries/"
+  tag: "Blog"
+  text: "Discover powerful insights with nested metric queries"
 ---
 
 ## Overview

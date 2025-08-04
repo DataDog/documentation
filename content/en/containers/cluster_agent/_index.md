@@ -44,7 +44,8 @@ Some features related to later Kubernetes versions require a minimum Datadog Age
 |--------------------|----------------|-----------------------|---------------------------------------|
 | 1.16.0+            | 7.19.0+        | 1.9.0+                | Kubelet metrics deprecation           |
 | 1.21.0+            | 7.36.0+        | 1.20.0+               | Kubernetes resource deprecation       |
-| 1.22.0+            | 7.37.0+        | 7.37.0+               | Support dynamic service account token |
+| 1.22.0+            | 7.37.0+        | 7.37.0+               | Supports dynamic service account token |
+| 1.25.0+            | 7.40.0+        | 7.40.0+               | Supports `v1` API group               |
 
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="/agent/cluster_agent/setup" >}}<u>Setup</u>: Setup the Datadog Cluster Agent in your Kubernetes Cluster.{{< /nextlink >}}

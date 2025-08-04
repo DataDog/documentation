@@ -48,7 +48,7 @@ Datadog 에이전트 또는 DaemonSet을 사용하여 Azure에서 Datadog로 로
 
 {{< code-block lang="powershell" filename="활동 로그 단계 2" >}}
 
-./activity_logs_deploy.ps1 -ApiKey <API_KEY> -SubscriptionId <SUBSCRIPTION_ID> 
+./activity_logs_deploy.ps1 -ApiKey <API_KEY> -SubscriptionId <SUBSCRIPTION_ID>
 
 {{< /code-block >}}
 
@@ -73,7 +73,7 @@ Azure 플랫폼 로그(리소스 포함 로그)을 전송하려면 이벤트 허
 
    {{< code-block lang="powershell" filename="Platform Logs Step 2" >}}
 
-   ./resource_deploy.ps1 -ApiKey <API_KEY> -SubscriptionId <SUBSCRIPTION_ID> 
+   ./resource_deploy.ps1 -ApiKey <API_KEY> -SubscriptionId <SUBSCRIPTION_ID>
 
    {{< /code-block >}}
 
@@ -93,175 +93,21 @@ Azure 플랫폼 로그(리소스 포함 로그)을 전송하려면 이벤트 허
 
 **참고**: 다음 파라미터를 커스터마이즈할 때 커스텀 리소스 이름이 고유한지 확인하세요. 리소스 이름이 다른 Azure 리소스의 목록 내에 이미 존재하지 않는지 확인합니다.
 
-| -Flag `<Default Parameter>`                                         | 설명                                                                                                                                                           |
-|---------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| -DatadogSite `<datadoghq.com>`                                      | 이 플래그를 다른 Datadog 사이트와 함께 파라미터로 추가하여 Datadog 인스턴스를 커스터마이즈합니다.  Datadog 사이트는 {{< region-param key="dd_site" code="true" >}}가 됩니다.    |
-| -Environment `<AzureCloud>`                                         | 이 플래그를 파라미터로 추가하여 Azure 독립 클라우드에서 스토리지를 관리합니다. 추가 옵션에는 `AzureChinaCloud`, `AzureGermanCloud` 및 `AzureUSGovernment`가 있습니다. |
-| -ResourceGroupLocation `<westus2>`                                  | 이 플래그를 업데이트된 Azure 지역과 함께 추가하여 Azure 리소스 그룹 및 리소스가 배포되는 지역을 선택할 수 있습니다.                     |
-| -ResourceGroupName `<datadog-log-forwarder-rg>`                     | 업데이트된 파라미터 으로 이 플래그를 추가하여 Azure 리소스 그룹의 이름을 사용자 지정합니다.                                                                        |
-| -EventhubNamespace `<datadog-ns-4c6c53b4-1abd-4798-987a-c8e671a5c25e>` | 업데이트된 파라미터 플래그와 함께 이 플래그를 추가하여 Azure 이벤트 허브 네임스페이스를 커스터마이즈하세요. 기본적으로 `datadog-ns-<globally-unique-ID>`가 생성됩니다.                              |
-| -EventhubName `<datadog-eventhub>`                                  | 업데이트된 파라미터 플래그와 함께 이 플래그를 추가하여 Azure 이벤트 허브의 이름을 커스터마이즈합니다.                                                                             |
-| -FunctionAppName `<datadog-functionapp-1435ad2f-7c1f-470c-a4df-bc7289d8b249>`                            | 업데이트된 파라미터로 이 플래그를 추가하여 Azure 함수 앱의 이름을 커스터마이즈합니다. 기본적으로 `datadog-functionapp-<globally-unique-ID>`가 생성됩니다.                                                                         |
-| -FunctionName `<datadog-function>`                                  | 업데이트된 파라미터로 이 플래그를 추가하여 Azure 함수의 이름을 커스터마이즈합니다.                                                                              |
-| -DiagnosticSettingName `<datadog-activity-logs-diagnostic-setting>` | 업데이트된 파라미터로 이 플래그를 추가하여 Azure 진단 설정의 이름을 커스터마이즈하세요. **(로그 활동 전송에만 해당)**                      |
+ | -Flag `<Default Parameter>`                                                   | 설명                                                                                                                                                                         |
+ |-------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+ | -DatadogSite `<datadoghq.com>`                                                | 이 플래그를 다른 Datadog 사이트와 함께 파라미터로 추가하여 Datadog 인스턴스를 커스터마이즈합니다.  Datadog 사이트는 {{< region-param key="dd_site" code="true" >}}가 됩니다. |
+ | -Environment `<AzureCloud>`                                                   | 이 플래그를 파라미터로 추가하여 Azure 독립 클라우드에서 스토리지를 관리합니다. 추가 옵션에는 `AzureChinaCloud`, `AzureGermanCloud` 및 `AzureUSGovernment`가 있습니다.        |
+ | -ResourceGroupLocation `<westus2>`                                            | 이 플래그를 업데이트된 Azure 지역과 함께 추가하여 Azure 리소스 그룹 및 리소스가 배포되는 지역을 선택할 수 있습니다.                                                          |
+ | -ResourceGroupName `<datadog-log-forwarder-rg>`                               | 업데이트된 파라미터 으로 이 플래그를 추가하여 Azure 리소스 그룹의 이름을 사용자 지정합니다.                                                                                  |
+ | -EventhubNamespace `<datadog-ns-4c6c53b4-1abd-4798-987a-c8e671a5c25e>`        | 업데이트된 파라미터 플래그와 함께 이 플래그를 추가하여 Azure 이벤트 허브 네임스페이스를 커스터마이즈하세요. 기본적으로 `datadog-ns-<globally-unique-ID>`가 생성됩니다.       |
+ | -EventhubName `<datadog-eventhub>`                                            | 업데이트된 파라미터 플래그와 함께 이 플래그를 추가하여 Azure 이벤트 허브의 이름을 커스터마이즈합니다.                                                                        |
+ | -FunctionAppName `<datadog-functionapp-1435ad2f-7c1f-470c-a4df-bc7289d8b249>` | 업데이트된 파라미터로 이 플래그를 추가하여 Azure 함수 앱의 이름을 커스터마이즈합니다. 기본적으로 `datadog-functionapp-<globally-unique-ID>`가 생성됩니다.                    |
+ | -FunctionName `<datadog-function>`                                            | 업데이트된 파라미터로 이 플래그를 추가하여 Azure 함수의 이름을 커스터마이즈합니다.                                                                                           |
+ | -DiagnosticSettingName `<datadog-activity-logs-diagnostic-setting>`           | 업데이트된 파라미터로 이 플래그를 추가하여 Azure 진단 설정의 이름을 커스터마이즈하세요. **(로그 활동 전송에만 해당)**                                                        |
 
 설치 오류가 발생했나요? 일반적인 오류 사례는 [자동화된 로그 수집][1]을 참조하세요.
 
 [101]: /ko/integrations/guide/azure-troubleshooting/#automated-log-collection
-{{% /tab %}}
-
-{{% tab "Manual installation" %}}
-
-이 섹션에서는 Azure 로그를 Datadog에 전달하기 위한 수동 설정 프로세스에 대해 설명합니다:
-
-1. [Azure 이벤트 허브]를 생성합니다(#create-an-azure-event-hub).
-2. [이벤트 허브 트리거가 있는 Datadog-Azure 함수](#create-the-datadog-azure-function)를 설정하여 로그를 Datadog 으로 포워딩합니다.
-3. [진단 설정](#create-diagnostic-settings)을 생성하여 Azure [활동 로그](#activity-logs), [리소스 로그](#resource-로그) 또는 이벤트 허브 둘 다에 포워딩합니다.
-
-아래 지침은 Azure 포털을 사용한 기본 초기 설정을 안내합니다. 이러한 모든 단계는 Azure 설명서를 참조하여 CLI, Powershell 또는 리소스 템플릿을 사용하여 수행할 수 있습니다.
-
-#### Azure 이벤트 허브 생성
-
-##### 이벤트 허브 네임스페이스 생성
-
-이미 이벤트 허브 연결 문자열로 구성된 이벤트 허브 네임스페이스 가 있는 경우 [ 이벤트 허브에 이벤트 허브 네임스페이스 추가](#add-an-event-hub-to-your-event-hubs-namespac)로 건너뛰세요.
-
-1. Azure 포털에서 [이벤트 허브][208] 개요로 이동하여 **생성**을 클릭합니다.
-2. 필요한 대로 프로젝트 세부 정보** 및 **인스턴스 세부 정보** 섹션을 입력합니다.  
-  **참고**: [Azure 리소스 로그][209]를 수집하려는 경우 이벤트 허브는 수집하려는 리소스 로그와 동일한 **위치**에 있어야 합니다. 활동 로그 또는 기타 계정 전체 로그을 남기는 리소스의 경우 원하는 지역을 선택할 수 있습니다.
-3. **검토 + 생성**을 클릭하여 리소스의 유효성을 검사합니다. 유효성 검사에 성공하면 **생성**을 클릭합니다.
-
-자세한 내용은 [Azure 이벤트 허브 빠른 시작][201]을 참조하세요.
-
-##### 이벤트 허브에 이벤트 허브 네임스페이스 추가
-
-1. Azure 포털에서 새로운 이벤트 허브 네임스페이스나 기존 이벤트 허브 네임스페이스로 이동합니다.
-2. **+ 이벤트 허브**를 클릭합니다.
-3. 기본** 및 **캡처** 탭 를 원하는 대로 설정할 수 있습니다.
-4. **검토 + 생성**을 클릭하여 리소스의 유효성을 검사합니다. 유효성 검사에 성공하면 **생성**을 클릭합니다.
-
-##### 공유된 액세스 설정
-
-1. 이벤트 허브의 세부정보 페이지에서 왼쪽의 **설정** 탭 아래 **공유 액세스 정책**을 클릭합니다.
-2. **+ 추가**를 클릭합니다.
-3. 정책 이름을 입력하고 **듣기**를 선택합니다.
-4. **연결 문자열 기본 키** 값을 복사하여 안전한 곳에 보관하세요. 이는 Datadog-Azure 함수가 이벤트 허브와 통신할 수 있도록 허용하는 데 필요합니다.
-
-{{< img src="integrations/azure/eventhub_connection_string.png" alt="이벤트 허브의 공유 액세스 정책의 연결 문자열 기본-키 값" popup="true" style="width:100%">}}
-
-#### Datadog-Azure 함수 생성
-
-##### 함수 앱 생성
-
-이벤트 허브 연결 문자열로 구성된 함수 앱이 이미 있는 경우 [ 이벤트 허브 트리거 템플릿을 사용하여 함수 앱에 새 함수 추가]로 건너뛰세요(#add-a-new-function-to-your-function-app-using-the-event-hub-trigger-template).
-
-1. Azure 포털에서 [함수 앱 개요][211]로 이동하여 **생성**을 클릭합니다.
-2. **인스턴스 세부 정보** 섹션에서 다음 설정을 설정합니다.
-   a. **코드** 라디오 버튼을 선택합니다.
-   b. **런타임 스택**의 경우 `Node.js`를 선택합니다. 
-   c. **버전**의 경우 `18 LTS`를 선택합니다.
-3. 기타 설정을 원하는 대로 설정합니다.
-4. **검토 + 생성**을 클릭하여 리소스의 유효성을 검사합니다. 유효성 검사에 성공하면 **생성**을 클릭합니다.
-
-자세한 내용은 [Azure 함수에 대한 이벤트 Azure용 허브 트리거][202]를 참조하세요.
-
-##### 이벤트 허브 연결 문자열을 사용하여 함수 앱 설정
-
-1. 함수 앱의 상세 페이지에서 왼쪽의 **설정** 탭 아래 **환경 변수**를 클릭합니다.
-2. **앱 설정** 탭 에서 연결 문자열의 이름을 입력합니다.
-3. [공유 액세스 섹션 설정]에서 이전에 얻은 값을 붙여넣습니다(#configure-shared-access).
-4. **Apply**를 클릭합니다.
-
-**참고**: Datadog API 키 값을 함수 코드에 직접 붙여넣지 않으려면 Datadog API 키 값에 대한 환경 변수를 추가로 생성하세요.
-
-##### 이벤트 허브 트리거 템플릿을 사용하여 함수 앱에 함수를 추가합니다.
-
-1. [함수 앱 개요][211]에서 신규 또는 기존 함수 앱을 선택합니다.
-2. **함수** 탭 에서 **생성**을 클릭합니다. 
-3. **개발 환경** 필드에 대해 **포털에서 개발**을 선택합니다.
-3. **템플릿 선택**에서 [Azure 이벤트 허브 트리거][202]를 선택합니다.
-4. **이벤트 허브 연결**에서 네임스페이스 및 이벤트 허브를 선택합니다.
-5. **생성**을 클릭합니다.
-
-자세한 내용은 [Azure 함수 시작하기][215]를 참조하세요.
-
-##### 이벤트 허브 트리거를 Datadog로 지정
-
-1. 이벤트 허브 트리거의 상세 페이지(함수)에서 **개발자** 사이드 메뉴의 **코드 + 테스트**를 클릭합니다.
-2. 함수의 `index.js` 파일에 [Datadog-Azure 함수 코드][204]를 추가합니다.
-3. `DD_API_KEY` 환경 변수를 통해 Datadog API 키를 추가하거나 21번째 줄에서 `<DATADOG_API_KEY>`를 함수 코드로 대체하여 복사합니다.  
-4. Datadog US1 사이트를 사용하지 않는 경우, 함수 앱의 설정 탭 아래에 `DD_SITE` 환경 변수를 사용하여 [Datadog 사이트][207]를 설정하거나 파라미터 사이트를 22줄의 함수 코드에 복사합니다.
-5. 함수를 **저장**합니다.
-6. **개발자** 사이드 메뉴에서 **통합**을 클릭합니다.
-7. **트리거 및 입력**에서 **Azure 이벤트 허브**를 클릭합니다.
-8. 다음 설정이 적용되었는지 확인합니다.
-  a. **이벤트 허브 연결**은 연결 문자열의 이름 환경 변수로 설정됩니다.  
-  b. **이벤트 파라미터 이름**이 `eventHubMessages`로 설정됩니다.  
-  c. **이벤트 허브 이름**은 이벤트 허브의 이름으로 설정합니다.  
-  d. **이벤트 허브 기수**가 `Many`로 설정됩니다.  
-  e. **이벤트 허브 데이터 유형**이 비어 있습니다.  
-9. 설정을 확인하려면 **개발자** 사이드 메뉴에서 **코드 + 테스트**를 클릭합니다.
-10. **테스트/실행**을 클릭하고 유효한 JSON 형식의 테스트 메시지를 입력합니다. 
-11. [Datadog 로그 탐색기][206]에서 테스트 메시지를 찾습니다.  
-
-#### 진단 설정 생성
-
-##### 활동 로그
-
-1. Azure 포털에서 [활동 로그][212]로 이동합니다.
-2. **활동 로그 내보내기**를 클릭합니다.
-3. **+ 진단 설정 추가**를 클릭합니다.
-4. **카테고리**에서 Datadog로 보내려는 로그의 카테고리를 선택합니다.
-5. **목적지 세부 정보**에서 **이벤트 허브에 스트리밍**을 선택합니다.
-6. **이벤트 허브 네임스페이스** 및 **이벤트 허브 이름**을 각각 이벤트 허브 트리거를 생성하는 데 사용된 이벤트 허브 네임스페이스 및 이벤트 허브 이름으로 설정합니다.
-7. **이벤트 허브 정책 이름**의 경우, 원하는 경우 `RootManageSharedAccessKey`를 선택할 수 있습니다. **선택 사항**으로, 이벤트 허브 **네임스페이스** 수준에서 자체 공유 액세스 정책을 생성합니다:  
-  a. 이벤트 허브 **네임스페이스**에서 왼쪽의 **설정** 탭 에서 **공유 액세스 정책**을 클릭합니다.  
-  b. **+ 추가**를 클릭합니다.  
-  c. 정책 이름을 입력하고 **전송** 또는 **관리**를 선택합니다.  
-  d. **저장**을 클릭합니다.  
-  e. 진단 설정 페이지로 돌아가서 **이벤트 허브 정책 이름** 필드에 공유 액세스 정책을 선택합니다. 페이지를 새로 고침해야 할 수도 있습니다.  
-  **참고**: 자세한 내용은 [공유 액세스 서명을 사용하여 이벤트 허브 리소스에 대한 액세스 권한 부여하기][214]를 참조하세요.  
-8. [Datadog 로그 탐색기][206]에서 활동 로그를 확인하여 설정이 올바른지 확인합니다.
-
-자세한 내용은 [Azure 모니터의 진단 설정][213]을 참조하세요.
-
-##### 리소스 로그
-
-[진단 설정][203]을 사용하여 로그를 이벤트 허브로 포워딩하도록 Azure 리소스를 설정합니다.
-
-1. Azure 포털에서 로그를 Datadog로 포워딩하려는 리소스로 이동합니다.
-2. 리소스 블레이드의 **모니터링** 섹션에서 **진단 설정**을 클릭합니다.
-3. **진단 설정 추가**를 클릭합니다.
-4. 이름을 입력하고 포워딩하려는 데이터의 출처를 선택합니다.
-5. **목적지 세부 정보**에서 **스트림 허브에 스트리밍**을 선택합니다.
-6. **이벤트 허브 네임스페이스** 및 **이벤트 허브 이름**을 각각 이벤트 허브 트리거를 생성하는 데 사용된 이벤트 허브 네임스페이스 및 이벤트 허브 이름으로 설정합니다.
-7. **이벤트 허브 정책 이름**의 경우, 원하는 경우 `RootManageSharedAccessKey`를 선택할 수 있습니다. **선택 사항**으로, 이벤트 허브 **네임스페이스** 수준에서 자체 공유 액세스 정책을 생성합니다:  
-  a. 이벤트 허브 **네임스페이스**에서 왼쪽의 **설정** 탭 에서 **공유 액세스 정책**을 클릭합니다.  
-  b. **+ 추가**를 클릭합니다.  
-  c. 정책 이름을 입력하고 **전송** 또는 **관리**를 선택합니다.  
-  d. **저장**을 클릭합니다.  
-  e. 진단 설정 페이지로 돌아가서 **이벤트 허브 정책 이름** 필드에 공유 액세스 정책을 선택합니다. 페이지를 새로 고침해야 할 수도 있습니다.  
-  **참고**: 자세한 내용은 [공유 액세스 서명을 사용하여 이벤트 허브 리소스에 대한 액세스 권한 부여하기][214]를 참조하세요.  
-8. **저장**을 클릭합니다.
-9. [Datadog 로그 탐색기][206]에서 로그를 확인하여 설정이 올바른지 확인합니다.
-
-자세한 내용은 [Azure의 진단 설정 모니터링][213]을 참조하세요.
-
-[201]: https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-create
-[202]: https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-event-hubs-trigger
-[203]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/diagnostic-settings
-[204]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/activity_logs_monitoring/index.js
-[205]: https://app.datadoghq.com/organization-settings/api-keys
-[206]: https://app.datadoghq.com/logs
-[207]: https://docs.datadoghq.com/ko/getting_started/site/
-[208]: https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.EventHub%2Fnamespaces
-[209]: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/tutorial-resource-logs
-[210]: https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function
-[211]: https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
-[212]: https://portal.azure.com/#view/Microsoft_Azure_Monitoring/AzureMonitoringBrowseBlade/~/activityLog
-[213]: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings?WT.mc_id=Portal-Microsoft_Azure_Monitoring
-[214]: https://learn.microsoft.com/en-us/azure/event-hubs/authorize-access-shared-access-signature
-[215]: https://learn.microsoft.com/en-us/azure/azure-functions/functions-get-started
 {{% /tab %}}
 
 {{% tab "Blob Storage" %}}
@@ -287,18 +133,18 @@ Datadog는 Azure 로그 수집용 이벤트 허브 설정을 사용할 것을 �
 이미 이 용도로 설정된 함수 앱이 있는 경우 [이벤트 허브 트리거 템플릿을 사용하여 함수 앱에 새 함수 추가]로 건너뛰세요(##add-a-new-function-to-your-function-app-using-the-azure-blob-storage-trigger-template).
 
 1. Azure 포털에서 [함수 앱 개요][309]로 이동하여 **생성**을 클릭합니다.
-2. **인스턴스 세부 정보** 섹션에서 다음 설정을 설정합니다:  
-  a. **코드** 라디오 버튼을 선택합니다.  
-  b. **런타임 스택**의 경우 `Node.js`를 선택합니다.  
-  c. **버전**의 경우 `18 LTS`를 선택합니다.  
-  d. **운영 체제**의 경우 `Windows`를 선택합니다.  
+2. **인스턴스 세부 정보** 섹션에서 다음 설정을 설정합니다:
+  a. **코드** 라디오 버튼을 선택합니다.
+  b. **런타임 스택**의 경우 `Node.js`를 선택합니다.
+  c. **버전**의 경우 `18 LTS`를 선택합니다.
+  d. **운영 체제**의 경우 `Windows`를 선택합니다.
 3. 원하는 대로 기타 설정을 설정합니다.
 4. **검토 + 생성**을 클릭하여 리소스의 유효성을 검사합니다. 유효성 검사에 성공하면 **생성**을 클릭합니다.
 
 ##### Azure Blob Storage 트리거 템플릿을 사용하여 함수 앱에 새 함수 추가
 
 1. [함수 앱 개요][309]에서 신규 또는 기존 함수 앱을 선택합니다.
-2. **기능/함수** 탭 에서 **생성**을 클릭합니다. 
+2. **기능/함수** 탭 에서 **생성**을 클릭합니다.
 3. **개발 환경** 필드에서 **포털에서 개발**을 선택합니다.
 4. **템플릿 선택**에서 [Azure Blob Storage 트리거][313]를 선택합니다.
 5. **저장소 계정 연결**을 선택합니다.
@@ -311,7 +157,7 @@ Datadog는 Azure 로그 수집용 이벤트 허브 설정을 사용할 것을 �
 
 1. 이벤트 허브 트리거의 상세 페이지(함수)에서 **개발자** 사이드 메뉴의 **코드 + 테스트**를 클릭합니다.
 2. 함수의 `index.js` 파일에 [Datadog-Azure 함수 코드][308]를 추가합니다.
-3. Datadog API 키를 `DD_API_KEY` 환경 변수에 추가하거나 20줄에서 `<DATADOG_API_KEY>`를 함수 코드로 대체하여 복사합니다.  
+3. Datadog API 키를 `DD_API_KEY` 환경 변수에 추가하거나 20줄에서 `<DATADOG_API_KEY>`를 함수 코드로 대체하여 복사합니다.
 4. Datadog US1 사이트를 사용하지 않는 경우, 함수 앱의 설정 탭 아래에 `DD_SITE` 환경 변수를 사용하여 [Datadog 사이트][312]를 설정하거나 파라미터 사이트를 21줄의 함수 코드에 복사합니다.
 5. 함수를 **저장** 합니다.
 6. **개발자** 사이드 메뉴에서 **통합**을 클릭합니다.

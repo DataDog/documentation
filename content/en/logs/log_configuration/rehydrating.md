@@ -85,31 +85,31 @@ Cancel ongoing Rehydrations directly in the Rehydrate from Archives page to avoi
 
 The logs already indexed will remain queryable until the end of the retention period selected for that historical view, and all the logs already scanned and indexed will still be billed.
 
-{{< img src="logs/archives/log_archives_cancel_ongoing_rehydration.png" alt="Canceling Ongoing Rehydrations" width="75%" >}}
+{{< img src="logs/archives/log_archives_cancel_ongoing_rehydration_settings.png" alt="Canceling Ongoing Rehydrations" width="75%" >}}
 
 ### Deleting historical views
 
 Historical views stay in Datadog until they have exceeded the selected retention period, or you can opt to delete them sooner if you no longer need the view. You can mark a historical view to be deleted by selecting and confirming the delete icon at the far right of the historical view.
 
-One hour later, the historical view is definitively deleted; until that time, the team is able to cancel the deletion.
+One day later, the historical view is definitively deleted; until that time, the team is able to cancel the deletion.
 
-{{< img src="logs/archives/log_archives_rehydrate_delete.mp4" alt="Deleting Historical Views" video="true" width="75%" >}}
+{{< img src="logs/archives/log_archives_rehydrate_delete_settings.mp4" alt="Deleting Historical Views" video="true" width="75%" >}}
 
 ### Viewing deleted historical views
 
 View deleted historical views for up to 1 year in the past using the `View` dropdown menu:
 
-{{< img src="logs/archives/log_archives_deleted_rehydrations.png" alt="Deleting Historical Views" width="75%" >}}
+{{< img src="logs/archives/log_archives_deleted_rehydrations_settings.png" alt="Deleting Historical Views" width="75%" >}}
 
 ### Set default limits for historical views
 
 Admins with the `Logs Write Archives` permission can configure default controls to ensure efficient use of log rehydration across teams.
 
+These settings can be configured from the **Rehydration settings** panel, available from the Historical Views page.
+
 - **Default rehydration volume limit**: Define the default number of logs (in millions) that can be rehydrated per historical view. If the limit is reached, the rehydration automatically stops, but already rehydrated logs remain accessible. Admins can also allow this limit to be overridden during view creation.
 
 - **Retention period selector**: Choose which retention periods are available when creating rehydrations. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog.
-
-These settings can be configured from the **Rehydration settings** panel, available from the Historical Views page.
 
 {{< img src="logs/archives/rehydration_limits.png" alt="Rehydration settings panel" style="width:75%;" >}}
 

@@ -49,7 +49,7 @@ Una vez hecho esto, exporta tus logs de Google Cloud Composer de Google Cloud Lo
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "google_cloud_composer" >}}
+{{< get-metrics-from-git "google-cloud-composer" >}}
 
 
 ### Eventos

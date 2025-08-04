@@ -28,11 +28,11 @@ Session Replay expands your user experience monitoring by allowing you to captur
 
 The RUM Browser SDK is [open source][1] and leverages the open source [rrweb][2] project.
 
-## Session Replay recorder
+## How the Session Replay recorder works
 
 The Session Replay recorder is part of the RUM Browser SDK. The recorder takes a snapshot of the browser's DOM and CSS by tailing and recording events happening on a web page (such as DOM modification, mouse move, clicks, and input events) along with these events' timestamps.
 
-Datadog then rebuilds the web page and re-applies the recorded events at the appropriate time in the replay view. Session Replay follows the same 30 day retention policy as normal RUM sessions.
+Datadog then rebuilds the web page and re-applies the recorded events at the appropriate time in the replay view.
 
 The Session Replay recorder supports all browsers supported by the RUM Browser SDK with the exception of IE11. For more information, see the [browser support table][3].
 

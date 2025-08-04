@@ -1,6 +1,8 @@
 ---
 title: Enabling Application & API Protection using Datadog Tracing Libraries
 type: multi-code-lang
+aliases:
+  - /security/application_security/threats/setup/standalone/
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"

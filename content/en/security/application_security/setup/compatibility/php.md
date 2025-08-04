@@ -3,6 +3,8 @@ title: PHP Compatibility Requirements
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 40
+aliases:
+  - /security/application_security/threats/setup/compatibility/php
 ---
 
 ## App and API Protection capabilities support
@@ -14,8 +16,6 @@ The following App and API Protection capabilities are supported in the PHP libra
 | Threat Detection | 0.84.0                     |
 | Threat Protection  | 0.86.0                     |
 | Customize response to blocked requests | 0.86.0 |
-| Software Composition Analysis (SCA) | 0.90.0              |
-| Code Security        | not supported              |
 | Automatic user activity event tracking | 0.89.0                     |
 | API Security | 0.98.0 |
 
@@ -25,13 +25,13 @@ The minimum tracer version to get all supported AAP capabilities for PHP is 0.98
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 ### Supported deployment types
-| Type        | Threat Detection support | Software Composition Analysis |
-|-------------|--------------------------|-------------------------------|
-| Docker      | {{< X >}}                | {{< X >}}                     |
-| Kubernetes  | {{< X >}}                | {{< X >}}                     |
-| Amazon ECS  | {{< X >}}                | {{< X >}}                     |
-| AWS Fargate |                          |                               |
-| AWS Lambda  |                          |                               |
+| Type        | Threat Detection support |
+|-------------|--------------------------|
+| Docker      | {{< X >}}                |
+| Kubernetes  | {{< X >}}                |
+| Amazon ECS  | {{< X >}}                |
+| AWS Fargate |                          |
+| AWS Lambda  |                          |
 
 ## Language and framework compatibility
 
@@ -88,7 +88,6 @@ The library supports the use of all PHP frameworks, and also the use of no frame
 - Distributed Tracing to see attack flows through your applications
 
 ##### App and API Protection Capability Notes
-- **Code Security** is not supported
 
 The following frameworks aren't directly instrumented by App and API Protection, but indirectly supported through runtime instrumentation.
 
@@ -119,7 +118,6 @@ The following frameworks aren't directly instrumented by App and API Protection,
 - error and stacktrace capturing
 
 ##### App and API Protection Capability Notes
-- **Code Security** is not supported
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
 | Framework         | Versions | Threat Detection supported?    | Threat Protection supported?|

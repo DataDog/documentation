@@ -17,6 +17,12 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/"
       tag: "Blog"
       text: "Datadog CNM now supports Consul networking"
+    - link: "https://www.datadoghq.com/blog/cnm-kubernetes-egress/"
+      tag: "Blog"
+      text: "How Datadog Cloud Network Monitoring helps you move to a deny-by-default network egress policy at scale"
+
+      
+
 ---
 
 Datadog Cloud Network Monitoring (CNM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog so you can:
@@ -97,7 +103,7 @@ Cloud Network Monitoring is designed to analyze traffic _between_ network endpoi
 
 To enable Cloud Network Monitoring with the Datadog Agent, use the following configurations:
 
-1. **If you are using an agent older than v6.14+**, enable [live process collection][1] first, otherwise skip this step.
+1. **If you are using an Agent older than v6.14**, enable [live process collection][1] first, otherwise skip this step.
 
 2. Copy the system-probe example configuration:
 
@@ -206,10 +212,10 @@ To enable Cloud Network Monitoring for Windows hosts:
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
 [2]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "Helm" %}}
 
 To enable Cloud Network Monitoring with Kubernetes using Helm, add the below to your `values.yaml` file.</br>
-**Note:** Helm chart v2.4.39+ **is required**. For more information, see the [Datadog Helm Chart documentation][1].
+**Note:** Helm chart v2.4.39+ is required. For more information, see the [Datadog Helm Chart documentation][1].
 
   ```yaml
   datadog:
@@ -392,7 +398,8 @@ If you already have the [Agent running with a manifest][4]:
 [2]: /resources/yaml/datadog-agent-npm.yaml
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /agent/kubernetes/
-[5]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1519-L1523
+[5]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1774-L1775
+
 {{% /tab %}}
 {{% tab "Operator" %}}
 

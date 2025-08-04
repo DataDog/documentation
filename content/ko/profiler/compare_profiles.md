@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ko/tracing/profiler/compare_profiles/
 further_reading:
 - link: profiler/enabling
   tag: 설명서
@@ -11,7 +13,7 @@ further_reading:
   text: DataDog에서 상시 운영 환경 프로파일링 도입
 - link: https://www.datadoghq.com/blog/code-optimization-datadog-profile-comparison/
   tag: 블로그
-  text: Datadog 프로파일 비교를 통해 코드를 비교하고 최적화하기
+  text: Datadog 프로파일 비교를 통한 코드 비교 및 최적화
 - link: https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/
   tag: 블로그
   text: Datadog의 지속적 프로파일러를 사용해 Akka 애플리케이션을 최적화하는 방법

@@ -146,7 +146,7 @@ IBM ACE チェックは [Datadog Agent][6] パッケージに含まれていま�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "ibm_ace" >}}
+{{< get-metrics-from-git "ibm-ace" >}}
 
 
 ### イベント
@@ -154,7 +154,7 @@ IBM ACE チェックは [Datadog Agent][6] パッケージに含まれていま�
 IBM ACE インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "ibm_ace" >}}
+{{< get-service-checks-from-git "ibm-ace" >}}
 
 
 ### ログ収集

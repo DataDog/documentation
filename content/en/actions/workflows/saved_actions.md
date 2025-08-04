@@ -18,10 +18,6 @@ further_reading:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Use the _Saved Actions_ feature to store and reuse an action and its parameters. You can insert a saved action into your workflow as a new step, or use one to populate an existing step's parameters.
 
 ## Save an action

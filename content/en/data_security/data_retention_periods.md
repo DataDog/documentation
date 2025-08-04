@@ -24,7 +24,8 @@ attributes:
        - **Spans**: 90 days
   - product: Audit Trail
     data_type: |
-       - **Audit logs**: 90 days
+       - **Audit logs (Audit Trail enabled)**: 90 days
+       - **Audit logs (Audit Trail disabled)**: 7 days
   - product: Browser RUM
     data_type: |
        - **Events**: 30 days
@@ -86,7 +87,8 @@ attributes:
        - **Dashboards, Notebooks, Monitors**: Retained for the duration of the account
   - product: Error Tracking
     data_type: | 
-       - **Errors**: 1 year after last access
+       - **Error samples**: 15 days
+       - **Issues**: 1 year after last activity
   - product: Event Management
     data_type: | 
        - **Events**: 15 months

@@ -139,7 +139,7 @@ Por defecto, se muestran todas las métricas recopiladas en Confluent Cloud.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "confluent_cloud" >}}
+{{< get-metrics-from-git "confluent-cloud" >}}
 
 
 ### Eventos

@@ -154,6 +154,16 @@ To pull test configurations and push test results, the private location worker n
 
 {{< /site-region >}}
 
+{{< site-region region="ap2" >}}
+
+| Port | Endpoint                                | Description                                                                        |
+| ---- | --------------------------------------- | ---------------------------------------------------------------------------------- |
+| 443  | `intake.synthetics.ap2.datadoghq.com`  | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
+
+[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+
+{{< /site-region >}}
+
 {{< site-region region="us5" >}}
 
 | Port | Endpoint                              | Description                                                    |
@@ -635,13 +645,13 @@ Once the process is complete, click **Finish** on the installation completion pa
    - In a PowerShell Terminal:
 
      ```powershell
-     Start-Process msiexec "/i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";
+     Start-Process msiexec "/i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi /quiet /qn CONFIG_FILEPATH=<path_to_your_worker_config_file>";
      ```
 
    - Or in a Command Terminal:
 
      ```cmd
-     msiexec /i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
+     msiexec /i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi /quiet /qn CONFIG_FILEPATH=<path_to_your_worker_config_file>
      ```
 
 Additional parameters can be added:
@@ -653,7 +663,7 @@ Additional parameters can be added:
 | LOGGING_ENABLED | When enabled, this configures file logging. These logs are stored in the installation directory under the logs folder. | 0 | `--enableFileLogging` | 0: Disabled<br>1: Enabled |
 | LOGGING_VERBOSITY | Configures the logging verbosity for the program. This affects console and file logs. | This affects console and file logs. | `-vvv` | `-v`: Error<br>`-vv`: Warning<br>`-vvv`: Info<br>`vvvv`: Debug |
 | LOGGING_MAXDAYS | Number of days to keep file logs on the system before deleting them. Can be any number when running an unattended installation. | 7 | `--logFileMaxDays` | Integer |
-| WORKERCONFIG_FILEPATH | This should be changed to the path to your Synthetics Private Location Worker JSON configuration file. Wrap this path in quotes if your path contains spaces. | <None> | `--config` | String |
+| CONFIG_FILEPATH | This should be changed to the path to your Synthetics Private Location Worker JSON configuration file. Wrap this path in quotes if your path contains spaces. | <None> | `--config` | String |
 
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 
@@ -666,7 +676,50 @@ For more information about private locations parameters for admins, see [Configu
 
 You can upload custom root certificates to your private locations to have your API and browser tests perform the SSL handshake using your own `.pem` files.
 
-When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime. **Note**: If you combine all your `.pem` files into one file, then the order in which the certificates are placed matters. It is required that the intermediate certificate precedes the root certificate to successfully establish a chain of trust.
+{{< tabs >}}
+{{% tab "Linux container" %}}
+
+When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime. 
+
+<div class="alert alert-info"><strong>Note</strong>: If you combine all your <code>.pem</code> files into one file, the sequence of the certificates within the file is important. It is required that the intermediate certificate precedes the root certificate to successfully establish a chain of trust.</div>
+
+{{% /tab %}}
+
+{{% tab "Windows service" %}}
+
+To install root certificates for private locations on a Windows service, use the following steps:
+
+1. Open the Registry Editor App.
+2. Navigate to the entry `Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\synthetics-private-location`.
+3. Create a Registry key named `Environment` with the `Multi-string` value type.
+
+<div class="alert alert-info"><strong>Note</strong>: Your certificate needs to be in the same folder as the your Synthetic Monitoring Service:
+default: <code>C:\Program Files\Datadog-Synthetics\Synthetics</code>.</div>
+
+4. Set the value `NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem`
+
+   {{< img src="synthetics/private_locations/windows_pl_set_service.png" alt="Your image description" style="width:100%;" >}}
+
+5. Open the Services App and reload the Datadog Synthetic Monitoring Private Location service.
+
+{{% /tab %}}
+
+{{% tab "Windows standalone" %}}
+
+To install root certificates for private locations on a standalone Windows process with `synthetics-private-location.exe`, use the following steps:
+
+1. Open your Windows command prompt or PowerShell.
+
+2. Set the environment variable and call the executable.
+
+Example:
+
+```text
+set NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem && .\synthetics-private-location.exe --config "C:\ProgramData\Datadog-Synthetics\Synthetics\worker-config.json"
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Set up liveness and readiness probes
 

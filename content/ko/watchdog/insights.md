@@ -287,7 +287,7 @@ First Contentful Paint, First Input Delay, Cumulative Layout Shift 및 [로딩 �
 [3]: /ko/tracing/services/service_page/
 [4]: /ko/tracing/services/resource_page/
 [5]: https://app.datadoghq.com/databases/list
-[6]: https://app.datadoghq.com/profiling/search
+[6]: https://app.datadoghq.com/profiling/explorer
 [7]: https://app.datadoghq.com/process
 [8]: https://app.datadoghq.com/functions
 [9]: https://app.datadoghq.com/orchestration/overview/pod
