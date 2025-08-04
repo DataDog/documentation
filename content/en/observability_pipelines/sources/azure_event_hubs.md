@@ -148,17 +148,17 @@ Select your platform.
             ```
         1. In the **Certificate path** field, enter `/cert.pem`.
     {{< img src="observability_pipelines/sources/kafka_settings.png" alt="The Kafka source settings with example values" style="width:45%;" >}}
-    1. Click **Next: Select Destination**.
-    1. After you set up your destinations and processors, click **Next: Install**.
-    1. Select your platform in the **Choose your installation platform** dropdown menu.
-    1. Enter the environment variables for your Kafka source:
-        1.  For **Kafka Bootstrap Servers**, enter `<NAMESPACE>.servicebus.windows.net:9093` (for example, `myeventhubns.servicebus.windows.net:9093`).
-        1.  For **Kafka SASL Username**, enter `\$\$ConnectionString`. **Note**: You must escape the `$` in front of `ConnectionString`, otherwise the environment variable won't be loaded.
-        1.  For **Kafka SASL Password**, enter the full connection string (for example, `Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>`).
-            - This is the **Primary Connection String** in your Event Hub instance [shared access policies](#configure-shared-access-policy).
-        1. Enter your Kafka TLS passphrase.
-            - This is the **Primary Key** in your Event Hub instance's [shared access policies](#configure-shared-access-policy).
-        {{< img src="observability_pipelines/sources/kafka_env_vars.png" alt="The install page with example values for the kafka environment variables" style="width:100%;" >}}
+1. Click **Next: Select Destination**.
+1. After you set up your destinations and processors, click **Next: Install**.
+1. Select your platform in the **Choose your installation platform** dropdown menu.
+1. Enter the environment variables for your Kafka source:
+    1.  For **Kafka Bootstrap Servers**, enter `<NAMESPACE>.servicebus.windows.net:9093` (for example, `myeventhubns.servicebus.windows.net:9093`).
+    1.  For **Kafka SASL Username**, enter `\$\$ConnectionString`. **Note**: You must escape the `$` in front of `ConnectionString`, otherwise the environment variable won't be loaded.
+    1.  For **Kafka SASL Password**, enter the full connection string (for example, `Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>`).
+        - This is the **Primary Connection String** in your Event Hub instance [shared access policies](#configure-shared-access-policy).
+    1. Enter your Kafka TLS passphrase.
+        - This is the **Primary Key** in your Event Hub instance's [shared access policies](#configure-shared-access-policy).
+    {{< img src="observability_pipelines/sources/kafka_env_vars.png" alt="The install page with example values for the kafka environment variables" style="width:100%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
