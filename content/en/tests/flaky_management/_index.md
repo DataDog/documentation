@@ -38,6 +38,24 @@ Use the status drop-down to change how a flaky test is handled in your CI pipeli
 
 <div class="alert alert-info"><strong>Note</strong>: Status actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
 
+## Configure policies to automate remediation
+
+Configure automated Flaky Tests Policies to govern how flaky tests are handled in each repository. For example, a test that flakes in the default branch can automatically be quarantined, and later disabled if it remains unfixed after 30 days.
+
+1. Click the **Policies** button at the upper right of the Flaky Management page. You can also navigate to [**Flaky Tests Policies**][11] in Software Delivery settings.
+
+    {{< img src="tests/flaky-policies.png" alt="Flaky Tests Policies page with the Edit Policies flyout open to configure a policy" style="width:100%;" >}}
+
+2. Search for and select the repository you want to configure.
+3. Use the toggles to enable specific actions, and use automation rules to further customize how tests get quarantined, disabled, or retried:
+
+| Action    | Description |
+| ---- | ---- |
+| **Quarantine**     | Run flaky tests in the background without affecting build results. Customize automation rules based on: <li>Time: Quarantine a test if its status is Active (known flaky) for a specified number of days. <li>Branch: Quarantine an Active test if it flakes in one or more specified branches.|
+| **Disable**        | Skip flaky tests entirely. You may want to do this after quarantining or persistent flakiness. Customize automation rules based on: <li>Status and time: Disable a test if it has a specified status for a specified number of days. <li>Branch: Branch: Disable an Active test if it flakes in one or more specified branches. |
+| **Attempt&nbsp;to&nbsp;Fix** | When you attempt to fix a flaky test, automatically retry the test a specified number of times on the commit containing the fix. |
+| **Fixed**          | If a flaky test no longer flakes for 30 days, it is automatically moved to Fixed status. This automation is default behavior and can't be customized. |
+
 ## Track evolution of flaky tests
 
 Track the evolution of the number of flaky tests with the `test_optimization.test_management.flaky_tests` out-of-the-box metric. The metric is enriched with the tags below to help you investigate the counts in more detail.
@@ -126,3 +144,4 @@ To use Flaky Test Management features, you must use Datadog's native instrumenta
 [8]: /tests/setup/javascript/
 [9]: /tests/setup/python/
 [10]: /tests/setup/ruby/
+[11]: https://app.datadoghq.com/ci/settings/test-optimization/flaky-test-management
