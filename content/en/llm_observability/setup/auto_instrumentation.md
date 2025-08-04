@@ -239,11 +239,9 @@ The Pydantic AI integration instruments agent invocations as well as tool calls 
 
 The Pydantic AI integration instruments the following methods:
 
-- [Agent Invocations][51]
+- [Agent Invocations][51] (including any tools and / or toolsets associated with the agent):
   - `agent.Agent.iter` (also traces `agent.Agent.run` and `agent.Agent.run_sync`)
   - `agent.Agent.run_stream`
-- Tool Calls made via [Function Tools][52] or [Toolsets][53]
-  - `agent.ToolManager.handle_call`
 
 
 [1]: https://platform.openai.com/docs/api-reference/introduction
