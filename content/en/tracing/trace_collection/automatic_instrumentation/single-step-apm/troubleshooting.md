@@ -108,11 +108,18 @@ DD_INSTALLER_DEFAULT_PKG_VERSION_DATADOG_APM_INJECT=<VERSION>-1
 
 Datadog maintains an internal deny list to prevent injection into certain processes (for example, IDEs or databases). If a process command or entrypoint is on this list, the injector exits the injection process.  
 
-#### Custom deny list entries (Linux only)  
+#### Linux workload selection
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSdMu6WAsUCD3djkl_oN0Qh7fQmBCiKYyUvuqlYWRyObebAc6Q/viewform" header="Join the Preview!">}}
 Workload selection is available for Linux-based apps through a limited availability preview. To configure allow or deny rules for process injection, sign up for preview access.
 {{< /callout >}}
+
+#### Kubernetes workload selection  
+
+Workload selection enables injection based on Kubernetes labels and selectors. Rules to consider:
+
+1. `disabledNamespaces` always takes precedence.
+2. When a pod initializes, the target list is checked from top to bottom. Only the first matching rule applies per pod.
 
 #### Injection container flagged by security scanners
 
@@ -121,13 +128,6 @@ Security tools may flag the `apm-inject` container because it runs an executable
 The container's behavior is expected and safe; the executable configures the environment for auto-instrumentation.
 
 Datadog adheres to security best practices and is working with security vendors to allow this container.
-
-#### Kubernetes workload selection  
-
-Workload selection enables injection based on Kubernetes labels and selectors. Rules to consider:
-
-1. `disabledNamespaces` always takes precedence.
-2. When a pod initializes, the target list is checked from top to bottom. Only the first matching rule applies per pod.
 
 ### Environments with strict Pod Security settings
 
