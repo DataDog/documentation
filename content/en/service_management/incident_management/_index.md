@@ -104,7 +104,7 @@ Incident Management integrates with third-party applications, including:
 - [ServiceNow][19] to create a ServiceNow tickets for incidents.
 - [Slack][11] to create channels for incidents.
 - [Webhooks][16] to send incident notifications using webhooks (for example, [sending SMS to Twilio][17]).
-- [Zoom][23] to launch video calls for incidents.
+- [Zoom][24] to launch video calls for incidents.
 
 ## Further Reading
 
