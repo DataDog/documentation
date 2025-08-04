@@ -152,7 +152,7 @@ security:
     getenv:
       # allow os.Getenv to read gitlab CI_ prefixed os environment vars
       - ^(HUGO_|CI_|IA_SUBDOMAIN)
-      # allow os.Getenv to read custom environment variable for local translation builds
+      # allows local translation builds (used by include-markdown shortcode)
       - LOCAL_TRANSLATION_BUILD
   exec:
     osEnv:
