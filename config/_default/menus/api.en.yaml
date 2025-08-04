@@ -5892,6 +5892,18 @@ menu:
           - UpdatePriority
         unstable: []
         order: 5
+    - name: Update case attributes
+      url: '#update-case-attributes'
+      identifier: case-management-update-case-attributes
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAttributes
+        unstable: []
+        order: 10
     - name: Assign case
       url: '#assign-case'
       identifier: case-management-assign-case
@@ -6583,7 +6595,8 @@ menu:
           - v2
         operationids:
           - UpdateDataset
-        unstable: []
+        unstable:
+          - v2
         order: 4
     - name: Get a single dataset by ID
       url: '#get-a-single-dataset-by-id'
@@ -6595,7 +6608,8 @@ menu:
           - v2
         operationids:
           - GetDataset
-        unstable: []
+        unstable:
+          - v2
         order: 2
     - name: Delete a dataset
       url: '#delete-a-dataset'
@@ -6607,7 +6621,8 @@ menu:
           - v2
         operationids:
           - DeleteDataset
-        unstable: []
+        unstable:
+          - v2
         order: 5
     - name: Create a dataset
       url: '#create-a-dataset'
@@ -6619,7 +6634,8 @@ menu:
           - v2
         operationids:
           - CreateDataset
-        unstable: []
+        unstable:
+          - v2
         order: 1
     - name: Get all datasets
       url: '#get-all-datasets'
@@ -6631,7 +6647,8 @@ menu:
           - v2
         operationids:
           - GetAllDatasets
-        unstable: []
+        unstable:
+          - v2
         order: 3
     - name: Domain Allowlist
       url: /api/latest/domain-allowlist/

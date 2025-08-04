@@ -6,6 +6,10 @@ further_reading:
   text: "Learn about the Deployment Gates explorer"
 ---
 
+{{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
+Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
+{{< /callout >}}
+
 Setting up Deployment Gates involves two steps:
 
 1. Configure a gate and rules in the Datadog UI.
