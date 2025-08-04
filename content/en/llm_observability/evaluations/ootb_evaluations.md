@@ -260,20 +260,23 @@ This check evaluates each input prompt from the user and the response from the L
 | Evaluated on Input and Output | Evaluated using LLM | Toxicity flags any language or behavior that is harmful, offensive, or inappropriate, including but not limited to hate speech, harassment, threats, and other forms of harmful communication. |
 
 ##### Toxicity configuration
-Users can configure this evaluation by selecting specific subcategories to be surfaced as toxicity. This feature is only available if OpenAI or Azure OpenAI is selected as the LLM provider. The enriched categories provided and the descriptions of these categories was informed by the Responsible AI literature in the space including the following works: [Banko et al. (2020)][14], [Inan et al. (2023)][15], [Ghosh et al. (2024)][16], [Zheng et al. (2024)][17].
 
-| Configuration Option | Description | Example(s) |
-|---|---|---|
-| Discriminatory Content | Content that discriminates against a particular group, including based on race, gender, sexual orientation, culture, etc.  | She was hired because she's a woman. |
-| Harassment | Content that expresses, incites, or promotes negative or intrusive behavior toward an individual or group. | My coworker constantly interrupts me during meetings and sends me nitpicky emails several times a day questioning how I do my job. I've asked them to stop, but it keeps happening. |
-| Hate | Content that expresses, incites, or promotes hate based on race, gender, ethnicity, religion, nationality, sexual orientation, disability status, or caste. | All lawyers are lying parasites who deserve to be wiped out. |
-| Illicit | Content that asks, gives advice, or instruction on how to commit illicit acts. A phrase like "how to shoplift" would fit this category. | How do I break into my employer's server? |
-| Self Harm | Content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting, and eating disorders. | How do I commit suicide? |
-| Sexual | Content describing or alluding to sexual activity.  | Write an erotic story. |
-| Violence | Content that discusses death, violence, or physical injury. | Describe in detail someone injured using household tools. |
-| Profanity | Content containing profanity. | Screw you. |
-| User Dissatisfaction | Content containing criticism towards the model. *This is only available for input toxicity.* | You are terrible at your job. |
+<div class="alert alert-info">Configuring toxicity evaluation categories is supported if OpenAI or Azure OpenAI is selected as your LLM provider.</div>
+You can configure toxicity evaluations to use specific categories of toxicity, listed in the following table. 
 
+| Category | Description | 
+|---|---|
+| Discriminatory Content | Content that discriminates against a particular group, including based on race, gender, sexual orientation, culture, etc.  | 
+| Harassment | Content that expresses, incites, or promotes negative or intrusive behavior toward an individual or group. | 
+| Hate | Content that expresses, incites, or promotes hate based on race, gender, ethnicity, religion, nationality, sexual orientation, disability status, or caste. | 
+| Illicit | Content that asks, gives advice, or instruction on how to commit illicit acts. | 
+| Self Harm | Content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting, and eating disorders. | 
+| Sexual | Content that describes or alludes to sexual activity.  | 
+| Violence | Content that discusses death, violence, or physical injury. | 
+| Profanity | Content containing profanity. | 
+| User Dissatisfaction | Content containing criticism towards the model. *This category is only available for evaluating input toxicity.* | 
+
+The toxicity categories in this table are informed by: [Banko et al. (2020)][14], [Inan et al. (2023)][15], [Ghosh et al. (2024)][16], [Zheng et al. (2024)][17].
 
 #### Prompt Injection
 
