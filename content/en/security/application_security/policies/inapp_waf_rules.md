@@ -3,15 +3,16 @@ title: In-App WAF Rules
 aliases:
   - /security_platform/application_security/event_rules
   - /security/application_security/event_rules
+  - /security/application_security/threats/inapp_waf_rules
 ---
 
 ## Overview
 
 With App and API Protection (AAP) enabled, the Datadog tracing library actively monitors all web services and API requests for suspicious security activity.
 
-An _In-App WAF rule_ specifies conditions on the incoming request to define what the library considers suspicious. The Datadog tracing library includes hundreds of out-of-the-box AAP In-App WAF rules, which are used to display security traces in the trace explorer and in the default signal rules. 
+An _In-App WAF rule_ specifies conditions on the incoming request to define what the library considers suspicious. The Datadog tracing library includes hundreds of out-of-the-box AAP In-App WAF rules, which are used to display security traces in the trace explorer and in the default signal rules.
 
-You can add to the In-App WAF rules without upgrading the tracing library. 
+You can add to the In-App WAF rules without upgrading the tracing library.
 
 ## Structure of an AAP In-App WAF rule
 
@@ -33,7 +34,7 @@ An input represents which part of the request the operator is applied to. The fo
 | `server.request.body` | The parsed HTTP body (key/value map) | `data.items[0] => value0, data.items[1] => value1` |
 | `server.response.status` | The http status code | `200` |
 
-#### Operators 
+#### Operators
 
 | name | Description |
 |------|-------------|
@@ -46,7 +47,7 @@ An input represents which part of the request the operator is applied to. The fo
 
 Custom In-App WAF rules enable users to log or block specific types of requests to their applications. For example, you can use custom rules to monitor login success or failure. To get started, navigate to **Security** -> **App and API Protection** -> **Policies** -> **In-App WAF** -> [**Custom Rules**][4].
 
-**Note:** Default rules in In-App WAF are read-only. To refine your In-App WAF behavior, modify the In-App WAF rules. Default rules cannot be modified, however, you can create a custom rule based on one of the default rules, and modify the match conditions to your needs. Be sure to disable the default rule so that you don't have two similar rules evaluating the same requests. 
+**Note:** Default rules in In-App WAF are read-only. To refine your In-App WAF behavior, modify the In-App WAF rules. Default rules cannot be modified, however, you can create a custom rule based on one of the default rules, and modify the match conditions to your needs. Be sure to disable the default rule so that you don't have two similar rules evaluating the same requests.
 
 ## Configure an AAP In-App WAF rule
 
@@ -97,7 +98,7 @@ Services using a policy are visible directly in the policy management page.
 
 4. Using a utility such as SCP or FTP, copy the `appsec-rules.json` file to your application server, for example, `/home/asm/appsec-rules.json`.
 
-5. Following the instructions in [Enabling AAP][3] for adding application variables in your environment, add the `DD_APPSEC_RULES` environment variable to your service with the full path to the file: 
+5. Following the instructions in [Enabling AAP][3] for adding application variables in your environment, add the `DD_APPSEC_RULES` environment variable to your service with the full path to the file:
    ```
    DD_APPSEC_RULES=/home/asm/appsec-rules.json
    ```
@@ -106,7 +107,7 @@ Services using a policy are visible directly in the policy management page.
 
 ## What to do next
 
-Next, [configure detection rules to create security signals][1] based on those security traces defined by the In-App WAF rules you created. You can modify the provided out-of-the-box AAP detection rules or create new ones. 
+Next, [configure detection rules to create security signals][1] based on those security traces defined by the In-App WAF rules you created. You can modify the provided out-of-the-box AAP detection rules or create new ones.
 
 [1]: /security/application_security/policies/custom_rules/
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf
