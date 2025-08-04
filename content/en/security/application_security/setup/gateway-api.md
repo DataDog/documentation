@@ -148,7 +148,7 @@ spec:
 
 ## Datadog Go Tracer and Gateway API integration
 
-<div class="alert alert-warning">
+<div class="alert alert-info">
   <strong>Note:</strong> The AAP Gateway API integration is built on top of the Datadog Go Tracer. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
 </div>
 

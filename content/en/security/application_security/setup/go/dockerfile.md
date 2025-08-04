@@ -66,7 +66,7 @@ Two main dimensions impact your Dockerfile choice for App and API Protection:
 * **libc implementation**: glibc (Debian/Ubuntu) or musl (Alpine)
 * **CGO**: enabled or disabled (with the env var `CGO_ENABLED`).
 
-These dimensions affect both build requirements and runtime compatibility. The Datadog WAF requires specific shared libraries (`libc.so.6` and `libpthread.so.0`) at runtime and the build approach varies depending on these choices. Those dependencies are required by all programs built with CGO enabled, so the Datadog WAF will work out-of-the-box on runtime environments that support such programs. 
+These dimensions affect both build requirements and runtime compatibility. The Datadog WAF requires specific shared libraries (`libc.so.6`, `libpthread.so.0` and `libdl.so.2`) at runtime and the build approach varies depending on these choices. Those dependencies are required by all programs built with CGO enabled, so the Datadog WAF will work out-of-the-box on runtime environments that support such programs. 
 
 When CGO is disabled, however, Go usually produces a fully, statically linked binary that does not require these libraries. but this is not true when using the Datadog WAF. This is why, when CGO is disabled, the `-tags=appsec` flag needs to be passed to enable the Datadog WAF.
 
