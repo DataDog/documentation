@@ -7,37 +7,35 @@ This topic describes how to use the App and API Protection [Users explorer][1] t
 
 ## Overview
 
-There are multiple ways Datadog can associate a user with a trace and, consequently, display the user in the Users explorer. See [Adding authenticated user information to traces and enabling user blocking capability][8].
+There are multiple ways Datadog can associate a user with a trace and, consequently, display the user in the Users explorer. For example, a login attempt causes a user to appear in the Users explorer. This tracing makes the Users explorer a sort of user inventory. Users are identified by user ID (`@usr.id`) and, when available, user name and email address. See [Adding authenticated user information to traces and enabling user blocking capability][8].
 
-For example, a login attempt causes a user to appear in the Users explorer. This makes the explorer a sort of user inventory. Users are identified by user ID (`@usr.id`) and, when available, user name and email address.
+Typically, users in the Users explorer are not a risk but some user account vulnerabilities are under attack. For example, attempts to compromise a user account.
 
-Typically, users are not a risk but some user account vulnerabilities are under attack. For example, attempts to compromise a user account.
-
-With the Users explorer, you can investigate and take action on user accounts flagged as risks using risk categories.
+With the Users explorer, you can investigate and take action on the user accounts flagged as risks using **risk categories**.
 
 ### Risk categories
 
 The Users explorer assigns one or more of the following risk categories to a user identified as a risk:
 
-- **New Geolocation:** User activity from an unfamiliar location might signal unauthorized access or legitimate travel requiring verification.
+- **New Geolocation:** User activity from an unfamiliar location might indicate unauthorized access or legitimate travel requiring verification.
 - **Impossible Travel:** Occurs when a user logs in from two distant locations in an unrealistically short time, indicating possible credential compromise. A caveat with this category is it can falsely identify users on the same VPN as impossible travel.
 - **Compromised User:** A user's credentials are stolen or hacked, allowing attackers to perform malicious activities with their identity.
 - **Disposable Email:** A disposable email is an email address that is temporary.
 
-When a user ID, email, or name is associated with a signal, but does not match a category, it still appears in the Users explorer.
+<div class="alert alert-info">When a user ID, email, or name is associated with a trace, but does not match a risk category, it still appears in the Users explorer.</div>
 
 ### How the Users explorer differs from other explorers
 
 To understand the difference between the different explorers, review these approaches:
 
 - **Protect:** Automatically block attackers (IPs and authenticated users) using App and API Protection [Policies][2]. Customers should block attack tools as their first automated blocking action. Blocking attack tools reduces common vulnerability discovery for OWASP threats such as SQLi, command injection, and SSRF.
-- **React:** Blocking attackers in response to observed threats using the [Signals][3], Users, [Attackers][4] explorers.
+- **React:** Blocking attackers in response to observed threats using the [Signals][9], [Traces][3], Users, [Attackers][4] explorers.
 
 Each explorer focuses on a specific use case:
 
-- **Signal explorer**: Provides a list of actionable alerts such as Credential Stuffing Attack or Command Injection. Signals have workflow capabilities, a description, severity, and correlated Traces. Interactions include user assignment workflows, automated protection, analytics, search, and pivoting to Trace Explorer.
-- **Trace explorer**: List of evidence for business logic events, such as logins, or attack payloads. Interactions include analytics and search.
-- **Attackers explorer**: Identifies attackers as suspicious (IP addresses that have attacked in the last 24 hours up to a threshold) and flagged (IP addresses that have exceeded that threshold).
+- **Signals explorer**: Provides a list of actionable alerts such as `Credential Stuffing Attack` or `Command Injection`. Signals have workflow capabilities, a description, severity, and correlated Traces. Interactions include user assignment workflows, automated protection, analytics, search, and pivoting to Traces Explorer.
+- **Traces explorer**: Lists evidence for business logic events, such as logins, or attack payloads. Interactions include analytics and search.
+- **Attackers explorer**: Identifies attackers as `suspicious` (IP addresses that have attacked in the last 24 hours up to a threshold) and `flagged` (IP addresses that have exceeded that threshold).
 - **Users explorer**: List of authenticated users associated with one or more traces. Interactions include: 
   - Bulk actions for user analytics and blocking
   - Drill-down into the history of any user
@@ -48,7 +46,7 @@ Each explorer focuses on a specific use case:
 
 To start reviewing users, go to the [Users explorer][1].
 
-There are two sections in the Users explorer:
+The main sections in the Users explorer are:
 
 - Facets and search. These enable you to filter users by multiple user attributes.
 - The list of users with security metrics. 
@@ -68,7 +66,7 @@ To block an individual user, do the following:
 
 ## Compare and block multiple users
 
-When you select two or more users, you can use the **Compare and Block** button to compare datapoints across compromised users.
+When you select two or more users, you can use the **Compare and Block** button to compare datapoints across potentially compromised users.
 
 When you click **Compare and Block**, several metrics are displayed in **Block selected users**. These metrics help you detect whether you are dealing with **a single attacker**, **a larger coordinated campaign**, or **widespread credential exposure**.
 
@@ -76,7 +74,7 @@ Here's a breakdown of the benefits of comparing each datapoint across two (or mo
 
 ### Users per ASN
 
-**Benefit:** Identifies if compromised accounts are accessed from the same internet service provider or network operator.
+**Benefit:** Identifies if compromised accounts are accessed from the same internet service provider (ISP) or network operator.
 
 If multiple users are compromised from the same ASN (Autonomous System Number), it could suggest:
   * A botnet operating from that network.
@@ -177,3 +175,4 @@ Here are some investigation tips for comparing each datapoint across two (or mor
 [6]: /security/application_security/policies/#denylist
 [7]: https://app.datadoghq.com/security/appsec/denylist
 [8]: /security/application_security/how-it-works/add-user-info/?tab=java#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
+[9]: https://app.datadoghq.com/security
