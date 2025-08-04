@@ -43,7 +43,7 @@ By default, the `mask_all` setting is enabled for all data. With this setting en
 
 #### Mask sensitive inputs
 
-With the `mask_sensitive_inputs` setting enabled, all text and inputs are shown except those considered sensitive, such as password fields.
+With the `mask_sensitive_inputs` setting enabled, all text and inputs are shown except those considered sensitive (passwords, emails, and phone numbers).
 
 <!-- Android -->
 {% if equals($platform, "android") %}

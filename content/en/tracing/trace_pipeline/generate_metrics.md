@@ -29,8 +29,7 @@ Use span-based metrics when you:
 - Want to power [anomaly][4] or [forecast][7] monitors with low-latency, high-resolution metrics
 - Don't need to retain the full trace, but want to extract key signals for trending or alerting
 
-<span class="alert alert-warning">Span-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and are billed accordingly. To avoid high costs, do not group metrics by high-cardinality values such as user IDs or request IDs.</span>
-
+<div class="alert alert-warning">Span-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and are billed accordingly. To avoid high costs, do not group metrics by high-cardinality values such as user IDs or request IDs.</div>
 
 ## Create a span-based metric
 
