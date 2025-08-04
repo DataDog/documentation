@@ -20,11 +20,13 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
 
 ### Graphs
 {{< whatsnext desc="Generic widgets to graph data from Datadog products: ">}}
-    {{< nextlink href="/dashboards/widgets/change" 
+    {{< nextlink href="/dashboards/widgets/bar_chart"
+        img="/dashboards/widgets/icons/bar-chart_light_large.svg">}} Bar Chart{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/change"
         img="dashboards/widgets/icons/change_light_large.png">}} Change {{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/distribution"
         img="dashboards/widgets/icons/distribution_light_large.png">}} Distribution{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/geomap" 
+    {{< nextlink href="/dashboards/widgets/geomap"
         img="dashboards/widgets/icons/geomap_light_large.png">}} Geomap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/heat_map"
         img="dashboards/widgets/icons/heatmap_light_large.png">}} Heatmap{{< /nextlink >}}
@@ -58,33 +60,33 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
 
 ### Product Analytics
 {{< whatsnext desc="Visualize Product Analytics data: ">}}
-    {{< nextlink href="/dashboards/widgets/sankey" 
+    {{< nextlink href="/dashboards/widgets/sankey"
         img="dashboards/widgets/icons/sankey_light_large.svg">}} Sankey{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/funnel" 
+    {{< nextlink href="/dashboards/widgets/funnel"
         img="dashboards/widgets/icons/funnel_light_large.png">}} Funnel{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/retention" 
+    {{< nextlink href="/dashboards/widgets/retention"
         img="/dashboards/widgets/icons/cohort_light_small.svg">}} Retention{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Architecture
 {{< whatsnext desc="Visualize infrastructure and architecture data: ">}}
-    {{< nextlink href="/dashboards/widgets/hostmap" 
+    {{< nextlink href="/dashboards/widgets/hostmap"
         img="dashboards/widgets/icons/host-map_light_large.png">}} Hostmap{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/topology_map" 
+    {{< nextlink href="/dashboards/widgets/topology_map"
         img="dashboards/widgets/icons/service-map_light_large.png">}} Topology Map{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/service_summary" 
+    {{< nextlink href="/dashboards/widgets/service_summary"
         img="dashboards/widgets/icons/service-summary_light_large.png">}} Service Summary{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Annotations and embeds
 {{< whatsnext desc="Decoration widgets to visually structure and annotate dashboards: ">}}
-    {{< nextlink href="/dashboards/widgets/free_text" 
+    {{< nextlink href="/dashboards/widgets/free_text"
         img="dashboards/widgets/icons/free-text_light_large.png">}} Free Text{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/iframe" 
+    {{< nextlink href="/dashboards/widgets/iframe"
         img="dashboards/widgets/icons/iframe_light_large.png">}} Iframe{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/image" 
+    {{< nextlink href="/dashboards/widgets/image"
         img="dashboards/widgets/icons/image_light_large.png">}} Image{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/note" 
+    {{< nextlink href="/dashboards/widgets/note"
         img="dashboards/widgets/icons/notes_light_large.png">}} Notes and Links{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -96,15 +98,15 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
 
 ### Alerting and response
 {{< whatsnext desc="Summary widgets to display Monitoring information: ">}}
-    {{< nextlink href="/dashboards/widgets/alert_graph" 
+    {{< nextlink href="/dashboards/widgets/alert_graph"
         img="dashboards/widgets/icons/alert-graph_light_large.png">}} Alert Graph{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/alert_value" 
+    {{< nextlink href="/dashboards/widgets/alert_value"
         img="dashboards/widgets/icons/alert-value_light_large.png">}}Alert Value{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/check_status" 
+    {{< nextlink href="/dashboards/widgets/check_status"
         img="dashboards/widgets/icons/check-status_light_large.png">}} Check Status{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/monitor_summary" 
+    {{< nextlink href="/dashboards/widgets/monitor_summary"
         img="dashboards/widgets/icons/monitor-summary_light_large.png">}} Monitor Summary{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/run_workflow" 
+    {{< nextlink href="/dashboards/widgets/run_workflow"
         img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Run Workflow{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -112,9 +114,9 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
 {{< whatsnext desc="Site reliability visualizations: ">}}
     {{< nextlink href="/dashboards/widgets/profiling_flame_graph"
         img="dashboards/widgets/icons/profiling_flame_graph.svg">}} Profiling Flame Graph{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo" 
+    {{< nextlink href="/dashboards/widgets/slo"
         img="dashboards/widgets/icons/slo-summary_light_large.png">}} Service Level Objective (SLO) Summary{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo_list" 
+    {{< nextlink href="/dashboards/widgets/slo_list"
         img="dashboards/widgets/icons/slo-list_light_large.png">}} Service Level Objective (SLO){{< /nextlink >}}
 {{< /whatsnext >}}
 
