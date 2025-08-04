@@ -42,7 +42,7 @@ Incidents carry three timestamp attributes that drive analytics:
 
 Incident Management reports the following analytic measures, which you can use to power analytic queries in Dashboard and Notebook widgets:
 
-- `Customer Impact Duration`: The duration customers were impacted, based on the impacts defined on the incident.
+- `Customer Impact Duration`: The duration during which customers were impacted, based on the impacts defined on the incident.
 - `Status Active Duration`: The duration that the incident was in an "active" state, based on the incident timeline.
 - `Status Stable Duration`: The duration that the incident was in a "stable" state, based on the incident timeline.
 - `Time to Detect`: The duration from the earliest customer impact to the incident's detection time.
