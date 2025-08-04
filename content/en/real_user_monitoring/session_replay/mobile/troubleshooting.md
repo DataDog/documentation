@@ -39,7 +39,7 @@ Image visibility depends on your SDK privacy configuration:
 
 All other images are replaced by a "Content Image" placeholder in the UI.
 
-Learn more on [image privacy settings][1].
+Learn more about [image privacy settings][1].
 
 Images follow a separate processing pipeline, which may introduce a small delay between uploading a replay and the image being available for rendering in the web player.
 In this case, wait a few minutes and then reload the replay. 
