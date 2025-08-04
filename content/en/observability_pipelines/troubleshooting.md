@@ -129,6 +129,18 @@ If the Worker is not starting, Worker logs are not sent to Datadog and are not v
     ```
     An example of `<pod-name>` is `opw-observability-pipelines-worker-0`.
 
+## Unable to get local issuer certificate
+
+Observability Pipelines does not accept self-signed certificates because they are not secure. If you see the error `unable to get local issuer certificate` and you are using self-signed certificates, do one of the following to resolve the issue:
+
+1. Use a certificate signed by Certificate Authority (CA).
+2. Use a certificate from [Let's Encrypt][15].
+3. Configure your environment to trust the self-signed certificate on the Observability Pipelines Worker host. **Note**: This method is less secure. Datadog recommends this method for internal use only. For the Worker host to trust the self-signed certificate:
+    - On Linux hosts, install the certificate into the OS trust store.
+    - In Kubernetes, you can either:
+        - Build a custom container image that includes the certificate.
+        - Mount the certificate and update the container's trust store manually.
+        
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/explorer/search_syntax/
@@ -143,3 +155,4 @@ If the Worker is not starting, Worker logs are not sent to Datadog and are not v
 [12]: https://app.datadoghq.com/logs
 [13]: /observability_pipelines/install_the_worker/worker_commands/
 [14]: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/security_guide/sec-port_forwarding#sec-Adding_a_Port_to_Redirect
+[15]: https://letsencrypt.org/
