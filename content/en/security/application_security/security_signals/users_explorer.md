@@ -3,20 +3,24 @@ title: Users Explorer
 disable_toc: false
 ---
 
-This topic describes how to use the App and API Protection [Users explorer][1] to investigate the risks associated with the users tracked by security [Signals][3].
+This topic describes how to use the App and API Protection [Users explorer][1] to investigate the risks associated with the users tracked by security [Traces][3].
 
 ## Overview
 
-Datadog App and API Protection identifies users as risks when one or more signals is associated with a user ID, email, or name. 
+There are multiple ways Datadog can associate a user with a trace and, consequently, display the user in the Users explorer. See [Adding authenticated user information to traces and enabling user blocking capability][8].
 
-With the Users explorer, you can investigate and take action on these users.
+For example, a login attempt causes a user to appear in the Users explorer. This makes the explorer a sort of user inventory. Users are identified by user ID (`@usr.id`) and, when available, user name and email address.
+
+Typically, users are not a risk but some user account vulnerabilities are under attack. For example, attempts to compromise a user account.
+
+With the Users explorer, you can investigate and take action on user accounts flagged as risks using risk categories.
 
 ### Risk categories
 
 The Users explorer assigns one or more of the following risk categories to a user identified as a risk:
 
 - **New Geolocation:** User activity from an unfamiliar location might signal unauthorized access or legitimate travel requiring verification.
-- **Impossible Travel:** Occurs when a user logs in from two distant locations in an unrealistically short time, indicating possible credential compromise.
+- **Impossible Travel:** Occurs when a user logs in from two distant locations in an unrealistically short time, indicating possible credential compromise. A caveat with this category is it can falsely identify users on the same VPN as impossible travel.
 - **Compromised User:** A user's credentials are stolen or hacked, allowing attackers to perform malicious activities with their identity.
 - **Disposable Email:** A disposable email is an email address that is temporary.
 
@@ -34,7 +38,7 @@ Each explorer focuses on a specific use case:
 - **Signal explorer**: Provides a list of actionable alerts such as Credential Stuffing Attack or Command Injection. Signals have workflow capabilities, a description, severity, and correlated Traces. Interactions include user assignment workflows, automated protection, analytics, search, and pivoting to Trace Explorer.
 - **Trace explorer**: List of evidence for business logic events, such as logins, or attack payloads. Interactions include analytics and search.
 - **Attackers explorer**: Identifies attackers as suspicious (IP addresses that have attacked in the last 24 hours up to a threshold) and flagged (IP addresses that have exceeded that threshold).
-- **Users explorer**: List of authenticated users associated with one or more signals. Interactions include: 
+- **Users explorer**: List of authenticated users associated with one or more traces. Interactions include: 
   - Bulk actions for user analytics and blocking
   - Drill-down into the history of any user
   - Search
@@ -99,7 +103,7 @@ If multiple users are being accessed from the same location (especially foreign 
 
 ### Users per Domain
 
-**Benefit:** Groups affected users by email domain, which typically represents their organization.
+**Benefit:** Groups affected users by IP domain, which typically represents their organization.
 
 Benefits include:
   * Identifying organization-wide breaches.
@@ -112,11 +116,11 @@ Benefits include:
 
 Comparing helps you:
   * Understand the vector of compromise.
-  * Prioritize responses (for example, `hosting_proxy` might require different mitigation than `malware`).
+  * Prioritize responses (for example, `corp_vpn`, which are IPs used by businesses, and `hosting_proxy`, which is largely malicious).
 
 ### Threat Intel Intention
 
-**Benefit:** Clarifies **why the attacker stole the credentials** (fraud, espionage, resale, lateral movement, etc.).
+**Benefit:** Provides insights about the attacker reputation based on IP. Flagged IPs aren't necessarily malicious, but they are known to be misused. Misuse is often without the user knowing, for example, in  the case of `residential_proxy`. These users are worth closer attention.
 
 Matching intentions reveal:
   * Common attacker **goals**.
@@ -130,7 +134,8 @@ Matching intentions reveal:
 Overlap between users might indicate:
 
   * Use of the **same attacker infrastructure**.
-  * Centralized control (e.g., via a **command-and-control server**).
+  * Office buildings shared by a group of users.
+  * Centralized control (for example, with a **command-and-control server**).
   * Account access from **known malicious IPs** (check threat feeds).
 
 ### Summary of comparison details
@@ -150,7 +155,7 @@ Overlap between users might indicate:
 
 Here are some investigation tips for comparing each datapoint across two (or more) compromised users:
 
-1. Breaches are just the start.
+1. Breaches are only the beginning.
   A leaked credential is the entry point into a wider investigation.
 2. Look for patterns.
   Compare ASN, IP, user agent, geo, domain. If multiple users share infrastructure, it's likely one actor or campaign.
@@ -166,9 +171,9 @@ Here are some investigation tips for comparing each datapoint across two (or mor
 
 [1]: https://app.datadoghq.com/security/appsec/users
 [2]: /security/application_security/policies/
-[3]: /security/application_security/security_signals
+[3]: https://app.datadoghq.com/security/appsec/traces
 [4]: /security/application_security/security_signals/attacker-explorer/
 [5]: /security/threat_intelligence/#threat-intelligence-categories
 [6]: /security/application_security/policies/#denylist
 [7]: https://app.datadoghq.com/security/appsec/denylist
-
+[8]: /security/application_security/how-it-works/add-user-info/?tab=java#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
