@@ -243,7 +243,7 @@ On Linux, you can reduce the Datadog Agent's overall footprint by running contai
 
 #### Enable optimized process collection
 
-In Datadog Agent v7.65.0+, optimized process collection is enabled by default. If you are using an earlier version of the Datadog Agent (v7.53.0+, but lower than v7.65.0), follow these steps to enable optimized process collection:
+In Datadog Agent v7.65.0+, optimized process collection is enabled by default. If you are using an earlier version of the Datadog Agent (starting with v7.53.0, but lower than v7.65.0), follow these steps to enable optimized process collection:
 
 1. Edit your configuration.
    {{< tabs >}}
