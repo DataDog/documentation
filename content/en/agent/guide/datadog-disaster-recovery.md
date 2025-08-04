@@ -204,26 +204,20 @@ You can configure Dual shipping to both your primary and failover orgs by using 
 <!-- FLEET AUTOMATION START -->
 ##### Using Fleet Automation (recommended)
 
-From the [Fleet Automation][14] page in your failover org, you can create a new failover policy or reuse an existing one and apply it to your fleet of Agents. Soon after, Agents begin dual-shipping telemetry to both the primary and secondary(failover) observability sites. 
+From the [Fleet Automation][14] page in your failover org, you can create a new failover policy or reuse an existing one and apply it to your fleet of Agents. Soon after the policy is enabled, Agents begin dual-shipping telemetry to both the primary and secondary(failover) observability sites. 
 
 {{< img src="/agent/guide/ddr/ddr-fa-policy.png" alt="Manage DDR policies" style="width:80%;" >}}
 
-1. First create a failover policy by scoping the hosts and telemetry (Metrics, Logs, Traces) that you are required to failover.
+
+To create a failover policy, click on **Create Failover Policy** and follow the prompt to scope the hosts and telemetry (metrics, logs, traces) that you are required to failover.
 
 {{< img src="/agent/guide/ddr/ddr-fa-policy-scope.png" alt="Scope the hosts and telemetry required to failover" style="width:80%;" >}}
 
-2. To trigger a failover of your Agents you can click on one of the policies in Fleet Automation and then click “Enable” . The status of each host will be updated as the failover occurs.
-
-{{< img src="/agent/guide/ddr/ddr-fa-policy-enable.png" alt="Enable the failover policy in the DDR org" style="width:80%;" >}}
-
-The failover overview page contains the status of DDR as well as the capability to failover Cloud Integrations. 
-
 <div class="alert alert-warning">
-Be aware that Cloud Integrations can only run in either your primary or secondary Datadog site, but not both at the same time, so failing them over will cease Cloud Integration data in your primary site.
+<strong>Note</strong>: Cloud Integrations can only run in either your primary or secondary Datadog site, but not both at the same time, so failing them over will cease Cloud Integration data in your primary site. <strong>During an integration failover, integrations run only in the DDR data center</strong>. When no longer in failover, you can disable the policy to return integration data collection to the primary org. 
 </div>
 
-{{< img src="/agent/guide/ddr/ddr-failover-main-page.png" alt="Enable the failover policy in the DDR org" style="width:80%;" >}}
-
+`<add steps 2 and 3 from the screenshot?>`
 
 <!-- FLEET AUTOMATION END -->
 [14]: https://app.datadoghq.com/fleet
@@ -255,7 +249,7 @@ multi_region_failover:
 
 Setting the **enabled** field to `true` allows the Agent to send metadata to the DDR Datadog site. so you can view Agents and your Infra hosts in the DDR org. This allows you to see your  Agents and infrastructure hosts in the failover organization. 
 
-**Note**: Telemetry (Logs, metrics, and traces) are not sent to the failover site unless DDR failover is activated.
+**Note**: Telemetry (logs, metrics, and traces) are not sent to the failover site unless DDR failover is activated.
 
 
 
@@ -340,9 +334,19 @@ DD_MULTI_REGION_FAILOVER_API_KEY=ADD_NEW_SITE_API_KEY
 
 Failing over cloud integrations is a separate and distinct action available on the disaster recovery landing page in the DDR region.
 
+To trigger a failover of your Agents you can click on one of the policies in Fleet Automation and then click “Enable”. The status of each host will be updated as the failover occurs.
+
+{{< img src="/agent/guide/ddr/ddr-fa-policy-enable.png" alt="Enable the failover policy in the DDR org" style="width:80%;" >}}
+
 During testing, integration telemetry is spread over both organizations and cancelling a failover testing returns the integrations to running in the Primary data center.
 
-During an integration failover, integrations run only in the DDR data center.
+
+The failover overview page contains the status of DDR as well as the capability to failover Cloud Integrations. 
+
+{{< img src="/agent/guide/ddr/ddr-failover-main-page.png" alt="Enable the failover policy in the DDR org" style="width:80%;" >}}
+
+
+
 
 {{% /collapse-content %}}<br>
 
