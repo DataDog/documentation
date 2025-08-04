@@ -436,6 +436,42 @@ app_key: "ENC[MySecret;ddappkey]"
 property3: "ENC[MySecret;ddorgname]"
 ```
 
+#### Backend configuration example
+
+In the following example, assume the Azure secret name is `MySecretName` with a secret value containing the Datadog Agent api_key:
+
+```json
+{
+    "ddapikey": "••••••••••••0f83"
+}
+```
+
+Also assume that the Key Vault's URL is `https://mykeyvault.vault.azure.net`
+
+The below example shows how to access the secret from the Datadog Agent configuration yaml file(s):
+
+```yaml
+# /etc/datadog-agent/datadog.yaml
+
+#################################
+## Datadog Agent Configuration ##
+#################################
+
+## @param api_key - string - required
+## @env DD_API_KEY - string - required
+## The Datadog API key to associate your Agent's data with your organization.
+## Create a new API key here: https://app.datadoghq.com/account/settings
+#
+api_key: "ENC[MySecretName;ddapikey]" 
+...
+...
+...
+secret_backend_type: azure.keyvault
+secret_backend_config:
+  keyvaulturl: https://mykeyvault.vault.azure.net
+```
+
+
 [1200]: https://docs.microsoft.com/en-us/Azure/key-vault/secrets/quick-create-portal
 
 {{% /collapse-content %}} 
