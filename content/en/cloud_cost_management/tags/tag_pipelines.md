@@ -22,6 +22,8 @@ With [Tag Pipelines][1], you can create tag rules to address missing or incorrec
 
 Tag pipelines are applied to Cloud Cost metrics from all providers. Tag pipelines are not applied to Cloud Cost Recommendations.
 
+When tag pipelines change, the new rules are automatically applied to the most recent three months of data. It may take up to 24 hours for the backfill to complete after rules are added or modified.
+
 ## Create a ruleset
 
 To create a ruleset, navigate to [**Cloud Cost > Settings > Tag Pipelines**][1].

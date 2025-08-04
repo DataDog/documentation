@@ -51,6 +51,9 @@ further_reading:
 - link: https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/
   tag: Centro de arquitectura
   text: Guía de estrategias de indexación de la gestión de logs con Datadog
+- link: https://www.datadoghq.com/blog/archive-search/
+  tag: Blog
+  text: Busca en tus logs históricos de forma más eficiente con Datadog Archive Search
 title: Gestión de logs
 ---
 
@@ -110,7 +113,7 @@ Comienza a explorar tus logs ingeridos en el [Log Explorer][1].
   Aprende sin coste alguno sobre la capacidad real de computación en la nube y una cuenta de prueba de Datadog. Inscríbete hoy mismo para obtener más información sobre la recopilación, consulta, análisis, métricas, monitorización, procesamiento, almacenamiento y control de acceso de logs.
 {{< /learning-center-callout >}}
 
-## Para leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>

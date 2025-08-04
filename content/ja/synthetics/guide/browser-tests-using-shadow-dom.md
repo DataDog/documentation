@@ -3,7 +3,7 @@ further_reading:
 - link: /synthetics/browser_tests
   tag: ドキュメント
   text: ブラウザテストの詳細
-title: Shadow DOM を使用したアプリケーションのテスト実行
+title: Shadow DOM を使用するアプリケーションでテストを実行する
 ---
 
 ## 概要
@@ -23,6 +23,10 @@ Shadow DOM は、以下のような用途に使用することができます。
 [カプセル化モード][2]とステップの目的に応じて、ブラウザテストアクションを利用して、Shadow DOM 内にレンダリングされた要素と対話し、検証するテストを構成します。このガイドでは、これらのアクションとアサーションタイプについて説明します。
 
 ## オープンモード
+
+<div class="alert alert-info">
+Shadow DOM を open モードでテストするためのオプションは、以下のとおりです。ただし、Datadog では、要素が Shadow DOM 内にないかのようにステップを記録することで open モードのテストをサポートしています。<a href="/getting_started/synthetics/browser_test/#create-recording">recording を作成</a>、または <a href="/synthetics/browser_tests/?tab=requestoptions#record-your-steps">ステップを記録</a> する方法を利用できます。
+</div>
 
 {{< img src="synthetics/guide/browser-tests-using-shadow-dom/open-shadow-dom.png" alt="Open Shadow DOM" style="width:50%;" >}}
 
@@ -115,4 +119,4 @@ return true
 
 [1]: https://developers.google.com/web/fundamentals/web-components/shadowdom
 [2]: https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM#basic_usage
-[3]: https://docs.datadoghq.com/ja/synthetics/browser_tests/actions#type-text
+[3]: /ja/synthetics/browser_tests/actions#type-text
