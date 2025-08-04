@@ -1,5 +1,9 @@
 ---
 title: Datadog CSI Driver
+further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-csi-driver/"
+  tag: "Blog"
+  text: "Bring high-performance observability to secure Kubernetes environments with Datadog's CSI driver"
 ---
 
 ## Overview
@@ -192,6 +196,10 @@ By isolating the Datadog CSI Driver in a privileged namespace, Kubernetes cluste
 <div class="alert alert-info">
    Limit access to the Datadog CSI Driver's namespace and configuration to trusted operators. If the Datadog CSI Driver's elevated privileges are misconfigured, these privileges can be exploited.
 </div>
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-csi-driver
 [2]: https://hub.docker.com/r/datadog/csi-driver
