@@ -94,7 +94,7 @@ Incident Management integrates closely with other Datadog products, including:
 
 Incident Management integrates with third-party applications, including:
 
-- [Atlassian Statuspage][24] to create and update Statuspage incidents.
+- [Atlassian Statuspage][25] to create and update Statuspage incidents.
 - [Confluence][22] to generate incident postmortems.
 - [CoScreen][14] to launch collaborative meetings with multi-user screen sharing, remote control, and built-in audio and video chat.
 - [CoTerm][21] to follow terminal-based incident remediation activities in real time.
