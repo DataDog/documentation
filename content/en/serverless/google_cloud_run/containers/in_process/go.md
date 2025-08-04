@@ -59,7 +59,7 @@ For more information, see [Correlating Go Logs and Traces][3].
 
 ## 4. Configure your application
 
-{{% gcr-configure-env-vars %}}
+{{% gcr-configure-env-vars language="go" %}}
 
 ## Troubleshooting
 

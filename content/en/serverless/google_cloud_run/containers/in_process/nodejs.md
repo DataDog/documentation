@@ -67,7 +67,7 @@ For more information, see [Correlating Node.js Logs and Traces][2].
 
 ## 4. Configure your application
 
-{{% gcr-configure-env-vars %}}
+{{% gcr-configure-env-vars language="nodejs" %}}
 
 ## Troubleshooting
 

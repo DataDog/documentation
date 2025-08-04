@@ -60,7 +60,7 @@ For more information, see [Correlating Python Logs and Traces][2].
 
 ## 4. Configure your application
 
-{{% gcr-configure-env-vars %}}
+{{% gcr-configure-env-vars language="python" %}}
 
 ## Troubleshooting
 

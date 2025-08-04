@@ -61,7 +61,7 @@ For more information, see [Correlating .NET Logs and Traces][3].
 
 ## 4. Configure your application
 
-{{% gcr-configure-env-vars %}}
+{{% gcr-configure-env-vars language="csharp" %}}
 
 ## Troubleshooting
 

@@ -45,7 +45,7 @@ For more information, see [Correlating PHP Logs and Traces][2].
 
 ## 4. Configure your application
 
-{{% gcr-configure-env-vars %}}
+{{% gcr-configure-env-vars language="php" %}}
 
 ## Troubleshooting
 
