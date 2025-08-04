@@ -53,7 +53,7 @@ You can create a bidirectional Jira ticket directly from any finding to track an
 
 ### Mute findings
 
-To suppress a finding, click **Mute** in the finding details panel. This opens a muting workflow where you can choose how to mute the finding. Muting a finding hides it and excludes it from reports.
+To suppress a finding, click **Mute** in the finding details panel. This opens a workflow where you can [create a Muting Rule][10] for context-aware filtering by tag values (for example, by `service` or `environment`). Muting a finding hides it and excludes it from reports.
 
 To restore a muted finding, click **Unmute** in the details panel. You can also use the **Status** filter on the [Code Security Vulnerabilities][3] page to review muted findings.
 
@@ -82,3 +82,4 @@ Exclusions are managed through a configuration file or inline comments in your I
 [7]: /security/code_security/iac_security/exclusions/?tab=yaml
 [8]: /security/automation_pipelines/mute
 [9]: https://app.datadoghq.com/integrations/github/
+[10]: /security/automation_pipelines/
