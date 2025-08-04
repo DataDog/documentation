@@ -174,4 +174,4 @@ If you run into issues after installing the Worker, check your Observability Pip
 
 ### Missing environment variable
 
-If you see the error `Missing environment variable `DD_OP_SOURCE_KAFKA_SASL_PASSWORD` and you are running the Worker in a VM, make sure that the variable is in quotes when you run the Worker install script.
+If you see the error `Missing environment variable DD_OP_SOURCE_KAFKA_SASL_PASSWORD` and you are running the Worker in a VM, make sure that the variable is in quotes when you run the Worker install script.
