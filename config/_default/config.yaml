@@ -152,6 +152,8 @@ security:
     getenv:
       # allow os.Getenv to read gitlab CI_ prefixed os environment vars
       - ^(HUGO_|CI_|IA_SUBDOMAIN)
+      # allow os.Getenv to read custom environment variable for local translation builds
+      - LOCAL_TRANSLATION_BUILD
   exec:
     osEnv:
       # as suggested here https://github.com/gohugoio/hugo/issues/9333#issuecomment-1022435616
