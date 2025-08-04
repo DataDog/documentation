@@ -12,6 +12,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
   tag: "Blog"
   text: "Autoscale your Kubernetes workloads with any Datadog metric"
+- link: "https://www.datadoghq.com/blog/datadog-csi-driver/"
+  tag: "Blog"
+  text: "Bring high-performance observability to secure Kubernetes environments with Datadog's CSI driver"
 ---
 
 ## Overview
