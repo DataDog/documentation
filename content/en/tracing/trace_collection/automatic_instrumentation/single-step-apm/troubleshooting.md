@@ -24,7 +24,7 @@ This feature is in preview for:
 <p>To enable it, contact support or turn on the <code>apm-ssi-troubleshooting</code> feature flag.<p>
 {{< /callout >}}
 
-Using Datadog, you can identify and troubleshoot SSI issues across your infrastructure. You can see information like:
+Using Datadog, you can identify and troubleshoot instrumentation issues across your infrastructure. You can see information like:
 - Which hosts have SSI enabled
 - Which processes failed instrumentation and why
 - Which services were instrumented successfully
@@ -36,7 +36,7 @@ To access instrumentation insights in Datadog:
 1. Navigate to [Fleet Automation][9].
 1. Use facets to filter down to relevant hosts:
    - `single_step_instrumentation` shows which hosts have SSI enabled or disabled.
-   - `instrumentation_status` shows which hosts have encountered issues with service instrumentation.
+   - `single_step_instrumentation_status` shows which hosts have encountered issues with service instrumentation.
 1. Select a host to open the Agent details panel.
 1. In the Agent panel, go to the **Services** tab.
 1. If SSI is enabled on the host, the tab shows:
