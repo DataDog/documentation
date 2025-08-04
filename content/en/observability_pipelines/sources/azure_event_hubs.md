@@ -163,7 +163,6 @@ Select your platform.
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ## Troubleshooting
 
 If you run into issues after installing the Worker, check your Observability Pipelines environment file (`/etc/default/observability-pipelines-worker`) to make sure the environment variables are correctly set:
