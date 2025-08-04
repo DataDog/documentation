@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-The External Provider Status page provides real-time visibility into the operational status of major external dependencies. This centralized dashboard helps you stay ahead of performance degradation on third-party providers such as payment gateways, cloud services, and APIs, enabling faster incident response and reduced mean time to detection (MTTD).
+The [External Provider Status page][1] provides real-time visibility into the operational status of major external dependencies. This centralized dashboard helps you stay ahead of performance degradation on third-party providers such as payment gateways, cloud services, and APIs, enabling faster incident response and reduced mean time to detection (MTTD).
 
 {{< img src="internal_developer_portal/external_provider_status/external_provider_status_page.png" alt="External Provider Status page showing operational status of third-party dependencies" >}}
 
@@ -113,6 +113,6 @@ in the following regions:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors/create
+[1]: https://app.datadoghq.com/watchdog/external-provider-status
 
 
