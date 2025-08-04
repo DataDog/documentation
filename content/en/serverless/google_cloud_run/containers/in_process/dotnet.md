@@ -19,7 +19,7 @@ Install the tracer in your Dockerfile. Note that GitHub requests are rate limite
 For linux/amd64, include:
 ```Dockerfile
 RUN --mount=type=secret,id=github-token,env=GITHUB_TOKEN \
-    chmod +x /app/dotnet.sh && /app/dotnet.sh \
+    chmod +x /app/dotnet.sh && /app/dotnet.sh
 ```
 
 For alpine builds, configure your Dockerfile like so:

@@ -13,7 +13,7 @@ Images are tagged based on semantic versioning, with each new version receiving 
 Add the following instructions and arguments to your Dockerfile.
 
 ```dockerfile
-COPY --from=datadog/serverless-init:YOUR-TAG /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 ENTRYPOINT ["/app/datadog-init"]
 CMD [{{ .Get "cmd" | safeHTML }}]
 ```
@@ -28,47 +28,13 @@ CMD [{{ .Get "cmd" | safeHTML }}]
         </svg>
       </div>
       <div class="header-text">
-        <h4 class='header-text-inner'>Explanation</h4>
-      </div>
-    </div>
-  </summary>
-  <div class="collapsible-content">
-
-1. Install `serverless-init`.
-
-   ```dockerfile
-   COPY --from=datadog/serverless-init:YOUR-TAG /datadog-init /app/datadog-init
-   ```
-
-2. Change the entrypoint to wrap your application in the Datadog `serverless-init` process.
-   **Note**: If you already have an entrypoint defined inside your Dockerfile, see the [alternative configuration](#alt).
-
-   ```dockerfile
-   ENTRYPOINT ["/app/datadog-init"]
-   ```
-
-3. Execute your binary application wrapped in the entrypoint. Adapt this line to your needs.
-   ```dockerfile
-   CMD [{{ .Get "cmd" | safeHTML }}]
-   ```
-
-  </div>
-</details>
-
-<details class="collapsible-section" id="alt">
-  <summary class="collapsible-header" tabindex="0" aria-expanded="false">
-    <div class="header-content">
-      <div class="header-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-chevron-right">
-          <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
-        </svg>
-      </div>
-      <div class="header-text">
         <h4 class='header-text-inner'>Alternative configuration</h4>
       </div>
     </div>
   </summary>
   <div class="collapsible-content">
+
+We expect `serverless-init` to be the top-level application with the test of your app's command line passed in for `serverless-init` to execute.
 
 If you already have an entrypoint defined inside your Dockerfile, you can instead modify the CMD argument.
 
