@@ -283,10 +283,10 @@ Configure the following environment variable in the Advanced Configuration secti
 DD_LOGS_CONFIG_PROCESSING_RULES=[{\"type\": \"exclude_at_match\",\"name\": \"drop_all_logs\",\"pattern\": \".*\"}]
 ```
 
-### Required Databricks Permissions
-Datadog recommends making the user/principal used to connect to your Databricks workspace a **Workspace Admin** so that Datadog can manage init script installs/updates and reduce the risk of misconfiguring permissions. However, you can also manage permissions more granulary.
+### Permissions
+Datadog recommends making the user/principal used to connect to your Databricks workspace a **Workspace Admin** so that Datadog can manage init script installs & updates and reduce the risk of misconfigurations. However, you can also manage permissions more granularly:
 
-To monitor all jobs, clusters and queries within a workspace, Datadog requires the user/principal to have these permissions to access [workspace level objects][19]:
+To monitor all jobs, clusters, and queries within a workspace, the user/principal must have access to these [workspace level objects][19]
 
 | Object                 | Permission                                                                                                                                                      |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
