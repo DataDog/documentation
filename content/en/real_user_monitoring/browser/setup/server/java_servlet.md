@@ -11,7 +11,7 @@ further_reading:
 ---
 
 {{< callout url="https://forms.gle/RdVvDsmmzW21s2vd7" header="Join the Preview!">}}
-  RUM Auto-Instrumentation through Java servlet-based web servers is in Preview.
+  RUM Auto-Instrumentation through Java servlet-based web servers is in Preview. 
 {{< /callout >}}
 
 ## Overview
@@ -45,50 +45,6 @@ The Java SDK works by monitoring your servlet API (which handles web requests an
   - `clientToken`
   - `applicationId` 
   - `remoteConfigurationId`
-
-## Configuration
-
-### Enabling RUM Auto-Instrumentation
-
-RUM Auto-Instrumentation for Java Web Application servers can be configured using the usual Java Tracing configuration methods described in [Configuring the Java SDK Library][3].
-
-RUM Auto-Instrumentation is disabled by default unless you export the following environment variables:
-
-```shell
-export DD_RUM_ENABLED=true
-export DD_RUM_APPLICATION_ID=<your-application-id>
-export DD_RUM_CLIENT_TOKEN=<your-client-token>
-export DD_RUM_REMOTE_CONFIGURATION_ID=<your-remote-config-id>
-```
-
-Or use the following Java system properties:
-
-```shell
-java -Ddd.rum.enabled=true -Ddd.rum.application.id=<your-application-id> -Ddd.rum.client.token=<your-client-token> -Ddd.rum.remote.configuration.id=<your-remote-configuration-id>
-```
-
-You may need to restart your Java Web Application server in order to see the changes. HTML documents should now contain the Datadog RUM JavaScript tag right before the closing `</head> tag. You may need to clear your cache before you start receiving data for your Datadog RUM application.
-
-### Configuring RUM Auto-Instrumentation
-
-Below are all the configurations related to RUM Auto-Instrumentation:
-
-| Property | Environment variable | Value | Requirement |
-|----------|-------------------|-------|-------------|
-| `dd.rum.enabled` | `DD_RUM_ENABLED` | `true` / `false` | Required |
-| `dd.rum.application.id` | `DD_RUM_APPLICATION_ID` | `<string>` | Required |
-| `dd.rum.client.token` | `DD_RUM_CLIENT_TOKEN` | `<string>` | Required |
-| `dd.rum.site` | `DD_RUM_SITE` | `datadoghq.com` / `us3.datadoghq.com` / `us5.datadoghq.com` / `datadoghq.eu` / `ap1.datadoghq.com` / `ap2.datadoghq.eu` | Optional, `datadoghq.com` by default |
-| `dd.rum.service` | `DD_RUM_SERVICE` | `<string>` | Optional |
-| `dd.rum.environment` | `DD_RUM_ENVIRONMENT` | `<string>` | Optional |
-| `dd.rum.major.version` | `DD_RUM_MAJOR_VERSION` | `5` / `6` | Optional, `6` by default |
-| `dd.rum.version` | `DD_RUM_VERSION` | `<string>` | Optional |
-| `dd.rum.track.user.interaction` | `DD_RUM_TRACK_USER_INTERACTION` | `true` / `false` | Optional |
-| `dd.rum.track.resources` | `DD_RUM_TRACK_RESOURCES` | `true` / `false` | Optional |
-| `dd.rum.track.long.tasks` | `DD_RUM_TRACK_LONG_TASKS` | `true` / `false` | Optional |
-| `dd.rum.session.sample.rate` | `DD_RUM_SESSION_SAMPLE_RATE` | percentage, from 0 to 100 | Required if `rum.remote.configuration.id` is missing |
-| `dd.rum.session.replay.sample.rate` | `DD_RUM_SESSION_REPLAY_SAMPLE_RATE` | percentage, from 0 to 100 | Required if `rum.remote.configuration.id` is missing |
-| `dd.rum.remote.configuration.id` | `DD_RUM_REMOTE_CONFIGURATION_ID` | `<string>` | Required if either `rum.session.sample.rate` or `rum.session.replay.sample.rate` is missing |
 
 ## Troubleshooting
 
