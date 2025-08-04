@@ -95,7 +95,7 @@ With container cost allocation, you can:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /cloud_cost_management/multisource_querying/
+[1]: /cloud_cost_management/multisource_querying/#out-of-the-box-tags
 [2]: /cloud_cost_management/container_cost_allocation
 [3]: /cloud_cost_management/setup/aws/#aws-resource-tags
 [4]: /cloud_cost_management/tags/tag_pipelines
