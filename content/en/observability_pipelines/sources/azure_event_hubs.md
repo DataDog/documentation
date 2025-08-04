@@ -164,7 +164,7 @@ Select your platform.
 {{< /tabs >}}
 
 
-#### Troubleshooting
+## Troubleshooting
 
 If you run into issues after installing the Worker, check your Observability Pipelines environment file (`/etc/default/observability-pipelines-worker`) to make sure the environment variables are correctly set:
 
@@ -172,6 +172,6 @@ If you run into issues after installing the Worker, check your Observability Pip
 -   `DD_OP_SOURCE_KAFKA_BOOTSTRAP_SERVERS=<NAMESPACE>.servicebus.windows.net:9093`
 -   `DD_OP_SOURCE_KAFKA_SASL_PASSWORD=<Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>>`
 
-## Missing environment variable
+### Missing environment variable
 
 If you see the error `Missing environment variable `DD_OP_SOURCE_KAFKA_SASL_PASSWORD` and you are running the Worker in a VM, make sure that the variable is in quotes when you run the Worker install script.
