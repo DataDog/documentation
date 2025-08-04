@@ -64,7 +64,7 @@ More specific setup instructions will depend on the backend type used. Refer to 
 
 <!-- https://github.com/DataDog/datadog-secret-backend/tree/v1/docs -->
 
-{{% collapse-content title="AWS Secret and SSM" level="h4" expanded=true id="id-for-anchoring" %}}
+{{% collapse-content title="AWS Secret and SSM" level="h4" expanded=false id="id-for-anchoring" %}}
 The `datadog-secret-backend` utility currently supports the following AWS services:
 
 |Backend Type                                 | AWS Service                             |
@@ -373,13 +373,71 @@ aws_session:
 
 <!-- ######### A Z U R E ############ -->
 
-{{% collapse-content title="Azure Secret Backends" level="h4" expanded=true id="id-for-anchoring" %}}
-{{% tab "Tab Name" %}}
+{{% collapse-content title="Azure Keyvault Backend" level="h4" expanded=true id="id-for-anchoring" %}}
+
+##### Supported backends
+
+The `datadog-secret-backend` utility currently supports the following Azure services:
+
+| Backend Type       | Azure Service          |
+| -------------------|------------------------|
+| [azure.keyvault]() | [Azure Keyvault][1200] |
 
 
-[1]: /agent/guide/agent-commands/
+##### Managed identity
 
-{{% /tab %}}
+To access your Key Vault, create a Managed Identity in your environment. Assign that Identity as a Role on your Virtual Machine, which will give it access to your Key Vault's secrets. 
+
+
+#### Backend configuration settings
+
+| Setting       | Description                |
+|---------------|----------------------------|
+| `keyvaulturl` | URL of the Azure keyvault  |
+
+<div class="alert alert-info">
+In your <code>datadog.yaml</code> config, the setting <code>secret_backend_type</code> must be set to <code>azure.keyvault</code>. The <strong>backend_type</strong> must be set to <code>azure.keyvault</code> and <strong>keyvaulturl</strong> must be set to your target Azure Key Vault URL.
+</div>
+
+The backend configuration for Azure Key Vault secrets has the following pattern:
+
+```yaml
+# /etc/datadog-agent/datadog.yaml
+---
+secret_backend_type: azure.keyvault
+secret_backend_config:
+  keyvaulturl: {keyVaultURL}
+```
+
+The backend secret is referenced in your Datadog Agent configuration file using the **ENC** notation.
+
+```yaml
+# /etc/datadog-agent/datadog.yaml
+
+api_key: "ENC[{secretHandle}]"
+```
+
+Azure Keyvault can hold multiple secret keys and values using json. For example, assuming an Azure secret with a **Secret Name** of `MySecret`:
+
+```json
+{
+    "ddapikey": "SecretValue1",
+    "ddappkey": "SecretValue2",
+    "ddorgname": "SecretValue3"
+}
+```
+
+This can be accessed using a semicolon (`;`) to separate the Secret Name from the Key. The notation in the `datadog.yaml` config file looks like **ENC[SecretName;SecretKey]**. If this semicolon is not present, then the entire string will be treated as the plain text value of the secret. Otherwise, `SecretKey` is the json key referring to the actual secret that you are trying to pull the value of.
+
+```yaml
+# /etc/datadog-agent/datadog.yml
+api_key: "ENC[MySecret;ddapikey]"
+app_key: "ENC[MySecret;ddappkey]"
+property3: "ENC[MySecret;ddorgname]"
+```
+
+[1200]: https://docs.microsoft.com/en-us/Azure/key-vault/secrets/quick-create-portal
+
 {{% /collapse-content %}} 
 
 
