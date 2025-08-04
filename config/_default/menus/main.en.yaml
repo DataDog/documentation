@@ -5295,6 +5295,7 @@ menu:
       url: observability_pipelines/sources/amazon_s3/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_amazon_s3
+      weight: 902
     - name: Azure Event Hubs
       url: observability_pipelines/sources/azure_event_hubs/
       parent: observability_pipelines_sources
