@@ -364,10 +364,10 @@ The OpenTelemetry Demo includes a feature flag engine for simulating error scena
 
 The Datadog Extension allows you to view OpenTelemetry Collector configuration within Datadog on either one of the following pages:
 
-1. [Infrastructure List](https://app.datadoghq.com/infrastructure).
-2. [Resource Catalog](https://app.datadoghq.com/infrastructure/catalog).
+- [Infrastructure List][14].
+- [Resource Catalog][15].
 
-When selecting the hostname where the Collector is running you will be able to visualize its full configuration:
+When selecting the hostname where the Collector is running, you can visualize its full configuration:
 
 {{< img src="/getting_started/opentelemetry/otel_demo/collector_full_config.png" alt="OpenTelemetry Collector configuration rendered within Datadog" style="width:90%;" >}}
 
@@ -382,4 +382,6 @@ When selecting the hostname where the Collector is running you will be able to v
 [10]: https://opentelemetry.io/docs/demo/#language-feature-reference
 [11]: https://app.datadoghq.com/services
 [12]: http://localhost:8080/feature
-[13]: https://docs.datadoghq.com/opentelemetry/integrations/datadog_extension/
+[13]: /opentelemetry/integrations/datadog_extension/
+[14]: https://app.datadoghq.com/infrastructure
+[15]: https://app.datadoghq.com/infrastructure/catalog
