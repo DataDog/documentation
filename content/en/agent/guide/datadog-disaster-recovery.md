@@ -213,11 +213,13 @@ To create a failover policy, click on **Create Failover Policy** and follow the 
 
 {{< img src="/agent/guide/ddr/ddr-fa-policy-scope.png" alt="Scope the hosts and telemetry required to failover" style="width:80%;" >}}
 
+`<add steps 2 and 3 from the screenshot?>`
+
+
 <div class="alert alert-warning">
-<strong>Note</strong>: Cloud Integrations can only run in either your primary or secondary Datadog site, but not both at the same time, so failing them over will cease Cloud Integration data in your primary site. <strong>During an integration failover, integrations run only in the DDR data center</strong>. When no longer in failover, you can disable the policy to return integration data collection to the primary org. 
+<strong>Note</strong>: Cloud Integrations can only run in either your primary or secondary Datadog site, but not both at the same time, so failing them over will cease Cloud Integration data in your primary site. <strong>During an integration failover, integrations run only in the DDR data center</strong>. When no longer in failover, disable the policy to return integration data collection to the primary org. 
 </div>
 
-`<add steps 2 and 3 from the screenshot?>`
 
 <!-- FLEET AUTOMATION END -->
 [14]: https://app.datadoghq.com/fleet
@@ -341,7 +343,7 @@ To trigger a failover of your Agents you can click on one of the policies in Fle
 During testing, integration telemetry is spread over both organizations and cancelling a failover testing returns the integrations to running in the Primary data center.
 
 
-The failover overview page contains the status of DDR as well as the capability to failover Cloud Integrations. 
+The failover overview page contains the status of DDR as well as the capability to failover Cloud Integrations. When no longer in failover, disable the policy to return integration data collection to the primary org. 
 
 {{< img src="/agent/guide/ddr/ddr-failover-main-page.png" alt="Enable the failover policy in the DDR org" style="width:80%;" >}}
 
