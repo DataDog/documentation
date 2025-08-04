@@ -58,6 +58,15 @@ secret_backend_config:
   <KEY_1>: <VALUE_1>
 ```
 
+
+
+
+
+
+
+
+
+
 <!-- -------------------------------------------------------------------- START OF SECTION ------------------------------------------------------------------------------>
 
 More specific setup instructions will depend on the backend type used. Refer to the appropriate link for further information: 
@@ -321,7 +330,7 @@ property3: "ENC[/DatadogAgent/Production/ParameterKey3]"
 
 Currently, `StringList` parameter store values will be retained as a comma-separated list. `SecureString` is properly decrypted automatically, assuming that the `aws_session` credentials have appropriate rights to the KMS key used to encrypt the `SecureString` value.
 
-## Configuration Examples
+#### Configuration Examples
 
 In the following examples, assume the AWS Systems Manager Parameter Store secret path prefix is `/DatadogAgent/Production` with a parameter key of `api_key`:
 
@@ -593,59 +602,162 @@ secret_backend_config:
 [1300]: https://learn.hashicorp.com/tutorials/vault/static-secrets
 {{% /collapse-content %}} 
 
-
-
-
-
-
-
-
-
 <!-- ######### F I L E ############ -->
 
-{{% collapse-content title="Azure Secret Backends" level="h4" expanded=true id="id-for-anchoring" %}}
-{{% tab "Tab Name" %}}
+{{% collapse-content title="File Secret Backends" level="h4" expanded=true id="id-for-anchoring" %}}
 
+|Backend Type                                 | AWS Service                             |
+|---------------------------------------------|-----------------------------------------|
+|[file.json]()                                |[JSON][4001]                             |
+|[file.yaml]()                                |[YAML][4002]                             |
 
-[1]: /agent/guide/agent-commands/
+##### File Permission 
+The `datadog-secret-backend` file backend only requires read permissions from the local system Datadog Agent user (`Linux: dd-agen`t; `Windows: ddagentuser`) to the configured JSON or YAML files.
+{{< tabs >}}
+{{% tab "JSON File Backend" %}}
 
+##### Backend settings
+| Setting | Description |
+| --- | --- |
+| `backend_type` | Backend type |
+| `file_path`| Absolute directory path to the JSON file |
+
+##### Backend configuration
+The backend configuration for JSON file secrets has the following pattern:
+
+```yaml
+# /etc/datadog-agent/datadog.yaml
+---
+secret_backend_type: file.json
+secret_backend_config:
+  file_path: /path/to/json/file
+```
+
+The backend secret is referenced in your Datadog Agent configuration file using the **ENC** notation.
+
+```yaml
+# /etc/datadog-agent/datadog.yaml
+
+api_key: "ENC[{json_property_name}"
+
+```
+
+##### Configuration Examples
+
+In the following examples, assume the JSON file is `/opt/production-secrets/secrets.json` with the following file contents:
+
+```json
+{
+  "api_key": "••••••••••••0f83"
+}
+```
+
+The following example will access the JSON secret from the Datadog Agent configuration YAML file(s) as such:
+
+```yaml
+# /etc/datadog-agent/datadog.yaml
+
+#########################
+## Basic Configuration ##
+#########################
+
+## @param api_key - string - required
+## @env DD_API_KEY - string - required
+## The Datadog API key to associate your Agent's data with your organization.
+## Create a new API key here: https://app.datadoghq.com/account/settings
+#
+api_key: "ENC[api_key]" 
+```
+
+```yaml
+# /etc/datadog-agent/datadog.yaml
+---
+secret_backend_type: file.json
+secret_backend_config:
+  file_path: /opt/production-secrets/secrets.json
+```
 {{% /tab %}}
 
-{{% tab "Tab Name" %}}
 
+{{% tab "YAML File Backend" %}}
 
-[1]: /agent/guide/agent-commands/
+##### Backend Settings
+
+| Setting | Description |
+| --- | --- |
+| `backend_type` | Backend type |
+| `file_path`| Absolute directory path to the YAML file |
+
+##### Backend Configuration
+The backend configuration for JSON file secrets has the following pattern:
+
+```yaml
+# /etc/datadog-agent/datadog.yaml
+---
+secret_backend_type: file.yaml
+secret_backend_config:
+  file_path: /path/to/yaml/file
+```
+
+The backend secret is referenced in your Datadog Agent configuration file using the **ENC** notation.
+
+```yaml
+# /etc/datadog-agent/datadog.yaml
+
+api_key: "ENC[{yaml_property_name}]"
+
+```
+
+##### Configuration Examples
+
+In the following examples, assume the YAML file is `/opt/production-secrets/secrets.yaml` with the following file contents:
+
+```yaml
+---
+api_key: "••••••••••••0f83"
+```
+
+The following example will access the YAML secret from the Datadog Agent configuration YAML file(s) as such:
+
+```yaml
+# /etc/datadog-agent/datadog.yaml
+
+#########################
+## Basic Configuration ##
+#########################
+
+## @param api_key - string - required
+## @env DD_API_KEY - string - required
+## The Datadog API key to associate your Agent's data with your organization.
+## Create a new API key here: https://app.datadoghq.com/account/settings
+#
+api_key: "ENC[api_key]" 
+```
+
+```yaml
+# /etc/datadog-agent/datadog.yaml
+---
+secret_backend_type: file.yaml
+secret_backend_config:
+  file_path: /opt/production-secrets/secrets.yaml
+```
 
 {{% /tab %}}
+{{< /tabs >}}
+
+[4001]: https://en.wikipedia.org/wiki/JSON
+[4002]: https://en.wikipedia.org/wiki/YAML
+
 {{% /collapse-content %}} 
 
 <!-- ######### END ############ -->
 
 
-
-
-<!-- https://github.com/DataDog/datadog-secret-backend/tree/v1/docs/aws -->
-[AWS Secrets](https://github.com/DataDog/datadog-secret-backend/blob/main/docs/aws/secrets.md), 
-[AWS SSM](https://github.com/DataDog/datadog-secret-backend/blob/main/docs/aws/ssm.md), 
-
-
-<!-- https://github.com/DataDog/datadog-secret-backend/tree/v1/docs/azure -->
-[Azure Keyvault](https://github.com/DataDog/datadog-secret-backend/blob/main/docs/azure/keyvault.md), 
-
-
-<!-- https://github.com/DataDog/datadog-secret-backend/tree/v1/docs/hashicorp -->
-[Hashicorp Vault](https://github.com/DataDog/datadog-secret-backend/blob/main/docs/hashicorp/vault.md), 
-
-
-<!-- https://github.com/DataDog/datadog-secret-backend/tree/v1/docs/file -->
-[JSON](https://github.com/DataDog/datadog-secret-backend/blob/main/docs/file/json.md), 
-[YAML](https://github.com/DataDog/datadog-secret-backend/blob/main/docs/file/yaml.md).
-
-
-
-
-
 <!-- ------------------------------------------------------------------- END OF SECTION ---------------------------------------------------------------------------- -->
+
+
+
+
 
 
 
