@@ -29,7 +29,7 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 
 ### Prerequisites
 
-- To access Cloudcraft in Datadog, users need the `cloudcraft_read` [permission](#permissions).
+- To access Cloudcraft in Datadog, you need the `cloudcraft_read` [permission](#permissions).
 - [Resource collection][2] must be enabled for your AWS accounts.
 - For the best experience, Datadog strongly recommends using the AWS-managed [`SecurityAudit`][5] policy, or the more permissive [`ReadOnlyAccess`][6] policy.
 - Viewing content on the [Security overlay][10] requires additional products to be enabled:
@@ -99,7 +99,7 @@ Use the search bar to locate resources on the diagram by name, ID, or tag. This 
 
 ## Permissions
 
-To access Cloudcraft in Datadog, users need the `cloudcraft_read` permission. This permission is included in the Datadog Read Only Role by default. If your organization uses custom roles, add this permission to the appropriate role. For more information on managing permissions, see the [RBAC documentation][14].
+To access Cloudcraft in Datadog, you need the `cloudcraft_read` permission. This permission is included in the Datadog Read Only Role by default. If your organization uses custom roles, add this permission to the appropriate role. For more information on managing permissions, see the [RBAC documentation][14].
 
 ## Next steps
 
