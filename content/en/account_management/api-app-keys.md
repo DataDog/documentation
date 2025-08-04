@@ -36,6 +36,8 @@ The Actions Platform APIs include:
 - [Actions Connections][6]
 - [Workflow Automation][7]
 
+Each API requires specific permissions for individual endpoints. Because these APIs often work together, we've simplified the scoping process with the **Actions API Access** feature. Enabling **Actions API Access** adds all the required permissions for the Actions Platform APIs. 
+
 ## Client tokens
 
 For security reasons, API keys cannot be used to send data from a browser, mobile, or TV app, as they would be exposed client-side. Instead, end user facing applications use client tokens to send data to Datadog.
