@@ -21,7 +21,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
-  Datadog Apps are in Preview. Request access by using this form. Once approved, you can start getting creative and develop your App for you, your organization, or for publishing to the entire Datadog community alongside our other great Datadog Apps!
+Agent-side filtering for DogStatsD custom metrics is in Preview. Use this form to request access.
 {{< /callout >}} 
 
 ## Overview
