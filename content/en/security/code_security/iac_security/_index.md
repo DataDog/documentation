@@ -44,7 +44,7 @@ Use filters to narrow results by:
 
 Click any finding to open a side panel that shows:
 
-- **Details**: A description and the relevant code that triggered the finding. (To view code snippets, install the GitHub App.)
+- **Details**: A description and the relevant code that triggered the finding. (To view code snippets, [install the GitHub App][9].)
 - **Remediation**: If available, suggested code fixes are provided for findings that support remediation.
 
 ### Create Jira tickets from findings
@@ -81,3 +81,4 @@ Exclusions are managed through a configuration file or inline comments in your I
 [6]: https://app.datadoghq.com/ci/code-analysis?
 [7]: /security/code_security/iac_security/exclusions/?tab=yaml
 [8]: /security/automation_pipelines/mute
+[9]: https://app.datadoghq.com/integrations/github/
