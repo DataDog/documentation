@@ -20,8 +20,8 @@ further_reading:
   text: "Best practices for end-to-end custom metrics governance"
 ---
 
-{{< callout url="https://www.datadoghq.com/" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
-Agent-side filtering for DogStatsD custom metrics is in Preview. Use this form to request access.
+{{< callout url="https://www.datadoghq.com/" btn_hidden="true" header="false" >}}
+Agent-side filtering for DogStatsD custom metrics is in Preview.
 {{< /callout >}} 
 
 ## Overview
