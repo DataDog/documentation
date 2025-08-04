@@ -59,14 +59,6 @@ secret_backend_config:
 ```
 
 
-
-
-
-
-
-
-
-
 <!-- -------------------------------------------------------------------- START OF SECTION ------------------------------------------------------------------------------>
 
 More specific setup instructions will depend on the backend type used. Refer to the appropriate link for further information: 
