@@ -139,13 +139,13 @@ Select your platform.
     1.  In the **Mechanism** dropdown menu, select **PLAIN**.
     1.  Enable TLS. For the certificate, copy the certificate from its original location to the default Observability Pipelines data configuration directory:
         1. Since the Observability Pipelines Worker hasn't been installed yet, run this command to create the directory for the certificate:
-        ```
-        sudo mkdir -p /var/lib/observability-pipelines-worker/config
-        ```
+            ```
+            sudo mkdir -p /var/lib/observability-pipelines-worker/config
+            ```
         1. Run this command to copy the certificate to the directory you created:
-        ```
-        sudo cp /etc/ssl/certs/ca-certificates.crt /var/lib/observability-pipelines-worker/config/
-        ```
+            ```
+            sudo cp /etc/ssl/certs/ca-certificates.crt /var/lib/observability-pipelines-worker/config/
+            ```
         1. In the **Certificate path** field, enter `/cert.pem`.
     {{< img src="observability_pipelines/sources/kafka_settings.png" alt="The Kafka source settings with example values" style="width:45%;" >}}
     1. Click **Next: Select Destination**.
