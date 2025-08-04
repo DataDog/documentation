@@ -148,7 +148,7 @@ If any unusual activity is identified, or you need additional help securing your
 Need help? Contact [Datadog support][19].
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: https://app.datadoghq.com/access/application-keys
+[2]: https://app.datadoghq.com/organization-settings/application-keys
 [3]: /account_management/rbac/permissions
 [4]: /api/latest/key-management/
 [5]: /api/latest/app-builder/
