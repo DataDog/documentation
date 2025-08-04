@@ -283,6 +283,20 @@ Configure the following environment variable in the Advanced Configuration secti
 DD_LOGS_CONFIG_PROCESSING_RULES=[{\"type\": \"exclude_at_match\",\"name\": \"drop_all_logs\",\"pattern\": \".*\"}]
 ```
 
+### Required Databricks Permissions
+Datadog recommends making the user/principal used to connect to your Databricks workspace a **Workspace Admin** so that Datadog can manage init script installs/updates and reduce the risk of misconfiguring permissions. However, you can also manage permissions more granulary.
+
+To monitor all jobs, clusters and queries within a workspace, Datadog requires the user/principal to have these permissions to access [workspace level objects][19]:
+
+| Object                 | Permission                                                                                                                                                      |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Job                              | [CAN VIEW][20]
+| Compute                          | [CAN ATTACH TO][21]
+| Lakeflow Declarative Pipelines   | [CAN VIEW][22]
+| Query                            | [CAN VIEW][23]
+| SQL warehouse                    | [CAN VIEW][24]
+
+
 ### Tag spans at runtime
 
 {{% djm-runtime-tagging %}}
@@ -344,3 +358,9 @@ If you are using [Databricks Private Connectivity][14], reach out to the Datadog
 [16]: https://docs.databricks.com/en/security/network/front-end/ip-access-list-workspace
 [17]: https://docs.databricks.com/aws/en/security/network/front-end/ip-access-list-account
 [18]: https://docs.databricks.com/api/workspace/clusters/edit#spark_env_vars
+[19]: https://docs.databricks.com/aws/en/security/auth/access-control#access-control-lists-overview
+[20]: https://docs.databricks.com/aws/en/security/auth/access-control#job-acls
+[21]: https://docs.databricks.com/aws/en/security/auth/access-control#compute-acls
+[22]: https://docs.databricks.com/aws/en/security/auth/access-control#lakeflow-declarative-pipelines-acls
+[23]: https://docs.databricks.com/aws/en/security/auth/access-control#query-acls
+[24]: https://docs.databricks.com/aws/en/security/auth/access-control#sql-warehouse-acls
