@@ -284,7 +284,7 @@ DD_LOGS_CONFIG_PROCESSING_RULES=[{\"type\": \"exclude_at_match\",\"name\": \"dro
 ```
 
 ### Permissions
-Datadog recommends making the user/principal used to connect to your Databricks workspace a **Workspace Admin** so that Datadog can manage init script installs & updates and reduce the risk of misconfigurations. However, you can also manage permissions more granularly:
+Grant **Workspace Admin** privileges to the user or service principal that connects to your Databricks workspace. This allows Datadog to manage init script installations and updates automatically, reducing the risk of misconfiguration. If you need to manage permissions more granularly, see the following options:
 
 To monitor all jobs, clusters, and queries within a workspace, the user/principal must have access to these [workspace level objects][19]
 
