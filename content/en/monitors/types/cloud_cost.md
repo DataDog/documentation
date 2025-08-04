@@ -23,7 +23,7 @@ further_reading:
 ---
 
 ## Overview
-Cloud Cost Monitors help you proactively identify cost changes, and understand if you're projected to go over budget, so you can investigate the cause. 
+Cloud Cost Monitors help you proactively identify cost changes, and understand if you're projected to go over budget, so you can investigate the cause.
 
 - Instantly view all your cost monitors and filter or search by team, service, tag, provider, or alert status.
 - See a summary of how many monitors are set up, which are alerting, and what areas of cloud spend are tracked.
@@ -44,14 +44,21 @@ Alternatively, you can set one up from [**Monitors** --> **New Monitor** --> **C
 ### Select a cost monitor type
 
 You can select from the following monitor types:
-| Monitor Type | Purpose | Example |
-|--------------|----------|-----------------------------------------|
-| Changes      | Detect daily, weekly, or monthly cost changes.  | Alert when the difference between today's cost and the week before is over 5%. |
-| Anomalies    | Identify unusual or unexpected cost patterns. <br> <br> Incomplete days are excluded from analysis to ensure accuracy. Anomaly monitors require at least 1 month of cloud cost data to evaluate since historical data is required to train the algorithm. | Alert if 3 days from the past 30 days show significant cost anomalies compared to historical data. |
-| Threshold    | Alert when costs exceed a set value. | Set alerts when today's total cost exceeds $10,000.              |
-| Forecast     | Alert if forecasted costs will exceed your budget. | Alert daily if the forecasted cost for this month is projected to exceed $500. |
+
+| Monitor Type | Cost Metric based | Purpose                                                                                                                                                                                                                                                   | Example |
+|--------------|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
+| Changes      | yes               | Detect daily, weekly, or monthly cost changes.                                                                                                                                                                                                            | Alert when the difference between today's cost and the week before is over 5%.                                                                                                                                                             |
+| Anomalies    | yes               | Identify unusual or unexpected cost patterns. <br> <br> Incomplete days are excluded from analysis to ensure accuracy. Anomaly monitors require at least 1 month of cloud cost data to evaluate since historical data is required to train the algorithm. | Alert if 3 days from the past 30 days show significant cost anomalies compared to historical data. |
+| Threshold    | yes               | Alert when costs exceed a set value.                                                                                                                                                                                                                      | Set alerts when today's total cost exceeds $10,000.                                                                                                                                                                                                       |
+| Forecast     | yes               | Alert if forecasted costs will exceed a threshold.                                                                                                                                                                                                        | Alert daily if the forecasted cost for this month is projected to exceed $500.                                                                                                                                                                            |
+| Budget       | no                | Alert if costs exceed your [budget][7].                                                                                                                                                                                                                   | Alert if the total cost for the month exceeds the budget of $10,000.                                                                                                                                                                                      |
+
+{{< img src="/monitors/monitor_types/cloud_cost/cost-monitors-select-type.png" alt="The Cloud Cost Monitor type selection screen" style="width:100%;" >}}
 
 ### Specify which cost to track
+
+{{< tabs >}}
+{{% tab "Cost Metric Based" %}}
 
 Any cost type or metric reporting to Datadog is available for monitors. You can use custom metrics or observability metrics alongside a cost metric to monitor unit economics.
 
@@ -67,6 +74,18 @@ Use the editor to define the cost types or exports.
 {{< img src="monitors/monitor_types/cloud_cost/cost-monitors-specify-cost.png" alt="Cloud Cost and Metrics data source options for specifying which costs to track" style="width:100%;" >}}
 
 For more information, see the [Cloud Cost Management documentation][1].
+
+{{% /tab %}}
+{{% tab "Budgets" %}}
+
+Select an existing budget to monitor from the dropdown.
+
+{{< img src="monitors/monitor_types/cloud_cost/budget-monitor-select-budget.png" alt="Dropdown for specifying which budget to track cost against" style="width:100%;" >}}
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ### Set alert conditions
 
@@ -96,6 +115,18 @@ If you are using the **Cost Threshold** monitor type, you can trigger an alert w
 {{% tab "Forecast" %}}
 
 If you are using the **Cost Forecast** monitor type, you can trigger an alert when the cloud cost is `above`, `below`, `above or equal`, `below or equal to`, `equal to`, or `not equal to` a threshold.
+
+{{% /tab %}}
+
+{{% tab "Budget" %}}
+If you are using the **Budget** monitor type, you can trigger an alert when the cloud cost exceeds the budget you selected in the previous step.
+
+| Step               | Purpose                                                        | Values                            |
+|--------------------|----------------------------------------------------------------|-----------------------------------|
+| Granularity        | Level of detail at which the cost is evaluated.                | `overall` (total cost), `per_row` |
+| Threshold          | Percentage of budget that is utilized to trigger the alert.    | number between 0 and 100          |
+| Timeframe          | Evaluation window used to assess if the threshold is breached. | `all_months`, `current_month`      |
+
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -132,3 +163,4 @@ You can also turn on **Audit Notifications** to alert the monitor creator and re
 [4]: https://app.datadoghq.com/cost/analyze/monitors
 [5]: https://app.datadoghq.com/cost/explorer
 [6]: /monitors/notify/
+[7]: /cloud_cost_management/planning/budgets/
