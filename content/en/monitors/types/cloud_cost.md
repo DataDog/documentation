@@ -45,7 +45,7 @@ Alternatively, you can set one up from [**Monitors** --> **New Monitor** --> **C
 
 You can select from the following monitor types:
 
-| Monitor Type | Cost Metric based | Purpose                                                                                                                                                                                                                                                   | Example |
+| Monitor Type | Cost Metric-based | Purpose                                                                                                                                                                                                                                                   | Example |
 |--------------|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
 | Changes      | Yes               | Detect daily, weekly, or monthly cost changes.                                                                                                                                                                                                            | Alert when the difference between today's cost and the week before is over 5%.                                                                                                                                                             |
 | Anomalies    | Yes               | Identify unusual or unexpected cost patterns. <br> <br> Incomplete days are excluded from analysis to ensure accuracy. Anomaly monitors require at least 1 month of cloud cost data to evaluate since historical data is required to train the algorithm. | Alert if 3 days from the past 30 days show significant cost anomalies compared to historical data. |
@@ -56,7 +56,7 @@ You can select from the following monitor types:
 ### Specify which cost to track
 
 {{< tabs >}}
-{{% tab "Cost Metric Based" %}}
+{{% tab "Cost metric-based" %}}
 
 Any cost type or metric reporting to Datadog is available for monitors. You can use custom metrics or observability metrics alongside a cost metric to monitor unit economics.
 
@@ -72,7 +72,7 @@ Use the editor to define the cost types or exports.
 {{< img src="monitors/monitor_types/cloud_cost/cost-monitors-specify-cost.png" alt="Cloud Cost and Metrics data source options for specifying which costs to track" style="width:100%;" >}}
 
 {{% /tab %}}
-{{% tab "Budgets" %}}
+{{% tab "Budget-based" %}}
 
 Select an existing budget to monitor from the dropdown.
 
@@ -120,8 +120,8 @@ If you are using the **Budget** monitor type, you can trigger an alert when the 
 | Step               | Purpose                                                        | Values                            |
 |--------------------|----------------------------------------------------------------|-----------------------------------|
 | Granularity        | Level of detail at which the cost is evaluated.                | `overall` (total cost), `per_row` |
-| Threshold          | Percentage of budget that is utilized to trigger the alert.    | number between 0 and 100          |
-| Timeframe          | Evaluation window used to assess if the threshold is breached. | `all_months`, `current_month`      |
+| Threshold          | Percentage of budget that is utilized to trigger the alert.    | Number between 0 and 100 (%)      |
+| Timeframe          | Evaluation window used to assess if the threshold is breached. | `all_months`, `current_month`     |
 
 
 {{% /tab %}}
