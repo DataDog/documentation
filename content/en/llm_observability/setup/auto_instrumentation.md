@@ -233,7 +233,7 @@ The LiteLLM integration instruments the following methods:
 
 ## Pydantic AI
 
-The Pydantic AI integration instruments agent invocations as well as tool calls made via the [Pydantic AI][50] agent framework.
+The Pydantic AI integration instruments agent invocations and tool calls made using the [Pydantic AI][50] agent framework.
 
 ### Traced methods
 
