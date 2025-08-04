@@ -49,7 +49,7 @@ Click any finding to open a side panel that shows:
 
 ### Create Jira tickets from findings
 
-You can create a bi-directional Jira ticket directly from any finding to track and remediate issues in your existing workflows. Ticket status remains synced between Datadog and Jira. For more information, see [Bidirectional ticket syncing with Jira][4].
+You can create a bidirectional Jira ticket directly from any finding to track and remediate issues in your existing workflows. Ticket status remains synced between Datadog and Jira. For more information, see [Bidirectional ticket syncing with Jira][4].
 
 ### Mute findings
 
