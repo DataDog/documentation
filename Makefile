@@ -81,7 +81,6 @@ build-llms-txt:
 start:
 	@make setup-build-scripts ## Build and run docs including external content.
 	@make dependencies
-	@make build-llms-txt
 	@make update_websites_sources_module
 	@make server
 
@@ -89,7 +88,6 @@ start:
 start-no-pre-build: node_modules  ## Build and run docs excluding external content.
 	@make setup-build-scripts
 	@make build-cdocs
-	@make build-llms-txt
 	@make server
 
 # Leave build scripts as is for local testing
@@ -124,7 +122,7 @@ node_modules: package.json yarn.lock
 
 # All the requirements for a full build
 dependencies: clean
-	make hugpython all-examples update_pre_build node_modules build-cdocs
+	make hugpython all-examples update_pre_build node_modules build-cdocs build-llms-txt
 
 integrations_data/extracted/vector:
 	$(call source_repo,vector,https://github.com/vectordotdev/vector.git,master,true,website/)
