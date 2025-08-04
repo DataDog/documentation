@@ -58,7 +58,7 @@ further_reading:
 
 Datadog Cloud SIEM (Security Information and Event Management) is a security data analysis and correlation system. It enables your entire security operations team to view, detect, investigate, and respond to security issues. Leveraging Datadog's scalable platform, Cloud SIEM ingests telemetry from both cloud and on‑premises systems using the Datadog Agent and API-based integrations.
 
-Effective security response requires speed, context, insight, and automation. By continuously analyzing incoming data, Cloud SIEM detects threats, generates actionable security signals, and correlates those signals across multiple sources. This empowers your team to investigate incidents and respond quickly.
+Effective security response requires speed, context, insight, and automation. Cloud SIEM continuously analyzes incoming data to detect threats, generate actionable security signals, and correlate them across multiple sources. This empowers your team to investigate incidents and respond quickly.
 
 To keep your team on top of the latest attacks, Datadog also has a team of threat researchers who analyze petabytes of telemetry across cloud and on-premises systems to identify emerging threats and attacker behaviors. See [Datadog Security Labs][1] to read articles about their recent investigations.
 
@@ -68,18 +68,20 @@ Cloud SIEM embeds both cloud and on-premises telemetry directly into security wo
 
 ### Flexible cost control for security data
 
-As your organization scales, controlling the ingestion cost of security logs without compromising visibility is critical. Cloud SIEM is integrated with Datadog Log Management so you can choose the retention and querying capability of your security logs to balance cost efficiency and your threat detection needs. The available options are:
+As your organization scales, controlling the ingestion cost of security logs without compromising visibility is critical. Cloud SIEM is integrated with Datadog Log Management so you can choose the appropriate retention and querying capability for  your security logs. This flexibility helps you balance cost efficiency with your threat detection needs. 
+
+Store logs using one of the available options:
 - [Standard indexing][6] for logs that need to be queried frequently with the most compute.
 - [Flex Logs][7] for logs that need to be retained long-term, but sometimes need to be queried urgently.
 - [Log Archives][8] for logs that are infrequently queried and need to be stored long-term.
 
 ### Guided security data onboarding
 
-Cloud SIEM [Content Packs][9] are a curated set of Datadog integrations specifically useful for security teams. Each content pack has instructions on how to configure the integration and what is included, such as detection rules, out-of-the-box interactive dashboards, parsers, and SOAR workflows. Content Packs highlight actionable insights specific to that integration to help you investigate security issues.
+Cloud SIEM [Content Packs][9] are a curated set of Datadog integrations designed for security teams. Each content pack has instructions on how to configure the integration and what is included, such as detection rules, out-of-the-box interactive dashboards, parsers, and SOAR workflows. Content Packs highlight actionable insights specific to each integration to help you investigate security issues.
 
 ### Content pack health monitoring
 
-After a content pack is activated, the content pack gives you the integration's health status and provides troubleshooting steps if something goes wrong so you can get back up and operational as fast as possible.
+After a content pack is activated, it gives you the integration's health status and provides troubleshooting steps if something goes wrong so you can get back up and operational as fast as possible.
 
 ### Log search and analysis
 
@@ -100,7 +102,7 @@ See the [Getting Started Guide][4] for more detailed setup instructions.
 Navigate to the [Cloud SIEM Overview page][3]. Use this page to see key security insights and act on common workflows for security analysts, security and detection engineers, and Security Operations Center (SOC) managers. From the Overview page, you can:
 - Access important signals, open cases, and high-risk entities.
 - Complete onboarding tasks and review content‑pack health.
-- View and investigate top signals by geography or ISP.
+- View and investigate top signals by geography or internet service provider (ISP).
 - Analyze signals and rules by MITRE ATT&CK tactics.
 - Track detection performance (Mean Time to Detect (MTTD), false‑positive rates).
 - Read the latest [Security Labs][1] research and release notes.
@@ -117,7 +119,7 @@ Remain aware of any data processing issues or coverage gaps.
 
 #### Enabled content packs and integrations
 
-View enabled content packs and integrations across the critical categories for providing comprehensive security coverage. Hover over each section of the horizontal bar to see which content packs are enabled in each category.
+View enabled content packs and integrations across the critical categories to provide comprehensive security coverage. Hover over each section of the horizontal bar to see which content packs are enabled in each category.
 
 #### Content pack and logs health KPIs
 
@@ -139,7 +141,7 @@ See signals grouped by rule name and sorted by severity to get an overview of th
 
 #### Recent open security cases
 
-Use [Case Management][5] for signals of interest that require additional analysis. View the current security cases in your environment and click on a case to see more details.
+Use [Case Management][5] to track signals that require further analysis. View active security cases in your environment and click a case to see more details.
 
 ### Risk insights
 
@@ -149,11 +151,11 @@ Review the risky entities in your environment.
 
 #### Top risky entities
 
-See which entities have the highest risk scores at this time. Click on an entity to view more details and take action.
+See the entities with the highest risk scores. Click an entity to view more details and take action.
 
 #### Entity type breakdown
 
-See which types of entities are most common in your environment. Click on a pie chart wedge to view a list of entities filtered by that type.
+View the most common entity types in your environment. Click a pie chart wedge to filter the list of entities by type.
 
 #### Entities risk score breakdown
 
@@ -171,11 +173,11 @@ See which IPs are generating the most signals with a breakdown of important and 
 
 #### Signals by country
 
-See the proportional breakdown from where signals are being generated. Click on a pie chart wedge to see signals by country and state/province, and spot signals being generated from unexpected countries.
+See the proportional breakdown of where signals originate. Click a pie chart wedge to filter by country and state or province, and identify signals from unexpected locations.
 
 #### Signals by ISP provider
 
-Review from which ISPs the signals are coming. Click on a pie chart wedge to scope down by provider and location.
+Review which ISPs are sending signals. Click on a pie chart wedge to scope down by provider and location.
 
 ### Security overview
 
