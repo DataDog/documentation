@@ -29,7 +29,7 @@ Si utilizas Docker o Amazon ECS, consulta [Docker e integraciones][1].
 
 <div class="alert alert-info">
 Algunas integraciones de Datadog no funcionan con Autodiscovery, ya que requieren datos del árbol de procesos o un acceso a los sistemas de archivos: <a href="/integrations/ceph">Ceph</a>, <a href="/integrations/varnish">Varnish</a>, <a href="/integrations/postfix">Postfix</a>, <a href="/integrations/cassandra/#agent-check-cassandra-nodetool">nodetools Cassandra</a> y <a href="/integrations/gunicorn">Gunicorn</a>.<br/><br/>
-Para monitorizar integraciones que no son compatibles con Autodiscovery, puedes utilizar un exportador Prometheus en el pod, para exponer un endpoint HTTP, y luego puedes utilizar la <a href="/integrations/openmetrics/">integración con OpenMetrics</a> (compatible con Autodiscovery) para encontrar el pod y consultar el endpoint. 
+Para monitorizar integraciones que no son compatibles con Autodiscovery, puedes utilizar un exportador Prometheus en el pod, para exponer un endpoint HTTP, y luego puedes utilizar la <a href="/integrations/openmetrics/">integración con OpenMetrics</a> (compatible con Autodiscovery) para encontrar el pod y consultar el endpoint.
 </div>
 
 ## Configurar tu integración
@@ -50,7 +50,7 @@ O:
 3. [Proporciona valores](#placeholder-values) para estos parámetros.
 
 {{< tabs >}}
-{{% tab "Annotations" (Anotaciones) %}}
+{{% tab "Anotaciones" %}}
 
 Si defines tus pods de Kubernetes directamente con `kind: Pod`, añade las anotaciones de cada pod directamente bajo su sección `metadata`, como se muestra a continuación:
 
@@ -78,7 +78,7 @@ spec:
 # (...)
 ```
 
-**Anotaciones de Autodiscovery v1** 
+**Anotaciones de Autodiscovery v1**
 
 ```yaml
 apiVersion: v1
@@ -101,7 +101,7 @@ spec:
 Si defines pods indirectamente (con despliegues, ReplicaSets o ReplicationControllers), añade anotaciones de pod en `spec.template.metadata`.
 
 {{% /tab %}}
-{{% tab "Local file" (Archivo local) %}}
+{{% tab "Archivo local" %}}
 
 Puedes almacenar plantillas de Autodiscovery como archivos locales en el directorio montado `conf.d` (`/etc/datadog-agent/conf.d`). Debes reiniciar tus contenedores del Agent cada vez que cambias, añades o eliminas plantillas.
 
@@ -148,7 +148,7 @@ data:
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap
 
 {{% /tab %}}
-{{% tab "Key-value store" (Base de datos clave-valor) %}}
+{{% tab "Base de datos clave-valor" %}}
 
 Puedes obtener plantillas de Autodiscovery desde [Consul][1], [etcd][2] o [ZooKeeper][3]. Puedes configurar tu base de datos clave-valor en el archivo de configuración `datadog.yaml` (y posteriormente montar este archivo en el contenedor del Agent) o como variables de entorno en el contenedor del Agent.
 
@@ -237,7 +237,7 @@ spec:
               <LOGS_CONFIG>
 ```
 
-Para monitorizar un [check de clústeres][1], añade una sobreescritura `extraConfd.configDataMap` al componente `clusterAgent`. También debes activar los checks de clústeres configurando `features.clusterChecks.enabled: true`. 
+Para monitorizar un [check de clústeres][1], añade una sobreescritura `extraConfd.configDataMap` al componente `clusterAgent`. También debes activar los checks de clústeres configurando `features.clusterChecks.enabled: true`.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -292,7 +292,7 @@ datadog:
         <LOGS_CONFIG>
 ```
 
-Para monitorizar un [check de clústeres][3], define tu plantilla en `clusterAgent.confd`. Puedes encontrar ejemplos en línea en [values.yaml][2]. También debes habilitar el Cluster Agent, configurando `clusterAgent.enabled: true`, y habilitar los checks de clústeres, configurando `datadog.clusterChecks.enabled: true`. 
+Para monitorizar un [check de clústeres][3], define tu plantilla en `clusterAgent.confd`. Puedes encontrar ejemplos en línea en [values.yaml][2]. También debes habilitar el Cluster Agent, configurando `clusterAgent.enabled: true`, y habilitar los checks de clústeres, configurando `datadog.clusterChecks.enabled: true`.
 
 ```yaml
 datadog:
@@ -379,7 +379,7 @@ Aquí, `<PASSWORD>` corresponde a la contraseña del usuario `datadog` que has c
 Para aplicar esta configuración a tus contenedores de Postgres:
 
 {{< tabs >}}
-{{% tab "Annotations" (Anotaciones) %}}
+{{% tab "Anotaciones" %}}
 
 En el manifiesto de tu pod:
 
@@ -418,7 +418,7 @@ spec:
     - name: postgres
 ```
 
-**Anotaciones de Autodiscovery v1** 
+**Anotaciones de Autodiscovery v1**
 
 ```yaml
 apiVersion: v1
@@ -452,7 +452,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "Local file" (Archivo local) %}}
+{{% tab "Archivo local" %}}
 1. Crea un archivo `conf.d/postgresql.d/conf.yaml` en tu host:
 
    ```yaml
@@ -521,7 +521,7 @@ A continuación, define `volumeMounts` y `volumes` en tu manifiesto:
 ```
 
 {{% /tab %}}
-{{% tab "Key-value store" (Base de datos clave-valor) %}}
+{{% tab "Base de datos clave-valor" %}}
 
 Los siguientes comandos etcd crean una plantilla de integración con Postgres con un parámetro `password` personalizado:
 
