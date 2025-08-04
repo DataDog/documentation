@@ -358,48 +358,63 @@ aws_session:
 ```
 
 
-
-
-
-
 [2100]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
 [3100]: https://docs.aws.amazon.com/systems-manager/
 [4100]: https://github.com/DataDog/datadog-secret-backend/blob/v1/docs/aws/README.md#instance-profile-instructions
 
 {{% /tab %}}
-
 {{< /tabs >}}
 {{% /collapse-content %}} 
 
 
+
+
+
+
 <!-- ######### A Z U R E ############ -->
+
+{{% collapse-content title="Azure Secret Backends" level="h4" expanded=true id="id-for-anchoring" %}}
 {{% tab "Tab Name" %}}
 
 
 [1]: /agent/guide/agent-commands/
 
 {{% /tab %}}
+{{% /collapse-content %}} 
+
+
+
+
 
 
 <!-- ######### H A S H I C O R P ############ -->
-
+{{% collapse-content title="Azure Secret Backends" level="h4" expanded=true id="id-for-anchoring" %}}
 {{% tab "Tab Name" %}}
 
 
 [1]: /agent/guide/agent-commands/
 
 {{% /tab %}}
+{{% /collapse-content %}} 
+
+
+
+
+
+
+
 
 
 <!-- ######### F I L E ############ -->
 
+{{% collapse-content title="Azure Secret Backends" level="h4" expanded=true id="id-for-anchoring" %}}
 {{% tab "Tab Name" %}}
 
 
 [1]: /agent/guide/agent-commands/
 
 {{% /tab %}}
-
+{{% /collapse-content %}} 
 
 <!-- ######### END ############ -->
 
