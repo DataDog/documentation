@@ -49,7 +49,7 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 |---|---|---|
 | Java | 1.47.0+ | Spring Boot/Data, gRPC servers, Micronaut 4, Kafka consumers|
 | Python | 2.15.0+ | Django, Flask, Starlette and derivatives|
-| Node.js | 4.49.0+ | Fastify|
+| Node.js | 4.49.0+ | Fastify, Express (5.54.0+)|
 | .NET | 3.15.0+ | ASP.NET, ASP.NET Core| 
 
 ### Enable Code Origins
@@ -106,8 +106,6 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 - For most services, Code Origins data is captured for [service entry spans][12] only. You can filter to "Service Entry Spans" in the [APM Trace Explorer][1].
 
     {{< img src="tracing/code_origins/code_origin_service_entry_spans_filter.png" alt="Code Origins - Search for Service Entry Spans" style="width:100%;">}}
-
-- To search for all spans that include Code Origins, use the query `@_dd.code_origin.type:*` in the [APM Trace Explorer][1].
 
 ### Code preview is not visible or the file is not found
 
