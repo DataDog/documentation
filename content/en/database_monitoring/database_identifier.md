@@ -24,7 +24,7 @@ Most users can leave this option as the default. Changing the value of `template
 | Each distinct instance identifier is billed as a host for Database Monitoring.
 
 ## Reported hostname
-The `reported_hostname` configuration allows users to override the automatic resolution of `host` for a single database instance. This is useful when connecting to a database through a proxy.
+The `reported_hostname` configuration allows users to override the automatic resolution of `host` for a single database instance. This is useful when connecting to a database through a proxy to maintain the association between the DBM databse instance and any available metrics for the database host.
 
 
 ## Examples
@@ -47,11 +47,12 @@ database_identifier:
   template: $azure_name/$database
 ```
 
-MySQL instance with the same hostname running in multiple environments, where each is tagged with `env`, for example, `mydatabase.com.local` on `env:prod` and `env:staging` :
+MySQL instance with the same hostname running in multiple environments, where each is tagged with `env`. For example, `mydatabase.com.local` on `env:prod` and `env:staging` would use:
 ```
 database_identifier:
   template: $env-$resolved_hostname
 ```
+to create database instances named `prod-mydatabase.com.local` and `staging-mydatabase.com.local`.
 
 Connecting to an Oracle database with multiple CDBs through a proxy:
 ```
