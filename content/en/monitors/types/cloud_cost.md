@@ -53,8 +53,6 @@ You can select from the following monitor types:
 | Forecast     | yes               | Alert if forecasted costs will exceed a threshold.                                                                                                                                                                                                        | Alert daily if the forecasted cost for this month is projected to exceed $500.                                                                                                                                                                            |
 | Budget       | no                | Alert if costs exceed your [budget][7].                                                                                                                                                                                                                   | Alert if the total cost for the month exceeds the budget of $10,000.                                                                                                                                                                                      |
 
-{{< img src="/monitors/monitor_types/cloud_cost/cost-monitors-select-type.png" alt="The Cloud Cost Monitor type selection screen" style="width:100%;" >}}
-
 ### Specify which cost to track
 
 {{< tabs >}}
@@ -73,8 +71,6 @@ Use the editor to define the cost types or exports.
 
 {{< img src="monitors/monitor_types/cloud_cost/cost-monitors-specify-cost.png" alt="Cloud Cost and Metrics data source options for specifying which costs to track" style="width:100%;" >}}
 
-For more information, see the [Cloud Cost Management documentation][1].
-
 {{% /tab %}}
 {{% tab "Budgets" %}}
 
@@ -82,10 +78,10 @@ Select an existing budget to monitor from the dropdown.
 
 {{< img src="monitors/monitor_types/cloud_cost/budget-monitor-select-budget.png" alt="Dropdown for specifying which budget to track cost against" style="width:100%;" >}}
 
-
 {{% /tab %}}
 {{< /tabs >}}
 
+For more information, see the [Cloud Cost Management documentation][1].
 
 ### Set alert conditions
 
