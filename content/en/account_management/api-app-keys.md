@@ -151,9 +151,9 @@ Need help? Contact [Datadog support][19].
 [2]: https://app.datadoghq.com/access/application-keys
 [3]: /account_management/rbac/permissions
 [4]: /api/latest/key-management/
-[5]: https://docs.datadoghq.com/api/latest/app-builder/
-[6]: https://docs.datadoghq.com/api/latest/action-connection/
-[7]: https://docs.datadoghq.com/api/latest/workflow-automation/
+[5]: /api/latest/app-builder/
+[6]: /api/latest/action-connection/
+[7]: /api/latest/workflow-automation/
 [8]: /logs/log_collection/javascript/
 [9]: /logs/log_collection/android/
 [10]: /logs/log_collection/ios/
