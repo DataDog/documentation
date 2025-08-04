@@ -43,6 +43,7 @@ Each cluster can have a maximum of 1000 workloads optimized with Datadog Kuberne
 - [Remote Configuration][1] must be enabled for your organization. See [Enabling Remote Configuration][2].
 - [Helm][3], for updating your Datadog Agent.
 - (For Datadog Operator users) [`kubectl` CLI][4], for updating the Datadog Agent.
+- Scaling recommendations are available for workloads monitored with Datadog Agent v7.50+. Datadog recommends upgrading to the latest Datadog Agent version to deploy live Kubernetes Autoscaling.
 - The following user permissions:
    - Org Management (required for Remote Configuration)
    - API Keys Write (required for Remote Configuration)

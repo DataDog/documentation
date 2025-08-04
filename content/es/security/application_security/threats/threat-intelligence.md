@@ -5,17 +5,17 @@ further_reading:
   text: Información sobre amenazas en Datadog
 - link: /security/application_security/
   tag: Documentación
-  text: Protección contra las amenazas con Datadog Application Security Management
+  text: Protegerse contra las amenazas con Datadog App and API Protection
 title: Información sobre amenazas
 ---
 
 ## Información general
 
-Este tema describe la [información sobre amenazas][1] para Application Security Management (ASM).
+Este tema describe [inteligencia de amenazas][1] para App and API Protection (AAP).
 
-Datadog proporciona [conjuntos de datos][1] de información sobre amenazas integrada para ASM. Esto proporciona pruebas adicionales a la hora de abordar la actividad de seguridad y reduce los umbrales de detección para algunas detecciones de lógica de negocio.
+Datadog proporciona [conjuntos de datos][1] de información sobre amenazas integrada para AAP. Esto proporciona pruebas adicionales a la hora de abordar la actividad de seguridad y reduce los umbrales de detección para algunas detecciones de lógica de negocio.
 
-Además, ASM admite *bring your own threat intelligence* (traer tu propia información sobre amenazas). Esta funcionalidad mejora las detecciones con información sobre amenazas específica de la empresa.
+Además, AAP admite *bring your own threat intelligence* (traer tu propia información sobre amenazas). Esta funcionalidad mejora las detecciones con información sobre amenazas específica de la empresa.
 
 ## Prácticas recomendadas
 
@@ -28,7 +28,7 @@ Datadog _no_ recomienda lo siguiente:
 1. Bloqueo de trazas (traces) de la información sobre amenazas sin la correspondiente actividad de seguridad. Las direcciones IP pueden tener muchos hosts detrás de ellas. La detección de un proxy residencial significa que la actividad asociada ha sido observada por un host detrás de esa IP. No garantiza que el host que ejecuta el malware o proxy sea el mismo host que se comunica con tus servicios.
 2. Bloqueo en todas las categorías de información de amenazas, ya que esto incluye el tráfico benigno de las VPN corporativas y bloquea el tráfico no malicioso.
 
-## Filtrado de información sobre amenazas en ASM
+## Filtrado de información sobre amenazas en AAP
 
 Los usuarios pueden filtrar la información sobre amenazas en Signals Explorer y Trace Explorer utilizando facetas y la barra de búsqueda.
 
@@ -42,7 +42,7 @@ Para consultar todas las trazas que contengan información sobre amenazas de cua
 
 ## Trae tu propia información sobre amenazas
 
-ASM admite la mejora y la búsqueda de trazas con indicadores de peligro en la información sobre amenazas almacenados en tablas de referencia de Datadog. Las [Tablas de referencia][2] permiten combinar metadatos con información ya existente en Datadog.
+AAP admite la mejora y la búsqueda de trazas con indicadores de peligro en la información sobre amenazas almacenados en tablas de referencia de Datadog. Las [Tablas de referencia][2] permiten combinar metadatos con información ya existente en Datadog.
 
 ### Almacenamiento de indicadores de peligro en tablas de referencia
 
@@ -76,12 +76,12 @@ ip_address,additional_data,category,intention,source
 Datadog admite la creación de tablas de referencia mediante una carga manual o recuperando periódicamente los datos de [Amazon S3, Azure Storage o Google Cloud Storage][10].
 
 Notas:
-- Un periodo de entre 10 y 30 minutos puede ser necesario para empezar a enriquecer trazas (traces) de ASM espués de crear una tabla.
+- Un periodo de entre 10 y 30 minutos puede ser necesario para empezar a enriquecer trazas (traces) de AAP espués de crear una tabla.
 - Si una clave primaria está duplicada, se omite y se muestra un mensaje de error sobre la clave.
 
 En una nueva página de [tabla de referencias][4]:
 
-1. Asigna un nombre a la tabla. Se hace referencia al nombre de la tabla en la configuración de **Información de amenazas** de ASM.
+1. Asigna un nombre a la tabla. Se hace referencia al nombre de la tabla en la configuración de **Información de amenazas** de AAP.
 2. Carga un CSV local o importa un CSV desde un bucket de almacenamiento en la nube. El archivo se normaliza y valida.
 3. Previsualiza el esquema de la tabla y elige la dirección IP como clave primaria.
 
@@ -117,7 +117,7 @@ Otros detalles útiles sobre la importación a la nube que debes recordar:
 
 ### Filtra trazas uniendo la lista con una tabla de referencia
 
-Puedes filtrar trazas de ASM en Datadog uniendo una tabla de traza con una Tabla de referencia.
+Puedes filtrar trazas de AAP en Datadog uniendo una tabla de traza con una Tabla de referencia.
 
 Para unir una Tabla de referencia con una consulta de traza, se combinan filas de la tabla de trazas de Datadog y una Tabla de referencia basándose en una columna relacionada entre ellas. La consulta de trazas devuelve solo aquellas trazas en las que hay una coincidencia en ambas tablas.
 
@@ -143,13 +143,13 @@ Para unir una traza con una Tabla de referencia:
 
 ### Mejora de trazas para las reglas de detección
 
-Mejorar las trazas incluye los atributos de información sobre amenazas en trazas de ASM cuando el indicador de amenaza coincide con el valor de la clave `http.client_ip` en la traza de ASM. Esto permite buscar trazas con coincidencias de información de amenazas utilizando las facetas existentes y la información de amenazas con reglas de detección.
+Mejorar las trazas incluye los atributos de información sobre amenazas en trazas de AAP cuando el indicador de amenaza coincide con el valor de la clave `http.client_ip` en la traza de AAP. Esto permite buscar trazas con coincidencias de información de amenazas utilizando las facetas existentes y la información de amenazas con reglas de detección.
 
 
 
 ## Información sobre amenazas en la interfaz de usuario
 
-Al visualizar trazas en el Trace Explorer de ASM, puedes ver los datos sobre amenazas en el atributo `@appsec`. Los atributos `category` y `security_activity` están ambos configurados.
+Al visualizar trazas en el Trace Explorer de AAP, puedes ver los datos sobre amenazas en el atributo `@appsec`. Los atributos `category` y `security_activity` están ambos configurados.
 
 {{< img src="security/application_security/threats/threat_intel/threat_intel_appsec.png" alt="Ejemplo del atributo appsec que contiene datos de amenazas">}}
 
@@ -166,7 +166,7 @@ En `@threat_intel.results` siempre puedes ver todos los detalles de lo que se ha
 [2]: /es/integrations/guide/reference-tables
 [3]: /es/security/threat_intelligence/#threat-intelligence-facets
 [4]: https://app.datadoghq.com/reference-tables/create
-[5]: https://app.datadoghq.com/security/configuration/asm/threat-intel
+[5]: https://app.datadoghq.com/security/configuration/threat-intel
 [6]: https://app.datadoghq.com/security/configuration/asm/rules/edit/kdb-irk-nua?product=appsec
 [7]: /es/security/threat_intelligence#threat-intelligence-categories
 [8]: /es/security/threat_intelligence#threat-intelligence-intents
