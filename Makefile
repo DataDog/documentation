@@ -72,6 +72,12 @@ watch-cdocs:
 	@echo "Compiling .mdoc files to HTML";
 	@node ./local/bin/js/cdocs-build.js --watch;
 
+# compile .mdoc.md files to HTML
+# so Hugo can include them in the site
+build-llms-txt:
+	@echo "Launching llms.txt build ...";
+	@node ./local/bin/js/llms-txt-build.js;
+
 start:
 	@make setup-build-scripts ## Build and run docs including external content.
 	@make dependencies
@@ -116,7 +122,7 @@ node_modules: package.json yarn.lock
 
 # All the requirements for a full build
 dependencies: clean
-	make hugpython all-examples update_pre_build node_modules build-cdocs
+	make hugpython all-examples update_pre_build node_modules build-cdocs build-llms-txt
 
 integrations_data/extracted/vector:
 	$(call source_repo,vector,https://github.com/vectordotdev/vector.git,master,true,website/)

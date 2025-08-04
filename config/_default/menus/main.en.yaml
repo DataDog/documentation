@@ -815,56 +815,61 @@ menu:
       identifier: otel_health_metrics
       parent: otel_integrations
       weight: 803
+    - name: Datadog Extension
+      url: opentelemetry/integrations/datadog_extension/
+      identifier: otel_datadog_extension
+      parent: otel_integrations
+      weight: 804
     - name: Docker Metrics
       url: opentelemetry/integrations/docker_metrics/
       identifier: otel_docker_metrics
       parent: otel_integrations
-      weight: 804
+      weight: 805
     - name: HAProxy Metrics
       url: opentelemetry/integrations/haproxy_metrics/
       identifier: otel_haproxy_metrics
       parent: otel_integrations
-      weight: 805
+      weight: 806
     - name: Host Metrics
       url: opentelemetry/integrations/host_metrics/
       identifier: otel_host_metrics
       parent: otel_integrations
-      weight: 806
+      weight: 807
     - name: IIS Metrics
       url: opentelemetry/integrations/iis_metrics/
       identifier: otel_iis_metrics
       parent: otel_integrations
-      weight: 807
+      weight: 808
     - name: Kafka Metrics
       url: opentelemetry/integrations/kafka_metrics/
       identifier: otel_kafka_metrics
       parent: otel_integrations
-      weight: 808
+      weight: 809
     - name: MySQL Metrics
       url: opentelemetry/integrations/mysql_metrics/
       identifier: otel_mysql_metrics
       parent: otel_integrations
-      weight: 809
+      weight: 810
     - name: NGINX Metrics
       url: opentelemetry/integrations/nginx_metrics/
       identifier: otel_nginx_metrics
       parent: otel_integrations
-      weight: 810
+      weight: 811
     - name: Podman Metrics
       url: opentelemetry/integrations/podman_metrics/
       identifier: otel_podman_metrics
       parent: otel_integrations
-      weight: 811
+      weight: 812
     - name: Runtime Metrics
       url: opentelemetry/integrations/runtime_metrics/
       identifier: otel_runtime_metrics
       parent: otel_integrations
-      weight: 812
+      weight: 813
     - name: Trace Metrics
       url: opentelemetry/integrations/trace_metrics/
       identifier: otel_trace_metrics
       parent: otel_integrations
-      weight: 813
+      weight: 814
     - name: Troubleshooting
       url: opentelemetry/troubleshooting/
       identifier: otel_troubleshooting
@@ -2676,26 +2681,31 @@ menu:
       parent: case_management
       identifier: case_management_create_case
       weight: 2
+    - name: Customization
+      url: service_management/case_management/customization
+      parent: case_management
+      identifier: case_management_customization
+      weight: 3
     - name: View and Manage Cases
       url: service_management/case_management/view_and_manage
       parent: case_management
       identifier: case_management_view_and_manage
-      weight: 3
+      weight: 4
     - name: Notifications and Integrations
       url: service_management/case_management/notifications_integrations
       parent: case_management
       identifier: case_management_notifications_and_integrations
-      weight: 4
+      weight: 5
     - name: Case Automation Rules
       url: service_management/case_management/automation_rules
       parent: case_management
       identifier: case_management_automation_rules
-      weight: 5
+      weight: 6
     - name: Troubleshooting
       url: service_management/case_management/troubleshooting
       parent: case_management
       identifier: case_management_troubleshooting
-      weight: 6
+      weight: 7
     - name: Workflow Automation
       url: actions/workflows/
       pre: workflows
@@ -4643,7 +4653,7 @@ menu:
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_custom
       weight: 202
-    - name: API
+    - name: HTTP API
       url: llm_observability/instrumentation/api
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_api
@@ -4708,16 +4718,21 @@ menu:
       parent: llm_obs
       identifier: llm_obs_experiments
       weight: 5
+    - name: Data Security and RBAC
+      url: llm_observability/data_security_and_rbac
+      parent: llm_obs
+      identifier: llm_obs_data_security_and_rbac
+      weight: 6
     - name: Terms and Concepts
       url: llm_observability/terms/
       parent: llm_obs
       identifier: llm_obs_terms
-      weight: 6
+      weight: 7
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 7
+      weight: 8
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
@@ -7069,6 +7084,11 @@ menu:
       parent: rum_mobile_android
       identifier: rum_mobile_android_troubleshooting
       weight: 110
+    - name: SDK Performance Impact
+      url: real_user_monitoring/mobile_and_tv_monitoring/android/sdk_performance_impact
+      parent: rum_mobile_android
+      identifier: rum_mobile_android_performance_overhead
+      weight: 111
     - name: iOS and tvOS
       url: real_user_monitoring/mobile_and_tv_monitoring/ios
       parent: mobile_and_tv_monitoring
