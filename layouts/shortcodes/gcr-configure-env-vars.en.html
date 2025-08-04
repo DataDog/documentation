@@ -21,9 +21,8 @@ gcloud run deploy <APP_NAME>
 | -------- | ----------- |
 | `DD_API_KEY` | [Datadog API key](/account_management/api-app-keys/#api-keys) - **Required**|
 | `DD_SITE` | [Datadog site](/getting_started/site/) - **Required** |
-| `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
-{{ if in (slice "java" "nodejs" "csharp" "php") (.Get "language") }}| `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers. See [Correlate Logs and Traces](/tracing/other_telemetry/connect_logs_and_traces/) for more information. |
-{{ end }}
+| `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |{{ if in (slice "java" "nodejs" "csharp" "php") (.Get "language") }}
+| `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers. See [Correlate Logs and Traces](/tracing/other_telemetry/connect_logs_and_traces/) for more information. |{{ end }}
 | `DD_SERVICE` | See [Unified Service Tagging](/getting_started/tagging/unified_service_tagging/). **Recommended** |
 | `DD_VERSION` | See [Unified Service Tagging](/getting_started/tagging/unified_service_tagging/). **Recommended** |
 | `DD_ENV` | See [Unified Service Tagging](/getting_started/tagging/unified_service_tagging/). **Recommended** |
