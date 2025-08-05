@@ -153,7 +153,7 @@ Notes:
 4. Enter a `System Tables SQL Warehouse ID` corresponding to your Databricks instance's warehouse to query for system table billing data.
 5. Click **Save Databricks Workspace**.
 
-Your service principal will require read access to the schemas within your catalog.
+Your service principal requires read access to the schemas within your catalog.
 ```sql
 GRANT USE CATALOG ON CATALOG <CATALOG> TO <service_principal>;
 GRANT USE SCHEMA ON CATALOG <CATALOG> TO <service_principal>;
