@@ -46,7 +46,7 @@ instances:
 
 ## Options for retrieving secrets
 
-### Option 1: Using the datadog_secret_backend executable embedded in the Agent
+### Option 1: Using the Agent to resolve secrets from supported secret management solutions
 
 Starting in Agent version 7.69, the [datadog-secret-backend][7] executable will be shipped within the Datadog Agent. The major change in this option is that the backend executable is now configured directly by setting the [secret_backend_type][8] and [secret_backend_config][9] options in the datadog.yaml file. 
 
@@ -59,26 +59,30 @@ secret_backend_config:
 ```
 
 
-<!-- -------------------------------------------------------------------- START OF SECTION ------------------------------------------------------------------------------>
+
+
+
+
+
+
+<!-- -------------------------------------------- START OF SECTION --------------------------------------------->
 
 More specific setup instructions will depend on the backend type used. Refer to the appropriate link for further information: 
 
-<!-- https://github.com/DataDog/datadog-secret-backend/tree/v1/docs -->
 
 {{% collapse-content title="AWS Secret and SSM" level="h4" expanded=false id="id-for-anchoring" %}}
+
 The `datadog-secret-backend` utility currently supports the following AWS services:
 
 |Backend Type                                 | AWS Service                             |
 |---------------------------------------------|-----------------------------------------|
-|[aws.secrets](#aws-secrets-manager-backend)  |[AWS Secrets Manager][1]                 |
-|[aws.ssm]()                                  |[AWS Systems Manager Parameter Store][2] |
+|`aws.secrets`  |AWS Secrets Manager                 |
+|`aws.ssm`                                 |AWS Systems Manager Parameter Store |
 
 
 <!-- ################## A W S - secrets ##################### -->
 {{< tabs >}}
 {{% tab "AWS Secrets" %}}
-
-#### AWS Secrets Manager Backend
 
 ##### IAM Permission Policy (if using an Instance Profile)
 
@@ -216,8 +220,8 @@ secret_backend_config:
     aws_region: us-east-1
 ```
 
-[1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
-[2000]: https://docs.aws.amazon.com/secretsmanager/
+[1001]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+[1002]: https://docs.aws.amazon.com/secretsmanager/
 [3000]: https://github.com/DataDog/datadog-secret-backend/blob/v1/docs/aws/README.md#instance-profile-instructions
 [4000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_examples_cross.html
 
@@ -226,8 +230,6 @@ secret_backend_config:
 <!-- ################## A W S - ssm ##################### -->
 
 {{% tab "AWS SSM" %}}
-
-#### AWS Systems Manager Parameter Store Backend
 
 ##### IAM Permission Policy (if using an Instance Profile)
 
@@ -483,7 +485,7 @@ secret_backend_config:
 
 
 <!-- ######### H A S H I C O R P ############ -->
-{{% collapse-content title="Hashicorp Vault Backend" level="h4" expanded=true id="id-for-anchoring" %}}
+{{% collapse-content title="Hashicorp Vault Backend" level="h4" expanded=false id="id-for-anchoring" %}}
 ##### Supported Backends
 
 The `datadog-secret-backend` utility currently supports the following Hashicorp services:
@@ -596,7 +598,7 @@ secret_backend_config:
 
 <!-- ######### F I L E ############ -->
 
-{{% collapse-content title="File Secret Backends" level="h4" expanded=true id="id-for-anchoring" %}}
+{{% collapse-content title="File Secret Backends" level="h4" expanded=false id="id-for-anchoring" %}}
 
 |Backend Type                                 | AWS Service                             |
 |---------------------------------------------|-----------------------------------------|
