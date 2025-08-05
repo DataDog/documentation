@@ -174,7 +174,7 @@ Storage costs are categorized as:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboard/ecm-es8-agw/bigquery-allocation
+[1]: /dash/integration/32017/bigquery-allocation
 [2]: /cloud_cost_management/setup/google_cloud/
 [3]: https://cloud.google.com/bigquery/pricing?hl=en
 [4]: https://docs.datadoghq.com/integrations/google-cloud-bigquery/
