@@ -4653,7 +4653,7 @@ menu:
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_custom
       weight: 202
-    - name: API
+    - name: HTTP API
       url: llm_observability/instrumentation/api
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_api
@@ -7084,6 +7084,11 @@ menu:
       parent: rum_mobile_android
       identifier: rum_mobile_android_troubleshooting
       weight: 110
+    - name: SDK Performance Impact
+      url: real_user_monitoring/mobile_and_tv_monitoring/android/sdk_performance_impact
+      parent: rum_mobile_android
+      identifier: rum_mobile_android_performance_overhead
+      weight: 111
     - name: iOS and tvOS
       url: real_user_monitoring/mobile_and_tv_monitoring/ios
       parent: mobile_and_tv_monitoring
