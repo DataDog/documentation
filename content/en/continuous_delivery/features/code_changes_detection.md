@@ -110,6 +110,8 @@ This can be done in [Software Catalog][5] by specifying, for the interested serv
 
 If the service definition contains a **full** GitHub or GitLab URL to the application folder, a single path pattern is automatically used. The link type must be **repo** and the link name must be either "Source" or the name of the service (`shopist` in the examples below).
 
+If your repository contains a single service and you want all directories to be considered for code changes, you may skip this step. If you deploy two or more services from a repository, specifying the source code path patterns is required.
+
 **Example (schema version v2.2):**
 
 {{< tabs >}}
@@ -153,6 +155,23 @@ extensions:
 Code Changes Detection for deployments of the `shopist` service will only consider the Git commits that include changes within the `src/apps/shopist/**` or the `src/libs/utils/**` paths.
 
 If the source code patterns for a service are defined in both a link and an extension, only the extension is considered when filtering the commits.
+
+#### Use service file path patterns to track changes across the entire repository
+To detect changes across the entire repository, use appropriate file path patterns. For example, `"**"` matches all files.
+
+**Example (schema version v2.2):**
+
+```yaml
+extensions:
+  datadoghq.com/cd-visibility:
+    source_patterns:
+      - "**"
+```
+
+In this case, Code Changes Detection for deployments of the `shopist` service will consider the Git commits that include changes in the whole repository tree.  
+
+<div class="alert alert-warning">If a pattern is exactly <code>**</code> or begins with it, enclose it in quotes, as <code>*</code> is reserved in YAML for anchors.</div>  
+
 
 ## Further Reading
 

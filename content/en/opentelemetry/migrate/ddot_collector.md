@@ -157,16 +157,15 @@ helm repo add datadog https://helm.datadoghq.com
 helm repo update
 ```
 
-### Set up Datadog API and application keys
+### Set up Datadog API key
 
-1. Get the Datadog [API][8] and [application keys][9].
-1. Store the keys as a Kubernetes secret:
+1. Get the Datadog [API key][8].
+1. Store the API key as a Kubernetes secret:
    ```shell
    kubectl create secret generic datadog-secret \
-     --from-literal api-key=<DD_API_KEY> \
-     --from-literal app-key=<DD_APP_KEY>
+     --from-literal api-key=<DD_API_KEY>
    ```
-   Replace `<DD_API_KEY>` and `<DD_APP_KEY>` with your actual Datadog API and application keys.
+   Replace `<DD_API_KEY>` with your actual Datadog API key.
 
 ### Configure the Datadog Agent
 
@@ -177,24 +176,13 @@ Use a YAML file to specify the Helm chart parameters for the [Datadog Agent char
    touch datadog-values.yaml
    ```
    <div class="alert alert-info">Unspecified parameters use defaults from <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml">values.yaml</a>.</div>
-1. Configure the Datadog API and application key secrets:
+1. Configure the Datadog API key secret:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
   site: <DATADOG_SITE>
   apiKeyExistingSecret: datadog-secret
-  appKeyExistingSecret: datadog-secret
    {{< /code-block >}}
    Set `<DATADOG_SITE>` to your [Datadog site][10]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
-
-1. Use the Datadog Agent image tag with embedded DDOT Collector::
-   {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
-agents:
-  image:
-    repository: gcr.io/datadoghq/agent
-    tag: {{< version key="agent_tag" >}}
-    doNotCheckTag: true
-...
-   {{< /code-block >}}
 
 1. Enable the OpenTelemetry Collector and configure the essential ports:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}

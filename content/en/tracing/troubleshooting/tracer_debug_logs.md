@@ -22,6 +22,9 @@ A flare allows you to send necessary troubleshooting information to the Datadog 
 ### Send a flare
 To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][4] and [Remote Configuration][5] on the Agent.
 {{% remote-flare %}}
+
+<div class="alert alert-warning">If you don't see the option for your service, there is likely a connection error between the application and the Datadog Agent and you should default to the manual option of providing debug tracer logs.</div>
+
 For example:
 
 {{< img src="agent/fleet_automation/fleet-automation-flare-agent-and-tracer-debuglevel.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:60%;" >}}
@@ -38,9 +41,14 @@ Debug mode is disabled by default. To enable it, follow the corresponding langua
 
 To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug=true` when starting the JVM or add `DD_TRACE_DEBUG=true` as environment variable.
 
-**Note**: Datadog Java Tracer implements SL4J SimpleLogger, so [all of its settings can be applied][1], for example, logging to a dedicated log file:
+**Notes**: 
+- Datadog Java Tracer implements SLF4J SimpleLogger, so [all of its settings can be applied][1]. For example, you can configure it to log to a dedicated log file:
 ```
 -Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>
+```
+- To output Datadog Java Tracer logs in a JSON format compatible with the Datadog Logs UI, use:
+```
+-Ddatadog.slf4j.simpleLogger.jsonEnabled=true
 ```
 
 
@@ -242,7 +250,7 @@ Logs files are saved in the following directories by default. Use the `DD_TRACE_
 
 **Note:**: On Linux, you must create the logs directory before you enabled debug mode.
 
-Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` setting to configure the tracer to delete log files from the current logging directory on startup. The tracer deletes log files the same age and older than the given number of days, with a default value of `31`.
+Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` setting to configure the tracer to delete log files from the current logging directory on startup. The tracer deletes log files the same age and older than the given number of days, with a default value of `32`.
 
 For more details on how to configure the .NET Tracer, see the [Configuration][2] section.
 

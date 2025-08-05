@@ -56,7 +56,7 @@ Google Cloud Dataflow のログは Google Cloud Logging で収集され、Cloud 
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_cloud_dataflow" >}}
+{{< get-metrics-from-git "google-cloud-dataflow" >}}
 
 
 <div class="alert alert-warning">

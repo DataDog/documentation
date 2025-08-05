@@ -85,25 +85,27 @@ The following table presents the list of collected resources and the minimal Age
 |---|---|---|---|---|
 | ClusterRoleBindings | 7.33.0 | 1.19.0 | 2.30.9 | 1.14.0 |
 | ClusterRoles | 7.33.0 | 1.19.0 | 2.30.9 | 1.14.0 |
-| Clusters | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
-| CronJobs | 7.33.0 | 7.40.0 | 2.15.5 | 1.16.0 |
-| DaemonSets | 7.33.0 | 1.18.0 | 2.16.3 | 1.16.0 |
-| Deployments | 7.33.0 | 1.18.0 | 2.10.0 | 1.16.0 |
+| Clusters | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
+| CronJobs | 7.33.0 | 7.40.0 | 2.15.5 | 1.16.0 |
+| CustomResourceDefinitions | 7.51.0 | 7.51.0 | 3.39.2 | v1.16.0 |
+| CustomResources | 7.51.0 | 7.51.0 | 3.39.2 | v1.16.0 |
+| DaemonSets | 7.33.0 | 1.18.0 | 2.16.3 | 1.16.0 |
+| Deployments | 7.33.0 | 1.18.0 | 2.10.0 | 1.16.0 |
 | HorizontalPodAutoscalers | 7.33.0 | 7.51.0 | 2.10.0 | 1.1.1 |
 | Ingresses | 7.33.0 | 1.22.0 | 2.30.7 | 1.21.0 |
 | Jobs | 7.33.0 | 1.18.0 | 2.15.5 | 1.16.0 |
 | Namespaces | 7.33.0 | 7.41.0 | 2.30.9 | 1.17.0 |
 | Network Policies | 7.33.0 | 7.56.0 | 3.57.2 | 1.14.0 |
-| Nodes | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
-| PersistentVolumes | 7.33.0 | 1.18.0 | 2.30.4 | 1.17.0 |
-| PersistentVolumeClaims | 7.33.0 | 1.18.0 | 2.30.4 | 1.17.0 |
+| Nodes | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
+| PersistentVolumeClaims | 7.33.0 | 1.18.0 | 2.30.4 | 1.17.0 |
+| PersistentVolumes | 7.33.0 | 1.18.0 | 2.30.4 | 1.17.0 |
 | Pods | 7.33.0 | 1.18.0 | 3.9.0 | 1.17.0 |
-| ReplicaSets | 7.33.0 | 1.18.0 | 2.10.0 | 1.16.0 |
+| ReplicaSets | 7.33.0 | 1.18.0 | 2.10.0 | 1.16.0 |
 | RoleBindings | 7.33.0 | 1.19.0 | 2.30.9 | 1.14.0 |
 | Roles | 7.33.0 | 1.19.0 | 2.30.9 | 1.14.0 |
 | ServiceAccounts | 7.33.0 | 1.19.0 | 2.30.9 | 1.17.0 |
-| Services | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
-| Statefulsets | 7.33.0 | 1.15.0 | 2.20.1 | 1.16.0 |
+| Services | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
+| Statefulsets | 7.33.0 | 1.15.0 | 2.20.1 | 1.16.0 |
 | VerticalPodAutoscalers | 7.33.0 | 7.46.0 | 3.6.8 | 1.16.0 |
 
 **Note**: After version 1.22, Cluster Agent version numbering follows Agent release numbering, starting with version 7.39.0.
@@ -192,7 +194,7 @@ Set the environment variable on both the Process Agent and Cluster Agent contain
 
 ### Collect custom resources
 
-The [Kubernetes Explorer][3] automatically collects CustomResourceDefinitions (CRDs) by default. 
+The [Kubernetes Explorer][3] automatically collects CustomResourceDefinitions (CRDs) by default.
 
 Follow these steps to collect the custom resources that these CRDs define:
 
@@ -264,13 +266,128 @@ Follow these steps to collect the custom resources that these CRDs define:
 
 1. On the modal, under **Indexing Configuration**, select the fields you want to index from the custom resource.
 
-   {{< img src="infrastructure/containers_view/CRD_indexing_2.mp4" alt="A video of the Collecting and Indexing modal. The cursor selects three fields and clicks Enable Indexing. A success message displays." video="true">}}
-     
-   Select **Enable Indexing** to save.
+    {{< img src="infrastructure/containers_view/CRD_indexing_2.mp4" alt="A video of the Collecting and Indexing modal. The cursor selects three fields and clicks Enable Indexing. A success message displays." video="true">}}
 
-   <div class="alert alert-info">You can select a maximum of 50 fields for each resource.</div>
+    For arrays of objects, see the [Indexing complex types](#indexing-complex-types) section.
 
-After the fields are indexed, you can add them as columns in the explorer or as part of Saved Views. 
+1.  Select **Enable Indexing** to save.
+
+After the fields are indexed, you can add them as columns in the explorer and sort them, or include them in Saved Views. You can also filter on indexed fields using the prefix `field#`.
+
+### Indexing complex types
+
+{{< img src="containers/explorer/crd_groupby.png" alt="Indexing Configuration: A conditions object[] array, with 'Group by' drop down options: no field, type, lastTransitionTime, message, reason, status" style="width:100%;" >}}
+
+For arrays of objects, two group-by strategies are available:
+
+-   `No field`: Object's nested fields are indexed solely on nested field name.
+-   **Field** (for example: `type`, `status`, etc.): Object's nested fields are indexed based on each unique field value.
+
+##### Example: Filtering on DatadogPodAutoscaler custom resources
+
+Consider these two custom resources:
+
+**Custom Resource 1 (CR1)**:
+
+```yaml
+status:
+    conditions:
+        - type: HorizontalAbleToScale
+          status: 'True'
+        - type: VerticalAbleToApply
+          status: 'False'
+```
+
+**Custom Resource 2 (CR2)**:
+
+```yaml
+status:
+    conditions:
+        - type: VerticalAbleToApply
+          status: 'True'
+        - type: HorizontalAbleToScale
+          status: 'False'
+```
+
+You have the filtering possibilities on `status.conditions` based on the two indexing strategies:
+
+{{< tabs >}}
+{{% tab "Grouping by no field" %}}
+
+**Indexed fields for CR1:**
+
+```yaml
+status:
+    conditions:
+        type: [HorizontalAbleToScale, VerticalAbleToApply]
+        status: ['True', 'False']
+```
+
+**Indexed fields for CR2:**
+
+```yaml
+status:
+    conditions:
+        type: [VerticalAbleToApply, HorizontalAbleToScale]
+        status: ['True', 'False']
+```
+
+**Example queries:**
+
+**Query 1:**
+
+```text
+field#status.conditions.status:"False"
+```
+
+**Result:** Returns CR1 and CR2. Both CRs have at least one object with `status:"False"`
+
+**Query 2:**
+
+```text
+field#status.conditions.status:"False" AND field#status.conditions.type:VerticalAbleToApply
+```
+
+**Result:** Returns CR1 and CR2. At least one `status.condition` object in each custom resource matches one of the filters—even if it's not the same object that matches both filters.
+
+{{% /tab %}}
+{{% tab "Grouping by type" %}}
+
+**Indexed fields for CR1:**
+
+```yaml
+status:
+    conditions:
+        - HorizontalAbleToScale:
+              status: 'True'
+        - VerticalAbleToApply:
+              status: 'False'
+```
+
+**Indexed fields for CR2:**
+
+```yaml
+status:
+    conditions:
+        - VerticalAbleToApply:
+              status: 'True'
+        - HorizontalAbleToScale:
+              status: 'False'
+```
+
+**Example query:**
+
+```text
+field#status.conditions.HorizontalAbleToScale.status:"False"
+```
+
+**Result:** Returns CR2. Only a `status.condition` object whose `type:"HorizontalAbleToScale"` and `status:"False"` is returned.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+<div class="alert alert-info">You can select up to 50 fields per resource. You can use the preview to validate your indexing choices.</div>
+
 
 ## Further reading
 

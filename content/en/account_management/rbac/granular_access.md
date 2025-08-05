@@ -17,6 +17,7 @@ Use the different principals to control access patterns in your organization and
 | [Case Management projects][10]                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Connections][14]                                | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Connection Groups][15]                          | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Cross Org Connections][20]                      | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Dashboards][2]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Datastores][16]                                 | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Integration Accounts][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
@@ -24,6 +25,7 @@ Use the different principals to control access patterns in your organization and
 | [Integration Webhooks][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Monitors][3]                                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Notebooks][4]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [On-Call][22]                                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Private Action Runner][18]                      | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Powerpacks][5]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Reference tables][12]                           | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
@@ -31,6 +33,7 @@ Use the different principals to control access patterns in your organization and
 | [Security rules][6]                              | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Security suppressions][7]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Service Level Objectives][8]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Sheets][21]                                     | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Synthetic tests][9]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Workflows][17]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 
@@ -58,3 +61,6 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [17]: /service_management/workflows/access/#restrict-access-on-a-specific-workflow
 [18]: /actions/private_actions
 [19]: /real_user_monitoring
+[20]: /account_management/org_settings/cross_org_visibility/#permissions
+[21]: /sheets/#permissions
+[22]: /service_management/on-call/#granular-access-control

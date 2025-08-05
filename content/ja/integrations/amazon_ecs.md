@@ -69,7 +69,7 @@ Amazon ECS Datadog インテグレーションを利用し、CloudWatch から E
 ## データ収集
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_ecs" >}}
+{{< get-metrics-from-git "amazon-ecs" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
@@ -85,7 +85,7 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 包含リストを削除し、Datadog Amazon ECS インテグレーションからすべてのイベントを取得できるようにするには、[Datadog のサポートチーム][8]までお問い合わせください。
 
 ### サービスチェック
-{{< get-service-checks-from-git "amazon_ecs" >}}
+{{< get-service-checks-from-git "amazon-ecs" >}}
 
 
 ## トラブルシューティング

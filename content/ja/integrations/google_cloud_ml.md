@@ -56,7 +56,7 @@ Google Cloud Machine Learning のログは Google Cloud Logging で収集され�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_cloud_ml" >}}
+{{< get-metrics-from-git "google-cloud-ml" >}}
 
 
 ### イベント

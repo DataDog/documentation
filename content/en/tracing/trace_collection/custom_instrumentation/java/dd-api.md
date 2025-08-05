@@ -20,11 +20,16 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-This page details common use cases for adding and customizing observability with Datadog APM. If you have not read the setup instructions for automatic instrumentation, start with the [Java Setup Instructions][11].
+This page details common use cases for adding and customizing observability with Datadog APM.
 
 <div class="alert alert-info">
-The Datadog Java tracer interoperates with the <code>opentracing-api</code> library. Although OpenTracing is deprecated in favor of OpenTelemetry, the examples on this page use OpenTracing types where needed. To compile these examples, add the <a href="https://mvnrepository.com/artifact/io.opentracing/opentracing-api"><code>opentracing-api</code></a> dependency to your project.
+The Datadog Java tracer interoperates with the <code>opentracing-api</code> library for custom instrumentation. If you would prefer to use the OpenTelemetry API for your custom instrumentation, see <a href="/tracing/trace_collection/custom_instrumentation/java/otel/">Java Custom Instrumentation using OpenTelemetry</a> instead.
 </div>
+
+## Prerequisites
+
+- If you have not read the setup instructions for automatic instrumentation, start with the [Java Setup Instructions][11].
+- To compile the examples on this page, add the [opentracing-api][12] dependency to your project.
 
 ## Adding tags
 
@@ -361,3 +366,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [9]: /tracing/security
 [10]: /tracing/guide/ignoring_apm_resources/
 [11]: /tracing/setup/java/
+[12]: https://mvnrepository.com/artifact/io.opentracing/opentracing-api

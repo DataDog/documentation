@@ -112,9 +112,11 @@ Use the [Installing on Kubernetes][16] page in Datadog to guide you through the 
    ```yaml
    datadog:
     apiKeyExistingSecret: datadog-secret
+    clusterName: <CLUSTER_NAME>
     site: <DATADOG_SITE>
    ```
-
+   
+   - Replace `<CLUSTER_NAME>` with a name for your cluster.
    - Replace `<DATADOG_SITE>` with your [Datadog site][2]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 
 4. **Deploy Agent with the above configuration file**

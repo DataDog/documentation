@@ -12,8 +12,11 @@ further_reading:
 - link: "software_catalog/scorecards/"
   tag: "Documentation"
   text: "Datadog Scorecards"
-- link: "https://www.datadoghq.com/blog/idp-engineering-reports/"
+- link: "/dora_metrics"
   tag: "Documentation"
+  text: "DORA Metrics"
+- link: "https://www.datadoghq.com/blog/idp-engineering-reports/"
+  tag: "Blog"
   text: "Track engineering metrics with customizable, executive-ready reports in Datadog’s IDP"
 ---
 
@@ -27,6 +30,7 @@ Engineering Reports provide you with out-of-the-box, executive-level reports on 
 {{< whatsnext desc="Explore the following reports:" >}}
     {{< nextlink href="/software_catalog/eng_reports/reliability_overview/" >}}Reliability Overview: Summary of your organization's reliability based on SLO performance and Incident trends.{{< /nextlink >}}
     {{< nextlink href="/software_catalog/eng_reports/scorecards_performance" >}}Scorecards Performance: Organization-wide view of Scorecard performance broken down by teams and rules.{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/eng_reports/dora_metrics" >}}DORA Metrics: Software development velocity and stability metrics broken down by services and teams.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

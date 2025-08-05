@@ -192,12 +192,11 @@ const initCodeTabs = () => {
     };
 
     const scrollToAnchor = (tab, anchorname) => {
-        const anchor = document.querySelectorAll(`[data-lang='${tab}'] ${anchorname}`)[0];
+        const anchor =
+            document.querySelectorAll(`[data-lang='${tab}'] ${anchorname}`)[0] || document.querySelector(anchorname);
 
         if (anchor) {
             anchor.scrollIntoView();
-        } else {
-            document.querySelector(anchorname).scrollIntoView();
         }
     };
 

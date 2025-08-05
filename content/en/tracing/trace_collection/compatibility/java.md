@@ -128,7 +128,6 @@ The following instrumentations are disabled by default and can be enabled with t
 | Ignite                       | `-Ddd.integration.ignite.enabled=true`                                                                   |
 | JAX-WS                       | `-Ddd.integration.jax-ws.enabled=true`                                                                   |
 | JDBC Datasource              | `-Ddd.integration.jdbc-datasource.enabled=true`                                                          |
-| Kotlin Coroutines            | `-Ddd.integration.kotlin_coroutine.experimental.enabled=true`                                            |
 | Mulesoft                     | `-Ddd.integration.mule.enabled=true`                                                                     |
 | Netty Promise                | `-Ddd.integration.netty-promise.enabled=true`                                                            |
 | Ning                         | `-Ddd.integration.ning.enabled=true`                                                                     |
@@ -258,6 +257,7 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | Hystrix             | 1.4+       | Fully Supported                                        | `hystrix`                                      |
 | JSP Rendering       | 2.3+       | Fully Supported                                        | `jsp`, `jsp-render`, `jsp-compile`             |
 | JUnit               | 4.1+, 5.3+ | Fully Supported                                        | `junit`, `junit-4`, `junit-5`                  |
+| Kotlin Coroutines   | 1.3+       | Fully Supported                                        | `kotlin_coroutine`                             |
 | Project Reactor     | 3.1+       | Fully Supported                                        | `reactor-core`                                 |
 | Quartz              | 2.x        | Fully Supported                                        | `quartz`                                       |
 | RxJava              | 2.x        | Fully Supported                                        | `rxjava`                                       |

@@ -48,7 +48,7 @@ Los archivos de log se guardan por defecto en los siguientes directorios. Utiliz
 
 **Nota:** En Linux, debes crear el directorio de logs antes de activar el modo de depuración.
 
-Desde la versión `2.19.0`, puedes utilizar el ajuste `DD_TRACE_LOGFILE_RETENTION_DAYS` para configurar el rastreador para borrar archivos de log del directorio de registro actual al iniciarse. El rastreador borra archivos de log de la misma antigüedad y más antiguos que el número de días dado, con un valor por defecto de `31`.
+Desde la versión `2.19.0`, puedes utilizar el ajuste `DD_TRACE_LOGFILE_RETENTION_DAYS` para configurar el rastreador para borrar archivos de log del directorio de registro actual al iniciarse. El rastreador borra archivos de log de la misma antigüedad y más antiguos que el número de días dado, con un valor por defecto de `32`.
 
 - `dotnet-tracer-managed-{processName}-{timestamp}.log` contiene los logs de configuración.
 

@@ -177,7 +177,7 @@ Para encontrar perfiles de proveedores específicos compatibles con esta integra
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "cisco_aci" >}}
+{{< get-metrics-from-git "cisco-aci" >}}
 
 
 ### Eventos
@@ -185,7 +185,7 @@ Para encontrar perfiles de proveedores específicos compatibles con esta integra
 El check de Cisco ACI envía fallas de inquilino como eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "cisco_aci" >}}
+{{< get-service-checks-from-git "cisco-aci" >}}
 
 
 ## Solucionar problemas

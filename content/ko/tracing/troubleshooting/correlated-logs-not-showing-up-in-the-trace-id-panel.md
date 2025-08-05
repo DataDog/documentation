@@ -51,7 +51,7 @@ title: 상호 연결된 로그가 트레이스 ID 패널에 표시되지 않는 
 
    프로세스가 예상대로 작동하지 않는 경우, 트레이스 ID가 포함된 로그 속성 이름이 `dd.trace_id` 인지 확인합니다. 아울러, [예약된 속성][4]의 트레이스 ID 섹션에서 속성이 정확하게 설정되었는지 확인하세요.
 
-   {{< img src="tracing/troubleshooting/trace_id_reserved_attribute_mapping.png" alt="트레이스 ID 섹션이 하이라이트 표시된 JSON 로그 전처리 페이지" >}}
+{{< img src="tracing/troubleshooting/trace_id_reserved_attribute_mapping.png" alt="트레이스 ID 섹션이 하이라이트 표시된 JSON 로그 전처리 페이지" >}}
 
 [1]: /ko/tracing/glossary/#trace
 [2]: /ko/tracing/glossary/#spans
@@ -64,7 +64,7 @@ title: 상호 연결된 로그가 트레이스 ID 패널에 표시되지 않는 
 
    다음은 자바(Java) 통합 파이프라인을 설명하는 예시입니다.
 
-   {{< img src="tracing/troubleshooting/tracing_java_traceid_remapping.png" alt="트레이스 ID 리매퍼가 강조 표시된 Java 로그 파이프라인" style="width:90%;">}}
+{{< img src="tracing/troubleshooting/tracing_java_traceid_remapping.png" alt="강조 표시된 트레이스 ID 리매퍼와 자바 로그 파이프라인" style="width:90%;">}}
 
    로그 형식이 통합 파이프라인에서 인식되지 않을 수도 있습니다. 이러한 경우 파이프라인을 복제하고 [파싱 트러블슈팅 지침][2]에 따라 파이프라인이 해당 로그 형식을 허용하는지 확인합니다.
 

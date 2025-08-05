@@ -104,7 +104,7 @@ AWS CodeBuild를 설정해 S3 버킷 또는 클라우드와치(CloudWatch) 중 �
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_codebuild" >}}
+{{< get-metrics-from-git "amazon-codebuild" >}}
 
 
 ### 이벤트

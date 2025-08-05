@@ -16,11 +16,11 @@ algolia:
 
 ## Overview
 
-Automatic multi-line detection allows the Agent to detect and aggregate common multi-line logs automatically. 
+Automatic multi-line detection allows the Agent to detect and aggregate common multi-line logs automatically.
 
 ## Getting started
 
-To enable the Auto multi-line feature in your Agent configuration, set `auto_multi_line_detection`  to `true` in your configuration file, or set the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true` environment variable: 
+To enable the Auto multi-line feature in your Agent configuration, set `auto_multi_line_detection`  to `true` in your configuration file, or set the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true` environment variable:
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -39,8 +39,8 @@ DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true
 ### Default settings
 By default, the following features are enabled:
 
-- `enable_datetime_detection`: This configures automatic datetime aggregation. Logs beginning with a datetime format are used to aggregate logs. 
-- `enable_json_detection`: This configures JSON detection and rejection. JSON-structured logs are never aggregated. 
+- `enable_datetime_detection`: This configures automatic datetime aggregation. Logs beginning with a datetime format are used to aggregate logs.
+- `enable_json_detection`: This configures JSON detection and rejection. JSON-structured logs are never aggregated.
 
 You can disable these features by setting the following to `false` in your configuration file or in your environment variable:
 
@@ -63,7 +63,7 @@ DD_LOGS_CONFIG_AUTO_MULTI_LINE_ENABLE_JSON_DETECTION=false
 ```
 {{% /tab %}}
 {{< /tabs >}}
-  
+
 
 ### Enable multi-line aggregation per integration
 
@@ -99,9 +99,9 @@ logs:
 
 ### Supported datetime formats
 
-Auto multi-line detection uses an algorithm to detect *any* datetime format that occurs in the first 60 bytes of a log line. To prevent false positives, the algorithm requires enough context to consider a datetime format a match. 
+Auto multi-line detection uses an algorithm to detect *any* datetime format that occurs in the first 60 bytes of a log line. To prevent false positives, the algorithm requires enough context to consider a datetime format a match.
 
-Your datetime format must include both a _date_ and _time_ component to be detected. 
+Your datetime format must include both a _date_ and _time_ component to be detected.
 
 Examples of valid formats that include enough context to be detected:
  - `2021-03-28 13:45:30`
@@ -109,7 +109,7 @@ Examples of valid formats that include enough context to be detected:
  - `Jun 14 15:16:01`
  - `2024/05/16 19:46:15`
 
-Examples of formats that do not have enough context to be detected: 
+Examples of formats that do not have enough context to be detected:
 - `12:30:2017`
 - `12:30:20`
 - `2024/05/16`
@@ -119,11 +119,11 @@ Examples of formats that do not have enough context to be detected:
 
 If datetime aggregation is insufficient or your format is too short to be detected automatically, you can customize the feature in two ways:
 - [Custom Samples](#custom-samples)
-- [Regex Patterns](#regex-patterns) 
+- [Regex Patterns](#regex-patterns)
 
 ### Custom samples
 
-A custom sample is a sample of a log on which you want to aggregate. For example, if you want to aggregate a stack trace, the first line of the stack trace would be a good sample to provide. Custom samples are an easier way to aggregate logs than regex patterns. 
+A custom sample is a sample of a log on which you want to aggregate. For example, if you want to aggregate a stack trace, the first line of the stack trace would be a good sample to provide. Custom samples are an easier way to aggregate logs than regex patterns.
 
 To configure custom samples, you can use the `logs_config` in your `datadog.yaml` file or set an environment variable. In the following example, the multi-line detection is looking for the sample `"SEVERE Main main Exception occurred"`:
 
@@ -160,22 +160,22 @@ java.lang.Exception: Something bad happened!
 
 #### How custom samples work
 
-Custom samples tokenize the first 60 bytes of a log line and also tokenize the provided sample. 
-Tokens include 
+Custom samples tokenize the first 60 bytes of a log line and also tokenize the provided sample.
+Tokens include
 - words and their length
 - whitespace
 - numbers and their length
 - special characters
-- datetime components. 
+- datetime components.
 
 Each log token is compared to each token in the sample. If 75% of the log’s tokens match the sample’s, the log is marked for aggregation.
-Datadog recommends using sample-based matching if your logs have a stable format. If you need more flexible matching, you can use regex. 
+Datadog recommends using sample-based matching if your logs have a stable format. If you need more flexible matching, you can use regex.
 
 ### Regex patterns
 
-Regex patterns work similarly to a `multi_line` rule. If the regex pattern matches the log, it is used for aggregation. 
+Regex patterns work similarly to a `multi_line` rule. If the regex pattern matches the log, it is used for aggregation.
 
-To configure custom regex patterns, you can use the `logs_config` in your `datadog.yaml` file or set an environment variable. 
+To configure custom regex patterns, you can use the `logs_config` in your `datadog.yaml` file or set an environment variable.
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -286,7 +286,7 @@ Auto multi-line detection uses a labeled aggregation system to aggregate logs. T
 
 ### Label configuration
 
-You can provide custom labels to each regex or sample to change the aggregation behavior based on the label rules. This is useful if you want to explicitly include or exclude certain log formats in multi-line aggregation. 
+You can provide custom labels to each regex or sample to change the aggregation behavior based on the label rules. This is useful if you want to explicitly include or exclude certain log formats in multi-line aggregation.
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}

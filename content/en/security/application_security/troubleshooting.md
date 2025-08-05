@@ -564,7 +564,7 @@ To disable AAP, use one of the following methods.
 
 If the `DD_APPSEC_ENABLED=true` environment variable is set for your service, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
 
-If your service is a PHP service, explicitly set the environment variable to `DD_APPSEC_ENABLED=false`, and restart your service.
+If your service is a PHP service, explicitly set the environment variable to `DD_APPSEC_ENABLED=false`, and if applicable, comment out the flag `datadog.appsec.enabled = On` from your `php.ini` configuration file. Then, restart your service. 
 
 ### Remote Configuration
 

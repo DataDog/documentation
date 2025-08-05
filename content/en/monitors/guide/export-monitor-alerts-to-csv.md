@@ -34,7 +34,7 @@ hour,host_name,alert_name,user,cnt
 ```
 {{< /site-region >}}
 
-{{< site-region region="eu,gov,us3,us5,ap1" >}}
+{{< site-region region="eu,gov,us3,us5,ap1,ap2" >}}
 
 This feature is not supported.
 

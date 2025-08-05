@@ -138,7 +138,7 @@ Datadog 이벤트 탐색기에 AWS 클라우드와치(CloudWatch) 알람을 전�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_web_services" >}}
+{{< get-metrics-from-git "amazon-web-services" >}}
 
 
 **참고**: AWS 커스텀 메트릭 수집뿐만 아니라 Datadog와 통합되지 않는 서비스의 메트릭도 수집할 수 있습니다. 자세한 정보는 [AWS 통합 및 CloudWatch FAQ][22]를 참고하세요.
@@ -195,7 +195,7 @@ AWS 통합을 통해 다음의 태그가 수집됩니다. **참조**: 일부 태
 | [WorkSpaces][61]       | `directoryid`, `workspaceid`                                                                                                                                                                                  |
 
 ### 서비스 점검
-{{< get-service-checks-from-git "amazon_web_services" >}}
+{{< get-service-checks-from-git "amazon-web-services" >}}
 
 
 ## 트러블슈팅

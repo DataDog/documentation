@@ -92,7 +92,7 @@ AWS Elemental MediaConvert を構成して、ログを S3 バケットまたは 
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_mediaconvert" >}}
+{{< get-metrics-from-git "amazon-mediaconvert" >}}
 
 
 ### イベント

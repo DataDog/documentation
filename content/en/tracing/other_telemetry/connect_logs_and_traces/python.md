@@ -32,6 +32,7 @@ To correlate your [traces][1] with your logs, complete the following steps:
 
   1. [Activate automatic instrumentation](#step-1---activate-automatic-instrumentation).
   2. [Include required attributes from the log record](#step-2---include-required-attributes).
+  3. [Configure log collection](#step-3---configure-log-collection).
 
 #### Step 1 - Activate automatic instrumentation
 
@@ -78,6 +79,10 @@ def hello():
 hello()
 ```
 
+#### Step 3 - Configure log collection
+
+Ensure that files being tailed by the Datadog Agent have [Logs Agent configuration][2] with `source: python` so log pipelines can parse incoming logs. If `source` is set to a value other than `python`, you may need to add a [trace remapper][3] to the appropriate log processing pipeline for the correlation to work correctly.
+
 To learn more about logs injection, read the [ddtrace documentation][6].
 
 ### No standard library logging
@@ -118,7 +123,7 @@ Once the logger is configured, executing a traced function that logs an event yi
 {"event": "In tracer context", "dd.trace_id": 9982398928418628468, "dd.span_id": 10130028953923355146, "dd.env": "dev", "dd.service": "hello", "dd.version": "abc123"}
 ```
 
-**Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings and remapped using the [Trace Remapper][3]. For more information, see [Correlated Logs Not Showing Up in the Trace ID Panel][4].
+**Note**: If you are not using a [Datadog Log Integration][7] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings and remapped using the [Trace Remapper][3]. For more information, see [Correlated Logs Not Showing Up in the Trace ID Panel][4].
 
 [See the Python logging documentation][2] to ensure that the Python Log Integration is properly configured so that your Python logs are automatically parsed.
 
@@ -132,3 +137,4 @@ Once the logger is configured, executing a traced function that logs an event yi
 [4]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
 [5]: /tracing/trace_collection/library_injection_local/
 [6]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#logs-injection
+[7]: https://docs.datadoghq.com/logs/log_collection/?tab=cloudintegration

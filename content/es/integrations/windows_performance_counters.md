@@ -94,7 +94,7 @@ Todas las métricas recopiladas por el check de los contadores de rendimiento de
 La integración de los contadores de rendimiento de Windows no incluye ningún evento.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "windows_performance_counters" >}}
+{{< get-service-checks-from-git "windows-performance-counters" >}}
 
 
 ## Solucionar problemas

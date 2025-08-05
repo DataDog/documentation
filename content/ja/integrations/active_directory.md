@@ -91,7 +91,7 @@ Datadog Agent をドメイン環境にインストールするには、[Agent �
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "active_directory" >}}
+{{< get-metrics-from-git "active-directory" >}}
 
 
 ### イベント

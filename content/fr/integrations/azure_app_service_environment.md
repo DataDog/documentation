@@ -66,7 +66,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft�
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "azure_app_service_environment" >}}
+{{ get-metrics-from-git "azure-appserviceenvironment" }}
 
 
 ### Événements

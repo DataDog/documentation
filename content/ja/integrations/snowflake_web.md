@@ -243,7 +243,7 @@ Snowflake インテグレーションは、カスタムメトリクスを収集�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "snowflake_web" >}}
+{{< get-metrics-from-git "snowflake-web" >}}
 
 
 ### イベント

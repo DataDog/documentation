@@ -179,7 +179,7 @@ tile:
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "open_policy_agent" >}}
+{{< get-metrics-from-git "open-policy-agent" >}}
 
 
 ### 이벤트
@@ -187,7 +187,7 @@ tile:
 Open_policy_agent는 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "open_policy_agent" >}}
+{{< get-service-checks-from-git "open-policy-agent" >}}
 
 
 ## 트러블슈팅

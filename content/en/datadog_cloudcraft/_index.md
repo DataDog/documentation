@@ -29,17 +29,22 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 
 ### Prerequisites
 
+- To access Cloudcraft in Datadog, you need the `cloudcraft_read` [permission](#permissions).
 - [Resource collection][2] must be enabled for your AWS accounts.
 - For the best experience, Datadog strongly recommends using the AWS-managed [`SecurityAudit`][5] policy, or the more permissive [`ReadOnlyAccess`][6] policy.
-- To view security misconfigurations on the [Security overlay][10], [Cloud Security][3] must be enabled.
+- Viewing content on the [Security overlay][10] requires additional products to be enabled:
+  - To view security misconfigurations and identity risks, [Cloud Security][3] must be enabled.
+  - To view sensitive data, [Sensitive Data Scanner][12] must be enabled. For a user to turn the layer on, they must have the [`data_scanner_read`][13] permission.
 
-**Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you opt to not grant permission to list S3 buckets, the diagram will simply exclude those buckets. If permissions block certain resources, an alert is displayed in the UI.
+**Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you don't grant permission to list S3 buckets, the diagram excludes those buckets. If permissions block certain resources, an alert displays in the UI.
 
 ## Getting started
 
 To get started using Cloudcraft, use the following steps:
 1. Navigate to [**Infrastructure > Resources > Cloudcraft**][7]. 
-2. Select one or more accounts, regions, and resources. The diagram automatically displays the Infrastructure diagram.
+2. A real-time diagram of the resources is displayed in your environment.
+
+ **Note**: For environments with more than 10,000 resources, you must filter the diagram by account, region, or tags before it can be displayed.
 
 {{< img src="datadog_cloudcraft/getting_started_3.mp4" alt="Video showing getting started in Cloudcraft by selecting the Account, Region, and Resource" video=true;" >}}
 
@@ -52,6 +57,14 @@ With Group By, Cloudcraft divides your diagram into distinct sections based on d
 Enable the **Show All Controls** toggle to display the available **Group By** options. You can also remove specific groupings by unchecking options like VPC and Region. To view the current nesting structure and add the Network ACL (Network Access Control List) layer, click the **More** dropdown.
 
 {{< img src="datadog_cloudcraft/cloudcraft_group_by_with_ccm.png" alt="Group by feature in Cloudcraft, highlighting the Group By menu" >}}
+
+#### Group by tags
+
+You can group resources by AWS tags, such as app, service, team, or cost center, to organize your view by team or workload.
+
+**Note**: Grouping by tags is supported for AWS tags only. Tags from the Datadog Agent (for example ,`env`, or `team` tags from local configuration) are not supported.
+
+{{< img src="datadog_cloudcraft/group_by_tag.mp4" alt="Group by tag feature in Cloudcraft, grouping by Team and Cost Center" video=true >}}
 
 ### Saved views 
 
@@ -84,6 +97,10 @@ Use the search bar to locate resources on the diagram by name, ID, or tag. This 
 
 {{< img src="datadog_cloudcraft/search_highlight_2.mp4" alt="Video showing the search and highlight feature in Cloudcraft" video=true >}}
 
+## Permissions
+
+To access Cloudcraft in Datadog, you need the `cloudcraft_read` permission. This permission is included in the Datadog Read Only Role by default. If your organization uses custom roles, add this permission to the appropriate role. For more information on managing permissions, see the [RBAC documentation][14].
+
 ## Next steps
 
 Learn how to navigate between [built-in overlays][4] to view your architecture from different perspectives. Each overlay is designed to support specific operational goals, such as:
@@ -108,3 +125,6 @@ Learn how to navigate between [built-in overlays][4] to view your architecture f
 [9]: /datadog_cloudcraft/overlays#observability
 [10]: /datadog_cloudcraft/overlays#security
 [11]: /datadog_cloudcraft/overlays#cloud-cost-management
+[12]: /security/sensitive_data_scanner
+[13]: /account_management/rbac/permissions/#compliance
+[14]: /account_management/rbac/

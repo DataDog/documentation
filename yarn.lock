@@ -6536,9 +6536,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v1.2.2.tgz":
-  version: 1.2.2
-  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v1.2.2.tgz"
+"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v1.4.0.tgz":
+  version: 1.4.0
+  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v1.4.0.tgz"
   dependencies:
     "@prettier/sync": ^0.5.2
     "@types/markdown-it": ^14.1.2
@@ -6563,7 +6563,7 @@ __metadata:
     vite: ^5.4.10
     vite-plugin-singlefile: ^2.0.2
     zod: ^3.22.4
-  checksum: d43eebd8b2f7261ce4f0ec0d57ffa998dd5d16494730d11e2e0187b0c6e05da5e9c569fdde55646f861491cac00593c689db269b3f3d2ec41b586a5f534a20a8
+  checksum: f37b2a894d9206cfc7f886d45d39fa9063560b7dad158df24c5c59ffa5f3a6e84dc7fc4f932003033053c99d127ae3e60817b9e210e50ddabb528cd06797763f
   languageName: node
   linkType: hard
 
@@ -7364,6 +7364,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"debug@npm:^4.4.0":
+  version: 4.4.1
+  resolution: "debug@npm:4.4.1"
+  dependencies:
+    ms: ^2.1.3
+  peerDependenciesMeta:
+    supports-color:
+      optional: true
+  checksum: a43826a01cda685ee4cec00fb2d3322eaa90ccadbef60d9287debc2a886be3e835d9199c80070ede75a409ee57828c4c6cd80e4b154f2843f0dc95a570dc0729
+  languageName: node
+  linkType: hard
+
 "decamelize@npm:^1.2.0":
   version: 1.2.0
   resolution: "decamelize@npm:1.2.0"
@@ -7588,6 +7600,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"docs-llms-txt@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/docs-llms-txt-v1.0.0.tgz":
+  version: 1.0.0
+  resolution: "docs-llms-txt@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/docs-llms-txt-v1.0.0.tgz"
+  dependencies:
+    js-yaml: ^4.1.0
+    rimraf: ^5.0.5
+    simple-git: ^3.28.0
+    uuid: ^11.1.0
+    zod: ^3.22.4
+  checksum: 92d15672e53188cb68d3f1aa32c93f556c3177a56ee23c8eaeaac04cd9b0a0d273a4edc0fb3fccf8c921f3f6b1b3d26a5b0287fa14426a4e49ddc8f55a4c29dc
+  languageName: node
+  linkType: hard
+
 "docs@workspace:.":
   version: 0.0.0-use.local
   resolution: "docs@workspace:."
@@ -7605,9 +7630,10 @@ __metadata:
     acorn: ^7.4.1
     alpinejs: ^3.13.7
     bootstrap: ^5.2
-    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v1.2.2.tgz"
+    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v1.4.0.tgz"
     cross-env: ^5.2.1
     del: 4.1.1
+    docs-llms-txt: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/docs-llms-txt-v1.0.0.tgz"
     eslint: ^6.8.0
     eslint-config-airbnb: ^18.2.1
     eslint-config-prettier: ^6.15.0
@@ -7620,8 +7646,9 @@ __metadata:
     eslint-plugin-react-hooks: ^2.5.1
     eslint-plugin-standard: ^4.1.0
     fancy-log: ^1.3.3
-    geo-locate: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/geo-locate-v1.0.1.tgz"
+    geo-locate: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/geo-locate-v1.0.2.tgz"
     hugo-bin: 0.123.0
+    husky: ^9.1.7
     instantsearch.js: ^4.74.1
     jest: ^25.5.4
     js-cookie: ^2.2.1
@@ -7637,6 +7664,7 @@ __metadata:
     mixitup: ^3.3.1
     mousetrap: ^1.6.5
     picturefill: 3.0.3
+    pinst: ^3.0.0
     popper.js: 1.16.1
     postcss-import: ^12.0.1
     postcss-preset-env: ^6.7.2
@@ -9366,10 +9394,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"geo-locate@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/geo-locate-v1.0.1.tgz":
-  version: 1.0.1
-  resolution: "geo-locate@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/geo-locate-v1.0.1.tgz"
-  checksum: 85c4c20ded085cdc515c72e77a291d2f456402e76e6acb58b373ee8be1bf7c4430e780881c6157a1687299d29e10fcfd95f6b3972cb934a9f42c3be7e40af40e
+"geo-locate@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/geo-locate-v1.0.2.tgz":
+  version: 1.0.2
+  resolution: "geo-locate@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/geo-locate-v1.0.2.tgz"
+  checksum: 95a0d22e57f0dbbab3de2bca2f0ac3971faf90e2b67b5d7d3cd796026e90e30aa7b88776ec9715760bc88e53af2865e921eb96b030d5be0996eed99c8105a62c
   languageName: node
   linkType: hard
 
@@ -10129,6 +10157,15 @@ __metadata:
   dependencies:
     ms: ^2.0.0
   checksum: 9c7a74a2827f9294c009266c82031030eae811ca87b0da3dceb8d6071b9bde22c9f3daef0469c3c533cc67a97d8a167cd9fc0389350e5f415f61a79b171ded16
+  languageName: node
+  linkType: hard
+
+"husky@npm:^9.1.7":
+  version: 9.1.7
+  resolution: "husky@npm:9.1.7"
+  bin:
+    husky: bin.js
+  checksum: c2412753f15695db369634ba70f50f5c0b7e5cb13b673d0826c411ec1bd9ddef08c1dad89ea154f57da2521d2605bd64308af748749b27d08c5f563bcd89975f
   languageName: node
   linkType: hard
 
@@ -13629,6 +13666,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pinst@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "pinst@npm:3.0.0"
+  bin:
+    pinst: bin.js
+  checksum: 4ae48a6a60f79c37071233af51b4d91bfc85cfa3c12b66ccda60cdb642b4d14a4ab0cb3587afc55b1f6192cea1772a5e4822026a0d0d3528296edef00cc2d61f
+  languageName: node
+  linkType: hard
+
 "pirates@npm:^4.0.1":
   version: 4.0.1
   resolution: "pirates@npm:4.0.1"
@@ -15496,6 +15542,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"simple-git@npm:^3.28.0":
+  version: 3.28.0
+  resolution: "simple-git@npm:3.28.0"
+  dependencies:
+    "@kwsites/file-exists": ^1.1.1
+    "@kwsites/promise-deferred": ^1.1.1
+    debug: ^4.4.0
+  checksum: d4f4a56f0eaf916e3c4b801342f6e6c32e73a3eb8c5497f61f71ff21f30462c64537ba76f2cc835d6cd1ffe6198bd52b3e242b0a70444c8cd21faa9f61f75634
+  languageName: node
+  linkType: hard
+
 "simple-swizzle@npm:^0.2.2":
   version: 0.2.2
   resolution: "simple-swizzle@npm:0.2.2"
@@ -17082,7 +17139,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:^11.0.5":
+"uuid@npm:^11.0.5, uuid@npm:^11.1.0":
   version: 11.1.0
   resolution: "uuid@npm:11.1.0"
   bin:

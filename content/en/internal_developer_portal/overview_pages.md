@@ -21,6 +21,7 @@ further_reading:
 - link: "watchdog"
   tag: "Documentation"
   text: "Watchdog"
+site_support_id: overview_pages
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/developer-overview-page/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for the Developer Overview Page!" >}}
@@ -38,7 +39,7 @@ Datadog's Internal Developer Platform (IDP) ships with **overview pages** that s
 
 The developer overview page centralizes the following information about your team and services:
 - Your team's Monitors, Incidents, and SLOs
-- Your Jira tickets and GitHub PRs
+- Your GitHub PRs
 - Your team's Services and Scorecard performance
 - Your Issues, Errors, and Watchdog alerts
 
@@ -46,11 +47,11 @@ The developer overview page centralizes the following information about your tea
 
 #### Get started
 
-The "My Pull Requests" and "My Jira Tickets" widgets displayed on the developer overview page are powered by [Datadog App Builder][9] and initially show demo data.
+The "My Pull Requests" widget displayed on the developer overview page are powered by [Datadog App Builder][9] and initially show demo data.
 
 To use the developer overview page with your data, [connect your data sources][10]:
 1. Find the developer overview page by selecting the **Overview** tab in IDP and selecting **My Workspace** in the left-hand menu. 
-1. For these widgets:
+1. For this widget:
 
    1. Click **+ Connect Data**.
    1. Create a new connection or select an existing one. 
@@ -76,10 +77,6 @@ The following widgets are included by default on the developer overview page.
 #### Monitors, incidents, and SLOs
 
 Shows live signals from Datadog [Monitors][6], [Incident Management][3], and [SLOs][7]. Widgets remain empty until these products are enabled.
-
-#### Jira tickets
-
-Lists open Jira issues assigned to your email. Tickets with the status **Done** are excluded.
 
 #### GitHub pull requests
 

@@ -24,7 +24,7 @@ title: Archivos de log
 
 Configura tu cuenta de Datadog para reenviar todos los logs ingestados (ya sea que esté [indexado][1] o no) a un sistema de almacenamiento en la nube de tu propiedad. Conserva tus logs en un archivo optimizado para el almacenamiento durante más tiempo y cumple los requisitos de conformidad, al tiempo que mantienes la auditabilidad para investigaciones ad hoc, con [Recuperación][2].
 
-{{< img src="logs/archives/log_forwarding_archives_tab.png" alt="Pestaña Archivo en la página Reenvío de log" style="width:100%;">}}
+{{< img src="/logs/archives/log_forwarding_archives_122024.png" alt="Pestaña de Archivos en la página Reenvío de logs" style="width:100%;">}}
 
 Ve a la página [**Log Forwarding**][3] (Reenvío de log) para configurar un archivo para el reenvío de logs ingeridos a tu propio bucket de almacenamiento alojado en la nube.
 
@@ -44,10 +44,6 @@ Consulta cómo [archivar tus logs con Pipelines de observabilidad][4] si deseas 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning"><em>La configuración de archivos S3 mediante la delegación de roles tiene actualmente una disponibilidad limitada. Ponte en contacto con el <a href="https://docs.datadoghq.com/help/">servicio de asistencia de Datadog</a> para solicitar esta función en tu cuenta Datadog for Government</em>.</div>
-{{< /site-region >}}
-
 Si aún no está configurada, configura [la integración de AWS][1] para la cuenta de AWS que contiene tu bucket de S3.
    * En el caso general, se trata de crear un rol que Datadog pueda utilizar para integrarse con AWS S3.
    * En el caso específico de las cuentas de AWS China, utiliza claves de acceso como alternativa a la delegación de roles.
@@ -58,7 +54,7 @@ Si aún no está configurada, configura [la integración de AWS][1] para la cuen
 
 Configura [la integración de Azure][1] dentro de la suscripción que contiene tu nueva cuenta de almacenamiento, si aún no lo has hecho. Esto implica [crear un registro de aplicación que Datadog pueda utilizar][2] para integrarla.
 
-**Nota:** No se admite el archivado en Azure ChinaCloud, GermanyCloud y GovCloud.
+**Nota:** El archivado en Azure ChinaCloud y Azure GermanyCloud no es compatible. El archivado en Azure GovCloud es compatible con la versión preliminar. Para solicitar acceso, ponte en contacto con el servicio de asistencia de Datadog.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /es/integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
@@ -83,6 +79,10 @@ Configura la [integración de Google Cloud][1] para el proyecto que contiene tu 
 {{% tab "AWS S3" %}}
 
 Entra en tu [consola de AWS][1] y [crea un bucket de S3][2] al que enviar tus archivos.
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning"> Datadog Archives no admiten nombres de bucket con puntos (.) cuando se integran con un endpoint FIPS de S3 que se basa en el direccionamiento de estilo virtual-host. Obtén más información en la documentación de AWS. <a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> y <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
+{{< /site-region >}}
 
 **Notas:**
 
@@ -126,7 +126,7 @@ Solo los usuarios de Datadog con el [permiso`logs_write_archive`][5] pueden crea
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-1. [Crear una política][1] con las siguientes sentencias de permiso:  
+1. [Crear una política][1] con las siguientes declaraciones de permiso:
 
    ```json
    {
@@ -160,9 +160,9 @@ Solo los usuarios de Datadog con el [permiso`logs_write_archive`][5] pueden crea
 2. Edita los nombres de los buckets.
 3. Opcionalmente, especifica las rutas que contienen tus archivos de log.
 4. Adjunta la nueva política al rol de integración de Datadog.
-   * Ve a **Roles** en la consola de AWS IAM.  
-   * Localiza el rol utilizado por la integración de Datadog. Por defecto se llama **DatadogIntegrationRole**, pero el nombre puede variar si tu organización le ha cambiado el nombre. Haz clic en el nombre del rol para abrir la página de resumen del rol.
-   * Haz clic en **Add permissions** (Añadir permisos), y luego en **Attach policies** (Adjuntar políticas).
+   * Ve a **Roles** en la consola IAM en AWS.
+   * Localiza el rol utilizado por la integración Datadog. Por defecto se llama **DatadogIntegrationRole**, pero el nombre puede variar si tu organización le ha cambiado el nombre. Haz clic en el nombre del rol para abrir la página de resumen del rol.
+   * Haz clic en **Add permissions** (Añadir permisos) y, luego, en **Attach policies** (Adjuntar políticas).
    * Introduce el nombre de la política creada anteriormente.
    * Haz clic en **Attach policies** (Adjuntar políticas).
 
@@ -202,54 +202,15 @@ Ve a la página de [Reenvío de log][6] y selecciona **Add a new archive** (Aña
 * Si tu bucket restringe el acceso de red a las IP especificadas, añade las IP de los webhooks de {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} a la lista de permitidos.
 * Para el sitio **US1-FED**, puedes configurar Datadog para enviar logs a un destino fuera del entorno Datadog GovCloud. Datadog no se hace responsable de ningún log que abandone el entorno Datadog GovCloud. Además, Datatdog no se hace responsable de ninguna obligación o requisito que puedas tener en relación con FedRAMP, DoD Impact Levels, ITAR, conformidad de las exportaciones, residencia de datos o normativas similares aplicables a estos Logs una vez que abandonen el entorno Datadog GovCloud.
 
-{{< tabs >}}
-{{% tab "AWS S3" %}}
-
-Selecciona la combinación de cuenta y rol de AWS adecuada para tu bucket de S3.
-
-Introduce el nombre de tu bucket. **Opcional**: introduce un directorio de prefijo para todo el contenido de tus archivos de log.
-
-{{< img src="logs/archives/logs_archive_aws_setup.png" alt="Configura tu información de bucket de S3 en Datadog" style="width:75%;">}}
-
-{{% /tab %}}
-{{% tab "Azure Storage" %}}
-
-Selecciona el tipo de archivo **Azure Storage**, y el inquilino y cliente de Azure para la aplicación de Datadog que tiene el rol Storage Blob Data Contributor en tu cuenta de almacenamiento.
-
-Introduce el nombre de tu cuenta de almacenamiento y el nombre de contenedor para tu archivo. **Opcional**: introduce un directorio de prefijo para todo el contenido de tus archivos de log.
-
-{{< img src="logs/archives/logs_archive_azure_setup.png" alt="Configura tu información de cuenta de almacenamiento de Azure en Datadog" style="width:75%;">}}
-
-
-{{% /tab %}}
-{{% tab "Google Cloud Storage" %}}
-
-Selecciona el tipo de archivo **GCS** y la cuenta de servicio de GCS que tenga permisos para escribir en tu bucket de almacenamiento.
-
-Introduce el nombre de tu bucket. **Opcional**: introduce un directorio de prefijo para todo el contenido de tus archivos de log.
-
-{{< img src="logs/archives/logs_archive_gcp_setup.png" alt="Configura tu información de cuenta de almacenamiento de Azure en Datadog" style="width:75%;">}}
-
-{{% /tab%}}
-{{< /tabs>}}
+| Servicio                  | Pasos                                                                                                                                                      |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Amazon S3**               | - Selecciona la combinación de la cuenta y rol de AWS adecuada para tu bucket de S3.<br>- Introduce el nombre de tu bucket.<br>**Opcional**: introduce un directorio prefijo para todo el contenido de tus archivos de log. |
+| **Almacenamiento de Azure**        | - Selecciona el tipo de archivo **Azure Storage** (Almacenamiento de Azure), y el inquilino y cliente de Azure para la aplicación de Datadog que tiene el rol Storage Blob Data Contributor en tu cuenta de almacenamiento.<br>- Introduce el nombre de tu cuenta de almacenamiento y el nombre de contenedor para tu archivo.<br>**Opcional**: introduce un directorio prefijo para todo el contenido de tus archivos de log. |
+| **Google Cloud Storage** | - Seleccione el tipo de archivo **Google Cloud Storage** (Almacenamiento de Google Cloud) y la cuenta de servicio de GCS que tiene permisos para escribir en tu bucket de almacenamiento.<br>- Introduce el nombre de tu bucket.<br>**Opcional**: introduce un directorio prefijo para todo el contenido de tus archivos de log. |
 
 ### Configuración avanzada
 
-#### Permisos de Datadog
-
-Por defecto:
-
-* Todos los usuarios Admin de Datadog pueden crear, editar y reordenar. Consulta [Configurar archivos múltiples](#multiple-archives) para obtener más información.
-* Todos los usuarios de Datadog Admin y Standard pueden recuperar desde archivos.
-* Todos los usuarios, incluidos los Read Only (solo lectura) de Datadog, pueden acceder a logs recuperados.
-
-Utiliza este paso de configuración opcional para asignar roles en ese archivo y restringir quién puede:
-
-* Editar ese archivo de configuración. Consulta el permiso [`logs_write_archive`][9].
-* Recuperar desde ese archivo. Consulta los permisos [`logs_read_archives`][10] y [`logs_write_historical_view`][11].
-* Acceder a logs recuperados en caso de que utilices el permiso legacy [`read_index_data`][12].
-
-{{< img src="logs/archives/archive_restriction.png" alt="Restrinfir el acceso a archivos y logs recuperados" style="width:75%;">}}
+{{< img src="/logs/archives/log_archives_advanced_settings.png" alt="Configuración avanzada para añadir etiquetas opcionales y definir el tamaño máximo de análisis" style="width:100%;" >}}
 
 #### Etiquetas de Datadog
 
@@ -258,15 +219,11 @@ Utiliza este paso de configuración opcional para:
 * Incluir todas las etiquetas de log en tus archivos (activado por defecto en todos los archivos nuevos). **Nota**: Esto aumenta el tamaño de los archivos resultantes.
 * Añadir etiquetas en los logs recuperados de acuerdo con tu política de Consultas de restricción. Consulta el permiso [`logs_read_data`][13].
 
-{{< img src="logs/archives/tags_in_out.png" alt="Configurar etiquetas de archivo" style="width:75%;">}}
-
 #### Definir el tamaño máximo de escaneado
 
 Utiliza este paso de configuración opcional para definir el volumen máximo de datos de log (en GB) que se pueden escanear para la recuperación en tus archivos de log.
 
 Para los archivos con un tamaño máximo de escaneado definido, todos los usuarios deben estimar el tamaño del escaneado antes de que se les permita iniciar una recuperación. Si el tamaño de escaneado estimado es superior al permitido para ese archivo, los usuarios deben reducir el intervalo en el que solicitan la recuperación. La reducción del intervalo reducirá el tamaño del escaneado y permitirá al usuario iniciar una recuperación.
-
-{{< img src="logs/archives/max_scan_size.png" alt="Definir el tamaño máximo de escaneado en el archivo" style="width:75%;">}}
 
 {{< site-region region="us3" >}}
 #### Reglas del cortafuegos
@@ -276,8 +233,8 @@ Para los archivos con un tamaño máximo de escaneado definido, todos los usuari
 
 No se admiten reglas de cortafuegos.
 
-{{% /tab%}}
-{{< /tabs>}}
+{{% /tab %}}
+{{< /tabs >}}
 
 {{< /site-region >}}
 #### Clase de almacenamiento
@@ -285,7 +242,7 @@ No se admiten reglas de cortafuegos.
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-Puedes [establecer una configuración del ciclo de vida en tu bucket de S3][1] para realizar una transición automática de tus archivos de log a clases de almacenamiento óptimas.
+Puedes seleccionar una clase de almacenamiento para tu archivo o [establecer una configuración de ciclo de vida en tu bucket de S3][1] para realizar una transición automática de tus archivos de log a clases de almacenamiento óptimas.
 
 La [recuperación][2] solo admite las siguientes clases de almacenamiento:
 
@@ -311,29 +268,56 @@ El archivado y la [recuperación][1] solo admiten los siguientes niveles de acce
 Si deseas recuperar a partir de archivos de otro nivel de acceso, primero debes moverlos a uno de los niveles admitidos mencionados anteriormente.
 
 [1]: /es/logs/archives/rehydrating/
-Accede a dashboards preconfigurados
-
 {{% /tab %}}
+{{% tab "Google Cloud Storage" %}}
+
+Archivo y [rehidratación][1] admite los siguientes niveles de acceso:
+
+- Standard (Estándar)
+- Nearline
+- Coldline
+- Archivo
+
+[1]: /es/logs/archives/rehydrating/
+{{% /tab %}}
+
 {{< /tabs >}}
 
-#### Cifrado del lado del servidor (SSE)
+#### Cifrado del lado del servidor (SSE) para archivos de S3
 
+Al crear o actualizar un archivo de S3 en Datadog, puedes optar por configurar **Advanced Encryption** (Cifrado avanzado). Hay tres opciones disponibles en el menú desplegable **Encryption Type** (Tipo de cifrado):
+
+- **Cifrado predeterminado a nivel de bucket de S3** (predeterminado): Datadog no anula la configuración de cifrado predeterminado de tu bucket de S3.
+- **Claves gestionadas de Amazon S3**: fuerza el cifrado del lado del servidor utilizando claves administradas de Amazon S3 ([SSE-S3][1]), independientemente del cifrado predeterminado del bucket de S3.
+- **AWS Key Management Service**: fuerza el cifrado del lado del servidor utilizando una clave gestionada por el cliente (CMK) de [AWS KMS][2], independientemente del cifrado predeterminado del bucket de S3. Deberás proporcionar el ARN de la CMK.
+
+[1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
+[2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 {{< tabs >}}
-{{% tab "AWS S3" %}}
+{{% tab "Default S3 Bucket-Level Encryption" %}}
 
-##### SSE-S3
+Cuando se selecciona esta opción, Datadog no especifica ningún encabezado de cifrado en la solicitud de carga. Se aplicará el cifrado predeterminado de tu bucket de S3.
 
-El cifrado predeterminado para los buckets de Amazon S3 es el cifrado del lado del servidor con claves de administración de Amazon S3 ([SSE-S3][1]).
-
-Para confirmar que tu bucket de S3 está cifrado con SSE-S3:
+Para configurar o comprobar la configuración del cifrado de tu bucket S3:
 
 1. Navega hasta tu bucket de S3.
-1. Haz clic en la pestaña **Properties** (Propiedades).
-1. En la sección **Default Encryption** (Cifrado por defecto), comprueba que el **Encryption key type** (Tipo de clave de cifrado) es **Amazon S3 managed keys (SSE-S3)** (Claves administradas de Amazon S3 (SSE-S3)).
+2. Haz clic en la pestaña **Propiedades**.
+3. En la sección **Default Encryption** (Cifrado por defecto), configura o confirma el tipo de cifrado. Si tu cifrado utiliza [AWS KMS][1], asegúrate de que tienes una CMK válida y una política de CMK adjunta a tu CMK.
 
-##### SSE-KMS
+[1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 
-Como alternativa, Datadog admite el cifrado del lado del servidor con una CMK de [AWS KMS][2]. Para habilitarla, sigue estos pasos:
+{{% /tab %}}
+{{% tab "Amazon S3 managed keys" %}}
+
+Esta opción garantiza que todos los objetos de archivo se carguen con [SSE_S3][1], utilizando claves gestionadas de Amazon S3. Esto anula cualquier configuración de cifrado predeterminada en el bucket de S3. 
+
+[1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
+{{% /tab %}}
+{{% tab "AWS Key Management Service" %}}
+
+Esta opción garantiza que todos los objetos de archivo se carguen utilizando una clave gestionada por el cliente (CMK) de [AWS KMS][1]. Esto anula cualquier configuración de cifrado predeterminada en el bucket de S3. 
+
+Asegúrate de haber completado los siguientes pasos para crear una CMK válida y una política de CMK. Deberás proporcionar el ARN de CMK para configurar correctamente este tipo de cifrado. 
 
 1. Crea tu CMK.
 2. Adjunta una política de CMK a tu CMK con el siguiente contenido, sustituyendo según corresponda el número de cuenta de AWS y el nombre de rol de Datadog IAM:
@@ -389,15 +373,9 @@ Como alternativa, Datadog admite el cifrado del lado del servidor con una CMK de
 }
 ```
 
-3. Ve a la pestaña **Properties** (Propiedades) en tu bucket de S3 y selecciona **Default Encryption** (Cifrado por defecto). Elige la opción "AWS-KMS", selecciona tu ARN de CMK y selecciona guardar.
+3. Después de seleccionar **AWS Key Management Service** como tu **Encryption Type** (Tipo de cifrado) en Datadog, introduce tu ARN de la clave de AWS KMS.
 
-Para cualquier cambio en las claves de KSM existentes, ponte en contacto con el [soporte de Datadog][3] para obtener más ayuda.
-
-[1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
-[2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
-[3]: /es/help/
-{{< partial name="whats-next/whats-next.html" >}}
-
+[1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -448,9 +426,9 @@ Dentro del archivo JSON comprimido, el contenido de cada evento tiene el siguien
 }
 ```
 
-## Configurar tests de API y tests de API multupaso
+## Referencias adicionales
 
-Grabar pruebas de aplicaciones móviles
+{{< partial name="whats-next/whats-next.html" >}}
 
 <br>
 *Logging without Limits es una marca registrada de Datadog, Inc.

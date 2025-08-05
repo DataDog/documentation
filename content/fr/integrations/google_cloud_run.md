@@ -74,7 +74,7 @@ Pour plus d'informations sur les instructions d'installation spécialisée de l�
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "google_cloud_run" >}}
+{{< get-metrics-from-git "google-cloud-run" >}}
 
 
 ### Événements

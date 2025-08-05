@@ -27,6 +27,34 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 
 ### Configure the Datadog-Databricks integration
 
+{{< tabs >}}
+
+{{% tab "Use a Service Principal for OAuth" %}}
+
+<div class="alert alert-warning">New workspaces must authenticate using OAuth. Workspaces integrated with a Personal Access Token continue to function and can switch to OAuth at any time. After a workspace starts using OAuth, it cannot revert to a Personal Access Token.</div>
+
+1. In your Databricks account, click on **User Management** in the left menu. Then, under the **Service principals** tab, click **Add service principal**.
+1. Under the **Credentials & secrets** tab, click **Generate secret**. Set **Lifetime (days)** to the maximum value allowed (730), then click **Generate**. Take note of your client ID and client secret. Also take note of your account ID, which can be found by clicking on your profile in the upper-right corner.
+  {{< img src="data_jobs/databricks/client-id-secret.png" alt="In Databricks, a modal showing the client ID and secret associated with a new OAuth secret is displayed." style="width:70%;" >}}
+  {{< img src="data_jobs/databricks/account-id.png" alt="In Databricks, a drop-down menu showing the user's account ID is displayed." style="width:70%;" >}}
+1. Click **Workspaces** in the left menu, then select the name of your workspace.
+1. Go to the **Permissions** tab and click **Add permissions**.
+1. Search for the service principal you created and assign it the **Admin** permission.
+1. In Datadog, open the Databricks integration tile.
+1. On the **Configure** tab, click **Add Databricks Workspace**.
+1. Enter a workspace name, your Databricks workspace URL, account ID, and the client ID and secret you generated.
+   {{< img src="data_jobs/databricks/configure-workspace-form-m2m.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, account ID, client ID, and client secret." style="width:100%;" >}}
+1. In the **Select products to set up integration** section, ensure that Data Jobs Monitoring is **Enabled**.
+1. In the **Datadog Agent Setup** section, choose either
+    - [Managed by Datadog (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog installs and manages the Agent with a global init script in the workspace.
+    - [Manually](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent): Follow the [instructions below](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent) to install and manage the init script for installing the Agent globally or on specific Databricks clusters.
+
+{{% /tab %}}
+
+{{% tab "Use a Personal Access Token (Legacy)" %}}
+
+<div class="alert alert-warning">This option is only available for workspaces created before July 7, 2025. New workspaces must authenticate using OAuth.</div>
+
 1. In your Databricks workspace, click on your profile in the top right corner and go to **Settings**. Select **Developer** in the left side bar. Next to **Access tokens**, click **Manage**.
 1. Click **Generate new token**, enter "Datadog Integration" in the **Comment** field, set the **Lifetime (days)** value to the maximum allowed (730 days), and create a reminder to update the token before it expires. Then click **Generate**. Take note of your token.
 
@@ -41,8 +69,17 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
    {{< img src="data_jobs/databricks/configure-workspace-form.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, and API token." style="width:100%;" >}}
 1. In the **Select products to set up integration** section, make sure the Data Jobs Monitoring product is **Enabled**.
 1. In the **Datadog Agent Setup** section, choose either
-  - [Managed by Datadog (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog installs and manages the Agent with a global init script in the workspace.
-  - [Manually](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent): Follow the [instructions below](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent) to install and manage the init script for installing the Agent globally or on specific Databricks clusters.
+    - [Managed by Datadog (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog installs and manages the Agent with a global init script in the workspace.
+    - [Manually](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent): Follow the [instructions below](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent) to install and manage the init script for installing the Agent globally or on specific Databricks clusters.
+
+[9]: https://docs.databricks.com/en/security/auth-authz/access-control/index.html#job-acls
+[10]: https://docs.databricks.com/en/admin/users-groups/service-principals.html#manage-personal-access-tokens-for-a-service-principal
+[11]: https://docs.databricks.com/en/admin/users-groups/service-principals.html#what-is-a-service-principal
+[17]: https://docs.databricks.com/aws/en/security/auth/entitlements#entitlements-overview
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ### Install the Datadog Agent
 
@@ -230,6 +267,8 @@ For scheduled jobs that run on job clusters, the init script installs the Datado
 
 In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Databricks jobs.
 
+If some jobs are not visible, navigate to the [Configuration][9] page to understand why. This page lists all your Databricks jobs not yet configured with the Agent on their clusters, along with guidance for completing setup.
+
 ## Troubleshooting
 
 {{% djm-install-troubleshooting %}}
@@ -243,6 +282,20 @@ Configure the following environment variable in the Advanced Configuration secti
 ```bash
 DD_LOGS_CONFIG_PROCESSING_RULES=[{\"type\": \"exclude_at_match\",\"name\": \"drop_all_logs\",\"pattern\": \".*\"}]
 ```
+
+### Permissions
+Grant **Workspace Admin** privileges to the user or service principal that connects to your Databricks workspace. This allows Datadog to manage init script installations and updates automatically, reducing the risk of misconfiguration.
+
+If you need more granular control, grant these minimal permissions to the following [workspace level objects][19] to still be able to monitor all jobs, clusters, and queries within a workspace: 
+
+| Object                 | Permission                                                                                                                                                      |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Job                              | [CAN VIEW][20]
+| Compute                          | [CAN ATTACH TO][21]
+| Lakeflow Declarative Pipelines   | [CAN VIEW][22]
+| Query                            | [CAN VIEW][23]
+| SQL warehouse                    | [CAN VIEW][24]
+
 
 ### Tag spans at runtime
 
@@ -284,7 +337,7 @@ DD_LOGS_CONFIG_PROCESSING_RULES=[{\"type\": \"exclude_at_match\",\"name\": \"dro
 ### Set up Data Jobs Monitoring with Databricks Networking Restrictions
 With [Databricks Networking Restrictions][12], Datadog may not have access to your Databricks APIs, which is required to collect traces for Databricks job executions along with tags and other metadata.
 
-If you are controlling Databricks API access with [IP access lists][13], allow-listing Datadog's specific {{< region-param key="ip_ranges_url_webhooks" link="true" text="webhook IP addresses" >}} allows Datadog to connect to the Databricks APIs in your workspace. See Databricks's documentation for [configuring IP access lists for workspaces][16] to give Datadog API access.
+If you are controlling Databricks API access with [IP access lists][13], allow-listing Datadog's specific {{< region-param key="ip_ranges_url_webhooks" link="true" text="webhook IP addresses" >}} allows Datadog to connect to the Databricks APIs in your workspaces/account. See Databricks's documentation for configuring IP access lists for [individual workspaces][16] and the [account console][17] to give Datadog API access. Updating the IP access lists **at both the workspace and account level is required** for the Databricks integration. **Note:** Datadog only uses Databricks account-level APIs to automatically refresh your service principal's client secret.
 
 If you are using [Databricks Private Connectivity][14], reach out to the Datadog [support team][15] to discuss potential options.
 
@@ -297,13 +350,17 @@ If you are using [Databricks Private Connectivity][14], reach out to the Datadog
 [6]: https://app.datadoghq.com/data-jobs/
 [7]: /data_jobs
 [8]: https://docs.databricks.com/api/workspace/jobs/submit
-[9]: https://docs.databricks.com/en/security/auth-authz/access-control/index.html#job-acls
-[10]: https://docs.databricks.com/en/admin/users-groups/service-principals.html#manage-personal-access-tokens-for-a-service-principal
-[11]: https://docs.databricks.com/en/admin/users-groups/service-principals.html#what-is-a-service-principal
+[9]: https://app.datadoghq.com/data-jobs/configuration
 [12]: https://docs.databricks.com/en/security/network/front-end/index.html
 [13]: https://docs.databricks.com/en/security/network/front-end/ip-access-list.html
 [14]: https://www.databricks.com/trust/security-features/secure-your-data-with-private-networking
 [15]: https://www.datadoghq.com/support/
-[16]: https://docs.databricks.com/en/security/network/front-end/ip-access-list-workspace.html
-[17]: https://docs.databricks.com/aws/en/security/auth/entitlements#entitlements-overview
+[16]: https://docs.databricks.com/en/security/network/front-end/ip-access-list-workspace
+[17]: https://docs.databricks.com/aws/en/security/network/front-end/ip-access-list-account
 [18]: https://docs.databricks.com/api/workspace/clusters/edit#spark_env_vars
+[19]: https://docs.databricks.com/aws/en/security/auth/access-control#access-control-lists-overview
+[20]: https://docs.databricks.com/aws/en/security/auth/access-control#job-acls
+[21]: https://docs.databricks.com/aws/en/security/auth/access-control#compute-acls
+[22]: https://docs.databricks.com/aws/en/security/auth/access-control#lakeflow-declarative-pipelines-acls
+[23]: https://docs.databricks.com/aws/en/security/auth/access-control#query-acls
+[24]: https://docs.databricks.com/aws/en/security/auth/access-control#sql-warehouse-acls

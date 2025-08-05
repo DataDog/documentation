@@ -29,6 +29,7 @@ This guide provides best practices for managing your custom metrics volumes thro
 - [Reduce costs on less valuable, unused metrics](#value-based-metrics-governance)
 - [Monitor and control usage before incurring billing overages](#monitoring-and-prevention)
 
+Check out this [interactive walk through][17] of Datadog's custom metrics governance tools. 
 
 ## Prerequisites
 
@@ -63,10 +64,6 @@ Additionally, review [Usage Attribution][3] information for a total breakdown of
 **Note**: Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or Customer Success to request this feature.
 
 #### Metric-level visibility
-
-{{< callout url="https://forms.gle/H3dG9tTdR6bqzHAX9" >}}
-Custom Metrics Tags Cardinality Explorer is in Preview. Use this form to request access today.
-{{< /callout >}} 
 
 {{< img src="metrics/tagsexplorer.png" alt="Custom Metrics Tags Cardinality Explorer for a spiking metric name" style="width:80%;">}}
 
@@ -223,9 +220,9 @@ After you've received an alert, use the Metrics Volume Management page to inspec
 ## Summary of best practices
 
 1. Start by identifying your largest metric names (your Top Custom Metrics table or the Metrics Volume Page), begin using Metrics without Limits™ to optimize these top metrics to the most cost-effective volume. 
-1. Use the Metrics Volume Management page to attribute any existing custom metrics usage spikes to the top spiking metric names causing that spike.
-1. For immediate cost savings, identify your unqueried custom metrics and use Metrics without Limits™ to configure these metrics with empty tag configurations.
-1. Set up monitors on your custom metrics usage using any of Datadog's OOTB estimated custom metrics usage metrics.
+2. Use the Metrics Volume Management page to attribute any existing custom metrics usage spikes to the top spiking metric names causing that spike.
+3. For immediate cost savings, identify your unqueried custom metrics and use Metrics without Limits™ to configure these metrics with empty tag configurations.
+4. Set up monitors on your custom metrics usage using any of Datadog's OOTB estimated custom metrics usage metrics.
 
 ## Further reading
 
@@ -247,3 +244,4 @@ After you've received an alert, use the Metrics Volume Management page to inspec
 [14]: https://docs.datadoghq.com/metrics/metrics-without-limits/#configuration-of-tags-for-a-single-metric
 [15]: /metrics/summary/#metrics-related-assets
 [16]: /metrics/summary/#facet-panel
+[17]: https://tour.datadoghq.com/psl/swa0y11
