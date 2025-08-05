@@ -155,7 +155,7 @@ To determine the value of any metric name to your organization, use Metrics Rela
 
 1. Scroll to the bottom of the metric's details side panel to the **Related Assets** section.
 2. Click the dropdown button to view the type of related asset you are interested in (dashboards, monitors, notebooks, SLOs). You can additionally use the search bar to validate specific assets.
-3. The **Related Tags** column shows exactly which tags are used in each asset.
+3. The **Tags** column shows exactly which tags are used in each asset.
    
 ## Custom Metrics Tags Cardinality Explorer 
 
