@@ -192,7 +192,7 @@ Hallucination detection does not run if either the rag query, the rag context, o
 You can find more examples of instrumentation in the [SDK documentation][6].
 
 ##### Hallucination configuration
-
+<div class="alert alert-info">Hallucination detection is only available for OpenAI.</div>
 Hallucination detection makes a distinction between two types of hallucinations, which can be configured when Hallucination is enabled.
 
 | Configuration Option | Description |
@@ -215,7 +215,8 @@ This check identifies instances where the LLM fails to deliver an appropriate re
 | Evaluated on Output | Evaluated using LLM | Failure To Answer flags whether each prompt-response pair demonstrates that the LLM application has provided a relevant and satisfactory answer to the user's question.  |
 
 ##### Failure to Answer Configuration
-You can configure the evaluation by selecting what types of answers should be considered Failure to Answer. This feature is only available if OpenAI or Azure OpenAI is selected for the LLM provider.
+<div class="alert alert-info">Configuring failure to answer evaluation categories is supported if OpenAI or Azure OpenAI is selected as your LLM provider.</div>
+You can configure the Failure to Answer evaluation to use specific categories of failure to answer, listed in the following table. 
 
 | Configuration Option | Description | Example(s) |
 |---|---|---|
@@ -289,7 +290,8 @@ This check identifies attempts by unauthorized or malicious authors to manipulat
 | Evaluated on Input | Evaluated using LLM | [Prompt Injection][13] flags any unauthorized or malicious insertion of prompts or cues into the conversation by an external party or user. |
 
 ##### Prompt injection configuration
-Users can configure this evaluation by selecting specific subcategories to be surfaced as prompt injection attempts. This feature is only available if OpenAI or Azure OpenAI is selected as the LLM provider.
+<div class="alert alert-info">Configuring prompt injection evaluation categories is supported if OpenAI or Azure OpenAI is selected as your LLM provider.</div>
+You can configure the prompt injection evaluation to use specific categories of prompt injection, listed in the following table. 
 
 | Configuration Option | Description | Example(s) |
 |---|---|---|
