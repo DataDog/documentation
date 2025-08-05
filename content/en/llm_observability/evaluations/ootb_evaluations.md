@@ -259,6 +259,25 @@ This check evaluates each input prompt from the user and the response from the L
 |---|---|---|
 | Evaluated on Input and Output | Evaluated using LLM | Toxicity flags any language or behavior that is harmful, offensive, or inappropriate, including but not limited to hate speech, harassment, threats, and other forms of harmful communication. |
 
+##### Toxicity configuration
+
+<div class="alert alert-info">Configuring toxicity evaluation categories is supported if OpenAI or Azure OpenAI is selected as your LLM provider.</div>
+You can configure toxicity evaluations to use specific categories of toxicity, listed in the following table. 
+
+| Category | Description | 
+|---|---|
+| Discriminatory Content | Content that discriminates against a particular group, including based on race, gender, sexual orientation, culture, etc.  | 
+| Harassment | Content that expresses, incites, or promotes negative or intrusive behavior toward an individual or group. | 
+| Hate | Content that expresses, incites, or promotes hate based on race, gender, ethnicity, religion, nationality, sexual orientation, disability status, or caste. | 
+| Illicit | Content that asks, gives advice, or instruction on how to commit illicit acts. | 
+| Self Harm | Content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting, and eating disorders. | 
+| Sexual | Content that describes or alludes to sexual activity.  | 
+| Violence | Content that discusses death, violence, or physical injury. | 
+| Profanity | Content containing profanity. | 
+| User Dissatisfaction | Content containing criticism towards the model. *This category is only available for evaluating input toxicity.* | 
+
+The toxicity categories in this table are informed by: [Banko et al. (2020)][14], [Inan et al. (2023)][15], [Ghosh et al. (2024)][16], [Zheng et al. (2024)][17].
+
 #### Prompt Injection
 
 This check identifies attempts by unauthorized or malicious authors to manipulate the LLM's responses or redirect the conversation in ways not intended by the original author. This check maintains the integrity and authenticity of interactions between users and the LLM.
@@ -304,3 +323,7 @@ This check ensures that sensitive information is handled appropriately and secur
 [11]: https://learnprompting.org/docs/prompt_hacking/offensive_measures/context-switching
 [12]: https://atlas.mitre.org/techniques/AML.T0054
 [13]: https://genai.owasp.org/llmrisk/llm01-prompt-injection/
+[14]: https://aclanthology.org/2020.alw-1.16.pdf
+[15]: https://arxiv.org/pdf/2312.06674
+[16]: https://arxiv.org/pdf/2404.05993
+[17]: https://arxiv.org/pdf/2309.11998

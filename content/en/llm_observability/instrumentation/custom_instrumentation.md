@@ -25,8 +25,6 @@ This page explains how to use the Datadog LLM Observability SDK's custom instrum
 
 ## Instrument an LLM application
 
-<div class="alert alert-info">These instructions use the <a href="/llm_observability/setup/sdk">LLM Observability SDK for Python</a>. If your application is running in a serverless environment, follow the <a href="/llm_observability/setup/sdk/#aws-lambda-setup">serverless setup instructions</a>. </br></br> If your application is not written in Python, you can complete the steps below with API requests instead of SDK function calls.</div>
-
 To instrument an LLM application:
 
 1. [Install the LLM Observability SDK for Python][5].
