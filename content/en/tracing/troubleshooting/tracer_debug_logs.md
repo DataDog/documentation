@@ -7,7 +7,7 @@ further_reading:
 ---
 
 ## Automated debug log collection
-<div class="alert alert-warning">Automated debug logs are supported for Java, Python, Node.js and .NET only. For other languages, use <a href="/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode">manual debug log collection</a> instead.</div>
+<div class="alert alert-warning">Automated debug logs are supported for Java, Python, Node.js, and .NET only. For other languages, use <a href="/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode">manual debug log collection</a> instead.</div>
 
 A flare allows you to send necessary troubleshooting information to the Datadog support team, including tracer logs, with sensitive data removed. Flares are useful for troubleshooting issues like high CPU usage, high memory usage, and missing spans.
 
