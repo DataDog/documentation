@@ -504,11 +504,6 @@ menu:
       url: agent/configuration/secrets-management/
       parent: agent_configuration
       weight: 609
-    - name: Remote Configuration
-      identifier: agent_remote_configuration
-      url: agent/remote_config
-      parent: agent
-      weight: 7
     - name: Fleet Automation
       identifier: agent_fleet_automation
       url: agent/fleet_automation
@@ -518,7 +513,7 @@ menu:
       identifier: remote_agent_management
       url: agent/fleet_automation/remote_management
       parent: agent_fleet_automation
-      weight: 801
+      weight: 802
     - name: Troubleshooting
       url: agent/troubleshooting/
       parent: agent
@@ -1232,6 +1227,12 @@ menu:
       identifier: coterm_rules
       parent: coterm
       weight: 3
+    - name: Remote Configuration
+      pre: config-2
+      url: remote_configuration
+      identifier: remote_configuration
+      parent: essentials_heading
+      weight: 130000
     - name: Cloudcraft (Standalone)
       url: cloudcraft/
       pre: cloudcraft
