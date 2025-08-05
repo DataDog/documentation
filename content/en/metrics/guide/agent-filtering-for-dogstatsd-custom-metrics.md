@@ -26,9 +26,9 @@ Agent-side filtering for DogStatsD custom metrics is in Preview.
 
 ## Overview
 
-Agent-side filtering enables you to block unused or unwanted DogStatsD custom metrics directly at the Datadog Agent, before sending them to Datadog. This can significantly reduce both indexed and ingested custom metric volume.
+Agent-side filtering enables you to filter out unused or unwanted DogStatsD custom metrics directly at the Datadog Agent, before sending them to Datadog. This can significantly reduce both indexed and ingested custom metric volume.
 
-Filtering is performed at the Agent level but centrally managed through the Datadog UI, giving teams full visibility and control. You can cigure, update, and manage filtering policies in Datadog, streamlining metric governance while maintaining transparency.
+Filtering is performed at the Agent level but centrally managed through the Datadog UI, giving teams full visibility and control. You can create, update, and manage filtering policies in Datadog, streamlining metric governance while maintaining transparency.
 
 ## Creating a filtering policy
 
@@ -37,7 +37,7 @@ There are three ways to create a filtering policy:
 {{< tabs >}}
 {{% tab "Metric Summary page" %}}
 
-From the [Metrics Summary page][100], select one or more metrics and convert them into a block list:
+From the [Metrics Summary page][100], select one or more metrics and convert them into a filter list:
 <Insert video>
 
 [100]: https://app.datadoghq.com/metric/summary
@@ -114,7 +114,7 @@ To delete a policy:
 
 This initial preview release includes the following limitations:
 
-- A maximum of 10,000 metric names can be blocked.
+- A maximum of 10,000 metric names can be filtered out.
 - Resource usage impact on the Agent is limited to up to 10MB RSS. There is no increase in CPU usage.
 - Only DogStatsD metrics are supported.
 - API-based policy management is expected in a future iteration.
