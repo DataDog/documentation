@@ -149,7 +149,7 @@ For any particular tag key, you can:
 
 ### Metrics Related Assets
 
-{{< img src="metrics/summary/related_assets_dashboards_08052025.png" alt="Related Assets for a specified metrics name" style="width:80%;">}}
+{{< img src="metrics/summary/related_assets_dashboards_08_05_2025.png" alt="Related Assets for a specified metrics name" style="width:80%;">}}
 
 To determine the value of any metric name to your organization, use Metrics Related Assets. Metrics related assets refers to any dashboard, notebook, monitor, or SLO that queries a particular metric. 
 
