@@ -40655,19 +40655,19 @@ components:
         data:
         - attributes:
             group_bys:
-            - key: client_team
-              value: networks
-            - key: server_service
-              value: hucklebuck
+            - key: client_service
+              value: example-service
+            - key: network.dns_query
+              value: example.com
             metrics:
             - key: dns_total_requests
               value: 100
             - key: dns_failures
-              value: 6
+              value: 7
             - key: dns_successful_responses
-              value: 95
+              value: 93
             - key: dns_failed_responses
-              value: 4
+              value: 5
             - key: dns_timeouts
               value: 2
             - key: dns_responses.nxdomain
@@ -40680,7 +40680,7 @@ components:
               value: 50
             - key: dns_failure_latency_percentile
               value: 75
-          id: client_team:networks, server_service:hucklebuck
+          id: client_service:example-service,network.dns_query:example.com
           type: aggregated_dns
       properties:
         data:
@@ -40697,48 +40697,20 @@ components:
         id:
           description: A unique identifier for the aggregated DNS traffic based on
             the group by values.
-          example: client_service:example-service,network.dns_query:example.com
           type: string
         type:
           $ref: '#/components/schemas/SingleAggregatedDnsResponseDataType'
-          example: aggregated_dns
       type: object
     SingleAggregatedDnsResponseDataAttributes:
       description: Attributes for an aggregated DNS flow.
       properties:
         group_bys:
           description: The key, value pairs for each group by.
-          example:
-          - key: client_service
-            value: example-service
-          - key: network.dns_query
-            value: example.com
           items:
             $ref: '#/components/schemas/SingleAggregatedDnsResponseDataAttributesGroupByItems'
           type: array
         metrics:
           description: Metrics associated with an aggregated DNS flow.
-          example:
-          - key: dns_total_requests
-            value: 100
-          - key: dns_failures
-            value: 7
-          - key: dns_successful_responses
-            value: 93
-          - key: dns_failed_responses
-            value: 5
-          - key: dns_timeouts
-            value: 2
-          - key: dns_responses.nxdomain
-            value: 1
-          - key: dns_responses.servfail
-            value: 1
-          - key: dns_responses.other
-            value: 3
-          - key: dns_success_latency_percentile
-            value: 50
-          - key: dns_failure_latency_percentile
-            value: 75
           items:
             $ref: '#/components/schemas/SingleAggregatedDnsResponseDataAttributesMetricsItems'
           type: array
@@ -40750,11 +40722,8 @@ components:
           description: The group by key.
           type: string
         value:
-          additionalProperties:
-            items:
-              type: string
-            type: array
           description: The group by value.
+          type: string
       type: object
     SingleAggregatedDnsResponseDataAttributesMetricsItems:
       description: Metrics associated with an aggregated DNS flow.
@@ -59565,7 +59534,7 @@ paths:
         schema:
           type: string
       - description: The number of connections to be returned. The maximum value is
-          7500.
+          7500. The default is 100.
         in: query
         name: limit
         schema:
@@ -59631,7 +59600,7 @@ paths:
         schema:
           type: string
       - description: The number of aggregated DNS entries to be returned. The maximum
-          value is 7500.
+          value is 7500. The default is 100.
         in: query
         name: limit
         schema:
