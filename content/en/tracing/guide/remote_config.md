@@ -42,6 +42,61 @@ The following table describes the meaning of each Tracing library status:
   | NOT DETECTED   | The Tracing library does not support Remote Configuration. To fix this issue, update the Tracing library software to the latest available version. |
   | UNKNOWN   | The Tracing library status is unknown, and it can't be determined if an Agent is associated with the Tracing library. For example, this could be because the Agent is deployed on a fully managed serverless container service like AWS Fargate. |
 
+## Opting out of Remote Configuration for Fleet Automation
+
+You can disable Remote Configuration capabilities:
+- at the API key level
+- at the Agent level
+- at the organization level (**not recommended**)
+
+### At the API key level
+
+Disable the API key of your choice on the [API Keys][8] page. You need the [`api_keys_write`][4] permission to disable Remote Configuration on an API key.
+
+### At the Agent level
+
+Starting with Agent version 7.47.0, `remote_configuration.enabled` is set to `true` by default in the Agent. This setting causes the Agent to request configuration updates from the Datadog site.
+
+If you don't want your Agent to send configuration requests to Datadog, you can set `remote_configuration.enabled` to `false` in the Agent.
+
+{{< tabs >}}
+{{% tab "Configuration YAML file" %}}
+Change `remote_configuration.enabled` from `true` to `false` in your [configuration YAML file][101]:
+```yaml
+remote_configuration:
+  enabled: false
+```
+
+[101]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+{{% /tab %}}
+{{% tab "Environment variable" %}}
+Add the following to your Datadog Agent manifest:
+```yaml
+DD_REMOTE_CONFIGURATION_ENABLED=false
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+Add the following to your Helm chart:
+```yaml
+datadog:
+  remoteConfiguration:
+    enabled: false
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### At the organization level
+
+<div class="alert alert-danger"><strong>Datadog does not recommend disabling Remote Configuration at the organization level. Disabling Remote Configuration at the organization level prevents Datadog components in several products across your organization from receiving configurations from Datadog.</strong></div>
+
+To disable Remote Configuration at the organization level:
+1. Ensure you have the required `org_management` permission.
+1. Go to the [Remote Configuration][5] settings page.
+1. Click **Disable**.
+1. When the warning message appears, click **Disable** again.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -53,3 +108,4 @@ The following table describes the meaning of each Tracing library status:
 [5]: https://app.datadoghq.com/organization-settings/remote-config
 [6]: /agent/configuration/network
 [7]: /tracing/trace_collection/runtime_config/#supported-configuration-options
+[8]: https://app.datadoghq.com/organization-settings/api-keys
