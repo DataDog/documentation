@@ -25,7 +25,3 @@ further_reading:
 ---
 
 {{< include-markdown "getting_started/opentelemetry" >}}
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
