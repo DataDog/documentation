@@ -6,12 +6,6 @@ further_reading:
 - link: "/data_security/"
   tag: "Documentation"
   text: "Review the main categories of data submitted to Datadog"
-- link: "/data_security/pci_compliance/"
-  tag: "Documentation"
-  text: "Set up a PCI-compliant Datadog organization"
-- link: "https://www.datadoghq.com/blog/datadog-pci-compliance-log-management-apm/"
-  tag: "Blog"
-  text: "Announcing PCI-Compliant Log Management and APM from Datadog"
 ---
 
 <div class="alert alert-info">This page is about the security of data sent to Datadog. If you're looking for cloud and application security products and features, see the <a href="/security/" target="_blank">Security</a> section.</div>
@@ -41,31 +35,6 @@ Sensitive Data Scanner is also available as a [processor][8] in [Observability P
 ## HIPAA-enabled customers
 
 {{% hipaa-customers %}}
-
-## PCI DSS compliance for Log Management
-
-{{< site-region region="us" >}}
-
-<div class="alert alert-warning">
-PCI DSS compliance for Log Management is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
-</div>
-
-Datadog allows customers to send logs to PCI DSS compliant Datadog organizations upon request. To set up a PCI-compliant Datadog org, follow these steps:
-
-{{% pci-logs %}}
-
-See [PCI DSS Compliance][1] for more information. To enable PCI compliance for APM, see [PCI DSS compliance for APM][1].
-
-[1]: /data_security/pci_compliance/
-[2]: /data_security/pci_compliance/?tab=apm
-
-{{< /site-region >}}
-
-{{< site-region region="us3,us5,eu,gov,ap1,ap2" >}}
-
-PCI DSS compliance for Log Management is not available for the {{< region-param key="dd_site_name" >}} site.
-
-{{< /site-region >}}
 
 ## Endpoint encryption
 

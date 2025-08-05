@@ -9,9 +9,6 @@ further_reading:
 - link: "/account_management/org_settings/"
   tag: "Documentation"
   text: "Learn about organization settings"
-- link: "/data_security/pci_compliance/"
-  tag: "Documentation"
-  text: "Set up a PCI-compliant Datadog organization"
 - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
   tag: "Blog"
   text: "Build compliance, governance, and transparency across your teams with Datadog Audit Trail"
@@ -43,8 +40,6 @@ For security admins or InfoSec teams, audit trail events help with compliance ch
 - For user logins, account, or role changes in your organization.
 
 You can also analyze Audit Trail events with [Cloud SIEM][15] to detect threats and generate security signals. See [Getting Started with Cloud SIEM][16] for more information.
-
-**Note**: See [PCI DSS Compliance][2] for information on setting up a PCI-compliant Datadog organization.
 
 ## Setup
 
@@ -228,7 +223,6 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][13] that shows vari
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/audit-trail
-[2]: /data_security/pci_compliance/
 [3]: https://app.datadoghq.com/organization-settings/
 [4]: https://app.datadoghq.com/event/explorer
 [5]: /logs/explorer/

@@ -9,10 +9,6 @@ aliases:
     - /tracing/custom_instrumentation/agent_customization
     - /tracing/faq/if-i-instrument-a-database-with-datadog-apm-will-there-be-sensitive-database-data-sent-to-datadog
     - /tracing/setup_overview/configure_data_security/
-further_reading:
-- link: "/data_security/pci_compliance/"
-  tag: "Documentation"
-  text: "Set up a PCI-compliant Datadog organization"
 ---
 ## Overview
 
