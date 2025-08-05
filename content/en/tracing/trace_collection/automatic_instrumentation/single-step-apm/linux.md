@@ -33,6 +33,7 @@ You may want to customize SDK versions based on your application's language vers
 
 To customize tracer versions:
 
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
 1. After you turn on **APM Instrumentation**, click **Customize library versions**.
 
@@ -42,6 +43,31 @@ To customize tracer versions:
    - Pin an exact tracer version, or
    - Select the major version you want to use.
 1. Copy and run the updated installation command.
+
+[15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
+
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
+1. After you turn on **APM Instrumentation**, set your desired library versions with the `DD_APM_INSTRUMENTATION_LIBRARIES` variable in your Agent installation command:
+   
+   ```
+   DD_API_KEY=<YOUR_DD_API_KEY> 
+   DD_SITE="US1-FED" 
+   DD_APM_INSTRUMENTATION_ENABLED=host 
+   DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1" 
+   bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   ```
+
+1. Find your language(s) and use the dropdown to either:
+   - Pin an exact tracer version, or
+   - Select the major version you want to use.
+1. Copy and run the updated installation command.
+
+[15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
+
+{{< /site-region >}}
 
 Available versions are listed in source repositories for each language:
 
