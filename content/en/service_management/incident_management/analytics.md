@@ -32,7 +32,7 @@ Incident Management Analytics is a queryable data source for aggregated incident
 
 ### Incident timestamps
 
-Incidents carry three timestamp attributes that drive analytics:
+Incidents carry three timestamp attributes that influence analytics:
 
 * Declaration time (`declared`) is the moment the incident was declared.
 * Detection time (`detected`) is the moment the underlying resource from which an incident was declared was created. For example, if a monitor alert fires at 2 p.m. and you declare an incident from it at 2:30 p.m., the `detected` time would be 2:30 p.m. If you did not declare the incident from another Datadog resource, `detected` is equivalent to `declared`.
