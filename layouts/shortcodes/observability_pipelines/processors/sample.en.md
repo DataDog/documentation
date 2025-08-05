@@ -5,15 +5,17 @@ The sampling only applies to logs that match your filter query and does not impa
 To set up the sample processor:
 1.  Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are sampled at the specified retention rate below. The sampled logs and the logs that do not match the filter query are sent to the next step in the pipeline.
 1. Enter your desired sampling rate in the **Retain** field. For example, entering `2` means 2% of logs are retained out of all the logs that match the filter query.
-1. Optionally, enter a group-by field to group events by field. Each bucket of events with the same field is sampled independently. Click **Add Field** if you want to add another group-by field. See the [group-by example](#group-by-example).
+1. Optionally, enter a group-by field to group events by field. Each bucket of events with the same field is sampled independently. See the [group-by example](#group-by-example). Click **Add Field** if you want to add another group-by field.
 
-#### Group-by example
+##### Group-by example
 
-If you have the following set up for the sample processor:
+If you have the following setup for the sample processor:
 - Filter query: `source:web-app`
 - Retain: `80%` of matching logs
 - Group by: `service`
 
-<!-- {{< img src="observability_pipelines/processors/group-by-sample-processor.png" alt="" style="width:100%;" >}} -->
+Then, 80% of logs for each service from `source:web-app` is retained.
 
-In this example, 80% of logs from each `source:web-app` service would be retained.
+<figure class="text-center">
+<img src="{{ .Site.Params.img_url}}images/observability_pipelines/processors/group-by-sample-example.png" alt="The sample processor with example values" width="40%">
+</figure>
