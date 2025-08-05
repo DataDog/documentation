@@ -464,12 +464,12 @@
     {
       "group": "events",
       "suffix": "",
-      "description": "Example (alert)"
+      "description": "Example"
     },
     {
       "group": "events",
       "suffix": "_change",
-      "description": "Example (change)"
+      "description": "Example 2"
     }
   ],
   "SearchEvents": [
