@@ -2,63 +2,72 @@
 title: Dead Letter Queues
 ---
 
-Data Streams Monitoring provides visibility into non-empty Dead Letter Queues (DLQs) so you can monitor, inspect, and fix message processing failures without leaving the Datadog platform.
+Data Streams Monitoring (DSM) provides visibility into your non-empty dead letter queues (DLQs), enabling you to monitor and inspect message processing failures. DSM also enables you to remediate these message processing failures directly within Datadog.
 
-## Prerequisites
-* You must have [Data Streams Monitoring instrumented][1]
-* You must have an [AWS Integration][2]. Permissions are managed through your existing AWS integration
-* For **peek**, **purge**, and **redrive** actions, set up Datadog Actions
+<div class="alert alert-info">Monitoring dead letter queues is available for Amazon SQS queues.</div>
 
-## Supported queue technologies
+## Monitor DLQs
 
-|            | Is supported |
-| ---------- | ------------ |
-| Amazon SQS | {{< X >}}    |
-| Kafka      | Coming soon  |
-| RabbitMQ   | Coming soon  |
+### Setup
+* Enable [Data Streams Monitoring][1] for your messaging services.
+* Install the [Datadog-AWS integration][2]. Use this integration to manage permissions.
+* To remediate message processing failures within Datadog, additional setup is required. See the [Remediate DLQ issues](#remediate-dlq-issues) section.
 
-## Monitor Dead Letter Queue messages
+### Usage
 
-To catch processing failures early, you can create a monitor to track if your queue is rerouting messages to its DLQ using the new [DLQ metric][3], `data_streams.sqs.dead_letter_queue.messages`.
+#### Create a monitor for a dead letter queue
 
-To create a monitor:
+To track if your queue is rerouting messages to its DLQ, you can create a [metric monitors][8] that alerts on the [`data_streams.sqs.dead_letter_queue.messages`][8] metric.
 
-1. Navigate to [Data Streams Monitoring][4]
-2. Ensure the **Explore tab** is selected
-3. Click on a supported queue. The Queue Details side panel appears
-4. Select the **Dead Letter Queue tab**
-5. Click on **Create Monitor** and follow monitor setup
+To create a monitor for a queue's DLQ:
 
-## Detect message processing issues
+1. In Datadog, navigate to [Data Streams Monitoring][4].
+2. Select the **Explore** tab (default).
+3. Click on a supported queue to open its side panel.
+4. Select the **Dead Letter Queue** tab.
+5. Click **Create Monitor** to open a monitor setup page. The default inputs are sufficient to create a monitor that alerts when your DLQ is non-empty, but you can also make additional configurations on this page if you wish.
+6. Click **Create** at the bottom of the page.
+
+#### Detect message processing issues
 
 Data Streams Monitoring helps you detect where messages couldn't be processed and what downstream services could be affected:
 
-The DSM **Service Map** helps you visually identify where failures occur by highlighting queues with messages in their DLQs.
+* The DSM [**Service Map**][6] highlights queues with messages in their DLQs, helping you to visually identify where failures occur
 
-The **Issues Page** helps you methodically review DLQs with messages by listing all queues that are experiencing message processing issues.
+* The DSM [**Issues**][7] page lists all queues that are experiencing message processing issues
 
-## Remediate directly in Datadog
+## Remediate DLQ issues
+You can inspect and resolve non-empty DLQs directly in Datadog by using [Datadog Actions][5].
 
-You can inspect and resolve non-empty DLQs directly in Datadog. In the queue detail side panel:
-* **Peek** to inspect failed message content and identify the root cause
-* **Purge** to clear messages that no longer need processing
-* **Redrive** to requeue messages for another processing attempt
-
-## Troubleshooting
-If you have an AWS integration set up but are unable to see Dead Letter Queue information:
-* Confirm that your role uses the AWS managed `AmazonSQSReadOnlyAccess` policy
-* Alternatively your role needs to have `sqs:ListQueues` and `sqs:GetQueueAttributes` access
-
-To remediate DLQ within Datadog by performing actions such as **peek**, **purge**, and **redrive** you need to create a connection:
+### Setup
+In Datadog, create a [Connection][9]: 
 * A User with secret access key or a Role through assume role
 * Applied on all SQS queues or for a subset of queues
 * Required permissions:
-  * `sqs:ReceiveMessage` (for **peek**)
-  * `sqs:StartMessageMoveTask` (for **redrive**)
-  * `sqs:PurgeQueue` (for **purge**)
+  * `sqs:ReceiveMessage` (for _peek_)
+  * `sqs:StartMessageMoveTask` (for _redrive_)
+  * `sqs:PurgeQueue` (for _purge_)
 
+### Usage
 
-[1]: https://docs.datadoghq.com/data_streams/
-[2]: https://docs.datadoghq.com/integrations/amazon-web-services/
-[3]: https://docs.datadoghq.com/data_streams/metrics_and_tags/#data_streamssqsdead_letter_queuemessages
+After you set up the connection, you can click on a supported queue to open its side panel, where you can use the following actions:
+
+* **Peek** to inspect failed message content and identify the root cause
+* **Redrive** to requeue messages for another processing attempt
+* **Purge** to clear messages that no longer need processing
+
+## Troubleshooting
+If you are unable to see dead letter queue information:
+* Confirm that you have installed the [Datadog-AWS integration][2]
+* Confirm that your AWS role uses the AWS-managed `AmazonSQSReadOnlyAccess` policy
+* Confirm that your role has `sqs:ListQueues` and `sqs:GetQueueAttributes` permissions
+
+[1]: /data_streams/setup
+[2]: /integrations/amazon-web-services/
+[3]: /data_streams/metrics_and_tags/#data_streamssqsdead_letter_queuemessages
 [4]: https://app.datadoghq.com/data-streams/
+[5]: https://app.datadoghq.com/actions
+[6]: https://app.datadoghq.com/data-streams/map
+[7]: https://app.datadoghq.com/data-streams/issues
+[8]: /monitors/types/metric/
+[9]: https://app.datadoghq.com/actions/connections
