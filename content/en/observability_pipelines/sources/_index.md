@@ -54,9 +54,31 @@ After events are ingested by the source, they get sent to different processors a
 
 **Note**: The `bytes in per second` metric in the UI is for ingested raw events, not enriched events.
 
+## TLS certificates
+
+Enable TLS for Observability Pipelines to ensure that logs are encrypted during transit and prevent attackers from tampering with your log data.
+
+Observability Pipelines does not accept self-signed certificates by default because self-signed certificates do not provide secure trust verification and can potentially expose your environment to man-in-the-middle attacks.
+
+If you use a self-signed certificate, the Worker throws the error `unable to get local issuer certificate`. Datadog recommends the following approaches instead:
+
+1. Use a certificate signed by Certificate Authority (CA).
+2. Use a certificate from [Let's Encrypt][3].
+
+If you must use a self-signed certificate because the above approaches are not possible, you can configure your environment to trust the self-signed certificate on the Observability Pipelines Worker host. **Note**: This method is less secure. Datadog recommends this method for internal use only.
+
+For the Worker host to trust the self-signed certificate:
+
+- On Linux hosts, install the certificate in the OS trust store.
+- In Kubernetes, you can either:
+    - Build a custom container image that includes the certificate.
+    - Mount the certificate and update the container's trust store manually.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/troubleshooting/#use-tap-to-see-your-data
+[3]: https://letsencrypt.org/
+

@@ -131,16 +131,8 @@ If the Worker is not starting, Worker logs are not sent to Datadog and are not v
 
 ## Unable to get local issuer certificate
 
-Observability Pipelines does not accept self-signed certificates because they are not secure. If you see the error `unable to get local issuer certificate` and you are using self-signed certificates, do one of the following to resolve the issue:
+Observability Pipelines does not accept self-signed certificates because they are not secure. If you see the error `unable to get local issuer certificate` and you are using self-signed certificates, see [TLS certificates][].
 
-1. Use a certificate signed by Certificate Authority (CA).
-2. Use a certificate from [Let's Encrypt][15].
-3. Configure your environment to trust the self-signed certificate on the Observability Pipelines Worker host. **Note**: This method is less secure. Datadog recommends this method for internal use only. For the Worker host to trust the self-signed certificate:
-    - On Linux hosts, install the certificate into the OS trust store.
-    - In Kubernetes, you can either:
-        - Build a custom container image that includes the certificate.
-        - Mount the certificate and update the container's trust store manually.
-        
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/explorer/search_syntax/
