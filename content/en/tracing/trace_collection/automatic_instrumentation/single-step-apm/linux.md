@@ -15,6 +15,8 @@ On a Linux host or VM, use Single Step Instrumentation (SSI) for APM to install 
 
 ## Enable APM on your applications
 
+<div class="alert alert-info">Before proceeding, confirm that your environment is compatible by reviewing the <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">SSI compatibility guide.</a></div>
+
 To enable APM on a Linux host:
 
 1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
