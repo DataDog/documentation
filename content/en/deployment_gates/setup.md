@@ -57,7 +57,7 @@ The Monitors rule allows you to evaluate the state of a set of monitors over a c
 
 #### Configuration settings
 
-* **Search Query**: Enter the query that will be used to find the monitors to evaluate, based on the [Search Monitor syntax][1]. Use the following syntax to filter on specific monitors tags:
+* **Search Query**: Enter the query that is used to find the monitors to evaluate, based on the [Search Monitor syntax][1]. Use the following syntax to filter on specific monitors tags:
   * Monitor static tags - `service:transaction-backend`
   * Tags within the monitor's query - `scope:"service:transaction-backend"`
   * Tags within a [monitor grouping][2] - `group:"service:transaction-backend"`
