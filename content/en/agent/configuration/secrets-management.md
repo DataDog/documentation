@@ -67,11 +67,11 @@ secret_backend_config:
 
 <!-- -------------------------------------------- START OF SECTION --------------------------------------------->
 
-# <!-- pre tabs -->
+# <!-- pre AWS tabs -->
 More specific setup instructions depends on the backend type used. Refer to the appropriate link for further information: 
 
 
-{{% collapse-content title="AWS Secret and SSM" level="h4" expanded=true id="id-for-anchoring" %}}
+{{% collapse-content title="AWS Secret and SSM" level="h4" expanded=false id="id-for-anchoring" %}}
 The `datadog-secret-backend` utility supports the following AWS services:
 
 |Backend Type                                 | AWS Service                             |
@@ -459,11 +459,12 @@ The `datadog-secret-backend` utility supports the following Azure services:
 
 ##### Azure Authentication
 
-We recommend using Managed Identities in order to authenticate with Azure. This lets you associate cloud resources with AMI accounts, removing the need to put sensitive information in your `datadog.yaml` configuration file.
+Datadog recommends using Managed Identities to authenticate with Azure. This allows you associate cloud resources with AMI accounts and removes the need to put sensitive information in your `datadog.yaml` configuration file.
 
 ##### Managed identity
 
-To access your Key Vault, create a Managed Identity in your environment. Assign that Identity as a Role on your Virtual Machine, which will give it access to your Key Vault's secrets. 
+To access your Key Vault, create a Managed Identity and assign it to your Virtual Machine. Then, configure the appropriate role assignment on the Key Vault to allow that identity to access its secrets.
+
 
 
 #### Backend configuration
@@ -473,7 +474,7 @@ To access your Key Vault, create a Managed Identity in your environment. Assign 
 | `keyvaulturl` | URL of the Azure keyvault  |
 
 <div class="alert alert-info">
-In your <code>datadog.yaml</code> config, the setting <code>secret_backend_type</code> must be set to <code>azure.keyvault</code>. The <strong>backend_type</strong> must be set to <code>azure.keyvault</code> and <strong>keyvaulturl</strong> must be set to your target Azure Key Vault URL.
+In your <code>datadog.yaml</code> config, the <strong>secret_backend_type</strong> must be set to <code>azure.keyvault</code>, the <strong>backend_type</strong> must be set to <code>azure.keyvault</code> and the <strong>keyvaulturl</strong> must be set to your target Azure Key Vault URL.
 </div>
 
 The backend configuration for Azure Key Vault secrets has the following pattern:
@@ -494,7 +495,7 @@ The backend secret is referenced in your Datadog Agent configuration file using 
 api_key: "ENC[{secretHandle}]"
 ```
 
-Azure Keyvault can hold multiple secret keys and values using json. For example, assuming an Azure secret with a **Secret Name** of `MySecret`:
+Azure Keyvault uses JSON to store multiple key-value pairs within a single secret. In this example, assume there is Azure secret with the **Secret Name** `MySecret`:
 
 ```json
 {
@@ -504,7 +505,10 @@ Azure Keyvault can hold multiple secret keys and values using json. For example,
 }
 ```
 
-This can be accessed using a semicolon (`;`) to separate the Secret Name from the Key. The notation in the `datadog.yaml` config file looks like **ENC[SecretName;SecretKey]**. If this semicolon is not present, then the entire string will be treated as the plain text value of the secret. Otherwise, `SecretKey` is the json key referring to the actual secret that you are trying to pull the value of.
+To reference a specific key within that secret, use a semicolon (`;`) to separate the secret name from the key. The notation in the `datadog.yaml` config file looks like **ENC[SecretName;SecretKey]**. 
+
+If this semicolon is not present, the entire string is treated as the plain text value of the secret.
+When the semicolon is used, `SecretKey` refers to the specific JSON key whose value you want to retrieve from within the `MySecret` secret.
 
 ```yaml
 # /etc/datadog-agent/datadog.yml
@@ -515,7 +519,7 @@ property3: "ENC[MySecret;ddorgname]"
 
 #### Configuration example
 
-In the following example, assume the Azure secret name is `MySecretName` with a secret value containing the Datadog Agent api_key:
+In the following example, assume the Azure secret's name is `MySecretName` and its value contains the Datadog Agent `api_key`:
 
 ```json
 {
@@ -523,9 +527,9 @@ In the following example, assume the Azure secret name is `MySecretName` with a 
 }
 ```
 
-Also assume that the Key Vault's URL is `https://mykeyvault.vault.azure.net`
+Assume also that the Key Vault's URL is `https://mykeyvault.vault.azure.net`
 
-The below example shows how to access the secret from the Datadog Agent configuration yaml file(s):
+The following example shows how to access the secret from the Datadog Agent configuration yaml file(s):
 
 ```yaml
 # /etc/datadog-agent/datadog.yaml
@@ -547,7 +551,7 @@ secret_backend_type: azure.keyvault
 secret_backend_config:
   keyvaulturl: https://mykeyvault.vault.azure.net
 ```
-
+<!-- AZURE LINKS -->
 
 [2000]: https://docs.microsoft.com/en-us/Azure/key-vault/secrets/quick-create-portal
 
@@ -570,31 +574,35 @@ The `datadog-secret-backend` utility supports the following Hashicorp services:
 
 ##### Hashicorp Auth Session
 
-Hashicorp Vault supports a variety of authentication methods. The ones supported by this module are as follows:
+Hashicorp Vault supports a variety of authentication methods. The ones supported by this module are:
 
-1. **User Pass Auth**. A Vault username and password defined on the backed configuration's `vault_session` section within the datadog-secret-backend.yaml file.
+1. **User Pass Auth**. A Vault username and password defined on the backed configuration's `vault_session` section within the `datadog-secret-backend.yaml` file.
 
-2. **AWS Instance Profile** If your machine has an AWS IAM role attached to it with the correct permissions, you don't need to define any secret credentials/passwords in your config. Refer to the [AWS Instance Profile section](#aws-instance-profile-instructions) and the [official Hashicorp AWS auth method instructions][3002] for more information.
+2. **AWS Instance Profile** If your machine has an attached AWS IAM role with the correct permissions, you don't need to define any secret credentials or passwords in your config. See the [AWS Instance Profile section](#aws-instance-profile-instructions) and the [official Hashicorp AWS auth method instructions][3002] for more information.
 
-Using environment variables are more complex as they must be configured within the service (daemon) environment configuration or the `dd-agent` user home directory on each Datadog Agent host. Using App Roles and Users (local or LDAP) are simpler configurations which do not require additional Datadog Agent host configuration.
+Using environment variables is more complex, as they must be configured within the service (daemon) environment or in the `dd-agent` user’s home directory on each Datadog Agent host. In contrast, using App Roles and Users (local or LDAP) is simpler, as it does not require additional configuration on each Datadog Agent host.
 
 #### General Instructions to set up Hashicorp Vault
 1. Run your Hashicorp Vault. For more information on how to do this, please look at the [official Hashicorp Vault documentation][3001]. 
-2. When running the vault, you should have received the variables `VAULT_ADDR` and `VAULT_TOKEN`. Export them as environment variables.
-3. To store your secrets in a certain path, run `vault secrets enable -path=<your path> -version=1 kv` *NOTE*: As of now, only version 1 of the Hashicorp Secrets Engine is supported.
-4. To add your key, run `vault kv put <your path> apikey=your_real_datadog_api_key`. You can conversely run `vault kv get ...` to get said key.
-5. Now you need to write a policy to give permission to pull secrets from your vault. Create a *.hcl file, and include the following permission:
+1. When running the vault, it outputs the variables `VAULT_ADDR` and `VAULT_TOKEN`. Export these as environment variables.
+1. To store your secrets in a certain path, run `vault secrets enable -path=<your path> -version=1 kv` **NOTE**: Only version 1 of the Hashicorp Secrets Engine is supported at this time.
+1. To add your key, run `vault kv put <your path> apikey=your_real_datadog_api_key`. To retrieve the key `vault kv get <your path>`.
+1. To write a policy that gives the permission to pull secrets from your vault, create a `*.hcl` file, and include the following permission:
 ```
 path "<your path>" {
   capabilities = ["read"]
 }
 ```
-Now run `vault policy write <policy-name> <path to *.hcl file>`
-6. Now you need to choose the method of authenticating to your vault. If using the AWS Instance Profile method, run `vault auth enable aws`. 
+  Then, run `vault policy write <policy-name> <path to *.hcl file>`
+
+1. Choose the method of authenticating to your vault. If using the AWS Instance Profile method, run `vault auth enable aws`. 
 
 ### AWS Instance Profile Instructions
 
-We strongly recommend that you authenticate using this method if you are running your Hashicorp Vault from an AWS-connected machine. Please first do the setup described in the [general AWS Instruction Profile Instructions](#instance-profile-instructions). After following those instructions, you should have attached a policy to your IAM role. To this policy, you will need to add the `sts:GetCallerPolicy` permission as well:
+Datadog strongly recommends that you authenticate using the Instance Profile method if you are running your Hashicorp Vault from an AWS-connected machine. 
+
+First follow the setup in the [Instruction Profile Instructions](#instance-profile-instructions) to attach a policy to your IAM role. Then, add the `sts:GetCallerPolicy` permission to this policy:
+
 ```json
 {
   "Version": "2012-10-17",
@@ -607,7 +615,8 @@ We strongly recommend that you authenticate using this method if you are running
   ]
 }
 ```
-After following the General Instructions, you will aslo need to write an authentication-specific vault policy. Run:
+
+After you have added the necessary permissions, run the below to write an authentication-specific vault policy:
 
 ```
 vault write auth/aws/role/<Name of AWS IAM Role> \
@@ -659,7 +668,9 @@ The following `vault_session` settings are available:
 The <strong>backend_type</strong> must be set to <code>hashicorp.vault</code>.
 </div>
 
-The path to the secret and the backend secret itself is referenced in your Datadog Agent configuration file using the **ENC** notation. The two need to be separated by a semicolon. The backend configuration for Hashicorp Vault has the following pattern:
+The path to the secret and the backend secret itself is referenced in your Datadog Agent configuration file using the **ENC** notation. Use a semicolon to separate these two values. 
+
+The backend configuration for Hashicorp Vault has the following pattern:
 
 ```yaml
 # /etc/datadog-agent/datadog.yaml
@@ -684,7 +695,7 @@ In the following examples, assume the Hashicorp Vault secret path prefix is `/Da
 /DatadogAgent/Production/api_key: (SecureString) "••••••••••••0f83"
 ```
 
-Each of the following examples will access the secret from the Datadog Agent configuration yaml file(s) as such:
+Each of the following examples access the secret from the Datadog Agent configuration yaml file(s) as such:
 
 ```yaml
 # /etc/datadog-agent/datadog.yaml
@@ -714,7 +725,7 @@ secret_backend_config:
     vault_aws_role: Name-of-IAM-role-attached-to-machine
     aws_region: us-east-1
 ```
-
+<!-- HASHICORP LINKS -->
 [3000]: https://learn.hashicorp.com/tutorials/vault/static-secrets
 [3001]: https://www.hashicorp.com/en/products/vault
 [3002]: https://developer.hashicorp.com/vault/docs/auth/aws#aws-auth-method
@@ -722,7 +733,7 @@ secret_backend_config:
 
 # <!-- ######### F I L E ############ -->
 
-{{% collapse-content title="JSON or YAML File Secret Backends" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="JSON or YAML File Secret Backends" level="h4" expanded=true id="id-for-anchoring" %}}
 
 |Backend Type                                 | AWS Service                             |
 |---------------------------------------------|-----------------------------------------|
@@ -730,7 +741,9 @@ secret_backend_config:
 |[file.yaml](#yaml-backend-settings)          |[YAML][4002]                             |
 
 ##### File Permission 
-The `datadog-secret-backend` file backend only requires read permissions from the local system Datadog Agent user (`Linux: dd-agent`; `Windows: ddagentuser`) to the configured JSON or YAML files.
+The `datadog-secret-backend `file backend only requires read permissions for the configured JSON or YAML files. These permissions must be granted to the local Datadog Agent user (`dd-agent` on Linux, `ddagentuser` on Windows).
+
+
 {{< tabs >}}
 {{% tab "JSON File Backend" %}}
 
@@ -766,7 +779,7 @@ api_key: "ENC[{json_property_name}"
 
 ##### Configuration Examples
 
-In the following examples, assume the JSON file is `/opt/production-secrets/secrets.json` with the following file contents:
+In the following examples, assume the JSON file is `/opt/production-secrets/secrets.json` and contains the Datadog Agent `api_key`:
 
 ```json
 {
@@ -774,7 +787,7 @@ In the following examples, assume the JSON file is `/opt/production-secrets/secr
 }
 ```
 
-The following example will access the JSON secret from the Datadog Agent configuration YAML file(s) as such:
+This is how to then access the JSON secret from the Datadog Agent configuration YAML file(s):
 
 ```yaml
 # /etc/datadog-agent/datadog.yaml
@@ -836,14 +849,15 @@ api_key: "ENC[{yaml_property_name}]"
 
 ##### Configuration Examples
 
-In the following examples, assume the YAML file is `/opt/production-secrets/secrets.yaml` with the following file contents:
+In the following examples, assume the YAML file is named `/opt/production-secrets/secrets.yaml` and contains the Datadog Agent `api_key`:
 
 ```yaml
 ---
 api_key: "••••••••••••0f83"
 ```
 
-The following example will access the YAML secret from the Datadog Agent configuration YAML file(s) as such:
+This is how to then access the YAML secret from the Datadog Agent configuration YAML file(s):
+
 
 ```yaml
 # /etc/datadog-agent/datadog.yaml
@@ -879,7 +893,7 @@ secret_backend_config:
 <!-- ######### END ############ -->
 
 
-# <!-- ------------------------------------------------------------------- END OF SECTION ---------------------------------------------------------------------------- -->
+# <!-- -------------------------------------- END OF SECTION----------------------------------------------------->
 
 
 
