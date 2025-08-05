@@ -48,7 +48,7 @@ instances:
 
 ### Option 1: Using the datadog_secret_backend executable embedded in the Agent
 
-Starting in Agent version 7.69, the [datadog-secret-backend][7] executable will be shipped within the Datadog Agent. The major change in this option is that the backend executable is now configured directly by setting the [secret_backend_type][8] and [secret_backend_config][9] options in the datadog.yaml file. 
+Starting in Agent version 7.69, the `datadog-secret-backend` executable is shipped within the Datadog Agent. The major change in this option is that the backend executable is configured directly by setting the [secret_backend_type][8] and [secret_backend_config][9] options in the datadog.yaml file. 
 
 `secret_backend_type` is where the type of the backend is specified, and `secret_backend_config` is where additional configuration relevant for pulling secrets is included. To use this embedded executable, in your datadog.yaml file, add:
 
@@ -61,12 +61,12 @@ secret_backend_config:
 
 <!-- -------------------------------------------------------------------- START OF SECTION ------------------------------------------------------------------------------>
 
-More specific setup instructions will depend on the backend type used. Refer to the appropriate link for further information: 
+More specific setup instructions depends on the backend type used. Refer to the appropriate link for further information: 
 
 <!-- https://github.com/DataDog/datadog-secret-backend/tree/v1/docs -->
 
 {{% collapse-content title="AWS Secret and SSM" level="h4" expanded=false id="id-for-anchoring" %}}
-The `datadog-secret-backend` utility currently supports the following AWS services:
+The `datadog-secret-backend` utility supports the following AWS services:
 
 |Backend Type                                 | AWS Service                             |
 |---------------------------------------------|-----------------------------------------|
@@ -79,17 +79,17 @@ Supported AWS backends can leverage the Default Credential Provider Chain as def
 
 1. **Environment Variables**. Note these environment variables would have to be defined as environment variables within the Datadog Agent service configuration on the Datadog Agent host system.
 
-2. **CLI Configuration File**. Currently only the default **CLI Configuration File** of the Datadog Agent user is supported, e.g. `${HOME}/.aws/config` or `%USERPROFILE%\.aws\config`. The Datadog Agent user is typically `dd-agent`.
+2. **CLI Configuration File**. Only the default **CLI Configuration File** of the Datadog Agent user is supported, for example, `${HOME}/.aws/config` or `%USERPROFILE%\.aws\config`. The Datadog Agent user is typically `dd-agent`.
 
-3. **Instance Profile Credentials**. Container or EC2 hosts with an assigned [IAM Instance Profile][1003]
+3. **Instance Profile Credentials**. Container or EC2 hosts with an assigned [IAM Instance Profile][1999]
 
 Using environment variables or session profiles are more complex as they must be configured within the service (daemon) environment configuration or the `dd-agent` user home directory on each Datadog Agent host. Using IAM User Access Keys or an EC2 Instance Profile are simpler configurations which do not require additional Datadog Agent host configuration.
 
 ##### Instance Profile Instructions
 
-We **highly encourage** to use the instance profile method of retrieving secrets, as AWS handles any environment variables or session profiles for you. 
+We **strongly encourage** using the instance profile method of retrieving secrets, as AWS handles any environment variables or session profiles for you. 
 
-To use an Instance Profile, create an IAM role in the same account that you are hosting your EC2, ECS, etc. from. Set the "trusted entity type" to the "AWS Service" and choose the relevant service to you (for example, EC2 if you are using an EC2 instance). This IAM role can now be used by an instance of the service that you selected. 
+To use an Instance Profile, create an IAM role in the same account that you are hosting your EC2, ECS, etc. from. Set the "trusted entity type" to the "AWS Service" and choose the relevant service to you (for example, EC2 if you are using an EC2 instance). This IAM role can be used by an instance of the service that you selected. 
 
 Then, choose a permission policy. Instructions on what permission policy to create are dependent on whether you are using [AWS Secrets](#aws-secrets-manager-backend) or [AWS SSM](#aws-systems-manager-parameter-store-backend). Finally, set a trust policy--replace ${Service} with the service that you are using:
 
@@ -124,7 +124,7 @@ The following `aws_session` settings are available on all supported AWS Service 
 | aws_secret_access_key | AWS IAM User Access Key Secret |
 
 <div class="alert alert-info">
-In <i>most</i> cases, you'll need to specify <code>aws_region</code> to correspond to the region hosting the target Parameter Store (aws.ssm) or Secrets Manager (aws.secrets) secret.
+In <i>most</i> cases, all you need to do in the <code>aws_session</code> is specify the <code>aws_region</code> corresponding to the region hosting the target Parameter Store (aws.ssm) or Secrets Manager (aws.secrets) secret.
 </div>
 
 When handling single strings, the backend configuration setting `force_string: true` will coerce the secret as a string value.
@@ -274,7 +274,6 @@ secret_backend_config:
 [1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
 [1001]: https://docs.aws.amazon.com/secretsmanager/
 [1002]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_examples_cross.html
-[1003]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html
 
 {{% /tab  %}}
 
@@ -375,7 +374,7 @@ property2: "ENC[/DatadogAgent/Production/ParameterKey2]"
 property3: "ENC[/DatadogAgent/Production/ParameterKey3]"
 ```
 
-Currently, `StringList` parameter store values will be retained as a comma-separated list. `SecureString` is properly decrypted automatically, assuming that the `aws_session` credentials have appropriate rights to the KMS key used to encrypt the `SecureString` value.
+The `StringList` parameter store values are retained as a comma-separated list. `SecureString` is properly decrypted automatically, assuming that the `aws_session` credentials have appropriate rights to the KMS key used to encrypt the `SecureString` value.
 
 #### Configuration Examples
 
@@ -419,6 +418,9 @@ aws_session:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+[1999]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html
+
 {{% /collapse-content %}} 
 
 
@@ -432,7 +434,7 @@ aws_session:
 
 ##### Supported backends
 
-The `datadog-secret-backend` utility currently supports the following Azure services:
+The `datadog-secret-backend` utility supports the following Azure services:
 
 | Backend Type                            | Azure Service          |
 | ----------------------------------------|------------------------|
@@ -540,10 +542,10 @@ secret_backend_config:
 
 
 <!-- ######### H A S H I C O R P ############ -->
-{{% collapse-content title="Hashicorp Vault Backend" level="h4" expanded=true id="id-for-anchoring" %}}
+{{% collapse-content title="Hashicorp Vault Backend" level="h4" expanded=false id="id-for-anchoring" %}}
 ##### Supported Backends
 
-The `datadog-secret-backend` utility currently supports the following Hashicorp services:
+The `datadog-secret-backend` utility supports the following Hashicorp services:
 
 | Backend Type                               | Hashicorp Service                                  |
 | ------------------------------------------ | -------------------------------------------------- |
@@ -551,7 +553,7 @@ The `datadog-secret-backend` utility currently supports the following Hashicorp 
 
 ##### Hashicorp Auth Session
 
-Hashicorp Vault supports a variety of authentication methods. The ones currently supported by this module are as follows:
+Hashicorp Vault supports a variety of authentication methods. The ones supported by this module are as follows:
 
 1. **User Pass Auth**. A Vault username and password defined on the backed configuration's `vault_session` section within the datadog-secret-backend.yaml file.
 
@@ -562,7 +564,7 @@ Using environment variables are more complex as they must be configured within t
 #### General Instructions to set up Hashicorp Vault
 1. Run your Hashicorp Vault. For more information on how to do this, please look at the [official Hashicorp Vault documentation][3001]. 
 2. When running the vault, you should have received the variables `VAULT_ADDR` and `VAULT_TOKEN`. Export them as environment variables.
-3. To store your secrets in a certain path, run `vault secrets enable -path=<your path> -version=1 kv` *NOTE*: As of now, only version 1 of the Hashicrop Secrets Engine is supported.
+3. To store your secrets in a certain path, run `vault secrets enable -path=<your path> -version=1 kv` *NOTE*: As of now, only version 1 of the Hashicorp Secrets Engine is supported.
 4. To add your key, run `vault kv put <your path> apikey=your_real_datadog_api_key`. You can conversely run `vault kv get ...` to get said key.
 5. Now you need to write a policy to give permission to pull secrets from your vault. Create a *.hcl file, and include the following permission:
 ```
@@ -575,7 +577,7 @@ Now run `vault policy write <policy-name> <path to *.hcl file>`
 
 ### AWS Instance Profile Instructions
 
-We HIGHLY recommend that you authenticate using this method if you are running your Hashicorp Vault from an AWS-connected machine. Please first do the setup described in the [general AWS Instruction Profile Instructions](#instance-profile-instructions). After following those instructions, you should have attached a policy to your IAM role. To this policy, you will need to add the `sts:GetCallerPolicy` permission as well:
+We strongly recommend that you authenticate using this method if you are running your Hashicorp Vault from an AWS-connected machine. Please first do the setup described in the [general AWS Instruction Profile Instructions](#instance-profile-instructions). After following those instructions, you should have attached a policy to your IAM role. To this policy, you will need to add the `sts:GetCallerPolicy` permission as well:
 ```json
 {
   "Version": "2012-10-17",
@@ -703,7 +705,7 @@ secret_backend_config:
 
 <!-- ######### F I L E ############ -->
 
-{{% collapse-content title="JSON or YAML File Secret Backends" level="h4" expanded=true id="id-for-anchoring" %}}
+{{% collapse-content title="JSON or YAML File Secret Backends" level="h4" expanded=false id="id-for-anchoring" %}}
 
 |Backend Type                                 | AWS Service                             |
 |---------------------------------------------|-----------------------------------------|
@@ -1375,5 +1377,5 @@ This command returns whether the permissions are valid for the Agent to view thi
 [5]: https://github.com/DataDog/datadog-secret-backend/blob/main/docs/aws/secrets.md
 [6]: /agent/configuration/agent-commands/#restart-the-agent
 [7]: /opentelemetry/setup/ddot_collector/
-[8]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml#L867
-[9]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml#L880
+[8]: https://github.com/DataDog/datadog-agent/blob/7.69.x/pkg/config/config_template.yaml#L867
+[9]: https://github.com/DataDog/datadog-agent/blob/7.69.x/pkg/config/config_template.yaml#L880
