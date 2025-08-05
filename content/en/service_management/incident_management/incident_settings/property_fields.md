@@ -8,7 +8,7 @@ Custom property fields enable you to capture important attributes unique to your
 
 You can use custom fields to filter for specific subsets of incidents on the [Homepage][2] and in [Incident Management Analytics][3]. You can also build conditions around custom fields in [incident notification rules][9].
 
-## Field Sections
+## Field sections
 
 Property fields are organized into three tables that correspond to where the fields appear in the [Overview tab][1] of the Incident Details page:
 
@@ -18,7 +18,7 @@ Property fields are organized into three tables that correspond to where the fie
 
 You can move any property field into a different table or reorder them in the same table by dragging and dropping the field using the drag handle icon.
 
-## Default Fields
+## Default fields
 
 {{< img src="/service_management/incidents/incident_settings/settings_property_fields.png" alt="Property Field Settings" style="width:100%;">}}
 
@@ -34,7 +34,7 @@ There are five default fields:
 
 You cannot delete default fields.
 
-### Field Types
+### Field types
 
 You can define new fields of any of the following field types.
 
@@ -59,13 +59,13 @@ You can define new fields of any of the following field types.
 **Datetime**
 : Accepts any datetime. Values are stored in UTC and are parsed and formatted using the user's local timezone.
 
-### Required at Declaration
+### Required at declaration
 
 If you mark a field as "Required at Declaration," users will be required to enter a value when declaring incidents.
 
 This option does not affect Datadog Workflow automations or API requests.
 
-### Prompt User
+### Prompt user
 
 Incident Management can be configured to prompt responders to set particular fields when changing the incident's state. To set this behavior for a field, edit the field's "Prompt user" option.
 
@@ -73,7 +73,7 @@ Incident Management can be configured to prompt responders to set particular fie
 
 **When the incident is moved to Stable/Resolved/Completed**: Users are prompted to enter a value for the field when moving the incident to the selected state and any later state. For example, if you select "When the incident is moved to Stable," users are prompted to fill out the field when moving incidents to Stable, Resolved, or Completed, as long as the field remains empty.
 
-### Custom Fields in Search and Analytics
+### Custom fields in search and analytics
 
 Single-Select, Multi-Select, Text Array, Number, and Datetime fields are searchable facets in the [Incident Homepage][2] and [Incident Management Analytics][3].
 
