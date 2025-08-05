@@ -60,7 +60,7 @@ Enable TLS for Observability Pipelines to ensure that logs are encrypted during 
 
 Observability Pipelines does not accept self-signed certificates by default because self-signed certificates do not provide secure trust verification and can potentially expose your environment to man-in-the-middle attacks.
 
-To check if your certificate is self signed, run the command:
+To check if your certificate is self signed, run this command:
 
 ```
 openssl verify -CAfile certificate.pem certificate.pem
