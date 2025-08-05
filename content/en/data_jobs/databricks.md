@@ -294,7 +294,7 @@ If you need more granular control, grant these minimal permissions to the follow
 | Compute                          | [CAN ATTACH TO][21]
 | Lakeflow Declarative Pipelines   | [CAN VIEW][22]
 | Query                            | [CAN VIEW][23]
-| SQL warehouse                    | [CAN VIEW][24]
+| SQL warehouse                    | [CAN MONITOR][24]
 
 
 ### Tag spans at runtime

@@ -99,9 +99,9 @@ In this example, the tag configuration modal shows a metric with a current volum
 {{< img src="metrics/volume/reduce_metric_vol_cost_tags_05292025.png" alt="Tag configuration modal showing an example metric with a current volume of 7,139 index metrics and an estimated new volume of 3, with an allowlist of suggested tags" style="width:80%;" >}}
 
 ## Analyze metrics' utility and relative value in Datadog
-Metrics without Limits™ allows you to find metrics that are underused in Datadog with the Metrics Related Assets feature. A metrics related asset refers to any dashboard, notebook, monitor, or SLO that queries a particular metric. Datadog's intelligent query insights surface the popularity and quantity of these related assets so you can evaluate metric utility within your organization. Use this information to make data-driven decisions. Identify how your team can use existing metrics to get more value from your observability spend and reduce metric volume and cost.
+Metrics without Limits™ allows you to find metrics that are underused in Datadog with the Metrics Related Assets feature. A metrics related asset refers to any dashboard, notebook, monitor, or SLO that queries a particular metric. Datadog's intelligent query insights surface the popularity and quantity of these related assets so you can evaluate metric utility within your organization. The **Tags** column shows exactly which tags are powering each asset, helping you preserve critical visibility while making data-driven decisions when configuring your metrics.
 
-{{< img src="metrics/related_assets_2025-01-27.png" alt="Metric detail side panel showing the Related Assets section. The example metric is applied to three dashboards" style="width:100%;" >}}
+{{< img src="metrics/related_assets_2025-07-31.png" alt="Metric detail side panel showing the Related Assets section. The example metric is applied to three dashboards" style="width:100%;" >}}
 
 To view a metric's related assets:
 1. Click on the metric name to open its details side panel.
