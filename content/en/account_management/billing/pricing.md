@@ -72,8 +72,18 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 
 ## Incident Management
 
-* Datadog tracks the number of monthly active users who participate in incident management and response.
- * An **active user** is only counted if they contribute comments or signals (graphs, links, etc.) to an incident. Anyone who only opens or closes an incident or anyone who only views the incident are not counted. Additionally, these are not named seats, so you do not need to determine which specific users have access.
+* For organizations on a new seat-based plan, Datadog charges based on your organization's seat commitment. Self-service seat management will be available soon.
+* For organizations on the legacy usage-based plan, Datadog tracks the number of monthly active Incident Management users.
+  * Datadog counts a user as an **active user** if they have used Datadog capabilities to contribute substantively to the incident response. For example, you become an active user for the month when you:
+    * Update an incident's state, severity, or other fields
+    * Comment on the incident's timeline
+    * Send incident notifications
+    * Add responders or assign responder types
+    * Create, modify, or assign incident follow-ups
+  * You do _not_ become an active user when you:
+    * Declare, view, or search for incidents
+    * Join third-party channels, meetings, or calls that are connected to the incident
+    * Post messages in the incident's Slack channel or Microsoft Teams channel (even if the message is automatically synced to the incident timeline)
 
 ## CI Visibility
 
