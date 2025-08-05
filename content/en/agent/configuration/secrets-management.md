@@ -67,36 +67,42 @@ secret_backend_config:
 
 <!-- -------------------------------------------- START OF SECTION --------------------------------------------->
 
+# <!-- pre tabs -->
 More specific setup instructions depends on the backend type used. Refer to the appropriate link for further information: 
 
 
-{{% collapse-content title="AWS Secret and SSM" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="AWS Secret and SSM" level="h4" expanded=true id="id-for-anchoring" %}}
 The `datadog-secret-backend` utility supports the following AWS services:
 
 |Backend Type                                 | AWS Service                             |
 |---------------------------------------------|-----------------------------------------|
-|[aws.secrets](#aws-secrets-manager-backend)  |[AWS Secrets Manager][1]                 |
-|[aws.ssm](#aws-systems-manager-parameter-store-backend) |[AWS Systems Manager Parameter Store][2] |
+|`aws.secrets` |[AWS Secrets Manager][1000]                 |
+|`aws.ssm` |[AWS Systems Manager Parameter Store][1001] |
 
 #### AWS Session
 
-Supported AWS backends can leverage the Default Credential Provider Chain as defined by the AWS SDKs and CLI. As a result, the following order of precedence is used to determine the AWS backend service credential.
+Supported AWS backends can leverage the Default Credential Provider Chain as defined by the [AWS SDKs][1002] and [CLI][1003]. As a result, the following order of precedence is used to determine the AWS backend service credential:
 
-1. **Environment Variables**. Note these environment variables would have to be defined as environment variables within the Datadog Agent service configuration on the Datadog Agent host system.
+1. **Environment Variables**. These environment variables would have to be defined as environment variables within the Datadog Agent service configuration on the Datadog Agent host system.
 
-2. **CLI Configuration File**. Only the default **CLI Configuration File** of the Datadog Agent user is supported, for example, `${HOME}/.aws/config` or `%USERPROFILE%\.aws\config`. The Datadog Agent user is typically `dd-agent`.
+2. **CLI Configuration File**. Only the default CLI Configuration File of the Datadog Agent user is supported, for example, `${HOME}/.aws/config` or `%USERPROFILE%\.aws\config`. The Datadog Agent user is typically `dd-agent`.
 
-3. **Instance Profile Credentials**. Container or EC2 hosts with an assigned [IAM Instance Profile][1999]
+3. **Instance Profile Credentials**. Container or EC2 hosts with an assigned [IAM Instance Profile][1004]
 
-Using environment variables or session profiles are more complex as they must be configured within the service (daemon) environment configuration or the `dd-agent` user home directory on each Datadog Agent host. Using IAM User Access Keys or an EC2 Instance Profile are simpler configurations which do not require additional Datadog Agent host configuration.
+Using environment variables or session profiles are more complex as they must be configured within the service (daemon) environment configuration or the `dd-agent` user home directory on each Datadog Agent host. 
+
+Using IAM User Access Keys or an EC2 Instance Profile are simpler configurations which do not require additional Datadog Agent host configuration.
 
 ##### Instance Profile Instructions
 
-We **strongly encourage** using the instance profile method of retrieving secrets, as AWS handles any environment variables or session profiles for you. 
+Datadog **strongly recommends** using the [instance profile method][1006] of retrieving secrets, as AWS handles all environment variables and session profiles for you. 
 
-To use an Instance Profile, create an IAM role in the same account that you are hosting your EC2, ECS, etc. from. Set the "trusted entity type" to the "AWS Service" and choose the relevant service to you (for example, EC2 if you are using an EC2 instance). This IAM role can be used by an instance of the service that you selected. 
+To use an instance profile, start by creating an IAM role in the same account your services (sush as EC2 or ECS) are running. When setting up the role, specify the "trusted entity type" as `AWS Service`, and select the appropriate service (for example, choose `EC2` if you're working with an EC2 instance). This IAM role is then available for use by instances of the selected service. 
 
-Then, choose a permission policy. Instructions on what permission policy to create are dependent on whether you are using [AWS Secrets](#aws-secrets-manager-backend) or [AWS SSM](#aws-systems-manager-parameter-store-backend). Finally, set a trust policy--replace ${Service} with the service that you are using:
+
+Next, attach a permissions policy to the IAM role. The specific policy you need depends on whether you're using [AWS Secrets Manager][1000] or [AWS Systems Manager Parameter Store][1001]. 
+
+Then, configure the trust policy for the role and be sure to replace `${Service}` with the name of the service you selected earlier:
 
 ```json
 {
@@ -113,7 +119,8 @@ Then, choose a permission policy. Instructions on what permission policy to crea
 }
 ```
 
-Now for the instance that you are retrieving secrets for, set the "IAM Role" section to be this role that you have just created. Restart your instance after doing this.
+Finally, for the instance that is retrieving secrets, assign the IAM role you just created. After assigning the role, restart the instance to apply the changes.
+
 
 ##### AWS Session Settings
 
@@ -121,26 +128,27 @@ The following `aws_session` settings are available on all supported AWS Service 
 
 | Setting | Description |
 | --- | --- |
-| aws_region | AWS Region |
-| aws_profile | AWS Session Profile |
-| aws_role_arn | AWS sts:AssumeRole ARN |
-| aws_external_id | AWS sts:AssumeRole ExternalId |
-| aws_access_key_id | AWS IAM User Access Key ID |
-| aws_secret_access_key | AWS IAM User Access Key Secret |
+| `aws_region` | AWS Region |
+| `aws_profile` | AWS Session Profile |
+| `aws_role_arn` | AWS sts:AssumeRole ARN |
+| `aws_external_id` | AWS sts:AssumeRole ExternalId |
+| `aws_access_key_id` | AWS IAM User Access Key ID |
+| `aws_secret_access_key` | AWS IAM User Access Key Secret |
 
 <div class="alert alert-info">
-In <i>most</i> cases, all you need to do in the <code>aws_session</code> is specify the <code>aws_region</code> corresponding to the region hosting the target Parameter Store (aws.ssm) or Secrets Manager (aws.secrets) secret.
+In <i>most</i> cases, you only need to set the <code>aws_region</code> in the <code>aws_session</code> to match the region where the target Parameter Store (aws.ssm) or Secrets Manager (aws.secrets) secret is located.
 </div>
 
-When handling single strings, the backend configuration setting `force_string: true` will coerce the secret as a string value.
+When working with single strings, setting `force_string: true` in the backend configuration ensures the secret is treated as a string value.
 
-<!-- ################## A W S - secrets ##################### -->
+
+# <!-- ################## A W S - secrets ##################### -->
 {{< tabs >}}
 {{% tab "AWS Secrets" %}}
 
 ##### IAM Permission Policy (if using an Instance Profile)
 
-Create a similar IAM Permission Policy as the example below to allow resources (EC2, ECS, etc. instances) to access your specified secrets. Please refer to the [AWS Secrets Manager official documentation][1001] for more details on allowing resources to access secrets. 
+Create an IAM Permission Policy similar to the following example to allow resources (such as EC2 or ECS instances) to access your specified secrets. For more details on granting resource access to secrets, see the [AWS Secrets Manager official documentation][101]. 
 
 ```json
 {
@@ -160,7 +168,7 @@ Create a similar IAM Permission Policy as the example below to allow resources (
 
 ```
 
-This is just one step in setting up the Instance Profile. Refer to the [Instance Profile Instructions][1002] in the AWS README to complete the setup.
+This is just one step in setting up the instance profile. Make sure to follow the [Instance Profile Instructions](#instance-profile-instructions) to complete the setup.
 
 ##### Backend settings
 
@@ -190,7 +198,8 @@ secret_backend_config:
 ```
 
 
-Cross-account Secrets Manager secrets are supported and tested, but require appropriate permissions on the secret as well as a KMS customer managed key. See more details on this configuration in the [AWS Secrets Manager documentation][1002].
+AWS supports and tests cross-account access to Secrets Manager secrets, but you must grant the correct permissions on both the secret and the KMS customer-managed key. For more details, see the [AWS Secrets Manager documentation][101]
+
 
 The backend secret is referenced in your Datadog Agent configuration file using the **ENC** notation, taking the form **ENC[secretId;secretKey]**. 
 
@@ -208,7 +217,7 @@ api_key: ENC[{secretId};{secretKey}]
 
 ```
 
-The AWS Secrets Manager can hold multiple secret keys and values. A backend configuration using Secrets Manager will have access to all the secret keys defined on the secret. For example, assuming an AWS Secrets Manager secret id of `My-Secret-Backend-Secret`:
+The AWS Secrets Manager can store multiple key-value pairs within a single secret. A backend configuration using Secrets Manager has access to all the keys defined in the secret. For example, assuming an AWS Secrets Manager secret id of `My-Secret-Backend-Secret`:
 
 ```json
 {
@@ -234,11 +243,11 @@ property2: ENC[My-Secret-Backend-Secret;SecretKey2]
 property3: ENC[My-Secret-Backend-Secret;SecretKey3]
 ```
 
-Multiple secret backends, of the same or different types, can be defined in your `datadog-secret-backend` yaml configuration. As a result, you can leverage multiple supported backends (file.yaml, file.json, aws.ssm, and aws.secrets) in your Datadog Agent configuration.
+You can define multiple secret backends, of the same or different types, in your backend YAML configuration. This allows you to use several supported backends (file.yaml, file.json, aws.ssm, and aws.secrets) within your Datadog Agent setup.
 
 #### Configuration examples
 
-In the following examples, assume the AWS Secrets Manager's **secret friendly** name is `/DatadogAgent/Production` with a **secret value** containing the Datadog Agent `api_key`:
+In the following examples, assume the AWS Secrets Manager secret's **friendly name**  is `/DatadogAgent/Production` and its **value** contains the Datadog Agent `api_key`:
 
 ```json
 {
@@ -246,7 +255,7 @@ In the following examples, assume the AWS Secrets Manager's **secret friendly** 
 }
 ```
 
-Each of the following examples will access the secret from the Datadog Agent configuration yaml file(s) as such:
+Each of the following examples access the secret from the Datadog Agent configuration yaml file(s) as such:
 
 ```yaml
 # /etc/datadog-agent/datadog.yaml
@@ -273,20 +282,18 @@ secret_backend_config:
   aws_session:
     aws_region: us-east-1
 ```
-
-[1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
-[1001]: https://docs.aws.amazon.com/secretsmanager/
-[1002]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_examples_cross.html
+<!-- SECRET MANAGER LINKS -->
+[101]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
 
 {{% /tab  %}}
 
-<!-- ################## A W S - ssm ##################### -->
+# <!-- ################## A W S - ssm ##################### -->
 
 {{% tab "AWS SSM" %}}
 
 ##### IAM Permission Policy (if using an Instance Profile)
 
-Create a similar IAM Permission Policy as the following example to allow resources (EC2, ECS, etc. instances) to access your specified secrets. Please refer to the [AWS SSM official documentation][1501] for more details on allowing resources to access secrets. 
+Create an IAM Permission Policy similar to the following example to allow resources (such as EC2 or ECS instances) to access your specified secrets. For more details on granting resource access to secrets, see the [AWS Secrets Manager official documentation][201]. 
 
 ```json
 {
@@ -311,7 +318,7 @@ Create a similar IAM Permission Policy as the following example to allow resourc
 
 You can use a wildcard when specifying the parameter path `Resource` (for example, use `datadog/*` for all resources within in the `datadog` folder).
 
-This is just one step in setting up the Instance Profile. Refer to the [Instance Profile Instructions](#instance-profile-instructions)in the AWS documentation to complete the setup.
+This is just one step in setting up the instance profile. Make sure to follow the [Instance Profile Instructions](#instance-profile-instructions) to complete the setup.
 
 ##### Backend settings
 
@@ -327,7 +334,7 @@ This is just one step in setting up the Instance Profile. Refer to the [Instance
 The <strong>secret_backend_type</strong> must be set to <code>aws.ssm</code>.
 </div>
 
-The backend configuration for [AWS SSM Parameter Store][1500] secrets has the following pattern:
+The backend configuration for [AWS SSM Parameter Store][200] secrets has the following pattern:
 
 ```yaml
 # /etc/datadog-agent/datadog.yaml
@@ -366,7 +373,7 @@ secret_backend_config:
     aws_region: us-east-1
 ```
 
-and finally accessed in the Datadog Agent:
+And then accessed in the Datadog Agent:
 
 ```yaml
 # /etc/datadog-agent/datadog.yaml
@@ -375,7 +382,7 @@ property2: "ENC[/DatadogAgent/Production/ParameterKey2]"
 property3: "ENC[/DatadogAgent/Production/ParameterKey3]"
 ```
 
-The `StringList` parameter store values are retained as a comma-separated list. `SecureString` is properly decrypted automatically, assuming that the `aws_session` credentials have appropriate rights to the KMS key used to encrypt the `SecureString` value.
+The `StringList` parameter stores values as a comma-separated list. `SecureString` values are automatically decrypted, provided that the `aws_session` credentials have the necessary permissions for the KMS key used in the encryption.
 
 #### Configuration Examples
 
@@ -385,7 +392,7 @@ In the following examples, assume the AWS Systems Manager Parameter Store secret
 /DatadogAgent/Production/api_key: (SecureString) "••••••••••••0f83"
 ```
 
-Each of the following examples will access the secret from the Datadog Agent configuration yaml file(s) as such:
+Each of the following examples access the secret from the Datadog Agent configuration yaml file(s) as such:
 
 ```yaml
 # /etc/datadog-agent/datadog.yaml
@@ -413,14 +420,23 @@ aws_session:
   aws_region: us-east-1
 ```
 
+<!------ SSM LINKS ------>
 
-[1500]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
-[1501]: https://docs.aws.amazon.com/systems-manager/
+[200]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
+[201]: https://docs.aws.amazon.com/systems-manager/
 
 {{% /tab %}}
 {{< /tabs >}}
 
-[1999]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html
+<!-- COLLAPSE-CONTENT LINKS -->
+
+[1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+[1001]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
+[1002]: https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html
+[1003]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html 
+[1004]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html
+[1005]: https://docs.aws.amazon.com/managedservices/latest/userguide/defaults-instance-profile.html
+[1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
 
 {{% /collapse-content %}} 
 
@@ -429,7 +445,7 @@ aws_session:
 
 
 
-<!-- ######### A Z U R E ############ -->
+# <!-- ######### A Z U R E ############ -->
 
 {{% collapse-content title="Azure Keyvault Backend" level="h4" expanded=false id="id-for-anchoring" %}}
 
@@ -542,7 +558,7 @@ secret_backend_config:
 
 
 
-<!-- ######### H A S H I C O R P ############ -->
+# <!-- ######### H A S H I C O R P ############ -->
 {{% collapse-content title="Hashicorp Vault Backend" level="h4" expanded=false id="id-for-anchoring" %}}
 ##### Supported Backends
 
@@ -704,7 +720,7 @@ secret_backend_config:
 [3002]: https://developer.hashicorp.com/vault/docs/auth/aws#aws-auth-method
 {{% /collapse-content %}} 
 
-<!-- ######### F I L E ############ -->
+# <!-- ######### F I L E ############ -->
 
 {{% collapse-content title="JSON or YAML File Secret Backends" level="h4" expanded=false id="id-for-anchoring" %}}
 
@@ -863,7 +879,7 @@ secret_backend_config:
 <!-- ######### END ############ -->
 
 
-<!-- ------------------------------------------------------------------- END OF SECTION ---------------------------------------------------------------------------- -->
+# <!-- ------------------------------------------------------------------- END OF SECTION ---------------------------------------------------------------------------- -->
 
 
 
