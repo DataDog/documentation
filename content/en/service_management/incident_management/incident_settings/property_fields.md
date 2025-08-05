@@ -16,7 +16,7 @@ Property fields are organized into three tables that correspond to where the fie
 2. `Why It Happened`
 3. `Attributes`
 
-You can move any property field into a different table or reorder them in the same table by dragging and dropping the field using the drag handle icon.
+You can move or reorder property fields by dragging them using the drag handle icon.
 
 ## Default fields
 
@@ -61,7 +61,7 @@ You can define new fields of any of the following field types.
 
 ### Required at declaration
 
-If you mark a field as "Required at Declaration," users will be required to enter a value when declaring incidents.
+If you mark a field as "Required at Declaration," users are required to enter a value when declaring incidents.
 
 This option does not affect Datadog Workflow automations or API requests.
 
@@ -71,7 +71,7 @@ Incident Management can be configured to prompt responders to set particular fie
 
 **During declaration**: Users are prompted to enter a value for the field during declaration and at all state changes if the field is empty.
 
-**When the incident is moved to Stable/Resolved/Completed**: Users are prompted to enter a value for the field when moving the incident to the selected state and any later state. For example, if you select "When the incident is moved to Stable," users are prompted to fill out the field when moving incidents to Stable, Resolved, or Completed, as long as the field remains empty.
+**When the incident is moved to Stable/Resolved/Completed**: Users are prompted to enter a value for the field when moving the incident to the selected state and any later state. For example, if you select "When the incident is moved to Stable," users are prompted to fill out the field when moving incidents to Stable, Resolved, or Completed.
 
 ### Custom fields in search and analytics
 
