@@ -20,8 +20,6 @@ You can move or reorder property fields by dragging them using the drag handle i
 
 ## Default fields
 
-{{< img src="/service_management/incidents/incident_settings/settings_property_fields.png" alt="Property Field Settings" style="width:100%;">}}
-
 There are five default fields:
 
 | Fields                   | Description |
@@ -38,10 +36,10 @@ You cannot delete default fields.
 
 You can define new fields of any of the following field types.
 
-**Single-Select**
+**Single Select**
 : A dropdown that accepts one value. You set the available values when defining the field.
 
-**Multi-Select**
+**Multi Select**
 : A dropdown that accepts multiple values. You set the available values when defining the field.
 
 **Text Array**
@@ -61,9 +59,7 @@ You can define new fields of any of the following field types.
 
 ### Required at declaration
 
-If you mark a field as "Required at Declaration," users are required to enter a value when declaring incidents.
-
-This option does not affect Datadog Workflow automations or API requests.
+If you mark a field as "Required at Declaration," users are required to enter a value when declaring incidents. This option does not affect Datadog Workflow automations or API requests.
 
 ### Prompt user
 
