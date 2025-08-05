@@ -6,9 +6,18 @@ further_reading:
   text: "Learn about the Deployment Gates explorer"
 ---
 
+{{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
+Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
+{{< /callout >}}
+
+The Deployment Gates product consists of two main components:
+
+- A **Gate** is defined for a service and environment, and contains one or more rules to evaluate.
+- A **Rule** is a type of evaluation performed as part of a gate, such as checking the status of a set of monitors.
+
 Setting up Deployment Gates involves two steps:
 
-1. Configure a gate and rules in the Datadog UI.
+1. Configure the gate and rules in the Datadog UI.
 2. Update your deployment pipeline to interact with the Deployment Gates API.
 
 ## Create a Deployment Gate
@@ -29,30 +38,30 @@ gate behavior without impacting the deployment pipeline.
 
 ## Add rules to a gate
 
-Each gate requires one or more rules. All rules must pass for the gate to succeed. For each rule, specify:
+Each gate requires one or more rules to evaluate. All rules must pass for the gate to succeed. For each rule, specify:
 
 1. **Name**: Enter a descriptive label (for example, `Check all P0 monitors`).
 2. **Type**: Select `Monitor` or `Faulty Deployment Detection`.
 3. Additional settings based on the selected rule type. See [Rule types](#rule-types) for more information.
-4. **Evaluation Mode**: Enable `Dry Run` to test rule evaluation without affecting the gate result.
+4. **Evaluation Mode**: When a rule is set as a `Dry Run`, its result is not taken into account when computing the overall gate result.
 
 
 ### Rule types
 
 {{< tabs >}}
 {{% tab "Monitors" %}}
-This rule type evaluates the state of your monitors for a configurable period of time. It will fail if at any time during the duration period:
+The Monitors rule allows you to evaluate the state of a set of monitors over a configurable period of time. It will fail if at any time during the evaluation period:
 - No monitors match the query.
 - More than 50 monitors match the query.
 - Any matching monitor is in `ALERT` or `NO_DATA` state.
 
 #### Configuration settings
 
-* **Query**: Enter a monitor query using [Search Monitor syntax][1]. Use the following syntax to filter on specific tags:
+* **Search Query**: Enter the query that is used to find the monitors to evaluate, based on the [Search Monitor syntax][1]. Use the following syntax to filter on specific monitors tags:
   * Monitor static tags - `service:transaction-backend`
   * Tags within the monitor's query - `scope:"service:transaction-backend"`
   * Tags within a [monitor grouping][2] - `group:"service:transaction-backend"`
-* **Duration**: Enter the period of time (in seconds), for which the matching monitors should be evaluated.
+* **Duration**: Enter the period of time (in seconds) for which the matching monitors should be evaluated. The default duration is 0, which means that monitors are evaluated instantly.
 
 #### Example queries
 
@@ -63,15 +72,17 @@ This rule type evaluates the state of your monitors for a configurable period of
 
 #### Notes
 * `group` filters evaluate only matching groups.
-* Muted monitors are automatically excluded (the query always includes `muted:false`).
+* Muted monitors are automatically excluded from the evaluation (the query always includes `muted:false`).
 
 [1]: /monitors/manage/search/
 [2]: /monitors/manage/#triggered-monitors
 {{% /tab %}}
 {{% tab "APM Faulty Deployment Detection" %}}
-This rule type uses Watchdog's [APM Faulty Deployment Detection][1] to compare the deployed version against previous versions of the same service. It can detect:
-* New types of errors
-* Significant increases in error rates
+This rule type uses Watchdog's [APM Faulty Deployment Detection][1] analysis to compare the deployed version against previous versions of the same service. The analysis detects:
+* New types of errors.
+* Significant increases in error rates compared to previous versions.
+
+The analysis is automatically done for all APM-instrumented services, and no prior setup is required.
 
 #### Configuration settings
 
@@ -80,7 +91,7 @@ This rule type uses Watchdog's [APM Faulty Deployment Detection][1] to compare t
 * **Excluded Resources**: Enter a comma-separated list of [APM resources][2] to ignore (such as low-volume or low-priority endpoints).
 
 #### Notes
-- The rule is evaluated for each [additional primary tag][4] value as well as an aggregate analysis. If you only want to consider a single primary tag, you can specify it in the [evaluation query](#evaluate-a-deployment-gate) (see below).
+- The rule is evaluated for each [additional primary tag][4] value as well as an aggregate analysis. If you only want to consider a single primary tag, you can specify it when [requesting a gate evaluation](#evaluate-deployment-gates) (see below).
 - New errors and error rate increases are detected at the resource level.
 - This rule type does not support services marked as `database` or `inferred service`.
 
@@ -93,7 +104,9 @@ This rule type uses Watchdog's [APM Faulty Deployment Detection][1] to compare t
 
 ## Evaluate Deployment Gates
 
-Deployment Gates can be evaluated in various ways, as outlined in the examples below.
+Once you have configured the gates and rules, you can request a gate evaluation when deploying the related service, and decide whether to block or continue the deployment based on the result.
+
+A gate evaluation can be requested in several ways:
 
 {{< tabs >}}
 {{% tab "datadog-ci CLI" %}}
@@ -103,34 +116,35 @@ The [datadog-ci][1] `deployment gate` command includes all the required logic to
 datadog-ci deployment gate --service transaction-backend --env staging
 ```
 
-If the Deployment Gate being evaluated has APM Faulty Deployment Detection rules, you must also specify the version, for example `--version 1.0.1`.
+If the Deployment Gate being evaluated contains APM Faulty Deployment Detection rules, you must also specify the version (for example, `--version 1.0.1`).
 
-The command has the following characteristics:
-* It sends a request to start the evaluation and polls the evaluation status endpoint using the evaluation_id until the evaluation is complete.
+The command has the following behavior:
+* It sends a request to start the gate evaluation and blocks until the evaluation is complete.
 * It provides a configurable timeout to determine the maximum amount of time to wait for an evaluation to complete.
-* It implements automatic retries for errors.
-* It allows you to customize the behavior on unexpected errors, allowing you to consider Datadog failures as either an evaluation pass or a fail.
+* It has built-in automatic retries for errors.
+* It allows you to customize its behavior in case of unexpected Datadog errors with the `--fail-on-error` parameter.
 
 Note that the `deployment gate` command is available in datadog-ci versions v3.17.0 and above.
 
 **Required environment variables**:
-* `DD_API_KEY`: API key used to authenticate the requests.
-* `DD_APP_KEY`: Application key used to authenticate the requests.
+* `DD_API_KEY`: Your [Datadog API key][2], used to authenticate the requests.
+* `DD_APP_KEY`: Your [Datadog application key][3], used to authenticate the requests.
 * `DD_BETA_COMMANDS_ENABLED=1`: The `deployment gate` command is a beta command, so datadog-ci needs to be run with beta commands enabled.
 
-For complete configuration options and detailed usage examples, refer to the [`deployment gate` command documentation][2].
+For complete configuration options and detailed usage examples, refer to the [`deployment gate` command documentation][4].
 
 [1]: https://github.com/DataDog/datadog-ci
-[2]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#gate
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/organization-settings/application-keys
+[4]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#gate
 
 {{% /tab %}}
 {{% tab "Argo Rollouts" %}}
-To call Deployment Gates from an Argo Rollouts Kubernetes Resource, you can create an [AnalysisTemplate][1] or a [ClusterAnalysisTemplate][1]. The template should contain a Kubernetes job that is used to perform the analysis.
+You can call Deployment Gates from an Argo Rollouts Kubernetes Resource by creating an [AnalysisTemplate][1] or a [ClusterAnalysisTemplate][1]. The template should contain a Kubernetes job that executes the [datadog-ci deployment gate command][7] to interact with the Deployment Gates API.
 
-Use this template as a starting point. For the DD_SITE environment variable, be sure to replace `<YOUR_DD_SITE>` with your [Datadog site name][2] (for example, {{< region-param key="dd_site" code="true" >}}).
-
-The command requires an API key and application key. The safest way to provide them is by using [Kubernetes Secrets][3]. This example relies on a secret called `datadog` holding two data values: `api-key` and `app-key`. Alternatively, you can also pass the values in plain text using `value` instead of `valueFrom` in the script below.
-
+Use the template below as a starting point:
+- Replace `<YOUR_DD_SITE>` below with your [Datadog site name][2] (for example, {{< region-param key="dd_site" code="true" >}}).
+- Define the [API key][5] and [application key][6] as environment variables. The example below relies on a [Kubernetes Secret][3] called `datadog` holding two data values: `api-key` and `app-key`. Alternatively, you can also pass the values in plain text using `value` instead of `valueFrom` in the script below.
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -218,6 +232,9 @@ spec:
 [2]: /getting_started/site/
 [3]: https://kubernetes.io/docs/concepts/configuration/secret/
 [4]: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-template-arguments
+[5]: https://app.datadoghq.com/organization-settings/api-keys
+[6]: https://app.datadoghq.com/organization-settings/application-keys
+[7]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#gate
 
 {{% /tab %}}
 {{% tab "Generic script" %}}

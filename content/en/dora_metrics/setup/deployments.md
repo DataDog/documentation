@@ -210,13 +210,13 @@ To confirm that the setup is valid, select your GitHub application in the [GitHu
 {{% /tab %}}
 
 {{% tab "GitLab" %}}
-<div class="alert alert-warning">Repositories from GitLab instances are supported in closed Preview. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.</div>
+If the [GitLab integration][1] is not already installed, install it on the [GitHub integration tile][2].
 
-After your organization has access, follow the [GitLab installation guide][1].
+[1]: https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=gitlabsaasonprem#source-code-management-providers
+[2]: https://app.datadoghq.com/integrations/gitlab-source-code?subPath=configuration
 
 **Note**: The scope of the service account's personal access token needs to be at least `read_api`.
 
-[1]: https://github.com/DataDog/gitlab-integration-setup?tab=readme-ov-file#datadog--gitlab-integration-installation-guide
 {{% /tab %}}
 
 {{% tab "Other Git Providers" %}}
