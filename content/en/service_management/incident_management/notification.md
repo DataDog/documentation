@@ -16,7 +16,7 @@ Effective incident response depends on notifying the right people at the right t
 
 - The **Notifications** tab centralizes stakeholder communications. From here, you can create and send manual updates, save drafts, and view all automated messages triggered by [Notification Rules][1].
 
-- The **Pages** tab helps you manage on-call escalations. From this tab, you can trigger new pages to alert responders based on your [Datadog On-Call][4] teams. This tab also shows a history of all pages sent, whether manually or through [Notification Rules][1], so you can track who has been paged and when.
+- The **Pages** tab helps you manage your on-call pages. From this tab, you can page [Datadog On-Call][4] teams to prompt them to join the incident response. This tab also shows a history of all pages sent, whether manually or through [Notification Rules][1], so that you can track which teams have been paged and when.
 
 These tools ensure that both stakeholders and technical responders are promptly and reliably informed throughout the incident lifecycle.
 
@@ -38,7 +38,7 @@ To page a team or user using [Datadog On-Call][4]:
 1. Navigate to the **Pages** tab of an incident.
 1. Click **Page**.
 1. Select the team or user you want to alert.
-1. (Optional) Assign an incident role to the responder.
+1. (Optional) Assign an incident role automatically to the person who acknowledges the page.
 1. Click **Page**.
 
 ## View all notifications
@@ -61,7 +61,7 @@ For more information on how to configure a new notification rule, see the [Incid
 
 ## Message templates
 
-Message templates are dynamic, reusable messages that can be used in [manual incident notifications](#add-a-notification), or automated [notification rules](#customize-notification-rules). Message templates leverage template variables, such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the notification is being sent for. Message templates have Markdown support so that incident notifications can include text formatting, tables, indented lists, and hyperlinks. Template variables are supported in both the message's title and body.
+Message templates are dynamic, reusable messages that can be used in [manual incident notifications](#add-a-notification), or automated [notification rules](#customize-notification-rules). Message templates leverage template variables, such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the notification is being sent for. Message templates have Markdown support so that incident notifications can include text formatting, tables, indented lists, and hyperlinks. Template variables are supported in both the message's subject and body.
 
 For more information on how to create a message template, see the [Incident Settings][3] documentation.
 

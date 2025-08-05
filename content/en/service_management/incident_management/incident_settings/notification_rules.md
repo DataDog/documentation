@@ -20,10 +20,11 @@ Use notification rules to:
 1. Navigate to [Incident Settings Notification Rules][1].
 1. Click **New Rule**.
 1. Configure the conditions for this notification rule. Select the incident property field `key:value` pairs you want notifications to be sent for. By default, these filters are empty, and a notification rule triggers when an incident is declared or when it's attributes are update.
-3. **Notify**: Select your notification recipients.
+1. **Notify**: Select your notification recipients.
     - Notifications can be sent to any of Datadog's existing [notification integrations][2].
-    - Notifications can be sent to existing [Datadog On-Call teams][4] using the `@oncall` handle.
+    - Notifications can be sent to existing [Datadog On-Call teams][4] using `@oncall-` handles.
     - If you want to notify a recipient's mobile device, select the option for their name that includes **(Mobile Push Notification)**. The recipient must have enabled notifications in the [Datadog mobile app][3] for this option to appear.
+    - If you want to notify the incident Slack channel, use handle `@incident-slack-channel`.
 4. **With Template**: Select the desired message template you want the notification rule to use.
 5. **Renotify on updates to**: Select the incident properties that trigger notifications. A new notification is sent whenever one or more of the selected properties change. **Note**: properties already in your filters (see step 2) are automatically included in these rules.
 6. Click **Save**
