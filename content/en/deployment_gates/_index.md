@@ -27,7 +27,7 @@ Deployment Gates are in Preview. If you're interested in this feature, complete 
 
 Deployment Gates allow you to reduce the likelihood and impact of incidents caused by deployments.
 
-When performing a production rollout, you can use Deployment Gates to evaluate the impact of the new changes by using [Monitors][1] and APM anomalies.
+When performing a production rollout, you can use Deployment Gates to evaluate the impact of the new changes by using [monitors][1] and APM anomalies.
 When anomalies or performance regressions are detected, you can automatically halt the release, preventing unstable code from reaching a wider user base. Additionally, you can then use Deployment Gates as the entry-point to investigate the problem.
 
 For setup instructions, see [Set up Deployment Gates][2]. After the setup is completed, you can track and analyze gate evaluations through the [Deployment Gates Evaluations][3] page:

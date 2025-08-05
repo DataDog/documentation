@@ -13,7 +13,7 @@ Deployment Gates are in Preview. If you're interested in this feature, complete 
 The Deployment Gates product consists of two main components:
 
 - A **Gate** is defined for a service and environment, and contains one or more rules to evaluate.
-- A **Rule** is a type of evaluation performed as part of a gate, such as checking the status of a set of Monitors.
+- A **Rule** is a type of evaluation performed as part of a gate, such as checking the status of a set of monitors.
 
 Setting up Deployment Gates involves two steps:
 
@@ -43,7 +43,7 @@ Each gate requires one or more rules to evaluate. All rules must pass for the ga
 1. **Name**: Enter a descriptive label (for example, `Check all P0 monitors`).
 2. **Type**: Select `Monitor` or `Faulty Deployment Detection`.
 3. Additional settings based on the selected rule type. See [Rule types](#rule-types) for more information.
-4. **Evaluation Mode**: When a rule is set as a `Dry Run`, its result will not be taken into account when computing the overall gate result.
+4. **Evaluation Mode**: When a rule is set as a `Dry Run`, its result is not taken into account when computing the overall gate result.
 
 
 ### Rule types
@@ -82,7 +82,7 @@ This rule type uses Watchdog's [APM Faulty Deployment Detection][1] analysis to 
 * New types of errors.
 * Significant increases in error rates compared to previous versions.
 
-The analysis is automatically done for all APM-instrumented services, and no previous setup is required.
+The analysis is automatically done for all APM-instrumented services, and no prior setup is required.
 
 #### Configuration settings
 
@@ -116,19 +116,19 @@ The [datadog-ci][1] `deployment gate` command includes all the required logic to
 datadog-ci deployment gate --service transaction-backend --env staging
 ```
 
-If the Deployment Gate being evaluated contains APM Faulty Deployment Detection rules, you must also specify the version, for example `--version 1.0.1`.
+If the Deployment Gate being evaluated contains APM Faulty Deployment Detection rules, you must also specify the version (for example, `--version 1.0.1`).
 
 The command has the following behavior:
 * It sends a request to start the gate evaluation and blocks until the evaluation is complete.
 * It provides a configurable timeout to determine the maximum amount of time to wait for an evaluation to complete.
 * It has built-in automatic retries for errors.
-* It allows you to customize its behavior in case of unexpected Datadog errors, via the `--fail-on-error` parameter.
+* It allows you to customize its behavior in case of unexpected Datadog errors with the `--fail-on-error` parameter.
 
 Note that the `deployment gate` command is available in datadog-ci versions v3.17.0 and above.
 
 **Required environment variables**:
 * `DD_API_KEY`: Your [Datadog API key][2], used to authenticate the requests.
-* `DD_APP_KEY`: Your [Datadog Application key][3], used to authenticate the requests.
+* `DD_APP_KEY`: Your [Datadog application key][3], used to authenticate the requests.
 * `DD_BETA_COMMANDS_ENABLED=1`: The `deployment gate` command is a beta command, so datadog-ci needs to be run with beta commands enabled.
 
 For complete configuration options and detailed usage examples, refer to the [`deployment gate` command documentation][4].
@@ -140,11 +140,11 @@ For complete configuration options and detailed usage examples, refer to the [`d
 
 {{% /tab %}}
 {{% tab "Argo Rollouts" %}}
-You can call Deployment Gates from an Argo Rollouts Kubernetes Resource by creating an [AnalysisTemplate][1] or a [ClusterAnalysisTemplate][1]. The template should contain a Kubernetes job, that executes the [datadog-ci deployment gate command][7] to interact with the Deployment Gates API.
+You can call Deployment Gates from an Argo Rollouts Kubernetes Resource by creating an [AnalysisTemplate][1] or a [ClusterAnalysisTemplate][1]. The template should contain a Kubernetes job that executes the [datadog-ci deployment gate command][7] to interact with the Deployment Gates API.
 
 Use the template below as a starting point:
 - Replace `<YOUR_DD_SITE>` below with your [Datadog site name][2] (for example, {{< region-param key="dd_site" code="true" >}}).
-- Define the [API key][5] and [Application key][6] as environment variables. The example below relies on a [Kubernetes Secret][3] called `datadog` holding two data values: `api-key` and `app-key`. Alternatively, you can also pass the values in plain text using `value` instead of `valueFrom` in the script below.
+- Define the [API key][5] and [application key][6] as environment variables. The example below relies on a [Kubernetes Secret][3] called `datadog` holding two data values: `api-key` and `app-key`. Alternatively, you can also pass the values in plain text using `value` instead of `valueFrom` in the script below.
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
