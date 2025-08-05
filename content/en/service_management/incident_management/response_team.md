@@ -1,5 +1,5 @@
 ---
-title: Manage an Incident Response Team
+title: Incident Response Team
 further_reading:
 - link: "/service_management/incident_management/incident_settings/responder-types"
   tag: "Documentation"
