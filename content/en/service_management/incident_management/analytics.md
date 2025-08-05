@@ -34,15 +34,15 @@ Incident Management Analytics is a queryable data source for aggregated incident
 
 Incidents carry three timestamp attributes that influence analytics:
 
-* Declaration time (`declared`) is the moment the incident was declared.
-* Detection time (`detected`) is the moment the underlying resource from which an incident was declared was created. For example, if a monitor alert fires at 2 p.m. and you declare an incident from it at 2:30 p.m., the `detected` time would be 2:30 p.m. If you did not declare the incident from another Datadog resource, `detected` is equivalent to `declared`.
-* Resolution time (`resolved`) is the moment the incident was last resolved.
+* Declaration time (`declared`): When the incident was declared.
+* Detection time (`detected`): When the underlying resource from which the incident was declared was created. For example, if a monitor alert fires at 2 p.m. and the incident is declared at 2:30 p.m., the detected time is 2:30 p.m. If the incident wasn't declared from another Datadog resource, `detected` is the same as `declared`.
+* Resolution time (`resolved`): When the incident was most recently resolved.
 
 ### Measures
 
 Incident Management reports the following analytic measures, which you can use to power analytic queries in Dashboard and Notebook widgets:
 
-- `Customer Impact Duration`: The duration customers were impacted, based on the impacts defined on the incident.
+- `Customer Impact Duration`: The duration during which customers were impacted, based on the impacts defined on the incident.
 - `Status Active Duration`: The duration that the incident was in an "active" state, based on the incident timeline.
 - `Status Stable Duration`: The duration that the incident was in a "stable" state, based on the incident timeline.
 - `Time to Detect`: The duration from the earliest customer impact to the incident's detection time.

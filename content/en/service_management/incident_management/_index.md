@@ -41,7 +41,7 @@ further_reading:
 
 Datadog Incident Management helps your team members identify, mitigate, and analyze disruptions and threats to your organization's services. With Incident Management, you can design an automation-enhanced response process that helps your teams assemble around a shared framework and toolkit. You can also use incident analytics to evaluate the effectiveness of your incident response process. 
 
-Incidents live in Datadog alongside your metrics, traces, and logs. Your teams can declare incidents from monitor alerts, security signals, events, cases, and more. You can also configure monitors to [declare incidents automatically](30).
+Incidents live in Datadog alongside your metrics, traces, and logs. Your teams can declare incidents from monitor alerts, security signals, events, cases, and more. You can also configure monitors to [declare incidents automatically][30].
 
 ## Get Started
 
@@ -68,7 +68,7 @@ You can also view your Incidents list from your mobile device home screen and ma
 
 ## Describing the incident
 
-When declaring an incident, it is critical to provide a comprehensive description, detailing what happened, why it occurred, and related attributes to ensure all stakeholders in the incident management process are fully informed. The essential elements of an incident declaration include a title, severity level, incident commanders. Effective incident management documentation includes:
+When declaring an incident, it is critical to provide a comprehensive description, detailing what happened, why it occurred, and related attributes to ensure all stakeholders in the incident management process are fully informed. The essential elements of an incident declaration include a title, severity level, and incident commanders. Effective incident management documentation includes:
 - Updating incident details, including its status, impact, root cause, detection methods, and service impacts.
 - Forming and managing a response team, using custom responder roles, and leveraging metadata attributes for detailed incident assessment.
 - Configuring notifications to keep all stakeholders informed throughout the incident resolution process.
@@ -94,7 +94,7 @@ Incident Management integrates closely with other Datadog products, including:
 
 Incident Management integrates with third-party applications, including:
 
-- [Atlassian Statuspage][24] to create and update Statuspage incidents.
+- [Atlassian Statuspage][25] to create and update Statuspage incidents.
 - [Confluence][22] to generate incident postmortems.
 - [CoScreen][14] to launch collaborative meetings with multi-user screen sharing, remote control, and built-in audio and video chat.
 - [CoTerm][21] to follow terminal-based incident remediation activities in real time.
@@ -104,7 +104,7 @@ Incident Management integrates with third-party applications, including:
 - [ServiceNow][19] to create a ServiceNow tickets for incidents.
 - [Slack][11] to create channels for incidents.
 - [Webhooks][16] to send incident notifications using webhooks (for example, [sending SMS to Twilio][17]).
-- [Zoom][23] to launch video calls for incidents.
+- [Zoom][24] to launch video calls for incidents.
 
 ## Further Reading
 
