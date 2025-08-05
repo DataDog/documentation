@@ -9,7 +9,7 @@ further_reading:
   tag: "Documentation"
   text: "Actions Catalog"
 - link: "https://learn.datadoghq.com/courses/getting-started-app-builder/"
-  tag: "Learning Center course"
+  tag: "Learning Center"
   text: "Getting Started with App Builder"
 ---
 

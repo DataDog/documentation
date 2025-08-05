@@ -23,7 +23,7 @@ further_reading:
   tag: "Blog"
   text: "How we created a single app to automate repetitive tasks with Datadog Workflow Automation, Datastore, and App Builder"
 - link: "https://learn.datadoghq.com/courses/getting-started-app-builder/"
-  tag: "Learning Center course"
+  tag: "Learning Center"
   text: "Getting Started with App Builder"
 ---
 
