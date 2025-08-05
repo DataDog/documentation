@@ -174,7 +174,7 @@ Storage costs are categorized as:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dash/integration/32017/bigquery-allocation?fromUser=false&refresh_mode=sliding&from_ts=1751731966635&to_ts=1754410366635&live=true
+[1]: https://app.datadoghq.com/dash/integration/32017/bigquery-allocation?fromUser=false&refresh_mode=sliding&from_ts=1751740562723&to_ts=1754418962723&live=true
 [2]: /cloud_cost_management/setup/google_cloud/
 [3]: https://cloud.google.com/bigquery/pricing?hl=en
 [4]: https://docs.datadoghq.com/integrations/google-cloud-bigquery/
