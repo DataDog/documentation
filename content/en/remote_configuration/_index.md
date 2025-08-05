@@ -94,7 +94,7 @@ Datadog implements the following safeguards to protect the confidentiality, inte
 - Datadog never sends configuration changes unless requested by Datadog components. If it does send configuration changes, Datadog only sends changes relevant to the requesting component.
 - The configuration requests are initiated from your infrastructure to Datadog over HTTPS (port 443). This is the same port that the Agent uses by default to send observability data.
 - The communication between your datadog components and Datadog is encrypted using HTTPS and is authenticated and authorized using your Datadog API key except in the case of private action runners where a JWT token is used instead.
-- Only users with the [`api_keys_write`][5] permissions are authorized to enable or disable Remote Configuration capability on API keys and use the supported product features.
+- Only users with the [`api_keys_write`][5] permission are authorized to enable or disable Remote Configuration capability on API keys and use the supported product features.
 - Your configuration changes submitted through the Datadog UI are signed and validated by the requesting Datadog component, verifying the integrity of the configuration.
 
 ## Enable Remote Configuration

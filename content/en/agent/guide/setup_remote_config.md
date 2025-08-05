@@ -29,7 +29,7 @@ Datadog recommends upgrading your Agents regularly to make sure you have access 
 
 - Datadog recommends Datadog Agent version `7.66` or later. Although some features might work with earlier versions of the Agent, version `7.66` introduced [breaking changes][12] to Remote Agent Management.
 - Ensure your RBAC permissions include [`org_management`][1], so you can enable Remote Configuration for your organization.
-- Ensure your RBAC permissions include [`api_keys_write`][2], so you can create a new API key with the Remote Configuration capability, or add the capability to an existing API key. The Contact your organization's Datadog administrator to update your permissions if you don't have it. A key with this capability allows you to authenticate and authorize your Agent to use Remote Configuration.
+- Ensure your RBAC permissions include [`api_keys_write`][2], so you can create a new API key with the Remote Configuration capability, or add the capability to an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. A key with this capability allows you to authenticate and authorize your Agent to use Remote Configuration.
 
 ## Enable Remote Configuration
 
