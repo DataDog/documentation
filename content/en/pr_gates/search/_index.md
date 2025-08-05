@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-The [**PR Gate Rules** page][1] is useful for developers who want to keep an eye on the PR gates for their build pipelines. You can see all of the rules defined by the organization.
+The [**PR Gate Rules** page][1] is useful for developers who want to keep an eye on the PR Gates for their build pipelines. You can see all of the rules defined by the organization.
 
 {{< img src="pr_gates/rules_list_2.png" alt="PR Gate rules in Datadog displaying the rule name, evaluation, scope, blocking status, last modified date, and the creator avatar" style="width:100%" >}}
 

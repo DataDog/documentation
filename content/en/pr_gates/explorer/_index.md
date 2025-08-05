@@ -96,7 +96,7 @@ Group PR Gates or rule executions into higher-level fields, patterns, and transa
 
 ## Visualize
 
-Select a visualization type to visualize the outcomes of filters and aggregations and better understand your PR gates or rule executions. For example, you can view gate results in a list to organize gates data into columns, or in a timeseries graph to measure gate execution data over time.
+Select a visualization type to visualize the outcomes of filters and aggregations and better understand your PR Gates or rule executions. For example, you can view gate results in a list to organize gates data into columns, or in a timeseries graph to measure gate execution data over time.
 
 ## Export
 
