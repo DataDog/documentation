@@ -75,7 +75,7 @@ When the [Datadog Google BigQuery integration][4] is enabled, CCM extracts the f
 |---|---|
 | `reservation_id` | The reservation pool that provided compute resources |
 | `user_email` | The user or service account that executed the query |
-| `query_signature` | THe hash of the logical SQL text of a query. This lets you group and analyze similar queries.|
+| `query_signature` | The hash of the logical SQL text of a query. This signature lets you group and analyze similar queries.|
 | `dts_config_id` | Identifier for scheduled queries and data transfers |
 
 To identify which BigQuery schedule a `DTS_CONFIG_ID` refers to:
