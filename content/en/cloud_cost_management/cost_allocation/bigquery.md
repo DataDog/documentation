@@ -52,7 +52,6 @@ The following table presents the list of collected features and the minimal requ
 1. Configure the Google Cloud Cost Management integration on the [Cloud Cost Setup page][2].
 2. Enable BigQuery monitoring in your Google Cloud project. 
 [**Enable BigQuery monitoring here**][4]
-3. For reservation cost allocation, configure BigQuery reservations in your project. [**Learn about BigQuery reservations.**][7]
 
 ## Allocating costs
 
@@ -62,8 +61,8 @@ Costs are allocated into the following spend types:
 
 | Spend type | Description |
 |---|---|
-| `allocated_spend_type`: Usage | Cost of query execution based on bytes processed (on-demand) or slot consumption (reservation) |
-| `allocated_spend_type`: Cluster_idle | Cost of reserved slots allocated within a project but not utilized by queries|
+| `allocated_spend_type:usage` | Cost of query execution based on bytes processed (on-demand) or slot consumption (reservation) |
+| `allocated_spend_type:cluster_idle` | Cost of reserved slots allocated within a project but not utilized by queries|
 
 ### Query-level tag extraction
 
@@ -73,6 +72,7 @@ When the [Datadog Google BigQuery integration][4] is enabled, CCM extracts the f
 |---|---|
 | `reservation_id` | The reservation pool that provided compute resources |
 | `user_email` | The user or service account that executed the query |
+| `query_signature` | THe hash of the logical SQL text of a query. This lets you group and analyze similar queries.|
 | `dts_config_id` | Identifier for scheduled queries and data transfers |
 
 To identify which BigQuery schedule a `DTS_CONFIG_ID` refers to:
@@ -162,8 +162,8 @@ Storage costs are categorized as:
 
 | Spend type | Description |
 |---|---|
-| `google_usage_type`: Active Logical Storage | Includes any table or table partition that has been modified in the last 90 days |
-| `google_usage_type`: Long Term Logical Storage | Includes any table or table partition that has not been modified for 90 consecutive days. The price of storage for that table automatically drops by approximately 50%. There is no difference in performance, durability, or availability between active and long-term storage |
+| `google_usage_type: Active Logical Storage` | Includes any table or table partition that has been modified in the last 90 days |
+| `google_usage_type: Long Term Logical Storage` | Includes any table or table partition that has not been modified for 90 consecutive days. The price of storage for that table automatically drops by approximately 50%. There is no difference in performance, durability, or availability between active and long-term storage |
 
 [**Learn more about BigQuery storage and best practices.**][9]
 
@@ -172,12 +172,11 @@ Storage costs are categorized as:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboard/ecm-es8-agw/bigquery-allocation
-[2]: /cost/setup 
+[2]: /cloud_cost_management/setup/google_cloud/
 [3]: https://cloud.google.com/bigquery/pricing?hl=en
 [4]: https://docs.datadoghq.com/integrations/google-cloud-bigquery/
 [5]: https://cloud.google.com/bigquery/docs/reservations-tasks
 [6]: https://console.cloud.google.com
-[7]: https://cloud.google.com/bigquery/docs/reservations-intro
 [8]: https://cloud.google.com/bigquery/docs/best-practices-performance-overview
 [9]: https://cloud.google.com/bigquery/docs/best-practices-storage
 [10]: https://cloud.google.com/bigquery/docs/adding-labels
