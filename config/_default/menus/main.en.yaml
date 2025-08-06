@@ -2717,10 +2717,10 @@ menu:
       parent: workflows
       identifier: workflows_build
       weight: 1
-    - name: Authentication
-      url: actions/workflows/access/
+    - name: Access and Authentication
+      url: actions/workflows/access_and_auth/
       parent: workflows
-      identifier: workflows_access
+      identifier: workflows_access_and_auth
       weight: 2
     - name: Trigger Workflows
       url: actions/workflows/trigger/
