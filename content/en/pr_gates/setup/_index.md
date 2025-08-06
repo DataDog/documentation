@@ -43,7 +43,7 @@ To create a PR Gates rule in Datadog:
 
    {{< img src="pr_gates/setup/static_analysis_3.png" alt="A Static Analysis rule that runs on all repos and fails when a PR has at least one Static Code Analysis code vulnerability with at least `Critical` severity" style="width:100%" >}}
 
-1. Under **Preview checks**, select your CI provider to preview the [status check](#enable-github-check-creation) to be added to pull requests. To set the check so it blocks the pipeline when it fails, follow your provider's instructions for making a status check _required_:
+1. Under **Preview checks**, select your CI provider to preview the [status check](#enable-ci-preview-check-creation) to be added to pull requests. To set the check so it blocks the pipeline when it fails, follow your provider's instructions for making a status check _required_:
 
    - [GitHub][14]
    - [Azure DevOps][15]
@@ -102,16 +102,24 @@ Check the command logs to see the overall gate evaluation status and information
 
 {{< img src="ci/datadog_ci_gate_evaluate_logs.png" alt="Datadog-ci gate evaluate logs" style="width:100%;">}}
 
-### Enable GitHub check creation
+### Enable CI status check creation
 
-You can automatically create a [GitHub check][9] for each rule evaluated. The check contains additional information about the rule evaluation, such as the failure reason and the matching events in Datadog. When this feature is enabled, the evaluation results appear directly in GitHub.
+You can automatically create a status check in [GitHub][9] or [Azure DevOps][15] for each rule evaluated. The check contains additional information about the rule evaluation, such as the failure reason and the matching events in Datadog. When this feature is enabled, the evaluation results appear directly in your CI provider.
 
-To enable GitHub Checks:
+To enable status checks:
 
-1. Navigate to the [GitHub integration tile][10]. If you do not have this integration set up, or you don't have a GitHub app within the integration, follow [the GitHub integration documentation][11] to set one up.
-2. Grant `Checks: Write` access to the GitHub application.
+1. Navigate to the integration tile for your CI provider:
+   - [GitHub][10]
+   - [Azure DevOps Source Code][16]
 
-After the permission is granted, you can see the checks in GitHub.
+   If you do not have the integration installed, or you don't have an app set up within the integration (GitHub App or Microsoft Entra App), follow the [GitHub][11] or Azure DevOps Source Code integration documentation to set one up.
+
+1. Ensure the integration has the permission required to create status checks:
+
+   - GitHub: Grant `Checks: Write` access to the integration.
+   - Azure DevOps: Grant `vso.build` and `vso.profile` access to the integration.
+
+1. After the permission is granted, you can see the checks in the CI provider.
 
 **Note**: Re-running a check does not re-run the corresponding PR Gates rule.
 
@@ -146,3 +154,4 @@ For more information, see the [RBAC Permissions documentation][1].
 [13]: /pr_gates/guide/understanding_rule_scopes
 [14]: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches
 [15]: https://learn.microsoft.com/en-us/azure/devops/repos/git/pr-status-policy?view=azure-devops
+[16]: https://app.datadoghq.com/integrations/azure-devops-source-code
