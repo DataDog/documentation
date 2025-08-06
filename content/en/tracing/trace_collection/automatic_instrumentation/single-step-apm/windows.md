@@ -15,7 +15,7 @@ With Single Step Instrumentation (SSI), you can automatically enable APM for you
 
 ## Enable APM on Windows
 
-**Note:** Only .NET applications running in IIS are supported for Single Step Instrumentation on Windows.
+<div class="alert alert-info">Before proceeding, confirm that your environment is compatible by reviewing the <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">SSI compatibility guide.</a></div>
 
 To enable APM with Single Step Instrumentation on Windows:
 

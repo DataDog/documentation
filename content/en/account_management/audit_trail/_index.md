@@ -71,9 +71,11 @@ To enable archiving for Audit Trail, navigate to your [Organization Settings][3]
 
 ### Retention
 
-Retaining events is an optional feature for Audit Trail. Scroll down to *Retention* and click the *Retain Audit Trail Events* toggle to enable.
+Retaining events is an optional feature for Audit Trail. In the **Retention Period** section, click the **Change retention period** to select a retention length appropriate for your use case.
 
-The default retention period for an audit trail event is seven days. You can set a retention period between three and 90 days.
+When Audit Trail is enabled, the default retention period for an audit trail event is 90 days. You can set the retention period to: 3, 7, 15, 30, or 90 days.
+
+When Audit Trail is disabled, the retention period is reset back to the default 7 days.
 
 {{< img src="account_management/audit_logs/retention_period.png" alt="Audit Trail Retention setup in Datadog" style="width:80%;">}}
 
