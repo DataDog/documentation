@@ -20,7 +20,7 @@ RUN curl -LO https://github.com/DataDog/dd-trace-php/releases/latest/download/da
   && php datadog-setup.php --php-bin=all
 {{< /code-block >}}
 
-   When running the `datadog-setup.php` script, you can also enable appsec and profiling via the `--enable-appsec` and `--enable-profiling` flags.
+   When running the `datadog-setup.php` script, you can also enable Application Security and Profiling by using the `--enable-appsec` and `--enable-profiling` flags, respectively.
 
    If you are using Alpine Linux, you need to install `libgcc_s` prior to running the installer:
 
