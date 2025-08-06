@@ -34420,7 +34420,7 @@ components:
         rule types application_code_vulnerability,
 
         application_library_vulnerability, attack_path, container_image_vulnerability,
-        identity_risk, misconfiguration, and api_security.'
+        identity_risk, misconfiguration, api_security, host_vulnerability and iac_misconfiguration.'
       enum:
       - application_security
       - log_detection
@@ -34435,6 +34435,8 @@ components:
       - identity_risk
       - misconfiguration
       - api_security
+      - host_vulnerability
+      - iac_misconfiguration
       type: string
       x-enum-varnames:
       - APPLICATION_SECURITY
@@ -34450,6 +34452,8 @@ components:
       - IDENTITY_RISK
       - MISCONFIGURATION
       - API_SECURITY
+      - HOST_VULNERABILITY
+      - IAC_MISCONFIGURATION
     RuleUser:
       description: User creating or modifying a rule.
       properties:
