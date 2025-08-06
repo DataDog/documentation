@@ -56,12 +56,12 @@ To create a PR Gates rule in Datadog:
 
 Invoke the PR Gates evaluation by calling the [`datadog-ci gate evaluate`][4] command. PR Gates requires [`datadog-ci`][7] version `2.27.0` or later.
 
-<div class="alert alert-info">For the command to work properly, ensure that events (tests, static analysis, and software composition analysis violations) are sent to Datadog <strong>before</strong> the <code>datadog-ci gate evaluate</code> command executes. Otherwise, the rules may demonstrate incorrect behavior due to the absence of these events.
+<div class="alert alert-info">For the command to work properly, ensure that events (for example, static analysis, software composition analysis violations, or tests) are sent to Datadog <strong>before</strong> the <code>datadog-ci gate evaluate</code> command executes. Otherwise, the rules may demonstrate incorrect behavior due to the absence of these events.
 </div>
 
-This command:
+This command does the following:
 
-1. Retrieves all the rules that have [rule scopes and custom scopes][13] that match the current pipeline context (the repository, branch, or custom scope(s) passed in the command).
+1. Retrieves all the rules that have [rule scopes and custom scopes][13] that match the current pipeline context (the repository, branch, or custom scopes passed in the command).
 2. Evaluates all the matching rules.
 3. Fails if one or more blocking rules fail, blocking the pipeline.
 
@@ -69,12 +69,12 @@ This command:
 |---|---|
 | `DD_API_KEY` | Point to your [Datadog API key][5]. |
 | `DD_APP_KEY` | Point to your [Datadog application key][6]. The application key must have the `PR Gates Evaluations` permission enabled.|
-| `DD_SITE` | (Optional) Point to a specific [Datadog site][12] (default value is {{< region-param key="dd_site" code="true" >}}). **Note**: `DATADOG_SITE` is not supported. |
+| `DD_SITE` | (Optional) Point to a specific [Datadog site][12] (default value is {{< region-param key="dd_site" code="true" >}}).<br/>**Note**: `DATADOG_SITE` is not supported. |
 
 For example:
 
 ```shell
-DD_SITE={{< region-param key="dd_site" >}} DD_API_KEY=API_KEY DD_APP_KEY=APP_KEY datadog-ci gate evaluate
+DD_SITE={{< region-param key="dd_site" >}} DD_API_KEY=<YOUR_API_KEY> DD_APP_KEY=<YOUR_APP_KEY> datadog-ci gate evaluate
 ```
 
 Configure the behavior of the `datadog-ci gate evaluate` command using the following flags:
@@ -90,7 +90,7 @@ By default, the command succeeds.
 : The command stops its execution after the specified timeout in seconds. The default timeout is 10 minutes. The command typically completes within a few minutes, but it could take longer.
 
 `--no-wait`
-: Skips the default time that the command waits for the events (for example, tests, static analysis violations) to arrive to Datadog. The default wait time makes sure that the events are queryable in Datadog before the rules are executed, avoiding incorrect evaluations. If, in your pipeline, the job containing the `datadog-ci gate evaluate` command is called several minutes after the related events are sent to Datadog, you can opt to skip this waiting time by specifying the `--no-wait` flag. However, if used incorrectly, this flag may result in inaccurate rule evaluations.
+: Skips the default time that the command waits for the events (for example, static analysis violations or tests) to arrive to Datadog. The default wait time makes sure that the events are queryable in Datadog before the rules are executed, avoiding incorrect evaluations. If, in your pipeline, the job containing the `datadog-ci gate evaluate` command is called several minutes after the related events are sent to Datadog, you can opt to skip this waiting time by specifying the `--no-wait` flag. However, if used incorrectly, this flag may result in inaccurate rule evaluations.
 
 Add [custom scopes][13] to the command by using the `--scope` option one or more times:
 
