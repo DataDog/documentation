@@ -316,7 +316,7 @@ menu:
       parent: basic_agent_usage
     - name: Alma Linux
       identifier: basic_agent_usage_alma_linux
-      url: agent/basic_agent_usage/centos/
+      url: agent/basic_agent_usage/alma/
       weight: 103
       parent: basic_agent_usage
     - name: Ansible
@@ -371,7 +371,7 @@ menu:
       parent: basic_agent_usage
     - name: Rocky Linux
       identifier: basic_agent_usage_rockylinux
-      url: agent/basic_agent_usage/centos/
+      url: agent/basic_agent_usage/rocky/
       weight: 114
       parent: basic_agent_usage
     - name: SaltStack

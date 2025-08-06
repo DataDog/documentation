@@ -1,8 +1,8 @@
 ---
-title: Basic Agent Usage for Fedora
-platform: Fedora
+title: Basic Agent Usage for Alma Linux
+platform: Alma Linux
 aliases:
-    - /guides/basic_agent_usage/fedora/
+    - /guides/basic_agent_usage/centos/
 further_reading:
 - link: "/logs/"
   tag: "Documentation"
