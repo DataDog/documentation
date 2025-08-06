@@ -29,12 +29,12 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- ㅊ
+- 컨테이너
 - 쿠버네티스(Kubernetes)
 - 로그 수집
 - 네트워크
-- orchestration
-custom_kind: integration
+- 오케스트레이션
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/README.md
 display_on_public_website: true
@@ -49,8 +49,8 @@ name: nginx_ingress_controller
 public_title: nginx-ingress-controller
 short_description: NGINX 수신 컨트롤러와 임베디드 NGINX에 관련된 메트릭을 모니터링합니다.
 supported_os:
-- 리눅스
-- windows
+- linux
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
@@ -63,7 +63,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - 제공::통합
+  - Offering::Integration
   configuration: README.md#Setup
   description: NGINX 수신 컨트롤러와 임베디드 NGINX에 관련된 메트릭을 모니터링합니다.
   media: []
@@ -86,7 +86,7 @@ tile:
 
 `nginx-ingress-controller` 점검은 [Datadog 에이전트][4] 패키지에 포함되어 있으므로 서버에 추가 설치할 필요가 없습니다.
 
-### 구성
+### 설정
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -98,11 +98,11 @@ tile:
 [1]: https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/datadog_checks/nginx_ingress_controller/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "컨테이너화" %}}
+{{% tab "Containerized" %}}
 
-#### 컨테이너화
+#### 컨테이너화된 환경
 
-컨테이너화된 환경의 경우 [자동탐지 통합 템플릿][1]에 다음 파라미터를 적용하는 방법이 안내되어 있습니다.
+컨테이너화된 환경의 경우 [자동탐지 통합 템플릿][1]에 아래 파라미터를 적용하는 방법이 안내되어 있습니다.
 
 [1]: https://docs.datadoghq.com/ko/agent/kubernetes/integrations/
 {{% /tab %}}
@@ -142,11 +142,19 @@ tile:
     }
 ```
 
+**Note**: Histogram metrics (like `nginx_ingress.controller.response.*` metrics) are not collected by default and require the additional [collect_nginx_histograms][6] instance config parameter
+to be set to `true`. The parameter defaults to `false` because the histogram metrics are known to have high tag cardinality.
+
+| 파라미터            | 값                                                                                                              |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `<INSTANCE_CONFIG>`  | `[{"nginx_status_url": "http://%%host%%:18080/nginx_status"},{"prometheus_url": "http://%%host%%:10254/metrics", "collect_nginx_histograms": true}]` |
+
+
 #### 로그 수집
 
-_Agent 버전 6.0 이상에서 사용 가능_
+_에이전트 버전 > 6.0에서 사용 가능_
 
-Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 있습니다. 이를 활성화하려면 [Kubernetes 로그 수집][6]을 참고하세요.
+Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes log collection][7].
 
 | 파라미터      | 값                                                              |
 | -------------- | ------------------------------------------------------------------ |
@@ -154,12 +162,12 @@ Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 �
 
 ### 검증
 
-[에이전트의 상태 하위 명령을 실행][7]하고 Checks 섹션에서 `nginx_ingress_controller`를 찾습니다.
+[Run the Agent's status subcommand][8] and look for `nginx_ingress_controller` under the Checks section.
 
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "nginx-ingress-controller" >}}
+{{< get-metrics-from-git "nginx_ingress_controller" >}}
 
 
 ### 이벤트
@@ -172,7 +180,7 @@ NGINX Ingress Controller에는 서비스 점검이 포함되어 있지 않습니
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원팀][8]에 문의하세요.
+도움이 필요하신가요? [Datadog 지원팀][9]에 문의하세요.
 
 
 [1]: https://kubernetes.github.io/ingress-nginx
@@ -180,6 +188,7 @@ NGINX Ingress Controller에는 서비스 점검이 포함되어 있지 않습니
 [3]: https://github.com/nginxinc/nginx-prometheus-exporter#exported-metrics
 [4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/datadog_checks/nginx_ingress_controller/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ko/agent/kubernetes/log/
-[7]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://docs.datadoghq.com/ko/help/
+[6]: https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/datadog_checks/nginx_ingress_controller/data/conf.yaml.example#L59C7-L59C31
+[7]: https://docs.datadoghq.com/ko/agent/kubernetes/log/
+[8]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#agent-status-and-information
+[9]: https://docs.datadoghq.com/ko/help/

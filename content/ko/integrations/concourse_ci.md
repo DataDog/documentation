@@ -22,6 +22,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - 자동화
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/README.md
 display_on_public_website: true
@@ -31,22 +32,22 @@ integration_id: concourse-ci
 integration_title: Concourse-CI
 integration_version: ''
 is_public: true
-custom_kind: 통합
 manifest_version: 2.0.0
 name: concourse_ci
 public_title: Concourse-CI
 short_description: Concourse CI에서 전송한 메트릭을 수집합니다.
 supported_os:
 - linux
-- windows
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - 카테고리::자동화
-  - 지원 OS::Linux
-  - 지원 OS::Windows
-  - 지원 OS::macOS
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Concourse CI에서 전송한 메트릭을 수집합니다.
   media: []
@@ -89,7 +90,7 @@ Metric Emitter (Datadog):
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "concourse-ci" >}}
+{{< get-metrics-from-git "concourse_ci" >}}
 
 
 ### 이벤트
