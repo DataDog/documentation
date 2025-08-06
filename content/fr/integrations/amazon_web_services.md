@@ -1,77 +1,77 @@
 ---
-"app_id": "amazon-web-services"
-"app_uuid": "45508037-7831-469d-80da-20241f00cbed"
-"assets":
-  "dashboards":
-    "aws_advisor": "assets/dashboards/aws_advisor.json"
-    "aws_ebs": "assets/dashboards/aws_ebs.json"
-    "aws_event_bridge": "assets/dashboards/aws_event_bridge.json"
-    "aws_firehose": "assets/dashboards/aws_firehose.json"
-    "aws_overall": "assets/dashboards/aws_overall.json"
-    "aws_sns": "assets/dashboards/aws_sns.json"
-    "aws_sqs": "assets/dashboards/aws_sqs.json"
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": true
-    "metrics":
-      "check":
-      - "aws.usage.call_count"
-      "metadata_path": "assets/metrics/metric-spec.yaml"
-      "prefix": "aws".
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "10"
-    "source_type_name": "Amazon Web Services
-  "monitors":
-    "Integration Health Status": "assets/monitors/aws_integration_status_monitor.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "aws"
-- "cloud"
-- "iot"
-- "log collection"
-- "event management"
-"custom_kind": "integration"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "amazon_web_services"
-"integration_id": "amazon-web-services"
-"integration_title": "Amazon Web Services
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "amazon_web_services"
-"public_title": "Amazon Web Services
-"short_description": "Amazon Web Services (AWS) est un ensemble de services web qui forment ensemble une plateforme de cloud computing."
-"supported_os": []
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::AWS"
-  - "Category::Cloud"
-  - "Category:IoT"
-  - "Category::Log Collection"
-  - "Category::Event Management"
-  - "Offering::Integration"
-  "configuration": "README.md#Setup"
-  "description": "Amazon Web Services (AWS) est un ensemble de services web qui forment ensemble une plateforme de cloud computing."
-  "media": []
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/monitor-aws-control-plane-api-usage-metrics/"
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/aws-reinvent-2022-recap/"
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/iam-least-privilege/"
-  "support": "README.md#Support"
-  "title": "Amazon Web Services"
+app_id: amazon-web-services
+app_uuid: 45508037-7831-469d-80da-20241f00cbed
+assets:
+  dashboards:
+    aws_advisor: assets/dashboards/aws_advisor.json
+    aws_ebs: assets/dashboards/aws_ebs.json
+    aws_event_bridge: assets/dashboards/aws_event_bridge.json
+    aws_firehose: assets/dashboards/aws_firehose.json
+    aws_overall: assets/dashboards/aws_overall.json
+    aws_sns: assets/dashboards/aws_sns.json
+    aws_sqs: assets/dashboards/aws_sqs.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: true
+    metrics:
+      check: aws.usage.call_count
+      metadata_path: assets/metrics/metric-spec.yaml
+      prefix: aws
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10
+    source_type_name: Amazon Web Services
+  monitors:
+    Integration Health Status: assets/monitors/aws_integration_status_monitor.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- aws
+- cloud
+- iot
+- log collection
+- event management
+custom_kind: integration
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: amazon_web_services
+integration_id: amazon-web-services
+integration_title: Amazon Web Services
+integration_version: ""
+is_public: true
+manifest_version: 2.0.0
+name: amazon_web_services
+public_title: Amazon Web Services
+short_description: Amazon Web Services (AWS) est un ensemble de services web qui forment ensemble une plateforme de cloud computing.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::AWS
+  - Category::Cloud
+  - Category::IoT
+  - Category::Log Collection
+  - Category::Event Management
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Amazon Web Services (AWS) est un ensemble de services web qui forment ensemble une plateforme de cloud computing.
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-aws-control-plane-api-usage-metrics/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/aws-reinvent-2022-recap/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/iam-least-privilege/
+  support: README.md#Support
+  title: Amazon Web Services
+
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
