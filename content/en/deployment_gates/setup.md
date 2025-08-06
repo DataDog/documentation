@@ -402,7 +402,10 @@ Deployment Gate evaluations are asynchronous, as the evaluation process can take
 
 A Deployment Gate evaluation can be requested with an API call.
 
-Replace `<YOUR_DD_SITE>` below with your [Datadog site name][1] (for example, {{< region-param key="dd_site" code="true" >}}), `<YOUR_API_KEY>` with your [API key][2] and `<YOUR_APP_KEY>` with your [application key][3].
+Be sure to replace the following:
+- `<YOUR_DD_SITE>`: Your [Datadog site name][1] (for example, {{< region-param key="dd_site" code="true" >}})
+- `<YOUR_API_KEY>`: Your [API key][2]
+- `<YOUR_APP_KEY>`: Your [application key][3]
 
 ```bash
 curl -X POST "https://api.<YOUR_DD_SITE>/api/unstable/deployments/gates/evaluation" \
