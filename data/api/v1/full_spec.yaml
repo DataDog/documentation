@@ -21054,6 +21054,11 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        flex_logs_compute_xlarge_avg:
+          description: Shows the average number of Flex Logs Compute Extra Large Instances
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
         flex_logs_compute_xsmall_avg:
           description: Shows the average number of Flex Logs Compute Extra Small Instances
             over all hours in the current date for the given org.
@@ -21995,6 +22000,11 @@ components:
           type: integer
         flex_logs_compute_small_avg:
           description: Shows the average number of Flex Logs Compute Small Instances
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_compute_xlarge_avg:
+          description: Shows the average number of Flex Logs Compute Extra Large Instances
             over all hours in the current date for the given org.
           format: int64
           type: integer
@@ -22946,6 +22956,11 @@ components:
           type: integer
         flex_logs_compute_small_avg_sum:
           description: Shows the average number of Flex Logs Compute Small Instances
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        flex_logs_compute_xlarge_avg_sum:
+          description: Shows the average number of Flex Logs Compute Extra Large Instances
             over all hours in the current months for all organizations.
           format: int64
           type: integer
