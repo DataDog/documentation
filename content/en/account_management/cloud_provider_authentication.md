@@ -10,7 +10,7 @@ algolia:
 
 Cloud-provider based authentication allows you to authenticate the Datadog Terraform provider using cloud provider credentials instead of static API and Application keys. This feature leverages your existing cloud identity and access management (IAM) systems to provide secure, temporary authentication to Datadog APIs.
 
-Currently, it only supports **AWS** authentication, with additional cloud providers planned for future releases.
+It first only supports **AWS** authentication, with additional cloud providers planned for future releases.
 
 {{< callout url="https://www.datadoghq.com/product-preview/cloud-provider-authentication/" btn_hidden="false" header="Join the Preview!" >}}
 Cloud-provider based authentication is in Preview. Complete the form to request access.
@@ -34,13 +34,13 @@ The authentication process uses AWS Security Token Service (STS) to verify your 
 4. **Token issuance**: If validation succeeds, Datadog issues a temporary JWT token for API access
 5. **API authentication**: The token is used for subsequent Datadog API calls
 
-## AWS Setup
+## AWS setup
 
 Setting up cloud-provider based authentication for AWS involves two main steps:
 
 ### 1. Configure AWS identity mapping in Datadog
 
-First, you need to map your AWS identities (ARNs) to Datadog user accounts. Currently, this must be done using the Datadog API.
+First, you need to map your AWS identities (ARNs) to Datadog user accounts. During the preview, this must be done using the Datadog API.
 
 **Create a new AWS identity mapping:**
 
@@ -72,7 +72,7 @@ curl -X GET "https://api.datadoghq.com/api/v2/cloud_auth/aws/persona_mapping" \
 
 ### 2. Update your Terraform provider configuration
 
-Once you've configured the identity mapping, update your Datadog Terraform provider configuration to use cloud-provider authentication:
+After you've configured the identity mapping, update your Datadog Terraform provider configuration to use cloud-provider authentication:
 
 **Replace your existing configuration:**
 
@@ -108,10 +108,10 @@ provider "datadog" {
 }
 ```
 
-The Terraform provider will automatically use your configured AWS credentials to authenticate with Datadog.
+The Terraform provider automatically uses your configured AWS credentials to authenticate with Datadog.
 
 
-## API Reference
+## API reference
 
 For detailed API documentation, see:
 - [Cloud Authentication Configuration API](/api/latest/cloud-authentication/)
