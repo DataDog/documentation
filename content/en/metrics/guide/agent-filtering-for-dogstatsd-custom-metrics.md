@@ -96,7 +96,7 @@ You can edit a metric filtering policy from the [Metrics Settings page][1] or th
 2. Click **Edit**.
 3. Select the metrics to filter from the **Metrics to Filter** dropdown, or click **Upload CSV**.
    - If you choose to upload a CSV, select the file and click **Open**.
-5. Click **Save and Filter**.
+4. Click **Save and Filter**.
 
 {{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/edit_policy_from_metrics_settings.mp4" alt="Editing a metric filtering policy from the Metrics Settings page" video="true" >}}
 
