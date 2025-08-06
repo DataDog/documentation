@@ -1,27 +1,13 @@
 ---
+app_id: amazon_rekognition
 categories:
-- cloud
+- 클라우드
 - aws
 - 로그 수집
-dependencies: []
+custom_kind: 통합
 description: 핵심 Amazon Rekognition 메트릭을 수집하세요.
-doc_link: https://docs.datadoghq.com/integrations/amazon_rekognition/
-draft: false
-git_integration_title: amazon_rekognition
-has_logo: true
-integration_id: ''
-integration_title: Amazon Rekognition
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: amazon_rekognition
-public_title: Datadog-Amazon Rekognition 통합
-short_description: 핵심 Amazon Rekognition 메트릭을 수집하세요.
-version: '1.0'
+title: Amazon Rekognition
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 개요
 
 Amazon Rekognition는 애플리케이션에 이미지와 비디오 분석을 손쉽게 추가할 수 있도록 해줍니다. Rekognition API에 이미지나 비디오를 제공하기만 하면 서비스가 개체, 사람, 텍스트, 장면 및 활동을 식별할 수 있습니다.
@@ -32,12 +18,12 @@ Amazon Rekognition는 애플리케이션에 이미지와 비디오 분석을 손
 
 ### 설치
 
-이미 하지 않은 경우 먼저 [Amazon Web Services 통합][1]을 설정하세요.
+If you haven't already, set up the [Amazon Web Services integration](https://docs.datadoghq.com/integrations/amazon_web_services/) first.
 
 ### 메트릭 수집
 
-1. [AWS 통합 페이지][2]에서 `Rekognition`가 `Metric Collection` 탭에서 활성화되어 있는지 확인하세요.
-2. [Datadog - Amazon Rekognition 통합][3]을 설치하세요.
+1. In the [AWS integration page](https://app.datadoghq.com/integrations/amazon-web-services), ensure that `Rekognition` is enabled under the `Metric Collection` tab.
+1. Install the [Datadog - Amazon Rekognition integration](https://app.datadoghq.com/integrations/amazon-rekognition).
 
 ### 로그 수집
 
@@ -47,19 +33,35 @@ Amazon Rekognition을 설정해 S3 버킷 또는 클라우드와치(CloudWatch)�
 
 **참고**: S3 버킷에 로그를 작성한 경우 `amazon_rekognition`이 _대상 접두어_로 설정되어 있는지 확인하세요.
 
-#### Datadog에 로그 전송
+#### Datadog로 로그 전송
 
-1. 이미 하지 않은 경우 [Datadog 포워더 람다 함수][4]를 설정하세요.
-2. 람다 함수가 설치되면 AWS 콘솔에서 Amazon Rekognition 로그를 포함하는 S3 버킷 또는 클라우드와치(CloudWatch) 로그 그룹에 수동으로 트리거를 추가합니다.
+1. If you haven’t already, set up the [Datadog Forwarder Lambda function](https://docs.datadoghq.com/logs/guide/forwarder/).
 
-    - [S3 버킷에서 직접 트리거 추가][5]
-    - [클라우드와치(CloudWatch) 로그 그룹에 수동 트리거 추가][6]
+1. 람다 함수가 설치되면 AWS 콘솔에서 Amazon Rekognition 로그를 포함하는 S3 버킷 또는 클라우드와치(CloudWatch) 로그 그룹에 수동으로 트리거를 추가합니다.
+
+   - [Add a manual trigger on the S3 bucket](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets)
+   - [Add a manual trigger on the CloudWatch Log Group](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group)
 
 ## 수집한 데이터
 
-### 메트릭
-{{< get-metrics-from-git "amazon_rekognition" >}}
+### Metrics
 
+| | |
+| --- | --- |
+| **aws.rekognition.deteceted_label_count** <br>(count) | The average number of labels detected with the DetectLabels operation.|
+| **aws.rekognition.deteceted_label_count.sum** <br>(count) | The sum of the number of labels detected with the DetectLabels operation.|
+| **aws.rekognition.detected_face_count** <br>(count) | The average number of faces detected with the IndexFaces or DetectFaces operation.|
+| **aws.rekognition.detected_face_count.sum** <br>(count) | The sum of the number of faces detected with the IndexFaces or DetectFaces operation.|
+| **aws.rekognition.response_time** <br>(count) | The time in milliseconds for Rekognition to compute the response.<br>_Shown as millisecond_ |
+| **aws.rekognition.response_time.data_samples** <br>(count) | The time in milliseconds for Rekognition to compute the response.|
+| **aws.rekognition.server_error_count** <br>(count) | The number of server errors.|
+| **aws.rekognition.server_error_count.sum** <br>(count) | The sum of the number of server errors.|
+| **aws.rekognition.successful_request_count** <br>(count) | The average number of successful requests.|
+| **aws.rekognition.successful_request_count.sum** <br>(count) | The sum of the number of successful requests.|
+| **aws.rekognition.throttled_count** <br>(count) | The average number of throttled requests. Rekognition throttles a request when it receives more requests than the limit of transactions per second set for your account.|
+| **aws.rekognition.throttled_count.sum** <br>(count) | The sum of the number of throttled requests. Rekognition throttles a request when it receives more requests than the limit of transactions per second set for your account.|
+| **aws.rekognition.user_error_count** <br>(count) | The average number of user errors (invalid parameters - invalid image - no permission etc).|
+| **aws.rekognition.user_error_count.sum** <br>(count) | The sum of the number of user errors (invalid parameters - invalid image - no permission etc).|
 
 ### 이벤트
 
@@ -71,13 +73,4 @@ Amazon Rekognition 통합은 서비스 점검을 포함하지 않습니다.
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원팀][8]에 문의하세요.
-
-[1]: https://docs.datadoghq.com/ko/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://app.datadoghq.com/integrations/amazon-rekognition
-[4]: https://docs.datadoghq.com/ko/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ko/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ko/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
-[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_rekognition/amazon_rekognition_metadata.csv
-[8]: https://docs.datadoghq.com/ko/help/
+도움이 필요하세요? [Datadog 지원 팀](https://docs.datadoghq.com/help/)에 문의하세요.

@@ -140,9 +140,9 @@ Datadog にレポートするパラメーターを `conf.yaml` ファイルで�
 [5]: https://console.cloud.google.com/apis/library/admin.googleapis.com
 [6]: https://console.cloud.google.com/iam-admin/serviceaccounts/create
 [7]: https://developers.google.com/identity/protocols/oauth2/service-account#delegatingauthority
-[8]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 [9]: mailto:support@rapdev.io
 [10]: https://www.rapdev.io/#Get-in-touch
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-gmeet" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-gmeet" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

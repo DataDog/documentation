@@ -17,7 +17,7 @@ assets:
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 225
-    source_type_name: Azure DB for MySQL
+    source_type_name: Azure DB pour MySQL
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -33,12 +33,12 @@ display_on_public_website: true
 draft: false
 git_integration_title: azure_db_for_mysql
 integration_id: azure-db-for-mysql
-integration_title: Azure DB for MySQL
+integration_title: Azure DB pour MySQL
 integration_version: ''
 is_public: true
 manifest_version: 2.0.0
 name: azure_db_for_mysql
-public_title: Azure DB for MySQL
+public_title: Azure DB pour MySQL
 short_description: Surveillez des métriques clés d'Azure Database pour MySQL.
 supported_os: []
 tile:
@@ -53,7 +53,7 @@ tile:
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Azure DB for MySQL
+  title: Azure DB pour MySQL
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -75,7 +75,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft�
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "azure-db-for-mysql" >}}
+{{< get-metrics-from-git "azure_db_for_mysql" >}}
 
 
 ### Événements
