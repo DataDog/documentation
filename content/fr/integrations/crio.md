@@ -1,70 +1,22 @@
 ---
+aliases:
+- /fr/intégrations/crio
 app_id: cri-o
-app_uuid: a5f9ace1-19b5-4928-b98b-21f15d62cce2
-assets:
-  dashboards:
-    crio: assets/dashboards/overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: crio.operations.count
-      metadata_path: metadata.csv
-      prefix: crio.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10044
-    source_type_name: CRI-O
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
 - incident-teams
 custom_kind: integration
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/crio/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: crio
-integration_id: cri-o
-integration_title: CRI-O
-integration_version: 4.1.0
-is_public: true
-manifest_version: 2.0.0
-name: crio
-public_title: CRI-O
-short_description: Surveillez toutes vos métriques CRI-O avec Datadog.
+description: Surveillez toutes vos métriques CRI-O avec Datadog.
+integration_version: 5.0.0
+media: []
 supported_os:
 - linux
 - macos
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Containers
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Surveillez toutes vos métriques CRI-O avec Datadog.
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: CRI-O
+title: CRI-O
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
-
-
 ## Section Overview
 
-Ce check surveille [CRI-O][1].
+Cette vérification permet de contrôler [CRI-O] (http://cri-o.io).
 
 ## Configuration
 
@@ -74,13 +26,13 @@ L'intégration repose sur l'option `--enable-metrics` de CRI-O, qui est désacti
 
 ### Configuration
 
-1. Modifiez le fichier `crio.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance CRI-O. Consultez le [fichier d'exemple crio.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `crio.d/conf.yaml`, dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à collecter vos données de performance CRI-O. Voir [sample crio.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/crio/datadog_checks/crio/data/conf.yaml.example) pour toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][3].
+1. [Redémarrer le Agent] (https://docs.datadoghq.com/agent/guide/agent-commands/#restart-the-agent).
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][4] et cherchez `crio` dans la section Checks.
+[Exécutez la sous-commande Agent's status](https://docs.datadoghq.com/agent/guide/agent-commands/#agent-information) et recherchez `crio` dans la section Checks.
 
 ## Données collectées
 
@@ -88,22 +40,33 @@ CRI-O recueille des métriques sur le nombre d'opérations effectuées par le ru
 L'intégration Datadog/CRI-O recueille des métriques sur l'utilisation du processeur et de la mémoire du binaire Golang CRI-O.
 
 ### Métriques
-{{< get-metrics-from-git "cri-o" >}}
 
+| | |
+| --- | --- |
+| **crio.cpu.time** <br>(gauge) | Temps total passé par l'utilisateur et le système en secondes<br>_Affiché en secondes_. |
+| **crio.mem.resident** <br>(gauge) | Taille de la mémoire résidente en octets<br>_Affichée en octets_ |
+| **crio.mem.virtual** <br>(gauge) | Taille de la mémoire virtuelle en octets<br>_Affichée en octets_ |
+| **crio.operations.count** <br>(count) | Comptoir des opérations du CRI-O |
+| **crio.operations.latency.count** <br>(gauge) | Nombre d'opérations CRI-O latence|
+| **crio.operations.latency.quantile** <br>(gauge) | Quantiles de latence des opérations CRI-O|
+| **crio.operations.latency.sum** <br>(gauge) | Somme des opérations CRI-O temps de latence<br>_Indiqué en microseconde_. |
 
 ### Checks de service
-{{< get-service-checks-from-git "cri-o" >}}
 
+**crio.prometheus.health**
+
+Renvoie `CRITICAL` si le check ne peut pas accéder au endpoint des métriques.
+
+Etat : ok, critique
+
+### Événements
+
+CRI-O n'inclut aucun événement.
+
+### Checks de service
+
+Voir [service_checks.json] (https://github.com/DataDog/integrations-core/blob/master/crio/assets/service_checks.json) pour une liste des contrôles de service fournis par cette intégration.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
-
-
-[1]: http://cri-o.io
-[2]: https://github.com/DataDog/integrations-core/blob/master/crio/datadog_checks/crio/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/crio/metadata.csv
-[6]: https://github.com/DataDog/integrations-core/blob/master/crio/assets/service_checks.json
-[7]: https://docs.datadoghq.com/fr/help/
+Besoin d'aide ? Contactez l'[assistance Datadog](https://docs.datadoghq.com/help/).
