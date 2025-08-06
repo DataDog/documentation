@@ -17,7 +17,7 @@ The Datadog Agent allows you to securely manage secrets by integrating with any 
 
 ### How it works
 
-To reference a secret in your configuration, use the `ENC[<secret_id>]` notation. This tells the Agent to resolve the value using either the embedded `datadog-secret-backend` or your configured secret retrieval executable. The backend resolves the placeholder using your secret store and injects the plain-text value into the config at runtime. The secret is fetched and loaded into memory but is never written to disk or sent to the Datadog backend.
+To reference a secret in your configuration, use the `ENC[<secret_id>]` notation. This tells the Agent to resolve the value using either the natively supported executable or your configured secret retrieval executable. The secret executable resolves the placeholder using your secrets management solution. It then injects the plain-text value into the config at runtime. The secret is fetched and loaded into memory but is never written to disk or sent to the Datadog backend.
 
 For example, the following configuration shows two secrets defined with `ENC[]`:
 ```
@@ -48,7 +48,7 @@ instances:
 
 ### Option 1: Using the Agent to resolve secrets from supported secret management solutions
 
-Starting in Agent version 7.69, the `datadog-secret-backend` executable is shipped within the Datadog Agent. The major change in this option is that the backend executable is configured directly by setting the [secret_backend_type][8] and [secret_backend_config][9] options in the datadog.yaml file. 
+Starting in Agent version 7.69, the Datadog Agent includes a natively supported secret executable. This update allows you to configure the backend executable directly by setting the `secret_backend_type` and `secret_backend_config` options in the datadog.yaml file. 
 
 `secret_backend_type` is where the type of the backend is specified, and `secret_backend_config` is where additional configuration relevant for pulling secrets is included. To use this embedded executable, in your datadog.yaml file, add:
 
@@ -72,7 +72,7 @@ More specific setup instructions depends on the backend type used. Refer to the 
 
 
 {{% collapse-content title="AWS Secret and SSM" level="h4" expanded=false id="id-for-anchoring" %}}
-The `datadog-secret-backend` utility supports the following AWS services:
+The secret executable utility supports the following AWS services:
 
 |Backend Type                                 | AWS Service                             |
 |---------------------------------------------|-----------------------------------------|
@@ -243,7 +243,7 @@ property2: ENC[My-Secret-Backend-Secret;SecretKey2]
 property3: ENC[My-Secret-Backend-Secret;SecretKey3]
 ```
 
-You can define multiple secret backends, of the same or different types, in your backend YAML configuration. This allows you to use several supported backends (file.yaml, file.json, aws.ssm, and aws.secrets) within your Datadog Agent setup.
+You can define multiple secret backends, of the same or different types, in your yaml configuration. This allows you to use several supported backends (file.yaml, file.json, aws.ssm, and aws.secrets) within your Datadog Agent setup.
 
 #### Configuration examples
 
@@ -451,7 +451,7 @@ aws_session:
 
 ##### Supported backends
 
-The `datadog-secret-backend` utility supports the following Azure services:
+The secret executable utility supports the following Azure services:
 
 | Backend Type                            | Azure Service          |
 | ----------------------------------------|------------------------|
@@ -566,7 +566,7 @@ secret_backend_config:
 {{% collapse-content title="Hashicorp Vault Backend" level="h4" expanded=false id="id-for-anchoring" %}}
 ##### Supported Backends
 
-The `datadog-secret-backend` utility supports the following Hashicorp services:
+The secret executable utility supports the following Hashicorp services:
 
 | Backend Type                               | Hashicorp Service                                  |
 | ------------------------------------------ | -------------------------------------------------- |
@@ -576,7 +576,7 @@ The `datadog-secret-backend` utility supports the following Hashicorp services:
 
 Hashicorp Vault supports a variety of authentication methods. The ones supported by this module are:
 
-1. **User Pass Auth**. A Vault username and password defined on the backed configuration's `vault_session` section within the `datadog-secret-backend.yaml` file.
+1. **User Pass Auth**. A Vault username and password defined on the backed configuration's `vault_session` section.
 
 2. **AWS Instance Profile** If your machine has an attached AWS IAM role with the correct permissions, you don't need to define any secret credentials or passwords in your config. See the [AWS Instance Profile section](#aws-instance-profile-instructions) and the [official Hashicorp AWS auth method instructions][3002] for more information.
 
@@ -741,7 +741,7 @@ secret_backend_config:
 |[file.yaml](#yaml-backend-settings)          |[YAML][4002]                             |
 
 ##### File Permission 
-The `datadog-secret-backend `file backend only requires read permissions for the configured JSON or YAML files. These permissions must be granted to the local Datadog Agent user (`dd-agent` on Linux, `ddagentuser` on Windows).
+The file backend only requires read permissions for the configured JSON or YAML files. These permissions must be granted to the local Datadog Agent user (`dd-agent` on Linux, `ddagentuser` on Windows).
 
 
 {{< tabs >}}
@@ -1408,5 +1408,3 @@ This command returns whether the permissions are valid for the Agent to view thi
 [5]: https://github.com/DataDog/datadog-secret-backend/blob/main/docs/aws/secrets.md
 [6]: /agent/configuration/agent-commands/#restart-the-agent
 [7]: /opentelemetry/setup/ddot_collector/
-[8]: https://github.com/DataDog/datadog-agent/blob/7.69.x/pkg/config/config_template.yaml#L867
-[9]: https://github.com/DataDog/datadog-agent/blob/7.69.x/pkg/config/config_template.yaml#L880
