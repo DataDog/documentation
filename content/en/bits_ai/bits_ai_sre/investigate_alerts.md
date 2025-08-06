@@ -44,11 +44,12 @@ Bits is able to run investigations on monitors that fulfill all three of the fol
    - A monitor query grouped by a service
    - A service tag on the monitor
 
-3. **Telemetry links**: For metric, anomaly, forecast, integration, and outlier monitors, the monitor message must include at least one helpful Datadog link:
+3. **Telemetry links**: For metric, anomaly, forecast, integration, and outlier monitors, the monitor message must include at least one helpful link:
    - A Datadog dashboard
    - A logs query
    - A trace query
    - A Datadog notebook with helpful widgets
+   - A [Confluence page](#Configure-knowledge-base-integrations)
 
 Think of the first page you'd navigate to in Datadog if this monitor were to fire. These links provide Bits with valuable context to kickstart its investigation. Links are not required for APM and log monitors.
 
@@ -76,8 +77,15 @@ In the **Configure notifications and automations** section, add the `@case-{proj
 Bits integrates with Confluence to find relevant documentation and runbooks to support its investigations, and also allows you to interact with your Confluence content directly through chat. 
 1. Connect your Confluence Cloud account by following the instructions in the [Confluence integration tile][13].
 1. Optionally, enable account crawling to make Confluence a data source within Bits' chat interface. This is not required for Bits to use Confluence when generating its investigation plan.
-1. Link specific Confluence pages to your monitor's message to guide Bits during investigations. When an alert triggers, Bits automatically scans the linked Confluence page for useful Datadog links to support its analysis.
 1. You can view all connected Confluence accounts on the [Bits Settings page][9].
+
+#### Optimize Bits’ Understanding of Your Knowledge
+
+Help Bits better interpret and act on your documentation by following these best practices::
+1. Include relevant Datadog telemetry links in your Confluence pages. Bits will directly query these links to extract more relevant information.
+1. Provide clear, step-by-step instructions for resolving monitor issues. Bits follows these instructions precisely, so specificity leads to more accurate outcomes.
+1. Document the services or systems involved in detail. Bits uses this information to understand the environment and guide investigations effectively.
+**Tip**: The more precisely your Confluence page matches the issue at hand, the more helpful Bits can be.
 
 ## How Bits AI SRE investigates
 
