@@ -48,7 +48,7 @@ You can find the Agent installation log in the `dd-aix-install.log` file. To dis
 | Start Agent   | `startsrc -s datadog-agent` |
 | Stop Agent    | `stopsrc -s datadog-agent`  |
 | Status of Agent service | `lssrc -s datadog-agent`|
-| Agent Status Page | `datadog-agent status`      |
+| Agent status page | `datadog-agent status`      |
 | Send flare | `datadog-agent flare` |
 | Show all commands | `datadog-agent --help`  |
 
