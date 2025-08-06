@@ -43,20 +43,6 @@ Set up your pipelines and its sources, processors, and destinations in the Obser
 1. Select and set up your [source][1].
 1. Select and set up your [destinations][2].
 1. Set up your [processors][3].
-    - If you want to copy a processor, click the copy icon for that processor and then use `command-v` to paste it.
-1. If you want to add another group of processors for a destination:
-    1. Click the plus sign (**+**) at the bottom of the existing processor group.
-    1. Click the name of the processor group to update it.
-    1. Optionally, enter a group filter. See [Filter Syntax](#filter-query-syntax) for more information.
-    1. Click **Add** to add processors to the group.
-    1. If you want to copy all the processors in a group and paste them into the same processor group or a different group:
-       1. Click the three dots on the processor group.
-       1. Select **Copy all processors**.
-       1. Select the processor group you want to paste the processors into and then use `command-v` to paste them.
-    1. You can toggle the switch to enable and disable the processor group and also each individual processor.
-  <br>**Notes**:
-  <br>- Configuring a pipeline with processor groups is available for Worker versions 2.7 and later.
-  <br>- There is a limit of 10 processor groups for a pipeline canvas.
 1. If you want to add another set of processors and destinations, click the plus sign (**+**) to the left of the processor group to add another set of processors and destinations to the source.
     - To delete a processor group, you need to delete all destinations linked to that processor group. When the last destination is deleted, the processor group is removed with it.
 1. If you want to add an additional destination to a processor group, click the plus sign (**+**) to the right of the processor group.
