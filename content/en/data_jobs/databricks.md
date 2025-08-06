@@ -85,7 +85,7 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
    {{< img src="data_jobs/databricks/configure-workspace-form.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, and API token." style="width:100%;" >}}
 1. For visibility into your Databricks costs in Data Jobs Monitoring or [Cloud Cost Management][18], provide the ID of a [Databricks SQL Warehouse][19] for Datadog to use to query your [system tables][20].
 
-   - The token’s Principal must have access to the SQL Warehouse. Give it `CAN USE` permission from **Permissions** at the top right of the Warehouse configuration page.
+   - The token's Principal must have access to the SQL Warehouse. Give it `CAN USE` permission from **Permissions** at the top right of the Warehouse configuration page.
    - Grant the service principal read access to the [system tables][20] within Unity Catalog with:
    ```sql
    GRANT USE CATALOG ON CATALOG system TO <token_principal>;
