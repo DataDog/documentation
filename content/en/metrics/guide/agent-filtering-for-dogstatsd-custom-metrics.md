@@ -126,7 +126,7 @@ Edit a metric filtering policy from the Metrics Summary page using any of the fo
 5. Click **Save and Filter**.
 
 {{% /tab %}}
-{{% tab "CSV upload" %}}
+{{% tab "From CSV upload" %}}
 
 1. Click the three vertical dots button on the right-hand side of the screen.
 2. Click **Filter metrics**.
