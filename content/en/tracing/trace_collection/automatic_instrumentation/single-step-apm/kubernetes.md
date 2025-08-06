@@ -48,29 +48,25 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 
 Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data.
 
-### Recommended: Configure USTs with ddTraceConfigs as part of [workload targeting](#advanced-options).
+### Recommended: Configure USTs with automatic label extraction
 
-With SSI, you can automatically extract UST values from pod labels and metadata without modifying individual deployments:
-To use the recommended ddTraceConfigs approach, ensure you have the following software components:
+With SSI, you can automatically extract UST values from pod labels and metadata without modifying individual deployments. Simply configure `kubernetesResourcesLabelsAsTags` to map your existing Kubernetes labels to Datadog service tags.
 
-| Component | Minimum Version | Notes |
-|-----------|-----------------|-------|
-| datadog-agent | 7.66+ | Required for valueFrom support |
-| datadog-operator | 1.16.0+ | 1.13.0+ works with Agent version override |
-| datadog-helm-chart | 3.120.0+ | Added valueFrom support |
-
-**Note**: Replace `app-name` with any label that contains your service name (e.g., `service`, `app`, `component`). You can configure multiple labels this way.
+#### Basic automatic configuration
 
 ```yaml
 datadog:
-  # Make pod labels available as tags in Datadog
+  # Automatically extract service names from Kubernetes labels
   kubernetesResourcesLabelsAsTags:
     pods:
-      app-name: service
+      app.kubernetes.io/name: service     # Modern Kubernetes label
+      app: service                        # Legacy label for older deployments
     deployments.apps:
-      app-name: service
+      app.kubernetes.io/name: service
+      app: service
     replicasets.apps:
-      app-name: service
+      app.kubernetes.io/name: service
+      app: service
 
   # Set environment globally for the entire cluster
   tags:
@@ -79,20 +75,52 @@ datadog:
   apm:
     instrumentation:
       enabled: true
+```
+
+With this configuration, Datadog automatically sets the service name based on the label values for all instrumented workloads that have these labels.
+
+#### Explicit control with ddTraceConfigs
+
+For granular control over specific services as part of [workload targeting](#advanced-options), use `ddTraceConfigs` to explicitly map labels to service configurations:
+
+**Prerequisites for ddTraceConfigs:**
+
+| Component | Minimum Version | Notes |
+|-----------|-----------------|-------|
+| datadog-agent | 7.66+ | Required for valueFrom support |
+| datadog-operator | 1.16.0+ | 1.13.0+ works with agent version override |
+| datadog-helm-chart | 3.120.0+ | Added valueFrom support |
+
+```yaml
+datadog:
+  kubernetesResourcesLabelsAsTags:
+    pods:
+      app.kubernetes.io/name: service
+    deployments.apps:
+      app.kubernetes.io/name: service
+
+  tags:
+    - "env:production"
+
+  apm:
+    instrumentation:
+      enabled: true
       targets:
-        - name: my-services
+        - name: frontend-services
           podSelector:
-            matchExpressions:
-            - key: app-name           # Target pods with this label
-              operator: Exists
+            matchLabels:
+              tier: frontend
           ddTraceConfigs:
-            - name: DD_SERVICE      # Extract service name from pod label
+            - name: DD_SERVICE       # Explicitly override service name
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.labels['app-name']
+                  fieldPath: metadata.labels['app.kubernetes.io/name']
+            - name: DD_ENV
+              value: "frontend-prod"
             # DD_VERSION automatically extracted from image tags
-            # DD_ENV inherited from cluster-level tags above
 ```
+
+**Note**: Use `ddTraceConfigs` for explicit control over service configuration for specific workloads. For most cases, the basic automatic configuration is sufficient.
 
 ### Configure USTs in deployment manifests
 
