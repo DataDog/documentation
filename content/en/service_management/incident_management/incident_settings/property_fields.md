@@ -6,7 +6,7 @@ title: Property Fields
 
 Custom property fields enable you to capture important attributes unique to your organization, such as specific product models in the automotive industry or unique codes in a software deployment. These attributes help you efficiently categorize incidents.
 
-You can use custom fields to filter for specific subsets of incidents on the [Homepage][2] and in [Incident Management Analytics][3]. You can also build conditions around custom fields in [incident notification rules][9].
+You can use custom fields to filter for specific subsets of incidents on the [Incident Management][2] page and in [Incident Management Analytics][3]. You can also build conditions around custom fields in [incident notification rules][9].
 
 ## Field sections
 
