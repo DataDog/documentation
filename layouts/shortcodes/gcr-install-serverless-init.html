@@ -1,4 +1,4 @@
-Datadog publishes new releases of the `serverless-init` container image to Google’s gcr.io, AWS’s ECR, and on Docker Hub:
+Datadog publishes new releases of the `serverless-init` container image to Google's gcr.io, AWS's ECR, and on Docker Hub:
 
 | hub.docker.com | gcr.io | public.ecr.aws |
 | ---- | ---- | ---- |
@@ -34,7 +34,7 @@ CMD [{{ .Get "cmd" | safeHTML }}]
   </summary>
   <div class="collapsible-content">
 
-We expect `serverless-init` to be the top-level application with the test of your app's command line passed in for `serverless-init` to execute.
+Datadog expects `serverless-init` to be the top-level application, with the rest of your app's command line passed in for `serverless-init` to execute.
 
 If you already have an entrypoint defined inside your Dockerfile, you can instead modify the CMD argument.
 
@@ -42,14 +42,14 @@ If you already have an entrypoint defined inside your Dockerfile, you can instea
 CMD ["/app/datadog-init", {{ .Get "cmd" | safeHTML }}]
 ```
 
-If you require your entrypoint to be instrumented as well, you can swap your entrypoint and CMD arguments instead.
+If you require your entrypoint to be instrumented as well, you can instead swap your entrypoint and CMD arguments.
 
 ```dockerfile
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["/your_entrypoint.sh", {{ .Get "cmd" | safeHTML }}]
 ```
 
-As long as your command to run is passed as an argument to datadog-init, you will receive full instrumentation.
+As long as your command to run is passed as an argument to `datadog-init`, you will receive full instrumentation.
 
   </div>
 </details>

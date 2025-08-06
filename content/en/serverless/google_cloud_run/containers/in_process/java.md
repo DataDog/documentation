@@ -12,63 +12,68 @@ further_reading:
     text: 'Correlating Java Logs and Traces'
 ---
 
-## 1. Install the Tracer
+## Setup
+1. **Install a Datadog tracer**.
 
-Add the Java tracer agent to your Dockerfile:
+   1. Add the Datadog Java tracer to your Dockerfile:
 
-```dockerfile
+      {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 ADD 'https://dtdg.co/latest-java-tracer' agent.jar
 ENV JAVA_TOOL_OPTIONS="-javaagent:agent.jar"
-```
+{{< /code-block >}}
 
-Then, add the tracer artifacts.
-
-Maven:
-```xml
+   2. Add the tracer artifacts.
+      {{< tabs >}}
+      {{% tab "Maven" %}}
+{{< code-block lang="xml" disable_copy="false" >}}
 <dependency>
   <groupId>com.datadoghq</groupId>
   <artifactId>dd-trace-api</artifactId>
   <version>DD_TRACE_JAVA_VERSION_HERE</version>
 </dependency>
-```
-
-Gradle:
-```groovy
+{{< /code-block >}}
+      {{% /tab %}}
+      
+      {{% tab "Gradle" %}}
+{{< code-block lang="groovy" disable_copy="false" >}}
 implementation 'com.datadoghq:dd-trace-api:DD_TRACE_JAVA_VERSION_HERE'
-```
+{{< /code-block >}}
+      {{% /tab %}}
+      {{< /tabs >}}
 
-Finally, add the `@Trace` annotation to any method you want to trace.
+   3. Add the `@Trace` annotation to any method you want to trace.
 
-For more information, see [Tracing Java Applications][1].
+   For more information, see [Tracing Java Applications][1].
 
-## 2. Install Serverless-Init
+2. **Install serverless-init**.
 
-{{% gcr-install-serverless-init cmd="\"./mvnw\", \"spring-boot:run\"" %}}
+   {{% gcr-install-serverless-init cmd="\"./mvnw\", \"spring-boot:run\"" %}}
 
-## 3. Setup Logs
+3. **Set up logs**.
 
-To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows serverless-init to read logs from stdout and stderr.
+   To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows `serverless-init` to read logs from stdout and stderr.
 
-We also recommend setting the environment variable `DD_SOURCE=java` to enable advanced Datadog log parsing.
+   Datadog also recommends setting the environment variable `DD_SOURCE=java` to enable advanced Datadog log parsing.
 
-If you want multiline logs to be preserved in a single log message, we recommend writing your logs in *compact* JSON format. For example, you can use a third-party logging library such as `Log4j 2`:
-```java
+   If you want multiline logs to be preserved in a single log message, Datadog recommends writing your logs in *compact* JSON format. For example, you can use a third-party logging library such as `Log4j 2`:
+
+   {{< code-block lang="java" disable_copy="false" >}}
 private static final Logger logger = LogManager.getLogger(App.class);
 logger.info("Hello World!");
-```
-`resources/log4j2.xml`:
-```xml
+{{< /code-block >}}
+
+   {{< code-block lang="xml" filename="resources/log4j2.xml" disable_copy="false" >}}
 <Configuration>
   <Appenders>
     <Console name="Console"><JsonLayout compact="true" eventEol="true" properties="true"/></Console>
   </Appenders>
   <Loggers><Root level="info"><AppenderRef ref="Console"/></Root></Loggers>
 </Configuration>
-```
+{{< /code-block >}}
 
-For more information, see [Correlating Java Logs and Traces][2].
+   For more information, see [Correlating Java Logs and Traces][2].
 
-## 4. Configure your application
+4. **Configure your application**.
 
 {{% gcr-configure-env-vars language="java" %}}
 

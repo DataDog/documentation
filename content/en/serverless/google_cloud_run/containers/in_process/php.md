@@ -12,38 +12,37 @@ further_reading:
     text: 'Correlating PHP Logs and Traces'
 ---
 
-## 1. Install the Tracer
+## Setup
+1. **Install a Datadog tracer** in your Dockerfile.
 
-Install the tracer in your Dockerfile:
-
-```Dockerfile
+   {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 RUN curl -LO https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php \
   && php datadog-setup.php --php-bin=all
-```
+{{< /code-block >}}
 
-When running the `datadog-setup.php` script, you can also enable appsec and profiling via the `--enable-appsec` and `--enable-profiling` flags.
+   When running the `datadog-setup.php` script, you can also enable appsec and profiling via the `--enable-appsec` and `--enable-profiling` flags.
 
-If you are using Alpine Linux, you need to install `libgcc_s` prior to running the installer:
+   If you are using Alpine Linux, you need to install `libgcc_s` prior to running the installer:
 
-```shell
+   {{< code-block lang="shell" disable_copy="false" >}}
 apk add libgcc
-```
+{{< /code-block >}}
 
-For more information, see [Tracing PHP applications][1].
+   For more information, see [Tracing PHP applications][1].
 
-## 2. Install Serverless-Init
+2. **Install serverless-init**.
 
-{{% gcr-install-serverless-init cmd="\"apache2-foreground\"" %}}
+   {{% gcr-install-serverless-init cmd="\"apache2-foreground\"" %}}
 
-## 3. Setup Logs
+3. **Set up logs**.
 
-To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows serverless-init to read logs from stdout and stderr.
+   To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows `serverless-init` to read logs from stdout and stderr.
 
-We also recommend setting the environment variable `DD_SOURCE=php` to enable advanced Datadog log parsing.
+   Datadog also recommends setting the environment variable `DD_SOURCE=php` to enable advanced Datadog log parsing.
 
-For more information, see [Correlating PHP Logs and Traces][2].
+   For more information, see [Correlating PHP Logs and Traces][2].
 
-## 4. Configure your application
+4. **Configure your application**.
 
 {{% gcr-configure-env-vars language="php" %}}
 

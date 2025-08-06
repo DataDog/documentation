@@ -12,30 +12,29 @@ further_reading:
     text: 'Correlating Python Logs and Traces'
 ---
 
-## 1. Install the Tracer
+## Setup
+1. **Install a Datadog tracer** in your Dockerfile.
 
-Install the tracer in your Dockerfile:
-
-```Dockerfile
+   {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 RUN pip install --target /dd_tracer/python/ ddtrace
-```
+{{< /code-block >}}
 
-For more information, see [Tracing Python applications][1].
+   For more information, see [Tracing Python applications][1].
 
-## 2. Install Serverless-Init
+2. **Install serverless-init**.
 
-{{% gcr-install-serverless-init cmd="\"/dd_tracer/python/bin/ddtrace-run\", \"python\", \"path/to/your/python/app.py\"" %}}
+   {{% gcr-install-serverless-init cmd="\"/dd_tracer/python/bin/ddtrace-run\", \"python\", \"path/to/your/python/app.py\"" %}}
 
-## 3. Setup Logs
+3. **Set up logs**.
 
-To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows serverless-init to read logs from stdout and stderr.
+   To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows `serverless-init` to read logs from stdout and stderr.
 
-We also recommend the following environment variables:
-- `ENV PYTHONUNBUFFERED=1`: Ensure Python outputs appear immediately in container logs instead of being buffered.
-- `ENV DD_SOURCE=python`: Enable advanced Datadog log parsing.
+   Datadog also recommends the following environment variables:
+   - `ENV PYTHONUNBUFFERED=1`: Ensure Python outputs appear immediately in container logs instead of being buffered.
+   - `ENV DD_SOURCE=python`: Enable advanced Datadog log parsing.
 
-If you want multiline logs to be preserved in a single log message, we recommend writing your logs in JSON format. For example, you can use a third-party logging library such as `structlog`:
-```python
+   If you want multiline logs to be preserved in a single log message, Datadog recommends writing your logs in JSON format. For example, you can use a third-party logging library such as `structlog`:
+   {{< code-block lang="python" disable_copy="false" >}}
 import structlog
 
 def tracer_injection(logger, log_method, event_dict):
@@ -54,11 +53,11 @@ structlog.configure(
 logger = structlog.get_logger()
 
 logger.info("Hello world!")
-```
+{{< /code-block >}}
 
-For more information, see [Correlating Python Logs and Traces][2].
+   For more information, see [Correlating Python Logs and Traces][2].
 
-## 4. Configure your application
+4. **Configure your application**.
 
 {{% gcr-configure-env-vars language="python" %}}
 

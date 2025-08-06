@@ -12,41 +12,45 @@ further_reading:
     text: 'Correlating .NET Logs and Traces'
 ---
 
-## 1. Install the Tracer
+## Setup
+1. **Install a Datadog tracer** in your Dockerfile.
 
-Install the tracer in your Dockerfile. Note that GitHub requests are rate limited, so pass a Github token saved in the environment variable `GITHUB_TOKEN` as a [Docker build secret][1] `--secret id=github-token,env=GITHUB_TOKEN`.
+   Because GitHub requests are rate limited, you must pass a GitHub token saved in the environment variable `GITHUB_TOKEN` as a [Docker build secret][1] `--secret id=github-token,env=GITHUB_TOKEN`.
 
-For linux/amd64, include:
-```Dockerfile
+   {{< tabs >}}
+   {{% tab "Linux/AMD64" %}}
+{{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 RUN --mount=type=secret,id=github-token,env=GITHUB_TOKEN \
     chmod +x /app/dotnet.sh && /app/dotnet.sh
-```
+{{< /code-block >}}
+   {{% /tab %}}
 
-For alpine builds, configure your Dockerfile like so:
-
-```Dockerfile
-# For arm64 use datadog-dotnet-apm-2.57.0.arm64.tar.gz
+   {{% tab "Alpine" %}}
+{{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 # For alpine use datadog-dotnet-apm-2.57.0-musl.tar.gz
 ARG TRACER_VERSION
 ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v${TRACER_VERSION}/datadog-dotnet-apm-${TRACER_VERSION}.tar.gz /tmp/datadog-dotnet-apm.tar.gz
 
 RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /dd_tracer/dotnet/ && rm /tmp/datadog-dotnet-apm.tar.gz
-```
+{{< /code-block >}}
+   {{% /tab %}}
+   {{< /tabs >}}
 
-For more information, see [Tracing .NET applications][2].
+   For more information, see [Tracing .NET applications][2].
 
-## 2. Install Serverless-Init
+2. **Install serverless-init**.
 
-{{% gcr-install-serverless-init cmd="\"dotnet\", \"dotnet.dll\"" %}}
+   {{% gcr-install-serverless-init cmd="\"dotnet\", \"dotnet.dll\"" %}}
 
-## 3. Setup Logs
+3. **Set up logs**.
 
-To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows serverless-init to read logs from stdout and stderr.
+   To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows `serverless-init` to read logs from stdout and stderr.
 
-We also recommend setting the environment variable `DD_SOURCE=csharp` to enable advanced Datadog log parsing.
+   Datadog also recommends setting the environment variable `DD_SOURCE=csharp` to enable advanced Datadog log parsing.
 
-If you want multiline logs to be preserved in a single log message, we recommend writing your logs in JSON format. For example, you can use a third-party logging library such as `Serilog`:
-```csharp
+   If you want multiline logs to be preserved in a single log message, Datadog recommends writing your logs in JSON format. For example, you can use a third-party logging library such as `Serilog`:
+
+   {{< code-block lang="csharp" disable_copy="false" >}}
 using Serilog;
 
 builder.Host.UseSerilog((context, config) =>
@@ -55,11 +59,11 @@ builder.Host.UseSerilog((context, config) =>
 });
 
 logger.LogInformation("Hello World!");
-```
+{{< /code-block >}}
 
-For more information, see [Correlating .NET Logs and Traces][3].
+   For more information, see [Correlating .NET Logs and Traces][3].
 
-## 4. Configure your application
+4. **Configure your application**.
 
 {{% gcr-configure-env-vars language="csharp" %}}
 

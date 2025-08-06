@@ -12,40 +12,41 @@ further_reading:
   text: 'Correlating Node.js Logs and Traces'
 ---
 
-## 1. Install the Tracer
+## Setup
+1. **Install a Datadog tracer**.
 
-In your main application, add the `dd-trace-js` library.
-
-```shell
+   1. In your main application, add `dd-trace-js`.
+   
+      {{< code-block lang="shell" disable_copy="false" >}}
 npm install dd-trace --save
-```
+{{< /code-block >}}
 
-Then, add this to your application code to initialize the tracer:
-```javascript
+   2. Add the following to your application code to initialize the tracer:
+   {{< code-block lang="javascript" disable_copy="false" >}}
 const tracer = require('dd-trace').init({
  logInjection: true,
 });
-```
+{{< /code-block >}}
 
-Finally, set the following environment variable to specify that the `dd-trace/init` module is required when the Node.js process starts:
-```dockerfile
+   3. Set the following environment variable to specify that the `dd-trace/init` module is required when the Node.js process starts:
+   {{< code-block lang="dockerfile" disable_copy="false" >}}
 ENV NODE_OPTIONS="--require dd-trace/init"
-```
+{{< /code-block >}}
 
-For more information, see [Tracing Node.js applications][1].
+   For more information, see [Tracing Node.js applications][1].
 
-## 2. Install Serverless-Init
+2. **Install serverless-init**.
 
-{{% gcr-install-serverless-init cmd="\"/nodejs/bin/node\", \"/path/to/your/app.js\"" %}}
+   {{% gcr-install-serverless-init cmd="\"/nodejs/bin/node\", \"/path/to/your/app.js\"" %}}
 
-## 3. Setup Logs
+3. **Set up logs**.
 
-To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows serverless-init to read logs from stdout and stderr.
+   To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows `serverless-init` to read logs from stdout and stderr.
 
-We also recommend setting the environment variable `DD_SOURCE=nodejs` to enable advanced Datadog log parsing.
+   Datadog also recommends setting the environment variable `DD_SOURCE=nodejs` to enable advanced Datadog log parsing.
 
-If you want multiline logs to be preserved in a single log message, we recommend writing your logs in JSON format. For example, you can use a third-party logging library such as `winston`:
-```javascript
+   If you want multiline logs to be preserved in a single log message, Datadog recommends writing your logs in JSON format. For example, you can use a third-party logging library such as `winston`:
+   {{< code-block lang="javascript" disable_copy="false" >}}
 const tracer = require('dd-trace').init({
   logInjection: true,
 });
@@ -61,11 +62,11 @@ const logger = createLogger({
 });
 
 logger.info(`Hello world!`);
-```
+{{< /code-block >}}
 
-For more information, see [Correlating Node.js Logs and Traces][2].
+   For more information, see [Correlating Node.js Logs and Traces][2].
 
-## 4. Configure your application
+4. **Configure your application**.
 
 {{% gcr-configure-env-vars language="nodejs" %}}
 

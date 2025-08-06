@@ -12,52 +12,53 @@ further_reading:
     text: 'Correlating Go Logs and Traces'
 ---
 
-## 1. Install the Tracer
+## Setup
+1. **Install a Datadog tracer**.
 
-In your main application, add the tracing library from `dd-trace-go`.
+   1. In your main application, add the tracing library from `dd-trace-go`.
 
-```shell
+      {{< code-block lang="shell" disable_copy="false" >}}
 go get github.com/DataDog/dd-trace-go/v2/ddtrace/tracer
-```
+{{< /code-block >}}
 
-Then, add this to your application code to initialize the tracer:
-```go
+   2. Add the following to your application code to initialize the tracer:
+      {{< code-block lang="go" disable_copy="false" >}}
 tracer.Start()
 defer tracer.Stop()
-```
+{{< /code-block >}}
 
-You can also add additional packages:
-```shell
+   You can also add additional packages:
+   {{< code-block lang="shell" disable_copy="false" >}}
 # Enable Profiling
 go get github.com/DataDog/dd-trace-go/v2/profiler
 
 # Patch /net/http
 go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
-```
+{{< /code-block >}}
 
-For more information, see [Tracing Go Applications][1] and the [Tracer README][2].
+   For more information, see [Tracing Go Applications][1] and the [Tracer README][2].
 
-## 2. Install Serverless-Init
+2. **Install serverless-init**.
 
-{{% gcr-install-serverless-init cmd="./your-binary" %}}
+   {{% gcr-install-serverless-init cmd="./your-binary" %}}
 
-## 3. Setup Logs
+3. **Set up logs**.
 
-To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows serverless-init to read logs from stdout and stderr.
+   To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows `serverless-init` to read logs from stdout and stderr.
 
-We also recommend setting the environment variable `DD_SOURCE=go` to enable advanced Datadog log parsing.
+   Datadog also recommends setting the environment variable `DD_SOURCE=go` to enable advanced Datadog log parsing.
 
-If you want multiline logs to be preserved in a single log message, we recommend writing your logs in JSON format. For example, you can use a third-party logging library such as `logrus`:
-```go
-logrus.SetFormatter(&logrus.JSONFormatter{})
-logrus.AddHook(&dd_logrus.DDContextLogHook{})
+   If you want multiline logs to be preserved in a single log message, Datadog recommends writing your logs in JSON format. For example, you can use a third-party logging library such as `logrus`:
+   ```go
+   logrus.SetFormatter(&logrus.JSONFormatter{})
+   logrus.AddHook(&dd_logrus.DDContextLogHook{})
 
-logrus.WithContext(ctx).Info("Hello World!")
-```
+   logrus.WithContext(ctx).Info("Hello World!")
+   ```
 
-For more information, see [Correlating Go Logs and Traces][3].
+   For more information, see [Correlating Go Logs and Traces][3].
 
-## 4. Configure your application
+4. **Configure your application**.
 
 {{% gcr-configure-env-vars language="go" %}}
 

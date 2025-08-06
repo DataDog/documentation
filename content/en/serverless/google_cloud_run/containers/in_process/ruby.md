@@ -12,39 +12,40 @@ further_reading:
     text: 'Correlating Ruby Logs and Traces'
 ---
 
-## 1. Install the Tracer
+## Setup
+1. **Install the Datadog Ruby tracer**.
 
-Manually install the Ruby tracer by adding the `datadog` gem to your Gemfile:
-```gemfile
+   Add the `datadog` gem to your Gemfile:
+   {{< code-block lang="gemfile" disable_copy="false" >}}
 source 'https://rubygems.org'
 gem 'datadog'
-```
+{{< /code-block >}}
 
-See [Tracing Ruby applications][1] for additional information on how to configure the tracer and enable auto instrumentation.
+   See [Tracing Ruby applications][1] for additional information on how to configure the tracer and enable auto instrumentation.
 
-## 2. Install Serverless-Init
+2. **Install serverless-init**.
 
-{{% gcr-install-serverless-init cmd="\"rails\", \"server\", \"-b\", \"0.0.0.0\"" %}}
+   {{% gcr-install-serverless-init cmd="\"rails\", \"server\", \"-b\", \"0.0.0.0\"" %}}
 
-## 3. Setup Logs
+3. **Set up logs**.
 
-To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows serverless-init to read logs from stdout and stderr.
+   To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows `serverless-init` to read logs from stdout and stderr.
 
-We also recommend setting the environment variable `DD_SOURCE=ruby` to enable advanced Datadog log parsing.
+   Datadog also recommends setting the environment variable `DD_SOURCE=ruby` to enable advanced Datadog log parsing.
 
-To enable log/trace correlation, you will need to include `Datadog::Tracing.log_correlation` in your log format. For example:
-```ruby
+   To enable log-trace correlation, you need to include `Datadog::Tracing.log_correlation` in your log format. For example:
+   {{< code-block lang="ruby" disable_copy="false" >}}
 logger = Logger.new(STDOUT)
 logger.formatter = proc do |severity, datetime, progname, msg|
   "[#{datetime}] #{severity}: [#{Datadog::Tracing.log_correlation}] #{msg}\n"
 end
 
 logger.info "Hello world!"
-```
+{{< /code-block >}}
 
-For more information, see [Correlating Ruby Logs and Traces][2].
+   For more information, see [Correlating Ruby Logs and Traces][2].
 
-## 4. Configure your application
+4. **Configure your application**.
 
 {{% gcr-configure-env-vars language="ruby" %}}
 
