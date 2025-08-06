@@ -2,7 +2,7 @@
 title: PostgreSQL 15 以上へのアップグレード
 ---
 
-Run this command on each database host to enable the additional permission needed for the `datadog` user:
+`datadog` ユーザーに必要な追加権限を有効にするには、各データベースホストで次のコマンドを実行してください。
 
 ```SQL
 ALTER ROLE datadog INHERIT;
@@ -10,22 +10,22 @@ ALTER ROLE datadog INHERIT;
 
 {{< tabs >}}
 {{% tab "RDS" %}}
-Agent versions prior to `7.49` may be unable to connect to PostgreSQL RDS instances without a configuration change. New RDS instances have a default value of `1` for the `rds.force_ssl` parameter. In Agent versions prior to `7.49`, this causes the following error when the Agent tries to issue queries:
+`7.49` より前の Agent バージョンでは、設定を変更しないと PostgreSQL RDS インスタンスに接続できない場合があります。新しい RDS インスタンスでは、`rds.force_ssl` パラメータのデフォルト値が `1` に設定されています。`7.49` より前の Agent がクエリを実行しようとすると、次のエラーが発生します。
 
 ```
 FATAL:  no pg_hba.conf entry for host "HOSTNAME", user "datadog", database "postgres", no encryption
 ```
 
-To allow the Agent to connect with SSL, add the following setting to each instance config where `host` and `port` are specified:
+Agent が SSL で接続できるようにするには、`host` と `port` を指定している各インスタンス設定に次の設定を追加してください。
 
 ```yaml
 ssl: allow
 ```
 
-Restart the agent after applying this change.
+この変更を適用したら、Agent を再起動してください。
 {{% /tab %}}
 {{% tab "Google Cloud SQL" %}}
-Agent versions prior to `7.50` may attempt to connect to the `cloudsqladmin` database. This can cause error logs on the database as well as warning logs in the Agent. In order to silence those logs, add `cloudsqladmin` to the [ignore_databases][1] list:
+`7.50` より前の Agent バージョンでは、`cloudsqladmin` データベースに接続を試みることがあります。これにより、データベース側にエラーログが、Agent 側に警告ログが出力される場合があります。これらのログを抑制するには、[ignore_databases][1] リストに `cloudsqladmin` を追加してください。
 
 ```yaml
 ignore_databases:
@@ -35,7 +35,7 @@ ignore_databases:
   - cloudsqladmin
 ```
 
-If using [database autodiscovery][2], also add `cloudsqladmin` to [excluded databases][3]:
+[database autodiscovery][2] を使用している場合は、[excluded databases][3] にも `cloudsqladmin` を追加してください。
 
 ```yaml
   exclude:

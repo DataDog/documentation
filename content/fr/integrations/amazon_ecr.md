@@ -1,26 +1,12 @@
 ---
+app_id: amazon_ecr
 categories:
 - cloud
 - aws
 custom_kind: integration
-dependencies: []
 description: Surveillez des métriques clés d'Amazon ECR.
-doc_link: https://docs.datadoghq.com/integrations/amazon_ecr/
-draft: false
-git_integration_title: amazon_ecr
-has_logo: true
-integration_id: ''
-integration_title: Amazon ECR
-integration_version: ''
-is_public: true
-manifest_version: '1.0'
-name: amazon_ecr
-public_title: Intégration Datadog/Amazon ECR
-short_description: Surveillez des métriques clés d'Amazon ECR.
-version: '1.0'
+title: Amazon ECR
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Section Overview
 
 Amazon Elastic Container Registry (Amazon ECR) est un registre de conteneurs Docker entièrement géré qui permet aux développeurs de stocker, gérer et déployer des images de conteneurs Docker en toute facilité.
@@ -31,19 +17,21 @@ Activez cette intégration pour visualiser toutes vos métriques ECR dans Datado
 
 ### Installation
 
-Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon Web Services][1].
+Si vous ne l'avez pas encore fait, commencez par configurer l'[intégration Amazon Web Services] (https://docs.datadoghq.com/integrations/amazon_web_services/).
 
 ### Collecte de métriques
 
-1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `ECR` est cochée
+1. Dans le [AWS integration tile](https://app.datadoghq.com/integrations/amazon-web-services), veillez à ce que `ECR` soit coché.
    dans la section concernant la collecte de métriques.
-2. Installez l'[intégration Datadog/ECR][3].
+1. Installez l'intégration [Datadog - ECR] (https://app.datadoghq.com/integrations/amazon-ecr).
 
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_ecr" >}}
 
+| | |
+| --- | --- |
+| **aws.ecr.repository_pull_count** <br>(count) | Le nombre total de tirages pour les images dans le référentiel.|
 
 ### Événements
 
@@ -55,10 +43,4 @@ L'intégration ECR n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
-
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://app.datadoghq.com/integrations/amazon-ecr
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ecr/amazon_ecr_metadata.csv
-[5]: https://docs.datadoghq.com/fr/help/
+Besoin d'aide ? Contactez l'[assistance Datadog](https://docs.datadoghq.com/help/).

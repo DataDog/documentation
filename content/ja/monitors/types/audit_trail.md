@@ -24,6 +24,8 @@ title: 監査証跡モニター
 
 Datadog で[監査証跡モニター][1]を作成するには、メインナビゲーションで *Monitors --> New Monitor --> Audit Trail* の順に進みます。
 
+<div class="alert alert-info"><strong>注</strong>: デフォルトでは、1 アカウントあたり 1000 モニターという制限があります。この制限に引っかかっている場合、<a href="/monitors/configuration/?tab=thresholdalert#multi-alert">マルチアラート</a>の使用を検討するか、<a href="/help/">サポートにお問い合わせ</a>ください。</div>
+
 ### 検索クエリを定義する
 
 監査イベントの検索クエリを定義します。検索クエリは、ログエクスプローラーと同じ[検索構文][2]に従います。

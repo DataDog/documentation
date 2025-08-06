@@ -66,7 +66,7 @@ Datadog Azure インテグレーションを使用して、Azure App Service Env
 ## 収集データ
 
 ### メトリクス
-{{ get-metrics-from-git "azure-appserviceenvironment" }}
+{{< get-metrics-from-git "azure_app_service_environment" >}}
 
 
 ### イベント
