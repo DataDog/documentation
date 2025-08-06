@@ -7,7 +7,7 @@ further_reading:
 ---
 
 ## Automated debug log collection
-<div class="alert alert-warning">Automated debug logs are supported for Java, Node.js and .NET only. For other languages, use <a href="/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode">manual debug log collection</a> instead.</div>
+<div class="alert alert-warning">Automated debug logs are supported for Java, Python, Node.js, and .NET only. For other languages, use <a href="/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode">manual debug log collection</a> instead.</div>
 
 A flare allows you to send necessary troubleshooting information to the Datadog support team, including tracer logs, with sensitive data removed. Flares are useful for troubleshooting issues like high CPU usage, high memory usage, and missing spans.
 
@@ -16,6 +16,7 @@ A flare allows you to send necessary troubleshooting information to the Datadog 
 - Your API key must be configured for Remote Configuration.
 - You must have a supported tracer version:
   - Java: `1.26.0` or greater
+  - Python: `3.12.0` or greater
   - Node.js: `5.15.0` or greater, or `4.39.0` or greater
   - .NET: `2.46.0` or greater
 
@@ -41,7 +42,7 @@ Debug mode is disabled by default. To enable it, follow the corresponding langua
 
 To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug=true` when starting the JVM or add `DD_TRACE_DEBUG=true` as environment variable.
 
-**Notes**: 
+**Notes**:
 - Datadog Java Tracer implements SLF4J SimpleLogger, so [all of its settings can be applied][1]. For example, you can configure it to log to a dedicated log file:
 ```
 -Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>
