@@ -43,7 +43,7 @@ To create a PR Gates rule in Datadog:
 
    {{< img src="pr_gates/setup/static_analysis_3.png" alt="A Static Analysis rule that runs on all repos and fails when a PR has at least one Static Code Analysis code vulnerability with at least `Critical` severity" style="width:100%" >}}
 
-1. Under **Preview checks**, select your CI provider to preview the [status check](#enable-ci-preview-check-creation) to be added to pull requests. To set the check so it blocks the pipeline when it fails, follow your provider's instructions for making a status check _required_:
+1. Under **Preview checks**, select your CI provider to preview the [status check](#enable-ci-status-checks) to be added to pull requests. To set the check so it blocks the pipeline when it fails, follow your provider's instructions for making a status check _required_:
 
    - [GitHub][14]
    - [Azure DevOps][15]
@@ -102,9 +102,11 @@ Check the command logs to see the overall gate evaluation status and information
 
 {{< img src="ci/datadog_ci_gate_evaluate_logs.png" alt="Datadog-ci gate evaluate logs" style="width:100%;">}}
 
-### Enable CI status check creation
+### Enable CI status checks
 
-You can automatically create a status check in [GitHub][9] or [Azure DevOps][15] for each rule evaluated. The check contains additional information about the rule evaluation, such as the failure reason and the matching events in Datadog. When this feature is enabled, the evaluation results appear directly in your CI provider.
+You can automatically create a status check in [GitHub][17] or [Azure DevOps][18] for each rule evaluated. The check contains additional information about the rule evaluation, such as the failure reason and the matching events in Datadog. When this feature is enabled, the evaluation results appear directly in pull requests in your CI provider.
+
+<div class="alert alert-info"><strong>Note</strong>: Re-running a check in the CI provider does not re-run the corresponding PR Gates rule.</div>
 
 To enable status checks:
 
@@ -112,7 +114,7 @@ To enable status checks:
    - [GitHub][10]
    - [Azure DevOps Source Code][16]
 
-   If you do not have the integration installed, or you don't have an app set up within the integration (GitHub App or Microsoft Entra App), follow the [GitHub][11] or Azure DevOps Source Code integration documentation to set one up.
+   If you do not have the integration installed, or you don't have an app set up within the integration (GitHub App or Microsoft Entra App), follow the [GitHub][11] or [Azure DevOps Source Code][16] integration documentation to set one up.
 
 1. Ensure the integration has the permission required to create status checks:
 
@@ -120,8 +122,6 @@ To enable status checks:
    - Azure DevOps: Grant `vso.build` and `vso.profile` access to the integration.
 
 1. After the permission is granted, you can see the checks in the CI provider.
-
-**Note**: Re-running a check does not re-run the corresponding PR Gates rule.
 
 ## Manage rules
 
@@ -155,3 +155,5 @@ For more information, see the [RBAC Permissions documentation][1].
 [14]: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches
 [15]: https://learn.microsoft.com/en-us/azure/devops/repos/git/pr-status-policy?view=azure-devops
 [16]: https://app.datadoghq.com/integrations/azure-devops-source-code
+[17]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks
+[18]: https://learn.microsoft.com/en-us/azure/devops/repos/git/pull-request-status?view=azure-devops
