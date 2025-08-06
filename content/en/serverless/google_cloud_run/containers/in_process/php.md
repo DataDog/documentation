@@ -13,7 +13,7 @@ further_reading:
 ---
 
 ## Setup
-1. **Install a Datadog tracer** in your Dockerfile.
+1. **Install the Datadog PHP tracer** in your Dockerfile.
 
    {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 RUN curl -LO https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php \

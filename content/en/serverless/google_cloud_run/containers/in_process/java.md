@@ -13,7 +13,7 @@ further_reading:
 ---
 
 ## Setup
-1. **Install a Datadog tracer**.
+1. **Install the Datadog Java tracer**.
 
    1. Add the Datadog Java tracer to your Dockerfile:
 

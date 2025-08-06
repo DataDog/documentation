@@ -13,7 +13,7 @@ further_reading:
 ---
 
 ## Setup
-1. **Install a Datadog tracer**.
+1. **Install the Datadog Go tracer**.
 
    1. In your main application, add the tracing library from `dd-trace-go`.
 
