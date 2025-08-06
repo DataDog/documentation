@@ -12,7 +12,7 @@ Cloud-provider based authentication is in Preview. Complete the form to request 
 
 ## Overview
 
-Cloud-provider based authentication allows you to authenticate the Datadog Terraform provider using cloud provider credentials instead of static API and Application keys. This feature leverages your existing cloud identity and access management systems to provide secure and temporary authentication to Datadog APIs.
+Cloud-provider based authentication lets you authenticate the Datadog Terraform provider using cloud credentials instead of static API and Application keys.
 
 The preview supports only **AWS**, with other cloud providers planned for future releases.
 
