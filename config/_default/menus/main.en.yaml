@@ -8000,6 +8000,11 @@ menu:
       url: account_management/guide/
       parent: account_management
       weight: 14
+    - name: Cloud-provider Based Authentication
+      identifier: account_management_cloud_auth
+      url: account_management/cloud_provider_authentication/
+      parent: account_management
+      weight: 15
     - name: Data Security
       url: data_security/
       pre: security-lock

@@ -6453,6 +6453,11 @@ menu:
       url: account_management/scim/azure
       parent: account_management_scim
       weight: 502
+    - name: 클라우드 공급자 기반 인증
+      identifier: account_management_cloud_auth
+      url: account_management/cloud_provider_authentication/
+      parent: account_management
+      weight: 5.5
     - name: API 및 애플리케이션 키
       identifier: account_management_api_app_keys
       url: account_management/api-app-keys/

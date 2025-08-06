@@ -6448,6 +6448,11 @@ menu:
       url: account_management/scim/azure
       parent: account_management_scim
       weight: 502
+    - name: クラウドプロバイダーベース認証
+      identifier: account_management_cloud_auth
+      url: account_management/cloud_provider_authentication/
+      parent: account_management
+      weight: 5.5
     - name: API and Application Keys
       identifier: account_management_api_app_keys
       url: account_management/api-app-keys/
