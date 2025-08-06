@@ -1,31 +1,59 @@
 ---
-aliases:
-- /fr/integrations/azure_appserviceplan
+app_id: azure-appserviceplan
+app_uuid: a44b7b0f-fd60-4a5a-8a18-03498111db31
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.web_serverfarms.cpu_percentage
+      metadata_path: metadata.csv
+      prefix: azure.web_serverfarms
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 279
+    source_type_name: Plan Azure App Service
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - azure
 custom_kind: integration
 dependencies: []
-description: Surveillez des métriques clés des plans Azure App Service.
-doc_link: https://docs.datadoghq.com/integrations/azure_app_service_plan/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_app_service_plan
-has_logo: true
 integration_id: azure-appserviceplan
-integration_title: Plan Microsoft Azure App Service
+integration_title: Plan Azure App Service
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_app_service_plan
-public_title: Intégration Datadog/Plan Microsoft Azure App Service
+public_title: Plan Azure App Service
 short_description: Surveillez des métriques clés des plans Azure App Service.
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Azure
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Surveillez des métriques clés des plans Azure App Service.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Plan Azure App Service
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## Section Overview
 
-Un plan App Service définit un ensemble de ressources de calcul nécessaires à l'exécution d'une application web. Ces ressources de calcul sont analogues à la batterie de serveurs dans l'hébergement web classique.
+Azure App Service Plan définit un ensemble de ressources informatiques utilisées pour exécuter une application web, à l'instar d'une ferme de serveurs dans l'hébergement web traditionnel. 
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques de plans Azure App Service.
 
@@ -33,12 +61,12 @@ Utilisez l'intégration Datadog/Azure pour recueillir des métriques de plans Az
 
 ### Installation
 
-Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
+Si vous ne l'avez pas encore fait, configurez l'[intégration Microsoft Azure][1]. Aucune étape d'installation supplémentaire n'est requise.
 
 ## Données collectées
 
 ### Métriques
-{{ get-metrics-from-git "azure-appserviceplan" }}
+{{< get-metrics-from-git "azure_app_service_plan" >}}
 
 
 ### Événements

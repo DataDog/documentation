@@ -28,11 +28,11 @@ title: 브라우저 세션 재생
 
 RUM Browser SDK는 [오픈 소스][1]이며 오픈 소스 [rrweb][2] 프로젝트를 활용합니다.
 
-## 세션 재생 레코더
+## How the Session Replay recorder works
 
 세션 재생 레코더는 RUM Browser SDK의 일부입니다. 레코더는 웹 페이지에서 발생하는 이벤트(예: DOM 수정, 마우스 이동, 클릭, 입력 이벤트)를 해당 이벤트의 타임스탬프와 함께 추적 및 기록하여 브라우저의 DOM 및 CSS의 스냅샷을 캡처합니다.
 
-그런 다음 Datadog은 웹 페이지를 재구축하고 재생 보기에서 적절한 시점에 기록된 이벤트를 다시 적용합니다. 세션 재생은 일반적인 RUM 세션과 동일한 30일 보존 정책을 따릅니다.
+Datadog then rebuilds the web page and re-applies the recorded events at the appropriate time in the replay view.
 
 세션 재생 레코더는 IE11을 제외한 RUM Browser SDK에서 지원하는 모든 브라우저를 지원합니다. 자세한 내용은 [브라우저 지원 테이블][3]을 참조하세요.
 
@@ -80,6 +80,8 @@ if (user.isAuthenticated) {
 현재 세션의 나머지 부분에 대한 Session Replay 녹화를 강제로 실행하려면 `startSessionReplayRecording({ force: true })`를 호출하세요.
 
 강제 옵션을 사용하면 초기 샘플링 결정에 관계없이 세션은 남은 시간 동안 재생 세션으로 업그레이드됩니다.
+
+<div class="alert alert-warning">강제 옵션은 기존 세션이 이미 샘플링 중인 경우에만 기존 세션을 재생된 세션으로 업그레이드합니다. 즉, 샘플링이 아직 시작되지 않은 경우 강제 옵션을 사용해도 샘플링이 시작되지 않으며 재생이 녹화되지 않습니다.</div>
 
 ## 세션 재생 비활성화
 

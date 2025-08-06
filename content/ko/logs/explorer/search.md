@@ -17,17 +17,35 @@ title: 로그 검색
 
 ## 개요
 
-개별 로그를 목록화해서 정보를 보는 것도 좋지만 로그를 집계했을 때 유용한 정보가 나타나는 경우도 있습니다. 이와 같이 정보를 보려면 [Log Explorer][5]에서 로그를 검색하고 시계열, 상위 목록, 트리맵 차트, 파이 차트, 또는 테이블로 표시하세요.
+[Logs Explorer][5]를 사용하면 개별 로그를 목록 형태로 검색하고 확인할 수 있습니다. 하지만 가장 유용한 인사이트는 대규모로 로그를 집계할 때 얻을 수 있습니다. 검색 기능을 사용하면 로그를 필터링하고 시계열 차트, 상위 목록, 트리 맵, 원형 차트, 표 형태로 시각화하여 로그 데이터 전반의 추세, 패턴 및 이상치를 더 잘 파악할 수 있습니다.
 
-Log Explorer의 검색 기능은 시간 범위, 검색 쿼리, `key:value` 및 전체 텍스트 검색을 혼합하여 사용합니다.
+## Natural Language Queries
 
-## 쿼리 검색
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+Natural Language Queries는 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다.
+</div>
+{{% /site-region %}}
 
-예를 들어 지난 30분 간 웹 스토어 서비스에서 오류 상태가 된 로그를 필터링하려면 `service:payment status:error rejected`와 같은 커스텀 쿼리를 만들고 시간 범위를 `Past 15 minutes`로 설정하세요.
+<div class="alert alert-info">로그용 Natural Language Queries (NLQ)는 <strong>Llama를 기반으로 구축되었습니다</strong>.</div>
+
+Natural Language Queries (NLQ)를 사용하면 원하는 내용을 쉬운 영어로 설명할 수 있습니다. Datadog은 요청을 구조화된 로그 쿼리로 자동 변환하여 복잡한 구문을 작성하지 않고도 로그를 더 쉽게 탐색할 수 있도록 지원합니다. 이 기능을 이용하려면 검색 필드에서 **Ask**를 클릭하세요.
+
+{{< img src="/logs/explorer/search/log_explorer_nlq.mp4" alt="Log Explorer에서 자연어 쿼리로 쉬운 영어를 사용해 로그를 검색하는 방법" video=true >}}
+
+이 시스템은 자연어 입력을 Datadog 쿼리로 변환하고 서비스, 속성, 태그, 시간 범위 등의 맥락을 이해합니다. 또한 관련 필드를 자동으로 감지하고 사용자가 간단한 설명을 입력해 시각화할 수 있습니다. 예: "Top 20 services by errors" 또는 "Show errors from service X in the past 24 hours."
+
+NLQ를 비활성화하려면 [`org_management` 권한][8]이 있어야 합니다. [Organization Settings > Preferences][7]로 이동하여 Natural Language Queries 기능을 끄세요.
+
+## 검색 쿼리
+
+Logs Explorer 검색은 시간 범위, 검색 쿼리, 혼합 `key:value`, [전체 텍스트 검색][6]으로 구성됩니다.
+
+지난 15분 동안 웹 스토어 서비스에서 생성된 로그(오류 상태 포함)를 필터링하려면 `service:payment status:error rejected`와 같은 커스텀 쿼리를 만들고 시간 범위를 `Past 15 minutes`로 설정합니다.
 
 {{< img src="logs/explorer/search_filter.png" alt="Log Explorer에서 웹 스토어 서비스 내 결제 거부 오류 로그를 필터링하는 검색 쿼리 쿼리 생성" style="width:100%;" >}}
 
-[인덱싱된 로그][1]는 전체 컨텍스트 검색과 `key:value` 검색 쿼리를 모두 지원합니다.
+[Indexed Logs][1]는 [전체 텍스트 검색][6]과 `key:value` 검색 쿼리를 모두 지원합니다.
 
 **참고**: `key:value` 쿼리를 사용하기 전에 [패싯을 선언][2]할 필요가 **없습니다**.
 
@@ -42,7 +60,7 @@ Log Explorer의 검색 기능은 시간 범위, 검색 쿼리, `key:value` 및 �
 
 ### 패싯 및 값 자동 완성
 
-검색 창은 검색 창 입력 내역을 기반으로 패싯을 자동 제안합니다. 이 패싯은 [패싯 패널][5] 위치와 같은 순서로 표시됩니다. 패싯에 정의된 표시 이름이 있을 경우 드롭다운 메뉴 우측에 표시됩니다. 패싯 패널에 표시되도록 구성하지 않은 패싯은 검색 창에 자동 제안되지 않습니다.
+검색창에 입력한 내용을 기반으로 검색창은 패싯을 자동 제안합니다. 제안된 패싯은 [패싯 패널][5]에 배치된 순서대로 표시됩니다. 패싯에 정의된 표시 이름이 있는 경우 드롭다운 메뉴 오른쪽에 표시됩니다.
 
 {{< img src="logs/explorer/search/log_facet_autocomplete.png" alt="`network`가 쿼리이고 @network.bytes_written, @network.client.ip, @network.interface가 자동 완성 옵션 패싯으로 표시된 로그 검색 창" style="width:80%;">}}
 
@@ -94,3 +112,6 @@ Log Explorer에서 로그를 검색하고 시간 프레임을 사용자 조정�
 [3]: /ko/logs/search-syntax
 [4]: /ko/dashboards/guide/custom_time_frames
 [5]: /ko/logs/explorer/
+[6]: /ko/logs/explorer/search_syntax/#full-text-search
+[7]: https://app.datadoghq.com/organization-settings/preferences
+[8]: /ko/account_management/rbac/permissions/#access-management

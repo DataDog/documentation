@@ -1,31 +1,16 @@
 ---
+app_id: azure_deployment_manager
 categories:
 - cloud
 - azure
 custom_kind: integration
-dependencies: []
-description: Utilisez Datadog pour surveiller les déploiements Canary dans Azure Deployment
-  Manager.
-doc_link: https://docs.datadoghq.com/integrations/azure_deployment_manager/
-draft: false
+description: Surveillez les déploiements Canary dans Azure Deployment Manager.
 further_reading:
 - link: https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/
   tag: Blog
   text: Versions Canary avec Azure Deployment Manager et Datadog
-git_integration_title: azure_deployment_manager
-has_logo: true
-integration_id: ''
-integration_title: Microsoft Azure Deployment Manager
-integration_version: ''
-is_public: true
-manifest_version: '1.0'
-name: azure_deployment_manager
-public_title: Datadog/Microsoft Azure Deployment Manager
-short_description: Surveillez les déploiements Canary dans Azure Deployment Manager.
-version: '1.0'
+title: Microsoft Azure Deployment Manager
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Section Overview
 
 Azure Deployment Manager (ADM) vous permet de coordonner un lancement par étapes pour le déploiement sécurisé d'applications complexes.
@@ -40,10 +25,10 @@ Pour utiliser Datadog comme check de santé pour ADM, vous avez besoin d'un comp
 
 ### Configuration
 
-1. Commencez par configurer des monitors dans Datadog pour votre déploiement. Commencez avec un monitor pour chaque région. Selon la complexité de votre application, il peut être utile de configurer des monitors pour les différentes étapes de déploiement dans chaque région. Suivez le [Didacticiel : Utiliser Azure Deployment Manager avec des modèles Resource Manager][1] pour mieux savoir où placer les monitors. Pour obtenir des idées de monitor, consultez [cet article du blog][2].
-2. Si vous avez configuré plusieurs monitors pour chaque région, créez un [monitor composite][3] pour chaque étape de déploiement ou région. Chaque monitor composite est une combinaison logique de plusieurs monitors qui, ensemble, indiquent le statut général d'une étape de déploiement.
-3. Configurez ensuite Datadog comme check de santé dans la topologie Azure Deployment Manager [dans le cadre du déploiement][4]. Définissez ces étapes de check de santé comme dépendances entre les étapes de déploiement. Utilisez [le modèle](#exemple-de-configuration-complete) en remplaçant `<CLÉ_API>` et `<CLÉ_APP>` par vos clés d'API et d'application Datadog. Créez une section dans `resources` pour chaque monitor (ou monitor composite) que vous venez de créer, et remplacez `<ID_MONITOR>` par l'ID du monitor. Il est possible d'ajouter plusieurs checks dans une [étape de check de santé](#exemple-d-etape-de-check-de-sante), mais Datadog vous conseille de créer un [check](#exemple-de-check-de-sante) par étape de check de santé, puis de créer des étapes de check de santé supplémentaires pour chaque monitor composite. Si vous définissez le check avec autre chose qu'un monitor composite, veillez à mettre à jour la `regex` en conséquence.
-4. Suivez la [documentation Microsoft][5] pour lancer le déploiement.
+1. Commencez par configurer des moniteurs dans Datadog pour votre déploiement. Commencez par un site Monitor pour chaque région. En fonction de la complexité de votre application, vous souhaiterez peut-être disposer de moniteurs pour différentes parties du déploiement dans chaque région. Le [Tutoriel : Utiliser Azure Deployment Manager avec les modèles Resource Manager] (https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-tutorial) peut vous aider à décider de l'emplacement de Monitor. Pour obtenir des idées sur Monitor, consultez [le blog](https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/).
+1. Si vous avez plusieurs moniteurs pour chaque région, créez un [composite Monitor ](https://docs.datadoghq.com/monitors/monitor_types/composite/) pour chaque déploiement step (étape) ou région. Chaque composite Monitor est une combinaison logique d'autres moniteurs qui, ensemble, indiquent l'état général d'un déploiement step (étape).
+1. Ensuite, configurez Datadog en tant que contrôle de santé dans Azure Deployment Manager topology (topologie) [dans le cadre du déploiement] (https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-overview#rollout-template). Définissez ces étapes de contrôle de santé comme des dépendances entre les étapes de déploiement. Utilisez le [template](#full-configuration-example), et remplacez `<API_KEY>` et `<APP_KEY>` par vos clés d'API et d'application Datadog. Créez une section dans `resources` pour chaque Monitor (ou composite Monitor ) que vous venez de créer et remplacez `<MONITOR_ID>` par les ID Monitor. Il est possible d'ajouter plusieurs contrôles à l'intérieur d'un [health check step (étape)](#example-health-check-step (étape)), mais Datadog recommande de créer un [check](#exemple-health-check) par contrôle de santé step (étape), puis de créer des étapes de contrôle de santé supplémentaires pour chaque composite Monitor . Si vous définissez le contrôle avec autre chose qu'un composite Monitor , veillez à mettre à jour le `regex` en conséquence.
+1. Suivez la [documentation Microsoft] (https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-overview) pour lancer le déploiement.
 
 #### Exemple de check de santé
 
@@ -204,11 +189,4 @@ Azure Deployment Manager ne comprend aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
-
-[1]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-tutorial
-[2]: https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/
-[3]: https://docs.datadoghq.com/fr/monitors/monitor_types/composite/
-[4]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-overview#rollout-template
-[5]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-overview
-[6]: https://docs.datadoghq.com/fr/help/
+Besoin d'aide ? Contactez l'[assistance Datadog](https://docs.datadoghq.com/help/).
