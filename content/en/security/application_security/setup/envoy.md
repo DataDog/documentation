@@ -19,10 +19,10 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="App and API Protection for Envoy is in Preview" >}}
-To try the preview of App and API Protection for Envoy, follow the setup instructions below.
+To try the preview of App and API Protection for Envoy, use the following setup instructions.
 {{< /callout >}}
 
-You can enable App and API Protection (AAP) for the Envoy proxy. The Datadog Envoy integration has support for threat detection and blocking.
+You can enable App and API Protection for the Envoy proxy. The Datadog Envoy integration has support for threat detection and blocking.
 
 ## Prerequisites
 
@@ -34,7 +34,7 @@ You can enable App and API Protection (AAP) for the Envoy proxy. The Datadog Env
 
 The App and API Protection Envoy integration uses the Envoy external processing filter.
 
-1. **Deploy a new container with the Datadog External Processor Docker image.** The image is available on the [Datadog GitHub Registry][5].
+1. Deploy a new container with the Datadog External Processor Docker image. The image is available on the [Datadog GitHub Registry][5].
 
    This service is a gRPC server that Envoy communicates with to have requests and responses analyzed by App and API Protection.
 
@@ -55,7 +55,7 @@ The App and API Protection Envoy integration uses the Envoy external processing 
    | `DD_AGENT_HOST`                        | `localhost`   | Hostname or IP of your Datadog Agent.                                            |
    | `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                                  |
 
-2. **Update your Envoy configuration** to add the [external processing filter][3] to your `http_filters` list, and define the corresponding gRPC cluster in your `clusters` section. For example:
+2. Update your Envoy configuration to add the [external processing filter][3] to your `http_filters` list, and define the corresponding gRPC cluster in your `clusters` section. For example:
 
    #### Http filters section
 
@@ -145,7 +145,7 @@ The App and API Protection Envoy integration uses the Envoy external processing 
 
    **Note**: Please read the provided example configuration carefully and adapt it to match your infrastructure and environment. You can find more configuration options available in the [Envoy external processor documentation][4].
 
-3. **Validation**
+3. Validation.
 
 {{% appsec-getstarted-2-plusrisk %}}
 
@@ -153,10 +153,10 @@ The App and API Protection Envoy integration uses the Envoy external processing 
 
 ## Datadog Go Tracer and Envoy integration
 
-The External Processor is built on top of the [Datadog Go Tracer][6] and inherits all of its environment variables. For additional details, refer to [Configuring the Go Tracing Library][7] and [App and API Protection Library Configuration][8].
+The External Processor is built on top of the [Datadog Go Tracer][6] and inherits all of its environment variables. See [Configuring the Go Tracing Library][7] and [App and API Protection Library Configuration][8].
 
-<div class="alert alert-warning">
-  <strong>Note:</strong> As the Datadog External Processor is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (e.g. <code>v2.2.0</code>). In some cases, early release versions may be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
+<div class="alert alert-info">
+  <strong>Note:</strong> As the Datadog External Processor is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.2.0</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
 </div>
 
 ## Limitations

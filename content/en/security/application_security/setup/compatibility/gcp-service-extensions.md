@@ -7,7 +7,7 @@ aliases:
   - /security/application_security/threats/setup/compatibility/gcp-service-extensions
 ---
 
-The following table lists the support for App and API Protection capabilities for GCP Service Extensions according to the specified Datadog Service Extensions callout image version:
+The following table lists App and API Protection capabilities for GCP Service Extensions according to the specified Datadog Service Extensions callout image version:
 
 | App and API Protection capability        | Minimum App and API Protection Service Extensions callout image version  |
 |------------------------------------------|--------------------------------------------------------------------------|
@@ -30,7 +30,7 @@ The Datadog Service Extensions callout supports the processing of request and re
 
 ## App and API Protection GCP Service Extensions support
 
-App and API Protection GCP Service Extensions is in Preview.
+<div class="alert alert-info">App and API Protection GCP Service Extensions is in Preview.</div>
 
 <div class="alert alert-info">If you would like to see support added for any of
 the unsupported capabilities, let us know! Fill out <a

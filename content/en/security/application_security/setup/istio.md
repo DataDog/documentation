@@ -17,10 +17,10 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="App and API Protection for Istio is in Preview" >}}
-To try the preview of App and API Protection for Istio, follow the setup instructions below.
+To try the preview of App and API Protection for Istio, use the following setup instructions.
 {{< /callout >}}
 
-You can enable App and API Protection (AAP) for your services within an Istio service mesh. The Datadog Istio integration allows Datadog to inspect and protect your traffic for threat detection and blocking directly at the edge of your infrastructure. This can be applied at the Istio Ingress Gateway or at the sidecar level.
+You can enable App and API Protection for your services within an Istio service mesh. The Datadog Istio integration allows Datadog to inspect and protect your traffic for threat detection and blocking directly at the edge of your infrastructure. This can be applied at the Istio Ingress Gateway or at the sidecar level.
 
 ## Prerequisites
 
@@ -135,10 +135,10 @@ Configure the connection from the external processor to the Datadog Agent using 
 | `DD_AGENT_HOST`                        | `localhost`   | Hostname or IP of your Datadog Agent.                                            |
 | `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                                  |
 
-The External Processor is built on top of the [Datadog Go Tracer][7] and inherits all of its environment variables. For additional details, refer to [Configuring the Go Tracing Library][8] and [App and API Protection Library Configuration][9].
+The External Processor is built on top of the [Datadog Go Tracer][7] and inherits all of its environment variables. See [Configuring the Go Tracing Library][8] and [App and API Protection Library Configuration][9].
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> As the Datadog External Processor is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (e.g. <code>v2.2.0</code>). In some cases, early release versions may be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
+  <strong>Note:</strong> As the Datadog External Processor is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.2.0</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
 </div>
 
 ### 2. Configure an EnvoyFilter

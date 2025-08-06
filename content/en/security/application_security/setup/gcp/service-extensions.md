@@ -23,10 +23,10 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="App and API Protection Service Extensions is in Preview" >}}
-To try the preview of App and API Protection Service Extensions for GCP, follow the setup instructions below.
+To try the preview of App and API Protection Service Extensions for GCP, use the following setup instructions.
 {{< /callout >}}
 
-You can enable App and API Protection (AAP) with GCP Service Extensions within GCP Cloud Load Balancing. The Datadog App and API Protection Service Extensions integration provides threat detection and blocking capabilities directly in your GCP environment.
+You can enable App and API Protection with GCP Service Extensions within GCP Cloud Load Balancing. The Datadog App and API Protection Service Extensions integration provides threat detection and blocking capabilities directly in your GCP environment.
 
 ## Prerequisites
 
@@ -42,7 +42,7 @@ You can enable App and API Protection (AAP) with GCP Service Extensions within G
 
 ## Enabling threat detection
 
-To set up the App and API Protection Service Extension in your GCP environment, use the Google Cloud Console with VM Compute Engine or Terraform scripts and complete the following steps.
+To set up the App and API Protection Service Extension in GCP, use the Google Cloud Console with VM Compute Engine or Terraform scripts, and complete the following steps.
 
 **Note:** Google Cloud provides guides for creating [a callout backend service][4] and [configuring a Service Extension as a traffic extension][5]. The following steps use the same general setup but include custom configurations specific to Datadog's App and API Protection integration.
 
@@ -81,7 +81,7 @@ To set up the App and API Protection Service Extension in your GCP environment, 
     1. To send all traffic to the extension, insert `true` in the **Match condition**.
     2. For **Programability type**, select `Callouts`.
     3. Select the backend service you created in the previous step.
-    4. Select in **Events** list **only** the `Request Headers` and `Response Headers`. These are **required**. Do not select the bodies events. They are supported out of the box by configuring accordingly the Service Extension callout with the body processing size limit.
+    4. In **Events**, select **only** `Request Headers` and `Response Headers`. These are required. Do not select the bodies events. These are supported out-of-the-box by configuring the Service Extension callout with the body processing size limit.
     5. Optionally, enable the `fail_open` to still allow the traffic to pass through if the service extension fails or times out.
 
     <br>
@@ -495,10 +495,10 @@ Configure the container to send traces to your Datadog Agent using the following
 | `DD_AGENT_HOST`                        | `localhost`   | Hostname or IP of your Datadog Agent.                                            |
 | `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                                  |
 
-The App and API Protection GCP Service Extensions integration is built on top of the [Datadog Go Tracer][6] and inherits all of its environment variables. For additional details, refer to [Configuring the Go Tracing Library][7] and [App and API Protection Library Configuration][8].
+The App and API Protection GCP Service Extensions integration is built on top of the [Datadog Go Tracer][6] and inherits all of its environment variables. See [Configuring the Go Tracing Library][7] and [App and API Protection Library Configuration][8].
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> As the App and API Protection GCP Service Extensions integration is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (e.g. <code>v2.2.0</code>). In some cases, early release versions may be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
+  <strong>Note:</strong> As the App and API Protection GCP Service Extensions integration is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.2.0</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
 </div>
 
 ## Limitations

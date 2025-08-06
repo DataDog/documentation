@@ -5,7 +5,7 @@ type: multi-code-lang
 code_lang_weight: 40
 ---
 
-The following table lists the support for App and API Protection capabilities for the Istio integration according to the specified Datadog External Processor image version:
+The following table lists App and API Protection capabilities for the Istio integration according to the specified Datadog External Processor image version:
 
 | App and API Protection capability              | Minimum Datadog External Processor image version  |
 |------------------------------------------------|---------------------------------------------------|
@@ -41,7 +41,7 @@ More information about relationship between Istio and Envoy versions can be foun
 
 ### Envoy version support
 
-The Datadog Envoy integration for App and API Protection relies on features that may not be present in every Envoy version. Refer to the table below to determine which Envoy versions support each feature.
+The Datadog Envoy integration for App and API Protection relies on features that might not be present in every Envoy version. The following table shows which Envoy versions support each feature.
 
 | Feature | Minimum Envoy version |
 |---------|-----------------------|
@@ -50,7 +50,7 @@ The Datadog Envoy integration for App and API Protection relies on features that
 
 ## Datadog Istio integration support
 
-The Datadog Istio integration for App and API Protection is in Preview.
+<div class="alert alert-info">The Datadog Istio integration for App and API Protection is in Preview.</div>
 
 Only the Linux version and both the arm64 and arm64 architectures are supported.
 
