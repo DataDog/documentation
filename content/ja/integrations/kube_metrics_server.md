@@ -24,9 +24,9 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- コンテナ
+- incident-teams
 - kubernetes
-- orchestration
+- オーケストレーション
 custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/README.md
@@ -125,7 +125,7 @@ Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含ま�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "kubernetes_state_core" >}}
+{{< get-metrics-from-git "kube_metrics_server" >}}
 
 
 ### イベント
@@ -133,7 +133,7 @@ Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含ま�
 kube_metrics_server には、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "kubernetes_state_core" >}}
+{{< get-service-checks-from-git "kube_metrics_server" >}}
 
 
 ## トラブルシューティング

@@ -1,28 +1,56 @@
 ---
-aliases:
-- /fr/integrations/azure_cognitiveservices
+app_id: azure-cognitiveservices
+app_uuid: 0d77c8ca-d9b6-46a5-925e-c942e00425a2
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.cognitiveservices_accounts.total_calls
+      metadata_path: metadata.csv
+      prefix: azure.cognitiveservices_accounts
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 282
+    source_type_name: Azure Cognitive Services
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - azure
 custom_kind: integration
 dependencies: []
-description: Surveillez des métriques clés Azure Cognitive Services.
-doc_link: https://docs.datadoghq.com/integrations/azure_cognitive_services/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_cognitive_services
-has_logo: true
 integration_id: azure-cognitiveservices
-integration_title: Microsoft Azure Cognitive Services
+integration_title: Azure Cognitive Services
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_cognitive_services
-public_title: Intégration Datadog/Microsoft Azure Cognitive Services
+public_title: Azure Cognitive Services
 short_description: Surveillez des métriques clés Azure Cognitive Services.
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Azure
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Surveillez des métriques clés Azure Cognitive Services.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Cognitive Services
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## Section Overview
 
 Azure Cognitive Services proposent des API, des kits de développement et des services conçus pour aider les développeurs à créer des applications intelligentes sans disposer directement de l'intelligence artificielle ni de connaissances ou compétences en science des données.
@@ -33,12 +61,12 @@ Utilisez l'intégration Datadog/Azure pour recueillir les métriques d'Azure Cog
 
 ### Installation
 
-Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
+Si vous ne l'avez pas encore fait, configurez l'[intégration Microsoft Azure][1]. Aucune installation supplémentaire n'est nécessaire.
 
 ## Données collectées
 
 ### Métriques
-{{ get-metrics-from-git "azure-cognitiveservices" }}
+{{< get-metrics-from-git "azure_cognitive_services" >}}
 
 
 ### Événements

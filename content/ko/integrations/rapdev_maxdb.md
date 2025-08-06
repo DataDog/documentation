@@ -63,7 +63,7 @@ public_title: MaxDB
 short_description: MaxDB 데이터베이스의 볼륨, 캐시, 스키마, 테이블 등 모니터링하기
 supported_os:
 - linux
-- windows
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
