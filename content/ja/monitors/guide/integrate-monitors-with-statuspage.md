@@ -44,7 +44,7 @@ Statuspage アラートでトリガーする[メトリクスモニター][8]を�
 1. [**Monitors** > **New Monitor**][9] の順に移動し、**Metric** をクリックします。
 2. 検出方法の選択、メトリクスの定義、アラート条件の設定、高度なモニターオプションの構成については、[メトリクスモニターのドキュメント][8]を参照してください。
 3. テストの状態に応じて、`UP` または `DOWN` を返すようにモニター名をカスタマイズします。例: `{{#is_alert}}DOWN{{/is_alert}}{{#is_recovery}}UP{{/is_recovery}}`
-4. In the **Configure notifications and automations** section, add the generated email address such as `@custom-statuspage-email@notifications.statuspage.io` in the message. This automatically populates the `Notify your services and your team members` field above **Renotification**.
+4. **Configure notifications and automations** セクションで、生成されたメール アドレス `@custom-statuspage-email@notifications.statuspage.io` をメッセージに追加します。これにより、**Renotification** の上にある `Notify your services and your team members` フィールドが自動的に入力されます。
 5. モニター通知セクションに必要事項を記入し、モニター名にサマリーを追加します。例: `Shopist Checkout Functionality`
 6. モニターの再通知条件を設定し、`service:status-page` などのタグを追加します。
 7. チームを選択し、モニターに優先順位を割り当てます。
