@@ -16,13 +16,43 @@ User retention is measured within a given cohort of users that you define. A coh
 
 Only views and actions can act as events.
 
-The retention graph displays the percentage of users who completed the return event each day during the past week.
+## Prerequisites
 
-{{< img src="product_analytics/retention/pana_retention_overview-2.png" alt="Example Retention Analysis graph" style="width:100%;" >}}
+In order for User Retention data to populate, you must set the `usr.id` attribute in your SDK. See the [instructions for sending unique user attributes][4].
+
+## Retention types
+Product analytics support two types of retention event measurements:
+
+{{< img src="product_analytics/retention/pana_retention_measureby.png" alt="The two types of retention measurements available with product analytics" style="width:80%;" >}}
+
+
+### Return On
+For each cohort and return period, calculates the percentage of users who triggered the return event during that specific period.
+
+It sheds light on the likelihood of users completing the return event X periods after the start event, which is especially helpful when assessing overall retention across your features and products.
+
+
+### Return On or After
+For each cohort and return period, calculates the percentage of users who triggered the return event during that specific period or any subsequent period.
+
+It sheds light on users who either fully leave your product or stop using key functionalities, which is especially helpful when assessing the effectiveness of onboarding experiences.
+
+
+
+## Weighted average cohort
+
+This retention graph displays the percentage of users who completed the return event each day during the past week. The goal is to sum up the overall retention across cohorts using the weighted average, the weights are coming from the cohort sizes.
+
+For example, the 91% after 1 week is computed using (99 * 1.8k + 92 * 2.35k + 81 * 1.75k) / (1.8k + 2.35k + 1.75k).
+
+
+
+{{< img src="product_analytics/retention/pana_retention_weighed_avg.png" alt="Example Retention Analysis graph" style="width:80%;" >}}
 
 <div class="alert alert-info">
 <strong>Note:</strong> The retention chart displays grey when partial data is available for a given time period or cohort. This is because the time period is not finished and Datadog cannot yet accurately compute the retention rate. 
 </div>
+
 
 
 You can further scope the retention measure based on when the return event occurs to identify the users who have completely churned from a product or feature. 
@@ -32,10 +62,6 @@ You can further scope the retention measure based on when the return event occur
 - `Return on`: the user has to do the "Return event" on the period to be counted as retained.
 It's useful to understand the likelihood of a user to come back after a given period.
 
-
-## Prerequisites
-
-In order for User Retention data to populate, you must set the `usr.id` attribute in your SDK. See the [instructions for sending unique user attributes][4].
 
 ## Build a graph
 
