@@ -35,7 +35,7 @@ title: ログをトランザクションにグループ化する
 
 例えば、e コマースサイトでは、カタログ検索、カートに入れる、チェックアウトなどの様々なユーザーアクションのログをグループ化し、`requestId` や `orderId` などの共通の属性を使用して **Transactions** ビューを構築します。
 
-{{< img src="logs/explorer/aggregations_transactions.jpg" alt="ログをトランザクション別に分類して表示するログエクスプローラー" style="width:100%;" >}}
+{{< img src="logs/explorer/aggregations_transactions.jpg" alt="Log Explorer がトランザクションごとにログをグループ化して表示している様子" style="width:100%;" >}}
 
 トランザクションは、[リスト集計][1]の視覚化をサポートします。リスト内のトランザクションをクリックすると、トランザクションのサイドパネルが開き、次のことができます。
 
@@ -52,7 +52,7 @@ title: ログをトランザクションにグループ化する
 
 {{< img src="logs/explorer/transaction_group_side_panel.png" alt="選択されたグループ内のトランザクションを順番に表示するトランザクショングループパネル" style="width:80%;" >}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
