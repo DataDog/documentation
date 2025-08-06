@@ -30,7 +30,7 @@ There are five default fields:
 |**Services**              | If you have [Datadog APM][4] configured, the `Services` property field automatically uses your APM Service names. To add values to `Services`, you can upload a CSV. |
 |**Teams**                 | The `Teams` property field automatically populates from the [teams][5] defined in your organization. |
 
-You cannot delete default fields.
+**Note**: You cannot delete default fields.
 
 ### Field types
 
