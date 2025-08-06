@@ -28638,7 +28638,6 @@ components:
       required:
       - source
       - match_rules
-      - support_rules
       type: object
     ObservabilityPipelineParseGrokProcessorRuleMatchRule:
       description: 'Defines a Grok parsing rule, which extracts structured fields
