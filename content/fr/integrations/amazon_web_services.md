@@ -17,10 +17,10 @@ assets:
     metrics:
       check: aws.usage.call_count
       metadata_path: assets/metrics/metric-spec.yaml
-      prefix: aws
+      prefix: aws.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10
+    source_type_id: !!int 10
     source_type_name: Amazon Web Services
   monitors:
     Integration Health Status: assets/monitors/aws_integration_status_monitor.json
@@ -42,7 +42,7 @@ draft: false
 git_integration_title: amazon_web_services
 integration_id: amazon-web-services
 integration_title: Amazon Web Services
-integration_version: ""
+integration_version: 
 is_public: true
 manifest_version: 2.0.0
 name: amazon_web_services
@@ -54,7 +54,7 @@ tile:
   classifier_tags:
   - Category::AWS
   - Category::Cloud
-  - Category::IoT
+  - Category:IoT
   - Category::Log Collection
   - Category::Event Management
   - Offering::Integration
@@ -71,7 +71,6 @@ tile:
     url: https://www.datadoghq.com/blog/iam-least-privilege/
   support: README.md#Support
   title: Amazon Web Services
-
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
