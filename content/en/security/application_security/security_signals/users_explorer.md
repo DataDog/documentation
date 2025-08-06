@@ -3,13 +3,13 @@ title: Users Explorer
 disable_toc: false
 ---
 
-This topic describes how to use the App and API Protection [Users explorer][1] to investigate the risks associated with the users tracked by security [Traces][3].
+This topic describes how to use the App and API Protection [Users explorer][1] to investigate the risks associated with the users tracked by security [traces][3].
 
 ## Overview
 
-There are multiple ways Datadog can associate a user with a trace and, consequently, display the user in the Users explorer. For example, a login attempt causes a user to appear in the Users explorer. This tracing makes the Users explorer a sort of user inventory. Users are identified by user ID (`@usr.id`) and, when available, user name and email address. See [Adding authenticated user information to traces and enabling user blocking capability][8].
+Datadog populates the Users explorer by associating users with security traces from events like login attempts. This makes the Users explorer an inventory of tracked users. Users are identified by user ID (`@usr.id`) and, when available, user name and email address. See [Adding authenticated user information to traces and enabling user blocking capability][8].
 
-Typically, users in the Users explorer are not a risk but some user account vulnerabilities are under attack. For example, attempts to compromise a user account.
+Typically, users in the Users explorer are not a risk. However, the explorer helps you identify user accounts that are at risk or are actively being attacked (for example, through attempts to compromise an account).
 
 With the Users explorer, you can investigate and take action on the user accounts flagged as risks using **risk categories**.
 
@@ -26,7 +26,7 @@ The Users explorer assigns one or more of the following risk categories to a use
 
 ### How the Users explorer differs from other explorers
 
-To understand the difference between the different explorers, review these approaches:
+To understand the difference between the different explorers, review these security approaches they support:
 
 - **Protect:** Automatically block attackers (IPs and authenticated users) using App and API Protection [Policies][2]. Customers should block attack tools as their first automated blocking action. Blocking attack tools reduces common vulnerability discovery for OWASP threats such as SQLi, command injection, and SSRF.
 - **React:** Blocking attackers in response to observed threats using the [Signals][9], [Traces][3], Users, [Attackers][4] explorers.
@@ -36,7 +36,7 @@ Each explorer focuses on a specific use case:
 - **Signals explorer**: Provides a list of actionable alerts such as `Credential Stuffing Attack` or `Command Injection`. Signals have workflow capabilities, a description, severity, and correlated Traces. Interactions include user assignment workflows, automated protection, analytics, search, and pivoting to Traces Explorer.
 - **Traces explorer**: Lists evidence for business logic events, such as logins, or attack payloads. Interactions include analytics and search.
 - **Attackers explorer**: Identifies attackers as `suspicious` (IP addresses that have attacked in the last 24 hours up to a threshold) and `flagged` (IP addresses that have exceeded that threshold).
-- **Users explorer**: List of authenticated users associated with one or more traces. Interactions include: 
+- **Users explorer**: Lists authenticated users associated with one or more traces. Interactions include: 
   - Bulk actions for user analytics and blocking
   - Drill-down into the history of any user
   - Search
@@ -50,7 +50,7 @@ The main sections in the Users explorer are:
 
 - Facets and search. These enable you to filter users by multiple user attributes.
 - The list of users with security metrics. 
-  - Click a user to examine its risks, IPs, locations, endpoints, and signals. 
+  - Click a user to examine their risks, IPs, locations, endpoints, and signals. 
   - You can block an individual user from the list or its details drawer.
   - To block multiple users, select one or more users and click **Compare and Block**.
 
@@ -118,7 +118,7 @@ Comparing helps you:
 
 ### Threat Intel Intention
 
-**Benefit:** Provides insights about the attacker reputation based on IP. Flagged IPs aren't necessarily malicious, but they are known to be misused. Misuse is often without the user knowing, for example, in  the case of `residential_proxy`. These users are worth closer attention.
+**Benefit:** Provides insights about the attacker reputation based on IP. Flagged IPs aren't necessarily malicious, but they are known to be misused. Misuse is often without the user knowing, for example, in the case of `residential_proxy`. These users are worth closer attention.
 
 Matching intentions reveal:
   * Common attacker **goals**.
