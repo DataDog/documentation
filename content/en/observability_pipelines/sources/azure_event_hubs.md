@@ -167,9 +167,10 @@ Select your platform.
 
 If you run into issues after installing the Worker, check your Observability Pipelines environment file (`/etc/default/observability-pipelines-worker`) to make sure the environment variables are correctly set:
 
--   `DD_OP_SOURCE_KAFKA_SASL_USERNAME="$$ConnectionString"`
--   `DD_OP_SOURCE_KAFKA_BOOTSTRAP_SERVERS=<NAMESPACE>.servicebus.windows.net:9093`
--   `DD_OP_SOURCE_KAFKA_SASL_PASSWORD=<Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>>`
+- `DD_OP_SOURCE_KAFKA_SASL_USERNAME="$$ConnectionString"`
+- `DD_OP_SOURCE_KAFKA_BOOTSTRAP_SERVERS=<NAMESPACE>.servicebus.windows.net:9093`
+- `DD_OP_SOURCE_KAFKA_SASL_PASSWORD=<Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>>`
+- `DD_OP_SOURCE_KAFKA_KEY_PASS=password`
 
 ### Missing environment variable
 
