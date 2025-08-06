@@ -13,6 +13,10 @@ further_reading:
 <div class="alert alert-warning">PR Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+PR Gates are in Preview.
+{{< /callout >}}
+
 ## Overview
 
 To use Datadog PR Gates, you can define one or more rules on the [**PR Gate Rules**][1] page and integrate them in your CI pipeline with the [`datadog-ci gate evaluate` command][2].

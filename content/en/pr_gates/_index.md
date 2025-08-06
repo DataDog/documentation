@@ -25,7 +25,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-PR Gates is in Preview.
+PR Gates are in Preview.
 {{< /callout >}}
 
 {{< site-region region="gov" >}}
