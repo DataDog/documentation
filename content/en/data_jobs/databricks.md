@@ -54,7 +54,7 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
    ```
    The user granting these must have `MANAGE` privilege on `CATALOG system`.
       
-   -  The SQL Warehouse must be Pro or Serverless. Classic Warehouses are **NOT** supported. We recommend a 2XS size Warehouse and configuring Auto Stop after 5-10 minutes to minimize costs.
+   -  The SQL Warehouse must be Pro or Serverless. Classic Warehouses are **NOT** supported. A 2XS warehouse is recommended, with Auto Stop set to 5–10 minutes to reduce cost.
 1. In the **Select products to set up integration** section, ensure that Data Jobs Monitoring is **Enabled**.
 1. In the **Datadog Agent Setup** section, choose either
     - [Managed by Datadog (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog installs and manages the Agent with a global init script in the workspace.
@@ -92,7 +92,7 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
    GRANT USE SCHEMA ON CATALOG system TO <token_principal>;
    ```
    The user granting these must have `MANAGE` privilege on `CATALOG system`.
-   -  The SQL Warehouse must be Pro or Serverless. Classic Warehouses are **NOT** supported. We recommend a 2XS size Warehouse and configuring Auto Stop after 5-10 minutes to minimize costs.
+   -  The SQL Warehouse must be Pro or Serverless. Classic Warehouses are **NOT** supported. A 2XS size warehouse is recommended, with Auto Stop configured for 5–10 minutes to minimize cost.
 1. In the **Select products to set up integration** section, make sure the Data Jobs Monitoring product is **Enabled**.
 1. In the **Datadog Agent Setup** section, choose either
     - [Managed by Datadog (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog installs and manages the Agent with a global init script in the workspace.
