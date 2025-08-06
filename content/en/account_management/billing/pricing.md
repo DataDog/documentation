@@ -72,7 +72,7 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 
 ## Incident Management
 
-* For organizations on a new seat-based plan, Datadog charges based on your organization's seat commitment. Self-service seat management will be available soon.
+* For organizations on a seat-based plan, Datadog charges based on your organization's seat commitment. 
 * For organizations on the legacy usage-based plan, Datadog tracks the number of monthly active Incident Management users.
   * Datadog counts a user as an **active user** if they have used Datadog capabilities to contribute substantively to the incident response. For example, you become an active user for the month when you:
     * Update an incident's state, severity, or other fields
