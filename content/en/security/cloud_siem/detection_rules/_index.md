@@ -386,13 +386,15 @@ One way to decrease signal noise is to prioritize production environment signals
 
 The severity decrement is applied to signals with an environment tag starting with `staging`, `test`, or `dev`.
 
-## Say what's happening
+## Describe your playbook
 
 {{% security-rule-say-whats-happening %}}
 
 Use the **Tag resulting signals** dropdown menu to add tags to your signals. For example, `security:attack` or `technique:T1110-brute-force`.
 
 **Note**: the tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
+
+See [Cloud SIEM Data Security ][7] for more information on using message template variables, group-by values in the notification title, and webhooks.
 
 ## Suppression rules
 
@@ -441,3 +443,4 @@ The rule deprecation process is as follows:
 [4]: https://app.datadoghq.com/security/rules
 [5]: /security/cloud_siem/historical_jobs/
 [6]: /security/default_rules/?category=cat-cloud-siem-log-detection#all
+[7]: /data_security/cloud_siem/
