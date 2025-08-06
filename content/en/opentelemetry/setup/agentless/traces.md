@@ -111,7 +111,7 @@ traceExporter, err := otlptracehttp.New(
 		map[string]string{
 			"dd-api-key": os.Getenv("DD_API_KEY"),
 			"dd-otel-span-mapping": "{span_name_as_resource_name: true}",
-      "dd-otlp-source": "${YOUR_SITE}", // Replace with the specific value provided by Datadog for your organization
+			"dd-otlp-source": "${YOUR_SITE}", // Replace with the specific value provided by Datadog for your organization
 		}),
 )
 ```
