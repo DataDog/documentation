@@ -25,7 +25,7 @@ Datadog で Database Monitoring を設定するために必要な手順は、使
 
 Datadog Agent は、CPU、メモリ、ネットワークアクティビティなどのシステムメトリクスを監視する軽量なソフトウェアです。また、SQL ユーザーとしてデータベースに接続し、データベースパフォーマンスに関するデータを収集することもできます。
 
-For self-hosted databases, you install the agent directly onto the host that is hosting your database. For cloud-managed databases such as Amazon RDS and Azure SQL, you configure the Agent to connect to your databases remotely.
+セルフホスト型データベースの場合は、データベースをホストしているサーバーに Agent を直接インストールします。Amazon RDS や Azure SQL などのクラウド管理型データベースの場合は、Agent を構成してリモートでデータベースに接続します。
 
 
 ### セルフホストデータベース
@@ -37,7 +37,7 @@ For self-hosted databases, you install the agent directly onto the host that is 
 * [Postgresで収集したシステムメトリクス][2]
 * [MySQL で収集したシステムメトリクス][3]
 * [SQL Server で収集したシステムメトリクス][4]
-* [System metrics collected on Oracle][17]
+* [Oracle で収集されるシステムメトリクス][17]
 
 セルフホスト型セットアップの場合、Agent をデータベースホストに直接インストールし、データベースプロセスを実行しているシステムの健全性を完全に視覚化することができます。
 
@@ -52,15 +52,15 @@ Agent にデータベースへの読み取り専用アクセスを許可し、�
 
 ### クラウド管理型データベース
 
-If your setup is cloud-managed (with providers such as [Amazon RDS][8] or Aurora, Google Cloud SQL, or Azure), you install the Agent on a separate host and configure it to connect to each managed instance.
+Amazon RDS、Aurora、Google Cloud SQL、Azure などのクラウド管理型データベース環境の場合は、別のホストに Agent をインストールし、各管理対象インスタンスに接続するように構成します。
 
 データベースモニタリングは、CPU、メモリ、ディスク使用量、ログ、関連するテレメトリーなどのシステムメトリクスを、クラウドプロバイダーとの Datadog インテグレーションを利用して直接収集します。
 
-{{< img src="database_monitoring/dbm_architecture_cloud-hosted.png" alt="The database instance is separate from the Agent host, which is separate from the Datadog backend. The cloud API connects to the Datadog AWS integration through the internet.">}}
+{{< img src="database_monitoring/dbm_architecture_cloud-hosted.png" alt="データベースインスタンスは Agent ホストとは別で、Datadog バックエンドとは別になっています。クラウド API は、インターネットを通じて Datadog の AWS インテグレーションに接続します。">}}
 
 Agent がデータベースインスタンスに接続できるのであれば、どのクラウド VM (例えば、EC2) にも Agent をインストールすることができます。
 
-If you are not running your own Kubernetes cluster, Datadog recommends using your cloud provider's orchestration tools. For example, you can use [Amazon ECS][9] to host the Datadog Agent, as [the Agent already exists as a Docker container][10].
+独自の Kubernetes クラスターを運用していない場合は、クラウドプロバイダーのオーケストレーションツールを利用することを Datadog は推奨しています。たとえば、[Amazon ECS][9] で Datadog Agent をホストできます。これは、[Agent がすでに Docker コンテナとして提供されている][10]ためです。
 
 ### Kubernetes
 
@@ -74,7 +74,7 @@ Agent がレポートを停止した場合、Cluster Agent はそれをアクテ
 
 #### Aurora
 
-If you are using [Aurora][15], the Agent must be connected to the individual Aurora instance (not the cluster endpoint) because the Agent must connect directly to the host being monitored.
+[Aurora][15] を使用している場合、Agent は監視対象のホストに直接接続する必要があるため、個々の Aurora インスタンス (クラスターのエンドポイントではありません) に接続する必要があります。
 
 Aurora データベースのモニタリングでは、Agent はプロキシ、ロードバランサー、`pgbouncer` などの接続プーラー、または Aurora クラスターのエンドポイントを通じてデータベースに接続してはいけません。各 Datadog Agent は、基礎となるホスト名に関する知識を持ち、フェイルオーバーの場合でも、その生涯を通じて単一のホストで実行する必要があります。そうでないと、メトリクスの値が不正確になります。
 

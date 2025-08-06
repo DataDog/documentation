@@ -1,28 +1,14 @@
 ---
+app_id: amazon_inspector
 categories:
-- AWS
+- aws
 - クラウド
 - コンプライアンス
 - ログの収集
-custom_kind: integration
-dependencies: []
+custom_kind: インテグレーション
 description: Amazon Inspector のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_inspector/
-draft: false
-git_integration_title: amazon_inspector
-has_logo: true
-integration_id: ''
-integration_title: Amazon Inspector
-integration_version: ''
-is_public: true
-manifest_version: '1.0'
-name: amazon_inspector
-public_title: Datadog-Amazon Inspector インテグレーション
-short_description: Amazon Inspector のキーメトリクスを追跡
-version: '1.0'
+title: Amazon Inspector
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Inspector は、AWS リソースのセキュリティとコンプライアンスの強化を支援するセキュリティ脆弱性評価サービスです。
@@ -33,14 +19,14 @@ Amazon Inspector は、AWS リソースのセキュリティとコンプライ�
 
 ### インストール
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration](https://docs.datadoghq.com/integrations/amazon_web_services/) first.
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Inspector` が有効になっていることを確認します。
-2. [Datadog - Amazon Inspector インテグレーション][3]をインストールします。
+1. In the [AWS integration page](https://app.datadoghq.com/integrations/amazon-web-services), ensure that `Inspector` is enabled under the `Metric Collection` tab.
+1. Install the [Datadog - Amazon Inspector integration](https://app.datadoghq.com/integrations/amazon-inspector).
 
-### 収集データ
+### ログ収集
 
 #### ログの有効化
 
@@ -50,17 +36,23 @@ S3 バケットまたは CloudWatch のいずれかにログを送信するよ�
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon Inspector ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+1. If you haven't already, set up the [Datadog Forwarder Lambda function](https://docs.datadoghq.com/logs/guide/forwarder/).
 
-    - [S3 バケットに手動トリガーを追加][5]
-    - [CloudWatch ロググループに手動トリガーを追加][6]
+1. Lambda 関数がインストールされたら、AWS コンソールから、Amazon Inspector ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+
+   - [Add a manual trigger on the S3 bucket](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-s3-buckets)
+   - [Add a manual trigger on the CloudWatch Log Group](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-cloudwatch-log-group)
 
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_inspector" >}}
 
+| | |
+| --- | --- |
+| **aws.inspector.total_assessment_run_findings** <br>(count) | The number of findings for this target.|
+| **aws.inspector.total_assessment_runs** <br>(count) | The number of assessment runs for this target.|
+| **aws.inspector.total_healthy_agents** <br>(count) | The number of agents that match this target that are healthy.|
+| **aws.inspector.total_matching_agents** <br>(count) | The number of agents that match this target.|
 
 ### イベント
 
@@ -72,13 +64,4 @@ Amazon Inspector インテグレーションには、サービスのチェック
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
-
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://app.datadoghq.com/integrations/amazon-inspector
-[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-cloudwatch-log-group
-[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_inspector/amazon_inspector_metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+お問合せは、[Datadog サポート](https://docs.datadoghq.com/help/) まで。

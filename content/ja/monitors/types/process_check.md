@@ -10,7 +10,7 @@ further_reading:
 - link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: ドキュメント
   text: モニターステータスを確認
 title: プロセスチェックモニター
@@ -77,14 +77,14 @@ Datadog で[プロセスチェックモニター][2]を作成するには、メ�
 
 ### 通知
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][7] page.
+**Configure notifications and automations** セクション (通知と自動化の構成) の詳細な手順については、[通知][7]のページをご覧ください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/integrations/process/
-[2]: https://app.datadoghq.com/monitors#create/process
+[2]: https://app.datadoghq.com/monitors/create/process
 [3]: /ja/monitors/configuration/#advanced-alert-conditions
 [4]: /ja/monitors/configuration/#no-data
 [5]: /ja/monitors/configuration/#auto-resolve

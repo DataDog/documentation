@@ -25,9 +25,13 @@ further_reading:
 - link: https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/
   tag: Blog
   text: Meilleures pratiques pour la surveillance des applications Web statiques
-- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
+- link: https://www.datadoghq.com/blog/api-test-coverage-monitoring-datadog-synthetics/
+  tag: Blog
+  text: Améliorez la couverture de vos tests avec la surveillance Synthetic Datadog
+- link: https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing
   tag: Centre d'apprentissage
-  text: Présentation des tests Synthetic
+  text: 'Centre d''apprentissage Datadog : Premiers pas avec les tests de navigateur
+    Synthetic'
 - link: /synthetics/guide/
   tag: Documentation
   text: Guides d'utilisation de la surveillance Synthetic
@@ -35,12 +39,31 @@ further_reading:
   tag: Validation des bases
   text: Participer à une session interactive pour améliorer vos capacités de testing
     Synthetic
-title: Surveillance Synthetic
+- link: https://www.datadoghq.com/blog/http-security-headers-synthetic-tests/
+  tag: Blog
+  text: Comment sécuriser les en-têtes HTTP avec des tests synthétiques
+- link: https://www.datadoghq.com/blog/synthetic-monitoring-updates/
+  tag: Blog
+  text: Accélérez votre compréhension de l’expérience utilisateur avec Synthetic Monitoring
+    de Datadog
+- link: https://www.datadoghq.com/blog/smoke-testing-synthetic-monitoring/
+  tag: Blog
+  text: Créer des tests UX de fumée efficaces avec Synthetic Monitoring
+- link: https://www.datadoghq.com/blog/slo-synthetic-monitoring/
+  tag: Blog
+  text: Améliorez la précision et les performances des SLO grâce à Synthetic Monitoring
+    de Datadog
+title: Tests et surveillance Synthetic
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/447241955/rendition/1080p/file.mp4?loc=external&signature=47f0bf6adc93cbbd62e4939228c964c19227a2e0aec2d61822417cd2af985c97" poster="/images/poster/synthetics.png" >}}
 
 <br/>
+
+
+{{< learning-center-callout header="Participez à une session de webinar de formation" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/session/synthetics/">}}
+  Explorez et inscrivez-vous aux sessions d'activation Foundation. Découvrez comment Synthetic Monitoring de Datadog est une solution proactive qui vous permet de créer des tests d'API, de navigateur et mobiles sans code pour simuler automatiquement les parcours utilisateur et les requêtes vers vos applications, points de terminaison clés et couches réseau.
+{{< /learning-center-callout >}}
 
 Les tests Synthetic vous permettent de contrôler le bon fonctionnement de vos systèmes et applications à l'aide de **requêtes et actions simulées dans le monde entier**. Datadog surveille les performances de vos pages Web et de vos API du backend au frontend, et à différents niveaux du réseau (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP` et `gRPC`), de manière contrôlée et stable, en vous envoyant des alertes en cas de comportement anormal (régression, fonctionnalité défaillante, temps de réponse élevé ou code de statut inattendu).
 
@@ -64,7 +87,7 @@ Utilisez des [tests Browser Synthetic][14] pour surveiller l'expérience de vos 
 
 Utilisez des [tests d'application mobile Synthetic][21] pour surveiller l'expérience de vos clients sur vos applications iOS et Android, de bout en bout et sur différents types d'appareils.
 
-{{< img src="mobile_app_testing/mobile_application_testing_demo.png" alt="Exemple de workflow d'enregistrement pour un test mobile Synthetic" style="width:100%;">}}
+{{< img src="synthetics/mobile_app_tests.png" alt="Exemples du workflow d'enregistrement d’un test mobile synthétique" style="width:100%;">}}
 
 ## Lancer des emplacements privés
 
@@ -82,13 +105,19 @@ Datadog vous permet d'[intégrer vos tests Synthetic à vos traces APM][16] pour
 
 Utilisez les [dashboards Synthetic prêts à l'emploi][17] pour analyser les données de performance liées à vos tests API, tests API à plusieurs étapes, tests Browser et emplacements privés, ainsi qu'aux événements Datadog. 
 
-{{< img src="synthetics/test_summary_dashboard.png" alt="Dashboard de résumé des tests" style="width:100%;">}}
+{{< img src="synthetics/dashboards/test_dashboard.png" alt="Dashboard de surveillance Synthetic et de tests en continu" style="width:100%;">}}
 
-## Utiliser l'Explorateur de surveillance Synthetic et de tests en continu
+## Utilisez l'explorateur de surveillance Synthetic et de tests en continu
 
 Créez des [requêtes de recherche et des visualisations][20] pour vos exécutions de tests Synthetic ou vos lots de tests exécutés dans des pipelines CI/CD. 
 
-{{< img src="continuous_testing/explorer_ci_batches.png" alt="Explorateur de tests en continu" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_ci_batches_1.png" alt="Explorateur de tests en continu" style="width:100%;">}}
+
+## Suivre la couverture des tests
+
+Optimisez votre suite de tests en [vous assurant que les workflows les plus importants de votre applications sont testés][22].
+
+{{< img src="synthetics/test_coverage/test_coverage.png" alt="Explorateur de tests en continu" style="width:100%;">}}
 
 ## Prêt à vous lancer ?
 
@@ -120,3 +149,4 @@ Consultez la section [Débuter avec la surveillance Synthetic][18] pour découvr
 [19]: /fr/getting_started/synthetics/private_location
 [20]: /fr/continuous_testing/explorer/
 [21]: /fr/mobile_testing
+[22]: /fr/synthetics/test_coverage
