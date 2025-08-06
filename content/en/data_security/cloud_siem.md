@@ -43,7 +43,7 @@ Contact [support][2] if you do not want users to be able to add template variabl
 
 In the **Describe your playbook** section for [log detection rules][3] and [signal correlation rules][4], you can add group-by values in the notification title. For example, if you are grouping by `service`, the service name shows in the title. Uncheck **Include triggering group-by values in notification title** to opt out of adding triggering group-by values to the title.
 
-Contact [support][2] If you do not want to have the triggering group-by values option available.
+Contact [support][2] If you do not want to have the **Include triggering group-by values in notification title** option available.
 
 ## Security rules can use webhooks
 
