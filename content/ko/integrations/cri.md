@@ -24,7 +24,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - 컨테이너
-- 쿠버네티스(Kubernetes)
+- Kubernetes
 custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cri/README.md

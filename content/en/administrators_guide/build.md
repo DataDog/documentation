@@ -41,7 +41,7 @@ The shape of this system will be different depending on your environment, but th
     - Create a new vSphere cluster node
     - Create a new database instance
     - Monitor new 3rd-party software product
-    - Add synthetic tests
+    - Add Synthetic Monitoring tests
     - Create an alert/monitor
     - Create/Update a dashboard
 

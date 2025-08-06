@@ -269,6 +269,57 @@ tracer.use('http', {
 
 Additionally, traces can be excluded based on their resource name, so that the Agent doesn't send them to Datadog. This and other security and fine-tuning Agent configurations can be found on the [Security][3] page or in [Ignoring Unwanted Resources][4].
 
+## dd-trace-api
+
+{{< callout btn_hidden="true" header="ddtrace-api is in Preview!">}}
+The <code>dd-trace-api</code> packages is in Preview and may not include all the API calls you need. If you need more complete functionality, use the API as described in the previous sections.
+<br><br>The following steps are only necessary if you want to experiment with the in-Preview <code>ddtrace-api</code> package.{{< /callout >}}
+
+The [dd-trace-api package][5] provides a stable public API for Datadog APM's custom Node.js instrumentation. This package implements only the API interface, not the underlying functionality that creates and sends spans to Datadog.
+
+This separation between interface (`dd-trace-api`) and implementation (`dd-trace`) offers several benefits:
+
+- You can rely on an API that changes less frequently and more predictably for your custom instrumentation
+- If you only use automatic instrumentation, you can ignore API changes entirely
+- If you implement both single-step and custom instrumentation, you avoid depending on multiple copies of the `dd-trace` package
+
+To use `dd-trace-api`:
+
+1. Install the `dd-trace` and `dd-trace-api` libraries in your app. **Note**: `dd-trace` is installed for you with single-step instrumentation, but you need to install `dd-trace-api` manually in your app.
+   ```shell
+   npm install dd-trace dd-trace-api
+   ```
+
+2. Instrument your Node.js application using `dd-trace`. If you're using single-step instrumentation, you can skip this step.
+   ```shell
+    node --require dd-trace/init app.js
+   ```
+
+3. After this is set up, you can write custom instrumentation exactly like the examples in the previous sections, but you require `dd-trace-api` instead of `dd-trace`.
+
+   For example:
+```javascript
+const tracer = require('dd-trace-api')
+const express = require('express')
+const app = express()
+
+app.get('/make-sandwich', (req, res) => {
+  const sandwich = tracer.trace('sandwich.make', { resource: 'resource_name' }, () => {
+    const ingredients = tracer.trace('get_ingredients', { resource: 'resource_name' }, () => {
+      return getIngredients()
+    })
+
+    return tracer.trace('assemble_sandwich', { resource: 'resource_name' }, () => {
+      assembleSandwich(ingredients)
+    })
+  })
+
+  res.end(sandwich)
+})
+```
+
+See that package's [API definition][6] for the full list of supported API calls.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -277,3 +328,5 @@ Additionally, traces can be excluded based on their resource name, so that the A
 [2]: /tracing/glossary/#spans
 [3]: /tracing/security
 [4]: /tracing/guide/ignoring_apm_resources/
+[5]: https://npm.im/dd-trace-api
+[6]: https://github.com/DataDog/dd-trace-api-js/blob/master/index.d.ts

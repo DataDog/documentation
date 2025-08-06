@@ -90,7 +90,7 @@ Google 앱 엔진 로그는 Google Cloud Logging으로 수집하여 클라우드
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_app_engine" >}}
+{{< get-metrics-from-git "google-app-engine" >}}
 
 
 ### 이벤트

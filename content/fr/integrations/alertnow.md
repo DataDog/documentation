@@ -21,11 +21,12 @@ author:
   sales_email: sales@opsnow.com
   support_email: support@opsnow.com
 categories:
-- alerting
+- slos
 - automation
 - collaboration
 - incidents
-- mobile
+- tracing_custom_inst_ruby
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/alertnow/README.md
 display_on_public_website: true
@@ -35,7 +36,6 @@ integration_id: alertnow
 integration_title: AlertNow
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: alertnow
 public_title: AlertNow
@@ -55,6 +55,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Synchroniser des alertes Datadog avec des alertes AlertNow
   media: []
@@ -66,7 +67,7 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Présentation
+## Section Overview
 
 AlertNow est une plateforme de gestion des incidents intégrée qui recueille des alertes depuis différents environnements informatiques complexes et les transmet aux personnes pertinentes. Cette solution permet d'accélérer la résolution des incidents. Lorsque vous associez AlertNow à Datadog, vos alertes Datadog sont automatiquement synchronisées avec les alertes AlertNow. Vous pouvez gérer vos alertes sur une plateforme unique, envoyer des notifications à vos équipes et corriger immédiatement les problèmes majeurs.
 
@@ -81,7 +82,7 @@ Avec AlertNow, vous pouvez :
 
 ![Vue d'ensemble d'AlertNow][1]
 
-## Formule et utilisation
+## Configuration
 
 ### AlertNow
 
@@ -103,7 +104,7 @@ Pour associer Datadog à AlertNow, créez un webhook et des monitors dans Datado
     ![Détails Datadog][4]
 
 
-### Ruby
+### Datadog
 
 Suivez les étapes indiquées ci-dessous dans votre compte Datadog.
 
@@ -163,7 +164,7 @@ Suivez les étapes indiquées ci-dessous dans votre compte Datadog.
 
 
 
-## Agent
+## Assistance
 
 Besoin d'aide ? Contactez [l'assistance AlertNow][8].
 

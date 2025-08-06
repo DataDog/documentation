@@ -126,7 +126,6 @@ This is described in more detail [in the Microsoft documentation][7]
 2. If your SQL Server instance does not require encryption to connect (`rds.force_ssl=0` on AWS), then update the connection string to include `Use Encryption for Data=False;`. For example:
 
   ```yaml
-  # example uses windows authentication
   instances:
     - host: <INSTANCE_ENDPOINT>,<PORT>
       connection_string: "Trust Server Certificate=True;Use Encryption for Data=False;"
@@ -137,7 +136,6 @@ This is described in more detail [in the Microsoft documentation][7]
 3. Install the [2018 version of the MSOLEDBSQL driver][8], which does not use encryption by default. After installing the driver, update the `adoprovider` to `MSOLEDBSQL`. For example:
 
   ```yaml
-  # example uses windows authentication
   instances:
     - host: <INSTANCE_ENDPOINT>,<PORT>
       connection_string: "Trusted_Connection=yes;"

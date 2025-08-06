@@ -1,18 +1,20 @@
 ---
 title: Azure Integration Programmatic Management Guide
-
 description: "Steps for programmatically managing the Azure integration with Datadog"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/azure/"
   tag: "Documentation"
   text: "Azure Integration"
+- link: "https://www.datadoghq.com/blog/azure-log-forwarding/"
+  tag: "Blog"
+  text: "Send Azure logs to Datadog faster and more easily with automated log forwarding"
 ---
 
 ## Overview
 
  This guide demonstrates how to programmatically manage the Azure integration with Datadog, as well as other Azure resources such as the Datadog Agent VM extension. This enables you to manage observability across multiple accounts at once.
 
-**All sites**: All [Datadog sites][3] can use the steps on this page to complete the App Registration credential process for Azure metric collection and the Event Hub setup for sending Azure Platform Logs.
+**All sites**: All [Datadog sites][3] can use the steps on this page to complete the App Registration credential process for Azure metric collection. See the [Azure Logging guide][18] for automated and manual log-forwarding setup options.
 
 **US3**: If your organization is on the Datadog US3 site, you can use the Azure Native integration to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible. Setup entails creating a [Datadog resource in Azure][14] to link your Azure subscriptions to your Datadog organization. This replaces the app registration credential process for metric collection and Event Hub setup for log forwarding. See the [Managing the Azure Native Integration guide][1] for more information.
 

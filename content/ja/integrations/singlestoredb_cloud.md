@@ -111,7 +111,7 @@ Datadog を使用して SingleStoreDB Cloud データベースを監視できる
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "singlestoredb_cloud" >}}
+{{< get-metrics-from-git "singlestoredb-cloud" >}}
 
 
 ### サービスチェック

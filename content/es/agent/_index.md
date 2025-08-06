@@ -1,15 +1,22 @@
 ---
-algolia:
-  tags:
-  - agent
 aliases:
 - /es/agent/faq/agent-check-directory-structure
 - /es/agent/faq/install-core-extra
 - /es/logs/faq/can-the-datadog-agent-be-used-to-send-only-logs
 - /es/agent/faq/the-datadog-agent-for-logs-or-traces-only
 cascade:
+- _target:
+    lang: en
+    path: /agent/basic_agent_usage/chef
+  tags:
+  - desinstalar
+- _target:
+    lang: en
+    path: /infrastructure/**/*
   algolia:
-    rank: 70
+    rank: 80
+    tags:
+    - agent
 description: Instalar y configurar el Agent para recopilar datos
 further_reading:
 - link: /logs/

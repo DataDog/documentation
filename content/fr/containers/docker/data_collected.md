@@ -10,7 +10,7 @@ title: Données Docker recueillies
 
 Métriques recueillies par l'Agent lorsqu'il est déployé dans un conteneur Docker :
 
-{{< get-metrics-from-git "docker_daemon" >}}
+{{< get-metrics-from-git "docker" >}}
 
 ### Événements
 

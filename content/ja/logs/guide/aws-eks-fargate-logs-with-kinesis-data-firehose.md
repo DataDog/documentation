@@ -9,22 +9,25 @@ further_reading:
 - link: https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html
   tag: Documentation
   text: AWS Fargate プロファイル
-title: Send Amazon EKS Fargate Logs with Amazon Data Firehose
+- link: /logs/guide/reduce_data_transfer_fees
+  tag: ガイド
+  text: データ転送料金を削減しながら Datadog にログを送信する方法
+title: Amazon EKS Fargate のログを Amazon Data Firehose で送信する
 ---
 
 ## 概要
 
-AWS Fargate on EKS provides a fully managed experience for running Kubernetes workloads. Amazon Data Firehose can be used with EKS's Fluent Bit log router to collect logs in Datadog. This guide provides a comparison of log forwarding through Amazon Data Firehose and CloudWatch logs, as well as a sample EKS Fargate application to send logs to Datadog through Amazon Data Firehose.
+EKS 上の AWS Fargate は、Kubernetes ワークロードを実行するためのフル マネージド エクスペリエンスを提供します。Amazon Data Firehose は、EKS の Fluent Bit ログ ルーターと組み合わせて使用し、Datadog でログを収集できます。このガイドでは、Amazon Data Firehose と CloudWatch Logs を経由したログ フォワーディングの比較と、Amazon Data Firehose を通じて Datadog にログを送信するサンプル EKS Fargate アプリケーションを提供します。
 
-{{< img src="logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_streaming_diagram.png" alt="Diagram of the log flow depicting a Fargate EKS cluster sending container logs through Fluent Bit log router to Amazon data firehose and an S3 backup bucket within AWS and then on to Datadog" responsive="true">}}
+{{< img src="logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_streaming_diagram.png" alt="Fargate の EKS クラスターが Fluent Bit ログ ルーターを介してコンテナ ログを Amazon Data Firehose と AWS 内の S3 バックアップ バケットに送信し、その後 Datadog へ転送するログ フローの図" responsive="true">}}
 
-### Amazon Data Firehose and CloudWatch log forwarding
+### Amazon Data Firehose と CloudWatch Log フォワーディング
 
-The following are key differences between using Amazon Data Firehose and CloudWatch log forwarding.
+以下は、Amazon Data Firehose と CloudWatch Log フォワーディングを使用した場合の主な違いです。
 
-- **Metadata and tagging**: Metadata, such as Kubernetes namespace and container ID, are accessible as structured attributes when sending logs with Amazon Data Firehose.
+- **メタ データとタグ付け**: Kubernetes 名前空間 や コンテナ ID などのメタ データは、Amazon Data Firehose でログを送信するときに構造化属性として利用できます。
 
-- **AWS Costs**: AWS Costs may vary for individual use cases but Amazon Data Firehose ingestion is generally less expensive than comparable Cloudwatch Log ingestion.
+- **AWS コスト**: AWS コスト はユース ケースによって異なりますが、Amazon Data Firehose での取り込みは、同等の CloudWatch Log 取り込みよりも一般的に安価です。
 
 ## 要件
 1. [`kubectl`][6] と [`aws`][7] のコマンドラインツールを使用します。
@@ -32,17 +35,17 @@ The following are key differences between using Amazon Data Firehose and CloudWa
 
 ## セットアップ
 
-The following steps outline the process for sending logs from a sample application deployed on an EKS cluster through Fluent Bit and an Amazon Data Firehose delivery stream to Datadog. To maximize consistency with standard Kubernetes tags in Datadog, instructions are included to remap selected attributes to tag keys.
+以下の手順では、EKS クラスターにデプロイしたサンプル アプリケーションから Fluent Bit と Amazon Data Firehose デリバリー ストリームを経由して Datadog にログを送信するプロセスを説明します。Datadog における標準 Kubernetes タグとの一貫性を最大化するため、選択した属性をタグ キーへリマップする手順も含まれています。
 
-1. [Create an Amazon Data Firehose delivery stream](#create-an-amazon-data-firehose-delivery-stream) that delivers logs to Datadog, along with an S3 Backup for any failed log deliveries.
+1. [Amazon Data Firehose デリバリー ストリームの作成](#create-an-amazon-data-firehose-delivery-stream) — ログを Datadog に配信し、失敗したログ配信用に S3 バックアップも設定します。
 2. [EKS Fargate で Fluent Bit for Firehose を構成しました。](#configure-fluent-bit-for-firehose-on-an-eks-fargate-cluster)。
 3. [サンプルアプリケーションをデプロイします](#deploy-a-sample-application)。
 4. Kubernetes タグと `container_id` タグを使った相関のために、[リマッパープロセッサーの適用](#remap-attributes-for-log-correlation)を行います。
 
-### Create an Amazon Data Firehose delivery stream
+### Amazon Data Firehose デリバリー ストリームを作成する
 
-See the [Send AWS Services Logs with the Datadog Amazon Data Firehose Destination][4] guide to set up an Amazon Data Firehose Delivery stream.
-**Note**: Set the **Source** as `Direct PUT`.
+[Datadog Amazon Data Firehose 宛先を使用して AWS サービスのログを送信する][4]ガイドを参照して、Amazon Data Firehose デリバリー ストリームをセットアップしてください。
+**注**: **Source** を `Direct PUT` に設定してください。
 
 ### EKS Fargate クラスターで Fluent Bit for Firehose を構成する
 
@@ -54,7 +57,7 @@ kubectl create namespace aws-observability
 
 2. Fluent Bit 用の Kubernetes ConfigMap を以下のように `aws-logging-configmap.yaml` として作成します。配信ストリームの名前を代入してください。
 
-<div class="alert alert-info">For the new higher performance <a href="https://docs.fluentbit.io/manual/pipeline/outputs/firehose">Kinesis Firehose plugin</a> use the plugin name <code>kinesis_firehose</code> instead of <code>amazon_data_firehose</code>. </div>
+<div class="alert alert-info">新しい高性能の <a href="https://docs.fluentbit.io/manual/pipeline/outputs/firehose">Kinesis Firehose プラグイン</a>を使用する場合は、プラグイン名に <code>kinesis_firehose</code> を指定し、<code>amazon_data_firehose</code> の代わりに使用してください。</div>
 
 {{< code-block lang="yaml" filename="" disable_copy="false" collapsible="false" >}}
 apiVersion: v1
@@ -87,7 +90,7 @@ data:
 kubectl apply -f aws-logging-configmap.yaml
 {{< /code-block >}}
 
-4. Create an IAM policy and attach it to the pod execution role to allow the log router running on AWS Fargate to write to the Amazon Data Firehose. You can use the example below, replacing the ARN in the **Resource** field with the ARN of your delivery stream, as well as specifying your region and account ID.
+4. AWS Fargate 上で動作するログ ルーターが Amazon Data Firehose に書き込めるように、IAM ポリシーを作成して Pod 実行ロールにアタッチします。以下の例を使用し、**Resource** フィールドの ARN をご自分のデリバリー ストリームの ARN に置き換え、リージョンとアカウント ID も指定してください。
 
 {{< code-block lang="json" filename="allow_firehose_put_permission.json" disable_copy="false" collapsible="false" >}}
 {
@@ -129,7 +132,7 @@ aws iam create-policy \
 
 ### サンプルアプリケーションをデプロイする
 
-To generate logs and test the Amazon Data Firehose delivery stream, deploy a sample workload to your EKS Fargate cluster.
+ログを生成して Amazon Data Firehose デリバリー ストリームをテストするため、EKS Fargate クラスターにサンプル ワークロードをデプロイします。
 
 1. デプロイメントマニフェスト `sample-deployment.yaml` を作成します。
 
@@ -218,7 +221,7 @@ To generate logs and test the Amazon Data Firehose delivery stream, deploy a sam
  ...
  {{< /code-block >}}
 
-4. Verify the logs are in Datadog. In the [Datadog Log Explorer][10], search for `@aws.firehose.arn:"<ARN>"`, replacing `<ARN>` with your Amazon Data Firehose ARN, to filter for logs from the Amazon Data Firehose.
+4. ログが Datadog に届いていることを確認します。[Datadog Log Explorer][10] で `@aws.firehose.arn:"<ARN>"` を検索し、`<ARN>` をご自分の Amazon Data Firehose ARN に置き換えることで、Amazon Data Firehose からのログのみにフィルターできます。
 
 {{< img src="logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_verification.jpg" alt="Datadog ログエクスプローラーでの nginx ログ行の検証" responsive="true">}}
 

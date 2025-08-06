@@ -48,7 +48,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud Interconn
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "google_cloud_interconnect" >}}
+{{< get-metrics-from-git "google-cloud-interconnect" >}}
 
 
 ### Événements

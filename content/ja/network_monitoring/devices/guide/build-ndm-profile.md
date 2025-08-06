@@ -13,7 +13,7 @@ title: NDM プロファイルの構築 (高度)
 
 Datadog ネットワークデバイスモニタリングは、プロファイルを使用してネットワークデバイスからメトリクスを収集します。これらは MIB により狭義されており、特定のデバイスメーカーおよびモデルからメトリクスを収集します。このチュートリアルでは、HP iLO4 デバイスから OID メトリクスを収集する基本の NDM プロファイルを構築するためのステップをご説明します。
 
-NDM プロファイルは SNMP コンセプトを使用します。SNMP の基本情報については、[用語][1]を参照してください。
+NDM プロファイルは SNMP の概念を使用します。SNMP の基本的な詳細については、[用語集][1] を参照してください。
 
 <div class="alert alert-info">
 このガイドは上級者向けです。ほとんどのデバイスは、<a href="/network_monitoring/devices/guide/device_profiles/">デバイスプロファイルの概要</a>ドキュメントにある GUI ベースのエクスペリエンス、または <a href="/network_monitoring/devices/profiles#metric-definition-by-profile">Datadog プロファイル</a>を使用して構成することができます。</div>
@@ -78,7 +78,7 @@ metrics:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/network_monitoring/devices/troubleshooting#terminology
+[1]: /ja/network_monitoring/devices/glossary
 [2]: https://en.wikipedia.org/wiki/HP_Integrated_Lights-Out
 [3]: https://support.hpe.com/hpsc/swd/public/detail?swItemId=MTX_53293d026fb147958b223069b6
 [4]: https://en.wikipedia.org/wiki/Networking_hardware

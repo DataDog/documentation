@@ -15,6 +15,8 @@ aliases:
 
 Choose a security scenario below to begin automating remediation.
 
+{{% sec-hipaa-limits %}}
+
 ## Delete misconfigured security groups
 
 In a cloud environment, it's important to delete a misconfigured resource as soon as it is created. In this scenario, you can configure a [webhook integration][2] to send a [webhook][2] to your cloud provider's API management service.

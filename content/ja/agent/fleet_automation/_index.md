@@ -13,10 +13,6 @@ further_reading:
 title: Fleet Automation
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では、 Fleet Automation はサポートされていません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 Datadog Fleet Automation を使用すると、変化する可観測性のニーズに対応するため、Datadog Agent を大規模に一元管理し、リモートで管理することができます。

@@ -1,4 +1,26 @@
 ---
+app_id: google-cloud-run-for-anthos
+app_uuid: 25da839f-c934-4988-a275-f04d3f9adf3e
+assets:
+  dashboards:
+    google_cloud_run_for_anthos: assets/dashboards/google_cloud_run_for_anthos.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check: gcp.knative.serving.autoscaler.actual_pods
+      metadata_path: metadata.csv
+      prefix: ''
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 339
+    source_type_name: Google Cloud Run para Anthos
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - nube
 - orquestación
@@ -8,6 +30,7 @@ custom_kind: integración
 dependencies: []
 description: Recopila métricas y logs de clústeres de Cloud Run para Anthos y analízalos
   en Datadog.
+display_on_public_website: true
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_run_for_anthos/
 draft: false
 further_reading:
@@ -20,15 +43,34 @@ integration_id: google-cloud-run-for-anthos
 integration_title: Google Cloud Run para Anthos
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: google_cloud_run_for_anthos
-public_title: Integración de Datadog y Google Cloud Run para Anthos
-short_description: Recopila métricas y logs de tus clústeres de Cloud Run para Anthos
-  y analízalos en Datadog.
+public_title: Google Cloud Run para Anthos
+short_description: Una oferta gestionada de Knative que permite cargas de trabajo
+  de serverless en entornos híbridos y múltiples nubes.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Categoría::Nube
+  - Category::Orchestration
+  - Categoría::Google Cloud
+  - Category::Log Collection
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Una oferta gestionada de Knative que permite cargas de trabajo de serverless
+    en entornos híbridos y múltiples nubes.
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: Documentación
+    url: https://docs.datadoghq.com/integrations/google_cloud_run/
+  support: README.md#Support
+  title: Google Cloud Run para Anthos
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
 Google Cloud Run para Anthos es una plataforma de desarrollo serverless flexible para entornos híbridos y multinube. Cloud Run para Anthos es la oferta [Knative][1] gestionada y totalmente soportada de Google. Si utilizas Google Cloud totalmente gestionado, consulta la [documentación de Google Cloud Run][2].
@@ -49,7 +91,7 @@ Si no has habilitado Workload Identity, debes migrar para utilizar Workload Iden
 
 Para obtener instrucciones detalladas de configuración, consulta [Google Cloud Workload Identity][4].
 
-### APM
+### Recopilación de logs
 
 Google Cloud Run para Anthos expone [logs de servicios][5].
 Los logs de Google Cloud Run pueden recopilarse con Google Cloud Logging y enviarse a una tarea de Dataflow a través de un tema Cloud Pub/Sub. Si aún no lo has hecho, [configura la generación de logs con la plantilla Dataflow de Datadog][6].
@@ -83,15 +125,15 @@ Para evitar que los pods reciban variables de entorno, añade la etiqueta `admis
 
 La integración Google Cloud Run para Anthos no incluye eventos.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración Google Cloud Run para Anthos no incluye checks de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [equipo de asistencia de Datadog][10].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

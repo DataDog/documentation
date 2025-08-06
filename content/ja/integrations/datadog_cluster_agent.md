@@ -91,7 +91,7 @@ Datadog Cluster Agent チェックは、ほとんどのシナリオで自動的�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "datadog_cluster_agent" >}}
+{{< get-metrics-from-git "datadog-cluster-agent" >}}
 
 
 ### イベント
@@ -99,7 +99,7 @@ Datadog Cluster Agent チェックは、ほとんどのシナリオで自動的�
 Datadog_Cluster_Agent インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "datadog_cluster_agent" >}}
+{{< get-service-checks-from-git "datadog-cluster-agent" >}}
 
 
 ## トラブルシューティング

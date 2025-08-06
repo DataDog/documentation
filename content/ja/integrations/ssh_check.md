@@ -131,7 +131,7 @@ SSH/SFTP チェックは [Datadog Agent][1] パッケージに含まれていま
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "ssh_check" >}}
+{{< get-metrics-from-git "ssh" >}}
 
 
 ### イベント
@@ -139,7 +139,7 @@ SSH/SFTP チェックは [Datadog Agent][1] パッケージに含まれていま
 SSH チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "ssh_check" >}}
+{{< get-service-checks-from-git "ssh" >}}
 
 
 ## トラブルシューティング

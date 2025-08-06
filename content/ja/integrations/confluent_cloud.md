@@ -139,7 +139,7 @@ Confluent Cloud Connector ID を検索するには
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "confluent_cloud" >}}
+{{< get-metrics-from-git "confluent-cloud" >}}
 
 
 ### イベント

@@ -15,14 +15,6 @@ AWS Payload Extraction captures request and response data exchanged between your
 
 ## Requirements
 
-The following AWS services are supported:
-
-- Amazon Simple Notification Service (SNS)
-- Amazon Simple Queue Service (SQS)
-- Amazon Kinesis
-- Amazon S3
-- Amazon EventBridge
-
 The following tracer versions and AWS SDK packages are supported:
 
 | Language | Version            | Instrumented AWS SDK Packages  |

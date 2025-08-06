@@ -48,7 +48,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud Router de
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "google_cloud_router" >}}
+{{< get-metrics-from-git "google-cloud-router" >}}
 
 
 ### Événements

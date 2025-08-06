@@ -8,12 +8,6 @@ further_reading:
   text: "Troubleshooting third-party integrations"
 ---
 
-{{% site-region region="gov,ap1" %}}
-<div class="alert alert-warning">
-Case Management is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
-</div>
-{{% /site-region %}}
-
 ## Overview
 
 Case Management provides the capability to create third-party integrations for generating notifications or tickets automatically or manually:
@@ -44,13 +38,10 @@ To get notified when a new case is created, create a view:
 | PagerDuty       | Select a service. |
 | Webhooks        | Select the name of a webhook. |
 
-
-
 ## Third party tickets
 In Project Settings, you can manage membership, configure the auto-closing of cases, and set up third-party integrations like Jira and ServiceNow.
 
-### Jira
-
+{{% collapse-content title="Jira Configuration" level="h4" expanded=false %}}
 {{< img src="/service_management/case_management/settings/settings_jira.png" alt="Jira configuration options for case management settings" style="width:100%;" >}}
 
 1. Ensure the Jira integration is configured.
@@ -71,9 +62,9 @@ In Project Settings, you can manage membership, configure the auto-closing of ca
 - Only cases using the core statuses of "Open", "In Progress" and "Closed" can sync with Jira.
 - Two-way syncing requires [webhook support][3].
 - Available for Jira Cloud, not Jira Data Center.
+{{% /collapse-content %}}
 
-### ServiceNow
-
+{{% collapse-content title="ServiceNow Configuration" level="h4" expanded=false %}}
 1. Configure the ServiceNow integration by following the [ITOM and ITSM setup instructions][2].
 1. In Case Management project settings, enable ServiceNow for manual ServiceNow incident creation from the project.
 1. Select a ServiceNow instance and assignment group.
@@ -89,6 +80,17 @@ In Project Settings, you can manage membership, configure the auto-closing of ca
 1. Save changes.
 
 **Note**: A case can only be synced with one external resource at a time, per project. To enable ServiceNow syncing, Jira automatic creation and syncing must be disabled. Only cases using the core statuses of "Open", "In Progress" and "Closed" can sync with ServiceNow.
+{{% /collapse-content %}}
+
+## Incident auto-escalation
+
+Manual incident declaration during high event volumes can cause delays and increase risk exposure during critical situations. Incident auto-escalation from Cases allows you to automatically declare incidents when cases match your defined criteria, removing the need for manual intervention.
+
+Navigate to the [Project Settings page][4], click **Integrations** > **Datadog Incidents**, and toggle on **Auto-escalate cases to Incidents**. 
+
+{{< img src="/service_management/case_management/notifications_integrations/case_auto_escalation.png" alt="Case Management settings page showing incident auto-escalation configuration" style="width:70%;" >}}
+
+When enabled, any case that meets your specified query criteria (at any point in its lifecycle) automatically triggers an incident, enabling faster response times for your team.
 
 ## Further Reading
 
@@ -97,3 +99,4 @@ In Project Settings, you can manage membership, configure the auto-closing of ca
 [1]: https://app.datadoghq.com/cases/settings
 [2]: /integrations/servicenow/#itom-and-itsm-setup
 [3]: /integrations/jira/#configure-a-jira-webhook
+[4]: https://app.datadoghq.com/cases/settings

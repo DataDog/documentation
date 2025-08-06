@@ -33,13 +33,13 @@ If you log in to Datadog using Google authentication, your email address is prov
 
 ### Preferences
 
-{{% site-region region="us,us3,us5,eu,ap1" %}}
+{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
 You can manage your timezone, visual accessibility preference, and email subscriptions from the [Preferences tab][3] within the **Personal Settings** page. 
 
 #### Email subscriptions
 
 Under email subscriptions, you have access to the following reports:
-{{< site-region region="us3,us5,gov,ap1" >}}
+{{< site-region region="us3,us5,gov,ap1,ap2" >}}
 <div class="alert alert-warning">Email digests are not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 

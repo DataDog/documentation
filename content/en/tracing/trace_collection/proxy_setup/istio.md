@@ -71,6 +71,8 @@ template:
 For [CronJobs][8], the `app` label should be added to the job template, as the generated name comes from the `Job` instead
 of the higher-level `CronJob`.
 
+<!-- Commenting out due to a bug (ref: DOCS-11035)
+
 ## Istio Sampling
 
 To control the volume of Istio traces that are sent to Datadog, configure a
@@ -100,27 +102,14 @@ environment variable names to values. The environment variable values are
 themselves strings, and in the case of `DD_TRACE_SAMPLING_RULES`, the string
 value is a JSON array of objects.
 
-## Environment variables
-
-Environment variables for Istio sidecars can be set on a per-deployment basis using the `apm.datadoghq.com/env` annotation. This is unique for deployments employing Istio sidecars and is set in addition to the [labels for unified service tagging][10].
-```yaml
-apiVersion: apps/v1
-...
-kind: Deployment
-...
-spec:
-  template:
-    metadata:
-      annotations:
-        apm.datadoghq.com/env: '{ "DD_ENV": "prod", "DD_SERVICE": "my-service", "DD_VERSION": "v1.1"}'
-```
+-->
 
 ## Deployment and service
 
 If the Agents on your cluster are running as a deployment and service instead of the default DaemonSet, then an additional option is required to specify the DNS address and port of the Agent.
 For a service named `datadog-agent` in the `default` namespace, that address would be `datadog-agent.default.svc.cluster.local:8126`.
 
-- `--set values.global.tracer.datadog.address=datadog-agent.default:8126`
+- `--set values.global.tracer.datadog.address=datadog-agent.default.svc.cluster.local:8126`
 
 If Mutual TLS is enabled for the cluster, then the Agent's deployment should disable sidecar injection, and you should add a traffic policy that disables TLS.
 
@@ -149,6 +138,25 @@ spec:
 Automatic Protocol Selection may determine that traffic between the sidecar and Agent is HTTP, and enable tracing.
 This can be disabled using [manual protocol selection][12] for this specific service. The port name in the `datadog-agent` Service can be changed to `tcp-traceport`.
 If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specification.
+
+## Environment variables
+
+Environment variables for Istio sidecars can be set on a per-deployment basis using the `proxy.istio.io/config` annotation. This is unique for deployments employing Istio sidecars.
+```yaml
+apiVersion: apps/v1
+...
+kind: Deployment
+...
+spec:
+  template:
+    metadata:
+      annotations:
+        proxy.istio.io/config: |
+          proxyMetadata:
+            "DD_ENV": "prod"
+            "DD_SERVICE": "my-service"
+            "DD_VERSION": "v1.1"
+```
 
 ## Further Reading
 

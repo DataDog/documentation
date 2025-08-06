@@ -48,7 +48,7 @@ Una vez hecho esto, exporta tus logs de Google Cloud Tasks de Google Cloud Loggi
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "google_cloud_tasks" >}}
+{{< get-metrics-from-git "google-cloud-tasks" >}}
 
 
 ### Eventos

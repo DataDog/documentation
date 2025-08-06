@@ -1,10 +1,10 @@
 ---
-description: Datadog Azure インテグレーションのアーキテクチャと代替構成オプションのガイド
+description: Datadog Azure インテグレーションのアーキテクチャ ガイドおよび代替構成オプション
 further_reading:
 - link: https://docs.datadoghq.com/integrations/azure/
-  tag: Documentation
+  tag: ドキュメント
   text: Azure インテグレーション
-title: Azure インテグレーションアーキテクチャと構成
+title: Azure インテグレーションのアーキテクチャと構成
 ---
 
 ## 概要
@@ -30,7 +30,7 @@ Datadog の Azure インテグレーションを有効にすると、Datadog で
 
 インテグレーションの標準版と Azure Native 版のどちらを使用しても、使用される Azure API と収集されるデータは同じです。
 
-{{% site-region region="us,us5,eu,gov,ap1" %}}
+{{% site-region region="us,us5,eu,gov,ap1,ap2" %}}
 
 ### 標準の Azureインテグレーションメトリクスとデータの収集
 
@@ -116,12 +116,12 @@ Datadog のアクセス権をサブスクリプションレベル未満に制限
 
   - モニタリングデータの一部または全部の消失
   - リソースメトリクス上でタグの形式をとっているメタデータの一部または全部の消失
-  - [Cloud Security Management Misconfigurations (CSM Misconfigurations)][3] または [Resource Catalog][4] のデータの一部または全部の消失
+  - [Cloud Security Misconfigurations][3] または [Resource Catalog][4] のデータが部分的または完全に失われる
   - Datadog により生成されたメトリクスの一部または全部の消失
 
 Azure AD のロールを制限または省略すると、次のような影響があります。
 
-  - CSM Misconfigurations における Azure AD リソースのメタデータの一部または全部の消失
+  - Cloud Security Misconfigurations 内の Azure AD リソースのメタデータが部分的または完全に失われる
   - Azure AD リソースの資格情報有効期限モニタリングの一部または全部の消失
 
 [1]: /ja/getting_started/site/
@@ -134,7 +134,7 @@ Azure AD のロールを制限または省略すると、次のような影響�
 
 ## Azure のログ収集
 
-{{% site-region region="us,us5,eu,gov,ap1" %}}
+{{% site-region region="us,us5,eu,gov,ap1,ap2" %}}
 
 ### 標準の Azure インテグレーションのログ収集
 _すべての Datadog サイトで利用可能_

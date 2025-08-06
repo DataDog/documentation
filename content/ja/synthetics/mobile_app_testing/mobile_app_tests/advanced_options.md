@@ -19,10 +19,6 @@ further_reading:
 title: モバイルアプリテストステップの高度なオプション
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">このサイトでは、Mobile Application Testing はサポートされていません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 このページでは、Synthetic モバイルアプリテストの高度なオプションについて説明します。

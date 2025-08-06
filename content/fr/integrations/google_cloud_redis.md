@@ -49,7 +49,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud Memorysto
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "google_cloud_redis" >}}
+{{< get-metrics-from-git "google-cloud-redis" >}}
 
 
 ### Événements

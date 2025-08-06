@@ -37,7 +37,7 @@ draft: false
 git_integration_title: active_directory
 integration_id: active-directory
 integration_title: Active Directory
-integration_version: 4.1.0
+integration_version: 4.2.0
 is_public: true
 manifest_version: 2.0.0
 name: active_directory
@@ -91,7 +91,7 @@ Agent의 Active Directory 검사는 [Datadog Agent][1] 패키지에 포함되어
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "active_directory" >}}
+{{< get-metrics-from-git "active-directory" >}}
 
 
 ### 이벤트

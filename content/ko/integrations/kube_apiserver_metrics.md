@@ -101,7 +101,7 @@ Kube_apiserver_metrics 점검은 [Datadog Agent][3] 패키지에 포함되어 �
 `default` 네임스페이스의 쿠버네티스(Kubernetes) 서비스에 다음과 같이 어노테이션할 수 있습니다.
 
 {{< tabs >}}
-{{% tab "Annotations v2 (for Datadog Agent v7.36+)" %}}
+{{% tab "Annotations v2 (for Datadog Agent v7.36)" %}}
 
 ```yaml
 ad.datadoghq.com/endpoints.checks: |
@@ -113,10 +113,11 @@ ad.datadoghq.com/endpoints.checks: |
         }
       ]
     }
-  } 
-
+  }
 ```
+
 {{% /tab %}}
+
 {{% tab "Annotations v1 (for Datadog Agent < v7.36)" %}}
 
 ```yaml
@@ -126,6 +127,7 @@ annotations:
   ad.datadoghq.com/endpoints.instances:
     '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics"}]'
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -139,8 +141,10 @@ annotations:
 
 클러스터 에이전트에 [설정][9]를 제공하여 클러스터 점검을 설정합니다.
 
-{{< tabs >}} 
+{{< tabs >}}
+
 {{% tab "Helm" %}}
+
 ```yaml
 clusterAgent:
   confd:
@@ -154,6 +158,7 @@ clusterAgent:
       instances:
         - prometheus_url: "https://%%host%%:%%port%%/metrics"
 ```
+
 {{% /tab %}}
 
 {{% tab "Operator" %}}
@@ -175,7 +180,9 @@ spec:
             instances:
               - prometheus_url: "https://%%host%%:%%port%%/metrics"
 ```
+
 {{% /tab %}}
+
 {{< /tabs >}}
 
 해당 설정은 에이전트를 트리거하여 정의된 엔드포인트 IP 주소 및 정의된 포트에서 `default` 네임스페이스의 `kubernetes` 서비스에 요청합니다.
@@ -187,7 +194,7 @@ spec:
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "kube_apiserver_metrics" >}}
+{{< get-metrics-from-git "kube-apiserver-metrics" >}}
 
 
 ### 서비스 점검
@@ -200,7 +207,8 @@ Kube_apiserver_metrics는 이벤트를 포함하지 않습니다.
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 고객 지원팀][12]에 문의하세요.
+도움이 필요하신가요? [Datadog 고객 지원팀][11]에 문의하세요.
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/kube_apiserver_metrics/images/screenshot.png
 [2]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver
@@ -212,5 +220,4 @@ Kube_apiserver_metrics는 이벤트를 포함하지 않습니다.
 [8]: https:docs.datadoghq.com//containers/cluster_agent/clusterchecks/?tab=datadogoperator#setting-up-check-configurations
 [9]: https://docs.datadoghq.com/ko/containers/cluster_agent/clusterchecks/?tab=helm#configuration-from-configuration-files
 [10]: https://docs.datadoghq.com/ko/agent/faq/agent-commands/#agent-status-and-information
-[11]: https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/metadata.csv
-[12]: https://docs.datadoghq.com/ko/help/
+[11]: https://docs.datadoghq.com/ko/help/

@@ -7,7 +7,7 @@ further_reading:
   tag: Documentación
   text: Kubernetes Agent
 - link: /agent/troubleshooting/
-  tag: Solucionar problemas del Agent
+  tag: Documentación
   text: Solucionar problemas del Agent
 title: Problemas de los contenedores de Windows
 ---
@@ -16,13 +16,13 @@ En esta página se describen los problemas detectados y no resueltos de monitori
 
 ## Problemas frecuentes
 
-La monitorización de aplicaciones contenerizadas de Windows requiere el Datadog Agent v7.19 o posterior.
+La monitorización de aplicaciones contenedorizadas de Windows requiere el Datadog Agent v7.19 o posterior.
 
 Las versiones de sistemas operativos compatibles son:
 - Windows Server 2019 (LTSC /1809)
-- Windows Server 2019 1909 (hasta el Agent 7.39, dado que ya no es compatible con Microsoft)
-- Windows Server 2019 2004 o 20H1 (hasta el Agent 7.39, dado que ya no es compatible con Microsoft)
-- Windows Server 2019 20H2 (Agent 7.33 a 7.39, dado que ya no es compatible con Microsoft)
+- Windows Server 2019 1909 (hasta el Agent 7.39, ya no es compatible con Microsoft)
+- Windows Server 2019 2004 o 20H1 (hasta el Agent 7.39, ya no es compatible con Microsoft)
+- Windows Server 2019 20H2 (Agent 7.33 a 7.39, ya no es compatible con Microsoft)
 - Windows Server 2022 LTSC (Agent v7.34 o posterior)
 
 El modo de aislamiento Hyper-V no es compatible.
@@ -43,23 +43,25 @@ El método recomendado para desplegar el Datadog Agent en un clúster mixto es r
 
 El Datadog Agent utiliza un `nodeSelector` para seleccionar automáticamente nodos Linux o Windows basados en `targetSystem`.
 
-Sin embargo, no es el caso de Kube State Metrics (que se instala por defecto), por lo que se dan situaciones en las que Kube State Metrics no se puede programar en nodos Windows.
+Sin embargo, este no es el caso de las métricas de Kube State (que se instala por defecto), lo que lleva a situaciones en las que las métricas de Kube State no se pueden programar en los nodos de Windows.
 
 Para evitar este problema existen tres posibilidades:
 
 * Usar la función taint en tus nodos Windows. En Windows, el Agent siempre permite el taint `node.kubernetes.io/os=windows:NoSchedule`.
 * Definir el selector de nodo Kube State Metrics a través del Helm chart `values.yaml` de Datadog:
 
-```
-kube-state-metrics:
-  nodeSelector:
-    beta.kubernetes.io/os: linux // Kubernetes < 1.14
-    kubernetes.io/os: linux // Kubernetes >= 1.14
-```
+   ```
+   kube-state-metrics:
+     nodeSelector:
+       beta.kubernetes.io/os: linux // Kubernetes < 1.14
+       kubernetes.io/os: linux // Kubernetes >= 1.14
+   ```
 
 * Desplegar Kube State Metrics por tu cuenta de forma independiente estableciendo `datadog.kubeStateMetricsEnabled` como `false`.
 
 **Nota**: Cuando se utilizan dos instalaciones de Datadog (una con `targetSystem: linux`, otra con `targetSystem: windows`), es necesario verificar que la segunda tiene `datadog.kubeStateMetricsEnabled` definido como `false` para evitar que se desplieguen dos instancias de Kube State Metrics.
+
+Algunas métricas no están disponibles para los despliegues de Windows. Consulta [métricas disponibles](#limited-metrics-for-windows-deployments).
 
 #### Clústeres mixtos con el Datadog Cluster Agent
 
@@ -83,9 +85,9 @@ datadog:
   kubeStateMetricsEnabled: false
 ```
 
-#### Opciones de configuración limitadas para los despliegues de Windows
+#### Opciones de configuración limitadas para las implementaciones de Windows
 
-Algunas opciones de configuración no se pueden usar en Windows. A continuación se muestra una lista de opciones **no compatibles**:
+Algunas opciones de configuración no están disponibles en Windows. A continuación se muestra una lista de opciones **no compatibles**:
 
 | Parámetro                      | Motivo |
 | --- | ----------- |
@@ -118,17 +120,17 @@ Si tu configuración no cumple estos requisitos, APM y DogStatsD solo funcionar�
 
 ### Check de Kubelet
 
-Es posible que algunas métricas de Kubelet no estén disponibles (o que el check de Kubelet agote el tiempo de espera) en función de la versión de Kubernetes que utilices.
-Para disfrutar de una experiencia óptima, utiliza cualquiera de los siguientes:
+Según la versión de Kubernetes, es posible que algunas métricas de Kubelet no estén disponibles (o que el check de Kubelet agote el tiempo de espera).
+Para una experiencia óptima, utiliza cualquiera de las siguientes opciones con el Datadog Agent v7.19.2+:
 
-* Kubelet 1.16.13 y posteriores (1.16.11 en GKE)
-* Kubelet 1.17.9 y posteriores (1.17.6 en GKE)
-* Kubelet 1.18.6 y posteriores
-* Kubelet 1.19 y posteriores
+* Kubelet v1.16.13+ (v1.16.11+ en GKE)
+* Kubelet v1.17.9+ (v1.17.6+ en GKE)
+* Kubelet v1.18.6+
+* Kubelet v1.19+
 
-Con la versión 7.19.2 y posteriores del Agent
+### Métricas limitadas para despliegues de Windows 
 
-Ten en cuenta que no todas las opciones de `kubernetes.*` están disponibles en Windows, puedes encontrar la lista de las disponibles a continuación:
+Las siguientes métricas de `kubernetes.*` están disponibles para los contenedores de Windows:
 
 * `kubernetes.cpu.usage.total`
 * `kubernetes.containers.restarts`

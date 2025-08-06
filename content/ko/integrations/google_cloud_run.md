@@ -127,7 +127,7 @@ Cloud Run 서비스에서 Datadog에 직접 애플리케이션을 로깅하는 �
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_cloud_run" >}}
+{{< get-metrics-from-git "google-cloud-run" >}}
 
 
 ### 이벤트

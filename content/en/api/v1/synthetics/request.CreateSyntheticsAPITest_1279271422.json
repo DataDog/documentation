@@ -77,6 +77,149 @@
           "metadata": {},
           "callType": "unary"
         }
+      },
+      {
+        "name": "SSL step",
+        "subtype": "ssl",
+        "allowFailure": false,
+        "isCritical": true,
+        "retry": {
+          "count": 0,
+          "interval": 300
+        },
+        "assertions": [
+          {
+            "operator": "isInMoreThan",
+            "type": "certificate",
+            "target": 10
+          }
+        ],
+        "request": {
+          "checkCertificateRevocation": true,
+          "disableAiaIntermediateFetching": true,
+          "host": "example.org",
+          "port": 443
+        }
+      },
+      {
+        "name": "DNS step",
+        "subtype": "dns",
+        "allowFailure": false,
+        "isCritical": true,
+        "retry": {
+          "count": 0,
+          "interval": 300
+        },
+        "assertions": [
+          {
+            "operator": "lessThan",
+            "type": "responseTime",
+            "target": 1000
+          }
+        ],
+        "request": {
+          "host": "troisdizaines.com",
+          "dnsServer": "8.8.8.8",
+          "dnsServerPort": "53"
+        }
+      },
+      {
+        "name": "TCP step",
+        "subtype": "tcp",
+        "allowFailure": false,
+        "isCritical": true,
+        "retry": {
+          "count": 0,
+          "interval": 300
+        },
+        "assertions": [
+          {
+            "operator": "lessThan",
+            "type": "responseTime",
+            "target": 1000
+          }
+        ],
+        "request": {
+          "host": "34.95.79.70",
+          "port": 80,
+          "shouldTrackHops": true,
+          "timeout": 32
+        }
+      },
+      {
+        "name": "ICMP step",
+        "subtype": "icmp",
+        "allowFailure": false,
+        "isCritical": true,
+        "retry": {
+          "count": 0,
+          "interval": 300
+        },
+        "assertions": [
+          {
+            "operator": "is",
+            "target": 0,
+            "type": "packetLossPercentage"
+          }
+        ],
+        "request": {
+          "host": "34.95.79.70",
+          "numberOfPackets": 4,
+          "shouldTrackHops": true,
+          "timeout": 38
+        }
+      },
+      {
+        "name": "Websocket step",
+        "subtype": "websocket",
+        "allowFailure": false,
+        "isCritical": true,
+        "retry": {
+          "count": 0,
+          "interval": 300
+        },
+        "assertions": [
+          {
+            "operator": "lessThan",
+            "type": "responseTime",
+            "target": 1000
+          }
+        ],
+        "request": {
+          "url": "ws://34.95.79.70/web-socket",
+          "message": "My message",
+          "isMessageBase64Encoded": true,
+          "headers": {
+            "f": "g"
+          },
+          "basicAuth": {
+            "type": "web",
+            "username": "user",
+            "password": "password"
+          }
+        }
+      },
+      {
+        "name": "UDP step",
+        "subtype": "udp",
+        "allowFailure": false,
+        "isCritical": true,
+        "retry": {
+          "count": 0,
+          "interval": 300
+        },
+        "assertions": [
+          {
+            "operator": "lessThan",
+            "type": "responseTime",
+            "target": 1000
+          }
+        ],
+        "request": {
+          "host": "8.8.8.8",
+          "port": 53,
+          "message": "A image.google.com"
+        }
       }
     ]
   },

@@ -80,7 +80,7 @@ Si aún no lo has hecho, configura primero la [integración de Amazon Web Servic
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_opensearch_serverless" >}}
+{{< get-metrics-from-git "amazon-opensearch-serverless" >}}
 
 
 ### Checks de servicio

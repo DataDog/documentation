@@ -38,18 +38,99 @@ Next, run Static Code Analysis by following instructions for your chosen CI prov
 {{< /whatsnext >}}
 
 ## Select your source code management provider
-Datadog Static Code Analysis supports all source code management providers, with native support for GitHub.
-### Set up the GitHub integration
-If GitHub is your source code management provider, you must configure a GitHub App using the [GitHub integration tile][9] and set up the [source code integration][10] to see inline code snippets and enable [pull request comments][11].
+Datadog Static Code Analysis supports all source code management providers, with native support for GitHub, GitLab, and Azure DevOps.
+
+{{< tabs >}}
+{{% tab "GitHub" %}}
+
+If GitHub is your source code management provider, you must configure a GitHub App using the [GitHub integration tile][1] and set up the [source code integration][2] to see inline code snippets and enable [pull request comments][3].
 
 When installing a GitHub App, the following permissions are required to enable certain features:
 
 - `Content: Read`, which allows you to see code snippets displayed in Datadog
-- `Pull Request: Read & Write`, which allows Datadog to add feedback for violations directly in your pull requests using [pull request comments][11], as well as open pull requests to [fix vulnerabilities][12]
+- `Pull Request: Read & Write`, which allows Datadog to add feedback for violations directly in your pull requests using [pull request comments][3], as well as open pull requests to [fix vulnerabilities][4]
+- `Checks: Read & Write`, which allows you to create checks on SAST violations to block pull requests
 
-### Other source code management providers
+[1]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
+[2]: /integrations/guide/source-code-integration
+[3]: /security/code_security/dev_tool_int/github_pull_requests
+[4]: /security/code_security/dev_tool_int/
+
+{{% /tab %}}
+{{% tab "GitLab" %}}
+
+<div class="alert alert-warning">
+Repositories from GitLab instances are supported in closed Preview. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.
+</div>
+
+If GitLab is your source code management provider, before you can begin installation, you must request access to the closed Preview using the form above. After being granted access, follow [these instructions][1] to complete the setup process.
+
+[1]: https://github.com/DataDog/gitlab-integration-setup
+
+{{% /tab %}}
+{{% tab "Azure DevOps" %}}
+
+<div class="alert alert-warning">
+Repositories from Azure DevOps are supported in closed Preview. Your Azure DevOps organizations must be connected to a Microsoft Entra tenant. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
+</div>
+
+If Azure DevOps is your source code management provider, before you can begin installation, you must request access to the closed preview using the form above. After being granted access, follow the instructions below to complete the setup process.
+
+**Note:** Azure DevOps Server is not supported.
+
+### Create and register a Microsoft Entra app
+If you are an admin in your Azure portal, you can configure Entra apps to connect your tenant to Datadog.
+
+1. Go to [Code Security setup][1].
+2. In **Activate scanning for your repositories**, click **Manage Repositories**.
+3. Select **CI Pipelines**.
+4. Select the scan types you want to use.
+5. Select **Azure DevOps** as your source code management provider.
+6. If this is your first time connecting an Azure DevOps organization to Datadog, click **Connect Azure DevOps Account**.
+7. When connecting a Microsoft Entra tenant for the first time you will need to go to your [Azure Portal][2] to register a new application. During this creation process, ensure the following:
+   1. You select **Accounts in this organizational directory only (Datadog, Inc. only - Single tenant)** as the account type.
+   2. Set the redirect URI to **Web** and paste the URI given to you in the instructions.
+8. Copy the values for **Application (client) ID** and **Directory (tenant) ID** and paste them into Datadog.
+9. In the Azure Portal for your app registration, navigate to **Manage > Certificates & secrets** and switch to **Client secrets**.
+10. Click **New client secret** and create a secret with the description and expiration values you want to use.
+11. Copy and paste the string in the **Value** column for your new secret.
+12. Paste the secret into Datadog and click **Create Configuration** to complete the connection between your Entra tenant and Datadog.
+13. Add one or more Azure DevOps organizations by pasting the organization slug into Datadog and then adding your Service Principal as a user by going to **Organization settings > Users > Add users**.
+    1.  Your Service Principal will need the **Basic** access level and at least the **Project Contributor** security group.
+14. Click **Submit Organization**.
+
+### Configure project service hooks
+
+To enable all Code Security features in Azure DevOps, you'll need to use a [Datadog API key][3] to configure service hooks for your projects.
+
+First, set your environment variables (note: the Datadog UI will fill these values out for you):
+```shell
+export AZURE_DEVOPS_TOKEN="..."                 # Client Secret Value
+export DD_API_KEY="..."                         # Datadog API Key
+```
+
+Then, replace the placeholders in the script below with your [Datadog Site][5] and Azure DevOps organization name to configure the necessary service hooks on your organization's projects:
+```shell
+curl https://raw.githubusercontent.com/DataDog/azdevops-sci-hooks/refs/heads/main/setup-hooks.py > setup-hooks.py && chmod a+x ./setup-hooks.py
+./setup-hooks.py --dd-site="<dd-site>" --az-devops-org="<org-name>"
+```
+
+Click [here][4] to see our CLI that automates this process.
+
+[1]: https://app.datadoghq.com/security/configuration/code-security/setup
+[2]: https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://github.com/DataDog/azdevops-sci-hooks
+[5]: /getting_started/site/
+
+{{% /tab %}}
+{{% tab "Other" %}}
+
 If you are using another source code management provider, configure Static Code Analysis to run in your CI pipelines using the `datadog-ci` CLI tool and [upload the results](#upload-third-party-static-analysis-results-to-datadog) to Datadog.
 You **must** run an analysis of your repository on the default branch before results can begin appearing on the **Code Security** page.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Customize your configuration
 
@@ -259,6 +340,8 @@ rulesets:
         arguments:
           # Set the max-function-lines rule's threshold to 150 lines
           max-lines: 150
+        # Override this rule's severity
+        severity: NOTICE
       max-class-lines:
         arguments:
           # Set different thresholds for the max-class-lines rule in different subtrees
@@ -267,6 +350,12 @@ rulesets:
             /: 200
             # Set the rule's threshold to 100 lines in src/main/backend
             src/main/backend: 100
+        # Override this rule's severity with different values in different subtrees
+        severity:
+          # Set the rule's severity to INFO by default
+          /: INFO
+          # Set the rule's severity to NONE in tests/
+          tests: NONE
   - python-inclusive
   - python-django:
     # Only apply the python-django ruleset to the following paths
@@ -311,12 +400,21 @@ You can include the following **rule** options in the `static-analysis.datadog.y
 | ------------- | ------------------------------------------------------------------------------------------------------------------ | --------- |
 | `ignore`    | A list of path prefixes and glob patterns to ignore for this specific rule. Matching files will not be analyzed.   | `false` |
 | `only`      | A list of path prefixes and glob patterns to analyze for this specific rule. Only matching files will be analyzed. | `false` |
-| `arguments` | A map of values for rules that support customizable arguments.                                                     | `false` |
+| `arguments` | A map of values for rules that support customizable arguments. See the syntax below.                               | `false` |
+| `severity`  | Override the rule's severity. See the syntax below.                                                                | `false` |
+| `category`  | Override the rule's category. See the syntax below.                                                                | `false` |
 
 The map in the `arguments` field uses an argument's name as its key, and the values are either strings or maps:
 
 * To set a value for the whole repository, you can specify it as a string.
 * To set different values for different subtrees in the repository, you can specify them as a map from a subtree prefix to the value that the argument will have within that subtree.
+
+The `severity` field can take a string or a map:
+
+* To set the severity for the whole repository, specify it as one of the following strings: `ERROR`, `WARNING`, `NOTICE`, or `NONE`.
+* To set different severities for different subtrees in the repository, you can specify them as a map from a subtree prefix to the severity for that subtree.
+
+The `category` field can take a string with one of the following values: `BEST_PRACTICES`, `CODE_STYLE`, `ERROR_PRONE`, `PERFORMANCE`, or `SECURITY`. You can only specify one category for the whole repository.
 
 ### Ignoring violations
 
@@ -392,6 +490,21 @@ datadog:
     - repositoryURL: https://github.com/myorganization/myrepo.git
       paths:
         - path/to/service/code/**
+{{< /code-block >}}
+
+
+If you want all the files in a repository to be associated with a service, you can use the glob `**` as follows:
+
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: service
+metadata:
+  name: my-service
+datadog:
+  codeLocations:
+    - repositoryURL: https://github.com/myorganization/myrepo.git
+      paths:
+        - "**"
 {{< /code-block >}}
 
 #### Detecting file usage patterns
@@ -565,8 +678,8 @@ When ingesting SARIF files, Datadog maps SARIF severities into CVSS severities u
 |----------------|---------------|
 | Error          | Critical      |
 | Warning        | High          |
-| Notice         | Medium        |
-| Info           | Low           |
+| Note           | Medium        |
+| None           | Low           |
 
 
 <!-- ## Further Reading

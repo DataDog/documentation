@@ -21,7 +21,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- os & system
+- OS & 시스템
 - 이벤트 관리
 custom_kind: 통합
 dependencies:
@@ -161,7 +161,7 @@ spec:
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "oom_kill" >}}
+{{< get-metrics-from-git "oom-kill" >}}
 
 
 ### 서비스 점검

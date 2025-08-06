@@ -24,7 +24,7 @@ further_reading:
 - link: /tracing/trace_explorer/trace_view/
   tag: Documentación
   text: Comprender cómo leer una traza de Datadog
-- link: /tracing/service_catalog/
+- link: /tracing/software_catalog/
   tag: Documentación
   text: Descubrir y catalogar los servicios que informan a Datadog
 - link: /tracing/services/service_page/
@@ -46,8 +46,8 @@ Una consulta se compone de *términos* y *operadores*.
 
 Existen dos tipos de *términos*:
 
-* **Etiqueta de tramo**: mejoras de contexto relacionados con el tramo (span). Por ejemplo, etiquetas (tags) de host o contenedor que describen la infraestructura en la que se ejecuta el servicio.
 * **Atributo de tramo**: contenido del tramo, recopilado con instrumentación automática o manual en la aplicación.
+* **Etiqueta de tramo**: mejoras de contexto relacionados con el tramo (span). Por ejemplo, etiquetas (tags) de host o contenedor que describen la infraestructura en la que se ejecuta el servicio.
 
 Para combinar varios *términos* en una consulta compleja, utiliza cualquiera de los siguientes operadores booleanos:
 
@@ -59,7 +59,7 @@ Para combinar varios *términos* en una consulta compleja, utiliza cualquiera de
 
 ### Búsqueda de atributo
 
-Para buscar en un atributo de tramo específico, debes añadir `@` al principio de la clave del atributo.
+Para buscar un atributo de span (tramo), debes añadir `@` al principio de la clave del atributo.
 
 Por ejemplo, si deseas acceder a un tramo con el siguiente atributo a continuación, puedes utilizar:
 
@@ -75,27 +75,35 @@ Por ejemplo, si deseas acceder a un tramo con el siguiente atributo a continuaci
     }
   }
 ```
+
+Los atributos de spans (tramos) son visibles en la pestaña **Información general** del panel lateral de traces (trazas).
+
 **Nota:** No es necesario utilizar `@` en los [atributos reservados][17]: `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type`, `link`
 
 ### Búsqueda por etiquetas
 
-Tus tramos heredan etiquetas de hosts e integraciones que los generan. Pueden utilizarse en la consulta de búsqueda:
+Tus spans (tramos) heredan etiquetas (tags) de hosts e integraciones que los generan.
 
-| Consulta                                                          | Coincidencia                                                                       |
-|:---------------------------------------------------------------|:----------------------------------------------------------------------------|
-| `("env:prod" OR test)`                                         | Todas las trazas con la etiqueta `#env:prod` o la etiqueta `#test`                      |
-| `(service:srvA OR service:srvB)` o `(service:(srvA OR srvB))` | Todas las trazas que contengan etiquetas `#service:srvA` o `#service:srvB`.            |
-| `("env:prod" AND -"version:beta")`                             | Todas las trazas que contienen `#env:prod` y que no contienen `#version:beta` |
+Por ejemplo:
+
+| Consulta                                                        | Coincidencia                                                                                             |
+|:-------------------------------------------------------------|:--------------------------------------------------------------------------------------------------|
+| `(hostname:web-server OR env:prod)`                          | Todas las trazas (traces) con la etiqueta (tag) de infraestructura `hostname:web-server` o el atributo reservado `env:prod` |
+| `(availability-zone:us-east OR container_name:api-frontend)` | Todas las trazas (traces) con cualquiera de estas etiquetas (tags) de infraestructura                                               |
+| `(service:api AND -kube_deployment:canary)`                  | Todas las trazas (traces) del servicio `api` que no están desplegados en el despliegue `canary`                 |
+
+Las etiquetas (tags) de spans (tramos) son visibles en la pestaña **Infraestructura** del panel lateral de trazas (traces).
+
+#### Formatos de etiquetas (tags) no estándar
 
 Si tus etiquetas no siguen las [prácticas recomendadas de etiquetas][2], no utilices la sintaxis `key:value`. En su lugar, utiliza la siguiente consulta de búsqueda:
 
-* `tags:<MY_TAG>`
+`tags:<MY_TAG>`
 
-Ejemplo de etiqueta que no sigue las prácticas recomendadas:
+Por ejemplo, esta etiqueta (tag) no sigue las mejores prácticas:  
+`auto-discovery.cluster-autoscaler.k8s.io/daffy`
 
-<img width="867" alt="etiquetado-not-recomendado" src="https://github.com/user-attachments/assets/4a3d5246-b6e7-4ab2-908a-bc2137062573">
-
-Consulta de búsqueda para esta etiqueta específica:
+Para buscar en esta etiqueta (tag), utiliza la siguiente consulta:  
 `tags:"auto-discovery.cluster-autoscaler.k8s.io/daffy"`
 
 ### Comodines
@@ -143,8 +151,8 @@ Para eliminar una búsqueda guardada, haz clic en el icono de la papelera situad
 
 ### Buscar servicios y entidades 
 
-{{< site-region region="ap1,us3,us5,eu,us" >}}
-Para buscar un servicio, utiliza el atributo `service`. Para buscar otro [tipo de entidad][20] (por ejemplo, una base de datos, una cola o un proveedor externo), recurra a otros [atributos de pares][21] que Datadog utiliza para describir dependencias que no están instrumentadas con APM. Por ejemplo, para encontrar tramos que representen llamadas a una tabla `users` desde una base de datos postgres, utiliza la siguiente consulta: `@peer.db.name:users @peer.db.system:postgres`
+{{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
+Para buscar un servicio, utiliza el atributo `service`. Para buscar otro [tipo de entidad][20] (por ejemplo, una base de datos, una cola o un proveedor externo), recurre a otros [atributos de pares][21] que Datadog utiliza para describir dependencias que no están instrumentadas con APM. Por ejemplo, para encontrar spans (tramos) que representen llamadas a una tabla `users` desde una base de datos postgres, utiliza la siguiente consulta: `@peer.db.name:users @peer.db.system:postgres`
 
 **Nota**: La etiqueta `service` del tramo representa el servicio **emitiendo** el tramo si migraste a la [nomenclatura del servicio global][22] configurando `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAME_ENABLED=true`.
 
@@ -163,7 +171,7 @@ El intervalo de tiempo te permite visualizar trazas dentro de un periodo determi
 
 La tabla de tramo es la lista de tramos que coinciden con el contexto seleccionado. Un contexto se define mediante un filtro de [barra de búsqueda](#search-bar) y un [intervalo de tiempo](#time-range).
 
-{{< site-region region="ap1,us3,us5,eu,us" >}}
+{{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
 ### La columna de servicio
 
 Por defecto, la columna de servicio muestra el atributo reservado `service` del tramo.
@@ -302,7 +310,6 @@ También puedes generar una nueva métrica para la consulta.
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /es/tracing/setup/java/#integrations
 [2]: /es/getting_started/tagging/#tags-best-practices

@@ -3,4 +3,4 @@ core_product:
 - apm
 title: インテリジェント保持フィルター
 ---
-A Datadog default retention filter that is always active, keeping a representative proportion of traces, true high latency, and diverse error traces to help you monitor the health of your applications. It ensures that you always see individual sample traces in any service and resource page.
+Datadog のデフォルトの保持フィルターは常にアクティブで、代表的な割合のトレース、実際に高レイテンシが発生したトレース、多様なエラートレースを保持することで、アプリケーションの健全性を監視できるようにします。このフィルターにより、任意のサービスページやリソースページで個々のサンプルトレースを常に確認できます。

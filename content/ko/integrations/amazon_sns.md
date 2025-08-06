@@ -100,7 +100,7 @@ SNS는 로그를 제공하지 않습니다. SNS를 통해 프로세스 로그와
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_sns" >}}
+{{< get-metrics-from-git "amazon-sns" >}}
 
 
 AWS에서 검색된 각 메트릭에는 AWS 콘솔에 나타나는 것과 동일한 태그가 할당됩니다, 호스트 이름, 보안 그룹 등을 포함하되 이에 제한되지 않습니다.

@@ -6,6 +6,10 @@ further_reading:
   text: "Backtest detection rules with Datadog Cloud SIEM Historical Jobs"
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">This feature is not supported for the US1-FED site.</div>
+{{% /site-region %}}
+
 Historical Jobs allows you to backtest detections by running them against historical logs stored in Datadog Cloud SIEM.
 
 Unlike a real-time rule, a Historical Job does not run continuously. Historical Jobs are one-time executable queries that analyze a specified period of historical data.

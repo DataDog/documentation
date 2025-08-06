@@ -11,10 +11,10 @@ author:
   support_email: support@sofy.ai
   vendor_id: sofy
 categories:
-- テスト
-- マーケットプレイス
-- apm
-- コラボレーション
+- testing
+- marketplace
+- mobile
+- collaboration
 custom_kind: integration
 dependencies: []
 display_on_public_website: true
@@ -32,10 +32,10 @@ pricing:
 - billing_type: flat_fee
   includes_assets: false
   product_id: sofy-license
-  short_description: No-code testing platform for mobile apps
+  short_description: モバイル アプリ向けノーコード テスト プラットフォーム
   unit_price: 599
 public_title: Sofy
-short_description: No-Code Testing for Mobile Apps
+short_description: モバイル アプリ向けノーコード テスト
 supported_os:
 - linux
 - windows
@@ -53,7 +53,7 @@ tile:
   - Submitted Data Type::Metrics
   - Offering::Software License
   configuration: README.md#Setup
-  description: No-Code Testing for Mobile Apps
+  description: モバイル アプリ向けノーコード テスト
   media:
   - caption: Sofy Dashboard
     image_url: images/sofy_dashboard.png
@@ -86,26 +86,26 @@ tile:
 
 ## 概要
 
-[Sofy][4] is a no-code testing platform for mobile apps. It enables you to run QA tests from your CI/CD pipeline on real devices without a single line of code. Sofy simplifies test planning, automation, environments, execution, reporting, and debugging. Save time, improve release quality, and deliver frictionless mobile app experiences.
+[Sofy][4] はモバイル アプリ向けのノーコード テスト プラットフォームです。これにより、コードを 1 行も書くことなく、本物のデバイス上で CI/CD パイプラインから QA テストを実行できます。Sofy はテスト プランニング、オートメーション、環境、実行、レポーティング、デバッグを簡素化します。時間を節約し、リリース品質を向上させ、シームレスなモバイル アプリ エクスペリエンスを提供しましょう。
 
-The [Sofy integration][1] provides deeper insight into your testing process by visualizing key metrics and trends such as load time, network, memory utilization, and CPU. The out-of-the-box dashboard provides real-time visibility into your Sofy test results, enabling you to monitor and analyze performance over time, and make data-driven decisions to improve overall software quality.
+[Sofy インテグレーション][1] は、ロード タイム、ネットワーク、メモリ使用率、CPU などの主要なメトリクスとトレンドを可視化することで、テスト プロセスに対するより深いインサイトを提供します。すぐに使えるダッシュボードが Sofy のテスト結果をリアル タイムで可視化し、経時的にパフォーマンスを監視・分析して、ソフトウェア全体の品質を向上させるデータ ドリブンの意思決定を可能にします。
 
-By signing up for Sofy from the Datadog Marketplace, you get an extra 500 device minutes per month for the next 12 months.
+Datadog Marketplace から Sofy に申し込むと、今後 12 か月間は毎月追加で 500 デバイス分の利用分数が付与されます。
 
 
 
 ## サポート
 
-For support or feature requests, contact Sofy through the following channel:
+サポートや機能リクエストについては、以下のチャネルから Sofy にお問い合わせください。
 
-- Support: [Sofy][2]
+- サポート: [Sofy][2]
 
 ### その他の参考資料
 
-お役に立つドキュメント、リンクや記事:
+役立つドキュメント、リンク、記事:
 
- - [Monitor your mobile tests with Sofy's offering in the Datadog Marketplace][5]
- - [Sofy Documentation][3]
+ - [Datadog Marketplace で提供される Sofy のオファリングでモバイル テストをモニタリングする][5]
+ - [Sofy ドキュメンテーション][3]
 
 
 [1]: https://app.datadoghq.com/integrations/sofy
@@ -114,4 +114,4 @@ For support or feature requests, contact Sofy through the following channel:
 [4]: https://sofy.ai/
 [5]: https://www.datadoghq.com/blog/sofy-mobile-tests/
 ---
-This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/sofy-sofy-license" target="_blank">Click Here</a> to purchase this application.
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/sofy-sofy-license" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

@@ -8,6 +8,28 @@ aliases:
   - /security/threats/security_profiles
   - /security/threats/runtime_anomaly_detection
   - /security/threats/
+cascade:
+- _target:
+    path: /security/workload_protection/agent_expressions
+  aliases:
+    - /security/threats/agent_expressions
+- _target:
+    path: /security/workload_protection/backend_linux
+  aliases:
+    - /security/threats/backend_linux
+- _target:
+    path: /security/workload_protection/backend_windows
+  aliases:
+    - /security/threats/backend_windows
+- _target:
+    path: /security/workload_protection/linux_expressions
+  aliases:
+    - /security/threats/linux_expressions
+- _target:
+    path: /security/workload_protection/windows_expressions
+  aliases:
+    - /security/threats/windows_expressions
+
 ---
 
 Workload Protection monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of Workload Protection with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
@@ -23,7 +45,7 @@ Workload Protection Threats uses the Datadog Agent to monitor your environment. 
 3. **DNS Activity Monitoring** to watch network traffic for malicious activity on hosts and containers in real-time.
 4. **Kernel Activity Monitoring** to watch for kernel-layer attacks like process hijacking, container breakouts, and more in real-time.
 
-<!-- {{< img src="security/csm/csm_overview_2.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}} -->
+<!-- {{< img src="security/csm/csm_overview_3.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}} -->
 
 ## Proactively block threats with Active Protection
 

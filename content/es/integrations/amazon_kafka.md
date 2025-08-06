@@ -110,7 +110,7 @@ Esta integración basada en OpenMetrics tiene un modo más reciente (`use_openme
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_kafka" >}}
+{{< get-metrics-from-git "amazon-kafka" >}}
 
 
 ### Eventos

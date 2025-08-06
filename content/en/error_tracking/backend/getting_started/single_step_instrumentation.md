@@ -94,7 +94,6 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
            value: "false"
      features:
        apm:
-         enabled: true
          errorTrackingStandalone:
            enabled: true
          instrumentation:

@@ -174,7 +174,7 @@ Si aún no lo has hecho, configura primero la [integración de Microsoft Azure][
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_openai" >}}
+{{< get-metrics-from-git "azure-openai" >}}
 
 
 ### Checks de servicio

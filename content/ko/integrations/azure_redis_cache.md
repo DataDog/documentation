@@ -40,7 +40,7 @@ Azure Redis Cache 메트릭을 얻으면 다음을 할 수 있습니다.
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_redis_cache" >}}
+{{< get-metrics-from-git "azure-redis-cache" >}}
 
 
 ### 이벤트

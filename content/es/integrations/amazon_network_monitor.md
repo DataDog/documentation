@@ -78,7 +78,7 @@ Instala la [integración de Datadog y CloudWatch Network Monitor][2].
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_network_monitor" >}}
+{{< get-metrics-from-git "amazon-network-monitor" >}}
 
 
 ### Eventos

@@ -38,7 +38,7 @@ Datadog Azure 통합을 사용하여 Azure Analysis Services에서 메트릭을 
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_analysis_services" >}}
+{{ get-metrics-from-git "azure-analysisservices" }}
 
 
 ### 이벤트

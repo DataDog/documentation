@@ -245,7 +245,7 @@ Lanes on the top are runtime activities that may add extra latency to your reque
 
 ### プロファイルをトレースから閲覧する
 
-{{< img src="profiler/view_profile_from_trace.png" alt="Opening a view of the profile in a flame graph" >}}
+{{< img src="profiler/view_profile_from_trace-2.png" alt="Opening a view of the profile in a flame graph" >}}
 
 For each type from the breakdown, click **Open in Profiling** to see the same data opened up in a new page. From there, you can change the visualization to a flame graph.
 Click the **Focus On** selector to define the scope of the data:

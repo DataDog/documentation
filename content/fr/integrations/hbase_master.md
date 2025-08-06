@@ -133,7 +133,7 @@ Lancez la [sous-commande status de l'Agent][8] et cherchez `hbase_master` dans l
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "hbase_master" >}}
+{{< get-metrics-from-git "hbase-master" >}}
 
 
 ### Événements
@@ -211,7 +211,7 @@ Lancez la [sous-commande status de l'Agent][8] et cherchez `hbase_regionserver` 
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "hbase_regionserver" >}}
+{{< get-metrics-from-git "hbase-regionserver" >}}
 
 
 ### Événements

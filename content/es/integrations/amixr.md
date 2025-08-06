@@ -43,22 +43,22 @@ public_title: Amixr
 short_description: Gestión de alertas fácil para desarrolladores con una excelente
   integración con Slack
 supported_os:
-- linux
-- windows
-- macos
+- Linux
+- Windows
+- macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Alerting
-  - Category::Automation
-  - Category::Collaboration
-  - Category::Incidents
-  - Category::Notifications
-  - Category::Orchestration
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
+  - Categoría::Alertar
+  - Categoría::Automatización
+  - Categoría::Colaboración
+  - Categoría::Incidentes
+  - Categoría::Notificaciones
+  - Categoría::Orquestación
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::Windows
+  - Sistema operativo compatible::macOS
+  - Oferta::Integración
   configuration: README.md#Configuración
   description: Gestión de alertas fácil para desarrolladores con una excelente integración
     con Slack
@@ -122,7 +122,7 @@ En Amixr:
 
 La integración de Amixr no incluye ninguna métrica.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración de Amixr no incluye ningún check de servicio.
 

@@ -33,7 +33,7 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- 준수
+- compliance
 - 설정 및 배포
 - marketplace
 custom_kind: 통합
@@ -59,7 +59,7 @@ public_title: Validator 태그
 short_description: DD 환경에서 모니터링 태그 유효성 검사 및 에이전트 규정 준수 보장
 supported_os:
 - linux
-- windows
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
@@ -95,12 +95,12 @@ RapDev Validator는 Datadog 환경에서 모니터링 태그 및 에이전트 �
 2. RapDev Validator 신서틱(Synthetic) 대시보드
 3. RapDev Validator 대시보드
 
-### 모니터
+### 모니터링
 1. 호스트에 필수 태그 키가 누락됨
 2. 호스트에 태그 키 비준수 값이 있음
 
 ## 지원
-지원 또는 기능 요청은 다음 채널을 통해 RapDev.io에 문의하세요.
+지원 또는 기능 요청은 다음 채널을 통해 RapDev.io에 문의해 주세요.
 
 - 이메일: support@rapdev.io
 - 채팅: [rapdev.io](https://www.rapdev.io/#Get-in-touch)

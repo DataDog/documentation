@@ -130,7 +130,7 @@ Para entornos en contenedores, consulta las [plantillas de integración de Autod
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "go_expvar" >}}
+{{< get-metrics-from-git "go-expvar" >}}
 
 
 ### Eventos

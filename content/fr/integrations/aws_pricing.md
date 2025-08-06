@@ -66,7 +66,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "aws_pricing" >}}
+{{< get-metrics-from-git "aws-pricing" >}}
 
 
 ### Événements
@@ -74,7 +74,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 AWS Pricing n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "aws_pricing" >}}
+{{< get-service-checks-from-git "aws-pricing" >}}
 
 
 ## Dépannage

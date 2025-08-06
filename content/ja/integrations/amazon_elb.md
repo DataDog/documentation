@@ -102,7 +102,7 @@ AWS Services のログを収集する方法については、[Datadog Lambda 関
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_elb" >}}
+{{< get-metrics-from-git "amazon-elb" >}}
 
 
 ### イベント

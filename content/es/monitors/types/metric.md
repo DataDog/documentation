@@ -11,7 +11,7 @@ further_reading:
 - link: /monitors/downtimes/
   tag: Documentación
   text: Programar una caída del sistema para silenciar un monitor
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: Documentación
   text: Consultar el estado de tu monitor
 - link: /monitors/types/change-alert
@@ -94,7 +94,7 @@ Cualquier métrica que informe a Datadog está disponible para monitores. Utiliz
 
 {{< img src="monitors/monitor_types/metric/metric_threshold_config.png" alt="definir la métrica para el monitor de métrica de detección del umbral" style="width:100%;">}}
 
-| Paso                              | Obligatorio | Predeterminada        | Ejemplo           |
+| Paso                              | Obligatorio | Predeterminado        | Ejemplo           |
 |-----------------------------------|----------|----------------|-------------------|
 | Selecciona una métrica                   | Sí      | Ninguna           | `system.cpu.user` |
 | Definir el `from`                 | No       | En todas partes     | `env:prod`        |
@@ -119,7 +119,7 @@ Cualquier métrica que informe a Datadog está disponible para monitores. Utiliz
 
 {{< img src="monitors/monitor_types/metric/metric_change_alert_config.png" alt="definir la métrica para el monitor de métrica de detección de cambio" style="width:100%;">}}
 
-| Paso                              | Obligatorio | Predeterminada        | Ejemplo           |
+| Paso                              | Obligatorio | Predeterminado        | Ejemplo           |
 |-----------------------------------|----------|----------------|-------------------|
 | Selecciona una métrica                   | Sí      | Ninguna           | `system.cpu.user` |
 | Definir el `from`                 | No       | En todas partes     | `env:prod`        |
@@ -146,11 +146,12 @@ Cualquier métrica que informe a Datadog está disponible para monitores. Utiliz
 {{% /tab %}}
 {{< /tabs >}}
 
-**Notas:**
+**Notas**
   - Si se utiliza una métrica de distribución con un agregador de percentil, se especifica automáticamente un umbral de percentil coincidente. Las métricas con agregadores de percentiles no generan un gráfico de snapshot en el mensaje de notificaciones.
   - **max/min*: estas descripciones de max y min asumen que el monitor envía una alerta cuando la métrica supera el umbral. Para monitores que alertan cuando la métrica está por debajo del umbral se aplica la lógica inversa.
   - La definición de métricas para monitores es similar a la definición de métricas para gráficos. Para más detalles sobre el uso de la opción `Advanced...`, consulta [Crear gráficas avanzadas][2].
   - Existen diferentes comportamientos cuando se utiliza `as_count()`. Consulta [as_count() en evaluaciones de monitor][3] para obtener más detalles.
+  - Los grupos `N/A` no se incluyen en los monitores, por lo que las claves de etiqueta (tag) deben tener un valor. 
 
 ## Definir condiciones de alerta
 
@@ -188,7 +189,7 @@ La siguiente lógica determina el tamaño del bucket:
 Para que se considere "intervalo completo", el monitor exige:
 
 1. Al menos un punto de datos en el primer bucket. El primer bucket es cronológicamente el bucket más antiguo de la ventana.
-2. Como máximo tres buckets en total sin puntos de datos (incluido el primero).
+2. No más de tres buckets en total sin puntos de datos.
 
 Si se cumplen las condiciones, se evalúa el monitor. En caso contrario, se cancela la evaluación y el estado del monitor no cambia.
 

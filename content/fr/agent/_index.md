@@ -6,13 +6,13 @@ aliases:
 - /fr/agent/faq/the-datadog-agent-for-logs-or-traces-only
 cascade:
 - _target:
-    path: /agent/basic_agent_usage/chef
     lang: fr
+    path: /agent/basic_agent_usage/chef
   tags:
   - uninstall
 - _target:
-    path: /infrastructure/**/*
     lang: fr
+    path: /infrastructure/**/*
   algolia:
     rank: 80
     tags:
@@ -41,7 +41,7 @@ title: Agent
 L'Agent v7 est disponible. <a href="/agent/versions/upgrade_to_agent_v7">Passez à la dernière version</a> pour profiter des nouvelles fonctionnalités.
 </div>
 
-## Présentation
+## Section Overview
 
 L'Agent Datadog est un logiciel qui s'exécute sur vos hosts. Il recueille les événements et les métriques des hosts et les envoie à la plateforme Datadog, à partir de laquelle vous pouvez analyser vos données de surveillance et de performance. L'Agent Datadog est open source et son code source est disponible sur GitHub dans [DataDog/datadog-agent][1].
 

@@ -10,6 +10,14 @@ algolia:
 SCIM is available with the Infrastructure Pro and Infrastructure Enterprise plans.
 </div>
 
+<div class="alert alert-warning">
+  Due to a Microsoft freeze on third-party app updates in Entra following a security incident in late 2024, Team provisioning via SCIM is unavailable. To create Teams in Datadog, use one of the supported alternatives: 
+  <a href="https://docs.datadoghq.com/account_management/saml/mapping/" target="_blank">SAML mapping</a>, 
+  <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/team" target="_blank">Terraform</a>, 
+  <a href="https://docs.datadoghq.com/api/latest/teams/" target="_blank">the public API</a>, or 
+  <a href="https://docs.datadoghq.com/api/latest/scim/" target="_blank">direct calls to the SCIM server</a>. SCIM can still be used to provision users.
+</div>
+
 See the following instructions to synchronize your Datadog users with Microsoft Entra ID using SCIM.
 
 For capabilities and limitations of this feature, see [SCIM][1].

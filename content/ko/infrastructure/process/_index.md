@@ -45,7 +45,7 @@ Datadog 에이전트를 설치한 후, 다음 매개 변수를 `"true"`로 설�
 ```yaml
 process_config:
   process_collection:
-    enabled: "true"
+    enabled: true
 ```
 
 추가로 일부 설정 옵션을 환경 변수로 설정할 수 있습니다. 

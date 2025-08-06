@@ -11,12 +11,12 @@ title: Node.js Lambda トレースとバンドラーの互換性
 
 ## 概要
 
-Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bundlers, like [Webpack][1] or [esbuild][2], due to the use of conditional imports and other issues. While bundlers cannot build `dd-trace`, your application can still use the `dd-trace` and `datadog-lambda-js` libraries provided by the prebuilt Datadog Lambda layer. Follow the instructions below.
+Datadog のトレーシングライブラリ (`dd-trace`) は、条件付きインポートなどの問題により [Webpack][1] や [esbuild][2] といったバンドラーと互換性がないことが知られています。バンドラーが `dd-trace` をビルドできなくても、事前ビルド済みの Datadog Lambda レイヤーに含まれる `dd-trace` と `datadog-lambda-js` ライブラリをアプリケーションで引き続き利用できます。以下の手順に従ってください。
 
 ## Webpack
-1. Follow the [installation instructions for Node.js][3] and ensure the Datadog Lambda layer for Node.js is added to your Lambda function.
-2. Exclude `datadog-lambda-js` and `dd-trace`, either by removing them from your `package.json` or by setting an [exclude rule][4]. Excluding them tells the bundler to skip building them as dependencies, since they are already available in the Lambda runtime provided by the Datadog Lambda layer.
-3. Mark your dependencies as [externals][5]. This tells the bundler to exclude them from the output bundle; instead, they are packaged in `node_modules`.
+1. [Node.js 用のインストール手順][3] に従い、Node.js 用の Datadog Lambda レイヤーが Lambda 関数に追加されていることを確認します。
+2. `datadog-lambda-js` と `dd-trace` を `package.json` から削除するか、または [exclude ルール][4] を設定して除外します。これにより、バンドラーはこれらを依存関係としてビルドしなくなります (Datadog Lambda レイヤーのランタイムですでに利用可能なため)。
+3. 依存関係を [externals][5] としてマークします。これにより、バンドラーは依存関係を出力バンドルに含めず、`node_modules` にパッケージします。
 
     **webpack.config.js**
 
@@ -45,7 +45,7 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bun
     }
     ```
 
-    If you are using the `serverless-webpack` plugin and have the option `includeModules` set to any value other than `false`, the plugin automatically [packs external modules under `node_modules`][6]. Therefore, you must force exclude `datadog-lambda-js` and `dd-trace`. Skip this step if you don't use `serverless-webpack` or you don't have the `includeModules` option in your `serverless.yml`.
+    `serverless-webpack` プラグインを使用していて、`includeModules` オプションが `false` 以外に設定されている場合、このプラグインでは外部モジュールは自動的に `node_modules` 配下へパッケージ化されます。そのため、`datadog-lambda-js` と `dd-trace` を必ず除外してください。`serverless-webpack` を使っていない場合、または `serverless.yml` に `includeModules` オプションが存在しない場合は、この手順をスキップできます。
 
     **serverless.yml**
 
@@ -68,7 +68,7 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bun
             - rm -rf node_modules/datadog-lambda-js node_modules/dd-trace
     ```
 
-    To have more control around what dependencies are included, you could also include your `webpack.config.js` in your `serverless-webpack` configuration:
+    依存関係の取り込みをより細かく制御したい場合は、`serverless-webpack` 設定に `webpack.config.js` を含めることも可能です。
 
     ```yaml
     custom:
@@ -84,8 +84,8 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bun
     ```
 
 ## esbuild
-1. Follow the [installation instructions for Node.js][3] and ensure the Datadog Lambda layer for Node.js is added to your Lambda function.
-2. Remove `datadog-lambda-js` and `dd-trace` from your `package.json` and the build process, since they are already available in the Lambda runtime provided by the Datadog Lambda layer.
+1. [Node.js 用のインストール手順][3] に従い、Node.js 用の Datadog Lambda レイヤーが Lambda 関数に追加されていることを確認します。
+2. `datadog-lambda-js` と `dd-trace` を `package.json` およびビルドプロセスから削除します。これらは Datadog Lambda レイヤーのランタイムにすでに含まれています。
 3. 依存関係を[外部][7]としてマークします。これは、出力バンドルからそれらを除外するようバンドラーに指示します。代わりに、それらは `node_modules` にパッケージされます。
 
     **esbuild.config.js**
@@ -128,11 +128,11 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bun
 
 ## AWS CDK
 
-If you deploy Node.js Lambda functions using the `NodeJsFunction` construct, but aren't using `esbuild` or Typescript, you can still use Datadog to observe your serverless applications.
+`NodeJsFunction` コンストラクトを使って Node.js Lambda 関数をデプロイしているが、`esbuild` や TypeScript を使用していない場合でも、Datadog を利用してサーバーレスアプリケーションを監視できます。
 
-1. Follow the installation instructions for Node.js and ensure the Datadog Lambda layer for Node.js is added to your Lambda function.
-2. Remove `datadog-lambda-js` and `dd-trace` from your `package.json` and the build process, since they are already available in the Lambda runtime provided by the Datadog Lambda Layer.
-3. Use the `NodejsFunction` construct in the CDK. Ensure you set the `entry` property to be the path to the file containing your Lambda function handler, the `depsLockFilePath` to the path to your lock file for the package manager you are using, and the `bundling.commandHooks.beforeBundling` to ensure all dependencies are installed.
+1. Node.js 用のインストール手順に従い、Node.js 用の Datadog Lambda レイヤーが Lambda 関数に追加されていることを確認します。
+2. `datadog-lambda-js` と `dd-trace` を `package.json` から削除し、ビルドプロセスからも除外します。これらは Datadog Lambda レイヤーのランタイムにすでに含まれています。
+3. CDK の `NodejsFunction` コンストラクトを使用します。`entry` プロパティには Lambda 関数 **の** ハンドラーを含むファイルのパス、`depsLockFilePath` には利用しているパッケージマネージャのロックファイルのパス、`bundling.commandHooks.beforeBundling` にはすべての依存関係をインストールするコマンドを設定してください。
 
    **lambdaFunction.ts**
     ```typescript    
@@ -163,11 +163,11 @@ If you deploy Node.js Lambda functions using the `NodeJsFunction` construct, but
 
 ## AWS CDK & esbuild
 
-The `NodeJsFunction` construct in the AWS CDK uses esbuild. The default configuration is not compatible with Datadog's tracing libraries. The CDK allows you to override the default configuration and provide a custom esbuild file to support bundling and the Datadog tracing libraries:
+AWS CDK の `NodeJsFunction` コンストラクトは内部で esbuild を使用します。デフォルト設定は Datadog のトレーシングライブラリと互換性がありませんが、CDK ではデフォルト設定を上書きし、バンドリングおよび Datadog トレーシングライブラリをサポートするカスタム esbuild ファイルを指定できます。
 
-1. Follow the installation instructions for Node.js and ensure the Datadog Lambda layer for Node.js is added to your Lambda function.
-2. Remove `datadog-lambda-js` and `dd-trace` from your `package.json` and the build process, since they are already available in the Lambda runtime provided by the Datadog Lambda Layer.
-3. Create an `esbuild` file for each of your Lambda functions. A seperate `esbuild` file is required per Lambda function so that each entry point can be specified seperately. Notice the `entryPoint` and `outfile` properties. For example, if you had a second Lambda function in your project named `producer`, then the entry point would be `./functions/producer.ts` and the outfile would be `/out/producer/index.js`
+1. Node.js 用のインストール手順に従い、Node.js 用の Datadog Lambda レイヤーが Lambda 関数に追加されていることを確認します。
+2. `datadog-lambda-js` と `dd-trace` を `package.json` から削除し、ビルドプロセスからも除外します。これらは Datadog Lambda レイヤーのランタイムにすでに含まれています。
+3. 各 Lambda 関数ごとに `esbuild` ファイルを作成します。エントリーポイントを個別に指定する必要があるため、Lambda 関数ごとに別々の `esbuild` ファイルが必要です。ここで `entryPoint` と `outfile` プロパティを設定する点に注意してください。たとえば、プロジェクトに `producer` という 2 つ目の Lambda 関数がある場合、`entryPoint` は `./functions/producer.ts`、`outfile` は `/out/producer/index.js` となります。
 
     **buildConsumer.js**
     ```javascript
@@ -206,7 +206,7 @@ The `NodeJsFunction` construct in the AWS CDK uses esbuild. The default configur
     })
     ```
 
-4. When defining your `NodeJsFunction` in the CDK, use the `Code.fromCustomCommand` function to specify the path to your custom `esbuild` file and an output folder. For each separate Lambda function, specify the individual `esbuild` file defined in step three. The output folder should match the folder of the `outfile` in your `esbuild` file.
+4. CDK で `NodeJsFunction` を定義する際、`Code.fromCustomCommand` を使用してカスタム `esbuild` ファイルのパスと出力フォルダーを指定します。個別の Lambda 関数ごとに、ステップ 3 で定義した `esbuild` ファイルを指定してください。出力フォルダーは `esbuild` ファイル内の `outfile` と同じフォルダーにする必要があります。
 
     **lambdaFunction.ts**
     ```typescript

@@ -39,7 +39,7 @@ Datadog Azure インテグレーションを使用して、Azure Network Interfa
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_network_interface" >}}
+{{ get-metrics-from-git "azure-networkinterface" }}
 
 
 ### イベント

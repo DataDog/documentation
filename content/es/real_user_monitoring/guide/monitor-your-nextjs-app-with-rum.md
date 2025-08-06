@@ -36,7 +36,7 @@ Sigue los pasos que se indican a continuación para configurar la monitorizació
    - Si tu aplicación Next.js depende del [enrutador de página][3] de Next.js **más antiguo**, puedes pegar el fragmento de inicialización en el archivo personalizado [`_app.tsx`][4] sin la directiva `"use client"` y sin un componente `<DatadogInit />` independiente.
 
    {{< code-block lang="javascript" filename="datadog-init.tsx" disable_copy="false" collapsible="true" >}}
-   // Obligatorio si se utiliza el Enrutador de aplicación para asegurar que este archivo se ejecuta en el cliente
+   // Obligatorio si se utiliza App Router para asegurar que este archivo se ejecuta en el cliente
    "use client";
 
     import { datadogRum } from "@datadog/browser-rum";
@@ -55,7 +55,7 @@ Sigue los pasos que se indican a continuación para configurar la monitorizació
       trackResources: true,
       trackLongTasks: true,
       defaultPrivacyLevel: "mask-user-input",
-      // Especificar URLs para propagar encabezados de traza para la conexión entre RUM y la traza de backend
+      // Especificar URL para propagar cabeceras de trazas (traces) para la conexión entre RUM y traza de backend
       allowedTracingUrls: [
         { match: "https://example.com/api/", propagatorTypes: ["tracecontext"] },
       ],
@@ -122,7 +122,7 @@ Si utilizas CDN asíncrona, deberás realizar unos pequeños cambios en el fragm
                h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
                d=o.createElement(u);d.async=1;d.src=n
                n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-             })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum.js','DD_RUM')
+             })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js','DD_RUM')
              window.DD_RUM.onReady(function() {
                window.DD_RUM.init({
                  clientToken: '<CLIENT_TOKEN>',
@@ -130,13 +130,10 @@ Si utilizas CDN asíncrona, deberás realizar unos pequeños cambios en el fragm
                  site: 'datadoghq.com',
                  service: 'next-app-router-rum',
                  env: '<ENV_NAME>',
-                 // Especifica un número de versión para identificar la versión desplegada de tu aplicación en Datadog
-                 // version: '1.0.0',
+                 // Especificar un número de versión para identificar la versión desplegada de tu aplicación en Datadog
+                 // versión: '1.0.0',
                  sessionSampleRate: 100,
                  sessionReplaySampleRate: 100,
-                 trackUserInteractions: true,
-                 trackResources: true,
-                 trackLongTasks: true,
                });
              })
            `}
@@ -179,7 +176,7 @@ Si utilizas CDN síncrona, deberás realizar unos pequeños cambios en el fragme
          <body>
            <Script
              id="dd-rum-sync"
-             src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum.js"
+             src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
              type="text/javascript"
              strategy="beforeInteractive"
            />
@@ -191,13 +188,10 @@ Si utilizas CDN síncrona, deberás realizar unos pequeños cambios en el fragme
                  site: 'datadoghq.com',
                  service: 'rum-cdn-async',
                  env: '<ENV_NAME>',
-                 // Especifica un número de versión para identificar la versión desplegada de tu aplicación en Datadog
-                 // version: '1.0.0',
+                 // Especificar un número de versión para identificar la versión desplegada de tu aplicación en Datadog
+                 // versión: '1.0.0',
                  sessionSampleRate: 100,
                  sessionReplaySampleRate: 100,
-                 trackUserInteractions: true,
-                 trackResources: true,
-                 trackLongTasks: true,
                });
              `}
            </Script>
@@ -226,7 +220,7 @@ Si utilizas CDN síncrona, deberás realizar unos pequeños cambios en el fragme
 
 Para iniciar la monitorización del backend de tus aplicaciones Next.js:
 
-1. Sigue los pasos de configuración del navegador para [Conectar RUM y trazas][6].
+1. Sigue los pasos de configuración del navegador para [conectar RUM y trazas][6].
 2. Sigue los pasos de configuración del navegador para [soporte de OpenTelemetry][7] para conectarse con APM.
 
 ## Referencias adicionales
@@ -238,6 +232,6 @@ Para iniciar la monitorización del backend de tus aplicaciones Next.js:
 [3]: /es/real_user_monitoring/browser/data_collected/
 [4]: /es/real_user_monitoring/platform/dashboards/
 [5]: https://nextjs.org/docs/messages/next-script-for-ga#using-analyticsjs-legacy
-[6]: /es/real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#setup-rum
-[7]: /es/real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#opentelemetry-support
+[6]: /es/real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum#setup-rum
+[7]: /es/real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum#opentelemetry-support
 [8]: https://vercel.com

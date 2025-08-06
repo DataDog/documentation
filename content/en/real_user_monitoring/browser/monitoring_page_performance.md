@@ -23,29 +23,29 @@ further_reading:
 
 ## Overview
 
-RUM view events collect extensive performance metrics for every pageview. Monitor your application's pageviews and explore performance metrics in dashboards and the RUM Explorer.
+RUM view events collect extensive performance telemetry for every pageview. Monitor your application's pageviews and explore performance telemetry in dashboards and the RUM Explorer.
 
 {{< img src="real_user_monitoring/browser/waterfall-4.png" alt="A waterfall graph on the Performance tab of a RUM view in the RUM Explorer" style="width:100%;" >}}
 
-You can access performance metrics for your views in:
+You can access performance telemetry for your views in:
 
-- Out-of-the-box [RUM dashboards][1], which provide a high-level view of your application's performance. For example, you can filter on [default attributes][2] collected by RUM to surface issues impacting a subset of users in the [Performance Overview dashboard][3]. You can also clone this dashboard, customize it to your needs, and use any [RUM performance metrics](#all-performance-metrics) in the dashboard's query.
+- Out-of-the-box [RUM dashboards][1], which provide a high-level view of your application's performance. For example, you can filter on [default attributes][2] collected by RUM to surface issues impacting a subset of users in the [Performance Overview dashboard][3]. You can also clone this dashboard, customize it to your needs, and use any [RUM performance telemetry](#all-performance-telemetry) in the dashboard's query.
 - A performance waterfall, accessible for every RUM view event in the [RUM Explorer][4], which enables you to troubleshoot the performance of a specific page view. It displays how your website assets and resources, long tasks, and frontend errors affect the page-level performance for your end users.
 
 ## Event timings and core web vitals
 
 <div class="alert alert-warning">
-  Datadog's Core Web Vitals metrics are available from the <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> package v2.2.0+.
+  Datadog's Core Web Vitals telemetry is available from the <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> package v2.2.0+.
 </div>
 
-[Google's Core Web Vitals][5] are a set of three metrics designed to monitor a site's user experience. These metrics focus on giving you a view of load performance, interactivity, and visual stability. Each metric comes with guidance on the range of values that translate to good user experience. Datadog recommends monitoring the 75th percentile for these metrics.
+[Google's Core Web Vitals][5] are a set of three KPIs designed to monitor a site's user experience. These KPIs focus on giving you a view of load performance, interactivity, and visual stability. Each KPI comes with guidance on the range of values that translate to good user experience. Datadog recommends monitoring the 75th percentile for these KPIs.
 
 {{< img src="real_user_monitoring/browser/core-web-vitals-1.png" alt="Core Web Vitals summary visualization" >}}
 
 - Interaction to Next Paint and Largest Contentful Paint are not collected for pages opened in the background (for example, in a new tab or a window without focus).
-- Metrics collected from your real users' pageviews may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab metrics, not real metrics.
+- Telemetry collected from your real users' pageviews may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab telemetry, not real telemetry.
 
-| Metric                   | Focus            | Description                                                                                           | Target value |
+| Datapoint                   | Focus            | Description                                                                                           | Target value |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
 | [Largest Contentful Paint][7] | Load performance | Moment in the page load timeline in which the largest DOM object in the viewport (as in, visible on screen) is rendered.         | <2.5s       |
 | [Interaction To Next Paint][19]| Interactivity    | Longest duration between a user's interaction with the page and the next paint. Requires RUM SDK v5.1.0. | <200ms        |
@@ -53,7 +53,7 @@ You can access performance metrics for your views in:
 
 ### Core web vitals target elements
 
-Identifying what element triggered a high Core Web Vitals metric is the first step in understanding the root cause and being able to improve performance.
+Identifying what element triggered a high Core Web Vitals KPI is the first step in understanding the root cause and being able to improve performance.
 RUM reports the element that is associated with each Core Web Vital instance:
 
 - For Largest Contentful Paint, RUM reports the CSS Selector of the element corresponding to the largest contentful paint.
@@ -61,7 +61,7 @@ RUM reports the element that is associated with each Core Web Vital instance:
 - For First Input Delay, RUM reports the CSS selector of the first element the user interacted with.
 - For Cumulative Layout Shift, RUM reports the CSS selector of the most shifted element contributing to the CLS.
 
-## All performance metrics
+## All performance telemetry
 
 | Attribute                       | Type        | Description                                                                                                                                                                                                                      |
 |---------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -90,7 +90,7 @@ RUM reports the element that is associated with each Core Web Vital instance:
 
 For single page applications (SPAs), the RUM Browser SDK differentiates between `initial_load` and `route_change` navigation with the `loading_type` attribute. If an interaction on your web page leads to a different URL without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks URL changes using the [History API][16].
 
-Datadog provides a unique performance metric, `loading_time`, which calculates the time needed for a page to load. This metric works for both `initial_load` and `route_change` navigation.
+Datadog provides a unique KPI, `loading_time`, which calculates the time needed for a page to load. This KPI works for both `initial_load` and `route_change` navigation.
 
 ### How loading time is calculated
 
@@ -144,7 +144,7 @@ window.DD_RUM.init({
 
 The RUM SDK automatically monitors frameworks that rely on hash (`#`) navigation. The SDK watches for `HashChangeEvent` and issues a new view. Events coming from an HTML anchor tag which do not affect the current view context are ignored.
 
-## Create custom performance metrics
+## Create custom performance telemetry
 
 ### Measure component-level performance with custom vitals
 

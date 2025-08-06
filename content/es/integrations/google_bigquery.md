@@ -29,7 +29,7 @@ version: '1.0'
 <!-- EXTRAÍDO DE https://github.com/DataDog/dogweb -->
 
 {{< callout url="https://www.datadoghq.com/product-preview/bigquery-monitoring/" header="Join the Preview!" >}}
-La monitorización Advanced BigQuery está en Vista previa. Utiliza este formulario para registrarte y empezar a obtener información sobre el rendimiento de sus consultas. 
+La monitorización Advanced BigQuery está en Vista previa. Utiliza este formulario para registrarte y empezar a obtener información sobre el rendimiento de sus consultas.
 {{< /callout >}}
 
 
@@ -62,7 +62,7 @@ Una vez hecho esto, exporta tus logs de Google BigQuery desde Google Cloud Loggi
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "google_bigquery" >}}
+{{< get-metrics-from-git "google-cloud-bigquery" >}}
 
 
 ### Eventos

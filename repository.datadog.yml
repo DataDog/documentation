@@ -1,7 +1,7 @@
 ---
 schema-version: v1
 kind: mergequeue
-enable: true
+enable: false # disable merge queue for now until we can get the github reporting issues resolved
 merge_method: squash
 workflow_type: speculative # (default)
 speculative_fallback_enable: true # When enabled, a fallback build will get started when there is more than 2 pull requests.
@@ -13,3 +13,16 @@ team: webops-platform
 checks_to_ignore:
   - "Send PR Approval Status"
   - "Preview Synthetics"
+  - "Documentation Team Approval Check / check-documentation-team-approval (pull_request)"
+  - "Documentation Team Approval Check / check-documentation-team-approval (pull_request_review)"
+---
+schema-version: v1
+kind: mergegate
+rules:
+  - require: commit-signatures
+    enforcement: warn
+    excluded_emails:
+      - 'robot-guacbot-guacamole@datadoghq.com'
+      - 'guacbot@users.noreply.github.com'
+      - '41898282+github-actions[bot]@users.noreply.github.com'
+    allow_unsigned_external: true

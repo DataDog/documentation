@@ -42,7 +42,7 @@ Datadog Azure インテグレーションを使用して、Azure Key Vault か�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_key_vault" >}}
+{{ get-metrics-from-git "azure-keyvault" }}
 
 
 ### イベント

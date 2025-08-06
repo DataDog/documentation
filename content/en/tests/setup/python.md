@@ -19,10 +19,6 @@ further_reading:
       text: "Troubleshooting Test Optimization"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Compatibility
 
 Supported languages:
@@ -454,9 +450,13 @@ Plugins for `pytest` that alter test execution may cause unexpected behavior.
 
 ### Parallelization
 
-Plugins that introduce parallelization to `pytest` (such as [`pytest-xdist`][1] or [`pytest-forked`][2]) create one session event for each parallelized instance. Multiple module or suite events may be created if tests from the same package or module execute in different processes.
+Plugins that introduce parallelization to `pytest` (such as [`pytest-xdist`][1] or [`pytest-forked`][2]) create one session event for each parallelized instance.
 
-The overall count of test events (and their correctness) remain unaffected. Individual session, module, or suite events may have inconsistent results with other events in the same `pytest` run.
+There are several issues when these plugins are used together with `ddtrace`. For example, a session, module, or suite may pass even when individual tests fail. Likewise, all the tests may pass and the suite/session/module fail. This happens because these plugins create worker subprocesses, and spans created in the parent process may not reflect the results from the child processes. For this reason, **the usage of `ddtrace` together with `pytest-xdist` and `pytest-forked` is not supported at the moment.**
+
+Each worker reports test results to Datadog independently, so tests from the same module running in different processes generate separate module or suite events.
+
+The overall count of test events (and their correctness) remains unaffected. Individual session, module, or suite events can have inconsistent results with other events in the same `pytest` run.
 
 ### Test ordering
 

@@ -119,7 +119,7 @@ Ejecuta el [subcomando de estado del Agent][7] y busca `php_apcu` en la sección
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "php_apcu" >}}
+{{< get-metrics-from-git "php-apcu" >}}
 
 
 ### Eventos
@@ -127,7 +127,7 @@ Ejecuta el [subcomando de estado del Agent][7] y busca `php_apcu` en la sección
 La integración PHP APCu no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "php_apcu" >}}
+{{< get-service-checks-from-git "php-apcu" >}}
 
 
 ## Solucionar problemas

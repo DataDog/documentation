@@ -221,7 +221,7 @@ Utiliza el [Datadog Agent][8] u otro [remitente de log][9] para enviar tus logs 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_ec2" >}}
+{{< get-metrics-from-git "amazon-ec2" >}}
 
 
 A cada una de las métricas recuperadas de AWS se le asignan las mismas etiquetas (tags) que aparecen en la consola de AWS, incluidos, entre otros, el nombre del host y los grupos de seguridad.
@@ -231,7 +231,7 @@ A cada una de las métricas recuperadas de AWS se le asignan las mismas etiqueta
    - `aws.ec2.host_ok` se recopila de forma predeterminada, incluso si deshabilitas la recopilación de métricas para la integración Amazon EC2, y puede provocar la aparición inesperada de hosts en la lista de infraestructuras. Para garantizar que sólo se monitoricen los hosts elegidos, asigna una etiqueta AWS, como `datadog:true`, a esas instancias EC2. A continuación, especifica esa etiqueta en el cuadro de texto **Limitar la recopilación de métricas a recursos específicos** en la pestaña **Recopilación de métricas** de la [página de tu integración AWS en Datadog][2].
 
 ### Checks de servicio
-{{< get-service-checks-from-git "amazon_ec2" >}}
+{{< get-service-checks-from-git "amazon-ec2" >}}
 
 
 ## Monitorización predefinida

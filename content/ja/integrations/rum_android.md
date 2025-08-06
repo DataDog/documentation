@@ -13,7 +13,7 @@ categories:
 - apm
 - ネットワーク
 - tracing
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_android/README.md
 display_on_public_website: true
@@ -58,7 +58,7 @@ tile:
 Datadog [Android インテグレーション][1]を利用することで、問題のトリアージに費やす時間を減らし、より多くの時間を新機能のリリースに費やすことができるようになります。
 
 - サードパーティライブラリ、ネットワークリクエスト、大容量メディアファイルにおけるパフォーマンス低下やアプリケーションクラッシュの根本的な原因をデバッグ
-- Improving application responsiveness, setting up service level indicators (SLIs), and diagnosing issues with out-of-the-box dashboards, real-time metrics, and deobfuscated crash reports
+- アプリケーションの応答性向上、サービスレベルインジケータ (SLI) の設定、すぐに使えるダッシュボード、リアルタイムメトリクス、難読化されたクラッシュレポートによる問題の診断
 - 大量のアプリケーションエラーを管理可能な固有の問題群にインテリジェントにグループ化
 
 ユーザーエクスペリエンスがビジネスに与える影響を関連付けます。

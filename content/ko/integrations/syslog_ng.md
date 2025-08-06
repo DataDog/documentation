@@ -3,7 +3,7 @@ aliases:
 - /ko/logs/log_collection/syslog_ng
 categories:
 - 로그 수집
-custom_kind: integration
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/syslog_ng.md
 description: 호스트, 컨테이너, 서비스에서 로그를 수집하도록 Syslog-ng 구성하기
@@ -16,18 +16,14 @@ name: syslog_ng
 public_title: Datadog-Syslog-ng 통합
 short_description: 호스트, 컨테이너, 서비스에서 로그를 수집하도록 Syslog-ng 구성하기
 supported_os:
-- 리눅스
-- windows
+- linux
+- 윈도우즈(Windows)
 title: Syslog-ng
 ---
 
 ## 개요
 
 호스트, 컨테이너, 서비스에서 로그를 수집하도록 Syslog-ng 구성하기
-
-{{< site-region region="us3,ap1" >}}
-<div class="alert alert-warning"><code>syslog-ng</code>로그 수집은 선택한 <a href="/getting_started/site">Datadog 사이트</a>({{< region-param key="dd_site_name" >}})에서 이용할 수 없습니다.</div>
-{{< /site-region >}}
 
 ## 설정
 

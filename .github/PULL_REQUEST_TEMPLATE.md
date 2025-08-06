@@ -14,15 +14,12 @@ Merge readiness:
 - [ ] Ready for merge
 
 **For Datadog employees**:
-Merge queue is enabled in this repo. Your branch name MUST follow the `<name>/<description>` convention and include the forward slash (`/`). Without this format, your pull request will not pass in CI, the GitLab pipeline will not run, and you won't get a branch preview. Getting a branch preview makes it easier for us to check any issues with your PR, such as broken links.
+
+Your branch name MUST follow the `<name>/<description>` convention and include the forward slash (`/`). Without this format, your pull request will not pass CI, the GitLab pipeline will not run, and you won't get a branch preview. Getting a branch preview makes it easier for us to check any issues with your PR, such as broken links.
 
 If your branch doesn't follow this format, rename it or create a new branch and PR.
 
-To have your PR automatically merged after it receives the required reviews, add the following PR comment:
-
-```
-/merge
-```
+[6/5/2025] Merge queue has been disabled on the documentation repo. If you have write access to the repo, the PR has been reviewed by a Documentation team member, and all of the required checks have passed, you can use the **Squash and Merge** button to merge the PR. If you don't have write access, or you need help, reach out in the #documentation channel in Slack.
 
 ### Additional notes
 <!-- Anything else we should know when reviewing?-->

@@ -32,10 +32,6 @@ cascade:
         rank: 70
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Universal Service Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 ## Overview
 
 Universal Service Monitoring (USM) provides visibility into your service health metrics universally across your entire stack _without having to instrument your code_. It relies solely on the presence of a configured Datadog Agent and [Unified Service Tagging][1], and brings performance data about your uninstrumented services into views such as the Software Catalog and Service Map. USM also works with [Deployment Tracking][2], Monitors, Dashboards, and SLOs.

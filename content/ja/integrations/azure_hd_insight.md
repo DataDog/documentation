@@ -38,7 +38,7 @@ Datadog Azure インテグレーションを使用すると、Azure HDInsight �
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_hd_insight" >}}
+{{ get-metrics-from-git "azure-hdinsight" }}
 
 
 ### イベント

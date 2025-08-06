@@ -71,7 +71,7 @@ Le check Service Windows n'inclut aucune métrique.
 Le check Service Windows n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "windows_service" >}}
+{{< get-service-checks-from-git "windows-service" >}}
 
 
 ## Dépannage

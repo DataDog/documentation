@@ -25,7 +25,7 @@ author:
 categories:
 - recopilación de logs
 - seguridad
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/perimeterx/README.md
 display_on_public_website: true
@@ -60,7 +60,7 @@ tile:
   title: PerimeterX
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -98,7 +98,7 @@ Una vez que el servicio de asistencia de PerimeterX haya confirmado que la integ
 
 PerimeterX no incluye métricas de [solicitudes][5].
 
-### Checks de servicio
+### Checks de servicios
 
 PerimeterX no incluye checks de servicio.
 
@@ -108,7 +108,7 @@ PerimeterX no incluye eventos.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][6].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][6].
 
 [1]: https://www.perimeterx.com/
 [2]: https://edocs.humansecurity.com/docs/configuring-the-export-via-portal

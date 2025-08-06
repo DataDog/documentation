@@ -27,10 +27,6 @@ title: Quality Gates
 Quality Gates はプレビュー版です。
 {{< /callout >}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では、現時点で Quality Gates は利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 Quality Gates を使用すると、不適切なコードがデプロイされるのを防ぐためのルールを構成することで、ソフトウェアの品質を管理できます。これにより、デフォルトブランチにマージされ、本番環境にデプロイされるコードをコントロールし、高品質な基準を満たすコードが稼働することを確保します。結果として、インシデントの発生を減らし、望ましくない動作を最小限に抑えることができます。

@@ -105,8 +105,6 @@ Sigue las instrucciones en la [Configuración de la transmisión a Datadog][8] e
 
 La integración de GitHub recopila métricas de alertas de escaneo de código y de secretos. Estas métricas proporcionan información general sobre el estado de alerta de la organización al categorizar su estado, repositorio y tipo de secreto. También proporcionan información a largo plazo sobre las tendencias de alerta y su progreso general.
 
-{{< get-metrics-from-git "github_telemetry" >}}
-
 A fin de empezar a recopilar estas métricas, selecciona los permisos correspondientes para el acceso de lectura al instalar la aplicación. Para inhabilitar las métricas de escaneo de código o de secretos, busca la organización correspondiente en la pestaña **Telemetery** (Telemetría) en el cuadro de integración, haz clic en el botón de alternancia de las secciones respectivas y haz clic en **Update Account** (Actualizar cuenta).
 
 ### Eventos

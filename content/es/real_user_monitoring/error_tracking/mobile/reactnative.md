@@ -2,7 +2,7 @@
 aliases:
 - /es/real_user_monitoring/error_tracking/reactnative
 code_lang: reactnative
-code_lang_weight: 40
+code_lang_weight: 60
 description: Configura el seguimiento de errores para tus proyectos React Native.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
@@ -21,13 +21,13 @@ type: lenguaje de código múltiple
 
 ## Información general
 
-Habilita la notificación de fallos y el seguimiento de errores React Native para obtener informes completos de fallos y tendencias de errores mediante Real User Monitoring. Con esta función, puede acceder a:
+Habilita la notificación de fallos y el seguimiento de errores React Native para obtener informes completos de fallos y tendencias de errores mediante Real User Monitoring. Con esta función, puedes acceder a:
 
 -   Dashboards y atributos de fallos agregados React Native
 -   Informes de fallos React Native simbolizados (JavaScript y iOS o Android nativos)
 -   Análisis de tendencias con el seguimiento de errores React Native
 
-Para simbolizar tus trazas (traces) de stack tecnológico, carga manualmente tus archivos de asignación en Datadog.
+Para simbolizar tus stack traces, carga manualmente tus mapas fuente y símbolos de depuración nativos en Datadog.
 
 Tus informes de fallos aparecen en [**Seguimiento de errores**][1].
 
@@ -53,14 +53,14 @@ config.nativeCrashReportEnabled = true; // enable native crash reporting
 
 ## Obtener trazas de stack tecnológico desofuscadas
 
-Los archivos de asignación se utilizan para desofuscar trazas de stack tecnológico, lo que ayuda a depurar errores. Mediante el ID de compilación único que se genera, Datadog hace coincidir automáticamente las trazas de stack tecnológico correctas con los archivos de asignación correspondientes. Esto garantiza que, independientemente de cuándo se haya cargado el archivo de asignación (ya sea durante la compilación de preproducción o de producción), se disponga de la información correcta para garantizar procesos de control de calidad eficaces al revisar fallos y errores notificados en Datadog.
+Los símbolos de depuración se utilizan para desenmascarar stack traces, lo que ayuda a depurar errores. Con un ID de compilación único que se genera, Datadog hace coincidir automáticamente los stack traces correctos con los símbolos de depuración correspondientes. Esto garantiza que, independientemente de cuándo se hayan cargado los símbolos de depuración (ya sea durante las compilaciones de preproducción o de producción), se disponga de la información correcta para un control de calidad eficaz al revisar los fallos y errores notificados en Datadog.
 
-En las aplicaciones React Native, la coincidencia de las trazas de stack tecnológico y los mapas de origen se basa en una combinación de los campos `service`, `version`, `bundle_name` y `platform`. De todos los mapas de origen que coinciden con estos campos, Datadog utiliza el que tiene el valor `build_number` más alto.
+Para las aplicaciones de React Native, la coincidencia de los stack traces y los mapas fuente se basa en una combinación de los campos `service`, `version`, `bundle_name` y `platform`. De todos los mapas fuente que coinciden con estos campos, Datadog utiliza el que tiene el valor `build_number` más alto.
 
 Para reducir el tamaño de tu aplicación, su código se minifica cuando se compila para su lanzamiento. Para vincular los errores a tu código real, debes cargar los siguientes archivos de simbolización:
 
--   Mapa de origen JavaScript para tu paquete iOS JavaScript 
--   Mapa de origen JavaScript para tu paquete Android JavaScript
+-   Mapas fuente de JavaScript para tu paquete iOS JavaScript
+-   Mapas fuente de JavaScript para tu paquete Android JavaScript
 -   dSYM para tu código iOS nativo
 -   Archivos de asignación Proguard, si has habilitado la ofuscación de código para tu código nativo de Android.
 
@@ -86,18 +86,17 @@ Las opciones del comando `datadog-ci react-native xcode` están disponibles en l
 
 #### Especificación de una versión personalizada
 
-Utiliza la variable de entorno `DATADOG_RELEASE_VERSION` para especificar una versión diferente para tus mapas de orígenes, a partir de `@datadog/mobile-react-native@2.3.5` y `@datadog/datadog-ci@v2.37.0`.
+Utiliza la variable de entorno `DATADOG_RELEASE_VERSION` para especificar una versión diferente para tus mapas fuente, a partir de `@datadog/mobile-react-native@2.3.5` y `@datadog/datadog-ci@v2.37.0`.
 
-Cuando el SDK se inicializa con un sufijo de versión, debes anular manualmente la versión para que el mapa de orígenes y las versiones de compilaciones coincidan.
+Cuando el SDK se inicializa con un sufijo de versión, debes anular manualmente la versión de lanzamiento para que el mapa fuente y las versiones de compilación coincidan.
+
+### Lista de los mapas fuente cargados
+
+Consulta la página [Símbolos de depuración de RUM][16] para ver todos los símbolos cargados.
 
 ## Limitaciones
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-Los mapas de orígenes, los archivos de asignación y los archivos dSYM tienen un límite de **500** MB cada uno.
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
-Los mapas de orígenes, los archivos de asignación y los archivos dSYM tienen un límite de **500** MB cada uno.
-{{< /site-region >}}
+El tamaño de los mapas fuente y los archivos de mapas está limitado a **500 MB** cada uno, mientras que los archivos dSYM pueden llegar a **2 GB** cada uno.
 
 Para calcular el tamaño de los mapas de origen y del paquete, ejecuta el siguiente comando:
 
@@ -118,11 +117,11 @@ echo "Size of source maps and bundle is $(($payloadsize / 1000000))MB"
 
 Si aún no existe un directorio `build`, créalo primero ejecutando `mkdir build` y, a continuación, ejecuta el comando anterior.
 
-## Para probar tu aplicación
+## Para probar tu implementación
 
 Para verificar la configuración de las notificaciones de fallos y el seguimiento de errores React Native, necesitas generar un error en tu aplicación y confirmar que el error aparece en Datadog.
 
-Para probar tu aplicación:
+Para probar tu implementación
 
 1. Ejecuta tu aplicación en un simulador, emulador o dispositivo real. Si estás ejecutando en iOS, asegúrate de que el depurador no está conectado. De lo contrario, Xcode captura el fallo antes de que lo haga el SDK de Datadog.
 2. Ejecuta código que contenga un error o fallo. Por ejemplo:
@@ -136,7 +135,7 @@ Para probar tu aplicación:
 3. Para los informes de error ofuscados que no provocan un fallo, puedes verificar la simbolización y la desofuscación en [**Rastreo de errores**][1].
 4. Para los fallos, después de que se produzcan, reinicia tu aplicación y espera a que el SDK de React Native cargue el informe del fallo en [**Rastreo de errores**][1].
 
-Para asegurarte de que tus mapas de origen se envían y vinculan correctamente con tu aplicación, también puedes generar fallos con el paquete [`react-native-performance-limiter`][14].
+Para asegurarte de que tus mapas fuente se envían y enlazan correctamente con tu aplicación, también puedes generar fallos con el paquete [`react-native-performance-limiter`][14].
 
 Instálalo con yarn o npm y luego vuelve a instalar tus pods:
 
@@ -145,7 +144,7 @@ yarn add react-native-performance-limiter # or npm install react-native-performa
 (cd ios && pod install)
 ```
 
-Bloquea el subproceso JavaScript desde tu aplicación:
+Genera un fallo en el subproceso de JavaScript desde tu aplicación:
 
 ```javascript
 import { crashJavascriptThread } from 'react-native-performance-limiter';
@@ -155,7 +154,7 @@ const crashApp = () => {
 };
 ```
 
-Vuelve a crear tu aplicación para que envíe los nuevos mapas de origen, activa el fallo y espera a que aparezca el error en la página [Rastreo de errores][1].
+Vuelve a compilar tu aplicación para la versión para enviar los nuevos mapas fuente, desencadenar el fallo y esperar en la página [Error Tracking][1] que aparezca el error.
 
 Para probar la carga de tus archivos dSYM y de asignación Proguard, genera un fallo en el subproceso principal nativo:
 
@@ -269,18 +268,18 @@ export SOURCEMAP_FILE=./build/main.jsbundle.map # <- añade esta línea para gen
 
 En adelante, podrás encontrar los mapas de origen de tu paquete en cada compilación de iOS.
 
-Para encontrar la ruta al archivo de tu paquete desde XCode, despliega el Navegador de informes en Xcode y filtra por `BUNDLE_FILE` para su localización.
+Para encontrar la ruta a tu archivo de paquete desde Xcode, despliega el Report Navigator en Xcode y filtra por `BUNDLE_FILE` para su localización.
 
 La localización habitual es `~/Library/Developer/Xcode/DerivedData/YourAppName-verylonghash/Build/Intermediates.noindex/ArchiveIntermediates/YourAppName/BuildProductsPath/Release-iphoneos/main.jsbundle`, donde `YourAppName` es el nombre de tu aplicación y `verylonghash` es un hash de 28 letras.
 
 Para cargar los mapas de origen, ejecuta esto desde tu proyecto React Native:
 
 ```bash
-export DATADOG_API_KEY= # rellena con tu clave de API
-export SERVICE=com.myapp # sustituye por el nombre de tu servicio 
-export VERSION=1.0.0 # sustituye por la versión de tu aplicación en XCode
-export BUILD=100 # sustituye por la versión de tu compilación en XCode
-export BUNDLE_PATH= # rellena con la ruta de tu paquete
+export DATADOG_API_KEY= # fill with your API key
+export SERVICE=com.myapp # replace by your service name
+export VERSION=1.0.0 # replace by the version of your app in Xcode
+export BUILD=100 # replace by the build of your app in Xcode
+export BUNDLE_PATH= # fill with your bundle path
 
 yarn datadog-ci react-native upload --platform ios --service $SERVICE --bundle $BUNDLE_PATH --sourcemap ./build/main.jsbundle.map --release-version $VERSION --build-version $BUILD
 ```
@@ -319,11 +318,11 @@ source "$REACT_NATIVE_DIR/scripts/node-binary.sh"
 Para cargar el mapa de origen, ejecuta esto desde la raíz de tu proyecto React Native:
 
 ```bash
-export DATADOG_API_KEY= # rellena con tu clave de API
-export SERVICE=com.myapp # sustituye por el nombre de tu servicio 
-export VERSION=1.0.0 # sustituye por la versión de tu aplicación en XCode
-export BUILD=100 # sustituye por la versión de tu compilación en XCode
-export BUNDLE_PATH= # rellena con la ruta de tu paquete
+export DATADOG_API_KEY= # fill with your API key
+export SERVICE=com.myapp # replace by your service name
+export VERSION=1.0.0 # replace by the version of your app in Xcode
+export BUILD=100 # replace by the build of your app in Xcode
+export BUNDLE_PATH= # fill with your bundle path
 
 yarn datadog-ci react-native upload --platform ios --service $SERVICE --bundle $BUNDLE_PATH --sourcemap ./build/main.jsbundle.map --release-version $VERSION --build-version $BUILD
 ```
@@ -340,7 +339,7 @@ En tu archivo `android/app/build.gradle`, añade lo siguiente después de la lí
 apply from: "../../node_modules/@datadog/mobile-react-native/datadog-sourcemaps.gradle"
 ```
 
-Para que la carga funcione, debes proporcionar tu clave de API Datadog. Puedes especificarla como una variable de entorno `DATADOG_API_KEY`o crear un archivo `datadog-ci.json` en la raíz de tu proyecto que contenga la clave de API:
+Para que la carga funcione, debes proporcionar tu clave de API Datadog. Puedes especificarla como una variable de entorno `DATADOG_API_KEY` o crear un archivo `datadog-ci.json` en la raíz de tu proyecto que contenga la clave de API:
 
 ```json
 {
@@ -360,7 +359,7 @@ En tu archivo `android/app/build.gradle`, añade lo siguiente después de la lí
 apply from: "../../node_modules/@datadog/mobile-react-native/datadog-sourcemaps.gradle"
 ```
 
-Para que la carga funcione, debes proporcionar tu clave de API Datadog. Puedes especificarla como una variable de entorno `DATADOG_API_KEY`o crear un archivo `datadog-ci.json` en la raíz de tu proyecto que contenga la clave de API:
+Para que la carga funcione, debes proporcionar tu clave de API Datadog. Puedes especificarla como una variable de entorno `DATADOG_API_KEY` o crear un archivo `datadog-ci.json` en la raíz de tu proyecto que contenga la clave de API:
 
 ```json
 {
@@ -431,7 +430,7 @@ datadog {
 }
 ```
 
-Para que la carga funcione, debes proporcionar tu clave de API Datadog. Puedes especificarla como una variable de entorno `DATADOG_API_KEY`o crear un archivo `datadog-ci.json` en la raíz de tu proyecto que contenga la clave de API:
+Para que la carga funcione, debes proporcionar tu clave de API Datadog. Puedes especificarla como una variable de entorno `DATADOG_API_KEY` o crear un archivo `datadog-ci.json` en la raíz de tu proyecto que contenga la clave de API:
 
 ```json
 {
@@ -460,7 +459,7 @@ Dentro del bucle, añade el siguiente fragmento:
         }
 ```
 
-**Nota**: Volver a cargar un mapa de origen no anula el existente si la versión no ha cambiado.
+**Nota**: Volver a cargar un mapa de fuente no anula el existente si la versión no ha cambiado.
 
 {{% /collapse-content %}}
 
@@ -482,3 +481,4 @@ Dentro del bucle, añade el siguiente fragmento:
 [13]: https://github.com/DataDog/datadog-react-native-wizard
 [14]: https://github.com/DataDog/react-native-performance-limiter
 [15]: https://plugins.gradle.org/plugin/com.datadoghq.dd-sdk-android-gradle-plugin
+[16]: https://app.datadoghq.com/source-code/setup/rum

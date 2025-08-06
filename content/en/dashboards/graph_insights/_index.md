@@ -5,6 +5,9 @@ further_reading:
 - link: "/watchdog/insights/"
   tag: "Documentation"
   text: "Learn more about Watchdog Insights"
+- link: "https://www.datadoghq.com/blog/ai-powered-metrics-monitoring/"
+  tag: "Blog"
+  text: Anomaly detection, predictive correlations - Using AI-assisted metrics monitoring
 ---
 
 ## Overview

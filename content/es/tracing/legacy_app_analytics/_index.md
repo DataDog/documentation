@@ -35,7 +35,7 @@ App Analytics está disponible a partir de la versión 0.25.0 del cliente de ras
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-App Analytics está disponible a partir de la versión 0.19.0 del cliente de rastreo Python. Habilita globalmente App Analytics para todas las integraciones de **servidores web** con un parámetro de configuración en el cliente de rastreo:
+App Analytics está disponible a partir de la versión 0.19.0 del cliente de rastreo Python. Esta configuración sólo está disponible para las versiones 3.x o anteriores de ddtrace. Habilita App Analytics globalmente para todas las integraciones **web** con un parámetro de configuración en el cliente de rastreo:
 
 * Configuración del rastreador: `ddtrace.config.analytics_enabled = True`
 * Variable de entorno: `DD_TRACE_ANALYTICS_ENABLED=true`
@@ -59,7 +59,7 @@ Datadog.configure { |c| c.tracing.analytics.enabled = true }
 
 App Analytics está disponible a partir de la versión 1.11.0 del cliente de rastreo Go y puede habilitarse globalmente para todas las integraciones **web** utilizando:
 
-* la opción de inicio del rastreador [`WithAnalytics`][1] ([documentación v2][2]), por ejemplo:
+* la opción de inicio del rastreador [`WithAnalytics`][2] ([documentación v1][1]), por ejemplo:
 
   ```go
   tracer.Start(tracer.WithAnalytics(true))
@@ -186,16 +186,16 @@ Donde `integration` es el nombre de la integración. Consulta la [lista de integ
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
+{{% tracing-go-v2 %}}
+
 Además de la configuración global, puedes habilitar o deshabilitar App Analytics individualmente para cada integración. Como ejemplo, para configurar el paquete estándar `net/http` de la biblioteca, podrías:
 
 ```go
 package main
 
 import (
-    httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2" // 2.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
@@ -338,7 +338,7 @@ Por defecto, App Analytics no registra el rastreo de bases de datos. Puedes habi
 
 * Variable de entorno: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-Utilízala junto con la configuración global de cualquier integración que envíe servicios personalizados. Por ejemplo, para:
+Utilízala junto con la configuración global de cualquier integración que envíe servicios personalizados. Por ejemplo, para `mysqli`:
 
 * Variable de entorno: `DD_MYSQLI_ANALYTICS_ENABLED=true`
 

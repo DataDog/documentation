@@ -63,7 +63,7 @@ Amazon Cognito를 설정해 S3 버킷이나 클라우드와치(CloudWatch)로 �
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_cognito" >}}
+{{< get-metrics-from-git "amazon-cognito" >}}
 
 
 ### 이벤트

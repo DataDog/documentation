@@ -21,10 +21,6 @@ further_reading:
     text: Learn more about Observability Pipelines configurations
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
-
 ## Overview
 
 Observability Pipelines enables you to shape and transform observability data. Similar to Logging without Limits™ pipelines, you can configure pipelines for Observability Pipelines that are composed of a series of transform components. These transforms allow you to parse, structure, and enrich data with built-in type safety.

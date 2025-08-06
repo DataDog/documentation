@@ -109,7 +109,6 @@ Crea el siguiente esquema:
 ```sql
 CREATE SCHEMA IF NOT EXISTS datadog;
 GRANT EXECUTE ON datadog.* to datadog@'%';
-GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
 Crea el procedimiento `explain_statement` para que el Agent pueda recopilar los planes de explicación:
@@ -143,6 +142,14 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
+Para recopilar métricas de índice, concede al usuario `datadog` un privilegio adicional:
+
+```sql
+GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
+```
+
+A partir del Agent v7.65, el Datadog Agent puede recopilar información de esquemas de bases de datos MySQL. Para obtener más información sobre cómo conceder al Agent permisos para esta recopilación, consulta la sección [Recopilación de esquemas][10] a continuación.
+
 ### Consumidores de configuración en tiempo de ejecución
 Datadog recomienda crear el siguiente procedimiento para que el Agent pueda habilitar los consumidores de `performance_schema.events_*` en tiempo de ejecución.
 
@@ -161,7 +168,7 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 ### Guardar tu contraseña de forma segura
 {{% dbm-secret %}}
 
-## Instalación y configuración del Agent
+## Instala y configura el Agent
 
 Para monitorizar hosts de Aurora, instala el Datadog Agent en tu infraestructura y configúralo para conectarse a cada endpoint de instancia de forma remota. El Agent no necesita ejecutarse en la base de datos, sólo necesita conectarse a ella. Para conocer otros métodos de instalación del Agent no mencionados aquí, consulta las [instrucciones de instalación del Agent][5].
 
@@ -207,9 +214,9 @@ instances:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Para configurar el Agent de la Monitorización de base de datos que se ejecuta en un contenedor de Docker, como en ECS o en Fargate, puedes definir las [plantillas de integración Autodiscovery][1] como etiquetas (labels) de Docker en tu contenedor del Agent.
+Para configurar el Agent de monitorización de bases de datos que se ejecuta en un contenedor Docker, como en ECS o en Fargate, puedes definir las [plantillas de integración Autodiscovery][1] como etiquetas (labels) de Docker en tu contenedor del Agent.
 
-**Nota**: El Agent debe tener permiso de lectura en el socket de Docker para que las etiquetas (labels) de Autodiscovery funcionen.
+**Nota**: El Agent debe tener permiso de lectura en el socket Docker para que las etiquetas de Autodiscovery funcionen.
 
 ### Línea de comandos
 
@@ -252,13 +259,13 @@ LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOI
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Si tienes un clúster de Kubernetes, utiliza el [Datadog Cluster Agent][1] para la Monitorización de base de datos.
+Si tienes un clúster Kubernetes, utiliza el [Datadog Cluster Agent][1] para la monitorización de bases de datos.
 
-Sigue las instrucciones para [habilitar checks de clúster][2], si no están habilitados en tu clúster de Kubernetes. Puedes declarar la configuración de MySQL mediante archivos estáticos integrados en el contenedor del Cluster Agent o utilizando anotaciones de servicios:
+Sigue las instrucciones para [habilitar checks de clúster][2], si no están habilitados en tu clúster Kubernetes. Puedes declarar la configuración de MySQL mediante archivos estáticos integrados en el contenedor del Cluster Agent o utilizando anotaciones de servicios:
 
 ### Helm
 
-Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu clúster de Kubernetes. Sustituye los valores para que coincidan con tu cuenta y tu entorno.
+Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu clúster Kubernetes. Sustituye los valores para que coincidan con tu cuenta y tu entorno.
 
 1. Sigue las [instrucciones de instalación del Datadog Agent][3] para Helm.
 2. Actualiza tu archivo de configuración YAML (`datadog-values.yaml` en las instrucciones de instalación del Cluster Agent) para incluir lo siguiente:
@@ -285,7 +292,7 @@ Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu c
     ```
 
 <div class="alert alert-info">
-Para Windows, añade <code>--set targetSystem=Windows</code> al comando <code>helm install</code>.
+For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
 </div>
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
@@ -309,7 +316,7 @@ instances:
 
 ### Configuración con anotaciones de servicios de Kubernetes
 
-En lugar de integrar un archivo, puedes declarar la configuración de la instancia como servicio de Kubernetes. Para configurar este check en un Agent que se ejecuta en Kubernetes, crea un servicio en el mismo espacio de nombres que el Datadog Cluster Agent:
+En lugar de montar un archivo, puedes declarar la configuración de la instancia como servicio Kubernetes. Para configurar este check en un Agent que se ejecuta en Kubernetes, crea un servicio en el mismo espacio de nombres que el Datadog Cluster Agent:
 
 
 ```yaml
@@ -353,16 +360,16 @@ Para evitar exponer la contraseña del usuario `datadog` en texto simple, utiliz
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validar
+### Validación
 
 [Ejecuta el subcomando de estado del Agent][6] y busca `mysql` en la sección Checks. Si no, consulta la página [Bases de datos][7] para empezar.
 
-## Ejemplo de configuraciones del Agent
+## Configuraciones del Agent de ejemplo
 {{% dbm-mysql-agent-config-examples %}}
 
 ## Instalar la integración de RDS
 
-Para ver métricas de infraestructura de AWS, como la CPU, junto con la telemetría de la base de datos en DBM, instala la [integración de RDS][8] (opcional).
+Para ver métricas de infraestructura de AWS, como la CPU, junto con la telemetría de la base de datos en DBM, instala la [integración RDS][8] (opcional).
 
 ## Solucionar problemas
 
@@ -382,3 +389,4 @@ Si has instalado y configurado las integraciones y el Agent como se describe, pe
 [7]: https://app.datadoghq.com/databases
 [8]: /es/integrations/amazon_rds
 [9]: /es/database_monitoring/troubleshooting/?tab=mysql
+[10]: /es/database_monitoring/setup_mysql/aurora?tab=mysql57#collecting-schemas

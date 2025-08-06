@@ -64,7 +64,7 @@ AWS App Runner envía eventos tanto de servicio como de cambio de estado de la o
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_app_runner" >}}
+{{< get-metrics-from-git "amazon-app-runner" >}}
 
 
 ### Eventos

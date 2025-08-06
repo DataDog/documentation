@@ -18,10 +18,6 @@ further_reading:
 title: Configurar el rastreo en un flujo de trabajo de CircleCI
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">En este momento, CI Visibility no está disponible en el sitio ({{< region-param key="dd_site_name" >}}) seleccionado.</div>
-{{< /site-region >}}
-
 ## Información general
 
 [CircleCI][1] es una plataforma de integración y entrega continuas que permite a los equipos crear, testear y desplegar software a escala.

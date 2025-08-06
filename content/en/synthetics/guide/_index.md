@@ -41,13 +41,13 @@ cascade:
     {{< nextlink href="synthetics/guide/manually-adding-chrome-extension/" >}}Manually add the Chrome extension for your browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/browser-tests-using-shadow-dom/" >}}Run tests on applications using a shadow DOM{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/http-tests-with-hmac/" >}}Create HTTP tests with hash-based message authentication code (HMAC) authentication{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/canvas-content-javascript/" >}}Asserting canvas content with JavaScript{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Datadog Integrations:" >}}
     {{< nextlink href="logs/guide/ease-troubleshooting-with-cross-product-correlation" >}}Ease troubleshooting with cross-product correlation{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/explore-rum-through-synthetics/" >}}Explore a preview of RUM features in Synthetics{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/explore-rum-through-synthetics/" >}}Explore a preview of RUM features in Synthetic Monitoring{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/rum-to-synthetics" >}}Generate Synthetic browser tests from RUM Session Replays{{< /nextlink >}}
-
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Metrics:" >}}

@@ -13,10 +13,6 @@ further_reading:
     text: Funnels
 ---
 
-{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
-All features in Product Analytics are in limited availability. To request access, complete the form.
-{{< /callout >}}
-
 ## Overview
 
 If you experience issues setting up or configuring Datadog Product Analytics, use this page to start troubleshooting. If you continue to have trouble, [contact Datadog Support][1].

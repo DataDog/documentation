@@ -246,7 +246,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "ibm_db2" >}}
+{{< get-metrics-from-git "ibm-db2" >}}
 
 
 ### イベント
@@ -254,7 +254,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 - テーブルスペースの状態が変化するたびに、`ibm_db2.tablespace_state_change` がトリガーされます。
 
 ### サービスチェック
-{{< get-service-checks-from-git "ibm_db2" >}}
+{{< get-service-checks-from-git "ibm-db2" >}}
 
 
 ## トラブルシューティング

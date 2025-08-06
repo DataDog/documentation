@@ -13,13 +13,10 @@ further_reading:
 - link: "/observability_pipelines/"
   tag: "Documentation"
   text: "Forward logs directly from your environment with Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/microsoft-sentinel-logs/"
+  tag: "Blog"
+  text: "Centrally process and govern your logs in Datadog before sending them to Microsoft Sentinel"
 ---
-
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">
-Log forwarding is not available for the Government site. Contact your account representative for more information.
-</div>
-{{% /site-region %}}
 
 ## Overview
 

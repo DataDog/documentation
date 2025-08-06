@@ -25,7 +25,7 @@ categories:
 - automatización
 - colaboración
 - rum
-- mobile
+- móvil
 custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/alertnow/README.md
@@ -64,7 +64,7 @@ tile:
   title: AlertNow
 ---
 
-<!--  FUENTE https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -164,7 +164,7 @@ Sigue los pasos que se indican a continuación en tu cuenta de Datadog.
 
 
 
-## Compatibilidad
+## Soporte
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de AlertNow][8].
 

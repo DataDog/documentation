@@ -73,7 +73,7 @@ Cloud Run サービスから Datadog へのアプリケーションの直接ロ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_cloud_run" >}}
+{{< get-metrics-from-git "google-cloud-run" >}}
 
 
 ### イベント

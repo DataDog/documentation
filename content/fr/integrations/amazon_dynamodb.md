@@ -73,7 +73,7 @@ Pour en savoir plus sur la collecte de logs de services AWS, consultez la sectio
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_dynamodb" >}}
+{{< get-metrics-from-git "amazon-dynamodb" >}}
 
 
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.

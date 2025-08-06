@@ -368,6 +368,13 @@ The Datadog Cluster Agent automatically creates `DatadogMetric` resources in its
 
 If you choose to migrate an HPA later on to reference a `DatadogMetric`, the automatically generated resource is cleaned up by the Datadog Cluster Agent after a few hours.
 
+Optionally, you can disable this behavior by setting `DD_EXTERNAL_METRICS_PROVIDER_ENABLE_DATADOGMETRIC_AUTOGEN` to `false` like:
+
+```yaml
+- name: DD_EXTERNAL_METRICS_PROVIDER_ENABLE_DATADOGMETRIC_AUTOGEN
+  value: "false"
+```
+
 ## Cluster Agent querying
 The Cluster Agent performs the queries for the `DatadogMetric` objects every 30 seconds. The Cluster Agent also batches the metric queries performed into groups of 35. Therefore, 35 `DatadogMetric` queries are included in a single request to the Datadog metrics API.
 

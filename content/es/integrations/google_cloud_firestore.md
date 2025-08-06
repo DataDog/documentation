@@ -50,7 +50,7 @@ Una vez hecho esto, exporta tus logs de Google Cloud Firestore de Google Cloud L
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "google_cloud_firestore" >}}
+{{< get-metrics-from-git "google-cloud-firestore" >}}
 
 
 ### Eventos

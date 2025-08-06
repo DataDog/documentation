@@ -30,10 +30,6 @@ title: Puertas de calidad
 Las Puertas de calidad están en vista previa.
 {{< /callout >}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Las Puertas de calidad no se encuentran disponibles en el sitio ({{< region-param key="dd_site_name" >}}) seleccionado en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Las Puertas de calidad te permiten controlar la calidad del software configurando reglas para bloquear despliegues de código de calidad inferior. Tú tienes el control de lo que se fusiona en la rama por defecto y se despliega en producción. También pueden asegurar que el código que se ejecuta en producción respete las normas de calidad más elevadas, reduciendo los incidentes y minimizando los comportamientos no deseados.
@@ -62,7 +58,7 @@ Puedes configurar reglas de Puertas de calidad para las siguientes categorías:
 
 Al integrar las Puertas de calidad [en tus pipelines CI/CD][7] o permitir que la [integración GitHub Datadog][13] cree automáticamente checks de estado en tus solicitudes de extracción (actualmente disponible sólo para reglas SCA), puedes crear un marco sólido para mantener y mejorar la calidad del software que se alinea con las metas operativas y los objetivos empresariales de tu organización. 
 
-## Configuración
+## Configurar
 
 Las Puertas de calidad ofrecen los siguientes tipos de reglas:
 
@@ -84,13 +80,14 @@ Puedes crear reglas para bloquear la fusión de código cuando tu repositorio ti
 {{< img src="quality_gates/setup/static_analysis_2.png" alt="Regla de una puerta de calidad que falla cuando el repositorio contiene una o más nuevas violaciones de la calidad del código con una gravedad de nivel de error" style="width:80%" >}}
 
 {{% /tab %}}
-{{% tab "Análisis de composición de software" %}}
+{{% tab "Software Composition Analysis" %}}
 
 Puede crear reglas para bloquear la fusión de código cuando su repositorio tiene un determinado número de vulnerabilidades de biblioteca o licencias prohibidas.
 
 {{< img src="quality_gates/setup/sca_2.png" alt="Regla de una puerta de calidad que falla cuando el repositorio contiene una o más vulnerabilidades de biblioteca de gravedad alta o crítica" style="width:80%" >}}
 
-{{% /tab %}}{{< /tabs >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 Para crear una regla de puerta de calidad, consulta la [documentación de configuración][2]. 
 
@@ -112,11 +109,12 @@ Puedes buscar y filtrar por puertas de calidad o ejecuciones de reglas, crear vi
 {{< img src="quality_gates/explorer/gates_3.png" alt="Resultados de puertas de calidad en el Explorador de puertas de calidad" style="width:100%" >}}
 
 {{% /tab %}}
-{{% tab "Ejecución de reglas" %}}
+{{% tab "Ejecuciones de reglas" %}}
 
 {{< img src="quality_gates/explorer/executions_1.png" alt="Resultados de la ejecución de reglas de puertas de calidad en el Explorador de puertas de calidad" style="width:100%" >}}
 
-{{% /tab %}}{{< /tabs >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 Para obtener más información, consulta la [documentación del Explorador de puertas de calidad][8].
 
@@ -128,7 +126,7 @@ Puedes ver información sobre quién creó, modificó y eliminó reglas de puert
 
 Para obtener más información, consulta la [documentación de Audit Trail][4].
 
-## Para leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

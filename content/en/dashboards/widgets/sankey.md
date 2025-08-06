@@ -7,6 +7,12 @@ further_reading:
   text: "Build Sankey Diagrams in Product Analytics"
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+The Sankey widget is not available in the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
+</div>
+{{% /site-region %}}
+
 {{< img src="dashboards/widgets/sankey/sankey_widget.png" alt="Sankey widget configuration showing an example graph" style="width:100%;" >}}
 
 The Sankey widget shows user flow, movement, or change from one application state to another. This widget is available for Product Analytics.

@@ -10,7 +10,7 @@ further_reading:
 title: Recopilación de logs de React Native
 ---
 
-Envía logs a Datadog desde tus aplicaciones de React Native Mobile con [la biblioteca de registro del cliente `dd-sdk-reactnative` de Datadog][1] y aprovecha las siguientes características:
+Envía logs a Datadog desde tus aplicaciones de React Native Mobile con [la biblioteca de registro del cliente `dd-sdk-reactnative` de Datadog][1] y aprovecha las siguientes funciones:
 
 * Loguear en Datadog en formato JSON de forma nativa.
 * Añadir `context` y atributos personalizados adicionales a cada log enviado.
@@ -47,10 +47,10 @@ A continuación, instala el pod añadido:
 ```js
 import {
     DdSdkReactNative,
-    DdSdkReactNativeConfiguration
+    DatadogProviderConfiguration
 } from '@datadog/mobile-react-native';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
@@ -65,10 +65,10 @@ config.site = 'US1';
 ```js
 import {
     DdSdkReactNative,
-    DdSdkReactNativeConfiguration
+    DatadogProviderConfiguration
 } from '@datadog/mobile-react-native';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
@@ -83,10 +83,10 @@ config.site = 'US3';
 ```js
 import {
     DdSdkReactNative,
-    DdSdkReactNativeConfiguration
+    DatadogProviderConfiguration
 } from '@datadog/mobile-react-native';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
@@ -103,10 +103,10 @@ await DdSdkReactNative.initialize(config);
 ```js
 import {
     DdSdkReactNative,
-    DdSdkReactNativeConfiguration
+    DatadogProviderConfiguration
 } from '@datadog/mobile-react-native';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
@@ -121,10 +121,10 @@ config.site = 'EU1';
 ```js
 import {
     DdSdkReactNative,
-    DdSdkReactNativeConfiguration
+    DatadogProviderConfiguration
 } from '@datadog/mobile-react-native';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
@@ -139,10 +139,10 @@ config.site = 'US1_FED';
 ```js
 import {
     DdSdkReactNative,
-    DdSdkReactNativeConfiguration
+    DatadogProviderConfiguration
 } from '@datadog/mobile-react-native';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
@@ -180,7 +180,22 @@ Esto significa que aunque los usuarios abran tu aplicación estando desconectado
 
 Los datos en disco se descartarán automáticamente si son demasiado antiguos para garantizar que el SDK no utilice demasiado espacio en disco.
 
-## Leer más
+## Huella digital de error personalizada
+
+A partir de la versión 2.4.2, puedes añadir una huella digital personalizada a los logs de error utilizando el argumento `fingerprint`:
+
+```ts
+export type LogWithErrorArguments = [
+    message: string,
+    errorKind?: string,
+    errorMessage?: string,
+    stacktrace?: string,
+    context?: object,
+    fingerprint?: string
+];
+```
+
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

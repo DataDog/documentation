@@ -91,7 +91,7 @@ S3 버킷이나 CloudWatch로 로그를 전송하도록 Amazon ElementalConvert�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_mediaconvert" >}}
+{{< get-metrics-from-git "amazon-mediaconvert" >}}
 
 
 ### 이벤트

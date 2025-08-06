@@ -18,6 +18,10 @@ further_reading:
 title: Control de datos de logs confidenciales
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/role-based-sensitive-data-unmasking-in-logs" btn_hidden="false" >}}
+El desenmascaramiento de datos confidenciales basado en roles en los logs está en Vista previa. Para inscribirte, haz clic en <b>Request access</b> (Solicitar acceso).
+{{< /callout >}}
+
 ## Información general
 
 Los logs pueden contener datos confidenciales y deben tratarse con cuidado. Si estás ingiriendo datos confidenciales en Datadog, ten en cuenta lo siguiente:
@@ -95,9 +99,9 @@ Sigue los siguientes pasos de acuerdo con tus requisitos de cumplimiento. Puede 
 
 Este paso hace que los logs con datos confidenciales, tanto logs que ya se enviaron como logs que podrían seguir llegando, no se puedan consultar en Datadog (Explorer, Dashboards y Livetail).
 
-Utiliza la [página de configuración de acceso a datos][17] y una consulta de esquema confidencial para definir una [restricción][18] que se aplique a todas las personas de tu organización. Por ejemplo, la consulta mencionada anteriormente: `version:x.y.z source:python status:debug`.
+Utiliza la [página de configuración de acceso a datos][17] y una consulta de esquema confidencial para definir una [restricción][18] y aplicarla a los [roles][22] de tu organización. Por ejemplo, `version:x.y.z source (fuente):python status:debug`. También puedes restringir durante un periodo con el atributo `@timestamp`. Por ejemplo, `@timestamp:[1731597125165 TO 1731597125200]`.
 
-**Nota:** El uso de **NOT** en la consulta de esquema confidencial restringe a los usuarios la posibilidad de ver cualquier cosa que NO coincida con logs.
+**Nota:** El uso de **NO** en la consulta de esquema confidencial restringe a los usuarios de los logs que coinciden con la consulta y permite a los usuarios ver los registros que no coinciden con la consulta.
 
 {{< img src="logs/guide/sensitive/sensitive_data_access.png" alt="Acceso a datos confidenciales" style="width:80%;" >}}
 
@@ -116,12 +120,12 @@ Si tienes alguna pregunta específica sobre el cumplimiento de la normativa o ne
 * Si ya has hecho que los datos confidenciales no se puedan consultar.
 
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/logs/guide/logs-rbac/
-[2]: /es/sensitive_data_scanner/
+[2]: /es/security/sensitive_data_scanner/
 [3]: /es/account_management/org_settings/
 [4]: /es/logs/search_syntax/
 [5]: /es/logs/indexes
@@ -141,3 +145,4 @@ Si tienes alguna pregunta específica sobre el cumplimiento de la normativa o ne
 [19]: /es/logs/archives/?tab=awss3#format-of-the-archives
 [20]: /es/help/
 [21]: https://www.datadoghq.com/blog/sensitive-data-scanner/
+[22]: /es/account_management/rbac/

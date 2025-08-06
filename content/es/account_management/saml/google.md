@@ -35,7 +35,7 @@ URL de inicio
 : déjala en blanco o utiliza la **Single Sign On Login URL** (URL de inicio de sesión único) que aparece en la [SAML setup page (página de configuración de SAML)][2].
 
 Respuesta firmada
-: déjala sin marcar
+: Dejar sin marcar
 
 Identificador de nombres
 : selecciona **Basic Information** (Información básica) e **Primary Email** (Correo electrónico principal)
@@ -51,7 +51,7 @@ Además, añade:
 
 {{< img src="account_management/saml/zAttributeMapping.png" alt="zAttributeMapping" style="width:75%;">}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

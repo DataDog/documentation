@@ -52,7 +52,7 @@ Une fois cette opération effectuée, exportez vos logs Google App Engine depu
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "google_app_engine" >}}
+{{< get-metrics-from-git "google-app-engine" >}}
 
 
 ### Événements

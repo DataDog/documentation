@@ -25,7 +25,7 @@ author:
   support_email: zjohnson@ns1.com
 categories:
 - 네트워크
-custom_kind: integration
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/ns1/README.md
 display_on_public_website: true
@@ -40,8 +40,8 @@ name: ns1
 public_title: ns1
 short_description: NS1 메트릭을 수집하는 Datadog 통합
 supported_os:
-- 리눅스
-- windows
+- linux
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
@@ -50,7 +50,7 @@ tile:
   - Supported OS::Windows
   - Category::Network
   - Supported OS::macOS
-  - 제공::통합
+  - Offering::Integration
   configuration: README.md#Setup
   description: NS1 메트릭을 수집하는 Datadog 통합
   media: []
@@ -89,11 +89,11 @@ NS1 점검은 [Datadog 에이전트][3] 패키지에 포함되어 있지 않기 
 
 2. 통합을 코어 [통합][5]과 유사하게 설정하세요.
 
-### 구성
+### 설정
 
 1. NS1 메트릭 수집을 시작하려면 에이전트의 설정 디렉터리 루트의 `conf.d/` 폴더에서 `ns1.d/conf.yaml` 파일을 편집합니다. 사용 가능한 모든 설정 옵션을 보려면 [[ns1.d/conf.yaml][6] 샘플을 참고하세요.
 
-2. [ Agent를 다시 시작][7]합니다.
+2. [에이전트를 다시 시작][7]합니다.
 
 ### 검증
 

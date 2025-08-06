@@ -166,7 +166,7 @@ Gateway가 성공적으로 설정되면 Datadog 사이트의 [Metrics Explorer][
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "akeyless_gateway" >}}
+{{< get-metrics-from-git "akeyless-gateway" >}}
 
 
 ### 서비스 점검

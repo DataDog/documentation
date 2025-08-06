@@ -28,10 +28,10 @@ author:
 categories:
 - conformidad
 - configuración y despliegue
-- contenedores
+- rastreo
 - recopilación de logs
 - seguridad
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/README.md
 display_on_public_website: true
@@ -46,22 +46,22 @@ name: open_policy_agent
 public_title: Open Policy Agent
 short_description: Integración de OPA
 supported_os:
-- linux
+- Linux
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Compliance
-  - Category::Configuration & Deployment
-  - Category::Containers
-  - Category::Log Collection
-  - Category::Security
-  - Supported OS::Linux
-  - Offering::Integration
-  configuration: README.md#Setup
+  - Categoría::Cumplimiento
+  - Categoría::Configuración y despliegue
+  - Categoría::Contenedores
+  - Categoría::Recopilación de logs
+  - Categoría::Seguridad
+  - Sistema operativo compatible::Linux
+  - Oferta::Integración
+  configuration: README.md#Configuración
   description: Integración de OPA
   media: []
-  overview: README.md#Overview
-  support: README.md#Support
+  overview: README.md#Información general
+  support: README.md#Soporte
   title: Open Policy Agent
 ---
 
@@ -90,7 +90,7 @@ Para instalar el check open_policy_agent en tu clúster de Kubernetes:
 3. Actualiza la configuración de `ddev` con la ruta de `integrations-extras/`:
 
    ```shell
-   ddev config set extras ./integrations-extras
+   ddev config set repos.extras ./integrations-extras
    ```
 
 4. Para compilar el paquete `open_policy_agent`, ejecuta:
@@ -101,7 +101,7 @@ Para instalar el check open_policy_agent en tu clúster de Kubernetes:
 
 5. [Descarga el manifiesto del Agent para instalar el Datadog Agent como DaemonSet][4].
 6. Crea dos `PersistentVolumeClaim`, uno para el código de checks y otro para la configuración.
-7. Añádelos como volúmenes a tu plantilla de pods del Agent y utilízalos para tus checks y configuración:
+7. Añádelos como volúmenes a tu plantilla de pods del Agent y úsalos para los checks y configuración:
 
    ```yaml
         env:
@@ -179,20 +179,20 @@ Una vez creadas las facetas, genera las métrica necesarias para que el dashboar
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "open_policy_agent" >}}
+{{< get-metrics-from-git "open-policy-agent" >}}
 
 
 ### Eventos
 
 open_policy_agent no incluye ningún evento.
 
-### Checks de servicio
-{{< get-service-checks-from-git "open_policy_agent" >}}
+### Checks de servicios
+{{< get-service-checks-from-git "open-policy-agent" >}}
 
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][14].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][14].
 
 
 [1]: https://www.openpolicyagent.org/

@@ -158,7 +158,7 @@ El check del Servicio de Windows no incluye métricas.
 El check del Servicio de Windows no incluye eventos.
 
 ### Checks de servicios
-{{< get-service-checks-from-git "windows_service" >}}
+{{< get-service-checks-from-git "windows-service" >}}
 
 
 ## Solucionar problemas

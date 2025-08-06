@@ -45,7 +45,7 @@ Azure Virtual Network からメトリクスを取得して、以下のことを�
 
 ## 収集データ
 ### メトリクス
-{{< get-metrics-from-git "azure_virtual_networks" >}}
+{{< get-metrics-from-git "azure-virtual-network" >}}
 
 
 ### イベント

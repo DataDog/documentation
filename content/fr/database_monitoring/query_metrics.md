@@ -20,10 +20,6 @@ further_reading:
 title: Explorer les métriques de requête
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
-{{< /site-region >}}
-
 La vue Query Metrics affiche l'historique des performances de vos requêtes normalisées. Visualisez les profils de performance pour une infrastructure ou des tags personnalisés spécifiques, tels que la zone de disponibilité du centre de données, et recevez une alerte en cas d'anomalie.
 
 Pour accéder à la vue Query Metrics depuis l'interface Database Monitoring, cliquez sur **[APM > Databases][1]**.

@@ -35,7 +35,7 @@ In the Network Topology Map, the following navigation options are available:
 
 ### View
 
-1. In **View By**, use tags to select how you want to visualize devices: 
+1. In **View By**, use tags to select how you want to visualize devices:
 
 {{< img src="/network_device_monitoring/network_topology_map/device-topology-grouped.png" alt="The navigation option, with view by devices and tags selected, highlighting view by location" style="width:80%;" >}}
 
@@ -44,7 +44,7 @@ In the Network Topology Map, the following navigation options are available:
 2. Under **Color By**, change how nodes on the Device Topology Map are colored based on:
 
 - **Device State**: Display nodes on the Device Topology Map by SNMP reachability.
-- **Ping State**: Display nodes on the Device Topology Map by [Ping status][6]. 
+- **Ping State**: Display nodes on the Device Topology Map by [Ping status][6].
 
 {{< img src="/network_device_monitoring/network_topology_map/device-topology-overview-intro.png" alt="The navigation option, with view by color selected, highlighting view by device state" style="width:80%;" >}}
 
@@ -62,11 +62,11 @@ In the Network Topology Map, the following navigation options are available:
 
 ### Filter devices
 
-3. Under **Filter Devices**, gain further granular control over what devices are shown on the Device Topology Map. 
+3. Under **Filter Devices**, gain further granular control over what devices are shown on the Device Topology Map.
 
 {{< img src="/network_device_monitoring/network_topology_map/device_topology_filter_devices_hide.png" alt="The navigation option, with view filer option selected, toggling by hide unmonitored devices " style="width:80%;" >}}
 
-**Note:** The **Filter Devices** setting impacts what devices are shown on the Device Topology Map for _all_ queries you might make. For example, if you filter by a device facet in the search bar. 
+**Note:** The **Filter Devices** setting impacts what devices are shown on the Device Topology Map for _all_ queries you might make. For example, if you filter by a device facet in the search bar.
 
 Hide _N_ Unmonitored Devices - Turned OFF by default.
 : Toggling this on hides devices on the Device Topology Map that are not directly monitored by Network Device Monitoring, but still discovered by LLDP/CDP, and shown on the map from adjacent devices that are monitored by Network Device Monitoring.
@@ -74,9 +74,9 @@ Hide _N_ Unmonitored Devices - Turned OFF by default.
 Hide _N_ Unconnected Devices - Turned OFF by default.
 : Toggling this on hides any devices that have no link connections. Devices can be unconnected for reasons such as improper configuration, or the device does not support [LLDP/CDP](#troubleshooting).
 
-### Icon legend 
+### Icon legend
 
-SNMP devices are matched to a representative icon based on their device type in each device node, as defined in their [device profiles][4]. 
+SNMP devices are matched to a representative icon based on their device type in each device node, as defined in their [device profiles][4].
 
 <table>
   <colgroup>
@@ -151,7 +151,7 @@ If you experience issues using the Network Topology Map, use the following troub
 
 This message is displayed when the rendered map has no links.
 
-**Note**: Since the "Hide _N_ Unconnected Devices" toggle is enabled by default, this message displays with an empty map. 
+**Note**: Since the "Hide _N_ Unconnected Devices" toggle is enabled by default, this message displays with an empty map.
 
 ### Empty map message
 
@@ -189,7 +189,7 @@ For CDP data
 sudo -u dd-agent datadog-agent snmp walk <DEVICE_IP> 1.3.6.1.4.1.9.9.23
 ```
 
-### Missing connections or links 
+### Missing connections or links
 
 If your device is exposing topology data with LLDP or CDP but some of the connections are missing, ensure that the "Hide _N_ Unmonitored Devices" toggle is off.
 If you are using tags to filter nodes on the map, ensure the "Show one hop away on filter" toggle is on to see the connected nodes.
@@ -204,13 +204,13 @@ You can use the "Hide _N_ Unmonitored Devices" toggle to hide these nodes.
 The Device Topology Map shows all devices discovered with LLDP and/or CDP. In some cases, these devices are already monitored with SNMP but can not be [resolved](#device-resolution) to the equivalent monitored device. In this case, the device is shown twice: one node representing the monitored device and one node representing the LLDP/CDP discovered device.
 Use the "Hide _N_ Unmonitored Devices" toggle to hide the unmonitored nodes.
 
-### Borderless or black nodes on the map 
+### Borderless or black nodes on the map
 
 The borderless or black nodes on the Device Topology Map can represent devices discovered with LLDP or CDP that are not configured to be monitored with NDM, or devices discovered with LLDP or CDP that can not be resolved to the equivalent [monitored device](#device-resolution).
 
-## Device resolution 
+## Device resolution
 
-The Device Topology Map provides an overview of the devices monitored with NDM and their physical connections. The topology links data is based on LLDP (Link Layer Discovery Protocol) or CDP (Cisco Discovery Protocol) information collected with SNMP. 
+The Device Topology Map provides an overview of the devices monitored with NDM and their physical connections. The topology links data is based on LLDP (Link Layer Discovery Protocol) or CDP (Cisco Discovery Protocol) information collected with SNMP.
 The connections discovered with LLDP or CDP can correspond to devices already monitored with SNMP. The device resolution consists in matching the discovered device to the monitored device.
 
 ### Device resolution failures
@@ -224,7 +224,7 @@ The device resolution can fail if the device is not monitored with NDM, or the L
 
 
 [1]: /network_monitoring/netflow/
-[2]: https://app.datadoghq.com/infrastructure/devices?viewTab=topology
+[2]: https://app.datadoghq.com/devices?viewTab=topology
 [3]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2#autodiscovery
 [4]: /network_monitoring/devices/profiles/
 [5]: /help

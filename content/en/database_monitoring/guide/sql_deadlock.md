@@ -95,8 +95,8 @@ Supported Agent versions
 
 ## Exploring deadlock events
 
-To access the deadlock view, navigate to the **APM** > **Database Monitoring** > **Databases** tab, select a SQL Server host, and then click the **Deadlocks** tab.
-The deadlock tab displays details about the victim and survivor processes, and includes a link to the deadlock diagram.
+To access the deadlock view, navigate to the **APM** > **Database Monitoring** > **Databases** tab, then select a SQL Server host. Next, select the **Queries** tab, then select the **Deadlocks** tab.
+The Deadlocks tab displays details about the victim and survivor processes, and includes a link to the deadlock diagram.
 
 **Note**: Because deadlocks occur infrequently, it's unlikely that any deadlock information will be visible right away.
 

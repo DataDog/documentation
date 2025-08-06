@@ -10,10 +10,6 @@ further_reading:
 title: Quality Gates 또는 Rule Execution 패싯
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Quality Gates는 현재 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 {{< callout url="#" btn_hidden="true" >}}
 Quality Gate는 공용 베타 서비스 중입니다.
 {{< /callout >}}

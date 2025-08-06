@@ -159,7 +159,7 @@ You can configure or remove this quota at any time when editing the Index:
 
 An event is generated when either the daily quota or the warning threshold is reached:
 
-{{< img src="logs/indexes/index_quota_event.png" alt="index quota notification" style="width:70%;">}}
+{{< img src="logs/indexes/daily_quota_warning_events.png" alt="Daily quota and warning events" style="width:90%;">}}
 
 See [Monitor log usage][20] on how to monitor and alert on your usage.
 

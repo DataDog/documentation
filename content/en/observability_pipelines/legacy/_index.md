@@ -20,10 +20,6 @@ cascade:
     private: true
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
-
 {{% observability_pipelines/legacy_warning %}}
 
 The following documents are for the Observability Pipelines Worker 1.8 and older.

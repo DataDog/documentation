@@ -117,4 +117,4 @@ Blink에 관한 더 자세한 정보는 [Blink 설명서][3]를 참고하세요.
 [8]: mailto:support@blinkops.com
 
 ---
-이 애플리케이션은 마켓플레이스를 통해 제공되며 Datadog 기술 파트너가 지원합니다. 이 애플리케이션을 구매하려면 <a href="https://app.datadoghq.com/marketplace/app/blink-blink" target="_blank">여기를 클릭</a>하세요.
+이 애플리케이션은 Datadog Marketplace를 통해 제공되며 Datadog 기술 파트너의 지원을 받습니다. 사용하려면 <a href="https://app.datadoghq.com/marketplace/app/blink-blink" target="_blank">Marketplace에서 구매하세요</a>.

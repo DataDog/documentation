@@ -12,7 +12,7 @@ title: ファネルウィジェット
 widget_type: ファネル
 ---
 
-Funnel analysis helps you track conversion rates across key workflows to identify and address any bottlenecks in end-to-end user journeys. The funnel widget visualizes conversion rates across user workflows and end-to-end user journeys.
+ファネル分析では、主要なワークフロー全体でコンバージョン率を追跡し、エンドツーエンドのユーザージャーニーにおけるボトルネックを特定して対処できます。ファネルウィジェットは、ユーザーワークフローおよびエンドツーエンドのユーザージャーニーにわたるコンバージョン率を可視化します。
 
 {{< img src="dashboards/widgets/funnel/funnel.png" alt="EC サイトにおけるユーザーのドロップオフ率を視覚化するファネルウィジェット" >}}
 

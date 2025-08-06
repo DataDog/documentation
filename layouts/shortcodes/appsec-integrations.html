@@ -1,0 +1,23 @@
+<style>
+  .appsec-integrations .card img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .appsec-integrations .card:hover {
+    scale: 1.03;
+    transition: scale 0.3s ease-in-out;
+  }
+
+  .appsec-integrations .card {
+    scale: 1;
+    transition: scale 0.3s ease-in-out;
+  }
+
+</style>
+
+<div class="appsec-integrations container cards-dd mb-3">
+  <div class="row row-cols-2 row-cols-sm-5 g-2">
+    {{ .Inner }}
+  </div>
+</div>

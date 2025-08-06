@@ -1,0 +1,78 @@
+name: Retrigger Code Freeze
+
+on:
+  workflow_dispatch:
+    inputs:
+      max_prs:
+        description: 'Maximum number of PRs to retrigger (default: 50)'
+        required: false
+        default: '50'
+        type: string
+
+permissions:
+  contents: read
+  actions: write
+  pull-requests: read
+
+jobs:
+  retrigger-code-freeze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get latest pull requests and retrigger code freeze
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7
+        with:
+          script: |
+            const maxPrs = parseInt('${{ github.event.inputs.max_prs || 50 }}');
+            
+            console.log(`Getting latest ${maxPrs} pull requests targeting master branch...`);
+            
+            try {
+              // Get latest PRs targeting master branch
+              const { data: pullRequests } = await github.rest.pulls.list({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: 'open',
+                base: 'master',
+                sort: 'updated',
+                direction: 'desc',
+                per_page: maxPrs
+              });
+              
+              if (pullRequests.length === 0) {
+                console.log('No open pull requests found targeting master branch');
+                return;
+              }
+              
+              console.log(`Found ${pullRequests.length} pull requests`);
+              console.log(`Pull request numbers: ${pullRequests.map(pr => pr.number).join(', ')}`);
+              
+              // Retrigger code freeze workflow for each PR
+              for (const pr of pullRequests) {
+                console.log(`Retriggering code freeze for PR #${pr.number}...`);
+                
+                try {
+                  // Trigger the code-freeze workflow
+                  await github.rest.actions.createWorkflowDispatch({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    workflow_id: 'code-freeze.yml',
+                    ref: pr.head.sha,
+                    inputs: {
+                      pr_number: pr.number.toString()
+                    }
+                  });
+                  
+                  console.log(`Triggered code freeze check for PR #${pr.number} (SHA: ${pr.head.sha})`);
+                  
+                  // Rate limiting - wait 2 seconds between requests
+                  await new Promise(resolve => setTimeout(resolve, 2000));
+                } catch (error) {
+                  console.error(`Failed to trigger workflow for PR #${pr.number}: ${error.message}`);
+                }
+              }
+              
+              console.log('Completed retriggering code freeze checks');
+            } catch (error) {
+              console.error(`Error: ${error.message}`);
+              process.exit(1);
+            } 

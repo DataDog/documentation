@@ -315,13 +315,11 @@ Al añadir información de usuario a tus sesiones de RUM, simplificas lo siguien
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="API de usuario en la interfaz de usuario de RUM" style="width:90%" >}}
 
-Los siguientes atributos son **opcionales**, proporciona **al menos** uno de ellos:
-
-| Atributo | Tipo   | Descripción                                                                                              |
-|-----------|--------|----------------------------------------------------------------------------------------------------------|
-| `usr.id`    | Cadena | Identificador único de usuario.                                                                                  |
-| `usr.name`  | Cadena | Nombre descriptivo, que se muestra por defecto en la interfaz de usuario de RUM.                                                  |
-| `usr.email` | Cadena | Correo electrónico del usuario, que se muestra en la interfaz de usuario de RUM si el nombre de usuario no está presente. También se usa para obtener Gravatars. |
+| Atributo   | Tipo   | Descripción                                                                     |
+| ----------- | ------ | ------------------------------------------------------------------------------- |
+| `usr.id`    | Cadena | (Obligatorio) Identificador único de usuario.                                              |
+| `usr.name`  | Cadena | (Opcional) Nombre de usuario sencillo, mostrado por defecto en la interfaz de usuario RUM.              |
+| `usr.email` | Cadena | (Opcional) Correo electrónico del usuario, mostrado en la interfaz de usuario RUM, si el nombre de usuario no está presente. |
 
 Para identificar las sesiones de usuario, utiliza `DatadogSdk.setUserInfo`.
 
@@ -390,21 +388,21 @@ Si se devuelve `null` desde el asignador de errores, recursos o acciones, se eli
 
 En función del tipo de evento, solo pueden modificarse algunas propiedades específicas:
 
-| Tipo de evento       | Clave de atributo                     | Descripción                                   |
-|------------------|-----------------------------------|-----------------------------------------------|
-| RumViewEvent     | `viewEvent.view.url`              | URL de la vista.                              |
-|                  | `viewEvent.view.referrer`         | Referente de la vista.                         |
-| RumActionEvent   | `actionEvent.action.target?.name` | Nombre de la acción.                           |
-|                  | `actionEvent.view.referrer`       | Referente de la vista vinculada a esta acción.   |
-|                  | `actionEvent.view.url`            | URL de la vista vinculada a esta acción.        |
-| RumErrorEvent    | `errorEvent.error.message`        | Mensaje de error.                                |
-|                  | `errorEvent.error.stack`          | Stack trace del error.                      |
-|                  | `errorEvent.error.resource?.url`  | URL del recurso al que se refiere el error.      |
-|                  | `errorEvent.view.referrer`        | Referente de la vista vinculada a esta acción.   |
-|                  | `errorEvent.view.url`             | URL de la vista vinculada a este error.         |
-| RumResourceEvent | `resourceEvent.resource.url`      | URL del recurso.                          |
-|                  | `resourceEvent.view.referrer`     | Referente de la vista vinculada a esta acción.   |
-|                  | `resourceEvent.view.url`          | URL de la vista vinculada a este recurso.      |
+| Tipo de evento       | Clave de atributo                     | Descripción                                 |
+| ---------------- | --------------------------------- | ------------------------------------------- |
+| RumViewEvent     | `viewEvent.view.url`              | URL de la vista.                            |
+|                  | `viewEvent.view.referrer`         | Referente de la vista.                       |
+| RumActionEvent   | `actionEvent.action.target?.name` | Nombre de la acción.                         |
+|                  | `actionEvent.view.referrer`       | Referente de la vista vinculada a esta acción. |
+|                  | `actionEvent.view.url`            | URL de la vista vinculada a esta acción.      |
+| RumErrorEvent    | `errorEvent.error.message`        | Mensaje de error.                              |
+|                  | `errorEvent.error.stack`          | Stack trace del error.                    |
+|                  | `errorEvent.error.resource?.url`  | URL del recurso al que se refiere el error.    |
+|                  | `errorEvent.view.referrer`        | Referente de la vista vinculada a esta acción. |
+|                  | `errorEvent.view.url`             | URL de la vista vinculada a este error.       |
+| RumResourceEvent | `resourceEvent.resource.url`      | URL del recurso.                        |
+|                  | `resourceEvent.view.referrer`     | Referente de la vista vinculada a esta acción. |
+|                  | `resourceEvent.view.url`          | URL de la vista vinculada a este recurso.    |
 
 ## Recuperar el ID de sesión de RUM
 

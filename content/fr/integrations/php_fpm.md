@@ -188,7 +188,7 @@ Si votre installation PHP-FPM utilise des sockets Unix, vous devez activer `use_
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "php_fpm" >}}
+{{< get-metrics-from-git "php-fpm" >}}
 
 
 ### Événements
@@ -196,7 +196,7 @@ Si votre installation PHP-FPM utilise des sockets Unix, vous devez activer `use_
 Le check PHP-FPM n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "php_fpm" >}}
+{{< get-service-checks-from-git "php-fpm" >}}
 
 
 ## Dépannage

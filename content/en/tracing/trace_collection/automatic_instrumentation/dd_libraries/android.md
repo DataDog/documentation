@@ -257,6 +257,43 @@ dependencies {
    {{< /tabs >}}
    {{< /site-region >}}
 
+   {{< site-region region="ap2" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+       class SampleApplication : Application() {
+           override fun onCreate() {
+               super.onCreate()
+               val configuration = Configuration.Builder(
+                        clientToken = <CLIENT_TOKEN>,
+                        env = <ENV_NAME>,
+                        variant = <APP_VARIANT_NAME>
+                    )
+                    .useSite(DatadogSite.AP2)
+                    .build()
+               Datadog.initialize(this, configuration, trackingConsent)
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+       public class SampleApplication extends Application {
+           @Override
+           public void onCreate() {
+               super.onCreate();
+               Configuration configuration =
+                       new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                               .useSite(DatadogSite.AP2)
+                               .build();
+               Datadog.initialize(this, configuration, trackingConsent);
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
+
    To be compliant with the GDPR regulation, the SDK requires the tracking consent value at initialization.
    The tracking consent can be one of the following values:
    * `TrackingConsent.PENDING`: The SDK starts collecting and batching the data but does not send it to the data
@@ -625,9 +662,12 @@ TraceConfiguration config = new TraceConfiguration.Builder()
 To monitor the performance of a given lambda, you can use the `withinSpan()` method. By default, a scope will be created for the span, but you can disable this behavior by setting the `activate` parameter to false.
 
 ```kotlin
-    withinSpan("<SPAN_NAME>", parentSpan, activate) {
-        // Your code here
-    }
+import com.datadog.android.trace.withinSpan
+import io.opentracing.Span
+
+withinSpan("<SPAN_NAME>", parentSpan, activate) {
+   // Your code here
+}
 ```
 
 ### Span extension methods
@@ -635,21 +675,27 @@ To monitor the performance of a given lambda, you can use the `withinSpan()` met
 You can mark a span as having an error using one of the following `error()` methods.
 
 ```kotlin
-    val span = tracer.buildSpan("<SPAN_NAME>").start()
-    try {
-        // …
-    } catch (e: IOException) {
-        span.setError(e)
-    }
-    span.finish()
+import com.datadog.android.trace.setError
+import io.opentracing.Tracer
+
+val span = tracer.buildSpan("<SPAN_NAME>").start()
+try {
+    // …
+} catch (e: IOException) {
+    span.setError(e)
+}
+span.finish()
 ```
 
 ```kotlin
-    val span = tracer.buildSpan("<SPAN_NAME>").start()
-    if (invalidState) {
-        span.setError("Something unexpected happened")
-    }
-    span.finish()
+import com.datadog.android.trace.setError
+import io.opentracing.Tracer
+
+val span = tracer.buildSpan("<SPAN_NAME>").start()
+if (invalidState) {
+    span.setError("Something unexpected happened")
+}
+span.finish()
 ```
 
 ### Tracing SQLite transaction
@@ -657,13 +703,16 @@ You can mark a span as having an error using one of the following `error()` meth
 If you are using `SQLiteDatabase` to persist data locally, you can trace the database transaction using the following method:
 
 ```kotlin
-   sqliteDatabase.transactionTraced("<SPAN_NAME>", isExclusive) { database ->
-        // Your queries here
-        database.insert("<TABLE_NAME>", null, contentValues)
+import com.datadog.android.trace.transactionTraced
+import android.database.sqlite.SQLiteDatabase
 
-        // Decorate the Span
-        setTag("<TAG_KEY>", "<TAG_VALUE>")
-   }
+sqliteDatabase.transactionTraced("<SPAN_NAME>", isExclusive) { database ->
+   // Your queries here
+   database.insert("<TABLE_NAME>", null, contentValues)
+
+   // Decorate the Span
+   setTag("<TAG_KEY>", "<TAG_VALUE>")
+}
 ```
 It behaves like the `SQLiteDatabase.transaction` method provided in the `core-ktx` AndroidX package and only requires a span operation name.
 

@@ -23,45 +23,46 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
 ## Installation and deployment
 
 1. Install the Datadog Operator with Helm:
-  ```bash
-  helm repo add datadog https://helm.datadoghq.com
-  helm install my-datadog-operator datadog/datadog-operator
-  ```
+   ```bash
+   helm repo add datadog https://helm.datadoghq.com
+   helm install my-datadog-operator datadog/datadog-operator
+   ```
+
 2. Create a Kubernetes secret with your API key:
-  ```bash
-  kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY>
-  ```
-  Replace `<DATADOG_API_KEY>` with your [Datadog API key][5].
-  
-  **Note**: Add an application key for autoscaling using the external metrics server by adding `--from-literal app-key=<DATADOG_APP_KEY>`
+   ```bash
+   kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY>
+   ```
+   Replace `<DATADOG_API_KEY>` with your [Datadog API key][5].
+   
+   **Note**: Add an application key for autoscaling using the external metrics server by adding `--from-literal app-key=<DATADOG_APP_KEY>`
 
 3. Create a `datadog-agent.yaml` file with the spec of your `DatadogAgent` deployment configuration. The following sample configuration enables metrics, logs, and APM:
-  ```yaml
-  apiVersion: datadoghq.com/v2alpha1
-  kind: DatadogAgent
-  metadata:
-    name: datadog
-  spec:
-    global:
-      site: datadoghq.com
-      credentials:
-        apiSecret:
-          secretName: datadog-secret
-          keyName: api-key
-    features:
-      apm:
-        enabled: true
-      logCollection:
-        enabled: true
-  ```
-  **Note**: Make sure to set `site` to the Datadog site you are using (for instance, `datadoghq.eu`). 
-  
-  For all configuration options, see the [Operator configuration spec][6].
+   ```yaml
+   apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+   spec:
+     global:
+       site: datadoghq.com
+       credentials:
+         apiSecret:
+           secretName: datadog-secret
+           keyName: api-key
+     features:
+       apm:
+         enabled: true
+       logCollection:
+         enabled: true
+   ```
+   **Note**: Make sure to set `site` to the Datadog site you are using (for instance, `datadoghq.eu`). 
+   
+   For all configuration options, see the [Operator configuration spec][6].
 
 4. Deploy the Datadog Agent:
-  ```bash
-  kubectl apply -f /path/to/your/datadog-agent.yaml
-  ```
+   ```bash
+   kubectl apply -f /path/to/your/datadog-agent.yaml
+   ```
 
 ### Running Agents in a single container
 

@@ -31,6 +31,8 @@ Network Analytics 페이지에서 전체 네트워크 상태에 관한 인사이
 
 특정 엔드포인트 간에 검색 범위를 좁히려면 **태그를 사용**해 네트워크 연결을 집계하고 필터링하세요. Datadog 통합 태그나 [통합 서비스 태깅][12]을 사용해 자동으로 집계 및 필터링을 할 수 있습니다. 네트워크 모니터링에서 태깅을 활용할 경우 특정 서비스나 전체 인프라스트럭처에 대해 가용 영역 전체의 네트워크 트래픽 흐름을 활용할 수 있습니다. `client`와 `server` 태그로 그룹화하여 두 태그 집합 _사이_의 네트워크를 가시화할 수 있습니다.
 
+또한, Datadog은 [즉시 사용할 수 있는](#default-tags) 기본 태그 목록을 제공합니다. 본 태그를 사용자의 필요에 가장 부합하는 네트워크 트래픽을 효율적으로 쿼리 및 분석하는 데 사용할 수 있습니다.
+
 {{< img src="network_performance_monitoring/network_analytics/network_diagram_with_tags.png" alt="태그로 그룹화할 경우 요청이 어떻게 나타나는지 보여주는 네트워크 다이어그램" style="width:100%;">}}
 
 예를 들어, 주문 서비스인 `orders-app`과 내 전체 가용 영역 간의 트래픽을 보고 싶으면 검색 창에서 `client_service:orders-app`을 사용하고 **View clients as** 드롭다운에서 `service` 태그를 추가한 후 **View servers as** 드롭다운에서 `availability-zone` 태그를 사용하면 두 태그 집합 사이의 트래픽 흐름을 가시화할 수 있습니다.
@@ -132,20 +134,20 @@ Network Analytics 페이지에서 전체 네트워크 상태에 관한 인사이
 
 | 태그                     | 설명                                                                                   |
 |-------------------------|-----------------------------------------------------------------------------------------------|
-| `is_agent_traffic`        | 트래픽이 Datadog 에이전트로 생성되었는지 표시                             |
-| `tls_encrypted`           | 연결이 TLS를 사용해 암호화되었는지 나타냄                                           |
-| `tls_cipher_suite`        | 사용된 특정 TLS 암호 스위트를 파악(예: `tls_ecdhe_rsa_with_aes_128_gcm_sha256`)  |
-| `tls_cipher_insecure`     | 연결에 사용된 암호가 일반적으로 안전한 것인지 아닌지 파악  |
-| `tls_version`             | 연결에 협상 및 사용된 TLS 버전(`tls_1.2` 또는 `tls_1.3`)            |
-| `tls_client_version`      | 클라이언트가 지원하는 TLS 버전(`tls_1.2` 또는 `tls_1.3`)                      |
-| `gateway_id`              | AWS 게이트웨이 리소스의 고유 식별자                                               |
-| `gateway_type`            | AWS 게이트웨이 유형 지정(인터넷 NAT, 또는 Transit)                             |
-| `gateway_region`          | 게이트웨이가 배포된 AWS 리전(예: `us-east-1`)                            |
-| `gateway_availability-zone` | 게이트웨이를 호스팅하는 가용 영역(예: `us-east-1a`)                               |
-| `gateway_public_ip`       | NAT 게이트웨이에 할당된 공용 IP 주소                                                |
-| `tgw_attachment_id`       | AWS Transit Gateway 연결의 고유 식별자                                     |
-| `tgw_attachment_type`     | AWS Transit Gateway 연결 유형(예: VPC, VPN, 또는 Direct Connect)                  |
-| `vpc_endpoint_id`         | VPC 엔드포인트의 고유 식별자                                                       |
+| `is_agent_traffic`      | 해당 트래픽을 Datadog Agent가 생성했는지 여부를 표시합니다.                                  |
+| `tls_encrypted`         | 연결이 TLS를 사용해 암호화되었는지 나타냄                                           |
+| `tls_cipher_suite`      | 사용된 TLS 암호 스위트 식별(예: `tls_ecdhe_rsa_with_aes_128_gcm_sha256`).          |
+| `tls_cipher_insecure`   | 사용된 암호가 안전한지 여부를 표시.                                            |
+| `tls_version`           | 사용된 TLS 버전(`tls_1.2` 또는 `tls_1.3`).                                                |
+| `tls_client_version`    | 클라이언트(`tls_1.2` 또는 `tls_1.3`)가 지원하는 TLS 버전.                            |
+| `gateway_id`            | AWS 게이트웨이 리소스의 고유 식별자                                               |
+| `gateway_type`          | AWS 게이트웨이 유형(인터넷, NAT, 또는 Transit)                                              |
+| `gateway_region`        | 게이트웨이 AWS 리전(예: `us-east-1`).                                                |
+| `gateway_availability-zone` | 게이트웨이를 호스팅하는 가용 영역(예: `us-east-1a`).                                |
+| `gateway_public_ip`     | NAT Gateway에 할당된 공공 IP 주소.                                                |
+| `tgw_attachment_id`     | AWS Transit Gateway 연결의 고유 식별자                                     |
+| `tgw_attachment_type`   | Transit Gateway 연결 유형(예: VPC, VPN, Direct Connect).                          |
+| `vpc_endpoint_id`       | VPC 엔드포인트의 고유 식별자                                                       |
 
 ## 요약 그래프
 
@@ -284,7 +286,6 @@ AWS 또는 Azure용으로 향상된 해결책을 [설정][9]한 경우 CNM은 �
  - sku_name
  - Azure 로드 밸런서 및 애플리케이션 게이트웨이에 적용되는 커스텀 (사용자 정의) 태그
 
-
 ### 도메인 확인
 
 Agent 7.17+부터는 외부 및 내부 트래픽에 대해 사람이 읽을 수 있는 도메인 이름으로 IP를 확인합니다. 도메인을 사용하면 S3 버킷, 애플리케이션 로드 밸런서 및 API와 같이 Datadog Agent를 설치할 수 없는 클라우드 제공업체 엔드포인트를 모니터링할 수 있습니다. C&C 서버의 DGA 도메인과 같이 인식할 수 없는 도메인 이름은 네트워크 보안 위협으로 이어질 수 있습니다. `domain`**은 Datadog에서 태그로 인코딩되므로** 검색창 쿼리 및 패싯 패널에서 이를 사용하여 트래픽을 집계하고 필터링할 수 있습니다.
@@ -327,7 +328,6 @@ AWS 및 Google Cloud에서는 네트워크 ID가 자동으로 VPC ID로 설정�
 
 자세한 내용은 [저장된 보기][5] 설명서를 참조하세요.
 
-
 ## 테이블
 
 네트워크 테이블에는 쿼리가 정의한 각 _source_와  _destination_ 사이의 _볼륨_, _처리량_, _TCP 재전송_, _왕복 시간 (RTT)_, 그리고 _RTT 변동_ 메트릭에 대한 세부 정보가 표시됩니다.
@@ -338,17 +338,20 @@ AWS 및 Google Cloud에서는 네트워크 ID가 자동으로 VPC ID로 설정�
 
 `Filter Traffic` 버튼으로 표시된 트래픽을 설정합니다.
 
-{{< img src="network_performance_monitoring/network_analytics/filter_traffic_toggles_v2.png" alt="흐름 상세 정보" style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_analytics/filter_traffic_toggle.png" alt="플로 세부 정보" style="width:50%;">}}
 
 기본적으로 외부 트래픽 (공용 IP에 대한) 및 Datadog Agent 트래픽이 표시됩니다. 보기 범위를 좁히려면 `Show Datadog Traffic`와 `Show External Traffic` 토글을 해제하도록 선택할 수 있습니다.
 
 ### 확인되지 않은 트래픽
 
-확인되지 않은 클라이언트 및 서버 태그는 `N/A`와 같이 표시됩니다. 트래픽 클라이언트 또는 서버 엔드포인트는 다음과 같은 이유로 확인되지 않을 수 있습니다:
+확인되지 않은 클라이언트 및 서버 태그는 `N/A`로 표시됩니다. 트래픽 클라이언트 또는 서버 엔드포인트는 소스 또는 대상 정보와 같은 식별 가능한 메타데이터가 없기 때문에 확인되지 않을 수도 있습니다. 이는 Datadog이 로드 밸런서, 클라우드 서비스 또는 모니터링되는 인프라스트럭처 내의 특정 IP 주소와 같은 알려진 엔티티에 대한 트래픽을 확인할 수 없는 경우에 발생합니다. 일반적으로 확인되지 않은 트래픽은 다음과 같은 이유로 발생할 수 있습니다.
 
 * 호스트, 컨테이너 클라이언트 또는 서버 IP는 트래픽 집계에 사용되는 클라이언트 또는 서버 태그로 태그가 지정되지 않습니다.
 * 엔드포인트가 사용자의 개인 네트워크 외부에 있으므로 Datadog Agent에서 태그를 지정하지 않습니다.
 * 엔드포인트는 Datadog Agent가 설치될 수 없는 방화벽, 서비스 메시 또는 다른 엔티티입니다.
+* 대상에 서비스 태그가 지정되지 않았거나, IP가 서비스에 매핑되지 않았습니다. 
+
+확인되지 않은 트래픽 모니터링은 네트워크 가시성의 사각지대를 식별하고, 성능 및 보안 분석에서 모든 관련 트래픽이 고려되도록 하는 데 꼭 필요합니다.
 
 데이터 테이블의 오른쪽 상단 모서리에 있는 **Show N/A (Unresolved Traffic)** 토글을 사용하여 해결되지 않은 (`N/A`) 클라이언트 또는 서버와의 집계 연결을 필터링합니다.
 
@@ -369,7 +372,7 @@ AWS 및 Google Cloud에서는 네트워크 ID가 자동으로 VPC ID로 설정�
 - 대상 엔드포인트의 CPU 또는 메모리를 많이 사용하는 프로세스.
 - 클라이언트 엔드포인트의 코드에서 발생하는 애플리케이션 오류.
 
-{{< img src="network_performance_monitoring/network_analytics/npm_sidepanel2.png" alt="흐름 상세 정보" style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_analytics/cnm_sidepanel.png" alt="클라이언트 서비스 오더 앱과 서버 서비스 azure.sql_database 간의 트래픽 세부 사항을 표시하는 CNM 사이드패널" style="width:80%;">}}
 
 ### 일반적인 태그
 
@@ -379,7 +382,79 @@ AWS 및 Google Cloud에서는 네트워크 ID가 자동으로 VPC ID로 설정�
 
 ### 보안
 
-**Security** 탭에서는 [Cloud Security Management Threats][6] 및 [Cloud Security Management Misconfigurations][7]에서 감지된 잠재적 네트워크 위협 및 결과를 강조 표시합니다. 이러한 신호는 Datadog이 [감지 또는 규정 준수 규칙][8]과 일치하는 네트워크 활동을 감지하거나 선택한 네트워크 플로우와 관련된 다른 위협 및 잘못된 설정이 있는 경우에 생성됩니다.
+**Security** 탭에서는 [Workload Protection][6] 및 [Cloud Security Misconfigurations][7]에서 감지된 잠재적 네트워크 위협 및 결과를 강조 표시합니다. 이러한 신호는 Datadog이 [감지 또는 규정 준수 규칙][8]과 일치하는 네트워크 활동을 감지하거나, 선택한 네트워크 플로우와 관련된 다른 위협 및 설정 오류가 있는 경우에 생성됩니다.
+
+## 기본 태그
+
+다음은 네트워크 트래픽을 쿼리 및 분석하는 데 사용 가능한 기본 `server` 및 `client` 태그 목록입니다.
+| 서버                    | 클라이언트                      |
+|---------------------------|-----------------------------|
+| server_team               | client_team                |
+| server_role               | client_role                |
+| server_env                | client_env                 |
+| server_environment        | client_environment         |
+| server_app                | client_app                 |
+| server_domain             | client_datacenter          |
+| server_dns_server         | client_instance-id         |
+| server_datacenter         | client_instance-type       |
+| server_instance-id        | client_security-group-name |
+| server_instance-type      | client_security-group      |
+| server_security-group-name| client_name                |
+| server_security-group     | client_image               |
+| server_name               | client_account             |
+| server_image              | client_kernel_version      |
+| server_account            | client_autoscaling_group   |
+| server_kernel_version     | client_region              |
+| server_autoscaling_group  | client_terraform.module    |
+| server_region             | client_site                |
+| server_terraform.module   | client_image_name          |
+| server_site               | client_pod_name            |
+| server_image_name         | client_kube_deployment     |
+| server_pod_name           | client_kube_replica_set    |
+| server_kube_deployment    | client_kube_job            |
+| server_kube_replica_set   | client_kube_cronjob        |
+| server_kube_job           | client_kube_daemon_set     |
+| server_kube_cronjob       | client_kube_stateful_set   |
+| server_kube_daemon_set    | client_kube_cluster_name   |
+| server_kube_stateful_set  | client_kube_service        |
+| server_kube_cluster_name  | client_kube_namespace      |
+| server_kube_service       | client_kubernetes_cluster  |
+| server_kube_namespace     | client_cluster-name        |
+| server_kubernetes_cluster | client_kube_container_name |
+| server_cluster-name       | client_kube-labels         |
+| server_kube_container_name| client_task_name           |
+| server_kube-labels        | client_task_version        |
+| server_task_name          | client_task_family         |
+| server_task_version       | client_ecs_cluster         |
+| server_task_family        | client_loadbalancer        |
+| server_ecs_cluster        | client_mesos_task          |
+| server_loadbalancer       | client_marathon_app        |
+| server_cacheclusterid     | client_chronos_job         |
+| server_mesos_task         | client_chronos_job_owner   |
+| server_marathon_app       | client_nomad_task          |
+| server_chronos_job        | client_nomad_group         |
+| server_chronos_job_owner  | client_nomad_job           |
+| server_nomad_task         | client_rancher_container   |
+| server_nomad_group        | client_rancher_service     |
+| server_nomad_job          | client_rancher_stack       |
+| server_rancher_container  | client_swarm_service       |
+| server_rancher_service    | client_swarm_namespace     |
+| server_rancher_stack      | client_container_id        |
+| server_swarm_service      | client_container_name      |
+| server_swarm_namespace    | client_image_tag           |
+| server_container_id       | client_short_image         |
+| server_container_name     | client_docker_image        |
+| server_image_tag          | client_kubernetescluster   |
+| server_short_image        | client_kube_cluster        |
+| server_cluster            | client_protocol            |
+| server_docker_image       |                             |
+| server_kubernetescluster  |                             |
+| server_kube_cluster       |                             |
+| server_s3_bucket          |                             |
+| server_rds_instance_id    |                             |
+| server_cloud_endpoint_detection |                      |
+| server_gateway_id         |                             |
+| server_protocol           |                             |
 
 ## 참고 자료
 
@@ -390,7 +465,7 @@ AWS 및 Google Cloud에서는 네트워크 ID가 자동으로 VPC ID로 설정�
 [3]: /ko/network_monitoring/cloud_network_monitoring/supported_cloud_services/aws_supported_services/
 [4]: /ko/network_monitoring/cloud_network_monitoring/supported_cloud_services/gcp_supported_services/
 [5]: /ko/logs/explorer/saved_views/
-[6]: /ko/security/threats/
+[6]: /ko/security/workload_protection/
 [7]: /ko/security/cloud_security_management/misconfigurations/
 [8]: /ko/security/detection_rules/
 [9]: /ko/network_monitoring/cloud_network_monitoring/setup/#enhanced-resolution

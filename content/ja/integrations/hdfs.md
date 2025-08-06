@@ -102,7 +102,7 @@ HDFS DataNode チェックは [Datadog Agent][3] パッケージに含まれて�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "hdfs_datanode" >}}
+{{< get-metrics-from-git "hdfs-datanode" >}}
 
 
 ### イベント
@@ -110,7 +110,7 @@ HDFS DataNode チェックは [Datadog Agent][3] パッケージに含まれて�
 HDFS-datanode チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "hdfs_datanode" >}}
+{{< get-service-checks-from-git "hdfs-datanode" >}}
 
 
 ## トラブルシューティング
@@ -224,7 +224,7 @@ HDFS NameNode チェックは [Datadog Agent][3] パッケージに含まれて�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "hdfs_namenode" >}}
+{{< get-metrics-from-git "hdfs-namenode" >}}
 
 
 ### イベント
@@ -232,7 +232,7 @@ HDFS NameNode チェックは [Datadog Agent][3] パッケージに含まれて�
 HDFS-namenode チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "hdfs_namenode" >}}
+{{< get-service-checks-from-git "hdfs-namenode" >}}
 
 
 ## トラブルシューティング

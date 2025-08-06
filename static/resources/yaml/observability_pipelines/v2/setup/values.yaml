@@ -1,3 +1,5 @@
+## For the full list of configuration options: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml
+
 datadog:
   ## The site parameter is based on the Datadog site you are using.
   ## For example, the site URL for US1 is "datadoghq.com". See Datadog Site

@@ -64,7 +64,7 @@ Consultez la [documentation relative aux facettes de logs Datadog][4] pour déco
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "hasura_cloud" >}}
+{{< get-metrics-from-git "hasura-cloud" >}}
 
 
 ### Checks de service

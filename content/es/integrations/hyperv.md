@@ -90,7 +90,7 @@ El check de Hyper-V está incluido en el paquete del [Datadog Agent][2]. No se n
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "hyperv" >}}
+{{< get-metrics-from-git "hyper-v" >}}
 
 
 ### Checks de servicios

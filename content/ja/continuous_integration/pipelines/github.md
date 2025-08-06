@@ -17,10 +17,6 @@ further_reading:
 title: GitHub Actions のワークフローにトレースを設定する
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.</div>
-{{< /site-region >}}
-
 ## Overview
 
 [GitHub Actions][1] is an automation tool that allows you to build, test, and deploy your code in GitHub. Create workflows that automate every step of your development process, streamlining software updates and enhancing code quality with CI/CD features integrated into your repositories.

@@ -10,10 +10,6 @@ further_reading:
 title: Explorador de Continuous Delivery Visibility
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CD Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Únete a la vista previa" >}}
 CD Visibility está en Vista previa. Si te interesa esta función, rellena el formulario para solicitar acceso.
 {{< /callout >}}

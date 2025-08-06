@@ -2,6 +2,9 @@
 description: Aprende a utilizar Multisource Querying para consultar los costes de
   diferentes proveedores en Cloud Cost Management.
 further_reading:
+- link: https://www.datadoghq.com/blog/focus-cost-data/
+  tag: Blog
+  text: Monitorizar tus costes multinube con Cloud Cost Management y FOCUS
 - link: /cloud_cost_management/
   tag: Documentación
   text: Más información sobre Cloud Cost Management
@@ -12,32 +15,25 @@ is_beta: true
 title: Multisource Querying
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/multisource-querying/" btn_hidden="false" header="Unirse a la Vista Previa">}}
-Multisource Querying está en Vista Previa. Si te interesa esta función, rellena el formulario para solicitar acceso.
-{{< /callout >}}
-
 ## Información general
 
 Una vez que empieces a ingerir tus costes de [AWS][1], [Azure][2], [Google Cloud][3], [SaaS][4] o [Datadog ][5] en [Cloud Cost Management][6], podrás consultar los costes de todos los proveedores de forma flexible. Multisource Querying te permite consultar los costes de varios proveedores utilizando etiquetas (tags) de forma constante y estandarizada, en lugar de crear varias consultas para cada proveedor.
 
-Utiliza Multisource Querying para crear vistas de costes, comprender el coste total de propiedad del servicio y recibir alertas sobre cambios y tendencias de costes en la [página **Analytics**][6], en [dashboards][7], en [notebooks][8] y en [costes de monitores][9].
+Utiliza Multisource Querying para crear vistas de costes, comprender el coste total de propiedad del servicio y recibir alertas sobre cambios y tendencias de costes en la [página **Explorer**][6], en [dashboards][7], en [notebooks][8] y en [costes de monitores][9].
 
 ## Configuración
 
-Para utilizar Multisource Querying asegúrate de que cumple los siguientes requisitos:
-
-1. Has configurado [Cloud Cost Management][10] y estás ingiriendo costes activamente en Datadog.
-1. Tus datos de costes están expresados en una sola divisa. No se admiten varias divisas.
+Para utilizar Multisource Querying, asegúrate de haber configurado [Cloud Cost Management][10] y de estar ingiriendo costes de forma activa en Datadog. Se admiten varias divisas y los costes se convierten automáticamente a USD y se muestran en USD.
 
 ## Consultar datos de tus costes
 
-Puedes seleccionar varios proveedores en el campo **Proveedor** de la [página **Análytics**][6].
+Puedes seleccionar varios proveedores en el campo **Provider** (Proveedor) de la página [**Explorer**][6].
 
-{{< img src="cloud_cost/multisource_querying/provider.png" alt="Campo del proveedor debajo de la consulta de búsqueda en la página Cloud Cost Analytics" style="width:40%;" >}}
+{{< img src="cloud_cost/multisource_querying/provider.png" alt="El campo de Proveedor debajo de la consulta de búsqueda en la página de Cloud Cost Explorer" style="width:40%;" >}}
 
 Los filtros desplegables como **Proveedor** y **Equipo** mantienen la flexibilidad y agilizan el proceso de crear una consulta de búsqueda para que puedas refinar los datos de tus costes. Para añadir un filtro, haz clic en **+ Filter** (+ Filtro).
 
-{{< img src="cloud_cost/multisource_querying/filters_2.png" alt="Consulta de búsqueda que utiliza el filtro Equipo y agrupa informes por servicio en la página Cloud Cost Analytics" style="width:100%;" >}}
+{{< img src="cloud_cost/multisource_querying/filters_2.png" alt="Una consulta de búsqueda que utiliza el filtro Equipo y agrupa informes por servicio en la página Cloud Cost Explorer" style="width:100%;" >}}
 
 Haz clic en **Refine Results** (Refinar resultados) para acceder a las siguientes opciones y filtrar los datos de tus costes.
 
@@ -56,7 +52,7 @@ Cambio de dólar
 Cambio porcentual
 : Muestra sólo los cambios de costes dentro de un rango de cambio porcentual especificado.
 
-{{< img src="cloud_cost/multisource_querying/refine_results_1.png" alt="Opciones adicionales para refinar los datos de tus costes Cloud Cost Analytics" style="width:100%;" >}}
+{{< img src="cloud_cost/multisource_querying/refine_results_1.png" alt="Opciones adicionales para ajustar tus datos de costo en la página Cloud Cost Explorer" style="width:100%;" >}}
 
 ## Visualizar los datos de tus costes
 
@@ -100,6 +96,7 @@ Las siguientes etiquetas de FOCUS están disponibles en Cloud Cost Management:
 | `servicename` | Oferta que se puede adquirir a un proveedor (por ejemplo, máquina virtual en la nube, base de datos SaaS, servicios profesionales de un integrador de sistemas). |
 | `billingaccountid` | Identificador asignado a una cuenta de facturación por el proveedor. |
 | `billingaccountname` | Nombre para mostrar, asignado a una cuenta de facturación. |
+| `billingcurrency` | La divisa en la que se pagó una factura de nube. |
 | `subaccountid` | Identificador asignado a una agrupación de recursos o servicios, utilizado a menudo para gestionar el acceso o los costes. |
 | `subaccountname` | Nombre asignado a una agrupación de recursos o servicios, utilizado a menudo para gestionar el acceso o los costes. |
 | `regionname` | Nombre de una zona geográfica aislada en la que se suministra un recurso o se proporciona un servicio. |
@@ -110,16 +107,19 @@ La métrica `all.cost` tiene [costes de contenedor asignados][13] para costes de
 
 <div class="alert alert-warning">Si tu organización utiliza cualquiera de estas etiquetas de FOCUS, Datadog recomienda actualizar tu clave de etiquetas en la infraestructura subyacente para que los valores de las etiquetas no se superpongan a los valores de las etiquetas de FOCUS en Cloud Cost Management.</div>
 
+## Conversión de divisas
+Cloud Cost Management recupera la divisa de facturación de la factura de cada proveedor de nube. Cuando procesas costes de múltiples proveedores en diferentes divisas, los cargos por costes se convierten a USD. Esta conversión se realiza al tipo de cambio medio mensual, que se actualiza diariamente. Esto garantiza que Cloud Cost Management pueda representar de forma coherente y precisa todos los datos de costes, independientemente de su divisa original. Para ver tu coste en la divisa original de facturación, filtra a un único proveedor.
+
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/cloud_cost_management/aws
-[2]: /es/cloud_cost_management/azure
-[3]: /es/cloud_cost_management/google_cloud
-[4]: /es/cloud_cost_management/saas_costs
+[1]: /es/cloud_cost_management/setup/aws
+[2]: /es/cloud_cost_management/setup/azure
+[3]: /es/cloud_cost_management/setup/google_cloud
+[4]: /es/cloud_cost_management/setup/saas_costs
 [5]: /es/cloud_cost_management/datadog_costs
-[6]: https://app.datadoghq.com/cost/analytics
+[6]: https://app.datadoghq.com/cost/explorer
 [7]: /es/dashboards
 [8]: /es/notebooks
 [9]: /es/cloud_cost_management/monitors

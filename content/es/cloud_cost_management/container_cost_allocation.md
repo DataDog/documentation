@@ -95,12 +95,16 @@ La siguiente tabla presenta la lista de características recopiladas y las versi
 1. Instala el [**Datadog Agent**][102] en un entorno Kubernetes y asegúrate de habilitar el [**Orchestrator Explorer**][103] en tu configuración del Agent.
 1. Para habilitar la asignación de costes de contenedores GPU, instala la [integración Datadog DCGM][104].
 
+**Nota**: [GKE Autopilot][105] sólo se admite como una configuración sin agente de Kubernetes sujeta a [limitaciones](#agentless-kubernetes-costs).
+
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /es/containers/kubernetes/installation/?tab=operator
 [103]: /es/infrastructure/containers/orchestrator_explorer?tab=datadogoperator
 [104]: https://docs.datadoghq.com/es/integrations/dcgm/?tab=kubernetes#installation
+[105]: https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-overview
 
-{{% /tab %}}{{< /tabs >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Asignar costes
 
@@ -112,6 +116,12 @@ Utiliza la etiqueta (tag) `allocated_resource` para visualizar los recursos de l
 {{% tab "AWS" %}}
 
 Estos costes divididos se enriquecen con las etiquetas (tags) de nodos, pods, tareas y volúmenes. Puedes utilizar estas etiquetas (tags) para desglosar los costes por cualquier dimensión asociada.
+
+### Extracción de etiquetas (tags) Kubernetes
+
+Sólo las _etiquetas_ (tags) del recurso directo, como un pod, así como los nodos subyacentes, se añaden a las métricas de costes por defecto. Para incluir etiquetas (labels) como etiquetas (tags), anotaciones como etiquetas (tags) o etiquetas (tags) de recursos relacionados como espacios de nombres, consulta [Extracción de etiquetas (tags) Kubernetes][201].
+
+[201]: /es/containers/kubernetes/tag/
 
 ### Cálculo
 
@@ -161,6 +171,12 @@ Datadog sólo admite la asignación de costes de transferencia de datos utilizan
 {{% /tab %}}
 {{% tab "Azure" %}}
 
+### Extracción de etiquetas (tags) Kubernetes
+
+Sólo las _etiquetas_ (tags) del recurso directo, como un pod, así como los nodos subyacentes, se añaden a las métricas de costes por defecto. Para incluir etiquetas (labels) como etiquetas (tags), anotaciones como etiquetas (tags) o etiquetas (tags) de recursos relacionados como espacios de nombres, consulta [Extracción de etiquetas (tags) Kubernetes][201].
+
+[201]: /es/containers/kubernetes/tag/
+
 ### Cálculo
 
 Para la asignación de cálculo de Kubernetes, se conecta un nodo Kubernetes a sus costes de instancia de host asociados. El nombre de clúster del nodo y todas las etiquetas (tags) del nodo se añaden a todo el coste de cálculo del nodo. Esto permite asociar dimensiones de nivel de clúster al coste de la instancia, sin tener en cuenta los pods programados para el nodo.
@@ -177,6 +193,12 @@ Todos los demás costes reciben el mismo valor y las mismas etiquetas (tags) que
 {{% /tab %}}
 {{% tab "Google" %}}
 
+### Extracción de etiquetas Kubernetes
+
+Sólo las _etiquetas_ (tags) del recurso directo, como un pod, así como los nodos subyacentes, se añaden a las métricas de costes por defecto. Para incluir etiquetas (labels) como etiquetas (tags), anotaciones como etiquetas (tags) o etiquetas (tags) de recursos relacionados como espacios de nombres, consulta [Extracción de etiquetas (tags) Kubernetes][201].
+
+[201]: /es/containers/kubernetes/tag/
+
 ### Cálculo
 
 Para la asignación de cálculo de Kubernetes, se conecta un nodo Kubernetes a sus costes de instancia de host asociados. El nombre de clúster del nodo y todas las etiquetas (tags) del nodo se añaden a todo el coste de cálculo del nodo. Esto permite asociar dimensiones de nivel de clúster al coste de la instancia, sin tener en cuenta los pods programados para el nodo.
@@ -189,7 +211,7 @@ Todos los demás costes reciben el mismo valor y las mismas etiquetas (tags) que
 
 ### Costes Kubernetes Agentless
 
-Para ver los costes de clústeres GKE sin habilitar Datadog Infrastructure Monitoring, utiliza la [asignación de costes de GKE][103]. Habilita la asignación de costes de GKE en clústeres GKE no monitorizados para acceder a este conjunto de funciones.
+Para ver los costes de los clústeres GKE sin habilitar Datadog Infrastructure Monitoring, utiliza la [asignación de costes de GKE][103]. Habilita la asignación de costes de GKE en clústeres GKE no supervisados para acceder a este conjunto de funciones. Este enfoque conlleva una serie de limitaciones (consulta abajo).
 
 #### Limitaciones y diferencias del Datadog Agent
 
@@ -206,7 +228,8 @@ Para habilitar la asignación de costes de GKE, consulta la [documentación ofic
 [104]: https://cloud.google.com/kubernetes-engine/docs/how-to/cost-allocations#limitations
 [105]: https://cloud.google.com/kubernetes-engine/docs/how-to/cost-allocations#enable_breakdown
 
-{{% /tab %}}{{< /tabs >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Para entender los gastos
 
@@ -281,7 +304,8 @@ Los costes se asignan a los siguientes tipos de gastos:
 | Clúster inactivo | Coste de los recursos (como memoria, CPU y GPU) que no están reservados por las cargas de trabajo en un clúster. Es la diferencia entre el coste total de los recursos y lo que se asigna a las cargas de trabajo. |
 | No monitorizado | Coste de los recursos cuyo tipo de gasto se desconoce. Para resolverlo, instala el Datadog Agent en estos clústeres nodos. |
 
-{{% /tab %}}{{< /tabs >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Para entender los recursos
 
@@ -326,7 +350,8 @@ Cuando se cumplen los requisitos previos, aparecen automáticamente las siguient
 | ---                                | ----------- |
 | `gcp.cost.amortized.shared.resources.allocated` | Costes de Google Compute Engine asignados según la CPU y la memoria utilizadas por un pod, utilizando una división 60:40 para CPU y memoria respectivamente, y una división 95:3:2 para GPU, CPU y memoria respectivamente, si un pod utiliza una GPU. Este método de asignación se utiliza cunado la factura no proporciona una división específica entre el uso de CPU y de memoria. <br> *Basados en `gcp.cost.amortized`*. |
 
-{{% /tab %}}{{< /tabs >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 Estos costes de métricas incluyen todos tus costes de nube. Esto te permite seguir visualizando todos tus costes de nube de una sola vez.
 
@@ -433,7 +458,8 @@ Además de las etiquetas (tags) de pods Kubernetes y de nodos Kubernetes, se apl
 | `allocated_resource:gpu` | Seguimiento y asignación de costes a nivel de host asociados a los recursos de GPU utilizados por servicios o cargas de trabajo Google Cloud. |
 | `allocated_resource:local_storage` | Seguimiento y asignación de costes a nivel de host asociados a los recursos de almacenamiento local utilizados por servicios o cargas de trabajo Google Cloud. |
 
-{{% /tab %}}{{< /tabs >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Referencias adicionales
 

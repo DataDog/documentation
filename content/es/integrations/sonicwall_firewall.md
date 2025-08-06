@@ -213,7 +213,7 @@ La integración del cortafuegos SonicWall no incluye métricas.
 La integración del cortafuegos SonicWall no incluye eventos.
 
 ### Checks de servicios
-{{< get-service-checks-from-git "sonicwall_firewall" >}}
+{{< get-service-checks-from-git "sonicwall-firewall" >}}
 
 
 ## Solucionar problemas

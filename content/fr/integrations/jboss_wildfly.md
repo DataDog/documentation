@@ -156,7 +156,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "jboss_wildfly" >}}
+{{< get-metrics-from-git "jboss-wildfly" >}}
 
 
 ### Événements
@@ -164,7 +164,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 L'intégration JBoss/WildFly n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "jboss_wildfly" >}}
+{{< get-service-checks-from-git "jboss-wildfly" >}}
 
 
 ## Dépannage

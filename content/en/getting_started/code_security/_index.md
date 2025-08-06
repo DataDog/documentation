@@ -192,7 +192,7 @@ detected in this file.
 
 If no services or teams are found, Datadog uses the `CODEOWNERS` file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider.
 
-**Note**: You must accurately map your Git provider teams to your [Datadog teams][10] for this feature to function properly.
+**Note**: You must [accurately map][13] your Git provider teams to your [Datadog teams][10] for this feature to function properly.
 
 [1]: /security/code_security/software_composition_analysis/
 [2]: /security/code_security/dev_tool_int/github_pull_requests/
@@ -206,3 +206,4 @@ If no services or teams are found, Datadog uses the `CODEOWNERS` file in your re
 [10]: /account_management/teams/
 [11]: /security/code_security/static_analysis/setup/#customize-your-configuration
 [12]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
+[13]: /integrations/github/#connect-github-teams-to-datadog-teams

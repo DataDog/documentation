@@ -111,7 +111,7 @@ Amazon Data Firehose などのコンシューマーを構成してリアルタ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_cloudfront" >}}
+{{< get-metrics-from-git "amazon-cloudfront" >}}
 
 
 AWS から取得される各メトリクスには、`aws_account`、`region`、`distributionid` など、AWS コンソールに表示されるタグと同じタグが割り当てられます。

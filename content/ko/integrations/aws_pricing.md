@@ -22,9 +22,9 @@ author:
   support_email: tsein@brightcove.com
 categories:
 - aws
-- cloud
+- 클라우드
 - cost management
-custom_kind: integration
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/README.md
 display_on_public_website: true
@@ -39,9 +39,9 @@ name: aws_pricing
 public_title: AWS Pricing
 short_description: 요금 코드별로 서비스에 대한 AWS Pricing 정보를 수집합니다.
 supported_os:
-- 리눅스
+- linux
 - macos
-- windows
+- 윈도우즈(Windows)
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
@@ -49,8 +49,9 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::AWS
-  - "\b카테고리::클라우드"
+  - Category::Cloud
   - Category::Cost Management
+  - Offering::Integration
   configuration: README.md#Setup
   description: 요금 코드별로 서비스에 대한 AWS Pricing 정보를 수집합니다.
   media: []
@@ -74,7 +75,7 @@ AWS Pricing 검사는 [Datadog Agent][2] 패키지에 포함되어 있지 않으
 
 Agent v7.21+ / v6.21+의 경우 아래 지침에 따라 호스트에 AWS Pricing 검사를 설치하세요. Docker Agent 또는 이전 버전의 Agent와 함께 설치하려면 [커뮤니티 통합 사용][3]을 참조하세요.
 
-1. 다음 명령어를 실행해 Agent 통합을 설치하세요.
+1. 다음 명령어를 실행해 에이전트 통합을 설치하세요.
 
    ```shell
    datadog-agent integration install -t datadog-aws_pricing==<INTEGRATION_VERSION>
@@ -82,7 +83,7 @@ Agent v7.21+ / v6.21+의 경우 아래 지침에 따라 호스트에 AWS Pricing
 
 2. 통합을 코어 [통합][4]과 유사하게 설정하세요.
 
-### 구성
+### 설정
 
 1. AWS Pricing 데이터 수집을 시작하려면 Agent 구성 디렉터리 루트에 있는 `conf.d/` 폴더에서 `aws_pricing.d/conf.yaml` 파일을 편집합니다. 사용 가능한 모든 구성 옵션은 샘플 [aws_pricing.d/conf.yaml][5]을 참조하세요.
 
@@ -92,10 +93,10 @@ Agent v7.21+ / v6.21+의 경우 아래 지침에 따라 호스트에 AWS Pricing
 
 [Agent의 하위 명령을 실행][7]하고 Checks 섹션에서 `aws_pricing`을 찾으세요.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "aws_pricing" >}}
+{{< get-metrics-from-git "aws-pricing" >}}
 
 
 ### 이벤트
@@ -103,7 +104,7 @@ Agent v7.21+ / v6.21+의 경우 아래 지침에 따라 호스트에 AWS Pricing
 AWS Pricing은 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "aws_pricing" >}}
+{{< get-service-checks-from-git "aws-pricing" >}}
 
 
 ## 트러블슈팅

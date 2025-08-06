@@ -133,7 +133,7 @@ Una vez completado, navega hasta la [página Logs][6] para empezar a explorar tu
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_api_gateway" >}}
+{{< get-metrics-from-git "amazon-api-gateway" >}}
 
 
 

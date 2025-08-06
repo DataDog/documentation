@@ -96,7 +96,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Redis Sentinel
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "redis_sentinel" >}}
+{{< get-metrics-from-git "redis-sentinel" >}}
 
 
 ### イベント
@@ -104,7 +104,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Redis Sentinel
 Redis の Sentinel チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "redis_sentinel" >}}
+{{< get-service-checks-from-git "redis-sentinel" >}}
 
 
 ## トラブルシューティング

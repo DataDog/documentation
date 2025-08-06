@@ -13,19 +13,20 @@ This guide assumes that you have configured [Database Monitoring][1].
 
 
 Supported databases
-: Postgres, SQL Server
+: Postgres, MySQL, SQL Server
 
 
 Supported authentication types and Agent versions
 :
 
 
-| Authentication Type                      | Agent Version | Postgres  | SQL Server |
-|:-----------------------------------------|:--------------|:---------:|:----------:|
-| [IAM][2]                                 |               |           |            |
-|                                          | 7.46          | {{< X >}} |            |
-| [Microsoft Entra ID Managed Identity][9] |               |           |            |
-|                                          | 7.48          | {{< X >}} | {{< X >}}  |
+| Authentication Type                      | Agent Version | Postgres  | MySQL      | SQL Server |
+|:-----------------------------------------|:--------------|:---------:|:----------:|:----------:|
+| [IAM][2]                                 |               |           |            |            |
+|                                          | 7.46          | {{< X >}} |            |            |
+|                                          | 7.67          |           | {{< X >}}  |            |
+| [Microsoft Entra ID Managed Identity][9] |               |           |            |            |
+|                                          | 7.48          | {{< X >}} |            | {{< X >}} |
 
 
 
@@ -128,8 +129,10 @@ AWS also supports wildcards for specifying the resource, for example if you want
   ],
 ```
 
-3. Log in to your database instance as the root user, and grant the `rds_iam` [role][20] to the new user:
+3. Log in to your database instance as the root user, and create an IAM authenticated [role][20]:
 
+{{< tabs >}}
+{{% tab "Postgres" %}}
 
 ```tsql
 CREATE USER <YOUR_IAM_ROLE> WITH LOGIN;
@@ -142,11 +145,27 @@ For example, for the `datadog` user you would run:
 CREATE USER datadog WITH LOGIN;
 GRANT rds_iam TO datadog;
 ```
+{{% /tab %}}
+{{% tab "MySQL" %}}
+
+```tsql
+CREATE USER <YOUR_IAM_ROLE> IDENTIFIED WITH AWSAuthenticationPlugin AS 'RDS';
+ALTER USER <YOUR_IAM_ROLE>@'%' REQUIRE SSL;
+```
+
+For example, for the `datadog` user you would run:
+
+```tsql
+CREATE USER 'datadog' IDENTIFIED WITH AWSAuthenticationPlugin AS 'RDS';
+ALTER USER 'datadog'@'%' REQUIRE SSL;
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 
 **Note:** this has to be a new user created without a password, or IAM authentication will fail.
 
-4. Complete the Agent setup steps for your [RDS][6] or [Aurora][7] instance.
+4. Complete the Agent setup steps for your RDS ([Postgres][6], [MySQL][21]) or Aurora ([Postgres][7], [MySQL][22]) instance.
 
 ### Enable IAM authentication for the Agent host in the same AWS account as the RDS instance
 
@@ -243,8 +262,7 @@ Map the IAM role to the Kubernetes service account where the Agent is running. F
 {{< /tabs >}}
 
 
-2. Update your Postgres instance config with an `aws` block specifying the `region` of the RDS instance, and set `managed_authentication.enabled` to `true`:
-
+2. Update your Postgres or MySQL instance config with an `aws` block specifying the `region` of the RDS instance, and set `managed_authentication.enabled` to `true`:
 
 ```yaml
 instances:
@@ -425,7 +443,7 @@ $ eksctl create iamserviceaccount \
 {{% /tab %}}
 {{< /tabs >}}
 
-Update your Postgres instance config with an `aws` block as shown below:
+Update your Postgres or MySQL instance config with an `aws` block as shown below:
  - Specify the `region` of the RDS instance
  - Set `managed_authentication.enabled` to `true`
  - Specify the role ARN, replacing `<YOUR_AWS_ACCOUNT_FOR_DB>` with the AWS account ID where the RDS instance is located, and `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role created in step 1
@@ -601,15 +619,17 @@ instances:
 [6]: /database_monitoring/setup_postgres/rds/#grant-the-agent-access
 [7]: /database_monitoring/setup_postgres/aurora/#grant-the-agent-access
 [8]: /database_monitoring
-[9]: https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview
-[10]: https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types
-[11]: https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/how-manage-user-assigned-managed-identities?pivots=identity-mi-methods-azp#create-a-user-assigned-managed-identity
-[12]: https://learn.microsoft.com/en-us/azure/postgresql/single-server/how-to-configure-sign-in-azure-ad-authentication
-[13]: https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-configure-sign-in-azure-ad-authentication#authenticate-with-azure-ad
+[9]: https://learn.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview
+[10]: https://learn.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types
+[11]: https://learn.microsoft.com/azure/active-directory/managed-identities-azure-resources/how-manage-user-assigned-managed-identities?pivots=identity-mi-methods-azp#create-a-user-assigned-managed-identity
+[12]: https://learn.microsoft.com/azure/postgresql/single-server/how-to-configure-sign-in-azure-ad-authentication
+[13]: https://learn.microsoft.com/azure/postgresql/flexible-server/how-to-configure-sign-in-azure-ad-authentication#authenticate-with-azure-ad
 [14]: /database_monitoring/setup_postgres/azure/#grant-the-agent-access
-[15]: https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/whatis
-[16]: https://learn.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?view=azuresql&tabs=azure-powershell#provision-azure-ad-admin-sql-managed-instance
+[15]: https://learn.microsoft.com/azure/active-directory/fundamentals/whatis
+[16]: https://learn.microsoft.com/azure/azure-sql/database/authentication-aad-configure?view=azuresql&tabs=azure-powershell#provision-azure-ad-admin-sql-managed-instance
 [17]: /database_monitoring/setup_sql_server/azure/?tab=azuresqlmanagedinstance
-[18]: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
+[18]: https://learn.microsoft.com/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
 [19]: /database_monitoring/setup_sql_server/azure/?tab=azuresqldatabase
 [20]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL
+[21]: /database_monitoring/setup_mysql/rds/#grant-the-agent-access
+[22]: /database_monitoring/setup_mysql/aurora/#grant-the-agent-access

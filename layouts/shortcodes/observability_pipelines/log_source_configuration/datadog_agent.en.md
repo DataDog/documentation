@@ -10,7 +10,7 @@ observability_pipelines_worker:
 
 For CloudFormation installs, use the `LoadBalancerDNS` CloudFormation output for the URL.
 
-For Kubernetes installs, you can use the internal DNS record of the Observability Pipelines Worker service. For example: `opw-observability-pipelines-worker.default.svc.cluster.local`.
+For Kubernetes installs, you can use the internal DNS record of the Observability Pipelines Worker service. For example: `http://opw-observability-pipelines-worker.default.svc.cluster.local:<PORT>`.
 
 After you restart the Agent, your observability data should be going to the Worker, processed by the pipeline, and delivered to Datadog.
 

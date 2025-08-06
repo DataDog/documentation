@@ -243,7 +243,7 @@ Runner の Prometheus メトリクスエンドポイントおよびサービス�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "gitlab_runner" >}}
+{{< get-metrics-from-git "gitlab-runner" >}}
 
 
 ### ログ収集

@@ -166,6 +166,11 @@ nav_sections:
       icon: llm-observability
       link: llm_observability/
       title: Observabilidad de LLM
+    - desc: Unificar la telemetría, los metadatos y los flujos de trabajo para acelerar
+        la entrega
+      icon: internal-developer-portal-wui
+      link: internal_developer_portal
+      title: Portal interno para desarrolladores
 - nav_section:
   - name: Configuración
   - navtiles:
@@ -185,6 +190,11 @@ nav_sections:
       icon: dev-code
       link: developers/
       title: Desarrolladores
+    - desc: Conoce las prácticas recomendadas y empieza a monitorizar los entornos
+        de tus clientes.
+      icon: colab
+      link: partners/
+      title: Socios
 popular_searches:
 - link: api/
   title: documentación de API

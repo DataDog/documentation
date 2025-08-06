@@ -28,14 +28,11 @@ further_reading:
       tag: "Documentation"
       text: "Learn how to troubleshoot Test Optimization"
 cascade:
+    site_support_id: test_optimization
     algolia:
         rank: 70
         tags: ['ci test', 'ci tests', 'test optimization', 'test visibility', 'failed test', 'flaky test', 'supported features']
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
 
 ## Overview
 

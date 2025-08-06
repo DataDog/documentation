@@ -130,6 +130,10 @@ For the fastest introduction to navigating Datadog, try the [Quick Start course]
 {{< nextlink href="/getting_started/code_security" >}}<u>Code Security</u>: Analyze your first-party code and open source libraries in your applications from development to runtime.{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Try a Preview product or feature
+
+Datadog Product teams are frequently adding new features that might help you. You can try some of these out before they are generally available to see if they help you and to give us feedback to make them better. To see a complete list of active previews, get more information, and sign up to participate, go to [Datadog Product Preview Program][5].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -138,3 +142,4 @@ For the fastest introduction to navigating Datadog, try the [Quick Start course]
 [2]: /integrations/amazon_web_services/
 [3]: https://learn.datadoghq.com/collections/getting-started
 [4]: https://learn.datadoghq.com/courses/course-quickstart
+[5]: https://www.datadoghq.com/product-preview/

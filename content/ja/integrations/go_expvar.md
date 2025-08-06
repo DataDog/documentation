@@ -130,7 +130,7 @@ Go サービスで [expvar パッケージ][4]をまだ使用していない場�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "go_expvar" >}}
+{{< get-metrics-from-git "go-expvar" >}}
 
 
 ### イベント

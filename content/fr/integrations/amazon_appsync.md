@@ -57,7 +57,7 @@ Configurez Amazon AppSync de façon à ce que ses logs soient envoyés vers un c
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_appsync" >}}
+{{< get-metrics-from-git "amazon-appsync" >}}
 
 
 ### Événements

@@ -120,7 +120,7 @@ Controller を Datadog にデータをプッシュするように設定すると
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "loadrunner_professional" >}}
+{{< get-metrics-from-git "loadrunner-professional" >}}
 
 
 ### サービスチェック

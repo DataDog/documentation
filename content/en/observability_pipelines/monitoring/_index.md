@@ -68,6 +68,6 @@ To see available out-of-the-box monitors:
 
 [1]: https://app.datadoghq.com//observability-pipelines/
 [2]: /service_management/incident_management/
-[3]: /getting_started/dashboards/
+[3]: /monitors/types/metric/
 [4]: /notebooks/
 [5]: /observability_pipelines/monitoring/metrics/

@@ -90,7 +90,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 ## Real User Monitoring
 
 ### Analyse d'entonnoirs
-{{< get-metrics-from-git "unifi_console" >}}
+{{< get-metrics-from-git "unifi-console" >}}
 
 
 ### Aide
@@ -98,7 +98,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 L'intégration Unifi Console n'inclut aucun événement.
 
 ### Aide
-{{< get-service-checks-from-git "unifi_console" >}}
+{{< get-service-checks-from-git "unifi-console" >}}
 
 
 

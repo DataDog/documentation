@@ -91,7 +91,7 @@ Akamai DataStream 1.0 et 2.0 prennent en charge l'envoi de logs à Datadog via 
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "akamai_datastream" >}}
+{{ get-metrics-from-git "akamai-datastream-2" }}
 
 
 ### Événements

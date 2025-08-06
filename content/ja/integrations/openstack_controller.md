@@ -40,7 +40,7 @@ draft: false
 git_integration_title: openstack_controller
 integration_id: openstack-controller
 integration_title: OpenStack Controller
-integration_version: 8.0.0
+integration_version: 8.6.0
 is_public: true
 manifest_version: 2.0.0
 name: openstack_controller

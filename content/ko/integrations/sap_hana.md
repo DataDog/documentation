@@ -190,7 +190,7 @@ HANA 테넌트, 단일 테넌트 및 시스템 데이터베이스의 포트 번�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "sap_hana" >}}
+{{< get-metrics-from-git "sap-hana" >}}
 
 
 ### 이벤트
@@ -198,7 +198,7 @@ HANA 테넌트, 단일 테넌트 및 시스템 데이터베이스의 포트 번�
 SAP HANA에는 이벤트가 포함되어 있지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "sap_hana" >}}
+{{< get-service-checks-from-git "sap-hana" >}}
 
 
 ## 트러블슈팅

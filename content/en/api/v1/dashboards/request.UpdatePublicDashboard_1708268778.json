@@ -1,0 +1,18 @@
+{
+  "global_time": {
+    "live_span": "15m"
+  },
+  "share_list": [],
+  "share_type": "open",
+  "selectable_template_vars": [
+    {
+      "default_value": "*",
+      "name": "group_by_var",
+      "type": "group",
+      "visible_tags": [
+        "selectableValue1",
+        "selectableValue2"
+      ]
+    }
+  ]
+}

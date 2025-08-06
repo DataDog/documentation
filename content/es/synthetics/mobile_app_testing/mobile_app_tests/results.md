@@ -14,10 +14,6 @@ further_reading:
 title: Resultados de tests de aplicaciones móviles
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Este sitio no admite tests de aplicaciones móviles.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Haz clic en un test de aplicación móvil en la [página **Tests Synthetic**][11] para ver la página Detalles del test. Esta página contiene toda la información relativa al test, incluidas las propiedades del test, el historial de tests, las ejecuciones de ejemplo y las ejecuciones de tests.

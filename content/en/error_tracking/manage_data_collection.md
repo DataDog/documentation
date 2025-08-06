@@ -95,7 +95,7 @@ After the daily cap is reached, ingestion stops until the next day. You can modi
 To set a rate limit:
 1. Navigate to [**Error Tracking** > **Settings**][1].
 1. Click **Rate Limits**.
-1. Edit the **errors/month** field.
+1. Edit the **errors/day** field.
 1. Click **Save Rate Limit**.
 
 {{< img src="error_tracking/rate-limit.png" alt="On the left side of this page, under 'Set your Rate Limit below,' is a drop-down menu where you can set your rate limit." style="width:70%;">}}

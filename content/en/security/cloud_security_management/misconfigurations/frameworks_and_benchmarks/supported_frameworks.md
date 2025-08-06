@@ -69,7 +69,7 @@ Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compl
 [4]: https://www.cisecurity.org/benchmark/docker
 [5]: https://www.cisecurity.org/benchmark/kubernetes/
 [6]: https://www.pcisecuritystandards.org/document_library
-[7]: https://www.aicpa.org/interestareas/frc/assuranceadvisoryservices/aicpasoc2report.html
+[7]: https://www.aicpa-cima.com/topic/audit-assurance/audit-and-assurance-greater-than-soc-2
 [8]: https://www.iso.org/isoiec-27001-information-security.html
 [9]: https://www.hhs.gov/hipaa/index.html
 [10]: https://gdpr.eu/

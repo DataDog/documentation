@@ -41,4 +41,4 @@ To access the Logs setup pages, follow the links below based on your platform:
 [1]: /real_user_monitoring/
 [2]: /logs/guide/ease-troubleshooting-with-cross-product-correlation/#correlate-frontend-products
 [3]: /account_management/billing/rum/#how-do-you-view-logs-from-the-browser-collector-in-rum
-[4]: /real_user_monitoring/browser/setup/#initialization-parameters
+[4]: /logs/log_collection/javascript/#initialization-parameters

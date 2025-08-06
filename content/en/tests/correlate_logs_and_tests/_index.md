@@ -7,11 +7,6 @@ further_reading:
       text: 'Learn about Test Optimization'
 ---
 
-{{< site-region region="gov" >}}
-
-<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 You can correlate Test Optimization data with [logs injected into Datadog][1], which allows you to view and analyze logs for specific test cases.

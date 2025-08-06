@@ -11,7 +11,7 @@ categories:
 - 自動化
 - data stores
 - 開発ツール
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/eversql/README.md
 display_on_public_website: true
@@ -77,7 +77,7 @@ MySQL、PostgreSQL、AWS Aurora、Google Cloud SQL、Azure DB、Percona、MariaD
 
 ## セットアップ
 
-### 構成
+### 設定
 Datadog によって特定された遅い SQL クエリを高速化するには
 1. [Datadog データベースモニタリング][4]ダッシュボードに移動し、遅い SQL クエリテーブルを見つけます。
 2. 関連するデータベースのフィルターを追加し、Average Latency などの関連するパフォーマンスメトリクスでソートします。

@@ -27,7 +27,7 @@ draft: false
 git_integration_title: wmi_check
 integration_id: wmi
 integration_title: WMI Check (レガシー)
-integration_version: 1.18.0
+integration_version: 3.2.0
 is_public: true
 manifest_version: 2.0.0
 name: wmi_check

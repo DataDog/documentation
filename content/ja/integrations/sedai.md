@@ -24,10 +24,10 @@ author:
   support_email: praveen.prakash@sedai.io
 categories:
 - 自動化
-- cloud
+- クラウド
 - コスト管理
 - notifications
-- orchestration
+- オーケストレーション
 - プロビジョニング
 custom_kind: integration
 dependencies:
@@ -103,7 +103,7 @@ Sedai で、
 
    ![Datadog 通知の有効化][5]
 
-## 収集データ
+## 収集されるデータ
 
 このインテグレーションは、Datadog にイベントを送信します。
 

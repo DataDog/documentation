@@ -153,7 +153,7 @@ Le Firehose Nozzle de Datadog recueille uniquement les CounterEvents (en tant qu
 
 Les métriques disponibles peuvent varier en fonction de la version de PCF et du déploiement. Datadog recueille les métriques counter et gauge générées par l'[API Loggregator v2][19]. Consultez la section [Métriques du composant Cloud Foundry][20] (en anglais) pour obtenir la liste des métriques générées par défaut.
 
-{{< get-metrics-from-git "cloud_foundry">}}
+{{< get-metrics-from-git "cloud-foundry">}}
 
 ## Pour aller plus loin
 

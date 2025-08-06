@@ -100,7 +100,7 @@ Le check KyotoTycoon est inclus avec le package de l'[Agent Datadog][1] : vous 
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "kyototycoon" >}}
+{{< get-metrics-from-git "kyoto-tycoon" >}}
 
 
 ### Événements
@@ -108,7 +108,7 @@ Le check KyotoTycoon est inclus avec le package de l'[Agent Datadog][1] : vous 
 Le check Kyoto Tycoon n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "kyototycoon" >}}
+{{< get-service-checks-from-git "kyoto-tycoon" >}}
 
 
 ## Dépannage

@@ -19,13 +19,10 @@ products:
   - name: Cloud Security Identity Risks
     url: /security/cloud_security_management/identity_risks/
     icon: cloud-security-management
+site_support_id: workflows
 ---
 
 {{< product-availability >}}
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 [Datadog Workflow Automation][1] allows you to orchestrate and automate your end-to-end processes by building workflows made up of actions that connect to your infrastructure and tools.
 
@@ -155,11 +152,13 @@ To retrieve the finding and pass it into the workflow, use the **Get security fi
 
 ## Trigger a workflow
 
-You can trigger an existing workflow from the finding, misconfiguration, and resource side panels.
+You can trigger an existing workflow from the misconfiguration or identity risks explorers, as well as when you have a resource open in a side panel.
+- In an explorer, hover over the resource, click the **Actions** dropdown that appears, then click **Run workflow**.
+  {{< img src="security/cspm/run_workflow_explorer.png" alt="Running a workflow on a resource from the misconfigurations explorer" style="width:100%;" >}}
+- In the side panel, in the **Next Steps** section, **Run Workflow**, and select a workflow to run.
+  {{< img src="security/cspm/run_workflow_next_steps.png" alt="Running a workflow from the Next Steps section of a side panel" style="width:30%;" >}}
 
-In the side panel, click **Actions** > **Run Workflow**, and select a workflow to run. The workflow must have a security trigger to appear in the list. Depending on the workflow, you may be required to enter additional input parameters, such as incident details and severity, the name of the impacted S3 bucket, or the Slack channel you want to send an alert to.
-
-{{< img src="/security/csm/run_workflow_side_panel.png" alt="The Actions menu on the misconfigurations side panel showing a list of actions to run" width="100%">}}
+The workflow must have a security trigger to appear in the list of workflows you can run. Depending on the workflow, you may be required to enter additional input parameters, such as incident details and severity, the name of the impacted S3 bucket, or the Slack channel you want to send an alert to.
 
 After running the workflow, additional information is shown on the side panel. You can click the link to view the workflow.
 

@@ -36,7 +36,7 @@ Depending on your runtime, this feature requires the following tracer and layer 
 | Runtime | Minimum tracer version | Minimum layer version |
 | ------- | ---------------------- | --------------------- |
 | Python | 1.4.0 | 62 |
-| Node.js | 2.22.1, 3.9.0 | 87 |
+| Node.js | 2.22.1, 3.9.0 | 78 |
 
 ## Further Reading
 

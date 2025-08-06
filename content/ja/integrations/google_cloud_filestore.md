@@ -49,7 +49,7 @@ Google Cloud Filestore のログは Google Cloud Logging で収集され、Cloud
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_cloud_filestore" >}}
+{{< get-metrics-from-git "google-cloud-filestore" >}}
 
 
 ### イベント

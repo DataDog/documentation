@@ -10,7 +10,7 @@ title: Acceder a tu ticket de soporte
 Para crear un nuevo ticket de soporte, haz clic en el enlace correspondiente en el sitio y haz clic en **Submit a request** (Enviar una solicitud) para rellenar un formulario de ticket.
 
 {{< whatsnext desc="Support page by Datadog site:">}}
-    {{< nextlink href="https://help.datadoghq.com/" >}} US1, US3, US5, EU, AP1 {{< /nextlink >}}
+    {{< nextlink href="https://help.datadoghq.com/" >}} US1, US3, US5, EU, AP1, AP2 {{< /nextlink >}}
     {{< nextlink href="http://help.ddog-gov.com/" >}}US1-FED{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -34,7 +34,7 @@ Si ya has abierto al menos un ticket de soporte en Datadog, sigue este proceso p
 6. Si quieres ver todos los tickets de tu organización, envía una solicitud al equipo de asistencia de Datadog.
 
 {{< whatsnext desc="Support Page by Datadog Site:">}}
-    {{< nextlink href="https://help.datadoghq.com/" >}} US1, US3, US5, EU, AP1 {{< /nextlink >}}
+    {{< nextlink href="https://help.datadoghq.com/" >}} US1, US3, US5, EU, AP1, AP2 {{< /nextlink >}}
     {{< nextlink href="http://help.ddog-gov.com/" >}}US1-FED{{< /nextlink >}}
 {{< /whatsnext >}}
 

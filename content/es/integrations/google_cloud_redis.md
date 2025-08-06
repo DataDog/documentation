@@ -49,7 +49,7 @@ Una vez hecho esto, exporta tus logs de Google Cloud Memorystore para Redis de G
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "google_cloud_redis" >}}
+{{< get-metrics-from-git "google-cloud-redis" >}}
 
 
 ### Eventos

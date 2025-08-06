@@ -26,6 +26,17 @@
                                 {{ end }}
                             {{ end }}
                         {{ end }}
+                        {{ if eq (len ($s.Get "regions")) 0 }}
+                            <!-- we have no allowed domain matches, match exact full domains that might be specific to an endpoint -->
+                            {{ range $domain := $servers.variables.site.enum }}
+                                {{ $serverURL = replace $servers.url "{site}" $domain }}
+                                {{ range $allowedRegion := site.Params.allowedRegions }}
+                                    {{ if in $allowedRegion.exact_domains $domain }}
+                                        {{ $s.SetInMap "regions" $allowedRegion.value $serverURL }}
+                                    {{ end }}
+                                {{ end }}
+                            {{ end }}
+                        {{ end }}
                     {{ else }}
                         <!-- If not, we're in a case where we talk to the local agent endpoint, like for tracing -->
                         {{ $serverURL = replace $servers.url "{site}" $servers.variables.site.default }}

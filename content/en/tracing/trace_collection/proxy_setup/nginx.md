@@ -196,6 +196,11 @@ controller:
         # for the list of all versions supported.
         tag: "v1.10.0"
         distroless: false
+  extraEnvs:
+    - name: DD_AGENT_HOST
+      valueFrom:
+        fieldRef:
+          fieldPath: status.hostIP
 {{< /code-block >}}
 
 **3. Deploy**<br>

@@ -57,7 +57,7 @@ Configurez Amazon Elemental MediaConvert de façon à ce que ses logs soient env
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_mediaconvert" >}}
+{{< get-metrics-from-git "amazon-mediaconvert" >}}
 
 
 ### Événements

@@ -20,6 +20,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
       tag: "Blog"
       text: "Monitor your Linux web apps on Azure App Service with Datadog"
+    - link: "https://www.datadoghq.com/blog/datadog-csi-driver/"
+      tag: "Blog"
+      text: "Bring high-performance observability to secure Kubernetes environments with Datadog's CSI driver"
 ---
 
 The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][1] protocol and adds a few Datadog-specific extensions:
@@ -105,6 +108,10 @@ Origin detection is supported in Agent v6.10.0+, and allows DogStatsD to detect 
 The following tags are added for [Docker][3]. It is important to note that [cardinality][4] is a key concept when it comes to billing.
 
 Origin detection in non-Kubernetes environments is based on an extension of the DogStatsD protocol in [Datagram Format and Shell Usage][2]. To enable the feature in the Agent, set the `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT` environment variable to `true`.
+
+<div class="alert alert-warning">
+  By default, origin detection is enabled in all DogStatsD clients, but it is not enabled by default in the Datadog Agent. To disable origin detection in a client, see the documentation for the specific DogStatsD library you're using.
+</div>
 
 **Note**: Origin detection is not supported for Fargate environments.
 

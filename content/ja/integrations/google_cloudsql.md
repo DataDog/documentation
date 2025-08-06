@@ -71,7 +71,7 @@ Google Cloud SQL のログは Google Cloud Logging で収集され、Cloud Pub/S
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_cloudsql" >}}
+{{< get-metrics-from-git "google-cloudsql" >}}
 
 
 ### イベント

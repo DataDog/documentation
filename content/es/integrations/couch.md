@@ -186,7 +186,7 @@ La recopilación de logs se encuentra deshabilitada de manera predeterminada en 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "couch" >}}
+{{< get-metrics-from-git "couchdb" >}}
 
 
 ### Eventos
@@ -194,7 +194,7 @@ La recopilación de logs se encuentra deshabilitada de manera predeterminada en 
 El check de Couch no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "couch" >}}
+{{< get-service-checks-from-git "couchdb" >}}
 
 
 ## Solucionar problemas

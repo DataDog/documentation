@@ -18,9 +18,16 @@ El uso de Software Composition Analysis proporciona a las organizaciones los sig
 Datadog SCA utiliza una base de datos propia. La base de datos procede de Open Source Vulnerabilities (OSV), National Vulnerability Database (NVD), asesores de GitHub y otros asesores del ecosistema de lenguajes, así como de los hallazgos del propio equipo de investigación de seguridad de Datadog.
 
 ## Configurar Software Composition Analysis
-Se admiten los siguientes lenguajes y tecnologías:
+Se admiten los siguientes lenguajes:
+- Python
+- JavaScript
+- Java
+- C#
+- Go
+- Ruby
+- PHP
 
-{{< partial name="code_security/sca-getting-started.html" >}}
+También es posible [cargar un SBOM de terceros a Datadog][13].
 
 SCA admite la detección de dependencias tanto estática como en tiempo de ejecución:
 - Para la detección estática, puedes analizar a través de tus pipelines CI/CD o directamente a través de Datadog con análisis alojado (sólo GitHub). Ve a la [página de configuración de Code Security][4] o consulta la [configuración estática][1] para empezar.
@@ -85,3 +92,5 @@ El Explorador de vulnerabilidades ofrece recomendaciones para la corrección de 
 [10]: https://app.datadoghq.com/services?lens=Security
 [11]: https://app.datadoghq.com/security/appsec/vm/library
 [12]: https://app.datadoghq.com/ci/code-analysis
+[13]: /security/code_security/software_composition_analysis/setup_static/#upload-third-party-sbom-to-datadog
+

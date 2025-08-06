@@ -52,7 +52,7 @@ Una vez hecho esto, exporta tus logs del Balanceador de carga HTTP de Google Clo
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "google_cloud_loadbalancing" >}}
+{{< get-metrics-from-git "google-cloud-loadbalancing" >}}
 
 
 ### Eventos

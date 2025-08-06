@@ -109,7 +109,7 @@ Puedes instalar la integración MongoDB Atlas iniciando sesión en tu portal Atl
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "mongodb_atlas" >}}
+{{< get-metrics-from-git "mongodb-atlas" >}}
 
 
 ### Eventos

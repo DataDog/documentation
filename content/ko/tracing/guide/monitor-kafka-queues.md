@@ -1,15 +1,14 @@
 ---
 further_reading:
 - link: /tracing/trace_collection
-  tags: 설명서
+  tag: 설명서
   text: 트레이스 수집 설정
 - link: /integrations/kafka
-  tags: 설명서
+  tag: 설명서
   text: Kafka 통합
 - link: /data_streams/
-  tags: 설명서
+  tag: 설명서
   text: 데이터 스트림 모니터링
-
 title: Kafka 대기열 모니터링
 ---
 
@@ -27,7 +26,7 @@ title: Kafka 대기열 모니터링
 
 [Datadog 데이터 스트림 모니터링][3]은 팀이 시스템을 통과하는 이벤트에 대한 파이프라인 상태와 엔드투엔드 대기 시간을 측정할 수 있는 표준화된 방법을 제공합니다. 데이터 스트림 모니터링이 제공하는 심층적인 가시성을 통해 파이프라인에서 지연과 지체를 유발하는 생산자, 소비자 또는 대기열을 정확히 찾아낼 수 있습니다. 차단된 메시지, 핫 파티션, 오프라인 소비자 등 디버깅하기 어려운 파이프라인 문제도 발견할 수 있습니다. 또한 관련 인프라스트럭처 또는 앱 팀 간에 원활하게 협업할 수 있습니다.
 
-{{< img src="tracing/guide/monitor_kafka_queues/dash-2022-data-streams-compressed-blurb.mp4" alt="데이터 스트림 모니터링 데모" video="true">}}
+{{< img src="tracing/guide/monitor_kafka_queues/dash-2022-data-streams-compressed-blurb2.mp4" alt="데이터 스트림 모니터링 데모" video="true">}}
 
 ### 분산된 트레이스
 
@@ -73,42 +72,46 @@ Kafka 애플리케이션을 추적하기 위해 Datadog은 Kafka SDK 내에서 �
 | `messaging.kafka.tombstone`      | `string` |  메시지가 툼스톤인 경우 true인 부울.                                                              |
 | `messaging.kafka.client_id`      | `string` |  메시지를 처리하는 소비자 또는 생산자의 클라이언트 ID.                                               |
 
-## 특수한 사용 사례
+## 특수한 사용 사례
 
 {{< tabs >}}
 
 {{% tab "Java" %}}
 
-Datadog Kafka 통합은 Header API를 지원하는 Kafka 버전 0.11+에서 작동합니다. 이 API는 트레이스 컨텍스트를 삽입하고 추출하는 데 사용됩니다. 혼합 버전 환경을 실행하는 경우 Kafka 브로커가 최신 버전의 Kafka를 잘못 보고할 수 있습니다. 이로 인해 트레이서가 로컬 생산자가 지원하지 않는 헤더를 삽입하려고 하면 문제가 발생합니다. 또한 이전 소비자는 헤더가 있기 때문에 메시지를 사용할 수 없습니다. 이러한 문제를 방지하려면 0.11 이전 버전의 혼합 버전 Kafka 환경을 실행하는 경우 환경 변수 `DD_KAFKA_CLIENT_PROPAGATION_ENABLED=false`를 사용하여 컨텍스트 전파를 비활성화합니다.
+Kafka 설정은 [자바의 트레이서 설명서][7]를 참조하세요.
 
-{{< /tabs >}}
+[7]: /ko/tracing/trace_collection/compatibility/java/#networking-framework-compatibility
+
+{{% /tab %}}
 
 {{% tab ".NET" %}}
 
-[Kafka .NET 클라이언트 문서][1]에 따르면 일반적인 Kafka 소비자 애플리케이션은 Consume 메서드를 반복적으로 호출하여 레코드를 하나씩 검색하는 소비 루프가 중심이 됩니다. `Consume` 메서드는 시스템에서 메시지를 폴링합니다. 따라서 기본적으로 소비자 스팬은 메시지가 반환될 때 생성되고 다음 메시지를 소비하기 전에 닫힙니다. 그러면 스팬 기간은 한 메시지 소비와 다음 메시지 소비 사이의 계산을 나타냅니다.
+[Kafka .NET 클라이언트 설명서][9]에 따르면 일반적인 Kafka 소비자 애플리케이션은 Consume 메서드를 반복적으로 호출하여 레코드를 하나씩 검색하는 consume 루프가 중심이 됩니다. `Consume` 메서드는 시스템에서 메시지를 폴링합니다. 따라서 기본적으로 메시지가 반환될 때 Consumer 스팬이 생성되고 다음 메시지를 소비하기 전에 닫힙니다. 그러면 스팬 기간은 한 메시지 소비와 다음 메시지 소비 사이의 계산을 나타냅니다.
 
-다음 메시지를 소비하기 전에 메시지가 완전히 처리되지 않거나 여러 메시지가 동시에 소비되는 경우 소비 애플리케이션에서 `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED`를 `false`로 설정할 수 있습니다. 이 설정이 `false`면 소비자 스팬이 생성되고 즉시 닫힙니다. 추적할 하위 스팬이 있는 경우 [.NET 커스텀 계측에 대한 헤더 추출 및 삽입 문서][2]에 따라 추적 컨텍스트를 추출하세요.
+다음 메시지를 소비하기 전에 메시지가 완전히 처리되지 않았거나 한 번에 여러 개의 메시지를 소비하는 경우 소비하는 애플리케이션에서 `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED`을 `false`로 설정할 수 있습니다. 이 설정이 `false`인 경우 Consumer 스팬이 생성되고 즉시 닫힙니다. 하위 스팬이 트레이스인 경우 [.NET 사용자 지정 계측을 위한 헤더 추출 및 삽입 설명서][10]에 따라 트레이스 컨텍스트를 추출하세요.
 
-.NET 트레이서는 [v1.27.0][3]부터 Confluent.Kafka 추적을 허용합니다. 추적 컨텍스트 전파 API는 [v2.7.0][4]부터 사용할 수 있습니다.
+.NET 트레이서는 [v1.27.0][11]부터 Confluent.Kafka를 추적할 수 있습니다. 트레이스 컨텍스트 전파 API는 [v2.7.0][12]부터 사용할 수 있습니다.
 
-[1]: https://docs.confluent.io/kafka-clients/dotnet/current/overview.html#the-consume-loop
-[2]: /ko/tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
-[3]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.27.0
-[4]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.7.0
-{{< /tabs >}}
+[9]: https://docs.confluent.io/kafka-clients/dotnet/current/overview.html#the-consume-loop
+[10]: /ko/tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
+[11]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.27.0
+[12]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.7.0
+
+{{% /tab %}}
 
 {{% tab "Ruby" %}}
 
-Kafka 통합은 `ruby-kafka` gem 추적을 제공합니다. [Ruby의 트레이서 문서][1]를 따라 활성화하세요.
+Kafka 통합은 `ruby-kafka` gem의 추적을 제공합니다. 이를 활성화하려면 [Ruby의 트레이서 설명서][8]를 참조하세요.
 
-[1]: /ko/tracing/trace_collection/dd_libraries/ruby/#kafka
-{{< /tabs >}}
+[8]: /ko/tracing/trace_collection/dd_libraries/ruby/#kafka
+
+{{% /tab %}}
 
 {{< /tabs >}}
 
 ### Kafka 추적 비활성화
 
-애플리케이션에서 Kafka 추적을 비활성화하려면 `DD_TRACE_KAFKA_ENABLED`를 `false`로 설정합니다.
+애플리케이션에서 Kafka 추적을 비활성화하려면 적절한 [언어별 설정][6]을 구성하세요.
 
 ## 참고 자료
 
@@ -119,3 +122,4 @@ Kafka 통합은 `ruby-kafka` gem 추적을 제공합니다. [Ruby의 트레이�
 [3]: https://app.datadoghq.com/data-streams/onboarding
 [4]: /ko/tracing/trace_collection/compatibility/
 [5]: /ko/tracing/trace_collection/
+[6]: /ko/tracing/trace_collection/library_config/

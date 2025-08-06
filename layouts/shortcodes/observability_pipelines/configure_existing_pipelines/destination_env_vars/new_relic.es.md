@@ -1,0 +1,4 @@
+- ID de cuenta de New Relic:
+    - Almacenado en la variable de entorno: `DD_OP_DESTINATION_NEW_RELIC_ACCOUNT_ID`.
+- Licencia de New Relic:
+    - Almacenado en la variable de entorno: `DD_OP_DESTINATION_NEW_RELIC_LICENSE_KEY`.

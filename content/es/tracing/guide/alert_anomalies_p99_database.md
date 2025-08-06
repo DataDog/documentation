@@ -23,7 +23,7 @@ _3 minutos para completar_
 Datadog te permite configurar monitores para realizar un seguimiento del estado de los servicios con APM para que no tengas que monitorizarlos constantemente. En este ejemplo, utilizaremos un monitor de detección de anomalías. La [detección de anomalías][1] es una función algorítmica que permite identificar cuándo un métrica se comporta de forma diferente a como lo ha hecho en el pasado, teniendo en cuenta tendencias y patrones, estacionales, de día de la semana y de hora del día. Es ideal para métricas con fuertes tendencias y patrones recurrentes que son difíciles o imposibles de monitorizar con alertas basadas en umbrales.
 
 1. **Abre la [página New Monitor (Monitor nuevo)][2] y elige [APM][3]**.
-2. **Elige tu entorno** en Primary Tags (Etiquetas principales) y **Elige la base de datos a monitorizar** en Service (Servicio).
+2. **Elige tu entorno** en Primary Tags (Etiquetas (tags) principales) y **Elige la base de datos a monitorizar** en Service (Servicio).
 
     En [Resource (Recurso)][4], puedes elegir monitorizar consultas específicas que se ejecutan en la base de datos. Sin embargo, en este ejemplo, vamos a ver el rendimiento general, así que déjalo como `*`.
 
@@ -59,7 +59,7 @@ Datadog te permite configurar monitores para realizar un seguimiento del estado 
 
     Aquí puedes ver el estado actual de tu monitor, silenciarlo o profundizar en los detalles de una alerta activada.
 
-8. **Ve de nuevo al [Catálogo de servicios][8]** y desde allí encuentra el servicio para el que acabas de activar el monitor. **Haz clic en el Página de servicios** y allí **haz clic en la barra Monitor** debajo del encabezado.
+8. **Regresa al [Catálogo de software][8]** y allí busca el servicio en el que acabas de configurar el monitor, **haz click en el página de servicios** y allí **haz clic en la barra del monitor** debajo de la cabecera.
 
     Aquí deberías **ver el monitor nuevo** junto con cualquier otro monitor configurado para el servicio y monitores sugeridos que se recomienda configurar.
 
@@ -76,8 +76,8 @@ Datadog te permite configurar monitores para realizar un seguimiento del estado 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/monitors/types/anomaly/
-[2]: https://app.datadoghq.com/monitors#/create
-[3]: https://app.datadoghq.com/monitors#create/apm
+[2]: https://app.datadoghq.com/monitors/create
+[3]: https://app.datadoghq.com/monitors/create/apm
 [4]: /es/tracing/glossary/#resources
 [5]: /es/tracing/glossary/#services
 [6]: /es/monitors/types/anomaly/#faq

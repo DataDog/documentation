@@ -11,6 +11,12 @@ further_reading:
 - link: "/dashboards/widgets/pie_chart/"
   tag: "Documentation"
   text: "Pie Chart Widget"
+- link: "/dashboards/widgets/top_list/"
+  tag: "Documentation"
+  text: "Top List Widget"
+- link: "/dashboards/widgets/bar_chart/"
+  tag: "Documentation"
+  text: "Bar Chart Widget"
 ---
 
 The treemap widget allows you to display proportions of one or more datasets. This widget can display a single dataset with corresponding proportions, or multiple datasets with nested proportions.

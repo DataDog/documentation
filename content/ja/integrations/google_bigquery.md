@@ -54,7 +54,7 @@ Google BigQuery のログは Google Cloud Logging で収集され、Cloud Pub/Su
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_bigquery" >}}
+{{< get-metrics-from-git "google-cloud-bigquery" >}}
 
 
 ### イベント

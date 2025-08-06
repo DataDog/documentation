@@ -19,12 +19,6 @@ title: Swift テスト
 type: multi-code-lang
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-選択された Datadog サイト ({{< region-param key="dd_site_name" >}}) はサポートされていません。
-</div>
-{{< /site-region >}}
-
 ## 互換性
 
 対応言語:

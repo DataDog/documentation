@@ -7,29 +7,38 @@ aliases:
 cascade:
   algolia:
     rank: 70
+    tags:
+    - envoyer des métriques
+    - envoi de métriques
 title: Métriques
 ---
+
+{{< learning-center-callout header="Participez un webinar de formation" hide_image="true" btn_title="Inscription" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Metrics">}}
+  Explorez et inscrivez-vous aux sessions Foundation Enablement sur les métriques personnalisées. Découvrez comment ces métriques vous aident à suivre les KPI de vos applications, comme le nombre de visiteurs, la taille moyenne des paniers, la latence des requêtes ou la répartition des performances d'un algorithme personnalisé.
+{{< /learning-center-callout >}}
+
 Cette page présente le fonctionnement des métriques dans Datadog et leurs avantages. Elle abord les sujets suivants :
 
 {{< whatsnext desc="Envoyer des métriques à Datadog" >}}
-    {{< nextlink href="/metrics/custom_metrics">}}<u>Envoyer des métriques custom</u> : Qu'est-ce qu'une métrique custom et comment en envoyer{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/otel_metrics" >}}<u>Envoyer des métriques OpenTelemetry</u> : Configurer l'Agent Datadog ou le Collector OpenTelemetry{{< /nextlink >}}
-    {{< nextlink href="/metrics/types" >}}<u>Types de métriques</u> : Types de métriques pouvant être envoyées à Datadog{{< /nextlink >}}
-    {{< nextlink href="/metrics/distributions" >}}<u>Métriques de distribution</u> : En savoir plus sur les métriques de distribution et les centiles calculés à l'échelle globale{{< /nextlink >}}
-    {{< nextlink href="/metrics/units" >}}<u>Unités des métriques</u> : En savoir plus sur les unités pouvant être associées aux métriques{{< /nextlink >}}
+    {{< nextlink href="/metrics/custom_metrics">}}<u>Submit Custom Metrics</u> - Découvrez ce que sont les métriques personnalisées et comment les envoyer.{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/reference/otel_metrics" >}}<u>Send OpenTelemetry Metrics</u> - Configurez l'Agent Datadog ou le collecteur OpenTelemetry.{{< /nextlink >}}
+    {{< nextlink href="/metrics/types" >}}<u>Metrics Types</u> - Types de métriques pouvant être envoyées à Datadog.{{< /nextlink >}}
+    {{< nextlink href="/metrics/distributions" >}}<u>Distribution Metrics</u> - En savoir plus sur les métriques de distribution et les percentiles globaux précis.{{< /nextlink >}}
+    {{< nextlink href="/metrics/units" >}}<u>Metrics Units</u> - En savoir plus sur les unités associables aux métriques.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Visualiser et interroger vos métriques" >}}
-    {{< nextlink href="/metrics/explorer" >}}<u>Metrics Explorer</u> : Explorer l'ensemble de vos métriques et effectuer des analyses{{< /nextlink >}}
-    {{< nextlink href="/metrics/summary" >}}<u>Metrics Summary</u> : Analyser les métriques transmises à Datadog{{< /nextlink >}}
-    {{< nextlink href="/metrics/advanced-filtering" >}}<u>Filtres avancés</u> : Filtrer vos données pour restreindre le contexte des métriques renvoyées{{< /nextlink >}}
+{{< whatsnext desc="Visualisez et interrogez vos métriques" >}}
+    {{< nextlink href="/metrics/explorer" >}}<u>Metrics Explorer</u> - Explorez toutes vos métriques et effectuez des analyses.{{< /nextlink >}}
+    {{< nextlink href="/metrics/summary" >}}<u>Metrics Summary</u> - Comprenez les métriques actuellement collectées par Datadog.{{< /nextlink >}}
+    {{< nextlink href="/metrics/advanced-filtering" >}}<u>Advanced Filtering</u> - Filtrez vos données pour limiter les métriques renvoyées.{{< /nextlink >}}
+    {{< nextlink href="/metrics/nested_queries" >}}<u>Nested Queries</u> - Appliquez des couches supplémentaires d'agrégation pour débloquer des capacités de requête avancées.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Comprendre et gérer la quantité de métriques custom et les coûts associés" >}}
-    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without LimitsTM</u> : Comprendre comment contrôler le volume de métriques custom en configurant des tags et des agrégations avec Metrics without LimitsTM{{< /nextlink >}}
+{{< whatsnext desc="Comprenez et gérez les volumes et les coûts de vos métriques personnalisées" >}}
+    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without LimitsTM</u> - Découvrez comment contrôler les volumes de métriques personnalisées avec des configurations de tags grâce à Metrics without LimitsTM.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Présentation
+## Section Overview
 ### En quoi consistent les métriques ?
 
 Les métriques sont des valeurs numériques qui vous permettent de surveiller l'évolution de nombreux éléments de votre environnement (latence, taux d'erreur, inscriptions, etc.).
@@ -97,6 +106,8 @@ Référez-vous à la section [Types de métriques][16] pour obtenir des exemples
 
 Vous pouvez visualiser vos métriques et créer des graphiques dans Datadog depuis le [Metrics Explorer][3], les [dashboards][4] ou les [notebooks][5].
 
+**Astuce** : pour ouvrir la page Metrics Summary à partir de la recherche globale de Datadog, appuyez sur <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> et recherchez `metrics`.
+
 Voici un exemple de visualisation représentant une série temporelle :
 
 {{< img src="metrics/introduction/timeseries_example.png" alt="Un graphique de série temporelle avec une métrique de latence représentée par une ligne bleue avec plusieurs pics" >}}
@@ -136,7 +147,7 @@ Une fois votre métrique sélectionnée, vous pouvez filtrer votre requête à l
 
 #### Configurer une agrégation temporelle
 
-Choisissez ensuite la granularité de vos données à l'aide de l'option de cumul temporel. Pour cet exemple, un point de données a été appliqué toutes les heures (3 600 secondes). Vous pouvez également choisir le type d'agrégation des données pour chaque compartiment temporel. Par défaut, l'agrégation _avg_ est appliquée. Toutefois, il est également possible de choisir parmi les agrégations _sum_, _min_, _max_ et _count_. Pour appliquer l'agrégation max, il suffit d'indiquer `.rollup(max, 60)`. Vous pouvez également personnaliser la façon dont vos données de métriques sont cumulées et compartimentées à l'aide de requêtes alignées sur le calendrier via la fonction `.rollup()`. Consultez la section [Cumul de données à l'aide de requêtes alignées sur le calendrier][23] pour en savoir plus.
+Choisissez ensuite la granularité de vos données à l'aide de l'option de cumul temporel. Pour cet exemple, un point de données a été appliqué toutes les heures (3 600 secondes). Vous pouvez également choisir le type d'agrégation des données pour chaque compartiment temporel. Par défaut, l'agrégation _avg_ est appliquée. Toutefois, il est également possible de choisir parmi les agrégations _sum_, _min_, _max_ et _count_. Vous pouvez également personnaliser la façon dont les données de vos métriques sont agrégées et mises en lot avec des fonctions ou des modificateurs intégrés aux applications. Par exemple, si vous vouliez appliquer le maximum et et personnaliser la façon dont vos données de métriques sont cumulées et compartimentées à l'aide de requêtes alignées sur le calendrier, vous utiliseriez `.rollup(max, 60)`. Pour en savoir plus, consultez la documentation relative aux [fonctions][24], au [rollup][23], et aux [modificateurs intégrés aux applications][25]
 
 #### Configurer une agrégation spatiale
 
@@ -168,6 +179,10 @@ L'agrégation spatiale permet de diviser une métrique en plusieurs séries temp
 
 Vous pouvez choisir parmi quatre agrégations spatiales : _sum_, _min_, _max_ et _avg_. Pour notre exemple, imaginons que les hosts sont répartis en quatre régions : us-east-1, us-east-2, us-west-1 et us-west-2. Les hosts de chaque région doivent être combinés à l'aide d'une fonction d'agrégation. L'agrégation _max_ affichera la latence maximale des différents hosts de chaque région, tandis que l'agrégation _avg_ représentera la latence moyenne par région.
 
+#### Requêtes imbriquées
+Ajoutez des couches supplémentaires d'agrégation sur les résultats de requêtes existantes dans le temps et l'espace à l'aide des requêtes imbriquées dans l’interface ou via l'[API][27]. Pour plus d'informations, consultez la documentation relative aux [requêtes imbriquées][26].
+
+
 ### Afficher des informations en temps réel sur des métriques
 
 La [page Metrics Summary][20] affiche la liste de vos métriques transmises à Datadog pendant un intervalle précis, à savoir l'heure précédente, le jour précédent ou la semaine précédente. Les métriques peuvent être filtrées en fonction de leur nom ou d'un tag.
@@ -180,11 +195,11 @@ Consultez la [section Metrics Summary][22] pour en savoir plus.
 
 ## Pour aller plus loin
 
-{{< whatsnext desc="Pour approfondir vos connaissances sur les métriques, consultez les ressources suivantes :">}}
-    {{< nextlink href="/metrics/advanced-filtering" >}}<u>Filtrage avancé</u> : filtrez vos données afin de restreindre le contexte des métriques renvoyées.{{< /nextlink >}}
-    {{< nextlink href="/metrics/distributions" >}}<u>Métriques de distribution</u> : calculez les centiles globaux pour l'intégralité de votre ensemble de données.{{< /nextlink >}}
-    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> : découvrez comment contrôler vos volumes de métriques custom avec des configurations de tags et d'agrégations grâce à Metrics without Limits™.{{< /nextlink >}}
-    {{< nextlink href="https://dtdg.co/fe" >}}<u>Validation des bases</u> : participez à une session interactive pour tirer pleinement profit des métriques.{{< /nextlink >}}
+{{< whatsnext desc="Pour aller plus loin avec les métriques :">}}
+    {{< nextlink href="/metrics/advanced-filtering" >}}<u>Advanced Filtering</u> - Filtrez vos données pour limiter les métriques renvoyées.{{< /nextlink >}}
+    {{< nextlink href="/metrics/distributions" >}}<u>Distribution metrics</u> - Calculez des percentiles globaux sur l'ensemble de vos données.{{< /nextlink >}}
+    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without LimitsTM</u> - Découvrez comment contrôler les volumes de métriques personnalisées avec des configurations de tags grâce à Metrics without LimitsTM.{{< /nextlink >}}
+    {{< nextlink href="https://dtdg.co/fe" >}}<u>Foundation Enablement</u> - Participez à une session interactive pour exploiter pleinement le potentiel des métriques.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /fr/logs
@@ -210,3 +225,7 @@ Consultez la [section Metrics Summary][22] pour en savoir plus.
 [21]: /fr/account_management/plan_and_usage/usage_details/
 [22]: /fr/metrics/summary/
 [23]: /fr/dashboards/functions/rollup/#rollup-with-calendar-aligned-queries
+[24]: /fr/dashboards/functions/
+[25]: /fr/metrics/custom_metrics/type_modifiers/?tab=count#in-application-modifiers
+[26]: /fr/metrics/nested_queries
+[27]: https://docs.datadoghq.com/fr/api/latest/metrics/#query-timeseries-data-across-multiple-products

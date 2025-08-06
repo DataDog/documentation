@@ -11,11 +11,8 @@ further_reading:
 - link: '/real_user_monitoring/error_tracking/explorer'
   tag: 'Documentation'
   text: 'Visualize Error Tracking data in the Explorer'
+site_support_id: rum_roku
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">RUM and Error Tracking for Roku is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
 
 ## Overview
 

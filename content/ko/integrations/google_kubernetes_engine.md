@@ -72,7 +72,7 @@ Google Kubernetes Engine 로그는 Google Cloud Logging으로 수집하여 클�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_kubernetes_engine" >}}
+{{< get-metrics-from-git "google-kubernetes-engine" >}}
 
 
 ### 이벤트

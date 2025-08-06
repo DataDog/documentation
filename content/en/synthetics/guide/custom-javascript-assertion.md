@@ -18,6 +18,8 @@ further_reading:
 
 This guide describes how you can test a user interface (UI) using custom JavaScript in a [browser test][1]. JavaScript assertions support synchronous and asynchronous code.
 
+<div class="alert alert-info">JavaScript assertions are not supported in Windows private locations.</div>
+
 To create an assertion using custom JavaScript:
 
 1. Click **Assertion** and select **Test custom JavaScript assertion**.

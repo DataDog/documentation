@@ -39,7 +39,7 @@ Azure Service Bus からメトリクスを取得すると、以下のことが�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_service_bus" >}}
+{{< get-metrics-from-git "azure-service-bus" >}}
 
 
 ### イベント

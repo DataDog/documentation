@@ -130,7 +130,6 @@ For a Datadog agent installed with the Datadog Operator:
    -         value: "false"
        features:
          apm:
-           enabled: true
    -       errorTrackingStandalone:
    -         enabled: true
            instrumentation:

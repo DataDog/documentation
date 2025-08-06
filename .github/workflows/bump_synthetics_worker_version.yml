@@ -1,24 +1,30 @@
 on:
   schedule:
     # At 08:00 on every day-of-week from Monday through Friday.
-    - cron: '0 8 * * 1-5'
+    - cron: "0 8 * * 1-5"
   workflow_dispatch: # allows manual trigger
 
 jobs:
   synthetics-worker-version:
     permissions:
       contents: write # for git push
-      pull-requests: write # to create pull request
+      id-token: write # Needed to federate tokens.
     runs-on: ubuntu-latest
     name: Find latest synthetics-worker version
     steps:
+      - uses: DataDog/dd-octo-sts-action@acaa02eee7e3bb0839e4272dacb37b8f3b58ba80 # v1.0.3
+        id: octo-sts
+        with:
+          scope: DataDog/documentation
+          policy: self.bump-synthetics-worker-version.create-pr
+
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
 
       - uses: actions/setup-python@v5.1.0
         with:
-          python-version: '3.11'
+          python-version: "3.11"
       - run: pip install requests semver defusedxml
 
       - name: Find latest synthetic-worker version
@@ -45,7 +51,7 @@ jobs:
         name: Propose change with latest versions
         if: steps.write-synthetics-worker-version.outputs.new_version == 'true'
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{ steps.octo-sts.outputs.token }}
           result-encoding: string
           script: |
             await github.rest.pulls.create({
@@ -57,4 +63,3 @@ jobs:
               base: "master",
               maintainer_can_modify: true
             })
-

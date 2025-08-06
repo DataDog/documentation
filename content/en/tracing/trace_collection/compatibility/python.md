@@ -17,23 +17,22 @@ further_reading:
 
 The Python APM Client library follows a [versioning policy][1] that specifies the support level for the different versions of the library and Python runtime.
 
-Two Python APM Client library release branches are supported:
+The following Python APM Client library release branches are supported:
 
-| Release    | Support level        |
-|------------|----------------------|
-| `>=1.0,<2` | Maintenance          |
-| `>=2.0,<3` | General Availability |
+{{< partial name="trace_collection/python/supported_versions.html" >}}
+
+Support levels are defined by the following:
+
+| Support Level | Support Provided | Lifecycle Timeline |
+| :--- | :--- | :--- |
+| **General Availability (GA)** | <li>New features and enhancements</li><li>All bug and security fixes (on the latest minor release)</li><li>Critical fixes backported (to the 3 most recent minor releases)</li> | A major version is in GA for **12 months** following its initial `x.0.0` release. |
+| **Maintenance** | <li>Critical security and bug fixes only</li> | A major version enters Maintenance **12 months** after its initial release and remains for **6 months**. |
+| **End of Life (EOL)** | <li>No updates or support</li> | A major version becomes EOL **18 months** after its initial `x.0.0` release. |  
 
 The Python APM Client library supports the following Python runtimes:
 
-| OS      | CPU                   | Runtime | Runtime version | Supported ddtrace versions  |
-|---------|-----------------------|---------|-----------------|---------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                      |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                      |
-| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                      |
-| Linux   | x86-64, i686, AArch64 | CPython | 3.7+            | `>=2`                     |
-| MacOS   | Intel, Apple Silicon  | CPython | 3.7+            | `>=2`                     |
-| Windows | 64bit, 32bit          | CPython | 3.7+            | `>=2`                     |
+{{< partial name="trace_collection/python/supported_runtimes.html" >}}
+
 
 ## Integrations
 
@@ -119,7 +118,7 @@ The `ddtrace` library includes support for the following libraries:
 | [Kombu][56]       | >= 4.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#kombu       |
 | [Mako][57]        | >= 0.1.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
 | [Requests][58]    | >= 2.08           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
-| [structlog][64]   | >= 20.2.0         | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#structlog   | 
+| [structlog][64]   | >= 20.2.0         | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#structlog   |
 | [urllib3][59]     | >= 1.22           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#urllib3     |
 | [graphql-core][60]| >= 2.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#graphql |
 | [pytest][14]              | >= 3.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#pytest  |

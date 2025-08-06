@@ -84,7 +84,7 @@ Si aún no lo has hecho, configura primero la [integración de Amazon Web Servic
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_memorydb" >}}
+{{< get-metrics-from-git "amazon-memorydb" >}}
 
 
 ### Eventos

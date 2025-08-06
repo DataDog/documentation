@@ -75,7 +75,7 @@ Datadog Google 클라우드 플랫폼 통합을 사용하여 Google 클라우드
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_cloud_apis" >}}
+{{< get-metrics-from-git "google-cloud-apis" >}}
 
 
 ### 이벤트

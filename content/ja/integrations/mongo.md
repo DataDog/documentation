@@ -641,7 +641,7 @@ Agent コンテナで必要な環境変数
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "mongo" >}}
+{{< get-metrics-from-git "mongodb" >}}
 
 
 メトリクスの詳細については、[MongoDB 3.0 マニュアル][4]を参照してください。
@@ -675,7 +675,7 @@ Agent コンテナで必要な環境変数
 このチェックは、Mongo ノードでレプリケーション状態が変化するたびにイベントを送信します。
 
 ### サービスチェック
-{{< get-service-checks-from-git "mongo" >}}
+{{< get-service-checks-from-git "mongodb" >}}
 
 
 ## トラブルシューティング

@@ -14,10 +14,6 @@ further_reading:
 Quality Gates is in Preview.
 {{< /callout >}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 A query filter is composed of terms and operators.

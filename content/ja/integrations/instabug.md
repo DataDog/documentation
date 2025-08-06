@@ -11,7 +11,7 @@ author:
 categories:
 - アラート設定
 - 問題追跡
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/instabug/README.md
 display_on_public_website: true
@@ -103,7 +103,7 @@ Instabug インテグレーションには、サービスのチェック機能�
 
 お役に立つドキュメント、リンクや記事:
 
-- [Leverage user context to debug mobile performance issues with the Instabug Datadog Marketplace offering][6]
+- [Instabug の Datadog Marketplace オファリングでユーザーコンテキストを活用し、モバイルのパフォーマンス問題をデバッグする][6]
 
 [1]: http://instabug.com
 [2]: https://dashboard.instabug.com/signup

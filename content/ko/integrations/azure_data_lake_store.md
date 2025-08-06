@@ -39,7 +39,7 @@ Datadog Azure 통합을 사용해 Data Lake Store 메트릭을 수집할 수 있
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_data_lake_store" >}}
+{{ get-metrics-from-git "azure-datalakestore" }}
 
 
 **참고**: 이 통합에서는 Data Lake Storage Gen 1 메트릭만 수집합니다. Data Lake Storage Gen 2는 Azure Blob Storage에서 구축되었기 때문에 Datadog의 Blob Storage 네임스페이스 `azure.storage_storageaccounts_blobservices.*` 아래에서 메트릭을 찾을 수 있습니다. 자세한 내용은 [Azure Data Lake Storage Gen 2][3] 설명서를 참고하세요.

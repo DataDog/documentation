@@ -68,9 +68,6 @@ Les 5 000 premières métriques custom sont automatiquement proposées lors de 
 
 ## Données collectées
 
-### Métriques
-{{< get-metrics-from-git "new_relic" >}}
-
 
 ### Événements
 

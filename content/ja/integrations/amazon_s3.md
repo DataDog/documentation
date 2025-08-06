@@ -115,7 +115,7 @@ AWS Services のログを収集する方法については、[Datadog Lambda 関
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_s3" >}}
+{{< get-metrics-from-git "amazon-s3" >}}
 
 
 ### イベント

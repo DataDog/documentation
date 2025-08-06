@@ -41,7 +41,7 @@ Datadog Azure インテグレーションを使用して、Cosmos DB からメ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_cosmosdb" >}}
+{{< get-metrics-from-git "azure-cosmosdb" >}}
 
 
 ### イベント

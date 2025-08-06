@@ -108,7 +108,7 @@ Atlas 포털에 로그인하여 MongoDB Atlas 통합을 설치할 수 있습니�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "mongodb_atlas" >}}
+{{< get-metrics-from-git "mongodb-atlas" >}}
 
 
 ### 이벤트

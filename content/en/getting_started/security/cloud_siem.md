@@ -107,8 +107,12 @@ After the index is moved to the first index position, review the settings and st
 
 ## Phase 4: Customization
 
-1. Set up [suppression rules][23] to reduce noise. 
+1. Set up [suppression rules][23] to reduce noise.
 2. Create [custom detection rules][24]. Review [Best Practices for Creating Detection Rules][25].
+
+## Disable Cloud SIEM
+
+Contact [support][26] to disable Cloud SIEM.
 
 ## Further Reading
 
@@ -139,3 +143,4 @@ After the index is moved to the first index position, review the settings and st
 [23]: /security/cloud_siem/detection_rules/?tab=threshold#advanced-options
 [24]: /security/cloud_siem/detection_rules/
 [25]: https://www.datadoghq.com/blog/writing-datadog-security-detection-rules/
+[26]: /help/

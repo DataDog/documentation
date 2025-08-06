@@ -54,35 +54,35 @@ Pour en savoir plus, consultez la documentation relative à l'intégration [Kube
 
 ### DNS Kubernetes
 
-{{< get-metrics-from-git "kube_dns" >}}
+{{< get-metrics-from-git "kube-dns" >}}
 
 ### Proxy Kubernetes
 
-{{< get-metrics-from-git "kube_proxy" >}}
+{{< get-metrics-from-git "kube-proxy" >}}
 
 ### Serveur d'API kubernetes
 
 Pour en savoir plus, consultez la documentation relative à l'intégration du [serveur d'API Kubernetes][3].
 
-{{< get-metrics-from-git "kube_apiserver_metrics" >}}
+{{< get-metrics-from-git "kube-apiserver-metrics" >}}
 
 ### Kubernetes Controller Manager
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes Controller Manager][2].
 
-{{< get-metrics-from-git "kube_controller_manager" >}}
+{{< get-metrics-from-git "kube-controller-manager" >}}
 
 ### Kubernetes Metrics Server
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes Metrics Server][4].
 
-{{< get-metrics-from-git "kube_metrics_server" >}}
+{{< get-metrics-from-git "kubernetes_state_core" >}}
 
 ### Kubernetes Scheduler
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes Scheduler][5].
 
-{{< get-metrics-from-git "kube_scheduler" >}}
+{{< get-metrics-from-git "kube-scheduler" >}}
 
 
 ## Événements
@@ -126,19 +126,19 @@ Pour en savoir plus, consultez la documentation relative à l'intégration [Kube
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes Controller Manager][2].
 
-{{< get-service-checks-from-git "kube_controller_manager" >}}
+{{< get-service-checks-from-git "kube-controller-manager" >}}
 
 ### Kubernetes Metrics Server
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes Metrics Server][4].
 
-{{< get-service-checks-from-git "kube_metrics_server" >}}
+{{< get-service-checks-from-git "kubernetes_state_core" >}}
 
 ### Kubernetes Scheduler
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes Scheduler][5].
 
-{{< get-service-checks-from-git "kube_scheduler" >}}
+{{< get-service-checks-from-git "kube-scheduler" >}}
 
 ### Kubernetes State Metrics Core
 

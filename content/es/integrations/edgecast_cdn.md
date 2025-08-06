@@ -79,7 +79,7 @@ Edgecast es una plataforma de red global que proporciona una red de distribució
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "edgecast_cdn" >}}
+{{< get-metrics-from-git "edgecast-cdn" >}}
 
 
 ### Eventos

@@ -49,7 +49,7 @@ Si aún no lo has hecho, configura primero la [integración de Microsoft Azure][
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_arc" >}}
+{{< get-metrics-from-git "azure-arc" >}}
 
 
 ### Eventos

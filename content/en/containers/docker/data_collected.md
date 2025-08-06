@@ -10,7 +10,7 @@ aliases:
 
 Metrics collected by the Agent when deployed in a Docker container:
 
-{{< get-metrics-from-git "docker_daemon" >}}
+{{< get-metrics-from-git "docker" >}}
 
 ### Events
 

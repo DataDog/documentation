@@ -33,7 +33,7 @@ title: 関連するログがトレース ID パネルに表示されない
 
 `host`、`container_id`、または `pod_name` オプションの **Log** セクションが空の場合、[Log エクスプローラー][2]に移動し、以下の条件を確認します。
 
-1. トレースを発行したホスト/コンテナ/ポッドからログが送信されている。
+1. ログは、トレースを発行したホスト / コンテナ / Pod から送信されています。
 2. トレースの時間枠内にそのホストのログがある。
 3. ログのタイムスタンプが正しく設定されている。詳しくは、[ログに期待したタイムスタンプが表示されない][3]をご覧ください。
 
@@ -51,7 +51,7 @@ title: 関連するログがトレース ID パネルに表示されない
 
    このプロセスが期待通りに動作しない場合、トレース ID を含むログ属性の名前が `dd.trace_id` であることを確認し、その属性が[予約属性][4]の Trace ID セクションに正しく設定されていることを検証してください。
 
-   {{< img src="tracing/troubleshooting/trace_id_reserved_attribute_mapping.png" alt="Trace Id セクションがハイライトされた JSON ログの前処理ページ" >}}
+{{< img src="tracing/troubleshooting/trace_id_reserved_attribute_mapping.png" alt="Trace Id セクションがハイライトされた JSON ログの前処理ページ" >}}
 
 [1]: /ja/tracing/glossary/#trace
 [2]: /ja/tracing/glossary/#spans
@@ -64,7 +64,7 @@ title: 関連するログがトレース ID パネルに表示されない
 
 この例では、Java インテグレーションパイプラインを紹介します。
 
-   {{< img src="tracing/troubleshooting/tracing_java_traceid_remapping.png" alt="Trace Id リマッパーがハイライトされた Java ログパイプライン" style="width:90%;">}}
+{{< img src="tracing/troubleshooting/tracing_java_traceid_remapping.png" alt="Trace Id リマッパーがハイライトされた Java ログ パイプライン" style="width:90%;">}}
 
 ログのフォーマットがインテグレーションパイプラインによって認識されていない可能性があります。この場合、パイプラインを複製し、[パーストラブルシューティングガイド][2]に従って、パイプラインがログ形式を受け入れることを確認します。
 
@@ -89,7 +89,7 @@ title: 関連するログがトレース ID パネルに表示されない
 
 ID が正しく挿入され、ログにリマップされると、トレースパネルでトレースと相関のあるログを見ることができます。
 
-{{< img src="tracing/troubleshooting/trace_id_injection.png" alt="関連するログを含むログセクションを表示するトレースページ" style="width:90%;">}}
+{{< img src="tracing/troubleshooting/trace_id_injection.png" alt="相関ログを含むログ セクションを表示するトレース ページ" style="width:90%;">}}
 
 **注**: ログまたは UI のログ属性には、トレース ID およびスパン ID は表示されません。
 

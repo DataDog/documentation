@@ -289,7 +289,7 @@ ActiveMQ XML チェックは [Datadog Agent][3] パッケージに含まれて�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "activemq_xml" >}}
+{{< get-metrics-from-git "activemq-xml" >}}
 
 
 ### イベント

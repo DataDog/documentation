@@ -23,6 +23,8 @@ further_reading:
 
 To retrieve a log list longer than the maximum 1000 logs limit returned by the [Logs API][1], you must use the Pagination feature.
 
+You can retrieve logs from your Datadog site by sending a POST request to the appropriate API endpoint. Make sure to replace `<DATADOG_SITE>` in the URL with your actual Datadog site domain (`{{< region-param key="dd_site" >}}`).
+
 {{< tabs >}}
 
 {{% tab "V1 API" %}}
@@ -30,7 +32,7 @@ To retrieve a log list longer than the maximum 1000 logs limit returned by the [
 Start by creating a query to retrieve your logs for a given context, for example, for a given query in a set timeframe:
 
 ```bash
-curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
+curl -X POST "https://api.<DATADOG_SITE>/api/v1/logs-queries/list" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: ${DD_CLIENT_API_KEY}" \
 -H "DD-APPLICATION-KEY: ${DD_CLIENT_APP_KEY}" \
@@ -63,7 +65,7 @@ The `logs` parameter is an array of Log objects and at maximum it contains as ma
 To retrieve the next page of logs, re-send your query, but this time with the `startAt` parameter that takes the `nextLogId` value from the previous call:
 
 ```bash
-curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
+curl -X POST "https://api.<DATADOG_SITE>/api/v1/logs-queries/list" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: ${DD_CLIENT_API_KEY}" \
 -H "DD-APPLICATION-KEY: ${DD_CLIENT_APP_KEY}" \
@@ -100,20 +102,20 @@ To see every page of your logs, continue to resend your query where the `startAt
 Start by creating a query to retrieve your logs for a given context, for example, for a given query in a set timeframe:
 
 ```bash
-curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
+curl -X POST "https://api.<DATADOG_SITE>/api/v2/logs/events/search" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: ${DD_CLIENT_API_KEY}" \
 -H "DD-APPLICATION-KEY: ${DD_CLIENT_APP_KEY}" \
 -d '{
-      "filter": 
+      "filter":
               {
                 "from": "2019-08-06T00:00:00Z",
                 "to": "2019-08-07T00:00:00Z",
                 "query": "@datacenter:us @role:db"
                },
-      "page":  
+      "page":
               {
-                  "limit":50   
+                  "limit":50
         }
 }'
 ```
@@ -138,26 +140,26 @@ Example result:
   }
 }
 ```
-The `data` parameter is an array of Log objects and at maximum it contains as many logs as defined with the `limit` parameter in your query. This parameter equals `50` by default, but can be set up to `1000`. 
+The `data` parameter is an array of Log objects and at maximum it contains as many logs as defined with the `limit` parameter in your query. This parameter equals `50` by default, but can be set up to `1000`.
 
 To see next page of your logs, continue to resend your query but include the `cursor` parameter where it takes the `after` value from the previous call. When you see `data` returns `null`, you have returned all pages of logs associated with your query.
 
 ```bash
-curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
+curl -X POST https://api.<DATADOG_SITE>/api/v2/logs/events/search \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: ${DD_CLIENT_API_KEY}" \
 -H "DD-APPLICATION-KEY: ${DD_CLIENT_APP_KEY}" \
 -d '{
-      "filter": 
+      "filter":
               {
                 "from": "2019-08-06T00:00:00Z",
                 "to": "2019-08-07T00:00:00Z",
                 "query": "@datacenter:us @role:db"
                },
-      "page":  
+      "page":
               {
                   "cursor": "eyJhZnRlciI6IkFRQUFBWE4tV0ZVbzZFRGRnZ0FBQUFCQldFNHRWMFpwVG1jelgwRTJURjlaVjBGQlFRIn0",
-                  "limit": 50   
+                  "limit": 50
         }
 }'
 ```

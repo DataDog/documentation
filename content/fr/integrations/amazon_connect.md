@@ -57,7 +57,7 @@ Configurez Amazon Connect de façon à ce que ses logs soient envoyés vers un c
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_connect" >}}
+{{< get-metrics-from-git "amazon-connect" >}}
 
 
 ### Événements

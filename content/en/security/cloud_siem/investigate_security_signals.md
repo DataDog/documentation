@@ -83,14 +83,37 @@ Use bulk actions to triage multiple signals. To use bulk actions, first search a
 ### Run Workflow Automation
 
 Use Workflow Automation to carry out actions to help you investigate and remediate a signal. These actions can include:
-- Blocking an IP address from your environment.
-- Disabling a user account.
-- Looking up an IP address with a third-party threat intelligence provider.
-- Sending Slack messages to your colleagues to get help with your investigation.
+- Block an IP address from your environment.
+- Disable a user account.
+- Look up an IP address with a third-party threat intelligence provider.
+- Send Slack messages to your colleagues to get help with your investigation.
 
-To run a workflow from the signal side panel, select **Run Workflows** in the **Next Steps** section. In the workflow browser, search and select a workflow to run. Click the **Workflows** tab in the signal side panel to see which workflows were triggered for the signal.
+Click the **Workflows** tab in the signal side panel to see which workflows were triggered for the signal and suggested Workflows to run. If you want to run a suggested Workflow, click **Run Workflow**. See [How suggested Workflows are selected](#how-suggested-workflows-are-selected) for more information. If the workflow requires additional input variables, a dialog box appears and prompts you to enter any required values before proceeding.
+
+If you don't see the Workflow you want to run in the list, click **Search and Run Workflow**. In the workflow browser, search and select a workflow to run.
+
+Alternatively, you can also select **Run Workflows** in the **Next Steps** section to search for and run a Workflow.
 
 To trigger a workflow automatically for any security signal, see [Trigger a Workflow from a Security Signal][8] and [Automate Security Workflows with Workflow Automation][9] for more information.
+
+#### How suggested Workflows are selected
+
+To streamline incident response and reduce friction during triage, Cloud SIEM suggests Workflows that are relevant to the signal. The suggested Workflows are selected based on which ones have the highest tag similarity with the signal. Cloud SIEM uses the following information to suggest Workflows for a signal:
+
+- **Tags automatically added from Blueprints, which are preconfigured flows**<br>
+Workflows are a set of actions that are relevant to the platform, such as AWS CloudTrail. Workflows created from a Blueprint automatically have tags applied based on the source. For example, a workflow action such as "Shutdown virtual machine on AWS" has the `source` tag AWS CloudTrail.
+- **Tags you added manually**<br>
+You can customize which workflows are prioritized by manually adding tags to both Blueprint-derived and custom workflows.To ensure correct contextual matching, these tags should match those found on the signal, the logs that generated the alert, or the detection rule itself.
+- **Tagging strategy**<br>
+To ensure a workflow appears for a given signal, the workflow must include tags similar to those of the signal. A common signal tag is the signal's source or service. For example, signals from AWS resources are typically tagged with `source:cloudtrail`. By tagging a workflow with `source:cloudtrail`, the workflow is associated with signals related to AWS activity.<br>
+If you want a Workflow to be suggested for a specific detection rule, tag the Workflow with that detection rule ID (for example, `ruleId:abc-123-xyz`).
+
+When a signal is created:
+
+- **Signals and workflows are matched using tags**<br>
+When a security signal is created, Cloud SIEM checks the signal's tags, and matches them against tags defined in your existing workflows.
+- **Relevant suggestions are made**<br>
+A **Suggested Workflows** section appears in the side panel. It shows the top three workflows based on tags that match closest to the tags on the signal. This ensures that suggested actions are context-aware and operationally relevant.
 
 ## Investigate
 

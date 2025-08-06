@@ -8,13 +8,10 @@ further_reading:
 - link: logs/explorer
   tag: Documentation
   text: Learn how to explore your logs
+site_support_id: roku_log_collection
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Roku Log collection is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
-
-{{< site-region region="us,us3,us5,eu,ap1" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 <div class="alert alert-info">Roku Log collection is in Preview.</div>
 {{< /site-region >}}
 
@@ -132,6 +129,27 @@ Send logs to Datadog from your Roku channel with [Datadog's `dd-sdk-roku` loggin
            clientToken: "<CLIENT_TOKEN>",
            applicationId: "<APPLICATION_ID>"
            site: "ap1",
+           env: "<ENV_NAME>",
+           sessionSampleRate: 100, ' the percentage (integer) of sessions to track
+          launchArgs: args
+       })
+
+       ' complete your channel setup here
+   end sub
+   ```
+   {{< /site-region >}}
+
+   {{< site-region region="ap2" >}}
+   ```brightscript
+   sub RunUserInterface(args as dynamic)
+       screen = CreateObject("roSGScreen")
+       scene = screen.CreateScene("MyScene")
+       screen.show()
+
+       datadogroku_initialize({
+           clientToken: "<CLIENT_TOKEN>",
+           applicationId: "<APPLICATION_ID>"
+           site: "ap2",
            env: "<ENV_NAME>",
            sessionSampleRate: 100, ' the percentage (integer) of sessions to track
           launchArgs: args

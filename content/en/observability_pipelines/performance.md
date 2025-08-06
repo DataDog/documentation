@@ -24,7 +24,7 @@ Sometimes problems can occur even when you try to ensure your Observability Pipe
 
 ## Backpressure
 
-Backpressure is a signal that events cannot be processed as soon as they are received, and that signal is propagated up through the pipeline. For example, if a processor is sending events to a sink, and the sink cannot process it as fast as it is receiving the events, backpressure is propagated from the sink to the processor and all the way back to the source.
+Backpressure is a signal that events cannot be processed as soon as they are received, and that signal is propagated up through the pipeline. For example, if a processor is sending events to a destination, and the destination cannot process it as fast as it is receiving the events, backpressure is propagated from the destination to the processor and all the way back to the source.
 
 Backpressure determines if the system should slow down the consumption or acceptance of events because it is too busy to handle more work. In some cases though, the system should not immediately propagate backpressure, because this could lead to the constant slowing down of upstream components, and potentially cause issues outside of Observability Pipelines. For example, the system prevents processes from slowing down when a component barely exceeds the saturation threshold. It can also handle temporary slowdowns and outages with external services that receive data from destinations.
 

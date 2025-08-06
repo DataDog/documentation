@@ -21,8 +21,8 @@ author:
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- アラート設定
-custom_kind: integration
+- アラート
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/botprise/README.md
 display_on_public_website: true
