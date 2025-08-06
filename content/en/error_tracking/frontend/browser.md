@@ -19,13 +19,14 @@ further_reading:
 
 [Error Tracking][4] processes errors collected from the browser by the Browser SDK. Whenever a [source][1], [custom][2], [report][3], or [console][3] error containing a stack trace is collected, Error Tracking processes and groups it under an issue, or group of similar errors.
 
+## Prerequisites
+
+Download the latest version of the [Browser SDK][7].
+
 ## Setup
 
-To set up Error Tracking, you need to:
-
-- Download the latest version of the [Browser SDK][7].
 - Set up the Browser SDK by following the [in-app setup instructions][5] or the [Browser SDK setup documentation][6] below.
-- Configure your application's `version`, `env`, and `service` when [initializing the SDK][8].
+
 - [Upload your JavaScript source maps][9] to access unminified stack traces.
 
 ### Step 1 - Set up the Browser SDK
@@ -78,7 +79,7 @@ The `trackUserInteractions` parameter enables the automatic collection of user c
 
 {{% /collapse-content %}} 
 
-{{% collapse-content title="CDN async" level="h4" expanded=true id="cdn-async" %}}
+{{% collapse-content title="CDN async" level="h4" expanded=false id="cdn-async" %}}
 
 Add the generated code snippet to the head tag of every HTML page you want to monitor in your application. For **{{<region-param key="dd_site_name">}}** site:
 
@@ -107,7 +108,7 @@ The `trackUserInteractions` parameter enables the automatic collection of user c
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="CDN sync" level="h4" expanded=true id="cdn-sync" %}}
+{{% collapse-content title="CDN sync" level="h4" expanded=false id="cdn-sync" %}}
 
 Add the generated code snippet to the head tag (in front of any other script tags) of every HTML page you want to monitor in your application. Including the script tag higher and synchronized ensures Datadog RUM can collect all performance data and errors. For **{{<region-param key="dd_site_name">}}** site:
 
@@ -133,7 +134,7 @@ The `trackUserInteractions` parameter enables the automatic collection of user c
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="TypeScript" level="h4" expanded=true id="typescript" %}}
+{{% collapse-content title="TypeScript" level="h4" expanded=false id="typescript" %}}
 
 Types are compatible with TypeScript >= 3.8.2. To initialize the SDK, use the following code snippet.
 
@@ -156,7 +157,11 @@ window.DD_RUM.init({
 
 ### Step 3 - Configure the application
 
-{{% collapse-content title="Initialization parameters" level="h4" expanded=true id="initialization-parameters" %}}
+#### Initialize the SDK
+
+Initialize the SDK with the below parameters. Configure your application's `version`, `env`, and `service` values to help organize and filter your error data.
+
+{{% collapse-content title="Initialization parameters" level="h4" expanded=false id="initialization-parameters" %}}
 
 Call the initialization command to start tracking. The following parameters are available:
 
@@ -179,17 +184,17 @@ A [Datadog client token][1].
 `service`
 : Optional<br/>
 **Type**: String<br/>
-The service name for your application. Follows the [tag syntax requirements][3].
+The service name for your application. This helps organize your data by application component. Examples: `frontend`, `web-app`, `checkout-service`. Follows the [tag syntax requirements][3].
 
 `env`
 : Optional<br/>
 **Type**: String<br/>
-The application's environment, for example: prod, pre-prod, and staging. Follows the [tag syntax requirements][4].
+The application's environment. This helps separate data from different deployment environments. Examples: `prod`, `staging`, `dev`, `pre-prod`. Follows the [tag syntax requirements][4].
 
 `version`
 : Optional<br/>
 **Type**: String<br/>
-The application's version, for example: 1.2.3, 6c44da20, and 2020.02.13. Follows the [tag syntax requirements][4].
+The application's version. This helps track errors across different releases. Examples: `1.2.3`, `6c44da20`, `2020.02.13`. Follows the [tag syntax requirements][4].
 
 `trackingConsent`
 : Optional<br/>
@@ -236,7 +241,7 @@ Specify your own attribute to be used to [name actions][10].
 : Optional<br/>
 **Type**: Number<br/>
 **Default**: `100`<br/>
-The percentage of sessions to track: `100` for all, `0` for none. Only tracked sessions send RUM events. For more details about `sessionSampleRate`, see the [sampling configuration][7].
+The percentage of sessions to track: `100` for all, `0` for none. Only tracked sessions send RUM events. For more details about `sessionSampleRate`, see the [sampling configuration][8].
 
 `silentMultipleInit`
 : Optional<br/>
@@ -316,6 +321,7 @@ Use `sessionPersistence` instead.
 [5]: /real_user_monitoring/browser/advanced_configuration/#user-tracking-consent
 [6]: /real_user_monitoring/browser/advanced_configuration/#override-default-rum-view-names
 [7]: /real_user_monitoring/browser/tracking_user_actions/
+[8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#sampling
 [8]: /real_user_monitoring/guide/proxy-rum-data/
 [9]: /real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
 [10]: /integrations/content_security_policy_logs/?tab=firefox#use-csp-with-real-user-monitoring-and-session-replay
@@ -323,16 +329,26 @@ Use `sessionPersistence` instead.
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
 [13]: /real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk/
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
-{{% collapse-content title="Tagging" level="h4" expanded=true id="tagging" %}}
+#### Tagging
+
+Tags are key-value pairs that help you organize and filter your error data in Datadog. They allow you to group errors by different criteria like environment, service, or version.
+
+Tags help you:
+- Filter errors by environment (prod vs staging)
+- Group errors by service or application component
+- Track errors across different versions of your application
+- Create more targeted alerts and dashboards
+
+Key tags for error tracking:
+- `service`: Identifies which part of your application the error came from
+- `env`: Distinguishes between different deployment environments (prod, staging, dev)
+- `version`: Tracks which version of your application had the error
 
 A service is an independent, deployable code repository that maps to a set of pages.
-
 - If your browser application was constructed as a monolith, your Datadog application has one service name for the application.
 - If your browser application was constructed as separate repositories for multiple pages, edit the default service names throughout the lifecycle of your application.
-
-{{% /collapse-content %}}
 
 ## Link errors with your source code
 
@@ -367,7 +383,7 @@ You can monitor unhandled exceptions, unhandled promise rejections, handled exce
 [5]: https://app.datadoghq.com/error-tracking/settings/setup/client
 [6]: /real_user_monitoring/browser/setup/client?tab=errortracking
 [7]: https://www.npmjs.com/package/@datadog/browser-rum
-[8]: /real_user_monitoring/browser/setup/#initialization-parameters
+
 [9]: /real_user_monitoring/guide/upload-javascript-source-maps
 [10]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#sourcemaps-command
 [11]: https://github.com
