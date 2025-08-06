@@ -326,6 +326,19 @@ If you need more granular control, grant these minimal permissions to the follow
 | Query                            | [CAN VIEW][23]
 | SQL warehouse                    | [CAN MONITOR][24]
 
+Additionally, for visibility into your Databricks costs in Data Jobs Monitoring or [Cloud Cost Management][18], the [Databricks SQL Warehouse][19] used by Datadog to query [system tables][20] requires the following permissions:
+   - The Service Principal must have `CAN USE` permission on the SQL Warehouse.
+   - The Service Principal must have read access to the [system tables][20] within Unity Catalog. This can be granted with:
+   ```sql
+   GRANT USE CATALOG ON CATALOG system TO <service_principal>;
+   GRANT SELECT ON CATALOG system TO <service_principal>;
+   GRANT USE SCHEMA ON CATALOG system TO <service_principal>;
+   ```
+   The user granting these must have `MANAGE` privilege on `CATALOG system`.
+      
+[18]: https://docs.datadoghq.com/cloud_cost_management
+[19]: https://docs.databricks.com/aws/en/compute/sql-warehouse/
+[20]: https://docs.databricks.com/aws/en/admin/system-tables/
 
 ### Tag spans at runtime
 
