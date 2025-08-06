@@ -1,6 +1,24 @@
 ---
-aliases:
-- /fr/integrations/azure_containerinstances
+app_id: azure-containerinstances
+app_uuid: 88867a91-04d4-41d3-8ced-36cd87c2a887
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.containerinstance_containergroups.cpu_usage
+      metadata_path: metadata.csv
+      prefix: azure.containerinstance_containergroups
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 283
+    source_type_name: Instances de conteneurs Azure
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - azure
 - cloud
@@ -8,23 +26,35 @@ categories:
 - provisioning
 custom_kind: integration
 dependencies: []
-description: Surveillez des métriques clés d'Azure Container Instances.
-doc_link: https://docs.datadoghq.com/integrations/azure_container_instances/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_container_instances
-has_logo: true
 integration_id: azure-containerinstances
-integration_title: Microsoft Azure Container Instances
+integration_title: Instances de conteneurs Azure
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_container_instances
-public_title: Intégration Datadog/Microsoft Azure Container Instances
+public_title: Instances de conteneurs Azure
 short_description: Surveillez des métriques clés d'Azure Container Instances.
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Azure
+  - Category::Cloud
+  - Category::Containers
+  - Category::Provisioning
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Surveillez des métriques clés d'Azure Container Instances.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Instances de conteneurs Azure
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## Section Overview
 
 Azure Container Instances est un service qui permet aux développeurs de déployer des conteneurs sans avoir à provisionner ou gérer l'infrastructure sous-jacente.
@@ -40,7 +70,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft�
 ## Données collectées
 
 ### Métriques
-{{ get-metrics-from-git "azure-containerinstances" }}
+{{< get-metrics-from-git "azure_container_instances" >}}
 
 
 ### Événements

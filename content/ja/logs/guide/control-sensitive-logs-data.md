@@ -17,6 +17,10 @@ further_reading:
 title: 機密ログデータの管理
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/role-based-sensitive-data-unmasking-in-logs" btn_hidden="false" >}}
+ログのロールベースの機密データマスキング解除機能はプレビュー版です。登録するには <b>Request Access</b> をクリックしてください。
+{{< /callout >}}
+
 ## 概要
 
 ログには機密データが含まれている可能性があるため、ログの処理方法には特に注意する必要があります。機密データを Datadog に取り込んでいる場合、次のことを検討してください。
