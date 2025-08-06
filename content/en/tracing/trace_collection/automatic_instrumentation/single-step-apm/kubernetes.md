@@ -48,11 +48,20 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 
 Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data.
 
-### Recommended: Configure USTs with automatic label extraction
+### Recommended: Configure USTs via label extraction
 
 With SSI, you can automatically extract UST values from pod labels and metadata without modifying individual deployments. Simply configure `kubernetesResourcesLabelsAsTags` to map your existing Kubernetes labels to Datadog service tags.
 
+**Prerequisites:**
+
+| Component | Minimum Version  |
+|-----------|------------------|
+| datadog-agent | 7.68+        |
+| datadog-operator | 1.16.0+   |
+| datadog-helm-chart | 3.120.0+|
+
 #### Basic automatic configuration
+**Note**: Replace `app.kubernetes.io/name` with any label that contains your service name (e.g., `service.kubernetes.io/name`, `component`). You can configure multiple labels this way.
 
 ```yaml
 datadog:
@@ -60,13 +69,10 @@ datadog:
   kubernetesResourcesLabelsAsTags:
     pods:
       app.kubernetes.io/name: service     # Modern Kubernetes label
-      app: service                        # Legacy label for older deployments
     deployments.apps:
       app.kubernetes.io/name: service
-      app: service
     replicasets.apps:
       app.kubernetes.io/name: service
-      app: service
 
   # Set environment globally for the entire cluster
   tags:
@@ -83,14 +89,6 @@ With this configuration, Datadog automatically sets the service name based on th
 
 For granular control over specific services as part of [workload targeting](#advanced-options), use `ddTraceConfigs` to explicitly map labels to service configurations:
 
-**Prerequisites for ddTraceConfigs:**
-
-| Component | Minimum Version | Notes |
-|-----------|-----------------|-------|
-| datadog-agent | 7.66+ | Required for valueFrom support |
-| datadog-operator | 1.16.0+ | 1.13.0+ works with agent version override |
-| datadog-helm-chart | 3.120.0+ | Added valueFrom support |
-
 ```yaml
 datadog:
   kubernetesResourcesLabelsAsTags:
@@ -99,6 +97,7 @@ datadog:
     deployments.apps:
       app.kubernetes.io/name: service
 
+  # Set environment globally for the entire cluster
   tags:
     - "env:production"
 
@@ -115,8 +114,7 @@ datadog:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.labels['app.kubernetes.io/name']
-            - name: DD_ENV
-              value: "frontend-prod"
+            # DD_ENV inherited from cluster-level tags above
             # DD_VERSION automatically extracted from image tags
 ```
 
