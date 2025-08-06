@@ -43,11 +43,11 @@ Contact [support][2] if you do not want users to be able to add template variabl
 
 In the **Describe your playbook** section for [log detection rules][3] and [signal correlation rules][4], you can add group-by values in the notification title. For example, if you are grouping by `service`, the service name shows in the title. Uncheck **Include triggering group-by values in notification title** to opt out of adding triggering group-by values to the title.
 
-Contact [support][2] If you do not want the option to include triggering group-by values in the notification title.
+Contact [support][2] If you do not want to have the triggering group-by values option available.
 
 ## Security rules can use webhooks
 
-<div class="alert alert-warning">If you are a <a href = "https://docs.datadoghq.com/data_security/hipaa_compliance/">HIPAA-enabled organization</a>, webhooks for security rules is disabled.</a></div>
+<div class="alert alert-warning">If your organization had HIPAA enabled in 2024 or earlier, you may have to reach out to <a href = "https://docs.datadoghq.com/help/">Datadog support</a> to enable webhooks for security rules.</a></div>
 
 Security notifications can be sent to [integrations][5], such as Jira, PagerDuty, and [webhooks][6]. Contact [support][2] if you do not want users to be able to send notifications to a third-party service using webhooks.
 
