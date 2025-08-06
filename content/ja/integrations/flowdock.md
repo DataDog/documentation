@@ -1,27 +1,15 @@
 ---
+app_id: flowdock
 categories:
-- collaboration
+- コラボレーション
 - notifications
-custom_kind: integration
-dependencies: []
-description: Datadog のアラートとグラフをチームのフローに送信。
-doc_link: https://docs.datadoghq.com/integrations/flowdock/
-draft: false
-git_integration_title: flowdock
-has_logo: true
-integration_id: ''
-integration_title: Flowdock
-integration_version: ''
-is_public: true
-manifest_version: '1.0'
-name: flowdock
-public_title: Datadog-Flowdock インテグレーション
-short_description: Datadog のアラートとグラフをチームのフローに送信。
-version: '1.0'
+custom_kind: インテグレーション
+description: FlowDock is hosted group chat and IM supporting message aggregation for
+  companies and teams.
+media: []
+title: FlowDock
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-{{< img src="integrations/flowdock/flowdock_overview.png" alt="Flowdock 概要" popup="true">}}
+{{< img src="integrations/flowdock/flowdock_overview.png" alt="Flowdock の概要" popup="true">}}
 
 ## 概要
 
@@ -50,12 +38,10 @@ Flowdock インテグレーションには、メトリクスは含まれませ�
 
 Flowdock インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービス チェック
 
 Flowdock インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
-
-[1]: https://docs.datadoghq.com/ja/help/
+お問合せは、[Datadog サポート](https://docs.datadoghq.com/help/) まで。

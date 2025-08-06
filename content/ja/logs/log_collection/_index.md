@@ -5,34 +5,34 @@ algolia:
   - grok パーサー
   - ログのパース
   - 属性の抽出
-  - 属性のリマッピング
+  - 属性の再マッピング
   - パース
 aliases:
 - /ja/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
 - /ja/logs/languages
 - /ja/integrations/windows_event_log/
-description: 環境を設定して、ホスト、コンテナ、およびサービスからログを収集します。
+description: ホスト、コンテナ、サービスからログを収集できるように環境を構成します。
 further_reading:
 - link: https://www.datadoghq.com/blog/log-file-control-with-logrotate/
   tag: ブログ
-  text: Logrotate を使ったログファイルの管理方法
+  text: Logrotate を使用してログ ファイルを管理する方法
 - link: /agent/logs/advanced_log_collection
-  tag: Documentation
-  text: 高度なログ収集の構成
+  tag: ドキュメント
+  text: 高度なログ コレクション設定
 - link: /logs/log_configuration/processors
-  tag: Documentation
+  tag: ドキュメント
   text: ログの処理方法について
 - link: /logs/log_configuration/parsing
-  tag: Documentation
+  tag: ドキュメント
   text: パースの詳細
 - link: /logs/live_tail/
-  tag: Documentation
+  tag: ドキュメント
   text: Datadog Live Tail 機能
 - link: /logs/explorer/
-  tag: Documentation
+  tag: ドキュメント
   text: ログの調査方法
 - link: /logs/logging_without_limits/
-  tag: Documentation
+  tag: ドキュメント
   text: Logging Without Limits*
 title: ログの収集とインテグレーション
 ---
@@ -221,13 +221,27 @@ Datadog では、SSL で暗号化された接続と暗号化されていない�
 
 {{< /site-region >}}
 
+{{< site-region region="ap2" >}}
+
+| サイト | タイプ  | エンドポイント                                                                  | ポート | 説明                                                                                                              |
+|------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
+| AP2  | HTTPS | `http-intake.logs.ap2.datadoghq.com`                                      | 443  | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Logs HTTP API のドキュメント][1]参照。 |
+| AP2  | HTTPS | `lambda-http-intake.logs.ap2.datadoghq.com`                               | 443  | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                         |
+| AP2  | HTTPS | `agent-http-intake.logs.ap2.datadoghq.com`                                | 443  | HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[ホスト Agent ログ収集のドキュメント][2]参照。          |
+| AP2  | HTTPS | {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}        | 443  | Browser SDK が HTTPS で JSON 形式のログを送信するために使用します。                                                          |
+
+[1]: /ja/api/latest/logs/#send-logs
+[2]: /ja/agent/logs/#send-logs-over-https
+
+{{< /site-region >}}
+
 {{< site-region region="gov" >}}
 
-| サイト    | タイプ  | エンドポイント                                                                  | ポート | 説明                                                                                                              |
+| サイト    | タイプ  | エンドポイント                                                                  | ポート | 説明                                                                                                               |
 |---------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
 | US1-FED | HTTPS | `http-intake.logs.ddog-gov.com`                                          | 443  | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Logs HTTP API のドキュメント][1]参照。 |
-| US1-FED | HTTPS | `lambda-http-intake.logs.ddog-gov.datadoghq.com`                          | 443  | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                         |
-| US1-FED | HTTPS | `agent-http-intake.logs.ddog-gov.datadoghq.com`                           | 443  | HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[ホスト Agent ログ収集のドキュメント][2]参照。          |
+| US1-FED | HTTPS | `lambda-http-intake.logs.ddog-gov.com`                                   | 443  | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                         |
+| US1-FED | HTTPS | `agent-http-intake.logs.ddog-gov.com`                                    | 443  | HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[ホスト Agent ログ収集のドキュメント][2]参照。          |
 | US1-FED | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Browser SDK が HTTPS で JSON 形式のログを送信するために使用します。                                                          |
 
 [1]: /ja/api/latest/logs/#send-logs
@@ -314,7 +328,7 @@ TCP エンドポイントは、このサイトでは推奨していません。�
 [1]: /ja/help
 {{< /site-region >}}
 
-{{< site-region region="gov,us5,ap1" >}}
+{{< site-region region="gov,us5,ap1,ap2" >}}
 
 このサイトでは、TCP エンドポイントはサポートされていません。
 
@@ -334,6 +348,10 @@ TCP エンドポイントは、このサイトでは推奨していません。�
 * JSON 形式に変換されたログイベントが保持できる属性は 256 未満です。これらの各属性のキーは 50 文字未満、連続するネストのレベルは 20 未満、 それぞれの値は (ファセットに昇格した場合) 1024 文字未満となります。
 * ログイベントは、過去 18 時間までの[タイムスタンプ][14]で送信可能です。
 
+<div class="alert alert-info">
+<b>プレビュー利用可能</b>: 現在の 18 時間の制限ではなく、過去 7 日分のログを送信できます。<a href="https://www.datadoghq.com/product-preview/ingest-logs-up-to-7-days-old/">プレビューに登録</a>。
+</div>
+
 上の制限に準拠しないログイベントは、システムによって変換されるか、切り詰められます。または、所定のタイムレンジ外の場合はインデックス化されません。ただし、Datadog はユーザーデータを可能な限り維持するよう全力を尽くします。
 
 インデックス化されたログにのみ適用されるフィールドの追加の切り捨てがあります。message フィールドの値は 75 KiB に、非 message フィールドは 25 KiB に切り捨てられます。Datadog は完全なテキストを引き続き保存し、Logs Explorer の通常のリストクエリで表示されます。ただし、グループ化されたクエリを実行する際、例えばその切り捨てられたフィールドでログをグループ化する場合や、特定のフィールドを表示する操作を行う場合、切り捨てられたバージョンが表示されます。
@@ -350,7 +368,7 @@ TCP エンドポイントは、このサイトでは推奨していません。�
 
 この機能を使用するには、以下の属性名を使用します。
 
-| 属性            | 説明                                                             |
+| 属性            | 説明                                                              |
 |----------------------|-------------------------------------------------------------------------|
 | `logger.name`        | ロガーの名前                                                      |
 | `logger.thread_name` | 現在のスレッドの名前                                              |

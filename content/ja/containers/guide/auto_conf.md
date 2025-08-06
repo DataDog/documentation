@@ -22,7 +22,7 @@ further_reading:
 title: Autodiscovery Auto-Configuration
 ---
 
-When the Agent runs as a container, [Autodiscovery][49] tries to discover other containers based on default configuration files named `auto_conf.yaml`. You can find these files in the corresponding `conf.d/<INTEGRATION>.d/` folders for the following integrations:
+Agent がコンテナとして実行されると、[Autodiscovery][49] は `auto_conf.yaml` という名前のデフォルト設定ファイルに基づいて他のコンテナを検出しようとします。これらのファイルは、次のインテグレーション用の `conf.d/<INTEGRATION>.d/` フォルダーにあります。
 
 | インテグレーション                    | オートディスカバリー構成ファイル |
 | ------                         | --------                |
@@ -52,19 +52,19 @@ When the Agent runs as a container, [Autodiscovery][49] tries to discover other 
 
 `auto_conf.yaml` 構成ファイルには、特定のインテグレーションのセットアップに必要なすべてのパラメーターと、コンテナ環境を考慮して用意されているそれらに相当する[オートディスカバリーテンプレートの変数][43]が含まれます。
 
-## Override auto-configuration
-Each `auto_conf.yaml` file provides a default configuration. To override this, you can add a custom configuration in [Kubernetes annotations][50] or [Docker Labels][51].
+## 自動構成のオーバーライド
+各 `auto_conf.yaml` ファイルにはデフォルト設定が用意されています。これをオーバーライドするには、[Kubernetes アノテーション][50] または [Docker ラベル][51] にカスタム設定を追加できます。
 
-Kubernetes annotations and Docker Labels take precedence over `auto_conf.yaml` files, but `auto_conf.yaml` files take precedence over Autodiscovery configuration set in the Datadog Operator and Helm charts. To use Datadog Operator or Helm to configure Autodiscovery for an integration in the table on this page, you must [disable auto-configuration](#disable-auto-configuration).
+[Kubernetes アノテーション] と [Docker ラベル] は `auto_conf.yaml` ファイルよりも優先されますが、`auto_conf.yaml` ファイルは Datadog Operator や Helm チャートで設定された Autodiscovery 設定よりも優先されます。このページの表にあるインテグレーションを Datadog Operator または Helm で Autodiscovery 設定する場合は、必ず [自動構成を無効化](#disable-auto-configuration) してください。
 
-## Disable auto-configuration
+## 自動構成の無効化
 
-The following examples disable auto-configuration for the Redis and Istio integrations.
+次の例では、Redis と Istio のインテグレーションの自動構成を無効化しています。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-In your `datadog-agent.yaml`, use `override.nodeAgent.env` to set the `DD_IGNORE_AUTOCONF` environment variable.
+`datadog-agent.yaml` 内で、`override.nodeAgent.containers.agent.env` を使用して `agent` コンテナに `DD_IGNORE_AUTOCONF` 環境変数を設定します。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -85,37 +85,23 @@ spec:
               value: "redisdb istio"
 ```
 
-Then, apply the new configuration.
+その後、新しい設定を適用します。
 
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Add `datadog.ignoreAutoconfig` to your `datadog-values.yaml`:
+`datadog-values.yaml` に `datadog.ignoreAutoconfig` を追加します:
 
 ```yaml
 datadog:
- #auto_conf.yaml を無視するインテグレーションの一覧。
+  #auto_conf.yaml を無視するインテグレーションの一覧。
   ignoreAutoConfig:
     - redisdb
     - istio
 ```
 {{% /tab %}}
-{{% tab "Operator" %}}
-
-To disable auto configuration integration(s) with the Operator, add the `DD_IGNORE_AUTOCONF` variable to your `datadog-agent.yaml` file:
-
-```yaml
-  override:
-    nodeAgent:
-      containers: 
-        agent:
-          env:
-            - name: DD_IGNORE_AUTOCONF
-              value: "redisdb istio"
-```
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
-DaemonSet との自動構成インテグレーションを無効にするには、Agent マニフェストに `DD_IGNORE_AUTOCONF` 変数を追加します。
+{{% tab "Containerized Agent" %}}
+手動 DaemonSet、Docker、ECS などのコンテナ化 Agent でインテグレーションの自動構成を無効化するには、`DD_IGNORE_AUTOCONF` 環境変数を追加します:
 
 ```yaml
 DD_IGNORE_AUTOCONF="redisdb istio"

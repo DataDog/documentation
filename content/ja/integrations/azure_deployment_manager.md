@@ -1,30 +1,16 @@
 ---
+app_id: azure_deployment_manager
 categories:
 - cloud
 - azure
 custom_kind: integration
-dependencies: []
-description: Datadog を使用して Azure Deployment Manager でのカナリアデプロイを監視
-doc_link: https://docs.datadoghq.com/integrations/azure_deployment_manager/
-draft: false
+description: Azure Deployment Manager でのカナリアデプロイを監視
 further_reading:
 - link: https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/
   tag: ブログ
   text: Azure Deployment Manager と Datadog を使用したカナリアリリース
-git_integration_title: azure_deployment_manager
-has_logo: true
-integration_id: ''
-integration_title: Microsoft Azure Deployment Manager
-integration_version: ''
-is_public: true
-manifest_version: '1.0'
-name: azure_deployment_manager
-public_title: Datadog-Microsoft Azure Deployment Manager
-short_description: Azure Deployment Manager でのカナリアデプロイを監視
-version: '1.0'
+title: Microsoft Azure Deployment Manager
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Deployment Manager (ADM) を使用すると、複雑なアプリケーションを安全にデプロイするための段階的ロールアウトを管理できます。
@@ -37,12 +23,12 @@ Datadog の使用によって、Azure Deployment Manager 用の健全性チェ�
 
 Datadog を ADM の健全性チェックとして使用するには、アクティブな Datadog アカウントと Azure Deployment Manager のアクティブなインスタンスが必要です。
 
-### 構成
+### 設定
 
-1. 最初に、デプロイ用のモニターを Datadog でセットアップします。リージョンごとのモニターのセットアップから始めます。アプリケーションの複雑さによっては、各リージョンで、デプロイのさまざまな部分にそれぞれモニターが必要になる場合があります。[チュートリアル: Resource Manager テンプレートで Azure Deployment Manager を使用する][1]に従うと、何を監視するかを決定する際に役立ちます。モニターの考え方については、[こちらのブログ記事][2]を参照してください。
-2. リージョンごとに複数のモニターをセットアップすることにした場合は、ロールアウト手順ごと、またはリージョンごとに[複合条件モニター][3]を作成します。複合条件モニターは、複数のモニターを論理的に組み合わることで、1 つのデプロイ手順の全体的なステータスを示します。
-3. 次に、[ロールアウトの一環として][4]、Azure Deployment Manager のトポロジー内で Datadog を健全性チェックとして構成します。この健全性チェックは、デプロイ手順間の依存関係として設定します。[テンプレート](#full-configuration-example)を使用し、`<API_KEY>` と `<APP_KEY>` をそれぞれ Datadog API キーとアプリケーションキーに置き換えてください。また、前の手順で作成した各モニター (または複合条件モニター) の `resources` にセクションを作成し、`<MONITOR_ID>` をモニター ID に置き換えます。1 つの[健全性チェック手順](#example-health-check-step)に複数のチェックを追加することは可能ですが、健全性チェック手順ごとに[チェック](#example-health-check)を 1 つ作成し、複合条件モニターごとに複数の健全性チェック手順を作成することをお勧めします。複合条件モニター以外を使用してチェックを設定している場合は、適宜 `regex` を更新してください。
-4. [Microsoft のドキュメント][5]に従って、デプロイを開始します。
+1. Start by setting up monitors in Datadog for your deployment. Start with a monitor for each region. Depending on the complexity of your application, you may want to have monitors for different parts of the deployment in each region. Completing the [Tutorial: Use Azure Deployment Manager with Resource Manager templates](https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-tutorial) may help you decide where to monitor. For monitor ideas, check out [the blog](https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/).
+1. If you end up with multiple monitors for each region, create a [composite monitor](https://docs.datadoghq.com/monitors/monitor_types/composite/) for each rollout step or region. Each composite monitor is a logical combination of other monitors that together indicate the overall status of a deployment step.
+1. Next, configure Datadog as a health check within the Azure Deployment Manager topology [as a part of the rollout](https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-overview#rollout-template). Set these health check steps as dependencies between the deployment steps. Use the [template](#full-configuration-example), and replace `<API_KEY>` and `<APP_KEY>` with your Datadog API and application keys. Create a section in `resources` for each monitor (or composite monitor) you just created and replace `<MONITOR_ID>` with the monitor IDs. It is possible to add multiple checks within a [health check step](#example-health-check-step), but Datadog recommends you create one [check](#example-health-check) per health check step, and then create additional health check steps for each composite monitor. If you are setting the check with something besides a composite monitor, be sure to update the `regex` accordingly.
+1. Follow the [Microsoft documentation](https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-overview) to initiate the deployment.
 
 #### 健全性チェック例
 
@@ -203,11 +189,4 @@ Azure Deployment Manager には、サービスのチェック機能は含まれ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
-
-[1]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-tutorial
-[2]: https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/
-[3]: https://docs.datadoghq.com/ja/monitors/monitor_types/composite/
-[4]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-overview#rollout-template
-[5]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-overview
-[6]: https://docs.datadoghq.com/ja/help/
+お問合せは、[Datadog サポート](https://docs.datadoghq.com/help/) まで。

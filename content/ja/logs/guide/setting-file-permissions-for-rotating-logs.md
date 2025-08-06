@@ -47,7 +47,7 @@ setfacl -m u:dd-agent:rx /var/log/apache
 
 ### ログファイルローテーションに対応したアクセス許可を設定する
 
-logrotate は ACL の設定を再適用しないため、一度[アクセス許可を設定][4]しても、ログがローテーションすると設定が無効になります。より永続的な解決方法としては、新しいファイルで ACL を再設定する規則を logrotate に追加します。
+logrotate は ACL の設定を再適用しないため、一度権限を設定しても、ログがローテーションすると設定が無効になります。より永続的な解決方法としては、新しいファイルで ACL を再設定する規則を logrotate に追加します。
 
 ```shell
 sudo touch /etc/logrotate.d/dd-agent_ACLs
@@ -114,4 +114,3 @@ drwxr-x--- 2 mysql mysql 4096 Feb 20 06:25 mysql
 [1]: https://help.ubuntu.com/community/FilePermissionsACLs
 [2]: https://www.tecmint.com/secure-files-using-acls-in-linux
 [3]: http://xmodulo.com/configure-access-control-lists-acls-linux.html
-[4]: http://bencane.com/2012/05/27/acl-using-access-control-lists-on-linux

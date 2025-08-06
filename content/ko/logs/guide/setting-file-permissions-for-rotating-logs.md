@@ -47,7 +47,7 @@ setfacl -m u:dd-agent:rx /var/log/apache
 
 ### 로그 파일 로테이션 권한 설정
 
-[권한 설정][4]을 한 번 수행하면 로그 로테이션 동안 지속되지 않습니다. logrotate가 ACL 설정에 다시 적용되지 않기 때문입니다. 보다 영구적인 해결 방법은 logrotate에 규칙을 추가하여 새로운 파일에서 ACL을 재설정하는 것입니다. 
+로그 로테이션의 경우 권한을 한 번만 설정하는 것으로는 유지되지 않습니다. logrotate가 ACL 설정을 다시 적용하지 않기 때문입니다. 보다 영구적으로 해결하려면 새 파일에 logrotate에 규칙을 추가해 ACL을 재설정합니다.
 
 ```shell
 sudo touch /etc/logrotate.d/dd-agent_ACLs
@@ -114,4 +114,3 @@ drwxr-x--- 2 mysql mysql 4096 Feb 20 06:25 mysql
 [1]: https://help.ubuntu.com/community/FilePermissionsACLs
 [2]: https://www.tecmint.com/secure-files-using-acls-in-linux
 [3]: http://xmodulo.com/configure-access-control-lists-acls-linux.html
-[4]: http://bencane.com/2012/05/27/acl-using-access-control-lists-on-linux
