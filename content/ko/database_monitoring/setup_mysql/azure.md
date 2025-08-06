@@ -13,7 +13,7 @@ title: Azure Database for MySQL을 위한 데이터베이스 모니터링 설정
 
 1. [데이터베이스 파라미터 설정](#configure-mysql-settings)
 1. [에이전트에 데이터베이스 접근 권한 부여](#grant-the-agent-access)
-1. [Agent 설치](#install-the-agent)
+1. [에이전트를 설치 및 설정합니다](#install-and-configure-the-agent).
 1. [Azure MySQL 통합 설치](#install-the-azure-mysql-integration)
 
 ## 시작 전 참고 사항
@@ -66,7 +66,6 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```sql
 CREATE SCHEMA IF NOT EXISTS datadog;
 GRANT EXECUTE ON datadog.* to datadog@'%';
-GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
 Agent가 설명 계획을 수집할 수 있도록 `explain_statement` 절차를 생성합니다:
@@ -100,7 +99,18 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
-## 에이전트 설치
+인덱스 메트릭을 수집하려면, `datadog` 사용자에게 추가 권한을 부여합니다.
+
+```sql
+GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
+```
+
+Datadog Agent는 v7.65부터 MySQL 데이터베이스에서 스키마 정보를 수집할 수 있습니다. Agent에 수집 권한을 부여하는 방법은 아래 [스키마 수집][11] 섹션을 참조하세요.
+
+### 비밀번호를 안전하게 저장하기
+{{% dbm-secret %}}
+
+## 에이전트 설치 및 구성
 
 Azure 호스트를 모니터링하려면 인프라스트럭처에 Datadog Agent를 설치하고 각 인스턴스 엔드포인트에 원격으로 연결하도록 설정합니다. Agent는 데이터베이스에서 실행할 필요가 없으며 데이터베이스에 연결하기만 하면 됩니다. 여기에 언급되지 않은 추가 Agent 설치 방법은 [Agent 설치 지침][5]을 참조하세요.
 
@@ -121,9 +131,9 @@ instances:
     host: '<AZURE_INSTANCE_ENDPOINT>'
     port: 3306
     username: datadog
-    password: '<YOUR_CHOSEN_PASSWORD>' # 이전의 CREATE USER 단계에서
+    password: 'ENC[datadog_user_database_password]' # 이전 CREATE USER 단계에서 기밀정보로 저장
 
-    # 프로젝트와 인스턴스를 추가한 후 CPU 및 메모리와 같은 추가 클라우드 데이터를 가져오도록 Datadog Azure 통합을 구성합니다.
+    # 프로젝트와 인스턴스를 추가한 후 CPU 및 메모리와 같은 추가 클라우드 데이터를 가져오도록 Datadog Azure 통합을 설정합니다.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
@@ -142,11 +152,11 @@ instances:
 [3]: /ko/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L523-L552
 {{% /tab %}}
-{{% tab "도커" %}}
+{{% tab "Docker" %}}
 
 도커 컨테이너에서 실행하는 데이터베이스 모니터링 에이전트를 구성하려면 에이전트 컨테이너에서 [Autodiscovery Integration Templates][1]을 도커 레이블로 설정합니다.
 
-**참고**: 에이전트에 도커 자동탐지 레이블을 읽을 수 있는 권한이 있어야 작동합니다. 
+**참고**: 에이전트에 Docker 자동탐지 레이블을 읽을 수 있는 권한이 있어야 작동합니다. 
 
 ### 명령줄
 
@@ -183,17 +193,13 @@ FROM datadog/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "ENC[datadog_user_database_password]", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
 ```
 
 설정 `deployment_type` 및 `name` 필드에 대한 자세한 내용은 [MySQL 통합 사양][4]을 참조하세요.
 
-일반 텍스트에서 `datadog` 사용자의 암호가 노출되지 않도록 하려면 Agent의 [비밀 관리 패키지][2]를 사용하고`ENC[]` 구문을 사용하여 암호를 선언하세요. 또는 환경 변수로 암호를 전달하는 방법에 대해 알아보려면 [자동탐지 템플릿 변수 설명서][3]를 참조하세요.
-
 
 [1]: /ko/agent/docker/integrations/?tab=docker
-[2]: /ko/agent/configuration/secrets-management
-[3]: /ko/agent/faq/template_variables/
 [4]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L523-L552
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -202,45 +208,59 @@ LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDP
 
 Kubernetes 클러스터에서 아직 활성화되지 않은 경우 지침에 따라 [클러스터 검사 활성화][2]를 수행합니다. Cluster Agent 컨테이너에 마운트된 정적 파일을 사용하거나 서비스 주석을 사용하여 MySQL 설정을 선언할 수 있습니다.
 
-### Helm 명령줄
+### Helm
 
-다음 [Helm][3] 명령을 실행해 쿠버네티스 클러스터에서 [Datadog 클러스터 에이전트][1]를 설치하세요. 내 계정과 환경에 맞게 값을 변경하세요.
+다음 단계를 완료해 쿠버네티스 클러스터에서 [Datadog 클러스터 에이전트][1]를 설치하세요. 내 계정과 환경에 맞게 값을 변경하세요.
 
-```bash
-helm repo add datadog https://helm.datadoghq.com
-helm repo update
+1. Helm용 [Datadog 에이전트 설치 지침][3]을 완료하세요.
+2. 다음을 포함하도록 YAML 설정 파일(클러스터 에이전트 설치 지침의 `datadog-values.yaml`)을 업데이트하세요.
+    ```yaml
+    clusterAgent:
+      confd:
+        mysql.yaml: |-
+          cluster_check: true
+          init_config:
+          instances:
+            - dbm: true
+              host: '<AZURE_INSTANCE_ENDPOINT>'
+              port: 3306
+              username: datadog
+              password: 'ENC[datadog_user_database_password]'
+              azure:
+                deployment_type: '<DEPLOYMENT_TYPE>'
+                fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 
-helm install <RELEASE_NAME> \
-  --set 'datadog.apiKey=<DATADOG_API_KEY>' \
-  --set 'clusterAgent.enabled=true' \
-  --set 'clusterAgent.confd.mysql\.yaml=cluster_check: true
-init_config:
-instances:
-  - dbm: true
-    host: <INSTANCE_ADDRESS>
-    port: 3306
-    username: datadog
-    password: "<UNIQUEPASSWORD>"
-    azure:
-      deployment_type: "<DEPLOYMENT_TYPE>"
-      fully_qualified_domain_name: "<AZURE_INSTANCE_ENDPOINT>"' \
-  datadog/datadog
-```
+    clusterChecksRunner:
+      enabled: true
+    ```
+
+3. 명령줄에서 위의 설정 파일로 에이전트를 배포합니다.
+    ```shell
+    helm install datadog-agent -f datadog-values.yaml datadog/datadog
+    ```
+
+<div class="alert alert-info">
+Windows의 경우 <code>--set targetSystem=windows</code>를 <code>helm 설치</code>명령에 추가하세요.
+</div>
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /ko/getting_started/site
+[3]: /ko/containers/kubernetes/installation/?tab=helm#installation
 
 ### 연결된 파일로 설정
 
-마운트된 설정 파일로 클러스터 검사를 구성하려면 `/conf.d/mysql.yaml` 경로의 Cluster Agent 컨테이너에서 설정 파일을 마운트합니다.
+연결된 구성 파일로 클러스터 검사를 구성하려면 `/conf.d/mysql.yaml` 경로의 Cluster 에이전트 컨테이너에서 설정 파일을 연결하세요.
 
 ```yaml
-cluster_check: true  # 이 플래그를 포함해야 합니다.
+cluster_check: true  # 다음 플래그를 포함해야 합니다.
 init_config:
 instances:
   - dbm: true
     host: '<AZURE_INSTANCE_ENDPOINT>'
     port: 3306
     username: datadog
-    password: '<UNIQUEPASSWORD>'
-    # 프로젝트와 인스턴스를 추가한 후 CPU, 메모리 등과 같은 추가 클라우드 데이터를 가져오도록 Datadog Azure 통합을 구성합니다.
+    password: 'ENC[datadog_user_database_password]'
+    # 프로젝트와 인스턴스를 추가한 후, CPU, 메모리 등과 같은 추가 클라우드 데이터를 가져오도록 Datadog Azure 통합을 설정합니다.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
@@ -269,7 +289,7 @@ metadata:
           "host": "<AZURE_INSTANCE_ENDPOINT>",
           "port": 3306,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>",
+          "password": "ENC[datadog_user_database_password]",
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
             "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"
@@ -286,7 +306,7 @@ spec:
 
 설정 `deployment_type` 및 `name` 필드에 대한 자세한 내용은 [MySQL 통합 사양][5]을 참조하세요.
 
-Cluster Agent가 자동으로 이 설정을 등록하고 MySQL 검사를 실행합니다. 
+Cluster 에이전트가 자동으로 이 설정을 등록하고 MySQL 검사를 실행합니다. 
 
 `datadog` 사용자 암호가 일반 텍스트로 노출되는 것을 예방하려면 에이전트의 [비밀 관리 패키지][4]를 이용해`ENC[]` 구문을 사용하여 암호를 선언하세요.
 
@@ -327,3 +347,4 @@ Azure에서 보다 포괄적인 데이터베이스 메트릭을 수집하려면 
 [8]: /ko/integrations/azure_db_for_mysql
 [9]: /ko/database_monitoring/setup_mysql/troubleshooting
 [10]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
+[11]: /ko/database_monitoring/setup_mysql/azure/?tab=host#collecting-schemas

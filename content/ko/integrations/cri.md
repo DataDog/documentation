@@ -1,64 +1,16 @@
 ---
 app_id: cri
-app_uuid: 81805522-0f55-45a4-95f6-23dd9ea46361
-assets:
-  dashboards:
-    cri: assets/dashboards/overview.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: cri.cpu.usage
-      metadata_path: metadata.csv
-      prefix: cri.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10043
-    source_type_name: CRI
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
 - 컨테이너
 - Kubernetes
 custom_kind: 통합
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/cri/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: cri
-integration_id: cri
-integration_title: CRI
-integration_version: ''
-is_public: true
-manifest_version: 2.0.0
-name: cri
-public_title: CRI
-short_description: Datadog로 CRI 메트릭을 모두 추적하기
+description: Datadog로 CRI 메트릭을 모두 추적하기
+integration_version: 1.0.0
+media: []
 supported_os:
 - linux
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Containers
-  - Category::Kubernetes
-  - Supported OS::Linux
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Datadog로 CRI 메트릭을 모두 추적하기
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: CRI
+title: CRI
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
-
-
 ## 개요
 
 이 점검은 컨테이너 Container Runtime Interface를 모니터링합니다.
@@ -67,7 +19,7 @@ tile:
 
 ### 설치
 
-CRI는 코어는 [Datadog 에이전트][1] 점검입니다. `datadog.yaml`에서 `cri.d/conf.yaml`로 구성합니다.
+CRI is a core [Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest) check that needs to be configured in the `datadog.yaml` with the `cri.d/conf.yaml`.
 
 `datadog.yaml`에서 에이전트 `cri_socket_path`를 구성해 기존 CRI를 쿼리하도록 합니다(또 기본 시간 제한을 구성할 수 있음). CRI(예: `containerd`)에서 디스크 사용량 메트릭을 보고한다면 `collect_disk`와 같은 점검 인스턴스 설정을 `cri.d/conf.yaml`에서 구성하세요.
 
@@ -112,19 +64,29 @@ spec:
 
 ### 설정
 
-1. 에이전트 구성 디렉터리의 루트 수준에 있는 `conf.d/` 폴더에서 `cri.d/conf.yaml` 파일을 편집해 crio 성능 데이터 수집을 시작하세요. 사용할 수 있는 구성 옵션을 모두 보려면 [sample cri.d/conf.yaml][2]을 참고하세요.
+1. Edit the `cri.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your crio performance data. See the [sample cri.d/conf.yaml](https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/cri.d/conf.yaml.default) for all available configuration options.
 
-2. [에이전트를 다시 시작합니다][3].
+1. [Agent를 다시 시작합니다](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ### 검증
 
-[에이전트 상태 하위 명령을 실행][3]하고 Checks 섹션에서 `cri`를 찾으세요.
+Run the Agent's [status subcommand](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent) and look for `cri` under the Checks section.
 
 ## 수집한 데이터
 
-### 메트릭
-{{< get-metrics-from-git "cri" >}}
+### Metrics
 
+CRI collect metrics about the resource usage of your containers running through the CRI.
+
+CPU and memory metrics are collected out of the box and you can additionally collect some disk metrics if they are supported by your CRI (CRI-O doesn't support them).
+
+| | |
+| --- | --- |
+| **cri.cpu.usage** <br>(gauge) | Cumulative CPU usage (sum across all cores) since object creation<br>_Shown as nanocore_ |
+| **cri.disk.inodes** <br>(gauge) | Represents the inodes used by the images<br>_Shown as inode_ |
+| **cri.disk.used** <br>(gauge) | Represents the bytes used for images on the filesystem<br>_Shown as byte_ |
+| **cri.mem.rss** <br>(gauge) | The amount of working set memory in bytes <br>_Shown as byte_ |
+| **cri.uptime** <br>(gauge) | Time since the container was started<br>_Shown as second_ |
 
 ### 서비스 점검
 
@@ -136,10 +98,4 @@ CRI에는 이벤트가 포함되어 있지 않습니다.
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원팀][5]에 문의하세요.
-
-[1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/cri.d/conf.yaml.default
-[3]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://github.com/DataDog/integrations-core/blob/master/cri/metadata.csv
-[5]: https://docs.datadoghq.com/ko/help/
+도움이 필요하세요? [Datadog 지원 팀](https://docs.datadoghq.com/help/)에 문의하세요.
