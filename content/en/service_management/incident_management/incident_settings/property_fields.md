@@ -34,7 +34,7 @@ There are five default fields:
 
 ### Field types
 
-You can define new fields of any of the following field types.
+You can define new fields of any of the following field types:
 
 **Single Select**
 : A dropdown that accepts one value. You set the available values when defining the field.
