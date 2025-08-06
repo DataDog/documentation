@@ -121,11 +121,11 @@ Select your platform.
 1. Enter the environment variables for your Kafka source:
     1.  For **Kafka Bootstrap Servers**, enter `<NAMESPACE>.servicebus.windows.net:9093` (for example, `myeventhubns.servicebus.windows.net:9093`).
     1.  For **Kafka SASL Username**, enter `$$$$ConnectionString`. **Note**: You must have `$$$$` in front of `ConnectionString` because `$$$$` ends up being `$$` when transposed into the environment.
-    1.  For **Kafka SASL Password**, enter the full connection string (for example, `Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>`).
+    1.  For **Kafka SASL Password**, enter the full connection string. For example, `Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>`.
         - This is the **Primary Connection String** in your Event Hub instance [shared access policies](#configure-shared-access-policy).
     1. Enter your Kafka TLS passphrase.
         - This is the **Primary Key** in your Event Hub instance's [shared access policies](#configure-shared-access-policy).
-    {{< img src="observability_pipelines/sources/kafka_env_vars.png" alt="The install page with example values for the kafka environment variables" style="width:100%;" >}}
+    {{< img src="observability_pipelines/sources/kafka_env_vars.png" alt="The install page with example values for the kafka environment variables" style="width:70%;" >}}
 1. Enter the environment variables for your destinations, if applicable.
 1. Follow the rest of the instructions on the page to install the Worker based on your platform.
 {{% /tab %}}
@@ -147,7 +147,7 @@ Select your platform.
             sudo cp /etc/ssl/certs/ca-certificates.crt /var/lib/observability-pipelines-worker/config/
             ```
         1. In the **Certificate path** field, enter `/ca-certificates.crt`.
-    {{< img src="observability_pipelines/sources/kafka_settings.png" alt="The Kafka source settings with example values" style="width:45%;" >}}
+    {{< img src="observability_pipelines/sources/kafka_settings_vm.png" alt="The Kafka source settings with example values" style="width:45%;" >}}
 1. Click **Next: Select Destination**.
 1. After you set up your destinations and processors, click **Next: Install**.
 1. Select your platform in the **Choose your installation platform** dropdown menu.
@@ -158,7 +158,7 @@ Select your platform.
         - This is the **Primary Connection String** in your Event Hub instance [shared access policies](#configure-shared-access-policy).
     1. Enter your Kafka TLS passphrase.
         - This is the **Primary Key** in your Event Hub instance's [shared access policies](#configure-shared-access-policy).
-    {{< img src="observability_pipelines/sources/kafka_env_vars.png" alt="The install page with example values for the kafka environment variables" style="width:100%;" >}}
+    {{< img src="observability_pipelines/sources/kafka_env_vars_vm.png" alt="The install page with example values for the kafka environment variables" style="width:70%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
