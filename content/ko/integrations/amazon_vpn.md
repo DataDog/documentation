@@ -1,28 +1,14 @@
 ---
+app_id: amazon_vpn
 categories:
 - aws
 - 클라우드
 - 로그 수집
 - 네트워크
 custom_kind: 통합
-dependencies: []
 description: AWS VPN 핵심 메트릭을 추적하세요.
-doc_link: https://docs.datadoghq.com/integrations/amazon_vpn/
-draft: false
-git_integration_title: amazon_vpn
-has_logo: true
-integration_id: ''
-integration_title: AWS VPN
-integration_version: ''
-is_public: true
-manifest_version: '1.0'
-name: amazon_vpn
-public_title: Datadog-AWS VPN 통합
-short_description: AWS VPN 핵심 메트릭을 추적하세요.
-version: '1.0'
+title: AWS VPN
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 개요
 
 AWS VPN으로 네트워크 또는 장치와 AWS 글로벌 네트워크를 연결하는 안전한 비공개 터널을 설정할 수 있습니다.
@@ -33,12 +19,12 @@ AWS VPN으로 네트워크 또는 장치와 AWS 글로벌 네트워크를 연결
 
 ### 설치
 
-아직 설정하지 않은 경우 먼저 [Amazon Web Services 통합][1]을 설정하세요.
+If you haven't already, set up the [Amazon Web Services integration](https://docs.datadoghq.com/integrations/amazon_web_services/) first.
 
 ### 메트릭 수집
 
-1. [AWS 통합 페이지][2]에서 `Metric Collection` 탭의 `VPN`이 활성화되어 있는지 확인합니다.
-2. [Datadog - AWS VPN 통합][3]을 설치합니다.
+1. In the [AWS integration page](https://app.datadoghq.com/integrations/amazon-web-services), ensure that `VPN` is enabled under the `Metric Collection` tab.
+1. Install the [Datadog - AWS VPN integration](https://app.datadoghq.com/integrations/amazon-vpn).
 
 ### 로그 수집
 
@@ -50,17 +36,26 @@ AWS VPN을 설정하여 S3 버킷 또는 클라우드와치(CloudWatch)에 로�
 
 #### Datadog로 로그 전송
 
-1. 아직 설정하지 않은 경우 [Datadog Forwarder Lambda 함수][4]를 설정하세요.
-2. Lambda 함수를 설치한 후 AWS 콘솔에서 AWS VPN 로그를 포함하는 S3 버킷 또는 클라우드와치(CloudWatch) 로그 그룹에 트리거를 수동으로 추가합니다.
+1. If you haven’t already, set up the [Datadog Forwarder Lambda function](https://docs.datadoghq.com/logs/guide/forwarder/).
 
-    - [S3 버킷에서 수동 트리거 추가][5]
-    - [CloudWatch 로그 그룹에 수동으로 트리거 추가][6]
+1. Lambda 함수를 설치한 후 AWS 콘솔에서 AWS VPN 로그를 포함하는 S3 버킷 또는 클라우드와치(CloudWatch) 로그 그룹에 트리거를 수동으로 추가합니다.
+
+   - [Add a manual trigger on the S3 bucket](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets)
+   - [Add a manual trigger on the CloudWatch Log Group](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group)
 
 ## 수집한 데이터
 
-### 메트릭
-{{< get-metrics-from-git "amazon_vpn" >}}
+### Metrics
 
+| | |
+| --- | --- |
+| **aws.vpn.tunnel_data_in** <br>(count) | The average number of bytes that have come in through the VPN tunnel<br>_Shown as byte_ |
+| **aws.vpn.tunnel_data_in.sum** <br>(count) | The total number of bytes that have come in through the VPN tunnel<br>_Shown as byte_ |
+| **aws.vpn.tunnel_data_out** <br>(count) | The average number of bytes that have gone out through the VPN tunnel<br>_Shown as byte_ |
+| **aws.vpn.tunnel_data_out.sum** <br>(count) | The total number of bytes that have gone out through the VPN tunnel<br>_Shown as byte_ |
+| **aws.vpn.tunnel_state** <br>(gauge) | This metric is 1 when all tunnels for the VPN are up, and 0 when all tunnels are down. Values between 0 and 1 indicate some tunnels for the VPN are up.|
+| **aws.vpn.tunnel_state.maximum** <br>(gauge) | This metric is 1 when any tunnel for the VPN is up, and 0 when all tunnels are down.|
+| **aws.vpn.tunnel_state.minimum** <br>(gauge) | This metric is 1 when all tunnels for the VPN are up, and 0 when any tunnel is down.|
 
 ### 이벤트
 
@@ -72,13 +67,4 @@ AWS VPN 통합은 서비스 점검을 포함하지 않습니다.
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원팀][8]에 문의하세요.
-
-[1]: https://docs.datadoghq.com/ko/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://app.datadoghq.com/integrations/amazon-vpn
-[4]: https://docs.datadoghq.com/ko/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_vpn/amazon_vpn_metadata.csv
-[8]: https://docs.datadoghq.com/ko/help/
+도움이 필요하세요? [Datadog 지원 팀](https://docs.datadoghq.com/help/)에 문의하세요.

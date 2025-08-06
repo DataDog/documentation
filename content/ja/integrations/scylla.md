@@ -23,13 +23,13 @@ assets:
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
+  sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
 - キャッシュ
 - data stores
-- ログの収集
-custom_kind: インテグレーション
+- log collection
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/scylla/README.md
 display_on_public_website: true
@@ -82,7 +82,7 @@ Scylla は「ドロップインの Apache Cassandra 代替」として使用で�
 
 Scylla チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### 設定
 
 1. Scylla のパフォーマンスデータを収集するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `scylla.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションについては、[サンプル scylla.d/conf.yaml][3] を参照してください。以前にこのインテグレーションを実装したことがある場合は、[旧バージョンの例][4]を参照してください。
 
