@@ -2778,10 +2778,10 @@ menu:
       parent: app_builder
       identifier: app_builder_build
       weight: 1
-    - name: Authentication
-      url: actions/app_builder/auth/
+    - name: Access and Authentication
+      url: actions/app_builder/access_and_auth/
       parent: app_builder
-      identifier: app_builder_access
+      identifier: app_builder_access_and_auth
       weight: 2
     - name: Queries
       url: actions/app_builder/queries/
