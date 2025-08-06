@@ -72,7 +72,10 @@ If the certificate is self signed and verifies against itself, the output is:
 certificate.pem: OK
 ```
 
-If you use a self-signed certificate, the Worker throws the error `unable to get local issuer certificate`. Datadog recommends the following approaches instead:
+Otherwise, you see the error `unable to get local issuer certificate`.
+
+
+Instead of using a self-signed certificate, Datadog recommends the following:
 
 1. Use a certificate signed by Certificate Authority (CA).
 2. If you cannot use a CA-signed certificate, use a certificate from [Let's Encrypt][3].
