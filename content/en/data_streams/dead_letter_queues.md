@@ -40,13 +40,12 @@ Data Streams Monitoring helps you detect where messages couldn't be processed an
 You can inspect and resolve non-empty DLQs directly in Datadog by using [Datadog Actions][5].
 
 ### Setup
-In Datadog, create a [Connection][9]: 
-* A User with secret access key or a Role through assume role
-* Applied on all SQS queues or for a subset of queues
-* Required permissions:
+In Datadog, create a [Connection][9]. You need an IAM entity to perform the actions. This IAM entity can be an IAM User (with a secret access key) or IAM Role (assumed by using `sts:AssumeRole`) and have the following permissions:
   * `sqs:ReceiveMessage` (for _peek_)
   * `sqs:StartMessageMoveTask` (for _redrive_)
   * `sqs:PurgeQueue` (for _purge_)
+
+These permissions can be applied globally to all SQS queues, or restricted to specific queues.
 
 ### Usage
 
