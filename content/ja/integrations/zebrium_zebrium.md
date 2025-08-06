@@ -14,7 +14,7 @@ categories:
 - notifications
 - 自動化
 - マーケットプレイス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -88,7 +88,10 @@ tile:
 
 Zebrium の使用方法は簡単です。トラブルシューティングを行う際、あちこち調べるのではなく、Datadog のダッシュボードで Zebrium アプリにスクロールし、対応する検出を見るだけでいいのです。
 
-Once you are a Zebrium customer, you can begin using the two points of integration between Zebrium and Datadog: 1) a Zebrium Datadog App with a custom dashboard widget and 2) a Datadog integration that sends in events and metrics from Zebrium. For installation, visit the [Integrations page][4] and search for Zebrium.
+Zebrium のお客様になると、Zebrium と Datadog の 2 つのインテグレーションポイントを利用できます。 
+1) カスタムダッシュボードウィジェットを備えた Zebrium Datadog アプリ 
+2) Zebrium からイベントとメトリクスを送信する Datadog インテグレーション 
+インストールするには、[インテグレーションページ][4]にアクセスして Zebrium を検索してください。
 
 ## サポート
 

@@ -1,28 +1,56 @@
 ---
-aliases:
-- /fr/integrations/azure_analysisservices
+app_id: azure-analysisservices
+app_uuid: 1705f0be-a2cb-4ebe-83f4-edc42bf735f6
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.analysisservices_servers.command_pool_job_queue_length
+      metadata_path: metadata.csv
+      prefix: azure.analysisservices_servers
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 276
+    source_type_name: Azure Analysis Services
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - azure
 custom_kind: integration
 dependencies: []
-description: Surveillez des métriques clés d'Azure Analysis Services.
-doc_link: https://docs.datadoghq.com/integrations/azure_analysis_services/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_analysis_services
-has_logo: true
 integration_id: azure-analysisservices
-integration_title: Microsoft Azure Analysis Services
+integration_title: Azure Analysis Services
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_analysis_services
-public_title: Intégration Datadog/Microsoft Azure Analysis Services
+public_title: Azure Analysis Services
 short_description: Surveillez des métriques clés d'Azure Analysis Services.
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Azure
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Surveillez des métriques clés d'Azure Analysis Services.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Analysis Services
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## Section Overview
 
 Azure Analysis Services est une plateforme entièrement gérée en tant que service (PaaS) qui fournit des modèles de données de qualité professionnelle dans le cloud.
@@ -38,7 +66,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft�
 ## Données collectées
 
 ### Métriques
-{{ get-metrics-from-git "azure-analysisservices" }}
+{{< get-metrics-from-git "azure_analysis_services" >}}
 
 
 ### Événements

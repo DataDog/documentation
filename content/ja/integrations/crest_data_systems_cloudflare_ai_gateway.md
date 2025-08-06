@@ -97,10 +97,6 @@ Cloudflare の AI Gateway を利用すると、AI アプリの可視性と制御
 - Web サイト: [crestdata.ai][5]
 - よくあるご質問: [Crest Data Datadog Marketplace インテグレーションのよくあるご質問][13]
 
-## トラブルシューティング
-
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
-
 [1]: https://developers.cloudflare.com/ai-gateway/get-started/creating-gateway/
 [2]: https://developers.cloudflare.com/analytics/graphql-api/getting-started/authentication/api-token-auth/
 [3]: mailto:datadog.integrations@crestdata.ai
@@ -115,4 +111,4 @@ Cloudflare の AI Gateway を利用すると、AI アプリの可視性と制御
 [12]: https://docs.crestdata.ai/datadog-integrations-readme/Cloudflare_AI_Gateway.pdf
 [13]: https://docs.crestdata.ai/datadog-integrations-readme/Crest_Data_Datadog_Integrations_FAQ.pdf
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-cloudflare-ai-gateway" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-cloudflare-ai-gateway" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

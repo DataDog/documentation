@@ -110,7 +110,7 @@ pprof.Do(ctx, pprof.Labels("customer_name", <値>), func(context.Context) {
 })
 ```"
 
-フィルタリングに使用したいラベルキーを指定するには、プロファイラーを起動するときに [WithCustomProfilerLabelKeys][2] オプションを追加します。
+To specify which label keys you want to use for filtering, add the [WithCustomProfilerLabelKeys][3] (or [WithCustomProfilerLabelKeys v1][2]) option when starting the profiler:
 
 "```go
 profiler.Start(
@@ -123,6 +123,7 @@ profiler.WithCustomProfilerLabelKeys("customer_name"),
 
 [1]: https://pkg.go.dev/runtime/pprof#Do
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithCustomProfilerLabelKeys
+[3]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#WithCustomProfilerLabelKeys
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
