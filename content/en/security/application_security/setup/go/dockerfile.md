@@ -1,8 +1,5 @@
 ---
 title: Building your Go application for App and API Protection
-code_lang: docker
-type: multi-code-lang
-code_lang_weight: 10
 further_reading:
 - link: "/security/application_security/how-it-works/"
   tag: "Documentation"
@@ -14,8 +11,6 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
 ---
-
-# Introduction
 
 App and API Protection for Go installation requirements can be abstract and the Go toolchain
 cross-compilation and CGO capabilities can make precise installation steps difficult to understand.

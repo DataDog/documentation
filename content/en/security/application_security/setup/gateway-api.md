@@ -1,8 +1,5 @@
 ---
 title: Enabling AAP for Gateway API in Kubernetes
-code_lang: gateway-api
-type: multi-code-lang
-code_lang_weight: 50
 aliases:
   - /security/application_security/threats/setup/threat_detection/gateway_api
   - /security/application_security/threats_detection/gateway_api
