@@ -733,7 +733,7 @@ secret_backend_config:
 
 # <!-- ######### F I L E ############ -->
 
-{{% collapse-content title="JSON or YAML File Secret Backends" level="h4" expanded=true id="id-for-anchoring" %}}
+{{% collapse-content title="JSON or YAML File Secret Backends" level="h4" expanded=false id="id-for-anchoring" %}}
 
 |Backend Type                                 | AWS Service                             |
 |---------------------------------------------|-----------------------------------------|
