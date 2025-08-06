@@ -177,9 +177,8 @@ You can delete metric filtering policies from the [Metrics Settings page][1].
 This initial preview release includes the following limitations:
 
 - A maximum of 10,000 metric names can be filtered out.
-- Resource usage impact on the Agent is limited to up to 10MB RSS. There is no increase in CPU usage.
+- Resource usage impact on the Agent is limited to up to 10MB [RSS][3]. There is no increase in CPU usage.
 - Only DogStatsD metrics are supported.
-- API-based metric filtering policy management is expected in a future iteration.
 
 ## Further reading
 
@@ -187,3 +186,4 @@ This initial preview release includes the following limitations:
 
 [1]: https://app.datadoghq.com/metric/settings/policies
 [2]: https://app.datadoghq.com/metric/summary
+[3]: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/6/html/performance_tuning_guide/network-rss
