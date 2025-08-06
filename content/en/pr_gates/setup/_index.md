@@ -9,10 +9,6 @@ further_reading:
   text: "Learn about PR Gates"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">PR Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
 PR Gates are in Preview.
 {{< /callout >}}
