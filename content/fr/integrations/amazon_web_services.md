@@ -54,7 +54,7 @@ tile:
   classifier_tags:
   - Category::AWS
   - Category::Cloud
-  - Category:IoT
+  - Category::IoT
   - Category::Log Collection
   - Category::Event Management
   - Offering::Integration
