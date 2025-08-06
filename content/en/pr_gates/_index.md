@@ -19,9 +19,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/"
   tag: "Blog"
   text: "Use Datadog monitors as quality gates for GitHub Actions deployments"
-- link: "/account_management/audit_trail/"
-  tag: "Documentation"
-  text: "Learn about Audit Trail"
 - link: "https://www.datadoghq.com/blog/datadog-flaky-tests/"
   tag: "Blog"
   text: "Flaky tests: their hidden costs and how to address flaky behavior"
@@ -104,14 +101,6 @@ You can evaluate and update quality control processes by accessing PR Gates rule
 This view is useful for developers who want to keep an eye on the PR gates for their build pipelines. You can see all of the rules defined by the organization.
 
 {{< img src="pr_gates/rules_list_3.png" alt="List of PR Gate rules in Datadog" style="width:100%" >}}
-
-## Track changes in rules
-
-You can view information about who created, modified, and deleted PR Gates rules in [Audit Trail][3].
-
-{{< img src="pr_gates/audit_event.png" alt="A PR Gates event in Datadog Audit Trail" style="width:100%" >}}
-
-For more information, see the [Audit Trail documentation][4].
 
 ## Further Reading
 
