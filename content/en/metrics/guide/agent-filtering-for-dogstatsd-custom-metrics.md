@@ -30,85 +30,147 @@ Agent-side filtering enables you to filter out unused or unwanted DogStatsD cust
 
 Filtering is performed at the Agent level but centrally managed through the Datadog UI, giving teams full visibility and control. You can create, update, and manage filtering policies in Datadog, streamlining metric governance while maintaining transparency.
 
-## Creating a filtering policy
+## Create a metric filtering policy
 
-There are three ways to create a filtering policy:
+You can create a metric filtering policy from the [Metrics Settings page][1] or the [Metrics Summary page][2].
+
+### From the Metrics Settings page
+
+1. Click **+ Create Policy**.
+2. Click **Filter metrics**.
+3. Provide a description for the new policy.
+4. Select the metrics to filter from the **Metrics to Filter** dropdown, or click **Upload CSV**.
+   - If you choose to upload a CSV, select the file and click **Open**. You can use multiple CSVs to create the policy.
+5. When you're satisfied with the list of metrics to filter, click **Save and Filter**.
+
+### From the Metrics Summary page
+
+Create a metric filtering policy from the Metrics Summary page using any of the following methods:
 
 {{< tabs >}}
-{{% tab "Metric Summary page" %}}
+{{% tab "From a metric query" %}}
 
-From the [Metrics Summary page][100], select one or more metrics and convert them into a filter list:
-<Insert video>
+1. Enter a metric query in the search bar.
+2. Click the three vertical dots button on the right-hand side of the screen.
+3. Click **Filter metrics**.
+4. In the **Choose policy** dropdown, click **New Policy**. Provide a description for the policy.
+5. Review the **Metrics to Filter**. Click `X` on the right side of any row to remove a metric from the list, or click `+ Include More Metrics` to add metrics to the list.
+6. Click **Save and Filter**.
 
-[100]: https://app.datadoghq.com/metric/summary
-
-{{% /tab %}}
-
-{{% tab "CSV upload" %}}
-
-Upload a `.csv` file containing a list of metric names:
-<Insert video>
+{{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/create_policy_from_metric_query.mp4" alt="Creating a metric filtering policy from a metric query" video="true" >}}
 
 {{% /tab %}}
+{{% tab "From the policy editor" %}}
 
-{{% tab "Manual" %}}
+1. Click the three vertical dots button on the right-hand side of the screen.
+2. Click **Filter metrics**.
+3. In the **Choose policy** dropdown, click **New Policy**. Provide a description for the policy.
+4. Enter a metric query in the **Metrics to Filter** field, or select metrics individually from the dropdown. Click `X` on the right side of any row to remove a metric from the list.
+5. Click **Save and Filter**.
 
-Manually choose metric names through the policy settings interface:
-<Insert video>
+{{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/create_policy_with_policy_editor.mp4" alt="Creating a metric filtering policy from the policy editor" video="true" >}}
+
+{{% /tab %}}
+{{% tab "From CSV upload" %}}
+
+1. Click the three vertical dots button on the right-hand side of the screen.
+2. Click **Filter metrics**.
+3. In the **Choose policy** dropdown, click **New Policy**. Provide a description for the policy.
+4. Click **Upload CSV** to the right of the **Metrics to Filter** field.
+5. Select the CSV file, and click **Open**.
+6. Review the metrics listed. Click `X` on the right side of any row to remove a metric from the list. If needed, upload additional CSV files, or add metrics through the **Metrics to Filter** field.
+7. Click **Save and Filter**.
+
+{{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/create_policy_with_csv_upload.mp4" alt="Creating a metric filtering policy with a CSV file upload" video="true" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Editing a filtering policy
+## Edit a metric filtering policy
 
-You can update an existing policy using any of the following methods:
+You can edit a metric filtering policy from the [Metrics Settings page][1] or the [Metrics Summary page][2].
+
+### From the Metrics Settings page
+
+1. Click the policy to edit.
+2. Click **Edit**.
+3. Select the metrics to filter from the **Metrics to Filter** dropdown, or click **Upload CSV**.
+   - If you choose to upload a CSV, select the file and click **Open**.
+5. Click **Save and Filter**.
+
+{{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/edit_policy_from_metrics_settings.mp4" alt="Editing a metric filtering policy from the Metrics Settings page" video="true" >}}
+
+### From the Metrics Summary page
+
+Edit a metric filtering policy from the Metrics Summary page using any of the following methods:
 
 {{< tabs >}}
-{{% tab "Metric Summary page" %}}
+{{% tab "From a metric query" %}}
 
-From the [Metrics Summary page][200], create a list of metrics to append to the existing policy. To remove metrics, click the `X` icon next to the metric name in the right-hand panel:
-<Insert video>
+1. Enter a metric query in the search bar.
+2. Click the three vertical dots button on the right-hand side of the screen.
+3. Click **Filter metrics**.
+4. In the **Choose policy** dropdown, select the policy to edit.
+5. Review the **Metrics to Filter** and **Existing metrics in policy** lists. Click `X` on the right side of any row to remove a metric from the list, or click `+ Include More Metrics` to add metrics to the list.
+6. Click **Save and Filter**.
 
-[200]: https://app.datadoghq.com/metric/summary
+{{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/edit_policy_with_metric_query.mp4" alt="Editing a metric filtering policy with a metric query" video="true" >}}
 
 {{% /tab %}}
+{{% tab "From the policy editor" %}}
 
+1. Click the three vertical dots button on the right-hand side of the screen.
+2. Click **Filter metrics**.
+3. In the **Choose policy** dropdown, select the policy to edit.
+4. Select metrics individually from the **Metrics to Filter** dropdown. Click `X` on the right side of any row to remove a metric from the list.
+5. Click **Save and Filter**.
+
+{{% /tab %}}
 {{% tab "CSV upload" %}}
 
-Uploading a new `.csv` file adds those metric names to the existing policy. This method does not support removing metrics:
-<Insert video>
-
-{{% /tab %}}
-
-{{% tab "Manual" %}}
-
-From the settings page, add or remove metric names directly within the policy editor:
-<Insert video>
+1. Click the three vertical dots button on the right-hand side of the screen.
+2. Click **Filter metrics**.
+3. In the **Choose policy** dropdown, select the policy to edit.
+4. Click **Upload CSV** to the right of the **Metrics to Filter** field.
+5. Select the CSV file, and click **Open**.
+6. Review the **Metrics to Filter** and **Existing metrics in policy** lists. Click `X` on the right side of any row to remove a metric from the list, or click `+ Include More Metrics` to add metrics to the list.
+7. Click **Save and Filter**.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Viewing a policy and list of metric names
+## View all policies and filtered metrics
 
-To view policies you can either:
+You can view all your policies and filtered metrics from the [Metrics Settings page][1].
 
 **Click on the [settings button][1]**: 
 
-{{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/settings_from_summary.png" alt="" caption="The settings button on the metric summary page" style="width:100%;" >}}
+{{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/settings_from_summary.png" alt="The settings button on the metric summary page" style="width:100%;" >}}
 
 **Click on Metrics in the navigation bar** and go straight to settings:
-{{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/settings_from_nav.png" alt="" caption="The settings option from the expanded Metrics panel in Datadog" style="width:100%;" >}}
 
-## Deleting a policy
+{{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/settings_from_nav.png" alt="The settings option from the expanded Metrics panel in Datadog" style="width:100%;" >}}
 
-To delete a policy:
+### View all policies
 
-1. Navigate to the [Policy Settings][1] page.
-2. Click on the desired policy.
-3. Select **Delete** in the top-right corner of the page.
-**Click on Metrics in the navigation bar** and go straight to settings:
+Select the **Policies** tab from the sidebar to see a list of all your policies. If you don't see the sidebar, click the **Show Sidebar** button {{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/show_sidebar.png" alt="The Show Sidebar button" inline="true" >}}.
 
-{{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/delete_policy.png" alt="" caption="The delete policy button on a policy detail view" style="width:100%;" >}}
+Click on any metric filtering policy to open its detail view for edits or deletion.
+
+### View all filtered metrics
+
+Select the **Filtered Metrics** tab from the sidebar to see a list of all your filtered. If you don't see the sidebar, click the **Show Sidebar** button {{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/show_sidebar.png" alt="The Show Sidebar button" inline="true" >}}.
+
+Click on a filtered metric's attached policies in the **ATTACHED POLICIES** column for edits or deletion.
+
+## Delete policies
+
+You can delete metric filtering policies from the [Metrics Settings page][1].
+
+1. Click on the metric filtering policy to delete.
+2. Select **Delete** in the top-right corner of the page.
+
+{{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/delete_policy.png" alt="The delete policy button on a metric filtering policy detail view" style="width:100%;" >}}
 
 ## Preview limitations
 
@@ -117,10 +179,11 @@ This initial preview release includes the following limitations:
 - A maximum of 10,000 metric names can be filtered out.
 - Resource usage impact on the Agent is limited to up to 10MB RSS. There is no increase in CPU usage.
 - Only DogStatsD metrics are supported.
-- API-based policy management is expected in a future iteration.
+- API-based metric filtering policy management is expected in a future iteration.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/metric/settings/policies
+[2]: https://app.datadoghq.com/metric/summary
