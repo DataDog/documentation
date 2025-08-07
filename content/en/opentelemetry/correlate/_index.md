@@ -23,7 +23,11 @@ To ensure your OpenTelemetry data is properly correlated, you must configure you
 | OpenTelemetry Resource Attribute | Datadog Tag | Notes                                                                                                   |
 |----------------------------------|-------------|---------------------------------------------------------------------------------------------------------|
 | `deployment.environment.name`    | `env`       | **Recommended**. Supported in Agent v7.58.0+ and Collector Exporter v0.110.0+.                          |
+<<<<<<< HEAD
 | `deployment.environment`         | `env`       | Use if you are running an Agent version older than v7.58.0 or a Collector Exporter older than v0.110.0. |
+=======
+| `deployment.environment`         | `env`       | Use instead of `deployment.environment.name` if you are running an Agent version older than v7.58.0 or a Collector Exporter older than v0.110.0. |
+>>>>>>> 54c000bd0dca12d5c8bd34faa80156c7f6a37e26
 | `service.name`                   | `service`   |                                                                                                         |
 | `service.version`                | `version`   |                                                                                                         |
 

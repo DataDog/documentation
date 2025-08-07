@@ -57,7 +57,7 @@ Datadog does not officially support any early-access versions of Java.
 
 | Java versions      | Operating Systems                                                               | Support level                     |
 |--------------------|---------------------------------------------------------------------------------|-----------------------------------|
-| 7 only             | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [Maintenance](#levels-of-support) ([End-of-life](#levels-of-support) on July 31, 2025) |
+| 7 only             | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [End-of-life](#levels-of-support) |
 | 7 only             | Linux (arm64)<br>Mac (arm64)                                                    | [End-of-life](#levels-of-support) |
 
 ### Levels of support
