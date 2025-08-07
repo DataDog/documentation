@@ -121,7 +121,7 @@ See the [AWS][10], [Azure][11], and [Google Cloud][12] integrations for setup st
 
 Your cloud integrations must be configured in both primary and DDR organizations. Because these integrations only run in one data center at a time, **the integrations must run only in the primary data center.**
 
-See the [Cloud integrations failover][13] section for details on the cloud failover process. 
+See the [Cloud integrations failover](#3-testrun-failover-tests-in-various-environments) section for details on the cloud failover process. 
 
 {{% /collapse-content %}}
 
@@ -265,6 +265,11 @@ Connect with your Datadog Customer Success Manager to schedule dedicated time wi
 
 ### 3. Test	run failover tests in various environments
 {{% collapse-content title="Activate and test DDR failover in Agent-based environments" level="h5" %}}
+
+To trigger a failover of your Agents you can click on one of the policies in Fleet Automation and then click “Enable”. The status of each host will be updated as the failover occurs.
+
+{{< img src="/agent/guide/ddr/ddr-fa-policy-enable2.png" alt="Enable the failover policy in the DDR org" style="width:80%;" >}}
+
 Use the steps appropriate for your environment to activate/test the DDR failover. 
 
 {{< tabs >}}
@@ -332,19 +337,17 @@ DD_MULTI_REGION_FAILOVER_API_KEY=ADD_NEW_SITE_API_KEY
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Activate and test DDR failover in cloud integrations" level="h5" %}}
+{{% collapse-content title="Activate and test DDR failover in cloud integrations" level="h5" id="id-for-cloud" %}}
 
 Failing over cloud integrations is a separate and distinct action available on the disaster recovery landing page in the DDR region.
-
-To trigger a failover of your Agents you can click on one of the policies in Fleet Automation and then click “Enable”. The status of each host will be updated as the failover occurs.
-
-{{< img src="/agent/guide/ddr/ddr-fa-policy-enable.png" alt="Enable the failover policy in the DDR org" style="width:80%;" >}}
 
 During testing, integration telemetry is spread over both organizations and cancelling a failover testing returns the integrations to running in the Primary data center.
 
 
-The failover overview page contains the status of DDR as well as the capability to failover Cloud Integrations. When no longer in failover, disable the policy to return integration data collection to the primary org. 
-
+The failover overview page contains the status of DDR as well as the capability to failover Cloud Integrations. 
+<div class="alert alert-warning">
+When no longer in failover, <strong>disable the policy</strong> to return integration data collection to the primary org. 
+</div>
 {{< img src="/agent/guide/ddr/ddr-failover-main-page.png" alt="Enable the failover policy in the DDR org" style="width:80%;" >}}
 
 
