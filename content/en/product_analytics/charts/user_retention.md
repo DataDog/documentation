@@ -7,8 +7,11 @@ further_reading:
     - link: '/product_analytics/'
       tag: Documentation
       text: Product Analytics
+    - link: 'real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session'
+      tag: Documentation
+      text: Set user sessions
 ---
-
+real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
 ## Overview
 Retention Analysis measures how often users are successfully returning to a page or action helping you assess the ongoing value of your products and features.
 
@@ -35,13 +38,13 @@ For each cohort and return period, `Return on` calculates the percentage of user
 ### Return On or After
 For each cohort and return period,`Return on or after` calculates the percentage of users who triggered the return event during that specific period or any subsequent period.
 
-`Return on or after` highlights users who either fully leave your product or stop using key functionalities, which is especially helpful when assessing the effectiveness of onboarding experiences.
+`Return on or after` highlights users who either fully leave your product or stop using key functionalities, which is helpful when assessing the effectiveness of onboarding experiences.
 
 
 
 ## Retention calculation and grouping 
 
-### Calculating the weighted average cohort
+### Weighted average cohort calculation
 The weighted average cohort summarizes overall cohort behavior by accounting for cohort size. Larger cohorts have more influence on the final value, making the result more representative than a simple average.
 
 This weighted average calculation is applied across all [visualization types](#visualization-types). For example, in the retention grid, the weighted average is used to populate the summary cell for each time interval. 
@@ -67,14 +70,6 @@ This means each cohort's retention rate is scaled by its number of users before 
 <div class="alert alert-info">
 <strong>Note:</strong> The retention chart displays greyed-out values when data is partial or incomplete. This occurs when the time period is ongoing and retention cannot yet be fully calculated
 </div>
-
-<!-- You can further scope the retention measure based on when the return event occurs to identify the users who have completely churned from a product or feature. 
-
-- `Return on or after`: the user has to complete the "Return event" on or after the period to be counted as retained. 
-
-- `Return on`: the user has to do the "Return event" on the period to be counted as retained.
-It's useful to understand the likelihood of a user to come back after a given period. -->
-
 
 ### Grouping
 You scope retention based on event attributes. The `group by` function is applied to the **start event**. This is helpful is you want to, for example, see how retention compares across user countries. 
