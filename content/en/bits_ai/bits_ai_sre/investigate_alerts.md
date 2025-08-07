@@ -85,6 +85,7 @@ Help Bits interpret and act on your documentation by following these best practi
 - Include relevant Datadog telemetry links in your Confluence pages. Bits queries these links to extract information for its investigation.
 - Provide clear, step-by-step instructions for resolving monitor issues. Bits follows these instructions precisely, so being specific leads to more accurate outcomes.
 - Document the services or systems involved in detail. Bits uses this information to understand the environment and guide investigations effectively.
+
 **Tip**: The more precisely your Confluence page matches the issue at hand, the more helpful Bits can be.
 
 ## How Bits AI SRE investigates
