@@ -6062,7 +6062,7 @@ menu:
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_custom_detection_rules
       weight: 201
-    - name: Signal Correlation Rules
+    - name: Signal Correlation
       url: security/cloud_siem/detect_and_monitor/custom_detection_rules/signal_correlation_rules
       parent: cloud_siem_custom_detection_rules
       identifier: cloud_siem_signal_correlation_rules
@@ -6073,7 +6073,7 @@ menu:
       identifier: cloud_siem_default_rules
       weight: 202
     - name: Suppressions
-      url: security/suppressions/
+      url: security/cloud_siem/detect_and_monitor/suppressions
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_suppressions
       weight: 203
