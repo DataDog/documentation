@@ -79,7 +79,7 @@ Bits integrates with Confluence to find relevant documentation and runbooks to s
 1. Optionally, enable account crawling to make Confluence a data source within Bits' chat interface. This is not required for Bits to use Confluence when generating its investigation plan.
 1. You can view all connected Confluence accounts on the [Bits Settings page][9].
 
-#### Optimize Bits’ Understanding of Your Knowledge
+#### Optimize Bits' understanding of your knowledge
 
 Help Bits better interpret and act on your documentation by following these best practices::
 1. Include relevant Datadog telemetry links in your Confluence pages. Bits will directly query these links to extract more relevant information.
