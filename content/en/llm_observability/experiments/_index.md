@@ -49,7 +49,7 @@ LLMObs.enable(
 
 ## Datasets
 
-A _dataset_ is a collection of _inputs_, and _expected outputs_ (optional) and _metadata_ (optional).
+A _dataset_ is a collection of _inputs_, and _expected outputs_ and _metadata_ (optional).
 You can construct datasets from production data in the UI by hitting "Add to Dataset" in any span page, as well as programatically using the SDK. You can use the SDK to push and retrieve datasets from Datadog.
 
 ### Creating a dataset
@@ -183,14 +183,51 @@ The DataFrame has a MultiIndex structure with the following columns:
 ## Experiments
 An experiment is a collection of traces used to test the behavior of an LLM application or agent against a dataset. The dataset provides the input data, and the outputs are the final generations produced by the application under test.
 
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `name`    | str | The name of the experiment.|
+| `task`    | Callable | The task function to run. Must accept parameters ``input_data`` and ``config``.|
+| `dataset`    | Dataset | The dataset to run the experiment on, created with LLMObs.pull/create_dataset().|
+| `evaluators`    | List[Callable] | A list of evaluator functions to evaluate the task output. Must accept parameters ``input_data``, ``output_data``, and ``expected_output``.|
+| `description`    | Optional[str] | A description of the experiment.|
+| `tags`    | Optional[Dict[str, str]] | A dictionary of string key-value tag pairs to associate with the experiment spans.|
+| `config`    | Optional[ExperimentConfigType] | A configuration dictionary describing the experiment that can be used in the task.|
+
 ### Task
 The task defines the core workflow you want to evaluate. It can range from a single LLM call to a more complex flow involving multiple LLM calls and RAG steps. The task is executed sequentially across all records in the dataset.
+
+The task is a function that the experiment will run and should accept the following:
+Input
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `input_data`    | Dict[str, NonNoneJSONType] | Record input.|
+| `config`    | Optional[Dict[str, JSONType]] | A configuration dictionary for the Experiment (e.g model name, temperature...) |
+
+Output
+| Type | Description |
+| ---- | ----------- |
+| Union[str, int, float, bool, None, JSONType] | Ouptut of the main task|
+
 
 ### Evaluators
 Evaluators are functions that measure how well the model or agent performs by comparing the output to either the expected_output or the original input. Datadog supports the following evaluator types:
 - Boolean: returns true or false
 - score: returns a numeric value (float)
 - categorical: returns a labeled category (string)
+
+An Evaluator is a function that the experiment will run and should accept the following:
+Input
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `input_data`    | Dict[str, NonNoneJSONType] | Record input.|
+| `output_data`| Optional[Dict[str, JSONType]] | Record output from the task. |
+| `expected_output`    | Optional[Dict[str, JSONType]] | Record expected output |
+
+Output
+| Type | Description |
+| ---- | ----------- |
+| Union[str, int, float, bool] | Value returned by the evaluator |
+
 
 ### Creating an experiment
 
@@ -218,10 +255,10 @@ If you use a [supported framework](https://docs.datadoghq.com/llm_observability/
 
 3. Define evaluator functions
 ```python
-def exact_match(input_data: Dict[str, Any], output_data: str, expected_output: str) -> bool:
+def exact_match(input_data, output_data, expected_output) -> bool:
     return output_data == expected_output
 
-def overlap(input_data: Dict[str, Any], output_data: str, expected_output: str) -> float:
+def overlap(input_data, output_data, expected_output) -> float:
     expected_output_set = set(expected_output)
     output_set = set(output_data)
 
@@ -230,7 +267,7 @@ def overlap(input_data: Dict[str, Any], output_data: str, expected_output: str) 
 
     return intersection / union
 
-def fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> str:
+def fake_llm_as_a_judge(input_data, output_data, expected_output) -> str:
     fake_llm_call = "excellent"
     return fake_llm_call
 ```
@@ -252,7 +289,8 @@ experiment = LLMObs.experiment(
 # Run the experiment
 results = experiment.run()  # Run on all dataset records
 results = experiment.run(jobs=4)  # Run with parallel processing
-results = experiment.run(sample_size=10, raise_errors=True)  # Test on subset
+results = experiment.run(sample_size=10)  # Test on subset of the dataset
+results = experiment.run(raise_errors=True)  # Display errors in console and stop the Experiment if one happens
 
 # View experiment in Datadog UI
 print(f"View experiment: {experiment.url}")
