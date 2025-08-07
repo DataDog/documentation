@@ -52,7 +52,7 @@ Unified Service Tags (USTs) apply consistent tags across traces, metrics, and lo
 
 With SSI, you can automatically extract UST values from pod labels and metadata without modifying individual deployments. To do this, configure `kubernetesResourcesLabelsAsTags` to map your existing Kubernetes labels to Datadog service tags.
 
-**Prerequisites:**
+**Prerequisites**
 
 | Component | Minimum version  |
 |-----------|------------------|
