@@ -93,7 +93,7 @@ The Python library supports the [database API specifications][4] and supports al
 | Django            | `1.11`, `2.2`, `3.2`, `>=4.0`   |
 
 [1]: /tracing/trace_collection/compatibility/python/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[2]: /tracing/guide/remote_config/
 [3]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [4]: https://peps.python.org/pep-0249/
 

@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting Go App and API Protection
+title: Troubleshooting App and API Protection for Go
 ---
 
 ## Common Issues

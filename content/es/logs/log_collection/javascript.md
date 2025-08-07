@@ -18,7 +18,7 @@ Con el SDK de logs del navegador, puedes enviar logs directamente a Datadog desd
 - Registra las direcciones IP reales de los clientes y los agentes de usuario.
 - Uso de red optimizado con envíos masivos automáticos.
 
-**Notas**: 
+**Notas**:
 - **Independiente del SDK de RUM**: el SDK de logs de navegador se puede utilizar sin el SDK de RUM.
 
 ## Configuración
@@ -95,6 +95,30 @@ Carga y configura el SDK en la sección de encabezado de tus páginas. Para el s
           DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
             site: 'ap1.datadoghq.com',
+            forwardErrorsToLogs: true,
+            sessionSampleRate: 100,
+          })
+        })
+      </script>
+  </head>
+</html>
+```
+{{</ site-region>}}
+{{< site-region region="ap2" >}}
+```html
+<html>
+  <head>
+    <title>Example to send logs to Datadog</title>
+      <script>
+      (function(h,o,u,n,d) {
+        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+        d=o.createElement(u);d.async=1;d.src=n
+        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/ap2/v6/datadog-logs.js','DD_LOGS')
+      DD_LOGS.onReady(function() {
+          DD_LOGS.init({
+            clientToken: '<DATADOG_CLIENT_TOKEN>',
+            site: 'ap2.datadoghq.com',
             forwardErrorsToLogs: true,
             sessionSampleRate: 100,
           })
@@ -246,6 +270,25 @@ Para recibir todos los logs y errores, carga y configura el SDK al principio de 
 </html>
 ```
 {{</ site-region>}}
+{{< site-region region="ap2" >}}
+```html
+<html>
+  <head>
+    <title>Example to send logs to Datadog</title>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap2/v6/datadog-logs.js"></script>
+    <script>
+      window.DD_LOGS &&
+        DD_LOGS.init({
+          clientToken: '<DATADOG_CLIENT_TOKEN>',
+          site: 'ap2.datadoghq.com',
+          forwardErrorsToLogs: true,
+          sessionSampleRate: 100,
+        })
+    </script>
+  </head>
+</html>
+```
+{{</ site-region>}}
 {{< site-region region="eu" >}}
 ```html
 <html>
@@ -364,11 +407,12 @@ Los siguientes parámetros están disponibles para configurar el SDK de logs de 
 | `sessionSampleRate`        | Número                                                                    | No       | `100`           | El porcentaje de sesiones a rastrear: `100` para todas, `0` para ninguna. Sólo las sesiones rastreadas envían logs. Sólo se aplica a los logs recopilados a través del SDK de logs de navegador y es independiente de los datos de RUM.                                                                                    |
 | `trackingConsent`          | `"granted"` o `"not-granted"`                                            | No       | `"granted"`     | Establece el estado inicial del consentimiento de rastreo del usuario. Consulta [Consentimiento de rastreo del usuario][15].                                                                                                         |
 | `silentMultipleInit`       | Booleano                                                                   | No       |                 | Evita errores de registro al tener múltiples inicios.                                                                                                                                    |
-| `proxy`                    | Cadena                                                                    | No       |                 | URL proxy opcional (ej: `https://www.proxy.com/path`). Para obtener más información, consulta la [guía completa para la configuración de proxies][6].                                                                        |
+| `proxy`                    | Cadena                                                                    | No       |                 | URL proxy opcional (ej: `https://www.proxy.com/path`). Para obtener más información, consulta la [guía completa para la configuración de proxies][6].                                                                      |
+| `usePciIntake`             | Booleano                                                                   | No       | `false`         | Utilice una ingesta que cumpla la normativa PCI. Consulte [Cumplimiento de PCI DSS][20] para obtener más información.                                                                                                          |
 | `telemetrySampleRate`      | Número                                                                    | No       | `20`            | Los datos de telemetría (error, logs de depuración) sobre la ejecución del SDK se envían a Datadog para detectar y resolver posibles problemas. Configura esta opción en `0` si te quieres excluir de la recopilación de datos telemétricos. |
 | `storeContextsAcrossPages` | Booleano                                                                   | No       |                 | Almacena el contexto global y el contexto de usuario en `localStorage` para preservarlos a lo largo de la navegación del usuario. Consulta [Ciclos de vida de los contextos][11] para obtener más detalles y limitaciones específicas.          |
 | `allowUntrustedEvents`     | Booleano                                                                   | No       |                 | Permite la captura de [eventos no confiables][13], por ejemplo, en tests automatizados de interfaz de usuario.                                                                                                           |
-| `sendLogsAfterSessionExpiration` | Booleano                                                             | No       |                 | Sigue enviando logs después de que expire la sesión.
+| `allowedTrackingOrigins`   | Matriz                                                                     | No       |                 | Lista de orígenes en los que el kit de desarrollo de software (SDK) puede funcionar.                                                                                                                                      |
 
 
 Opciones que deben tener una configuración coincidente cuando utilices el SDK `RUM`:
@@ -999,9 +1043,97 @@ window.DD_LOGS && window.DD_LOGS.getUser() // => {}
 
 **Nota**: El check `window.DD_LOGS` evita problemas cuando se produce un fallo de carga con el SDK.
 
+#### Contexto de la cuenta
+
+Los registros de Datadog kit de desarrollo de software (SDK) proporcionan funciones prácticas para asociar un `Account` con los registros generados.
+
+- Configure la cuenta para todos sus registradores con la API `setAccount (newAccount: Account)`.
+- Añada o modifique una propiedad de cuenta a todos sus registradores con la API `setAccountProperty (key: string, value: any)`.
+- Obtenga la cuenta almacenada actualmente con la API `getAccount ()`.
+- Elimine una propiedad de cuenta con la API `removeAccountProperty (key: string)`.
+- Borre todas las propiedades de cuenta existentes con la API `clearAccount ()`.
+
+**Nota**: El contexto de cuenta se aplica antes que el contexto global. Por lo tanto, cada propiedad de cuenta incluida en el contexto global anulará el contexto de cuenta al generar registros.
+
+##### NPM
+
+Para NPM, utiliza:
+
+```javascript
+import { datadogLogs } from '@datadog/browser-logs'
+
+datadogLogs.setAccount({ id: '1234', name: 'Nombre de mi empresa' })
+datadogLogs.setAccountProperty('type', 'premium')
+datadogLogs.getAccount() // => {id: '1234', name: 'Nombre de mi empresa', type: 'premium'}
+
+datadogLogs.removeAccountProperty('tipo')
+datadogLogs.getAccount() // => {id: '1234', name: 'Nombre de mi empresa'}
+
+datadogLogs.clearAccount()
+datadogLogs.getAccount() // => {}
+```
+
+##### CDN asíncrono
+
+Para CDN asíncrono, utiliza:
+
+```javascript
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.setAccount({ id: '1234', name: 'Nombre de mi empresa' })
+})
+
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.setAccountProperty('tipo', 'premium')
+})
+
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.getAccount() // => {id: '1234', name: 'Nombre de mi empresa', type: 'premium'}
+})
+
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.removeAccountProperty('tipo')
+})
+
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.getAccount() // => {id: '1234', name: 'Nombre de mi empresa'}
+})
+
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.clearAccount()
+})
+
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.getAccount() // => {}
+})
+```
+
+**Nota**: Las primeras llamadas a la API deben incluirse en la devolución de llamada de `window.DD_LOGS.onReady()`. Esto asegura que el código solo se ejecute una vez que el SDK se cargue correctamente.
+
+##### CDN síncrono
+
+Para CDN síncrono, utiliza:
+
+```javascript
+window.DD_LOGS && window.DD_LOGS.setAccount({ id: '1234', name: 'Nombre de mi empresa' })
+
+window.DD_LOGS && window.DD_LOGS.setAccountProperty('type', 'premium')
+
+window.DD_LOGS && window.DD_LOGS.getAccount() // => {id: '1234', name: 'Nombre de mi empresa', type: 'premium'}
+
+window.DD_LOGS && window.DD_LOGS.removeAccountProperty('type')
+
+window.DD_LOGS && window.DD_LOGS.getAccount() // => {id: '1234', name: 'Nombre de mi empresa'}
+
+window.DD_LOGS && window.DD_LOGS.clearAccount()
+
+window.DD_LOGS && window.DD_LOGS.getAccount() // => {}
+```
+
+**Nota**: El check `window.DD_LOGS` evita problemas cuando se produce un fallo de carga con el SDK.
+
 #### Ciclo de vida de los contextos
 
-Por defecto, el contexto global y el contexto de usuario se almacenan en la memoria de la página actual, lo que significa que:
+Por defecto, los contextos se almacenan en la memoria actual Page ( página), lo que significa que no están:
 
 - no se mantienen tras una recarga completa de la página
 - no se comparten entre diferentes pestañas ni ventanas de la misma sesión
@@ -1283,3 +1415,4 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [17]: /es/real_user_monitoring/browser/advanced_configuration/?tab=npm#micro-frontend
 [18]: /es/real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
 [19]: /es/real_user_monitoring/browser/advanced_configuration/?tab=npm#discard-a-rum-event
+[20]: /es/data_security/pci_compliance/?tab=logmanagement
