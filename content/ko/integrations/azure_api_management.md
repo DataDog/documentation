@@ -1,28 +1,58 @@
 ---
-aliases:
-- /ko/integrations/azure_apimanagement
+app_id: azure-apimanagement
+app_uuid: 122539f9-dc11-4099-9d64-cbd6f50159a5
+assets:
+  dashboards:
+    azure_api_management: assets/dashboards/azure_api_management.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.apimanagement_service.capacity
+      metadata_path: metadata.csv
+      prefix: azure.apimanagement_service
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 277
+    source_type_name: Azure API Management
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - 클라우드
 - azure
 custom_kind: 통합
 dependencies: []
-description: 주요 Azure API Management 메트릭을 추적하세요.
-doc_link: https://docs.datadoghq.com/integrations/azure_api_management/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_api_management
-has_logo: true
 integration_id: azure-apimanagement
-integration_title: Microsoft Azure API Management
+integration_title: Azure API Management
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_api_management
-public_title: Datadog-Microsoft Azure API Management 통합
+public_title: Azure API Management
 short_description: 주요 Azure API Management 메트릭을 추적하세요.
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Azure
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: 주요 Azure API Management 메트릭을 추적하세요.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure API Management
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 개요
 
 Azure API Management는 고객이 API를 게시, 보호, 변환, 유지 관리 및 모니터링할 수 있는 완전 관리형 서비스입니다.
@@ -38,7 +68,7 @@ Datadog Azure 통합을 사용하여 Azure API Management에서 메트릭을 수
 ## 수집한 데이터
 
 ### 메트릭
-{{ get-metrics-from-git "azure-apimanagement" }}
+{{< get-metrics-from-git "azure_api_management" >}}
 
 
 ### 이벤트
