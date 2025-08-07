@@ -40,6 +40,7 @@ First, you need to map your AWS identities (ARNs) to Datadog service accounts or
 
 **Create an AWS identity mapping:**
 
+{{% site-region region="us" %}}
 ```bash
 curl -X POST "https://api.datadoghq.com/api/v2/cloud_auth/aws/persona_mapping" \
 -H "Content-Type: application/json" \
@@ -55,14 +56,147 @@ curl -X POST "https://api.datadoghq.com/api/v2/cloud_auth/aws/persona_mapping" \
   }
 }'
 ```
+{{% /site-region %}}
+
+{{% site-region region="eu" %}}
+```bash
+curl -X POST "https://api.datadoghq.eu/api/v2/cloud_auth/aws/persona_mapping" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{
+  "data": {
+    "type": "aws_cloud_auth_config",
+    "attributes": {
+      "account_identifier": "terraform-service-account@myorg.com",
+      "arn_pattern": "arn:aws:sts::123456789012:assumed-role/terraform-runner"
+    }
+  }
+}'
+```
+{{% /site-region %}}
+
+{{% site-region region="us3" %}}
+```bash
+curl -X POST "https://api.us3.datadoghq.com/api/v2/cloud_auth/aws/persona_mapping" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{
+  "data": {
+    "type": "aws_cloud_auth_config",
+    "attributes": {
+      "account_identifier": "terraform-service-account@myorg.com",
+      "arn_pattern": "arn:aws:sts::123456789012:assumed-role/terraform-runner"
+    }
+  }
+}'
+```
+{{% /site-region %}}
+
+{{% site-region region="us5" %}}
+```bash
+curl -X POST "https://api.us5.datadoghq.com/api/v2/cloud_auth/aws/persona_mapping" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{
+  "data": {
+    "type": "aws_cloud_auth_config",
+    "attributes": {
+      "account_identifier": "terraform-service-account@myorg.com",
+      "arn_pattern": "arn:aws:sts::123456789012:assumed-role/terraform-runner"
+    }
+  }
+}'
+```
+{{% /site-region %}}
+
+{{% site-region region="ap" %}}
+```bash
+curl -X POST "https://api.ap1.datadoghq.com/api/v2/cloud_auth/aws/persona_mapping" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{
+  "data": {
+    "type": "aws_cloud_auth_config",
+    "attributes": {
+      "account_identifier": "terraform-service-account@myorg.com",
+      "arn_pattern": "arn:aws:sts::123456789012:assumed-role/terraform-runner"
+    }
+  }
+}'
+```
+{{% /site-region %}}
+
+{{% site-region region="gov" %}}
+```bash
+curl -X POST "https://api.ddog-gov.com/api/v2/cloud_auth/aws/persona_mapping" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{
+  "data": {
+    "type": "aws_cloud_auth_config",
+    "attributes": {
+      "account_identifier": "terraform-service-account@myorg.com",
+      "arn_pattern": "arn:aws:sts::123456789012:assumed-role/terraform-runner"
+    }
+  }
+}'
+```
+{{% /site-region %}}
 
 **List existing mappings:**
 
+{{% site-region region="us" %}}
 ```bash
 curl -X GET "https://api.datadoghq.com/api/v2/cloud_auth/aws/persona_mapping" \
 -H "DD-API-KEY: ${DD_API_KEY}" \
 -H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
 ```
+{{% /site-region %}}
+
+{{% site-region region="eu" %}}
+```bash
+curl -X GET "https://api.datadoghq.eu/api/v2/cloud_auth/aws/persona_mapping" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
+```
+{{% /site-region %}}
+
+{{% site-region region="us3" %}}
+```bash
+curl -X GET "https://api.us3.datadoghq.com/api/v2/cloud_auth/aws/persona_mapping" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
+```
+{{% /site-region %}}
+
+{{% site-region region="us5" %}}
+```bash
+curl -X GET "https://api.us5.datadoghq.com/api/v2/cloud_auth/aws/persona_mapping" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
+```
+{{% /site-region %}}
+
+{{% site-region region="ap" %}}
+```bash
+curl -X GET "https://api.ap1.datadoghq.com/api/v2/cloud_auth/aws/persona_mapping" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
+```
+{{% /site-region %}}
+
+{{% site-region region="gov" %}}
+```bash
+curl -X GET "https://api.ddog-gov.com/api/v2/cloud_auth/aws/persona_mapping" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
+```
+{{% /site-region %}}
 
 **Note**: To use these APIs, you need the `cloud_auth_config_read` and `cloud_auth_config_write` permissions.
 
