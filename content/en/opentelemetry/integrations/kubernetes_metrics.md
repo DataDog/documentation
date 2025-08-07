@@ -178,7 +178,7 @@ Metrics scraped from the `kube-state-metrics` endpoint provide information about
 
 The `kubeletstatsreceiver` collects metrics from the Kubelet on each node, focusing on pod, container, and volume resource usage.
 
-{{< mapping-table resource="k8s.csv">}}
+{{< mapping-table resource="kubeletstats.csv">}}
 
 ### Kubernetes cluster receiver
 
