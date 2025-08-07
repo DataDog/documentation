@@ -91,7 +91,7 @@ To set up the App and API Protection Service Extension in GCP, use the Google Cl
 
     <div class="alert alert-info">
       <p>
-        <strong>Note:</strong> When body processing is enabled, the service extension need to receive request and response bodies in addition to headers. This can increase processing time, especially for larger payloads. The service extension will only receive and analyze bodies when relevant, based on its configuration. If you enable body processing, make sure to <strong>adjust your timeout settings</strong> to allow for the additional processing time required for body inspection and transfer.
+        <strong>Note:</strong> When body processing is enabled, the service extension decides based on its configuration whether to receive the request body, the response body, or both, along with the headers which are always included. This decision is made separately for requests and responses. Receiving body content can increase processing time, especially for large payloads. If you enable body processing, make sure to <strong>adjust your timeout settings</strong> to allow for the additional processing time required for body inspection and transfer.
       </p>
     </div>
 </br>
