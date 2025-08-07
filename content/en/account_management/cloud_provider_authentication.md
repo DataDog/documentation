@@ -198,7 +198,7 @@ curl -X GET "https://api.ddog-gov.com/api/v2/cloud_auth/aws/persona_mapping" \
 ```
 {{% /site-region %}}
 
-**Note**: To use these APIs, you need the `cloud_auth_config_read` and `cloud_auth_config_write` permissions.
+**Note**: To use these APIs, you need the `cloud_auth_config_read` and `cloud_auth_config_write` permissions. These permissions are available only after being onboarded to the preview.
 
 ### 2. Update your Terraform provider configuration
 
