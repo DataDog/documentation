@@ -143,7 +143,7 @@ DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.2}]'
 
   **注**: スパンサンプリングルールの構成は、取り込みスパンから得られる[スパンベースメトリクス][8]を使用する場合に特に有効です。
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/single-span-sampling3.png" alt="Database spans sampling" style="width:100%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/single-span-sampling3.png" alt="データベーススパンサンプリング" style="width:100%;" >}}
 
 
 ## その他の参考資料
