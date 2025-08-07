@@ -221,7 +221,15 @@ pow(ping{region:*}, 2)
 To use `pow(a, b)`, `a`, and `b` can be constants or metrics. This function is only available on metrics.
 {{% /collapse-content %}}
 
-{{ % collapse-content title="Time()" level="h5" %}}
+{{ % collapse-content title="Time() function" level="h5" %}}
+The `time()` function returns the current Unix time in seconds as a timeseries. This is useful for calculations where you need to compare a metric's timestamp against the present, such as monitoring data freshness or calculating the time until an event expires. For example, to calcualte the time elapsed in seconds since the last reported backup, you can use `time()` to find the difference between now and the timestamp of the backup metric. 
+
+```text
+time() - max:backup.last_completed_timestamp{*}
+```
+
+In the editor, this would look like:
+
 
 {{% /collapse-content %}}
 
