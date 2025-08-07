@@ -1652,6 +1652,8 @@ components:
             example: arn:aws:lambda:us-east-1:123456789012:function:DatadogLambdaLogForwarder
             type: string
           type: array
+        log_source_config:
+          $ref: '#/components/schemas/AWSLambdaForwarderConfigLogSourceConfig'
         sources:
           description: 'List of service IDs set to enable automatic log collection.
             Discover the list of available services with the
@@ -1661,6 +1663,44 @@ components:
           items:
             example: s3
             type: string
+          type: array
+      type: object
+    AWSLambdaForwarderConfigLogSourceConfig:
+      description: Log source configuration.
+      properties:
+        tag_filters:
+          description: List of AWS log source tag filters. Defaults to `[]`.
+          items:
+            $ref: '#/components/schemas/AWSLogSourceTagFilter'
+          type: array
+      type: object
+    AWSLogSourceTagFilter:
+      description: 'AWS log source tag filter list. Defaults to `[]`.
+
+        Array of log source to AWS resource tag mappings. Each mapping contains a
+        log source and its associated AWS resource tags (in `key:value` format) used
+        to filter logs submitted to Datadog.
+
+        Tag filters are applied for tags on the AWS resource emitting logs; tags associated
+        with the log storage entity (such as a CloudWatch Log Group or S3 Bucket)
+        are not considered.
+
+        For more information on resource tag filter syntax, [see AWS resource exclusion](https://docs.datadoghq.com/account_management/billing/aws/#aws-resource-exclusion)
+        in the AWS integration billing page.'
+      properties:
+        source:
+          description: The AWS log source to which the tag filters defined in `tags`
+            are applied.
+          example: s3
+          type: string
+        tags:
+          description: The AWS resource tags to filter on for the log source specified
+            by `source`.
+          items:
+            description: Tag in the form `key:value`.
+            example: env:prod
+            type: string
+          nullable: true
           type: array
       type: object
     AWSLogsConfig:
@@ -53741,9 +53781,12 @@ paths:
               {\n        \"include_only\": [\n          \"us-east-1\"\n        ]\n
               \     },\n      \"logs_config\": {\n        \"lambda_forwarder\": {\n
               \         \"lambdas\": [\n            \"arn:aws:lambda:us-east-1:123456789012:function:DatadogLambdaLogForwarder\"\n
-              \         ],\n          \"sources\": [\n            \"s3\"\n          ]\n
-              \       }\n      },\n      \"metrics_config\": {\n        \"enabled\":
-              true,\n        \"automute_enabled\": true,\n        \"collect_custom_metrics\":
+              \         ],\n          \"sources\": [\n            \"s3\"\n          ],\n
+              \         \"log_source_config\": {\n            \"tag_filters\": [\n
+              \             {\n                \"source\": \"s3\",\n                \"tags\":
+              [\"test:test\"]\n              }\n            ]\n          }\n        }\n
+              \     },\n      \"metrics_config\": {\n        \"enabled\": true,\n
+              \       \"automute_enabled\": true,\n        \"collect_custom_metrics\":
               false,\n        \"collect_cloudwatch_alarms\": false,\n        \"tag_filters\":
               [\n          {\n            \"namespace\": \"AWS/EC2\",\n            \"tags\":
               [\n              \"key:value\"\n            ]\n          }\n        ],\n
