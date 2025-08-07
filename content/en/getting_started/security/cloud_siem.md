@@ -137,7 +137,7 @@ Contact [support][26] to disable Cloud SIEM.
 [17]: /security/notifications/rules/
 [18]: https://app.datadoghq.com/security/configuration/reports
 [19]: https://app.datadoghq.com/security/investigator/
-[20]: /security/cloud_siem/investigator
+[20]: /security/cloud_siem/triage_and_investigate/investigator
 [21]: https://app.datadoghq.com/dashboard/lists/preset/100
 [22]: /dashboards/#overview
 [23]: /security/suppressions/

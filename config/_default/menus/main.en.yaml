@@ -6098,12 +6098,12 @@ menu:
       identifier: cloud_siem_investigate_security_signals
       weight: 301
     - name: Risk Insights
-      url: security/cloud_siem/entities_and_risk_scoring
+      url: security/cloud_siem/triage_and_investigate/entities_and_risk_scoring
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_entities_and_risk_scoring
       weight: 302
     - name: Investigator
-      url: security/cloud_siem/investigator
+      url: security/cloud_siem/triage_and_investigate/investigator
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_investigator
       weight: 303
