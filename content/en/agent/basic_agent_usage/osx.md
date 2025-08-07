@@ -26,9 +26,7 @@ algolia:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for macOS. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
-
-See the [Supported Platforms][5] documentation for the complete list of supported macOS distributions and versions.
+This page outlines the basic features of the Datadog Agent for macOS. See the [Supported Platforms][5] documentation for the complete list of supported macOS distributions and versions.
 
 ## Install the Agent 
 To install the Agent on macOS, follow the [in-app instructions in Fleet Automation][6], and run the generated script on your hosts.
