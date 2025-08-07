@@ -464,7 +464,12 @@
     {
       "group": "events",
       "suffix": "",
-      "description": "Post an event returns \"OK\" response"
+      "description": "Example"
+    },
+    {
+      "group": "events",
+      "suffix": "_change",
+      "description": "Example 2"
     }
   ],
   "SearchEvents": [
