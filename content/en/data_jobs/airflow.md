@@ -345,7 +345,7 @@ OpenLineage integration can automatically inject Airflow's parent job informatio
 
 1. **Verify operator compatibility**: Check the [Apache Airflow OpenLineage documentation][8] to confirm your Spark operators are supported. This feature only works with specific operators like SparkSubmitOperator and LivyOperator.
 
-2. Make sure your Spark jobs are currently monitored through [Data Jobs Monitoring][2].
+2. Make sure your Spark jobs are actively monitored through [Data Jobs Monitoring][2].
 
 3. Enable automatic parent job information injection by setting the following configuration:
 
