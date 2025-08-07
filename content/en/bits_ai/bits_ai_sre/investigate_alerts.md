@@ -49,7 +49,7 @@ Bits is able to run investigations on monitors that fulfill all three of the fol
    - A logs query
    - A trace query
    - A Datadog notebook with helpful widgets
-   - A [Confluence page](#Configure-knowledge-base-integrations)
+   - A [Confluence page](#configure-knowledge-base-integrations)
 
 Think of the first page you'd navigate to in Datadog if this monitor were to fire. These links provide Bits with valuable context to kickstart its investigation. Links are not required for APM and log monitors.
 
