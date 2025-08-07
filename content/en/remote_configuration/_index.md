@@ -173,4 +173,4 @@ Instead of disabling Remote Configuration globally, Datadog recommends opting ou
 [36]: /tracing/dynamic_instrumentation/#explore-dynamic-instrumentation
 [37]: /security/cloud_security_management/setup/agentless_scanning/enable/
 [38]: /security/cloud_security_management/setup/agent/
-[39]: https://docs.datadoghq.com/security/cloud_security_management/setup/
+[39]: /security/cloud_security_management/setup/
