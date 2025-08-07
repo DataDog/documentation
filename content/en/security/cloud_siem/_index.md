@@ -192,7 +192,7 @@ On the right side, see a break down of signal activity by severity, source, and 
 
 #### Mean Time to Respond to Signals
 
-See KPIs of how quickly your team responds. Sets a signal to `under review` or `archive` by signal severity.
+See KPIs of how quickly your team responds. Click a severity tile to view signals set to `under review` or `archive` and filtered to the selected severity.
 
 ### MITRE ATT&CK coverage
 
