@@ -7,7 +7,7 @@ further_reading:
 - link: "/security/cloud_siem/investigate_security_signals"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
-- link: "/security/cloud_siem/detection_rules/"
+- link: "/security/cloud_siem/detect_and_monitor/custom_detection_rules/"
   tag: "Documentation"
   text: "Create new detection rules"
 ---

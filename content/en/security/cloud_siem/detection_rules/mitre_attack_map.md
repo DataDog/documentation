@@ -4,7 +4,7 @@ disable_toc: false
 aliases:
   - /security/cloud_siem/detection_rules/attack_map
 further_reading:
-- link: "/security/cloud_siem/detection_rules/"
+- link: "/security/cloud_siem/detect_and_monitor/custom_detection_rules/"
   tag: "Documentation"
   text: "Create custom detection rules"
 - link: "https://www.datadoghq.com/blog/cloud-siem-mitre-attack-map/"
@@ -63,4 +63,4 @@ This is an example of the format you need to use for tagging custom rules and th
 [1]: https://app.datadoghq.com/security/rules
 [2]: https://docs.datadoghq.com/security/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api/
 [3]: https://app.datadoghq.com/security/rules?query=product=siem&sort=date&viz=attck-map
-[4]: https://docs.datadoghq.com/security/cloud_siem/detection_rules/?tab=threshold
+[4]: https://docs.datadoghq.com/security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold
