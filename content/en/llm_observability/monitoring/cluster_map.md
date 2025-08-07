@@ -16,7 +16,7 @@ further_reading:
 
 You can identify drifts in your LLM applications by visualizing trace data in clusters on the [Clusters page][1]. Select an application configured with LLM Observability to view cluster information.
 
-> **Note:** Clustering can take up to **24 hours** after data is ingested to be fully processed and visible on the Cluster Map. During this time, spans that have not yet been clustered will appear under a **"Pending"** cluster.
+**Note:** Clustering can take up to **24 hours** after data is ingested to be fully processed and visible on the Cluster Map. During this time, spans that are not yet clustered appear under a **"Pending"** cluster.
 
 Cluster Maps display inputs or outputs, grouped by [topic][2]. Inputs and outputs are clustered separately. Topics are determined by clustering the selected input or output into text embeddings in high dimensions, then projecting them into a 2D space.
 
@@ -36,7 +36,7 @@ Cluster Maps provide an overview of each cluster's performance across operationa
 Customize your search query by selecting the sorting options to narrow down the clusters based on your specific criteria, such as evaluation metrics or time periods, for more targeted analysis.
 
 1. Select `inputs` or `outputs` from the dropdown menu to see clusters for inputs or outputs grouped by topic.
-1. Select an evaluation type or an evaluation score to color-code the clusters. For example, `Output Sentiment` for “What is the sentiment of the output?” or `duration` for “How long does it take for an LLM to generate an output (in nanoseconds)?”
+1. Select an evaluation type or an evaluation score to color-code the clusters. For example, `Output Sentiment` for "What is the sentiment of the output?" or `duration` for "How long does it take for an LLM to generate an output (in nanoseconds)?"
 1. Select a field for the clusters to be sorted by: time, duration, or color. Then, select **desc** or **asc** to set the order.
 
 Select a topic cluster from the list to examine how inputs or outputs about specific topics perform against other topics for each metric or evaluation. You can also see individual prompts and responses for each cluster. For example, you can get an overview of your slowest topics when you overlay by `duration`.
