@@ -6058,7 +6058,7 @@ menu:
       identifier: cloud_siem_custom_detection_rules
       weight: 201
     - name: Signal Correlation Rules
-      url: security/cloud_siem/detection_rules/signal_correlation_rules
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/signal_correlation_rules
       parent: cloud_siem_custom_detection_rules
       identifier: cloud_siem_signal_correlation_rules
       weight: 2101
