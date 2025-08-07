@@ -6073,12 +6073,12 @@ menu:
       identifier: cloud_siem_default_rules
       weight: 202
     - name: Suppressions
-      url: security/cloud_siem/suppressions/
+      url: security/suppressions/
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_suppressions
       weight: 203
     - name: Historical Jobs
-      url: security/cloud_siem/historical_jobs
+      url: security/cloud_siem/detect_and_monitor/historical_jobs
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_log_historical_jobs
       weight: 204

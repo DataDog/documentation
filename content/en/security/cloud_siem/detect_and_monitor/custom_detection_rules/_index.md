@@ -440,5 +440,5 @@ The rule deprecation process is as follows:
 [2]: /security/detection_rules/#clone-a-rule
 [3]: https://app.datadoghq.com/logs/
 [4]: https://app.datadoghq.com/security/rules
-[5]: /security/cloud_siem/historical_jobs/
+[5]: /security/cloud_siem/detect_and_monitor/historical_jobs/
 [6]: /security/default_rules/?category=cat-cloud-siem-log-detection#all

@@ -1,5 +1,7 @@
 ---
 title: Historical Jobs
+aliases:
+    - /security/cloud_siem/historical_jobs/
 further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-siem-historical-jobs/"
   tag: "Blog"
