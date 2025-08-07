@@ -6270,8 +6270,7 @@ menu:
           - v2
         operationids:
           - GetAggregatedDns
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Get all aggregated connections
       url: '#get-all-aggregated-connections'
@@ -6283,8 +6282,7 @@ menu:
           - v2
         operationids:
           - GetAggregatedConnections
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Cloudflare Integration
       url: /api/latest/cloudflare-integration/
