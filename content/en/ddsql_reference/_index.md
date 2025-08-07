@@ -33,6 +33,7 @@ This documentation covers the SQL support available and includes:
 - [SQL functions](#functions)
 - [Window functions](#window-functions)
 - [JSON functions](#json-functions-and-operators)
+- [Table functions](#table-functions)
 - [Tags](#tags)
 
 
@@ -123,7 +124,9 @@ The following SQL functions are supported. For Window function, see the separate
 | `TO_TIMESTAMP(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.             |
 | `TO_CHAR(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.             |
 | `DATE_TRUNC(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.  |
-| `REGEXP_LIKE(string s, pattern p)`               | boolean                               | Evaluates whether a string matches a regular expression pattern.                 |
+| `REGEXP_LIKE(string s, pattern p)`               | Boolean                               | Evaluates whether a string matches a regular expression pattern.            |
+| `REGEXP_MATCH(string s, pattern p)`              | array of strings                      | Returns substrings of the first pattern match in the string. Note: Function is in Preview; request access from Support.  |
+| `REGEXP_REPLACE(string s, pattern p, string replacement [, string flags ])`| string      | Replaces the first occurrence of the pattern in a string with the replacement. Optional `flags` argument, add `'g'` (global) to match all occurrences instead of first. Note: Function is in Preview; request access from Support.        |
 | `CARDINALITY(array a)`                           | integer                               | Returns the number of elements in the array.                                |
 | `ARRAY_POSITION(array a, typeof_array value)`    | integer                               | Returns the index of the first occurrence of the value found in the array, or null if value is not found. |
 | `STRING_TO_ARRAY(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter. |
@@ -382,6 +385,18 @@ WHERE
   REGEXP_LIKE(email_address, '@example\.com$')
 {{< /code-block >}}
 
+### `REGEXP_MATCH`
+{{< code-block lang="sql" >}}
+SELECT
+  REGEXP_MATCH('abc123xyz', '[0-9]+')
+{{< /code-block >}}
+
+### `REGEXP_REPLACE`
+{{< code-block lang="sql" >}}
+SELECT
+  REGEXP_REPLACE('2025-07/29', '-', '/')
+{{< /code-block >}}
+
 ### `CARDINALITY`
 {{< code-block lang="sql" >}}
 SELECT
@@ -452,6 +467,77 @@ This table provides an overview of the supprted window functions. For comprehens
 |------|-------------|-------------|
 | json_extract_path_text(text json, text path…) | text | Extracts a JSON sub-object as text, defined by the path. Its behavior is equivalent to the [Postgres function with the same name][3]. For example, `json_extract_path_text(col, ‘forest')` returns the value of the key `forest` for each JSON object in `col`. See the example below for a JSON array syntax.|
 | json_extract_path(text json, text path…) | JSON | Same functionality as `json_extract_path_text`, but returns a column of JSON type instead of text type.|
+
+## Table functions
+
+{{< callout url="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/" >}}
+Querying Logs and Metrics through DDSQL is in Preview. Use this form to request access.
+{{< /callout >}} 
+
+Table functions are used to query Logs and Metrics
+
+<table style="width: 100%; table-layout: fixed;">
+  <thead>
+    <tr>
+      <th style="width: 33%;">Function</th>
+      <th style="width: 33%;">Description</th>
+      <th style="width: 33%;">Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <pre>
+dd.logs(
+    filter => varchar,
+    columns => array < varchar >,
+    indexes ? => array < varchar >,
+    from_timestamp ? => timestamp,
+    to_timestamp ? => timestamp
+) AS (column_name type [, ...])</pre>
+      </td>
+      <td>Returns log data as a table. The columns parameter specifies which log fields to extract, and the AS clause defines the schema of the returned table. Optional: filtering by index or time range. When time is not specified, we default to the past 1 hour of data.</td>
+      <td>
+        {{< code-block lang="sql" >}}
+SELECT timestamp, host, service, message
+FROM dd.logs(
+    filter  => 'source:java',
+    columns => ARRAY['timestamp','host', 'service','message']
+) AS (
+    timestamp TIMESTAMP,
+    host      VARCHAR,
+    service   VARCHAR,
+    message   VARCHAR
+){{< /code-block >}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <pre>
+dd.metric_scalar(
+    query varchar,
+    reducer varchar [, from_timestamp timestamp, to_timestamp timestamp]
+)</pre>
+      </td>
+      <td>Returns metric data as a scalar value. The function accepts a metrics query (with optional grouping), a reducer to determine how values are aggregated (avg, max, etc.), and optional timestamp parameters (default 1 hour) to define the time range.</td>
+      <td>
+        {{< code-block lang="sql" >}}
+SELECT *
+FROM dd.metric_scalar(
+    'avg:system.cpu.user{*} by {service}',
+    'avg',
+    TIMESTAMP '2025-07-10 00:00:00.000-04:00',
+    TIMESTAMP '2025-07-17 00:00:00.000-04:00'
+)
+ORDER BY value DESC;{{< /code-block >}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
 
 ## Tags
 

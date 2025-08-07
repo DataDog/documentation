@@ -5654,6 +5654,72 @@ components:
       type: string
       x-enum-varnames:
       - DATE_REMAPPER
+    LogsDecoderProcessor:
+      description: 'The decoder processor decodes any source attribute containing
+        a
+
+        base64/base16-encoded UTF-8/ASCII string back to its original value, storing
+        the
+
+        result in a target attribute.'
+      properties:
+        binary_to_text_encoding:
+          $ref: '#/components/schemas/LogsDecoderProcessorBinaryToTextEncoding'
+        input_representation:
+          $ref: '#/components/schemas/LogsDecoderProcessorInputRepresentation'
+        is_enabled:
+          default: false
+          description: Whether the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        source:
+          description: Name of the log attribute with the encoded data.
+          example: encoded.field
+          type: string
+        target:
+          description: Name of the log attribute that contains the decoded data.
+          example: decoded.field
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsDecoderProcessorType'
+      required:
+      - source
+      - target
+      - binary_to_text_encoding
+      - input_representation
+      - type
+      type: object
+    LogsDecoderProcessorBinaryToTextEncoding:
+      description: The encoding used to represent the binary data.
+      enum:
+      - base64
+      - base16
+      example: base64
+      type: string
+      x-enum-varnames:
+      - BASE64
+      - BASE16
+    LogsDecoderProcessorInputRepresentation:
+      description: The original representation of input string.
+      enum:
+      - utf_8
+      - integer
+      example: utf_8
+      type: string
+      x-enum-varnames:
+      - UTF_8
+      - INTEGER
+    LogsDecoderProcessorType:
+      default: decoder-processor
+      description: Type of logs decoder processor.
+      enum:
+      - decoder-processor
+      example: decoder-processor
+      type: string
+      x-enum-varnames:
+      - DECODER_PROCESSOR
     LogsExclusion:
       description: Represents the index exclusion filter object from configuration
         API.
@@ -6322,6 +6388,7 @@ components:
       - $ref: '#/components/schemas/LogsTraceRemapper'
       - $ref: '#/components/schemas/LogsSpanRemapper'
       - $ref: '#/components/schemas/LogsArrayProcessor'
+      - $ref: '#/components/schemas/LogsDecoderProcessor'
     LogsQueryCompute:
       description: Define computation for a log query.
       properties:
@@ -19132,6 +19199,14 @@ components:
           description: The total account usage.
           format: int64
           type: integer
+        account_committed_usage:
+          description: The total account committed usage.
+          format: int64
+          type: integer
+        account_on_demand_usage:
+          description: The total account on-demand usage.
+          format: int64
+          type: integer
         elapsed_usage_hours:
           description: Elapsed usage hours for some billable product.
           format: int64
@@ -20929,6 +21004,21 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        event_management_correlation_correlated_events_sum:
+          description: Shows the sum of all Event Management correlated events over
+            all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        event_management_correlation_correlated_related_events_sum:
+          description: Shows the sum of all Event Management correlated related events
+            over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        event_management_correlation_sum:
+          description: Shows the sum of all Event Management correlations over all
+            hours in the current date for all organizations.
+          format: int64
+          type: integer
         fargate_container_profiler_profiling_fargate_avg:
           description: The average number of Profiling Fargate tasks over all hours
             in the current date for all organizations.
@@ -20961,6 +21051,11 @@ components:
           type: integer
         flex_logs_compute_small_avg:
           description: Shows the average number of Flex Logs Compute Small Instances
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_compute_xlarge_avg:
+          description: Shows the average number of Flex Logs Compute Extra Large Instances
             over all hours in the current date for the given org.
           format: int64
           type: integer
@@ -21859,6 +21954,21 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        event_management_correlation_correlated_events_sum:
+          description: Shows the sum of all Event Management correlated events over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        event_management_correlation_correlated_related_events_sum:
+          description: Shows the sum of all Event Management correlated related events
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        event_management_correlation_sum:
+          description: Shows the sum of all Event Management correlations over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
         fargate_container_profiler_profiling_fargate_avg:
           description: The average number of Profiling Fargate tasks over all hours
             in the current month for the given org.
@@ -21890,6 +22000,11 @@ components:
           type: integer
         flex_logs_compute_small_avg:
           description: Shows the average number of Flex Logs Compute Small Instances
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_compute_xlarge_avg:
+          description: Shows the average number of Flex Logs Compute Extra Large Instances
             over all hours in the current date for the given org.
           format: int64
           type: integer
@@ -22794,6 +22909,21 @@ components:
             hours in the current month for all organizations.
           format: int64
           type: integer
+        event_management_correlation_agg_sum:
+          description: Shows the sum of all Event Management correlations over all
+            hours in the current month for all organizations.
+          format: int64
+          type: integer
+        event_management_correlation_correlated_events_agg_sum:
+          description: Shows the sum of all Event Management correlated events over
+            all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        event_management_correlation_correlated_related_events_agg_sum:
+          description: Shows the sum of all Event Management correlated related events
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         fargate_container_profiler_profiling_fargate_avg_sum:
           description: The average number of Profiling Fargate tasks over all hours
             in the current month for all organizations.
@@ -22826,6 +22956,11 @@ components:
           type: integer
         flex_logs_compute_small_avg_sum:
           description: Shows the average number of Flex Logs Compute Small Instances
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        flex_logs_compute_xlarge_avg_sum:
+          description: Shows the average number of Flex Logs Compute Extra Large Instances
             over all hours in the current months for all organizations.
           format: int64
           type: integer
@@ -33061,7 +33196,9 @@ paths:
         type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/assignee:
     patch:
-      description: Modify the triage assignee of a security signal.
+      deprecated: true
+      description: This endpoint is deprecated - Modify the triage assignee of a security
+        signal.
       operationId: EditSecurityMonitoringSignalAssignee
       parameters:
       - $ref: '#/components/parameters/SignalID'
@@ -33112,7 +33249,9 @@ paths:
         type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/state:
     patch:
-      description: Change the triage state of a security signal.
+      deprecated: true
+      description: This endpoint is deprecated - Change the triage state of a security
+        signal.
       operationId: EditSecurityMonitoringSignalState
       parameters:
       - $ref: '#/components/parameters/SignalID'
@@ -35573,6 +35712,12 @@ paths:
       description: Search for Synthetic tests and Test Suites.
       operationId: SearchTests
       parameters:
+      - description: The search query.
+        in: query
+        name: text
+        required: false
+        schema:
+          type: string
       - description: If true, include the full configuration for each test in the
           response.
         in: query
@@ -39658,13 +39803,18 @@ tags:
 - description: Get a list of IP prefixes belonging to Datadog.
   name: IP Ranges
 - description: 'Manage your Datadog API and application keys. You need an API key
-    and
+    and an
 
-    an application key for a user with the required permissions to interact
+    application key for a user with the required permissions to interact with these
+    endpoints.
 
-    with these endpoints. The full list of API and application keys can be
 
-    seen on your [Datadog API page](https://app.datadoghq.com/account/settings#api).'
+    Consult the following pages to view and manage your keys:
+
+
+    - [API Keys](https://app.datadoghq.com/organization-settings/api-keys)
+
+    - [Application Keys](https://app.datadoghq.com/personal-settings/application-keys)'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/api-app-keys/

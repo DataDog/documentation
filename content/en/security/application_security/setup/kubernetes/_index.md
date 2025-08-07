@@ -27,8 +27,8 @@ Learn how to set up App and API Protection (AAP) on your Kubernetes services by 
 </div>
 
 {{< appsec-integrations >}}
-  {{< appsec-integration name="Python" avatar="python" link="/security/application_security/setup/python" >}}
-  {{< appsec-integration name="Node.js" avatar="node" link="/security/application_security/setup/nodejs" >}}
+  {{< appsec-integration name="Python" avatar="python" link="/security/application_security/setup/python/kubernetes" >}}
+  {{< appsec-integration name="Node.js" avatar="node" link="/security/application_security/setup/nodejs/kubernetes" >}}
   {{< appsec-integration name="Java" avatar="java" link="/security/application_security/setup/java/kubernetes" >}}
   {{< appsec-integration name="Go" avatar="go" link="/security/application_security/setup/go" >}}
   {{< appsec-integration name="Ruby" avatar="ruby" link="/security/application_security/setup/ruby" >}}

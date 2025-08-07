@@ -118,7 +118,7 @@ Reduce your indexed custom metrics volumes on any metric name by setting a tag c
 {{< img src="metrics/volume/reduce_metric_vol_cost_tags_03142025.png" alt="Example using Metrics Volume Management and Metrics without Limits™ to reduce volume by limiting the allowlist through tag configuration" style="width:80%;" >}}
 
 With Metrics without Limits™, Datadog automatically provides the following:
-- Up to date recommended tag configurations (based on our intelligent query insights) to help you maximize the ROI and value you get from your observability spend.
+- Up to date recommended tag configurations based on actively queried tags and tags used on assets (powered by our intelligent query insights) to help you maximize the ROI and value you get from your observability spend.
 - Intelligent query insights that continuously compute and analyze all users' interactions (both in-app and through the API) on any metrics submitted to Datadog so that your recommended tag configurations are always relevant.
 - Ability to roll back changes at any time to get full visibility into all your originally submitted data.
 
@@ -151,7 +151,7 @@ You can also reduce costs, without unintended side effects, by using the [Relate
 
 #### Identify all unqueried and unused metrics
 
-Use the [Related Assets facet][16] to gain visibility into the metrics that are unused in Datadog, which can help you reduce costs without accidentally breaking any assets. This facet lets you see which metrics are used on your dashboards, notebooks, monitors, and SLOs, allowing you to make informed decisions about your metric configurations. 
+Use the [Related Assets facet][16] to gain visibility into the metrics that are unused in Datadog, which can help you reduce costs without accidentally breaking any assets. This facet lets you see which metrics are used on your dashboards, notebooks, monitors, and SLOs, allowing you to make informed decisions about your metric configurations.
 
 Identify your organization's entire list of unqueried and unused metrics:
 
@@ -178,9 +178,9 @@ Based on Datadog's intelligent query insights across thousands of custom metrics
 
 Even though a metric is not queried for the past 30, 60, or 90 days, your teams might still derive value from it for incident management and outage remediation. Conversely, your teams could be underutilizing existing, actively queried metrics. So understanding the relative utility of your metrics is the next recommended step in your governance workflow. 
 
-Datadog's Metrics without Limits™ is a suite of features that also provide you with OOTB insights to assess the value of your actively queried metrics with the [Metrics Related Assets][15] side panel. A metrics related asset refers to any Datadog asset, such as a dashboard, notebook, monitor, or SLO that queries a particular metric. Use related asset popularity and quantity to evaluate metric utility within your organization, enabling data-driven decisions. Gain a better understanding of how your team can use existing metrics to get more value from your observability spend. 
+Datadog's Metrics without Limits™ is a suite of features that also provide you with OOTB insights to assess the value of your actively queried metrics with the [Metrics Related Assets][15] side panel. A metrics related asset refers to any Datadog asset, such as a dashboard, notebook, monitor, or SLO that queries a particular metric. Use the **Tags** column to identify which specific tags are used on assets, ensuring your retain visibility when optimizing with Metrics without Limits™. Use related asset popularity and quantity to evaluate metric utility within your organization, enabling data-driven decisions. Gain a better understanding of how your team can use existing metrics to get more value from your observability spend. 
 
-{{< img src="metrics/related_assets_2025-01-27.png" alt="Metric detail side panel showing the Related Assets section. The example metric is applied to three dashboards" style="width:100%;" >}}
+{{< img src="metrics/related_assets_08_05_2025.png" alt="Metric detail side panel showing the Related Assets section. The example metric is applied to three dashboards" style="width:100%;" >}}
 
 To view a metric's related assets:
 1. Click on the metric name to open its details side panel.

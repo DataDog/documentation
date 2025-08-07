@@ -421,7 +421,7 @@
             file_name: 'agent_config.yaml'
             output_content: false
         - action: pull-and-push-folder
-          branch: 7.66.x
+          branch: 7.68.x
           globs:
           - 'docs/cloud-workload-security/agent_expressions.md'
           - 'docs/cloud-workload-security/backend_linux.md'
@@ -429,7 +429,7 @@
           - 'docs/cloud-workload-security/linux_expressions.md'
           - 'docs/cloud-workload-security/windows_expressions.md'
           options:
-            dest_dir: '/security/threats/'
+            dest_dir: '/security/workload_protection/'
             path_to_remove: 'docs/cloud-workload-security/'
 
       - repo_name: web-ui
