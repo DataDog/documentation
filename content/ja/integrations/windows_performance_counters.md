@@ -28,7 +28,7 @@ draft: false
 git_integration_title: windows_performance_counters
 integration_id: windows-performance-counters
 integration_title: Windows パフォーマンスカウンター
-integration_version: 2.1.1
+integration_version: 3.1.0
 is_public: true
 manifest_version: 2.0.0
 name: windows_performance_counters
@@ -93,7 +93,7 @@ Windows パフォーマンスカウンターチェックにより収集された
 Windows パフォーマンスカウンターインテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "windows-performance-counters" >}}
+{{< get-service-checks-from-git "windows_performance_counters" >}}
 
 
 ## トラブルシューティング

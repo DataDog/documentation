@@ -96,7 +96,7 @@ EKS のモニタリングには、以下の Datadog インテグレーション�
 
 - [Kubernetes][6]
 - [AWS][7]
-- [AWS EC2][8]
+- [Amazon EC2][8]
 
 ### ログ収集
 

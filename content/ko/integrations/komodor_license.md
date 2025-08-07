@@ -93,6 +93,6 @@ Datadog Marketplace에서 이 서비스를 찾아 Komodor 플랫폼으로 액세
 Komodor에서는 고객이 성공하는 데 필요한 도구를 제공하기 위해 최선을 다합니다. 이에 따라 고객이 필요할 때 도와드릴 수 있는 다양한 채널을 만들었습니다. Komodor 애플리케이션 내에서 저희에게 메시지를 보내시거나(우측 하단에 있는 커뮤니케이션 버튼), [support@komodor.com](mailto:support@komodor.com)로 이메일을 보내 티켓을 개설하실 수 있습니다.
 
 
-[1]: /ko/integrations/komodor
+[1]: https://app.datadoghq.com/integrations/komodor
 ---
-이 애플리케이션은 마켓플레이스를 통해 제공되며 Datadog 기술 파트너가 지원합니다. 이 애플리케이션을 구매하려면 <a href="https://app.datadoghq.com/marketplace/app/komodor-komodor" target="_blank">여기를 클릭</a>하세요.
+이 애플리케이션은 Datadog Marketplace를 통해 제공되며, Datadog 기술 파트너의 지원을 받습니다. 사용하려면 <a href="https://app.datadoghq.com/marketplace/app/komodor-komodor" target="_blank">Marketplace에서 구매하세요.</a>

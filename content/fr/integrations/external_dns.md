@@ -1,80 +1,32 @@
 ---
 app_id: external-dns
-app_uuid: b41539a6-8222-4d6e-92f9-0a9f8496acdd
-assets:
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: external_dns.source.endpoints.total
-      metadata_path: metadata.csv
-      prefix: external_dns.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10075
-    source_type_name: ExternalDNS
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
 - network
 custom_kind: integration
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/external_dns/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: external_dns
-integration_id: external-dns
-integration_title: ExternalDNS
-integration_version: 5.1.0
-is_public: true
-manifest_version: 2.0.0
-name: external_dns
-public_title: ExternalDNS
-short_description: Surveillez toutes vos métriques ExternalDNS avec Datadog.
+description: Surveillez toutes vos métriques ExternalDNS avec Datadog.
+integration_version: 6.0.0
+media: []
 supported_os:
 - linux
 - macos
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Network
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Surveillez toutes vos métriques ExternalDNS avec Datadog.
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: ExternalDNS
+title: ExternalDNS
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
-
-
 ## Section Overview
 
 Recueillez des métriques sur le service ExternalDNS en temps réel pour visualiser et surveiller les métriques recueillies avec le plug-in Prometheus ExternalDNS pour Kubernetes.
 
-Pour en savoir plus sur le service ExternalDNS, consultez le [référentiel Github][1].
+Pour plus d'informations sur le DNS externe, voir le [Github repo] (https://github.com/kubernetes-incubator/external-dns).
 
 ## Configuration
 
 ### Installation
 
-Le check ExternalDNS est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs.
+La vérification du DNS externe est incluse dans le paquet [Datadog Agent ](https://app.datadoghq.com/account/settings/agent/latest), vous n'avez donc pas besoin d'installer quoi que ce soit d'autre sur vos serveurs.
 
 ### Configuration
 
-Modifiez le fichier `external_dns.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] afin de spécifier votre serveur et votre port et de définir les masters à surveiller. Consultez le [fichier d'exemple external_dns.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+Modifiez le fichier `external_dns.d/conf.yaml`, dans le dossier `conf.d/` à la racine de votre [Agent's configuration directory](https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory), pour qu'il pointe vers votre serveur et votre port, et pour que les maîtres soient Monitor. Consultez l'[exemple external_dns.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/external_dns/datadog_checks/external_dns/data/conf.yaml.example) pour connaître toutes les options de configuration disponibles.
 
 #### Utilisation de la découverte de services
 
@@ -95,31 +47,32 @@ metadata:
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][5] et cherchez `external_dns` dans la section Checks.
+[Exécutez la sous-commande `status` de Agent(https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) et recherchez `external_dns` dans la section Checks.
 
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "external_dns" >}}
 
+| | |
+| --- | --- |
+| **external_dns.controller.last_sync** <br>(gauge) | Date de la dernière synchronisation réussie avec le fournisseur de DNS<br>_Affichée en secondes_. |
+| **external_dns.registry.endpoints.total** <br>(gauge) | Nombre de points d'extrémité du registre<br>_Consulter la ressource_. |
+| **external_dns.registry.errors.total** <br>(jauge) | Nombre d'erreurs de registre<br>_Affichage de l'erreur_. |
+| **external_dns.source.endpoints.total** <br>(gauge) | Nombre de points d'aboutissement source<br> _Constitué de resource_ |
+| **external_dns.source.errors.total** <br>(gauge) | Nombre d'erreurs source<br> _Affichage de l'erreur_. |
 
 ### Événements
 
 Le check ExternalDNS n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "external_dns" >}}
 
+**external_dns.prometheus.health**
+
+Renvoie `CRITICAL` si le contrôle ne peut pas accéder au point de terminaison des métriques, sinon renvoie `OK`.
+
+Etat : ok, critique
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
-
-[1]: https://github.com/kubernetes-incubator/external-dns
-[2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/external_dns/datadog_checks/external_dns/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-core/blob/master/external_dns/metadata.csv
-[7]: https://github.com/DataDog/integrations-core/blob/master/external_dns/assets/service_checks.json
-[8]: https://docs.datadoghq.com/fr/help/
+Besoin d'aide ? Contactez l'[assistance Datadog](https://docs.datadoghq.com/help/).

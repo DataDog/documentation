@@ -1,64 +1,16 @@
 ---
 app_id: cri
-app_uuid: 81805522-0f55-45a4-95f6-23dd9ea46361
-assets:
-  dashboards:
-    cri: assets/dashboards/overview.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: cri.cpu.usage
-      metadata_path: metadata.csv
-      prefix: cri.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10043
-    source_type_name: CRI
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
 - incident-teams
 - kubernetes
 custom_kind: integration
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/cri/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: cri
-integration_id: cri
-integration_title: CRI
-integration_version: ''
-is_public: true
-manifest_version: 2.0.0
-name: cri
-public_title: CRI
-short_description: Surveillez toutes vos métriques CRI avec Datadog.
+description: Surveillez toutes vos métriques CRI avec Datadog.
+integration_version: 1.0.0
+media: []
 supported_os:
 - linux
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Containers
-  - Category::Kubernetes
-  - Supported OS::Linux
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Surveillez toutes vos métriques CRI avec Datadog.
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: CRI
+title: CRI
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
-
-
 ## Section Overview
 
 Ce check surveille une interface de runtime de conteneur (Container Runtime Interface ou CRI).
@@ -67,7 +19,7 @@ Ce check surveille une interface de runtime de conteneur (Container Runtime Inte
 
 ### Installation
 
-CRI est un [check de base de l'Agent Datadog][1] qui doit être configuré dans `datadog.yaml` avec `cri.d/conf.yaml`.
+CRI est un contrôle de base [Datadog Agent ](https://app.datadoghq.com/account/settings/agent/latest) qui doit être configuré dans `datadog.yaml` avec `cri.d/conf.yaml`.
 
 Dans `datadog.yaml`, configurez votre `cri_socket_path` pour l'Agent afin d'interroger votre CRI actuel (vous pouvez également configurer des délais d'expiration par défaut). Dans `cri.d/conf.yaml`, configurez les réglages d'instance de check tels que `collect_disk` si votre CRI (p. ex., `containerd`) transmet des métriques sur l'utilisation du disque.
 
@@ -112,19 +64,29 @@ spec:
 
 ### Configuration
 
-1. Modifiez le fichier `cri.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance CRI. Consultez le [fichier d'exemple cri.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
+1. Editez le fichier `cri.d/conf.yaml`, dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à collecter vos données de performance crio. Voir le [sample cri.d/conf.yaml](https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/cri.d/conf.yaml.default) pour toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][3].
+1. [Redémarrer le Agent] (https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ### Validation
 
-Lancez la [sous-commande status][3] de l'Agent et cherchez `cri` dans la section Checks.
+Exécutez la [sous-commande d'état] de Agent(https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent) et recherchez `cri` dans la section "Checks".
 
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "cri" >}}
 
+CRI recueille des données sur l'utilisation des ressources de vos conteneurs fonctionnant via CRI.
+
+Les métriques de CPU et de mémoire sont collectées d'emblée et vous pouvez également collecter certaines métriques de disque si elles sont supportées par votre CRI (CRI-O ne les supporte pas).
+
+| | |
+| --- | --- |
+| **cri.cpu.usage** <br>(jauge) | Utilisation cumulée de l'unité centrale (somme de tous les cœurs) depuis la création de l'objet<br>_Affichée en nanocœur_. |
+| **cri.disk.inodes** <br>(jauge) | Représente les inodes utilisés par les images<br>_Montré comme inode_. |
+| **cri.disk.used** <br>(gauge) | Représente les octets utilisés pour les images sur le système de fichiers<br>_Constitué d'octets_. |
+| **cri.mem.rss** <br>(jauge) | La quantité de mémoire de l'ensemble de travail en octets <br>_Affichage en octets_. |
+| **cri.uptime** <br>(gauge) | Temps écoulé depuis le démarrage du conteneur<br>_Affiché en seconde_ |
 
 ### Checks de service
 
@@ -136,10 +98,4 @@ CRI n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
-
-[1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/cri.d/conf.yaml.default
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://github.com/DataDog/integrations-core/blob/master/cri/metadata.csv
-[5]: https://docs.datadoghq.com/fr/help/
+Besoin d'aide ? Contactez l'[assistance Datadog](https://docs.datadoghq.com/help/).

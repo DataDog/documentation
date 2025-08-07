@@ -1,26 +1,58 @@
 ---
+app_id: azure-queue-storage
+app_uuid: fafca6a4-8820-4a42-bc84-1d53f322366e
+assets:
+  dashboards:
+    azure_queue_storage: assets/dashboards/azure_queue_storage.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.storage_storageaccounts_queueservices.queue_count
+      metadata_path: metadata.csv
+      prefix: azure.storage_storageaccounts_queueservices
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 224
+    source_type_name: Azure Queue Storage
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - クラウド
 - azure
 custom_kind: インテグレーション
 dependencies: []
-description: Azure Queue Storage のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_queue_storage/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_queue_storage
-has_logo: true
 integration_id: azure-queue-storage
-integration_title: Microsoft Azure Queue Storage
+integration_title: Azure Queue Storage
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_queue_storage
-public_title: Datadog-Microsoft Azure Queue Storage インテグレーション
+public_title: Azure Queue Storage
 short_description: Azure Queue Storage のキーメトリクスを追跡
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Azure
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Azure Queue Storage のキーメトリクスを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Queue Storage
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Azure Queue Storage は、多数のメッセージを格納するためのサービスです。メッセージには、HTTP または HTTPS を使用し、認証された呼び出しで世界中のどこからでもアクセスできます。
@@ -39,7 +71,7 @@ Azure Queue Storage からメトリクスを取得すると、以下のことが
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure-queue-storage" >}}
+{{< get-metrics-from-git "azure_queue_storage" >}}
 
 
 ### イベント

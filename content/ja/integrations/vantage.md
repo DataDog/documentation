@@ -11,7 +11,7 @@ author:
 categories:
 - コスト管理
 - クラウド
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/vantage/README.md
 display_on_public_website: true

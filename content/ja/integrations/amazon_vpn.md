@@ -1,28 +1,14 @@
 ---
+app_id: amazon_vpn
 categories:
 - aws
 - クラウド
 - ログの収集
 - ネットワーク
 custom_kind: インテグレーション
-dependencies: []
 description: AWS VPN のキーメトリクスを追跡します。
-doc_link: https://docs.datadoghq.com/integrations/amazon_vpn/
-draft: false
-git_integration_title: amazon_vpn
-has_logo: true
-integration_id: ''
-integration_title: AWS VPN
-integration_version: ''
-is_public: true
-manifest_version: '1.0'
-name: amazon_vpn
-public_title: Datadog-AWS VPN インテグレーション
-short_description: AWS VPN のキーメトリクスを追跡します。
-version: '1.0'
+title: AWS VPN
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS VPN を使用すると、ユーザーネットワークまたはデバイスから AWS グローバルネットワークへの安全なプライベートトンネルを確立できます。
@@ -33,12 +19,12 @@ AWS VPN を使用すると、ユーザーネットワークまたはデバイス
 
 ### インストール
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration](https://docs.datadoghq.com/integrations/amazon_web_services/) first.
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `VPN` が有効になっていることを確認します。
-2. [Datadog - AWS VPN インテグレーション][3]をインストールします。
+1. In the [AWS integration page](https://app.datadoghq.com/integrations/amazon-web-services), ensure that `VPN` is enabled under the `Metric Collection` tab.
+1. Install the [Datadog - AWS VPN integration](https://app.datadoghq.com/integrations/amazon-vpn).
 
 ### ログ収集
 
@@ -50,35 +36,35 @@ AWS VPN から S3 バケットまたは CloudWatch のいずれかにログを�
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから、AWS VPN ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+1. If you haven’t already, set up the [Datadog Forwarder Lambda function](https://docs.datadoghq.com/logs/guide/forwarder/).
 
-    - [S3 バケットに手動トリガーを追加][5]
-    - [CloudWatch ロググループに手動トリガーを追加][6]
+1. Lambda 関数がインストールされたら、AWS コンソールから、AWS VPN ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+
+   - [Add a manual trigger on the S3 bucket](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets)
+   - [Add a manual trigger on the CloudWatch Log Group](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group)
 
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_vpn" >}}
 
+| | |
+| --- | --- |
+| **aws.vpn.tunnel_data_in** <br>(count) | The average number of bytes that have come in through the VPN tunnel<br>_Shown as byte_ |
+| **aws.vpn.tunnel_data_in.sum** <br>(count) | The total number of bytes that have come in through the VPN tunnel<br>_Shown as byte_ |
+| **aws.vpn.tunnel_data_out** <br>(count) | The average number of bytes that have gone out through the VPN tunnel<br>_Shown as byte_ |
+| **aws.vpn.tunnel_data_out.sum** <br>(count) | The total number of bytes that have gone out through the VPN tunnel<br>_Shown as byte_ |
+| **aws.vpn.tunnel_state** <br>(gauge) | This metric is 1 when all tunnels for the VPN are up, and 0 when all tunnels are down. Values between 0 and 1 indicate some tunnels for the VPN are up.|
+| **aws.vpn.tunnel_state.maximum** <br>(gauge) | This metric is 1 when any tunnel for the VPN is up, and 0 when all tunnels are down.|
+| **aws.vpn.tunnel_state.minimum** <br>(gauge) | This metric is 1 when all tunnels for the VPN are up, and 0 when any tunnel is down.|
 
 ### イベント
 
 AWS VPN インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービス チェック
 
 AWS VPN インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
-
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://app.datadoghq.com/integrations/amazon-vpn
-[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_vpn/amazon_vpn_metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+お問合せは、[Datadog サポート](https://docs.datadoghq.com/help/) まで。

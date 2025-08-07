@@ -247,7 +247,7 @@ Datadog でカスタム日付と時間形式をパースする方法について
 
 ## ログメッセージリマッパー
 
-`message` は、Datadog のキー属性です。その値はログエクスプローラーの **Content** 列に表示され、ログのコンテキストを提供します。検索バーを使って、ログメッセージでログを見つけることができます。
+`message` is a key attribute in Datadog. Its value is displayed in the **Content** column of the Log Explorer to provide context on the log. You can use the search bar to find a log by the log message.
 
 ログメッセージリマッパープロセッサーを使用して、1 つまたは複数の属性を公式ログメッセージとして定義します。属性が存在しない可能性があり、代替が可能な場合には、複数の属性を定義します。例えば、定義されたメッセージの属性が `attribute1`、`attribute2`、`attribute3` で、`attribute1` が存在しない場合は `attribute2` が使用されます。同様に、`attribute2` が存在しない場合、`attribute3` が使用されます。
 
@@ -578,7 +578,7 @@ URL パーサープロセッサーは URL からクエリパラメーターな�
 リクエスト GET https://app.datadoghq.com/users に対する応答 200
 ```
 
-**注**: `http` はオブジェクトであり、ブロック内で使用することはできません (`%{http}` は失敗します)。一方、`%{http.method}`、`%{http.status_code}`、または `%{http.url}` は、対応する値を返します。ブロックは、値の配列や配列内の特定の属性に対して使用することができます。
+**Note**: `http` is an object and cannot be used in a block (`%{http}` fails), whereas `%{http.method}`, `%{http.status_code}`, or `%{http.url}` returns the corresponding value. Blocks can be used on arrays of values or on a specific attribute within an array.
 
 * 例えば、 `%{array_ids}` というブロックを追加すると、以下のような値が返されます。
 
@@ -678,7 +678,7 @@ geoIP パーサーは、IP アドレスの属性を受け取り、対象の属�
 * 現在のログにソース属性が含まれていないかを確認する。
 * ソース属性の値がマッピングテーブルに存在するかをチェックする。
   * 存在する場合、テーブルにターゲット属性を作成し、対応する値を割り当てる。
-  * オプションとして、マッピングテーブルで値が見つからなかった場合、`fallbackValue` フィールドにデフォルトのフォールバック値を設定したターゲット属性を作成します。**Manual Mapping** タブでは、`source_key,target_value` ペアのリストを手動で入力するか、CSV ファイルをアップロードすることができます。
+  * Optionally, if it does not find the value in the mapping table, it creates a target attribute with the default fallback value set in the `fallbackValue` field. You can manually enter a list of `source_key,target_value` pairs or upload a CSV file on the **Manual Mapping** tab.
 
     {{< img src="logs/log_configuration/processor/lookup_processor_manual_mapping.png" alt="ルックアッププロセッサー" style="width:80%;">}}
 
@@ -686,7 +686,7 @@ geoIP パーサーは、IP アドレスの属性を受け取り、対象の属�
 
   * オプションとして、マッピングテーブルで値が見つからない場合は、リファレンステーブルの値でターゲット属性を作成します。[Reference Table][101] の値は、**Reference Table** タブで選択できます。
 
-    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="ルックアッププロセッサー" 
+    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Lookup processor"
     style="width:80%;">}}
 
 
@@ -945,6 +945,12 @@ geoIP パーサーは、IP アドレスの属性を受け取り、対象の属�
 {{% /tab %}}
 {{< /tabs >}}
 
+## Threat intel processor
+
+Add the Threat Intel Process to evaluate logs against the table using a specific Indicator of Compromise (IoC) key, such as an IP address. If a match is found, the log is enriched with relevant Threat Intelligence (TI) attributes from the table, which enhances detection, investigation, and response.
+
+For more information, see [Threat Intelligence][9].
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -960,3 +966,4 @@ geoIP パーサーは、IP アドレスの属性を受け取り、対象の属�
 [6]: /ja/logs/search_syntax/
 [7]: /ja/integrations/guide/reference-tables/
 [8]: /ja/tracing/other_telemetry/connect_logs_and_traces/
+[9]: /ja/security/threat_intelligence/

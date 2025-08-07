@@ -2,6 +2,8 @@
 app_id: 도커(Docker)
 app_uuid: ca1a7870-7d95-40c7-9790-ef6c1e928967
 assets:
+  dashboards:
+    docker: assets/dashboards/docker_dashboard.json
   integration:
     auto_install: true
     configuration: {}
@@ -55,10 +57,24 @@ tile:
   - Category::Containers
   - Category::Log Collection
   - Category::Network
+  - 제공::통합
   configuration: README.md#Setup
   description: 컨테이너 성능과 내부에서 실행 중인 서비스 성능을 상호 연결합니다.
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: 설명서
+    url: https://docs.datadoghq.com/agent/guide/compose-and-the-datadog-agent
+  - resource_type: 설명서
+    url: https://docs.datadoghq.com/integrations/faq/dogstatsd-and-docker
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/the-docker-monitoring-problem
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/how-to-monitor-docker-resource-metrics
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/how-to-collect-docker-metrics
+  - resource_type: 설명서
+    url: https://www.datadoghq.com/docker-adoption
   support: README.md#Support
   title: 도커(Docker) Daemon
 ---
@@ -193,7 +209,7 @@ Datadog 에이전트, Alpine Linux 기반 이미지, 버전 관리 등을 사용
 
 ## 수집한 데이터
 ### 메트릭
-{{< get-metrics-from-git "docker" >}}
+{{< get-metrics-from-git "docker_daemon" >}}
 
 
 ### 이벤트
@@ -211,7 +227,7 @@ Datadog 에이전트, Alpine Linux 기반 이미지, 버전 관리 등을 사용
 * 업데이트
 
 ### 서비스 점검
-{{< get-service-checks-from-git "docker" >}}
+{{< get-service-checks-from-git "docker_daemon" >}}
 
 
 **참고**: `docker.exit`를 사용하려면 [도커(Docker) YAML file][21] 파일에 `collect_exit_codes: true`를 추가하고 에이전트를 다시 시작합니다.
@@ -228,7 +244,7 @@ Datadog 에이전트, Alpine Linux 기반 이미지, 버전 관리 등을 사용
 * [도커(Docker) 리소스 메트릭 모니터링 방법][26]
 * [도커(Docker) 메트릭 수집 방법][27]
 * [실제 도커(Docker) 도입에 대한 8가지 놀라운 사실][28]
-* [AWS ECS에서 도커(Docker) 모니터링하기][29]
+* [AWS ECS 환경에서 Docker 모니터링 시작하기][29]
 * [Datadog 도커화][30]
 * [Datadog으로 도커(Docker) 모니터링하기][31]
 

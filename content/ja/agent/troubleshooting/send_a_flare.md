@@ -14,10 +14,6 @@ further_reading:
 title: Agent フレア
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Agent Flare の送信はこのサイトではサポートされていません。</div>
-{{< /site-region >}}
-
 フレアを使用すると、必要なトラブルシューティング情報を Datadog のサポートチームに送信できます。
 
 このページでは、以下の内容を説明しています。
@@ -29,13 +25,19 @@ title: Agent フレア
 
 Datadog Agent は完全にオープンソースなので、[コードの動作を検証][1]することができます。フレアは、アップロードの前に確認を求めるため、必要に応じて送信前にフレアを確認できます。
 
+Agent で Remote Configuration が有効な状態で Datadog Support に問い合わせる際、サポートチームは迅速な対応のためにお客様の環境から flare を起動する場合があります。flare にはトラブルシューティング情報が含まれており、Datadog Support に提供されることで問題解決を支援します。
+
 ## Datadog サイトからフレアを送信する
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Sending an Agent Flare from Fleet Automation is not supported for this site.</div>
+{{< /site-region >}}
 
 Datadog サイトからフレアを送信するには、Agent の [Fleet Automation][2] と [Remote configuration][3] が有効になっていることを確認してください。
 
 {{% remote-flare %}}
 
-{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="Send Ticket ボタンは、既存または新規のサポートチケットに対してフレアを送信するためのフォームを起動します" style="width:70%;" >}}
+{{< img src="agent/fleet_automation/fleet_automation_remote_flare.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:70%;" >}}
 
 ## `flare` コマンドを使用してフレアを送信する
 
@@ -60,7 +62,7 @@ Datadog サイトからフレアを送信するには、Agent の [Fleet Automat
 | Redhat     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Suse       | `sudo datadog-agent flare <CASE_ID>`                    |
 | ソース     | `sudo datadog-agent flare <CASE_ID>`                    |
-| Windows    | [Windows][2]に関する個別のドキュメントをご参照ください。        |
+| Windows    | `& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>`       |
 | Heroku     | [Heroku][3]に関する個別のドキュメントをご参照ください。         |
 | PCF     | `sudo /var/vcap/jobs/dd-agent/packages/dd-agent/bin/agent/agent flare <CASE_ID>`             |
 
@@ -155,5 +157,5 @@ kubectl cp datadog-<pod-name>:tmp/datadog-agent-<date-of-the-flare>.zip flare.zi
 
 [1]: https://github.com/DataDog/datadog-agent/tree/main/pkg/flare
 [2]: /ja/agent/fleet_automation/
-[3]: /ja/agent/remote_config#enabling-remote-configuration
+[3]: /ja/agent/guide/setup_remote_config
 [4]: /ja/tracing/troubleshooting/tracer_debug_logs/?code-lang=dotnet#data-collected

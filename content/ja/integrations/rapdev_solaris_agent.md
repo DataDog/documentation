@@ -24,7 +24,7 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- マーケットプレイス
+- marketplace
 - oracle
 custom_kind: インテグレーション
 dependencies: []
@@ -61,7 +61,7 @@ tile:
   configuration: README.md#Setup
   description: sparc と i86pc の Solaris 10 および 11 のメトリクスを提供する Agent
   media:
-  - caption: インフラストラクチャーリスト
+  - caption: インフラストラクチャー一覧
     image_url: images/1.png
     media_type: image
   - caption: ホストインフラストラクチャーの詳細
@@ -86,7 +86,7 @@ Solaris Agent は、Datadog インフラストラクチャーリストをサポ�
 
 Solaris Agent は、ネイティブ Agent と同じ URL とポートを使用します。Solaris Agent は、コアインフラストラクチャーメトリクス、プロセスチェック、ログ追跡をサポートしています。インテグレーションまたはサービスチェックはサポートしていません。
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 

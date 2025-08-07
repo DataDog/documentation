@@ -1,60 +1,12 @@
 ---
 app_id: planetscale
-app_uuid: ea670b69-7322-4c75-afbc-4ef1a6cf286c
-assets:
-  dashboards:
-    planetscale_overview: assets/dashboards/planetscale_overview.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: planetscale.tables.storage
-      metadata_path: metadata.csv
-      prefix: planetscale.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10264
-    source_type_name: PlanetScale
-author:
-  homepage: http://www.planetscale.com
-  name: PlanetScale
-  sales_email: sales@planetscale.com
-  support_email: support@planetscale.com
 categories:
 - data stores
 custom_kind: integration
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/planetscale/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: planetscale
-integration_id: planetscale
-integration_title: PlanetScale
-integration_version: ''
-is_public: true
-manifest_version: 2.0.0
-name: planetscale
-public_title: PlanetScale
-short_description: PlanetScale のメトリクスを DataDog に送信します。
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Data Stores
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: PlanetScale のメトリクスを DataDog に送信します。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: PlanetScale
+description: PlanetScale のメトリクスを DataDog に送信します。
+media: []
+title: PlanetScale
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
-
-
 ## 概要
 
 PlanetScale は、Datadog にメトリクスをプッシュして、データベースの使用量とパフォーマンスの把握を支援することができます。
@@ -63,18 +15,29 @@ PlanetScale は、Datadog にメトリクスをプッシュして、データベ
 
 以下の手順に従って、Datadog にメトリクスをプッシュするために PlanetScale の組織を構成してください。
 
-1. [Datadog 組織設定][1]で、Datadog API キーを作成します。
-2. [PlanetScale 組織設定][2]で Datadog の API キーを PlanetScale に渡します。
+1. Create a Datadog API key in your [Datadog Organization Settings](https://app.datadoghq.com/organization-settings/api-keys).
+1. Supply PlanetScale with the Datadog API key in your [PlanetScale Organization Settings](https://app.planetscale.com/settings/integrations).
 
-![PlanetScale 組織設定][3]
+![PlanetScale Organization Settings](https://raw.githubusercontent.com/DataDog/integrations-extras/master/planetscale/images/planetscale.png)
 
-## 収集データ
+## 収集されるデータ
 
 ### メトリクス
-{{< get-metrics-from-git "planetscale" >}}
 
+| | |
+| --- | --- |
+| **planetscale.connections** <br>(gauge) | Number of active connections to a database branch<br>_Shown as connection_ |
+| **planetscale.rows_read** <br>(count) | Number of rows read from a database branch<br>_Shown as row_ |
+| **planetscale.rows_written** <br>(count) | Number of rows written to a database branch<br>_Shown as row_ |
+| **planetscale.tables.cumulative_query_time** <br>(count) | Cumulative active query time in a database branch by table and statement<br>_Shown as nanosecond_ |
+| **planetscale.tables.queries** <br>(count) | Number of queries issued to a database branch by table and statement<br>_Shown as query_ |
+| **planetscale.tables.rows_deleted** <br>(count) | Number of rows deleted from a database branch by table<br>_Shown as row_ |
+| **planetscale.tables.rows_inserted** <br>(count) | Number of rows inserted into a database branch by table<br>_Shown as row_ |
+| **planetscale.tables.rows_selected** <br>(count) | Number of rows selected in a database branch by table<br>_Shown as row_ |
+| **planetscale.tables.rows_updated** <br>(count) | Number of rows updated in a database branch by table<br>_Shown as row_ |
+| **planetscale.tables.storage** <br>(gauge) | Total bytes stored in a database branch by table<br>_Shown as byte_ |
 
-### サービスチェック
+### サービス チェック
 
 Planetscale には、サービスのチェック機能は含まれません。
 
@@ -84,11 +47,4 @@ Planetscale には、イベントは含まれません。
 
 ## サポート
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
-
-
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: https://app.planetscale.com/settings/integrations
-[3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/planetscale/images/planetscale.png
-[4]: https://github.com/DataDog/integrations-extras/blob/master/planetscale/metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+お問合せは、[Datadog サポート](https://docs.datadoghq.com/help/) まで。

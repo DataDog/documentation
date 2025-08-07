@@ -1,27 +1,13 @@
 ---
+app_id: azure_functions
 categories:
 - azure
 - クラウド
 - プロビジョニング
 custom_kind: インテグレーション
-dependencies: []
 description: Azure Functions のキーメトリクスを追跡。
-doc_link: https://docs.datadoghq.com/integrations/azure_functions/
-draft: false
-git_integration_title: azure_functions
-has_logo: true
-integration_id: ''
-integration_title: Microsoft Azure Functions
-integration_version: ''
-is_public: true
-manifest_version: '1.0'
-name: azure_functions
-public_title: Datadog-Microsoft Azure Functions インテグレーション
-short_description: Azure Functions のキーメトリクスを追跡。
-version: '1.0'
+title: Microsoft Azure Functions
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Functions は、イベント駆動型のサーバーレスコンピューティングプラットフォームです。複雑なオーケストレーション問題も解決します。追加のセットアップなしでローカルでビルドおよびデバッグし、クラウドで大規模にデプロイおよび運用が可能なうえ、トリガーとバインドによりサービスを統合します。
@@ -35,26 +21,62 @@ Azure Functions からメトリクスを取得すると、以下のことがで�
 
 ### インストール
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration](https://docs.datadoghq.com/integrations/azure/) first. There are no other installation steps.
 
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_functions" >}}
 
+| | |
+| --- | --- |
+| **azure.functions.average_memory_working_set** <br>(gauge) | Average memory working set<br>_Shown as byte_ |
+| **azure.functions.average_response_time** <br>(gauge) | The average time taken for the app to serve requests, in seconds.<br>_Shown as second_ |
+| **azure.functions.bytes_received** <br>(gauge) | Data In<br>_Shown as byte_ |
+| **azure.functions.bytes_sent** <br>(gauge) | Data Out<br>_Shown as byte_ |
+| **azure.functions.connections** <br>(gauge) | Connections<br>_Shown as connection_ |
+| **azure.functions.current_assemblies** <br>(gauge) | Current Assemblies|
+| **azure.functions.function_execution_count** <br>(count) | Function Execution Count|
+| **azure.functions.function_execution_units** <br>(count) | Function Execution Units|
+| **azure.functions.function_execution_units.max** <br>(count) | Maximum Function Execution Units (Max Aggregated)|
+| **azure.functions.gen_0_garbage_collections** <br>(gauge) | Gen 0 Garbage Collections|
+| **azure.functions.gen_1_garbage_collections** <br>(gauge) | Gen 1 Garbage Collections|
+| **azure.functions.gen_2_garbage_collections** <br>(gauge) | Gen 2 Garbage Collections|
+| **azure.functions.handle_count** <br>(count) | Handle Count|
+| **azure.functions.http101** <br>(count) | The count of requests resulting in an HTTP status code 101.|
+| **azure.functions.http2xx** <br>(count) | The count of requests resulting in an HTTP status code = 200 but \< 300.|
+| **azure.functions.http3xx** <br>(count) | The count of requests resulting in an HTTP status code = 300 but \< 400.|
+| **azure.functions.http401** <br>(count) | The count of requests resulting in HTTP 401 status code.|
+| **azure.functions.http403** <br>(count) | The count of requests resulting in HTTP 403 status code.|
+| **azure.functions.http404** <br>(count) | The count of requests resulting in HTTP 404 status code.|
+| **azure.functions.http406** <br>(count) | The count of requests resulting in HTTP 406 status code.|
+| **azure.functions.http4xx** <br>(count) | The count of requests resulting in an HTTP status code = 400 but \< 500.|
+| **azure.functions.http5xx** <br>(count) | Http Server Errors|
+| **azure.functions.io_other_bytes_per_second** <br>(rate) | IO Other Bytes Per Second<br>_Shown as byte_ |
+| **azure.functions.io_other_operations_per_second** <br>(rate) | IO Other Operations Per Second|
+| **azure.functions.io_read_bytes_per_second** <br>(rate) | IO Read Bytes Per Second<br>_Shown as byte_ |
+| **azure.functions.io_read_operations_per_second** <br>(rate) | IO Read Operations Per Second|
+| **azure.functions.io_write_bytes_per_second** <br>(rate) | IO Write Bytes Per Second<br>_Shown as byte_ |
+| **azure.functions.io_write_operations_per_second** <br>(rate) | IO Write Operations Per Second|
+| **azure.functions.memory_working_set** <br>(gauge) | Memory working set<br>_Shown as byte_ |
+| **azure.functions.private_bytes** <br>(gauge) | Private Bytes<br>_Shown as byte_ |
+| **azure.functions.requests_in_application_queue** <br>(count) | Requests In Application Queue<br>_Shown as request_ |
+| **azure.functions.thread_count** <br>(count) | Thread Count|
+| **azure.functions.total_app_domains** <br>(gauge) | Total App Domains|
+| **azure.functions.total_app_domains_unloaded** <br>(gauge) | Total App Domains Unloaded|
+| **azure.functions.file_system_usage** <br>(gauge) | Percentage of filesystem quota consumed by the app.<br>_Shown as byte_ |
+| **azure.functions.health_check_status** <br>(gauge) | Health check status.|
+| **azure.functions.response_time** <br>(gauge) | The time taken for the app to serve requests, in seconds.<br>_Shown as second_ |
+| **azure.functions.requests** <br>(count) | The total number of requests regardless of their resulting HTTP status code.|
+| **azure.functions.count** <br>(gauge) | The count of azure functions resources|
 
 ### イベント
 
 Azure Functions インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービス チェック
 
 Azure Functions インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
-
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
-[2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_functions/azure_functions_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+お問合せは、[Datadog サポート](https://docs.datadoghq.com/help/) まで。

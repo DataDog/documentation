@@ -68,7 +68,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft�
 ## Données collectées
 
 ### Métriques
-{{ get-metrics-from-git "azure-datalakeanalytics" }}
+{{< get-metrics-from-git "azure_data_lake_analytics" >}}
 
 
 ### Événements

@@ -2,6 +2,8 @@
 title: AWS Lambda에서 로그 수집
 ---
 
+<div class="alert alert-info"><a href="https://docs.datadoghq.com/serverless/libraries_integrations/extension/">Datadog Lambda 확장</a>을 사용하는 경우 로그 수집이 <strong>기본적으로 활성화됩니다</strong>. </div>
+
 ### 논람다 리소스에서 로그 수집
 
 AWS Lambda 함수 이외의 관리 리소스에서 생성된 로그는 서버리스 애플리케이션의 오류의 근본 원인을 파악하는 데 유용할 수 있습니다. Datadog은 사용자 환경의 AWS 관리형 리소스에서 다음과 같은 [로그를 수집][11]할 것을 권장합니다:
@@ -9,7 +11,7 @@ AWS Lambda 함수 이외의 관리 리소스에서 생성된 로그는 서버리
 - 쿼리 & 스트림: SQS, SNS, Kinesis
 - 데이터 저장: DynamoDB, S3, RDS
 
-## 구성
+## 설정
 
 ### 로그 수집 활성화
 

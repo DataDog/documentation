@@ -15,7 +15,7 @@ categories:
 - incident-teams
 - コスト管理
 - セキュリティ
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -92,4 +92,4 @@ Buoyant Cloud は、Linkerd 環境を管理・監視します。Buoyant によ�
 [support.buoyant.io](https://support.buoyant.io) にアクセスして、ご相談ください。
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/buoyant-inc-buoyant-cloud" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/buoyant-inc-buoyant-cloud" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

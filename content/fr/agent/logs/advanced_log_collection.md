@@ -4,6 +4,9 @@ algolia:
   - advanced log filter
 description: Utiliser l'Agent Datadog pour recueillir vos logs et les envoyer à Datadog
 further_reading:
+- link: /logs/guide/getting-started-lwl/
+  tag: Documentation
+  text: Démarrer avec Logging without LimitsTM
 - link: /logs/guide/how-to-set-up-only-logs/
   tag: Documentation
   text: Utiliser l'Agent Datadog pour la collecte de logs uniquement
@@ -19,23 +22,25 @@ further_reading:
 - link: /logs/explorer/
   tag: Documentation
   text: Découvrir comment explorer vos logs
-- link: /logs/logging_without_limits/
-  tag: Documentation
-  text: Logging without Limits*
 - link: /glossary/#tail
-  tag: Envoi - API
+  tag: Glossaire
   text: Entrée du glossaire pour le terme « tail » (suivi)
 title: Configurations avancées pour la collecte de logs
 ---
 
 Après avoir configuré [la collecte de logs][1], vous pouvez personnaliser la configuration de votre collection :
-* [Filtrer les logs](#filtrer-les-logs)
-* [Nettoyer les données sensibles de vos logs](#nettoyer-les-donnees-sensibles-de-vos-logs)
-* [Agréger des logs multiligne](#agregation-multiligne)
-* [Copier des exemples de règles de traitement de logs couramment utilisées](#regles-de-traitement-de-logs-couramment-utilisees)
-* [Utiliser des wildcards pour effectuer le suivi de répertoires](#suivre-des-repertoires-a-l-aide-de-wildcards)
-* [Spécifier des encodages de fichiers de log](#encodages-de-fichiers-de-log)
-* [Définir des règles globales de traitement](#regles-globales-de-traitement)
+- [Filtrer les logs](#filtrer-les-logs)
+  - [Exclusion par correspondance](#exclusion-par-correspondance)
+  - [Inclusion par correspondance](#Inclusion-par-correspondance)
+- [Nettoyer les données sensibles de vos logs](#nettoyer-les-donnees-sensibles-de-vos-logs)
+- [Agrégation multilignes](#manually-aggregate-multi-line-logs)
+- [Agréger automatiquement les logs multilignes](#agreger-automatiquement-les-logs-multi-lignes)
+- [Règles de traitement des logs couramment utilisées] (#regles-de-traitement-des-logs-couramment-utilisees)
+- [Suivre des répertoires avec des wildcards](#surveiller-des-repertoires-avec-des-wildcards)
+  - [Suivre en priorité les fichiers récemment modifiés](#suivre-en-priorité-les-fichiers-recemment-modifies)
+- [Encodages des fichiers de log](#encodages-des-fichiers-de-log)
+- [Règles globales de traitement](#regles-globales-de-traitement)
+- [Pour aller plus loin](#pour-aller-plus-loin)
 
 Pour appliquer une règle de traitement à tous les logs recueillis par un Agent Datadog, consultez la section [Règles globales de traitement](#regles-globales-de-traitement).
 
@@ -50,7 +55,7 @@ Pour envoyer uniquement un sous-ensemble spécifique de logs à Datadog, utilise
 
 ### Exclude at match
 
-| Paramètre          | Description                                                                                        |
+| Paramètre          | Rôle                                                                                        |
 |--------------------|----------------------------------------------------------------------------------------------------|
 | `exclude_at_match` | Si l'expression spécifiée est incluse dans le message, le log est exclu et n'est pas envoyé à Datadog. |
 
@@ -75,6 +80,10 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
+<div class="alert alert-info">
+Pour plus d'informations sur la configuration de l'Agent, consultez <a href="/containers/guide/container-discovery-management/?tab=datadogoperator#agent-configuration">Gestion de la détection de conteneurs</a>.
+</div>
+
 Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur votre **conteneur envoyant les logs à filtrer** afin de spécifier les `log_processing_rules`, par exemple :
 
 ```yaml
@@ -98,7 +107,11 @@ Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Pour appliquer une configuration spécifique à un conteneur donné, Autodiscovery identifie les conteneurs via leur nom, et non via leur image. Cette fonctionnalité cherche à faire correspondre `<IDENTIFICATEUR_CONTENEUR>` à `.spec.containers[0].name`, et non à `.spec.containers[0].image`. Pour configurer Autodiscovery afin de recueillir les logs de conteneur sur un `<IDENTIFICATEUR_CONTENEUR>` donné dans votre pod, ajoutez les annotations suivantes aux `log_processing_rules` de votre pod :
+<div class="alert alert-info">
+Pour plus d'informations sur la configuration de l'Agent, consultez <a href="/containers/guide/container-discovery-management/?tab=datadogoperator#agent-configuration">Gestion de la détection de conteneurs</a>.
+</div>
+
+Pour configurer la collecte des logs d'un conteneur donné (nommé `CONTAINER_NAME`) dans votre pod à l'aide d'Autodiscovery, ajoutez les annotations suivantes à la propriété `log_processing_rules` de votre pod :
 
 ```yaml
 apiVersion: apps/v1
@@ -111,7 +124,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<IDENTIFICATEUR_CONTENEUR>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -126,7 +139,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: '<IDENTIFICATEUR_CONTENEUR>'
+        - name: '<CONTAINER_NAME>'
           image: cardpayment:latest
 ```
 
@@ -139,7 +152,7 @@ spec:
 
 ### Include at match
 
-| Paramètre          | Description                                                                       |
+| Paramètre          | Rôle                                                                       |
 |--------------------|-----------------------------------------------------------------------------------|
 | `include_at_match` | Seuls les logs avec un message qui contient l'expression spécifiée sont envoyés à Datadog. Si plusieurs règles `include_at_match` sont définies, toutes les expressions doivent être présentes dans le log pour que ce dernier soit inclus. |
 
@@ -231,7 +244,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<IDENTIFICATEUR_CONTENEUR>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -246,7 +259,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: '<IDENTIFICATEUR_CONTENEUR>'
+        - name: '<CONTAINER_NAME>'
           image: cardpayment:latest
 ```
 
@@ -322,7 +335,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<IDENTIFICATEUR_CONTENEUR>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -338,7 +351,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: '<IDENTIFICATEUR_CONTENEUR>'
+        - name: '<CONTAINER_NAME>'
           image: cardpayment:latest
 ```
 
@@ -358,7 +371,17 @@ Par exemple, pour supprimer les informations personnelles du log `User email: fo
 
 Le log suivant est alors envoyé à Datadog : `User email: masked_user@example.com`
 
-## Agrégation multiligne
+## Agrégation automatique des logs multilignes
+
+La détection automatique des logs multilignes est utile lorsque vous avez de nombreuses sources de logs avec des formats complexes ou lorsque vous n'avez pas le temps de configurer chaque source manuellement. Cette fonctionnalité détecte et regroupe automatiquement les logs multi-lignes sans nécessiter de motifs regex personnalisés.
+
+Consultez la documentation [Auto Multi-line Detection and Aggregation][7] (en anglais).
+
+Pour la prise en charge héritée de cette fonctionnalité, consultez la documentation [Automatic Multi-line Detection and Aggregation (Legacy)][8] (en anglais).
+
+## Agrégation manuelle des logs multilignes
+
+Les règles d'agrégation manuelle vous permettent de contrôler avec précision le regroupement des logs si vous connaissez le format de vos logs. Cette méthode est idéale pour garantir un traitement cohérent à l'aide de motifs regex personnalisés adaptés à votre structure de log.
 
 Si vos logs ne sont pas envoyés au format JSON et que vous souhaitez agréger plusieurs lignes en une seule entrée, configurez l'Agent Datadog de façon à détecter un nouveau log avec une expression régulière spécifique, au lieu de compter un seul log par ligne. Utilisez le type `multi_line` dans le paramètre `log_processing_rules` pour agréger toutes les lignes en une seule entrée jusqu'à ce que l'expression indiquée soit à nouveau détectée.
 
@@ -424,7 +447,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<IDENTIFICATEUR_CONTENEUR>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "postgresql",
             "service": "database",
@@ -439,7 +462,7 @@ spec:
       name: postgres
     spec:
       containers:
-        - name: '<IDENTIFICATEUR_CONTENEUR>'
+        - name: '<CONTAINER_NAME>'
           image: postgres:latest
 ```
 
@@ -450,7 +473,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>Attention :</strong> les expressions régulières pour les logs multiligne doivent commencer au <em>début</em> d'un log. Elles ne peuvent pas être recherchées en milieu de ligne. <em>Une expression sans aucune correspondance peut entraîner la perte de la ligne de log.</em></div>
+<div class="alert alert-warning"><strong>Important</strong> : les motifs regex pour les logs multi-lignes doivent commencer au <em>début</em> d'une ligne de log. Aucun motif ne peut être apparié en milieu de ligne. <em>Un motif qui ne correspond jamais peut entraîner la perte de lignes de log.</em> <br><br>La collecte de logs fonctionne avec une précision allant jusqu'à la milliseconde. Les logs avec une précision supérieure ne sont pas envoyés, même s’ils correspondent au motif.</div>
 
 Exemples supplémentaires :
 
@@ -463,94 +486,6 @@ Exemples supplémentaires :
 | 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}`     |
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                    |
 
-### Agrégation multiligne automatique
-Depuis la version 7.37 de l'Agent, vous pouvez activer `auto_multi_line_detection` afin que l'Agent détecte automatiquement [les patterns multilignes courants][3].
-
-Activez `auto_multi_line_detection` de façon globale dans le fichier `datadog.yaml` :
-
-```yaml
-logs_config:
-  auto_multi_line_detection: true
-```
-
-Pour les déploiements conteneurisés, vous pouvez activer `auto_multi_line_detection` avec la variable d'environnement `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true`.
-
-Il est également possible d'activer ou de désactiver cette option (en ignorant la configuration globale) dans chaque configuration de log :
-
-{{< tabs >}}
-{{% tab "Fichier de configuration" %}}
-
-```yaml
-logs:
-  - type: file
-    path: /my/test/file.log
-    service: testApp
-    source: java
-    auto_multi_line_detection: true
-```
-
-La détection multiligne automatique se base sur une liste d'expressions régulières courantes pour essayer de trouver des correspondances avec des logs. Si la liste intégrée ne contient pas assez d'expressions, vous pouvez ajouter des patterns personnalisés dans le fichier `datadog.yaml` :
-
-```yaml
-logs_config:
-  auto_multi_line_detection: true
-  auto_multi_line_extra_patterns:
-   - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-   - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
-```
-
-{{% /tab %}}
-{{% tab "Docker" %}}
-
-Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur votre conteneur pour indiquer les `log_processing_rules`. Par exemple :
-
-```yaml
- labels:
-    com.datadoghq.ad.logs: >-
-      [{
-        "source": "java",
-        "service": "testApp",
-        "auto_multi_line_detection": true
-      }]
-```
-
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
-
-```yaml
-apiVersion: apps/v1
-metadata:
-  name: testApp
-spec:
-  selector:
-    matchLabels:
-      app: testApp
-  template:
-    metadata:
-      annotations:
-        ad.datadoghq.com/<IDENTIFICATEUR_CONTENEUR>.logs: >-
-          [{
-            "source": "java",
-            "service": "testApp",
-            "auto_multi_line_detection": true
-          }]
-      labels:
-        app: testApp
-      name: testApp
-    spec:
-      containers:
-        - name: '<IDENTIFICATEUR_CONTENEUR>'
-          image: testApp:latest
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-Lorsque cette fonctionnalité est activée, l'Agent essaie de détecter un pattern à chaque ouverture d'un nouveau fichier de log. Durant cette étape, les logs sont envoyés sous la forme de lignes uniques. Une fois le seuil de détection atteint, tous les logs ultérieurs provenant de cette source sont agrégés avec le pattern détecté (ou sous la forme de lignes uniques si aucun pattern n'est détecté). La détection s'arrête après 30 secondes ou après les 500 premiers logs (selon la première occurrence).
-
-**Remarque** : si vous pouvez modifier le pattern utilisé pour nommer le log renouvelé, vérifiez que le fichier renouvelé remplace le fichier précédemment actif du même nom. L'Agent réutilise un pattern qui a été détecté sur le nouveau fichier, afin d'éviter d'effectuer une nouvelle fois la détection.
-
-La détection multlligne automatique identifie les logs qui commencent par les formats de date/heure suivants et les respectent : RFC3339, ANSIC, format de dates Unix, format de date Ruby, RFC822, RFC822Z, RFC850, RFC1123, RFC1123Z, RFC3339Nano et le format de date SimpleFormatter des logs Java par défaut.
 
 ## Règles de traitement de log couramment utilisées
 
@@ -599,15 +534,17 @@ logs:
 L'exemple ci-dessus correspond à `C:\\MyApp\\MyLog.log` et exclut `C:\\MyApp\\MyLog.20230101.log` et `C:\\MyApp\\MyLog.20230102.log`.
 
 **Remarque** : l'Agent nécessite les autorisations de lecture et d'exécution pour un répertoire afin d'énumérer tous les fichiers qui y figurent.
-**Remarque2** : les valeurs path et exclude_paths sont sensibles à la casse.
 
-## Suivre en priorité les fichiers les plus récemment modifiés
+**Remarque** : Les valeurs `path` et `exclude_paths` sont sensibles à la casse.
 
-Pour déterminer la priorité des fichiers à suivre, l'Agent Datadog trie les noms des fichiers dans le chemin du répertoire en tenant compte de leur ordre lexicographique inversé. Pour trier les fichiers en fonction de leur heure de modification, définissez l'option de configuration `logs_config.file_wildcard_selection_mode` sur la valeur `by_modification_time`.
+### Suivre en priorité les fichiers les plus récemment modifiés
 
-Cette option s'avère particulièrement utile lorsque le nombre total de correspondances de fichier de log dépasse la valeur de `logs_config.open_files_limit`. Les configurations basées sur `by_modification_time` permettent de suivre en priorité les fichiers les plus récemment mis à jour dans le chemin de répertoire défini.
+L'Agent limite le nombre de fichiers qu'il peut suivre simultanément, tel que défini par le paramètre `logs_config.open_files_limit`.
+Par défaut, lorsque plus de fichiers correspondent au motif que cette limite, l'Agent les trie par ordre lexicographique inverse. Cela fonctionne bien pour les fichiers nommés avec des timestamps ou une numérotation séquentielle, car les logs les plus récents sont traités en priorité.
 
-Pour rétablir le comportement par défaut, définissez l'option de configuration `logs_config.file_wildcard_selection_mode` sur la valeur `by_name`.
+Cependant, si les noms de fichiers de log ne suivent pas de schéma clair, le comportement par défaut peut ne pas être optimal. Pour prioriser les fichiers selon leur date de modification, définissez le paramètre `logs_config.file_wildcard_selection_mode` sur `by_modification_time`. Avec ce réglage, l'Agent trie en continu les fichiers selon leur date de modification. Il suit toujours en priorité les fichiers les plus récemment modifiés et cesse de suivre les fichiers les moins récents si nécessaire.
+
+Pour revenir au comportement par défaut, supprimez l'entrée `logs_config.file_wildcard_selection_mode` ou définissez-la sur `by_name`.
 
 Cette fonctionnalité nécessite la version 7.40.0 ou une version ultérieure de l'Agent.
 
@@ -665,14 +602,33 @@ DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_
 ```
 
 {{% /tab %}}
-{{% tab "Helm" %}}
+{{% tab "Operator Datadog" %}}
 
-Utilisez le paramètre `env` dans le chart Helm pour définir la variable d'environnement `DD_LOGS_CONFIG_PROCESSING_RULES` afin de configurer les règles globales de traitement. Par exemple :
+Utilisez le paramètre `spec.override.[key].env` dans le manifeste de l'Operator Datadog pour définir la variable d'environnement `DD_LOGS_CONFIG_PROCESSING_RULES` et ainsi configurer les règles de traitement globales, `[key]` devant être défini sur `nodeAgent`, `clusterAgent` ou `clusterChecksRunner`. Par exemple :
 
 ```yaml
-env:
-  - name: DD_LOGS_CONFIG_PROCESSING_RULES
-    value: '[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      env:
+        - name: DD_LOGS_CONFIG_PROCESSING_RULES
+          value: '[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Utilisez le paramètre `datadog.env` dans le chart Helm pour définir la variable d'environnement `DD_LOGS_CONFIG_PROCESSING_RULES` et ainsi configurer les règles globales de traitement. Par exemple :
+
+```yaml
+datadog:
+  env:
+    - name: DD_LOGS_CONFIG_PROCESSING_RULES
+      value: '[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
 ```
 
 {{% /tab %}}
@@ -680,6 +636,21 @@ env:
 Ces règles globales de traitement s'appliquent à tous les logs recueillis par l'Agent Datadog.
 
 **Remarque** : l'Agent Datadog n'initie pas le processus de collecte de logs en cas de problème de format dans les règles globales de traitement. Lancez la [sous-commande status][6] pour diagnostiquer les éventuels problèmes.
+
+## Agrégation multiligne log FAQ
+
+**1. Quand dois-je utiliser des règles multilignes manuelles plutôt qu'une détection multiligne automatique ?
+
+Si vous connaissez le format de vos log, vous devriez utiliser des règles multilignes manuelles pour un contrôle précis. 
+Si vous envoyez beaucoup de logs multilignes et que vous n'êtes pas sûr de leur format ou que vous n'avez pas les moyens de configurer toutes les sources individuellement, vous devriez utiliser la détection multiligne automatique.
+
+**2. Que se passe-t-il lorsqu'un motif à plusieurs lignes ne correspond à aucune logs?** ?
+
+Toutes les lignes log non JSON sont traitées individuellement comme des entrées log distinctes.
+Toutes les lignes log au format JSON sont traitées comme une seule ligne de log, et seul le premier format JSON valide entre dans l'entrée ; les autres sont abandonnés.
+
+**3. Que se passe-t-il lorsqu'il existe à la fois des règles globales et des règles spécifiques à l'intégration ?
+Les règles spécifiques à l'intégration remplacent complètement les règles globales pour l'intégration en question.
 
 ## Pour aller plus loin
 
@@ -694,3 +665,5 @@ Ces règles globales de traitement s'appliquent à tous les logs recueillis par 
 [4]: /fr/agent/faq/commonly-used-log-processing-rules
 [5]: /fr/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [6]: /fr/agent/configuration/agent-commands/#agent-information
+[7]: /fr/agent/logs/auto_multiline_detection
+[8]: /fr/agent/logs/auto_multiline_detection_legacy

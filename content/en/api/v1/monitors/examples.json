@@ -533,33 +533,46 @@
           "counts": {
             "status": [
               {
-                "count": "integer",
-                "name": "undefined"
+                "count": 2,
+                "name": "OK"
               }
             ],
             "type": [
               {
-                "count": "integer",
-                "name": "undefined"
+                "count": 2,
+                "name": "metric"
               }
             ]
           },
           "groups": [
             {
-              "group": "string",
-              "group_tags": [],
-              "last_nodata_ts": "integer",
-              "last_triggered_ts": "integer",
-              "monitor_id": "integer",
-              "monitor_name": "string",
-              "status": "string"
+              "group": "*",
+              "group_tags": [
+                "*"
+              ],
+              "last_nodata_ts": 0,
+              "last_triggered_ts": 1525702966,
+              "monitor_id": 2738266,
+              "monitor_name": "[demo] Cassandra disk usage is high on {{host.name}}",
+              "status": "OK"
+            },
+            {
+              "group": "*",
+              "group_tags": [
+                "*"
+              ],
+              "last_nodata_ts": 0,
+              "last_triggered_ts": 1525703008,
+              "monitor_id": 1576648,
+              "monitor_name": "[demo] Disk usage is high on {{host.name}}",
+              "status": "OK"
             }
           ],
           "metadata": {
-            "page": "integer",
-            "page_count": "integer",
-            "per_page": "integer",
-            "total_count": "integer"
+            "page": 0,
+            "page_count": 2,
+            "per_page": 30,
+            "total_count": 2
           }
         },
         "html": "<div class=\"\"><div class=\"row  hasChildData isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> counts</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>The counts of monitor groups per different criteria.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> status</p>\n    </div>\n              <div class=\"col-2 column\"><p>[object]</p></div>\n              <div class=\"col-6 column\"><p>Search facets.</p></div>\n            </div>\n            <div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">count</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>The number of found monitors with the listed value.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name</p>\n    </div>\n              <div class=\"col-2 column\"><p></p></div>\n              <div class=\"col-6 column\"><p>The facet value.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> type</p>\n    </div>\n              <div class=\"col-2 column\"><p>[object]</p></div>\n              <div class=\"col-6 column\"><p>Search facets.</p></div>\n            </div>\n            <div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">count</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>The number of found monitors with the listed value.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name</p>\n    </div>\n              <div class=\"col-2 column\"><p></p></div>\n              <div class=\"col-6 column\"><p>The facet value.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div>\n          </div>\n        </div><div class=\"row  hasChildData isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> groups</p>\n    </div>\n              <div class=\"col-2 column\"><p>[object]</p></div>\n              <div class=\"col-6 column\"><p>The list of found monitor groups.</p></div>\n            </div>\n            <div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">group</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The name of the group.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">group_tags</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>The list of tags of the monitor group.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">last_nodata_ts</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>Latest timestamp the monitor group was in NO_DATA state.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">last_triggered_ts</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>Latest timestamp the monitor group triggered.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">monitor_id</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>The ID of the monitor.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">monitor_name</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The name of the monitor.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">status</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>The different states your monitor can be in. \nAllowed enum values: <code>Alert,Ignored,No Data,OK,Skipped,Unknown,Warn</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> metadata</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Metadata about the response.</p></div>\n            </div>\n            <div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">page</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>The page to start paginating from.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">page_count</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>The number of pages.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">per_page</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>The number of monitors to return per page.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">total_count</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>The total number of monitors.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
@@ -602,62 +615,75 @@
           "counts": {
             "muted": [
               {
-                "count": "integer",
-                "name": "undefined"
+                "count": 3,
+                "name": false
+              },
+              {
+                "count": 3,
+                "name": true
               }
             ],
             "status": [
               {
-                "count": "integer",
-                "name": "undefined"
+                "count": 4,
+                "name": "No Data"
+              },
+              {
+                "count": 2,
+                "name": "OK"
               }
             ],
             "tag": [
               {
-                "count": "integer",
-                "name": "undefined"
+                "count": 6,
+                "name": "service:cassandra"
               }
             ],
             "type": [
               {
-                "count": "integer",
-                "name": "undefined"
+                "count": 6,
+                "name": "metric"
               }
             ]
           },
           "metadata": {
-            "page": "integer",
-            "page_count": "integer",
-            "per_page": "integer",
-            "total_count": "integer"
+            "page": 0,
+            "page_count": 6,
+            "per_page": 30,
+            "total_count": 6
           },
           "monitors": [
             {
-              "classification": "string",
+              "classification": "metric",
               "creator": {
-                "email": "string",
-                "handle": "string",
-                "name": "string"
+                "handle": "john@datadoghq.com",
+                "name": "John Doe"
               },
-              "id": "integer",
-              "last_triggered_ts": "integer",
-              "metrics": [],
-              "name": "string",
+              "id": 2699850,
+              "last_triggered_ts": null,
+              "metrics": [
+                "system.cpu.user"
+              ],
+              "name": "Cassandra CPU is high on {{host.name}} in {{availability-zone.name}}",
               "notifications": [
                 {
-                  "handle": "string",
-                  "name": "string"
+                  "handle": "jane@datadoghq.com",
+                  "name": "Jane Doe"
                 }
               ],
-              "org_id": "integer",
-              "quality_issues": [],
-              "query": "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100",
-              "scopes": [
-                "host:app2",
-                "env:dev,env:prod"
+              "org_id": 1234,
+              "quality_issues": [
+                "broken_at_handle",
+                "noisy_monitor"
               ],
-              "status": "string",
-              "tags": [],
+              "scopes": [
+                "!availability-zone:us-east-1c",
+                "name:cassandra"
+              ],
+              "status": "No Data",
+              "tags": [
+                "service:cassandra"
+              ],
               "type": "query alert"
             }
           ]

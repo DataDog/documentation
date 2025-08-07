@@ -49,12 +49,14 @@ title: 데이터베이스 모니터링과 트레이스 상호 연결
 |                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |                      |
 | **Python:** [dd-trace-py][11] >= 1.9.0   |                        |           |           |                     |                     |                      |
 |                                          | [psycopg2][12]         | {{< X >}} |           |                     |                     |                      |
+|                                          | [psycopg][34]          | {{< X >}} |           |                     |                     |                      |
 |             [dd-trace-py][11] >= 2.9.0   |                        |           |           |                     |                     |                      |
 |                                          | [asyncpg][27]          | {{< X >}} |           |                     |                     |                      |
 |                                          | [aiomysql][28]         |           | {{< X >}} |                     |                     |                      |
 |                                          | [mysql-connector-python][29] |     | {{< X >}} |                     |                     |                      |
 |                                          | [mysqlclient][30]      |           | {{< X >}} |                     |                     |                      |
 |                                          | [pymysql][31]          |           | {{< X >}} |                     |                     |                      |
+|                                          | [pymongo][35]          |           |           |                     |                     | {{< X >}} *****      |
 | **.NET** [dd-trace-dotnet][15] >= 2.35.0 |                        |           |           |                     |                     |                      |
 |                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |                      |
 |                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |                      |
@@ -90,6 +92,10 @@ title: 데이터베이스 모니터링과 트레이스 상호 연결
   - 전제 조건:
     - Node.js 트레이서 5.37.0 이상
 
+\*\*\*\*\* Python용 MongoDB 서비스/전체 모드:
+  - 전제 조건:
+    - Python 트레이서 3.5.0 이상
+
 ## 설정
 최상의 사용자 경험을 위해 다음 환경 변수가 애플리케이션에 설정되어 있는지 확인하세요.
 
@@ -105,23 +111,22 @@ Datadog은 Agent 버전 `7.63` 이상에 대해 난독화 모드를 `obfuscate_a
   sql_obfuscation_mode: "obfuscate_and_normalize"
 ```
 
+<div class="alert alert-danger">난독화 모드를 변경하면 정규화된 SQL 텍스트가 변경될 수 있습니다. APM 트레이스에 SQL 텍스트 기반 모니터가 있는 경우 해당 모니터를 업데이트해야 할 수 있습니다.</div>
+
 {{< tabs >}}
 {{% tab "Go" %}}
 
-앱 종속성을 업데이트하여 [dd-trace-go@v1.44.0][1] 이상을 포함합니다.
+Update your app dependencies to include [dd-trace-go@v1.44.0][1] or greater. {{% tracing-go-v2 %}}
 ```shell
-go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0 # 1.x
-# go get github.com/DataDog/dd-trace-go/v2 # 2.x
+go get github.com/DataDog/dd-trace-go/v2 # 2.x
 ```
 
 코드를 업데이트하여 `contrib/database/sql` 패키지를 내보내세요.
 ```go
 import (
    "database/sql"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
-   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
-   // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+   sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
 )
 ```
 
@@ -148,24 +153,22 @@ import (
 ```go
 import (
     "database/sql"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
-   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
-   // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+   sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
 )
 
 func main() {
-    // 첫 번째 단계는 드라이버 등록 시 DBM 전파 모드를 설정하는 것입니다. 이는 또한
-    // sqltrace에서도 가능하니 참고하세요. 열면 기능을 더 세부적으로 제어할 수 있습니다.
+    // The first step is to set the dbm propagation mode when registering the driver. Note that this can also
+    // be done on sqltrace.Open for more granular control over the feature.
     sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
 
-    // 이후에 열기 호출을 진행합니다.
+    // Followed by a call to Open.
     db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable")
     if err != nil {
         log.Fatal(err)
     }
 
-    // 이후 일반 작업할 때와 마찬가지로 추적과 함께 database/sql 패키지를 사용합니다.
+    // Then, we continue using the database/sql package as we normally would, with tracing.
     rows, err := db.Query("SELECT name FROM users WHERE age=?", 27)
     if err != nil {
         log.Fatal(err)
@@ -219,7 +222,9 @@ public class Application {
 - 시스템 속성 `dd.dbm.trace_prepared_statements=true` 설정
 - 환경 변수 `export DD_DBM_TRACE_PREPARED_STATEMENTS=true` 설정
 
-**참고**: 준비한 계측 문을 사용하면 `Application` 속성을 재정의하고 데이터베이스로 왕복 이동하게 됩니다. 이렇게 왕복 이동을 하더라도 지연 시간에 주는 영향은 미미합니다.
+**참고**: 준비된 명령문 계측은 `Application` 속성을 `_DD_overwritten_by_tracer` 텍스트로 덮어쓰고, 데이터베이스로의 추가 왕복을 발생시킵니다. 이 추가 왕복은 일반적으로 SQL 명령문 실행 시간에 미미한 영향을 미칩니다.
+
+<div class="alert alert-warning">Enabling prepared statements tracing may cause increased connection pinning when using Amazon RDS Proxy, which reduces connection pooling efficiency. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy-pinning.html">Connection pinning on RDS Proxy</a>.</div>
 
 **트레이서 버전 1.44 미만**:
  준비한 문은 Postgres와 MySQL의 `full` 모드에서 지원되지 않고, 준비한 문을 사용하는 JDBC API 호출 전체가 `service` 모드로 자동 다운그레이드됩니다. Java SQL 라이브러리 대부분에서 기본적으로 준비한 문을 사용하므로, **대부분**의 Java 애플리케이션에서는 `service` 모드만 사용할 수 있습니다.
@@ -284,17 +289,21 @@ client.query("SELECT 1;")
 pip install "ddtrace>=1.9.0"
 ```
 
-[psycopg2][2] 설치:
+Postgres에는 [psycopg2][2]를 설치합니다:
 ```
 pip install psycopg2
+```
+
+MongoDB(dd-trace-py>=3.5.0 필요)에는 pymongo를 설치합니다.
+```
+pip install pymongo
 ```
 
 다음 환경 변수를 설정해 데이터베이스 모니터링 전파 기능을 활성화합니다.
    - `DD_DBM_PROPAGATION_MODE=full`
 
-전체 예시:
+Postgres 예시:
 ```python
-
 import psycopg2
 
 POSTGRES_CONFIG = {
@@ -305,12 +314,30 @@ POSTGRES_CONFIG = {
     "dbname": "postgres_db_name",
 }
 
-# POSTGRES DB로 연결
+# postgres db에 연결
 conn = psycopg2.connect(**POSTGRES_CONFIG)
 cursor = conn.cursor()
-# SQL 쿼리 실행
+# sql 쿼리 실행
 cursor.execute("select 'blah'")
 cursor.executemany("select %s", (("foo",), ("bar",)))
+```
+
+MongoDB 예시:
+```python
+from pymongo import MongoClient
+
+# MongoDB에 연결
+client = MongoClient('mongodb://localhost:27017/')
+db = client['test_database']
+collection = db['test_collection']
+
+# 도큐먼트 삽입
+collection.insert_one({"name": "test", "value": 1})
+
+# 도큐먼트 쿼리
+results = collection.find({"name": "test"})
+for doc in results:
+    print(doc)
 ```
 
 [1]: https://ddtrace.readthedocs.io/en/stable/release_notes.html
@@ -487,3 +514,5 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 [31]: https://github.com/PyMySQL/PyMySQL
 [32]: https://learn.microsoft.com/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace
 [33]: https://github.com/mongodb/node-mongodb-native
+[34]: https://www.psycopg.org/psycopg3/
+[35]: https://pymongo.readthedocs.io/en/stable/

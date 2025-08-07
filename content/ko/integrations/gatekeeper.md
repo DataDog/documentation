@@ -1,82 +1,28 @@
 ---
 app_id: gatekeeper
-app_uuid: 9c48b05d-ee74-4557-818e-14456c6f427b
-assets:
-  dashboards:
-    Gatekeeper base dashboard: assets/dashboards/gatekeeper_overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: gatekeeper.constraints
-      metadata_path: metadata.csv
-      prefix: gatekeeper.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10148
-    source_type_name: Gatekeeper
-  logs:
-    source: gatekeeper
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: 커뮤니티
-  sales_email: ara.pulido@datadoghq.com
-  support_email: ara.pulido@datadoghq.com
 categories:
-- cloud
-- 준수
+- 클라우드
+- compliance
 - 설정 및 배포
 - 컨테이너
-- 보안
+- security
 custom_kind: 통합
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/gatekeeper/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: gatekeeper
-integration_id: gatekeeper
-integration_title: Gatekeeper
+description: Gatekeeper 통합
 integration_version: 1.0.0
-is_public: true
-manifest_version: 2.0.0
-name: gatekeeper
-public_title: Gatekeeper
-short_description: Gatekeeper 통합
+media: []
 supported_os:
 - linux
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cloud
-  - Category::Compliance
-  - Category::Configuration & Deployment
-  - Category::Containers
-  - Category::Security
-  - Supported OS::Linux
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Gatekeeper 통합
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Gatekeeper
+title: Gatekeeper
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
-
-
 ## 개요
 
-이 점검에서는 [OPA Gatekeepr][1]에서 메트릭을 수집합니다.
+This check collects metrics from [OPA Gatekeeper](https://github.com/open-policy-agent/gatekeeper).
 
-![Gatekeeper 개요 대시보드][2]
+![Gatekeeper Overview Dashboard](https://raw.githubusercontent.com/DataDog/integrations-extras/master/gatekeeper/images/gatekeeper_dashboard.png)
 
 ## 설정
 
-아래 지침을 따라 쿠버네티스 클러스터에서 실행되는 에이전트에 이 점검을 설치하고 설정하세요. 지침을 적용하는 데 가이드가 필요하면 [자동탐지 통합 템플릿][3]을 참고하세요.
+Follow the instructions below to install and configure this check for an Agent running on a Kubernetes cluster. See also the [Autodiscovery Integration Templates](https://docs.datadoghq.com/agent/kubernetes/integrations/) for guidance on applying these instructions.
 
 ### 설치
 
@@ -89,32 +35,35 @@ FROM gcr.io/datadoghq/agent:latest
 RUN agent integration install -r -t datadog-gatekeeper==<INTEGRATION_VERSION>
 ```
 
-#### 에이전트 버전 <7.26.0 또는 <6.26.0
+#### Agent versions \<7.26.0 or \<6.26.0
 
 쿠버네티스 클러스터에서 gatekeeper 점검 설치하는 방법:
 
-1. [개발자 툴킷][4]을 설치합니다.
-2. `integrations-extras` 리포지토리를 복제합니다.
+1. Install the [developer toolkit](https://docs.datadoghq.com/developers/integrations/python/).
+
+1. `integrations-extras` 리포지토리를 복제합니다.
 
    ```shell
    git clone https://github.com/DataDog/integrations-extras.git.
    ```
 
-3. `integrations-extras/` 경로로 `ddev` config을 업데이트합니다.
+1. `integrations-extras/` 경로로 `ddev` config을 업데이트합니다.
 
    ```shell
-   ddev config set extras ./integrations-extras
+   ddev config set repos.extras ./integrations-extras
    ```
 
-4. `gatekeeper` 패키지를 구축하려면 다음을 실행하세요.
+1. `gatekeeper` 패키지를 구축하려면 다음을 실행하세요.
 
    ```shell
    ddev -e release build gatekeeper
    ```
 
-5. [에이전트 매니페스트를 다운로드해 Datadog 에이전트를 DaemonSet으로 설치][5]합니다.
-6. `PersistentVolumeClaim`을 두 개 생성합니다. 하나는 점검 코드용, 다른 하나는 구성용입니다.
-7. 생성한 두 파일을 에이전트 포드 템플릿에 볼륨으로 추가하고 내 점검과 구성에 사용하세요.
+1. [Download the Agent manifest to install the Datadog Agent as a DaemonSet](https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile).
+
+1. `PersistentVolumeClaim`을 두 개 생성합니다. 하나는 점검 코드용, 다른 하나는 구성용입니다.
+
+1. 생성한 두 파일을 에이전트 포드 템플릿에 볼륨으로 추가하고 내 점검과 구성에 사용하세요.
 
    ```yaml
         env:
@@ -138,67 +87,91 @@ RUN agent integration install -r -t datadog-gatekeeper==<INTEGRATION_VERSION>
             claimName: agent-conf-claim
    ```
 
-8. Datadog 에이전트를 쿠버네티스 클러스터에 배포합니다.
+1. Datadog 에이전트를 쿠버네티스(Kubernetes) 클러스터에 배포합니다.
 
    ```shell
    kubectl apply -f agent.yaml
    ```
 
-9. 통합 아티팩트 .whl 파일을 내 쿠버네티스 노드에 복사하거나 공용 URL에 업로드합니다.
+1. 통합 아티팩트 .whl 파일을 내 쿠버네티스 노드에 복사하거나 공용 URL에 업로드합니다.
 
-10. 다음 명령을 실행해 통합 에이전트와 통합 휠을 설치하세요.
+1. 다음 명령을 실행해 통합 에이전트와 통합 휠을 설치하세요.
 
-    ```shell
-    kubectl exec ds/datadog -- agent integration install -w <PATH_OF_GATEKEEPER_ARTIFACT_>/<GATEKEEPER_ARTIFACT_NAME>.whl
-    ```
+   ```shell
+   kubectl exec ds/datadog -- agent integration install -w <PATH_OF_GATEKEEPER_ARTIFACT_>/<GATEKEEPER_ARTIFACT_NAME>.whl
+   ```
 
-11. 다음 명령을 실행해 점검과 구성을 복사해 해당 PVC로 붙여넣으세요.
+1. 다음 명령을 실행해 점검과 구성을 복사해 해당 PVC로 붙여넣으세요.
 
-    ```shell
-    kubectl exec ds/datadog -- sh
-    # cp -R /opt/datadog-agent/embedded/lib/python3.8/site-packages/datadog_checks/* /checksd
-    # cp -R /etc/datadog-agent/conf.d/* /confd
-    ```
+   ```shell
+   kubectl exec ds/datadog -- sh
+   # cp -R /opt/datadog-agent/embedded/lib/python3.8/site-packages/datadog_checks/* /checksd
+   # cp -R /etc/datadog-agent/conf.d/* /confd
+   ```
 
-12. Datadog 에이전트 포드를 재시작하세요.
+1. Datadog 에이전트 포드를 재시작하세요.
 
-### 구성
+### 설정
 
-1. 에이전트 포드에 추가한 `/confd` 폴더에 있는 `gatekeeper/conf.yaml` 파일을 편집해 gatekeeper 성능 데이터 수집을 시작하세요. 사용할 수 있는 구성 옵션을 모두 보려면 [샘플 gatekeeper/conf.yaml][6]을 참고하세요.
+1. Edit the `gatekeeper/conf.yaml` file, in the `/confd` folder that you added to the Agent pod to start collecting your gatekeeper performance data. See the [sample gatekeeper/conf.yaml](https://github.com/DataDog/integrations-extras/blob/master/gatekeeper/datadog_checks/gatekeeper/data/conf.yaml.example) for all available configuration options.
 
-2. [에이전트를 다시 시작][7]합니다.
+1. [Agent를 다시 시작합니다](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ### 검증
 
-[에이전트 상태 하위 명령을 실행][8]하고 Checks 섹션 아래 `gatekeeper`를 찾으세요.
+[Run the Agent's status subcommand](https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) and look for `gatekeeper` under the Checks section.
 
 ## 수집한 데이터
 
-### 메트릭
-{{< get-metrics-from-git "gatekeeper" >}}
+### Metrics
 
+| | |
+| --- | --- |
+| **gatekeeper.audit.duration.seconds.sum** <br>(count) | Latency of audit operation in seconds<br>_Shown as second_ |
+| **gatekeeper.audit.duration.seconds.count** <br>(count) | Latency of audit operation in seconds<br>_Shown as second_ |
+| **gatekeeper.audit.last_run_time** <br>(gauge) | Timestamp of last audit operation|
+| **gatekeeper.constraint_template_ingestion.duration.seconds.sum** <br>(count) | Distribution of how long it took to ingest a constraint template in seconds<br>_Shown as second_ |
+| **gatekeeper.constraint_template_ingestion.duration.seconds.count** <br>(count) | Distribution of how long it took to ingest a constraint template in seconds<br>_Shown as second_ |
+| **gatekeeper.constraint_template_ingestion.count** <br>(count) | Total number of constraint template ingestion actions|
+| **gatekeeper.violations** <br>(gauge) | Total number of violations per constraint|
+| **gatekeeper.constraints** <br>(gauge) | Current number of known constraints|
+| **gatekeeper.constraint_templates** <br>(gauge) | Number of observed constraint templates|
+| **gatekeeper.request.duration.seconds.sum** <br>(count) | \[Deprecated since Gatekeeper v3.4.0\] The response time in seconds<br>_Shown as second_ |
+| **gatekeeper.request.duration.seconds.count** <br>(count) | \[Deprecated since Gatekeeper v3.4.0\] The response time in seconds<br>_Shown as second_ |
+| **gatekeeper.request.count** <br>(count) | \[Deprecated since Gatekeeper v3.4.0\] Total number of requests that are routed to webhook|
+| **gatekeeper.sync** <br>(gauge) | Total number of resources of each kind being cached|
+| **gatekeeper.sync.duration.seconds.sum** <br>(count) | Latency of sync operation in seconds<br>_Shown as second_ |
+| **gatekeeper.sync.duration.seconds.count** <br>(count) | Latency of sync operation in seconds<br>_Shown as second_ |
+| **gatekeeper.sync.last_run_time** <br>(gauge) | Timestamp of last sync operation|
+| **gatekeeper.watch.intended** <br>(gauge) | The total number of Group/Version/Kinds that the watch manager has instructions to watch|
+| **gatekeeper.watch.watched** <br>(gauge) | The total number of Group/Version/Kinds currently watched by the watch manager|
+| **gatekeeper.validation.request.count** <br>(count) | The number of requests that are routed to validation webhook|
+| **gatekeeper.validation.request.duration.seconds.sum** <br>(count) | The response time in second<br>_Shown as second_ |
+| **gatekeeper.validation.request.duration.seconds.count** <br>(count) | The response time in second<br>_Shown as second_ |
+| **gatekeeper.mutator.ingestion.count** <br>(count) | Total number of Mutator ingestion actions|
+| **gatekeeper.mutator.ingestion.duration.seconds.sum** <br>(count) | The distribution of Mutator ingestion durations<br>_Shown as second_ |
+| **gatekeeper.mutator.ingestion.duration.seconds.count** <br>(count) | The distribution of Mutator ingestion durations<br>_Shown as second_ |
+| **gatekeeper.mutators** <br>(gauge) | The current number of Mutator objects|
+| **gatekeeper.mutator.conflicting.count** <br>(gauge) | The current number of conflicting Mutator objects|
 
 ### 이벤트
 
 Gatekeeper에는 이벤트가 포함되어 있지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "gatekeeper" >}}
 
+**gatekeeper.prometheus.health**
+
+Returns `CRITICAL` if the agent fails to connect to the Prometheus metrics endpoint, otherwise `OK`.
+
+_상태: ok, critical_
+
+**gatekeeper.health**
+
+Returns `CRITICAL` if the agent fails to connect to the gatekeeper health endpoint, `OK` if it returns 200, `WARNING` otherwise.
+
+_Statuses: ok, warning, critical_
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 고객 지원팀][11]에 문의하세요.
-
-
-[1]: https://github.com/open-policy-agent/gatekeeper
-[2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/gatekeeper/images/gatekeeper_dashboard.png
-[3]: https://docs.datadoghq.com/ko/agent/kubernetes/integrations/
-[4]: https://docs.datadoghq.com/ko/developers/integrations/python/
-[5]: https://docs.datadoghq.com/ko/agent/kubernetes/daemonset_setup/?tab=k8sfile
-[6]: https://github.com/DataDog/integrations-extras/blob/master/gatekeeper/datadog_checks/gatekeeper/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-extras/blob/master/gatekeeper/metadata.csv
-[10]: https://github.com/DataDog/integrations-extras/blob/master/gatekeeper/assets/service_checks.json
-[11]: https://docs.datadoghq.com/ko/help/
+도움이 필요하세요? [Datadog 지원 팀](https://docs.datadoghq.com/help/)에 문의하세요.

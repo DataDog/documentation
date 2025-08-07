@@ -26,7 +26,7 @@ RUM は、ブラウザアプリケーションのすべてのイベントをキ�
 - ビューには、`https://www.yourwebsite.com/about` のような `@view.url` で利用可能な **URL** があります。
 - ビューには、`/about` のような `@view.url_path` で利用可能な**パス**があります。
 
-If, for example, automatically capturing pageviews by route change does not provide enough visibility, you can specify a different name for your pages. To do this, you can [track views manually][3] and assign them each a name available at `@view.name`, such as "About Us".
+たとえば、ルートの変更によってページビューを自動取得しても十分な可視性が得られない場合は、ページに別の名前を指定できます。そのためには、[手動でビューをトラッキング][3] し、それぞれに `@view.name` で利用可能な "About Us" などの名前を割り当てます。
 
 ## ページのレンダリングライフサイクルにおけるタイミングの追跡
 
@@ -99,7 +99,7 @@ RUM の `service` 属性を使用して、指定されたチームのスコー�
 1. RUM アプリケーションの概要ページから、すべてのグラフを `service` で絞り込み、チームのスコープを全体的に把握することができます。
 2. RUM エクスプローラーで行うすべてのクエリは、`service` 属性を使用して以下をフィルタリングすることができます。
    - サービス別エラー数 
-   - Pageviews by service
+   - サービス別ページビュー
 
 {{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-rum-applications-overview-page-4.png" alt="Shopist の Cart ページでユーザー名でグループ分けされたアクションを検索するクエリ" style="width:90%;">}}
 
@@ -117,7 +117,7 @@ RUM の `service` 属性を使用して、指定されたチームのスコー�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/real_user_monitoring/explorer/
-[2]: /ja/real_user_monitoring/browser/setup
+[2]: /ja/real_user_monitoring/browser/setup/
 [3]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [4]: /ja/real_user_monitoring/browser/monitoring_page_performance/#all-performance-metrics
 [5]: /ja/real_user_monitoring/browser/monitoring_page_performance/#add-your-own-performance-timing

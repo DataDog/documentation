@@ -25,9 +25,9 @@ title: セッションリプレイブラウザ開発ツール
 
 **Performance** タブには、セッション内のイベント (アクション、エラー、リソース、ロングタスクなど) とタイムスタンプのウォーターフォールが表示されます。
 
-**Network**、**Events**、**Timings** の各フィルターを選択して適用すると、表示されるリソースやイベントの種類を変更することができます。また、ウォーターフォールのスライダーをドラッグアンドドロップすると、時間範囲を拡大することができます。
+Action Name や Resource Type などのフィルターを選択して適用し、表示されるリソースとイベント タイプの範囲を変更します。ウォーターフォール内のスライダーをドラッグ アンド ドロップして、時間範囲を拡大することもできます。
 
-{{< img src="real_user_monitoring/session_replay/dev_tools/performance-filters-1.mp4" alt="パフォーマンスフィルター" video="true" style="width:60%;">}}
+{{< img src="real_user_monitoring/session_replay/dev_tools/performance-filters-2.mp4" alt="パフォーマンス フィルター" video="true" style="width:60%;">}}
 
 ### コンソール
 

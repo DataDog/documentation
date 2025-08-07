@@ -7,7 +7,7 @@ further_reading:
   text: Datadog CSM Threats の開始
 title: Agent ルール式の作成
 ---
-<!--  SOURCED FROM https://github.com/DataDog/datadog-agent -->
+<!-- https://github.com/DataDog/datadog-agent から取得 --> 
 
 
 ## Assisted rule creator を使用してカスタムルールを作成
@@ -87,6 +87,6 @@ SECL 式は複数のプラットフォームをサポートしています。以
 * [Linux][2]
 * [Windows][3]
 
-[1]: /ja/security/threats/workload_security_rules/custom_rules
+[1]: /ja/security/workload_protection/workload_security_rules/custom_rules
 [2]: /ja/security/threats/linux_expressions
 [3]: /ja/security/threats/windows_expressions

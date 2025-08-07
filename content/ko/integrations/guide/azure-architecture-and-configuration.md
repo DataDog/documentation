@@ -30,7 +30,7 @@ Datadog의 Azure 통합을 활성화하면 Datadog이 다음을 수행할 수 �
 
 사용된 Azure API와 수집된 데이터는 통합의 표준 버전을 사용하는지 Azure Native 버전을 사용하는지에 관계없이 동일합니다.
 
-{{% site-region region="us,us5,eu,gov,ap1" %}}
+{{% site-region region="us,us5,eu,gov,ap1,ap2" %}}
 
 ### 표준 Azure 통합 메트릭 및 데이터 수집
 
@@ -134,7 +134,7 @@ Azure AD 역할을 제한하거나 생략하면 다음과 같은 의미가 있�
 
 ## Azure 로그 수집
 
-{{% site-region region="us,us5,eu,gov,ap1" %}}
+{{% site-region region="us,us5,eu,gov,ap1,ap2" %}}
 
 ### 표준 Azure 통합 로그 수집
 _모든 Datadog 사이트에서 사용 가능_

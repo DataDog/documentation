@@ -6,7 +6,7 @@ further_reading:
 - link: /opentelemetry/
   tag: Documentation
   text: Datadog の OpenTelemetry サポート
-title: OTLP ヒストグラムのヒートマップとしての可視化
+title: OTLP ヒストグラムをヒートマップとして可視化する
 ---
 
 ## 概要

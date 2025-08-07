@@ -1,52 +1,38 @@
 ---
+app_id: dingtalk
 categories:
 - collaboration
 - notifications
 custom_kind: integration
-dependencies: []
-description: Envoyez des alertes et des graphiques Datadog au groupe DingTalk de votre
-  équipe.
-doc_link: https://docs.datadoghq.com/integrations/dingtalk/
-draft: false
-git_integration_title: dingtalk
-has_logo: true
-integration_id: dingtalk
-integration_title: DingTalk
-integration_version: ''
-is_public: true
-manifest_version: '1.0'
-name: dingtalk
-public_title: Intégration Datadog/DingTalk
-short_description: Envoyez des alertes et des graphiques Datadog au groupe DingTalk
-  de votre équipe.
-version: '1.0'
+description: DingTalk est une plateforme de communication et de collaboration d'entreprise
+  gratuite et tout-en-un.
+media: []
+title: DingTalk
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Section Overview
 
 Intégrez DingTalk à Datadog pour :
 
--   Être informé des événements et des alertes Datadog dans DingTalk
--   Partager des messages et des graphiques avec votre groupe DingTalk
+- Être informé des événements et des alertes Datadog dans DingTalk
+- Partager des messages et des graphiques avec votre groupe DingTalk
 
 ## Installation
 
-L'intégration DingTalk s'installe à l'aide du [carré d'intégration Datadog/DingTalk][1].
+L'intégration DingTalk est installée avec le Datadog [DingTalk integration tile] (https://app.datadoghq.com/integrations/dingtalk).
 
 ## Configuration
 
 Pour intégrer Datadog à votre groupe DingTalk :
 
 1. Dans l'application DingTalk, accédez à _Messages_. Cliquez ensuite sur le groupe auquel vous souhaitez ajouter une intégration Datadog.
-2. Dans le coin supérieur droit, cliquez sur l'icône _Group Settings_ (qui ressemble à une ellipse) et sélectionnez _Group Robot_.
-3. Dans le menu Group Robot, sélectionnez Datadog et cliquez sur `Add`.
-4. Saisissez un nom pour le robot et cliquez sur `Finished`. Vous obtenez alors une adresse de webhook.
-5. Copiez l'adresse de webhook et cliquez sur `Finished`.
-6. Dans le [carré d'intégration][1] DingTalk, indiquez le groupe DingTalk auquel vous avez ajouté l'intégration Datadog dans le champ _Group Name_ et copiez l'adresse de webhook dans le champ _Group Robot Webhook_. Les noms de groupe peuvent contenir des lettres, des chiffres et des underscores.
-7. Cliquez sur _Install Configuration_ (ou sur _Update Configuration_).
+1. Dans le coin supérieur droit, cliquez sur l'icône _Group Settings_ (qui ressemble à une ellipse) et sélectionnez _Group Robot_.
+1. Dans le menu Group Robot, sélectionnez Datadog et cliquez sur `Add`.
+1. Saisissez un nom pour le robot et cliquez sur `Finished`. Vous obtenez alors une adresse de webhook.
+1. Copiez l'adresse de webhook et cliquez sur `Finished`.
+1. Sur la [tuile d'intégration] de DingTalk (https://app.datadoghq.com/integrations/dingtalk), saisissez le groupe DingTalk dans lequel vous avez ajouté l'intégration Datadog dans le champ _Nom du groupe_ et collez l'adresse du webhook dans le champ _Robot Webhook du groupe_. Les noms de groupe peuvent contenir des lettres, des chiffres et des traits de soulignement.
+1. Cliquez sur _Install Configuration_ (ou sur _Update Configuration_).
 
-Après avoir installé et mis à jour l'intégration, vous pouvez utiliser la fonction [`@-notification`][2] avec le nom de votre groupe DingTalk.
+Après avoir installé ou mis à jour l'intégration, vous pouvez utiliser la fonction [`@-notification` ] (https://docs.datadoghq.com/monitors/notifications/#notification) avec votre nom de groupe DingTalk.
 
 ## Données collectées
 
@@ -64,8 +50,4 @@ L'intégration DingTalk n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][3].
-
-[1]: https://app.datadoghq.com/integrations/dingtalk
-[2]: https://docs.datadoghq.com/fr/monitors/notifications/#notification
-[3]: https://docs.datadoghq.com/fr/help/
+Besoin d'aide ? Contactez l'[assistance Datadog](https://docs.datadoghq.com/help/).

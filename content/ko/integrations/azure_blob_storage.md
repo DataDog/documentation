@@ -71,7 +71,7 @@ Azure Blob Storage는 클라우드용 Microsoft 개체 스토리지 솔루션입
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure-blob-storage" >}}
+{{< get-metrics-from-git "azure_blob_storage" >}}
 
 
 ### 이벤트

@@ -17,7 +17,7 @@ assets:
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 10312
-    source_type_name: Scalr (Community Version)
+    source_type_name: Scalr (コミュニティバージョン)
 author:
   homepage: https://scalr.com
   name: Scalr
@@ -27,7 +27,7 @@ categories:
 - 自動化
 - 構成 & デプロイ
 - orchestration
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/scalr/README.md
 display_on_public_website: true

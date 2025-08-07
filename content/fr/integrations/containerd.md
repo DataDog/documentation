@@ -1,64 +1,17 @@
 ---
 app_id: containerd
-app_uuid: 206cf95f-1d2a-4ad5-b027-0de15431833b
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: true
-    metrics:
-      check: containerd.cpu.user
-      metadata_path: metadata.csv
-      prefix: containerd.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10082
-    source_type_name: Containerd
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
 - incident-teams
 - kubernetes
 custom_kind: integration
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/containerd/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: containerd
-integration_id: containerd
-integration_title: Containerd
-integration_version: ''
-is_public: true
-manifest_version: 2.0.0
-name: containerd
-public_title: Containerd
-short_description: Surveillez toutes vos métriques Containerd avec Datadog.
+description: Surveillez toutes vos métriques Containerd avec Datadog.
+integration_version: 1.0.0
+media: []
 supported_os:
 - linux
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Containers
-  - Category::Kubernetes
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Surveillez toutes vos métriques Containerd avec Datadog.
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Containerd
+title: Containerd
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
-
-
 ## Section Overview
 
 Ce check surveille le runtime du conteneur Containerd.
@@ -67,7 +20,7 @@ Ce check surveille le runtime du conteneur Containerd.
 
 ### Installation
 
-Containerd est un check de base de l'[Agent Datadog][1]. Vous devez configurer Containerd dans les fichiers `datadog.yaml` et `containerd.d/conf.yaml`.
+Containerd est un contrôle de base [Datadog Agent ](https://app.datadoghq.com/account/settings/agent/latest). Vous devez configurer Containerd à la fois dans `datadog.yaml` et `containerd.d/conf.yaml`.
 
 Dans `datadog.yaml`, configurez votre `cri_socket_path` pour que l'Agent puisse interroger Containerd. Dans `containerd.d/conf.yaml`, configurez les paramètres d'instance du check (tel que `filters`) pour les événements.
 
@@ -78,7 +31,8 @@ Si vous utilisez l'Agent dans un conteneur et définissez la variable d'environn
 Par exemple, pour installer l'intégration sur Kubernetes, modifiez votre DaemonSet de façon à monter le socket Containerd du nœud host sur le conteneur de l'Agent et définissez la variable d'environnement `DD_CRI_SOCKET_PATH` sur le chemin de montage du DaemonSet :
 
 {{< tabs >}}
-{{% tab "Conteneur Linux" %}}
+
+{{% tab "Linux container" %}}
 
 ##### Conteneur Linux
 
@@ -114,7 +68,8 @@ spec:
 **Remarque :** le répertoire `/var/run` doit être monté à partir du host pour que l'intégration s'exécute correctement.
 
 {{% /tab %}}
-{{% tab "Conteneur Windows" %}}
+
+{{% tab "Windows Container" %}}
 
 ##### Conteneur Windows
 
@@ -142,41 +97,68 @@ spec:
 ```
 
 {{% /tab %}}
+
 {{< /tabs >}}
 
 ### Configuration
 
-1. Modifiez le fichier `containerd.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Containerd. Consultez le [fichier d'exemple containerd.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `containerd.d/conf.yaml`, dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à collecter les données de performance de votre Containerd. Voir [sample containerd.d/conf.yaml](https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/containerd.d/conf.yaml.default) pour toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][3].
+1. [Redémarrer le Agent](https://docs.datadoghq.com/help/)
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][4] et cherchez `containerd` dans la section Checks.
+[Exécutez la sous-commande `status` de Agent(https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent) et recherchez `containerd` dans la section Checks.
 
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "containerd" >}}
 
+Containerd recueille des métriques sur l'utilisation des ressources de vos conteneurs.
 
-Cette intégration fonctionne sous Linux et Windows. Toutefois, certaines métriques sont uniquement disponibles pour un seul système d'exploitation. Consultez le fichier `metadata.csv` pour découvrir la liste des métriques qui varient selon le système d'exploitation.
+Les métriques sur le processeur, la mémoire, le bloc E/S ou la table des huge pages sont recueillies par défaut. Vous pouvez également choisir de recueillir des métriques relatives au disque.
+
+| | |
+| --- | --- |
+| **containerd.cpu.system** <br>(gauge) | Le temps total de l'unité centrale<br>_Affiché en nanosecondes_. |
+| **containerd.cpu.throttled.periods** <br>(gauge) | Le temps total d'étranglement du CPU (Linux seulement)<br>_Affiché en nanosecondes_. |
+| **containerd.cpu.total** <br>(gauge) | Le temps total de l'unité centrale<br>_Affiché en nanosecondes_. |
+| **containerd.cpu.user** <br>(gauge) | Le temps total de l'unité centrale de l'utilisateur<br>_Affiché en nanosecondes_. |
+| **containerd.image.pull** <br>(count) | Le nombre de demandes d'extraction d'images<br>_Constitué d'octets_. |
+| **containerd.image.size** <br>(gauge) | La taille de l'image du conteneur<br>_Affichée en octets_. |
+| **cache.mem.conteneur** <br>(gauge) | La quantité de cache utilisée (Linux uniquement)<br>_Affichée en octets_ |
+| **containerd.mem.commit** <br>(gauge) | La mémoire engagée (Windows uniquement)<br>_Constitué d'un octet_. |
+| **containerd.mem.commit_peak** <br>(gauge) | Le pic de mémoire engagée (Windows uniquement)<br>_Affiché en octet_. |
+| **containerd.mem.current.failcnt** <br>(gauge) | L'échec de l'utilisation (Linux seulement)|
+| **containerd.mem.current.limit** <br>(gauge) | La limite de mémoire (Linux uniquement)<br>_Affiché en octet_. |
+| **containerd.mem.current.usage** <br>(gauge) | L'utilisation de la mémoire (Linux uniquement)<br>_Affichée en octets_. |
+| **containerd.mem.kernel.usage** <br>(gauge) | L'utilisation du noyau (Linux uniquement)<br>_Affiché sous forme d'octet_. |
+| **containerd.mem.kernel_tcp.failcnt** <br>(gauge) | Le taux d'échec de kerneltcp (Linux uniquement)|
+| **containerd.mem.kernel_tcp.limit** <br>(gauge) | La limite kerneltcp (Linux uniquement)<br>_Affiché en octet_. |
+| **containerd.mem.kernel_tcp.max** <br>(gauge) | L'utilisation maximale de kerneltcp (Linux seulement)<br>_Constitué d'octets_. |
+| **containerd.mem.kernel_tcp.usage** <br>(gauge) | L'utilisation de kerneltcp (Linux seulement)<br>_Constitué d'un octet_. |
+| **containerd.mem.rss** <br>(gauge) | La quantité de rss utilisée (Linux seulement)<br>_Affiché en octet_. |
+| **containerd.mem.swap.usage** <br>(gauge) | L'utilisation du swap (Linux seulement)<br>_Constitué d'un octet_. |
+| **containerd.mem.working_set** <br>(gauge) | L'utilisation de l'ensemble de travail du conteneur<br>_Constitué d'un octet_. |
+| **containerd.proc.open_fds** <br>(gauge) | Le nombre de descripteurs de fichiers ouverts<br>_Shown as file_ (en anglais) |
+| **containerd.storage.read** <br>(rate) | Lecture d'octets (Windows uniquement)<br>_Affiché sous forme d'octets_ |
+| **containerd.storage.write** <br>(rate) | Écriture d'octets (Windows uniquement)<br>_Affiché sous forme d'octet_. |
+| **containerd.uptime** <br>(gauge) | Temps écoulé depuis le démarrage du conteneur<br>_Affiché en seconde_ |
+
+Cette intégration fonctionne sur Linux et Windows, mais certaines mesures dépendent du système d'exploitation. Consultez `metadata.csv` pour obtenir la liste des mesures dépendantes du système d'exploitation.
 
 ### Événements
 
-Le check Containerd peut recueillir des événements. Utilisez `filters` pour sélectionner les événements pertinents. Consultez le [fichier d'exemple containerd.d/conf.yaml][2] pour obtenir plus de détails.
+Le contrôle Containerd peut collecter des événements. Utilisez `filters` pour sélectionner les événements pertinents. Voir le [sample containerd.d/conf.yaml](https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/containerd.d/conf.yaml.default) pour plus de détails.
 
 ### Checks de service
-{{< get-service-checks-from-git "containerd" >}}
 
+**containerd.health**
+
+Renvoie `CRITICAL` si le check de l'Agent n'est pas capable de se connecter au socket containerd qu'il surveille. Si ce n'est pas le cas, renvoie `OK`.
+
+Etat : ok, critique
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][3].
-
-
-
-[1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/containerd.d/conf.yaml.default
-[3]: https://docs.datadoghq.com/fr/help/
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+Besoin d'aide ? Contactez l'[assistance Datadog](https://docs.datadoghq.com/help/).

@@ -1,26 +1,12 @@
 ---
+app_id: amazon_ecr
 categories:
 - クラウド
 - aws
 custom_kind: integration
-dependencies: []
 description: Amazon ECR のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_ecr/
-draft: false
-git_integration_title: amazon_ecr
-has_logo: true
-integration_id: ''
-integration_title: Amazon ECR
-integration_version: ''
-is_public: true
-manifest_version: '1.0'
-name: amazon_ecr
-public_title: Datadog-Amazon ECR インテグレーション
-short_description: Amazon ECR のキーメトリクスを追跡
-version: '1.0'
+title: Amazon ECR
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Elastic Container Registry (Amazon ECR) は、開発者が Docker コンテナイメージを簡単に保存、管理、デプロイできるようにするフルマネージドの Docker コンテナレジストリです。
@@ -31,34 +17,30 @@ Amazon Elastic Container Registry (Amazon ECR) は、開発者が Docker コン�
 
 ### インストール
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration](https://docs.datadoghq.com/integrations/amazon_web_services/) first.
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]で、メトリクスコレクションの下にある `ECR` にチェックが入っていることを
+1. In the [AWS integration tile](https://app.datadoghq.com/integrations/amazon-web-services), ensure that `ECR` is checked
    確認します。
-2. [Datadog - ECR インテグレーション][3]をインストールします。
+1. Install the [Datadog - ECR integration](https://app.datadoghq.com/integrations/amazon-ecr).
 
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_ecr" >}}
 
+| | |
+| --- | --- |
+| **aws.ecr.repository_pull_count** <br>(count) | The total number of pulls for the images in the repository.|
 
 ### イベント
 
 ECR インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービス チェック
 
 ECR インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
-
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://app.datadoghq.com/integrations/amazon-ecr
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ecr/amazon_ecr_metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+お問合せは、[Datadog サポート](https://docs.datadoghq.com/help/) まで。

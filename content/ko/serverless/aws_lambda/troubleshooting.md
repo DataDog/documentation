@@ -31,6 +31,8 @@ title: AWS Lambda 모니터링 트러블슈팅
 
 포워더를 계속 사용하려면 이 [포워더 트러블슈팅 가이드]를 참조해 더 많은 지원을 받으세요.
 
+<div class="alert alert-info">Datadog Lambda 확장은 기본적으로 로그 수집을 활성화합니다. Forwarder에서 확장으로 마이그레이션하는 경우 반드시 로그 구독을 제거하세요. 그러지 않으면 로그가 중복될 수 있습니다.</div>
+
 ## 구성이 최신 상태고 예상대로 작동하는지 확인
 
 [설치 가이드][9]가 과거 Datadog 모니터링에 설정되었을 수 있는 애플리케이션에 대한 최신 지침을 포함하는지 확인하세요.
@@ -76,9 +78,9 @@ AWS 람다 리소스 태그로 수집된 풍부한 데이터를 확보하려면 
     datadog-ci lambda flare -f <function_arn> -e <email> -c <case_id> --with-logs
     ```
 
-<div class="alert alert-info">Serverless Flare에 대한 더 자세한 내용을 확인하려면 </a>명령 설명서</a>를 참고하세요.</div>
+<div class="alert alert-info">Serverless Flare에 관한 자세한 정보는 <a href="https://docs.datadoghq.com/serverless/libraries_integrations/cli/#troubleshooting-lambda-instrumentation">명령 설명서</a>를 참고하세요.</div>
 {{% /tab %}}
-{{% tab "수동" %}}
+{{% tab "Manually" %}}
 
 [Zendesk 티켓]을 생성하고(https://help.datadoghq.com/hc/en-us/requests/new), 티켓에 다음 정보를 포함하세요.
 

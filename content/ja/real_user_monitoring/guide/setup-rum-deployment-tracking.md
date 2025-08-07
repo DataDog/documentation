@@ -68,13 +68,13 @@ window.DD_RUM &&
 
 #### Android RUM
 
-The version tag is captured automatically from the application's manifest.
+バージョン タグはアプリケーションのマニフェストから自動的に取得されます。
 
 #### iOS RUM
 
-The version tag is captured automatically from the application's `info.plist`.
+バージョン タグはアプリケーションの `info.plist` から自動的に取得されます。
 
-## Analyze your deployment performance in RUM
+## RUM でデプロイメントのパフォーマンスを分析する
 
 {{< tabs >}}
 {{% tab "ブラウザ RUM" %}}

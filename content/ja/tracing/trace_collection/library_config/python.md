@@ -44,11 +44,9 @@ type: multi-code-lang
 ## トレース
 
 `DD_TRACE_ENABLED`
-: **デフォルト**: `true`<br>
-Web フレームワークとライブラリインスツルメンテーションを有効にします。`false` の場合、アプリケーションコードはトレースを生成しません。
-
-`DD_TRACE_SAMPLE_RATE`
-: トレースボリュームコントロールを有効にします
+: **Default**: `true`<br>
+Enable web framework and library instrumentation. When `false`, the application code doesn't generate any traces.<br/>
+See also [DD_APM_TRACING_ENABLED][15].
 
 `DD_TRACE_DEBUG`
 : **デフォルト**: `false`<br>
@@ -66,10 +64,6 @@ Web フレームワークとライブラリインスツルメンテーション�
 
 `DD_TRACE_AGENT_URL`
 : トレーサが送信する Trace Agent の URL です。設定された場合、これはホスト名とポートよりも優先されます。`datadog.yaml` ファイル内の `apm_config.receiver_socket` 構成、または Datadog Agent に設定された `DD_APM_RECEIVER_SOCKET` 環境変数との組み合わせで Unix Domain Sockets (UDS) をサポートします。例えば、HTTP の URL には `DD_TRACE_AGENT_URL=http://localhost:8126`、UDS の URL には `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket` を指定します。[Agent 構成][13]で `receiver_port` や `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、`DD_AGENT_PORT` や `DD_TRACE_AGENT_URL` をそれに合わせなければなりません。
-
-`DD_TRACE_SAMPLING_RULES`
-: **デフォルト**: `[]`<br>
-オブジェクトの JSON 配列。各オブジェクトは `"sample_rate"` を持たなければなりません。`"name"` と `"service"` フィールドは省略可能です。`"sample_rate"` の値は `0.0` と `1.0` の間でなければなりません (この値を含む)。ルールは、トレースのサンプルレートを決定するために設定された順序で適用されます。
 
 `DD_SPAN_SAMPLING_RULES`
 : **デフォルト**: `[]`<br>
@@ -105,21 +99,21 @@ Web フレームワークとライブラリインスツルメンテーション�
 : **デフォルト**: `8125`<br>
 デフォルトのトレーサーが DogStatsD メトリクスを送信するポートをオーバーライドします。[Agent 構成][13]で `dogstatsd_port` や `DD_DOGSTATSD_PORT` をデフォルトの `8125` 以外に設定した場合、このトレーシングライブラリ `DD_DOGSTATSD_PORT` や `DD_DOGSTATSD_URL` をそれに合わせなければなりません。
 
-## Logs
+## ログ
 
 `DD_LOGS_INJECTION`
 : **デフォルト**: `false`<br>
 [ログとトレースの挿入を接続する][6]を有効にします。
 
-## Trace context propagation
+## トレースコンテキストの伝播
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
-: **デフォルト**: `tracecontext,Datadog`<br>
-トレーシングヘッダを注入するときに使用する伝搬スタイル。例えば、`DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,B3` を使用すると、 Datadog と B3 形式のヘッダを注入することができます。
+: **Default**: `tracecontext,Datadog,baggage`<br>
+Propagation styles to use when injecting tracing headers. For example, use `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,B3` to inject both Datadog and B3 format headers.
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
-: **デフォルト**: `DD_TRACE_PROPAGATION_STYLE_INJECT` の値 (`tracecontext,Datadog`)<br>
-トレーシングヘッダを抽出する際に使用する伝搬スタイル。複数の値が与えられた場合、最初に見つかったヘッダのマッチングを使用します。マッチングの順番は、与えられた値の順番に基づきます。例えば、`DD_TRACE_PROPAGATION_STYLE_EXTRACT=B3,Datadog` は最初に `B3` ヘッダーを探し、それが利用できない場合にのみ `Datadog` ヘッダーを使用します。
+: **Default**: Value of `DD_TRACE_PROPAGATION_STYLE_INJECT` (`tracecontext,Datadog,baggage`)<br>
+Propagation styles to use when extracting tracing headers. When multiple values are given, it uses the first header match found. The order of matching is based on the order of values given. For example, `DD_TRACE_PROPAGATION_STYLE_EXTRACT=B3,Datadog` looks for `B3` headers first, and only uses `Datadog` headers if those are not available.
 
 ## その他の参考資料
 
@@ -133,3 +127,4 @@ Web フレームワークとライブラリインスツルメンテーション�
 [6]: /ja/tracing/other_telemetry/connect_logs_and_traces/python/
 [13]: /ja/agent/configuration/network/#configure-ports
 [14]: /ja/opentelemetry/interoperability/environment_variable_support
+[15]: /ja/tracing/trace_collection/library_config/#traces

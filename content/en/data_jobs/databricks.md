@@ -283,6 +283,20 @@ Configure the following environment variable in the Advanced Configuration secti
 DD_LOGS_CONFIG_PROCESSING_RULES=[{\"type\": \"exclude_at_match\",\"name\": \"drop_all_logs\",\"pattern\": \".*\"}]
 ```
 
+### Permissions
+Grant **Workspace Admin** privileges to the user or service principal that connects to your Databricks workspace. This allows Datadog to manage init script installations and updates automatically, reducing the risk of misconfiguration.
+
+If you need more granular control, grant these minimal permissions to the following [workspace level objects][19] to still be able to monitor all jobs, clusters, and queries within a workspace: 
+
+| Object                 | Permission                                                                                                                                                      |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Job                              | [CAN VIEW][20]
+| Compute                          | [CAN ATTACH TO][21]
+| Lakeflow Declarative Pipelines   | [CAN VIEW][22]
+| Query                            | [CAN VIEW][23]
+| SQL warehouse                    | [CAN MONITOR][24]
+
+
 ### Tag spans at runtime
 
 {{% djm-runtime-tagging %}}
@@ -323,7 +337,7 @@ DD_LOGS_CONFIG_PROCESSING_RULES=[{\"type\": \"exclude_at_match\",\"name\": \"dro
 ### Set up Data Jobs Monitoring with Databricks Networking Restrictions
 With [Databricks Networking Restrictions][12], Datadog may not have access to your Databricks APIs, which is required to collect traces for Databricks job executions along with tags and other metadata.
 
-If you are controlling Databricks API access with [IP access lists][13], allow-listing Datadog's specific {{< region-param key="ip_ranges_url_webhooks" link="true" text="webhook IP addresses" >}} allows Datadog to connect to the Databricks APIs in your workspace. See Databricks's documentation for [configuring IP access lists for workspaces][16] to give Datadog API access.
+If you are controlling Databricks API access with [IP access lists][13], allow-listing Datadog's specific {{< region-param key="ip_ranges_url_webhooks" link="true" text="webhook IP addresses" >}} allows Datadog to connect to the Databricks APIs in your workspaces/account. See Databricks's documentation for configuring IP access lists for [individual workspaces][16] and the [account console][17] to give Datadog API access. Updating the IP access lists **at both the workspace and account level is required** for the Databricks integration. **Note:** Datadog only uses Databricks account-level APIs to automatically refresh your service principal's client secret.
 
 If you are using [Databricks Private Connectivity][14], reach out to the Datadog [support team][15] to discuss potential options.
 
@@ -341,5 +355,12 @@ If you are using [Databricks Private Connectivity][14], reach out to the Datadog
 [13]: https://docs.databricks.com/en/security/network/front-end/ip-access-list.html
 [14]: https://www.databricks.com/trust/security-features/secure-your-data-with-private-networking
 [15]: https://www.datadoghq.com/support/
-[16]: https://docs.databricks.com/en/security/network/front-end/ip-access-list-workspace.html
+[16]: https://docs.databricks.com/en/security/network/front-end/ip-access-list-workspace
+[17]: https://docs.databricks.com/aws/en/security/network/front-end/ip-access-list-account
 [18]: https://docs.databricks.com/api/workspace/clusters/edit#spark_env_vars
+[19]: https://docs.databricks.com/aws/en/security/auth/access-control#access-control-lists-overview
+[20]: https://docs.databricks.com/aws/en/security/auth/access-control#job-acls
+[21]: https://docs.databricks.com/aws/en/security/auth/access-control#compute-acls
+[22]: https://docs.databricks.com/aws/en/security/auth/access-control#lakeflow-declarative-pipelines-acls
+[23]: https://docs.databricks.com/aws/en/security/auth/access-control#query-acls
+[24]: https://docs.databricks.com/aws/en/security/auth/access-control#sql-warehouse-acls

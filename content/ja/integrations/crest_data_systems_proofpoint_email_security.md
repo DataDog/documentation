@@ -24,7 +24,7 @@ assets:
     source_type_id: 10379
     source_type_name: crest_data_systems_proofpoint_email_security
   monitors:
-    '[Proofpoint Email Security] Service Check Monitor': assets/monitors/cds_service_check_monitor.json
+    Proofpoint Email Security Service Check Monitor: assets/monitors/cds_service_check_monitor.json
 author:
   homepage: https://crestdata.ai
   name: Crest Data
@@ -35,7 +35,7 @@ categories:
 - マーケットプレイス
 - data stores
 - イベント管理
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -58,7 +58,7 @@ pricing:
   unit_label: Proofpoint 登録ユーザー
   unit_price: 1.0
 public_title: Proofpoint Email Security
-short_description: Monitors Proofpoint TAP, Proofpoint On-Demand, and Proofpoint Isolation
+short_description: Proofpoint TAP、Proofpoint On-Demand、および Proofpoint Isolation を監視します
 supported_os:
 - linux
 - windows
@@ -77,7 +77,7 @@ tile:
   - Submitted Data Type::Events
   - Submitted Data Type::Logs
   configuration: README.md#Setup
-  description: Monitors Proofpoint TAP, Proofpoint On-Demand, and Proofpoint Isolation
+  description: Proofpoint TAP、Proofpoint On-Demand、および Proofpoint Isolation を監視します
   media:
   - caption: Crest Proofpoint - TAP ダッシュボード
     image_url: images/crest_data_systems_proofpoint_tap_1.png
@@ -114,7 +114,7 @@ tile:
 
 ## 概要
 
-The Proofpoint email security integration monitors and visualizes [Proofpoint TAP][7], [Proofpoint on Demand][8], and [Proofpoint Isolation][9].
+Proofpoint のメール セキュリティ連携は、[Proofpoint TAP][7]、[Proofpoint on Demand][8]、および [Proofpoint Isolation][9] を監視して可視化します。
 
 ### Proofpoint Targeted Attack Protection (TAP)
 
@@ -133,22 +133,22 @@ The Proofpoint email security integration monitors and visualizes [Proofpoint TA
 
 ### Proofpoint Isolation
 
-**Proofpoint Isolation** is designed to enhance cybersecurity by isolating and protecting users from potentially malicious content. The primary goal is to prevent users from interacting directly with harmful or suspicious content, thereby reducing the risk of cyber threats.
+**Proofpoint Isolation** は、潜在的に悪意のあるコンテンツを隔離し、ユーザーを保護することでサイバー セキュリティを強化するよう設計されています。主な目的は、ユーザーが危険または疑わしいコンテンツと直接やり取りすることを防ぎ、サイバー 脅威のリスクを低減することです。
 
 このインテグレーションは、以下を監視します。
 - Proofpoint TAP サーバーで処理される `Messages Blocked and Delivered` と `Clicks Blocked and Permitted`。
 - Proofpoint on Demand Log Service をソースとして使用し、セキュアな WebSocket (WSS) プロトコルを利用したメッセージデータタイプ。
-- User's web browsing and email activity by the Proofpoint Isolation Server.
+- Proofpoint Isolation サーバーでのユーザーのウェブ ブラウジングおよびメール アクティビティ。
 
 
 ## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data にお問い合わせください。
 
-- Support Email: [datadog.integrations@crestdata.ai][5]
-- Sales Email: [datadog-sales@crestdata.ai][6]
+- サポートメール: [datadog.integrations@crestdata.ai][5]
+- 営業メール: [datadog-sales@crestdata.ai][6]
 - Web サイト: [crestdata.ai][3]
-- FAQ: [Crest Data Datadog Marketplace Integrations FAQ][14]
+- FAQ: [Crest Data Datadog Marketplace 統合 FAQ][14]
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
@@ -165,4 +165,4 @@ The Proofpoint email security integration monitors and visualizes [Proofpoint TA
 [13]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
 [14]: https://docs.crestdata.ai/datadog-integrations-readme/Crest_Data_Datadog_Integrations_FAQ.pdf
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-proofpoint-email-security" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-proofpoint-email-security" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

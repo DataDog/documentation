@@ -66,7 +66,7 @@ Datadog Azure インテグレーションを使用して、Customer Insights か
 ## 収集データ
 
 ### メトリクス
-{{ get-metrics-from-git "azure-customerinsights" }}
+{{< get-metrics-from-git "azure_customer_insights" >}}
 
 
 ### イベント

@@ -20,11 +20,13 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
 
 ### Graphs
 {{< whatsnext desc="Generic widgets to graph data from Datadog products: ">}}
-    {{< nextlink href="/dashboards/widgets/change" 
+    {{< nextlink href="/dashboards/widgets/bar_chart"
+        img="/dashboards/widgets/icons/bar-chart_light_large.svg">}} Bar Chart{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/change"
         img="dashboards/widgets/icons/change_light_large.png">}} Change {{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/distribution"
         img="dashboards/widgets/icons/distribution_light_large.png">}} Distribution{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/geomap" 
+    {{< nextlink href="/dashboards/widgets/geomap"
         img="dashboards/widgets/icons/geomap_light_large.png">}} Geomap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/heat_map"
         img="dashboards/widgets/icons/heatmap_light_large.png">}} Heatmap{{< /nextlink >}}
@@ -58,33 +60,33 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
 
 ### Product Analytics
 {{< whatsnext desc="Visualize Product Analytics data: ">}}
-    {{< nextlink href="/dashboards/widgets/sankey" 
+    {{< nextlink href="/dashboards/widgets/sankey"
         img="dashboards/widgets/icons/sankey_light_large.svg">}} Sankey{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/funnel" 
+    {{< nextlink href="/dashboards/widgets/funnel"
         img="dashboards/widgets/icons/funnel_light_large.png">}} Funnel{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/retention" 
+    {{< nextlink href="/dashboards/widgets/retention"
         img="/dashboards/widgets/icons/cohort_light_small.svg">}} Retention{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Architecture
 {{< whatsnext desc="Visualize infrastructure and architecture data: ">}}
-    {{< nextlink href="/dashboards/widgets/hostmap" 
+    {{< nextlink href="/dashboards/widgets/hostmap"
         img="dashboards/widgets/icons/host-map_light_large.png">}} Hostmap{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/topology_map" 
+    {{< nextlink href="/dashboards/widgets/topology_map"
         img="dashboards/widgets/icons/service-map_light_large.png">}} Topology Map{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/service_summary" 
+    {{< nextlink href="/dashboards/widgets/service_summary"
         img="dashboards/widgets/icons/service-summary_light_large.png">}} Service Summary{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Annotations and embeds
 {{< whatsnext desc="Decoration widgets to visually structure and annotate dashboards: ">}}
-    {{< nextlink href="/dashboards/widgets/free_text" 
+    {{< nextlink href="/dashboards/widgets/free_text"
         img="dashboards/widgets/icons/free-text_light_large.png">}} Free Text{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/iframe" 
+    {{< nextlink href="/dashboards/widgets/iframe"
         img="dashboards/widgets/icons/iframe_light_large.png">}} Iframe{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/image" 
+    {{< nextlink href="/dashboards/widgets/image"
         img="dashboards/widgets/icons/image_light_large.png">}} Image{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/note" 
+    {{< nextlink href="/dashboards/widgets/note"
         img="dashboards/widgets/icons/notes_light_large.png">}} Notes and Links{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -96,15 +98,15 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
 
 ### Alerting and response
 {{< whatsnext desc="Summary widgets to display Monitoring information: ">}}
-    {{< nextlink href="/dashboards/widgets/alert_graph" 
+    {{< nextlink href="/dashboards/widgets/alert_graph"
         img="dashboards/widgets/icons/alert-graph_light_large.png">}} Alert Graph{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/alert_value" 
+    {{< nextlink href="/dashboards/widgets/alert_value"
         img="dashboards/widgets/icons/alert-value_light_large.png">}}Alert Value{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/check_status" 
+    {{< nextlink href="/dashboards/widgets/check_status"
         img="dashboards/widgets/icons/check-status_light_large.png">}} Check Status{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/monitor_summary" 
+    {{< nextlink href="/dashboards/widgets/monitor_summary"
         img="dashboards/widgets/icons/monitor-summary_light_large.png">}} Monitor Summary{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/run_workflow" 
+    {{< nextlink href="/dashboards/widgets/run_workflow"
         img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Run Workflow{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -112,9 +114,9 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
 {{< whatsnext desc="Site reliability visualizations: ">}}
     {{< nextlink href="/dashboards/widgets/profiling_flame_graph"
         img="dashboards/widgets/icons/profiling_flame_graph.svg">}} Profiling Flame Graph{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo" 
+    {{< nextlink href="/dashboards/widgets/slo"
         img="dashboards/widgets/icons/slo-summary_light_large.png">}} Service Level Objective (SLO) Summary{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo_list" 
+    {{< nextlink href="/dashboards/widgets/slo_list"
         img="dashboards/widgets/icons/slo-list_light_large.png">}} Service Level Objective (SLO){{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -138,6 +140,10 @@ Additional options are available for [timeseries widgets][1].
 Custom links connect data values to URLs such as a Datadog page or your AWS console.
 
 To customize interactions with data inline your generic widgets, see [Custom Links][2].
+
+## Metrics info
+
+On a metric graph, click the context menu (three vertical dots) to find the **Metrics Info** option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
 
 ## Unit override
 
@@ -185,30 +191,58 @@ To copy multiple screenboard widgets (edit mode only), <kbd>Shift</kbd> + click 
 
 **Note**: This only works when sharing within Datadog. It does not generate a preview image.
 
-## Widget graphs
+## Widget graph menus
+
+Hover your cursor over a graph to access the following menu options.
+
+### View in full screen
+
+View the graph in [full screen mode](#full-screen).  
 
 ### Export
 
-| Format | Instructions            |
-| -----  | ----------------------- |
-| PNG    | To download a widget in PNG format, click the export button in the upper right hand side of the widget, and select **Download as PNG**. |
-| CSV    | To download data from a timeseries, table, or top list widget in CSV format, click the export button in the upper right hand side of the widget, and select **Download as CSV**.|
-
-### Graph menu
-
-Click on any dashboard graph to open an options menu:
+Click on the export icon of any dashboard graph to open an options menu:
 
 | Option                 | Description                                                        |
 |------------------------|--------------------------------------------------------------------|
-| Send snapshot          | Create and send a snapshot of your graph.                          |
-| Find correlated metrics| Find correlations from APM services, integrations, and dashboards. |
-| View in full screen    | View the graph in [full screen mode][5].                           |
-| Lock cursor            | Lock the cursor in place on the page.                              |
-| View related processes | Jump to the [Live Processes][6] page scoped to your graph.         |
-| View related hosts     | Jump to the [Host Map][7] page scoped to your graph.               |
-| View related logs      | Jump to the [Log Explorer][8] page scoped to your graph.           |
-| View related traces    | Populate a [Traces][9] panel scoped to your graph.                 |
-| View related profiles  | Jump to the [Profiling][10] page scoped to your graph.             |
+| Copy                   | Create a copy of the dashboard graph.                              |
+| Share snapshot         | Create and send a snapshot of your graph.                          |
+
+#### Use within Datadog
+
+| Option                 | Description                                                        |
+|------------------------|--------------------------------------------------------------------|
+| Declare incident       | Declare an incident from the graph.                                |
+| Add to incident        | Add the graph to an existing incident.                             |
+| Create case            | Create a case from the graph.                                      |
+| Save to notebook       | Save the graph to a notebook.                                      |
+| Link to widget         | Get a link to the widget copied to your clipboard.                 |
+
+#### Share externally
+
+| Format | Instructions            |
+| -----  | ----------------------- |
+| Download as PNG    | Download the widget in PNG format. |
+| Download as SVG    | Download the widget in SVG format. |
+| Download as CSV    | Download the widget in CSV format. |
+
+### Edit
+
+Click on the pencil icon of any dashboard graph to make edits.
+
+### Additional options
+
+Click on the context menu (three vertical dots) of any dashboard graph to open an options menu:
+
+| Option                 | Description                                                        |
+|------------------------|--------------------------------------------------------------------|
+| Edit                              | Edit the graph.                                         |
+| Clone                             | Create an adjacent copy of the graph.                   |
+| Split graph                       | Create a [split graph][13].                             |
+| Create custom links               | Create [custom links](#custom-links).                   |
+| Create monitor                    | Create a monitor preconfigured with the graph's query.  |
+| Metrics info (metric graphs only) | Get a description of the metrics in this graph. You can click on the metric names to open them in the Metric Summary page.            |
+| Delete                            | Delete the graph.                                       |
 
 ## Further Reading
 
@@ -226,3 +260,4 @@ Click on any dashboard graph to open an options menu:
 [10]: /profiler/profile_visualizations/
 [11]: /dashboards/guide/custom_time_frames/
 [12]: /service_management/incident_management/datadog_clipboard/
+[13]: /dashboards/widgets/split_graph/

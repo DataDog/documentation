@@ -5654,6 +5654,72 @@ components:
       type: string
       x-enum-varnames:
       - DATE_REMAPPER
+    LogsDecoderProcessor:
+      description: 'The decoder processor decodes any source attribute containing
+        a
+
+        base64/base16-encoded UTF-8/ASCII string back to its original value, storing
+        the
+
+        result in a target attribute.'
+      properties:
+        binary_to_text_encoding:
+          $ref: '#/components/schemas/LogsDecoderProcessorBinaryToTextEncoding'
+        input_representation:
+          $ref: '#/components/schemas/LogsDecoderProcessorInputRepresentation'
+        is_enabled:
+          default: false
+          description: Whether the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        source:
+          description: Name of the log attribute with the encoded data.
+          example: encoded.field
+          type: string
+        target:
+          description: Name of the log attribute that contains the decoded data.
+          example: decoded.field
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsDecoderProcessorType'
+      required:
+      - source
+      - target
+      - binary_to_text_encoding
+      - input_representation
+      - type
+      type: object
+    LogsDecoderProcessorBinaryToTextEncoding:
+      description: The encoding used to represent the binary data.
+      enum:
+      - base64
+      - base16
+      example: base64
+      type: string
+      x-enum-varnames:
+      - BASE64
+      - BASE16
+    LogsDecoderProcessorInputRepresentation:
+      description: The original representation of input string.
+      enum:
+      - utf_8
+      - integer
+      example: utf_8
+      type: string
+      x-enum-varnames:
+      - UTF_8
+      - INTEGER
+    LogsDecoderProcessorType:
+      default: decoder-processor
+      description: Type of logs decoder processor.
+      enum:
+      - decoder-processor
+      example: decoder-processor
+      type: string
+      x-enum-varnames:
+      - DECODER_PROCESSOR
     LogsExclusion:
       description: Represents the index exclusion filter object from configuration
         API.
@@ -6322,6 +6388,7 @@ components:
       - $ref: '#/components/schemas/LogsTraceRemapper'
       - $ref: '#/components/schemas/LogsSpanRemapper'
       - $ref: '#/components/schemas/LogsArrayProcessor'
+      - $ref: '#/components/schemas/LogsDecoderProcessor'
     LogsQueryCompute:
       description: Define computation for a log query.
       properties:
@@ -33069,7 +33136,9 @@ paths:
         type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/assignee:
     patch:
-      description: Modify the triage assignee of a security signal.
+      deprecated: true
+      description: This endpoint is deprecated - Modify the triage assignee of a security
+        signal.
       operationId: EditSecurityMonitoringSignalAssignee
       parameters:
       - $ref: '#/components/parameters/SignalID'
@@ -33120,7 +33189,9 @@ paths:
         type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/state:
     patch:
-      description: Change the triage state of a security signal.
+      deprecated: true
+      description: This endpoint is deprecated - Change the triage state of a security
+        signal.
       operationId: EditSecurityMonitoringSignalState
       parameters:
       - $ref: '#/components/parameters/SignalID'
@@ -35581,6 +35652,12 @@ paths:
       description: Search for Synthetic tests and Test Suites.
       operationId: SearchTests
       parameters:
+      - description: The search query.
+        in: query
+        name: text
+        required: false
+        schema:
+          type: string
       - description: If true, include the full configuration for each test in the
           response.
         in: query

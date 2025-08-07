@@ -63,7 +63,7 @@ title: デプロイメントの追跡
 この概要テーブルに列を追加またはテーブルから列を削除することができます。選択はすべて保存されます。利用可能な列は以下のとおりです。
 
 - 前バージョンに存在しなかったバージョンでアクティブなエンドポイント。
-- アクティブな時間。このバージョンで Datadog に送信された最初のトレースから最後のトレースまでの時間を表示。
+- アクティブな時間。このバージョンで Datadog に送信された最初のトレースから最後のトレースまでの時間を表示します。
 - リクエスト総数。
 - エラー総数。
 - p50、p75、p90、p95、p99、または最大で計測されたレイテンシー。
@@ -220,7 +220,7 @@ Time = 30
 : `{service: foo, env: staging, cluster-name: us-staging, version: Y}`
 
 Time = 45
-: `{service: foo, env: dev-shopist, cluster-name: us-staging, version: Y}`
+: `{service: foo, env: staging, cluster-name: dev-shopist, version: Y}`
 
 デプロイメント間の最大時間:
 : `max:datadog.service.time_between_deployments{env: staging, cluster-name: *} = 25`

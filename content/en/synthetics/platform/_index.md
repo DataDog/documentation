@@ -31,7 +31,7 @@ Explore the [Test Coverage][4] page to gain insights into the overall testing co
 {{< img src="synthetics/test_coverage/browser_actions.png" alt="Test Coverage page with an Overview section, Untested Actions section, and a Tested Actions section" style="width:100%" >}}
 
 ## Connect Synthetic Monitoring testing and APM
-[Connect APM][4] to identify failing synthetic tests directly through to the root causes by digging into related traces.
+[Connect APM][5] to identify failing synthetic tests directly through to the root causes by digging into related traces.
 
 {{< img src="tracing/index/Synthetics.png" alt="Synthetic tests" style="width:100%;">}}
 

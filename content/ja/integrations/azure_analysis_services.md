@@ -66,7 +66,7 @@ Datadog Azure インテグレーションを使用して、Azure Analysis Servic
 ## 収集データ
 
 ### メトリクス
-{{ get-metrics-from-git "azure-analysisservices" }}
+{{< get-metrics-from-git "azure_analysis_services" >}}
 
 
 ### イベント

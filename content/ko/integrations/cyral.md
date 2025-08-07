@@ -1,75 +1,27 @@
 ---
 app_id: cyral
-app_uuid: da6e2ea6-1611-4d37-9cc6-efce73bc4f31
-assets:
-  dashboards:
-    Cyral Overview: assets/dashboards/cyral_overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: cyral.analysis_time
-      metadata_path: metadata.csv
-      prefix: cyral.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10115
-    source_type_name: Cyral
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Cyral
-  sales_email: product@cyral.com
-  support_email: product@cyral.com
 categories:
-- 데이터 스토어
-- 보안
+- 데이터 저장소
+- security
 custom_kind: 통합
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/cyral/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: cyral
-integration_id: cyral
-integration_title: Cyral
-integration_version: 0.0.1
-is_public: true
-manifest_version: 2.0.0
-name: cyral
-public_title: Cyral
-short_description: Cyral 인스턴스 모니터링 MySQL에서 런타임 메트릭 수집
+description: Cyral 인스턴스 모니터링 MySQL에서 런타임 메트릭 수집
+integration_version: 0.1.0
+media: []
 supported_os:
 - linux
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Data Stores
-  - Category::Security
-  - Supported OS::Linux
-  configuration: README.md#Setup
-  description: Cyral 인스턴스 모니터링 MySQL에서 런타임 메트릭 수집
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Cyral
+title: Cyral
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
-
-
 ## 개요
 
-이 점검은 Datadog 에이전트를 통해 [Cyral][1] MySQL 사이드카를 모니터링합니다.
+This check monitors a [Cyral](https://cyral.com/) MySQL sidecar through the Datadog Agent.
 
 ## 설정
 
-[Datadog 에이전트][2] 패키지에는 Cyral 점검이 포함되어 있지 않기 때문에 설치해야 합니다.
+The Cyral check is not included in the [Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest) package, so you need to install it.
 
 ### 설치
 
-에이전트 v7.21+/v6.21+의 경우, 하단 지침에 따라 호스트에 Cyral 점검을 설치하세요. Docker 에이전트 또는 이전 버전의 에이전트와 같이 설치하려면 [커뮤니티 통합][3]을 참고하세요.
+For Agent v7.21+ / v6.21+, follow the instructions below to install the Cyral check on your host. See [Use Community Integrations](https://docs.datadoghq.com/agent/guide/use-community-integrations/) to install with the Docker Agent or earlier versions of the Agent.
 
 1. 다음 명령어를 실행해 에이전트 통합을 설치하세요.
 
@@ -77,31 +29,55 @@ tile:
    datadog-agent integration install -t datadog-cyral==<INTEGRATION_VERSION>
    ```
 
-2. 통합을 코어 [통합][4]과 유사하게 설정하세요.
+1. Configure your integration similar to core [integrations](https://docs.datadoghq.com/getting_started/integrations/).
 
 ### 설정
 
-1. 에이전트 구성 디렉터리의 루트 수준에 있는 `conf.d/` 폴더에서 `cyral.d/conf.yaml` 파일을 편집해 cyral 성능 데이터 수집을 시작하세요. 사용할 수 있는 구성 옵션을 모두 보려면 [sample cyral.d/conf.yaml][5]을 참고하세요.
+1. Edit the `cyral.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your cyral performance data. See the [sample cyral.d/conf.yaml](https://github.com/DataDog/integrations-extras/blob/master/cyral/datadog_checks/cyral/data/conf.yaml.example) for all available configuration options.
 
-    ```yaml
-    init_config:
+   ```yaml
+   init_config:
 
-    instances:
-     # url of the metrics endpoint of prometheus
-     - prometheus_url: http://localhost:9018/metrics
-    ```
+   instances:
+    # url of the metrics endpoint of prometheus
+    - prometheus_url: http://localhost:9018/metrics
+   ```
 
-2. [에이전트를 재시작합니다][6].
+1. [Agent를 다시 시작합니다](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ### 검증
 
-[에이전트 상태 하위 명령을 실행][7]하고 Checks 섹션 아래에서 `cyral`를 찾으세요.
+[Run the Agent's status subcommand](https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) and look for `cyral` under the Checks section.
 
-## 수집한 데이터
+## 수집한 데이터
 
-### 메트릭
-{{< get-metrics-from-git "cyral" >}}
+### Metrics
 
+| | |
+| --- | --- |
+| **cyral.analysis_time** <br>(count) | Time spent in just doing analysis<br>_Shown as millisecond_ |
+| **cyral.authentication_failure_count** <br>(count) | The number of authentication failures|
+| **cyral.catalog_query_count** <br>(count) | |
+| **cyral.closed_client_conns_count** <br>(count) | |
+| **cyral.closed_listeners_count** <br>(count) | |
+| **cyral.high_latency_query_count** <br>(count) | Number of queries exceeding (configurable) threshold|
+| **cyral.open_client_conns_count** <br>(count) | |
+| **cyral.open_listeners_count** <br>(count) | |
+| **cyral.policy_eval_time** <br>(count) | |
+| **cyral.policy_eval_time_counter** <br>(count) | |
+| **cyral.policy_violation_count** <br>(count) | The number of queries with policy violations|
+| **cyral.portscan_count** <br>(count) | The number of detected portscan attempts|
+| **cyral.queries_with_errors** <br>(count) | |
+| **cyral.query_duration_count** <br>(count) | Number of increments to query_duration|
+| **cyral.query_duration_sum** <br>(count) | The total duration of queries in milliseconds|
+| **cyral.repo_dial_errors_count** <br>(count) | |
+| **cyral.row_count** <br>(count) | The number of rows per query|
+| **cyral.sql_parse_time** <br>(count) | Time spent doing parsing in milliseconds|
+| **cyral.sql_parse_time_counter** <br>(count) | Number of increments to sql_parse_time|
+| **cyral.storage_watch_events_count** <br>(count) | |
+| **cyral.wire_dial_errors_count** <br>(count) | |
+| **cyral.wire_parse_duration** <br>(count) | |
+| **cyral.wire_parse_duration_increments** <br>(count) | |
 
 ### 서비스 점검
 
@@ -124,14 +100,4 @@ Cyral에는 이벤트가 포함되어 있지 않습니다.
 
 `cyral.yaml` 내의 `url`이 올바른지 확인하세요.
 
-도움이 필요하신가요? [Datadog 지원팀][9]에 문의하세요.
-
-[1]: https://cyral.com/
-[2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/ko/agent/guide/use-community-integrations/
-[4]: https://docs.datadoghq.com/ko/getting_started/integrations/
-[5]: https://github.com/DataDog/integrations-extras/blob/master/cyral/datadog_checks/cyral/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-extras/blob/master/cyral/metadata.csv
-[9]: https://docs.datadoghq.com/ko/help/
+도움이 필요하세요? [Datadog 지원 팀](https://docs.datadoghq.com/help/)에 문의하세요.

@@ -13,8 +13,8 @@ type: multi-code-lang
 
 プロファイラを設定してもプロファイル検索ページにプロファイルが表示されない場合は、[デバッグモード][1]をオンにし、デバッグファイルと次の情報で[サポートチケットを開いてください][2]。
 
-- Operating system type and version (for example, Ubuntu Linux 22.04)
-- ランタイムのタイプ、バージョン、ベンダー (例: Ruby 2.7.3)
+- オペレーティング システムの種類とバージョン (例: Ubuntu Linux 24.04)
+- ランタイムの種類、バージョン、ベンダー (例: Ruby 3.3.1)
 
 ## レスキュージョブのプロファイルがありません
 
@@ -28,23 +28,23 @@ Ruby 2.7 と古いバージョンの GCC (4.8 以下) の間には、プロフ�
 
 これを解決するには、オペレーティングシステムまたは Docker イメージを更新して、GCC のバージョンが v4.8 よりも新しいものになるようにしてください。
 
-この問題についての更なるヘルプは、[サポートにお問い合わせ][2]の上、`DD_PROFILING_FAIL_INSTALL_IF_MISSING_EXTENSION=true gem install ddtrace` と結果の `mkmf.log` ファイルを実行したときの出力を含めてお送りください。
+この問題に関して追加のサポートが必要な場合は、[サポートに連絡][2] し、`DD_PROFILING_FAIL_INSTALL_IF_MISSING_EXTENSION=true gem install datadog` を実行した出力と、生成された `mkmf.log` ファイルを添付してください。
 
 ## バックトレースが非常に深い場合、フレームが省略される
 
-Ruby プロファイラーでは、プロファイリングデータを収集する際に、深いバックトレースを切り捨てています。切り捨てられたバックトレースは呼び出し元の関数の一部が欠落しているため、ルートコールフレームにリンクすることが不可能になります。その結果、切り捨てられたバックトレースは `N frames omitted` というフレームにまとめられます。
+The Ruby profiler truncates deep backtraces when collecting profiling data. Truncated backtraces are missing some of their caller functions, making it impossible to link them to the root call frame. As a result, truncated backtraces are grouped together under a `Truncated Frames` (or `N frames omitted` in older versions) frame.
 
-環境変数 `DD_PROFILING_MAX_FRAMES`、または次のコードで、最大深度を増やすことができます。
+You can increase the maximum backtrace (stack) depth with the `DD_PROFILING_MAX_FRAMES` environment variable, or in code:
 
 ```ruby
 Datadog.configure do |c|
-  c.profiling.advanced.max_frames = 500
+  c.profiling.advanced.max_frames = 600
 end
 ```
 
-## Unexpected failures or errors from Ruby gems that use native extensions
+## ネイティブ拡張を使用する Ruby gem で予期しない失敗やエラーが発生する
 
-The Ruby profiler gathers data by sending `SIGPROF` UNIX signals to Ruby applications, enabling finer-grained data gathering.
+`SIGPROF` UNIX シグナルを Ruby アプリケーションに送信することで、Ruby プロファイラーはより詳細なデータ収集を行います。
 
 `SIGPROF` の送信は一般的なプロファイリング手法であり、ネイティブ拡張機能/ライブラリからのシステムコールがシステムの [`EINTR` エラーコード][8]で中断されることがあります。
 まれに、ネイティブ拡張機能またはネイティブ拡張機能から呼び出されたライブラリの `EINTR` エラーコードに対するエラー処理が欠けていたり、不正確な場合があります。
@@ -52,10 +52,10 @@ The Ruby profiler gathers data by sending `SIGPROF` UNIX signals to Ruby applica
 以下のような非互換性があることが知られています。
 * `mysql2` gem を [8.0.0 より古い][9]バージョンの `libmysqlclient` と一緒に使用すること。影響を受ける `libmysqlclient` のバージョンは、Ubuntu 18.04 に存在することが知られていますが、20.04 またはそれ以降のリリースには存在しません。
 * [`rugged` gem を使用すること。][10]
-* Using the `passenger` gem/Phusion Passenger web server [older than 6.0.19][11]
-* [Some APIs in the `Dir` class][13]
+* `passenger` gem / Phusion Passenger Web サーバーの [6.0.19 より前のバージョン][11] を使用する
+* [`Dir` クラスの一部 API][13]
 
-In these cases, the latest version of the profiler automatically detects the incompatibility and applies a workaround.
+これらの場合、最新バージョンのプロファイラーは自動的に非互換性を検出し、ワークアラウンドを適用します。
 
 上記以外のネイティブ拡張機能を使用する Ruby gem で失敗やエラーが発生した場合、手動で "no signals" 回避策を有効にすることで `SIGPROF` シグナルの使用を回避することができます。
 この回避策を有効にするには、環境変数 `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED` を `true` に設定します。
@@ -69,15 +69,15 @@ end
 非互換性を見つけたり疑ったりした場合は、[サポートチケット][2]で弊社チームにお知らせください。
 そうすることで、Datadog はそれらを自動検出リストに追加し、gem/ライブラリの作者と協力して問題を解決することができます。
 
-## Segmentation faults in `gc_finalize_deferred` in Ruby versions 2.6 to 3.2
+## Ruby 2.6 〜 3.2 で `gc_finalize_deferred` に発生するセグメンテーション フォルト
 
-A workaround for this issue is automatically applied since [`dd-trace-rb` version 1.21.0][3]. Datadog recommends upgrading to this version or later to fix this issue.
+この問題のワークアラウンドは、[`dd-trace-rb` バージョン 1.21.0][3] 以降で自動的に適用されます。Datadog は本バージョン以降へのアップグレードを推奨します。
 
-Prior to version 1.21.0, in rare situations the profiler could trigger [Ruby VM Bug #19991][12] that manifests itself as a "Segmentation fault" with a crash stack trace including the `gc_finalize_deferred` function.
+バージョン 1.21.0 より前では、まれにプロファイラーが [Ruby VM Bug #19991][12] を引き起こし、`gc_finalize_deferred` 関数を含むクラッシュ スタック トレースとともに「Segmentation fault」が発生する場合があります。
 
-This bug has been fixed for Ruby 3.3 and above. For older Ruby versions (and prior to dd-trace-rb 1.21.0), you can use the "no signals" workaround to resolve this issue.
+このバグは Ruby 3.3 以降で修正されています。古い Ruby バージョン (および dd-trace-rb 1.21.0 より前) では、“no signals” ワークアラウンドを使用して解決できます。
 
-To enable this workaround, set the `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED` environment variable to `true`, or in code:
+このワークアラウンドを有効にするには、環境変数 `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED` を `true` に設定するか、コード内で次のように指定します:
 
 ```ruby
 Datadog.configure do |c|
@@ -90,7 +90,7 @@ end
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/tracing/troubleshooting/#tracer-debug-logs
+[1]: /ja/tracing/troubleshooting/#debugging-and-logging
 [2]: /ja/help/
 [3]: https://github.com/datadog/dd-trace-rb/releases/tag/v1.21.0
 [4]: https://github.com/resque/resque

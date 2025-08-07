@@ -295,6 +295,44 @@ configuration.site = [DDSite ap1];
 {{< /tabs >}}
 {{< /site-region >}}
 
+{{< site-region region="ap2" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+
+```swift
+import DatadogCore
+import DatadogLogs
+
+Datadog.initialize(
+    with: Datadog.Configuration(
+        clientToken: "<client token>",
+        env: "<environment>",
+        site: .ap2,
+        service: "<service name>"
+    ), 
+    trackingConsent: trackingConsent
+)
+
+Logs.enable()
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+@import DatadogObjc;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite ap2];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+
+[DDLogs enable];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
 GDPR 規定を遵守するため、SDK は初期化時に `trackingConsent` の値を求めます。
 `trackingConsent` は以下のいずれかの値になります。
 
@@ -326,7 +364,8 @@ DDDatadog.verbosityLevel = DDSDKVerbosityLevelDebug;
 {{% /tab %}}
 {{< /tabs >}}
 
-3. `Logger` の構成：
+3. `Logger` を設定する:<br>
+**注**: `Logs.enable()` を呼び出した *後* にロガーを作成する必要があります。
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -401,7 +440,7 @@ logger.info("Clicked OK", attributes: ["context": "onboarding flow"])
 
 ログを Datadog に送信するようにロガーを初期化する際に、`Logger.Configuration` の次のメソッドを使用できます。
 
-| メソッド | 説明 |
+| メソッド | 説明  |
 |---|---|
 | `Logger.Configuration.networkInfoEnabled` | すべてのログに `network.client.*` 属性を追加します。デフォルトで記録されるデータには、`reachability` (`yes`、`no`、`maybe`)、`available_interfaces` (`wifi`、`cellular` など)、`sim_carrier.name` (例: `AT&T - US`)、`sim_carrier.technology` (`3G`、`LTE` など)、`sim_carrier.iso_country` (例: `US`)があります。 |
 | `Logger.Configuration.service` | Datadog に送信されるすべてのログにアタッチされる `service` [標準属性][4]の値を設定します。 |

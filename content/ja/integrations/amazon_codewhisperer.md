@@ -11,7 +11,7 @@ assets:
     metrics:
       check:
       - aws.codewhisperer.invocations
-      metadata_path: metadata.csv
+      metadata_path: assets/metrics/metric-spec.yaml
       prefix: aws.codewhisperer.
     service_checks:
       metadata_path: assets/service_checks.json
@@ -28,7 +28,7 @@ categories:
 - クラウド
 - ai/ml
 - 開発ツール
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -81,7 +81,7 @@ Amazon CodeWhisperer は、自然言語によるコメントと統合開発環�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-codewhisperer" >}}
+{{< get-metrics-from-git "amazon_codewhisperer" >}}
 
 
 ### イベント
@@ -99,5 +99,5 @@ Amazon CodeWhisperer インテグレーションには、サービスのチェ�
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-codewhisperer
-[4]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_codewhisperer/metadata.csv
+[4]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_codewhisperer/assets/metrics/metric-spec.yaml
 [5]: https://docs.datadoghq.com/ja/help/

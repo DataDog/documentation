@@ -1,27 +1,58 @@
 ---
+app_id: azure-relay
+app_uuid: 7334eb73-4a8e-4b0a-9c18-9a755c63ca69
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.relay_namespaces.active_connections
+      metadata_path: metadata.csv
+      prefix: azure.relay_namespaces
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 300
+    source_type_name: Relais Azure
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - azure
 - cloud
 - network
 custom_kind: integration
 dependencies: []
-description: Surveillez des métriques clés d'Azure Relay.
-doc_link: https://docs.datadoghq.com/integrations/azure_relay/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_relay
-has_logo: true
 integration_id: azure-relay
-integration_title: Microsoft Azure Relay
+integration_title: Relais Azure
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_relay
-public_title: Intégration Datadog/Microsoft Azure Relay
+public_title: Relais Azure
 short_description: Surveillez des métriques clés d'Azure Relay.
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Azure
+  - Category::Cloud
+  - Category::Network
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Surveillez des métriques clés d'Azure Relay.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Relais Azure
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## Section Overview
 
 Le service Azure Relay vous permet d'exposer en toute sécurité les services exécutés dans votre réseau d'entreprise sur le cloud public. Vous pouvez le faire sans ouvrir de port sur votre pare-feu ni apporter de changements intrusifs à votre infrastructure réseau d'entreprise.
@@ -37,7 +68,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft�
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "azure-relay" >}}
+{{< get-metrics-from-git "azure_relay" >}}
 
 
 ### Événements

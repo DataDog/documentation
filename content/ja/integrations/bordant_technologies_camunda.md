@@ -81,6 +81,9 @@ tile:
     image_url: images/Camunda_8-Overview_3.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/bordant-technologies-camunda-8-datadog-marketplace/
   support: README.md#Support
   title: Camunda 8
   uninstallation: README.md#Uninstallation
@@ -116,12 +119,16 @@ Camunda 8 ワークフローエンジンの高度な監視機能を解放しま�
 
 - サポート: [support@bordant.com][2]
 
+### その他の参考資料
+お役に立つドキュメント、リンクや記事:
+
+- [Bordant Technologies の Datadog インテグレーションで Camunda 8 コンポーネントの可視性を高める][6]
+
 [1]: https://docs.camunda.io/docs/self-managed/platform-deployment/overview/
 [2]: mailto:support@bordant.com
 [3]: https://docs.datadoghq.com/ja/agent/
 [4]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [5]: https://docs.datadoghq.com/ja/containers/kubernetes/integrations/?tab=kubernetesadv2
-
-
+[6]: https://www.datadoghq.com/blog/bordant-technologies-camunda-8-datadog-marketplace/
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/bordant-technologies-camunda" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/bordant-technologies-camunda" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

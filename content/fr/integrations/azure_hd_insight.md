@@ -1,28 +1,56 @@
 ---
-aliases:
-- /fr/integrations/azure_hdinsight
+app_id: azure-hdinsight
+app_uuid: 2b5359ca-2d39-4a43-8f8a-49ec30f6bee3
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.hdinsight_clusters.gateway_requests
+      metadata_path: metadata.csv
+      prefix: azure.hdinsight_clusters
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 294
+    source_type_name: Azure HD Insight
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - azure
 custom_kind: integration
 dependencies: []
-description: Surveillez des métriques clés d'Azure HDInsight.
-doc_link: https://docs.datadoghq.com/integrations/azure_hd_insight/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_hd_insight
-has_logo: true
 integration_id: azure-hdinsight
-integration_title: Microsoft Azure HDInsight
+integration_title: Azure HD Insight
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_hd_insight
-public_title: Intégration Datadog/Microsoft Azure HDInsight
-short_description: Surveillez des métriques clés d'Azure HDInsight.
-version: '1.0'
+public_title: Azure HD Insight
+short_description: Suivre les indicateurs clés d'Azure HD Insight.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Azure
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Suivre les indicateurs clés d'Azure HD Insight.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure HD Insight
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## Section Overview
 
 Azure HDInsight est un service cloud qui simplifie, accélère et rentabilise le traitement de quantités importantes de données.
@@ -38,7 +66,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft�
 ## Données collectées
 
 ### Métriques
-{{ get-metrics-from-git "azure-hdinsight" }}
+{{< get-metrics-from-git "azure_hd_insight" >}}
 
 
 ### Événements

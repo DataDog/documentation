@@ -14,15 +14,15 @@ assets:
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
+  sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
 - incident-teams
 - kubernetes
-- ログの収集
+- log collection
 - ネットワーク
 - オーケストレーション
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pivotal_pks/README.md
 display_on_public_website: true

@@ -1,26 +1,58 @@
 ---
+app_id: azure-service-bus
+app_uuid: 9db052dc-1cb1-405a-833d-dfb77a2db9df
+assets:
+  dashboards:
+    azure_service_bus: assets/dashboards/azure_service_bus.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.servicebus_namespaces.count
+      metadata_path: metadata.csv
+      prefix: azure.servicebus_namespaces
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 227
+    source_type_name: Azure Service Bus
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - 클라우드
 - azure
 custom_kind: 통합
 dependencies: []
-description: Azure Service Bus의 핵심 메트릭 추적하기.
-doc_link: https://docs.datadoghq.com/integrations/azure_service_bus/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_service_bus
-has_logo: true
 integration_id: azure-service-bus
-integration_title: Microsoft Azure Service Bus
+integration_title: Azure Service Bus
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_service_bus
-public_title: Datadog-Microsoft Azure Service Bus 통합
+public_title: Azure Service Bus
 short_description: Azure Service Bus의 핵심 메트릭 추적하기.
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Azure
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Azure Service Bus의 핵심 메트릭 추적하기.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Service Bus
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 개요
 
 Microsoft Azure Service Bus는 완전관리형 엔터프라이즈 통합 메시지 브로커입니다.
@@ -39,7 +71,7 @@ Azure Service Bus 메트릭을 얻으면 다음을 할 수 있습니다.
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure-service-bus" >}}
+{{< get-metrics-from-git "azure_service_bus" >}}
 
 
 ### 이벤트

@@ -97,10 +97,6 @@ Cloudflare의 AI Gateway를 사용하면 AI 앱에 대한 가시성을 확보하
 - 웹사이트: [crestdata.ai][5]
 - FAQ: [Crest Data Datadog Marketplace 통합 FAQ][13]
 
-## 트러블슈팅
-
-도움이 필요하신가요? [Datadog 지원팀][8]에 문의하세요.
-
 [1]: https://developers.cloudflare.com/ai-gateway/get-started/creating-gateway/
 [2]: https://developers.cloudflare.com/analytics/graphql-api/getting-started/authentication/api-token-auth/
 [3]: mailto:datadog.integrations@crestdata.ai
@@ -115,4 +111,4 @@ Cloudflare의 AI Gateway를 사용하면 AI 앱에 대한 가시성을 확보하
 [12]: https://docs.crestdata.ai/datadog-integrations-readme/Cloudflare_AI_Gateway.pdf
 [13]: https://docs.crestdata.ai/datadog-integrations-readme/Crest_Data_Datadog_Integrations_FAQ.pdf
 ---
-이 애플리케이션은 Marketplace를 통해 제공되며 Datadog 기술 파트너의 지원을 받습니다. 구매하려면 <a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-cloudflare-ai-gateway" target="_blank">여기를 클릭하세요</a>.
+이 애플리케이션은 Datadog Marketplace를 통해 제공되며 Datadog 기술 파트너의 지원을 받습니다. 사용하려면 <a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-cloudflare-ai-gateway" target="_blank">Marketplace에서 애플리케이션을 구매하세요</a>.

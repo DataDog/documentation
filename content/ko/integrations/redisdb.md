@@ -45,7 +45,7 @@ draft: false
 git_integration_title: redisdb
 integration_id: redis
 integration_title: Redis
-integration_version: 7.2.0
+integration_version: 8.0.0
 is_public: true
 manifest_version: 2.0.0
 name: redisdb
@@ -443,7 +443,7 @@ Agent 컨테이너의 필수 환경 변수:
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "redis" >}}
+{{< get-metrics-from-git "redisdb" >}}
 
 
 ### 이벤트
@@ -451,7 +451,7 @@ Agent 컨테이너의 필수 환경 변수:
 Redis 점검은 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "redis" >}}
+{{< get-service-checks-from-git "redisdb" >}}
 
 
 ## 트러블슈팅

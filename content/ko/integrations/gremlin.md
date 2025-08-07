@@ -1,97 +1,51 @@
 ---
 app_id: gremlin
-app_uuid: 451a4863-1767-4c11-8831-d196ae4643d0
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: true
-    metrics:
-      check: []
-      metadata_path: metadata.csv
-      prefix: gremlin.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10031
-    source_type_name: Gremlin
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Gremlin
-  sales_email: support@gremlin.com
-  support_email: support@gremlin.com
 categories:
 - 문제 추적
 custom_kind: 통합
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/gremlin/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: gremlin
-integration_id: gremlin
-integration_title: Gremlin
-integration_version: ''
-is_public: true
-manifest_version: 2.0.0
-name: gremlin
-public_title: Gremlin
-short_description: Gremlin에서 발생하는 이벤트를 Datadog으로 전송
+description: Gremlin에서 발생하는 이벤트를 Datadog으로 전송
+further_reading:
+- link: https://www.datadoghq.com/blog/gremlin-datadog/
+  tag: 블로그
+  text: How Gremlin monitors its own Chaos Engineering service with Datadog
+integration_version: 1.0.0
+media: []
 supported_os:
 - linux
-- windows
+- 윈도우즈(Windows)
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Issue Tracking
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Gremlin에서 발생하는 이벤트를 Datadog으로 전송
-  media: []
-  overview: README.md#Overview
-  resources:
-  - resource_type: 블로그
-    url: https://www.datadoghq.com/blog/gremlin-datadog/
-  support: README.md#Support
-  title: Gremlin
+title: Gremlin
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
-
-
 ## 개요
 
 Datadog에서 Gremlin 공격을 직접 확인, 재실행, 중단할 수 있습니다.
 
-Datadog [이벤트][1]와 Gremlin을 페어링하면 Datadog 워크플로우에 테스트 실패 컨텍스트를 효율적으로 추가할 수 있습니다.
+Pairing Gremlin with Datadog's [Events](https://docs.datadoghq.com/getting_started/#events) is an effective way to add failure-testing context to your Datadog workflows.
 
 - 대시보드 상단에 공격 이벤트를 오버레이하여 Gremlin이 언제 어떻게 메트릭에 영향을 미치는지 정확히 파악할 수 있습니다.
-- Datadog [이벤트 스트림]에서 Gremlin 공격을 표시, 재실행, 중지하기[ 2]
+- Show, Rerun, and Halt Gremlin attacks from your Datadog [Event Stream](https://app.datadoghq.com/event/stream)
 
-![snapshot][3]
+![snapshot](https://raw.githubusercontent.com/DataDog/integrations-extras/master/gremlin/images/events-overlay.png)
 
 ## 설정
 
 ### 설정
 
-해당 통합을 활성화하려면 Datadog API 키를 Gremlin에 전달해야 합니다. 키를 전달하려면 [통합 페이지][4]에서 **Datadog** 행의 **추가** 버튼을 클릭합니다. **Datadog API 키**를 입력하라는 메시지가 표시됩니다. 입력을 완료하면 통합이 초기화됩니다.
+To activate this integration, you need to pass your Datadog API key to Gremlin. This is done on the [Integrations Page](https://app.gremlin.com/settings/integrations), by clicking the **Add** button on the row for **Datadog**. You are prompted for your **Datadog API key**. Once entered, the integration is initialized.
 
-- API 키: <span class="hidden-api-key">\${api_key}</span>
+- API key: <span class="hidden-api-key">${api_key}</span>
 
-이제 [이벤트 스트림][2]의 통합에서 이벤트를 확인할 수 있습니다.
+You should start seeing events from this integration in your [Event Stream](https://app.datadoghq.com/event/stream).
 
 ## 수집한 데이터
 
-### 메트릭
+### Metrics
 
 Gremlin 통합은 메트릭을 제공하지 않습니다.
 
 ### 이벤트
 
-Gremlin 통합은 Gremlin에서 공격이 시작 또는 중지되면 [Datadog 이벤트 스트림][4]에 이벤트를 전송합니다.
+The Gremlin integration sends events to your [Datadog Event Stream](https://app.gremlin.com/settings/integrations) when attacks are started or stopped on Gremlin.
 
 ### 서비스 점검
 
@@ -99,17 +53,10 @@ Gremlin 통합은 서비스 점검을 포함하지 않습니다.
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원팀][5]에 문의하세요.
+도움이 필요하세요? [Datadog 지원 팀](https://docs.datadoghq.com/help/)에 문의하세요.
 
 ## 참고 자료
 
 기타 유용한 문서, 링크 및 기사:
 
-- [Gremlin이 Datadog으로 Chaos Engineering 서비스를 모니터링하는 방법][6]
-
-[1]: https://docs.datadoghq.com/ko/getting_started/#events
-[2]: https://app.datadoghq.com/event/stream
-[3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/gremlin/images/events-overlay.png
-[4]: https://app.gremlin.com/settings/integrations
-[5]: https://docs.datadoghq.com/ko/help/
-[6]: https://www.datadoghq.com/blog/gremlin-datadog/
+- [How Gremlin monitors its own Chaos Engineering service with Datadog](https://www.datadoghq.com/blog/gremlin-datadog/)

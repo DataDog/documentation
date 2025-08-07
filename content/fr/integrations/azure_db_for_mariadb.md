@@ -1,27 +1,58 @@
 ---
+app_id: azure-dbformariadb
+app_uuid: 7d232ca6-3098-473a-8d53-e6c3e22653bd
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.dbformariadb_servers.active_connections
+      metadata_path: metadata.csv
+      prefix: azure.dbformariadb_servers
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 290
+    source_type_name: Azure DB pour MariaDB
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - azure
 - cloud
 - data stores
 custom_kind: integration
 dependencies: []
-description: Surveillez des métriques clés d'Azure Database pour MariaDB.
-doc_link: https://docs.datadoghq.com/integrations/azure_db_for_mariadb/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_db_pour_mariadb
-has_logo: true
 integration_id: azure-dbformariadb
-integration_title: Microsoft Azure Database pour MariaDB
+integration_title: Azure DB pour MariaDB
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_db_pour_mariadb
-public_title: Intégration Datadog/Microsoft Azure Database pour MariaDB
+public_title: Azure DB pour MariaDB
 short_description: Surveillez des métriques clés d'Azure Database pour MariaDB.
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Azure
+  - Category::Cloud
+  - Category::Data Stores
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Surveillez des métriques clés d'Azure Database pour MariaDB.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure DB pour MariaDB
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## Section Overview
 
 Azure Database pour MariaDB offre une version communautaire complètement managée et prête à l'emploi de MariaDB en tant que service.
@@ -40,7 +71,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft�
 ## Données collectées
 
 ### Métriques
-{{ get-metrics-from-git "azure-dbformariadb" }}
+{{< get-metrics-from-git "azure_db_for_mariadb" >}}
 
 
 ### Événements

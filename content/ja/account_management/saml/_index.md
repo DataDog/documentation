@@ -11,85 +11,94 @@ further_reading:
 title: SAML を使用したシングルサインオン
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">政府機関向け Datadog サイトでは、SAML ログインのみがサポートされています。</div>
+<div class="alert alert-warning">Datadog for Government サイトは SAML ログインのみをサポートしています。</div>
 {{< /site-region >}}
 
 ## 概要
 
-Datadog アカウントに [SAML (Security Assertion Markup Language)][1] を構成することにより、あなたやチームメンバー全員は、組織の Active Directory、LDAP、または SAML Identity Provider によって構成された他の ID ストアに保存されている認証情報を使用して Datadog にログインできるようになります。
+Datadog アカウントで [SAML (Security Assertion Markup Language)][1] を設定すると、組織の Active Directory、LDAP、その他 SAML アイデンティティ プロバイダーと連携するアイデンティティ ストアに保存されている資格情報を使用して、あなたとチーム メイト全員が Datadog にログインできます。
 
 **注:**
 
-{{% site-region region="us,us3,us5,eu,ap1" %}}
-- Datadog アカウントで SAML が有効になっていない場合は、[サポート][2]にお問い合わせの上、有効化を依頼してください。
-- このドキュメントでは、既に SAML Identity Provider (IdP) をお持ちであることを前提としています。IdP をお持ちでない場合は、Datadog と統合された複数の IdP ([Active Directory][3]、[Auth0][4]、[Google][5]、[LastPass][6]、[Microsoft Entra ID][3]、[Okta][7]、および [SafeNet][8] など) があります。
-- SAML の構成を行うには、[Datadog Administrator][9] のアクセス権限が必要です。
+{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
+- Datadog アカウントで SAML が有効になっていない場合は、[サポート][2] までお問い合わせください。
+- 本ドキュメントでは、すでに SAML アイデンティティ プロバイダー (IdP) をお持ちであることを前提としています。SAML IdP をお持ちでない場合は、[Active Directory][3]、[Auth0][4]、[Google][5]、[LastPass][6]、[Microsoft Entra ID][3]、[Okta][7]、[SafeNet][8] など、Datadog と連携する複数の IdP があります。
+- SAML の設定には [Datadog Administrator][9] 権限が必要です。
 {{% /site-region %}}
 
 {{% site-region region="gov" %}}
-- このドキュメントでは、既に SAML Identity Provider (IdP) をお持ちであることを前提としています。IdP をお持ちでない場合は、Datadog と統合された複数の IdP ([Active Directory][3]、[Auth0][4]、[Google][5]、[LastPass][6]、[Microsoft Entra ID][3]、[Okta][7]、および [SafeNet][8] など) があります。
-- SAML の構成を行うには、[Datadog Administrator][9] のアクセス権限が必要です。
+- 本ドキュメントでは、すでに SAML アイデンティティ プロバイダー (IdP) をお持ちであることを前提としています。SAML IdP をお持ちでない場合は、[Active Directory][3]、[Auth0][4]、[Google][5]、[LastPass][6]、[Microsoft Entra ID][3]、[Okta][7]、[SafeNet][8] など、Datadog と連携する複数の IdP があります。
+- SAML の設定には [Datadog Administrator][9] 権限が必要です。
 {{% /site-region %}}
 
-## SAML の構成
+## SAML の設定
 
-1. 構成を開始するには、IdP のドキュメントを参照してください。
+1. 設定を開始するには、ご利用 IdP のドキュメントを参照してください。
 
-* [Active Directory][10]
-* [Auth0][11]
-* [Google][13]
-* [Microsoft Entra ID][12]
-* [NoPassword][14]
-* [Okta][15]
-* [SafeNet][16]
+    * [Active Directory][10]
+    * [Auth0][11]
+    * [Google][13]
+    * [Microsoft Entra ID][12]
+    * [NoPassword][14]
+    * [Okta][15]
+    * [SafeNet][16]
 
-2. Datadog アプリで、左下のユーザー名にカーソルを合わせて「Organization Settings」を選択します。[Login Methods][17] を選択し、SAML の下の **Configure** をクリックします。
+2. Datadog アプリで左下のユーザー名にカーソルを合わせ、Organization Settings を選択します。次に [Login Methods][17] を選択し、SAML の **Configure** をクリックします。
 
-3. **Choose File** ボタンをクリックして SAML Identity Provider から IdP メタデータをアップロードします。ファイルを選択した後、**Upload File** をクリックします。
+3. **Choose File** をクリックして IdP メタデータ ファイルをアップロードします。ファイルを選択したら **Upload File** をクリックします。
 
-**注:** IdP メタデータには ASCII 文字のみが含まれている必要があります。
+**注:** IdP メタデータは ASCII 文字のみである必要があります。
 
-4. Datadog の [Service Provider メタデータ][18]をダウンロードして、IdP に Datadog を Service Provider として認識させるように構成します。
+4. Datadog をサービス プロバイダーとして認識させるために、Datadog の [Service Provider メタデータ][18] をダウンロードして IdP を設定します。
 
-5. IdP メタデータをアップロードして IdP を構成した後、**Upload and Enable** ボタンをクリックして Datadog で SAML を有効にします。
-{{< img src="account_management/saml/saml_enable_cropped.png" alt="IdP メタデータをアップロードして SAML を構成します" >}}
+5. IdP メタデータをアップロードし、IdP を設定したら、Datadog で **Upload and Enable** ボタンをクリックして SAML を有効化します。
+    {{< img src="account_management/saml/saml_enable_cropped.png" alt="IdP メタ データをアップロードして SAML を設定" >}}
 
-6. IdP メタデータをアップロードしたら、**Login Methods** ページに戻り、デフォルトで SAML を `on` にします。
+6. IdP メタデータをアップロード後、**Login Methods** ページに戻り、デフォルトで SAML を `on` にします。
 
-7. Datadog で SAML が構成され、IdP が Datadog からのリクエストを受け入れるように構成されたら、ユーザーは以下の方法でログインできます。
+**注記:** マルチ オーガニゼーションで SAML を設定する場合は、[複数組織アカウントの管理][21] を参照してください。
 
-- **SP-initiated ログインを使用する場合** (Service Provider、つまり Datadog から開始されるログイン): [SAML Configuration ページ][19]の上部にあるステータスボックスで表示される **Single Sign-on URL** を使用します。**Single Sign-on URL** は [Team ページ][20]にも表示されます。この URL にアクセスすると、IdP に対する SAML 認証が開始されます。**注**: この URL は、アカウントで SAML が有効になっており SP-initiated ログインを使用している場合にのみ表示されます。
-{{< img src="account_management/saml/saml_enabled_cropped.png" alt="SAML が有効であることを示す確認" >}}
+## SAML の使用
 
-- **IdP-initiated ログインを使用する場合** (Identity Provider、つまりあなたのアプリポータルから開始されるログイン): Google App Drawer や Okta App Portal などのアプリポータルでアプリのアイコンをクリックすることでログインします。一部のシナリオでは、SP-initiated ログイン URL を使用してログインするユーザーも IdP-initiated ログインを使用できますが、これは IdP の構成およびサポートによって異なります。
+SAML が Datadog で設定され、IdP が Datadog からの要求を受け入れるよう設定されると、ユーザーはログインできます。
 
-**注**: 複数の組織を持つアカウントで SAML を構成する場合は、[複数組織アカウントの管理][21]を参照してください。
+### SP‑initiated ログイン
+
+SP‑initiated (サービス プロバイダー開始) とは、Datadog から開始されるログインです。ユーザーは [SAML Configuration ページ][19] 上部のステータス ボックスに表示される **Single Sign‑on URL** からログインします。**Single Sign‑on URL** は [Team ページ][20] にも表示されます。この URL にアクセスすると IdP への SAML 認証が開始されます。**注:** この URL は、SAML がアカウントで有効になっており、SP‑initiated ログインを使用している場合にのみ表示されます。
+
+{{< img src="account_management/saml/saml_enabled_cropped.png" alt="SAML が有効化されたことの確認" >}}
+
+組織にカスタム サブドメインがない状態で SP‑initiated SAML を介してユーザーがログインする場合、Datadog は追加のセキュリティを要求します。ユーザーはログイン時に必要となるワンタイム メール認証コードを受け取ります。
+
+### IdP‑initiated ログイン
+
+IdP‑initiated (アイデンティティ プロバイダー開始) とは、アプリ ポータルから開始されるログインです。ユーザーは Google App ドロワーや Okta App Portal などのアプリ ポータルにあるアプリアイコンをクリックしてログインします。IdP の設定によっては、SP‑initiated ログインを利用するユーザーも IdP‑initiated ログインを使用できる場合があります。
 
 ## アサーションと属性
 
-ログインが行われたとき、ユーザー認証を含む SAML アサーションが Identity Provider から Datadog に送信されます。
+ログインが発生すると、ユーザー認可情報を含む SAML アサーションがアイデンティティ プロバイダーから Datadog に送信されます。
 
 ### 機能
 
-* Datadog は **SAML2** 用の **HTTP-POST** バインディングをサポートしています。
-`urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST`
-* Datadog は、アサーションリクエストにおける **NameIDPolicy** の形式として `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` を指定します。
+* Datadog は **SAML2** 用の **HTTP‑POST** バインディング
+`urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST` をサポートします。
+* Datadog はアサーション要求で **NameIDPolicy** のフォーマットに `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` を指定します。
 
 ### 要件
 
 * アサーションは署名されている必要があります。
-* アサーションは暗号化可能ですが、暗号化されていないアサーションも受け入れられます。
-* 詳細については、[Datadog の Service Provider メタデータ][18]を参照してください。このファイルにアクセスするには、Datadog にサインインしている必要があります。
+* アサーションは暗号化することもできますが、暗号化されていないアサーションも受け付けます。
+* 詳細は [Datadog の Service Provider メタデータ][18] を参照してください (ファイルにアクセスするには Datadog にサインインしている必要があります)。
 
-### サポートされている属性
+### サポートされる属性
 
-属性は SAML アサーションに含まれる場合があります。Datadog は `AttributeStatement` 内の 3 つの属性を参照します。
+SAML アサーションには属性を含めることができます。Datadog は `AttributeStatement` 内で次の 3 つの属性を確認します。
 
-1. **eduPersonPrincipalName**: 指定されている場合、eduPersonPrincipalName はユーザーの Datadog ユーザー名に対応している必要があります。ユーザー名は通常、ユーザーのメールアドレスです。
-2. **sn**: この属性は任意で、ユーザーの姓を設定する必要があります。
-3. **givenName**: この属性は任意で、ユーザーの名を設定する必要があります。
+  1. **eduPersonPrincipalName**: 指定されている場合、eduPersonPrincipalName はユーザーの Datadog ユーザー名 (通常はメール アドレス) に対応している必要があります。
+  2. **sn**: 任意。ユーザーの姓を設定します。
+  3. **givenName**: 任意。ユーザーの名 (ファースト ネーム) を設定します。
 
-<div class="alert alert-info">Microsoft Entra ID IdP の場合、アサーション内で `sn` の代わりに `surname` 属性を使用してください。</div>
+<div class="alert alert-info">Microsoft Entra ID IdP をご利用の場合、アサーションでは `sn` の代わりに `surname` 属性を使用してください。</div>
 
 <mrk mid="49" mtype="seg">Datadog は、属性が URI NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:uri` または基本 NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:basic` を使用することを想定しています。</mrk><mrk mid="50" mtype="seg">各属性に使用される名前は、IdP が使用する NameFormat に依存します。</mrk>
 
@@ -124,6 +133,10 @@ JIT プロビジョニングを使用すると、初めてログインしよう�
 組織によっては、すべてのユーザーを Datadog に招待したくない場合もあります。アカウントの SAML の動作を変更したい場合は、[Datadog サポート][2]に連絡してください。特定のユーザーを Datadog にアクセスさせたくない場合、IdP がアサーションを Datadog に送信しないように構成するかどうかは、組織次第です。
 
 管理者は、新しい JIT ユーザーにデフォルトのロールを設定できます。デフォルトのロールは **Standard** ですが、新しい JIT ユーザーを **Read-Only** や **Administrators**、またはカスタムロールとして追加することもできます。
+
+<div class="alert alert-warning">
+  <strong>重要:</strong> Role Mapping が有効になっている場合、JIT プロビジョニング時に設定されたロールよりも優先されます。適切な Group Attribute ステートメントがないと、ユーザーにロールが割り当てられず、Datadog へのアクセスを失う可能性があります。JIT プロビジョニング後にユーザーがロックアウトされるのを防ぐため、Mappings と JIT の両方を有効にする前に、マッピング定義を確認し、アサーションをチェックしてください。
+</div>
 
 {{< img src="account_management/saml/saml_jit_default.png" alt="SAML JIT デフォルト" style="width:50%;" >}}
 

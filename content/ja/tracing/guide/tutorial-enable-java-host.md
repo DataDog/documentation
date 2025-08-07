@@ -39,7 +39,7 @@ Java の一般的なトレース設定ドキュメントについては、[Java 
 Datadog Agent をマシンにインストールしていない場合は、[**Integrations > Agent**][5] にアクセスし、お使いの OS を選択してください。例えば、ほとんどの Linux プラットフォームでは、`<YOUR_API_KEY>` を [Datadog API キー][3]に置き換えて、以下のスクリプトを実行することで Agent をインストールすることができます。
 
 {{< code-block lang="shell" >}}
-DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script.sh)"
+DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)" 
 {{< /code-block >}}
 
 `datadoghq.com` 以外の Datadog サイトにデータを送信するには、`DD_SITE` 環境変数を [Datadog サイト][6]に置き換えてください。
@@ -154,7 +154,7 @@ sh ./scripts/gradle_run.sh
 curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 {{< /code-block >}}
 
-If your operating system does not support curl, you can go directly to `'https://dtdg.co/latest-java-tracer' ` to download the `dd-java-agent.jar` file.
+お使いの OS が curl をサポートしていない場合は、直接 `'https://dtdg.co/latest-java-tracer' ` にアクセスして `dd-java-agent.jar` ファイルをダウンロードすることができます。
 
 ## 自動インスツルメンテーションによる Java アプリケーションの起動
 
@@ -216,7 +216,7 @@ sh ./scripts/gradle_instrumented_run.sh
 
 しばらく待って、Datadog の UI を見てみてください。[**APM > Traces**][11] に移動します。Traces リストには、次のように表示されます。
 
-{{< img src="tracing/guide/tutorials/tutorial-java-host-traces_cropped.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-host-traces_cropped.png" alt="Traces ビューには、ホストから入ってくるトレースデータが表示されます。" style="width:100%;" >}}
 
 `h2` はこのチュートリアルのために埋め込まれたメモリ内データベースで、`notes` は Spring Boot アプリケーションです。トレースリストには、すべてのスパン、いつ開始したか、どのリソースがスパンで追跡されたか、どれくらいの時間がかかったか、が表示されます。
 

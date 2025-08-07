@@ -14,7 +14,7 @@ categories:
 - クラウド
 - kubernetes
 - マーケットプレイス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -90,7 +90,7 @@ tile:
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから CloudNatix にお問い合わせください。
 
-- メール: [CloudNatix サポート][4]
+- メール: [CloudNatix サポート][4] 
 - Slack: [CloudNatix コミュニティ][3]
 
 [1]: https://cloudnatix.com/
@@ -100,4 +100,4 @@ tile:
 [5]: https://app.datadoghq.com/integrations/cloudnatix
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/cloudnatix-cloudnatix" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/cloudnatix-cloudnatix" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

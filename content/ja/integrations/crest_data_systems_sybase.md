@@ -111,9 +111,6 @@ SAP Adaptive Server Enterprise (ASE) は、Sybase としても知られるリレ
 - Web サイト: [crestdata.ai][3]
 - よくあるご質問: [Crest Data Datadog Marketplace インテグレーションのよくあるご質問][11]
 
-## トラブルシューティング
-
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
@@ -130,4 +127,4 @@ SAP Adaptive Server Enterprise (ASE) は、Sybase としても知られるリレ
 [12]: https://docs.datadoghq.com/ja/agent/?tab=Linux
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-sybase" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-sybase" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

@@ -3,12 +3,12 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/core-web-vitals-lab
   tag: ラーニングセンター
   text: 'インタラクティブラボ: コアウェブバイタル'
-- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-  tag: ブログ
-  text: リアルユーザーモニタリング (RUM)
 - link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/
   tag: ブログ
   text: Datadog RUM および Synthetic モニタリングでウェブに関する主な指標を監視
+- link: https://www.datadoghq.com/blog/single-page-apps-inp/
+  tag: ブログ
+  text: Core Web Vitals と Datadog でシングルページアプリのインタラクティビティをモニタリングする
 - link: /real_user_monitoring/explorer/
   tag: Documentation
   text: Datadog でビューを検索する
@@ -23,29 +23,29 @@ title: ページのパフォーマンスの監視
 
 ## 概要
 
-RUM のビューイベントは、各ページビューについて広範囲のパフォーマンスメトリクスを収集します。アプリケーションのページビューを監視し、ダッシュボードや RUM エクスプローラーでパフォーマンスメトリクスを確認することができます。
+RUM view events collect extensive performance telemetry for every pageview. Monitor your application's pageviews and explore performance telemetry in dashboards and the RUM Explorer.
 
 {{< img src="real_user_monitoring/browser/waterfall-4.png" alt="RUM エクスプローラーの RUM ビューの Performance タブにあるウォーターフォールグラフ" style="width:100%;" >}}
 
-以下で、ビューのパフォーマンスメトリクスにアクセスできます。
+You can access performance telemetry for your views in:
 
-- すぐに使える [RUM ダッシュボード][1]。これは、アプリケーションのパフォーマンスの概要を表示するものです。例えば、RUM が収集した[デフォルト属性][2]にフィルターをかけて、[パフォーマンス概要ダッシュボード][3]でユーザーのサブセットに影響を与える問題を浮き彫りにすることができます。また、このダッシュボードを複製してニーズに合わせてカスタマイズし、ダッシュボードのクエリで任意の [RUM パフォーマンスメトリクス](#all-performance-metrics)を使用することができます。
+- Out-of-the-box [RUM dashboards][1], which provide a high-level view of your application's performance. For example, you can filter on [default attributes][2] collected by RUM to surface issues impacting a subset of users in the [Performance Overview dashboard][3]. You can also clone this dashboard, customize it to your needs, and use any [RUM performance telemetry](#all-performance-telemetry) in the dashboard's query.
 - [RUM エクスプローラー][4]の各 RUM ビューイベントでアクセスできるパフォーマンスウォーターフォール。ここでは、特定のページビューのパフォーマンスのトラブルシューティングを行うことが可能です。Web サイトのアセットやリソース、ロングタスク、フロントエンドエラーが、エンドユーザーのページレベルのパフォーマンスにどのような影響を与えるかが表示されます。
 
 ## イベントのタイミングとコア Web バイタル
 
 <div class="alert alert-warning">
-Datadog の Core Web Vitals メトリクスは、<a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> パッケージ v2.2.0 以降から入手できます。
+  Datadog's Core Web Vitals telemetry is available from the <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> package v2.2.0+.
 </div>
 
-[Google のウェブに関する主な指標][5]は、サイトのユーザーエクスペリエンスを監視するために設計された 3 つのメトリクスのセットです。これらのメトリクスは、負荷パフォーマンス、対話性、視覚的安定性のビューを提供することに重点を置いています。各メトリクスには、優れたユーザーエクスペリエンスにつながる値の範囲に関するガイダンスが付属しています。Datadog では、このメトリクスの 75 パーセンタイルの監視をおすすめしています。
+[Google's Core Web Vitals][5] are a set of three KPIs designed to monitor a site's user experience. These KPIs focus on giving you a view of load performance, interactivity, and visual stability. Each KPI comes with guidance on the range of values that translate to good user experience. Datadog recommends monitoring the 75th percentile for these KPIs.
 
 {{< img src="real_user_monitoring/browser/core-web-vitals-1.png" alt="コアウェブバイタルサマリーの視覚化" >}}
 
 - Interaction to Next Paint と Largest Contentful Paint は、バックグラウンドで開かれたページ (例えば、新しいタブやフォーカスのないウィンドウ) では収集されません。
-- 実際のユーザーのページビューから収集されたメトリクスは、[Synthetic ブラウザテスト][6]などの固定され制御された環境で読み込まれたページに対して計算されたものと異なる場合があります。Synthetic Monitoring では、Largest Contentful Paint と Cumulative Layout Shift を実際のメトリクスではなく、ラボメトリクスとして表示します。
+- Telemetry collected from your real users' pageviews may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab telemetry, not real telemetry.
 
-| メトリクス                   | 焦点            | 説明                                                                                           | 対象値 |
+| Datapoint                   | 焦点            | 説明                                                                                           | 対象値 |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
 | [Largest Contentful Paint][7] | ロードパフォーマンス | ビューポート内の最大の DOM オブジェクト (つまり、画面に表示される) がレンダリングされるページ読み込みタイムラインの瞬間。         | 2.5秒以下       |
 | [Interaction To Next Paint][19]| インタラクティブなアクティビティ    | ユーザーがページを操作してから次のペイントまでの最長時間。RUM SDK v5.1.0 が必要です。 | <200ms        |
@@ -53,15 +53,15 @@ Datadog の Core Web Vitals メトリクスは、<a href="https://github.com/Dat
 
 ### コアウェブバイタルのターゲット要素
 
-高いコアウェブバイタルメトリクスを引き起こした要素を特定することは、根本原因を理解し、パフォーマンスを向上させるための第一歩となります。
-RUM は、各コアウェブバイタルインスタンスに関連する要素を報告します。
+Identifying what element triggered a high Core Web Vitals KPI is the first step in understanding the root cause and being able to improve performance.
+RUM reports the element that is associated with each Core Web Vital instance:
 
 - Largest Contentful Paint の場合、RUM は最大コンテンツ描画に対応する要素の CSS セレクターを報告します。
 - Interaction to Next Paint の場合、RUM は次のペイントまでの最長のインタラクションに関連する要素の CSS セレクターを報告します。
 - First Input Delay の場合、RUM はユーザーが最初に対話した要素の CSS セレクターを報告します。
 - Cumulative Layout Shift の場合、RUM は CLS に寄与する最もシフトした要素の CSS セレクターを報告します。
 
-## すべてのパフォーマンスメトリクス
+## All performance telemetry
 
 | 属性                       | タイプ        | 説明                                                                                                                                                                                                                      |
 |---------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -90,7 +90,7 @@ RUM は、各コアウェブバイタルインスタンスに関連する要素�
 
 シングルページアプリケーション (SPA) の場合、RUM ブラウザ SDK は、`loading_type` 属性を使用して、`initial_load` ナビゲーションと `route_change` ナビゲーションを区別します。ウェブページを操作すると、ページが完全に更新されずに異なる URL に移動する場合、RUM SDK は、`loading_type:route_change` を使用して新しいビューイベントを開始します。RUM は、[履歴 API][16] を使用して URL の変更を追跡します。
 
-Datadog は、ページの読み込みに必要な時間を計算する独自のパフォーマンスメトリクス、`loading_time` を提供します。このメトリクスは、`initial_load` と `route_change` の両方のナビゲーションで機能します。
+Datadog provides a unique KPI, `loading_time`, which calculates the time needed for a page to load. This KPI works for both `initial_load` and `route_change` navigation.
 
 ### ロード時間の計算方法
 
@@ -144,7 +144,7 @@ window.DD_RUM.init({
 
 RUM SDK は、ハッシュ (`#`) ナビゲーションに依存するフレームワークを自動的に監視します。SDK は `HashChangeEvent` を監視し、新しいビューを表示します。現在のビューのコンテキストに影響しない HTML アンカータグからくるイベントは無視されます。
 
-## カスタムパフォーマンスメトリクスを作成する
+## Create custom performance telemetry
 
 ### カスタムバイタルでコンポーネントレベルのパフォーマンスを測定する
 

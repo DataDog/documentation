@@ -1,62 +1,16 @@
 ---
 app_id: bonsai
-app_uuid: ec3141f4-b722-4eaa-be49-47c6eec76da9
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: bonsai.req.total
-      metadata_path: metadata.csv
-      prefix: bonsai.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10053
-    source_type_name: Bonsai
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Bonsai
-  sales_email: dev@onemorecloud.com
-  support_email: dev@onemorecloud.com
 categories:
-- メトリクス
-custom_kind: integration
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/bonsai/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: bonsai
-integration_id: bonsai
-integration_title: Bonsai
-integration_version: ''
-is_public: true
-manifest_version: 2.0.0
-name: bonsai
-public_title: Bonsai
-short_description: 'Bonsai: マネージド型 Elasticsearch'
+- モニター
+custom_kind: インテグレーション
+description: 'Bonsai: マネージド型 Elasticsearch'
+integration_version: 1.0.0
+media: []
 supported_os:
 - linux
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Category::Metrics
-  - Supported OS::Windows
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: 'Bonsai: マネージド型 Elasticsearch'
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Bonsai
+title: Bonsai
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
-
-
 ## 概要
 
 Bonsai クラスターのリクエストレベルのメトリクスを追跡すると、以下のことができます。
@@ -65,7 +19,7 @@ Bonsai クラスターのリクエストレベルのメトリクスを追跡す�
 - 検索のパフォーマンスをアプリケーションのパフォーマンスと関連付けることができます。
 - アラートを生成できます。
 
-![スナップショット][1]
+![snapshot](https://raw.githubusercontent.com/DataDog/integrations-extras/master/bonsai/images/snapshot.png)
 
 ## セットアップ
 
@@ -73,31 +27,45 @@ Bonsai クラスターのリクエストレベルのメトリクスを追跡す�
 
 ### API キーを取得する
 
-Datadog で、[Integrations --> API][2] に移動して、API キーをコピーします。
+In Datadog, navigate to [Integrations --> API](https://app.datadoghq.com/organization-settings/api-keys) and copy your API Key.
 
-![スナップショット][3]
+![snapshot](https://raw.githubusercontent.com/DataDog/integrations-extras/master/bonsai/images/copy_key.png)
 
 ### API キーを送信する
 
-[Bonsai --> Clusters][4] に移動し、統合するクラスターをクリックします。Manage タブに移動し、ページ最下部までスクロールします。
+Navigate to [Bonsai --> Clusters](https://app.bonsai.io/clusters) and click the cluster you want to integrate. Navigate to the Manage tab and scroll to the bottom of the page.
 
 "Datadog Integration" セクションで API キーを貼り付け、"Activate Datadog" をクリックします。
 
-![スナップショット][5]
+![snapshot](https://raw.githubusercontent.com/DataDog/integrations-extras/master/bonsai/images/activate_datadog.png)
 
 ### 検証する
 
 キーが有効であれば、インテグレーションが Active として表示されます。
 
-![スナップショット][6]
+![snapshot](https://raw.githubusercontent.com/DataDog/integrations-extras/master/bonsai/images/datadog_activated.png)
 
 数分以内に、Datadog のダッシュボードでリクエストメトリクスを使用できるようになります。
 
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "bonsai" >}}
 
+| | |
+| --- | --- |
+| **bonsai.req.2xx** <br>(gauge) | Number of requests with a 2xx (successful) response code<br>_Shown as request_ |
+| **bonsai.req.4xx** <br>(gauge) | Number of requests with a 4xx (client error) response code<br>_Shown as request_ |
+| **bonsai.req.5xx** <br>(gauge) | Number of requests with a 5xx (server error) response code<br>_Shown as request_ |
+| **bonsai.req.max_concurrency** <br>(gauge) | Peak concurrent requests<br>_Shown as connection_ |
+| **bonsai.req.p50** <br>(gauge) | The median request duration<br>_Shown as minute_ |
+| **bonsai.req.p95** <br>(gauge) | The 95th percentile request duration<br>_Shown as minute_ |
+| **bonsai.req.p99** <br>(gauge) | The 99th percentile request duration<br>_Shown as minute_ |
+| **bonsai.req.queue_depth** <br>(gauge) | Peak queue depth (how many requests are waiting due to concurrency limits)<br>_Shown as connection_ |
+| **bonsai.req.reads** <br>(gauge) | The number of requests which read data<br>_Shown as request_ |
+| **bonsai.req.rx_bytes** <br>(gauge) | The number of bytes sent to elasticsearch<br>_Shown as byte_ |
+| **bonsai.req.total** <br>(gauge) | The total number of requests<br>_Shown as request_ |
+| **bonsai.req.tx_bytes** <br>(gauge) | The number of bytes sent to client<br>_Shown as byte_ |
+| **bonsai.req.writes** <br>(gauge) | The total number of writes<br>_Shown as request_ |
 
 メトリクスはクラスターごとにタグ付けされるため、クラスターに基づいて分割できます。タグは次のようになります。
 
@@ -109,20 +77,10 @@ cluster:my-cluster-slug
 
 Bonsai インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービス チェック
 
 Bonsai インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
-
-
-[1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bonsai/images/snapshot.png
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bonsai/images/copy_key.png
-[4]: https://app.bonsai.io/clusters
-[5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bonsai/images/activate_datadog.png
-[6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bonsai/images/datadog_activated.png
-[7]: https://github.com/DataDog/integrations-extras/blob/master/bonsai/metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+サポートが必要な場合は [Datadog サポート](https://docs.datadoghq.com/help/)にお問い合わせください。

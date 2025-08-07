@@ -56,9 +56,9 @@ Datadog ユーザーのメールアドレスとは異なり、サービスアカ
 2. 変更したいフィールドを更新します。名前、メールアドレス、ステータス、ロールを編集することができます。
 3. **Save** をクリックします。
 
-To disable a service account, the user must have the User Manage Access permission in addition to Service Account Write.
+サービスアカウントを無効にするには、Service Account Write に加えて User Manage Access 権限が必要です。
 
-To disable a service account, follow the previous procedure to edit the service account and set the status to **Disabled**.
+サービスアカウントを無効にするには、前述の手順に従ってそのサービスアカウントを編集し、ステータスを **Disabled** に設定します。
 
 ### アプリケーションキーの作成・失効
 
@@ -71,6 +71,10 @@ To disable a service account, follow the previous procedure to edit the service 
 - **Create Key** をクリックします。
 
 ダイアログボックスが更新され、キーが表示されます。キーをコピーして、任意の場所に貼り付けます。ダイアログボックスを閉じた後、キーの値を取得することはできません。
+
+{{< site-region region="ap2,gov" >}}
+<div class="alert alert-warning">Service account application keys are one-time read only. Make sure to securely store your application key immediately after creation, as the key secret cannot be retrieved later.</div>
+{{< /site-region >}}
 
 アプリケーションキーを失効させるには、サービスアカウント詳細表示のサイドパネルでキーを探し、キーにカーソルを合わせます。右側に鉛筆とゴミ箱のアイコンが表示されます。ゴミ箱をクリックすると、キーが失効されます。キーを失効させたら、**Confirm** をクリックします。
 

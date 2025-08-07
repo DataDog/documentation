@@ -9,7 +9,7 @@ assets:
     metrics:
       check:
       - aws.medialive.active_alerts
-      metadata_path: metadata.csv
+      metadata_path: assets/metrics/metric-spec.yaml
       prefix: aws.medialive.
     service_checks:
       metadata_path: assets/service_checks.json
@@ -24,7 +24,7 @@ categories:
 - AWS
 - メトリクス
 - クラウド
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -75,7 +75,7 @@ AWS Elemental MediaLive は、ブロードキャストグレードのライブ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-medialive" >}}
+{{< get-metrics-from-git "amazon_medialive" >}}
 
 
 ### イベント
@@ -93,5 +93,5 @@ MediaLive インテグレーションには、サービスのチェック機能�
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-medialive
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_medialive/amazon_medialive_metadata.csv
+[4]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_medialive/assets/metrics/metric-spec.yaml
 [5]: https://docs.datadoghq.com/ja/help/

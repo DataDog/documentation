@@ -1,81 +1,30 @@
 ---
 app_id: purefb
-app_uuid: 50ae3c61-a87d-44ee-9917-df981184ff8a
-assets:
-  dashboards:
-    purefb_overview: assets/dashboards/purefb_overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: purefb.info
-      metadata_path: metadata.csv
-      prefix: purefb.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10269
-    source_type_name: PureFB
-author:
-  homepage: https://purestorage.com
-  name: Pure Storage
-  sales_email: sales@purestorage.com
-  support_email: pure-observability@purestorage.com
 categories:
-- 데이터 스토어
+- 데이터 저장소
 - OS & 시스템
 custom_kind: 통합
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/purefb/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: purefb
-integration_id: purefb
-integration_title: Pure Storage FlashBlade
-integration_version: 2.0.0
-is_public: true
-manifest_version: 2.0.0
-name: purefb
-public_title: Pure Storage FlashBlade
-short_description: Pure Storage FlashBlade 성능과 활용률을 모니터링하세요.
+description: Pure Storage FlashBlade 성능과 활용률을 모니터링하세요.
+integration_version: 2.0.1
+media:
+- caption: Pure Storage FlashBlade 대시보드 - 개요 (상단)
+  image_url: images/FB-overview-1.png
+  media_type: image
+- caption: Pure Storage FlashBlade 대시보드 - 개요 (중앙)
+  image_url: images/FB-overview-2.png
+  media_type: image
+- caption: Pure Storage FlashBlade 대시보드 - 개요 (하단)
+  image_url: images/FB-overview-3.png
+  media_type: image
 supported_os:
 - linux
-- windows
+- 윈도우즈(Windows)
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Data Stores
-  - Category::OS & System
-  - Offering::Integration
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Pure Storage FlashBlade 성능과 활용률을 모니터링하세요.
-  media:
-  - caption: Pure Storage FlashBlade 대시보드 - 개요 (상단)
-    image_url: images/FB-overview-1.png
-    media_type: image
-  - caption: Pure Storage FlashBlade 대시보드 - 개요 (중앙)
-    image_url: images/FB-overview-2.png
-    media_type: image
-  - caption: Pure Storage FlashBlade 대시보드 - 개요 (하단)
-    image_url: images/FB-overview-3.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Pure Storage FlashBlade
+title: Pure Storage FlashBlade
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
-
-
 ## 개요
 
-본 점검은 [Datadog 에이전트][2] 및 [Pure Storage FlashBlade 개방형메트릭 익스포터][3]를 통해 [Pure Storage FlashBlade][1]를 모니터링합니다.
+This check monitors the [Pure Storage FlashBlade](https://www.purestorage.com/products.html) through the [Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest) and the [Pure Storage FlashBlade OpenMetrics exporter](https://github.com/PureStorage-OpenConnect/pure-fb-openmetrics-exporter).
 
 본 통합으로 어레이, 클라이언트, 공유 및 버킷 레벨의 성능 데이터와 높은 수준의 용량 및 설정 정보를 제공합니다.
 
@@ -83,31 +32,29 @@ tile:
 
 **이 통합에는 다음이 필요합니다.**
 
- - FlashBlade Purity 4.1.x+
- - OpenMetricsBaseCheckV2를 활용하기 위한 Datadog 에이전트 v7.26.x 이상
- - Python 3
- - Pure Storage FlashBlade 개방형메트릭 익스포터 v1.0.11+는 컨테이너화된 환경에서 설치 및 실행됩니다. 설치 지침은 [Pure Storage GitHub 리포지토리][3]를 참조하세요.
+- FlashBlade Purity 4.1.x+
+- OpenMetricsBaseCheckV2를 활용하기 위한 Datadog 에이전트 v7.26.x 이상
+- Python 3
+- The Pure Storage FlashBlade OpenMetrics exporter v1.0.11+ is installed and running in a containerized environment. Refer to the [Pure Storage GitHub repo](https://github.com/PureStorage-OpenConnect/pure-fb-openmetrics-exporter) for installation instructions.
 
 ## 설정
 
-아래 지침을 따라 호스트에서 실행되는 에이전트에 대해 이 점검을 설치하고 설정하세요. 컨테이너화된 환경의 경우 이러한 지침을 적용하는 데 지침이 필요하면 [자동탐지 통합 템플릿][4]을 참조하세요.
+Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates](https://docs.datadoghq.com/agent/kubernetes/integrations/) for guidance on applying these instructions.
 
 ### 설치
 
-1. [Datadog 에이전트를 다운로드하여 실행합니다][2].
-2. Pure FlashBlade 통합을 수동 설치합니다. 환경에 따른 자세한 내용은 [커뮤니티 통합 사용][5]을 참조하세요.
-
+1. [Download and launch the Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest).
+1. Manually install the Pure FlashBlade integration. See [Use Community Integrations](https://docs.datadoghq.com/agent/guide/community-integrations-installation-with-docker-agent) for more details based on your environment.
 
 #### 호스트
 
 호스트에서 실행되는 에이전트에 대한 점검을 설정하려면 `datadog-agent integration install -t datadog-purefb==2.0.0`을 실행하세요.
 
-
 ### 설정
 
 1. FlashBlade에 읽기 전용 역할로 사용자를 생성하고 이 사용자에 대한 API 토큰을 생성합니다.
 
-2. 에이전트의 설정 디렉토리 루트의 `conf.d/` 폴더에 있는 `purefb.d/conf.yaml` 파일에 다음 설정 블록을 추가하여 PureFB 성능 데이터 수집을 시작하세요. 사용 가능한 모든 설정 옵션은 샘플 [purefb.d/conf.yaml][6]을 참조하세요.
+1. Add the following configuration block to the `purefb.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory, to start collecting your PureFB performance data. See the sample [purefb.d/conf.yaml](https://github.com/DataDog/integrations-extras/blob/master/purefb/data/conf.yaml.example) for all available configuration options.
 
 **참고**: 설정 파일을 만들 때 `/array` 엔드포인트는 반드시 필요합니다.
 
@@ -146,11 +93,11 @@ instances:
 
 ```
 
-2. [에이전트 다시 시작][7].
+2. [Agent를 다시 시작합니다](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ### 검증
 
-[에이전트 상태 하위 명령을 실행하고][8] 점검 섹션 에서 `purefb`를 찾으세요.
+[Run the Agent's status subcommand](https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) and look for `purefb` under the Checks section.
 
 ### 트러블슈팅
 
@@ -179,12 +126,56 @@ min_collection_interval: 120
 min_collection_interval: 600
 ```
 
-
 ## 수집한 데이터
 
-### 메트릭
-{{< get-metrics-from-git "purefb" >}}
+### Metrics
 
+| | |
+| --- | --- |
+| **purefb.alerts.open** <br>(gauge) | Open alert events|
+| **purefb.array.http_specific_performance_latency_usec** <br>(gauge) | FlashBlade array HTTP specific latency<br>_Shown as microsecond_ |
+| **purefb.array.http_specific_performance_throughput_iops** <br>(gauge) | FlashBlade array HTTP specific throughput<br>_Shown as operation_ |
+| **purefb.array.nfs_specific_performance_latency_usec** <br>(gauge) | FlashBlade array NFS latency<br>_Shown as microsecond_ |
+| **purefb.array.nfs_specific_performance_throughput_iops** <br>(gauge) | FlashBlade array NFS throughput<br>_Shown as operation_ |
+| **purefb.array.performance_average_bytes** <br>(gauge) | FlashBlade array average operations size<br>_Shown as byte_ |
+| **purefb.array.performance_bandwidth_bytes** <br>(gauge) | FlashBlade array bandwidth<br>_Shown as byte_ |
+| **purefb.array.performance_latency_usec** <br>(gauge) | FlashBlade array latency<br>_Shown as microsecond_ |
+| **purefb.array.performance_replication** <br>(gauge) | FlashBlade array replication throughput in bytes per second<br>_Shown as byte_ |
+| **purefb.array.performance_throughput_iops** <br>(gauge) | FlashBlade array throughput<br>_Shown as operation_ |
+| **purefb.array.s3_specific_performance_latency_usec** <br>(gauge) | FlashBlade array S3 specific latency<br>_Shown as microsecond_ |
+| **purefb.array.s3_specific_performance_throughput_iops** <br>(gauge) | FlashBlade array S3 specific throughput<br>_Shown as operation_ |
+| **purefb.array.space_bytes** <br>(gauge) | FlashBlade space in bytes<br>_Shown as byte_ |
+| **purefb.array.space_data_reduction_ratio** <br>(gauge) | FlashBlade space data reduction|
+| **purefb.array.space_parity** <br>(gauge) | FlashBlade space parity|
+| **purefb.array.space_utilization** <br>(gauge) | FlashBlade array space utilization in percent<br>_Shown as percent_ |
+| **purefb.buckets.object_count** <br>(gauge) | FlashBlade buckets object count|
+| **purefb.buckets.performance_average_bytes** <br>(gauge) | FlashBlade buckets average operations size<br>_Shown as byte_ |
+| **purefb.buckets.performance_bandwidth_bytes** <br>(gauge) | FlashBlade buckets bandwidth<br>_Shown as byte_ |
+| **purefb.buckets.performance_latency_usec** <br>(gauge) | FlashBlade buckets latency<br>_Shown as microsecond_ |
+| **purefb.buckets.performance_throughput_iops** <br>(gauge) | FlashBlade buckets throughput<br>_Shown as operation_ |
+| **purefb.buckets.quota_space_bytes** <br>(gauge) | FlashBlade buckets quota space in bytes<br>_Shown as byte_ |
+| **purefb.buckets.s3_specific_performance_latency_usec** <br>(gauge) | FlashBlade buckets S3 specific latency<br>_Shown as microsecond_ |
+| **purefb.buckets.s3_specific_performance_throughput_iops** <br>(gauge) | FlashBlade buckets S3 specific throughput<br>_Shown as operation_ |
+| **purefb.buckets.space_bytes** <br>(gauge) | FlashBlade buckets space in bytes<br>_Shown as byte_ |
+| **purefb.buckets.space_data_reduction_ratio** <br>(gauge) | FlashBlade buckets space data reduction|
+| **purefb.clients.performance_average_bytes** <br>(gauge) | FlashBlade array clients average operations size<br>_Shown as byte_ |
+| **purefb.clients.performance_bandwidth_bytes** <br>(gauge) | FlashBlade array clients bandwidth<br>_Shown as byte_ |
+| **purefb.clients.performance_latency_usec** <br>(gauge) | FlashBlade array clients latency<br>_Shown as microsecond_ |
+| **purefb.clients.performance_throughput_iops** <br>(gauge) | FlashBlade array clients throughput<br>_Shown as operation_ |
+| **purefb.file.system_usage_groups_bytes** <br>(gauge) | FlashBlade file system groups usage<br>_Shown as byte_ |
+| **purefb.file.system_usage_users_bytes** <br>(gauge) | FlashBlade file system users usage<br>_Shown as byte_ |
+| **purefb.file.systems_performance_average_bytes** <br>(gauge) | FlashBlade filesystems average operations size<br>_Shown as byte_ |
+| **purefb.file.systems_performance_bandwidth_bytes** <br>(gauge) | FlashBlade filesystems bandwidth<br>_Shown as byte_ |
+| **purefb.file.systems_performance_latency_usec** <br>(gauge) | FlashBlade filesystems latency<br>_Shown as microsecond_ |
+| **purefb.file.systems_performance_throughput_iops** <br>(gauge) | FlashBlade filesystems throughput<br>_Shown as operation_ |
+| **purefb.file.systems_space_bytes** <br>(gauge) | FlashBlade file systems space in bytes<br>_Shown as byte_ |
+| **purefb.file.systems_space_data_reduction_ratio** <br>(gauge) | FlashBlade file systems space data reduction|
+| **purefb.hardware.connectors_performance_bandwidth_bytes** <br>(gauge) | FlashBlade hardware connectors performance bandwidth<br>_Shown as byte_ |
+| **purefb.hardware.connectors_performance_errors** <br>(gauge) | FlashBlade hardware connectors performance errors per sec|
+| **purefb.hardware.connectors_performance_throughput_pkts** <br>(gauge) | FlashBlade hardware connectors performance throughputh|
+| **purefb.hardware.health** <br>(gauge) | FlashBlade hardware component health status|
+| **purefb.info** <br>(gauge) | FlashBlade system information|
+| **purefb.nfs.export_rule** <br>(gauge) | FlashBlade NFS export rules|
 
 ### 이벤트
 
@@ -192,22 +183,15 @@ PureFB 통합에는 이벤트가 포함되어 있지 않습니다.
 
 ### 서비스 점검
 
-이 통합에서 제공하는 서비스 점검 목록은 [service_checks.json][10]을 참조하세요.
+**purefb.openmetrics.health**
+
+Returns `CRITICAL` if the Agent is unable to connect to the FlashBlade OpenMetrics endpoint, otherwise returns `OK`.
+
+_상태: ok, critical_
 
 ## 지원
 
 지원 또는 기능 요청이 필요한 경우, 다음 방법을 통해 Pure Storage에 문의하세요.
-* 이메일: pure-observability@purestorage.com
-* Slack: [Pure Storage Code// 관측 가능성 채널][11].
 
-[1]: https://www.purestorage.com/products.html
-[2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://github.com/PureStorage-OpenConnect/pure-fb-openmetrics-exporter
-[4]: https://docs.datadoghq.com/ko/agent/kubernetes/integrations/
-[5]: https://docs.datadoghq.com/ko/agent/guide/community-integrations-installation-with-docker-agent
-[6]: https://github.com/DataDog/integrations-extras/blob/master/purefb/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-extras/blob/master/purefb/metadata.csv
-[10]: https://github.com/DataDog/integrations-extras/blob/master/purefb/assets/service_checks.json
-[11]: https://code-purestorage.slack.com/messages/C0357KLR1EU
+- 이메일: pure-observability@purestorage.com
+- Slack: [Pure Storage Code// Observability Channel](https://code-purestorage.slack.com/messages/C0357KLR1EU).
