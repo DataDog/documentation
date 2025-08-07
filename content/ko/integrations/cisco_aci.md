@@ -41,7 +41,7 @@ draft: false
 git_integration_title: cisco_aci
 integration_id: cisco-aci
 integration_title: CiscoACI
-integration_version: 4.5.0
+integration_version: 4.7.0
 is_public: true
 manifest_version: 2.0.0
 name: cisco_aci
@@ -126,7 +126,8 @@ Cisco ACI 점검은 에이전트를 포함하므로 네트워크에서 서버에
         #   - <TENANT_2>
 
         ## @param send_ndm_metadata - boolean - optional - default: false
-        ## Set to `true` to enable Network Device Monitoring metadata (for devices and interfaces) to be sent.
+        ## Set to `true` to enable Network Device Monitoring metadata (for devices, interfaces, topology) to be sent
+        ## and to allow Cisco ACI fault collection to be enabled.
         #
         # send_ndm_metadata: false
 
@@ -176,7 +177,7 @@ Cisco ACI 점검은 에이전트를 포함하므로 네트워크에서 서버에
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "cisco-aci" >}}
+{{< get-metrics-from-git "cisco_aci" >}}
 
 
 ### 이벤트
@@ -184,7 +185,7 @@ Cisco ACI 점검은 에이전트를 포함하므로 네트워크에서 서버에
 Cisco ACI 점검은 이벤트로 테넌트 오류를 전송합니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "cisco-aci" >}}
+{{< get-service-checks-from-git "cisco_aci" >}}
 
 
 ## 트러블슈팅

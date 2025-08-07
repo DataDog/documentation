@@ -29,7 +29,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - data stores
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cockroachdb_dedicated/README.md
 display_on_public_website: true
@@ -68,7 +68,7 @@ tile:
 
 ## 概要
 
-The CockroachDB Cloud integration for Datadog enables data collection and alerting on a subset of CockroachDB metrics using the Datadog platform.
+Datadog 用 CockroachDB Cloud インテグレーションを使用すると、Datadog プラットフォームを利用して、CockroachDB メトリクスのサブセットを収集およびアラート設定できます。
 
 ## セットアップ
 
@@ -76,7 +76,7 @@ The CockroachDB Cloud integration for Datadog enables data collection and alerti
 
 Cockroach Cloud クラスターに対して Datadog のモニタリングを有効にするには
 
-1. On the cluster's **Monitoring** > [**Tools** page][1].
+1. クラスターの **Monitoring** > [**Tools** ページ][1]に移動します。
 
 2. **API key** と **Datadog Site** のフィールドに、対応する値を入力します。
     - **API key** は、Datadog の組織と関連付けられています。Cockroach Cloud クラスターで使用する API キーをお持ちでない場合は、作成する必要があります。手順については、[Datadog のドキュメント][2]を参照してください。
@@ -88,18 +88,18 @@ Cockroach Cloud クラスターに対して Datadog のモニタリングを有�
 
 ### 構成
 
-Open your Datadog [Dashboard List][5]. There are two out of the box dashboards that present CockroachDB metrics
-- CockroachDB Cloud Serverless (Limited Preview)
+Datadog の [Dashboard List][5] を開きます。CockroachDB メトリクスを表示する既製のダッシュボードが 2 つあります。
+- CockroachDB Cloud Serverless (Limited Preview: 限定プレビュー)
 - CockroachDB Cloud Dedicated
 
-To create your own Cockroach Cloud dashboard, you can either [clone][6] the default `CockroachDB Cloud Dedicated` dashboard and edit the widgets, or [create a new dashboard][7].
+独自の Cockroach Cloud ダッシュボードを作成するには、デフォルトの `CockroachDB Cloud Dedicated` ダッシュボードを[クローン作成][6]してウィジェットを編集するか、[新しいダッシュボードを作成][7]します。
 
-The [available metrics][8] are intended for use as building blocks for your own charts.
+[利用可能なメトリクス][8]は、独自のチャートを構築する際のビルディングブロックとして使用することを想定しています。
 
 収集されるメトリクスをプレビューするには、以下の方法があります。
 
 - [インフラストラクチャーリスト][4]のクラスターのエントリーをクリックすると、利用可能な各メトリクスの時系列グラフが表示されます。
-- Use the [Metrics Explorer][9] to search for and view `crdb_cloud` or `crdb_dedicated` metrics.
+- [Metrics Explorer][9] を使用して、`crdb_cloud` または `crdb_dedicated` メトリクスを検索・表示します。
 
 ### 検証
 
@@ -116,7 +116,7 @@ CockroachDB からのメトリクスエクスポートは、以下のような�
 - API キーが古くなっている。この場合、インテグレーションのステータスは `Unhealthy` になります。この問題を解決するには、新しい API キーを使って[インテグレーションを更新](#update-integration)してください。
 - CockroachDB が一時的に使用できない。この場合、インテグレーションのステータスは `Active` のままです。この問題を解決するには、**Datadog** パネルからインテグレーションを[非アクティブ化](#deactivate-integration)して再アクティブ化してみてください。それでも問題が解決しない場合は、[サポートチームにご連絡ください][10]。
 
-To monitor the health of metrics export, you can create a custom Monitor in Datadog.
+メトリクスエクスポートの健全性を監視するには、Datadog でカスタム Monitor を作成できます。
 
 ### インテグレーションの更新
 
@@ -140,15 +140,15 @@ To monitor the health of metrics export, you can create a custom Monitor in Data
 
 ### メトリクス
 
-- `crdb_cloud` & `crdb_dedicated` [Metrics][12]
+- `crdb_cloud` と `crdb_dedicated` の [Metrics][12]
 
 ### サービスチェック
 
-The Cockroach Cloud integration does not include any service checks.
+Cockroach Cloud インテグレーションにはサービスチェックは含まれていません。
 
 ### イベント
 
-The Cockroach Cloud integration does not include any events.
+Cockroach Cloud インテグレーションにはイベントは含まれていません。
 
 ## サポート
 
