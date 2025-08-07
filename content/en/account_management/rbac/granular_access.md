@@ -25,6 +25,7 @@ Use the different principals to control access patterns in your organization and
 | [Integration Webhooks][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Monitors][3]                                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Notebooks][4]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [On-Call][22]                                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Private Action Runner][18]                      | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Powerpacks][5]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Reference tables][12]                           | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
@@ -62,3 +63,4 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [19]: /real_user_monitoring
 [20]: /account_management/org_settings/cross_org_visibility/#permissions
 [21]: /sheets/#permissions
+[22]: /service_management/on-call/#granular-access-control

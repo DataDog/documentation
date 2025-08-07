@@ -10,6 +10,9 @@ further_reading:
   - link: /tracing/guide/init_resource_calc/
     tag: Documentation
     text: Learn about init container resource usage
+  - link: /tracing/guide/local_sdk_injection
+    tag: Documentation
+    text: Instrument your applications using local SDK injection
 ---
 
 ## Overview
@@ -18,9 +21,11 @@ In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to in
 
 ## Requirements
 
-- Kubernetes v1.20+
+- Kubernetes v1.20+.
 - [`Helm`][1] for deploying the Datadog Operator.
 - [`Kubectl` CLI][2] for installing the Datadog Agent.
+- Confirmed environment compatibility per the [Single Step Instrumentation compatibility guide][36].
+
 
 ## Enable APM on your applications
 
@@ -740,6 +745,7 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [33]: /containers/guide/changing_container_registry/
 [34]: /containers/guide/sync_container_images/#copy-an-image-to-another-registry-using-crane
 [35]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
+[36]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
 
 
 
