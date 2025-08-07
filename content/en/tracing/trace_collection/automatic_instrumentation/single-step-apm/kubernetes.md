@@ -87,7 +87,7 @@ With this configuration, Datadog automatically sets the service name based on th
 
 #### Explicit control with ddTraceConfigs
 
-For granular control over specific services as part of [workload targeting](#advanced-options), use `ddTraceConfigs` to explicitly map labels to service configurations:
+In most cases, automatic configuration is sufficient. However, if you need granular control over settings for specific workloads, use `ddTraceConfigs` to explicitly map labels to service configurations:
 
 ```yaml
 datadog:
