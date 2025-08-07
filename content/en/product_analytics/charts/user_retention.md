@@ -11,7 +11,7 @@ further_reading:
       tag: Documentation
       text: Set user sessions
 ---
-real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
+
 ## Overview
 Retention Analysis measures how often users are successfully returning to a page or action helping you assess the ongoing value of your products and features.
 
