@@ -56,7 +56,7 @@ With SSI, you can automatically extract UST values from pod labels and metadata 
 
 | Component | Minimum version  |
 |-----------|------------------|
-| `datadog-agent` | 7.68        |
+| `datadog-agent` | 7.69        |
 | `datadog-operator` | 1.16.0   |
 | `datadog-helm-chart` | 3.120.0 |
 
