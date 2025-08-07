@@ -48,7 +48,7 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 
 Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data.
 
-### Recommended: Configure USTs via label extraction
+### (Recommended) Configure USTs through label extraction
 
 With SSI, you can automatically extract UST values from pod labels and metadata without modifying individual deployments. To do this, configure `kubernetesResourcesLabelsAsTags` to map your existing Kubernetes labels to Datadog service tags.
 
