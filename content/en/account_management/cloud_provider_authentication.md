@@ -26,7 +26,7 @@ The authentication process uses [AWS Security Token Service (STS)](https://docs.
 4. **Token issuance**: If validation succeeds, Datadog issues a temporary JWT token for API access
 5. **API authentication**: The token is used for subsequent Datadog API calls
 
-**Note**: We recommend to map your ARNs to a Datadog Service account.
+**Note**: Prefer mapping ARNs to a Datadog Service account.
 
 ## AWS setup
 
@@ -38,7 +38,7 @@ Setting up cloud-provider based authentication for AWS involves two main steps:
 
 First, you need to map your AWS identities (ARNs) to Datadog service accounts or user accounts. During the preview, this must be done using the Datadog API.
 
-**Create a new AWS identity mapping:**
+**Create an AWS identity mapping:**
 
 ```bash
 curl -X POST "https://api.datadoghq.com/api/v2/cloud_auth/aws/persona_mapping" \
