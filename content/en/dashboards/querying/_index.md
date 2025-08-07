@@ -231,7 +231,7 @@ time() - max:backup.last_completed_timestamp{*}
 ```
 
 In the editor, this would look like:
-<!-- TBD after designs are done -->
+<!-- TBD after designs are done, need to also add units here like time_s and explain units -->
 
 {{% /collapse-content %}}
 
