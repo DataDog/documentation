@@ -93,39 +93,27 @@ provider "datadog" {
 **Note**: To get your `org_uuid`, call this endpoint or click the link (requires active session in target org):
 
 {{% site-region region="us" %}}
-```
-https://app.datadoghq.com/api/v2/current_user
-```
+[https://app.datadoghq.com/api/v2/current_user](https://app.datadoghq.com/api/v2/current_user)
 {{% /site-region %}}
 
-{{% site-region region="eu1" %}}
-```
-https://app.datadoghq.eu/api/v2/current_user
-```
+{{% site-region region="eu" %}}
+[https://app.datadoghq.eu/api/v2/current_user](https://app.datadoghq.eu/api/v2/current_user)
 {{% /site-region %}}
 
 {{% site-region region="us3" %}}
-```
-https://us3.datadoghq.com/api/v2/current_user
-```
+[https://us3.datadoghq.com/api/v2/current_user](https://us3.datadoghq.com/api/v2/current_user)
 {{% /site-region %}}
 
 {{% site-region region="us5" %}}
-```
-https://us5.datadoghq.com/api/v2/current_user
-```
+[https://us5.datadoghq.com/api/v2/current_user](https://us5.datadoghq.com/api/v2/current_user)
 {{% /site-region %}}
 
-{{% site-region region="ap1" %}}
-```
-https://ap1.datadoghq.com/api/v2/current_user
-```
+{{% site-region region="ap" %}}
+[https://ap1.datadoghq.com/api/v2/current_user](https://ap1.datadoghq.com/api/v2/current_user)
 {{% /site-region %}}
 
 {{% site-region region="gov" %}}
-```
-https://app.ddog-gov.com/api/v2/current_user
-```
+[https://app.ddog-gov.com/api/v2/current_user](https://app.ddog-gov.com/api/v2/current_user)
 {{% /site-region %}}
 
 **Optional: Specify AWS credentials explicitly:**
