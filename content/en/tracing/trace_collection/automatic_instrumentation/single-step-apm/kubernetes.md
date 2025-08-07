@@ -83,7 +83,7 @@ datadog:
       enabled: true
 ```
 
-With this configuration, Datadog automatically sets the service name based on the label values for all instrumented workloads that have these labels.
+With this configuration, Datadog automatically sets the `service` tag using the value of the `app.kubernetes.io/name` label for any instrumented workload that includes this label.
 
 #### Explicit control with ddTraceConfigs
 
