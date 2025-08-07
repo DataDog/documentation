@@ -35,13 +35,13 @@ Ensure that the Docker socket (`/var/run/docker.sock`) is mounted into the Agent
 For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
 
 ```shell
-docker run -d --name datadog-agent \
+docker run -d --name dd-agent \
     --cgroupns host \
     --pid host \
     -e DD_API_KEY=<DATADOG_API_KEY> \
     -e DD_LOGS_ENABLED=true \
     -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
-    -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
+    -e DD_CONTAINER_EXCLUDE="name:dd-agent" \
     -e DD_SITE=<DD_SITE>
     -v /var/run/docker.sock:/var/run/docker.sock:ro \
     -v /proc/:/host/proc/:ro \

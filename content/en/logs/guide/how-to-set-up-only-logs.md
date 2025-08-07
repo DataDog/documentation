@@ -47,13 +47,13 @@ If you're using the Docker containerized Agent, set the following environment va
 Here's an example of how you can include these settings in your Docker run command:
 
 ```shell
-docker run -d --name datadog-agent \
+docker run -d --name dd-agent \
            --cgroupns host \
            --pid host \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
-           -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
+           -e DD_CONTAINER_EXCLUDE="name:dd-agent" \
            -e DD_ENABLE_PAYLOADS_EVENTS=false \
            -e DD_ENABLE_PAYLOADS_SERIES=false \
            -e DD_ENABLE_PAYLOADS_SERVICE_CHECKS=false \
