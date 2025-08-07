@@ -60,8 +60,9 @@ With SSI, you can automatically extract UST values from pod labels and metadata 
 | datadog-operator | 1.16.0+   |
 | datadog-helm-chart | 3.120.0+|
 
-#### Basic automatic configuration
-**Note**: Replace `app.kubernetes.io/name` with any label that contains your service name (e.g., `service.kubernetes.io/name`, `component`). You can configure multiple labels this way.
+#### Automatic configuration
+
+Replace `app.kubernetes.io/name` in the following example with any label that contains your service name (for example, `service.kubernetes.io/name` or `component`). You can configure multiple labels this way.
 
 ```yaml
 datadog:
