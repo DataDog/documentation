@@ -20,7 +20,7 @@ Collect Kubernetes metrics using the OpenTelemetry Collector to gain comprehensi
 
 {{< img src="/opentelemetry/collector_exporter/kubernetes_metrics.png" alt="The 'Containers - Overview' dashboard, showing metrics for containers, including total count, CPU usage by image, and memory usage." style="width:100%;" >}}
 
-This integration requires the [kube-state-metrics][8] service and uses a two-collector architecture to gather data.
+This integration requires the [`kube-state-metrics`][8] service and uses a two-collector architecture to gather data.
 
 The `kube-state-metrics` service is a required component that generates detailed metrics about the state of Kubernetes objects like deployments, nodes, and pods. This architecture uses two separate OpenTelemetry Collectors:
 - A Cluster Collector, deployed as a Kubernetes Deployment, gathers cluster-wide metrics (for example, the total number of deployments).
@@ -30,7 +30,7 @@ This approach ensures that cluster-level metrics are collected only once, preven
 
 ## Setup
 
-To collect Kubernetes metrics with OpenTelemetry, you need to deploy `kube-state-metrics` and configure two OpenTelemetry Collectors in your cluster.
+To collect Kubernetes metrics with OpenTelemetry, you need to deploy `kube-state-metrics` and configure both of the above OpenTelemetry Collectors in your cluster.
 
 ### Prerequisites
 
