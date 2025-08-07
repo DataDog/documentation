@@ -8028,6 +8028,11 @@ menu:
       url: data_security/real_user_monitoring/
       parent: data_security
       weight: 6
+    - name: PCI Compliance
+      identifier: data_security_pci_compliance
+      url: data_security/pci_compliance/
+      parent: data_security
+      weight: 7
     - name: HIPAA Compliance
       identifier: data_security_hipaa_compliance
       url: data_security/hipaa_compliance/

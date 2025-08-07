@@ -4,6 +4,9 @@ description: "Process, enrich, control, and manage your logs from the Logs Confi
 aliases:
   - /logs/processing
 further_reading:
+- link: "/data_security/pci_compliance/"
+  tag: "Documentation"
+  text: "PCI DSS Compliance"
 - link: "https://www.datadoghq.com/blog/logging-without-limits/"
   tag: "Blog"
   text: Learn more about Logging without Limits*
@@ -44,6 +47,7 @@ Once you've completed configuration, start investigating and troubleshooting log
 *Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: https://app.datadoghq.com/logs/pipelines
+[2]: /data_security/pci_compliance/
 [3]: /logs/log_configuration/pipelines
 [4]: /logs/log_configuration/processors
 [5]: /logs/log_configuration/attributes_naming_convention/

@@ -684,29 +684,6 @@ export DD_APM_TELEMETRY_ENABLED=false
 {{% /tab %}}
 {{< /tabs >}}
 
-## PCI DSS compliance for compliance for APM
-
-{{< site-region region="us" >}}
-
-<div class="alert alert-warning">
-PCI compliance for APM is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
-</div>
-
-To set up a PCI-compliant Datadog org, follow these steps:
-
-{{% pci-apm %}}
-
-See [PCI DSS Compliance][1] for more information. To enable PCI compliance for logs, see [PCI DSS compliance for Log Management][2].
-
-[1]: /data_security/pci_compliance/
-[2]: /data_security/pci_compliance/?tab=logmanagement
-
-{{< /site-region >}}
-
-{{< site-region region="us2,us3,us5,eu,gov" >}}
-PCI compliance for APM is not available for the {{< region-param key="dd_site_name" >}} site.
-{{< /site-region >}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
