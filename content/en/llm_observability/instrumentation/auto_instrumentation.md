@@ -284,16 +284,16 @@ The Pydantic AI integration instruments the following methods:
 
 ## Model Context Protocol (MCP)
 
-The MCP integration instruments client and server tool calls in the [MCP][57] SDK made via [fastmcp 1.0][58], which is an implementation of the mcp protocol incorporated into the official MCP SDK.
+The MCP integration instruments client and server tool calls in the [MCP][57] SDK.
 
 ### Traced methods
 
 The MCP integration instruments the following methods:
 
-- [Client Tool Calls][59]:
+- [Client Tool Calls][58]:
   - `mcp.client.session.ClientSession.call_tool`
 
-- [Server Tool Calls][60]:
+- [Server Tool Calls][59]:
   - `mcp.server.fastmcp.tools.tool_manager.ToolManager.call_tool`
 
 
@@ -354,9 +354,8 @@ The MCP integration instruments the following methods:
 [55]: https://ai.pydantic.dev/
 [56]: https://ai.pydantic.dev/agents/
 [57]: https://modelcontextprotocol.io/docs/getting-started/intro
-[58]: https://gofastmcp.com/getting-started/installation
-[59]: https://gofastmcp.com/clients/client#tools
-[60]: https://gofastmcp.com/python-sdk/fastmcp-tools-tool_manager#call-tool
+[58]: https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#writing-mcp-clients
+[59]: https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#tools
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
