@@ -39,57 +39,57 @@ To collect Kubernetes metrics with OpenTelemetry, you need to deploy `kube-state
 
 ### Installation
 
-1.  **Install kube-state-metrics**
+#### 1. Install kube-state-metrics
 
-    Run the following commands to add the `prometheus-community` Helm repository and install `kube-state-metrics`:
-    ```sh
-    helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-    helm repo update
-    helm install kube-state-metrics prometheus-community/kube-state-metrics
-    ```
+Run the following commands to add the `prometheus-community` Helm repository and install `kube-state-metrics`:
+```sh
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install kube-state-metrics prometheus-community/kube-state-metrics
+```
 
-2.  **Create a Datadog API Key Secret**
+#### 2. Create a Datadog API Key Secret
 
-    Create a Kubernetes secret to store your Datadog API key securely.
-    ```sh
-    export DD_API_KEY="<YOUR_DATADOG_API_KEY>"
-    kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
-    ```
+Create a Kubernetes secret to store your Datadog API key securely.
+```sh
+export DD_API_KEY="<YOUR_DATADOG_API_KEY>"
+kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
+```
 
-3.  **Install the OpenTelemetry Collectors**
+#### 3. Install the OpenTelemetry Collectors
 
-    First, add the OpenTelemetry Helm chart repository:
-    ```sh
-    helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
-    helm repo update
-    ```
+1. Add the OpenTelemetry Helm chart repository:
+   ```sh
+   helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
+   helm repo update
+   ```
 
-    Next, download the configuration files for the two Collectors:
-    - [cluster-collector.yaml][3]
-    - [daemonset-collector.yaml][4]
+1. Download the configuration files for the two Collectors:
+   - [cluster-collector.yaml][3]
+   - [daemonset-collector.yaml][4]
 
-    Finally, set your cluster name as an environment variable and use Helm to deploy both the Cluster and Node Collectors. Make sure the paths to the YAML files are correct.
+1. Set your cluster name as an environment variable and use Helm to deploy both the Cluster and Node Collectors. Make sure the paths to the YAML files are correct.
 
-    ```bash
-    # Set your cluster name
-    export K8S_CLUSTER_NAME="<YOUR_CLUSTER_NAME>"
-
-    # Install the Node Collector (DaemonSet)
-    helm install otel-daemon-collector open-telemetry/opentelemetry-collector \
-      -f daemonset-collector.yaml \
-      --set image.repository=otel/opentelemetry-collector-contrib \
-      --set image.tag=0.130.0 \
-      --set-string "config.processors.resource.attributes[0].key=k8s.cluster.name" \
-      --set-string "config.processors.resource.attributes[0].value=${K8S_CLUSTER_NAME}"
-
-    # Install the Cluster Collector (Deployment)
-    helm install otel-cluster-collector open-telemetry/opentelemetry-collector \
-      -f cluster-collector.yaml \
-      --set image.repository=otel/opentelemetry-collector-contrib \
-      --set image.tag=0.130.0 \
-      --set-string "config.processors.resource.attributes[0].key=k8s.cluster.name" \
-      --set-string "config.processors.resource.attributes[0].value=${K8S_CLUSTER_NAME}"
-    ```
+   ```bash
+   # Set your cluster name
+   export K8S_CLUSTER_NAME="<YOUR_CLUSTER_NAME>"
+   
+   # Install the Node Collector (DaemonSet)
+   helm install otel-daemon-collector open-telemetry/opentelemetry-collector \
+     -f daemonset-collector.yaml \
+     --set image.repository=otel/opentelemetry-collector-contrib \
+     --set image.tag=0.130.0 \
+     --set-string "config.processors.resource.attributes[0].key=k8s.cluster.name" \
+     --set-string "config.processors.resource.attributes[0].value=${K8S_CLUSTER_NAME}"
+   
+   # Install the Cluster Collector (Deployment)
+   helm install otel-cluster-collector open-telemetry/opentelemetry-collector \
+     -f cluster-collector.yaml \
+     --set image.repository=otel/opentelemetry-collector-contrib \
+     --set image.tag=0.130.0 \
+     --set-string "config.processors.resource.attributes[0].key=k8s.cluster.name" \
+     --set-string "config.processors.resource.attributes[0].value=${K8S_CLUSTER_NAME}"
+   ```
 
 ## Metric metadata configuration
 
@@ -99,17 +99,16 @@ To edit a metric's metadata:
 1. Go to **[Metrics > Summary][6]**.
 1. Select the metric you want to edit.
 1. Click **Edit** in the side panel.
-1. Apply the following updates:
-   - `k8s.pod.cpu.usage`
-       - **Metric Type**: `Gauge`
-       - **Unit**: `core`
-   - `k8s.pod.network.io`
-       - **Metric Type**: `Gauge`
-       - **Unit**: `byte per second`
-   - `k8s.pod.network.errors`
-       - **Metric Type**: `Gauge`
-       - **Unit**: `byte per second`
+1. Edit the metadata as needed.
 1. Click **Save**.
+
+Repeat this process for each of the metrics listed in the following table:
+
+| Metric Name              | Metric Type | Unit                                     |
+|--------------------------|-------------|------------------------------------------|
+| `k8s.pod.cpu.usage`      | `Gauge`     | `core`                                   |
+| `k8s.pod.network.io`     | `Gauge`     | `byte_in_binary_bytes_family per second` |
+| `k8s.pod.network.errors` | `Gauge`     | `byte_in_binary_bytes_family per second` |
   
 ## Correlating traces with infrastructure metrics
 
