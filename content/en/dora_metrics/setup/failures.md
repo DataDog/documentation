@@ -135,7 +135,7 @@ The matching algorithm works in the following steps:
 6. If there have been no matches up to this point, the incident metrics and events are emitted with the PagerDuty service and PagerDuty team provided in the incident.
 
 <div class="alert alert-warning">
-If an incident is resolved manually in PagerDuty instead of from a monitor notification, the incident resolution event will not contain monitor information and the first step of the matching algorithm will be skipped.
+If an incident is resolved manually in PagerDuty instead of from a monitor notification, the incident resolution event does not contain monitor information and the first step of the matching algorithm is skipped.
 </div>
 
 [101]: https://support.pagerduty.com/docs/services-and-integrations
