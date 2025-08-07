@@ -1,5 +1,5 @@
 ---
-title: Enabling App and API Protection for Go
+title: Enabling App and API Protection for Go: Get Started
 aliases:
   - /security_platform/application_security/getting_started/go
   - /security/application_security/getting_started/go
