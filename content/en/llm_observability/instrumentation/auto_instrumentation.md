@@ -34,6 +34,7 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 | [OpenAI Agents](#openai-agents)                 | >= 0.0.2           | >= 3.5.0       |
 | [LiteLLM](#litellm)                             | >= 1.70.0          | >= 3.9.0       |
 | [Pydantic AI](#pydantic-ai)                     | >= 0.3.0           | >= 3.11.0      |
+| [MCP](#mcp)                                     | >= 1.10.0          | >= 3.11.0      |
 
 
 You can programmatically enable automatic tracing of LLM calls to a supported LLM model like OpenAI or a framework like LangChain by setting `integrations_enabled` to `true` in the `LLMOBs.enable()` function. In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
@@ -281,6 +282,20 @@ The Pydantic AI integration instruments the following methods:
   - `agent.Agent.iter` (also traces `agent.Agent.run` and `agent.Agent.run_sync`)
   - `agent.Agent.run_stream`
 
+## MCP
+
+The Model Context Protocol (MCP) integration instruments client and server tool calls in the [MCP][57] SDK.
+
+### Traced methods
+
+The MCP integration instruments the following methods:
+
+- [Client Tool Calls][58]:
+  - `mcp.client.session.ClientSession.call_tool`
+
+- [Server Tool Calls][59]:
+  - `mcp.server.fastmcp.tools.tool_manager.ToolManager.call_tool`
+
 
 [1]: https://platform.openai.com/docs/api-reference/introduction
 [2]: https://platform.openai.com/docs/api-reference/completions
@@ -338,6 +353,9 @@ The Pydantic AI integration instruments the following methods:
 [54]: https://api-docs.deepseek.com/
 [55]: https://ai.pydantic.dev/
 [56]: https://ai.pydantic.dev/agents/
+[57]: https://modelcontextprotocol.io/docs/getting-started/intro
+[58]: https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#writing-mcp-clients
+[59]: https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#tools
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
