@@ -32965,7 +32965,7 @@ components:
       description: Relationship to impact object.
       properties:
         id:
-          description: A unique identifier that represents the responder.
+          description: A unique identifier that represents the user defined field.
           example: 00000000-0000-0000-2345-000000000000
           type: string
         type:
