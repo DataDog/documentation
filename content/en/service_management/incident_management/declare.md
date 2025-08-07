@@ -60,7 +60,7 @@ Use the [Datadog Clipboard][6] to gather multiple monitors and graphs and to gen
 
 ## From a Datadog On-Call page
 
-You can declare an incident directly from a [Datadog On-Call page][12]. When viewing your [On-Call Pages][13], click on a page and use the **Declare Incident** button to quickly create a new incident and automatically associate it with the relevant on-call team.
+You can declare an incident directly from a [Datadog On-Call page][12]. From the [On-Call pages list][13], select a page and click **Declare Incident** to create an incident and automatically associate it with the relevant on-call team.
 
 ## From Slack
 
