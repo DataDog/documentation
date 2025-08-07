@@ -222,7 +222,9 @@ To use `pow(a, b)`, `a`, and `b` can be constants or metrics. This function is o
 {{% /collapse-content %}}
 
 {{ % collapse-content title="Time() function" level="h5" %}}
-The `time()` function returns the current Unix time in seconds as a timeseries. This is useful for calculations where you need to compare a metric's timestamp against the present, such as monitoring data freshness or calculating the time until an event expires. For example, to calcualte the time elapsed in seconds since the last reported backup, you can use `time()` to find the difference between now and the timestamp of the backup metric. 
+TThe time() function returns the current Unix time in seconds as a timeseries. Use it in formulas to compare a metric's timestamp against the present, which is ideal for monitoring data freshness or calculating time until an expiration.
+
+For example, to calculate the time elapsed in seconds since the last reported backup, you can use `time()` to find the difference between now and the timestamp of the backup metric.
 
 ```text
 time() - max:backup.last_completed_timestamp{*}
