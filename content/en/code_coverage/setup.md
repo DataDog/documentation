@@ -297,7 +297,7 @@ Start-Process -FilePath "./datadog-ci.exe" -ArgumentList version
 ### Uploading coverage reports
 
 <div class="alert alert-info">
-There is no need to merge coverage reports before uploading them to Datadog. All reports for the same commit are aggregated automatically in the Datadog backend.
+Datadog automatically aggregates all reports for the same commit on the backend. You don't need to merge coverage reports before uploading them.
 </div>
 
 To upload your code coverage reports to Datadog, run the following command. Provide a valid [Datadog API key][9] (`DD_API_KEY`), and one or more file paths to either the coverage report files directly or directories containing them:
@@ -327,11 +327,10 @@ You can also view your coverage data aggregated by pull request in the [Code Cov
 
 ## Troubleshooting
 
-### Coverage upload command does not find my coverage report files
+### Coverage upload command does not detect your coverage report files
 
-The `datadog-ci coverage upload` command automatically detects supported coverage report files in the specified directories, relying on certain heuristics, such as file names and extensions.
-It is possible that the command does not find your coverage report files if they do not match the expected patterns.
-In this case set your report format and specify the files explicitly as positional arguments to the command, like this:
+The `datadog-ci coverage upload` command automatically detects supported coverage report files in the specified directories using heuristics, such as file names and extensions.
+If your coverage report files do not match expected patterns, the command might not detect them automatically. In this case, specify the report format and provide the file paths as positional arguments. For example:
 
 {{< code-block lang="shell" >}}
 datadog-ci coverage upload --format=lcov \
@@ -342,7 +341,11 @@ datadog-ci coverage upload --format=lcov \
 ### Coverage upload fails with "Format could not be detected" error
 
 The `datadog-ci coverage upload` command automatically detects the format of the coverage report files based on their content and file extension.
-If the command fails with the "Invalid coverage report file [...]: format could not be detected" error, try setting the format explicitly using the `--format` option, like this:
+If the command fails with the following error: 
+```
+Invalid coverage report file [...]: format could not be detected
+```
+specify the format explicitly using the `--format` option, like this:
 
 {{< code-block lang="shell" >}}
 datadog-ci coverage upload --format=cobertura reports/cobertura.xml
@@ -350,22 +353,21 @@ datadog-ci coverage upload --format=cobertura reports/cobertura.xml
 
 ### Coverage upload outputs "Could not sync git metadata" error
 
-Git metadata upload is only required when directly integrating your CI provider with Datadog is not possible.
+Git metadata upload is only required if you can't integrate your CI provider directly with Datadog.
 If you are using a [source code provider integration][12], such as Datadog GitHub app or Gitlab integration, you can disable the git metadata upload by passing the `--skip-git-metadata-upload=1` flag to the `datadog-ci coverage upload` command, like this:
 
 {{< code-block lang="shell" >}}
 datadog-ci coverage upload --skip-git-metadata-upload=1 .
 {{< /code-block >}}
 
-### Datadog UI shows different coverage percentage values than the ones in my coverage reports
+### Discrepancy between Datadog UI and coverage report values
 
 Datadog automatically merges coverage reports for the same commit.
-As a result, the coverage percentage values displayed in the Datadog UI may differ from those shown in your individual coverage reports,
-especially if there are overlapping or duplicate source code file entries.
+As a result, the coverage percentage displayed in the Datadog UI may differ from the values in your individual coverage reports, especially if those reports contain overlapping or duplicate source code file entries.
 
 If you use an external tool (such as [ReportGenerator](https://reportgenerator.io/)) to merge coverage reports before uploading to Datadog,
-ensure your merged report does not contain duplicate source code file entries.
-Datadog will deduplicate any duplicates found, which can lead to differences in coverage values between your merged report and the values displayed in the Datadog UI.
+ensure your merged reports do not contain duplicate source code file entries.
+Datadog deduplicates overlapping files across reports, which can result in differences between your original coverage values and the merged values displayed in the Datadog UI.
 
 ## Further reading
 
