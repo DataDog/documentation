@@ -46,7 +46,7 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 
 ## Configure Unified Service Tags
 
-Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data.
+Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. You can configure USTs through label extraction (recommended) or in deployment manifests.
 
 ### (Recommended) Configure USTs through label extraction
 
