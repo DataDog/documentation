@@ -118,7 +118,6 @@ datadog:
             # DD_VERSION automatically extracted from image tags
 ```
 
-**Note**: Use `ddTraceConfigs` for explicit control over service configuration for specific workloads. For most cases, the basic automatic configuration is sufficient.
 
 ### Configure USTs in deployment manifests
 
