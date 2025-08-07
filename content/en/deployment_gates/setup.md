@@ -239,8 +239,11 @@ spec:
 {{% /tab %}}
 {{% tab "Generic script" %}}
 
+Use this script as a starting point. Be sure to replace the following:
 
-Use this script as a starting point. For the API_URL variable, be sure to replace `<YOUR_DD_SITE>` with your [Datadog site name][1] (for example, {{< region-param key="dd_site" code="true" >}}).
+- `<YOUR_DD_SITE>`: Your [Datadog site name][1] (for example, {{< region-param key="dd_site" code="true" >}})
+- `<YOUR_API_KEY>`: Your [API key][2]
+- `<YOUR_APP_KEY>`: Your [application key][3]
 
 ```bash
 #!/bin/sh
@@ -386,6 +389,8 @@ The script has the following characteristics:
 This is a general behavior, and you should change it based on your personal use case and preferences. The script uses `curl` (to perform the request) and `jq` (to process the returned JSON). If those commands are not available, install them at the beginning of the script (for example, by adding `apk add --no-cache curl jq`).
 
 [1]: /getting_started/site/
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/organization-settings/application-keys
 
 {{% /tab %}}
 {{% tab "Direct API calls" %}}
@@ -395,10 +400,15 @@ Deployment Gate evaluations are asynchronous, as the evaluation process can take
 - First, request a Deployment Gate evaluation, which initiates the process and returns an evaluation ID.
 - Then, periodically poll the evaluation status endpoint using the evaluation ID to retrieve the result when the evaluation is complete. Polling every 10-20 seconds is recommended.
 
-A Deployment Gate evaluation can be requested with an API call:
+A Deployment Gate evaluation can be requested with an API call.
+
+Be sure to replace the following:
+- `<YOUR_DD_SITE>`: Your [Datadog site name][1] (for example, {{< region-param key="dd_site" code="true" >}})
+- `<YOUR_API_KEY>`: Your [API key][2]
+- `<YOUR_APP_KEY>`: Your [application key][3]
 
 ```bash
-curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/unstable/deployments/gates/evaluation" \
+curl -X POST "https://api.<YOUR_DD_SITE>/api/unstable/deployments/gates/evaluation" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: <YOUR_API_KEY>" \
 -H "DD-APPLICATION-KEY: <YOUR_APP_KEY>" \
@@ -438,7 +448,7 @@ The field `data.attributes.evaluation_id` contains the unique identifier for thi
 You can fetch the status of a gate evaluation by polling an additional API endpoint using the gate evaluation ID:
 
 ```bash
-curl -X GET "https://api.{{< region-param key="dd_site" >}}/api/unstable/deployments/gates/evaluation/<evaluation_id>" \
+curl -X GET "https://api.<YOUR_DD_SITE>/api/unstable/deployments/gates/evaluation/<evaluation_id>" \
 -H "DD-API-KEY: <YOUR_API_KEY>" \
 -H "DD-APPLICATION-KEY: <YOUR_APP_KEY>"
 ```
@@ -455,14 +465,14 @@ When a 200 HTTP response is returned, it has the following format:
        "attributes": {
            "dry_run": false,
            "evaluation_id": "e9d2f04f-4f4b-494b-86e5-52f03e10c8e9",
-           "evaluation_url": "https://app.{{< region-param key="dd_site" >}}/ci/deployment-gates/evaluations?index=cdgates&query=level%3Agate+%40evaluation_id%3Ae9d2f14f-4f4b-494b-86e5-52f03e10c8e9",
+           "evaluation_url": "https://app.datadoghq.com/ci/deployment-gates/evaluations?index=cdgates&query=level%3Agate+%40evaluation_id%3Ae9d2f14f-4f4b-494b-86e5-52f03e10c8e9",
            "gate_id": "e140302e-0cba-40d2-978c-6780647f8f1c",
            "gate_status": "pass",
            "rules": [
                {
                    "name": "Check service monitors",
                    "status": "fail",
-                   "reason": "One or more monitors in ALERT state: https://app.{{< region-param key="dd_site" >}}/monitors/34330981",
+                   "reason": "One or more monitors in ALERT state: https://app.datadoghq.com/monitors/34330981",
                    "dry_run": true
                }
            ]
@@ -478,6 +488,10 @@ The field `data.attributes.gate_status` contains the result of the evaluation. I
 * `fail`: The Deployment Gate evaluation failed.
 
 **Note**: If the field `data.attributes.dry_run` is `true`, the field `data.attributes.gate_status` is always `pass`.
+
+[1]: /getting_started/site/
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/organization-settings/application-keys
 
 {{% /tab %}}
 {{< /tabs >}}
