@@ -18,16 +18,19 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/llm-observability-bedrock-agents/"
   tag: "Blog"
   text: "Monitor agents built on Amazon Bedrock with Datadog LLM Observability"
+- link: "https://www.datadoghq.com/blog/monitor-mcp-servers/"
+  tag: "Blog"
+  text: "Identify common security risks in MCP servers"
 ---
 
 ## Overview
 
-With LLM Observability, you can monitor, troubleshoot, and evaluate your LLM-powered applications, such as chatbots. You can investigate the root cause of issues, monitor operational performance, and evaluate the quality, privacy, and safety of your LLM applications. 
+With LLM Observability, you can monitor, troubleshoot, and evaluate your LLM-powered applications, such as chatbots. You can investigate the root cause of issues, monitor operational performance, and evaluate the quality, privacy, and safety of your LLM applications.
 
 Each request fulfilled by your application is represented as a trace on the [**LLM Observability** page][1] in Datadog.
 
 {{< img src="llm_observability/traces.png" alt="A list of prompt-response pair traces on the LLM Observability page" style="width:100%;" >}}
- 
+
 A trace can represent:
 
 - An individual LLM inference, including tokens, error information, and latency
@@ -62,12 +65,12 @@ Automatically scan and redact any sensitive data in your AI applications and ide
 
 ## See anomalies highlighted as insights
 
-LLM Observability Insights provides a monitoring experience that helps users identify anomalies in their operational metrics—such as duration and error rate—and their out-of-the-box (OOTB) evaluations.
+LLM Observability Insights provides a monitoring experience that helps users identify anomalies in their operational metrics—such as duration and error rate—and their [out-of-the-box (OOTB) evaluations][9].
 
 Outlier detection is performed across key dimensions:
 - Span name
 - Workflow type
-- Cluster input/output topics
+- [Cluster input/output topics][10]
 
 These outliers are analyzed over the past week and automatically surfaced in the corresponding time window selected by the user. This enables teams to proactively detect regressions, performance drifts, or unexpected behavior in their LLM applications.
 
@@ -97,3 +100,5 @@ See the [Setup documentation][5] for instructions on instrumenting your LLM appl
 [6]: /llm_observability/quickstart
 [7]: https://app.datadoghq.com/dash/integration/llm_operational_insights
 [8]: /llm_observability/setup/auto_instrumentation
+[9]: /llm_observability/evaluations/ootb_evaluations
+[10]: /llm_observability/monitoring/cluster_map

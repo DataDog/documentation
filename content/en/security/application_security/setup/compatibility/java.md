@@ -151,7 +151,7 @@ Datadog does not officially support any early-access versions of Java.
 
 
 [1]: /tracing/trace_collection/compatibility/java/
-[2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[2]: /tracing/guide/remote_config
 [3]: /security/code_security/software_composition_analysis/
 
 This is new content at line 33

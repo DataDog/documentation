@@ -1,5 +1,5 @@
 ---
-title: Basic Agent Usage for Amazon Linux
+title: Basic Agent Usage for Linux
 platform: Amazon Linux
 aliases:
     - /guides/basic_agent_usage/amazonlinux/
@@ -25,20 +25,34 @@ algolia:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for Amazon Linux. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
+This page outlines the basic features of the Datadog Agent for Linux environments. See the [Supported Platforms][5] documentation for the complete list of supported Linux distributions and versions. 
 
-Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
+## Install the Agent
+To install the Agent on Linux, follow the [in-app instructions in Fleet Automation][6], and run the generated script on your hosts.
+
+{{< img src="/agent/basic_agent_usage/linux_img_july_25.png" alt="In-app installation steps for the Datadog Agent on a Linux host." style="width:90%;">}}
+
+
+## Configure the Agent
+The Datadog Agent configuration file is located in `/etc/datadog-agent/datadog.yaml`. This YAML file holds the host-wide connection details used to send data to Datadog including:
+- `api_key`: Your organization's [Datadog API key][7] 
+- `site`: Target Datadog region (for example `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`)  
+- `proxy`: HTTP/HTTPS proxy endpoints for outbound traffic (see [Datadog Agent Proxy Configuration][8])  
+- Default tags, log level, and Datadog configurations
+
+A fully commented reference file, located in `/etc/datadog-agent/datadog.yaml.example`, lists every available option for comparison or to copy and paste. Alternatively, see the sample `config_template.yaml` file for all available configuration options.
+
+### Integration files
+Configuration files for integrations live in `/etc/datadog-agent/conf.d/`. Each integration has its own sub-directory, `<INTEGRATION>.d/`, that contains:
+- `conf.yaml`: The active configuration controlling how the integration gathers metrics and logs  
+- `conf.yaml.example`: A sample illustrating supported keys and defaults
+
+
 
 ## Commands
 
-In Agent v6 and v7, the service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run through the Agent binary directly. In Agent v5, almost everything is done through the service manager.
-
-### Amazon Linux 2, Amazon Linux 2022/2023
-
-<div class="alert alert-info">Amazon Linux 2022/2023 installations on Agent versions <= 6.39/7.39 require the <code>libxcrypt-compat</code> package. To install the package, run:<br/><pre><code>dnf install -y libxcrypt-compat</code></pre></div>
-
-| Description                        | Command                                                |
-|------------------------------------|--------------------------------------------------------|
+| Description   | Command               |
+|---------------|-----------------------|
 | Start Agent as a service           | `sudo systemctl start datadog-agent`                   |
 | Stop Agent running as a service    | `sudo systemctl stop datadog-agent`                    |
 | Restart Agent running as a service | `sudo systemctl restart datadog-agent`                 |
@@ -48,50 +62,40 @@ In Agent v6 and v7, the service manager provided by the operating system is resp
 | Display command usage              | `sudo datadog-agent --help`                            |
 | Run a check                        | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` |
 
-### Amazon Linux
+**Note**: For upstart-based systems, such as `CentOS/RHEL 6` or `SUSE 11`, swap `systemctl <action>` with `<action>`. For example, when starting an Agent as a service on a `SUSE 11` system, use `sudo start datadog-agent`.
 
-| Description                        | Command                                                |
-|------------------------------------|--------------------------------------------------------|
-| Start Agent as a service           | `sudo start datadog-agent`                             |
-| Stop Agent running as a service    | `sudo stop datadog-agent`                              |
-| Restart Agent running as a service | `sudo restart datadog-agent`                           |
-| Status of Agent service            | `sudo status datadog-agent`                            |
-| Status page of running Agent       | `sudo datadog-agent status`                            |
-| Send flare                         | `sudo datadog-agent flare`                             |
-| Display command usage              | `sudo datadog-agent --help`                            |
-| Run a check                        | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` |
-
-**Note**: If the `service` wrapper is not available on your system, use:
-
-* On `upstart`-based systems: `sudo start/stop/restart/status datadog-agent`
-* On `systemd`-based systems: `sudo systemctl start/stop/restart/status datadog-agent`
-
-## Configuration
-
-The configuration files and folders for the Agent are located in:
-
-* `/etc/datadog-agent/datadog.yaml`
-
-Configuration files for [Integrations][4]:
-
-* `/etc/datadog-agent/conf.d/`
 
 ## Uninstall the Agent
 
+To uninstall the Agent, run the command for the appropriate Linux environment:
+
+
+### For CentOS, Rocky, AlmaLinux, Amazon Linux, Oracle Linux, and Red Hat
 
 ```shell
 sudo yum remove datadog-agent
 ```
 
-This command removes the Agent, but does not remove:
+### For Debian, Ubuntu
+```shell
+sudo apt-get remove datadog-agent -y
+```
+
+### For SUSE
+```shell
+sudo zypper remove datadog-agent
+```
+
+<div class="alert alert-info">
+
+**The above commands remove the Agent, but do not remove**:
 * The `datadog.yaml` configuration file
 * User-created files in the `/etc/datadog-agent` configuration folder
 * User-created files in the `/opt/datadog-agent` folder
 * The `dd-agent` user
 * Datadog log files
 
-If you also want to remove these elements, run this command after removing the Agent:
-
+**To remove these elements, run this command after removing the Agent:**
 ```shell
 sudo userdel dd-agent \
 && sudo rm -rf /opt/datadog-agent/ \
@@ -99,11 +103,22 @@ sudo userdel dd-agent \
 && sudo rm -rf /var/log/datadog/
 ```
 
-{{% apm-ssi-uninstall-linux %}}
+To uninstall remaining Agent artifacts for `Debian` and `Ubuntu` run:
+
+```shell
+sudo apt-get remove --purge datadog-agent -y
+```
+
+</div>
+
+
+### Uninstall Single Step APM Instrumentation
+If you installed the Agent with Single Step APM Instrumentation and want to uninstall it, you need to [run additional commands][9] to remove APM Instrumentation. Follow the steps for your [specific environment][10]. 
+
 
 ## Troubleshooting
 
-See the [Agent Troubleshooting documentation][2].
+For detailed steps, see [Agent Troubleshooting][2].
 
 ## Working with the embedded Agent
 
@@ -119,3 +134,9 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 [2]: /agent/troubleshooting/
 [3]: /developers/guide/custom-python-package/
 [4]: /integrations/
+[5]: /agent/supported_platforms/?tab=linux
+[6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linuxs
+[7]: https://app.datadoghq.com/organization-settings/api-keys
+[8]: https://docs.datadoghq.com/agent/configuration/proxy/
+[9]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
+[10]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/linux

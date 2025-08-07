@@ -137,6 +137,9 @@ There are reserved keywords that the Datadog platform requires for functionality
 
 The excluded namespaces are:
 
+{{% tabs %}}
+{{% tab "Logs" %}}
+
 - `host`
 - `hostname`
 - `syslog.hostname`
@@ -158,6 +161,78 @@ The excluded namespaces are:
 - `syslog.timestamp`
 - `error.fingerprint`
 - `x-datadog-parent-id`
+
+{{% /tab %}}
+{{% tab "Spans" %}}
+
+- `metrics._dd.`
+- `metrics.dd.`
+- `metrics._dd1.`
+- `metrics.otel.trace_id`
+- `metrics.otlp.`
+- `metrics._sampling_priority_v1`
+- `metrics._sample_rate`
+- `meta._dd.`
+- `meta.api.endpoint.`
+- `meta.dd.`
+- `meta_struct.dd.`
+- `meta_struct._dd.`
+- `meta_struct.api.endpoint.`
+- `meta_struct.appsec.`
+- `meta_struct.threat_intel.results.`
+- `meta.otel.trace_id`
+- `meta.otel.library.`
+- `meta.otlp.`
+- `trace_id`
+- `span_id`
+- `start`
+- `timestamp`
+- `end`
+- `duration`
+- `parent_id`
+- `type`
+- `resource`
+- `resource_hash`
+- `ingest_size_in_bytes`
+- `ingestion_reason`
+- `error`
+- `flags`
+- `status`
+- `chunk_id`
+- `host`
+- `host_id`
+- `hostname`
+- `env`
+- `service`
+- `operation_name`
+- `name`
+- `version`
+- `meta._dd.error_tracking`
+- `meta.error.fingerprint`
+- `meta.issue`
+
+{{% /tab %}}
+{{% tab "RUM" %}}
+
+- `application.id`
+- `session.id`
+- `session.initial_view.id`
+- `session.last_view.id`
+- `view.id`
+- `action.id`
+- `resource.id`
+- `geo`
+- `error.fingerprint`
+- `error.binary_images.uuid`
+- `issue`
+- `_dd.trace_id`
+- `_dd.span_id`
+- `_dd.usage_attribution_tag_names`
+- `_dd.error.unminified_frames`
+- `_dd.error.threads`
+
+{{% /tab %}}
+{{% /tabs %}}
 
 ### Edit scanning rules
 
