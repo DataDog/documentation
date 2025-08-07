@@ -6395,6 +6395,11 @@ menu:
       parent: application_security_security_signals
       identifier: threats_attacker_clustering
       weight: 3
+    - name: Users Explorer
+      url: security/application_security/security_signals/users_explorer/
+      parent: application_security_security_signals
+      identifier: threats_users
+      weight: 4
     - name: Policies
       url: security/application_security/policies/
       parent: application_security
