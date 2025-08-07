@@ -30,7 +30,7 @@ Backpressure determines if the system should slow down the consumption or accept
 
 ## In-memory buffering for components
 
-All components in Observability Pipelines have a small in-memory buffer between them. In-memory buffering can also be configured for all Observability Pipelines destinations (Preview). The buffer is the channel that two components communicate over. It ensures that there is a small amount of space, typically 100 events, that can be used to send events even if the component on the receiving end is busy. This allows maximizing throughput when workloads are not entirely uniform.
+All components in Observability Pipelines have a small in-memory buffer between them. In-memory buffering can also be configured for all Observability Pipelines destinations (in Preview). The buffer is the channel that two components communicate over. It ensures that there is a small amount of space, typically 100 events, that can be used to send events even if the component on the receiving end is busy. This allows maximizing throughput when workloads are not entirely uniform.
 
 Buffering protects against temporary overloads or outages for a given workload. The buffering model prioritizes performance when handling an excess of events, an amount that is beyond what a destination can process, by using in-memory buffers on destinations. By default, a destination's default buffer size is increased from 100 events to 500 events. The buffer capacity is increased because destinations are typically the primary source of backpressure in any given Observability Pipelines topology. They communicate to services over the network, where latency may be introduced or outages may temporarily occur.
 
