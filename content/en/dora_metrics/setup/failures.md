@@ -134,6 +134,10 @@ The matching algorithm works in the following steps:
 5. If the PagerDuty service name of the incident matches a team name in the Software Catalog, the incident metrics and events are emitted with the team.
 6. If there have been no matches up to this point, the incident metrics and events are emitted with the PagerDuty service and PagerDuty team provided in the incident.
 
+<div class="alert alert-warning">
+If an incident is resolved manually in PagerDuty instead of from a monitor notification, the incident resolution event will not contain monitor information and the first step of the matching algorithm will be skipped.
+</div>
+
 [101]: https://support.pagerduty.com/docs/services-and-integrations
 [102]: /software_catalog/
 [103]: /software_catalog/integrations/#pagerduty-integration
