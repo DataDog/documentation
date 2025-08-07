@@ -284,7 +284,7 @@ The Pydantic AI integration instruments the following methods:
 
 ## MCP
 
-The Model Context Protocol (mcp) integration instruments client and server tool calls in the [MCP][57] SDK.
+The Model Context Protocol (MCP) integration instruments client and server tool calls in the [MCP][57] SDK.
 
 ### Traced methods
 
