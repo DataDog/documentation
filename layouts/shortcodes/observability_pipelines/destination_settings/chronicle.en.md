@@ -6,7 +6,7 @@ To set up the Worker's Google Chronicle destination:
     - The Worker uses standard [Google authentication methods][10005].
 1. Select **JSON** or **Raw** encoding in the dropdown menu.
 1. Enter the log type. See [template syntax][10002] if you want to route logs to different log types based on specific fields in your logs.
-1. Optionally, toggle the switch to enable **Buffering Options**. If left disabled, the maximum size for buffering is 500 events. If enabled:
+1. Optionally, toggle the switch to enable **Buffering Options** (in Preview). If left disabled, the maximum size for buffering is 500 events. If enabled:
 	1. Select the buffer type you want to set (**Memory** or **Disk**).
 	1. Enter the buffer size and select the unit.
 

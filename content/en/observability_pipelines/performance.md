@@ -30,13 +30,15 @@ Backpressure determines if the system should slow down the consumption or accept
 
 ## In-memory buffering for components
 
-All components in Observability Pipelines have a small in-memory buffer between them. In-memory buffering can also be configured for all Observability Pipelines destinations. The buffer is the channel that two components communicate over. It ensures that there is a small amount of space, typically 100 events, that can be used to send events even if the component on the receiving end is busy. This allows maximizing throughput when workloads are not entirely uniform.
+All components in Observability Pipelines have a small in-memory buffer between them. In-memory buffering can also be configured for all Observability Pipelines destinations (Preview). The buffer is the channel that two components communicate over. It ensures that there is a small amount of space, typically 100 events, that can be used to send events even if the component on the receiving end is busy. This allows maximizing throughput when workloads are not entirely uniform.
 
 Buffering protects against temporary overloads or outages for a given workload. The buffering model prioritizes performance when handling an excess of events, an amount that is beyond what a destination can process, by using in-memory buffers on destinations. By default, a destination's default buffer size is increased from 100 events to 500 events. The buffer capacity is increased because destinations are typically the primary source of backpressure in any given Observability Pipelines topology. They communicate to services over the network, where latency may be introduced or outages may temporarily occur.
 
 Observability Pipelines destination's buffers are configured to block events, which means it waits indefinitely to write to a buffer that is full. This is to make sure observability data is reliably processed in the order it was given. Additionally, as mentioned earlier, blocking induces backpressure and signals upstream components to slow down event acceptance or consumption. As a result, although the system retains all data, it accumulates at the edge.
 
 ## Disk buffers
+
+<div class="alert alert-warning">Configuring disk buffers for destinations is in Preview.</div>
 
 Observability Pipelines destination can be configured with disk buffers. When disk buffering is enabled for a destination, every event is first sent through the buffer and written to the data files, before the data is sent to the downstream integration. By default, data is not synchronized for every write, but instead synchronized on an interval (500 milliseconds), which allows for high throughput with a reduced risk of data loss.
 
