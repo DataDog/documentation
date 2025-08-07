@@ -125,7 +125,7 @@ Select your platform.
         - This is the **Primary Connection String** in your Event Hub instance [shared access policies](#configure-shared-access-policy).
     1. Enter your Kafka TLS passphrase.
         - This is the **Primary Key** in your Event Hub instance's [shared access policies](#configure-shared-access-policy).
-    {{< img src="observability_pipelines/sources/kafka_env_vars.png" alt="The install page with example values for the kafka environment variables" style="width:70%;" >}}
+    {{< img src="observability_pipelines/sources/kafka_env_vars.png" alt="The install page with example values for the kafka environment variables" style="width:60%;" >}}
 1. Enter the environment variables for your destinations, if applicable.
 1. Follow the rest of the instructions on the page to install the Worker based on your platform.
 {{% /tab %}}
@@ -158,7 +158,7 @@ Select your platform.
         - This is the **Primary Connection String** in your Event Hub instance [shared access policies](#configure-shared-access-policy).
     1. Enter your Kafka TLS passphrase.
         - This is the **Primary Key** in your Event Hub instance's [shared access policies](#configure-shared-access-policy).
-    {{< img src="observability_pipelines/sources/kafka_env_vars_vm.png" alt="The install page with example values for the kafka environment variables" style="width:70%;" >}}
+    {{< img src="observability_pipelines/sources/kafka_env_vars_vm.png" alt="The install page with example values for the kafka environment variables" style="width:60%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
