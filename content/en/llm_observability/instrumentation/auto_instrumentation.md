@@ -282,9 +282,9 @@ The Pydantic AI integration instruments the following methods:
   - `agent.Agent.iter` (also traces `agent.Agent.run` and `agent.Agent.run_sync`)
   - `agent.Agent.run_stream`
 
-## Model Context Protocol (MCP)
+## MCP
 
-The MCP integration instruments client and server tool calls in the [MCP][57] SDK.
+The Model Context Protocol (mcp) integration instruments client and server tool calls in the [MCP][57] SDK.
 
 ### Traced methods
 
