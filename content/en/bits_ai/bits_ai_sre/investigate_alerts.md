@@ -81,7 +81,7 @@ Bits integrates with Confluence to find relevant documentation and runbooks to s
 
 #### Optimize Bits' understanding of your knowledge
 
-Help Bits better interpret and act on your documentation by following these best practices::
+Help Bits interpret and act on your documentation better by following these best practices:
 1. Include relevant Datadog telemetry links in your Confluence pages. Bits directly queries these links to extract more relevant information.
 1. Provide clear, step-by-step instructions for resolving monitor issues. Bits follows these instructions precisely, so specificity leads to more accurate outcomes.
 1. Document the services or systems involved in detail. Bits uses this information to understand the environment and guide investigations effectively.
