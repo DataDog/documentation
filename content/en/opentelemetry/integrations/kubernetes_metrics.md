@@ -16,9 +16,9 @@ further_reading:
 
 ## Overview
 
-Collect Kubernetes metrics using the OpenTelemetry Collector to gain comprehensive insights into your cluster's health and performance. This integration uses a combination of OpenTelemetry receivers to gather data, which populates the [Containers - Overview][1] dashboard.
+Collect Kubernetes metrics using the OpenTelemetry Collector to gain comprehensive insights into your cluster's health and performance. This integration uses a combination of OpenTelemetry receivers to gather data, which populates the [Kubernetes - Overview][1] dashboard.
 
-{{< img src="/opentelemetry/collector_exporter/kubernetes_metrics.png" alt="The 'Containers - Overview' dashboard, showing metrics for containers, including total count, CPU usage by image, and memory usage." style="width:100%;" >}}
+{{< img src="/opentelemetry/collector_exporter/kubernetes_metrics.png" alt="The 'Kubernetes - Overview' dashboard, showing metrics for containers, including status and resource usage of your cluster and its containers." style="width:100%;" >}}
 
 This integration requires the [`kube-state-metrics`][8] service and uses a two-collector architecture to gather data.
 
@@ -45,9 +45,8 @@ To collect Kubernetes metrics with OpenTelemetry, you need to deploy `kube-state
     ```sh
     helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
     helm repo update
-    helm install kube-state-metrics prometheus-community/kube-state-metrics --set "metricLabelsAllowlist[0]=pods=[*]"
+    helm install kube-state-metrics prometheus-community/kube-state-metrics
     ```
-    **Note**: The `--set "metricLabelsAllowlist[0]=pods=[*]"` flag configures `kube-state-metrics` to include all available labels for pod-related metrics. This provides maximum detail but may increase cardinality in large clusters. For production environments, you may want to customize this to a specific list of required labels.
 
 2.  **Create a Datadog API Key Secret**
 
@@ -120,7 +119,7 @@ The required OpenTelemetry attributes are:
 
 - `service.name`
 - `service.version`
-- `deployment.environment.name` (Supported in Agent v7.58.0+ and Collector Exporter v0.110.0+; otherwise, use `deployment.environment`)
+- `deployment.environment.name` (formerly `deployment.environment`)
 
 This ensures that telemetry from your application is consistently tagged, allowing Datadog to link traces, metrics, and logs to the same service.
 
@@ -199,7 +198,7 @@ See [OpenTelemetry Metrics Mapping][5] for more information.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/dash/integration/30657/containers---overview
+[1]: https://app.datadoghq.com/dash/integration/86/kubernetes---overview
 [2]: https://helm.sh/docs/intro/install/
 [3]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/cluster-collector.yaml
 [4]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/daemonset-collector.yaml
