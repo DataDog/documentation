@@ -106,7 +106,7 @@ The following is a list of bootstrap options, their related pipeline environment
 
 ## Enable liveness and readiness probe
 
-Configure your load balancer's health check with the `/heath` endpoint to check that the Worker is up and running. To expose the `/health` endpoint, you must set `DD_OP_API_ENABLED` to `true` and the `DD_OP_API_ADDRESS` to `0.0.0.0:8686`. An example configuration:
+Configure your load balancer's health check with the `/heath` endpoint to check that the Worker is up and running. To expose the `/health` endpoint, you must set `DD_OP_API_ENABLED` to `true` and set the `DD_OP_API_ADDRESS` to `0.0.0.0:8686`. An example configuration:
 
 ```
 api:
