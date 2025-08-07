@@ -1,9 +1,0 @@
-{{ $dot := . }}
-{{ $language := .Get "language" }}
-
-{{ partial "serverless/azure-app-service-setup.html" (dict 
-    "language" $language
-    "context" $dot
-) }}
-
-{{ .Inner }} 
