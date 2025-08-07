@@ -53,6 +53,8 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [Web Application Firewall][49]     | [Enable Amazon WAF logs][50]                                                                                   | [Manual][51] and [automatic](#automatically-set-up-triggers) log collection.                                                                                               |
 | [MWAA][55]                         | [Enable Amazon MWAA logs][56]                                                                                  | [Manual][56] and [automatic](#automatically-set-up-triggers) log collection.                                                                                                 |
 | [Network Firewall][57]             | [Enable AWS Network Firewall logs][58]                                                                      | [Manual][58] and [automatic](#automatically-set-up-triggers) log collection.                                                                                                 |
+| Redshift Serverless             | `-`                                                                      | [Automatic](#automatically-set-up-triggers) log collection.                                                                                                 |
+
 
 
 ## Set up triggers
@@ -70,19 +72,20 @@ The following sources and locations are supported:
 
 | Source                      | Location       |
 | --------------------------- | -------------- |
-| Apache Airflow (MWAA)       | Cloudwatch     |
+| Apache Airflow (MWAA)       | CloudWatch     |
 | API Gateway Access Logs     | CloudWatch     |
 | API Gateway Execution Logs  | CloudWatch     |
 | Application ELB Access Logs | S3             |
 | Classic ELB Access Logs     | S3             |
 | CloudFront Access Logs      | S3             |
-| Cloudtrail Logs             | S3, Cloudwatch |
+| Cloudtrail Logs             | S3, CloudWatch |
 | Lambda Logs                 | CloudWatch     |
 | Lambda@Edge Logs            | Cloudwatch     |
 | Network Firewall Logs       | S3, CloudWatch |
-| Redshift Logs               | S3             |
+| Redshift Logs               | S3, Cloudwatch |
+| Redshift Serverless Logs    | CloudWatch     |
 | S3 Access Logs              | S3             |
-| SSM Command Logs            | Cloudwatch     |
+| SSM Command Logs            | CloudWatch     |
 | Step Functions              | CloudWatch     |
 | Web Application Firewall    | S3, CloudWatch |
 
@@ -107,6 +110,7 @@ The following sources and locations are supported:
     "network-firewall:ListFirewalls",
     "redshift:DescribeClusters",
     "redshift:DescribeLoggingStatus",
+    "redshift-serverless:ListNamespaces",
     "s3:GetBucketLogging",
     "s3:GetBucketLocation",
     "s3:GetBucketNotification",
@@ -136,9 +140,10 @@ The following sources and locations are supported:
     | `lambda:List*`                                              | List all Lambda functions.                                                   |
     | `lambda:GetPolicy`                                          | Get the Lambda policy when triggers are to be removed.                       |
     | `network-firewall:DescribeLoggingConfiguration`             | Get the logging configuration of a firewall                                  |
-    | `network-firewall:ListFirewalls`                            | List all Network Firewall firewalls                                                           |
+    | `network-firewall:ListFirewalls`                            | List all Network Firewall firewalls                                          |
     | `redshift:DescribeClusters`                                 | List all Redshift clusters.                                                  |
     | `redshift:DescribeLoggingStatus`                            | Get the name of the S3 bucket containing Redshift Logs.                      |
+    | `redshift-serverless:ListNamespaces`                        | List all Redshift Serverless namespaces                                      |
     | `s3:GetBucketLogging`                                       | Get the name of the S3 bucket containing S3 access logs.                     |
     | `s3:GetBucketLocation`                                      | Get the region of the S3 bucket containing S3 access logs.                   |
     | `s3:GetBucketNotification`                                  | Get existing Lambda trigger configurations.                                  |
