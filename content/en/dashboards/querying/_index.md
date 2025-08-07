@@ -229,7 +229,7 @@ time() - max:backup.last_completed_timestamp{*}
 ```
 
 In the editor, this would look like:
-
+<!-- TBD after designs are done -->
 
 {{% /collapse-content %}}
 
