@@ -1,28 +1,56 @@
 ---
-aliases:
-- /ko/integrations/azure_cognitiveservices
+app_id: azure-cognitiveservices
+app_uuid: 0d77c8ca-d9b6-46a5-925e-c942e00425a2
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.cognitiveservices_accounts.total_calls
+      metadata_path: metadata.csv
+      prefix: azure.cognitiveservices_accounts
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 282
+    source_type_name: Azure Cognitive Services
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - 클라우드
 - azure
 custom_kind: 통합
 dependencies: []
-description: Azure Cognitive Services의 핵심 메트릭 추적하기
-doc_link: https://docs.datadoghq.com/integrations/azure_cognitive_services/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_cognitive_services
-has_logo: true
 integration_id: azure-cognitiveservices
-integration_title: Microsoft Azure Cognitive Services
+integration_title: Azure Cognitive Services
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_cognitive_services
-public_title: Datadog-Microsoft Azure Cognitive Services 통합
+public_title: Azure Cognitive Services
 short_description: Azure Cognitive Services의 핵심 메트릭 추적하기
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Azure
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Azure Cognitive Services의 핵심 메트릭 추적하기
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Cognitive Services
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 개요
 
 Azure Cognitive Services는 AI나 데이터 과학 기술 및 지식 없이도 개발자가 지능적인 애플리케이션을 개발할 수 있도록 도와주는 서비스와 API, SDK입니다.
@@ -33,12 +61,12 @@ Datadog Azure 통합을 사용해 Azure Cognitive Services 메트릭을 수집�
 
 ### 설치
 
-아직 설정하지 않았다면, 먼저 [Microsoft Azure 통합][1]을 설정하세요. 그 외 다른 설치 단계는 없습니다.
+If you haven't already, set up the [Microsoft Azure integration][1]. No additional installation are required.
 
 ## 수집한 데이터
 
 ### 메트릭
-{{ get-metrics-from-git "azure-cognitiveservices" }}
+{{< get-metrics-from-git "azure_cognitive_services" >}}
 
 
 ### 이벤트

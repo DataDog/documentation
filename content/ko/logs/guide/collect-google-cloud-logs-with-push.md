@@ -9,11 +9,21 @@ further_reading:
 - link: /logs/log_configuration/processors
   tag: 설명서
   text: 로그 처리 방법 알아보기
+- link: /logs/guide/reduce_data_transfer_fees
+  tag: 가이드
+  text: 데이터 전송 수수료를 줄이면서 로그를 Datadog로 보내는 방법
 title: Pub/Sub Push 구독으로 Google Cloud 로그 수집
 ---
 
 <div class="alert alert-danger">
-이 페이지에서는 레거시 Pub/Sub Push 구독과 관련된 구성 정보와 함께 지원 중단된 기능을 다루고 있어 레거시 설정 문제를 해결하거나 수정하는 데 유용합니다. Datadog Dataflow 템플릿과 함께 <strong>Pull</strong> 구독을 사용하여 Google Cloud 로그를 Datadog에 전달합니다. 자세한 내용은 Google Cloud 통합 페이지의 <a href="https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection" target="_blank">로그 수집</a>을 참조하세요.
+
+이 페이지에서는 레거시 Pub/Sub 푸시 구독과 관련된 설정 정보와 더 이상 사용되지 않는 기능을 보여주므로 레거시 설정을 수정하거나 문제를 해결하는 데 유용합니다. Pub/Sub 푸시 구독은 다음의 이유로 더 이상 사용할 수 없습니다. 
+- Google Cloud VPC의 경우 외부 엔드포인트로 새 푸시 구독을 설정할 수 없습니다(자세한 내용은 Google Cloud의 [지원되는 제품 및 제한 사항][12] 페이지 참조).
+- 푸시 구독은 이벤트의 압축 또는 일괄 처리를 제공하지 않습니다.
+
+<strong>푸시</strong> 구독 관련 설명서는 문제 해결 또는 레거시 설정 수정을 위해서만 유지 관리됩니다. 
+
+대신 Datadog 데이터 흐름 템플릿과 함께 <strong>Pull</strong> 구독을 사용하여 Google Cloud 로그를 Datadog에 전달하세요. 자세한 내용은 Google Cloud 통합 페이지에서 <a href="https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection" target="_blank">로그 수집</a> 페이지를 참조하세요.
 </div>
 
 ## 개요
@@ -26,7 +36,7 @@ GCE 또는 GKE에서 실행되는 애플리케이션에서 로그를 수집하�
 
 ## 설정
 
-### 전제 조건
+### 사전 필수 조건
 
 [Google Cloud Platform 통합][4]이 성공적으로 설치되었습니다.
 
@@ -36,7 +46,7 @@ GCE 또는 GKE에서 실행되는 애플리케이션에서 로그를 수집하�
 
     {{< img src="integrations/google_cloud_platform/create_topic_no_default_sub.png" alt="기본 구독 없이 주제 만들기" style="width:80%;">}}
 
-2. 해당 주제에 `export-logs-to-datadog`과 같은 명시적인 이름을 지정하고 **Create**를 클릭합니다.
+2. 해당 주제에 `export-logs-to-datadog`과 같은 명확한 이름을 지정하고 **Create**를 클릭합니다.
 
 **경고**: Pub/Sub에는 [Google Cloud 할당량 및 제한사항][6]이 적용됩니다. 보유한 로그 수가 해당 제한보다 높은 경우 Datadog에서는 로그를 여러 주제로 분할할 것을 권장합니다. 해당 제한에 도달하는 경우 모니터 알림 설정에 대한 자세한 내용은 [Log Forwarding 모니터링 섹션](#monitor-the-log-forwarding)을 참조하세요.
 
@@ -64,7 +74,7 @@ Pub/Sub는 Google Cloud Logging에서 로그를 수신하여 Datadog에 전달�
 4. **Cloud Pub/Sub**를 대상으로 선택하고 해당 목적으로 생성된 Pub/Sub를 선택합니다.
    **참고**: Pub/Sub는 다른 프로젝트에 있을 수 있습니다.
 
-    {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Export Google Cloud Pub/Sub Logs to Pub Sub" >}}
+    {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Google Cloud Pub/Sub 로그를 Pub Sub로 내보내기" >}}
 
 5. **Create Sink**를 클릭하고 확인 메시지가 나타날 때까지 기다립니다.
 
@@ -97,3 +107,4 @@ Pub/Sub에는 [Google Cloud 할당량 및 제한사항][6]이 적용됩니다. �
 [9]: https://console.cloud.google.com/logs/viewer
 [10]: https://docs.datadoghq.com/ko/integrations/google_cloud_pubsub/
 [11]: https://cloud.google.com/logging/docs/view/logging-query-language#sample
+[12]: https://cloud.google.com/vpc-service-controls/docs/supported-products#table_pubsub
