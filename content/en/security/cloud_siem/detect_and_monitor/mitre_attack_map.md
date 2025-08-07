@@ -3,6 +3,7 @@ title: MITRE ATT&CK Map
 disable_toc: false
 aliases:
   - /security/cloud_siem/detection_rules/attack_map
+  - /security/cloud_siem/detection_rules/mitre_attack_map
 further_reading:
 - link: "/security/cloud_siem/detect_and_monitor/custom_detection_rules/"
   tag: "Documentation"
