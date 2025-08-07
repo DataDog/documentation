@@ -43,7 +43,7 @@ A template variable is defined by:
 ## Add a template variable
 If template variables are already defined, see [Edit a template variable](#edit-a-template-variable). If your dashboard does not have any template variables, you can click the question mark icon to open a help modal on how to use Dashboard Variables.
 
-{{< img src="/dashboards/template_variables/template_variable_menu.png" alt="Template variable menu showing the Configure Dropdown Values option" style="width:80%;" >}}
+{{< img src="/dashboards/template_variables/template_variable_menu.png" alt="Template variable menu showing the Configure Dropdown Values option" style="width:70%;" >}}
 
 To add a template variable in a dashboard:
 1. Click **Add Variable**.
