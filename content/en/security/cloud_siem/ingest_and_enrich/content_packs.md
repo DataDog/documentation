@@ -10,7 +10,7 @@ further_reading:
 - link: "security/cloud_siem/investigator"
   tag: "Documentation"
   text: "Learn more about the Investigator"
-- link: "/security/cloud_siem/investigate_security_signals"
+- link: "/security/cloud_siem/triage_and_investigate/investigate_security_signals"
   tag: "Documentation"
   text: "Investigate security signals"
 - link: "https://www.datadoghq.com/blog/cloud-siem-content-packs-whats-new-2024-09/"

@@ -1,7 +1,7 @@
 ---
 title: Automate the Remediation of Detected Threats with Webhooks
 further_reading:
-- link: "/security/cloud_siem/investigate_security_signals"
+- link: "/security/cloud_siem/triage_and_investigate/investigate_security_signals"
   tag: "Documentation"
   text: "Start investigating signals in the Signals Explorer"
 aliases:
