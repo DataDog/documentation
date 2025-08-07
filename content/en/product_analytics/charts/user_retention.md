@@ -10,9 +10,9 @@ further_reading:
 ---
 
 ## Overview
-Retention Analysis allows you to measure how often users are successfully returning to a page or action. By tracking user retention over time, you can gain insights into overall user satisfaction.
+Retention Analysis measures how often users are successfully returning to a page or action helping you assess the ongoing value of your products and features.
 
-User retention is measured within a given cohort of users that you define. A cohort is a group of users who participate in an initial event, such as clicking a link. A user in the cohort is considered retained if they subsequently complete a return event, such as clicking the same link again or clicking a **Proceed to Payment** button. 
+User retention is measured within a given cohort of users that you define. A cohort is a group of users who performed the start event, such as clicking a link. A user in the cohort is considered retained if they subsequently complete the configured return event, such as clicking the same link again or clicking a **Proceed to Payment** button. 
 
 Only views and actions can act as events.
 
@@ -41,21 +41,31 @@ For each cohort and return period,`Return on or after` calculates the percentage
 
 ## Retention calculation and grouping 
 
-### Weighted average cohort
+### Calculating the weighted average cohort
+The weighted average cohort summarizes overall cohort behavior by accounting for cohort size. Larger cohorts have more influence on the final value, making the result more representative than a simple average.
 
-The following retention graph displays the percentage of users who completed a return event each week during the past month. The goal of this graph is to sum up the overall retention across cohorts using the weighted average, the weights are coming from the cohort sizes.
+This weighted average calculation is applied across all [visualization types](#visualization-types). For example, in the retention grid, the weighted average is used to populate the summary cell for each time interval. 
 
-For example, the 91% after 1 week shown in this graph...
+To compute the value for a specific interval (such as Week 1 in the retention grid), multiply each cohort's value by its size, sum the results, and divide by the total cohort size. The formula is:
 
-{{< img src="product_analytics/retention/pana_retention_weighed_avg.png" alt="Example Retention Analysis graph" style="width:80%;" >}}
+```
+Weighted Average = (Σ (cohort_value × cohort_size)) / (Σ cohort_size)
+```
 
-... is computed using the following logic:
+The weighted average retention of **91% after 1 week** shown in the following retention graph is calculated as follows:
+
 ```
 (99 * 1.8k + 92 * 2.35k + 81 * 1.75k) / (1.8k + 2.35k + 1.75k)
 ```
 
+This means each cohort's retention rate is scaled by its number of users before contributing to the overall metric.
+
+
+{{< img src="product_analytics/retention/pana_retention_weighed_avg.png" alt="Example Retention Analysis graph" style="width:80%;" >}}
+
+
 <div class="alert alert-info">
-<strong>Note:</strong> The retention chart displays grey when partial data is available for a given time period or cohort. This is because the time period is not finished and Datadog cannot yet accurately compute the retention rate. 
+<strong>Note:</strong> The retention chart displays greyed-out values when data is partial or incomplete. This occurs when the time period is ongoing and retention cannot yet be fully calculated
 </div>
 
 <!-- You can further scope the retention measure based on when the return event occurs to identify the users who have completely churned from a product or feature. 
@@ -81,7 +91,7 @@ To build a retention graph, navigate to **[Product Analytics > Charts][1]**, cli
 ### 2. Define the the measures
 1. Select `Retention rate` to see the data in percentages, or `Unique users` to see the absolute number of users. 
 2. Scope the retention measure `Return on or after` or `Return on` based on when the return event occurs.
-3. Choose the timeframe (day, week or month) which define the rows in your diagram, then scope to the appropriate duration for your columns. For example, in the `Measure by` section, you can select `Each week` and have the duration of this measure be for the past month. 
+3. Choose the timeframe on which define you want to analyze user retention. Select a period size (day, week, or month) to define  how return events are goruped in the analysis.
 
 {{< img src="product_analytics/retention/pana_retention_timeframes_ui.png" alt="Example Retention Analysis graph" style="width:100%;" >}}
 
