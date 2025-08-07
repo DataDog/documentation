@@ -1,6 +1,7 @@
 ---
 title: Datadog Forwarder を使用した Go サーバーレスアプリケーションのインスツルメンテーション
 ---
+
 ## 概要
 
 <div class="alert alert-warning">
@@ -16,7 +17,7 @@ Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serve
 
 [AWS インテグレーション][1]と [Datadog Forwarder][2] をインストールしたら、手順に従ってアプリケーションをインスツルメントし、Datadog にメトリクス、ログ、トレースを送信します。
 
-## 構成
+## 設定
 
 ### インストール
 
@@ -31,7 +32,7 @@ go get github.com/DataDog/datadog-lambda-go
 関数をインスツルメントするには、次の手順に従います。
 
 1. 環境変数 `DD_FLUSH_TO_LOG` と `DD_TRACE_ENABLED` を `true` に設定します。
-2. Lambda 関数ハンドラーを宣言するファイルに必要なパッケージをインポートします。
+2. Lambda 関数ハンドラーを宣言するファイルに必要なパッケージをインポートします。{{% tracing-go-v2 %}}
 
     ```go
     package main
@@ -39,8 +40,8 @@ go get github.com/DataDog/datadog-lambda-go
     import (
       "github.com/aws/aws-lambda-go/lambda"
       "github.com/DataDog/datadog-lambda-go"
-      "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-      httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+      "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+      httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
     )
     ```
 3. Datadog Lambda ライブラリが提供するラッパーを使用して、Lambda 関数ハンドラーをラップします。
@@ -84,7 +85,7 @@ go get github.com/DataDog/datadog-lambda-go
 1. [まだの場合は、Datadog Forwarder をインストールします][2]。
 2. [Datadog Forwarder を関数のロググループにサブスクライブします][4]。
 
-### タグ
+### Tag
 
 これはオプションですが、Datadog は、[統合サービスタグ付け][5]向けに、サーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることをお勧めします。
 
@@ -148,3 +149,4 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 [5]: /ja/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
 [6]: https://app.datadoghq.com/functions
 [7]: /ja/serverless/custom_metrics?tab=go
+[8]: /ja/tracing/trace_collection/custom_instrumentation/go/migration

@@ -1,80 +1,32 @@
 ---
 app_id: convox
-app_uuid: 4476973b-6e79-4861-a321-7e24e581873b
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: []
-      metadata_path: metadata.csv
-      prefix: convox.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10006
-    source_type_name: Convox
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Convox
-  sales_email: help@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
 - cloud
 - configuration & deployment
 - containers
-custom_kind: インテグレーション
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/convox/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: convox
-integration_id: convox
-integration_title: Convox
-integration_version: ''
-is_public: true
-manifest_version: 2.0.0
-name: convox
-public_title: Convox
-short_description: Convox は、プライバシーの完全保護を保全なしで実現できるよう設計されたオープンソースの PaaS です。
+custom_kind: integration
+description: Convox is an open-source PaaS designed for total privacy and zero upkeep.
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-aws-ecs-convox-integration/
+  tag: blog
+  text: Monitor your AWS ECS platform with Convox and Datadog
+integration_version: 1.0.0
+media: []
 supported_os:
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::クラウド
-  - Category::構成 & デプロイ
-  - Category::コンテナ
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Convox は、プライバシーの完全保護を保全なしで実現できるよう設計されたオープンソースの PaaS です。
-  media: []
-  overview: README.md#Overview
-  resources:
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/monitor-aws-ecs-convox-integration/
-  support: README.md#Support
-  title: Convox
+title: Convox
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
-
-
 ## 概要
 
 Convox からリアルタイムにメトリクスを取得して、コンテナのパフォーマンスを視覚化します。
 
-![Convox インテグレーションダッシュボードウィジェット][1]
+![Convox integration dashboard widget](https://raw.githubusercontent.com/DataDog/integrations-extras/master/convox/images/snapshot.png)
 
 ## セットアップ
 
-[Convox ドキュメント][2]を参照して、Datadog インテグレーションを設定してください。
+See the [Convox documentation](https://docs.convox.com/integrations/monitoring/datadog) to set up the Datadog integration.
 
 ### Datadog Agent のデプロイ
 
@@ -98,7 +50,7 @@ $ convox scale agent --count=3 --cpu=10 --memory=128
 
 Rack でオートスケーリングが有効になっている場合は、Rack のインスタンス数に合わせて Datadog Agent の数を動的にスケーリングする必要があります。
 
-詳しくは、[Listening for ECS CloudWatch Events][3] チュートリアルをご覧ください。
+For more information, see the [Listening for ECS CloudWatch Events](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_cwet.html) tutorial.
 
 ## 収集データ
 
@@ -110,7 +62,7 @@ Convox インテグレーションには、メトリクスは含まれません�
 
 Convox インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービス チェック
 
 Convox インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -118,19 +70,12 @@ Convox インテグレーションには、サービスのチェック機能は�
 
 環境変数を `convox.yml` ファイルで構成する場合、`environment` パラメーターは `services` パラメーターと同じレベルで定義する必要があります。
 
-![同じレベルで定義された Environment と Services のパラメーター][4]
+![The Environment and Services parameters defined on the same level](https://raw.githubusercontent.com/DataDog/integrations-extras/master/convox/images/setting_environment_variables.png)
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+お問合せは、[Datadog サポート](https://docs.datadoghq.com/help/) まで。
 
 ## その他の参考資料
 
-お役に立つドキュメント、リンクや記事:
+役立つドキュメント、リンク、記事:
 
-- [Convox と Datadog で AWS ECS プラットフォームを監視する][6]
-
-[1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/convox/images/snapshot.png
-[2]: https://docs.convox.com/integrations/monitoring/datadog
-[3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_cwet.html
-[4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/convox/images/setting_environment_variables.png
-[5]: https://docs.datadoghq.com/ja/help/
-[6]: https://www.datadoghq.com/blog/monitor-aws-ecs-convox-integration/
+- [Monitor your Amazon ECS platform with Convox and Datadog](https://www.datadoghq.com/blog/monitor-aws-ecs-convox-integration/)

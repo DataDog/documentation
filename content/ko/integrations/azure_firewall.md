@@ -1,27 +1,13 @@
 ---
+app_id: azure_firewall
 categories:
 - azure
 - 클라우드
 - 네트워크
 custom_kind: 통합
-dependencies: []
 description: 주요 Azure Firewall 메트릭을 추적하세요.
-doc_link: https://docs.datadoghq.com/integrations/azure_firewall/
-draft: false
-git_integration_title: azure_firewall
-has_logo: true
-integration_id: ''
-integration_title: Microsoft Azure Firewall
-integration_version: ''
-is_public: true
-manifest_version: '1.0'
-name: azure_firewall
-public_title: Datadog-Microsoft Azure Firewall 통합
-short_description: 주요 Azure Firewall 메트릭을 추적하세요.
-version: '1.0'
+title: Microsoft Azure Firewall
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 개요
 
 Azure Firewall은 Azure Virtual Network 리소스를 보호하는 데 사용되는 클라우드 기반 네트워크 보안입니다.
@@ -32,13 +18,21 @@ Datadog Azure 통합을 사용해 Firewall 메트릭을 수집할 수 있습니�
 
 ### 설치
 
-아직 설정하지 않았다면, 먼저 [Microsoft Azure 통합][1]을 설정하세요. 그 외 다른 설치 단계는 없습니다.
+If you haven't already, set up the [Microsoft Azure integration](https://docs.datadoghq.com/integrations/azure/) first. There are no other installation steps.
 
 ## 수집한 데이터
 
-### 메트릭
-{{< get-metrics-from-git "azure_firewall" >}}
+### Metrics
 
+| | |
+| --- | --- |
+| **azure.network_azurefirewalls.application_rule_hit** <br>(count) | The number of times application rules were hit<br>_Shown as hit_ |
+| **azure.network_azurefirewalls.count** <br>(count) | The number of Azure firewalls|
+| **azure.network_azurefirewalls.data_processed** <br>(gauge) | The total amount of data processed by a firewall<br>_Shown as byte_ |
+| **azure.network_azurefirewalls.firewall_health** <br>(gauge) | Indicates the overall health of a firewall<br>_Shown as percent_ |
+| **azure.network_azurefirewalls.network_rule_hit** <br>(count) | The number of times network rules were hit<br>_Shown as hit_ |
+| **azure.network_azurefirewalls.snat_port_utilization** <br>(gauge) | The percentage of outbound SNAT ports currently in use<br>_Shown as percent_ |
+| **azure.network_azurefirewalls.throughput** <br>(gauge) | The throughput processed by a firewall<br>_Shown as bit_ |
 
 ### 이벤트
 
@@ -50,8 +44,4 @@ Azure Firewall 통합에는 서비스 점검이 포함되지 않습니다.
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원팀][3]에 문의하세요.
-
-[1]: https://docs.datadoghq.com/ko/integrations/azure/
-[2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_firewall/azure_firewall_metadata.csv
-[3]: https://docs.datadoghq.com/ko/help/
+도움이 필요하세요? [Datadog 지원 팀](https://docs.datadoghq.com/help/)에 문의하세요.
