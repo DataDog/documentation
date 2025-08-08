@@ -15,7 +15,7 @@ Live Messages enables you to view a live tail of messages that a specific servic
 1. Enable [Dynamic Instrumentation][1] on the services you want to use this feature on. 
 
    <div class="alert alert-info">
-   Dynamic Instrumentation requires <a href="/agent/remote_config/">Remote Configuration</a>.
+   Dynamic Instrumentation requires <a href="/remote_configuration">Remote Configuration</a>.
    </div>
 1. In [Datadog Settings][2], ensure that you have the following roles:
    - `Dynamic Instrumentation Read`
