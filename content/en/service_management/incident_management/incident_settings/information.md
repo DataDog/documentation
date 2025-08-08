@@ -55,7 +55,7 @@ If you convert an incident to private, Datadog archives the existing incident ch
 
 To convert an incident to private in Slack, use `/datadog incident private`.
 
-### Incident deletion
+## Incident deletion
 
 _Default: disabled_
 
@@ -63,7 +63,7 @@ When incident deletion is enabled for an incident type, any user with **Incident
 
 After you delete an incident, the incident no longer influences incident analytics, and no user can access it. Deleted incidents cannot be recovered.
 
-### Override status timestamps
+## Override status timestamps
 
 _Default: disabled_
 
@@ -71,7 +71,7 @@ When timestamp overrides are enabled in an incident type, any user with **Incide
 
 When enabled, you can define overrides for the `declared`, `detected`, and `resolved` timestamps on an incident. These overrides apply only in incident search and [analytics][3]. Overrides do not affect entries on the incident timeline. You can delete overrides.
 
-### Test incidents
+## Test incidents
 
 _Default: disabled_
 
