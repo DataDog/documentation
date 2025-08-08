@@ -13,7 +13,7 @@ The Payment Card Industry (PCI) Data Security Standard (DSS) has rigorous monito
 **Datadog's tools and policies comply with PCI v4.0**. To understand the full scope of Datadog's environment and how it relates to customer responsibilities under the relevant PCI-DSS controls, download the Customer Responsibility Matrix and the Attestation of Compliance (AoC) from the [Datadog Trust Center][1].
 
 Datadog's Attestation of Compliance (AoC) reflects the tools and policies we have in place to maintain a Connected PCI environment as a service provider. The Datadog platform supports connections to cardholder data environments (CDE) as a Connected PCI environment, but does not serve as a CDE itself for storing, processing, or transmitting cardholder data (CHD).
-It is the customer's responsibility to prevent any CHD from entering the Datadog platform. See below for some tools customers can use to meet this requirement.
+It is your responsibility to prevent any CHD from entering the Datadog platform. 
 
 ## Recommended tools for PCI compliance
 
