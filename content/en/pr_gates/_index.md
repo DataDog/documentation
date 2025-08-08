@@ -22,6 +22,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-flaky-tests/"
   tag: "Blog"
   text: "Flaky tests: their hidden costs and how to address flaky behavior"
+- link: "https://www.datadoghq.com/blog/datadog-iac-security/"
+  tag: "Blog"
+  text: "Prevent cloud misconfigurations from reaching production with Datadog IaC Security"
 ---
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
