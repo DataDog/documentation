@@ -1,0 +1,262 @@
+---
+title: Set Up the Datadog MCP Server
+private: true
+further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-remote-mcp-server/"
+  tag: "Blog"
+  text: "Connect your AI agents to Datadog tools and context using the Datadog MCP Server"
+- link: "bits_ai/mcp_server"
+  tag: "Documentation"
+  text: "Datadog MCP Server"
+- link: "developers/ide_plugins/vscode/?tab=cursor"
+  tag: "Documentation"
+  text: "Datadog Extension for Cursor"
+- link: "https://www.datadoghq.com/blog/datadog-cursor-extension/"
+  tag: "Blog"
+  text: "Debug live production issues with the Datadog Cursor extension"
+- link: "https://www.datadoghq.com/blog/openai-datadog-ai-devops-agent/"
+  tag: "Blog"
+  text: "Datadog + OpenAI: Codex CLI integration for AI‑assisted DevOps"
+---
+
+{{< callout url="https://www.datadoghq.com/product-preview/datadog-mcp-server/" >}}
+The Datadog MCP Server is in Preview. If you're interested in this feature and need access, complete this form. Read more about the MCP Server on the <a href="https://www.datadoghq.com/blog/datadog-remote-mcp-server/">Datadog blog</a>.
+{{< /callout >}}
+
+## Connect to the Datadog MCP Server
+
+The following instructions are for all MCP-compatible clients. For VS Code or Cursor, use the [Datadog extension](#connect-in-vs-code-or-cursor) for built-in access to the Datadog MCP Server.
+
+{{< tabs >}}
+{{% tab "Remote authentication" %}}
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For example, if you're using `app.datadoghq.com` to access Datadog, use the US1 site endpoint: `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp`.
+
+| Datadog Site | MCP Server Endpoint | 
+|--------|------|
+| **US1** (`app.datadoghq.com`) | `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp` |
+| **US3** (`us3.datadoghq.com`) | `https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp` |
+| **US5** (`us5.datadoghq.com`) | `https://mcp.us5.datadoghq.com/api/unstable/mcp-server/mcp` |
+| **EU1** (`app.datadoghq.eu`) | `https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp` |
+| **AP1** (`ap1.datadoghq.com`) | `https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp` |
+| **AP2** (`ap2.datadoghq.com`) | `https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp` |
+
+### Example configurations
+
+These examples are for the US1 site:
+
+* **Command line**: For Claude Code, run:
+  ```bash
+  claude mcp add --transport http datadog-mcp https://mcp.datadoghq.com/api/unstable/mcp-server/mcp
+  ```
+
+* **Configuration file**: Edit the configuration file for your AI agent:
+  * Codex CLI: `~/.codex/config.toml`
+  * Gemini CLI: `~/.gemini/settings.json`
+
+  ```json
+  {
+    "mcpServers": {
+      "datadog": {
+        "type": "http",
+        "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
+      }
+    }
+  }
+  ```
+
+[1]: /getting_started/site/
+{{% /tab %}}
+
+{{% tab "Local binary authentication" %}}
+Use this option if direct remote authentication is not available for you.
+
+1. Install the MCP Server binary:
+    * macOS and Linux:
+      ```bash
+      curl -sSL https://coterm.datadoghq.com/mcp-cli/install.sh | bash
+      ```
+
+      This installs the MCP Server binary to `~/.local/bin/datadog_mcp_cli` and then you can use it like any other stdio MCP server.<br/><br/>
+
+    * Windows: Download the [Windows version][1].
+
+2. Run `datadog_mcp_cli login` manually to walk through the OAuth login flow.  
+
+    The MCP Server automatically starts the OAuth flow if a client needs it, but doing it manually lets you choose a [Datadog site][2] and avoid the AI client timing out.
+
+3. Configure your AI client to use the Datadog MCP Server. Follow your client's configuration instructions, as MCP Server setup varies between third-party AI clients.
+
+    For example, for Claude Code, add this to `~/.claude.json`, making sure to replace `<USERNAME>` in the command path:
+
+      ```json
+            "mcpServers": {
+              "datadog": {
+                "type": "stdio",
+                "command": "/Users/<USERNAME>/.local/bin/datadog_mcp_cli",
+                "args": [],
+                "env": {}
+              }
+            }
+      ```
+
+    Alternatively, you can also configure Claude Code by running the following:
+      ```bash
+      claude mcp add datadog --scope user -- ~/.local/bin/datadog_mcp_cli
+      ```
+
+[1]: https://coterm.datadoghq.com/mcp-cli/datadog_mcp_cli.exe
+[2]: /getting_started/site/
+{{% /tab %}}
+{{< /tabs >}}
+
+## Connect in VS Code or Cursor
+
+Datadog's [VS Code and Cursor extension][1] includes built-in access to the Datadog MCP Server. Benefits include:
+
+* No additional MCP Server setup after you install the extension and connect to Datadog.
+* One-click transitions to switch between multiple Datadog organizations.
+* Better fixes from **Fix in Chat** on Code Insights (issues from Error Tracking, Code Vulnerabilities, and Library Vulnerabilities), informed by context from the MCP Server.
+
+### Install the IDE extension
+
+1. Ensure you have an active version of [Node.js][2] installed on your local machine.  
+2. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. To find the MCP Server configuration:
+   - VS Code: Open the command palette (`Shift` + `Cmd/Ctrl` + `P`) and run `MCP: Open User Configuration`.
+   - Cursor: Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`) and select the **Tools & Integrations** tab.
+3. Install the Datadog extension following [these instructions][3]. If you have the extension installed already, make sure it's the latest version, as new features are released regularly.  
+4. Sign in to your Datadog account. If you have multiple accounts, use the account included in your Product Preview.
+    {{< img src="bits_ai/mcp_server/ide_sign_in.png" alt="Sign in to Datadog from the IDE extension" style="width:70%;" >}}
+5. Open a project or workspace.
+6. **Restart the IDE.**
+7. Confirm the Datadog MCP Server is available and the [tools](#available-tools) are listed in your IDE:
+    - VS Code: Open the chat panel, select Agent mode, and click the **Configure Tools** button.
+       {{< img src="bits_ai/mcp_server/vscode_configure_tools_button.png" alt="Configure Tools button in VS Code" style="width:70%;" >}}
+    - Cursor: Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), and select the **Tools & Integrations** tab.
+
+## Available tools
+
+This section lists the tools available in the Datadog MCP Server and provides example prompts for using them.
+
+<div class="alert alert-warning">Datadog MCP Server tools are under significant development and are subject to change. We encourage you to share any feedback, use cases, or issues encountered with your prompts and queries.</div>
+
+### `ask_docs`
+Returns AI-generated answers to Datadog questions, sourced from [Datadog documentation][4].
+- "How do you enable Datadog profiling in Python?"
+- "What's the best way to correlate logs and traces?"
+- "How does RUM auto-instrumentation work?"
+
+### `get_active_hosts_count`
+Returns the number of active and up hosts in Datadog.
+
+- "How many hosts are currently active in our infrastructure?"
+- "Show me the active host count from the last 2 hours."
+- "What's our current infrastructure size based on active hosts?"
+
+### `get_events`
+Searches events like monitor alerts, deployment notifications, infrastructure changes, security findings, and service status changes.
+
+- "Show me all deployment events from the last 24 hours."
+- "Find events related to our production environment with error status."
+- "Get events tagged with `service:api` from the past hour."
+
+**Note**: See the [Event Management API][5] for more details.
+
+### `get_incident`
+Retrieves detailed information about an incident.
+
+- "Get details for incident ABC123."
+- "What's the status of incident ABC123?"
+- "Retrieve full information about the Redis incident from yesterday."
+
+**Note**: The tool is operational but does not yet include incident timeline data.
+
+### `get_metrics`
+Queries and analyzes historical or real-time metric data, supporting custom queries and aggregations.
+
+- "Show me CPU utilization metrics for all hosts in the last 4 hours."
+- "Get Redis latency metrics for the production environment."
+- "Display memory usage trends for our database servers."
+
+### `get_monitors`
+Retrieves information about Datadog monitors, including their statuses, thresholds, and alert conditions.
+
+- "List all monitors that are currently alerting."
+- "Show me monitors related to our payment service."
+- "Find monitors tagged with `team:infrastructure`."
+
+### `get_trace`
+Fetches a complete trace from Datadog APM using a trace ID.
+
+- "Get the complete trace for ID 7d5d747be160e280504c099d984bcfe0."
+- "Show me all spans for trace abc123 with timing information."
+- "Retrieve trace details including database queries for ID xyz789."
+
+**Note**: Large traces with thousands of spans may be truncated (and indicated as such) without a way to retrieve all spans.
+
+### `list_dashboards`
+Lists available Datadog dashboards and key details.
+
+- "Show me all available dashboards in our account."
+- "List dashboards related to infrastructure monitoring."
+- "Find shared dashboards for the engineering team."
+
+**Note**: This tool lists relevant dashboards but provides limited detail about their contents.
+
+### `list_hosts`
+Lists and provides information about monitored hosts, supporting filtering and searching.
+
+- "Show me all hosts in our production environment."
+- "List unhealthy hosts that haven't reported in the last hour."
+- "Get all hosts tagged with `role:database`."
+
+### `list_incidents`
+Retrieves a list of Datadog incidents, including their state, severity, and metadata.
+
+- "Show me all active incidents by severity."
+- "List resolved incidents from the past week."
+- "Find incidents that are customer-impacting."
+
+### `list_metrics`
+Lists available metrics, with options for filtering and metadata.
+
+- "Show me all available Redis metrics."
+- "List CPU-related metrics for our infrastructure."
+- "Find metrics tagged with `service:api`."
+
+### `list_services`
+Lists services in Datadog's Software Catalog with details and team information.
+
+- "Show me all services in our microservices architecture."
+- "List services owned by the platform team."
+- "Find services related to payment processing."
+
+### `list_spans`
+Retrieves spans from APM traces with filters such as service, time, resource, and so on.
+
+- "Show me spans with errors from the checkout service."
+- "Find slow database queries in the last 30 minutes."
+- "Get spans for failed API requests to our payment service."
+
+### `search_logs`
+Searches logs with filters (time, query, service, host, storage tier, and so on) and returns log details. Renamed from `get_logs`.
+
+- "Show me error logs from the nginx service in the last hour."
+- "Find logs containing 'connection timeout' from our API service."
+- "Get all 500 status code logs from production."
+
+### `search_rum_events`
+Search Datadog RUM events using advanced query syntax.
+
+- "Show JavaScript errors and console warnings in RUM."
+- "Find pages that are loading slowly (more than 3 seconds)."
+- "Show recent user interactions on product detail pages."
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /developers/ide_plugins/vscode/
+[2]: https://nodejs.org/en/about/previous-releases
+[3]: https://docs.datadoghq.com/developers/ide_plugins/vscode/?tab=cursor#installation
+[4]: /
+[5]: https://docs.datadoghq.com/api/latest/events/
