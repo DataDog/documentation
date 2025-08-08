@@ -1,7 +1,7 @@
 ---
 title: Create Policies and Custom Rules
 further_reading:
-- link: "/security/cloud_security_management/setup/"
+- link: "/security/workload_protection/"
   tag: "Documentation"
   text: "Setting Up Workload Protection"
 - link: "/security/workload_protection/agent_expressions"
