@@ -114,7 +114,7 @@ gs:
     image: "platform_rockylinux.png"
   - name: almalinux
     link: "https://app.datadoghq.com/account/settings/agent/latest?platform=centos"
-    image: "platform_linux.png"
+    image: "platform_almalinux.png"
   - name: fedora
     link: "https://app.datadoghq.com/account/settings/agent/latest?platform=fedora"
     image: "platform_fedora.png"
