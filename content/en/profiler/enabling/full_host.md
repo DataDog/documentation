@@ -77,7 +77,7 @@ To build the Full-Host Profiler directly on your machine, run:
 ## Service naming
 When using full-host profiling, Datadog captures profiles from all processes running on the host. The service name for each process is primarily determined by the `DD_SERVICE` environment variable.
 
-If `DD_SERVICE` is set, the profiler will use the value of `DD_SERVICE` as the service name. This is the recommended and most reliable approach.
+If `DD_SERVICE` is set, the profiler uses the value of `DD_SERVICE` as the service name. This is the recommended and most reliable approach.
 
 If `DD_SERVICE` is not set, Datadog will infer a service name by using the binary name, which for interpreted languages is the name of the interpreter. So for services written in Java, full host will set service:`java` or service:`python3.12`
 {{< img src="profiler/inferred_service_example.png" alt="Example of an inferred services within Profiling" style="width:50%;">}}
