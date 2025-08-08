@@ -82,7 +82,7 @@ If `DD_SERVICE` is set, the profiler uses the value of `DD_SERVICE` as the servi
 If `DD_SERVICE` is not set, Datadog infers a service name from the binary name. For interpreted languages, this is the name of the interpreter. For example, for a service written in Java, the full-host profiler sets the service name to `service:java`.
 {{< img src="profiler/inferred_service_example.png" alt="Example of an inferred services within Profiling" style="width:50%;">}}
 
-If multiple services are running under the same interpreter (for example, two separate Java applications on the same host), and neither sets `DD_SERVICE`, they will be grouped together under the same service name (e.g., service:java). Datadog cannot distinguish between them without a unique service name being provided.
+If multiple services are running under the same interpreter (for example, two separate Java applications on the same host), and neither sets `DD_SERVICE`, Datadog groups them together under the same service name. Datadog cannot distinguish between them unless you provide a unique service name.
 
 Always set `DD_SERVICE` for each service you want to profile and identify separately. This ensures accurate attribution and more actionable profiling data.
 
