@@ -1,5 +1,7 @@
 ---
-title: Instrumenting Google Cloud Run Containers with Sidecar
+title: Sidecar Instrumentation
+aliases:
+  - /serverless/google_cloud_run/containers_sidecar/
 further_reading:
 - link: 'https://www.datadoghq.com/blog/instrument-cloud-run-with-datadog-sidecar/'
   tag: 'Blog'
@@ -16,7 +18,7 @@ Google Cloud Run is a fully managed serverless platform for deploying and scalin
 
 This page provides instructions for instrumenting your Google Cloud Run containers with the Datadog Agent, which enables tracing, custom metrics, and direct log collection. The Datadog Agent runs in a sidecar container.
 
-<div class="alert alert-info">To instrument your Google Cloud Run applications with an in-process approach, see <a href="/serverless/google_cloud_run/containers_in_process">Instrument Google Cloud Run In-Process</a>.</div>
+<div class="alert alert-info">To instrument your Google Cloud Run applications with an in-process approach, see <a href="/serverless/google_cloud_run/containers/in_process">Instrument Google Cloud Run In-Process</a>.</div>
 
 <div class="alert alert-info">
 <strong>Have you set up your <a href="/integrations/google-cloud-platform/">Google Cloud integration</a>?</strong> Datadog recommends setting up the integration, which collects metrics and logs from Google Cloud services, before proceeding on to instrumentation. Remember to add the <code>cloud asset viewer</code> role to your service account and enable the Cloud Asset Inventory API in Google Cloud.
@@ -873,5 +875,5 @@ $statsd->increment('page.views', 1, array('environment'=>'dev'));
 [11]: /tracing/other_telemetry/connect_logs_and_traces/go
 [12]: /tracing/other_telemetry/connect_logs_and_traces/ruby
 [13]: /getting_started/tagging/unified_service_tagging/
-[14]: /serverless/google_cloud_run/containers_in_process
+[14]: /serverless/google_cloud_run/containers/in_process
 [15]: https://cloud.google.com/run/docs/configuring/services/labels
