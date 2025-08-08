@@ -2,15 +2,15 @@ platforms:
   - name: aix
     link: "agent/basic_agent_usage/aix/"
     image: "platform_aix.png"
-    category: "Linux"
+    category: "Host-based"
   - name: almalinux
     link: "agent/basic_agent_usage/centos/"
     image: "platform_almalinux.png"
-    category: "Linux"
+    category: "Host-based"
   - name: amazonlinux
     link: "agent/basic_agent_usage/amazonlinux/"
     image: "platform_amazonlinux.png"
-    category: "Linux"
+    category: "Host-based"
   - name: ansible
     link: "agent/basic_agent_usage/ansible/"
     image: "platform_ansible.png"
@@ -18,7 +18,7 @@ platforms:
   - name: centos
     link: "agent/basic_agent_usage/centos/"
     image: "platform_centos.png"
-    category: "Linux"
+    category: "Host-based"
   - name: chef
     link: "agent/basic_agent_usage/chef/"
     image: "platform_chef.png"
@@ -26,7 +26,7 @@ platforms:
   - name: deb
     link: "agent/basic_agent_usage/deb/"
     image: "platform_debian.png"
-    category: "Linux"
+    category: "Host-based"
   - name: docker
     link: "agent/docker/"
     image: "platform_docker.png"
@@ -34,7 +34,7 @@ platforms:
   - name: fedora
     link: "agent/basic_agent_usage/fedora/"
     image: "platform_fedora.png"
-    category: "Linux"
+    category: "Host-based"
   - name: heroku
     link: "agent/basic_agent_usage/heroku/"
     image: "platform_heroku.png"
@@ -46,11 +46,11 @@ platforms:
   - name: osx
     link: "agent/basic_agent_usage/osx/"
     image: "platform_macos.png"
-    category: "macOS"
+    category: "Host-based"
   - name: Oracle
     link: "agent/basic_agent_usage/oracle/"
     image: "platform_oracle.png"
-    category: "Linux"  
+    category: "Host-based"  
   - name: puppet
     link: "agent/basic_agent_usage/puppet/"
     image: "platform_puppet.png"
@@ -58,11 +58,11 @@ platforms:
   - name: redhat
     link: "agent/basic_agent_usage/redhat/"
     image: "platform_redhat.png"
-    category: "Linux"
+    category: "Host-based"
   - name: rockylinux
     link: "agent/basic_agent_usage/centos/"
     image: "platform_rockylinux.png"
-    category: "Linux"
+    category: "Host-based"
   - name: salt
     link: "agent/basic_agent_usage/saltstack/"
     image: "platform_saltstack.png"
@@ -70,19 +70,19 @@ platforms:
   - name: suse
     link: "agent/basic_agent_usage/suse/"
     image: "platform_suse.png"
-    category: "Linux"
+    category: "Host-based"
   - name: ubuntu
     link: "agent/basic_agent_usage/ubuntu/"
     image: "platform_ubuntu.png"
-    category: "Linux"
+    category: "Host-based"
   - name: windows
     link: "agent/basic_agent_usage/windows/"
     image: "platform_windows.png"
-    category: "Windows"
+    category: "Host-based"
   - name: sccm
     link: "agent/basic_agent_usage/sccm/"
     image: "platform_sccm.png"
-    category: "Windows"
+    category: "Host-based"
   - name: source
     link: "agent/basic_agent_usage/source/"
     image: "platform_fromsource.png"
@@ -114,7 +114,7 @@ gs:
     image: "platform_rockylinux.png"
   - name: almalinux
     link: "https://app.datadoghq.com/account/settings/agent/latest?platform=centos"
-    image: "platform_almalinux.png"
+    image: "platform_linux.png"
   - name: fedora
     link: "https://app.datadoghq.com/account/settings/agent/latest?platform=fedora"
     image: "platform_fedora.png"
