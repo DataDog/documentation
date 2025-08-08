@@ -11,7 +11,7 @@ further_reading:
 - link: "/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration"
   tag: "Documentation"
   text: "Dynamic Instrumentation"
-- link: "/security/cloud_security_management/setup/"
+- link: "/security/workload_protection/"
   tag: "Documentation"
   text: "Setting Up Workload Protection"
 - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
