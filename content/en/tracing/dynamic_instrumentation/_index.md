@@ -31,7 +31,7 @@ further_reading:
 
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
- Dynamic Instrumentation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}), as it requires <a href="/agent/remote_config/">Remote Configuration</a> to be enabled.
+ Dynamic Instrumentation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}), as it requires <a href="/remote_configuration">Remote Configuration</a> to be enabled.
 </div>
 {{% /site-region %}}
 
@@ -218,7 +218,7 @@ You can use a *span tag probe* as an alternative to [using Custom Instrumentatio
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/
-[2]: /agent/remote_config/
+[2]: /tracing/guide/remote_config
 [3]: https://github.com/DataDog/dd-trace-java
 [4]: https://github.com/DataDog/dd-trace-py
 [5]: https://github.com/DataDog/dd-trace-dotnet

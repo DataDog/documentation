@@ -1,10 +1,5 @@
 ---
 title: Enabling App and API Protection for Go
-aliases:
-  - /security_platform/application_security/getting_started/go
-  - /security/application_security/getting_started/go
-  - /security/application_security/threats/setup/threat_detection/go
-  - /security/application_security/threats_detection/go
 further_reading:
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
@@ -19,7 +14,6 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
 ---
-{{< partial name="app_and_api_protection/callout.html" >}}
 
 ## Overview
 
@@ -48,9 +42,15 @@ For detailed compatibility information, including supported Go versions, framewo
 
 ## Additional Resources
 
+- [Troubleshooting][1]
 - [Compatibility Information][2]
+- [How to create a Dockerfile for Go][3]
+- [App and API Protection SDK for Go][4]
 
+[1]: /security/application_security/setup/go/troubleshooting
 [2]: /security/application_security/setup/compatibility/go
+[3]: /security/application_security/setup/go/dockerfile
+[4]: /security/application_security/setup/go/sdk
 [5]: https://github.com/DataDog/dd-trace-go/
 [6]: https://datadoghq.dev/orchestrion/
 

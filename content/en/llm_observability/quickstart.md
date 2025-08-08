@@ -3,15 +3,12 @@ title: Quickstart
 aliases:
     - /tracing/llm_observability/quickstart
 further_reading:
-    - link: '/llm_observability'
-      tag: 'Documentation'
-      text: 'Learn about LLM Observability'
     - link: '/llm_observability/evaluations'
       tag: 'Evaluations'
       text: 'Configure Evaluations on your application'
     - link: '/llm_observability/instrumentation/custom_instrumentation'
       tag: 'Custom Instrumentation'
-      text: 'Custom instrumentation'
+      text: 'Instrument your application with custom spans'
 ---
 
 This page demonstrates using Datadog's LLM Observability SDK to instrument a Python or Node.js LLM application.
