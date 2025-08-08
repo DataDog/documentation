@@ -67,9 +67,9 @@ To use the MITRE ATT&CK map, do the following:
 2. Select **MITRE ATT&CK map**.
 3. Select one of more products in the filter <i class="icon-filter"></i>.
 4. Review the map for the following:
-   - Assessing Coverage: Quickly determine which attack techniques are well-covered and which are under-monitored.
+   - Assessing Coverage: Determine which attack techniques are well-covered and which are under-monitored.
    - Prioritizing Rule Creation: Focus on creating detection rules for techniques with low or no coverage.
-   - Streamlining Rule Management: Easily manage and update detection rules, ensuring they align with the latest threat intelligence.
+   - Streamlining Rule Management: Manage and update detection rules, ensuring they align with the latest threat intelligence.
 
 ## Beta detection rules
 
