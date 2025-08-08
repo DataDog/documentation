@@ -15,21 +15,22 @@ further_reading:
 ---
 
 ## Database identifier
-Each database instance monitored with Datadog has a unique identifier. For Postgres, MySQL, SQL Server and Oracle this identifier can be configured using the `database_identifier.template` path in the integration configuration.
+Each database instance that Datadog monitors has a unique identifier. For Postgres, MySQL, SQL Server, and Oracle, use the `database_identifier.template` path in the integration configuration to define instance identifiers.
 
-The default value for this is `$resolved_hostname`, which identifies the database with the resolved hostname of its host. This is typically the same as the specified connection `host`, but for example, if `host` is `localhost` then `$resolved_hostname` will be the `hostname` of the host.
+The default value for `database_identifier.template` is `$resolved_hostname`, which uses the resolved hostname of the database host as the identifier. 
+**Note**: The resolved hostname is usually the same as the specified connection `host`. In other cases, for example, if `host` is set to`localhost`, `$resolved_hostname` resolves to the actual hostname.
 
-Most users can leave this option as the default. Changing the value of `template` is primarily useful when multiple database instances are hosted on one machine.
+Most users do not need to change the default value. Changing the value of `template` is primarily useful when multiple database instances are hosted on one machine.
 
-| Each distinct instance identifier is billed as a host for Database Monitoring.
+Each distinct instance identifier is billed as a host for Database Monitoring.
 
 ## Reported hostname
-The `reported_hostname` configuration allows users to override the automatic resolution of `host` for a single database instance. This is useful when connecting to a database through a proxy to maintain the association between the DBM databse instance and any available metrics for the database host.
+The `reported_hostname` configuration allows users to override the automatic resolution of `host` for a single database instance. This is useful when connecting to a database through a proxy to maintain the association between the Database Monitoring database instance and any available metrics for the database host.
 
 
 ## Examples
 
-Multiple Postgres instances on one host each on a different port:
+Multiple Postgres instances on one host, each on a different port:
 ```
 database_identifier:
   template: $resolved_hostname:$port
@@ -47,12 +48,11 @@ database_identifier:
   template: $azure_name/$database
 ```
 
-MySQL instance with the same hostname running in multiple environments, where each is tagged with `env`. For example, `mydatabase.com.local` on `env:prod` and `env:staging` would use:
+A MySQL host called `mydatabase.com.local` running in multiple environments, where each is tagged with `env`, would use the following configuration to create database instances named `prod-mydatabase.com.local` and `staging-mydatabase.com.local`:
 ```
 database_identifier:
   template: $env-$resolved_hostname
 ```
-to create database instances named `prod-mydatabase.com.local` and `staging-mydatabase.com.local`.
 
 Connecting to an Oracle database with multiple CDBs through a proxy:
 ```
