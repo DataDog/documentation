@@ -6,13 +6,18 @@ further_reading:
 - link: "/data_security/"
   tag: "Documentation"
   text: "Review the main categories of data submitted to Datadog"
+- link: "/data_security/pci_compliance/"
+  tag: "Documentation"
+  text: "PCI DSS Compliance"
 ---
 
 <div class="alert alert-info">This page is about the security of data sent to Datadog. If you're looking for cloud and application security products and features, see the <a href="/security/" target="_blank">Security</a> section.</div>
 
 The Log Management product supports multiple [environments and formats][1], allowing you to submit to Datadog nearly any data you choose. This article describes the main security guarantees and filtering controls available to you when submitting logs to Datadog.
 
-**Note**: Logs can be viewed in various Datadog products. All logs viewed in the Datadog UI, including logs viewed in APM trace pages, are part of the Log Management product.
+**Notes**:
+- Logs can be viewed in various Datadog products. All logs viewed in the Datadog UI, including logs viewed in APM trace pages, are part of the Log Management product.
+- Datadog's tools and policies comply with PCI v4.0. For more information see [PCI DSS Compliance][10].
 
 ## Information security
 
@@ -58,3 +63,4 @@ All log submission endpoints are encrypted. These legacy endpoints are still sup
 [7]: /security/sensitive_data_scanner/
 [8]: /observability_pipelines/processors/sensitive_data_scanner
 [9]: /observability_pipelines/
+[10]: /data_security/pci_compliance/
