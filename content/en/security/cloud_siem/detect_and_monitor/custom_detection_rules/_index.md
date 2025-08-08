@@ -43,16 +43,6 @@ further_reading:
 
 Cloud SIEM detection rules analyze logs, Audit Trail events, and events from Event Management to generate security signals when threats are detected. You can use [out-of-the-box detections rules](#out-of-the-box-detection-rules) or [create custom detection rules](#custom-detection-rules). This document walks you through how to create a custom detection rule.
 
-### Out-of-the-box detection rules
-
-After you set up Cloud SIEM, [OOTB detection rules][6] automatically begin analyzing your logs, Audit Trail events, and events from Event Management. You can edit OOTB detection rules and:
-- Change the name of the rule.
-- Extend the query. The original query cannot be edited, but you can add a custom query to it.
-- Change the severity setting in the **Set conditions** section.
-- Modify the playbook.
-
-### Custom detection rules
-
 To create a detection rule in Datadog, navigate to the [Detection Rules page][1] and click **New Rule**.
 
 ## Detection mechanism
