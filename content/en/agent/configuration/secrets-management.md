@@ -560,19 +560,19 @@ Using environment variables is more complex. The variables must be configured wi
 
 #### General instructions to set up Hashicorp Vault
 1. Run your Hashicorp Vault. For more information, see the [official Hashicorp Vault documentation][3001]. 
-1. When running the vault, it outputs the variables `VAULT_ADDR` and `VAULT_TOKEN`. Export these as environment variables.
-1. To store your secrets in a certain path, run `vault secrets enable -path=<your path> -version=1 kv`. 
+2. When running the vault, it outputs the variables `VAULT_ADDR` and `VAULT_TOKEN`. Export these as environment variables.
+3. To store your secrets in a certain path, run `vault secrets enable -path=<your path> -version=1 kv`. 
   - **Note**: Only version 1 of the Hashicorp Secrets Engine is supported at this time.
-1. To add your key, run `vault kv put <your path> apikey=your_real_datadog_api_key`. To retrieve your key, run `vault kv get <your path>`.
-1. To write a policy that gives the permission to pull secrets from your vault, create a `*.hcl` file, and include the following permission:
+4. To add your key, run `vault kv put <your path> apikey=your_real_datadog_api_key`. To retrieve your key, run `vault kv get <your path>`.
+5. To write a policy that gives the permission to pull secrets from your vault, create a `*.hcl` file, and include the following permission:
 ```
 path "<your path>" {
   capabilities = ["read"]
 }
 ```
-  Then, run `vault policy write <policy-name> <path to *.hcl file>`
+6. Then, run `vault policy write <policy-name> <path to *.hcl file>`
 
-1. Choose the method of authenticating to your vault. If using the AWS instance profile method, run `vault auth enable aws`. 
+7. Choose the method of authenticating to your vault. If using the AWS instance profile method, run `vault auth enable aws`. 
 
 ### AWS instance profile instructions
 
