@@ -75,7 +75,7 @@ To build the Full-Host Profiler directly on your machine, run:
    ```
 
 ## Service naming
-When using full-host profiling, Datadog captures profiles from all processes running on the host. The service name for each process is primarily determined by the `DD_SERVICE` environment variable.
+When using full-host profiling, Datadog captures profiles from all processes running on the host. The service name for each process depends on the `DD_SERVICE` environment variable.
 
 If `DD_SERVICE` is set, the profiler uses the value of `DD_SERVICE` as the service name. This is the recommended and most reliable approach.
 
