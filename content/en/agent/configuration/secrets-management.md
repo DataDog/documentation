@@ -48,9 +48,9 @@ instances:
 
 ### Option 1: Using the Agent to resolve secrets from supported secret management solutions
 
-Starting in Agent version 7.69, the Datadog Agent includes a natively supported secret executable. This update allows you to configure the backend executable directly by setting the `secret_backend_type` and `secret_backend_config` options in the datadog.yaml file. 
+Starting in Agent version 7.69, the Datadog Agent includes a natively supported secret executable. This update allows you to configure the backend executable directly by setting the `secret_backend_type` and `secret_backend_config` options in the `datadog.yaml` file. 
 
-`secret_backend_type` is where the type of the backend is specified, and `secret_backend_config` is where additional configuration relevant for pulling secrets is included. To use this embedded executable, in your datadog.yaml file, add:
+`secret_backend_type` is where the type of the backend is specified, and `secret_backend_config` is where additional configuration relevant for pulling secrets is included. To use this embedded executable, add the following code to your `datadog.yaml` file:
 
 ```yaml
 secret_backend_type: <backend_type>
@@ -208,7 +208,7 @@ The **secretId** value can be either of the following:
 - The full ARN format. For example `arn:aws:secretsmanager:us-east-1:123456789012:secret:/DatadogAgent/Production-FOga1K`.
   - **Note**: The full ARN format is required when accessing secrets from an a different account where the AWS credential (or `sts:AssumeRole` credential) is defined.
   
-The **secretKey** is the json key referring to the actual secret that you are trying to pull the value of.
+The **secretKey** is the JSON key referring to the actual secret that you are trying to pull the value of.
 
 ```yaml
 # /etc/datadog-agent/datadog.yaml
@@ -243,7 +243,7 @@ property2: ENC[My-Secret-Backend-Secret;SecretKey2]
 property3: ENC[My-Secret-Backend-Secret;SecretKey3]
 ```
 
-You can define multiple secret backends, of the same or different types, in your yaml configuration. This allows you to use several supported backends (file.yaml, file.json, aws.ssm, and aws.secrets) within your Datadog Agent setup.
+You can define multiple secret backends, of the same or different types, in your yaml configuration. This allows you to use several supported backends (`file.yaml`, `file.json`, `aws.ssm`, and `aws.secrets`) within your Datadog Agent setup.
 
 #### Configuration examples
 
@@ -255,7 +255,7 @@ In the following examples, assume the AWS Secrets Manager secret's **friendly na
 }
 ```
 
-Each of the following examples access the secret from the Datadog Agent configuration yaml file(s) as such:
+Each of the following examples access the secret from the Datadog Agent configuration YAML file(s) as such:
 
 ```yaml
 # /etc/datadog-agent/datadog.yaml
@@ -392,7 +392,7 @@ In the following examples, assume the AWS Systems Manager Parameter Store secret
 /DatadogAgent/Production/api_key: (SecureString) "••••••••••••0f83"
 ```
 
-Each of the following examples access the secret from the Datadog Agent configuration yaml file(s) as such:
+Each of the following examples access the secret from the Datadog Agent configuration YAML file(s) as such:
 
 ```yaml
 # /etc/datadog-agent/datadog.yaml
@@ -529,7 +529,7 @@ In the following example, assume the Azure secret's name is `MySecretName` and i
 
 Assume also that the Key Vault's URL is `https://mykeyvault.vault.azure.net`
 
-The following example shows how to access the secret from the Datadog Agent configuration yaml file(s):
+The following example shows how to access the secret from the Datadog Agent configuration YAML file(s):
 
 ```yaml
 # /etc/datadog-agent/datadog.yaml
@@ -695,7 +695,7 @@ In the following examples, assume the Hashicorp Vault secret path prefix is `/Da
 /DatadogAgent/Production/api_key: (SecureString) "••••••••••••0f83"
 ```
 
-Each of the following examples access the secret from the Datadog Agent configuration yaml file(s) as such:
+Each of the following examples access the secret from the Datadog Agent configuration YAML file(s) as such:
 
 ```yaml
 # /etc/datadog-agent/datadog.yaml
