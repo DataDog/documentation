@@ -178,7 +178,7 @@ instances:
     port: 443 # optional port number, default is 80
 ```
 
-**Note**: In Windows Client OS environments, raw packets are not supported. To work around this, ensure the protocol is TCP, and use `syn_socket` tcp_method (Agent `v7.67+` is required). For example:
+**Note**: In Windows Client OS environments, raw packets are [not supported][5]. To work around this, set `protocol: TCP` and `tcp_method: syn_socket`. Agent `v7.67+` and [Windows version 2004 (10.0; Build 19041) or later][6] are required. For example:
 
 ```yaml
 init_config:
@@ -191,6 +191,8 @@ instances:
 ```
 
 [4]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
+[5]: https://learn.microsoft.com/en-us/windows/win32/winsock/tcp-ip-raw-sockets-2#limitations-on-raw-sockets
+[6]: https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-wsasetfailconnectonicmperror
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -397,18 +399,18 @@ Agent `v7.61+` is required.
 Agent `v7.59+` is required.
 
 To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.
-**Note:** Helm chart v3.109.1+ is required. For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
+**Note:** Helm chart v3.124.0+ is required. For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
 
 ```yaml
 datadog:
-  connections_monitoring:
-    enabled: true
-
-## Set to true to enable the Traceroute Module of the System Probe
+  networkPath:
+    connectionsMonitoring:
+      enabled: true
+  ## Set to true to enable the Traceroute Module of the System Probe
   traceroute:
     enabled: true
 
-## @param collector - custom object - optional
+  ## @param collector - custom object - optional
   ## Configuration related to Network Path Collector.
   #
   collector:

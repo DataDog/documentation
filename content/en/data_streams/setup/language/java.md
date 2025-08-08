@@ -132,7 +132,7 @@ Data Streams Monitoring can collect information from your self-hosted Kafka conn
 
 [1]: /agent
 [2]: /tracing/trace_collection/dd_libraries/java/
-[4]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[4]: /remote_configuration
 [5]: /data_streams/manual_instrumentation/?tab=java
 [6]: https://github.com/DataDog/dd-trace-java
 [7]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=wget

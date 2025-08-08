@@ -107,4 +107,4 @@ Integrations to **User Authentication Frameworks provides:**
 
 [1]: /tracing/trace_collection/compatibility/dotnet-core/
 [2]: /tracing/trace_collection/compatibility/dotnet-framework/
-[3]: /agent/remote_config/#enabling-remote-configuration
+[3]: /remote_configuration#enabling-remote-configuration

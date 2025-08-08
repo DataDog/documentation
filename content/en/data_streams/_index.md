@@ -52,7 +52,7 @@ Data Streams Monitoring instruments Kafka _clients_ (consumers/producers). If yo
 
 |   | Java | Python | .NET | Node.js | Go |
 | - | ---- | ------ | ---- | ------- | -- |
-| Apache Kafka | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Apache Kafka <br/>(self-hosted, Amazon MSK, Confluent Cloud, or any other hosting platform) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | Amazon Kinesis | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
 | Amazon SNS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
 | Amazon SQS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
