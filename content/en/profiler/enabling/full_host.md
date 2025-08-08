@@ -84,7 +84,6 @@ If `DD_SERVICE` is not set, Datadog infers a service name from the binary name. 
 
 If multiple services are running under the same interpreter (for example, two separate Java applications on the same host), and neither sets `DD_SERVICE`, Datadog groups them together under the same service name. Datadog cannot distinguish between them unless you provide a unique service name.
 
-Always set `DD_SERVICE` for each service you want to profile and identify separately. This ensures accurate attribution and more actionable profiling data.
 
 ## What's next?
 
