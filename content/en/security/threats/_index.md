@@ -34,7 +34,7 @@ By default, all OOTB Agent crypto mining threat detection rules are enabled and 
 
 Workload Protection Threats comes with more than 50 out-of-the-box detection rules that are maintained by a team of security experts. The rules surface the most important risks so that you can immediately take steps to remediate. Agent expression rules define the workload activities to be collected for analysis while backend detection rules analyze the activities and identify attacker techniques and other risky patterns of behavior.
 
-Use [Remote Configuration][7] to automatically deploy new and updated rules to the Agent. [Customize the rules][5] by defining how each rule monitors process, network, and file activity, [create custom rules][6], and [set up real-time notifications](#set-up-real-time-notifications) for new signals.
+Use [Cloud Security][1] with {{< tooltip glossary="Remote Configuration" case="title" >}} to automatically deploy new and updated rules to the Agent. [Customize the rules][5] by defining how each rule monitors process, network, and file activity, [create custom rules][6], and [set up real-time notifications](#set-up-real-time-notifications) for new signals.
 
 {{< img src="security/cws/threats_detection_rules.png" alt="Workload Protection detection rules in the Datadog app" width="100%">}}
 
@@ -71,7 +71,6 @@ Datadog is introducing a new feature called Active Protection to address the cry
 [4]: /security/notifications/#notification-channels
 [5]: /security/notifications/#detection-rule-notifications
 [6]: /security/workload_protection/agent_expressions
-[7]: /security/cloud_security_management/setup/
 [8]: /security/workload_protection/security_signals
 [9]: /network_monitoring/performance/
 [10]: /security/workload_protection/guide/active-protection
