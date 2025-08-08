@@ -34,17 +34,43 @@ Use status level settings to:
 
 {{< img src="/service_management/incidents/incident_settings/settings_info_helper_text.png" alt="Declare Incident Helper Text Settings" style="width:100%;">}}
 
-For the Declare Incident Helper Text settings, you can customize the helper text that appears alongside the severity and status level descriptions in the [Incident Creation Modal][4]. The helper text has Markdown support, which allows indented lists, text formatting, and hyperlinks to other instruction resources for incident responders.
+Helper text appears alongside the [Incident Creation Modal][4] and can help your incident responders make informed decisions about severity or other attributes when declaring an incident.
 
-## Additional information settings
+When defining helper text, you can use markdown to add indented lists, formatted text, and hyperlinks to other resources.
 
-| Setting     | Description    |
-| ---  | ----------- |
-| Private&nbsp;Incidents | Enable users in your organization to make incidents private. Private Incidents gives users the ability to limit access to incidents with sensitive information so that only responders of the incident can see its details.|
-| Incident&nbsp;Deletion | Incident Deletion gives users the ability to remove the incidents from the UI, including the analytics. By default, incident deletion is disabled. |
-| Portmortem&nbsp;Generation Anytime| Enable users to to generate a postmortem regardless of the incident status. When this setting is disabled, users can only generate postmortems after an incident has been resolved. |
-| Override Status Timestamps | Enable users to override the detection, declaration, and resolution timestamps of an incident. If an override is set, the new timestamp applies in incident search and analytics. |
+## Private incidents (incident visibility)
 
+_Default: Enabled_
+
+An incident's **visibility** determines what users in your Datadog organization can see it. If an incident's visbility is **organization**, any user with the **Incidents Read** permission can see it. If the incident's visibility is **private**, only the incident's responders or users with the **Private Incidents Global Access** permission can see it.
+
+On the incident search page, you can search for private incidents using the **visbility** facet on the left. You can also add conditions around incident visibility when defining incident [notification rules][2].
+
+### Private incidents in Slack
+
+When you declare private incidents, Datadog creates private Slack channels instead of public channels.
+
+If you convert an incident to private, Datadog archives the existing incident channel, creates a new public channel, and adds all existing responders to it.
+
+To convert an incident to private in Slack, use `/datadog incident private`.
+
+### Incident deletion
+
+_Default: Disabled_
+
+You can enable incident deletion for a particular incident type in Incident Management settings. It is disabled by default. When enabled, any user with **Incidents Write** can delete any incident of the incident type.
+
+Once you delete an incident, it no longer influences incident analytics, and no user can access it. Deletion cannot be undone.
+
+### Override status timestamps
+
+_Default: Disabled_
+
+When timestamp overrides are enabled, any user with **Incidents Write** can define timestamp overrides in any incident of that incident type.
+
+When enabled, you can define overrides for the `declared`, `detected`, and `resolved` timestamps on an incident. These overrides apply only in incident search and [analytics][3]. Overrides do not affect entries on the incident timeline. You can delete overrides.
+
+Timestamp overrides are disabled by default.
 
 [1]: https://app.datadoghq.com/incidents/settings#Information
 [2]: /service_management/incident_management/incident_settings/notification_rules
