@@ -49,7 +49,7 @@ To add a template variable in a dashboard:
 1. Click **Add Variable**.
 1. You can add both **Filter** and **Group by** variable types.
    1. Filter: Add a tag or attribute to filter dashboard queries and visualizations.
-   1. Group by: Add a tag or attribute to show a breakdown of groups within your data.<br>**Note**: Group by is only supported on select widgets---Timeseries, Table, Tree Map, Bar Chart, Wildcard, Distribution, Top List, Heatmap, Pie Chart, Geomap, Change, Scatterplot, Query Value, Host Map, and SLO Summary.
+   1. Group by: Add a tag or attribute to show a breakdown of groups within your data.<br>**Note**: `Group by` is only supported on select widgets---Timeseries, Table, Tree Map, Bar Chart, Wildcard, Distribution, Top List, Heatmap, Pie Chart, Geomap, Change, Scatterplot, Query Value, host map, and SLO Summary.
 1. (Optional) After selecting a tag, click the **+ Configure Dropdown Values** button to rename the variable and set default or available values.
 1. Click **Save**.
 1. To add more template variables, see [Edit a template variable](#edit-a-template-variable)
