@@ -845,31 +845,36 @@ menu:
       identifier: otel_kafka_metrics
       parent: otel_integrations
       weight: 809
+    - name: Kubernetes Metrics
+      url: opentelemetry/integrations/kubernetes_metrics/
+      identifier: otel_kubernetes_metrics
+      parent: otel_integrations
+      weight: 810
     - name: MySQL Metrics
       url: opentelemetry/integrations/mysql_metrics/
       identifier: otel_mysql_metrics
       parent: otel_integrations
-      weight: 810
+      weight: 811
     - name: NGINX Metrics
       url: opentelemetry/integrations/nginx_metrics/
       identifier: otel_nginx_metrics
       parent: otel_integrations
-      weight: 811
+      weight: 812
     - name: Podman Metrics
       url: opentelemetry/integrations/podman_metrics/
       identifier: otel_podman_metrics
       parent: otel_integrations
-      weight: 812
+      weight: 813
     - name: Runtime Metrics
       url: opentelemetry/integrations/runtime_metrics/
       identifier: otel_runtime_metrics
       parent: otel_integrations
-      weight: 813
+      weight: 814
     - name: Trace Metrics
       url: opentelemetry/integrations/trace_metrics/
       identifier: otel_trace_metrics
       parent: otel_integrations
-      weight: 814
+      weight: 815
     - name: Troubleshooting
       url: opentelemetry/troubleshooting/
       identifier: otel_troubleshooting
