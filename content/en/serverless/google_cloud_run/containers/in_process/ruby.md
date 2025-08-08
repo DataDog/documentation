@@ -13,6 +13,9 @@ further_reading:
 ---
 
 ## Setup
+
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-process/ruby">available on GitHub</a>.</div>
+
 1. **Install the Datadog Ruby tracer**.
 
    Add the `datadog` gem to your Gemfile:
