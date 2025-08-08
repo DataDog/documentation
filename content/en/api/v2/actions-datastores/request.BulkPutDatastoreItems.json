@@ -1,0 +1,23 @@
+{
+  "data": {
+    "attributes": {
+      "values": [
+        {
+          "28173b88-1a0e-001e-28c0-7664b6410518": "key1",
+          "value": {
+            "data": "example data 1",
+            "key": "value"
+          }
+        },
+        {
+          "28173b88-1a0e-001e-28c0-7664b6410518": "key2",
+          "value": {
+            "data": "example data 2",
+            "key": "value"
+          }
+        }
+      ]
+    },
+    "type": "items"
+  }
+}
