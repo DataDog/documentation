@@ -13,7 +13,7 @@ The instrumenter must be deployed to every region and account where you want to 
 ### Prerequisites
 
 - The [Datadog-AWS integration][1] is set up, and [resource collection][2] is enabled.
-- Your user account has the following roles:
+- Your user account has the following permissions:
    - Serverless AWS Instrumentation Read
    - Serverless AWS Instrumentation Write
 - Your API key must have [Remote Configuration access][4]
@@ -37,16 +37,16 @@ The instrumenter must be deployed to every region and account where you want to 
    The CloudFormation stack deploys the instrumenter function, **datadog-remote-instrumenter**, into your account and region. The stack also creates a CloudTrail and some adjacent resources.
 
 1. After the instrumenter function is deployed, select functions to instrument. 
-   You can select functions by tag or by function name. To enable instrumentation for multiple functions at once, you could apply a custom tag (for example, `dd_serverless_instrument:true`) to all the functions you want to instrument, and use this tag to select all of your desired functions.
+   You can select functions by tag or by function name. To enable instrumentation for multiple functions at once, you could apply a custom tag (for example, `dd_serverless_instrument:true`) to all the functions you want to instrument, and use this tag to select all of your desired functions. Tag matching is case-insensitive.
    
    After you finish your selections, click **Enable Remote Instrumentation**.
 
-1. Confirm your function selections. You can also set the layer version, which is used for all future instrumentation. This version remains fixed until you manually update it. Updates can take a few minutes to be applied.
+1. Confirm your function selections. You can also set layer versions and toggle logging and tracing. These settings are used for all future instrumentation and remain fixed until you manually update them. Updates can take a few minutes to be applied.
 
 ## Skipped functions
-Datadog recommends that you only instrument Lambda functions with a memory size greater than 256 MB. If you are comfortable with adding layers to smaller Lambdas, you can change the setting in the CloudFormation template. 
+Functions that have pre-existing Datadog layers or environment variables are considered manually instrumented. Manually instrumented functions are marked `manual` and skipped by the remote instrumenter to ensure there are no layer conflicts.
 
-The remote instrumenter also marks functions that have at least one layer with the tag `manual` and skips instrumentation to ensure there are no layer conflicts. 
+Datadog recommends that you only instrument Lambda functions with a memory size greater than 256 MB. To skip instrumenting smaller Lambdas, make sure they are not selected.
 
 ## Verification
 
