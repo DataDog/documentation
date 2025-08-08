@@ -72,4 +72,4 @@ The Datadog PHP library supports PHP version 7.0 and above on the following arch
 The library supports the use of all PHP frameworks, and also the use of no framework.
 
 [1]: /tracing/trace_collection/compatibility/php/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[2]: /remote_configuration#enabling-remote-configuration

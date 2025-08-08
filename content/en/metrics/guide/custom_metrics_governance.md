@@ -180,7 +180,7 @@ Even though a metric is not queried for the past 30, 60, or 90 days, your teams 
 
 Datadog's Metrics without Limits™ is a suite of features that also provide you with OOTB insights to assess the value of your actively queried metrics with the [Metrics Related Assets][15] side panel. A metrics related asset refers to any Datadog asset, such as a dashboard, notebook, monitor, or SLO that queries a particular metric. Use the **Tags** column to identify which specific tags are used on assets, ensuring your retain visibility when optimizing with Metrics without Limits™. Use related asset popularity and quantity to evaluate metric utility within your organization, enabling data-driven decisions. Gain a better understanding of how your team can use existing metrics to get more value from your observability spend. 
 
-{{< img src="metrics/related_assets_2025-07-31.png" alt="Metric detail side panel showing the Related Assets section. The example metric is applied to three dashboards" style="width:100%;" >}}
+{{< img src="metrics/related_assets_08_05_2025.png" alt="Metric detail side panel showing the Related Assets section. The example metric is applied to three dashboards" style="width:100%;" >}}
 
 To view a metric's related assets:
 1. Click on the metric name to open its details side panel.

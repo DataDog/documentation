@@ -316,7 +316,7 @@ menu:
       parent: basic_agent_usage
     - name: Alma Linux
       identifier: basic_agent_usage_alma_linux
-      url: agent/basic_agent_usage/centos/
+      url: agent/basic_agent_usage/alma/
       weight: 103
       parent: basic_agent_usage
     - name: Ansible
@@ -371,7 +371,7 @@ menu:
       parent: basic_agent_usage
     - name: Rocky Linux
       identifier: basic_agent_usage_rockylinux
-      url: agent/basic_agent_usage/centos/
+      url: agent/basic_agent_usage/rocky/
       weight: 114
       parent: basic_agent_usage
     - name: SaltStack
@@ -504,11 +504,6 @@ menu:
       url: agent/configuration/secrets-management/
       parent: agent_configuration
       weight: 609
-    - name: Remote Configuration
-      identifier: agent_remote_configuration
-      url: agent/remote_config
-      parent: agent
-      weight: 7
     - name: Fleet Automation
       identifier: agent_fleet_automation
       url: agent/fleet_automation
@@ -518,7 +513,7 @@ menu:
       identifier: remote_agent_management
       url: agent/fleet_automation/remote_management
       parent: agent_fleet_automation
-      weight: 801
+      weight: 802
     - name: Troubleshooting
       url: agent/troubleshooting/
       parent: agent
@@ -785,16 +780,21 @@ menu:
       identifier: otel_explore
       parent: opentelemetry_top_level
       weight: 7
-    - name: Correlate Logs and Traces
+    - name: Logs and Traces
       url: /opentelemetry/correlate/logs_and_traces/
       identifier: otel_logs
       parent: otel_explore
       weight: 701
-    - name: Correlate RUM and Traces
+    - name: Metrics and Traces
+      url: /opentelemetry/correlate/metrics_and_traces/
+      identifier: otel_metrics_traces
+      parent: otel_explore
+      weight: 702
+    - name: RUM and Traces
       url: /opentelemetry/correlate/rum_and_traces/
       identifier: otel_rum
       parent: otel_explore
-      weight: 702
+      weight: 703
     - name: Integrations
       url: opentelemetry/integrations/
       identifier: otel_integrations
@@ -1232,6 +1232,12 @@ menu:
       identifier: coterm_rules
       parent: coterm
       weight: 3
+    - name: Remote Configuration
+      pre: config-2
+      url: remote_configuration
+      identifier: remote_configuration
+      parent: essentials_heading
+      weight: 130000
     - name: Cloudcraft (Standalone)
       url: cloudcraft/
       pre: cloudcraft
@@ -4600,16 +4606,21 @@ menu:
       identifier: data_streams_live_messages
       parent: data_streams
       weight: 3
+    - name: Dead Letter Queues
+      url: data_streams/dead_letter_queues
+      identifier: data_streams_dead_letter_queues
+      parent: data_streams
+      weight: 4
     - name: Data Pipeline Lineage
       url: data_streams/data_pipeline_lineage
       identifier: data_streams_pipeline_lineage
       parent: data_streams
-      weight: 4
+      weight: 5
     - name: Metrics and Tags
       url: data_streams/metrics_and_tags
       identifier: data_streams_metrics_and_tags
       parent: data_streams
-      weight: 5
+      weight: 6
     - name: Data Jobs Monitoring
       url: data_jobs/
       pre: data-jobs-monitoring
@@ -5296,76 +5307,81 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_amazon_s3
       weight: 902
+    - name: Azure Event Hubs
+      url: observability_pipelines/sources/azure_event_hubs/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_azure_event_hubs
+      weight: 903
     - name: Datadog Agent
       url: observability_pipelines/sources/datadog_agent/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_datadog_agent
-      weight: 903
+      weight: 904
     - name: Filebeat
       url: observability_pipelines/sources/filebeat/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_filebeat
-      weight: 904
+      weight: 905
     - name: Fluent
       url: observability_pipelines/sources/fluent/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_fluent
-      weight: 905
+      weight: 906
     - name: Google Pub/Sub
       url: observability_pipelines/sources/google_pubsub/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_google_pubsub
-      weight: 906
+      weight: 907
     - name: HTTP Client
       url: observability_pipelines/sources/http_client/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_client
-      weight: 907
+      weight: 908
     - name: HTTP Server
       url: observability_pipelines/sources/http_server/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_server
-      weight: 908
+      weight: 909
     - name: Lambda Forwarder
       url: observability_pipelines/sources/lambda_forwarder/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_lambda_forwarder
-      weight: 909
+      weight: 910
     - name: Kafka
       url: observability_pipelines/sources/kafka/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_kafka
-      weight: 910
+      weight: 911
     - name: Logstash
       url: observability_pipelines/sources/logstash/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_logstash
-      weight: 911
+      weight: 912
     - name: Socket
       url: observability_pipelines/sources/socket/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_socket
-      weight: 912
+      weight: 913
     - name: Splunk HEC
       url: observability_pipelines/sources/splunk_hec/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_hec
-      weight: 913
+      weight: 914
     - name: Splunk TCP
       url: observability_pipelines/sources/splunk_tcp/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_tcp
-      weight: 914
+      weight: 915
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/sources/sumo_logic/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_sumo_logic
-      weight: 915
+      weight: 916
     - name: Syslog
       url: observability_pipelines/sources/syslog/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_syslog
-      weight: 916
+      weight: 917
     - name: Processors
       url: observability_pipelines/processors/
       parent: observability_pipelines
@@ -6377,6 +6393,11 @@ menu:
       parent: application_security_security_signals
       identifier: threats_attacker_clustering
       weight: 3
+    - name: Users Explorer
+      url: security/application_security/security_signals/users_explorer/
+      parent: application_security_security_signals
+      identifier: threats_users
+      weight: 4
     - name: Policies
       url: security/application_security/policies/
       parent: application_security
