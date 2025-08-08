@@ -2523,7 +2523,7 @@ menu:
       url: service_management/on-call/guides/
       parent: oncall
       identifier: oncall_guides
-      weight: 8
+      weight: 9
     - name: Status Pages
       url: service_management/status_pages/
       pre: status-page-wui
