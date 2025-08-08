@@ -113,7 +113,7 @@ Consult the documentation below for instructions specific to the product you're 
 | Fleet Automation | [Setup Fleet Automation][31] |
 | APM | [Configuration at runtime](/tracing/guide/remote_config/) |
 | Dynamic Instrumentation | [Getting started with Dynamic Instrumentation](/dynamic_instrumentation/#getting-started) |
-| Workload Protection | [Workload Protection](/security/threats/) |
+| Workload Protection | [Workload Protection][3] |
 | Observability Pipelines | Ensure that you've [enabled Remote Configuration on the API key][32] you're using for Observability Pipelines. |
 | Sensitive Data Scanner | [Cloud storage](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount) |
 | Private Action Runner | [Private Actions Overview](/actions/private_actions/) |
@@ -137,7 +137,7 @@ Instead of disabling Remote Configuration globally, Datadog recommends opting ou
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/site/
-[3]: /security/threats/setup
+[3]: /security/workload_protection/
 [4]: /observability_pipelines/#observability-pipelines-worker
 [5]: /account_management/rbac/permissions#api-and-application-keys
 [6]: /security/application_security/threats/setup/compatibility/
