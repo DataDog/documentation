@@ -1,10 +1,7 @@
 ---
 title: PHP Compatibility Requirements
-code_lang: php
-type: multi-code-lang
-code_lang_weight: 40
 aliases:
-  - /security/application_security/threats/setup/compatibility/php
+  - /security/application_security/threats/setup/compatibility/PHP
 ---
 
 ## App and API Protection capabilities support
