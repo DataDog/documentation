@@ -63,14 +63,14 @@ By mapping tactics and techniques, MITRE ATT&CK provides security teams with a c
 
 To use the MITRE ATT&CK map, do the following:
 
-1. Open Detection Rules in [SIEM][16] or [Workload Protection][17]. The MITRE ATT&CK map can be used for Application and API Protection also, but the map is only available in SIEM or Workload Protection. Application and API Protection users typically focus on OWASP concerns, but it is included in the MITRE ATT&CK map for all-inclusive security coverage.
+1. Open Detection Rules in [SIEM][16] or [Workload Protection][17].
 2. Select **MITRE ATT&CK map**.
 3. Select one of more products in the filter <i class="icon-filter"></i>.
 4. Review the map for the following:
    - Assessing Coverage: Determine which attack techniques are well-covered and which are under-monitored.
    - Prioritizing Rule Creation: Focus on creating detection rules for techniques with low or no coverage.
    - Streamlining Rule Management: Manage and update detection rules, ensuring they align with the latest threat intelligence.
-
+The MITRE ATT&CK map available in SIEM or Workload Protection, but you can select Application and API Protection in the filter. Application and API Protection is included in the MITRE ATT&CK map for all-inclusive security coverage.
 ## Beta detection rules
 
 Datadog's Security Research team continually adds new OOTB security detection rules. While the aim is to deliver high quality detections with the release of integrations or other new features, the performance of the detection at scale often needs to be observed before making the rule generally available. This gives Datadog's Security Research the time to either refine or deprecate detection opportunities that do not meet our standards.
