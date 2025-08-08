@@ -1,0 +1,13 @@
+{
+  "data": {
+    "attributes": {
+      "value": {
+        "28173b88-1a0e-001e-28c0-7664b6410518": "new-item-key",
+        "data": "example data",
+        "key": "value"
+      }
+    },
+    "type": "items",
+    "id": "e7e64418-b60c-4789-9612-895ac8423207"
+  }
+}

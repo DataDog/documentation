@@ -1,0 +1,25 @@
+{
+  "data": {
+    "attributes": {
+      "name": "datastore-name",
+      "primary_column_name": "primaryKey",
+      "values": [
+        {
+          "primaryKey": "key1",
+          "value": {
+            "data": "example data 1",
+            "key": "value"
+          }
+        },
+        {
+          "primaryKey": "key2",
+          "value": {
+            "data": "example data 2",
+            "key": "value"
+          }
+        }
+      ]
+    },
+    "type": "datastores"
+  }
+}
