@@ -1,5 +1,5 @@
 ---
-title: Detection Rules
+title: Custom Detection Rules
 type: documentation
 aliases:
  - /security_platform/detection_rules/cloud_siem
@@ -11,6 +11,7 @@ aliases:
  - /security/detection_rules/security_monitoring
  - /security/detection_rules/create_a_new_rule
  - /security/cloud_siem/log_detection_rules/
+ - /security/cloud_siem/detection_rules/
 further_reading:
 - link: "/cloud_siem/default_rules/"
   tag: "Documentation"
@@ -439,5 +440,5 @@ The rule deprecation process is as follows:
 [2]: /security/detection_rules/#clone-a-rule
 [3]: https://app.datadoghq.com/logs/
 [4]: https://app.datadoghq.com/security/rules
-[5]: /security/cloud_siem/historical_jobs/
+[5]: /security/cloud_siem/detect_and_monitor/historical_jobs/
 [6]: /security/default_rules/?category=cat-cloud-siem-log-detection#all
