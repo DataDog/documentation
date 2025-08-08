@@ -40,42 +40,42 @@ Deployment frequency (Fréquence de déploiement)
 : Fréquence à laquelle une organisation effectue des mises en production réussies.
 
 Change lead time (Délai de changement)
-: Temps nécessaire pour qu’un commit soit mis en production.
+: Temps nécessaire pour qu'un commit soit mis en production.
 
-Change failure rate (Taux d’échec de changement)
+Change failure rate (Taux d'échec de changement)
 : Pourcentage de déploiements entraînant une défaillance en production.
 
 Time to restore service (Temps de restauration du service)
-: Durée nécessaire à une organisation pour se remettre d’une défaillance en production.
+: Durée nécessaire à une organisation pour se remettre d'une défaillance en production.
 
-Définir et suivre les métriques DORA peut vous aider à identifier les axes d’amélioration de la rapidité et de la qualité de livraison logicielle de votre équipe ou de votre organisation.
+Définir et suivre les métriques DORA peut vous aider à identifier les axes d'amélioration de la rapidité et de la qualité de livraison logicielle de votre équipe ou de votre organisation.
 
 ## Configurer les métriques DORA
 
-Pour commencer à configurer les sources de données afin d’envoyer les événements de déploiement et d’échec vers Datadog, consultez la [documentation relative à la configuration][2].
+Pour commencer à configurer les sources de données afin d'envoyer les événements de déploiement et d'échec vers Datadog, consultez la [documentation relative à la configuration][2].
 
 ## Analyser les métriques DORA
 
-Une fois les sources de données configurées pour vos événements de déploiement et d’échec, rendez-vous dans [Software Delivery > DORA Metrics][4] pour identifier les améliorations ou régressions de chaque métrique. Vous pouvez également agréger les métriques par équipe, service, référentiel, environnement, période et [tags custom][8] pour comparer les tendances dans le temps.
+Une fois les sources de données configurées pour vos événements de déploiement et d'échec, rendez-vous dans [Software Delivery > DORA Metrics][4] pour identifier les améliorations ou régressions de chaque métrique. Vous pouvez également agréger les métriques par équipe, service, référentiel, environnement, période et [tags custom][8] pour comparer les tendances dans le temps.
 
-{{< img src="dora_metrics/dora_ui_3.png" alt="Vue d’ensemble des calculs des métriques DORA filtrés par le tag custom Language" style="width:100%;" >}}
+{{< img src="dora_metrics/dora_ui_3.png" alt="Vue d'ensemble des calculs des métriques DORA filtrés par le tag custom Language" style="width:100%;" >}}
 
-Cliquez sur **View Deployments** pour ouvrir un nouvel onglet affichant les métriques Deployment Frequency et Change Lead Time, ainsi qu’une liste des événements de déploiement.
+Cliquez sur **View Deployments** pour ouvrir un nouvel onglet affichant les métriques Deployment Frequency et Change Lead Time, ainsi qu'une liste des événements de déploiement.
 
-{{< img src="dora_metrics/deployments_list.png" alt="La répartition des déploiements affichant un détail des métriques ainsi qu’une liste des événements associés" style="width:100%;" >}}
+{{< img src="dora_metrics/deployments_list.png" alt="La répartition des déploiements affichant un détail des métriques ainsi qu'une liste des événements associés" style="width:100%;" >}}
 
-Cliquez sur **View Failures** pour ouvrir un panneau latéral affichant les métriques Change Failure Rate et Time To Restore, ainsi qu’une liste des événements d’échec.
+Cliquez sur **View Failures** pour ouvrir un panneau latéral affichant les métriques Change Failure Rate et Time To Restore, ainsi qu'une liste des événements d'échec.
 
-{{< img src="dora_metrics/failures_list.png" alt="La répartition des échecs affichant un détail des métriques ainsi qu’une liste des événements associés" style="width:100%;" >}}
+{{< img src="dora_metrics/failures_list.png" alt="La répartition des échecs affichant un détail des métriques ainsi qu'une liste des événements associés" style="width:100%;" >}}
 
 ## Utiliser les données des métriques DORA
 
 ### Exporter les widgets des métriques DORA
 Exportez vos widgets de visualisation vers des dashboards, des notebooks, ou ajoutez-les à des incidents existants.
 
-{{< img src="dora_metrics/dora_ui_2.png" alt="Cliquez sur l’icône Exporter pour ajouter le widget de visualisation à un incident, un dashboard ou un notebook." style="width:100%;" >}}
+{{< img src="dora_metrics/dora_ui_2.png" alt="Cliquez sur l'icône Exporter pour ajouter le widget de visualisation à un incident, un dashboard ou un notebook." style="width:100%;" >}}
 
-Cliquez sur l’icône **Export** de n’importe quelle visualisation pour l’ajouter à un incident, un dashboard ou un notebook. Pour en savoir plus sur les métriques calculées par les métriques DORA, consultez la [documentation relative aux données collectées][3].
+Cliquez sur l'icône **Export** de n'importe quelle visualisation pour l'ajouter à un incident, un dashboard ou un notebook. Pour en savoir plus sur les métriques calculées par les métriques DORA, consultez la [documentation relative aux données collectées][3].
 
 ### Créer des dashboards personnalisés
 
