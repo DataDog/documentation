@@ -48,6 +48,8 @@ instances:
 
 ### Option 1: Using the Agent to resolve secrets from supported secret management solutions
 
+*Note:* This option is not supported in Windows yet.
+
 Starting in Agent version 7.69, the Datadog Agent includes a natively supported secret executable. This update allows you to configure the backend executable directly by setting the `secret_backend_type` and `secret_backend_config` options in the `datadog.yaml` file. 
 
 `secret_backend_type` is where the type of the backend is specified, and `secret_backend_config` is where additional configuration relevant for pulling secrets is included. To use this embedded executable, add the following code to your `datadog.yaml` file:
