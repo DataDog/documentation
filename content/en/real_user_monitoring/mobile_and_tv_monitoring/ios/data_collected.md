@@ -79,12 +79,12 @@ The following device-related attributes are attached automatically to all events
 | `device.batteryLevel`                | number | The current battery level of the device (0.0 to 1.0).                                                    |
 | `device.brand`                       | string | The device brand as reported by the device (System User-Agent).                                          |
 | `device.brightnessLevel`             | number | The current screen brightness level (0.0 to 1.0).                                                        |
-| `device.locale`                      | string | The user’s locale as a language tag combining language and region (e.g. 'en-US').                        |
-| `device.locales`                     | array (string) | Ordered list of the user’s preferred system languages as IETF language tags.                     |
+| `device.locale`                      | string | The user's locale as a language tag combining language and region (e.g. 'en-US').                        |
+| `device.locales`                     | array (string) | Ordered list of the user's preferred system languages as IETF language tags.                     |
 | `device.model`                       | string | The device model as reported by the device (System User-Agent).                                          |
 | `device.name`                        | string | The device name as reported by the device (System User-Agent).                                           |
 | `device.powerSavingMode`             | boolean | Whether the device is in power saving mode.                                                             |
-| `device.timeZone`                    | string | The device’s current time zone identifier.                                                               |
+| `device.timeZone`                    | string | The device's current time zone identifier.                                                               |
 | `device.type`                        | string | The device type as reported by the device (System User-Agent).                                           |
 
 ### Connectivity
