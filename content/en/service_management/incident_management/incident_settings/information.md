@@ -29,15 +29,15 @@ Use status level settings to:
 1. Customize the descriptions of the statuses
 2. Enable the optional `Completed` status
 
-**Note**: Deleting the `Completed` status does not automatically update any incidents that are already in the `Completed` status, and it does not automatically update any [Incident Management Analytics][3] query that explicitly references it. Any notification rule that references the `Completed` status is disabled, as that rule is no longer valid.
+**Note**: Deleting the `Completed` status does not automatically update incidents in the `Completed` status and does not automatically update any [Incident Management Analytics][3] query that explicitly references it. Any notification rule that references the `Completed` status becomes disabled.
 
 ## Helper text
 
 {{< img src="/service_management/incidents/incident_settings/settings_info_helper_text.png" alt="Declare Incident Helper Text Settings" style="width:100%;">}}
 
-Helper text appears alongside the [Incident Creation Modal][4] and can help your incident responders make informed decisions about severity or other attributes when declaring an incident.
+Helper text appears alongside the [Incident Creation Modal][4] and helps your responders understand how they should define the incident.
 
-When defining helper text, you can use markdown to add indented lists, formatted text, and hyperlinks to other resources.
+You can use markdown in helper text to add indented lists, formatted text, and hyperlinks to other resources.
 
 ## Private incidents (incident visibility)
 
@@ -61,7 +61,7 @@ _Default: disabled_
 
 When incident deletion is enabled for an incident type, any user with **Incidents Write** can delete any incident of the incident type.
 
-Once you delete an incident, the incident no longer influences incident analytics, and no user can access it. Deleted incidents cannot be recovered.
+After you delete an incident, the incident no longer influences incident analytics, and no user can access it. Deleted incidents cannot be recovered.
 
 ### Override status timestamps
 
