@@ -17,7 +17,7 @@ The Datadog Agent allows you to securely manage secrets by integrating with any 
 
 ### How it works
 
-To reference a secret in your configuration, use the `ENC[<secret_id>]` notation. This tells the Agent to resolve the value using either the natively supported executable or your configured secret retrieval executable. The secret executable resolves the placeholder using your secrets management solution. It then injects the plain-text value into the config at runtime. The secret is fetched and loaded into memory but is never written to disk or sent to the Datadog backend.
+To reference a secret in your configuration, use `ENC[<secret_id>]`. This notation tells the Agent to resolve the value using either the natively supported executable or your configured secret retrieval executable. The secret executable resolves the placeholder using your secrets management solution. It then injects the plain text value into the config at runtime. The secret is fetched and loaded into memory but is never written to disk or sent to the Datadog backend.
 
 For example, the following configuration shows two secrets defined with `ENC[]`:
 ```
@@ -48,7 +48,7 @@ instances:
 
 ### Option 1: Using the Agent to resolve secrets from supported secret management solutions
 
-Starting in Agent version 7.69, the Datadog Agent includes a natively supported secret executable. This update allows you to configure the backend executable directly by setting the `secret_backend_type` and `secret_backend_config` options in the datadog.yaml file. 
+Starting in Agent version 7.69, the Datadog Agent includes a natively supported secret executable. This update allows you to configure the backend executable directly by setting the `secret_backend_type` and `secret_backend_config` options in the `datadog.yaml` file. 
 
 `secret_backend_type` is where the type of the backend is specified, and `secret_backend_config` is where additional configuration relevant for pulling secrets is included. To use this embedded executable, in your datadog.yaml file, add:
 
@@ -68,7 +68,7 @@ secret_backend_config:
 <!-- -------------------------------------------- START OF SECTION --------------------------------------------->
 
 # <!-- pre AWS tabs -->
-More specific setup instructions depends on the backend type used. Refer to the appropriate link for further information: 
+More specific setup instructions depend on the backend type used. Refer to the appropriate link for further information: 
 
 
 {{% collapse-content title="AWS Secret and SSM" level="h4" expanded=false id="id-for-anchoring" %}}
@@ -79,17 +79,17 @@ The secret executable utility supports the following AWS services:
 |`aws.secrets` |[AWS Secrets Manager][1000]                 |
 |`aws.ssm` |[AWS Systems Manager Parameter Store][1001] |
 
-#### AWS Session
+#### AWS session
 
-Supported AWS backends can leverage the Default Credential Provider Chain as defined by the [AWS SDKs][1002] and [CLI][1003]. As a result, the following order of precedence is used to determine the AWS backend service credential:
+Supported AWS backends can leverage the default credential provider chain as defined by the [AWS SDKs][1002] and [CLI][1003]. As a result, the following order of precedence is used to determine the AWS backend service credential:
 
-1. **Environment Variables**. These environment variables would have to be defined as environment variables within the Datadog Agent service configuration on the Datadog Agent host system.
+1. **Environment variables**:defined as environment variables within the Datadog Agent service configuration on the Datadog Agent host system.
 
-2. **CLI Configuration File**. Only the default CLI Configuration File of the Datadog Agent user is supported, for example, `${HOME}/.aws/config` or `%USERPROFILE%\.aws\config`. The Datadog Agent user is typically `dd-agent`.
+2. **CLI configuration file**. Only the default CLI configuration file of the Datadog Agent user, such as `${HOME}/.aws/config` or `%USERPROFILE%\.aws\config` is supported. The Datadog Agent user is typically `dd-agent`.
 
-3. **Instance Profile Credentials**. Container or EC2 hosts with an assigned [IAM Instance Profile][1004]
+3. **Instance profile credentials**: Container or EC2 hosts with an assigned [IAM instance profile][1004]
 
-Using environment variables or session profiles are more complex as they must be configured within the service (daemon) environment configuration or the `dd-agent` user home directory on each Datadog Agent host. 
+Using environment variables or session profiles are more complex. They must be configured within the service (daemon) environment configuration or the `dd-agent` user home directory on each Datadog Agent host. 
 
 Using IAM User Access Keys or an EC2 Instance Profile are simpler configurations which do not require additional Datadog Agent host configuration.
 
