@@ -16,7 +16,7 @@ further_reading:
 ---
 ## Overview
 
-Datadog tracing libraries collect data from an instrumented application. That data is sent to Datadog as traces and it may contain sensitive data such as personally identifiable information (PII). If you are ingesting sensitive data as traces into Datadog, remediations can be added at ingestion with [Sensitive Data Scanner][12]. You can also configure the Datadog Agent or the tracing library to remediate sensitive data at collection before traces are sent to Datadog. Datadog's tools and policies comply with PCI v4.0. For more information see [PCI DSS Compliance][14].
+Datadog tracing libraries collect data from an instrumented application. That data is sent to Datadog as traces and it may contain sensitive data such as personally identifiable information (PII). If you are ingesting sensitive data as traces into Datadog, remediations can be added at ingestion with [Sensitive Data Scanner][12]. You can also configure the Datadog Agent or the tracing library to remediate sensitive data at collection before traces are sent to Datadog. Datadog's tools and policies comply with PCI v4.0. For more information, see [PCI DSS Compliance][14].
 
 If the configurations described here do not cover your compliance requirements, reach out to [the Datadog support team][1].
 

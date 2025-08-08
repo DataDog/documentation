@@ -17,7 +17,7 @@ The Log Management product supports multiple [environments and formats][1], allo
 
 **Notes**:
 - Logs can be viewed in various Datadog products. All logs viewed in the Datadog UI, including logs viewed in APM trace pages, are part of the Log Management product.
-- Datadog's tools and policies comply with PCI v4.0. For more information see [PCI DSS Compliance][10].
+- Datadog's tools and policies comply with PCI v4.0. For more information, see [PCI DSS Compliance][10].
 
 ## Information security
 

@@ -28,7 +28,7 @@ To help maintain PCI compliance, **Datadog strongly recommends** the use of the 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://trust.datadoghq.com/?itemUid=53e1508c-665e-45a8-9ce0-03fdf9ae1efb&source=click
-[2]: https://docs.datadoghq.com/security/sensitive_data_scanner/
-[3]: https://docs.datadoghq.com/account_management/audit_trail/
-[4]: https://docs.datadoghq.com/security/workload_protection/
-[5]: https://docs.datadoghq.com/security/cloud_security_management/#track-your-organizations-health
+[2]: /security/sensitive_data_scanner/
+[3]: /account_management/audit_trail/
+[4]: /security/workload_protection/
+[5]: /security/cloud_security_management/#track-your-organizations-health
