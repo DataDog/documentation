@@ -48,7 +48,7 @@ instances:
 
 ### Option 1: Using the Agent to resolve secrets from supported secret management solutions
 
-*Note:* This option is not supported in Windows.
+*Note*: This option is not supported in Windows.
 
 Starting in Agent version 7.69, the Datadog Agent includes a natively supported secret executable. This update allows you to configure the backend executable directly by setting the `secret_backend_type` and `secret_backend_config` options in the `datadog.yaml` file. 
 
@@ -85,11 +85,11 @@ The secret executable utility supports the following AWS services:
 
 Supported AWS backends can leverage the default credential provider chain as defined by the [AWS SDKs][1002] and [CLI][1003]. As a result, the following order of precedence is used to determine the AWS backend service credential:
 
-1. **Environment variables:** Defined as environment variables within the Datadog Agent service configuration on the Datadog Agent host system
+1. **Environment variables**: Defined as environment variables within the Datadog Agent service configuration on the Datadog Agent host system
 
-2. **CLI configuration file:** Only the default CLI configuration file of the Datadog Agent user, such as `${HOME}/.aws/config` or `%USERPROFILE%\.aws\config`, is supported. The Datadog Agent user is typically `dd-agent`.
+2. **CLI configuration file**: Only the default CLI configuration file of the Datadog Agent user, such as `${HOME}/.aws/config` or `%USERPROFILE%\.aws\config`, is supported. The Datadog Agent user is typically `dd-agent`.
 
-3. **Instance profile credentials:** Container or EC2 hosts with an assigned [IAM instance profile][1004]
+3. **Instance profile credentials**: Container or EC2 hosts with an assigned [IAM instance profile][1004]
 
 Using environment variables or session profiles are more complex. They must be configured within the service (daemon) environment configuration or the `dd-agent` user home directory on each Datadog Agent host. 
 
@@ -202,7 +202,7 @@ secret_backend_config:
 ```
 
 
-If you grant the correct permissions on both the secret and the KMS customer-managed key, AWS will test cross-account access to Secrets Manager secrets. For more details, see the [AWS Secrets Manager documentation][101]
+If you grant the correct permissions on both the secret and the KMS customer-managed key, AWS tests cross-account access to Secrets Manager secrets. For more details, see the [AWS Secrets Manager documentation][101]
 
 
 The backend secret is referenced in your Datadog Agent configuration file with `ENC`, taking the form of `ENC[secretId;secretKey]`. 
@@ -210,7 +210,7 @@ The backend secret is referenced in your Datadog Agent configuration file with `
 The `secretId` value can be either of the following:
 - The secret friendly name, such as `/DatadogAgent/Production`
 - The full ARN format, such as `arn:aws:secretsmanager:us-east-1:123456789012:secret:/DatadogAgent/Production-FOga1K`
-  - **Note:** The full ARN format is required when accessing secrets from a different account where the AWS credential or `sts:AssumeRole` credential is defined.
+  - **Note**: The full ARN format is required when accessing secrets from a different account where the AWS credential or `sts:AssumeRole` credential is defined.
   
 The **secretKey** is the JSON key referring to the actual secret that you are trying to pull the value of.
 
@@ -461,7 +461,7 @@ The secret executable utility supports the following Azure services:
 | ----------------------------------------|------------------------|
 | [azure.keyvault](#azure-authentication) | [Azure Keyvault][2000] |
 
-##### Azure Authentication
+##### Azure authentication
 
 Datadog recommends using Managed Identities to authenticate with Azure. This allows you associate cloud resources with AMI accounts and removes the need to put sensitive information in your `datadog.yaml` configuration file.
 
@@ -568,7 +568,7 @@ secret_backend_config:
 
 # <!-- ######### H A S H I C O R P ############ -->
 {{% collapse-content title="Hashicorp Vault Backend" level="h4" expanded=false id="id-for-anchoring" %}}
-##### Supported Backends
+##### Supported backends
 
 The secret executable utility supports the following Hashicorp services:
 
@@ -576,21 +576,21 @@ The secret executable utility supports the following Hashicorp services:
 | ------------------------------------------ | -------------------------------------------------- |
 | [hashicorp.vault](#hashicorp-auth-session) | [Hashicorp Vault (Secrets Engine Version 1)][3000] |
 
-##### Hashicorp Auth Session
+##### Hashicorp auth session
 
 Hashicorp Vault supports a variety of authentication methods. The ones supported by this module are:
 
-- **User Pass Auth:** A Vault username and password defined on the backend configuration's `vault_session` section
+- **User Pass Auth**: A Vault username and password defined on the backend configuration's `vault_session` section
 
-- **AWS instance profile:** If your machine has an attached AWS IAM role with the correct permissions, you don't need to define any secret credentials or passwords in your config. See the [AWS instance profile section](#aws-instance-profile-instructions) and the [official Hashicorp AWS auth method instructions][3002] for more information.
+- **AWS instance profile**: If your machine has an attached AWS IAM role with the correct permissions, you don't need to define any secret credentials or passwords in your config. See the [AWS instance profile section](#aws-instance-profile-instructions) and the [official Hashicorp AWS auth method instructions][3002] for more information.
 
-Using environment variables is more complex. The variables must be configured within the service (daemon) environment or in the `dd-agent` user’s home directory on each Datadog Agent host. In contrast, using app roles and users (local or LDAP) is simpler. This method does not require additional configuration on each Datadog Agent host.
+Using environment variables is more complex. The variables must be configured within the service (daemon) environment or in the `dd-agent` user's home directory on each Datadog Agent host. In contrast, using app roles and users (local or LDAP) is simpler. This method does not require additional configuration on each Datadog Agent host.
 
-#### General Instructions to set up Hashicorp Vault
+#### General instructions to set up Hashicorp Vault
 1. Run your Hashicorp Vault. For more information, see the [official Hashicorp Vault documentation][3001]. 
 1. When running the vault, it outputs the variables `VAULT_ADDR` and `VAULT_TOKEN`. Export these as environment variables.
 1. To store your secrets in a certain path, run `vault secrets enable -path=<your path> -version=1 kv`. 
-  - **Note:** Only version 1 of the Hashicorp Secrets Engine is supported at this time.
+  - **Note**: Only version 1 of the Hashicorp Secrets Engine is supported at this time.
 1. To add your key, run `vault kv put <your path> apikey=your_real_datadog_api_key`. To retrieve your key, run `vault kv get <your path>`.
 1. To write a policy that gives the permission to pull secrets from your vault, create a `*.hcl` file, and include the following permission:
 ```
@@ -961,7 +961,7 @@ You can then reference the secret like this:
 password: ENC[file@/etc/secret-volume/password]
 ```
 
-**Notes:**
+**Notes**:
 - The Secret must exist in the same namespace as the pod it is being mounted in.
 - The script is able to access all subfolders, including the sensitive `/var/run/secrets/kubernetes.io/serviceaccount/token`. As such, Datadog recommends using a dedicated folder instead of `/var/run/secrets`.
 
@@ -1024,7 +1024,7 @@ The following example shows what the Agent sends to your executable on STDIN:
 * `secrets` (list of strings): Each string is a handle for a secret to fetch.
 
 
-The executable will respond through the following STDOUT output:
+The executable responds through the following STDOUT output:
 ```
 {
   "secret1": {"value": "decrypted_value", "error": null},
@@ -1131,7 +1131,7 @@ On Windows, the executable must:
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note:** The executable shares the same environment variables as the Agent.
+**Note**: The executable shares the same environment variables as the Agent.
 
 ## Refreshing API/APP keys at runtime
 
