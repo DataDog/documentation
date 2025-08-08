@@ -23,6 +23,12 @@ further_reading:
 The Datadog MCP Server is in Preview. If you're interested in this feature and need access, complete this form. Read more about the MCP Server on the <a href="https://www.datadoghq.com/blog/datadog-remote-mcp-server/">Datadog blog</a>.
 {{< /callout >}}
 
+## Overview
+
+The Datadog MCP Server acts as a bridge between your observability data in Datadog and AI agents that support the [Model Context Protocol (MCP)][6]. Providing structured access to relevant Datadog contexts, features, and tools, the MCP Server lets you query and retrieve observability insights directly from AI-powered clients such as Cursor, OpenAI Codex, Claude Code, or your own AI agent.
+
+This page provides instructions for connecting your AI agent to the Datadog MCP Server, lists the available tools, and includes example prompts.
+
 ## Connect to the Datadog MCP Server
 
 The following instructions are for all MCP-compatible clients. For VS Code or Cursor, use the [Datadog extension](#connect-in-vs-code-or-cursor) for built-in access to the Datadog MCP Server.
@@ -114,7 +120,7 @@ Use this option if direct remote authentication is not available for you.
 Datadog's [VS Code and Cursor extension][1] includes built-in access to the Datadog MCP Server. Benefits include:
 
 * No additional MCP Server setup after you install the extension and connect to Datadog.
-* One-click transitions to switch between multiple Datadog organizations.
+* One-click transitions between multiple Datadog organizations.
 * Better fixes from **Fix in Chat** on Code Insights (issues from Error Tracking, Code Vulnerabilities, and Library Vulnerabilities), informed by context from the MCP Server.
 
 ### Install the IDE extension
@@ -260,3 +266,4 @@ Search Datadog RUM events using advanced query syntax.
 [3]: https://docs.datadoghq.com/developers/ide_plugins/vscode/?tab=cursor#installation
 [4]: /
 [5]: https://docs.datadoghq.com/api/latest/events/
+[6]: https://modelcontextprotocol.io/
