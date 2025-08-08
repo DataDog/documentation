@@ -17,7 +17,9 @@ The [External Provider Status page][1] provides real-time visibility into the op
 
 
 ## Key capabilities
-External Provider Status monitors third-party service performance by analyzing actual service impact rather than relying on status page updates. This approach detects issues through telemetry data from your applications, providing earlier and more accurate detection of external provider problems.
+External Provider Status evaluates third-party service performance by monitoring service impact rather than relying on status page updates. It uses telemetry data from your applications for earlier and more accurate detection of external provider problems.
+
+External Provider Status shows:
 
 - **Real-time status**: Monitor external provider health in a single view.
 - **Service dependencies**: Map external providers to internal services (requires APM).
