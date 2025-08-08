@@ -2144,6 +2144,11 @@ menu:
       parent: idp_eng_reports
       identifier: eng_reports_dora_metrics
       weight: 403
+    - name: External Provider Status
+      url: internal_developer_portal/external_provider_status
+      parent: internal_developer_portal
+      identifier: external_provider_status
+      weight: 5
     - name: Integrations
       url: internal_developer_portal/integrations
       parent: internal_developer_portal
