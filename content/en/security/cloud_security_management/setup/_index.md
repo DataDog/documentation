@@ -4,7 +4,7 @@ aliases:
   - /security_platform/cloud_workload_security/getting_started
   - /security/cloud_workload_security/getting_started
   - /security/cloud_workload_security/setup
-  - /security/threats/setup
+  - /security/cloud_security_management/setup/
   - /security_platform/cspm/getting_started
   - /security/cspm/getting_started
   - /security/cspm/setup

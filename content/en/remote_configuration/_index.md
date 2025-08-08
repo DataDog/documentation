@@ -11,7 +11,7 @@ further_reading:
 - link: "/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration"
   tag: "Documentation"
   text: "Dynamic Instrumentation"
-- link: "/security/threats/setup"
+- link: "/security/cloud_security_management/setup/"
   tag: "Documentation"
   text: "Setting Up Workload Protection"
 - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
@@ -137,7 +137,7 @@ Instead of disabling Remote Configuration globally, Datadog recommends opting ou
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/site/
-[3]: /security/threats/setup
+[3]: /security/cloud_security_management/setup/
 [4]: /observability_pipelines/#observability-pipelines-worker
 [5]: /account_management/rbac/permissions#api-and-application-keys
 [6]: /security/application_security/threats/setup/compatibility/
