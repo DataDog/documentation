@@ -33,9 +33,11 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
     1. On the Members page, select **User, group, or service principal**.
     1. Click **Select Members** and search for the application you created in the app registration step.
     1. Click **Review + Assign**. **Note**: It can take up to 10 minutes for the IAM change to take effect.
-1. Optionally, toggle the switch to enable **Buffering Options** (in Preview). If left disabled, the maximum size for buffering is 500 events. If enabled:
-	1. Select the buffer type you want to set (**Memory** or **Disk**).
-	1. Enter the buffer size and select the unit.
+1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
+	- If left disabled, the maximum size for buffering is 500 events.
+	- If enabled:
+		1. Select the buffer type you want to set (**Memory** or **Disk**).
+		1. Enter the buffer size and select the unit.
 
 The table below summarizes the Azure and Microsoft Sentinel information you need when you [set up the Observability Pipelines Microsoft Sentinel destination](#set-up-the-destination-in-observability-pipelines):
 

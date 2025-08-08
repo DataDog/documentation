@@ -16,6 +16,8 @@ further_reading:
   text: "Destinations"
 ---
 
+<div class="alert alert-warning">In-memory and disk buffering options for destinations are in Preview. Contact your account manager to request access.</a></div>
+
 ## Overview
 
 Sometimes problems can occur even when you try to ensure your Observability Pipelines deployments are sized for the expected load. For example, an application might start generating more logs than usual, or the downstream service you are sending data to starts responding slower than expected. To address these issues:
@@ -38,9 +40,7 @@ Observability Pipelines destination's buffers are configured to block events, wh
 
 ## Disk buffers
 
-<div class="alert alert-warning">Configuring disk buffers for destinations is in Preview.</div>
-
-Observability Pipelines destination can be configured with disk buffers. When disk buffering is enabled for a destination, every event is first sent through the buffer and written to the data files, before the data is sent to the downstream integration. By default, data is not synchronized for every write, but instead synchronized on an interval (500 milliseconds), which allows for high throughput with a reduced risk of data loss.
+Observability Pipelines destinations can be configured with disk buffers (in Preview). When disk buffering is enabled for a destination, every event is first sent through the buffer and written to the data files, before the data is sent to the downstream integration. By default, data is not synchronized for every write, but instead synchronized on an interval (500 milliseconds), which allows for high throughput with a reduced risk of data loss.
 
 ## Further reading
 
