@@ -1,4 +1,4 @@
-1. Enter the S3 bucket name for the S3 bucket you created earlier.
+1. Enter your S3 bucket name. If you configured Log Archives, it's the name of the bucket you created earlier.
 1. Enter the AWS region the S3 bucket is in.
 1. Enter the key prefix.
     - Prefixes are useful for partitioning objects. For example, you can use a prefix as an object key to store objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path; a trailing `/` is not automatically added.
@@ -16,6 +16,9 @@
     1. Enter the ARN of the IAM role you want to assume.
     1. Optionally, enter the assumed role session name and external ID.
     - **Note:** The [user or role you created earlier][10054] must have permission to assume this role so that the Worker can authenticate with AWS.
+1. Optionally, toggle the switch to enable **Buffering Options**. If left disabled, the maximum size for buffering is 500 events. If enabled:
+	1. Select the buffer type you want to set (**Memory** or **Disk**).
+	1. Enter the buffer size and select the unit.
 
 #### Example destination and log archive setup
 

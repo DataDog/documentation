@@ -19,8 +19,7 @@ El procesador de búsqueda realiza las siguientes acciones:
 
 
 **Tabla de referencia**
-    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Procesador de búsqueda" 
-    style="width:80%;">}}
+    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Procesador de búsqueda" style="width:80%;" >}}
 
 
  El límite de tamaño de la tabla de asignación es de 100 kB. Este límite se aplica a todos los procesadores de búsqueda de la plataforma. Sin embargo, las tablas de referencia admiten archivos de mayor tamaño.

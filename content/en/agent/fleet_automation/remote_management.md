@@ -5,7 +5,7 @@ further_reading:
 - link: "/agent/fleet_automation/"
   tag: "Documentation"
   text: "Fleet Automation"
-- link: "/agent/remote_config/"
+- link: "/remote_configuration"
   tag: "Documentation"
   text: "Remote Configuration"
 ---
@@ -20,7 +20,7 @@ Remote Agent Management simplifies the process of upgrading your Agent fleet by 
 ## Setup
 
 To enable Remote Agent Management:
-1. If you haven't enabled Remote Configuration on the Agent, follow the [configuration instructions][1] to enable it.
+1. Ensure that [Remote Configuration is enabled for your organization][15].
 1. Go to the [Datadog Agent install page][3] for your platform or configuration management tool.
 1. Enable **Remote Agent Management**. Enabling Remote Agent Management adds the `DD_REMOTE_UPDATES` environment variable to the generated Agent installation command.
 
@@ -42,7 +42,8 @@ To enable Remote Agent Management:
 
 * **User permissions**: Users must have the [Agent Upgrade][2] permission within Fleet Automation. The permission is enabled by default on the Datadog Admin role.
 * **Disk space**: Datadog suggests at least 2GB for the initial Agent install and an additional 2GB for upgrading the Agent from Fleet Automation. Specifically, the upgrade requires 1.3GB in the `/opt/datadog-packages` directory on Linux, or `C:\ProgramData\Datadog\Installer\packages` on Windows. The extra space ensures that there is enough room to maintain two Agent installs temporarily during the upgrade process in case a rollback is needed.
-* **Windows Agent User**: To enable remote updates for installations using an Active Directory domain account, provide the password option to the installer when upgrading to Agent 7.66 or later. To avoid providing and manually managing the account password, consider using a [Group Managed Service Account (gMSA)][11]. For more information, see [Installing the Agent with a gMSA account][12].
+* **System service manager**: Remote updates are supported only on machines running `systemd`. Other init systems (for example SysVinit, Upstart) are not supported.
+* **(Windows) Agent User**: To enable remote updates for installations using an Active Directory domain account, provide the password option to the installer when upgrading to Agent 7.66 or later. To avoid providing and manually managing the account password, consider using a [Group Managed Service Account (gMSA)][11]. For more information, see [Installing the Agent with a gMSA account][12].
 
 ### Upgrade your Agents
 
@@ -81,7 +82,7 @@ The Agent ensures that the appropriate permissions are set for these files. No c
 
 ### Upgrade precedence
 
-For the most consistent upgrade experience, Datadog recommends managing upgrades from one source at a time. Use either Fleet Automation or a configuration management tool. If you run a configuration management tool on an Agent that has already been upgraded using Fleet Automation, the upgrade reverts the Agent to the [`DD_AGENT_MINOR_VERSION`][9]  specified in your configuration. If no `DD_AGENT_MINOR_VERSION` is set, the Agent is upgraded to the latest available version .
+For the most consistent upgrade experience, Datadog recommends managing upgrades from one source at a time. Use either Fleet Automation or a configuration management tool. If you run a configuration management tool on an Agent that has already been upgraded using Fleet Automation, the upgrade reverts the Agent to the [`DD_AGENT_MINOR_VERSION`][9]  specified in your configuration. If no `DD_AGENT_MINOR_VERSION` is set, the Agent is upgraded to the latest available version.
 
 ### Mirrors and proxies
 
@@ -143,7 +144,7 @@ To uninstall the Agent, see [Uninstall the Agent][1].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/remote_config/#enabling-remote-configuration
+[1]: https://app.datadoghq.com/organization-settings/remote-config
 [2]: /account_management/rbac/permissions#fleet-automation
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://app.datadoghq.com/fleet/agent-upgrades
@@ -157,3 +158,4 @@ To uninstall the Agent, see [Uninstall the Agent][1].
 [12]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/?tab=installationinactivedirectorydomains
 [13]: https://app.datadoghq.com/fleet?query=support_remote_upgrade%3Adatadog-installer
 [14]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
+[15]: /agent/guide/setup_remote_config
