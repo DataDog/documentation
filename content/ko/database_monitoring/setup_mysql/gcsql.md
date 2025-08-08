@@ -100,7 +100,6 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```sql
 CREATE SCHEMA IF NOT EXISTS datadog;
 GRANT EXECUTE ON datadog.* to datadog@'%';
-GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
 에이전트가 설명 계획을 수집할 수 있도록 `explain_statement` 절차를 생성합니다.
@@ -133,6 +132,14 @@ END $$
 DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
+
+인덱스 메트릭을 수집하려면, `datadog` 사용자에게 추가 권한을 부여합니다.
+
+```sql
+GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
+```
+
+Datadog Agent는 v7.65부터 MySQL 데이터베이스에서 스키마 정보를 수집할 수 있습니다. Agent에 수집 권한을 부여하는 방법은 아래 [스키마 수집][12] 섹션을 참조하세요.
 
 ### 런타임 설정 컨슈머
 다음 절차를 생성하여 에이전트가 런타임에 `performance_schema.events_*` 컨슈머를 실행할 수 있는 기능을 제공하도록 합니다.
@@ -406,3 +413,4 @@ Google Cloud에서 보다 포괄적인 데이터베이스 메트릭을 수집하
 [9]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
 [10]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [11]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
+[12]: /ko/database_monitoring/setup_mysql/gcsql?tab=mysql57#collecting-schemas

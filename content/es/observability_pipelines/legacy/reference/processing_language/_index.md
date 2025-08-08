@@ -4,10 +4,6 @@ aliases:
 title: (LEGACY) Lenguaje de procesamiento de Datadog / Lenguaje de reasignación vectorial
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines no está disponible en el sitio US1-FED Datadog.</div>
-{{< /site-region >}}
-
 El Lenguaje de procesamiento de Datadog (DPL), o Lenguaje de reasignación vectorial (VRL), es un lenguaje específico del dominio, orientado a expresiones, diseñado para transformar logs. Presenta una sintaxis sencilla y [funciones integradas][1], adaptadas a casos de uso de observabilidad.
 
 El Lenguaje de procesamiento de Datadog es compatible con la transformación `remap`.

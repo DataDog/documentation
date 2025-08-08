@@ -9,6 +9,10 @@ further_reading:
   text: "Best practices for creating custom scanning rules"
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/human-name-pii-detection-in-logs-using-machine-learning/" btn_hidden="false" >}}
+Human name PII detection in logs using machine learning is in Preview. To enroll, click <b>Request Access</b>.
+{{< /callout >}}
+
 ## Telemetry Data
 
 Sensitive Data Scanner for Telemetry Data uses scanning rules to determine what sensitive information to match within the data. This data can be from your application logs, APM spans, RUM events, and events from Event Management. You can use Datadog's [Scanning Rule Library][1] to create rules or you can create [custom rules][2].

@@ -15,7 +15,7 @@ Las claves de API son exclusivas de tu organización. El Datadog Agent requiere 
 
 ## Claves de aplicación
 
-Las [claves de aplicación][2], junto con la clave de API de tu organización, ofrecen a los usuarios acceso a las API programáticas de Datadog. Las claves de aplicación están asociadas a la cuenta de usuario que las haya creado y, de manera predeterminada, tienen los permisos y contextos del usuario que las haya creado.
+Las [claves de aplicación][2], junto con la clave de API de tu organización, permiten a los usuarios acceder a la API programática de Datadog. Las claves de aplicación están asociadas a la cuenta de usuario que las creó y, por defecto, tienen los permisos del usuario que las creó.
 
 ### Contextos
 
@@ -68,6 +68,10 @@ Para añadir una clave de aplicación de Datadog, ve a  [**Organization Settings
 
 {{< img src="account_management/app-key.png" alt="Navega a la página de Claves de aplicación para tu organización en Datadog" style="width:80%;" >}}
 
+{{< site-region region="ap2,gov" >}}
+<div class="alert alert-warning">Asegúrate de almacenar de forma segura tu clave de aplicación inmediatamente después de la creación, ya que el secreto de la clave no se puede recuperar más tarde.</div>
+{{< /site-region >}}
+
 **Notas:**
 
 - Los nombres de las claves de aplicación no pueden quedar en blanco.
@@ -76,7 +80,19 @@ Para añadir una clave de aplicación de Datadog, ve a  [**Organization Settings
 
 Para eliminar una clave de aplicación de Datadog, accede a [**Organization Settings** (Parámetros de organización) > **Application Keys** (Claves de aplicación)][2]. Si tienes [permiso][4] para crear y gestionar claves de aplicación, podrás ver tus claves y hacer clic en **Revoke** (Revocar) junto a la que quieras revocar. Si tienes permiso para gestionar todas las claves de aplicaciones de tu organización, podrás buscar la que quieres revocar y hacer clic en **Revoke** junto a ella.
 
-## Definir el contexto de las claves de aplicación
+## Retraso en la propagación de claves y coherencia final
+
+Las claves de API y de aplicación de Datadog siguen un modelo de coherencia eventual. Debido a la naturaleza distribuida de los sistemas de Datadog, las actualizaciones de las claves, como la creación y la revocación, pueden tardar unos segundos en propagarse por completo.
+
+Como resultado:
+
+- No utilices nuevas claves de API o de aplicación inmediatamente en flujos de trabajo críticos. Deja un breve tiempo (unos segundos) para la propagación. Puedes implementar una estrategia de reintento con un backoff exponencial corto para manejar errores transitorios durante el intervalo de propagación.
+- Para validar si una clave de API está activa y utilizable, llama al endpoint [/api/v1/validate][18].
+- Para verificar que una clave de aplicación está activa, utiliza el endpoint `/api/v2/validate_keys` con el par de claves adecuado.
+
+Intentar utilizar una clave recién creada antes de que se haya propagado completamente puede provocar errores de autenticación temporales como 403 Forbidden o 401 Unauthorized.
+
+## Definir el contexto de claves de aplicación
 
 Para especificar contextos de autorización para claves de aplicación, [haz una solicitud a la API de Datadog][5] o a la interfaz de usuario para crear o editar una clave de aplicación. Los contextos pueden especificarse para claves de aplicación propiedad del [usuario actual][14] o de una [cuenta de servicio][15]. Si no se especifica este campo, las claves de aplicación tendrán por defecto los mismos contextos y permisos que el usuario que las creó.
 
@@ -123,7 +139,7 @@ Si se detecta alguna actividad inusual o si necesitas más información sobre c�
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con [el soporte de Datadog][16].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][16].
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/access/application-keys
@@ -141,3 +157,4 @@ Si se detecta alguna actividad inusual o si necesitas más información sobre c�
 [15]: /es/api/latest/service-accounts/
 [16]: /es/help/
 [17]: /es/account_management/org_settings/service_accounts/
+[18]: /es/api/latest/authentication/#validate-api-key

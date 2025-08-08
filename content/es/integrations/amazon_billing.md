@@ -106,7 +106,7 @@ La métrica `aws.billing.estimated_charges` es lo que AWS cree que es la factura
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_billing" >}}
+{{< get-metrics-from-git "amazon-billing" >}}
 
 
 ### Eventos

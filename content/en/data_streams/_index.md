@@ -24,6 +24,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/'
       tag: 'Blog'
       text: 'Autodiscover Confluent Cloud connectors and easily monitor performance in Data Streams Monitoring'
+    - link: "https://www.datadoghq.com/blog/data-observability/"
+      tag: "Blog"
+      text: "Ensure trust across the entire data life cycle with Datadog Data Observability"
 cascade:
     algolia:
         rank: 70
@@ -49,7 +52,7 @@ Data Streams Monitoring instruments Kafka _clients_ (consumers/producers). If yo
 
 |   | Java | Python | .NET | Node.js | Go |
 | - | ---- | ------ | ---- | ------- | -- |
-| Apache Kafka | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Apache Kafka <br/>(self-hosted, Amazon MSK, Confluent Cloud, or any other hosting platform) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | Amazon Kinesis | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
 | Amazon SNS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
 | Amazon SQS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |

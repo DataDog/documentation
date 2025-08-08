@@ -2226,11 +2226,16 @@ menu:
     parent: oncall
     url: service_management/on-call/teams/
     weight: 1
-  - identifier: oncall_pages
+  - identifier: oncall_triggering_pages
     name: Enviar una página
     parent: oncall
-    url: service_management/on-call/pages/
+    url: service_management/on-call/triggering_pages/
     weight: 2
+  - name: Live Call Routing
+    url: service_management/on-call/triggering_pages/live_call_routing
+    identifier: oncall_live_call_routing
+    parent: oncall_triggering_pages
+    weight: 201
   - identifier: oncall_routing_rules
     name: Procesamiento de reglas
     parent: oncall

@@ -59,7 +59,7 @@ Amazon AppStream から S3 バケットまたは CloudWatch のいずれかに�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_appstream" >}}
+{{< get-metrics-from-git "amazon-appstream" >}}
 
 
 ### イベント

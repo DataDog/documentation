@@ -615,10 +615,10 @@ Dirígete a la [sección de trazas de APM][19] para ver tus trazas:
 
 {{< img src="agent/guide/heroku_ruby/traces.png" alt="Trazas de aplicaciones de Ruby en Datadog" >}}
 
-Accede al [Catálogo de servicios][20] para ver todos tus servicios de aplicaciones y una vista de tus servicios de aplicaciones:
+Ve al [Catálogo de software][20] para ver todos los servicios de tu aplicación y la vista de servicios de tu aplicación:
 
-{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Catálogo de servicios en Datadog" >}}
-{{< img src="agent/guide/heroku_ruby/service_page.png" alt="Página de detalles de servicios de la aplicación Ruby en Datadog" >}}
+{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Catálogo de software en Datadog" >}}
+{{< img src="agent/guide/heroku_ruby/service_page.png" alt="Página de información de servicios de aplicaciones en Datadog" >}}
 
 ## Logs
 

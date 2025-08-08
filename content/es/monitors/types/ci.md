@@ -19,10 +19,6 @@ further_reading:
 title: Monitor CI
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Resumen
 
 Una vez que [CI Visibility esté habilitado][1] para tu organización, podrás crear un pipeline CI o un monitor de tests CI.

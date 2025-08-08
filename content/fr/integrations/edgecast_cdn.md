@@ -51,7 +51,7 @@ Recueillez des métriques Edgecast pour surveiller votre trafic Web en fonction 
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "edgecast_cdn" >}}
+{{< get-metrics-from-git "edgecast-cdn" >}}
 
 
 ### Événements

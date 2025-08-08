@@ -1,20 +1,36 @@
 {
+  "ListAppKeyRegistrations": {
+    "description": "List App Key Registrations",
+    "summary": "List App Key Registrations"
+  },
+  "UnregisterAppKey": {
+    "description": "Unregister an App Key",
+    "summary": "Unregister an App Key"
+  },
+  "GetAppKeyRegistration": {
+    "description": "Get an existing App Key Registration",
+    "summary": "Get an existing App Key Registration"
+  },
+  "RegisterAppKey": {
+    "description": "Register a new App Key",
+    "summary": "Register a new App Key"
+  },
   "CreateActionConnection": {
-    "description": "Create a new Action Connection",
+    "description": "Create a new Action Connection. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Create a new Action Connection",
     "request_description": "",
     "request_schema_description": "Request used to create an action connection."
   },
   "DeleteActionConnection": {
-    "description": "Delete an existing Action Connection",
+    "description": "Delete an existing Action Connection. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Delete an existing Action Connection"
   },
   "GetActionConnection": {
-    "description": "Get an existing Action Connection",
+    "description": "Get an existing Action Connection. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Get an existing Action Connection"
   },
   "UpdateActionConnection": {
-    "description": "Update an existing Action Connection",
+    "description": "Update an existing Action Connection. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Update an existing Action Connection",
     "request_description": "Update an existing Action Connection request body",
     "request_schema_description": "Request used to update an action connection."
@@ -156,41 +172,41 @@
     "request_schema_description": "The body of the retention filter to be updated."
   },
   "DeleteApps": {
-    "description": "Delete multiple apps in a single request from a list of app IDs.",
+    "description": "Delete multiple apps in a single request from a list of app IDs. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Delete Multiple Apps",
     "request_description": "",
     "request_schema_description": "A request object for deleting multiple apps by ID."
   },
   "ListApps": {
-    "description": "List all apps, with optional filters and sorting. This endpoint is paginated. Only basic app information such as the app ID, name, and description is returned by this endpoint.",
+    "description": "List all apps, with optional filters and sorting. This endpoint is paginated. Only basic app information such as the app ID, name, and description is returned by this endpoint. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "List Apps"
   },
   "CreateApp": {
-    "description": "Create a new app, returning the app ID.",
+    "description": "Create a new app, returning the app ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Create App",
     "request_description": "",
     "request_schema_description": "A request object for creating a new app."
   },
   "DeleteApp": {
-    "description": "Delete a single app.",
+    "description": "Delete a single app. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Delete App"
   },
   "GetApp": {
-    "description": "Get the full definition of an app.",
+    "description": "Get the full definition of an app. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Get App"
   },
   "UpdateApp": {
-    "description": "Update an existing app. This creates a new version of the app.",
+    "description": "Update an existing app. This creates a new version of the app. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Update App",
     "request_description": "",
     "request_schema_description": "A request object for updating an existing app."
   },
   "UnpublishApp": {
-    "description": "Unpublish an app, removing the live version of the app. Unpublishing creates a new instance of a `deployment` object on the app, with a nil `app_version_id` (`00000000-0000-0000-0000-000000000000`). The app can still be updated and published again in the future.",
+    "description": "Unpublish an app, removing the live version of the app. Unpublishing creates a new instance of a `deployment` object on the app, with a nil `app_version_id` (`00000000-0000-0000-0000-000000000000`). The app can still be updated and published again in the future. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Unpublish App"
   },
   "PublishApp": {
-    "description": "Publish an app for use by other users. To ensure the app is accessible to the correct users, you also need to set a [Restriction Policy](https://docs.datadoghq.com/api/latest/restriction-policies/) on the app if a policy does not yet exist.",
+    "description": "Publish an app for use by other users. To ensure the app is accessible to the correct users, you also need to set a [Restriction Policy](https://docs.datadoghq.com/api/latest/restriction-policies/) on the app if a policy does not yet exist. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Publish App"
   },
   "ListApplicationKeys": {
@@ -289,6 +305,12 @@
     "request_description": "Assign case payload",
     "request_schema_description": "Case assign request"
   },
+  "UpdateAttributes": {
+    "description": "Update case attributes",
+    "summary": "Update case attributes",
+    "request_description": "Case attributes update payload",
+    "request_schema_description": "Case update attributes request"
+  },
   "UpdatePriority": {
     "description": "Update case priority",
     "summary": "Update case priority",
@@ -326,6 +348,24 @@
   "DeleteCatalogEntity": {
     "description": "Delete a single entity in Software Catalog.",
     "summary": "Delete a single entity"
+  },
+  "ListCatalogKind": {
+    "description": "Get a list of entity kinds from Software Catalog.",
+    "summary": "Get a list of entity kinds"
+  },
+  "UpsertCatalogKind": {
+    "description": "Create or update kinds in Software Catalog.",
+    "summary": "Create or update kinds",
+    "request_description": "Kind YAML or JSON.",
+    "request_schema_description": "Create or update kind request."
+  },
+  "DeleteCatalogKind": {
+    "description": "Delete a single kind in Software Catalog.",
+    "summary": "Delete a single kind"
+  },
+  "ListCatalogRelation": {
+    "description": "Get a list of entity relations from Software Catalog.",
+    "summary": "Get a list of entity relations"
   },
   "CreateCIAppPipelineEvent": {
     "description": "Send your pipeline event to your Datadog platform over HTTP. For details about how pipeline executions are modeled and what execution types we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).\n\nPipeline events can be submitted with a timestamp that is up to 18 hours in the past.",
@@ -384,6 +424,16 @@
     "summary": "Update a custom framework",
     "request_description": "",
     "request_schema_description": "Request object to update a custom framework."
+  },
+  "GetResourceEvaluationFilters": {
+    "description": "List resource filters.",
+    "summary": "List resource filters"
+  },
+  "UpdateResourceEvaluationFilters": {
+    "description": "Update resource filters.",
+    "summary": "Update resource filters",
+    "request_description": "",
+    "request_schema_description": "Request object to update a resource filter."
   },
   "ListContainerImages": {
     "description": "Get all Container Images for your organization.",
@@ -469,6 +519,26 @@
     "description": "Fetch the specified Custom Costs file.",
     "summary": "Get Custom Costs file"
   },
+  "ListCostGCPUsageCostConfigs": {
+    "description": "List the GCP Usage Cost configs.",
+    "summary": "List Cloud Cost Management GCP Usage Cost configs"
+  },
+  "CreateCostGCPUsageCostConfig": {
+    "description": "Create a Cloud Cost Management account for an GCP Usage Cost config.",
+    "summary": "Create Cloud Cost Management GCP Usage Cost config",
+    "request_description": "",
+    "request_schema_description": "GCP Usage Cost config post request."
+  },
+  "DeleteCostGCPUsageCostConfig": {
+    "description": "Archive a Cloud Cost Management account.",
+    "summary": "Delete Cloud Cost Management GCP Usage Cost config"
+  },
+  "UpdateCostGCPUsageCostConfig": {
+    "description": "Update the status of an GCP Usage Cost config (active/archived).",
+    "summary": "Update Cloud Cost Management GCP Usage Cost config",
+    "request_description": "",
+    "request_schema_description": "GCP Usage Cost config patch request."
+  },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
     "summary": "Get active billing dimensions for cost attribution"
@@ -543,6 +613,30 @@
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
   },
+  "GetAllDatasets": {
+    "description": "Get all datasets that have been configured for an organization.",
+    "summary": "Get all datasets"
+  },
+  "CreateDataset": {
+    "description": "Create a dataset with the configurations in the request.",
+    "summary": "Create a dataset",
+    "request_description": "Dataset payload",
+    "request_schema_description": "Create request for a dataset."
+  },
+  "DeleteDataset": {
+    "description": "Deletes the dataset associated with the ID.",
+    "summary": "Delete a dataset"
+  },
+  "GetDataset": {
+    "description": "Retrieves the dataset associated with the ID.",
+    "summary": "Get a single dataset by ID"
+  },
+  "UpdateDataset": {
+    "description": "Edits the dataset associated with the ID.",
+    "summary": "Edit a dataset",
+    "request_description": "Dataset payload",
+    "request_schema_description": "Edit request for a dataset."
+  },
   "GetDomainAllowlist": {
     "description": "Get the domain allowlist for an organization.",
     "summary": "Get Domain Allowlist"
@@ -559,11 +653,37 @@
     "request_description": "",
     "request_schema_description": "Request to create a DORA deployment event."
   },
+  "ListDORADeployments": {
+    "description": "Use this API endpoint to get a list of deployment events.",
+    "summary": "Get a list of deployment events",
+    "request_description": "",
+    "request_schema_description": "Request to get a list of deployments."
+  },
+  "GetDORADeployment": {
+    "description": "Use this API endpoint to get a deployment event.",
+    "summary": "Get a deployment event"
+  },
+  "CreateDORAFailure": {
+    "description": "Use this API endpoint to provide failure data for DORA metrics.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
+    "summary": "Send a failure event for DORA Metrics",
+    "request_description": "",
+    "request_schema_description": "Request to create a DORA failure event."
+  },
+  "ListDORAFailures": {
+    "description": "Use this API endpoint to get a list of failure events.",
+    "summary": "Get a list of failure events",
+    "request_description": "",
+    "request_schema_description": "Request to get a list of failures."
+  },
+  "GetDORAFailure": {
+    "description": "Use this API endpoint to get a failure event.",
+    "summary": "Get a failure event"
+  },
   "CreateDORAIncident": {
-    "description": "Use this API endpoint to provide data about incidents for DORA metrics.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
+    "description": "**Note**: This endpoint is deprecated. Please use `/api/v2/dora/failure` instead.\n\nUse this API endpoint to provide failure data for DORA metrics.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
     "summary": "Send an incident event for DORA Metrics",
     "request_description": "",
-    "request_schema_description": "Request to create a DORA incident event."
+    "request_schema_description": "Request to create a DORA failure event."
   },
   "ListDowntimes": {
     "description": "Get all scheduled downtimes.",
@@ -594,9 +714,9 @@
     "summary": "Get a list of events"
   },
   "CreateEvent": {
-    "description": "This endpoint allows you to post events.\n\n✅ **Only events with the `change` category** are in General Availability. See [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, please use the V1 endpoint.",
+    "description": "This endpoint allows you to publish events.\n\n**Note:** To utilize this endpoint with our client libraries, please ensure you are using the latest version released on or after July 1, 2025. Earlier versions do not support this functionality.\n\n✅ **Only events with the `change` or `alert` category** are in General Availability. For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).\n\n❌ Notifications are not yet supported for events sent to this endpoint. Use the V1 endpoint for notification functionality.",
     "summary": "Post an event",
-    "request_description": "Event request object",
+    "request_description": "Event creation request payload.",
     "request_schema_description": "Payload for creating an event."
   },
   "SearchEvents": {
@@ -604,6 +724,10 @@
     "summary": "Search events",
     "request_description": "",
     "request_schema_description": "The object sent with the request to retrieve a list of events from your organization."
+  },
+  "GetEvent": {
+    "description": "Get the details of an event by `event_id`.",
+    "summary": "Get an event"
   },
   "ListIncidents": {
     "description": "Get all incidents for the user's organization.",
@@ -746,6 +870,10 @@
   "CreateNewAWSExternalID": {
     "description": "Generate a new external ID for AWS role-based authentication.",
     "summary": "Generate a new external ID"
+  },
+  "GetAWSIntegrationIAMPermissions": {
+    "description": "Get all AWS IAM permissions required for the AWS integration.",
+    "summary": "Get AWS integration IAM permissions"
   },
   "ListAWSLogsServices": {
     "description": "Get a list of AWS services that can send logs to Datadog.",
@@ -1211,6 +1339,10 @@
     "description": "Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations configuration using Metrics without Limits&trade;.",
     "summary": "Tag Configuration Cardinality Estimator"
   },
+  "GetMetricTagCardinalityDetails": {
+    "description": "Returns the cardinality details of tags for a specific metric.",
+    "summary": "Get tag key cardinality details"
+  },
   "DeleteTagConfiguration": {
     "description": "Deletes a metric's tag configuration. Can only be used with application\nkeys from users with the `Manage Tags for Metrics` permission.",
     "summary": "Delete a tag configuration"
@@ -1226,7 +1358,7 @@
     "request_schema_description": "Request object that includes the metric that you would like to edit the tag configuration on."
   },
   "CreateTagConfiguration": {
-    "description": "Create and define a list of queryable tag keys for an existing count/gauge/rate/distribution metric.\nOptionally, include percentile aggregations on any distribution metric or configure custom aggregations\non any count, rate, or gauge metric. By setting `exclude_tags_mode` to true the behavior is changed\nfrom an allow-list to a deny-list, and tags in the defined list will not be queryable.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
+    "description": "Create and define a list of queryable tag keys for an existing count/gauge/rate/distribution metric.\nOptionally, include percentile aggregations on any distribution metric. By setting `exclude_tags_mode`\nto true, the behavior is changed from an allow-list to a deny-list, and tags in the defined list are\nnot queryable. Can only be used with application keys of users with the `Manage Tags for Metrics`\npermission.",
     "summary": "Create a tag configuration",
     "request_description": "",
     "request_schema_description": "Request object that includes the metric that you would like to configure tags for."
@@ -1283,6 +1415,42 @@
     "request_description": "Description of the update.",
     "request_schema_description": "Request for editing a monitor configuration policy."
   },
+  "ListMonitorUserTemplates": {
+    "description": "Retrieve all monitor user templates.",
+    "summary": "Get all monitor user templates"
+  },
+  "CreateMonitorUserTemplate": {
+    "description": "Create a new monitor user template.",
+    "summary": "Create a monitor user template",
+    "request_description": "",
+    "request_schema_description": "Request for creating a monitor user template."
+  },
+  "ValidateMonitorUserTemplate": {
+    "description": "Validate the structure and content of a monitor user template.",
+    "summary": "Validate a monitor user template",
+    "request_description": "",
+    "request_schema_description": "Request for creating a monitor user template."
+  },
+  "DeleteMonitorUserTemplate": {
+    "description": "Delete an existing monitor user template by its ID.",
+    "summary": "Delete a monitor user template"
+  },
+  "GetMonitorUserTemplate": {
+    "description": "Retrieve a monitor user template by its ID.",
+    "summary": "Get a monitor user template"
+  },
+  "UpdateMonitorUserTemplate": {
+    "description": "Creates a new version of an existing monitor user template.",
+    "summary": "Update a monitor user template to a new version",
+    "request_description": "",
+    "request_schema_description": "Request for creating a new monitor user template version."
+  },
+  "ValidateExistingMonitorUserTemplate": {
+    "description": "Validate the structure and content of an existing monitor user template being updated to a new version.",
+    "summary": "Validate an existing monitor user template",
+    "request_description": "",
+    "request_schema_description": "Request for creating a new monitor user template version."
+  },
   "ListMonitorDowntimes": {
     "description": "Get all active downtimes for the specified monitor.",
     "summary": "Get active downtimes for a monitor"
@@ -1313,45 +1481,85 @@
     "description": "Get all aggregated connections.",
     "summary": "Get all aggregated connections"
   },
+  "GetAggregatedDns": {
+    "description": "Get all aggregated DNS traffic.",
+    "summary": "Get all aggregated DNS traffic"
+  },
   "CreateOnCallEscalationPolicy": {
-    "description": "Create a new on-call escalation policy",
-    "summary": "Create on-call escalation policy",
+    "description": "Create a new On-Call escalation policy",
+    "summary": "Create On-Call escalation policy",
     "request_description": "",
     "request_schema_description": "Represents a request to create a new escalation policy, including the policy data."
   },
   "DeleteOnCallEscalationPolicy": {
-    "description": "Delete an on-call escalation policy",
-    "summary": "Delete on-call escalation policy"
+    "description": "Delete an On-Call escalation policy",
+    "summary": "Delete On-Call escalation policy"
   },
   "GetOnCallEscalationPolicy": {
-    "description": "Get an on-call escalation policy",
-    "summary": "Get on-call escalation policy"
+    "description": "Get an On-Call escalation policy",
+    "summary": "Get On-Call escalation policy"
   },
   "UpdateOnCallEscalationPolicy": {
-    "description": "Update an on-call escalation policy",
-    "summary": "Update on-call escalation policy",
+    "description": "Update an On-Call escalation policy",
+    "summary": "Update On-Call escalation policy",
     "request_description": "",
     "request_schema_description": "Represents a request to update an existing escalation policy, including the updated policy data."
   },
+  "CreateOnCallPage": {
+    "description": "Trigger a new On-Call Page.\n",
+    "summary": "Create On-Call Page",
+    "request_description": "",
+    "request_schema_description": "Full request to trigger an On-Call Page."
+  },
+  "AcknowledgeOnCallPage": {
+    "description": "Acknowledges an On-Call Page.\n",
+    "summary": "Acknowledge On-Call Page"
+  },
+  "EscalateOnCallPage": {
+    "description": "Escalates an On-Call Page.\n",
+    "summary": "Escalate On-Call Page"
+  },
+  "ResolveOnCallPage": {
+    "description": "Resolves an On-Call Page.\n",
+    "summary": "Resolve On-Call Page"
+  },
   "CreateOnCallSchedule": {
-    "description": "Create a new on-call schedule",
-    "summary": "Create on-call schedule",
+    "description": "Create a new On-Call schedule",
+    "summary": "Create On-Call schedule",
     "request_description": "",
     "request_schema_description": "The top-level request body for schedule creation, wrapping a `data` object."
   },
   "DeleteOnCallSchedule": {
-    "description": "Delete an on-call schedule",
-    "summary": "Delete on-call schedule"
+    "description": "Delete an On-Call schedule",
+    "summary": "Delete On-Call schedule"
   },
   "GetOnCallSchedule": {
-    "description": "Get an on-call schedule",
-    "summary": "Get on-call schedule"
+    "description": "Get an On-Call schedule",
+    "summary": "Get On-Call schedule"
   },
   "UpdateOnCallSchedule": {
-    "description": "Update a new on-call schedule",
-    "summary": "Update on-call schedule",
+    "description": "Update a new On-Call schedule",
+    "summary": "Update On-Call schedule",
     "request_description": "",
     "request_schema_description": "A top-level wrapper for a schedule update request, referring to the `data` object with the new details."
+  },
+  "GetScheduleOnCallUser": {
+    "description": "Retrieves the user who is on-call for the specified schedule at a given time.",
+    "summary": "Get the schedule on-call user"
+  },
+  "GetTeamOnCallUsers": {
+    "description": "Get a team's on-call users at a given time",
+    "summary": "Get team on-call users"
+  },
+  "GetOnCallTeamRoutingRules": {
+    "description": "Get a team's On-Call routing rules",
+    "summary": "Get On-Call team routing rules"
+  },
+  "SetOnCallTeamRoutingRules": {
+    "description": "Set a team's On-Call routing rules",
+    "summary": "Set On-Call team routing rules",
+    "request_description": "",
+    "request_schema_description": "Represents a request to create or update team routing rules, including the data payload."
   },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
@@ -1372,7 +1580,7 @@
     "summary": "List permissions"
   },
   "ListFindings": {
-    "description": "Get a list of findings. These include both misconfigurations and identity risks.\n\n**Note**: To filter and return only identity risks, add the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.\n",
+    "description": "Get a list of findings. These include both misconfigurations and identity risks.\n\n**Note**: To filter and return only identity risks, add the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Additional extension fields\n\nAdditional extension fields are available for some findings.\n\nThe data is available when you include the query parameter `?detailed_findings=true` in the request.\n\nThe following fields are available for findings:\n- `external_id`: The resource external ID related to the finding.\n- `description`: The description and remediation steps for the finding.\n- `datadog_link`: The Datadog relative link for the finding.\n- `ip_addresses`: The list of private IP addresses for the resource related to the finding.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.\n",
     "summary": "List findings"
   },
   "MuteFindings": {
@@ -1474,32 +1682,56 @@
     "request_schema_description": "Request object for updating a single WAF exclusion filter."
   },
   "ListCSMThreatsAgentRules": {
-    "description": "Get the list of Cloud Security Management Threats Agent rules.",
-    "summary": "Get all CSM Threats Agent rules"
+    "description": "Get the list of Workload Protection agent rules.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "summary": "Get all Workload Protection agent rules"
   },
   "CreateCSMThreatsAgentRule": {
-    "description": "Create a new Cloud Security Management Threats Agent rule with the given parameters.",
-    "summary": "Create a CSM Threats Agent rule",
-    "request_description": "The definition of the new Agent rule.",
-    "request_schema_description": "Request object that includes the Agent rule to create."
+    "description": "Create a new Workload Protection agent rule with the given parameters.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "summary": "Create a Workload Protection agent rule",
+    "request_description": "The definition of the new agent rule",
+    "request_schema_description": "Request object that includes the Agent rule to create"
   },
   "DeleteCSMThreatsAgentRule": {
-    "description": "Delete a specific Cloud Security Management Threats Agent rule.",
-    "summary": "Delete a CSM Threats Agent rule"
+    "description": "Delete a specific Workload Protection agent rule.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "summary": "Delete a Workload Protection agent rule"
   },
   "GetCSMThreatsAgentRule": {
-    "description": "Get the details of a specific Cloud Security Management Threats Agent rule.",
-    "summary": "Get a CSM Threats Agent rule"
+    "description": "Get the details of a specific Workload Protection agent rule.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "summary": "Get a Workload Protection agent rule"
   },
   "UpdateCSMThreatsAgentRule": {
-    "description": "Update a specific Cloud Security Management Threats Agent rule.\nReturns the Agent rule object when the request is successful.",
-    "summary": "Update a CSM Threats Agent rule",
-    "request_description": "New definition of the Agent rule.",
-    "request_schema_description": "Request object that includes the Agent rule with the attributes to update."
+    "description": "Update a specific Workload Protection Agent rule.\nReturns the agent rule object when the request is successful.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "summary": "Update a Workload Protection agent rule",
+    "request_description": "New definition of the agent rule",
+    "request_schema_description": "Request object that includes the Agent rule with the attributes to update"
+  },
+  "ListCSMThreatsAgentPolicies": {
+    "description": "Get the list of Workload Protection policies.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "summary": "Get all Workload Protection policies"
+  },
+  "CreateCSMThreatsAgentPolicy": {
+    "description": "Create a new Workload Protection policy with the given parameters.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "summary": "Create a Workload Protection policy",
+    "request_description": "The definition of the new Agent policy",
+    "request_schema_description": "Request object that includes the Agent policy to create"
   },
   "DownloadCSMThreatsPolicy": {
-    "description": "The download endpoint generates a CSM Threats policy file from your currently active\nCSM Threats rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour Agents to update the policy running in your environment.",
-    "summary": "Get the latest CSM Threats policy"
+    "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "summary": "Download the Workload Protection policy"
+  },
+  "DeleteCSMThreatsAgentPolicy": {
+    "description": "Delete a specific Workload Protection policy.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "summary": "Delete a Workload Protection policy"
+  },
+  "GetCSMThreatsAgentPolicy": {
+    "description": "Get the details of a specific Workload Protection policy.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "summary": "Get a Workload Protection policy"
+  },
+  "UpdateCSMThreatsAgentPolicy": {
+    "description": "Update a specific Workload Protection policy.\nReturns the policy object when the request is successful.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "summary": "Update a Workload Protection policy",
+    "request_description": "New definition of the Agent policy",
+    "request_schema_description": "Request object that includes the Agent policy with the attributes to update"
   },
   "ListPipelines": {
     "description": "Retrieve a list of pipelines.",
@@ -1540,7 +1772,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Accounts: `integration-account`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Accounts        | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -1802,8 +2034,12 @@
     "summary": "List vulnerable assets"
   },
   "DownloadCloudWorkloadPolicyFile": {
-    "description": "The download endpoint generates a Cloud Workload Security policy file from your currently active\nCloud Workload Security rules, and downloads them as a .policy file. This file can then be deployed to\nyour Agents to update the policy running in your environment.",
-    "summary": "Get the latest Cloud Workload Security policy"
+    "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
+    "summary": "Download the Workload Protection policy (US1-FED)"
+  },
+  "ListAssetsSBOMs": {
+    "description": "Get a list of assets SBOMs for an organization.\n\n### Pagination\n\nPlease review the [Pagination section](#pagination) for the \"List Vulnerabilities\" endpoint.\n\n### Filtering\n\nPlease review the [Filtering section](#filtering) for the \"List Vulnerabilities\" endpoint.\n\n### Metadata\n\nPlease review the [Metadata section](#metadata) for the \"List Vulnerabilities\" endpoint.",
+    "summary": "List assets SBOMs"
   },
   "GetSBOM": {
     "description": "Get a single SBOM related to an asset by its type and name.\n",
@@ -1862,28 +2098,28 @@
     "request_schema_description": "Body of the notification rule patch request."
   },
   "ListCloudWorkloadSecurityAgentRules": {
-    "description": "Get the list of Agent rules.",
-    "summary": "Get all Cloud Workload Security Agent rules"
+    "description": "Get the list of agent rules.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
+    "summary": "Get all Workload Protection agent rules (US1-FED)"
   },
   "CreateCloudWorkloadSecurityAgentRule": {
-    "description": "Create a new Agent rule with the given parameters.",
-    "summary": "Create a Cloud Workload Security Agent rule",
-    "request_description": "The definition of the new Agent rule.",
-    "request_schema_description": "Request object that includes the Agent rule to create."
+    "description": "Create a new agent rule with the given parameters.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
+    "summary": "Create a Workload Protection agent rule (US1-FED)",
+    "request_description": "The definition of the new agent rule",
+    "request_schema_description": "Request object that includes the Agent rule to create"
   },
   "DeleteCloudWorkloadSecurityAgentRule": {
-    "description": "Delete a specific Agent rule.",
-    "summary": "Delete a Cloud Workload Security Agent rule"
+    "description": "Delete a specific agent rule.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
+    "summary": "Delete a Workload Protection agent rule (US1-FED)"
   },
   "GetCloudWorkloadSecurityAgentRule": {
-    "description": "Get the details of a specific Agent rule.",
-    "summary": "Get a Cloud Workload Security Agent rule"
+    "description": "Get the details of a specific agent rule.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
+    "summary": "Get a Workload Protection agent rule (US1-FED)"
   },
   "UpdateCloudWorkloadSecurityAgentRule": {
-    "description": "Update a specific Agent rule.\nReturns the Agent rule object when the request is successful.",
-    "summary": "Update a Cloud Workload Security Agent rule",
-    "request_description": "New definition of the Agent rule.",
-    "request_schema_description": "Request object that includes the Agent rule with the attributes to update."
+    "description": "Update a specific agent rule.\nReturns the agent rule object when the request is successful.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
+    "summary": "Update a Workload Protection agent rule (US1-FED)",
+    "request_description": "New definition of the agent rule",
+    "request_schema_description": "Request object that includes the Agent rule with the attributes to update"
   },
   "ListSecurityFilters": {
     "description": "Get the list of configured security filters with their definitions.",
@@ -2227,6 +2463,20 @@
     "request_description": "",
     "request_schema_description": "Request to create a team"
   },
+  "ListMemberTeams": {
+    "description": "Get all member teams.",
+    "summary": "Get all member teams"
+  },
+  "AddMemberTeam": {
+    "description": "Add a member team.\nAdds the team given by the `id` in the body as a member team of the super team.",
+    "summary": "Add a member team",
+    "request_description": "",
+    "request_schema_description": "Request to add a member team to super team's hierarchy"
+  },
+  "RemoveMemberTeam": {
+    "description": "Remove a super team's member team identified by `member_team_id`.",
+    "summary": "Remove a member team"
+  },
   "DeleteTeam": {
     "description": "Remove a team using the team's `id`.",
     "summary": "Remove a team"
@@ -2402,41 +2652,41 @@
     "summary": "Get user memberships"
   },
   "CreateWorkflow": {
-    "description": "Create a new workflow, returning the workflow ID. This API requires an application key scoped with the `workflows_write` permission.",
+    "description": "Create a new workflow, returning the workflow ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Create a Workflow",
     "request_description": "",
     "request_schema_description": "A request object for creating a new workflow."
   },
   "DeleteWorkflow": {
-    "description": "Delete a workflow by ID. This API requires an application key scoped with the `workflows_write` permission.",
+    "description": "Delete a workflow by ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Delete an existing Workflow"
   },
   "GetWorkflow": {
-    "description": "Get a workflow by ID.  This API requires an application key scoped with the `workflows_read` permission.",
+    "description": "Get a workflow by ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Get an existing Workflow"
   },
   "UpdateWorkflow": {
-    "description": "Update a workflow by ID. This API requires an application key scoped with the `workflows_write` permission.",
+    "description": "Update a workflow by ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Update an existing Workflow",
     "request_description": "",
     "request_schema_description": "A request object for updating an existing workflow."
   },
   "ListWorkflowInstances": {
-    "description": "List all instances of a given workflow. This API requires an application key scoped with the workflows_read permission.",
+    "description": "List all instances of a given workflow. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "List workflow instances"
   },
   "CreateWorkflowInstance": {
-    "description": "Execute the given workflow. This API requires an application key scoped with the workflows_run permission.",
+    "description": "Execute the given workflow. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Execute a workflow",
     "request_description": "",
     "request_schema_description": "Request used to create a workflow instance."
   },
   "GetWorkflowInstance": {
-    "description": "Get a specific execution of a given workflow. This API requires an application key scoped with the workflows_read permission.",
+    "description": "Get a specific execution of a given workflow. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Get a workflow instance"
   },
   "CancelWorkflowInstance": {
-    "description": "Cancels a specific execution of a given workflow. This API requires an application key scoped with the workflows_run permission.",
+    "description": "Cancels a specific execution of a given workflow. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Cancel a workflow instance"
   }
 }

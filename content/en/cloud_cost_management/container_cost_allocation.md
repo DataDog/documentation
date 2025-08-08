@@ -29,7 +29,7 @@ CCM displays costs for resources including CPU, memory, and more depending on th
 {{< tabs >}}
 {{% tab "AWS" %}}
 
-CCM allocates costs of AWS ECS clusters as well as all Kubernetes clusters, including those managed through Elastic Kubernetes Service (EKS).
+CCM allocates costs of Amazon ECS clusters as well as all Kubernetes clusters, including those managed through Elastic Kubernetes Service (EKS).
 
 The following table presents the list of collected features and the minimal Agent and Cluster Agent versions for each.
 
@@ -42,11 +42,13 @@ The following table presents the list of collected features and the minimal Agen
 
 1. Configure the AWS Cloud Cost Management integration on the [Cloud Cost Setup page][101].
 1. For Kubernetes support, install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
-1. For AWS ECS support, set up [**Datadog Container Monitoring**][104] in ECS tasks.
+1. For Amazon ECS support, set up [**Datadog Container Monitoring**][104] in ECS tasks.
 1. Optionally, enable [AWS Split Cost Allocation][105] for usage-based ECS allocation.
 1. To enable storage cost allocation, set up [EBS metric collection][108].
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][106].
 1. To enable Data transfer cost allocation, set up [Cloud Network Monitoring][107]. **Note**: additional charges apply
+
+**Note**: GPU Container Cost Allocation only supports pod requests in the format `nvidia.com/gpu`.
 
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
@@ -73,6 +75,8 @@ The following table presents the list of collected features and the minimal Agen
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][104].
 
+**Note**: GPU Container Cost Allocation only supports pod requests in the format `nvidia.com/gpu`.
+
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
 [103]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator
@@ -94,10 +98,15 @@ The following table presents the list of collected features and the minimal Agen
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][104].
 
+**Note**: GPU Container Cost Allocation only supports pod requests in the format `nvidia.com/gpu`.
+
+**Note**: [GKE Autopilot][105] is only supported as an Agentless Kubernetes setup that is subject to [limitations](#agentless-kubernetes-costs).
+
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
 [103]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator
 [104]: https://docs.datadoghq.com/integrations/dcgm/?tab=kubernetes#installation
+[105]: https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-overview
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -107,7 +116,6 @@ The following table presents the list of collected features and the minimal Agen
 Cost allocation divides host compute and other resource costs from your cloud provider into individual tasks or pods associated with them. These divided costs are then enriched with tags from related resources so you can break down costs by any associated dimensions.
 
 Use the `allocated_resource` tag to visualize the spend resource associated with your costs at various levels, including the Kubernetes node, container orchestration host, storage volume, or entire cluster level.
-
 
 {{< tabs >}}
 {{% tab "AWS" %}}
@@ -136,13 +144,13 @@ For Kubernetes Persistent Volume storage allocation, Persistent Volumes (PV), Pe
 
 Next, Datadog looks at all of the pods that claimed the volume on that day. The cost of the volume is allocated to a pod based on the resources it used and the length of time it ran. These resources include the provisioned capacity for storage, IOPS, and throughput. This allocated cost is enriched with all of the pod's tags.
 
-### AWS ECS on EC2
+### Amazon ECS on EC2
 
 For ECS allocation, Datadog determines which tasks ran on each EC2 instance used for ECS. If you enable AWS Split Cost Allocation, the metrics allocate ECS costs by usage instead of reservation, providing more granular detail.
 
 Based on resources the task has used, Datadog assigns the appropriate portion of the instance's compute cost to that task. The calculated cost is enriched with all of the task's tags and all of the container tags (except container names) running in the task.
 
-### AWS ECS on Fargate
+### Amazon ECS on Fargate
 
 ECS tasks that run on Fargate are already fully allocated [in the CUR][103]. CCM enriches that data by adding out-of-the-box tags and container tags to the AWS Fargate cost.
 
@@ -208,7 +216,7 @@ All other costs are given the same value and tags as the source metric `gcp.cost
 
 ### Agentless Kubernetes costs
 
-To view the costs of GKE clusters without enabling Datadog Infrastructure Monitoring, use [GKE cost allocation][103]. Enable GKE cost allocation on unmonitored GKE clusters to access this feature set.
+To view the costs of GKE clusters without enabling Datadog Infrastructure Monitoring, use [GKE cost allocation][103]. Enable GKE cost allocation on unmonitored GKE clusters to access this feature set. This approach comes with a number of limitations (see below).
 
 #### Limitations and differences from the Datadog Agent
 
@@ -395,7 +403,7 @@ In addition to ECS task tags, the following out-of-the-box tags are applied to c
 
 | Out-of-the-box tag      |  Description |
 | ---                     | ------------ |
-| `orchestrator:ecs`      | The orchestration platform associated with the item is AWS ECS. |
+| `orchestrator:ecs`      | The orchestration platform associated with the item is Amazon ECS. |
 | `ecs_cluster_name`      | The name of the ECS cluster. |
 | `is_aws_ecs`            | All costs associated with running ECS. |
 | `is_aws_ecs_on_ec2`     | All EC2 compute costs associated with running ECS on EC2. |

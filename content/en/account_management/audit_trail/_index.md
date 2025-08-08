@@ -71,9 +71,11 @@ To enable archiving for Audit Trail, navigate to your [Organization Settings][3]
 
 ### Retention
 
-Retaining events is an optional feature for Audit Trail. Scroll down to *Retention* and click the *Retain Audit Trail Events* toggle to enable.
+Retaining events is an optional feature for Audit Trail. In the **Retention Period** section, click the **Change retention period** to select a retention length appropriate for your use case.
 
-The default retention period for an audit trail event is seven days. You can set a retention period between three and 90 days.
+When Audit Trail is enabled, the default retention period for an audit trail event is 90 days. You can set the retention period to: 3, 7, 15, 30, or 90 days.
+
+When Audit Trail is disabled, the retention period is reset back to the default 7 days.
 
 {{< img src="account_management/audit_logs/retention_period.png" alt="Audit Trail Retention setup in Datadog" style="width:80%;">}}
 
@@ -163,8 +165,6 @@ To apply a query filter with Reference Tables, click on the `+ Add` button next 
 {{< img src="account_management/audit_logs/reference_tables.png" alt="The Datadog Audit Trail explorer with reference table search options highlighted" border="true" popup="true" style="width:100%;" >}}
 
 ### API key auditing
-
-<div class="alert alert-warning">API key auditing is in Preview.</div>
 
 Log management users can audit API key usage with Audit Trail. For API key auditing, logs have a `datadog.api_key_uuid` tag that contains the UUID of the API key used for collecting those logs. Use this information to determine:
 - How API keys are used across your organization and telemetry sources.

@@ -15,7 +15,7 @@ Regarding the API rate limit policy:
 
 - Datadog **does not rate limit** on data point/metric submission (see [metrics section][2] for more info on how the metric submission rate is handled). Limits encounter is dependent on the quantity of [custom metrics][3] based on your agreement.
 - The API for sending logs is not rate limited.
-- The rate limit for event submission is `50,000` events per minute per organization.
+- The rate limit for event submission is `250,000` events per minute per organization.
 - The rate limits for endpoints vary and are included in the headers detailed below. These can be extended on demand.
 
 <div class="alert alert-warning">

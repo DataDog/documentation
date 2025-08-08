@@ -48,7 +48,7 @@ Las siguientes también se consideran métricas personalizadas:
 - En general, cualquier métrica enviada a través de [DogStatsD][3] o a través de un [check de Agent personalizado][4].
 - Métricas presentadas por las [Integraciones de Marketplace][29].
 - Ciertas [integraciones estándar](#standard-integrations) pueden potencialmente emitir métricas personalizadas.
-- Métricas enviadas desde una integración que no es una de las [{{< translate key="integration_count" >}} integraciones de Datadog][1]. **Nota**: Las integraciones de Marketplace emiten métricas personalizadas.
+- Métricas enviadas desde una integración que no sea una de las [más de {{< translate key="integration_count" >}} integraciones Datadog][1].
 
 **Nota**: Los usuarios con el rol de administrador de Datadog o el permiso `usage_read` pueden ver la cantidad promedio mensual de métricas personalizadas por hora y las 5000 métricas personalizadas principales de su cuenta en la [página de detalles de uso][5]. Obtén más información sobre [cómo se cuentan las métricas personalizadas][6].
 

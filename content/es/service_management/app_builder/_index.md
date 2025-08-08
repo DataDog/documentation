@@ -16,11 +16,8 @@ further_reading:
   text: Crea flujos de trabajo y aplicaciones en Datadog en cuestión de minutos con
     nuestro asistente de inteligencia artificial.
 title: App Builder
+site_support_id: actions
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder no es compatible con el <a href="/getting_started/site">sitio de Datadog </a> ({{< region-param key="dd_site_name" >}}) seleccionado.</div>
-{{< /site-region >}}
 
 App Builder de Datadog es una plataforma de creación de aplicaciones de bajo código. Agiliza el desarrollo de tus herramientas internas con una interfaz de arrastrar y soltar fácil de utilizar y una compatibilidad integrada con JavaScript. App Builder se integra con servicios populares como AWS y GitHub, lo que te permite aprovechar los datos y conectarte de forma fluida con API externas y almacenes de datos. Mediante su integración con las capacidades existentes de Datadog, App Builder te proporciona un contexto centralizado que te permite tomar medidas preventivas o responder a incidentes activos, todo desde la misma vista que utilizas para solucionar problemas.
 

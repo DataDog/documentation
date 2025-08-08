@@ -167,7 +167,7 @@ Para obtener información sobre entornos en contenedores, consulta la guía [Aut
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "confluent_platform" >}}
+{{< get-metrics-from-git "confluent-platform" >}}
 
 
 ### Eventos
@@ -175,7 +175,7 @@ Para obtener información sobre entornos en contenedores, consulta la guía [Aut
 El check de Confluent Platform no incluye eventos.
 
 ### Checks de servicios
-{{< get-service-checks-from-git "confluent_platform" >}}
+{{< get-service-checks-from-git "confluent-platform" >}}
 
 
 ## Solucionar problemas

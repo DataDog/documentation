@@ -289,7 +289,7 @@ Pour le Kubernetes Explorer, le carrousel d'insights Watchdog affiche [toutes l
 [3]: /fr/tracing/services/service_page/
 [4]: /fr/tracing/services/resource_page/
 [5]: https://app.datadoghq.com/databases/list
-[6]: https://app.datadoghq.com/profiling/search
+[6]: https://app.datadoghq.com/profiling/explorer
 [7]: https://app.datadoghq.com/process
 [8]: https://app.datadoghq.com/functions
 [9]: https://app.datadoghq.com/orchestration/overview/pod

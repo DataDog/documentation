@@ -50,11 +50,11 @@ Puedes establecer sistemas de control tanto para los volúmenes de tramos indexa
 * Un **test de navegador** permite simular una secuencia de comandos de acciones de usuario en una aplicación web utilizando un navegador web virtualizado. Datadog cobra por cada mil tests de navegador ejecutados al servicio de monitorización Synthetic
  de Datadog.
 
-## Network Performance Monitoring
+## Monitorización de red en la nube
 
-* Datadog registra una vez por hora el número de hosts **Network Performance Monitoring** (NPM) que estás monitorizando de forma simultánea con el servicio NPM de Datadog.
+* Datadog registra el número de hosts de **Monitorización de red en la nube** (CNM) que estás monitorizando simultáneamente con el servicio de CNM de Datadog una vez por hora.
   * El recuento facturable de hosts se calcula al final del mes utilizando el recuento máximo (marca de agua alta) del 99% inferior del consumo de esas horas. Datadog excluye el 1% superior para reducir el impacto de los picos de consumo en tu factura.
-* Además, Datadog mide mensualmente el número total de flujos utilizados por todos los hosts NPM. Un **flujo** es un registro del tráfico enviado y recibido entre un origen (IP:Puerto) y un destino (IP:Puerto), medido en un periodo de tiempo de cinco minutos.
+* Además, Datadog mide el número total de flujos utilizados por todos los hosts de CNM al mes. Un **flujo** es un registro del tráfico enviado y recibido entre un origen (IP:Puerto) y un destino (IP:Puerto), medido en un periodo de tiempo de cinco minutos.
 
 ## Real User Monitoring
 

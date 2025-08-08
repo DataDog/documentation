@@ -14,23 +14,27 @@ further_reading:
 title: Automatización de flotas
 ---
 
-{{< callout btn_hidden="true">}}La automatización de flotas está en fase beta. Accede a ella desde la página <a href="https://app.datadoghq.com/fleet">Automatización de flotas</a> de Datadog.{{< /callout >}}
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La automatización de flotas no es compatible con el <a href="/getting_started/site">sitio de Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Información general
 
 La automatización de flotas de Datadog te permite controlar de forma centralizada y gestionar en remoto Datadog Agents a escala para responder a tus necesidades de observabilidad en constante evolución.
 
-{{< img src="agent/fleet_automation/fleet-automation.png" alt="Página de automatización de flotas" style="width:100%;" >}}
+{{< img src="/agent/fleet_automation/fleet_automation2.png" alt="Página de Fleet Automation" style="width:100%;" >}}
+
+## Casos prácticos
 
 Con la plataforma de automatización de flotas, puedes:
-- Visualizar el Agent y las configuraciones de sus integraciones para ayudar a confirmar cambios en la implementación y garantizar la coherencia de la configuración.
+- Consulte las últimas configuraciones del Agent y los cambios históricos para confirmar las actualizaciones del despliegue y garantizar la coherencia de la configuración.
+- Asegúrate de que tu flota de Agent utiliza las últimas mejoras identificando y actualizando las versiones obsoletas de Agent.
 - Enviar un flare desde dentro de tu organización, reduciendo así el tiempo que se tarda en depurar problemas en un Agent.
-- Asegurarte de que tu flota de Agents utiliza las últimas mejoras, identificando las versiones obsoletas del Agent.
 - Ayudar a rotar las claves API y asegurarte de que las claves antiguas pueden desactivarse sin ningún impacto, identificando cuáles y cuántos Agents utilizan una clave específica.
+
+## Configurar Fleet Automation
+
+- **Actualización y configuración remotas de Agents**: para obtener información sobre las versiones del Agent compatibles y los pasos de configuración, consulta [Activar la gestión remota de Agent][3].
+- **Ver la configuración del Agent**: la vista de configuración del Agent está habilitada por defecto en las versiones del Agent 7.47.0 o posteriores. Para habilitar la configuración del Agent manualmente, establece `inventories_configuration_enabled` en tu [archivo de configuración del Agent][2] a `true`. También puedes utilizar la variable de entorno `DD_INVENTORIES_CONFIGURATION_ENABLED`.
+- **Ver configuración de una integración del Agent**: la configuración de una integración del Agent está habilitada por defecto en las versiones 7.49/6.49 o posteriores del Agent. Para habilitar la configuración de una integración del Agent manualmente, define`inventories_checks_configuration_enabled` en tu [archivo de configuración del Agent][2] como `true`. También puedes utilizar la variable de entorno `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED`.
+
+## Observar tu flota
 
 Utiliza la página [**Automatización de la flota**][1] para obtener información sobre hosts no supervisados, Agents que deben actualizarse o Agents que presentan problemas de integración. Para cada Agent, puedes ver:
 - La versión del Agent 
@@ -38,29 +42,36 @@ Utiliza la página [**Automatización de la flota**][1] para obtener informació
 - Los servicios que está monitorizando el Agent
 - El estado de configuración remota del Agent
 - Los productos habilitados en el Agent
+- Eventos de Agent de Audit Trail, incluidos cambios de configuración, actualizaciones y flares
 
-Al seleccionar un Agent, obtendrás más información sobre él, como su configuración, sus integraciones conectadas y una pestaña de ayuda que puedes utilizar para enviar un flare remoto.
+### Examinar un Agent
 
-{{< img src="agent/fleet_automation/fleet-automation-agent.png" alt="Información sobre la integración de un Agent" style="width:100%;" >}}
+Al seleccionar un Agent, obtendrás más información sobre él, como su configuración, sus integraciones conectadas, eventos de auditoría y una pestaña de ayuda que puedes utilizar para enviar un flare remoto.
 
-## Configuración de la automatización de flotas
+{{< img src="agent/fleet_automation/fleet-automation-view-config.png" alt="Información de integración de un Agent" style="width:100%;" >}}
 
-La automatización de flotas incorpora varias funciones de Datadog, que se activan automáticamente en el Agent versión 7.49/6.49 o posterior. Para asegurarte de que tienes acceso a todas las funciones, actualiza tu Agent a la versión 7.49/6.49 o posterior.
+### Ver los eventos de Agent de Audit Trail
 
-Si utilizas un Agent más antiguo, es posible que aún puedas activar las siguientes funciones de Datadog de forma individual:
-- **Configuración remota**: Para obtener información sobre las versiones compatibles del Agent y los pasos que debes seguir durante la configuración, consulta [Habilitación de la configuración remota][3].
-- **Configuración del Agent**: Necesitas tener la versión del Agent 7.39/6.39 o posterior para habilitar la pestaña de configuración del Agent. Esta se encuentra habilitada por defecto en las versiones del Agent 7.47.0/6.47.0 o posteriores. Para habilitar la configuración del Agent manualmente, define `inventories_configuration_enabled` en tu [archivo de configuración del Agent][2] como `true`. También puedes utilizar la variable de entorno`DD_INVENTORIES_CONFIGURATION_ENABLED`.
-- **Configuración de una integración del Agent**: La configuración de una integración del Agent está habilitada por defecto en las versiones 7.49/6.49 o posteriores del Agent. Para habilitar la configuración de una integración del Agent manualmente, define`inventories_checks_configuration_enabled` en tu [archivo de configuración del Agent][2] como `true`. También puedes utilizar la variable de entorno `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED`.
+La pestaña Eventos de auditoría muestra eventos de Audit Trail asociados con el Agent seleccionado.
+Utiliza esta pestaña para:
+- Identificar los cambios de configuración, las actualizaciones de claves de API, las instalaciones, las actualizaciones y los flares de asistencia.
+- Determinar cuándo se hicieron los cambios y desde dónde
 
-Datadog te recomienda actualizar tu Agent con regularidad para asegurarte de que tienes acceso a las últimas funciones.
+La visibilidad de los eventos de Audit Trail depende de tu plan. Cuando Audit Trail está habilitado en tu organización, puedes ver los eventos de Agent durante un máximo de 90 días según la configuración de retención de Audit Trail. Si Audit Trail no está habilitado en tu organización, puedes ver los eventos de las últimas 24 horas.
 
-## Enviar un flare remoto
+### Enviar un flare remoto
 
-Antes de enviar un flare, asegúrate de que la configuración remota está [habilitada](#configuring-fleet-automation) en el Agent seleccionado.
+Después de activar la configuración remota en un Agent, puedes enviar un flare desde Datadog. Para obtener instrucciones sobre cómo enviar un flare, consulta [Enviar un flare desde el sitio de Datadog][7].
 
-{{% remote-flare %}}
+Cuando te pongas en contacto con el servicio de asistencia de Datadog con la configuración remota activada para el Agent, el equipo podrá iniciar un flare desde tu entorno para poder ayudarte mejor y de forma más rápida. Los flares proporcionan información de solución de problemas al servicio de asistencia de Datadog para ayudarte a resolver tu problema. 
 
-{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="El botón Send Ticket (Enviar ticket) genera un formulario para enviar un flare sobre un nuevo ticket de asistencia o sobre uno ya existente" style="width:100%;" >}}
+{{< img src="agent/fleet_automation/fleet_automation_remote_flare.png" alt="Enviar un flare remoto" style="width:100%;" >}}
+
+## Gestión remota de Agents
+
+La gestión remota de Agents simplifica el proceso de actualización de tu flota de Agents, ya que reduce la necesidad de coordinar varias herramientas de despliegue o gestión de la configuración.  Para obtener más información, consulta [Gestión remota del Agent][6].
+
+{{< img src="agent/fleet_automation/fleet-automation-upgrades-2.png" alt="Actualizar agents de forma remota en Fleet Automation" style="width:100%;" >}}
 
 ## Control de acceso a la automatización de flotas
 
@@ -68,17 +79,21 @@ La automatización de flotas está disponible para todos los usuarios de una org
 
 | Permiso | Descripción |
 |--------------|---------------|
-| `API keys read`| Determina qué usuarios pueden visualizar y buscar Agents por clave API. |
-| `Agent flare collection` | Determina qué usuarios pueden enviar flares de forma remota. |
+| `API Keys Read`| Determina qué usuarios pueden visualizar y buscar Agents por clave API. |
+| `Agent Flare Collection` | Restringe qué usuarios pueden enviar flares a distancia desde Fleet Automation. |
+| `Agent Upgrade` | Restringe qué usuarios tienen acceso a la actualización de Agents desde Fleet Automation. |
+| `Agent Configuration Management` | Restringe qué usuarios tienen acceso a configurar Agents desde Fleet Automation. |
 
 Para obtener información sobre la configuración de funciones y permisos, consulta [Control de acceso][5].
 
-## Lectura adicional
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/fleet
 [2]: /es/agent/configuration/agent-configuration-files/
-[3]: /es/agent/remote_config#enabling-remote-configuration
+[3]: /es/agent/fleet_automation/remote_management/#setup
 [4]: /es/infrastructure/list/#agent-configuration
-[5]: https://docs.datadoghq.com/es/account_management/rbac/
+[5]: /es/account_management/rbac/
+[6]: /es/agent/fleet_automation/remote_management/
+[7]: /es/agent/troubleshooting/send_a_flare/#send-a-flare-from-the-datadog-site

@@ -26,7 +26,7 @@ custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cloud_foundry_api/README.md
 display_on_public_website: true
-draft: false
+draft: true
 git_integration_title: cloud_foundry_api
 integration_id: cloud-foundry-api
 integration_title: API de Cloud Foundry
@@ -86,7 +86,7 @@ No es necesaria ninguna instalación adicional en tu servidor.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "cloud_foundry_api" >}}
+{{< get-metrics-from-git "cloud-foundry-api" >}}
 
 
 ### Eventos
@@ -94,7 +94,7 @@ No es necesaria ninguna instalación adicional en tu servidor.
 La integración de la API de Cloud Foundry recopila los eventos de auditoría configurados.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "cloud_foundry_api" >}}
+{{< get-service-checks-from-git "cloud-foundry-api" >}}
 
 
 ## Solucionar problemas

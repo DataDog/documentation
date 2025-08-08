@@ -8,6 +8,7 @@
         </div>
     </div>
     {{ partial "translate_status_banner/translate_status_banner.html" . }}
+    {{ partial "site_support_banner/site_support_banner.html" . }}
     
     {{ $wrappedTable := printf "<div class=table-wrapper> ${1} </div>" }} 
     {{ .Content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable | safeHTML }}

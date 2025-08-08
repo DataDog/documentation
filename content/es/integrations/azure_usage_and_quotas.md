@@ -41,7 +41,7 @@ Si aún no lo has hecho, configura la [integración Microsoft Azure][1]. No es n
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_usage_and_quotas" >}}
+{{< get-metrics-from-git "azure-usage-and-quotas" >}}
 
 
 ### Eventos

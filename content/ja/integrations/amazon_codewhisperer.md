@@ -81,7 +81,7 @@ Amazon CodeWhisperer は、自然言語によるコメントと統合開発環�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_codewhisperer" >}}
+{{< get-metrics-from-git "amazon-codewhisperer" >}}
 
 
 ### イベント

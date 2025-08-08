@@ -29,7 +29,7 @@ The monitor takes the values in the evaluation window and calculates the average
 
 You want a monitor to send a notification when the average over the past 10 minutes goes over 30. What state is the monitor in at minute 3:10?
 
-$$(\10+15+12+8+11+14+13+25+37+45+50\)/10 = 24$$
+$$(\10+15+12+8+11+14+13+25+37+45+50\)/11 = 22$$
 
 ##### Answer
 

@@ -7,6 +7,8 @@ disable_toc: false
 
 For existing pipelines in Observability Pipelines, you can update and deploy changes for source settings, destination settings, and processors in the Observability Pipelines UI. But if you want to update source and destination environment variables, you need to manually update the Worker with the new values.
 
+This document goes through updating the pipeline in the UI. You can also use the [update a pipeline][2] API or [datadog_observability_pipeline][3] Terraform resource to update existing pipelines.
+
 ## Update an existing pipeline
 
 1. Navigate to [Observability Pipelines][1].
@@ -67,6 +69,11 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/logstash %}}
 
 {{% /tab %}}
+{{% tab "Socket" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/socket %}}
+
+{{% /tab %}}
 {{% tab "Splunk HEC" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/splunk_hec %}}
@@ -95,11 +102,11 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_opensearch %}}
 
 {{% /tab %}}
-<!-- {{% tab "Amazon Security Lake" %}}
+{{% tab "Amazon Security Lake" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_security_lake %}}
 
-{{% /tab %}} -->
+{{% /tab %}}
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
@@ -129,6 +136,11 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/elasticsearch %}}
 
 {{% /tab %}}
+{{% tab "HTTP Client" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/http_client %}}
+
+{{% /tab %}}
 {{% tab "Microsoft Sentinel" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/microsoft_sentinel %}}
@@ -147,6 +159,11 @@ On the Worker installation page:
 {{% tab "SentinelOne" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sentinelone %}}
+
+{{% /tab %}}
+{{% tab "Socket" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/socket %}}
 
 {{% /tab %}}
 {{% tab "Splunk HEC" %}}
@@ -196,3 +213,5 @@ On the Worker installation page:
 {{< /tabs >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
+[2]: /api/latest/observability-pipelines/#update-a-pipeline
+[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/observability_pipeline
