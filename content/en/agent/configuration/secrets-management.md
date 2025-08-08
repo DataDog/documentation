@@ -61,15 +61,6 @@ secret_backend_config:
 ```
 
 
-
-
-
-
-
-
-<!-- -------------------------------------------- START OF SECTION --------------------------------------------->
-
-# <!-- pre AWS tabs -->
 More specific setup instructions depend on the backend type used. Refer to the appropriate link for further information: 
 
 
@@ -143,8 +134,6 @@ In <i>most</i> cases, you only need to set the <code>aws_region</code> in the <c
 
 When working with single strings, setting `force_string: true` in the backend configuration ensures the secret is treated as a string value.
 
-
-# <!-- ################## A W S - secrets ##################### -->
 {{< tabs >}}
 {{% tab "AWS Secrets" %}}
 
@@ -291,7 +280,6 @@ secret_backend_config:
 
 {{% /tab  %}}
 
-# <!-- ################## A W S - ssm ##################### -->
 
 {{% tab "AWS SSM" %}}
 
@@ -424,15 +412,11 @@ aws_session:
   aws_region: us-east-1
 ```
 
-<!------ SSM LINKS ------>
-
 [200]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
 [201]: https://docs.aws.amazon.com/systems-manager/
 
 {{% /tab %}}
 {{< /tabs >}}
-
-<!-- COLLAPSE-CONTENT LINKS -->
 
 [1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
 [1001]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
@@ -444,12 +428,6 @@ aws_session:
 
 {{% /collapse-content %}} 
 
-
-
-
-
-
-# <!-- ######### A Z U R E ############ -->
 
 {{% collapse-content title="Azure Keyvault Backend" level="h4" expanded=false id="id-for-anchoring" %}}
 
@@ -555,18 +533,12 @@ secret_backend_type: azure.keyvault
 secret_backend_config:
   keyvaulturl: https://mykeyvault.vault.azure.net
 ```
-<!-- AZURE LINKS -->
 
 [2000]: https://docs.microsoft.com/en-us/Azure/key-vault/secrets/quick-create-portal
 
 {{% /collapse-content %}} 
 
 
-
-
-
-
-# <!-- ######### H A S H I C O R P ############ -->
 {{% collapse-content title="Hashicorp Vault Backend" level="h4" expanded=false id="id-for-anchoring" %}}
 ##### Supported backends
 
@@ -736,8 +708,6 @@ secret_backend_config:
 [3002]: https://developer.hashicorp.com/vault/docs/auth/aws#aws-auth-method
 {{% /collapse-content %}} 
 
-# <!-- ######### F I L E ############ -->
-
 {{% collapse-content title="JSON or YAML File Secret Backends" level="h4" expanded=false id="id-for-anchoring" %}}
 
 |Backend Type                                 | AWS Service                             |
@@ -894,18 +864,6 @@ secret_backend_config:
 [4002]: https://en.wikipedia.org/wiki/YAML
 
 {{% /collapse-content %}} 
-
-<!-- ######### END ############ -->
-
-
-# <!-- -------------------------------------- END OF SECTION----------------------------------------------------->
-
-
-
-
-
-
-
 
 
 ### Option 2: Using the built-in Script for Kubernetes and Docker
