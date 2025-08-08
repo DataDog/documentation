@@ -23,7 +23,11 @@ To ensure your OpenTelemetry data is properly correlated, you must configure you
 | OpenTelemetry Resource Attribute | Datadog Tag | Notes                                                                                                   |
 |----------------------------------|-------------|---------------------------------------------------------------------------------------------------------|
 | `deployment.environment.name`    | `env`       | **Recommended**. Supported in Agent v7.58.0+ and Collector Exporter v0.110.0+.                          |
+<<<<<<< HEAD
+| `deployment.environment`         | `env`       | Use if you are running an Agent version older than v7.58.0 or a Collector Exporter older than v0.110.0. |
+=======
 | `deployment.environment`         | `env`       | Use instead of `deployment.environment.name` if you are running an Agent version older than v7.58.0 or a Collector Exporter older than v0.110.0. |
+>>>>>>> 54c000bd0dca12d5c8bd34faa80156c7f6a37e26
 | `service.name`                   | `service`   |                                                                                                         |
 | `service.version`                | `version`   |                                                                                                         |
 
@@ -89,6 +93,7 @@ After unified service tagging is configured, you can connect your various teleme
 - [Correlate logs and traces][1]
 - [Correlate metrics and traces][2]
 - [Correlate RUM and traces][3]
+- [Correlate DBM and traces][4]
 
 ## Further reading
 
@@ -97,3 +102,4 @@ After unified service tagging is configured, you can connect your various teleme
 [1]: /opentelemetry/correlate/logs_and_traces
 [2]: /opentelemetry/correlate/metrics_and_traces
 [3]: /opentelemetry/correlate/rum_and_traces
+[4]: /opentelemetry/correlate/dbm_and_traces
