@@ -22,6 +22,7 @@ categories:
 - 네트워크
 - 로그 수집
 - 컨테이너
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/consul_connect/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: consul-connect
 integration_title: Consul Connect
 integration_version: ''
 is_public: true
-custom_kind: 통합
 manifest_version: 2.0.0
 name: consul_connect
 public_title: Consul Connect
@@ -39,7 +39,7 @@ short_description: Consul Connect Envoy 사이드카 프록시를 모니터링�
 supported_os:
 - linux
 - macos
-- windows
+- 윈도우즈(Windows)
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
@@ -49,6 +49,7 @@ tile:
   - Category::Network
   - Category::Log Collection
   - Category::Containers
+  - Offering::Integration
   configuration: README.md#Setup
   description: Consul Connect Envoy 사이드카 프록시를 모니터링하세요.
   media: []
@@ -70,7 +71,7 @@ tile:
 
 Consul Connect를 실행하는 서비스에 [Datadog Agent][4]를 설치하고 해당 환경에 맞는 [구성](#configuration) 지침을 따르세요.
 
-### 구성
+### 설정
 호스트에서 실행 중인 Agent에 대해 이 검사를 구성하려면 아래 지침을 따르세요. 컨테이너화된 환경의 경우 [Containerized](#containerized) 섹션을 참조하세요.
 
 {{< tabs >}}
@@ -78,7 +79,7 @@ Consul Connect를 실행하는 서비스에 [Datadog Agent][4]를 설치하고 �
 
 #### 호스트
 
-호스트에서 실행 중인 에이전트에 대해 이 점검을 구성하려면:
+호스트에서 실행 중인 에이전트에 이 점검을 구성하는 방법:
 
 ##### 메트릭 수집
 1. Consul Connect에서 구성 옵션 [`-admin-bind`][1]을 활성화하여 Envoy Admin API가 노출되는 포트를 구성합니다.
@@ -93,9 +94,9 @@ Consul Connect를 실행하는 서비스에 [Datadog Agent][4]를 설치하고 �
 [2]: https://docs.datadoghq.com/ko/integrations/envoy/?tab=host#metric-collection
 [3]: https://docs.datadoghq.com/ko/integrations/envoy/?tab=host#log-collection
 {{% /tab %}}
-{{% tab "컨테이너화" %}}
+{{% tab "Containerized" %}}
 
-#### 컨테이너화
+#### 컨테이너화된 환경
 
 [Envoy 컨테이너화 지침][1]에 따라 Envoy용 Datadog Agent를 구성합니다.
 
@@ -120,7 +121,7 @@ Consul Connect를 실행하는 서비스에 [Datadog Agent][4]를 설치하고 �
 
 [Agent의 상태 하위 명령을 실행][5]하고 Checks 섹션에서 `envoy`를 찾습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 

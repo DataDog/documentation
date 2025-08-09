@@ -24,9 +24,9 @@ title: Continuous Testing 設定
 
 ## 概要
 
-You can access Continuous Testing settings on the [Synthetic Monitoring & Testing Settings page][1].
+Continuous Testing の設定には、[Synthetic Monitoring & Testing Settings ページ][1]からアクセスできます。
 
-{{< img src="continuous_testing/settings/parallelization.png" alt="Set parallelization for your Continuous Testing tests on the Settings page" style="width:100%;">}}
+{{< img src="continuous_testing/settings/parallelization.png" alt="Settings ページで Continuous Testing テストの並列実行を設定する" style="width:100%;">}}
 
 デフォルトでは、CI/CD パイプラインで実行されるすべてのテストは、順次実行されます (1 つずつ実行されます)。この動作を変更するには、[並列化値](#set-parallelization)を設定し、選択を保存してください。
 
@@ -59,7 +59,7 @@ $$\text"estimated parallelization" = {\text"CI バッチあたりの平均テス
 3. **Save Selection** をクリックします。
 4. 選択内容を確認します。
 
-{{< img src="continuous_testing/settings/parallelization.png" alt="Parallelization settings for 25 parallel Continuous Testing test runs" style="width:100%;">}}
+{{< img src="continuous_testing/settings/parallelization.png" alt="25 並列で Continuous Testing テストを実行するための並列化設定" style="width:100%;">}}
 
 ## 権限
 

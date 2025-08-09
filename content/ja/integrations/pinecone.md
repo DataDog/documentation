@@ -1,108 +1,110 @@
 ---
 app_id: pinecone
-app_uuid: dd7ebeb0-9910-4897-81b3-d8bc73003413
-assets:
-  dashboards:
-    pinecone: assets/dashboards/pinecone_overview.json
-  integration:
-    auto_install: true
-    events:
-      creates_events: false
-    metrics:
-      check:
-      - pinecone.index.fullness
-      metadata_path: metadata.csv
-      prefix: pinecone.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10363
-    source_type_name: Pinecone
-  monitors:
-    Index is approaching limit: assets/monitors/index_fullness.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
 categories:
 - メトリクス
 - data stores
 - ai/ml
 custom_kind: インテグレーション
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: pinecone
-integration_id: pinecone
-integration_title: Pinecone
-integration_version: ''
-is_public: true
-manifest_version: 2.0.0
-name: pinecone
-public_title: Pinecone
-short_description: 高性能 AI アプリケーションのためのクラウドベースのベクターデータベース。
+description: 高性能 AI アプリケーションのためのクラウドベースのベクターデータベース。
+further_reading:
+- link: https://www.datadoghq.com/blog/ai-integrations/
+  tag: blog
+  text: 'インテグレーションのまとめ: AI スタックのモニタリング'
+- link: https://docs.datadoghq.com/integrations/pinecone/
+  tag: blog
+  text: Pinecone
+integration_version: 1.1.0
+media:
+- caption: Pinecone ポッド ベース ダッシュボード概要
+  image_url: images/pinecone-dashboard.png
+  media_type: image
+- caption: Pinecone サーバーレス ダッシュボード概要
+  image_url: images/pinecone-serverless-dashboard.png
+  media_type: image
 supported_os:
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Metrics
-  - Category::Data Stores
-  - Category::AI/ML
-  - Submitted Data Type::Metrics
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: 高性能 AI アプリケーションのためのクラウドベースのベクターデータベース。
-  media:
-  - caption: Pinecone ダッシュボード概要
-    image_url: images/pinecone-dashboard.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Pinecone
+title: Pinecone
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
-- **パフォーマンスの最適化と使用量の管理:** Pinecone 内で特定のアクション (リクエスト数など) を観測、追跡し、レイテンシーが高かったり使用量が多かったりするアプリケーションリクエストを特定します。傾向を監視し、実用的な洞察を得ることで、リソースの使用量を改善し、コストを削減します。
+- **パフォーマンスを最適化し、使用量を制御**: Pinecone 内の特定アクション (例: リクエスト カウント) を監視して、レイテンシーや使用量が高いアプリケーション リクエストを特定します。トレンドを可視化し、リソース利用率を改善してコストを削減するためのインサイトを取得できます。
 
-- **メトリクスの自動アラート:** インデックスの空き状況が特定のしきい値に達したときにアラートを取得します。また、特定のメトリクスやしきい値にアラートする独自のカスタムモニターを作成することもできます。
+- **メトリクスで自動アラート**: インデックスの充填率がしきい値に達したときにアラートを受け取ります。また、特定のメトリクスやしきい値に対してカスタム モニターを作成することも可能です。
 
-- **使用量やレイテンシーにおける予期せぬスパイクの発見とトリアージ:** Pinecone の Datadog ダッシュボードで、使用量やレイテンシーの異常をすばやく視覚化します。メトリクスを時系列で表示することで、傾向の理解を深め、スパイクの重大度を判断します。
+- **使用量やレイテンシーの突発的なスパイクを特定・トリアージ**: Datadog の Pinecone ダッシュボードで使用量やレイテンシーの異常を迅速に可視化。メトリクスを時系列で表示し、スパイクの傾向と重大度を把握します。
+
+## 要件
+
+Datadog で Pinecone を監視するための前提条件
+
+- Enterprise または Enterprise Dedicated の Pinecone プラン
+- ポッド ベースまたはサーバーレス インデックス: Datadog は両方のメトリクス取得をサポートします。
 
 ## セットアップ
 
 ### インストール
 
-1. [Pinecone アカウント][1]にログインします。
-2. **API Keys** タブに移動します。
-3. API キーを作成します。
-4. 作成した API キーをクリップボードにコピーします。
+1. [Pinecone アカウント](https://app.pinecone.io/) にログインします。
+1. **API Keys** タブに移動します。
+1. API キーを作成します。
+1. 作成した API キーをクリップボードにコピーします。
 
-### 構成
+### 設定
 
-1. Datadog の [Pinecone インテグレーションタイル][2]内のコンフィギュレーションタブに移動します。
-2. プロジェクト ID を入力します。
-3. API キーをクリップボードにコピーした際に表示される、環境を入力します。
-4. コピーした API キーを入力します。
+1. Datadog の [Pinecone インテグレーション タイル](https://app.datadoghq.com/account/settings#integrations/pinecone) 内の Configuration タブへ移動します。
+1. Pinecone コンソールのプロジェクト一覧に表示される Pinecone Project ID を入力します。
+1. ポッド ベース環境のみ: 使用している環境を選択します。サーバーレス環境のプロジェクトは空欄のままで構いません。
+1. コピーした API キーを貼り付けます。
 
-## 収集データ
+## 収集されるデータ
 
 ### メトリクス
-{{< get-metrics-from-git "pinecone" >}}
 
+| **タイプ** | **説明** | **収集されるメトリクス プレフィックス** |
+|------|-------------|-----------------------------|
+| **アカウント 使用量** | インデックス内のポッド当たりレコード数を判定するためのメトリクス集 | `pinecone.vector` |
+| **レイテンシー** | Pinecone データ プレーン コールのサーバー サイド レイテンシー メトリクス集 | `pinecone.request` |
+| **Serverless** | タイプが `Serverless` として定義されたインデックスのメトリクス集 | `pinecone.db` |
 
-### Logs
+| | |
+| --- | --- |
+| **pinecone.vector.count** <br>(gauge) | インデックス内の Pod あたりのレコード数。<br>_record として表示_ |
+| **pinecone.request.count.total** <br>(count) | クライアントによって行われたデータ プレーン コール数。<br>_request として表示_ |
+| **pinecone.request.error.count.total** <br>(count) | エラーとなったクライアントのデータ プレーン コール数。<br>_request として表示_ |
+| **pinecone.request.latency.seconds.min** <br>(gauge) | Pinecone データ プレーン コールのサーバー サイド処理レイテンシー分布の最小値。<br>_second として表示_ |
+| **pinecone.request.latency.seconds.max** <br>(gauge) | Pinecone データ プレーン コールのサーバー サイド処理レイテンシー分布の最大値。<br>_second として表示_ |
+| **pinecone.request.latency.seconds.avg** <br>(gauge) | Pinecone データ プレーン コールのサーバー サイド処理レイテンシー分布の平均値。<br>_second として表示_ |
+| **pinecone.request.latency.seconds.50percentile** <br>(gauge) | Pinecone データ プレーン コールのサーバー サイド処理レイテンシー分布の p50。<br>_second として表示_ |
+| **pinecone.request.latency.seconds.90percentile** <br>(gauge) | Pinecone データ プレーン コールのサーバー サイド処理レイテンシー分布の p90。<br>_second として表示_ |
+| **pinecone.request.latency.seconds.95percentile** <br>(gauge) | Pinecone データ プレーン コールのサーバー サイド処理レイテンシー分布の p95。<br>_second として表示_ |
+| **pinecone.request.latency.seconds.99percentile** <br>(gauge) | Pinecone データ プレーン コールのサーバー サイド処理レイテンシー分布の p99。<br>_second として表示_ |
+| **pinecone.request.latency.seconds.99.9percentile** <br>(gauge) | Pinecone データ プレーン コールのサーバー サイド処理レイテンシー分布の p99.9。<br>_second として表示_ |
+| **pinecone.request.latency.seconds.count** <br>(count) | Pinecone データ プレーン コールのサーバー サイド処理レイテンシー分布のカウント。<br>_request として表示_ |
+| **pinecone.index.fullness** <br>(gauge) | インデックスの充填率 (0〜1 のスケール)。<br>_unit として表示_ |
+| **pinecone.db.op.query.total** <br>(count) | インデックス (サーバーレス) への Query リクエスト数。<br>_request として表示_ |
+| **pinecone.db.op.fetch.total** <br>(count) | インデックス (サーバーレス) への Fetch リクエスト数。<br>_request として表示_ |
+| **pinecone.db.op.update.total** <br>(count) | インデックス (サーバーレス) への Update リクエスト数。<br>_request として表示_ |
+| **pinecone.db.op.delete.total** <br>(count) | インデックス (サーバーレス) への Delete リクエスト数。<br>_request として表示_ |
+| **pinecone.db.op.upsert.total** <br>(count) | インデックス (サーバーレス) への Upsert リクエスト数。<br>_request として表示_ |
+| **pinecone.db.op.query.duration.total** <br>(count) | インデックス (サーバーレス) の Query リクエスト処理に要した総時間。<br>_millisecond として表示_ |
+| **pinecone.db.op.fetch.duration.total** <br>(count) | インデックス (サーバーレス) の Fetch リクエスト処理に要した総時間。<br>_millisecond として表示_ |
+| **pinecone.db.op.update.duration.total** <br>(count) | インデックス (サーバーレス) の Update リクエスト処理に要した総時間。<br>_millisecond として表示_ |
+| **pinecone.db.op.delete.duration.total** <br>(count) | インデックス (サーバーレス) の Delete リクエスト処理に要した総時間。<br>_millisecond として表示_ |
+| **pinecone.db.op.upsert.duration.total** <br>(count) | インデックス (サーバーレス) の Upsert リクエスト処理に要した総時間。<br>_millisecond として表示_ |
+| **pinecone.db.op.write.unit.total** <br>(count) | 消費された書き込みユニット合計 (サーバーレス)。<br>_request として表示_ |
+| **pinecone.db.op.read.unit.total** <br>(count) | 消費された読み取りユニット合計 (サーバーレス)。<br>_request として表示_ |
+| **pinecone.db.storage.size.bytes** <br>(gauge) | インデックスの合計サイズ (バイト、サーバーレス)。<br>_byte として表示_ |
+| **pinecone.db.record.total** <br>(gauge) | レコード総数 (サーバーレス)。<br>_record として表示_ |
+| **pinecone.db.op.list.duration.total** <br>(count) | インデックスの list リクエスト処理に要した総時間 (ミリ秒)。<br>_millisecond として表示_ |
+| **pinecone.db.op.list.total** <br>(count) | インデックスへの list リクエスト数。<br>_request として表示_ |
+
+### ログ
 
 Pinecone には、収集ログは含まれません。
 
-### サービスチェック
+### サービス チェック
 
 Pinecone には、サービスのチェック機能は含まれません。
 
@@ -112,9 +114,4 @@ Pinecone には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
-
-[1]: https://app.pinecone.io/
-[2]: https://app.datadoghq.com/account/settings#integrations/pinecone
-[3]: https://github.com/DataDog/integrations-internal-core/blob/main/pinecone/metadata.csv
-[4]: https://docs.datadoghq.com/ja/help/
+お問合せは、[Datadog サポート](https://docs.datadoghq.com/help/) まで。

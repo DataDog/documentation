@@ -1,12 +1,12 @@
 ---
-title: Api V2
 build:
-  render: never
   list: always
   publishResources: false
+  render: never
 cascade:
   build:
-    render: never
     list: always
     publishResources: false
+    render: never
+title: Api V2
 ---

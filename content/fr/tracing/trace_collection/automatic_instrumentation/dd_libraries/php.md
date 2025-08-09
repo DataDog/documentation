@@ -56,16 +56,16 @@ apk add libgcc
 Exécutez le programme d'installation :
 
 ```shell
-# Installation complète : APM, ASM et profiling
+# Installation complète : APM + AAP + Profiling
 php datadog-setup.php --php-bin=all --enable-appsec --enable-profiling
 
-# APM seulement
+# APM uniquement
 php datadog-setup.php --php-bin=all
 
-# APM et ASM
+# APM + AAP
 php datadog-setup.php --php-bin=all --enable-appsec
 
-# APM et profiling
+# APM + Profiling
 php datadog-setup.php --php-bin=all --enable-profiling
 ```
 

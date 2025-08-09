@@ -24,9 +24,9 @@ Datadog は、[OAuth 2.0 (OAuth2) Authorization Framework][1] を使用し、ユ
 
 OAuth2 クライアントは、ユーザーに代わって Datadog リソースへのアプリケーションのアクセスを承認できるようにするアプリケーションのコンポーネントです。OAuth2 は、パブリックと[機密][3]の 2 種類のクライアントを定義しています。
 
-Public Clients
-: Typically used for browser-based applications and are not capable of storing confidential information.
-<!--Examples of public clients include OAuth clients for [UI Extensions][4]. -->
+パブリッククライアント
+: 通常、ブラウザベースのアプリケーションで使用され、機密情報を保存できません。
+<!--パブリッククライアントの例としては、[UI Extensions][4] の OAuth クライアントが挙げられます。 -->
 
 機密クライアント
 : 機密データを保存することができ、認可リクエストを行うために追加の `client_secret` を必要とします。インテグレーション用の OAuth クライアントは機密クライアントです。
