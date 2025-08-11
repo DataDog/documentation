@@ -86,7 +86,7 @@ Notebooks support commonly used rich text features like bold, italics, inline co
 | Codeblocks    | Insert a codeblock by typing <code>```</code> and pressing <kbd>Enter</kbd>, or by using the slash command menu.           |
 | Quotes        | Insert a quote block by typing `>`, or by using the slash command menu.                                                    |
 | Text tables   | Insert a table by typing `/table` or using the **Add Cell** menu.                                                          |
-| Callouts      | Insert a callout by typing `/table` or typing `!NOTE`, `!TIP`, `!WARNING`, `!IMPORTANT` or `!CAUTION` then hitting space   |
+| Callouts      | Insert a callout by typing `/table` or typing `!NOTE`, `!TIP`, `!WARNING`, `!IMPORTANT`, or `!CAUTION` and then hitting space   |
 
 ### Smart chips
 
