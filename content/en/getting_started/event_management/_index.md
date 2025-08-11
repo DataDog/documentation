@@ -1,5 +1,5 @@
 ---  
-title: Getting Started with Event Management Inbox  
+title: Getting Started with Event Management Triage Inbox  
 further_reading:  
 - link: "/service_management/events/ingest//"  
   tag: "doc"  
@@ -49,7 +49,7 @@ On the right hand split-view side panel, you can perform the following:
 ## Take Action
 
 - **Mark root cause**: Identify and mark a related event, such as a faulty change, as the root cause.
-- **Run workflows**: Execute remediation runbooks manually or trigger them conditionally with [Case Automation Workflows][5].
+- **Run workflows**: Execute remediation runbooks manually or trigger them conditionally with [Case Automation Rules][5].
 - **Merge cases**: Combine related cases to streamline investigations.
 - **Split cases**: Separate alerts that require individual investigation.
 
