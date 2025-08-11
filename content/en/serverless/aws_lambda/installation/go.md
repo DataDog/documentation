@@ -27,7 +27,7 @@ aliases:
 
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/product-management-service">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
 
-**Note**: Datadog recommends that you use Go tracer v1.73.1 for instrumenting AWS Lambda functions.
+**Note**: Datadog recommends that you use Go tracer v1.73.1 for instrumenting AWS Lambda functions. Go tracer v2 is not currently supported.
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
@@ -215,10 +215,10 @@ import (
 	"net/http"
 	"time"
 
-  ddlambda "github.com/DataDog/datadog-lambda-go"
-  "github.com/aws/aws-lambda-go/events"
-  "github.com/aws/aws-lambda-go/lambda"
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+	ddlambda "github.com/DataDog/datadog-lambda-go"
+	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-lambda-go/lambda"
+	httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
