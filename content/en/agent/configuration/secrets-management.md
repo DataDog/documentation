@@ -13,7 +13,15 @@ algolia:
 
 ## Overview
 
-The Datadog Agent allows you to securely manage secrets by integrating with any external secrets management solution (such as HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, or a custom solution). Instead of hardcoding sensitive values like API keys or passwords in plaintext within configuration files, the Agent can retrieve them dynamically at runtime.
+The Datadog Agent help you securely manage you secrets by integrating with a number of external secrets management solutions:
+- AWS Secrets Manager
+- AWS SSM
+- Azure KeyVault
+- Hashicorp Vault
+- File JSON
+- File YAML
+
+Instead of hardcoding sensitive values like API keys or passwords in plaintext within configuration files, the Agent can retrieve them dynamically at runtime.
 
 ### How it works
 
@@ -72,16 +80,15 @@ The secret executable utility supports the following AWS services:
 |`aws.secrets` |[AWS Secrets Manager][1000]                 |
 |`aws.ssm` |[AWS Systems Manager Parameter Store][1001] |
 
-##### Instance profile instructions
+##### Set up an Instance profile
 
 Datadog recommends using the [instance profile method][1006] of retrieving secrets, as AWS handles all environment variables and session profiles for you. 
 
 To use an instance profile, create an IAM role in the same account where your AWS services are running. When setting up the role, specify the **Trusted Entity Type** as **AWS Service**. Select the appropriate service, such as **EC2** if you're working with an EC2 instance. This IAM role is then available for use by instances of the selected service. 
 
-
 Next, attach a permissions policy to the IAM role. The specific policy you need depends on whether you're using [AWS Secrets Manager][1000] or [AWS Systems Manager Parameter Store][1001]. 
 
-Then, configure the trust policy for the role and be sure to replace `${Service}` with the name of the service you selected earlier:
+Then, configure the trust policy for the role and be sure to replace `${Service}` with the name of the service you selected earlier (for example `ec2`):
 
 ```json
 {
@@ -99,26 +106,6 @@ Then, configure the trust policy for the role and be sure to replace `${Service}
 ```
 
 Finally, for the instance that is retrieving secrets, assign the IAM role you just created. After assigning the role, restart the instance to apply the changes.
-
-
-##### AWS session settings
-
-The following `aws_session` settings are available on all supported AWS Service backends:
-
-| Setting | Description |
-| --- | --- |
-| `aws_region` | AWS Region |
-| `aws_profile` | AWS session profile |
-| `aws_role_arn` | AWS sts:AssumeRole ARN |
-| `aws_external_id` | AWS sts:AssumeRole ExternalId |
-| `aws_access_key_id` | AWS IAM user access key ID |
-| `aws_secret_access_key` | AWS IAM user access key secret |
-
-<div class="alert alert-info">
-In <i>most</i> cases, you only need to set the <code>aws_region</code> in the <code>aws_session</code> to match the region where the target Parameter Store (aws.ssm) or Secrets Manager (aws.secrets) secret is located.
-</div>
-
-When working with single strings, setting `force_string: true` in the backend configuration ensures the secret is treated as a string value.
 
 {{< tabs >}}
 {{% tab "AWS Secrets" %}}
@@ -145,8 +132,6 @@ To allow resources such as EC2 or ECS instances to access your specified secrets
 
 ```
 
-After completing this step, follow the [instance profile instructions](#instance-profile-instructions) to complete the setup.
-
 #### Datadog.yaml configuration
 
 Finally, configure the DataDog Agent to user `AWS Secrets` to resolve secrets using the following configuration:
@@ -158,10 +143,6 @@ secret_backend_config:
   aws_session:
     aws_region: {regionName}
 ```
-
-
-If you grant the correct permissions on both the secret and the KMS customer-managed key, AWS tests cross-account access to Secrets Manager secrets. For more details, see the [AWS Secrets Manager documentation][101]
-
 
 Now that you have configured the Agent to use AWS Secrets, you can refer to any secrets in your configurations using the  `ENC[secretId;secretKey]` notation. 
 
@@ -227,41 +208,7 @@ To allow resources such as EC2 or ECS instances to access your specified secrets
 
 You can use a wildcard when specifying the parameter path `Resource`. For example, use `datadog/*` for all resources within the `datadog` folder.
 
-After completing this step, follow the [instance profile instructions](#instance-profile-instructions) to complete the setup.
-
-##### Backend settings
-
-| Setting           | Description                             |
-| ------------------| ----------------------------------------|
-|`backend_type`     | Backend type                            |
-|`parameter_path`   | SSM parameters prefix, recursive        |
-|`parameters`       | List of individual SSM parameters       |
-
-#### Backend configuration
-
-<div class="alert alert-info">
-The <code>secret_backend_type</code> must be set to <code>aws.ssm</code>.
-</div>
-
-The backend configuration for [AWS SSM Parameter Store][200] secrets is structured as YAML following this schema:
-
-```yaml
-# /etc/datadog-agent/datadog.yaml
----
-secret_backend_type: aws.ssm
-secret_backend_config:
-  aws_session:
-    aws_region: us-east-1
-```
-
-The backend secret is referenced in your Datadog Agent configuration file using the **ENC** notation.
-
-```yaml
-# /etc/datadog-agent/datadog.yaml
-
-api_key: ENC[{parameter_full_path}]
-
-```
+#### Datadog.yaml configuration
 
 The AWS System Manager Parameter Store supports a hierachical model. For example, assuming the following AWS System Manager Parameter Store paths:
 
@@ -280,53 +227,10 @@ secret_backend_type: aws.ssm
 secret_backend_config:
   aws_session:
     aws_region: us-east-1
-```
 
-And then accessed in the Datadog Agent:
-
-```yaml
-# /etc/datadog-agent/datadog.yaml
 property1: "ENC[/DatadogAgent/Production/ParameterKey1]"
 property2: "ENC[/DatadogAgent/Production/ParameterKey2]"
 property3: "ENC[/DatadogAgent/Production/ParameterKey3]"
-```
-
-The `StringList` parameter stores values as a comma-separated list. `SecureString` values are automatically decrypted, provided that the `aws_session` credentials have the necessary permissions for the KMS key used in the encryption.
-
-#### Configuration examples
-
-In the following examples, assume the AWS Systems Manager Parameter Store secret path prefix is `/DatadogAgent/Production` with a parameter key of `api_key`:
-
-```sh
-/DatadogAgent/Production/api_key: (SecureString) "••••••••••••0f83"
-```
-
-Each of the following examples access the secret from the Datadog Agent configuration YAML file(s) as such:
-
-```yaml
-# /etc/datadog-agent/datadog.yaml
-
-#########################
-## Basic Configuration ##
-#########################
-
-## @param api_key - string - required
-## @env DD_API_KEY - string - required
-## The Datadog API key to associate your Agent's data with your organization.
-## Create a new API key here: https://app.datadoghq.com/account/settings
-#
-api_key: "ENC[/DatadogAgent/Production/api_key]" 
-```
-
-##### AWS IAM user access key with SSM parameter_path recursive fetch:
-
-```yaml
-# /etc/datadog-agent/datadog.yaml
----
-secret_backend_type: aws.ssm
-secret_backend_config:
-aws_session:
-  aws_region: us-east-1
 ```
 
 [200]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
@@ -364,17 +268,7 @@ Datadog recommends using Managed Identities to authenticate with Azure. This all
 
 To access your Key Vault, create a Managed Identity and assign it to your Virtual Machine. Then, configure the appropriate role assignment on the Key Vault to allow that identity to access its secrets.
 
-
-
-#### Backend configuration
-
-| Setting       | Description                |
-|---------------|----------------------------|
-| `keyvaulturl` | URL of the Azure keyvault  |
-
-<div class="alert alert-info">
-In your <code>datadog.yaml</code> config, the <strong>secret_backend_type</strong> must be set to <code>azure.keyvault</code>, the <strong>backend_type</strong> must be set to <code>azure.keyvault</code> and the <strong>keyvaulturl</strong> must be set to your target Azure Key Vault URL.
-</div>
+#### Datadog.yaml configuration
 
 The backend configuration for Azure Key Vault secrets is structured as YAML following this schema:
 
@@ -386,7 +280,7 @@ secret_backend_config:
   keyvaulturl: {keyVaultURL}
 ```
 
-The backend secret is referenced in your Datadog Agent configuration file with `ENC`:
+The backend secret is referenced in your Datadog Agent configuration file with `ENC`--here is an example where a plaintext secret needs to be retrieved:
 
 ```yaml
 # /etc/datadog-agent/datadog.yaml
@@ -394,7 +288,7 @@ The backend secret is referenced in your Datadog Agent configuration file with `
 api_key: "ENC[{secretHandle}]"
 ```
 
-Azure Keyvault uses JSON to store multiple key-value pairs within a single secret. In the following example, assume there is an Azure secret named `MySecret`:
+Azure Keyvault also uses JSON to store multiple key-value pairs within a single secret. In the following example, assume there is an Azure secret named `MySecret`:
 
 ```json
 {
@@ -416,41 +310,6 @@ app_key: "ENC[MySecret;ddappkey]"
 property3: "ENC[MySecret;ddorgname]"
 ```
 
-#### Configuration example
-
-In the following example, assume the Azure secret's name is `MySecretName` and its value contains the Datadog Agent `api_key`:
-
-```json
-{
-    "ddapikey": "••••••••••••0f83"
-}
-```
-
-Assume also that the Key Vault's URL is `https://mykeyvault.vault.azure.net`.
-
-The following example shows how to access the secret from the Datadog Agent configuration YAML file(s):
-
-```yaml
-# /etc/datadog-agent/datadog.yaml
-
-#################################
-## Datadog Agent Configuration ##
-#################################
-
-## @param api_key - string - required
-## @env DD_API_KEY - string - required
-## The Datadog API key to associate your Agent's data with your organization.
-## Create a new API key here: https://app.datadoghq.com/account/settings
-#
-api_key: "ENC[MySecretName;ddapikey]" 
-...
-...
-...
-secret_backend_type: azure.keyvault
-secret_backend_config:
-  keyvaulturl: https://mykeyvault.vault.azure.net
-```
-
 [2000]: https://docs.microsoft.com/en-us/Azure/key-vault/secrets/quick-create-portal
 
 {{% /collapse-content %}} 
@@ -464,16 +323,6 @@ The secret executable utility supports the following Hashicorp services:
 | Backend Type                               | Hashicorp Service                                  |
 | ------------------------------------------ | -------------------------------------------------- |
 | [hashicorp.vault](#hashicorp-auth-session) | [Hashicorp Vault (Secrets Engine Version 1)][3000] |
-
-##### Hashicorp auth session
-
-Hashicorp Vault supports a variety of authentication methods. The ones supported by this module are:
-
-- **User Pass Auth**: A Vault username and password defined on the backend configuration's `vault_session` section
-
-- **AWS instance profile**: If your machine has an attached AWS IAM role with the correct permissions, you don't need to define any secret credentials or passwords in your config. See the [AWS instance profile section](#aws-instance-profile-instructions) and the [official Hashicorp AWS auth method instructions][3002] for more information.
-
-Using environment variables is more complex. The variables must be configured within the service (daemon) environment or in the `dd-agent` user's home directory on each Datadog Agent host. In contrast, using app roles and users (local or LDAP) is simpler. This method does not require additional configuration on each Datadog Agent host.
 
 #### General instructions to set up Hashicorp Vault
 1. Run your Hashicorp Vault. For more information, see the [official Hashicorp Vault documentation][3001]. 
@@ -520,70 +369,9 @@ vault write auth/aws/role/<Name of AWS IAM Role> \
   max_ttl=768h
 ```
 
-##### Backend Settings
+#### Configuration example
 
-| Setting | Description |
-| --- | --- |
-| `backend_type` | Backend type |
-| `vault_address` | DNS/IP of the Hashicorp Vault system |
-| `vault_tls_config` | TLS Configuration to access the Vault system |
-| `vault_session` | Authentication configuration to access the Vault system |
-
-###### vault_session Settings
-The following `vault_session` settings are available:
-
-| Setting | Description |
-| --- | --- |
-| `vault_role_id` | App Role ID from Vault |
-| `vault_secret_id` | Secret ID for the app role |
-| `vault_username` | Local Vault user |
-| `vault_password` | Password for local vault user |
-| `vault_ldap_username` | LDAP user with Vault access |
-| `vault_ldap_password` | LDAP password for the LDAP user |
-| `vault_auth_type` | The backend service if using an instance profile |
-| `vault_aws_role` | The name of the IAM user if `vault_auth_type` is `aws` |
-| `aws_region` | The AWS region of the machine if `vault_auth_type` is `aws` |
-
-###### TLS Settings
-
-| Setting | Description |
-| --- | --- |
-| `ca_cert` | Path to PEM-encoded CA cert file to verify the Vault server SSL certificate |
-| `ca_path` | Path to directory of PEM-encoded CA cert files to verify the Vault server SSL certificate |
-| `client_cert` | Path to the certificate for Vault communication |
-| `client_key` | Path to the private key for Vault communication |
-| `tls_server` | If set, is used to set the SNI host when connecting via TLS |
-| `Insecure` | Enables or disables SSL verification (bool) |
-
-
-#### Backend Configuration
-
-<div class="alert alert-info">
-The <code>backend_type</code> must be set to <code>hashicorp.vault</code>.
-</div>
-
-The path to the secret and the backend secret itself is referenced in your Datadog Agent configuration file with `ENC`. Use a semicolon to separate these two values, as seen in the example below.
-
-The backend configuration for Hashicorp Vault is structured as YAML following this schema:
-
-```yaml
-# /etc/datadog-agent/datadog.yaml
----
-api_key: "ENC[{secret_path};{secret}]"
-
-secret_backend_type: hashicorp.vault
-secret_backend_config:
-  vault_address: http://myvaultaddress.net
-  vault_tls_config:
-      # ... TLS settings if applicable
-  vault_session:
-    vault_auth_type: aws
-    # ... additional session settings
-```
-
-#### Configuration examples
-
-In the following examples, assume the Hashicorp Vault secret path prefix is `/Datadog/Production` with a parameter key of `api_key`:
+In the following example, assume the Hashicorp Vault secret path prefix is `/Datadog/Production` with a parameter key of `api_key`:
 
 ```sh
 /DatadogAgent/Production/api_key: (SecureString) "••••••••••••0f83"
@@ -604,13 +392,7 @@ Each of the following examples access the secret from the Datadog Agent configur
 ## Create a new API key here: https://app.datadoghq.com/account/settings
 #
 api_key: "ENC[/Datadog/Production;apikey]" 
-```
 
-#### Hashicorp Vault authentication with AWS instance profile
-
-```yaml
-# /etc/datadog-agent/datadog.yaml
----
 secret_backend_type: hashicorp.vault
 secret_backend_config:
   vault_address: http://myvaultaddress.net
@@ -639,16 +421,7 @@ The file backend only requires read permissions for the configured JSON or YAML 
 {{< tabs >}}
 {{% tab "JSON File Backend" %}}
 
-##### JSON Backend settings
-| Setting | Description |
-| --- | --- |
-| `backend_type` | Backend type |
-| `file_path`| Absolute directory path to the JSON file |
-
-##### Backend configuration
-<div class="alert alert-info">
-The <code>backend_type</code> must be set to <code>file.json</code>.
-</div>
+##### Datadog.yaml configuration
 
 The backend configuration for JSON file secrets is structured as YAML following this schema:
 
@@ -668,59 +441,14 @@ The backend secret is referenced in your Datadog Agent configuration file with `
 api_key: "ENC[{json_property_name}"
 
 ```
-
-##### Configuration Examples
-
-In the following examples, assume the JSON file is `/opt/production-secrets/secrets.json` and contains the Datadog Agent `api_key`:
-
-```json
-{
-  "api_key": "••••••••••••0f83"
-}
-```
-
-The following examples show how to access the JSON secret from the Datadog Agent configuration YAML file(s):
-
-```yaml
-# /etc/datadog-agent/datadog.yaml
-
-#########################
-## Basic Configuration ##
-#########################
-
-## @param api_key - string - required
-## @env DD_API_KEY - string - required
-## The Datadog API key to associate your Agent's data with your organization.
-## Create a new API key here: https://app.datadoghq.com/account/settings
-#
-api_key: "ENC[api_key]" 
-```
-
-```yaml
-# /etc/datadog-agent/datadog.yaml
----
-secret_backend_type: file.json
-secret_backend_config:
-  file_path: /opt/production-secrets/secrets.json
-```
 {{% /tab %}}
 
 
 {{% tab "YAML File Backend" %}}
 
-##### YAML Backend Settings
+##### Datadog.yaml Configuration
 
-| Setting | Description |
-| --- | --- |
-| `backend_type` | Backend type |
-| `file_path`| Absolute directory path to the YAML file |
-
-##### Backend Configuration
-<div class="alert alert-info">
-The <code>backend_type</code> must be set to <code>file.yaml</code>.
-</div>
-
-The backend configuration for JSON file secrets is structured as YAML following this schema:
+The backend configuration for YAML file secrets is structured as YAML following this schema:
 
 ```yaml
 # /etc/datadog-agent/datadog.yaml
@@ -738,42 +466,6 @@ The backend secret is referenced in your Datadog Agent configuration file with `
 api_key: "ENC[{yaml_property_name}]"
 
 ```
-
-##### Configuration Examples
-
-In the following examples, assume the YAML file is named `/opt/production-secrets/secrets.yaml` and contains the Datadog Agent `api_key`:
-
-```yaml
----
-api_key: "••••••••••••0f83"
-```
-
-The following examples show how to access YAML secret from the Datadog Agent configuration YAML file(s):
-
-
-```yaml
-# /etc/datadog-agent/datadog.yaml
-
-#########################
-## Basic Configuration ##
-#########################
-
-## @param api_key - string - required
-## @env DD_API_KEY - string - required
-## The Datadog API key to associate your Agent's data with your organization.
-## Create a new API key here: https://app.datadoghq.com/account/settings
-#
-api_key: "ENC[api_key]" 
-```
-
-```yaml
-# /etc/datadog-agent/datadog.yaml
----
-secret_backend_type: file.yaml
-secret_backend_config:
-  file_path: /opt/production-secrets/secrets.yaml
-```
-
 {{% /tab %}}
 {{< /tabs >}}
 
