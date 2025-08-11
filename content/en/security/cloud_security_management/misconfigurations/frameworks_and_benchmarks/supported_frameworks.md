@@ -26,12 +26,12 @@ Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compl
 | [CIS AWS Foundations Benchmark*][2]             | v1.5.0, v3.0.0, v4.0.0, v5.0.0 | `cis-aws`                           | Cloud                    |
 | [CIS Azure Foundations Benchmark][3]            | v2.0.0, v4.0.0                 | `cis-azure`                         | Cloud                    |
 | [CIS GCP Foundations Benchmark][22]             | v3.0.0                         | `cis-gcp`                           | Cloud                    |
-| [CIS Docker Benchmark][4]                       | v1.2                           | `cis-docker `                       | Infrastructure           |
+| [CIS Docker Benchmark][4]                       | v1.2                           | `cis-docker`                        | Infrastructure           |
 | [CIS Kubernetes Benchmark**][5]                 | v1.9.0                         | `cis-kubernetes`                    | Infrastructure           |
 | [CIS Kubernetes (AKS) Benchmark**][5]           | v1.4.0                         | `cis-aks`                           | Cloud and Infrastructure |
 | [CIS Kubernetes (EKS) Benchmark**][5]           | v1.4.0, v1.7.0                 | `cis-eks`                           | Cloud and Infrastructure |
 | [CIS Ubuntu 20.04][23]                          | v1.0.0                         | `cis-ubuntu2004`                    | Infrastructure           |
-| [CIS Ubuntu 22.04][23]                          | v2.0.0                         | `cis-ubuntu2204 `                   | Infrastructure           |
+| [CIS Ubuntu 22.04][23]                          | v2.0.0                         | `cis-ubuntu2204`                    | Infrastructure           |
 | [CIS Red Hat Linux 7][24]                       | v3.1.1                         | `cis-rhel7`                         | Infrastructure           |
 | [CIS Red Hat Linux 8][24]                       | v2.0.0                         | `cis-rhel8`                         | Infrastructure           |
 | [CIS Red Hat Linux 9][24]                       | v1.0.0                         | `cis-rhel9`                         | Infrastructure           |
