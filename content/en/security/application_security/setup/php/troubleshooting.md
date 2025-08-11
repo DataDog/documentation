@@ -211,4 +211,3 @@ To disable AAP on your services in bulk, do the following:
 [14]: /security/code_security/software_composition_analysis
 [15]: https://app.datadoghq.com/security/configuration/asm/services-config
 [16]: https://app.datadoghq.com/organization-settings/remote-config
-[17]: https://ddtrace.readthedocs.io/en/stable/integrations.html#flask

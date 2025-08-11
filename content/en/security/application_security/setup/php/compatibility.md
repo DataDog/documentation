@@ -141,5 +141,3 @@ The following frameworks aren't directly instrumented by App and API Protection,
 | Symfony   | 3.3                       |
 | Wordpress | 4.8                       |
 
-[1]: /tracing/trace_collection/compatibility/php/
-[2]: /tracing/guide/remote_config
