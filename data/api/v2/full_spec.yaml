@@ -1652,6 +1652,8 @@ components:
             example: arn:aws:lambda:us-east-1:123456789012:function:DatadogLambdaLogForwarder
             type: string
           type: array
+        log_source_config:
+          $ref: '#/components/schemas/AWSLambdaForwarderConfigLogSourceConfig'
         sources:
           description: 'List of service IDs set to enable automatic log collection.
             Discover the list of available services with the
@@ -1661,6 +1663,44 @@ components:
           items:
             example: s3
             type: string
+          type: array
+      type: object
+    AWSLambdaForwarderConfigLogSourceConfig:
+      description: Log source configuration.
+      properties:
+        tag_filters:
+          description: List of AWS log source tag filters. Defaults to `[]`.
+          items:
+            $ref: '#/components/schemas/AWSLogSourceTagFilter'
+          type: array
+      type: object
+    AWSLogSourceTagFilter:
+      description: 'AWS log source tag filter list. Defaults to `[]`.
+
+        Array of log source to AWS resource tag mappings. Each mapping contains a
+        log source and its associated AWS resource tags (in `key:value` format) used
+        to filter logs submitted to Datadog.
+
+        Tag filters are applied for tags on the AWS resource emitting logs; tags associated
+        with the log storage entity (such as a CloudWatch Log Group or S3 Bucket)
+        are not considered.
+
+        For more information on resource tag filter syntax, [see AWS resource exclusion](https://docs.datadoghq.com/account_management/billing/aws/#aws-resource-exclusion)
+        in the AWS integration billing page.'
+      properties:
+        source:
+          description: The AWS log source to which the tag filters defined in `tags`
+            are applied.
+          example: s3
+          type: string
+        tags:
+          description: The AWS resource tags to filter on for the log source specified
+            by `source`.
+          items:
+            description: Tag in the form `key:value`.
+            example: env:prod
+            type: string
+          nullable: true
           type: array
       type: object
     AWSLogsConfig:
@@ -36969,6 +37009,12 @@ components:
     SecurityMonitoringRuleUpdatePayload:
       description: Update an existing rule.
       properties:
+        calculatedFields:
+          description: Calculated fields. Only allowed for scheduled rules - in other
+            words, when schedulingOptions is also defined.
+          items:
+            $ref: '#/components/schemas/CalculatedField'
+          type: array
         cases:
           description: Cases for generating signals.
           items:
@@ -37025,6 +37071,8 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringReferenceTable'
           type: array
+        schedulingOptions:
+          $ref: '#/components/schemas/SecurityMonitoringSchedulingOptions'
         tags:
           description: Tags for generated signals.
           items:
@@ -37051,6 +37099,27 @@ components:
       - $ref: '#/components/schemas/SecurityMonitoringStandardRulePayload'
       - $ref: '#/components/schemas/SecurityMonitoringSignalRulePayload'
       - $ref: '#/components/schemas/CloudConfigurationRulePayload'
+    SecurityMonitoringSchedulingOptions:
+      description: Options for scheduled rules. When this field is present, the rule
+        runs based on the schedule. When absent, it runs real-time on ingested logs.
+      nullable: true
+      properties:
+        rrule:
+          description: Schedule for the rule queries, written in RRULE syntax. See
+            [RFC](https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html)
+            for syntax reference.
+          example: FREQ=HOURLY;INTERVAL=1;
+          type: string
+        start:
+          description: Start date for the schedule, in ISO 8601 format without timezone.
+          example: '2025-07-14T12:00:00'
+          type: string
+        timezone:
+          description: Time zone of the start date, in the [tz database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+            format.
+          example: America/New_York
+          type: string
+      type: object
     SecurityMonitoringSignal:
       description: Object description of a security signal.
       properties:
@@ -37729,6 +37798,12 @@ components:
     SecurityMonitoringStandardRuleCreatePayload:
       description: Create a new rule.
       properties:
+        calculatedFields:
+          description: Calculated fields. Only allowed for scheduled rules - in other
+            words, when schedulingOptions is also defined.
+          items:
+            $ref: '#/components/schemas/CalculatedField'
+          type: array
         cases:
           description: Cases for generating signals.
           example: []
@@ -37781,6 +37856,8 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringReferenceTable'
           type: array
+        schedulingOptions:
+          $ref: '#/components/schemas/SecurityMonitoringSchedulingOptions'
         tags:
           description: Tags for generated signals.
           example:
@@ -37810,6 +37887,12 @@ components:
     SecurityMonitoringStandardRulePayload:
       description: The payload of a rule.
       properties:
+        calculatedFields:
+          description: Calculated fields. Only allowed for scheduled rules - in other
+            words, when schedulingOptions is also defined.
+          items:
+            $ref: '#/components/schemas/CalculatedField'
+          type: array
         cases:
           description: Cases for generating signals.
           example: []
@@ -37870,6 +37953,8 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringReferenceTable'
           type: array
+        schedulingOptions:
+          $ref: '#/components/schemas/SecurityMonitoringSchedulingOptions'
         tags:
           description: Tags for generated signals.
           example:
@@ -37926,6 +38011,14 @@ components:
           example: false
           readOnly: true
           type: boolean
+        index:
+          description: '**This field is currently unstable and might be removed in
+            a minor version upgrade.**
+
+            The index to run the query on, if the `dataSource` is `logs`. Only used
+            for scheduled rules - in other words, when the `schedulingOptions` field
+            is present in the rule payload.'
+          type: string
         metric:
           deprecated: true
           description: '(Deprecated) The target field to aggregate over when using
@@ -37953,6 +38046,12 @@ components:
     SecurityMonitoringStandardRuleResponse:
       description: Rule.
       properties:
+        calculatedFields:
+          description: Calculated fields. Only allowed for scheduled rules - in other
+            words, when schedulingOptions is also defined.
+          items:
+            $ref: '#/components/schemas/CalculatedField'
+          type: array
         cases:
           description: Cases for generating signals.
           items:
@@ -38038,6 +38137,8 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringReferenceTable'
           type: array
+        schedulingOptions:
+          $ref: '#/components/schemas/SecurityMonitoringSchedulingOptions'
         tags:
           description: Tags for generated signals.
           items:
@@ -38069,6 +38170,12 @@ components:
     SecurityMonitoringStandardRuleTestPayload:
       description: The payload of a rule to test
       properties:
+        calculatedFields:
+          description: Calculated fields. Only allowed for scheduled rules - in other
+            words, when schedulingOptions is also defined.
+          items:
+            $ref: '#/components/schemas/CalculatedField'
+          type: array
         cases:
           description: Cases for generating signals.
           example: []
@@ -38121,6 +38228,8 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringReferenceTable'
           type: array
+        schedulingOptions:
+          $ref: '#/components/schemas/SecurityMonitoringSchedulingOptions'
         tags:
           description: Tags for generated signals.
           example:
@@ -53741,9 +53850,12 @@ paths:
               {\n        \"include_only\": [\n          \"us-east-1\"\n        ]\n
               \     },\n      \"logs_config\": {\n        \"lambda_forwarder\": {\n
               \         \"lambdas\": [\n            \"arn:aws:lambda:us-east-1:123456789012:function:DatadogLambdaLogForwarder\"\n
-              \         ],\n          \"sources\": [\n            \"s3\"\n          ]\n
-              \       }\n      },\n      \"metrics_config\": {\n        \"enabled\":
-              true,\n        \"automute_enabled\": true,\n        \"collect_custom_metrics\":
+              \         ],\n          \"sources\": [\n            \"s3\"\n          ],\n
+              \         \"log_source_config\": {\n            \"tag_filters\": [\n
+              \             {\n                \"source\": \"s3\",\n                \"tags\":
+              [\"test:test\"]\n              }\n            ]\n          }\n        }\n
+              \     },\n      \"metrics_config\": {\n        \"enabled\": true,\n
+              \       \"automute_enabled\": true,\n        \"collect_custom_metrics\":
               false,\n        \"collect_cloudwatch_alarms\": false,\n        \"tag_filters\":
               [\n          {\n            \"namespace\": \"AWS/EC2\",\n            \"tags\":
               [\n              \"key:value\"\n            ]\n          }\n        ],\n
@@ -59563,9 +59675,6 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/network/dns/aggregate:
     get:
       description: Get all aggregated DNS traffic.
@@ -59629,9 +59738,6 @@ paths:
       x-menu-order: 2
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/on-call/escalation-policies:
     post:
       description: Create a new On-Call escalation policy
