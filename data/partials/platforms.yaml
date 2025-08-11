@@ -83,7 +83,7 @@ platforms:
     link: "agent/basic_agent_usage/sccm/"
     image: "platform_sccm.png"
     category: "Host-based"
-  - name: amazonlinux
+  - name: linux
     link: "agent/basic_agent_usage/amazonlinux/"
     image: "platform_linux.png"
     category: "Host-based"
