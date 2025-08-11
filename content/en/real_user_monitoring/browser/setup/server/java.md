@@ -82,4 +82,3 @@ This confirms that RUM Auto-Instrumentation is properly configured.
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [3]: https://app.datadoghq.com/rum/list
 [4]: https://forms.gle/RdVvDsmmzW21s2vd7
-[5]: 
