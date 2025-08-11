@@ -46,6 +46,9 @@ RUN curl -LO https://github.com/DataDog/dd-trace-php/releases/latest/download/da
 RUN php datadog-setup.php --php-bin=all
 # Enable appsec
 ENV DD_APPSEC_ENABLED=true
+# Configure your service
+ENV DD_SERVICE=<YOUR_SERVICE_NAME>
+ENV DD_ENV=<YOUR_ENVIRONMENT>
 ```
 
 {{% /collapse-content %}}
@@ -63,6 +66,9 @@ RUN php datadog-setup.php --php-bin=all
 ENV DD_APPSEC_ENABLED=true
 # Disable apm
 ENV DD_APM_TRACING_ENABLED=false
+# Configure your service
+ENV DD_SERVICE=<YOUR_SERVICE_NAME>
+ENV DD_ENV=<YOUR_ENVIRONMENT>
 ```
 
 {{% /collapse-content %}}
