@@ -17,7 +17,7 @@ The Datadog Agent allows you to securely manage secrets by integrating with any 
 
 ### How it works
 
-To reference a secret in your configuration, use `ENC[<secret_id>]`. This notation tells the Agent to resolve the value using either the natively supported executable or your configured secret retrieval executable. The secret executable resolves the placeholder using your secrets management solution. It then injects the plaintext value into the config at runtime. The secret is fetched and loaded into memory but is never written to disk or sent to the Datadog backend.
+To reference a secret in your configuration, use `ENC[<secret_id>]`. This notation tells the Agent to resolve the value using either the natively supported secret management solution or your own executable. It then injects the plaintext value into the config at runtime. The secret is fetched and loaded in memory but is never written to disk or sent to the Datadog backend.
 
 For example, the following configuration shows two secrets defined with `ENC[]`:
 ```
@@ -48,11 +48,11 @@ instances:
 
 ### Option 1: Using the Agent to resolve secrets from supported secret management solutions
 
-*Note*: This option is not supported in Windows.
+*Note*: This option is not yet available for Windows.
 
 Starting in Agent version 7.69, the Datadog Agent includes a natively supported secret executable. This update allows you to configure the backend executable directly by setting the `secret_backend_type` and `secret_backend_config` options in the `datadog.yaml` file. 
 
-`secret_backend_type` is where the type of the backend is specified, and `secret_backend_config` is where additional configuration relevant for pulling secrets is included. To use this embedded executable, add the following code to your `datadog.yaml` file:
+`secret_backend_type` is used to specify which secret management solution to use, and `secret_backend_config` holds additional configuration relevant to that solution:
 
 ```yaml
 secret_backend_type: <backend_type>
@@ -64,31 +64,17 @@ secret_backend_config:
 More specific setup instructions depend on the backend type used. Refer to the appropriate link for further information: 
 
 
-{{% collapse-content title="AWS Secret and SSM" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="AWS Secret and AWS SSM" level="h4" expanded=false id="id-for-anchoring" %}}
 The secret executable utility supports the following AWS services:
 
-|Backend Type                                 | AWS Service                             |
+|secret_backend_type value                                | AWS Service                             |
 |---------------------------------------------|-----------------------------------------|
 |`aws.secrets` |[AWS Secrets Manager][1000]                 |
 |`aws.ssm` |[AWS Systems Manager Parameter Store][1001] |
 
-#### AWS session
-
-Supported AWS backends can leverage the default credential provider chain as defined by the [AWS SDKs][1002] and [CLI][1003]. As a result, the following order of precedence is used to determine the AWS backend service credential:
-
-1. **Environment variables**: Defined as environment variables within the Datadog Agent service configuration on the Datadog Agent host system
-
-2. **CLI configuration file**: Only the default CLI configuration file of the Datadog Agent user, such as `${HOME}/.aws/config` or `%USERPROFILE%\.aws\config`, is supported. The Datadog Agent user is typically `dd-agent`.
-
-3. **Instance profile credentials**: Container or EC2 hosts with an assigned [IAM instance profile][1004]
-
-Using environment variables or session profiles are more complex. They must be configured within the service (daemon) environment configuration or the `dd-agent` user home directory on each Datadog Agent host. 
-
-Using IAM user access keys or an EC2 instance profile are simpler configurations which do not require additional Datadog Agent host configuration.
-
 ##### Instance profile instructions
 
-Datadog **strongly recommends** using the [instance profile method][1006] of retrieving secrets, as AWS handles all environment variables and session profiles for you. 
+Datadog recommends using the [instance profile method][1006] of retrieving secrets, as AWS handles all environment variables and session profiles for you. 
 
 To use an instance profile, create an IAM role in the same account where your AWS services are running. When setting up the role, specify the **Trusted Entity Type** as **AWS Service**. Select the appropriate service, such as **EC2** if you're working with an EC2 instance. This IAM role is then available for use by instances of the selected service. 
 
@@ -137,7 +123,7 @@ When working with single strings, setting `force_string: true` in the backend co
 {{< tabs >}}
 {{% tab "AWS Secrets" %}}
 
-##### IAM permission policy (if using an instance profile)
+##### IAM permission policy
 
 To allow resources such as EC2 or ECS instances to access your specified secrets, create an IAM permission policy similar to the following example. For more details on granting resource access to secrets, see the [AWS Secrets Manager official documentation][101]. 
 
@@ -161,120 +147,51 @@ To allow resources such as EC2 or ECS instances to access your specified secrets
 
 After completing this step, follow the [instance profile instructions](#instance-profile-instructions) to complete the setup.
 
-##### Backend settings
+#### Datadog.yaml configuration
 
-| Setting           | Description                                  |
-| ------------------|----------------------------------------------|
-| `backend_type`    | Backend type                                 |
-| `secret_id`       | Secret friendly name or Amazon Resource Name |
-| `aws_session`     | AWS session configuration                    |
-
-#### Backend configuration
-
-<div class="alert alert-info">
-The <code>secret_backend_type</code> must be set to <code>aws.secrets</code>.
-</div>
-
-
-The backend configuration for AWS Secrets Manager secrets is structured as YAML following this schema:
-
-
+Finally, configure the DataDog Agent to user `AWS Secrets` to resolve secrets using the following configuration:
 
 ```yaml
-# /etc/datadog-agent/datadog.yaml
----
+# datadog.yaml
 secret_backend_type: aws.secrets
 secret_backend_config:
   aws_session:
     aws_region: {regionName}
-
 ```
 
 
 If you grant the correct permissions on both the secret and the KMS customer-managed key, AWS tests cross-account access to Secrets Manager secrets. For more details, see the [AWS Secrets Manager documentation][101]
 
 
-The backend secret is referenced in your Datadog Agent configuration file with `ENC`, taking the form of `ENC[secretId;secretKey]`. 
+Now that you have configured the Agent to use AWS Secrets, you can refer to any secrets in your configurations using the  `ENC[secretId;secretKey]` notation. 
 
-The `secretId` value can be either of the following:
-- The secret friendly name, such as `/DatadogAgent/Production`
-- The full ARN format, such as `arn:aws:secretsmanager:us-east-1:123456789012:secret:/DatadogAgent/Production-FOga1K`
+The ENC notation is composed of:
+* `secretId`: either the secret "friendly name" (ex: `/DatadogAgent/Production`) or thel ARN (ex: `arn:aws:secretsmanager:us-east-1:123456789012:secret:/DatadogAgent/Production-FOga1K`).
   - **Note**: The full ARN format is required when accessing secrets from a different account where the AWS credential or `sts:AssumeRole` credential is defined.
-  
-The **secretKey** is the JSON key referring to the actual secret that you are trying to pull the value of.
+* `secretKey`: the JSON key from the AWS secret that you want to use.
 
-```yaml
-# /etc/datadog-agent/datadog.yaml
 
-api_key: ENC[{secretId};{secretKey}]
-
-```
-
-The AWS Secrets Manager can store multiple key-value pairs within a single secret. A backend configuration using Secrets Manager has access to all the keys defined in the secret. For example, assuming an AWS Secrets Manager secret ID of `My-Secret-Backend-Secret`:
+The AWS Secrets Manager can store multiple key-value pairs within a single secret. A backend configuration using Secrets Manager has access to all the keys defined in a secret. For example, assuming an AWS Secrets Manager secret ID of `My-Secrets`:
 
 ```json
 {
-    "SecretKey1": "SecretValue1",
-    "SecretKey2": "SecretValue2",
-    "SecretKey3": "SecretValue3"
+    "prodApiKey": "datadog api key to use",
+    "anotherSecret1": "value2",
+    "anotherSecret2": "value3",
 }
 ```
 
+Here would be a complete example of the `datadog.yaml` using the AWS Secrets to pull its API key:
+
 ```yaml
-# /etc/datadog-agent/datadog.yaml
----
+api_key: ENC[My-Secrets;prodApiKey]
+
 secret_backend_type: aws.secrets
 secret_backend_config:
   aws_session:
     aws_region: us-east-1
 ```
 
-```yaml
-# /etc/datadog-agent/datadog.yaml
-property1: ENC[My-Secret-Backend-Secret;SecretKey1]
-property2: ENC[My-Secret-Backend-Secret;SecretKey2]
-property3: ENC[My-Secret-Backend-Secret;SecretKey3]
-```
-
-You can define multiple secret backends, of the same or different types, in your yaml configuration. This allows you to use several supported backends (`file.yaml`, `file.json`, `aws.ssm`, and `aws.secrets`) within your Datadog Agent setup.
-
-#### Configuration examples
-
-In the following examples, assume the AWS Secrets Manager secret friendly name is `/DatadogAgent/Production` and its value contains the Datadog Agent `api_key`:
-
-```json
-{
-    "api_key": "••••••••••••0f83"
-}
-```
-
-Each of the following examples access the secret from the Datadog Agent configuration YAML file(s) as such:
-
-```yaml
-# /etc/datadog-agent/datadog.yaml
-
-#########################
-## Basic Configuration ##
-#########################
-
-## @param api_key - string - required
-## @env DD_API_KEY - string - required
-## The Datadog API key to associate your Agent's data with your organization.
-## Create a new API key here: https://app.datadoghq.com/account/settings
-#
-api_key: ENC[/DatadogAgent/Production;api_key] 
-```
-
-##### AWS IAM user access key with Secrets Manager secret in same AWS account:
-
-```yaml
-# /etc/datadog-agent/datadog.yaml
----
-secret_backend_type: aws.secrets
-secret_backend_config:
-  aws_session:
-    aws_region: us-east-1
-```
 <!-- SECRET MANAGER LINKS -->
 [101]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
 
