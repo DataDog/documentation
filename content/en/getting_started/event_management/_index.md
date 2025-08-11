@@ -16,9 +16,9 @@ further_reading:
 
 Datadog Event Management [Triage Inbox][4] simplifies incident response by consolidating related events from any source into actionable cases. This centralized view reduces noise and helps teams triage, investigate, and collaborate more effectively. With customizable saved views, you can stay focused on high-priority cases and review correlated alerts, related changes, and telemetry, all in one place.
 
-## Case triage and investigation
+## Triaging and investigating cases
 
-Case triage and investigation begins in the Triage Inbox, where you can sort, filter, and manage incoming cases. Collaborate seamlessly with teammates, both within and outside of Datadog, to coordinate responses. From there, you can prioritize, assign, investigate, and escalate cases as needed to drive faster resolution.
+Case triage and investigation begins in the Triage Inbox, where you can sort, filter, and manage incoming cases. Collaborate with teammates, both within and outside of Datadog, to coordinate responses. From there, you can prioritize, assign, investigate, and escalate cases as needed to drive faster resolution.
 
 {{< img src="getting_started/event_management/event_mgmt_inbox.mp4" alt="Event Management Inbox, sorting by priority, highlighting changing status and priority capabilities" video=true >}}
 
@@ -42,7 +42,7 @@ On the right hand split-view side panel, you can perform the following:
 - **Tag and comment**: Collaborate with teammates in the case timeline by tagging users and adding notes.
 - **Send notifications**: Alert stakeholders with Slack, Microsoft Teams, email, or webhooks.
 - **Escalate issues**: Trigger an incident or page an on-call responder using [Incident Management][1], [On-Call][2], [Workflow Automation][3], or third-party tools.
-- **Sync with external tools**: Keep Jira and ServiceNow records in-sync to ensure external stakeholders stay up to date.
+- **Sync with external tools**: Keep Jira and ServiceNow records in sync to ensure external stakeholders stay up to date.
 
    {{< img src="getting_started/event_management/event_mgmt_inbox_right_hand_panel.png" alt="Event Management Inbox right hand panel, highlighting Escalate drop down" style="width:100%;" >}}
 
@@ -53,7 +53,7 @@ On the right hand split-view side panel, you can perform the following:
 - **Merge cases**: Combine related cases to streamline investigations.
 - **Split cases**: Separate alerts that require individual investigation.
 
-**Note**: When all alerts in the case are resolved, the system automatically closes the case, or you can manually mark it as resolved.  
+**Note**: When all alerts in a case are resolved, the system automatically closes the case. You can also manually mark a case as resolved.  
 
 ## Further Reading
 
