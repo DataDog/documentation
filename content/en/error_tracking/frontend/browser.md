@@ -9,7 +9,7 @@ further_reading:
   text: "datadog-ci Source code"
 - link: "/real_user_monitoring/guide/upload-javascript-source-maps"
   tag: "Documentation"
-  text: "Upload Javascript source maps"
+  text: "Upload JavaScript source maps"
 - link: "/error_tracking/explorer"
   tag: "Documentation"
   text: "Learn about the Error Tracking Explorer"
@@ -36,12 +36,12 @@ To start sending Error Tracking data from your browser application to Datadog, f
 
 Choose the installation type for the Browser SDK.
 
-#### npm (node package manager)
-This method is recommended for modern web applications. The Browser SDK is packaged with the rest of your frontend JavaScript code. It has no impact on page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.
+{{< tabs >}}
+{{% tab "npm" %}}
 
-{{% collapse-content title="Installing using npm" level="h4" expanded=false id="npm" %}}
+Installing through npm (node package manager) is recommended for modern web applications. The Browser SDK is packaged with the rest of your frontend JavaScript code. It has no impact on page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.
 
-Add [`@datadog/browser-rum`][5] to your `package.json` file, then initialize it with:
+Add [`@datadog/browser-rum`][1] to your `package.json` file, then initialize it with:
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -62,12 +62,12 @@ datadogRum.init({
 
 The `trackUserInteractions` parameter enables the automatic collection of user clicks in your application. **Sensitive and private data** contained in your pages may be included to identify the elements interacted with.
 
-{{% /collapse-content %}}
+[1]: https://www.npmjs.com/package/@datadog/browser-rum
 
-#### CDN async
+{{% /tab %}}
+{{% tab "CDN async" %}}
+
 This method is recommended for web applications with performance targets. The Browser SDK loads from our CDN asynchronously, ensuring the SDK download does not impact page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized.
-
-{{% collapse-content title="Installing using CDN async" level="h4" expanded=false id="cdn-async" %}}
 
 Add the generated code snippet to the head tag of every HTML page you want to monitor in your application. For **{{<region-param key="dd_site_name">}}** site:
 
@@ -93,12 +93,10 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 
 The `trackUserInteractions` parameter enables the automatic collection of user clicks in your application. **Sensitive and private data** contained in your pages may be included to identify the elements interacted with.
 
-{{% /collapse-content %}}
+{{% /tab %}}
+{{% tab "CDN sync" %}}
 
-#### CDN sync
-This method is recommended for collecting all events. The Browser SDK loads from our CDN synchronously, ensuring the SDK loads first and collects all errors, resources, and user actions. This method may impact page load performance.
-
-{{% collapse-content title="Installing using CDN sync" level="h4" expanded=false id="cdn-sync" %}}
+This method is recommended for collecting all events. The Browser SDK loads from Datadog's CDN synchronously, ensuring the SDK loads first and collects all errors, resources, and user actions. This method may impact page load performance.
 
 Add the generated code snippet to the head tag (in front of any other script tags) of every HTML page you want to monitor in your application. Including the script tag higher and synchronized ensures Datadog RUM can collect all performance data and errors. For **{{<region-param key="dd_site_name">}}** site:
 
@@ -121,7 +119,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 
 The `trackUserInteractions` parameter enables the automatic collection of user clicks in your application. **Sensitive and private data** contained in your pages may be included to identify the elements interacted with.
 
-{{% /collapse-content %}}
+{{% /tab %}}
+{{< /tabs >}}
 
 #### TypeScript (optional)
 
@@ -142,198 +141,126 @@ window.DD_RUM.init({
 })
 ```
 
-### Step 3 - Define the environment and other settings
+### Step 3 - Configure environment and settings
 
-- In the Environment field, define the environment (`env`) for your application to use [unified service tagging][33].
-- In the Service field, define the service (`service`) for your application to use [unified service tagging][33].
-- Set the privacy level for user input. See [Session Replay Browser Privacy Options][16] for more details.
-- Set a version number (`version`) for your deployed application in the initialization snippet. For more information, see [Tagging][34].
+1. In the Environment field, define the environment (`env`) for your application to use [unified service tagging][32].
+2. In the Service field, define the service (`service`) for your application to use [unified service tagging][32].
+3. Set the privacy level for user input. See [Session Replay Browser Privacy Options][16] for more details.
+4. Set a version number (`version`) for your deployed application in the initialization snippet. For more information, see [Tagging][33].
+5. Configure additional parameters as needed. See the [Configuration reference](#configuration-reference) section below for all available options. 
 
-For Error Tracking, these tags power:
+#### Tagging for Error Tracking
+
+These tags (configured in step 3 above) power Error Tracking functionality:
 
 - Filtering and faceting issues by `service` and `env`
 - Cross-product correlation with RUM, Logs, and APM for the same `service`/`env`
-- Matching uploaded source maps via the same `service` and `version` you configure during upload
+- Matching uploaded source maps through the same `service` and `version` you configure during upload
 
-### Step 4 - Configuration
-
-Call the initialization command to start tracking. The following parameters are available:
-
-{{% collapse-content title="Initialization parameters" level="h4" expanded=false id="init-parameters" %}}
-
-`applicationId`
-: Required<br/>
-**Type**: String<br/>
-The application ID.
-
-`clientToken`
-: Required<br/>
-**Type**: String<br/>
-A [Datadog client token][10].
-
-`site`
-: Optional<br/>
-**Type**: String<br/>
-**Default**: `datadoghq.com`<br/>
-[The Datadog site parameter of your organization][11].
-
-`service`
-: Optional<br/>
-**Type**: String<br/>
-The service name for your application. Follows the [tag syntax requirements][12].
-
-`env`
-: Optional<br/>
-**Type**: String<br/>
-The application's environment, for example: prod, pre-prod, and staging. Follows the [tag syntax requirements][12].
-
-`version`
-: Optional<br/>
-**Type**: String<br/>
-The application's version, for example: 1.2.3, 6c44da20, and 2020.02.13. Follows the [tag syntax requirements][12].
-
-`trackingConsent`
-: Optional<br/>
-**Type**: `"granted"` or `"not-granted"`<br/>
-**Default**: `"granted"`<br/>
-Set the initial user tracking consent state. See [User Tracking Consent][13].
-
-`trackViewsManually`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false` <br/>
-Allows you to control views creation. See [override default view names][14].
-
-`trackUserInteractions`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false` <br/>
-Enables [automatic collection of users actions][15].
-
-`trackResources`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false` <br/>
-Enables collection of resource events.
-
-`defaultPrivacyLevel`
-: Optional<br/>
-**Type**: String<br/>
-**Default**: `mask` <br/>
-See [Session Replay Privacy Options][16].
-
-`enablePrivacyForActionName`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false` <br/>
-See [Mask Action Names][17].
-
-`actionNameAttribute`
-: Optional<br/>
-**Type**: String<br/>
-Specify your own attribute to be used to [name actions][18].
-
-`sessionSampleRate`
-: Optional<br/>
-**Type**: Number<br/>
-**Default**: `100`<br/>
-The percentage of sessions to track: `100` for all, `0` for none. Only tracked sessions send RUM events. For more details about `sessionSampleRate`, see the [sampling configuration][19].
-
-`silentMultipleInit`
-: Optional<br/>
-**Type**: Boolean <br/>
-**Default**: `false`<br/>
-Initialization fails silently if the RUM Browser SDK is already initialized on the page.
-
-`proxy`
-: Optional<br/>
-**Type**: String<br/>
-Optional proxy URL, for example: `https://www.proxy.com/path`. For more information, see the full [proxy setup guide][20].
-
-`excludedActivityUrls`
-: Optional<br/>
-**Type**: List<br/>
-A list of request origins ignored when computing the page activity. See [How page activity is calculated][21].
-
-`workerUrl`
-: Optional<br/>
-**Type**: String<br/>
-URL pointing to the Datadog Browser SDK Worker JavaScript file. The URL can be relative or absolute, but is required to have the same origin as the web application. See [Content Security Policy guidelines][22] for more information.
-
-`compressIntakeRequests`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false`<br/>
-Compress requests sent to the Datadog intake to reduce bandwidth usage when sending large amounts of data. The compression is done in a Worker thread. See [Content Security Policy guidelines][22] for more information.
-
-`storeContextsAcrossPages`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false`<br/>
-Store global context and user context in `localStorage` to preserve them along the user navigation. See [Contexts life cycle][23] for more details and specific limitations.
-
-`allowUntrustedEvents`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false`<br/>
-Allow capture of [untrusted events][24], for example in automated UI tests.
-
-Options that must have matching configuration when you are using the Logs Browser SDK:
-
-`sessionPersistence`
-: Optional<br/>
-**Type**: `"cookie" | "local-storage"`<br/>
-**Default**: `"cookie"`<br/>
-Which storage strategy to use for persisting sessions. Can be either `cookie` or `local-storage`.
-
-`trackSessionAcrossSubdomains`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false`<br/>
-Preserve the session across subdomains for the same site.
-
-`useSecureSessionCookie`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false`<br/>
-Use a secure session cookie. This disables events sent on insecure (non-HTTPS) connections.
-
-`usePartitionedCrossSiteSessionCookie`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**:`false`<br/>
-Use a partitioned secure cross-site session cookie. This allows the Browser SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`.
-
-`allowFallbackToLocalStorage`
-: Optional - **Deprecated**<br/>
-**Type**: Boolean<br/>
-**Default**: `false`<br/>
-Use `sessionPersistence` instead.
-
-{{% /collapse-content %}}
-
-### Tagging
-
-A service is an independent, deployable code repository that maps to a set of pages.
+A service is an independent, deployable code repository that maps to a set of pages:
 
 - If your browser application was constructed as a monolith, your Datadog application has one service name for the application.
 - If your browser application was constructed as separate repositories for multiple pages, edit the default service names throughout the lifecycle of your application.
 
-### Step 5 - Deploy your application
+#### Configuration reference
+
+Call the initialization command to start tracking. The below parameters are available.
+
+**Required**
+
+These parameters are essential for the Browser SDK to function. You must provide both values to initialize Error Tracking.
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `applicationId` | String | - | The application ID. |
+| `clientToken` | String | - | A [Datadog client token][10]. |
+
+**Core configuration**
+
+These parameters define your application's identity and environment. They're used for unified service tagging and help organize your data across Datadog products.
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `env` | String | - | The application's environment (e.g., prod, pre-prod, staging). Follows the [tag syntax requirements][12]. |
+| `service` | String | - | The service name for your application. Follows the [tag syntax requirements][12]. |
+| `site` | String | `datadoghq.com` | [The Datadog site parameter of your organization][11]. |
+| `version` | String | - | The application's version (e.g., 1.2.3, 6c44da20). Follows the [tag syntax requirements][12]. |
+
+**Privacy and consent**
+
+These parameters control how user data is collected and protected. Configure them based on your privacy requirements and compliance needs.
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `defaultPrivacyLevel` | String | `mask` | See [Session Replay Privacy Options][16]. |
+| `enablePrivacyForActionName` | Boolean | `false` | See [Mask Action Names][17]. |
+| `trackingConsent` | `"granted"` or `"not-granted"` | `"granted"` | Set the initial user tracking consent state. See [User Tracking Consent][13]. |
+
+**Tracking and collection**
+
+These parameters control what data is automatically collected from user interactions and pageviews. Enable them based on your monitoring needs.
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `actionNameAttribute` | String | - | Specify your own attribute to be used to [name actions][18]. |
+| `sessionSampleRate` | Number | `100` | The percentage of sessions to track: `100` for all, `0` for none. See [sampling configuration][19]. |
+| `trackResources` | Boolean | `false` | Enables collection of resource events. |
+| `trackUserInteractions` | Boolean | `false` | Enables [automatic collection of user actions][15]. |
+| `trackViewsManually` | Boolean | `false` | Allows you to control views creation. See [override default view names][14]. |
+
+**Advanced configuration**
+
+These parameters provide fine-grained control over SDK behavior, networking, and performance. Use them for advanced use cases and custom configurations.
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `compressIntakeRequests` | Boolean | `false` | Compresses intake requests to reduce bandwidth usage. |
+| `excludedActivityUrls` | List | - | A list of request origins ignored when computing page activity. See [How page activity is calculated][21]. |
+| `proxy` | String | - | Optional proxy URL. See the full [proxy setup guide][20]. |
+| `silentMultipleInit` | Boolean | `false` | Initialization fails silently if the RUM Browser SDK is already initialized. |
+| `workerUrl` | String | - | URL pointing to the Datadog Browser SDK Worker JavaScript file. See [Content Security Policy guidelines][22]. |
+
+**Context and storage**
+
+These parameters control how user context and application state are preserved across page navigation and browser sessions.
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `allowUntrustedEvents` | Boolean | `false` | Allow capture of [untrusted events][24], for example in automated UI tests. |
+| `storeContextsAcrossPages` | Boolean | `false` | Store global context and user context in `localStorage` to preserve them along user navigation. See [Contexts life cycle][23]. |
+
+**Logs Browser SDK compatibility options**
+
+These parameters ensure compatibility when using both the RUM Browser SDK and Logs Browser SDK together. They must have matching configuration values across both SDKs to maintain consistent session tracking and data correlation.
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `allowFallbackToLocalStorage` | Boolean | `false` | **Deprecated** - Use `sessionPersistence` instead. |
+| `sessionPersistence` | `"cookie" \| "local-storage"` | `"cookie"` | Which storage strategy to use for persisting sessions. Can be either `cookie` or `local-storage`. |
+| `trackSessionAcrossSubdomains` | Boolean | `false` | Preserve the session across subdomains for the same site. |
+| `usePartitionedCrossSiteSessionCookie` | Boolean | `false` | Use a partitioned secure cross-site session cookie. This allows the Browser SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`. |
+| `useSecureSessionCookie` | Boolean | `false` | Use a secure session cookie. This disables events sent on insecure (non-HTTPS) connections. |
+
+### Step 4 - Deploy your application
 
 Deploy the changes to your application. After your deployment is live, Datadog collects events from your users' browsers.
 
-### Step 6 - Upload source maps (optional but recommended)
+### Step 5: Upload source maps (optional but recommended)
 
-Upload your JavaScript source maps to access unminified stack traces. See [Upload JavaScript source maps][32].
+Upload your JavaScript source maps to access unminified stack traces. See [Upload JavaScript source maps][30].
 
-### Step 7 - Visualize your data
+### Step 6: Visualize your data
 
-Visualize the [data collected][7] in [dashboards][9] or create a search query in Error Tracking.
+Now that you've completed the basic setup for Browser Error Tracking, your application is collecting browser errors and you can start monitoring and debugging issues in real-time.
+
+Visualize the [data collected][7] in [dashboards][8] or create a search query in Error Tracking.
 
 Until Datadog starts receiving data, your application appears as `pending` on the **Applications** page.
 
-## Link errors with your source code
+
+## Advanced features (optional)
+
+### Link errors with your source code
 
 In addition to sending source maps, the [Datadog CLI][25] reports Git information such as the commit hash, repository URL, and a list of tracked file paths in the code repository.
 
@@ -343,19 +270,17 @@ Error Tracking can use this information to correlate errors with your source cod
 
 For more information, see the [Datadog Source Code Integration][29].
 
-## List uploaded source maps
+### Manage uploaded source maps
 
-See the [Debug Symbols][30] page to view all uploaded symbols.
+See all uploaded symbols and manage your source maps on the [Debug Symbols][30] page.
 
-### Limitations
+**Note**: Source maps are limited in size to **500 MB** each.
 
-Source maps are limited in size to **500 MB** each.
-
-## Collect errors
+## Next steps
 
 You can monitor unhandled exceptions, unhandled promise rejections, handled exceptions, handled promise rejections, and other errors that the Browser SDK does not automatically track. Learn more about [Collecting Browser Errors][31].
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -366,30 +291,29 @@ You can monitor unhandled exceptions, unhandled promise rejections, handled exce
 [5]: https://www.npmjs.com/package/@datadog/browser-rum
 [6]: https://app.datadoghq.com/error-tracking/settings/setup/client
 [7]: /real_user_monitoring/browser/data_collected/
-[8]: /real_user_monitoring/browser/data_collected/
-[9]: /real_user_monitoring/platform/dashboards/errors/
-[10]: /account_management/api-app-keys/#client-tokens
-[11]: /getting_started/site/
-[12]: /getting_started/tagging/#define-tags
-[13]: /real_user_monitoring/browser/advanced_configuration/#user-tracking-consent
-[14]: /real_user_monitoring/browser/advanced_configuration/#override-default-rum-view-names
-[15]: /real_user_monitoring/browser/tracking_user_actions/
-[16]: /real_user_monitoring/session_replay/browser/privacy_options
-[17]: /real_user_monitoring/session_replay/browser/privacy_options#mask-action-names
-[18]: /real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
-[19]: https://docs.datadoghq.com/real_user_monitoring/guide/sampling-browser-plans/
-[20]: /real_user_monitoring/guide/proxy-rum-data/
-[21]: /real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated 
-[22]: /integrations/content_security_policy_logs/?tab=firefox#use-csp-with-real-user-monitoring-and-session-replay
-[23]: /real_user_monitoring/browser/advanced_configuration/#contexts-life-cycle
-[24]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
-[25]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#sourcemaps-command
-[26]: https://github.com
-[27]: https://about.gitlab.com
-[28]: https://bitbucket.org/product
-[29]: /integrations/guide/source-code-integration/
-[30]: https://app.datadoghq.com/source-code/setup/rum
+[8]: /real_user_monitoring/platform/dashboards/errors/
+[9]: /account_management/api-app-keys/#client-tokens
+[10]: /getting_started/site/
+[11]: /getting_started/tagging/#define-tags
+[12]: /real_user_monitoring/browser/advanced_configuration/#user-tracking-consent
+[13]: /real_user_monitoring/browser/advanced_configuration/#override-default-rum-view-names
+[14]: /real_user_monitoring/browser/tracking_user_actions/
+[15]: /real_user_monitoring/session_replay/browser/privacy_options
+[16]: /real_user_monitoring/session_replay/browser/privacy_options#mask-action-names
+[17]: /real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
+[18]: https://docs.datadoghq.com/real_user_monitoring/guide/sampling-browser-plans/
+[19]: /real_user_monitoring/guide/proxy-rum-data/
+[20]: /real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
+[21]: /integrations/content_security_policy_logs/?tab=firefox#use-csp-with-real-user-monitoring-and-session-replay
+[22]: /real_user_monitoring/browser/advanced_configuration/#contexts-life-cycle
+[23]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
+[24]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#sourcemaps-command
+[25]: https://github.com
+[26]: https://about.gitlab.com
+[27]: https://bitbucket.org/product
+[28]: /integrations/guide/source-code-integration/
+[29]: https://app.datadoghq.com/source-code/setup/rum
+[30]: /real_user_monitoring/guide/upload-javascript-source-maps
 [31]: https://docs.datadoghq.com/error_tracking/frontend/collecting_browser_errors/?tab=npm#collect-errors-manually
-[32]: /real_user_monitoring/guide/upload-javascript-source-maps
-[33]: /getting_started/tagging/unified_service_tagging/
-[34]: /getting_started/tagging/
+[32]: /getting_started/tagging/unified_service_tagging/
+[33]: /getting_started/tagging/
