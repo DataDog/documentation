@@ -72,21 +72,18 @@ secret_backend_config:
 More specific setup instructions depend on the backend type used. Refer to the appropriate link for further information: 
 
 
-{{% collapse-content title="AWS Secret and AWS SSM" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="AWS Secrets" level="h4" expanded=false id="id-for-anchoring" %}}
 The secret executable utility supports the following AWS services:
 
 |secret_backend_type value                                | AWS Service                             |
 |---------------------------------------------|-----------------------------------------|
 |`aws.secrets` |[AWS Secrets Manager][1000]                 |
-|`aws.ssm` |[AWS Systems Manager Parameter Store][1001] |
 
 ##### Set up an Instance profile
 
 Datadog recommends using the [instance profile method][1006] of retrieving secrets, as AWS handles all environment variables and session profiles for you. 
 
 To use an instance profile, create an IAM role in the same account where your AWS services are running. When setting up the role, specify the **Trusted Entity Type** as **AWS Service**. Select the appropriate service, such as **EC2** if you're working with an EC2 instance. This IAM role is then available for use by instances of the selected service. 
-
-Next, attach a permissions policy to the IAM role. The specific policy you need depends on whether you're using [AWS Secrets Manager][1000] or [AWS Systems Manager Parameter Store][1001]. 
 
 Then, configure the trust policy for the role and be sure to replace `${Service}` with the name of the service you selected earlier (for example `ec2`):
 
@@ -105,14 +102,9 @@ Then, configure the trust policy for the role and be sure to replace `${Service}
 }
 ```
 
-Finally, for the instance that is retrieving secrets, assign the IAM role you just created. After assigning the role, restart the instance to apply the changes.
-
-{{< tabs >}}
-{{% tab "AWS Secrets" %}}
-
 ##### IAM permission policy
 
-To allow resources such as EC2 or ECS instances to access your specified secrets, create an IAM permission policy similar to the following example. For more details on granting resource access to secrets, see the [AWS Secrets Manager official documentation][101]. 
+Next, attach a permissions policy to the IAM role. To allow resources such as EC2 or ECS instances to access your specified secrets, create an IAM permission policy similar to the following example. For more details on granting resource access to secrets, see the [AWS Secrets Manager official documentation][101]. 
 
 ```json
 {
@@ -131,6 +123,8 @@ To allow resources such as EC2 or ECS instances to access your specified secrets
 }
 
 ```
+
+Finally, for the instance that is retrieving secrets, assign the IAM role you just created. After assigning the role, restart the instance to apply the changes.
 
 #### Datadog.yaml configuration
 
@@ -176,14 +170,49 @@ secret_backend_config:
 <!-- SECRET MANAGER LINKS -->
 [101]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
 
-{{% /tab  %}}
+[1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+[1001]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
+[1002]: https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html
+[1003]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html 
+[1004]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html
+[1005]: https://docs.aws.amazon.com/managedservices/latest/userguide/defaults-instance-profile.html
+[1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
 
+{{% /collapse-content %}} 
 
-{{% tab "AWS SSM" %}}
+{{% collapse-content title="AWS SSM" level="h4" expanded=false id="id-for-anchoring" %}}
+The secret executable utility supports the following AWS services:
 
-##### IAM permission policy (if using an instance profile)
+|secret_backend_type value                                | AWS Service                             |
+|---------------------------------------------|-----------------------------------------|
+|`aws.ssm` |[AWS Systems Manager Parameter Store][1001] |
 
-To allow resources such as EC2 or ECS instances to access your specified secrets, create an IAM permission policy similar to the following example. For more details on granting resource access to secrets, see the [AWS Secrets Manager official documentation][201]. 
+##### Set up an Instance profile
+
+Datadog recommends using the [instance profile method][1006] of retrieving secrets, as AWS handles all environment variables and session profiles for you. 
+
+To use an instance profile, create an IAM role in the same account where your AWS services are running. When setting up the role, specify the **Trusted Entity Type** as **AWS Service**. Select the appropriate service, such as **EC2** if you're working with an EC2 instance. This IAM role is then available for use by instances of the selected service. 
+
+Then, configure the trust policy for the role and be sure to replace `${Service}` with the name of the service you selected earlier (for example `ec2`):
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "${Service}.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
+}
+```
+
+##### IAM permission policy
+
+Next, attach a permissions policy to the IAM role. To allow resources such as EC2 or ECS instances to access your specified secrets, create an IAM permission policy similar to the following example. For more details on granting resource access to secrets, see the [AWS Systems Manager official documentation][201]. 
 
 ```json
 {
@@ -207,6 +236,8 @@ To allow resources such as EC2 or ECS instances to access your specified secrets
 ```
 
 You can use a wildcard when specifying the parameter path `Resource`. For example, use `datadog/*` for all resources within the `datadog` folder.
+
+Finally, for the instance that is retrieving secrets, assign the IAM role you just created. After assigning the role, restart the instance to apply the changes.
 
 #### Datadog.yaml configuration
 
@@ -235,9 +266,6 @@ property3: "ENC[/DatadogAgent/Production/ParameterKey3]"
 
 [200]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
 [201]: https://docs.aws.amazon.com/systems-manager/
-
-{{% /tab %}}
-{{< /tabs >}}
 
 [1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
 [1001]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
