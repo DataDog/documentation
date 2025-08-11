@@ -29,23 +29,22 @@ Product analytics support two types of retention event measurements:
 {{< img src="product_analytics/retention/pana_retention_measureby.png" alt="The two types of retention measurements available with product analytics" style="width:80%;" >}}
 
 
-### Return On
+### Return on
 For each cohort and return period, `Return on` calculates the percentage of users who triggered the return event during that specific period.
 
-`Return on` highlights the likelihood of users completing the return event some period of time (for example, days or weeks) after the start event. This is especially helpful when assessing overall retention across your features and products.
+`Return on` highlights the likelihood of users completing the return event, some period of time (for example, days or weeks), after the start event. This is especially helpful when assessing overall retention across your features and products.
 
 
-### Return On or After
+### Return on or after
 For each cohort and return period,`Return on or after` calculates the percentage of users who triggered the return event during that specific period or any subsequent period.
 
 `Return on or after` highlights users who either fully leave your product or stop using key functionalities, which is helpful when assessing the effectiveness of onboarding experiences.
 
 
-
 ## Retention calculation and grouping 
 
 ### Weighted average cohort calculation
-The weighted average cohort summarizes overall cohort behavior by accounting for cohort size. Larger cohorts have more influence on the final value, making the result more representative than a simple average.
+The weighted average cohort summarizes overall cohort behavior by accounting for cohort size. Larger cohorts have more influence on the final value, making the result more representative than an average.
 
 This weighted average calculation is applied across all [visualization types](#visualization-types). For example, in the retention grid, the weighted average is used to populate the summary cell for each time interval. 
 
@@ -86,7 +85,7 @@ To build a retention graph, navigate to **[Product Analytics > Charts][1]**, cli
 ### 2. Define the the measures
 1. Select `Retention rate` to see the data in percentages, or `Unique users` to see the absolute number of users. 
 2. Scope the retention measure `Return on or after` or `Return on` based on when the return event occurs.
-3. Choose the timeframe on which define you want to analyze user retention. Select a period size (day, week, or month) to define  how return events are goruped in the analysis.
+3. Choose the time frame on which define you want to analyze user retention. Select a period size (day, week, or month) to define how return events are goruped in the analysis.
 
 {{< img src="product_analytics/retention/pana_retention_timeframes_ui.png" alt="Example Retention Analysis graph" style="width:100%;" >}}
 
