@@ -109,9 +109,6 @@ SCA는 지원되는 언어에서 `-Ddd.appsec.sca.enabled` 플래그 또는 `DD_
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
-{{< tabs >}}
-
-
 ```shell
 docker run [...] -e DD_APPSEC_SCA_ENABLED=true [...]
 ```

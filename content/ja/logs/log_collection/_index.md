@@ -219,11 +219,6 @@ Datadog では、SSL で暗号化された接続と暗号化されていない�
 
 {{< /site-region >}}
 
-<<<<<<< HEAD
-{{< site-region region="gov" >}}
-
-| サイト    | タイプ  | エンドポイント                                                                  | ポート | 説明                                                                                                              |
-=======
 {{< site-region region="ap2" >}}
 
 | サイト | タイプ  | エンドポイント                                                                  | ポート | Description                                                                                                              |
@@ -241,7 +236,6 @@ Datadog では、SSL で暗号化された接続と暗号化されていない�
 {{< site-region region="gov" >}}
 
 | サイト    | タイプ  | エンドポイント                                                                  | ポート | Description                                                                                                              |
->>>>>>> 37c1c0d9e6 (Translated file updates)
 |---------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
 | US1-FED | HTTPS | `http-intake.logs.ddog-gov.com`                                          | 443  | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Logs HTTP API のドキュメント][1]参照。 |
 | US1-FED | HTTPS | `lambda-http-intake.logs.ddog-gov.datadoghq.com`                          | 443  | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                         |
