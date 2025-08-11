@@ -2519,6 +2519,11 @@ menu:
       parent: oncall
       identifier: oncall_profile_settings
       weight: 7
+    - name: Cross-org Paging
+      url: service_management/on-call/x_org_paging/
+      parent: oncall
+      identifier: oncall_x_org_paging
+      weight: 8
     - name: Guides
       url: service_management/on-call/guides/
       parent: oncall
