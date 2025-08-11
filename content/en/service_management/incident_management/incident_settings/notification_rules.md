@@ -19,8 +19,12 @@ Use notification rules to:
 
 1. Navigate to [Incident Settings Notification Rules][1].
 1. Click **New Rule**.
-2. Under **For incidents matching...**, select the incident property field `key:value` pairs you want notifications to be sent for. By default, these filters are empty, and a notification rule triggers for any incident.
-3. **Notify**: Select your notification recipients. Notifications can be sent to any of Datadog's existing [notification integrations][2]. If you want to notify a recipient's mobile device, select the option for their name that includes **(Mobile Push Notification)**. The recipient must have enabled notifications in the [Datadog mobile app][3] for this option to appear.
+1. Select the `key:value` pairs for the incident properties that should trigger a notification. By default, no filters are set, and a notification rule triggers whenever an incident is declared or its attributes are updated.
+1. Select your notification recipients.
+    - Send notifications to any of Datadog's [supported notification integrations][2].
+    - Notify [Datadog On-Call teams][4] using `@oncall-` handles.
+    - To notify a recipient's mobile device, find their name and select the option that includes **(Mobile Push Notification)**. The recipient must have notifications enabled in the [Datadog mobile app][3] for this option to appear.
+    - If you want to notify the incident Slack channel, use handle `@incident-slack-channel`.
 4. **With Template**: Select the desired message template you want the notification rule to use.
 5. **Renotify on updates to**: Select the incident properties that trigger notifications. A new notification is sent whenever one or more of the selected properties change. **Note**: properties already in your filters (see step 2) are automatically included in these rules.
 6. Click **Save**
@@ -39,3 +43,4 @@ You can perform the following operations to manage your notification rules.
 [1]: https://app.datadoghq.com/incidents/settings#Rules
 [2]: /monitors/notifications/?tab=is_alert#configure-notifications-and-automations
 [3]: /mobile/
+[4]: /service_management/on-call/

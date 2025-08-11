@@ -39,11 +39,11 @@ To control which information is sent to Datadog, you can [mask action names with
 
 The RUM Browser SDK automatically tracks clicks to generate click actions. A one-click action generally represents one user click, except when the same element is clicked multiple times in a row, which is considered a single action (see [Frustration Signals "rage clicks"][4]).
 
-## Action timing metrics
+## Action timing telemetry
 
 For information about the default attributes for all RUM event types, see [RUM Browser Data Collected][5].
 
-| Metric    | Type   | Description              |
+| Telemetry    | Type   | Description              |
 |--------------|--------|--------------------------|
 | `action.loading_time` | number (ns) | The loading time of the action.  |
 | `action.long_task.count`        | number      | Count of all long tasks collected for this action. |

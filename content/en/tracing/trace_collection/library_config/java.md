@@ -247,6 +247,11 @@ Request path | Resource path
 `/admin/user/12345/delete` | `/admin/user`
 `/user/12345` | `/user/?`
 
+`dd.trace.status404rule.enabled`
+: **Environment Variable**: `DD_TRACE_STATUS404RULE_ENABLED`<br>
+**Default**: `true`<br>
+By default, HTTP 404 responses use "404" as the span resource name. When `false`, HTTP 404 responses keep the original URL path as the resource name.
+
 `dd.trace.128.bit.traceid.generation.enabled`
 : **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`<br>
 **Default**: `true`<br>
@@ -641,7 +646,7 @@ Deprecated since version 1.9.0
 
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: /agent/logs/advanced_log_collection
-[3]: /agent/remote_config/
+[3]: /tracing/guide/remote_config
 [4]: https://app.datadoghq.com/services
 [5]: /tracing/setup/docker/
 [6]: /agent/configuration/network/#configure-ports

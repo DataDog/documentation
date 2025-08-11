@@ -14,11 +14,11 @@ title: Dashboards RUM
 
 Cuando se crea una aplicación RUM, Datadog [recopila datos][1] y genera dashboards sobre el rendimiento, los errores, los recursos y las sesiones de usuario de la aplicación. 
 
-{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="Página de información general de la aplicación RUM" style="width:90%;" >}}
+{{< img src="real_user_monitoring/dashboards/rum-dashboards-performance-summary.png" alt="Página de Información general de la aplicación RUM" style="width:90%;" >}}
 
 Accede a tus dashboards RUM filtrando por `RUM` en la consulta de búsqueda de la [**lista de dashboards**][2] o en las páginas de resumen de tu aplicación (**Experiencia digital > Resumen de rendimiento** y **Experiencia digital > Análisis de productos > Resumen del análisis**).
 
-{{< img src="real_user_monitoring/dashboards/available_rum_dashboards-2.png" alt="Dashboards RUM predefinidos" style="width:90%;" >}}
+{{< img src="real_user_monitoring/dashboards/available-rum-dashboards.png" alt="Out-of-the-box Dashboards de RUM predefinidos" style="width:90%;" >}}
 
 {{< whatsnext desc="Puedes explorar los siguientes dashboards RUM predefinidos:" >}}
   {{< nextlink href="/real_user_monitoring/platform/dashboards/performance" >}}<u>Informaciones generales de rendimiento</u>: Observa una vista global del rendimiento del sitio web/de la aplicación y de los datos demográficos. {{< /nextlink >}}
@@ -39,7 +39,7 @@ Los dashboards RUM generados contienen automáticamente un conjunto de variables
 
 Para explorar eventos individualmente, haz clic en un gráfico y en **Visualizar eventos RUM**. Esto te redirige al Explorador RUM con filtros de búsqueda preseleccionados.
 
-{{< img src="real_user_monitoring/dashboards/view_rum_events.mp4" alt="Visualizar eventos RUM" video=true style="width:80%;" >}}
+{{< img src="real_user_monitoring/dashboards/rum-view-events-2.mp4" alt="Ver eventos de RUM" video=true style="width:80%;" >}}
 
 ### Personalización de los dashboards
 
