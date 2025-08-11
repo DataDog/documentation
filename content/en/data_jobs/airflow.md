@@ -341,15 +341,19 @@ dbt_run = BashOperator(
 
 OpenLineage integration can automatically inject Airflow's parent job information (namespace, job name, run id) into Spark application properties. This creates a parent-child relationship between Airflow tasks and Spark jobs, enabling you to troubleshoot both systems in one place.
 
-1. Make sure your Spark jobs are currently monitored through [Data Jobs Monitoring][2].
+**Note**: This feature requires `apache-airflow-providers-openlineage` version 2.1.0 or later (supported from Airflow 2.9+).
 
-2. Enable automatic parent job information injection by setting the following configuration:
+1. **Verify operator compatibility**: Check the [Apache Airflow OpenLineage documentation][8] to confirm your Spark operators are supported. This feature only works with specific operators like SparkSubmitOperator and LivyOperator.
+
+2. Make sure your Spark jobs are actively monitored through [Data Jobs Monitoring][2].
+
+3. Enable automatic parent job information injection by setting the following configuration:
 
 ```shell
 AIRFLOW__OPENLINEAGE__SPARK_INJECT_PARENT_JOB_INFO=true
 ```
 
-This automatically injects parent job properties for all supported Spark Operators, like SparkSubmitOperator or LivyOperator. See the [Apache Airflow OpenLineage documentation][8] for the full list of supported operators. To disable for specific operators, set `openlineage_inject_parent_job_info=False` on the operator.
+This automatically injects parent job properties for all supported Spark Operators. To disable for specific operators, set `openlineage_inject_parent_job_info=False` on the operator.
 
 
 ## Further Reading

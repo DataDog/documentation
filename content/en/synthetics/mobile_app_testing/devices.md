@@ -1,6 +1,9 @@
 ---
 title: Supported Mobile App Testing Devices
 further_reading:
+- link: "https://www.datadoghq.com/blog/mobile-apps-synthetic-tests/"
+  tag: "Blog"
+  text: "How to build reliable and accurate synthetic tests for your mobile apps"
 - link: "synthetics/mobile_app_testing/"
   tag: "Documentation"
   text: "Mobile App Testing"

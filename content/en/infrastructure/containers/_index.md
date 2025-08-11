@@ -151,7 +151,7 @@ Use parentheses to group operators together. For example, `(NOT (elasticsearch O
 
 The screenshot below displays a system that has been filtered down to a Kubernetes cluster of 25 nodes. RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist. Here, it is apparent that the containers in this cluster are over-provisioned. You could use tighter limits and bin packing to achieve better utilization of resources.
 
-{{< img src="infrastructure/livecontainers/filter-by.png" alt="A system that has been filter down to a Kubernetes cluster of 25 nodes" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/filter-by.png" alt="A system that has been filtered down to a Kubernetes cluster of 25 nodes" style="width:80%;">}}
 
 Container environments are dynamic and can be hard to follow. The following screenshot displays a view that has been pivoted by `kube_service` and `host`—and, to reduce system noise, filtered to `kube_namespace:default`. You can see what services are running where, and how saturated key metrics are:
 

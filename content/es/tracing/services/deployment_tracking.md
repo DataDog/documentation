@@ -8,13 +8,13 @@ further_reading:
 - link: getting_started/tagging/unified_service_tagging/
   tag: Documentación
   text: Más información sobre el etiquetado de servicios unificado y las etiquetas
-    (tags) reservadas
+    reservadas
 - link: tracing/app_analytics
   tag: Documentación
   text: Utiliza la versión como una dimensión en tus consultas a App Analytics
 title: Rastreo de despliegue
 ---
-## La etiqueta de versión
+## La etiqueta "version" (versión)
 
 La etiqueta `version` está reservada dentro del etiquetado de servicios unificado. Se aplica a métricas de infraestructura (host, contenedor, proceso, y checks de NPM), métricas de traza ( trace), trazas (traces), perfiles y logs.
 
@@ -53,10 +53,10 @@ Un servicio configurado con etiquetas `version` tiene una sección de versión e
 Por defecto, verás:
 
 - Los nombres de las versiones desplegadas para este servicio a lo largo del tiempo.
-- Las horas a las que trazas que corresponden a esta versión fueron vistas por primera y última vez.
+- Las horas a las que las trazas que corresponden a esta versión fueron vistas por primera y última vez.
 - Un indicador de Error Types (Tipos de error), que muestra cuántos tipos de error aparecen en cada versión que no aparecían en la versión inmediatamente anterior.
 
-  > **Nota:** Este indicador muestra errores que no se veían en trazas de la versión anterior. No significa que esta versión haya introducido necesariamente estos errores. Buscar nuevos tipos de error puede ser una buena forma de empezar a investigar errores.
+    > **Nota:** Este indicador muestra errores que no se veían en trazas de la versión anterior. No significa que esta versión haya introducido necesariamente estos errores. Buscar nuevos tipos de error puede ser una buena forma de empezar a investigar errores.
 
 - Solicitudes por segundo.
 - Porcentaje de errores sobre el total de solicitudes.
@@ -70,11 +70,11 @@ Puedes añadir o eliminar columnas de este cuadro y tus selecciones se guardará
 - Número total de errores.
 - Latencia medida por p50, p75, p90, p95, p99 o máx.
 
-{{< img src="tracing/deployment_tracking/VersionComparison.png" alt="Versiones en la Página de servicios" style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/VersionComparison.png" alt="Versiones en la página de servicios" style="width:100%;">}}
 
 **Nota:** La sección de versiones solo aparece si hay más de una versión informando durante el intervalo de tiempo seleccionado en la parte superior de la página.
 
-## Comparación del despliegue
+## Comparación de despliegues
 
 Haz clic en cualquier fila de la tabla de resumen de versiones para abrir una página de comparación de versiones, que te permitirá comparar dos versiones del mismo servicio. Por defecto, la versión seleccionada se comparará con la versión inmediatamente anterior, pero puedes cambiar esto para comparar dos versiones cualesquiera de los últimos 30 días.
 
@@ -222,13 +222,13 @@ Tiempo = 30
 : `{service: foo, env: staging, cluster-name: us-staging, version: Y}`
 
 Tiempo = 45
-: `{service: foo, env: dev-shopist, cluster-name: us-staging, version: Y}`
+: `{service: foo, env: staging, cluster-name: dev-shopist, version: Y}`
 
 Tiempo máximo entre despliegues:
 : `max:datadog.service.time_between_deployments{env: staging, cluster-name: *} = 25`
 
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
