@@ -187,7 +187,7 @@ You can customize alert conditions to define the circumstances under which you w
 
 A notification is sent according to the set of alerting conditions. Use this section to define how and what to message your teams.
 
-1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][7] and supports the following [conditional variables][8]:
+1. Enter a **message** for the Browser Test or use pre-filled monitor messages. This field allows standard [Markdown formatting][7] and supports the following [conditional variables][8]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -200,11 +200,13 @@ A notification is sent according to the set of alerting conditions. Use this sec
     | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).                  |
     | `{{^is_priority}}`         | Show unless the monitor matches priority (P1 to P5).                |
 
-    Notification messages include the **message** defined in this section and information about the failing locations.
+    Notification messages include the **message** defined in this section and information about the failing locations. For example, pre-filled monitor messages are already included in the message body section:
+
+     {{< img src="/synthetics/browser_tests/browser_tests_pre-filled.png" alt="Synthetic Monitoring monitor section, highlighting the pre-filled monitor messages" style="width:100%;" >}}
 
 2. Choose team members and services to notify.
-3. Specify a renotification frequency. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
-4. Click **Save Details and Record Test** to save your test configuration and record your browser steps.
+3. Specify a renotification frequency. To prevent renotification on failing tests, check the option `Stop re-notifying on X occurrences`.
+4. Click **Save & Start Recording** to save your test configuration and record your browser steps.
 
 For more information, see [Using Synthetic Test Monitors][9].
 
