@@ -19,14 +19,17 @@ further_reading:
 
 Sensitive Data Scanner in the Cloud scans telemetry data, such as your application logs, APM events, RUM events, and events from Event Management. The data that can be scanned and redacted are:
 
-- Logs: All structured and unstructured log content, including log message and attribute values
-- APM: Span attribute values only
-- RUM: Event attribute values only
-- Events: Event attribute values only
+- **Logs**: All structured and unstructured log content, including log message and attribute values
+- **APM**: Span attribute values only
+- **RUM**: Event attribute values only
+- **Events**: Event attribute values only
 
-{{< callout url="https://www.datadoghq.com/product-preview/role-based-sensitive-data-unmasking-in-logs" btn_hidden="false" >}}
-Role-based sensitive data unmasking in logs is in Preview. To enroll, click <b>Request Access</b>.
-{{< /callout >}}
+The following actions can be applied to matched sensitive data per scanning rule:
+
+- **Redact**: Replace all matching values entirely with a single token that you choose, such as `[sensitive_data]`.
+- **Partially redact**: Replace a specific portion of all matching values.
+- **Hash**: Replace entirely, all matching values with a non-reversible unique identifier.
+- **Mask** (only available for logs): Replace all matching values with redacted data, which users with the `Data Scanner Unmask` permission can optionally de-obfuscate in Datadog.
 
 You submit logs and events to the Datadog backend, so the data leaves your environment before it gets redacted. The logs and events are scanned and redacted in the Datadog backend during processing, so sensitive data is redacted before events are indexed and shown in the Datadog UI.
 
@@ -47,6 +50,8 @@ This document goes through the following:
 ### Permissions
 
 By default, users with the Datadog Admin role have access to view and set up scanning rules. To allow other users access, grant the `data_scanner_read` or `data_scanner_write` permissions under [Compliance][1] to a custom role. See [Access Control][2] for details on how to set up roles and permissions.
+
+If a rule uses the **mask** action for matched sensitive data, the data is accessible to all users with the `data_scanner_unmask` permission because they can de-obfuscate the data in Dataodog. **Note**: Datadog does not recommend using the **mask** action for credentials, unless you have a plan to respond to and rotate all leaked credentials. The **mask** action is only available for logs.
 
 {{< img src="sensitive_data_scanner/read_write_permissions.png" alt="The compliance permissions sections showing data scanner read and writer permissions" style="width:80%;">}}
 
@@ -250,6 +255,17 @@ The excluded namespaces are:
 
 To control who can access logs containing sensitive data, use tags added by the Sensitive Data Scanner to build queries with role-based access control (RBAC). You can restrict access to specific individuals or teams until the data ages out after the retention period. See [How to Set Up RBAC for Logs][9] for more information.
 
+### Mask action
+
+When you set up or edit a rule, there is an **Action on Match** section where you can set the rule to use the **mask** action (only available for logs) for matched sensitive data. The **mask** action obfuscate the sensitive data, but users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) the data in Datadog.
+
+**Notes**:
+- Unmasking can only be performed on indexed logs within Datadog. Masked data that is accessed programmatically, such as using the API or Terraform, or within archives always appear encrypted.
+- Unmasking does not work on rehydrated logs.
+- Datadog does not recommend using the **mask** action for credentials, unless you have a plan to respond to and rotate all leaked credentials.
+
+To unmask sensitive data, navigate to the [Summary page][8] and click on a scanning rule. Click on a log. If you have permission to see masked data, the masked data has an eye icon next to it. Click the eye icon to see the data. You can also use the [Log Explorer][15] to view your masked log data.
+
 ## Redact sensitive data in tags
 
 To redact sensitive data contained in tags, you must [remap][10] the tag to an attribute and then redact the attribute. Uncheck `Preserve source attribute` in the remapper processor so that the tag is not preserved during the remapping.
@@ -299,3 +315,4 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [12]: /observability_pipelines/
 [13]: /observability_pipelines/processors/sensitive_data_scanner/
 [14]: /observability_pipelines/set_up_pipelines/
+[15]: https://app.datadoghq.com/logs

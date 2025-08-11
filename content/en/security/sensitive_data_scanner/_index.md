@@ -61,24 +61,23 @@ With Sensitive Data Scanner in the Cloud, you submit logs and events to the Data
 
 The data that can be scanned and redacted are:
 
-- Logs: All structured and unstructured log content, including log message and attribute values
-- APM: Span attribute values only
-- RUM: Event attribute values only
-- Events: Event attribute values only
+- **Logs**: All structured and unstructured log content, including log message and attribute values
+- **APM**: Span attribute values only
+- **RUM**: Event attribute values only
+- **Events**: Event attribute values only
 
 The following actions can be applied to matched sensitive data per scanning rule:
 
-- Redact: Replace all matching values entirely with a single token that you choose, such as `[sensitive_data]`.
-- Partially redact: Replace a specific portion of all matching values.
-- Hash: Replace entirely, all matching values with a non-reversible unique identifier.
-- [Logs only] Mask: Replace all matching values with redacted data, which users with the `Data Scanner Unmask` permission can optionally de-obfuscate in Datadog.
+- **Redact**: Replace all matching values entirely with a single token that you choose, such as `[sensitive_data]`.
+- **Partially redact**: Replace a specific portion of all matching values.
+- **Hash**: Replace entirely, all matching values with a non-reversible unique identifier.
+- **Mask** (available for logs only): Replace all matching values with redacted data, which users with the `Data Scanner Unmask` permission can optionally de-obfuscate in Datadog.
 
 To use Sensitive Data Scanner, set up a scanning group to define what data to scan and then set up scanning rules to determine what sensitive information to match within the data. For scanning rules you can:
 - Add predefined scanning rules from Datadog's [Scanning Rule Library][2]. These rules detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more.
 - [Create your own rules using regex patterns][3].
 
 See [Set Up Sensitive Data Scanner for Telemetry Data][4] for setup details.
-
 
 ### In your environment {#in-your-environment}
 
