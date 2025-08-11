@@ -63,7 +63,7 @@ The geomap widget visualizes geographic data with shaded regions or points. It c
   {{% /tab %}}
   {{< /tabs >}}
 
-3. (Optional) Under **Visual Options**, set the widget default view box. You can choose a custom view, or search for a country, subdivision (province, state) or city to define as the default view. A **Custom** view box can be any region, not specific to a state.
+3. (Optional) Under **Visual Options**, use the **Set widget default view** dropdown to select where to initially focus the map. Select **Custom** to define a custom region, or search for the name of a country, state, or province.
 
 ### Options
 
