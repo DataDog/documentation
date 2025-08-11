@@ -28,17 +28,19 @@ The following operating systems and architectures are compatible:
 
 <div class="alert alert-info">For additional operating system requirements specific to your programming language, see <a href="#language-specific-requirements">Language specific requirements</a>.</div>
 
-## Platforms
+## Deployment environments
 
-The following container platforms are compatible:
+The following environments are compatible:
 
-| Environment     | Requirements & Limitations                             | Support |
-|-----------------|--------------------------------------------------------|---------|
-| Linux           | Not supported on hardened environments such as SELinux | GA      |
-| Docker on Linux |                                                        | GA      |
-| Kubernetes      | [Datadog Admission Controller][1] enabled              | GA |
+| Environment     | Requirements & Limitations                              | Support |
+|-----------------|---------------------------------------------------------|---------|
+| Linux           | Not supported on hardened environments such as SELinux. | GA      |
+| Docker on Linux |                                                         | GA      |
+| Kubernetes      | Requires [Datadog Admission Controller][1] to be enabled.      | GA      |
+| Windows IIS     | Requires Agent v7.67.1+ and Tracer v3.19.0+.<br>Only .NET applications running in IIS are supported.     | GA      |
 
-### Platform-specific requirements
+
+### Environment-specific requirements
 
 #### Linux virtual machines (VMs)
 
