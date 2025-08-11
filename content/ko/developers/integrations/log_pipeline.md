@@ -181,7 +181,7 @@ Datadog은 이 페이지에 명시된 지침 및 요구 사항을 기반으로 �
 
 검토 프로세스를 시작하려면 [Logs Configuration 페이지][3]의 **Export** 아이콘을 사용하여 로그 파이프라인과 관련 사용자 정의 패싯을 내보내세요.
 
-{{< img src="developers/integrations/export_pipeline.png" alt="Datadog에서 로그 파이프라인을 내보내려면 Export Pipeline 아이콘을 클릭합니다. width="50%">}}
+{{< img src="developers/integrations/export_pipeline.png" alt="Datadog에서 로그 파이프라인을 내보내려면 Export Pipeline 아이콘을 클릭합니다." width="50%">}}
 
 통합을 통해 Datadog으로 전송될 **모든** 속성이 포함된 샘플 원시 로그를 포함하세요. 원시 로그는 Datadog으로 전송되기 **전에** 소스 애플리케이션에서 직접 생성된 원시 메시지로 구성됩니다.
 
