@@ -34,9 +34,7 @@ To send logs from Observability Pipelines to Datadog using AWS PrivateLink, see 
 - Logs (User HTTP intake): `http-intake.logs.datadoghq.com`
 - Remote Configuration: `config.datadoghq.com`
 
-**Notes**:
-- If you are a PCI-compliant organization, the Worker sends logs over `http-intake-pci.logs.datadoghq.com`, which is not available as an AWS PrivateLink endpoint.
-- The `obpipeline-intake.datadoghq.com` endpoint is used for Live Capture and is not available as a PrivateLink endpoint.
+**Note**: The `obpipeline-intake.datadoghq.com` endpoint is used for Live Capture and is not available as a PrivateLink endpoint.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching

@@ -30,19 +30,24 @@ Incident Management Analytics is a queryable data source for aggregated incident
 - [Incident Management Overview Dashboard template][3] 
 - [Notebook Incident Report template][4]
 
+### Incident timestamps
+
+Incidents carry three timestamp attributes that influence analytics:
+
+* Declaration time (`declared`): When the incident was declared.
+* Detection time (`detected`): When the underlying resource from which the incident was declared was created. For example, if a monitor alert fires at 2 p.m. and the incident is declared at 2:30 p.m., the detected time is 2:30 p.m. If the incident wasn't declared from another Datadog resource, `detected` is the same as `declared`.
+* Resolution time (`resolved`): When the incident was most recently resolved.
+
 ### Measures
 
-Incident Management collects the following analytic measures to form analytic queries:
+Incident Management reports the following analytic measures, which you can use to power analytic queries in Dashboard and Notebook widgets:
 
-- Incident Count
-- Customer Impact Duration
-- Status Active Duration
-- Status Stable Duration
-- Time to Detect (detected time – customer impact start time)
-- Time to Repair (customer impact end time – detected time)
-- Time to Resolve (resolved time – declared time)
-- Number of Users Impacted
-- Acknowledge
+- `Customer Impact Duration`: The duration during which customers were impacted, based on the impacts defined on the incident.
+- `Status Active Duration`: The duration that the incident was in an "active" state, based on the incident timeline.
+- `Status Stable Duration`: The duration that the incident was in a "stable" state, based on the incident timeline.
+- `Time to Detect`: The duration from the earliest customer impact to the incident's detection time.
+- `Time to Repair`: The duration from the incident's detection time to the last customer impact.
+- `Time to Resolve`: The duration from the incident's declaration time to the time it was resolved.
 
 In addition to these defaults, you can create new measures by adding custom *Number* property fields in your [Incident Settings][7]. 
 

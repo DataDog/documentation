@@ -33,6 +33,7 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 | [Crew AI](#crew-ai)                             | >= 0.105.0         | >= 3.5.0       |
 | [OpenAI Agents](#openai-agents)                 | >= 0.0.2           | >= 3.5.0       |
 | [LiteLLM](#litellm)                             | >= 1.70.0          | >= 3.9.0       |
+| [Pydantic AI](#pydantic-ai)                     | >= 0.3.0           | >= 3.11.0      |
 
 
 You can programmatically enable automatic tracing of LLM calls to a supported LLM model like OpenAI or a framework like LangChain by setting `integrations_enabled` to `true` in the `LLMOBs.enable()` function. In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
@@ -268,6 +269,18 @@ The LiteLLM integration instruments the following methods:
   - `router.Router.text_completion`
   - `router.Router.atext_completion`
 
+## Pydantic AI
+
+The Pydantic AI integration instruments agent invocations and tool calls made using the [Pydantic AI][55] agent framework.
+
+### Traced methods
+
+The Pydantic AI integration instruments the following methods:
+
+- [Agent Invocations][56] (including any tools or toolsets associated with the agent):
+  - `agent.Agent.iter` (also traces `agent.Agent.run` and `agent.Agent.run_sync`)
+  - `agent.Agent.run_stream`
+
 
 [1]: https://platform.openai.com/docs/api-reference/introduction
 [2]: https://platform.openai.com/docs/api-reference/completions
@@ -323,6 +336,8 @@ The LiteLLM integration instruments the following methods:
 [52]: https://github.com/google-gemini/deprecated-generative-ai-python
 [53]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
 [54]: https://api-docs.deepseek.com/
+[55]: https://ai.pydantic.dev/
+[56]: https://ai.pydantic.dev/agents/
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
