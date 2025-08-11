@@ -36,7 +36,7 @@ For each cohort and return period, `Return on` calculates the percentage of user
 
 
 ### Return on or after
-For each cohort and return period,`Return on or after` calculates the percentage of users who triggered the return event during that specific period or any subsequent period.
+For each cohort and return period, `Return on or after` calculates the percentage of users who triggered the return event during that specific period or any subsequent period.
 
 `Return on or after` highlights users who either fully leave your product or stop using key functionalities, which is helpful when assessing the effectiveness of onboarding experiences.
 
@@ -67,7 +67,7 @@ This means each cohort's retention rate is scaled by its number of users before 
 
 
 <div class="alert alert-info">
-<strong>Note:</strong> The retention chart displays greyed-out values when data is partial or incomplete. This occurs when the time period is ongoing and retention cannot yet be fully calculated
+<strong>Note:</strong> The retention chart displays greyed-out values when data is partial or incomplete. This occurs when the time period is ongoing and retention cannot yet be fully calculated.
 </div>
 
 ### Grouping
@@ -85,12 +85,12 @@ To build a retention graph, navigate to **[Product Analytics > Charts][1]**, cli
 ### 2. Define the the measures
 1. Select `Retention rate` to see the data in percentages, or `Unique users` to see the absolute number of users. 
 2. Scope the retention measure `Return on or after` or `Return on` based on when the return event occurs.
-3. Choose the time frame on which define you want to analyze user retention. Select a period size (day, week, or month) to define how return events are goruped in the analysis.
+3. Choose the time frame for which you want to analyze user retention. Select a period size (day, week, or month) to define how return events are grouped in the analysis.
 
 {{< img src="product_analytics/retention/pana_retention_timeframes_ui.png" alt="Example Retention Analysis graph" style="width:100%;" >}}
 
-### 3. Add filters Define the users
-Optionally, select a specific [segment][6] to measure the retention of its users. This defaults to All users. You can also add any desired filter criteria, such as `user country`, `device type`, or `operating system`.
+### 3. Define users and add filters
+Optionally, select a specific [segment][6] to measure the retention of its users. This defaults to all users. You can also add any desired filter criteria, such as `user country`, `device type`, or `operating system`.
 
 
 ### 4. Group by 
@@ -133,7 +133,7 @@ Reading the **Dec 04 2023** row of the above graph from left to right:
 After building your graph, select the relevant visualization type to surface the information you need under the search query.
 
 Retention curve
-: Shows the change in retention (including the weighted avg) for all or a specified cohorts.
+: Shows the change in retention (including the weighted average) for all or specified cohorts.
 {{< img src="product_analytics/retention/pana_retention_viz_curve2.png" alt="Retention curve visualization graph" style="width:90%;" >}}
 
 
