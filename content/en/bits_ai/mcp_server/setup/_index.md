@@ -35,7 +35,7 @@ The following instructions are for all MCP-compatible clients. For VS Code or Cu
 
 {{< tabs >}}
 {{% tab "Remote authentication" %}}
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For example, if you're using `app.datadoghq.com` to access Datadog, use the US1 site endpoint: `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp`.
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For example, if you're using `app.datadoghq.com` to access Datadog, use the endpoint for the US1 site.
 
 | Datadog Site | MCP Server Endpoint | 
 |--------|------|
@@ -74,7 +74,7 @@ These examples are for the US1 site:
 {{% /tab %}}
 
 {{% tab "Local binary authentication" %}}
-Use this option if direct remote authentication is not available for you.
+Use this option if direct remote authentication is not available for you. After installation, you typically do not need to update the local binary to benefit from MCP Server updates, as the tools are remote.
 
 1. Install the MCP Server binary:
     * macOS and Linux:
@@ -115,7 +115,26 @@ Use this option if direct remote authentication is not available for you.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Connect in VS Code or Cursor
+### Authentication
+
+The MCP Server uses OAuth 2.0 for [authentication][8]. If you cannot go through the OAuth flow (for example, on a server), you can provide a Datadog [API key and application key][9] as variables in the header of the MCP Server configuration.
+
+{{< code-block lang="json" >}}
+      "mcpServers": {
+        "datadog": {
+          "type": "http",
+          "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp",
+          "headers": { 
+              "DD_API_KEY": "<your-api-key>", 
+              "DD_APPLICATION_KEY": "<your-application-key>"
+          }
+        }
+      }
+{{< /code-block >}}
+
+## Client compatibility
+
+### Connect in VS Code or Cursor
 
 Datadog's [VS Code and Cursor extension][1] includes built-in access to the Datadog MCP Server. Benefits include:
 
@@ -174,7 +193,7 @@ Retrieves detailed information about an incident.
 - "What's the status of incident ABC123?"
 - "Retrieve full information about the Redis incident from yesterday."
 
-**Note**: The tool is operational but does not yet include incident timeline data.
+**Note**: The tool is operational but does not include incident timeline data.
 
 ### `get_metrics`
 Queries and analyzes historical or real-time metric data, supporting custom queries and aggregations.
@@ -189,6 +208,13 @@ Retrieves information about Datadog monitors, including their statuses, threshol
 - "List all monitors that are currently alerting."
 - "Show me monitors related to our payment service."
 - "Find monitors tagged with `team:infrastructure`."
+
+### `get_synthetics_tests`
+Searches Datadog synthetic tests.
+
+- "Help me understand why the synthetic test on endpoint `/v1/my/tested/endpoint` is failing."
+- "There is an outage; find all the failing synthetic tests on the domain `api.mycompany.com`."
+- "Are synthetic tests on my website `api.mycompany.com` still working in the past hour?"
 
 ### `get_trace`
 Fetches a complete trace from Datadog APM using a trace ID.
@@ -257,13 +283,20 @@ Search Datadog RUM events using advanced query syntax.
 - "Find pages that are loading slowly (more than 3 seconds)."
 - "Show recent user interactions on product detail pages."
 
+## Track tool calls in Audit Trail
+
+You can view information about calls made by MCP Server tools in Datadog's [Audit Trail][7]. Search or filter by the event name `MCP Server`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/ide_plugins/vscode/
 [2]: https://nodejs.org/en/about/previous-releases
-[3]: https://docs.datadoghq.com/developers/ide_plugins/vscode/?tab=cursor#installation
+[3]: /developers/ide_plugins/vscode/?tab=cursor#installation
 [4]: /
-[5]: https://docs.datadoghq.com/api/latest/events/
+[5]: /api/latest/events/
 [6]: https://modelcontextprotocol.io/
+[7]: /account_management/audit_trail/
+[8]: https://modelcontextprotocol.io/specification/draft/basic/authorization
+[9]: /account_management/api-app-keys/
