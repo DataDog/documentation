@@ -40,11 +40,15 @@ The Java SDK works by monitoring your servlet API (which handles web requests an
   - [Manual Java SDK installation][2]
 
 ### Datadog configuration
-- RUM Application created in Datadog
+- RUM application [created in Datadog][3]
 - Configuration values ready:
   - `clientToken`
   - `applicationId` 
   - `remoteConfigurationId`
+
+## Configuration
+
+To get access to configuration steps for this feature, [join the preview program][4].
 
 ## Troubleshooting
 
@@ -53,7 +57,7 @@ The Java SDK works by monitoring your servlet API (which handles web requests an
 If you don't see the RUM JavaScript tag injected, try the following steps:
 
 1. **Check server logs** for any error messages related to RUM Auto-Instrumentation
-2. **Verify configuration** - ensure all required environment variables are set:
+2. **Verify configuration** - ensure all required environment variables defined at the configuration step are set:
    - `DD_RUM_ENABLED=true`
    - `DD_RUM_APPLICATION_ID=<your-application-id>`
    - `DD_RUM_CLIENT_TOKEN=<your-client-token>`
@@ -76,3 +80,6 @@ This confirms that RUM Auto-Instrumentation is properly configured.
 
 [1]: /tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentation
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+[3]: https://app.datadoghq.com/rum/list
+[4]: https://forms.gle/RdVvDsmmzW21s2vd7
+[5]: 
