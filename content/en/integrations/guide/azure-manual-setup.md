@@ -284,7 +284,7 @@ When critical errors are encountered, the Azure integration generates events in 
 
 Datadog provides a monitor template to help you get started. To use the monitor template:
 
-1. In Datadog, go to **Monitors** and click the **Browse Templates** button.
+1. In Datadog, go to **Monitors** and click **Browse Templates**.
 2. Search for and select the monitor template titled [[Azure] Integration Errors][8].
 3. Make any desired modifications to the search query or alert conditions. By default, the monitor triggers whenever a new error is detected, and resolves when the error has not been detected for the past 15 minutes.
 4. Update the notification and re-notification messages as desired. Note that the events themselves contain pertinent information about the event and are included in the notification automatically. This includes detailed information about the scope, error response, and common steps to remediate.
