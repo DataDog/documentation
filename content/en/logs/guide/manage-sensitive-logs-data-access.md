@@ -1,5 +1,5 @@
 ---
-title: Control Sensitive Logs Data
+title: Manage Sensitive Logs Data Access
 aliases:
   - /logs/guide/restrict-access-to-sensitive-data-with-rbac
 further_reading:
@@ -35,6 +35,17 @@ If you have already indexed logs that contain sensitive data, then follow these 
 1. [Determine the scope of the data being sent](#determine-the-scope-of-the-data-being-sent)
 2. [Fix the source of the data upstream](#fix-the-source-of-the-data-upstream)
 3. [Handle data already sent to Datadog](#handle-data-already-sent-to-and-indexed-in-datadog)
+
+### Mask action
+
+When you set up or edit a scanner rule, there is an **Action on Match** section where you can set the rule to use the **mask** action (only available for logs) for matched sensitive data. The **mask** action obfuscate the sensitive data, but users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) the data in Datadog.
+
+**Notes**:
+- Unmasking can only be performed on indexed logs within Datadog. Masked data that is accessed programmatically, such as using the API or Terraform, or within archives always appear encrypted.
+- Unmasking does not work on rehydrated logs.
+- Datadog does not recommend using the **mask** action for credentials, unless you have a plan to respond to and rotate all leaked credentials.
+
+To unmask sensitive data, navigate to the [Summary page][8] and click on a scanning rule. Click on a log. If you have permission to see masked data, the masked data has an eye icon next to it. Click the eye icon to see the data. You can also use the [Log Explorer][15] to view your masked log data.
 
 ## Determine the scope of the data being sent
 

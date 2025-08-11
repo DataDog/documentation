@@ -257,7 +257,7 @@ To control who can access logs containing sensitive data, use tags added by the 
 
 ### Mask action
 
-When you set up or edit a rule, there is an **Action on Match** section where you can set the rule to use the **mask** action (only available for logs) for matched sensitive data. The **mask** action obfuscate the sensitive data, but users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) the data in Datadog.
+When you set up or edit a scanner rule, there is an **Action on Match** section where you can set the rule to use the **mask** action (only available for logs) for matched sensitive data. The **mask** action obfuscate the sensitive data, but users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) the data in Datadog.
 
 **Notes**:
 - Unmasking can only be performed on indexed logs within Datadog. Masked data that is accessed programmatically, such as using the API or Terraform, or within archives always appear encrypted.
