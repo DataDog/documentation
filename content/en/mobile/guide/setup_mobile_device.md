@@ -52,7 +52,7 @@ Customize the order and modules of the mobile app home page.
 3. To reorder the modules, hold and drag the modules from the left hand side. 
 4. Make edits to Teams, Starred Items, or Monitor Saved Views by tapping the edit icon next to the respective module.
 
-{{< img src="service_management/mobile/on_call_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS on-call page showing shifts, schedules, and escalation options">}}
+{{< img src="service_management/mobile/android_edit_home.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS on-call page showing shifts, schedules, and escalation options">}}
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -61,7 +61,7 @@ Customize the order and modules of the mobile app home page.
 3. To reorder the modules, hold and drag the modules from the right hand side.
 4. Make edits to Teams, Starred Items, or Monitor Saved Views by tapping “Edit” next to the respective module.
 
-{{< img src="service_management/mobile/Android_On_Call.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android on-call page showing shifts, schedules, and escalation options">}}
+{{< img src="service_management/mobile/ios_edit_home.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android on-call page showing shifts, schedules, and escalation options">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -87,10 +87,10 @@ Enable push notifications to ensure timely response to alerts from On-Call, inci
 {{< tabs >}}
 {{% tab "Android" %}}
 1. In the Datadog mobile app, navigate to **Settings > Notifications**.
-{{< img src="service_management/mobile/android_settings_may_2025.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="iOS notifications settings">}}
+{{< img src="service_management/mobile/android_settings.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="iOS notifications settings">}}
 
 2. Enable the **Allow notifications** toggle. Datadog highly recommends you also enable **Sound and vibration** and **Show content on Lock screen**.
-{{< img src="service_management/mobile/android_notification_may_2025.png" style="width:80%; background:none; border:none; box-shadow:none;" alt="iOS notifications settings">}}
+{{< img src="service_management/mobile/android_notification.png" style="width:80%; background:none; border:none; box-shadow:none;" alt="iOS notifications settings">}}
 
 
 **Note**: If you are using the mobile app for Datadog On-Call, follow this guide to [set up your mobile device for Datadog On-Call][4].
@@ -103,10 +103,10 @@ Enable push notifications to ensure timely response to alerts from On-Call, inci
 Make sure you grant the mobile app the necessary permissions.
 
 1. In the Datadog mobile app, navigate to **Settings > Notifications**.
-{{< img src="service_management/mobile/ios_settings_may_2025.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="iOS notifications settings">}}
+{{< img src="service_management/mobile/ios_settings.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="iOS notifications settings">}}
 
 2. Enable the **Allow Notifications** toggle. If this is your first time enabling notifications, this opens up a permissions prompt. Grant permission, then touch **Enable Notifications** again to go to the iOS system settings.
-{{< img src="service_management/mobile/ios_notification_may_2025.png" style="width:80%; background:none; border:none; box-shadow:none;" alt="iOS notifications settings">}}
+{{< img src="service_management/mobile/ios_notification.png" style="width:80%; background:none; border:none; box-shadow:none;" alt="iOS notifications settings">}}
 
 3. Within the iOS system settings, make sure you enable the **Allow Notifications** toggle. Datadog highly recommends you also enable the **Sound** and **Badges** toggles.
 
@@ -119,6 +119,9 @@ For fast access to important data, add Datadog widgets to your mobile device’s
 
 ### Home screen widgets
 Set up home screen widgets to quickly access dashboards. 
+
+{{< img src="service_management/mobile/ios_dashboard_widget.png" style="width:80%; background:none; border:none; box-shadow:none;" alt="iOS home screen dashboard widgets">}}
+
 
 
 {{< tabs >}}
@@ -146,6 +149,9 @@ Set up home screen widgets to quickly access dashboards.
 
 ### Lock screen widgets
 Lock screen widgets for monitors, SLOs, incidents, and dashboards are supported on iOS.
+
+{{< img src="service_management/mobile/lock_screen_widget.png" style="width:80%; background:none; border:none; box-shadow:none;" alt="iOS home screen dashboard widgets">}}
+
 1. Long press on your lock screen.
 2. Tap Customize, then Lock Screen.
 3. Tap on the lock screen widget space to pull up the Add Widgets card.
