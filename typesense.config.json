@@ -172,7 +172,7 @@
                 },
                 {
                     "id": "gcp",
-                    "synonyms": ["gcp", "google cloud platform", "google cloud integration"]
+                    "synonyms": ["gcp", "google cloud platform", "google cloud integration", "gcp integration"]
                 },
                 {
                     "id": "aws",
