@@ -16,11 +16,11 @@ further_reading:
 
 ## Overview
 
-RUM Auto-Instrumentation automatically adds RUM monitoring to your web application server. This means you don't need to modify your frontend code directly. Instead, you can start collecting RUM data by editing a configuration file. However, if you want to track specific user actions (custom actions) or add custom event details (event attributes), you still need to add some code to your application.
+RUM Auto-Instrumentation automatically adds RUM monitoring to your web application server, so you can start collecting RUM data by editing a configuration file instead of having to modify your frontend code directly. However, if you want to track specific user actions (custom actions) or add custom event details (event attributes), you still need to add some code to your application.
 
 ## How it works
 
-The Java SDK works by monitoring your servlet API (which handles web requests and responses). It automatically checks each HTTP response your server sends. When it detects an HTML response, it looks for the `<head>` section and automatically adds the RUM JavaScript code there. The rest of your HTML content remains unchanged. This approach adds minimal overhead, so it works well even with streaming responses (where content is sent in real-time).
+The Java SDK works by monitoring your servlet API (which handles web requests and responses), automatically checking each HTTP response your server sends. When it detects an HTML response, it looks for the `<head>` section and automatically adds the RUM JavaScript code there. The rest of your HTML content remains unchanged. This approach adds minimal overhead, so it works well even with streaming responses (where content is sent in real-time).
 
 ## Prerequisites
 
@@ -75,4 +75,4 @@ This confirms that RUM Auto-Instrumentation is properly configured.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentation
-[2]: tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
