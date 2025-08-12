@@ -736,7 +736,7 @@ After this change, service names reflect the actual AWS resource name rather tha
 * `aws.s3` → `[bucket_name]`
 * `aws.eventbridge` → `[event_name]`
 
-Some may prefer the older service representation model if their dashboards and monitors are based on the legacy naming convention. To opt out and restore old behavior, use the env var: `DD_TRACE_AWS_SERVICE_REPRESENTATION_ENABLED=false`
+You may prefer the older service representation model if your dashboards and monitors rely on the legacy naming convention. To restore the previous behavior, set the environment var: `DD_TRACE_AWS_SERVICE_REPRESENTATION_ENABLED=false`
 
 The updated service modeling configuration is recommended. 
 
