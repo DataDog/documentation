@@ -2418,16 +2418,21 @@ menu:
       parent: incidents
       identifier: incident_describe
       weight: 2
+    - name: Response Team
+      url: service_management/incident_management/response_team
+      parent: incidents
+      identifier: response_team
+      weight: 3
     - name: Notification
       url: service_management/incident_management/notification
       parent: incidents
       identifier: incident_notification
-      weight: 3
+      weight: 4
     - name: Investigate an Incident
       url: service_management/incident_management/investigate
       parent: incidents
       identifier: incident_investigate
-      weight: 4
+      weight: 5
     - name: Timeline
       url: service_management/incident_management/investigate/timeline
       parent: incident_investigate
@@ -2437,7 +2442,7 @@ menu:
       url: service_management/incident_management/incident_settings
       parent: incidents
       identifier: incidents_settings
-      weight: 5
+      weight: 6
     - name: Information
       url: service_management/incident_management/incident_settings/information
       parent: incidents_settings
@@ -2472,17 +2477,17 @@ menu:
       url: service_management/incident_management/analytics
       parent: incidents
       identifier: analytics
-      weight: 6
+      weight: 7
     - name: Datadog Clipboard
       url: service_management/incident_management/datadog_clipboard
       parent: incidents
       identifier: incidents_clipboard
-      weight: 7
+      weight: 8
     - name: Guides
       url: service_management/incident_management/guides
       parent: incidents
       identifier: incidents_guide
-      weight: 10
+      weight: 9
     - name: On-Call
       url: service_management/on-call/
       pre: on-call
