@@ -61,7 +61,7 @@ _Default: disabled_
 
 When incident deletion is enabled for an incident type, any user with **Incidents Write** can delete any incident of the incident type.
 
-After you delete an incident, the incident no longer influences incident analytics, and no user can access it. Deleted incidents cannot be recovered.
+After you delete an incident, it no longer influences incident analytics, and no user can access it. Deleted incidents cannot be recovered.
 
 ## Override status timestamps
 
