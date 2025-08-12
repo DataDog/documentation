@@ -511,7 +511,7 @@ Utilisez des template variables pour personnaliser les notifications de votre mo
 
  `{{first_triggered_at}}` est défini lorsque le groupe de monitor passe de `OK` à un état différent de `OK`, ou lorsqu'un nouveau groupe apparaît dans un état non `OK`. `{{last_triggered_at}}` est défini quand le groupe de monitor passe à un état non `OK`, quel que soit l'état précédent (y compris `WARN` → `ALERT`, `ALERT` → `WARN`). `{{last_triggered_at}}` est également défini lorsqu'un nouveau groupe apparaît dans un état non `OK`. La différence est que `{{last_triggered_at}}` est indépendant de l'état précédent.
 
- {{< img src="monitors/notifications/triggered_variables.png" alt="Transitions montrant quatre horodatages A : 1419 OK vers WARN, B : 1427 WARN vers ALERT, C : 1445 ALERT vers NO DATA, D : 1449 NO DATA vers OK" style="width:90%;" >}}
+ {{< img src="monitors/notifications/triggered_variables.png" alt="Transitions montrant quatre horodatages A : 1419 OK vers WARN, B : 1427 WARN vers ALERT, C : 1445 ALERT vers NO DATA, D : 1449 NO DATA vers OK" style="width:90%;">}}
 
 **Exemple** : lorsque le monitor passe de `OK` à `WARN`, les variables `{{first_triggered_at}}` et `{{last_triggered_at}}` auront toutes deux la valeur de l'horodatage A. Le tableau ci-dessous affiche les valeurs jusqu'à la récupération du monitor.
 

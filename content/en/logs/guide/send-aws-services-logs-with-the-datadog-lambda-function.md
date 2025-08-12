@@ -54,6 +54,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [MWAA][55]                         | [Enable Amazon MWAA logs][56]                                                                                  | [Manual][56] and [automatic](#automatically-set-up-triggers) log collection.                                                                                                 |
 | [Network Firewall][57]             | [Enable AWS Network Firewall logs][58]                                                                      | [Manual][58] and [automatic](#automatically-set-up-triggers) log collection.                                                                                                 |
 | Redshift Serverless             | `-`                                                                      | [Automatic](#automatically-set-up-triggers) log collection.                                                                                                 |
+| [Route 53][59]                     | [Enable Amazon Route 53 DNS query logging][60]                                                                      | [Manual][61] and [automatic](#automatically-set-up-triggers) log collection.                                                                                                 |
 
 
 
@@ -84,6 +85,7 @@ The following sources and locations are supported:
 | Network Firewall Logs       | S3, CloudWatch |
 | Redshift Logs               | S3, Cloudwatch |
 | Redshift Serverless Logs    | CloudWatch     |
+| Route53 DNS Query Logs      | CloudWatch     |
 | S3 Access Logs              | S3             |
 | SSM Command Logs            | CloudWatch     |
 | Step Functions              | CloudWatch     |
@@ -110,6 +112,7 @@ The following sources and locations are supported:
     "network-firewall:ListFirewalls",
     "redshift:DescribeClusters",
     "redshift:DescribeLoggingStatus",
+    "route53:ListQueryLoggingConfigs",
     "redshift-serverless:ListNamespaces",
     "s3:GetBucketLogging",
     "s3:GetBucketLocation",
@@ -144,6 +147,7 @@ The following sources and locations are supported:
     | `redshift:DescribeClusters`                                 | List all Redshift clusters.                                                  |
     | `redshift:DescribeLoggingStatus`                            | Get the name of the S3 bucket containing Redshift Logs.                      |
     | `redshift-serverless:ListNamespaces`                        | List all Redshift Serverless namespaces                                      |
+    | `route53:ListQueryLoggingConfigs`                           | List all DNS query logging configurations for Route 53                       |
     | `s3:GetBucketLogging`                                       | Get the name of the S3 bucket containing S3 access logs.                     |
     | `s3:GetBucketLocation`                                      | Get the region of the S3 bucket containing S3 access logs.                   |
     | `s3:GetBucketNotification`                                  | Get existing Lambda trigger configurations.                                  |
@@ -364,3 +368,6 @@ You can also exclude or send only those logs that match a specific pattern by us
 [56]: /integrations/amazon_mwaa/#log-collection
 [57]: /integrations/amazon_network_firewall/
 [58]: /integrations/amazon_network_firewall/#log-collection
+[59]: /integrations/amazon_route53/
+[60]: /integrations/amazon_route53/#enable-route53-dns-query-logging
+[61]: /integrations/amazon_route53/#send-logs-to-datadog
