@@ -30,13 +30,13 @@ Remote Agent Management simplifies the process of upgrading your Agent fleet by 
 ### Permissions 
 Users must have the [Agent Upgrade][2] and  [Fleet Policies Write][2] permissions within Fleet Automation to configure Agents. The permission is enabled by default on the Datadog Admin role.
 
-## Additional requirements
+### Additional requirements
 * **Disk space**: Datadog suggests at least 2GB for the initial Agent install and an additional 2GB for upgrading the Agent from Fleet Automation. Specifically, the upgrade requires 1.3GB in the `/opt/datadog-packages` directory on Linux, or `C:\ProgramData\Datadog\Installer\packages` on Windows. The extra space ensures that there is enough room to maintain two Agent installs temporarily during the upgrade process in case a rollback is needed.
 * **System service manager**: Remote updates are supported only on machines running `systemd`. Other init systems (for example SysVinit, Upstart) are not supported.
 * **(Windows) Agent User**: To enable remote updates for installations using an Active Directory domain account, provide the password option to the installer when upgrading to Agent 7.66 or later. To avoid providing and manually managing the account password, consider using a [Group Managed Service Account (gMSA)][11]. For more information, see [Installing the Agent with a gMSA account][12].
 
 
-### Enable Remote Agent Management
+## Enable Remote Agent Management
 To enable Remote Agent Management:
 1. Ensure that [Remote Configuration is enabled for your organization][15].
 1. Go to the [Datadog Agent install page][3] for your platform or configuration management tool.
@@ -89,10 +89,6 @@ The Agent ensures that the appropriate permissions are set for these files. No c
 For the most consistent upgrade experience, Datadog recommends managing upgrades from one source at a time. Use either Fleet Automation or a configuration management tool. If you run a configuration management tool on an Agent that has already been upgraded using Fleet Automation, the upgrade reverts the Agent to the [`DD_AGENT_MINOR_VERSION`][9]  specified in your configuration. If no `DD_AGENT_MINOR_VERSION` is set, the Agent is upgraded to the latest available version.
 
 
-## Downgrade Agents
-
-If you need to downgrade an Agent, follow the steps in [Upgrade your Agents](#upgrade-your-agents) and specify the version you wish to downgrade to. Datadog recommends using the latest version of the Agent and upgrading your Agents regularly to make sure you have access to the latest features.
-
 ## Configure your Agents
 {{< callout url="https://www.datadoghq.com/product-preview/manage-agent-configurations-from-fleet-automation/" >}}
 Managing Agent Configurations in Fleet Automation is in <strong>preview</strong>. To get access, complete the preview sign‑up form
@@ -101,7 +97,7 @@ Managing Agent Configurations in Fleet Automation is in <strong>preview</strong>
 1. In Fleet Automation, open the [Configure Agents][16] tab and click Create Configuration.
 1. Select and configure the products (for example, APM, Logs, NDM) that you want the target Agents to run.
 
-{{< img src="/agent/fleet_automation/fa_create_agent_configuration.png" alt="Select which product to enable." style="width:100%;" >}}
+{{< img src="/agent/fleet_automation/fa_create_agent_configuration2.png" alt="Select which product to enable." style="width:100%;" >}}
 
 1. Review and name your final configuration and begin scoping deployment to your Agents. Alternatively, you can save the configuration to edit or deploy to your Agents at a later time from the Configure Agents page.
 1. Scope Agents to deploy configuration to (for example through tags such as host names, site, or environment).
@@ -127,6 +123,10 @@ For instructions on configuring your Agent to use a proxy, see [Agent Proxy Conf
 For instructions on using mirrored or air-gapped repositories, see:
 - [Synchronize Datadog's images with a private container registry][7]
 - [Installing the Agent on a server with limited internet connectivity][8]
+
+## Downgrade Agents
+
+If you need to downgrade an Agent, follow the steps in [Upgrade your Agents](#upgrade-your-agents) and specify the version you wish to downgrade to. Datadog recommends using the latest version of the Agent and upgrading your Agents regularly to make sure you have access to the latest features.
 
 ## Troubleshooting
 
