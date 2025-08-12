@@ -77,7 +77,7 @@ _Default: disabled_
 
 When test incidents are enabled in an incident type, any user with the **Incidents Write** permission can declare test incidents of the incident type.
 
-Test incidents are visually distinguished from other incidents. By default, test incidents do not by appear in incident search, execute automations, execute notification rules, or affect analytics. The declarer can opt into these functions during declaration.
+Test incidents are visually distinguished by a purple banner. By default, test incidents do not by appear in incident search, execute automations, execute notification rules, or affect analytics. The declarer can opt into these functions during declaration.
 
 [1]: https://app.datadoghq.com/incidents/settings#Information
 [2]: /service_management/incident_management/incident_settings/notification_rules
