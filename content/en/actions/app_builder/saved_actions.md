@@ -12,6 +12,9 @@ aliases:
   - /service_management/app_builder/actions/saved_actions/
   - /service_management/app_builder/saved_actions
 further_reading:
+- link: "/actions/workflows/actions/"
+  tag: "Documentation"
+  text: "Learn about actions in workflows"
 - link: "/integrations/"
   tag: "Documentation"
   text: "Learn about integrations"
