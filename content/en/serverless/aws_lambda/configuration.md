@@ -727,7 +727,7 @@ To instrument AWS Lambda with the OpenTelemetry API, set the environment variabl
 
 These versions of the [Node.js](https://github.com/DataDog/datadog-lambda-js/releases/tag/v12.127.0), [Python](https://github.com/DataDog/datadog-lambda-python/releases/tag/v8.113.0), and [Java](https://github.com/DataDog/datadog-lambda-java/releases/tag/v24) Lambda layers released changes to correctly name, model and visualize AWS managed services. 
 
-After this change, service names reflect the actual AWS resource name rather than only the AWS service:
+Service names reflect the actual AWS resource name rather than only the AWS service:
 * `aws.lambda` → `[function_name]`
 * `aws.dynamodb` → `[table_name]`
 * `aws.sns` → `[topic_name]`
