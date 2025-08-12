@@ -15,6 +15,14 @@
      --update-env-vars=DD_SITE=$DD_SITE \
    ```
 
+5. Finally, add a service label in Google Cloud. In your Cloud Run service's info panel, add a label with the following key and value:
+
+   | Key      | Value                                                       |
+   |-----------|-------------------------------------------------------------|
+   | `service` | The name of your service. Matches the value provided as the `DD_SERVICE` environment variable. |
+
+   See [Configure labels for services][1006] in the Cloud Run documentation for instructions.
+
 ### Environment variables
 
 | Variable            | Description |
@@ -34,3 +42,4 @@
 [1003]: /tracing/other_telemetry/connect_logs_and_traces/
 [1004]: /getting_started/tagging/unified_service_tagging/
 [1005]: /logs/log_configuration/pipelines
+[1006]: https://cloud.google.com/run/docs/configuring/services/labels

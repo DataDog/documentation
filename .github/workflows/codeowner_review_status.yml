@@ -68,8 +68,8 @@ jobs:
               }
             });
 
-            // Get current approvals
-            const approvals = new Set(
+            // Get current approvals (will be filtered by team membership later)
+            const allApprovals = new Set(
               Array.from(latestReviews.values())
                 .filter(review => review.state === 'APPROVED')
                 .map(review => review.user.login)
@@ -113,11 +113,13 @@ jobs:
               console.log(`Documentation team considered requested: ${isDocumentationTeamRequested}`);
               
               if (isDocumentationTeamRequested) {
-                // Check for approval from documentation team members
-                hasDocumentationApproval = teamMembers.some(member => 
-                  approvals.has(member.login)
+                // Check for approval from documentation team members only
+                const docsTeamApprovals = teamMembers.filter(member => 
+                  allApprovals.has(member.login)
                 );
+                hasDocumentationApproval = docsTeamApprovals.length > 0;
                 
+                console.log(`Documentation team members who approved: ${docsTeamApprovals.map(m => m.login).join(', ')}`);
                 console.log(`Documentation team approval status: ${hasDocumentationApproval}`);
               } else {
                 // If documentation team is not requested, no approval needed
