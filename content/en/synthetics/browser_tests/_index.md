@@ -187,7 +187,7 @@ You can customize alert conditions to define the circumstances under which you w
 
 A notification is sent according to the set of alerting conditions. Use this section to define how and what to message your teams.
 
-1. Enter a **message** for the Browser Test or use pre-filled monitor messages. This field allows standard [Markdown formatting][7] and supports the following [conditional variables][8]:
+1. Enter a **message** for the browser test or use pre-filled monitor messages. This field allows standard [Markdown formatting][7] and supports the following [conditional variables][8]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -200,9 +200,22 @@ A notification is sent according to the set of alerting conditions. Use this sec
     | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).                  |
     | `{{^is_priority}}`         | Show unless the monitor matches priority (P1 to P5).                |
 
-    Notification messages include the **message** defined in this section and information about the failing locations. For example, pre-filled monitor messages are already included in the message body section:
+    Notification messages include the **message** defined in this section and information about the failing locations. Pre-filled monitor messages are included in the message body section:
 
      {{< img src="/synthetics/browser_tests/browser_tests_pre-filled.png" alt="Synthetic Monitoring monitor section, highlighting the pre-filled monitor messages" style="width:100%;" >}}
+
+     For example, to create a monitor that iterates over steps extracting variables for browser tests, add the following to the monitor message:
+
+   ```text
+   {{! List extracted variables across all successful steps }}
+   # Extracted variables
+   {{#each synthetics.attributes.result.steps}}
+   {{#if extractedValue}}
+   * **Name**: `{{extractedValue.name}}`
+   **Value:** {{#if extractedValue.secure}}*Obfuscated (value hidden)*{{else}}`{{{extractedValue.value}}}`{{/if}}
+   {{/if}}
+   {{/each}}
+   ```
 
 2. Choose team members and services to notify.
 3. Specify a renotification frequency. To prevent renotification on failing tests, check the option `Stop re-notifying on X occurrences`.
