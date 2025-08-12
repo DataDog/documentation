@@ -5,7 +5,6 @@ aliases:
     - /guides/basic_agent_usage/amazonlinux/
     - /agent/basic_agent_usage/amazonlinux/
     - /agent/basic_agent_usage/centos/
-    - /agent/basic_agent_usage/centos/
     - /agent/basic_agent_usage/deb/
     - /agent/basic_agent_usage/fedora/
     - /agent/basic_agent_usage/oracle/
