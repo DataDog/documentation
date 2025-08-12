@@ -10,7 +10,7 @@ further_reading:
 
 Form your response team by adding other users and assigning them responder types (responder roles) so they know what they should focus on during the incident response.
 
-### Adding responders
+## Adding responders
 
 A responder is any Datadog user who participates in the response process for a particular incident.
 
