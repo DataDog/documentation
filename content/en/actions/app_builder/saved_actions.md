@@ -47,8 +47,6 @@ To find a saved action:
 
 **Note:** If you did not create an action, you cannot delete it or edit it directly. Instead, select the **Clone** {{< img src="icons/clone.png" inline="true" style="width:14px;">}}icon to copy the action and make your configuration changes. 
 
-{{< img src="service_management/workflows/edit_saved_action.png" alt="Preview, edit, or delete a saved action from the Action Catalog." style="width:80%;" >}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
