@@ -725,7 +725,7 @@ To instrument AWS Lambda with the OpenTelemetry API, set the environment variabl
 
 ## Visualize and model AWS services by resource name
 
-These versions of the [Node.js](https://github.com/DataDog/datadog-lambda-js/releases/tag/v12.127.0), [Python](https://github.com/DataDog/datadog-lambda-python/releases/tag/v8.113.0), and [Java](https://github.com/DataDog/datadog-lambda-java/releases/tag/v24) Lambda layers released changes to correctly name, model and visualize AWS managed services. 
+These versions of the [Node.js][50], [Python][51], and [Java][52] Lambda layers released changes to correctly name, model and visualize AWS managed services. 
 
 Service names reflect the actual AWS resource name rather than only the AWS service:
 * `aws.lambda` → `[function_name]`
@@ -798,4 +798,6 @@ If you have trouble configuring your installations, set the environment variable
 [47]: /logs/
 [48]: /tracing/trace_collection/otel_instrumentation/
 [49]: https://app.datadoghq.com/security/appsec?column=time&order=desc
-
+[50]: https://github.com/DataDog/datadog-lambda-js/releases/tag/v12.127.0
+[51]: https://github.com/DataDog/datadog-lambda-python/releases/tag/v8.113.0
+[52]: https://github.com/DataDog/datadog-lambda-java/releases/tag/v24
