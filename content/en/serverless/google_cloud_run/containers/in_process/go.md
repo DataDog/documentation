@@ -13,6 +13,9 @@ further_reading:
 ---
 
 ## Setup
+
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-process/go">available on GitHub</a>.</div>
+
 1. **Install the Datadog Go tracer**.
 
    1. In your main application, add the tracing library from `dd-trace-go`.

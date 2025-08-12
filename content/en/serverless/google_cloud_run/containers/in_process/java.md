@@ -13,6 +13,9 @@ further_reading:
 ---
 
 ## Setup
+
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-process/java">available on GitHub</a>.</div>
+
 1. **Install the Datadog Java tracer**.
 
    1. Add the Datadog Java tracer to your Dockerfile:
@@ -33,7 +36,7 @@ ENV JAVA_TOOL_OPTIONS="-javaagent:agent.jar"
 </dependency>
 {{< /code-block >}}
       {{% /tab %}}
-      
+
       {{% tab "Gradle" %}}
 {{< code-block lang="groovy" disable_copy="false" >}}
 implementation 'com.datadoghq:dd-trace-api:DD_TRACE_JAVA_VERSION_HERE'
