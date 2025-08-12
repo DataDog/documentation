@@ -368,7 +368,7 @@ path "<your path>" {
 
 7. Choose the method of authenticating to your vault. If using the AWS instance profile method, run `vault auth enable aws`. 
 
-### AWS instance profile instructions
+#### AWS instance profile instructions
 
 Datadog strongly recommends that you authenticate using the instance profile method if you are running your Hashicorp Vault from an AWS-connected machine. 
 
