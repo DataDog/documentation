@@ -37,7 +37,7 @@ The Version History side panel shows changes in chronological order. Each entry 
 
 ## Restore a version
 
-From the Version History side panel, after you choose the version to restore, click the kebab menu to the right of a user profile and select "Restore this test version".
+From the Version History side panel, after you choose the version to restore, click the kebab menu to the right of a user profile and select **Restore this test version**.
 
 Restoring a version updates the test and creates a new version history entry documenting the restore action, displaying any steps that were added or removed to the test. Your existing change history remains intact, allowing you to restore any version within the retention period.
 
@@ -45,7 +45,7 @@ Restoring a version updates the test and creates a new version history entry doc
 
 ## Clone a version
 
-To create a new test based on a previous version without modifying your current test, you can clone any version from your history. In the Version History side panel, select the desired version, click the kebab menu next to the user profile, and choose "Clone to a new test."
+To create a new test based on a previous version without modifying your current test, you can clone any version from your history. In the Version History side panel, select the desired version, click the kebab menu next to the user profile, and choose **Clone to a new test**.
 
 ## Version History retention
 |                          | Retention Period    |
