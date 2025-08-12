@@ -13,7 +13,7 @@ This processor parses the specified JSON field into objects. For example, if you
 }
 ```
 
-Use the parse JSON processor to parse the `message` field so that the field has all the attributes within a nested object.
+Use the Parse JSON processor to parse the `message` field so the `message` field has all the attributes within a nested object.
 
 <figure class="text-center">
 <img src="{{ .Site.Params.img_url}}images/observability_pipelines/processors/parse-json-example.png" alt="The parse json processor with message as the field to parse on" width="60%">
