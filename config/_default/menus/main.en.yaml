@@ -2651,26 +2651,31 @@ menu:
       identifier: event_explorer_saved_views
       parent: events_explorer
       weight: 308
+    - name: Triage Inbox
+      identifier: event_triage_inbox
+      url: service_management/events/triage_inbox
+      parent: events
+      weight: 4
     - name: Correlation
       url: service_management/events/correlation/
       identifier: event_correlation
       parent: events
-      weight: 4
+      weight: 5
     - name: Configuration
       url: service_management/events/correlation/configuration
       identifier: event_correlation_configure
       parent: event_correlation
-      weight: 401
+      weight: 501
     - name: Triaging & Notifying
       url: service_management/events/correlation/triage_and_notify
       identifier: event_correlation_triage_and_notify
       parent: event_correlation
-      weight: 402
+      weight: 502
     - name: Analytics
       url: service_management/events/correlation/analytics
       identifier: event_correlation_analytics
       parent: event_correlation
-      weight: 403
+      weight: 503
     - name: Guides
       url: service_management/events/guides/
       identifier: events_guides
