@@ -21,7 +21,7 @@ When you declare an incident, a declaration modal appears. This modal has severa
 | Severity Level     | (Required) By default, severity ranges from SEV-1 (most severe) to SEV-5 (least severe). You can customize the number of severities and their descriptions in Incident Management settings.
 | Incident Commander | The person assigned to lead the incident response. |
 
-You can [configure][7] Incident Management to include more fields in the incident declaration modal or require certain fields.
+You can configure [Incident Management Settings][2] to include more fields in the incident declaration modal or require certain fields.
 
 
 ## From the Incident page
