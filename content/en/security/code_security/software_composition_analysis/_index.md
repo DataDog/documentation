@@ -66,20 +66,20 @@ SCA enriches the information Application Performance Monitoring (APM) is already
 - Software supply chain & Software Bill of Materials (SBOM) management
 
 
-### Vulnerabilities Lifecycle
-Vulnerabilities detected **at runtime** in libraries by the Software Composition Analysis (SCA) are closed by Datadog after a certain period, depending on the usage of the vulnerable library by the service that uses it.
+### Vulnerabilities lifecycle
+Vulnerabilities detected in libraries by SCA **at runtime** are closed by Datadog after a certain period, depending on the service's usage of the vulnerable library.
 
 - **Hot Libraries:**
 Libraries from services that are alive for more than 2 hours.
-**When vulnerabilities are auto-closed by Datadog:** After 1 hour, if they are not detected again and the service is running on all environments where the vulnerability was detected.
+  - **When vulnerabilities are auto-closed by Datadog:** After 1 hour, if they are not detected again and the service is running on all environments where the vulnerability was detected.
 
 - **Lazy Libraries:**
 Libraries that are loaded more than 1 hour after the service has started.
-**When vulnerabilities are auto-closed by Datadog:** After 5 days, if they have not been detected again during this period.
+  - **When vulnerabilities are auto-closed by Datadog:** After 5 days, if they have not been detected again during this period.
 
 - **Cold Libraries:**
 Libraries from services that are alive for less than 2 hours (such as jobs).
-**When vulnerabilities are auto-closed by Datadog:** After 5 days, if they have not been detected again during this period.
+  - **When vulnerabilities are auto-closed by Datadog:** After 5 days, if they have not been detected again during this period.
 
 <!-- ### Remediation
 
