@@ -1,7 +1,7 @@
 ---
 title: Incident Response Team
 further_reading:
-- link: "/service_management/incident_management/incident_settings/responder-types"
+- link: "/service_management/incident_management/incident_settings/responder_types"
   tag: "Documentation"
   text: "Customize responder types in Incident Settings"
 ---
