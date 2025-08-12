@@ -18,7 +18,7 @@ No matter where you [declare an incident][1], it’s important to describe it as
 
 ## Incident details
 
-An incident’s status and details can be updated on the incident’s Overview tab. Within an incident, fill out the Overview tab with relevant details—including incident summary, customer impact, affected services, incident responders, root cause, detection method, and severity—to give your teams all the information they need to investigate and resolve an incident. 
+An incident's status and details can be updated on the incident's Overview tab. Within an incident, fill out the Overview tab with relevant details—including incident summary, customer impact, affected services, incident responders, root cause, detection method, and severity—to give your teams all the information they need to investigate and resolve an incident. 
 
 Update the impact section to record customer impacts, including their start and end times. These impacts influence incident analytics to help your organization analyze the impact of incidents on your business.
 
