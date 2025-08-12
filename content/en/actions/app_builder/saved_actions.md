@@ -28,8 +28,6 @@ Use the _Saved Actions_ feature to store and reuse an action and its parameters.
 1. If you want anyone in your organization to have access to the action, toggle **Usable by others in the organization**.
 1. Verify the configuration details for the action and click **Save Action Configuration**.
 
-{{< img src="service_management/workflows/save_action_1.mp4" alt="Click the Saved Action icon to save an action for later use." video="true" width=80% >}}
-
 ## Use a saved action in your app
 
 To add a saved action as a new step in your app:
