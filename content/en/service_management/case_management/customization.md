@@ -35,7 +35,7 @@ Datadog provides five [built-in case types][1], each designed for common workflo
 2. Click **+ Create Case Type**.
 3. Provide a **Name** and an optional **Description**.
 4. Save your new case type.
-5. (Optional) Add [custom attributes](#custom-attributes).
+5. (Optional) See the [custom attributes section](#custom-attributes) of this page to add custom attributes.
 
 ##### Enable a custom case type
 

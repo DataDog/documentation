@@ -244,7 +244,7 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
     <td></td>
   </tr>
   <tr>
-    <td>2016, 2019, 2022</td>
+    <td>2016, 2019, 2022, 2025</td>
     <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
