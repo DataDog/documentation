@@ -30,8 +30,6 @@ To get started with monitoring Azure App Service, install the Azure integration 
 
 The [Azure integration][2] provides [enriched metrics][3] and resource metadata for Azure App Service, and are required for the [Azure App Service View][4] in Datadog. Follow the [Azure integration setup instructions][5] to install the Azure integration.
 
-Additionally, [set up Azure log forwarding][6] to automatically collect and send Azure App Service resource and application logs to Datadog.
-
 ### Azure App Service Instrumentation
 
 To monitor Azure App Service workloads with APM and custom metrics, install instrumentation on your Azure App Service workloads. This instrumentation is available for both Windows and Linux App Services, and supports the following runtimes on Basic, Standard, and Premium plans:
@@ -56,6 +54,10 @@ Capabilities:
 - `Trace_ID` injection into application logs
 - Custom metrics with [DogStatsD][16]
 
+## Logging
+
+For comprehensive logging setup and configuration, see the [dedicated logging documentation][17].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -76,4 +78,4 @@ Capabilities:
 [14]: /serverless/azure_app_services/azure_app_services_linux/?tab=python
 [15]: /serverless/azure_app_services/azure_app_services_container
 [16]: /developers/dogstatsd/
-
+[17]: /serverless/azure_app_services/azure_app_services_logging/
