@@ -2839,6 +2839,11 @@ menu:
       parent: app_builder
       identifier: app_builder_embedded_apps
       weight: 9
+    - name: Save and Reuse Actions
+      url: actions/app_builder/saved_actions/
+      parent: app_builder
+      identifier: app_builder_saved_actions
+      weight: 10
     - name: Action Interface
       url: actions/action_interface/
       pre: bits-ai

@@ -30,15 +30,9 @@ Use the _Saved Actions_ feature to store and reuse an action and its parameters.
 
 ## Use a saved action in your app
 
-To add a saved action as a new step in your app:
-1. In the app editor view, click the **Actions** {{< img src="icons/kebab.png" inline="true" style="width:14px;">}} menu and select **Saved Actions**.
-1. Use the search bar or browse through the list to find the Saved Action you're looking for.
+1. In the app editor view, click the **Actions** {{< img src="icons/kebab.png" inline="true" style="width:14px;">}} menu and select **Use Saved Actions**.
+1. Browse through the list to find the Saved Action you're looking for.
 1. Select the Saved Action to add it as a configured step in your app.
-
-To configure an existing step using a saved action:
-1. Select a step in your app that you'd like to populate with a pre-configured action.
-1. Click the **Actions** {{< img src="icons/kebab.png" inline="true" style="width:14px;">}} menu and select **Saved Actions**.
-1. Select the Saved Action you'd like to use and click **Use Saved Action**.
 
 ## Manage a saved action
 
