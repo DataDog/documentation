@@ -59,8 +59,8 @@ On the right hand split-view side panel, you can perform the following:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/service_management/incident_management/
-[2]: https://docs.datadoghq.com/service_management/on-call/
-[3]: https://docs.datadoghq.com/actions/workflows/
+[1]: /service_management/incident_management/
+[2]: /service_management/on-call/
+[3]: /actions/workflows/
 [4]: https://app.datadoghq.com/event/correlation
 [5]: /service_management/case_management/automation_rules/
