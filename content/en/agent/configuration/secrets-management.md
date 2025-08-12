@@ -372,7 +372,26 @@ path "<your path>" {
 
 Datadog strongly recommends that you authenticate using the instance profile method if you are running your Hashicorp Vault from an AWS-connected machine. 
 
-First, follow the setup in the [instruction profile instructions](#instance-profile-instructions) to attach a policy to your IAM role. Next, add the `sts:GetCallerPolicy` permission to this policy:
+To use an instance profile, first, create an IAM role in the same account where your AWS services are running. When setting up the role, specify the **Trusted Entity Type** as **AWS Service**. Select the appropriate service, such as **EC2** if you're working with an EC2 instance. This IAM role is then available for use by instances of the selected service. 
+
+Then, configure the trust policy for the role and be sure to replace `${Service}` with the name of the service you selected earlier (for example `ec2`):
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "${Service}.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
+}
+```
+
+Next, add the `sts:GetCallerPolicy` permission to this policy:
 
 ```json
 {
@@ -386,6 +405,8 @@ First, follow the setup in the [instruction profile instructions](#instance-prof
   ]
 }
 ```
+
+Finally, for the instance that is retrieving secrets, assign the IAM role you just created. After assigning the role, restart the instance to apply the changes.
 
 Next, run the following command to write an authentication-specific vault policy:
 
