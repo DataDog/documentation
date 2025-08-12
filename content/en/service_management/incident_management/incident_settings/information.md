@@ -75,7 +75,7 @@ When enabled, you can define overrides for the `declared`, `detected`, and `reso
 
 _Default: disabled_
 
-When test incidents are enabled in an incident type, any user with **Incidents Write** can declare test incidents of the incident type.
+When test incidents are enabled in an incident type, any user with the **Incidents Write** permission can declare test incidents of the incident type.
 
 Test incidents are visually distinguished from other incidents. By default, test incidents do not by appear in incident search, execute automations, execute notification rules, or affect analytics. The declarer can opt into these functions during declaration.
 
