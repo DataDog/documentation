@@ -45,7 +45,7 @@ _Default: disabled_
 
 An incident's **visibility** determines what users in your Datadog organization can see it. If an incident's visibility is **organization**, any user with the **Incidents Read** permission can see it. If the incident's visibility is **private**, only the incident's responders or users with the **Private Incidents Global Access** permission can see it.
 
-On the incident search page, you can search for private incidents using the **visibility** facet on the left. You can also add conditions around incident visibility when defining incident [notification rules][2].
+On the [Datadog Incidents page][5], you can search for private incidents using the **Visibility** facet on the left. You can also add conditions around incident visibility when defining incident [notification rules][2].
 
 ### Private incidents in Slack
 
