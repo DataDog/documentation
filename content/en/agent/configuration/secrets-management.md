@@ -56,54 +56,11 @@ The following AWS services are supported:
 
 ##### Set up an Instance profile
 
-Datadog recommends using the [instance profile method][1006] of retrieving secrets, as AWS handles all environment variables and session profiles for you. 
-
-To use an instance profile, create an IAM role in the same account where your AWS services are running. When setting up the role, specify the **Trusted Entity Type** as **AWS Service**. Select the appropriate service, such as **EC2** if you're working with an EC2 instance. This IAM role is then available for use by instances of the selected service. 
-
-Then, configure the trust policy for the role and be sure to replace `${Service}` with the name of the service you selected earlier (for example `ec2`):
-
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Principal": {
-                "Service": "${Service}.amazonaws.com"
-            },
-            "Action": "sts:AssumeRole"
-        }
-    ]
-}
-```
-
-##### IAM permission policy
-
-Next, attach a permissions policy to the IAM role. To allow resources such as EC2 or ECS instances to access your specified secrets, create an IAM permission policy similar to the following example. For more details on granting resource access to secrets, see the [AWS Secrets Manager official documentation][101]. 
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "secretsmanager:GetSecretValue"
-      ],
-      "Resource": [
-        "arn:aws:secretsmanager:${Region}:${Account}:secret:${SecretNameId}"
-      ]
-    }
-  ]
-}
-
-```
-
-Finally, for the instance that is retrieving secrets, assign the IAM role you just created. After assigning the role, restart the instance to apply the changes.
+Datadog recommends using the [instance profile method][1006] of retrieving secrets, as AWS handles all environment variables and session profiles for you. More instructions on how to do this can be found at the official [AWS Secrets Manager documentation][1007].
 
 #### Datadog.yaml configuration
 
-Finally, configure the DataDog Agent to user `AWS Secrets` to resolve secrets using the following configuration:
+Configure the DataDog Agent to user `AWS Secrets` to resolve secrets using the following configuration:
 
 ```yaml
 # datadog.yaml
@@ -154,6 +111,7 @@ secret_backend_config:
 [1004]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html
 [1005]: https://docs.aws.amazon.com/managedservices/latest/userguide/defaults-instance-profile.html
 [1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
+[1007]: https://aws.amazon.com/blogs/security/how-to-use-the-aws-secrets-manager-agent/
 
 {{% /collapse-content %}} 
 
@@ -166,54 +124,7 @@ The following AWS services are supported:
 
 ##### Set up an Instance profile
 
-Datadog recommends using the [instance profile method][1006] of retrieving secrets, as AWS handles all environment variables and session profiles for you. 
-
-To use an instance profile, create an IAM role in the same account where your AWS services are running. When setting up the role, specify the **Trusted Entity Type** as **AWS Service**. Select the appropriate service, such as **EC2** if you're working with an EC2 instance. This IAM role is then available for use by instances of the selected service. 
-
-Then, configure the trust policy for the role and be sure to replace `${Service}` with the name of the service you selected earlier (for example `ec2`):
-
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Principal": {
-                "Service": "${Service}.amazonaws.com"
-            },
-            "Action": "sts:AssumeRole"
-        }
-    ]
-}
-```
-
-##### IAM permission policy
-
-Next, attach a permissions policy to the IAM role. To allow resources such as EC2 or ECS instances to access your specified secrets, create an IAM permission policy similar to the following example. For more details on granting resource access to secrets, see the [AWS Systems Manager official documentation][201]. 
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-                "ssm:GetParameters",
-                "ssm:GetParameter",
-                "ssm:GetParametersByPath",
-                "ssm:DescribeParameters"
-             ],
-      "Resource": [
-        "arn:aws:ssm:${Region}:${Account}:parameter/${ParameterPathWithoutLeadingSlash}"
-      ]
-    }
-  ]
-}
-```
-
-You can use a wildcard when specifying the parameter path `Resource`. For example, use `datadog/*` for all resources within the `datadog` folder.
-
-Finally, for the instance that is retrieving secrets, assign the IAM role you just created. After assigning the role, restart the instance to apply the changes.
+Datadog recommends using the [instance profile method][1006] of retrieving secrets, as AWS handles all environment variables and session profiles for you. More instructions on how to do this can be found at the official [AWS Secrets Manager documentation][1007].
 
 #### Datadog.yaml configuration
 
@@ -249,6 +160,7 @@ property3: "ENC[/DatadogAgent/Production/ParameterKey3]"
 [1004]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html
 [1005]: https://docs.aws.amazon.com/managedservices/latest/userguide/defaults-instance-profile.html
 [1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
+[1007]: https://docs.aws.amazon.com/systems-manager/latest/userguide/integration-ps-secretsmanager.html
 
 {{% /collapse-content %}} 
 
@@ -345,45 +257,9 @@ path "<your path>" {
 
 #### AWS instance profile instructions
 
-Datadog recommends that you authenticate using the instance profile method if you are running your Hashicorp Vault from an AWS-connected machine. 
+Datadog recommends that you authenticate using the [instance profile method][3003] if you are running your Hashicorp Vault from an AWS-connected machine.
 
-To use an instance profile, first, create an IAM role in the same account where your AWS services are running. When setting up the role, specify the **Trusted Entity Type** as **AWS Service**. Select the appropriate service, such as **EC2** if you're working with an EC2 instance. This IAM role is then available for use by instances of the selected service. 
-
-Then, configure the trust policy for the role and be sure to replace `${Service}` with the name of the service you selected earlier (for example `ec2`):
-
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Principal": {
-                "Service": "${Service}.amazonaws.com"
-            },
-            "Action": "sts:AssumeRole"
-        }
-    ]
-}
-```
-
-Next, add the `sts:GetCallerPolicy` permission to this policy:
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": "sts:GetCallerIdentity",
-      "Resource": "*"
-    }
-  ]
-}
-```
-
-Finally, for the instance that is retrieving secrets, assign the IAM role you just created. After assigning the role, restart the instance to apply the changes.
-
-Next, run the following command to write an authentication-specific vault policy:
+Once this has been set up, run the following command to write an authentication-specific vault policy:
 
 ```
 vault write auth/aws/role/<Name of AWS IAM Role> \
@@ -419,6 +295,7 @@ secret_backend_config:
 [3000]: https://learn.hashicorp.com/tutorials/vault/static-secrets
 [3001]: https://www.hashicorp.com/en/products/vault
 [3002]: https://developer.hashicorp.com/vault/docs/auth/aws#aws-auth-method
+[3003]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
 {{% /collapse-content %}} 
 
 {{% collapse-content title="JSON or YAML File Secret Backends" level="h4" expanded=false id="id-for-anchoring" %}}
