@@ -55,9 +55,6 @@ gs:
   - name: osx
     link: "https://app.datadoghq.com/account/settings/agent/latest?platform=macos"
     image: "platform_macosx.png"
-  - name: linux
-    link: "https://app.datadoghq.com/account/settings/agent/latest?platform=linux"
-    image: "platform_linux.png"
   - name: windows
     link: "https://app.datadoghq.com/account/settings/agent/latest?platform=windows"
     image: "platform_windows.png"
