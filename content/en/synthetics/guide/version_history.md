@@ -19,7 +19,7 @@ Version History allows you to:
 - **Troubleshoot failing tests**: Determine whether a recent change introduced the failure. 
 - **Collaborate with teammates**: See who made changes and what was updated.  
 - **Roll back tests**: Restore a previous version after a deployment rollback or incorrect update.  
-- **Support multi-environment testing**: Deploy different test versions to match the code running in each environment, ensuring tests remain compatible with environment-specific deployments.
+- **Clone tests**: Create a new test based on a previous version, without changing the current test. 
 
 ## Prerequisites
 
