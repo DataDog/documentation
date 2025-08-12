@@ -41,6 +41,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Migrating between x86 to arm64 with the Datadog Lambda Extension](#migrating-between-x86-to-arm64-with-the-datadog-lambda-extension)
 - [Configure the Datadog Lambda extension for local testing](#configure-the-datadog-lambda-extension-for-local-testing)
 - [Instrument AWS Lambda with the OpenTelemetry API](#instrument-aws-lambda-with-the-opentelemetry-api)
+- [Visualize and model AWS services correctly](#visualize-and-model-aws-services-correctly)
 - [Troubleshoot](#troubleshoot)
 - [Further Reading](#further-reading)
 
@@ -721,6 +722,23 @@ The Datadog tracing library, which is included in the Datadog Lambda Extension u
 You can use this approach if, for example, your code has already been instrumented with the OpenTelemetry API. You may also use this approach if you want to instrument using vendor-agnostic code with the OpenTelemetry API while still gaining the benefits of using the Datadog tracing libraries.
 
 To instrument AWS Lambda with the OpenTelemetry API, set the environment variable `DD_TRACE_OTEL_ENABLED` to `true`. See [Custom instrumentation with the OpenTelemetry API][48] for more details.
+
+## Visualize and model AWS services correctly
+
+In these versions of the [Node.js](https://github.com/DataDog/datadog-lambda-js/releases/tag/v12.127.0), [Python](https://github.com/DataDog/datadog-lambda-python/releases/tag/v8.113.0) and [Java](https://github.com/DataDog/datadog-lambda-java/releases/tag/v24) Lambda layers, we released changes to correctly name, model and visualize AWS managed services. 
+
+Namely, service names now reflect the actual AWS resource name rather than simply the AWS services:
+* `aws.lambda` → `[function_name]`
+* `aws.dynamodb` → `[table_name]`
+* `aws.sns` → `[topic_name]`
+* `aws.sqs` → `[queue_name]`
+* `aws.kinesis` → `[stream_name]`
+* `aws.s3` → `[bucket_name]`
+* `aws.eventbridge` → `[event_name]`
+
+Some may prefer the older service representation model if their dashboards and monitors are based on the legacy naming convention. To opt out and restore old behavior, use the env var: `DD_TRACE_AWS_SERVICE_REPRESENTATION_ENABLED=false`
+
+We highly recommend using the corrected service modeling configuration when possible. 
 
 ## Troubleshoot
 
