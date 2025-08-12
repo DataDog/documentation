@@ -61,8 +61,8 @@ When critical errors are encountered, the Azure integration generates events in 
 
 Datadog provides a monitor template to help you get started. To use the monitor template:
 
-1. In Datadog, go to **Monitors** -> **New Monitor** and select the [Recommended Monitors][19] tab.
-2. Select the monitor template titled `[Azure] Integration Errors`.
+1. In Datadog, go to **Monitors** and click the **Browse Templates** button.
+2. Search for and select the monitor template titled [[Azure] Integration Errors][19].
 3. Make any desired modifications to the search query or alert conditions. By default, the monitor triggers whenever a new error is detected, and resolves when the error has not been detected for the past 15 minutes.
 4. Update the notification and re-notification messages as desired. Note that the events themselves contain pertinent information about the event and are included in the notification automatically. This includes detailed information about the scope, error response, and common steps to remediate.
 5. [Configure notifications][20] through your preferred channels (email, Slack, PagerDuty, or others) to make sure your team is alerted about issues affecting Azure data collection.
@@ -170,5 +170,5 @@ See the [Virtual Machine Extension resource][10] in the Terraform registry for m
 [15]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_azure
 [18]: /logs/guide/azure-logging-guide
-[19]: https://app.datadoghq.com/monitors/recommended
+[19]: https://app.datadoghq.com/monitors/templates?q=Azure%20%22integration%20errors%22&origination=all&p=1
 [20]: /monitors/notify/#configure-notifications-and-automations
