@@ -83,3 +83,4 @@ Test incidents are visually distinguished from other incidents. By default, test
 [2]: /service_management/incident_management/incident_settings/notification_rules
 [3]: /service_management/incident_management/analytics
 [4]: /service_management/incident_management/#from-the-incidents-page
+[5]: https://app.datadoghq.com/incidents
