@@ -41,7 +41,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Migrating between x86 to arm64 with the Datadog Lambda Extension](#migrating-between-x86-to-arm64-with-the-datadog-lambda-extension)
 - [Configure the Datadog Lambda extension for local testing](#configure-the-datadog-lambda-extension-for-local-testing)
 - [Instrument AWS Lambda with the OpenTelemetry API](#instrument-aws-lambda-with-the-opentelemetry-api)
-- [Visualize and model AWS services correctly](#visualize-and-model-aws-services-correctly)
+- [Visualize and model AWS services correctly](#visualize-and-model-aws-services-by-resource-name)
 - [Troubleshoot](#troubleshoot)
 - [Further Reading](#further-reading)
 
