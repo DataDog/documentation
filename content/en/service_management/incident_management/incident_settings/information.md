@@ -59,7 +59,7 @@ To convert an incident to private in Slack, use `/datadog incident private`.
 
 _Default: disabled_
 
-When incident deletion is enabled for an incident type, any user with **Incidents Write** can delete any incident of the incident type.
+When incident deletion is enabled for an incident type, any user with the **Incidents Write** permission can delete any incident of the incident type.
 
 After you delete an incident, it no longer influences incident analytics, and no user can access it. Deleted incidents cannot be recovered.
 
