@@ -18,7 +18,7 @@ This section covers information on configuring your Datadog Agents. For informat
     {{< nextlink href="agent/configuration/agent-status-page/" >}}Status Page{{< /nextlink >}}
     {{< nextlink href="agent/configuration/network/" >}}Network Traffic{{< /nextlink >}}
     {{< nextlink href="agent/configuration/proxy/" >}}Proxy Configuration{{< /nextlink >}}
-    {{< nextlink href="agent/configuration/agent-fips-proxy/" >}}FIPS Compliance{{< /nextlink >}}
+    {{< nextlink href="agent/configuration/fips-compliance/" >}}FIPS Compliance{{< /nextlink >}}
     {{< nextlink href="agent/configuration/dual-shipping/" >}}Dual Shipping{{< /nextlink >}}
     {{< nextlink href="agent/configuration/secrets-management/" >}}Secrets Management{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -27,6 +27,6 @@ This section covers information on configuring your Datadog Agents. For informat
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/remote_config/
+[1]: /remote_configuration
 [2]: /containers/
 [3]: /integrations/

@@ -10,6 +10,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
   tag: "Blog"
   text: "Monitor DNS logs for network and security analysis"
+- link: "https://www.datadoghq.com/blog/cloud-siem-flex-logs/"
+  tag: "Blog"
+  text: "Cloud SIEM and Flex Logs: Enhanced security insights for the cloud"
+- link: "/logs/guide/flex_compute"
+  tag: "Documentation"
+  text: "Monitor Flex Compute Usage"
 - link: "/logs/log_configuration/indexes"
   tag: "Documentation"
   text: "Log Indexes"
@@ -19,6 +25,15 @@ further_reading:
 - link: "/logs/guide/reduce_data_transfer_fees"
   tag: "Documentation"
   text: "How to send logs to Datadog while reducing data transfer fees"
+- link: "https://www.datadoghq.com/blog/optimize-high-volume-logs/"
+  tag: "blog"
+  text: "How to optimize high-volume log data without compromising visibility"
+- link: "https://www.datadoghq.com/blog/monitor-flex-compute-usage/"
+  tag: "Blog"
+  text: "Monitor and optimize your Flex Logs compute usage"
+- link: "https://www.datadoghq.com/blog/flex-logs/"
+  tag: "Blog"
+  text: "Store and analyze high-volume logs efficiently with Flex Logs"
 ---
 
 ## Overview
@@ -55,7 +70,7 @@ Use the spectrum of log types shown in the image below to determine when to use 
 
 Compute is the querying capacity to run queries for Flex Logs. It is used when querying logs in the Flex Logs tier. It is not used for ingestion or when only searching Standard Indexing logs. The available compute tiers are:
 
-<div class="alert alert-warning">The compute sizes available for US3, US5, AP1, US1-FED are Starter, XS and S.</div>
+<div class="alert alert-warning">The compute sizes available for US3, US5, AP1, AP2, and US1-FED are Starter, XS and S.</div>
 
 - Starter
 - Extra small (XS)
@@ -63,7 +78,7 @@ Compute is the querying capacity to run queries for Flex Logs. It is used when q
 - Medium (M)
 - Large (L)
 
-Each compute tier is approximately 2X the query performance and capacity of the previous tier. The compute size is constrained by the CPU, number of concurrent queries, and the maximum limit on how many logs can be scanned per query
+Each compute tier is approximately 2X the query performance and capacity of the previous tier. The compute size is constrained by the number of concurrent queries and the maximum limit on how many logs can be scanned per query
 
 ### Determine the compute size that you need
 
@@ -121,13 +136,13 @@ To disable Flex Logs:
 If you select one of the scalable compute options for Flex Logs (for example, XS, S, M, or L), you can upgrade or downgrade your compute size on the [Flex Logs Control][5] page.
 
 **Notes**:
-- Only compute options on your contract are made available. 
+- Only compute options on your contract are made available. Upgrading from Flex Starter to a scalable compute option does not apply the change automatically. To enable the new size, go to the [Flex Logs Controls][5] page, select the desired compute option, then click **Save**.
 - A compute instance can be upgraded at any time.
 - A compute instance can be downgraded once per 15 days.
 
 ## Configure storage tiers
 
-Flex Logs is set up within log index configurations. [Index filters][1] that apply to that index also apply to Flex Logs. With Flex Logs Starter, you can store logs for 6, 12, or 15 months. With a scalable compute option, you can store logs for 30-450 days. 
+Flex Logs is set up within log index configurations. [Index filters][1] that apply to that index also apply to Flex Logs. With Flex Logs Starter, you can store logs for 3, 6, 12, or 15 months. With a scalable compute option, you can store logs for 30-450 days. 
 
 Configure Flex Tier in the [Logs Index Configuration][2] page:
 
@@ -212,7 +227,7 @@ Datadog generally recommends Flex Logs scalable compute sizes (XS, S, M, and L) 
 
 ### When the compute limit is reached
 
-When your organization reaches the compute limit in terms of concurrent queries, you many experience slower queries because queries continue to retry until capacity is available. If a query retries multiple times, it may fail to run. In such situations, there is an error message that says Flex Logs compute capacity is constrained and you should contact your admin.
+When your organization reaches the compute limit in terms of concurrent queries, you may experience slower queries because queries continue to retry until capacity is available. If a query retries multiple times, it may fail to run. In such situations, there is an error message that says Flex Logs compute capacity is constrained and you should contact your admin.
 
 ## Further reading
 

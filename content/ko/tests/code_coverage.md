@@ -1,8 +1,8 @@
 ---
 aliases:
-- /continuous_integration/guides/code_coverage/
-- /continuous_integration/integrate_tests/code_coverage/
-- /continuous_integration/tests/code_coverage/
+- /ko/continuous_integration/guides/code_coverage/
+- /ko/continuous_integration/integrate_tests/code_coverage/
+- /ko/continuous_integration/tests/code_coverage/
 description: Datadog에서 코드 검사를 보고하고 사용하는 방법 알아보기
 further_reading:
 - link: /tests

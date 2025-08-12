@@ -23,11 +23,6 @@ Les paramètres du compte, tels que les adresses IP autorisées, ne sont pas tra
 
 La fonctionnalité de compte multi-organisations n'est pas activée par défaut. Contactez l'[assistance Datadog][2] pour l'activer.
 
-Voici une présentation vidéo de deux minutes à ce sujet :
-
-{{< wistia tg9ufqbin9>}}
-<br>
-
 ## Organisations enfant
 
 ### Création

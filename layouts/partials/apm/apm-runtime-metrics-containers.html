@@ -1,0 +1,35 @@
+{{ $dot := . }}
+<div class="apm-containers">
+    <div class="container cards-dd">
+        <div class="row row-cols-2 row-cols-sm-4 g-2 g-xl-3 justify-content-sm-center">
+            <div class="col">
+                <a class="card h-100" href="/containers/docker/?tab=standard#dogstatsd-custom-metrics">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/docker.png" "class" "img-fluid" "alt" "Docker" "width" "400") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a class="card h-100" href="/containers/kubernetes/configuration/?tab=datadogoperator#configure-dogstatsd">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/kubernetes.png" "class" "img-fluid" "alt" "Kubernetes" "width" "400") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a class="card h-100" href="/containers/amazon_ecs/#dogstatsd">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/amazon_ecs.png" "class" "img-fluid" "alt" "Amazon ECS" "width" "400") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a class="card h-100" href="/integrations/ecs_fargate/#metric-collection">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/ecs_fargate.png" "class" "img-fluid" "alt" "ECS Fargate" "width" "400") }}
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

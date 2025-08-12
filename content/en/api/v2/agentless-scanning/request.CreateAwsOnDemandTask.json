@@ -1,0 +1,8 @@
+{
+  "data": {
+    "attributes": {
+      "arn": "arn:aws:lambda:eu-west-3:376334461865:function:This-Is-An-Api-Spec-Test"
+    },
+    "type": "aws_resource"
+  }
+}

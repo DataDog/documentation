@@ -3,9 +3,9 @@ aliases:
 - /ja/integrations/amazon_verified_access
 categories:
 - クラウド
-- AWS
+- aws
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: AWS Verified Access ログを収集します。
 doc_link: https://docs.datadoghq.com/integrations/aws_verified_access/
@@ -39,7 +39,7 @@ AWS Verified Access を使用すると、仮想プライベートネットワー
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
-### 収集データ
+### ログ収集
 
 #### Verified Access ログを有効にする
 
@@ -68,7 +68,7 @@ AWS Verified Access を使用すると、仮想プライベートネットワー
 
 AWS Services のログを収集する方法については、[Datadog Lambda 関数で AWS Services のログを送信する][6]を参照してください。
 
-## データ収集
+## 収集されたデータ
 
 ### メトリクス
 
@@ -78,7 +78,7 @@ AWS Verified Access インテグレーションには、メトリクスの収集
 
 AWS Verified Access インテグレーションには、イベントは含まれません。
 
-### Logs
+### ログ
 
 AWS Verified Access インテグレーションには、[Verified Access ログ][7]が含まれます。
 
@@ -88,9 +88,9 @@ AWS Verified Access インテグレーションには、サービスのチェッ
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

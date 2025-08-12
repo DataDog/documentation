@@ -2,7 +2,7 @@
 categories:
 - azure
 - クラウド
-- ネットワーク
+- network
 custom_kind: integration
 dependencies: []
 description: Azure Firewall のキーメトリクスを追跡
@@ -34,7 +34,7 @@ Datadog Azure インテグレーションを使用して、Firewall からメト
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## 収集データ
+## 収集されるデータ
 
 ### メトリクス
 {{< get-metrics-from-git "azure_firewall" >}}
@@ -44,7 +44,7 @@ Datadog Azure インテグレーションを使用して、Firewall からメト
 
 Azure Firewall インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービス チェック
 
 Azure Firewall インテグレーションには、サービスのチェック機能は含まれません。
 

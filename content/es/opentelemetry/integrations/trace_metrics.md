@@ -1,6 +1,6 @@
 ---
 aliases:
-- /opentelemetry/collector_exporter/trace_metrics/
+- /es/opentelemetry/collector_exporter/trace_metrics/
 further_reading:
 - link: /opentelemetry/collector_exporter/
   tag: Documentación

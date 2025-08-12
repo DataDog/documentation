@@ -33,7 +33,7 @@ draft: false
 git_integration_title: amazon_msk
 integration_id: amazon-kafka
 integration_title: Amazon MSK (Agent)
-integration_version: 6.1.0
+integration_version: 6.3.0
 is_public: true
 manifest_version: 2.0.0
 name: amazon_msk
@@ -110,7 +110,7 @@ Agent チェックは、Datadog Agent を通じて、Amazon Managed Streaming fo
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_msk" >}}
+{{< get-metrics-from-git "amazon-msk" >}}
 
 
 ### イベント
@@ -118,7 +118,7 @@ Agent チェックは、Datadog Agent を通じて、Amazon Managed Streaming fo
 Amazon MSK チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "amazon_msk" >}}
+{{< get-service-checks-from-git "amazon-msk" >}}
 
 
 ## トラブルシューティング

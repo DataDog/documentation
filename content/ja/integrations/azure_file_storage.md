@@ -5,7 +5,7 @@ categories:
 - azure
 - クラウド
 - data stores
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure File Storage のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_file_storage/
@@ -39,7 +39,7 @@ Datadog Azure インテグレーションを使用すると、Azure File Storage
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_file_storage" >}}
+{{ get-metrics-from-git "azure-filestorage" }}
 
 
 ### イベント

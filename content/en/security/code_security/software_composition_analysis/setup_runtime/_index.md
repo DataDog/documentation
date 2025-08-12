@@ -4,37 +4,25 @@ disable_toc: false
 aliases:
 - /security/application_security/enabling/tracing_libraries/sca/
 ---
-SCA can detect vulnerabilities that affect open source libraries running in your services based on Datadog's application telemetry. 
+SCA can detect vulnerabilities that affect open source libraries running in your services based on Datadog's application telemetry.
 
-Before setting up runtime deteciton, ensure the following prerequisites are met:
+Before setting up runtime detection, ensure the following prerequisites are met:
 
 1. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service.
 2. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
 3. **Datadog APM Configuration:** Datadog APM is configured for your application or service, and web traces (`type:web`) are being received by Datadog.
-4. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][5] page for each ASM product.
+4. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][2] page for each AAP product.
 
 ## Software Composition Analysis enablement types
 
-### Quick start for in-app service enablement
+### In-app service enablement
 
-1. Navigate to the [Quick Start Guide][2]:
-   1. Expand **Enable Vulnerability Detection**.
-   2. Select **Open source vulnerabilities**.
-   3. Select **Start Activation**.
-   4. Select the services where you want to identify library vulnerabilities, and then click **Next**.
-   5. Select **Enable for Selected Services**.
+You can enable runtime Software Composition Analysis (SCA) in-app through [**Security** > **Code Security**][3].
 
-### Settings page for in-app service enablement
-
-Alternatively, you can enable Software Composition Analysis through the [Settings][3] page.
-
-1. Navigate to the [Settings][3] page and select **Get Started** in **Software Composition Analysis (SCA)**.
-2. For static analysis in source code, select **Select Repositories**.
-3. Select **Add Github Account** and follow the [instructions][4] to create a new GitHub Application.
-4. Once the GitHub account is set up, select **Select Repositories** and enable **Software Composition Analysis (SCA)**.
-5. For runtime analysis in running services, click **Select Services**.
-6. Choose the services where you want to identify library vulnerabilities, and select **Next**.
-7. Select **Enable for Selected Services**.
+1. Navigate to the [Security Settings][3] page.
+2. In **Activate runtime detection of library vulnerabilities**, click **Manage Services**.
+3. Check the services where you want to identify library vulnerabilities, and select **Bulk Actions**.
+4. Click **Activate Runtime Software Composition Analysis (SCA)**.
 
 ### Datadog tracing library configuration
 
@@ -77,7 +65,7 @@ This topic explains how to set up SCA using a Java example.
    ```
 {{% /tab %}}
 {{< /tabs >}}
-   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][2].
+   To check that your service's language and framework versions are supported, see [Compatibility][2].
 
 1. **Run your Java application with SCA enabled.** From the command line:
    ```shell
@@ -157,7 +145,5 @@ java -javaagent:dd-java-agent.jar \
 
 
 [1]: /security/code_security/software_composition_analysis/setup_runtime/compatibility/java
-[2]: https://app.datadoghq.com/security/configuration/asm/onboarding
-[3]: https://app.datadoghq.com/security/configuration/asm/setup
-[4]: /integrations/github/
-[5]: /security/code_security/software_composition_analysis/setup_runtime/compatibility/
+[2]: /security/code_security/software_composition_analysis/setup_runtime/compatibility/
+[3]: https://app.datadoghq.com/security/configuration/code-security/setup

@@ -6,10 +6,6 @@ further_reading:
   text: 'Datadog On-Call'
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 In Datadog On-Call, schedules define the specific times when team members are available to respond to Pages. Schedules organize and manage the availability of team members across different timezones and shifts.
 
 ### Concepts
@@ -65,20 +61,41 @@ Other channel members can select **Take it** to schedule themselves to override 
 
 ### Export schedules
 
-The Export Shifts feature allows you to integrate your on-call schedule into your preferred calendar app (for example, Google Calendar, Apple Calendar, or Outlook) using a `.webcal` link. Whether you are part of multiple rotations, planning personal time around shifts, or aiming to increase team visibility, this feature ensures your on-call responsibilities are accessible and always up-to-date.
+The Export Shifts feature allows you to integrate your on-call schedule into your preferred calendar app (for example, Google Calendar, Apple Calendar, or Outlook) using a `.webcal` link. Choose whether you want to sync **only your shifts** or **the entire schedule**.
 
-#### Export and sync schedules
-1. To generate a `.webcal` link, go to the [**On-Call** > **Schedules**][1] section in your account.
-2. Select **Export My Shifts**. A link is auto-generated for you. 
-3. Hit **Copy Link**.
-4. After copying the link, use it in your calendar app. For example:
-    - Google Calendar: [Follow these instructions from Google (under 'Use a link to add a public calendar').][3]
-    - Outlook: [Microsoft's guide to subscribing to internet calendars.][4]
-    - Apple Calendar: [Learn how to subscribe to calendars on Mac or iPhone.][5]
+---
 
-If your on-call schedule changes, updates are automatically reflected in the linked calendar, ensuring you always have the most accurate view of your responsibilities. If needed, revoke access to a previously shared link by generating a new one, which invalidates the old URL.
+##### 📆 Export *My* Shifts
 
-Most calendar apps support notifications—enabled reminders to get alerts before your shifts start, but you can also configure shift reminders through SMS, push notification, and email in your [Datadog On-Call profile settings][6].
+1. Go to the [**On-Call** > **Schedules**][1] section in your account.
+2. Select **Export My Shifts**. A personal `.webcal` link is generated automatically.
+3. Click **Copy Link**.
+4. Paste the link into your calendar app. For example:
+    - **Google Calendar**: [Use a link to add a public calendar][3].
+    - **Outlook**: [Subscribe to internet calendars][4].
+    - **Apple Calendar**: [Subscribe on Mac or iPhone][5].
+
+Your calendar is automatically updated if your on-call shifts change. To revoke access to a previously shared link, generate a new one. This disables the previous link.
+
+---
+
+##### 🌐 Export *Entire* Schedule
+
+1. Go to the [**On-Call** > **Schedules**][1] section in your account.
+2. Open the schedule you want to export.
+3. Select **Export Schedule**. A `.webcal` link is generated for the full schedule, including all participants and shifts.
+4. Click **Copy Link**.
+5. Paste the link into your calendar app:
+    - **Google Calendar**: [Use a link to add a public calendar.][3]
+    - **Outlook**: [Subscribe to internet calendars.][4]
+    - **Apple Calendar**: [Subscribe on Mac or iPhone.][5]
+
+---
+
+##### 🔔 Get Notified
+
+Enable reminders for upcoming shifts in your calendar app. You can also configure custom shift notifications through SMS, push, or email in your [Datadog On-Call profile settings][6].
+
 
 #### Troubleshooting schedule exports
 

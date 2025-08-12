@@ -25,7 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - 로그 수집
-- os & system
+- OS & 시스템
 custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_was/README.md
@@ -34,7 +34,7 @@ draft: false
 git_integration_title: ibm_was
 integration_id: ibm-was
 integration_title: IBM WAS
-integration_version: 5.0.0
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: ibm_was
@@ -42,7 +42,7 @@ public_title: IBM WAS
 short_description: IBM Websphere Application Sever는 Java 애플리케이션을 호스팅하는 프레임워크입니다.
 supported_os:
 - linux
-- windows
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
@@ -70,7 +70,7 @@ tile:
 
 ## 설정
 
-아래 지침을 따라 호스트에서 실행되는 에이전트에 대해 이 점검을 설치하고 설정하세요. 컨테이너화된 환경의 경우 이러한 지침을 적용하는 데 가이드가 필요하면 [오토파일럿 통합 템플릿][3]을 참조하세요.
+아래 지침을 따라 호스트에서 실행되는 에이전트에 대해 이 점검을 설치하고 설정하세요. 컨테이너화된 환경의 경우 이러한 지침을 적용하는 데 가이드가 필요하면 [자동탐지 통합 템플릿][2]을 참조하세요.
 
 IBM WAS Datadog 통합에서는 WebSphere Application Server에서 활성화된 PMI 카운터를 가져옵니다. 설정하려면 Datdog가 WAS에서 성능 데이터를 가져올 수 있도록 PerfServlet을 활성화해야 합니다.
 
@@ -97,10 +97,10 @@ Websphere Administration Console에서 `Application servers > <YOUR_APP_SERVER> 
 
 변경한 후 "Apply"를 클릭해 구성을 저장하고 애플리케이션 서버를 재시작하세요. 변경 몇 분 후에 JDBC, JVM, servlet 메트릭이 Datadog에 추가로 나타나기 시작합니다.
 
-### 구성
+### 설정
 
 {{< tabs >}}
-{{% tab "호스트" %}}
+{{% tab "Host" %}}
 
 #### 호스트
 
@@ -116,7 +116,7 @@ Websphere Administration Console에서 `Application servers > <YOUR_APP_SERVER> 
 
 _에이전트 버전 > 6.0에서 사용 가능_
 
-1. Datadog 에이전트에서 로그 수집은 기본적으로 사용하지 않도록 설정되어 있습니다. `datadog.yaml` 파일에서 로그 수집을 사용하도록 설하세요.
+1. 로그 수집은 Datadog 에이전트에서 기본적으로 비활성화되어 있습니다. `datadog.yaml` 파일에서 활성화합니다.
 
    ```yaml
    logs_enabled: true
@@ -137,11 +137,11 @@ _에이전트 버전 > 6.0에서 사용 가능_
 [1]: https://github.com/DataDog/integrations-core/blob/master/ibm_was/datadog_checks/ibm_was/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "컨테이너화된 환경" %}}
+{{% tab "Containerized" %}}
 
 #### 컨테이너화된 환경
 
-컨테이너화된 환경의 경우 [자동탐지 통합 템플릿][1]에 다음 파라미터를 적용하는 방법이 안내되어 있습니다.
+컨테이너화된 환경의 경우 [자동탐지 통합 템플릿][1]에 아래 파라미터를 적용하는 방법이 안내되어 있습니다.
 
 ##### 메트릭 수집
 
@@ -155,7 +155,7 @@ _에이전트 버전 > 6.0에서 사용 가능_
 
 _에이전트 버전 > 6.0에서 사용 가능_
 
-Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 있습니다. 이를 활성화하려면 [쿠버네티스 로그 수집][2]을 참고하세요.
+Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 있습니다. 이를 활성화하려면 [쿠버네티스(Kubernetes) 로그 수집][2]을 참조하세요.
 
 | 파라미터      | 값                                                |
 | -------------- | ---------------------------------------------------- |
@@ -173,7 +173,7 @@ Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 �
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "ibm_was" >}}
+{{< get-metrics-from-git "ibm-was" >}}
 
 
 ### 이벤트
@@ -181,7 +181,7 @@ Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 �
 IBM WAS는 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "ibm_was" >}}
+{{< get-service-checks-from-git "ibm-was" >}}
 
 
 ## 트러블슈팅

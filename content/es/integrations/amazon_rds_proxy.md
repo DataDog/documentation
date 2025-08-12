@@ -41,7 +41,7 @@ También es necesario habilitar la [integración de Amazon RDS][2].
 1. En la [página de la integración de AWS][3], asegúrate de que `RDS Proxy` está habilitado en la pestaña `Metric Collection`.
 2. Instala la [integración de Datadog y Amazon RDS Proxy][4].
 
-### APM
+### Recopilación de logs
 
 #### Activar logging
 
@@ -64,11 +64,11 @@ Una vez hecho esto, ve al [Datadog Log Explorer][7] para analizar tus logs.
 
 La integración de Amazon RDS Proxy no incluye ningún evento.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración de Amazon RDS Proxy no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? [Consulta el servicio de asistencia de Datadog][9].
 

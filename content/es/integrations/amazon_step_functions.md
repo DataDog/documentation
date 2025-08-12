@@ -3,7 +3,7 @@ categories:
 - nube
 - AWS
 - recopilación de logs
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 description: Seguimiento de métricas AWS Step Functions clave.
 doc_link: https://docs.datadoghq.com/integrations/amazon_step_functions/
@@ -98,15 +98,15 @@ La integración AWS Step Functions no incluye checks de servicios.
 ¿Necesitas ayuda? Ponte en contacto con [soporte técnico de Datadog][13].
 
 [1]: https://docs.datadoghq.com/es/serverless/step_functions
-[2]: /es/integrations/amazon_web_services/
+[2]: https://app.datadoghq.com/integrations/amazon_web_services/
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
 [4]: https://app.datadoghq.com/integrations/amazon-step-functions
-[5]: /es/tagging/
-[6]: /es/serverless/
+[5]: https://app.datadoghq.com/tagging/
+[6]: https://app.datadoghq.com/serverless/
 [7]: https://docs.datadoghq.com/es/serverless/step_functions/enhanced-metrics
 [8]: https://docs.aws.amazon.com/step-functions/latest/dg/cw-logs.html
-[9]: /es/integrations/amazon_web_services/?tab=roledelegation#log-collection
-[10]: /es/tracing/serverless_functions/enable_aws_xray
-[11]: /es/integrations/amazon_xray/#installing-the-x-ray-client-libraries
+[9]: https://app.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#log-collection
+[10]: https://app.datadoghq.com/tracing/serverless_functions/enable_aws_xray
+[11]: https://app.datadoghq.com/integrations/amazon_xray/#installing-the-x-ray-client-libraries
 [12]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_step_functions/amazon_step_functions_metadata.csv
-[13]: /es/help/
+[13]: https://app.datadoghq.com/help/

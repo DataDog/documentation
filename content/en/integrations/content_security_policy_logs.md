@@ -34,6 +34,9 @@ further_reading:
   - link: "/getting_started/tagging/unified_service_tagging/"
     tag: "Documentation"
     text: "Learn about Unified Service Tagging"
+  - link: "https://www.datadoghq.com/blog/content-security-policy-reporting-with-datadog/"
+    tag: "Blog"
+    text: "Monitor Content Security Policy violations with Datadog"
 ---
 
 ## Overview

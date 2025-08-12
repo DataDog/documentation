@@ -2,7 +2,7 @@
 title: Extract a One-Time Passcode from an Email Body using Synthetic Browser Tests
 description: Learn how to extract a OTP from an email body using Synthetic Browser Tests.
 further_reading:
-- link: "//synthetics/browser_tests/?tab=requestoptions#overview"
+- link: "/synthetics/browser_tests/?tab=requestoptions#overview"
   tag: "Documentation"
   text: "Learn about Synthetic Browser Tests"
 - link: "/synthetics/api_tests/http_tests#variables"
@@ -31,7 +31,7 @@ This guide walks you through how to configure the OTP extraction for a Synthetic
 
 ### Step 1 - Create an email variable
 
-Follow the steps below to create an email variable for the [Browser Test][3]. This generates a unique [Datadog Synthetics email address][7] for the Synthetic Test run.
+Follow the steps below to create an email variable for the [Browser Test][3]. This generates a unique [Datadog Synthetic Monitoring email address][7] for the Synthetic Test run.
 
 1. On a new or existing Browser Test, under **Variables** click **Add Variable**.
 2. Next, select **Email Address** from the dropdown menu.
@@ -135,7 +135,7 @@ From here, you can continue [recording the rest of your Browser Test][9] and the
 [3]: https://app.datadoghq.com/synthetics/browser/create
 [4]: /synthetics/settings/?tab=specifyvalue#global-variables
 [5]: /synthetics/browser_tests/actions/?tab=testanelementontheactivepage#javascript
-[6]: synthetics/browser_tests/actions/?tab=testanelementontheactivepage#assertion
+[6]: /synthetics/browser_tests/actions/?tab=testanelementontheactivepage#assertion
 [7]: /synthetics/browser_tests/actions/?tab=testanelementontheactivepage#email
 [8]: /synthetics/guide/email-validation/#create-an-email-variable
 [9]: /synthetics/browser_tests/actions?tab=testanelementontheactivepage

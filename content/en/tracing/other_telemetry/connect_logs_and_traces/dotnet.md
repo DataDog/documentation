@@ -218,7 +218,7 @@ After configuring the correlation identifier injection, see [C# Log Collection][
 
 **Note:** To correlate traces with logs, you might need to set up a [trace ID remapper][8] to parse `dd_trace_id` as the log's trace ID. See [Correlated Logs Not Showing Up in the Trace ID Panel][9] for more information.
 
-<div class="alert alert-info">Starting in version 2.35.0, if <a href="/agent/remote_config/">Agent Remote Configuration</a> is enabled where this service runs, you can set <code>DD_LOGS_INJECTION</code> in the <a href="/tracing/software_catalog">Software Catalog</a> UI.</div>
+<div class="alert alert-info">Starting in version 2.35.0, if <a href="/remote_configuration">Agent Remote Configuration</a> is enabled where this service runs, you can set <code>DD_LOGS_INJECTION</code> in the <a href="/tracing/software_catalog">Software Catalog</a> UI.</div>
 
 ## Manual injection
 
@@ -229,8 +229,8 @@ If you prefer to manually correlate your traces with your logs, you can add corr
   | `dd.env`       | Globally configures the `env` for the tracer. Defaults to `""` if not set. |
   | `dd.service`   | Globally configures the root service name. Defaults to the name of the application or IIS site name if not set.  |
   | `dd.version`   | Globally configures `version` for the service. Defaults to `""` if not set.  |
-  | `dd.trace_id`  | Active trace ID during the log statement. Defaults to `0` if no trace.  |
-  | `dd.span_id`   | Active span ID during the log statement. Defaults to `0` if no trace. |
+  | `dd.trace_id`  | Active trace ID (represented as a 64-bit decimal number) during the log statement. Defaults to `0` if no trace.  |
+  | `dd.span_id`   | Active span ID (represented as a 64-bit decimal number) during the log statement. Defaults to `0` if no trace. |
 
 **Note:** If you are not using a [Datadog Log Integration][7] to parse your logs, custom log parsing rules must parse `dd.trace_id` and `dd.span_id` as strings. For information, see [Correlated Logs Not Showing Up in the Trace ID Panel][10].
 

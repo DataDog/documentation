@@ -59,6 +59,8 @@ By default, the listener discovers all Aurora clusters in the account and region
 
 You must apply these tags to the DB cluster (Role: `Regional cluster`). For more information on tagging RDS resources, see the [AWS documentation][7].
 
+If you configure `tags` as an empty array, Autodiscovery will discovery all clusters in the account and region.
+
 ### Configure the Datadog Agent
 
 Autodiscovery uses an Agent service listener, which discovers all database host endpoints in an Aurora cluster and forwards discovered endpoints to the existing Agent check scheduling pipeline. You can configure the listener in the `datadog.yaml` file:
@@ -93,6 +95,16 @@ database_monitoring:
         - "my-cluster-tag-key:value"
 ```
 
+To monitor all clusters in the account and region:
+
+```yaml
+database_monitoring:
+  autodiscovery:
+    aurora:
+      enabled: true
+      tags: []
+```
+
 The listener queries the AWS API for the list of hosts in a loop. The frequency with which the listener queries the AWS API, in seconds, is configurable in the `datadog.yaml` file:
 
 ```yaml
@@ -102,6 +114,20 @@ database_monitoring:
       enabled: true
       discovery_interval: 300
 ```
+
+The listener provides an `%%extra_dbm%%` variable that can be used to enable or disable DBM for the instance. This value defaults to `true` if the tag `datadoghq.com/dbm:true` is present. To specify a custom tag for this value use `dbm_tag`:
+
+```yaml
+database_monitoring:
+  autodiscovery:
+    aurora:
+      enabled: true
+      dbm_tag:
+        - "use_dbm:true"
+```
+
+The `%%extra_dbm%%` value is true if the tag is present, and false otherwise. It does not set its value to the value of the tag.
+
 
 ### Create a configuration template
 
@@ -129,7 +155,7 @@ instances:
   - host: "%%host%%"
     port: "%%port%%"
     username: datadog
-    dbm: true
+    dbm: "%%extra_dbm%%"
     aws:
       instance_endpoint: "%%host%%"
       region: "%%extra_region%%"
@@ -138,7 +164,7 @@ instances:
     - "region:%%extra_region%%"
 ```
 
-In this example, the template variables `%%host%%`, `%%port%%`, `%%extra_dbclusteridentifier%%`, and `%%extra_region%%` are dynamically populated with information from the Aurora cluster.
+In this example, the template variables `%%host%%`, `%%port%%`, `%%extra_dbclusteridentifier%%`, `%%extra_dbm%%`, and `%%extra_region%%` are dynamically populated with information from the Aurora cluster.
 
 To use [IAM authentication][2] to connect to your Aurora cluster, use the following template:
 
@@ -163,6 +189,7 @@ instances:
 
 The template variable `%%extra_managed_authentication_enabled%%` resolves to `true` if the instance is using IAM authentication.
 
+[2]: /database_monitoring/guide/managed_authentication/?tab=aurora#configure-iam-authentication
 {{% /tab %}}
 {{% tab "MySQL" %}}
 
@@ -185,7 +212,7 @@ instances:
   - host: "%%host%%"
     port: "%%port%%"
     username: datadog
-    dbm: true
+    dbm: "%%extra_dbm%%"
     aws:
       instance_endpoint: "%%host%%"
     tags:
@@ -193,7 +220,7 @@ instances:
     - "region:%%extra_region%%"
 ```
 
-In this example, the template variables `%%host%%`, `%%port%%`, `%%extra_dbclusteridentifier%%`, and `%%extra_region%%` are dynamically populated with information from the Aurora cluster.
+In this example, the template variables `%%host%%`, `%%port%%`, `%%extra_dbclusteridentifier%%`, `%%extra_dbm%%`, and `%%extra_region%%` are dynamically populated with information from the Aurora cluster.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -208,10 +235,10 @@ For more information on configuring Autodiscovery with integrations, see the [Au
 | %%port%%                                 | The port of the Aurora instance                                                                                                               |
 | %%extra_region%%                         | The AWS region where the instance is located                                                                                                  |
 | %%extra_dbclusteridentifier%%            | The cluster identifier of the discovered Aurora cluster                                                                                       |
-| %%extra_managed_authentication_enabled%% | Whether IAM authentication enabled on the cluster. <br/>This is used to determine if managed authentication should be used for Postgres. |
+| %%extra_dbm%% | Whether DBM is enabled on the cluster. Determined by the presence of `dbm_tag`, which defaults to `datadoghq.com/dbm:true`.                                              |
+| %%extra_managed_authentication_enabled%% | Whether IAM authentication enabled on the cluster. <br/>This is used to determine if managed authentication should be used for the connection. |
 
 [1]: /database_monitoring/setup_postgres/aurora/?tab=postgres10
-[2]: /database_monitoring/guide/managed_authentication/#configure-iam-authentication
 [3]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AmazonRDSReadOnlyAccess.html
 [4]: /getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
 [5]: /containers/docker/integrations/?tab=dockeradv2

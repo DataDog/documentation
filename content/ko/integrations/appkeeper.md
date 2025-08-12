@@ -24,6 +24,7 @@ categories:
 - aws
 - cloud
 - 알림
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/appkeeper/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: appkeeper
 integration_title: AppKeeper
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: appkeeper
 public_title: AppKeeper
@@ -49,6 +49,7 @@ tile:
   - Category::Notifications
   - Supported OS::Linux
   - Supported OS::Windows
+  - 제공::통합
   configuration: README.md#Setup
   description: Datadog 알림에 따른 Appkeeper의 서비스 재시작
   media: []
@@ -101,17 +102,15 @@ AppKeeper의 복구 결과는 AppKeeper GUI에 표시됩니다.
 
 ![snapshot][6]
 
-자세한 내용은 [AppKeeper 통합 문서][7]를 참고하세요.
-
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 
-이 통합에서 제공하는 메트릭 목록을 보려면 [metadata.csv][8]를 참고하세요.
+본 통합에서 제공하는 메트릭 목록을 보려면 [metadata.csv][7]를 참고하세요.
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원팀][9]에 문의하세요.
+도움이 필요하신가요? [Datadog 지원팀][8]에 문의하세요.
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/get_token.jpg
 [2]: https://app.datadoghq.com/account/settings#integrations/webhooks
@@ -119,6 +118,5 @@ AppKeeper의 복구 결과는 AppKeeper GUI에 표시됩니다.
 [4]: https://app.datadoghq.com/synthetics/list
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/synthetic_test_params.png
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/history.jpg
-[7]: https://sioscoati.zendesk.com/hc/en-us/articles/900000978443-Integration
-[8]: https://github.com/DataDog/integrations-extras/blob/master/appkeeper/metadata.csv
-[9]: https://docs.datadoghq.com/ko/help/
+[7]: https://github.com/DataDog/integrations-extras/blob/master/appkeeper/metadata.csv
+[8]: https://docs.datadoghq.com/ko/help/

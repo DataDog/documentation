@@ -263,9 +263,47 @@ with tracer.trace("example") as span:
 
 To see an example in action, see [flask-baggage on trace-examples][7]
 
-## Resource filtering
+## ddtrace-api
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][4] page or in [Ignoring Unwanted Resources][5].
+{{< callout btn_hidden="true" header="ddtrace-api is in Preview!">}}
+The <code>ddtrace-api</code> Python package is in Preview and may not include all the API calls you need. If you need more complete functionality, use the API as described in the previous sections.
+<br><br>The following steps are only necessary if you want to experiment with the in Preview <code>ddtrace-api</code> package.{{< /callout >}}
+
+The [ddtrace-api package][8] provides a stable public API for Datadog APM's custom Python instrumentation. This package implements only the API interface, not the underlying functionality that creates and sends spans to Datadog.
+
+This separation between interface (`ddtrace-api`) and implementation (`ddtrace`) offers several benefits:
+
+- You can rely on an API that changes less frequently and more predictably for your custom instrumentation
+- If you only use automatic instrumentation, you can ignore API changes entirely
+- If you implement both single-step and custom instrumentation, you avoid depending on multiple copies of the `ddtrace` package
+
+To use `ddtrace-api`:
+
+1. Install both the `ddtrace` and `ddtrace-api` libraries:
+   ```python
+   pip install 'ddtrace>=3.1' ddtrace-api
+   ```
+
+2. Instrument your Python application using `ddtrace-run` by prefixing your Python entry-point command:
+   ```shell
+   ddtrace-run python app.py
+   ```
+
+3. After this is set up, you can write custom instrumentation exactly like the examples in the previous sections, but you import from `ddtrace_api` instead of `ddtrace`.
+
+   For example:
+   ```python
+   from ddtrace_api import tracer
+
+   @tracer.wrap(service="my-sandwich-making-svc", resource="resource_name")
+   def get_ingredients():
+       # go to the pantry
+       # go to the fridge
+       # maybe go to the store
+       return
+   ```
+
+See that package's [API definition][9] for the full list of supported API calls.
 
 ## Further Reading
 
@@ -278,3 +316,5 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [5]: /tracing/guide/ignoring_apm_resources/
 [6]: /tracing/setup/python/
 [7]: https://github.com/DataDog/trace-examples/tree/master/python/flask-baggage
+[8]: https://pypi.org/project/ddtrace-api/
+[9]: https://datadoghq.dev/dd-trace-api-py/pdocs/ddtrace_api.html

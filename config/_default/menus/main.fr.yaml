@@ -1962,21 +1962,16 @@ menu:
       parent: error_tracking
       identifier: error_tracking_regression_detection
       weight: 3
-    - name: Default Grouping
-      url: error_tracking/default_grouping
+    - name: Error Grouping
+      url: error_tracking/error_grouping
       parent: error_tracking
-      identifier: error_tracking_default_grouping
+      identifier: error_tracking_error_grouping
       weight: 4
     - name: Monitors
       url: error_tracking/monitors
       parent: error_tracking
       identifier: error_tracking_monitors
       weight: 5
-    - name: Custom Grouping
-      url: error_tracking/custom_grouping
-      parent: error_tracking
-      identifier: error_tracking_custom_grouping
-      weight: 6
     - name: Identify Suspect Commits
       url: error_tracking/suspect_commits
       parent: error_tracking
@@ -2085,15 +2080,20 @@ menu:
       parent: oncall
       identifier: oncall_teams
       weight: 1
-    - name: Send a Page
-      url: service_management/on-call/pages/
+    - name: Trigger a Page
+      url: service_management/on-call/triggering_pages/
       parent: oncall
-      identifier: oncall_pages
+      identifier: oncall_triggering_pages
       weight: 2
-    - name: Processing Rules
-      url: service_management/on-call/processing_rules/
+    - name: Live Call Routing
+      url: service_management/on-call/triggering_pages/live_call_routing
+      identifier: oncall_live_call_routing
+      parent: oncall_triggering_pages
+      weight: 201
+    - name: Routing Rules
+      url: service_management/on-call/routing_rules/
       parent: oncall
-      identifier: oncall_processing_rules
+      identifier: oncall_routing_rules
       weight: 3
     - name: Escalation Policies
       url: service_management/on-call/escalation_policies/
@@ -3334,16 +3334,11 @@ menu:
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_states
       weight: 1002
-    - name: Default Grouping
-      url: tracing/error_tracking/default_grouping
+    - name: Error Grouping
+      url: tracing/error_tracking/error_grouping
       parent: tracing_error_tracking
-      identifier: tracing_error_tracking_default_grouping
+      identifier: tracing_error_tracking_error_grouping
       weight: 1003
-    - name: Custom Grouping
-      url: tracing/error_tracking/custom_grouping
-      parent: tracing_error_tracking
-      identifier: tracing_error_tracking_custom_grouping
-      weight: 1004
     - name: Monitors
       url: tracing/error_tracking/monitors
       parent: tracing_error_tracking
@@ -5039,16 +5034,11 @@ menu:
       url: logs/error_tracking/backend
       parent: log_management_error_tracking
       weight: 704
-    - name: Default Grouping
-      url: logs/error_tracking/default_grouping
+    - name: Error Grouping
+      url: logs/error_tracking/error_grouping
       parent: log_management_error_tracking
-      identifier: log_management_error_tracking_default_grouping
+      identifier: log_management_error_tracking_error_grouping
       weight: 705
-    - name: Custom Grouping
-      url: logs/error_tracking/custom_grouping
-      parent: log_management_error_tracking
-      identifier: log_management_error_tracking_custom_grouping
-      weight: 706
     - name: Manage Data Collection
       url: logs/error_tracking/manage_data_collection
       parent: log_management_error_tracking
@@ -5162,12 +5152,12 @@ menu:
       identifier: cloud_siem_content_packs
       weight: 1
     - name: Log Detection Rules
-      url: security/cloud_siem/log_detection_rules
+      url: security/cloud_siem/detection_rules
       parent: cloud_siem
       identifier: cloud_siem_log_detection_rules
       weight: 2
     - name: Signal Correlation Rules
-      url: security/cloud_siem/signal_correlation_rules
+      url: security/cloud_siem/detection_rules/signal_correlation_rules
       parent: cloud_siem
       identifier: cloud_siem_signal_correlation_rules
       weight: 3
@@ -6166,16 +6156,11 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_mobile
       weight: 804
-    - name: Default Grouping
-      url: real_user_monitoring/error_tracking/default_grouping
+    - name: Error Grouping
+      url: real_user_monitoring/error_tracking/error_grouping
       parent: rum_error_tracking
-      identifier: rum_error_tracking_default_grouping
+      identifier: rum_error_tracking_error_grouping
       weight: 805
-    - name: Custom Grouping
-      url: real_user_monitoring/error_tracking/custom_grouping
-      parent: rum_error_tracking
-      identifier: rum_error_tracking_custom_grouping
-      weight: 806
     - name: Monitors
       url: real_user_monitoring/error_tracking/monitors
       parent: rum_error_tracking

@@ -26,7 +26,7 @@ author:
   vendor_id: rapdev
 categories:
 - marketplace
-custom_kind: integration
+custom_kind: 통합
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -48,8 +48,8 @@ pricing:
 public_title: 백업 자동화 도구
 short_description: Datadog 대시보드 , 신서틱, 모니터 및 노트북을 백업하세요.
 supported_os:
-- 리눅스
-- windows
+- linux
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
@@ -76,7 +76,7 @@ tile:
 이 에이전트점검 의 목적은 Datadog 계정의 대시보드, 신서틱(Synthetic) 테스트, 모니터 및 노트북에 대한 압축 백업을 만드는 것입니다.
 그런 다음 해당 백업을 로컬 컴퓨터 또는 지원되는 다른 플랫폼(예: AWS, Azure 및 GitHub) 중 하나에 저장할 수 있습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 
@@ -91,9 +91,9 @@ tile:
 이 통합에는 이벤트가 포함되어 있지 않습니다.
 
 ## 지원
-지원 또는 기능 요청은 다음 채널을 통해 RapDev.io에 문의하세요.
+지원 또는 기능 요청은 다음 채널을 통해 RapDev.io에 문의해 주세요.
 
-- 지원: support@rapdev.io
+- 지원 팀: support@rapdev.io
 - 영업 팀: sales@rapdev.io
 - 채팅: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
 - 전화: 855-857-0222

@@ -47,10 +47,10 @@ Then install the added pod:
 ```js
 import {
     DdSdkReactNative,
-    DdSdkReactNativeConfiguration
+    DatadogProviderConfiguration
 } from '@datadog/mobile-react-native';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
@@ -65,10 +65,10 @@ config.site = 'US1';
 ```js
 import {
     DdSdkReactNative,
-    DdSdkReactNativeConfiguration
+    DatadogProviderConfiguration
 } from '@datadog/mobile-react-native';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
@@ -83,10 +83,10 @@ config.site = 'US3';
 ```js
 import {
     DdSdkReactNative,
-    DdSdkReactNativeConfiguration
+    DatadogProviderConfiguration
 } from '@datadog/mobile-react-native';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
@@ -103,10 +103,10 @@ await DdSdkReactNative.initialize(config);
 ```js
 import {
     DdSdkReactNative,
-    DdSdkReactNativeConfiguration
+    DatadogProviderConfiguration
 } from '@datadog/mobile-react-native';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
@@ -121,10 +121,10 @@ config.site = 'EU1';
 ```js
 import {
     DdSdkReactNative,
-    DdSdkReactNativeConfiguration
+    DatadogProviderConfiguration
 } from '@datadog/mobile-react-native';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
@@ -139,10 +139,10 @@ config.site = 'US1_FED';
 ```js
 import {
     DdSdkReactNative,
-    DdSdkReactNativeConfiguration
+    DatadogProviderConfiguration
 } from '@datadog/mobile-react-native';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
@@ -151,6 +151,24 @@ const config = new DdSdkReactNativeConfiguration(
     true // track Errors
 );
 config.site = 'AP1';
+```
+{{< /site-region >}}
+{{< site-region region="ap2" >}}
+```js
+import {
+    DdSdkReactNative,
+    DatadogProviderConfiguration
+} from '@datadog/mobile-react-native';
+
+const config = new DatadogProviderConfiguration(
+    '<CLIENT_TOKEN>',
+    '<ENVIRONMENT_NAME>',
+    '<RUM_APPLICATION_ID>',
+    true, // track User interactions (e.g.: Tap on buttons).
+    true, // track XHR Resources
+    true // track Errors
+);
+config.site = 'AP2';
 ```
 {{< /site-region >}}
 

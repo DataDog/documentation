@@ -28,13 +28,13 @@ If you are using Docker, there are several container images available through GC
 
 
 [1]: /agent/docker/
-[2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
+[2]: https://console.cloud.google.com/artifacts/docker/datadoghq/us/gcr.io/agent
 [3]: /developers/dogstatsd/
-[4]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/dogstatsd
+[4]: https://console.cloud.google.com/artifacts/docker/datadoghq/us/gcr.io/dogstatsd
 [5]: /agent/cluster_agent/
-[6]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/cluster-agent
+[6]: https://console.cloud.google.com/artifacts/docker/datadoghq/us/gcr.io/cluster-agent
 [7]: /getting_started/synthetics/private_location/
-[8]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker
+[8]: https://console.cloud.google.com/artifacts/docker/datadoghq/us/gcr.io/synthetics-private-location-worker
 {{% /tab %}}
 {{% tab "ECR" %}}
 

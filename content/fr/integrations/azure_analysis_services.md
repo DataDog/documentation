@@ -4,6 +4,7 @@ aliases:
 categories:
 - cloud
 - azure
+custom_kind: integration
 dependencies: []
 description: Surveillez des métriques clés d'Azure Analysis Services.
 doc_link: https://docs.datadoghq.com/integrations/azure_analysis_services/
@@ -14,7 +15,6 @@ integration_id: azure-analysisservices
 integration_title: Microsoft Azure Analysis Services
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_analysis_services
 public_title: Intégration Datadog/Microsoft Azure Analysis Services
@@ -23,33 +23,33 @@ version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## Présentation
+## Section Overview
 
 Azure Analysis Services est une plateforme entièrement gérée en tant que service (PaaS) qui fournit des modèles de données de qualité professionnelle dans le cloud.
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'Azure Analysis Services.
 
-## Formule et utilisation
+## Configuration
 
-### Liste des infrastructures
+### Installation
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
-## Real User Monitoring
+## Données collectées
 
-### Analyse d'entonnoirs
-{{< get-metrics-from-git "azure_analysis_services" >}}
+### Métriques
+{{ get-metrics-from-git "azure-analysisservices" }}
 
 
-### Aide
+### Événements
 
 L'intégration Azure Analysis Services n'inclut aucun événement.
 
-### Aide
+### Checks de service
 
 L'intégration Azure Analysis Service n'inclut aucun check de service.
 
-## Aide
+## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

@@ -9,7 +9,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/test-creation-best-practices/
   tag: 블로그
   text: 엔드 투 엔드 테스트 생성 모범 사례
-title: 브라우저 테스트 여정을 테스트 스위터 전체에 재사용하기
+title: 브라우저 테스트 여정을 테스트 스위트(suite) 전체에 재사용하기
 ---
 
 ## 개요
@@ -32,19 +32,19 @@ title: 브라우저 테스트 여정을 테스트 스위터 전체에 재사용�
 
 로그인 테스트를 만들고 테스트 스위트 전체에 하위 테스트로 사용하는 방법:
 
-1. 애플리케이션에 로그인만 하는 테스트 A를 만드세요. 테스트 A의 **Starting URL**을 로그인 전 URL로 설정하세요.
+1. 애플리케이션에 로그인만 하는 테스트를 만드세요. 테스트의 **시작 URL**을 로그인 전 URL로 설정하세요.
 
-  {{< img src="synthetics/guide/reusing-browser-test-journeys/login_subtest_recording.mp4" alt="로그인 하위 테스트 레코딩" video="true" width="100%">}}
+  {{< img src="synthetics/guide/reusing-browser-test-journeys/login_subtest_recording_2.mp4" alt="로그인 하위 테스트 레코딩t" video="true" width="100%">}}
 
-2. 애플리케이션 로그인 후 기능을 모니터링하는 두 번째 테스트 테스트 B를 만드세요. 다음은 대시보드 생성을 모니터링하는 두 번째 테스트 예시입니다. 테스트 B의 **Starting URL**도 로그인 전 UR로 설정하세요.
+2. 애플리케이션 로그인 후 기능을 모니터링하는 두 번째 테스트를 만드세요. 다음은 대시보드 생성을 모니터링하는 두 번째 테스트 예시입니다. 테스트의 **시작 URL**도 로그인 전 UR로 설정하세요.
 
-  {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_configuration.png" alt="상위 테스트 구성" >}}
+  {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_configuration_2.png" alt="상위 테스트 설정" >}}
 
-3. 테스트 B를 레코딩할 때 **Subset**을 클릭하고 로그인 테스트 A를 선택하세요.
+3. 두 번째 테스트를 레코딩할 때 **하위 테스트**를 클릭하고 1단계에서 생성한 로그인 테스트를 선택하세요.
 
-  {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_subtest.mp4" alt="상위 테스트에서 하위 테스트를 포함" video="true" width="100%">}}
+  {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_subtest_2.mp4" alt="상위 테스트에 하위 테스트 포함" video="true" width="80%">}}
 
-  이렇게 하위 테스트 단계를 설정할 때 테스트 A에 포함된 모든 단계가 상위 테스트 B를 시작할 때 실행됩니다. 또 하위 테스트 A에 있는 변수를 상위 테스트 B에서 가져옵니다. 기본적으로 하위 테스트는 메인 탭에서 실행됩니다. 따라서 하위 테스트 단계가 이전 및 다음 단계가 실행되는 동일 탭에서 실행됩니다. 상위 테스트에 설정된 URL을 사용해 하위 테스트가 실행되고(이 경우 로그인 전 URL), 하위 테스트 단계가 모두 실행된 후 브라우저 테스트가 하위 테스트가 마지막으로 실행된 브라우저에 상위 테스트의 첫 단계를 실행합니다. 현재 상위 테스트는 생성하지 않은 상태입니다.
+  이렇게 하위 테스트 단계를 설정할 때 로그인 테스트에 포함된 모든 단계가 상위 테스트를 시작할 때 실행됩니다. 또 하위 테스트에 있는 변수를 두 번째 테스트의 상위 테스트로 가져옵니다. 기본적으로 하위 테스트는 메인 탭에서 실행됩니다. 따라서 하위 테스트 단계가 이전 및 다음 단계가 실행되는 동일 탭에서 실행됩니다. 상위 테스트에 설정된 URL을 사용해 하위 테스트가 실행되고(이 경우 로그인 전 URL), 하위 테스트 단계가 모두 실행된 후 브라우저 테스트가 하위 테스트가 마지막으로 실행된 페이지에서 상위 테스트의 첫 비하위 테스트 단계를 실행합니다. 현재 상위 테스트는 생성하지 않은 상태입니다.
 
 **참고:** [**Subtest Advanced Options**][1]을 사용해 하위 테스트가 있는 탭을 선택할 수 있습니다.
 

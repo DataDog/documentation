@@ -40,7 +40,7 @@ The environment name sent to Datadog. You can use `env` to filter events by envi
 `site`
 : Required<br/>
 **Type**: Enum<br/>
-The Datadog site that data is sent to. Enum values: `us1`, `us3`, `us5`, `eu1`, `us1Fed`, and `ap1`.
+The Datadog site that data is sent to. Enum values: `us1`, `us3`, `us5`, `eu1`, `us1Fed`, `ap1`, and `ap2`.
 
 `nativeCrashReportEnabled`
 : Optional<br/>
@@ -316,13 +316,11 @@ Adding user information to your RUM sessions makes it easy to:
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI" style="width:90%" >}}
 
-The following attributes are **optional**, provide **at least** one of them:
-
-| Attribute | Type   | Description                                                                                              |
-|-----------|--------|----------------------------------------------------------------------------------------------------------|
-| `usr.id`    | String | Unique user identifier.                                                                                  |
-| `usr.name`  | String | User friendly name, displayed by default in the RUM UI.                                                  |
-| `usr.email` | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
+| Attribute   | Type   | Description                                                                     |
+| ----------- | ------ | ------------------------------------------------------------------------------- |
+| `usr.id`    | String | (Required) Unique user identifier.                                              |
+| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
+| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
 
 To identify user sessions, use `DatadogSdk.setUserInfo`.
 
@@ -391,21 +389,21 @@ Returning `null` from the error, resource, or action mapper drops the event enti
 
 Depending on the event's type, only some specific properties can be modified:
 
-| Event Type       | Attribute key                     | Description                                   |
-|------------------|-----------------------------------|-----------------------------------------------|
-| RumViewEvent     | `viewEvent.view.url`              | URL of the view.                              |
-|                  | `viewEvent.view.referrer`         | Referrer of the view.                         |
-| RumActionEvent   | `actionEvent.action.target?.name` | Name of the action.                           |
-|                  | `actionEvent.view.referrer`       | Referrer of the view linked to this action.   |
-|                  | `actionEvent.view.url`            | URL of the view linked to this action.        |
-| RumErrorEvent    | `errorEvent.error.message`        | Error message.                                |
-|                  | `errorEvent.error.stack`          | Stacktrace of the error.                      |
-|                  | `errorEvent.error.resource?.url`  | URL of the resource the error refers to.      |
-|                  | `errorEvent.view.referrer`        | Referrer of the view linked to this action.   |
-|                  | `errorEvent.view.url`             | URL of the view linked to this error.         |
-| RumResourceEvent | `resourceEvent.resource.url`      | URL of the resource.                          |
-|                  | `resourceEvent.view.referrer`     | Referrer of the view linked to this action.   |
-|                  | `resourceEvent.view.url`          | URL of the view linked to this resource.      |
+| Event Type       | Attribute key                     | Description                                 |
+| ---------------- | --------------------------------- | ------------------------------------------- |
+| RumViewEvent     | `viewEvent.view.url`              | URL of the view.                            |
+|                  | `viewEvent.view.referrer`         | Referrer of the view.                       |
+| RumActionEvent   | `actionEvent.action.target?.name` | Name of the action.                         |
+|                  | `actionEvent.view.referrer`       | Referrer of the view linked to this action. |
+|                  | `actionEvent.view.url`            | URL of the view linked to this action.      |
+| RumErrorEvent    | `errorEvent.error.message`        | Error message.                              |
+|                  | `errorEvent.error.stack`          | Stacktrace of the error.                    |
+|                  | `errorEvent.error.resource?.url`  | URL of the resource the error refers to.    |
+|                  | `errorEvent.view.referrer`        | Referrer of the view linked to this action. |
+|                  | `errorEvent.view.url`             | URL of the view linked to this error.       |
+| RumResourceEvent | `resourceEvent.resource.url`      | URL of the resource.                        |
+|                  | `resourceEvent.view.referrer`     | Referrer of the view linked to this action. |
+|                  | `resourceEvent.view.url`          | URL of the view linked to this resource.    |
 
 ## Retrieve the RUM session ID
 

@@ -21,8 +21,8 @@ author:
   sales_email: david.bouchare@datadoghq.com
   support_email: david.bouchare@datadoghq.com
 categories:
-- メトリクス
-- ネットワーク
+- モニター
+- network
 custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sendmail/README.md
@@ -97,7 +97,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Sendmail チ�
 
 Sendmail には、イベントは含まれません。
 
-### サービスチェック
+### サービス チェック
 {{< get-service-checks-from-git "sendmail" >}}
 
 

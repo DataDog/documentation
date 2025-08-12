@@ -1,7 +1,7 @@
 ---
 aliases:
-- /tracing/trace_collection/otel_instrumentation/python/
-- /tracing/trace_collection/custom_instrumentation/otel_instrumentation/python
+- /fr/tracing/trace_collection/otel_instrumentation/python/
+- /fr/tracing/trace_collection/custom_instrumentation/otel_instrumentation/python
 code_lang: otel
 code_lang_weight: 2
 description: 'Instrumentez votre application Python avec l''API OpenTelemetry pour

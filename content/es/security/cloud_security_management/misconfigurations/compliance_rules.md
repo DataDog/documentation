@@ -1,10 +1,10 @@
 ---
 aliases:
-- /security_platform/cspm/configuration_rules
-- /security/cspm/configuration_rules
-- /security/cspm/detection_rules
-- /security/cspm/compliance_rules
-- /security/misconfigurations/compliance_rules
+- /es/security_platform/cspm/configuration_rules
+- /es/security/cspm/configuration_rules
+- /es/security/cspm/detection_rules
+- /es/security/cspm/compliance_rules
+- /es/security/misconfigurations/compliance_rules
 further_reading:
 - link: /security/cloud_security_management/misconfigurations
   tag: Documentación

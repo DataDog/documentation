@@ -26,6 +26,8 @@ Ensure you have enabled [AWS resource collection][10], the [ECS on EC2 integrati
 
 If using the [task definition to install the Datadog Agent][4], add this environment variable to the Datadog Agent container to activate this feature.
 
+This feature is enabled by default in Datadog Agent version 7.64.0 and later.
+
 ```yaml
 {
   "containerDefinitions": [
@@ -56,6 +58,28 @@ ecs_task_collection_enabled: true
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+### Logs
+
+For ECS on Fargate, it is recommended to use the [AWS FireLens integration][11] built on Datadog's Fluent Bit output plugin to send logs to Datadog. To ensure that logs are properly correlated between ECS resources and the log explorer, apply the following log configuration to apply the `aws_account` tag:
+```
+{
+  "logConfiguration": {
+    "logDriver": "awsfirelens",
+    "options": {
+      "Name": "datadog",
+      "apikey": "<DATADOG_API_KEY>",
+      "Host": "http-intake.logs.datadoghq.com",
+      "dd_service": "...",
+      "dd_source": "...",
+      "dd_message_key": "log",
+      "dd_tags": "aws_account:<ACCOUNT_ID>",
+      "TLS": "on",
+      "provider": "ecs"
+    }
+  }
+}
+```
 
 ## Usage
 
@@ -103,7 +127,6 @@ Other tabs provide additional information for troubleshooting the selected resou
 * [**Logs**][5]: Access logs from your container or resource. Click on any log entry to view the full log details in the Log Explorer.
 * [**Metrics**][6]: View live metrics for your container or resource. You can maximize any graph for full-screen viewing, share a snapshot, or export it from this tab.
 * [**APM**][7]: Access traces from your container or resource, including details such as date, service, duration, method, and status code.
-* **Processes**: See all processes running in the resource's containers.
 * **Network**: View network performance metrics for a container or resource, including source and destination, sent and received volume, and throughput. Use the **Destination** field to filter by tags like `DNS` or `ip_type`, or use the **Group by** filter to group network data by tags, such as `task_name` or `service`.
 * **Monitors**: View monitors that are tagged, scoped, or grouped for this resource.
 
@@ -154,11 +177,12 @@ Some resources have specific tags. The following tags are available in addition 
 | **Resource**        | **With Datadog Agent** | **Without Datadog Agent** |
 |---------------------|------------------------|--------------------------|
 | **Cluster**         | ~15 minutes             | ~15 minutes               |
-| **Task**            | ~15 seconds             | ~24 hours                 |
-| **Task Definition** | ~15 seconds             | ~24 hours                 |
-| **Service**         | ~15 seconds             | ~24 hours                 |
-| **Container Instance**         | ~24 hours               | ~24 hours                 |
+| **Task**            | ~15 seconds             | ~15 minutes                 |
+| **Task Definition** | ~15 seconds             | ~15 minutes                 |
+| **Service**         | ~15 seconds             | ~15 minutes                 |
+| **Container Instance**         | ~15 minutes               | ~15 minutes                 |
 
+* A newly created ECS Service is typically collected within approximately 15 seconds. However, for status changes in an existing Service, a refresh within 15 seconds is not guaranteed.
 * Installing the Datadog Agent in your cluster enables visibility into task lifecycle changes. Without the Datadog Agent, stopped tasks can appear as running for up to two days.
 * Installing the Datadog Agent in your cluster provides additional, relevant host-level tags, such as `availability_zone`.
 
@@ -171,3 +195,4 @@ Some resources have specific tags. The following tags are available in addition 
 [8]: /infrastructure/containers/orchestrator_explorer/?tab=manual#query-filter-details
 [9]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments
 [10]: /integrations/amazon_web_services/#resource-collection
+[11]: /integrations/aws-fargate/?tab=webui#fluent-bit-and-firelens

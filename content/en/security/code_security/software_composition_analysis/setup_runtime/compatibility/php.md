@@ -5,33 +5,25 @@ type: multi-code-lang
 code_lang_weight: 40
 ---
 
-## Application Security capabilities support
+## Code Security capabilities support
 
-The following application security capabilities are supported in the PHP library, for the specified tracer version:
+The following code security capabilities are supported in the PHP library, for the specified tracer version:
 
-| Application Security capability                   | Minimum PHP tracer version |
-| -------------------------------- |----------------------------|
-| Threat Detection | 0.84.0                     |
-| Threat Protection  | 0.86.0                     |
-| Customize response to blocked requests | 0.86.0 |
-| Software Composition Analysis (SCA) | 0.90.0              |
-| Code Security        | not supported              |
-| Automatic user activity event tracking | 0.89.0                     |
-| API Security | 0.98.0 |
-
-The minimum tracer version to get all supported ASM capabilities for PHP is 0.98.0.
-
+| Code Security capability                    | Minimum PHP tracer version |
+| ------------------------------------------- |----------------------------|
+| Runtime Software Composition Analysis (SCA) | 0.90.0                     |
+| Runtime Code Analysis (IAST)                | not supported              |
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 ### Supported deployment types
-| Type        | Threat Detection support | Software Composition Analysis |
-|-------------|--------------------------|-------------------------------|
-| Docker      | {{< X >}}                | {{< X >}}                     |
-| Kubernetes  | {{< X >}}                | {{< X >}}                     |
-| Amazon ECS  | {{< X >}}                | {{< X >}}                     |
-| AWS Fargate |                          |                               |
-| AWS Lambda  |                          |                               |
+| Type              | Runtime Software Composition Analysis (SCA) | Runtime Code Analysis (IAST)        |
+|------------------ | ------------------------------------------- | ----------------------------------- |
+| Docker            | {{< X >}}                                   |                                     |
+| Kubernetes        | {{< X >}}                                   |                                     |
+| Amazon ECS        | {{< X >}}                                   |                                     |
+| AWS Fargate       |                                             |                                     |
+| AWS Lambda        |                                             |                                     |
 
 ## Language and framework compatibility
 
@@ -52,7 +44,7 @@ It's recommended to use <a href="https://www.php.net/supported-versions">officia
 | 7.1.x          | General Availability                  | All             |
 | 7.0.x          | General Availability                  | All             |
 
-Application Security capabililties for PHP support the following SAPI's:
+Code Security capabililties for PHP support the following SAPI's:
 
 | SAPI           | Support type    |
 |:---------------|:----------------|
@@ -63,7 +55,7 @@ Application Security capabililties for PHP support the following SAPI's:
 
 ## Supported processor architectures
 
-Application Security capabililties for PHP support the following architectures:
+Code Security capabililties for PHP support the following architectures:
 
 | Processor architectures                   | Support level         | Package version                        |
 | ------------------------------------------|-----------------------|----------------------------------------|
@@ -79,76 +71,5 @@ The Datadog PHP library supports PHP version 7.0 and above on the following arch
 
 The library supports the use of all PHP frameworks, and also the use of no framework.
 
-
-### Web framework compatibility
-
-- Attacker source HTTP request details
-- Tags for the HTTP request (status code, method, etc)
-- Distributed Tracing to see attack flows through your applications
-
-##### Application Security Capability Notes
-- **Software Composition Analysis** is not supported
-- **Code Security** is not supported
-
-The following frameworks aren't directly instrumented by Application Security, but indirectly supported through runtime instrumentation.
-
-| Framework                | Versions    | Threat Detection supported? | Threat Protection supported? |
-| ------------------------ | ----------- | --------------- | ---------------------------------------------- |
-| CakePHP       | 2.x       |  {{< X >}} | {{< X >}} |
-| CodeIgniter   | 2.x       |  {{< X >}} | {{< X >}} |
-| FuelPHP       | 1.1        |  {{< X >}} | {{< X >}} |
-| Laravel       | 4.2, 5.x, 6.x        | {{< X >}} | {{< X >}} |
-| Laravel 8     | 8.x (tracer 0.52.0+) | {{< X >}} | {{< X >}} |
-| Lumen         | 1.9-2.29    |  {{< X >}} | {{< X >}} |
-| Magento       |  3.8+       |  {{< X >}} | {{< X >}} |
-| Neos Flow     |  3.0.x      |  {{< X >}} | {{< X >}} |
-| Phalcon       | 3.1+        |  {{< X >}} | {{< X >}} |
-| Slim          | 3.1+        |  {{< X >}} | {{< X >}} |
-| Symfony 3     | 3.1+        |  {{< X >}} | {{< X >}} |
-| Symfony 4     | 3.1+        |  {{< X >}} | {{< X >}} |
-| Symfony 5     | 3.1+        |  {{< X >}} | {{< X >}} |
-| Wordpress     | 3.1+        |  {{< X >}} | {{< X >}} |
-| Yii           | 3.1+        |  {{< X >}} | {{< X >}} |
-| Zend          | 3.1+        |  {{< X >}} | {{< X >}} |
-| Symfony 3     | 3.1+        |  {{< X >}} | {{< X >}} |
-| RoadRunner    | 2.x         |  {{< X >}} | {{< X >}} |
-
-
-### Data store compatibility
-
-**Datastore tracing provides:**
-
-- SQL attack detection
-- query info (for example, a sanitized query string)
-- error and stacktrace capturing
-
-##### Application Security Capability Notes
-- **Software Composition Analysis** is not supported
-- **Code Security** is not supported
-- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
-
-| Framework         | Versions | Threat Detection supported?    | Threat Protection supported?|
-|-------------------|-----------------|-----------------|---------------|
-| Amazon RDS        | Any supported PHP | {{< X >}}  |   {{< X >}} |
-| Eloquent       | Laravel supported versions | {{< X >}} | {{< X >}} |
-| Memcached        | Any supported PHP |   {{< X >}}    | {{< X >}} |
-| MySQLi        | Any supported PHP | {{< X >}} | {{< X >}} |
-| PDO        | Any supported PHP| {{< X >}}| {{< X >}} |
-| PHPRedis        | 3, 4, 5 |   {{< X >}}    | {{< X >}} |
-| Predis        | 1.1 | {{< X >}} |   {{< X >}}    |
-
-### User Authentication Frameworks compatibility
-
-**Integrations to User Authentication Frameworks provide:**
-
-- User login events, including the user IDs
-- Account Takeover detection monitoring for user login events
-
-| Framework | Minimum Framework Version |
-|-----------|---------------------------|
-| Laravel   | 4.2                       |
-| Symfony   | 3.3                       |
-| Wordpress | 4.8                       |
-
 [1]: /tracing/trace_collection/compatibility/php/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[2]: /remote_configuration#enabling-remote-configuration

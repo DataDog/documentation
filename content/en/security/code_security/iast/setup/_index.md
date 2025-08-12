@@ -95,7 +95,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 [6]: /agent/versions/upgrade_between_agent_minor_versions/
 
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title=".NET" level="h4" %}}
 
@@ -163,7 +163,7 @@ ENV DD_IAST_ENABLED=true
 
 #### Kubernetes
 
-Update your deployment configuration file for APM and add the ASM environment variable:
+Update your deployment configuration file for APM and add the Runtime Code Analysis (IAST) environment variable:
 
 ```yaml
 spec:
@@ -175,7 +175,7 @@ spec:
           env:
             - name: DD_IAST_ENABLED
               value: "true"
-``` 
+```
 
 #### AWS ECS
 
@@ -211,7 +211,7 @@ If you need additional assistance, contact [Datadog support][5].
 [4]: /security/code_security/iast/setup/
 [5]: /help
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Node.js" level="h4" %}}
 
@@ -228,7 +228,7 @@ Follow these steps to enable Runtime Code Analysis (IAST) in your service:
    ```shell
    node --require dd-trace/init app.js
    ```
-   Then use environment variables to enable ASM:
+   Then use environment variables to enable Runtime Code Analysis (IAST):
    ```shell
    DD_IAST_ENABLED=true node app.js
    ```
@@ -287,13 +287,13 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 [5]: https://app.datadoghq.com/security/appsec/vm/code
 [6]: /help
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Python" level="h4" %}}
 
 You can detect code-level vulnerabilities and monitor application security in Python applicationss running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
-NOTE: Code-Level Vulnerability detection in Python is in Preview.
+NOTE: Runtime Code Analysis (IAST) in Python is in Preview.
 
 Follow these steps to enable Runtime Code Analysis (IAST) in your service:
 
@@ -380,7 +380,7 @@ using the CPython API, or on intermediate language systems like Cython, the resu
 [5]: /help
 [6]: /agent/versions/upgrade_between_agent_minor_versions/
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 ### Finishing setup
 
@@ -397,81 +397,72 @@ If you need additional assistance, contact [Datadog support][5].
 
 ## Compatibility Requirements
 
-The following ASM capabilities are supported relative to each language's tracing library:
+The following code security capabilities are supported relative to each language's tracing library:
 
-| Application Security capability               | Java    | .NET     | Node.js        | Python        | Go              | Ruby          | PHP           |
-|-----------------------------------------------|---------|----------|----------------|---------------|-----------------|---------------|---------------|
-| Runtime Code Analysis (IAST)                  | 1.15.0  | 2.42.0   | 4.18.0         | Preview       | not supported   | not supported | not supported |
+| Code Security capability                      | Java    | .NET     | Node.js    | Python      | Go             | Ruby          | PHP           |
+|-----------------------------------------------|---------|----------|------------|-------------|----------------|---------------|---------------|
+| Runtime Software Composition Analysis (SCA)   | 1.1.4   | 2.16.0   | 4.0.0      | 1.5.0       | 1.49.0         | 1.11.0        | 0.90.0        |
+| Runtime Code Analysis (IAST)                  | 1.15.0  | 2.42.0   | 4.18.0     | Preview     | not supported  | not supported | not supported |
+
+**Note**: **Static Software Composition Analysis (SCA)** and **Static Code Analysis (SAST)** capabilities do not require Datadog's tracing library. Therefore, the requirements listed below do not apply to these two Code Security capabilities.
 
 Select your application language for details about framework compatibility and feature support.
 
 {{% collapse-content title="Java" level="h4" %}}
 
-### Application Security capabilities
+### Code Security capabilities
 
-The following application security capabilities are supported in the Java library, for the specified tracer version:
+The following code security capabilities are supported in the Java library, for the specified tracer version:
 
-| Application Security capability  | Minimum Java tracer version |
-| -------------------------------- | ----------------------------|
-| Threat Detection | 1.8.0  |
-| API Security | 1.31.0 |
-| Threat Protection| 1.9.0 |
-| Customize response to blocked requests | 1.11.0 |
-| Software Composition Analysis (SCA) | 1.1.4 |
-| Runtime Code Analysis (IAST)  | 1.15.0|
-| Automatic user activity event tracking | 1.20.0 |
+| Code Security capability                    | Minimum Java tracer version |
+| ------------------------------------------- | ----------------------------|
+| Runtime Software Composition Analysis (SCA) | 1.1.4                       |
+| Runtime Code Analysis (IAST)                | 1.15.0                      |
 
-The minimum tracer version to get all supported application security capabilities for Java is 1.31.0.
-
-**Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
+The minimum tracer version to get all supported code security capabilities for Java is 1.15.0.
 
 #### Supported deployment types
-| Type              | Threat Detection support | Software Composition Analysis |
-|-------------------|--------------------------|-------------------------------|
-| Docker            | <i class="icon-check-bold"></i>                | <i class="icon-check-bold"></i>                     |
-| Kubernetes        | <i class="icon-check-bold"></i>                | <i class="icon-check-bold"></i>                     |
-| Amazon ECS        | <i class="icon-check-bold"></i>                | <i class="icon-check-bold"></i>                     |
-| AWS Fargate       | <i class="icon-check-bold"></i>                | <i class="icon-check-bold"></i>                     |
-| AWS Lambda        | <i class="icon-check-bold"></i>                |                               |
-| Azure App Service | <i class="icon-check-bold"></i>                | <i class="icon-check-bold"></i>                     |
+| Type              | Runtime Software Composition Analysis (SCA) | Runtime Code Analysis (IAST)        |
+|------------------ | ------------------------------------------- | ----------------------------------- |
+| Docker            | <i class="icon-check-bold"></i>             | <i class="icon-check-bold"></i>     |
+| Kubernetes        | <i class="icon-check-bold"></i>             | <i class="icon-check-bold"></i>     |
+| Amazon ECS        | <i class="icon-check-bold"></i>             | <i class="icon-check-bold"></i>     |
+| AWS Fargate       | <i class="icon-check-bold"></i>             | Preview (1.15.0)                    |
+| AWS Lambda        |                                             |                                     |
+| Azure App Service | <i class="icon-check-bold"></i>             | <i class="icon-check-bold"></i>     |
 
-**Note**: Azure App Service is supported for **web applications only**. Application Security doesn't support Azure Functions.
+**Note**: Azure App Service is supported for **web applications only**. Code Security doesn't support Azure Functions.
 
 ### Language and framework compatibility
 
 #### Supported Java versions
 The Java Tracer supports automatic instrumentation for the following Oracle JDK and OpenJDK JVM runtimes.
 
-| JVM versions | Operating Systems                                                               | Support level                       | Tracer version |
-| -------------| ------------------------------------------------------------------------------- | ----------------------------------- | -------------- |
-| 8 to 17      | Windows (x86-64)<br>Linux (glibc, musl) (arm64, x86-64)<br>MacOS (arm64, x86-64)               | Supported                | Latest         |
+| JVM versions | Operating Systems                                                                     | Support level                       | Tracer version |
+| -------------| ------------------------------------------------------------------------------------- | ----------------------------------- | -------------- |
+| 8 to 21      | Windows (x86-64)<br>Linux (glibc, musl) (arm64, x86-64)<br>MacOS (arm64, x86-64)      | Supported                           | Latest         |
 
 
 Datadog does not officially support any early-access versions of Java.
 
+Versions 22 and above are supported as in Preview.
+
 #### Web framework compatibility
-
-- Attacker source HTTP request details
-- Tags for the HTTP request (status code, method, etc)
-- Distributed Tracing to see attack flows through your applications
-
-##### Application Security Capability Notes
-- **Software Composition Analysis** is supported on all frameworks
+##### Code Security Capability Notes
+- **Runtime Software Composition Analysis (SCA)** is supported on all frameworks
 - If **Runtime Code Analysis (IAST)** does not support your framework, it continues to detect Weak Cipher, Weak Hashing, Weak Randomness, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
-
-
-| Framework                  | Versions   | Threat Detection supported? | Threat Protection supported? | Runtime Code Analysis (IAST)? |
-| ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
-| Grizzly                 | 2.0+       |  <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |
-| Glassfish               |            |  <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |
-| Java Servlet | 2.3+, 3.0+ |   <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |
-| Jetty                   | 7.0-9.x, 10.x    |  <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |
-| Spring Boot             | 1.5        |  <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |
-| Spring Web (MVC)        | 4.0+       |  <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |
-| Spring WebFlux          | 5.0+       |            |            |  <i class="icon-check-bold"></i> |
-| Tomcat                  | 5.5+       |   <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |
-| Vert.x                  | 3.4-3.9.x  |   <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |
+| Framework                   | Versions         | Runtime Code Analysis (IAST)      |
+| --------------------------- | ---------------- | --------------------------------- |
+| Grizzly                     | 2.0+             | <i class="icon-check-bold"></i>   |
+| Glassfish                   |                  | <i class="icon-check-bold"></i>   |
+| Java Servlet                | 2.3+, 3.0+       | <i class="icon-check-bold"></i>   |
+| Jetty                       | 7.0-9.x, 10.x    | <i class="icon-check-bold"></i>   |
+| Spring Boot                 | 1.5              | <i class="icon-check-bold"></i>   |
+| Spring Web (MVC)            | 4.0+             | <i class="icon-check-bold"></i>   |
+| Spring WebFlux              | 5.0+             | <i class="icon-check-bold"></i>   |
+| Tomcat                      | 5.5+             | <i class="icon-check-bold"></i>   |
+| Vert.x                      | 3.4-3.9.x        | <i class="icon-check-bold"></i>   |
 
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss. Also, frameworks like Spring Boot (version 3) inherently work because they usually use a supported embedded application server, such as Tomcat, Jetty, or Netty.
 
@@ -481,26 +472,20 @@ Datadog does not officially support any early-access versions of Java.
 
 `dd-java-agent` includes support for automatically tracing the following networking frameworks.
 
-**Networking tracing provides:**
-
-- Distributed tracing through your applications
-- Request-based blocking
-
-##### Application Security Capability Notes
-- **Software Composition Analysis** is supported on all frameworks
+##### Code Security Capability Notes
+- **Runtime Software Composition Analysis (SCA)** is supported on all frameworks
 - If **Runtime Code Analysis (IAST)** does not support your framework, it continues to detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, Cookie without SameSite Flag, HSTS Header Missing, and X-Content-Type-Options Header Missing vulnerabilities.
 
-
-| Framework                | Versions    | Threat Detection supported? | Threat Protection supported? | Runtime Code Analysis (IAST)? |
-| ------------------------ | ----------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
-| Apache HTTP Client       | 4.0+        |  <i class="icon-check-bold"></i> |  |  |
-| gRPC                     | 1.5+        |  <i class="icon-check-bold"></i> |  |  |
-| HttpURLConnection        | all         |  <i class="icon-check-bold"></i> |  |  |
-| Jax RS Clients           | 2.0+        |  <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i>  |
-| Jersey Server            | 1.9-2.29    |  <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |
-| Netty HTTP Server        |  3.8+           |  <i class="icon-check-bold"></i> |    |  |
-| RESTEasy                 |  3.0.x          |  <i class="icon-check-bold"></i> |    |  |
-| Spring SessionAwareMessageListener     | 3.1+            |  <i class="icon-check-bold"></i> |  |  |
+| Framework                              | Versions    | Runtime Code Analysis (IAST)                   |
+| -------------------------------------- | ----------- | ---------------------------------------------- |
+| Apache HTTP Client                     | 4.0+        |                                                |
+| gRPC                                   | 1.5+        |                                                |
+| HttpURLConnection                      | all         |                                                |
+| Jax RS Clients                         | 2.0+        |  <i class="icon-check-bold"></i>               |
+| Jersey Server                          | 1.9-2.29    |  <i class="icon-check-bold"></i>               |
+| Netty HTTP Server                      |  3.8+       |                                                |
+| RESTEasy                               |  3.0.x      |                                                |
+| Spring SessionAwareMessageListener     | 3.1+        |                                                |
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
@@ -514,95 +499,62 @@ Datadog does not officially support any early-access versions of Java.
 - Query info (for example, a sanitized query string)
 - Error and stacktrace capturing
 
-##### Application Security Capability Notes
-- **Software Composition Analysis** is supported on all frameworks
-- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
+##### Code Security Capability Notes
+- **Runtime Software Composition Analysis (SCA)** is supported on all frameworks
 - If your framework is not supported below, **Runtime Code Analysis (IAST)** won't detect SQL Injection vulnerabilities, but it continues to detect the remaining vulnerability types listed [here][3].
 
-| Database                | Versions | Threat Detection supported? |  Runtime Code Analysis (IAST)? |
-| ----------------------- | -------- |  ------------------------| ---------------------------------------------------------------- |
-| Aerospike               | 4.0+     |  <i class="icon-check-bold"></i> |   |
-| Couchbase               | 2.0+     |  <i class="icon-check-bold"></i> |   |
-| JDBC                    | N/A      |  <i class="icon-check-bold"></i> |   <i class="icon-check-bold"></i> |
-| MongoDB                 | 3.0-4.0+ |  <i class="icon-check-bold"></i> |   |
+| Database                | Versions | Runtime Code Analysis (IAST)     |
+| ----------------------- | -------- | -------------------------------- |
+| Aerospike               | 4.0+     |                                  |
+| Couchbase               | 2.0+     |                                  |
+| JDBC                    | N/A      | <i class="icon-check-bold"></i>  |
+| MongoDB                 | 3.0-4.0+ |                                  |
 
-`dd-java-agent` is also compatible with common JDBC drivers for Threat Detection, such as:
-
-- Apache Derby
-- Firebird SQL
-- H2 Database Engine
-- HSQLDB
-- IBM DB2
-- MariaDB
-- MSSQL (Microsoft SQL Server)
-- MySQL
-- Oracle
-- Postgres SQL
-- ScalikeJDBC
-
-<div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
-
-#### User Authentication Frameworks compatibility
-
-Integrations to User Authentication Frameworks provide:
-
-- User login events, including the user IDs
-- Account Takeover detection monitoring for user login events
-
-| Framework         | Minimum Framework Version |
-|-------------------|---------------------------|
-| Spring Security   | 5.5+                      |
+<div class="alert alert-info">If you don't see your framework of choice listed, let us know. Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 
 [1]: /tracing/trace_collection/compatibility/java/
-[2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
-[3]: /security/application_security/vulnerability_management/#manage-code-level-vulnerabilities
+[2]: /remote_configuration
+[3]: /security/code_security/software_composition_analysis/
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title=".NET" level="h4" %}}
 
-### Application Security capabilities support
+### Code Security capabilities support
 
-The following application security capabilities are supported in the .NET library, for the specified tracer version:
+The following code security capabilities are supported in the .NET library, for the specified tracer version:
 
-| Application Security capability  | Minimum .NET tracer version |
-| -------------------------------- | ----------------------------|
-| Threat Detection | 2.23.0|
-| Threat Protection  | 2.26.0|
-| Customize response to blocked requests | 2.27.0 |
-| Software Composition Analysis (SCA) |  2.16.0  |
-| Runtime Code Analysis (IAST)  | 2.42.0  |
-| Automatic user activity event tracking | 2.32.0 |
-| API Security | 2.42.0 |
+| Code Security capability                    | Minimum .NET tracer version |
+| ------------------------------------------- | --------------------------- |
+| Runtime Software Composition Analysis (SCA) | 2.16.0                      |
+| Runtime Code Analysis (IAST)                | 2.42.0                      |
 
-The minimum tracer version to get all supported application security capabilities for .NET is 2.42.0.
-
-**Note**: Threat Protection requires enabling [Remote Configuration][3], which is included in the listed minimum tracer version.
+The minimum tracer version to get all supported code security capabilities for .NET is 2.42.0.
 
 #### Supported deployment types
-| Type              | Threat Detection support | Software Composition Analysis            |
-|-------------------|--------------------------|------------------------------------------|
-| Docker            | <i class="icon-check-bold"></i>                | <i class="icon-check-bold"></i>                                |
-| Kubernetes        | <i class="icon-check-bold"></i>                | <i class="icon-check-bold"></i>                                |
-| Amazon ECS        | <i class="icon-check-bold"></i>                | <i class="icon-check-bold"></i>                                |
-| AWS Fargate       | <i class="icon-check-bold"></i>                | <i class="icon-check-bold"></i>                                |
-| AWS Lambda        | <i class="icon-check-bold"></i>                |                                          |
-| Azure App Service | <i class="icon-check-bold"></i>                | <i class="icon-check-bold"></i>                                |
+| Type              | Runtime Software Composition Analysis (SCA) | Runtime Code Analysis (IAST)        |
+|------------------ | ------------------------------------------- | ----------------------------------- |
+| Docker            | <i class="icon-check-bold"></i>             | <i class="icon-check-bold"></i>     |
+| Kubernetes        | <i class="icon-check-bold"></i>             | <i class="icon-check-bold"></i>     |
+| Amazon ECS        | <i class="icon-check-bold"></i>             | <i class="icon-check-bold"></i>     |
+| AWS Fargate       | <i class="icon-check-bold"></i>             | Preview (2.42.0)                    |
+| AWS Lambda        |                                             |                                     |
+| Azure App Service | <i class="icon-check-bold"></i>             | <i class="icon-check-bold"></i>     |
 
-**Note**: Azure App Service is supported for **web applications only**. Application Security capabilities are not supported for Azure Functions.
+**Note**: Azure App Service is supported for **web applications only**. Code Security capabilities are not supported for Azure Functions.
 
 ### Language and framework compatibility
 
 #### Supported .NET versions
 
-| .NET Framework Version  | Microsoft End of Life | Support level                       | Package version             |
-| ----------------------- | --------------------- | ----------------------------------- | --------------------------- |
-| 4.8                     |                       | GA   | latest                      |
-| 4.7.2                   |                       | GA | latest                      |
-| 4.7                     |                       | GA | latest                      |
-| 4.6.2                   |                       | GA | latest                      |
-| 4.6.1                   | 04/26/2022            | GA   | latest |
+| .NET Framework Version  | Microsoft End of Life | Support level       | Package version     |
+| ----------------------- | --------------------- | ------------------- | ------------------- |
+| 4.8                     |                       | GA                  | latest              |
+| 4.7.2                   |                       | GA                  | latest              |
+| 4.7                     |                       | GA                  | latest              |
+| 4.6.2                   |                       | GA                  | latest              |
+| 4.6.1                   | 04/26/2022            | GA                  | latest              |
 
 
 These are supported on the following architectures:
@@ -611,24 +563,28 @@ These are supported on the following architectures:
 - macOS (Darwin) x86-64, ARM64
 - Windows (msvc) x86, x86-64
 
-
-
 #### Web framework compatibility
+##### Code Security capability notes
 
-- Attacker source HTTP request details
-- Tags for the HTTP request (status code, method, etc)
-- Distributed Tracing to see attack flows through your applications
-
-##### Application Security capability notes
-
-- **Software Composition Analysis** is supported on all frameworks.
+- **Runtime Software Composition Analysis (SCA)** is supported on all frameworks.
 - If your framework is not listed below, **Runtime Code Analysis (IAST)** continues to detect Insecure Cookie vulnerabilities.
 
+| Framework               | Runtime Code Analysis (IAST)     |
+| ----------------------- | -------------------------------- |
+| ASP.NET MVC             | <i class="icon-check-bold"></i>  |
+| ASP.NET Web API 2       | <i class="icon-check-bold"></i>  |
 
-| Framework                  | Threat Detection supported? | Threat Protection supported? | Runtime Code Analysis (IAST)? |
-| ----------------------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
-| ASP.NET MVC | <i class="icon-check-bold"></i>  |<i class="icon-check-bold"></i>  | <i class="icon-check-bold"></i> |
-| ASP.NET Web API 2 | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i>  |
+<div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
+
+### Networking framework compatibility
+##### Code Security capability notes
+
+- **Runtime Software Composition Analysis (SCA)**  is supported on all frameworks
+
+| Framework | Runtime Code Analysis (IAST)                |
+|---------- |-------------------------------------------- |
+| http      | <i class="icon-check-bold"></i>             |
+| https     | <i class="icon-check-bold"></i>             |
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
@@ -636,70 +592,49 @@ These are supported on the following architectures:
 
 **Datastore tracing provides:**
 
-- SQL attack detection
 - query info (for example, a sanitized query string)
 - error and stacktrace capturing
 
-##### Application Security Capability Notes
-- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
+##### Code Security Capability Notes
 
-| Framework         | Threat Detection supported?    | Threat Protection supported? | Runtime Code Analysis (IAST)? |
-|-------------------|-----------------|---------------------|---|
-| OracleDB         | <i class="icon-check-bold"></i> |   <i class="icon-check-bold"></i>    |<i class="icon-check-bold"></i>    |
-| ADO.NET         | <i class="icon-check-bold"></i> |   <i class="icon-check-bold"></i>    |<i class="icon-check-bold"></i>    |
-| SQL Server         | <i class="icon-check-bold"></i> |   <i class="icon-check-bold"></i>    |<i class="icon-check-bold"></i>    |
-| MySQL       | <i class="icon-check-bold"></i> |   <i class="icon-check-bold"></i>    |<i class="icon-check-bold"></i>    |
-| SQLite         | <i class="icon-check-bold"></i> |   <i class="icon-check-bold"></i>    |<i class="icon-check-bold"></i>    |
+- **Runtime Software Composition Analysis (SCA)** is supported on all frameworks.
 
-#### User Authentication Frameworks compatibility
-
-Integrations to **User Authentication Frameworks provides:**
-
-- User login events including the user IDs
-- User signup events (apps using built-in SignInManager)
-- Account Takeover detection monitoring for user login events
-
-| Framework         |
-|-------------------|
-| > .Net Core 2.1   |
+| Framework        | Runtime Code Analysis (IAST)    |
+|------------------|---------------------------------|
+| OracleDB         | <i class="icon-check-bold"></i> |
+| ADO.NET          | <i class="icon-check-bold"></i> |
+| SQL Server       | <i class="icon-check-bold"></i> |
+| MySQL            | <i class="icon-check-bold"></i> |
+| SQLite           | <i class="icon-check-bold"></i> |
 
 [1]: /tracing/trace_collection/compatibility/dotnet-core/
 [2]: /tracing/trace_collection/compatibility/dotnet-framework/
-[3]: /agent/remote_config/#enabling-remote-configuration
+[3]: /remote_configuration#enabling-remote-configuration
 
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Node.js" level="h4" %}}
 
-### Application Security capabilities
+### Code Security capabilities
 
-The following application security capabilities are supported in the Node.js library, for the specified tracer version:
+The following code security capabilities are supported in the Node.js library, for the specified tracer version:
 
-| Application Security capability        | Minimum Node.js tracer version                     |
-|----------------------------------------|----------------------------------------------------|
-| Threat Detection                       | 4.0.0                                              |
-| Threat Protection                      | 4.0.0                                              |
-| Customize response to blocked requests | 4.1.0                                              |
-| Software Composition Analysis (SCA)    | 4.0.0                                              |
-| Runtime Code Analysis (IAST)           | 4.18.0 for Node.js 16+, or 5.0.0 for Node.js 18+   |
-| Automatic user activity event tracking | 4.4.0 for Node.js 16+                              |
-| API Security                           | 4.30.0 for Node.js 16+, or 5.6.0 for Node.js 18+   |
+| Code Security capability                      | Minimum Node.js tracer version                     |
+|---------------------------------------------- | -------------------------------------------------- |
+| Runtime Software Composition Analysis (SCA)   | 4.0.0                                              |
+| Runtime Code Analysis (IAST)                  | 4.18.0 for Node.js 16+, or 5.0.0 for Node.js 18+   |
 
-The minimum tracer version to get all supported application security capabilities for Node.js is 4.30.0.
-
-
-**Note**:
-- Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
+The minimum tracer version to get all supported code security capabilities is 4.30.0 for Node.js 16+ and 5.0.0 for Node.js 18+.
 
 #### Supported deployment types
-| Type        | Threat Detection support | Software Composition Analysis |
-|-------------|--------------------------|-------------------------------|
-| Docker      | <i class="icon-check-bold"></i>                | <i class="icon-check-bold"></i>                     |
-| Kubernetes  | <i class="icon-check-bold"></i>                | <i class="icon-check-bold"></i>                     |
-| Amazon ECS  | <i class="icon-check-bold"></i>                | <i class="icon-check-bold"></i>                     |
-| AWS Fargate | <i class="icon-check-bold"></i>                | <i class="icon-check-bold"></i>                     |
-| AWS Lambda  | <i class="icon-check-bold"></i>                | <i class="icon-check-bold"></i>                     |
+| Type         | Runtime Software Composition Analysis (SCA)   | Runtime Code Analysis (IAST)                               |
+|------------- | --------------------------------------------- | ---------------------------------------------------------- |
+| Docker       | <i class="icon-check-bold"></i>               | <i class="icon-check-bold"></i>                            |
+| Kubernetes   | <i class="icon-check-bold"></i>               | <i class="icon-check-bold"></i>                            |
+| Amazon ECS   | <i class="icon-check-bold"></i>               | <i class="icon-check-bold"></i>                            |
+| AWS Fargate  | <i class="icon-check-bold"></i>               | Preview (4.18.0 for Node.js 16+, or 5.0.0 for Node.js 18+) |
+| AWS Lambda   | <i class="icon-check-bold"></i>               | not supported                                              |
 
 ### Language and framework compatibility
 
@@ -715,12 +650,9 @@ For the best level of support, always run the latest LTS release of Node.js, and
 
 For more information about Node.js release, see the [official Node.js documentation][4].
 
-
-
 #### Operating system support
 
 The following operating systems are officially supported by `dd-trace`. Any operating system not listed is still likely to work, but with some features missing, for example application security capabilities, profiling, and runtime metrics. Generally speaking, operating systems that are actively maintained at the time of initial release for a major version are supported.
-
 
 | Operating System | Architectures | Minimum Versions                         |
 |------------------|---------------|------------------------------------------|
@@ -729,48 +661,28 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 | macOS            | arm64, x64    | Catalina (10.15)                         |
 | Windows          | x64           | Windows 8.1, Windows Server 2012         |
 
-
-
-
-
 #### Web framework compatibility
-
-- Attacker source HTTP request details
-- Tags for the HTTP request (status code, method, etc)
-- Distributed Tracing to see attack flows through your applications
-
-##### Application Security Capability Notes
-- **Software Composition Analysis** is supported on all frameworks
+##### Code Security Capability Notes
+- **Runtime Software Composition Analysis (SCA)** is supported on all frameworks
 - If your framework is not listed below, **Runtime Code Analysis (IAST)** it continues to detect Weak Cipher, Weak Hashing, Weak Randomness, Insecure Cookie, Cookie without HttpOnly Flag, Cookie without SameSite Flag, HSTS Header Missing, and X-Content-Type-Options Header Missing vulnerabilities.
 
-
-| Framework | Versions | Threat Detection supported? | Threat Protection supported? | Runtime Code Analysis (IAST)? |
-|-----------|----------|-----------------------------|------------------------------|----------------------------------------------------|
-| express   | >=4      | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    | <i class="icon-check-bold"></i>                                          |
-| nextjs    | >=11.1   | <i class="icon-check-bold"></i>                   |                              |                                                    |
-
+| Framework | Versions | Runtime Code Analysis (IAST)     |
+|-----------|----------|----------------------------------|
+| express   | >=4      | <i class="icon-check-bold"></i>  |
+| fastify   | >=2      | <i class="icon-check-bold"></i>  |
+| nextjs    | >=11.1   |                                  |
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities or for your Node.js framework, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
-
 ### Networking framework compatibility
+##### Code Security capability notes
 
-Networking tracing provides:
+- **Runtime Software Composition Analysis (SCA)**  is supported on all frameworks
 
-- Distributed tracing through your applications
-- Request-based blocking
-
-##### Application Security capability notes
-
-- **Software Composition Analysis**  is supported on all frameworks
-
-
-
-| Framework | Threat Detection supported? | Threat Protection supported? | Runtime Code Analysis (IAST)? |
-|-----------|-----------------------------|------------------------------|----------------------------------------------------|
-| http      | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    | <i class="icon-check-bold"></i>                                          |
-| https     | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    | <i class="icon-check-bold"></i>                                          |
-
+| Framework | Runtime Code Analysis (IAST)                |
+|---------- |-------------------------------------------- |
+| http      | <i class="icon-check-bold"></i>             |
+| https     | <i class="icon-check-bold"></i>             |
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
@@ -778,52 +690,37 @@ Networking tracing provides:
 
 Datastore tracing provides:
 
-- Timing request to response
 - Query info (for example, a sanitized query string)
 - Error and stacktrace capturing
 
-##### Application Security capability notes
+##### Code Security capability notes
 
-- **Software Composition Analysis**  is supported on all frameworks
-- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
-
-
-| Framework                | Versions  | Threat Detection supported? | Threat Protection supported? | Runtime Code Analysis (IAST)? |
-|--------------------------|-----------|-----------------------------|------------------------------|----------------------------------------------------|
-| [@apollo/server][43]     | `>=4`     | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    |                                                    |
-| [apollo-server-core][44] | `>=3`     | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    |                                                    |
-| [cassandra-driver][28]   | `>=3`     | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    |                                                    |
-| [couchbase][29]          | `^2.4.2`  | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    |                                                    |
-| [elasticsearch][30]      | `>=10`    | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    |                                                    |
-| [ioredis][31]            | `>=2`     | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    |                                                    |
-| [knex][32]               | `>=0.8`   | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    |                                                    |
-| [mariadb][5]             | `>=3`     | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    |                                                    |
-| [memcached][33]          | `>=2.2`   | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    |                                                    |
-| [mongodb-core][34]       | `>=2`     | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    | <i class="icon-check-bold"></i>                                          |
-| [mysql][35]              | `>=2`     | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    | <i class="icon-check-bold"></i>                                          |
-| [mysql2][36]             | `>=1`     | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    | <i class="icon-check-bold"></i>                                          |
-| [oracledb][37]           | `>=5`     | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    |                                                    |
-| [pg][38]                 | `>=4`     | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    | <i class="icon-check-bold"></i>                                          |
-| [redis][39]              | `>=0.12`  | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    |                                                    |
-| [sharedb][40]            | `>=1`     | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    |                                                    |
-| [tedious][41]            | `>=1`     | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    |                                                    |
-| [sequelize][42]          | `>=4`     | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    | <i class="icon-check-bold"></i>                                          |
+- **Runtime Software Composition Analysis (SCA)**  is supported on all framework
 
 
-### User authentication frameworks compatibility
-
-Integrations to User Authentication Frameworks provide:
-
-- User login events, including the user IDs
-- The Account Takeover detection monitoring the user login events
-
-| Framework       | Minimum Framework Version |
-|-----------------|---------------------------|
-| passport-local  | 1.0.0                     |
-| passport-http   | 0.3.0                     |
+| Framework                | Versions  | Runtime Code Analysis (IAST)           |
+|--------------------------|-----------|--------------------------------------- |
+| [@apollo/server][43]     | `>=4`     |                                        |
+| [apollo-server-core][44] | `>=3`     |                                        |
+| [cassandra-driver][28]   | `>=3`     |                                        |
+| [couchbase][29]          | `^2.4.2`  |                                        |
+| [elasticsearch][30]      | `>=10`    |                                        |
+| [ioredis][31]            | `>=2`     |                                        |
+| [knex][32]               | `>=0.8`   |                                        |
+| [mariadb][5]             | `>=3`     |                                        |
+| [memcached][33]          | `>=2.2`   |                                        |
+| [mongodb-core][34]       | `>=2`     | <i class="icon-check-bold"></i>        |
+| [mysql][35]              | `>=2`     | <i class="icon-check-bold"></i>        |
+| [mysql2][36]             | `>=1`     | <i class="icon-check-bold"></i>        |
+| [oracledb][37]           | `>=5`     |                                        |
+| [pg][38]                 | `>=4`     | <i class="icon-check-bold"></i>        |
+| [redis][39]              | `>=0.12`  |                                        |
+| [sharedb][40]            | `>=1`     |                                        |
+| [tedious][41]            | `>=1`     |                                        |
+| [sequelize][42]          | `>=4`     | <i class="icon-check-bold"></i>        |
 
 [1]: /tracing/trace_collection/compatibility/nodejs/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[2]: /remote_configuration#enabling-remote-configuration
 [4]: https://github.com/nodejs/release#release-schedule
 [5]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
 [28]: https://github.com/datastax/nodejs-driver
@@ -832,7 +729,7 @@ Integrations to User Authentication Frameworks provide:
 [31]: https://github.com/luin/ioredis
 [32]: https://knexjs.org
 [33]: https://github.com/3rd-Eden/memcached
-[34]: http://mongodb.github.io/node-mongodb-native/core
+[34]: https://www.mongodb.com/docs/drivers/node/current/
 [35]: https://github.com/mysqljs/mysql
 [36]: https://github.com/sidorares/node-mysql2
 [37]: https://oracle.github.io/node-oracledb/
@@ -845,34 +742,27 @@ Integrations to User Authentication Frameworks provide:
 [44]: https://www.npmjs.com/package/apollo-server-core
 
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Python" level="h4" %}}
 
-### Application Security capabilities support
+### Code Security capabilities support
 
-The following application security capabilities are supported in the Python library, for the specified tracer version:
+The following code security capabilities are supported in the Python library, for the specified tracer version:
 
-| Application Security capability  | Minimum Python tracer version |
-| -------------------------------- | ----------------------------|
-| Threat Detection | 1.9.0   |
-| Threat Protection | 1.10.0  |
-| Customize response to blocked requests | 1.19.0 |
-| Software Composition Analysis (SCA) | 1.5.0  |
-| Runtime Code Analysis (IAST)         | Preview (2.9.3)  |
-| Automatic user activity event tracking | 1.17.0 |
-| API Security | 2.6.0 |
-
-**Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
+| Code Security capability                    | Minimum Python tracer version |
+| ------------------------------------------- |-------------------------------|
+| Runtime Software Composition Analysis (SCA) | 1.5.0                         |
+| Runtime Code Analysis (IAST)                | Preview (2.21.0)              |
 
 #### Supported deployment types
-| Type        | Threat Detection support | Software Composition Analysis |
-|-------------|--------------------------|-------------------------------|
-| Docker      | <i class="icon-check-bold"></i>                | <i class="icon-check-bold"></i>                     |
-| Kubernetes  | <i class="icon-check-bold"></i>                | <i class="icon-check-bold"></i>                     |
-| Amazon ECS  | <i class="icon-check-bold"></i>                | <i class="icon-check-bold"></i>                     |
-| AWS Fargate | <i class="icon-check-bold"></i>                | <i class="icon-check-bold"></i>                     |
-| AWS Lambda  | <i class="icon-check-bold"></i>                |                               |
+| Type        | Runtime Code Analysis (IAST)      |
+|------------ |---------------------------------- |
+| Docker      | <i class="icon-check-bold"></i>   |
+| Kubernetes  | <i class="icon-check-bold"></i>   |
+| Amazon ECS  | <i class="icon-check-bold"></i>   |
+| AWS Fargate | Preview (2.9.3)                   |
+| AWS Lambda  |                                   |
 
 
 ### Language and framework compatibility
@@ -883,37 +773,38 @@ The Python Application Security Client library follows a [versioning policy][3] 
 
 Two release branches are supported:
 
-| Release    | Support level        |
-|------------|----------------------|
-| `<1`       | Maintenance           |
-| `>=1.0,<2` | General Availability |
+| Release    | Support level                              | Minimum Datadog Agent |
+|------------|--------------------------------------------|-----------------------|
+| `>=3.0,<4` | General Availability   7.28                |
+| `>=2.0,<3` | Maintenance (End of Life October 31, 2025) | 7.28                  |
+|    `<2`    | End of Life                                |                       |
 
 And the library supports the following runtimes:
 
-| OS      | CPU                   | Runtime | Runtime version | Support ddtrace versions |
-|---------|-----------------------|---------|-----------------|--------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                     |
+| OS      | CPU                   | Runtime | Runtime version | Supported ddtrace versions |
+|---------|-----------------------|---------|-----------------|----------------------------|
+| Linux   | x86-64, i686, AArch64 | CPython | 3.8+            | `>=3,<4`                   |
+| MacOS   | Intel, Apple Silicon  | CPython | 3.8+            | `>=3,<4`                   |
+| Windows | 64bit, 32bit          | CPython | 3.8+            | `>=3,<4`                   |
+| Linux   | x86-64, i686, AArch64 | CPython | 3.7-3.13        | `>=2,<3`                   |
+| MacOS   | Intel, Apple Silicon  | CPython | 3.7-3.13        | `>=2,<3`                   |
+| Windows | 64bit, 32bit          | CPython | 3.7-3.13        | `>=2,<3`                   |
+| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                       |
+| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                       |
+| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                       |
 
 
 #### Web framework compatibility
+##### Code Security Capability Notes
 
-- Attacker source HTTP request details
-- Tags for the HTTP request (status code, method, etc)
-- Distributed Tracing to see attack flows through your applications
-
-##### Application Security Capability Notes
-
-- **Software Composition Analysis** is supported on all frameworks
+- **Runtime Software Composition Analysis (SCA)** is supported on all frameworks
 
 #### Supported frameworks
 
-
-| Framework                | Versions    | Threat Detection supported? | Threat Protection supported? |
-| ------------------------ | ----------- | --------------- | ---------------------------------------------- |
-| Django    | 1.8   |  <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i>  |
-| Flask     | 0.10  |  <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i>  |
+| Framework                | Versions    | Runtime Code Analysis (IAST)                |
+| ------------------------ | ----------- | ------------------------------------------- |
+| Django                   | 1.8         |  <i class="icon-check-bold"></i>            |
+| Flask                    | 0.10        |  <i class="icon-check-bold"></i>            |
 
 Support for query strings is not available for Flask.
 
@@ -923,32 +814,19 @@ Support for query strings is not available for Flask.
 
 Datastore tracing provides:
 
-- timing request to response
 - query info (for example, a sanitized query string)
 - error and stacktrace capturing
 
-##### Application Security capability notes
+##### Code Security capability notes
 
-- **Software Composition Analysis** is supported on all frameworks.
-- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
--
+- **Runtime Software Composition Analysis (SCA)** is supported on all frameworks.
+
 The Python library supports the [database API specifications][4] and supports all generic SQL databases. This includes databases such as SQLite, Mysql, Postgres and MariaDB.
 
-#### User Authentication Frameworks compatibility
-
-Integrations to User Authentication Frameworks provide:
-
-- User login events, including the user IDs
-- Account Takeover detection monitoring for user login events
-
-| Framework         | Framework Versions   |
-|-------------------| --------------------------- |
-| Django            | 1.11, 2.2, 3.2, >= 4.0
-
 [1]: /tracing/trace_collection/compatibility/python/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[2]: /remote_configuration#enabling-remote-configuration
 [3]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [4]: https://peps.python.org/pep-0249/
 
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}

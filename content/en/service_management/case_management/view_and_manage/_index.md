@@ -38,7 +38,7 @@ Within a project, you can search for cases by:
 
 To compose a more complex query, you can use the following case sensitive Boolean operators: `AND`, `OR`, and `-` (exclusion). For example, `priority:(P2 OR P3)` returns cases of either priority `P2` or `P3`. 
 
-Additionally, you can search for cases across all projects using the global search bar in the top left corner.
+Additionally, you can search for cases across all projects using the search bar in the top left corner.
 
 ## Create a view
 

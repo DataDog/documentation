@@ -1,10 +1,10 @@
 ---
-title: Cloud Security Management Agent Variables
+title: Cloud Security Agent Variables
 aliases:
   - /security/cloud_security_management/setup/agent_variables
 ---
 
-The Datadog Agent has several environment variables that can be enabled for Cloud Security Management. This article describes the purpose of each environment variable.
+The Datadog Agent has several environment variables that can be enabled for Cloud Security. This article describes the purpose of each environment variable.
 
 <table>
     <tr>

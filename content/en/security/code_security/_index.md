@@ -1,6 +1,10 @@
 ---
 title: Code Security
 disable_toc: false
+further_reading:
+- link: "https://www.datadoghq.com/blog/monitor-mcp-servers/"
+  tag: "Blog"
+  text: "Identify common security risks in MCP servers"
 aliases:
 - /code_analysis/
 ---
@@ -9,7 +13,10 @@ Code Security scans your first-party code and open source libraries used in your
 
 - [Static Code Analysis (SAST)][1] for identifying security and quality issues in your first-party code
 - [Software Composition Analysis (SCA)][2] for identifying open source dependencies in both your repositories and your services
-- [Runtime Code Analysis (IAST)][3] for code-level vulnerabilities in your services
+- [Runtime Code Analysis (IAST)][3] for identifying vulnerabilities in the first-party code within your services
+- [Secret Scanning][8] for identifying and validating leaked secrets (in Preview)
+- [Infrastructure as Code (IaC) Security][10] for identifying security misconfigurations in Terraform files stored in your repositories
+- [Supply Chain Security](#supply-chain-security) for preventing malicious packages from entering your development environment and code repositories 
 
 Code Security helps teams implement DevSecOps throughout the organization:
 - **Developers:** early vulnerability detection, code quality improvements, faster development as developers spend less time debugging and patching.
@@ -43,6 +50,20 @@ Runtime Code Analysis (IAST) identifies code-level vulnerabilities in your runni
 
 You can enable IAST on your services instrumented with Datadog APM. See [IAST setup][3] to get started.
 
+## Secret Scanning
+Secret Scanning identifies and validates leaked secrets in your codebase. [Request access to the Preview][9].
+
+## Supply Chain Security
+Developers are being actively targeted with supply chain attacks. Prevent malicious packages to enter your dev environments with Datadog Supply Chain Security Firewall, which is available in GitHub.
+{{< callout url="https://docs.google.com/forms/d/1Xqh5h1n3-jC7au2t30fdTq732dkTJqt_cb7C7T-AkPc" >}}
+  To enroll as a design partner, click Request Access.
+{{< /callout >}}
+
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /security/code_security/static_analysis/
 [2]: /security/code_security/software_composition_analysis/
 [3]: /security/code_security/iast/
@@ -50,6 +71,6 @@ You can enable IAST on your services instrumented with Datadog APM. See [IAST se
 [5]: /security/code_security/software_composition_analysis/setup_runtime/
 [6]: /security/code_security/static_analysis/setup/
 [7]: /security/code_security/iast/setup/
-
-
-
+[8]: /security/code_security/secret_scanning/
+[9]: https://www.datadoghq.com/product-preview/secret-scanning/
+[10]: /security/code_security/iac_security

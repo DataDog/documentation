@@ -1,29 +1,60 @@
 ---
-aliases:
-- /ja/integrations/azure_containerservice
+app_id: azure-containerservice
+app_uuid: 6146f70c-cb70-419e-afbc-318b79b70864
+assets:
+  dashboards:
+    azure_container_service: assets/dashboards/azure_container_service.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.containerservice_managedclusters.kube_pod_status_ready
+      metadata_path: metadata.csv
+      prefix: azure.containerservice_managedclusters
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 284
+    source_type_name: Azure Container Service
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-- cloud
-- コンテナ
+- クラウド
+- incident-teams
 - azure
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
-description: Azure Kubernetes Services のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_container_service/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_container_service
-has_logo: true
 integration_id: azure-containerservice
-integration_title: Microsoft Azure Kubernetes Service
+integration_title: Azure Container Service
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_container_service
-public_title: Datadog-Microsoft Azure Kubernetes Service インテグレーション
-short_description: Azure Kubernetes Services のキーメトリクスを追跡
-version: '1.0'
+public_title: Azure Container Service
+short_description: Azure Container Services のキーメトリクスを追跡
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Containers
+  - Category::Azure
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Azure Container Services のキーメトリクスを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Container Service
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Azure Kubernetes Service を使用すると、実稼働準備が整った Kubernetes クラスターを迅速にデプロイできます。
@@ -39,7 +70,7 @@ Datadog Azure インテグレーションを使用して Azure Kubernetes Servic
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_container_service" >}}
+{{ get-metrics-from-git "azure-containerservice" }}
 
 
 ### イベント

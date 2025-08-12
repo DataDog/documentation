@@ -15,34 +15,9 @@ further_reading:
 
 ## Overview
 
-Use Observability Pipelines' sources to receive logs from your different log sources.
+Use Observability Pipelines' sources to receive logs from your different log sources. Sources have different prerequisites and settings. Some sources also need to be configured to send logs to the Observability Pipelines Worker.
 
-Select and set up your source when you build a pipeline in the UI. This is step 3 in the pipeline setup process:
-
-1. Navigate to [Observability Pipelines][1].
-1. Select a template.
-1. Select and set up your source.
-1. Select and set up your destinations.
-1. Set up your processors.
-1. Install the Observability Pipelines Worker.
-
-Sources have different prerequisites and settings. Some sources also need to be configured to send logs to the Observability Pipelines Worker.
-
-{{< whatsnext desc="Select a source for more information:" >}}
-    <!-- {{< nextlink href="observability_pipelines/sources/amazon_data_firehose/" >}}Amazon Data Firehose{{< /nextlink >}} -->
-    {{< nextlink href="observability_pipelines/sources/amazon_s3/" >}}Amazon S3{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/datadog_agent/" >}}Datadog Agent{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/fluent/" >}}Fluentd and Fluent Bit{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/google_pubsub/" >}}Google Pub/Sub{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/http_client/" >}}HTTP/S Client{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/http_server/" >}}HTTP/S Server{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/kafka/" >}}Kafka{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/logstash/" >}}Logstash (includes Filebeat){{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/splunk_hec/" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/splunk_tcp/" >}}Splunk Heavy or Universal Forwarders (TCP){{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/sumo_logic/" >}}Sumo Logic{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/syslog/" >}}rsyslog or syslog-ng (includes Fortinet and Palo Alto Networks){{< /nextlink >}}
-{{< /whatsnext >}}
+Select a source in the left navigation menu to see more information about it.
 
 ## Standard metadata fields
 

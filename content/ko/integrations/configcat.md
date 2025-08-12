@@ -24,6 +24,7 @@ categories:
 - 설정 및 배포
 - 알림
 - 프로비저닝
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/configcat/README.md
 display_on_public_website: true
@@ -33,24 +34,24 @@ integration_id: configcat
 integration_title: ConfigCat
 integration_version: ''
 is_public: true
-custom_kind: 통합
 manifest_version: 2.0.0
 name: configcat
 public_title: ConfigCat
 short_description: Datadog이 추적하는 변경 이벤트 설정하기
 supported_os:
 - linux
-- windows
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - 카테고리::설정 및 배포
-  - 카테고리::알림
-  - 카테고리::프로비저닝
-  - 지원 OS::Linux
-  - 지원 OS::Windows
-  - 지원 OS::macOS
+  - Category::Configuration & Deployment
+  - Category::Notifications
+  - Category::Provisioning
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog이 추적하는 변경 이벤트 설정하기
   media: []

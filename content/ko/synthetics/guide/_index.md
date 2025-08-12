@@ -11,9 +11,10 @@ private: true
 title: Synthetic Monitoring 가이드
 ---
 
-{{< whatsnext desc="일반 지침:" >}}
-    {{< nextlink href="synthetics/guide/identify_synthetics_bots/" >}}신서틱 봇 식별{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/clone-test" >}}신서틱 테스트 복제{{< /nextlink >}}
+{{< whatsnext desc="일반 가이드" >}}
+    {{< nextlink href="synthetics/guide/identify_synthetics_bots/" >}}Synthetic 봇 식별{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/clone-test" >}}Synthetic 테스트 복제 {{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/otp-email-synthetics-test" >}}Synthetic Browser Tests를 사용하여 이메일 본문에서 일회용 비밀번호 추출{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="알림:" >}}

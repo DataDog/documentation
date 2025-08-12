@@ -12,10 +12,6 @@ further_reading:
 title: Buscar y gestionar pipelines CI
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Resumen
 
 La página [Pipelines][1] es útil para los desarrolladores que quieren mantener un ojo en el proceso de construcción de su servicio.
@@ -89,7 +85,7 @@ La recopilación de trabajos loguear es compatible con los siguientes proveedore
 - [GitLab][4]
 - Jenkins][5]
 
-#### Resúmenes generados por IA loguear 
+#### Resúmenes generados por IA loguear
 
 <div class="alert alert-info">Los resúmenes generados por la IA loguear están en vista previa. Para solicitar acceso, rellene <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform">este formulario</a>.</div>
 
@@ -103,9 +99,9 @@ Pipeline Visibility proporciona explicaciones generadas por IA para los errores 
 [3]: /es/continuous_integration/pipelines/github/#enable-log-collection
 [4]: /es/continuous_integration/pipelines/gitlab/#enable-job-log-collection
 [5]: /es/continuous_integration/pipelines/jenkins#enable-job-log-collection
-[6]: /es/account_management/teams/ 
+[6]: /es/account_management/teams/
 [7]: /es/continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
-[8]: /es/continuous_integration/pipelines/awscodepipeline/#enable-log-correlation
+[8]: /es/continuous_integration/pipelines/awscodepipeline/#collect-job-logs
 [9]: /es/continuous_integration/pipelines/azure/#enable-job-log-collection
 [10]: /es/continuous_integration/pipelines/circleci/#enable-log-collection
 [11]: /es/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path

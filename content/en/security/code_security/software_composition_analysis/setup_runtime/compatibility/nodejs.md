@@ -5,25 +5,16 @@ type: multi-code-lang
 code_lang_weight: 50
 ---
 
-## Application Security capabilities
+## Code Security capabilities
 
-The following application security capabilities are supported in the Node.js library, for the specified tracer version:
+The following code security capabilities are supported in the Node.js library, for the specified tracer version:
 
-| Application Security capability        | Minimum Node.js tracer version                     |
-|----------------------------------------|----------------------------------------------------|
-| Threat Detection                       | 4.0.0                                              |
-| Threat Protection                      | 4.0.0                                              |
-| Customize response to blocked requests | 4.1.0                                              |
-| Software Composition Analysis (SCA)    | 4.0.0                                              |
-| Code Security                          | 4.18.0 for Node.js 16+, or 5.0.0 for Node.js 18+   |
-| Automatic user activity event tracking | 4.4.0 for Node.js 16+                              |
-| API Security                           | 4.30.0 for Node.js 16+, or 5.6.0 for Node.js 18+   |
+| Code Security capability                       | Minimum Node.js tracer version                     |
+|------------------------------------------------|----------------------------------------------------|
+| Runtime Software Composition Analysis (SCA)    | 4.0.0                                              |
+| Runtime Code Analysis (IAST)                   | 4.18.0 for Node.js 16+, or 5.0.0 for Node.js 18+   |
 
-The minimum tracer version to get all supported application security capabilities for Node.js is 4.30.0.
-
-
-**Note**:
-- Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
+The minimum tracer version to get all supported application security capabilities is 4.18.0 for Node.js 16+ and 5.0.0 for Node.js 18+.
 
 ### Supported deployment types
 | Type        | Threat Detection support | Software Composition Analysis |
@@ -33,6 +24,14 @@ The minimum tracer version to get all supported application security capabilitie
 | Amazon ECS  | {{< X >}}                | {{< X >}}                     |
 | AWS Fargate | {{< X >}}                | {{< X >}}                     |
 | AWS Lambda  | {{< X >}}                | {{< X >}}                     |
+
+| Type              | Runtime Software Composition Analysis (SCA) | Runtime Code Analysis (IAST)                                |
+|------------------ | ------------------------------------------- | ----------------------------------------------------------- |
+| Docker            | {{< X >}}                                   | {{< X >}}                                                   |
+| Kubernetes        | {{< X >}}                                   | {{< X >}}                                                   |
+| Amazon ECS        | {{< X >}}                                   | {{< X >}}                                                   |
+| AWS Fargate       | {{< X >}}                                   | Preview (4.18.0 for Node.js 16+, or 5.0.0 for Node.js 18+)  |
+| AWS Lambda        |                                             |                                                             |
 
 ## Language and framework compatibility
 
@@ -68,23 +67,18 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 
 ### Web framework compatibility
 
-- Attacker source HTTP request details
 - Tags for the HTTP request (status code, method, etc)
 - Distributed Tracing to see attack flows through your applications
 
-##### Application Security Capability Notes
-- **Software Composition Analysis** is supported on all frameworks
-- If your framework is not listed below, **Code Security** will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
+##### Code Security Capability Notes
+- **Runtime Software Composition Analysis (SCA)** is supported on all frameworks
+- If your framework is not listed below, **Runtime Code Analysis (IAST)** will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
 
-| Framework | Versions | Threat Detection supported? | Threat Protection supported? | Code Security? |
-|-----------|----------|-----------------------------|------------------------------|----------------------------------------------------|
-| express   | >=4      | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
-| nextjs    | >=11.1   | {{< X >}}                   |                              |                                                    |
-
-
-
-
+| Framework | Versions | Runtime Code Analysis (IAST) |
+|-----------|----------|------------------------------|
+| express   | >=4      | {{< X >}}                    |
+| nextjs    | >=11.1   |                              |
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities or for your Node.js framework, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
@@ -97,69 +91,50 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 - Distributed tracing through your applications
 - Request-based blocking
 
-##### Application Security Capability Notes
-- **Software Composition Analysis**  is supported on all frameworks
+##### Code Security Capability Notes
+- **Runtime Software Composition Analysis (SCA)** is supported on all frameworks
 
-
-
-| Framework | Threat Detection supported? | Threat Protection supported? | Code Security? |
-|-----------|-----------------------------|------------------------------|----------------------------------------------------|
-| http      | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
-| https     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
-
+| Framework | Runtime Code Analysis (IAST) | 
+|-----------|------------------------------|
+| http      | {{< X >}}                    |
+| https     | {{< X >}}                    |
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 ### Data store compatibility
 
-
 **Datastore tracing provides:**
 
-- Timing request to response
 - Query info (for example, a sanitized query string)
 - Error and stacktrace capturing
 
-##### Application Security Capability Notes
-- **Software Composition Analysis**  is supported on all frameworks
-- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
+##### Code Security Capability Notes
+- **Runtime Software Composition Analysis (SCA)** is supported on all frameworks
 
+| Framework                | Versions  | Runtime Code Analysis (IAST) |
+|--------------------------|-----------|------------------------------|
+| [@apollo/server][43]     | `>=4`     |                              |
+| [apollo-server-core][44] | `>=3`     |                              |
+| [cassandra-driver][28]   | `>=3`     |                              |
+| [couchbase][29]          | `^2.4.2`  |                              |
+| [elasticsearch][30]      | `>=10`    |                              |
+| [ioredis][31]            | `>=2`     |                              |
+| [knex][32]               | `>=0.8`   |                              |
+| [mariadb][5]             | `>=3`     |                              |
+| [memcached][33]          | `>=2.2`   |                              |
+| [mongodb-core][34]       | `>=2`     | {{< X >}}                    |
+| [mysql][35]              | `>=2`     | {{< X >}}                    |
+| [mysql2][36]             | `>=1`     | {{< X >}}                    |
+| [oracledb][37]           | `>=5`     |                              |
+| [pg][38]                 | `>=4`     | {{< X >}}                    |
+| [redis][39]              | `>=0.12`  |                              |
+| [sharedb][40]            | `>=1`     |                              |
+| [tedious][41]            | `>=1`     |                              |
+| [sequelize][42]          | `>=4`     | {{< X >}}                    |
 
-| Framework                | Versions  | Threat Detection supported? | Threat Protection supported? | Code Security? |
-|--------------------------|-----------|-----------------------------|------------------------------|----------------------------------------------------|
-| [@apollo/server][43]     | `>=4`     | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [apollo-server-core][44] | `>=3`     | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [cassandra-driver][28]   | `>=3`     | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [couchbase][29]          | `^2.4.2`  | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [elasticsearch][30]      | `>=10`    | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [ioredis][31]            | `>=2`     | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [knex][32]               | `>=0.8`   | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [mariadb][5]             | `>=3`     | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [memcached][33]          | `>=2.2`   | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [mongodb-core][34]       | `>=2`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
-| [mysql][35]              | `>=2`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
-| [mysql2][36]             | `>=1`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
-| [oracledb][37]           | `>=5`     | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [pg][38]                 | `>=4`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
-| [redis][39]              | `>=0.12`  | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [sharedb][40]            | `>=1`     | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [tedious][41]            | `>=1`     | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [sequelize][42]          | `>=4`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
-
-
-### User Authentication Frameworks compatibility
-
-**Integrations to User Authentication Frameworks provide:**
-
-- User login events, including the user IDs
-- The Account Takeover detection monitoring the user login events
-
-| Framework       | Minimum Framework Version |
-|-----------------|---------------------------|
-| passport-local  | 1.0.0                     |
-| passport-http   | 0.3.0                     |
 
 [1]: /tracing/trace_collection/compatibility/nodejs/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[2]: /remote_configuration#enabling-remote-configuration
 [4]: https://github.com/nodejs/release#release-schedule
 [5]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
 [28]: https://github.com/datastax/nodejs-driver
@@ -168,7 +143,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 [31]: https://github.com/luin/ioredis
 [32]: https://knexjs.org
 [33]: https://github.com/3rd-Eden/memcached
-[34]: http://mongodb.github.io/node-mongodb-native/core
+[34]: https://www.mongodb.com/docs/drivers/node/current/
 [35]: https://github.com/mysqljs/mysql
 [36]: https://github.com/sidorares/node-mysql2
 [37]: https://oracle.github.io/node-oracledb/

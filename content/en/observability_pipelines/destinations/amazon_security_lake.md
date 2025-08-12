@@ -23,17 +23,15 @@ Set up the Amazon Security Lake destination and its environment variables when y
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_security_lake %}}
 
-## AWS Authentication
+## How the destination works
 
-{{% observability_pipelines/aws_authentication/amazon_security_lake/intro %}}
+### AWS Authentication
 
 {{% observability_pipelines/aws_authentication/instructions %}}
 
-### Permissions
+#### Permissions
 
 {{% observability_pipelines/aws_authentication/amazon_security_lake/permissions %}}
-
-## How the destination works
 
 ### Event batching
 
@@ -41,7 +39,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
-| TKTK           | TKTK      | TKTK                   |
+| None           | 256,000,000     | 300                 |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching

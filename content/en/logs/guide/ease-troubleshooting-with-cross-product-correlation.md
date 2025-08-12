@@ -8,7 +8,7 @@ further_reading:
 - link: '/tracing/other_telemetry/connect_logs_and_traces'
   tag: 'Documentation'
   text: 'Connect Logs and Traces'
-- link: '/real_user_monitoring/platform/connect_rum_and_traces/'
+- link: '/real_user_monitoring/correlate_with_other_telemetry/apm/'
   tag: 'Documentation'
   text: 'Connect RUM & Session Replay and Traces'
 - link: '/synthetics/apm/'
@@ -239,7 +239,7 @@ For more information, see [Connect Synthetic Tests and Traces][19].
 [13]: /real_user_monitoring/browser/setup/#initialization-parameters
 [14]: https://app.datadoghq.com/apm/traces
 [15]: https://app.datadoghq.com/rum/explorer
-[16]: /real_user_monitoring/platform/connect_rum_and_traces
+[16]: /real_user_monitoring/correlate_with_other_telemetry/apm
 [17]: /synthetics/browser_tests/
 [18]: https://app.datadoghq.com/synthetics/tests
 [19]: /synthetics/apm

@@ -18,11 +18,11 @@ type: documentation
 
 ## インテグレーションタイル
 
-The tile serves as a point of entry where customers can learn about your offering, see setup instructions, and install or purchase your offering to unlock out-of-the-box dashboards and additional assets.
+このタイルは、顧客があなたの製品について学び、設定方法を確認し、すぐに使えるダッシュボードや追加アセットを利用可能にするために製品をインストールまたは購入するための入口として機能します。
 
 {{< img src="developers/integrations/marketplace_or_integrations_tile.png" alt="Integrations や Marketplace ページで、サンプル製品の拡張タイルモーダル" style="width:100%" >}}
 
-* For any offerings that **do not use** the Datadog Agent—including API-based integrations, professional services listings, and software licenses—you only need to create a tile and submit the tile-related files in order to publish your offering. This is called a _tile-only-listing_. Tile-ony listings apply in situations where Datadog does not host any of the code associated with the API-based integrations, and the other supported offering types do not require any code.
+* API ベースのインテグレーション、プロフェッショナルサービスのリスト、ソフトウェアライセンスなど、Datadog Agent を**使用しない**製品については、タイルを作成してタイル関連ファイルを送信するだけで、製品を公開することができます。これは_タイルのみのリスト_と呼ばれます。タイルのみのリストは、API ベースのインテグレーションに関連するコードを Datadog がホストしていない場合や、その他のサポートされている製品タイプでコードが必要ない場合に適用されます。
 
 * **Agent ベースのインテグレーション**の場合、タイルを作成し、さらに、インテグレーションに関連するすべてのコード (およびタイル関連ファイル) を 1 つのプルリクエストで送信する必要があります。詳しくは、[Agent ベースのインテグレーションを作成する][27]をご覧ください。
 
@@ -36,7 +36,7 @@ The tile serves as a point of entry where customers can learn about your offerin
 
 [**Integrations** ページ][103]にタイルを構築するには
 
-<div class="alert alert-warning">If you have already gone through the steps to create an Agent integration and have built out the scaffolding, you can skip directly to <a href="#complete-the-necessary-integration-asset-files">completing the necessary integration asset files</a>.
+<div class="alert alert-warning">すでに Agent インテグレーションを作成するステップを経てスキャフォールディングを構築済みである場合、<a href="#complete-the-necessary-integration-asset-files">必要なインテグレーションアセットファイルを完成させる</a>に直接スキップすることができます。
 </div>
 
 1. `dd` ディレクトリを作成します。
@@ -100,9 +100,9 @@ ddev config set repo extras
 
 {{< img src="developers/integrations/marketplace_tile.png" alt="Marketplace ページに表示される製品の例を表すタイル" style="width:25%" >}}
 
-To build a tile on the [**Marketplace** page][104]:
+[**Marketplace** ページ][104]にタイルを構築するには
 
-<div class="alert alert-warning">If you have already gone through the steps to create an Agent integration and have built out the scaffolding, you can skip directly to <a href="#complete-the-necessary-integration-asset-files">completing the necessary integration asset files</a>.
+<div class="alert alert-warning">すでに Agent インテグレーションを作成するステップを経てスキャフォールディングを構築済みである場合、<a href="#complete-the-necessary-integration-asset-files">必要なインテグレーションアセットファイルを完成させる</a>に直接スキップすることができます。
 </div>
 
 1. [Marketplace リポジトリ][101]へのアクセスリクエストは、[Marketplace 製品の構築][102]を参照してください。
@@ -191,9 +191,9 @@ Datadog Development Toolkit を使用して、タイルのみの出品でスキ�
 | 収集データ  | メトリクス、イベント、サービスチェック、ログなど、インテグレーションによって収集されるデータのデータタイプを指定します (該当する場合)。`metadata.csv` ファイルに追加されたメトリクスは、自動的にこのタブに表示されます。 <br><br> 製品がこのようなデータを提供しない場合は、Data Collected セクションを追加する必要はありません。 |
 | サポート | サポートチームへのメール、自社のドキュメントやブログ記事へのリンク、その他のヘルプ情報などを含む連絡先情報を箇条書きで掲載します。 |
 
-When adding links to the `README.md` file, format them using [reference-style links][30]. For example, instead of embedding the URL directly in the text, write `see the [official Datadog documentation][1]` and define the link reference at the bottom of the file like `[1]: https://docs.datadoghq.com/`.
+`README.md` ファイルにリンクを追加する際は、[リファレンススタイルリンク][30]を使用して形式を整えてください。たとえば、テキストに直接 URL を埋め込むのではなく、`see the [official Datadog documentation][1]` のように記述し、ファイルの末尾に `[1]: https://docs.datadoghq.com/` のようにリンク参照を定義します。
 
-For additional grammar and style advice, see also the [Datadog documentation contributors guidelines][31].
+文法やスタイルに関する追加のアドバイスについては、[Datadog ドキュメント寄稿者ガイドライン][31]も参照してください。
 ### メディアカルーセル
 
 各タイルには、イメージとビデオのメディアカルーセルが表示され、ユーザーは視覚的な説明によって、製品の機能や価値をよりよく理解することができます。タイルにビデオを追加するには、ビデオのコピーまたはダウンロードリンクを <a href="mailto:marketplace@datadoghq.com">marketplace@datadoghq.com</a> に送信してください。Marketplace チームがビデオをアップロードし、`manifest.json` ファイルに追加すべき `vimeo_link` を提供します。
@@ -258,8 +258,8 @@ ddev validate all <INTEGRATION_NAME>
 以下のステップを完了します。
 
 1. すべての変更をフィーチャーブランチにコミットします。
-2. Push your changes to the remote repository.
-3. Open a pull request that contains your integration tile's asset files (including images) in the [`marketplace`][18] or [`integrations-extras`][26] repository.
+2. 変更内容をリモートリポジトリにプッシュします。
+3. [`marketplace`][18] または [`integrations-extras`][26] リポジトリで、インテグレーションタイルのアセットファイル (イメージを含む) を含むプルリクエストを開きます。
 
 プルリクエストを作成すると、自動チェックが実行され、プルリクエストが正常な状態であること、更新に必要なコンテンツがすべて含まれていることが確認されます。
 
@@ -271,9 +271,9 @@ ddev validate all <INTEGRATION_NAME>
 
 ## エラーの解決
 
-Out-of-the-box integrations in the `integrations-extras` repository can run into validation errors when the forked repository is out of date with the origin.
+`integrations-extras` リポジトリにあるすぐに使えるインテグレーションは、フォークされたリポジトリがオリジンの最新状態と同期されていない場合、検証エラーになることがあります。
 
-To resolve validation errors, update the forked repository on the GitHub web app:
+検証エラーを解決するには、GitHub Web アプリでフォークされたリポジトリを更新します。
 
 1. [GitHub][29] で、フォークした `integrations-extras` リポジトリに移動します。
 1. **Sync fork** をクリックし、**Update branch** をクリックします。

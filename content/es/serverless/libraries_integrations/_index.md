@@ -1,8 +1,8 @@
 ---
 aliases:
-- /serverless/serverless_integrations
-- /serverless/datadog_lambda_library/
-- /serverless/libraries_integrations/library/
+- /es/serverless/serverless_integrations
+- /es/serverless/datadog_lambda_library/
+- /es/serverless/libraries_integrations/library/
 title: Bibliotecas e integraciones serverless
 ---
 

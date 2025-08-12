@@ -17,7 +17,7 @@ algolia:
 
 ## Overview
 
-Static Code Analysis is Datadog's Static Application Security Testing (SAST) capability. SAST is a clear-box software testing technique that analyzes a program's pre-production code without the need to execute the program. 
+Static Code Analysis is Datadog's Static Application Security Testing (SAST) capability. SAST is a clear-box software testing technique that analyzes a program's pre-production code without the need to execute the program.
 
 Static Code Analysis helps you identify security vulnerabilities and maintainability issues early in the software development life cycle (SDLC) to ensure only the highest quality, most secure code makes it to production. It provides organizations with the following benefits:
 
@@ -50,7 +50,7 @@ To get started, go to the [**Code Security** setup page][12] or see the [Setup d
 {{< /whatsnext >}}
 
 ## Search and filter results
-After setting up Static Code Analysis, a scan is ran upon each commit to a scanned repository. Violations are summarized per repository on the [**Code Security Repositories** page][1]. Click on a repository to analyze **Code Vulnerabilities** and **Code Quality** results from Static Code Analysis. 
+After setting up Static Code Analysis, a scan is run on each commit to a scanned repository. Violations are summarized per repository on the [**Code Security Repositories** page][1]. Click on a repository to analyze **Code Vulnerabilities** and **Code Quality** results from Static Code Analysis.
 
 * The **Code Vulnerabilities** tab contains the violations found by Datadog's rules in the [Security category][2].
 * The **Code Quality** tab contains the violations found by Datadog's rules in the [Best Practices, Code Style, Error Prone, or Performance categories][3].
@@ -74,6 +74,35 @@ To customize which Static Code Analysis rules are configured in your repositorie
 
 ## Link results to Datadog services and teams
 
+### Link results to services
+Datadog associates code and library scan results with relevant services by using the following mechanisms:
+
+1. [Identifying the code location associated with a service using the Software Catalog.](#identifying-the-code-location-in-the-software-catalog)
+2. [Detecting usage patterns of files within additional Datadog products.](#detecting-file-usage-patterns)
+3. [Searching for the service name in the file path or repository.](#detecting-service-name-in-paths-and-repository-names)
+
+If one method succeeds, no further mapping attempts are made. Each mapping method is detailed below.
+
+#### Identifying the code location in the Software Catalog
+
+The [schema version `v3`][12] and later of the Software Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
+
+The `paths` attribute is a list of globs that should match paths in the repository.
+
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: service
+metadata:
+name: my-service
+datadog:
+codeLocations:
+- repositoryURL: https://github.com/myorganization/myrepo.git
+paths:
+- path/to/service/code/**
+{{< /code-block >}}
+
+
+## Remediation
 
 ### Apply suggested fixes
 <!-- {{< img src="code_security/static_analysis/static-analysis-fixes.png" alt="Fixes tab of a static analysis violation" style="width:80%;">}} -->
@@ -94,18 +123,18 @@ In Datadog Static Code Analysis, there are two types of suggested fixes:
 You can push a code change to fix an issue found by Static Code Analysis directly from a result in Datadog in two ways.
 
 #### Open a pull request
- 
-If your GitHub app's **Pull Requests** permission is set to **Read & Write**, one-click remediation is enabled for all Static Code Analysis findings with an available suggested fix. For more information about setting up the GitHub integration, see [GitHub Pull Requests][10]. 
+
+If your GitHub app's **Pull Requests** permission is set to **Read & Write**, one-click remediation is enabled for all Static Code Analysis findings with an available suggested fix. For more information about setting up the GitHub integration, see [GitHub Pull Requests][10].
 
 Follow these steps to fix a vulnerability and open a pull request:
 1. View a specific SAST result in Code Security.
-2. Click **Fix Violation** in the side panel of the result. 
+2. Click **Fix Violation** in the side panel of the result.
 3. Select **Open a Pull Request**.
 4. Enter a pull request title and commit message.
 5. Click **Create PR**.
 
 #### Commit directly to the current branch
-You can also fix a vulnerability by committing directly to the branch the result was found on. 
+You can also fix a vulnerability by committing directly to the branch the result was found on.
 
 To commit a suggested fix:
 

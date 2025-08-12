@@ -1,5 +1,5 @@
 ---
-title: Cloudcraft
+title: Cloudcraft (Standalone)
 further_reading:
     - link: 'https://www.datadoghq.com/blog/cloud-architecture-diagrams-cost-compliance-cloudcraft-datadog/'
       tag: 'blog'
@@ -11,6 +11,8 @@ further_reading:
 
 ## Overview
 [Cloudcraft is a diagramming tool for professionals][1] that manage cloud-based infrastructure systems. Catering to Azure and AWS users, Cloudcraft provides aesthetic, real-time 3D visualizations of your cloud environments.
+
+<div class="alert alert-info">This documentation applies to the Standalone Cloudcraft product. For information on the Cloudcraft integration within Datadog, please refer to the <a href="/datadog_cloudcraft"> Cloudcraft in Datadog</a> documentation.</div>
 
 {{<img src="cloudcraft/cloudcraft-ui-overview.png" alt="An overview of the Cloudcraft UI" style="width:80%;">}}
 

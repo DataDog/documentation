@@ -36,6 +36,13 @@ Ensure that the [recommended Agent version][2] for your hosting type is installe
 ### "Table or view does not exist" error in `agent.log`
 Execute the permission grants listed in the **Grant permissions** step of the [setup instructions][3] for your hosting type.
 
+### No Oracle DB hostname reported
+
+The Datadog Agent detects Oracle DB hostname by running SQL command against [V$INSTANCE][4].
+When an Oracle DB returns `null` for the `HOST_NAME` column, the Datadog Agent reports the Oracle DB hostname as empty. This behavior has been confirmed with Oracle Autonomous Database.
+In this case, Datadog recommends setting the `reported_hostname` in the `conf.yaml` file.
+
 [1]: /database_monitoring/setup_oracle/
 [2]: /database_monitoring/setup_oracle#recommended-agent-version
 [3]: /database_monitoring/setup_oracle#setup
+[4]: https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/V-INSTANCE.html

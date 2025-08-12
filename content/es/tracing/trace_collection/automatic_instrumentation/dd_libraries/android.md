@@ -16,7 +16,7 @@ further_reading:
 title: Rastreo de aplicaciones Android
 type: lenguaje de código múltiple
 ---
-Envía [trazas][1] a Datadog desde tus aplicaciones Android con [la biblioteca de rastreo del cliente `dd-sdk-android-logs` de Datadog][2] y aprovecha las siguientes características:
+Envía [trazas][1] a Datadog desde tus aplicaciones Android con [la biblioteca de rastreo del cliente `dd-sdk-android-trace` de Datadog][2] y aprovecha las siguientes características:
 
 * Crea [tramos (spans)][3] personalizados para las operaciones de tu aplicación.
 * Añade `context` y atributos personalizados adicionales a cada tramo enviado.
@@ -307,12 +307,16 @@ Cuando escribas tu aplicación, puedes activar logs de desarrollo llamando al m�
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
+import io.opentracing.util.GlobalTracer
+
 val tracer = AndroidTracer.Builder().build()
 GlobalTracer.registerIfAbsent(tracer)
 ```
 {{% /tab %}} 
 {{% tab "Java" %}}
 ```java
+import io.opentracing.util.GlobalTracer;
+
 AndroidTracer tracer = new AndroidTracer.Builder().build();
 GlobalTracer.registerIfAbsent(tracer);
 ```
@@ -684,19 +688,24 @@ Si quieres rastrear tus solicitudes OkHttp, puedes añadir el [interceptor][6] p
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
+val tracedHosts = listOf("example.com", "example.eu")
 val okHttpClient = OkHttpClient.Builder() 
         .addInterceptor(
-            DatadogInterceptor(listOf("example.com", "example.eu"), traceSampler = RateBasedSampler(20f))
+            DatadogInterceptor.Builder(tracedHosts)
+                .setTraceSampler(RateBasedSampler(20f))
+                .build()
         )
         .build()
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-final List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
-final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
+OkHttpClient okHttpClient = new OkHttpClient.Builder()
         .addInterceptor(
-                new DatadogInterceptor(/** SDK instance name or null **/, tracedHosts, null, null, new RateBasedSampler(20f))
+            new DatadogInterceptor.Builder(tracedHosts)
+                    .setTraceSampler(new RateBasedSampler(20f))
+                    .build()
         )
         .build();
 ```
@@ -714,20 +723,32 @@ El interceptor rastrea solicitudes a nivel de la aplicación. Para obtener más 
 ```kotlin
 val tracedHosts = listOf("example.com", "example.eu") 
 val okHttpClient =  OkHttpClient.Builder()
-        .addInterceptor(DatadogInterceptor(tracedHosts, traceSampler = RateBasedSampler(20f)))
-        .addNetworkInterceptor(TracingInterceptor(tracedHosts, traceSampler = RateBasedSampler(20f)))
+        .addInterceptor(
+            DatadogInterceptor.Builder(tracedHosts)
+                .setTraceSampler(RateBasedSampler(20f))
+                .build()
+        )
+        .addNetworkInterceptor(
+            TracingInterceptor.Builder(tracedHosts)
+                .setTraceSampler(RateBasedSampler(100f))
+                .build()
+        )
         .build()
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-final List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
-final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
+OkHttpClient okHttpClient = new OkHttpClient.Builder()
         .addInterceptor(
-                new DatadogInterceptor(/** SDK instance name or null **/, tracedHosts, null, null, new RateBasedSampler(20f))
+            new DatadogInterceptor.Builder(tracedHosts)
+                    .setTraceSampler(new RateBasedSampler(20f))
+                    .build()
         )
         .addNetworkInterceptor(
-                new TracingInterceptor(/** SDK instance name or null **/, tracedHosts, null, new RateBasedSampler(20f))
+            new TracingInterceptor.Builder(tracedHosts)
+                    .setTraceSampler(new RateBasedSampler(20f))
+                    .build()
         )
         .build();
 ```

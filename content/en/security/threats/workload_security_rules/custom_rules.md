@@ -1,21 +1,21 @@
 ---
 title: Create Policies and Custom Rules
 further_reading:
-- link: "/security/threats/setup"
+- link: "/security/workload_protection/"
   tag: "Documentation"
-  text: "Setting Up CSM Threats"
-- link: "/security/threats/agent_expressions"
+  text: "Setting Up Workload Protection"
+- link: "/security/workload_protection/agent_expressions"
   tag: "Documentation"
   text: "Agent Expressions"
 - link: "security/threats/backend"
   tag: "Documentation"
-  text: "CSM Threats Events"
+  text: "Workload Protection Events"
 - link: "/security/notifications/variables/"
   tag: "Documentation"
   text: "Learn more about Security notification variables"
 ---
 
-This topic explains how to create custom Datadog Agent policies and detection rules for [CSM Threats][8].
+This topic explains how to create custom Datadog Agent policies and detection rules for [Workload Protection][8].
 
 In addition to the out of the box (OOTB) [default Agent and detection rules][7], you can write custom Agent and detection rules. Custom rules help to detect events Datadog is not detecting with its OOTB rules.
 
@@ -33,7 +33,7 @@ Here are some important [role and permissions][11] to use for custom rules RBAC:
 
 ## Policies
 
-Rules are managed and applied using policies. To view policies, go to [Security > Cloud Security Management > Agent Configuration][3].
+Rules are managed and applied using policies. To view policies, go to [Security > Cloud Security > Agent Configuration][3].
 
 You can create and deploy different custom policies containing rules you want to apply to different sets of hosts in your infrastructure.
 
@@ -48,7 +48,7 @@ The default policy and its rules cannot be modified. You can use the policy prio
 
 ### Create a policy
 
-1. Go to [Security > Cloud Security Management > Agent Configuration][3].
+1. Go to [Security > Cloud Security > Agent Configuration][3].
 2. Click **New Policy**. You can also open an existing policy, click **Actions**, and clone it.
 3. Enter a name for the policy and click **Create**.
    The new policy is created and placed as the top priority, but it is not enabled or deployed.
@@ -60,7 +60,7 @@ The default policy and its rules cannot be modified. You can use the policy prio
 
 ### Prioritize policies
 
-1. Go to [Security > Cloud Security Management > Agent Configuration][3].
+1. Go to [Security > Cloud Security > Agent Configuration][3].
 2. Click **Determine Priority**.
 3. Drag the policies to set their priority.
 4. Click **Confirm Reordering**.
@@ -75,7 +75,7 @@ When a policy is overridden, the **Overridden** status is displayed. Hover over 
 
 Tags identify two things: the Agents using the policy and the infrastructure where those Agents apply the policy. For example, if a policy has the tag `cluster_name:mycluster` the Agents in that cluster use the policy on the hosts in that cluster.
 
-1. Go to [Security > Cloud Security Management > Agent Configuration][3].
+1. Go to [Security > Cloud Security > Agent Configuration][3].
 2. Hover over a policy, or open a policy, and click **Apply Tags & Deploy Policy**.
 3.  Enter tags and click **Apply**. If the policy is enabled, the policy is applied to the tag targets.
 
@@ -92,7 +92,7 @@ There are two use cases:
 - **Create a detection rule using an existing Agent rule:** To create a threat detection rule that uses an existing Agent rule, you only need to create a threat detection rule that references the Agent rule and adds any additional expression parameters you need.
 - **Create a threat detection rule using a new Agent rule:** To detect an event that the current Agent rules do not support, you need to create a custom Agent rule to detect that event, and then create a custom threat detection rule that uses the custom Agent rule.
 
-For more information, see [CSM Threats Detection Rules][7]. 
+For more information, see [Workload Protection Detection Rules][7]. 
 
 You can create custom rules using these methods:
 
@@ -103,7 +103,7 @@ You can create custom rules using these methods:
 
 ## Create the custom Agent and detection rules together
 
-CSM custom Agent rules are grouped into policies. Policies group Agent rules to help you apply multiple rules more efficiently.
+Workload Protection custom Agent rules are grouped into policies. Policies group Agent rules to help you apply multiple rules more efficiently.
 
 
 ## Create the custom Agent and detection rules together
@@ -116,7 +116,7 @@ As you define the rules using this tool, the threat expressions generated for th
 
 To use the Assisted rule creator:
 
-1. Go to [Security > Cloud Security Management > Agent Configuration][3].
+1. Go to [Security > Cloud Security > Agent Configuration][3].
 2. Create or open a policy.
 3. In **Actions**, select **Assisted rule creator**.
 4. Define the detection. To monitor your resource effectively, you have the following detection type options:
@@ -136,7 +136,7 @@ To use the Assisted rule creator:
 
 You can create a custom Agent rule and deploy it as part of a new Agent policy. Later, when defining a custom [detection rule][3], you reference the custom Agent rule and add expression parameters.
 
-1. Go to [Security > Cloud Security Management > Agent Configuration][3].
+1. Go to [Security > Cloud Security > Agent Configuration][3].
 2. Create or open a policy.
 3. In **Actions**, select **Manual rule creator**.
 4. Add a name and description for the rule.
@@ -229,7 +229,7 @@ After you upload the new default policy file to the Agent, navigate to the [**Th
    1. In **Detection rule types**, select **Workload Security**. 
    2. Select a detection method such as **Threshold** or **New Value**.
 3. **Define search queries:**
-   1. Configure a new CSM Threats rule. A rule can have multiple rule cases combined with Boolean logic, for example `(||, &&)`. You can also set the counter, group by, and roll-up window.
+   1. Configure a new Workload Protection rule. A rule can have multiple rule cases combined with Boolean logic, for example `(||, &&)`. You can also set the counter, group by, and roll-up window.
 
       {{< img src="security/cws/workload_security_rules/define_runtime_expression2.png" alt="Adding a rule to the search queries field" >}}  
     
@@ -264,15 +264,15 @@ You can also disable a rule by setting the **Then...** section of a rule to **Do
 [4]: https://app.datadoghq.com/security/configuration/agent-rules
 [5]: /security/notifications/variables/?tab=cloudsiem
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules
-[7]: /security/threats/workload_security_rules
-[8]: /security/threats/
+[7]: /security/workload_protection/workload_security_rules
+[8]: /security/workload_protection/
 [9]: /security/cloud_siem/detection_rules/?tab=threshold#set-a-rule-case
 [10]: https://app.datadoghq.com/notebook/list?type=runbook
 [11]: /account_management/rbac/permissions/
-[12]: /security/cloud_security_management/guide/active-protection
+[12]: /security/workload_protection/guide/active-protection
 [13]: #disable-default-agent-rules
 [14]: #create-the-custom-agent-and-detection-rules-together
 [15]: https://app.datadoghq.com/cost/settings/tags
-[16]: /security/threats/agent_expressions/
+[16]: /security/workload_protection/agent_expressions/
 [17]: #prioritize-policies
 [18]: #apply-tags

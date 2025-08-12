@@ -26,11 +26,11 @@ further_reading:
 
 ## Overview
 
-This document explains bootstrapping for the Observability Pipelines Worker.
+This document explains [bootstrapping](#bootstrap-options) for the Observability Pipelines Worker and how to [enable the liveness and readiness probe](#enable-liveness-and-readiness-probe).
 
 ## Bootstrap Options
 
-<div class="alert alert-warning">All configuration file paths specified in the pipeline need to be under <code>DD_OP_DATA_DIR/config</code>.
+<div class="alert alert-warning">All configuration file paths specified in the pipeline need to be under <code>/DD_OP_DATA_DIR/config</code>.
 Modifying files under that location while OPW is running might have adverse effects.
 </div>
 
@@ -48,10 +48,19 @@ To set bootstrap options, do one of the following:
 
 The following is a list of bootstrap options, their related pipeline environment variables, and which variables have a higher precedence (priority).
 
+`api`
+: **Pipeline environment variable**: `DD_OP_API_ENABLED`
+: **Priority**: `DD_OP_API_ENABLED`
+: An example configuration:
+: &nbsp;&nbsp;&nbsp;&nbsp;`api`:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`enabled`: `true`<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`address`: `"127.0.0.1:8686" # optional`
+: Note: Setting `address` is optional. It is the network address to which the API should bind. If you're running the Worker in a Docker container, bind to `0.0.0.0`. Otherwise, the API is not exposed outside of the container.
+: **Description**: Enable the Observability Pipelines Worker API so you can see the Worker's processes with the `tap` or `top` command. See [Run, tap, or top the Worker][8] for more information. If you are using the Helm charts provided when you [set up a pipeline][7], then the API has already been enabled. Otherwise, make sure the environment variable `DD_OP_API_ENABLED` is set to `true` in `/etc/observability-pipelines-worker/bootstrap.yaml`. This sets up the API to listen on `localhost` and port `8686`, which is what the CLI for `tap` is expecting.
+<br><br>See [Enable liveness and readiness probe](#enable-liveness-and-readiness-probe) on how to expose the `/health` endpoint.
+
 `api_key`
 : **Pipeline environment variable**: `DD_API_KEY`
 : **Priority**: `DD_API_KEY`
-: **Description**: Create a [Datadog API key][1] for this environment variable.
+: **Description**: Create a [Datadog API key][1] for this environment variable. [Remote Configuration][6] must be enabled for the API key.
 
 `pipeline_id`
 : **Pipeline environment variable**: `DD_OP_PIPELINE_ID`
@@ -88,12 +97,22 @@ The following is a list of bootstrap options, their related pipeline environment
 <br>&nbsp;&nbsp;&nbsp;3. `proxy`
 :
 : An example proxy configuration:
-: &nbsp;&nbsp;&nbsp;&nbsp;proxy:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled: true<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https: https://foo.bar:3128
+: &nbsp;&nbsp;&nbsp;&nbsp;`proxy`:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`enabled`: `true`<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`https`: `https://foo.bar:3128`
 : **Description**: The Observability Pipelines Worker can route external requests through forward proxies, such as Squid. Forward proxies forward client requests from the Observability Pipelines Worker to the internet. You might use them as a web firewall to forbid or allow certain domains, ports, or protocols. Forward proxies usually do not terminate SSL and therefore do not have access to the request content. They only pass packets back and forth between the client and the destination. [HTTP tunnels][5] are used to secure communication through a forward proxy.
 : **Notes**:
 : <li style="list-style-type: '- '">This option is available for Observability Pipelines Worker 2.1 and later.</li>
 : <li style="list-style-type: '- '">The Observability Pipelines Worker cannot route external requests through reverse proxies, such as HAProxy and NGINX.</li>
 : <li style="list-style-type: '- '">The <code>DD_PROXY_HTTP(S)</code> and <code>HTTP(S)_PROXY</code> environment variables need to be already exported in your environment for the Worker to resolve them. They cannot be prepended to the Worker installation script.</li>
+
+## Enable liveness and readiness probe
+
+Configure your load balancer's health check with the `/heath` endpoint to check that the Worker is up and running. To expose the `/health` endpoint, you must set `DD_OP_API_ENABLED` to `true` and set the `DD_OP_API_ADDRESS` to `0.0.0.0:8686`. An example configuration:
+
+```
+api:
+  enabled: true
+  address: "0.0.0.0.1:8686"
+```
 
 ## Further reading
 
@@ -104,3 +123,6 @@ The following is a list of bootstrap options, their related pipeline environment
 [3]: /getting_started/site/
 [4]: /agent/configuration/proxy/?tab=linux#environment-variables
 [5]: https://en.wikipedia.org/wiki/HTTP_tunnel
+[6]: /remote_configuration
+[7]: /observability_pipelines/set_up_pipelines/
+[8]: /observability_pipelines/install_the_worker/worker_commands/#run-tap-or-top-the-worker

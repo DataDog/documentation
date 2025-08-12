@@ -14,4 +14,5 @@ disable_sidebar: true
     {{< nextlink href="agent/faq/docker-hub" >}}Docker Hub{{< /nextlink >}}
     {{< nextlink href="containers/faq/build_cluster_agent" >}}How do I build the Cluster Agent?{{< /nextlink >}}
     {{< nextlink href="containers/faq/package-server-manager-openshift" >}}Errors during OpenShift upgrade with custom SCCs{{< /nextlink >}}
+    {{< nextlink href="containers/faq/cpu-usage-metrics" >}}Discrepancies in `kubernetes.cpu.*` and `container.cpu.*` metrics{{< /nextlink >}}
 {{< /whatsnext >}}

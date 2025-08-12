@@ -5,17 +5,13 @@ aliases:
 - /mobile_testing/mobile_app_tests/results
 - /mobile_app_testing/mobile_app_tests/results
 further_reading:
-- link: "/synthetics/mobile_app_testing/mobile_app_tests/"
+- link: "/synthetics/mobile_app_testing/"
   tag: "Documentation"
   text: "Learn about Synthetic mobile tests"
 - link: "/service_management/events/explorer"
   tag: "Documentation"
   text: "Learn about the Events Explorer"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
-{{< /site-region >}}
 
 ## Overview
 

@@ -22,10 +22,6 @@ further_reading:
       text: "Troubleshooting Test Optimization"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Compatibility
 
 For a list of supported runtimes and platforms, see [.NET Framework Compatibility][18] and [.NET/.NET Core Compatiblity][19].
@@ -44,18 +40,19 @@ Supported test frameworks:
 To report test results to Datadog, you need to configure the Datadog .NET library:
 
 {{< tabs >}}
+
 {{% tab "CI Provider with Auto-Instrumentation Support" %}}
 {{% ci-autoinstrumentation %}}
 {{% /tab %}}
 
 {{% tab "Other Cloud CI Provider" %}}
-<div class="alert alert-info">Agentless mode is available in Datadog .NET library versions >= 2.5.1</div>
 {{% ci-agentless %}}
-
 {{% /tab %}}
+
 {{% tab "On-Premises CI Provider" %}}
 {{% ci-agent %}}
 {{% /tab %}}
+
 {{< /tabs >}}
 
 ## Installing the .NET tracer CLI
@@ -389,11 +386,11 @@ The test session name needs to be unique within a repository to help you disting
 
 #### When to use `DD_TEST_SESSION_NAME`
 
-There's a set of parameters that the product checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. Some examples of unstable test commands are:
+There's a set of parameters that Datadog checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. For example:
 
-- `DD_TEST_SESSION_NAME=integration-tests dotnet test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+- `dotnet test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 
-Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands varies between executions.
+Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands vary between executions.
 
 ## Further reading
 

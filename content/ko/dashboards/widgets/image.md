@@ -7,27 +7,23 @@ further_reading:
   tag: 설명서
   text: JSON을 사용하여 대시보드 구축
 title: 이미지 위젯
+widget_type: image
 ---
 
-이미지 위젯을 사용하면 대시보드에 이미지를 내장할 수 있습니다. 이미지는 URL로 액세스할 수 있는 PNG, JPG 또는 애니메이션 GIF일 수 있습니다.
+이미지 위젯을 사용하면 대시보드에 이미지를 내장할 수 있습니다. 이미지를 Datadog에 업로드하거나 URL로 호스팅할 수 있습니다. 지원되는 파일 형식은 URL, PNG, JPG, GIF입니다.
 
 {{< img src="dashboards/widgets/image/image.mp4" alt="이미지" video="true" style="width:80%;" >}}
 
-## 구성
+## 설정
 
-{{< img src="dashboards/widgets/image/image_setup.png" alt="이미지 구성" style="width:80%;">}}
+{{< img src="dashboards/widgets/image/image_setup2.png" alt="Image setup" style="width:80%;">}}
 
-1. 이미지 URL을 입력합니다.
-2. 다음에서 모양을 선택합니다.
-    * 전체 타이틀을 보여주는 줌 이미지
-    * 타일에 맞춘 이미지
-    * 타일 중앙의 이미지
+1. 이미지를 업로드하거나 URL 이미지를 입력합니다.
+2. 사전 설정 템플릿을 선택하거나 표시 옵션을 맞춤 설정합니다.
 
 ## API
 
-이 위젯은 **Dashboards API**와 함께 사용할 수 있습니다. 더 많은 정보를 얻으시려면 [Dashboards API documentation][1]을 참조하세요.
-
-이미지 위젯의 전용 [위젯 JSON 스키마 정의][2]는 다음과 같습니다.
+이 위젯을 **[대시보드 API][1]**와 함께 사용할 수 있습니다. [위젯 JSON 스키마 정의][2]에 관해서는 다음 테이블을 참고하세요.
 
 {{< dashboards-widgets-api >}}
 
@@ -35,5 +31,5 @@ title: 이미지 위젯
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/api/v1/dashboards/
+[1]: /ko/api/latest/dashboards/
 [2]: /ko/dashboards/graphing_json/widget_json/

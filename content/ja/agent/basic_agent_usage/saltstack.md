@@ -87,7 +87,7 @@ file_roots:
         - datadog
     ```
 
-### 構成
+### 設定
 
 計算式のコンフィギュレーションはピラーファイルの `datadog` キー内に記述する必要があります。これには `config`、 `install_settings`、`checks` の 3 つが含まれます。
 
@@ -127,7 +127,7 @@ file_roots:
 
 ホストに Agent インテグレーションを追加するには、`checks` 変数とチェックの名前を合わせてキーとして使用します。各チェックに 2 つのオプションが存在します。
 
-| オプション    | 説明                                                                                                                                                             |
+| オプション    | Description                                                                                                                                                             |
 |-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `config`  | チェックのコンフィギュレーションファイルに書き込むためのコンフィギュレーションオプションを追加します。<br>Agent v6 & v7: <confd_path>/<check>.d/conf.yaml`<br>Agent v5: `<confd_path>/<check>.yaml` |
 | `version` | Agent v6 & v7 環境でインストールするチェックのバージョン (デフォルトは Agent にバンドルされたバージョンとなります) 。                                                                |
@@ -167,7 +167,7 @@ datadog:
       third_party: true
 ```
 
-##### Logs
+##### ログ
 
 ログ収集を有効にするには、メインのコンフィギュレーションで `logs_enabled` を `true` に設定します。
 ```text
@@ -204,7 +204,7 @@ datadog:
 
 Salt Formula には Salt の状態が事前に記述されています。Datadog Formula で利用可能な状態は以下の通りです。
 
-| 状態               | 説明                                                                                             |
+| 状態               | Description                                                                                             |
 |---------------------|---------------------------------------------------------------------------------------------------------|
 | `datadog`           | Datadog Agent サービスをインストール、構成、起動します。                                             |
 | `datadog.install`   | Datadog Agent の適切なリポジトリとインストールを構成します。                                             |
@@ -214,7 +214,7 @@ Salt Formula には Salt の状態が事前に記述されています。Datadog
 
 **注**: `datadog.config` を使用して別のマシンで異なるチェックのインスタンスを構成する場合は、Salt マスターコンフィギュレーションまたは Salt ミニオンコンフィギュレーション (マスターなしの場合) の [pillar_merge_lists][5] を必ず `True` に設定してください。
 
-[1]: http://docs.saltstack.com/en/latest/topics/development/conventions/formulas.html
+[1]: https://docs.saltproject.io/en/latest/topics/development/conventions/formulas.html
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.datadoghq.com/ja/integrations/directory/
 [4]: https://github.com/DataDog/datadog-formula/blob/master/pillar.example

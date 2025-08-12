@@ -5,9 +5,9 @@ app_id: agentil-software-sap-hana
 app_uuid: 75784ba6-6a1a-4059-849e-c4cbdb56f258
 assets:
   dashboards:
-    SAP HANA services overview: assets/dashboards/agentil_software_sap_hana_services_overview.json
-    SAP HANA systems overview: assets/dashboards/agentil_software_sap_hana_overview.json
-    SAP HANA tables overview: assets/dashboards/agentil_software_sap_hana_tables_overview.json
+    SAP HANA DB services overview: assets/dashboards/agentil_software_sap_hana_services_overview.json
+    SAP HANA DB tables overview: assets/dashboards/agentil_software_sap_hana_tables_overview.json
+    SAP HANA databases overview: assets/dashboards/agentil_software_sap_hana_overview.json
   integration:
     auto_install: false
     configuration: {}

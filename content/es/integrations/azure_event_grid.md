@@ -1,28 +1,56 @@
 ---
-aliases:
-- /es/integrations/azure_eventgrid
+app_id: azure-eventgrid
+app_uuid: 55b5c82c-bba0-4bb5-b9a7-50096b97f0bb
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.eventgrid_topics.publish_success_count
+      metadata_path: metadata.csv
+      prefix: azure.eventgrid
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 291
+    source_type_name: Azure eventos Grid
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - nube
 - azure
 custom_kind: integración
 dependencies: []
-description: Rastrea las métricas principales de Azure Event Grid.
-doc_link: https://docs.datadoghq.com/integrations/azure_event_grid/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_event_grid
-has_logo: true
 integration_id: azure-eventgrid
-integration_title: Microsoft Azure Event Grid
+integration_title: Azure eventos Grid
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_event_grid
-public_title: Integración de Datadog y Microsoft Azure Event Grid
+public_title: Azure eventos Grid
 short_description: Rastrea las métricas principales de Azure Event Grid.
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Categoría::Nube
+  - Categoría::Azure
+  - Oferta::Integración
+  configuration: README.md#Configuración
+  description: Rastrea las métricas principales de Azure Event Grid.
+  media: []
+  overview: README.md#Información general
+  support: README.md#Soporte
+  title: Azure eventos Grid
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
 Azure Event Grid es un servicio de enrutamiento de eventos inteligente y totalmente gestionado que permite un consumo uniforme de eventos utilizando un modelo de publicación y suscripción.
@@ -38,18 +66,18 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_event_grid" >}}
+{{ get-metrics-from-git "azure-eventgrid" }}
 
 
 ### Eventos
 
 La integración Azure Event Grid no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración Azure Event Grid no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 

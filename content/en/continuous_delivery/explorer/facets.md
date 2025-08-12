@@ -4,15 +4,8 @@ description: Learn about facets for filtering and grouping your deployment execu
 further_reading:
 - link: 'continuous_delivery/explorer/'
   tag: 'Documentation'
-  text: 'Learn about the CD Visibility Explorer'
-- link: 'continuous_delivery/search/'
-  tag: 'Documentation'
-  text: 'Learn how to search and manage your deployment results'
+  text: 'Learn how to query and visualize deployments'
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CD Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Join the Preview!" >}}
 CD Visibility is in Preview. If you're interested in this feature, complete the form to request access.
@@ -24,13 +17,13 @@ Facets are user-defined tags and attributes from your pipelines. They are useful
 
 [Creating facets](#creating-facets) is **not required** to [search deployment executions][5]. Autocomplete capabilities use existing facets, but also any input that matches incoming deployment executions applies.
 
-The [CD Visibility Explorer][4] includes out-of-the-box facets such as `Environment`, `Deployment Status`, and `Deployment Provider`. You can use facets in the CD Visibility Explorer to:
+The [Deployment Executions page][4] includes out-of-the-box facets such as `Environment`, `Deployment Status`, and `Deployment Provider`. You can use facets in the CD Visibility Explorer to:
 
 - [Search for and filter deployment executions][5].
 - Perform deployment or environment analytics.
 - Start troubleshooting after your deployments complete.
 
-Navigate to [**Software Delivery** > **CD Visibility** > **Executions**][7] to access the list of facets left of the deployment executions list.
+Navigate to [**Software Delivery** > **CD Visibility** > **Executions**][4] to access the list of facets left of the deployment executions list.
 
 {{< img src="/continuous_delivery/explorer/facets.png" text="Facets list on the Deployment Executions page of the CD Visibility Explorer" style="width:100%" >}}
 
@@ -89,7 +82,7 @@ Create a facet from the Deployment Details side panel so that most of the facet 
 
 {{< img src="continuous_delivery/explorer/create_facet.png" alt="Create a facet from the Deployment Details side panel" style="width:100%;">}}
 
-1. Navigate to a deployment execution of interest in the [CD Visibility Explorer][4] that contains the field to create a facet on.
+1. Navigate to a deployment execution of interest in the [Deployment Executions page][4] that contains the field to create a facet on.
 2. Open the Deployment Details side panel by selecting the deployment execution from the list.
 3. Click on the desired field and create a facet from there:
 
@@ -116,7 +109,6 @@ Autocomplete based on the content in deployment executions of the current views 
 [1]: /monitors/types/ci
 [2]: /dashboards/
 [3]: /notebooks/
-[4]: /continuous_delivery/explorer
-[5]: /continuous_delivery/search
+[4]: https://app.datadoghq.com/ci/deployments/executions
+[5]: /continuous_delivery/explorer#deployment-executions
 [6]: /continuous_delivery/explorer/search_syntax
-[7]: https://app.datadoghq.com/ci/deployments/executions

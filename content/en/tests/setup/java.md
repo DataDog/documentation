@@ -28,10 +28,6 @@ further_reading:
       text: "Troubleshooting Test Optimization"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Compatibility
 
 Supported test frameworks:
@@ -46,7 +42,7 @@ Supported test frameworks:
 | Karate | >= 1.0.0 |
 | Scalatest | >= 3.0.8 |
 | Scala MUnit | >= 0.7.28 |
-| Scala Weaver | >= 0.8.4 |
+| Scala Weaver | >= 0.8.4 (Only when using SBT as build system) |
 
 If your test framework is not supported, you can try instrumenting your tests using [Manual Testing API][1].
 
@@ -505,11 +501,11 @@ The test session name needs to be unique within a repository to help you disting
 
 #### When to use `DD_TEST_SESSION_NAME`
 
-There's a set of parameters that the product checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. Some examples of unstable test commands are:
+There's a set of parameters that Datadog checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. For example:
 
 - `mvn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 
-Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands varies between executions.
+Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands vary between executions.
 
 ## Troubleshooting
 

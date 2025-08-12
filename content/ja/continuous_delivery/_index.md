@@ -5,9 +5,9 @@ cascade:
     tags:
     - ci/cd
     - continuous delivery
-    - deployment visibility
-    - deployments
-    - deployment executions
+    - デプロイメントの可視性
+    - デプロイメント
+    - デプロイメント実行
 disable_sidebar: true
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
@@ -28,35 +28,29 @@ further_reading:
 title: Continuous Delivery Visibility
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CD Visibility は利用できません。</div>
-{{< /site-region >}}
-
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" header="false" >}}
-CD Visibility は、非公開ベータ版です。アクセスをリクエストするには、フォームにご記入ください。
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="プレビューに参加しませんか？" >}}
+CD Visibility はプレビュー段階です。この機能に興味がある場合は、フォームにご記入いただき、アクセスをリクエストしてください。
 {{< /callout >}}
 
-## 概要
+Datadog Continuous Delivery (CD) Visibility は、デプロイメントに関する可観測性を提供します。CD Visibility を使用すると、デプロイメントのメトリクスやデータを Datadog に取り込み、デプロイメントの健全性を伝えられるようになり、チームが常に高品質のコードを提供できるようにするための改善に注力できます。
 
-Datadog Continuous Delivery (CD) Visibility provides observability on your deployments. CD Visibility brings deployment metrics and data into Datadog so you can communicate the health of your deployments, and focus your efforts in improving your team's ability to deliver quality code every time.
+## デプロイ頻度の向上
 
-## Improve deployment frequency
-
-Deployment Visibility helps you monitor deployments across CD environments by tracking every deployment event. You can identify bottlenecks, understand failures, and measure deployment success metrics. With CD Visibility, your team can optimize processes, increase deployment frequency safely, and ensure consistent delivery performance.
+Deployment Visibility を利用すると、すべてのデプロイメントイベントをトラッキングすることで、さまざまな CD 環境でのデプロイメントを監視できます。ボトルネックを特定し、障害を把握し、デプロイメント成功のメトリクスを測定できます。CD Visibility を導入すると、チームはプロセスを最適化し、安全にデプロイ頻度を高め、一貫したデリバリーパフォーマンスを確保することが可能になります。
 
 ## シームレスなインテグレーションで効率アップ
 
-Datadog integrates with [CI providers][4] and CD providers like [Argo CD][5] to collect metrics and track the execution performance and results of your deployments.
+Datadog は [CI プロバイダー][4]や、[Argo CD][5] のような CD プロバイダーと連携し、メトリクスを収集し、デプロイメントの実行パフォーマンスや結果を追跡します。
 
 {{< partial name="continuous_delivery/cd-getting-started.html" >}}
 
 <br/>
 
-Use the data aggregated over time to identify trends and improve your deployment strategies for enhanced operational efficiency.
+時間の経過とともに集計されたデータを利用して、傾向を把握し、運用効率を高めるためのデプロイメント戦略を改善してください。
 
 ## 準備はいいですか？
 
-See [Deployment Visibility][1] for instructions on setting up CD Visibility with your CD providers, information about compatibility requirements, and steps for instrumenting and configuring data collection. Then, start exploring details about your deployment executions in the [CD Visibility Explorer][2] and export your search query into a [saved view][3].
+[Deployment Visibility][1] を参照して、CD プロバイダーで CD Visibility を設定する手順、互換性要件に関する情報、データ収集のインスツルメントと構成手順を確認してください。その後、[CD Visibility Explorer][2] でデプロイメント実行の詳細を確認し、検索クエリを[保存ビュー][3]にエクスポートしてみましょう。
 
 ## 参考資料
 

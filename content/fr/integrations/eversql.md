@@ -8,9 +8,10 @@ author:
   sales_email: sales@eversql.com
   support_email: support@eversql.com
 categories:
-- monitoring
 - automation
-- languages
+- data stores
+- developer tools
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/eversql/README.md
 display_on_public_website: true
@@ -20,7 +21,6 @@ integration_id: eversql
 integration_title: 'EverSQL : Optimisation des bases de données'
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: eversql
 public_title: 'EverSQL : Optimisation des bases de données'
@@ -28,17 +28,18 @@ short_description: Optimisation automatique des requêtes SQL et des bases de do
   pour MySQL, PostgreSQL, Aurora
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Monitoring
   - Category::Automation
-  - Category::Languages
+  - Category::Data Stores
+  - Category::Developer Tools
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Optimisation automatique des requêtes SQL et des bases de données pour
     MySQL, PostgreSQL, Aurora
@@ -60,9 +61,10 @@ tile:
   title: 'EverSQL : Optimisation des bases de données'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Présentation
+## Section Overview
 
 [EverSQL][1] est un outil conçu pour accélérer votre base de données et optimiser vos requêtes SQL. Il offre des fonctions de réglage et d'indexation automatiques des requêtes SQL pour les développeurs, les administrateurs de base de données et les ingénieurs DevOps.
 

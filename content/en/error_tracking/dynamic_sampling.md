@@ -41,7 +41,7 @@ A `Dynamic Sampling activated` event is generated when Dynamic Sampling is appli
 When Dynamic Sampling is applied, the following steps are recommended:
 
 - Check which issue is consuming your quota. The issue to which Dynamic Sampling is applied is linked in the event generated in Event Management.
-- If you'd like collect additional samples for this issue, raise your daily quota on the [Error Tracking Rate Limits page][2].
+- If you'd like to collect additional samples for this issue, raise your daily quota on the [Error Tracking Rate Limits page][2].
 - If you'd like to avoid collecting samples for this issue in the future, consider creating an [exclusion filter][3] to prevent additional events from being ingested into Error Tracking.
 
 ## Further Reading

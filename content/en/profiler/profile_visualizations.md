@@ -61,7 +61,7 @@ For example, starting from the first row in the previous image, `Thread.run()` c
 
 The width of a frame represents how much of the total CPU it consumed. On the right, you can see a **CPU time by Method** top list that only accounts for self time, which is the time a method spent on CPU without calling another method.
 
-Flame graphs can be be included in Dashboards and Notebooks with the [Profiling Flame Graph Widget][5].
+Flame graphs can be included in Dashboards and Notebooks with the [Profiling Flame Graph Widget][5].
 
 ### Single profile
 
@@ -109,7 +109,7 @@ To access the timeline view:
 
 Depending on the runtime and language, the timeline lanes vary:
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php,full_host" >}}
 {{< programming-lang lang="java" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
@@ -181,6 +181,10 @@ Lanes on the top are runtime activities that may add extra latency to your reque
 
 [1]: /profiler/connect_traces_and_profiles/#prerequisites
 {{< /programming-lang >}}
+
+{{< programming-lang lang="full_host" >}}
+Timeline view is currently not supported for Full Host profiling
+{{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
 ## Further Reading
@@ -189,7 +193,7 @@ Lanes on the top are runtime activities that may add extra latency to your reque
 
 [1]: /tracing/send_traces/#configure-your-environment
 [2]: /tracing/glossary/#services
-[3]: https://app.datadoghq.com/profiling/search?viz=timeseries
+[3]: https://app.datadoghq.com/profiling/explorer?viz=timeseries
 [4]: /profiler/profile_types/
 [5]: /dashboards/widgets/profiling_flame_graph
 [6]: /profiler/connect_traces_and_profiles/#span-execution-timeline-view

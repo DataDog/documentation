@@ -29,7 +29,11 @@ def compile_filename(filename):
     if pattern2.match(filename):
         return grab_glossary_title(filename)
     elif pattern1.match(filename):
-        filename = filename.replace('content/en/', '').replace('_index', '').replace('.md', '')
+        filename = filename.replace(
+            'content/en/', ''
+            ).replace('_index', ''
+            ).replace('.mdoc', ''
+            ).replace('.md', '')
         return filename
 
 def sort_files(file_string):

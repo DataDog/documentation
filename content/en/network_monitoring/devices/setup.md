@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-Network Device Monitoring helps you gain insights into the health and performance of your on-prem routers, switches, and firewalls. Once the Datadog Agent is installed on a host that has access to the network, the Agent can autodiscover network devices and collect metrics right out of the box.
+Network Device Monitoring helps you gain insights into the health and performance of your on-prem routers, switches, and firewalls. After the Datadog Agent is installed on a host that has access to the network, the Agent can automatically detect network devices and collect metrics right out of the box.
 
 This guide covers configuring Network Device Monitoring on your hosts, enriching device tags, setting up and viewing device profiles, viewing data in NetFlow Monitoring, and validating data in the provided dashboards and Device Topology Map.
 
@@ -43,9 +43,21 @@ Navigate to the [Agent installation page][1], and install the [Datadog Agent][2]
 
 ## Setup
 
-### Integration Configuration
+### High Availability
 
-To begin monitoring your network devices, enable the SNMP integration using one of the following methods:
+{{< site-region region="gov" >}}
+<div class="alert alert-warning"> High Availability support of the Datadog Agent is in not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+High Availability (HA) support of the Datadog Agent in Network Device Monitoring allows you to designate an active Agent and a standby Agent, ensuring automatic failover if the active Agent encounters an issue. This setup eliminates the Agent as a single point of failure, maintaining continuous monitoring during unexpected incidents or planned maintenance, such as OS updates and Agent upgrades.
+
+You can configure active and standby Agents to function as an HA pair in NDM. If the active Agent goes down, the standby Agent takes over within 90 seconds, becoming the new active Agent. Additionally, you can designate a preferred active Agent, allowing NDM to automatically revert to it once it becomes available again. This feature allows for proactive Agent switching ahead of scheduled maintenance.
+
+For more information, see [High Availability support of the Datadog Agent][20].
+
+### Configuration
+
+To begin monitoring your network devices, enable SNMP monitoring using one of the following methods:
 
 [Individual devices][3]
 : Configure SNMP monitoring on your individual devices.
@@ -55,7 +67,6 @@ To begin monitoring your network devices, enable the SNMP integration using one 
 
 [Ping][5]
 : Additionally, SNMP supports enabling ping on your devices.
-
 
 ### Enrich network devices with tags 
 
@@ -132,3 +143,4 @@ Configure [NetFlow Monitoring][11] to visualize and monitor your flow records fr
 [17]: /api/latest/network-device-monitoring/#get-the-list-of-tags-for-a-device
 [18]: /api/latest/network-device-monitoring/#update-the-tags-for-a-device
 [19]: /network_monitoring/devices/troubleshooting
+[20]: /integrations/guide/high_availability

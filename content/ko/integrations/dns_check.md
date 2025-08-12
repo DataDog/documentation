@@ -29,7 +29,7 @@ draft: false
 git_integration_title: dns_check
 integration_id: dns
 integration_title: DNS 점검
-integration_version: 3.3.0
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: dns_check
@@ -46,6 +46,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Network
+  - Offering::Integration
   configuration: README.md#Setup
   description: 모든 DNS 기록의 조회 확인과 조회 시간을 모니터링합니다.
   media: []
@@ -69,7 +70,7 @@ DNS 점검은 [Datadog 에이전트][1] 패키지에 포함됩니다. 서버에 
 
 메트릭 점검 대부분은 모니터링하는 서비스와 동일한 호스트에서 실행하는 것이 가장 좋지만, 모니터링하는 DNS 서비스를 실행하지 않는 호스트에서 본 상태 점검을 실행할 수 있습니다.
 
-### 설정
+### 구성
 
 1. [에이전트 설정 디렉토리][2] 루트의 `conf.d/` 폴더에서 `dns_check.d/conf.yaml` 파일을 편집해 DNS 데이터 수집을 시작합니다.
    사용 가능한 설정 옵션을 전부 확인하려면 [dns_check.d/conf.yaml 샘플][3]을 참조하세요.

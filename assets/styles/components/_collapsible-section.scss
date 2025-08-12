@@ -2,7 +2,8 @@
     border: 1px solid #D4BDFB;
     border-radius: 8px;
     margin-bottom: 16px;
-    overflow: hidden;
+    //overflow: hidden;
+    scroll-margin-top: 100px;
 }
 
 .collapsible-header {
@@ -12,7 +13,8 @@
     cursor: pointer;
     outline: none;
     background-color: #ffffff00;
-    transition: background-color 0.3s;
+    border-radius: 7px 7px 7px 7px;
+    transition: background-color 0.3s,
 }
 
 /* hide marker on safari */
@@ -20,13 +22,14 @@
   display: none;
 }
 
-.collapsible-header:hover { 
+.collapsible-header:hover {
     background-color: #eae2f8;
 }
 
 .collapsible-section[open] .collapsible-header {
     background-color: #632DA6;
     color: white;
+    border-radius: 7px 7px 0 0;
 }
 
 .collapsible-section[open] .header-text-inner {

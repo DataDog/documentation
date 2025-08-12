@@ -7,9 +7,16 @@ aliases:
 cascade:
     algolia:
         rank: 70
+further_reading:
+    - link: "https://www.datadoghq.com/blog/volkswagen-organizations/"
+      tag: "Blog"
+      text: "Best practices for managing Datadog organizations at scale"
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">The Datadog for Government site only supports SAML login.</div>
+<div class="alert alert-warning">The Datadog for Government platform supports only SAML or basic authentication using a username/email and password. Before configuring SAML authentication, ensure that at least one username/email and password account is established to maintain access during the setup process. Datadog recommends enabling multi-factor authentication (MFA) for password-based accounts.
+
+If you need SAML enabled for a trial account, contact <a href="https://docs.datadoghq.com/getting_started/support/">Datadog Support</a>.</div>
+
 {{< /site-region >}}
 
 ## Personal settings
@@ -26,13 +33,13 @@ If you log in to Datadog using Google authentication, your email address is prov
 
 ### Preferences
 
-{{% site-region region="us,us3,us5,eu,ap1" %}}
+{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
 You can manage your timezone, visual accessibility preference, and email subscriptions from the [Preferences tab][3] within the **Personal Settings** page. 
 
 #### Email subscriptions
 
 Under email subscriptions, you have access to the following reports:
-{{< site-region region="us3,us5,gov,ap1" >}}
+{{< site-region region="us3,us5,gov,ap1,ap2" >}}
 <div class="alert alert-warning">Email digests are not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
@@ -59,7 +66,7 @@ The [Organizations tab][12] in **Personal Settings** lists all of the organizati
 
 **Note**: If you leave an organization, you cannot rejoin unless invited by an administrator in that organization.
 
-To join an existing organization, you must be invited by an administrator. After you are invited, you are sent an email with the subject "You've been invited to join <Organization Name>". Click the **Join Account** button in the email.
+To join an existing organization, you must be invited by an administrator. After you are invited, you are sent an email with the subject "You've been invited to join \<Organization Name>". Click the **Join Account** button in the email.
 
 If you are an organization administrator, reference the additional documentation to:
 

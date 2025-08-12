@@ -1,6 +1,6 @@
 ---
 aliases:
-- /tracing/profiler/enabling/dotnet/
+- /es/tracing/profiler/enabling/dotnet/
 code_lang: dotnet
 code_lang_weight: 60
 further_reading:

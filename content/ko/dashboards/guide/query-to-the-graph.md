@@ -21,19 +21,20 @@ title: 그래프에 대한 쿼리
 
 따라서 이 메트릭은 여러 `{host, device}` 태그 조합을 갖습니다.
 
-각 소스(호스트 및 태그들의 세트로 정의됨)에 대해 데이터는 별도로 저장됩니다. 이 예에서는 `host:moby`에 5개의 장치가 있다고 가정합니다. 따라서 Datadog는 다음을 위해 5개의 시계열(소스에 대해 시간이 지남에 따라 제출된 모든 데이터 포인트)을 저장합니다.
+각 소스(호스트 및 태그의 세트로 정의됨)에 대해 데이터는 별도로 저장됩니다.
+이 예에서는 `host:bubs`에 5개의 장치가 있다고 가정합니다. 따라서 Datadog는 다음에 대해 5개의 시계열(소스에 대해 시간이 지남에 따라 제출된 모든 데이터 포인트)을 저장합니다.
 
-* `{host:moby, device:tmpfs}`
-* `{host:moby, device:cgroup_root}`
-* `{host:moby, device:/dev/vda1}`
-* `{host:moby, device:overlay}`
-* `{host:moby, device:shm}`
+* `{host:bubs, device:tmpfs}`
+* `{host:bubs, device:cgroup_root}`
+* `{host:bubs, device:/dev/vda1}`
+* `{host:bubs, device:overlay}`
+* `{host:bubs, device:shm}`
 
 다음으로, 위에 제시된 쿼리에 대한 백엔드가 따르는 다음 단계들을 고려하세요.
 
 ## 쿼리에 어떤 시계열들이 필요한지 찾으세요
 
-이 쿼리에서는 `host:moby`에 연결된 데이터만 요청했습니다. 따라서 Datadog 백엔드의 첫 번째 단계는 모든 소스(이 경우 `system.disk.total` 메트릭이 제출된 모든 `{host, device}` 조합)를 스캔하고 쿼리 범위에 해당하는 소스만 유지하는 것입니다.
+이 쿼리에서는 `host:bubs`에 연결된 데이터만 요청했습니다. 따라서 Datadog 백엔드의 첫 번째 단계는 모든 소스(이 경우 `system.disk.total` 메트릭이 제출된 모든 `{host, device}` 조합)를 스캔하고 쿼리 범위에 해당하는 소스만 유지하는 것입니다.
 
 짐작하셨겠지만 백엔드는 5개의 일치하는 소스를 찾습니다(이전 단락 참조).
 
@@ -46,7 +47,7 @@ title: 그래프에 대한 쿼리
 [시계열 및 태그 카디널리티에 대한 추가 정보][4]
 
 **관련 매개변수: 범위**
-두 태그 모두에 응답하는 데이터를 가져오려면 `{host:moby, device:udev}`와 같이 둘 이상의 태그를 사용할 수 있습니다.
+두 태그 모두 해당하는 데이터를 가져오려면 `{host:bubs, device:udev}`와 같이 둘 이상의 태그를 사용합니다.
 
 ## 시간 집계로 진행
 
@@ -56,7 +57,7 @@ Datadog의 백엔드는 그래프의 기간에 해당하는 모든 데이터를 
 
 ### 그 이유는 무엇일까요? 
 
-Datadog는 1초 단위로 데이터를 저장하므로 모든 실제 데이터를 그래프에 표시할 수는 없기 때문입니다. 자세한 내용은 [데이터가 그래프에 집계되는 방식][5]을 참조하세요.
+Datadog는 1초 분할 단위로 데이터를 저장하므로 모든 실제 데이터를 그래프에 표시할 수는 없기 때문입니다. 자세한 내용은 [메트릭 집계][5]를 참조하세요.
 
 1주 기간에 대한 그래프의 경우, 브라우저에 수십만 개의 값을 전송해야 합니다. 게다가 이러한 모든 점이 화면의 작은 부분을 차지하는 위젯에 그래프로 표시될 수가 없습니다. 따라서 Datadog는 그래프를 렌더링하기 위해 브라우저에 제한된 수의 포인트를 보내기 위해 데이터 집계를 수행해야 합니다.
 
@@ -93,7 +94,7 @@ Datadog의 백엔드는 쿼리에 해당하는 각 소스에 대한 일련의 �
 
 얻은 값(25.74GB)은 모든 소스에서 보고된 값의 평균입니다(이전 이미지 참조).
 
-**참고**: 소스가 하나만 있는 경우(예: 쿼리 범위로 `{host:moby, device:/dev/disk}`를 선택한 경우)  `sum`/`avg`/`max`/`min`을 사용해도 공간 집계를 수행할 필요가 없으므로 아무 효과가 없습니다. [sum/min/max/avg 집계 기간 전환][8]에 대한 FAQ를 참조하세요.
+**참고**: 소스가 하나만 있는 경우(예: 쿼리 범위로 `{host:bubs, device:/dev/disk}`를 선택한 경우)  `sum`/`avg`/`max`/`min`을 사용해도 공간 집계를 수행할 필요가 없으므로 아무 효과가 없습니다. [sum/min/max/avg 애그리게이터(aggregator) 전환][8]에 대한 FAQ를 참조하세요.
 
 **관련 매개변수: 공간 집계기**
 
@@ -157,13 +158,13 @@ Datadog은 4개의 공간 집계기를 제공합니다.
 자세한 내용은 [카운트 그래프로 StatsD 메트릭 시각화][9]를 참조하세요.
 [StatsD/DogStatsD][10]에 대한 문서.
 
-[1]: /ko/dashboards/#timeboards
+[1]: /ko/dashboards/#get-started
 [2]: /ko/dashboards/#screenboards
 [3]: /ko/agent/
 [4]: /ko/metrics/custom_metrics/
-[5]: /ko/dashboards/faq/how-is-data-aggregated-in-graphs/
+[5]: /ko/dashboards/querying/#aggregate-and-rollup
 [6]: /ko/dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs/
 [7]: /ko/dashboards/functions/rollup/
-[8]: /ko/dashboards/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same/
+[8]: /ko/metrics/guide/different-aggregators-look-same/
 [9]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
 [10]: /ko/metrics/custom_metrics/dogstatsd_metrics_submission/

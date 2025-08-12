@@ -141,6 +141,18 @@ Además, es posible que también debas asegurarte de que tus firewalls permitan 
 
 De forma predeterminada, los tests de Synthetic no [vuelven a notificar][12]. Por tanto, si añades tu identificador de notificación, como tu dirección de correo electrónico o tu identificador de Slack, después de que se genere una transición (por ejemplo, un test que muestra una alerta o se recupera de una alerta anterior), no se enviará ninguna notificación sobre dicha transición, sino que únicamente se enviará para la próxima transición.
 
+## Tests móviles
+
+### No se puede iniciar la grabación de un dispositivo
+
+Si se realizan comprobaciones de seguridad durante el inicio de la aplicación, como verificar si la depuración USB está activada, Datadog recomienda cargar una versión de la aplicación que no contenga estas comprobaciones.
+
+### Garantizar el correcto funcionamiento de la aplicación durante la grabación y la ejecución de los tests
+
+Si algunas características de tu aplicación iOS no funcionan como se espera durante la grabación o la ejecución de tests, podría ser el resultado del proceso de nueva firma de la aplicación. Este proceso de nueva firma es necesario para que los dispositivos móviles puedan confiar en la aplicación proporcionada. Los problemas con el proceso de nueva firma pueden provocar que se eliminen derechos esenciales de iOS (como el acceso a Contactos, Cámara, Keychain, Fotos, Health Kit, Home Kit, etc.).
+
+Para minimizar el riesgo de problemas relacionados con los derechos y para mejorar la compatibilidad, Datadog recomienda distribuir tu aplicación iOS utilizando perfiles de suministro Ad Hoc o de Desarrollo.
+
 ## Localizaciones privadas
 
 {{< tabs >}}
@@ -158,6 +170,28 @@ Esto podría indicar un problema de agotamiento de recursos en los workers de tu
 
 Comprueba que no haya [problemas de memoria insuficiente][102] con tus implementaciones de localizaciones privadas. Si ya has intentado escalar tus instancias de workers siguiendo las [directrices de dimensionamiento][103], contacta con el [equipo de asistencia de Datadog][104].
 
+### Requisitos para los tests de navegador que se ejecutan en localizaciones privadas
+
+Los tests de navegador requieren privilegios elevados para generar (cuando se inicia la ejecución del test) y finalizar (cuando finaliza la ejecución del test) el proceso del navegador. Si tu localización privada está configurada con un contexto de seguridad que restringe los privilegios elevados, entonces la localización privada emite logs de error cuando se ejecuta el test de navegador. Los logs informados varían en función del navegador seleccionado para la ejecución del test. Los tests ejecutados en Chrome/Edge informan del siguiente error:
+```
+Critical error in startBrowser: Failed to launch the browser process!
+sudo: The "no new privileges" flag is set, which prevents sudo from running as root.
+sudo: If sudo is running in a container, you may need to adjust the container configuration to disable the flag.
+```
+
+Firefox informa del siguiente error:
+```
+Impossible to spawn Firefox: binary is not a Firefox executable
+sudo: The "no new privileges" flag is set, which prevents sudo from running as root.
+sudo: If sudo is running in a container, you may need to adjust the container configuration to disable the flag.
+```
+
+### Requisitos para los tests ICMP que se ejecutan en localizaciones privadas
+
+Los tests ICMP utilizan el comando `ping` para evaluar las rutas de red y la conectividad a un host. `ping` abre un socket sin procesar para enviar paquetes ICMP a través de él, por lo que requiere la capacidad `NET_RAW` para permitir la creación de sockets sin procesar. Si tu contenedor está configurado con un contexto de seguridad que elimina esta capacidad, los tests ICMP no podrán funcionar correctamente en la localización privada.
+
+Adicionalmente, `ping` requiere privilegios elevados para crear el socket sin procesar. La localización privada no puede ejecutar tests ICMP si la localización privada está configurada con un contexto de seguridad que restringe los privilegios elevados.
+
 ### Aparecen errores de tipo `TIMEOUT`(tiempo de espera) en tests de API ejecutados desde mi localización privada
 
 Esto podría significar que tu localización privada no puede alcanzar el endpoint en el que se ha configurado que se ejecute tu test de API. Comprueba que la localización privada esté instalada en la misma red que el endpoint que quieres someter a test. También puedes intentar ejecutar el test en diferentes endpoints para ver si se produce o no el mismo error `TIMEOUT`.
@@ -172,6 +206,22 @@ Esto podría significar que tu localización privada no puede alcanzar el endpoi
 {{% /tab %}}
 {{% tab "Docker" %}}
 
+### Resolución de problemas de reenvío IPv4 para contenedores con localización privada
+
+Las localizaciones privadas requieren acceso a [endpoints de ingesta de la monitorización Synthetic de Datadog][103] para extraer configuraciones de test y enviar resultados de tests. Si el reenvío IPv4 está deshabilitado en un servidor Linux, la localización privada puede perder el acceso a la Internet pública y, en consecuencia, no podrá conectarse a la ingesta. Docker normalmente intenta habilitar el reenvío IP cuando se inicia un contenedor, pero si permanece deshabilitado, el contenedor no puede acceder a servicios externos como la ingesta. 
+
+En ese caso, la localización privada informará de logs como:
+
+```
+WARNING: IPv4 forwarding is disabled. Networking will not work.
+```
+y
+```
+Queue error - onFetchMessagesLongPolling - getaddrinfo EAI_AGAIN intake.synthetics.datadoghq.com
+```
+
+Para resolver este problema, asegúrate de que `net.ipv4.ip_forward` está habilitado en el host. 
+
 ### A veces, mis contendores de localizaciones privadas se eliminan debido a un problema `OOM`
 
 Los contenedores de localizaciones privadas que se eliminan por un problema `Out Of Memory` (memoria insuficiente) generalmente indican un problema de agotamiento de recursos en los workers de tus localizaciones privadas. Asegúrate de que los contenedores de localizaciones privadas cuenten con [recursos de memoria suficientes][101].
@@ -182,6 +232,7 @@ Esto sucede si se intenta montar un solo archivo en un contenedor basado en Wind
 
 [101]: /es/synthetics/private_locations#private-location-total-hardware-requirements
 [102]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
+[103]: https://docs.datadoghq.com/es/synthetics/platform/private_locations/?tab=docker#datadog-private-locations-endpoints
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -197,7 +248,7 @@ En primer lugar, asegúrate de haber instalado la localización privada con una 
 1. Haz clic en **Services (Local)** (Servicios [Local]) y busca el servicio llamado `Datadog Synthetics Private Location`.
 1. Haz clic con el botón derecho en el servicio del paso 2 y elige **Restart** (Reiniciar).
 
-El worker de localizaciones privadas de Synthetics se ejecuta ahora bajo la cuenta **Local Service** (Servicio local). Para confirmarlo, inicia el Administrador de tareas y busca el proceso `synthetics-pl-worker` en la pestaña **Details** (Detalles).
+El worker de localizaciones privadas de Synthetics se ejecuta ahora bajo la cuenta **Servicio local**. Para confirmarlo, inicia el administrador de tareas y busca el proceso `synthetics-pl-worker` en la pestaña **Detalles**.
 
 #### PowerShell
 
@@ -219,7 +270,7 @@ Si proporcionaste un archivo de configuración al instalar la aplicación, se in
 
 El usuario de la localización privada (`dog`) requiere `sudo` por varias razones. Normalmente, a este usuario se le conceden ciertos permisos para dar acceso a `sudo` en el proceso de lanzar la localización privada en tu contenedor. Confirma si dispones de una política que restrinja la capacidad del usuario `dog` para `sudo`, o que impida que el contenedor se inicie como el usuario `dog` (UID 501).
 
-Además, en las versiones `>v1.27` de la localización privada, Datadog depende del uso de la llamada al sistema `clone3`. En algunas versiones anteriores de entornos de tiempo de ejecución de contenedores (como las versiones de Docker <20.10.10), no se admite `clone3` por la política predeterminada `seccomp`. Confirma que la política `seccomp` de tu entorno de tiempo de ejecución de contenedores incluye `clone3`. Puedes hacerlo actualizando la versión de tu tiempo de ejecución en uso, añadiendo manualmente `clone3` a tu política `seccomp` o utilizando una política seccomp `unconfined`. Para obtener más información, consulta la [documentación sobre `seccomp` de Docker][13].
+Además, en las versiones de localización privada `>v1.27` , Datadog depende del uso de la llamada al sistema `clone3`. En algunas antiguas versiones de entornos de ejecución de contenedores (como las versiones de Docker <20.10.10), `clone3` no es compatible con la política por defecto `seccomp`. Confirma que la política `seccomp` del entorno de ejecución de tu contenedor incluye `clone3`. Puedes hacerlo actualizando la versión de tu tiempo de ejecución en uso, añadiendo manualmente `clone3` a tu política `seccomp` o utilizando una política seccomp `unconfined`. Para obtener más información, consulta la [documentación de `seccomp` de Docker][13].
 
 ## Referencias adicionales
 

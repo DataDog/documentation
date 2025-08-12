@@ -1,5 +1,5 @@
 ---
-title: Risk Insights for AWS Entities
+title: Risk Insights
 further_reading:
     - link: "https://www.datadoghq.com/blog/risk-prioritization-entity-analytics/"
       tag: Blog
@@ -8,7 +8,7 @@ further_reading:
 
 ## Overview
 
-[Cloud SIEM's Risk Insights for AWS Entities][4] consolidates multiple data sources, such as SIEM threats and CSM insights, into a profile representing a single security entity, such as an IAM user.
+[Cloud SIEM's Risk Insights][4] consolidates multiple data sources, such as SIEM threats and Cloud Security insights, into a profile representing a single security entity, such as an IAM user.
 
 With Risk Insights, you can:
 
@@ -19,8 +19,8 @@ With Risk Insights, you can:
 
 ## Prerequisites
 
-- For AWS Risk Insights coverage, [AWS must be configured for Cloud SIEM][1].
-- (Optional) To view associated Cloud Security Management (CSM) insights in the entity panel, [CSM must be configured][2].
+- For Risk Insights coverage, either [Azure][6], [GCP][5], or [AWS must be configured for Cloud SIEM][1].
+- (Optional) To view associated Cloud Security insights in the entity panel, [Cloud Security must be configured][2].
 
 
 ## Explore risk insights
@@ -29,13 +29,13 @@ With Risk Insights, you can:
 
 On the [Risk Insights Explorer][4], you can view all entities that have a non-zero risk score associated to them.
 
-{{< img src="security/entities/entities-explorer2.png" alt="A list of entities and their risk scores in the Risk Insights Explorer" style="width:100%;" >}}
+{{< img src="security/entities/entities-explorer3.png" alt="A list of entities and their risk scores in the Risk Insights Explorer" style="width:100%;" >}}
 
 ### Quickly build context on an entity
 
 Click an entity in the [Explorer][4] to open the entity side panel.
 
-{{< img src="security/entities/entity-side-panel2.png" alt="The side panel for an entity" style="width:90%;" >}}
+{{< img src="security/entities/entity-side-panel3.png" alt="The side panel for an entity" style="width:90%;" >}}
 
 The **What Happened** section of the panel summarizes the count of signals, misconfigurations, and identity risks and how they have contributed to the risk score, as well as any potential configuration risks.
 
@@ -61,3 +61,5 @@ The risk score is calculated from the characteristics of the entity's associated
 [2]: https://docs.datadoghq.com/security/cloud_security_management/setup
 [3]: https://app.datadoghq.com/security
 [4]: https://app.datadoghq.com/security/entities
+[5]: /security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/
+[6]: /security/cloud_siem/guide/azure-config-guide-for-cloud-siem/

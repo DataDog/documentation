@@ -1,6 +1,6 @@
 ---
 aliases:
-- /tracing/profiler/enabling/ruby/
+- /es/tracing/profiler/enabling/ruby/
 code_lang: ruby
 code_lang_weight: 40
 further_reading:

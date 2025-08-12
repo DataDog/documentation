@@ -13,7 +13,7 @@ Audit Event Forwarding is not available in the US1-FED site.
 </div>
 {{% /site-region %}}
 
-{{% site-region region="us,us3,us5,eu,ap1" %}}
+{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
 <div class="alert alert-warning">
 Audit Event Forwarding is in Preview.
 </div>
@@ -81,7 +81,7 @@ Audit Event Forwarding allows you to send audit events from Datadog to custom de
 {{% /tab %}}
 {{% tab "Microsoft Sentinel" %}}
 
-<div class="alert alert-info">Log forwarding to Microsoft Sentinel is in Preview. To access this feature, <a href="https://www.datadoghq.com/product-preview/log-forwarding-to-microsoft-sentinel/">register here.</a></div>
+<div class="alert alert-info">Log forwarding to Microsoft Sentinel is in Preview.</div>
 
 6. Enter a name for the destination.
 7. Authentication for the Microsoft Sentinel Forwarder requires configuring an App Registration through the Datadog Azure Integration.

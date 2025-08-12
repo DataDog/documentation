@@ -137,7 +137,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Hbase_master �
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "hbase_master" >}}
+{{< get-metrics-from-git "hbase-master" >}}
 
 
 ### イベント
@@ -216,7 +216,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い HBase RegionSe
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "hbase_regionserver" >}}
+{{< get-metrics-from-git "hbase-regionserver" >}}
 
 
 ### イベント

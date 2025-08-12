@@ -1,0 +1,11 @@
+{{- $expression := .Get "expression" -}}
+
+<div class="expression-evaluator">
+  <div class="expression-code-container">
+    <code class="expression-code">→ {{ $expression }}</code>
+    <button type="button" class="run-expression-btn" aria-label="Run expression">▶</button>
+  </div>
+  <div class="expression-result-container">
+    <code class="expression-result" data-expression="{{ $expression }}"> </code>
+  </div>
+</div>

@@ -1,54 +1,50 @@
 <!-- Get shortcode parameters -->
-{{ $text := .Get "text" }}
-{{ $tooltip := .Get "tooltip" }}
-{{ $glossary := .Get "glossary" }}
-{{ $case := .Get "case"}}
+{{- $text := .Get "text" -}}
+{{- $tooltip := .Get "tooltip" -}}
+{{- $glossary := .Get "glossary" -}}
+{{- $case := .Get "case" -}}
 
 <!-- Initialize variables -->
-{{ $displayText := $text }}
-{{ $tooltipContent := $tooltip }}
-{{ $fullDefinitionLink := "" }}
-{{ $glossaryMatch := false }}
-{{ $shortDefMatch := false }}
+{{- $displayText := $text -}}
+{{- $tooltipContent := $tooltip -}}
+{{- $fullDefinitionLink := "" -}}
+{{- $glossaryMatch := false -}}
+{{- $shortDefMatch := false -}}
 
 <!-- Handle glossary terms if provided -->
-{{ if $glossary }}
+{{- if $glossary -}}
   <!-- Add underscore to multi-word terms to match file name -->
-  {{ $glossaryTerm := replace $glossary " " "_" }}
+  {{- $glossaryTerm := replace $glossary " " "_" -}}
   <!-- Get the bundle of glossary term -->
-  {{ $headless := .Site.GetPage "/glossary/terms" }}
+  {{- $headless := .Site.GetPage "/glossary/terms" -}}
   <!-- Find the matching glossary term file -->
-  {{ with $headless.Resources.GetMatch (printf "%s.md" $glossaryTerm) }}
-    {{ $glossaryMatch = true }}
-    {{ $displayText = .Title }}
-    {{ if .Params.short_definition }}
-      {{ $shortDefMatch = true }}
+  {{- with $headless.Resources.GetMatch (printf "%s.md" $glossaryTerm) -}}
+    {{- $glossaryMatch = true -}}
+    {{- $displayText = .Title -}}
+    {{- if .Params.short_definition -}}
+      {{- $shortDefMatch = true -}}
       <!-- Use short definition if available -->
-      {{ $tooltipContent = .Params.short_definition }}
-      {{ $fullDefinitionLink = printf "/glossary/#%s" ($glossary | urlize) }}
-      {{ else }}
-        {{ warnf "Glossary term '%s' found but has no short_definition" $glossary }}
-    {{ end }}
-  {{ else }}
-    {{ $displayText = $glossary }}
-    {{ warnf "Glossary term '%s' not found" $glossary }}
-  {{ end }}
-{{ end }}
+      {{- $tooltipContent = .Params.short_definition -}}
+      {{- $fullDefinitionLink = printf "/glossary/#%s" ($glossary | urlize) -}}
+      {{- else -}}
+        {{- warnf "Glossary term '%s' found but has no short_definition" $glossary -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $displayText = $glossary -}}
+    {{- warnf "Glossary term '%s' not found" $glossary -}}
+  {{- end -}}
+{{- end -}}
 
 <!-- Apply capitalization based on the 'case' parameter -->
-{{ if eq $case "sentence" }}
-  {{ $displayText = printf "%s%s" (substr $displayText 0 1 | upper) (substr $displayText 1 | lower) }}
-{{ else if eq $case "title" }}
-  {{ $displayText = title $displayText }}
-{{ else if eq $case "lower" }}
-  {{ $displayText = lower $displayText }}
-{{ else if eq $case "upper" }}
-  {{ $displayText = upper $displayText }}
-{{ end }}
-
-<!-- Render tooltip -->
-{{- if or $shortDefMatch (and $text $tooltip) -}}
-<span class="tooltip-container"><button class="tooltip-trigger" aria-describedby="tooltip-{{ $displayText | anchorize }}">{{ $displayText }}</button><span id="tooltip-{{ $displayText | anchorize }}" class="tooltip-content" role="tooltip">{{ $tooltipContent | safeHTML }}{{- if $fullDefinitionLink -}}<a href="{{ $fullDefinitionLink }}" class="tooltip-full-link" aria-label="View full definition">Glossary</a>{{- end }}</span></span>
-{{- else -}}
-{{- $displayText -}}
+{{- if eq $case "sentence" -}}
+  {{- $displayText = printf "%s%s" (substr $displayText 0 1 | upper) (substr $displayText 1 | lower) -}}
+{{- else if eq $case "title" -}}
+  {{- $displayText = title $displayText -}}
+{{- else if eq $case "lower" -}}
+  {{- $displayText = lower $displayText -}}
+{{- else if eq $case "upper" -}}
+  {{- $displayText = upper $displayText -}}
 {{- end -}}
+
+<!-- Render tooltip (on one line to prevent unnecessary whitespace around tooltip) -->
+{{- if or $shortDefMatch (and $text $tooltip) -}}<span class="tooltip-container"><button class="tooltip-trigger" aria-describedby="tooltip-{{- $displayText | anchorize -}}">{{- $displayText -}}</button><span id="tooltip-{{- $displayText | anchorize -}}" class="tooltip-content" role="tooltip">{{- $tooltipContent | safeHTML -}}{{- if $fullDefinitionLink -}}<a href="{{- $fullDefinitionLink -}}" class="tooltip-full-link" aria-label="View full definition">Glossary</a>{{- end -}}</span></span>{{- else -}}{{- $displayText -}}{{- end -}}

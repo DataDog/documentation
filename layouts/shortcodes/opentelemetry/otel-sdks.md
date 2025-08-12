@@ -1,0 +1,3 @@
+You can fully instrument your applications with OpenTelemetry SDKs. These SDKs provide complete implementations for creating traces, metrics, and logs in the OpenTelemetry format, which can then be sent to Datadog.
+
+<div class="alert alert-info">If you instrument your applications fully with OTel, some Datadog features are not supported. For more information, see the <a href="/opentelemetry/compatibility/">Feature Compatibility</a> table.</div>

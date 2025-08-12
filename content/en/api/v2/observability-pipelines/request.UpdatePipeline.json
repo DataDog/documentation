@@ -1,0 +1,36 @@
+{
+  "data": {
+    "attributes": {
+      "config": {
+        "destinations": [
+          {
+            "id": "updated-datadog-logs-destination-id",
+            "inputs": [
+              "filter-processor"
+            ],
+            "type": "datadog_logs"
+          }
+        ],
+        "processors": [
+          {
+            "id": "filter-processor",
+            "include": "service:my-service",
+            "inputs": [
+              "datadog-agent-source"
+            ],
+            "type": "filter"
+          }
+        ],
+        "sources": [
+          {
+            "id": "datadog-agent-source",
+            "type": "datadog_agent"
+          }
+        ]
+      },
+      "name": "Updated Pipeline Name"
+    },
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "type": "pipelines"
+  }
+}

@@ -37,7 +37,7 @@ title: 백엔드 서비스 오류 추적
 
 ## 스팬(span) 속성을 사용하여 오류 스팬 추적
 
-Datadog 추적기는 통합 및 백엔드 서비스 소스 코드의 설명서 계측을 통해 오류를 수집합니다. 트레이스 내의 오류 스팬(span)는 오류 추적 **(오류가 서비스 항목 스팬(span)**(최상위 서비스 스팬)에 있는 경우)에 의해 처리됩니다. 이 스팬에는 추적할 `error.stack`, `error.message`, `error.type` [스팬 속성][1]도 포함되어야 합니다.
+Datadog 트레이서는 백엔드 서비스 소스 코드의 통합 및 수동 계측을 통해 오류를 수집합니다. 오류 추적은 오류가 서비스 항목 스팬에 있는지 여부에 관계없이 서비스 수준에서 발생하는 경우 트레이스 내에서 오류 스팬을 처리합니다. 이 스팬에는 추적할 `error.stack`, `error.message`, `error.type` [스팬 속성][1]도 포함되어야 합니다.
 
 {{< img src="tracing/error_tracking/flamegraph_with_errors.png" alt="오류가 있는 플레임 그래프" style="width:100%;" >}}
 

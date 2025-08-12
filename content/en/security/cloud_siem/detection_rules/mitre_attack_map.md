@@ -7,6 +7,9 @@ further_reading:
 - link: "/security/cloud_siem/detection_rules/"
   tag: "Documentation"
   text: "Create custom detection rules"
+- link: "https://www.datadoghq.com/blog/cloud-siem-mitre-attack-map/"
+  tag: "Blog"
+  text: "Identify gaps to strengthen detection coverage with the Datadog Cloud SIEM MITRE ATT&CK Map"
 ---
 
 ## Overview
@@ -27,7 +30,7 @@ The default view of the map shows all Datadog out-of-the-box and custom rules fo
 
 To view the map for all sources, in the **Visualize** dropdown menu, select **All Sources**. This shows all out-of-the-box rules, including those that are not currently used to detect threats from your logs.
 
-Click the rule density buttons to visualize the map for a specific number of rules. For example, if you click **High \+7**, only tiles that have more than seven rules enabled are shown on the map.
+Click the rule density buttons to visualize the map for a specific number of rules. For example, if you click **High 7+**, only tiles that have more than seven rules enabled are shown on the map.
 
 ### View an attacker technique's information and related rules
 

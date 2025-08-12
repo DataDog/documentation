@@ -23,7 +23,6 @@ Test Impact Analysis is only supported in the following versions and testing fra
   * JRuby is not supported.
 * `rspec >= 3.0.0`
 * `minitest >= 5.0.0`
-  * [Rails parallel testing][2] is not supported.
 * `cucumber >= 3.0.0`
 
 ## Setup
@@ -164,4 +163,3 @@ Test Impact Analysis can be disabled locally by setting the `DD_CIVISIBILITY_ITR
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tests/setup/ruby
-[2]: https://edgeguides.rubyonrails.org/testing.html#parallel-testing

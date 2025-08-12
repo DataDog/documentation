@@ -11,72 +11,68 @@ is_beta: true
 title: Monitorizar los despliegues de Argo CD
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La visibilidad de CD no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Join the Preview!" >}}
-CD Visibility para Argo CD está en Preview. Si está interesado en esta función, rellene el formulario para solicitar acceso.
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Únete a la Vista previa" >}}
+CD Visibility para Argo CD está en vista previa. Si te interesa esta función, rellena el formulario para solicitar acceso.
 {{< /callout >}}
 
-## Visión general
+## Información general
 
-[Argo CD][1] es una herramienta declarativa de entrega continua (CD) GitOps para Kubernetes. Sigue el patrón GitOps utilizando repositorios Git para definir el estado deseado de la aplicación, y automatiza el despliegue de aplicaciones en el destino especificado entornos.
+[Argo CD][1] es una herramienta declarativa de entrega continua (CD) GitOps para Kubernetes. Sigue el patrón GitOps utilizando repositorios Git para definir el estado deseado de la aplicación y automatiza el despliegue de aplicaciones en entornos de destino especificados.
 
-Datadog CD Visibility se integra con Argo CD mediante [Argo CD notificaciones][2]. Argo CD notificaciones consta de dos componentes principales:
-1. 1. [Triggers][3], que definen _cuándo_ enviar un mensaje notificación.
-2. 2. [Plantillas][4], que definen _qué_ enviar en un notificación.
+Datadog CD Visibility se integra con Argo CD mediante [notificaciones de Argo CD][2]. Las notificaciones de Argo CD constan de dos componentes principales:
+1. [Activadores][3], que definen _cuándo_ enviar un mensaje de notificación.
+2. [Plantillas][4], que definen _qué_ enviar en una notificación.
 
 ## Configuración mínima
 
-La siguiente configuración utiliza el [Webhook notificación servicio ][5] de Argo CD para enviar notificaciones a Datadog.
+La siguiente configuración utiliza el [servicio de notificación de webhooks][5] de Argo CD para enviar notificaciones a Datadog.
 
-Primero, añada su [Datadog API Key][11] en el secreto `argocd-notifications-secret` con la clave `dd-api-key`. Consulte [la guía de CD Argo][2] para obtener información sobre la modificación de la `argocd-notifications-secret`.
+Primero, añade tu [clave de API Datadog][11] en el secreto `argocd-notifications-secret` con la clave `dd-api-key`. Para obtener información sobre la modificación del `argocd-notifications-secret`, consulta [la guía de Argo CD][2] .
 
-A continuación, modifique el `argocd-notifications-cm` ConfigMap para crear el notificación servicio , la plantilla y el disparador para enviar notificaciones a Datadog:
+A continuación, modifica el ConfigMap `argocd-notifications-cm` para crear el servicio, la plantilla y el activador de notificaciones para enviar notificaciones a Datadog:
 
 ```yaml
 apiVersion: v1
-tipo: ConfigMap
-metadatos:
-  nombre: argocd-notificaciones-cm
+kind: ConfigMap
+metadata:
+name: argocd-notifications-cm
 data:
- servicio.webhook.cd-visibilidad-webhook: |
-    url: https://webhook-intake.{{< region-param key="dd_site" code="true" >}}/api/v2/webhook
-    headers:
-    - name: "DD-CD-PROVIDER-ARGOCD"
-      value: "true"
-    - nombre: "DD-API-KEY"
-      valor: $dd-api-key
-    - name: "Tipo de contenido"
-      valor: "application/json"
-  plantilla.cd-visibilidad-plantilla: |
-    webhook:
-      cd-visibility-webhook:
-        method: POST
-        cuerpo: |
-            {
-              "app": {{toJson .app}},
-              "context": {{toJson .context}},
-              "service_type": {{toJson .serviceType}},
-              "recipient": {{toJson .recipient}},
-              "commit_metadata": {{toJson (call .repo.GetCommitMetadata .app.status.operationState.syncResult.revision)}}
-            }
-  trigger.cd-visibilidad-trigger: |
-    - cuando: app.status.operationState.phase esté en ['Exitoso', 'Fallido', 'Error'] y app.status.health.status esté en ['Sano', 'Degradado'].
-      enviar: [cd-visibilidad-plantilla]
-    - when: app.status.operationState.phase == 'Running' and app.status.health.status in ['Healthy', 'Degraded']
-      enviar: [cd-visibility-template]
+service.webhook.cd-visibility-webhook: |
+url: https://webhook-intake.{{< region-param key="dd_site" code="true" >}}/api/v2/webhook
+headers:
+- name: "DD-CD-PROVIDER-ARGOCD"
+value: "true"
+- name: "DD-API-KEY"
+value: $dd-api-key
+- name: "Content-Type"
+value: "application/json"
+template.cd-visibility-template: |
+webhook:
+cd-visibility-webhook:
+method: POST
+body: |
+{
+"app": {{toJson .app}},
+"context": {{toJson .context}},
+"service_type": {{toJson .serviceType}},
+"recipient": {{toJson .recipient}},
+"commit_metadata": {{toJson (call .repo.GetCommitMetadata .app.status.operationState.syncResult.revision)}}
+}
+trigger.cd-visibility-trigger: |
+- when: app.status.operationState.phase in ['Succeeded', 'Failed', 'Error'] and app.status.health.status in ['Healthy', 'Degraded']
+send: [cd-visibility-template]
+- when: app.status.operationState.phase == 'Running' and app.status.health.status in ['Healthy', 'Degraded']
+send: [cd-visibility-template]
 ```
 
 Se han añadido los siguientes recursos:
-1. El `cd-visibility-webhook` servicio hace referencia a la entrada Datadog y configura las cabeceras correctas para la petición. La cabecera `DD-API-KEY` hace referencia a la entrada `dd-api-key` añadida previamente en `argocd-notifications-secret`.
-2. El `cd-visibility-template` define qué enviar en la petición para el `cd-visibility-webhook` servicio .
-3. La `cd-visibility-trigger` define cuándo enviar la notificación, y hace referencia a la `cd-visibility-template`.
+1. El servicio `cd-visibility-webhook` hace referencia a la admisión en Datadog y configura las cabeceras correctas para la solicitud. La cabecera `DD-API-KEY` hace referencia a la admisión `dd-api-key` añadida previamente en `argocd-notifications-secret`.
+2. La `cd-visibility-template` define qué enviar en la solicitud para el servicio`cd-visibility-webhook`.
+3. El `cd-visibility-trigger` define cuándo enviar la notificación y hace referencia a la `cd-visibility-template`.
 
 <div class="alert alert-warning">
 La llamada para rellenar el campo <code>commit_metadata</code> no es necesaria. El campo se utiliza para enriquecer la carga útil con información de Git.
-Si el origen de tu aplicación Argo CD no es un SHA de commit definido (por ejemplo, si estás utilizando repositorios Helm), ajusta el cuerpo eliminando esa línea y la coma de la línea anterior.
+Si el origen de tu aplicación Argo CD no es un algoritmo de hash seguro (SHA) de commit definido (por ejemplo, si estás utilizando repositorios Helm), ajusta el cuerpo eliminando esa línea y la coma de la línea anterior.
 </div>
 
 Una vez que el servicio de notificación, el activador y la plantilla se han añadido al mapa de configuración, puedes suscribir cualquiera de tus aplicaciones de Argo CD a la integración.
@@ -84,59 +80,59 @@ Modifica las anotaciones de la aplicación de Argo CD utilizando la interfaz de 
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
-tipo: Aplicación
-metadatos:
-  anotaciones:
-   notificaciones.argoproj.io/subscribe.cd-visibility-trigger.cd-visibility-webhook: ""
+kind: Application
+metadata:
+  annotations:
+    notifications.argoproj.io/subscribe.cd-visibility-trigger.cd-visibility-webhook: ""
     dd_env: <YOUR_ENV>
     dd_service: <YOUR_SERVICE>
     dd_customtags: "region:us1-east, team:backend"
 ```
 
 Del fragmento anterior:
-1. La anotación notificaciones suscribe la aplicación Argo CD a la configuración notificación creada anteriormente. Consulte la [Guía oficial de Argo CD][12] para más detalles sobre la suscripción de aplicaciones.
-2. Puede utilizar la anotación `dd_env` para Configurar el entorno de la aplicación. Sustituya `YOUR_ENV` por la anotación entorno
+1. La anotación de notificaciones suscribe la aplicación Argo CD a la configuración de notificaciones creada anteriormente. Para ver más detalles sobre la suscripción a aplicaciones, consulta la [guía oficial de Argo CD][12].
+2. Puedes utilizar la anotación `dd_env` para configurar el entorno de la aplicación. Sustituye `YOUR_ENV` anterior por el entorno
    en el que se está desplegando esta aplicación (por ejemplo: `staging` o `prod`). Si no estableces esta anotación,
    el entorno por defecto es `none`.
-3. Puede utilizar la anotación `dd_service` para Configurar el servicio de la aplicación. Sustituya `YOUR_SERVICE` por la anotación servicio
+3. Puedes utilizar la anotación `dd_service` para configurar el servicio de la aplicación. Sustituye `YOUR_SERVICE` anterior por el servicio
    que la aplicación de Argo CD está desplegando (por ejemplo: `transaction-service`). Cuando se utiliza esta anotación, el nombre del servicio
    se añade a todas las ejecuciones de despliegue generadas a partir de la aplicación. Además, si tu servicio
-   está registrado en el [Catálogo de servicios][13], el nombre del equipo también se añade a todas las ejecuciones de despliegue. Si tu aplicación de Argo CD
+   registrado en [Catálogo de software][13], el nombre del equipo también se añade a todas las ejecuciones de despliegues. Si tu Argo CD
    está configurada para desplegar más de un servicio, consulta [Etiquetar una aplicación de Argo CD con despliegues de múltiples servicios](#tag-an-argo-cd-application-deploying-multiple-services).
-4. Puede utilizar la anotación `dd_customtags` para añadir opcionalmente etiquetas (tags) personalizado a las ejecuciones de despliegue generadas para esta aplicación Argo CD.
-   El valor debe ser un lista separado por comas de etiquetas (tags), estructurado como pares `key:value`.
+4. Puedes utilizar la anotación `dd_customtags` para añadir opcionalmente etiquetas (tags) personalizadas a las ejecuciones de despliegues generadas para esta aplicación Argo CD.
+   El valor debe ser una lista de etiquetas (tags) separada por comas, estructuradas como pares `key:value`.
 
-Una vez que haya suscrito su aplicación Argo CD añadiendo las anotaciones anteriores, empezarán a aparecer nuevos despliegues de la aplicación en Datadog.
+Una vez que hayas suscrito tu aplicación Argo CD añadiendo las anotaciones anteriores, empezarán a aparecer nuevos despliegues de la aplicación en Datadog.
 
-La sección [recomendado Setup](#recomendado-setup) a continuación contiene recomendado acciones para mejorar el Monitorización reportado en CD Visibility.
+La sección [Configuración recomendada](#recommended-setup) a continuación contiene las acciones recomendadas para mejorar la monitorización informada en CD Visibility.
 
-## recomendado Configurar
+## Configuración recomendada
 
-### Modificar la duración de la espera de la salud de los recursos
-La duración reportada en el despliegue eventos coincide con la duración de la sincronización en Argo CD. Sin embargo, la duración de la sincronización generalmente representa el tiempo empleado por Argo CD para sincronizar el estado del repositorio Git y el estado de Kubernetes clúster .
-Esto significa que lo que ocurre después de la sincronización (por ejemplo, el tiempo empleado por los recursos de Kubernetes para arrancar) no está incluido en la duración.
+### Modificar la duración de la espera del estado de los recursos
+La duración informada en eventos de despliegue coincide con la duración de la sincronización en Argo CD. Sin embargo, la duración de la sincronización generalmente representa el tiempo empleado por Argo CD para sincronizar el estado del repositorio Git y el estado del clúster Kubernetes.
+Esto significa que lo que ocurre después de la sincronización (por ejemplo, el tiempo empleado por los recursos Kubernetes para arrancar) no está incluido en la duración.
 
-Para cambiar la duración reportada para esperar hasta que los recursos configurados hayan arrancado y alcanzado un estado saludable, añada un nuevo recurso no-op monitorizado por su aplicación Argo CD, con una anotación [PostSync Hook][19].
-El PostSync Hook se ejecutará después de que todos los recursos hayan alcanzado un estado saludable, y la sincronización de Argo CD esperará al resultado del PostSync Hook para actualizar el estado de la aplicación como saludable.
+Para cambiar la duración informada de la espera hasta que los recursos configurados arranquen y alcancen un estado saludable, añade un nuevo recurso no-op monitorizado por tu aplicación Argo CD, con una anotación de [hook PostSync][19].
+El hook PostSync se ejecutará después de que todos los recursos hayan alcanzado un estado saludable y la sincronización de Argo CD esperará el resultado del hook PostSync para actualizar el estado de la aplicación como saludable.
 
-A continuación se representa un ejemplo de un PostSync Hook Job que ejecuta un simple comando `echo`.
+A continuación se representa un ejemplo de un trabajo de hook PostSync que ejecuta un simple comando `echo`.
 
 ```yaml
 apiVersion: batch/v1
-tipo: Trabajo
+kind: Job
 metadata:
-  name: cdvisibility-postsync-job # Asegura que la duración de la sincronización del CD de Argo espera la salud de los recursos
-  anotaciones:
+  name: cdvisibility-postsync-job # Ensures that the Argo CD sync duration waits for resources health
+  annotations:
     argocd.argoproj.io/hook: PostSync
-    argocd.argoproj.io/hook-delete-política: HookSucceeded
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
   template:
     spec:
-      contenedores:
-        - nombre: noop-echo
-          imagen: alpine:latest
-          comando: ["echo", "todos los recursos de sincronización han alcanzado un estado saludable"]
-      restartPolicy: Nunca
+      containers:
+        - name: noop-echo
+          image: alpine:latest
+          command: ["echo", "all the sync resources have reached a healthy state"]
+      restartPolicy: Never
   backoffLimit: 0
 ```
 
@@ -150,7 +146,7 @@ El siguiente diagrama representa un ejemplo de este tipo de configuración:
 
 {{< img src="ci/diagram_argo-cd-deployment_240910.png" alt="Activación de despliegues de Argo CD mediante Git" style="width:100%;">}}
 
-El [ comando`datadog-ci deployment correlate` ][14] puede utilizarse para correlacionar una o más confirmaciones del repositorio de configuración con una confirmación del repositorio de aplicaciones. Cuando se produce un despliegue de Argo CD, la información de la confirmación de configuración en el evento de despliegue es reemplazada por la confirmación del repositorio de la aplicación relacionada, si existe. Hay dos formas posibles de realizar la correlación con el comando: configuración automática y manual. Ambos métodos requieren la versión `2.44.0` o posterior de la CLI `datadog-ci`.
+El [comando`datadog-ci deployment correlate`][14] puede utilizarse para correlacionar una o más confirmaciones del repositorio de configuración con una confirmación del repositorio de aplicaciones. Cuando se produce un despliegue de Argo CD, la información de la confirmación de configuración en el evento de despliegue es reemplazada por la confirmación del repositorio de la aplicación relacionada, si existe. Hay dos formas posibles de realizar la correlación con el comando: configuración automática y manual. Ambos métodos requieren la versión `2.44.0` o posterior de la CLI `datadog-ci`.
 
 {{< tabs >}}
 {{% tab "Configuración automática" %}}
@@ -196,9 +192,9 @@ Si tu aplicación de Argo CD despliega más de un servicio, Datadog puede inferi
 La detección automática de servicios no es compatible cuando se utiliza <a href="https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/#server-side-apply">Server-Side Apply</a>.
 </div>
 
-Para habilitar el etiquetado automático de servicios, necesitas [monitorizar tu infraestructura de Kubernetes utilizando el Datadog Agent][15] y tus recursos de Kubernetes deben tener las siguientes etiquetas:
-- `tags.datadoghq.com/service` (obligatorio): especifica el servicio de Datadog de este recurso. Para más información, consulta [etiquetado unificado de servicios][18].
-- `team` (opcional): especifica el equipo de Datadog de este recurso. Si se omite esta etiqueta, el equipo se recupera automáticamente del [Catálogo de servicios][13] basándose en la etiqueta (label) de servicio.
+Para habilitar el etiquetado automático de servicios, necesitas [monitorizar tu infraestructura de Kubernetes utilizando el Datadog Agent][15] y tus recursos de Kubernetes deben tener las siguientes etiquetas (labels):
+- `tags.datadoghq.com/service` (obligatorio): especifica el servicio de Datadog de este recurso. Para más información, consulta [Etiquetado unificado de servicios][18].
+- `team` (opcional): especifica el equipo Datadog de este recurso. Si se omite esta etiqueta (label), el equipo se recupera automáticamente del [Catálogo de software][13] en función de la etiqueta (label) de servicio.
 
 Sólo son admisibles los recursos de Kubernetes con los siguientes tipos: `Deployment`, `ReplicaSet`, `StatefulSet`, `Service`, `DaemonSet`, `Pod`, `Job` y `CronJob`.
 
@@ -220,7 +216,7 @@ metadata:
 
 ## Visualizar los despliegues en Datadog
 
-Las páginas [**Despliegues**][6] y [**Ejecuciones**][7] se rellenan con datos una vez finalizado el despliegue. Para obtener más información, consulte [Buscar y Gestionar][9] y [Explorador de visibilidad de CD][10].
+Las páginas [**Despliegues**][6] y [**Ejecuciones**][7] se rellenan con datos una vez finalizado el despliegue. Para obtener más información, consulta [Buscar y gestionar][9] y [Explorador de CD Visibility][10].
 
 ## Resolución de problemas
 
@@ -243,7 +239,7 @@ Si no se envían notificaciones, examina los logs del pod `argocd-notification-c
 [10]: /es/continuous_delivery/explorer
 [11]: https://app.datadoghq.com/organization-settings/api-keys
 [12]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/subscriptions/
-[13]: /es/tracing/service_catalog
+[13]: /es/tracing/software_catalog
 [14]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#correlate
 [15]: /es/containers/kubernetes
 [16]: https://app.datadoghq.com/orchestration/explorer

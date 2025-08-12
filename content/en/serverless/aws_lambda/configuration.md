@@ -33,6 +33,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Collect Profiling data](#collect-profiling-data)
 - [Send telemetry over PrivateLink or proxy](#send-telemetry-over-privatelink-or-proxy)
 - [Send telemetry to multiple Datadog organizations](#send-telemetry-to-multiple-datadog-organizations)
+- [Enable FIPS compliance](#enable-fips-compliance)
 - [Propagate trace context over AWS resources](#propagate-trace-context-over-aws-resources)
 - [Merge X-Ray and Datadog traces](#merge-x-ray-and-datadog-traces)
 - [Enable AWS Lambda code signing](#enable-aws-lambda-code-signing)
@@ -57,13 +58,11 @@ To enable threat monitoring, add the following environment variables to your dep
      AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
    ```
 
-Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
+Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][49].
 
-[3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
-
-To see Application Security Management threat detection in action, send known attack patterns to your application. For example, send an HTTP header with value `acunetix-product` to trigger a [security scanner attack][44] attempt:
+To see App and API Protection threat detection in action, send known attack patterns to your application. For example, send an HTTP header with value `acunetix-product` to trigger a [security scanner attack][44] attempt:
    ```sh
-   curl -H 'My-ASM-Test-Header: acunetix-product' https://<YOUR_FUNCTION_URL>/<EXISTING_ROUTE>
+   curl -H 'My-AAP-Test-Header: acunetix-product' https://<YOUR_FUNCTION_URL>/<EXISTING_ROUTE>
    ```
 A few minutes after you enable your application and send the attack patterns, **threat information appears in the [Application Signals Explorer][41]**.
 
@@ -128,7 +127,7 @@ Transform:
 Ensure you are using the latest version of the [Datadog serverless cdk construct][1] and apply the tags using the `env`, `service`, `version` and `tags` parameters. For example:
 
 ```typescript
-const datadog = new Datadog(this, "Datadog", {
+const datadog = new DatadogLambda(this, "Datadog", {
     // ... other required parameters, such as the Datadog site and API key
     env: "dev",
     service: "web",
@@ -215,7 +214,7 @@ Transform:
 Ensure you are using the latest version of the [Datadog serverless cdk construct][1] and set the `captureLambdaPayload` parameter to `true`. For example:
 
 ```typescript
-const datadog = new Datadog(this, "Datadog", {
+const datadog = new DatadogLambda(this, "Datadog", {
     // ... other required parameters, such as the Datadog site and API key
     captureLambdaPayload: true
 });
@@ -278,8 +277,6 @@ DD_APM_REPLACE_TAGS=[
 
 ## Collect traces from non-Lambda resources
 
-<div class="alert alert-info">This feature is currently supported for Python, Node.js, Java, and .NET.</div>
-
 Datadog can infer APM spans based on the incoming Lambda events for the AWS managed resources that trigger the Lambda function. This can be help visualize the relationship between AWS managed resources and identify performance issues in your serverless applications. See [additional product details][12].
 
 The following resources are currently supported:
@@ -319,6 +316,7 @@ To rename all upstream services associated with an AWS Lambda integration, use t
 | `lambda_kinesis` | `"lambda_kinesis:newServiceName"` |
 | `lambda_dynamodb` | `"lambda_dynamodb:newServiceName"` |
 | `lambda_url` | `"lambda_url:newServiceName"` |
+| `lambda_msk` | `"lambda_msk:newServiceName"` |
 
 #### Rename specific services
 
@@ -334,6 +332,7 @@ For a more granular approach, use these service-specific identifiers:
 | Kinesis | Stream name | `"MyStream:newServiceName"` |
 | DynamoDB | Table name | `"ExampleTableWithStream:newServiceName"` |
 | Lambda URLs | API ID | `"a8hyhsshac:newServiceName"` |
+| MSK | Cluster name | `"ExampleCluster:newServiceName"` |
 
 #### Examples with description
 
@@ -352,9 +351,9 @@ To see what libraries and frameworks are automatically instrumented by the Datad
 
 To manage the [APM traced invocation sampling rate][17] for serverless functions, set the `DD_TRACE_SAMPLING_RULES` environment variable on the function to a value between 0.000 (no tracing of Lambda function invocations) and 1.000 (trace all Lambda function invocations).
 
-**Note**: The use of `DD_TRACE_SAMPLE_RATE` is deprecated. Use `DD_TRACE_SAMPLING_RULES` instead. For instance, if you already set `DD_TRACE_SAMPLE_RATE` to `0.1`, set `DD_TRACE_SAMPLING_RULES` to `[{"sample_rate":0.1}]` instead.
-
-Metrics are calculated based on 100% of the application's traffic, and remain accurate regardless of any sampling configuration.
+**Notes**:
+   - The use of `DD_TRACE_SAMPLE_RATE` is deprecated. Use `DD_TRACE_SAMPLING_RULES` instead. For instance, if you already set `DD_TRACE_SAMPLE_RATE` to `0.1`, set `DD_TRACE_SAMPLING_RULES` to `[{"sample_rate":0.1}]` instead.
+   - Overall traffic metrics such as `trace.<OPERATION_NAME>.hits` are calculated based on sampled invocations *only* in Lambda.
 
 For high throughput services, there's usually no need for you to collect every single request as trace data is very repetitive—an important enough problem should always show symptoms in multiple traces. [Ingestion controls][18] help you to have the visibility that you need to troubleshoot problems while remaining within budget.
 
@@ -410,7 +409,7 @@ Transform:
 {{% tab "AWS CDK" %}}
 
 ```typescript
-const datadog = new Datadog(this, "Datadog", {
+const datadog = new DatadogLambda(this, "Datadog", {
     // ... other required parameters, such as the Datadog site and API key
     enableDatadogTracing: true
 });
@@ -463,7 +462,7 @@ Transform:
 {{% tab "AWS CDK" %}}
 
 ```typescript
-const datadog = new Datadog(this, "Datadog", {
+const datadog = new DatadogLambda(this, "Datadog", {
     // ... other required parameters, such as the Datadog site and API key
     enableDatadogTracing: false
 });
@@ -578,6 +577,40 @@ The Datadog Extension supports decrypting [AWS KMS][41] values automatically for
 
 For more advanced usage, see the [Dual Shipping guide][32].
 
+## Enable FIPS compliance
+
+<div class="alert alert-info">For a complete overview of FIPS compliance for AWS Lambda functions, refer to the dedicated <a href="/serverless/aws_lambda/fips-compliance">AWS Lambda FIPS Compliance</a> page.</div>
+
+To enable FIPS compliance for AWS Lambda functions, follow these steps:
+
+1. Use a FIPS-compliant extension layer by referencing the appropriate ARN:
+
+{{< tabs >}}
+{{% tab "AWS GovCLoud" %}}
+ ```sh
+ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
+ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
+ ```
+{{% /tab %}}
+{{% tab "AWS Commercial" %}}
+ ```sh
+ arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
+ arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
+ ```
+{{% /tab %}}
+{{< /tabs >}}
+
+2. For Lambda functions using Python, JavaScript, or Go, set the environment variable `DD_LAMBDA_FIPS_MODE` to `true`. This environment variable:
+   - In FIPS mode, the Lambda metric helper functions require the FIPS-compliant extension for metric submission
+   - Uses AWS FIPS endpoints for API key lookups
+   - Is enabled by default in GovCloud environments
+
+3. For Lambda functions using Ruby, .NET, or Java, no additional environment variable configuration is needed.
+
+4. For complete end-to-end FIPS compliance, configure your Lambda function to use the US1-FED Datadog site:
+   - Set the `DD_SITE` to `ddog-gov.com` (required for end-to-end FIPS compliance)
+   **Note**: While the FIPS-compliant Lambda components work with any Datadog site, only the US1-FED site has FIPS-compliant intake endpoints.
+
 ## Propagate trace context over AWS resources
 
 Datadog automatically injects the trace context into outgoing AWS SDK requests and extracts the trace context from the Lambda event. This enables Datadog to trace a request or transaction over distributed services. See [Serverless Trace Propagation][33].
@@ -614,6 +647,8 @@ Datadog can collect the monitoring data from your Lambda functions either using 
 To migrate, compare the [installation instructions using the Datadog Lambda Extension][1] against the [instructions using the Datadog Forwarder][38]. For your convenience, the key differences are summarized below.
 
 **Note**: Datadog recommends migrating your dev and staging applications first and migrating production applications one by one.
+
+<div class="alert alert-info">The Datadog Lambda extension enables log collection by default. If you are migrating from the Forwarder to the extension, ensure that you remove your log subscription. Otherwise, you may see duplicate logs.</div>
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -677,7 +712,7 @@ If you cannot use Layer Versions, Datadog recommends configuring the [Datadog Fo
 
 ## Configure the Datadog Lambda extension for local testing
 
-To test your Lambda function's container image locally with the Datadog Lambda extension installed, you need to set `DD_LOCAL_TEST` to `true` in your local testing environment. Otherwise, the extension waits for responses from the AWS Extensions API and blocks the invocation.
+Not all Lambda emulators support the AWS Lambda Telemetry API. To test your Lambda function's container image locally with the Datadog Lambda extension installed, you need to set `DD_SERVERLESS_FLUSH_STRATEGY` to `periodically,1` in your local testing environment. Otherwise, the extension waits for responses from the AWS Lambda Telemetry API and blocks the invocation.
 
 ## Instrument AWS Lambda with the OpenTelemetry API
 
@@ -744,3 +779,5 @@ If you have trouble configuring your installations, set the environment variable
 [46]: https://docs.datadoghq.com/tracing/glossary/#services
 [47]: /logs/
 [48]: /tracing/trace_collection/otel_instrumentation/
+[49]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+

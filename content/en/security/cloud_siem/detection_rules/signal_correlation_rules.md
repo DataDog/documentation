@@ -24,7 +24,7 @@ As another example, you can create a signal by combining these two rules:
 
 And use the `expired account ID` attribute to correlate the two rules.
 
-You can correlate log detection rules, as well as log detection rules with Cloud Security Management Threats and Application Security Management rules.
+You can correlate log detection rules, as well as log detection rules with Workload Protection and App and API Protection rules.
 
 ## Create a Signal Correlation rule
 

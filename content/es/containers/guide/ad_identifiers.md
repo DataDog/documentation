@@ -3,28 +3,27 @@ aliases:
 - /es/agent/autodiscovery/ad_identifiers
 - /es/agent/guide/ad_identifiers
 further_reading:
-- link: /agent/kubernetes/integrations/
+- link: /contenedores/Kubernetes/integraciones/
   tag: Documentación
-  text: Crea y carga una plantilla de integración de Autodiscovery
+  text: Configurar integraciones con Autodiscovery en Kubernetes
+- link: /contenedores/Docker/integraciones/
+  tag: Documentación
+  text: Configurar integraciones con Autodiscovery en Docker
 - link: /agent/guide/autodiscovery-management/
   tag: Documentación
   text: Determina qué contenedor debe incluirse en el Autodiscovery del Agent
 title: Identificadores de contenedor de Autodiscovery
 ---
 
-Los identificadores de contenedores Autodiscovery, o `ad_identifiers`, te permiten aplicar una plantilla de archivo de configuración Autodiscovery a un determinado contenedor, ya sea utilizando el nombre de imagen del contenedor o un identificador de contenedor Autodiscovery personalizado.
-
-Incluso si la configuración de Autodiscovery está definida dentro de un archivo de configuración personalizado, puedes utilizar las etiquetas (labels) estándar para etiquetar `env` , `service` y `version`. Consulta [Etiquetado unificado de servicios][1] para obtener más información sobre cómo configurar estas etiquetas en tus contenedores.
-
-**Nota**: Otros tipos de configuraciones, incluidas las bases de datos clave-valor, las etiquetas (labels) de Docker o las anotaciones en pods de Kubernetes utilizan un método diferente para hacer coincidir las plantillas de configuración de integraciones con sus contenedores correspondientes. Para estos tipos de configuraciones, la correspondencia entre una plantilla de configuración de integraciones y el contenedor se basa en el `<CONTAINER_IDENTIFIER>` incluido en las bases de datos clave-valor, en las etiquetas o en las anotaciones.
+Este documento explica cómo aplicar una plantilla de configuración de [Autodiscovery][1] a un contenedor específico. El parámetro `ad_identifiers` puede coincidir con un nombre de imagen del contenedor o con un identificador personalizado.
 
 ## Nombre de la imagen del contenedor
 
-Para aplicar la siguiente plantilla de configuración de Autodiscovery a un determinado contenedor, utiliza el nombre corto de la imagen del contenedor como `<INTEGRATION_Autodiscovery_IDENTIFIER>`:
+Para aplicar la siguiente plantilla de configuración de Autodiscovery a un determinado contenedor, sustituye `<AUTODISCOVERY_IDENTIFIER>` por el nombre [corto][2] de la imagen de contenedor:
 
 ```yaml
 ad_identifiers:
-  <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
+  <AUTODISCOVERY_IDENTIFIER>
 
 init_config:
   <INIT_CONFIG>
@@ -64,48 +63,54 @@ Esto coincide con **cualquier** imagen de contenedor en tu host que coincida con
 
 ## Identificadores de contenedores de Autodiscovery personalizados
 
-Para aplicar diferentes plantillas de configuración de Autodiscovery a contenedores que ejecutan la misma imagen, elige un valor personalizado para proporcionar como `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`. Luego, aplica una etiqueta (label) de Docker o una anotación de Kubernetes a tu contenedor que contenga este valor personalizado.
+Si deseas aplicar diferentes plantillas de configuración a contenedores que ejecutan la misma imagen, utiliza identificadores personalizados de contenedor.
 
-**Ejemplo**: la siguiente plantilla de configuración de Autodiscovery en Apache designa una imagen de contenedor con el nombre personalizado `foo`:
+1. Proporciona un identificador personalizado de contenedor a tu contenedor utilizando una etiqueta de Docker o una anotación de Kubernetes.
 
-```yaml
-ad_identifiers:
-  - foo
-init_config:
-instances:
-  - apache_status_url: http://%%host%%/server-status?auto
-logs:
-  source: apache
-  service: webapp
-```
+   **Ejemplo**: 
+   Aplica una etiqueta de Docker o una anotación de Kubernetes para identificar tu contenedor como `foo`:
 
-Luego, aplica una etiqueta (label) de Docker o una anotación de Kubernetes para identificar tu contenedor como `foo`:
+   {{< tabs >}}
+   {{% tab "Etiqueta de Docker" %}}
 
-{{< tabs >}}
-{{% tab "Etiqueta (label) de Docker" %}}
+   ```yaml
+   LABEL com.datadoghq.ad.check.id="foo"
+   ```
 
-```yaml
-LABEL com.datadoghq.ad.check.id="foo"
-```
+   **Nota**: La etiqueta `com.datadoghq.ad.check.id` tiene prioridad sobre el nombre de la imagen.
 
-**Nota**: La etiqueta (label) `com.datadoghq.ad.check.id` tiene prioridad sobre el nombre de la imagen.
+   {{% /tab %}}
+   {{% tab "Anotación de Kubernetes" %}}
 
-{{% /tab %}}
-{{% tab "Anotación de Kubernetes" %}}
+   ```text
+   ad.datadoghq.com/<CONTAINER_NAME>.check.id: 'foo'
+   ```
 
-```text
-ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id: <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
-```
+   Sustituye `<CONTAINER_NAME>` por el nombre de contenedor dentro del pod.
 
-Sustituye el `<CONTAINER_IDENTIFIER>` por el nombre del contenedor dentro del pod.
+   **Nota**: Compatible con Datadog Agent v6.25+ y v7.25. La etiqueta `ad.datadoghq.com/<CONTAINER_NAME>.check.id` tiene prioridad sobre el nombre de la imagen.
+   {{% /tab %}}
+   {{< /tabs >}}
 
-**Nota**: Compatible con el Datadog Agent v6.25 o posteriores y v7.25. La etiqueta (label)`ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id` tiene prioridad sobre el nombre de la imagen.
-{{% /tab %}}
-{{< /tabs >}}
+2. Haz referencia a este valor personalizado en tu plantilla de configuración de Autodiscovery.
 
+   **Ejemplo**: 
+   La siguiente plantilla de configuración de Apache Autodiscovery designa una imagen de contenedor con el nombre personalizado `foo`:
 
-## Leer más
+   ```yaml
+   ad_identifiers:
+     - foo
+   init_config:
+   instances:
+     - apache_status_url: http://%%host%%/server-status?auto
+   logs:
+     source: apache
+     service: webapp
+   ```
+
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/getting_started/tagging/unified_service_tagging
+[1]: /es/getting_started/containers/autodiscovery
+[2]: /es/glossary/#short-image

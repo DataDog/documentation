@@ -1,0 +1,100 @@
+<div class="expression-examples-container">
+  <div class="examples-header">Try these examples:</div>
+  <div class="examples-list">
+    <button class="example-button" data-expression="i > 3">i > 3</button>
+    <button class="example-button" data-expression='i == mySequence[0]'>i == mySequence[0]</button>
+    <button class="example-button" data-expression="any(myMap, {@value == i})">any(myMap, {@value == i})</button>
+    <button class="example-button" data-expression="">Write your own!</button>
+  </div>
+</div>
+
+<div class="expression-simulator-container">
+  <!-- Add a notice at the top to indicate this is a static illustration -->
+  <div class="instrumentation-indicator">
+    <strong>Note:</strong> Condition evaluations and variable access patterns may vary when using the product.
+  </div>
+
+  <div class="expression-simulator">
+    <div class="simulator-code-editor">
+      <div class="code-line-container">
+        <span class="line-number">11</span>
+        <div class="code-line"></div>
+      </div>
+
+      <div class="code-line-container">
+        <span class="line-number">12</span>
+        <div class="code-line"><span class="decorator">@app.route</span>(<span class="string">'/hello_world/&lt;int:loops&gt;'</span>)</div>
+      </div>
+    </div>
+
+    <div class="simulator-code-editor">
+      <div class="code-line-container">
+        <span class="line-number">13</span>
+        <div class="code-line"><span class="keyword">def</span> <span class="function-name">hello_world</span>(<span class="parameter">loops</span>):</div>
+      </div>
+
+      <div class="code-line-container">
+        <span class="line-number">14</span>
+        <div class="code-line"><span class="indent-1"></span><span class="variable">myString</span> = <span class="string">"hello world"</span></div>
+      </div>
+
+      <div class="code-line-container">
+        <span class="line-number">15</span>
+        <div class="code-line"><span class="indent-1"></span><span class="variable">mySequence</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div>
+      </div>
+
+      <div class="code-line-container">
+        <span class="line-number">16</span>
+        <div class="code-line"><span class="indent-1"></span><span class="variable">myMap</span> = {<span class="string">"a"</span>: <span class="number">1</span>, <span class="string">"b"</span>: <span class="number">2</span>, <span class="string">"c"</span>: <span class="number">3</span>}</span></div>
+      </div>
+
+      <div class="code-line-container">
+        <span class="line-number">17</span>
+        <div class="code-line"><span class="indent-1"></span><span class="keyword">for</span> <span class="variable">i</span> <span class="keyword">in</span> <span class="function-name">range</span>(<span class="variable">loops</span>):</div>
+      </div>
+    </div>
+
+    <div class="instrumentation-controls">
+      <div class="emit-container">
+        <div class="emit-label">Emit</div>
+        <div class="dropdown-container">
+          <div class="dropdown-button non-interactive">Log <span class="dropdown-arrow">▼</span></div>
+        </div>
+      </div>
+
+      <div class="template-container">
+        <div class="template-label">with template</div>
+        <div class="template-input non-interactive" style="display: flex; align-items: center; height: 1.5rem;">Log on loop <span style="color: #2c63db; padding-left: 0.2rem; padding-right:0.2rem"> {i+1} </span> generated</div>
+      </div>
+
+      <div class="condition-container">
+        <div class="condition-label">when</div>
+        <button class="clear-button">×</button>
+        <input type="text" id="condition-input" class="condition-input" placeholder="Enter a condition...">
+        <div id="simulator-autocomplete-container" class="autocomplete-container"></div>
+      </div>
+    </div>
+
+    <div class="simulator-code-editor">
+      <div class="code-line-container highlighted-line">
+        <span class="line-number">18</span>
+        <div class="code-line"><span class="indent-2"></span><span class="keyword">pass</span></div>
+      </div>
+
+      <div class="code-line-container">
+        <span class="line-number">19</span>
+        <div class="code-line"><span class="indent-1"></span><span class="keyword">return</span> <span class="string">"OK"</span>, <span class="number">200</span></div>
+      </div>
+
+      <div class="code-line-container">
+        <span class="line-number">20</span>
+        <div class="code-line"></div>
+      </div>
+    </div>
+
+    <div class="simulation-controls">
+      <button id="simulate-button" class="simulate-button">SIMULATE</button>
+      <span class="curl-example">curl http://example-app:80/hello_world/5</span>
+    </div>
+  </div>
+</div>

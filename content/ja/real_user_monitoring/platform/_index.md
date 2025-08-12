@@ -21,15 +21,11 @@ RUM アプリケーションのデータ収集を開始したら、Datadog プ�
 
 {{< img src="monitors/monitor_types/rum/rum_multiple_queries_2.png" alt="カートページのエラー率についてアラートを出すように構成されたモニターです。このモニターには 2 つのクエリ (a、b) があり、数式 (a/b)*100 が含まれています。" style="width:80%;" >}}
 
-## カスタムメトリクスを生成
+## カスタムメトリクスの生成
 [カスタムメトリクス][3]を生成して、アプリケーションの KPI を最大 15 か月にわたって追跡します。
 
 {{< img src="real_user_monitoring/generate_metrics/generate_metric_example.png" alt="RUM ベースのカスタムメトリクスを生成する" width="80%" >}}
 
-## RUM とトレースの接続
-[RUM とトレースを接続][4]して、フロントエンドのリクエストを対応するバックエンドのトレースにリンクし、スタックのどこに問題があるかを特定します。
-
-{{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM とトレース" style="width:100%;">}}
 
 ## その他の参考資料
 
@@ -38,4 +34,3 @@ RUM アプリケーションのデータ収集を開始したら、Datadog プ�
 [1]: /ja/real_user_monitoring/platform/dashboards
 [2]: /ja/monitors/types/real_user_monitoring/
 [3]: /ja/real_user_monitoring/platform/generate_metrics
-[4]: /ja/real_user_monitoring/platform/connect_rum_and_traces

@@ -6,7 +6,7 @@ further_reading:
 - link: "logs/guide/control-sensitive-logs-data/"
   tag: "Documentation"
   text: "Control Sensitive Logs Data"
-- link: "/sensitive_data_scanner/"
+- link: "/security/sensitive_data_scanner/"
   tag: "Documentation"
   text: "Sensitive Data Scanner"
 ---
@@ -42,8 +42,6 @@ To delete an entire index:
 1. Navigate to the [Log Indexes][1] page.
 1. Click the **Delete** icon on the right side of the index you want to delete.
 1. Click **Confirm** to delete the index.
-
-**Note**: The index shows as a pending deletion until the logs age out, after which the index is fully deleted and removed from the UI.
 
 ## Redact sensitive data with Sensitive Data Scanner
 

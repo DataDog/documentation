@@ -112,6 +112,12 @@ For Web, add the following to your `index.html` under the `head` tag, for **{{<r
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v5/datadog-rum-slim.js"></script>
 ```
 {{</ site-region>}}
+{{< site-region region="ap2" >}}
+```html
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap2/v5/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap2/v5/datadog-rum-slim.js"></script>
+```
+{{</ site-region>}}
 {{< site-region region="eu" >}}
 ```html
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v5/datadog-logs.js"></script>
@@ -207,8 +213,6 @@ You can initialize the library using one of two methods in your `main.dart` file
    ```
 
 #### Sample session rates
-
-<div class="alert alert-warning">Configuring the session sample rate does not apply to Error Tracking.</div>
 
 To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while initializing the Flutter RUM SDK. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 

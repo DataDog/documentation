@@ -10,7 +10,7 @@ assets:
       creates_events: false
     metrics:
       check:
-      - oci.computeagent.cpu_utilization
+      - oci.mediastreams.egress_bytes
       metadata_path: metadata.csv
       prefix: oci.
     service_checks:
@@ -71,207 +71,196 @@ Utiliza la integración de OCI de Datadog para reenviar tus logs y métricas a D
 ### Recopilación de métricas
 
 Para enviar tus métricas de OCI a Datadog:
-   - Usa una stack de Oracle Resource Manager para [crear un usuario de autenticación de Datadog, un grupo y las políticas necesarias](#create-a-policy-stack) en la región de origen de tu tenencia. Esta stack:
-       * Permite que el usuario de autenticación de Datadog lea datos de tus recursos de OCI.
-       * Permite el reenvío de métricas.
-   - [Ingresa información de tenencia](#enter-tenancy-info) en el cuadro de integración de Datadog.
-   - Usa la stack de Oracle Resource Manager a fin de [crear la infraestructura de OCI necesaria](#create-a-metric-forwarding-stack) para cada región de tenencia desde la que quieres reenviar métricas.
+   - [Ingresa la información de la tenencia](#enter-tenancy-info).
+   - [Crea un stack tecnológico de políticas de OCI](#create-oci-policy-stack) en la región de origen de tu tenencia para crear un usuario de autenticación, un grupo y políticas de Datadog.
+   - [Ingresa la información del DatadogAuthUser](#enter-datadogauthuser-info) en Datadog.
+   - [Crea un stack tecnológico de reenvío de métricas de OCI](#create-oci-metric-forwarding-stack) para cada región de la tenencia desde la que quieras reenviar métricas.
 
-### Generar stacks de OCI e información de tenencia
+Para ver una representación visual de esta arquitectura, consulta la sección [Arquitectura](#architecture).
 
-**Nota**: Tu cuenta de usuario de OCI necesita el rol de **Cloud Administrator** (Administrador de la nube) para completar estos pasos.
+#### Ingresar la información de la tenencia
 
-Esta integración usa un [centro de conectores][1] de OCI, una [aplicación de funciones][2] y una infraestructura de red segura para enviar métricas de OCI a Datadog.
+{{% collapse-content title="Requisitos para esta sección" level="h5" %}}
+- Tu cuenta de usuario de OCI necesita el rol **Cloud Administrator** (Administrador de la nube) para completar estos pasos.
+- OCID de la tenencia
+- Región de origen
+{{% /collapse-content %}}
 
-{{< img src="/integrations/oracle_cloud_infrastructure/OCI_metrics_integration_diagram.png" alt="Un diagrama de los recursos de OCI mencionados en esta página y que muestra el flujo de los datos" >}}
+Ingresa el OCID y la región de origen de la tenencia que deseas monitorizar en el [cuadro de integración de Datadog y OCI][1].
+   - Puedes encontrar esta información en la [Página de detalles de tenencia][2].
+   - Introduce la región de origen utilizando el valor **Region Identifier** (Identificador de región) de la [página Regiones y dominios de disponibilidad][3] de OCI.
 
-Para la configuración más sencilla, Datadog recomienda crear todos los recursos de OCI necesarios con los stacks tecnológicos de ORM que se proporcionan a continuación. Como alternativa, puedes utilizar tu infraestructura de red de OCI o aplicación de función existente que cumpla los requisitos descritos en la sección [Crear un stack tecnológico de reenvío de métricas](#create-a-metric-forwarding-stack).
+#### Crear un stack tecnológico de políticas de OCI
 
-**Nota**: Debes gestionar quién tiene acceso a los archivos de estado de Terraform de las stacks del gestor de recursos. Consulta la sección [Archivos de estado de Terraform][3] de la página Seguridad del gestor de recursos para obtener más información.
+{{% collapse-content title="Requisitos para esta sección" level="h5" %}}
+- Tu cuenta de usuario debe poder [crear políticas y grupos dinámicos][4] en el dominio predeterminado.
+- Debes estar en la región de origen de la tenencia.
+{{% /collapse-content %}}
 
-#### Crear un stack tecnológico de políticas
+<div class="alert alert-warning">Asegúrate de que la <strong>región de origen</strong> de la tenencia esté seleccionada en la parte superior derecha de la pantalla.</div>
 
-{{< img src="/integrations/oracle_cloud_infrastructure/OCI_auth_workflow_diagram.png" alt="Un diagrama de los recursos y flujo de trabajo de OCI utilizado para la autenticación de integración" >}}
+Este stack tecnológico de políticas solo debe desplegarse una vez por tenencia.
 
-Se debe crear una stack de políticas de ORM en la **región de origen** de la tenencia. La stack de políticas crea:
- * Un grupo dinámico con `resource.type = 'serviceconnectors'`, para permitir el acceso al centro de conectores.
+1. Haz clic en el botón **Create Policy Stack** (Crear un stack tecnológico de políticas) en el cuadro de integración de Datadog y OCI.
+2. Acepta las Condiciones de uso de Oracle.
+3. Deja la opción de utilizar proveedores de Terraform personalizados **desmarcada**.
+4. Utiliza el nombre y el compartimento predeterminados para el stack tecnológico. De manera opcional, indica tu propio nombre descriptivo o compartimento.
+5. Haz clic en **Next** (Siguiente).
+6. Asigna un nombre al grupo dinámico, el grupo de usuarios y a la política que se van a crear, o usa los nombres predeterminados proporcionados.
+7. Haz clic en **Next** (Siguiente).
+8. Haz clic en **Create** (Crear).
+
+#### Ingresar la información del DatadogAuthUser
+
+{{% collapse-content title="Requisitos para esta sección" level="h5" %}}
+- OCID del `DatadogAuthUser`
+- Clave de la API de OCI y valor de la huella digital
+{{% /collapse-content %}}
+
+1. En la barra de búsqueda de la consola de OCI, busca `DatadogAuthUser` y haz clic en el recurso de usuario que aparece.
+2. Copia el valor del OCID del usuario.
+3. Pega el valor en el campo **User OCID** (OCID del usuario) del [cuadro de integración de Datadog y OCI][1].
+4. Vuelve a la consola de OCI y genera una clave de API con estos pasos:
+   a. En la esquina inferior izquierda de la pantalla, en **Resources** (Recursos), haz clic en **API keys** (Claves de API).
+   b. Haz clic en **Add API key** (Añadir clave de API).
+   c. Haz clic en **Download private key** (Descargar clave privada).
+   d. Haz clic en **Add** (Añadir).
+   e. Aparece una ventana emergente **Configuration file preview** (Vista previa del archivo de configuración), pero no es necesario realizar ninguna acción; cierra la ventana emergente.
+
+![La página Add API Key (Añadir clave de API) en la consola de OCI][5]
+
+5. Copia el valor de la huella digital y pégalo en el campo **Fingerprint** (Huella digital) del [cuadro de integración de Datadog y OCI][1].
+6. Copia el valor de la clave privada con estos pasos:
+   a. Abre el archivo de clave privada `.pem` descargado en un editor de texto, o utiliza un comando de terminal como `cat` para mostrar el contenido del archivo.
+   b. Copia todo el contenido, incluidos `-----BEGIN PRIVATE KEY-----` y `-----END PRIVATE KEY-----`.
+7. Pega el valor de la clave privada en el campo **Private Key** (Clave privada) del cuadro de integración de Datadog y OCI.
+
+#### Crear un stack tecnológico de reenvío de métricas de OCI
+
+{{% collapse-content title="Requisitos para esta sección" level="h5" %}}
+- Tu cuenta de usuario debe poder crear recursos en el compartimento.
+- Valor de la [clave de API de Datadog][6].
+- Nombre de usuario y token de autenticación para un usuario con los permisos `REPOSITORY_READ` y `REPOSITORY_UPDATE`, de modo que se puedan extraer y enviar imágenes a un repositorio de Docker.
+    - Consulta [Cómo obtener un token de autenticación][7] para saber cómo crear un token de autenticación.
+    - Consulta [Políticas para controlar el acceso a repositorios][8] para obtener más información sobre las políticas requeridas.
+
+**Nota**: Para comprobar que el inicio de sesión en el registro de Docker es el correcto, consulta [Inicio de sesión en el registro de Oracle Cloud Infrastructure][9].
+{{% /collapse-content %}}
+
+El stack tecnológico de reenvío métricas debe desplegarse para **cada combinación de tenencia y región** que se va a monitorizar. Para la configuración más sencilla, Datadog recomienda crear todos los recursos de OCI necesarios con el stack tecnológico de ORM que se facilita a continuación. Como alternativa, puedes usar tu infraestructura de redes de OCI existente.
+
+Todos los recursos creados a partir del stack tecnológico de ORM de Datadog se despliegan en el compartimento especificado y para la región seleccionada actualmente en la parte superior derecha de la pantalla.
+
+1. Haz clic en el botón **Create Metric Stack** (Crear un stack tecnológico de métricas) en el cuadro de integración de Datadog y OCI.
+2. Acepta las Condiciones de uso de Oracle.
+3. Deja sin marcar la opción **Custom providers** (Proveedores personalizados).
+4. Asigna un nombre al stack tecnológico y selecciona el compartimento en el que se desplegará.
+5. Haz clic en **Next** (Siguiente).
+6. En el campo **Datadog API Key** (Clave de API de Datadog), ingresa el valor de tu [clave de API de Datadog][6].
+
+{{< tabs >}}
+{{% tab "Creaf VCN con ORM (recomendado)" %}}
+8. En la sección **Network options** (Opciones de red), deja marcada la opción `Create VCN`.
+{{% /tab %}}
+{{% tab "Usar una VCN existente" %}}
+Si utilizas una VCN existente, debes indicar el OCID de la subred en el stack tecnológico. Asegúrate de que la VCN cumpla los siguientes requisitos:
+   - Se le permite hacer llamadas de salida HTTP a través de la gateway NAT.
+   - Puede extraer imágenes del registro de contenedores de OCI mediante la gateway de servicio.
+   - Tiene las reglas de la tabla de enrutamiento para permitir la gateway NAT y la gateway de servicio.
+   - Tiene las reglas de seguridad para enviar solicitudes HTTP.
+
+8. En la sección **Network options** (Opciones de red), desmarca la opción `Create VCN` e ingresa la información de tu VCN:
+    a. En el campo **vcnCompartment**, selecciona tu compartimento.
+    b. En la sección **existingVcn**, selecciona tu VCN existente.
+    c. En la sección **Function Subnet OCID** (OCID de subred de función), ingresa el OCID de la subred que se va a utilizar.
+{{% /tab %}}
+{{< /tabs >}}
+
+9. De manera opcional, en la sección **Metrics settings** (Parámetros de las métricas), elimina cualquier espacio de nombres de métrica de la colección.
+10. En la sección **Metrics compartments** (Compartimentos de las métricas), ingresa una lista separada por comas de los OCID de compartimentos que se van a monitorizar. Los filtros de espacio de nombres de métrica seleccionados en el paso anterior se aplican a cada compartimento.
+11. En la sección **Function settings** (Parámetros de la función), indica un nombre de usuario de registro de OCI Docker y un token de autenticación en sus campos respectivos. Consulta [Cómo obtener un token de autenticación][7] para obtener más información.
+12. Haz clic en **Next** (Siguiente).
+13. Haz clic en **Create** (Crear).
+14. Vuelve a la página del [cuadro de integración de Datadog y OCI][1] y haz clic en **Create configuration** (Crear configuración).
+
+**Notas**:
+- De forma predeterminada, solo se selecciona el compartimento raíz y se activan todos los espacios de nombres de métrica compatibles con la integración de Datadog y OCI (se admiten hasta 50 espacios de nombres por hub de conectores). Si eliges monitorizar compartimentos adicionales, se aplica cualquier filtro de exclusión de espacio de nombres de métrica a cada compartimento.
+- Debes gestionar quién tiene acceso a los archivos de estado de Terraform de los stacks tecnológicos del gestor de recursos. Consulta la sección [Archivos de estado de Terraform][10] de la página Seguridad del gestor de recursos para obtener más información.
+
+#### Validación
+
+Consulta las métricas de `oci.*` en el [dashboard de información general de la integración de OCI][11] o en la [página del explorador de métricas][12] en Datadog.
+
+<div class="alert alert-warning">Las métricas de la función de OCI (espacio de nombres <code>oci.faas</code>) y las métricas de la instancia del contenedor (espacio de nombres <code>oci_computecontainerinstance</code>) se encuentran en versión preliminar.</div>
+
+#### Configuración
+
+##### Añadir regiones
+
+Para monitorizar una región adicional en una tenencia, navega hasta esa tenencia en el cuadro de integración de OCI.
+  1. En la sección **Configure an Additional Region** (Configurar una región adicional), haz clic en **Create Metric Stack** (Crear un stack tecnológico de métricas).
+  2. Cambia a la región que deseas monitorizar en la parte superior derecha de la pantalla.
+  3. Completa los pasos de [Crear un stack tecnológico de reenvío de métricas de OCI](#create-oci-metric-forwarding-stack) en la región nueva.
+
+##### Añadir compartimentos o espacios de nombres de métrica
+
+Para añadir compartimentos o editar la lista de los espacios de nombres de métrica activados, haz clic en **Edit** (Editar) en el [hub de conectores][13] recién creado.
+   - Haz clic en **+ Another compartment** (+ otro compartimento) para añadir compartimentos.
+   - En la sección **Configure source** (Configurar origen), añade o elimina espacios de nombres del menú desplegable **Namespaces** (Espacios de nombres).
+
+#### Arquitectura
+
+##### Recursos de reenvío de métricas
+
+![Un diagrama de los recursos de OCI mencionados en esta página, en el que se muestra el flujo de datos][14]
+
+Esta integración crea un [hub de conectores][15] de OCI, una [aplicación de función][16] y una infraestructura de redes segura para reenviar métricas de OCI a Datadog. El stack tecnológico de ORM de estos recursos crea un repositorio de contenedores de la función para la región en la tenencia, y la imagen de Docker se envía a él para que la función la utilice.
+
+##### Recursos de IAM
+
+![Un diagrama de los recursos y el flujo de trabajo de OCI utilizados para la autenticación de la integración][17]
+
+Esta integración crea lo siguiente:
+
+ * Un grupo dinámico con `resource.type = 'serviceconnectors'`, para permitir el acceso al hub de conectores.
  * Un usuario llamado **DatadogAuthUser**, que Datadog usa para leer recursos de tenencia.
  * Un grupo al que se añade el usuario creado para acceder a la política.
- * Una política en el compartimento raíz para permitir que los centros de conectores lean métricas e invoquen funciones. Además, otorga al grupo de usuarios creado acceso de lectura a los recursos de la tenencia. Se añaden las siguientes instrucciones a la política:
+ * Una política en el compartimento raíz para permitir que los hubs de conectores lean métricas e invoquen funciones. Además, otorga al grupo de usuarios creado acceso de lectura a los recursos de la tenencia. Se añaden las siguientes instrucciones a la política:
 
 ```text
 Allow dynamic-group <GROUP_NAME> to read metrics in tenancy
 Allow dynamic-group <GROUP_NAME> to use fn-function in tenancy
 Allow dynamic-group <GROUP_NAME> to use fn-invocation in tenancy
-Allow group <DOMAIN>/<USER_GROUP_NAME> to read all-resources in tenancy
+Allow dynamic-group Default/<GROUP_NAME> to read metrics in tenancy
+Allow dynamic-group Default/<GROUP_NAME> to use fn-function in tenancy
+Allow dynamic-group Default/<GROUP_NAME> to use fn-invocation in tenancy
+Allow group Default/<USER_GROUP_NAME> to read all-resources in tenancy
 ```
-
-Para crear la stack, tu cuenta de usuario debe poder [crear políticas y grupos dinámicos][4].
-
-1. Haz clic en el botón **Create a stack** (Crear un stack tecnológico) del cuadro de integración de Datadog y OCI.
-2. Acepta las Condiciones de uso de Oracle.
-3. En el desplegable **Working directory** (Directorio de trabajo), selecciona `datadog-oci-orm/policy-setup`.
-4. Deja la opción de utilizar proveedores de Terraform personalizados **desmarcada**.
-5. Proporciona un nombre descriptivo como `datadog-metrics-policy-setup` y selecciona el compartimento en el que deseas desplegarlo.
-6. Haz clic en **Next** (Siguiente).
-7. Asigna un nombre al grupo dinámico, el grupo de usuarios y a la política que se van a crear, o usa los nombres predeterminados proporcionados.
-8. Proporciona el nombre del dominio del usuario que ejecuta la stack. El nombre de dominio predeterminado es `Default`.
-9. Asegúrate de que se encuentre seleccionada la **región de origen** de la tenencia.
-10. Haz clic en **Next** (Siguiente).
-11. Haz clic en **Create** (Crear).
-
-**Notas**: 
-* Si el usuario que ejecuta la stack pertenece a un dominio de IAM diferente al de `Default`, proporciona ese nombre de dominio para que el usuario de autenticación, el grupo dinámico y el grupo de usuarios solo se creen en ese dominio.
-* Si el usuario y el grupo no se crean en el dominio **predeterminado**, asegúrate de que el dominio se replique en todas las regiones suscritas de la tenencia. Consulta [Replicación de un dominio de identidad en varias regiones][5] para obtener más información.
-
-#### Introducir datos de tenencia
-
-1. Ingresa el OCID y la región de origen de la tenencia que quieres monitorizar en el [cuadro de integración de Datadog y OCI][6].
-   - Puedes encontrar esta información en la [página de detalles de la tenencia][7].
-   - Ingresa la región de origen con el valor **Region Identifier** (Identificador de región) de la [página Regiones y dominios de disponibilidad][8] de OCI.
-
-2. Para el `DatadogAuthUser` creado después de ejecutar la stack anterior, copia el valor **OCID** del usuario y pégalo en el campo User OCID (OCID del usuario) en el [cuadro de integración de Datadog y OCI][6].
-
-3. Volviendo a la consola de OCI, genera una **API key** (Clave de API) con estos pasos:  
-   a. Vuelve a la página `DatadogAuthUser` que se creó.  
-   b. En la esquina inferior izquierda de la pantalla, en **Resources** (Recursos), haz clic en **API keys** (Claves de API).  
-   c. Haz clic en **Add API key** (Añadir clave de API).  
-   d. Haz clic en **Download private key** (Descargar clave privada).
-   e. Haz clic en **Add** (Añadir).  
-   f. Aparece una ventana emergente **Configuration file preview** (Vista previa del archivo de configuración), pero no es necesario realizar ninguna acción; cierra la ventana emergente.
-
-{{< img src="/integrations/oracle_cloud_infrastructure/add_api_key.png" alt="La página Añadir clave de API en la consola de OCI" >}}
-
-4. Copia el valor **Fingerprint** (Huella dactilar) y pégalo en el campo **Fingerprint** (Huella dactilar) del [cuadro de integración de Datadog y OCI][6].
-5. Copia el valor de la **private key** (clave privada) con estos pasos:  
-   a. Abre el archivo de clave privada `.pem` descargado en un editor de texto, o utiliza un comando de terminal como `cat` para mostrar el contenido del archivo.  
-   b. Copia todo el contenido, incluidos `-----BEGIN PRIVATE KEY-----` y `-----END PRIVATE KEY-----`.
-6. Pega el valor de la clave privada en el campo **Private Key** (Clave privada) del cuadro de integración de Datadog y OCI.
-
-
-#### Crear una stack de reenvío de métricas
-
-Todos los recursos que crea esta stack se despliegan en el compartimento especificado. Asegúrate de que el usuario que ejecuta esta stack tenga acceso para crear recursos en el compartimento.
-
-1. Ve a [Create stack][9] (Crear stack) en la consola de OCI.
-2. Acepta las Condiciones de uso de Oracle.
-3. En el desplegable **Working directory** (Directorio de trabajo), selecciona `datadog-oci-orm/metrics-setup`.
-4. Deja la opción de utilizar proveedores de Terraform personalizados **desmarcada**.
-5. Asigna un nombre al stack tecnológico y selecciona el compartimento en el que se desplegará.
-6. Haz clic en **Next** (Siguiente).
-7. Deja los valores de **Tenancy** (Tenencia) sin modificar, ya que vienen especificados por tu región e inquilino actuales, así como por el compartimento seleccionado anteriormente.
-8. En el campo **Datadog API Key** (Clave de API de Datadog), ingresa tu [clave de API de Datadog][10].
-9. En el campo **Datadog Environment Endpoint** (Endpoint del entorno de Datadog), selecciona el endpoint que coincida con tu [sitio de Datadog][11]:
-
-| Sitio de Datadog   | Endpoint                               |
-| -------------  | -------------------------------------- |
-| US1            | ocimetrics-intake.datadoghq.com        |
-| US3            | ocimetrics-intake.us3.datadoghq.com    |
-| US5            | ocimetrics-intake.us5.datadoghq.com    |
-| EU1            | ocimetrics-intake.datadoghq.eu         |
-| AP1            | ocimetrics-intake.ap1.datadoghq.com    |
-
-_Nota:_ La integración de OCI no es compatible con el sitio US1-FED.
-
-{{< tabs >}}
-{{% tab "Creaf VCN con ORM (recomendado)" %}}
-10. En la sección **Network options** (Opciones de red), deja marcada la opción `Create VCN`.
-    a. En el campo **vcnCompartment**, selecciona tu compartimento.
-{{% /tab %}}
-
-{{% tab "Usar VCN existente" %}}
-Si utiliza un VCN existente, debe proporcionar el OCID de la subred a la pila. Asegúrese de que el VCN:  
-   - Se permite realizar llamadas de salida HTTP a través de la gateway NAT.  
-   - Es capaz de extraer imágenes del registro de contenedores de OCI mediante la gateway de servicio.  
-   - Tiene las reglas de la tabla de enrutamiento para permitir la gateway NAT y la gateway de servicio.  
-   - Tiene las reglas de seguridad para enviar solicitudes HTTP.
-
-10. En la sección **Network options** (Opciones de red), desmarca la opción `Create VCN` e introduce la información de tu VCN:
-    a. En el campo **vcnCompartment**, selecciona tu compartimento.  
-    b. En la sección **existingVcn**, selecciona tu VCN existente.  
-    c. En la sección **Function Subnet OCID** (OCID de subred de función), introduce el OCID de la subred que se va a utilizar.
-{{% /tab %}}
-{{< /tabs >}}
-
-{{< tabs >}}
-{{% tab "Crear función aplicación con ORM (recomendado)" %}}
-La pila ORM crea un repositorio función Contenedor para la región en la tenencia, y la imagen Docker se empuja a él para ser utilizado por el función.
-
-11. Completa los siguientes pasos en la sección **Function settings** (Configuración de la función):
-    a. En el campo **Function Application shape** (Forma de la aplicación de función), deja el valor como `GENERIC_ARM`. 
-    b. Proporciona un nombre de usuario y una contraseña para el registro de OCI Docker.
-      - En el campo **OCI Docker registry user name** (Nombre de usuario del registro de OCI Docker), indica tu nombre de usuario de OCI.
-      - En el campo **OCI Docker registry password** (Contraseña de registro de OCI Docker), proporciona un token de autorización para tu usuario de OCI. Consulta [Cómo obtener un autentificador][1] para más información.
-
-    _Nota:_ Para verificar si el inicio de sesión en el registro de Docker es correcto, consulta [Iniciar sesión en Oracle Cloud Infrastructure Registry][2].
-
-
-
-
-[1]: https://docs.oracle.com/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm
-[2]: https://docs.oracle.com/iaas/Content/Functions/Tasks/functionslogintoocir.htm
-{{% /tab %}}
-
-{{% tab "Utilizar la aplicación de función existente" %}}
-Si se utiliza una aplicación de función existente, la imagen ya debe existir y se debe proporcionar la ruta completa de la imagen. A continuación, se muestra un ejemplo de ruta de imagen completa:
-
-```text
-<REGION_KEY>.ocir.io/<TENANCY_NAMESPACE>/datadog-functions/datadog-function-metrics:latest
-```
-
-- En `<REGION_KEY>`, utiliza el valor **Region key** (Clave de región) de la [página Regiones y dominios de disponibilidad][1] de OCI. Por ejemplo, la clave de región para `US-EAST` es `IAD`.
-- En `<TENANCY_NAMESPACE>`, utiliza el valor del **Object storage namespace** (Espacio de nombre de almacenamiento de objetos** en la [Página de detalles de la tenencia][2].
-
-11. Completa los siguientes pasos en la sección **Function settings** (Configuración de la función):
-    a. En el campo **Function Application shape** (Forma de la aplicación de función), deja el valor como `GENERIC_ARM`. 
-    b. En el campo **Function Image Path** (Ruta de la imagen de la función), ingresa la ruta completa de la imagen.
-
-[1]: https://docs.oracle.com/iaas/Content/General/Concepts/regions.htm
-[2]: https://cloud.oracle.com/tenancy
-{{% /tab%}}
-{{< /tabs>}}
-
-12. Establece el **Service Connector hub batch size** (Tamaño de lote del centro de conectores del servicio) en `5000`.
-13. Haz clic en **Next** (Siguiente).
-14. Haz clic en **Create** (Crear).
-15. Vuelve al [cuadro de integración de Datadog y OCI][6] y haz clic en **Create configuration** (Crear configuración).
-
-**Nota**: De forma predeterminada, solo se selecciona el compartimento raíz y se activan todos los espacios de nombres de métrica compatibles con la integración de Datadog y OCI (se admiten hasta 50 espacios de nombres por hub de conectores).
-
-16. De manera opcional, para añadir compartimentos o editar la lista de los espacios de nombres de métrica habilitados, haz clic en **Edit** (Editar) en el [centro de conectores][12] recién creado.
-    - Haz clic en **+ Another compartment** (+ otro compartimento) para añadir compartimentos.
-    - En la sección **Configure source** (Configurar origen), añade o elimina espacios de nombres del menú desplegable **Namespaces** (Espacios de nombres).
-
-#### Validación
-
-Consulta las métricas de `oci.*` en el [dashboard de información general de la integración de OCI][13] o en la [página del explorador de métricas][14] en Datadog.
-
-<div class="alert alert-warning">Las métricas de la función de OCI (espacio de nombres <code>oci.faas</code>) y las métricas de la instancia del contenedor (espacio de nombres <code>oci_computecontainerinstance</code>) se encuentran en versión preliminar.</div>
 
 ### Espacios de nombre de métrica
 
-| Integración                   | Espacio de nombre de métrica                                                                                                                         |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| [Base de datos autónoma][15]     | [oci_autonomous_database][16]                                                                                                            |
-| Block Storage                 | [oci_blockstore][17]                                                                                                                     |
-| [Computación][18]                 | [oci_computeagent][19], [rdma_infrastructure_health][20], [gpu_infrastructure_health][21], [oci_compute_infrastructure_health][22]       |
-| Instancias de contenedor (versión preliminar)    | [oci_computecontainerinstance][23]                                                                                                       |
-| [Base de datos][24]                | [oci_database][25], [oci_database_cluster][26]                                                                                           |
-| Gateway de enrutamiento dinámico       | [oci_dynamic_routing_gateway][27]                                                                                                        |
-| FastConnect                   | [oci_fastconnect][28]                                                                                                                    |
-| File Storage                  | [oci_filestorage][29]                                                                                                                    |
-| Funciones (versión preliminar)              | [oci_faas][30]                                                                                                                           |
-| HeatWave MySQL                | [oci_mysql_database][31]                                                                                                                 |
-| Motor de Kubernetes             | [oci_oke][32]                                                                                                                            |
-| [Equilibrador de carga][33]           | [oci_lbaas][34], [oci_nlb][35]                                                                                                           |
-| [Gateway NAT][36]             | [oci_nat_gateway][37]                                                                                                                    |
-| Object Storage                | [oci_objectstorage][38]                                                                                                                  |
-| Cola                         | [oci_queue][39]                                                                                                                          |
-| Hub de conectores de servicio         | [oci_service_connector_hub][40]                                                                                                          |
-| Gateway de servicio               | [oci_service_gateway][41]                                                                                                                |
-| [VCN][42]                     | [oci_vcn][43]                                                                                                                            |
-| VPN                           | [oci_vpn][44]                                                                                                                            |
-| Firewall de aplicaciones web      | [oci_waf][45]                                                                                                                            |
+| Integración                         | Espacio de nombre de métrica                                                                                                                         |
+|-------------------------------------| ---------------------------------------------------------------------------------------------------------------------------------------- |
+| [Base de datos autónoma][18]           | [oci_autonomous_database][19]                                                                                                            |
+| Block Storage                       | [oci_blockstore][20]                                                                                                                     |
+| [Computación][21]                       | [oci_computeagent][22], [rdma_infrastructure_health][23], [gpu_infrastructure_health][24], [oci_compute_infrastructure_health][25]       |
+| [Instancias de contenedor (versión preliminar)][26] | [oci_computecontainerinstance][27]                                                                                                       |
+| [Base de datos][28]                      | [oci_database][29], [oci_database_cluster][30]                                                                                           |
+| Gateway de enrutamiento dinámico             | [oci_dynamic_routing_gateway][31]                                                                                                        |
+| FastConnect                         | [oci_fastconnect][32]                                                                                                                    |
+| File Storage                        | [oci_filestorage][33]                                                                                                                    |
+| [Funciones (versión preliminar)][34]           | [oci_faas][35]                                                                                                                           |
+| [HeatWave MySQL][36]                | [oci_mysql_database][37]                                                                                                                 |
+| Motor de Kubernetes                   | [oci_oke][38]                                                                                                                            |
+| [Equilibrador de carga][39]                 | [oci_lbaas][40], [oci_nlb][41]                                                                                                           |
+| [Gateway NAT][42]                   | [oci_nat_gateway][43]                                                                                                                    |
+| Object Storage                      | [oci_objectstorage][44]                                                                                                                  |
+| Cola                               | [oci_queue][45]                                                                                                                          |
+| Hub de conectores de servicio               | [oci_service_connector_hub][46]                                                                                                          |
+| Gateway de servicio                     | [oci_service_gateway][47]                                                                                                                |
+| [VCN][48]                           | [oci_vcn][49]                                                                                                                            |
+| [VPN][50]                           | [oci_vpn][51]                                                                                                                            |
+| Firewall de aplicaciones web            | [oci_waf][52]                                                                                                                            |
 
 ### Recopilación de logs
 
@@ -396,13 +385,13 @@ Para más información sobre OCI Object Storage, consulta [Empezando con eventos
 [5]: https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Object%20Store/func.yaml
 [6]: https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Object%20Store/requirements.txt
 [7]: https://docs.cloud.oracle.com/iaas/Content/Events/Concepts/eventsgetstarted.htm
-{{% /tab%}}
-{{< /tabs>}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "oracle_cloud_infrastructure" >}}
+{{< get-metrics-from-git "oracle-cloud-infrastructure" >}}
 
 
 ### Checks de servicio
@@ -413,61 +402,68 @@ La integración de OCI no incluye ningún check de servicio.
 
 La integración de OCI no incluye ningún evento.
 
-## Solucionar problemas
+## Resolución de problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][46].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][53].
 
-## Referencias adicionales
+## Para leer más
 
 Más enlaces, artículos y documentación útiles:
 
-- [Monitorizar Oracle Cloud Infrastructure con Datadog][47]
+- [Monitorizar Oracle Cloud Infrastructure con Datadog][54]
 
 
-[1]: https://docs.oracle.com/iaas/Content/connector-hub/home.htm
-[2]: https://docs.oracle.com/iaas/Content/Functions/Concepts/functionsconcepts.htm#applications
-[3]: https://docs.oracle.com/iaas/Content/Security/Reference/resourcemanager_security.htm#confidentiality__terraform-state
+[1]: https://app.datadoghq.com/integrations/oracle-cloud-infrastructure
+[2]: https://cloud.oracle.com/tenancy
+[3]: https://docs.oracle.com/iaas/Content/General/Concepts/regions.htm
 [4]: https://docs.oracle.com/en/cloud/paas/weblogic-container/user/create-dynamic-groups-and-policies.html
-[5]: https://docs.oracle.com/iaas/Content/Identity/domains/to-manage-regions-for-domains.htm
-[6]: https://app.datadoghq.com/integrations/oracle-cloud-infrastructure
-[7]: https://cloud.oracle.com/tenancy
-[8]: https://docs.oracle.com/iaas/Content/General/Concepts/regions.htm
-[9]: https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/Datadog/oracle-cloud-integration/releases/latest/download/datadog-oci-orm.zip
-[10]: https://app.datadoghq.com/organization-settings/api-keys
-[11]: https://docs.datadoghq.com/es/getting_started/site/
-[12]: https://cloud.oracle.com/connector-hub/service-connectors
-[13]: https://app.datadoghq.com/dash/integration/31405/oracle-cloud-oci-overview
-[14]: https://app.datadoghq.com/metric/explorer
-[15]: https://app.datadoghq.com/integrations/oci-autonomous-database
-[16]: https://docs.oracle.com/iaas/autonomous-database-serverless/doc/autonomous-monitor-metrics-list.html
-[17]: https://docs.oracle.com/iaas/Content/Block/References/volumemetrics.htm
-[18]: https://app.datadoghq.com/integrations/oci-compute
-[19]: https://docs.oracle.com/iaas/Content/Compute/References/computemetrics.htm#Availabl
-[20]: https://docs.oracle.com/iaas/Content/Compute/References/computemetrics.htm#computemetrics_topic-Available_Metrics_oci_compute_rdma_network
-[21]: https://docs.oracle.com/iaas/Content/Compute/References/computemetrics.htm#computemetrics_topic-Available_Metrics_oci_high_performance_compute
-[22]: https://docs.oracle.com/iaas/Content/Compute/References/infrastructurehealthmetrics.htm
-[23]: https://docs.oracle.com/iaas/Content/container-instances/container-instance-metrics.htm
-[24]: https://app.datadoghq.com/integrations/oci-database
-[25]: https://docs.oracle.com/iaas/base-database/doc/available-metrics-base-database-service-resources.html#DBSCB-GUID-57B7B9B1-288B-4DCB-82AE-D53B2BD9C78F
-[26]: https://docs.oracle.com/iaas/base-database/doc/available-metrics-base-database-service-resources.html#DBSCB-GUID-A42CF0E3-EE65-4A66-B8A3-C89B62AFE489
-[27]: https://docs.oracle.com/iaas/Content/Network/Reference/drgmetrics.htm
-[28]: https://docs.oracle.com/iaas/Content/Network/Reference/fastconnectmetrics.htm
-[29]: https://docs.oracle.com/iaas/Content/File/Reference/filemetrics.htm
-[30]: https://docs.oracle.com/iaas/Content/Functions/Reference/functionsmetrics.htm
-[31]: https://docs.oracle.com/iaas/mysql-database/doc/metrics.html
-[32]: https://docs.oracle.com/iaas/Content/ContEng/Reference/contengmetrics.htm
-[33]: https://app.datadoghq.com/integrations/oci-load-balancer
-[34]: https://docs.oracle.com/iaas/Content/Balance/Reference/loadbalancermetrics.htm
-[35]: https://docs.oracle.com/iaas/Content/NetworkLoadBalancer/Metrics/metrics.htm
-[36]: https://app.datadoghq.com/integrations/oci-nat-gateway
-[37]: https://docs.oracle.com/iaas/Content/Network/Reference/nat-gateway-metrics.htm
-[38]: https://docs.oracle.com/iaas/Content/Object/Reference/objectstoragemetrics.htm
-[39]: https://docs.oracle.com/iaas/Content/queue/metrics.htm
-[40]: https://docs.oracle.com/iaas/Content/connector-hub/metrics-reference.htm
-[41]: https://docs.oracle.com/iaas/Content/Network/Reference/SGWmetrics.htm
-[42]: https://app.datadoghq.com/integrations/oci-vcn
-[43]: https://docs.oracle.com/iaas/Content/Network/Reference/vnicmetrics.htm
-[44]: https://docs.oracle.com/iaas/Content/Network/Reference/ipsecmetrics.htm
-[45]: https://docs.oracle.com/iaas/Content/WAF/Reference/metricsalarms.htm
-[46]: https://docs.datadoghq.com/es/help/
-[47]: https://www.datadoghq.com/blog/monitor-oci-with-datadog/
+[5]: images/add_api_key.png
+[6]: https://app.datadoghq.com/organization-settings/api-keys
+[7]: https://docs.oracle.com/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm
+[8]: https://docs.oracle.com/en-us/iaas/Content/Registry/Concepts/registrypolicyrepoaccess.htm#Policies_to_Control_Repository_Access
+[9]: https://docs.oracle.com/iaas/Content/Functions/Tasks/functionslogintoocir.htm
+[10]: https://docs.oracle.com/iaas/Content/Security/Reference/resourcemanager_security.htm#confidentiality__terraform-state
+[11]: https://app.datadoghq.com/dash/integration/31417/oracle-cloud-infrastructure-oci-overview
+[12]: https://app.datadoghq.com/metric/explorer
+[13]: https://cloud.oracle.com/connector-hub/service-connectors
+[14]: images/OCI_metrics_integration_diagram.png
+[15]: https://docs.oracle.com/iaas/Content/connector-hub/home.htm
+[16]: https://docs.oracle.com/iaas/Content/Functions/Concepts/functionsconcepts.htm#applications
+[17]: images/OCI_auth_workflow_diagram.png
+[18]: https://app.datadoghq.com/integrations/oci-autonomous-database
+[19]: https://docs.oracle.com/iaas/autonomous-database-serverless/doc/autonomous-monitor-metrics-list.html
+[20]: https://docs.oracle.com/iaas/Content/Block/References/volumemetrics.htm
+[21]: https://app.datadoghq.com/integrations/oci-compute
+[22]: https://docs.oracle.com/iaas/Content/Compute/References/computemetrics.htm#Availabl
+[23]: https://docs.oracle.com/iaas/Content/Compute/References/computemetrics.htm#computemetrics_topic-Available_Metrics_oci_compute_rdma_network
+[24]: https://docs.oracle.com/iaas/Content/Compute/References/computemetrics.htm#computemetrics_topic-Available_Metrics_oci_high_performance_compute
+[25]: https://docs.oracle.com/iaas/Content/Compute/References/infrastructurehealthmetrics.htm
+[26]: https://app.datadoghq.com/integrations/oci-container-instances
+[27]: https://docs.oracle.com/iaas/Content/container-instances/container-instance-metrics.htm
+[28]: https://app.datadoghq.com/integrations/oci-database
+[29]: https://docs.oracle.com/iaas/base-database/doc/available-metrics-base-database-service-resources.html#DBSCB-GUID-57B7B9B1-288B-4DCB-82AE-D53B2BD9C78F
+[30]: https://docs.oracle.com/iaas/base-database/doc/available-metrics-base-database-service-resources.html#DBSCB-GUID-A42CF0E3-EE65-4A66-B8A3-C89B62AFE489
+[31]: https://docs.oracle.com/iaas/Content/Network/Reference/drgmetrics.htm
+[32]: https://docs.oracle.com/iaas/Content/Network/Reference/fastconnectmetrics.htm
+[33]: https://docs.oracle.com/iaas/Content/File/Reference/filemetrics.htm
+[34]: https://app.datadoghq.com/integrations/oci-functions
+[35]: https://docs.oracle.com/iaas/Content/Functions/Reference/functionsmetrics.htm
+[36]: https://app.datadoghq.com/integrations/oci-mysql-database
+[37]: https://docs.oracle.com/iaas/mysql-database/doc/metrics.html
+[38]: https://docs.oracle.com/iaas/Content/ContEng/Reference/contengmetrics.htm
+[39]: https://app.datadoghq.com/integrations/oci-load-balancer
+[40]: https://docs.oracle.com/iaas/Content/Balance/Reference/loadbalancermetrics.htm
+[41]: https://docs.oracle.com/iaas/Content/NetworkLoadBalancer/Metrics/metrics.htm
+[42]: https://app.datadoghq.com/integrations/oci-nat-gateway
+[43]: https://docs.oracle.com/iaas/Content/Network/Reference/nat-gateway-metrics.htm
+[44]: https://docs.oracle.com/iaas/Content/Object/Reference/objectstoragemetrics.htm
+[45]: https://docs.oracle.com/iaas/Content/queue/metrics.htm
+[46]: https://docs.oracle.com/iaas/Content/connector-hub/metrics-reference.htm
+[47]: https://docs.oracle.com/iaas/Content/Network/Reference/SGWmetrics.htm
+[48]: https://app.datadoghq.com/integrations/oci-vcn
+[49]: https://docs.oracle.com/iaas/Content/Network/Reference/vnicmetrics.htm
+[50]: https://app.datadoghq.com/integrations/oci-vpn
+[51]: https://docs.oracle.com/iaas/Content/Network/Reference/ipsecmetrics.htm
+[52]: https://docs.oracle.com/iaas/Content/WAF/Reference/metricsalarms.htm
+[53]: https://docs.datadoghq.com/es/help/
+[54]: https://www.datadoghq.com/blog/monitor-oci-with-datadog/

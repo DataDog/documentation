@@ -1,7 +1,7 @@
 ---
 aliases:
-- /tracing/trace_collection/otel_instrumentation/python/
-- /tracing/trace_collection/custom_instrumentation/otel_instrumentation/python
+- /ko/tracing/trace_collection/otel_instrumentation/python/
+- /ko/tracing/trace_collection/custom_instrumentation/otel_instrumentation/python
 code_lang: otel
 code_lang_weight: 2
 description: OpenTelemetry API를 사용하여 파이썬 애플리케이션을 계측하고 트레이스를 Datadog로 전송하세요.

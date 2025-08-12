@@ -41,7 +41,7 @@ draft: false
 git_integration_title: ceph
 integration_id: ceph
 integration_title: Ceph
-integration_version: 4.0.0
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: ceph
@@ -100,14 +100,14 @@ Para ver todas las opciones de configuración disponibles, consulta el [ceph.d/c
 init_config:
 
 instances:
-  - ceph_cmd: /path/to/your/ceph # la opción predeterminada es /usr/bin/ceph
-    use_sudo: true # solo si el binario ceph necesita sudo en los nodos
+  - ceph_cmd: /path/to/your/ceph # default is /usr/bin/ceph
+    use_sudo: true # only if the ceph binary needs sudo on your nodes
 ```
 
 Si has habilitado `use_sudo`, añade una línea como la siguiente a tu archivo `sudoers`:
 
 ```text
-dd-agent ALL=(ALL) NOPASSWD:/ruta/a/tu/ceph
+dd-agent ALL=(ALL) NOPASSWD:/path/to/your/ceph
 ```
 
 #### Recopilación de logs

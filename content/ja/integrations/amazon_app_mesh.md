@@ -1,10 +1,10 @@
 ---
 categories:
-- AWS
+- aws
 - クラウド
 - ログの収集
 - ネットワーク
-- トレーシング
+- tracing
 creates_events: false
 custom_kind: インテグレーション
 dependencies: []
@@ -92,7 +92,7 @@ supported_os:
                 path: envoy.yaml
     ```
 
-#### 収集データ
+#### ログ収集
 
 {{< site-region region="us3" >}}
 
@@ -147,7 +147,7 @@ namespace を選択して、`datadog-agent` とサービス (例: `monitoring`) 
             },
     ```
 
-#### 収集データ
+#### ログ収集
 
 {{< site-region region="us3" >}}
 
@@ -193,7 +193,7 @@ AWS App Mesh パラメーター `ENABLE_ENVOY_DATADOG_TRACING` および `DATADO
             },
     ```
 
-#### 収集データ
+#### ログ収集
 
 {{< site-region region="us3" >}}
 

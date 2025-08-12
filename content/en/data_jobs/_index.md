@@ -1,10 +1,12 @@
 ---
 title: Data Jobs Monitoring
 further_reading:
-    - link: '/data_streams'
-      tag: 'Documentation'
-      text: 'Data Streams Monitoring'
-
+  - link: '/data_streams'
+    tag: 'Documentation'
+    text: 'Data Streams Monitoring'
+  - link: "https://www.datadoghq.com/blog/data-observability/"
+    tag: "Blog"
+    text: "Ensure trust across the entire data life cycle with Datadog Data Observability"
 ---
 
 {{< img src="data_jobs/overview_062024.png" alt="Datadog Data Jobs Monitoring overview page" style="width:100%;" >}}
@@ -45,7 +47,7 @@ Click on a job to see how it performed across multiple runs, as well as error me
 
 ### Analyze an individual run
 
-Clicking on a run opens a side panel with details of how much time was spent on each Spark job and stage, along with a breakdown of resource consumption and Spark metrics, such as idle executor CPU, input/output data volume, shuffling, and disk spill. From this panel, you can correlate the execution with executor and driver node resource utilization, logs, and the job and cluster configuration. 
+Clicking on a run opens a side panel with details of how much time was spent on each Spark job and stage, along with a breakdown of resource consumption and Spark metrics, such as idle executor CPU, input/output data volume, shuffling, and disk spill. From this panel, you can correlate the execution with executor and driver node resource utilization, logs, and the job and cluster configuration.
 
 On the **Infrastructure** tab, you can correlate the execution to infrastructure metrics.
 

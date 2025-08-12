@@ -4,21 +4,14 @@ code_lang: python
 type: multi-code-lang
 code_lang_weight: 50
 ---
-## Application Security capabilities support
+## Code Security capabilities support
 
-The following application security capabilities are supported in the Python library, for the specified tracer version:
+The following code security capabilities are supported in the Python library, for the specified tracer version:
 
-| Application Security capability  | Minimum Python tracer version |
-| -------------------------------- | ----------------------------|
-| Threat Detection | 1.9.0   |
-| Threat Protection | 1.10.0  |
-| Customize response to blocked requests | 1.19.0 |
-| Software Composition Analysis (SCA) | 1.5.0  |
-| Code Security         |  Preview  |
-| Automatic user activity event tracking | 1.17.0 |
-| API Security | 2.6.0 |
-
-**Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
+| Code Security capability                    | Minimum Python tracer version |
+| ------------------------------------------- |-------------------------------|
+| Runtime Software Composition Analysis (SCA) | 1.5.0                         |
+| Runtime Code Analysis (IAST)                | Preview (`>=2.21.0`)          |
 
 ### Supported deployment types
 | Type        | Threat Detection support | Software Composition Analysis |
@@ -29,6 +22,13 @@ The following application security capabilities are supported in the Python libr
 | AWS Fargate | {{< X >}}                | {{< X >}}                     |
 | AWS Lambda  | {{< X >}}                |                               |
 
+| Type              | Runtime Software Composition Analysis (SCA) | Runtime Code Analysis (IAST)        |
+|------------------ | ------------------------------------------- | ----------------------------------- |
+| Docker            | {{< X >}}                                   | Preview                             |
+| Kubernetes        | {{< X >}}                                   | Preview                             |
+| Amazon ECS        | {{< X >}}                                   | Preview                             |
+| AWS Fargate       | {{< X >}}                                   | Preview                             |
+| AWS Lambda        |                                             |                                     |
 
 ## Language and framework compatibility
 
@@ -38,36 +38,27 @@ The Python Application Security Client library follows a [versioning policy][3] 
 
 Two release branches are supported:
 
-| Release    | Support level        |
-|------------|----------------------|
-| `<1`       | Maintenance           |
-| `>=1.0,<2` | General Availability |
+{{< partial name="trace_collection/python/supported_versions.html" >}}
 
 And the library supports the following runtimes:
 
-| OS      | CPU                   | Runtime | Runtime version | Support ddtrace versions |
-|---------|-----------------------|---------|-----------------|--------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                     |
+{{< partial name="trace_collection/python/supported_runtimes.html" >}}
 
 
 ### Web framework compatibility
 
-- Attacker source HTTP request details
 - Tags for the HTTP request (status code, method, etc)
 - Distributed Tracing to see attack flows through your applications
 
 ##### Application Security Capability Notes
-- **Software Composition Analysis** is supported on all frameworks
+- **Runtime Software Composition Analysis (SCA)** is supported on all frameworks
 
 ### Supported frameworks
 
-
-| Framework                | Versions    | Threat Detection supported? | Threat Protection supported? |
-| ------------------------ | ----------- | --------------- | ---------------------------------------------- |
-| Django    | 1.8   |  {{< X >}} | {{< X >}}  |
-| Flask     | 0.10  |  {{< X >}} | {{< X >}}  |
+| Framework                | Versions | Runtime Code Analysis (IAST) |
+| ------------------------ |----------| ---------------------------- |
+| Django                   | `1.8`    | {{< X >}}                    |
+| Flask                    | `0.10`   | {{< X >}}                    |
 
 Support for query strings is not available for Flask.
 
@@ -75,32 +66,18 @@ Support for query strings is not available for Flask.
 
 ### Data store compatibility
 
-
 **Datastore tracing provides:**
 
-- timing request to response
 - query info (for example, a sanitized query string)
 - error and stacktrace capturing
 
-##### Application Security Capability Notes
-- **Software Composition Analysis** is supported on all frameworks.
-- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
--
+##### Code Security Capability Notes
+- **Runtime Software Composition Analysis (SCA)** is supported on all frameworks.
+
 The Python library supports the [database API specifications][4] and supports all generic SQL databases. This includes databases such as SQLite, Mysql, Postgres and MariaDB.
 
-### User Authentication Frameworks compatibility
-
-**Integrations to User Authentication Frameworks provide:**
-
-- User login events, including the user IDs
-- Account Takeover detection monitoring for user login events
-
-| Framework         | Framework Versions   |
-|-------------------| --------------------------- |
-| Django            | 1.11, 2.2, 3.2, >= 4.0
-
 [1]: /tracing/trace_collection/compatibility/python/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[2]: /remote_configuration#enabling-remote-configuration
 [3]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [4]: https://peps.python.org/pep-0249/
 

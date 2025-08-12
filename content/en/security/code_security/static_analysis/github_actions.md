@@ -56,12 +56,10 @@ You can set the following parameters for Static Code Analysis.
 | `subdirectory` | A subdirectory pattern or glob (or space-delimited subdirectory patterns) that the analysis should be limited to. For example: "src" or "src packages". | `false` |                 |
 | `architecture` | The CPU architecture to use for the analyzer. Supported values are `x86_64` and `aarch64`.                                                              | No      | `x86_64`        |
 | `diff_aware` | Enable [diff-aware scanning mode][5].                                                                                                                   | No      | `true`          |
-| `secrets_enabled` | Enable secrets detection (in private beta)                                                                                                              | No      | `false`         |
 
 ### Notes
 
 1. Diff-aware scanning only scans the files modified by a commit when analyzing feature branches. Diff-aware is enabled by default. To disable diff-aware scanning, set the GitHub action `diff_aware` parameter to `false`.
-2. Secrets scanning is in private beta. To enable secrets scanning, please contact your Datadog customer success manager.
 
 ### Deprecated Inputs
 The following action inputs have been deprecated and no longer have any effect. Passing these in will emit a warning.

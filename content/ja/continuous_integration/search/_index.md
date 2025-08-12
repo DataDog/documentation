@@ -12,10 +12,6 @@ further_reading:
 title: CI パイプラインの検索と管理
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">現在、選択されたサイト ({{< region-param key="dd_site_name" >}}) では CI Visibility をご利用いただけません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 [Pipelines ページ][1]は、サービスのビルドパイプラインを常に監視したい開発者にとって役立ちます。
@@ -103,9 +99,9 @@ Pipeline Visibility では、CI ジョブログに基づき AI が生成した�
 [3]: /ja/continuous_integration/pipelines/github/#enable-log-collection
 [4]: /ja/continuous_integration/pipelines/gitlab/#enable-job-log-collection
 [5]: /ja/continuous_integration/pipelines/jenkins#enable-job-log-collection
-[6]: /ja/account_management/teams/ 
+[6]: /ja/account_management/teams/
 [7]: /ja/continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
-[8]: /ja/continuous_integration/pipelines/awscodepipeline/#enable-log-correlation
+[8]: /ja/continuous_integration/pipelines/awscodepipeline/#collect-job-logs
 [9]: /ja/continuous_integration/pipelines/azure/#enable-job-log-collection
 [10]: /ja/continuous_integration/pipelines/circleci/#enable-log-collection
 [11]: /ja/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path

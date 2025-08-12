@@ -35,7 +35,7 @@ RUM에서 수집한 [데이터 및 컨텍스트][1]를 다양한 방법으로 �
 
 ## 기본 RUM 보기 이름 재정의
 
-RUM Browser SDK는 사용자가 새 페이지에 액세스할 때마다 또는 페이지의 URL이 변경될 때(단일 페이지 애플리케이션의 경우) [보기 이벤트][2]를 자동으로 생성합니다. 보기 이름은 현재 페이지의 URL에서 생성되며, 가변 영숫자 ID는 자동으로 삭제됩니다. 예를 들어, `/dashboard/1234`는 `/dashboard/?`가 됩니다.
+RUM Browser SDK는 사용자가 방문한 새 페이지마다 또는 페이지 URL이 변경될 때마다(단일 페이지 애플리케이션의 경우) [view 이벤트][2]를 자동으로 생성합니다. view 이름은 현재 페이지 URL에서 생성되며, 이때 변수 ID는 자동으로 제거됩니다. 숫자가 하나 이상 포함된 경로 세그먼트는 변수 ID로 간주됩니다. 예를 들어 `/dashboard/1234` 및 `/dashboard/9a`는 `/dashboard/?`가 됩니다.
 
 [버전 2.17.0][3]부터 `trackViewsManually` 옵션을 사용하여 보기 이벤트를 수동으로 추적함으로써 보기 이름을 추가하고 팀이 소유한 전용 서비스에 할당할 수 있습니다:
 
@@ -477,10 +477,7 @@ window.DD_RUM &&
 
 사용자가 여러 팀에 속한 경우, 호출에 포함된 키-값 쌍을 Global Context API에 추가합니다.
 
-RUM Browser SDK는 다음을 무시합니다:
-
-- `event.context` 외부에서 추가된 속성
-- RUM 보기 이벤트 컨텍스트에 대한 수정사항
+RUM Browser SDK는 `event.context` 외부에서 추가된 속성을 무시합니다.
 
 ### 기능 플래그를 사용하여 RUM 이벤트 강화
 
@@ -536,22 +533,36 @@ window.DD_RUM &&
 
 다음 이벤트 속성을 업데이트할 수 있습니다:
 
-|   속성           |   유형    |   설명                                                                                       |
-|-----------------------|-----------|-----------------------------------------------------------------------------------------------------|
-|   `view.url`            |   문자열  |   활성화된 웹 페이지의 URL.                            |
-|   `view.referrer`       |   문자열  |   현재 요청된 페이지로 연결되는 링크를 따라간 이전 웹 페이지의 URL.  |
-|   `view.name`           |   문자열  |   현재 보기의 이름.                            |
-|   `service`             |   문자열  |   애플리케이션의 서비스 이름입니다.                                                            |
-|   `version`             |   문자열  |   애플리케이션 버전(예: 1.2.3, 6c44da20, 2020.02.13)입니다.                          |
-|   `action.target.name`  |   문자열  |   사용자가 상호 작용한 요소. 자동으로 수집된 액션에만 해당합니다.              |
-|   `error.message`       |   문자열  |   오류를 설명하는 간결하고 사람이 읽을 수 있는 한 줄 메시지.                                 |
-|   `error.stack `        |   문자열  |   스택 트레이스 또는 오류에 대한 보완 정보.                                     |
-|   `error.resource.url`  |   문자열  |   오류를 트리거한 리소스 URL.                                                        |
-|   `resource.url`        |   문자열  |   리소스 URL.                                                                                 |
-|   `context`        |   개체  |   [글로벌 컨텍스트 API](#global-context), [뷰 컨텍스트 API](#view-context) 또는 수동으로 이벤트 생성 시 추가된 속성(예: `addError` 및 **`addAction`**)입니다.                                                                                 |
+| 속성                      | 유형   | 설명                                                                                                                                                                               |
+| ------------------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `view.url`                     | 문자열 | 활성화된 웹 페이지의 URL.                                                                                                                                                           |
+| `view.referrer`                | 문자열 | 현재 요청된 페이지로 연결되는 링크를 따라간 이전 웹 페이지의 URL.                                                                                          |
+| `view.name`                    | 문자열 | 현재 보기의 이름.                                                                                                                                                             |
+| `view.performance.lcp.resource_url` | 문자열 |   Largest Contentful Paint에 대한 리소스 URL.                                                                                                                                 |
+| `service`                      | 문자열 | 애플리케이션의 서비스 이름입니다.                                                                                                                                                    |
+| `version`                      | 문자열 | 애플리케이션 버전(예: 1.2.3, 6c44da20, 2020.02.13)                                                                                                                  |
+| `action.target.name`           | 문자열 | 사용자가 상호 작용한 요소. 자동으로 수집된 액션에만 해당합니다.                                                                                                      |
+| `error.message`                | 문자열 | 오류를 설명하는 간결하고 사람이 읽을 수 있는 한 줄 메시지.                                                                                                                         |
+| `error.stack `                 | 문자열 | 스택 트레이스 또는 오류에 대한 보완 정보.                                                                                                                             |
+| `error.resource.url`           | 문자열 | 오류를 트리거한 리소스 URL.                                                                                                                                                |
+| `resource.url`                 | 문자열 | 리소스 URL.                                                                                                                                                                         |
+| `long_task.scripts.source_url` | 문자열 | 스크립트 리소스 URL                                                                                                                                                                   |
+| `long_task.scripts.invoker`    | 문자열 | 스크립트가 어떻게 호출되었는지 나타내는 의미 있는 이름                                                                                                                                    |
+| `context`                      | 개체 | [글로벌 컨텍스트 API](#global-context), [뷰 컨텍스트 API](#view-context) 또는 수동으로 이벤트 생성 시 추가된 속성(예: `addError` 및 **`addAction`**)입니다. |
 
 RUM Browser SDK는 위에 나열되지 않은 이벤트 속성에 대한 수정 사항은 무시합니다. 이벤트 속성에 대한 자세한 내용은 [RUM Browser SDK GitHub 리포지토리][15]를 참조하세요.
 
+**참고**: 다른 이벤트와 달리 뷰 이벤트는 수명 주기 동안 발생하는 업데이트를 반영하기 위해 Datadog에 여러 번 전송됩니다. 새 뷰가 활성화된 상태에서도 이전 뷰 이벤트 업데이트를 전송할 수 있으므로 뷰 이벤트 수정 시 유의하는 것이 좋습니다.
+
+```javascript
+beforeSend: (event) => {
+    // 현재 뷰 이름이 현재 뷰와 이전 뷰 모두에 적용될 수 있으므로 권장하지 않습니다
+    event.view.name = getCurrentViewName()
+
+    // 권장
+    event.view.name = getViewNameForUrl(event.view.url)
+}
+```
 ### RUM 이벤트 삭제
 
 `beforeSend` API과 함께 `false`를 반환하여 RUM 이벤트를 삭제합니다:
@@ -619,6 +630,20 @@ RUM 세션에 사용자 정보를 추가하면 다음과 같은 장점이 있습
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="RUM UI의 사용자 API" >}}
 
+{{< tabs >}}
+{{% tab "6.4.0 and above" %}}
+
+다음 속성을 사용할 수 있습니다.
+
+| 속성  | 유형 | 필수 |  설명                                                                                              |
+|------------|------|------|----------------------------------------------------------------------------------------------------|
+| `usr.id`    | 문자열 | Yes | 고유한 사용자 식별자.                                                                                  |
+| `usr.name`  | 문자열 | No | RUM UI에 기본적으로 표시되는 사용자 친화적인 이름.                                                  |
+| `usr.email` | 문자열 | No | 사용자 이메일. 사용자 이름이 없는 경우 RUM UI에 표시됨. Gravatars를 가져오는 데 사용되기도 함.  |
+
+{{% /tab %}}
+{{% tab "Before 6.4.0" %}}
+
 다음 속성은 선택 사항이나, Datadog에서는 이 중에서 최소 하나의 정보를 제공하는 것을 강력히 권고합니다. 예를 들어, 세션에서 사용자 ID를 설정해서 일부 기본 RUM 대시보드에서 관련 정보를 확인할 수 있는데, 이를 위해 `usr.id`가 쿼리 일부로 사용됩니다.
 
 | 속성  | 유형 | 설명                                                                                              |
@@ -626,6 +651,9 @@ RUM 세션에 사용자 정보를 추가하면 다음과 같은 장점이 있습
 | `usr.id`    | 문자열 | 고유한 사용자 식별자.                                                                                  |
 | `usr.name`  | 문자열 | RUM UI에 기본적으로 표시되는 사용자 친화적인 이름.                                                  |
 | `usr.email` | 문자열 | 사용자 이메일. 사용자 이름이 없는 경우 RUM UI에 표시됨. Gravatars를 가져오는 데 사용되기도 함.  |
+
+{{% /tab %}}
+{{< /tabs >}}
 
 권장 속성 외에 추가 속성을 추가하여 필터링 기능을 향상시킬 수 있습니다. 예를 들어 사용자 요금제 또는 해당 사용자가 속한 사용자 그룹에 대한 정보를 추가할 수 있습니다.
 
@@ -770,6 +798,152 @@ window.DD_RUM.onReady(function() {
 {{% tab "CDN sync" %}}
 ```javascript
 window.DD_RUM && window.DD_RUM.clearUser()
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+## 계정
+
+To group users into different set, use the account concept.
+
+다음 속성을 사용할 수 있습니다.
+
+| 속성      | 유형   | 필수 | 설명                                                |
+|----------------|--------|----------|------------------------------------------------------------|
+| `account.id`   | 문자열 | Yes      | Unique account identifier.                                 |
+| `account.name` | 문자열 | No       | Account friendly name, displayed by default in the RUM UI. |
+
+### Identify account
+
+`datadogRum.setAccount(<ACCOUNT_CONFIG_OBJECT>)`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.setAccount({
+    id: '1234',
+    name: 'My Company Name',
+    ...
+})
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setAccount({
+        id: '1234',
+        name: 'My Company Name',
+        ...
+    })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.setAccount({
+    id: '1234',
+    name: 'My Company Name',
+    ...
+})
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Access account
+
+`datadogRum.getAccount()`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.getAccount()
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.getAccount()
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.getAccount()
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Add/Override account property
+
+`datadogRum.setAccountProperty('<ACCOUNT_KEY>', <ACCOUNT_VALUE>)`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.setAccountProperty('name', 'My Company Name')
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setAccountProperty('name', 'My Company Name')
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.setAccountProperty('name', 'My Company Name')
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Remove account property
+
+`datadogRum.removeAccountProperty('<ACCOUNT_KEY>')`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.removeAccountProperty('name')
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.removeAccountProperty('name')
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.removeAccountProperty('name')
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### Clear account properties
+
+`datadogRum.clearAccount()`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.clearAccount()
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.clearAccount()
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.clearAccount()
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -985,6 +1159,19 @@ window.DD_RUM &&
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## 오류 컨텍스트
+
+### dd_context를 사용하여 로컬 오류 컨텍스트 연결
+
+오류 캡처 시 오류가 생성될 때 추가 컨텍스트가 제공될 수 있습니다. `addError()` API를 통해 추가 정보를 전달하는 대신 `dd_context` 속성을 오류 인스턴스에 직접 연결할 수 있습니다. RUM Browser SDK는 이 속성을 자동으로 감지하여 최종 오류 이벤트 컨텍스트에 병합합니다.
+
+{{< code-block lang="javascript" >}}
+const error = new Error('Something went wrong')
+error.dd_context = { component: 'Menu', param: 123, }
+throw error
+{{< /code-block >}}
+
 ## 글로벌 컨텍스트
 
 ### 글로벌 컨텍스트 속성 추가
@@ -1304,7 +1491,7 @@ RUM 탐색기에서 수행한 모든 쿼리에 대해 서비스 속성을 사용
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [10]: https://developer.mozilla.org/en-US/docs/Web/API/Request
 [11]: https://developer.mozilla.org/en-US/docs/Web/API/Response
-[12]: https://developer.mozilla.org/en-US/docs/Web//Reference/Global_Objects/Error
+[12]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
 [14]: /ko/real_user_monitoring/guide/enrich-and-control-rum-data
 [15]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts

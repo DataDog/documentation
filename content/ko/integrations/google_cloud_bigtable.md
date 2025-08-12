@@ -1,4 +1,24 @@
 ---
+app_id: google-cloud-bigtable
+app_uuid: 6450fe6b-bd5b-4957-9974-3e2615ff0d19
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: gcp.bigtable.cluster.cpu_load
+      metadata_path: metadata.csv
+      prefix: gcp.bigtable.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 263
+    source_type_name: Google Cloud Bigtable
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - google cloud
@@ -7,22 +27,40 @@ categories:
 custom_kind: 통합
 dependencies: []
 description: 주요 Google Bigtable 메트릭을 추적합니다.
+display_on_public_website: true
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_bigtable/
 draft: false
 git_integration_title: google_cloud_bigtable
 has_logo: true
 integration_id: google-cloud-bigtable
-integration_title: Google Bigtable
+integration_title: Google Cloud Bigtable
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: google_cloud_bigtable
-public_title: Datadog-Google Bigtable 통합
-short_description: 주요 Google Bigtable 메트릭을 추적합니다.
+public_title: Google Cloud Bigtable
+short_description: 검색, 분석, 지도, Gmail과 같은 Google 서비스를 구동하는 Google의 NoSQL Big Data 데이터베이스
+  서비스
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Google Cloud
+  - Category::Data Stores
+  - Category::Log Collection
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: 검색, 분석, 지도, Gmail과 같은 Google 서비스를 구동하는 Google의 NoSQL Big Data 데이터베이스
+    서비스
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Google Cloud Bigtable
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 개요
 
 Bigtable은 Google의 NoSQL 빅데이터 데이터베이스 서비스입니다. 검색, 애널리틱스, 지도, Gmail 등 많은 주요 Google 서비스를 제공하는 데 사용되는 동일한 데이터베이스입니다.
@@ -49,7 +87,7 @@ Google Bigtable 로그는 Google Cloud Logging으로 수집하여 클라우드 P
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_cloud_bigtable" >}}
+{{< get-metrics-from-git "google-cloud-bigtable" >}}
 
 
 ### 이벤트

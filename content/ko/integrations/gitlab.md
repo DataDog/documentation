@@ -43,7 +43,7 @@ draft: false
 git_integration_title: gitlab
 integration_id: gitlab
 integration_title: GitLab
-integration_version: 7.3.2
+integration_version: 9.1.0
 is_public: true
 manifest_version: 2.0.0
 name: gitlab
@@ -187,7 +187,7 @@ Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 �
 
 ### 검증
 
-[에이전트 상태 하위 명령을 실행][5]하고 점검 섹션 아래 `gitlab`을 찾으세요.
+[에이전트 상태 하위 명령을 실행][5]하고 점검 섹션 아래에서 `gitlab`을 찾으세요.
 
 ## 수집한 데이터
 
@@ -243,7 +243,7 @@ GitLab Runner 점검은 [Datadog 에이전트][2] 패키지에 포함되어 있�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "gitlab_runner" >}}
+{{< get-metrics-from-git "gitlab-runner" >}}
 
 
 ### 로그 수집

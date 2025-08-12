@@ -281,6 +281,21 @@ DdRum.startResource('<res-key>', 'GET', 'http://www.example.com/api/v1/test', {}
 DdRum.stopResource('<res-key>', 200, 'xhr', (size = 1337), {}, Date.now());
 ```
 
+### Notify the SDK that your view finished loading
+
+You can notify the SDK that your view has finished loading by calling the `addViewLoadingTime` method on `DdRum`. 
+Call this method when your view is fully loaded and ready to be displayed to the user:
+
+```javascript
+DdRum.addViewLoadingTime(true);
+```
+
+Use the `overwrite` parameter to replace the previously calculated loading time for the current view.
+
+After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
+
+**Note**: This API is experimental.
+
 ### Add custom timings
 You can add custom timings:
 
@@ -301,9 +316,63 @@ DdTrace.finishSpan(spanId, { custom: 21 }, Date.now());
 
 You can attach user information to all RUM events to get more detailed information from your RUM sessions.
 
-### User information
+### Track User Sessions
 
-For user-specific information, use the following code wherever you want in your app (after the SDK has been initialized). The `id`, `name`, and `email` attributes are built into Datadog, and you can add other attributes that makes sense for your app.
+Adding user information to your RUM sessions makes it easy to:
+* Follow the journey of a given user
+* Know which users are the most impacted by errors
+* Monitor performance for your most important users
+
+{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
+
+{{< tabs >}}
+{{% tab "SDK version >= 2.6.5" %}}
+<!-- source of truth: https://github.com/DataDog/dd-sdk-reactnative/pull/818 -->
+
+| Attribute   | Type   | Description                                                                     |
+| ----------- | ------ | ------------------------------------------------------------------------------- |
+| `usr.id`    | String | (Required) Unique user identifier.                                              |
+| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
+| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
+| `usr.extraInfo` | Object | (Optional) Include custom attributes such as subscription type, any user specific information that enhance user context in RUM sessions. |
+
+To identify user sessions, use the `setUserInfo` API, for example:
+
+```js
+DdSdkReactNative.setUserInfo({
+    id: '1337',
+    name: 'John Smith',
+    email: 'john@example.com',
+    extraInfo: {
+        type: 'premium'
+    }
+});
+```
+
+If you want to add or update user information, you can use the following code to modify the existing user's details.
+
+```js
+DdSdkReactNative.addUserExtraInfo({
+    hasPaid: 'true'
+});
+```
+
+If you want to clear the user information (for example, when the user signs out), you can do so by passing an empty object, as follows:
+
+```js
+DdSdkReactNative.setUser({});
+```
+
+{{% /tab %}}
+{{% tab "Legacy" %}}
+
+| Attribute   | Type   | Description                                                                     |
+| ----------- | ------ | ------------------------------------------------------------------------------- |
+| `usr.id`    | String | (Required) Unique user identifier.                                              |
+| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
+| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
+
+To identify user sessions, use the `setUser` API, for example:
 
 ```js
 DdSdkReactNative.setUser({
@@ -327,6 +396,9 @@ If you want to clear the user information (for example, when the user signs out)
 ```js
 DdSdkReactNative.setUser({});
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Global attributes
 
@@ -429,12 +501,12 @@ Events include additional context:
 | ------------- | ------------------------------------------------ | ----------------------------------------------------------------------- |
 | LogEvent      | `logEvent.additionalInformation.userInfo`        | Contains the global user info set by `DdSdkReactNative.setUser`.        |
 |               | `logEvent.additionalInformation.attributes`      | Contains the global attributes set by `DdSdkReactNative.setAttributes`. |
-| ActionEvent   | `actionEvent.actionContext`                      | [GestureResponderEvent][14] corresponding to the action or `undefined`.  |
+| ActionEvent   | `actionEvent.actionContext`                      | [GestureResponderEvent][14] corresponding to the action or `undefined`. |
 |               | `actionEvent.additionalInformation.userInfo`     | Contains the global user info set by `DdSdkReactNative.setUser`.        |
 |               | `actionEvent.additionalInformation.attributes`   | Contains the global attributes set by `DdSdkReactNative.setAttributes`. |
 | ErrorEvent    | `errorEvent.additionalInformation.userInfo`      | Contains the global user info set by `DdSdkReactNative.setUser`.        |
 |               | `errorEvent.additionalInformation.attributes`    | Contains the global attributes set by `DdSdkReactNative.setAttributes`. |
-| ResourceEvent | `resourceEvent.resourceContext`                  | [XMLHttpRequest][15] corresponding to the resource or `undefined`.       |
+| ResourceEvent | `resourceEvent.resourceContext`                  | [XMLHttpRequest][15] corresponding to the resource or `undefined`.      |
 |               | `resourceEvent.additionalInformation.userInfo`   | Contains the global user info set by `DdSdkReactNative.setUser`.        |
 |               | `resourceEvent.additionalInformation.attributes` | Contains the global attributes set by `DdSdkReactNative.setAttributes`. |
 
@@ -563,7 +635,7 @@ See [Monitor hybrid React Native applications][18].
 [5]: /getting_started/tagging/#define-tags
 [6]: /getting_started/site/
 [7]: /real_user_monitoring/browser/frustration_signals/
-[8]: /real_user_monitoring/platform/connect_rum_and_traces?tab=reactnativerum
+[8]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=reactnativerum
 [9]: /real_user_monitoring/guide/proxy-mobile-rum-data/
 [10]: https://github.com/wix/react-native-navigation
 [11]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/integrated_libraries/

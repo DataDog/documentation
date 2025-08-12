@@ -1,27 +1,65 @@
 ---
+app_id: google-app-engine
+app_uuid: 873be5df-897f-450d-856d-99cea1ffae03
+assets:
+  dashboards:
+    gcp_appengine: assets/dashboards/gcp_appengine.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - gcp.gae.memcache.hit_ratio
+      - gcp.gae.http.server.response_latencies.avg
+      - gcp.gae.system.cpu.usage
+      - gcp.gae.flex.instance.connections.current
+      metadata_path: metadata.csv
+      prefix: gcp.gae
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 87
+    source_type_name: Google 앱 엔진
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - configuration & deployment
 - google cloud
 custom_kind: 통합
 dependencies: []
-description: 프로젝트에 관한 메트릭을 수집하고 프로젝트 버전 간에 비교합니다.
-doc_link: https://docs.datadoghq.com/integrations/google_app_engine/
+display_on_public_website: true
 draft: false
 git_integration_title: google_app_engine
-has_logo: true
 integration_id: google-app-engine
 integration_title: Google 앱 엔진
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: google_app_engine
-public_title: Datadog-Google 앱 엔진 통합
-short_description: 프로젝트에 관한 메트릭을 수집하고 프로젝트 버전 간에 비교합니다.
-version: '1.0'
+public_title: Google 앱 엔진
+short_description: "Google App Engine: Google의 Platform as a Service \n클라우드에서 실행되는\
+  \ 앱 모니터링"
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::설정 및 배포
+  - Category::Google Cloud
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: "Google App Engine: Google의 Platform as a Service \n클라우드에서 실행되는 앱 모니터링"
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Google 앱 엔진
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 개요
 
 프로젝트에 Google 앱 엔진 통합을 설치합니다.
@@ -52,7 +90,7 @@ Google 앱 엔진 로그는 Google Cloud Logging으로 수집하여 클라우드
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_app_engine" >}}
+{{< get-metrics-from-git "google-app-engine" >}}
 
 
 ### 이벤트

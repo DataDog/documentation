@@ -7,10 +7,8 @@ further_reading:
 - link: "watchdog/faulty_deployment_detection/"
   tag: "Documentation"
   text: "Learn about Watchdog Faulty Service Deployment Detections"
+site_support_id: watchdog_faulty_service_deployment
 ---
-{{< site-region region="us3,us5,eu,ap1,gov" >}}
-<div class="alert alert-warning">Watchdog Faulty Service Deployment Detections are not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -40,10 +38,10 @@ Watchdog monitors the status of the following external providers' APIs:
 | Coreweave | *.coreweave.com |
 | Cloudflare | api.cloudflare.com |
 | Confluent | api.confluent.cloud & api.telemetry.confluent.cloud |
+| Databricks | *.cloud.databricks.com |
 | Envoy | api.envoy.com |
 | Facebook | graph.facebook.com |
 | GitHub | api.github.com |
-| Google | developers.google.com |
 | Hubspot | api.hubspot.com |
 | Intercom | api.intercom.io |
 | Mapbox | api.mapbox.com |
@@ -52,8 +50,10 @@ Watchdog monitors the status of the following external providers' APIs:
 | PagerDuty | api.pagerduty.com |
 | Palo Alto Networks | api.urlcloud.paloaltonetworks.com |
 | Render | api.render.com |
-| SendGrid | .sendgrid.com |
+| SendGrid | *.sendgrid.com |
+| ServiceNow | *.service-now.com |
 | Slack | *.slack.com |
+| Snowflake | *.snowflakecomputing.com |
 | SoundCloud | api.soundcloud.com |
 | Splunk | *.splunkcloud.com |
 | Square | connect.squareup.com |
@@ -62,6 +62,7 @@ Watchdog monitors the status of the following external providers' APIs:
 | Twilio | api.twilio.com |
 | Twitter | api.twitter.com |
 | Zendesk | *.zendesk.com |
+| Zoom    | api.zoom.us |
 
 The following AWS services are monitored (.*amazonaws.com):
 - CloudWatch

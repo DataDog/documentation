@@ -3,7 +3,7 @@ categories:
 - 自動化
 - azure
 - クラウド
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure Automation のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_automation/
@@ -37,7 +37,7 @@ Datadog Azure インテグレーションを使用して、Azure Automation か�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_automation" >}}
+{{< get-metrics-from-git "azure-automation" >}}
 
 
 ### イベント

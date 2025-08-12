@@ -4,6 +4,7 @@ aliases:
 categories:
 - cloud
 - azure
+custom_kind: integration
 dependencies: []
 description: Surveillez des métriques d'adresse IP publique Azure.
 doc_link: https://docs.datadoghq.com/integrations/azure_public_ip_address/
@@ -14,7 +15,6 @@ integration_id: azure-publicipaddress
 integration_title: Adresse IP publique Microsoft Azure
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_public_ip_address
 public_title: Intégration Datadog/Adresse IP publique Microsoft Azure
@@ -23,33 +23,33 @@ version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## Présentation
+## Section Overview
 
 Lorsqu'elle est assignée à une ressource, une adresse IP publique Azure permet une connectivité entrante et une connectivité sortante à partir d'Internet.
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'adresse IP publique Azure.
 
-## Formule et utilisation
+## Configuration
 
-### Liste des infrastructures
+### Installation
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
-## Real User Monitoring
+## Données collectées
 
-### Analyse d'entonnoirs
-{{< get-metrics-from-git "azure_public_ip_address" >}}
+### Métriques
+{{ get-metrics-from-git "azure-publicipaddress" }}
 
 
-### Aide
+### Événements
 
 L'intégration Adresse IP publique Azure n'inclut aucun événement.
 
-### Aide
+### Checks de service
 
 L'intégration Adresse IP publique Azure n'inclut aucun check de service.
 
-## Aide
+## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

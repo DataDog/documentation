@@ -1,4 +1,24 @@
 ---
+app_id: google-cloud-firebase
+app_uuid: d7f5267d-56e4-4148-aabb-bec98207c35a
+assets:
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check: gcp.firebasedatabase.io.utilization
+      metadata_path: metadata.csv
+      prefix: gcp.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 189
+    source_type_name: Google Cloud Firebase
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - google cloud
@@ -7,6 +27,7 @@ categories:
 custom_kind: 통합
 dependencies: []
 description: Firebase 서비스로 인한 네트워크 및 데이터 저장소 사용량을 추적합니다.
+display_on_public_website: true
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_firebase/
 draft: false
 git_integration_title: google_cloud_firebase
@@ -15,14 +36,29 @@ integration_id: google-cloud-firebase
 integration_title: Google Cloud Firebase
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: google_cloud_firebase
-public_title: Datadog-Google Cloud Firebase 통합
-short_description: Firebase 서비스로 인한 네트워크 및 데이터 저장소 사용량을 추적합니다.
+public_title: Google Cloud Firebase
+short_description: Firebase는 앱을 빠르게 개발할 수 있도록 도와주는 모바일 플랫폼입니다.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Google Cloud
+  - Category::Log Collection
+  - Category::Mobile
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Firebase는 앱을 빠르게 개발할 수 있도록 도와주는 모바일 플랫폼입니다.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Google Cloud Firebase
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 개요
 
 Firebase는 고품질 앱을 빠르게 개발하고, 사용자 기반을 늘리고, 더 많은 수익을 창출할 수 있도록 도와드리는 모바일 플랫폼입니다.
@@ -52,7 +88,7 @@ Google Firebase 로그는 Google Cloud Logging으로 수집하여 클라우드 P
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_cloud_firebase" >}}
+{{< get-metrics-from-git "google-cloud-firebase" >}}
 
 
 ### 이벤트

@@ -5,7 +5,7 @@ aliases:
 - /real_user_monitoring/error_tracking/roku
 type: multi-code-lang
 code_lang: roku
-code_lang_weight: 50
+code_lang_weight: 70
 further_reading:
 - link: '/real_user_monitoring/error_tracking/'
   tag: 'Documentation'
@@ -13,11 +13,8 @@ further_reading:
 - link: '/real_user_monitoring/error_tracking/explorer'
   tag: 'Documentation'
   text: 'Visualize Error Tracking data in the Explorer'
+site_support_id: roku_error_tracking
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">RUM and Error Tracking for Roku is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
 
 ## Overview
 

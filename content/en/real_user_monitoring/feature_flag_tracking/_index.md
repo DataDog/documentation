@@ -25,9 +25,9 @@ By enriching your RUM data with feature flag data, you can:
 
 ## Supported frameworks
 
-Feature flag tracking is available in the RUM Browser SDK. To start, set up [RUM browser monitoring][2]. You need the Browser RUM SDK version >= 4.25.0.
+Feature flag tracking is available in the RUM Browser, iOS, Android, Flutter, and React Native SDK. To start, [set up RUM monitoring for browser or mobile][1].
 
-You can start collecting feature flag data for [custom feature flag management solutions][3], or using one of our integration partners. 
+You can start collecting feature flag data for [custom feature flag management solutions][2], or using one of Datadog's integration partners. 
 
 We support integrations with:
 
@@ -48,12 +48,6 @@ To get started with feature flags, set up feature flag tracking for the browser 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/setup/
-[2]: /real_user_monitoring/browser#setup
-[3]: /real_user_monitoring/setup/?tab=npm#custom-feature-flag-management
-[4]: https://app.datadoghq.com/rum/feature-flags
-[5]: /real_user_monitoring/session_replay/browser/
-[6]: /real_user_monitoring/error_tracking/explorer/#explore-your-issues
-[7]: https://app.datadoghq.com/rum/explorer
-[8]: /dashboards/
-[9]: /monitors/#create-monitors
+
+[1]: https://docs.datadoghq.com/real_user_monitoring/feature_flag_tracking/setup/
+[2]: /real_user_monitoring/setup/?tab=npm#custom-feature-flag-management

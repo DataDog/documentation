@@ -243,13 +243,13 @@ cascade:
       text: Use Datadog Code Security to catch code issues at every step of your development process
       link:
         name: Datadog Code Security
-        url: https://www.datadoghq.com/security/code_security/
+        url: https://www.datadoghq.com/product/code-security/
 
   banner:
     title: "<span>Seamless integrations.</span> Try Datadog Code Security"
     link:
       name: Datadog Code Security
-      url: https://www.datadoghq.com/security/code_security/
+      url: https://www.datadoghq.com/product/code-security/
 
 further_reading:
   - link: "/security/code_security/"

@@ -3,8 +3,8 @@ categories:
 - aws
 - nube
 - recopilación de logs
-- la red
-custom_kind: integration
+- network
+custom_kind: integración
 dependencies: []
 description: Rastrea métricas clave de AWS VPN.
 doc_link: https://docs.datadoghq.com/integrations/amazon_vpn/
@@ -22,7 +22,7 @@ short_description: Rastrea métricas clave de AWS VPN.
 version: '1.0'
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  FUENTE https://github.com/DataDog/dogweb -->
 ## Información general
 
 AWS VPN te permite establecer un túnel seguro y privado desde tu red o dispositivo hasta la red global de AWS.
@@ -33,7 +33,7 @@ Habilita esta integración para ver todas tus métricas de VPN en Datadog.
 
 ### Instalación
 
-Si aún no lo has hecho, primero configura la [integración Amazon Web Services][1].
+Si aún no lo has hecho, configura primero la [integración de Amazon Web Services][1].
 
 ### Recopilación de métricas
 
@@ -50,7 +50,7 @@ Configura AWS VPN para enviar logs a un bucket de S3 o a CloudWatch.
 
 #### Enviar logs a Datadog
 
-1. Si aún no lo has hecho, configura la [función Lambda de Datadog Forwarder][4].
+1. Si aún no lo has hecho, configura la [función de Lambda de Datadog Forwarder][4].
 2. Una vez instalada la función de Lambda, añade manualmente un activador en el bucket de S3 o en el grupo de logs de CloudWatch que contiene tus logs de AWS VPN en la consola de AWS:
 
     - [Añadir un activador manual en el bucket de S3][5]
@@ -66,11 +66,11 @@ Configura AWS VPN para enviar logs a un bucket de S3 o a CloudWatch.
 
 La integración de AWS VPN no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración de AWS VPN no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][8].
 

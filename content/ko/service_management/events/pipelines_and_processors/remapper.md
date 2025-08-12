@@ -19,4 +19,4 @@ title: 리매퍼
 
 {{< img src="logs/log_configuration/processor/remapper.png" alt="속성 리매퍼 프로세서" style="width:80%;" >}}
 
-[1]: https://app.datadoghq.com/logs/pipelines
+[1]: https://app.datadoghq.com/event/settings/pipelines

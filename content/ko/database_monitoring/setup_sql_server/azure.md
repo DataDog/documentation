@@ -7,6 +7,9 @@ further_reading:
 - link: /database_monitoring/troubleshooting/?tab=sqlserver
   tag: 설명서
   text: 일반적인 문제 트러블슈팅
+- link: /database_monitoring/guide/sql_deadlock/
+  tag: 설명서
+  text: 교착 모니터링 구성
 title: Azure SQL Server에서 데이터베이스 모니터링 설정
 ---
 
@@ -15,7 +18,7 @@ title: Azure SQL Server에서 데이터베이스 모니터링 설정
 데이터베이스에서 데이터베이스 모니터링을 활성화하려면 다음 단계를 따르세요.
 
 1. [에이전트에 데이터베이스 접근 권한 부여](#grant-the-agent-access)
-2. [Agent 설치](#install-the-agent)
+2. [에이전트를 설치 및 설정합니다](#install-and-configure-the-agent).
 3. [Azure 통합 설치](#install-the-azure-integration)
 
 ## 시작 전 참고 사항
@@ -39,10 +42,11 @@ CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 ALTER SERVER ROLE ##MS_ServerStateReader## ADD MEMBER datadog;
 ALTER SERVER ROLE ##MS_DefinitionReader## ADD MEMBER datadog;
--- Log Shipping Monitoring(Agent v7.50+에서 사용 가능)을 사용하려면 다음 세 줄의 주석을 제거하세요.
--- USE msdb;
--- CREATE USER datadog FOR LOGIN datadog;
--- GRANT SELECT to datadog;
+-- Log Shipping Monitoring(Agent v7.50+에서 사용 가능) 또는 SQL Server Agent Monitoring(Agent v7.57+에서 사용 가능) 중 
+-- 하나를 사용하지 않는 경우 다음 세 줄을 주석 처리하세요.
+USE msdb;
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT to datadog;
 ```
 
 이 서버에 있는 각 추가 Azure SQL 데이터베이스에 접근할 수 있도록 에이전트에 권한을 부여합니다.
@@ -98,15 +102,16 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
--- 로그 전송 모니터링(에이전트 v7.50+에서 사용 가능) 기능을 활용하려면 다음 세 줄의 주석 처리를 해제하세요.
--- USE msdb;
--- CREATE USER datadog FOR LOGIN datadog;
--- GRANT SELECT to datadog;
+-- 로그 전송 모니터링(에이전트 v7.50+에서 사용 가능) 또는
+-- SQL Server 에이전트 모니터링(에이전트 v7.57+에서 사용 가능)을 사용하지 않는 경우, 다음 세 줄의 주석 처리를 해제하세요:
+USE msdb;
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT to datadog;
 ```
 
 **참고:** Azure 관리형 ID 인증도 지원됩니다. Azure SQL DB 인스턴스에서 이를 설정하는 방법을 보려면 [가이드][1]를 참고하세요.
 
-[3]: /ko/database_monitoring/guide/managed_authentication
+[1]: /ko/database_monitoring/guide/managed_authentication
 {{% /tab %}}
 
 {{% tab "Windows Azure VM의 SQL Server" %}}
@@ -119,7 +124,10 @@ GRANT VIEW ANY DEFINITION to datadog;
 
 {{< /tabs >}}
 
-## 에이전트 설치
+### 비밀번호를 안전하게 저장하기
+{{% dbm-secret %}}
+
+## 에이전트 설치 및 구성
 
 Azure는 직접적인 호스트 액세스를 허용하지 않기 때문에 Datadog Agent는 SQL Server 호스트와 통신할 수 있는 별도의 호스트에 설치되어야 합니다. Agent 설치 및 실행에는 여러 가지 옵션이 있습니다.
 
@@ -136,13 +144,13 @@ instances:
   - dbm: true
     host: '<HOSTNAME>,<SQL_PORT>'
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     connector: adodbapi
     adoprovider: MSOLEDBSQL
-    tags:  # Optional
+    tags:  # 선택 사항
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # 프로젝트와 인스턴스를 추가한 후에는 CPU, 메모리 등과 같은 추가 클라우드 데이터를 풀하도록 Datadog Azure 통합을 설정합니다.
+    # 프로젝트와 인스턴스를 추가한 후 CPU, 메모리 등과 같은 추가 클라우드 데이터를 가져오도록 Datadog Azure 통합을 구성합니다.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
@@ -195,7 +203,7 @@ driver: '{ODBC Driver 18 for SQL Server}'
 [11]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Linux Host" %}}
-SQL Server 원격 측정을 수집하려면 먼저 [Datadog Agent를 설치][1]합니다.
+SQL Server 원격 측정을 수집하려면 먼저 [Datadog 에이전트를 설치][1]합니다.
 
 Linux의 경우 Datadog 에이전트에 ODBC SQL Server 드라이버(예: [Microsoft ODBC 드라이버][2])를 추가 설치해야 합니다. ODBC SQL Server가 설치되면 `odbc.ini`과 `odbcinst.ini` 파일을 `/opt/datadog-agent/embedded/etc` 폴더에 복사하세요.
 
@@ -209,13 +217,13 @@ instances:
   - dbm: true
     host: '<HOSTNAME>,<SQL_PORT>'
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     connector: odbc
     driver: '<Driver from the `odbcinst.ini` file>'
-    tags:  # Optional
+    tags:  # 선택 사항
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # 프로젝트와 인스턴스를 추가한 후에는 CPU, 메모리 등과 같은 추가 클라우드 데이터를 풀하도록 Datadog Azure 통합을 설정합니다.
+    # 프로젝트와 인스턴스를 추가한 후 CPU, 메모리 등과 같은 추가 클라우드 데이터를 가져오도록 Datadog Azure 통합을 구성합니다.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'
@@ -242,9 +250,9 @@ instances:
 [8]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Docker" %}}
-도커 컨테이너에서 실행하는 데이터베이스 모니터링 에이전트를 구성하려면 에이전트 컨테이너에서 [Autodiscovery Integration Templates][1]을 도커 레이블로 설정합니다.
+Docker 컨테이너에서 실행하는 데이터베이스 모니터링 에이전트를 구성하려면 에이전트 컨테이너에서 [자동탐지 통합 템플릿][1]을 Docker 레이블로 설정합니다.
 
-**참고**: 에이전트에 도커 자동탐지 레이블을 읽을 수 있는 권한이 있어야 작동합니다. 
+**참고**: 에이전트에 Docker 자동탐지 레이블을 읽을 수 있는 권한이 있어야 작동합니다. 
 
 값을 내 계정과 환경에 맞게 변경하세요. 사용할 수 있는 설정 옵션을 모두 보려면 [설정 파일 샘플][2]을 참고하세요.
 
@@ -296,36 +304,45 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 
 쿠버네티스 클러스터에서 클러스터 점검을 아직 활성화하지 않은 경우 [클러스터 확인 활성화][2] 지침에 따라 활성화합니다. 클러스터 에이전트 컨테이너에 연결된 정적 파일을 이용하거나 쿠버네티스 서비스 주석을 이용해 클러스터 에이전트를 설정할 수 있습니다.
 
-### Helm 명령줄
+### Helm
 
-다음 [Helm][3] 명령을 실행해 쿠버네티스 클러스터에서 [Datadog 클러스터 에이전트][1]를 설치하세요. 내 계정과 환경에 맞게 값을 변경하세요.
+다음 단계를 완료해 쿠버네티스 클러스터에서 [Datadog 클러스터 에이전트][1]를 설치하세요. 내 계정과 환경에 맞게 값을 변경하세요.
 
-```bash
-helm repo add datadog https://helm.datadoghq.com
-helm repo update
+1. Helm용 [Datadog 에이전트 설치 지침][3]을 완료하세요.
+2. 다음을 포함하도록 YAML 설정 파일(클러스터 에이전트 설치 지침의 `datadog-values.yaml`)을 업데이트하세요.
+    ```yaml
+    clusterAgent:
+      confd:
+        sqlserver.yaml: |-
+          cluster_check: true
+          init_config:
+          instances:
+          - dbm: true
+            host: <HOSTNAME>,1433
+            username: datadog
+            password: 'ENC[datadog_user_database_password]'
+            connector: 'odbc'
+            driver: '{ODBC Driver 18 for SQL Server}'
+            include_ao_metrics: true  # Optional: For AlwaysOn users
+            tags:  # Optional
+              - 'service:<CUSTOM_SERVICE>'
+              - 'env:<CUSTOM_ENV>'
+            azure:
+              deployment_type: '<DEPLOYMENT_TYPE>'
+              fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'
 
-helm install <RELEASE_NAME> \
-  --set 'datadog.apiKey=<DATADOG_API_KEY>' \
-  --set 'clusterAgent.enabled=true' \
-  --set 'clusterChecksRunner.enabled=true' \
-  --set "clusterAgent.confd.sqlserver\.yaml=cluster_check: true
-init_config:
-instances:
-  - dbm: true
-    host: <HOSTNAME>\,1433
-    username: datadog
-    password: '<PASSWORD>'
-    connector: 'odbc'
-    driver: 'ODBC Driver 18 for SQL Server'
-    include_ao_metrics: true  # 선택 사항: AlwaysOn 사용자의 경우 
-    tags:  # 선택 사항
-      - 'service:<CUSTOM_SERVICE>'
-      - 'env:<CUSTOM_ENV>'
-    azure:
-      deployment_type: '<DEPLOYMENT_TYPE>'
-      fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'" \
-  datadog/datadog
-```
+    clusterChecksRunner:
+      enabled: true
+    ```
+
+3. 명령줄에서 위의 설정 파일로 에이전트를 배포합니다.
+    ```shell
+    helm install datadog-agent -f datadog-values.yaml datadog/datadog
+    ```
+
+<div class="alert alert-info">
+Windows의 경우 <code>--set targetSystem=windows</code>를 <code>helm 설치</code>명령에 추가하세요.
+</div>
 
 ### 연결된 파일로 설정
 
@@ -338,9 +355,9 @@ instances:
   - dbm: true
     host: '<HOSTNAME>,<SQL_PORT>'
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     connector: "odbc"
-    driver: "ODBC Driver 18 for SQL Server"
+    driver: '{ODBC Driver 18 for SQL Server}'
     tags:  # 선택 사항
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
@@ -369,10 +386,10 @@ metadata:
           "dbm": true,
           "host": "<HOSTNAME>,<SQL_PORT>",
           "username": "datadog",
-          "password": "<PASSWORD>",
+          "password": "ENC[datadog_user_database_password]",
           "connector": "odbc",
           "driver": "ODBC Driver 18 for SQL Server",
-          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # 선택 사항
+          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # 선택 사항 
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
             "fully_qualified_domain_name": "<AZURE_ENDPOINT_ADDRESS>"
@@ -396,7 +413,7 @@ spec:
 
 [1]: /ko/agent/cluster_agent
 [2]: /ko/agent/cluster_agent/clusterchecks/
-[3]: https://helm.sh
+[3]: /ko/containers/kubernetes/installation/?tab=helm#installation
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
 [5]: /ko/agent/configuration/secrets-management
 {{% /tab %}}

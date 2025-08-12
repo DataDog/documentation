@@ -414,6 +414,14 @@ Tracer 버전 2.7.0에서 에이전트리스 로깅을 사용할 때 기본적�
 
 {{< /site-region >}}
 
+{{< site-region region="ap2" >}}
+
+`DD_LOGS_DIRECT_SUBMISSION_URL`
+: 로그가 제출된 URL을 설정합니다. 기본적으로 `DD_SITE`에 제공된 도메인을 사용합니다.<br>
+**기본값**: `https://http-intake.logs.ap2.datadoghq.com:443`(`DD_SITE` 기준)
+
+{{< /site-region >}}
+
 {{< site-region region="eu" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
@@ -478,7 +486,7 @@ PM> Install-Package Serilog.Sinks.Datadog.Logs
 
 ```csharp
 using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "{{< region-param key="http_endpoint" code="true" >}}" })
+    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "{{< region-param key="http_endpoint_full" >}}" })
     .CreateLogger())
 {
     // Some code
@@ -554,7 +562,7 @@ using (var log = new LoggerConfiguration()
 [9]: /ko/tracing/other_telemetry/connect_logs_and_traces/dotnet/
 [10]: /ko/agent/logs/advanced_log_collection
 [11]: /ko/serverless/azure_app_services
-[12]: /ko/sensitive_data_scanner/
+[12]: /ko/security/sensitive_data_scanner/
 [13]: /ko/tracing/trace_collection/dd_libraries/dotnet-core
 [14]: /ko/tracing/trace_collection/dd_libraries/dotnet-framework
 [15]: https://app.datadoghq.com/organization-settings/api-keys

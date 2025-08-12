@@ -16,11 +16,11 @@ aliases:
 
 Datadog provides an HTTPd [module][1] to enhance [Apache HTTP Server][2] and [IHS HTTP Server][3] capabilities with APM Tracing.
 
-### Compatibility
+## Compatibility
 
 Since IHS HTTP Server is essentially a wrapper of the Apache HTTP Server, the module can also be used with IHS without any modifications.
 
-### Installation
+## Installation
 
 <div class="alert alert-warning">
   <strong>Note</strong>: Only Apache HTTP Server 2.4.x for x86_64 architecture is supported.
@@ -54,7 +54,7 @@ To install the module:
 
 1. To enable the module, make sure to restart or reload HTTPd.
 
-### Configuration
+## Configuration
 
 By default, all requests are traced and sent to the Datadog Agent.
 

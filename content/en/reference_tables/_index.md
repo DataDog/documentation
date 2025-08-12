@@ -11,12 +11,22 @@ further_reading:
 - link: "/logs/explorer/advanced_search#filter-logs-based-on-reference-tables"
   tag: "Documentation"
   text: "Filter logs based on Reference Tables"
-- link: "/cloud_cost_management/tag_pipelines/#map-multiple-tags"
+- link: "/sheets/#lookup"
+  tag: "Documentation"
+  text: "Sheets lookup"
+- link: "/service_management/events/pipelines_and_processors/lookup_processor/"
+  tag: "Documentation"
+  text: "Lookup processor for Events"
+- link: "/cloud_cost_management/tag_pipelines/
+#map-multiple-tags"
   tag: "Documentation"
   text: "Use Reference Tables to add multiple tags to cost data"
 - link: 'https://www.datadoghq.com/blog/add-context-with-reference-tables/'
   tag: 'Blog'
   text: 'Add more context to your logs with Reference Tables'
+- link: 'https://www.datadoghq.com/blog/reference-tables/'
+  tag: 'Blog'
+  text: 'Enrich your existing Datadog telemetry with custom metadata using Reference Tables'
 - link: 'https://www.datadoghq.com/blog/add-context-with-reference-tables-in-cloud-siem/'
   tag: 'Blog'
   text: 'Add more context to Cloud SIEM detections and investigations with Datadog Reference Tables'
@@ -28,13 +38,19 @@ Reference Tables allow you to combine custom metadata with information already i
 
 {{< img src="reference_tables/reference-table.png" alt="A reference table with data populated in the columns for org id, org name, parent org, account owner, and csm" style="width:100%;">}}
 
+For example, you can:
+
+- **Enrich logs and security data for faster investigations:** Correlate logs, traces, and security events with up-to-date business context—such as customer names, account owners, threat intelligence, or error code descriptions—to accelerate troubleshooting and analysis.
+- **Segment users and resources for targeted analytics and cost management:** Group users, customers, or cloud resources into meaningful segments (like user tiers, teams, or business units) for deeper product analytics and precise cost attribution using tools like Tag Pipelines.
+- **Enhance data for advanced querying and reporting:** Join external data from Reference Tables in Sheets, DDSQL Editor, or Log Workspaces to perform complex queries, aggregations, and build custom reports without technical expertise.
+
 ## Validation rules
 
 Reference Table names and column headers are validated using the following naming conventions and automatically updated or normalized, if necessary.
 
 | Rule     | Normalization |
 | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Names and headers can not be duplicated.											| Duplicated names are enumerated. For example, if `fileid` is used twice as a name, the first instance becomes `fileid1` and the second instance becomes `fileid2`. If a name or header is enumerated and it exceeds the 56 characters, it is rejected and needs to be renamed. |
+| Names and headers cannot be duplicated.											| Duplicated names are enumerated. For example, if `fileid` is used twice as a name, the first instance becomes `fileid1` and the second instance becomes `fileid2`. If a name or header is enumerated and it exceeds the 56 characters, it is rejected and needs to be renamed. |
 | Names and headers cannot contain uppercase letters. 								| Names with uppercase letters are converted to lowercase. This conversion may result in duplicate names, which are then enumerated. For example, `Fileid` and `FileID` both become `fileid` and are enumerated to `fileid1` and `fileid2` respectively. |
 | Names and headers cannot contain spaces. 											| Spaces other than leading and trailing spaces are replaced with underscore `_` characters. Leading and trailing spaces are removed. For example, `customer names` is replaced with `customer_names`. |
 | Names and headers must start with a lowercase letter. 							| Uppercase characters are converted to lowercase. Non-letter leading characters are removed. For example, `23Two_three` becomes `two_three`.	|
@@ -43,8 +59,12 @@ Reference Table names and column headers are validated using the following namin
 
 ## Create a Reference Table
 
+Datadog supports the following data sources, including integrations and manual CSV upload:
+
 {{< tabs >}}
-{{% tab "Manual upload" %}}
+{{% tab "Cloud storage" %}}
+
+{{% collapse-content title="Manual upload" level="h4" expanded=true %}}
 
 Click **New Reference Table +**, then upload a CSV file, name the appropriate columns, and define the primary key for lookups.
 
@@ -52,9 +72,9 @@ Click **New Reference Table +**, then upload a CSV file, name the appropriate co
 
 **Note**: The manual CSV upload method supports files up to 4MB.
 
-{{% /tab %}}
+{{% /collapse-content %}}
 
-{{% tab "Amazon S3" %}}
+{{% collapse-content title="Amazon S3" level="h4" id="amazon-s3" %}}
 
 Reference Tables can automatically pull a CSV file from an Amazon S3 bucket to keep your data up to date. The integration looks for changes to the CSV file in S3, and when the file is updated it replaces the Reference Table with the new data. This also enables API updating with the S3 API once the initial Reference Table is configured. **Note**: Reference Tables are not replaced if the content of the CSV file is unchanged.
 
@@ -83,7 +103,7 @@ To update Reference Tables from S3, Datadog uses the IAM role in your AWS accoun
 	"Version": "2012-10-17"
 }
 ```
-### Define the table
+#### Define the table
 
 Click **New Reference Table +**, then add a name, select Amazon S3, fill out all fields, click import, and define the primary key for lookups.
 
@@ -93,9 +113,9 @@ Click **New Reference Table +**, then add a name, select Amazon S3, fill out all
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#installation
-{{% /tab %}}
 
-{{% tab "Azure storage" %}}
+{{% /collapse-content %}} 
+{{% collapse-content title="Azure storage" level="h4" id="azure-storage" %}}
 
 1. If you haven't already, set up the [Azure integration][1] within the subscription that holds the storage account from which you want to import your Reference Table. This involves [creating an app registration that Datadog can][2] integrate with.
 2. In the Azure Portal, select the storage account that stores your Reference Table files.
@@ -118,9 +138,14 @@ For more information, see the [Azure integration documentation][4].
 [3]: https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-reader
 [4]: /integrations/azure/
 
-{{% /tab %}}
+{{% /collapse-content %}} 
+{{% collapse-content title="Google Cloud storage" level="h4" id="google-cloud-storage" %}}
 
-{{% tab "Google Cloud storage" %}}
+### Google Cloud storage
+
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">Reference Tables are not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}})</div>
+{{% /site-region %}}
 
 1. If you have not set up a Google Cloud integration with Datadog or you are using legacy Google project ID files (legacy projects are indicated in your GCP integration tile), follow the instructions for setting up the [Google Cloud Platform integration][1]. This involves creating a [Google Cloud service account][2].
 
@@ -131,7 +156,6 @@ For more information, see the [Azure integration documentation][4].
 1. Click on the **Permissions** tab. Under "View By Principals", click the **Grant Access** button.
 
 1. In the window that appears, under the "New principals" field, enter the service account email that you created and added to the GCP tile in Step 1. Under "Assign roles", select the **Storage Object Viewer** role. Click **Save**.
-
 
 {{< img src="reference_tables/grant_access.png" alt="Google Cloud console showing the configuration to grant access" style="width:100%;" >}}
 
@@ -144,10 +168,30 @@ After reviewing and assigning the role, you can import into Reference Tables fro
 [1]: /integrations/google_cloud_platform/#setup
 [2]: /integrations/google_cloud_platform/#1-create-your-google-cloud-service-account
 
+{{% /collapse-content %}}
+
+{{% /tab %}}
+{{% tab "Integrations" %}}
+
+{{< partial name="reference_tables/ref-tables-saas-integrations.html" >}}
+
 {{% /tab %}}
 {{< /tabs >}}
 
 This Reference Table can be used to add additional attributes to logs with the [Lookup Processor][1].
+
+## Validation rules
+
+Reference Table names and column headers are validated using the following naming conventions and automatically updated or normalized, if necessary.
+
+| Rule     | Normalization |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Names and headers cannot be duplicated.											| Duplicated names are enumerated. For example, if `fileid` is used twice as a name, the first instance becomes `fileid1` and the second instance becomes `fileid2`. If a name or header is enumerated and it exceeds the 56 characters, it is rejected and needs to be renamed. |
+| Names and headers cannot contain uppercase letters. 								| Names with uppercase letters are converted to lowercase. This conversion may result in duplicate names, which are then enumerated. For example, `Fileid` and `FileID` both become `fileid` and are enumerated to `fileid1` and `fileid2` respectively. |
+| Names and headers cannot contain spaces. 											| Spaces other than leading and trailing spaces are replaced with underscore `_` characters. Leading and trailing spaces are removed. For example, `customer names` is replaced with `customer_names`. |
+| Names and headers must start with a lowercase letter. 							| Uppercase characters are converted to lowercase. Non-letter leading characters are removed. For example, `23Two_three` becomes `two_three`.	|
+| Names and headers support only lowercase letters, numbers, and the `_` character. | Unsupported characters are replaced with the underscore `_` character, unless it breaks one of the rules above. In that case, the unsupported characters are normalized by the respective rule.				|
+| Names and headers must be 56 characters or less. 									| No normalization is done. Names and headers that have more than 56 characters are rejected and need to be renamed. |
 
 ## Modify a Reference Table
 
@@ -179,7 +223,7 @@ The `reference_table_file` Asset Type displays import/upload events and the `ref
 
 ### Change Events
 
-Use change events for reference tables to track automated or user-triggered actions. They are sent when a cloud file is imported from a user or automatic refresh. While events can track user-triggered actions, they are mainly used to track triggered imports when a reference table automatically pulls a new CSV file.
+Use change events for reference tables to track automated or user-triggered actions. They are sent when a cloud file is imported from a user or automatic refresh. (Uploading a local file does not generate a change event.) While events can track user-triggered actions, they are mainly used to track triggered imports when a reference table automatically pulls a new CSV file.
 
 Events contain information about the success status, path, and table name of the import. If an error occurs, information about the error type is provided.
 
@@ -198,6 +242,34 @@ You can create monitors from the **Monitors** tab, or click on the Settings icon
 
 Reach out to [support][5] if you have a use case that exceeds these limits.
 
+## Automatic update frequency
+
+Reference Tables can be updated automatically, depending on the data source:
+
+- **Cloud file storage** (Amazon S3, Azure Storage, Google Cloud Storage): Every 5 minutes
+- **Integrations**: Every hour
+- **CSV manual uploads**: Automatic updates are not supported
+
+## Permissions
+
+### Role based access
+To view Reference Tables, users require the `reference_tables_read` permission. To create or modify Reference Tables, users require the `reference_tables_write` permission.
+
+For more information on permissions, see the [RBAC documentation][6].
+
+### Granular access controls
+Restrict access to individual tables by specifying a list of teams, roles, or users that are allowed to view or edit them.
+
+{{< img src="reference_tables/granular_access_permissions.png" alt="The Permissions cog option that supports setting granular access permissions on a table" style="width:100%;">}}
+
+1. Click on a table to open its detail page.
+2. Click the cog icon in the upper-right corner.
+3. Select **Permissions** from the menu.
+4. Click **Restrict Access**.
+5. Use the dropdown to select one or more teams, roles, or users.
+6. Click **Add**.
+7. Select either **Editor** or **Viewer**.
+8. Click **Save** to apply changes.
 
 ## Further Reading
 
@@ -208,3 +280,4 @@ Reach out to [support][5] if you have a use case that exceeds these limits.
 [3]: /events/
 [4]: /monitors/types/event/
 [5]: /help/
+[6]: /account_management/rbac/permissions/#reference-tables

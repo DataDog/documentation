@@ -7,10 +7,6 @@ further_reading:
   text: "Take enhanced control of your log data with Datadog Log Workspaces"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/log-workspaces/" header="Access the Preview!" >}}
-  Log Workspaces is in Preview.
-{{< /callout >}}
-
 ## Overview
 During an incident investigation, you might need to run complex queries, such as combining attributes from multiple log sources or transforming log data, to analyze your logs. Use Log Workspaces to run queries to:
 
@@ -60,7 +56,7 @@ You can also create Calculated Fields directly within a Workspace to define a co
 ## Analyze, transform, and visualize your logs
 You can add the following cells to:
 - Include additional data sources such as reference tables
-- Use SQL to join data
+- Use [DDSQL][5] to join data
 - Transform, correlate, and visualize the data
 
 Cells that depend on other cells are automatically updated when one of the cells it depends on is changed.
@@ -87,7 +83,7 @@ You can add a logs query or a reference table as a data source.
 
 ### Analysis cell
 
-1. Click the **Analysis** tile to add a cell and use SQL to query the data from any of the data sources. You can use natural language or SQL to query your data . An example using natural language: `select only timestamp, customer id, transaction id from the transaction logs`.
+1. Click the **Analysis** tile to add a cell and use SQL to query the data from any of the data sources. See [SQL syntax features][6] documentation. You can also use natural language to query your data. An example using natural language: `select only timestamp, customer id, transaction id from the transaction logs`.
 1. If you are using SQL, click **Run** to run the SQL commands.
 1. Click the download icon to export the dataset as a CSV.
 
@@ -105,7 +101,7 @@ Add the **Visualization** cell to display your data as a:
 1. Select your visualization method in the **Visualize as** dropdown menu.
 1. Enter a filter if you want to filter to a subset of the data. For example, `status:error`. If you are using an analysis cell as your data source, you can also filter the data in SQL first.
 1. If you want to group your data, click **Add Aggregation** and select the information you want to group by.
-1. Click the download button to export the data as a CSV.
+1. Click the download button to export the data as a CSV (for table visualizations only).
 
 ### Transformation cell
 
@@ -113,11 +109,16 @@ Click the **Transformation** tile to add a cell for filtering, aggregating, and 
 
 1. Click the **Transformation** tile.
 1. Select the data source you want to transform in the **Source dataset** dropdown menu.
-1. Click the plus icon to add a **Filter**, **Parse**, or **Aggregate** function.
-    - For **Filter**, add a filter query for the dataset.
+1. Choose an operation like **Parse**, **Group**, or **Filter**.
     - For **Parse**, enter [grok syntax][3] to extract data into a separate column. In the **from** dropdown menu, select the column the data is getting extracted from. See the [column extraction example](#column-extraction-example).
-    - For **Aggregate**, select what you want to group the data by in the dropdown menus.
-    - For **Limit**, enter the number of rows of the dataset you want to display.
+    - For **Group**, select what you want to group the data by in the dropdown menu.
+    - For **Join**, specify the join type, source dataset and field, and target dataset and field.
+    - For **Filter**, add a filter query for the dataset.
+    - Under **More Operations**:
+        - For **Calculate**, specify a new calculated field name and a formula.
+        - For **Limit**, enter the number of rows of the dataset you want to display.
+        - For **Sort**, choose a field and ordering.
+        - For **Convert**, choose a field and type conversions.
 1. Click the download icon to export the dataset into a CSV.
 
 #### Column extraction example
@@ -256,3 +257,5 @@ Finally, a treemap visualization cell is created with the `transaction_record_wi
 [2]: https://app.datadoghq.com/logs
 [3]: /logs/log_configuration/parsing/
 [4]: /logs/explorer/calculated_fields/
+[5]: /ddsql_reference/
+[6]: /ddsql_reference/ddsql_default/

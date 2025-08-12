@@ -12,7 +12,7 @@ title: Datadog Agent 이미지 빌드
     git clone https://github.com/DataDog/datadog-agent.git
     ```
 
-2. `datadog-agent/Dockerfile/agent/` 폴더로 이동하세요.
+2. `datadog-agent/Dockerfiles/agent/` 폴더로 이동:
 
     ```shell
     cd datadog-agent/Dockerfiles/agent/

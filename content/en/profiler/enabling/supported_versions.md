@@ -13,7 +13,6 @@ The following tables summarize the features available for each language runtime.
 
 <div class="alert alert-info">For more details, click the language heading in any table to go that language's setup page.</div>
 
-
 ## Runtime and tracing library versions
 
 To use the Datadog Profiler, use at least the minimum versions summarized in the following table. For specific profile type availability by version, see [Profile types](#profile-types).
@@ -26,28 +25,29 @@ To use the Datadog Profiler, use at least the minimum versions summarized in the
 
 ## Profile types
 
-To collect profile types, use at least the minimum versions summarized in the following table. If a runtime isn't specified, the profile type requires the minimum runtime version in [Runtime and tracing library versions](#runtime-and-tracing-library-versions).
+The following table shows profile type availability by language. For optimal performance and access to all features, Datadog recommends using the latest version of the tracing library for your language. If a specific runtime version isn't indicated, the profile type is available with the minimum runtime version listed in the [Runtime and tracing library versions](#runtime-and-tracing-library-versions).
+
 
 | <div style="width:150px"><div>    |                     [Java][1]                     | [Python][2]  |  [Go][3]   |  [Ruby][4] |   [Node.js][5]  |  [.NET][6]   |   [PHP][7]  | [Rust/C/C++][8] |
 |-----------------------------------|:-------------------------------------------------:|:-------:|:------------:|:------:|:---------:|:-------:|:------:|:----------:|
-| {{< ci-details title="CPU" >}}The time each function/method spent running on the CPU.{{< /ci-details >}}   |                 [JDK&nbsp;8+][17]                 | tracer&nbsp;0.35+ | tracer&nbsp;1.23+ | tracer&nbsp;0.48+ | tracer&nbsp;5.11.0,<br>4.35.0, 3.56.0 | tracer&nbsp;2.15+ | tracer&nbsp;0.71+  | Preview<br>ddprof&nbsp;0.1+ |
-| {{< ci-details title="Exceptions" >}}The number of exceptions raised, including those caught.{{< /ci-details >}}   |                 [JDK&nbsp;8+][17]                 | Python 3.7+ |       |       |       | .NET 5+<br>tracer&nbsp;2.31+ |  tracer&nbsp;0.96+  |       |
-| {{< ci-details title="Allocation" >}}Number and sizes of memory allocations made by each function/method, including allocations which were subsequently freed.{{< /ci-details >}}   |                [JDK&nbsp;11+][17]                 | Python 3.6+<br>tracer&nbsp;0.50+ | tracer&nbsp;1.47+ | tracer 2.3.0+ |       | Preview<br>.NET 6+ and .NET Framework beta (requires Datadog Agent 7.51+ and tracer 3.2+)<br>tracer&nbsp;2.18+ | tracer&nbsp;0.88+ | Preview<br>ddprof&nbsp;0.9.3 |
-| {{< ci-details title="Heap" >}}The amount of heap memory allocated that remains in use.{{< /ci-details >}}   | [JDK&nbsp;11+][17]<br>tracer&nbsp;1.39.0+ | Python 3.6+<br> tracer&nbsp;0.50+ | tracer&nbsp;1.23+ | alpha<br>Ruby 3.1+<br>tracer&nbsp;2.3.0+ | tracer&nbsp;0.23+ | beta<br>.NET 7+<br>tracer&nbsp;2.22+ |       | Preview<br>ddprof&nbsp;0.15+ |
-| {{< ci-details title="Wall time" >}}The elapsed time spent in each function/method. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function/method is running.{{< /ci-details >}}   |                 [JDK&nbsp;8+][17]                 | tracer&nbsp;0.35+ |       | tracer&nbsp;0.48+ | tracer&nbsp;0.23+ | tracer&nbsp;2.7+ | tracer&nbsp;0.71+ |       |
-| {{< ci-details title="Locks" >}}The time each function/method spent waiting for and holding locks, and the number of times each function acquired a lock.{{< /ci-details >}}   |                 [JDK&nbsp;8+][17]                 | tracer&nbsp;0.45+ | tracer&nbsp;1.47+ |      |       | .NET 5+ and .NET Framework beta (requires Datadog Agent 7.51+)<br>tracer&nbsp;2.49+ |       |      |
-| {{< ci-details title="I/O" >}}The time each method spent reading from and writing to files and sockets.{{< /ci-details >}}   |                 [JDK&nbsp;8+][17]                 |       |       |       |       |       |       |       |
-
+| {{< ci-details title="CPU" >}}The time each function/method spent running on the CPU.{{< /ci-details >}}   |                 {{< X >}}                 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}  | {{< tooltip glossary="preview" case="title" >}} | 
+| {{< ci-details title="Exceptions" >}}The number of exceptions raised, including those caught.{{< /ci-details >}}   |                 {{< X >}}                 | Python 3.7+ | | | | .NET 5+ | {{< X >}}  | |
+| {{< ci-details title="Allocation" >}}Number and sizes of memory allocations made by each function/method, including allocations which were subsequently freed.{{< /ci-details >}}   |                [JDK 11+][17]                 | Python 3.6+ | {{< X >}} | {{< X >}} | | {{< tooltip glossary="preview" case="title" >}}<br>.NET 6+ | {{< X >}} | {{< tooltip glossary="preview" case="title" >}} |
+| {{< ci-details title="Heap" >}}The amount of heap memory allocated that remains in use.{{< /ci-details >}}   | [JDK 11+][17] | Python 3.6+ | {{< X >}} | {{< tooltip glossary="preview" case="title" >}}<br>Ruby 3.1+ | {{< X >}} | {{< tooltip glossary="preview" case="title" >}}<br>.NET 7+ | | {{< tooltip glossary="preview" case="title" >}} |
+| {{< ci-details title="Wall time" >}}The elapsed time spent in each function/method. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function/method is running.{{< /ci-details >}}   |                 {{< X >}}                 | {{< X >}} | | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+| {{< ci-details title="Locks" >}}The time each function/method spent waiting for and holding locks, and the number of times each function acquired a lock.{{< /ci-details >}}   |                 {{< X >}}                 | {{< X >}} | {{< X >}} | | | .NET 5+ | | |
+| {{< ci-details title="I/O" >}}The time each method spent reading from and writing to files and sockets.{{< /ci-details >}}   |                 {{< X >}}                 | | | | | | {{< tooltip glossary="preview" case="title" >}} | |
 
 ## Other features
 
-To access additional profiling features, use at least the minimum versions summarized in the following table. If a runtime isn't specified, the profile type requires the minimum runtime version in [Runtime and tracing library versions](#runtime-and-tracing-library-versions).
+The following table outlines additional profiling features by language. For full functionality and best performance, Datadog recommends using the latest version of your language's tracing library. If a specific runtime version isn't indicated, the feature is available with the minimum runtime version listed in the [Runtime and tracing library versions](#runtime-and-tracing-library-versions).
 
 |                                   | [Java][1]  | [Python][2]  |  [Go][3]   |  [Ruby][4] |   [Node.js][5]  |  [.NET][6]   |   [PHP][7]  | [Rust/C/C++][8] |
 |-----------------------------------|:-------:|:-------:|:------------:|:------:|:---------:|:-------:|:------:|:----------:|
-| {{< ci-details title="Trace to Profiling integration" >}}Find specific lines of code related to performance issues. <a href="/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces">Learn more</a>{{< /ci-details >}}   | [JDK&nbsp;8+][17] | tracer&nbsp;2.12.0,<br>2.11.4, 2.10.7 | tracer&nbsp;1.51.0 | tracer&nbsp;1.21.1 | tracer&nbsp;5.11.0,<br>4.35.0, 3.56.0 | tracer&nbsp;2.30.0 | tracer&nbsp;2.30.0 |      |
-| {{< ci-details title="Endpoint Profiling" >}}Identify endpoints that are bottlenecks or responsible for heavy resource consumption. <a href="/profiler/connect_traces_and_profiles/#endpoint-profiling">Learn more</a>{{< /ci-details >}}   | [JDK&nbsp;8+][17] | tracer&nbsp;0.54.0 | tracer&nbsp;1.37.0 | tracer&nbsp;0.52.0 | tracer&nbsp;5.0.0,<br>4.24.0, 3.45.0 | tracer&nbsp;2.15.0 | tracer&nbsp;0.79.0 |      |
-| {{< ci-details title="Timeline View" >}}Surface time-based patterns and work distribution over the period of a span. <a href="/profiler/connect_traces_and_profiles/#span-execution-timeline-view">Learn more</a>{{< /ci-details >}}   | [JDK&nbsp;8+][17] | tracer&nbsp;2.12.0,<br>2.11.4, 2.10.7 | tracer&nbsp;1.51.0 | tracer&nbsp;1.21.1<br>(2.4.0 for GVL profiling) | tracer&nbsp;5.11.0,<br>4.35.0, 3.56.0 | tracer&nbsp;2.30.0 | tracer&nbsp;0.89.0 |      |
+| {{< ci-details title="Trace to Profiling integration" >}}Find specific lines of code related to performance issues. <a href="/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces">Learn more</a>{{< /ci-details >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+| {{< ci-details title="Endpoint Profiling" >}}Identify endpoints that are bottlenecks or responsible for heavy resource consumption. <a href="/profiler/connect_traces_and_profiles/#endpoint-profiling">Learn more</a>{{< /ci-details >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+| {{< ci-details title="Timeline View" >}}Surface time-based patterns and work distribution over the period of a span. <a href="/profiler/connect_traces_and_profiles/#span-execution-timeline-view">Learn more</a>{{< /ci-details >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+| {{< ci-details title="Memory Leaks" >}}A guided workflow to assist in investigating memory leaks. <a href="/profiler/guide/solve-memory-leaks/">Learn more</a>{{< /ci-details >}}   | {{< X >}} | | {{< X >}} | | | | | |
 
 ## Further reading
 
@@ -74,3 +74,4 @@ To access additional profiling features, use at least the minimum versions summa
 [19]: /profiler/connect_traces_and_profiles/#endpoint-profiling
 [20]: /profiler/connect_traces_and_profiles/#span-execution-timeline-view
 [21]: https://go.dev/doc/devel/release
+

@@ -2226,15 +2226,20 @@ menu:
     parent: oncall
     url: service_management/on-call/teams/
     weight: 1
-  - identifier: oncall_pages
+  - identifier: oncall_triggering_pages
     name: Enviar una página
     parent: oncall
-    url: service_management/on-call/pages/
+    url: service_management/on-call/triggering_pages/
     weight: 2
-  - identifier: oncall_processing_rules
+  - name: Live Call Routing
+    url: service_management/on-call/triggering_pages/live_call_routing
+    identifier: oncall_live_call_routing
+    parent: oncall_triggering_pages
+    weight: 201
+  - identifier: oncall_routing_rules
     name: Procesamiento de reglas
     parent: oncall
-    url: service_management/on-call/processing_rules/
+    url: service_management/on-call/routing_rules/
     weight: 3
   - identifier: oncall_escalation_policies
     name: Políticas de escalada
@@ -5540,12 +5545,12 @@ menu:
   - identifier: cloud_siem_log_detection_rules
     name: Reglas de detección de logs
     parent: cloud_siem
-    url: security/cloud_siem/log_detection_rules
+    url: security/cloud_siem/detection_rules
     weight: 2
   - identifier: cloud_siem_signal_correlation_rules
     name: Reglas de correlación de señales
     parent: cloud_siem
-    url: security/cloud_siem/signal_correlation_rules
+    url: security/cloud_siem/detection_rules/signal_correlation_rules
     weight: 3
   - identifier: cloud_siem_default_rules
     name: Reglas predefinidas
