@@ -31,7 +31,7 @@ This page provides instructions for connecting your AI agent to the Datadog MCP 
 
 ## Connect to the Datadog MCP Server
 
-The following instructions are for all MCP-compatible clients. For VS Code or Cursor, use the [Datadog extension](#connect-in-vs-code-or-cursor) for built-in access to the Datadog MCP Server.
+The following instructions are for all [MCP-compatible clients](#client-compatibility). For VS Code or Cursor, use the [Datadog extension](#connect-in-vs-code-or-cursor) for built-in access to the Datadog MCP Server.
 
 {{< tabs >}}
 {{% tab "Remote authentication" %}}
@@ -95,14 +95,16 @@ Use this option if direct remote authentication is not available for you. After 
     For example, for Claude Code, add this to `~/.claude.json`, making sure to replace `<USERNAME>` in the command path:
 
       ```json
-            "mcpServers": {
-              "datadog": {
-                "type": "stdio",
-                "command": "/Users/<USERNAME>/.local/bin/datadog_mcp_cli",
-                "args": [],
-                "env": {}
-              }
-            }
+      {
+        "mcpServers": {
+          "datadog": {
+            "type": "stdio",
+            "command": "/Users/<USERNAME>/.local/bin/datadog_mcp_cli",
+            "args": [],
+            "env": {}
+          }
+        }
+      }
       ```
 
     Alternatively, you can also configure Claude Code by running the following:
@@ -120,19 +122,46 @@ Use this option if direct remote authentication is not available for you. After 
 The MCP Server uses OAuth 2.0 for [authentication][8]. If you cannot go through the OAuth flow (for example, on a server), you can provide a Datadog [API key and application key][9] as variables in the header of the MCP Server configuration.
 
 {{< code-block lang="json" >}}
-      "mcpServers": {
-        "datadog": {
-          "type": "http",
-          "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp",
-          "headers": { 
-              "DD_API_KEY": "<your-api-key>", 
-              "DD_APPLICATION_KEY": "<your-application-key>"
-          }
-        }
+{
+  "mcpServers": {
+    "datadog": {
+      "type": "http",
+      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp",
+      "headers": { 
+          "DD_API_KEY": "<your-api-key>", 
+          "DD_APPLICATION_KEY": "<your-application-key>"
       }
+    }
+  }
+}
 {{< /code-block >}}
 
+### Test access to the MCP Server
+
+1. Install the [MCP inspector](https://github.com/modelcontextprotocol/inspector), a developer tool for testing and debugging MCP servers.
+
+    ```bash
+    npx @modelcontextprotocol/inspector
+    ```
+2. In the inspector's web UI, for **Transport Type**, select **Streamable HTTP**.
+3. For **URL**, enter the [MCP Server URL](#connect-to-the-datadog-mcp-server) for your regional Datadog site.
+4. Click **Connect**, then go to **Tools** > **List Tools**.
+5. Check if the [available tools](#available-tools) appear.
+
 ## Client compatibility
+
+The following AI clients are compatible with the Datadog MCP Server.
+
+<div class="alert alert-info">Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
+
+| Client | Developer | Notes |
+|--------|------|------|
+| [Claude Code](https://www.anthropic.com/claude-code)<br/>[Claude&nbsp;Desktop](https://claude.ai/download) | Anthropic | |
+| [Codex CLI](https://help.openai.com/en/articles/11096431-openai-codex-cli-getting-started) | OpenAI | |
+| [Cursor](https://www.cursor.com/) | Anysphere | Datadog [VS Code & Cursor extension](#connect-in-vs-code-or-cursor) recommended. |
+| [Goose](https://github.com/block/goose) | Block | |
+| [Q CLI](https://github.com/aws/amazon-q-developer-cli) | Amazon | Does not support HTTP transport for remote authentication. Use [local binary authentication](#connect-to-the-datadog-mcp-server) instead. |
+| [VS Code](https://code.visualstudio.com/) | Microsoft | Datadog [VS Code & Cursor extension](#connect-in-vs-code-or-cursor) recommended. |
 
 ### Connect in VS Code or Cursor
 
@@ -142,7 +171,7 @@ Datadog's [VS Code and Cursor extension][1] includes built-in access to the Data
 * One-click transitions between multiple Datadog organizations.
 * Better fixes from **Fix in Chat** on Code Insights (issues from Error Tracking, Code Vulnerabilities, and Library Vulnerabilities), informed by context from the MCP Server.
 
-### Install the IDE extension
+To install the extension:
 
 1. Ensure you have an active version of [Node.js][2] installed on your local machine.  
 2. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. To find the MCP Server configuration:
