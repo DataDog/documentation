@@ -14,8 +14,8 @@ The following table lists App and API Protection capabilities for GCP Service Ex
 | Threat Detection                         | 1.71.0                                                                   |
 | Threat Protection                        | 1.71.0                                                                   |
 | Customize response to blocked requests   | 1.71.0                                                                   |
-| API Security                             | v2.2.0                                                                   |
-| App and API Protection Standalone        | v2.2.0                                                                   |
+| API Security                             | v2.2.2                                                                   |
+| App and API Protection Standalone        | v2.2.2                                                                   |
 | Automatic user activity event tracking   | not supported                                                            |
 
 Please refer to the [limitations][1] of the App and API Protection GCP Service Extensions integration.
@@ -26,7 +26,7 @@ The Datadog Service Extensions callout supports the processing of request and re
 
 | Payload type | Minimum App and API Protection Service Extensions callout image version  |
 |--------------|--------------------------------------------------------------------------|
-| JSON         | v2.1.0                                                                   |
+| JSON         | v2.2.2                                                                   |
 
 ## App and API Protection GCP Service Extensions support
 

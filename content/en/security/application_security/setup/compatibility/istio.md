@@ -13,8 +13,8 @@ The following table lists App and API Protection capabilities for the Istio inte
 | Threat Protection                              | v1.71.0                                           |
 | Customize response to blocked requests         | v1.71.0                                           |
 | Non blocking asynchronous mode (observability) | v2.1.0                                            |
-| API Security                                   | v2.2.0                                            |
-| App and API Protection Standalone              | v2.2.0                                            |
+| API Security                                   | v2.2.2                                            |
+| App and API Protection Standalone              | v2.2.2                                            |
 | Automatic user activity event tracking         | not supported                                     |
 
 ### Body processing support
@@ -23,7 +23,7 @@ The Datadog External Processor service supports the processing of request and re
 
 | Payload type | Minimum Datadog External Processor image version  |
 |--------------|---------------------------------------------------|
-| JSON         | v2.1.0                                            |
+| JSON         | v2.2.2                                            |
 
 ## Istio version support
 
