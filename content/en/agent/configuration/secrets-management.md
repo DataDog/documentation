@@ -63,19 +63,21 @@ Starting in Agent version 7.69, the Datadog Agent includes a natively supported 
 `secret_backend_type` is used to specify which secret management solution to use, and `secret_backend_config` holds additional configuration relevant to that solution:
 
 ```yaml
+# datadog.yaml
+
 secret_backend_type: <backend_type>
 secret_backend_config:
   <KEY_1>: <VALUE_1>
 ```
 
 
-More specific setup instructions depend on the backend type used. Refer to the appropriate link for further information: 
+More specific setup instructions depend on the backend type used. Refer to the appropriate section bellow for further information: 
 
 
 {{% collapse-content title="AWS Secrets" level="h4" expanded=false id="id-for-anchoring" %}}
 The secret executable utility supports the following AWS services:
 
-|secret_backend_type value                                | AWS Service                             |
+|"secret_backend_type" value                                | AWS Service                             |
 |---------------------------------------------|-----------------------------------------|
 |`aws.secrets` |[AWS Secrets Manager][1000]                 |
 
@@ -141,12 +143,14 @@ secret_backend_config:
 Now that you have configured the Agent to use AWS Secrets, you can refer to any secrets in your configurations using the  `ENC[secretId;secretKey]` notation. 
 
 The ENC notation is composed of:
-* `secretId`: either the secret "friendly name" (ex: `/DatadogAgent/Production`) or thel ARN (ex: `arn:aws:secretsmanager:us-east-1:123456789012:secret:/DatadogAgent/Production-FOga1K`).
+* `secretId`: either the secret "friendly name" (ex: `/DatadogAgent/Production`) or the ARN (ex: `arn:aws:secretsmanager:us-east-1:123456789012:secret:/DatadogAgent/Production-FOga1K`).
   - **Note**: The full ARN format is required when accessing secrets from a different account where the AWS credential or `sts:AssumeRole` credential is defined.
 * `secretKey`: the JSON key from the AWS secret that you want to use.
 
 
-The AWS Secrets Manager can store multiple key-value pairs within a single secret. A backend configuration using Secrets Manager has access to all the keys defined in a secret. For example, assuming an AWS Secrets Manager secret ID of `My-Secrets`:
+The AWS Secrets Manager can store multiple key-value pairs within a single secret. A backend configuration using Secrets Manager has access to all the keys defined in a secret.
+
+For example, assuming the secret ID `My-Secrets` contains the following 3 values:
 
 ```json
 {
@@ -156,7 +160,7 @@ The AWS Secrets Manager can store multiple key-value pairs within a single secre
 }
 ```
 
-Here would be a complete example of the `datadog.yaml` using the AWS Secrets to pull its API key:
+Here would be a complete example of the `datadog.yaml` using the AWS Secrets to pull its API key from `My-Secrets`:
 
 ```yaml
 api_key: ENC[My-Secrets;prodApiKey]
@@ -183,7 +187,7 @@ secret_backend_config:
 {{% collapse-content title="AWS SSM" level="h4" expanded=false id="id-for-anchoring" %}}
 The secret executable utility supports the following AWS services:
 
-|secret_backend_type value                                | AWS Service                             |
+|"secret_backend_type" value                                | AWS Service                             |
 |---------------------------------------------|-----------------------------------------|
 |`aws.ssm` |[AWS Systems Manager Parameter Store][1001] |
 
@@ -221,18 +225,17 @@ Next, attach a permissions policy to the IAM role. To allow resources such as EC
     {
       "Effect": "Allow",
       "Action": [
-				"ssm:GetParameters",
-				"ssm:GetParameter",
-				"ssm:GetParametersByPath",
-				"ssm:DescribeParameters"
-			],
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParametersByPath",
+                "ssm:DescribeParameters"
+             ],
       "Resource": [
         "arn:aws:ssm:${Region}:${Account}:parameter/${ParameterPathWithoutLeadingSlash}"
       ]
     }
   ]
 }
-
 ```
 
 You can use a wildcard when specifying the parameter path `Resource`. For example, use `datadog/*` for all resources within the `datadog` folder.
@@ -253,7 +256,6 @@ The parameters can be fetched like so:
 
 ```yaml
 # /etc/datadog-agent/datadog.yaml
----
 secret_backend_type: aws.ssm
 secret_backend_config:
   aws_session:
@@ -301,8 +303,7 @@ To access your Key Vault, create a Managed Identity and assign it to your Virtua
 The backend configuration for Azure Key Vault secrets is structured as YAML following this schema:
 
 ```yaml
-# /etc/datadog-agent/datadog.yaml
----
+# datadog.yaml
 secret_backend_type: azure.keyvault
 secret_backend_config:
   keyvaulturl: {keyVaultURL}
@@ -316,7 +317,7 @@ The backend secret is referenced in your Datadog Agent configuration file with `
 api_key: "ENC[{secretHandle}]"
 ```
 
-Azure Keyvault also uses JSON to store multiple key-value pairs within a single secret. In the following example, assume there is an Azure secret named `MySecret`:
+Azure Keyvault uses JSON to store multiple key-value pairs within a single secret. In the following example, assume there is an Azure secret named `MySecret`:
 
 ```json
 {
@@ -328,7 +329,7 @@ Azure Keyvault also uses JSON to store multiple key-value pairs within a single 
 
 To reference a specific key within that secret, use a semicolon (`;`) to separate the secret name from the key. The notation in the `datadog.yaml` config file is `ENC[SecretName;SecretKey]`. 
 
-If this semicolon is not present, the entire string is treated as the plaintext value of the secret.
+If this semicolon is not present, the entire JSON is treated as a plaintext value of the secret.
 When the semicolon is used, `SecretKey` refers to the specific JSON key whose value you want to retrieve from within `MySecret`:
 
 ```yaml
@@ -358,7 +359,7 @@ The secret executable utility supports the following Hashicorp services:
 3. To store your secrets in a certain path, run `vault secrets enable -path=<your path> -version=1 kv`. 
   - **Note**: Only version 1 of the Hashicorp Secrets Engine is supported at this time.
 4. To add your key, run `vault kv put <your path> apikey=your_real_datadog_api_key`. To retrieve your key, run `vault kv get <your path>`.
-5. To write a policy that gives the permission to pull secrets from your vault, create a `*.hcl` file, and include the following permission:
+5. Write a policy that gives the permission to pull secrets from your vault--create a `*.hcl` file, and include the following permission:
 ```
 path "<your path>" {
   capabilities = ["read"]
@@ -370,7 +371,7 @@ path "<your path>" {
 
 #### AWS instance profile instructions
 
-Datadog strongly recommends that you authenticate using the instance profile method if you are running your Hashicorp Vault from an AWS-connected machine. 
+Datadog recommends that you authenticate using the instance profile method if you are running your Hashicorp Vault from an AWS-connected machine. 
 
 To use an instance profile, first, create an IAM role in the same account where your AWS services are running. When setting up the role, specify the **Trusted Entity Type** as **AWS Service**. Select the appropriate service, such as **EC2** if you're working with an EC2 instance. This IAM role is then available for use by instances of the selected service. 
 
@@ -423,23 +424,13 @@ vault write auth/aws/role/<Name of AWS IAM Role> \
 In the following example, assume the Hashicorp Vault secret path prefix is `/Datadog/Production` with a parameter key of `api_key`:
 
 ```sh
-/DatadogAgent/Production/api_key: (SecureString) "••••••••••••0f83"
+/DatadogAgent/Production/api_key: (SecureString) "<your api key>"
 ```
 
 Each of the following examples access the secret from the Datadog Agent configuration YAML file(s) as such:
 
 ```yaml
-# /etc/datadog-agent/datadog.yaml
-
-#########################
-## Basic Configuration ##
-#########################
-
-## @param api_key - string - required
-## @env DD_API_KEY - string - required
-## The Datadog API key to associate your Agent's data with your organization.
-## Create a new API key here: https://app.datadoghq.com/account/settings
-#
+# datadog.yaml
 api_key: "ENC[/Datadog/Production;apikey]" 
 
 secret_backend_type: hashicorp.vault
@@ -623,10 +614,11 @@ This `Role` gives access to the `Secret: database-secret` in the `Namespace: dat
 
 ### Option 3: Creating your own custom executable
 
-To retrieve secrets, the Agent uses an external executable that you provide. The executable is used when new
-secrets are discovered and are cached for the lifecycle of the Agent. If you need to update or rotate a secret, you must restart the Agent to reload it.
+To retrieve secrets, the Agent uses an external executable that you provide. The executable is used when new secrets are discovered and are cached for the lifecycle of the Agent. If you need to update or rotate a secret, you must restart the Agent to reload it.
 
-The Agent sends this executable a JSON payload over standard input containing a list of secret handles. The executable fetches each secret and returns them in a JSON format through standard output.
+This allow you to use any secret management solution and gives you full control on how the Agent accesses secrets.
+
+The Agent sends to this executable a JSON payload over standard input containing a list of secret handles to resolve. Your executable will fetch each secret and return them in a JSON format through a standard output.
 
 The following example shows what the Agent sends to your executable on STDIN:
 ```
@@ -651,9 +643,9 @@ The executable responds through the following STDOUT output:
 * `value` (string): The secret value to be used in the configurations. This can be `null` in the case of an error.
 * `error` (string): An error message or `null`.
 
-If a secret fails to resolve (either by returning a non-zero exit code or a non-null error), the related configuration is ignored by the Agent.
+If a secret fails to be resolved (either by returning a non-zero exit code or a non-null error), the related configuration is ignored by the Agent.
 
-**Never output sensitive information on `stderr`**. If the binary exits with a different status code than `0`, the Agent logs the standard error output of the executable for troubleshooting.
+**Never output sensitive information on `stderr`**. If the binary exits with a different status code than `0`, the Agent logs the standard error output of your executable for troubleshooting.
 
 You can also build your own secret retrieval executable using any language. The only requirement is that it follows the input/output format described previously.
 
@@ -719,7 +711,7 @@ instances:
 
 You can configure the Agent to use the binary to resolve secrets by adding the following:
 ```
-secret_backend_command: /path/to/datadog-secret-backend
+secret_backend_command: /path/to/binary
 ```
 
 ### Agent security requirements
@@ -729,7 +721,7 @@ The Agent runs the provided executable as a sub-process. The execution patterns 
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-On Linux, the executable must:
+On Linux, your executable must:
 
 * Belong to the same user running the Agent (`dd-agent` by default, or `root` inside a container).
 * Have no rights for `group` or `other`.
@@ -738,7 +730,7 @@ On Linux, the executable must:
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-On Windows, the executable must:
+On Windows, your executable must:
 
 * Have read/exec for `ddagentuser` (the user used to run the Agent).
 * Have no rights for any user or group except for the `Administrators` group, the built-in `Local System` account, or the Agent user context (`ddagentuser` by default).
@@ -747,7 +739,7 @@ On Windows, the executable must:
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: The executable shares the same environment variables as the Agent.
+**Note**: Your executable shares the same environment variables as the Agent.
 
 ## Refreshing API/APP keys at runtime
 
