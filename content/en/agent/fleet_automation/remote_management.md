@@ -48,7 +48,7 @@ To enable Remote Agent Management:
 * **System service manager**: Remote updates are supported only on machines running `systemd`. Other init systems (for example SysVinit, Upstart) are not supported.
 * **(Windows) Agent User**: To enable remote updates for installations using an Active Directory domain account, provide the password option to the installer when upgrading to Agent 7.66 or later. To avoid providing and manually managing the account password, consider using a [Group Managed Service Account (gMSA)][11]. For more information, see [Installing the Agent with a gMSA account][12].
 
-### Upgrade your Agents
+### How to upgrade your Agents
 
 To upgrade your Agents:
 1. [Enable Remote Agent Management](#setup).
@@ -97,10 +97,11 @@ If you need to downgrade an Agent, follow the steps in [Upgrade your Agents](#up
 Note: Managing Agent Configurations in Fleet Automation is currently in <strong>preview</strong>. To get access, complete the <a href="https://www.datadoghq.com/product-preview/manage-agent-configurations-from-fleet-automation/"> preview sign‑up form</a>.
 </div>
 
-1. In Fleet Automation, open the [Configure Agents][15] tab and click Create Configuration.
+1. In Fleet Automation, open the [Configure Agents][16] tab and click Create Configuration.
 1. Select and configure the products (for example, APM, Logs, NDM) that you want the target Agents to run.
 
-`<image>`
+{{< img src="/agent/fleet_automation/fa_create_agent_configuration.png" alt="Select which product to enable." style="width:100%;" >}}
+
 1. Review and name your final configuration and begin scoping deployment to your Agents. Alternatively, you can save the configuration to edit or deploy to your Agents at a later time from the Configure Agents page.
 1. Scope Agents to deploy configuration to (for example via tags such as host names, site, environment)
 1. Review the deployment plan to confirm scoped Agents and deployment settings, such as rollout concurrency.
@@ -108,10 +109,10 @@ Note: Managing Agent Configurations in Fleet Automation is currently in <strong>
 
 ## Configuration precedence
 
-When a configuration file on the host conflicts with a Fleet Automation configuration, Fleet Automation takes precedence, ensuring a single source of truth. See Configuration Order Precedence.
+When a configuration file on the host conflicts with a Fleet Automation configuration, Fleet Automation takes precedence, ensuring a single source of truth. See [Configuration Order Precedence][17].
 
 ### Edit, deploy or roll back configurations
-From your list of configurations in the Configure Agents tab, you can
+From your list of configurations in the [Configure Agents][16] tab, you can
    - Deploy the unused configuration to your Agents
    - Edit the configuration, save a new version, and redeploy the updated configuration.
    - Rollback the configuration to a previous version and redeploy.
@@ -185,3 +186,5 @@ To uninstall the Agent, see [Uninstall the Agent][1].
 [13]: https://app.datadoghq.com/fleet?query=support_remote_upgrade%3Adatadog-installer
 [14]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
 [15]: /agent/guide/setup_remote_config
+[16]: https://app.datadoghq.com/fleet/agent-management
+[17]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#configuration-order-precedence
