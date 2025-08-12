@@ -738,7 +738,7 @@ After this change, service names reflect the actual AWS resource name rather tha
 
 Some may prefer the older service representation model if their dashboards and monitors are based on the legacy naming convention. To opt out and restore old behavior, use the env var: `DD_TRACE_AWS_SERVICE_REPRESENTATION_ENABLED=false`
 
-We highly recommend using the corrected service modeling configuration when possible. 
+The updated service modeling configuration is recommended. 
 
 ## Troubleshoot
 
