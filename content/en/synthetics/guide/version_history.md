@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Version History automatically tracks changes made to your Synthetic Monitoring tests and saves previous versions so you can see exactly what was changed and by whom. You can run a previous version of a test, restore your test to any saved version, or clone a version to create a new Synthetic Monitoring test.
+Version History automatically tracks changes made to your Synthetic Monitoring tests and saves previous versions so you can see exactly what was changed and by whom. You can restore your test to any saved version, or clone a version to create a new Synthetic Monitoring test.
 
 Version History allows you to:
 
@@ -33,7 +33,7 @@ From an individual Synthetic Monitoring test, click the settings menu on the top
 
 {{< img src="/synthetics/guide/version_history/synthetics_version_history.png" alt="Synthetic Monitoring Version history menu" style="width:70%;" >}}
 
-The Version History side panel shows changes in chronological order. Each entry displays the fields that were modified, the values before and after, the user who made the change, and timestamp. Use the context menu to restore, clone, or run any version.
+The Version History side panel shows changes in chronological order. Each entry displays the fields that were modified, the values before and after, the user who made the change, and timestamp. Use the context menu to restore or clone a previous version of a test.
 
 ## Restore a version
 

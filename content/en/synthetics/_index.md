@@ -104,7 +104,7 @@ Optimize your test suite by [ensuring that your application's most critical work
 
 ## Version History
 
-Use [Version History in Synthetic Monitoring][23] to run a previous version of a test, restore your test to any saved version, or clone a version to create a new Synthetic Monitoring test.
+Use [Version History in Synthetic Monitoring][23] to run a previous version of a test, or clone a version to create a new Synthetic Monitoring test.
 
 ## Ready to start?
 
