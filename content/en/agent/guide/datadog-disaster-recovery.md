@@ -49,10 +49,10 @@ To enable Datadog Disaster Recovery, follow these steps. If you have any questio
 
 <div class="alert alert-info">If required, Datadog can set this up for you.</div>
 
-##### Create your DDR org:
+##### Create your DDR org
 
   1. Go to [Get Started with Datadog](https://app.datadoghq.com/signup). You may need to log out of your current session, or use incognito mode to access this page.
-  2. Choose a different Datadog site than your primary (for example, if you're on `US1`, choose `EU` or `US5`)
+  2. Choose a different Datadog site than your primary (for example, if you're on `US1`, choose `EU` or `US5`).
   3. Follow the prompts to create an account.
 
 
@@ -60,7 +60,9 @@ All Datadog sites are geographically separated. Reference the [Datadog Site List
 
 If you are also sending telemetry to Datadog using cloud provider integrations, you must add your cloud provider accounts in the DDR org. Datadog does not use cloud providers to receive telemetry data while the DDR site is passive (not in failover).
 
-##### Share the DDR org information with Datadog:
+<br>
+
+##### Share the DDR org information with Datadog
 
 Email your DDR org name to your [Customer Success Manager](mailto:success@datadoghq.com). Then, your Customer Success Manager sets this new org as your **DDR failover org**
 
@@ -131,7 +133,7 @@ See the [Cloud integrations failover](#3-testrun-failover-tests-in-various-envir
 In your DDR Datadog org, create an [API key][15] **and** [App key][16] set. These are useful for copying dashboards and monitors between Datadog sites. 
 
 <div class="alert alert-info">
-Datadog can help copy the API key signatures for your Agents to the DDR backup account. Contact your <a href="mailto:success@datadoghq.com">Customer Success Manager</a> for any questions regarding this.
+Datadog can help copy the API key signatures for your Agents to the DDR backup account. This ensures there is no need to create new API keys when operating in the DDR region. By using the existing keys, you can avoid the complexity of managing multiple sets of keys, reduce operational overhead and simplify key management. For any questions, please contact your <a href="mailto:success@datadoghq.com">Customer Success Manager</a>.
 </div>
 {{% /collapse-content %}}
 
@@ -205,10 +207,12 @@ Contact your Datadog Customer Success Manager to schedule dedicated time windows
 
 From the [Fleet Automation][14] page in your failover org, on the **Configure Agents** tab,  you can create a new failover policy or reuse an existing one, and apply it to your fleet of Agents. Soon after the policy is enabled, Agents begin dual-shipping telemetry to both the primary and DDR (failover) observability sites. 
 
+To create a failover policy, click on **Create Failover Policy**.
+
 {{< img src="/agent/guide/ddr/ddr-fa-policy.png" alt="Manage DDR policies" style="width:80%;" >}}
 
 
-To create a failover policy, click on **Create Failover Policy** and follow the prompt to scope the hosts and telemetry (metrics, logs, traces) that you are required to failover.
+Then, follow the prompt to scope the hosts and telemetry (metrics, logs, traces) that you are required to failover.
 
 {{< img src="/agent/guide/ddr/ddr-fa-policy-scope.png" alt="Scope the hosts and telemetry required to failover" style="width:80%;" >}}
 
