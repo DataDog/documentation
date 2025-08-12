@@ -27,7 +27,7 @@ The **Response Team** tab of the Incident Details page records the time an indiv
 
 You can remove responders if they are not assigned to any responder types and if they have not yet performed any actions updating the incident.
 
-### Assigning responder types
+## Assigning responder types
 
 <div class="alert alert-info">Responder types are unrelated to the <a href="/account_management/rbac/?tab=datadogapplication">Role Based Access Control (RBAC)</a> system. The Responder Type in Incident Management does not affect a user’s permissions.</a></div>
 
