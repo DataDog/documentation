@@ -32,7 +32,7 @@ Starting in version 0.74.0, the Java tracer automatically injects trace correlat
 - Automatic injection of trace correlation is available for Log4j2, Log4j, or SLF4J and Logback.
 - If the `attribute.path` for your trace ID is *not* `dd.trace_id`, ensure that your trace ID reserved attribute settings account for the `attribute.path`. For more information, see [Correlated Logs Not Showing Up in the Trace ID Panel][3].
 
-<div class="alert alert-info">Starting in version 1.18.3, if <a href="/agent/remote_config/">Agent Remote Configuration</a> is enabled where the service runs, you can set <code>DD_LOGS_INJECTION</code> in the <a href="/tracing/software_catalog">Software Catalog</a> UI.</div>
+<div class="alert alert-info">Starting in version 1.18.3, if <a href="/tracing/guide/remote_config">Agent Remote Configuration</a> is enabled where the service runs, you can set <code>DD_LOGS_INJECTION</code> in the <a href="/tracing/software_catalog">Software Catalog</a> UI.</div>
 
 ## Manual injection
 

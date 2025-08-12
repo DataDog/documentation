@@ -32,6 +32,7 @@ cascade:
     {{< nextlink href="/dashboards/guide/apm-stats-graph" >}}Configuring an APM stats graph{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/version_history" >}}Version History{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/graphing_json/" >}}Graphing with JSON{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/getting_started_with_wildcard_widget" >}}Getting started with the Wildcard Widget{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/using_vega_lite_in_wildcard_widgets/" >}}Using Vega-Lite with Wildcard Widgets in Datadog{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/wildcard_examples" >}}Wildcard Widget Examples{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/graphing_json/" >}}Graphing with JSON
