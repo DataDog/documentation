@@ -273,7 +273,7 @@ Le module Terraform [`lambda-datadog`][1] enveloppe la ressource [`aws_lambda_fu
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "3.2.0"
+  version = "3.2.1"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<ARN_SECRET_CLÉ_API_DATADOG>"

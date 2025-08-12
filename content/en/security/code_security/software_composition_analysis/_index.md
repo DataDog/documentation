@@ -24,7 +24,7 @@ SCA supports both static and runtime dependency detection:
 
 ## Search and filter results
 ### Vulnerabilities explorer
-The [Vulnerabilities][11] explorer provides a vulnerability-centric view of library vulnerabilities detected by SCA, alongside vulnerabilities detected by other Code Security capabilities (SAST and IAST). All vulnerabilities shown in this explorer are detected on the default branch of a scanned repository and/or affecting a running service.
+The [Vulnerabilities][11] explorer provides a vulnerability-centric view of library vulnerabilities detected by SCA, alongside vulnerabilities detected by other Code Security capabilities (SAST and IAST). All vulnerabilities shown in this explorer are detected on the default branch and the last commit of a scanned repository and/or affecting a running service.
 
 ### Datadog severity score
 Each vulnerability has a defined base severity score. To assist in prioritizing remediation, Datadog modifies the base CVSS score into the Datadog Severity Score by considering evidence of suspicious requests or attacks, the business sensitivity or internet exposure of the environment, and the risk of a successful exploit.

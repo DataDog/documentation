@@ -161,7 +161,7 @@ The session duration can be configured within the following limits:
 [7]: /account_management/saml/mapping
 [8]: /account_management/api-app-keys/
 [9]: /account_management/rbac/
-[10]: /agent/remote_config/?tab=configurationyamlfile#how-it-works
+[10]: /remote_configuration#how-it-works
 [11]: /account_management/api-app-keys/#client-tokens
 [12]: /service_management/events/guides/email/
 [13]: /synthetics/settings/?tab=specifyvalue#overview

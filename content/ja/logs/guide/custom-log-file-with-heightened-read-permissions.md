@@ -14,15 +14,15 @@ further_reading:
 title: 高度な読み取り権限を持つカスタムログファイルからのログ送信
 ---
 
-Often, log files, especially system logs such as *syslog* or *journald*, have heightened read-permissions blocking the Datadog Agent log collection as it does not have *sudo* or *admin* access.
+多くの場合、*syslog* や *journald* などのシステムログを含むログファイルは読み取り権限が厳しく設定されているため、*sudo* や *admin* アクセス権を持たない Datadog Agent がログを収集できないことがあります。
 
-There are three potential solutions to get around this:
+この問題を回避する方法は 3 つあります。
 
-* (Not Recommended) Give the Agent root access so it can tail those files. Datadog strongly recommends against going this route.
-* Change the file permission to let the Agent access it. The Agent needs execute and read permissions on the directories and also read permission on the file. Run the following commands to provide those permissions (for any user, not just the Agent):
+* (非推奨) Agent に root アクセス権を付与してファイルを tail できるようにする。Datadog ではこの方法を強く非推奨としています。
+* ファイルの権限を変更して Agent がアクセスできるようにする。Agent にはディレクトリに対する実行権限と読み取り権限、ファイルに対する読み取り権限が必要です。以下のコマンドを実行して (Agent だけでなく任意のユーザーに) これらの権限を付与します。
   * chmod 755 `<folder name>`
   * chmod 644 `<file name>`
-* Configure an open source log shipper (such as Rsyslog, NXLog, ...) that has root access to send those logs either directly to your Datadog platform or locally to a running Datadog Agent. For instructions, read the dedicated documentation for [Rsyslog][1], [Syslog-ng][2], [NXlog][3], [FluentD][4], or [Logstash][5].
+* root アクセス権を持つオープンソースのログシッパー (Rsyslog、NXLog など) を構成し、これらのログを直接 Datadog プラットフォームに送信するか、ローカルで稼働している Datadog Agent に送信する。設定手順については [Rsyslog][1]、[Syslog-ng][2]、[NXLog][3]、[FluentD][4]、[Logstash][5] の各ドキュメントを参照してください。
 
 {{< partial name="whats-next/whats-next.html" >}}
 
