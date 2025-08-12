@@ -50,8 +50,8 @@ Configure automated Flaky Tests Policies to govern how flaky tests are handled i
 
 | Action    | Description |
 | ---- | ---- |
-| **Quarantine**     | Toggle to allow flaky tests to be quarantined for this repository. Customize automation rules based on: <li>Time: Quarantine a test if its status is Active for a specified number of days. <li>Branch: Quarantine an Active test if it flakes in one or more specified branches.|
-| **Disable**        | Toggle to allow flaky tests to be disabled for this repository. You may want to do this after quarantining or to protect specific branches from flakiness. Customize automation rules based on: <li>Status and time: Disable a test if it has a specified status for a specified number of days. <li>Branch: Disable an Active or Quarantined test if it flakes in one or more specified branches. |
+| **Quarantine**     | Toggle to allow flaky tests to be quarantined for this repository. Customize automation rules based on: <li>Time: Quarantine a test if its status is `Active` for a specified number of days. <li>Branch: Quarantine an `Active` test if it flakes in one or more specified branches.|
+| **Disable**        | Toggle to allow flaky tests to be disabled for this repository. You may want to do this after quarantining or to protect specific branches from flakiness. Customize automation rules based on: <li>Status and time: Disable a test if it has a specified status for a specified number of days. <li>Branch: Disable an `Active` or `Quarantined` test if it flakes in one or more specified branches. |
 | **Attempt&nbsp;to&nbsp;Fix** | When you attempt to fix a flaky test, automatically retry the test a specified number of times on the commit containing the fix. |
 | **Fixed**          | If a flaky test no longer flakes for 30 days, it is automatically moved to Fixed status. This automation is default behavior and can't be customized. |
 
