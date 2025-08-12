@@ -35,7 +35,7 @@ From the **Response Team** tab of the Incident Details page, you can modify the 
 
 You can define additional single-person or multi-person responder types with custom names and descriptions in [Incident Settings][1].
 
-### Managing responders in Slack
+## Managing responders in Slack
 
 In Slack, you can manage responders and their responder types by entering the command `/dd incident responders` inside an incident channel. You can also click the "Manage Responders" button on the incident action tray.
 
