@@ -80,7 +80,7 @@ cascade:
 {{< whatsnext desc="Sensitive Data Management" >}}
     {{< nextlink href="logs/guide/logs-rbac" >}}How to set up RBAC for Logs{{< /nextlink >}}
     {{< nextlink href="logs/guide/logs-rbac-permissions" >}}Learn more about RBAC permissions for Logs{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/restrict-access-to-sensitive-data-with-rbac/" >}}Manage sensitive logs data access{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/manage-sensitive-logs-data-access" >}}Manage sensitive logs data access{{< /nextlink >}}
     {{< nextlink href="/logs/guide/delete_logs_with_sensitive_data/" >}}Delete Logs with Sensitive Data{{< /nextlink >}}
 {{< /whatsnext >}}
 

@@ -2,6 +2,7 @@
 title: Manage Sensitive Logs Data Access
 aliases:
   - /logs/guide/restrict-access-to-sensitive-data-with-rbac
+  - /logs/guide/control-sensitive-data-logs/
 further_reading:
   - link: /logs/guide/logs-rbac/
     tag: Documentation
