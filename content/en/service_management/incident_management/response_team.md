@@ -19,10 +19,9 @@ When you add a responder to an incident:
 * If the incident is private, the responder can view it in Datadog.
 * If the incident has a Slack channel attached, the responders is automatically added to that channel.
 
-Datadog also automatically adds users as responders when...
-
-* ...they perform any action updating the incident, including writing to the incident timeline.
-* ...they are notified about the incident via a notification rule or manual incident notification.
+Datadog also automatically adds users as responders when:
+* They perform any action that updates the incident, including writing to the timeline.
+* They are notified about the incident through a notification rule or a manual incident notification.
 
 The **Response Team** tab of the Incident Details page records the time an individual was added to the incident’s response team. It also records the time the responder last took an action affecting the incident in Datadog, such as updating its attributes or writing to its timeline.
 
