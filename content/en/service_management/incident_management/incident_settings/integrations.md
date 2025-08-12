@@ -24,10 +24,10 @@ Changing your channel name template does not rename any existing incident channe
 - Click the **Incident ID** checkbox to prevent duplicate channel names. 
 - Click the **Title of Incident** checkbox to enable the Datadog Slack App to automatically rename the channel if an incident's title changes.
 
-## Slack features
+## Slack integration
 
 The following features are available to use with the Incident Management Slack integration. Enable or configure these options in **[Service Management > Incidents > Settings > Integrations][1]**.
-- Mirror Slack channel messages, to import and retain all Slack conversations in the incident timeline. **Note**: This counts every Slack message commenter as a monthly active user. Alternately, push pinned message to your timeline to create a system of record for all incident-related conversations.
+- Mirror Slack channel messages to import and retain all Slack conversations in the incident timeline. Alternatively, react with the 📌 emoji message to your timeline to create a system of record for all incident-related conversations.
 - Add important links from integrations such as Jira and Zoom to the incident channel's bookmarks.
 - You can also automatically add [team members][3] to an incident Slack channel when a team is added to the incident. Only members who have connected their Slack and Datadog accounts by running the "/datadog connect" command in Slack are added to the channel.
 - Automatically archive a Slack channel after a certain amount of time.
