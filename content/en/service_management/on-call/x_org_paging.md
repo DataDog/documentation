@@ -6,75 +6,74 @@ further_reading:
   text: 'Datadog On-Call'
 ---
 
-Cross-org paging enables users to automatically trigger alerts to On-Call teams that reside in other Datadog organizations or datacenters. This is especially useful for enterprises with multi-org setups that want to centralize On-Call configuration while maintaining flexible, cross-org incident response.
-
 <div class="alert alert-info">
-Note: Cross-org paging is currently **in Preview** and solely supported for automated workflows (e.g. monitor alerts, incident notification rules). Manual paging via UI or API is limited to local orgs/datacenters.
+Cross-org paging is in Preview and only supported for automated workflows (for example: monitor alerts, incident notification rules). Manual paging through the Datadog UI or API is limited to local organizations and data centers.
 </div>
 
-## When should you use Cross-Org Paging?
-Use Cross-Org Paging when your operational or organizational setup spans multiple Datadog orgs or datacenters, and you want to centralise incident response **in one single org**. Here are common scenarios where this feature is a good fit:
+## Overview
 
-**You manage On-Call teams in a central org**: Consolidate all On-Call teams in a single organization, and trigger pages from any org or region (e.g., GovCloud → US1).
+Cross-org paging enables users to automatically trigger alerts to On-Call teams that reside in other Datadog organizations or data centers. Cross-org paging is useful when your operational or organizational setup spans multiple Datadog orgs or data centers, and you want to centralize incident response in one single org. 
 
-**You want to avoid duplicating On-Call configs**: Instead of replicating the same team structures across orgs, use one source of truth and page them from anywhere.
+With cross-org paging, you can:
 
-**Your teams operate across regional or compliance boundaries**: Page teams in compliant regions (like US1 or AP1) while keeping alerting logic where it originates.
+- **Manage On-Call teams in a central org**: Consolidate all On-Call teams in a single org, and trigger pages from any org or region.
 
+- **Avoid duplicating On-Call configs**: Instead of replicating the same team structures across orgs, use one set of configs and page teams from anywhere.
 
-## How it works
-Cross-Org Paging involves two parts: setting up the connection between organizations, and triggering pages using that connection.
+- **Page teams across regional or compliance boundaries**: Page teams in compliant regions (like US1 or AP1) while keeping alerting logic where it originates.
 
-### Configuration: Set Up the Cross-Org Connection
-To enable paging between orgs or datacenters, you'll first need to establish a secure connection between the source org (where alerts originate) and the destination org (where the On-Call team is managed).
+## Setup
 
-#### In the Destination Org:
-- Create a service account with On-Call API access (Read + Page).
-- Generate application keys for each source org you want to allow.
+To enable paging between orgs or datacenters, you must establish a secure connection between the **source org** (where alerts originate) and the **destination org** (where the On-Call team is managed).
 
-**Required Permissions**: The service account must have the following permissions:
-- `on_call_read` - Read access to On-Call teams and configurations
-- `on_call_page` - Ability to trigger pages to On-Call teams  
-- `on_call_respond` - Respond to On-Call Pages
-- `user_access_read` - Read user information (automatically included in most roles)
+1. In your destination org, [create a service account][1] with On-Call API access. This service account must have the following permissions:
+   - `on_call_read` - Read access to On-Call teams and configurations
+   - `on_call_page` - Ability to trigger pages to On-Call teams  
+   - `on_call_respond` - Respond to On-Call Pages
+   - `user_access_read` - Read user information (automatically included in most roles)
+ 
+   <div class="alert alert-warning">
+   Service accounts created with Terraform may be missing the <code>user_access_read</code> permission. This permission is automatically added to roles created through the UI, but it cannot be manually added through the UI and may not be included in Terraform-configured roles. If cross-org paging fails with permission errors, add an additional role to your service account that includes the <code>user_access_read</code> permission.
+   </div>
 
+2. In your destination org, [create an API key][2].
 
+2. In your destination org, [create an application key][3] for each source org you want to allow.
 
-<div class="alert alert-warning">
-**Important**: Service accounts created via Terraform may be missing the `user_access_read` permission. This permission is automatically added to roles created through the UI but cannot be manually added through the UI and may not be included in Terraform-configured roles. If cross-org paging fails with permission errors, add an additional role to your service account that includes the `user_access_read` permission.
-</div>
+3. In your source org, navigate to your [On-Call settings][4] and select [**Cross-Org Paging**][5].
 
-#### In the Source Org:
-- Go to On-Call > Settings > Cross-Org Paging.
-- Choose a destination datacenter (e.g. US1, EU1).
-- Enter the API and application keys from the destination org's service account.
+4. Select **Add Connection** and provide the following values:
+   - **Connection Name**: A name for your new connection.
+   - **Datacenter**: Your destination org's data center.
+   - **API Key**: The API key you created in your destination org.
+   - **Application Key**: The application key you created in your destination org for this source org.
 
-Datadog will:
+When you create this connection, Datadog securely stores your credentials and fetches available On-Call team handles from the destination org. This process may take up to five minutes.
 
-- Securely store the credentials
-- Fetch available On-Call team handles from the destination org. **Note**, this can take up to five minutes.
-- Validate the connection
+After this process is complete, destination org team handles appear in your source org's autocomplete menus (for example, in monitors).
 
-Once complete, destination org team handles will appear in the source org's autocomplete menus, e.g. in Monitors.
+### Usage
+After the setup process is complete, you can reference cross-org On-Call team handles in automated alert workflows, in the same way that you reference local handles.
 
-### Paging: Trigger Alerts to Remote On-Call Teams
-After configuration, you can reference cross-org On-Call team handles in automated alert workflows, just like local handles.
+For example, if your `@oncall-core-infra` team is managed in your destination org, you can use the following in an automated alert in your source org:
 
-For example:
 ```
 High memory usage detected on backend services. @oncall-core-infra
 ```
 
-When an alert is triggered:
-
-- Datadog detects that the handle is external.
-- The page is routed to the correct destination org using the stored service account credentials.
+When an alert is triggered, Datadog detects that the handle is external, and the page is routed to the correct destination org using the stored service account credentials.
 
 ## Limitations 
-- Manual paging (e.g., via API or web UI) is not supported across orgs — only within your current org/datacenter.
-- Links in cross-org notifications (e.g. monitor or incident URLs) will point to the source org. They may not resolve cleanly in the destination org UI.
+- Manual paging (for example, through the API or web UI) is not supported across orgs. Manual paging is only supported within your current org or data center.
+- Links in cross-org notifications (for example, monitor or incident URLs) point to the source org. They may not resolve cleanly in the destination org UI.
 - Handle syncing happens periodically; changes in destination org On-Call teams may take time to propagate.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/organization-settings/service-accounts
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/personal-settings/application-keys
+[4]: https://app.datadoghq.com/on-call/settings
+[5]: https://app.datadoghq.com/on-call/settings/cross-org-paging
