@@ -66,12 +66,12 @@ The data that can be scanned and redacted are:
 - **RUM**: Event attribute values only
 - **Events**: Event attribute values only
 
-The following actions can be applied to matched sensitive data per scanning rule:
+For each scanning rule, one of the following actions can be applied to matched sensitive data:
 
-- **Redact**: Replace all matching values entirely with a single token that you choose, such as `[sensitive_data]`.
+- **Redact**: Replace the entire matched data with a single token that you choose, such as `[sensitive_data]`.
 - **Partially redact**: Replace a specific portion of all matching values.
-- **Hash**: Replace entirely, all matching values with a non-reversible unique identifier.
-- **Mask** (available for logs only): Replace all matching values with redacted data, which users with the `Data Scanner Unmask` permission can optionally de-obfuscate in Datadog.
+- **Hash**: Replace the entire matched data with a non-reversible unique identifier.
+- **Mask** (available for logs only): Replace all matching values with redacted data. Users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) and view this data in Datadog. See [Mask action](#mask-action) for more information.
 
 To use Sensitive Data Scanner, set up a scanning group to define what data to scan and then set up scanning rules to determine what sensitive information to match within the data. For scanning rules you can:
 - Add predefined scanning rules from Datadog's [Scanning Rule Library][2]. These rules detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more.

@@ -5,7 +5,7 @@
     - **Redact**: Replaces all matching values with the text you specify in the **Replacement text** field.
     - **Partially Redact**: Replaces a specified portion of all matched data. In the **Redact** section, specify the number of characters you want to redact and which part of the matched data to redact.
     - **Hash**: Replaces all matched data with a unique identifier. The UTF-8 bytes of the match is hashed with the 64-bit fingerprint of FarmHash.
-    - **Mask** (available for logs only): Replace all matching values with redacted data, which users with the `Data Scanner Unmask` permission can optionally de-obfuscate in Datadog. See [Mask action](#mask-action) for more information.
+    - **Mask** (available for logs only): Replace all matching values with redacted data, which users with the `Data Scanner Unmask` permission can de-obfuscate and view in Datadog. See [Mask action](#mask-action) for more information.
 1. Optionally, add tags you want to associate with events where the values match the specified regex pattern. Datadog recommends using `sensitive_data` and `sensitive_data_category` tags. These tags can then be used in searches, dashboards, and monitors. See [Control access to logs with sensitive data](#control-access-to-logs-with-sensitive-data) for information on how to use tags to determine who can access logs containing sensitive information.
 1. For **Set priority level**, select the priority level for the rule based on your business needs.
 1. In the **Name and describe the scanning rule** section, enter a name for the rule. Optionally, add a description.

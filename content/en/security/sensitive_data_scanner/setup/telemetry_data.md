@@ -24,12 +24,12 @@ Sensitive Data Scanner in the Cloud scans telemetry data, such as your applicati
 - **RUM**: Event attribute values only
 - **Events**: Event attribute values only
 
-The following actions can be applied to matched sensitive data per scanning rule:
+For each scanning rule, one of the following actions can be applied to matched sensitive data:
 
-- **Redact**: Replace all matching values entirely with a single token that you choose, such as `[sensitive_data]`.
+- **Redact**: Replace the entire matched data with a single token that you choose, such as `[sensitive_data]`.
 - **Partially redact**: Replace a specific portion of all matching values.
-- **Hash**: Replace entirely, all matching values with a non-reversible unique identifier.
-- **Mask** (only available for logs): Replace all matching values with redacted data, which users with the `Data Scanner Unmask` permission can optionally de-obfuscate in Datadog.
+- **Hash**: Replace the entire matched data with a non-reversible unique identifier.
+- **Mask** (available for logs only): Replace all matching values with redacted data. Users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) and view this data in Datadog. See [Mask action](#mask-action) for more information.
 
 You submit logs and events to the Datadog backend, so the data leaves your environment before it gets redacted. The logs and events are scanned and redacted in the Datadog backend during processing, so sensitive data is redacted before events are indexed and shown in the Datadog UI.
 
@@ -51,7 +51,7 @@ This document goes through the following:
 
 By default, users with the Datadog Admin role have access to view and set up scanning rules. To allow other users access, grant the `data_scanner_read` or `data_scanner_write` permissions under [Compliance][1] to a custom role. See [Access Control][2] for details on how to set up roles and permissions.
 
-If a rule uses the **mask** action for matched sensitive data, the data is accessible to all users with the `data_scanner_unmask` permission because they can de-obfuscate the data in Dataodog. **Note**: Datadog does not recommend using the **mask** action for credentials, unless you have a plan to respond to and rotate all leaked credentials. The **mask** action is only available for logs.
+If a scanning rule uses the **mask** action (only available for logs) for matched sensitive data, users with the `data_scanner_unmask` permission can de-obfuscate and view the data in Datadog. **Note**: Datadog does not recommend using the **mask** action for credentials, unless you have a plan to respond to and rotate all leaked credentials. See [Mask action](#mask-action) for more information.
 
 {{< img src="sensitive_data_scanner/read_write_permissions.png" alt="The compliance permissions sections showing data scanner read and writer permissions" style="width:80%;">}}
 
@@ -257,14 +257,17 @@ To control who can access logs containing sensitive data, use tags added by the 
 
 ### Mask action
 
-When you set up or edit a scanner rule, there is an **Action on Match** section where you can set the rule to use the **mask** action (only available for logs) for matched sensitive data. The **mask** action obfuscate the sensitive data, but users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) the data in Datadog.
+<div class="alert alert-warning">The <b>mask</b> action is only available for logs.</div>
+
+When you set up or edit a scanner rule, there is an **Action on Match** section where you can set the rule to use the **mask** action for matched sensitive data. The **mask** action obfuscate the sensitive data, but users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) and view the data in Datadog.
 
 **Notes**:
-- Unmasking can only be performed on indexed logs within Datadog. Masked data that is accessed programmatically, such as using the API or Terraform, or within archives always appear encrypted.
+- Unmasking can only be performed on indexed logs within Datadog.
+- Masked data that is accessed programmatically, such as using the API or Terraform, or within archives always appear obfuscated and cannot be unmasked.
 - Unmasking does not work on rehydrated logs.
 - Datadog does not recommend using the **mask** action for credentials, unless you have a plan to respond to and rotate all leaked credentials.
 
-To unmask sensitive data, navigate to the [Summary page][8] and click on a scanning rule. Click on a log. If you have permission to see masked data, the masked data has an eye icon next to it. Click the eye icon to see the data. You can also use the [Log Explorer][15] to view your masked log data.
+To unmask sensitive data, navigate to the [Summary page][8], click on a scanning rule, and then click on a log. If you have permission to see masked data, that data has an eye icon next to it. Click the eye icon to see the data. You can also use the [Log Explorer][15] to view your masked log data.
 
 ## Redact sensitive data in tags
 
