@@ -54,7 +54,7 @@ instances:
 
 ## Options for retrieving secrets
 
-### Option 1: Using the Agent to resolve secrets from supported secret management solutions
+### Option 1: Using native Agent support for fetching secrets
 
 *Note*: This option is not yet available for Windows.
 
