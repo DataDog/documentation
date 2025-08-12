@@ -723,7 +723,7 @@ You can use this approach if, for example, your code has already been instrument
 
 To instrument AWS Lambda with the OpenTelemetry API, set the environment variable `DD_TRACE_OTEL_ENABLED` to `true`. See [Custom instrumentation with the OpenTelemetry API][48] for more details.
 
-## Visualize and model AWS services correctly
+## Visualize and model AWS services by resource name
 
 These versions of the [Node.js](https://github.com/DataDog/datadog-lambda-js/releases/tag/v12.127.0), [Python](https://github.com/DataDog/datadog-lambda-python/releases/tag/v8.113.0), and [Java](https://github.com/DataDog/datadog-lambda-java/releases/tag/v24) Lambda layers released changes to correctly name, model and visualize AWS managed services. 
 
