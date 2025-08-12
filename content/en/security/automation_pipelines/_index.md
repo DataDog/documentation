@@ -12,6 +12,9 @@ further_reading:
   - link: "/security/automation_pipelines/set_due_date"
     tag: "Documentation"
     text: "Set Due Date Rules"
+  - link: "https://www.datadoghq.com/blog/datadog-iac-security/"
+    tag: "Blog"
+    text: "Prevent cloud misconfigurations from reaching production with Datadog IaC Security"
 algolia:
   tags: ["automation pipelines", "findings automation", "findings pipelines", "finding automation"]
 ---

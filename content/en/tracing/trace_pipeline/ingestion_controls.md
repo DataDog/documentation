@@ -247,7 +247,7 @@ To phrase it another way, Datadog uses the following precedence rules:
 
 [1]: /tracing/metrics/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/traces/ingestion-control
-[3]: /agent/remote_config/#enabling-remote-configuration
+[3]: /tracing/guide/remote_config
 [4]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
 [5]: /tracing/trace_pipeline/ingestion_mechanisms/#error-traces
 [6]: /tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
@@ -258,7 +258,7 @@ To phrase it another way, Datadog uses the following precedence rules:
 [11]: /tracing/trace_pipeline/ingestion_mechanisms/
 [12]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
 [13]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
-[14]: /agent/remote_config/#enabling-remote-configuration
+[14]: /remote_configuration#enabling-remote-configuration
 [15]: /tracing/trace_pipeline/metrics#what-is-the-sampling-service
 [17]: /tracing/trace_pipeline/adaptive_sampling/
 [18]: /tracing/guide/trace_ingestion_volume_control/#globally-configure-the-ingestion-sampling-rate-at-the-agent-level
