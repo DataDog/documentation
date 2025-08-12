@@ -62,7 +62,7 @@ Click **Add Case** to add additional cases.
 
 **Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
-### Say what's happening
+### Describe your playbook
 
 {{% security-rule-say-whats-happening %}}
 
@@ -70,8 +70,11 @@ Use the **Tag resulting signals** dropdown menu to add tags to your signals. For
 
 **Note**: the tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
 
+See [Cloud SIEM Data Security ][2] for more information on using message template variables, group-by values in the notification title, and webhooks.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/configuration/rules?product=siem
+[2]: /data_security/cloud_siem/
