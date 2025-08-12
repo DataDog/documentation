@@ -36,15 +36,16 @@ Use the _Saved Actions_ feature to store and reuse an action and its parameters.
 
 ## Manage a saved action
 
-You can preview, edit, or delete your Saved Actions from the Action Catalog.
+You can edit, clone, or delete your Saved Actions from the Action Catalog.
 
 To find a saved action:
 1. Navigate to the [**Action Catalog**][2].
-1. Click **Saved Actions** and browse through the list for the Saved Action you'd like to preview, edit, or delete.
-1. Hover over the action and click **Preview/Edit saved configurations** to be presented with a preview of the action.
-1. From the preview screen, select the action to edit or delete it.
+1. Click **Saved Actions**. 
+1. Browse through the list of Saved Actions or use the search bar. Hover over the Saved Action you'd like to edit, clone, or delete.
+1. Click **Manage Saved Actions**. 
+1. Select the icon to edit {{< img src="icons/pencil.png" inline="true" style="width:14px;">}}, clone {{< img src="icons/clone.png" inline="true" style="width:14px;">}}, or delete {{< img src="icons/delete.png" inline="true" style="width:14px;">}} the Saved Action.
 
-If you did not create the action, you cannot edit it directly. Instead select the **Clone** icon to copy it and make your configuration changes. You cannot delete an action that you did not create.
+**Note:** If you did not create an action, you cannot delete it or edit it directly. Instead, select the **Clone** {{< img src="icons/clone.png" inline="true" style="width:14px;">}}icon to copy the action and make your configuration changes. 
 
 {{< img src="service_management/workflows/edit_saved_action.png" alt="Preview, edit, or delete a saved action from the Action Catalog." style="width:80%;" >}}
 
