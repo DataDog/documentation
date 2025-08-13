@@ -218,6 +218,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1478956307",
+      "description": "Create a new dashboard with geomap widget in custom focus"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_1177423752",
       "description": "Create a new dashboard with heatmap widget"
     },
