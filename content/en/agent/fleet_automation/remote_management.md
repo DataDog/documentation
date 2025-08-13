@@ -24,6 +24,8 @@ Remote Agent Management simplifies the process of upgrading your Agent fleet by 
 - Linux VMs installed using the install script or Ansible Datadog Role
 - Windows VMs
 
+Remotely upgrading Agents in containerized environments is not supported.
+
 ### Permissions 
 Users must have the [Agent Upgrade][2] within Fleet Automation for upgrades, and the [Fleet Policies Write][2] permissions to configure Agents remotely. The permission is enabled by default on the Datadog Admin role.
 
@@ -41,8 +43,6 @@ To enable Remote Agent Management:
 
 
 ## Upgrade Agents remotely
-
-<div class="alert alert-info">Remotely upgrading Agents in containerized environments is not supported.</div>
 
 ### Prerequisites
 * **Disk space**: Datadog suggests at least 2GB for the initial Agent install and an additional 2GB for upgrading the Agent from Fleet Automation. Specifically, the upgrade requires 1.3GB in the `/opt/datadog-packages` directory on Linux, or `C:\ProgramData\Datadog\Installer\packages` on Windows. The extra space ensures that there is enough room to maintain two Agent installs temporarily during the upgrade process in case a rollback is needed.
