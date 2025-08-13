@@ -98,7 +98,34 @@ As a best practice, Datadog recommends using unified service tagging when assign
 
 ### Tag inheritance
 
-All metrics, logs, traces, and integrations go through a process of `host-tag` inheritance as data is ingested into Datadog. Since data is associated with a given hostname, those components inherit all the `host-level` tags associated with that host. These tags are visible in the [infrastructure list][12] for a given host, sourced from either the cloud provider or the Datadog Agent. See [missing `host-level` tags on new hosts or nodes][25] for more information. 
+All metrics, logs, traces, and integrations go through a process of `host-tag` inheritance as data is ingested into Datadog. Since data is associated with a given hostname, those components inherit all the `host-level` tags associated with that host. These tags are visible in the [infrastructure list][12] for a given host, sourced from either the cloud provider or the Datadog Agent. See [missing `host-level` tags on new hosts or nodes][25] for more information.
+
+### Tag precedence
+
+The Datadog Agent does **not** enforce a precedence order for tags set from different sources. Instead, the Agent collects all tags from every available source, stores each unique value for a given tag key, and emits all of them with the telemetry.
+
+This means a single tag key can have multiple values if it's configured differently across sources. For example, if the `service` tag is set to `payments` in an environment variable, `checkout` in the Agent YAML, and `orders` in a tracing client configuration, telemetry for that service could include:
+
+```
+service:payments
+service:checkout
+service:orders
+```
+
+This behavior applies consistently across all tag sources, including but not limited to:
+
+* **Agent configuration** (`datadog.yaml`)
+* **Environment variables** visible to the Agent
+* **Pod or container annotations/labels**
+* **Tag Autodiscovery** rules
+* **Integration inheritance** (for example, AWS, vSphere, Ansible)
+* **Tracing client configurations**
+* **Integration YAML configuration files**
+* **Pod annotation configs for integration Autodiscovery**
+* **User-defined tags** in the Datadog UI
+* **Tags set in code** when generating metrics
+
+Because the Agent emits all values, downstream filters or dashboards should explicitly filter on the desired value if you expect only one.
 
 ## Usage
 
