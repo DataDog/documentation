@@ -97,7 +97,7 @@ Managing Agent Configurations in Fleet Automation is in <strong>preview</strong>
 1. In Fleet Automation, open the [Configure Agents][16] tab and click Create Configuration.
 1. Select and configure the products (for example, APM, Logs, NDM) that you want the target Agents to run.
 
-{{< img src="/agent/fleet_automation/fa_create_agent_configuration2.png" alt="Select which product to enable." style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/fa_create_agent_configuration2.png" alt="Select which product to enable." style="width:100%;" >}}
 
 1. Review and name your final configuration and begin scoping deployment to your Agents. Alternatively, you can save the configuration to edit or deploy to your Agents at a later time from the Configure Agents page.
 1. Scope Agents to deploy configuration to (for example through tags such as host names, site, or environment).
