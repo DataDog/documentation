@@ -4,15 +4,17 @@ title: Integrations
 
 ## Overview
 
-Custom integrations with popular communication tools like Slack, Microsoft Teams, Zoom, and Jira ensure that your team can use platforms they are already comfortable with. Customize the use of integration features in Datadog Incident Management to minimize the time spent on setting up new communication channels during incident response.
+Datadog Incident Management integrates with popular collaboration tools, such as Slack, Microsoft Teams, Zoom, Jira, Confluence, ServiceNow, Google Meet, and Google Drive.
 
 ## Integrations
 
-Navigate to [**Incidents > Settings > Integrations**][1] to configure Incident Management's integration with third-party applications.
+To integrate Incident Management with a third-party application, install that application's integration in the [Datadog integrations library][13].
+
+Then, configure the integration for Incident Management by navigating to [**Incidents > Settings > Integrations**][1].
 
 ## Slack
 
-To use Incident Management's Slack features, you must first [install the Slack integration for Datadog][4].
+To use Incident Management's Slack features, you must first [install the Slack integration for Datadog][2].
 
 Once you do that, go to **[Service Management > Incidents > Settings > Integrations][1]** to configure the Slack features for Incident Management.
 
@@ -76,31 +78,30 @@ You can configure Incident Management to:
 
 *Send incident updates to a global channel*: You can configure Incident Management to update a selected channel when an incident's state, severity, title, or incident commander changes.
 
-If you want to customize this behavior, deactivate this setting and [define a notification rule][14] instead.
+If you want to customize this behavior, deactivate this setting and [define a notification rule][12] instead.
 
-## Supported integrations
+## Other integrations
 
-In addition to integrating with [Slack][4], Incident Management also integrates with:
+In addition to integrating with [Slack][2], Incident Management also integrates with:
 
-- [PagerDuty][5] and [Opsgenie][6] to send incident notifications to your on-call engineers.
-- [CoScreen][7] to launch collaborative meetings with multi-user screen sharing, remote control, and built-in audio and video chat.
-- [Jira][8] to create a Jira ticket for an incident.
-- [Webhooks][9] to send incident notifications using webhooks (for example, [sending SMS to Twilio][10]).
-- [Statuspage][11] to create and update Statuspage incidents.
-- [ServiceNow][12] to create a ServiceNow ticket for an incident.
-- [Zoom][13] to create Zoom meetings for an incident.
+- [PagerDuty][3] and [Opsgenie][4] to send incident notifications to your on-call engineers.
+- [CoScreen][5] to launch collaborative meetings with multi-user screen sharing, remote control, and built-in audio and video chat.
+- [Jira][6] to create a Jira ticket for an incident.
+- [Webhooks][7] to send incident notifications using webhooks (for example, [sending SMS to Twilio][8]).
+- [Statuspage][9] to create and update Statuspage incidents.
+- [ServiceNow][10] to create a ServiceNow ticket for an incident.
+- [Zoom][11] to create Zoom meetings for an incident.
 
 [1]: https://app.datadoghq.com/incidents/settings#Integrations
-[2]: https://app.datadoghq.com/account/settings#integrations
-[3]: /account_management/teams/
-[4]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
-[5]: /integrations/pagerduty/
-[6]: /integrations/opsgenie/
-[7]: /coscreen
-[8]: /integrations/jira/
-[9]: /integrations/webhooks/
-[10]: /integrations/webhooks/#sending-sms-through-twilio
-[11]: /integrations/statuspage/
-[12]: /integrations/servicenow/
-[13]: /integrations/zoom_incident_management/
-[14]: /service_management/incident_management/incident_settings/notification_rules
+[2]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
+[3]: /integrations/pagerduty/
+[4]: /integrations/opsgenie/
+[5]: /coscreen
+[6]: /integrations/jira/
+[7]: /integrations/webhooks/
+[8]: /integrations/webhooks/#sending-sms-through-twilio
+[9]: /integrations/statuspage/
+[10]: /integrations/servicenow/
+[11]: /integrations/zoom_incident_management/
+[12]: /service_management/incident_management/incident_settings/notification_rules
+[13]: https://app.datadoghq.com/integrations
