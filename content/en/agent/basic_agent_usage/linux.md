@@ -3,7 +3,6 @@ title: Basic Agent Usage for Linux
 platform: Linux
 aliases:
     - /guides/basic_agent_usage/amazonlinux/
-    - /agent/basic_agent_usage/amazonlinux/
     - /agent/basic_agent_usage/centos/
     - /agent/basic_agent_usage/deb/
     - /agent/basic_agent_usage/fedora/
@@ -11,6 +10,7 @@ aliases:
     - /agent/basic_agent_usage/redhat/
     - /agent/basic_agent_usage/ubuntu/
     - /agent/basic_agent_usage/suse/
+    - /agent/basic_agent_usage/rocky/
 further_reading:
 - link: "/logs/"
   tag: "Documentation"

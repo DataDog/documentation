@@ -309,41 +309,41 @@ menu:
       url: agent/basic_agent_usage/aix/
       weight: 101
       parent: basic_agent_usage
-    - name: Amazon Linux
-      identifier: basic_agent_usage_amazon_linux
-      url: agent/basic_agent_usage/amazonlinux/
+    - name: Linux
+      identifier: basic_agent_usage_linux
+      url: agent/basic_agent_usage/linux/
       weight: 102
       parent: basic_agent_usage
-    - name: Alma Linux
-      identifier: basic_agent_usage_alma_linux
-      url: agent/basic_agent_usage/alma/
-      weight: 103
-      parent: basic_agent_usage
+    # - name: Alma Linux
+    #   identifier: basic_agent_usage_alma_linux
+    #   url: agent/basic_agent_usage/alma/
+    #   weight: 103
+    #   parent: basic_agent_usage
     - name: Ansible
       identifier: basic_agent_usage_ansible
       url: agent/basic_agent_usage/ansible/
       parent: basic_agent_usage
       weight: 104
-    - name: CentOS
-      identifier: basic_agent_usage_centos
-      url: agent/basic_agent_usage/centos/
-      weight: 105
-      parent: basic_agent_usage
+    # - name: CentOS
+    #   identifier: basic_agent_usage_centos
+    #   url: agent/basic_agent_usage/centos/
+    #   weight: 105
+    #   parent: basic_agent_usage
     - name: Chef
       identifier: basic_agent_usage_chef
       url: agent/basic_agent_usage/chef/
       weight: 106
       parent: basic_agent_usage
-    - name: Debian
-      identifier: basic_agent_usage_deb
-      url: agent/basic_agent_usage/deb/
-      weight: 107
-      parent: basic_agent_usage
-    - name: Fedora
-      identifier: basic_agent_usage_fedora
-      url: agent/basic_agent_usage/fedora/
-      weight: 108
-      parent: basic_agent_usage
+    # - name: Debian
+    #   identifier: basic_agent_usage_deb
+    #   url: agent/basic_agent_usage/deb/
+    #   weight: 107
+    #   parent: basic_agent_usage
+    # - name: Fedora
+    #   identifier: basic_agent_usage_fedora
+    #   url: agent/basic_agent_usage/fedora/
+    #   weight: 108
+    #   parent: basic_agent_usage
     - name: Heroku
       identifier: basic_agent_usage_heroku
       url: agent/basic_agent_usage/heroku/
@@ -354,26 +354,26 @@ menu:
       url: agent/basic_agent_usage/osx/
       weight: 110
       parent: basic_agent_usage
-    - name: Oracle Linux
-      identifier: basic_agent_usage_oracle
-      url: agent/basic_agent_usage/oracle/
-      weight: 111
-      parent: basic_agent_usage
+    # - name: Oracle Linux
+    #   identifier: basic_agent_usage_oracle
+    #   url: agent/basic_agent_usage/oracle/
+    #   weight: 111
+    #   parent: basic_agent_usage
     - name: Puppet
       identifier: basic_agent_usage_puppet
       url: agent/basic_agent_usage/puppet/
       weight: 112
       parent: basic_agent_usage
-    - name: Red Hat
-      identifier: basic_agent_usage_redhat
-      url: agent/basic_agent_usage/redhat/
-      weight: 113
-      parent: basic_agent_usage
-    - name: Rocky Linux
-      identifier: basic_agent_usage_rockylinux
-      url: agent/basic_agent_usage/rocky/
-      weight: 114
-      parent: basic_agent_usage
+    # - name: Red Hat
+    #   identifier: basic_agent_usage_redhat
+    #   url: agent/basic_agent_usage/redhat/
+    #   weight: 113
+    #   parent: basic_agent_usage
+    # - name: Rocky Linux
+    #   identifier: basic_agent_usage_rockylinux
+    #   url: agent/basic_agent_usage/rocky/
+    #   weight: 114
+    #   parent: basic_agent_usage
     - name: SaltStack
       identifier: basic_agent_usage_saltstack
       url: agent/basic_agent_usage/saltstack/
@@ -384,16 +384,16 @@ menu:
       url: agent/basic_agent_usage/sccm/
       weight: 116
       parent: basic_agent_usage
-    - name: SUSE
-      identifier: basic_agent_usage_suse
-      url: agent/basic_agent_usage/suse/
-      weight: 117
-      parent: basic_agent_usage
-    - name: Ubuntu
-      identifier: basic_agent_usage_ubuntu
-      url: agent/basic_agent_usage/ubuntu/
-      weight: 118
-      parent: basic_agent_usage
+    # - name: SUSE
+    #   identifier: basic_agent_usage_suse
+    #   url: agent/basic_agent_usage/suse/
+    #   weight: 117
+    #   parent: basic_agent_usage
+    # - name: Ubuntu
+    #   identifier: basic_agent_usage_ubuntu
+    #   url: agent/basic_agent_usage/ubuntu/
+    #   weight: 118
+    #   parent: basic_agent_usage
     - name: Windows
       identifier: basic_agent_usage_windows
       url: agent/basic_agent_usage/windows/
