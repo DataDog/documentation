@@ -1,4 +1,4 @@
-This processor parses the specified JSON field into objects. For example, if you have a `message` field that contains stringfied JSON:
+This processor parses the specified JSON field into objects. For example, if you have a `message` field that contains stringified JSON:
 
 ```json
 {
