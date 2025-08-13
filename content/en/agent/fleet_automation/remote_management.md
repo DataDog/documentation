@@ -28,7 +28,7 @@ Remote Agent Management simplifies the process of upgrading your Agent fleet by 
 - Windows VMs
 
 ### Permissions 
-Users must have the [Agent Upgrade][2] within Fleet Automation for upgrades and [Fleet Policies Write][2] permissions to configure Agents remotely. The permission is enabled by default on the Datadog Admin role.
+Users must have the [Agent Upgrade][2] within Fleet Automation for upgrades, and the [Fleet Policies Write][2] permissions to configure Agents remotely. The permission is enabled by default on the Datadog Admin role.
 
 ## Enable Remote Agent Management
 To enable Remote Agent Management:
