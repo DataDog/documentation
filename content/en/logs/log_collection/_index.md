@@ -219,10 +219,10 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 
 | Site | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
 |------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
-| AP1  | HTTPS | `http-intake.logs.ap2.datadoghq.com`                                      | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1]. |
-| AP1  | HTTPS | `lambda-http-intake.logs.ap2.datadoghq.com`                               | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
-| AP1  | HTTPS | `agent-http-intake.logs.ap2.datadoghq.com`                                | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
-| AP1  | HTTPS | {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}        | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                          |
+| AP2  | HTTPS | `http-intake.logs.ap2.datadoghq.com`                                      | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1]. |
+| AP2  | HTTPS | `lambda-http-intake.logs.ap2.datadoghq.com`                               | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
+| AP2  | HTTPS | `agent-http-intake.logs.ap2.datadoghq.com`                                | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
+| AP2  | HTTPS | {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}        | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                          |
 
 [1]: /api/latest/logs/#send-logs
 [2]: /agent/logs/#send-logs-over-https

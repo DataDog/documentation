@@ -19,7 +19,7 @@ The Datadog Agent can automatically assign tags to metrics, traces, and logs emi
 
 ## Out-of-the-box tags
 
-The list of automatically-assigned tags depends on the Agent's [cardinality configuration][1]. [Tag Cardinality][4] can impact billing as different cardinality settings impact the number of emitted metrics.
+The list of automatically-assigned tags depends on the Agent's [cardinality configuration][1]. [Tag Cardinality][4] is added before ingestion and can impact billing, as different cardinality settings impact the number of emitted metrics.
 
 <div style="overflow-x: auto;">
 
@@ -60,6 +60,10 @@ The list of automatically-assigned tags depends on the Agent's [cardinality conf
   | `eks_fargate_node`            | Low          | Pod spec                                                                                                                     | EKS Fargate environment                             |
   | `kube_runtime_class`          | Low          | Pod spec                                                                                                                     | Pod must be attached to a runtime class             |
   | `gpu_vendor`                  | Low          | Pod spec                                                                                                                     | Container must be attached to a GPU resource        |
+  | `image_id`                    | Low          | Container image ID                                                                                                            | N/A                                                 |
+  | `kube_autoscaler_kind`        | Low          | Kubernetes autoscaler type                                                                                                    | Kubernetes autoscaler must be used                  |
+  | `kube_priority_class`         | Low          | Pod priority class                                                                                                            | Pod must have priority class set                   |
+  | `kube_qos`                    | Low          | Pod Quality of Service class                                                                                                  | N/A                                                 |
 
 </div>
 
@@ -75,6 +79,7 @@ The Agent can attach Kubernetes environment information as "host tags".
   | `kube_cluster_name` | Low         | `DD_CLUSTER_NAME` envvar or cloud provider integration | `DD_CLUSTER_NAME` envvar or cloud provider integration enabled |
   | `kube_node_role`    | Low         | Node label `node-role.kubernetes.io/<role>`            | Node label must exist                                          |
   | `kube_node`         | Low         | `NodeName` field in a pod's specifications               |                                                                |
+  | `orch_cluster_id`         | Low         | Orchestrator cluster metadata               |  Orchestrator environment                            |                                                              |
 
 </div>
 

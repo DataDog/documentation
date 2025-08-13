@@ -74,7 +74,7 @@ If you run into any problems during deployment, see [Automated log collection][1
 
 Datadog recommends using the Event Hub setup for Azure log collection. However, you can also follow the steps in this section to forward all of your Azure App Services logs from Azure Blob Storage:
 
-1. If you haven't already set up [Azure Blob Storage][301], use one of the following methods to get started: 
+1. If you haven't already set up [Azure Blob Storage][301], use one of the following methods to get started:
    - [Azure portal][302]
    - [Azure Storage Explorer][303]
    - [Azure CLI][304]
@@ -87,18 +87,18 @@ Datadog recommends using the Event Hub setup for Azure log collection. However, 
 If you already have a function app configured for this purpose, skip to [Add a new function to your Function App using the Event Hub trigger template](#add-a-new-function-to-your-function-app-using-the-azure-blob-storage-trigger-template).
 
 1. In the Azure portal, navigate to the [Function App overview][309] and click **Create**.
-2. In the **Instance Details** section, configure the following settings:  
-  a. Select the **Code** radio button  
-  b. For **Runtime stack**, select `Node.js`  
-  c. For **Version**, select `18 LTS`.  
-  d. For **Operating System**, select `Windows`.  
+2. In the **Instance Details** section, configure the following settings:
+  a. Select the **Code** radio button
+  b. For **Runtime stack**, select `Node.js`
+  c. For **Version**, select `18 LTS`.
+  d. For **Operating System**, select `Windows`.
 3. Configure other settings as desired.
 4. Click **Review + create** to validate the resource. If validation is successful, click **Create**.
 
 ##### Add a new function to your Function App using the Azure Blob Storage trigger template
 
 1. Select your new or existing function app from the [Function App overview][309].
-2. Under the **Functions** tab, click **Create**. 
+2. Under the **Functions** tab, click **Create**.
 3. For the **Development environment** field, select **Develop in portal**.
 4. Under **Select a template**, choose [Azure Blob storage trigger][313].
 5. Select your **Storage account connection**.
@@ -111,7 +111,7 @@ See [Getting started with Azure Functions][307] for more information.
 
 1. On the detail page of your Event Hub trigger function, click **Code + Test** under the **Developer** side menu.
 2. Add the [Datadog-Azure Function code][308] to the function's `index.js` file.
-3. Add your Datadog API key with a `DD_API_KEY` environment variable, or copy it into the function code by replacing `<DATADOG_API_KEY>` on line 20.  
+3. Add your Datadog API key with a `DD_API_KEY` environment variable, or copy it into the function code by replacing `<DATADOG_API_KEY>` on line 20.
 4. If you're not using the Datadog US1 site, set your [Datadog site][312] with a `DD_SITE` environment variable under the configuration tab of your function app, or copy the site parameter into the function code on line 21.
 5. **Save** the function.
 6. Click **Integration** under the **Developer** side menu.
@@ -155,7 +155,7 @@ Under **Settings > Environment variables**, click **Add** to set the following e
 
 Archiving logs to Azure Blob Storage requires an App Registration even if you are using the Azure Native integration. To archive logs to Azure Blob Storage, follow the [automatic][7] or [manual][8] setup instructions to configure the integration using an App Registration. App Registrations created for archiving purposes do not need the `Monitoring Reader` role assigned.
 
-After configuring an App Registration, you can [create a log archive][3] that writes to Azure Blob Storage. 
+After configuring an App Registration, you can [create a log archive][3] that writes to Azure Blob Storage.
 
 **Note**: If your storage bucket is in a subscription being monitored through the Azure Native integration, a warning is displayed in the Azure Integration Tile about the App Registration being redundant. You can ignore this warning.
 

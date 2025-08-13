@@ -25,7 +25,7 @@ further_reading:
 
 ## Overview
 
-Real User Monitoring offers Mobile Vitals, which includes a set of data points inspired by frameworks such as [Android Vitals][1] and [Apple's MetricKit][2], which can help compute insights about your mobile application's responsiveness, stability, and resource consumption. Mobile Vitals range from poor, moderate, to good.
+Real User Monitoring offers Mobile Vitals, which includes a set of datapoints inspired by frameworks such as [Android Vitals][1] and [Apple's MetricKit][2], which can help compute insights about your mobile application's responsiveness, stability, and resource consumption. Mobile Vitals range from poor, moderate, to good.
 
 You can view Mobile Vitals for your application by navigating to **Digital Experience > Performance Summary** and selecting your application.
 
@@ -35,7 +35,7 @@ To access the RUM mobile app performance dashboard, switch to the **Performance*
 
 {{< img src="real_user_monitoring/android/android-perf-dash-link.png" alt="Access the mobile performance dashboard from the Performance tab" style="width:90%;">}}
 
-Understand your application's overall health and performance with the line graphs displaying data points across various application versions. To filter on application version or see specific sessions and views, click on a graph.
+Understand your application's overall health and performance with the line graphs displaying datapoints across various application versions. To filter on application version or see specific sessions and views, click on a graph.
 
 {{< img src="real_user_monitoring/android/android_mobile_vitals_3.png" alt="Event Timings and Mobile Vitals in the RUM Explorer" style="width:90%;">}}
 
