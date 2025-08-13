@@ -69,14 +69,14 @@ Customize the order and modules of the mobile app home page.
 {{< /tabs >}}
 
 
-### Add Starred Items
+### Add starred items
 Add your most frequented dashboards, notebooks, and services for quick reference.
-1. Select **Edit** next to Starred Items
+1. Select **Edit** next to **Starred Items**
 2. Add and arrange up to 5 starred items
 3. Tap **Done** when you are finished
 
 
-### Add monitors Saved Views
+### Add monitors saved views
 Quickly reference monitor saved views for your most important monitors. For more information, see [manage monitors][3].
 1. Select **Edit** next to Monitors Saved Views
 2. Add and arrange up to 5 monitor saved views
