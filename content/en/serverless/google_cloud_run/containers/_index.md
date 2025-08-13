@@ -13,6 +13,9 @@ further_reading:
   - link: "/serverless/google_cloud_run/containers/sidecar/"
     tag: 'Documentation'
     text: 'Instrument your container with the sidecar approach'
+  - link: 'https://www.datadoghq.com/blog/instrument-cloud-run-with-datadog-sidecar/'
+    tag: 'Blog'
+    text: 'Instrument Google Cloud Run applications with the new Datadog Agent sidecar'
 ---
 
 To instrument your Google Cloud Run containers with Datadog, choose one of two options:
