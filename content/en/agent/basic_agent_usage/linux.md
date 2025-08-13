@@ -3,6 +3,7 @@ title: Basic Agent Usage for Linux
 platform: Linux
 aliases:
     - /guides/basic_agent_usage/amazonlinux/
+    - /guides/basic_agent_usage/alma/
     - /agent/basic_agent_usage/centos/
     - /agent/basic_agent_usage/deb/
     - /agent/basic_agent_usage/fedora/
