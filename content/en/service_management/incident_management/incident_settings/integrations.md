@@ -24,6 +24,8 @@ When you connect a Slack workspace to a Datadog organization, users in the works
 * `/datadog incident test` declares a test incident (if test incidents are enabled for the incident type)
 * `/datadog incident list` shows active and stable incidents
 
+_Tip: You can start any Datadog slash command in Slack with `/dd` instead of `/datadog`._
+
 To allow any Slack user or non-guest Slack user to declare incidents in your Slack workspace, enable "Allow Slack users to declare incidents without a connected Datadog account" in Incident Management settings.
 
 You can also declare incidents directly from a Slack message. To do this, mouse over the Slack message, click the "More actions" button, and then select "Declare incident". When you declare an incident in this way, Datadog posts a message to the Slack message thread indicating that you declared an incident.
@@ -49,11 +51,14 @@ When enabling this, you can define a channel name template for Datadog to follow
 
 The following commands can be run inside the incident Slack channel to manage the incident:
 
+* `/datadog` summons the incident action tray, which you can use to perform common actions related to managing the incident
 * `/datadog incident update` updates the channel's incident
 * `/datadog incident private` converts the incident to a private incident (if private incidents are enabled for the incident type)
 * `/datadog incident responders` allows you to add new responders and manage responder types
 * `/datadog task` creates a new incident task
 * `/datadog task list` shows the incident's tasks
+
+_Tip: You can start any Datadog slash command in Slack with `/dd` instead of `/datadog`._
 
 #### Channel message syncing
 
