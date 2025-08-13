@@ -49,12 +49,13 @@ When enabling this, you can define a channel name template for Datadog to follow
 
 #### Incident commands
 
-The following commands can be run inside the incident Slack channel to manage the incident:
+You can run the following commands inside the incident Slack channel to manage the incident:
 
 * `/datadog` summons the incident action tray, which you can use to perform common actions related to managing the incident
 * `/datadog incident update` updates the channel's incident
 * `/datadog incident private` converts the incident to a private incident (if private incidents are enabled for the incident type)
 * `/datadog incident responders` allows you to add new responders and manage responder types
+* `/datadog page` pages the [Datadog On-call][16] team you select
 * `/datadog task` creates a new incident task
 * `/datadog task list` shows the incident's tasks
 
@@ -92,7 +93,7 @@ After you do that, go to **[Service Management > Incidents > Settings > Integrat
 
 To declare an incident from a particular team, you must first [add the Datadog application to the team][15].
 
-After the application to the team, you can add the "Datadog" tab to any channel within the team. From this tab, you can declare Datadog incidents.
+After adding the application to the team, you can add the "Datadog" tab to any channel within the team. From this tab, you can declare Datadog incidents.
 
 ### Incident channels
 
@@ -156,3 +157,4 @@ In addition to integrating with Slack and Microsoft Teams, Incident Management a
 [13]: https://app.datadoghq.com/integrations
 [14]: /integrations/microsoft-teams/?tab=datadogapprecommended
 [15]: /integrations/microsoft-teams/?tab=datadogapprecommended#datadog-incident-management-in-microsoft-teams
+[16]: /service_management/on-call/
