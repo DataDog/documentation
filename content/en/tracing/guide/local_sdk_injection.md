@@ -69,7 +69,7 @@ Use the following pod annotations to specify which language SDK to inject and wh
 | .NET | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` | 
 | Ruby | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"` | 
 
-Replace `<CONTAINER IMAGE TAG>` with the appropriate value. For musl-based .NET containers, use tags with the `-musl` suffix (for example, `v2.29.0-musl`).
+Replace `<CONTAINER IMAGE TAG>` with the appropriate value.
 
 For example:
 
