@@ -31,7 +31,7 @@ Una vez activado, el contenedor del Datadog Agent recopila las trazas emitidas d
           "name": "datadog-agent",
           "image": "public.ecr.aws/datadog/agent:latest",
           "cpu": 100,
-          "memory": 256,
+          "memory": 512,
           "essential": true,
           "portMappings": [
             {
@@ -74,7 +74,7 @@ Indica al rastreador la dirección IP privada de la instancia EC2 subyacente en 
 Utiliza uno de los siguientes métodos para obtener dinámicamente la dirección IP privada:
 
 {{< tabs >}}
-{{% tab "Endpoint de metadatos de EC2" %}}
+{{% tab "EC2 metadata endpoint" (Endpoint de metadatos de EC2) %}}
 
 El [endpoint de metadatos de EC2 de Amazon (IMDSv1)][1] permite detectar la dirección IP privada. Para obtener la dirección IP privada de cada host, utiliza el comando curl para la siguiente URL:
 
@@ -92,7 +92,7 @@ curl http://169.254.169.254/latest/meta-data/local-ipv4 -H "X-aws-ec2-metadata-t
 [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
 [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
 {{% /tab %}}
-{{% tab "Archivo de metadatos del contenedor de ECS" %}}
+{{% tab "ECS container metadata file" ("Archivo de metadatos del contenedor de ECS") %}}
 
 El [archivo de metadatos del contenedor de ECS de Amazon][1] permite detectar la dirección IP privada. Para obtener la dirección IP privada de cada host, ejecuta el siguiente comando:
 
@@ -200,7 +200,7 @@ end
 
 {{< /programming-lang >}}
 
-{{< programming-lang lang="go" >}}
+{{< programming-lang lang="go">}}
 
 #### Variable de momento de inicio
 Actualiza el `entryPoint` de la definición de tareas con lo siguiente, sustituyendo tu`<Go Startup Command>`:
@@ -214,7 +214,7 @@ Actualiza el `entryPoint` de la definición de tareas con lo siguiente, sustituy
 ```
 
 #### Código
-También puedes actualizar el código para que el rastreador configure el nombre de host explícitamente:
+También puedes actualizar tu código para que el rastreador establezca el nombre de host explícitamente. {{% tracing-go-v2 %}}
 
 ```go
 package main
@@ -222,7 +222,7 @@ package main
 import (
     "net/http"
     "io/ioutil"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
