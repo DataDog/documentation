@@ -8,29 +8,75 @@ Custom integrations with popular communication tools like Slack, Microsoft Teams
 
 ## Integrations
 
-Navigate to [**Incidents > Settings > Integrations**][1].
+Navigate to [**Incidents > Settings > Integrations**][1] to configure Incident Management's integration with third-party applications.
 
-Toggle the option to **Automatically create a channel for each new incident** to enable the following:
-- Automatic Slack or Microsoft Teams channel creation for every new incident and the name template for those channels.
-- Incident updates channel.
+## Slack
 
-Configure either of these settings to use any Slack or Microsoft Teams workspace you have set up in your organization's [integration tile][2]. The *incident updates channel* sends a message whenever an incident is declared or changes status, severity, or incident commander.
+To use Incident Management's Slack features, you must first [install the Slack integration for Datadog][4].
 
-## Channel name template options
-<div class="alert alert-info">Datadog recommends you keep your prefix short as Slack enforces an 80 character limit in channel names. </div>
+Once you do that, go to **[Service Management > Incidents > Settings > Integrations][1]** to configure the Slack features for Incident Management.
 
-Changing your channel name template does not rename any existing incident channels. The new name template only applies going forward. By default, dedicated incident channels use `incident-{public_id}` as their name template. Add additional title options to add clarity to Slack channels:
-- The `incident` prefix can be changed to any string composed of *lowercase* letters, numbers, and dashes. 
-- Click the **Incident ID** checkbox to prevent duplicate channel names. 
-- Click the **Title of Incident** checkbox to enable the Datadog Slack App to automatically rename the channel if an incident's title changes.
+### Declaring incidents in Slack
 
-## Slack features
+When you connect a Slack workspace to a Datadog organization, users in the workspace can use slash commands and shortcuts related to Incident Management:
 
-The following features are available to use with the Incident Management Slack integration. Enable or configure these options in **[Service Management > Incidents > Settings > Integrations][1]**.
-- Mirror Slack channel messages, to import and retain all Slack conversations in the incident timeline. **Note**: This counts every Slack message commenter as a monthly active user. Alternately, push pinned message to your timeline to create a system of record for all incident-related conversations.
-- Add important links from integrations such as Jira and Zoom to the incident channel's bookmarks.
-- You can also automatically add [team members][3] to an incident Slack channel when a team is added to the incident. Only members who have connected their Slack and Datadog accounts by running the "/datadog connect" command in Slack are added to the channel.
-- Automatically archive a Slack channel after a certain amount of time.
+* `/datadog incident` declares an incident
+* `/datadog incident test` declares a test incident (if test incidents are enabled for the incident type)
+
+To allow any user or non-guest user to declare incidents via your Slack workspace, enable "Allow Slack users to declare incidents without a connected Datadog account" in Incident Management settings.
+
+You can also declare incidents directly from a Slack message. To do this, mouse over the Slack message, click the "More actions" button, and then select "Declare incident". When you declare an incident in this way, Datadog will post a message to the message thread indicating that you declared an incident.
+
+### Incident Slack channels
+
+#### Automatic channel creation
+
+You can configure Incident Management to automatically create an incident Slack for each incident or for incidents meeting criteria you define.
+
+When enabling this, you can define a channel name template for Datadog to follow when creating the channel. The following variables are availble in channel name templates:
+
+* `{{public_id}}`: Incident's numeric ID
+* `{{title}}`: Incident's title
+* `{{created}}`: Incident's creation date in format MM_DD_YYYY
+* `{{yyyy}}`: Incident's four-digit creation year
+* `{{mm}}`:  Incident's two-digit creation month
+* `{{dd}}`: Incident's two-digit creation day of month
+* `{{random_adjective}}`: Random adjective
+* `{{random_noun}}`: Random noun
+
+#### Incident commands
+
+The following commands can be run inside the incident Slack channel to manage the incident:
+
+* `/datadog incident update` updates the channel's incident
+* `/datadog incident private` converts the incident to a private incident (if private incidents are enabled for the incident type)
+* `/datadog incident responders` allows you to add new responders and manage responder types
+* `/datadog task` creates a new incident task
+* `/datadog task list` shows the incident's tasks
+
+#### Channel message syncing
+
+You can configure Incident Management to push Slack channel messages to the incident timeline — all messages or only messages to which a 📌 reaction has been applied.
+
+The author of a synced message does not need an Incident Management or Incident Response seat for the message to be recorded.
+
+In organizations with usage-based billing for Incident Management, the author will not be counted as a monthly active user.
+
+#### Other incident Slack channel features
+
+You can configure Incident Management to:
+
+* Push incident timeline messages to the incident Slack channel
+* Add important links to the incident Slack channel's bookmarks
+* Add team members to the incident channel when a Datadog team is added to the incident
+* Send a notification to the Slack channel when a meeting has been started
+* Auto-archive an incident Slack channel after the incident is resolved
+
+### Other Slack features
+
+*Send incident updates to a global channel*: You can configure Incident Management to update a selected channel when an incident's state, severity, title, or incident commander changes.
+
+If you want to customize this behavior, deactivate this setting and [define a notification rule][14] instead.
 
 ## Supported integrations
 
@@ -57,3 +103,4 @@ In addition to integrating with [Slack][4], Incident Management also integrates 
 [11]: /integrations/statuspage/
 [12]: /integrations/servicenow/
 [13]: /integrations/zoom_incident_management/
+[14]: /service_management/incident_management/incident_settings/notification_rules
