@@ -3,6 +3,23 @@ title: Basic Agent Usage for Linux
 platform: Linux
 aliases:
     - /guides/basic_agent_usage/amazonlinux/
+    - /guides/basic_agent_usage/centos/
+    - /guides/basic_agent_usage/deb/
+    - /agent/basic_agent_usage/install_debian_5/
+    - /guides/basic_agent_usage/fedora/
+    - /guides/basic_agent_usage/redhat/
+    - /guides/basic_agent_usage/suse/
+    - /guides/basic_agent_usage/ubuntu/
+    - /agent/basic_agent_usage/alma/
+    - /agent/basic_agent_usage/amazonlinux/
+    - /agent/basic_agent_usage/centos/
+    - /agent/basic_agent_usage/deb/
+    - /agent/basic_agent_usage/fedora/
+    - /agent/basic_agent_usage/oracle/
+    - /agent/basic_agent_usage/redhat/
+    - /agent/basic_agent_usage/ubuntu/
+    - /agent/basic_agent_usage/suse/
+    - /agent/basic_agent_usage/rocky/
 further_reading:
 - link: "/logs/"
   tag: "Documentation"
@@ -46,7 +63,6 @@ A fully commented reference file, located in `/etc/datadog-agent/datadog.yaml.ex
 Configuration files for integrations live in `/etc/datadog-agent/conf.d/`. Each integration has its own sub-directory, `<INTEGRATION>.d/`, that contains:
 - `conf.yaml`: The active configuration controlling how the integration gathers metrics and logs  
 - `conf.yaml.example`: A sample illustrating supported keys and defaults
-
 
 
 ## Commands
@@ -125,6 +141,7 @@ For detailed steps, see [Agent Troubleshooting][2].
 The Agent contains an embedded Python environment at `/opt/datadog-agent/embedded/`. Common binaries such as `python` and `pip` are contained within `/opt/datadog-agent/embedded/bin/`.
 
 See the instructions on how to [add packages to the embedded Agent][3] for more information.
+
 
 ## Further Reading
 
