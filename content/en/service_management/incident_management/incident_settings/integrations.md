@@ -88,7 +88,7 @@ After you do that, go to **[Service Management > Incidents > Settings > Integrat
 
 To declare an incident from a particular team, you must first [add the Datadog application to the team][15].
 
-After doing that, you can post `@Datadog incident` to declare an incident.
+After doing that, you can add the "Datadog" tab to any channel within the team. From this tab, you can declare Datadog incidents.
 
 ### Incident channels
 
