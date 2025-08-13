@@ -31,7 +31,7 @@ The recommended best practice for scoping application keys is to grant your keys
 
 ### Actions API access
 
-The Actions Platform APIs include:
+Action APIs include:
 - [App Builder][5]
 - [Actions Connections][6]
 - [Workflow Automation][7]
