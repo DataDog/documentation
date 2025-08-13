@@ -41,6 +41,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Migrating between x86 to arm64 with the Datadog Lambda Extension](#migrating-between-x86-to-arm64-with-the-datadog-lambda-extension)
 - [Configure the Datadog Lambda extension for local testing](#configure-the-datadog-lambda-extension-for-local-testing)
 - [Instrument AWS Lambda with the OpenTelemetry API](#instrument-aws-lambda-with-the-opentelemetry-api)
+- [Visualize and model AWS services correctly](#visualize-and-model-aws-services-by-resource-name)
 - [Troubleshoot](#troubleshoot)
 - [Further Reading](#further-reading)
 
@@ -722,6 +723,23 @@ You can use this approach if, for example, your code has already been instrument
 
 To instrument AWS Lambda with the OpenTelemetry API, set the environment variable `DD_TRACE_OTEL_ENABLED` to `true`. See [Custom instrumentation with the OpenTelemetry API][48] for more details.
 
+## Visualize and model AWS services by resource name
+
+These versions of the [Node.js][50], [Python][51], and [Java][52] Lambda layers released changes to correctly name, model and visualize AWS managed services. 
+
+Service names reflect the actual AWS resource name rather than only the AWS service:
+* `aws.lambda` → `[function_name]`
+* `aws.dynamodb` → `[table_name]`
+* `aws.sns` → `[topic_name]`
+* `aws.sqs` → `[queue_name]`
+* `aws.kinesis` → `[stream_name]`
+* `aws.s3` → `[bucket_name]`
+* `aws.eventbridge` → `[event_name]`
+
+You may prefer the older service representation model if your dashboards and monitors rely on the legacy naming convention. To restore the previous behavior, set the environment var: `DD_TRACE_AWS_SERVICE_REPRESENTATION_ENABLED=false`
+
+The updated service modeling configuration is recommended. 
+
 ## Troubleshoot
 
 If you have trouble configuring your installations, set the environment variable `DD_LOG_LEVEL` to `debug` for debugging logs. For additional troubleshooting tips, see the [serverless monitoring troubleshooting guide][39].
@@ -780,4 +798,6 @@ If you have trouble configuring your installations, set the environment variable
 [47]: /logs/
 [48]: /tracing/trace_collection/otel_instrumentation/
 [49]: https://app.datadoghq.com/security/appsec?column=time&order=desc
-
+[50]: https://github.com/DataDog/datadog-lambda-js/releases/tag/v12.127.0
+[51]: https://github.com/DataDog/datadog-lambda-python/releases/tag/v8.113.0
+[52]: https://github.com/DataDog/datadog-lambda-java/releases/tag/v24
