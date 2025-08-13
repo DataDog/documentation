@@ -9,7 +9,7 @@ description: Recopila métricas de rendimiento por grupo y monitoriza el estado 
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-ceph-datadog
   tag: blog
-  text: 'Monitorizar Ceph: del estado del nodo al rendimiento de todo el clúster
+  text: 'Monitorizar Ceph: del estado del nodo al rendimiento de todo el clúster'
 integration_version: 4.1.0
 media: []
 supported_os:

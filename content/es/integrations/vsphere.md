@@ -17,7 +17,7 @@
       - "vsphere.cpu.usage.avg"
       - "vsphere.vm.count"
       "metadata_path": "metadata.csv"
-      "prefix": "vsphere".
+      "prefix": "vsphere"
     "service_checks":
       "metadata_path": "assets/service_checks.json"
     "source_type_id": !!int "85"
@@ -43,7 +43,7 @@
 "manifest_version": "2.0.0"
 "name": "vsphere"
 "public_title": "vSphere"
-"short_description": "Comprende cómo afecta a tu aplicación el uso de recursos vSphere".
+"short_description": "Comprende cómo afecta a tu aplicación el uso de recursos vSphere"
 "supported_os":
 - "linux"
 - "windows"
@@ -58,7 +58,7 @@
   - "Supported OS::macOS"
   - "Offering::Integración"
   "configuration": "README.md#Configuración"
-  "description": "Comprende cómo afecta a tu aplicación el uso de recursos vSphere".
+  "description": "Comprende cómo afecta a tu aplicación el uso de recursos vSphere"
   "media": []
   "overview": "README.md#Información general"
   "resources":

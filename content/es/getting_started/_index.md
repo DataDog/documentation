@@ -10,7 +10,7 @@ further_reading:
       text: 'Haz un curso para empezar a utilizar Datadog'
     - link: 'https://datadoghq.com/blog/'
       tag: 'Blog'
-      text: "Obtén información sobre los nuevos productos y funciones de Datadog, integraciones y mucho más".
+      text: "Obtén información sobre los nuevos productos y funciones de Datadog, integraciones y mucho más"
     - link: 'https://app.datadoghq.com/help/quick_start'
       tag: "Aplicación"
       text: "Explorar la Guía de inicio rápido"

@@ -77,7 +77,7 @@ En forma predeterminada, estos servicios no están asociados a la telemetría de
 ## Crear entidades
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/internal_developer_portal/software_catalog/set_up/create_entities#through-the-datadog-ui" >}}Crear a través de la interfaz de usuario Datadog {< /nextlink >}}
+    {{< nextlink href="/internal_developer_portal/software_catalog/set_up/create_entities#through-the-datadog-ui" >}}Crear a través de la interfaz de usuario Datadog {{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/software_catalog/set_up/create_entities#through-automation" >}}Crear a través de la automatización del código{{< /nextlink >}}
 {{< /whatsnext >}}
 
