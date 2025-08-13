@@ -112,6 +112,10 @@ The following metrics report on logs that have been forwarded successfully, incl
 | **Customer ID** | The Chronicle customer ID provided by Google. | `abcd1234`   |
 | **Regional Endpoint**           | The Chronicle ingestion API endpoint URL based on your region.  **Note**: Ensure the Monitoring Metrics Publisher role is assigned in the DCR IAM settings. | `https://us.chronicle.googleapis.com`              |
 | **Namespace**| The namespace in which your Chronicle logs should be ingested.  | `default`                                          |
+
+10. In the **Configure authentication settings** section, enter the following details:
+  | Setting                   | Description                                                                                                          | Example                                                   |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
 | **Project ID**| The GCP project ID associated with the Chronicle instance.  | `my-gcp-chronicle-project`                                          |
 | **Private Key ID**| The ID of the private key from your service account credentials.  | `0123456789abcdef`                                          |
 | **Private Key**| The private key from your service account credentials.  | `-----BEGIN PRIVATE KEY-----\nMIIE...`                                          |
