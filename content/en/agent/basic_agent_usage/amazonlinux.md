@@ -1,8 +1,16 @@
 ---
 title: Basic Agent Usage for Linux
-platform: Amazon Linux
+platform: Linux
 aliases:
     - /guides/basic_agent_usage/amazonlinux/
+    - /agent/basic_agent_usage/amazonlinux/
+    - /agent/basic_agent_usage/centos/
+    - /agent/basic_agent_usage/deb/
+    - /agent/basic_agent_usage/fedora/
+    - /agent/basic_agent_usage/oracle/
+    - /agent/basic_agent_usage/redhat/
+    - /agent/basic_agent_usage/ubuntu/
+    - /agent/basic_agent_usage/suse/
 further_reading:
 - link: "/logs/"
   tag: "Documentation"
