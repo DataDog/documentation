@@ -16,7 +16,7 @@ Then, configure the integration for Incident Management by navigating to [**Inci
 
 To use Incident Management's Slack features, you must first [install the Slack integration for Datadog][2].
 
-Once you do that, go to **[Service Management > Incidents > Settings > Integrations][1]** to configure the Slack features for Incident Management.
+After you do that, go to **[Service Management > Incidents > Settings > Integrations][1]** to configure the Slack features for Incident Management.
 
 ### Declaring incidents in Slack
 
@@ -25,9 +25,9 @@ When you connect a Slack workspace to a Datadog organization, users in the works
 * `/datadog incident` declares an incident
 * `/datadog incident test` declares a test incident (if test incidents are enabled for the incident type)
 
-To allow any user or non-guest user to declare incidents via your Slack workspace, enable "Allow Slack users to declare incidents without a connected Datadog account" in Incident Management settings.
+To allow any Slack user or non-guest Slack user to declare incidents in your Slack workspace, enable "Allow Slack users to declare incidents without a connected Datadog account" in Incident Management settings.
 
-You can also declare incidents directly from a Slack message. To do this, mouse over the Slack message, click the "More actions" button, and then select "Declare incident". When you declare an incident in this way, Datadog will post a message to the message thread indicating that you declared an incident.
+You can also declare incidents directly from a Slack message. To do this, mouse over the Slack message, click the "More actions" button, and then select "Declare incident". When you declare an incident in this way, Datadog posts a message to the Slack message thread indicating that you declared an incident.
 
 ### Incident Slack channels
 
@@ -41,7 +41,7 @@ When enabling this, you can define a channel name template for Datadog to follow
 * `{{title}}`: Incident's title
 * `{{created}}`: Incident's creation date in format MM_DD_YYYY
 * `{{yyyy}}`: Incident's four-digit creation year
-* `{{mm}}`:  Incident's two-digit creation month
+* `{{mm}}`: Incident's two-digit creation month
 * `{{dd}}`: Incident's two-digit creation day of month
 * `{{random_adjective}}`: Random adjective
 * `{{random_noun}}`: Random noun
@@ -58,11 +58,9 @@ The following commands can be run inside the incident Slack channel to manage th
 
 #### Channel message syncing
 
-You can configure Incident Management to push Slack channel messages to the incident timeline — all messages or only messages to which a 📌 reaction has been applied.
+You can configure Incident Management to push all incident Slack channel messages to the incident timeline. Alternatively, you can configure it to sync a Slack message only when you add a 📌 reaction to it.
 
-The author of a synced message does not need an Incident Management or Incident Response seat for the message to be recorded.
-
-In organizations with usage-based billing for Incident Management, the author will not be counted as a monthly active user.
+The author of a synced message does not need an Incident Management or Incident Response seat for the message to be recorded. In organizations with usage-based billing for Incident Management, the author is not be counted as a monthly active user.
 
 #### Other incident Slack channel features
 
