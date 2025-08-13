@@ -35,5 +35,8 @@ further_reading:
 {{< /appsec-integrations >}}
 ## Additional Resources
 
-- [Troubleshooting Guide](dotnet/troubleshooting)
-- [Compatibility Information](dotnet/compatibility)
+- [Troubleshooting Guide][1]
+- [Compatibility Information][2]
+
+[1]: /security/application_security/setup/dotnet/troubleshooting
+[2]: /security/application_security/setup/dotnet/compatibility
