@@ -29,7 +29,7 @@ To allow any Slack user or non-guest Slack user to declare incidents in your Sla
 
 You can also declare incidents directly from a Slack message. To do this, mouse over the Slack message, click the "More actions" button, and then select "Declare incident". When you declare an incident in this way, Datadog posts a message to the Slack message thread indicating that you declared an incident.
 
-### Incident Slack channels
+### Incident channels
 
 #### Automatic channel creation
 
@@ -62,7 +62,7 @@ You can configure Incident Management to push all incident Slack channel message
 
 The author of a synced message does not need an Incident Management or Incident Response seat for the message to be recorded. In organizations with usage-based billing for Incident Management, the author is not be counted as a monthly active user.
 
-#### Other incident Slack channel features
+#### Other incident channel features
 
 You can configure Incident Management to:
 
@@ -70,17 +70,64 @@ You can configure Incident Management to:
 * Add important links to the incident Slack channel's bookmarks
 * Add team members to the incident channel when a Datadog team is added to the incident
 * Send a notification to the Slack channel when a meeting has been started
-* Auto-archive an incident Slack channel after the incident is resolved
+* Automatically archive an incident Slack channel after the incident is resolved
 
 ### Other Slack features
 
-*Send incident updates to a global channel*: You can configure Incident Management to update a selected channel when an incident's state, severity, title, or incident commander changes.
+*Send incident updates to a global channel*: You can configure Incident Management to inform a selected channel when an incident's state, severity, title, or incident commander changes.
+
+If you want to customize this behavior, deactivate this setting and [define a notification rule][12] instead.
+
+## Microsoft Teams
+
+To use Incident Management's Microsoft Teams features, you must first [install the Microsft Teams integration for Datadog][14].
+
+After you do that, go to **[Service Management > Incidents > Settings > Integrations][1]** to configure the Microsoft Teams features for Incident Management.
+
+### Declaring incidents in Microsoft Teams
+
+To declare an incident from a particular team, you must first [add the Datadog application to the team][15].
+
+After doing that, you can post `@Datadog incident` to declare an incident.
+
+### Incident channels
+
+#### Automatic channel creation
+
+You can configure Incident Management to automatically create an incident Microsoft Teams channel for each incident or for incidents meeting criteria you define.
+
+When enabling this, you can define a channel name template for Datadog to follow when creating the channel. The following variables are availble in channel name templates:
+
+* `{{public_id}}`: Incident's numeric ID
+* `{{title}}`: Incident's title
+* `{{created}}`: Incident's creation date in format MM_DD_YYYY
+* `{{yyyy}}`: Incident's four-digit creation year
+* `{{mm}}`: Incident's two-digit creation month
+* `{{dd}}`: Incident's two-digit creation day of month
+* `{{random_adjective}}`: Random adjective
+* `{{random_noun}}`: Random noun
+
+#### Channel message syncing
+
+You can configure Incident Management to push all incident Microsoft Teams channel messages to the incident timeline.
+
+The author of a synced message does not need an Incident Management or Incident Response seat for the message to be recorded. In organizations with usage-based billing for Incident Management, the author is not be counted as a monthly active user.
+
+#### Other incident channel features
+
+You can configure Incident Management to:
+
+* Automatically archive an incident channel after the incident is resolved
+
+### Other Microsoft Teams features
+
+*Send incident updates to a global channel*: You can configure Incident Management to inform a selected channel when an incident's state, severity, title, or incident commander changes.
 
 If you want to customize this behavior, deactivate this setting and [define a notification rule][12] instead.
 
 ## Other integrations
 
-In addition to integrating with [Slack][2], Incident Management also integrates with:
+In addition to integrating with Slack and Microsoft Teams, Incident Management also integrates with:
 
 - [PagerDuty][3] and [Opsgenie][4] to send incident notifications to your on-call engineers.
 - [CoScreen][5] to launch collaborative meetings with multi-user screen sharing, remote control, and built-in audio and video chat.
@@ -103,3 +150,5 @@ In addition to integrating with [Slack][2], Incident Management also integrates 
 [11]: /integrations/zoom_incident_management/
 [12]: /service_management/incident_management/incident_settings/notification_rules
 [13]: https://app.datadoghq.com/integrations
+[14]: /integrations/microsoft-teams/?tab=datadogapprecommended
+[15]: /integrations/microsoft-teams/?tab=datadogapprecommended#datadog-incident-management-in-microsoft-teams
