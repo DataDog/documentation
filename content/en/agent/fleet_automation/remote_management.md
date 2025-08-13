@@ -182,8 +182,6 @@ To uninstall the Agent, see [Uninstall the Agent][1].
 [8]: https://docs.datadoghq.com/agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
 [9]: https://github.com/DataDog/agent-linux-install-script?tab=readme-ov-file#install-script-configuration-options
 [10]: https://app.datadoghq.com/fleet/deployments
-[11]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/group-managed-service-accounts-overview
-[12]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/?tab=installationinactivedirectorydomains
 [13]: https://app.datadoghq.com/fleet?query=support_remote_upgrade%3Adatadog-installer
 [14]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
 [15]: /agent/guide/setup_remote_config
