@@ -222,18 +222,17 @@ Then, follow the prompt to scope the hosts and telemetry (metrics, logs, traces)
 </div>
 
 
-<!-- FLEET AUTOMATION END -->
 [14]: https://app.datadoghq.com/fleet
 {{% /tab %}}
 
 {{% tab "Manually" %}}
 
-Update your Datadog Agent's `datadog.yaml` configuration file as shown in the example below and restart the Agent.
+During a failover or failover exercises, update your Datadog Agent's `datadog.yaml` configuration file as shown in the example below and restart the Agent.
 
 <div class="alert alert-warning">
 
 - `enabled: true` allows the Agent to send {{< tooltip text="metadata" tooltip="Data about the Agent and the infrastructure host. For example, `host name`, `host tags`, `Agent version`. " >}} to the DDR Datadog site so you can view Agents and your Infra hosts in the DDR org. This allows you to see your  Agents and infrastructure hosts in the failover org. <br><br>
-- `failover_metrics`, `failover_logs`, and `failover_apm` are `false` by default. These only need to be **enabled** during a failover. 
+- `failover_metrics`, `failover_logs`, and `failover_apm` are `false` by default. Setting these to `true` causes the Agent to start sending {{< tooltip text="telemetry" tooltip="Data that is sent to the Datadog platform. For example, `logs`, `metrics`, `traces`. " >}} to the failover site. 
 
 </div>
 
@@ -248,14 +247,12 @@ multi_region_failover:
 ```
  
 
-**Note**: Telemetry (logs, metrics, and traces) are only sent to the failover site if DDR failover is activated.
+**Note**: Telemetry (logs, metrics, and traces) are only sent to the failover site if DDR failover is activated. Failover is activated when `enabled`, `failover_metrics`, `failover_logs`, and `failover_apm` are set to `true`.
 
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}} <br>
 
-
-<!-- ------------------------------- -->
 
 ### 3. Test	run failover tests in various environments
 {{% collapse-content title="Activate and test DDR failover in Agent-based environments" level="h5" %}}
