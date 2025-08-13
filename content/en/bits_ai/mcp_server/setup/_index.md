@@ -206,13 +206,6 @@ Returns AI-generated answers to Datadog questions, sourced from [Datadog documen
 - "What's the best way to correlate logs and traces?"
 - "How does RUM auto-instrumentation work?"
 
-### `get_active_hosts_count`
-Returns the number of active and up hosts in Datadog.
-
-- "How many hosts are currently active in our infrastructure?"
-- "Show me the active host count from the last 2 hours."
-- "What's our current infrastructure size based on active hosts?"
-
 ### `get_events`
 Searches events like monitor alerts, deployment notifications, infrastructure changes, security findings, and service status changes.
 
