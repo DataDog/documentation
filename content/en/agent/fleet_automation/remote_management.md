@@ -91,7 +91,7 @@ For the most consistent upgrade experience, Datadog recommends managing upgrades
 
 ## Configure your Agents
 {{< callout url="https://www.datadoghq.com/product-preview/manage-agent-configurations-from-fleet-automation/" >}}
-Managing Agent Configurations in Fleet Automation is in <strong>preview</strong>. To get access, complete the preview sign‑up form
+Managing Agent Configurations in Fleet Automation is in <strong>preview</strong>. To get access, complete the preview sign‑up form.
 {{< /callout >}}
 
 1. In Fleet Automation, open the [Configure Agents][16] tab and click Create Configuration.
