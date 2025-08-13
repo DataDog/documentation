@@ -17,15 +17,14 @@ Remote Agent Management simplifies the process of upgrading your Agent fleet by 
 * **Visibility and Monitoring** - Track the status of upgrades in real-time, allowing quick verification of deployment success.
 * **Operational Efficiency** - Streamline the upgrade process by eliminating cross-team coordination and unifying deployment across different platforms.
 
-<div class="alert alert-info">Remotely upgrading Agents in containerized environments is not supported.</div>
-
-
 ## Prerequisites
 
 ### Supported platforms
 
 - Linux VMs installed using the install script or Ansible Datadog Role
 - Windows VMs
+
+Remotely upgrading Agents in containerized environments is not supported.
 
 ### Permissions 
 Users must have the [Agent Upgrade][2] within Fleet Automation for upgrades, and the [Fleet Policies Write][2] permissions to configure Agents remotely. The permission is enabled by default on the Datadog Admin role.
