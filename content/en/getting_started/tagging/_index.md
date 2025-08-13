@@ -112,20 +112,7 @@ service:checkout
 service:orders
 ```
 
-This behavior applies consistently across all tag sources, including but not limited to:
-
-* **Agent configuration** (`datadog.yaml`)
-* **Environment variables** visible to the Agent
-* **Pod or container annotations/labels**
-* **Tag Autodiscovery** rules
-* **Integration inheritance** (for example, AWS, vSphere, Ansible)
-* **Tracing client configurations**
-* **Integration YAML configuration files**
-* **Pod annotation configs for integration Autodiscovery**
-* **User-defined tags** in the Datadog UI
-* **Tags set in code** when generating metrics
-
-Because the Agent emits all values, downstream filters or dashboards should explicitly filter on the desired value if you expect only one.
+Downstream filters or dashboards should explicitly filter on the desired value if you expect only one.
 
 ## Usage
 
