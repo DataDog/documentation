@@ -68,6 +68,20 @@ Select your deployment environment to get started with the most appropriate conf
 
 For complete version compatibility details, see [Supported Language and Tracer Versions][13].
 
+{{% collapse-content title="Important compatibility requirements" level=\"h4\" %}}
+
+**GraalVM compatibility:**
+The Datadog Profiler is disabled by default on the GraalVM compiler (JVMCI) and needs to be enabled explicitly with `-Ddd.profiling.ddprof.enabled=true` or `DD_PROFILING_DDPROF_ENABLED=true`.
+
+**Minimum JDK versions:**
+The Datadog Profiler uses the JVMTI `AsyncGetCallTrace` function, which has a [known issue][1] prior to JDK release 17.0.5. This fix was backported to 11.0.17 and 8u352. The Datadog Profiler is not enabled unless the JVM has this fix. **Upgrade to at least 8u352, 11.0.17, 17.0.5, or the latest non-LTS JVM version** to use the Datadog Profiler.
+
+If you're using an older JDK version, the profiler will automatically fall back to alternative profiling methods with reduced functionality.
+
+[1]: https://bugs.openjdk.org/browse/JDK-8283849
+
+{{% /collapse-content %}}
+
 ## Installation
 
 ### Prerequisites
