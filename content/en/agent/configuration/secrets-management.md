@@ -13,11 +13,11 @@ algolia:
 
 ## Overview
 
-The Datadog Agent help you securely manage you secrets by integrating with a number of external secrets management solutions:
+The Datadog Agent helps you securely manage your secrets by integrating with the following secrets management solutions:
 - AWS Secrets Manager
 - AWS SSM
 - Azure KeyVault
-- Hashicorp Vault
+- HashiCorp Vault
 - File JSON
 - File YAML
 
@@ -31,7 +31,7 @@ Instead of hardcoding sensitive values like API keys or passwords in plaintext w
 
 *Note*: This option is not yet available for Windows.
 
-Starting in Agent version `7.69`, the Datadog Agent natively support a number of secret management solution. Two new settings have been introduce to the datadog.yaml to support this: `secret_backend_type` and `secret_backend_config`. 
+Starting in Agent version `7.69`, the Datadog Agent natively supports several secret management solutions. Two new settings have been introduced to `datadog.yaml`: `secret_backend_type` and `secret_backend_config`. 
 
 `secret_backend_type` is used to specify which secret management solution to use, and `secret_backend_config` holds additional configuration relevant to that solution:
 
@@ -70,7 +70,7 @@ secret_backend_config:
     aws_region: {regionName}
 ```
 
-Now that you have configured the Agent to use AWS Secrets, you can refer to any secrets in your configurations using the  `ENC[secretId;secretKey]` notation. 
+After configuring the Agent to use AWS Secrets, you can refer to any secrets in your configurations with `ENC[secretId;secretKey]`. 
 
 The ENC notation is composed of:
 * `secretId`: either the secret "friendly name" (ex: `/DatadogAgent/Production`) or the ARN (ex: `arn:aws:secretsmanager:us-east-1:123456789012:secret:/DatadogAgent/Production-FOga1K`).
@@ -232,19 +232,19 @@ secret_backend_config:
 {{% /collapse-content %}} 
 
 
-{{% collapse-content title="Hashicorp Vault Backend" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="HashiCorp Vault Backend" level="h4" expanded=false id="id-for-anchoring" %}}
 ##### Supported backends
 
-**Note**: Only version 1 of the Hashicorp Secrets Engine is supported at this time.
+**Note**: Only version 1 of the HashiCorp Secrets Engine is supported at this time.
 
-The following Hashicorp services are supported:
+The following HashiCorp services are supported:
 
-| "secret_backend_type" value                               | Hashicorp Service                                  |
+| "secret_backend_type" value                               | HashiCorp Service                                  |
 | ------------------------------------------ | -------------------------------------------------- |
-| [hashicorp.vault](#hashicorp-auth-session) | [Hashicorp Vault (Secrets Engine Version 1)][3000] |
+| [hashicorp.vault](#hashicorp-auth-session) | [HashiCorp Vault (Secrets Engine Version 1)][3000] |
 
-#### General instructions to set up Hashicorp Vault
-1. Run your Hashicorp Vault. For more information, see the [official Hashicorp Vault documentation][3001]. 
+#### General instructions to set up HashiCorp Vault
+1. Run your HashiCorp Vault. For more information, see the [official HashiCorp Vault documentation][3001]. 
 2. Write a policy that gives the permission to pull secrets from your vault--create a `*.hcl` file, and include the following permission:
 ```
 path "<your path>" {
@@ -257,9 +257,9 @@ path "<your path>" {
 
 #### AWS instance profile instructions
 
-Datadog recommends that you authenticate using the [instance profile method][3003] if you are running your Hashicorp Vault from an AWS-connected machine.
+Datadog recommends that you authenticate using the [instance profile method][3003] if you are running your HashiCorp Vault from an AWS-connected machine.
 
-Once this has been set up, run the following command to write an authentication-specific vault policy:
+After this has been set up, run the following command to write an authentication-specific vault policy:
 
 ```
 vault write auth/aws/role/<Name of AWS IAM Role> \
@@ -271,7 +271,7 @@ vault write auth/aws/role/<Name of AWS IAM Role> \
 
 #### Configuration example
 
-In the following example, assume the Hashicorp Vault secret path prefix is `/Datadog/Production` with a parameter key of `api_key`:
+In the following example, assume the HashiCorp Vault secret path prefix is `/Datadog/Production` with a parameter key of `api_key`:
 
 ```sh
 /DatadogAgent/Production/api_key: (SecureString) "<your api key>"
@@ -305,7 +305,7 @@ secret_backend_config:
 |[file.json](#json-backend-settings)          |[JSON][4001]                             |
 |[file.yaml](#yaml-backend-settings)          |[YAML][4002]                             |
 
-##### File Permission 
+##### File permissions
 The file backend only requires read permissions for the configured JSON or YAML files. These permissions must be granted to the local Datadog Agent user (`dd-agent` on Linux, `ddagentuser` on Windows).
 
 
