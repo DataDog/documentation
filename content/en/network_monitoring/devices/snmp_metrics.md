@@ -113,7 +113,7 @@ To use Autodiscovery with Network Device Monitoring:
 
 2. Edit the [`datadog.yaml`][8] Agent configuration file to include all the subnets for Datadog to scan. The following sample config provides required parameters, default values, and examples for Autodiscovery.
 
-3. Optionally, enable [de-duplication][11] of devices during Autodiscovery of the Agent (disabled by default):
+3. Optionally, enable [de-duplication][11] of devices during Autodiscovery of the Agent (disabled by default). Requires Agent version `7.67` or higher.
 
    ```yaml
    network_devices:
