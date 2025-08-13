@@ -13,19 +13,16 @@ further_reading:
 aliases:
     - /serverless/datadog_lambda_library/go/
     - /serverless/installation/go
+    - /serverless/aws_lambda/installation/go
 ---
 
 <div class="alert alert-warning">If your Go Lambda functions are still using runtime <code>go1.x</code> and you cannot migrate to the <code>provided.al2</code> runtime, you must <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_go">instrument using the Datadog Forwarder</a>. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.</div>
 
-<div class="alert alert-warning">If your Lambda functions are deployed in a VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/configuration/proxy/">using a proxy</a> for all other sites.</div>
+<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">Read more</a>.</div>
 
-<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
+## Setup
 
-<div class="alert alert-info">Datadog provides FIPS-compliant monitoring for AWS Lambda functions. For GovCloud environments, the <code>DD_LAMBDA_FIPS_MODE</code> environment variable is enabled by default. When FIPS mode is enabled, AWS FIPS endpoints are used for Datadog API key lookups, and the Lambda metric helper function <code>Metric()</code> requires the FIPS-compliant extension for metric submission. While the FIPS-compliant Lambda components work with any Datadog site, end-to-end FIPS compliance requires using the US1-FED site. See <a href="/serverless/aws_lambda/fips-compliance">AWS Lambda FIPS Compliance</a> for more details.</div>
-
-## Installation
-
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/product-management-service">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
+If your application is deployed as a container image, use the _Container Image_ method.
 
 **Note**: Datadog recommends that you use Go tracer v1.73.1 for instrumenting AWS Lambda functions.
 
@@ -249,28 +246,20 @@ func myHandler(ctx context.Context, _ events.APIGatewayProxyRequest) (string, er
 }
 ```
 
-## Minimize cold start duration
-Version 67+ of [the Datadog Extension][5] is optimized to significantly reduce cold start duration.
+## FIPS compliance
 
-To use the optimized extension, disable App and API Protection (AAP), Continuous Profiler for Lambda, and OpenTelemetry based tracing. Set the following environment variables to `false`:
+{{% svl-lambda-fips %}}
 
-- `DD_TRACE_OTEL_ENABLED`
-- `DD_PROFILING_ENABLED`
-- `DD_SERVERLESS_APPSEC_ENABLED`
+## AWS Lambda and VPC
 
-Enabling any of these features cause the extension to default back to the fully compatible older version of the extension. You can also force your extension to use the older version by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog encourages you to report any feedback or bugs by adding an [issue on GitHub][6] and tagging your issue with `version/next`.
+{{% svl-lambda-vpc %}}
 
 ## What's next?
 
-- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
-- Turn on [threat monitoring][4] to get alerted on attackers targeting your service
-- See the [troubleshooting guide][2] if you have trouble collecting the telemetry
-- See the [advanced configurations][3] to
-    - connect your telemetry using tags
-    - collect telemetry for Amazon API Gateway, SQS, etc.
-    - capture the Lambda request and response payloads
-    - link errors of your Lambda functions to your source code
-    - filter or scrub sensitive information from logs or traces
+- Add custom tags to your telemetry by using the `DD_TAGS` environment variable
+- Configure [payload collection][8] to capture your functions' JSON request and response payloads
+- If you are using the Datadog Lambda Extension, turn off the Datadog Forwarder's Lambda logs
+- See [Configure Serverless Monitoring for AWS Lambda][3] for further capabilities
 
 ## Further Reading
 
@@ -283,3 +272,4 @@ Enabling any of these features cause the extension to default back to the fully 
 [5]: https://github.com/DataDog/datadog-lambda-extension
 [6]: https://github.com/DataDog/datadog-lambda-extension/issues
 [7]: /tracing/trace_collection/custom_instrumentation/go/migration
+[8]: /serverless/aws_lambda/configuration?tab=datadogcli#collect-the-request-and-response-payloads

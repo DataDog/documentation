@@ -13,25 +13,20 @@ further_reading:
 aliases:
     - /serverless/datadog_lambda_library/java/
     - /serverless/installation/java
+    - /serverless/aws_lambda/installation/java
 ---
 
-<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
-
-<div class="alert alert-info">For FIPS compliance, use the Datadog FIPS-compliant extension layer, but note that the Java runtime layer does not require additional configuration. While the FIPS-compliant Lambda components work with any Datadog site, end-to-end FIPS compliance requires using the US1-FED site. See <a href="/serverless/aws_lambda/fips-compliance">AWS Lambda FIPS Compliance</a> for more details.</div>
+<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">Read more</a>.</div>
 
 To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (`java8.al2`), Java 11 (`java11`), Java 17 (`java17`), or Java 21 (`java21`) runtimes with at least 1024 MB of memory.
-
-If your Lambda functions are deployed in a VPC without access to the public internet, you can send data either [using AWS PrivateLink][6] for the `datadoghq.com` [Datadog site][7], or [using a proxy][8] for all other sites.
 
 If you previously set up your Lambda functions using the Datadog Forwarder, see [instrumenting using the Datadog Forwarder][9]. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.
 
 If you are using the Datadog Lambda layers `dd-trace-java:4` (or older) and `Datadog-Extension:24` (or older), follow the [special instructions to upgrade][10].
 
-## Installation
+## Setup
 
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/inventory-service">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
-
-Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
+If your application is deployed as a container image, use the _Container Image_ method.
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -371,29 +366,20 @@ module "lambda-datadog" {
 {{% /tab %}}
 {{< /tabs >}}
 
-## Minimize cold start duration
-Version 67+ of [the Datadog Extension][12] is optimized to significantly reduce cold start duration.
+## FIPS compliance
 
-To use the optimized extension, disable App and API Protection (AAP), Continuous Profiler for Lambda, and OpenTelemetry based tracing. Set the following environment variables to `false`:
+{{% svl-lambda-fips %}}
 
-- `DD_TRACE_OTEL_ENABLED`
-- `DD_PROFILING_ENABLED`
-- `DD_SERVERLESS_APPSEC_ENABLED`
+## AWS Lambda and VPC
 
-Enabling any of these features cause the extension to default back to the fully compatible older version of the extension. You can also force your extension to use the older version by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog encourages you to report any feedback or bugs by adding an [issue on GitHub][13] and tagging your issue with `version/next`.
+{{% svl-lambda-vpc %}}
 
 ## What's next?
 
-- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
-- Turn on [threat monitoring][11] to get alerted on attackers targeting your service.
-- Submit a [custom metric][2] or [APM span][3] to monitor your business logic.
-- See the [troubleshooting guide][4] if you have trouble collecting the telemetry
-- See the [advanced configurations][5] to
-    - connect your telemetry using tags
-    - collect telemetry for Amazon API Gateway, SQS, etc.
-    - capture the Lambda request and response payloads
-    - link errors of your Lambda functions to your source code
-    - filter or scrub sensitive information from logs or traces
+- Add custom tags to your telemetry by using the `DD_TAGS` environment variable
+- Configure [payload collection][14] to capture your functions' JSON request and response payloads
+- If you are using the Datadog Lambda Extension, turn off the Datadog Forwarder's Lambda logs
+- See [Configure Serverless Monitoring for AWS Lambda][5] for further capabilities
 
 ## Further Reading
 
@@ -412,3 +398,4 @@ Enabling any of these features cause the extension to default back to the fully 
 [11]: /security/application_security/serverless/
 [12]: https://github.com/DataDog/datadog-lambda-extension
 [13]: https://github.com/DataDog/datadog-lambda-extension/issues
+[14]: /serverless/aws_lambda/configuration?tab=datadogcli#collect-the-request-and-response-payloads

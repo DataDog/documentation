@@ -16,19 +16,16 @@ further_reading:
 aliases:
     - /serverless/datadog_lambda_library/ruby/
     - /serverless/installation/ruby
+    - /serverless/aws_lambda/installation/ruby
 ---
 
 <div class="alert alert-warning">If you previously set up your Lambda functions using the Datadog Forwarder, see <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_ruby">instrumenting using the Datadog Forwarder</a>. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.</div>
 
-<div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/configuration/proxy/">using a proxy</a> for all other sites.</div>
+<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">Read more</a>.</div>
 
-<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
+## Setup
 
-<div class="alert alert-info">For FIPS compliance, use the Datadog FIPS-compliant extension layer, but note that the Ruby runtime layer does not require additional configuration. While the FIPS-compliant Lambda components work with any Datadog site, end-to-end FIPS compliance requires using the US1-FED site. See <a href="/serverless/aws_lambda/fips-compliance">AWS Lambda FIPS Compliance</a> for more details.</div>
-
-## Installation
-
-Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
+If your application is deployed as a container image, use the _Container Image_ method.
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -332,29 +329,19 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Minimize cold start duration
-Version 67+ of [the Datadog Extension][10] is optimized to significantly reduce cold start duration.
+## FIPS compliance
 
-To use the optimized extension, disable App and API Protection (AAP), Continuous Profiler for Lambda, and OpenTelemetry based tracing. Set the following environment variables to `false`:
+{{% svl-lambda-fips %}}
 
-- `DD_TRACE_OTEL_ENABLED`
-- `DD_PROFILING_ENABLED`
-- `DD_SERVERLESS_APPSEC_ENABLED`
+## AWS Lambda and VPC
 
-Enabling any of these features cause the extension to default back to the fully compatible older version of the extension. You can also force your extension to use the older version by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog encourages you to report any feedback or bugs by adding an [issue on GitHub][11] and tagging your issue with `version/next`.
+{{% svl-lambda-vpc %}}
 
 ## What's next?
 
-- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
-- Turn on [threat monitoring][9] to get alerted on attackers targeting your service.
-- See the sample code to [monitor custom business logic](#monitor-custom-business-logic)
-- See the [troubleshooting guide][5] if you have trouble collecting the telemetry
-- See the [advanced configurations][6] to
-    - connect your telemetry using tags
-    - collect telemetry for Amazon API Gateway, SQS, etc.
-    - capture the Lambda request and response payloads
-    - link errors of your Lambda functions to your source code
-    - filter or scrub sensitive information from logs or traces
+- Add custom tags to your telemetry by using the `DD_TAGS` environment variable
+- If you are using the Datadog Lambda Extension, turn off the Datadog Forwarder's Lambda logs
+- See [Configure Serverless Monitoring for AWS Lambda][6] for further capabilities
 
 ### Monitor custom business logic
 
