@@ -314,22 +314,25 @@ The file backend only requires read permissions for the configured JSON or YAML 
 
 ##### Datadog.yaml configuration
 
-The backend configuration for JSON file secrets is structured as YAML following this schema:
+You can use a JSON file to store secrets locally.
 
-```yaml
-# datadog.yaml
-secret_backend_type: file.json
-secret_backend_config:
-  file_path: /path/to/json/file
+As an example if we have a JSON file in `/path/to/secret.json` containing:
+
+```json
+{
+  "datadog_api_key": "your api key"
+}
 ```
 
-The backend secret is referenced in your Datadog Agent configuration file with `ENC`:
+You can use the following configuration to pull secrets from it:
 
 ```yaml
 # datadog.yaml
+api_key: "ENC[{datadog_api_key}]"
 
-api_key: "ENC[{json_property_name}"
-
+secret_backend_type: file.json
+secret_backend_config:
+  file_path: /path/to/secret.json
 ```
 {{% /tab %}}
 
@@ -338,22 +341,22 @@ api_key: "ENC[{json_property_name}"
 
 ##### Datadog.yaml Configuration
 
-The backend configuration for YAML file secrets is structured as YAML following this schema:
+You can use a YAML file to store secrets locally.
+
+As an example if we have a YAML file in `/path/to/secret.yaml` containing:
 
 ```yaml
-# datadog.yaml
-secret_backend_type: file.yaml
-secret_backend_config:
-  file_path: /path/to/yaml/file
+datadog_api_key: your api key
 ```
 
-The backend secret is referenced in your Datadog Agent configuration file with `ENC`:
+You can use the following configuration to pull secrets from it:
 
 ```yaml
 # datadog.yaml
-
-api_key: "ENC[{yaml_property_name}]"
-
+api_key: "ENC[{datadog_api_key}]"
+secret_backend_type: file.yaml
+secret_backend_config:
+  file_path: /path/to/secret.yaml
 ```
 {{% /tab %}}
 {{< /tabs >}}
