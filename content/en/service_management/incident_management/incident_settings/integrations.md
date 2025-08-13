@@ -22,6 +22,7 @@ When you connect a Slack workspace to a Datadog organization, users in the works
 
 * `/datadog incident` declares an incident
 * `/datadog incident test` declares a test incident (if test incidents are enabled for the incident type)
+* `/datadog incident list` shows active and stable incidents
 
 To allow any Slack user or non-guest Slack user to declare incidents in your Slack workspace, enable "Allow Slack users to declare incidents without a connected Datadog account" in Incident Management settings.
 
