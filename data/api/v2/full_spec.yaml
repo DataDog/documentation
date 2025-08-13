@@ -67417,6 +67417,18 @@ paths:
               86400\n  },\n  \"message\": \"Test rule Bis\",\n  \"tags\": [],\n  \"isEnabled\":
               true,\n  \"type\": \"log_detection\"\n}"
           step: there is a valid "security_rule_bis" in the system
+        security_rule_hash:
+          parameters:
+          - name: body
+            value: "{\n  \"name\": \"_{{ unique_hash }}\",\n  \"queries\": [{\n    \"query\":
+              \"@test:true\",\n    \"aggregation\": \"count\",\n    \"groupByFields\":
+              [],\n    \"distinctFields\": [],\n    \"metrics\": []\n  }],\n  \"filters\":
+              [],\n  \"cases\": [{\n    \"name\": \"\",\n    \"status\": \"info\",\n
+              \   \"condition\": \"a > 0\",\n    \"notifications\": []\n  }],\n  \"options\":
+              {\n    \"evaluationWindow\": 900,\n    \"keepAlive\": 3600,\n    \"maxSignalDuration\":
+              86400\n  },\n  \"message\": \"Test rule\",\n  \"tags\": [],\n  \"isEnabled\":
+              true,\n  \"type\": \"log_detection\"\n}"
+          step: there is a valid "security_rule_hash" in the system
       x-menu-order: 4
       x-permission:
         operator: OR
