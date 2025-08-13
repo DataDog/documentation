@@ -24,8 +24,8 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- os & system
-custom_kind: integration
+- OS & 시스템
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_i/README.md
 display_on_public_website: true
@@ -40,7 +40,7 @@ name: ibm_i
 public_title: IBM i
 short_description: 작업, 작업 대기열, ASP 등을 포함하여 IBM i 시스템을 원격으로 모니터링하세요.
 supported_os:
-- 리눅스
+- linux
 - macos
 tile:
   changelog: CHANGELOG.md
@@ -48,7 +48,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Category::OS & System
-  - 제공::통합
+  - Offering::Integration
   configuration: README.md#Setup
   description: 작업, 작업 대기열, ASP 등을 포함하여 IBM i 시스템을 원격으로 모니터링하세요.
   media: []
@@ -66,7 +66,7 @@ tile:
 
 ## 설정
 
-아래 지침을 따라 호스트에서 실행되는 에이전트에 대해 이 점검을 설치하고 설정하세요. 컨테이너화된 환경의 경우 이러한 지침을 적용하는 데 가이드가 필요하면 [오토파일럿 통합 템플릿][3]을 참조하세요.
+아래 지침을 따라 호스트에서 실행되는 에이전트에 대해 이 점검을 설치하고 설정하세요. 컨테이너화된 환경의 경우 이러한 지침을 적용하는 데 가이드가 필요하면 [자동탐지 통합 템플릿][2]을 참조하세요.
 
 **참고**: 이 검사는 Unix 계열 운영 체제에 특정한 `fcntl()` 시스템 호출을 사용하므로 Windows에서는 사용할 수 없습니다.
 
@@ -75,7 +75,7 @@ tile:
 IBM i 점검은 [Datadog Agent][3] 패키지에 포함되어 있습니다.
 서버에 추가 설치가 필요하지 않습니다.
 
-#### ODBC 드라이버
+#### ODBC 드라이버
 
 IBM i 검사는 IBM i ODBC 드라이버를 사용하여 IBM i 호스트에 원격으로 연결합니다.
 
@@ -83,7 +83,7 @@ IBM i 검사는 IBM i ODBC 드라이버를 사용하여 IBM i 호스트에 원�
 
 Linux 호스트용 `ACS Linux App Pkg` 등 플랫폼에 맞는 `ACS App Pkg` 패키지를 선택합니다. 패키지를 다운로드하고 설치 지침에 따라 드라이버를 설치합니다.
 
-### 구성
+### 설정
 
 IBM i 검사는 Datadog Agent를 실행하는 호스트에서 원격으로 IBM i 시스템을 쿼리합니다. IBM i 시스템과 통신하려면 Datadog Agent를 실행하는 호스트에 IBM i ODBC 드라이버를 설정해야 합니다.
 
@@ -111,7 +111,7 @@ IBM i 검사를 구성하려면 IBM i ODBC 드라이버의 이름이 필요합�
 1. Agent의 구성 디렉터리 루트에 있는 `conf.d/` 폴더에서 `ibm_i.d/conf.yaml` 파일을 편집하여 IBM i 성능 데이터 수집을 시작하세요. 사용 가능한 모든 구성 옵션은 [샘플 ibm_i.d/conf.yaml][5]을 참조하세요.
    `obdcinst.ini` 파일의 드라이버 이름을 사용하세요.
 
-2. [Agent를 재시작합니다][6].
+2. [에이전트를 재시작합니다][6].
 
 ### 검증
 

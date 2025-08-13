@@ -1,8 +1,8 @@
 ---
 categories:
 - 言語
-- トレーシング
-custom_kind: integration
+- tracing
+custom_kind: インテグレーション
 dependencies: []
 description: Datadog のクライアントライブラリを使用して Go アプリケーションからランタイムメトリクスを送信。
 doc_link: https://docs.datadoghq.com/integrations/go/
@@ -42,7 +42,7 @@ Go インテグレーションを利用して、Go アプリケーションの�
 
 トレースを Datadog に送信するには、[Go アプリケーションのインスツルメンテーション][2]に関するドキュメントを参照してください。
 
-### 収集データ
+### ログ収集
 
 _Agent v6.0 以上で使用可能_
 

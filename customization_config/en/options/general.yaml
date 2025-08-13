@@ -223,6 +223,9 @@ options:
 - label: Kotlin
   id: kotlin
 
+- label: Kotlin Multiplatform
+  id: kotlin_multiplatform
+
 - label: Kubernetes
   id: kubernetes
 

@@ -17,7 +17,7 @@ You can use a metric monitor on the `system.uptime` metric can to address this. 
 
 The example shown below captures how you can set this up:
 
-{{< img src="monitors/guide/ephemeral_set_up.png" alt="ephemeral_set_up" >}}
+{{< img src="monitors/guide/ephemeral_set_up_2025-05-20.png" alt="The New Monitor page in Datadog, showing a metric monitor with a threshold alert set to 0 for the system.uptime metric, averaged by host" >}}
 
 
 {{< partial name="whats-next/whats-next.html" >}}

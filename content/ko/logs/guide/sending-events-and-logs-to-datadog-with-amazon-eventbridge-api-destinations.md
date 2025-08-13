@@ -6,12 +6,10 @@ further_reading:
 - link: /logs/guide/reduce_data_transfer_fees
   tag: 가이드
   text: 데이터 전송 수수료를 줄이면서 로그를 Datadog로 보내는 방법
+site_support_id: amazon_event_bridge
 title: Amazon EventBridge API 목적지를 사용하여 이벤트 및 로그를 Datadog에 전송하기
+site_support_id: amazon_event_bridge
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">정부 사이트용 Datadog는 Amazon EventBridge를 지원하지 않습니다.</div>
-{{< /site-region >}}
 
 Amazon EventBridge는 이벤트 기반 애플리케이션을 구축할 수 있는 서버리스 이벤트 버스입니다. EventBridge는 AWS 서비스와 통합할 수 있지만 API 목적지 기능을 사용하면 AWS 외부에서 API를 사용하여 데이터를 푸시하고 가져올 수 있습니다. 이 가이드는 이벤트 및 로그를 EventBridge에서 Datadog로 전송하는 단계를 안내합니다. Datadog에서 EventBridge로 이벤트를 푸시하는 방법에 대한 자세한 내용은 [EventBridge 통합 문서][1]를 참조하세요.
 

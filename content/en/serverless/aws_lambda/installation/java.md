@@ -279,7 +279,7 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "2.0.0"
+  version = "3.2.1"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -289,8 +289,8 @@ module "lambda-datadog" {
     "DD_VERSION" : "<VERSION>"
   }
 
-  datadog_extension_layer_version = 67
-  datadog_java_layer_version = 15
+  datadog_extension_layer_version = {{< latest-lambda-layer-version layer="extension" >}}
+  datadog_java_layer_version = {{< latest-lambda-layer-version layer="dd-trace-java" >}}
 
   # aws_lambda_function arguments
 }
@@ -315,8 +315,8 @@ module "lambda-datadog" {
 4. Select the versions of the Datadog Extension Lambda layer and Datadog Java Lambda layer to use. If left blank the latest layer versions will be used.
 
 ```
-  datadog_extension_layer_version = 67
-  datadog_java_layer_version = 15
+  datadog_extension_layer_version = {{< latest-lambda-layer-version layer="extension" >}}
+  datadog_java_layer_version = {{< latest-lambda-layer-version layer="dd-trace-java" >}}
 ```
 
 [1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
@@ -384,7 +384,7 @@ Enabling any of these features cause the extension to default back to the fully 
 
 ## What's next?
 
-- You can now view metrics, logs, and traces on the [Serverless Homepage][1].
+- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
 - Turn on [threat monitoring][11] to get alerted on attackers targeting your service.
 - Submit a [custom metric][2] or [APM span][3] to monitor your business logic.
 - See the [troubleshooting guide][4] if you have trouble collecting the telemetry

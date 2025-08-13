@@ -206,7 +206,7 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "2.0.0"
+  version = "3.2.1"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -216,8 +216,8 @@ module "lambda-datadog" {
     "DD_VERSION" : "<VERSION>"
   }
 
-  datadog_extension_layer_version = 67
-  datadog_dotnet_layer_version = 16
+  datadog_extension_layer_version = {{< latest-lambda-layer-version layer="extension" >}}
+  datadog_dotnet_layer_version = {{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
 
   # aws_lambda_function arguments
 }
@@ -242,8 +242,8 @@ module "lambda-datadog" {
 4. Select the versions of the Datadog Extension Lambda layer and Datadog .NET Lambda layer to use. Defaults to the latest layer versions.
 
 ```
-  datadog_extension_layer_version = 67
-  datadog_dotnet_layer_version = 16
+  datadog_extension_layer_version = {{< latest-lambda-layer-version layer="extension" >}}
+  datadog_dotnet_layer_version = {{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
 ```
 
 [1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
@@ -328,7 +328,7 @@ When using the [Datadog Lambda tracing layer for .NET](https://github.com/DataDo
 You are now ready to add custom spans and span tags using the .NET tracer. For further instructions on how to add spans, see the [.NET custom instrumentation](https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/dotnet/dd-api/) page.
 
 ## What's next?
-- You can now view metrics, logs, and traces on the [Serverless Homepage][1].
+- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
 - Turn on [threat monitoring][6] to get alerted on attackers targeting your service.
 - Submit a [custom metric][2] or [APM span][3] to monitor your business logic.
 - See the [troubleshooting guide][4] if you have trouble collecting the telemetry

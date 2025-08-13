@@ -3,6 +3,7 @@ title: Custom Detection Rules
 aliases:
   - /security_platform/application_security/custom_rules
   - /security/application_security/custom_rules
+  - /security/application_security/threats/attacker_fingerprint
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"

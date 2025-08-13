@@ -25,6 +25,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/total-cost-of-service-ownership-ccm/"
   tag: "Blog"
   text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
+- link: "https://www.datadoghq.com/blog/datadog-costs/"
+  tag: "Blog"
+  text: "Understand and manage your Datadog spend with Datadog cost data in Cloud Cost Management"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/daily-datadog-costs/" btn_hidden="false" header="Join the Preview!">}}

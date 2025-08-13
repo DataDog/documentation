@@ -20,10 +20,6 @@ further_reading:
 title: Datadog の CI Pipeline Visibility
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 [Pipeline Visibility][1] は、CI の健全性をパイプライン中心で表示し、パイプラインからの重要なメトリクスと結果を提供します。これにより、パイプラインの障害をトラブルシュートし、パフォーマンスのボトルネックに対処し、CI のパフォーマンスと信頼性を長期的に追跡するのに役立ちます。

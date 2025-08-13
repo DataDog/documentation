@@ -3,6 +3,8 @@ title: Enabling Application & API Protection for Envoy
 code_lang: envoy
 type: multi-code-lang
 code_lang_weight: 50
+aliases:
+  - /security/application_security/threats/setup/standalone/envoy
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-go/tree/main/contrib/envoyproxy/go-control-plane/cmd/serviceextensions'
       tag: "Source Code"
@@ -109,10 +111,10 @@ The available functionality for Envoy version `1.71.0` has the following importa
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[2]: https://docs.datadoghq.com/tracing/guide/remote_config
 [3]: https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/ext_proc_filter
 [4]: https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_proc/v3/ext_proc.proto#extensions-filters-http-ext-proc-v3-externalprocessor
 [5]: https://github.com/DataDog/dd-trace-go/pkgs/container/dd-trace-go%2Fservice-extensions-callout
 [6]: https://github.com/DataDog/dd-trace-go
 [7]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
-[8]: https://docs.datadoghq.com/security/application_security/threats/library_configuration/
+[8]: https://docs.datadoghq.com/security/application_security/policies/library_configuration/

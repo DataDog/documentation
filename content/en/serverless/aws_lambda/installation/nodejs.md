@@ -35,6 +35,8 @@ aliases:
 
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
 
+To use remote instrumentation, see See [Remote instrumentation for AWS Lambda][11].
+
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
@@ -275,7 +277,7 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "2.0.0"
+  version = "3.2.1"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -285,8 +287,8 @@ module "lambda-datadog" {
     "DD_VERSION" : "<VERSION>"
   }
 
-  datadog_extension_layer_version = 67
-  datadog_node_layer_version = 117
+  datadog_extension_layer_version = {{< latest-lambda-layer-version layer="extension" >}}
+  datadog_node_layer_version = {{< latest-lambda-layer-version layer="node" >}}
 
   # aws_lambda_function arguments
 }
@@ -311,14 +313,60 @@ module "lambda-datadog" {
 4. Select the versions of the Datadog Extension Lambda layer and Datadog Node.js Lambda layer to use. Defaults to the latest layer versions.
 
 ```
-  datadog_extension_layer_version = 67
-  datadog_node_layer_version = 117
+  datadog_extension_layer_version = {{< latest-lambda-layer-version layer="extension" >}}
+  datadog_node_layer_version = {{< latest-lambda-layer-version layer="node" >}}
 ```
 
 [1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
 [2]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function
 [3]: https://github.com/DataDog/terraform-aws-lambda-datadog?tab=readme-ov-file#inputs
 [4]: /getting_started/site/
+{{% /tab %}}
+{{% tab "SST v3" %}}
+
+To configure Datadog using SST v3, follow these steps:
+
+  ```ts
+  const app = new sst.aws.Function("MyApp", {
+    handler: "index.handler",
+    nodejs : {
+      install: [
+        "datadog-lambda-js",
+        "dd-trace",
+      ]
+    },
+    environment: {
+      DD_ENV: "<ENVIRONMENT>",
+      DD_SERVICE: "<SERVICE_NAME>",
+      DD_VERSION: "<VERSION>",
+      DATADOG_API_KEY_SECRET_ARN: "<DATADOG_API_KEY_SECRET_ARN>",
+      DD_SITE: "<DATADOG_SITE>",
+    },
+    layers: [
+      $interpolate`arn:aws:lambda:${aws.getRegionOutput().name}:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}`,
+      $interpolate`arn:aws:lambda:${aws.getRegionOutput().name}:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}`,
+    ],
+  });
+  ```
+
+  1. Configure the Datadog Lambda Library and Datadog Lambda Extension layers
+
+     - The available `<RUNTIME>` options are: {{< latest-lambda-layer-version layer="node-versions" >}}.
+  
+  2. Add `dd-trace` and `datadog-lambda-js` to the `nodejs.install` list
+
+  3. Fill in the environment variable placeholders:
+
+     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use the environment variable `DD_API_KEY` and set your Datadog API key in plaintext.
+     - Replace `<ENVIRONMENT>` with the Lambda function's environment, such as `prod` or `staging`
+     - Replace `<SERVICE_NAME>` with the name of the Lambda function's service
+     - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}}. (Ensure the correct [Datadog site][1] is selected on this page)
+     - Replace `<VERSION>` with the version number of the Lambda function
+    
+  4. [Apply the Datadog wrapper in your function code][2]
+
+[1]: /getting_started/site/
+[2]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -436,7 +484,7 @@ Enabling any of these features cause the extension to default back to the fully 
 
 ## What's next?
 
-- Congratulations! You can now view metrics, logs, and traces on the [Serverless Homepage][1].
+- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
 - Turn on [threat monitoring][6] to get alerted on attackers targeting your service.
 - See the sample code to [monitor custom business logic](#monitor-custom-business-logic)
 - See the [troubleshooting guide][2] if you have trouble collecting the telemetry
@@ -503,3 +551,4 @@ exports.handler = async (event) => {
 [8]: https://github.com/DataDog/datadog-lambda-extension/issues
 [9]: /serverless/aws_lambda/distributed_tracing/#span-auto-linking
 [10]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
+[11]: /serverless/aws_lambda/remote_instrumentation

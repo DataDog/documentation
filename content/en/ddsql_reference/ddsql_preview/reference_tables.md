@@ -1,5 +1,6 @@
 ---
 title: Reference Tables in DDSQL (Preview)
+private: true
 aliases:
 - /ddsql_editor/reference_tables/
 further_reading:

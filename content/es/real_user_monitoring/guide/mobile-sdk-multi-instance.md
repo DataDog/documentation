@@ -15,6 +15,8 @@ Sigue esta guía para utilizar varias instancias con nombre del SDK. Muchos mét
 
 **Nota**: El nombre de la instancia del SDK debe ser constante entre ejecuciones de la aplicación. Las rutas de almacenamiento para eventos de SDK dependen de esto.
 
+**Nota**: Session Replay sólo puede ejecutarse en un único núcleo a la vez. Para cambiar a otro, detén primero el núcleo que se está ejecutando.
+
 {{< tabs >}}
 {{% tab "Android" %}}
 
@@ -40,6 +42,15 @@ GlobalRumMonitor.get(namedSdkInstance)
 NdkCrashReports.enable(namedSdkInstance)
 
 WebViewTracking.enable(webView, allowedHosts, namedSdkInstance)
+
+SessionReplay.enable(sessionReplayConfig, namedSdkInstance)
+```
+
+**Nota**:
+Para que la instrumentación funcione en el componente WebView, es muy importante que JavaScript esté habilitado en el WebView. Para habilitarlo, puedes utilizar el siguiente fragmento de código:
+
+```kotlin
+    webView.settings.javaScriptEnabled = true
 ```
 
 Puedes recuperar la instancia del SDK con nombre llamando a `Datadog.getInstance(<name>)` y utilizar el método `Datadog.isInitialized(<name>)` para comprobar si la instancia del SDK en particular está inicializada.
@@ -67,6 +78,8 @@ RUM.enable(
 Logs.enable(in: core)
 
 Trace.enable(in: core)
+
+SessionReplay.enable(with: sessionReplayConfig, in: core)
 ```
 
 Una vez inicializada la instancia del SDK con nombre, puedes recuperarla llamando a `Datadog.sdkInstance(named: "<name>")` y utilizarla como se muestra a continuación.
@@ -84,7 +97,7 @@ import DatadogLogs
 let logger = Logger.create(in: core)
 ```
 
-### Traza (trace)
+### Traza
 ```swift
 import DatadogRUM
 
@@ -99,8 +112,8 @@ let monitor = RUMMonitor.shared(in: core)
 ```
 
 
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 
 ## Referencias adicionales

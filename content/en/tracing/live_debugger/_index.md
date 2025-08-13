@@ -7,15 +7,18 @@ further_reading:
 - link: "/dynamic_instrumentation/expression-language/"
   tag: "Documentation"
   text: "Dynamic Instrumentation Expression Language"
+- link: "/developers/ide_plugins/idea/live_debugger/"
+  tag: "Documentation"
+  text: "Live Debugger for JetBrains IDEs"
 - link: "/dynamic_instrumentation/sensitive-data-scrubbing/"
   tag: "Documentation"
   text: "Sensitive Data Scrubbing"
 - link: "/dynamic_instrumentation/symdb/"
   tag: "Documentation"
   text: "Autocomplete and Search (Preview)"
-- link: "/tracing/error_tracking/execution_replay"
+- link: "/error_tracking/backend/exception_replay"
   tag: "Documentation"
-  text: "Execution Replay"
+  text: "Exception Replay"
 ---
 
 {{< beta-callout-private url="https://www.datadoghq.com/product-preview/live-debugger/" >}}
@@ -82,6 +85,8 @@ When you enable or disable Live Debugger, the same action applies to Dynamic Ins
 
 ## Using Live Debugger
 
+<div class="alert alert-info">Try using Live Debugger from your JetBrains IDE! <a href="/developers/ide_plugins/idea/live_debugger/">Click here</a> to learn more.</div>
+
 ### Creating and using a Debug Session
 
 Debug Sessions let you inspect your code at runtime with auto-expiring logpoints. To create and use a Debug Session:
@@ -141,7 +146,7 @@ The following constraints apply to Live Debugger usage and configuration:
 [2]: /dynamic_instrumentation/expression-language/
 [3]: /dynamic_instrumentation/sensitive-data-scrubbing/
 [4]: /agent/
-[5]: /agent/remote_config/
+[5]: /remote_configuration
 [6]: https://github.com/DataDog/dd-trace-java
 [7]: https://github.com/DataDog/dd-trace-py
 [8]: https://github.com/DataDog/dd-trace-dotnet

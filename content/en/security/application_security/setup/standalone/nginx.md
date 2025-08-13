@@ -7,6 +7,7 @@ aliases:
   - /security_platform/application_security/getting_started/nginx
   - /security/application_security/getting_started/nginx
   - /security/application_security/enabling/tracing_libraries/threat_detection/nginx/
+  - /security/application_security/threats/setup/standalone/nginx
 further_reading:
     - link: 'https://github.com/DataDog/nginx-datadog/'
       tag: "Source Code"

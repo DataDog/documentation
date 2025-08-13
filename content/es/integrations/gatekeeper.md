@@ -27,9 +27,9 @@ author:
   support_email: ara.pulido@datadoghq.com
 categories:
 - nube
-- cumplimiento
+- conformidad
 - configuración y despliegue
-- contenedores
+- rastreo
 - seguridad
 custom_kind: integración
 dependencies:
@@ -46,17 +46,17 @@ name: gatekeeper
 public_title: Gatekeeper
 short_description: Integración de Gatekeeper
 supported_os:
-- linux
+- Linux
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Cloud
-  - Category::Compliance
-  - Category::Configuration & Deployment
-  - Category::Containers
-  - Category::Security
-  - Supported OS::Linux
-  - Offering::Integration
+  - Categoría::Nube
+  - Categoría::Cumplimiento
+  - Categoría::Configuración y despliegue
+  - Categoría::Contenedores
+  - Categoría::Seguridad
+  - Sistema operativo compatible::Linux
+  - Oferta::Integración
   configuration: README.md#Configuración
   description: Integración de Gatekeeper
   media: []
@@ -65,7 +65,7 @@ tile:
   title: Gatekeeper
 ---
 
-<!--  FUENTE https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -103,7 +103,7 @@ Para instalar el check de Gatekeeper en tu clúster de Kubernetes:
 3. Actualiza la configuración de `ddev` con la ruta de `integrations-extras/`:
 
    ```shell
-   ddev config set extras ./integrations-extras
+   ddev config set repos.extras ./integrations-extras
    ```
 
 4. Para crear el paquete de `gatekeeper`, ejecuta:
@@ -182,13 +182,13 @@ Para instalar el check de Gatekeeper en tu clúster de Kubernetes:
 
 Gatekeeper no incluye eventos.
 
-### Checks de servicio
+### Checks de servicios
 {{< get-service-checks-from-git "gatekeeper" >}}
 
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Contacta con el [equipo de asistencia de Datadog][11].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][11].
 
 
 [1]: https://github.com/open-policy-agent/gatekeeper

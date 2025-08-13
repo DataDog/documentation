@@ -5,20 +5,13 @@ further_reading:
 - link: "/security/application_security/how-it-works"
   tag: "Documentation"
   text: "How App and API Protection Works"
-- link: "/security/application_security/threats/"
+- link: "/security/application_security"
   tag: "Documentation"
   text: "App and API Protection"
-- link: "/security/code_security/software_composition_analysis/"
-  tag: "Documentation"
-  text: "Software Composition Analysis"
 - link: "https://www.datadoghq.com/blog/datadog-threat-intelligence/"
   tag: "Blog"
   text: "Accelerate security investigations with Datadog Threat Intelligence"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog App and API Protection is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 Datadog App and API Protection monitors threats and provides protection against application-level attacks that aim to exploit code-level vulnerabilities. It leverages runtime code execution context, trace and error data, and user attribution.
 
@@ -43,9 +36,6 @@ In-App WAF rules (formerly event rules)
 : A set of rules executed in the Datadog libraries to catch security activity. These include Web Application Firewall (WAF) patterns that monitor for attempts to exploit known vulnerabilities.
 : See [In-App WAF rules][12].
 
-interactive application security testing (IAST)
-: An application security testing method that proactively detects vulnerabilities while the app is run by an automated test, human tester, or any activity interacting with the application functionality.
-
 Remote Configuration
 : A Datadog platform mechanism that enables the Agent configuration to be updated remotely. Used by Datadog App and API Protection to update In-App WAF rules, activate the product, and block attackers.
 : See [How Remote Configuration Works][8].
@@ -56,9 +46,6 @@ service
 signal
 : A detection of an application attack that impacts your services. Signals identify meaningful threats for you to review, and should be triaged with a high priority.
 : See [Signals Explorer][13] in the app.
-
-software composition analysis (SCA)
-: Comparing the open source libraries loaded by your services to databases of known vulnerabilities. SCA helps you identify vulnerable dependencies, outdated libraries, and licensing issues in the open source libraries that your web services load.
 
 severity
 : An indicator of how quickly an attack attempt should be triaged and addressed. Based on a combination of factors, including the attack's potential impact and risk. Values are Critical, High, Medium, Low, Info.
@@ -87,11 +74,11 @@ threat intelligence
 
 suspicious attackers
 : A precursor to Flagged IPs. Suspicious IPs have met a minimum threshold of attack traffic to be classified as suspicious, but not the threshold for Flagged. Thresholds are not user-configurable.
-: See [Attacker Explorer][17]
+: See [Attackers Explorer][17]
 
 flagged attackers
 : IPs that send large amounts of attack traffic. We recommend reviewing and blocking Flagged IPs. Thresholds are not user-configurable.
-: See [Attacker Explorer][17]
+: See [Attackers Explorer][17]
 
 attacker fingerprint
 : Identifiers computed from request characteristics to track an attacker across multiple requests.
@@ -146,10 +133,10 @@ Object-Graph Navigation Language Injection (OGNLi)
 [5]: https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/
 [6]: https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/07-Input_Validation_Testing/11.1-Testing_for_Local_File_Inclusion
 [7]: https://owasp.org/www-project-top-ten/2017/A1_2017-Injection
-[8]: /agent/remote_config/
+[8]: /remote_configuration
 [10]: /security/detection_rules/
 [11]: https://app.datadoghq.com/security/appsec/exclusions
-[12]: /security/application_security/threats/inapp_waf_rules
+[12]: /security/application_security/policies/inapp_waf_rules/
 [13]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&product=appsec&view=signal
 [14]: /security/application_security/how-it-works/add-user-info/
 [15]: /security/application_security/how-it-works/trace_qualification/

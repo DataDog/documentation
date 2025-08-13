@@ -421,16 +421,11 @@ Tracing:
       macros and functions to create and manage spans, supports asynchronous trace
       propagation, and integrates with Phoenix via middleware plugs.
 - Go:
-  - name: dd-trace-go (v1)
+  - name: dd-trace-go
     link: https://github.com/DataDog/dd-trace-go
     official: true
     authors: Datadog
-    notes: Go package is 'gopkg.in/DataDog/dd-trace-go.v1'.
-  - name: dd-trace-go (v2)
-    link: https://github.com/DataDog/dd-trace-go
-    official: true
-    authors: Datadog
-    notes: 'Go package is ''github.com/DataDog/dd-trace-go/v2''. Note: v2 is in Preview.'
+    notes: Datadog's APM tracer library for Go automatically instruments HTTP, gRPC, and database operations, providing visibility into request flows across services. Supports OpenTelemetry integration and custom instrumentation. Enables correlation of traces with logs and metrics in Datadog, helping identify performance bottlenecks and errors in distributed systems.
   - name: datadog-go
     link: https://github.com/savaki/datadog
     authors: Matt Ho

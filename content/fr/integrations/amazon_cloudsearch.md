@@ -63,7 +63,7 @@ Configurez Amazon CloudSearch de façon à ce que ses logs soient envoyés vers 
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_cloudsearch" >}}
+{{< get-metrics-from-git "amazon-cloudsearch" >}}
 
 
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.

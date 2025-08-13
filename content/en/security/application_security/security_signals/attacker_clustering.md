@@ -1,6 +1,8 @@
 ---
 title: Attacker Clustering
 disable_toc: false
+aliases:
+  - /security/application_security/threats/attacker_clustering
 further_reading:
 - link: "/security/application_security/security_signals/attacker_fingerprint"
   tag: "Documentation"
@@ -8,10 +10,10 @@ further_reading:
 - link: "/security/application_security/how-it-works/threat-intelligence/"
   tag: "Documentation"
   text: "Threat Intelligence"
-- link: "/security/application_security/threats/event_rules"
+- link: "/security/application_security/policies/inapp_waf_rules/"
   tag: "Documentation"
   text: "In-App WAF Rules"
-- link: "/security/application_security/threats/security_signals/"
+- link: "/security/application_security/security_signals/"
   tag: "Documentation"
   text: "Security Signals"
 - link: "https://www.datadoghq.com/blog/attacker-clustering/"
@@ -67,12 +69,28 @@ Traffic associated with threat intelligence is also considered in the clustering
 
 The attacker clustering attributes selected are then shown as regular expressions that can be used to block with AAP's [In-App WAF][3] or to filter out traffic in AAP Traces explorer for investigation.
 
+## Custom attacker clustering
+
+If the automatic attacker clustering detection fails to identify the appropriate attributes, you can manually create attacker clusters by selecting attributes from the trace analysis side panel.
+
+To create a custom attacker cluster:
+
+1. Open the trace analysis panel from a security signal.
+2. Select the specific attributes that correspond to the attacker's patterns.
+3. Create a cluster based on your selected attributes.
+
+{{< img src="security/application_security/threats/create-custom-cluster.png" alt="The trace analysis panel with the create cluster from search button highlighted" >}}
+
+This manual approach allows you to create more targeted blocking rules when the automatic detection doesn't capture the right patterns.
+
+{{< img src="security/application_security/threats/custom-clusters.png" alt="An AAP signal with custom clusters sorted by the attacker attributes"  >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/application_security/how-it-works/threat-intelligence/
 [2]: /security/application_security/security_signals/attacker_fingerprint
-[3]: /security/application_security/threats/event_rules
+[3]: /security/application_security/security_signals/
 [4]: /security/workload_protection/security_signals/
 [5]: /tracing/trace_collection/library_config/

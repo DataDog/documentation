@@ -6,14 +6,6 @@ further_reading:
 title: Configuración del perfil
 ---
 
-<div class="alert alert-info">
-Para utilizar Datadog On-Call en tu dispositivo móvil, instala la <a href="/mobile#installing">aplicación móvil de Datadog</a>.
-</div>
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call no es compatible con el <a href="/getting_started/site">sitio Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Debes [configurar tu configuración del perfil][1] antes de poder recibir páginas de On-Call. Tu perfil incluye la configuración de los métodos de contacto, la comprobación de esos métodos y las preferencias de notificaciones. Esto garantiza que recibas las páginas a tiempo y de forma eficaz.
 
 ## Configura tu perfil de On-Call

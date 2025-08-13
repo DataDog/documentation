@@ -24,7 +24,8 @@ author:
   support_email: kristiana.mitchell@contrastsecurity.com
 categories:
 - 로그 수집
-- 보안
+- security
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/contrastsecurity/README.md
 display_on_public_website: true
@@ -34,14 +35,13 @@ integration_id: contrastsecurity
 integration_title: Contrast Security
 integration_version: ''
 is_public: true
-custom_kind: 통합
 manifest_version: 2.0.0
 name: contrastsecurity
 public_title: Contrast Security
 short_description: Datadog에서 Contrast Security가 제공하는 공격 및 취약점 보기
 supported_os:
 - linux
-- windows
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
@@ -51,6 +51,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog에서 Contrast Security가 제공하는 공격 및 취약점 보기
   media: []
@@ -96,7 +97,7 @@ logs_enabled: true
 - [Datadog 로그 설명서][4]
 - [Datadog 대시보드 API][5]
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 

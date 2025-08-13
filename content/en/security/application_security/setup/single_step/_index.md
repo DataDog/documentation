@@ -1,6 +1,8 @@
 ---
 title: Enabling AAP threat detection and protection using single step instrumentation
 external_redirect: /security/application_security/threats/threat_detection/
+aliases:
+  - /security/application_security/threats/setup/single_step
 ---
 
 <div class="alert alert-info">Enabling AAP threat detection and protection using single step instrumentation is in Preview.</div>
@@ -49,7 +51,7 @@ For an Ubuntu host:
 4. Restart the services on the host or VM.
 5. [Explore the performance observability of your services in Datadog][5].
 
-**Note:** To configure single-step for both AAP Threat Protection and Code Security, add the environment variables `DD_APPSEC_ENABLED=true` _and_ `DD_IAST_ENABLED=true` to your one-line installation command.
+**Note:** To configure single-step for AAP threat protection, add the environment variable `DD_APPSEC_ENABLED=true` to your one-line installation command.
 
 ### Specifying tracing library versions {#lib-linux}
 
@@ -81,7 +83,7 @@ For example:
 DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:3,js:5,dotnet:3,php:1" DD_APPSEC_ENABLED=true DD_ENV=staging bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-[2]: /agent/remote_config
+[2]: /tracing/guide/remote_config
 [3]: /getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: /software_catalog/
@@ -271,4 +273,4 @@ To stop producing traces, remove library injectors and restart the infrastructur
 {{% /tab %}}
 {{< /tabs >}}
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: /agent/remote_config
+[2]: /tracing/guide/remote_config

@@ -1,5 +1,7 @@
 ---
 title: Investigate Security Signals
+aliases:
+  - /security/application_security/threats/security_signals
 further_reading:
   - link: "/security/default_rules/?category=cat-application-security#cat-application-security"
     tag: "Documentation"

@@ -10,6 +10,12 @@ further_reading:
   text: "Measure long-term user engagement with Datadog Retention Analysis"
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+The Retention widget is not available in the <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
+</div>
+{{% /site-region %}}
+
 {{< callout url="https://www.datadoghq.com/product-preview/product-analytics/" header="false" >}}
 The Retention widget is available in Preview for Product Analytics customers. To request access, complete the form.
 {{< /callout >}}

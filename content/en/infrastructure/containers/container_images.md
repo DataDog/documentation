@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-The [container images view][1] in Datadog provides key insights into every image used in your environment to help you assess their deployment footprint. It also detects and remediates security and performance issues that can affect multiple containers. You can view container image details alongside the rest of your container data to troubleshoot image issues affecting infrastructure health. Additionally, you can view vulnerabilities found in your container images from [Cloud Security][2] to help you streamline your security efforts.
+The [container images view][1] in Datadog provides key insights into every image used in your environment to help you assess their deployment footprint. It also detects and remediates security and performance issues that can affect multiple containers. You can view container image details alongside the rest of your container data to troubleshoot image issues affecting infrastructure health. Additionally, you can view vulnerabilities from [Cloud Security][2] found in your container images, and trace those vulnerabilities to specific layers, so you can pinpoint and remediate your security risks faster.
 
 {{< img src="security/vulnerabilities/container_images.png" alt="The container images view highlighting vulnerabilities and container column sort feature" width="100%">}}
 
@@ -104,8 +104,9 @@ container_image:
 The following instructions turn on [Software Bill of Materials][5] (SBOM) collection for [Cloud Security Vulnerabilities][8]. SBOM collection enables automatic detection of container image vulnerabilities. Vulnerabilities are evaluated and scanned against your containers every hour.
 
 **Notes**:
-- The Cloud Security Vulnerabilities feature is not available for AWS Fargate or Windows environments.
 - SBOM collection is not compatible with the image streaming feature in Google Kubernetes Engine (GKE). To disable it, see the [Disable Image streaming][11] section of the GKE docs.
+- The Cloud Security Vulnerabilities feature is available for Amazon ECS Fargate with [Amazon ECR agentless scanning][13].
+- The Cloud Security Vulnerabilities feature is not available for containers running on Windows environments.
 
 {{< tabs >}}
 {{% tab "Kubernetes (Operator)" %}}
@@ -243,3 +244,4 @@ Tag and enrich your container images with arbitrary tags by using [extract label
 [9]: https://app.datadoghq.com/container-images/image-trends
 [11]: https://cloud.google.com/kubernetes-engine/docs/how-to/image-streaming#disable
 [12]: /integrations/amazon_web_services/#resource-collection
+[13]: /security/cloud_security_management/setup/agentless_scanning/compatibility

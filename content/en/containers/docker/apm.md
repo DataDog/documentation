@@ -277,12 +277,13 @@ end
 
 {{< programming-lang lang="go" >}}
 
+{{% tracing-go-v2 %}}
+
 ```go
 package main
 
 import (
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {

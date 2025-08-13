@@ -3,13 +3,6 @@ title: User Monitoring and Protection
 aliases:
   - /security_platform/application_security/add-user-info
   - /security/application_security/add-user-info
-further_reading:
-- link: "/security/application_security/"
-  tag: "Documentation"
-  text: "Protect against threats with Datadog App and API Protection"
-- link: "/security/application_security/threats/library_configuration/"
-  tag: "Documentation"
-  text: "Other setup considerations and configuration options"
 ---
 
 ## Overview
@@ -116,14 +109,13 @@ For information and options, read [the .NET tracer documentation][1].
 
 {{< programming-lang lang="go" >}}
 
-The Go tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For more options, see [the Go tracer documentation][1] (or [v2 documentation][2]).
+The Go tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For more options, see [the Go tracer documentation][2] (or [v1 documentation][1]).
 
-This example shows how to retrieve the current tracer span, use it to set user monitoring tags, and enable user blocking capability:
+This example shows how to retrieve the current tracer span, use it to set user monitoring tags, and enable user blocking capability. {{% tracing-go-v2 %}}
 
 ```go
 import (
-  "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/appsec // 2.x
+  "github.com/DataDog/dd-trace-go/v2/appsec"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -137,6 +129,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#SetUser
 [2]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#SetUser
+
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
@@ -277,9 +270,38 @@ For information and options, read [the Node.js tracer documentation][1].
 
 {{< programming-lang lang="python" >}}
 
-Monitor authenticated requests by adding user information to the trace with the `set_user` function provided by the Python tracer package.
+Starting in dd-trace-py v3.7, you can use the new Python tracer's SDK to track users and user events.
 
-This example shows how to set user monitoring tags and enable user blocking capability:
+In previous versions, you can monitor authenticated requests by adding user information to the trace with the `set_user` function provided by the Python tracer package.
+
+{{% collapse-content title="User Tracking SDK" level="h4" expanded="true" id="python-user-info-sdk" %}}
+
+Starting in dd-trace-py v3.7, this example shows how to set user monitoring tags and enable user blocking capability:
+
+```python
+from ddtrace.appsec.track_user_sdk import track_user
+
+user_login = "some_login"
+# to enable all features (user_id and/or session_id monitoring and blocking), 
+# make sure you provide the corresponding optional arguments
+track_user(
+    user_login,
+    user_id="some_user_id",
+    session_id="session_id",
+    metadata={
+        "name": "John",
+        "email": "test@test.com",
+        "scope": "some_scope",
+        "role": "manager",
+    },
+)
+```
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Legacy API" level="h4" expanded="false" id="python-user-info-legacy" %}}
+
+This example shows how to set user monitoring tags and enable user blocking capability using the legacy API; however, using the new User Tracking SDK, described above, is encouraged.
 
 ```python
 from ddtrace.contrib.trace_utils import set_user
@@ -289,6 +311,8 @@ user_id = "some_user_id"
 set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope",
          role="manager", session_id="session_id", propagate=True)
 ```
+
+{{% /collapse-content %}}
 
 {{< /programming-lang >}}
 
@@ -461,13 +485,12 @@ void OnUserSignupComplete(string userId, ...)
 
 Starting in dd-trace-go v1.47.0, you can use the Go tracer's API to track user events.
 
-The following examples show how to track login events or custom events (using signup as an example).
+The following examples show how to track login events or custom events (using signup as an example). {{% tracing-go-v2 %}}
 
 {{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```go
 import (
-  "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/appsec" // 2.x
+  "github.com/DataDog/dd-trace-go/v2/appsec"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -488,8 +511,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{% collapse-content title="Login failure" level="h4" expanded="false" id="go-login-failure" %}}
 ```go
 import (
-  "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/appsec" // 2.x
+  "github.com/DataDog/dd-trace-go/v2/appsec"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -506,8 +528,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{% collapse-content title="Custom business logic" level="h4" expanded="false" id="go-custom-business" %}}
 ```go
 import (
-  "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/appsec" // 2.x
+  "github.com/DataDog/dd-trace-go/v2/appsec"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -522,46 +543,100 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-Starting in dd-trace-rb v1.9.0, you can use the Ruby tracer's API to track user events.
+Starting in dd-trace-rb v1.9.0, you can use the Ruby tracer's API to track user events. Version v2.19.0 of dd-trace-rb introduces new methods under the `Datadog::Kit::AppSec::Events::V2` namespace. Existing event tracking methods are retained for compatibility.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
-Traces containing login success/failure events can be queried using the following query `@appsec.security_activity:business_logic.users.login.success` or `@appsec.security_activity:business_logic.users.login.failure`.
-
 {{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```ruby
-require 'datadog/kit/appsec/events'
+require 'datadog/kit/appsec/events/v2'
 
-trace = Datadog::Tracing.active_trace
-# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
-Datadog::Kit::AppSec::Events.track_login_success(trace, user: { id: 'my_user_id' }, { 'usr.login': 'my_user_email' })
+login = 'user@some.com'
+user = 'some-user-id'    # any unique string identifier (i.e. id, username or email)
+user = {                 # or user could be a Hash with an id and other fields
+  id: 'some-user-id',    # id is mandatory
+  email: 'user@some.com' # other fields are optional
+}
+metadata = { 'some.key': 'value' } # any arbitrary key-value pairs
+
+Datadog::Kit::AppSec::Events::V2.track_user_login_success(login, user, metadata)
 ```
 {{% /collapse-content %}}
 
 {{% collapse-content title="Login failure" level="h4" expanded="false" id="ruby-login-failure" %}}
 ```ruby
-require 'datadog/kit/appsec/events'
-trace = Datadog::Tracing.active_trace
+require 'datadog/kit/appsec/events/v2'
 
-# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
+login = 'user@some.com' # the string used by the user to log in
+user_exists = true      # if the user login exists in database for example
+metadata = { 'some.key': 'value' } # any arbitrary key-value pairs
 
-# if the user exists
-Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: true, { 'usr.login': 'my_user_email' })
-
-# if the user doesn't exist
-Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: false, { 'usr.login': 'my_user_email' })
+Datadog::Kit::AppSec::Events::V2.track_user_login_failure(login, user_exists, metadata)
 ```
 {{% /collapse-content %}}
 
 {{% collapse-content title="Custom business logic" level="h4" expanded="false" id="ruby-custom-business" %}}
 ```ruby
 require 'datadog/kit/appsec/events'
+
+span = nil
 trace = Datadog::Tracing.active_trace
+metadata = { 'usr.id': 'some-user-id' }
+event_name = 'users.signup'
 
-# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
+Datadog::Kit::AppSec::Events.track(event_name, trace, span, metadata)
+```
+{{% /collapse-content %}}
 
-# Leveraging custom business logic tracking to track user signups
-Datadog::Kit::AppSec::Events.track('users.signup', trace, nil, { 'usr.id': 'my_user_id'})
+#### Migrating to the new login success and failure methods
+
+The new methods in `Datadog::Kit::AppSec::Events::V2` introduce a more intuitive parameter order and clearer separation of concerns. Here are the key changes:
+
+1. The login identifier (email, username) is the first parameter and is mandatory.
+2. The user object/ID is optional in success events and has been removed from failure events.
+3. Metadata has been simplified and no longer requires the `usr.login` field.
+4. The trace and span parameters are no longer required and are automatically inferred.
+
+**Note**: the legacy methods `track_login_success` and `track_login_failure` are deprecated in favor of the new methods `track_user_login_success` and `track_user_login_failure`, respectively.
+
+In the following example, the commented code is no longer necessary.
+
+{{% collapse-content title="Login success" level="h4" expanded="true" id="ruby-v2-migration-login-success" %}}
+```ruby
+require 'datadog/kit/appsec/events/v2'
+
+login = 'user@some.com' # new mandatory argument
+user = {                # same as before, but now the Hash is optional
+  id: 'some-user-id',   # providing a user ID will nonetheless help with post-compromised activity correlation
+  email: 'user@some.com'
+}
+metadata = {
+# 'usr.login': 'user@some.com', this is no longer necessary in metadata, but became the required first parameter
+  'some.key': 'value'
+}
+
+# deprecated
+# Datadog::Kit::AppSec::Events.track_login_success(trace, span, user: user, **metadata)
+
+Datadog::Kit::AppSec::Events::V2.track_user_login_success(login, user, metadata)
+```
+{{% /collapse-content %}}
+
+{{% collapse-content title="Login failure" level="h4" expanded="false" id="ruby-v2-migration-login-failure" %}}
+```ruby
+require 'datadog/kit/appsec/events/v2'
+
+login = 'user@some.com' # new mandatory argument
+user_exists = true      # if the user login exists in database for example
+metadata = {
+# 'usr.login': 'user@some.com', this is no longer necessary in metadata, but became the required first parameter
+  'some.key': 'value'
+}
+
+# deprecated
+# Datadog::Kit::AppSec::Events.track_login_failure(trace, span, user_exists: user_exists, user_id: login, **metadata)
+
+Datadog::Kit::AppSec::Events::V2.track_user_login_failure(login, user_exists, metadata)
 ```
 {{% /collapse-content %}}
 
@@ -711,38 +786,219 @@ tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata)
 
 {{< programming-lang lang="python" >}}
 
+
 Starting in dd-trace-py v1.9.0, you can use the Python tracer's API to track user events.
 
-The following examples show how to track login events or custom events (using signup as an example).
+Starting in dd-trace-py v3.7, you can use the new Python tracer's SDK to track users and user events.
 
-{{% collapse-content title="Login success" level="h4" expanded="true" %}}
+The following examples show how to track login events, signup events, or custom events.
+
+{{% collapse-content title="User Tracking SDK" level="h4" expanded="true" id="python-business-logic-sdk" %}}
+
+Available since dd-trace-py v3.7, `track_user_sdk` provides 5 functions:
+
+- `track_login_success`
+- `track_login_failure`
+- `track_signup`
+- `track_custom_event`
+- `track_user`
+
+```python
+from ddtrace.appsec import track_user_sdk
+
+## This function should be called when a user successfully logs in to the
+# application.
+
+# user_id and metadata are optional
+metadata = {"usr.email": "user@email.com"}
+track_user_sdk.track_login_success(
+    "some_user_login",
+    user_id="some_user_id",
+    metadata=metadata,
+)
+
+
+## This function should be called when a user fails to log in to the
+# application.
+
+# user_id and metadata are optional
+metadata = {"usr.error": "login failure"}
+
+# If you want to track the login failure as a "login do not exists"
+exists = False
+track_user_sdk.track_login_failure(
+    "some_user_login",
+    exists,
+    metadata=metadata,
+)
+
+# If you want to track the login failure as a "login exists but
+# authentification failed
+exists = True
+track_user_sdk.track_login_failure(
+    "some_user_login",
+    exists,
+    user_id="some_user_id",
+    metadata=metadata,
+)
+
+
+## This function should be called when a user successfully signs up for
+# the application.
+
+# user_id, success and metadata are optional, success is True by default.
+metadata = {"usr.email": "user@email.com"}
+track_user_sdk.track_signup(
+    "some_user_login",
+    user_id="some_user_id",
+    success=True,
+    metadata=metadata,
+)
+
+
+## This function should be called when a custom user event occurs in the
+# application.
+
+# metadata is required
+metadata = {
+    "usr.address": {"line1": "221b Baker Street", "city": "London"},
+    "phone": "0123456789",
+}
+track_user_sdk.track_custom_event("my_event_name", metadata)
+
+```
+{{% /collapse-content %}}
+
+{{% collapse-content title="FastAPI Toy App with SDK" level="h4" expanded="false" id="python-business-logic-example" %}}
+
+The following example is a fully functioning Toy application that uses the User Tracking SDK with a memory-based user database. This example illustrates the possible usage of the SDK but does not provide the necessary requirements of a real application, such as a persistent data model or a secure authentication system.
+
+```python
+from uuid import uuid4
+
+import ddtrace.auto  # noqa: F401
+from ddtrace.appsec.track_user_sdk import (
+    track_custom_event,
+    track_login_failure,
+    track_login_success,
+    track_signup,
+    track_user,
+)
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel
+from starlette.middleware.sessions import SessionMiddleware
+
+
+class User(BaseModel):
+    user_id: str
+    username: str
+    password: str
+
+
+users: dict[str, User] = {}
+
+app = FastAPI()
+
+
+@app.middleware("http")
+async def track_user_middleware(request: Request, call_next):
+    user = request.session.get("username")
+    session_id = request.session.get("session_id")
+    if user and session_id and user in users:
+        track_user(user, users[user].user_id, session_id=session_id)
+    return await call_next(request)
+
+
+session_secret = "just-a-test"
+app.add_middleware(SessionMiddleware, secret_key=session_secret)
+
+
+@app.post("/signup")
+async def signup(username: str, password: str):
+    if username in users:
+        return JSONResponse(
+            {"error": "User already exists"},
+            status_code=400,
+        )
+
+    user_id = str(uuid4())
+    users[username] = User(
+        user_id=user_id,
+        username=username,
+        password=password,
+    )
+
+    track_signup(username, user_id, success=True)
+    return {"message": "User created successfully"}
+
+
+@app.post("/login")
+async def login(username: str, password: str, request: Request):
+    if username not in users:
+        track_login_failure(username, False)
+        return JSONResponse(
+            {"error": "Invalid user password combination"},
+            status_code=403,
+        )
+
+    if users[username].password != password:
+        track_login_failure(username, True, users[username].user_id)
+        return JSONResponse(
+            {"error": "Invalid user password combination"},
+            status_code=403,
+        )
+
+    track_login_success(username, users[username].user_id)
+    request.session["username"] = username
+    request.session["session_id"] = str(uuid4())
+
+    return {"message": "Login successful"}
+
+
+@app.get("/whoami")
+async def whoami(request: Request) -> User:
+    if (
+        "username" not in request.session
+        or request.session["username"] not in users
+    ):
+        raise HTTPException(status_code=403, detail="User not logged in")
+
+    track_custom_event(
+        "user_has_forgotten_who_they_are",
+        metadata={
+            "username": request.session["username"],
+            "session_id": request.session["session_id"],
+        },
+    )
+    return users[request.session["username"]]
+```
+
+{{% /collapse-content %}}
+
+
+{{% collapse-content title="Legacy API" level="h4" expanded="false" id="python-business-logic-legacy" %}}
+
+The preferred method is to use the new User Tracking SDK (available since dd-trace-py v1.9) instead of the Legacy API.
+
 ```python
 from ddtrace.appsec.trace_utils import track_user_login_success_event
+from ddtrace.appsec.trace_utils import track_user_login_failure_event
+from ddtrace.appsec.trace_utils import track_custom_event
 from ddtrace import tracer
 metadata = {"usr.login": "user@email.com"}
 # name, email, scope, role, session_id and propagate are optional arguments which
 # default to None except propagate that defaults to True. They'll be
 # passed to the set_user() function
 track_user_login_success_event(tracer, "userid", metadata)
-```
-{{% /collapse-content %}}
 
-{{% collapse-content title="Login failure" level="h4" expanded="false" id="python-login-failure" %}}
-```python
-from ddtrace.appsec.trace_utils import track_user_login_failure_event
-from ddtrace import tracer
-metadata = {"usr.login": "user@email.com"}
+
 # exists indicates if the failed login user exists in the system
 exists = False
 # if no numeric userId is available, any unique identifier will do (username, email...)
 track_user_login_failure_event(tracer, "userid", exists, metadata)
-```
-{{% /collapse-content %}}
 
-{{% collapse-content title="Custom business logic" level="h4" expanded="false" id="python-custom-business" %}}
-```python
-from ddtrace.appsec.trace_utils import track_custom_event
-from ddtrace import tracer
+
 metadata = {"usr.id": "userid"}
 event_name = "users.signup"
 track_custom_event(tracer, event_name, metadata)
@@ -768,7 +1024,7 @@ This will open a menu in which you may define your custom WAF rule. By selecting
 Once saved, the rule is deployed to instances of the service that have Remote Configuration enabled.
 
 
-[1]: /agent/remote_config?tab=configurationyamlfile#application-security-management-asm
+[1]: /tracing/guide/remote_config
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
 
 ## Automatic user activity event tracking
@@ -828,10 +1084,6 @@ To disable automated user activity detection through your [AAP Software Catalog]
 
 For manual configuration, you can set the environment variable `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` to `false` on your service and restart it. This must be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [3]: /tracing/trace_collection/custom_instrumentation/
 [4]: /security/default_rules/bl-rate-limiting/
 [5]: /security/default_rules/bl-privilege-violation-user/
@@ -844,4 +1096,4 @@ For manual configuration, you can set the environment variable `DD_APPSEC_AUTOMA
 [12]: /security/default_rules/appsec-ato-bf/
 [13]: /security/default_rules/distributed-ato-ua-asn/
 [14]: https://app.datadoghq.com/security/appsec/inventory/services?tab=capabilities
-[15]: /agent/remote_config/
+[15]: /tracing/guide/remote_config

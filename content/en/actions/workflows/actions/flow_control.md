@@ -15,10 +15,6 @@ further_reading:
   text: "Learn about integrations"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Use [Logic actions][1] to add control logic to your workflow. For example, you can branch from a condition, perform an action iteratively, include a sleep interval, and more.
 
 ## If condition
