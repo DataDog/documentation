@@ -81,7 +81,7 @@ Log Management usage metrics come with three tags that can be used for more gran
 | Tag                     | Description                                                           |
 | ----------------------- | --------------------------------------------------------------------- |
 |  `datadog_index`        | Indicates the routing query that matches a log to an intended index.  |
-|  `datadog_is_excluded`  | Indicates whether or not a log matches an exclusion query. **Note**: The `datadog_is_excluded` field can have a value of N/A. This indicates that the log was ingested but didn't match any inclusion or exclusion criteria defined in an index. Meaning the log wasn't explicitly routed to any index.           |
+|  `datadog_is_excluded`  | Indicates whether or not a log matches an exclusion query. **Note**: The `datadog_is_excluded` field can have a value of `N/A`. This indicates that the log was ingested, but didn't match any inclusion or exclusion criteria defined in an index. This means the log wasn't explicitly routed to any index.           |
 |  `service`              | The service attribute of the log event.                               |
 
 An extra `status` tag is available on the `datadog.estimated_usage.logs.ingested_events` metric to reflect the log status (`info`, `warning`, etc.).
