@@ -119,7 +119,7 @@ Use this option if direct remote authentication is not available for you. After 
 
 ### Authentication
 
-The MCP Server uses OAuth 2.0 for [authentication][8]. If you cannot go through the OAuth flow (for example, on a server), you can provide a Datadog [API key and application key][9] as variables in the header of the MCP Server configuration.
+The MCP Server uses OAuth 2.0 for [authentication][8]. If you cannot go through the OAuth flow (for example, on a server), you can provide a Datadog [API key and application key][9] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers. For example:
 
 {{< code-block lang="json" >}}
 {
@@ -222,7 +222,7 @@ Retrieves detailed information about an incident.
 - "What's the status of incident ABC123?"
 - "Retrieve full information about the Redis incident from yesterday."
 
-**Note**: The tool is operational but does not include incident timeline data.
+**Note**: The tool is operational, but does not include incident timeline data.
 
 ### `get_metrics`
 Queries and analyzes historical or real-time metric data, supporting custom queries and aggregations.
