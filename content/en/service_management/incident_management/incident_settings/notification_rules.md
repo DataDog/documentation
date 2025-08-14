@@ -62,3 +62,4 @@ When defining a notification rule's recipients, you can use `@` handles for any 
 [4]: /service_management/on-call/
 [5]: /actions/workflows/
 [6]: /integrations/webhooks/
+[7]: /service_management/on-call/
