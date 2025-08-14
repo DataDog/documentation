@@ -11,7 +11,7 @@ further_reading:
 
 [Data Jobs Monitoring][7] gives visibility into the performance and reliability of your Apache Spark and Databricks jobs.
 
-{{< callout url="https://www.datadoghq.com/product-preview/databricks-serverless-job-monitoring" custom_class="sign-up-trigger" btn_hidden="false" header="Join the Preview: Databricks Serverless Job Monitoring">}}
+{{< callout url="https://www.datadoghq.com/product-preview/databricks-serverless-job-monitoring" btn_hidden="false" header="Join the Preview: Databricks Serverless Job Monitoring">}}
 Databricks Serverless Job Monitoring helps you detect issues with jobs running on Serverless or SQL Warehouse compute. Complete the form to request access.
 {{< /callout >}}
 
