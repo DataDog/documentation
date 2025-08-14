@@ -7664,8 +7664,8 @@ menu:
       parent: pa_charts
       identifier: pa_funnel_analysis
       weight: 102
-    - name: User Retention
-      url: product_analytics/charts/user_retention
+    - name: Retention Analysis
+      url: product_analytics/charts/retention_analysis
       parent: pa_charts
       identifier: pa_user_retention
       weight: 103
