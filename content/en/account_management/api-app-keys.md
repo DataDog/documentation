@@ -26,7 +26,7 @@ The recommended best practice for scoping application keys is to grant your keys
 
 - Users or service accounts with [permissions][3] to create or edit application keys can scope application keys. A user must have the `user_app_keys` permission to scope their own application keys, or the `org_app_keys_write` permission to scope application keys owned by any user in their organization. A user must have the `service_account_write` permission to scope application keys for service accounts.
 - Application owners cannot authorize an application if they are missing any required permissions, even if they scope an application key with authorization scopes that they do not have.
-- Errors due to missing permissions when writing application keys or authorizing applications will display a `403 Forbidden` error. More information about various error responses can be found in the [Datadog API][4] documentation.
+- Errors due to missing permissions when writing application keys or authorizing applications display a `403 Forbidden` error. More information about various error responses can be found in the [Datadog API][4] documentation.
 - If a user's role or permissions change, authorization scopes specified for their application keys remain unchanged.
 
 ### Actions API access
