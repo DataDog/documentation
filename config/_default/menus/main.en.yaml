@@ -309,40 +309,20 @@ menu:
       url: agent/basic_agent_usage/aix/
       weight: 101
       parent: basic_agent_usage
-    - name: Amazon Linux
-      identifier: basic_agent_usage_amazon_linux
-      url: agent/basic_agent_usage/amazonlinux/
+    - name: Linux
+      identifier: basic_agent_usage_linux
+      url: agent/basic_agent_usage/linux/
       weight: 102
-      parent: basic_agent_usage
-    - name: Alma Linux
-      identifier: basic_agent_usage_alma_linux
-      url: agent/basic_agent_usage/alma/
-      weight: 103
       parent: basic_agent_usage
     - name: Ansible
       identifier: basic_agent_usage_ansible
       url: agent/basic_agent_usage/ansible/
       parent: basic_agent_usage
       weight: 104
-    - name: CentOS
-      identifier: basic_agent_usage_centos
-      url: agent/basic_agent_usage/centos/
-      weight: 105
-      parent: basic_agent_usage
     - name: Chef
       identifier: basic_agent_usage_chef
       url: agent/basic_agent_usage/chef/
       weight: 106
-      parent: basic_agent_usage
-    - name: Debian
-      identifier: basic_agent_usage_deb
-      url: agent/basic_agent_usage/deb/
-      weight: 107
-      parent: basic_agent_usage
-    - name: Fedora
-      identifier: basic_agent_usage_fedora
-      url: agent/basic_agent_usage/fedora/
-      weight: 108
       parent: basic_agent_usage
     - name: Heroku
       identifier: basic_agent_usage_heroku
@@ -354,25 +334,10 @@ menu:
       url: agent/basic_agent_usage/osx/
       weight: 110
       parent: basic_agent_usage
-    - name: Oracle Linux
-      identifier: basic_agent_usage_oracle
-      url: agent/basic_agent_usage/oracle/
-      weight: 111
-      parent: basic_agent_usage
     - name: Puppet
       identifier: basic_agent_usage_puppet
       url: agent/basic_agent_usage/puppet/
       weight: 112
-      parent: basic_agent_usage
-    - name: Red Hat
-      identifier: basic_agent_usage_redhat
-      url: agent/basic_agent_usage/redhat/
-      weight: 113
-      parent: basic_agent_usage
-    - name: Rocky Linux
-      identifier: basic_agent_usage_rockylinux
-      url: agent/basic_agent_usage/rocky/
-      weight: 114
       parent: basic_agent_usage
     - name: SaltStack
       identifier: basic_agent_usage_saltstack
@@ -383,16 +348,6 @@ menu:
       identifier: basic_agent_usage_sccm
       url: agent/basic_agent_usage/sccm/
       weight: 116
-      parent: basic_agent_usage
-    - name: SUSE
-      identifier: basic_agent_usage_suse
-      url: agent/basic_agent_usage/suse/
-      weight: 117
-      parent: basic_agent_usage
-    - name: Ubuntu
-      identifier: basic_agent_usage_ubuntu
-      url: agent/basic_agent_usage/ubuntu/
-      weight: 118
       parent: basic_agent_usage
     - name: Windows
       identifier: basic_agent_usage_windows
@@ -845,31 +800,36 @@ menu:
       identifier: otel_kafka_metrics
       parent: otel_integrations
       weight: 809
+    - name: Kubernetes Metrics
+      url: opentelemetry/integrations/kubernetes_metrics/
+      identifier: otel_kubernetes_metrics
+      parent: otel_integrations
+      weight: 810
     - name: MySQL Metrics
       url: opentelemetry/integrations/mysql_metrics/
       identifier: otel_mysql_metrics
       parent: otel_integrations
-      weight: 810
+      weight: 811
     - name: NGINX Metrics
       url: opentelemetry/integrations/nginx_metrics/
       identifier: otel_nginx_metrics
       parent: otel_integrations
-      weight: 811
+      weight: 812
     - name: Podman Metrics
       url: opentelemetry/integrations/podman_metrics/
       identifier: otel_podman_metrics
       parent: otel_integrations
-      weight: 812
+      weight: 813
     - name: Runtime Metrics
       url: opentelemetry/integrations/runtime_metrics/
       identifier: otel_runtime_metrics
       parent: otel_integrations
-      weight: 813
+      weight: 814
     - name: Trace Metrics
       url: opentelemetry/integrations/trace_metrics/
       identifier: otel_trace_metrics
       parent: otel_integrations
-      weight: 814
+      weight: 815
     - name: Troubleshooting
       url: opentelemetry/troubleshooting/
       identifier: otel_troubleshooting
@@ -2144,6 +2104,11 @@ menu:
       parent: idp_eng_reports
       identifier: eng_reports_dora_metrics
       weight: 403
+    - name: External Provider Status
+      url: internal_developer_portal/external_provider_status
+      parent: internal_developer_portal
+      identifier: external_provider_status
+      weight: 5
     - name: Integrations
       url: internal_developer_portal/integrations
       parent: internal_developer_portal
@@ -2408,16 +2373,21 @@ menu:
       parent: incidents
       identifier: incident_describe
       weight: 2
+    - name: Response Team
+      url: service_management/incident_management/response_team
+      parent: incidents
+      identifier: response_team
+      weight: 3
     - name: Notification
       url: service_management/incident_management/notification
       parent: incidents
       identifier: incident_notification
-      weight: 3
+      weight: 4
     - name: Investigate an Incident
       url: service_management/incident_management/investigate
       parent: incidents
       identifier: incident_investigate
-      weight: 4
+      weight: 5
     - name: Timeline
       url: service_management/incident_management/investigate/timeline
       parent: incident_investigate
@@ -2427,7 +2397,7 @@ menu:
       url: service_management/incident_management/incident_settings
       parent: incidents
       identifier: incidents_settings
-      weight: 5
+      weight: 6
     - name: Information
       url: service_management/incident_management/incident_settings/information
       parent: incidents_settings
@@ -2462,17 +2432,17 @@ menu:
       url: service_management/incident_management/analytics
       parent: incidents
       identifier: analytics
-      weight: 6
+      weight: 7
     - name: Datadog Clipboard
       url: service_management/incident_management/datadog_clipboard
       parent: incidents
       identifier: incidents_clipboard
-      weight: 7
+      weight: 8
     - name: Guides
       url: service_management/incident_management/guides
       parent: incidents
       identifier: incidents_guide
-      weight: 10
+      weight: 9
     - name: On-Call
       url: service_management/on-call/
       pre: on-call
@@ -2519,16 +2489,11 @@ menu:
       parent: oncall
       identifier: oncall_profile_settings
       weight: 7
-    - name: Cross-org Paging
-      url: service_management/on-call/x_org_paging/
-      parent: oncall
-      identifier: oncall_x_org_paging
-      weight: 8
     - name: Guides
       url: service_management/on-call/guides/
       parent: oncall
       identifier: oncall_guides
-      weight: 9
+      weight: 8
     - name: Status Pages
       url: service_management/status_pages/
       pre: status-page-wui
@@ -2646,26 +2611,31 @@ menu:
       identifier: event_explorer_saved_views
       parent: events_explorer
       weight: 308
+    - name: Triage Inbox
+      identifier: event_triage_inbox
+      url: service_management/events/triage_inbox
+      parent: events
+      weight: 4
     - name: Correlation
       url: service_management/events/correlation/
       identifier: event_correlation
       parent: events
-      weight: 4
+      weight: 5
     - name: Configuration
       url: service_management/events/correlation/configuration
       identifier: event_correlation_configure
       parent: event_correlation
-      weight: 401
+      weight: 501
     - name: Triaging & Notifying
       url: service_management/events/correlation/triage_and_notify
       identifier: event_correlation_triage_and_notify
       parent: event_correlation
-      weight: 402
+      weight: 502
     - name: Analytics
       url: service_management/events/correlation/analytics
       identifier: event_correlation_analytics
       parent: event_correlation
-      weight: 403
+      weight: 503
     - name: Guides
       url: service_management/events/guides/
       identifier: events_guides
@@ -5752,13 +5722,6 @@ menu:
       url: logs/log_configuration/forwarding_custom_destinations/
       parent: log_configuration
       weight: 211
-    - name: PCI Compliance
-      identifier: log_pci_compliance
-      url: data_security/pci_compliance/
-      parent: log_management
-      weight: 3
-      params:
-        skip: true
     - name: Log Explorer
       url: logs/explorer/
       parent: log_management

@@ -1,5 +1,6 @@
 ---
 title: Cross-org Paging
+private: true
 further_reading:
 - link: '/service_management/on-call/'
   tag: 'Documentation'
