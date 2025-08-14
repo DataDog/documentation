@@ -166,7 +166,7 @@ A service is an independent, deployable code repository that maps to a set of pa
 
 Call the initialization command to start tracking. The below parameters are available.
 
-**Required**
+##### Required
 
 These parameters are essential for the Browser SDK to function. You must provide both values to initialize Error Tracking.
 
@@ -175,7 +175,7 @@ These parameters are essential for the Browser SDK to function. You must provide
 | `applicationId` | String | - | The application ID. |
 | `clientToken` | String | - | A [Datadog client token][10]. |
 
-**Core configuration**
+##### Core configuration
 
 These parameters define your application's identity and environment. They're used for unified service tagging and help organize your data across Datadog products.
 
@@ -186,7 +186,7 @@ These parameters define your application's identity and environment. They're use
 | `site` | String | `datadoghq.com` | [The Datadog site parameter of your organization][11]. |
 | `version` | String | - | The application's version (e.g., 1.2.3, 6c44da20). Follows the [tag syntax requirements][12]. |
 
-**Privacy and consent**
+##### Privacy and consent
 
 These parameters control how user data is collected and protected. Configure them based on your privacy requirements and compliance needs.
 
@@ -196,7 +196,7 @@ These parameters control how user data is collected and protected. Configure the
 | `enablePrivacyForActionName` | Boolean | `false` | See [Mask Action Names][17]. |
 | `trackingConsent` | `"granted"` or `"not-granted"` | `"granted"` | Set the initial user tracking consent state. See [User Tracking Consent][13]. |
 
-**Tracking and collection**
+##### Tracking and collection
 
 These parameters control what data is automatically collected from user interactions and pageviews. Enable them based on your monitoring needs.
 
@@ -208,7 +208,7 @@ These parameters control what data is automatically collected from user interact
 | `trackUserInteractions` | Boolean | `false` | Enables [automatic collection of user actions][15]. |
 | `trackViewsManually` | Boolean | `false` | Allows you to control views creation. See [override default view names][14]. |
 
-**Advanced configuration**
+##### Advanced configuration
 
 These parameters provide fine-grained control over SDK behavior, networking, and performance. Use them for advanced use cases and custom configurations.
 
@@ -220,7 +220,7 @@ These parameters provide fine-grained control over SDK behavior, networking, and
 | `silentMultipleInit` | Boolean | `false` | Initialization fails silently if the RUM Browser SDK is already initialized. |
 | `workerUrl` | String | - | URL pointing to the Datadog Browser SDK Worker JavaScript file. See [Content Security Policy guidelines][22]. |
 
-**Context and storage**
+##### Context and storage
 
 These parameters control how user context and application state are preserved across page navigation and browser sessions.
 
@@ -229,7 +229,7 @@ These parameters control how user context and application state are preserved ac
 | `allowUntrustedEvents` | Boolean | `false` | Allow capture of [untrusted events][24], for example in automated UI tests. |
 | `storeContextsAcrossPages` | Boolean | `false` | Store global context and user context in `localStorage` to preserve them along user navigation. See [Contexts life cycle][23]. |
 
-**Logs Browser SDK compatibility options**
+##### Logs Browser SDK compatibility options
 
 These parameters ensure compatibility when using both the RUM Browser SDK and Logs Browser SDK together. They must have matching configuration values across both SDKs to maintain consistent session tracking and data correlation.
 
@@ -256,7 +256,6 @@ Now that you've completed the basic setup for Browser Error Tracking, your appli
 Visualize the [data collected][7] in [dashboards][8] or create a search query in Error Tracking.
 
 Until Datadog starts receiving data, your application appears as `pending` on the **Applications** page.
-
 
 ## Advanced features (optional)
 
