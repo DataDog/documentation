@@ -25,9 +25,13 @@ You can manage notification rules in [Incident Settings Notification Rules][1], 
 
 Under **When an incident is...**, select a trigger and define rule conditions:
 
-When the trigger is `Declared`, the notification rule fires whenever an incident is declared that meets the conditions. If there are no conditions defined, the rule fires whenever an incident is declared.
-  
-When the trigger is `Declared or attributes are updated`, the rule also fires whenever it is changed to meet the conditions. It also fires whenever any of the fields listed under `Renotify on updates to...` are changed and the incident already meets the conditions. Conditions are joined by AND across fields and OR within fields. 
+| Condition                              | When the Rule Sends a Notification                                                                                                                                                                                                                     |
+|--------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Declared`                           | Sends a notification when an incident is declared and meets the defined conditions. If no conditions are defined, it sends a notification for every incident declaration.                                                                              |
+| `Declared or attributes are updated` | Sends a notification when an incident is declared or updated in a way that causes it to meet the conditions. Also sends a notification when any field listed under **Renotify on updates to...** is changed and the incident already meets the conditions. Conditions are joined by `AND` across fields and `OR` within each field. |
+
+
+
 
 For example, consider a rule that has conditions `severity:SEV-1` and `severity:SEV-2` and `team:shopping` and renotify fields `state` and `service`. This rule fires whenever you...
 
