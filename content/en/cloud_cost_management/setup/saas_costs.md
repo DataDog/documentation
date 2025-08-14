@@ -148,10 +148,17 @@ Notes:
 {{% tab "Databricks" %}}
 
 1. Navigate to the [Databricks integration tile][101] in Datadog and click **Configure**.
-2. Enter the workspace name, url, and access token corresponding to your Databricks account.
+2. Enter the workspace name, url, client ID, and client secret corresponding to your Databricks service principal.
 3. Under the **Select products to set up integration** section, click the toggle for each account to enable Databricks `Cloud Cost Management`.
 4. Enter a `System Tables SQL Warehouse ID` corresponding to your Databricks instance's warehouse to query for system table billing data.
 5. Click **Save Databricks Workspace**.
+
+Your service principal requires read access to the [system tables](https://docs.databricks.com/aws/en/admin/system-tables/) within Unity Catalog.
+```sql
+GRANT USE CATALOG ON CATALOG system TO <service_principal>;
+GRANT USE SCHEMA ON CATALOG system TO <service_principal>;
+GRANT SELECT ON CATALOG system TO <service_principal>;
+```
 
 Your Databricks cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
