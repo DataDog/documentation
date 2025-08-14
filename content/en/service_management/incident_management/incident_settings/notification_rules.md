@@ -23,7 +23,7 @@ You can manage notification rules in [Incident Settings Notification Rules][1], 
 
 ### Triggers and conditions
 
-First, select a trigger and define rule conditions.
+Under **When an incident is...**, select a trigger and define rule conditions:
 
 When the trigger is `Declared`, the notification rule fires whenever an incident is declared that meets the conditions. If there are no conditions defined, the rule fires whenever an incident is declared.
   
