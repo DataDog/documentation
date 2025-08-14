@@ -46,7 +46,7 @@ Datadog Synthetic Monitoring enables proactive monitoring of web applications an
 
 For API tests, you must also configure the Domain field by navigating to **Create/Edit API Test** > **Define Request** > **Advanced Options** > **Authentication**.
 
-   {{< img src="synthetics/guide/api_test_kerberos.png" alt="API Test creation with the Advanced options expanded, highlighting the Authentication tab and Kerberos authentication type" style="width:80%;" >}}
+   {{< img src="synthetics/guide/kerberos-authentication/api_test_kerberos.png" alt="API Test creation with the Advanced options expanded, highlighting the Authentication tab and Kerberos authentication type" style="width:80%;" >}}
 
 ## Further Reading
 
