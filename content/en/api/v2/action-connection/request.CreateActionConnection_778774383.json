@@ -1,0 +1,17 @@
+{
+  "data": {
+    "type": "action_connection",
+    "attributes": {
+      "name": "HTTP Basic Auth Connection exampleactionconnection",
+      "integration": {
+        "type": "HTTP",
+        "base_url": "https://api.example.com",
+        "credentials": {
+          "type": "HTTPBasicAuth",
+          "username": "test-user",
+          "password": "test-password"
+        }
+      }
+    }
+  }
+}

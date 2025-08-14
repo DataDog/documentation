@@ -1,0 +1,28 @@
+{
+  "data": {
+    "type": "action_connection",
+    "attributes": {
+      "name": "HTTP Token Connection exampleactionconnection",
+      "integration": {
+        "type": "HTTP",
+        "base_url": "https://api.example.com",
+        "credentials": {
+          "type": "HTTPTokenAuth",
+          "tokens": [
+            {
+              "name": "ApiKey",
+              "type": "SECRET",
+              "value": "secret-token-value"
+            }
+          ],
+          "headers": [
+            {
+              "name": "Authorization",
+              "value": "Bearer token-value"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
