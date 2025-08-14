@@ -7704,12 +7704,12 @@ components:
       description: The type of the changed resource.
       enum:
       - feature_flag
-      - configuration
+      - metric_configuration
       example: feature_flag
       type: string
       x-enum-varnames:
       - FEATURE_FLAG
-      - CONFIGURATION
+      - METRIC_CONFIGURATION
     ChangeEventAttributesImpactedResourcesItem:
       description: A uniquely identified resource.
       properties:
@@ -7835,12 +7835,12 @@ components:
       description: The type of the resource that was changed.
       enum:
       - feature_flag
-      - configuration
+      - metric_configuration
       example: feature_flag
       type: string
       x-enum-varnames:
       - FEATURE_FLAG
-      - CONFIGURATION
+      - METRIC_CONFIGURATION
     ChangeEventCustomAttributesImpactedResourcesItems:
       additionalProperties: false
       description: Object representing a uniquely identified resource.
