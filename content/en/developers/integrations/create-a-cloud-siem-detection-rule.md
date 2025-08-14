@@ -25,7 +25,7 @@ To enhance security insights for users, partners can create their own out-of-the
 
 In your Datadog sandbox, [create a new rule][4].
 
-<< placeholder image for detection rule home page >>
+{{< img src="developers/integrations/detection_rule.png" alt="The Create a New Rule page in Datadog's Detection Rules area" style="width:100%;" >}}
 
 Follow [best practices](#configuration-best-practices) outlined in this guide to configure the detection rule.
 
@@ -33,7 +33,8 @@ Follow [best practices](#configuration-best-practices) outlined in this guide to
 
 Within your integration in the Integration Developer Platform, navigate to the Content tab. From here, select **Import Detection Rule** to choose from a list of available detection rules. You can select up to 10 detection rules to include with your integration.
 
-<< placeholder image for pub plat content tab >> 
+{{< img src="developers/integrations/content_tab.png" alt="The Content tab in the Developer Platform" style="width:100%;" >}}
+
 
 ## Verify your detection rule in production
 

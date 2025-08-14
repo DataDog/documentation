@@ -19,14 +19,16 @@ Create an out-of-the-box monitor to help users find value in your Datadog integr
 ## Create a monitor
 In your Datadog sandbox, create a monitor.
 
-"placeholder for picture of monitor homepage"
+{{< img src="developers/integrations/new_monitor.png" alt="The Monitors Template list in Datadog" style="width:100%;" >}}
+
 
 Follow the [best practices](#configuration-best-practices) listed in this guide to configure your monitor.
 
 ## Upload your monitor 
 Within your integration in the Integration Developer Platform, navigate to the Content tab. From there, select **import monitor** to choose from a list of available monitors. You can select up to 10 monitors to include with your integration.
 
-<< placeholder for picture of publishing platform content page >> 
+{{< img src="developers/integrations/content_tab.png" alt="The Content tab in the Integration Developer Platform" style="width:100%;" >}}
+ 
 
 ## Verify your monitor in production
 

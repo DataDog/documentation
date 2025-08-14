@@ -191,7 +191,8 @@ Note: Depending on your browser, you may need to adjust your setting to allow fi
 ## Upload your log pipeline
 Navigate to the Integration Developer Platform, and under the **Data** tab > **Submitted logs**, specify the log source and upload the two files exported from the previous step.
 
-"placeholder for image of data page in pub plat"
+{{< img src="developers/integrations/data_tab.png" alt="The Data tab in the Integration Developer Platform" style="width:100%;" >}}
+
 
 
 ## Further reading
