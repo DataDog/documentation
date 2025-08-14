@@ -3,9 +3,10 @@
 {{- with .Site.GetPage $page -}}
     {{ .Content }}
 {{- else -}}
-    {{- if eq (os.Getenv "LOCAL_TRANSLATION_BUILD") "true" -}}
-        {{ warnf "[include-markdown shortcode] Page %s not found in %s (language: %s)" $page .Page.File.Path .Page.Lang }}
-    {{- else -}}
-        {{ errorf "[include-markdown shortcode] Page %s not found in %s (language: %s)" $page .Page.File.Path .Page.Lang }}
-    {{- end -}}
+    {{ warnf "[include-markdown shortcode] Page %s not found in %s (language: %s)" $page .Page.File.Path .Page.Lang }}
+    {{ with where .Site.Sites "Language.Lang" "eq" "en" }}
+        {{ $enSite := index . 0 }}
+        {{ $enPage := $enSite.GetPage $page }}
+        {{ $enPage.Content }}
+    {{ end }}
 {{- end -}}
