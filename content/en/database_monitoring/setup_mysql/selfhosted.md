@@ -172,256 +172,30 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 
 ## Install the Agent
 
-Installing the Datadog Agent also installs the MySQL check, which is required for Database Monitoring on MySQL.
+Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][6].
 
-1. If you haven't installed the Agent yet, see the [Agent installation instructions][6], then return here to configure the MySQL check.
+To configure this check for an Agent running on a host:
 
-2. Follow the instructions below based on how you installed the Agent.
+Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][7] to start collecting your MySQL [metrics](#metric-collection) and [logs](#log-collection-optional). See the [sample mysql.d/conf.yaml][8] for all available configuration options, including those for custom metrics.
 
-{{< tabs >}}
+### Metric collection
 
-{{% tab "Host" %}}
-
-After you've installed the Host Agent, edit the Agent's `conf.d/mysql.d/conf.yaml` file to point the MySQL instance you want to monitor. For a complete list of configuration options, see the [sample mysql.d/conf.yaml][1].
-
-Note that the `datadog` user should be set up in the MySQL integration configuration as `host: 127.0.0.1` instead of `localhost`. Alternatively, you may also use `sock`.
+Add this configuration block to your `mysql.d/conf.yaml` to collect MySQL metrics:
 
 ```yaml
 init_config:
+
 instances:
   - dbm: true
     host: 127.0.0.1
     port: 3306
     username: datadog
-    password: 'ENC[datadog_user_database_password]'
+    password: 'ENC[datadog_user_database_password]' # from the CREATE USER step earlier
 ```
 
-**Note**: If your password includes special characters, wrap it in single quotes.
+Note that the `datadog` user should be set up in the MySQL integration configuration as `host: 127.0.0.1` instead of `localhost`. Alternatively, you may also use `sock`.
 
-[Restart the Agent][2] to apply the changes.
-
-[1]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
-[2]: /agent/configuration/agent-commands/#restart-the-agent
-
-{{% /tab %}}
-
-{{% tab "Docker" %}}
-
-To configure an integration for an Agent running in a Docker container, you have a couple of methods available, all of which are covered in detail in the [Docker Configuration Documentation][1].
-
-The examples below show how to use [Docker Labels][2] and [Autodiscovery Templates][3] to configure the MySQL integration.
-
-**Note**: The Agent must have read access to the Docker socket for label-based Autodiscovery to work.
-
-### Command line
-
-Run the following command from your [command line][4] to start the Agent. Replace the placeholder values with those for your account and environment.
-
-```bash
-export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=<AGENT_VERSION>
-
-docker run -e "DD_API_KEY=${DD_API_KEY}" \
-  -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  -l com.datadoghq.ad.checks='{"mysql": {
-    "init_config": {},
-    "instances": [{
-      "dbm": true,
-      "host": "<HOST>",
-      "port": <PORT>,
-      "username": "datadog",
-      "password": "ENC[datadog_user_database_password]"
-    }]
-  }}' \
-  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
-```
-
-### Dockerfile
-
-You can also specify labels in a `Dockerfile`, allowing you to build and deploy a custom Agent without modifying your infrastructure configuration:
-
-```Dockerfile
-FROM gcr.io/datadoghq/agent:<AGENT_VERSION>
-
-LABEL "com.datadoghq.ad.checks"='{"mysql": {"init_config": {}, "instances": [{"dbm": true, "host": "<HOST>", "port": <PORT>, "username": "datadog", "password": "ENC[datadog_user_database_password]"}]}}'
-```
-
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][5] and declare the password using the `ENC[]` syntax. Alternatively, see the [Autodiscovery template variables documentation][6] to provide the password as an environment variable.
-
-[1]: /containers/docker/integrations/?tab=labels#configuration
-[2]: https://docs.docker.com/engine/manage-resources/labels/
-[3]: /getting_started/containers/autodiscovery/
-[4]: /containers/docker/integrations/?tab=labels#using-docker-run-nerdctl-run-or-podman-run
-[5]: /agent/configuration/secrets-management
-[6]: /agent/faq/template_variables/
-
-{{% /tab %}}
-
-{{% tab "Kubernetes" %}}
-
-If you're running a Kubernetes cluster, use the [Datadog Cluster Agent][1] to enable Database Monitoring.
-
-**Note**: Make sure [cluster checks][2] are enabled for your Datadog Cluster Agent before proceeding.
-
-Below are step-by-step instructions for configuring the MySQL integration using different Datadog Cluster Agent deployment methods.
-
-### Operator
-
-Using the [Operator instructions in Kubernetes and Integrations][3] as a reference, follow the steps below to set up the MySQL integration:
-
-1. Create or update the `datadog-agent.yaml` file with the following configuration:
-
-    ```yaml
-    apiVersion: datadoghq.com/v2alpha1
-    kind: DatadogAgent
-    metadata:
-      name: datadog
-    spec:
-      global:
-        clusterName: <CLUSTER_NAME>
-        site: <DD_SITE>
-        credentials:
-          apiSecret:
-            secretName: datadog-agent-secret
-            keyName: api-key
-
-      features:
-        clusterChecks:
-          enabled: true
-
-      override:
-        nodeAgent:
-          image:
-            name: agent
-            tag: <AGENT_VERSION>
-
-        clusterAgent:
-          extraConfd:
-            configDataMap:
-              mysql.yaml: |-
-                cluster_check: true
-                init_config:
-                instances:
-                - host: <HOST>
-                  port: <PORT>
-                  username: datadog
-                  password: 'ENC[datadog_user_database_password]'
-                  dbm: true
-    ```
-
-2. Apply the changes to the Datadog Operator using the following command:
-
-    ```shell
-    kubectl apply -f datadog-agent.yaml
-    ```
-
-### Helm
-
-Using the [Helm instructions in Kubernetes and Integrations][4] as a reference, follow the steps below to set up the MySQL integration:
-
-1. Update your `datadog-values.yaml` file (used in the Cluster Agent installation instructions) with the following configuration:
-
-    ```yaml
-    datadog:
-      clusterChecks:
-        enabled: true
-
-    clusterChecksRunner:
-      enabled: true
-
-    clusterAgent:
-      enabled: true
-      confd:
-        mysql.yaml: |-
-          cluster_check: true
-          init_config:
-          instances:
-          - dbm: true
-            host: <HOST>
-            port: <PORT>
-            username: datadog
-            password: 'ENC[datadog_user_database_password]'
-    ```
-
-2. Deploy the Agent with the above configuration file using the following command:
-
-    ```shell
-    helm install datadog-agent -f datadog-values.yaml datadog/datadog
-    ```
-
-<div class="alert alert-info">
-For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
-</div>
-
-### Configure with mounted files
-
-To configure a cluster check with a mounted configuration file, mount the configuration file in the Cluster Agent container at the path: `/conf.d/mysql.yaml`:
-
-```yaml
-cluster_check: true  # Make sure to include this flag
-init_config:
-instances:
-  - dbm: true
-    host: <HOST>
-    port: <PORT>
-    username: datadog
-    password: 'ENC[datadog_user_database_password]'
-```
-
-### Configure with Kubernetes service annotations
-
-Instead of mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
-
-#### Autodiscovery annotations v2
-
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: mysql
-  labels:
-    tags.datadoghq.com/env: '<ENV>'
-    tags.datadoghq.com/service: '<SERVICE>'
-  annotations:
-    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
-      {
-        "mysql": {
-          "init_config": <INIT_CONFIG>,
-          "instances": [
-            {
-              "dbm": true,
-              "host": "<HOST>",
-              "port": <PORT>,
-              "username": "datadog",
-              "password": "ENC[datadog_user_database_password]"
-            }
-          ]
-        }
-      }
-spec:
-  ports:
-  - port: <PORT>
-    protocol: TCP
-    targetPort: <PORT>
-    name: mysql
-```
-
-The Cluster Agent automatically registers this configuration and begins running the MySQL check.
-
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][6] and declare the password using the `ENC[]` syntax.
-
-[1]: /containers/cluster_agent/setup/
-[2]: /containers/cluster_agent/clusterchecks/
-[3]: /containers/kubernetes/integrations/?tab=datadogoperator
-[4]: /containers/kubernetes/integrations/?tab=helm
-[5]: /containers/kubernetes/integrations/?tab=annotations#configuration
-[6]: /agent/configuration/secrets-management
-
-
-{{% /tab %}}
-
-{{< /tabs >}}
-
+[Restart the Agent][9] to start sending MySQL metrics to Datadog.
 
 ### Log collection (optional)
 
