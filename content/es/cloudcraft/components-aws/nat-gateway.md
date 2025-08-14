@@ -5,7 +5,7 @@ title: Componente de NAT Gateway
 
 Utiliza el componente NAT Gateway para representar gateways de traducción de direcciones de red (NAT) de tu arquitectura de Amazon Web Services.
 
-{{< img src="cloudcraft/components-aws/nat-gateway/component-nat-gateway-diagram.png" alt="Captura de pantalla de un diagrama isométrico de Cloudcraft que muestra el componente de AWS "NAT Gateway." responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-aws/nat-gateway/component-nat-gateway-diagram.png" alt="Captura de pantalla de un diagrama isométrico de Cloudcraft que muestra el componente de AWS NAT Gateway." responsive="true" style="width:60%;">}}
 
 ## Barra de herramientas
 

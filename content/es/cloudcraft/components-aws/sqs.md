@@ -5,7 +5,7 @@ title: Componente de SQS
 
 Utiliza el componente de SQS para representar colas de mensajes de tu arquitectura de Amazon Web Services.
 
-{{< img src="cloudcraft/components-aws/sqs/component-sqs-diagram.png" alt="Captura de pantalla de un diagrama isométrico de Cloudcraft que muestra el componente de AWS "SQS"." responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-aws/sqs/component-sqs-diagram.png" alt="Captura de pantalla de un diagrama isométrico de Cloudcraft que muestra el componente de AWS 'SQS'." responsive="true" style="width:60%;">}}
 
 ## Barra de herramientas
 

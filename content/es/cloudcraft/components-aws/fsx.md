@@ -5,7 +5,7 @@ title: Componente FSx
 
 Utiliza el componente FSx para representar sistemas de archivos FSx de tu arquitectura de Amazon Web Services.
 
-{{< img src="cloudcraft/components-aws/fsx/component-fsx-diagram.png" alt="Captura de pantalla de un diagrama isométrico de Cloudcraft que muestra el componente "FSx" de AWS." responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-aws/fsx/component-fsx-diagram.png" alt="Captura de pantalla de un diagrama isométrico de Cloudcraft que muestra el componente 'FSx' de AWS." responsive="true" style="width:60%;">}}
 
 ## Barra de herramientas
 

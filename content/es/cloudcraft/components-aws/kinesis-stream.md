@@ -5,7 +5,7 @@ title: Componente Kinesis Stream
 
 Utiliza el componente Kinesis Stream para representar flujos de datos en tiempo real desde tu arquitectura de Amazon Web Services.
 
-{{< img src="cloudcraft/components-aws/kinesis-stream/component-kinesis-stream-diagram.png" alt="Captura de pantalla de un diagrama isométrico de Cloudcraft que muestra el componente "Kinesis Stream" de AWS." responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-aws/kinesis-stream/component-kinesis-stream-diagram.png" alt="Captura de pantalla de un diagrama isométrico de Cloudcraft que muestra el componente 'Kinesis Stream' de AWS." responsive="true" style="width:60%;">}}
 
 ## Barra de herramientas
 
