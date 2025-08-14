@@ -2,6 +2,7 @@
 title: Retention Analysis
 aliases:
 - /product_analytics/user_retention/
+- /product_analytics/charts/user_retention/
 description: Measure user retention to understand overall user satisfaction with your application.
 further_reading:
     - link: '/product_analytics/'
