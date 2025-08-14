@@ -38,7 +38,7 @@ To enable paging between orgs or datacenters, you'll first need to establish a s
 - `on_call_respond` - Respond to On-Call Pages
 - `user_access_read` - Read user information (automatically included in most roles)
 
-
+Note, When generating application keys for cross-org paging, ensure you create an **unscoped application key** by assigning it to a role, not directly to the service account.
 
 <div class="alert alert-warning">
 **Important**: Service accounts created via Terraform may be missing the `user_access_read` permission. This permission is automatically added to roles created through the UI but cannot be manually added through the UI and may not be included in Terraform-configured roles. If cross-org paging fails with permission errors, add an additional role to your service account that includes the `user_access_read` permission.
