@@ -9,7 +9,7 @@ further_reading:
 - link: /developers/integrations/marketplace_offering
   tag: Documentation
   text: Create an offering on the Datadog Marketplace
-title: Build an integration with Datadog
+title: Build an Integration with Datadog
 type: documentation
 ---
 ## Overview
