@@ -259,7 +259,7 @@ To control who can access logs containing sensitive data, use tags added by the 
 
 <div class="alert alert-warning">The <b>mask</b> action is only available for logs.</div>
 
-When you set up or edit a scanner rule, there is an **Action on Match** section where you can set the rule to use the **mask** action for matched sensitive data. The **mask** action obfuscate the sensitive data, but users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) and view the data in Datadog.
+When you set up or edit a scanner rule, there is an **Action on Match** section where you can set the rule to use the **mask** action for matched sensitive data. The **mask** action obfuscates the sensitive data, but users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) and view the data in Datadog.
 
 **Notes**:
 - Unmasking can only be performed on indexed logs within Datadog.
