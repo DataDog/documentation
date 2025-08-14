@@ -68,7 +68,7 @@ apm_config:
   filter_tags:
     requerir: ["db:sql", "db.instance:mysql"]
     rechazar: ["outcome:success", "key2:value2"]
-{{< /bloque de código >}}
+{{< /code-block >}}
 
 Por ejemplo, para ignorar comprobaciones de estado donde la `http.url` coincide con este punto conexión:
 
@@ -76,7 +76,7 @@ Por ejemplo, para ignorar comprobaciones de estado donde la `http.url` coincide 
 apm_config:
   filter_tags:
     rechazar: ["http.url:http://localhost:5050/healthcheck"]
-{{< /bloque de código >}}
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -222,7 +222,7 @@ apm_config:
 ## Todas las entradas deben ir entre comillas dobles y separadas por comas.
 
   ignore_resources: ["(GET|POST) /healthcheck","API::NotesController#index"]
-{{< /bloque de código >}}
+{{< /code-block >}}
 
 Utilización de `DD_APM_IGNORE_RESOURCES`:
 
@@ -258,14 +258,14 @@ Según cuál sea tu forma de despliegue, la sintaxis será un poco diferente:
 {{< lenguaje de bloque de código="yaml" nombre de archivo="Datadog.yaml" >}}
 apm_config:
   ignore_resources: Api::HealthchecksController#index$
-{{< /bloque de código >}}
+{{< /code-block >}}
 
 Para valores múltiples:
 
 {{< lenguaje de bloque de código="yaml" >}}
 apm_config:
   ignore_resources: ["value1", "Api::HealthchecksController#index$"]
-{{< /bloque de código >}}
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Docker compose" %}}
@@ -304,13 +304,13 @@ docker run -d --name datadog-agent \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
               gcr.io/datadoghq/agent:latest
-{{< /bloque de código >}}
+{{< /code-block >}}
 
 Para valores múltiples:
 
 {{< lenguaje de bloque de código="yaml" >}}
               -e DD_APM_IGNORE_RESOURCES=["value1","Api::HealthchecksController#index$"] \
-{{< /bloque de código >}}
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Kubernetes daemonset" %}}
@@ -392,7 +392,7 @@ helm install dd-agent -f values.yaml \
   --configurar agents.containers.traceAgent.env[0].name=DD_APM_IGNORE_RESOURCES, \
     agents.containers.traceAgent.env[0].value="Api::HealthchecksController#index$" \
   datadog/datadog
-{{< /bloque de código >}}
+{{< /code-block >}}
 
 [1]: /es/agent/kubernetes/?tab=helm#installation
 {{% /tab %}}
@@ -408,7 +408,7 @@ Si utilizas Amazon ECS (como en EC2), en tu definición del contenedor del Datad
           "value": "Api::HealthchecksController#index$"
         }
      ]
-{{< /bloque de código >}}
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}

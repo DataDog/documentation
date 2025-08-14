@@ -79,7 +79,7 @@ Los enlaces a todas las versiones disponibles del instalador de Windows están d
 1. En un shell `cmd.exe` del directorio donde descargaste el instalador, ejecuta el siguiente comando. Sustituye `MY_API_KEY` por tu clave de API de Datadog:
    {{< code-block lang="shell" >}}
 start /wait msiexec /qn /i ddagent-cli-latest.msi APIKEY="MY_API_KEY"
-{{< /bloque de código >}}
+{{< /code-block >}}
    Opcionalmente, añade los valores de `TAG` y `HOSTNAME`.
 
 #### Implementación en Azure
