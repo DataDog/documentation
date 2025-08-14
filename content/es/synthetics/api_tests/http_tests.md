@@ -143,7 +143,7 @@ Define variables para tus tests de API HTTP con JavaScript:
 
    {{% /tab %}}
 
-{{< tabs >}}
+{{< /tabs >}}
 
 ### Definición de aserciones
 

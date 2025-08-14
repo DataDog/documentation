@@ -48,8 +48,8 @@ Este tema explica cómo configurar SCA utilizando un ejemplo de Java.
 
 1. **Actualiza la [biblioteca Java de Datadog][1]** al menos a la versión 0.94.0 (o a la versión 1.1.4 para las funciones de detección de Software Composition Analysis):
 
-   {{< tabs >}}
-   {{% tab "Wget" %}}
+{{< tabs >}}
+{{% tab "Wget" %}}
    ```shell
    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
@@ -76,7 +76,7 @@ Este tema explica cómo configurar SCA utilizando un ejemplo de Java.
 
    **Nota:** Los sistemas de archivos de sólo lectura no son compatibles en este momento. La aplicación debe tener acceso a un directorio `/tmp` en el que se pueda escribir.
 
-   {{< tabs >}}
+{{< tabs >}}
 {{% tab "CLI Docker" %}}
 
 Actualiza tu contenedor de configuración para APM añadiendo el siguiente argumento en tu comando `docker run`:
@@ -141,7 +141,7 @@ java -javaagent:dd-java-agent.jar \
 
 {{% /tab %}}
 
-{{< tabs >}}
+{{< /tabs >}}
 
 
 [1]: /es/security/code_security/software_composition_analysis/setup_runtime/compatibility/java
