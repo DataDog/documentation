@@ -27265,6 +27265,59 @@ components:
       type: string
       x-enum-varnames:
       - AMAZON_S3
+    ObservabilityPipelineAmazonSecurityLakeDestination:
+      description: 'The `amazon_security_lake` destination sends your logs to Amazon
+        Security Lake.
+
+        '
+      properties:
+        auth:
+          $ref: '#/components/schemas/ObservabilityPipelineAwsAuth'
+        bucket:
+          description: Name of the Amazon S3 bucket in Security Lake (3-63 characters).
+          example: security-lake-bucket
+          type: string
+        custom_source_name:
+          description: Custom source name for the logs in Security Lake.
+          example: my-custom-source
+          type: string
+        id:
+          description: Unique identifier for the destination component.
+          example: amazon-security-lake-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        region:
+          description: AWS region of the S3 bucket.
+          example: us-east-1
+          type: string
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineAmazonSecurityLakeDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      - bucket
+      - region
+      - custom_source_name
+      type: object
+    ObservabilityPipelineAmazonSecurityLakeDestinationType:
+      default: amazon_security_lake
+      description: The destination type. Always `amazon_security_lake`.
+      enum:
+      - amazon_security_lake
+      example: amazon_security_lake
+      type: string
+      x-enum-varnames:
+      - AMAZON_SECURITY_LAKE
     ObservabilityPipelineAwsAuth:
       description: "AWS authentication credentials used for accessing AWS services
         such as S3.\nIf omitted, the system\u2019s default credentials are used (for
@@ -27336,6 +27389,9 @@ components:
       - $ref: '#/components/schemas/ObservabilityPipelineSentinelOneDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineOpenSearchDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineAmazonOpenSearchDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineAmazonSecurityLakeDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestination'
     ObservabilityPipelineConfigProcessorItem:
       description: A processor for the pipeline.
       oneOf:
@@ -27355,6 +27411,8 @@ components:
       - $ref: '#/components/schemas/ObservabilityPipelineEnrichmentTableProcessor'
       - $ref: '#/components/schemas/ObservabilityPipelineReduceProcessor'
       - $ref: '#/components/schemas/ObservabilityPipelineThrottleProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineCustomProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessor'
     ObservabilityPipelineConfigSourceItem:
       description: A data source for the pipeline.
       oneOf:
@@ -27373,6 +27431,159 @@ components:
       - $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubSource'
       - $ref: '#/components/schemas/ObservabilityPipelineHttpClientSource'
       - $ref: '#/components/schemas/ObservabilityPipelineLogstashSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketSource'
+    ObservabilityPipelineCrowdStrikeNextGenSiemDestination:
+      description: The `crowdstrike_next_gen_siem` destination forwards logs to CrowdStrike
+        Next Gen SIEM.
+      properties:
+        compression:
+          $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestinationCompression'
+        encoding:
+          $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestinationEncoding'
+        id:
+          description: The unique identifier for this component.
+          example: crowdstrike-ngsiem-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      - encoding
+      type: object
+    ObservabilityPipelineCrowdStrikeNextGenSiemDestinationCompression:
+      description: Compression configuration for log events.
+      properties:
+        algorithm:
+          $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestinationCompressionAlgorithm'
+        level:
+          description: Compression level.
+          example: 6
+          format: int64
+          type: integer
+      required:
+      - algorithm
+      type: object
+    ObservabilityPipelineCrowdStrikeNextGenSiemDestinationCompressionAlgorithm:
+      description: Compression algorithm for log events.
+      enum:
+      - gzip
+      - zlib
+      example: gzip
+      type: string
+      x-enum-varnames:
+      - GZIP
+      - ZLIB
+    ObservabilityPipelineCrowdStrikeNextGenSiemDestinationEncoding:
+      description: Encoding format for log events.
+      enum:
+      - json
+      - raw_message
+      example: json
+      type: string
+      x-enum-varnames:
+      - JSON
+      - RAW_MESSAGE
+    ObservabilityPipelineCrowdStrikeNextGenSiemDestinationType:
+      default: crowdstrike_next_gen_siem
+      description: The destination type. The value should always be `crowdstrike_next_gen_siem`.
+      enum:
+      - crowdstrike_next_gen_siem
+      example: crowdstrike_next_gen_siem
+      type: string
+      x-enum-varnames:
+      - CROWDSTRIKE_NEXT_GEN_SIEM
+    ObservabilityPipelineCustomProcessor:
+      description: The `custom_processor` processor transforms events using [Vector
+        Remap Language (VRL)](https://vector.dev/docs/reference/vrl/) scripts with
+        advanced filtering capabilities.
+      properties:
+        id:
+          description: The unique identifier for this processor.
+          example: remap-vrl-processor
+          type: string
+        include:
+          default: '*'
+          description: A Datadog search query used to determine which logs this processor
+            targets. This field should always be set to `*` for the custom_processor
+            processor.
+          example: '*'
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the input for
+            this processor.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        remaps:
+          description: Array of VRL remap rules.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineCustomProcessorRemap'
+          minItems: 1
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineCustomProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - remaps
+      - inputs
+      type: object
+    ObservabilityPipelineCustomProcessorRemap:
+      description: Defines a single VRL remap rule with its own filtering and transformation
+        logic.
+      properties:
+        drop_on_error:
+          description: Whether to drop events that caused errors during processing.
+          example: false
+          type: boolean
+        enabled:
+          description: Whether this remap rule is enabled.
+          example: true
+          type: boolean
+        include:
+          description: A Datadog search query used to filter events for this specific
+            remap rule.
+          example: service:web
+          type: string
+        name:
+          description: A descriptive name for this remap rule.
+          example: Parse JSON from message field
+          type: string
+        source:
+          description: The VRL script source code that defines the processing logic.
+          example: . = parse_json!(.message)
+          type: string
+      required:
+      - include
+      - name
+      - source
+      - enabled
+      - drop_on_error
+      type: object
+    ObservabilityPipelineCustomProcessorType:
+      default: custom_processor
+      description: The processor type. The value should always be `custom_processor`.
+      enum:
+      - custom_processor
+      example: custom_processor
+      type: string
+      x-enum-varnames:
+      - CUSTOM_PROCESSOR
     ObservabilityPipelineData:
       description: "Contains the pipeline\u2019s ID, type, and configuration attributes."
       properties:
@@ -27464,6 +27675,80 @@ components:
       type: string
       x-enum-varnames:
       - DATADOG_LOGS
+    ObservabilityPipelineDatadogTagsProcessor:
+      description: The `datadog_tags` processor includes or excludes specific Datadog
+        tags in your logs.
+      properties:
+        action:
+          $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessorAction'
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (for example, as the `input`
+            to downstream components).
+          example: datadog-tags-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        keys:
+          description: A list of tag keys.
+          example:
+          - env
+          - service
+          - version
+          items:
+            type: string
+          type: array
+        mode:
+          $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessorMode'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - mode
+      - action
+      - keys
+      - inputs
+      type: object
+    ObservabilityPipelineDatadogTagsProcessorAction:
+      description: The action to take on tags with matching keys.
+      enum:
+      - include
+      - exclude
+      example: include
+      type: string
+      x-enum-varnames:
+      - INCLUDE
+      - EXCLUDE
+    ObservabilityPipelineDatadogTagsProcessorMode:
+      description: The processing mode.
+      enum:
+      - filter
+      example: filter
+      type: string
+      x-enum-varnames:
+      - FILTER
+    ObservabilityPipelineDatadogTagsProcessorType:
+      default: datadog_tags
+      description: The processor type. The value should always be `datadog_tags`.
+      enum:
+      - datadog_tags
+      example: datadog_tags
+      type: string
+      x-enum-varnames:
+      - DATADOG_TAGS
     ObservabilityPipelineDecoding:
       description: The decoding format used to interpret incoming logs.
       enum:
@@ -29655,6 +29940,278 @@ components:
       type: string
       x-enum-varnames:
       - SENTINEL_ONE
+    ObservabilityPipelineSocketDestination:
+      description: 'The `socket` destination sends logs over TCP or UDP to a remote
+        server.
+
+        '
+      properties:
+        encoding:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationEncoding'
+        framing:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationFraming'
+        id:
+          description: The unique identifier for this component.
+          example: socket-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        mode:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationMode'
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+          description: TLS configuration. Relevant only when `mode` is `tcp`.
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      - encoding
+      - framing
+      - mode
+      type: object
+    ObservabilityPipelineSocketDestinationEncoding:
+      description: Encoding format for log events.
+      enum:
+      - json
+      - raw_message
+      example: json
+      type: string
+      x-enum-varnames:
+      - JSON
+      - RAW_MESSAGE
+    ObservabilityPipelineSocketDestinationFraming:
+      description: Framing method configuration.
+      oneOf:
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationFramingNewlineDelimited'
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationFramingBytes'
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationFramingCharacterDelimited'
+    ObservabilityPipelineSocketDestinationFramingBytes:
+      description: Event data is not delimited at all.
+      properties:
+        method:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationFramingBytesMethod'
+      required:
+      - method
+      type: object
+    ObservabilityPipelineSocketDestinationFramingBytesMethod:
+      description: The definition of `ObservabilityPipelineSocketDestinationFramingBytesMethod`
+        object.
+      enum:
+      - bytes
+      example: bytes
+      type: string
+      x-enum-varnames:
+      - BYTES
+    ObservabilityPipelineSocketDestinationFramingCharacterDelimited:
+      description: Each log event is separated using the specified delimiter character.
+      properties:
+        delimiter:
+          description: A single ASCII character used as a delimiter.
+          example: '|'
+          maxLength: 1
+          minLength: 1
+          type: string
+        method:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationFramingCharacterDelimitedMethod'
+      required:
+      - method
+      - delimiter
+      type: object
+    ObservabilityPipelineSocketDestinationFramingCharacterDelimitedMethod:
+      description: The definition of `ObservabilityPipelineSocketDestinationFramingCharacterDelimitedMethod`
+        object.
+      enum:
+      - character_delimited
+      example: character_delimited
+      type: string
+      x-enum-varnames:
+      - CHARACTER_DELIMITED
+    ObservabilityPipelineSocketDestinationFramingNewlineDelimited:
+      description: Each log event is delimited by a newline character.
+      properties:
+        method:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationFramingNewlineDelimitedMethod'
+      required:
+      - method
+      type: object
+    ObservabilityPipelineSocketDestinationFramingNewlineDelimitedMethod:
+      description: The definition of `ObservabilityPipelineSocketDestinationFramingNewlineDelimitedMethod`
+        object.
+      enum:
+      - newline_delimited
+      example: newline_delimited
+      type: string
+      x-enum-varnames:
+      - NEWLINE_DELIMITED
+    ObservabilityPipelineSocketDestinationMode:
+      description: Protocol used to send logs.
+      enum:
+      - tcp
+      - udp
+      example: tcp
+      type: string
+      x-enum-varnames:
+      - TCP
+      - UDP
+    ObservabilityPipelineSocketDestinationType:
+      default: socket
+      description: The destination type. The value should always be `socket`.
+      enum:
+      - socket
+      example: socket
+      type: string
+      x-enum-varnames:
+      - SOCKET
+    ObservabilityPipelineSocketSource:
+      description: 'The `socket` source ingests logs over TCP or UDP.
+
+        '
+      properties:
+        framing:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFraming'
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: socket-source
+          type: string
+        mode:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketSourceMode'
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+          description: TLS configuration. Relevant only when `mode` is `tcp`.
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketSourceType'
+      required:
+      - id
+      - type
+      - mode
+      - framing
+      type: object
+    ObservabilityPipelineSocketSourceFraming:
+      description: Framing method configuration for the socket source.
+      oneOf:
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFramingNewlineDelimited'
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFramingBytes'
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFramingCharacterDelimited'
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFramingOctetCounting'
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFramingChunkedGelf'
+    ObservabilityPipelineSocketSourceFramingBytes:
+      description: Byte frames are passed through as-is according to the underlying
+        I/O boundaries (for example, split between messages or stream segments).
+      properties:
+        method:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFramingBytesMethod'
+      required:
+      - method
+      type: object
+    ObservabilityPipelineSocketSourceFramingBytesMethod:
+      description: Byte frames are passed through as-is according to the underlying
+        I/O boundaries (for example, split between messages or stream segments).
+      enum:
+      - bytes
+      example: bytes
+      type: string
+      x-enum-varnames:
+      - BYTES
+    ObservabilityPipelineSocketSourceFramingCharacterDelimited:
+      description: Byte frames which are delimited by a chosen character.
+      properties:
+        delimiter:
+          description: A single ASCII character used to delimit events.
+          example: '|'
+          maxLength: 1
+          minLength: 1
+          type: string
+        method:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFramingCharacterDelimitedMethod'
+      required:
+      - method
+      - delimiter
+      type: object
+    ObservabilityPipelineSocketSourceFramingCharacterDelimitedMethod:
+      description: Byte frames which are delimited by a chosen character.
+      enum:
+      - character_delimited
+      example: character_delimited
+      type: string
+      x-enum-varnames:
+      - CHARACTER_DELIMITED
+    ObservabilityPipelineSocketSourceFramingChunkedGelf:
+      description: Byte frames which are chunked GELF messages.
+      properties:
+        method:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFramingChunkedGelfMethod'
+      required:
+      - method
+      type: object
+    ObservabilityPipelineSocketSourceFramingChunkedGelfMethod:
+      description: Byte frames which are chunked GELF messages.
+      enum:
+      - chunked_gelf
+      example: chunked_gelf
+      type: string
+      x-enum-varnames:
+      - CHUNKED_GELF
+    ObservabilityPipelineSocketSourceFramingNewlineDelimited:
+      description: Byte frames which are delimited by a newline character.
+      properties:
+        method:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFramingNewlineDelimitedMethod'
+      required:
+      - method
+      type: object
+    ObservabilityPipelineSocketSourceFramingNewlineDelimitedMethod:
+      description: Byte frames which are delimited by a newline character.
+      enum:
+      - newline_delimited
+      example: newline_delimited
+      type: string
+      x-enum-varnames:
+      - NEWLINE_DELIMITED
+    ObservabilityPipelineSocketSourceFramingOctetCounting:
+      description: Byte frames according to the octet counting format as per RFC6587.
+      properties:
+        method:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFramingOctetCountingMethod'
+      required:
+      - method
+      type: object
+    ObservabilityPipelineSocketSourceFramingOctetCountingMethod:
+      description: Byte frames according to the octet counting format as per RFC6587.
+      enum:
+      - octet_counting
+      example: octet_counting
+      type: string
+      x-enum-varnames:
+      - OCTET_COUNTING
+    ObservabilityPipelineSocketSourceMode:
+      description: Protocol used to receive logs.
+      enum:
+      - tcp
+      - udp
+      example: tcp
+      type: string
+      x-enum-varnames:
+      - TCP
+      - UDP
+    ObservabilityPipelineSocketSourceType:
+      default: socket
+      description: The source type. The value should always be `socket`.
+      enum:
+      - socket
+      example: socket
+      type: string
+      x-enum-varnames:
+      - SOCKET
     ObservabilityPipelineSpec:
       description: Input schema representing an observability pipeline configuration.
         Used in create and validate requests.
@@ -66860,6 +67417,18 @@ paths:
               86400\n  },\n  \"message\": \"Test rule Bis\",\n  \"tags\": [],\n  \"isEnabled\":
               true,\n  \"type\": \"log_detection\"\n}"
           step: there is a valid "security_rule_bis" in the system
+        security_rule_hash:
+          parameters:
+          - name: body
+            value: "{\n  \"name\": \"_{{ unique_hash }}\",\n  \"queries\": [{\n    \"query\":
+              \"@test:true\",\n    \"aggregation\": \"count\",\n    \"groupByFields\":
+              [],\n    \"distinctFields\": [],\n    \"metrics\": []\n  }],\n  \"filters\":
+              [],\n  \"cases\": [{\n    \"name\": \"\",\n    \"status\": \"info\",\n
+              \   \"condition\": \"a > 0\",\n    \"notifications\": []\n  }],\n  \"options\":
+              {\n    \"evaluationWindow\": 900,\n    \"keepAlive\": 3600,\n    \"maxSignalDuration\":
+              86400\n  },\n  \"message\": \"Test rule\",\n  \"tags\": [],\n  \"isEnabled\":
+              true,\n  \"type\": \"log_detection\"\n}"
+          step: there is a valid "security_rule_hash" in the system
       x-menu-order: 4
       x-permission:
         operator: OR
