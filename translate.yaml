@@ -21,6 +21,8 @@ ignores:
   - "content/en/api/v1/**/*.md"
   - "content/en/api/v2/**/*.md"
   - "config/_default/menus/menus.en.yaml"
+  - "layouts/shortcodes/**/*[!.en].md" # We want to process *.en.md but ignore *.md
+  - "**/*.mdoc.md"
   - "**/*.fr.md"
   - "**/*.fr.yaml"
   - "**/*.fr.json"

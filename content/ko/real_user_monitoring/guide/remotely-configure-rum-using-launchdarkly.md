@@ -115,13 +115,13 @@ datadogRum.init(RUM_configuration_object)
 ```
 
 ## LaunchDarkly 제어를 포함해 대시보드에서 직접 RUM을 설정할 수 있습니다.
-Datadog 애플리케이션에서 직접 RUM 설정을 변경하려면 Datadog에 LaunchDarkly UI를 포함하고 기능 플래그 켜기/끄기를 전환할 수 있습니다. 기능 플래그가 설정되면 기본 값을 사용해 꺼둘 수 있습니다. 고정확도 데이터를 사용하려면 기능 플래그를 켭니다. 그러면 ON 변수에 대해 설정한 값이 RUM 초기화에 사용됩니다.
+Datadog 애플리케이션에서 RUM 구성을 직접 변경하려면 LaunchDarkly UI를 Datadog에 임베드하여 기능 플래그를 켜거나 끄면 됩니다. 기본값을 사용하여 기능 플래그를 끈 채로 유지할 수 있습니다. 더 정밀한 데이터가 필요할 때 기능 플래그를 활성화하면, ON 변수에 설정된 값이 RUM 초기화에 적용됩니다.
 
-LaunchDarkly의 Datadog 앱 통합에는 기능 플래그 관리 UI가 대시보드 위젯으로 포함되어 있습니다. 이 위젯을 사용하면 Datadog을 나가지 않고도 기능 플래그를 전환할 수 있습니다. 주요 메트릭을 표시하는 새 대시보드나 기존 대시보드 내에 LaunchDarkly 위젯을 포함할 수 있습니다. 인시던트가 발생하거나 오류가 급증하는 경우 Datadog 내에서 RUM 구성에 대한 기능 플래그를 빠르게 전환하여 더 많은 데이터 샘플링을 시작하고 팀이 문제를 해결하는 데 필요한 정보에 액세스할 수 있도록 할 수 있습니다.
+LaunchDarkly의 Datadog 앱 통합 기능은 기능 플래그 관리 UI를 대시보드 위젯으로 임베드합니다. 이 위젯을 사용하면 Datadog 내에서 기능 플래그를 전환할 수 있고, 주요 메트릭을 표시하는 새 대시보드나 기존 대시보드에 LaunchDarkly 위젯을 임베드할 수 있습니다. 인시던트가 발생하거나 오류가 급증하면 Datadog 내에서 RUM 구성의 기능 플래그를 전환하여 더 많은 데이터를 샘플링하고 문제 해결에 필요한 정보를 얻을 수 있습니다.
 
 {{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/datadog-launchdarkly-ui-widget.png" alt="Datadog 및 LaunchDarkly UI 통합 위젯" style="width:100%;">}}
 
-설정에 대해 원래 구성한 값을 변경해야 하는 경우 언제든지 LaunchDarkly 내에서 플래그를 업데이트할 수 있습니다. 변경 사항을 저장한 후에는 모든 새 플래그 평가에 업데이트된 값이 적용됩니다.
+초기 설정 값을 변경해야 할 때는 LaunchDarkly에서 언제든지 플래그를 업데이트할 수 있습니다. 변경 사항을 저장하면 모든 새 플래그 평가에 업데이트된 값이 적용됩니다.
 
 ## 참고 자료
 {{< partial name="whats-next/whats-next.html" >}}

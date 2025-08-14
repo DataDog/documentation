@@ -6,8 +6,8 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
 1. [Create a Log Analytics Workspace][10165] in the workspace if you haven't already.
 1. In the Log Analytics Workspace, navigate to **Settings** > **Tables**.
     1. Click **+ Create**.
-    1. Define a custom table (for example, `Custom-MyLogs_CL`).
-        - **Notes**:<br>- For custom tables, the table name must start with `Custom-`. `CL` is automatically appended to the end of the table name. You need the table name to set up the Observability Pipelines Microsoft Sentinel destination.<br>- You can also use an Azure Table instead of a custom table.
+    1. Define a custom table (for example, `MyOPWLogs`).
+        - **Notes**:<br>- After the table is configured, the prefix `Custom-` and suffix `_CL` are automatically appended to the table name. For example, if you defined the table name in Azure to be `MyOPWLogs`, the full table name is stored as `Custom-MyOPWLogs_CL`. You must use the full table name when you set up the Observability Pipelines Microsoft Sentinel destination.<br>-The full table name can be found in the resource JSON of the DCR under `streamDeclarations`.<br>- You can also use an Azure Table instead of a custom table.
     1. Select **New Custom Log (DCR-based)**.
     1. Click **Create a new data collection rule** and select the DCE you created earlier.
     1. Click **Next**.
@@ -33,6 +33,11 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
     1. On the Members page, select **User, group, or service principal**.
     1. Click **Select Members** and search for the application you created in the app registration step.
     1. Click **Review + Assign**. **Note**: It can take up to 10 minutes for the IAM change to take effect.
+1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
+	- If left disabled, the maximum size for buffering is 500 events.
+	- If enabled:
+		1. Select the buffer type you want to set (**Memory** or **Disk**).
+		1. Enter the buffer size and select the unit.
 
 The table below summarizes the Azure and Microsoft Sentinel information you need when you [set up the Observability Pipelines Microsoft Sentinel destination](#set-up-the-destination-in-observability-pipelines):
 
@@ -40,7 +45,7 @@ The table below summarizes the Azure and Microsoft Sentinel information you need
 |------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Application (client) ID            | The Azure Active Directory (AD) application's client ID. See [Register an application in Microsoft Entra ID][10161] for more information.<br>**Example**: `550e8400-e29b-41d4-a716-446655440000`                                                                                      |
 | Directory (tenant) ID              | The Azure AD tenant ID. See [Register an application in Microsoft Entra ID][10161] for more information.<br>**Example**: `72f988bf-86f1-41af-91ab-2d7cd011db47`                                                                                      |
-| Table (Stream) Name                | The name of the stream which matches the table chosen when configuring the Data Collection Rule (DCR).  **Note**: The table name must start with `Custom-`. `CL` is automatically appended to the end of the table name.<br>**Example**: `Custom-MyLogs_CL`                                                                                                          |
+| Table (Stream) Name                | The name of the stream which matches the table chosen when configuring the Data Collection Rule (DCR).  **Note**: The full table name can be found in the resource JSON of the DCR under `streamDeclarations`. <br>**Example**: `Custom-MyOPWLogs_CL`                                                                                                          |
 | Data Collection Rule (DCR) immutable ID | This is the immutable ID of the DCR where logging routes are defined. It is the **Immutable ID** shown on the DCR Overview page.<br>**Note**: Ensure the Monitoring Metrics Publisher role is assigned in the DCR IAM settings.<br>**Example**: `dcr-000a00a000a00000a000000aa000a0aa`<br>See [Data collection rules (DCRs) in Azure Monitor][10162] to learn more about creating or viewing DCRs. |
 
 #### Set up the destination in Observability Pipelines
@@ -49,7 +54,7 @@ To set up the Microsoft Sentinel destination in Observability Pipelines:
 
 1. Enter the client ID for your application, such as `550e8400-e29b-41d4-a716-446655440000`.
 1. Enter the directory ID for your tenant, such as `72f988bf-86f1-41af-91ab-2d7cd011db47`. This is the Azure AD tenant ID.
-1. Enter the name of the table to which you are sending logs. An example table name: `Custom-MyLogs_CL`.
+1. Enter the full table name to which you are sending logs. An example table name: `Custom-MyOPWLogs_CL`.
 1. Enter the Data Collection Rule (DCR) immutable ID, such as `dcr-000a00a000a00000a000000aa000a0aa`.
 
 [10161]: https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app?tabs=certificate%2Cexpose-a-web-api

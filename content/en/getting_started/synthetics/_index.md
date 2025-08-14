@@ -1,9 +1,9 @@
 ---
 title: Getting Started with Synthetic Monitoring
 further_reading:
-- link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
+- link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
   tag: 'Learning Center'
-  text: 'Introduction to Synthetic Tests'
+  text: 'Getting Started with Synthetic Browser Testing'
 - link: '/synthetics/api_tests'
   tag: 'Documentation'
   text: 'Learn more about API tests'
@@ -55,6 +55,10 @@ To set up your first Synthetic test with Datadog, choose from the following opti
 - [Create a mobile test][6] to start testing key business workflows on your Android and iOS applications.
 - [Create a private location][5] to start monitoring internal applications using all Synthetic test types.
 
+## Version History
+
+Use [Version History in Synthetic Monitoring][8] to restore your test to any saved version, or clone a version to create a new Synthetic Monitoring test.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -66,3 +70,4 @@ To set up your first Synthetic test with Datadog, choose from the following opti
 [5]: /getting_started/synthetics/private_location/
 [6]: /getting_started/synthetics/mobile_app_testing/
 [7]: /getting_started/continuous_testing/
+[8]: /synthetics/guide/version_history/
