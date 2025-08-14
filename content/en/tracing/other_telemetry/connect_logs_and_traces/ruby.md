@@ -29,7 +29,7 @@ For Rails applications using `ActiveSupport::TaggedLogging` (default), `semantic
 When using <code>lograge</code>, you must <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/#for-logging-in-rails-applications">disable <code>TaggedLogging</code></a>.
 </div>
 
-You also need to add a [trace remapper][1] to connect the relevant logs with the traces.
+You must also add a [trace remapper][1] to link the relevant logs to their corresponding traces.
 
 #### Manual injection
 
