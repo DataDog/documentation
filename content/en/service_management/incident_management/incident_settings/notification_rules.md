@@ -17,7 +17,9 @@ Use notification rules to:
 
 ## Creating a notification rule
 
-You can manage notification rules in [Incident Settings Notification Rules][1]. Here you can search, delete, copy, toggle, and create rules. To modify notification rules, you need the `Incident Notification Settings Write` permission.
+To create and modify notification rules, you must have the `Incident Notification Settings Write` permission.
+
+You can manage notification rules in [Incident Settings Notification Rules][1], where you can search, delete, copy, toggle, and create rules. 
 
 ### Triggers and conditions
 
