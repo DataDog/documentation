@@ -1,5 +1,5 @@
 ---
-title: User Retention
+title: Retention Analysis
 aliases:
 - /product_analytics/user_retention/
 description: Measure user retention to understand overall user satisfaction with your application.
@@ -21,7 +21,7 @@ Only views and actions can act as events.
 
 ## Prerequisites
 
-In order for User Retention data to populate, you must set the `usr.id` attribute in your SDK. See the [instructions for sending unique user attributes][4].
+In order for user retention data to populate, you must set the `usr.id` attribute in your SDK. See the [instructions for sending unique user attributes][4].
 
 ## Retention types
 Product analytics support two types of retention event measurements:
