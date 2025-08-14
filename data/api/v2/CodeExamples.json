@@ -465,6 +465,11 @@
       "group": "events",
       "suffix": "",
       "description": "Post an event returns \"OK\" response"
+    },
+    {
+      "group": "events",
+      "suffix": "_1017977945",
+      "description": "Post an event with metric_configuration resource type returns \"OK\" response"
     }
   ],
   "SearchEvents": [

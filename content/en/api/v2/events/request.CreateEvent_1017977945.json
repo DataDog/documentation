@@ -1,0 +1,55 @@
+{
+  "data": {
+    "attributes": {
+      "aggregation_key": "aggregation_key_123",
+      "attributes": {
+        "author": {
+          "name": "example@datadog.com",
+          "type": "user"
+        },
+        "change_metadata": {
+          "dd": {
+            "team": "datadog_team",
+            "user_email": "datadog@datadog.com",
+            "user_id": "datadog_user_id",
+            "user_name": "datadog_username"
+          },
+          "resource_link": "datadog.com/metric/config_test"
+        },
+        "changed_resource": {
+          "name": "config_test",
+          "type": "metric_configuration"
+        },
+        "impacted_resources": [
+          {
+            "name": "system.cpu.usage",
+            "type": "service"
+          }
+        ],
+        "new_value": {
+          "aggregation": "avg",
+          "tags": [
+            "env:prod",
+            "service:web"
+          ],
+          "unit": "percent"
+        },
+        "prev_value": {
+          "aggregation": "sum",
+          "tags": [
+            "env:prod"
+          ],
+          "unit": "percent"
+        }
+      },
+      "category": "change",
+      "integration_id": "custom-events",
+      "message": "metric configuration has been updated",
+      "tags": [
+        "env:api_client_test"
+      ],
+      "title": "metric configuration updated"
+    },
+    "type": "event"
+  }
+}
