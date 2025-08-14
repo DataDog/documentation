@@ -26,21 +26,19 @@ With cross-org paging, you can:
 
 To enable paging between orgs or datacenters, you must establish a secure connection between the **source org** (where alerts originate) and the **destination org** (where the On-Call team is managed).
 
-**Required Permissions**: The service account must have the following permissions:
-- `on_call_read` - Read access to On-Call teams and configurations
-- `on_call_page` - Ability to trigger pages to On-Call teams  
-- `on_call_respond` - Respond to On-Call Pages
-- `user_access_read` - Read user information (automatically included in most roles)
-
-Note, When generating application keys for cross-org paging, ensure you create an **unscoped application key** by assigning it to a role, not directly to the service account.
-
-<div class="alert alert-warning">
-**Important**: Service accounts created via Terraform may be missing the `user_access_read` permission. This permission is automatically added to roles created through the UI but cannot be manually added through the UI and may not be included in Terraform-configured roles. If cross-org paging fails with permission errors, add an additional role to your service account that includes the `user_access_read` permission.
-</div>
+1. In your destination org, [create a service account][1] with On-Call API access. This service account must have the following permissions:
+   - `on_call_read` - Read access to On-Call teams and configurations
+   - `on_call_page` - Ability to trigger pages to On-Call teams  
+   - `on_call_respond` - Respond to On-Call Pages
+   - `user_access_read` - Read user information (automatically included in most roles)
+ 
+   <div class="alert alert-warning">
+   Service accounts created with Terraform may be missing the <code>user_access_read</code> permission. This permission is automatically added to roles created through the UI, but it cannot be manually added through the UI and may not be included in Terraform-configured roles. If cross-org paging fails with permission errors, add an additional role to your service account that includes the <code>user_access_read</code> permission.
+   </div>
 
 2. In your destination org, [create an API key][2].
 
-2. In your destination org, [create an application key][3] for each source org you want to allow.
+2. In your destination org, [create an application key][3] for each source org you want to allow. Ensure that each application key is **unscoped**: assign it to a role, not directly to the service account.
 
 3. In your source org, navigate to your [On-Call settings][4] and select [**Cross-Org Paging**][5].
 
