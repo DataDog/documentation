@@ -224,7 +224,7 @@ Para adjuntar la instrumentación automática a tu servicio, debes configurar la
 
 #### Servicios de Windows
 
-{{< pestañas >}}
+{{< tabs >}}
 
 {{% tab "Editor de registro" %}}
 

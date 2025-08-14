@@ -27,7 +27,7 @@ kinesis, kafka, rabbitmq, sqs, sns, servicebus
 {{< /code-block >}}
 
 3. Llama a los puntos de control de Data Streams Monitoring cuando se produzcan mensajes y cuando se consuman, como se muestra en el siguiente código de ejemplo:
-{{< pestañas >}}
+{{< tabs >}}
 {{% tab "Java" %}}
 {{< code-block lang="java" >}}
 import datadog.trace.api.experimental.*;

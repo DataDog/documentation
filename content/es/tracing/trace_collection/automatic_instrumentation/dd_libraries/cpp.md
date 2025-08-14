@@ -74,7 +74,7 @@ int main() {
 }
 ```
 
-{{< pestañas >}}
+{{< tabs >}}
 
 {{% tab "CPM" %}}
 
