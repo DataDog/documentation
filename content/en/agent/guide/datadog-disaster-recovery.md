@@ -260,7 +260,7 @@ multi_region_failover:
 To trigger a failover of your Agents, you can click on one of the policies in [Fleet Automation][14], and then click **Enable**. The status of each host updates as the failover occurs.
 
 
-{{< img src="/agent/guide/ddr/ddr-fa-policy-enable2.png" alt="Enable the failover policy in the DDR org" style="width:80%;" >}}
+{{< img src="/agent/guide/ddr/ddr-fa-policy-enable3.png" alt="Enable the failover policy in the DDR org" style="width:80%;" >}}
 
 Use the steps appropriate for your environment to activate/test the DDR failover. 
 
