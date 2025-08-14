@@ -126,7 +126,7 @@ dependencies: clean
 # Download files from S3 bucket and add them to the file system
 websites_sources_data: hugpython
 	@echo "Downloading data from websites-sources S3 bucket..."
-	@. hugpython/bin/activate && python3 ./local/bin/py/get_websites_sources_data.py
+	@. hugpython/bin/activate && python3 ./local/bin/py/build/get_websites_sources_data.py
 
 integrations_data/extracted/vector:
 	$(call source_repo,vector,https://github.com/vectordotdev/vector.git,master,true,website/)
