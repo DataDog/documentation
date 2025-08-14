@@ -20,29 +20,29 @@ description: Learn how to create a Datadog Log Integration Pipeline.
 ---
 ## Overview
 
-This guide walks Technology Partners through creating a log pipeline for your integrations that sends logs to Datadog. A log pipeline is required to process, structure, and enrich logs for optimal usability.
+This guide walks Technology Partners through creating a log pipeline for an integration that sends logs to Datadog. A log pipeline is required to process, structure, and enrich logs for optimal usability.
 
 ## Best practices
 1. Use supported Datadog log [endpoints][23].
-- The integration must use one of Datadog's supported log ingestion endpoints.
-- Alternatively, use the [Logs Ingestion HTTP endpoint][1] to send logs to Datadog.
+   - The integration must use one of Datadog's supported log ingestion endpoints.
+   - Alternatively, use the [Logs Ingestion HTTP endpoint][1] to send logs to Datadog.
 2. Support all Datadog sites.
-- Ensure users can select between different Datadog sites when applicable.
-- Refer to [Getting Started with Datadog Sites][2] for site-specific details.
-- The Datadog site endpoint for log ingestion is: `http-intake.logs`.{{< region-param key="dd_site" code="true" >}}.
+   - Ensure users can select between different Datadog sites when applicable.
+   - Refer to [Getting Started with Datadog Sites][2] for site-specific details.
+   - The Datadog site endpoint for log ingestion is: `http-intake.logs.{{< region-param key="dd_site" code="true" >}}`
 3. Allow users to attach custom tags.
-- Tags should be set as key-value attributes in the JSON body of the log payload.
-- If logs are sent using API, tags can also be set using the `ddtags=<TAGS>` query parameter
+   - Tags should be set as key-value attributes in the JSON body of the log payload.
+   - If logs are sent using API, tags can also be set using the `ddtags=<TAGS>` query parameter.
 4. Set the integration's logs source tag.
-- Define the source tag as the integration name, such as source: okta.
-- The source tag must:
-  - Be lowercase
-  - Not be user-editable (use for pipelines and dashboards)
+   - Define the source tag as the integration name, such as `source: okta`.
+   - The source tag must be:
+     - Lowercase
+     - Not user-editable (use for pipelines and dashboards)
 5. Avoid sending logs with arrays in the JSON body.
-- While arrays are supported they cannot be faceted, which limits filtering
+   - While arrays are supported they cannot be faceted, which limits filtering.
 6. Protect Datadog API and application keys.
-- Never log Datadog API keys. These should only be passed in the request header or HTTP path.
-- Do not use application keys for log ingestion
+   - Never log Datadog API keys. These should only be passed in the request header or HTTP path.
+   - Do not use application keys for log ingestion.
 
 ## Create log integration assets
 Log integration assets consist of:
@@ -79,7 +79,7 @@ For advanced processing, consider:
 - Arithmetic Profecessor - Performs calculations on log attributes.
 - String Builder Processor - Concatenates multiple string attributes.
 
-Tips
+**Tips**
 - Remove original attributes when remapping log attributes by using `preserveSource:false`. This helps avoid confusion and removes duplicates.
 - To maintain optimal grok parsing performance, avoid wildcard matchers.
 
