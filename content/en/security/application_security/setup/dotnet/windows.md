@@ -14,9 +14,8 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
 ---
-{{% app_and_api_protection_dotnet_setup_options platform="linux" %}}
-
-{{% app_and_api_protection_dotnet_overview %}}
+{{% aap/aap_and_api_protection_dotnet_setup_options platform="windows" %}}
+{{% aap/aap_and_api_protection_dotnet_overview %}}
 
 ## Prerequisites
 
@@ -31,7 +30,7 @@ further_reading:
 Install the Datadog Agent by following the [setup instructions for Windows hosts][2].
 ## 2. Enabling App and API Protection monitoring
 
-{{% app_and_api_protection_navigation_menu %}}
+{{% aap/aap_and_api_protection_dotnet_navigation_menu %}}
 {{% appsec-remote-config-activation %}}
 
 ### Manually enabling App and API Protection monitoring
@@ -101,7 +100,7 @@ CORECLR_ENABLE_PROFILING=1
 {{< /tabs >}}
 
 
-{{% app_and_api_protection_verify_setup %}}
+{{% aap/aap_and_api_protection_verify_setup %}}
 
 ## Troubleshooting
 

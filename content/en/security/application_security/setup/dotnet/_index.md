@@ -35,6 +35,24 @@ further_reading:
 {{< /appsec-integrations >}}
 ## Additional Resources
 
+### Cloud and Container Platforms
+{{< appsec-integrations >}}
+{{< appsec-integration name="Docker" avatar="docker" link="./docker" >}}
+{{< appsec-integration name="Kubernetes" avatar="kubernetes" link="./kubernetes" >}}
+{{< /appsec-integrations >}}
+
+### AWS
+{{< appsec-integrations >}}
+{{< appsec-integration name="AWS Fargate" avatar="aws-fargate" link="./aws-fargate" >}}
+{{< appsec-integration name="AWS Lambda" avatar="amazon-lambda" link="/security/application_security/setup/aws/lambda/" >}}
+{{< /appsec-integrations >}}
+
+### Microsoft Azure
+{{< appsec-integrations >}}
+  {{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="./azure/app-service" >}}
+{{< /appsec-integrations >}}
+
+
 - [Troubleshooting Guide][1]
 - [Compatibility Information][2]
 
