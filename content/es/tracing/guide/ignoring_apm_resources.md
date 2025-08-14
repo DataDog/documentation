@@ -66,8 +66,8 @@ También las puedes configurar en la configuración del Agent con una lista sepa
 {{< code-block lang="yaml" filename="datadog.yaml" >}}
 apm_config:
   filter_tags:
-    requerir: ["db:sql", "db.instance:mysql"]
-    rechazar: ["outcome:success", "key2:value2"]
+    require: ["db:sql", "db.instance:mysql"]
+    reject: ["outcome:success", "key2:value2"]
 {{< /code-block >}}
 
 Por ejemplo, para ignorar comprobaciones de estado donde la `http.url` coincide con este punto conexión:
@@ -75,7 +75,7 @@ Por ejemplo, para ignorar comprobaciones de estado donde la `http.url` coincide 
 {{< code-block lang="yaml" filename="Datadog.yaml" >}}
 apm_config:
   filter_tags:
-    rechazar: ["http.url:http://localhost:5050/healthcheck"]
+    reject: ["http.url:http://localhost:5050/healthcheck"]
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -93,8 +93,8 @@ spec:
       containers:
         trace-agent:
           env:
-            - nombre: DD_APM_FILTER_TAGS_REJECT
-              valor: tag_key1:tag_val2 tag_key2:tag_val2
+            - name: DD_APM_FILTER_TAGS_REJECT
+              value: tag_key1:tag_val2 tag_key2:tag_val2
 {{< /code-block >}}
 
 {{% k8s-operator-redeploy %}}
@@ -102,12 +102,12 @@ spec:
 ##### Helm
 
 {{< code-block lang="yaml" filename="Datadog-values.yaml" >}}
-agentes:
-  contenedores:
+agents:
+  containers:
     traceAgent:
-      variable de entorno:
-        - nombre: DD_APM_FILTER_TAGS_REJECT
-          valor: tag_key1:tag_val2 tag_key2:tag_val2
+      env:
+        - name: DD_APM_FILTER_TAGS_REJECT
+          value: tag_key1:tag_val2 tag_key2:tag_val2
 
 {{< /code-block >}}
 
@@ -264,7 +264,7 @@ Para valores múltiples:
 
 {{< code-block lang="yaml" >}}
 apm_config:
-  ignore_resources: ["value1", "Api::HealthchecksController#index$"]
+  ignore_resources: ["value1","Api::HealthchecksController#index$"]
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -273,7 +273,7 @@ apm_config:
 En la lista de variables de entorno del contenedor del Datadog Agent, añade `DD_APM_IGNORE_RESOURCES` con un patrón como el del ejemplo siguiente. Docker Compose tiene su propia [sustitución de variables][1] para tener en cuenta cuando utilices caracteres especiales como `$`.
 
 {{< code-block lang="yaml" >}}
-   entorno:
+   environment:
       // otras variables de entorno del Datadog Agent
       - DD_APM_IGNORE_RESOURCES=Api::HealthchecksController#index$$
 {{< /code-block >}}
@@ -281,7 +281,7 @@ En la lista de variables de entorno del contenedor del Datadog Agent, añade `DD
 Para valores múltiples:
 
 {{< code-block lang="yaml" >}}
-   entorno:
+   environment:
       // otras variables de entorno del Datadog Agent
       - DD_APM_IGNORE_RESOURCES="value1","Api::HealthchecksController#index$$"
 {{< /code-block >}}
@@ -318,49 +318,49 @@ Para valores múltiples:
 En el contenedor del Trace Agent dedicado, añade la variable de entorno `DD_APM_IGNORE_RESOURCES`:
 
 {{< code-block lang="yaml" >}}
-    - nombre: trace-agent
-        imagen: "gcr.io/datadoghq/agent:latest"
+    - name: trace-agent
+        image: "gcr.io/datadoghq/agent:latest"
         imagePullPolicy: IfNotPresent
-        comando: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
-        recursos: {}
-        puertos:
+        command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
+        resources: {}
+        ports:
         - containerPort: 8126
           hostPort: 8126
-          nombre: traceport
-          protocolo: TCP
+          name: traceport
+          protocol: TCP
         env:
-        - nombre: DD_API_KEY
+        - name: DD_API_KEY
           valueFrom:
             secretKeyRef:
-              nombre: "datadog-secret"
-              clave: api-key
-        - nombre: DD_KUBERNETES_KUBELET_HOST
+              name: "datadog-secret"
+              key: api-key
+        - name: DD_KUBERNETES_KUBELET_HOST
           valueFrom:
             fieldRef:
               fieldPath: status.hostIP
-        - nombre: KUBERNETES
-          valor: "yes"
-        - nombre: DOCKER_HOST
-          valor: unix:///host/var/run/docker.sock
-        - nombre: DD_LOG_LEVEL
-          valor: "INFO"
-        - nombre: DD_APM_ENABLED
-          valor: "true"
-        - nombre: DD_APM_NON_LOCAL_TRAFFIC
-          valor: "true"
-        - nombre: DD_APM_RECEIVER_PORT
-          valor: "8126"
-        - nombre: DD_KUBELET_TLS_VERIFY
-          valor: "false"
-        - nombre: DD_APM_IGNORE_RESOURCES
-          valor: "Api::HealthchecksController#index$"
+        - name: KUBERNETES
+          value: "yes"
+        - name: DOCKER_HOST
+          value: unix:///host/var/run/docker.sock
+        - name: DD_LOG_LEVEL
+          value: "INFO"
+        - name: DD_APM_ENABLED
+          value: "true"
+        - name: DD_APM_NON_LOCAL_TRAFFIC
+          value: "true"
+        - name: DD_APM_RECEIVER_PORT
+          value: "8126"
+        - name: DD_KUBELET_TLS_VERIFY
+          value: "false"
+        - name: DD_APM_IGNORE_RESOURCES
+          value: "Api::HealthchecksController#index$"
 {{< /code-block >}}
 
 Para valores múltiples:
 
 {{< code-block lang="yaml" >}}
-        - nombre: DD_APM_IGNORE_RESOURCES
-          valor: '"value1","Api::HealthchecksController#index$"'
+        - name: DD_APM_IGNORE_RESOURCES
+          value: '"value1","Api::HealthchecksController#index$"'
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -371,25 +371,25 @@ En la sección `traceAgent` del archivo `values.yaml`, añade `DD_APM_IGNORE_RES
 {{< code-block lang="yaml" filename="values.yaml" >}}
     traceAgent:
       # agents.containers.traceAgent.env -- Variables de entorno adicionales para el contenedor del trace-agent
-      variable de entorno:
-        - nombre: DD_APM_IGNORE_RESOURCES
-          valor: Api::HealthchecksController#index$
+      env:
+        - name: DD_APM_IGNORE_RESOURCES
+          value: Api::HealthchecksController#index$
 
 {{< /code-block >}}
 
 Para valores múltiples:
 
 {{< code-block lang="yaml" >}}
-        - nombre: DD_APM_IGNORE_RESOURCES
-          valor: value1, Api::HealthchecksController#index$
+        - name: DD_APM_IGNORE_RESOURCES
+          value: value1, Api::HealthchecksController#index$
 {{< /code-block >}}
 
 También puedes configurar `agents.containers.traceAgent.env` en el comando `helm install`:
 
 {{< code-block lang="shell" >}}
 helm install dd-agent -f values.yaml \
-  --configurar datadog.apiKeyExistingSecret="datadog-secret" \
-  --configurar agents.containers.traceAgent.env[0].name=DD_APM_IGNORE_RESOURCES, \
+  --set datadog.apiKeyExistingSecret="datadog-secret" \
+  --set agents.containers.traceAgent.env[0].name=DD_APM_IGNORE_RESOURCES, \
     agents.containers.traceAgent.env[0].value="Api::HealthchecksController#index$" \
   datadog/datadog
 {{< /code-block >}}
