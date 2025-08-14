@@ -24,7 +24,7 @@ O para realizar un muestreo basado en las etiquetas (tags) de la URL HTTP:
 DD_TRACE_SAMPLING_RULES='[{"tags": {"http.url": "http://.*/healthcheck$"}, "sample_rate": 0.0}]'
 ```
 
-<div class="alert alert-info"><strong>Nota</strong>: Las decisiones de muestreo se determinan utilizando el primer span (tramo) de una trace (traza). Si el span (tramo) que contiene la etiqueta sobre la que se deseas filtrar no es una {{< descripción de herramienta Glosario="trace root span (span de origen de traza)" case="sentencia" >}}, esta regla no se aplica.</div>
+<div class="alert alert-info"><strong>Nota</strong>: Las decisiones de muestreo se determinan utilizando el primer span (tramo) de una trace (traza). Si el span (tramo) que contiene la etiqueta sobre la que se deseas filtrar no es una {{< tooltip glossary="trace root span (span de origen de traza)" case="sentencia" >}}, esta regla no se aplica.</div>
 
 ## Filtrado
 
@@ -63,7 +63,7 @@ Puedes especificar etiquetas de tramos para requerir o rechazar utilizando un li
 
 También las puedes configurar en la configuración del Agent con una lista separada por comas:
 
-{{< lenguaje de bloque de código="yaml" nombre de archivo="datadog.yaml" >}}
+{{< code-block lang="yaml" filename="datadog.yaml" >}}
 apm_config:
   filter_tags:
     requerir: ["db:sql", "db.instance:mysql"]
@@ -72,7 +72,7 @@ apm_config:
 
 Por ejemplo, para ignorar comprobaciones de estado donde la `http.url` coincide con este punto conexión:
 
-{{< lenguaje de bloque de código="yaml" nombre de archivo="Datadog.yaml" >}}
+{{< code-block lang="yaml" filename="Datadog.yaml" >}}
 apm_config:
   filter_tags:
     rechazar: ["http.url:http://localhost:5050/healthcheck"]
@@ -101,7 +101,7 @@ spec:
 
 ##### Helm
 
-{{< lenguaje de bloque de código="yaml" nombre de archivo="Datadog-values.yaml" >}}
+{{< code-block lang="yaml" filename="Datadog-values.yaml" >}}
 agentes:
   contenedores:
     traceAgent:
@@ -215,7 +215,7 @@ Puedes especificar los recursos que deseas ignorar en el archivo de configuraci�
 
 Utilización de `Datadog.yaml`:
 
-{{< lenguaje de bloque de código="yaml" nombre de archivo="Datadog.yaml" >}}
+{{< code-block lang="yaml" filename="Datadog.yaml" >}}
 apm_config:
 ## @param ignore_resources - lista de cadenas - opcional
 ## Se puede proporcionar un lista de expresiones regulares para excluir determinados trazas en función del nombre del recurso.
@@ -255,14 +255,14 @@ Según cuál sea tu forma de despliegue, la sintaxis será un poco diferente:
 {{< tabs >}}
 {{% tab "datadog.yaml" %}}
 
-{{< lenguaje de bloque de código="yaml" nombre de archivo="Datadog.yaml" >}}
+{{< code-block lang="yaml" filename="Datadog.yaml" >}}
 apm_config:
   ignore_resources: Api::HealthchecksController#index$
 {{< /code-block >}}
 
 Para valores múltiples:
 
-{{< lenguaje de bloque de código="yaml" >}}
+{{< code-block lang="yaml" >}}
 apm_config:
   ignore_resources: ["value1", "Api::HealthchecksController#index$"]
 {{< /code-block >}}
@@ -272,7 +272,7 @@ apm_config:
 
 En la lista de variables de entorno del contenedor del Datadog Agent, añade `DD_APM_IGNORE_RESOURCES` con un patrón como el del ejemplo siguiente. Docker Compose tiene su propia [sustitución de variables][1] para tener en cuenta cuando utilices caracteres especiales como `$`.
 
-{{< lenguaje de bloque de código="yaml" >}}
+{{< code-block lang="yaml" >}}
    entorno:
       // otras variables de entorno del Datadog Agent
       - DD_APM_IGNORE_RESOURCES=Api::HealthchecksController#index$$
@@ -280,7 +280,7 @@ En la lista de variables de entorno del contenedor del Datadog Agent, añade `DD
 
 Para valores múltiples:
 
-{{< lenguaje de bloque de código="yaml" >}}
+{{< code-block lang="yaml" >}}
    entorno:
       // otras variables de entorno del Datadog Agent
       - DD_APM_IGNORE_RESOURCES="value1","Api::HealthchecksController#index$$"
@@ -292,7 +292,7 @@ Para valores múltiples:
 
 En tu comando Docker run para hacer girar el Datadog Agent, añade `DD_APM_IGNORE_RESOURCES`:
 
-{{< lenguaje de bloque de código="shell" >}}
+{{< code-block lang="shell" >}}
 docker run -d --name datadog-agent \
               --cgroupns host \
               --pid host \
@@ -308,7 +308,7 @@ docker run -d --name datadog-agent \
 
 Para valores múltiples:
 
-{{< lenguaje de bloque de código="yaml" >}}
+{{< code-block lang="yaml" >}}
               -e DD_APM_IGNORE_RESOURCES=["value1","Api::HealthchecksController#index$"] \
 {{< /code-block >}}
 
@@ -317,7 +317,7 @@ Para valores múltiples:
 
 En el contenedor del Trace Agent dedicado, añade la variable de entorno `DD_APM_IGNORE_RESOURCES`:
 
-{{< lenguaje de bloque de código="yaml" >}}
+{{< code-block lang="yaml" >}}
     - nombre: trace-agent
         imagen: "gcr.io/datadoghq/agent:latest"
         imagePullPolicy: IfNotPresent
@@ -358,7 +358,7 @@ En el contenedor del Trace Agent dedicado, añade la variable de entorno `DD_APM
 
 Para valores múltiples:
 
-{{< lenguaje de bloque de código="yaml" >}}
+{{< code-block lang="yaml" >}}
         - nombre: DD_APM_IGNORE_RESOURCES
           valor: '"value1","Api::HealthchecksController#index$"'
 {{< /code-block >}}
@@ -368,7 +368,7 @@ Para valores múltiples:
 
 En la sección `traceAgent` del archivo `values.yaml`, añade `DD_APM_IGNORE_RESOURCES` en la sección `env` y, a continuación, [haz girar helm como de costumbre][1].
 
-{{< lenguaje de bloque de código="yaml" nombre de archivo="values.yaml" >}}
+{{< code-block lang="yaml" filename="values.yaml" >}}
     traceAgent:
       # agents.containers.traceAgent.env -- Variables de entorno adicionales para el contenedor del trace-agent
       variable de entorno:
@@ -379,14 +379,14 @@ En la sección `traceAgent` del archivo `values.yaml`, añade `DD_APM_IGNORE_RES
 
 Para valores múltiples:
 
-{{< lenguaje de bloque de código="yaml" >}}
+{{< code-block lang="yaml" >}}
         - nombre: DD_APM_IGNORE_RESOURCES
           valor: value1, Api::HealthchecksController#index$
 {{< /code-block >}}
 
 También puedes configurar `agents.containers.traceAgent.env` en el comando `helm install`:
 
-{{< lenguaje de bloque de código="shell" >}}
+{{< code-block lang="shell" >}}
 helm install dd-agent -f values.yaml \
   --configurar datadog.apiKeyExistingSecret="datadog-secret" \
   --configurar agents.containers.traceAgent.env[0].name=DD_APM_IGNORE_RESOURCES, \
@@ -400,7 +400,7 @@ helm install dd-agent -f values.yaml \
 
 Si utilizas Amazon ECS (como en EC2), en tu definición del contenedor del Datadog Agent, añade la variable de entorno `DD_APM_IGNORE_RESOURCES` con los valores necesarios para que el JSON evalúe de la siguiente manera:
 
-{{< lenguaje de bloque de código="json" >}}
+{{< code-block lang="json" >}}
     "environment": [
     // otras variables de entorno para el Datadog Agent
         {
@@ -422,7 +422,7 @@ Algunos de los rastreadores específicos del lenguaje tienen una opción para mo
 <div class="alert alert-warning"><strong>Notas</strong>:<br>1. Si la solicitud está asociada a una trace (traza) distribuida, la trace (traza) resultante puede tener imprecisiones de muestreo si se descartan partes de ella debido a estas reglas de filtrado.<br> 2. Filtrar traces (trazas) de esta manera elimina estas solicitudes de <a href="/tracing/guide/metrics_namespace/">las métricas de traces (trazas) </a>. Para obtener información sobre cómo reducir la ingesta sin afectar a las métricas de traces (trazas), consulta <a href="/tracing/trace_ingestion/ingestion_controls">los controles de ingesta</a>.</div>
 
 
-{{< programming-lang-wrapper lenguajes="ruby,python,nodeJS,java" >}}
+{{< programming-lang-wrapper langs="ruby,python,nodeJS,java" >}}
 
 {{< programming-lang lang="ruby" >}}
 
