@@ -2,7 +2,7 @@
 title: Retention Widget
 widget_type: cohort
 further_reading:
-- link: "product_analytics/retention_analysis/"
+- link: "product_analytics/charts/retention_analysis/"
   tag: "Documentation"
   text: "Retention Analysis"
 - link: "https://www.datadoghq.com/blog/user-engagement-retention-analysis/"
