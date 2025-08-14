@@ -1458,26 +1458,29 @@ components:
       - data
       type: object
     AWSAssumeRole:
-      description: The definition of `AWSAssumeRole` object.
+      description: The definition of the `AWSAssumeRole` object.
       properties:
         account_id:
-          description: AWS account the connection is created for
+          description: AWS account the connection is created for.
           example: '111222333444'
           pattern: ^\d{12}$
           type: string
         external_id:
           description: External ID used to scope which connection can be used to assume
-            the role
+            the role.
           example: 33a1011635c44b38a064cf14e82e1d8f
           readOnly: true
           type: string
+        generate_new_external_id:
+          description: Pass true if the `external_id` should be regenerated.
+          type: boolean
         principal_id:
-          description: AWS account that will assume the role
+          description: AWS account that will assume the role.
           example: '123456789012'
           readOnly: true
           type: string
         role:
-          description: Role to assume
+          description: Role to assume.
           example: my-role
           type: string
         type:
@@ -1488,7 +1491,7 @@ components:
       - role
       type: object
     AWSAssumeRoleType:
-      description: The definition of `AWSAssumeRoleType` object.
+      description: The definition of the `AWSAssumeRole` object.
       enum:
       - AWSAssumeRole
       example: AWSAssumeRole
@@ -1496,18 +1499,18 @@ components:
       x-enum-varnames:
       - AWSASSUMEROLE
     AWSAssumeRoleUpdate:
-      description: The definition of `AWSAssumeRoleUpdate` object.
+      description: The definition of the `AWSAssumeRole` object.
       properties:
         account_id:
-          description: AWS account the connection is created for
+          description: AWS account the connection is created for.
           example: '111222333444'
           pattern: ^\d{12}$
           type: string
         generate_new_external_id:
-          description: The `AWSAssumeRoleUpdate` `generate_new_external_id`.
+          description: Pass true if the `external_id` should be regenerated.
           type: boolean
         role:
-          description: Role to assume
+          description: Role to assume.
           example: my-role
           type: string
         type:
@@ -1554,15 +1557,15 @@ components:
       - role_name
       type: object
     AWSCredentials:
-      description: The definition of `AWSCredentials` object.
+      description: The definition of the `AWSCredentials` object.
       oneOf:
       - $ref: '#/components/schemas/AWSAssumeRole'
     AWSCredentialsUpdate:
-      description: The definition of `AWSCredentialsUpdate` object.
+      description: The definition of the `AWSCredentialsUpdate` object.
       oneOf:
       - $ref: '#/components/schemas/AWSAssumeRoleUpdate'
     AWSIntegration:
-      description: The definition of `AWSIntegration` object.
+      description: The definition of the `AWSIntegration` object.
       properties:
         credentials:
           $ref: '#/components/schemas/AWSCredentials'
@@ -1621,7 +1624,7 @@ components:
       x-enum-varnames:
       - PERMISSIONS
     AWSIntegrationType:
-      description: The definition of `AWSIntegrationType` object.
+      description: The definition of the `AWSIntegrationType` object.
       enum:
       - AWS
       example: AWS
@@ -1629,7 +1632,7 @@ components:
       x-enum-varnames:
       - AWS
     AWSIntegrationUpdate:
-      description: The definition of `AWSIntegrationUpdate` object.
+      description: The definition of the `AWSIntegrationUpdate` object.
       properties:
         credentials:
           $ref: '#/components/schemas/AWSCredentialsUpdate'
@@ -18608,6 +18611,46 @@ components:
         example: env:production
         type: string
       type: array
+    HTTPBasicAuth:
+      description: The definition of the `HTTPBasicAuth` object.
+      properties:
+        password:
+          description: Password used for authentication. Saved in a secret store
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/HTTPBasicAuthType'
+        username:
+          description: Username used for authentication.
+          example: ''
+          type: string
+      required:
+      - type
+      - username
+      - password
+      type: object
+    HTTPBasicAuthType:
+      description: The definition of the `HTTPBasicAuth` object.
+      enum:
+      - HTTPBasicAuth
+      example: HTTPBasicAuth
+      type: string
+      x-enum-varnames:
+      - HTTPBASICAUTH
+    HTTPBasicAuthUpdate:
+      description: The definition of the `HTTPBasicAuth` object.
+      properties:
+        password:
+          description: Password used for authentication. Saved in a secret store
+          type: string
+        type:
+          $ref: '#/components/schemas/HTTPBasicAuthType'
+        username:
+          description: Username used for authentication.
+          type: string
+      required:
+      - type
+      type: object
     HTTPBody:
       description: The definition of `HTTPBody` object.
       properties:
@@ -18646,13 +18689,17 @@ components:
           type: array
       type: object
     HTTPCredentials:
-      description: The definition of `HTTPCredentials` object.
+      description: The definition of the `HTTPCredentials` object.
       oneOf:
       - $ref: '#/components/schemas/HTTPTokenAuth'
+      - $ref: '#/components/schemas/HTTPBasicAuth'
+      - $ref: '#/components/schemas/HTTPMtlsAuth'
     HTTPCredentialsUpdate:
-      description: The definition of `HTTPCredentialsUpdate` object.
+      description: The definition of the `HTTPCredentialsUpdate` object.
       oneOf:
       - $ref: '#/components/schemas/HTTPTokenAuthUpdate'
+      - $ref: '#/components/schemas/HTTPBasicAuthUpdate'
+      - $ref: '#/components/schemas/HTTPMtlsAuthUpdate'
     HTTPHeader:
       description: The definition of `HTTPHeader` object.
       properties:
@@ -18688,10 +18735,10 @@ components:
       - name
       type: object
     HTTPIntegration:
-      description: The definition of `HTTPIntegration` object.
+      description: The definition of the `HTTPIntegration` object.
       properties:
         base_url:
-          description: Base HTTP url for the integration
+          description: Base HTTP url for the integration.
           example: http://datadoghq.com
           type: string
         credentials:
@@ -18704,7 +18751,7 @@ components:
       - credentials
       type: object
     HTTPIntegrationType:
-      description: The definition of `HTTPIntegrationType` object.
+      description: The definition of the `HTTPIntegrationType` object.
       enum:
       - HTTP
       example: HTTP
@@ -18712,10 +18759,10 @@ components:
       x-enum-varnames:
       - HTTP
     HTTPIntegrationUpdate:
-      description: The definition of `HTTPIntegrationUpdate` object.
+      description: The definition of the `HTTPIntegrationUpdate` object.
       properties:
         base_url:
-          description: Base HTTP url for the integration
+          description: Base HTTP url for the integration.
           example: http://datadoghq.com
           type: string
         credentials:
@@ -18801,6 +18848,46 @@ components:
       required:
       - message
       type: object
+    HTTPMtlsAuth:
+      description: The definition of the `HTTPMtlsAuth` object.
+      properties:
+        certificate:
+          description: Certificate of authority used to sign the request.
+          example: ''
+          type: string
+        private_key:
+          description: Private key used for the MTLS handshake
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/HTTPMtlsAuthType'
+      required:
+      - type
+      - certificate
+      - private_key
+      type: object
+    HTTPMtlsAuthType:
+      description: The definition of the `HTTPMtlsAuth` object.
+      enum:
+      - HTTPMtlsAuth
+      example: HTTPMtlsAuth
+      type: string
+      x-enum-varnames:
+      - HTTPMTLSAUTH
+    HTTPMtlsAuthUpdate:
+      description: The definition of the `HTTPMtlsAuth` object.
+      properties:
+        certificate:
+          description: Certificate of authority used to sign the request.
+          type: string
+        private_key:
+          description: Private key used for the MTLS handshake
+          type: string
+        type:
+          $ref: '#/components/schemas/HTTPMtlsAuthType'
+      required:
+      - type
+      type: object
     HTTPToken:
       description: The definition of `HTTPToken` object.
       properties:
@@ -18846,7 +18933,7 @@ components:
       - type
       type: object
     HTTPTokenAuthType:
-      description: The definition of `HTTPTokenAuthType` object.
+      description: The definition of the `HTTPTokenAuth` object.
       enum:
       - HTTPTokenAuth
       example: HTTPTokenAuth

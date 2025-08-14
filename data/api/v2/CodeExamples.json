@@ -54,6 +54,21 @@
       "group": "action_connection",
       "suffix": "",
       "description": "Create a new Action Connection returns \"Successfully created Action Connection\" response"
+    },
+    {
+      "group": "action_connection",
+      "suffix": "_778774383",
+      "description": "Create a new Action Connection with HTTPBasicAuth returns \"Successfully created Action Connection\" response"
+    },
+    {
+      "group": "action_connection",
+      "suffix": "_247736109",
+      "description": "Create a new Action Connection with HTTPMtlsAuth returns \"Successfully created Action Connection\" response"
+    },
+    {
+      "group": "action_connection",
+      "suffix": "_912926606",
+      "description": "Create a new Action Connection with HTTPTokenAuth returns \"Successfully created Action Connection\" response"
     }
   ],
   "UpdateActionConnection": [
@@ -61,6 +76,11 @@
       "group": "action_connection",
       "suffix": "",
       "description": "Update an existing Action Connection returns \"Successfully updated Action Connection\" response"
+    },
+    {
+      "group": "action_connection",
+      "suffix": "_1293363740",
+      "description": "Update an existing Action Connection with HTTPBasicAuth returns \"Successfully updated Action Connection\" response"
     }
   ],
   "UpdateAwsScanOptions": [
