@@ -57,10 +57,13 @@ The client is the component of an application that enables users to authorize th
 2. Enter your client details such as the name, onboarding URL, and redirect URIs.
 3. Generate your OAuth client secret.
 4. Save your client secret as it won't show again. You can regenerate a new secret if you lost it.
-  > The client you create in this step is a private version of the client, whose credentials you can use for testing. It allows only internal organization authorization. When your integration is published, a published version of this client is created, and you will receive a new set of credentials that enable authorization across any Datadog organization.
-5. Select the appropriate scopes
-> Scopes determine the types of data your app can access in the customer’s Datadog account. This allows your integration to access the necessary scopes. Only request the minimum amount of scopes required for your use case, as more can be added later on as needed. To submit data into Datadog, the **api_keys_write** scope must be selected.
-6. Save your changes
+
+   The client you create in this step is a private version, and its credentials can be used for testing within your own organization only. When your integration is published, a new, published version of this client will be created, and you will receive a new set of credentials that allow authorization across any Datadog organization.
+
+5. Select the appropriate scopes.
+
+   Scopes determine the types of data your app can access in the customer's Datadog account. This allows your integration to access the necessary scopes. Only request the minimum amount of scopes required for your use case, as more can be added later on as needed. To submit data into Datadog, you must select the `api_keys_write` scope.
+6. Save your changes.
 
 ### Implement the OAuth protocol
 
