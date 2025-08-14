@@ -33,12 +33,12 @@ Under **When an incident is...**, select a trigger and define rule conditions:
 
 
 
-For example, consider a rule that has conditions `severity:SEV-1` and `severity:SEV-2` and `team:shopping` and renotify fields `state` and `service`. This rule fires whenever you...
+For example, consider a rule that has conditions `severity:SEV-1`, `severity:SEV-2`, and `team:shopping`. The rule is also configured to renotify on changes to the `state` and `service` fields. This rule sends a notification when you:
 
-* ...add the `shopping` team to its `teams` field.
-* ...change its `severity` to `SEV-1` or `SEV-2` from some other severity.
-* ...change `state` if the incident already has team `shopping` and is either `SEV-1` or `SEV-2`.
-* ...change `service` if the incident already has team `shopping` and is either `SEV-1` or `SEV-2`.
+* Add the `shopping` team to the incident's `teams` field.
+* Change the incident's `severity` to `SEV-1` or `SEV-2` from some other severity.
+* Change `state` field **if** the incident already has team `shopping` **and** is either `SEV-1` or `SEV-2`.
+* Change the `service` field **if** the incident already has team `shopping` **and** is either `SEV-1` or `SEV-2`.
 
 ### Notification recipients
 
