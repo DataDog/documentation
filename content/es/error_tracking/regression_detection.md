@@ -16,7 +16,7 @@ Una regresión se refiere a la reaparición no intencionada de un error o un pro
 
 Si un error **RESUELTO** se repite en una versión más reciente del código o el error vuelve a producirse en el código sin versiones, el rastreo de errores activa una regresión. El problema pasa al estado **PARA REVISIÓN** y se le coloca una etiqueta (tag) de **Regresión**:
 
-{{< img src="error_tracking/regression-detection.png" alt=Los detalles de la regresión en el rastreo de errores" style="width:90%;" >}}
+{{< img src="error_tracking/regression-detection.png" alt="Los detalles de la regresión en el rastreo de errores" style="width:90%;" >}}
 
 Las regresiones tienen en cuenta las versiones de tu servicio en las que se sabe que se produce el error y sólo se activan en las nuevas versiones después de que un problema se marque como **RESUELTO**. Configura tus servicios con etiquetas (tags) de la versión (consulta las instrucciones para [APM][1], [RUM][2] y [Logs][3]) para garantizar que los problemas se resuelvan automáticamente sólo si los mismos errores se producen en versiones más recientes de tus servicios.
 
