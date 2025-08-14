@@ -257,17 +257,7 @@ To control who can access logs containing sensitive data, use tags added by the 
 
 ### Mask action
 
-<div class="alert alert-warning">The <b>mask</b> action is only available for logs.</div>
-
-When you set up or edit a scanner rule, there is an **Action on Match** section where you can set the rule to use the **mask** action for matched sensitive data. The **mask** action obfuscates the sensitive data, but users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) and view the data in Datadog.
-
-**Notes**:
-- Unmasking can only be performed on indexed logs within Datadog.
-- Masked data that is accessed programmatically, such as using the API or Terraform, or within archives always appear obfuscated and cannot be unmasked.
-- Unmasking does not work on rehydrated logs.
-- Datadog does not recommend using the **mask** action for credentials, unless you have a plan to respond to and rotate all leaked credentials.
-
-To unmask sensitive data, navigate to the [Summary page][8], click on a scanning rule, and then click on a log. If you have permission to see masked data, that data has an eye icon next to it. Click the eye icon to see the data. You can also use the [Log Explorer][15] to view your masked log data.
+{{% sds-mask-action %}}
 
 ## Redact sensitive data in tags
 
@@ -318,4 +308,3 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [12]: /observability_pipelines/
 [13]: /observability_pipelines/processors/sensitive_data_scanner/
 [14]: /observability_pipelines/set_up_pipelines/
-[15]: https://app.datadoghq.com/logs
