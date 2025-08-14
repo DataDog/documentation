@@ -80,7 +80,7 @@ For advanced processing, consider:
 - String Builder Processor - Concatenates multiple string attributes.
 
 Tips
-- Remove original attributes when remapping log attributes by using preserveSource:false. This helps avoid confusion and removes duplicates.
+- Remove original attributes when remapping log attributes by using `preserveSource:false`. This helps avoid confusion and removes duplicates.
 - To maintain optimal grok parsing performance, avoid wildcard matchers.
 
 Use processors within your pipelines to enrich and restructure your data, and generate log attributes. For a list of all log processors, see the [Processors][10] documentation.

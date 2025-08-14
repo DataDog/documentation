@@ -15,7 +15,7 @@ This guide provides steps for creating a Cloud SIEM detection rule and outlines 
 
 [Datadog Cloud SIEM (Security Information and Event Management)][1] unifies developer, operation, and security teams through one platform. Datadog provides a set of out-of-the-box detection rules for many features and integrations. View these rules in your [SIEM Detection Rules list][2].
 
-Datadog Cloud SIEM detection rules are out-of-the-box content that can be added to integratios to be ready to use upon installation.
+Datadog Cloud SIEM detection rules are out-of-the-box content that can be added to integrations and are ready to use upon installation.
 
 To create a Datadog integration, see [Create a New Integration][3].
 

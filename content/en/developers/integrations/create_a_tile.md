@@ -14,11 +14,11 @@ type: documentation
 ---
 ## Overview
 
-This page will outline what an integration is, and the general process of building an integration at Datadog using the Integration Developer Platform.
+This page outlines what an integration is, and the general process of building an integration at Datadog using the Integration Developer Platform.
 
 ## What are integrations?
 
-Integrations enable third-parties to send observability data—such as metrics, logs, traces, or events—into Datadog. Integrations include out-of-the-box (OOTB) dashboards, monitors and other content to help users visualize and analyze their data. 
+Integrations enable third parties to send observability data—such as metrics, logs, traces, or events—into Datadog. Integrations include out-of-the-box (OOTB) dashboards, monitors, and other content to help users visualize and analyze their data. 
 
 ## What is an integration tile?
 
@@ -53,10 +53,9 @@ Once accepted, a member of the Datadog Technology Partner team will reach out to
 
 ## Out-of-the-box Integrations vs. Marketplace Offerings
 
-**Out-of-the-Box Integrations**:integrations developed both by Datadog and Technology Partners, available at no cost on the [Integrations page][2]. 
+**Out-of-the-Box Integrations** are integrations developed both by Datadog and Technology Partners, available at no cost on the [Integrations page][2]. 
 
-**Marketplace Offerings**: 
-The Datadog Marketplace is a commercial platform for Technology Partners to _sell_ a variety of offerings to Datadog customers. Marketplace offerings include:
+**Marketplace Offerings** are available on the Datadog Marketplac, a commercial platform for Technology Partners to _sell_ a variety of offerings to Datadog customers. Marketplace offerings include:
 * Paid Integrations
 * Software Licenses
 * Professional Services
@@ -67,7 +66,7 @@ Marketplace integrations are ideal for:
 
 |                          | **OOTB Integrations**                                                                 | **Marketplace Integrations**                                                                                   |
 |--------------------------|----------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
-| **Purpose**              | Provides a way to connect and transfer data between Datadog and partner platforms     | Enhance the Datadog experience, including extended capabilities, partner services, and legacy tech coverage    |
+| **Purpose**              | Provide a way to connect and transfer data between Datadog and partner platforms     | Enhance the Datadog experience, including extended capabilities, partner services, and legacy tech coverage    |
 | **Availability**         | Included on the Integrations Page                                                     | Paid, available on the Marketplace                                                                             |
 | **Built & Maintained by**| Datadog or Technology Partners                                                        | Technology Partners                                                                                            |
 | **Billing**              | Included in Datadog subscription                                                      | Additional fees                                               |
