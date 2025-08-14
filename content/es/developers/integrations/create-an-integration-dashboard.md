@@ -27,7 +27,7 @@ En Datadog, en [**Dashboard List**][12] (Lista de dashboard), haz clic en **New 
 ### Exporta tu dashboard
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "UI" %}}
 
 Exporta tu dashboard a JSON haciendo clic en el icono **Share** (Compartir) o **Configure** (Configurar) y seleccionando **Export dashboard JSON** (Exportar dashboard JSON).
 

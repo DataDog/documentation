@@ -74,7 +74,7 @@ Para obtener una lista completo de las variables de entorno establecidas por Azu
 
 [101]: https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops
 {{% /tab %}}
-{{% tab "Bitbucket Pipelines" (Pipelines de Bitbucket) %}}
+{{% tab "Pipelines de Bitbucket" %}}
 
 | Variable de entorno               | Descripción                                                                                                                                                      |
 |------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -194,7 +194,7 @@ Para una lista completa de las variables de entorno establecidas por Codefresh p
 [101]: https://codefresh.io/docs/docs/pipelines/variables/
 
 {{% /tab %}}
-{{% tab "GitHub Actions" (Acciones GitHub) %}}
+{{% tab "Acciones GitHub" %}}
 
 | Variable de entorno       | Descripción                                                                                           |
 |----------------------------|-------------------------------------------------------------------------------------------------------|
@@ -218,7 +218,7 @@ Para una lista completa de las variables de entorno establecidas por las accione
 [101]: https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/variables#default-environment-variables
 
 {{% /tab %}}
-{{% tab "GitLab CI" (CLI GitLab) %}}
+{{% tab "GitLab CI" %}}
 
 | Variable de entorno              | Descripción                                                                                              |
 |-----------------------|----------------------------------------------------------------------------------------------------------|

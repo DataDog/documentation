@@ -18,7 +18,7 @@ Esta sección especifica el formato de datagramas sin procesar para métricas, e
 ## Protocolo de DogStatsD 
 
 {{< tabs >}}
-{{% tab "Metrics" (Métricas) %}}
+{{% tab "Métricas" %}}
 
 `<METRIC_NAME>:<VALUE>|<TYPE>|@<SAMPLE_RATE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
 
@@ -180,7 +180,7 @@ _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low
 ```
 
 {{% /tab %}}
-{{% tab "Service Checks" (Checks de servicios) %}}
+{{% tab "Checks de servicios" %}}
 
 `_sc|<NAME>|<STATUS>|d:<TIMESTAMP>|h:<HOSTNAME>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|m:<SERVICE_CHECK_MESSAGE>`
 
@@ -211,7 +211,7 @@ Para Linux y otros sistemas operativos tipo Unix, utiliza Bash. Para Windows, ut
 DogStatsD crea un mensaje que contiene información sobre tu métrica, evento o check de servicio y los envía a un Agent instalado localmente como recopilador. La dirección IP de destino es `127.0.0.1` y el puerto del recopilador en UDP es `8125`. Para ver más detalles sobre la configuración del Agent, consulta [DogStatsD][3].
 
 {{< tabs >}}
-{{% tab "Metrics" (Métricas) %}}
+{{% tab "Métricas" %}}
 
 El formato para enviar métricas es:
 
@@ -289,7 +289,7 @@ PS C:> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$text|#she
 ```
 
 {{% /tab %}}
-{{% tab "Service Checks" (Checks de servicios) %}}
+{{% tab "Checks de servicios" %}}
 
 El formato para enviar checks de servicios es:
 
