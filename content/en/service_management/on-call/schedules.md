@@ -107,8 +107,8 @@ If you encounter issues when exporting your On-Call schedule feeds to Google Cal
 
 When team members leave your organisation, they are not automatically removed from On-Call schedules:
 
-- **Schedule membership**: Users remain part of schedules and are not automatically removed when they leave. You must manually update schedules to remove departed team members and reassign their shifts.
-- **Notifications**: If a user's Datadog account is deactivated, they stop receiving all On-Call notifications (SMS, email, push notifications, etc.), even if they remain assigned to shifts in the schedule.
+- **Schedule membership**: Departed users remain in On-Call schedules until manually removed. You must update schedules to remove former team members and reassign their shifts.
+- **Notifications**: If a user's Datadog account is deactivated, they no longer receive On-Call notifications (such as SMS, email, and push notifications), even if still assigned to scheduled shifts.
 
 ## Further Reading
 
