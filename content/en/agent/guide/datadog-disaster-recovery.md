@@ -214,7 +214,7 @@ Then, follow the prompt to scope the hosts and telemetry (metrics, logs, traces)
 
 
 <div class="alert alert-warning">
-<strong>Note</strong>: Cloud Integrations can only run in either your primary or DDR Datadog site, but not both at the same time, so failing them over will cease Cloud Integration data in your primary site. <strong>During an integration failover, integrations run only in the DDR data center</strong>. When no longer in failover, disable the policy to return integration data collection to the primary org. 
+<strong>Note</strong>: Cloud Integrations can only run in either your primary or DDR Datadog site, but not both at the same time, so failing them over will cease Cloud Integration data in your primary site. <strong>During an integration failover, integrations run only in the DDR data center</strong>. When no longer in failover, disable the failover policy to return integration data collection to the primary org. 
 </div>
 
 
