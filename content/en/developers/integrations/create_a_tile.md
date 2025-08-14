@@ -34,19 +34,22 @@ Integration tiles are a component of integrations at Datadog.
 
 Follow these steps to create a new integration with Datadog.
 
-1. **Apply to the Datadog Partner Network.**
-Once accepted, a member of the Datadog Technology Partner team will reach out to schedule an introductory call.
+1. **Apply to the Datadog Partner Network.** Once accepted, a member of the Datadog Technology Partner team will reach out to schedule an introductory call.
 2. **Request a Datadog sandbox account** for development via the Datadog Partner Network portal.
-3. **Start developing your integration** using the Integration Developer Platform.
-    a. Define the basic details about your integration. 
-    b. Define and write your integration code by following the instructions to create either 1) [an Agent-based integration][5], or 2) [an API-based integration][6]. Select the appropriate configuration method depending on your integration.
-    c. Specify what type of data types your integration queries or submits.
-    c. Create a dashboard, and optionally monitors or security rules. 
-    c. Fill in the remaining fields:
-        * Setup and uninstallation instructions
-        * Images
-        * Support details
-        * Other key details that help describe the value of your integration
+3. **Start developing your integration** using the Integration Developer Platform:
+
+   a. Define the basic details about your integration.
+
+   b. Define and write your integration code by following the instructions to create one of the following integration types:
+      - [Agent-based integration][5]
+      - [API-based integration][6]   
+
+   c. Specify what type of data your integration queries or submits.
+
+   d. Create a dashboard, and optionally create monitors or security rules.
+
+   e. Fill in the remaining fields: setup and uninstallation instructions, images, support details, and other key details that help describe the value of your integration.
+
 4. **Test your integration** in your Datadog sandbox account.
 5. **Submit your integration for review.**
 6. **Once approved, your integration is published.**
@@ -83,5 +86,5 @@ Datadog offers GTM support for Marketplace listings only. To learn more about th
 [2]: /integrations
 [3]: /marketplace
 [4]: https://docs.datadoghq.com/developers/integrations/marketplace_offering/
-[5]: << link to agent integration docs >> 
-[6]: << link to API integration docs>> 
+[5]: /developers/integrations/agent_integration/
+[6]: /developers/integrations/api_integration/
