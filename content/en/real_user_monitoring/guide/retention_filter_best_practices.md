@@ -29,13 +29,12 @@ This guide provides strategies for managing your RUM session volumes effectively
 
 RUM retention filters let you choose which user sessions to keep. Here's how they work:
 
-Each session contains multiple events (like pageviews, clicks, or errors). The system evaluates each event individually against your retention filters:
+Each session contains multiple events (like pageviews, user actions, errors, resource requests, or performance metrics). The system evaluates each event individually against your retention filters:
 
 1. **Session kept**: If at least one event matches a retention filter AND is selected for retention, the entire session is preserved.
 2. **Session discarded**: If no events match any retention filters by the time the session ends, the entire session is removed.
 
 {{< img src="real_user_monitoring/rum_without_limits/rum-without-limits-how-retention-filters-work-3.png" alt="Flowchart showing how retention filters work: 1. Events from a session are checked against filters, 2. If any event matches and is selected, the entire session is kept, 3. If no events match any filters, the session is discarded" style="width:80%" >}}
-*Figure 1: How retention filters evaluate events and determine session retention*
 
 ### How different event types work
 
@@ -54,18 +53,9 @@ Some events (like errors and clicks) are "locked in" once they happen - Datadog 
 
 ## Best practices
 
-Sequencing your retention filters properly ensures you store the RUM data you need. Based on the [retention filter logic][2], follow these best practices:
-
-1. Arrange them from highest to lowest retention rates
-2. Use more filters with 100% retention
-3. Limit filters with lower percentages, and 
-4. Always add a fallback filter at the end with `@session.is_active: false` to capture any remaining sessions
-
-Below you can learn more about each of these practices and see examples of how to implement them correctly.
-
 ### Ordering retention filters
 
-The order of your retention filters is important. Datadog recommends placing your most specific filters with the highest sample rates at the top of the list, and your most general filters with the lowest sample rates at the bottom.
+The order of your [retention filters][2] is important. Datadog recommends putting the most specific filters with the highest sample rates at the top of the list, and your most general filters with the lowest sample rates at the bottom.
 
 For example, imagine you have a crash event (an Error event with the `@error.is_crash:true` attribute). This event could match more than one filter, but it is only be evaluated against the first matching filter in your list.
 
@@ -73,13 +63,13 @@ For example, imagine you have a crash event (an Error event with the `@error.is_
 
   | ✅ Recommended |
   |---------|
-  | {{< img src="real_user_monitoring/rum_without_limits/retention-filters-good.png" alt="Good filter order example: 1. Sessions with replays (100% retention), 2. Crash sessions (100% retention), 3. All error sessions (50% retention). This ensures crashes are always captured." style="width:100%" >}} |
+  | {{< img src="real_user_monitoring/rum_without_limits/retention-filters-good-3.png" alt="Good filter order example: 1. Sessions with replays (100% retention), 2. Crash sessions (100% retention), 3. All error sessions (50% retention). This ensures crashes are always captured." style="width:100%" >}} |
 
 - In following example, the more general "All errors" filter comes before the "Crashes" filter. Because of this, crash sessions are only kept if they are selected by the "All errors" filter (for example, if it has a 50% sample rate). If they are not selected, they are not evaluated by the "Crashes" filter, and those sessions are lost.
 
   | ❌ Not recommended |
   |---------|
-  | {{< img src="real_user_monitoring/rum_without_limits/retention-filters-bad.png" alt="Poor filter order example: 1. Sessions with replays (100% retention), 2. All error sessions (50% retention), 3. Crash sessions (100% retention). This risks losing crash sessions if they don't match the general error filter first." style="width:100%" >}} |
+  | {{< img src="real_user_monitoring/rum_without_limits/retention-filters-bad-3.png" alt="Poor filter order example: 1. Sessions with replays (100% retention), 2. All error sessions (50% retention), 3. Crash sessions (100% retention). This risks losing crash sessions if they don't match the general error filter first." style="width:100%" >}} |
 
 ### Fallback filters for capturing remaining sessions
 
@@ -89,13 +79,13 @@ A fallback filter at the bottom of your list captures a small percentage of sess
 
   | ✅ Recommended |
   |---------|
-  | {{< img src="real_user_monitoring/rum_without_limits/retention-filters-catchall-good.png" alt="Good fallback filter example: 1. Sessions with replays (100% retention), 2. Sessions lasting more than 5 seconds (100% retention), 3. Sessions that are not active (10% retention). This ensures other filters get first chance to capture sessions." style="width:100%" >}} |
+  | {{< img src="real_user_monitoring/rum_without_limits/retention-filters-catchall-good-3.png" alt="Good fallback filter example: 1. Sessions with replays (100% retention), 2. Sessions lasting more than 5 seconds (100% retention), 3. Sessions that are not active (10% retention). This ensures other filters get first chance to capture sessions." style="width:100%" >}} |
   
 - **Without `@session.is_active:false`**: The fallback filter captures all sessions immediately, potentially overriding your more specific filters
 
   | ❌ Not recommended |
   |---------|
-  | {{< img src="real_user_monitoring/rum_without_limits/retention-filters-catchall-bad.png" alt="Poor fallback filter example: 1. Sessions with replays (100% retention), 2. Sessions lasting more than 5 seconds (100% retention), 3. All sessions (10% retention). This risks overriding more specific filters by capturing all sessions immediately." style="width:100%" >}} |
+  | {{< img src="real_user_monitoring/rum_without_limits/retention-filters-catchall-bad-3.png" alt="Poor fallback filter example: 1. Sessions with replays (100% retention), 2. Sessions lasting more than 5 seconds (100% retention), 3. All sessions (10% retention). This risks overriding more specific filters by capturing all sessions immediately." style="width:100%" >}} |
 
 ## Suggested retention filters and use cases
 Below we describe the set of default filters, suggested filters, and their typical use cases.
@@ -104,7 +94,7 @@ Below we describe the set of default filters, suggested filters, and their typic
 |-------------|---------------|-------------|----------------|
 | Sessions with replays | `@session.has_replay:true` | Keep sessions with a replay to ensure the system does not discard any sessions with session replays available. | 100% |
 | Sessions with errors | `@type:error` | A default filter that can be applied to retain all sessions that contain at least 1 error. | 100% |
-| Sessions with mobile crashes | `@type:error @error.is_crash:true` | A filter that can be applied to retain all sessions that ended with a crash. | 100% |
+| Sessions with crashes | `@type:error @error.is_crash:true` | A filter that can be applied to retain all sessions that ended with a crash. | 100% |
 | Sessions | `@type:session` | A default filter, placed last in the list, to apply to all sessions, which allows you to retain or discard a percentage of them. | Variable |
 | App versions | `@type:session version:v1.1.0-beta` | Filtering by app version (beta, alpha, or specific version) ensures all sessions from a particular build are saved for detailed analysis and troubleshooting. | 100% |
 | Environments | `@type:session environment:stage` | When collecting sessions from various build types or environments, ensure you capture at least 100% of sessions from staging environments, while collecting a smaller percentage from dev/test environments. | 100% |
