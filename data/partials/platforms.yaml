@@ -41,7 +41,7 @@ platforms:
     category: "Container platforms"
   - name: Google Cloud Run
     link: "/serverless/google_cloud_run/containers/sidecar/"
-    image: "platform_gcr-2.png"
+    image: "platform_gcr.png"
     category: "Container platforms"
   - name: puppet
     link: "agent/basic_agent_usage/puppet/"
