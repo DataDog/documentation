@@ -34,7 +34,7 @@
 - "cloud"
 "custom_kind": "integración"
 "dependencies": []
-"description": "Controla el tamaño de la tabla, la capacidad de lectura/escritura, la latencia de las solicitudes y mucho más".
+"description": "Controla el tamaño de la tabla, la capacidad de lectura/escritura, la latencia de las solicitudes y mucho más"
 "display_on_public_website": verdadero
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_dynamodb/"
 "draft": falso

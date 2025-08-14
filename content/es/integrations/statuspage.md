@@ -31,7 +31,7 @@
 "manifest_version": "2.0.0"
 "name": "statuspage"
 "public_title": "Statuspage"
-"short_description": "Statuspage.io ayuda a las empresas a configurar páginas de estado con métricas públicas y actualizaciones automáticas para los clientes".
+"short_description": "Statuspage.io ayuda a las empresas a configurar páginas de estado con métricas públicas y actualizaciones automáticas para los clientes"
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -41,7 +41,7 @@
   - "Category::Notifications"
   - "Offering::Integration"
   "configuration": "README.md#Configuración"
-  "description": "Statuspage.io ayuda a las empresas a configurar páginas de estado con métricas públicas y actualizaciones automáticas para los clientes".
+  "description": "Statuspage.io ayuda a las empresas a configurar páginas de estado con métricas públicas y actualizaciones automáticas para los clientes"
   "media": []
   "overview": "README.md#Información general"
   "support": "README.md#Soporte"

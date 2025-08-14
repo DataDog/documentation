@@ -13,7 +13,7 @@
     "metrics":
       "check": "mongodb.connections.available"
       "metadata_path": "metadata.csv"
-      "prefix": "mongodb".
+      "prefix": "mongodb"
     "process_signatures":
     - "mongod"
     "service_checks":
@@ -56,7 +56,7 @@
 "manifest_version": "2.0.0"
 "name": "mongo"
 "public_title": "MongoDB"
-"short_description": "Haz un seguimiento del rendimiento de lectura/escritura, de las réplicas más utilizadas, recopila métricas y mucho más".
+"short_description": "Haz un seguimiento del rendimiento de lectura/escritura, de las réplicas más utilizadas, recopila métricas y mucho más"
 "supported_os":
 - "linux"
 - "macos"
@@ -71,7 +71,7 @@
   - "Category::Recopilación de logs"
   - "Offering::integración"
   "configuration": "README.md#Setup"
-  "description": "Haz un seguimiento del rendimiento de lectura/escritura, de las réplicas más utilizadas, recopila métricas y mucho más".
+  "description": "Haz un seguimiento del rendimiento de lectura/escritura, de las réplicas más utilizadas, recopila métricas y mucho más"
   "media": []
   "overview": "README.md#Overview"
   "resources":

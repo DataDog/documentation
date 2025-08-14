@@ -28,7 +28,7 @@
 - "os & system"
 "custom_kind": "integración"
 "dependencies": []
-"description": "Realiza un seguimiento de las instancias ocupadas y compara las métricas de uso de cuenta con los límites de cuota".
+"description": "Realiza un seguimiento de las instancias ocupadas y compara las métricas de uso de cuenta con los límites de cuota"
 "display_on_public_website": verdadero
 "doc_link": "https://docs.datadoghq.com/integrations/google_compute_engine/"
 "draft": falso

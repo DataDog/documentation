@@ -41,7 +41,7 @@
 "manifest_version": "2.0.0"
 "name": "google_app_engine"
 "public_title": "Google App Engine"
-"short_description": "Google App Engine: Platforma como servicio de Google.\nMonitor de tu aplicación que se ejecuta en la nube".
+"short_description": "Google App Engine: Platforma como servicio de Google.\nMonitor de tu aplicación que se ejecuta en la nube"
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -51,7 +51,7 @@
   - "Category::Google Cloud"
   - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "Google App Engine: Platforma como servicio de Google.\nMonitori de tu aplicación que se ejecuta en la nube".
+  "description": "Google App Engine: Platforma como servicio de Google.\nMonitori de tu aplicación que se ejecuta en la nube"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"

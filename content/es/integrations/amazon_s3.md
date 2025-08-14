@@ -44,7 +44,7 @@
 "manifest_version": "2.0.0"
 "name": "amazon_s3"
 "public_title": "Amazon S3"
-"short_description": "Amazon S3 es un servicio de almacenamiento en la nube altamente disponible y escalable".
+"short_description": "Amazon S3 es un servicio de almacenamiento en la nube altamente disponible y escalable"
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -55,7 +55,7 @@
   - "Category::Almacenes de datos"
   - "Offering::Integration"
   "configuration": "README.md#Configuración"
-  "description": "Amazon S3 es un servicio de almacenamiento en la nube altamente disponible y escalable".
+  "description": "Amazon S3 es un servicio de almacenamiento en la nube altamente disponible y escalable"
   "media": []
   "overview": "README.md#Información general"
   "support": "README.md#Soporte"

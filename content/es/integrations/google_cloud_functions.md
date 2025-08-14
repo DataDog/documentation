@@ -37,7 +37,7 @@
 "manifest_version": "2.0.0"
 "name": "google_cloud_functions"
 "public_title": "Google Cloud Functions"
-"short_description": "Una solución de computación asíncrona basada en eventos que permite la creación de pequeñas funciones de propósito único".
+"short_description": "Una solución de computación asíncrona basada en eventos que permite la creación de pequeñas funciones de propósito único"
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -47,7 +47,7 @@
   - "Category::Recopilación de logs"
   - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "Una solución de computación asíncrona basada en eventos que permite la creación de pequeñas funciones de propósito único".
+  "description": "Una solución de computación asíncrona basada en eventos que permite la creación de pequeñas funciones de propósito único"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"

@@ -23,7 +23,7 @@
 "manifest_version": "2.0.0"
 "name": "snmpwalk"
 "public_title": "SNMP walk"
-"short_description": "Descripción de snmpwalk".
+"short_description": "Descripción de snmpwalk"
 "supported_os":
 - "linux"
 - "macos"
@@ -38,7 +38,7 @@
   - "Category::Red"
   - "Offering::Integración"
   "configuration": "README.md#Configuración"
-  "description": "descripción de snmpwalk".
+  "description": "descripción de snmpwalk"
   "media": []
   "overview": "README.md#Información general"
   "support": "README.md#Soporte"

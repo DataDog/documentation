@@ -27,7 +27,7 @@
 - "mobile"
 "custom_kind": "integración"
 "dependencies": []
-"description": "Realiza el seguimiento del rendimiento de lectura/escritura, del recuento de solicitudes y más".
+"description": "Realiza el seguimiento del rendimiento de lectura/escritura, del recuento de solicitudes y más"
 "display_on_public_website": verdadero
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloud_datastore/"
 "draft": falso
@@ -40,7 +40,7 @@
 "manifest_version": "2.0.0"
 "name": "google_cloud_datastore"
 "public_title": "Google Cloud Datastore"
-"short_description": "Cloud Datastore es una base de datos NoSQL altamente escalable para tus aplicaciones web y móviles".
+"short_description": "Cloud Datastore es una base de datos NoSQL altamente escalable para tus aplicaciones web y móviles"
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -52,7 +52,7 @@
   - "Category::Mobile"
   - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "Cloud Datastore es una base de datos NoSQL altamente escalable para tus aplicaciones web y móviles".
+  "description": "Cloud Datastore es una base de datos NoSQL altamente escalable para tus aplicaciones web y móviles"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"

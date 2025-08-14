@@ -44,7 +44,7 @@
 "manifest_version": "2.0.0"
 "name": "amazon_cloudfront"
 "public_title": "Amazon CloudFront"
-"short_description": "Amazon CloudFront es un servicio global de red de entrega de contenido (CDN) que acelera la entrega de tus recursos web".
+"short_description": "Amazon CloudFront es un servicio global de red de entrega de contenido (CDN) que acelera la entrega de tus recursos web"
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -54,7 +54,7 @@
   - "Category::Cloud"
   - "Offering::Integration"
   "configuration": "README.md#Configuración"
-  "description": "Amazon CloudFront es un servicio global de red de entrega de contenido (CDN) que acelera la entrega de tus recursos web".
+  "description": "Amazon CloudFront es un servicio global de red de entrega de contenido (CDN) que acelera la entrega de tus recursos web"
   "media": []
   "overview": "README.md#Información general"
   "support": "README.md#Soporte"

@@ -42,7 +42,7 @@
 "manifest_version": "2.0.0"
 "name": "amazon_ec2"
 "public_title": "Amazon EC2"
-"short_description": "Amazon Elastic Compute Cloud (Amazon EC2) es un servicio web que proporciona capacidad informática redimensionable en la nube".
+"short_description": "Amazon Elastic Compute Cloud (Amazon EC2) es un servicio web que proporciona capacidad informática redimensionable en la nube"
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -53,7 +53,7 @@
   - "Category::Recopilación de logs"
   - "Offering::Integration"
   "configuration": "README.md#Configuración"
-  "description": "Amazon Elastic Compute Cloud (Amazon EC2) es un servicio web que proporciona capacidad informática redimensionable en la nube".
+  "description": "Amazon Elastic Compute Cloud (Amazon EC2) es un servicio web que proporciona capacidad informática redimensionable en la nube"
   "media": []
   "overview": "README.md#Información general"
   "support": "README.md#Soporte"

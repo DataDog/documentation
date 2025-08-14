@@ -13,7 +13,7 @@
     "metrics":
       "check": "tokumx.uptime"
       "metadata_path": "metadata.csv"
-      "prefix": "tokumx".
+      "prefix": "tokumx"
     "service_checks":
       "metadata_path": "assets/service_checks.json"
     "source_type_id": !!int "74"
@@ -41,7 +41,7 @@
 "manifest_version": "2.0.0"
 "name": "tokumx"
 "public_title": "TokuMX"
-"short_description": "Realiza un seguimiento de las métricas de opcounters, demoras de replicación, tamaño de tablas de caché y más".
+"short_description": "Realiza un seguimiento de las métricas de opcounters, demoras de replicación, tamaño de tablas de caché y más"
 "supported_os":
 - "linux"
 - "windows"
@@ -56,7 +56,7 @@
   - "Supported OS::macOS"
   - "Offering::Integración"
   "configuration": "README.md#Configuración"
-  "description": "Realiza un seguimiento de las métricas de opcounters, demoras de replicación, tamaño de tablas de caché y más".
+  "description": "Realiza un seguimiento de las métricas de opcounters, demoras de replicación, tamaño de tablas de caché y más"
   "media": []
   "overview": "README.md#Información general"
   "resources":

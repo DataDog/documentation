@@ -39,7 +39,7 @@
 "manifest_version": "2.0.0"
 "name": "google_cloud_firebase"
 "public_title": "Google Cloud Firebase"
-"short_description": "Firebase es una plataforma móvil que te ayuda a desarrollar aplicaciones rápidamente".
+"short_description": "Firebase es una plataforma móvil que te ayuda a desarrollar aplicaciones rápidamente"
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -50,7 +50,7 @@
   - "Category::Mobile"
   - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "Firebase es una plataforma móvil que te ayuda a desarrollar aplicaciones rápidamente".
+  "description": "Firebase es una plataforma móvil que te ayuda a desarrollar aplicaciones rápidamente"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"

@@ -28,7 +28,7 @@
 - "log collection"
 "custom_kind": "integración"
 "dependencies": []
-"description": "Realiza un seguimiento del uso de recursos de tus instancias Spanner".
+"description": "Realiza un seguimiento del uso de recursos de tus instancias Spanner"
 "display_on_public_website": verdadero
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloud_spanner/"
 "draft": falso
@@ -41,7 +41,7 @@
 "manifest_version": "2.0.0"
 "name": "google_cloud_spanner"
 "public_title": "Google Cloud Spanner"
-"short_description": "El primero y único servicio de base de datos relacional que es a la vez fuertemente consistente y escalable horizontalmente".
+"short_description": "El primero y único servicio de base de datos relacional que es a la vez fuertemente consistente y escalable horizontalmente"
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -52,7 +52,7 @@
   - "Category::Recopilación de logs"
   - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "El primero y único servicio de base de datos relacional que es a la vez fuertemente consistente y escalable horizontalmente".
+  "description": "El primero y único servicio de base de datos relacional que es a la vez fuertemente consistente y escalable horizontalmente"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"

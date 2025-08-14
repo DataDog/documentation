@@ -39,7 +39,7 @@
 "manifest_version": "2.0.0"
 "name": "google_cloud_storage"
 "public_title": "Almacenamiento en la nube de Google"
-"short_description": "Almacenamiento de objetos unificado para servicio de datos en directo, análisis de datos, aprendizaje automático y archivo de datos".
+"short_description": "Almacenamiento de objetos unificado para servicio de datos en directo, análisis de datos, aprendizaje automático y archivo de datos"
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -50,7 +50,7 @@
   - "Category::Recopilación de logs"
   - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "Almacenamiento de objetos unificado para servicio de datos en directo, análisis de datos, aprendizaje automático y archivo de datos".
+  "description": "Almacenamiento de objetos unificado para servicio de datos en directo, análisis de datos, aprendizaje automático y archivo de datos"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"

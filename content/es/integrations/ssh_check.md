@@ -11,7 +11,7 @@
     "metrics":
       "check": "sftp.response_time"
       "metadata_path": "metadata.csv"
-      "prefix": "sftp".
+      "prefix": "sftp"
     "process_signatures":
     - "ssh"
     - "sftp"
@@ -42,7 +42,7 @@
 "manifest_version": "2.0.0"
 "name": "ssh_check"
 "public_title": "SSH"
-"short_description": "Monitoriza la conectividad SSH y la latencia SFTP".
+"short_description": "Monitoriza la conectividad SSH y la latencia SFTP"
 "supported_os":
 - "linux"
 - "windows"
@@ -57,7 +57,7 @@
   - "Supported OS::macOS"
   - "Offering::Integración"
   "configuration": "README.md#Configuración"
-  "description": "Monitoriza la conectividad SSH y la latencia SFTP".
+  "description": "Monitoriza la conectividad SSH y la latencia SFTP"
   "media": []
   "overview": "README.md#Información general"
   "support": "README.md#Soporte"

@@ -24,7 +24,7 @@
 - "google cloud"
 "custom_kind": "integración"
 "dependencies": []
-"description": "Realiza un seguimiento del tamaño de los logs ingeridos en Google Cloud Logging".
+"description": "Realiza un seguimiento del tamaño de los logs ingeridos en Google Cloud Logging"
 "display_on_public_website": verdadero
 "doc_link": "https://docs.datadoghq.com/integrations/google_stackdriver_logging/"
 "draft": falso
@@ -41,7 +41,7 @@
 "manifest_version": "2.0.0"
 "name": "google_stackdriver_logging"
 "public_title": "Registro de Google StackDriver"
-"short_description": "Almacenar, buscar, analizar, monitorizar y alertar sobre datos de logs y eventos desde Google Cloud".
+"short_description": "Almacenar, buscar, analizar, monitorizar y alertar sobre datos de logs y eventos desde Google Cloud"
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -50,7 +50,7 @@
   - "Category::Google Cloud"
   - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "Almacenar, buscar, analizar, monitorizar y alertar sobre datos de logs y eventos desde Google Cloud".
+  "description": "Almacenar, buscar, analizar, monitorizar y alertar sobre datos de logs y eventos desde Google Cloud"
   "media": []
   "overview": "README.md#Overview"
   "resources":

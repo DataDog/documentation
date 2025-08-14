@@ -33,7 +33,7 @@
 "manifest_version": "2.0.0"
 "name": "slack"
 "public_title": "Slack"
-"short_description": "Slack es una plataforma de comunicación alojada y totalmente consultable que reúne toda la comunicación de tu equipo en un solo lugar".
+"short_description": "Slack es una plataforma de comunicación alojada y totalmente consultable que reúne toda la comunicación de tu equipo en un solo lugar"
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -43,7 +43,7 @@
   - "Category::Security"
   - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "Slack es una plataforma de comunicación alojada y totalmente consultable que reúne toda la comunicación de tu equipo en un solo lugar".
+  "description": "Slack es una plataforma de comunicación alojada y totalmente consultable que reúne toda la comunicación de tu equipo en un solo lugar"
   "media": []
   "overview": "README.md#Overview"
   "resources":
