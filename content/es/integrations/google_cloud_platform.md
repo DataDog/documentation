@@ -40,7 +40,7 @@
 "manifest_version": "2.0.0"
 "name": "google_cloud_platform"
 "public_title": "Google Cloud Platform"
-"short_description": "Google Cloud Platform es un grupo de servicios web que en conjunto conforman una plataforma de computación en la nube"
+"short_description": "Google Cloud Platform es un grupo de servicios web que en conjunto conforman una plataforma de computación en la nube".
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -52,7 +52,7 @@
   - "Category::Network"
   - "Offering::Integration"
   "configuration": "README.md#Configuración"
-  "description": "Google Cloud Platform es un grupo de servicios web que en conjunto conforman una plataforma de computación en la nube"
+  "description": "Google Cloud Platform es un grupo de servicios web que en conjunto conforman una plataforma de computación en la nube".
   "media": []
   "overview": "README.md#Información general"
   "resources":
