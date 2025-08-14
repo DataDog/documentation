@@ -270,7 +270,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Exclude truncated
+### Exclude truncated (v7.69+)
 
 | Parameter           | Description                                                        |
 |---------------------|--------------------------------------------------------------------|
@@ -651,7 +651,7 @@ logs:
 
 ## Global processing rules
 
-For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][5] or through an environment variable:
+For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, `exclude_truncated` (v7.69+), and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][5] or through an environment variable:
 
 {{< tabs >}}
 {{% tab "Configuration files" %}}
