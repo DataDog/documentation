@@ -44,13 +44,16 @@ For example, consider a rule that has conditions `severity:SEV-1`, `severity:SEV
 
 When defining a notification rule's recipients, you can use `@` handles for any of Datadog's [supported notification integrations][2]. This allows you to define notification rules that notify many types of targets, including:
 
-* **Emails:** To notify via email, type `@` followed by any valid email address. If the email address is a Datadog user's email address, Datadog automatically adds the user as a responder to the incident when the rule fires. If the incident is private, this means the responder gains access to it.
-* **Mobile devices:** To notify a Datadog user's mobile device, find the user's name and select the option that includes **(Mobile Push Notification)**. The user must have notifications enabled in the [Datadog mobile app][3] for this option to appear.
-* **Slack channels:** To notify a Slack channel, use a `@slack-` handle. To notify the incident Slack channel, use handle `@incident-slack-channel`.
-* **On-Call Teams:** Use an `@oncall-` handle to page an on-call team.
-* **Microsoft Teams channels**: Use a `@teams-` handle to notify a Microsoft Teams channel.
-* **Webhooks:** Use a `@webhook-` handle to fire a [webhook][6]. You must first define a webhook with an "incident" payload type.
-* **Workflows:** Use a `@workflows-` handle to fire a [Datadog Workflow][5]. You must first publish a workflow with an **incident** trigger type.
+| Notification Type      | Handle                         | How to Use                                                                                                                                                                                                                                 |
+|------------------------|--------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Emails**             | `@<email>`                     | Type `@` followed by any valid email address. If it’s a Datadog user’s email, the user is automatically added as a responder when the rule sends a notification. For private incidents, the user gains access.                            |
+| **Mobile devices**     | *(Selected from UI)*           | Select the user’s name with **(Mobile Push Notification)**. The user must have notifications enabled in the [Datadog mobile app][3] for this option to appear.                                                                                                      |
+| **Slack channels**     | `@slack-<channel>`<br>`@incident-slack-channel`            | Use a `@slack-` handle. To notify the incident Slack channel, use `@incident-slack-channel`.                                                                                                                                                |
+| **On-Call Teams**      | `@oncall-<team>`               | Use a `@oncall-` handle to page a [Datadog on-call team][7].                                                                                                                                                                                            |
+| **Microsoft Teams**    | `@teams-<channel>`             | Use a `@teams-` handle to notify a Microsoft Teams channel.                                                                                                                                                                                 |
+| **Webhooks**           | `@webhook-<name>`              | Use a `@webhook-` handle to trigger a [webhook][6]. You must define the webhook with an **incident** payload type.                                                                                                                          |
+| **Workflows**          | `@workflows-<workflow_name>`   | Use a `@workflows-` handle to trigger a [Datadog Workflow][5]. You must publish the workflow with an **incident** trigger type.                                                                                                             |
+
 
 ## Further reading
 
