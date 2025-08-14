@@ -14,7 +14,7 @@ Use this guide to troubleshoot metric discrepancies between AWS and Datadog.
 
 ## Metric discrepancies
 
-Datadog will always try to ingest the most granular raw values from AWS normalized to per-second values. All aggregation seen in Datadog happens on the Datadog side. The following steps reconcile a discrepancy between AWS and Datadog for the following metric `aws.ec2.cpuutilization`. 
+Datadog always tries to ingest the most granular raw values from AWS normalized to per-second values. All aggregation seen in Datadog happens on the Datadog side. The following steps reconcile a discrepancy between AWS and Datadog for the following metric `aws.ec2.cpuutilization`. 
 
 1. Find the corresponding metric in AWS.
 
@@ -22,16 +22,16 @@ Datadog will always try to ingest the most granular raw values from AWS normaliz
 
 2. Find the most granular dimensions.
 
-   For our example metric, this would be `InstanceID`. Refer to the [AWS documentation][2] for other metrics. Although additional dimensions are seen here, CloudWatch will only populate our example metric with `InstanceID`. 
+   For the example metric, this would be `InstanceID`. Refer to the [AWS documentation][2] for other metrics. Although additional dimensions are seen here, CloudWatch only populates the example metric with `InstanceID`. 
    
    {{< img src="integrations/guide/aws-metric-discrepancy/aws_dimensions.png" alt="dimensions definition in AWS documentation" >}}
 
 3. Find the statistic.
 
-    In regards to what statistics we decide to collect for any given metric, we decide based on recommendations in AWS documentation and customer demand. We do not collect all statistics for two key reasons:
+    In regards to what statistics Datadog decides to collect for any given metric, Datadog decides based on recommendations in AWS documentation and customer demand. Datadog does not collect all statistics for two key reasons:
     - Typically, only one or a few statistics offer meaningful insight.
-    - By collection only relevant statistics we can significantly reduce data volume and minimize traffic between Datadog and AWS.
-    Generally, we collect Average by default. When multiple statistics are collected, they will be noted as `aws.AWS_NAMESPACE.METRIC_NAME.STATISTIC` e.g, `aws.ec2.cpuutilization.max`. If you are unsure what statistic is being collected for a specific metric it may be useful to compare AWS to Datadog with each statistic provided by AWS. In our example, the statistic will be Average. 
+    - By collection only relevant statistics Datadog can significantly reduce data volume and minimize traffic between Datadog and AWS.
+    Generally, Datadog collects Average by default. When multiple statistics are collected, it is noted as `aws.AWS_NAMESPACE.METRIC_NAME.STATISTIC` e.g, `aws.ec2.cpuutilization.max`. If you are unsure what statistic is being collected for a specific metric it may be useful to compare AWS to Datadog with each statistic provided by AWS. In our example, the statistic will be Average. 
 
 3. Graph the metric in AWS CloudWatch Metric Explorer.
 
@@ -48,7 +48,7 @@ Datadog will always try to ingest the most granular raw values from AWS normaliz
 
    {{< img src="integrations/guide/aws-metric-discrepancy/datadog_metric_explorer.png" alt="datadog metric explorer" >}}
 
-   In most cases, after completing steps 1–4, you see the exact same values in both AWS and Datadog. However, in our example, a discrepancy appears as soon as the metric begins reporting.
+   In most cases, after completing steps 1 through 4, you see the exact same values in both AWS and Datadog. However, in our example, a discrepancy appears as soon as the metric begins reporting.
 
    - **Datadog**: 32.6
    - **Google Cloud**: 39.8210191868
