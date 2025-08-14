@@ -157,7 +157,7 @@ Available instrumentation modes:
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: if you don't declare `composeInstrumentation` in `datadog` block, the auto-instrumentation is disabled by default.
+**Note**: If you don't declare `composeInstrumentation` in `datadog` block, the auto-instrumentation is disabled by default.
 
 ### How names are assigned with auto-instrumentation
 When auto-instrumentation is enabled:
