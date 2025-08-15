@@ -17,6 +17,8 @@ title: Integration Assets Reference
 
 This page walks you through the files that you need to populate in order to create an offering on the [**Integrations** page][12] or the [**Marketplace** page][9]. 
 
+<div class="alert alert-info">Some files apply only to legacy integrations that were <em>not</em> created using the Integration Developer Platform.</div>
+
 ## Configuration file
 
 When preparing a new integration, you must include an example configuration that contains the necessary options and reasonable defaults. The example configuration file—which in this case, is located at `<CHECK_NAME>/datadog_checks/<CHECK_NAME>/data/conf.yaml.example`—has two top-level elements: `init_config` and `instances`. 
