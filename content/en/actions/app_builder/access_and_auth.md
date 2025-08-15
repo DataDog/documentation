@@ -3,9 +3,8 @@ title: Access and Authentication
 description: Access and authentication for App builder
 aliases:
     - /service_management/app_builder/auth
+    - /actions/app_builder/auth
 ---
-
-[comment]: <> (This PR is for requesting changes to this file.)
 
 A few tools control access and authentication for apps and their components. 
 

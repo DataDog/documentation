@@ -51,9 +51,9 @@ You can perform an action using the Action Interface. Let's look at an example w
 4. Click the **List ECS cluster** action.
 5. In the action, in **Connection**, select the connection to the AWS account you want to use. Connections are set up in [Action Catalog][1].
   Bits AI will continue to use the same connection for the duration of the chat session.
-1. In **Region**, select the AWS region where the clusters are hosted.
-2. In **Limit**, enter `5`.
-3. Click **Run**.
+6. In **Region**, select the AWS region where the clusters are hosted.
+7. In **Limit**, enter `5`.
+8. Click **Run**.
   Bits AI runs the action. In this example, it responds with a list of the custer names and ARNs.
   
   Bits AI also suggests additional prompts related to the clusters it retrieved.

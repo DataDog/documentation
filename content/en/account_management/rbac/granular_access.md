@@ -54,11 +54,11 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [10]: /service_management/case_management/settings#granular-access-control
 [11]: /getting_started/integrations/#granular-access-control
 [12]: /reference_tables/#permissions
-[13]: /service_management/app_builder/auth/#restrict-access-to-a-specific-app
+[13]: /actions/app_builder/access_and_auth/#restrict-access-to-a-specific-app
 [14]: /actions/connections/?tab=workflowautomation#connection-credentials
 [15]: /actions/connections/?tab=workflowautomation#connection-groups
 [16]: /actions/datastore/
-[17]: /service_management/workflows/access/#restrict-access-on-a-specific-workflow
+[17]: /actions/workflows/access_and_auth/#restrict-access-on-a-specific-workflow
 [18]: /actions/private_actions
 [19]: /real_user_monitoring
 [20]: /account_management/org_settings/cross_org_visibility/#permissions
