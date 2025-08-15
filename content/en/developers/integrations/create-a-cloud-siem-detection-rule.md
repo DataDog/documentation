@@ -44,14 +44,6 @@ To see the out-of-the-box detection rule, the relevant integration tile must be 
 2. Ensure that its logos render correctly.
 3. Verify that the rule is enabled.
 
-## Configuration best practices
-
-In addition to the detection rule definition, the `partnerRuleId` field is required for partner contributed detection rules. The `isEnabled` field should be removed as it does not apply to partner contributed detection rules.
-
-|      | Description    | Examples |
-| ---  | ----------- | ----------- |
-|partnerRuleId | Unique identifier for the rule, following the format `ext-00*-***` where * could be any alphanumeric characters. | `ext-003-bzd` |
-
 ### Example of a well-defined detection rule
 
 Selecting a rule type and defining search queries:
