@@ -8,6 +8,9 @@ further_reading:
 - link: "/getting_started/site/"
   tag: "Documentation"
   text: "Getting Started with Datadog Sites"
+- link: "https://www.datadoghq.com/blog/ddr-mitigates-cloud-provider-outages/"
+  tag: "Blog"
+  text: "Datadog Disaster Recovery mitigates cloud provider outages"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/datadog-disaster-recovery/" header="Join the Preview!">}}
