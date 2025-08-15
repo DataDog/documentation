@@ -210,12 +210,11 @@ Next, complete the setup for either automatic or manual injection.
 
 ## Automatic injection
 
-The final step to enable automatic correlation identifier injection is to:
+To enable automatic correlation identifier injection, ensure `DD_LOGS_INJECTION` is enabled.
 
-1. Ensure `DD_LOGS_INJECTION` is enabled.
-    - Starting in version 3.24.0, `DD_LOGS_INJECTION` is enabled by default.
-    - For older versions, set `DD_LOGS_INJECTION=true` in the .NET Tracer's environment variables.
-    - To configure the .NET Tracer with a different method, see [Configuring the .NET Tracer][6].
+Starting in version 3.24.0, `DD_LOGS_INJECTION` is enabled by default. For older versions, set `DD_LOGS_INJECTION=true` in the .NET Tracer's environment variables.
+
+To configure the .NET Tracer with a different method, see [Configuring the .NET Tracer][6].
 
 After configuring the correlation identifier injection, see [C# Log Collection][7] to configure your log collection.
 
