@@ -144,8 +144,8 @@ Datadog offers GTM support. Please reach out to your partner manager to learn mo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://partners.datadoghq.com
-[2]: /integrations
-[3]: /marketplace
+[2]: https://app.datadoghq.com/integrations
+[3]: https://app.datadoghq.com/marketplace
 [4]: https://docs.datadoghq.com/developers/integrations/marketplace_offering/
 [5]: /developers/integrations/agent_integration/
 [6]: /developers/integrations/api_integration/
