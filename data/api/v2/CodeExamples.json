@@ -63,6 +63,48 @@
       "description": "Update an existing Action Connection returns \"Successfully updated Action Connection\" response"
     }
   ],
+  "BulkPutDatastoreItems": [
+    {
+      "group": "actions_datastores",
+      "suffix": "",
+      "description": "Bulk put datastore items returns \"OK\" response"
+    }
+  ],
+  "CreateDatastoreFromImport": [
+    {
+      "group": "actions_datastores",
+      "suffix": "",
+      "description": "Create datastore from import returns \"OK\" response"
+    }
+  ],
+  "CreateDatastore": [
+    {
+      "group": "actions_datastores",
+      "suffix": "",
+      "description": "Create datastore returns \"OK\" response"
+    }
+  ],
+  "DeleteDatastoreItem": [
+    {
+      "group": "actions_datastores",
+      "suffix": "",
+      "description": "Delete datastore item returns \"OK\" response"
+    }
+  ],
+  "PutDatastoreItem": [
+    {
+      "group": "actions_datastores",
+      "suffix": "",
+      "description": "Put datastore item returns \"OK\" response"
+    }
+  ],
+  "UpdateDatastore": [
+    {
+      "group": "actions_datastores",
+      "suffix": "",
+      "description": "Update datastore returns \"OK\" response"
+    }
+  ],
   "UpdateAwsScanOptions": [
     {
       "group": "agentless_scanning",
