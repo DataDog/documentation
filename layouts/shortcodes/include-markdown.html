@@ -5,6 +5,7 @@
 {{- else -}}
     {{ warnf "[include-markdown shortcode] Page %s not found in %s (language: %s)" $page .Page.File.Path .Page.Lang }}
     {{ with where .Site.Sites "Language.Lang" "eq" "en" }}
+        {{/*  use english markdown for Content as default  */}}
         {{ $enSite := index . 0 }}
         {{ $enPage := $enSite.GetPage $page }}
         {{ $enPage.Content }}
