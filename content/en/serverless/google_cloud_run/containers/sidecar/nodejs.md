@@ -50,8 +50,8 @@ ENV NODE_OPTIONS="--require dd-trace/init"
    Terraform
    {{% /tab %}}
 
-   {{% tab "Manual" %}}
-   {{% gcr-install-sidecar-manual %}}
+   {{% tab "Custom" %}}
+   {{% gcr-install-sidecar-custom %}}
    {{% /tab %}}
 
    {{< /tabs >}}
