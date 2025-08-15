@@ -3,13 +3,16 @@ title: Access and Authentication
 description: Access and authentication for App builder
 aliases:
     - /service_management/app_builder/auth
+    - /actions/app_builder/auth
 ---
 
-A few tools control access and authentication for apps and their components.
+A few tools control access and authentication for apps and their components. 
 
 ## App execution identity
 
-A published app runs using the Datadog user identity of its author. In edit mode, it runs as the current editor.
+A published app runs using the Datadog user identity of its author. The author is listed both in the **All Apps** view and in **App Properties**.
+
+In edit mode, an app runs as the current editor.
 
 ## Action credentials
 
