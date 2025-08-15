@@ -171,7 +171,7 @@ Idle costs represent the portion of reservation capacity that was paid for but n
 BigQuery idle slot sharing is a cost allocation feature that redistributes unused reservation capacity to projects that need additional slots. For example, if Reservation A has extra idle slots, queries under Project B could use Project A's slots in addition to Project B's slots.
 
 If your organization has enabled idle slot sharing between reservations, the idle cost calculation reflects how unused capacity is distributed across projects. With idle slot sharing enabled:
-- Contributing projects: Projects whose unused reservation capacity is shared still see `borrowed_slot_usage` costs, representing the value they provided to other projects' queries.
+- Contributing projects: Projects whose unused reservation capacity is shared will be tagged as `borrowed_slot_usage` costs, representing the value they provided to other projects' queries.
 - Cost attribution: The total cost is preserved across the organization - costs are redistributed from idle capacity to borrowed usage, but no costs are lost or double-counted.
 - The original project still pays full reservation costs as per Google Cloud billing.
 - Shared idle slot costs help organizations understand the true value and utilization of their BigQuery reservations.
