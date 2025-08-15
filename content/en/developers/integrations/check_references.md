@@ -8,9 +8,9 @@ further_reading:
 - link: /developers/integrations/
   tag: Documentation
   text: Learn about creating an Agent or API-based integration
-- link: /developers/integrations/oauth_for_integrations/
+- link: /developers/integrations/api_integration/
   tag: Documentation
-  text: Learn about using OAuth for integrations
+  text: Learn about using OAuth for API-based integrations
 title: Integration Assets Reference
 ---
 ## Overview

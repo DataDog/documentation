@@ -102,7 +102,7 @@ For the initial launch, leave it as is. For future updates, specify feature addi
 [4]: /developers/integrations/marketplace_offering/
 [5]: /developers/integrations/agent_integration/
 [6]: /developers/integrations/api_integration/
-[7]: /developers/integrations/oauth_for_integrations/
+[7]: /developers/integrations/api_integration/#oauth
 [8]: /developers/integrations/log_pipeline/
 [9]: /developers/integrations/create-an-integration-dashboard/
 [10]: /developers/integrations/create-an-integration-monitor-template/

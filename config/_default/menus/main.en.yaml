@@ -975,7 +975,7 @@ menu:
       url: developers/integrations/agent_integration/
       parent: dev_tools_integrations
       weight: 402
-    - name: Create an API Integration
+    - name: Create an API-based Integration
       identifier: dev_tools_integrations_api
       url: developers/integrations/api_integration/
       parent: dev_tools_integrations
@@ -1015,16 +1015,11 @@ menu:
       url: developers/integrations/create-a-cloud-siem-detection-rule
       parent: dev_tools_integrations
       weight: 410
-    - name: OAuth for Integrations
-      identifier: dev_tools_integrations_oauth
-      url: developers/integrations/oauth_for_integrations
-      parent: dev_tools_integrations
-      weight: 411
     - name: Install Agent Integration Developer Tool
       identifier: dev_tools_integrations_install_developer_tool
       url: developers/integrations/python/
       parent: dev_tools_integrations
-      weight: 412
+      weight: 411
     - name: Service Checks
       url: developers/service_checks/
       parent: dev_tools
