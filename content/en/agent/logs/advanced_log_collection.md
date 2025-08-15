@@ -275,7 +275,6 @@ spec:
 | Parameter           | Description                                                        |
 |---------------------|--------------------------------------------------------------------|
 | `exclude_truncated` | When present, it excludes truncated logs and does not send to Datadog. The `exclude_truncated` rule is available starting with Agent v7.69. |
-| `exclude_truncated` | When present, it excludes truncated logs and does not send to Datadog. |
 
 For example, to **filter out** truncated logs:
 
