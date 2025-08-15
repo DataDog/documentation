@@ -20,9 +20,9 @@ further_reading:
 
    Add the `datadog` gem to your Gemfile:
    {{< code-block lang="gemfile" disable_copy="false" >}}
-   source 'https://rubygems.org'
-   gem 'datadog'
-   {{< /code-block >}}
+source 'https://rubygems.org'
+gem 'datadog'
+{{< /code-block >}}
 
    See [Tracing Ruby applications][1] for additional information on how to configure the tracer and enable auto instrumentation.
 
