@@ -57,7 +57,7 @@ The following table presents the list of collected features and the minimal requ
 
 1. Configure the Google Cloud Cost Management integration on the [Cloud Cost Setup page][4].
 2. [Enable BigQuery monitoring][5] in your Google Cloud project. 
-3. (Optional) For reservation cost allocation, [configure BigQuery reservations][6] in your project. This approach is typically more cost-efficient for predictable or high-volume workloads compared to on-demand pricing, as explained in this [Google Cloud Community blog post][7].
+3. (Optional) For reservation cost allocation, [configure BigQuery reservations][6] in your project. This approach is typically more cost-efficient for predictable or high-volume workloads compared to on-demand pricing, as explained in this [Google Cloud Guide][7].
 
 ## Allocating costs
 
@@ -199,7 +199,7 @@ Learn more about [BigQuery storage and best practices][11].
 [4]: /cloud_cost_management/setup/google_cloud/
 [5]: /integrations/google-cloud-bigquery/
 [6]: https://cloud.google.com/bigquery/docs/reservations-get-started
-[7]: https://medium.com/google-cloud/bigquery-dynamic-reservation-the-new-query-cost-hack-4ee4297e619e
+[7]: https://medium.com/google-cloud/bigquery-dynamic-reservation-the-new-query-cost-hack-4ee4297e619e](https://cloud.google.com/bigquery/docs/reservations-intro
 [8]: https://console.cloud.google.com
 [9]: https://cloud.google.com/bigquery/docs/adding-labels
 [10]: https://cloud.google.com/bigquery/docs/reservations-tasks
