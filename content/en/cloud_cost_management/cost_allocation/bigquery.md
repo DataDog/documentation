@@ -65,7 +65,8 @@ Costs are allocated into the following spend types:
 | Spend type | Description |
 |---|---|
 | `allocated_spend_type:usage` | Cost of query execution based on bytes processed (on-demand) or slot consumption (reservation) |
-| `allocated_spend_type:cluster_idle` | Cost of reserved slots allocated within a project but not utilized by queries|
+| `allocated_spend_type:borrowed_slot_usage` | Cost of queries that used borrowed idle slots from other reservations within the admin project |
+| `allocated_spend_type:cluster_idle` | Cost of reserved slots within a project but not utilized by any queries|
 
 ### Query-level tag extraction
 
@@ -89,7 +90,7 @@ Additionally, CCM adds the following tags for cost analysis:
 
 | Tag | Description |
 |---|---|
-| `allocated_spend_type` | Categorizes costs as either `usage` (active query execution) or `cluster_idle` (unused reservation capacity) |
+| `allocated_spend_type` | Categorizes costs as either `usage` (active query execution), `borrowed_slot_usage` (queries using idle slots from other reservations with extra slot capcaity` or `cluster_idle` (unused reservation capacity) |
 | `allocated_resource` | Indicates resource measurement type - `slots` for reservation-based queries or `bytes_processed` for on-demand queries |
 | `orchestrator` | Set to `BigQuery` for all BigQuery query-related records |
 
@@ -151,11 +152,13 @@ Any difference between the total billed reservation cost and the sum of allocate
 
 Idle costs represent the portion of reservation capacity that was paid for but not utilized by queries. These costs arise when the reserved slot capacity exceeds actual usage during a billing period.
 
-**Idle slot sharing considerations**: If your organization has enabled idle slot sharing between reservations, the idle cost calculation may appear different than expected. When queries from one project use idle slots from another project's reservation, those slot costs are attributed as "free" rather than to the consuming project. This means:
+**Idle slot sharing considerations**: BigQuery idle slot sharing is a cost allocation feature that redistributes unused reservation capacity to projects that need additional slots. For example, if Reservation A has extra idle slots, queries under Project B could use Project A's slots in addition to Project B's slots.
 
-- A project's reservation may show higher idle costs if other projects are using its unused capacity
-- The original project pays full reservation costs regardless of cross-project usage
-- No automatic cost-transfer: Sharing projects don't pay the reservation owner for consumed idle slots
+If your organization has enabled idle slot sharing between reservations, the idle cost calculation will reflect how unused capacity is distributed across projects. With idle slot sharing enabled:
+- Contributing projects: Projects whose unused reservation capacity is shared will see `borrowed_slot_usage` costs, representing the value they provided to other projects' queries.
+- Cost attribution: The total cost is preserved across the organization - costs are redistributed from idle capacity to borrowed usage, but no costs are lost or double-counted.
+- The original project still pays full reservation costs as per Google Cloud billing.
+- Shared idle slot costs help organizations understand the true value and utilization of their BigQuery reservations.
 
 [**Learn how to enable idle slot sharing for your reservations.**][5]
 
