@@ -1154,6 +1154,11 @@ menu:
       identifier: mobile_widgets
       parent: mobile
       weight: 5
+    - name: Guides
+      url: mobile/guide
+      identifier: mobile_guide
+      parent: mobile
+      weight: 6
     - name: DDSQL Reference
       url: ddsql_reference/
       pre: ddsql
