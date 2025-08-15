@@ -10,8 +10,8 @@ Only environment variables used to configure the tracer should be set in your ma
 | ------------------- | ----------- |
 | `DD_API_KEY`        | [Datadog API key][1001] - **Required**|
 | `DD_SITE`           | [Datadog site][1002] - **Required** |{{ if eq (.Get "instrumentationMethod") "in-process" }}
-| `DD_LOGS_ENABLED`   | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
-| `DD_LOGS_INJECTION` | When true, enrich all logs with trace data for supported loggers. See [Correlate Logs and Traces][1003] for more information. {{ if eq (.Get "instrumentationMethod") "sidecar" }}Set in your *main* application container, not the sidecar container.{{ end }}|{{ end }}
+| `DD_LOGS_ENABLED`   | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |{{ end }}
+| `DD_LOGS_INJECTION` | When true, enrich all logs with trace data for supported loggers. See [Correlate Logs and Traces][1003] for more information. {{ if eq (.Get "instrumentationMethod") "sidecar" }}Set in your *main* application container, not the sidecar container.{{ end }}|
 | `DD_SERVICE`       | See [Unified Service Tagging][1004]. Set in *all* containers. **Recommended** |
 | `DD_VERSION`       | See [Unified Service Tagging][1004]. **Recommended** |
 | `DD_ENV`           | See [Unified Service Tagging][1004]. **Recommended** |
