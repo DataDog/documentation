@@ -63,12 +63,14 @@ const tracer = require('dd-trace').init({
 });
 const { createLogger, format, transports } = require('winston');
 
+const LOG_FILE = "/shared-volume/logs/app.log"
+
 const logger = createLogger({
   level: 'info',
   exitOnError: false,
   format: format.json(),
   transports: [
-    new transports.File({ filename: `/shared-volume/logs/app.log` }),
+    new transports.File({ filename: LOG_FILE }),
     new transports.Console()
   ],
 });
