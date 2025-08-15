@@ -3552,14 +3552,33 @@ components:
       description: The view of the world that the map should render.
       example:
         focus: WORLD
+      oneOf:
+      - required:
+        - focus
+      - required:
+        - custom_extent
       properties:
+        custom_extent:
+          description: A custom extent of the map defined by an array of four numbers
+            in the order `[minLongitude, minLatitude, maxLongitude, maxLatitude]`.
+          example:
+          - -30
+          - -40
+          - 40
+          - 30
+          items:
+            description: The longitudinal or latitudinal coordinates of the bounding
+              box.
+            format: double
+            type: number
+          maxItems: 4
+          minItems: 4
+          type: array
         focus:
-          description: The 2-letter ISO code of a country to focus the map on. Or
-            `WORLD`.
+          description: The ISO code of a country, subdivision, or region to focus
+            the map on. Or `WORLD`. Mutually exclusive with `custom_extent`.
           example: WORLD
           type: string
-      required:
-      - focus
       type: object
     GeomapWidgetRequest:
       description: An updated geomap widget.
