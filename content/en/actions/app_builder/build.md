@@ -102,7 +102,7 @@ When you refresh the page, the starred app appears in a section at the top of yo
 
 App Builder keeps a record of every saved version of your app.
 
-To view the version history for your app, in the left-hand menu of your app, click the version history icon {{< img src="service_management/app_builder/version-history-icon.png" inline="true">}}.
+To view the version history for your app, in the left-hand menu of your app, click the version history {{< img src="service_management/app_builder/version-history-icon.png" inline="true" style="width:16px;">}} icon.
 
 The UI displays up to 50 saved or published versions of your app, along with the icon of the user who saved or published the version:
 
