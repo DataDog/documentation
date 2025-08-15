@@ -41,7 +41,11 @@ platforms:
     category: "Container platforms"
   - name: Google Cloud Run
     link: "serverless/google_cloud_run/containers/sidecar/"
-    image: "platform_grc.png"
+    image: "platform_gcr.png" 
+    category: "Container platforms"
+  - name: Amazon ECS
+    link: "containers/"
+    image: "platform_ecs.png" 
     category: "Container platforms"
   - name: puppet
     link: "agent/basic_agent_usage/puppet/"
