@@ -85,7 +85,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 {{< programming-lang lang="dotnet" >}}
 1. **Install dependencies**. Run the following commands:
    ```shell
-   dotnet package add Datadog.Azure.Functions
+   dotnet package add Datadog.AzureFunctions
    ```
 
    Datadog recommends regularly upgrading to the latest version of `Datadog.AzureFunctions` to ensure you have access to enhancements and bug fixes.

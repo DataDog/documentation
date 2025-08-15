@@ -31,6 +31,7 @@ After you set up [log collection][1], you can customize your collection configur
 - [Filter logs](#filter-logs)
   - [Exclude at match](#exclude-at-match)
   - [Include at match](#include-at-match)
+  - [Exclude truncated](#exclude-truncated)
 - [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
 - [Multi-line aggregation](#manually-aggregate-multi-line-logs)
 - [Automatically aggregate multi-line logs](#automatically-aggregate-multi-line-logs)
@@ -263,6 +264,84 @@ spec:
 ```
 
 **Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
+
+**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Exclude truncated
+
+| Parameter           | Description                                                        |
+|---------------------|--------------------------------------------------------------------|
+| `exclude_truncated` | When present, it excludes truncated logs and does not send to Datadog. |
+
+For example, to **filter out** truncated logs:
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
+```yaml
+logs:
+  - type: file
+    path: /my/test/file.log
+    service: cardpayment
+    source: java
+    log_processing_rules:
+    - type: exclude_truncated
+```
+
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+In a Docker environment, use the label `com.datadoghq.ad.logs` on the container that is sending the logs you want to filter, to specify the `log_processing_rules`. For example:
+
+```yaml
+ labels:
+    com.datadoghq.ad.logs: >-
+      [{
+        "source": "java",
+        "service": "cardpayment",
+        "log_processing_rules": [{
+          "type": "exclude_truncated"
+        }]
+      }]
+```
+
+**Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`. For example:
+
+```yaml
+apiVersion: apps/v1
+metadata:
+  name: cardpayment
+spec:
+  selector:
+    matchLabels:
+      app: cardpayment
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
+          [{
+            "source": "java",
+            "service": "cardpayment",
+            "log_processing_rules": [{
+              "type": "exclude_truncated"
+            }]
+          }]
+      labels:
+        app: cardpayment
+      name: cardpayment
+    spec:
+      containers:
+        - name: '<CONTAINER_NAME>'
+          image: cardpayment:latest
+```
 
 **Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
