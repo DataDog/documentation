@@ -75,19 +75,6 @@ The App Builder Overview dashboard provides a high-level overview of your Datado
 
 {{< img src="service_management/app_builder/app-builder-overview-dashboard.png" alt="The App Builder Overview dashboard" style="width:100%;" >}}
 
-## App Builder Debug Console
-
-The App Builder Debug Console provides a central place to view real-time logs, action executions, and errors. 
-
-To access the Debug Console, go to [your apps list][9] and click the **Edit** {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icon for one of your apps. Click the **Expand** {{< img src="icons/panel-bottom-grow.png" inline="true" style="width:14px;">}} icon to see the entire Debug Console. Information inside the console includes:
-- **Action Executions:** Track the success and failure of action executions with their associated inputs and outputs
-- **Errors:** View logs for errors, warnings, and info messages
-- **Logs:** View configuration errors for your actions, transformers, variables, and components
-- **App State:** Access real-time application state changes
-
-{{< img src="service_management/app_builder/app-builder-debug-console.png" alt="The expanded panel of the Debug Console inside an app's editor view" style="width:100%;" >}}
-
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
