@@ -8,7 +8,7 @@ further_reading:
 
 ## Overview
 
-Correlate backend traces to detailed database performance data in Datadog Database Monitoring (DBM). This allows you to link spans from your OpenTelemetry-instrumented application directly to query metrics and execution plans to identify the exact queries that are slowing down your application.
+Correlate backend traces to detailed database performance data in Datadog Database Monitoring (DBM). This allows you to link spans from your OpenTelemetry-instrumented application to related query metrics and execution plans to identify the exact queries that are slowing down your application.
 
 ## Requirements
 
@@ -99,7 +99,15 @@ After your application is sending traces, you can see the correlation in the APM
 1. Navigate to [**APM** > **Traces**][3].
 2. Find and click on a trace from your instrumented service.
 3. In the trace's flame graph, select a database span (for example, a span with `span.type: sql`)
-4. In the details panel, click the **SQL Queries** tab. You should see the host metrics, like CPU and memory utilization, from the host that executed that part of the request.
+4. In the details panel, click the **SQL Queries** tab. You should see performance metrics and execution plans for the query.
+
+## Troubleshooting
+
+If you don't see the expected correlation between your APM traces and DBM, it's typically due to a missing or incorrect configuration. Check the following common causes:
+
+- **All required attributes (`db.system`, `db.statement`, `span.type`) must be present** on the database span.
+- **The SQL query may not be parsable**: The correlation relies on Datadog's ability to parse the SQL query from the `db.statement` attribute. If the query uses non-standard or highly complex syntax, parsing may fail. If you suspect this is the case, [contact Datadog support][5] for assistance.
+- **The correct feature gates must be enabled** for your specific trace ingestion path as described in the setup steps.
 
 ## Further reading
 
@@ -109,3 +117,4 @@ After your application is sending traces, you can see the correlation in the APM
 [2]: /opentelemetry/integrations/host_metrics
 [3]: https://app.datadoghq.com/apm/traces
 [4]: https://opentelemetry.io/docs/languages/
+[5]: /help
