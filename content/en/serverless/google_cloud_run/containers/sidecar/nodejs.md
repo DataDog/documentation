@@ -14,7 +14,7 @@ further_reading:
 
 ## Setup
 
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-process/node">available on GitHub</a>.</div>
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/sidecar/node">available on GitHub</a>.</div>
 
 1. **Install the Datadog Node.js tracer**.
 
@@ -36,7 +36,7 @@ const tracer = require('dd-trace').init({
 ENV NODE_OPTIONS="--require dd-trace/init"
 {{< /code-block >}}
 
-   For more information, see [Tracing Node.js applications][1001].
+   For more information, see [Tracing Node.js applications][1].
 
 2. **Install serverless-init as a sidecar**.
 
@@ -78,7 +78,7 @@ logger.info(`Hello world!`);
 
    Datadog recommends setting the environment variable `DD_SOURCE=nodejs` in your sidecar container to enable advanced Datadog log parsing.
 
-   For more information, see [Correlating Node.js Logs and Traces][1002].
+   For more information, see [Correlating Node.js Logs and Traces][2].
 
 {{% gcr-env-vars instrumentationMethod="sidecar" language="nodejs" %}}
 
@@ -90,5 +90,5 @@ logger.info(`Hello world!`);
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1001]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
-[1002]: /tracing/other_telemetry/connect_logs_and_traces/nodejs/
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
+[2]: /tracing/other_telemetry/connect_logs_and_traces/nodejs/
