@@ -5,7 +5,7 @@ further_reading:
 - link: "/agent/fleet_automation/"
   tag: "Documentation"
   text: "Fleet Automation"
-- link: "/agent/remote_config/"
+- link: "/remote_configuration"
   tag: "Documentation"
   text: "Remote Configuration"
 ---
@@ -17,10 +17,21 @@ Remote Agent Management simplifies the process of upgrading your Agent fleet by 
 * **Visibility and Monitoring** - Track the status of upgrades in real-time, allowing quick verification of deployment success.
 * **Operational Efficiency** - Streamline the upgrade process by eliminating cross-team coordination and unifying deployment across different platforms.
 
-## Setup
+## Prerequisites
 
+### Supported platforms
+
+- Linux VMs installed using the install script or Ansible Datadog Role
+- Windows VMs
+
+Remotely upgrading Agents in containerized environments is not supported.
+
+### Permissions 
+Users must have the [Agent Upgrade][2] within Fleet Automation for upgrades, and the [Fleet Policies Write][2] permissions to configure Agents remotely. The permission is enabled by default on the Datadog Admin role.
+
+## Enable Remote Agent Management
 To enable Remote Agent Management:
-1. If you haven't enabled Remote Configuration on the Agent, follow the [configuration instructions][1] to enable it.
+1. Ensure that [Remote Configuration is enabled for your organization][15].
 1. Go to the [Datadog Agent install page][3] for your platform or configuration management tool.
 1. Enable **Remote Agent Management**. Enabling Remote Agent Management adds the `DD_REMOTE_UPDATES` environment variable to the generated Agent installation command.
 
@@ -30,24 +41,15 @@ To enable Remote Agent Management:
 
 <div class="alert alert-info">You must run the generated installation command with <code>DD_REMOTE_UPDATES</code> set to <code>true</code> to gain access to Remote Agent Management. Enabling Remote Agent Management without running the installation command does not grant access to the feature.</div>
 
-## Remotely upgrade your Agents
-### Supported platforms
 
-- Linux VMs installed using the install script or Ansible Datadog Role
-- Windows VMs
-
-<div class="alert alert-info">Remotely upgrading Agents in containerized environments is not supported.</div>
+## Upgrade Agents remotely
 
 ### Prerequisites
-
-* **User permissions**: Users must have the [Agent Upgrade][2] permission within Fleet Automation. The permission is enabled by default on the Datadog Admin role.
 * **Disk space**: Datadog suggests at least 2GB for the initial Agent install and an additional 2GB for upgrading the Agent from Fleet Automation. Specifically, the upgrade requires 1.3GB in the `/opt/datadog-packages` directory on Linux, or `C:\ProgramData\Datadog\Installer\packages` on Windows. The extra space ensures that there is enough room to maintain two Agent installs temporarily during the upgrade process in case a rollback is needed.
-* **Windows Agent User**: To enable remote updates for installations using an Active Directory domain account, provide the password option to the installer when upgrading to Agent 7.66 or later. To avoid providing and manually managing the account password, consider using a [Group Managed Service Account (gMSA)][11]. For more information, see [Installing the Agent with a gMSA account][12].
 
-### Upgrade your Agents
-
-To upgrade your Agents:
-1. [Enable Remote Agent Management](#setup).
+### How to upgrade Agents remotely
+To upgrade your Agents remotely:
+1. [Enable Remote Agent Management](#enable-remote-agent-management).
 1. From the [**Upgrade Agents** tab][4], click **Start Agents Upgrade**.
 
    {{< img src="/agent/fleet_automation/upgrade-screen.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
@@ -81,10 +83,36 @@ The Agent ensures that the appropriate permissions are set for these files. No c
 
 ### Upgrade precedence
 
-For the most consistent upgrade experience, Datadog recommends managing upgrades from one source at a time. Use either Fleet Automation or a configuration management tool. If you run a configuration management tool on an Agent that has already been upgraded using Fleet Automation, the upgrade reverts the Agent to the [`DD_AGENT_MINOR_VERSION`][9]  specified in your configuration. If no `DD_AGENT_MINOR_VERSION` is set, the Agent is upgraded to the latest available version .
+For the most consistent upgrade experience, Datadog recommends managing upgrades from one source at a time. Use either Fleet Automation or a configuration management tool. If you run a configuration management tool on an Agent that has already been upgraded using Fleet Automation, the upgrade reverts the Agent to the [`DD_AGENT_MINOR_VERSION`][9]  specified in your configuration. If no `DD_AGENT_MINOR_VERSION` is set, the Agent is upgraded to the latest available version.
+
+
+## Configure Agents
+{{< callout url="https://www.datadoghq.com/product-preview/manage-agent-configurations-from-fleet-automation/" >}}
+Managing Agent Configurations in Fleet Automation is in <strong>preview</strong>. To get access, complete the preview sign‑up form.
+{{< /callout >}}
+
+1. In Fleet Automation, open the [Configure Agents][16] tab and click Create Configuration.
+1. Select and configure the products (for example, APM, Logs, NDM) that you want the target Agents to run.
+
+   {{< img src="/agent/fleet_automation/fa_create_agent_configuration2.png" alt="Select which product to enable." style="width:100%;" >}}
+
+1. Review and name your final configuration and begin scoping deployment to your Agents. Alternatively, you can save the configuration to edit or deploy to your Agents at a later time from the Configure Agents page.
+1. Scope Agents to deploy configuration to (for example through tags such as host names, site, or environment).
+1. Review the deployment plan to confirm scoped Agents and deployment settings, such as rollout concurrency.
+1. Start deployment and track progress from the Deployments page.
+
+### Configuration precedence
+
+When a configuration file on the host conflicts with a Fleet Automation configuration, Fleet Automation takes precedence, ensuring a single source of truth. See [Configuration Order Precedence][17].
+
+### Edit, deploy or roll back configurations
+From your list of configurations in the [Configure Agents][16] tab, you can
+   - Deploy the unused configuration to your Agents
+   - Edit the configuration, save a new version, and redeploy the updated configuration.
+   - Rollback the configuration to a previous version and redeploy.
+
 
 ### Mirrors and proxies
-
 You can use Remote Agent Management along with a proxy or mirrored repositories.
 
 For instructions on configuring your Agent to use a proxy, see [Agent Proxy Configuration][6]. After you've configured the proxy, restart the Agent to apply the settings.
@@ -93,7 +121,7 @@ For instructions on using mirrored or air-gapped repositories, see:
 - [Synchronize Datadog's images with a private container registry][7]
 - [Installing the Agent on a server with limited internet connectivity][8]
 
-### Downgrading Agents
+## Downgrade Agents
 
 If you need to downgrade an Agent, follow the steps in [Upgrade your Agents](#upgrade-your-agents) and specify the version you wish to downgrade to. Datadog recommends using the latest version of the Agent and upgrading your Agents regularly to make sure you have access to the latest features.
 
@@ -143,7 +171,7 @@ To uninstall the Agent, see [Uninstall the Agent][1].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/remote_config/#enabling-remote-configuration
+[1]: https://app.datadoghq.com/organization-settings/remote-config
 [2]: /account_management/rbac/permissions#fleet-automation
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://app.datadoghq.com/fleet/agent-upgrades
@@ -153,7 +181,8 @@ To uninstall the Agent, see [Uninstall the Agent][1].
 [8]: https://docs.datadoghq.com/agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
 [9]: https://github.com/DataDog/agent-linux-install-script?tab=readme-ov-file#install-script-configuration-options
 [10]: https://app.datadoghq.com/fleet/deployments
-[11]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/group-managed-service-accounts-overview
-[12]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/?tab=installationinactivedirectorydomains
 [13]: https://app.datadoghq.com/fleet?query=support_remote_upgrade%3Adatadog-installer
 [14]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
+[15]: /agent/guide/setup_remote_config
+[16]: https://app.datadoghq.com/fleet/agent-management
+[17]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#configuration-order-precedence

@@ -107,6 +107,8 @@ module:
        target: data
      - source: assets
        target: assets
+     - source: layouts/shortcodes
+       target: layouts/shortcodes
 
   mounts:
     # default mounts
@@ -150,6 +152,8 @@ security:
     getenv:
       # allow os.Getenv to read gitlab CI_ prefixed os environment vars
       - ^(HUGO_|CI_|IA_SUBDOMAIN)
+      # allows local translation builds (used by include-markdown shortcode)
+      - LOCAL_TRANSLATION_BUILD
   exec:
     osEnv:
       # as suggested here https://github.com/gohugoio/hugo/issues/9333#issuecomment-1022435616
@@ -205,7 +209,7 @@ outputFormats:
     mediaType: "text/plain"
     notAlternative: true
 
-timeout: "90s"
+timeout: 300s
 
 minify:
   disableSVG: true

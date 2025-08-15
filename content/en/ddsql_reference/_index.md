@@ -124,7 +124,9 @@ The following SQL functions are supported. For Window function, see the separate
 | `TO_TIMESTAMP(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.             |
 | `TO_CHAR(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.             |
 | `DATE_TRUNC(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.  |
-| `REGEXP_LIKE(string s, pattern p)`               | boolean                               | Evaluates whether a string matches a regular expression pattern.                 |
+| `REGEXP_LIKE(string s, pattern p)`               | Boolean                               | Evaluates whether a string matches a regular expression pattern.            |
+| `REGEXP_MATCH(string s, pattern p)`              | array of strings                      | Returns substrings of the first pattern match in the string.  |
+| `REGEXP_REPLACE(string s, pattern p, string replacement [, string flags ])`| string      | Replaces the first occurrence of the pattern in a string with the replacement. Optional `flags` argument, add `'g'` (global) to match all occurrences instead of first.        |
 | `CARDINALITY(array a)`                           | integer                               | Returns the number of elements in the array.                                |
 | `ARRAY_POSITION(array a, typeof_array value)`    | integer                               | Returns the index of the first occurrence of the value found in the array, or null if value is not found. |
 | `STRING_TO_ARRAY(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter. |
@@ -381,6 +383,18 @@ FROM
   emails
 WHERE
   REGEXP_LIKE(email_address, '@example\.com$')
+{{< /code-block >}}
+
+### `REGEXP_MATCH`
+{{< code-block lang="sql" >}}
+SELECT
+  REGEXP_MATCH('abc123xyz', '[0-9]+')
+{{< /code-block >}}
+
+### `REGEXP_REPLACE`
+{{< code-block lang="sql" >}}
+SELECT
+  REGEXP_REPLACE('2025-07/29', '-', '/')
 {{< /code-block >}}
 
 ### `CARDINALITY`

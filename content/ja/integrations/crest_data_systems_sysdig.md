@@ -100,41 +100,7 @@ tile:
 *  アクティビティ監査
 *  監査タップ
 
-## トラブルシューティング
-
-* Agent ログでポートバインディング中に **Permission denied** エラーが表示された場合は、以下の手順に従ってください。
-
-   1. 1024 未満のポート番号にバインドするには、昇格権限が必要です。以下の手順に従って設定してください。
-
-      - setcap コマンドを使用して、ポートへのアクセスを許可します。
-
-         ```
-         sudo setcap CAP_NET_BIND_SERVICE=+ep /opt/datadog-agent/bin/agent/agent
-         ```
-
-      - セットアップが正しいか確認するために、getcap コマンドを実行します。
-
-         ```
-         sudo getcap /opt/datadog-agent/bin/agent/agent
-         ```
-         正しければ、次のように出力されます。
-
-         ```
-         /opt/datadog-agent/bin/agent/agent = cap_net_bind_service+ep
-         ```
-         **注**: Agent をアップグレードするたびに、この setcap コマンドを再実行してください。
-
-   2. [Agent を再起動します][3]。
-
-* ファイアウォールが有効になっている場合、構成ポートからのトラフィックがバイパスされることを確認してください。
-
-* **Port <PORT-NO\> Already in Use** エラーが表示された場合は、以下の手順に従ってください (以下の例は PORT-NO = 514 の場合です)。
-
-    * Syslog があるシステムで、Agent がポート 514 で Sysdig ログをリッスンしている場合、Agent ログに以下のエラーが表示されることがあります: **Can't start UDP forwarder on port 514: listen udp :514: bind: address already in use**
-
-    * これは、デフォルトで Syslog がポート 514 をリッスンしているために発生します。このエラーを解決するには、Syslog を無効にするか、Agent が他のサービスに占有されていない利用可能なポートをリッスンします。
-
-## Agent
+## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data にお問い合わせください。
 
@@ -156,4 +122,4 @@ tile:
 [10]: https://docs.datadoghq.com/ja/agent/?tab=Linux
 [11]: https://docs.crestdata.ai/datadog-integrations-readme/Crest_Data_Datadog_Integrations_FAQ.pdf
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-sysdig" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-sysdig" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

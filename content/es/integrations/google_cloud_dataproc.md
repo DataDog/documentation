@@ -1,4 +1,24 @@
 ---
+app_id: google-cloud-dataproc
+app_uuid: 85672a18-7845-4038-a688-ee86a126f3aa
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: gcp.dataproc.cluster.hdfs.datanodes
+      metadata_path: metadata.csv
+      prefix: gcp.dataproc.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 266
+    source_type_name: Google Cloud Dataproc
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - nube
 - google cloud
@@ -6,6 +26,7 @@ categories:
 custom_kind: integración
 dependencies: []
 description: Realiza el seguimiento de las métricas de Google Cloud Dataproc.
+display_on_public_website: true
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_dataproc/
 draft: false
 git_integration_title: google_cloud_dataproc
@@ -14,14 +35,30 @@ integration_id: google-cloud-dataproc
 integration_title: Google Cloud Dataproc
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: google_cloud_dataproc
-public_title: Integración de Datadog y Google Cloud Dataproc
-short_description: Realiza el seguimiento de las métricas de Google Cloud Dataproc.
+public_title: Google Cloud Dataproc
+short_description: Un servicio en la nube gestionado para un funcionamiento rentable
+  de los clústeres de Apache Spark y Hadoop.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Categoría::Nube
+  - Categoría::Google Cloud
+  - Category::Log Collection
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Un servicio en la nube gestionado para un funcionamiento rentable de
+    los clústeres de Apache Spark y Hadoop.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Google Cloud Dataproc
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
 <div class="alert alert-info">
@@ -46,26 +83,26 @@ Una vez hecho esto, exporta tus logs de Google Cloud Dataproc de Google Cloud Lo
 
 1. Ve a la [página de Google Cloud Logging][3] y filtra logs de Google Cloud Dataproc.
 2. Haz clic en **Create Export** (Crear exportación) y asigna un nombre al sumidero.
-3. Elige "Cloud Pub/Sub" como destino y selecciona el tema Pub/Sub creado para tal fin. **Nota**: El tema Pub/Sub puede estar ubicado en un proyecto diferente.
+3. Elige "Cloud Pub/Sub" como destino y selecciona el tema Pub/Sub creado para tal fin. **Nota**: El tema Pub/Sub puede encontrarse en un proyecto diferente.
 4. Haz clic en **Create** (Crear) y espera a que aparezca el mensaje de confirmación.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "google-cloud-dataproc" >}}
+{{< get-metrics-from-git "google_cloud_dataproc" >}}
 
 
 ### Eventos
 
 La integración Google Cloud Dataproc no incluye eventos.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración Google Cloud Dataproc no incluye checks de servicio.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][5].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][5].
 
 [1]: https://docs.datadoghq.com/es/integrations/google_cloud_platform/
 [2]: https://docs.datadoghq.com/es/integrations/google_cloud_platform/#log-collection
