@@ -50,6 +50,10 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
+   {{% tab "YAML Deploy" %}}
+   {{% gcr-install-sidecar-yaml language="go" %}}
+   {{% /tab %}}
+
    {{% tab "Custom" %}}
    {{% gcr-install-sidecar-custom %}}
    {{% /tab %}}

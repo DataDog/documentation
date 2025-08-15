@@ -46,6 +46,10 @@ ENV NODE_OPTIONS="--require dd-trace/init"
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
+   {{% tab "YAML Deploy" %}}
+   {{% gcr-install-sidecar-yaml language="nodejs" %}}
+   {{% /tab %}}
+
    {{% tab "Custom" %}}
    {{% gcr-install-sidecar-custom %}}
    {{% /tab %}}

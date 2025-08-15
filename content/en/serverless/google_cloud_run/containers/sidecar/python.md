@@ -32,6 +32,10 @@ RUN pip install --target /dd_tracer/python/ ddtrace
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
+   {{% tab "YAML Deploy" %}}
+   {{% gcr-install-sidecar-yaml language="python" %}}
+   {{% /tab %}}
+
    {{% tab "Custom" %}}
    {{% gcr-install-sidecar-custom %}}
    {{% /tab %}}

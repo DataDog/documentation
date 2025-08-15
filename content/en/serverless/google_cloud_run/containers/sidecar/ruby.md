@@ -34,6 +34,10 @@ gem 'datadog'
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
+   {{% tab "YAML Deploy" %}}
+   {{% gcr-install-sidecar-yaml language="ruby" %}}
+   {{% /tab %}}
+
    {{% tab "Custom" %}}
    {{% gcr-install-sidecar-custom %}}
    {{% /tab %}}

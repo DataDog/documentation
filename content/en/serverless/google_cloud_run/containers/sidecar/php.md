@@ -41,6 +41,10 @@ apk add libgcc
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
+   {{% tab "YAML Deploy" %}}
+   {{% gcr-install-sidecar-yaml language="php" %}}
+   {{% /tab %}}
+
    {{% tab "Custom" %}}
    {{% gcr-install-sidecar-custom %}}
    {{% /tab %}}
