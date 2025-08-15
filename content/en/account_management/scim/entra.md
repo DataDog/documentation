@@ -55,7 +55,7 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
         - **Note:** The `?aadOptscim062020` part of the Tenant URL is specifically for Entra ID. This is a flag that tells Entra to correct its SCIM behavior as outlined in this [Microsoft Entra documentation][8]. If you are not using Entra ID, you should not include this suffix on the URL.
     - **Secret Token**: Use a valid Datadog application key. You can create an application key on [your organization settings page][4]. To maintain continuous access to your data, use a [service account][5] application key.
 
-{{< img src="/account_management/scim/admin-credentials-2.png" alt="Azure AD Admin Credentials configuration screen">}}
+{{< img src="/account_management/scim/admin-credentials-entra-flag.png" alt="Azure AD Admin Credentials configuration screen">}}
 
 5. Click **Test Connection**, and wait for the message confirming that the credentials are authorized to enable provisioning.
 6. Click **Save**. The mapping section appears. See the following section to configure mapping.
