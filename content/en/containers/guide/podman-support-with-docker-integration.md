@@ -22,6 +22,10 @@ To deploy the Agent as a rootless Podman container, the command to run is simila
 The main difference is that as the Agent does not have access to the runtime socket, it relies on the Podman DB to extract the container information that it needs. So, instead of mounting the Docker socket and setting `DOCKER_HOST` we need to mount the Podman DB (`<PODMAN_DB_PATH>` in the command below).
 In some systems the path of the Podman DB is `$HOME/.local/share/containers/storage/libpod/bolt_state.db` but it might be different in your system. Set `<PODMAN_DB_PATH>` in the command below accordingly.
 
+<div class="alert alert-info">
+If you are using <strong> Podman verstion >=v4.8 </strong>, podman uses Sqlite as the default database backend and boltDB is deprecated from v5. If this is the case, please update the (`<PODMAN_DB_PATH>`) to the path of db.sql, this is generally `/var/lib/containers/storage/db.sql`. In some systems this path may differ so, please ensure to use the right db path.
+</div>
+
 ```
 $ podman run -d --name dd-agent \
     --cgroupns host --pid host \
