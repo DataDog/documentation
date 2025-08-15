@@ -43506,6 +43506,68 @@ components:
         urgency:
           $ref: '#/components/schemas/Urgency'
       type: object
+    TeamSyncAttributes:
+      description: Team sync attributes.
+      properties:
+        source:
+          $ref: '#/components/schemas/TeamSyncAttributesSource'
+        type:
+          $ref: '#/components/schemas/TeamSyncAttributesType'
+      required:
+      - source
+      - type
+      type: object
+    TeamSyncAttributesSource:
+      description: The external source platform for team synchronization. Only "github"
+        is supported.
+      enum:
+      - github
+      example: github
+      type: string
+      x-enum-varnames:
+      - GITHUB
+    TeamSyncAttributesType:
+      description: The type of synchronization operation. Only "link" is supported,
+        which links existing teams by matching names.
+      enum:
+      - link
+      example: link
+      type: string
+      x-enum-varnames:
+      - LINK
+    TeamSyncBulkType:
+      description: Team sync bulk type.
+      enum:
+      - team_sync_bulk
+      example: team_sync_bulk
+      type: string
+      x-enum-varnames:
+      - TEAM_SYNC_BULK
+    TeamSyncData:
+      description: Team sync data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamSyncAttributes'
+        type:
+          $ref: '#/components/schemas/TeamSyncBulkType'
+      required:
+      - attributes
+      - type
+      type: object
+    TeamSyncRequest:
+      description: Team sync request.
+      example:
+        data:
+          attributes:
+            source: github
+            type: link
+          type: team_sync_bulk
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamSyncData'
+      required:
+      - data
+      type: object
     TeamTarget:
       description: Represents a team target for an escalation policy step, including
         the team's ID and resource type.
@@ -70176,6 +70238,74 @@ paths:
     x-merge-override:
       get: false
       post: false
+  /api/v2/team/sync:
+    post:
+      description: 'This endpoint attempts to link your existing Datadog teams with
+        GitHub teams by matching their names.
+
+        It evaluates all current Datadog teams and compares them against teams in
+        the GitHub organization
+
+        connected to your Datadog account, based on Datadog Team handle and GitHub
+        Team slug
+
+        (lowercased and kebab-cased).
+
+
+        This operation is read-only on the GitHub side, no teams will be modified
+        or created.
+
+
+        [A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),
+
+        and the GitHub App integrated with Datadog must have the `Members Read` permission.
+        Matching is performed by comparing the Datadog team handle to the GitHub team
+        slug
+
+        using a normalized exact match; case is ignored and spaces are removed. No
+        modifications are made
+
+        to teams in GitHub. This will not create new Teams in Datadog.'
+      operationId: SyncTeams
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamSyncRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Internal Server Error - Unexpected error during linking.
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_manage
+      summary: Link Teams with GitHub Teams
+      tags:
+      - Teams
+      x-codegen-request-body-name: body
+      x-menu-order: 19
+      x-permission:
+        operator: AND
+        permissions:
+        - teams_manage
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
+        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/team/{super_team_id}/member_teams:
     get:
       description: Get all member teams.
