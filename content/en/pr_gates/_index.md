@@ -33,15 +33,15 @@ PR Gates are in Preview.
 
 ## Overview
 
-PR Gates allow you to control software quality by configuring rules to block substandard code from deployment. You have control over what is merged into the default branch and deployed to production, and can ensure that the code running in production adheres to high quality standards, reducing incidents and minimizing unwanted behaviors.
+PR Gates allow you to control software security and quality by configuring rules to block pull requests with substandard code from being merged. Preventing pull requests with substandard code from being merged can ensure that the code that is eventually deployed to production adheres to high organizational standards, reducing incidents and minimizing unwanted behaviors.
 
 {{< img src="pr_gates/setup/sca_3.png" alt="An SCA rule that triggers a failure if any library vulnerabilities with critical or high severity are detected in the repository." style="width:100%" >}}
 
 Use PR Gates to:
 
-* Create rules that block workflows using data in Datadog, ensuring that only code that meets your standards end up in production.
-* Give your organization the ability to decide what code makes it to production, enhancing your deployment discipline and mitigating potential issues in live environments.
-* Continually improve code quality and system performance with precise enforcement and customizable rules.
+* Create rules that block pull requests using data in Datadog, ensuring that only code that meets your standards end up being merged.
+* Give your organization the ability to prevent substandard code changes from ever reaching production.
+* Continually improve code security and quality with precise enforcement and customizable rules.
 
 You can configure PR Gates rules for the following categories: 
 
@@ -52,7 +52,7 @@ You can configure PR Gates rules for the following categories:
 | [**Code Coverage**][15] | <li> Total code coverage threshold <li> Patch code coverage threshold |
 | [**Infrastructure as Code Scanning**][16] | <li> IaC vulnerability severity |
 
-By integrating PR Gates [into your CI/CD pipelines][7] or allowing the [Datadog GitHub integration][13] to create status checks on your Pull Requests automatically (available for SCA rules only), you can create a robust framework for maintaining and improving software quality that aligns with your organization's operational goals and business objectives. 
+After creating PR Gates rules, Datadog will automatically create checks on your pull requests using the [GitHub integration][13] or [Azure DevOps integration][14]. Set those checks as required in GitHub or Azure DevOps when you are ready to enforce them.
 
 ## Rule types
 
@@ -116,5 +116,6 @@ This view is useful for developers who want to keep an eye on the PR gates for t
 [11]: /security/code_security/static_analysis
 [12]: /security/code_security/software_composition_analysis
 [13]: /integrations/github/
+[14]: /integrations/azure_devops_source_code/
 [15]: https://www.datadoghq.com/product-preview/code-coverage
 [16]: /security/code_security/iac_security/
