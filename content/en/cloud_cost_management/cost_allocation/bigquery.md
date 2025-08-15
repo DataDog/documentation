@@ -41,9 +41,9 @@ BigQuery offers several additional services beyond query processing that contrib
 | **BI Engine** | Costs for in-memory analytics acceleration |
 | **Other services** | ML training, routine executions, and additional BigQuery features |
 
-CCM allocates and enriches costs for both query-processing [pricing models][3], providing detailed cost attribution and tagging for your BigQuery analysis workloads.
+CCM allocates and enriches costs for both query-processing [pricing models][2], providing detailed cost attribution and tagging for your BigQuery analysis workloads.
 
-Learn more about [optimizing BigQuery performance and costs][8].
+Learn more about [optimizing BigQuery performance and costs][3].
 
 ## Prerequisites
 
@@ -55,9 +55,9 @@ The following table presents the list of collected features and the minimal requ
 | Query-Level Cost Attribution | BigQuery monitoring enabled |
 | Reservation Cost Allocation | BigQuery reservations configured |
 
-1. Configure the Google Cloud Cost Management integration on the [Cloud Cost Setup page][2].
-2. [Enable BigQuery monitoring][4] in your Google Cloud project. 
-3. (Optional) For reservation cost allocation, [configure BigQuery reservations][7] in your project. This approach is typically more cost-efficient for predictable or high-volume workloads compared to on-demand pricing, as explained in this [Google Cloud Community blog post][11].
+1. Configure the Google Cloud Cost Management integration on the [Cloud Cost Setup page][4].
+2. [Enable BigQuery monitoring][5] in your Google Cloud project. 
+3. (Optional) For reservation cost allocation, [configure BigQuery reservations][6] in your project. This approach is typically more cost-efficient for predictable or high-volume workloads compared to on-demand pricing, as explained in this [Google Cloud Community blog post][7].
 
 ## Allocating costs
 
@@ -73,7 +73,7 @@ Costs are allocated into the following spend types:
 
 ### Query-level tag extraction
 
-When the [Datadog Google BigQuery integration][4] is enabled, CCM extracts the following tags to add to your query costs:
+When the [Datadog Google BigQuery integration][5] is enabled, CCM extracts the following tags to add to your query costs:
 
 | Tag | Description |
 |---|---|
@@ -88,7 +88,7 @@ You can identify BigQuery schedules to help connect costs to specific scheduled 
 
 To identify which BigQuery schedule a `DTS_CONFIG_ID` refers to:
 
-1.  Go to **BigQuery** in the [**GCP Console**][6].
+1.  Go to **BigQuery** in the [**GCP Console**][8].
 2.  Navigate to **Transfers > Schedules**.
 3.  Use the **search bar** or **Ctrl+F** to locate the `DTS_CONFIG_ID`.
 4.  Click the matched entry to view details about the query schedule, including source, frequency, and target dataset.
@@ -108,7 +108,7 @@ The tags below are automatically tagged from the billing data CCM processes and 
 | Tag | Description |
 |---|---|
 | `project_id` | GCP project ID where the BigQuery resource or job is located |
-| `google_location` | The specific Google Cloud region or zone where BigQuery resources are deployed (e.g., us-central1, europe-west1, asia-southeast1) |
+| `google_location` | The specific Google Cloud region or zone where BigQuery resources are deployed (for example, `us-central1`, `europe-west1`, `asia-southeast1`) |
 | `resource_name` | Full Google Cloud resource identifier |
 
 ### Using BigQuery labels for cost attribution
@@ -119,7 +119,7 @@ Use labels to categorize your BigQuery workloads by team, project, application, 
 
 #### Adding labels to queries
 
-You can add labels to BigQuery queries using the `--label` flag with the `bq` command-line tool:
+You can add labels to BigQuery queries so that they appear in CCM using the `--label` flag with the `bq` command-line tool:
 
 ```bash
 bq query --label department:engineering --label environment:production 'SELECT * FROM dataset.table'
@@ -143,7 +143,7 @@ To set labels that apply to all subsequent queries:
 SET @@query_label = "team:data_science,cost_center:analytics";
 ```
 
-Learn more about [adding BigQuery labels][10].
+Learn more about [adding BigQuery labels][9].
 
 ### Query-level allocation
 
@@ -170,13 +170,13 @@ Idle costs represent the portion of reservation capacity that was paid for but n
 
 BigQuery idle slot sharing is a cost allocation feature that redistributes unused reservation capacity to projects that need additional slots. For example, if Reservation A has extra idle slots, queries under Project B could use Project A's slots in addition to Project B's slots.
 
-If your organization has enabled idle slot sharing between reservations, the idle cost calculation will reflect how unused capacity is distributed across projects. With idle slot sharing enabled:
+If your organization has enabled idle slot sharing between reservations, the idle cost calculation reflects how unused capacity is distributed across projects. With idle slot sharing enabled:
 - Contributing projects: Projects whose unused reservation capacity is shared still see `borrowed_slot_usage` costs, representing the value they provided to other projects' queries.
 - Cost attribution: The total cost is preserved across the organization - costs are redistributed from idle capacity to borrowed usage, but no costs are lost or double-counted.
 - The original project still pays full reservation costs as per Google Cloud billing.
 - Shared idle slot costs help organizations understand the true value and utilization of their BigQuery reservations.
 
-Learn how to [enable idle slot sharing for your reservations][5].
+Learn how to [enable idle slot sharing for your reservations][10].
 
 ### Storage
 
@@ -187,20 +187,20 @@ Storage costs are categorized as:
 | `google_usage_type: Active Logical Storage` | Includes any table or table partition that has been modified in the last 90 days |
 | `google_usage_type: Long Term Logical Storage` | Includes any table or table partition that has not been modified for 90 consecutive days. The price of storage for that table automatically drops by approximately 50%. There is no difference in performance, durability, or availability between active and long-term storage |
 
-Learn more about [BigQuery storage and best practices][9].
+Learn more about [BigQuery storage and best practices][11].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/dash/integration/32017/bigquery-allocation?fromUser=false&refresh_mode=sliding&from_ts=1751740562723&to_ts=1754418962723&live=true
-[2]: /cloud_cost_management/setup/google_cloud/
-[3]: https://cloud.google.com/bigquery/pricing?hl=en
-[4]: /integrations/google-cloud-bigquery/
-[5]: https://cloud.google.com/bigquery/docs/reservations-tasks
-[6]: https://console.cloud.google.com
-[7]: https://cloud.google.com/bigquery/docs/reservations-get-started
-[8]: https://cloud.google.com/bigquery/docs/best-practices-performance-overview
-[9]: https://cloud.google.com/bigquery/docs/best-practices-storage
-[10]: https://cloud.google.com/bigquery/docs/adding-labels
-[11]: https://medium.com/google-cloud/bigquery-dynamic-reservation-the-new-query-cost-hack-4ee4297e619e
+[2]: https://cloud.google.com/bigquery/pricing
+[3]: https://cloud.google.com/bigquery/docs/best-practices-performance-overview
+[4]: /cloud_cost_management/setup/google_cloud/
+[5]: /integrations/google-cloud-bigquery/
+[6]: https://cloud.google.com/bigquery/docs/reservations-get-started
+[7]: https://medium.com/google-cloud/bigquery-dynamic-reservation-the-new-query-cost-hack-4ee4297e619e
+[8]: https://console.cloud.google.com
+[9]: https://cloud.google.com/bigquery/docs/adding-labels
+[10]: https://cloud.google.com/bigquery/docs/reservations-tasks
+[11]: https://cloud.google.com/bigquery/docs/best-practices-storage
