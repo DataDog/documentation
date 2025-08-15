@@ -28,8 +28,6 @@ compliance_config:
   ## Set to true to enable CIS benchmarks for Misconfigurations.
   #
   enabled: true
-  host_benchmarks:
-    enabled: true
 
 # Vulnerabilities are evaluated and scanned against your containers and hosts every hour.
 sbom:
