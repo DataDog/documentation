@@ -4,7 +4,7 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
       tag: "Blog"
       text: "Automate end-to-end processes and quickly respond to events with Datadog Workflows"
-    - link: "/service_management/workflows/access/"
+    - link: "/actions/workflows/access_and_auth/"
       tag: "Documentation"
       text: "Access and authentication"
     - link: "/security/cloud_security_management/workflows/"

@@ -11,7 +11,7 @@ further_reading:
   text: Evitar alertas de monitores que estaban en tiempo de inactividad
 - link: https://www.datadoghq.com/blog/datadog-recommended-monitors/
   tag: Blog
-  text: Activar alertas preconfiguradas con monitores recomendados
+  text: Activar alertas preconfiguradas con plantillas de monitor
 - link: https://www.datadoghq.com/blog/datadog-recommended-monitors/
   tag: Blog
   text: Monitorizar alertas y eventos con OpsGenie y Datadog
@@ -19,73 +19,83 @@ further_reading:
   tag: Blog
   text: Monitorizar servicios y establecer acuerdos de nivel de servicio (SLA) con
     Datadog
-title: Solucionar problemas de alertas de monitor
+title: Solucionar problemas de alertas de monitores
 ---
 
 ## Información general
 
-Esta guía proporciona información general de algunos conceptos básicos que pueden ayudarte a determinar si el comportamiento de alertas de tu monitor es válido. Si sospechas que las evaluaciones de tu monitor no reflejan con precisión los datos subyacentes, consulta las siguientes secciones mientras inspeccionas tu monitor.
+En esta guía, se proporciona información general de algunos conceptos fundamentales que pueden ayudarte a determinar si el comportamiento de alerta de tu monitor es válido. Si sospechas que las evaluaciones del monitor no reflejan con exactitud los datos subyacentes, utiliza esta guía para inspeccionar el monitor y solucionar los siguientes problemas:
+- [El estado del monitor no coincide con la evaluación](#monitor-state-and-monitor-status)
+- [Verificar la presencia de los datos](#verify-the-presence-of-data)
+- [Configuraciones de alerta](#alert-conditions)
+- [Notificaciones no deseadas](#notification-issues)
 
-### Monitorizar estados
+## Monitorizar estados
 
-Mientras que las *evaluaciones* de monitor no tienen estado, lo que significa que el resultado de una evaluación no depende de los resultados de evaluaciones anteriores, los propios monitores sí tienen estado y este se actualiza en función de los resultados de evaluación de sus consultas y configuraciones. Una evaluación de monitor con un estado determinado no provocará necesariamente que el estado del monitor cambie al mismo estado. A continuación se indican algunas causas potenciales:
+Mientras que las *evaluaciones* de monitor no tienen estado, lo que significa que el resultado de una evaluación no depende de los resultados de evaluaciones anteriores, los propios monitores sí tienen estado y este se actualiza en función de los resultados de la evaluación de sus consultas y configuraciones. La evaluación de un monitor con una situación determinada no provocará necesariamente que el estado del monitor cambie a la misma situación. A continuación se indican algunas causas potenciales:
 
-#### Las métricas son demasiado dispersas dentro de una ventana de evaluación de métricas de monitor
+#### Las métricas son demasiado escasas en una ventana de evaluación de métricas de monitor
 
-Si las métricas están ausentes de la ventana de evaluación de un monitor y el monitor no está configurado para anticipar [condiciones de ausencia de datos][1], la evaluación puede ser `skipped`. En tal caso, el estado monitor no se actualiza, por lo que un monitor que previamente tenía el estado `OK` permanece `OK`. Lo mismo ocurre con un monitor con el estado `Alert`. Utiliza el gráfico del [historial][2] de la página de estado del monitor y selecciona el grupo y el periodo de tiempo que te interesen. Si los datos están escasamente poblados, consulta [Monitorizar la aritmética y las métricas escasas][3] para obtener más información.
+Si las métricas están ausentes de la ventana de evaluación de un monitor y el monitor no está configurado para anticipar [condiciones de ausencia de datos][1], la evaluación puede ser `skipped`. En tal caso, el estado del monitor no se actualiza, por lo que un monitor que previamente tenía el estado `OK` permanece `OK`. Lo mismo ocurre con un monitor con el estado `Alert`. Utiliza el gráfico del [historial][2] de la página de estado del monitor y selecciona el grupo y el periodo de tiempo que te interesan. Si los datos están escasamente poblados, consulta [Monitorizar la aritmética y las métricas escasas][3] para obtener más información.
 
 #### Monitorizar actualizaciones de estado generadas por condiciones externas
 
-El estado de un monitor también puede actualizarse a veces en ausencia de una evaluación de monitor, por ejemplo, debido a la [resolución automática][4].
+Algunas veces, el estado de un monitor también puede actualizarse en ausencia de una evaluación de monitor, por ejemplo, debido a una [resolución automática][4].
 
-### Verificar la presencia de datos
+#### Estado "No Data" (Sin datos) con la función rollup
 
-Si el estado de tu monitor no es el que esperabas, confirma el comportamiento de la fuente de datos subyacente. En el caso de un monitor de métricas, puedes utilizar el gráfico del [historial][2] para ver los puntos de datos extraídos por la consulta de métricas. 
+Si tus monitores se están evaluando inesperadamente en un estado "No Data" (Sin datos), considera revisar los ajustes de los intervalos de rollups y evaluación. Por ejemplo, si un monitor tiene un intervalo de rollup de 4 minutos y otro de evaluación 20 minutos, produce un punto de datos cada 4 minutos, lo que lleva a un máximo de 5 puntos de datos dentro de la ventana. Si la opción "Require Full Window" (Requerir intervalo completo) está activada, la evaluación puede dar como resultado "No Data" (Sin datos) porque el intervalo no está completamente lleno. 
 
-### Condiciones de alerta
+Para la mayoría de los casos de uso, desactiva el ajuste "Require Full Window" (Requerir intervalo completo) a menos que tu caso específico exija datos completos para una evaluación precisa. Para obtener más información, consulta [Rollups en monitores][21].
 
-Algunas veces, el comportamiento inesperado de un monitor puede ser el resultado de una mala configuración de las [condiciones de alerta][5], que varían según el [tipo de monitor][6]. Si tu consulta de monitor utiliza la función `as_count()`, consulta la guía de [`as_count()` en evaluaciones de monitores][7].
+## Verificar la presencia de datos
+
+Si el estado del monitor no es el que esperabas, confirma el comportamiento de la fuente de datos subyacente. En el caso de un monitor de métricas, puedes utilizar el gráfico del [historial][2] para ver los puntos de datos extraídos por la consulta de métricas. Los grupos `N/A` no se incluyen en los monitores, pero son visibles en las consultas del dashboard. 
+
+## Condiciones de alerta
+
+Algunas veces, el comportamiento inesperado de un monitor puede ser el resultado de una mala configuración de las [condiciones de alerta][5], que varían según el [tipo de monitor][6]. Si tu consulta de monitor utiliza la función `as_count()`, consulta la guía [`as_count()` en evaluaciones de monitores][7].
 
 Si utilizas umbrales de recuperación, comprueba las condiciones enumeradas en la [guía de umbrales de recuperación][8] para ver si el comportamiento es el esperado.
 
-### Monitorizar estados y grupos
+## Monitorizar estados y grupos
 
-Tanto en las evaluaciones como en los estados de monitor, el seguimiento se realiza por grupos.
+Tanto en las evaluaciones como en los estados de monitores, el seguimiento se realiza por grupos.
 
-Para un monitor de alertas múltiples, un grupo es un conjunto de etiquetas (tags) con un valor para cada clave de agrupación (por ejemplo, `env:dev, host:myhost` para un monitor agrupad por `env` y `host`). Para una alerta simple, sólo hay un grupo (`*`) que representa todo lo que hay dentro del contexto del monitor.
+Para un monitor de alertas múltiples, un grupo es un conjunto de etiquetas (tags) con un valor para cada clave de agrupación (por ejemplo, `env:dev, host:myhost` para un monitor agrupado por `env` y `host`). Para una alerta simple, sólo hay un grupo (`*`) que representa todo lo que hay dentro del contexto del monitor.
 
 Por defecto, Datadog mantiene los grupos de monitores disponibles en la interfaz de usuario durante 24 horas, o 48 horas para los monitores de host, a menos que se modifique la consulta. Para obtener más información, consulta [Monitorizar los cambios de configuración que no surten efecto][9].
 
-Si anticipas la creación de nuevos grupos de monitores dentro del contexto de tus monitores con alertas múltiples, tal vez quieras configurar un periodo de espera para la evaluación de estos nuevos grupos. Esto puede ayudarte a evitar alertas sobre el comportamiento esperado de los nuevos grupos, como un alto uso de recursos asociado a la creación de un nuevo contenedor. Para obtener más información, consulta [Periodo de espera para nuevo grupo][10].
+Si anticipas la creación de nuevos grupos de monitores dentro del contexto de tus monitores con alertas múltiples, tal vez quieras configurar un periodo de espera para la evaluación de estos nuevos grupos. Esto puede ayudarte a evitar alertas sobre comportamientos esperados para los nuevos grupos, como un alto uso de recursos asociado a la creación de un nuevo contenedor. Para obtener más información, consulta [Periodo de espera para nuevo grupo][10].
 
 Si tu monitor realiza consultas de métricas en la nube basadas en crawlers, utiliza un [periodo de espera de evaluación][11] para asegurarte de que hayan llegado las métricas antes de la evaluación del monitor. Consulta [Periodo de espera para métricas en la nube][12] para obtener más información sobre los cronogramas de los crawlers de integraciones en la nube.
 
-### Problemas con las notificacies
+## Problemas con las notificaciones
 
 Si tu monitor se comporta como se espera, pero produce notificaciones no deseadas, existen varias opciones para reducir o suprimir las notificaciones:
 
-- Para los monitores que cambian rápidamente de estado, consulta [Reducir el flapping de alertas][13] para conocer formas de minimizar la fatiga por alertas.
-- Para las alertas esperadas o que no son útiles para tu organización, utiliza los [tiempos de inactividad][14] para suprimir las notificaciones no deseadas.
-- Para controlar el enrutamiento de las alertas, utiliza [variables de plantilla][15], y para separar los estados **advertencia** o **alerta** utiliza [variables condicionales][16].
+- Para los monitores que cambian rápidamente de estado, consulta [Reducir el flapping de alertas][13], para conocer formas de minimizar la fatiga por alertas.
+- Para las alertas esperadas o que no son útiles para tu organización, utiliza los [tiempos de inactividad][14], para suprimir las notificaciones no deseadas.
+- Para controlar el enrutamiento de las alertas, utiliza [variables de plantilla][15] y, para separar los estados **advertencia** o **alerta**, utiliza [variables condicionales][16].
 
-#### Notificaciones de ausencia
+### Notificaciones de ausencia
 
 Si sospechas que las notificaciones no se están entregando correctamente, consulta los siguientes elementos para garantizar que las notificaciones puedan entregarse:
 
-- Comprueba las [preferencias de correo electrónico][17] del destinatario y asegúrate de que `Notification from monitor alerts` está seleccionado.
+- Comprueba las [preferencias de correo electrónico][17] del destinatario y asegúrate de que la opción `Notification from monitor alerts` está seleccionada.
 - Comprueba el [flujo de eventos][18] de los eventos con la cadena `Error delivering notification`.
 
-#### Notificaciones múltiples Opsgenie
+### Notificaciones múltiples Opsgenie
 
 Si utilizas las notificaciones múltiples `@opsgenie-[...]` en tu monitor, enviamos esas notificaciones con el mismo alias Opsgenie.
 Debido a una [característica de Opsgenie][19], Opsgenie descartará lo que considere una duplicación.
 
-## Leer más
+## Para leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/monitors/configuration/?tabs=thresholdalert#no-data
-[2]: /es/monitors/manage/status/#history
+[2]: /es/monitors/status/#history
 [3]: /es/monitors/guide/monitor-arithmetic-and-sparse-metrics/
 [4]: /es/monitors/configuration/?tabs=thresholdalert#auto-resolve
 [5]: /es/monitors/configuration/?tabs=thresholdalert#set-alert-conditions
@@ -104,3 +114,4 @@ Debido a una [característica de Opsgenie][19], Opsgenie descartará lo que cons
 [18]: /es/events/stream
 [19]: https://docs.opsgenie.com/docs/alert-deduplication
 [20]: /es/notebooks
+[21]: /es/dashboards/functions/rollup/#rollups-in-monitors

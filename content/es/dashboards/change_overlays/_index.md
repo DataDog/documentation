@@ -29,53 +29,32 @@ title: Cambiar superposiciones
 
 ## Información general
 
-A medida que los equipos iteran, implementan código y realizan cambios continuamente en sus aplicaciones y servicios, puede resultar difícil encontrar el cambio exacto que ha provocado un pico de errores, un aumento de la latencia o una ralentización de los tiempos de carga de las páginas. Utiliza las superposiciones de cambios para identificar cuándo un cambio reciente está causando problemas de rendimiento en tu aplicación o tus servicios y encontrar el origen del problema.
-
-Visualiza el momento en que se produce un cambio en el contexto de tus datos de observabilidad de Datadog para localizar problemas en versiones específicas, correlacionar cambios con métricas y solucionar problemas con mayor rapidez. Las superposiciones de cambios admiten [implementaciones de servicios APM][1].
+A medida que los equipos iteran, despliegan código y realizan cambios en sus aplicaciones y servicios, identificar el cambio exacto que provocó un pico de errores, un aumento de la latencia o una ralentización de los tiempos de carga de las páginas puede resultar complicado. Utiliza las superposiciones de cambios para visualizar cambios en tu dashboard, como despliegues o marcadores de funciones, y correlacionar rápidamente los problemas de rendimiento con ellos.
 
 ## Superponer cambios en gráficos
 
-Para empezar, haz clic en **Show Overlays** (Mostrar superposiciones), en la esquina superior derecha de tu dashboard. 
+Para empezar, haz clic en **Show Overlays** (Mostrar superposiciones) en la esquina superior derecha de tu dashboard. Ahora puedes activar la línea de tiempo [Change Tracking][16] y cambiar las superposiciones en los widgets de series de tiempo.
 
 {{< img src="dashboards/change_overlays/show_overlays_button.png" alt="Botón Overlays (Superposiciones) en el encabezado del dashboard" style="width:100%;">}}
 
-Las superposiciones aparecen automáticamente en los gráficos de series temporales, filtradas con la etiqueta (tag) `service`, para servicios configurados con etiquetas `version`. Para habilitar las implementaciones en tus servicios APM, [añade etiquetas de versión a tu configuración][1]. 
+Cuando se activa, la barra de búsqueda **Servicio** muestra el servicio **más relevante** por defecto. Datadog selecciona automáticamente el servicio más frecuentemente mencionado en las consultas, que apoyan los widgets del dashboard.
 
-Haz clic en cualquier superposición de evento para abrir un panel lateral con más información y [analizar el impacto de tu cambio](#analyze-the-impact-of-your-change).
-
-### Mostrar implementaciones fallidas
-Utiliza el conmutador del panel de superposiciones para mostrar únicamente las [implementaciones fallidas][2] que podrían estar afectando a tus métricas.
-
-### Anular la detección automática
 Anula la detección automática de servicios, utilizando la barra de búsqueda para encontrar el servicio que te interese. 
 
-## Analizar el impacto de tu cambio
-Haz clic en cualquier superposición de tu gráfico para abrir una página de análisis de cambios, lo que te permitirá comprender el estado y el impacto de tu cambio.
+Todos los cambios mostrados en la línea de tiempo de los cambios y como superposiciones están vinculados al servicio seleccionado. 
+Utiliza el menú desplegable **Mostrar en** para limitar las superposiciones de cambios a los widgets pertinentes o mostrarlas en todos los widgets de tu dashboard.
 
-{{< img src="dashboards/change_overlays/change_overlays_side_panel.png" alt="Panel lateral de superposiciones de cambios" style="width:75%;">}}
-
-### Implementaciones de APM
-Para las implementaciones de APM, puedes:
-- Comparar la versión seleccionada con el rendimiento general del servicio, en cuanto a solicitudes, errores o latencia
-- Ver el despliegue de tu versión en `region`, `env` o `datacenter`
-- Ver los nuevos problemas de seguimiento de errores que se han introducido con la nueva implementación
-- Verificar la infraestructura relacionada en la que se está ejecutando tu servicio
-
-{{< img src="dashboards/change_overlays/apm_overlays_side_panel.png" alt="Panel lateral de superposiciones de APM" style="width:75%;">}}
+Para ver más detalles o realizar acciones adicionales, haz clic en una superposición de cambios o en un cambio dentro de la línea de tiempo de los cambios.
 
 ## FAQ
-### ¿Cuándo aparecen las superposiciones?
-En las implementaciones de APM, las superposiciones aparecen en gráficos de series temporales que:
-1. Se filtran por etiquetas de `service` en la consulta
-2. Configuran el `service` con la etiqueta de `version`
 
-### ¿Cuál es el alcance de las implementaciones?
+### ¿A qué se delimitan los cambios de despliegues?
 En las implementaciones de APM debe especificarse `env`. Si tienes una variable de plantilla `env` o `datacenter` establecida en tu dashboard, las implementaciones se filtran para que coincidan con la selección. De lo contrario, `env` cambia por defecto a `prod`. 
 
-## Referencias adicionales
+
+## Para leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /es/tracing/services/deployment_tracking/
 [2]: /es/watchdog/faulty_deployment_detection/
@@ -92,3 +71,4 @@ En las implementaciones de APM debe especificarse `env`. Si tienes una variable 
 [13]: /es/metrics/advanced-filtering/#boolean-filtered-queries
 [14]: /es/logs/explorer/search_syntax/
 [15]: /es/dashboards/widgets/timeseries/#event-overlay
+[16]: /es/change_tracking/

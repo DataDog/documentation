@@ -274,7 +274,7 @@ spec:
 
 | Parameter           | Description                                                        |
 |---------------------|--------------------------------------------------------------------|
-| `exclude_truncated` | When present, it excludes truncated logs and does not send to Datadog. |
+| `exclude_truncated` | When present, it excludes truncated logs and does not send to Datadog. The `exclude_truncated` rule is available starting with Agent v7.69. |
 
 For example, to **filter out** truncated logs:
 
@@ -651,7 +651,7 @@ logs:
 
 ## Global processing rules
 
-For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][5] or through an environment variable:
+For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][5] or through an environment variable. The `exclude_truncated` rule is available starting with Agent v7.69.
 
 {{< tabs >}}
 {{% tab "Configuration files" %}}

@@ -233,7 +233,8 @@ components:
       name: cloud_account_id
       required: true
       schema:
-        type: string
+        format: int64
+        type: integer
     CloudWorkloadSecurityAgentRuleID:
       description: The ID of the Agent rule
       example: 3b5-v82-ns6
@@ -4539,8 +4540,7 @@ components:
           $ref: '#/components/schemas/AwsCURConfigAttributes'
         id:
           description: The ID of the AWS CUR config.
-          format: int64
-          type: integer
+          type: string
         type:
           $ref: '#/components/schemas/AwsCURConfigType'
       required:
@@ -4693,9 +4693,6 @@ components:
           description: The region the bucket is located in.
           example: us-east-1
           type: string
-        is_enabled:
-          description: Whether or not the Cloud Cost Management account is enabled.
-          type: boolean
         months:
           description: The month of the report.
           format: int32
@@ -5189,8 +5186,7 @@ components:
           type: string
         id:
           description: The ID of the Azure config.
-          format: int64
-          type: integer
+          type: string
         months:
           deprecated: true
           description: The number of months the report has been backfilled.
@@ -5246,8 +5242,7 @@ components:
           $ref: '#/components/schemas/AzureUCConfigPairAttributes'
         id:
           description: The ID of Cloud Cost Management account.
-          format: int64
-          type: integer
+          type: string
         type:
           $ref: '#/components/schemas/AzureUCConfigPairType'
       required:
@@ -5266,8 +5261,7 @@ components:
           type: array
         id:
           description: The ID of the Azure config pair.
-          format: int64
-          type: integer
+          type: string
       required:
       - configs
       type: object
@@ -43512,6 +43506,68 @@ components:
         urgency:
           $ref: '#/components/schemas/Urgency'
       type: object
+    TeamSyncAttributes:
+      description: Team sync attributes.
+      properties:
+        source:
+          $ref: '#/components/schemas/TeamSyncAttributesSource'
+        type:
+          $ref: '#/components/schemas/TeamSyncAttributesType'
+      required:
+      - source
+      - type
+      type: object
+    TeamSyncAttributesSource:
+      description: The external source platform for team synchronization. Only "github"
+        is supported.
+      enum:
+      - github
+      example: github
+      type: string
+      x-enum-varnames:
+      - GITHUB
+    TeamSyncAttributesType:
+      description: The type of synchronization operation. Only "link" is supported,
+        which links existing teams by matching names.
+      enum:
+      - link
+      example: link
+      type: string
+      x-enum-varnames:
+      - LINK
+    TeamSyncBulkType:
+      description: Team sync bulk type.
+      enum:
+      - team_sync_bulk
+      example: team_sync_bulk
+      type: string
+      x-enum-varnames:
+      - TEAM_SYNC_BULK
+    TeamSyncData:
+      description: Team sync data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamSyncAttributes'
+        type:
+          $ref: '#/components/schemas/TeamSyncBulkType'
+      required:
+      - attributes
+      - type
+      type: object
+    TeamSyncRequest:
+      description: Team sync request.
+      example:
+        data:
+          attributes:
+            source: github
+            type: link
+          type: team_sync_bulk
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamSyncData'
+      required:
+      - data
+      type: object
     TeamTarget:
       description: Represents a team target for an escalation policy step, including
         the team's ID and resource type.
@@ -50962,6 +51018,31 @@ paths:
     get:
       description: List the Custom Costs files.
       operationId: ListCustomCostsFiles
+      parameters:
+      - description: Page number for pagination
+        in: query
+        name: page[number]
+        schema:
+          format: int64
+          type: integer
+      - description: Page size for pagination
+        in: query
+        name: page[size]
+        schema:
+          default: 100
+          format: int64
+          type: integer
+      - description: Filter by file status
+        in: query
+        name: filter[status]
+        schema:
+          type: string
+      - description: Sort key with optional descending prefix
+        in: query
+        name: sort
+        schema:
+          default: created_at
+          type: string
       responses:
         '200':
           content:
@@ -50969,6 +51050,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/CustomCostsFileListResponse'
           description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
         '403':
           content:
             application/json:
@@ -51004,6 +51091,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/CustomCostsFileUploadResponse'
           description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
         '403':
           content:
             application/json:
@@ -51038,6 +51131,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -51069,6 +51168,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -70133,6 +70238,74 @@ paths:
     x-merge-override:
       get: false
       post: false
+  /api/v2/team/sync:
+    post:
+      description: 'This endpoint attempts to link your existing Datadog teams with
+        GitHub teams by matching their names.
+
+        It evaluates all current Datadog teams and compares them against teams in
+        the GitHub organization
+
+        connected to your Datadog account, based on Datadog Team handle and GitHub
+        Team slug
+
+        (lowercased and kebab-cased).
+
+
+        This operation is read-only on the GitHub side, no teams will be modified
+        or created.
+
+
+        [A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),
+
+        and the GitHub App integrated with Datadog must have the `Members Read` permission.
+        Matching is performed by comparing the Datadog team handle to the GitHub team
+        slug
+
+        using a normalized exact match; case is ignored and spaces are removed. No
+        modifications are made
+
+        to teams in GitHub. This will not create new Teams in Datadog.'
+      operationId: SyncTeams
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamSyncRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Internal Server Error - Unexpected error during linking.
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_manage
+      summary: Link Teams with GitHub Teams
+      tags:
+      - Teams
+      x-codegen-request-body-name: body
+      x-menu-order: 19
+      x-permission:
+        operator: AND
+        permissions:
+        - teams_manage
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
+        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/team/{super_team_id}/member_teams:
     get:
       description: Get all member teams.
