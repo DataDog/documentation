@@ -61,20 +61,41 @@ Otros miembros del canal pueden seleccionar **Take it** (Aceptar) para programar
 
 ### Exportar cronogramas
 
-La función Exportar turnos te permite integrar tu cronograma de guardia en tu aplicación de calendario de preferencia (por ejemplo, Google Calendar, Apple Calendar o Outlook) mediante un enlace `.webcal`. Tanto si formas parte de varias rotaciones, como si planificas tu tiempo personal en función de los turnos o pretendes aumentar la visibilidad del equipo, esta función asegura que tus responsabilidades de guardia sean accesibles y estén siempre actualizadas.
+La función Exportar turnos te permite integrar tus horarios de guardia en tu aplicación de calendario preferida (por ejemplo, Google Calendar, Apple Calendar o Outlook) mediante un enlace `.webcal`. Elige si quieres sincronizar **solo tus turnos** o **todo el horario**.
 
-#### Exportación y sincronización de cronogramas
-1. Para generar un enlace `.webcal`, ve a la sección [**On-Call** > **Schedules**][1] (On-Call > Cronogramas) de tu cuenta.
-2. Selecciona **Export My Shifts** (Exportar mis turnos). Se generará automáticamente un enlace para ti.
-3. Pulsa **Copy Link** (Copiar enlace).
-4. Después de copiar el enlace, utilízalo en tu aplicación de calendario. Por ejemplo:
-    - Google Calendar: [sigue estas instrucciones de Google (en "Utilizar un enlace para añadir un calendario público")][3].
-    - Outlook: [Guía de Microsoft para suscribirte a calendarios de Internet][4].
-    - Calendario de Apple: [aprende a suscribirte a calendarios en Mac o iPhone][5].
+---
 
-Si tu cronograma de guardia cambia, las actualizaciones se reflejan automáticamente en el calendario vinculado, asegurando que siempre tengas la visión más precisa de tus responsabilidades. Si es necesario, revoca el acceso a un enlace previamente compartido generando uno nuevo, que invalida la URL anterior.
+##### 📆 Exportar *mis* turnos
 
-La mayoría de las aplicaciones de calendario admiten notificaciones, que son recordatorios habilitados para recibir alertas antes de que comiencen tus turnos; también puedes configurar recordatorios de turnos a través de SMS, notificación push y correo electrónico en tu [configuración del perfil de Datadog On-Call][6].
+1. Ve a la sección [**On-Call** > **Schedules**][1] (On-Call > Horarios) de tu cuenta.
+2. Seleccione **Export My Shifts** (Exportar mis turnos). Se generará automáticamente un enlace personal `.webcal`.
+3. Haz clic en **Copy Link** (Copiar enlace).
+4. Pega el enlace en tu aplicación de calendario. Por ejemplo:
+    - **Google Calendar**: [utiliza un enlace para añadir un calendario público][3].
+    - **Outlook**: [suscríbete a los calendarios de Internet][4].
+    - **Apple Calendar**: [suscrpibete en Mac o iPhone][5].
+
+Tu calendario se actualiza automáticamente si cambian tus turnos de guardia. Para revocar el acceso a un enlace previamente compartido, genera uno nuevo. Esto desactiva el enlace anterior.
+
+---
+
+##### 🌐 Exportar *todo* el horario
+
+1. Ve a la sección [**On-Call** > **Schedules**][1] (On-Call > Horarios) de tu cuenta.
+2. Abre el horario que deseas exportar.
+3. Selecciona **Export schedule** (Exportar horario). Se genera un enlace `.webcal` para todo el horario, incluidos todos los participantes y turnos.
+4. Haz clic en **Copy Link** (Copiar enlace).
+5. Pega el enlace en tu aplicación de calendario:
+    - **Google Calendar**: [utiliza un enlace para añadir un calendario público.][3]
+    - **Outlook**: [suscríbete a los calendarios de Internet.][4]
+    - **Apple Calendar**: [suscrpibete en Mac o iPhone.][5]
+
+---
+
+##### 🔔 Recibir notificaciones
+
+Activa recordatorios para los próximos turnos en tu aplicación de calendario. También puedes configurar notificaciones de turnos personalizadas a través de SMS, push o correo electrónico en tus [ajustes de perfil de Datadog On-Call][6].
+
 
 #### Solucionar problemas con exportaciones de cronogramas
 

@@ -33,10 +33,10 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- cumplimiento
+- conformidad
 - configuración y despliegue
 - marketplace
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -53,7 +53,7 @@ pricing:
 - billing_type: flat_fee
   includes_assets: true
   product_id: validator
-  short_description: Tarifa plana para esta integración
+  short_description: Tarifa plana de esta integración
   unit_price: 500
 public_title: Tag Validator
 short_description: Valida las etiquetas del monitor y garantiza el cumplimiento del
@@ -65,7 +65,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Compliance
+  - Categoría::Cumplimiento
   - Category::Configuration & Deployment
   - Category::Marketplace
   - Offering::Integration
@@ -86,7 +86,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  FUENTE https://github.com/DataDog/marketplace -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/marketplace -->
 
 
 ## Información general
@@ -101,8 +101,8 @@ El validador de RapDev resuelve el problema de monitorizar el cumplimiento de la
 1. Al host le falta la clave de etiqueta requerida
 2. El host tiene un valor no compatible para la clave de etiqueta
 
-## Agent
-Para obtener asistencia o realizar solicitudes de funciones, ponte en contacto con RapDev.io a través de los siguientes canales:
+## Ayuda
+Para solicitar asistencia o funciones, ponte en contacto con RapDev.io a través de los siguientes canales:
 
 - Correo electrónico: support@rapdev.io
 - Chat: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
@@ -114,4 +114,4 @@ Hecho con ❤️ en Boston
 *¿Esta no es la integración que estás buscando? ¿Falta una función esencial para tu organización? Envíanos una [nota](mailto:support@rapdev.io) y la crearemos.*
 
 ---
-Esta aplicación está disponible a través de Marketplace y cuenta con el respaldo de un socio tecnológico de Datadog. <a href="https://app.datadoghq.com/marketplace/app/rapdev-validator" target="_blank">Haz clic aquí</a> para adquirir esta aplicación.
+Esta aplicación está disponible a través del Marketplace Datadog y cuenta con el respaldo de un socio tecnológico de Datadog. Para utilizarla, <a href="https://app.datadoghq.com/marketplace/app/rapdev-validator" target="_blank">adquiere esta aplicación en el Marketplace</a>.
