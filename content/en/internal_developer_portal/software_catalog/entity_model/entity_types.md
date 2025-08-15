@@ -437,9 +437,9 @@ componentOf:
 
 When this definition is created:
 
-1. The frontend app appears under the Frontend Apps section in Software Catalog.
-2. If a RUM application exists with the same name, its telemetry is automatically linked.
-3. The entity aggregates metadata, dependencies, and real-time RUM performance metrics in a unified view.
+- The frontend app appears under the Frontend Apps section in Software Catalog.
+- If a RUM application exists with the same name, its telemetry is automatically linked.
+- The entity aggregates metadata, dependencies, and real-time RUM performance metrics in a unified view.
 
 **Note:** This separation improves observability by clarifying the role of frontend applications and enables more targeted performance monitoring and scorecarding.
 
