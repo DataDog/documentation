@@ -13,9 +13,9 @@ Datadog Cloud Cost Management (CCM) automatically allocates the costs of your Go
 
 CCM displays costs for resources including query-level analysis, storage, and data transfer on the [BigQuery dashboard][1].
 
-## BigQuery pricing models
+## BigQuery pricing options
 
-BigQuery offers multiple pricing components, with CCM focusing on query-related processing costs.
+BigQuery offers multiple pricing options, with CCM focusing on query-related processing costs.
 
 ### On-demand queries
 
@@ -31,19 +31,23 @@ With reservation-based queries, you purchase dedicated processing capacity (slot
 
 ### Other BigQuery costs
 
-- **Storage**: Charges for data stored in BigQuery tables (active and long-term storage)
-- **Streaming**: Costs for real-time data ingestion through streaming inserts
-- **Data Transfer**: Charges for moving data between regions or exporting data
-- **BI Engine**: Costs for in-memory analytics acceleration
-- **Other services**: ML training, routine executions, and additional BigQuery features
+BigQuery offers several additional services beyond query processing that contribute to your overall costs:
 
-CCM allocates and enriches costs for both query-processing pricing models, providing detailed cost attribution and tagging for your BigQuery analysis workloads. Learn more about [BigQuery services and pricing models][3].
+| Service | Description |
+|---|---|
+| **Storage** | Charges for data stored in BigQuery tables (active and long-term storage) |
+| **Streaming** | Costs for real-time data ingestion through streaming inserts |
+| **Data Transfer** | Charges for moving data between regions or exporting data |
+| **BI Engine** | Costs for in-memory analytics acceleration |
+| **Other services** | ML training, routine executions, and additional BigQuery features |
+
+CCM allocates and enriches costs for both query-processing [pricing models][3], providing detailed cost attribution and tagging for your BigQuery analysis workloads.
 
 Learn more about [optimizing BigQuery performance and costs][8].
 
 ## Prerequisites
 
-The following table presents the list of collected features and the minimal requirements:
+The following table presents the list of collected features and the minimal requirements for unlocking different levels of BigQuery cost visibility and attribution in Datadog:
 
 | Feature | Requirements |
 |---|---|
@@ -53,9 +57,7 @@ The following table presents the list of collected features and the minimal requ
 
 1. Configure the Google Cloud Cost Management integration on the [Cloud Cost Setup page][2].
 2. [Enable BigQuery monitoring][4] in your Google Cloud project. 
-3. (Optional) For reservation cost allocation, configure BigQuery reservations in your project. This approach is typically more cost-efficient for predictable or high-volume workloads compared to on-demand pricing, as explained in this [Google Cloud Community blog post][11].
-
-Learn more about how to [set up BigQuery reservations.][7]
+3. (Optional) For reservation cost allocation, [configure BigQuery reservations][7] in your project. This approach is typically more cost-efficient for predictable or high-volume workloads compared to on-demand pricing, as explained in this [Google Cloud Community blog post][11].
 
 ## Allocating costs
 
