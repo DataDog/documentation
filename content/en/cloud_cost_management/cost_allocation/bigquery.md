@@ -199,7 +199,7 @@ Learn more about [BigQuery storage and best practices][11].
 [4]: /cloud_cost_management/setup/google_cloud/
 [5]: /integrations/google-cloud-bigquery/
 [6]: https://cloud.google.com/bigquery/docs/reservations-get-started
-[7]: https://medium.com/google-cloud/bigquery-dynamic-reservation-the-new-query-cost-hack-4ee4297e619e](https://cloud.google.com/bigquery/docs/reservations-intro
+[7]: https://cloud.google.com/bigquery/docs/reservations-intro
 [8]: https://console.cloud.google.com
 [9]: https://cloud.google.com/bigquery/docs/adding-labels
 [10]: https://cloud.google.com/bigquery/docs/reservations-tasks
