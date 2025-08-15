@@ -202,115 +202,115 @@ This section lists the tools available in the Datadog MCP Server and provides ex
 
 ### `ask_docs`
 Returns AI-generated answers to Datadog questions, sourced from [Datadog documentation][15].
-- "How do you enable Datadog profiling in Python?"
-- "What's the best way to correlate logs and traces?"
-- "How does RUM auto-instrumentation work?"
+- How do you enable Datadog profiling in Python?
+- What's the best way to correlate logs and traces?
+- How does RUM auto-instrumentation work?
 
 ### `get_events`
 Searches events like monitor alerts, deployment notifications, infrastructure changes, security findings, and service status changes.
 
-- "Show me all deployment events from the last 24 hours."
-- "Find events related to our production environment with error status."
-- "Get events tagged with `service:api` from the past hour."
+- Show me all deployment events from the last 24 hours.
+- Find events related to our production environment with error status.
+- Get events tagged with `service:api` from the past hour.
 
 **Note**: See the [Event Management API][16] for more details.
 
 ### `get_incident`
 Retrieves detailed information about an incident.
 
-- "Get details for incident ABC123."
-- "What's the status of incident ABC123?"
-- "Retrieve full information about the Redis incident from yesterday."
+- Get details for incident ABC123.
+- What's the status of incident ABC123?
+- Retrieve full information about the Redis incident from yesterday.
 
 **Note**: The tool is operational, but does not include incident timeline data.
 
 ### `get_metrics`
 Queries and analyzes historical or real-time metric data, supporting custom queries and aggregations.
 
-- "Show me CPU utilization metrics for all hosts in the last 4 hours."
-- "Get Redis latency metrics for the production environment."
-- "Display memory usage trends for our database servers."
+- Show me CPU utilization metrics for all hosts in the last 4 hours.
+- Get Redis latency metrics for the production environment.
+- Display memory usage trends for our database servers.
 
 ### `get_monitors`
 Retrieves information about Datadog monitors, including their statuses, thresholds, and alert conditions.
 
-- "List all monitors that are currently alerting."
-- "Show me monitors related to our payment service."
-- "Find monitors tagged with `team:infrastructure`."
+- List all monitors that are currently alerting.
+- Show me monitors related to our payment service.
+- Find monitors tagged with `team:infrastructure`.
 
 ### `get_synthetics_tests`
 Searches Datadog synthetic tests.
 
-- "Help me understand why the synthetic test on endpoint `/v1/my/tested/endpoint` is failing."
-- "There is an outage; find all the failing synthetic tests on the domain `api.mycompany.com`."
-- "Are synthetic tests on my website `api.mycompany.com` still working in the past hour?"
+- Help me understand why the synthetic test on endpoint `/v1/my/tested/endpoint` is failing.
+- There is an outage; find all the failing synthetic tests on the domain `api.mycompany.com`.
+- Are synthetic tests on my website `api.mycompany.com` still working in the past hour?
 
 ### `get_trace`
 Fetches a complete trace from Datadog APM using a trace ID.
 
-- "Get the complete trace for ID 7d5d747be160e280504c099d984bcfe0."
-- "Show me all spans for trace abc123 with timing information."
-- "Retrieve trace details including database queries for ID xyz789."
+- Get the complete trace for ID 7d5d747be160e280504c099d984bcfe0.
+- Show me all spans for trace abc123 with timing information.
+- Retrieve trace details including database queries for ID xyz789.
 
 **Note**: Large traces with thousands of spans may be truncated (and indicated as such) without a way to retrieve all spans.
 
 ### `list_dashboards`
 Lists available Datadog dashboards and key details.
 
-- "Show me all available dashboards in our account."
-- "List dashboards related to infrastructure monitoring."
-- "Find shared dashboards for the engineering team."
+- Show me all available dashboards in our account.
+- List dashboards related to infrastructure monitoring.
+- Find shared dashboards for the engineering team.
 
 **Note**: This tool lists relevant dashboards but provides limited detail about their contents.
 
 ### `list_hosts`
 Lists and provides information about monitored hosts, supporting filtering and searching.
 
-- "Show me all hosts in our production environment."
-- "List unhealthy hosts that haven't reported in the last hour."
-- "Get all hosts tagged with `role:database`."
+- Show me all hosts in our production environment.
+- List unhealthy hosts that haven't reported in the last hour.
+- Get all hosts tagged with `role:database`.
 
 ### `list_incidents`
 Retrieves a list of Datadog incidents, including their state, severity, and metadata.
 
-- "Show me all active incidents by severity."
-- "List resolved incidents from the past week."
-- "Find incidents that are customer-impacting."
+- Show me all active incidents by severity.
+- List resolved incidents from the past week.
+- Find incidents that are customer-impacting.
 
 ### `list_metrics`
 Lists available metrics, with options for filtering and metadata.
 
-- "Show me all available Redis metrics."
-- "List CPU-related metrics for our infrastructure."
-- "Find metrics tagged with `service:api`."
+- Show me all available Redis metrics.
+- List CPU-related metrics for our infrastructure.
+- Find metrics tagged with `service:api`.
 
 ### `list_services`
 Lists services in Datadog's Software Catalog with details and team information.
 
-- "Show me all services in our microservices architecture."
-- "List services owned by the platform team."
-- "Find services related to payment processing."
+- Show me all services in our microservices architecture.
+- List services owned by the platform team.
+- Find services related to payment processing.
 
 ### `list_spans`
 Retrieves spans from APM traces with filters such as service, time, resource, and so on.
 
-- "Show me spans with errors from the checkout service."
-- "Find slow database queries in the last 30 minutes."
-- "Get spans for failed API requests to our payment service."
+- Show me spans with errors from the checkout service.
+- Find slow database queries in the last 30 minutes.
+- Get spans for failed API requests to our payment service.
 
 ### `search_logs`
 Searches logs with filters (time, query, service, host, storage tier, and so on) and returns log details. Renamed from `get_logs`.
 
-- "Show me error logs from the nginx service in the last hour."
-- "Find logs containing 'connection timeout' from our API service."
-- "Get all 500 status code logs from production."
+- Show me error logs from the nginx service in the last hour.
+- Find logs containing 'connection timeout' from our API service.
+- Get all 500 status code logs from production.
 
 ### `search_rum_events`
 Search Datadog RUM events using advanced query syntax.
 
-- "Show JavaScript errors and console warnings in RUM."
-- "Find pages that are loading slowly (more than 3 seconds)."
-- "Show recent user interactions on product detail pages."
+- Show JavaScript errors and console warnings in RUM.
+- Find pages that are loading slowly (more than 3 seconds).
+- Show recent user interactions on product detail pages.
 
 ## Track tool calls in Audit Trail
 
