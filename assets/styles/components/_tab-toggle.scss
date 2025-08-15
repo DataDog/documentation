@@ -8,7 +8,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
 // Multi-code-lang tabs specific styles
 .code-lang-list-container {
   background: #fff;
-  z-index: 2;
+  z-index: 5;
   position: relative;
   border-bottom: none;
   margin-bottom: 0;
@@ -140,7 +140,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
     border-bottom-color: #FFFFFF;
     font-weight: 600;
     position: relative;
-    z-index: 3;
+    z-index: 6;
     margin-bottom: -1px;
     padding-bottom: 9px;
     border-top-left-radius: 4px;
@@ -211,7 +211,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
     gap: 0;
     margin: 0;
     position: relative;
-    z-index: 2;
+    z-index: 5;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
@@ -254,7 +254,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
       }
 
       &.active {
-        z-index: 3;
+        z-index: 6;
 
         a {
           @extend %active-tab-base;
@@ -420,7 +420,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
   position: relative;
   border-bottom: none;
   background: #fff;
-  z-index: 1;
+  z-index: 5;
 }
 
 .code-tabs .nav-tabs::after,
@@ -433,7 +433,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
   bottom: 0;
   height: 0;
   border-bottom: 1px solid $tab-border-color;
-  z-index: 1;
+  z-index: 4;
   pointer-events: none;
 }
 
@@ -451,7 +451,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
   background: #fff;
   margin-bottom: -1px;
   position: relative;
-  z-index: 3;
+  z-index: 6;
   display: block;
   border-bottom: 1px solid #fff;
 }
@@ -464,4 +464,37 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
 .code-tabs.tabs-wrap-layout .nav-tabs::after,
 .code-tabs.tabs-wrap-layout .code-lang-list-container::after {
   display: none;
+}
+
+// API Reference specific styling to ensure proper z-index layering
+
+.code-tabs.api-reference {
+  .nav-tabs,
+  .code-lang-list-container {
+    z-index: 1;
+  }
+
+  .nav-tabs::after,
+  .code-lang-list-container::after {
+    z-index: 0;
+  }
+
+  .nav-tabs li.active a {
+    z-index: 2;
+  }
+
+  // Ensure tab content appears above tabs but below search
+  .tab-content {
+    z-index: 0;
+  }
+
+  // Override any conflicting z-index values from the base styles
+  li.active {
+    z-index: 2;
+  }
+
+  // Additional safety: ensure all tab-related elements use consistent z-index
+  .tab-pane {
+    z-index: 0;
+  }
 }
