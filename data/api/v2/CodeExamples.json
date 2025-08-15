@@ -1051,6 +1051,11 @@
       "group": "rum",
       "suffix": "",
       "description": "Create a new RUM application returns \"OK\" response"
+    },
+    {
+      "group": "rum",
+      "suffix": "_1946294560",
+      "description": "Create a new RUM application with Product Scales returns \"OK\" response"
     }
   ],
   "SearchRUMEvents": [
@@ -1070,6 +1075,11 @@
       "group": "rum",
       "suffix": "",
       "description": "Update a RUM application returns \"OK\" response"
+    },
+    {
+      "group": "rum",
+      "suffix": "_394074053",
+      "description": "Update a RUM application with Product Scales returns \"OK\" response"
     }
   ],
   "UpdateRestrictionPolicy": [
