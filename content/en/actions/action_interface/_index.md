@@ -66,7 +66,7 @@ You can rely on the Action Interface to inform you if your action is not configu
 [2]: /actions/connections/?tab=workflowautomation
 [3]: /bits_ai/
 [4]: /account_management/audit_trail/
-[5]: /actions/workflows/access/#action-credentials
+[5]: /actions/workflows/access_and_auth/#action-credentials
 [6]: /actions/connections/#connection-credentials
 [7]: /getting_started/integrations/#permissions
 [8]: https://app.datadoghq.com/actions/ai
