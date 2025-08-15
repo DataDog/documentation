@@ -20,7 +20,7 @@ Cloud SIEM collects and analyzes data from a wide range of sources such as cloud
 
 The Open Cybersecurity Schema Framework (OCSF) is an open-source, vendor-neutral standard for organizing and classifying security event data. It is designed to simplify and unify how security logs are structured across platforms and products, enabling consistent threat detection and faster investigation.
 
-At Datadog, OCSF support is integrated directly into Datadog Cloud SIEM. This means that incoming security logs are automatically enriched with OCSF-compliant attributes at ingestion time through out-of-the-box (OOTB) pipelines. See [Supported out-of-the-box OCSF pipelines](#supported-out-of-the-box-ocsf-pipelines) for details. This means you get standardized, normalized log data without manual configuration.
+At Datadog, OCSF support is integrated directly into Datadog Cloud SIEM so you get standardized, normalized log data without manual configuration. Incoming security logs are automatically enriched with OCSF-compliant attributes at ingestion time through out-of-the-box (OOTB) pipelines. All OCSF values are contained in the dedicated `OCSF` attribute, and are in addition to the other processes that transform and enrich logs. See [Supported out-of-the-box OCSF pipelines](#supported-out-of-the-box-ocsf-pipelines) to see a list of Log Management integrations that support OCSF. 
 
 OCSF integration in Datadog's Cloud SIEM enables:
 
@@ -67,10 +67,25 @@ The following Log Management integrations support out-of-the-box OCSF pipelines:
 
 - 1Password
 - Auth0
-- CloudTrail
-- GitHub
+- AWS CloudTrail
+- Cisco Duo
+- Cisco Meraki
+- Cloudflare
+- CrowdStrike
+- Github Telemetry
+- Google BigQuery
+- Google Cloud
+- Google GKE cluster audit logs
+- Google Pub Sub
+- Google GSuite
+- JumpCloud
+- Kubernetes audit
+- LastPass
 - Microsoft 365
 - Okta
+- Salesforce
+- Slack
+- Snowflake Web Logs
 
 ## View Security Pipelines \- OCSF
 
@@ -96,8 +111,6 @@ To view the read-only OCSF pipeline for a source integration:
 **Note**: Cloning the main pipeline converts OCSF pipelines into log pipelines rather than Security pipelines.
 
 ## View OCSF data in logs
-
-All OCSF values are contained in the dedicated \`OCSF\` attribute, and are in addition to the other processes that transform and enrich logs. This means that the OCSF data does not affect any existing detections, monitors, or dashboards.
 
 To view OCSF data in logs:
 1. Navigate to [Logs Explorer][10].
