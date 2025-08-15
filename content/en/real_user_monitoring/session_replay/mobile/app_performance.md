@@ -36,8 +36,13 @@ To minimize the total upload volume, Datadog employs a highly optimized wire for
 ## Application size
 Datadog's SDK follows strict standards and aims to minimize the inclusion of third-party dependencies. This approach ensures that the SDK leverages as much native framework code as possible. On Android, the binary size produced by Datadog's own code in the AAR package is 480 kB. See more information on the application size impact [here][1]. On iOS, the size of exported `*.ipa` file will be higher by approximately 200 kB.
 
+## Benchmarks
+For a more detailed description of how Session Replay performance impact was measured, see the following pages: [Android][2], [iOS][3].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-sdk-android/blob/develop/docs/sdk_performance.md?plain=1#L119
+[2]: https://github.com/DataDog/dd-sdk-android/blob/develop/docs/sdk_performance.md#session-relay-performance-measurement
+[3]: https://github.com/DataDog/dd-sdk-ios/blob/develop/docs/session_replay_performance.md

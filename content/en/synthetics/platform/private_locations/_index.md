@@ -56,7 +56,7 @@ Private locations are Docker containers that you can install anywhere inside you
 
 If you require FIPS support, use the [FIPS compliant image][26] on Docker hub.
 
-[26]: https://hub.docker.com/repository/docker/datadog/synthetics-private-location-worker-fips/general
+[26]: https://hub.docker.com/r/datadog/synthetics-private-location-worker-fips
 
 {{< /site-region >}}
 
@@ -97,7 +97,7 @@ You must install .NET version 4.7.2 or later on your computer before using the M
 
 {{< site-region region="gov" >}}
 
-<div class="alert alert-danger">FIPS compliance is not supported for private locations that report to <code>ddog-gov.com</code>. To disable this behavior, use the <a href="https://docs.datadoghq.com/synthetics/private_locations/configuration/?tab=docker#all-configuration-options"><code>--disableFipsCompliance</code> option</a>.</div>
+<div class="alert alert-danger">FIPS compliance is not supported for Windows private locations that report to <code>ddog-gov.com</code>. To disable this behavior, use the <a href="https://docs.datadoghq.com/synthetics/private_locations/configuration/?tab=docker#all-configuration-options"><code>--disableFipsCompliance</code> option</a>.</div>
 
 {{< /site-region >}}
 
@@ -645,13 +645,13 @@ Once the process is complete, click **Finish** on the installation completion pa
    - In a PowerShell Terminal:
 
      ```powershell
-     Start-Process msiexec "/i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";
+     Start-Process msiexec "/i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi /quiet /qn CONFIG_FILEPATH=<path_to_your_worker_config_file>";
      ```
 
    - Or in a Command Terminal:
 
      ```cmd
-     msiexec /i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
+     msiexec /i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi /quiet /qn CONFIG_FILEPATH=<path_to_your_worker_config_file>
      ```
 
 Additional parameters can be added:
@@ -663,7 +663,7 @@ Additional parameters can be added:
 | LOGGING_ENABLED | When enabled, this configures file logging. These logs are stored in the installation directory under the logs folder. | 0 | `--enableFileLogging` | 0: Disabled<br>1: Enabled |
 | LOGGING_VERBOSITY | Configures the logging verbosity for the program. This affects console and file logs. | This affects console and file logs. | `-vvv` | `-v`: Error<br>`-vv`: Warning<br>`-vvv`: Info<br>`vvvv`: Debug |
 | LOGGING_MAXDAYS | Number of days to keep file logs on the system before deleting them. Can be any number when running an unattended installation. | 7 | `--logFileMaxDays` | Integer |
-| WORKERCONFIG_FILEPATH | This should be changed to the path to your Synthetics Private Location Worker JSON configuration file. Wrap this path in quotes if your path contains spaces. | <None> | `--config` | String |
+| CONFIG_FILEPATH | This should be changed to the path to your Synthetics Private Location Worker JSON configuration file. Wrap this path in quotes if your path contains spaces. | <None> | `--config` | String |
 
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 
@@ -679,7 +679,7 @@ You can upload custom root certificates to your private locations to have your A
 {{< tabs >}}
 {{% tab "Linux container" %}}
 
-When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime. 
+When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime.
 
 <div class="alert alert-info"><strong>Note</strong>: If you combine all your <code>.pem</code> files into one file, the sequence of the certificates within the file is important. It is required that the intermediate certificate precedes the root certificate to successfully establish a chain of trust.</div>
 
