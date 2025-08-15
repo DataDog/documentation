@@ -332,70 +332,47 @@ To set a different service name per Ingress using annotations:
 ```
 The above overrides the default `nginx-ingress-controller.ingress-nginx` service name.
 
-## Correlating traces to logs
+## Correlating NGINX logs with traces
 
-Once APM tracing is enabled, you can connect your traces to the corresponding NGINX access logs. This correlation links each trace to the specific log events generated during that request, allowing you to pivot between them.
+After enabling NGINX tracing, you can correlate proxy logs with APM traces to  diagnose issues and view all relevant telemetry for a given request. This requires adding the Datadog trace ID to your NGINX logs and updating your log pipelines to extract it.
 
-### Step 1: Inject the Trace ID into NGINX Logs
+### Inject the trace ID into NGINX logs
 
-Modify the `log_format` directive in your NGINX configuration file (for example, `/etc/nginx/nginx.conf`) to include the trace ID. The variable you use depends on your instrumentation method.
-
-If you are using the Datadog NGINX module:
-
-Use the `$datadog_trace_id` variable. This value is `-` for requests that are not traced.
+The trace ID is available in the `opentelemetry_trace_id` variable. Update your NGINX log format to include this variable in `/etc/nginx/nginx.conf`:
 
 ```nginx
 http {
-  # Define a log format that includes the Datadog trace ID.
-  log_format main_datadog '$remote_addr - $remote_user [$time_local] "$request" '
-                         '$status $body_bytes_sent "$http_referer" '
-                         '"$http_user_agent" "$http_x_forwarded_for" '
-                         'dd.trace_id="$datadog_trace_id"';
+  log_format main '$remote_addr - $opentelemetry_trace_id $http_x_forwarded_user [$time_local] "$request" '
+                  '$status $body_bytes_sent "$http_referer" '
+                  '"$http_user_agent" "$http_x_forwarded_for" ';
 
-  # Apply the new format to your access log.
-  access_log /var/log/nginx/access.log main_datadog;
-
-  # ... your other http configurations
-}
-```
-If you are using the native OpenTelemetry integration:
-
-Use the `$opentelemetry_trace_id` variable. This value is an empty string for requests that are not traced.
-
-```nginx
-http {
-  # Define a log format that includes the OpenTelemetry trace ID.
-  log_format main_opentelemetry '$remote_addr - $remote_user [$time_local] "$request" '
-                               '$status $body_bytes_sent "$http_referer" '
-                               '"$http_user_agent" "$http_x_forwarded_for" '
-                               'dd.trace_id="$opentelemetry_trace_id"';
-
-  # Apply the new format to your access log.
-  access_log /var/log/nginx/access.log main_opentelemetry;
-
-  # ... your other http configurations
+  access_log /var/log/nginx/access.log;
 }
 ```
 
-After saving your changes, reload the NGINX configuration. For example:
+Reload NGINX to apply the updated configuration.
 
-```shell
-sudo nginx -s reload
-```
+#### Parse the trace ID in your Datadog log pipeline
 
-### Step 2: Configure the Log Pipeline to Parse the Trace ID
+1. Clone the NGINX pipeline in the Pipelines page.
+1. Customize the first grok parser:
+  - Replace the first parsing rule with:
+  ```text
+  access.common %{_client_ip} %{_ident} %{_trace_id} %{_auth} \[%{_date_access}\] "(?>%{_method} |)%{_url}(?> %{_version}|)" %{_status_code} (?>%{_bytes_written}|-)
+  ```
+  - Under **Advanced settings** > **Helper Rules**, add:
+  ```text
+  _trace_id %{notSpace:dd.trace_id:nullIf("-")}
+  ```
+1. Add a trace ID remapper on the `dd.trace_id` attribute so Datadog links the log entry to its corresponding trace.
+  
+#### Verify the correlation
 
-Next, configure your Datadog pipeline to process the trace ID from your logs.
+After the configuration is applied:
 
-1. In Datadog, navigate to the [Log Pipelines][] page.
-1. Clone your active NGINX pipeline to create an editable version.
-1. In the new pipeline, add a Grok Parser processor.
-1. Add the following parsing rule to extract the trace ID attribute from a log event:
-1. Add a Trace ID Remapper processor after the Grok Parser. This processor officially associates the parsed ID with the corresponding APM trace.
-1. Ensure the remapper is configured to use the dd.trace_id attribute.
-1. Save and enable your new pipeline.
-
-Once the pipeline is active, new NGINX logs will be automatically correlated with their traces.
+1. In a trace's detail view, you can navigate to the related logs in the **Logs** tab.
+1. From a log event, you can open the corresponding trace in the **Traces** tab.
+1. For more information on correlating logs and traces, see [Ease Troubleshooting With Cross-Product Correlation][8].
 
 ## Further Reading
 
@@ -407,3 +384,4 @@ Once the pipeline is active, new NGINX logs will be automatically correlated wit
 [4]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
 [6]: https://github.com/DataDog/nginx-datadog/
 [7]: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+[8]: /logs/guide/ease-troubleshooting-with-cross-product-correlation
