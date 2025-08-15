@@ -335,6 +335,9 @@ Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` (optional with automatic versio
   "com.datadoghq.tags.version": "<VERSION>"
 }
 ```
+<div class="alert alert-warning">
+On ECS Fargate ensure these tags are added to your services task definition, *not* the Datadog Agent task definition.
+</div>
 
 ##### Partial configuration
 
