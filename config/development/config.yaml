@@ -8,3 +8,7 @@ disableLanguages:
   - ja
   - ko
   - es
+
+# Faster rebuilds
+build:
+  useResourceCacheWhen: "always"

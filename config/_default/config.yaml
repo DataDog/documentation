@@ -6,7 +6,14 @@ pygmentsCodeFences: true
 enableRobotsTXT: true
 
 # don't publish cdocs source files
-ignoreFiles: ["\\.mdoc\\.md$"]
+ignoreFiles:
+  - "\\.mdoc\\.md$"
+  - "integrations_data"
+  - "hugpython"
+  - "examples"
+  - "local"
+  - "logs"
+  - "\\.(txt|log|zip|tar\\.gz)$"
 
 publishDir: "./public"
 
@@ -26,12 +33,26 @@ defaultContentLanguageInSubdir: false
 # Prevent autogeneration of jsconfig.json file
 # See: https://gohugo.io/hugo-pipes/js/#import-js-code-from-assets
 build:
+  writeStats: false
   noJSConfigInAssets: true
+  useResourceCacheWhen: "fallback"
+
+# Limit resource processing to reduce memory usage
+imaging:
+  resampleFilter: "box"
+  quality: 75
+  anchor: "smart"
 
 caches:
     getjson:
         dir: :cacheDir/:project
         maxAge: '1h'
+    images:
+        dir: :resourceDir/_gen
+        maxAge: '24h'  # Cache images longer
+    assets:
+        dir: :resourceDir/_gen
+        maxAge: '24h'
 
 # enableGitInfo so lastmod in sitemap.xml is based off git
 enableGitInfo: true
