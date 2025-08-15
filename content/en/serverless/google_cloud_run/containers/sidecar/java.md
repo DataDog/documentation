@@ -16,7 +16,6 @@ further_reading:
 
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/sidecar/java">available on GitHub</a>.</div>
 
-
 1. **Install the Datadog Java tracer**.
 
    1. Add the Datadog Java tracer to your Dockerfile:
