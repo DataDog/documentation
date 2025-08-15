@@ -51,7 +51,7 @@ logger.info "Hello world!"
 4. **Configure your application**.
 
 {{% gcr-configure %}}
-{{% gcr-env-vars language="ruby" %}}
+{{% gcr-env-vars instrumentationMethod="in-process" language="ruby" %}}
 
 ## Troubleshooting
 

@@ -72,7 +72,7 @@ logger.info(`Hello world!`);
 4. **Configure your application**.
 
 {{% gcr-configure %}}
-{{% gcr-env-vars language="nodejs" %}}
+{{% gcr-env-vars instrumentationMethod="in-process" language="nodejs" %}}
 
 ## Troubleshooting
 

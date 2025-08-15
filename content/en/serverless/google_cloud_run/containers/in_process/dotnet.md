@@ -69,7 +69,7 @@ logger.LogInformation("Hello World!");
 4. **Configure your application**.
 
 {{% gcr-configure %}}
-{{% gcr-env-vars language="csharp" %}}
+{{% gcr-env-vars instrumentationMethod="in-process" language="csharp" %}}
 
 ## Troubleshooting
 

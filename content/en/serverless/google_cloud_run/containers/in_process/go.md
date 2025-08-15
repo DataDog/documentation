@@ -64,7 +64,7 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 4. **Configure your application**.
 
 {{% gcr-configure %}}
-{{% gcr-env-vars language="go" %}}
+{{% gcr-env-vars instrumentationMethod="in-process" language="go" %}}
 
 ## Troubleshooting
 

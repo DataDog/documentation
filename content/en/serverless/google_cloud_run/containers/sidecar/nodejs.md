@@ -46,10 +46,6 @@ ENV NODE_OPTIONS="--require dd-trace/init"
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
-   {{% tab "Terraform" %}}
-   Terraform
-   {{% /tab %}}
-
    {{% tab "Custom" %}}
    {{% gcr-install-sidecar-custom %}}
    {{% /tab %}}
@@ -84,7 +80,7 @@ logger.info(`Hello world!`);
 
    For more information, see [Correlating Node.js Logs and Traces][1002].
 
-{{% gcr-env-vars language="nodejs" %}}
+{{% gcr-env-vars instrumentationMethod="sidecar" language="nodejs" %}}
 
 ## Troubleshooting
 
