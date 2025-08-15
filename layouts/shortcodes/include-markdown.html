@@ -3,11 +3,9 @@
 {{- with .Site.GetPage $page -}}
     {{ .Content }}
 {{- else -}}
-    {{ warnf "[include-markdown shortcode] Page %s not found in %s (language: %s)" $page .Page.File.Path .Page.Lang }}
-    {{ with where .Site.Sites "Language.Lang" "eq" "en" }}
-        {{/*  use english markdown for Content as default  */}}
-        {{ $enSite := index . 0 }}
-        {{ $enPage := $enSite.GetPage $page }}
-        {{ $enPage.Content }}
+    {{ warnf "[include-markdown shortcode] Page %s not found in %s (language: %s). Using default english page" $page .Page.File.Path .Page.Lang }}
+    {{ with .Site.Sites.First.GetPage $page }}
+        {{/*  use english (first site) markdown for Content as default  */}}
+        {{ .Content }}
     {{ end }}
 {{- end -}}
