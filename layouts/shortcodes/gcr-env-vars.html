@@ -1,9 +1,7 @@
 ### Environment variables
 
 {{ if eq (.Get "instrumentationMethod") "sidecar" }}
-Unless specified otherwise, all environment variables below should be set in the **sidecar** container.
-
-Only environment variables used to configure the tracer should be set in your main application container.
+Unless specified otherwise, all environment variables below should be set in the **sidecar** container. Only environment variables used to configure the tracer should be set in your main application container.
 {{ end }}
 
 | Variable            | Description |
