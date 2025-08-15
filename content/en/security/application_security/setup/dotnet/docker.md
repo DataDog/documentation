@@ -67,9 +67,6 @@ ENV DD_ENV=<YOUR_ENVIRONMENT>
 
 To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
 
-{{< tabs >}}
-{{% tab "Using system properties" %}}
-
 ```dockerfile
 # Set environment variables
 ENV DD_APPSEC_ENABLED=true
@@ -77,9 +74,6 @@ ENV DD_APM_TRACING_ENABLED=false
 ENV DD_SERVICE=<YOUR_SERVICE_NAME>
 ENV DD_ENV=<YOUR_ENVIRONMENT>
 ```
-{{% /tab %}}
-{{< /tabs >}}
-
 {{% /collapse-content %}}
 
 ## 3. Run your application
