@@ -431,6 +431,7 @@ Within the zipped JSON file, each event's content is formatted as follows:
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
+
 *Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /logs/indexes/#exclusion-filters

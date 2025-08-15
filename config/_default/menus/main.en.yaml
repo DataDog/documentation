@@ -3214,8 +3214,8 @@ menu:
       parent: serverless
       identifier: serverless_aws_lambda
       weight: 1
-    - name: Installation
-      url: serverless/aws_lambda/installation
+    - name: Instrumentation
+      url: serverless/aws_lambda/instrumentation
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_installation
       weight: 101
@@ -7669,8 +7669,8 @@ menu:
       parent: pa_charts
       identifier: pa_funnel_analysis
       weight: 102
-    - name: User Retention
-      url: product_analytics/charts/user_retention
+    - name: Retention Analysis
+      url: product_analytics/charts/retention_analysis
       parent: pa_charts
       identifier: pa_user_retention
       weight: 103

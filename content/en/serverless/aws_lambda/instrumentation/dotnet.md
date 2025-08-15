@@ -2,6 +2,7 @@
 title: Instrumenting .NET Serverless Applications
 aliases:
     - /serverless/installation/dotnet
+    - /serverless/aws_lambda/installation/dotnet
 further_reading:
     - link: '/serverless/configuration'
       tag: 'Documentation'
@@ -14,17 +15,11 @@ further_reading:
       text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
-<div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/configuration/proxy/">using a proxy</a> for all other sites.</div>
+<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension is optimized to significantly reduce cold start duration. <a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">Read more</a>.</div>
 
-<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
+## Setup
 
-<div class="alert alert-info">For FIPS compliance, use the Datadog FIPS-compliant extension layer, but note that the .NET runtime layer does not require additional configuration. While the FIPS-compliant Lambda components work with any Datadog site, end-to-end FIPS compliance requires using the US1-FED site. See <a href="/serverless/aws_lambda/fips-compliance">AWS Lambda FIPS Compliance</a> for more details.</div>
-
-## Installation
-
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/order-service">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
-
-Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
+If your application is deployed as a container image, use the _Container Image_ method.
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -304,20 +299,9 @@ module "lambda-datadog" {
 {{% /tab %}}
 {{< /tabs >}}
 
-## Minimize cold start duration
-Version 67+ of [the Datadog Extension][7] is optimized to significantly reduce cold start duration.
+## Add custom spans
 
-To use the optimized extension, disable App and API Protection (AAP), Continuous Profiler for Lambda, and OpenTelemetry based tracing. Set the following environment variables to `false`:
-
-- `DD_TRACE_OTEL_ENABLED`
-- `DD_PROFILING_ENABLED`
-- `DD_SERVERLESS_APPSEC_ENABLED`
-
-Enabling any of these features cause the extension to default back to the fully compatible older version of the extension. You can also force your extension to use the older version by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog encourages you to report any feedback or bugs by adding an [issue on GitHub][8] and tagging your issue with `version/next`.
-
-## Adding Custom Spans
-
-When using the [Datadog Lambda tracing layer for .NET](https://github.com/DataDog/dd-trace-dotnet-aws-lambda-layer), ensure that a second version of the .NET tracer is not also packaged with your application code. Add `ExcludeAssets` instruction to ensure this extra tracer is excluded.
+When using the [Datadog Lambda tracing layer for .NET][9], ensure that a second version of the .NET tracer is not also packaged with your application code. Add the `ExcludeAssets` instruction to ensure this extra tracer is excluded.
 
 ```xml
 <PackageReference Include="Datadog.Trace" Version="2.38.0">
@@ -325,19 +309,20 @@ When using the [Datadog Lambda tracing layer for .NET](https://github.com/DataDo
 </PackageReference>
 ```
 
-You are now ready to add custom spans and span tags using the .NET tracer. For further instructions on how to add spans, see the [.NET custom instrumentation](https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/dotnet/dd-api/) page.
+You can then add custom spans and span tags using the .NET tracer. For instructions on how to add spans, see [.NET custom instrumentation][10].
 
-## What's next?
-- View metrics, logs, and traces on the [Serverless page][1] in Datadog. By default, the Datadog Lambda extension enables logs.
-- Turn on [threat monitoring][6] to get alerted on attackers targeting your service.
-- Submit a [custom metric][2] or [APM span][3] to monitor your business logic.
-- See the [troubleshooting guide][4] if you have trouble collecting the telemetry
-- See the [advanced configurations][5] to
-    - connect your telemetry using tags
-    - collect telemetry for Amazon API Gateway, SQS, and so on.
-    - capture the Lambda request and response payloads
-    - link errors of your Lambda functions to your source code
-    - filter or scrub sensitive information from logs or traces
+## FIPS compliance
+
+{{% svl-lambda-fips %}}
+
+## AWS Lambda and VPC
+
+{{% svl-lambda-vpc %}}
+
+- Add custom tags to your telemetry by using the `DD_TAGS` environment variable
+- Configure [payload collection][11] to capture your functions' JSON request and response payloads
+- If you are using the Datadog Lambda Extension, turn off the Datadog Forwarder's Lambda logs
+- See [Configure Serverless Monitoring for AWS Lambda][5] for further capabilities
 
 ## Further Reading
 
@@ -352,3 +337,6 @@ You are now ready to add custom spans and span tags using the .NET tracer. For f
 [6]: /security/application_security/serverless/
 [7]: https://github.com/DataDog/datadog-lambda-extension
 [8]: https://github.com/DataDog/datadog-lambda-extension/issues
+[9]: https://github.com/DataDog/dd-trace-dotnet-aws-lambda-layer
+[10]: https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/dotnet/dd-api/
+[11]: /serverless/aws_lambda/configuration?tab=datadogcli#collect-the-request-and-response-payloads
