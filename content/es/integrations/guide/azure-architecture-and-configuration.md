@@ -4,7 +4,7 @@ description: Guía de arquitectura de la integración de Azure con Datadog y opc
 further_reading:
 - link: https://docs.datadoghq.com/integrations/azure/
   tag: Documentación
-  text: Integración de Azure
+  text: Integración Azure
 title: Arquitectura y configuración de la integración de Azure
 ---
 
@@ -31,7 +31,7 @@ Al habilitar la integración de Azure de Datadog, Datadog puede:
 
 Las APIs de Azure que se usan y los datos recopilados son idénticos independientemente de si usas la versión estándar o la nativa de Azure de la integración.
 
-{{% site-region region="us,us5,eu,gov,ap1" %}}
+{{% site-region region="us,us5,eu,gov,ap1,ap2" %}}
 
 ### Recopilación de datos y métricas de la integración estándar de Azure
 
@@ -117,12 +117,12 @@ Las implicaciones de restringir el acceso por debajo del rol de lector de monito
 
   - Pérdida parcial o total de datos de monitorización
   - Pérdida parcial o total de metadatos en forma de etiquetas en las métricas de tus recursos
-  - Pérdida parcial o total de datos por [Cloud Security Management Misconfigurations (CSM Misconfigurations)][3] o el [Catálogo de recursos][4]
+  - Pérdida parcial o total de los datos de [Cloud Security Misconfigurations][3] o del [Catálogo de recursos][4].
   - Pérdida parcial o total de las métricas que genera Datadog
 
 Las implicaciones de restringir u omitir los roles de Azure AD son:
 
-  - Pérdida parcial o total de metadatos de recursos de Azure AD en CSM Misconfigurations
+  - Pérdida parcial o total de los metadatos de los recursos de Azure AD en Cloud Security Misconfigurations
   - Pérdida parcial o total de la monitorización del vencimiento de credenciales para los recursos de Azure AD
 
 [1]: /es/getting_started/site/
@@ -135,7 +135,7 @@ Las implicaciones de restringir u omitir los roles de Azure AD son:
 
 ## Recopilación de logs de Azure
 
-{{% site-region region="us,us5,eu,gov,ap1" %}}
+{{% site-region region="us,us5,eu,gov,ap1,ap2" %}}
 
 ### Recopilación de logs de la integración estándar de Azure
 _Disponible en todos los sitios de Datadog_

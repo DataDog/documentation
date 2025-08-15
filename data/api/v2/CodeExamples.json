@@ -1541,6 +1541,13 @@
       "description": "Create a team with V2 fields returns \"CREATED\" response"
     }
   ],
+  "SyncTeams": [
+    {
+      "group": "teams",
+      "suffix": "_3215592344",
+      "description": "Sync teams returns \"OK\" response"
+    }
+  ],
   "UpdateTeamLink": [
     {
       "group": "teams",

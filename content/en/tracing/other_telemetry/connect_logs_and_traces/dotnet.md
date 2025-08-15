@@ -42,8 +42,7 @@ Ensure that log collection is configured in the Datadog Agent and that the [Logs
 To inject correlation identifiers into your log messages, follow the instructions for your logging library.
 
 <div class="alert alert-info">
-  <div class="alert-info">See the <a href="https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/AutomaticTraceIdInjection">samples in dd-trace-dotnet</a> for more examples.</div>
-  </div>
+  See the <a href="https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/AutomaticTraceIdInjection">samples in dd-trace-dotnet</a> for more examples.
 </div>
 
 {{< tabs >}}
