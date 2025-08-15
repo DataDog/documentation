@@ -193,6 +193,13 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
     .card-body img {
       border: 0px solid $ddgray;
     }
+
+    .tab-pane {
+      h3:before {
+        margin-top: 0;
+        height: 0;
+      }
+    }
   }
 
   // Horizontal tab navigation container
