@@ -5,9 +5,9 @@ app_id: agentil-software-sap-hana
 app_uuid: 75784ba6-6a1a-4059-849e-c4cbdb56f258
 assets:
   dashboards:
-    SAP HANA services overview: assets/dashboards/agentil_software_sap_hana_services_overview.json
-    SAP HANA systems overview: assets/dashboards/agentil_software_sap_hana_overview.json
-    SAP HANA tables overview: assets/dashboards/agentil_software_sap_hana_tables_overview.json
+    SAP HANA DB services overview: assets/dashboards/agentil_software_sap_hana_services_overview.json
+    SAP HANA DB tables overview: assets/dashboards/agentil_software_sap_hana_tables_overview.json
+    SAP HANA databases overview: assets/dashboards/agentil_software_sap_hana_overview.json
   integration:
     auto_install: false
     configuration: {}
@@ -33,7 +33,7 @@ categories:
 - data stores
 - イベント管理
 - モニター
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -108,13 +108,13 @@ Agent ベースのソリューションとは異なり、このプラットフ�
 ### 監視対象モジュール
 
 - HANA ノード
-- Alerts
+- アラート
 - バックアップ
 - サービス CPU
 - サービスメモリ
 - サービスディスク
 - ブロックされたトランザクション
-- Connections
+- 接続
 - スレッド
 - レプリケーションステータス
 - レプリケーション統計
@@ -142,4 +142,4 @@ AGENTIL Software では、SAP のエキスパートと開発者のチームが�
 
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/agentil-software-sap-hana" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/agentil-software-sap-hana" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

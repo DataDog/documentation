@@ -1,7 +1,6 @@
 ---
-title: Enabling AAP for Nginx
+title: Enabling App and API Protection for Nginx
 code_lang: nginx
-type: multi-code-lang
 code_lang_weight: 50
 aliases:
   - /security_platform/application_security/getting_started/nginx
@@ -39,7 +38,7 @@ The Datadog nginx tracing module has experimental support for threat detection a
    pattern "ngx_http_datadog_module-appsec-&lt;amd64/arm64&gt;-&lt;nginx
    version&gt;.so.tgz". Note that this artifact includes "appsec" in the name.
 
-3. **Enable AAP in the nginx configuration**.
+3. **Enable App and API Protection in the nginx configuration**.
    You need to:
    * define one or more thread pools with the [`thread_pool`][4] directive,
    * explicitly enable AppSec with [`datadog_appsec_enabled`][5], and
@@ -72,7 +71,7 @@ As of version 1.3.0, the available functionality has the following important lim
 * It's not possible to block the request based on characteristics of the
   response, such as its status code, headers, or body.
 
-## Using AAP without APM tracing
+## Using App and API Protection without APM tracing
 
 If you want to use Application & API Protection without APM tracing functionality, you can deploy with tracing disabled:
 
