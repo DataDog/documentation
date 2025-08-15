@@ -1,37 +1,54 @@
 {
   "data": {
-    "type": "event",
     "attributes": {
       "aggregation_key": "aggregation_key_123",
       "attributes": {
-        "custom": {
-          "threshold": 95,
-          "current_value": 98,
-          "metric": "cpu.utilization"
+        "author": {
+          "name": "example@datadog.com",
+          "type": "user"
         },
-        "links": [
-          {
-            "category": "runbook",
-            "title": "CPU Alert Runbook",
-            "url": "https://example.com/runbooks/cpu-alert"
+        "change_metadata": {
+          "dd": {
+            "team": "datadog_team",
+            "user_email": "datadog@datadog.com",
+            "user_id": "datadog_user_id",
+            "user_name": "datadog_username"
           },
+          "resource_link": "datadog.com/feature/fallback_payments_test"
+        },
+        "changed_resource": {
+          "name": "fallback_payments_test",
+          "type": "feature_flag"
+        },
+        "impacted_resources": [
           {
-            "category": "dashboard",
-            "url": "https://example.com/dashboards/cpu-usage"
+            "name": "payments_api",
+            "type": "service"
           }
         ],
-        "priority": "2",
-        "status": "error"
+        "new_value": {
+          "enabled": true,
+          "percentage": "50%",
+          "rule": {
+            "datacenter": "devcycle.us1.prod"
+          }
+        },
+        "prev_value": {
+          "enabled": true,
+          "percentage": "10%",
+          "rule": {
+            "datacenter": "devcycle.us1.prod"
+          }
+        }
       },
-      "category": "alert",
+      "category": "change",
       "integration_id": "custom-events",
-      "message": "CPU usage exceeded the 95% threshold for more than 5 minutes.",
+      "message": "payment_processed feature flag has been enabled",
       "tags": [
-        "env:production",
-        "team:infrastructure"
+        "env:api_client_test"
       ],
-      "timestamp": "2025-08-05T10:30:00Z",
-      "title": "High CPU usage on production nodes"
-    }
+      "title": "payment_processed feature flag updated"
+    },
+    "type": "event"
   }
 }

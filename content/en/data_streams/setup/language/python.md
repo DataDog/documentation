@@ -16,7 +16,7 @@ aliases:
 
 ### Prerequisites
 
-* [Datadog Agent v7.34.0 or later][1]
+* [Datadog Agent v7.34.0 or later][10]
 
 ### Supported libraries
 
@@ -61,7 +61,7 @@ Data Streams Monitoring propagates context through message headers. If you are u
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent
+[10]: /agent
 [2]: /tracing/trace_collection/dd_libraries/python
 [3]: https://pypi.org/project/confluent-kafka/
 [5]: https://pypi.org/project/kombu/

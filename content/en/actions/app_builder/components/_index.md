@@ -13,6 +13,9 @@ further_reading:
 - link: "/service_management/app_builder/expressions/"
   tag: "Documentation"
   text: "JavaScript Expressions"
+- link: "https://learn.datadoghq.com/courses/app-builder-integration"
+  tag: "Learning Center"
+  text: "Build Self-Serve Apps with App Builder for Third-Party Integrations"
 
 ---
 

@@ -99,7 +99,7 @@ The metrics, mapped to Datadog metrics, are used in the following views:
 - [Host default dashboards][8]
 - [APM Trace view Host info][9]
 
-**Note**: To correlate trace and host metrics, configure [Universal Service Monitoring attributes][10] for each service, and set the `host.name` resource attribute to the corresponding underlying host for both service and collector instances. 
+**Note**: To correlate trace and host metrics, configure [Unified Service Tagging attributes][10] for each service, and set the `host.name` resource attribute to the corresponding underlying host for both service and collector instances. 
 
 The following table shows which Datadog host metric names are associated with corresponding OpenTelemetry host metric names, and, if applicable, what math is applied to the OTel host metric to transform it to Datadog units during the mapping.
 
@@ -168,6 +168,6 @@ Value: 1153183744
 [7]: https://app.datadoghq.com/infrastructure
 [8]: /opentelemetry/collector_exporter/#out-of-the-box-dashboards
 [9]: /tracing/trace_explorer/trace_view/?tab=hostinfo
-[10]: /universal_service_monitoring/setup/
+[10]: /opentelemetry/correlate/#prerequisite-unified-service-tagging
 
 

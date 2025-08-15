@@ -5,7 +5,7 @@ further_reading:
 - link: /integrations/mysql/
   tag: Documentación
   text: Integración básica de MySQL
-- link: /base_de_datos_monitorización/guía/rds_autodescubrimiento
+- link: /database_monitoring/guide/rds_autodiscovery
   tag: Documentación
   text: Autodiscovery para RDS
 title: Configuración de la monitorización de bases de datos para MySQL gestionado
@@ -53,7 +53,7 @@ Habilita la **Recopilación estándar** en la sección **Resource Collection** (
 Configura lo siguiente en el [grupo de parámetros de base de datos][3] y luego **reinicia el servidor** para que los ajustes surtan efecto:
 
 {{< tabs >}}
-{{% tab "MySQL v5.7 o posterior" %}}
+{{% tab "MySQL ≥ 5.7" %}}
 | Parámetro | Valor | Descripción
 | --- | --- | --- |
 | `performance_schema` | `1` | Obligatorio. Habilita el [esquema de rendimiento][1]. |

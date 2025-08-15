@@ -98,7 +98,7 @@ Suppose you want to make changes to your application interface but want to first
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /data_security/data_retention_periods/
-[2]: /product_analytics/charts/user_retention
+[2]: /product_analytics/charts/retention_analysis
 [3]: https://app.datadoghq.com/product-analytics
 [4]: /product_analytics/charts/funnel_analysis
 [5]: /product_analytics/charts/pathways
