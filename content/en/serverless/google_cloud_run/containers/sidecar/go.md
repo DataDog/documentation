@@ -1,1 +1,94 @@
-# Content
+---
+title: Instrumenting a Go Cloud Run Container with Sidecar
+code_lang: go
+type: multi-code-lang
+code_lang_weight: 30
+further_reading:
+- link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/'
+  tag: 'Documentation'
+  text: 'Tracing Node.js Applications'
+- link: '/tracing/other_telemetry/connect_logs_and_traces/nodejs/'
+  tag: 'Documentation'
+  text: 'Correlating Node.js Logs and Traces'
+---
+
+## Setup
+
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/sidecar/dotnet">available on GitHub</a>.</div>
+
+
+1. **Install the Datadog Go tracer**.
+
+   1. In your main application, add the tracing library from `dd-trace-go`.
+
+      {{< code-block lang="shell" disable_copy="false" >}}
+go get github.com/DataDog/dd-trace-go/v2/ddtrace/tracer
+{{< /code-block >}}
+
+   2. Add the following to your application code to initialize the tracer:
+      {{< code-block lang="go" disable_copy="false" >}}
+tracer.Start()
+defer tracer.Stop()
+{{< /code-block >}}
+
+   You can also add additional packages:
+   {{< code-block lang="shell" disable_copy="false" >}}
+# Enable Profiling
+go get github.com/DataDog/dd-trace-go/v2/profiler
+
+# Patch /net/http
+go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
+{{< /code-block >}}
+
+   For more information, see [Tracing Go Applications][1] and the [Tracer README][2].
+
+2. **Install serverless-init as a sidecar**.
+
+   {{< tabs >}}
+
+   {{% tab "Datadog CLI" %}}
+   {{% gcr-install-sidecar-datadog-ci %}}
+   {{% /tab %}}
+
+   {{% tab "Custom" %}}
+   {{% gcr-install-sidecar-custom %}}
+   {{% /tab %}}
+
+   {{< /tabs >}}
+
+3. **Set up logs**.
+
+   In the previous step, you created a shared volume. Additionally, you set the `DD_SERVERLESS_LOG_PATH` env var, or it was defaulted to `/shared-volume/logs/app.log`.
+
+   Now, you will need to configure your logging library to write logs to that file. In Go, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `logrus`:
+   {{< code-block lang="go" disable_copy="false" >}}
+const LOG_FILE = "/shared-volume/logs/app.log"
+
+os.MkdirAll(filepath.Dir(LOG_FILE), 0755)
+logFile, err := os.OpenFile(LOG_FILE, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+defer logFile.Close()
+
+logrus.SetOutput(logFile)
+logrus.SetFormatter(&logrus.JSONFormatter{})
+logrus.AddHook(&dd_logrus.DDContextLogHook{})
+
+logrus.WithContext(ctx).Info("Hello World!")
+{{< /code-block >}}
+
+Datadog recommends setting the environment variable `DD_SOURCE=go` in your sidecar container to enable advanced Datadog log parsing.
+
+For more information, see [Correlating Go Logs and Traces][3].
+
+{{% gcr-env-vars instrumentationMethod="sidecar" language="go" %}}
+
+## Troubleshooting
+
+{{% gcr-troubleshooting %}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go/
+[2]: https://github.com/DataDog/dd-trace-go?tab=readme-ov-file#installing
+[3]: /tracing/other_telemetry/connect_logs_and_traces/go/
