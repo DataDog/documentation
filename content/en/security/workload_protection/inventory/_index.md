@@ -5,22 +5,20 @@ disable_toc: false
 
 Actively improve security posture and workload resilience using the Workload Protection [Inventory][1].
 
-The **Inventory** section gives DevSecOps teams a unified, real-time view of workload security posture across all compute environments: hosts, containers, and serverless functions. It consolidates asset visibility, protection coverage, and actionable insights so you can identify and remediate gaps before they become exploitable risks.
+The Workload Protection **Inventory** tools give security teams a unified, real-time view of workload security posture across all compute environments: hosts, containers, and serverless functions. **Inventory** consolidates asset visibility, protection coverage, and actionable insights so you can identify and remediate gaps before they become exploitable risks.
 
-Inventory is organized into the following features:
+Inventory is organized into the following tools:
 
 - [Hosts & Containers][1]:
-  * List all physical and virtual hosts and container workloads
-  * Filter by policy, rule status, agent version, and health
-  * Identify unprotected or misconfigured workloads
+  * List all physical and virtual hosts and container workloads.
+  * Filter by environment, enabled features, agent version, etc.
 - [Serverless][2]:
   * Track coverage for serverless functions
-  * Confirm policy enforcement on event-driven workloads
-  * Spot coverage gaps as functions are deployed or updated
+  * Filter by environment, enabled features, agent version, etc.
 - [Coverage Map][3]:
   * View a real-time map of workload protection status
   * Find and prioritize workloads in a warning state
-  * Filter by policy, rule, or MITRE ATT\&CK tactic to locate gaps
+  * Filter by policy, rule, or MITRE ATT&CK tactic to locate gaps
   * Check for outdated or unhealthy agents
 
 ## Benefits of using Inventory for posture management

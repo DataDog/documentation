@@ -78,15 +78,15 @@ In **Filter by tactics, techniques, and policy types**, built-in filters for **T
 
 To use these filters to strengthen detection and response alignment with proven MITRE ATT&CK framework threat models, do the following:
 
-1. Click **Tactics** to Filter for high-priority tactics (for example, `TA004-privilege-escalation`, `TA004-persistence`), to ensure those are protected across all hosts.
+1. Click **Tactics** to filter for high-priority tactics (for example, `TA004-privilege-escalation`, `TA004-persistence`), to ensure those are protected across all hosts.
 2. After the map updates for the tactic you selected, click **Techniques** and select a technique to identify gaps in technique coverage for critical systems.
-3. Click Policies and select a policy type to see the distribution of policies across the filtered infrastructure.
+3. Click **Policies** and select a policy type to see the distribution of policies across the filtered infrastructure.
 
 For information about the MITRE ATT&CK map available in SIEM or Workload Protection, see [MITRE ATT&CK map][2].
 
 ### Continuous posture management
 
-You can use Coverage as part of your reactive security culture by incorporating it into your scheduled security reviews.
+You can use Coverage as part of your proactive security culture by incorporating it into your scheduled security reviews.
 
 To treat Coverage as part of your scheduled security reviews, do the following:
 
@@ -99,7 +99,7 @@ For regulated environments, the ability to demonstrate continuous workload prote
 
 ### Policy effectiveness validation
 
-Coveraged can be used for policy effectiveness validation. Rather than assuming a policy is active across the environment, Coverage allows teams to confirm deployments and spot workloads where enforcement has failed or configurations are broken. This prevents false assurance and ensures that detection rules remain consistently applied across all systems.
+Coverage can be used for policy effectiveness validation. Instead of assuming a policy is active across the environment, Coverage allows teams to confirm deployments and spot workloads where enforcement has failed or configurations are broken. This prevents false assurance and ensures that detection rules remain consistently applied across all systems.
 
 ### Detection engineering gap analysis
 
@@ -107,7 +107,23 @@ Coverage can be used for gap analysis. By mapping MITRE ATT&CK tactics and techn
 
 ### Post-incident lessons learned
 
-After an event, teams can compare coverage data from before the incident to the environment after remediation. This confirms that exploited gaps have been addressed and that similar workloads are now fully protected, reducing the risk of a repeat compromise.
+After an event, teams can compare coverage data from before the incident to the environment after remediation. This confirms that exploited gaps have been addressed and that similar workloads are fully protected, reducing the risk of a repeat compromise.
+
+## Workload coverage triage and remediation cycle
+
+As an example of how to use Coverage to triage and remediate coverage issues, her is a sequence that starts by establishing a baseline, closing blind spots, and securing the most critical assets. It then verifies enforcement mechanisms, restores agent health, and aligns detection coverage with known adversary behaviors. Lastly, it applies rule updates, confirms effectiveness, and records the state for audit and incident reference.
+
+1. Do a full environment view to establish baseline coverage status.
+2. Focus on assets that appear fully covered. Validate that their policies, rules, and agents are working as intended before addressing visible gaps. This uncovers silent failures in trusted systems that would otherwise be ignored.
+3. Identify all unprotected or partially protected workloads.
+4. Prioritize assets with the highest business impact and exposure.
+5. Verify policy deployment and enforcement on those assets.
+6. Check for outdated or unhealthy agents on all remaining workloads.
+7. Map current detection coverage to MITRE ATT&CK to find gaps in tactics and techniques.
+8. Deploy or update detection rules to close those gaps.
+9. Reassess coverage to confirm posture changes took effect.
+10. Log the final state for compliance and future comparison.
+
 
 ## Further reading
 
