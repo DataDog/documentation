@@ -220,7 +220,7 @@ Navigate to the Integration Developer Platform, and under the **Data** tab > **S
 [19]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#category-processor
 [20]: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
 [21]: https://partners.datadoghq.com/
-[22]: https://docs.datadoghq.com/developers/integrations/create_a_tile/?tab=buildatileontheintegrationspage#open-a-pull-request
+[22]: https://docs.datadoghq.com/developers/integrations/
 [23]: https://docs.datadoghq.com/logs/log_collection/?tab=http#additional-configuration-options
 [24]: https://docs.datadoghq.com/logs/explorer/search_syntax/#arrays
 [25]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#log-status-remapper

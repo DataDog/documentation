@@ -995,31 +995,26 @@ menu:
       parent: dev_tools_integrations
       identifier: dev_tools__integrations_marketplace_offering
       weight: 406
-    - name: Create a Tile
-      url: developers/integrations/create_a_tile/
-      parent: dev_tools_integrations
-      identifier: dev_tools_integrations_tile
-      weight: 407
     - name: Create an Integration Dashboard
       identifier: dev_tools_integrations_dashboard
       url: developers/integrations/create-an-integration-dashboard
       parent: dev_tools_integrations
-      weight: 408
+      weight: 407
     - name: Create a Monitor Template
       identifier: dev_tools_integrations_monitor_template
       url: developers/integrations/create-an-integration-monitor-template
       parent: dev_tools_integrations
-      weight: 409
+      weight: 408
     - name: Create a Cloud SIEM Detection Rule
       identifier: dev_tools_integrations_cloud_siem_detection_rule
       url: developers/integrations/create-a-cloud-siem-detection-rule
       parent: dev_tools_integrations
-      weight: 410
+      weight: 409
     - name: Install Agent Integration Developer Tool
       identifier: dev_tools_integrations_install_developer_tool
       url: developers/integrations/python/
       parent: dev_tools_integrations
-      weight: 411
+      weight: 410
     - name: Service Checks
       url: developers/service_checks/
       parent: dev_tools

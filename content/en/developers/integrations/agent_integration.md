@@ -6,9 +6,9 @@ aliases:
 - /guides/new_integration/
 - /developers/integrations/new_check_howto/
 further_reading:
-- link: /developers/integrations/create_a_tile/
+- link: /developers/integrations/
   tag: Documentation
-  text: Create a tile
+  text: Create an integration
 - link: /developers/integrations/python/
   tag: Documentation
   text: Python for Agent-based Integration Development
@@ -488,7 +488,7 @@ In addition to any code changes, the following is required when bumping an integ
 [17]: https://docs.datadoghq.com/agent/
 [18]: https://docs.datadoghq.com/service_management/events/
 [19]: https://desktop.github.com/
-[20]: https://docs.datadoghq.com/developers/integrations/create_a_tile
+[20]: https://docs.datadoghq.com/developers/integrations/
 [21]: https://github.com/Datadog/integrations-extras
 [22]: https://github.com/Datadog/marketplace
 [23]: https://app.datadoghq.com/integrations
@@ -499,7 +499,7 @@ In addition to any code changes, the following is required when bumping an integ
 [28]: https://docs.datadoghq.com/dashboards/
 [29]: https://docs.datadoghq.com/logs/log_configuration/pipelines/
 [30]: https://docs.datadoghq.com/glossary/#check
-[31]: https://docs.datadoghq.com/developers/integrations/create_a_tile/#complete-the-necessary-integration-asset-files
+[31]: https://docs.datadoghq.com/developers/integrations/
 [32]: https://partners.datadoghq.com/
 [33]: https://docs.datadoghq.com/developers/integrations/check_references/
 [34]: https://docs.datadoghq.com/metrics/
