@@ -14,13 +14,14 @@ title: Guías de Serverless Monitoring
 {{< whatsnext desc="Best practices for monitoring your serverless applications" >}}
     {{< nextlink href="/serverless/guide/connect_invoking_resources" >}}Mayor visibilidad de los recursos que invocan funciones de Lambda{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/serverless_warnings" >}}Advertencias de las aplicaciones serverless{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/serverless_tagging" >}}Etiquetado en las aplicaciones serverless{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/serverless_tagging" >}}Etiquetado serverless{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/agent_configuration" >}}Configuración del Agent{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/opentelemetry" >}}Serverless y OpenTelemetry{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Azure App Service and Container Apps" >}}
-    {{< nextlink href="/serverless/guide/azure_app_service_linux_sidecar" >}}Instrumentación de contenedores de Linux en Azure App Service con el sidecar de Azure{{< /nextlink >}}
+{{< whatsnext desc="Azure App Service y Container Apps" >}}
+    {{< nextlink href="/serverless/guide/azure_app_service_linux_containers_serverless_init" >}}Instrumentar Azure App Service con serverless-init - Contenedores Linux{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/aca_serverless_init" >}}Instrumentar Azure Container Apps con serverless-init{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Instalar mediante el Datadog Forwarder
