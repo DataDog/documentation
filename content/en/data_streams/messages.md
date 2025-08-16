@@ -55,7 +55,38 @@ You must have the following permissions enabled:
 
 You can verify your current permissions on your [Profile page][7].
 
+The logs related permissions should be part of the "Datadog Standard Role".
+
 To enable permissions, edit an existing role or create a new one on the [Roles page][8]. If you don't have adequate access to modify roles, contact your organization's administrator.
+
+#### Creating a new role with permissions
+Follow these steps to create a new role with the required permissions and assign it to users who need access to the Messages feature.
+
+##### Step 1: Create a new role
+
+1. Navigate to the [Roles page][8] in Datadog.
+2. Click **+ New Role** in the top-right corner.
+   {{< callout-info >}}
+   If you see "Read Only" instead of the **+ New Role** button, you don't have permission to create roles. Contact your Datadog administrator for assistance.
+   {{< /callout-info >}}
+3. Enter a descriptive name for your new role (for example, "Data Streams Messages Access").
+4. In the **Search Permissions** field, type `Data Streams Monitoring Capture Messages`.
+5. Select the permission from the search results to enable it for this role.
+6. Click **Save**.
+7. Confirm your role was created successfully by searching for it in the roles list.
+
+##### Step 2: Assign the role to users
+
+1. Go to the [Users page][9] in Datadog.
+2. Find and click on the user you want to assign the role to.
+3. In the user details panel, click **Edit** next to their name.
+   {{< callout-info >}}
+   If you don't see an **Edit** button, you need administrator privileges to modify user roles. Contact your Datadog administrator.
+   {{< /callout-info >}}
+4. In the modal that opens, locate the **Roles** section.
+5. Add your newly created role to the user.
+6. Click **Save**.
+7. Look for a "User updated" confirmation message to verify the change was successful.
 
 [1]: #agent-setup
 [2]: #required-permissions
@@ -65,3 +96,4 @@ To enable permissions, edit an existing role or create a new one on the [Roles p
 [6]: /integrations/kafka-consumer/?tab=host#setup
 [7]: https://app.datadoghq.com/personal-settings/profile
 [8]: https://app.datadoghq.com/organization-settings/roles
+[9]: https://app.datadoghq.com/organization-settings/users
