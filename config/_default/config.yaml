@@ -16,8 +16,12 @@ ignoreFiles:
   - "\\.(txt|log|zip|tar\\.gz|bak)$"
 
 disableKinds:
+  - "RSS" # Major memory saver
   - "taxonomy"
   - "taxonomyTerm"
+
+rss:
+  limit: 10  # Only recent items
 
 publishDir: "./public"
 
