@@ -1,10 +1,7 @@
 ---
 title: PHP Compatibility Requirements
-code_lang: php
-type: multi-code-lang
-code_lang_weight: 40
 aliases:
-  - /security/application_security/threats/setup/compatibility/php
+  - /security/application_security/threats/setup/compatibility/PHP
 ---
 
 ## App and API Protection capabilities support
@@ -144,5 +141,3 @@ The following frameworks aren't directly instrumented by App and API Protection,
 | Symfony   | 3.3                       |
 | Wordpress | 4.8                       |
 
-[1]: /tracing/trace_collection/compatibility/php/
-[2]: /tracing/guide/remote_config
