@@ -41,12 +41,6 @@ build:
   noJSConfigInAssets: true
   useResourceCacheWhen: "fallback"
 
-# Limit resource processing to reduce memory usage
-imaging:
-  resampleFilter: "box"
-  quality: 75
-  anchor: "smart"
-
 caches:
     getjson:
         dir: :cacheDir/:project
