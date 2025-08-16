@@ -75,7 +75,7 @@ node --require dd-trace/init app.js
 
 Start your Node.js application with the configured settings.
 
-{{% aap/aap_and_api_protection_nodejs_verify_setup %}}
+{{% aap/aap_and_api_protection_verify_setup %}}
 
 ## Troubleshooting
 
