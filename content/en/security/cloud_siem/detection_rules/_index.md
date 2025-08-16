@@ -74,7 +74,7 @@ When configuring a specific threshold isn't an option, you can define an anomaly
 
 ### Content anomaly
 
-While the anomaly method detects anomalies in volume and is ideal for identifying spikes in log or event activity, content anomaly detection analyzes the content of logs. The rule determines a similarity score for incoming values by comparing them to previous values. The similarity score helps determine whether the incoming value is an outlier. See [How an event is determined to be anomalous](#how-an-event-is-determined-to-be-anomalous) for more information.
+While the anomaly method detects anomalies in volume and is ideal for identifying spikes in log or event activity, content anomaly detection analyzes the content of logs. The rule determines a similarity score for incoming values by comparing them to previous values. The similarity score helps determine whether the incoming value is an outlier. See [How an event is determined to be anomalous](?tab=contentanomaly#how-an-event-is-determined-to-be-anomalous) for more information.
 
 ### Impossible travel
 
