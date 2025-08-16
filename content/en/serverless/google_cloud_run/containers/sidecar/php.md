@@ -1,5 +1,5 @@
 ---
-title: Instrumenting a PHP Cloud Run Container In-Process
+title: Instrumenting a PHP Cloud Run Container with Sidecar
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 70
@@ -14,7 +14,7 @@ further_reading:
 
 ## Setup
 
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-process/php">available on GitHub</a>.</div>
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/sidecar/php">available on GitHub</a>.</div>
 
 1. **Install the Datadog PHP tracer** in your Dockerfile.
 
@@ -33,22 +33,48 @@ apk add libgcc
 
    For more information, see [Tracing PHP applications][1].
 
-2. **Install serverless-init**.
+2. **Install serverless-init as a sidecar**.
 
-   {{% gcr-install-serverless-init cmd="\"apache2-foreground\"" %}}
+   {{< tabs >}}
+
+   {{% tab "Datadog CLI" %}}
+   {{% gcr-install-sidecar-datadog-ci %}}
+   {{% /tab %}}
+
+   {{% tab "YAML Deploy" %}}
+   {{% gcr-install-sidecar-yaml language="php" %}}
+   {{% /tab %}}
+
+   {{% tab "Custom" %}}
+   {{% gcr-install-sidecar-custom %}}
+   {{% /tab %}}
+
+   {{< /tabs >}}
 
 3. **Set up logs**.
 
-   To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows `serverless-init` to read logs from stdout and stderr.
+   In the previous step, you created a shared volume. Additionally, you set the `DD_SERVERLESS_LOG_PATH` env var, or it was defaulted to `/shared-volume/logs/app.log`.
 
-   Datadog also recommends setting the environment variable `DD_SOURCE=php` to enable advanced Datadog log parsing.
+   Now, you will need to configure your logging library to write logs to that file. For example:
 
-   For more information, see [Correlating PHP Logs and Traces][2].
+   {{< code-block lang="php" disable_copy="false" >}}
+const LOG_FILE = "/shared-volume/logs/app.log";
 
-4. **Configure your application**.
+function logInfo($message) {
+    Log::build([
+        'driver' => 'single',
+        'path' => LOG_FILE,
+    ])->info($message);
+}
 
-{{% gcr-configure %}}
-{{% gcr-env-vars instrumentationMethod="in-process" language="php" %}}
+logInfo('Hello World!');
+{{< /code-block >}}
+
+Datadog recommends setting the environment variable `DD_SOURCE=php` in your sidecar container to enable advanced Datadog log parsing.
+
+For more information, see [Correlating PHP Logs and Traces][2].
+
+{{% gcr-env-vars instrumentationMethod="sidecar" language="php" %}}
 
 ## Troubleshooting
 
@@ -60,4 +86,3 @@ apk add libgcc
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/php/
 [2]: /tracing/other_telemetry/connect_logs_and_traces/php/
-

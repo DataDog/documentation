@@ -1,5 +1,5 @@
 ---
-title: Instrumenting a Ruby Cloud Run Container In-Process
+title: Instrumenting a Ruby Cloud Run Container with Sidecar
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 60
@@ -14,7 +14,7 @@ further_reading:
 
 ## Setup
 
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-process/ruby">available on GitHub</a>.</div>
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/sidecar/ruby">available on GitHub</a>.</div>
 
 1. **Install the Datadog Ruby tracer**.
 
@@ -26,32 +26,46 @@ gem 'datadog'
 
    See [Tracing Ruby applications][1] for additional information on how to configure the tracer and enable auto instrumentation.
 
-2. **Install serverless-init**.
+2. **Install serverless-init as a sidecar**.
 
-   {{% gcr-install-serverless-init cmd="\"rails\", \"server\", \"-b\", \"0.0.0.0\"" %}}
+   {{< tabs >}}
+
+   {{% tab "Datadog CLI" %}}
+   {{% gcr-install-sidecar-datadog-ci %}}
+   {{% /tab %}}
+
+   {{% tab "YAML Deploy" %}}
+   {{% gcr-install-sidecar-yaml language="ruby" %}}
+   {{% /tab %}}
+
+   {{% tab "Custom" %}}
+   {{% gcr-install-sidecar-custom %}}
+   {{% /tab %}}
+
+   {{< /tabs >}}
 
 3. **Set up logs**.
 
-   To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows `serverless-init` to read logs from stdout and stderr.
+   In the previous step, you created a shared volume. Additionally, you set the `DD_SERVERLESS_LOG_PATH` env var, or it was defaulted to `/shared-volume/logs/app.log`.
 
-   Datadog also recommends setting the environment variable `DD_SOURCE=ruby` to enable advanced Datadog log parsing.
+   Now, you will need to configure your logging library to write logs to that file. You can also set a custom format for log/trace correlation and other features. Datadog recommends setting the environment variable `DD_SOURCE=ruby` to parse your log format.
 
-   To enable log-trace correlation, you need to include `Datadog::Tracing.log_correlation` in your log format. For example:
+   Then, update your logging library. For example, you can use Ruby's native `logger` library:
    {{< code-block lang="ruby" disable_copy="false" >}}
-logger = Logger.new(STDOUT)
+LOG_FILE = "/shared-logs/logs/app.log"
+FileUtils.mkdir_p(File.dirname(LOG_FILE))
+
+logger = Logger.new(LOG_FILE)
 logger.formatter = proc do |severity, datetime, progname, msg|
   "[#{datetime}] #{severity}: [#{Datadog::Tracing.log_correlation}] #{msg}\n"
 end
 
-logger.info "Hello world!"
+logger.info "Hello World!"
 {{< /code-block >}}
 
    For more information, see [Correlating Ruby Logs and Traces][2].
 
-4. **Configure your application**.
-
-{{% gcr-configure %}}
-{{% gcr-env-vars instrumentationMethod="in-process" language="ruby" %}}
+{{% gcr-env-vars instrumentationMethod="sidecar" language="ruby" %}}
 
 ## Troubleshooting
 
