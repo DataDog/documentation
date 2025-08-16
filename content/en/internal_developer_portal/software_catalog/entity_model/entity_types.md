@@ -401,6 +401,50 @@ Learn more about [peer tags and inferred entities][4].
 
 {{% /tab %}}
 
+{{% tab "Frontend" %}}
+In Software Catalog, a frontend (`kind:frontend`) represents a frontend application—such as a browser-based single-page application or mobile app—that interacts with services and APIs. Frontend entities offer a structured way to model user-facing applications in the same catalog alongside backend services.
+
+### Example YAML definitions
+```yaml
+apiVersion: v3
+kind: frontend
+metadata:
+name: "checkout-webapp"
+displayName: "Checkout Web App"
+description: Main frontend experience for the checkout flow in Shopist
+owner: shopist-frontend
+additionalOwners:
+- name: ux-platform-team
+type: team
+links:
+- name: "UX Design Guidelines"
+type: doc
+url: https://wiki.internal/checkout-design
+- name: "Frontend Source Code"
+type: repo
+provider: github
+url: https://github.com/shopist/checkout-webapp
+spec:
+type: browser
+lifecycle: production
+tier: tier1
+dependsOn:
+- service:checkout-api
+- service:payment-service
+componentOf:
+- system:shopist-checkout-platform
+```
+
+When this definition is created:
+
+- The frontend app appears under the Frontend Apps section in Software Catalog.
+- If a RUM application exists with the same name, its telemetry is automatically linked.
+- The entity aggregates metadata, dependencies, and real-time RUM performance metrics in a unified view.
+
+**Note:** This separation improves observability by clarifying the role of frontend applications and enables more targeted performance monitoring and scorecarding.
+
+{{% /tab %}}
+
 {{% tab "Custom entities" %}}
 
 You can define custom entity types beyond service, system, datastore, queue, and API. Custom entities allow you to represent any component or resource that is important to your organization but does not fit into the standard categories.
