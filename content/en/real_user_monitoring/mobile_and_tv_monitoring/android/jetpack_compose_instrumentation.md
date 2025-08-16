@@ -122,7 +122,7 @@ datadog {
 	//(...)
 
 	// Jetpack Compose instrumentation mode option.
-	composeInstrumentation = InstrumentationMode.AUTO
+	composeInstrumentation = "AUTO"
 }
 ```
 {{% /tab %}}
@@ -140,11 +140,24 @@ datadog {
 {{< /tabs >}}
 
 Available instrumentation modes:
--   `InstrumentationMode.AUTO`: Instruments all `@Composable` functions.
--   `InstrumentationMode.ANNOTATION`: Only instruments `@Composable` functions annotated with `@ComposeInstrumentation`. You can define the scope of auto-instrumentation by using this annotation.
--   `InstrumentationMode.DISABLE`: Disables instrumentation completely.
 
-**Note**: if you don't declare `composeInstrumentation` in `datadog` block, the auto-instrumentation is disabled by default.
+{{< tabs >}}
+{{% tab "Groovy" %}}
+- `"AUTO"`: Instruments all `@Composable` functions.
+- `"ANNOTATION"`: Only instruments `@Composable` functions annotated with `@ComposeInstrumentation`. You can define the scope of auto-instrumentation by using this annotation.
+- `"DISABLE"`: Disables instrumentation completely.
+{{% /tab %}}
+
+{{% tab "Kotlin" %}}
+
+- `InstrumentationMode.AUTO`: Instruments all `@Composable` functions.
+- `InstrumentationMode.ANNOTATION`: Only instruments `@Composable` functions annotated with `@ComposeInstrumentation`. You can define the scope of auto-instrumentation by using this annotation.
+- `InstrumentationMode.DISABLE`: Disables instrumentation completely.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+**Note**: If you don't declare `composeInstrumentation` in `datadog` block, the auto-instrumentation is disabled by default.
 
 ### How names are assigned with auto-instrumentation
 When auto-instrumentation is enabled:
