@@ -8,12 +8,13 @@ further_reading:
 
 ## Overview
 
-All issues in Error Tracking have a status to help you triage and prioritize issues or dismiss noise. There are four statuses:
+All issues in Error Tracking have a status to help you triage and prioritize issues or dismiss noise. There are five statuses:
 
 - **FOR REVIEW**: Ongoing and in need of attention because the issue is new or it's a regression.
 - **REVIEWED**: Triaged and needs to be fixed, either now or later.
-- **IGNORED**: Requiring no additional investigation or action.
 - **RESOLVED**: Fixed and no longer occurring.
+- **IGNORED**: Requiring no additional investigation or action.
+- **EXCLUDED**: Requiring no additional investigation or action, stops collecting new errors and no longer count towards usage or billing
 
 All issues start with a FOR REVIEW status. Error Tracking automatically updates the status in the cases described below, or you can [manually update the status](#updating-an-error-status). You can also [view the history](#issue-history) of a given error's state changes.
 
@@ -44,7 +45,18 @@ See [Regression Detection][4].
 
 The issue status appears anywhere the issue can be viewed, such as in the issues list or on the details panel for a given issue. To manually update the status of an issue, click the status and choose a different one in the dropdown menu.
 
-{{< img src="error_tracking/updating-issue-status-2.png" alt="The Activity Timeline in the Error Tracking Issue" style="width:100%;" >}}
+{{< img src="error_tracking/updating-issue-status.png" alt="The Activity Timeline in the Error Tracking Issue" style="width:100%;" >}}
+
+## Excluding an issue
+
+Exclude specific errors from error tracking, preventing further collection and ensuring they do not count toward billing. This allows you to clean up non-actionable errors or expected failures issues without complex exclusion rules.
+
+To manually exclude an issue, click the issue status and choose **EXCLUDED** in the dropdown menu. Excluded issues remain accessible in the **Ignored** tab, you can review their history at any time.
+
+{{< img src="error_tracking/issue-states-excluded.png" alt="Excluded in issue status dropdown" style="width:100%;" >}}
+
+To restart the error collection of an excluded issue, choose a status other than **EXCLUDED**.
+
 
 ## Issue history
 View a history of your issue activity with the **Activity Timeline**. On the details panel of any Error Tracking issue, view the Activity Timeline by clicking the **Activity** tab.
