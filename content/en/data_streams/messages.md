@@ -67,7 +67,7 @@ Follow these steps to create a new role with the required permissions and assign
 1. Navigate to the [Roles page][8] in Datadog.
 2. Click **+ New Role** in the top-right corner.
    <div class="alert alert-info">
-   If you see "Read Only" instead of the **+ New Role** button, you don't have permission to create roles. Contact your Datadog administrator for assistance.
+   If you see "Read Only" instead of the "+ New Role button", you don't have permission to create roles. Contact your Datadog administrator for assistance.
    </div>
 3. Enter a descriptive name for your new role (for example, "Data Streams Messages Access").
 4. In the **Search Permissions** field, type `Data Streams Monitoring Capture Messages`.
@@ -81,7 +81,7 @@ Follow these steps to create a new role with the required permissions and assign
 2. Find and click on the user you want to assign the role to.
 3. In the user details panel, click **Edit** next to their name.
    <div class="alert alert-info">
-   If you don't see an **Edit** button, you need administrator privileges to modify user roles. Contact your Datadog administrator.
+   If you don't see an "Edit" button, you need administrator privileges to modify user roles. Contact your Datadog administrator.
    </div>
 4. In the modal that opens, locate the **Roles** section.
 5. Add your newly created role to the user.
