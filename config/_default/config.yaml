@@ -13,7 +13,7 @@ ignoreFiles:
   - "examples"
   - "local"
   - "logs"
-  - "\\.(txt|log|zip|tar\\.gz)$"
+  - "\\.(txt|log|zip|tar\\.gz|bak)$"
 
 disableKinds:
   - "taxonomy"
@@ -39,6 +39,8 @@ defaultContentLanguageInSubdir: false
 build:
   writeStats: false
   noJSConfigInAssets: true
+  # When to use the resource file cache, one of never, fallback, or always.
+  # Applicable when transpiling Sass to CSS. Default is fallback.
   useResourceCacheWhen: "fallback"
 
 caches:
