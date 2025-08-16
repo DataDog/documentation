@@ -108,6 +108,8 @@ To see the metrics, click on a job span in the trace view. A window opens with a
 
 If job logs collection is enabled, CI Visibility computes analysis using LLM models for failed CI jobs based on relevant logs coming from GitHub Actions.
 
+You can also add job failure analysis to a PR comment. See the guide on [using PR comments][26].
+
 For a full explanation, see the guide on [using CI jobs failure analysis][23].
 
 ## Visualize pipeline data in Datadog
@@ -145,3 +147,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [23]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [24]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
 [25]: /glossary/#pipeline-execution-time
+[26]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments
