@@ -102,7 +102,7 @@ When you refresh the page, the starred app appears in a section at the top of yo
 
 App Builder keeps a record of every saved version of your app.
 
-To view the version history for your app, in the left-hand menu of your app, click the version history icon {{< img src="service_management/app_builder/version-history-icon.png" inline="true">}}.
+To view the version history for your app, in the left-hand menu of your app, click the version history {{< img src="service_management/app_builder/version-history-icon.png" inline="true" style="width:16px;">}} icon.
 
 The UI displays up to 50 saved or published versions of your app, along with the icon of the user who saved or published the version:
 
@@ -132,6 +132,17 @@ To copy the app to another organization:
 
 The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
 
+## Debug an app
+
+The App Builder Debug Console provides a central place to view real-time logs, action executions, and errors. 
+
+To access the Debug Console, go to [your apps list][9] and click the **Edit** {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icon for one of your apps. Click the **Expand** {{< img src="icons/panel-bottom-grow.png" inline="true" style="width:14px;">}} icon to see the entire Debug Console. Information inside the console includes:
+- **Action Executions:** Track the success and failure of action executions with their associated inputs and outputs
+- **Errors:** View logs for errors, warnings, and info messages
+- **Logs:** View configuration errors for your actions, transformers, variables, and components
+- **App State:** Access real-time application state changes
+
+{{< img src="service_management/app_builder/app-builder-debug-console.png" alt="The expanded panel of the Debug Console inside an app's editor view" style="width:100%;" >}}
 
 ## Further reading
 
