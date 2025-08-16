@@ -10,41 +10,32 @@ description: Learn how to create a monitor for your integration.
 ---
 ## Overview
 
+This guide provides steps for creating a monitor template and best practices to follow during the creation process.
+
 [Datadog Monitors][1] track key metrics, so you can efficiently monitor your infrastructure and integrations. Datadog provides a set of out-of-the-box monitors for many features and integrations. View these monitors in your [Monitors Template list][2].
 
-Create an out-of-the-box monitor to help users find value in your Datadog integration. This guide provides steps for creating an integration-monitor template and best practices to follow during the creation process.
+Create an out-of-the-box monitor to help users find value in your Datadog integration. To create a Datadog integration, see [Create a New Integration][3].
 
-To create a Datadog integration, see [Create a New Integration][3].
+## Create a monitor
+In your Datadog sandbox, create a monitor.
 
-## Steps to create a monitor template
-### Build a monitor JSON Schema
+{{< img src="developers/integrations/new_monitor.png" alt="The Monitors Template list in Datadog" style="width:100%;" >}}
 
-1. [Create a monitor][4].
 
-2. Follow the [best practices](#configuration-best-practices) listed in this guide to configure your monitor.
+Follow the [best practices](#configuration-best-practices) listed in this guide to configure your monitor.
+
+## Upload your monitor 
+Within your integration in the Integration Developer Platform, navigate to the Content tab. From there, select **import monitor** to choose from a list of available monitors. You can select up to 10 monitors to include with your integration.
+
+{{< img src="developers/integrations/content_tab.png" alt="The Content tab in the Integration Developer Platform" style="width:100%;" >}}
  
-3. Click **Export Monitor**.
-
-4. Check **Select to export as a monitor template**.
-    {{< img src="developers/integrations/monitor_json.png" alt="Monitor JSON modal to export as monitor template" style="width:100%;" >}}
-
-5. Click **Copy** to use the JSON schema of your configured monitor.
-
-6. Save the copied schema to a JSON file and name it according to your monitor title. For example, `your_integration_name_alert.json`.
-
-7. In the monitor JSON file, fill out the Title, Description, and Tags. For more information, see [Configuration best practices](#configuration-best-practices). 
-
-### Open a pull request
-
-1. Save the monitor JSON file to your integration's `assets/monitors` folder. Add the asset to your `manifest.json` file. See [Integrations Assets Reference][5] for more information about your integration's file structure and manifest file.
-
-2. Open a pull request (PR) to add your monitor template JSON file and updated manifest file to the corresponding integration folder either in the [`integrations-extras` GitHub repository][6] or [`Marketplace` GitHub repository][9]. 
-
-3. After it's approved, Datadog merges the PR and your integration-monitor template is pushed to production.
 
 ## Verify your monitor in production
 
-To see the out-of-the-box monitor, the relevant integration tile must be `Installed` in Datadog. 
+To see the out-of-the-box monitor:
+1. Find your detection rule in the Monitor Template list, and click to expand it.
+2. Ensure logos render correctly.
+3. Verify that the monitor is enabled.
 
 Find your monitor in the [Monitors Template list][2]. Ensure logos render correctly on the Monitors Template lists page.
 

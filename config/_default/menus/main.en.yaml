@@ -965,35 +965,35 @@ menu:
       parent: dev_tools
       identifier: dev_tools_integrations
       weight: 4
+    - name: Build an Integration with Datadog
+      identifier: dev_tools_integrations_build
+      url: developers/integrations/build_integration/
+      parent: dev_tools_integrations
+      weight: 401
     - name: Create an Agent-based Integration
       identifier: dev_tools_integrations_agent
       url: developers/integrations/agent_integration/
       parent: dev_tools_integrations
-      weight: 401
-    - name: Create an API Integration
+      weight: 402
+    - name: Create an API-based Integration
       identifier: dev_tools_integrations_api
       url: developers/integrations/api_integration/
       parent: dev_tools_integrations
-      weight: 402
+      weight: 403
     - name: Create a Log Pipeline
       identifier: dev_tools_integrations_log
       url: developers/integrations/log_pipeline/
       parent: dev_tools_integrations
-      weight: 403
+      weight: 404
     - name: Integration Assets Reference
       identifier: dev_tools_integrations_check_references
       url: developers/integrations/check_references/
       parent: dev_tools_integrations
-      weight: 404
+      weight: 405
     - name: Build a Marketplace Offering
       url: developers/integrations/marketplace_offering/
       parent: dev_tools_integrations
       identifier: dev_tools__integrations_marketplace_offering
-      weight: 405
-    - name: Create a Tile
-      url: developers/integrations/create_a_tile/
-      parent: dev_tools_integrations
-      identifier: dev_tools_integrations_tile
       weight: 406
     - name: Create an Integration Dashboard
       identifier: dev_tools_integrations_dashboard
@@ -1010,16 +1010,11 @@ menu:
       url: developers/integrations/create-a-cloud-siem-detection-rule
       parent: dev_tools_integrations
       weight: 409
-    - name: OAuth for Integrations
-      identifier: dev_tools_integrations_oauth
-      url: developers/integrations/oauth_for_integrations
-      parent: dev_tools_integrations
-      weight: 410
     - name: Install Agent Integration Developer Tool
       identifier: dev_tools_integrations_install_developer_tool
       url: developers/integrations/python/
       parent: dev_tools_integrations
-      weight: 411
+      weight: 410
     - name: Service Checks
       url: developers/service_checks/
       parent: dev_tools
