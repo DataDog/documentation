@@ -3,8 +3,9 @@
 {{- $context := .context -}}
 
 {{- /* Build integration pages lookup once per site build */ -}}
-{{- if not $context.Site.Scratch.Get "integration_pages_map" -}}
-  {{- $integrationPages := dict -}}
+{{- $integrationPages := $context.Site.Scratch.Get "integration_pages_map" -}}
+{{- if not $integrationPages -}}
+  {{- $integrationPages = dict -}}
   {{- range where $context.Site.AllPages "Section" "integrations" -}}
     {{- if eq .Language.Lang "en" -}}
       {{- $integrationPages = merge $integrationPages (dict .File.BaseFileName .) -}}
@@ -13,7 +14,6 @@
   {{- $context.Site.Scratch.Set "integration_pages_map" $integrationPages -}}
 {{- end -}}
 
-{{- $integrationPages := $context.Site.Scratch.Get "integration_pages_map" -}}
 {{- $page := index $integrationPages $int_name -}}
 
 {{- if not $page -}}
