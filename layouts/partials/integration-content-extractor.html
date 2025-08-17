@@ -3,15 +3,18 @@
 {{- $context := .context -}}
 
 {{- /* Build integration pages lookup once per site build */ -}}
-{{- $integrationPages := $context.Site.Scratch.Get "integration_pages_map" -}}
-{{- if not $integrationPages -}}
-  {{- $integrationPages = dict -}}
+{{- $storeKey := "integration_pages_map" -}}
+{{- $integrationPages := dict -}}
+
+{{- /* Try to get from store first, fallback to building fresh */ -}}
+{{- if isset $context.Site.Data "integration_pages_cache" -}}
+  {{- $integrationPages = $context.Site.Data.integration_pages_cache -}}
+{{- else -}}
   {{- range where $context.Site.AllPages "Section" "integrations" -}}
     {{- if eq .Language.Lang "en" -}}
       {{- $integrationPages = merge $integrationPages (dict .File.BaseFileName .) -}}
     {{- end -}}
   {{- end -}}
-  {{- $context.Site.Scratch.Set "integration_pages_map" $integrationPages -}}
 {{- end -}}
 
 {{- $page := index $integrationPages $int_name -}}
