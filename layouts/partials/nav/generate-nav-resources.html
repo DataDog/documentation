@@ -1,0 +1,42 @@
+{{ $context := .context }}
+{{ $navTemplate := `
+<nav class="api-sidebar">
+  {{ range .sections }}
+    <div class="nav-section">
+      <h3>{{ .title }}</h3>
+      <ul>
+        {{ range .endpoints }}
+          <li>
+            <a href="#{{ .anchor }}" class="nav-link method-{{ .method }}">
+              <span class="method">{{ .method | upper }}</span>
+              <span class="path">{{ .path }}</span>
+              <span class="title">{{ .title }}</span>
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    </div>
+  {{ end }}
+</nav>
+` }}
+
+{{/* Build navigation data */}}
+{{ $navSections := slice }}
+{{ range $context.Site.Data.api_sections }}
+  {{ $endpoints := slice }}
+  {{ range .endpoints }}
+    {{ $endpoints = $endpoints | append (dict
+      "method" .method
+      "path" .path
+      "title" .title
+      "anchor" (.operationId | urlize)
+    ) }}
+  {{ end }}
+  {{ $navSections = $navSections | append (dict "title" .section_title "endpoints" $endpoints) }}
+{{ end }}
+
+{{ $navData := dict "sections" $navSections }}
+{{ $navResource := resources.FromString "templates/api-sidebar.html" $navTemplate }}
+{{ $processedNav := $navResource | resources.ExecuteAsTemplate "api-sidebar-processed.html" $navData }}
+
+{{ $context.Scratch.Set "api-sidebar" $processedNav.RelPermalink }}
