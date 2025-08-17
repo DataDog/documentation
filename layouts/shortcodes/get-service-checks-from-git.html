@@ -1,4 +1,28 @@
 {{- $int_name := (.Get 0 ) -}}
-{{- if and $int_name (not .Page.Draft) -}}
-  {{- partial "integration-content-extractor.html" (dict "context" . "int_name" $int_name "section" "Service Checks") -}}
+{{- if $int_name -}}
+  <!-- if the page is a draft we can skip -->
+  {{- if not .Page.Draft -}}
+    <!-- if non english page load from english integration -->
+    {{- $page := "" -}}
+    {{ with where .Site.Sites "Language.Lang" "eq" "en" }}
+      {{ with index . 0 }}
+        {{ $page = .GetPage (print "/integrations/" $int_name ".md") }}
+      {{ end }}
+    {{ end }}
+    {{- if not $page -}}
+      {{ warnf "Integration page for '%s' not found in get-service-checks-from-git shortcode." $int_name }}
+    {{- else -}}
+      {{- $pattern := `(?s)### Service Checks\n(.*?)(#{2,3}\s)` -}}
+      {{- $matches := findRE $pattern $page.RawContent 1 -}}
+      {{- if not $matches -}}
+        {{ warnf "No ### Service Checks section found in '%s' integration documentation (get-service-checks-from-git shortcode)." $int_name }}
+      {{- else -}}
+        {{- range $matches -}}
+          {{- $content := strings.TrimPrefix "### Service Checks\n" . | strings.TrimSuffix (index (findRE "(#{2,3}\\s)$" . 1) 0) -}}
+          {{- $content := replaceRE `\{\{<[^>]+>\}\}` "" $content -}}
+          {{- $content | markdownify -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
 {{- end -}}
