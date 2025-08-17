@@ -84,9 +84,9 @@
           <ul class="nav nav-tabs response-toggle border-none justify-content-md-end">
             {{ range $versionIndex, $versionNum := $menuChild.Params.versions }}
               {{ $adat := (index (index $dot.Site.Data.api $versionNum) "full_spec_deref") }}
-              {{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
-              {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) }}
-              {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $endpoint) }}
+              {{ $generalRegions := partialCached "api/regions.html" (dict "servers" $adat.servers) $versionNum }}
+              {{ $endpoint := partialCached "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) $menuChild.Params.operationids $versionNum $.Page.Lang }}
+              {{ $endpointVisibility := partialCached "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $endpoint) $menuChild.Params.operationids $versionNum }}
               <li class="nav-item">
                 <a class="nav-link me-1 {{ with $endpointVisibility.label }}{{ else }}px-3{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (gt (len $menuChild.Params.versions) 1) }}active{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (eq (len $menuChild.Params.versions) 1) }}disabled{{ end }}" {{- if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}data-bs-toggle="collapse"{{- else -}}data-bs-toggle="tab" data-bs-target="#{{ (print $anchorStr "-" $versionNum) | anchorize }}"{{- end -}} href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} {{ with $endpointVisibility.label }}({{ . }}){{ end }}</a>
               </li>
@@ -102,11 +102,11 @@
       {{ $adat := (index (index $dot.Site.Data.api $versionNum) "full_spec_deref") }}
 
       <!-- Get the general API server url for this version -->
-      {{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
+      {{ $generalRegions := partialCached "api/regions.html" (dict "servers" $adat.servers) $versionNum }}
       {{ $dot.Scratch.Set "regions" $generalRegions }}
 
-      {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) }}
-      {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $endpoint) }}
+      {{ $endpoint := partialCached "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) $menuChild.Params.operationids $versionNum $.Page.Lang }}
+      {{ $endpointVisibility := partialCached "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $endpoint) $menuChild.Params.operationids $versionNum }}
 
       <div id="{{ (print $anchorStr "-" $versionNum) | anchorize }}" class="{{- if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}collapse{{- else -}}tab-pane{{- end -}} {{ if $endpointVisibility.isVisibleVersion }} active{{ end }}" role="tabpanel">
 
@@ -168,10 +168,10 @@
                     {{ partial "api/arguments.html" (dict "context" $dot "endpoint" $endpoint) }}
 
                     <!-- request body -->
-                    {{ partial "api/request-body.html" (dict "context" $dot "body" $endpoint.action.requestBody "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum) }}
+                    {{ partialCached "api/request-body.html" (dict "context" $dot "body" $endpoint.action.requestBody "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum) $endpoint.action.operationId $versionNum }}
 
                     <!-- response -->
-                    {{ partial "api/response.html" (dict "responses" $endpoint.action.responses "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum) }}
+                    {{ partialCached "api/response.html" (dict "responses" $endpoint.action.responses "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum) $endpoint.action.operationId $versionNum }}
 
                     <!-- code example -->
                     {{ partial "api/code-example.html" (dict "context" $dot "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "securitySchemes" $adat.components.securitySchemes "endpoint" $endpoint "version" $versionNum) }}
