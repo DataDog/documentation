@@ -1,29 +1,16 @@
 ---
-title: Cluster Sizing and Operations
-description: Learn about cluster sizing, scaling, monitoring, and maintenance for CloudPrem
+title: Cluster Sizing
+description: Learn about cluster sizing for CloudPrem
 private: true
 further_reading:
-- link: "/cloudprem/"
-  tag: "Documentation"
-  text: "CloudPrem Overview"
-- link: "/cloudprem/installation/"
-  tag: "Documentation"
-  text: "Install CloudPrem and Send Logs with the Agent"
-- link: "/cloudprem/ingress/"
+- link: "/cloudprem/configure/ingress/"
   tag: "Documentation"
   text: "Configure CloudPrem Ingress"
-- link: "/cloudprem/aws_config"
-  tag: "Documentation"
-  text: "Configure AWS"
-- link: "/cloudprem/processing/"
   tag: "Documentation"
   text: "Configure CloudPrem Log Processing"
-- link: "/cloudprem/architecture/"
+- link: "/cloudprem/overview/architecture/"
   tag: "Documentation"
   text: "Learn more about CloudPrem Architecture"
-- link: "/cloudprem/troubleshooting/"
-  tag: "Documentation"
-  text: "Troubleshooting"
 ---
 
 <div class="alert alert-warning">CloudPrem is in Preview.</div>

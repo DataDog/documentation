@@ -2,25 +2,7 @@
 title: Troubleshooting
 private: true
 further_reading:
-- link: "/cloudprem/"
-  tag: "Documentation"
-  text: "Learn more about CloudPrem"
-- link: "/cloudprem/installation/"
-  tag: "Documentation"
-  text: "Installation"
-- link: "/cloudprem/ingress/"
-  tag: "Documentation"
-  text: "Ingress Configuration"
-- link: "/cloudprem/aws_config"
-  tag: "Documentation"
-  text: "AWS Configuration"
-- link: "/cloudprem/processing/"
-  tag: "Documentation"
-  text: "CloudPrem Log Processing"
-- link: "/cloudprem/cluster/"
-  tag: "Documentation"
-  text: "Cluster Sizing and Operations"
-- link: "/cloudprem/architecture/"
+- link: "/cloudprem/overview/architecture/"
   tag: "Documentation"
   text: "CloudPrem Architecture"
 ---
@@ -49,4 +31,4 @@ Command failed: Another error occurred. `Metastore error`. Cause: `StorageError(
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/support/
+[1]: /help/

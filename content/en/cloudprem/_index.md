@@ -12,20 +12,23 @@ private: true
 
 Datadog CloudPrem is a self-hosted log management solution that enables cost-effective log ingestion, processing, indexing, and search capabilities within your own infrastructure. Built to meet data residency, stringent security, and high-volume requirements, CloudPrem integrates with the Datadog platform to provide log analysis, visualization, and alerting — all while keeping your log data at rest within your infrastructure boundaries.
 
+## Key features
+
+- **Self-hosted**: Deploy CloudPrem within your own infrastructure and keep your logs on your object storage
+- **Cost-effective**: Reduce log management infra costs while maintaining full observability
+- **Scalable**: Horizontally scalable architecture to handle high-volume log ingestion
+- **Integrated in Datadog**
+
 ## Get started
 
+Follow these steps to deploy and configure CloudPrem:
+
 {{< whatsnext >}}
-   {{< nextlink href="/cloudprem/installation/" >}}Install CloudPrem and Send Logs with the Agent {{< /nextlink >}}
-   {{< nextlink href="/cloudprem/ingress/" >}}Configure CloudPrem Ingress{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/aws_config" >}}Configure AWS{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/processing/" >}}Configure CloudPrem Log Processing{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/cluster/" >}}Learn more about Cluster Sizing and Operations{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/architecture/" >}}Learn more about CloudPrem Architecture{{< /nextlink >}}   
+   {{< nextlink href="/cloudprem/overview/" >}}Overview{{< /nextlink >}}
+   {{< nextlink href="/cloudprem/install/" >}}Install CloudPrem{{< /nextlink >}}
+   {{< nextlink href="/cloudprem/ingest-logs/" >}}Set up Log Ingestion{{< /nextlink >}}
+      {{< nextlink href="/cloudprem/configure/" >}}Configure CloudPrem{{< /nextlink >}}
+   {{< nextlink href="/cloudprem/manage/" >}}Manage and Monitor{{< /nextlink >}}
+   {{< nextlink href="/cloudprem/supported-features/" >}}Supported Features{{< /nextlink >}}
    {{< nextlink href="/cloudprem/troubleshooting/" >}}Troubleshooting{{< /nextlink >}}
 {{< /whatsnext >}}
-
-
-[1]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/deploy/installation/
-[2]: /cloudprem/installation/
-[3]: /cloudprem/processing/
-[4]: /cloudprem/architecture/

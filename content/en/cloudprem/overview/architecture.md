@@ -2,30 +2,14 @@
 title: Architecture
 private: true
 further_reading:
-- link: "/cloudprem/"
+- link: "/cloudprem/overview/prerequisites/"
   tag: "Documentation"
-  text: "CloudPrem Overview"
-- link: "/cloudprem/installation/"
+  text: "CloudPrem Prerequisites"
+- link: "/cloudprem/install/"
   tag: "Documentation"
-  text: "Install CloudPrem and Send Logs with the Agent"
-- link: "/cloudprem/ingress/"
-  tag: "Documentation"
-  text: "Configure CloudPrem Ingress"
-- link: "/cloudprem/aws_config"
-  tag: "Documentation"
-  text: "Configure AWS"
-- link: "/cloudprem/processing/"
-  tag: "Documentation"
-  text: "Configure CloudPrem Log Processing"
-- link: "/cloudprem/cluster/"
-  tag: "Documentation"
-  text: "Learn more about Cluster Sizing and Operations"
-- link: "/cloudprem/troubleshooting/"
-  tag: "Documentation"
-  text: "Troubleshooting"
----
+  text: "Install CloudPrem"
 
-<div class="alert alert-warning">CloudPrem is in Preview.</div>
+---
 
 ## Overview
 

@@ -1,36 +1,22 @@
 ---
-title: CloudPrem Installation
-description: Learn how to install and configure CloudPrem in your environment
+title: Install CloudPrem on AWS EKS
+description: Learn how to install and configure CloudPrem on AWS EKS
 private: true
 further_reading:
-- link: "/cloudprem/"
+- link: "/cloudprem/install/aws-config/"
   tag: "Documentation"
-  text: "CloudPrem Overview"
-- link: "/cloudprem/ingress/"
+  text: "AWS Configuration"
+- link: "/cloudprem/configure/ingress/"
   tag: "Documentation"
   text: "Configure CloudPrem Ingress"
-- link: "/cloudprem/aws_config"
+- link: "/cloudprem/ingest-logs/"
   tag: "Documentation"
-  text: "Configure AWS"
-- link: "/cloudprem/processing/"
-  tag: "Documentation"
-  text: "Configure CloudPrem Log Processing"
-- link: "/cloudprem/cluster/"
-  tag: "Documentation"
-  text: "Learn more about Cluster Sizing and Operations"
-- link: "/cloudprem/architecture/"
-  tag: "Documentation"
-  text: "Learn more about CloudPrem Architecture"
-- link: "/cloudprem/troubleshooting/"
-  tag: "Documentation"
-  text: "Troubleshooting"
+  text: "Configure Log Ingestion"
 ---
-
-<div class="alert alert-warning">CloudPrem is in Preview.</div>
 
 ## Overview
 
-This document walks you through the process of installing CloudPrem in your environment. CloudPrem can be installed on any Kubernetes cluster that meets the prerequisites.
+This document walks you through the process of installing CloudPrem on AWS EKS.
 
 ## Prerequisites
 
@@ -47,9 +33,46 @@ Before getting started with CloudPrem, ensure you have:
 
 ## Installation steps
 
-1. [Install the CloudPrem Helm chart](#install-the-cloudprem-helm-chart).
-3. [Configure the Datadog Agent to send Kubernetes logs](#send-kubernetes-logs-to-cloudprem-with-the-datadog-agent).
-4. [Configure your Datadog account](#configure-your-datadog-account).
+1. [Prepare your AWS environment](#prepare-your-aws-environment)
+2. [Install the CloudPrem Helm chart](#install-the-cloudprem-helm-chart)
+3. [Verify installation](#verification)
+4. [Configure your Datadog account](#configure-your-datadog-account)
+
+## Prepare your AWS environment
+
+Before installing CloudPrem on EKS, ensure your AWS environment is properly configured. For detailed AWS configuration instructions, see the [AWS Configuration guide](aws-config/).
+
+Key requirements:
+- AWS credentials configured (IAM role or access keys)
+- Appropriate IAM permissions for S3 access
+- EKS cluster with AWS Load Balancer Controller installed
+- RDS PostgreSQL instance or compatible database
+
+### Create an RDS database
+
+With the following command, you will create a micro RDS instance. For production environment, a small instance with multi az is enough.
+
+```bash
+# Micro RDS instance for testing purposes. Takes around 5 min.
+aws rds create-db-instance --db-instance-identifier cloudprem-postgres --db-instance-class db.t3.micro --engine postgres --engine-version 16.3 --master-username cloudprem --master-user-password 'FixMeCloudPrem' --allocated-storage 20 --storage-type gp2 --db-subnet-group-name <VPC-ID> --vpc-security-group-ids <VPC-SECURITY-GROUP-ID> --db-name cloudprem --backup-retention-period 0 --no-multi-az
+```
+
+You can retrieve RDS info by executing the following bash commmands:
+
+```bash
+# Get RDS instance details
+RDS_INFO=$(aws rds describe-db-instances --db-instance-identifier cloudprem-demo-postgres --query 'DBInstances[0].{Status:DBInstanceStatus,Endpoint:Endpoint.Address,Port:Endpoint.Port,Database:DBName}' --output json 2>/dev/null)
+
+STATUS=$(echo $RDS_INFO | jq -r '.Status')
+ENDPOINT=$(echo $RDS_INFO | jq -r '.Endpoint')
+PORT=$(echo $RDS_INFO | jq -r '.Port')
+DATABASE=$(echo $RDS_INFO | jq -r '.Database')
+
+echo ""
+echo "🔗 Full URI:"
+echo "postgres://cloudprem:FixMeCloudPrem@$ENDPOINT:$PORT/$DATABASE"
+echo ""
+```
 
 ## Install the CloudPrem Helm chart
 
@@ -209,66 +232,17 @@ Before getting started with CloudPrem, ensure you have:
    -f datadog-values.yaml
    ```
 
-   To check if the deployment went well:
-   - Look at the logs from the metastore or indexer pod.
-   - Look at the status of deployment resources, such as the ingress status.
-   If you spot some errors, check out our troubleshooting section.
+## Verification
 
-## Send Kubernetes logs to CloudPrem with the Datadog Agent
+### Check deployment status
 
-Follow the [Getting Started with Datadog Operator][5] guide for installation and deployment. When you reach Step 3, use the following `datadog-agent.yaml` configuration instead of the example provided in the guide.
+Verify that all CloudPrem components are running:
 
-```yaml
-apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-spec:
-  global:
-    clusterName: <CLUSTER_NAME>
-    site: datadoghq.com
-    credentials:
-      apiSecret:
-        secretName: datadog-secret
-        keyName: api-key
-    env:
-      - name: DD_LOGS_CONFIG_LOGS_DD_URL
-        value: http://<RELEASE_NAME>-indexer.<NAMESPACE_NAME>.svc.cluster.local:7280
-
-  features:
-    logCollection:
-      enabled: true
-      containerCollectAll: true
-
-    otlp:
-      receiver:
-        protocols:
-          grpc:
-            enabled: true
-            endpoint: 0.0.0.0:4417
-
-    prometheusScrape:
-      enabled: true
-      enableServiceEndpoints: true
-
+```bash
+kubectl get pods -n <NAMESPACE_NAME>
+kubectl get ingress -n <NAMESPACE_NAME>
+kubectl get services -n <NAMESPACE_NAME>
 ```
-
-- Within the cluster, use the indexer service for the logs endpoint URL: `DD_LOGS_CONFIG_LOGS_DD_URL:http://<RELEASE_NAME>-indexer.<NAMESPACE_NAME>.svc.cluster.local:7280`.
-- Outside the cluster, use the host of the internal ingress.
-- To send cluster metrics to Datadog, enable `prometheusScrape`.
-- To send cluster logs to Datadog, enable `OTLP/gRPC`.
-
-## Configure your Datadog account
-
-You need to reach out to [Datadog support][6] and give the public DNS of CloudPrem so that you can search into your CloudPrem cluster from Datadog UI.
-
-### Searching your CloudPrem logs in the Logs Explorer
-
-After your Datadog account is configured, you are ready to search into the `cloudprem` index by typing it in the search bar or selecting it in facets.
-
-**Note**: You cannot query CloudPrem indexes alongside other indexes. Additionally, Flex Logs are not supported with CloudPrem indexes.
-
-{{< img src="/cloudprem/installation/filter_index_cloudprem.png" alt="Screenshot of the Logs Explorer interface showing how to filter logs by selecting the cloudprem index in the facets panel" style="width:70%;" >}}
 
 ## Uninstall
 
@@ -277,6 +251,10 @@ To uninstall CloudPrem:
 ```bash
 helm uninstall <RELEASE_NAME>
 ```
+
+## Next step
+
+**[Set up log ingestion with Datadog Agent](../ingest-logs/datadog-agent/)** - Configure the Datadog Agent to send logs to CloudPrem
 
 ## Further reading
 
@@ -287,4 +265,4 @@ helm uninstall <RELEASE_NAME>
 [3]: https://aws.amazon.com/rds/
 [4]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/deploy/installation/
 [5]: /getting_started/containers/datadog_operator/#installation-and-deployment
-[6]: /getting_started/support/
+[6]: /help/

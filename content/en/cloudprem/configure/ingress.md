@@ -6,27 +6,22 @@ further_reading:
 - link: "/cloudprem/"
   tag: "Documentation"
   text: "CloudPrem Overview"
-- link: "/cloudprem/installation/"
+- link: "/cloudprem/install/"
   tag: "Documentation"
-  text: "Install CloudPrem and Send Logs with the Agent"
-- link: "/cloudprem/aws_config"
+  text: "Install CloudPrem"
+- link: "/cloudprem/install/aws_config/"
   tag: "Documentation"
-  text: "Configure AWS"
-- link: "/cloudprem/processing/"
+  text: "AWS Configuration Prerequisites"
+- link: "/cloudprem/configure/"
   tag: "Documentation"
-  text: "Configure CloudPrem Log Processing"
-- link: "/cloudprem/cluster/"
+  text: "Configure CloudPrem"
+- link: "/cloudprem/ingest-logs/"
   tag: "Documentation"
-  text: "Learn more about Cluster Sizing and Operations"
-- link: "/cloudprem/architecture/"
+  text: "Set up Log Ingestion"
+- link: "/cloudprem/manage/"
   tag: "Documentation"
-  text: "Learn more about CloudPrem Architecture"
-- link: "/cloudprem/troubleshooting/"
-  tag: "Documentation"
-  text: "Troubleshooting"
+  text: "Manage and Monitor"
 ---
-
-<div class="alert alert-warning">CloudPrem is in Preview.</div>
 
 ## Overview
 
@@ -46,7 +41,7 @@ The public ingress is essential for enabling Datadog's control plane and query s
 
 This setup ensures that only authenticated Datadog services can access the CloudPrem cluster while maintaining secure encrypted communication end-to-end.
 
-{{< img src="/cloudprem/ingress/public_ingress.png" alt="Diagram showing CloudPrem public ingress architecture with Datadog services connecting through an internet-facing AWS ALB using mTLS authentication to access the CloudPrem gRPC API" style="width:100%;" >}}
+{{< img src="/cloudprem/images/public_ingress.png" alt="Diagram showing CloudPrem public ingress architecture with Datadog services connecting through an internet-facing AWS ALB using mTLS authentication to access the CloudPrem gRPC API" style="width:100%;" >}}
 
 ### IP Allowlisting
 
@@ -61,7 +56,7 @@ curl -X GET "https://ip-ranges.datadoghq.eu/" \
 
 The internal ingress enables log ingestion from Datadog Agents and other log collectors within your environment through HTTP.
 
-{{< img src="/cloudprem/ingress/internal_ingress.png" alt=" Internal ingress with ALB provisioned by Helm chart" style="width:100%;" >}}
+{{< img src="/cloudprem/images/internal_ingress.png" alt=" Internal ingress with ALB provisioned by Helm chart" style="width:100%;" >}}
 
 By default, the chart creates an internal AWS Application Load Balancer (ALB) to route HTTP traffic to the appropriate CloudPrem services based on the requested API endpoint path. However, if you prefer to use your own ingress controller (such as HAProxy, NGINX, or Traefik), you can disable the default internal ALB and configure your controller with the following routing rules:
 
@@ -117,7 +112,7 @@ rules:
 
 ```
 
-{{< img src="/cloudprem/ingress/internal_ingress_nginx_controller.png" alt="CloudPrem internal ingress configuration using NGINX ingress controller showing path routing to indexer, metastore, and searcher services" style="width:100%;" >}}
+{{< img src="/cloudprem/images/internal_ingress_nginx_controller.png" alt="CloudPrem internal ingress configuration using NGINX ingress controller showing path routing to indexer, metastore, and searcher services" style="width:100%;" >}}
 
 ## Further reading
 
