@@ -16,13 +16,13 @@ metadata:
       contact: https://dd.enterprise.slack.com/archives/C0DESMBQU
     - name: Technical support Email
       type: email
-      contact: team-webops@datadoghq.com
+      contact: team-websites@datadoghq.com
     - name: Technical support Slack
       type: slack
       contact: https://dd.enterprise.slack.com/archives/C3CT8QA11
   additionalOwners:
   - type: Technical support team
-    name: Team-webops
+    name: Team-websites
 spec:
   components:
     - service:docs
@@ -41,7 +41,7 @@ metadata:
   owner: Documentation
   additionalOwners:
   - type: Technical support team
-    name: Team-webops
+    name: Team-websites
   displayName: Documentation site
   tags:
     - team:documentation
@@ -55,7 +55,7 @@ metadata:
       contact: https://dd.enterprise.slack.com/archives/C0DESMBQU
     - name: Technical support Email
       type: email
-      contact: team-webops@datadoghq.com
+      contact: team-websites@datadoghq.com
     - name: Technical support Slack
       type: slack
       contact: https://dd.enterprise.slack.com/archives/C3CT8QA11
