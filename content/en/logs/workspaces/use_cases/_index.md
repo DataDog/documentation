@@ -16,5 +16,6 @@ This page provides insights on various applications of Log Workspaces, outlining
     {{< nextlink href="/logs/workspaces/use_cases/analyze_login_attempts" >}}Analyze Login Attempts for e-PHI{{< /nextlink >}}
     {{< nextlink href="/logs/workspaces/use_cases/analyze_finance_operations" >}}Analyze Financial Operations Using Payments and Transactions Data{{< /nextlink >}}
     {{< nextlink href="/logs/workspaces/use_cases/analyze_ecommerce_ops" >}}Analyze E-Commerce operations By Correlating Payment Errors with Customer Feedback {{< /nextlink >}}
+    {{< nextlink href="/logs/workspaces/use_cases/analyze_inventory_across_regions" >}}Analyze Retail Inventory Across Regions{{< /nextlink >}}
 {{< /whatsnext >}}
 
