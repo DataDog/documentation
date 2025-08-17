@@ -1,7 +1,7 @@
 {{ $dot := . }}
 
 <!-- From data file -->
-{{ $integration_list := site.Pages }}
+{{ $integration_list := site.RegularPages }}
 {{ $integration_list := $integration_list | intersect (where $integration_list ".Section" "=" "integrations") }}
 {{ $integration_list := $integration_list | intersect (where $integration_list ".File.Dir" "=" "integrations/") }}
 {{ $integration_list := $integration_list | intersect (where $integration_list ".Params.beta" "!=" true) }}
