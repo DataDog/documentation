@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-If you experience unexpected behavior with Datadog App and API Protection (AAP), there are common issues you can investigate, as mentioned below. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.
+This document provides diagnostic information for common issues and unexpected behavior with Datadog App and API Protection. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.
 
 ## AAP rate limits
 
