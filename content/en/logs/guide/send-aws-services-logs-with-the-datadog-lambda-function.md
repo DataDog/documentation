@@ -152,7 +152,7 @@ The following sources and locations are supported:
     | `lambda:GetPolicy`                                          | Get the Lambda policy when triggers are to be removed.                       |
     | `logs:PutSubscriptionFilter`                                | Add a Lambda trigger based on CloudWatch Log events.                         |
     | `logs:DeleteSubscriptionFilter`                             | Remove a Lambda trigger based on CloudWatch Log events.                      |
-    | `logs:DescribeLogGroups`                                    | Describe  CloudWatch log groups.                                             |
+    | `logs:DescribeLogGroups`                                    | Describe CloudWatch log groups.                                              |
     | `logs:DescribeSubscriptionFilters`                          | List the subscription filters for the specified log group.                   |
     | `network-firewall:DescribeLoggingConfiguration`             | Get the logging configuration of a firewall.                                 |
     | `network-firewall:ListFirewalls`                            | List all Network Firewall firewalls.                                         |
