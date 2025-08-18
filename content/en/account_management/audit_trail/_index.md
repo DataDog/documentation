@@ -11,7 +11,7 @@ further_reading:
   text: "Learn about organization settings"
 - link: "/data_security/pci_compliance/"
   tag: "Documentation"
-  text: "Set up a PCI-compliant Datadog organization"
+  text: "PCI DSS Compliance"
 - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
   tag: "Blog"
   text: "Build compliance, governance, and transparency across your teams with Datadog Audit Trail"
@@ -44,7 +44,7 @@ For security admins or InfoSec teams, audit trail events help with compliance ch
 
 You can also analyze Audit Trail events with [Cloud SIEM][15] to detect threats and generate security signals. See [Getting Started with Cloud SIEM][16] for more information.
 
-**Note**: See [PCI DSS Compliance][2] for information on setting up a PCI-compliant Datadog organization.
+**Note**: Datadog's tools and policies comply with PCI v4.0. For more information, see [PCI DSS Compliance][2].
 
 ## Setup
 

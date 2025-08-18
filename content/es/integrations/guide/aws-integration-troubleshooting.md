@@ -58,21 +58,32 @@ Al instalar el Agent en un host de AWS, es posible que veas hosts duplicados en 
 
 ### Metadatos de EC2 con IMDS v2
 
-En algunas situaciones, la configuración de [IMDSv2][5] de EC2 hace imposible que el agente acceda a los metadatos, lo que lleva al Agent a recurrir al proveedor de nombre de host `os` en lugar de `aws`, como se ve en la salida de `agent status`.
-
-En entornos en contenedores, el problema podría ser que hayas bloqueado el endpoint de metadatos de EC2 mediante la asignación de roles/credenciales de IAM a los pods que se ejecutan en el clúster de Kubernetes. `Kube2IAM` y `kiam` son herramientas comunes que se utilizan para hacer esto. Para resolverlo, actualiza tu configuración para permitir el acceso a este endpoint.
-
-La API de AWS permite deshabilitar IMDSv1, que el Agent utiliza de forma predeterminada. Si este es el caso, pero IMDSv2 está habilitado y es accesible, configura el parámetro `ec2_prefer_imdsv2` en `true` (el valor predeterminado es `false`) en tu [configuración del Agent][6]. Consulta la documentación [Transición al uso de Instance Metadata Service versión 2][7] para obtener más detalles.
+En entornos en contenedores, el problema podría ser que hayas bloqueado el endpoint de metadatos de EC2 mediante la asignación de roles/credenciales de IAM a los pods que se ejecutan en el clúster de Kubernetes. `Kube2IAM` y `kiam` son herramientas comunes que se utilizan para hacer esto. Para resolverlo, actualiza tu configuración `Kube2IAM` y `kiam` para permitir el acceso a este endpoint.
 
 IMDSv2, en su configuración predeterminada, rechaza las conexiones con un conteo de saltos de IP mayor que uno, es decir, conexiones que hayan pasado por una puerta de enlace de IP. Esto puede causar problemas cuando el Agent se ejecuta en un contenedor con una red distinta a la red del host, ya que el tiempo de ejecución reenvía el tráfico del contenedor a través de una puerta de enlace de IP virtual. Esto es común en las implementaciones de ECS. Las siguientes opciones pueden solucionar este problema:
 
- * [Aumenta el conteo máximo de saltos a al menos `2`][8]. Hacerlo puede tener consecuencias para la seguridad de los datos almacenados en el IMDS, ya que permite que otros contenedores además del Agent accedan también a estos datos.
+ * [Aumenta el número máximo de saltos al menos a `2`][8]. Hacerlo puede tener implicaciones para la seguridad de los datos almacenados en el IMDS, ya que permite que contenedores que no son del Agent accedan también a estos datos.
  * Utiliza el nombre de host descubierto por cloud-init [estableciendo `providers.eks.ec2.useHostnameFromFile` en true][9].
  * Ejecuta el Agent en el espacio de nombres UTS del host [estableciendo `agents.useHostNetwork` en true][10].
 
-## Etiquetas
+### Nombre de host EC2 con IMDS
 
-### Los hosts aún tienen etiquetas (tags) de AWS después de eliminar la integración de Amazon EC2
+#### Versiones del Agent anteriores a la v7.64.0
+
+En algunas situaciones, la configuración del [IMDSv2][5] EC2 puede imposibilitar el acceso del Agent a los metadatos necesarios. Esto puede hacer que Agent vuelva al proveedor de nombres de host `os`, en lugar de `aws`, como se ve en el resultado de `agent status`.
+
+La API de AWS permite deshabilitar IMDSv1, que el Agent utiliza de forma predeterminada. Si este es el caso, pero IMDSv2 está habilitado y es accesible, configura el parámetro `ec2_prefer_imdsv2` en `true` (el valor predeterminado es `false`) en tu [configuración del Agent][6]. Consulta la documentación [Transición al uso de Instance Metadata Service versión 2][7] para obtener más detalles.
+
+La actualización del Datadog Agent a la v7.64.0 o posterior debería resolver estos problemas, ya que las versiones más recientes del Agent utilizan IMDSv2 por defecto.
+
+#### Versión 7.64.0 o posterior del Agent
+
+A partir de la versión 7.64.0, el Datadog Agent utiliza por defecto IMDSv2 y vuelve a IMDSv1 en caso de fallo. Para volver al comportamiento anterior, configura `ec2_imdsv2_transition_payload_enabled` como `false` en la configuración  de tu host.
+Para obtener más información, consulta la documentación [Transición al uso de Instance Metadata Service, versión 2][7].
+
+## Etiquetas (Tags)
+
+### Los hosts aún tienen etiquetas de AWS después de eliminar la integración de Amazon EC2
 
 Puedes usar la integración de AWS para recopilar datos de CloudWatch o instalar un Datadog Agent directamente en cada instancia de EC2 para obtener datos y etiquetas. Si has optado por utilizar ambos métodos para recopilar datos, el backend de Datadog fusiona los datos de la integración y del Datadog Agent en un único objeto de host.
 
@@ -80,7 +91,9 @@ Si eliminaste la integración de AWS, pero continúas ejecutando un Datadog Agen
 
 Puedes verificar que la integración esté habilitada marcando "Apps Running" para ese host en la lista de infraestructura o verificando el resumen de métricas y creando un notebook acotado a ese host.
 
-Si deseas eliminar permanentemente las etiquetas de host de AWS de un host, puedes hacerlo mediante el [Endpoint de API para eliminar etiquetas de host][11].
+Por defecto, las etiquetas de nivel de host permanecen adjuntas a hosts AWS. Si quieres eliminar permanentemente las etiquetas de host de AWS de un host, puedes hacerlo mediante los siguientes métodos:
+   - Utilizar la opción [Eliminar etiquetas de host con el endpoint de la API][11] para eliminar todas las etiquetas asignadas por el usuario para un único host
+   - Utilizar la herramienta [remove_lingering_aws_host_tags.py][12] para eliminar todas las etiquetas asignadas por el usuario a partir de una lista de hosts o de todos los hosts
 
 [1]: /es/integrations/amazon_web_services/
 [2]: /es/integrations/guide/error-datadog-not-authorized-sts-assume-role/#pagetitle
@@ -93,3 +106,4 @@ Si deseas eliminar permanentemente las etiquetas de host de AWS de un host, pued
 [9]: https://github.com/DataDog/helm-charts/blob/58bf52e4e342c79dbec95659458f7de8c5de7e6c/charts/datadog/values.yaml#L1683-L1688
 [10]: https://github.com/DataDog/helm-charts/blob/58bf52e4e342c79dbec95659458f7de8c5de7e6c/charts/datadog/values.yaml#L930-L937
 [11]: /es/api/latest/tags/#remove-host-tags
+[12]: https://github.com/DataDog/Miscellany/blob/master/remove_lingering_aws_host_tags.py

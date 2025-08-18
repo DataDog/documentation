@@ -55,7 +55,7 @@ El preprocesamiento de logs JSON viene con una configuración predeterminada que
 2. Cambia la asignación por defecto en función del atributo reservado:
 
 {{< tabs >}}
-{{% tab "Source" %}}
+{{% tab "Source (Origen)" %}}
 
 #### Atributo de origen
 
@@ -78,7 +78,7 @@ El uso de Datadog Agent o del formato RFC5424 configura automáticamente el valo
 * `syslog.hostname`
 
 {{% /tab %}}
-{{% tab "Date" %}}
+{{% tab "Date (Fecha)" %}}
 
 #### Atributo de fecha
 
@@ -104,7 +104,7 @@ Los formatos de fecha reconocidos son: <a href="https://www.iso.org/iso-8601-dat
 
 [1]: /es/logs/log_configuration/processors/#log-date-remapper
 {{% /tab %}}
-{{% tab "Message" %}}
+{{% tab "Message (Mensaje)" %}}
 
 #### Atributo de mensaje
 
@@ -117,7 +117,7 @@ Especifica los atributos alternativos que se utilizarán como origen del mensaje
 [2]: /es/logs/explorer/#filters-logs
 [3]: /es/logs/log_configuration/processors/#log-message-remapper
 {{% /tab %}}
-{{% tab "Status" %}}
+{{% tab "Status (Estado)" %}}
 
 #### Atributo de estado
 
@@ -132,7 +132,7 @@ Especifica los atributos alternativos que se utilizarán como origen del estado 
 
 [1]: /es/logs/log_configuration/processors/#log-status-remapper
 {{% /tab %}}
-{{% tab "Service" %}}
+{{% tab "Service (Servicio)" %}}
 
 #### Atributo de servicio
 
@@ -146,7 +146,7 @@ Especifica los atributos alternativos que se utilizarán como origen del servici
 
 [1]: /es/logs/log_configuration/processors/#service-remapper
 {{% /tab %}}
-{{% tab "Trace ID" %}}
+{{% tab "Trace ID (ID de rastreo)" %}}
 
 #### Atributo de ID de rastreo
 
@@ -185,9 +185,8 @@ En forma predeterminada, los rastreadores de Datadog pueden [insertar automátic
     **Nota**: El filtrado del pipeline se aplica antes que cualquier procesador del pipeline. Por esta razón, no se puede filtrar con un atributo que se extrae del propio pipeline.
 
 4. Ponle un nombre a tu pipeline.
-5. (Opcional) Concede acceso de edición a los procesadores en el pipeline. Si asignas un rol a un pipeline, el rol recibe [permisos][12] `logs_write_processor` específicamente asignados a ese pipeline. Los roles con permisos `logs_write_processor` asignados globalmente (por rol de edición), no se pueden seleccionar, ya que tienen acceso a todos los pipelines.
-6. (Opcional) Añade una descripción y etiquetas (tags) al pipeline para indicar su propósito y propiedad. Las etiquetas (tags) de pipeline no afectan a logs, pero pueden utilizarse para filtrar y buscar en la [Page (página) de pipelines][5].
-7. Pulsa **Create** (Crear).
+5. (Opcional) Añade una descripción y etiquetas (tags) al pipeline para indicar su propósito y propiedad. Las etiquetas (tags) de pipeline no afectan a logs, pero pueden utilizarse para filtrar y buscar en la [Page (página) de pipelines][5].
+6. Pulsa **Create** (Crear).
 
 Ejemplo de log transformado por un pipeline:
 
