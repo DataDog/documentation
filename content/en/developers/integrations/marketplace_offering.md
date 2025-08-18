@@ -80,7 +80,7 @@ Once a Marketplace tile is live, Technology Partners can meet with Datadog's Par
 
 ## Get started
 
-To get started with creating an API-based integration, software license, or professional service, see [Create a Tile][13]. If you're interesting in building an Agent-based integration and selling it on the Datadog Marketplace, see [Create an Agent-based Integration][19].
+To get started with creating an integration, see [Build an Integration with Datadog][13].
 
 ## Further reading
 
@@ -97,7 +97,7 @@ To get started with creating an API-based integration, software license, or prof
 [10]: https://chat.datadoghq.com/
 [11]: https://docs.datadoghq.com/developers/authorization/
 [12]: https://github.com/DataDog/marketplace/pull/107
-[13]: https://docs.datadoghq.com/developers/integrations/
+[13]: /developers/integrations/build_integration/
 [15]: https://docs.datadoghq.com/developers/integrations/api_integration
 [19]: https://docs.datadoghq.com/developers/integrations/agent_integration
 [20]: https://www.dashcon.io/
