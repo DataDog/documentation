@@ -474,18 +474,26 @@ The Vertex AI integration instruments the following methods:
   - `chat.sendMessage()`
   - `chat.sendMessageStream()`
 
-### Vercel AI SDK
+## Vercel AI SDK
 
-The Vercel AI SDK integration automatically intercepts the OpenTelemetry spans created by the underlying core Vercel AI SDK and converts them into Datadog LLM Observability spans. This integration will automatically patch the tracer passed into each of the following functions under `experimental_telemetry`:
+The [Vercel AI SDK][22] integration automatically traces text and object generation, embeddings, and tool calls by intercepting the OpenTelemetry spans created by the underlying core Vercel AI SDK and converting them into Datadog LLM Observability spans.
 
-- `generateText`
-- `streamText`
-- `generateObject`
-- `streamObject`
-- `embed`
-- `embedMany`
+### Traced methods
+- [Text generation][24]:
+  - `generateText`
+  - `streamText`
+- [Object generation][25]:
+  - `generateObject`
+  - `streamObject`
+- [Embedding][26]:
+  - `embed`
+  - `embedMany`
+- [Tool calling][27]:
+  - `tool.execute`
 
-If no `experimental_telemetry` configuration is passed in, the integration will enable it to still send LLM Observability spans.
+### Vercel AI Core SDK Telemetry
+
+This integration will automatically patch the tracer passed into each of the traced methods under the [`experimental_telemetry` option][23]. If no `experimental_telemetry` configuration is passed in, the integration will enable it to still send LLM Observability spans.
 
 ```javascript
 require('dd-trace').init({
@@ -514,7 +522,7 @@ async function main () {
 }
 ```
 
-If `experimental_telemetry.isEnabled` is set to `false`, the integration will not turn it on, and will not send spans to LLM Observability.
+**Note**: If `experimental_telemetry.isEnabled` is set to `false`, the integration will not turn it on, and will not send spans to LLM Observability.
 
 ## ESM support
 
@@ -614,6 +622,12 @@ module.exports = {
 [19]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/nodejs/latest#send-multiturn-chat-requests
 [20]: https://www.npmjs.com/package/@aws-sdk/client-bedrock-runtime
 [21]: https://api-docs.deepseek.com/
+[22]: https://ai-sdk.dev/docs/introduction
+[23]: https://ai-sdk.dev/docs/ai-sdk-core/telemetry
+[24]: https://ai-sdk.dev/docs/ai-sdk-core/generating-text
+[25]: https://ai-sdk.dev/docs/ai-sdk-core/generating-structured-data
+[26]: https://ai-sdk.dev/docs/ai-sdk-core/embeddings
+[27]: https://ai-sdk.dev/docs/ai-sdk-core/tools-and-tool-calling
 {{% /tab %}}
 {{< /tabs >}}
 
