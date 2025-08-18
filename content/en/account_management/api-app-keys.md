@@ -18,15 +18,7 @@ API keys are unique to your organization. An [API key][1] is required by the Dat
 
 ### One-Time Read Mode
 
-One-Time Read (OTR) mode is a security feature that limits the visibility of application key secrets to creation time only. When enabled:
-
-- Application key secrets are only visible once, immediately after creation
-- The raw values cannot be retrieved later via the UI or API
-- You must securely store the key value when it is first displayed
-
-You can enable OTR mode in [Organization Settings][18].
-
-**Note**: For organizations created after [DATE TBD], OTR mode is enabled by default and cannot be disabled.
+All application keys for new master organizations (and their child organizations) created after August 20th, 2025 are in One-Time Read (OTR) mode. OTR mode is a security feature that limits the visibility of application key secrets to creation time only. All application key secrets are only displayed once during creation and cannot be retrieved later for security purposes.
 
 ### Scopes 
 
