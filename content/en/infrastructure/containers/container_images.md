@@ -226,7 +226,7 @@ Image metrics are collected from the [Live Containers](#live-containers) and [Im
 
 {{< img src="infrastructure/containerimages/container_image_trends_configuration_modal.png" alt="The container images trends configuration modal" width="100%">}}
 
-### Data Collected
+### Data collected
 
 | Metric Name | Description |
 |-------------|-------------|
