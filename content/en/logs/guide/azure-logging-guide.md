@@ -136,21 +136,6 @@ See [Getting started with Azure Functions][307] for more information.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Advanced configuration
-Refer to the following topics to configure your installation according to your monitoring needs.
-
-### PCI compliance
-
-<div class="alert alert-warning">
-PCI DSS compliance for APM and Log Management is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
-</div>
-
-To set up PCI-compliant Log Management, you must meet the requirements outlined in [PCI DSS Compliance][6]. Send your logs to the dedicated PCI compliant endpoint:
-
-Under **Settings > Environment variables**, click **Add** to set the following environment variable:
-- Name: `DD_URL`
-- Value: `http-intake-pci.logs.datadoghq.com`
-
 ## Log Archiving
 
 Archiving logs to Azure Blob Storage requires an App Registration even if you are using the Azure Native integration. To archive logs to Azure Blob Storage, follow the [automatic][7] or [manual][8] setup instructions to configure the integration using an App Registration. App Registrations created for archiving purposes do not need the `Monitoring Reader` role assigned.
@@ -168,7 +153,6 @@ After configuring an App Registration, you can [create a log archive][3] that wr
 [3]: /logs/log_configuration/archives/?tab=azurestorage#configure-an-archive
 [4]: /logs/guide/azure-native-logging-guide/
 [5]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
-[6]: /data_security/pci_compliance/?tab=logmanagement
 [7]: /integrations/guide/azure-programmatic-management/#datadog-azure-integration
 [8]: /integrations/guide/azure-manual-setup/#setup
 [9]: /logs/guide/azure-automated-log-forwarding/

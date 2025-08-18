@@ -113,12 +113,21 @@ To use Autodiscovery with Network Device Monitoring:
 
 2. Edit the [`datadog.yaml`][8] Agent configuration file to include all the subnets for Datadog to scan. The following sample config provides required parameters, default values, and examples for Autodiscovery.
 
+3. Optionally, enable [de-duplication][11] of devices during Autodiscovery of the Agent. This feature is disabled by default and requires Agent version `7.67+`.
+
+   ```yaml
+   network_devices:
+     autodiscovery:
+       use_deduplication: true
+   ```
+
 {{< tabs >}}
 {{% tab "SNMPv2" %}}
 
 ```yaml
 network_devices:
   autodiscovery:
+    ## use_deduplication - boolean - optional - default: false
     workers: 100  # number of workers used to discover devices concurrently
     discovery_interval: 3600  # interval between each autodiscovery in seconds
     loader: core  # use core check implementation of SNMP integration. recommended
@@ -130,16 +139,16 @@ network_devices:
         port: 161
         community_string: '***'  # enclose with single quote
         tags:
-        - "key1:val1"
-        - "key2:val2"
+          - "key1:val1"
+          - "key2:val2"
       - network_address: 10.20.0.0/24
         loader: core
         snmp_version: 2
         port: 161
         community_string: '***'
         tags:
-        - "key1:val1"
-        - "key2:val2"
+          - "key1:val1"
+          - "key2:val2"
 ```
 
 {{% /tab %}}
@@ -149,6 +158,7 @@ network_devices:
 ```yaml
 network_devices:
   autodiscovery:
+    ## use_deduplication - boolean - optional - default: false
     workers: 100  # number of workers used to discover devices concurrently
     discovery_interval: 3600  # interval between each autodiscovery in seconds
     loader: core  # use core check implementation of SNMP integration. recommended
@@ -202,3 +212,4 @@ network_devices:
 [8]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [9]: https://github.com/DataDog/datadog-agent/blob/51dd4482466cc052d301666628b7c8f97a07662b/pkg/config/config_template.yaml#L855
 [10]: /agent/configuration/agent-commands/#agent-status-and-information
+[11]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml#L4036

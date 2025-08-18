@@ -11,6 +11,19 @@ In the Datadog paradigm, any of the following are appropriate situations for dec
 
 You can declare an incident from multiple places within the Datadog platform, such as a graph widget on a dashboard, the Incidents UI, or any alert reporting into Datadog.
 
+## Declaration modal
+
+When you declare an incident, a declaration modal appears. This modal has several core elements:
+
+| Incident elements  | Description |
+| ------------------ | ----------- |
+| Title              | (Required) A descriptive title for the incident. |
+| Severity Level     | (Required) By default, severity ranges from SEV-1 (most severe) to SEV-5 (least severe). You can customize the number of severities and their descriptions in Incident Management settings.
+| Incident Commander | The person assigned to lead the incident response. |
+
+You can configure [Incident Management Settings][2] to include more fields in the incident declaration modal or require certain fields.
+
+
 ## From the Incident page
 
 In the [Datadog UI][1], click **Declare Incident** to create an incident.

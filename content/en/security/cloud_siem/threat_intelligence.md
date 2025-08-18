@@ -17,7 +17,7 @@ Cloud SIEM supports enriching and searching logs using threat intelligence indic
 
 ### Storing indicators of compromise in reference tables
 
-Threat intelligence is supported in the CSV format, and requires a table for each Indicator type (for example, IP address) and requires the following columns:
+Threat intelligence is supported in the CSV format, and requires a table for each Indicator type (for example, IP address or domain) and requires the following columns:
 
 #### CSV structure for IP address
 
@@ -37,6 +37,16 @@ ip_address,additional_data,category,intention,source
 192.0.2.2,"{""ref"":""hxxp://example.org""}",scanner,suspicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 192.0.2.3,"{""ref"":""hxxp://example.org""}",scanner,suspicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 ```
+
+#### CSV structure for domain
+
+| Field            | Data  | Description                                                                                     | Required | Example                          |
+|-------------------|-------|-------------------------------------------------------------------------------------------------|----------|----------------------------------|
+| domain            | text  | The primary key for the reference table.                                                        | true     | mal-domain.com                  |
+| additional_data   | json  | Additional data to enrich the trace.                                                           | false    | `{"ref":"hxxp://example.org"}`    |
+| category          | text  | The threat intel [category][8]. This is used by some out-of-the-box detection rules.                | true     | Phishing                         |
+| intention         | text  | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.                  | true     | malicious                        |
+| source            | text  | The name of the source and the link to its site, such as your team and your team's wiki.       | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
 
 ### Uploading and enabling your own threat intelligence
 
@@ -83,7 +93,7 @@ To enable Cloud SIEM threat intelligence data for reference tables:
 1. Navigate to [Threat Intelligence][3].
 1. For the table you want to see Cloud SIEM threat intelligence data, click the dropdown menu in the **Enabled** column and select Cloud SIEM.
 
-After applying a reference table to Cloud SIEM, all incoming logs are evaluated against the table using a specific Indicator of Compromise (IoC) key, such as an IP address. If a match is found, the log is enriched with relevant Threat Intelligence (TI) attributes from the table, which enhances detection, investigation, and response.
+After applying a reference table to Cloud SIEM, all incoming logs are evaluated against the table using a specific Indicator of Compromise (IoC) key, such as an IP address or domain. If a match is found, the log is enriched with relevant Threat Intelligence (TI) attributes from the table, which enhances detection, investigation, and response.
 
 A threat intelligence reference table can be shared across multiple security products.
 
