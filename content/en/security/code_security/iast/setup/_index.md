@@ -801,10 +801,11 @@ And the library supports the following runtimes:
 
 #### Supported frameworks
 
-| Framework                | Versions    | Runtime Code Analysis (IAST)                |
-| ------------------------ | ----------- | ------------------------------------------- |
-| Django                   | 1.8         |  <i class="icon-check-bold"></i>            |
-| Flask                    | 0.10        |  <i class="icon-check-bold"></i>            |
+| Framework   | Versions     | Runtime Code Analysis (IAST)    |
+|-------------|--------------|---------------------------------|
+| Django      | 1.8          | <i class="icon-check-bold"></i> |
+| FastAPI     | 0.86         | <i class="icon-check-bold"></i> |
+| Flask       | 0.10         | <i class="icon-check-bold"></i> |
 
 Support for query strings is not available for Flask.
 
