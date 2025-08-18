@@ -175,10 +175,10 @@ If your service is a PHP service, explicitly set the environment variable to `DD
 
 If AAP was activated using [Remote Configuration][16], do the following: 
   1. Go to [Services][15].
-  2. Select **Threat Management in Monitoring Mode**.
-  3. In the **Threat Management** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
+  2. Select **App & API Protection in Monitoring Mode**.
+  3. In the **App & API Protection** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
   4. Click on a service.
-  5. In the service details, in **Threat Detection**, click **Deactivate**.
+  5. In **Capabilities** > **App & API Protection** > **Threat Detection**, click **Deactivate**.
 
 <div class="alert alert-info">If AAP was activated using <a href="https://app.datadoghq.com/organization-settings/remote-config">Remote Configuration</a>, you can use a <strong>Deactivate</strong> button. If AAP was activated using local configuration, the <strong>Deactivate</strong> button is not an option.</div>
 
