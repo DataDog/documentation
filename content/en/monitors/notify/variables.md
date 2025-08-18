@@ -17,6 +17,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/alert-monitor-notifications"
   tag: "Learning Center"
   text: "Take a course to customize alert monitor notifications"
+- link: "https://www.datadoghq.com/blog/monitor-notification-rules/"
+  tag: "Blog"
+  text: "Route your monitor alerts with Datadog monitor notification rules"
 ---
 
 Use variables in notification messages to display conditional messaging and route notification to different teams using [conditional variables](#conditional-variables), or to enrich its content by using [attribute and tag variables](#attribute-and-tag-variables) and [template variables](#template-variables).
@@ -192,7 +195,7 @@ The `is_exact_match` conditional variable also supports an empty string for the 
 ```text
 {{#is_exact_match "host.datacenter" ""}}
   This displays if the attribute or tag does not exist or if it's empty
-{{/is_match}}
+{{/is_exact_match}}
 ```
 
 

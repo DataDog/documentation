@@ -18,10 +18,6 @@ further_reading:
 Azure DevOps Server is not officially supported.
 </div>
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 [Azure Pipelines][1] is a continuous integration and delivery service that supports any language, platform, or cloud.

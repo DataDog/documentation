@@ -14,10 +14,6 @@ further_reading:
 title: Azure 파이프라인에서 트레이스 설정
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">선택한 사이트 ({{< region-param key="dd_site_name" >}})에서는 현재 CI Visibility를 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 ## 호환성
 
 - **런타임에 커스텀 태그 및 메트릭**: 런타임에 [커스텀 태그][6] 및 메트릭 설정

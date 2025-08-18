@@ -88,11 +88,11 @@ CRI-O는 런타임 운영 횟수와 대기 시간 메트릭을 수집합니다.
 Datadog-CRI-O 통합은 CRI-O golang 이진수 자체의 메모리 사용량과 CPU를 수집합니다.
 
 ### 메트릭
-{{< get-metrics-from-git "crio" >}}
+{{< get-metrics-from-git "cri-o" >}}
 
 
 ### 서비스 점검
-{{< get-service-checks-from-git "crio" >}}
+{{< get-service-checks-from-git "cri-o" >}}
 
 
 ## 트러블슈팅

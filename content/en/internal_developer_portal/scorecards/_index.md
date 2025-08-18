@@ -34,7 +34,7 @@ Scorecards are in Preview.
 
 ## Overview
 
-Scorecards help you monitor, prioritize, plan, and communicate effectively to take informed actions that improve your service's health and performance. Each scorecard shows the status for Production Readiness, Observability Best Practices, and Documentation & Ownership. All services with defined metadata in the Software Catalog are automatically evaluated against a set of pass-fail criteria.
+Scorecards help you monitor, prioritize, plan, and communicate effectively to take informed actions that improve your software's health and performance. Each scorecard shows the status for Production Readiness, Observability Best Practices, and Documentation & Ownership. All entities with defined metadata in the Software Catalog are automatically evaluated against a set of pass-fail criteria.
 
 You can select the rules used to populate the Scorecards, and you can generate reports, which are sent directly to your team's Slack channel, to regularly report on scorecard results.
 

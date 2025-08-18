@@ -7,9 +7,6 @@ further_reading:
   tag: "Documentation"
   text: "Submit Evaluations"
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 NVIDIA NeMo Evaluator is a microservice that provides automated benchmarking for LLMs. For more information, see [NVIDIA's documentation][3].

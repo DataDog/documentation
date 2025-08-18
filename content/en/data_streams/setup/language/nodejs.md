@@ -15,18 +15,19 @@ aliases:
 ---
 ### Prerequisites
 
-* [Datadog Agent v7.34.0 or later][1]
+* [Datadog Agent v7.34.0 or later][10]
 
 ### Supported libraries
 
-| Technology     | Library                                                                   | Minimal tracer version    | Recommended tracer version |
-|----------------|---------------------------------------------------------------------------|---------------------------|----------------------------|
-| Kafka          | [kafkajs](https://www.npmjs.com/package/kafkajs)                          | 2.39.0 or 3.26.0 or 4.5.0 | 5.25.0 or later            |
-| RabbitMQ       | [amqplib](https://www.npmjs.com/package/amqplib)                          | 3.48.0 or 4.27.0 or 5.3.0 | 5.3.0 or later             |
-| Amazon SQS     | [client-sqs](https://www.npmjs.com/package/@aws-sdk/client-sqs)           | 3.47.0 or 4.26.0 or 5.2.0 | 5.18.0 or later            |
-| Amazon Kinesis | [client-kinesis](https://www.npmjs.com/package/@aws-sdk/client-kinesis)   | 3.47.0 or 4.26.0 or 5.2.0 | 5.18.0 or later            |
-| Amazon SNS     | [client-sns](https://www.npmjs.com/package/@aws-sdk/client-sns)           | 3.47.0 or 4.26.0 or 5.2.0 | 5.18.0 or later            |
-| Google Pub/Sub | [google-cloud/pubsub](https://www.npmjs.com/package/@google-cloud/pubsub) | 5.25.0 or 4.49.0          | 5.25.0 or later            |
+| Technology      | Library                                                                                  | Minimal tracer version                                                                   | Recommended tracer version                                                                   |
+|-----------------|------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| Kafka           | [kafkajs](https://www.npmjs.com/package/kafkajs)                                         | {{< dsm-tracer-version lang="nodejs" lib="kafkajs" type="minimal" >}}                    | {{< dsm-tracer-version lang="nodejs" lib="kafkajs" type="recommended" >}}                    |
+| Confluent Kafka | [confluent-kafka-javascript](https://github.com/confluentinc/confluent-kafka-javascript) | {{< dsm-tracer-version lang="nodejs" lib="confluent-kafka-javascript" type="minimal" >}} | {{< dsm-tracer-version lang="nodejs" lib="confluent-kafka-javascript" type="recommended" >}} |
+| RabbitMQ        | [amqplib](https://www.npmjs.com/package/amqplib)                                         | {{< dsm-tracer-version lang="nodejs" lib="amqplib" type="minimal" >}}                    | {{< dsm-tracer-version lang="nodejs" lib="amqplib" type="recommended" >}}                    |
+| Amazon SQS      | [client-sqs](https://www.npmjs.com/package/@aws-sdk/client-sqs)                          | {{< dsm-tracer-version lang="nodejs" lib="client-sqs" type="minimal" >}}                 | {{< dsm-tracer-version lang="nodejs" lib="client-sqs" type="recommended" >}}                 |
+| Amazon Kinesis  | [client-kinesis](https://www.npmjs.com/package/@aws-sdk/client-kinesis)                  | {{< dsm-tracer-version lang="nodejs" lib="client-kinesis" type="minimal" >}}             | {{< dsm-tracer-version lang="nodejs" lib="client-kinesis" type="recommended" >}}             |
+| Amazon SNS      | [client-sns](https://www.npmjs.com/package/@aws-sdk/client-sns)                          | {{< dsm-tracer-version lang="nodejs" lib="client-sns" type="minimal" >}}                 | {{< dsm-tracer-version lang="nodejs" lib="client-sns" type="recommended" >}}                 |
+| Google Pub/Sub  | [google-cloud/pubsub](https://www.npmjs.com/package/@google-cloud/pubsub)                | {{< dsm-tracer-version lang="nodejs" lib="google-cloud-pubsub" type="minimal" >}}        | {{< dsm-tracer-version lang="nodejs" lib="google-cloud-pubsub" type="recommended" >}}        |
 
 ### Installation
 
@@ -61,7 +62,7 @@ Data Streams Monitoring propagates context through message headers. If you are u
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent
+[10]: /agent
 [2]: /tracing/trace_collection/dd_libraries/nodejs
 [3]: https://pypi.org/project/confluent-kafka/
 [5]: https://www.npmjs.com/package/amqplib

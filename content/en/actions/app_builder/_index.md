@@ -19,11 +19,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/ai-assistant-workflows-apps/"
   tag: "Blog"
   text: "Build Datadog workflows and apps in minutes with our AI assistant"
+- link: "https://www.datadoghq.com/blog/pm-app-automation/"
+  tag: "Blog"
+  text: "How we created a single app to automate repetitive tasks with Datadog Workflow Automation, Datastore, and App Builder"
+- link: "https://learn.datadoghq.com/courses/getting-started-app-builder/"
+  tag: "Learning Center"
+  text: "Getting Started with App Builder"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 Datadog App Builder is a low-code application building platform. It streamlines the development of your internal tools with a user-friendly drag-and-drop interface and built-in support for JavaScript. App Builder integrates with popular services such as AWS and GitHub, allowing you to leverage data and seamlessly connect with external APIs and data stores. By integrating with Datadog's existing capabilities, App Builder provides a centralized context that enables you to take preventive actions or respond to ongoing incidents, all from within the same view that you use for troubleshooting.
 

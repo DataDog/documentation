@@ -12,10 +12,6 @@ further_reading:
 title: Buscar y gestionar pipelines CI
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Resumen
 
 La página [Pipelines][1] es útil para los desarrolladores que quieren mantener un ojo en el proceso de construcción de su servicio.

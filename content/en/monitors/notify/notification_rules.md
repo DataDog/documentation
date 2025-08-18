@@ -7,15 +7,16 @@ further_reading:
 - link: "/monitors/settings/"
   tag: "Documentation"
   text: "Monitor Settings"
+- link: "https://www.datadoghq.com/blog/monitor-notification-rules/"
+  tag: "Blog"
+  text: "Route your monitor alerts with Datadog monitor notification rules"
 ---
-
-{{< beta-callout url="https://www.datadoghq.com/product-preview/monitor-notification-rules/" >}}
-Monitor Notification Rules are in Preview.
-{{< /beta-callout >}}
 
 ## Overview
 
 Monitor notification rules are predefined sets of conditions that automate the process of alerting your team based on predefined conditions and tags. Instead of individually configuring notification recipients and routing for every monitor, notification rules allow you to define the notification logic and recipients in one place and automatically route all monitor events with matching tags to that list of handles.
+
+<div class="alert alert-info">There is a default limit of 1000 rules per organization.</a>.</div>
 
 ## Creating notification rules
 
@@ -23,7 +24,7 @@ Monitor notification rules are predefined sets of conditions that automate the p
 
 1. Navigate to [**Monitors > Settings > Notification Rules**][1].
 1. Click **New Rule**.
-1. Add specific tags and values to set the scope for the rule. Notification rules use an AND logic for multiple tags. For an example of this, see [Routing logic](#routing-logic).
+1. Add specific tags and values to set the scope for the rule. Notification rules use an AND logic for multiple tags. Both monitor tags and group tags are considered when matching the scope. For an example of this, see [Routing logic](#routing-logic).
 1. Add up to 50 notification recipients. Notifications can be sent to emails, Team channels, or Integration channels. For more information, see [Notifications][2].
 1. Add a name for the rule.
 1. Click **Create Rule**.
@@ -54,8 +55,9 @@ In your monitor configuration, you can view the notification recipients that are
 
 ## Routing logic
 
-Notification rules apply to recipients of all monitor notifications that match the scopes defined in the rule configuration.
+Notification rules apply to all monitor notifications that match the scopes defined in the rule configuration.
 - Multiple tags apply an AND logic to the scope.
+- Tags can be either from monitor tags or from monitor groups
 - Multiple rules can match a single monitor notification, and all recipients are added to the monitor alert without duplication.
 
 {{< img src="/monitors/notifications/notification_rules/diagram_notification-rules.png" alt="Flowchart showing how Monitor notification rules match tags, combine recipients from monitors and rules, and remove duplicates before sending alerts" style="width:100%;" >}}

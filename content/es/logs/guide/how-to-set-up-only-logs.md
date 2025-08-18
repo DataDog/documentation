@@ -19,7 +19,7 @@ Para deshabilitar las cargas útiles, debes ejecutar la versión 6.4 o posterior
 {{% tab "Host " %}}
 
 1. Abre el [archivo de configuración datadog.yaml][1].
-2. Añade el atributo `enable_payloads` con la siguiente configuración:
+2. Añade `enable_payloads` como atributo de nivel superior en cualquier lugar del archivo de configuración con la siguiente configuración:
 
     ```yaml
     enable_payloads:
@@ -58,6 +58,8 @@ docker run -d --name datadog-agent \
            -e DD_ENABLE_PAYLOADS_SERIES=false \
            -e DD_ENABLE_PAYLOADS_SERVICE_CHECKS=false \
            -e DD_ENABLE_PAYLOADS_SKETCHES=false \
+           -e DD_PROCESS_AGENT_ENABLED=false \
+           -e DD_PROCESS_CONFIG_CONTAINER_COLLECTION_ENABLED=false \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /proc/:/host/proc/:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
@@ -71,24 +73,24 @@ docker run -d --name datadog-agent \
 Si despliegas el Agent en Kubernetes, realiza los siguientes cambios en tu Helm chart además de tu configuración del Agent:
 
 ```yaml
- ## Enviar sólo Logs 
+ ## Send logs only
 clusterAgent:
   enabled: false
-Datadog:
+datadog:
 [...]
   processAgent:
     enabled: false
     containerCollection: false
 [...]
   env:
-    - nombre: DD_ENABLE_PAYLOADS_EVENTS
+    - name: DD_ENABLE_PAYLOADS_EVENTS
       value: "false"
     - name: DD_ENABLE_PAYLOADS_SERIES
-      valor: "false"
+      value: "false"
     - name: DD_ENABLE_PAYLOADS_SERVICE_CHECKS
-      valor: "false"
+      value: "false"
     - name: DD_ENABLE_PAYLOADS_SKETCHES
-      valor: "false"
+      value: "false"
 ```
 
 {{% /tab %}}

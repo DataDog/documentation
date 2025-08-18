@@ -72,7 +72,7 @@ Datadog does not officially support any early-access versions of Java.
 | Spring Web (MVC)        | 4.0+       |  {{< X >}} |  {{< X >}} |
 | Spring WebFlux          | 5.0+       |            |            |
 | Tomcat                  | 5.5+       |   {{< X >}} |  {{< X >}} |
-| Vert.x                  | 3.4-3.9.x  |   {{< X >}} |  {{< X >}} |
+| Vert.x                  | 3.4+, 4+   |   {{< X >}} |  {{< X >}} |
 
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss. Also, frameworks like Spring Boot (version 3) inherently work because they usually use a supported embedded application server, such as Tomcat, Jetty, or Netty.
 
@@ -151,7 +151,7 @@ Datadog does not officially support any early-access versions of Java.
 
 
 [1]: /tracing/trace_collection/compatibility/java/
-[2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[2]: /tracing/guide/remote_config
 [3]: /security/code_security/software_composition_analysis/
 
 This is new content at line 33

@@ -7,10 +7,6 @@ further_reading:
   text: "Set up pipelines"
 ---
 
-{{< beta-callout url="" header="false" btn_hidden="true">}}
-Live Capture is in Preview.
-{{< /beta-callout >}}
-
 ## Overview
 
 Use Live Capture to see the data a source sends through the pipeline and also the data a processor receives and sends out.
@@ -21,6 +17,10 @@ Specifically, the following information is shown:
     - Unmodified
     - Dropped
     - Reduced
+
+An example of Live Capture showing the log's `message` field before and after it has been processed by the Parse XML processor.
+
+{{< img src="observability_pipelines/processors/live-capture-example.png" alt="The entry column shows the original message field's values and the exit column shows the values parsed as XML" style="width:100%;" >}}
 
 ## Permissions
 

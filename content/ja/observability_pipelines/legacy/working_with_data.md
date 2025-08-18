@@ -21,10 +21,6 @@ further_reading:
 title: (レガシー) データの操作
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines は US1-FED Datadog サイトでは利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 Observability Pipelines を使用すると、可観測性データを形成および変換できます。Logging without Limits™ パイプラインと同様に、一連の変換コンポーネントで構成される Observability Pipelines のパイプラインを構成できます。これらの変換により、型安全性が保証された状態で、データをパース、構造化、拡充することができます。

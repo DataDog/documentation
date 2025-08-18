@@ -15,10 +15,6 @@ further_reading:
   text: "Learn how to manage flaky tests"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization is not available in ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 Use the [Repositories page][1] to gain insights into test trends in your repositories or debug issues by investigating individual commits.

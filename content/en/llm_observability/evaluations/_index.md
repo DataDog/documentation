@@ -6,21 +6,17 @@ aliases:
     - /llm_observability/configuration/
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 LLM Observability offers several ways to support evaluations:
 
-### Out of the Box Evaluations
+### Out-of-the-Box Evaluations
 
-Datadog builds and supports [Out of the Box Evaluations][1] to support common use cases. You can enable and configure them within the LLM Observability application.
+Datadog builds and supports [Out-of-the-Box Evaluations][1] to support common use cases. You can enable and configure them within the LLM Observability application.
 
-### Submit Evaluations
+### Submit Custom Evaluations
 
-You can also [Submit Evaluations][2] using Datadog's API. This mechanism is great if you have your own evaluation system, but would like to centralize that information within Datadog.
+You can also [Submit Custom Evaluations][2] using Datadog's API. This mechanism is great if you have your own evaluation system, but would like to centralize that information within Datadog.
 
 ### Evaluation Integrations
 
@@ -32,9 +28,13 @@ In addition to evaluating the input and output of LLM requests, agents, workflow
 
 By proactively scanning for sensitive data, LLM Observability ensures that conversations remain secure and compliant with data protection regulations. This additional layer of security reinforces Datadog's commitment to maintaining the confidentiality and integration of user interactions with LLMs.
 
+### Permissions
+
+[LLM Observability Write permissions][6] are necessary to configure evaluations.
 
 [1]: /llm_observability/evaluations/ootb_evaluations
 [2]: /llm_observability/evaluations/submit_evaluations
 [3]: /llm_observability/evaluations/ragas_evaluations
 [4]: /llm_observability/evaluations/submit_nemo_evaluations
 [5]: /security/sensitive_data_scanner/
+[6]: /account_management/rbac/permissions/#llm-observability

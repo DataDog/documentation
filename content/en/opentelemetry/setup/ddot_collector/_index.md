@@ -9,8 +9,14 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-danger"><strong>The Datadog Agent with embedded OpenTelemetry Collector is not FedRAMP or FIPS compliant.</strong><br> FedRAMP customers should not use the embedded OpenTelemetry Collector and should continue using standard Agent deployments.</div>
+<div class="alert alert-danger"><strong>The Datadog Distribution of OpenTelemetry Collector (DDOT) is not yet FedRAMP/FIPS compliant.</strong><br>
+&bull; If you require a FedRAMP or FIPS-compliant data collection pipeline, use the <a href="/agent/configuration/fips-compliance/?tab=linux">FIPS-enabled Datadog Agent</a>.<br>
+&bull; If you are a GovCloud customer whose only requirement is data residency in the GovCloud (US1-FED) data center, you <strong>may</strong> use the DDOT Collector.</div>
 {{< /site-region >}}
+
+{{< callout url="https://www.datadoghq.com/product-preview/ddot-for-linux-based-hosts-or-vms/" btn_hidden="false" >}}
+Support for deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is in Preview. To join the Preview, click <strong>Request Access</strong> and complete the form.
+{{< /callout >}}
 
 ## Overview
 
@@ -20,7 +26,7 @@ The Datadog distribution of OpenTelemetry (DDOT) Collector is an open source sol
 - Full data collection and processing capabilities of the Datadog Agent for seamless integration and robust monitoring, including [Datadog Fleet Automation][9] support for the DDOT Collector (see [Key benefits](#key-benefits))
 - [Custom Datadog components](#custom-datadog-components) designed to deliver the best onboarding experience
 
-{{< img src="/opentelemetry/setup/ddot-collector.png" alt="Architecture overview for DDOT Collector, which is embedded in the Datadog Agent." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Architecture overview for DDOT Collector, which is embedded in the Datadog Agent." style="width:100%;" >}}
 
 ## Key benefits
 
@@ -110,6 +116,7 @@ By default, the DDOT Collector ships with the following Collector components. Yo
 {{% collapse-content title="Connectors" level="p" %}}
 
 - [datadogconnector][44]
+- [routingconnector][56] (available since version 7.68.0)
 - [spanmetricsconnector][45]
 
 {{% /collapse-content %}}
@@ -218,3 +225,4 @@ This guide helps you migrate from an existing OpenTelemetry Collector setup to t
 [53]: /containers/kubernetes/tag/?tab=datadogoperator#out-of-the-box-tags
 [54]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [55]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/loadbalancingexporter/README.md
+[56]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/routingconnector/README.md

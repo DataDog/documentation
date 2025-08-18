@@ -238,9 +238,9 @@ async fn main() {
 
 {{< partial name="api/sdk-languages.html" >}}
 </br>
-アプリケーションを使用して開始する場合は、Datadog の一般向けの[「はじめに」ドキュメント][7]をご覧ください。
+代わりにアプリケーションのセットアップから始めたい場合は、Datadog の一般向け[「はじめに」ドキュメント][7]をご覧ください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

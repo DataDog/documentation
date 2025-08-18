@@ -65,7 +65,9 @@ You can override your device's system volume and Do Not Disturb mode for both pu
 
 3. Within the iOS system settings, make sure you enable the **Critical Alerts** toggle. Make sure you grant the mobile app the necessary permissions.
 
-4. Test the setup of your critical push notification by tapping **Test push notifications**.
+4. Select your device for **High Urgency Notifications** and/or **Low Urgency Notifications** under the Notification Preferences section.
+
+5. Test the setup of your critical push notification by tapping **Test push notifications**.
 
 {{% /tab %}}
 {{% tab "Android" %}}
@@ -86,7 +88,9 @@ You can override your device's system volume and Do Not Disturb mode for both pu
 
 5. In order to override system volume, tap the **Override system volume** and allow **Mode access** in System Settings to toggle on **Override system volume**.
 
-6. Test the setup of your critical push notification by tapping **Test push notifications**.
+6. On web, set up notifciation preferences for **High Urgency Notifications** and/or **Low Urgency Notifications**.
+
+7. Test the setup of your critical push notification by tapping **Test push notifications**.
 
 <div class="alert alert-danger">
 On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb settings when used within a Work Profile. As a workaround, install the Datadog mobile app on your personal profile.
@@ -119,7 +123,7 @@ For reliability, Datadog uses a rotating set of phone numbers to contact you. To
 
 {{< img src="service_management/mobile/android_sync_card_may_2025.png" alt="Override your Android device's do-not-disturb mode for SMS and voice calls" style="width:100%;" >}}
 
-1. In the Datadog mobile app, navigate to **Account** > **Settings** > **Notifications**.
+1. In the Datadog mobile app, navigate to **Settings** > **On-Call**.
 
 2. Under **Phone & SMS**, enable **Automatic Contact Card Sync**. This creates a contact named "Datadog On-Call", which updates regularly with Datadog's latest phone numbers.
 

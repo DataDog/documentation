@@ -50,55 +50,11 @@ The Go tracer includes support for the following frameworks, data stores and lib
 
 The Go packages listed in this page are relevant for App and API Protection capabilities. You can also find more tracing integrations in [APM's tracing compatibility page][16].
 
+{{% tracing-go-v2 %}}
+
+Supported packages have changed between v1 and v2 of the Go tracer.
+
 {{% tabs %}}
-{{% tab "v1" %}}
-
-**Note**: The [Go integrations documentation][6] provides a detailed overview of the supported packages and their APIs, along with usage examples.
-
-<div class="alert alert-info">If you don't see your library of choice listed, fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this form to send details</a>.</div>
-
-### Web framework compatibility
-
-| Framework         | Threat Detection supported? | Threat Protection supported? |
-|-------------------|-----------------------------|------------------------------|
-| [net/http][13]     | <i class="icon-check-bold"></i>  | <i class="icon-check-bold"></i> |
-| [Gin][7]          | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
-| [Gorilla Mux][8] | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
-| [gRPC][11]          | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
-| [echo v4][9]     | <i class="icon-check-bold"></i>  | <i class="icon-check-bold"></i> |
-| [echo v3][10]     | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
-| [chi][12] | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
-| [graphql-go][17] | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
-| [gqlgen][18] | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
-
-
-### Networking framework compatibility
-
-| Framework             | Threat Detection supported? | Threat Protection supported? |
-|-----------------------|-----------------------------|------------------------------|
-| [gRPC client][11]     | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i> |
-| [net/http client][13] | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i> |
-
-### Data store compatibility
-
-| Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
-|-------------------|-----------------|--------------------------------------------------------------------------|
-| [sql][14]          | <i class="icon-check-bold"></i> |   <i class="icon-check-bold"></i>    |
-
-[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
-[7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin
-[8]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux
-[9]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4
-[10]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo
-[11]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc
-[12]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi
-[13]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http
-[14]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql
-[16]: /tracing/compatibility_requirements/go
-[17]: https://pkg.go.dev/github.com/graphql-go/graphql
-[18]: https://pkg.go.dev/github.com/99designs/gqlgen/graphql
-
-{{% /tab %}}
 {{% tab "v2" %}}
 
 **Note**: The [Go integrations documentation][19] provides a detailed overview of the supported packages and their APIs, along with usage examples.
@@ -144,11 +100,59 @@ The Go packages listed in this page are relevant for App and API Protection capa
 [26]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/database/sql/v2
 
 {{% /tab %}}
+{{% tab "v1" %}}
+
+**Note**: The [Go integrations documentation][6] provides a detailed overview of the supported packages and their APIs, along with usage examples.
+
+<div class="alert alert-info">If you don't see your library of choice listed, fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this form to send details</a>.</div>
+
+### Web framework compatibility
+
+| Framework         | Threat Detection supported? | Threat Protection supported? |
+|-------------------|-----------------------------|------------------------------|
+| [net/http][13]     | <i class="icon-check-bold"></i>  | <i class="icon-check-bold"></i> |
+| [Gin][7]          | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [Gorilla Mux][8] | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [gRPC][11]          | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [echo v4][9]     | <i class="icon-check-bold"></i>  | <i class="icon-check-bold"></i> |
+| [echo v3][10]     | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [chi][12] | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [graphql-go][17] | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [gqlgen][18] | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+
+
+### Networking framework compatibility
+
+| Framework             | Threat Detection supported? | Threat Protection supported? |
+|-----------------------|-----------------------------|------------------------------|
+| [gRPC client][11]     | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i> |
+| [net/http client][13] | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i> |
+
+### Data store compatibility
+
+| Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
+|-------------------|-----------------|--------------------------------------------------------------------------|
+| [sql][14]          | <i class="icon-check-bold"></i> |   <i class="icon-check-bold"></i>    |
+
+[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
+[7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin
+[8]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux
+[9]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4
+[10]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo
+[11]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc
+[12]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi
+[13]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http
+[14]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql
+[17]: https://pkg.go.dev/github.com/graphql-go/graphql
+[18]: https://pkg.go.dev/github.com/99designs/gqlgen/graphql
+
+{{% /tab %}}
 {{% /tabs %}}
 
-[1]: /agent/remote_config/#enabling-remote-configuration
+[1]: /tracing/guide/remote_config
 [2]: https://github.com/DataDog/dd-trace-go
 [3]: https://github.com/DataDog/dd-trace-go#support-policy
 [4]: https://github.com/DataDog/dd-trace-go#support-maintenance
 [5]: https://www.datadoghq.com/support/
 [15]: https://github.com/golang/go/wiki/cgo
+[16]: /tracing/compatibility_requirements/go

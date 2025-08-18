@@ -28,17 +28,19 @@ The following operating systems and architectures are compatible:
 
 <div class="alert alert-info">For additional operating system requirements specific to your programming language, see <a href="#language-specific-requirements">Language specific requirements</a>.</div>
 
-## Platforms
+## Deployment environments
 
-The following container platforms are compatible:
+The following environments are compatible:
 
-| Environment     | Requirements & Limitations                             | Support |
-|-----------------|--------------------------------------------------------|---------|
-| Linux           | Not supported on hardened environments such as SELinux | GA      |
-| Docker on Linux |                                                        | GA      |
-| Kubernetes      | [Datadog Admission Controller][1] enabled              | GA |
+| Environment     | Requirements & Limitations                              | Support |
+|-----------------|---------------------------------------------------------|---------|
+| Linux           | Not supported on hardened environments such as SELinux. | GA      |
+| Docker on Linux |                                                         | GA      |
+| Kubernetes      | Requires [Datadog Admission Controller][1] to be enabled.      | GA      |
+| Windows IIS     | Requires Agent v7.67.1+ and Tracer v3.19.0+.<br>Only .NET applications running in IIS are supported.     | GA      |
 
-### Platform-specific requirements
+
+### Environment-specific requirements
 
 #### Linux virtual machines (VMs)
 
@@ -54,46 +56,67 @@ You may encounter timeouts with smaller VM instances such as `t2.micro`. In this
 
 For Kubernetes clusters with Windows pods, use namespace inclusion/exclusion or specify an annotation in the application to exclude them from library injection.
 
+## Tracer libraries
+
+<div class="alert alert-info">
+
+SSI instrumentation depends on both the tracer version and your application's language version. Specifically:
+
+- SSI must be compatible with the tracer version
+- That tracer version must support the language version you're using
+
+If either requirement isn't met, SSI falls back gracefully and your application runs uninstrumented.
+
+</div>
+
+SSI [automatically downloads][2] a compatible tracer version based on your application's language. The following tracer versions support injection with SSI:
+
+| Tracer Language  | Version   |
+|------------------|-----------|
+| Java             | 1.44.0+   | 
+| Python           | 2.20.1+   | 
+| Node.js          | 4+        | 
+| .NET             | 3.7.0+    | 
+| Ruby             | 2.5.0+    |  
+| PHP              | 1.6.0+    |  
+
+
 ## Language-specific requirements
 
-This section provides language-specific compatibility requirements for Single Step Instrumentation:
+While Single Step Instrumentation itself does not directly require a specific language version, compatibility depends on whether a supported tracer version exists for that language version. See the [Tracer libraries](#tracer-libraries) section for details.
+
+To check which language versions are supported for your runtime, see the compatibility documentation for each tracer:
+
+For a complete list of supported language versions, see the compatibility documentation for each tracer:
+
+- [Java tracer compatibility][4]
+- [Python tracer compatibility][5]
+- [Ruby tracer compatibility][6]
+- [Node.js tracer compatibility][7]
+- [.NET Core tracer compatibility][8]
+- [.NET Framework tracer compatibility][9]
+- [PHP tracer compatibility][10]
+
+The following section provides additional notes, troubleshooting guidance, and known limitations for each language:
 
 {{< programming-lang-wrapper langs="java,python,ruby,nodejs,dotnet,php" >}}
 
 {{< programming-lang lang="java" >}}
 
-### Supported Java versions
-
-| Java Version | Support                         |
-|--------------|---------------------------------|
-| 8+           | <i class="icon-check-bold"></i> |
-
 ### Troubleshooting
 
 **Environment Variable Length**: If your application uses extensive command-line options or environment variables, you might encounter initialization failures. This typically occurs when you have many JVM arguments or other startup configurations. To resolve this:
-  - Review and minimize non-essential JVM arguments
-  - Consider moving some configurations to a properties file
+  - Minimize non-essential JVM arguments
+  - Consider moving some configurations to a `.properties` file
   - Check application logs for specific initialization errors
 
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
 
-### Supported Python versions
-
-| Python Version | Support                         |
-|----------------|---------------------------------|
-| 3.13           | <i class="icon-check-bold"></i> |
-| 3.12           | <i class="icon-check-bold"></i> |
-| 3.11           | <i class="icon-check-bold"></i> |
-| 3.10           | <i class="icon-check-bold"></i> |
-| 3.9            | <i class="icon-check-bold"></i> |
-| 3.8            | <i class="icon-check-bold"></i> |
-| 3.7            | <i class="icon-check-bold"></i> |
-
 ### Default system repository support
 
-Single Step Instrumentation requires Python 3.7-3.12, which is available by default only on:
+Single Step Instrumentation requires Python 3.7+, which is available by default only on:
 - CentOS Stream 8+
 - Red Hat Enterprise Linux 8+
 
@@ -102,15 +125,6 @@ Single Step Instrumentation requires Python 3.7-3.12, which is available by defa
 {{< programming-lang lang="ruby" >}}
 
 <div class="alert alert-warning">Using Single Step Instrumentation with Ruby applications is in Preview.</div>
-
-### Supported Ruby versions
-
-| Ruby Version | Support |
-|--------------|---------|
-| 3.2          | Preview |
-| 3.1          | Preview |
-| 3.0          | Preview |
-| 2.7          | Preview |
 
 ### Troubleshooting
 
@@ -130,54 +144,31 @@ When uninstalling Single Step Instrumentation from a Ruby application, follow th
 
 {{< programming-lang lang="nodejs" >}}
 
-### Supported Node.js versions
-
-| Node.js Version    | Support                         | Notes                                         |
-|--------------------|---------------------------------|-----------------------------------------------|
-| Latest LTS release | <i class="icon-check-bold"></i> | Instrumenting ESM modules is not supported.   |
-
 ### Default system repository support
-
-Single Step Instrumentation supports Node.js 16.x and above, which is available by default only on:
+Default system repositories include supported Node.js versions only on:
 - CentOS Stream 9+
 - Red Hat Enterprise Linux 9+
+
+### Additional information
+- Instrumentation of ESM modules is not currently supported.
 
 {{< /programming-lang >}}
 
 {{< programming-lang lang="dotnet" >}}
 
-### Supported .NET runtimes
+## Supported .NET runtimes
 
-| .NET Version     | Support                         | Notes                                |
-|------------------|---------------------------------|--------------------------------------|
-| .NET 8           | <i class="icon-check-bold"></i> |                                      |
-| .NET 7           | <i class="icon-check-bold"></i> |                                      |
-| .NET 6           | <i class="icon-check-bold"></i> | Versions below 6.0.13 not supported. |
-| .NET 5           | <i class="icon-check-bold"></i> |                                      |
-| .NET Core 3.1    | <i class="icon-check-bold"></i> |                                      |
-| .NET Core 3.0    |                                 |                                      |
-| .NET Core 2.2    |                                 |                                      |
-| .NET Core 2.1    |                                 |                                      |
-| .NET Core 2.0    |                                 |                                      |
+SSI supports both .NET Core and .NET runtimes. See the tracer documentation for version compatibility details:
+
+- [.NET Core tracer compatibility][8]
+- [.NET Framework tracer compatibility][9]
+
+[8]: /tracing/trace_collection/compatibility/dotnet-core
+[9]: /tracing/trace_collection/compatibility/dotnet-framework
 
 {{< /programming-lang >}}
 
 {{< programming-lang lang="PHP" >}}
-
-### Supported PHP versions
-
-| PHP Version | Support |
-|-------------|---------|
-| 8.4.x       | <i class="icon-check-bold"></i> |
-| 8.3.x       | <i class="icon-check-bold"></i> |
-| 8.2.x       | <i class="icon-check-bold"></i> |
-| 8.1.x       | <i class="icon-check-bold"></i> |
-| 8.0.x       | <i class="icon-check-bold"></i> |
-| 7.4.x       | <i class="icon-check-bold"></i> |
-| 7.3.x       | <i class="icon-check-bold"></i> |
-| 7.2.x       | <i class="icon-check-bold"></i> |
-| 7.1.x       | <i class="icon-check-bold"></i> |
-| 7.0.x       | <i class="icon-check-bold"></i> |
 
 ### PHP extensions
 
@@ -195,23 +186,18 @@ SSI disables automatically when it detects:
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-## Tracer libraries
-
-The following tracer library versions are supported for Single Step Instrumentation: 
-
-| Tracer Language  | Version   |
-|------------------|-----------|
-| Java             | 1.44.0+   | 
-| Python           | 2.20.1+   | 
-| Node.js          | 4+        | 
-| .NET             | 3.7.0+    | 
-| Ruby             | 2.5.0+    |  
-| PHP              | 1.6.0+    |  
-
-Single Step Instrumentation automatically downloads the tracer version compatible with your application's language version. 
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /containers/cluster_agent/admission_controller/
+[2]: /tracing/guide/injectors/
+[3]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
+[4]: /tracing/trace_collection/compatibility/java/
+[5]: /tracing/trace_collection/compatibility/python
+[6]: /tracing/trace_collection/compatibility/ruby
+[7]: /tracing/trace_collection/compatibility/nodejs
+[8]: /tracing/trace_collection/compatibility/dotnet-core
+[9]: /tracing/trace_collection/compatibility/dotnet-framework
+[10]: /tracing/trace_collection/compatibility/php

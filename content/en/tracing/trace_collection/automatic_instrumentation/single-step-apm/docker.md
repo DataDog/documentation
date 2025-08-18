@@ -15,9 +15,11 @@ In a Docker Linux container, use Single Step Instrumentation (SSI) for APM to in
 
 ## Enable APM on your applications
 
+<div class="alert alert-info">Before proceeding, confirm that your environment is compatible by reviewing the <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">SSI compatibility guide.</a></div>
+
 To enable APM in a Docker Linux container:
 
-1. In the Datadog app, go to the [Install the Datadog Agent on Docker][15] page.
+1. In Datadog, go to the [Install the Datadog Agent on Docker][15] page.
 1. In the **Customize my agent install command** section, go to **Additional configuration** > **Application Observability**, and turn on **APM Instrumentation**.
 
   
@@ -34,7 +36,7 @@ You may want to customize SDK versions based on your application's language vers
 
 To customize tracer versions:
 
-1. In the Datadog app, go to the [Install the Datadog Agent on Docker][15] page.
+1. In Datadog, go to the [Install the Datadog Agent on Docker][15] page.
 1. After you turn on **APM Instrumentation**, click **Customize library versions**.
 
    {{< img src="tracing/trace_collection/apm-instrumentation-version-pinning.png" alt="The 'Customize library versions' drop-down in the instructions for installing the Datadog Agent on Docker" style="width:100%;" >}}
@@ -53,6 +55,15 @@ Available versions are listed in source repositories for each language:
 - [Ruby][12] (`ruby`)
 - [PHP][13] (`php`)
 
+## Configure Unified Service Tags
+
+Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. Learn how to [set USTs for Docker services][16].
+
+## Enable SDK-dependent products and features
+
+After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
+
+To enable products, [set environment variables][3] in your application configuration.
 
 ## Remove Single Step APM instrumentation from your Agent
 
@@ -82,11 +93,17 @@ To stop producing traces, uninstall APM and restart the infrastructure:
    ```
    Or use the equivalent for your environment.
 
+## Troubleshooting
+
+If you encounter problems enabling APM with SSI, see the [SSI troubleshooting guide][17].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /tracing/trace_collection/library_config/
+[3]: /tracing/trace_collection/library_config/
 [8]: https://github.com/DataDog/dd-trace-java/releases
 [9]: https://github.com/DataDog/dd-trace-js/releases
 [10]: https://github.com/DataDog/dd-trace-py/releases
@@ -96,5 +113,7 @@ To stop producing traces, uninstall APM and restart the infrastructure:
 [14]: /tracing/glossary/#instrumentation
 [15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=docker
 [16]: /getting_started/tagging/unified_service_tagging/?tab=docker#containerized-environment
+[17]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
+
 
 

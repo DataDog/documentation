@@ -29,13 +29,17 @@ APM and USM automatically detect the following entities types: `service`,`datast
 
 RUM is responsible for discovering `frontend apps` entities.
 
-**Managing automatically-named services:**
-- You can opt-in to [inferred entities][3] to filter out entities by type (database, queue, third-party).
-- You can optionally [remove service overrides][4] such as `service:my-service-http-client` from your catalog or map.
-
 For information about discovering endpoints, see [Discovering Endpoints from APM][5].
 
 **Note**: The [performance metrics][6] for an entity are tied to its [primary operations][7]. If a service is detected only by USM, the performance view shows [USM metrics][9]; if a entity is detected only by APM, or by both APM and USM, the performance view shows APM [trace metrics][8].
+
+### Managing automatically-named services 
+
+To adjust how inferred entities appear in Software Catalog, you can:
+
+- Assign a display name to identify an entity by a custom name.
+- [Filter out entities][3] by type (database, queue, third-party).
+- [Remove service overrides][4] such as `service:my-service-http-client` from your catalog or map.
 
 
 ## Import entities from Infrastructure and Logs
@@ -55,16 +59,16 @@ To remove imported services from the default **Explore** view, click **Clear Pre
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: tracing/
-[2]: universal_service_monitoring/
-[3]: tracing/services/inferred_services/
-[4]: tracing/guide/service_overrides/#remove-service-overrides
-[5]: software_catalog/endpoints/
+[1]: /tracing/
+[2]: /universal_service_monitoring/
+[3]: /tracing/services/inferred_services/
+[4]: /tracing/guide/service_overrides/#remove-service-overrides
+[5]: /software_catalog/endpoints/
 [6]: https://app.datadoghq.com/software?lens=performance
-[7]: tracing/guide/configuring-primary-operation/
-[8]: tracing/metrics/metrics_namespace/
-[9]: universal_service_monitoring/guide/using_usm_metrics/#usm-metrics-vs-apm-metrics
-[10]: getting_started/tagging/unified_service_tagging/
+[7]: /tracing/guide/configuring-primary-operation/
+[8]: /tracing/metrics/metrics_namespace/
+[9]: /universal_service_monitoring/guide/using_usm_metrics/#usm-metrics-vs-apm-metrics
+[10]: /getting_started/tagging/unified_service_tagging/
 [11]: https://app.datadoghq.com/software/settings/get-started
-[12]: software_catalog/apis/
-[13]: integrations/github/
+[12]: /software_catalog/apis/
+[13]: /integrations/github/
