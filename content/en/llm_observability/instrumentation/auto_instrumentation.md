@@ -371,6 +371,7 @@ Datadog's [LLM Observability Node.js SDK][4] provides integrations that automati
 | [LangChain](#langchain)                 | >= 0.1.0           | >= 5.32.0 (CJS), >=5.38.0 (ESM)             |
 | [Amazon Bedrock](#amazon-bedrock)       | >= 3.422.0         | >= 5.35.0 (CJS), >=5.35.0 (ESM)             |
 | [VertexAI](#vertex-ai)                  | >= 1.0.0           | >= 5.44.0 (CJS), >=5.44.0 (ESM)             |
+| [Vercel AI SDK](#vercel-ai-sdk)         | >=4.0.0            | >= 5.63.0 (CJS), >=5.63.0 (ESM)             |
 
 In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
 
@@ -473,7 +474,49 @@ The Vertex AI integration instruments the following methods:
   - `chat.sendMessage()`
   - `chat.sendMessageStream()`
 
-### ESM support
+### Vercel AI SDK
+
+The Vercel AI SDK integration automatically intercepts the OpenTelemetry spans created by the underlying core Vercel AI SDK and converts them into Datadog LLM Observability spans. This integration will automatically patch the tracer passed into each of the following functions under `experimental_telemetry`:
+
+- `generateText`
+- `streamText`
+- `generateObject`
+- `streamObject`
+- `embed`
+- `embedMany`
+
+If no `experimental_telemetry` configuration is passed in, the integration will enable it to still send LLM Observability spans.
+
+```javascript
+require('dd-trace').init({
+  llmobs: {
+    mlApp: 'my-ml-app',
+  }
+});
+
+const { generateText } = require('ai');
+const { openai } = require('@ai-sdk/openai');
+
+async function main () {
+  let result = await generateText({
+    model: openai('gpt-4o'),
+    ...
+    experimental_telemetry: {
+      isEnabled: true,
+      tracer: someTracerProvider.getTracer('ai'), // this tracer will be patched to format and send created spans to Datadog LLM Observability
+    }
+  });
+
+  result = await generateText({
+    model: openai('gpt-4o'),
+    ...
+  }); // since no tracer is passed in, the integration will enable it to still send LLM Observability spans
+}
+```
+
+If `experimental_telemetry.isEnabled` is set to `false`, the integration will not turn it on, and will not send spans to LLM Observability.
+
+## ESM support
 
 Auto-instrumentation for ECMAScript Module projects is supported starting from `dd-trace@>=5.38.0`. To enable auto-instrumentation in your ESM projects, run your application with the following Node option:
 
