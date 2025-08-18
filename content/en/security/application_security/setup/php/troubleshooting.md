@@ -186,9 +186,9 @@ If AAP was activated using [Remote Configuration][16], do the following:
 
 To disable AAP on your services in bulk, do the following: 
   1. Go to [Services][15].
-  2. In the **Threat Management** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
-  3. Select the check boxes for the services where you want to disable threat detection.
-  4. In **Bulk Actions**, select **Deactivate Threat detection on (number of) services**.
+  2. In the **App & API Protection** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
+  3. Select the checkboxes for the services where you want to disable threat detection.
+  4. In **Bulk Actions**, select **Deactivate threat detection on (number of) services**.
 
 
 
