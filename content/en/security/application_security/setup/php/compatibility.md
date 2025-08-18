@@ -16,7 +16,7 @@ The following App and API Protection capabilities are supported in the PHP libra
 | Automatic user activity event tracking | 0.89.0                     |
 | API Security | 0.98.0 |
 
-The minimum tracer version to get all supported AAP capabilities for PHP is 0.98.0.
+The minimum tracer version to get all supported App and API Protection capabilities for PHP is 0.98.0.
 
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
