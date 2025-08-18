@@ -49,7 +49,7 @@ further_reading:
 
 ### Microsoft Azure
 {{< appsec-integrations >}}
-  {{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="/security/application_security/setup/azure/app-service" >}}
+  {{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="/security/application_security/setup/azure/app-service/?tab=nodenetphppython" >}}
 {{< /appsec-integrations >}}
 
 
