@@ -47,6 +47,10 @@ platforms:
     link: "agent/basic_agent_usage/saltstack/"
     image: "platform_saltstack.png"
     category: "configuration_management"
+  - name: Amazon ECS
+    link: "containers/"
+    image: "platform_ecs.png" 
+    category: "Container platforms"
   # - name: source
   #   link: "agent/basic_agent_usage/source/"
   #   image: "platform_fromsource.png"
