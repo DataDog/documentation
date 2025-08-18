@@ -233,19 +233,28 @@ secret_backend_config:
 {{% collapse-content title="HashiCorp Vault Backend" level="h4" expanded=false id="id-for-anchoring" %}}
 ##### Supported backends
 
-**Note**: Only version 1 of the HashiCorp Secrets Engine is supported at this time.
-
 The following HashiCorp services are supported:
 
 | "secret_backend_type" value                               | HashiCorp Service                                  |
 | ------------------------------------------ | -------------------------------------------------- |
 | [hashicorp.vault](#hashicorp-auth-session) | [HashiCorp Vault (Secrets Engine Version 1)][3000] |
+| [hashicorp.vault](#hashicorp-auth-session) | [HashiCorp Vault (Secrets Engine Version 2)][3000] |
 
 #### General instructions to set up HashiCorp Vault
 1. Run your HashiCorp Vault. For more information, see the [official HashiCorp Vault documentation][3001]. 
-2. Write a policy that gives the permission to pull secrets from your vault--create a `*.hcl` file, and include the following permission:
+2. Write a policy that gives the permission to pull secrets from your vault--create a `*.hcl` file, and include the following permission if using Secrets Engine Version 1:
 ```
-path "<your path>" {
+path "<your mount path>/<additional subpath>" {
+  capabilities = ["read"]
+}
+```
+If using Secrets Engine Version 2, then the following permissions are needed:
+```
+path "<your mount path>/data/<additional subpath>" {
+  capabilities = ["read"]
+}
+
+path "sys/mounts" {
   capabilities = ["read"]
 }
 ```
