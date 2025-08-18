@@ -152,5 +152,5 @@ For more information, see the [RBAC Permissions documentation][15].
 [11]: https://learn.microsoft.com/en-us/azure/devops/repos/git/pull-request-status?view=azure-devops
 [12]: https://app.datadoghq.com/integrations/github
 [13]: https://app.datadoghq.com/integrations/azure-devops-source-code
-[14]: https://docs.datadoghq.com/integrations/github/
+[14]: /integrations/github/
 [15]: /account_management/rbac/permissions
