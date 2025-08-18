@@ -102,7 +102,7 @@ When you refresh the page, the starred app appears in a section at the top of yo
 
 App Builder keeps a record of every saved version of your app.
 
-To view the version history for your app, in the left-hand menu of your app, click the version history {{< img src="service_management/app_builder/version-history-icon.png" inline="true" style="width:16px;">}} icon.
+To view the version history for your app, in the left-hand menu of your app, click the version history {{< img src="icons/version-history.png" inline="true" style="width:14px;">}} icon.
 
 The UI displays up to 50 saved or published versions of your app, along with the icon of the user who saved or published the version:
 
@@ -119,15 +119,15 @@ You can perform the following operations:
 
 ### Edit an app
 
-To edit an app with JSON, click the cog (**Settings**) icon and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
+To edit an app with JSON, click **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
 
 ### Export an app
 
-To copy an app layout across organizations or back it up, click the cog (**Settings**) icon and select **Switch to JSON**. This shows the JSON code for the entire app. Copy this JSON code and save it in a text editor. You can save intermediate states of your app during development and return to them if necessary.
+To copy an app layout across organizations or back it up, click **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon and select **Switch to JSON**. This shows the JSON code for the entire app. Copy this JSON code and save it in a text editor. You can save intermediate states of your app during development and return to them if necessary.
 
 To copy the app to another organization:
 1. Create an app. 
-1. Click the cog (**Settings**) icon and select **Switch to JSON**. 
+1. Click the **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon and select **Switch to JSON**. 
 1. Replace the existing JSON with the JSON that you previously copied. 
 
 The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
