@@ -34,11 +34,21 @@ If you have multiple layers of notifications (for example, notifying more teams 
 
 ## Monitor messages use cases
 
-- Pre-filled Monitor Messages
-- Notification message templating
-- Template variables
-- Advanced usage
-- Conditional alerting
+The following monitor message use cases are available for Synthetic Monitoring:
+
+Pre-filled monitor messages
+: Pre-filled monitor messages provide a structured starting point for Synthetic test alerts. Each message includes a standardized title, summary, and footer containing test metadata, making it easier to understand the alert at a glance.
+
+Template variables
+: Template variables let you inject test-specific data into monitor notifications dynamically. These variables pull from the `synthetics.attributes` object.
+
+Advanced usage
+: Advanced usage includes techniques for surfacing deeper test insights or structuring complex messages using handlebars templating.
+
+Conditional alerting
+: Conditional alerting allows you to change the content of a monitor notification based on specific test results or failure conditions.
+
+For more information, see the [Synthetic Monitoring enhanced monitor messages and notifications][9] guide.
 
 ## Tailor monitor notifications
 
@@ -46,7 +56,7 @@ Depending on your incident management strategy, you may want to involve multiple
 
 {{< img src="synthetics/guide/synthetics_test_monitors/renotification_toggle_2.png" alt="Select the amount of time for the alerting monitor to renotify" style="width:90%;">}}
 
-To enable the alerting monitor to renotify, click the toggle left of `If this monitor stays in alert status renotify every` and select a time option from the dropdown menu.
+To enable the alerting monitor to renotify, click the toggle **Enable renotification**, then select a time option from the dropdown menu `If this monitor stays in alert status renotify every`.
 
 ## Integrate your Synthetic test monitor with Statuspage
 
@@ -62,6 +72,7 @@ If you use [Atlassian Statuspage][6] for visibility into your applications' and 
 
 For more information, see [Integrating Monitors with Statuspage][8].
 
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -74,3 +85,4 @@ For more information, see [Integrating Monitors with Statuspage][8].
 [6]: https://support.atlassian.com/statuspage/
 [7]: https://support.atlassian.com/statuspage/docs/get-started-with-email-automation/
 [8]: /monitors/guide/integrate-monitors-with-statuspage/
+[9]: /monitors/types/synthetic_monitoring/

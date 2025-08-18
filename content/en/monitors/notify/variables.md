@@ -390,6 +390,7 @@ For Docs and Links you can also access a specific item with the following syntax
   <a href="/monitors/types/real_user_monitoring/">RUM monitors </a>,
   <a href="/monitors/types/ci/">CI monitors </a>, and
   <a href="/monitors/types/database_monitoring/">Database Monitoring monitors</a>.
+  <a href="/monitors/types/synthetic_monitoring/">Synthetic Monitoring monitors</a>.
 </div>
 
 To include **any** attribute or tag from a log, a trace span, a RUM event, a CI pipeline, or a CI test event matching the monitor query, use the following variables:
@@ -404,6 +405,7 @@ To include **any** attribute or tag from a log, a trace span, a RUM event, a CI 
 | CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
 | CI Test         | `{{citest.attributes.key}}`                      |
 | Database Monitoring | `{{databasemonitoring.attributes.key}}`      |
+| Synthetic Monitoring | `{{synthetics.attributes.key}}`      |
 
 {{% collapse-content title="Example syntax usage" level="h4" %}}
 - For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the alert message.
