@@ -17,7 +17,7 @@ title: Trace Explorer
 
 El [Trace Explorer][1] te ofrece la posibilidad de buscar todos los tramos (spans) ingeridos o indexados mediante cualquier etiqueta en cualquier tramo. Los tramos encontrados por tu consulta cambian según si estás buscando tramos en Live (todos los tramos ingeridos en los últimos 15 minutos, de forma continua) o tramos indexados (tramos retenidos durante 15 días por tus filtros personalizados).
 
-Las aplicaciones instrumentadas envían el 100% de tus trazas (traces) a Datadog para la [ingesta][2], haciendo que las trazas estén disponibles como trazas en Live durante un intervalo fijo de 15 minutos.
+Las aplicaciones instrumentadas envían trazas a Datadog en función de los [controles de ingesta][2] configurados. Las trazas ingestadas están disponibles como trazas en directo durante un periodo de 15 minutos.
 
 El Trace Explorer muestra un indicador **Live Search - All ingested data** (Live Search: todos los datos ingeridos) siempre que se encuentre en el modo Live:
 
@@ -144,7 +144,7 @@ Desde la vista de series temporales, exporta tu consulta a un [dashboard][1], [m
 
 Puedes personalizar qué tramos se retienen y con qué frecuencia de retención. Por defecto, se aplica [el filtro de retención inteligente de Datadog ][4], que retiene automáticamente trazas con diversidad de errores y latencia, así como recursos de bajo rendimiento. Para obtener más información sobre el filtro de retención inteligente predeterminado y sobre cómo crear tus propios filtros adicionales, consulta la [documentación sobre filtros de retención][3]. Ve a la página [Filtros de retención][12] dentro de la aplicación de Datadog para crear o modificar tus propios filtros.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

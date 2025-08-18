@@ -22,32 +22,32 @@ title: Débuter avec les monitors
 
 ## Présentation
 
-Les alertes Datadog vous permettent de créer des monitors capables de surveiller activement des métriques, la disponibilité d'intégrations, des endpoints réseau, etc. Tirez profit des monitors pour vous focaliser sur les systèmes qui nécessitent une surveillance, une enquête approfondie ou une intervention.
+Avec le système d'alertes de Datadog, vous pouvez créer des monitors qui vérifient en continu les métriques, la disponibilité des intégrations, les points de terminaison réseau, et bien plus. Utilisez les monitors pour mettre en évidence les systèmes nécessitant une observation, une inspection ou une intervention.
 
-Cette page présente le fonctionnement des monitors et décrit les instructions à suivre pour configurer un [monitor de métrique][1]. Ce type de monitor envoie des alertes et des notifications lorsqu'une métrique dépasse un certain seuil. Par exemple, un monitor de métrique peut vous envoyer une alerte lorsque votre espace disque disponible devient faible.
+Cette page présente les monitors et décrit comment configurer un monitor de métrique. Un [monitor de métrique][1] déclenche des alertes et des notifications si une métrique dépasse ou passe en dessous d'un seuil défini. Par exemple, un monitor de métrique peut vous avertir lorsque l'espace disque devient insuffisant.
 
-Ce guide aborde les sujets suivants :
-- Création et configuration de monitor
-- Configuration d'alertes de monitor
-- Personnalisation de messages de notification
+Ce guide couvre les étapes suivantes :
+- Création et configuration d'un monitor
+- Configuration des alertes de monitor
+- Personnalisation des messages de notification
 - Autorisations des monitors
 
 ## Prérequis
 
-Avant de commencer, vous devez disposer d'un compte Datadog associé à un host sur lequel l'Agent Datadog est installé. Pour en savoir plus sur l'Agent, consultez le guide [Débuter avec l'Agent][2] ou accéder à **[Integrations > Agent][3]** pour accéder aux instructions d'installation.
+Avant de commencer, vous devez disposer d'un compte Datadog lié à un host sur lequel l'Agent Datadog est installé. Pour en savoir plus, consultez le guide [Débuter avec l'Agent][2], ou accédez à **[Integrations > Agent][3]** pour afficher les instructions d'installation.
 
-Pour vérifier que l'Agent Datadog est en cours d'exécution, vérifiez que la [liste d'infrastructures][4] affiche des données dans Datadog.
+Pour vérifier que l'Agent Datadog fonctionne correctement, assurez-vous que votre [liste d'infrastructure][4] dans Datadog est bien renseignée.
 
 ## Créer un monitor
 
 Pour créer un monitor, accédez à **[Monitors > New Monitor][5]** et sélectionnez **Metric**.
 
-## Configurer un monitor
+## Configurer
 
-La configuration d'un monitor vous permet de définir ce qui suit :
+Les éléments principaux de la configuration d'un monitor sont les suivants :
 
 - **Choisir la méthode de détection** : comment mesurez-vous ce qui fera l'objet d'une alerte ? Vous préoccupez-vous du fait que la valeur dʼune métrique lui fasse franchir un seuil ? Que le changement dʼune valeur entraîne le franchissement dʼun seuil ? De la présence dʼune valeur anormale, ou d'autre chose ?
-- **Définition de la métrique** : quelle est la valeur surveillée pour les alertes ? S'agit-il de l'espace disque disponible de votre système, ou encore du nombre d'erreurs de connexion détectées ?
+- **Définir la métrique** : quelle valeur souhaitez-vous surveiller ? L'espace disque de votre système ? Le nombre d'erreurs lors des connexions ?
 - **Définir les conditions d'alerte** : quʼest-ce qui justifie de réveiller un ingénieur ? 
 - **Configurer les notifications et les automatisations** : quelles informations doivent figurer dans l'alerte ?
 - **Définir les permissions et les notifications dʼaudit** : qui a accès à ces alertes, et qui doit être notifié si l'alerte est modifiée ?
@@ -104,7 +104,7 @@ Pour ajouter des messages conditionnels basés sur des seuils d'alerte ou d'aver
 
 #### Informer vos services et les membres de votre équipe
 
-Envoyez des notifications à votre équipe par e-mail, Slack, PagerDuty, etc. Vous pouvez rechercher des membres de l'équipe et des comptes connectés à l'aide de la liste déroulante. 
+Envoyez des notifications à votre équipe par e-mail, Slack, PagerDuty, etc. Vous pouvez rechercher des membres de l'équipe et des comptes connectés à l'aide de la liste déroulante.
 
 {{< img src="getting_started/monitors/monitor_notification.png" alt="Ajouter un message et des automatisations de monitor à la notification de votre alerte" style="width:100%;" >}}
 
@@ -114,11 +114,11 @@ Laissez les autres sections telles quelles. Pour plus d'informations sur le rôl
 
 ### Autorisations
 
-Cliquez sur **Edit Acces** pour que seul le créateur du monitor et des rôles spécifiques de votre organisation puissent bénéficier dʼun accès en édition. Vous pouvez aussi choisir de sélectionner `Notify` pour recevoir une alerte lorsque le monitor est modifié.
+Cliquez sur **Edit Access** pour restreindre la modification du monitor à son créateur, à certaines équipes, utilisateurs, groupes ou rôles spécifiques dans votre organisation. Vous pouvez aussi activer l'option `Notify` pour recevoir une alerte en cas de modification du monitor.
 
 {{< img src="getting_started/monitors/monitor_permissions.png" alt="Définir des autorisations dʼaccès pour un monitor et des options pour les notifications dʼaudit" style="width:80%;" >}}
 
-Pour en savoir plus sur les rôles, consultez la section [Contrôle d'accès à base de rôles][10].
+Pour plus d'informations, consultez la page sur le [contrôle d'accès granulaire][10].
 
 ## Visualiser les monitors et les alertes de triage sur mobile
 
@@ -134,13 +134,13 @@ Vous pouvez consulter vos vues enregistrées de monitors et consulter ou désact
 [2]: /fr/getting_started/agent/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://app.datadoghq.com/infrastructure
-[5]: https://app.datadoghq.com/monitors#create/metric
+[5]: https://app.datadoghq.com/monitors/create/metric
 [6]: /fr/integrations/disk/
 [7]: /fr/monitors/types/metric/?tab=threshold#set-alert-conditions
 [8]: /fr/monitors/notify/variables/
 [9]: /fr/monitors/configuration/?tab=thresholdalert#alert-grouping
-[10]: /fr/account_management/rbac/
-[11]: /fr/service_management/mobile/
+[10]: /fr/account_management/rbac/granular_access/
+[11]: /fr/mobile/
 [12]: https://apps.apple.com/app/datadog/id1391380318
 [13]: https://play.google.com/store/apps/details?id=com.datadog.app
 [14]: /fr/service_management/workflows/

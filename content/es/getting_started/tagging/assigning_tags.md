@@ -80,9 +80,9 @@ Aunque se recomienda asignar las etiquetas (tags) en pares de `<KEY>:<VALUE>`, t
 El nombre de host (clave de etiqueta (tag) `host`) lo [asigna automáticamente][4] el Datadog Agent. Para personalizarlo, utiliza el archivo de configuración del Agent `datadog.yaml`:
 
 ```yaml
-# Define el nombre de host (por defecto: detección automática)
-# Debe seguir el formato RFC-1123, que sólo permite:
-# Mayúsculas de la "A" a la "Z", minúsculas de la "a" a la "z", números del "0" al "9" y guiones (-)
+# Set the hostname (default: auto-detected)
+# Must comply with RFC-1123, which permits only:
+# "A" to "Z", "a" to "z", "0" to "9", and the hyphen (-)
 hostname: mymachine.mydomain
 ```
 
@@ -122,9 +122,9 @@ Aunque se recomienda asignar las etiquetas (tags) en pares de `<KEY>:<VALUE>`, t
 El nombre de host (clave de etiqueta (tag) `host`) lo [asigna automáticamente][4] el Datadog Agent. Para personalizarlo, utiliza el archivo de configuración del Agent `datadog.conf`:
 
 ```yaml
-# Define el nombre de host (por defecto: detección automática)
-# Debe seguir el formato RFC-1123, que sólo permite:
-# Mayúsculas de la "A" a la "Z", minúsculas de la "a" a la "z", números del "0" al "9" y guiones (-)
+# Set the hostname (default: auto-detected)
+# Must comply with RFC-1123, which permits only:
+# "A" to "Z", "a" to "z", "0" to "9", and the hyphen (-)
 hostname: mymachine.mydomain
 ```
 
@@ -159,7 +159,7 @@ Las [integraciones web][5] se basan en la autenticación. Las métricas se recop
 
 #### Variables de entorno
 
-Después de instalar el Datadog Agent contenedorizado, puedes configurar tus etiquetas (tags) de host utilizando la variable de entorno `DD_TAGS` en tu archivo de configuración principal del Agent. Si especifica varias etiquetas, separa cada una de ellas con una coma y un espacio.
+Después de instalar el Datadog Agent contenedorizado, puedes configurar tus etiquetas de host utilizando la variable de entorno `DD_TAGS` en tu archivo de configuración principal del Agent. Si especificas varias etiquetas, separa cada una de ellas con un espacio.
 
 Datadog recopila automáticamente las etiquetas (tags) habituales de [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad y Rancher][6]. Para extraer aún más etiquetas, utiliza las siguientes opciones:
 
@@ -216,7 +216,7 @@ services:
     environment:
       - DD_API_KEY= "<DATADOG_API_KEY>"
       - DD_CONTAINER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
-      - DD_TAGS="key1:value1, key2:value2, key3:value3"
+      - DD_TAGS="key1:value1 key2:value2 key3:value3"
     image: 'gcr.io/datadoghq/agent:latest'
     deploy:
       restart_policy:
@@ -239,9 +239,18 @@ Puedes definir las variables en tu `datadog.yaml` personalizado o configurarlas 
 
 ##### Cardinalidad de las etiquetas (tags)
 
-Hay dos variables de entorno que establecen la cardinalidad de las etiquetas (tags): `DD_CHECKS_TAG_CARDINALITY` y `DD_DOGSTATSD_TAG_CARDINALITY`. Debido a que el precio de DogStatsD se fija de un modo diferente, la definición de la cardinalidad de las etiquetas de DogStatsD se realiza de forma separada para ofrecer una configuración más precisa. De lo contrario, estas variables funcionarían igual; es decir, podrían presentar valores `low`, `orchestrator` o `high`. En ambos casos, `low` es el valor predeterminado, lo que introduce etiquetas de nivel de host.
+Hay dos variables de entorno que establecen la cardinalidad de etiqueta: `DD_CHECKS_TAG_CARDINALITY` y `DD_DOGSTATSD_TAG_CARDINALITY`. Dado que DogStatsD tiene un precio diferente, el ajuste de cardinalidad de la etiqueta DogStatsD se separa para dar la oportunidad de una configuración más detallada. Por lo demás, estas variables funcionan de la misma manera: pueden tener los valores `low`, `orchestrator` o `high`. Ambas tienen por defecto `low`, que extrae etiquetas de nivel de clúster de Kubernetes.
+
+Los diferentes ajustes de cardinalidad objetivo:
+* `low`: etiquetas de nivel de clúster de Kubernetes, como `kube_namespace`.
+* `orchestrator`: etiquetas de nivel de pod, como `pod_name`.
+* `high`: etiquetas de nivel de contenedor, como `container_id`.
 
 Dependiendo de la cardinalidad, existe un conjunto diferente de etiquetas (tags) predefinidas para [Kubernetes y OpenShift][7], y para [Docker, Rancher, y Mesos][8]. En el caso de ECS y Fargate, al definir la variable como `orchestrator`, se añade la etiqueta `task_arn`.
+
+**Notas**:
+- El envío de etiquetas de contenedor para las métricas de DogStatsD puede crear más métricas (una por contenedor en lugar de una por host). Esto puede afectar a la facturación de tus métricas personalizadas.
+- En las métricas, las marcas de tiempo se redondean al segundo más próximo. Si algún punto tiene la misma marca de tiempo, el último punto sobrescribe a los anteriores. Una cardinalidad mayor puede ayudar a evitar este problema.
 
 #### Trazas
 
@@ -303,11 +312,12 @@ En [Métricas de distribución][1], crea agregaciones de percentiles aplicando u
 {{% /tab %}}
 {{% tab "Integraciones" %}}
 
-El cuadro de integración de [AWS][1] te permite asignar etiquetas (tags) adicionales a todas las métricas a nivel de cuenta. Utiliza una lista de etiquetas separadas por comas con el formato `<KEY>:<VALUE>`.
+El cuadro de integración de [AWS][1] te permite asignar etiquetas adicionales a todas las métricas a nivel de cuenta, así como a los logs enviados a través de [activadores automáticos de suscripción][2]. Utiliza una lista de etiquetas separadas por comas de la forma `<KEY>:<VALUE>`.
 
 {{< img src="tagging/assigning_tags/integrationtags.png" alt="Etiquetas (tags) AWS" style="width:80%;">}}
 
 [1]: /es/integrations/amazon_web_services/
+[2]: /es/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#automatically-set-up-triggers
 {{% /tab %}}
 {{% tab "Objetivos de nivel de servicio (SLOs)" %}}
 

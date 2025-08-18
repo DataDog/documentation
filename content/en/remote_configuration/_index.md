@@ -79,9 +79,6 @@ Workload Protection
 Observability Pipelines
 : - Remotely deploy and update [Observability Pipelines Workers][4] (OPW): Build and edit pipelines in the Datadog UI, rolling out your configuration changes to OPW instances running in your environment.
 
-Sensitive Data Scanner (SDS) through the Datadog Agent
-: - Redact sensitive information in your logs within your premises (Preview): Remotely configure and deploy OOTB Sensitive Data Scanning rules to the Datadog Agent in your environment. See [Sensitive Data Scanner][28] for more information.
-
 Private action runner
 : - Run Datadog workflows and apps that interact with services hosted on your private network without exposing your services to the public internet. For more information, see [Private Actions][30].
 
