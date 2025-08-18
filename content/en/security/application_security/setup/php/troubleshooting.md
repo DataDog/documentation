@@ -52,7 +52,7 @@ done
 
 **Note:** The `dd-test-scanner-log` value is supported in the most recent releases.
 
-A few minutes after you enable your application and exercise it, and if it's successful, threat information appears in the [Trace and Signals Explorer][2].
+A few minutes after you enable your application and run a successful exercise on it, threat information appears in the [Trace and Signals Explorer][2].
 
 {{< img src="/security/security_monitoring/explorer/signal_panel_v2.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
 
