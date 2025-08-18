@@ -14,7 +14,7 @@ further_reading:
 - link: /developers/integrations/agent_integration
   tag: Documentation
   text: Create an Agent-based Integration
-title: Build A Marketplace Offering
+title: Build a Marketplace Offering
 type: documentation
 description: Learn about the Datadog marketplace.
 ---
