@@ -1831,11 +1831,16 @@ menu:
       parent: monitor_types
       identifier: monitor_types_slo
       weight: 424
+    - name: Synthetic Monitoring
+      url: monitors/types/synthetic_monitoring/
+      parent: monitor_types
+      identifier: monitor_types_syn
+      weight: 425
     - name: Watchdog
       url: monitors/types/watchdog/
       parent: monitor_types
       identifier: monitor_types_watchdog
-      weight: 425
+      weight: 426
     - name: Notifications
       url: monitors/notify/
       parent: alerting
