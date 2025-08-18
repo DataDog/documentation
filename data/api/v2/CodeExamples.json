@@ -275,6 +275,13 @@
       "description": "Unassign case returns \"OK\" response"
     }
   ],
+  "UpdateAttributes": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Update case attributes returns \"OK\" response"
+    }
+  ],
   "UpdatePriority": [
     {
       "group": "case_management",
@@ -416,6 +423,20 @@
       "group": "data_deletion",
       "suffix": "",
       "description": "Creates a data deletion request returns \"OK\" response"
+    }
+  ],
+  "CreateDataset": [
+    {
+      "group": "datasets",
+      "suffix": "",
+      "description": "Create a dataset returns \"OK\" response"
+    }
+  ],
+  "UpdateDataset": [
+    {
+      "group": "datasets",
+      "suffix": "",
+      "description": "Edit a dataset returns \"OK\" response"
     }
   ],
   "PatchDomainAllowlist": [
@@ -1191,6 +1212,11 @@
       "group": "security_monitoring",
       "suffix": "_498211763",
       "description": "Create a detection rule with type 'workload_security' returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_868881438",
+      "description": "Create a scheduled detection rule returns \"OK\" response"
     }
   ],
   "CreateCustomFramework": [
@@ -1513,6 +1539,13 @@
       "group": "teams",
       "suffix": "_252121814",
       "description": "Create a team with V2 fields returns \"CREATED\" response"
+    }
+  ],
+  "SyncTeams": [
+    {
+      "group": "teams",
+      "suffix": "_3215592344",
+      "description": "Sync teams returns \"OK\" response"
     }
   ],
   "UpdateTeamLink": [

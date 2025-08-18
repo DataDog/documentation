@@ -111,7 +111,7 @@ Datadog에는 [Azure 리소스 상태 API][3]에 있는 상태에 기반하여 �
 도움이 필요하시면 <a href="https://docs.datadoghq.com/help/" target="_blank">Datadog 지원팀</a>에 문의해 주세요.</div>
 
 ### 메트릭
-{{< get-metrics-from-git "azure_vm" >}}
+{{< get-metrics-from-git "azure-vm" >}}
 
 
 ### 이벤트

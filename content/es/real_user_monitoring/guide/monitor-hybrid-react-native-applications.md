@@ -21,7 +21,7 @@ Los eventos RUM de ambas fuentes se notifican como procedentes de la misma aplic
   - A través de la *Instrumentación automática*: algunas clases y métodos de React se modifican para automatizar esto. La instrumentación automática para errores, recursos e interacciones de JavaScript solo se puede iniciar desde el código de JavaScript.
   - A través de la *Instrumentación manual*: por ejemplo, si quieres informar de algo que consideras un error, pero que no va a colapsar la aplicación.
 - Puedes compartir la misma instancia del SDK central entre nativo y React Native sin tener que inicializar el SDK en ambos lados por separado. Esto te permite inicializar el SDK nativo en el lado nativo o en el lado de React Native (llamando a `DdSdkReactNative.initialize`) y tenerlo inicializado para ambos lados, con eventos en la misma sesión RUM. React Native usa la instancia central por defecto. Esto significa que puedes usar la *Instrumentación manual* en ambos lados, pero la *Instrumentación automática* solo se activa para el lado en el que se inicializó el SDK.
-- Puedes informar de eventos o logs de Datadog RUM solo después de la inicialización. Si aún no has inicializado el SDK, eventos y logs no se envían.
+- Puedes informar de eventos o logs de Datadog RUM sólo después de la inicialización. Si aún no inicializaste el SDK, no se envían eventos ni logs.
 - No puedes cambiar el atributo de fuente de una sesión RUM; todos tus eventos RUM aparecen bajo la misma fuente.
 
 ## Monitorización de aplicaciones React Native con contenido nativo
@@ -41,7 +41,7 @@ Recomendamos esta solución si no has utilizado nuestro SDK en el lado nativo an
 En Android, añade los SDKs de Datadog Android a tus dependencias en tu archivo `android/app/build.gradle`:
 
 ```java
-// La versión se establece por @datadog/mobile-react-native
+// The version is set by @datadog/mobile-react-native
 implementation "com.datadoghq:dd-sdk-android-rum"
 implementation "com.datadoghq:dd-sdk-android-logs"
 implementation "com.datadoghq:dd-sdk-android-trace"
@@ -54,7 +54,7 @@ implementation "com.datadoghq:dd-sdk-android-webview"
 En iOS, añade los SDKs de iOS Datadog a tus dependencias en tu archivo ios/Podfile para utilizarlos en archivos Objective C:
 
 ```ruby
-# Asegúrate de que la versión coincide con la de node_modules/@datadog/mobile-react-native/DatadogSDKReactNative.podspec
+# Make sure the version matches the one from node_modules/@datadog/mobile-react-native/DatadogSDKReactNative.podspec
 pod 'DatadogSDKObjc', '~> 2.5.0'
 ```
 
@@ -116,7 +116,7 @@ npm install @datadog/mobile-react-native
 Añade el SDK de Android Datadog a tus dependencias en tu archivo `android/app/build.gradle`:
 
 ```gradle
-// La versión se establece por @datadog/mobile-react-native
+// The version is set by @datadog/mobile-react-native
 implementation "com.datadoghq:dd-sdk-android-rum"
 implementation "com.datadoghq:dd-sdk-android-logs"
 implementation "com.datadoghq:dd-sdk-android-trace"
@@ -125,14 +125,14 @@ implementation "com.datadoghq:dd-sdk-android-webview"
 
 Inicializa el SDK en el lado nativo. Consulta la documentación oficial de [Android][1] para obtener instrucciones.
 
-[1]: /es/real_user_monitoring/mobile_and_tv_monitoring/setup/android/?tab=kotlin
+[1]: /es/real_user_monitoring/mobile_and_tv_monitoring/android/setup/?tab=kotlin
 
 {{% /tab %}}
 {{% tab "iOS" %}}
 
 Inicializa el SDK en el lado nativo. Consulta la documentación oficial de [iOS][1] para obtener instrucciones.
 
-[1]: /es/real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=cocoapods
+[1]: /es/real_user_monitoring/mobile_and_tv_monitoring/ios/setup/?tab=cocoapods
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -145,10 +145,10 @@ Inicializa el SDK en el lado nativo. Consulta la documentación oficial de [iOS]
 Utiliza un `ComponentPredicate` para filtrar las vistas nativas creadas por tus bibliotecas de navegación:
 
 ```kotlin
-// Adapta el tipo de fragmento a tu estrategia de seguimiento de la vista
+// Adapt the Fragment type to your View tracking strategy
 class RNComponentPredicate : ComponentPredicate<Fragment> {
     override fun accept(component: Fragment): Boolean {
-        // Identica y suelta las vistas de pantalla de React Native
+        // Identify and drop react native screen views
         if (component.javaClass.name.startsWith("com.swmansion.rnscreens")) {
             return false
         }
@@ -163,7 +163,7 @@ class RNComponentPredicate : ComponentPredicate<Fragment> {
     }
 }
 
-// Utilízala en tu configuración RUM
+// Use it in your RUM configuration
 rumConfiguration.useViewTrackingStrategy(FragmentViewTrackingStrategy(true, RNComponentPredicate()))
 ```
 A continuación, utiliza `@datadog/mobile-react-navigation` para realizar un rastreo de tus vistas.
@@ -181,7 +181,7 @@ class RNHybridPredicate: UIKitRUMViewsPredicate {
 
     func rumView(for viewController: UIViewController) -> RUMView? {
         let canonicalClassName = NSStringFromClass(type(of: viewController))
-        // Suelta las vistas de RN
+        // Dropping RN Views
         if (canonicalClassName.starts(with: "RN")) {
             return nil
         }
@@ -190,7 +190,7 @@ class RNHybridPredicate: UIKitRUMViewsPredicate {
     }
 }
 
-// Utilízala en tu configuración RUM
+// Use it in your RUM configuration
 let rumConfiguration = RUM.Configuration(
     applicationID: applicationId,
     uiKitViewsPredicate: RNHybridPredicate(),
@@ -248,7 +248,7 @@ class RNActionEventMapper : EventMapper<ActionEvent> {
     }
 }
 
-// Utilízala en tu configuración RUM
+// Use it in your RUM configuration
 rumConfiguration.setActionEventMapper(RNActionEventMapper())
 ```
 
@@ -270,7 +270,7 @@ val config = RumConfiguration.Builder(applicationId = appId)
             if (event.context?.additionalProperties?.containsKey("_dd.resource.drop_resource") == true) {
                 return null
             }
-            // Puedes añadir tu lógica del asignador de eventos personalizada aquí
+            // You can add your custom event mapper logic here
             return event
         }
     })
@@ -279,7 +279,7 @@ val config = RumConfiguration.Builder(applicationId = appId)
             if (event.context?.additionalProperties?.containsKey("_dd.action.drop_action") == true) {
                 return null
             }
-            // Puedes añadir tu lógica del asignador de eventos personalizada aquí
+            // You can add your custom event mapper logic here
             return event
         }
     })
@@ -295,14 +295,14 @@ RUM.Configuration(
         if resourceEvent.context?.contextInfo["_dd.resource.drop_resource"] != nil {
             return nil
         }
-        // Puedes añadir tu lógica del asignador de eventos personalizada aquí
+        // You can add your custom event mapper logic here
         return resourceEvent
     },
     actionEventMapper: { actionEvent in
         if actionEvent.context?.contextInfo["_dd.resource.drop_action"] != nil {
             return nil
         }
-        // Puedes añadir tu lógica del asignador de eventos personalizada aquí
+        // You can add your custom event mapper logic here
         return resourceEvent
     }
 )
@@ -315,6 +315,6 @@ RUM.Configuration(
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative/
-[2]: /es/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios/?tab=swift#custom-views
-[3]: /es/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#custom-views
+[1]: /es/real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/
+[2]: /es/real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration/?tab=swift#custom-views
+[3]: /es/real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tab=kotlin#custom-views

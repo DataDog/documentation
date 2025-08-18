@@ -117,7 +117,7 @@ Esta integración no almacena ni procesa ninguna información de pago confidenci
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "iocs_dp2i" >}}
+{{< get-metrics-from-git "iocs-dp2i" >}}
 
 ### Eventos
 

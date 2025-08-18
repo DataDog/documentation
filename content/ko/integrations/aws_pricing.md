@@ -96,7 +96,7 @@ Agent v7.21+ / v6.21+의 경우 아래 지침에 따라 호스트에 AWS Pricing
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "aws_pricing" >}}
+{{< get-metrics-from-git "aws-pricing" >}}
 
 
 ### 이벤트
@@ -104,7 +104,7 @@ Agent v7.21+ / v6.21+의 경우 아래 지침에 따라 호스트에 AWS Pricing
 AWS Pricing은 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "aws_pricing" >}}
+{{< get-service-checks-from-git "aws-pricing" >}}
 
 
 ## 트러블슈팅

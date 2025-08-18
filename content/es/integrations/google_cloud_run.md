@@ -130,7 +130,7 @@ Para obtener más información sobre las instrucciones de configuración especia
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "google_cloud_run" >}}
+{{< get-metrics-from-git "google-cloud-run" >}}
 
 
 ### Eventos

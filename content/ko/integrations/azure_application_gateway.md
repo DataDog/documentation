@@ -66,7 +66,7 @@ Datadog Azure 통합을 사용해 Azure Application Gateway 메트릭을 수집�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_application_gateway" >}}
+{{ get-metrics-from-git "azure-applicationgateway" }}
 
 
 ### 이벤트

@@ -148,10 +148,17 @@ Notes:
 {{% tab "Databricks" %}}
 
 1. Navigate to the [Databricks integration tile][101] in Datadog and click **Configure**.
-2. Enter the workspace name, url, and access token corresponding to your Databricks account.
+2. Enter the workspace name, url, client ID, and client secret corresponding to your Databricks service principal.
 3. Under the **Select products to set up integration** section, click the toggle for each account to enable Databricks `Cloud Cost Management`.
 4. Enter a `System Tables SQL Warehouse ID` corresponding to your Databricks instance's warehouse to query for system table billing data.
 5. Click **Save Databricks Workspace**.
+
+Your service principal requires read access to the [system tables](https://docs.databricks.com/aws/en/admin/system-tables/) within Unity Catalog.
+```sql
+GRANT USE CATALOG ON CATALOG system TO <service_principal>;
+GRANT USE SCHEMA ON CATALOG system TO <service_principal>;
+GRANT SELECT ON CATALOG system TO <service_principal>;
+```
 
 Your Databricks cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
@@ -290,70 +297,242 @@ You can view cost data on the [**Cloud Cost Explorer** page][3], the [Cloud Cost
 The following table contains a non-exhaustive list of out-of-the-box tags associated with each SaaS Cost integration.
 
 {{< tabs >}}
-{{% tab "Snowflake" %}}
+{{% tab "Snowflake" %}} 
 
-| Tag Name | Tag Description |
-|---|---|
-| `account_locator` | Locator for the account where the usage was consumed. |
-| `account_name` | Name of the account where the usage was consumed. |
-| `balance_source` | Source of the funds used to pay for the daily usage. The source can be one of the following:<br>- **capacity**: Usage paid with credits remaining on an organization's capacity commitment.<br>- **rollover**: Usage paid with rollover credits. When an organization renews a capacity commitment, unused credits are added to the balance of the new contract as rollover credits.<br>- **free usage**: Usage covered by the free credits provided to the organization.<br>- **overage**: Usage that was paid at on-demand pricing, which occurs when an organization has exhausted its capacity, rollover, and free credits.<br>- **rebate**: Usage covered by the credits awarded to the organization when it shared data with another organization. |
-| `billing_type` | Indicates what is being charged or credited. Possible billing types include:<br>- **consumption**: Usage associated with compute credits, storage costs, and data transfer costs.<br>- **rebate**: Usage covered by the credits awarded to the organization when it shared data with another organization.<br>- **priority support**: Charges for priority support services. This charge is associated with a stipulation in a contract, not with an account.<br>- **vps_deployment_fee**: Charges for a Virtual Private Snowflake deployment.<br>- **support_credit**: Snowflake Support credited the account to reverse charges attributed to an issue in Snowflake. |
-| `charge_description` | A description of the cost type associated with distinct line items. Descriptions differ for each cost type, represented by the `servicename` tag. |
-| `contract_number` | Snowflake contract number for the organization. |
-| `database_name` | Name of the database in which the query was executed (if applicable). Only found for **query attribution** costs. |
-| `organization_name` | Name of the organization. |
-| `query_hash` | Unique hash representing a parameterized version of the query for attribution purposes. Only found for **query attribution** costs. |
-| `query_hash_version` | Version of the Snowflake query hash algorithm used to generate `query_hash`. Only found for **query attribution** costs. |
-| `rating_type` | Indicates how the usage in the record is rated, or priced. Possible values include:<br>- **compute**<br>- **data_transfer**<br>- **storage**<br>- **Other** |
-| `region` | Name of the region where the account is located. |
-| `service_level` | Service level (edition) of the Snowflake account (Standard, Enterprise, or Business Critical). |
-| `servicename` | Type of usage. Possible service types include:<br>- **automatic_clustering**: Refer to Automatic Clustering.<br>- **data_transfer**: Refer to Understanding data transfer cost.<br>- **logging**: Refer to Logging and Tracing Overview.<br>- **materialized_view**: Refer to Working with Materialized Views.<br>- **replication**: Refer to Introduction to replication and failover across multiple accounts.<br>- **query_acceleration**: Refer to Using the Query Acceleration Service.<br>- **search_optimization**: Refer to Search Optimization Service.<br>- **serverless_task**: Refer to Introduction to tasks.<br>- **snowpipe**: Refer to Snowpipe.<br>- **snowpipe_streaming**: Refer to Snowpipe Streaming.<br>- **storage**: Refer to Understanding storage cost.<br>- **warehouse_metering_query_attribution**: Refer to Virtual warehouse credit usage of queries with an execution time of 100ms or greater. Does not indicate usage of serverless or cloud services compute.<br-> **warehouse_metering_query_attribution**: Refer to Virtual warehouse credit usage of queries with execution time of 100ms or less, as well as idle warehouse time. Does not indicate usage of serverless or cloud services compute. |
-| `user_name` | Name of the user or service account associated with the query. |
-| `warehouse_id` | Identifier for the warehouse generating the cost. |
-| `warehouse_name` | Name of the warehouse associated with this usage. |
-| `warehouse_size` | Size of the warehouse (for example, Large, Medium). |
+<table>
+  <thead>
+    <tr>
+      <th style="width: 200px;">Tag Name</th>
+      <th>Tag Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>account_locator</code></td>
+      <td>Locator for the account where the usage was consumed.</td>
+    </tr>
+    <tr>
+      <td><code>account_name</code></td>
+      <td>Name of the account where the usage was consumed.</td>
+    </tr>
+    <tr>
+      <td><code>balance_source</code></td>
+      <td>Source of the funds used to pay for the daily usage. The source can be one of the following:<br>- <b>capacity</b>: Usage paid with credits remaining on an organization's capacity commitment.<br>- <b>rollover</b>: Usage paid with rollover credits. When an organization renews a capacity commitment, unused credits are added to the balance of the new contract as rollover credits.<br>- <b>free usage</b>: Usage covered by the free credits provided to the organization.<br>- <b>overage</b>: Usage that was paid at on-demand pricing, which occurs when an organization has exhausted its capacity, rollover, and free credits.<br>- <b>rebate</b>: Usage covered by the credits awarded to the organization when it shared data with another organization.</td>
+    </tr>
+    <tr>
+      <td><code>billing_type</code></td>
+      <td>Indicates what is being charged or credited. Possible billing types include:<br>- <b>consumption</b>: Usage associated with compute credits, storage costs, and data transfer costs.<br>- <b>rebate</b>: Usage covered by the credits awarded to the organization when it shared data with another organization.<br>- <b>priority support</b>: Charges for priority support services. This charge is associated with a stipulation in a contract, not with an account.<br>- <b>vps_deployment_fee</b>: Charges for a Virtual Private Snowflake deployment.<br>- <b>support_credit</b>: Snowflake Support credited the account to reverse charges attributed to an issue in Snowflake.</td>
+    </tr>
+    <tr>
+      <td><code>charge_description</code></td>
+      <td>A description of the cost type associated with distinct line items. Descriptions differ for each cost type, represented by the <code>servicename</code> tag.</td>
+    </tr>
+    <tr>
+      <td><code>contract_number</code></td>
+      <td>Snowflake contract number for the organization.</td>
+    </tr>
+    <tr>
+      <td><code>database_name</code></td>
+      <td>Name of the database in which the query was executed (if applicable). Only found for <b>query attribution</b> costs.</td>
+    </tr>
+    <tr>
+      <td><code>organization_name</code></td>
+      <td>Name of the organization.</td>
+    </tr>
+    <tr>
+      <td><code>query_hash</code></td>
+      <td>Unique hash representing a parameterized version of the query for attribution purposes. Only found for <b>query attribution</b> costs.</td>
+    </tr>
+    <tr>
+      <td><code>query_hash_version</code></td>
+      <td>Version of the Snowflake query hash algorithm used to generate <code>query_hash</code>. Only found for <b>query attribution</b> costs.</td>
+    </tr>
+    <tr>
+      <td><code>rating_type</code></td>
+      <td>Indicates how the usage in the record is rated, or priced. Possible values include:<br>- <b>compute</b><br>- <b>data_transfer</b><br>- <b>storage</b><br>- <b>Other</b></td>
+    </tr>
+    <tr>
+      <td><code>region</code></td>
+      <td>Name of the region where the account is located.</td>
+    </tr>
+    <tr>
+      <td><code>service_level</code></td>
+      <td>Service level (edition) of the Snowflake account (Standard, Enterprise, or Business Critical).</td>
+    </tr>
+    <tr>
+      <td><code>servicename</code></td>
+      <td>Type of usage. Possible service types include:<br>- <b>automatic_clustering</b>: Refer to Automatic Clustering.<br>- <b>data_transfer</b>: Refer to Understanding data transfer cost.<br>- <b>logging</b>: Refer to Logging and Tracing Overview.<br>- <b>materialized_view</b>: Refer to Working with Materialized Views.<br>- <b>replication</b>: Refer to Introduction to replication and failover across multiple accounts.<br>- <b>query_acceleration</b>: Refer to Using the Query Acceleration Service.<br>- <b>search_optimization</b>: Refer to Search Optimization Service.<br>- <b>serverless_task</b>: Refer to Introduction to tasks.<br>- <b>snowpipe</b>: Refer to Snowpipe.<br>- <b>snowpipe_streaming</b>: Refer to Snowpipe Streaming.<br>- <b>storage</b>: Refer to Understanding storage cost.<br>- <b>warehouse_metering_query_attribution</b>: Refer to Virtual warehouse credit usage of queries with an execution time of 100ms or greater. Does not indicate usage of serverless or cloud services compute.<br>- <b>warehouse_metering_query_attribution</b>: Refer to Virtual warehouse credit usage of queries with execution time of 100ms or less, as well as idle warehouse time. Does not indicate usage of serverless or cloud services compute.</td>
+    </tr>
+    <tr>
+      <td><code>user_name</code></td>
+      <td>Name of the user or service account associated with the query.</td>
+    </tr>
+    <tr>
+      <td><code>warehouse_id</code></td>
+      <td>Identifier for the warehouse generating the cost.</td>
+    </tr>
+    <tr>
+      <td><code>warehouse_name</code></td>
+      <td>Name of the warehouse associated with this usage.</td>
+    </tr>
+    <tr>
+      <td><code>warehouse_size</code></td>
+      <td>Size of the warehouse (for example, Large, Medium).</td>
+    </tr>
+  </tbody>
+</table>
 
 {{% /tab %}}
 {{% tab "Databricks" %}}
 
 **Note**: The Databricks cost integration calculates costs using list prices and usage data. It does not reflect any negotiated or discounted rates.
 
-| Tag Name | Tag Description |
-|---|---
-| `account_id` | ID of the account this report was generated for. |
-| `billing_origin_product` | Product or feature originating the billing event (for example, JOBS, CLUSTERS). |
-| `central_clean_room_id` | ID of the central clean room associated with the workload (if applicable). |
-| `charge_description` | A combination of the cloud type and name of the associated SKU (for example, AWS - PREMIUM_ALL_PURPOSE_COMPUTE). |
-| `cloud` | Cloud this usage is relevant for. Possible values are AWS, AZURE, and GCP. |
-| `cluster_id` | ID of the cluster associated with this usage. |
-| `custom_tags` | Custom tags applied to the usage, usually as key-value pairs for additional metadata or categorization. |
-| `destination_region` | Region where the workload is directed (if applicable). |
-| `dlt_maintenance_id` | Maintenance ID for Delta Live Tables (if applicable). |
-| `dlt_pipeline_id` | ID of the Delta Live Tables pipeline (if applicable). |
-| `dlt_tier` | Tier of Delta Live Tables service (if applicable). |
-| `dlt_update_id` | Delta Live Table update ID associated with this usage (if applicable). |
-| `endpoint_id` | ID of the endpoint for SQL-based or serving-related usage (if applicable). |
-| `endpoint_name` | Name of the SQL or serving endpoint (if applicable). |
-| `instance_pool_id` | ID of the instance pool used (if applicable). |
-| `is_photon` | Indicates whether Photon processing was used (`true` or `false`). |
-| `is_serverless` | Indicates if the usage pertains to a serverless compute resource (`true` or `false`). |
-| `job_id` | Unique identifier for the job in Databricks. |
-| `job_name` | Name of the job in Databricks (if applicable). |
-| `job_run_id` | Identifier for the specific job run (if applicable). |
-| `jobs_tier` | Tier of the job, such as `CLASSIC` or `PREMIUM`. |
-| `networking` | Type of networking used for this job, if specified. |
-| `node_type` | Type of node used in this billing record (for example, m5d.large). |
-| `notebook_id` | ID of the notebook used in this billing record (if applicable). |
-| `notebook_path` | Path to the notebook in Databricks (if applicable). |
-| `record_id` | Unique ID for this record. |
-| `run_name` | Name of the current job or workflow run (if applicable). |
-| `serving_type` | Type of serving model used, if applicable (for example, Model Serving). |
-| `source_region` | Originating region for this billing record (if applicable). |
-| `sql_tier` | SQL tier associated with the usage (if applicable). |
-| `usage_metadata` | Metadata related to the usage, which might include details like usage type, service category, or other relevant information. |
-| `usage_type` | Type of usage being billed (for example, COMPUTE_TIME). |
-| `warehouse_id` | ID of the SQL warehouse (if applicable). |
-| `workspace_id` | ID of the Workspace this usage was associated with. |
+<table>
+  <thead>
+    <tr>
+      <th style="width: 220px;">Tag Name</th>
+      <th>Tag Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>account_id</code></td>
+      <td>ID of the account this report was generated for.</td>
+    </tr>
+    <tr>
+      <td><code>billing_origin_product</code></td>
+      <td>Product or feature originating the billing event (for example, JOBS, CLUSTERS).</td>
+    </tr>
+    <tr>
+      <td><code>central_clean_room_id</code></td>
+      <td>ID of the central clean room associated with the workload (if applicable).</td>
+    </tr>
+    <tr>
+      <td><code>charge_description</code></td>
+      <td>A combination of the cloud type and name of the associated SKU (for example, AWS - PREMIUM_ALL_PURPOSE_COMPUTE).</td>
+    </tr>
+    <tr>
+      <td><code>cloud</code></td>
+      <td>Cloud this usage is relevant for. Possible values are AWS, AZURE, and GCP.</td>
+    </tr>
+    <tr>
+      <td><code>cluster_id</code></td>
+      <td>ID of the cluster associated with this usage.</td>
+    </tr>
+    <tr>
+      <td><code>custom_tags</code></td>
+      <td>Custom tags applied to the usage, usually as key-value pairs for additional metadata or categorization.</td>
+    </tr>
+    <tr>
+      <td><code>destination_region</code></td>
+      <td>Region where the workload is directed (if applicable).</td>
+    </tr>
+    <tr>
+      <td><code>dlt_maintenance_id</code></td>
+      <td>Maintenance ID for Delta Live Tables (if applicable).</td>
+    </tr>
+    <tr>
+      <td><code>dlt_pipeline_id</code></td>
+      <td>ID of the Delta Live Tables pipeline (if applicable).</td>
+    </tr>
+    <tr>
+      <td><code>dlt_tier</code></td>
+      <td>Tier of Delta Live Tables service (if applicable).</td>
+    </tr>
+    <tr>
+      <td><code>dlt_update_id</code></td>
+      <td>Delta Live Table update ID associated with this usage (if applicable).</td>
+    </tr>
+    <tr>
+      <td><code>endpoint_id</code></td>
+      <td>ID of the endpoint for SQL-based or serving-related usage (if applicable).</td>
+    </tr>
+    <tr>
+      <td><code>endpoint_name</code></td>
+      <td>Name of the SQL or serving endpoint (if applicable).</td>
+    </tr>
+    <tr>
+      <td><code>instance_pool_id</code></td>
+      <td>ID of the instance pool used (if applicable).</td>
+    </tr>
+    <tr>
+      <td><code>is_photon</code></td>
+      <td>Indicates whether Photon processing was used (<code>true</code> or <code>false</code>).</td>
+    </tr>
+    <tr>
+      <td><code>is_serverless</code></td>
+      <td>Indicates if the usage pertains to a serverless compute resource (<code>true</code> or <code>false</code>).</td>
+    </tr>
+    <tr>
+      <td><code>job_id</code></td>
+      <td>Unique identifier for the job in Databricks.</td>
+    </tr>
+    <tr>
+      <td><code>job_name</code></td>
+      <td>Name of the job in Databricks (if applicable).</td>
+    </tr>
+    <tr>
+      <td><code>job_run_id</code></td>
+      <td>Identifier for the specific job run (if applicable).</td>
+    </tr>
+    <tr>
+      <td><code>jobs_tier</code></td>
+      <td>Tier of the job, such as <code>CLASSIC</code> or <code>PREMIUM</code>.</td>
+    </tr>
+    <tr>
+      <td><code>networking</code></td>
+      <td>Type of networking used for this job, if specified.</td>
+    </tr>
+    <tr>
+      <td><code>node_type</code></td>
+      <td>Type of node used in this billing record (for example, m5d.large).</td>
+    </tr>
+    <tr>
+      <td><code>notebook_id</code></td>
+      <td>ID of the notebook used in this billing record (if applicable).</td>
+    </tr>
+    <tr>
+      <td><code>notebook_path</code></td>
+      <td>Path to the notebook in Databricks (if applicable).</td>
+    </tr>
+    <tr>
+      <td><code>record_id</code></td>
+      <td>Unique ID for this record.</td>
+    </tr>
+    <tr>
+      <td><code>run_name</code></td>
+      <td>Name of the current job or workflow run (if applicable).</td>
+    </tr>
+    <tr>
+      <td><code>serving_type</code></td>
+      <td>Type of serving model used, if applicable (for example, Model Serving).</td>
+    </tr>
+    <tr>
+      <td><code>source_region</code></td>
+      <td>Originating region for this billing record (if applicable).</td>
+    </tr>
+    <tr>
+      <td><code>sql_tier</code></td>
+      <td>SQL tier associated with the usage (if applicable).</td>
+    </tr>
+    <tr>
+      <td><code>usage_metadata</code></td>
+      <td>Metadata related to the usage, which might include details like usage type, service category, or other relevant information.</td>
+    </tr>
+    <tr>
+      <td><code>usage_type</code></td>
+      <td>Type of usage being billed (for example, COMPUTE_TIME).</td>
+    </tr>
+    <tr>
+      <td><code>warehouse_id</code></td>
+      <td>ID of the SQL warehouse (if applicable).</td>
+    </tr>
+    <tr>
+      <td><code>workspace_id</code></td>
+      <td>ID of the Workspace this usage was associated with.</td>
+    </tr>
+  </tbody>
+</table>
 
 {{% /tab %}}
 
@@ -387,14 +566,40 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 
 {{% tab "Confluent Cloud" %}}
 
-| Tag Name | Tag Description |
-|---|---
-| `charge_description` | The subtype of the cost (for example, KAFKA_NETWORK_WRITE). |
-| `environment_id` | The unique identifier for the environment. |
-| `network_access_type` | Network access type for the cluster. Possible values are `INTERNET`, `TRANSIT_GATEWAY`, `PRIVATE_LINK`, and `PEERED_VPC`. |
-| `product` | Product name. Possible values include `KAFKA`, `CONNECT`, `KSQL`, `AUDIT_LOG`, `STREAM_GOVERNANCE`, `CLUSTER_LINK`, `CUSTOM_CONNECT`, `FLINK`, `SUPPORT_CLOUD_BASIC`, `SUPPORT_CLOUD_DEVELOPER`, `SUPPORT_CLOUD_BUSINESS`, and `SUPPORT_CLOUD_PREMIER`. |
-| `resource_id` | The unique identifier of the Confluent resource. |
-| `resource_name` | The name of the Confluent resource. |
+<table>
+  <thead>
+    <tr>
+      <th style="width: 200px;">Tag Name</th>
+      <th>Tag Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>charge_description</code></td>
+      <td>The subtype of the cost (for example, KAFKA_NETWORK_WRITE).</td>
+    </tr>
+    <tr>
+      <td><code>environment_id</code></td>
+      <td>The unique identifier for the environment.</td>
+    </tr>
+    <tr>
+      <td><code>network_access_type</code></td>
+      <td>Network access type for the cluster. Possible values are <code>INTERNET</code>, <code>TRANSIT_GATEWAY</code>, <code>PRIVATE_LINK</code>, and <code>PEERED_VPC</code>.</td>
+    </tr>
+    <tr>
+      <td><code>product</code></td>
+      <td>Product name. Possible values include <code>KAFKA</code>, <code>CONNECT</code>, <code>KSQL</code>, <code>AUDIT_LOG</code>, <code>STREAM_GOVERNANCE</code>, <code>CLUSTER_LINK</code>, <code>CUSTOM_CONNECT</code>, <code>FLINK</code>, <code>SUPPORT_CLOUD_BASIC</code>, <code>SUPPORT_CLOUD_DEVELOPER</code>, <code>SUPPORT_CLOUD_BUSINESS</code>, and <code>SUPPORT_CLOUD_PREMIER</code>.</td>
+    </tr>
+    <tr>
+      <td><code>resource_id</code></td>
+      <td>The unique identifier of the Confluent resource.</td>
+    </tr>
+    <tr>
+      <td><code>resource_name</code></td>
+      <td>The name of the Confluent resource.</td>
+    </tr>
+  </tbody>
+</table>
 
 {{% /tab %}}
 
@@ -424,29 +629,90 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 
 {{% tab "Fastly" %}}
 
-| Tag Name | Tag Description |
-|---|---|
-| `charge_description` | The description of the charge. |
-| `credit_coupon_code` | Code of any coupon or credit applied to this cost entry (if available). |
-| `plan_name` | Name of the plan under which this service falls, often matching "product_line". |
-| `product_name` | Name of the specific product being billed (for example, "North America Bandwidth"). |
-| `product_group` | Group or category of the product, such as "Full Site Delivery". |
-| `product_line` | Line of products to which this item belongs, for example, "Network Services". |
-| `region` | Region where the service usage occurred (for example, "North America"). |
-| `service_name` | Name of the service associated with this cost entry, often matching the `product_name`. |
-| `usage_type` | Type of usage being billed (for example, "Bandwidth"). |
-| `usage_type_cd` | Code or label representing the type of usage, such as "North America Bandwidth". |
+<table>
+  <thead>
+    <tr>
+      <th style="width: 200px;">Tag Name</th>
+      <th>Tag Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>charge_description</code></td>
+      <td>The description of the charge.</td>
+    </tr>
+    <tr>
+      <td><code>credit_coupon_code</code></td>
+      <td>Code of any coupon or credit applied to this cost entry (if available).</td>
+    </tr>
+    <tr>
+      <td><code>plan_name</code></td>
+      <td>Name of the plan under which this service falls, often matching "product_line".</td>
+    </tr>
+    <tr>
+      <td><code>product_name</code></td>
+      <td>Name of the specific product being billed (for example, "North America Bandwidth").</td>
+    </tr>
+    <tr>
+      <td><code>product_group</code></td>
+      <td>Group or category of the product, such as "Full Site Delivery".</td>
+    </tr>
+    <tr>
+      <td><code>product_line</code></td>
+      <td>Line of products to which this item belongs, for example, "Network Services".</td>
+    </tr>
+    <tr>
+      <td><code>region</code></td>
+      <td>Region where the service usage occurred (for example, "North America").</td>
+    </tr>
+    <tr>
+      <td><code>service_name</code></td>
+      <td>Name of the service associated with this cost entry, often matching the <code>product_name</code>.</td>
+    </tr>
+    <tr>
+      <td><code>usage_type</code></td>
+      <td>Type of usage being billed (for example, "Bandwidth").</td>
+    </tr>
+    <tr>
+      <td><code>usage_type_cd</code></td>
+      <td>Code or label representing the type of usage, such as "North America Bandwidth".</td>
+    </tr>
+  </tbody>
+</table>
 
 {{% /tab %}}
 {{% tab "Twilio" %}}
 
-| Tag Name | Tag Description |
-|---|---|
-| `account_sid` | Alphanumeric string identifying the Twilio account. |
-| `category` | The category of usage. For more information, see [Usage Categories][101]. |
-| `charge_description` | The description of the charge. |
-| `count_unit` | The units in which count is measured, such as calls for calls or messages for SMS. |
-| `usage_unit` | The units in which usage is measured, such as minutes for calls or messages for SMS. |
+<table>
+  <thead>
+    <tr>
+      <th style="width: 200px;">Tag Name</th>
+      <th>Tag Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>account_sid</code></td>
+      <td>Alphanumeric string identifying the Twilio account.</td>
+    </tr>
+    <tr>
+      <td><code>category</code></td>
+      <td>The category of usage. For more information, see <a href="https://www.twilio.com/docs/usage/api/usage-record#usage-categories" target="_blank">Usage Categories</a>.</td>
+    </tr>
+    <tr>
+      <td><code>charge_description</code></td>
+      <td>The description of the charge.</td>
+    </tr>
+    <tr>
+      <td><code>count_unit</code></td>
+      <td>The units in which count is measured, such as calls for calls or messages for SMS.</td>
+    </tr>
+    <tr>
+      <td><code>usage_unit</code></td>
+      <td>The units in which usage is measured, such as minutes for calls or messages for SMS.</td>
+    </tr>
+  </tbody>
+</table>
 
 [101]: https://www.twilio.com/docs/usage/api/usage-record#usage-categories
 

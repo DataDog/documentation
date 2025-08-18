@@ -41,7 +41,7 @@ draft: falso
 git_integration_title: cisco_aci
 integration_id: cisco-aci
 integration_title: CiscoACI
-integration_version: 4.6.0
+integration_version: 4.7.0
 is_public: verdadero
 manifest_version: 2.0.0
 name: cisco_aci

@@ -102,7 +102,9 @@ code_language_ids:
     native: Native
     other: Other
     linux: Linux
+    macos: macOS
     windows: Windows
+    aws-fargate: "AWS Fargate"
     opentelemetry: OpenTelemetry
     ddprof: "Rust/C/C++"
     full_host: "Full Host"
@@ -258,15 +260,22 @@ unsupported_sites:
   app_builder: [gov]
   application_security: [gov]
   autocomplete_search: [gov]
-  case_management: [gov,ap1,ap2]
+  bits_ai: [gov]
+  bits_ai_sre: [gov, ap2]
+  case_management: [gov]
   ci_visibility: [gov]
+  code_coverage: [gov]
+  code_security: [gov]
   continuous_delivery: [gov]
   continuous_integration: [gov]
+  correlation: [gov] #Event management correlation
   data_jobs: [gov]
   datadog_cloudcraft: [gov]
   dora_metrics: [gov]
+  dynamic_instrumentation: [gov]
   dynamic_quotas: [gov]
   eng_reports: [gov]
+  events_from_sns_emails: [gov]
   fips-compliance: [us,us3,us5,eu,ap1,ap2]
   fips-integrations: [us,us3,us5,eu,ap1,ap2]
   fips-proxy: [us,us3,us5,eu,ap1,ap2]
@@ -282,6 +291,7 @@ unsupported_sites:
   overview_pages: [gov]
   quality_gates: [gov]
   remote_config: [gov]
+  remote_configuration: [gov]
   resource_catalog: [gov]
   roku_error_tracking: [gov]
   roku_log_collection: [gov]

@@ -5,12 +5,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-apis-with-datadog/"
   tag: "Blog"
   text: "Monitor your workflows with Datadog multistep API tests"
-- link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
-  tag: 'Learning Center'
-  text: 'Introduction to Synthetic Tests'
-- link: "/getting_started/synthetics/api_test"
-  tag: "Documentation"
-  text: "Get started with API tests"
+- link: "/synthetics/guide/version_history/"
+  tag: "Guide"
+  text: "Version History for Synthetic Monitoring"
 - link: "/synthetics/private_locations"
   tag: "Documentation"
   text: "Run Multistep API tests on internal endpoints"
@@ -193,6 +190,22 @@ You can use the [global variables defined in the `Settings`][13] and the [locall
 To display your list of variables, type `{{` in your desired field.
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Using Variables in Multistep API tests" video="true" width="90%" >}}
+
+### Subtests
+
+Multistep API tests support subtests, allowing you to reuse existing Multistep API tests or extract steps into reusable components. You can nest subtests up to two levels deep.
+
+To use an existing Multistep API test as a subtest, click **Subtest**, go to the **From Existing Test** tab, and select a Multistep API test from the dropdown menu.
+
+To convert steps from your current Multistep API test into a subtest, click on the **Extract From Steps** tab, select the recorded steps you want to extract, and click **Convert to Subtest**.
+
+{{< img src="synthetics/multistep_tests/subtest.png" alt="UI for adding a subtest to a Multistep API test" width="60%" >}}
+
+To override a subtest variable in a Multistep API test, define it in the parent test using the same name. A variable always uses the first value assigned to it.
+
+If you don't need to run a subtest independently, you can pause it. It still runs as part of the Multistep API test but is not executed on its own.
+
+**Note:** Only Multistep API tests can be added as subtests. Using [API tests][1] as subtests is not supported.
 
 ## Test failure
 

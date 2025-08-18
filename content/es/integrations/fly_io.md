@@ -128,7 +128,7 @@ El check Fly.io está incluido en el paquete del [Datadog Agent][2]. Recomendamo
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "fly_io" >}}
+{{< get-metrics-from-git "fly-io" >}}
 
 
 ### Eventos

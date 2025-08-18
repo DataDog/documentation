@@ -98,7 +98,7 @@ Esta integración requiere acceso al endpoint de la métrica del Controller Mana
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "kube_controller_manager" >}}
+{{< get-metrics-from-git "kube-controller-manager" >}}
 
 
 ### Eventos
@@ -106,7 +106,7 @@ Esta integración requiere acceso al endpoint de la métrica del Controller Mana
 El check del Kubernetes Controller Manager no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "kube_controller_manager" >}}
+{{< get-service-checks-from-git "kube-controller-manager" >}}
 
 
 ## Solucionar problemas

@@ -75,7 +75,7 @@ Azure DB for PostgreSQL からメトリクスを取得すると、以下のこ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_db_for_postgresql" >}}
+{{< get-metrics-from-git "azure-db-for-postgresql" >}}
 
 
 ### イベント

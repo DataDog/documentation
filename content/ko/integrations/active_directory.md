@@ -91,7 +91,7 @@ Agent의 Active Directory 검사는 [Datadog Agent][1] 패키지에 포함되어
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "active_directory" >}}
+{{< get-metrics-from-git "active-directory" >}}
 
 
 ### 이벤트

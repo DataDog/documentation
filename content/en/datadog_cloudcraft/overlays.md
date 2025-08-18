@@ -73,17 +73,34 @@ The observability overlay tracks coverage for the following products:
 
 The security overlay highlights potential security exposures in your architecture, grouping resources by Region, VPC, and Security Group. It displays security findings detected by Cloud Security, helping you:
 
-- Identify security issues directly in infrastructure diagrams.
-- Analyze misconfigurations and identity risks in context, so you can prioritize remediation.
-- Assess your security posture before deploying applications.
-
-You can click on any resource with findings to open a side panel with more details, allowing deeper investigation without leaving the diagram.
+- Identify security issues directly in infrastructure diagrams
+- Analyze findings in context, so you can prioritize remediation:
+  - Misconfigurations
+  - Identity risks
+  - Sensitive data (S3 buckets only)
+- Assess your security posture before deploying applications
 
 This view is ideal for mapping attack surfaces during penetration tests or security audits. To keep the diagram focused, components like EBS volumes and NAT Gateways are excluded. 
 
-By default, the security overlay shows Critical, High, and Medium severity misconfigurations or identity risks, which you can filter at the bottom of the screen.
+#### Investigate misconfigurations and identity risks
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_security_overlay_with_ccm_2.png" alt="Security overlay in Cloudcraft, highlighting the collapsible legend and the bottom left hand side of the screen, and the Investigate button on the side panel." style="width:100%;" >}}
+By default, the security overlay shows Critical, High, and Medium severity misconfigurations or identity risks, which you can filter in the legend.
+
+You can click on any resource that has findings to open a side panel with more details, allowing deeper investigation without leaving the diagram. Click **Investigate** to get more context about the finding and learn how to remediate it.
+
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_security_overlay_misconfigurations.png" alt="Security overlay in Cloudcraft with the misconfigurations filter applied, highlighting the collapsible legend in the bottom left of the screen, and the Investigate button on the side panel." style="width:100%;" >}}
+
+#### Investigate sensitive data
+
+You can view sensitive data matches for your S3 buckets. Click a resource with matches to learn more about the bucket's sensitive data matches. Then, hover over a filename and click its **Inspect in AWS** button.
+
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_security_overlay_sensitive_data.png" alt="Security overlay in Cloudcraft with the sensitive data filter applied, highlighting the collapsible legend in the bottom left of the screen, and the Inspect in AWS button on the side panel." style="width:100%;" >}}
+
+#### Investigate vulnerabilities
+
+View security vulnerability matches associated with your EC2 instances. Click a resource that has a matching vulnerability. This opens a side panel which provides detailed vulnerability data for a selected EC2 instance, including severity, affected packages, and exploit status. For deeper analysis, click **Investigate** to get more context about the vulnerability and learn how to remediate it.
+
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_security_vuln.png" alt="Security overlay in Cloudcraft with the vulnerabilities filter applied, highlighting the collapsible legend in the bottom left of the screen, and the Investigate button on the side panel." style="width:100%;" >}}
 
 ### Cloud Cost Management 
 

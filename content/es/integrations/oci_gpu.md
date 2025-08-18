@@ -93,7 +93,7 @@ Después de configurar la integración [Oracle Cloud Infrastructure][3], comprue
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "oci_gpu" >}}
+{{< get-metrics-from-git "oci-gpu" >}}
 
 
 ### Checks de servicios

@@ -27,7 +27,7 @@ custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/traefik/README.md
 display_on_public_website: true
-draft: false
+draft: true
 git_integration_title: traefik
 integration_id: traefik
 integration_title: Traefik
@@ -149,11 +149,11 @@ Por defecto, [los logs de Traefik][5] se envían a stdout. Esto no debe cambiars
 
 #### Acerca de v1
 
-Consulta la [documentación de Traefik][1] para obtener información sobre v1. Para obtener información sobre los cambios de v1 a v2, consulta la [guía de migración de Traefik][2]. 
+Consulta la [documentación de Traefik][1] para obtener información sobre v1. Para obtener información sobre los cambios de v1 a v2, consulta la [guía de migración de Traefik][2].
 
 #### Recopilación de métricas
 
-1. Para recopilar [métricas][2] de Traefik, abre el archivo `traefik.d/conf.yaml` en la carpeta `conf.d/` en la raíz de tu [directorio de configuración del Agent][3]. 
+1. Para recopilar [métricas][2] de Traefik, abre el archivo `traefik.d/conf.yaml` en la carpeta `conf.d/` en la raíz de tu [directorio de configuración del Agent][3].
 
 2. Añade esta configuración a tu archivo `traefik.d/conf.yaml` para empezar a recopilar tus [métricas][2]:
 

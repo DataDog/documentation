@@ -105,7 +105,7 @@ OceanBase Cloud クラスター用に Datadog integration を設定するには�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "oceanbasecloud" >}}
+{{< get-metrics-from-git "oceanbase-cloud" >}}
 
 
 ### サービス チェック

@@ -55,7 +55,7 @@ Pour obtenir des instructions détaillées, consultez la [documentation principa
 ## Real User Monitoring
 
 ### Analyse d'entonnoirs
-{{< get-metrics-from-git "azure_event_hub" >}}
+{{< get-metrics-from-git "azure-event-hub" >}}
 
 
 ### Aide

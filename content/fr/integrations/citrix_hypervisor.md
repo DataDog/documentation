@@ -97,7 +97,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "citrix_hypervisor" >}}
+{{< get-metrics-from-git "citrix-hypervisor" >}}
 
 
 ### Événements
@@ -105,7 +105,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 L'intégration Citrix Hypervisor n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "citrix_hypervisor" >}}
+{{< get-service-checks-from-git "citrix-hypervisor" >}}
 
 
 ## Dépannage

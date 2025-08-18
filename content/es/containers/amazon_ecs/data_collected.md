@@ -20,7 +20,7 @@ title: Recopilación de datos de Amazon ECS
 
 Amazon ECS en EC2 es un servicio de gestión de contenedores para contenedores de Docker que se ejecutan en instancias EC2. Las métricas recopiladas por el Agent para Amazon ECS son:
 
-{{< get-metrics-from-git "amazon_ecs" >}}
+{{< get-metrics-from-git "amazon-ecs" >}}
 
 Las métricas recopiladas por el Agent cuando se despliegan en un contenedor de Docker también incluyen las mismas métricas recopiladas por la integración con Docker. Consulta las [métricas de integración con Docker][1] para obtener una lista completa de métricas.
 

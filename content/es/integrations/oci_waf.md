@@ -80,7 +80,7 @@ Después de configurar la integración de [Oracle Cloud Infrastructure][2], comp
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "oci_waf" >}}
+{{< get-metrics-from-git "oci-waf" >}}
 
 
 ### Checks de servicios

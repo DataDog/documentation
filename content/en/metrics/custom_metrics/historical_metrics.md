@@ -39,7 +39,7 @@ With Historical Metrics Ingestion enabled, if you submit multiple values with th
 
 You can start ingesting historical metric values by enabling Historical Metrics Ingestion on the [Metrics Summary Page][1] for *counts, rates, and gauges* metric types.  
 
-**Note**: Historical Metrics Ingestion is not available for distribution metrics.
+**Note**: Historical Metrics Ingestion is not available for distribution metrics, or custom metrics generated from other Datadog data types (such as logs).
 
 ## Configuration
 
@@ -455,10 +455,12 @@ Historical Metrics are counted and billed as indexed custom metrics. Billable cu
 
 The following example assumes:
 - 3000 unique tag-value combinations
+- 1500 real-time metrics
+- 1500 historical metrics 
 - 720 hours in the month (30 days)
 - Custom metric cost of $5 per 100 metrics
 
-$(3000 / 720) ⋅ (5 / 100) = \\$0.21$
+$(1500/ 720) ⋅ (5 / 100) + $(1500/ 720) ⋅ (5 / 100) = \\$0.21$
 
 Track your indexed historical metrics through the Usage Summary section of the [Plan and Usage page][4].
 

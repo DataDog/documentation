@@ -105,7 +105,7 @@ AWS App Runner에서는 서비스와 작동 상태 변경 이벤트를 EventBrid
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_app_runner" >}}
+{{< get-metrics-from-git "amazon-app-runner" >}}
 
 
 ### 이벤트

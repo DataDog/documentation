@@ -71,7 +71,7 @@ Azure Blob Storage は、Microsoft のクラウド用オブジェクトストレ
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_blob_storage" >}}
+{{< get-metrics-from-git "azure-blob-storage" >}}
 
 
 ### イベント

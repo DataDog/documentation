@@ -73,12 +73,21 @@ Monitorización de base de datos de Datadog recopila métricas por consulta para
 
 Las muestras de consultas no tienen límites en cuanto al número de consultas únicas normalizadas rastreadas, pero el muestreo está sesgado hacia las consultas que son lentas o frecuentes. Es posible que se seleccione una muestra de consultas, pero que no tenga ninguna métrica de consulta asociada. Este es el caso cuando la consulta fue lenta o frecuente durante un breve periodo de tiempo, pero no se mantuvo lo suficiente como para convertirse en una consulta principal.
 
+## Periodos de retención de consultas
+
+Datadog retiene datos de consulta de Database Monitoring en función del tipo de datos recopilados:
+
+- Las métricas de consulta se conservan durante 15 meses.
+- Las muestras de consulta se conservan durante 15 días.
+
+Para más información, consulta [Periodos de retención de datos][5].
+
 ## Otras consultas
 
 _Otras consultas_ representa métricas de todas las consultas que no aparecen entre las 200 principales. Dado que una consulta puede ser una de las principales en algunos periodos de tiempo, pero no en otros, las métricas de una consulta concreta pueden contabilizarse a veces como una consulta normalizada distinta y otras veces en Otras consultas.
-
 
 [1]: /es/dashboards/
 [2]: /es/monitors/
 [3]: /es/notebooks/
 [4]: /es/data_security/logs/
+[5]: /es/data_security/data_retention_periods/

@@ -118,7 +118,7 @@ AWS 서비스 로그 수집에 대한 자세한 내용은 , [Datadog 람다 함�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_s3" >}}
+{{< get-metrics-from-git "amazon-s3" >}}
 
 
 ### 이벤트

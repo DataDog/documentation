@@ -37,7 +37,7 @@ draft: false
 git_integration_title: ssh_check
 integration_id: ssh
 integration_title: SSH
-integration_version: 4.1.0
+integration_version: 4.2.1
 is_public: true
 manifest_version: 2.0.0
 name: ssh_check

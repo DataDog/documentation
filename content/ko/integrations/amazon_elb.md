@@ -102,7 +102,7 @@ AWS 서비스 로그 수집에 대한 자세한 정보는 [Datadog Lambda 함수
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_elb" >}}
+{{< get-metrics-from-git "amazon-elb" >}}
 
 
 ### 이벤트

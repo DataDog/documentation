@@ -43,7 +43,7 @@ By default, the `mask_all` setting is enabled for all data. With this setting en
 
 #### Mask sensitive inputs
 
-With the `mask_sensitive_inputs` setting enabled, all text and inputs are shown except those considered sensitive, such as password fields.
+With the `mask_sensitive_inputs` setting enabled, all text and inputs are shown except those considered sensitive (passwords, emails, and phone numbers).
 
 <!-- Android -->
 {% if equals($platform, "android") %}
@@ -237,19 +237,23 @@ SessionReplay.enable(config)
 <!-- end React Native -->
 
 #### Mask content images
-You can manage content masking while still showing system images.
+You can manage content masking while still allowing system or bundled images to be visible.
 
 <!-- iOS and React Native -->
 {% if or(equals($platform, "ios"), equals($platform, "react_native")) %}
-Select the `mask_non_bundled_only` setting, which replaces any image that is not part of the system with a "Content Image" placeholder.
+Use the `maskNonBundledOnly` setting to replace non-bundled images with a "Content Image" placeholder in the replay.
+
+- In UIKit, the SDK can determine whether an image is bundled and can mask it accordingly.
+- In SwiftUI, this determination isn't possible. Instead, the SDK uses a heuristic: if an image exceeds 100×100 points, it is assumed to be non-bundled and is masked.
+
 {% /if %}
 
 <!-- Android -->
 {% if equals($platform, "android") %}
 Select the `mask_large_only` setting, which replaces images with dimensions that exceed 100x100dp with a "Content Image" placeholder.
-{% /if %}
 
 **Note**: These dimensions refer to the drawable resource, not the view's size.
+{% /if %}
 
 <!-- Android -->
 {% if equals($platform, "android") %}
