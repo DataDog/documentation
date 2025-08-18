@@ -491,9 +491,9 @@ The [Vercel AI SDK][22] integration automatically traces text and object generat
 - [Tool calling][27]:
   - `tool.execute`
 
-### Vercel AI Core SDK Telemetry
+### Vercel AI Core SDK telemetry
 
-This integration will automatically patch the tracer passed into each of the traced methods under the [`experimental_telemetry` option][23]. If no `experimental_telemetry` configuration is passed in, the integration will enable it to still send LLM Observability spans.
+This integration automatically patches the tracer passed into each of the traced methods under the [`experimental_telemetry` option][23]. If no `experimental_telemetry` configuration is passed in, the integration enables it to still send LLM Observability spans.
 
 ```javascript
 require('dd-trace').init({
@@ -522,7 +522,7 @@ async function main () {
 }
 ```
 
-**Note**: If `experimental_telemetry.isEnabled` is set to `false`, the integration will not turn it on, and will not send spans to LLM Observability.
+**Note**: If `experimental_telemetry.isEnabled` is set to `false`, the integration does not turn it on, and does not send spans to LLM Observability.
 
 ## ESM support
 
