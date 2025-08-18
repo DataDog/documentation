@@ -51,7 +51,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [Verified Access][37]              | [Enable Verified Access logs][38]                                                                              | [Manual][39] log collection.                                                                                                 |
 | [VPC][40]                          | [Enable Amazon VPC logs][41]                                                                                   | [Manual][42] log collection.                                                                                                 |
 | [Step Functions][52]               | [Enable Amazon Step Functions logs][53]                                                                        | [Manual][54] log collection.                                                                                                 |
-| [Web Application Firewall][49]     | [Enable Amazon WAF logs][50]                                                                                   | [Manual][51] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
+| [Web Application Firewall][49]     | [Enable AWS WAF logs][50]                                                                                      | [Manual][51] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [MWAA][55]                         | [Enable Amazon MWAA logs][56]                                                                                  | [Manual][56] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [Network Firewall][57]             | [Enable AWS Network Firewall logs][58]                                                                         | [Manual][58] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | Redshift Ser4verless               | `-`                                                                                                            | [Automatic](#automatically-set-up-triggers) log collection.                                                                  |
@@ -137,8 +137,8 @@ The following sources and locations are supported:
 
     | AWS Permission                                              | Description                                                                  |
     | ----------------------------------------------------------- | ---------------------------------------------------------------------------- |
-    | `airflow:ListEnvironments`                                  | List all MWAA environment names                                              |
-    | `airflow:GetEnvironment`                                    | Get information about a MWAA environment                                     |
+    | `airflow:ListEnvironments`                                  | List all MWAA environment names.                                             |
+    | `airflow:GetEnvironment`                                    | Get information about a MWAA environment.                                    |
     | `cloudfront:GetDistributionConfig`                          | Get the name of the S3 bucket containing CloudFront access logs.             |
     | `cloudfront:ListDistributions`                              | List all CloudFront distributions.                                           |
     | `cloudtrail:GetTrail`                                       | Get Trail logging information.                                               |
@@ -150,16 +150,16 @@ The following sources and locations are supported:
     | `lambda:InvokeFunction`                                     | Invoke a Lambda function.                                                    |
     | `lambda:List*`                                              | List all Lambda functions.                                                   |
     | `lambda:GetPolicy`                                          | Get the Lambda policy when triggers are to be removed.                       |
-    | `logs:PutSubscriptionFilter`                                | Add a Lambda trigger based on CloudWatch Log events                          |
-    | `logs:DeleteSubscriptionFilter`                             | Remove a Lambda trigger based on CloudWatch Log events                       |
+    | `logs:PutSubscriptionFilter`                                | Add a Lambda trigger based on CloudWatch Log events.                         |
+    | `logs:DeleteSubscriptionFilter`                             | Remove a Lambda trigger based on CloudWatch Log events.                      |
     | `logs:DescribeLogGroups`                                    | Describe  CloudWatch log groups.                                             |
     | `logs:DescribeSubscriptionFilters`                          | List the subscription filters for the specified log group.                   |
-    | `network-firewall:DescribeLoggingConfiguration`             | Get the logging configuration of a firewall                                  |
-    | `network-firewall:ListFirewalls`                            | List all Network Firewall firewalls                                          |
+    | `network-firewall:DescribeLoggingConfiguration`             | Get the logging configuration of a firewall.                                 |
+    | `network-firewall:ListFirewalls`                            | List all Network Firewall firewalls.                                         |
     | `redshift:DescribeClusters`                                 | List all Redshift clusters.                                                  |
     | `redshift:DescribeLoggingStatus`                            | Get the name of the S3 bucket containing Redshift Logs.                      |
-    | `redshift-serverless:ListNamespaces`                        | List all Redshift Serverless namespaces                                      |
-    | `route53:ListQueryLoggingConfigs`                           | List all DNS query logging configurations for Route 53                       |
+    | `redshift-serverless:ListNamespaces`                        | List all Redshift Serverless namespaces.                                     |
+    | `route53:ListQueryLoggingConfigs`                           | List all DNS query logging configurations for Route 53.                      |
     | `s3:GetBucketLogging`                                       | Get the name of the S3 bucket containing S3 access logs.                     |
     | `s3:GetBucketLocation`                                      | Get the region of the S3 bucket containing S3 access logs.                   |
     | `s3:GetBucketNotification`                                  | Get existing Lambda trigger configurations.                                  |
