@@ -1,5 +1,9 @@
 ---
 title: Scheduled Cost Reports
+further_reading:
+- link: "/cloud_cost_management/"
+  tag: "Documentation"
+  text: "Learn about Cloud Cost Management"
 ---
 
 ## Overview
@@ -14,7 +18,7 @@ Create a report or click on an existing report. To create a report, see the docu
 3. Add recipients:
     1. **Email recipients**: To add email recipients to your report, enter their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the trash icon that appears next to it.
     **{{< img src="dashboards/scheduled_reports/add_email_recipients.png" alt="The configuration modal for editing scheduled report variables." style="width:90%;" >}}**
-   2. **Slack recipients**: To add Slack recipients, select the Slack workspace and channel from the available dropdowns. If you do not see any Slack workspaces available, ensure you have the Datadog [Slack Integration][5] installed. All public channels within the Slack workspace should be listed automatically. To select a private Slack channel, make sure to invite the Datadog Slack bot to the channel in Slack. To send a test message to Slack, add a channel recipient and click **Send Test Message**.
+   2. **Slack recipients**: To add Slack recipients, select the Slack workspace and channel from the available dropdowns. If you do not see any Slack workspaces available, ensure you have the Datadog [Slack Integration][2] installed. All public channels within the Slack workspace should be listed automatically. To select a private Slack channel, make sure to invite the Datadog Slack bot to the channel in Slack. To send a test message to Slack, add a channel recipient and click **Send Test Message**.
     **{{< img src="dashboards/scheduled_reports/add_slack_recipients.png" alt="The configuration modal for editing scheduled report email recipients." style="width:90%;" >}}**
 
 ## Managing reports
@@ -22,11 +26,11 @@ A single report can have multiple scheduled reports with different settings, whi
 
 From the configuration modal that opens, you can pause an existing schedule or create a new schedule. To see and edit the details of an existing schedule, or delete the schedule, click Edit.
 
-{{< img src="cloud_cost/cost_reports/manage-cost-report-schedules.png" alt="Manage a Cost Report's Schedule." style="width:100%;" >}}
+{{< img src="cloud_cost/cost_reports/manage-cost-report-schedules.png" alt="Manage a Cost Report's Schedule." style="width:90%;" >}}
 
 To see all report schedules, navigate to [**Cloud Cost > Analyze > Reports**][1] and click the Report Schedules tab. On this page, you can click the "My schedules" toggle to switch between the schedules you've created and all the schedules in your organization.
 
-{{< img src="cloud_cost/cost_reports/cost-report-schedules-view.png" alt="View all Cost Report Schedules." style="width:90%;" >}}
+{{< img src="cloud_cost/cost_reports/cost-report-schedules-view.png" alt="View all Cost Report Schedules." style="width:100%;" >}}
 
 ## Permissions
 - You must have at least one of **Cloud Cost Report Schedules Write** or **Cloud Cost Report Schedules Manage** permissions to see any report schedules created in your organization.
@@ -35,4 +39,9 @@ To see all report schedules, navigate to [**Cloud Cost > Analyze > Reports**][1]
 
 After a report is created, you can subscribe, unsubscribe, edit a schedule, and delete a report assuming you have appropriate permissions. If you do not have **Cloud Cost Report Schedules Write** or **Cloud Cost Report Schedules Manage** permissions, you can unsubscribe from the report directly from an email.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/cost/analyze/reports
+[2]: /integrations/slack/?tab=datadogforslack
