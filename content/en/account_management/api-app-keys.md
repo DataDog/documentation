@@ -68,7 +68,7 @@ To add a Datadog API key or client token:
 
 ## Remove API keys or client tokens
 
-To remove a Datadog API key or client token, navigate to the list of keys or tokens, and click the **trash can** icon with **Revoke** next to the key or token you want to remove.
+To remove a Datadog API key or client token, navigate to the list of keys or tokens, and click the **Delete** {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icon with **Revoke** next to the key or token you want to remove.
 
 ## Add application keys
 
