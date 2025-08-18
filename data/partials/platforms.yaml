@@ -47,6 +47,10 @@ platforms:
     link: "agent/basic_agent_usage/saltstack/"
     image: "platform_saltstack.png"
     category: "configuration_management"
+  - name: foundry
+    link: "/integrations/"
+    image: "platform_cloud_foundry.png"
+    category: "Cloud platforms"
   # - name: source
   #   link: "agent/basic_agent_usage/source/"
   #   image: "platform_fromsource.png"
