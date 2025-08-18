@@ -95,7 +95,7 @@ To create a PR Gate rule, see the [Setup documentation][2].
 
 ## Manage rules
 
-You can evaluate and update quality control processes by accessing PR Gates rules on the [**PR Gates Rules**][6] page. Improve your deployment practices based on your project requirements and desired performance outcomes. 
+You can manage and update PR Gates rules on the [**PR Gates Rules**][6] page. Improve your security and quality practices based on your project requirements and risk tolerances. 
 
 You can see all of the rules defined by the organization.
 
