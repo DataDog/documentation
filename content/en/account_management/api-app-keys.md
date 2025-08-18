@@ -36,7 +36,9 @@ Action APIs include:
 - [Actions Connections][6]
 - [Workflow Automation][7]
 
-Each API requires specific permissions for individual endpoints. Because these APIs often work together, there is a simplified scoping process through the **Actions API Access** feature. Enabling **Actions API Access** adds all the required permissions for the Actions Platform APIs. 
+In order to use application keys with these APIs, you must enable Actions API access on the application key. This can be done can be done [via the UI][2] or [API][5]. By default, application keys cannot be used with these APIs.
+
+{{< img src="account_management/click-enable-actions-api-access.png" alt="Click Enable for Actions API Access" style="width:80%;" >}}
 
 ## Client tokens
 
