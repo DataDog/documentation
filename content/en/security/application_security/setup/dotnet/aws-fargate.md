@@ -61,7 +61,8 @@ Install the Datadog Agent in your Fargate task definition:
 {{% appsec-remote-config-activation %}}
 
 ### Manually enabling App and API Protection monitoring
-Ensure your Dockerfile includes the Datadog Node.js library:
+
+Ensure your Dockerfile includes the Datadog .NET library:
 
 ```dockerfile
 # Download and install Datadog .NET Tracer
@@ -109,10 +110,8 @@ Update your task definition to include the .NET agent and App and API Protection
 
 {{% collapse-content title="APM Tracing Disabled" level="h4" %}}
 To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
-{{< tabs >}}
-{{% tab "Using system properties" %}}
 
-Update your task definition to include the Java agent and App and API Protection configuration with APM tracing disabled:
+Update your task definition to include the .NET agent and App and API Protection configuration with APM tracing disabled:
 
 ```json
 {
