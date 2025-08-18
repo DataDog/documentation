@@ -322,12 +322,12 @@ Depending on the cloud provider, certain resources may or may not be available f
 |---:|---:|---|---|
 | CPU | {{< X >}} | {{< X >}} | {{< X >}} |
 | Memory | {{< X >}} | {{< X >}} | {{< X >}} |
-| {{< ccm-details title="Persistent volumes" >}}Storage resources within a cluster, provisioned by administrators or dynamically, that persist data independently of pod lifecycles.{{< /ccm-details >}} | {{< X >}} |  |  |
-| {{< ccm-details title="Managed service fees" >}}Cost of associated fees charged by the cloud provider for managing the cluster, such as fees for managed Kubernetes services or other container orchestration options.{{< /ccm-details >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| {{< tooltip text="Persistent volumes" tooltip="Storage resources within a cluster, provisioned by administrators or dynamically, that persist data independently of pod lifecycles." case="title" >}} | {{< X >}} |  |  |
+| {{< tooltip text="Managed service fees" tooltip="Cost of associated fees charged by the cloud provider for managing the cluster, such as fees for managed Kubernetes services or other container orchestration options." case="title" >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | ECS costs | {{< X >}} | N/A | N/A |
 | Data transfer costs | {{< X >}} | Limited* | Limited* |
 | GPU | {{< X >}} | {{< X >}} | {{< X >}}  |
-| {{< ccm-details title="Local storage" >}}Directly-attached storage resources for a node.{{< /ccm-details >}} |  | Limited* | Limited* |
+| {{< tooltip text="Local storage" tooltip="Directly-attached storage resources for a node." case="title" >}} |  | Limited* | Limited* |
 
 `Limited*` resources have been identified as part of your Kubernetes spend, but are not fully allocated to specific workloads or pods. These resources are host-level costs, not pod or namespace-level costs, and are identified with `allocated_spend_type:<resource>_not_supported`.
 
