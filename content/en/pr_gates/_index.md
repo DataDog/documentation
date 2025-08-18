@@ -47,10 +47,10 @@ You can configure PR Gates rules for the following categories:
 
 | Source type     | Condition types |
 | --- | ----------- |
-| [**Static Code Analysis**][11] | <li> Code vulnerability violations <li> Code quality violations |
-| [**Software Composition Analysis**][12] | <li> Library vulnerability violations <li> Detected license violations |
-| [**Code Coverage**][15] | <li> Total code coverage threshold <li> Patch code coverage threshold |
-| [**Infrastructure as Code Scanning**][16] | <li> IaC vulnerability severity |
+| [**Static Code Analysis**][11] | <li> Code vulnerabilities <li> Code quality violations |
+| [**Software Composition Analysis**][12] | <li> Library vulnerabilities <li> Library license violations |
+| [**Code Coverage**][15] | <li> Total code coverage <li> Patch code coverage |
+| [**Infrastructure as Code Scanning**][16] | <li> IaC vulnerabilities |
 
 After creating PR Gates rules, Datadog will automatically create checks on your pull requests using the [GitHub integration][13] or [Azure DevOps integration][14]. Set those checks as required in GitHub or Azure DevOps when you are ready to enforce them.
 
@@ -59,22 +59,22 @@ After creating PR Gates rules, Datadog will automatically create checks on your 
 PR Gates offers the following rule types:
 
 {{< tabs >}}
-{{% tab "Static Code Analysis" %}}
+{{% tab "Static Code Analysis (SAST)" %}}
 
 You can create rules to block code from being merged when a pull request introduces at least one code vulnerability or code quality violation of a certain severity.
 
 {{< img src="pr_gates/setup/static_analysis_3.png" alt="A PR Gate rule that fails when one or more new code quality violations of error-level severity are contained in the repository" style="width:80%" >}}
 
 {{% /tab %}}
-{{% tab "Software Composition Analysis" %}}
+{{% tab "Software Composition Analysis (SCA)" %}}
 
-You can create rules to block code from being merged when a pull request introduces at least one library vulnerability or forbidden license of a certain severity.
+You can create rules to block code from being merged when a pull request introduces at least one library vulnerability of a certain severity or at least one library with a forbidden license.
 
 {{< img src="pr_gates/setup/sca_3.png" alt="A PR Gate rule that fails when one or more critical or high severity library vulnerabilities are contained in the repository" style="width:80%" >}}
 
 {{% /tab %}}
 {{% tab "Code Coverage" %}}
-You can create rules to block code from being merged when a pull request causes the repository's overall code coverage to fall below a certain percentage.
+You can create rules to block code from being merged when a pull request causes the repository's overall code coverage to fall below a certain percentage or if the patch coverage is below a certain threshold.
 
 {{< img src="pr_gates/setup/code_coverage.png" alt="A PR Gate rule that fails when one or more critical or high severity library vulnerabilities are contained in the repository" style="width:80%" >}}
 
@@ -97,7 +97,7 @@ To create a PR Gate rule, see the [Setup documentation][2].
 
 You can evaluate and update quality control processes by accessing PR Gates rules on the [**PR Gates Rules**][6] page. Improve your deployment practices based on your project requirements and desired performance outcomes. 
 
-This view is useful for developers who want to keep an eye on the PR gates for their build pipelines. You can see all of the rules defined by the organization.
+You can see all of the rules defined by the organization.
 
 {{< img src="pr_gates/rules_list_3.png" alt="List of PR Gate rules in Datadog" style="width:100%" >}}
 
