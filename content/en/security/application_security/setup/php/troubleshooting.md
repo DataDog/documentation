@@ -22,7 +22,7 @@ AAP traces are rate-limited to 100 traces per second. Traces sent after the limi
 
 ## No security traces detected by AAP
 
-There are a series of steps that must run successfully for threat information to appear in the AAP [Trace and Signals Explorer][2]. It is important to check each step when investigating this issue. Additional troubleshooting steps for specific languages are in the language tab at the end.
+There are a series of steps that must run successfully for threat information to appear in the AAP [Trace and Signals Explorer][2]. It is important to check each step when investigating this issue.
 
 ### Confirm AAP is enabled
 
