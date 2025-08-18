@@ -6,19 +6,6 @@ aliases:
   - /security/application_security/threats/setup/threat_detection/php
   - /security/application_security/threats_detection/php
   - /security/application_security/setup/aws/fargate/php
-further_reading:
-- link: "/security/application_security/how-it-works/add-user-info/?tab=php"
-  tag: "Documentation"
-  text: "Adding user information to traces"
-- link: 'https://github.com/DataDog/dd-trace-php'
-  tag: "Source Code"
-  text: 'php Datadog library source code'
-- link: "/security/default_rules/?category=cat-application-security"
-  tag: "Documentation"
-  text: "OOTB App and API Protection Rules"
-- link: "/security/application_security/troubleshooting"
-  tag: "Documentation"
-  text: "Troubleshooting App and API Protection"
 ---
 {{< partial name="app_and_api_protection/callout.html" >}}
 
