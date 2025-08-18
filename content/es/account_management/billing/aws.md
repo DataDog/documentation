@@ -16,8 +16,8 @@ Otros recursos de AWS, como ELB, RDS y DynamoDB, no forman parte de la facturaci
 
 ## Exclusión de recursos de AWS
 
-Puedes limitar las métricas de AWS recopiladas para algunos servicios a recursos específicos. En la [página de integración de AWS de Datadog][3], selecciona la cuenta de AWS y haz clic en la pestaña **Metric Collection**. En **Limit Metric Collection to Specific Resources**, puedes limitar las métricas para una o más de las métricas personalizadas de EC2, Lambda, ELB, Application ELB, Network ELB, RDS, SQS y CloudWatch.
-Asegúrate de que las etiquetas (tags) agregadas a esta sección estén asignadas a los recursos correspondientes en AWS.
+Puedes limitar las métricas de AWS recopiladas para algunos servicios a recursos específicos. En la [página de integración de AWS de Datadog][3], selecciona la cuenta de AWS y haz clic en la pestaña **Metric Collection** (Recopilación de métricas). En **Limit Metric Collection to Specific Resources** (Limitar la recopilación de métricas para recursos específicos), puedes limitar las métricas para una o más de las métricas personalizadas de EC2, Lambda, ELB, Application ELB, Network ELB, RDS, SQS, Step Functions y CloudWatch.
+Asegúrate de que las etiquetas agregadas a esta sección estén asignadas a los recursos correspondientes en AWS.
 
 **Nota**: si utilizas la notación de exclusión (`!`), asegúrate de que el recurso carezca de la etiqueta especificada.
 
@@ -25,7 +25,7 @@ Asegúrate de que las etiquetas (tags) agregadas a esta sección estén asignada
 
 También puedes limitar las métricas de AWS utilizando la [API][4].
 
-**Nota**: Datadog solo puede facturar EC2 (hosts), Lambda (funciones activas) y CloudWatch Custom Metrics (métricas personalizadas). Las métricas integradas para los demás servicios que puedes filtrar no generan cargos en Datadog.
+**Nota**: Datadog solo puede facturar EC2 (hosts), Lambda (funciones activas), CloudWatch Custom Metrics (métricas personalizadas) y [contenedores][9]. Las métricas integradas para los demás servicios que puedes filtrar no generan cargos en Datadog.
 
 ### EC2
 
@@ -66,3 +66,4 @@ Si tienes preguntas sobre la facturación, ponte en contacto con tu [asesor de c
 [6]: /es/help/
 [7]: mailto:success@datadoghq.com
 [8]: /es/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation#streaming-vs-polling
+[9]: /es/account_management/billing/containers/

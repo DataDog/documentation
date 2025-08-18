@@ -420,7 +420,7 @@ Para más información, consulta la [Guía de enriquecimiento y control de datos
 
 ### Enriquecer eventos de RUM
 
-Junto con los atributos añadidos con la [API de Global Context](#global-context) o la [recopilación de datos de marcas de funciones](#enrich-rum-events-with-feature-flags), puedes añadir atributos de contexto adicionales al evento. Por ejemplo, etiquetar tus eventos de recursos del RUM con datos extraídos de un objeto de respuesta de acceso:
+Junto con los atributos añadidos con la [API de Global Context](#global-context) o la [recopilación de datos de indicadores de funciones](#enrich-rum-events-with-feature-flags), puedes añadir atributos de contexto adicionales al evento. Por ejemplo, etiquetar tus eventos de recursos del RUM con datos extraídos de un objeto de respuesta de acceso:
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -430,7 +430,7 @@ import { datadogRum } from '@datadog/browser-rum';
 datadogRum.init({
     ...,
     beforeSend: (event, context) => {
-        // recopila encabezados de respuesta de un recurso de RUM
+        // collect a RUM resource's response headers
         if (event.type === 'resource' && event.resource.type === 'fetch') {
             event.context.responseHeaders = Object.fromEntries(context.response.headers)
         }
@@ -446,7 +446,7 @@ window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
         ...,
         beforeSend: (event, context) => {
-            // recopila encabezados de respuesta de un recurso de RUM
+            // collect a RUM resource's response headers
             if (event.type === 'resource' && event.resource.type === 'fetch') {
                 event.context.responseHeaders = Object.fromEntries(context.response.headers)
             }
@@ -463,7 +463,7 @@ window.DD_RUM &&
     window.DD_RUM.init({
         ...,
         beforeSend: (event, context) => {
-            // recopila encabezados de respuesta de un recurso de RUM
+            // collect a RUM resource's response headers
             if (event.type === 'resource' && event.resource.type === 'fetch') {
                 event.context.responseHeaders = Object.fromEntries(context.response.headers)
             }
@@ -481,7 +481,7 @@ El SDK del RUM Browser ignora los atributos añadidos fuera de `eventos.context`
 
 ### Enriquecer eventos de RUM con indicadores de funciones
 
-Puedes [enriquecer tus datos de eventos de RUM con indicadores de características][14] para obtener mejor contexto y visibilidad de la monitorización del rendimiento. Esto te permite determinar a qué usuarios se les muestra una experiencia de usuario específica y si está afectando negativamente al rendimiento del usuario.
+Puedes [enriquecer tus datos de eventos de RUM con indicadores de funciones][14] para obtener mejor contexto y visibilidad de la monitorización del rendimiento. Esto te permite determinar a qué usuarios se les muestra una experiencia de usuario específica y si está afectando negativamente al rendimiento del usuario.
 
 ### Modificar el contenido de un evento de RUM
 
@@ -495,7 +495,7 @@ import { datadogRum } from '@datadog/browser-rum';
 datadogRum.init({
     ...,
     beforeSend: (event) => {
-        // eliminar dirección de correo electrónico de la URL de la vista
+        // remove email from view url
         event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
     },
     ...
@@ -508,7 +508,7 @@ window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
         ...,
         beforeSend: (event) => {
-            // eliminar dirección de correo electrónico de la URL de la vista
+            // remove email from view url
             event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
         },
         ...
@@ -522,7 +522,7 @@ window.DD_RUM &&
     window.DD_RUM.init({
         ...,
         beforeSend: (event) => {
-            // eliminar dirección de correo electrónico de la URL de la vista
+            // remove email from view url
             event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
         },
         ...
@@ -804,7 +804,7 @@ window.DD_RUM && window.DD_RUM.clearUser()
 
 ## Cuenta
 
-Para agrupar a los usuarios en conjuntos diferentes, utilice el concepto de cuenta.
+Para agrupar a los usuarios en conjuntos diferentes, utiliza el concepto de cuenta.
 
 Están disponibles los siguientes atributos:
 
@@ -822,7 +822,7 @@ Están disponibles los siguientes atributos:
 ```javascript
 datadogRum.setAccount({
     id: '1234',
-    name: 'Mi nombre de empresa',
+    name: 'My Company Name',
     ...
 })
 ```
@@ -832,7 +832,7 @@ datadogRum.setAccount({
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setAccount({
         id: '1234',
-        name: 'Nombre de mi empresa',
+        name: 'My Company Name',
         ...
     })
 })
@@ -842,7 +842,7 @@ window.DD_RUM.onReady(function() {
 ```javascript
 window.DD_RUM && window.DD_RUM.setAccount({
     id: '1234',
-    name: 'Nombre de mi empresa',
+    name: 'My Company Name',
     ...
 })
 ```
@@ -882,49 +882,49 @@ window.DD_RUM && window.DD_RUM.getAccount()
 {{< tabs >}}
 {{% tab "NPM" %}}
 ```javascript
-datadogRum.setAccountProperty('name', 'Nombre de mi empresa')
+datadogRum.setAccountProperty('name', 'My Company Name')
 ```
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
 ```javascript
 window.DD_RUM.onReady(function() {
-    window.DD_RUM.setAccountProperty('nombre', 'Nombre de mi empresa')
+    window.DD_RUM.setAccountProperty('name', 'My Company Name')
 })
 ```
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
 ```javascript
-window.DD_RUM && window.DD_RUM.setAccountProperty('name', 'Nombre de mi empresa')
+window.DD_RUM && window.DD_RUM.setAccountProperty('name', 'My Company Name')
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Eliminar la propiedad de la cuenta
+### Eliminar propiedad de cuenta
 
 `datadogRum.removeAccountProperty('<ACCOUNT_KEY>')`
 
 {{< tabs >}}
 {{% tab "NPM" %}}
 ```javascript
-datadogRum.removeAccountProperty('nombre')
+datadogRum.removeAccountProperty('name')
 ```
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
 ```javascript
 window.DD_RUM.onReady(function() {
-    window.DD_RUM.removeAccountProperty('nombre')
+    window.DD_RUM.removeAccountProperty('name')
 })
 ```
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
 ```javascript
-window.DD_RUM && window.DD_RUM.removeAccountProperty('nombre')
+window.DD_RUM && window.DD_RUM.removeAccountProperty('name')
 ```
 {{% /tab %}}
 {{< /tabs >}}
 
-### Borrar propiedades de la cuenta
+### Borrar propiedades de cuenta
 
 `datadogRum.clearAccount()`
 
@@ -1076,7 +1076,7 @@ import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 
-// Ejemplo de código
+// Code example
 datadogRum.setViewContextProperty('activity', {
     hasPaid: true,
     amount: 23.42
@@ -1089,7 +1089,7 @@ window.DD_RUM.onReady(function() {
     window.DD_RUM.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 })
 
-// Ejemplo de código
+// Code example
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setViewContextProperty('activity', {
         hasPaid: true,
@@ -1102,7 +1102,7 @@ window.DD_RUM.onReady(function() {
 ```javascript
 window.DD_RUM && window.DD_RUM.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 
-// Ejemplo de código
+// Code example
 window.DD_RUM && window.DD_RUM.setViewContextProperty('activity', {
     hasPaid: true,
     amount: 23.42
@@ -1123,7 +1123,7 @@ Sustituye el contexto de tus eventos de vista del RUM y de los eventos secundari
 import { datadogRum } from '@datadog/browser-rum';
 datadogRum.setViewContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 
-// Ejemplo de código
+// Code example
 datadogRum.setViewContext({
     originalUrl: 'shopist.io/department/chairs',
 });
@@ -1136,7 +1136,7 @@ window.DD_RUM.onReady(function() {
     window.DD_RUM.setViewContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 })
 
-// Ejemplo de código
+// Code example
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setViewContext({
       originalUrl: 'shopist.io/department/chairs',
@@ -1150,7 +1150,7 @@ window.DD_RUM.onReady(function() {
 window.DD_RUM &&
     window.DD_RUM.setViewContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 
-// Ejemplo de código
+// Code example
 window.DD_RUM &&
     window.DD_RUM.setViewContext({
         originalUrl: 'shopist.io/department/chairs',
@@ -1185,7 +1185,7 @@ import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.setGlobalContextProperty('<CONTEXT_KEY>', <CONTEXT_VALUE>);
 
-// Ejemplo de código
+// Code example
 datadogRum.setGlobalContextProperty('activity', {
     hasPaid: true,
     amount: 23.42
@@ -1198,7 +1198,7 @@ window.DD_RUM.onReady(function() {
     window.DD_RUM.setGlobalContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 })
 
-// Ejemplo de código
+// Code example
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setGlobalContextProperty('activity', {
         hasPaid: true,
@@ -1211,7 +1211,7 @@ window.DD_RUM.onReady(function() {
 ```javascript
 window.DD_RUM && window.DD_RUM.setGlobalContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 
-// Ejemplo de código
+// Code example
 window.DD_RUM && window.DD_RUM.setGlobalContextProperty('activity', {
     hasPaid: true,
     amount: 23.42
@@ -1231,7 +1231,7 @@ Puedes eliminar una propiedad de contexto global previamente definida.
 import { datadogRum } from '@datadog/browser-rum';
 datadogRum.removeGlobalContextProperty('<CONTEXT_KEY>');
 
-// Ejemplo de código
+// Code example
 datadogRum.removeGlobalContextProperty('codeVersion');
 ```
 
@@ -1242,7 +1242,7 @@ window.DD_RUM.onReady(function() {
     window.DD_RUM.removeGlobalContextProperty('<CONTEXT_KEY>');
 })
 
-// Ejemplo de código
+// Code example
 window.DD_RUM.onReady(function() {
     window.DD_RUM.removeGlobalContextProperty('codeVersion');
 })
@@ -1254,7 +1254,7 @@ window.DD_RUM.onReady(function() {
 window.DD_RUM &&
     window.DD_RUM.removeGlobalContextProperty('<CONTEXT_KEY>');
 
-// Ejemplo de código
+// Code example
 window.DD_RUM &&
     window.DD_RUM.removeGlobalContextProperty('codeVersion');
 ```
@@ -1274,7 +1274,7 @@ Sustituye el contexto por defecto de todos tus eventos de RUM con la API `setGlo
 import { datadogRum } from '@datadog/browser-rum';
 datadogRum.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 
-// Ejemplo de código
+// Code example
 datadogRum.setGlobalContext({
     codeVersion: 34,
 });
@@ -1287,7 +1287,7 @@ window.DD_RUM.onReady(function() {
     window.DD_RUM.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 })
 
-// Ejemplo de código
+// Code example
 window.DD_RUM.onReady(function() {
     window.DD_RUM.setGlobalContext({
         codeVersion: 34,
@@ -1301,7 +1301,7 @@ window.DD_RUM.onReady(function() {
 window.DD_RUM &&
     window.DD_RUM.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 
-// Ejemplo de código
+// Code example
 window.DD_RUM &&
     window.DD_RUM.setGlobalContext({
         codeVersion: 34,
@@ -1401,20 +1401,20 @@ En la propiedad `beforeSend`, puede anular las propiedades servicio y version. P
 
 {{< tabs >}}
 {{% tab "NPM" %}}
-```JavaScript
-import { datadogRum } from '@Datadog/browser-rum';
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
 
-const SERVICE_REGEX = /some-pathname\/(?<servicio>\w+)\/(?<version>\w+)\//;
+const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
 
 datadogRum.init({
     ...,
-    beforeSend: (evento, context) => {
-        const stack = contexto?.handlingStack || evento?.error?.stack;
-        const { servicio, versión } = stack?.match(SERVICE_REGEX)?.groups;
+    beforeSend: (event, context) => {
+        const stack = context?.handlingStack || event?.error?.stack;
+        const { service, version } = stack?.match(SERVICE_REGEX)?.groups;
 
-        if (servicio && version) {
-         evento.servicio = servicio;
-         evento.version = versión;
+        if (service && version) {
+          event.service = service;
+          event.version = version;
         }
 
         return true;
@@ -1423,19 +1423,19 @@ datadogRum.init({
 ```
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
-```JavaScript
-const SERVICE_REGEX = /some-pathname/(?<servicio>\w+)\/(?<version>\w+)\//;
+```javascript
+const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
 
-window.DD_RUM.onReady(función() {
+window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
         ...,
-        beforeSend: (evento, context) => {
-            const stack = contexto?.handlingStack || evento?.error?.stack;
-            const { servicio, versión } = stack?.match(SERVICE_REGEX)?.groups;
+        beforeSend: (event, context) => {
+            const stack = context?.handlingStack || event?.error?.stack;
+            const { service, version } = stack?.match(SERVICE_REGEX)?.groups;
 
-            if (servicio && version) {
-               evento.servicio = servicio;
-               evento.version = versión;
+            if (service && version) {
+                event.service = service;
+                event.version = version;
             }
 
             return true;
@@ -1445,18 +1445,18 @@ window.DD_RUM.onReady(función() {
 ```
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
-```JavaScript
-const SERVICE_REGEX = /some-pathname/(?<servicio>\w+)\/(?<version>\w+)\//;
+```javascript
+const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
 
 window.DD_RUM && window.DD_RUM.init({
     ...,
-    beforeSend: (evento, context) => {
-        const stack = contexto?.handlingStack || evento?.error?.stack;
-        const { servicio, versión } = stack?.match(SERVICE_REGEX)?.groups;
+    beforeSend: (event, context) => {
+        const stack = context?.handlingStack || event?.error?.stack;
+        const { service, version } = stack?.match(SERVICE_REGEX)?.groups;
 
-        if (servicio && version) {
-         evento.servicio = servicio;
-         evento.version = versión;
+        if (service && version) {
+          event.service = service;
+          event.version = version;
         }
 
         return true;

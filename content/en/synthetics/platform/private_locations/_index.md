@@ -56,7 +56,7 @@ Private locations are Docker containers that you can install anywhere inside you
 
 If you require FIPS support, use the [FIPS compliant image][26] on Docker hub.
 
-[26]: https://hub.docker.com/repository/docker/datadog/synthetics-private-location-worker-fips/general
+[26]: https://hub.docker.com/r/datadog/synthetics-private-location-worker-fips
 
 {{< /site-region >}}
 
@@ -97,7 +97,7 @@ You must install .NET version 4.7.2 or later on your computer before using the M
 
 {{< site-region region="gov" >}}
 
-<div class="alert alert-danger">FIPS compliance is not supported for private locations that report to <code>ddog-gov.com</code>. To disable this behavior, use the <a href="https://docs.datadoghq.com/synthetics/private_locations/configuration/?tab=docker#all-configuration-options"><code>--disableFipsCompliance</code> option</a>.</div>
+<div class="alert alert-danger">FIPS compliance is not supported for Windows private locations that report to <code>ddog-gov.com</code>. To disable this behavior, use the <a href="https://docs.datadoghq.com/synthetics/private_locations/configuration/?tab=docker#all-configuration-options"><code>--disableFipsCompliance</code> option</a>.</div>
 
 {{< /site-region >}}
 
@@ -679,7 +679,7 @@ You can upload custom root certificates to your private locations to have your A
 {{< tabs >}}
 {{% tab "Linux container" %}}
 
-When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime. 
+When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime.
 
 <div class="alert alert-info"><strong>Note</strong>: If you combine all your <code>.pem</code> files into one file, the sequence of the certificates within the file is important. It is required that the intermediate certificate precedes the root certificate to successfully establish a chain of trust.</div>
 

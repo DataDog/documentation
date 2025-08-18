@@ -95,7 +95,7 @@ Una vez alcanzado el tope diario, se interrumpe la ingesta hasta el día siguien
 Para establecer un límite de tasa:
 1. Ve a [**Error Tracking** > **Configuración**][1].
 1. Haz clic en **Rate Limits** (Límites de tasa).
-1. Edita el campo **errors/month** (errores/mes).
+1. Edita el campo **errors/day** (errores/día).
 1. Haz clic en **Save Rate Limit** (Guardar límite de tasa).
 
 {{< img src="error_tracking/rate-limit.png" alt="En el lado izquierdo de esta página, en 'Set your Rate Limit below' (Establecer tu límite de tasa a continuación) hay un menú desplegable donde puedes establecer tu límite de tasa." style="width:70%;">}}
