@@ -13122,9 +13122,7 @@ components:
         attributes:
           $ref: '#/components/schemas/DatasetAttributesRequest'
         type:
-          description: Resource type, always "dataset".
-          example: dataset
-          type: string
+          $ref: '#/components/schemas/DatasetType'
       required:
       - type
       - attributes
@@ -13146,9 +13144,7 @@ components:
           example: 123e4567-e89b-12d3-a456-426614174000
           type: string
         type:
-          description: Resource type, always "dataset".
-          example: dataset
-          type: string
+          $ref: '#/components/schemas/DatasetType'
       type: object
     DatasetResponseMulti:
       description: Response containing a list of datasets.
@@ -13165,6 +13161,15 @@ components:
         data:
           $ref: '#/components/schemas/DatasetResponse'
       type: object
+    DatasetType:
+      default: dataset
+      description: Resource type, always set to `dataset`.
+      enum:
+      - dataset
+      example: dataset
+      type: string
+      x-enum-varnames:
+      - DATASET
     DatasetUpdateRequest:
       description: Edit request for a dataset.
       properties:

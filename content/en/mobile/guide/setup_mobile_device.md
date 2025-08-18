@@ -36,7 +36,7 @@ Download the app from the [Apple App Store][1] for your iOS device, or from the 
 1. Enter your org’s SAML credentials to be rerouted to an authenticated session of the Datadog mobile app.
 
 ### Login with a QR code 
-1. In a desktop browser, open Datadog and navigate to **[Personal Settings > Organizations]**[8]. 
+1. In a desktop browser, open Datadog and navigate to [**Personal Settings > Organizations**][8]. 
 1. Click **Log in to Mobile App** for your organization. This displays a QR code.
 1. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App. You will be automatically logged in.
 
