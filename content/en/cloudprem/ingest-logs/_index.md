@@ -1,7 +1,6 @@
 ---
 title: Set up Log Ingestion
 description: Configure log sources to send data to your CloudPrem deployment
-private: true
 ---
 
 <div class="alert alert-warning">CloudPrem is in Preview.</div>

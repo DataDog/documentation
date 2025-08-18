@@ -1,7 +1,6 @@
 ---
 title: Configure CloudPrem
 description: Learn how to configure and customize your CloudPrem deployment for optimal performance and security
-private: true
 ---
 
 ## Overview

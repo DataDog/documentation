@@ -1,7 +1,6 @@
 ---
 title: CloudPrem Ingress Configuration
 description: Learn how to configure and manage ingress controllers for your CloudPrem deployment
-private: true
 further_reading:
 - link: "/cloudprem/"
   tag: "Documentation"

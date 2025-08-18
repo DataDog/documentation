@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting
-private: true
 further_reading:
 - link: "/cloudprem/overview/architecture/"
   tag: "Documentation"

@@ -1,8 +1,6 @@
 ---
 title: Send logs to CloudPrem with the Datadog Agent
 description: Configure the Datadog Agent to send logs to your CloudPrem deployment
-private: true
-disable_toc: false
 further_reading:
 - link: "/cloudprem/ingest-logs/"
   tag: "Documentation"

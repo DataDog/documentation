@@ -1,8 +1,6 @@
 ---
 title: Send logs to CloudPrem with Observability Pipelines
 description: Configure Observability Pipelines to send logs to CloudPrem with optional dual shipping
-private: true
-disable_toc: false
 further_reading:
 - link: "/cloudprem/ingest-logs/"
   tag: "Documentation"

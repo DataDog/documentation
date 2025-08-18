@@ -1,7 +1,6 @@
 ---
 title: Send logs to CloudPrem with REST API
 description: Learn how to integrate with CloudPrem using direct API calls
-private: true
 further_reading:
 - link: "/cloudprem/ingest-logs/"
   tag: "Documentation"

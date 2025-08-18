@@ -1,7 +1,6 @@
 ---
 title: Manage and monitor CloudPrem
 description: Learn how to monitor, maintain, and operate your CloudPrem deployment
-private: true
 ---
 
 ## Dashboards

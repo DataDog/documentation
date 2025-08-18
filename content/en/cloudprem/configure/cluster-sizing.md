@@ -1,7 +1,6 @@
 ---
 title: Cluster Sizing
 description: Learn about cluster sizing for CloudPrem
-private: true
 further_reading:
 - link: "/cloudprem/configure/ingress/"
   tag: "Documentation"

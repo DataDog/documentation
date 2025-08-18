@@ -1,7 +1,6 @@
 ---
 title: Processing Configuration
 description: Learn how to configure your processing pipelines in CloudPrem
-private: true
 further_reading:
 - link: "/cloudprem/install/"
   tag: "Documentation"

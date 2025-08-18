@@ -1,7 +1,6 @@
 ---
 title: Configure your Datadog account
 description: Set up your Datadog account to access CloudPrem logs
-private: true
 further_reading:
 - link: "/cloudprem/ingest-logs/datadog-agent/"
   tag: "Documentation"
