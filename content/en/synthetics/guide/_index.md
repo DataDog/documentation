@@ -16,6 +16,7 @@ cascade:
     {{< nextlink href="synthetics/guide/identify_synthetics_bots/" >}}Identify Synthetic bots{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/clone-test" >}}Clone your Synthetic tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/otp-email-synthetics-test" >}}Extract a one-time passcode from an email body using Synthetic Browser Tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/version_history" >}}Version History for Synthetic Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Alerting:" >}}
@@ -46,9 +47,8 @@ cascade:
 
 {{< whatsnext desc="Datadog Integrations:" >}}
     {{< nextlink href="logs/guide/ease-troubleshooting-with-cross-product-correlation" >}}Ease troubleshooting with cross-product correlation{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/explore-rum-through-synthetics/" >}}Explore a preview of RUM features in Synthetics{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/explore-rum-through-synthetics/" >}}Explore a preview of RUM features in Synthetic Monitoring{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/rum-to-synthetics" >}}Generate Synthetic browser tests from RUM Session Replays{{< /nextlink >}}
-
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Metrics:" >}}

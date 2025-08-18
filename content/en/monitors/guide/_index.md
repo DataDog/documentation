@@ -18,7 +18,6 @@ cascade:
     {{< nextlink href="monitors/guide/recovery-thresholds" >}}Recovery thresholds{{< /nextlink >}}
     {{< nextlink href="monitors/guide/alert_aggregation" >}}Alert aggregation{{< /nextlink >}}
     {{< nextlink href="monitors/guide/notification-message-best-practices" >}}Notification message Best Practice{{< /nextlink >}}
-
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Tutorial:" >}}
@@ -26,6 +25,7 @@ cascade:
     {{< nextlink href="monitors/guide/create-monitor-dependencies" >}}Create monitor dependencies{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}How to create monitors in synthetic tests{{< /nextlink >}}
     {{< nextlink href="monitors/guide/reduce-alert-flapping" >}}Reduce alert flapping{{< /nextlink >}}
+        {{< nextlink href="monitors/guide/clean_up_monitor_clutter" >}}Clean up monitor clutter{{< /nextlink >}}
     {{< nextlink href="monitors/guide/troubleshooting-monitor-alerts" >}}Troubleshooting monitor alerts{{< /nextlink >}}
 {{< /whatsnext >}}
 

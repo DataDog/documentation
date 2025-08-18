@@ -5,7 +5,7 @@ description: ログコンフィギュレーションページからログを処�
 further_reading:
 - link: /data_security/pci_compliance/
   tag: ドキュメント
-  text: PCI 準拠の Datadog 組織をセットアップする
+  text: PCI DSS 準拠
 - link: https://www.datadoghq.com/blog/logging-without-limits/
   tag: ブログ
   text: Logging without Limits* の詳細
@@ -25,8 +25,6 @@ title: ログコンフィギュレーション
 
 Datadog Logging without Limits* は、ログの取り込みとインデックス作成を切り離します。[**Logs > Pipelines**][1] のログ構成ページから、インデックスを作成して保持するログ、またはアーカイブするログを選択し、トップレベルで設定と制御を管理します。
 
-**注**: PCI 準拠の Datadog 組織をセットアップするための情報は、[PCI DSS 準拠][2]をご覧ください。
-
 ## コンフィギュレーションオプション
 
 - [パイプライン][3]と[プロセッサ][4]を使用してログを処理する方法を制御します。
@@ -41,7 +39,7 @@ Datadog Logging without Limits* は、ログの取り込みとインデックス
 
 コンフィギュレーションが完了したら、[ログエクスプローラー][11]でログの調査とトラブルシューティングを開始します。
 
-## その他の参考資料
+## 参考情報
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -15,6 +15,8 @@ cascade:
     {{< nextlink href="database_monitoring/guide/tag_database_statements" >}}Tagging Database Statements{{< /nextlink >}}
     {{< nextlink href="database_monitoring/guide/managed_authentication" >}}Connecting with Managed Authentication{{< /nextlink >}}
     {{< nextlink href="database_monitoring/guide/aurora_autodiscovery" >}}Configuring Database Monitoring for Amazon Aurora DB Clusters{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/guide/rds_autodiscovery" >}}Configuring Database Monitoring for Amazon RDS DB Instances{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/guide/database_identifier" >}}Specifying a Database Identifier{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="SQL Server guides:" >}}

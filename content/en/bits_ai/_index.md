@@ -16,10 +16,6 @@ further_reading:
       text: "Automate Cloud SIEM investigations with Bits AI Security Analyst"
 ---
 
-{{< site-region region="gov" >}}
-Bits AI is not available for the selected site ({{< region-param key="dd_site_name" >}}).
-{{< /site-region >}}
-
 Bits AI is your agentic teammate in Datadog, built to automate development, security, and operational workflows. You can chat and collaborate with Bits in real time, or delegate full tasks—like alert investigations, code fixes, or security triage—and let it take care of the details.
 
 ## Features
