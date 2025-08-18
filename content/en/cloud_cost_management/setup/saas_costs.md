@@ -187,6 +187,25 @@ Your OpenAI cost data for the past 15 months can be accessed in Cloud Cost Manag
 
 {{% /tab %}}
 
+{{% tab "Anthropic" %}}
+
+### 1. Generate an Admin API Key
+
+You will need an [Admin API key](https://docs.anthropic.com/en/api/administration-api) from Anthropic. This key allows access to usage and cost reports across your organization.
+
+1. Navigate to your organization's settings or reach out to your Anthropic account admin to create a new Admin API key.
+2. Copy the API key to a secure location.
+
+### 2. Configure the Datadog Integration
+
+1. In Datadog, go to [**Integrations > Anthropic Usage and Costs**](https://app.datadoghq.com/integrations?integrationId=anthropic-usage-and-costs).
+2. In the configuration panel, provide the **Admin API Key** by pasting the key you generated from Anthropic.
+3. Click **Save Configuration**.
+
+Once saved, Datadog will begin polling Anthropic usage and cost endpoints using this key and populate metrics in your environment.
+
+{{% /tab %}}
+
 {{% tab "GitHub" %}}
 
 1. Create a personal authorization token (classic), with the `manage_billing:enterprise` and `repo` scopes on the [Personal Access Tokens][109] page in GitHub.
@@ -545,6 +564,25 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `organization_name` | The name of the organization. |
 | `project_id` | The unique identifier of the project. |
 | `project_name` | The name of the project. |
+
+{{% /tab %}}
+
+{{% tab "Anthropic" %}}
+
+| Tag Name | Tag Description |
+|---|---|
+| `workspace_id` | The unique identifier of the Anthropic workspace. |
+| `workspace_name` | A tag-normalized version of the workspace name. |
+| `display_workspace_name` | The unaltered name of the workspace. |
+| `org_id` | The unique identifier of the Anthropic organization. |
+| `org_name` | A tag-normalized version of the Anthropic organization’s name. |
+| `display_org_name` | The unaltered name of the organization. |
+| `model_id` | The canonical Anthropic model identifier (e.g., `claude-3-opus-20240229`). |
+| `model` | An alias for `model_id`, provided for compatibility and consistency with usage and metrics. |
+| `model_name` | The friendly name of the model (e.g., “Claude 3 Opus”). |
+| `service_tier` | The Anthropic service plan or tier associated with the usage (e.g., standard, pro, enterprise). |
+| `token_type` | The category of tokens consumed.|
+| `context_window` | The context window size for the tokens (e.g., `tier_0-200k`). |
 
 {{% /tab %}}
 
