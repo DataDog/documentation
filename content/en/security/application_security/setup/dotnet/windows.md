@@ -57,7 +57,7 @@ DD_APM_TRACING_ENABLED=false
 
 ## 3. Run your application
 
-Start your .NET application with above settings.
+Start your .NET application with the previous settings.
 
 {{< tabs >}}
 {{% tab "IIS" %}}
@@ -104,7 +104,7 @@ CORECLR_ENABLE_PROFILING=1
 
 ## Troubleshooting
 
-For a more detailed info go to [the Datadog Tracer installation guide for .NET Framework][5] or [the Datadog Tracer installation guide for .NET Core][6]
+For a more detailed, see [the Datadog Tracer installation guide for .NET Framework][5] or [the Datadog Tracer installation guide for .NET Core][6].
 
 If you encounter issues while setting up App and API Protection for your .NET application, see the [.NET App and API Protection troubleshooting guide][4].
 

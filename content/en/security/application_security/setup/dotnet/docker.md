@@ -35,7 +35,7 @@ Install the Datadog Agent by following the [Agent setup instructions for Docker]
 
 ### Manually enabling App and API Protection monitoring
 
-Add this lines to download and enable the DataDog tracer to your docker file:
+Add the following lines to download and enable the DataDog tracer to your docker file:
 
 ```dockerfile
 # Download and install Datadog .NET Tracer
