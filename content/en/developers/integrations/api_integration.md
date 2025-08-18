@@ -77,7 +77,7 @@ Once you have implemented the OAuth protocol, test your OAuth client to ensure t
 **Note**: Until your integration tile is published, you can only authorize the OAuth client from your sandbox organization. This means that you can only send data into or pull data out of your sandbox account.
 
 To test your OAuth client, complete the following steps:
-1. Test that autorization is working properly
+1. Test that authorization is working properly
 2. Create an API Key
 3. Test multiple Datadog sites
 4. Confirm cross-regional support
@@ -99,7 +99,7 @@ If successful, this request returns an API key that you can find on the [API Key
 
 Testing across different [Datadog sites][8] is only available once your integration is available for preview in your developer sandbox after approval.
 1. If you do not have access to a sandbox account on a different site, contact `ecosystems@datadog.com`.
-2. Your integration will be made availabe in your other sandbox.
+2. Your integration will be made available in your other sandbox.
 3. Connect the integration and go through the OAuth flow.
 
 
