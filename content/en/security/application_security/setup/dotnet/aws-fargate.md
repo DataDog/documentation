@@ -15,7 +15,7 @@ further_reading:
   text: "Troubleshooting App and API Protection"
 ---
 
-{{% aap/app_and_api_protection_dotnet_overview %}}
+{{% aap/aap_and_api_protection_dotnet_overview %}}
 
 ## Prerequisites
 
