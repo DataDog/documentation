@@ -33,9 +33,36 @@ For DBM correlation to work, your database spans must include the following attr
 | `db.name`      | The logical database or schema name being queried.                                                  | `user_accounts`                    |
 | `span.type`    | **Required (Datadog-specific).** The type of span such as `sql`,`postgres`, `mysql`, or `sql.query` | `sql`                              |
 
-#### Example
+<div class="alert alert-info">The <code>span.type</code> attribute is a Datadog-specific convention required for the backend to identify and processes database spans. It is not part of the standard OpenTelemetry semantic conventions.</div>
 
-The method for adding these attributes depends on your setup. If you are using an OpenTelemetry auto-instrumentation library for your database client, see its documentation for configuration options. If you are manually creating spans with the OpenTelemetry SDK, you can set the attributes directly in your code. For more information, see the [OpenTelemetry documentation][4].
+#### Auto instrumentation
+
+If you are using an OpenTelemetry auto-instrumentation library, you can add required attributes without changing your application code. Most OpenTelemetry auto-instrumentation libraries already add `db.system` and `db.statement`. For DBM correlation, you typically only need to add the Datadog-specific `span.type` attribute. You can do this by using the OpenTelemetry Collector's `attributes` processor to enrich your spans.
+
+For example, you can add `span.type: sql` to any span that has the `db.system` attribute:
+
+```yaml
+processors:
+  attributes/add_span_type:
+    actions:
+      - key: span.type
+        value: "sql"
+        action: insert
+        # Apply this action only to spans that have the db.system attribute
+        from_context: span
+        when:
+          - span.attributes["db.system"] != nil
+
+service:
+  pipelines:
+    traces:
+      # Add the processor to your traces pipeline
+      processors: [..., attributes/add_span_type, ...]
+```
+
+#### Manual instrumentation
+
+If you are manually creating spans with the OpenTelemetry SDK, you can set the attributes directly in your code. For more information, see the [OpenTelemetry documentation][4].
 
 The following is a conceptual example of manual instrumentation using Python's OpenTelemetry SDK:
 
