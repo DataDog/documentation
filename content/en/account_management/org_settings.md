@@ -60,19 +60,6 @@ This section allows you to view, copy, and revoke any API key in the list. Your 
 
 You can filter application keys by name, ID, or owner, or click the **Only My Keys** toggle to only view application keys you own. Read the [Application keys documentation][8] for more information on adding and removing keys.
 
-#### One-Time Read Mode
-
-If you have the `org_management` permission, you can enable One-Time Read (OTR) mode in Organization > Application Keys settings. When enabled:
-
-- All application key secrets in your organization become one-time read only
-- Key secrets are only visible immediately after creation
-- v1 Application Key APIs become unavailable
-
-**Note**: 
-- For organizations created after [DATE TBD], OTR mode is enabled by default and cannot be disabled
-- For existing organizations, once enabled, you have 3 months to disable the feature if needed. Each enablement starts a new 3-month period. After this period expires, OTR mode becomes permanent
-- Contact [Datadog Support][16] for early enforcement
-
 ### Roles
 
 To learn about default and custom roles in Datadog, read the [Role Based Access Control documentation][9].
