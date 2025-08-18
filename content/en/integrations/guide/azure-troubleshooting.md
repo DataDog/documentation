@@ -74,6 +74,10 @@ Ensure that you have not exceeded your [daily quota][4] for log retention.
 
 **Note:** It is advised that you take at least five minutes after the execution of the script to start looking for logs in the Logs Explorer.
 
+## Monitoring multiple app registrations
+
+Subscriptions monitored by multiple app registrations can introduce overlapping access configurations. This setup is not recommended and may result in integration issues or system conflicts, and may also increase your Azure Monitor costs.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

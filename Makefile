@@ -72,6 +72,12 @@ watch-cdocs:
 	@echo "Compiling .mdoc files to HTML";
 	@node ./local/bin/js/cdocs-build.js --watch;
 
+# compile .mdoc.md files to HTML
+# so Hugo can include them in the site
+build-llms-txt:
+	@echo "Launching llms.txt build ...";
+	@node ./local/bin/js/llms-txt-build.js;
+
 start:
 	@make setup-build-scripts ## Build and run docs including external content.
 	@make dependencies
@@ -81,6 +87,7 @@ start:
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
 start-no-pre-build: node_modules  ## Build and run docs excluding external content.
 	@make setup-build-scripts
+	@make update_websites_sources_module
 	@make build-cdocs
 	@make server
 
@@ -116,7 +123,7 @@ node_modules: package.json yarn.lock
 
 # All the requirements for a full build
 dependencies: clean
-	make hugpython all-examples update_pre_build node_modules build-cdocs
+	make hugpython all-examples update_pre_build node_modules build-cdocs build-llms-txt
 
 integrations_data/extracted/vector:
 	$(call source_repo,vector,https://github.com/vectordotdev/vector.git,master,true,website/)
@@ -134,7 +141,7 @@ placeholders: hugpython update_pre_build
 hugpython: local/etc/requirements3.txt
 	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<;\
 	if [[ "$(CI_COMMIT_REF_NAME)" != "" ]]; then \
-		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.70443877-py3-none-any.whl; \
+		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.72592276-py3-none-any.whl; \
 	fi
 
 update_pre_build: hugpython

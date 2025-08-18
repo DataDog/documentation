@@ -172,17 +172,17 @@ When following the [Datadog Agent installation on Kubernetes](/containers/kubern
 
 For the Datadog Operator:
 ```yaml
-datadog:
-   site: "ddog-gov.com"
-useFIPSAgent: true
-```
-
-For the Datadog Helm Chart:
-```yaml
 spec:
    global:
       site: "ddog-gov.com"
       useFIPSAgent: true
+```
+
+For the Datadog Helm Chart:
+```yaml
+datadog:
+   site: "ddog-gov.com"
+useFIPSAgent: true
 ```
 
 {{% /tab %}}

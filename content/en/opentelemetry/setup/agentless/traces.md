@@ -46,7 +46,7 @@ If you are using [OpenTelemetry automatic instrumentation][3], set the following
 ```shell
 export OTEL_EXPORTER_OTLP_TRACES_PROTOCOL="http/protobuf"
 export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="{{< region-param key="otlp_trace_endpoint" >}}"
-export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-protocol=otlp,dd-api-key=${DD_API_KEY},dd-otlp-source=${YOUR_SITE}"
+export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-api-key=${DD_API_KEY},dd-otlp-source=${YOUR_SITE}"
 ```
 
 <div class="alert alert-info">The value for <code>dd-otlp-source</code> should be provided to you by Datadog after being allowlisted for the intake endpoint. This is a specific identifier assigned to your organization.</div>
@@ -68,7 +68,6 @@ const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-proto'
 const exporter = new OTLPTraceExporter({
   url: '${YOUR_ENDPOINT}', // Replace this with the correct endpoint
   headers: {
-    'dd-protocol': 'otlp',
     'dd-api-key': process.env.DD_API_KEY,
     'dd-otel-span-mapping': '{span_name_as_resource_name: true}',
     'dd-otlp-source': '${YOUR_SITE}', // Replace with the specific value provided by Datadog for your organization
@@ -88,7 +87,6 @@ import io.opentelemetry.exporter.otlp.http.trace.OtlpHttpSpanExporter;
 
 OtlpHttpSpanExporter exporter = OtlpHttpSpanExporter.builder()
     .setEndpoint("${YOUR_ENDPOINT}") // Replace this with the correct endpoint
-    .addHeader("dd-protocol", "otlp")
     .addHeader("dd-api-key", System.getenv("DD_API_KEY"))
     .addHeader("dd-otel-span-mapping", "{span_name_as_resource_name: true}")
     .addHeader("dd-otlp-source", "${YOUR_SITE}") // Replace with the specific value provided by Datadog for your organization
@@ -108,13 +106,12 @@ import "go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp"
 traceExporter, err := otlptracehttp.New(
 	ctx,
 	otlptracehttp.WithEndpoint("${YOUR_ENDPOINT}"), // Replace this with the correct endpoint
-	otlptracehttp.WithURLPath("/api/v0.2/traces"),
+	otlptracehttp.WithURLPath("/v1/traces"),
 	otlptracehttp.WithHeaders(
 		map[string]string{
-			"dd-protocol": "otlp",
 			"dd-api-key": os.Getenv("DD_API_KEY"),
 			"dd-otel-span-mapping": "{span_name_as_resource_name: true}",
-      "dd-otlp-source": "${YOUR_SITE}", // Replace with the specific value provided by Datadog for your organization
+			"dd-otlp-source": "${YOUR_SITE}", // Replace with the specific value provided by Datadog for your organization
 		}),
 )
 ```
@@ -132,7 +129,6 @@ from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExport
 exporter = OTLPSpanExporter(
     endpoint="${YOUR_ENDPOINT}", # Replace this with the correct endpoint
     headers={
-        "dd-protocol": "otlp",
         "dd-api-key": os.environ.get("DD_API_KEY"),
         "dd-otel-span-mapping": "{span_name_as_resource_name: true}",
         "dd-otlp-source": "${YOUR_SITE}" # Replace with the specific value provided by Datadog for your organization
@@ -179,7 +175,6 @@ exporters:
   otlphttp:
     traces_endpoint: {{< region-param key="otlp_trace_endpoint" >}}
     headers:
-      dd-protocol: "otlp"
       dd-api-key: ${env:DD_API_KEY}
       dd-otel-span-mapping: "{span_name_as_resource_name: false}"
       dd-otlp-source: "${YOUR_SITE}", # Replace with the specific value provided by Datadog for your organization
@@ -244,7 +239,7 @@ When `span_name_as_resource_name` is set to `false`, the operation name is deriv
 
 **Solution**: If you want to disable the `span_name_as_resource_name` option in the Datadog OTLP traces intake endpoint to match the behavior of the Datadog Agent or OpenTelemetry Collector, follow these steps:
 
-1. Refer to [Map or filter span names](#map-or-filter-span-names) in this document.
+1. Refer to [Map or filter span names](#optional-map-or-filter-span-names) in this document.
 1. Set the `span_name_as_resource_name` option to `false` in the `dd-otel-span-mapping` header.
 
 For example:

@@ -123,7 +123,7 @@ The example below shows the **New Connection** dialog box for the OpenAI connect
 
 ### Restrict connection use
 
-To learn how to restrict connection use, see Access and Authentication for [Workflow Automation][4] or [App Builder][15].
+To learn how to restrict connection use, see Access and Authentication for [Workflow Automation][12] or [App Builder][15].
 
 ## HTTP connection
 
@@ -153,7 +153,7 @@ Each connection in the group must have a set of unique identifier tags so that a
 
 ### Create a connection group
 
-<div class="alert alert-info"><strong>Note</strong>: You can only add connections to a group if you have <a href="/service_management/workflows/access/#restrict-access-on-a-specific-connection">Resolver permission</a> for them.</div>
+<div class="alert alert-info"><strong>Note</strong>: You can only add connections to a group if you have <a href="/actions/workflows/access_and_auth/#restrict-access-on-a-specific-connection">Resolver permission</a> for them.</div>
 
 To create a connection group:
 
@@ -202,13 +202,12 @@ To delete a connection group:
 
 [2]: https://app.datadoghq.com/workflow
 [3]: https://app.datadoghq.com/workflow/connections
-[4]: /service_management/workflows/access/#restrict-connection-use
 [6]: /integrations/
 [8]: /service_management/workflows/actions/
 [9]: https://app.datadoghq.com/workflow
 [10]: /actions/connections/http/
 [11]: https://datadoghq.slack.com/
-[12]: /service_management/workflows/access/#restrict-access-on-a-specific-connection
+[12]: /actions/workflows/access_and_auth/#restrict-access-on-a-specific-connection
 [13]: /getting_started/tagging/
 [14]: https://app.datadoghq.com/app-builder/
-[15]: /service_management/app_builder/auth/
+[15]: /actions/app_builder/access_and_auth/#restrict-access-to-a-specific-connection
