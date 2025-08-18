@@ -9683,6 +9683,19 @@ menu:
         unstable:
           - v2
         order: 21
+    - name: Link Teams with GitHub Teams
+      url: '#link-teams-with-github-teams'
+      identifier: teams-link-teams-with-github-teams
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SyncTeams
+        unstable:
+          - v2
+        order: 19
     - name: Create a team
       url: '#create-a-team'
       identifier: teams-create-a-team

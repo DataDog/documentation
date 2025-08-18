@@ -272,6 +272,7 @@ unsupported_sites:
   data_jobs: [gov]
   datadog_cloudcraft: [gov]
   dora_metrics: [gov]
+  dynamic_instrumentation: [gov]
   dynamic_quotas: [gov]
   eng_reports: [gov]
   events_from_sns_emails: [gov]
