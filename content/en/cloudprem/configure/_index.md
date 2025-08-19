@@ -5,12 +5,9 @@ description: Learn how to configure and customize your CloudPrem deployment for 
 
 ## Overview
 
-After installing CloudPrem, you need to [configure your Datadog account](datadog-account/), and optionally adjust the [cluster size](cluster-sizing/), configure [ingress](ingress/) and/or [processing](processing/).
-
-## Next steps
-
-{{< whatsnext >}}
+{{< whatsnext desc="">}}
    {{< nextlink href="./datadog-account/" >}}Configure your Datadog account{{< /nextlink >}}
-   {{< nextlink href="./ingest-logs/" >}}Send logs to CloudPrem{{< /nextlink >}}
-   {{< nextlink href="../manage/" >}}Monitor CloudPrem{{< /nextlink >}}
+   {{< nextlink href="./cluster-sizing/" >}}Size your cluster{{< /nextlink >}}
+   {{< nextlink href="./ingress/" >}}Configure Ingress{{< /nextlink >}}
+   {{< nextlink href="./processing/" >}}Configure processing{{< /nextlink >}}
 {{< /whatsnext >}}

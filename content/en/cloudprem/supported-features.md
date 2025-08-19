@@ -6,9 +6,9 @@ private: true
 
 <div class="alert alert-warning">CloudPrem is in Preview.</div>
 
-## Log Explorer supported features
+## Supported features
 
-The following Log Explorer features are already supported:
+The following log features are already supported:
 - Full text search on any log attributes
 - Group into Fields with all functions except the monthly timeshift
 - Dashboards
@@ -20,6 +20,4 @@ The following Log Explorer features are already supported:
 
 ## Unsupported features
 
-Features like Bits AI, LiveTail, Notebooks, Watchdogs, Sheets, Joins, Filter with Subquery are not supported.
-
-Search on multiple indexes is not yet available for CloudPrem.
+Features like Bits AI, LiveTail, Notebooks, Watchdogs, Sheets, Joins, Filter with Subquery, and search on multiple indexes are not yet supported.

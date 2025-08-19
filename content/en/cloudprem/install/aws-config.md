@@ -3,9 +3,6 @@ title: AWS Configuration
 description: Learn how to configure AWS for CloudPrem
 private: true
 further_reading:
-- link: "/cloudprem/"
-  tag: "Documentation"
-  text: "CloudPrem Overview"
 - link: "/cloudprem/install/aws-eks/"
   tag: "Documentation"
   text: "Install CloudPrem on AWS EKS"

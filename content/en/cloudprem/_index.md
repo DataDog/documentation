@@ -14,21 +14,19 @@ Datadog CloudPrem is a self-hosted log management solution that enables cost-eff
 
 ## Key features
 
-- **Self-hosted**: Deploy CloudPrem within your own infrastructure and keep your logs on your object storage
-- **Cost-effective**: Reduce log management infra costs while maintaining full observability
-- **Scalable**: Horizontally scalable architecture to handle high-volume log ingestion
-- **Integrated in Datadog**
+- **Self-hosted**: Deploy CloudPrem within your own infrastructure and store your logs on your object storage.
+- **Cost-effective**: Low infrastructure costs thanks to decoupled compute and storage architecture and fast search on object storage.
+- **Scalable**: Horizontally scalable architecture to handle high-volume log ingestion.
+- **Integrated in Datadog**: CloudPrem works with Datadog's log core features such as full-text search, Dashboards, monitors and more.
 
 ## Get started
 
 Follow these steps to deploy and configure CloudPrem:
 
-{{< whatsnext >}}
-   {{< nextlink href="/cloudprem/overview/" >}}Overview{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/install/" >}}Install CloudPrem{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/ingest-logs/" >}}Set up Log Ingestion{{< /nextlink >}}
-      {{< nextlink href="/cloudprem/configure/" >}}Configure CloudPrem{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/manage/" >}}Manage and Monitor{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/supported-features/" >}}Supported Features{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/troubleshooting/" >}}Troubleshooting{{< /nextlink >}}
+{{< whatsnext desc="">}}
+  {{< nextlink href="/cloudprem/overview/architecture" >}}CloudPrem Architecture{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/install/" >}}Install CloudPrem{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/ingest-logs/datadog-agent" >}}Ingest logs with Datadog Agent{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/manage/" >}}Manage and Monitor{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/supported-features/" >}}Supported Features{{< /nextlink >}}
 {{< /whatsnext >}}

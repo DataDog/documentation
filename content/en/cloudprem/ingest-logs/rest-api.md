@@ -2,9 +2,6 @@
 title: Send logs to CloudPrem with REST API
 description: Learn how to integrate with CloudPrem using direct API calls
 further_reading:
-- link: "/cloudprem/ingest-logs/"
-  tag: "Documentation"
-  text: "Log Ingestion Overview"
 - link: "/cloudprem/ingest-logs/datadog-agent/"
   tag: "Documentation"
   text: "Datadog Agent Integration"

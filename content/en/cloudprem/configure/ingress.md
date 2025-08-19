@@ -2,18 +2,6 @@
 title: CloudPrem Ingress Configuration
 description: Learn how to configure and manage ingress controllers for your CloudPrem deployment
 further_reading:
-- link: "/cloudprem/"
-  tag: "Documentation"
-  text: "CloudPrem Overview"
-- link: "/cloudprem/install/"
-  tag: "Documentation"
-  text: "Install CloudPrem"
-- link: "/cloudprem/install/aws_config/"
-  tag: "Documentation"
-  text: "AWS Configuration Prerequisites"
-- link: "/cloudprem/configure/"
-  tag: "Documentation"
-  text: "Configure CloudPrem"
 - link: "/cloudprem/ingest-logs/"
   tag: "Documentation"
   text: "Set up Log Ingestion"

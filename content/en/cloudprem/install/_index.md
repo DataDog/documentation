@@ -14,22 +14,20 @@ Select the installation guide that matches your environment:
 
 ### Cloud-managed Kubernetes
 
-{{< whatsnext >}}
+{{< whatsnext desc="">}}
   {{< nextlink href="./aws-eks/" >}}Install CloudPrem on AWS EKS{{< /nextlink >}}
   {{< nextlink href="./azure-aks/" >}}Install CloudPrem on Azure AKS{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Self-managed Kubernetes
 
-{{< whatsnext >}}
+{{< whatsnext desc="">}}
   {{< nextlink href="./kubernetes-nginx/" >}}Install CloudPrem on a Kubernetes cluster using NGINX Ingress Controller{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Next steps
 
-After completing the installation:
-
-{{< whatsnext >}}
+{{< whatsnext desc="After completing the installation:">}}
    {{< nextlink href="../configure/datadog-account/" >}}Configure your Datadog account{{< /nextlink >}}
    {{< nextlink href="../ingest-logs/" >}}Configure log ingestion{{< /nextlink >}}
    {{< nextlink href="../manage/" >}}Review management and operations{{< /nextlink >}}

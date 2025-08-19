@@ -2,9 +2,6 @@
 title: Send logs to CloudPrem with the Datadog Agent
 description: Configure the Datadog Agent to send logs to your CloudPrem deployment
 further_reading:
-- link: "/cloudprem/ingest-logs/"
-  tag: "Documentation"
-  text: "Log Ingestion Overview"
 - link: "/cloudprem/ingest-logs/observability-pipelines/"
   tag: "Documentation"
   text: "Observability Pipelines Integration"

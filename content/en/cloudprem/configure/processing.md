@@ -2,9 +2,6 @@
 title: Processing Configuration
 description: Learn how to configure your processing pipelines in CloudPrem
 further_reading:
-- link: "/cloudprem/install/"
-  tag: "Documentation"
-  text: "Install CloudPrem and Send Logs with the Agent"
 - link: "/cloudprem/overview/architecture/"
   tag: "Documentation"
   text: "Learn more about CloudPrem Architecture"

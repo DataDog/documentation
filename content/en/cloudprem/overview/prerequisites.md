@@ -42,12 +42,6 @@ This page outlines the infrastructure and software requirements for deploying Cl
 - Ceph Object Storage
 - Any S3-compatible storage
 
-<!-- TODO: add recommendations for small/medium/large deployment
-## Capacity planning examples
-### Small deployment (< 1 TB/day)
-### Medium deployment 10TB per day
-### Medium deployment 100TB per day -->
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
