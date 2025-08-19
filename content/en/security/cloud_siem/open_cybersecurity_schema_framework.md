@@ -72,14 +72,14 @@ The following Log Management integrations support out-of-the-box OCSF pipelines:
 - Cisco Meraki
 - Cloudflare
 - CrowdStrike
-- Github Telemetry
+- GitHub Telemetry
 - Google BigQuery
 - Google Cloud
 - Google GKE cluster audit logs
 - Google Pub Sub
 - Google GSuite
 - JumpCloud
-- Kubernetes audit
+- Kubernetes audit logs
 - LastPass
 - Microsoft 365
 - Okta
