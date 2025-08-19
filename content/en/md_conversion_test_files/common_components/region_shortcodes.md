@@ -6,7 +6,8 @@ title: Region Shortcodes
 
 ### Expected .md output
 
-The contents are enclosed in `[BEGIN CONTENT FOR REGIONS "ap1", "gov"]` and `[END CONTENT FOR REGIONS "ap1", "gov"]`.
+- The contents are enclosed in a `{% alert level="info" %}` tag.
+- The alert contents include a heading or similar content establishing the context of the alert (e.g., "Alert for users on `ap1.datadoghq.com`").
 
 ### Example input
 
