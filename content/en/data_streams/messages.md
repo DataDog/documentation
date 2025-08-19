@@ -60,7 +60,7 @@ To enable permissions, edit an existing role or create a new one on the [Roles p
 #### Creating a new role with permissions
 Follow these steps to create a new role with the required permissions and assign it to users who need access to the Messages feature.
 
-##### Step 1: Create a new role
+##### 1. Create a new role
 
 1. Navigate to the [Roles page][8] in Datadog.
 2. Click **+ New Role** in the top-right corner.
