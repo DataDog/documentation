@@ -523,7 +523,7 @@ spec:
 When this definition is created:
 
 - The frontend app appears under the Frontend Apps section in Software Catalog.
-- If a RUM application exists with the same name or ID, its telemetry is automatically linked. You can find the name under [Manage Applications][1] or the ID will be autofilled when you click **Add Metadata** on an existing Frontend App in Software Catalog.
+- If a RUM application exists with the same name or ID, its telemetry is automatically linked. You can find the name and ID under [Manage Applications][1], or you can click **Add Metadata** on an existing frontend app in Software Catalog to autofill the ID.
 - The entity aggregates metadata, dependencies, and real-time RUM performance metrics in a unified view.
 
 [1]: https://app.datadoghq.com/rum/list
