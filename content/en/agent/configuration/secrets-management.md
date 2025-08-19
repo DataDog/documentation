@@ -29,6 +29,8 @@ Instead of hardcoding sensitive values like API keys or passwords in plaintext w
 
 ### Option 1: Using native Agent support for fetching secrets
 
+**Note**: This option is not available for FIPS-enabled agents at this time.
+
 Starting in Agent version `7.70`, the Datadog Agent natively supports several secret management solutions. Two new settings have been introduced to `datadog.yaml`: `secret_backend_type` and `secret_backend_config`. 
 
 `secret_backend_type` is used to specify which secret management solution to use, and `secret_backend_config` holds additional configuration relevant to that solution:
