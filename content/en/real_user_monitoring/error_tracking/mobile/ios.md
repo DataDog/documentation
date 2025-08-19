@@ -387,6 +387,8 @@ npx @datadog/datadog-ci dsyms upload /path/to/appDsyms/
 
 **Note**: To configure the tool using the EU endpoint, set the `DATADOG_SITE` environment variable to `datadoghq.eu`. To override the full URL for the intake endpoint, define the `DATADOG_DSYM_INTAKE_URL` environment variable. 
 
+The `datadog-ci dsyms upload` command runs only on macOS. 
+
 Alternatively, if you use Fastlane or GitHub Actions in your workflows, you can leverage these integrations instead of `datadog-ci`:
 
 ### Use Fastlane plugin to upload your .dSYM file
