@@ -407,7 +407,7 @@ In Software Catalog, a frontend (`kind:frontend`) represents a frontend applicat
 
 {{% collapse-content title="YAML for RUM app by name" level="h4" expanded=false id="rum-app-name" %}}
 
-This example shows a `kind:frontend` definition for a frontend application in RUM, linked by the name. The name and ID can be found under [Manage Applications][1] or the ID will be autofilled when you click **Add Metadata** on an existing Frontend App in Software Catalog.
+This example shows a `kind:frontend` definition for a frontend application in RUM, linked by the name. You can find the name and ID under [Manage Applications][1], or you can click **Add Metadata** on an existing frontend app in Software Catalog to autofill the ID.
 
 ### Example YAML definitions
 ```yaml
