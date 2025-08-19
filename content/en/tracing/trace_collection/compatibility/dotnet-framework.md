@@ -25,19 +25,19 @@ The .NET Tracer is open source. For more information, see the [.NET Tracer repos
 
 The .NET Tracer supports automatic and custom instrumentation on the following .NET Framework versions. It also supports [.NET Core and .NET 5+][2]. The .NET Tracer does not support code running in partial trust environments.
 
-| .NET Framework Version  | Microsoft End of Life | Support level                       | Package version            | Datadog End of Life |
-| ----------------------- | --------------------- | ----------------------------------- | -------------------------- | ------------------- |
-| 4.8.1                   |                       | [GA](#support-ga)                   | latest                     |                     |
-| 4.8                     |                       | [GA](#support-ga)                   | latest                     |                     |
-| 4.7.2                   |                       | [GA](#support-ga)                   | latest                     |                     |
-| 4.7.1                   |                       | [GA](#support-ga)                   | latest                     |                     |
-| 4.7                     |                       | [GA](#support-ga)                   | latest                     |                     |
-| 4.6.2                   |                       | [GA](#support-ga)                   | latest                     |                     |
-| 4.6.1                   | April 26, 2022        | [GA](#support-ga)                   | latest                     |                     |
-| 4.6                     | April 26, 2022        | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
-| 4.5.2                   | April 26, 2022        | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
-| 4.5.1                   | January 12, 2016      | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
-| 4.5                     | January 12, 2016      | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
+| .NET Framework Version  | Microsoft End of Life | Support level       | Package version            | Datadog End of Life |
+| ----------------------- | --------------------- | --------------------| -------------------------- | ------------------- |
+| 4.8.1                   |                       | [GA](#support-ga)   | latest                     |                     |
+| 4.8                     |                       | [GA](#support-ga)   | latest                     |                     |
+| 4.7.2                   |                       | [GA](#support-ga)   | latest                     |                     |
+| 4.7.1                   |                       | [GA](#support-ga)   | latest                     |                     |
+| 4.7                     |                       | [GA](#support-ga)   | latest                     |                     |
+| 4.6.2                   |                       | [GA](#support-ga)   | latest                     |                     |
+| 4.6.1                   | April 26, 2022        | [GA](#support-ga)   | latest                     |                     |
+| 4.6                     | April 26, 2022        | [EOL](#support-eol) | < 2.0.0 (e.g. [1.31.2][3]) | April 26, 2022      |
+| 4.5.2                   | April 26, 2022        | [EOL](#support-eol) | < 2.0.0 (e.g. [1.31.2][3]) | April 26, 2022      |
+| 4.5.1                   | January 12, 2016      | [EOL](#support-eol) | < 2.0.0 (e.g. [1.31.2][3]) | April 26, 2022      |
+| 4.5                     | January 12, 2016      | [EOL](#support-eol) | < 2.0.0 (e.g. [1.31.2][3]) | April 26, 2022      |
 
 Additional information can be found in [Microsoft's .NET Framework Lifecycle Policy][4] and in [.NET runtime support policy](#net-runtime-support-policy).
 
