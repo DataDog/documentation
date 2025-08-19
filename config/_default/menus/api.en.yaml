@@ -6260,6 +6260,18 @@ menu:
       url: /api/latest/cloud-network-monitoring/
       identifier: cloud-network-monitoring
       generated: true
+    - name: Get all aggregated DNS traffic
+      url: '#get-all-aggregated-dns-traffic'
+      identifier: cloud-network-monitoring-get-all-aggregated-dns-traffic
+      parent: cloud-network-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAggregatedDns
+        unstable: []
+        order: 2
     - name: Get all aggregated connections
       url: '#get-all-aggregated-connections'
       identifier: cloud-network-monitoring-get-all-aggregated-connections
@@ -6270,8 +6282,7 @@ menu:
           - v2
         operationids:
           - GetAggregatedConnections
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Cloudflare Integration
       url: /api/latest/cloudflare-integration/
@@ -9672,6 +9683,19 @@ menu:
         unstable:
           - v2
         order: 21
+    - name: Link Teams with GitHub Teams
+      url: '#link-teams-with-github-teams'
+      identifier: teams-link-teams-with-github-teams
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SyncTeams
+        unstable:
+          - v2
+        order: 19
     - name: Create a team
       url: '#create-a-team'
       identifier: teams-create-a-team

@@ -144,4 +144,4 @@ The following frameworks aren't directly instrumented by App and API Protection,
 | Wordpress | 4.8                       |
 
 [1]: /tracing/trace_collection/compatibility/php/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[2]: /tracing/guide/remote_config

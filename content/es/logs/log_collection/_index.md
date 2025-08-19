@@ -149,7 +149,6 @@ Utiliza el menú desplegable de selección del [sitio][13] situado a la derecha 
 | Sitio | Tipo        | Endpoint                                                                  | Puerto         | Descripción                                                                                                                                                                 |
 |------|-------------|---------------------------------------------------------------------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | EE. UU.   | HTTPS       | `http-intake.logs.datadoghq.com`                                          | 443   | Utilizado por el forwarder personalizado para enviar logs en formato JSON o de texto sin formato a través de HTTPS. Consulta la [documentación de la API HTTP de logs][1].                                                    |
-| EE. UU.   | HTTPS       | `agent-http-intake-pci.logs.datadoghq.com`                                | 443   | Utilizado por el Agent para enviar logs a través de HTTPS a una organización con cumplimiento de PCI DSS activado. Para obtener más información, consulta [Cumplimiento de PCI DSS para Log Management][3].                 |
 | EE. UU.   | HTTPS       | `agent-http-intake.logs.datadoghq.com`                                    | 443   | Utilizado por el Agent para enviar logs en formato JSON a través de HTTPS. Consulta la [documentación Recopilación de logs del Agent de host][2].                                                             |
 | EE. UU.   | HTTPS       | `lambda-http-intake.logs.datadoghq.com`                                   | 443   | Utilizado por funciones de Lambda para enviar logs sin formato o en formato Syslog o JSON a través de HTTPS.                                                                                            |
 | EE. UU.   | HTTPS       | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443   | Utilizado por el SDK del navegador para enviar logs en formato JSON a través de HTTPS.                                                                                                             |
@@ -161,7 +160,6 @@ Utiliza el menú desplegable de selección del [sitio][13] situado a la derecha 
 
 [1]: /es/api/latest/logs/#send-logs
 [2]: /es/agent/logs/#send-logs-over-https
-[3]: /es/data_security/logs/#pci-dss-compliance-for-log-management
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}

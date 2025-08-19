@@ -9,6 +9,10 @@ Puedes utilizar Teams para vincular recursos como dashboards, servicios, monitor
 
 Existen varias formas de ser miembro de un equipo. Los usuarios pueden unirse a los equipos, o pueden agregarlos otros miembros o un administrador. Además, un usuario puede estar en varios equipos al mismo tiempo.
 
+{{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" header="Únete a la Vista previa.">}}
+  La integración de Github para Teams está en Vista previa.
+{{< /callout >}}
+
 ## Configuración
 
 ### Navegación
@@ -24,7 +28,7 @@ Accede a la página del directorio de equipos desde los [parámetros de organiza
 1. Escribe una descripción opcional en **Description**.
 1. Haz clic en **Create** (Crear).
 
-**Notas**:
+**Notas**: 
 
 - Los caracteres permitidos para los nombres de equipos son `a-z`, `A-Z`, `0-9` y `._-:/`. Sustituye los espacios por guiones bajos. 
 - Los caracteres permitidos para los identificadores de equipos son `a-z`, `0-9` y `._-:/`. El último carácter no puede ser un guion bajo.
@@ -74,7 +78,7 @@ Datadog permite asociar los siguientes recursos con identificadores de equipos:
 - [Incidencias][6]
 - [Monitores][7]
 - [Catálogo de recursos][8]
-- [Catálogo de servicios][9]
+- [Software Catalog][9]
 - [Objetivos de nivel de servicio (SLOs)][10]
 - Monitoreos de Sintético, variables globales, ubicaciones privadas
 
@@ -129,11 +133,11 @@ En la siguiente tabla se describen los productos en los que puedes usar el filtr
 |-------------------------|----------------------------------------------------------------------------------|
 | [Dashboards][11]         | Identificador de equipos                                                                      |
 | [Catálogo de recursos][8]   | Identificador de equipos                                                                      |
-| [Catálogo de servicios][12]    | Identificador de equipos                                                                      |
+| [Software Catalog][12]    | Identificador de equipos                                                                      |
 | [Incidentes][13]          | Identificador de equipos                                                                      |
 | [Monitores][14]          | Identificador de equipos                                                                      |
-| [Seguimiento de errores de APM][15] | Servicio que es propiedad de los equipos (determinado por la propiedad dentro del [catálogo de servicios][12]) |
-| [Seguimiento de errores de logs][16] | Servicio que es propiedad de los equipos (determinado por la propiedad dentro del [catálogo de servicios][12]) |
+| [Seguimiento de errores de APM][15] | Servicio propiedad de los equipos (determinado por la propiedad dentro del [Software Catalog][12]) |
+| [Seguimiento de errores de logs][16] | Servicio propiedad de los equipos (determinado por la propiedad dentro del [Software Catalog][12]) |
 | [Objetivos de nivel de servicio (SLOs)][17] | Identificador de equipos                                                                 |
 | [Data Streams Monitoring][18]  | Identificador de equipos                                                                 |
 | [Tests Synthetic][19]          | Identificador de equipos                                                                 |
@@ -157,7 +161,7 @@ Para personalizar tu equipo, consulta [Gestión de equipos][3].
 [6]: /es/service_management/incident_management/
 [7]: /es/monitors/configuration/?tab=thresholdalert#add-metadata
 [8]: /es/infrastructure/resource_catalog/
-[9]: /es/tracing/service_catalog/adding_metadata/#add-metadata-from-the-datadog-ui
+[9]: /es/tracing/software_catalog/adding_metadata/#add-metadata-from-the-datadog-ui
 [10]: /es/service_management/service_level_objectives/#slo-tags
 [11]: https://app.datadoghq.com/dashboard/lists
 [12]: https://app.datadoghq.com/services
