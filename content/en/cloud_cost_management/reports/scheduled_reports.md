@@ -7,41 +7,53 @@ further_reading:
 ---
 
 ## Overview
-Scheduled Cloud Cost (CCM) Reports let you automatically receive recurring cost reports through email or Slack. This feature supports finance, engineering, and executive stakeholders by delivering periodic snapshots of cost metrics, without needing to log into the Datadog platform. The report PDF can be sent to Slack channels or email addresses.
+Scheduled Cloud Cost (CCM) Reports let you automatically receive recurring cost reports through email or Slack. This feature supports finance, engineering, and executive stakeholders by delivering periodic snapshots of cost metrics, without needing to log into the Datadog platform. Reports are sent as PDFs to your chosen Slack channels or email addresses.
 
 {{< img src="cloud_cost/cost_reports/cloud-cost-scheduled-report.png" alt="Schedule Cost Report." style="width:100%;" >}}
 
 ## Schedule a cost report
 1. Go to [**Cloud Cost > Analyze > Reports**][1] in Datadog.
-Create a report or click on an existing report. To create a report, see the documentation on Cloud Cost Reports here.
-2. Click Share, then Schedule Report. In the configuration modal that opens, set a schedule for the report to determine when and how often the report is sent. Enter your schedule's title.
-3. Add recipients:
-    1. **Email recipients**: To add email recipients to your report, enter their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the trash icon that appears next to it.
-    **{{< img src="dashboards/scheduled_reports/add_email_recipients.png" alt="The configuration modal for editing scheduled report variables." style="width:90%;" >}}**
-   2. **Slack recipients**: To add Slack recipients, select the Slack workspace and channel from the available dropdowns. If you do not see any Slack workspaces available, ensure you have the Datadog [Slack Integration][2] installed. All public channels within the Slack workspace should be listed automatically. To select a private Slack channel, make sure to invite the Datadog Slack bot to the channel in Slack. To send a test message to Slack, add a channel recipient and click **Send Test Message**.
-    **{{< img src="dashboards/scheduled_reports/add_slack_recipients.png" alt="The configuration modal for editing scheduled report email recipients." style="width:90%;" >}}**
+2. [Create a report][1] or select an existing report.
+3. Click **Share**, then **Schedule Report**.
+    {{< img src="cloud_cost/cost_reports/share_scheduled_report.png" alt="Click the Share button and Schedule Report on an individual report page." style="width:90%;" >}}
+    
+4. In the configuration modal that opens:
+   - Set your schedule (when and how often the report should be sent)
+   - Enter a title for your schedule
+5. Add recipients:
+   - **Email recipients**: Enter email addresses. Your Datadog account is automatically added, but you can remove it by hovering over it and clicking the trash icon.
+      {{< img src="dashboards/scheduled_reports/add_email_recipients.png" alt="The configuration modal for editing scheduled report variables." style="width:90%;" >}}  
+    - **Slack recipients**: Select your Slack workspace and channel from the dropdowns. If no workspaces appear, make sure you have the Datadog [Slack Integration][2] installed. All public channels within the Slack workspace are listed automatically. For private channels, invite the Datadog Slack bot first. You can test the connection by clicking **Send Test Message**.
+      {{< img src="dashboards/scheduled_reports/add_slack_recipients.png" alt="The configuration modal for editing scheduled report Slack recipients." style="width:90%;" >}}
 
 ## Managing reports
-A single report can have multiple scheduled reports with different settings, which allows you to inform different groups of stakeholders interested in the same cost report. To see the schedules on an existing report, click the Share button and select Manage Schedules.
+A single report can have multiple schedules with different settings, allowing you to inform different stakeholder groups interested in the same cost data. To view existing schedules, click **Share** and select **Manage Schedules**.
 
-From the configuration modal that opens, you can pause an existing schedule or create a new schedule. To see and edit the details of an existing schedule, or delete the schedule, click Edit.
+From the configuration modal that opens, you can:
+- Pause existing schedules
+- Create new schedules
+- Edit schedule details
+- Delete schedules
 
-{{< img src="cloud_cost/cost_reports/manage-cost-report-schedules.png" alt="Manage a Cost Report's Schedule." style="width:90%;" >}}
+{{< img src="cloud_cost/cost_reports/manage-cost-report-schedules-1.png" alt="Manage a Cost Report's Schedule." style="width:90%;" >}}
 
-To see all report schedules, navigate to [**Cloud Cost > Analyze > Reports**][1] and click the Report Schedules tab. On this page, you can click the "My schedules" toggle to switch between the schedules you've created and all the schedules in your organization.
+To see all report schedules across your organization, navigate to [**Cloud Cost > Analyze > Reports**][1] and click the **Report Schedules** tab. Use the "My schedules" toggle to switch between your personal schedules and all organization schedules.
 
-{{< img src="cloud_cost/cost_reports/cost-report-schedules-view.png" alt="View all Cost Report Schedules." style="width:100%;" >}}
+{{< img src="cloud_cost/cost_reports/cost-report-schedules-view-1.png" alt="View all Cost Report Schedules." style="width:100%;" >}}
 
 ## Permissions
-- You must have at least one of **Cloud Cost Report Schedules Write** or **Cloud Cost Report Schedules Manage** permissions to see any report schedules created in your organization.
-- You must have the **Cloud Cost Report Schedules Write** permission to create and modify your own report schedules.
-- You must have the **Cloud Cost Report Schedules Manage** permission to modify other users' report schedules.
+| Action | Required Permission |
+|--------|----------|
+| View schedules | Cloud Cost Report Schedules Write OR Cloud Cost Report Schedules Manage |
+| Create/modify your schedules | Cloud Cost Report Schedules Write |
+| Modify others' schedules | Cloud Cost Report Schedules Manage |
 
-After a report is created, you can subscribe, unsubscribe, edit a schedule, and delete a report assuming you have appropriate permissions. If you do not have **Cloud Cost Report Schedules Write** or **Cloud Cost Report Schedules Manage** permissions, you can unsubscribe from the report directly from an email.
+After a report is created, you can subscribe, unsubscribe, edit schedules, and delete reports (assuming you have the appropriate permissions). If you do not have **Cloud Cost Report Schedules Write** or **Cloud Cost Report Schedules Manage** permissions, you can still unsubscribe directly from the email.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/cost/analyze/reports
-[2]: /integrations/slack/?tab=datadogforslack
+[1]: /cloud_cost_management/reports
+[2]: https://app.datadoghq.com/cost/analyze/reports
+[3]: /integrations/slack/?tab=datadogforslack

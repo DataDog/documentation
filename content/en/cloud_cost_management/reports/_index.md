@@ -3,6 +3,9 @@ title: Reports
 private: true
 description: Track your organization spending with Cloud Cost Management Reports.
 further_reading:
+- link: "/cloud_cost_management/reports/scheduled_reports"
+  tag: "Documentation"
+  text: "Scheduled Cost Reports"
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
@@ -83,6 +86,10 @@ Use filters to include only the specific costs you want to allocate, such as by 
 1. Click **Save** at the top right to save your report for personal or team use.
 1. Share the report by copying the URL or exporting the view to CSV or PNG.
 1. Search for saved reports as needed.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /cloud_cost_management/aws/
 [2]: /cloud_cost_management/azure/?tab=billingaccounts
