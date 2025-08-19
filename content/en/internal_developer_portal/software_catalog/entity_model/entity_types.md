@@ -444,7 +444,7 @@ spec:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="YAML for RUM app by name" level="h4" expanded=false id="rum-app-id" %}}
+{{% collapse-content title="YAML for RUM app by ID" level="h4" expanded=false id="rum-app-id" %}}
 
 This example shows a `kind:frontend` definition for a frontend application in RUM, linked by the ID. The name and ID can be found under [Manage Applications][1] or the ID will be autofilled when you click **Add Metadata** on an existing Frontend App in Software Catalog.
 
