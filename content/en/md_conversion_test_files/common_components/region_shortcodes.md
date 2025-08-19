@@ -22,7 +22,7 @@ This paragraph only appears if the user has selected US or AP1 from the Site Sel
 A placeholder: 
 
 - `<YOUR_DATADOG_SITE>` in code.
-- `[USER'S DATADOG SITE]` in copy.
+- `{% user-datadog-site /%}` in copy.
 
 ### Example inputs
 
