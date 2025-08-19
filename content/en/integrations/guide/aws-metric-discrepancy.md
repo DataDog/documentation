@@ -31,7 +31,7 @@ Datadog always tries to ingest the most granular raw values from AWS normalized 
     In regards to what statistics Datadog decides to collect for any given metric, Datadog decides based on recommendations in AWS documentation and customer demand. Datadog does not collect all statistics for two key reasons:
     - Typically, only one or a few statistics offer meaningful insight.
     - By collection only relevant statistics Datadog can significantly reduce data volume and minimize traffic between Datadog and AWS.
-    Generally, Datadog collects Average by default. When multiple statistics are collected, it is noted as `aws.AWS_NAMESPACE.METRIC_NAME.STATISTIC` e.g, `aws.ec2.cpuutilization.max`. If you are unsure what statistic is being collected for a specific metric it may be useful to compare AWS to Datadog with each statistic provided by AWS. In our example, the statistic will be Average. 
+    Generally, Datadog collects Average by default. When multiple statistics are collected, it is noted as `aws.AWS_NAMESPACE.METRIC_NAME.STATISTIC` e.g, `aws.ec2.cpuutilization.max`. If you are unsure what statistic is being collected for a specific metric it may be useful to compare AWS to Datadog with each statistic provided by AWS. In this example, the statistic is Average. 
 
 3. Graph the metric in AWS CloudWatch Metric Explorer.
 
@@ -48,7 +48,7 @@ Datadog always tries to ingest the most granular raw values from AWS normalized 
 
    {{< img src="integrations/guide/aws-metric-discrepancy/datadog_metric_explorer.png" alt="datadog metric explorer" >}}
 
-   In most cases, after completing steps 1 through 4, you see the exact same values in both AWS and Datadog. However, in our example, a discrepancy appears as soon as the metric begins reporting.
+   In most cases, after completing steps 1 through 4, you see the exact same values in both AWS and Datadog. However, in this example, a discrepancy appears as soon as the metric begins reporting.
 
    - **Datadog**: 32.6
    - **Google Cloud**: 39.8210191868
@@ -61,9 +61,9 @@ Datadog always tries to ingest the most granular raw values from AWS normalized 
 
    This discrepancy occurs because by default, Datadog applies time aggregation when view metrics over a longer period of time . For details, see [Time and Space aggregation][3] documentation.
 
-6. Adjust the timeframe in Datadog.
+6. Adjust the time frame in Datadog.
 
-   Zoom in on the timeframe in Datadog. Assuming you are using the most granular dimensions, the value in AWS should match the value in Datadog.
+   Zoom in on the time frame in Datadog. Assuming you are using the most granular dimensions, the value in AWS should match the value in Datadog.
 
    {{< img src="integrations/guide/aws-metric-discrepancy/datadog_value_correct.png" alt="correct datadog value" >}}
    
