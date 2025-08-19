@@ -56,7 +56,7 @@ The following AWS services are supported:
 
 ##### Set up an Instance profile
 
-Datadog recommends using the [instance profile method][1006] of retrieving secrets, as AWS handles all environment variables and session profiles for you. More instructions on how to do this can be found at the official [AWS Secrets Manager documentation][1007].
+Datadog recommends using the [instance profile method][1006] of retrieving secrets, as AWS handles all environment variables and session profiles for you. More instructions on how to do this can be found at the official [AWS Secrets Manager documentation][1000].
 
 #### Datadog.yaml configuration
 
@@ -111,7 +111,6 @@ secret_backend_config:
 [1004]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html
 [1005]: https://docs.aws.amazon.com/managedservices/latest/userguide/defaults-instance-profile.html
 [1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
-[1007]: https://aws.amazon.com/blogs/security/how-to-use-the-aws-secrets-manager-agent/
 
 {{% /collapse-content %}} 
 
@@ -124,7 +123,7 @@ The following AWS services are supported:
 
 ##### Set up an Instance profile
 
-Datadog recommends using the [instance profile method][1006] of retrieving secrets, as AWS handles all environment variables and session profiles for you. More instructions on how to do this can be found at the official [AWS Secrets Manager documentation][1007].
+Datadog recommends using the [instance profile method][1006] of retrieving secrets, as AWS handles all environment variables and session profiles for you. More instructions on how to do this can be found at the official [AWS Secrets Manager documentation][1001].
 
 #### Datadog.yaml configuration
 
@@ -160,7 +159,6 @@ property3: "ENC[/DatadogAgent/Production/ParameterKey3]"
 [1004]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html
 [1005]: https://docs.aws.amazon.com/managedservices/latest/userguide/defaults-instance-profile.html
 [1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
-[1007]: https://docs.aws.amazon.com/systems-manager/latest/userguide/integration-ps-secretsmanager.html
 
 {{% /collapse-content %}} 
 
