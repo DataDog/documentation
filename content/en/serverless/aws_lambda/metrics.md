@@ -80,7 +80,7 @@ These metrics are [distributions][8]: you can query them using the `count`, `min
 
 `aws.lambda.enhanced.out_of_memory`
 : Measures the number of times a function runs out of memory.
-: Because there are many variations of out-of-memory errors, some cases may not be handled well despite best efforts. If you encounter such a case, create an issue in the [Datadog Lambda Extension GitHub repo][9].
+: Because there are many variations of out-of-memory errors, some cases may not be handled well despite best efforts. If you encounter such a case, create an issue in the [Datadog Lambda Extension GitHub repo][18].
 
 `aws.lambda.enhanced.cpu_total_utilization`
 : Measures the total CPU utilization of the function as a number of cores.
@@ -136,7 +136,7 @@ These metrics are [distributions][8]: you can query them using the `count`, `min
 [6]: /integrations/amazon_lambda/#metric-collection
 [7]: https://app.datadoghq.com/screen/integration/aws_lambda_enhanced_metrics
 [8]: /metrics/distributions/
-[9]: https://github.com/DataDog/datadog-lambda-extension
+[18]: https://github.com/DataDog/datadog-lambda-extension
 
 ## Submit custom metrics
 
