@@ -12,9 +12,9 @@ further_reading:
     text: 'Correlating .NET Logs and Traces'
 ---
 
-## Setup
-
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/sidecar/dotnet">available on GitHub</a>.</div>
+
+## Setup
 
 1. **Install the Datadog .NET tracer** in your Dockerfile.
 

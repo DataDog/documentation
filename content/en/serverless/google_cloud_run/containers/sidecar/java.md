@@ -12,9 +12,9 @@ further_reading:
     text: 'Correlating Java Logs and Traces'
 ---
 
-## Setup
-
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/sidecar/java">available on GitHub</a>.</div>
+
+## Setup
 
 1. **Install the Datadog Java tracer**.
 

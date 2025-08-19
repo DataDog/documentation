@@ -5,9 +5,9 @@ aliases:
   - /serverless/google_cloud_run/containers_sidecar/
 ---
 
-First, set up the **[Google Cloud Integration][1]** to collect metrics and logs from Google Cloud services. Remember to add the `cloud asset viewer` role to your service account and enable the Cloud Asset Inventory API in Google Cloud.
+First, set up the [Datadog-Google Cloud Platform integration][1] to collect metrics and logs from Google Cloud services. Remember to add the `cloud asset viewer` role to your service account and enable the Cloud Asset Inventory API in Google Cloud.
 
-Then, instrument your application using one of the following guides:
+Then, select your runtime below for instructions on how to instrument your application:
 
 {{% container-languages path="sidecar" %}}
 

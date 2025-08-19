@@ -12,9 +12,9 @@ further_reading:
     text: 'Correlating PHP Logs and Traces'
 ---
 
-## Setup
-
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/sidecar/php">available on GitHub</a>.</div>
+
+## Setup
 
 1. **Install the Datadog PHP tracer** in your Dockerfile.
 
