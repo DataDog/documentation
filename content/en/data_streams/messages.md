@@ -53,9 +53,7 @@ You must have the following permissions enabled:
 * `Logs Read Data`
 * `Logs Live Tail`
 
-You can verify your current permissions on your [Profile page][7].
-
-The logs related permissions should be part of the "Datadog Standard Role".
+You can verify your current permissions on your [Profile page][7]. If you need to add the logs-related permissions, add them to the Datadog Standard Role.
 
 To enable permissions, edit an existing role or create a new one on the [Roles page][8]. If you don't have adequate access to modify roles, contact your organization's administrator.
 
