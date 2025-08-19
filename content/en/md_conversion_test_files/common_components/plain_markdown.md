@@ -29,7 +29,7 @@ Some text.
 
 ## Inline text formatting
 
-You can *italicize* text, or **bold** it.
+You can *italicize* text, or **bold** it. You can also use underscores to _italicize_ or __bold__ it.
 
 Text can also be formatted as a [plain link][1], **[bold link][1]**, or *[italic link][1]*.
 
