@@ -479,6 +479,8 @@ spec:
     - system:shopist-checkout-platform
 ```
 
+[1]: https://app.datadoghq.com/rum/list
+
 {{% /collapse-content %}}
 
 {{% collapse-content title="YAML for manually defined frontend app" level="h4" expanded=false id="manually-created" %}}
