@@ -1,6 +1,7 @@
 ---
 title: Synthetic Monitoring enhanced monitor messages and notifications
-
+aliases:
+  - /synthetics/guide/synthetic-test-monitors/
 further_reading:
 - link: "/monitors/manage/"
   tag: "Documentation"
@@ -11,11 +12,25 @@ further_reading:
 - link: "/synthetics/guide/synthetic-test-monitors/"
   tag: "Guide"
   text: "Use Synthetic test monitors"
+products:
+- name: Browser Tests
+  url: /synthetics/browser_tests/
+  icon: browser
+- name: API Tests
+  url: /synthetics/api_tests/
+  icon: api
+- name: Mobile Application Tests
+  url: /synthetics/mobile_app_testing/
+  icon: device-mobile
+- name: Multistep API Tests
+  url: /synthetics/multistep/
+  icon: cog-multi
 ---
 
+{{< product-availability names="Browser Tests,API Tests,Mobile Application Tests,Multistep API Tests" >}}
 ## Overview
 
-Customize your Synthetic monitor notifications to provide meaningful context for on-call responders. Datadog's message templating system enables you to enrich alerts with test details, extract data from test results, and route notifications conditionally based on the failure.
+Customize your Synthetic Monitoring monitor notifications to provide meaningful context for on-call responders. Datadog's message templating system enables you to enrich alerts with test details, extract data from test results, and route notifications conditionally based on the failure.
 
 Monitor messages in Synthetic Monitoring consist of:
 
@@ -24,9 +39,7 @@ Monitor messages in Synthetic Monitoring consist of:
 - **Auto-appended summary**: Includes failing locations, error messages, and links to the test.
 - **Footer**: Includes details from the last failed test run.
 
-You can use [pre-filled content](#pre-filled-monitor-messages), [templated variables](#template-variables), and [conditional logic](#conditional-alerting) to adapt alert messages across different test types and workflows.
-
-{{< img src="/synthetics/browser_tests/browser_tests_pre-filled.png" alt="Synthetic Monitoring monitor section, highlighting the pre-filled monitor messages" style="width:100%;" >}}
+You can use [pre-filled content](#pre-filled-monitor-messages) to start with a structured starting point, [templated variables](#template-variables) to enrich your notifications, and [conditional logic](#conditional-alerting) to adapt alert messages across different test types and workflows. For more complex customization, [advanced usage](#advanced-usage) offers the ability to structure complex messages using handlebars templating.
 
 ## Use cases
 
@@ -40,6 +53,26 @@ Synthetic Monitoring templating system supports a range of use cases:
 - **Screenshots**: Browser and Mobile tests include screenshots in the message footer.
 - **Location metadata**: Include the failing location (for example, `private` or `managed`) in the message.
 
+## Create a Synthetic test monitor
+
+Create a monitor in the **Monitor** section to send notifications when a Synthetic Monitoring test is failing. Monitors are associated with the Synthetic test you create and link to the alerting conditions set in your Synthetic test configuration.
+
+{{< img src="synthetics/guide/synthetics_test_monitors/configure_the_monitor_2.png" alt="Creating a monitor in your Synthetic test" style="width:90%;">}}
+
+- Customize the monitor name to search for it on the [**Manage Monitors**][2] page. To find a Synthetic test monitor, filter on `type:synthetics` in the search bar. You can use monitor [conditional variables][3] to characterize the notification message based on test state. 
+
+- The Synthetic test monitor integrates with notification channels such as email, Slack, Pagerduty, and Microsoft Teams. For more information, see [Notifications][4].
+
+- If you have multiple layers of notifications (for example, notifying more teams the longer a Synthetic test is alerting), Datadog recommends enabling [renotification][5] on your Synthetic monitors.
+
+### Tailor monitor notifications
+
+Depending on your incident management strategy, you may want to involve multiple teams when a Synthetic test alerts. To notify Team B only on subsequent alerts after the first alert, surround the notification to Team B with `{{#is_renotify}}` and `{{/is_renotify}`. Use [conditional variables][3] to further characterize the notification message based on monitor attributes. 
+
+{{< img src="synthetics/guide/synthetics_test_monitors/renotification_toggle_2.png" alt="Select the amount of time for the alerting monitor to renotify" style="width:90%;">}}
+
+To enable renotification, toggle **Enable renotification** and select a time interval from the dropdown menu.
+
 ## Pre-filled monitor messages
 
 Synthetic Monitoring provides pre-filled messages with metadata such as:
@@ -50,7 +83,9 @@ Synthetic Monitoring provides pre-filled messages with metadata such as:
 - Last failed test run information
 - Time the test started failing
 
-These values appear by default in most notification channels. You can override or extend the message using templating.
+These values appear by default in most notification channels. You can override or extend the message using [templating](#template-variables).
+
+   {{< img src="/synthetics/browser_tests/browser_tests_pre-filled.png" alt="Synthetic Monitoring monitor section, highlighting the pre-filled monitor messages" style="width:100%;" >}}
 
 Examples:
 
@@ -183,13 +218,13 @@ Iterate over steps extracting variables for browser and mobile tests:
 
 ## Template variables
 
-Template variables allow you to insert values from the test results into the message. For example:
+Template variables allow you to insert values from the test results and configuration into the message and are accessed using the standard `synthetics.attributes` prefix. For example:
 
 ```handlebars
 Test "{{check_name}}" failed at step {{synthetics.failed_step.name}} with error: {{synthetics.failed_step.failure.message}}.
 ```
 
-### Common variables
+### Common variable shortcuts
 
 - `{{check_name}}`: The name of the monitor.
 - `{{synthetics.failed_step.name}}`: The name of the failing step.
@@ -203,8 +238,6 @@ Test "{{check_name}}" failed at step {{synthetics.failed_step.name}} with error:
 **Note:** Not all variables are available for every test type. You may need to test different outputs to verify the data returned.
 
 ### Result attributes
-
-Access result data using the standard `synthetics.attributes` prefix. Attributes differ by test type.
 
 {{< tabs >}}
 {{% tab "Test Info" %}}
@@ -248,7 +281,7 @@ Applies to Browser and Mobile tests.
 ### Variables
 
 {{< tabs >}}
-{{% tab "Config local variables" %}}
+{{% tab "Local config variables" %}}
 
 These are local variables configured for API tests or defined outside individual steps in step-based tests. This also includes variables created by JavaScript code execution.
 
@@ -269,8 +302,7 @@ Available only for **successful test results** and **recovery notifications**.
 {{% /tab %}}
 {{% tab "Step extracted variables" %}}
 
-Steps
-For tests with steps (Api-catalog-chip globe with meridiansmobile phone), step data is contained in `.steps`.
+For tests with steps, step data is contained in `.steps`.
 
 - `.extractedValue` in step
   - `.name`, `.secure`, `.value` (if successful)
@@ -422,12 +454,6 @@ Use conditional templating to change messages, set notification handles, or over
 {{/if}}
 ```
 
-### Best practices
-
-- Always include a default `@notification` (outside any conditions) to prevent dropped messages.
-- Avoid complex logic for paging tools like PagerDuty, which require consistent routing for recovery.
-- Use conditional logic to override alert text, change priority, or split notifications between teams.
-
 ## Advanced usage
 
 You can customize Synthetic monitor messages using handlebars templating. The following examples cover advanced techniques such as comments, list access, conditions, and iterations.
@@ -567,10 +593,38 @@ You can select from the following options to hide or display the information rel
 | Email   | Full test detail, screenshot, step info | Only custom message and event link |
 | Slack   | Rich content + preview of failed run | Custom message only |
 
-See [Monitor Notifications][1] for more information.
+See [Monitor Notifications][9] for more information.
+
+## Integrate your Synthetic test monitor with Statuspage
+
+If you use [Atlassian Statuspage][6] for visibility into your applications' and services' uptime, you can update the status of your systems with Synthetic test monitor notifications.
+
+{{< img src="synthetics/guide/synthetics_test_monitors/statuspage_monitor_setup.png" alt="Add a Statuspage email address and status to the monitor name in your Synthetic test" style="width:95%;">}}
+
+1. See the [Statuspage documentation][7] to generate a component-specific email address.
+2. Add the generated email address into your test's notification message. For example, `@custom-statuspage-email@notifications.statuspage.io`.
+3. Customize the monitor name to return `UP` or `DOWN` depending on the test state. For example, `{{#is_alert}}DOWN{{/is_alert}}{{#is_recovery}}UP{{/is_recovery}}`.
+4. Fill out the monitor notification section and add a summary in the monitor name. For example, `Shopist Checkout Functionality`.
+5. After you have configured your monitor, click **Save & Exit**.
+
+For more information, see [Integrating Monitors with Statuspage][8].
+
+### Best practices
+
+- Always include a default `@notification` (outside any conditions) to prevent dropped messages.
+- Avoid complex logic for paging tools like PagerDuty, which require consistent routing for recovery.
+- Use conditional logic to override alert text, change priority, or split notifications between teams.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/notifications
+[1]: /monitors/types/metric/
+[2]: /monitors/manage/
+[3]: /monitors/notify/variables/?tab=is_alert#conditional-variables
+[4]: /monitors/notify/#notification-recipients
+[5]: /monitors/notify/#renotify
+[6]: https://support.atlassian.com/statuspage/
+[7]: https://support.atlassian.com/statuspage/docs/get-started-with-email-automation/
+[8]: /monitors/guide/integrate-monitors-with-statuspage/
+[9]: /monitors/notifications

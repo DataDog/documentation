@@ -221,7 +221,7 @@ A notification is sent according to the set of alerting conditions. Use this sec
 3. Specify a renotification frequency. To prevent renotification on failing tests, check the option `Stop re-notifying on X occurrences`.
 4. Click **Save & Start Recording** to save your test configuration and record your browser steps.
 
-For more information, see [Using Synthetic Test Monitors][9].
+For more information, see [Synthetic Monitoring enhanced monitor messages and notifications][9].
 
 ## Record your steps
 
@@ -280,7 +280,7 @@ Use [granular access control][17] to limit who has access to your test based on 
 [6]: /api/latest/synthetics/#create-or-clone-a-test
 [7]: http://daringfireball.net/projects/markdown/syntax
 [8]: /monitors/notify/variables/?tab=is_alert#conditional-variables
-[9]: /synthetics/guide/synthetic-test-monitors
+[9]: /monitors/types/synthetic_monitoring
 [10]: https://www.google.com/chrome
 [11]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [12]: /synthetics/browser_tests/actions/#assertion

@@ -76,9 +76,9 @@ Notification messages include the **message** defined in this section and inform
 
 4. Click **Save & Start Recording** to save your test configuration and monitor.
 
-For more information, see [Using Synthetic Test Monitors][103].
+For more information, see [Synthetic Monitoring enhanced monitor messages and notifications][103].
 
 [101]: /monitors/notify/?tab=is_alert#configure-notifications-and-automations
 [102]: /monitors/notify/variables/?tab=is_alert#conditional-variables
-[103]: /synthetics/guide/synthetic-test-monitors/
+[103]: /monitors/types/synthetic_monitoring/
 [104]: http://daringfireball.net/projects/markdown/syntax
