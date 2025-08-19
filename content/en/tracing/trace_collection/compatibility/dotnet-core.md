@@ -85,7 +85,7 @@ The .NET Tracer supports Linux distributions as best-effort, based on minimum li
 
 | Operating System         | Version | Architectures | Support level                         | Package version                 |
 | -------------------------|---------|---------------|---------------------------------------|---------------------------------|
-| Alpine Linux (x64)       | 3.14+   |  x64,         | [GA](#support-ga)                     | latest (.NET 5+ only, v1.27.0+) |
+| Alpine Linux (x64)       | 3.14+   |  x64          | [GA](#support-ga)                     | latest (.NET 5+ only, v1.27.0+) |
 | Alpine Linux (arm64)     | 3.18+   |  Arm64        | [GA](#support-ga)                     | latest (.NET 6+ only, v3.2.0+)  |
 | CentOS Linux             | 7+      |  x64          | [Maintenance](#support-maintenance)   | latest (EOL in v4.0.0)          |
 | CentOS Stream Linux      | 8       |  x64          | [Maintenance](#support-maintenance)   | latest (EOL in v4.0.0)          |
@@ -132,7 +132,7 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 0.61.0+                                                     | `MySql`              |
 | Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                                  | `Oracle`             |
 | PostgreSQL                      | `Npgsql` 4.0+                                                                                        | `Npgsql`             |
-| Process                         | `"System.Diagnostics.Process"` 4.0+                                                                  | `Process`            |
+| Process                         | `System.Diagnostics.Process` 4.0+                                                                    | `Process`            |
 | RabbitMQ                        | `RabbitMQ.Client` 3.6.9+ .                                                                           | `RabbitMQ`           |
 | Redis (ServiceStack client)     | `ServiceStack.Redis` 4.0.48+                                                                         | `ServiceStackRedis`  |
 | Redis (StackExchange client)    | `StackExchange.Redis` 1.0.187+                                                                       | `StackExchangeRedis` |
@@ -159,11 +159,11 @@ The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 an
 
 ## Supported Datadog Agent versions
 
-| **Datadog Agent version**   | **Package version** |
-|-----------------------------|---------------------|
-| [7.x][8]                    | Latest              |
-| [6.x][8]                    | Latest              |
-| [5.x][9]                    | Latest              |
+| Datadog Agent version | Package version |
+|-----------------------|-----------------|
+| [7.x][8]              | Latest          |
+| [6.x][8]              | Latest          |
+| [5.x][9]              | Latest          |
 
 ## .NET runtime support policy
 
