@@ -61,13 +61,13 @@ The .NET Tracer supports automatic instrumentation of .NET Framework application
 
 ### Windows
 
-| Operating System             | Version     | Support level         | Package version                        |
-| -----------------------------|-------------|-----------------------|----------------------------------------|
-| Windows Server (x64)         | 2012+       | [GA](#support-ga)     | latest                                 |
-| Windows Client (x64)         | 8.1+        | [GA](#support-ga)     | latest                                 |
-| Nano Server (x64)            | < 2012      | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
-| Windows Server (x64)         | < 2012      | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
-| Windows Server (x86)         | All versions| [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
+| Operating System             | Version      | Support level         | Package version                        |
+| -----------------------------|--------------|-----------------------|----------------------------------------|
+| Windows Server (x64)         | >= 2012      | [GA](#support-ga)     | latest                                 |
+| Windows Client (x64)         | >= 8.1       | [GA](#support-ga)     | latest                                 |
+| Nano Server (x64)            | < 2012       | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
+| Windows Server (x64)         | < 2012       | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
+| Windows Server (x86)         | All versions | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
 
 ## Integrations
 
@@ -99,7 +99,7 @@ The [latest version of the .NET Tracer][5] can automatically instrument the foll
 | MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 0.61.0+                                          | `MySql`              |
 | Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                       | `Oracle`             |
 | PostgreSQL                      | `Npgsql` 4.0+                                                                             | `Npgsql`             |
-| Process                         | `"System.Diagnostics.Process"` 4.0+                                                       | `Process`            |
+| Process                         | built-in                                                                                  | `Process`            |
 | RabbitMQ                        | `RabbitMQ.Client` 3.6.9+,                                                                 | `RabbitMQ`           |
 | Redis (ServiceStack client)     | `ServiceStack.Redis` 4.0.48+                                                              | `ServiceStackRedis`  |
 | Redis (StackExchange client)    | `StackExchange.Redis` 1.0.187+                                                            | `StackExchangeRedis` |
@@ -112,11 +112,11 @@ Don't see the library you're looking for? First, check if the library produces o
 
 ## Supported Datadog Agent versions
 
-| **Datadog Agent version**   | **Package version** |
-|-----------------------------|---------------------|
-| [7.x][7]                    | latest              |
-| [6.x][7]                    | latest              |
-| [5.x][8]                    | latest              |
+| Datadog Agent version | Package version |
+|-----------------------|-----------------|
+| [7.x][7]              | latest          |
+| [6.x][7]              | latest          |
+| [5.x][8]              | latest          |
 
 ## .NET runtime support policy
 
