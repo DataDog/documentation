@@ -35,7 +35,7 @@ On the Lambda Task, set the `Payload` in the `Arguments` field as follows:
   "Output": "{% $states.result.Payload %}",
   "Arguments": {
     "FunctionName": "MyFunctionName",
-  "Payload": "{% ($ddctx := ($states.context.**._datadog)[0]; $maybeSnsCtx := ($parse($parse(($states.context.**.body)[0]).**._datadog.Value))[0]; $ddctx := $exists($maybeSnsCtx) ? $maybeSnsCtx : $ddctx; $ddTraceContext := $exists($ddctx.`x-datadog-trace-id`) ? {'x-datadog-trace-id': $ddctx.`x-datadog-trace-id`, 'x-datadog-tags': $ddctx.`x-datadog-tags`} : {'RootExecutionId': $exists($ddctx.RootExecutionId) ? $ddctx.RootExecutionId : $states.context.Execution.Id}; $sfnContext := $merge([$states.context, {'Execution': $sift($states.context.Execution, function($v, $k) { $k != 'Input' })}]); $merge([$sfnContext, $ddTraceContext, {'serverless-version': 'v1'}])) %}"
+    "Payload": "{% ($ddctx := ($states.context.**._datadog)[0]; $maybeSnsCtx := ($parse($parse(($states.context.**.body)[0]).**._datadog.Value))[0]; $ddctx := $exists($maybeSnsCtx) ? $maybeSnsCtx : $ddctx; $ddTraceContext := $exists($ddctx.`x-datadog-trace-id`) ? {'x-datadog-trace-id': $ddctx.`x-datadog-trace-id`, 'x-datadog-tags': $ddctx.`x-datadog-tags`} : {'RootExecutionId': $exists($ddctx.RootExecutionId) ? $ddctx.RootExecutionId : $states.context.Execution.Id}; $sfnContext := $merge([$states.context, {'Execution': $sift($states.context.Execution, function($v, $k) { $k != 'Input' })}]); $merge([$sfnContext, $ddTraceContext, {'serverless-version': 'v1'}])) %}"
   }
 }
 {{< /highlight >}}
@@ -342,7 +342,7 @@ Edit the Step Functions Task to set `_datadog` in the `Input` field as follows:
 
 Configure your task according to the following example:
 
-{{< highlight json "hl_lines=9-13" >}}
+{{< highlight json "hl_lines=8-13" >}}
 "Step Functions StartExecution": {
   "Type": "Task",
   "Resource": "arn:aws:states:::states:startExecution",
