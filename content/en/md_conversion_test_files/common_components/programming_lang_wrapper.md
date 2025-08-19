@@ -4,10 +4,7 @@ title: Programming lang wrapper
 
 ## Expected .md output
 
-These are treated as tabs:
-
-- Each section starts with `[BEGIN TAB]` and end with `[END TAB]`.
-- Each section includes its label at the top (for example, "Python"), formatted as a heading.
+These are treated as tabs (see `tabs.md`).
 
 ## Example input
 

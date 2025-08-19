@@ -4,8 +4,9 @@ title: Tabs
 
 ## Expected .md output
 
-- Each tab starts with `[BEGIN TAB]` and end with `[END TAB]`.
-- Each tab includes its label at the top (for example, "Python"), formatted as a heading.
+- Each tab set is wrapped in `{% tabs %}` and `{% /tabs %}` tags.
+- Each tab is enclosed in `{% tab %}` and `{% /tabs %}` tags.
+- Each tab includes its label at the top (for example, "Python"), formatted as a heading of the appropriate level based on context. If no heading levels are left, bold is used, on its own line.
 
 ## Example input
 

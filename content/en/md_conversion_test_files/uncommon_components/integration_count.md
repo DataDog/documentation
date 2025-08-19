@@ -4,7 +4,7 @@ title: Integration count
 
 ## Expected .md output
 
-A placeholder is used: `[INTEGRATION COUNT PLACEHOLDER]`.
+A self-closing tag: `{% integration-count /%}`.
 
 ## Integration count
 

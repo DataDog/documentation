@@ -4,8 +4,8 @@ title: Callouts
 
 ## Expected .md output
 
-- Each callout is marked by `[BEGIN CALLOUT]` and `[END CALLOUT]`.
-- Any attributes, such as the title or the URL, are included in the box contents:
+- Each callout is enclosed in `{% callout %}` and `{% /callout %}` tags.
+- Any attributes, such as the title or the URL, are also included in the box contents:
     - The title is a heading at the top of the box.
     - The URL is included with verbiage at the bottom like "Visit this URL: <URL>".
 

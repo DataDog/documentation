@@ -4,7 +4,7 @@ title: Collapsible Sections
 
 ## Expected .md output
 
-Each section begins and ends with a box marker: `[BEGIN BOX]` and `[END BOX]`.
+- Each section is enclosed in `{% collapsible-section %}` and `{% /collapsible-section %}` tags. Any attributes, like `title`, are included in the tag.
 
 ## Example inputs
 

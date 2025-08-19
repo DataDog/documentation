@@ -4,7 +4,7 @@ title: Icon
 
 ## Expected .md output
 
-A placeholder: `[ICON: some-icon-name]`
+A self-closing tag: `{% icon name="some-icon-name" %}`
 
 ## Example input
 

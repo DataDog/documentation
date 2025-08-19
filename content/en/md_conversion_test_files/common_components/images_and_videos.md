@@ -4,7 +4,7 @@ title: Images and Videos
 
 ## Expected .md output
 
-A placeholder including relevant information about the asset, such as `[IMAGE src="some/src/path" alt="some alt text"]`.
+An easily readable tag is used for each one, such as `{% image src="path/to/image" %}`, with any available attributes.
 
 ## Example inputs
 

@@ -4,7 +4,7 @@ title: Alert
 
 ## Expected .md output
 
-Each alert is bordered with `[BEGIN <ALERT_LEVEL> ALERT]` and `[END <ALERT_LEVEL> ALERT]`. For example, `[BEGIN INFO ALERT]`.
+Each alert is enclosed in `{% alert %}` and `{% /alert %}` tags, with a `level` attribute.
 
 ### Info
 

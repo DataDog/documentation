@@ -4,9 +4,7 @@ title: Expression Language Evaluator
 
 ## Expected .md output
 
-A placeholder is inserted, like this:
-
-[INTERACTIVE DEMO OF `matches(\"Hello\", \"^H.*o$\")`]
+A tag is inserted: `{% interactive-demo for-expression="some expression" /%}`
 
 ## Example input
 
