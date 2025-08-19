@@ -35,11 +35,11 @@ From the configuration modal that opens, you can:
 - Edit schedule details
 - Delete schedules
 
-{{< img src="cloud_cost/cost_reports/manage-cost-report-schedules-1.png" alt="Manage a Cost Report's Schedule." style="width:90%;" >}}
+{{< img src="cloud_cost/cost_reports/manage-cost-report-schedules-2.png" alt="Manage a Cost Report's Schedule." style="width:90%;" >}}
 
 To see all report schedules across your organization, navigate to [**Cloud Cost > Analyze > Reports**][1] and click the **Report Schedules** tab. Use the "My schedules" toggle to switch between your personal schedules and all organization schedules.
 
-{{< img src="cloud_cost/cost_reports/cost-report-schedules-view-1.png" alt="View all Cost Report Schedules." style="width:100%;" >}}
+{{< img src="cloud_cost/cost_reports/cost-report-schedules-view-2.png" alt="View all Cost Report Schedules." style="width:100%;" >}}
 
 ## Permissions
 | Action | Required Permission |
