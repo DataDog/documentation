@@ -270,6 +270,16 @@
             "{{< /whatsnext >}}"
         ]
     },
+    "Header list": {
+        "scope": "markdown",
+        "prefix": ";;header-list",
+        "body": [
+            "{{< header-list header=\"${1:}\" >}}",
+            "   {{< nextlink href=\"link/here\" >}}Link description goes here{{< /nextlink >}}",
+            "{{< /header-list >}}"
+        ],
+        "description": "Header list"
+    },
     "Eng Blog Frontmatter": {
         "scope": "markdown",
         "prefix": ";;eng_blog_frontmatter",

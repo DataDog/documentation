@@ -11,7 +11,7 @@ further_reading:
 
 [Data Jobs Monitoring][7] gives visibility into the performance and reliability of your Apache Spark and Databricks jobs.
 
-{{< callout url="https://www.datadoghq.com/product-preview/databricks-serverless-job-monitoring/" custom_class="sign-up-trigger" btn_hidden="false" header="Join the Preview: Databricks Serverless Job Monitoring">}}
+{{< callout url="https://www.datadoghq.com/product-preview/databricks-serverless-job-monitoring" btn_hidden="false" header="Join the Preview: Databricks Serverless Job Monitoring">}}
 Databricks Serverless Job Monitoring helps you detect issues with jobs running on Serverless or SQL Warehouse compute. Complete the form to request access.
 {{< /callout >}}
 
@@ -44,10 +44,25 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 1. On the **Configure** tab, click **Add Databricks Workspace**.
 1. Enter a workspace name, your Databricks workspace URL, account ID, and the client ID and secret you generated.
    {{< img src="data_jobs/databricks/configure-workspace-form-m2m.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, account ID, client ID, and client secret." style="width:100%;" >}}
+1. To gain visibility into your Databricks costs in Data Jobs Monitoring or [Cloud Cost Management][18], provide the ID of a [Databricks SQL Warehouse][19] that Datadog can use to query your [system tables][20].
+   - The service principal must have access to the SQL Warehouse. In the Warehouse configuration page, go to **Permissions** (top right) and grant it `CAN USE` permission.
+   - Grant the service principal read access to the Unity Catalog [system tables][20] by running the following commands:
+   ```sql
+   GRANT USE CATALOG ON CATALOG system TO <service_principal>;
+   GRANT SELECT ON CATALOG system TO <service_principal>;
+   GRANT USE SCHEMA ON CATALOG system TO <service_principal>;
+   ```
+   The user granting these must have `MANAGE` privilege on `CATALOG system`.
+      
+   -  The SQL Warehouse must be Pro or Serverless. Classic Warehouses are **NOT** supported. A 2XS warehouse is recommended, with Auto Stop set to 5-10 minutes to reduce cost.
 1. In the **Select products to set up integration** section, ensure that Data Jobs Monitoring is **Enabled**.
 1. In the **Datadog Agent Setup** section, choose either
     - [Managed by Datadog (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog installs and manages the Agent with a global init script in the workspace.
     - [Manually](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent): Follow the [instructions below](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent) to install and manage the init script for installing the Agent globally or on specific Databricks clusters.
+
+[18]: https://docs.datadoghq.com/cloud_cost_management/
+[19]: https://docs.databricks.com/aws/en/compute/sql-warehouse/
+[20]: https://docs.databricks.com/aws/en/admin/system-tables/
 
 {{% /tab %}}
 
@@ -67,6 +82,17 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 1. On the **Configure** tab, click **Add Databricks Workspace**.
 1. Enter a workspace name, your Databricks workspace URL, and the Databricks token you generated.
    {{< img src="data_jobs/databricks/configure-workspace-form.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, and API token." style="width:100%;" >}}
+1. To gain visibility into your Databricks costs in Data Jobs Monitoring or [Cloud Cost Management][18], provide the ID of a [Databricks SQL Warehouse][19] that Datadog can use to query your [system tables][20].
+
+   - The token's principal must have access to the SQL Warehouse. Give it `CAN USE` permission from **Permissions** at the top right of the Warehouse configuration page.
+   - Grant the service principal read access to the Unity Catalog [system tables][20] by running the following commands::
+   ```sql
+   GRANT USE CATALOG ON CATALOG system TO <token_principal>;
+   GRANT SELECT ON CATALOG system TO <token_principal>;
+   GRANT USE SCHEMA ON CATALOG system TO <token_principal>;
+   ```
+   The user granting these must have `MANAGE` privilege on `CATALOG system`.
+   -  The SQL Warehouse must be Pro or Serverless. Classic Warehouses are **NOT** supported. A 2XS size warehouse is recommended, with Auto Stop configured for 5-10 minutes to minimize cost.
 1. In the **Select products to set up integration** section, make sure the Data Jobs Monitoring product is **Enabled**.
 1. In the **Datadog Agent Setup** section, choose either
     - [Managed by Datadog (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog installs and manages the Agent with a global init script in the workspace.
@@ -76,6 +102,10 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 [10]: https://docs.databricks.com/en/admin/users-groups/service-principals.html#manage-personal-access-tokens-for-a-service-principal
 [11]: https://docs.databricks.com/en/admin/users-groups/service-principals.html#what-is-a-service-principal
 [17]: https://docs.databricks.com/aws/en/security/auth/entitlements#entitlements-overview
+[18]: https://docs.datadoghq.com/cloud_cost_management
+[19]: https://docs.databricks.com/aws/en/compute/sql-warehouse/
+[20]: https://docs.databricks.com/aws/en/admin/system-tables/
+
 
 {{% /tab %}}
 
@@ -83,7 +113,7 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 
 ### Install the Datadog Agent
 
-The Datadog Agent must be installed on Databricks clusters to monitor Databricks jobs that run on all-purpose or job clusters.
+The Datadog Agent must be installed on Databricks clusters to monitor Databricks jobs that run on all-purpose or job clusters. This step is not required to monitor jobs on [serverless compute][4].
 
 {{< tabs >}}
 {{% tab "Datadog managed global init script (Recommended)" %}}
@@ -129,6 +159,7 @@ Optionally, you can add tags to your Databricks cluster and Spark performance me
 [1]: /getting_started/tagging/
 [2]: https://docs.databricks.com/api/workspace/clusters/edit#spark_env_vars
 [3]: /agent/logs/advanced_log_collection/?tab=environmentvariable#global-processing-rules
+[4]: https://docs.databricks.com/aws/en/compute/serverless/
 
 {{% /tab %}}
 
@@ -296,6 +327,18 @@ If you need more granular control, grant these minimal permissions to the follow
 | Query                            | [CAN VIEW][23]
 | SQL warehouse                    | [CAN MONITOR][24]
 
+Additionally, for Datadog to access your Databricks cost data in Data Jobs Monitoring or [Cloud Cost Management][18], the user or service principal used to query [system tables][20] must have the following permissions:
+   - `CAN USE` permission on the SQL Warehouse.
+   - Read access to the [system tables][20] within Unity Catalog. This can be granted with:
+   ```sql
+   GRANT USE CATALOG ON CATALOG system TO <service_principal>;
+   GRANT SELECT ON CATALOG system TO <service_principal>;
+   GRANT USE SCHEMA ON CATALOG system TO <service_principal>;
+   ```
+   The user granting these must have `MANAGE` privilege on `CATALOG system`.
+      
+[18]: https://docs.datadoghq.com/cloud_cost_management
+[20]: https://docs.databricks.com/aws/en/admin/system-tables/
 
 ### Tag spans at runtime
 
