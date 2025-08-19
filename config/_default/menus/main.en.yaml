@@ -5939,17 +5939,17 @@ menu:
       identifier: cloudprem
       weight: 30000
     - name: Overview # Recommend Getting Started instead of Overview
-      url: cloudprem/getting_started/
+      url: cloudprem/overview/
       parent: cloudprem
       identifier: cloudprem_getting_started
       weight: 1
     - name: Architecture
-      url: /cloudprem/overview/architecture
+      url: /cloudprem/architecture
       parent: cloudprem_getting_started
       identifier: cloudprem_architecture
       weight: 101
     - name: Prerequisites
-      url: /cloudprem/overview/prerequisites
+      url: /cloudprem/install/prerequisites
       parent: cloudprem_getting_started
       identifier: cloudprem_prerequisites
       weight: 102
@@ -6028,16 +6028,26 @@ menu:
       parent: cloudprem_advanced_configuration
       identifier: cloudprem_processing
       weight: 404
+    - name: Datadog Account
+      url: /cloudprem/configure/datadog-account
+      parent: cloudprem_advanced_configuration
+      identifier: cloudprem_datadog_account
+      weight: 405
     - name: Manage
       url: /cloudprem/manage/
       parent: cloudprem
       identifier: cloudprem_manage
       weight: 5
+    - name: Supported Features
+      url: /cloudprem/supported-features/
+      parent: cloudprem
+      identifier: cloudprem_supported_features
+      weight: 6
     - name: Troubleshooting
       url: /cloudprem/troubleshooting/
       parent: cloudprem
       identifier: cloudprem_troubleshooting
-      weight: 6
+      weight: 7
     - name: Security Overview
       url: security/
       pre: security-platform

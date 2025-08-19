@@ -24,6 +24,6 @@ CloudPrem is optimized for logs and has a very low infrastructure costs per TB, 
 ## Next steps
 
 {{< whatsnext >}}
-   {{< nextlink href="/cloudprem/overview/architecture" >}}Architecture{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/overview/prerequisites" >}}Prerequisites{{< /nextlink >}}
+   {{< nextlink href="/cloudprem/architecture/" >}}Architecture{{< /nextlink >}}
+   {{< nextlink href="/cloudprem/install/prerequisites/" >}}Prerequisites{{< /nextlink >}}
 {{< /whatsnext >}}

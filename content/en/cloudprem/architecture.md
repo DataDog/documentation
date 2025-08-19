@@ -2,7 +2,7 @@
 title: Architecture
 private: true
 further_reading:
-- link: "/cloudprem/overview/prerequisites/"
+- link: "/cloudprem/install/prerequisites/"
   tag: "Documentation"
   text: "CloudPrem Prerequisites"
 - link: "/cloudprem/install/"
