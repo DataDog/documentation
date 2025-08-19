@@ -12,11 +12,11 @@ further_reading:
 ## Overview
 Scheduled Cloud Cost (CCM) Reports let you automatically receive recurring cost reports through email or Slack. This feature supports finance, engineering, and executive stakeholders by delivering periodic snapshots of cost metrics, without needing to log into the Datadog platform. Reports are sent as PDFs to your chosen Slack channels or email addresses.
 
-{{< img src="cloud_cost/cost_reports/cloud-cost-scheduled-report.png" alt="Schedule Cost Report." style="width:100%;" >}}
+{{< img src="cloud_cost/cost_reports/cloud-cost-scheduled-report-1.png" alt="Schedule Cost Report." style="width:80%;" >}}
 
 ## Schedule a cost report
 1. Go to [**Cloud Cost > Analyze > Reports**][1] in Datadog.
-2. [Create a report][1] or select an existing report.
+2. [Create a report][2] or select an existing report.
 3. Click **Share**, then **Schedule Report**.
     {{< img src="cloud_cost/cost_reports/share_scheduled_report.png" alt="Click the Share button and Schedule Report on an individual report page." style="width:90%;" >}}
     
@@ -25,9 +25,9 @@ Scheduled Cloud Cost (CCM) Reports let you automatically receive recurring cost 
    - Enter a title for your schedule
 5. Add recipients:
    - **Email recipients**: Enter email addresses. Your Datadog account is automatically added, but you can remove it by hovering over it and clicking the trash icon.
-      {{< img src="dashboards/scheduled_reports/add_email_recipients.png" alt="The configuration modal for editing scheduled report variables." style="width:90%;" >}}  
+     {{< img src="dashboards/scheduled_reports/add_email_recipients.png" alt="The configuration modal for editing scheduled report variables." style="width:80%;" >}}  
     - **Slack recipients**: Select your Slack workspace and channel from the dropdowns. If no workspaces appear, make sure you have the Datadog [Slack Integration][2] installed. All public channels within the Slack workspace are listed automatically. For private channels, invite the Datadog Slack bot first. You can test the connection by clicking **Send Test Message**.
-      {{< img src="dashboards/scheduled_reports/add_slack_recipients.png" alt="The configuration modal for editing scheduled report Slack recipients." style="width:90%;" >}}
+      {{< img src="dashboards/scheduled_reports/add_slack_recipients.png" alt="The configuration modal for editing scheduled report Slack recipients." style="width:80%;" >}}
 
 ## Managing reports
 A single report can have multiple schedules with different settings, allowing you to inform different stakeholder groups interested in the same cost data. To view existing schedules, click **Share** and select **Manage Schedules**.
@@ -38,11 +38,15 @@ From the configuration modal that opens, you can:
 - Edit schedule details
 - Delete schedules
 
-{{< img src="cloud_cost/cost_reports/manage-cost-report-schedules-2.png" alt="Manage a Cost Report's Schedule." style="width:90%;" >}}
+{{< img src="cloud_cost/cost_reports/manage-cost-report-schedules-2.png" alt="Manage a Cost Report's Schedule." style="width:70%;" >}}
 
-To see all report schedules across your organization, navigate to [**Cloud Cost > Analyze > Reports**][1] and click the **Report Schedules** tab. Use the "My schedules" toggle to switch between your personal schedules and all organization schedules.
+## Viewing schedules
 
-{{< img src="cloud_cost/cost_reports/cost-report-schedules-view-2.png" alt="View all Cost Report Schedules." style="width:100%;" >}}
+To see all report schedules across your organization:
+1. Navigate to [**Cloud Cost > Analyze > Reports**][1] and click the **Report Schedules** tab.
+2. Use the "My schedules" toggle to switch between your personal schedules and all organization schedules.
+
+{{< img src="cloud_cost/cost_reports/cost-report-schedules-view-4.png" alt="View all Cost Report Schedules." style="width:100%;" >}}
 
 ## Permissions
 | Action | Required Permission |
@@ -57,6 +61,6 @@ After a report is created, you can subscribe, unsubscribe, edit schedules, and d
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /cloud_cost_management/reports
-[2]: https://app.datadoghq.com/cost/analyze/reports
+[1]: https://app.datadoghq.com/cost/analyze/reports
+[2]: /cloud_cost_management/reports
 [3]: /integrations/slack/?tab=datadogforslack
