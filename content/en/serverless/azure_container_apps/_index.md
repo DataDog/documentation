@@ -4,6 +4,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/azure-container-apps/'
       tag: 'Blog'
       text: 'Collect traces, logs, and custom metrics from Container Apps services'
+    - link: 'http://datadoghq.com/blog/azure-well-architected-serverless-applications-best-practices/'
+      tag: 'Blog'
+      text: 'Build secure and scalable Azure serverless applications with the Well-Architected Framework'
 ---
 
 <div class="alert alert-info">To instrument your Azure Container Apps applications with <code>serverless-init</code>, see <a href="/serverless/guide/aca_serverless_init">Azure Container Apps with serverless-init</a>.</div>
