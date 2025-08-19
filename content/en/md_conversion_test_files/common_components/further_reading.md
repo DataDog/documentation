@@ -11,7 +11,7 @@ further_reading:
 
 ## Expected .md output
 
-A list of links, introduced by the text "Further reading:".
+A list of links, introduced by the "Further Reading" heading.
 
 ## Example input
 
