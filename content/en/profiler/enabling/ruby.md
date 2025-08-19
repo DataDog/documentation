@@ -129,7 +129,7 @@ You can configure the profiler using the following environment variables:
 | `DD_VERSION`                                  | String  | The [version][10] of your service.                                                                                                      |
 | `DD_TAGS`                                     | String  | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.          |
 
-Alternatively, you can set profiler parameters in code with these functions, inside a `Datadog.configure` block. Note that parameters provided via code take precedence over those provided via environment variable.
+Alternatively, you can set profiler parameters in code with these functions, inside a `Datadog.configure` block. Note that parameters provided in code take precedence over those provided as environment variables.
 
 | Environment variable                                  | Type    | Description                                                                                                                             |
 | ----------------------------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
