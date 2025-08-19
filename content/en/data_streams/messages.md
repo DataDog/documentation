@@ -73,7 +73,7 @@ Follow these steps to create a new role with the required permissions and assign
 6. Click **Save**.
 7. Confirm your role was created successfully by searching for it in the roles list.
 
-##### Step 2: Assign the role to users
+##### 2. Assign the role to users
 
 1. Go to the [Users page][9] in Datadog.
 2. Find and click on the user you want to assign the role to.
