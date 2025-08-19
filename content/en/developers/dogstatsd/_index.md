@@ -101,24 +101,8 @@ docker run -d --cgroupns host \
 
 If you need to change the port used to collect StatsD metrics, use the `DD_DOGSTATSD_PORT="<NEW_DOGSTATSD_PORT>` environment variable. You can also configure DogStatsD to use a [UNIX domain socket][1].
 
-#### Origin detection over UDP
-
-Origin detection is supported in Agent v6.10.0+, and allows DogStatsD to detect where the container metrics come from and automatically tag metrics. When this mode is enabled, all metrics received through UDP are tagged by the same pod tags as Autodiscovery metrics.
-
-The following tags are added for [Docker][3]. It is important to note that [cardinality][4] is a key concept when it comes to billing.
-
-Origin detection in non-Kubernetes environments is based on an extension of the DogStatsD protocol in [Datagram Format and Shell Usage][2]. To enable the feature in the Agent, set the `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT` environment variable to `true`.
-
-<div class="alert alert-warning">
-  By default, origin detection is enabled in all DogStatsD clients, but it is not enabled by default in the Datadog Agent. To disable origin detection in a client, see the documentation for the specific DogStatsD library you're using.
-</div>
-
-**Note**: Origin detection is not supported for Fargate environments.
-
 [1]: /developers/dogstatsd/unix_socket/
 [2]: /developers/dogstatsd/datagram_shell/?tab=metrics#dogstatsd-protocol-v12
-[3]: /containers/docker/tag/
-[4]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#tags-cardinality
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
@@ -177,47 +161,12 @@ With this, any pod running your application is able to send DogStatsD metrics wi
 
 **Note**: As a best practice, Datadog recommends using unified service tagging when assigning attributes. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to unify your environment, see [unified service tagging][4].
 
-#### Origin detection over UDP
-
-Origin detection is supported in Agent 6.10.0+ and allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received through UDP are tagged by the same pod tags as Autodiscovery metrics.
-
-The following tags are added for [Kubernetes][8]. It is important to note that [cardinality][9] is a key concept when it comes to billing.
-
-1. To activate origin detection, add the `global.originDetectionUnified.enabled` setting to your `datadog-agent.yaml` manifest:
-
-    ```yaml
-    global:
-        originDetectionUnified:
-            enabled: true
-    ```
-
-**Notes**: 
-* An alternative to UDP is [UNIX Domain Sockets][5].
-* Origin detection with UDP can use the pod ID as the entity ID.
-
-To use pod ID as the entity ID, add the following lines to your application manifest:
-
-```yaml
-env:
-    - name: DD_ENTITY_ID
-      valueFrom:
-          fieldRef:
-              fieldPath: metadata.uid
-```
-
-To set [tag cardinality][6] for the metrics collected using origin detection, set the setting `features.dogstatsd.tagCardinality` to either `low` (default), `orchestrator` or `high`.
-
-**Note:** For UDP, `pod_name` tags are not added by default to avoid creating too many [custom metrics][7].
-
 [1]: /developers/dogstatsd/unix_socket/
 [2]: https://github.com/containernetworking/cni
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /developers/dogstatsd/unix_socket/?tab=host#using-origin-detection-for-container-tagging
 [6]: /getting_started/tagging/assigning_tags/#environment-variables
-[7]: /metrics/custom_metrics/
-[8]: /containers/kubernetes/tag/
-[9]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#tags-cardinality
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -557,12 +506,14 @@ For more information, search the Java DogStatsD [package][1] for the NonBlocking
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-| Parameter     | Type            | Default     | Description                                                                                                                                                                                            |
-| ------------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `host`        | String          | `localhost` | The host of your DogStatsD server. If this is not set the Agent looks at the `DD_AGENT_HOST` or `DD_DOGSTATSD_URL` environment variable.                                                               |
-| `port`        | Integer         | `8125`      | The port of your DogStatsD server. If this is not set, the Agent looks at the `DD_DOGSTATSD_PORT` or `DD_DOGSTATSD_URL` environment variable.                                                          |
-| `socket_path` | String          | `null`      | The path to the DogStatsD UNIX domain socket (overrides `host` and `port`). This is only supported with Agent v6+. If this is not set, the Agent looks at the `DD_DOGSTATSD_URL` environment variable. |
-| `global_tags` | List of Strings | `null`      | Tags to apply to all metrics, events, and service checks. The `@dd.internal.entity_id` tag is appended to global_tags from the `DD_ENTITY_ID` environment variable.                                    |
+| Parameter          | Type            | Default     | Description                                                                                                                                                                                            |
+| ------------------ | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `host`             | String          | `localhost` | The host of your DogStatsD server. If this is not set the Agent looks at the `DD_AGENT_HOST` or `DD_DOGSTATSD_URL` environment variable.                                                               |
+| `port`             | Integer         | `8125`      | The port of your DogStatsD server. If this is not set, the Agent looks at the `DD_DOGSTATSD_PORT` or `DD_DOGSTATSD_URL` environment variable.                                                          |
+| `socket_path`      | String          | `null`      | The path to the DogStatsD UNIX domain socket (overrides `host` and `port`). This is only supported with Agent v6+. If this is not set, the Agent looks at the `DD_DOGSTATSD_URL` environment variable. |
+| `global_tags`      | List of Strings | `null`      | Tags to apply to all metrics, events, and service checks. The `@dd.internal.entity_id` tag is appended to global_tags from the `DD_ENTITY_ID` environment variable.                                    |
+| `origin_detection` | Boolean         | True        | Should origin detection fields be added to each metric?                                                                                                                                                |
+| `container_id`     | String          | `null`      | A container id to tag all metrics with for origin detection.                                                                                                                                           |
 
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
@@ -573,6 +524,8 @@ For more information, search the Java DogStatsD [package][1] for the NonBlocking
 | `StatsdPort`       | Integer         | `8125`      | The port of the targeted StatsD server.                              |
 | `Prefix`           | String          | `null`      | Prefix to apply to every metric, event, and service check.           |
 | `ConstantTags`     | List of strings | `null`      | Global tags to be applied to every metric, event, and service check. |
+| `OriginDetection`  | Bool            | True        | Should origin detection fields be added to each metric?              |
+| `ContainerID`      | String          | `null`      | A container id to tag all metrics with for origin detection.         |
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
