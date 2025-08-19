@@ -440,6 +440,8 @@ spec:
     - system:shopist-checkout-platform
 ```
 
+[1]: https://app.datadoghq.com/rum/list
+
 {{% /collapse-content %}}
 
 {{% collapse-content title="YAML for RUM app by name" level="h4" expanded=false id="rum-app-id" %}}
