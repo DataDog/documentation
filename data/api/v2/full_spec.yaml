@@ -233,7 +233,8 @@ components:
       name: cloud_account_id
       required: true
       schema:
-        type: string
+        format: int64
+        type: integer
     CloudWorkloadSecurityAgentRuleID:
       description: The ID of the Agent rule
       example: 3b5-v82-ns6
@@ -1652,6 +1653,8 @@ components:
             example: arn:aws:lambda:us-east-1:123456789012:function:DatadogLambdaLogForwarder
             type: string
           type: array
+        log_source_config:
+          $ref: '#/components/schemas/AWSLambdaForwarderConfigLogSourceConfig'
         sources:
           description: 'List of service IDs set to enable automatic log collection.
             Discover the list of available services with the
@@ -1661,6 +1664,44 @@ components:
           items:
             example: s3
             type: string
+          type: array
+      type: object
+    AWSLambdaForwarderConfigLogSourceConfig:
+      description: Log source configuration.
+      properties:
+        tag_filters:
+          description: List of AWS log source tag filters. Defaults to `[]`.
+          items:
+            $ref: '#/components/schemas/AWSLogSourceTagFilter'
+          type: array
+      type: object
+    AWSLogSourceTagFilter:
+      description: 'AWS log source tag filter list. Defaults to `[]`.
+
+        Array of log source to AWS resource tag mappings. Each mapping contains a
+        log source and its associated AWS resource tags (in `key:value` format) used
+        to filter logs submitted to Datadog.
+
+        Tag filters are applied for tags on the AWS resource emitting logs; tags associated
+        with the log storage entity (such as a CloudWatch Log Group or S3 Bucket)
+        are not considered.
+
+        For more information on resource tag filter syntax, [see AWS resource exclusion](https://docs.datadoghq.com/account_management/billing/aws/#aws-resource-exclusion)
+        in the AWS integration billing page.'
+      properties:
+        source:
+          description: The AWS log source to which the tag filters defined in `tags`
+            are applied.
+          example: s3
+          type: string
+        tags:
+          description: The AWS resource tags to filter on for the log source specified
+            by `source`.
+          items:
+            description: Tag in the form `key:value`.
+            example: env:prod
+            type: string
+          nullable: true
           type: array
       type: object
     AWSLogsConfig:
@@ -4499,8 +4540,7 @@ components:
           $ref: '#/components/schemas/AwsCURConfigAttributes'
         id:
           description: The ID of the AWS CUR config.
-          format: int64
-          type: integer
+          type: string
         type:
           $ref: '#/components/schemas/AwsCURConfigType'
       required:
@@ -4653,9 +4693,6 @@ components:
           description: The region the bucket is located in.
           example: us-east-1
           type: string
-        is_enabled:
-          description: Whether or not the Cloud Cost Management account is enabled.
-          type: boolean
         months:
           description: The month of the report.
           format: int32
@@ -5149,8 +5186,7 @@ components:
           type: string
         id:
           description: The ID of the Azure config.
-          format: int64
-          type: integer
+          type: string
         months:
           deprecated: true
           description: The number of months the report has been backfilled.
@@ -5206,8 +5242,7 @@ components:
           $ref: '#/components/schemas/AzureUCConfigPairAttributes'
         id:
           description: The ID of Cloud Cost Management account.
-          format: int64
-          type: integer
+          type: string
         type:
           $ref: '#/components/schemas/AzureUCConfigPairType'
       required:
@@ -5226,8 +5261,7 @@ components:
           type: array
         id:
           description: The ID of the Azure config pair.
-          format: int64
-          type: integer
+          type: string
       required:
       - configs
       type: object
@@ -13088,9 +13122,7 @@ components:
         attributes:
           $ref: '#/components/schemas/DatasetAttributesRequest'
         type:
-          description: Resource type, always "dataset".
-          example: dataset
-          type: string
+          $ref: '#/components/schemas/DatasetType'
       required:
       - type
       - attributes
@@ -13112,9 +13144,7 @@ components:
           example: 123e4567-e89b-12d3-a456-426614174000
           type: string
         type:
-          description: Resource type, always "dataset".
-          example: dataset
-          type: string
+          $ref: '#/components/schemas/DatasetType'
       type: object
     DatasetResponseMulti:
       description: Response containing a list of datasets.
@@ -13131,6 +13161,15 @@ components:
         data:
           $ref: '#/components/schemas/DatasetResponse'
       type: object
+    DatasetType:
+      default: dataset
+      description: Resource type, always set to `dataset`.
+      enum:
+      - dataset
+      example: dataset
+      type: string
+      x-enum-varnames:
+      - DATASET
     DatasetUpdateRequest:
       description: Edit request for a dataset.
       properties:
@@ -13508,6 +13547,42 @@ components:
           description: The type of the resource. The value should always be device.
           type: string
       type: object
+    DnsMetricKey:
+      description: The metric key for DNS metrics.
+      enum:
+      - dns_total_requests
+      - dns_failures
+      - dns_successful_responses
+      - dns_failed_responses
+      - dns_timeouts
+      - dns_responses.nxdomain
+      - dns_responses.servfail
+      - dns_responses.other
+      - dns_success_latency_percentile
+      - dns_failure_latency_percentile
+      type: string
+      x-enum-descriptions:
+      - The total number of DNS requests made by the client.
+      - The total number of timeouts and errors in DNS requests.
+      - The total number of successful DNS responses.
+      - The total number of failed DNS responses.
+      - The total number of DNS timeouts.
+      - The total number of DNS responses with the NXDOMAIN error code.
+      - The total number of DNS responses with the SERVFAIL error code.
+      - The total number of DNS responses with other error codes.
+      - The latency percentile for successful DNS responses.
+      - The latency percentile for failed DNS responses.
+      x-enum-varnames:
+      - DNS_TOTAL_REQUESTS
+      - DNS_FAILURES
+      - DNS_SUCCESSFUL_RESPONSES
+      - DNS_FAILED_RESPONSES
+      - DNS_TIMEOUTS
+      - DNS_RESPONSES_NXDOMAIN
+      - DNS_RESPONSES_SERVFAIL
+      - DNS_RESPONSES_OTHER
+      - DNS_SUCCESS_LATENCY_PERCENTILE
+      - DNS_FAILURE_LATENCY_PERCENTILE
     DomainAllowlist:
       description: The email domain allowlist for an org.
       properties:
@@ -27189,6 +27264,59 @@ components:
       type: string
       x-enum-varnames:
       - AMAZON_S3
+    ObservabilityPipelineAmazonSecurityLakeDestination:
+      description: 'The `amazon_security_lake` destination sends your logs to Amazon
+        Security Lake.
+
+        '
+      properties:
+        auth:
+          $ref: '#/components/schemas/ObservabilityPipelineAwsAuth'
+        bucket:
+          description: Name of the Amazon S3 bucket in Security Lake (3-63 characters).
+          example: security-lake-bucket
+          type: string
+        custom_source_name:
+          description: Custom source name for the logs in Security Lake.
+          example: my-custom-source
+          type: string
+        id:
+          description: Unique identifier for the destination component.
+          example: amazon-security-lake-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        region:
+          description: AWS region of the S3 bucket.
+          example: us-east-1
+          type: string
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineAmazonSecurityLakeDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      - bucket
+      - region
+      - custom_source_name
+      type: object
+    ObservabilityPipelineAmazonSecurityLakeDestinationType:
+      default: amazon_security_lake
+      description: The destination type. Always `amazon_security_lake`.
+      enum:
+      - amazon_security_lake
+      example: amazon_security_lake
+      type: string
+      x-enum-varnames:
+      - AMAZON_SECURITY_LAKE
     ObservabilityPipelineAwsAuth:
       description: "AWS authentication credentials used for accessing AWS services
         such as S3.\nIf omitted, the system\u2019s default credentials are used (for
@@ -27260,6 +27388,9 @@ components:
       - $ref: '#/components/schemas/ObservabilityPipelineSentinelOneDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineOpenSearchDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineAmazonOpenSearchDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineAmazonSecurityLakeDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestination'
     ObservabilityPipelineConfigProcessorItem:
       description: A processor for the pipeline.
       oneOf:
@@ -27279,6 +27410,8 @@ components:
       - $ref: '#/components/schemas/ObservabilityPipelineEnrichmentTableProcessor'
       - $ref: '#/components/schemas/ObservabilityPipelineReduceProcessor'
       - $ref: '#/components/schemas/ObservabilityPipelineThrottleProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineCustomProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessor'
     ObservabilityPipelineConfigSourceItem:
       description: A data source for the pipeline.
       oneOf:
@@ -27297,6 +27430,159 @@ components:
       - $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubSource'
       - $ref: '#/components/schemas/ObservabilityPipelineHttpClientSource'
       - $ref: '#/components/schemas/ObservabilityPipelineLogstashSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketSource'
+    ObservabilityPipelineCrowdStrikeNextGenSiemDestination:
+      description: The `crowdstrike_next_gen_siem` destination forwards logs to CrowdStrike
+        Next Gen SIEM.
+      properties:
+        compression:
+          $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestinationCompression'
+        encoding:
+          $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestinationEncoding'
+        id:
+          description: The unique identifier for this component.
+          example: crowdstrike-ngsiem-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      - encoding
+      type: object
+    ObservabilityPipelineCrowdStrikeNextGenSiemDestinationCompression:
+      description: Compression configuration for log events.
+      properties:
+        algorithm:
+          $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestinationCompressionAlgorithm'
+        level:
+          description: Compression level.
+          example: 6
+          format: int64
+          type: integer
+      required:
+      - algorithm
+      type: object
+    ObservabilityPipelineCrowdStrikeNextGenSiemDestinationCompressionAlgorithm:
+      description: Compression algorithm for log events.
+      enum:
+      - gzip
+      - zlib
+      example: gzip
+      type: string
+      x-enum-varnames:
+      - GZIP
+      - ZLIB
+    ObservabilityPipelineCrowdStrikeNextGenSiemDestinationEncoding:
+      description: Encoding format for log events.
+      enum:
+      - json
+      - raw_message
+      example: json
+      type: string
+      x-enum-varnames:
+      - JSON
+      - RAW_MESSAGE
+    ObservabilityPipelineCrowdStrikeNextGenSiemDestinationType:
+      default: crowdstrike_next_gen_siem
+      description: The destination type. The value should always be `crowdstrike_next_gen_siem`.
+      enum:
+      - crowdstrike_next_gen_siem
+      example: crowdstrike_next_gen_siem
+      type: string
+      x-enum-varnames:
+      - CROWDSTRIKE_NEXT_GEN_SIEM
+    ObservabilityPipelineCustomProcessor:
+      description: The `custom_processor` processor transforms events using [Vector
+        Remap Language (VRL)](https://vector.dev/docs/reference/vrl/) scripts with
+        advanced filtering capabilities.
+      properties:
+        id:
+          description: The unique identifier for this processor.
+          example: remap-vrl-processor
+          type: string
+        include:
+          default: '*'
+          description: A Datadog search query used to determine which logs this processor
+            targets. This field should always be set to `*` for the custom_processor
+            processor.
+          example: '*'
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the input for
+            this processor.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        remaps:
+          description: Array of VRL remap rules.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineCustomProcessorRemap'
+          minItems: 1
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineCustomProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - remaps
+      - inputs
+      type: object
+    ObservabilityPipelineCustomProcessorRemap:
+      description: Defines a single VRL remap rule with its own filtering and transformation
+        logic.
+      properties:
+        drop_on_error:
+          description: Whether to drop events that caused errors during processing.
+          example: false
+          type: boolean
+        enabled:
+          description: Whether this remap rule is enabled.
+          example: true
+          type: boolean
+        include:
+          description: A Datadog search query used to filter events for this specific
+            remap rule.
+          example: service:web
+          type: string
+        name:
+          description: A descriptive name for this remap rule.
+          example: Parse JSON from message field
+          type: string
+        source:
+          description: The VRL script source code that defines the processing logic.
+          example: . = parse_json!(.message)
+          type: string
+      required:
+      - include
+      - name
+      - source
+      - enabled
+      - drop_on_error
+      type: object
+    ObservabilityPipelineCustomProcessorType:
+      default: custom_processor
+      description: The processor type. The value should always be `custom_processor`.
+      enum:
+      - custom_processor
+      example: custom_processor
+      type: string
+      x-enum-varnames:
+      - CUSTOM_PROCESSOR
     ObservabilityPipelineData:
       description: "Contains the pipeline\u2019s ID, type, and configuration attributes."
       properties:
@@ -27388,6 +27674,80 @@ components:
       type: string
       x-enum-varnames:
       - DATADOG_LOGS
+    ObservabilityPipelineDatadogTagsProcessor:
+      description: The `datadog_tags` processor includes or excludes specific Datadog
+        tags in your logs.
+      properties:
+        action:
+          $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessorAction'
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (for example, as the `input`
+            to downstream components).
+          example: datadog-tags-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        keys:
+          description: A list of tag keys.
+          example:
+          - env
+          - service
+          - version
+          items:
+            type: string
+          type: array
+        mode:
+          $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessorMode'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - mode
+      - action
+      - keys
+      - inputs
+      type: object
+    ObservabilityPipelineDatadogTagsProcessorAction:
+      description: The action to take on tags with matching keys.
+      enum:
+      - include
+      - exclude
+      example: include
+      type: string
+      x-enum-varnames:
+      - INCLUDE
+      - EXCLUDE
+    ObservabilityPipelineDatadogTagsProcessorMode:
+      description: The processing mode.
+      enum:
+      - filter
+      example: filter
+      type: string
+      x-enum-varnames:
+      - FILTER
+    ObservabilityPipelineDatadogTagsProcessorType:
+      default: datadog_tags
+      description: The processor type. The value should always be `datadog_tags`.
+      enum:
+      - datadog_tags
+      example: datadog_tags
+      type: string
+      x-enum-varnames:
+      - DATADOG_TAGS
     ObservabilityPipelineDecoding:
       description: The decoding format used to interpret incoming logs.
       enum:
@@ -28602,7 +28962,6 @@ components:
       required:
       - source
       - match_rules
-      - support_rules
       type: object
     ObservabilityPipelineParseGrokProcessorRuleMatchRule:
       description: 'Defines a Grok parsing rule, which extracts structured fields
@@ -29580,6 +29939,278 @@ components:
       type: string
       x-enum-varnames:
       - SENTINEL_ONE
+    ObservabilityPipelineSocketDestination:
+      description: 'The `socket` destination sends logs over TCP or UDP to a remote
+        server.
+
+        '
+      properties:
+        encoding:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationEncoding'
+        framing:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationFraming'
+        id:
+          description: The unique identifier for this component.
+          example: socket-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        mode:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationMode'
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+          description: TLS configuration. Relevant only when `mode` is `tcp`.
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      - encoding
+      - framing
+      - mode
+      type: object
+    ObservabilityPipelineSocketDestinationEncoding:
+      description: Encoding format for log events.
+      enum:
+      - json
+      - raw_message
+      example: json
+      type: string
+      x-enum-varnames:
+      - JSON
+      - RAW_MESSAGE
+    ObservabilityPipelineSocketDestinationFraming:
+      description: Framing method configuration.
+      oneOf:
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationFramingNewlineDelimited'
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationFramingBytes'
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationFramingCharacterDelimited'
+    ObservabilityPipelineSocketDestinationFramingBytes:
+      description: Event data is not delimited at all.
+      properties:
+        method:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationFramingBytesMethod'
+      required:
+      - method
+      type: object
+    ObservabilityPipelineSocketDestinationFramingBytesMethod:
+      description: The definition of `ObservabilityPipelineSocketDestinationFramingBytesMethod`
+        object.
+      enum:
+      - bytes
+      example: bytes
+      type: string
+      x-enum-varnames:
+      - BYTES
+    ObservabilityPipelineSocketDestinationFramingCharacterDelimited:
+      description: Each log event is separated using the specified delimiter character.
+      properties:
+        delimiter:
+          description: A single ASCII character used as a delimiter.
+          example: '|'
+          maxLength: 1
+          minLength: 1
+          type: string
+        method:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationFramingCharacterDelimitedMethod'
+      required:
+      - method
+      - delimiter
+      type: object
+    ObservabilityPipelineSocketDestinationFramingCharacterDelimitedMethod:
+      description: The definition of `ObservabilityPipelineSocketDestinationFramingCharacterDelimitedMethod`
+        object.
+      enum:
+      - character_delimited
+      example: character_delimited
+      type: string
+      x-enum-varnames:
+      - CHARACTER_DELIMITED
+    ObservabilityPipelineSocketDestinationFramingNewlineDelimited:
+      description: Each log event is delimited by a newline character.
+      properties:
+        method:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationFramingNewlineDelimitedMethod'
+      required:
+      - method
+      type: object
+    ObservabilityPipelineSocketDestinationFramingNewlineDelimitedMethod:
+      description: The definition of `ObservabilityPipelineSocketDestinationFramingNewlineDelimitedMethod`
+        object.
+      enum:
+      - newline_delimited
+      example: newline_delimited
+      type: string
+      x-enum-varnames:
+      - NEWLINE_DELIMITED
+    ObservabilityPipelineSocketDestinationMode:
+      description: Protocol used to send logs.
+      enum:
+      - tcp
+      - udp
+      example: tcp
+      type: string
+      x-enum-varnames:
+      - TCP
+      - UDP
+    ObservabilityPipelineSocketDestinationType:
+      default: socket
+      description: The destination type. The value should always be `socket`.
+      enum:
+      - socket
+      example: socket
+      type: string
+      x-enum-varnames:
+      - SOCKET
+    ObservabilityPipelineSocketSource:
+      description: 'The `socket` source ingests logs over TCP or UDP.
+
+        '
+      properties:
+        framing:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFraming'
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: socket-source
+          type: string
+        mode:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketSourceMode'
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+          description: TLS configuration. Relevant only when `mode` is `tcp`.
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketSourceType'
+      required:
+      - id
+      - type
+      - mode
+      - framing
+      type: object
+    ObservabilityPipelineSocketSourceFraming:
+      description: Framing method configuration for the socket source.
+      oneOf:
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFramingNewlineDelimited'
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFramingBytes'
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFramingCharacterDelimited'
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFramingOctetCounting'
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFramingChunkedGelf'
+    ObservabilityPipelineSocketSourceFramingBytes:
+      description: Byte frames are passed through as-is according to the underlying
+        I/O boundaries (for example, split between messages or stream segments).
+      properties:
+        method:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFramingBytesMethod'
+      required:
+      - method
+      type: object
+    ObservabilityPipelineSocketSourceFramingBytesMethod:
+      description: Byte frames are passed through as-is according to the underlying
+        I/O boundaries (for example, split between messages or stream segments).
+      enum:
+      - bytes
+      example: bytes
+      type: string
+      x-enum-varnames:
+      - BYTES
+    ObservabilityPipelineSocketSourceFramingCharacterDelimited:
+      description: Byte frames which are delimited by a chosen character.
+      properties:
+        delimiter:
+          description: A single ASCII character used to delimit events.
+          example: '|'
+          maxLength: 1
+          minLength: 1
+          type: string
+        method:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFramingCharacterDelimitedMethod'
+      required:
+      - method
+      - delimiter
+      type: object
+    ObservabilityPipelineSocketSourceFramingCharacterDelimitedMethod:
+      description: Byte frames which are delimited by a chosen character.
+      enum:
+      - character_delimited
+      example: character_delimited
+      type: string
+      x-enum-varnames:
+      - CHARACTER_DELIMITED
+    ObservabilityPipelineSocketSourceFramingChunkedGelf:
+      description: Byte frames which are chunked GELF messages.
+      properties:
+        method:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFramingChunkedGelfMethod'
+      required:
+      - method
+      type: object
+    ObservabilityPipelineSocketSourceFramingChunkedGelfMethod:
+      description: Byte frames which are chunked GELF messages.
+      enum:
+      - chunked_gelf
+      example: chunked_gelf
+      type: string
+      x-enum-varnames:
+      - CHUNKED_GELF
+    ObservabilityPipelineSocketSourceFramingNewlineDelimited:
+      description: Byte frames which are delimited by a newline character.
+      properties:
+        method:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFramingNewlineDelimitedMethod'
+      required:
+      - method
+      type: object
+    ObservabilityPipelineSocketSourceFramingNewlineDelimitedMethod:
+      description: Byte frames which are delimited by a newline character.
+      enum:
+      - newline_delimited
+      example: newline_delimited
+      type: string
+      x-enum-varnames:
+      - NEWLINE_DELIMITED
+    ObservabilityPipelineSocketSourceFramingOctetCounting:
+      description: Byte frames according to the octet counting format as per RFC6587.
+      properties:
+        method:
+          $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFramingOctetCountingMethod'
+      required:
+      - method
+      type: object
+    ObservabilityPipelineSocketSourceFramingOctetCountingMethod:
+      description: Byte frames according to the octet counting format as per RFC6587.
+      enum:
+      - octet_counting
+      example: octet_counting
+      type: string
+      x-enum-varnames:
+      - OCTET_COUNTING
+    ObservabilityPipelineSocketSourceMode:
+      description: Protocol used to receive logs.
+      enum:
+      - tcp
+      - udp
+      example: tcp
+      type: string
+      x-enum-varnames:
+      - TCP
+      - UDP
+    ObservabilityPipelineSocketSourceType:
+      default: socket
+      description: The source type. The value should always be `socket`.
+      enum:
+      - socket
+      example: socket
+      type: string
+      x-enum-varnames:
+      - SOCKET
     ObservabilityPipelineSpec:
       description: Input schema representing an observability pipeline configuration.
         Used in create and validate requests.
@@ -34384,7 +35015,7 @@ components:
         rule types application_code_vulnerability,
 
         application_library_vulnerability, attack_path, container_image_vulnerability,
-        identity_risk, misconfiguration, and api_security.'
+        identity_risk, misconfiguration, api_security, host_vulnerability and iac_misconfiguration.'
       enum:
       - application_security
       - log_detection
@@ -34399,6 +35030,8 @@ components:
       - identity_risk
       - misconfiguration
       - api_security
+      - host_vulnerability
+      - iac_misconfiguration
       type: string
       x-enum-varnames:
       - APPLICATION_SECURITY
@@ -34414,6 +35047,8 @@ components:
       - IDENTITY_RISK
       - MISCONFIGURATION
       - API_SECURITY
+      - HOST_VULNERABILITY
+      - IAC_MISCONFIGURATION
     RuleUser:
       description: User creating or modifying a rule.
       properties:
@@ -36930,6 +37565,12 @@ components:
     SecurityMonitoringRuleUpdatePayload:
       description: Update an existing rule.
       properties:
+        calculatedFields:
+          description: Calculated fields. Only allowed for scheduled rules - in other
+            words, when schedulingOptions is also defined.
+          items:
+            $ref: '#/components/schemas/CalculatedField'
+          type: array
         cases:
           description: Cases for generating signals.
           items:
@@ -36986,6 +37627,8 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringReferenceTable'
           type: array
+        schedulingOptions:
+          $ref: '#/components/schemas/SecurityMonitoringSchedulingOptions'
         tags:
           description: Tags for generated signals.
           items:
@@ -37012,6 +37655,27 @@ components:
       - $ref: '#/components/schemas/SecurityMonitoringStandardRulePayload'
       - $ref: '#/components/schemas/SecurityMonitoringSignalRulePayload'
       - $ref: '#/components/schemas/CloudConfigurationRulePayload'
+    SecurityMonitoringSchedulingOptions:
+      description: Options for scheduled rules. When this field is present, the rule
+        runs based on the schedule. When absent, it runs real-time on ingested logs.
+      nullable: true
+      properties:
+        rrule:
+          description: Schedule for the rule queries, written in RRULE syntax. See
+            [RFC](https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html)
+            for syntax reference.
+          example: FREQ=HOURLY;INTERVAL=1;
+          type: string
+        start:
+          description: Start date for the schedule, in ISO 8601 format without timezone.
+          example: '2025-07-14T12:00:00'
+          type: string
+        timezone:
+          description: Time zone of the start date, in the [tz database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+            format.
+          example: America/New_York
+          type: string
+      type: object
     SecurityMonitoringSignal:
       description: Object description of a security signal.
       properties:
@@ -37690,6 +38354,12 @@ components:
     SecurityMonitoringStandardRuleCreatePayload:
       description: Create a new rule.
       properties:
+        calculatedFields:
+          description: Calculated fields. Only allowed for scheduled rules - in other
+            words, when schedulingOptions is also defined.
+          items:
+            $ref: '#/components/schemas/CalculatedField'
+          type: array
         cases:
           description: Cases for generating signals.
           example: []
@@ -37742,6 +38412,8 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringReferenceTable'
           type: array
+        schedulingOptions:
+          $ref: '#/components/schemas/SecurityMonitoringSchedulingOptions'
         tags:
           description: Tags for generated signals.
           example:
@@ -37771,6 +38443,12 @@ components:
     SecurityMonitoringStandardRulePayload:
       description: The payload of a rule.
       properties:
+        calculatedFields:
+          description: Calculated fields. Only allowed for scheduled rules - in other
+            words, when schedulingOptions is also defined.
+          items:
+            $ref: '#/components/schemas/CalculatedField'
+          type: array
         cases:
           description: Cases for generating signals.
           example: []
@@ -37831,6 +38509,8 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringReferenceTable'
           type: array
+        schedulingOptions:
+          $ref: '#/components/schemas/SecurityMonitoringSchedulingOptions'
         tags:
           description: Tags for generated signals.
           example:
@@ -37887,6 +38567,14 @@ components:
           example: false
           readOnly: true
           type: boolean
+        index:
+          description: '**This field is currently unstable and might be removed in
+            a minor version upgrade.**
+
+            The index to run the query on, if the `dataSource` is `logs`. Only used
+            for scheduled rules - in other words, when the `schedulingOptions` field
+            is present in the rule payload.'
+          type: string
         metric:
           deprecated: true
           description: '(Deprecated) The target field to aggregate over when using
@@ -37914,6 +38602,12 @@ components:
     SecurityMonitoringStandardRuleResponse:
       description: Rule.
       properties:
+        calculatedFields:
+          description: Calculated fields. Only allowed for scheduled rules - in other
+            words, when schedulingOptions is also defined.
+          items:
+            $ref: '#/components/schemas/CalculatedField'
+          type: array
         cases:
           description: Cases for generating signals.
           items:
@@ -37999,6 +38693,8 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringReferenceTable'
           type: array
+        schedulingOptions:
+          $ref: '#/components/schemas/SecurityMonitoringSchedulingOptions'
         tags:
           description: Tags for generated signals.
           items:
@@ -38030,6 +38726,12 @@ components:
     SecurityMonitoringStandardRuleTestPayload:
       description: The payload of a rule to test
       properties:
+        calculatedFields:
+          description: Calculated fields. Only allowed for scheduled rules - in other
+            words, when schedulingOptions is also defined.
+          items:
+            $ref: '#/components/schemas/CalculatedField'
+          type: array
         cases:
           description: Cases for generating signals.
           example: []
@@ -38082,6 +38784,8 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringReferenceTable'
           type: array
+        schedulingOptions:
+          $ref: '#/components/schemas/SecurityMonitoringSchedulingOptions'
         tags:
           description: Tags for generated signals.
           example:
@@ -40613,6 +41317,100 @@ components:
       type: string
       x-enum-varnames:
       - AGGREGATED_CONNECTION
+    SingleAggregatedDnsResponseArray:
+      description: List of aggregated DNS flows.
+      example:
+        data:
+        - attributes:
+            group_bys:
+            - key: client_service
+              value: example-service
+            - key: network.dns_query
+              value: example.com
+            metrics:
+            - key: dns_total_requests
+              value: 100
+            - key: dns_failures
+              value: 7
+            - key: dns_successful_responses
+              value: 93
+            - key: dns_failed_responses
+              value: 5
+            - key: dns_timeouts
+              value: 2
+            - key: dns_responses.nxdomain
+              value: 1
+            - key: dns_responses.servfail
+              value: 1
+            - key: dns_responses.other
+              value: 3
+            - key: dns_success_latency_percentile
+              value: 50
+            - key: dns_failure_latency_percentile
+              value: 75
+          id: client_service:example-service,network.dns_query:example.com
+          type: aggregated_dns
+      properties:
+        data:
+          description: Array of aggregated DNS objects.
+          items:
+            $ref: '#/components/schemas/SingleAggregatedDnsResponseData'
+          type: array
+      type: object
+    SingleAggregatedDnsResponseData:
+      description: Object describing an aggregated DNS flow.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SingleAggregatedDnsResponseDataAttributes'
+        id:
+          description: A unique identifier for the aggregated DNS traffic based on
+            the group by values.
+          type: string
+        type:
+          $ref: '#/components/schemas/SingleAggregatedDnsResponseDataType'
+      type: object
+    SingleAggregatedDnsResponseDataAttributes:
+      description: Attributes for an aggregated DNS flow.
+      properties:
+        group_bys:
+          description: The key, value pairs for each group by.
+          items:
+            $ref: '#/components/schemas/SingleAggregatedDnsResponseDataAttributesGroupByItems'
+          type: array
+        metrics:
+          description: Metrics associated with an aggregated DNS flow.
+          items:
+            $ref: '#/components/schemas/SingleAggregatedDnsResponseDataAttributesMetricsItems'
+          type: array
+      type: object
+    SingleAggregatedDnsResponseDataAttributesGroupByItems:
+      description: Attributes associated with a group by
+      properties:
+        key:
+          description: The group by key.
+          type: string
+        value:
+          description: The group by value.
+          type: string
+      type: object
+    SingleAggregatedDnsResponseDataAttributesMetricsItems:
+      description: Metrics associated with an aggregated DNS flow.
+      properties:
+        key:
+          $ref: '#/components/schemas/DnsMetricKey'
+        value:
+          description: The metric value.
+          format: int64
+          type: integer
+      type: object
+    SingleAggregatedDnsResponseDataType:
+      default: aggregated_dns
+      description: Aggregated DNS resource type.
+      enum:
+      - aggregated_dns
+      type: string
+      x-enum-varnames:
+      - AGGREGATED_DNS
     SlackIntegrationMetadata:
       description: Incident integration metadata for the Slack integration.
       properties:
@@ -42712,6 +43510,68 @@ components:
           $ref: '#/components/schemas/TimeRestrictions'
         urgency:
           $ref: '#/components/schemas/Urgency'
+      type: object
+    TeamSyncAttributes:
+      description: Team sync attributes.
+      properties:
+        source:
+          $ref: '#/components/schemas/TeamSyncAttributesSource'
+        type:
+          $ref: '#/components/schemas/TeamSyncAttributesType'
+      required:
+      - source
+      - type
+      type: object
+    TeamSyncAttributesSource:
+      description: The external source platform for team synchronization. Only "github"
+        is supported.
+      enum:
+      - github
+      example: github
+      type: string
+      x-enum-varnames:
+      - GITHUB
+    TeamSyncAttributesType:
+      description: The type of synchronization operation. Only "link" is supported,
+        which links existing teams by matching names.
+      enum:
+      - link
+      example: link
+      type: string
+      x-enum-varnames:
+      - LINK
+    TeamSyncBulkType:
+      description: Team sync bulk type.
+      enum:
+      - team_sync_bulk
+      example: team_sync_bulk
+      type: string
+      x-enum-varnames:
+      - TEAM_SYNC_BULK
+    TeamSyncData:
+      description: Team sync data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamSyncAttributes'
+        type:
+          $ref: '#/components/schemas/TeamSyncBulkType'
+      required:
+      - attributes
+      - type
+      type: object
+    TeamSyncRequest:
+      description: Team sync request.
+      example:
+        data:
+          attributes:
+            source: github
+            type: link
+          type: team_sync_bulk
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamSyncData'
+      required:
+      - data
       type: object
     TeamTarget:
       description: Represents a team target for an escalation policy step, including
@@ -50163,6 +51023,31 @@ paths:
     get:
       description: List the Custom Costs files.
       operationId: ListCustomCostsFiles
+      parameters:
+      - description: Page number for pagination
+        in: query
+        name: page[number]
+        schema:
+          format: int64
+          type: integer
+      - description: Page size for pagination
+        in: query
+        name: page[size]
+        schema:
+          default: 100
+          format: int64
+          type: integer
+      - description: Filter by file status
+        in: query
+        name: filter[status]
+        schema:
+          type: string
+      - description: Sort key with optional descending prefix
+        in: query
+        name: sort
+        schema:
+          default: created_at
+          type: string
       responses:
         '200':
           content:
@@ -50170,6 +51055,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/CustomCostsFileListResponse'
           description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
         '403':
           content:
             application/json:
@@ -50205,6 +51096,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/CustomCostsFileUploadResponse'
           description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
         '403':
           content:
             application/json:
@@ -50239,6 +51136,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -50270,6 +51173,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -53608,9 +54517,12 @@ paths:
               {\n        \"include_only\": [\n          \"us-east-1\"\n        ]\n
               \     },\n      \"logs_config\": {\n        \"lambda_forwarder\": {\n
               \         \"lambdas\": [\n            \"arn:aws:lambda:us-east-1:123456789012:function:DatadogLambdaLogForwarder\"\n
-              \         ],\n          \"sources\": [\n            \"s3\"\n          ]\n
-              \       }\n      },\n      \"metrics_config\": {\n        \"enabled\":
-              true,\n        \"automute_enabled\": true,\n        \"collect_custom_metrics\":
+              \         ],\n          \"sources\": [\n            \"s3\"\n          ],\n
+              \         \"log_source_config\": {\n            \"tag_filters\": [\n
+              \             {\n                \"source\": \"s3\",\n                \"tags\":
+              [\"test:test\"]\n              }\n            ]\n          }\n        }\n
+              \     },\n      \"metrics_config\": {\n        \"enabled\": true,\n
+              \       \"automute_enabled\": true,\n        \"collect_custom_metrics\":
               false,\n        \"collect_cloudwatch_alarms\": false,\n        \"tag_filters\":
               [\n          {\n            \"namespace\": \"AWS/EC2\",\n            \"tags\":
               [\n              \"key:value\"\n            ]\n          }\n        ],\n
@@ -58034,25 +58946,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIErrorResponse'
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad Request
         '403':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIErrorResponse'
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Forbidden
         '404':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIErrorResponse'
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Not Found
         '429':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIErrorResponse'
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Too Many Requests
       summary: Get tag key cardinality details
       tags:
@@ -59404,7 +60316,7 @@ paths:
         schema:
           type: string
       - description: The number of connections to be returned. The maximum value is
-          7500.
+          7500. The default is 100.
         in: query
         name: limit
         schema:
@@ -59430,9 +60342,69 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/network/dns/aggregate:
+    get:
+      description: Get all aggregated DNS traffic.
+      operationId: GetAggregatedDns
+      parameters:
+      - description: Unix timestamp (number of seconds since epoch) of the start of
+          the query window. If not provided, the start of the query window is 15 minutes
+          before the `to` timestamp. If neither `from` nor `to` are provided, the
+          query window is `[now - 15m, now]`.
+        in: query
+        name: from
+        schema:
+          format: int64
+          type: integer
+      - description: Unix timestamp (number of seconds since epoch) of the end of
+          the query window. If not provided, the end of the query window is the current
+          time. If neither `from` nor `to` are provided, the query window is `[now
+          - 15m, now]`.
+        in: query
+        name: to
+        schema:
+          format: int64
+          type: integer
+      - description: Comma-separated list of fields to group DNS traffic by. The server
+          side defaults to `network.dns_query` if unspecified. `server_ungrouped`
+          may be used if groups are not desired. The maximum number of group_by(s)
+          is 10.
+        in: query
+        name: group_by
+        schema:
+          type: string
+      - description: Comma-separated list of tags to filter DNS traffic by.
+        in: query
+        name: tags
+        schema:
+          type: string
+      - description: The number of aggregated DNS entries to be returned. The maximum
+          value is 7500. The default is 100.
+        in: query
+        name: limit
+        schema:
+          default: 100
+          format: int32
+          maximum: 7500
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SingleAggregatedDnsResponseArray'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all aggregated DNS traffic
+      tags:
+      - Cloud Network Monitoring
+      x-menu-order: 2
+      x-undo:
+        type: safe
   /api/v2/on-call/escalation-policies:
     post:
       description: Create a new On-Call escalation policy
@@ -66555,6 +67527,18 @@ paths:
               86400\n  },\n  \"message\": \"Test rule Bis\",\n  \"tags\": [],\n  \"isEnabled\":
               true,\n  \"type\": \"log_detection\"\n}"
           step: there is a valid "security_rule_bis" in the system
+        security_rule_hash:
+          parameters:
+          - name: body
+            value: "{\n  \"name\": \"_{{ unique_hash }}\",\n  \"queries\": [{\n    \"query\":
+              \"@test:true\",\n    \"aggregation\": \"count\",\n    \"groupByFields\":
+              [],\n    \"distinctFields\": [],\n    \"metrics\": []\n  }],\n  \"filters\":
+              [],\n  \"cases\": [{\n    \"name\": \"\",\n    \"status\": \"info\",\n
+              \   \"condition\": \"a > 0\",\n    \"notifications\": []\n  }],\n  \"options\":
+              {\n    \"evaluationWindow\": 900,\n    \"keepAlive\": 3600,\n    \"maxSignalDuration\":
+              86400\n  },\n  \"message\": \"Test rule\",\n  \"tags\": [],\n  \"isEnabled\":
+              true,\n  \"type\": \"log_detection\"\n}"
+          step: there is a valid "security_rule_hash" in the system
       x-menu-order: 4
       x-permission:
         operator: OR
@@ -69259,6 +70243,74 @@ paths:
     x-merge-override:
       get: false
       post: false
+  /api/v2/team/sync:
+    post:
+      description: 'This endpoint attempts to link your existing Datadog teams with
+        GitHub teams by matching their names.
+
+        It evaluates all current Datadog teams and compares them against teams in
+        the GitHub organization
+
+        connected to your Datadog account, based on Datadog Team handle and GitHub
+        Team slug
+
+        (lowercased and kebab-cased).
+
+
+        This operation is read-only on the GitHub side, no teams will be modified
+        or created.
+
+
+        [A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),
+
+        and the GitHub App integrated with Datadog must have the `Members Read` permission.
+        Matching is performed by comparing the Datadog team handle to the GitHub team
+        slug
+
+        using a normalized exact match; case is ignored and spaces are removed. No
+        modifications are made
+
+        to teams in GitHub. This will not create new Teams in Datadog.'
+      operationId: SyncTeams
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamSyncRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Internal Server Error - Unexpected error during linking.
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_manage
+      summary: Link Teams with GitHub Teams
+      tags:
+      - Teams
+      x-codegen-request-body-name: body
+      x-menu-order: 19
+      x-permission:
+        operator: AND
+        permissions:
+        - teams_manage
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
+        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/team/{super_team_id}/member_teams:
     get:
       description: Get all member teams.
@@ -72177,7 +73229,8 @@ tags:
     documentation](https://docs.datadoghq.com/cloud_cost_management/).
   name: Cloud Cost Management
 - description: The Cloud Network Monitoring API allows you to fetch aggregated connections
-    and their attributes. See the [Cloud Network Monitoring page](https://docs.datadoghq.com/network_monitoring/cloud_network_monitoring/)
+    and DNS traffic with their attributes. See the [Cloud Network Monitoring page](https://docs.datadoghq.com/network_monitoring/cloud_network_monitoring/)
+    and [DNS Monitoring page](https://docs.datadoghq.com/network_monitoring/dns/)
     for more information.
   name: Cloud Network Monitoring
 - description: Manage your Datadog Cloudflare integration directly through the Datadog

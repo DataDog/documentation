@@ -55,10 +55,11 @@ And the library supports the following runtimes:
 
 ### Supported frameworks
 
-| Framework                | Versions | Runtime Code Analysis (IAST) |
-| ------------------------ |----------| ---------------------------- |
-| Django                   | `1.8`    | {{< X >}}                    |
-| Flask                    | `0.10`   | {{< X >}}                    |
+| Framework     | Versions    | Runtime Code Analysis (IAST) |
+|---------------|-------------|------------------------------|
+| Django        | `1.8`       | {{< X >}}                    |
+| FastAPI       | `0.86`      | {{< X >}}                    |
+| Flask         | `0.10`      | {{< X >}}                    |
 
 Support for query strings is not available for Flask.
 
@@ -77,7 +78,7 @@ Support for query strings is not available for Flask.
 The Python library supports the [database API specifications][4] and supports all generic SQL databases. This includes databases such as SQLite, Mysql, Postgres and MariaDB.
 
 [1]: /tracing/trace_collection/compatibility/python/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[2]: /remote_configuration#enabling-remote-configuration
 [3]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [4]: https://peps.python.org/pep-0249/
 

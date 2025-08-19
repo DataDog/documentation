@@ -14,41 +14,28 @@ algolia:
   tags: ['uninstall', 'uninstalling']
 ---
 
-<div class="alert alert-info">
-The Datadog UNIX Agent is being developed for specific system architectures, and is not the same as the Windows, Linux, and MacOS Agents.
-</div>
+## Overview
+The [Datadog UNIX Agent][4] brings host-level monitoring to IBM AIX (PowerPC 8+) so you can visualize system metrics, enable additional Datadog products, and troubleshoot services that still run on-prem.
 
-This page outlines the installation and configuration of the Datadog UNIX Agent for AIX.
+The UNIX Agent supports Infrastructure Monitoring and Custom Metrics using [DogStatsD][11]. Other products like APM, Live Process Monitoring, Cloud Network Monitoring, and Log Management are not supported on the UNIX Agent. See [Supported Platforms][5] for the complete list of supported AIX versions.
 
-**Note:** The Datadog UNIX Agent supports PowerPC 8 or greater and the following versions of AIX:
-
-* AIX 6.1 TL9 SP6+
-* AIX 7.1 TL5 SP3+
-* AIX 7.2 TL3 SP0+
-* AIX 7.3 TL3 SP0+
+This page walks you through installing, operating, and removing the Datadog UNIX Agent on AIX.
 
 ## Installation
 
-A one-step ksh install script is provided on the [Agent download page][1] within Datadog. The script supports the following environment variables:
+### Prerequisites 
+- Root privileges (or sudo) on each host  
+- Outbound HTTPS (443) to `.datadoghq.com`  
+- curl or ksh (shipped on AIX by default)  
+- Verify your host is running a [Supported AIX version][5]
 
-* **CHANNEL**: defaults to stable. Specifies the package repository channel.
-  * Values: `stable`, `beta`, `unstable`
-* **VERSION**: defaults to latest. Specifies the package version.
-* **PROXY**: defaults to none. Specifies the proxy URI.
-  * Example: `http://proxy.foo.com`
-* **PROXY_USER**: defaults to empty. Specifies the proxy server username.
-* **PROXY_PASSWORD**: defaults to empty. Specifies the proxy server password. For the process/container Agent, this variable is required for passing in an authentication password and cannot be renamed.
-* **INSECURE**: defaults to `false`. Allows skipping TLS validation.
+### Install the Agent
 
-Alternatively, download links for the latest releases can be found on [this page][2].
+To install the Agent on AIX, follow the [in-app instructions in Fleet Automation][6], and run the generated script on your hosts.
 
-The installer may be executed as follows (as root):
+{{< img src="/agent/basic_agent_usage/aix_img2_july_25.png" alt="The Datadog Agent installation step for AIX hosts." style="width:90%;">}}
 
-{{< code-block lang="shell" wrap="true" >}}
-installp -aXYgd ./datadog-unix-agent-<VERSION>.bff -e dd-aix-install.log datadog-unix-agent
-{{< /code-block >}}
 
-This installs the Agent in `/opt/datadog-agent`.
 
 ### Installation log files
 
@@ -56,72 +43,57 @@ You can find the Agent installation log in the `dd-aix-install.log` file. To dis
 
 ## Commands
 
-| Description                     | Command (as root)           |
-|---------------------------------|-----------------------------|
-| Start Agent as a service        | `startsrc -s datadog-agent` |
-| Stop Agent running as a service | `stopsrc -s datadog-agent`  |
-| Status of Agent service         | `lssrc -s datadog-agent`    |
-| Status page of running Agent    | `datadog-agent status`      |
-| Send flare                      | `datadog-agent flare`       |
-| Display command usage           | `datadog-agent --help`      |
+| Description   | Command (as root)           |
+|---------------|-----------------------------|
+| Start Agent   | `startsrc -s datadog-agent` |
+| Stop Agent    | `stopsrc -s datadog-agent`  |
+| Status of Agent service | `lssrc -s datadog-agent`|
+| Agent status page | `datadog-agent status`      |
+| Send flare | `datadog-agent flare` |
+| Show all commands | `datadog-agent --help`  |
 
-## Configuration
 
-The configuration files and folders for the Agent are located in `/etc/datadog-agent/datadog.yaml`
+## Configure the Agent
 
-A sample configuration file can be found in `/etc/datadog-agent/datadog.yaml.example`.
+The [Datadog Agent configuration file][7] is located in `/etc/datadog-agent/datadog.yaml`. This YAML file holds the host-wide connection details used to send data to Datadog including:
+- `api_key`: Your organization's [Datadog API key][8]  
+- `site`: Target Datadog region (see [Datadog Sites][1])  
+- `proxy`: HTTP/HTTPS proxy endpoints for outbound traffic (see [Datadog Agent Proxy Configuration][9])  
+- Default tags, log level, and Datadog configurations
 
-A basic configuration typically requires your Datadog API key. To submit your metrics to a different site (for example, the EU instance), the `site` configuration option is available.
+A fully commented reference file, located in `/etc/datadog-agent/datadog.yaml.example`, lists every available option for comparison or to copy and paste. 
 
-Occasionally a proxy configuration must be specified depending on your network setup.
+Alternatively, see the [datadog.yaml.example file][10] for all available configuration options.
 
-**Configuration files for Integrations:**
-`/etc/datadog-agent/conf.d/`
 
-## Integrations
+### Integration files
 
-The UNIX Agent collects system metrics for:
+Configuration files for integrations exist in `/etc/datadog-agent/conf.d/`.
+Each integration has its own subdirectory, `<INTEGRATION>.d/`, that contains:
+- `conf.yaml`: The active configuration controlling how the integration gathers metrics and logs  
+- `conf.yaml.example`: A sample illustrating supported keys and defaults
 
-* cpu
-* filesystem
-* iostat
-* load
-* memory
-* uptime
-* disk
-* network
 
-Additionally, the following integrations can be enabled to collect further metrics:
+## Available integrations
 
-* process
-* lparstats
-* [ibm_was (Websphere Application Server)][3]
+Out of the box integrations
+: `cpu`
+: `filesystem`
+: `iostat`
+: `load`
+: `memory`
+: `uptime`
+: `disk`
+: `network`
 
-Enable the above integrations by copying and editing the sample configuration files provided. These are found in `/etc/datadog-agent/conf.d`. The name of the YAML configuration file should match that of the integration: `/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml` enables the integration `<INTEGRATION_NAME>`, and set its configuration. Example configuration files can be found at `/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml.example`
+Additional integrations
+: `process`
+: `lparstats`
+: `ibm_was` (WebSphere Application Server)
 
-**Note**: Some of the available metrics differ between the integrations for the UNIX Agent and the integrations for Linux, Windows and MacOS. Although it is possible to monitor processes and network metrics with the UNIX Agent, the Live Process Monitoring and Cloud Network Monitoring capabilities aren't available. Log Management is also not available with the UNIX Agent.
 
-<div class="alert alert-info">The UNIX Agent has no trace-agent component, so APM tracing and profiling is not supported.</div>
+**Note:** Metric coverage can differ from the UNIX, Linux, Windows, and macOS integrations.
 
-## Running DogStatsD
-
-DogStatsD allows collecting and submitting custom metrics to Datadog. It listens on a UDP port and DogStatsD metrics may be submitted to it. These are then relayed to Datadog.
-
-DogStatsD relies on the same configuration file defined for the Agent, where a DogStatsD configuration section is available. The DogStatsD server typically runs within the same Agent process—but should you need a dedicated process, it may also be launched in standalone mode.
-
-To enable DogStatsD, edit `/etc/datadog-agent/datadog.yaml` and set the relevant configuration options.
-
-{{< code-block lang="yaml" filename="/etc/datadog-agent/datadog.yaml" >}}
-dogstatsd:                        # DogStatsD configuration options
-  enabled: true                   # disabled by default
-  bind_host: localhost            # address we'll be binding to
-  port: 8125                      # DogStatsD UDP listening port
-  non_local_traffic: false        # listen to non-local traffic
-{{< /code-block >}}
-
-**Note:** DogStatsD does not daemonize and runs in the foreground.
-
-There are also facilities to run the Agent with the known Python supervisor. This might be your preferred way to manage the Agent daemon if you are familiar with the tool. There are entries for both the Agent and DogStatsD.
 
 ## Monitor Agent uptime
 
@@ -135,12 +107,18 @@ To remove an installed Agent, run the following `installp` command:
 installp -e dd-aix-uninstall.log -uv datadog-unix-agent
 {{< /code-block >}}
 
-Note: Agent uninstallation logs can be found in the `dd-aix-install.log` file. To disable this logging, remove the `-e` parameter in the uninstallation command.
+**Note:** Agent uninstallation logs can be found in the `dd-aix-install.log` file. To disable this logging, remove the `-e` parameter in the uninstallation command.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=aix
-[2]: https://github.com/DataDog/datadog-unix-agent/releases
-[3]: https://github.com/DataDog/datadog-unix-agent/blob/master/checks/bundled/ibm_was/README.md
+[1]: /getting_started/site/#access-the-datadog-site
+[4]: https://github.com/DataDog/datadog-unix-agent/blob/master/README.md
+[5]: /agent/supported_platforms/?tab=unix
+[6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=aix
+[7]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[8]: https://app.datadoghq.com/organization-settings/api-keys
+[9]: /agent/configuration/proxy/
+[10]: https://github.com/DataDog/datadog-unix-agent/blob/master/docs/datadog.yaml.example
+[11]: /developers/dogstatsd/?tab=hostagent

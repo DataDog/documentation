@@ -18,6 +18,9 @@ further_reading:
   - link: /tracing/guide/local_sdk_injection
     tag: Documentation
     text: Instrument your applications using local SDK injection
+  - link: "https://www.datadoghq.com/blog/datadog-csi-driver/"
+    tag: "Blog"
+    text: "Bring high-performance observability to secure Kubernetes environments with Datadog's CSI driver"
 ---
 ## Overview
 

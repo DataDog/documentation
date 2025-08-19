@@ -7,8 +7,10 @@ title: Migrar de la versión 1 de las APIs de uso por hora a la versión 2
 ---
 
 ## Resumen
-Los usuarios de la versión 1 de las APIs deberían reconocer conceptos similares en la versión 2 de la API de uso por hora,
-aunque representados de forma algo diferente.
+El 1 de febrero de 2025, los endpoints de uso individual por hora por producto quedarán obsoletos en favor de la v2 de la [API de uso por hora por familia de productos][1].
+
+Los usuarios de las API v1 deberían reconocer conceptos familiares en la API de uso por hora v2 consolidada,
+sólo que representados en un formato ligeramente diferente.
 
 Las diferencias más destacables entre estas versiones de la API son que la versión 2:
 * Consolida todos los productos en un único endpoint
@@ -19,164 +21,11 @@ Las diferencias más destacables entre estas versiones de la API son que la vers
 Cada diferencia se aborda con mayor detalle en las siguientes secciones.
 
 ## Gamas de productos consolidadas
-La versión 2 de la API introduce los conceptos de gama de productos y tipo de uso. Las gamas de productos son
-agrupaciones de uno o varios tipos de uso. Los tipos de uso son mediciones del uso de una organización
-y un periodo de tiempo concretos. El conjunto inicial de gamas de productos se corresponde en su mayor parte con la versión 1 de las APIs,
-con la asignación completa indicada a continuación. Además, existe una gama de productos `all` especial que recopila
-el uso del resto de gamas de productos.
+La API v2 introduce los conceptos de familia de productos y tipo de uso. Las familias de productos son
+agrupaciones de uno o más tipos de uso. Los tipos de uso son medidas de uso de una organización
+y un periodo de tiempo determinados. La familia de productos `all` indica el uso de todas las familias de productos o puedes filtrar por familias de productos específicas.
 
-Las gamas y los tipos de uso:
-- **all** (todos)
-    * _Contiene todas las demás gamas de productos_
-- **analyzed_logs** (logs analizados)
-    * `analyzed_logs`
-- **application_security** (seguridad de la aplicación)
-    * `app_sec_host_count`
-- **audit_trail** (traza de auditoría)
-    * `enabled`
-- **serverless**
-    * `func_count`
-    * `invocations_sum`
-- **ci_app** (app CI)
-    * `ci_pipeline_indexed_spans`
-    * `ci_test_indexed_spans`
-    * `ci_visibility_pipeline_committers`
-    * `ci_visibility_test_committers`
-- **cloud_cost_management** (gestión de costes en la nube)
-    * `host_count`
-- **csm_container_enterprise**
-    * `cws_count`
-    * `compliance_count`
-    * `total_count`
-- **csm_host_enterprise**
-    * `total_host_count`
-    * `compliance_hosts`
-    * `cws_hosts`
-    * `aas_host_count`
-    * `azure_host_count`
-    * `aws_host_count`
-    * `gcp_host_count`
-- **cspm**
-    * `aas_host_count`
-    * `azure_host_count`
-    * `compliance_host_count`
-    * `container_count`
-    * `host_count`
-- **cws**
-    * `cws_container_count`
-    * `cws_host_count`
-- **dbm**
-    * `dbm_host_count`
-    * `dbm_queries_count`
-- **fargate**
-    * `avg_profiled_fargate_tasks`
-    * `tasks_count`
-- **infra_hosts**
-    * `agent_host_count`
-    * `alibaba_host_count`
-    * `apm_azure_app_service_host_count`
-    * `apm_host_count`
-    * `aws_host_count`
-    * `azure_host_count`
-    * `container_count`
-    * `gcp_host_count`
-    * `heroku_host_count`
-    * `host_count`
-    * `infra_azure_app_service`
-    * `opentelemetry_host_count`
-    * `vsphere_host_count`
-- **incident_management**
-    * `monthly_active_users`
-- **indexed_logs**
-    * `logs_indexed_events_3_day_count`
-    * `logs_live_indexed_events_3_day_count`
-    * `logs_rehydrated_indexed_events_3_day_count`
-    * `logs_indexed_events_7_day_count`
-    * `logs_live_indexed_events_7_day_count`
-    * `logs_rehydrated_indexed_events_7_day_count`
-    * `logs_indexed_events_15_day_count`
-    * `logs_live_indexed_events_15_day_count`
-    * `logs_rehydrated_indexed_events_15_day_count`
-    * `logs_indexed_events_30_day_count`
-    * `logs_live_indexed_events_30_day_count`
-    * `logs_rehydrated_indexed_events_30_day_count`
-    * `logs_indexed_events_45_day_count`
-    * `logs_live_indexed_events_45_day_count`
-    * `logs_rehydrated_indexed_events_45_day_count`
-    * `logs_indexed_events_60_day_count`
-    * `logs_live_indexed_events_60_day_count`
-    * `logs_rehydrated_indexed_events_60_day_count`
-    * `logs_indexed_events_90_day_count`
-    * `logs_live_indexed_events_90_day_count`
-    * `logs_rehydrated_indexed_events_90_day_count`
-    * `logs_indexed_events_180_day_count`
-    * `logs_live_indexed_events_180_day_count`
-    * `logs_rehydrated_indexed_events_180_day_count`
-    * `logs_indexed_events_360_day_count`
-    * `logs_live_indexed_events_360_day_count`
-    * `logs_rehydrated_indexed_events_360_day_count`
-    * `logs_indexed_events_custom_day_count`
-    * `logs_live_indexed_events_custom_day_count`
-    * `logs_rehydrated_indexed_events_custom_day_count`
-- **indexed_spans**
-    * `indexed_events_count`
-    * `ingested_spans`
-    * `ingested_events_bytes`
-- **iot**
-    * `iot_device_count`
-- **lambda_traced_invocations**
-    * `lambda_traced_invocations_count`
-- **logs**
-    * `billable_ingested_bytes`
-    * `indexed_events_count`
-    * `ingested_events_bytes`
-    * `logs_forwarding_events_bytes`
-    * `logs_live_indexed_count`
-    * `logs_live_ingested_bytes`
-    * `logs_rehydrated_indexed_count`
-    * `logs_rehydrated_ingested_bytes`
-- **network_flows**
-    * `indexed_events_count`
-- **network_hosts**
-    * `host_count`
-- **observability_pipelines**
-    * `observability_pipelines_bytes_processed`
-- **online_archive**
-    * `online_archive_events_count`
-- **profiling**
-    * `avg_container_agent_count`
-    * `host_count`
-- **rum**
-    * `browser_rum_units`
-    * `mobile_rum_units`
-    * `rum_units`
-- **rum_browser_sessions**
-    * `replay_session_count`
-    * `session_count`
-- **rum_mobile_sessions**
-    * `session_count`
-    * `session_count_android`
-    * `session_count_ios`
-    * `session_count_reactnative`
-    * `session_count_flutter`
-- **sds**
-    * `logs_scanned_bytes`
-    * `total_scanned_bytes`
-- **snmp**
-    * `snmp_devices`
-- **synthetics_api**
-    * `check_calls_count`
-- **synthetics_browser**
-    * `browser_check_calls_count`
-- **synthetics_mobile**
-    * `test_runs`
-- **timeseries**
-    * `num_custom_input_timeseries`
-    * `num_custom_output_timeseries`
-    * `num_custom_timeseries`
-
-
-Esta lista muestra cómo se asignan las gamas y los tipos de uso anteriores a los endpoints de uso por hora de la versión 1. El tipo de uso y el punto de datos son lo mismo, excepto cuando se especifique expresamente lo contrario:
+Esta lista se muestra cómo las familias de productos y los tipos de uso se corresponden con los endpoints de uso por hora v1. El tipo de uso y el punto de datos son los mismos, excepto cuando se indica explícitamente:
 
 ENDPOINT | GAMA DE PRODUCTOS
 `<base_url>/api/v1/usage/hosts` | infra_hosts
@@ -228,15 +77,8 @@ ENDPOINT | GAMA DE PRODUCTOS
 : `func_count`
 : `invocations_sum`
 
-`<base_url>/api/v1/usage/rum_sessions?type=browser` | rum_browser_sessions
-: `replay_session_count`
-: `session_count`
-
-`<base_url>/api/v1/usage/rum_sessions?type=mobile` | rum_mobile_sessions
-: `session_count`
-: `session_count_android`
-: `session_count_ios`
-: `session_count_reactnative`
+`<base_url>/api/v1/usage/rum_sessions` | RUM
+: Consulte la [guía de migración RUM para obtener instrucciones completas de asignación][2].
 
 `<base_url>/api/v1/usage/network_hosts` | network_hosts
 : `host_count`
@@ -276,9 +118,6 @@ ENDPOINT | GAMA DE PRODUCTOS
 : `container_count`
 : `host_count`
 
-`<base_url>/api/v1/usage/audit_logs` | audit_logs
-: `lines_indexed`
-
 `<base_url>/api/v1/usage/cws` | cws
 : `cws_container_count`
 : `cws_host_count`
@@ -290,11 +129,6 @@ ENDPOINT | GAMA DE PRODUCTOS
 `<base_url>/api/v1/usage/sds` | sds
 : `logs_scanned_bytes`
 : `total_scanned_bytes`
-
-`<base_url>/api/v1/usage/rum` | rum
-: `browser_rum_units`
-: `mobile_rum_units`
-: `rum_units`
 
 `<base_url>/api/v1/usage/ci-app` | ci_app
 : `ci_pipeline_indexed_spans`
@@ -316,11 +150,11 @@ ENDPOINT | GAMA DE PRODUCTOS
 
 ## Formato compatible con la especificación JSON:API
 
-Los cuerpos de las respuestas y los nombres de los parámetros se ajustan a la [especificación JSON:API][1]. Todos los datos
-disponibles en la versión 1 de las APIs siguen estando disponibles. Consulta el siguiente ejemplo de asignación de la API de hosts de la versión 1
-a la API de uso por hora de la versión 2.
+Los cuerpos de las respuestas y los nombres de los parámetros se ajustan a la [especificación JSON:API][3]. Todos los datos
+disponibles en las API v1 siguen estando disponibles. Consulta el siguiente ejemplo de asignación de la API de hosts v1
+a la API de uso por hora v2.
 
-### API v1: [Ver el uso por hora de los hosts y contenedores][2]
+### API V1: Obtén el uso por hora de hosts y contenedores.
 
 #### Solicitud
 
@@ -483,9 +317,10 @@ END
 La API v2 permite recuperar los datos de uso de todas tus organizaciones secundarias de todas las regiones en una solicitud. Utiliza el
 parámetro `filter[include_descendants]` para solicitar datos de organizaciones secundarias.
 
-### Leer más
+### Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://jsonapi.org/format/
-[2]: /es/api/latest/usage-metering/#get-hourly-usage-for-hosts-and-containers
+[1]: /es/api/latest/usage-metering/#get-hourly-usage-by-product-family
+[2]: /es/account_management/guide/relevant-usage-migration/#rum
+[3]: https://jsonapi.org/format/

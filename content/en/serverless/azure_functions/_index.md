@@ -1,5 +1,9 @@
 ---
 title: Install Serverless Monitoring for Azure Functions
+further_reading:
+- link: 'http://datadoghq.com/blog/azure-well-architected-serverless-applications-best-practices/'
+  tag: 'Blog'
+  text: 'Build secure and scalable Azure serverless applications with the Well-Architected Framework'
 ---
 
 ## Overview
@@ -85,7 +89,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 {{< programming-lang lang="dotnet" >}}
 1. **Install dependencies**. Run the following commands:
    ```shell
-   dotnet package add Datadog.Azure.Functions
+   dotnet package add Datadog.AzureFunctions
    ```
 
    Datadog recommends regularly upgrading to the latest version of `Datadog.AzureFunctions` to ensure you have access to enhancements and bug fixes.

@@ -453,8 +453,8 @@ Log4j 2 permite registrar logs en un host remoto, pero no ofrece la posibilidad 
 
 ### Configurar Logback
 
-{{< site-region region="us3,us5,ap1,gov" >}}
- <div class="alert alert-warning">El endpoint TCP no es compatible con el <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}). Para consultar una lista de endpoints de registro, consulta <a href="/logs/log_collection/?tab=tcp#additional-configuration-options">Recopilación de logs e integraciones</a>.</div>
+{{< site-region region="us3,us5,ap1,ap2,gov" >}}
+  <div class="alert alert-warning">El endpoint TCP no es compatible con el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}). Para obtener una lista de los endpoints de generación de logs, consulta <a href="/logs/log_collection/?tab=tcp#additional-configuration-options">Recopilación de logs e integraciones</a>.</div>
 {{< /site-region >}}
 
 
