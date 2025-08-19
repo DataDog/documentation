@@ -391,5 +391,5 @@ For assistance with custom integrations, [contact Datadog Support][4].
 
 [1]: /serverless/step_functions/installation
 [2]: /serverless/aws_lambda/installation
-[3]: tracing/trace_collection/trace_context_propagation/?tab=java#datadog-format
+[3]: /tracing/trace_collection/trace_context_propagation/?tab=java#datadog-format
 [4]: /help
