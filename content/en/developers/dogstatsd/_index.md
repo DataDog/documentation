@@ -102,7 +102,6 @@ docker run -d --cgroupns host \
 If you need to change the port used to collect StatsD metrics, use the `DD_DOGSTATSD_PORT="<NEW_DOGSTATSD_PORT>` environment variable. You can also configure DogStatsD to use a [UNIX domain socket][1].
 
 [1]: /developers/dogstatsd/unix_socket/
-[2]: /developers/dogstatsd/datagram_shell/?tab=metrics#dogstatsd-protocol-v12
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
@@ -165,9 +164,6 @@ With this, any pod running your application is able to send DogStatsD metrics wi
 [2]: https://github.com/containernetworking/cni
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [4]: /getting_started/tagging/unified_service_tagging
-[5]: /developers/dogstatsd/unix_socket/?tab=host#using-origin-detection-for-container-tagging
-[6]: /getting_started/tagging/assigning_tags/#environment-variables
-
 {{% /tab %}}
 {{% tab "Helm" %}}
 
