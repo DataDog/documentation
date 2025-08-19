@@ -5,7 +5,7 @@ description: Track your organization spending with Cloud Cost Management Reports
 further_reading:
 - link: "/cloud_cost_management/reports/scheduled_reports"
   tag: "Documentation"
-  text: "Scheduled Cost Reports"
+  text: "Scheduled cost reports"
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
