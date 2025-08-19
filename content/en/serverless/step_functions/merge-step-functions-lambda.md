@@ -342,7 +342,7 @@ Edit the Step Functions Task to set `_datadog` in the `Input` field as follows:
 
 Configure your task according to the following example:
 
-{{< highlight json "hl_lines=8-13" >}}
+{{< highlight json "hl_lines=8-12" >}}
 "Step Functions StartExecution": {
   "Type": "Task",
   "Resource": "arn:aws:states:::states:startExecution",
