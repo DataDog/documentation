@@ -524,7 +524,7 @@ When this definition is created:
 - If a RUM application exists with the same name or ID, its telemetry is automatically linked. You can find the name under [Manage Applications][1] or the ID will be autofilled when you click **Add Metadata** on an existing Frontend App in Software Catalog.
 - The entity aggregates metadata, dependencies, and real-time RUM performance metrics in a unified view.
 
-[1]: /rum/list?fromUser=false&refresh_mode=sliding&from_ts=1755524206451&to_ts=1755610606451&live=true
+[1]: https://app.datadoghq.com/rum/list
 
 {{% /tab %}}
 
