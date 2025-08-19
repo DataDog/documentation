@@ -6025,8 +6025,8 @@ menu:
       weight: 403
     - name: Processing
       url: /cloudprem/configure/processing
-      parent: cloud_prem_advanced_configuration
-      identifier: cloud_prem_processing
+      parent: cloudprem_advanced_configuration
+      identifier: cloudprem_processing
       weight: 404
     - name: Manage
       url: /cloudprem/manage/
