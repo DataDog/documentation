@@ -20,7 +20,7 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Alerting:" >}}
-    {{< nextlink href="synthetics/guide/synthetic-test-monitors/" >}}Use monitors in Synthetic tests{{< /nextlink >}}
+    {{< nextlink href="monitors/types/synthetic_monitoring/" >}}Use and enrich monitors in Synthetic tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-test-retries-monitor-status/" >}}Understand how Synthetic test retries determine monitor status{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/uptime-percentage-widget" >}}Monitor website uptime with SLOs{{< /nextlink >}}
 {{< /whatsnext >}}
