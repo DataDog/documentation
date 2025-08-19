@@ -4,6 +4,9 @@ further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
+- link: "/dashboards/sharing/scheduled_reports"
+  tag: "Documentation"
+  text: "Learn about scheduled dashboard reports"
 ---
 
 ## Overview
