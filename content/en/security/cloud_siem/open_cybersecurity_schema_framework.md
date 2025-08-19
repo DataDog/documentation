@@ -12,10 +12,6 @@ further_reading:
 
 ## Overview
 
-{{< callout url="https://www.datadoghq.com/product-preview/ocsf/" btn_hidden="false" >}}
-Open Cybersecurity Schema Framework (OCSF) in Datadog is in Preview. Fill out the form to request access.
-{{< /callout >}}
-
 Cloud SIEM collects and analyzes data from a wide range of sources such as cloud services, firewalls, networks, applications, and IT systems. Since these services emit data in different formats, it often requires significant effort to normalize and prepare logs before meaningful threat analysis can occur.
 
 The Open Cybersecurity Schema Framework (OCSF) is an open-source, vendor-neutral standard for organizing and classifying security event data. It is designed to simplify and unify how security logs are structured across platforms and products, enabling consistent threat detection and faster investigation.
