@@ -409,39 +409,39 @@ In Software Catalog, a frontend (`kind:frontend`) represents a frontend applicat
 apiVersion: v3
 kind: frontend
 metadata:
-name: "checkout-webapp"
-displayName: "Checkout Web App"
-description: Main frontend experience for the checkout flow in Shopist
-owner: shopist-frontend
-additionalOwners:
-- name: ux-platform-team
-type: team
-links:
-- name: "UX Design Guidelines"
-type: doc
-url: https://wiki.internal/checkout-design
-- name: "Frontend Source Code"
-type: repo
-provider: github
-url: https://github.com/shopist/checkout-webapp
+  name: "checkout-webapp"
+  displayName: "Checkout Web App"
+  description: "Main frontend experience for the checkout flow in Shopist"
+  owner: shopist-frontend
+  additionalOwners:
+    - name: ux-platform-team
+  type: team
+  links:
+    - name: "UX Design Guidelines"
+      type: doc
+      url: https://wiki.internal/checkout-design
+    - name: "Frontend Source Code"
+      type: repo
+      provider: github
+      url: https://github.com/shopist/checkout-webapp
 spec:
-type: browser
-lifecycle: production
-tier: tier1
-dependsOn:
-- service:checkout-api
-- service:payment-service
-componentOf:
-- system:shopist-checkout-platform
+  type: browser
+  lifecycle: production
+  tier: tier1
+  dependsOn:
+    - service:checkout-api
+    - service:payment-service
+  componentOf:
+    - system:shopist-checkout-platform
 ```
 
 When this definition is created:
 
 - The frontend app appears under the Frontend Apps section in Software Catalog.
-- If a RUM application exists with the same name, its telemetry is automatically linked.
+- If a RUM application exists with the same name or ID, its telemetry is automatically linked. You can find the name under [Manage Applications][1] or the ID will be autofilled when you click **Add Metadata** on an existing Frontend App in Software Catalog.
 - The entity aggregates metadata, dependencies, and real-time RUM performance metrics in a unified view.
 
-**Note:** This separation improves observability by clarifying the role of frontend applications and enables more targeted performance monitoring and scorecarding.
+[1]: /rum/list?fromUser=false&refresh_mode=sliding&from_ts=1755524206451&to_ts=1755610606451&live=true
 
 {{% /tab %}}
 
