@@ -321,6 +321,8 @@ The file backend only requires read permissions for the configured JSON or YAML 
 {{< tabs >}}
 {{% tab "JSON File Backend" %}}
 
+**Note**: Only one level of JSON depth is supported (for example, `{"key": "value"}`)
+
 ##### Datadog.yaml configuration
 
 You can use a JSON file to store secrets locally.
@@ -347,6 +349,8 @@ secret_backend_config:
 
 
 {{% tab "YAML File Backend" %}}
+
+**Note**: Only one level of YAML depth is supported (for example, `key: value`)
 
 ##### Datadog.yaml Configuration
 
