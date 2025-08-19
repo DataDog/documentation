@@ -4,7 +4,9 @@ title: Plain Markdown Elements
 
 ## Expected .md output
 
-- Most of this should remains unchanged, or uses a format that does not meaningfully differ from its original form. (Some spacing changes can be difficult to avoid.)
+- Most of this should remains unchanged, or uses a format that does not meaningfully differ from its original form. 
+  - Some spacing changes can be difficult to avoid.
+  - OOTB Markdoc does not support description lists, but a similar structure can be used. (Longer term, Markdoc can be patched to support it, as we've already done with Cdocs, but it introduces complexity that we probably don't want to deal with at this stage.)
 - In some cases, content may be slightly optimized for agents (for example, links will become inline).
 
 ## Headings
@@ -71,9 +73,6 @@ Resource
 
 `clusterChecksRunner.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution`
 : Required. A list of node selector terms. The terms are ORed.
-
-`site`
-: Set the site of the Datadog intake for Agent data:  {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
 
 
 [1]: https://www.google.com
