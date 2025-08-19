@@ -404,14 +404,19 @@ Learn more about [peer tags and inferred entities][4].
 {{% tab "Frontend" %}}
 In Software Catalog, a frontend (`kind:frontend`) represents a frontend application—such as a browser-based single-page application or mobile app—that interacts with services and APIs. Frontend entities offer a structured way to model user-facing applications in the same catalog alongside backend services.
 
+
+{{% collapse-content title="YAML for RUM app by name" level="h4" expanded=false id="rum-app-name" %}}
+
+This example shows a `kind:frontend` definition for a frontend application in RUM, linked by the name. The name and ID can be found under [Manage Applications][1] or the ID will be autofilled when you click **Add Metadata** on an existing Frontend App in Software Catalog.
+
 ### Example YAML definitions
 ```yaml
 apiVersion: v3
 kind: frontend
 metadata:
-  name: "checkout-webapp"
-  displayName: "Checkout Web App"
-  description: "Main frontend experience for the checkout flow in Shopist"
+  name: checkout-webapp
+  displayName: Checkout Web App
+  description: Main frontend experience for the checkout flow in Shopist
   owner: shopist-frontend
   additionalOwners:
     - name: ux-platform-team
@@ -434,6 +439,82 @@ spec:
   componentOf:
     - system:shopist-checkout-platform
 ```
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="YAML for RUM app by name" level="h4" expanded=false id="rum-app-id" %}}
+
+This example shows a `kind:frontend` definition for a frontend application in RUM, linked by the ID. The name and ID can be found under [Manage Applications][1] or the ID will be autofilled when you click **Add Metadata** on an existing Frontend App in Software Catalog.
+
+### Example YAML definitions
+```yaml
+apiVersion: v3
+kind: frontend
+metadata:
+  name: rum_application:750904cc-cdde-4d06-b427-5d3fec477219
+  displayName: Checkout Web App
+  description: Main frontend experience for the checkout flow in Shopist
+  owner: shopist-frontend
+  additionalOwners:
+    - name: ux-platform-team
+  type: team
+  links:
+    - name: "UX Design Guidelines"
+      type: doc
+      url: https://wiki.internal/checkout-design
+    - name: "Frontend Source Code"
+      type: repo
+      provider: github
+      url: https://github.com/shopist/checkout-webapp
+spec:
+  type: browser
+  lifecycle: production
+  tier: tier1
+  dependsOn:
+    - service:checkout-api
+    - service:payment-service
+  componentOf:
+    - system:shopist-checkout-platform
+```
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="YAML for manually defined frontend app" level="h4" expanded=false id="manually-created" %}}
+
+This example shows a `kind:frontend` definition for a manually declared frontend app.
+
+### Example YAML definitions
+```yaml
+apiVersion: v3
+kind: frontend
+metadata:
+  name: checkout-webapp
+  displayName: Checkout Web App
+  description: Main frontend experience for the checkout flow in Shopist
+  owner: shopist-frontend
+  additionalOwners:
+    - name: ux-platform-team
+  type: team
+  links:
+    - name: "UX Design Guidelines"
+      type: doc
+      url: https://wiki.internal/checkout-design
+    - name: "Frontend Source Code"
+      type: repo
+      provider: github
+      url: https://github.com/shopist/checkout-webapp
+spec:
+  type: browser
+  lifecycle: production
+  tier: tier1
+  dependsOn:
+    - service:checkout-api
+    - service:payment-service
+  componentOf:
+    - system:shopist-checkout-platform
+```
+
+{{% /collapse-content %}}
 
 When this definition is created:
 
