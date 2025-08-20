@@ -101,6 +101,12 @@ multifiltersearch:
       recommendation_type: Migrate DynamoDB to Standard Table Class
       recommendation_description: Migrating to the Standard table class offers potential savings from capacity rates compared to the additional costs from storage rates, or it uses the Standard table class' free tier for storage.
       recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: AWS
+      resource_type: EBS Snapshot
+      recommendation_type: Delete Old EBS Snapshots
+      recommendation_description: EBS Snapshots that are at least 90 days old and can be deleted
+      recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
       resource_type: EBS Volume
@@ -413,6 +419,12 @@ multifiltersearch:
       recommendation_type: Terminate SQL Server
       recommendation_description: SQL Server with no connections, which can be terminated
       recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: SQL Server Database
+      recommendation_type: Downsize SQL Server Database DTU
+      recommendation_description: SQL Server database with low DTU usage that can be downsized
+      recommendation_prerequisites: ""
     - category: Purchase
       cloud_provider: Azure
       resource_type: SQL Server Database
@@ -434,8 +446,14 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: Azure
       resource_type: VM Instance
-      recommendation_type: Terminate VM Instance
+      recommendation_type: Terminate Azure VM Instance
       recommendation_description: VM instance with less than 5% user CPU and over 90% usable memory
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: VM Instance
+      recommendation_type: Downsize Azure VM Instance
+      recommendation_description: VM instance that can be downsized to a smaller instance type
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Purchase
       cloud_provider: GCP
@@ -467,6 +485,18 @@ multifiltersearch:
       recommendation_type: Delete Unused Compute Global IP Address
       recommendation_description: Unused compute global IP addresses can be deleted.
       recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: GCP
+      resource_type: Compute Instance
+      recommendation_type: Downsize Compute Instance
+      recommendation_description: Compute instance with low CPU and memory usage that can be downsized to a smaller instance type
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    - category: Terminate
+      cloud_provider: GCP
+      resource_type: Compute Instance
+      recommendation_type: Terminate Compute Instance
+      recommendation_description: Compute instance with low CPU usage, high available memory, and minimal network activity
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Downsize
       cloud_provider: GCP
       resource_type: CloudSQL Instance
