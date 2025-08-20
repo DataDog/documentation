@@ -68,7 +68,6 @@ Datadog automatically creates a visualization based on your query.
 
 {{% collapse-content title="Guided example of Auto-generate" level="h4" expanded=false %}}
 1. In a new Wildcard widget, click the JSON tab of the query editor and paste the following query:
-{{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
     ```json
     {
       "response_format": "scalar",

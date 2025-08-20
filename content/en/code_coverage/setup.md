@@ -296,6 +296,10 @@ Start-Process -FilePath "./datadog-ci.exe" -ArgumentList version
 
 ### Uploading coverage reports
 
+<div class="alert alert-info">
+Datadog automatically aggregates all reports for the same commit on the backend. You don't need to merge coverage reports before uploading them.
+</div>
+
 To upload your code coverage reports to Datadog, run the following command. Provide a valid [Datadog API key][9] (`DD_API_KEY`), and one or more file paths to either the coverage report files directly or directories containing them:
 
 {{< tabs >}}
@@ -321,6 +325,50 @@ You can also view your coverage data aggregated by pull request in the [Code Cov
 
 {{< img src="/code_coverage/pr_details.png" text="Code Coverage PR details page in Datadog" style="width:100%" >}}
 
+## Troubleshooting
+
+### Coverage upload command does not detect your coverage report files
+
+The `datadog-ci coverage upload` command automatically detects supported coverage report files in the specified directories using heuristics, such as file names and extensions.
+If your coverage report files do not match expected patterns, the command might not detect them automatically. In this case, specify the report format and provide the file paths as positional arguments. For example:
+
+{{< code-block lang="shell" >}}
+datadog-ci coverage upload --format=lcov \
+  src/coverage-reports/unit-tests/coverage.info \
+  src/coverage-reports/e2e-tests/coverage.info
+{{< /code-block >}}
+
+### Coverage upload fails with "Format could not be detected" error
+
+The `datadog-ci coverage upload` command automatically detects the format of the coverage report files based on their content and file extension.
+If the command fails with the following error: 
+```
+Invalid coverage report file [...]: format could not be detected
+```
+specify the format explicitly using the `--format` option, like this:
+
+{{< code-block lang="shell" >}}
+datadog-ci coverage upload --format=cobertura reports/cobertura.xml
+{{< /code-block >}}
+
+### Coverage upload outputs "Could not sync git metadata" error
+
+Git metadata upload is only required if you can't integrate your CI provider directly with Datadog.
+If you are using a [source code provider integration][12], such as Datadog GitHub app or Gitlab integration, you can disable the git metadata upload by passing the `--skip-git-metadata-upload=1` flag to the `datadog-ci coverage upload` command, like this:
+
+{{< code-block lang="shell" >}}
+datadog-ci coverage upload --skip-git-metadata-upload=1 .
+{{< /code-block >}}
+
+### Discrepancy between Datadog UI and coverage report values
+
+Datadog automatically merges coverage reports for the same commit.
+As a result, the coverage percentage displayed in the Datadog UI may differ from the values in your individual coverage reports, especially if those reports contain overlapping or duplicate source code file entries.
+
+If you use an external tool (such as [ReportGenerator](https://reportgenerator.io/)) to merge coverage reports before uploading to Datadog,
+ensure your merged reports do not contain duplicate source code file entries.
+Datadog deduplicates overlapping files across reports, which can result in differences between your original coverage values and the merged values displayed in the Datadog UI.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -336,3 +384,4 @@ You can also view your coverage data aggregated by pull request in the [Code Cov
 [9]: https://app.datadoghq.com/organization-settings/api-keys
 [10]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/coverage/README.md
 [11]: https://app.datadoghq.com/ci/code-coverage
+[12]: #integrate-with-source-code-provider
