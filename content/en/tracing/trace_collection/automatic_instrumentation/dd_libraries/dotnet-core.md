@@ -56,7 +56,7 @@ For a full list of Datadog's .NET Core library and processor architecture suppor
 ## Installation and getting started
 
 <div class="alert alert-info">
-    To set up Datadog APM in Serverless environments, such as AWS Lambda or Azure Functions, see [Serverless][7].
+    To set up Datadog APM in Serverless environments, such as AWS Lambda or Azure Functions, see <a href="/serverless">Serverless</a>.
 </div>
 
 <div class="alert alert-warning">
@@ -64,7 +64,7 @@ For a full list of Datadog's .NET Core library and processor architecture suppor
 </div>
 
 <div class="alert alert-info">
-  To instrument trimmed apps, reference the [Datadog.Trace.Trimming][8] NuGet package in your project.
+  To instrument trimmed apps, reference the <a href="https://www.nuget.org/packages/Datadog.Trace.Trimming/">Datadog.Trace.Trimming<a> NuGet package in your project.
 </div>
 
 ### Installation
@@ -450,7 +450,5 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 [4]: /tracing/trace_collection/library_config/dotnet-core/
 [5]: /tracing/trace_collection/custom_instrumentation/dotnet/
 [6]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
-[7]: /serverless/
-[8]: https://www.nuget.org/packages/Datadog.Trace.Trimming/
 [11]: /tracing/trace_collection/library_injection_local/
 [12]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
