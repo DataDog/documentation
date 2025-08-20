@@ -203,6 +203,8 @@ If you want to use Application & API Protection without APM tracing functionalit
 For more details, see [Standalone App and API Protection][standalone_billing_guide].
 [standalone_billing_guide]: /security/application_security/guide/standalone_application_security/
 
+{{% aap/aap_and_api_protection_verify_setup %}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
