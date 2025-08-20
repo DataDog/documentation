@@ -363,7 +363,7 @@ Configure your task according to the following example:
 
 ## Merge Lambda traces with downstream Step Functions traces
 
-Traces can be connected downstream from Lambda functions when called directly using `StartExecution` or `StartSyncExecution` or when called indirectly through managed services like SNS, SQS, or EventBridge.
+Traces can be connected downstream from Lambda functions when called directly using `StartExecution` or `StartSyncExecution`, or when called indirectly through managed services like SNS, SQS, or EventBridge.
 
 ### Requirements
 | Runtime | Requirement |
