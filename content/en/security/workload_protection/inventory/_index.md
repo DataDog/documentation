@@ -16,17 +16,17 @@ Inventory is organized into the following tools:
   * Track coverage for serverless functions
   * Filter by environment, enabled features, agent version, etc.
 - [Coverage Map][3]:
-  * View a real-time map of workload protection status
+  * View a map of Workload Protection status updated every 1-5 minutes
   * Find and prioritize workloads in a warning state
   * Filter by policy, rule, or MITRE ATT&CK tactic to locate gaps
   * Check for outdated or unhealthy agents
 
 ## Benefits of using Inventory for posture management
 
-- Proactive risk reduction: Spot and fix gaps before attackers can exploit them.
-- Faster incident response: Pivot from high-level coverage views to specific assets or policies in seconds.
-- Continuous compliance: Maintain alignment with regulatory and internal security requirements.
-- Cloud-native scalability: Coverage updates in under 5 minutes keep up with rapidly changing environments.
+- **Proactive risk reduction:** Spot and fix gaps before attackers can exploit them.
+- **Faster incident response:** Pivot from high-level coverage views to specific assets or policies in seconds.
+- **Continuous compliance:** Maintain alignment with regulatory and internal security requirements.
+- **Cloud-native scalability:** Coverage updates in under 5 minutes keep up with rapidly changing environments.
 
 [1]: https://app.datadoghq.com/security/workload-protection/inventory/hosts
 [2]: https://app.datadoghq.com/security/workload-protection/inventory/serverless

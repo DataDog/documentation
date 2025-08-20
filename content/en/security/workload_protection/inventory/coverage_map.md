@@ -10,7 +10,7 @@ further_reading:
   text: "Review your Workload Protection coverage with the coverage map"
 ---
 
-Workload Protection [Coverage][1] provides a real-time view of security coverage across all your workloads, including hosts, containers, and serverless environments. Use Coverage to assess protection posture, identify gaps, and take immediate action.
+Workload Protection [Coverage][1] provides a real-time view of security coverage across all your hosts. Use Coverage to assess protection posture, identify gaps, and take immediate action.
 
 {{< img src="security/cws/workload_protection_coverage_map.png" alt="Leverage the Coverage map to get real time visibility into the workload protection status across all your hosts and see which policies are effectively applied" width="100%">}}
 
@@ -36,43 +36,54 @@ Coverage consolidates critical protection data into one view so you can:
 * Maintain continuous compliance and policy alignment.
 * Integrate posture checks into CI/CD and infrastructure reviews.
 
+## Policy statuses
+
+Hosts are identified with the following colors:
+
+- Green: all rules in the policies applied to the host have passed.
+- Orange: one or more rules in the policies applied to the host are in error.
+
+Click an orange hexagon to view a host with policy rules in error.
+
+Policies are displayed with the following statuses:
+
+- **Fully Loaded:** all of the policy's rules pass.
+- **Partially Loaded:** some of the policy's rules fail.
+- **Fully Rejected:** the entire policy is failing.
+
+Click a policy to view the rules in error. Edit the rules as needed.
+
 ## Improving workload security using Coverage
 
 Here are some ways to use Coverage to improve your workload security.
 
-### Eliminate gaps in security coverage
+### Detect and remediate policy deployment issues
 
-To eliminate unknown workloads from your environment and reduce attack surface, do the following:
+1. In **Incomplete infrastructure coverage**, click **Warning**, and then select the policies in **Security coverage needs attention**. In the coverage map, assets with policy deployment problems are displayed as orange hexagons.
+3. Review the list of deployed policies. Policies are highlighted with statuses such as **Partially Loaded**, **Fully Rejected**, etc.
+4. In the policy details, do one of the following:
+   - Edit a policy.
+   - View a policy's rule errors, and then edit them as needed.
+5. Redeploy and confirm the fix in the coverage map.
 
-- Identify which hosts are in a **Warning** or **Incomplete Coverage** state.
-- Focus on the **orange hexagons** (warnings). These warnings indicate potential blind spots such as missing agents, outdated policies, or disabled rules.
-- Use the **Incomplete infrastructure coverage** banner to see exactly which assets are at risk and why.
+### Identify assets missing Workload Protection
 
-### Prioritize policy remediation
+**Improve infrastructure coverage** flags assets without full Workload Protection.
 
-Coverage uses policy and rule metadata to show the exact version, status, and source of each deployment. This exposure ensures every workload is aligned with your security baselines, minimizing the window of exposure.
+1. In **Improve infrastructure coverage**, click **NO WP**. **NO WP** shows how many hosts are running the Datadog Agent without Workload Protection enabled.
+2. Click **Inspect Hosts Without WP**. Fleet Automation appears, allowing you to [set up Workload Protection][3].
 
-To see where deployments failed or rules are not enforced, do the following:
+### Identify assets missing key features
 
-1. Filter by **Policy Status** or **Policy Rule Status**.
-2. Select a workload.
-3. In the workload details pane, select **Edit** for a policy. The policy appears.
-4. Redeploy or fix policy configs.
+To find gaps in protection, do the following:
 
-### Detect and address stale or misconfigured agents
-
-Coverage refreshes **every 5 minutes**, helping you spot the agents that need attention.
-
-To spot stale or misconfigured agents, do the following:
-
-1. In **Improve infrastructure coverage**, click **NO WP**. **NO WP** shows how many hosts are running the Datadog Agent with Workload Protection enabled.
-   1. Click **Inspect Hosts Without WP**. Fleet Automation appears, allowing you to [set up Workload Protection][3].
-2. In **Improve infrastructure coverage**, click **NO AGENT**. **NO AGENT** show how many hosts are not running the Datadog Agent, and therefore can't be evaluated by Workload Protection.
+1. In **Improve infrastructure coverage**, click **INFO** to review the `outdated_agent` flag. The `outdated_agent` flag means the Agent is running an outdated version and might not support the latest Workload Protection features.
+2. In **Improve infrastructure coverage**, click **NO AGENT**. **NO AGENT** shows how many hosts are not running the Datadog Agent, and therefore can't be evaluated by Workload Protection.
    1. Click **Inspect Hosts Without Agent**. The Resource Catalog appears, allowing you to address hosts missing agents.
 3. Filter by **Agent Version** to detect outdated agents lacking recent security updates.
-4. Investigate **Snapshot Health Issues** to catch and fix health issues before they mask attacks.
+4. Update the Agent to ensure complete coverage.
 
-### Validate policy deployment against MITRE ATT&CK coverage
+### Search assets by MITRE ATT&CK techniques and tactics
 
 In **Filter by tactics, techniques, and policy types**, built-in filters for **Tactics**, **Techniques**, and **Policies** show exactly which parts of the MITRE ATT&CK framework are covered.
 
@@ -84,34 +95,18 @@ To use these filters to strengthen detection and response alignment with proven 
 
 For information about the MITRE ATT&CK map available in SIEM or Workload Protection, see [MITRE ATT&CK map][2].
 
-### Continuous posture management
+### Experiment with new rules
 
-You can use Coverage as part of your proactive security culture by incorporating it into your scheduled security reviews.
+You can use Coverage to test and iterate on custom security rules:
 
-To treat Coverage as part of your scheduled security reviews, do the following:
-
-- Integrate the Coverage map into your CI/CD and IaC review processes to ensure every new host is automatically protected.
-- Schedule weekly reviews to track progress toward 100% green coverage.
-
-### Compliance and audit reporting
-
-For regulated environments, the ability to demonstrate continuous workload protection is essential. Coverage provides visual evidence and timestamped data that can be used in frameworks like PCI DSS, HIPAA, SOC 2, or ISO 27001. Security teams can export or capture the view as part of audit documentation, proving coverage at a specific point in time.
-
-### Policy effectiveness validation
-
-Coverage can be used for policy effectiveness validation. Instead of assuming a policy is active across the environment, Coverage allows teams to confirm deployments and spot workloads where enforcement has failed or configurations are broken. This prevents false assurance and ensures that detection rules remain consistently applied across all systems.
-
-### Detection engineering gap analysis
-
-Coverage can be used for gap analysis. By mapping MITRE ATT&CK tactics and techniques to current workload coverage, teams can see exactly where detection is thin. If certain tactics, such as defense evasion, are underrepresented, security engineers can adjust or create rules to address those gaps and strengthen detection capabilities.
-
-### Post-incident lessons learned
-
-After an event, teams can compare coverage data from before the incident to the environment after remediation. This confirms that exploited gaps have been addressed and that similar workloads are fully protected, reducing the risk of a repeat compromise.
+1. Write and deploy a [new custom rule][4].
+2. In **Coverage**, search for the rule by rule ID, policy ID, or hostname.
+3. Confirm that the agent has loaded the rule successfully.
+4. If errors appear, review the details, fix the rule, and redeploy.
 
 ## Workload coverage triage and remediation cycle
 
-As an example of how to use Coverage to triage and remediate coverage issues, her is a sequence that starts by establishing a baseline, closing blind spots, and securing the most critical assets. It then verifies enforcement mechanisms, restores agent health, and aligns detection coverage with known adversary behaviors. Lastly, it applies rule updates, confirms effectiveness, and records the state for audit and incident reference.
+As an example of how to use Coverage to triage and remediate coverage issues, here is a sequence that starts by establishing a baseline, closing blind spots, and securing the most critical assets. It then verifies enforcement mechanisms, restores agent health, and aligns detection coverage with known adversary behaviors. Lastly, it applies rule updates, confirms effectiveness, and records the state for audit and incident reference.
 
 1. Do a full environment view to establish baseline coverage status.
 2. Focus on assets that appear fully covered. Validate that their policies, rules, and agents are working as intended before addressing visible gaps. This uncovers silent failures in trusted systems that would otherwise be ignored.
@@ -132,3 +127,4 @@ As an example of how to use Coverage to triage and remediate coverage issues, he
 [1]: https://app.datadoghq.com/security/workload-protection/inventory/coverage
 [2]: /security/detection_rules/#mitre-attck-map
 [3]: /security/workload_protection/setup/
+[4]: /security/workload_protection/workload_security_rules/custom_rules
