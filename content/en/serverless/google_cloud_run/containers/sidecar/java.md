@@ -1,5 +1,5 @@
 ---
-title: Instrumenting a Java Cloud Run Container In-Process
+title: Instrumenting a Java Cloud Run Container with Sidecar
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 40
@@ -12,9 +12,9 @@ further_reading:
     text: 'Correlating Java Logs and Traces'
 ---
 
-## Setup
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/sidecar/java">available on GitHub</a>.</div>
 
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-process/java">available on GitHub</a>.</div>
+## Setup
 
 1. **Install the Datadog Java tracer**.
 
@@ -48,17 +48,29 @@ implementation 'com.datadoghq:dd-trace-api:DD_TRACE_JAVA_VERSION_HERE'
 
    For more information, see [Tracing Java Applications][1].
 
-2. **Install serverless-init**.
+2. **Install serverless-init as a sidecar**.
 
-   {{% gcr-install-serverless-init cmd="\"./mvnw\", \"spring-boot:run\"" %}}
+   {{< tabs >}}
+
+   {{% tab "Datadog CLI" %}}
+   {{% gcr-install-sidecar-datadog-ci %}}
+   {{% /tab %}}
+
+   {{% tab "YAML Deploy" %}}
+   {{% gcr-install-sidecar-yaml language="java" %}}
+   {{% /tab %}}
+
+   {{% tab "Custom" %}}
+   {{% gcr-install-sidecar-custom %}}
+   {{% /tab %}}
+
+   {{< /tabs >}}
 
 3. **Set up logs**.
 
-   To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows `serverless-init` to read logs from stdout and stderr.
+   In the previous step, you created a shared volume. Additionally, you set the `DD_SERVERLESS_LOG_PATH` env var, or it was defaulted to `/shared-volume/logs/app.log`.
 
-   Datadog also recommends setting the environment variable `DD_SOURCE=java` to enable advanced Datadog log parsing.
-
-   If you want multiline logs to be preserved in a single log message, Datadog recommends writing your logs in *compact* JSON format. For example, you can use a third-party logging library such as `Log4j 2`:
+   Now, you will need to configure your logging library to write logs to that file. In Java, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `Log4j 2`:
 
    {{< code-block lang="java" disable_copy="false" >}}
 private static final Logger logger = LogManager.getLogger(App.class);
@@ -69,17 +81,19 @@ logger.info("Hello World!");
 <Configuration>
   <Appenders>
     <Console name="Console"><JsonLayout compact="true" eventEol="true" properties="true"/></Console>
+    <File name="FileAppender" fileName="/shared-volume/logs/app.log">
+      <JsonLayout compact="true" eventEol="true" properties="true"/>
+    </File>
   </Appenders>
-  <Loggers><Root level="info"><AppenderRef ref="Console"/></Root></Loggers>
+  <Loggers><Root level="info"><AppenderRef ref="FileAppender"/></Root></Loggers>
 </Configuration>
 {{< /code-block >}}
 
-   For more information, see [Correlating Java Logs and Traces][2].
+Datadog recommends setting the environment variable `DD_SOURCE=java` in your sidecar container to enable advanced Datadog log parsing.
 
-4. **Configure your application**.
+For more information, see [Correlating Java Logs and Traces][2].
 
-{{% gcr-configure %}}
-{{% gcr-env-vars instrumentationMethod="in-process" language="java" %}}
+{{% gcr-env-vars instrumentationMethod="sidecar" language="java" %}}
 
 ## Troubleshooting
 

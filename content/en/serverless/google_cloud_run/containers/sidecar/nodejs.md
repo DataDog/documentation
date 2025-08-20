@@ -1,5 +1,5 @@
 ---
-title: Instrumenting a Node.js Cloud Run Container In-Process
+title: Instrumenting a Node.js Cloud Run Container with Sidecar
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 20
@@ -12,9 +12,9 @@ further_reading:
   text: 'Correlating Node.js Logs and Traces'
 ---
 
-## Setup
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/sidecar/node">available on GitHub</a>.</div>
 
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-process/node">available on GitHub</a>.</div>
+## Setup
 
 1. **Install the Datadog Node.js tracer**.
 
@@ -38,28 +38,43 @@ ENV NODE_OPTIONS="--require dd-trace/init"
 
    For more information, see [Tracing Node.js applications][1].
 
-2. **Install serverless-init**.
+2. **Install serverless-init as a sidecar**.
 
-   {{% gcr-install-serverless-init cmd="\"/nodejs/bin/node\", \"/path/to/your/app.js\"" %}}
+   {{< tabs >}}
+
+   {{% tab "Datadog CLI" %}}
+   {{% gcr-install-sidecar-datadog-ci %}}
+   {{% /tab %}}
+
+   {{% tab "YAML Deploy" %}}
+   {{% gcr-install-sidecar-yaml language="nodejs" %}}
+   {{% /tab %}}
+
+   {{% tab "Custom" %}}
+   {{% gcr-install-sidecar-custom %}}
+   {{% /tab %}}
+
+   {{< /tabs >}}
 
 3. **Set up logs**.
 
-   To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows `serverless-init` to read logs from stdout and stderr.
+   In the previous step, you created a shared volume. Additionally, you set the `DD_SERVERLESS_LOG_PATH` env var, or it was defaulted to `/shared-volume/logs/app.log`.
 
-   Datadog also recommends setting the environment variable `DD_SOURCE=nodejs` to enable advanced Datadog log parsing.
-
-   If you want multiline logs to be preserved in a single log message, Datadog recommends writing your logs in JSON format. For example, you can use a third-party logging library such as `winston`:
+   Now, you will need to configure your logging library to write logs to that file. In Node.js, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `winston`:
    {{< code-block lang="javascript" disable_copy="false" >}}
 const tracer = require('dd-trace').init({
   logInjection: true,
 });
 const { createLogger, format, transports } = require('winston');
 
+const LOG_FILE = "/shared-volume/logs/app.log"
+
 const logger = createLogger({
   level: 'info',
   exitOnError: false,
   format: format.json(),
   transports: [
+    new transports.File({ filename: LOG_FILE }),
     new transports.Console()
   ],
 });
@@ -67,12 +82,11 @@ const logger = createLogger({
 logger.info(`Hello world!`);
 {{< /code-block >}}
 
+   Datadog recommends setting the environment variable `DD_SOURCE=nodejs` in your sidecar container to enable advanced Datadog log parsing.
+
    For more information, see [Correlating Node.js Logs and Traces][2].
 
-4. **Configure your application**.
-
-{{% gcr-configure %}}
-{{% gcr-env-vars instrumentationMethod="in-process" language="nodejs" %}}
+{{% gcr-env-vars instrumentationMethod="sidecar" language="nodejs" %}}
 
 ## Troubleshooting
 
