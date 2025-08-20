@@ -29,8 +29,8 @@ Scheduled Cloud Cost (CCM) Reports let you automatically receive recurring cost 
     - **Slack recipients**: Select your Slack workspace and channel from the dropdowns. If no workspaces appear, make sure you have the Datadog [Slack Integration][2] installed. All public channels within the Slack workspace are listed automatically. For private channels, invite the Datadog Slack bot first. You can test the connection by clicking **Send Test Message**.
       {{< img src="dashboards/scheduled_reports/add_slack_recipients.png" alt="The configuration modal for editing scheduled report Slack recipients." style="width:80%;" >}}
 
-## Managing reports
-A single report can have multiple schedules with different settings, allowing you to inform different stakeholder groups interested in the same cost data. To view existing schedules, click **Share** and select **Manage Schedules**.
+## Managing schedules
+A single Cloud Cost (CCM) Report can have multiple schedules with different settings, allowing you to inform different stakeholder groups interested in the same cost data. To view existing schedules, click **Share** and select **Manage Schedules**.
 
 From the configuration modal that opens, you can:
 - Pause existing schedules
@@ -42,7 +42,7 @@ From the configuration modal that opens, you can:
 
 ## Viewing schedules
 
-To see all report schedules across your organization:
+To see all Cloud Cost (CCM) Report schedules across your organization:
 1. Navigate to [**Cloud Cost > Analyze > Reports**][1] and click the **Report Schedules** tab.
 2. Use the "My schedules" toggle to switch between your personal schedules and all organization schedules.
 
@@ -52,7 +52,7 @@ To see all report schedules across your organization:
 | Action | Required Permission |
 |--------|----------|
 | View schedules | Cloud Cost Report Schedules Write OR Cloud Cost Report Schedules Manage |
-| Create/modify your schedules | Cloud Cost Report Schedules Write |
+| Create/modify your schedules | Cloud Cost Report Schedules Write OR Cloud Cost Report Schedules Manage |
 | Modify others' schedules | Cloud Cost Report Schedules Manage |
 
 After a report is created, you can subscribe, unsubscribe, edit schedules, and delete reports (assuming you have the appropriate permissions). If you do not have **Cloud Cost Report Schedules Write** or **Cloud Cost Report Schedules Manage** permissions, you can still unsubscribe directly from the email.
