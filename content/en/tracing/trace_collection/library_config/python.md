@@ -109,7 +109,7 @@ Override the port that the default tracer submits DogStatsD metrics to. If the [
 ## Logs
 
 `DD_LOGS_INJECTION`
-: **Default**: `false`<br>
+: **Default**: `true`<br>
 Enable [connecting logs and trace injection][6].
 
 ## Trace context propagation

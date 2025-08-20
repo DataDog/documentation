@@ -233,7 +233,7 @@ For more information on how to add labels, see Google Cloud's [Configure labels 
 | `DD_SITE`        | [Datadog site][5] - **Required**                                                                                                                                            |
 | `FUNCTION_TARGET`   | The entry point of your function - **Required**                                                                                                                             |
 | `DD_SERVICE`     | See [Unified Service Tagging][13] - **Required**                                                                                                                            |
-| `DD_LOGS_INJECTION` | When true, enrich all logs with trace data for supported loggers in [Java][6], [Node][7], [.NET][8], and [PHP][9]. See additional docs for [Python][10], [Go][11], and [Ruby][12]. |
+| `DD_LOGS_INJECTION` | Enrich all logs with trace data for supported loggers in [Java][6], [Node][7], [.NET][8], and [PHP][9]. See additional docs for [Python][10], [Go][11], and [Ruby][12]. |
 | `DD_VERSION`     | See [Unified Service Tagging][13].                                                                                                                                          |
 | `DD_ENV`         | See [Unified Service Tagging][13].                                                                                                                                          |
 | `DD_SOURCE`      | See [Unified Service Tagging][13].                                                                                                                                          |

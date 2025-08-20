@@ -90,7 +90,7 @@ For example:
     - Set the `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
     - Set `DD_ENV` to group your traces and custom statistics.
     - Set `DD_SERVICE` to specify a service name (defaults to your app name).
-    - Set `DD_LOGS_INJECTION:true` for correlation with application logs from your app.
+    - Set `DD_LOGS_INJECTION:true` (default value) for correlation with application logs from your app.
     - Set `DD_PROFILING_ENABLED:true` to enable .NET [Continuous Profiler][5].
     - Set `DD_APPSEC_ENABLED:true` to enable [Application Security][15].
     - See a full list of [optional configuration variables][6].
@@ -108,7 +108,7 @@ You can send logs from your application in Azure App Service to Datadog in one o
 1. [Agentless logging with automatic instrumentation][7]
 2. [Agentless logging with the Serilog sink][8]
 
-Both methods allow trace ID injection, making it possible to connect logs and traces in Datadog. To enable trace ID injection with the extension, add the application setting `DD_LOGS_INJECTION:true`.
+Both methods allow trace ID injection, making it possible to connect logs and traces in Datadog.
 
 **Note**: Since this occurs inside your application, any Azure Platform logs you submit with diagnostic settings do not include the trace ID.
 

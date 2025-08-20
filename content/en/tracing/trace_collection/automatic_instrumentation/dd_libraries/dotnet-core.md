@@ -402,7 +402,6 @@ When using `systemctl` to run .NET applications as a service, you can add the re
     DD_DOTNET_TRACER_HOME=/opt/datadog
 
     # (Optional) Set additional Datadog environment variables, for example:
-    DD_LOGS_INJECTION=true
     DD_RUNTIME_METRICS_ENABLED=true
     ```
 2. In the service's configuration file, reference this as an [`EnvironmentFile`][1] in the service block:

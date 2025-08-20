@@ -251,7 +251,7 @@ To enable DBM to APM link using tag injection, can be set to `'service'` or `'fu
 
 `DD_LOGS_INJECTION`
 : **Configuration**: `logInjection`<br>
-**Default**: `false`<br>
+**Default**: `true`<br>
 Enable automatic injection of trace IDs in logs for supported logging libraries.
 
 `DD_TRACE_LOG_LEVEL`

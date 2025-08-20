@@ -416,7 +416,7 @@ The `'full'` option enables connection between database spans with database quer
 
 `DD_LOGS_INJECTION`
 : **INI**: `datadog.logs_injection`<br>
-**Default**: `0`<br>
+**Default**: `1`<br>
 Enables or disables automatic injection of correlation identifiers into application logs. Added in version `0.89.0`<br>
 See [logs correlation documentation][17] for more information.
 

@@ -143,7 +143,7 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 |`DD_API_KEY`| [Datadog API key][7] - **Required**|
 | `DD_SITE` | [Datadog site][5] - **Required** |
 | `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
-| `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][19], [Node][20], [.NET][21], and [PHP][22]. See additional docs for [Python][23], [Go][24], and [Ruby][25]. |
+| `DD_LOGS_INJECTION`| Enrich all logs with trace data for supported loggers in [Java][19], [Node][20], [.NET][21], and [PHP][22]. See additional docs for [Python][23], [Go][24], and [Ruby][25]. |
 | `DD_SERVICE`      | See [Unified Service Tagging][6].                                  |
 | `DD_VERSION`      | See [Unified Service Tagging][6].                                  |
 | `DD_ENV`          | See [Unified Service Tagging][6].                                  |

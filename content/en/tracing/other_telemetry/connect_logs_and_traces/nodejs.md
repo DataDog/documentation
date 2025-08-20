@@ -23,16 +23,16 @@ further_reading:
 
 ## Automatic injection
 
-Enable injection with the environment variable `DD_LOGS_INJECTION=true` or by configuring the tracer directly:
+Enables automatic trace ID injection for `bunyan`, `paperplane`, `pino`, and `winston`. 
+
+For older tracer versions injection can be enabled the environment variable `DD_LOGS_INJECTION=true` or by configuring the tracer directly:
 
 ```javascript
 // This line must come before importing the logger.
 const tracer = require('dd-trace').init({
-    logInjection: true
+    logInjection: false
 });
 ```
-
-This enables automatic trace ID injection for `bunyan`, `paperplane`, `pino`, and `winston`.
 
 If you haven't done so already, configure the Node.js tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the best
 experience for adding `env`, `service`, and `version` (see [Unified Service Tagging][1] for more details).

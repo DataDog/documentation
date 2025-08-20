@@ -253,7 +253,6 @@ After installing the MSI, no additional configuration is needed to automatically
 
 1. Open the Registry Editor, find the multi-string value called `Environment` in the `HKLM\System\CurrentControlSet\Services\WAS` key, and add the environment variables, one per line. For example, to add logs injection and runtime metrics, add the following lines to the value data:
    ```text
-   DD_LOGS_INJECTION=true
    DD_RUNTIME_METRICS_ENABLED=true
    ```
 2. Run the following commands to restart IIS:
