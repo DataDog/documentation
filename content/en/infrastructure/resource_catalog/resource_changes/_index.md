@@ -38,7 +38,7 @@ For a comprehensive list of supported resources, see the [Supported resources](#
 
 To view configuration changes for your resources, ensure that resource collection is enabled for your cloud resources so they are visible within the Resource Catalog. You can manage this setting from the [Resource Catalog settings page][2] or the relevant [cloud provider integration tile][3]. This step automatically enables [Snapshot Changes](#snapshot-changes) for your resources.
 
-<div class="alert alert-info"><strong>Note:</strong> Enabling resource collection for your AWS accounts may result in a small charge if you are using Usage Metrics. If you are not using Usage Metrics, you can disable this feature by turning off the Usage toggle in your AWS account settings.<br/>
+<div class="alert alert-info"><strong>Note</strong>: Enabling resource collection for your AWS accounts may impact your AWS CloudWatch costs if you are using Usage Metrics. To avoid the additional charge, you can disable collecting "Usage" metrics in the Metric Collection tab of the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog AWS Integration.</a><br/>
 
 {{< img src="/infrastructure/resource_catalog/aws_usage_toggle.png" alt="AWS Usage toggle in account settings" style="width:100%;" >}}</div>
 
