@@ -60,7 +60,7 @@ For a full list of Datadog's .NET Framework library and processor architecture s
 ## Installation and getting started
 
 <div class="alert alert-info">
-  To set up Datadog APM in AWS Lambda, see <strong><a href="/tracing/serverless_functions/">Tracing Serverless Functions</a></strong>, in Azure App Service, see <strong><a href="/serverless/azure_app_services/">Tracing Azure App Service</a></strong>.
+  To set up Datadog APM in Serverless environments, such as AWS Lambda or Azure Functions, see [Tracing Serverless Functions][6].</strong>.
 </div>
 
 <div class="alert alert-warning">
@@ -291,5 +291,6 @@ dotnet.exe example.dll
 [3]: https://app.datadoghq.com/apm/traces
 [4]: /tracing/trace_collection/library_config/dotnet-framework/
 [5]: /tracing/trace_collection/custom_instrumentation/dotnet/
+[6]: /serverless/
 [11]: /tracing/trace_collection/library_injection_local/
 [12]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
