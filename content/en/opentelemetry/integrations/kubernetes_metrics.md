@@ -104,12 +104,14 @@ To edit a metric's metadata:
 
 Repeat this process for each of the metrics listed in the following table:
 
-| Metric Name              | Metric Type | Unit   |
-|--------------------------|-------------|---------
-| `k8s.pod.cpu.usage`      | `Gauge`     | `core` |
-| `k8s.pod.memory.usage`   | `Gauge`     | `byte` |
-| `k8s.pod.network.io`     | `Gauge`     | `byte` |
-| `k8s.pod.network.errors` | `Gauge`     | `byte` |
+| Metric Name              | Metric Type | Unit                          | Denominator           |
+|--------------------------|-------------|-------------------------------|-----------------------|
+| `k8s.pod.cpu.usage`      | `Gauge`     | `Cpu` > `core`                |                       |
+| `k8s.pod.memory.usage`   | `Gauge`     | `Bytes (binary)` > `byte (B)` | `Time` > `second (s)` |
+| `k8s.pod.network.io`     | `Gauge`     | `Bytes (binary)` > `byte (B)` | `Time` > `second (s)` |
+| `k8s.pod.network.errors` | `Gauge`     | `Bytes (binary)` > `byte (B)` | `Time` > `second (s)` |
+
+**Note**: Click the plus (**+**) icon beside the **Unit** to add the **Denominator**.
   
 ## Correlating traces with infrastructure metrics
 
