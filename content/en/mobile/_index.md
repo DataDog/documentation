@@ -263,7 +263,7 @@ On the Services page, you can view, search and filter all services that you have
 ### How do I remain logged into the mobile app?
 Upon successful authentication to the mobile app, you will remain logged in for 90 days. Provided you are active during that 90 day period, the token will be refreshed. 
 
-**Note**: If you have notifications enabled, proactive nofitications will be sent prior to token expiration.
+**Note**: If you have notifications enabled, proactive notifications will be sent prior to token expiration.
 
 ### Will I still receive notifications if I am automatically signed out?
 If you are automatically logged out due to inactivity during the 90 day token period, you will still be able to receive notifications and will be prompted to log in again.
