@@ -33,7 +33,7 @@ For DBM correlation to work, your database spans must include the following attr
 | `db.name`      | The logical database or schema name being queried.                                                  | `user_accounts`                    |
 | `span.type`    | **Required (Datadog-specific).** The type of span such as `sql`,`postgres`, `mysql`, or `sql.query` | `sql`                              |
 
-<div class="alert alert-info">The <code>span.type</code> attribute is a Datadog-specific convention required for the backend to identify and processes database spans. It is not part of the standard OpenTelemetry semantic conventions.</div>
+<div class="alert alert-info">The <code>span.type</code> attribute is a Datadog-specific convention required for the backend to identify and process database spans. It is not part of the standard OpenTelemetry semantic conventions.</div>
 
 #### Auto instrumentation
 
@@ -133,7 +133,7 @@ After your application is sending traces, you can see the correlation in the APM
 If you don't see the expected correlation between your APM traces and DBM, it's typically due to a missing or incorrect configuration. Check the following common causes:
 
 - **All required attributes (`db.system`, `db.statement`, `span.type`) must be present** on the database span.
-- **The SQL query may not be parsable**: The correlation relies on Datadog's ability to parse the SQL query from the `db.statement` attribute. If the query uses non-standard or highly complex syntax, parsing may fail. If you suspect this is the case, [contact Datadog support][5] for assistance.
+- **The SQL query may not be parsable**: The correlation relies on Datadog's ability to parse the SQL query from the `db.statement` attribute. If the query uses non-standard or complex syntax, parsing may fail. If you suspect this is the case, [contact Datadog support][5] for assistance.
 - **The correct feature gates must be enabled** for your specific trace ingestion path as described in the setup steps.
 
 ## Further reading
