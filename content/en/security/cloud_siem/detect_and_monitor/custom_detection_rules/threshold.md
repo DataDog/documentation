@@ -43,10 +43,6 @@ To create a threshold detection rule or job:
 
 ### Set conditions
 
-{{< img src="security/security_monitoring/detection_rules/define_rule_case2.png" alt="The set rule case section showing the default settings" style="width:80%;" >}}
-
-Enable **Create rules cases with the Then operator** if you want to trigger a signal for the example: If query A occurs and then query B occurs. The `then` operator can only be used on a single rule case.
-
 All rule cases are evaluated as case statements. Thus, the order of the cases affects which notifications are sent because the first case to match generates the signal. Click and drag your rule cases to change their ordering.
 
 A rule case contains logical operations (`>, >=, &&, ||`) to determine if a signal should be generated based on the event counts in the previously defined queries. The ASCII lowercase [query labels](#define-a-search-query) are referenced in this section. An example rule case for query `a` is `a > 3`.
@@ -77,22 +73,13 @@ In this example, when there are more than five failed logins and at least one su
 
 {{% security-rule-time-windows %}}
 
-Click **Add Case** to add additional cases.
+Click **Add Condition** to add additional conditions.
 
 **Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
 ### Decreasing non-production severity
 
-One way to decrease signal noise is to prioritize production environment signals over non-production environment signals. Select the `Decrease severity for non-production environments` checkbox to decrease the severity of signals in non-production environments by one level from what is defined by the rule case.
-
-| Signal Severity in Production Environment| Signal Severity in Non-production Environment|
-| ---------------------------------------- | -------------------------------------------- |
-| Critical                                 | High                                         |
-| High                                     | Medium                                       |
-| Medium                                   | Info                                         |
-| Info                                     | Info                                         |
-
-The severity decrement is applied to signals with an environment tag starting with `staging`, `test`, or `dev`.
+{{% cloud_siem/decreasing_non_prod_severity %}}
 
 ### Describe your playbook
 
@@ -100,9 +87,7 @@ The severity decrement is applied to signals with an environment tag starting wi
 
 ### Create a suppression
 
-Optionally, add a suppression rule to prevent a signal from getting generated. For example, if a user `john.doe` is triggering a signal, but their actions are benign and you do not want signals triggered from this user, add the following query into the **Add a suppression query** field: `@user.username:john.doe`.
-
-Additionally, in the suppression rule, you can add a log exclusion query to exclude logs from being analyzed. These queries are based on **log attributes**. **Note**: The legacy suppression was based on log exclusion queries, but it is now included in the suppression rule's **Add a suppression query** step.
+{{% cloud_siem/create_suppression %}}
 
 [1]: /logs/search_syntax/
 [2]:  https://app.datadoghq.com/logs/
