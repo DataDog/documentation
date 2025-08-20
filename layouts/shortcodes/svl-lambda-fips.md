@@ -1,0 +1,3 @@
+Datadog provides FIPS-compliant monitoring for AWS Lambda functions. For AWS GovCloud environments, the `DD_LAMBDA_FIPS_MODE` environment variable is enabled by default. When FIPS mode is enabled, AWS FIPS endpoints are used for Datadog API key lookups, and the Lambda metric helper function `lambda_metric` requires the FIPS-compliant extension for metric submission. While the FIPS-compliant Lambda components work with any Datadog site, end-to-end FIPS compliance requires using the US1-FED site. See [AWS Lambda FIPS Compliance][1001] for more details.
+
+[1001]: /serverless/aws_lambda/fips-compliance
