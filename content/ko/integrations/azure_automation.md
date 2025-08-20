@@ -2,7 +2,7 @@
 categories:
 - 자동화
 - azure
-- cloud
+- 클라우드
 custom_kind: 통합
 dependencies: []
 description: Azure Automation의 핵심 메트릭 추적하기
@@ -34,10 +34,10 @@ Datadog Azure 통합을 사용해 Azure Automation 메트릭을 수집할 수 �
 
 아직 설정하지 않았다면, 먼저 [Microsoft Azure 통합][1]을 설정하세요. 그 외 다른 설치 단계는 없습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_automation" >}}
+{{< get-metrics-from-git "azure-automation" >}}
 
 
 ### 이벤트

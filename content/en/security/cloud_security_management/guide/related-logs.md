@@ -2,7 +2,7 @@
 title: View a misconfiguration's related logs
 ---
 
-Datadog CSM's Related Logs feature allows you to quickly identify cloud audit logs that relate to a specific cloud resource. When investigating a misconfiguration, this can help you understand:
+Datadog Cloud Security's Related Logs feature allows you to quickly identify cloud audit logs that relate to a specific cloud resource. When investigating a misconfiguration, this can help you understand:
 - Who created the resource
 - Who last modified the resource, possibly introducing the misconfiguration
 
@@ -24,7 +24,7 @@ source:cloudtrail @recipientAccountId:172597598159 @awsRegion:us-east-1 @readOnl
 
 ## View related logs
 
-1. In the [Misconfigurations Explorer][2], open a misconfiguration for a supported resource type.
+1. On the **Findings** page, in the [Misconfigurations explorer][2], open a misconfiguration for a supported resource type.
 1. Click the **Related Logs** tab. Datadog queries your CloudTrail logs for events related to the cloud resource.
 
 ## Search through a larger timeframe

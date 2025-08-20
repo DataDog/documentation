@@ -38,7 +38,7 @@ En un proyecto, puedes buscar casos por:
 
 Para crear una consulta más compleja, puedes usar los siguientes operadores booleanos que distinguen entre mayúsculas y minúsculas: `AND`, `OR` y `-` (exclusión). Por ejemplo, `priority:(P2 OR P3)` devuelve casos de prioridad `P2` o `P3`.
 
-Además, puedes buscar casos en todos los proyectos con la barra de búsqueda global en la esquina superior izquierda.
+Además, puedes buscar casos en todos los proyectos utilizando la barra de búsqueda de la esquina superior izquierda.
 
 ## Crear una vista
 
@@ -95,7 +95,7 @@ El análisis de casos es un origen de datos consultable para estadísticas de ca
 
 Los siguientes widgets son compatibles con el análisis de casos: serie temporal, lista de principales, valor de consulta, tabla, mapa de árbol, gráfico circular, cambio y lista. 
 
-## Lectura adicional
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

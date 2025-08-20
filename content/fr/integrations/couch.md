@@ -161,7 +161,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "couch" >}}
+{{< get-metrics-from-git "couchdb" >}}
 
 
 ### Événements
@@ -169,7 +169,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 Le check CouchDB n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "couch" >}}
+{{< get-service-checks-from-git "couchdb" >}}
 
 
 ## Dépannage

@@ -16,6 +16,7 @@ aliases:
 - /ja/tracing/trace_search_and_analytics/analytics/
 - /ja/tracing/app_analytics/analytics
 - /ja/tracing/trace_search_and_analytics/query_syntax
+- /ja/tracing/trace_explorer/trace_groups
 description: タグを使用したすべてのトレースのグローバル検索
 further_reading:
 - link: /tracing/trace_collection/
@@ -24,7 +25,7 @@ further_reading:
 - link: /tracing/trace_explorer/trace_view/
   tag: ドキュメント
   text: Datadog トレースの読み方を理解する
-- link: /tracing/service_catalog/
+- link: /tracing/software_catalog/
   tag: ドキュメント
   text: Datadog に報告するサービスの発見とカタログ化
 - link: /tracing/services/service_page/
@@ -46,8 +47,8 @@ title: 検索構文
 
 *条件*には 2 種類あります。
 
-* **Span タグ**: スパンに関連するコンテキスト情報を拡張するためのタグです。例えば、サービスが稼働しているインフラストラクチャーを示すホストやコンテナタグなどが含まれます。
 * **Span 属性**: アプリケーション内で自動または手動のインスツルメントによって収集されたスパンの内容を指します。
+* **Span タグ**: スパンに関連するコンテキスト情報を拡張するためのタグです。例えば、サービスが稼働しているインフラストラクチャーを示すホストやコンテナタグなどが含まれます。
 
 複合クエリで複数の*条件*を組み合わせるには、以下のブール演算子のいずれかを使用します。
 
@@ -59,7 +60,7 @@ title: 検索構文
 
 ### Attribute 検索
 
-特定のスパン属性を検索するには、属性キーの先頭に `@` を付けてください。
+スパン属性を検索するには、属性キーの先頭に `@` を追加する必要があります。
 
 例えば、以下の属性を持つスパンにアクセスしたい場合は、次のクエリを使用します:
 
@@ -75,27 +76,35 @@ title: 検索構文
     }
   }
 ```
+
+スパン属性はトレース サイド パネルの **Overview** タブに表示されます。
+
 **注:** [予約属性][17] (`env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type`, `link`) については、属性キーの先頭に `@` を付ける必要はありません。
 
 ### タグ検索
 
-スパンは、それらを生成するホストやインテグレーションからタグを継承します。これらのタグは検索クエリで利用可能です。
+スパンは、それらを生成するホストやインテグレーションからタグを継承します。
 
-| クエリ                                                          | 一致                                                                       |
-|:---------------------------------------------------------------|:----------------------------------------------------------------------------|
-| `("env:prod" OR test)`                                         | タグ `#env:prod` またはタグ `#test` を持つすべてのトレース                      |
-| `(service:srvA OR service:srvB)` または `(service:(srvA OR srvB))` | タグ `#service:srvA` または `#service:srvB` を含むすべてのトレース。            |
-| `("env:prod" AND -"version:beta")`                             | `#env:prod` を含み、`#version:beta` を含まないすべてのトレース |
+例:
+
+| Query                                                        | 一致                                                                                             |
+|:-------------------------------------------------------------|:--------------------------------------------------------------------------------------------------|
+| `(hostname:web-server OR env:prod)`                          | インフラストラクチャー タグ `hostname:web-server` または予約済み属性 `env:prod` が付与されたすべてのトレース |
+| `(availability-zone:us-east OR container_name:api-frontend)` | これらのインフラストラクチャー タグのいずれかが付与されたすべてのトレース                                               |
+| `(service:api AND -kube_deployment:canary)`                  | `api` サービスで、`canary` デプロイメントにデプロイされていないすべてのトレース                |
+
+スパン タグはトレース サイド パネルの **Infrastructure** タブに表示されます。
+
+#### 標準外のタグ形式
 
 もしタグが[タグ運用ベストプラクティス][2]に従っていない場合、`key:value` 形式は使用せず、以下のような検索クエリを利用してください:
 
-* `tags:<MY_TAG>`
+`tags:<MY_TAG>`
 
-ベストプラクティスに従っていないタグの例:
+例として、次のタグはベスト プラクティスに従っていません:
+`auto-discovery.cluster-autoscaler.k8s.io/daffy`
 
-<img width="867" alt="tagging-not-recommended" src="https://github.com/user-attachments/assets/4a3d5246-b6e7-4ab2-908a-bc2137062573">
-
-この特定のタグを検索するクエリ:
+このタグを検索するには、次のクエリを使用します:
 `tags:"auto-discovery.cluster-autoscaler.k8s.io/daffy"`
 
 ### ワイルドカード
@@ -143,11 +152,8 @@ title: 検索構文
 
 ### サービスおよびエンティティの検索
 
-{{< site-region region="ap1,us3,us5,eu,us" >}}
-サービスを検索するには `service` 属性を使用します。
-データベース、キュー、サードパーティプロバイダなど、他の[エンティティタイプ][20]を検索するには、[ピア属性][21]を使用します。これらは、APM でインスツルメントされていない依存関係を記述するために Datadog が用いる属性です。
-例えば、Postgres データベースの `users` テーブルへの呼び出しを表すスパンを検索するには、次のクエリを使用します:
-`@peer.db.name:users @peer.db.system:postgres`
+{{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
+サービスを検索するには、`service` 属性を使用します。別の [エンティティ タイプ][20] (たとえば、データベース、キュー、サード パーティ プロバイダーなど) を検索する場合は、Datadog が APM でインスツルメントされていない依存関係を表すために使用するその他の [ピア属性][21] を利用します。たとえば、Postgres データベースの `users` テーブルへの呼び出しを表すスパンを見つけるには、次のクエリを使用します: `@peer.db.name:users @peer.db.system:postgres`
 
 **注**: [グローバルサービスネーミング][22]へ移行し、`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAME_ENABLED=true` を設定している場合、スパンの `service` タグはそのスパンを**発行している**サービスを表します。
 
@@ -166,7 +172,7 @@ title: 検索構文
 
 Span テーブルは、選択されたコンテキスト ([検索バー](#search-bar)フィルタおよび[時間範囲](#time-range)で定義) に一致するスパンの一覧を表示します。
 
-{{< site-region region="ap1,us3,us5,eu,us" >}}
+{{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
 ### Service 列
 
 デフォルトでは、Service 列はスパンの `service` 予約属性を表示します。
@@ -202,6 +208,36 @@ Span テーブルは、選択されたコンテキスト ([検索バー](#search
 リストに他の[スパンタグや属性][23]を列として追加するには、**Options** ボタンをクリックして、追加したい任意のディメンションを選択します。
 
 {{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="列を含むトレースリスト" style="width:80%;">}}
+
+### Trace Groups
+
+Group the query by any span tag or attribute to observe request counts, error rates and latency distributions in the list view. You can select up to four dimensions in the **Group by** clause.
+
+{{< img src="/tracing/trace_explorer/trace_groups/group_by_clause.png" alt="Group by clause" style="width:90%;" >}}
+
+#### Advanced 'Group By' queries
+
+After selecting a dimension to group by, you can specify where to get the dimension's values from using the **from** dropdown: 
+- **Span**: Group by the dimension of the queried span (default). For example, `a`.
+- **Parent of span**: Group by the specified dimension from the parent span of spans matching the query. For example, to visualize how an API endpoint performs based on the service calling it, group by `service` from `parent(a)`.
+- **Root span**: Group by the specified dimension from the root span of the trace. For example, to analyze backend request patterns based on the frontend pages requests originate from, group by `@view.name` from `root`.
+
+{{< img src="/tracing/trace_explorer/trace_groups/group_by_root.png" alt="Group by from root" style="width:90%;" >}}
+
+#### View trace groups in the group list
+
+Trace groups are displayed as unique values of the selected dimension. Each group is shown with three key metrics:
+- **REQUESTS**: Count of spans within the group.
+- **ERRORS**: Error rate and count of errors.
+- **P95 Latency**: p95 latency of spans.
+
+To view these metrics aggregated over the parent or root span instead of the queried span, select `parent(a)` or `root` in the **Show metrics from** statement.
+
+Additionally, the `Latency Breakdown` surfaces how time is spent between different services within requests from each group, allowing you to visually spot latency bottlenecks for given groups.
+
+{{< img src="/tracing/trace_explorer/trace_groups/group_list.png" alt="Group list" style="width:90%;" >}}
+
+For deeper analysis, click any group to examine the individual span events that make up the aggregated metrics.
 
 ## ファセット
 
@@ -302,7 +338,7 @@ Span テーブルは、選択されたコンテキスト ([検索バー](#search
 
 **注**: ダッシュボードおよびノートブック内の APM クエリは、すべての[インデックス化されたスパン][14]に基づきます。一方、モニター内の APM クエリは、[カスタム保持フィルター][19]でインデックス化されたスパンにのみ基づきます。
 
-## その他の参考資料
+## 参考情報
 
 {{< partial name="whats-next/whats-next.html" >}}
 

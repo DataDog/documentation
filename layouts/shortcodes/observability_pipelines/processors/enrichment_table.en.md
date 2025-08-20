@@ -6,7 +6,7 @@ To set up the enrichment table processor:
 3. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the reference table.
 4. Select the type of reference table you want to use, **File** or **GeoIP**.
    - For the **File** type:
-        1. Enter the file path.
+        1. Enter the file path.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Configurations][10172] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
         1. Enter the column name. The column name in the enrichment table is used for matching the source attribute value. See the [Enrichment file example](#enrichment-file-example).
    - For the **GeoIP** type, enter the GeoIP path.
 
@@ -36,3 +36,6 @@ merchant_info {
     "state":"Colorado"
 }
 ```
+
+[10172]: /observability_pipelines/advanced_configurations/
+<!-- 10172 link is used in multiple shortcodes, so if it is changed, make sure to update those shortcodes using find and replace -->

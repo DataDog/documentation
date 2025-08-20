@@ -30,6 +30,8 @@ To share a graph:
 
 {{< img src="dashboards/sharing/graph_share_tab.png" alt="Share tab in a graphing editor" style="width:95%;">}}
 
+All shared graphs are listed in the [Public Sharing Settings page][10]. You can also revoke individual shared graphs or disable all shared graphs from this page.
+
 ## Revoke
 
 To revoke the keys used to share individual (embedded) graphs:
@@ -68,3 +70,4 @@ Datadog has a [dedicated API][4] allowing you to interact with your shared graph
 [7]: /api/latest/embeddable-graphs/#get-specific-embed
 [8]: /api/latest/embeddable-graphs/#enable-embed
 [9]: /api/latest/embeddable-graphs/#revoke-embed
+[10]: https://app.datadoghq.com/organization-settings/public-sharing

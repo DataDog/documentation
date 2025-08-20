@@ -3,8 +3,9 @@ aliases:
 - /ko/integrations/azure_expressroute
 categories:
 - azure
-- cloud
+- 클라우드
 - 네트워크
+custom_kind: 통합
 dependencies: []
 description: 주요 Azure ExpressRoute 메트릭을 추적하세요.
 doc_link: https://docs.datadoghq.com/integrations/azure_express_route/
@@ -15,7 +16,6 @@ integration_id: azure-expressroute
 integration_title: Microsoft Azure ExpressRoute
 integration_version: ''
 is_public: true
-custom_kind: 통합
 manifest_version: '1.0'
 name: azure_express_route
 public_title: Datadog-Microsoft Azure ExpressRoute 통합
@@ -36,17 +36,17 @@ Datadog Azure 통합을 사용하여 Azure ExpressRoute에서 메트릭을 수�
 
 아직 설정하지 않았다면, 먼저 [Microsoft Azure 통합][1]을 설정하세요. 그 외 다른 설치 단계는 없습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_express_route" >}}
+{{ get-metrics-from-git "azure-expressroute" }}
 
 
 ### 이벤트
 
 Azure ExpressRoute 통합에는 이벤트가 포함되지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 
 Azure ExpressRoute 통합에는 서비스 점검이 포함되지 않습니다.
 

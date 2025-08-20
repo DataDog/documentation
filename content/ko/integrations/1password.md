@@ -22,6 +22,7 @@ categories:
 - 이벤트 관리
 - 문제 추적
 - security
+custom_kind: 통합
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -30,7 +31,6 @@ integration_id: onepassword
 integration_title: 1Password
 integration_version: ''
 is_public: true
-custom_kind: 통합
 manifest_version: 2.0.0
 name: 1password
 public_title: 1Password
@@ -40,11 +40,11 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Log Collection
-  - 카테고리::이벤트 관리
-  - 카테고리::이슈 추적
+  - Category::Event Management
+  - Category::Issue Tracking
   - Category::Security
-  - 제출한 데이터 유형::로그
-  - 제공::통합
+  - Submitted Data Type::Logs
+  - Offering::Integration
   configuration: README.md#Setup
   description: 1Password 계정용 이벤트를 생성하세요.
   media:

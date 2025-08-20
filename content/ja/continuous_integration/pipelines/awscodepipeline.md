@@ -14,10 +14,6 @@ further_reading:
 title: AWS CodePipeline パイプラインでトレースをセットアップする
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では 現在 CI Visibility は利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 [AWS CodePipeline][1] は、フルマネージド型の継続的デリバリーサービスで、アプリケーションとインフラストラクチャーを高速かつ確実にアップデートできるよう、リリースパイプラインの自動化を支援します。

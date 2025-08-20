@@ -239,7 +239,12 @@ Either define the variables in your custom `datadog.yaml`, or set them as JSON m
 
 ##### Tags cardinality
 
-There are two environment variables that set tag cardinality: `DD_CHECKS_TAG_CARDINALITY` and `DD_DOGSTATSD_TAG_CARDINALITY`. Because DogStatsD is priced differently, the DogStatsD tag cardinality setting is separated to provide the opportunity for finer configuration. Otherwise, these variables function the same way: they can have values `low`, `orchestrator`, or `high`. They both default to `low`, which pulls in host-level tags.
+There are two environment variables that set tag cardinality: `DD_CHECKS_TAG_CARDINALITY` and `DD_DOGSTATSD_TAG_CARDINALITY`. Because DogStatsD is priced differently, the DogStatsD tag cardinality setting is separated to provide the opportunity for finer configuration. Otherwise, these variables function the same way: they can have values `low`, `orchestrator`, or `high`. They both default to `low`, which pulls in Kubernetes cluster-level tags.
+
+The different cardinality settings target:
+* `low`: Kubernetes cluster-level tags, such as `kube_namespace`.
+* `orchestrator`: Pod-level tags, such as `pod_name`.
+* `high`: Container-level tags, such as `container_id`.
 
 Depending on the cardinality, there is a different set of out-of-the box tags for [Kubernetes and OpenShift][7], and for [Docker, Rancher, and Mesos][8]. For ECS and Fargate, setting the variable to `orchestrator` adds the `task_arn` tag.
 
@@ -307,11 +312,12 @@ Create percentile aggregations within [Distribution Metrics][1] by applying an a
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
-The [AWS][1] integration tile allows you to assign additional tags to all metrics at the account level. Use a comma separated list of tags in the form `<KEY>:<VALUE>`.
+The [AWS][1] integration tile allows you to assign additional tags to all metrics at the account level, as well as logs sent through [automatic subscription triggers][2]. Use a comma separated list of tags in the form `<KEY>:<VALUE>`.
 
 {{< img src="tagging/assigning_tags/integrationtags.png" alt="AWS Tags" style="width:80%;">}}
 
 [1]: /integrations/amazon_web_services/
+[2]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#automatically-set-up-triggers
 {{% /tab %}}
 {{% tab "Service Level Objectives" %}}
 

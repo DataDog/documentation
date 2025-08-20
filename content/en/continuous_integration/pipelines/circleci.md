@@ -17,10 +17,6 @@ further_reading:
       text: "Extend Pipeline Visibility by adding custom tags and measures"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 [CircleCI][1] is a continuous integration and delivery platform that enables teams to build, test, and deploy software at scale.
@@ -36,6 +32,8 @@ Set up tracing on CircleCI to optimize the performance of your pipelines, improv
 | [Custom spans][13] | Custom spans | Configure custom spans for your pipelines. |
 | Custom pre-defined tags | Custom pre-defined tags | Set [custom tags][6] to all generated pipeline and job spans. |
 | [Custom tags][14] [and measures at runtime][15] | Custom tags and measures at runtime | Configure [custom tags and measures][7] at runtime. |
+| [Filter CI Jobs on the critical path][18] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
+| [Execution time][19] | Execution time  | View the amount of time pipelines have been running jobs. |
 
 ## Configure the Datadog integration
 
@@ -128,3 +126,5 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [15]: /glossary/#custom-measure
 [16]: /logs/guide/best-practices-for-log-management/
 [17]: /continuous_integration/search/#search-for-pipelines
+[18]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[19]: /glossary/#pipeline-execution-time

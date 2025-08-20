@@ -31,7 +31,7 @@ Ubuntu ホストの場合
 1. 1 行のインストールコマンドを実行します。
 
    ```shell
-   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3" DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:3,js:5,dotnet:3" DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 
    `<YOUR_DD_API_KEY>` をお使いの [Datadog API キー][4]に、`<YOUR_DD_SITE>` をお使いの [Datadog サイト][3]に、`<AGENT_ENV>` を Agent がインストールされる環境 (例: `staging`) に置き換えてください。
@@ -56,7 +56,7 @@ Docker Linux コンテナの場合
 
 1. 1 行のインストールコマンドを実行します。
    ```shell
-   DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3" DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:3,js:5,dotnet:3" DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 2. Docker で Agent を構成します。
    ```shell
@@ -217,7 +217,7 @@ Helm で Single Step Instrumentation を有効にするには
 `DD_APM_INSTRUMENTATION_LIBRARIES` の例:
 
 - `DD_APM_INSTRUMENTATION_LIBRARIES="java:1"` - Java の Datadog APM ライブラリのみを、メジャーバージョン 1 のリリースラインに固定してインストールします。
-- `DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2"` - Java と Python の Datadog APM ライブラリのみを、メジャーバージョンをそれぞれ 1 と 2 に固定してインストールします。
+- `DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:3"` - Java と Python の Datadog APM ライブラリのみを、メジャーバージョンをそれぞれ 1 と 3 に固定してインストールします。
 - `DD_APM_INSTRUMENTATION_LIBRARIES="java:1.38.0,python:2.10.5"` - Java と Python の Datadog APM ライブラリのみを、それぞれ特定のバージョン 1.38.0 と 2.10.5 に固定してインストールします。
 
 
@@ -250,7 +250,7 @@ Helm で Single Step Instrumentation を有効にするには
 `DD_APM_INSTRUMENTATION_LIBRARIES` の例:
 
 - `DD_APM_INSTRUMENTATION_LIBRARIES="java:1"` - Java の Datadog APM ライブラリのみを、メジャーバージョン 1 のリリースラインに固定してインストールします。
-- `DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2"` - Java と Python の Datadog APM ライブラリのみを、メジャーバージョンをそれぞれ 1 と 2 に固定してインストールします。
+- `DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:3"` - Java と Python の Datadog APM ライブラリのみを、メジャーバージョンをそれぞれ 1 と 3 に固定してインストールします。
 - `DD_APM_INSTRUMENTATION_LIBRARIES="java:1.38.0,python:2.10.5"` - Java と Python の Datadog APM ライブラリのみを、それぞれ特定のバージョン 1.38.0 と 2.10.5 に固定してインストールします。
 
 

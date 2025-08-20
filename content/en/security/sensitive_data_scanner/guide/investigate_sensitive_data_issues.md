@@ -82,7 +82,7 @@ To investigate a datastore:
       - If it is not supposed to be in the bucket, delete the files or move them to an appropriate bucket.
       - If it is supposed to be in the bucket, complete the following steps to improve your security posture:
         1. Click the **Security** tab in the side panel and review the **Misconfigurations** section.
-        1. Click on a misconfiguration to see details in Cloud Security Management.
+        1. Click on a misconfiguration to see details in Cloud Security.
         1. In the **Next Steps** section:
             1. Under **Triage**, click the dropdown to change the triage status of the signal. The default status is `OPEN`.
             1. Click **Assign Signal** to assign a signal to yourself or another Datadog user.

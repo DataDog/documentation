@@ -5,9 +5,9 @@ title: SaltStack
 ---
 Datadog SaltStack 공식은 Datadog Agent와 Agent 기반 통합(점검)을 설치할 때 사용합니다. SaltStack 공식을 자세히 알아보려면 [Salt 공식 설치 및 사용 가이드][1]를 참조하시기 바랍니다.
 
-## 구성
+## 설정
 
-### 요건
+### 필수 조건
 
 Datadog SaltStack 공식은 데비안(Debian) 기반 및 레드햇(RedHat) 기반 시스템에서만 설치가 지원됩니다.
 
@@ -57,7 +57,7 @@ file_roots:
     - /srv/formulas/datadog-formula/
 ```
 
-### 배포
+### 디플로이먼트
 
 호스트에 Datadog Agent를 배포하는 방법은 다음과 같습니다.
 
@@ -214,7 +214,7 @@ Salt 공식은 사전에 작성된 Salt State입니다. Datadog 공식에서 사
 
 **참조**: `datadog.config`를 사용해 다양한 점검 인스턴스를 서로 달느 머신에서 설정하는 경우, Salt 마스터 설정 또는 (마스터 없는 환경에서 실행 중이라면) Salt minion 설정에서 [pillar_merge_lists][5]를 `True`로 설정해야 합니다.
 
-[1]: http://docs.saltstack.com/en/latest/topics/development/conventions/formulas.html
+[1]: https://docs.saltproject.io/en/latest/topics/development/conventions/formulas.html
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.datadoghq.com/ko/integrations/directory/
 [4]: https://github.com/DataDog/datadog-formula/blob/master/pillar.example

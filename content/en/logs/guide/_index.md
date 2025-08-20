@@ -17,6 +17,7 @@ cascade:
     {{< nextlink href="logs/guide/correlate-logs-with-metrics" >}}Correlate Logs with Metrics{{< /nextlink >}}
     {{< nextlink href="logs/guide/best-practices-for-log-management" >}}Best Practices for Log Management{{< /nextlink >}}
     {{< nextlink href="logs/guide/manage_logs_and_metrics_with_terraform" >}}Manage Logs and Metrics with Terraform{{< /nextlink >}}
+    {{< nextlink href="logs/guide/flex_compute" >}}Monitor Flex Compute Usage{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
@@ -32,6 +33,8 @@ cascade:
     {{< nextlink href="/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose" >}}Send Amazon EKS Fargate Logs with Amazon Data Firehose{{< /nextlink >}}
     {{< nextlink href="/logs/guide/apigee" >}}Collect Apigee Logs{{< /nextlink >}}
     {{< nextlink href="/logs/guide/azure-logging-guide/" >}}Send Azure Logs to Datadog{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/azure-automated-log-forwarding" >}}Azure Automated Log Forwarding{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/azure-automated-logs-architecture/" >}}Azure Automated Log Forwarding Architecture and Configuration{{< /nextlink >}}
     {{< nextlink href="/logs/guide/azure-native-logging-guide/" >}}Send Azure Logs with the Datadog Resource{{< /nextlink >}}
     {{< nextlink href="/logs/guide/fluentbit" >}}Send Fluent Bit Logs{{< /nextlink >}}
     {{< nextlink href="/integrations/google_cloud_platform/#log-collection" >}}Collect Google Cloud logs with the Datadog Dataflow template{{< /nextlink >}}

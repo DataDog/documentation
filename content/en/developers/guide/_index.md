@@ -11,7 +11,7 @@ cascade:
 ---
 
 {{< whatsnext desc="General:" >}}
-    {{< nextlink href="developers/guide/data-collection-resolution-retention">}}Datadog Data Collection, Resolution, and Retention{{< /nextlink >}}
+    {{< nextlink href="developers/guide/data-collection-resolution">}}Datadog Data Collection and Resolution{{< /nextlink >}}
     {{< nextlink href="developers/guide/creating-a-jmx-integration">}}Creating a JMX integration{{< /nextlink >}}
 {{< /whatsnext >}}
 

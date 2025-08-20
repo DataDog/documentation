@@ -4,17 +4,21 @@ aliases:
     - /security/threat_intel
 description: "Threat Intelligence at Datadog"
 further_reading:
-  - link: "/security/application_security/threats/threat-intelligence/"
+  - link: "/security/application_security/how-it-works/threat-intelligence/"
     tag: "documentation"
-    text: "ASM Threat Intelligence"
+    text: "AAP Threat Intelligence"
+  - link: "/security/cloud_siem/threat_intelligence/"
+    tag: "documentation"
+    text: "Cloud SIEM Threat Intelligence"
+
 products:
 - name: Cloud SIEM
   url: /security/cloud_siem/
   icon: siem
-- name: CSM Threats
-  url: /security/threats/
+- name: Workload Protection
+  url: /security/workload_protection/
   icon: cloud-security-management
-- name: Application Security Management
+- name: App and API Protection
   url: /security/application_security/
   icon: app-sec
 ---
@@ -25,6 +29,12 @@ products:
 Threat Intelligence is reputation information that helps responders make informed decisions on attacks and compromises.
 
 Datadog curates commercial, open-source, and in-house threat intelligence indicators of compromise into categories and intents. Threat intelligence is updated at least once per day, per source. This data is used to enrich your logs and traces with relevant reputation information.
+
+## Bring your own threat intelligence
+
+Datadog Security supports enriching and searching traces with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.
+
+For more information, see the [Bring Your Own Threat Intelligence][3] guide.
 
 ## Threat Intelligence Lifecycle
 
@@ -66,13 +76,13 @@ Sources, categories, and intents are available as facets and filters on relevant
 
 | Source | Category | Source Use Cases | Primary Products |
 |--------|------------|-----------|------------------|
-| Datadog Threat Research| scanners, Redis exploitation, Docker exploitation, malware, bruteforcer | Honeypots focused on software specific threats | ASM, CWS and Cloud SIEM |
-| [Datadog ASM](https://docs.datadoghq.com/security/application_security/) | scanner | List of IPs that have been observed attacking multiple ASM customers | ASM |
-| [Spur](https://spur.us/) | residential_proxy | Proxies associated credential stuffing and fraud | ASM and Cloud SIEM |
+| Datadog Threat Research| scanners, Redis exploitation, Docker exploitation, malware, bruteforcer | Honeypots focused on software specific threats | AAP, CWS and Cloud SIEM |
+| [Datadog AAP](https://docs.datadoghq.com/security/application_security/) | scanner | List of IPs that have been observed attacking multiple AAP customers | AAP |
+| [Spur](https://spur.us/) | residential_proxy | Proxies associated credential stuffing and fraud | AAP and Cloud SIEM |
 | [Spur](https://spur.us/) | malware_proxy | Proxies associated with malware command and control | Cloud SIEM |
 | [Abuse.ch](https://abuse.ch/) Malware Bazaar| malware | Malware on hosts | CWS |
 | [Minerstat](https://minerstat.com/mining-pool-whitelist.txt) | malware | Coinminer activity with known mining pools| CWS |
-| Tor | tor | Policy violations for user activity | ASM, Cloud SIEM, and CWS |
+| Tor | tor | Policy violations for user activity | AAP, Cloud SIEM, and CWS |
 | [Threatfox](https://threatfox.abuse.ch/) | malware | Identify hosts communicating with known malware infrastructure | Cloud SIEM, and CWS |
 
 
@@ -80,13 +90,14 @@ Sources, categories, and intents are available as facets and filters on relevant
 
 | Category | Intention | Entity Types | Product Use Cases | Primary Products |
 |----------|----------|--------------|----------|------------------|
-| residential_proxy | suspicious | IP addresses | Reputation for credential stuffing and fraud | ASM and Cloud SIEM |
-| botnet_proxy | suspicious | IP addresses | Reputation for being part of a botnet and contributing to distributed attacks | ASM and Cloud SIEM |
+| residential_proxy | suspicious | IP addresses | Reputation for credential stuffing and fraud | AAP and Cloud SIEM |
+| botnet_proxy | suspicious | IP addresses | Reputation for being part of a botnet and contributing to distributed attacks | AAP and Cloud SIEM |
 | malware | malicious | application library versions, file hashes | Malicious packages and communication with mining pools| CWS |
-| scanner | suspicious | IP addresses | Reputation for scanners | ASM and Cloud SIEM |
-| hosting_proxy | suspicious | IP addresses | Datacenter IPs with a reputation of abuse, such as for distributed credential stuffing attacks | ASM and Cloud SIEM |
-| tor | suspicious | IP addresses  | Corporate policy violations for user activity | ASM and Cloud SIEM |
-| disposable_email | suspicious | Email domain  | Detect product usage from disposable email addresses | ASM |
+| scanner | suspicious | IP addresses | Reputation for scanners | AAP and Cloud SIEM |
+| hosting_proxy | suspicious | IP addresses | Datacenter IPs with a reputation of abuse, such as for distributed credential stuffing attacks | AAP and Cloud SIEM |
+| tor | suspicious | IP addresses  | Corporate policy violations for user activity | AAP and Cloud SIEM |
+| disposable_email | suspicious | Domain  | Detect product usage from disposable email addresses | AAP |
+| corp_vpn | benign | IP addresses | IPs associated to corporate VPNs | AAP and Client SIEM |
 
 ### Threat Intelligence Intents
 | Intent | Use Case |
@@ -111,3 +122,5 @@ Sources, categories, and intents are available as facets and filters on relevant
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]:/security/detection_rules/
+[2]: /integrations/guide/reference-tables
+[3]: /security/guide/byoti_guide

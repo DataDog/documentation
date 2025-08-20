@@ -34,7 +34,7 @@ Datadog Network Device Monitoring のトラブルシューティングには、�
      Average Execution Time : 0s
      Last Execution Date : 2024-11-13 13:12:09 PST / 2024-11-13 21:12:09 UTC (1731532329000)
      Last Successful Execution Date : Never
-     Error: <ERROR MESSAGE> 
+     Error: <ERROR MESSAGE>
      No traceback
    ```
 
@@ -42,7 +42,7 @@ Datadog Network Device Monitoring のトラブルシューティングには、�
 
    - `datadog-agent status` コマンドを実行し、`autodiscovery` セクションで利用可能なすべてのデバイス IP がスキャンされたことが報告されるまで待ちます。大規模なネットワークでは数分かかる場合があります。出力例は次のようになります。
 
-    ``` 
+    ```
     Autodiscovery
     =============
     Subnet 127.0.0.1/24 is queued for scanning.
@@ -70,12 +70,12 @@ Datadog Network Device Monitoring のトラブルシューティングには、�
       ```
       sudo -u dd-agent datadog-agent snmp walk <IP Address> -A <AUTH_KEY> -a <AUTH_PROTOCOL> -X <PRIV_KEY> -x <PRIV_PROTOCOL>
       ```
-      **Windows**:   
+      **Windows**:
       ```
       agent snmp walk <IP Address>[:Port]
 
-      Example:           
-      agent.exe snmp walk  10.143.50.30 1.3.6 
+      Example:
+      agent.exe snmp walk  10.143.50.30 1.3.6
       ```
 
    これらのコマンドの詳細については、使用しているベンダー独自のドキュメントを参照してください。
@@ -84,7 +84,7 @@ Datadog Network Device Monitoring のトラブルシューティングには、�
 
 SNMP ステータスまたは Agent の walk コマンドでエラーが表示される場合、次のいずれかの問題が考えられます。
 
-#### Permission denied 
+#### Permission denied
 
 ポートバインド時に Agent のログで permission denied エラーが表示される場合、指定したポート番号には管理者権限が必要な可能性があります。ポート番号が 1024 未満の場合は、[デフォルトの SNMP Trap ポート 162 を使用する][8]を参照してください。
 
@@ -117,7 +117,7 @@ SNMP ステータスまたは Agent の walk コマンドでエラーが表示�
 **エラー例**:
    ```
    Error: an authentication method needs to be provided
-   ``` 
+   ```
 
 **対処方法**:
 
@@ -212,7 +212,7 @@ SNMPv2 を使用している場合は、コミュニティ文字列が設定さ�
 
 
 [1]: /ja/help
-[2]: https://app.datadoghq.com/infrastructure/devices
+[2]: https://app.datadoghq.com/devices
 [3]: /ja/agent/configuration/agent-commands/#agent-information
 [4]: /ja/api/latest/network-device-monitoring/
 [5]: /ja/api/latest/network-device-monitoring/#get-the-list-of-interfaces-of-the-device

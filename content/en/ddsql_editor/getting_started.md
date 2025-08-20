@@ -88,4 +88,4 @@ If you forget to save a useful query before navigating away from it, you can sti
 
 [1]: https://app.datadoghq.com/ddsql/editor
 [2]: /ddsql_editor/#use-sql-syntax-ddsql
-[3]: /ddsql_editor/reference/tags
+[3]: /ddsql_reference/ddsql_preview/tags

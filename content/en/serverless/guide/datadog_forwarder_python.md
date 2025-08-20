@@ -327,7 +327,7 @@ The minor version of the `datadog-lambda` package always matches the layer versi
 [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
 ```
-# For us,us3,us5,ap1, and eu regions
+# For us,us3,us5,ap1, ap2, and eu regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 
 # For us-gov regions

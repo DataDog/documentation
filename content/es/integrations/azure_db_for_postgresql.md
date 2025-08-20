@@ -42,7 +42,7 @@ Si aún no lo has hecho, configura la [integración Microsoft Azure][1]. No es n
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_db_for_postgresql" >}}
+{{< get-metrics-from-git "azure-db-for-postgresql" >}}
 
 
 ### Eventos
@@ -53,7 +53,7 @@ La integración Azure DB for PostgreSQL no incluye eventos.
 
 La integración Azure DB for PostgreSQL no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 

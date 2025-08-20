@@ -13,7 +13,7 @@ assets:
     metrics:
       check:
       - aws.dynamodb.table_size
-      metadata_path: metadata.csv
+      metadata_path: assets/metrics/metric-spec.yaml
       prefix: aws.dynamodb
     service_checks:
       metadata_path: assets/service_checks.json
@@ -99,8 +99,8 @@ AWS CloudTrail에서 [트레일을 생성][7]한 다음 로그를 작성할 S3 �
 
 #### Datadog로 로그 전송
 
-1. 아직 설정하지 않았다면 AWS 계정에서 [Datadog Forwarder Lambda 함수][8]를 설정하세요.
-2. 설정한 후에는 Datadog Forwarder Lambda 함수로 이동하세요. Function Overview 섹션에서 **Add Trigger**를 클릭합니다.
+1. 이미 하지 않은 경우 AWS 계정에서 [Datadog 포워더(Forwarder) 람다 함수][8]를 설정하세요.
+2. 설정한 후에는 Datadog Forwarder Lambda 함수로 이동합니다. Function Overview 섹션에서 **Add Trigger**를 클릭합니다.
 3. 트리거 설정에 대해 **S3** 트리거를 선택합니다.
 4. Amazon DynamoDB가 포함된 S3 버킷을 선택합니다.
 5. 이벤트 유형을 `All object create events`로 남겨둡니다.
@@ -113,7 +113,7 @@ AWS 서비스 로그 수집에 대한 자세한 정보는 [Datadog Lambda 함수
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_dynamodb" >}}
+{{< get-metrics-from-git "amazon-dynamodb" >}}
 
 
 AWS에서 검색된 각 메트릭에는 호스트 이름, 보안 그룹 등을 포함하되 이에 국한되지 않고 AWS 콘솔에 표시되는 동일한 태그가 할당됩니다.
@@ -140,5 +140,5 @@ Amazon DynamoDB 통합은 서비스 점검을 포함하지 않습니다.
 [8]: https://docs.datadoghq.com/ko/logs/guide/forwarder/
 [9]: https://app.datadoghq.com/logs
 [10]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
-[11]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_dynamodb/amazon_dynamodb_metadata.csv
+[11]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_dynamodb/assets/metrics/metric-spec.yaml
 [12]: https://docs.datadoghq.com/ko/help/

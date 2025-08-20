@@ -20,6 +20,7 @@ categories:
 - compliance
 - log collection
 - security
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/drata/README.md
 display_on_public_website: true
@@ -29,7 +30,6 @@ integration_id: drata-integration
 integration_title: Drata
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: drata
 public_title: Drata
@@ -59,17 +59,17 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Présentation
+## Section Overview
 
 Drata est une plateforme d'automatisation de la sécurité et de la conformité qui surveille en permanence les contrôles de sécurité de l'entreprise et recueille des preuves à cet égard. Elle permet de simplifier les workflows de conformité dans leur intégralité pour assurer une préparation optimale avant un audit.
 
 Cette intégration permet aux clients de [Drata][1] d'envoyer leurs logs et leurs événements de conformité à Drafta depuis Datadog via une API.
 
-## Formule et utilisation
+## Configuration
 
 Pour configurer cette intégration, vous devez disposer d'un [compte Drata][2] actif. Vous devez également disposer des [autorisations admin][3] adéquates dans Datadog.
 
-### Liste des infrastructures
+### Installation
 
 1. Pour installer cette intégration, vous devez créer une clé d'API et une clé d'application.
 2. Nous vous conseillons de créer un compte de service dans Datadog et de lui appliquer le rôle Read-Only Datadog afin d'accorder des autorisations limitées à cette connexion.
@@ -81,7 +81,7 @@ Pour configurer cette intégration, vous devez disposer d'un [compte Drata][2] a
 8. Drafta procédera alors à la synchronisation des données utilisateur et des données de configuration via l'API de Datadog. La plateforme vous notifiera en cas d'échec d'un monitor de conformité.
 
 
-## Agent
+## Assistance
 
 Besoin d'aide ? Contactez l'[assistance Datadog][6] ou [support@drata.com][7].
 

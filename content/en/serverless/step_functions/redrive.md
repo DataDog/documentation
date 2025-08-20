@@ -11,7 +11,7 @@ further_reading:
 
 This page explains how to [redrive][1] executions directly from Datadog to continue failed AWS Step Functions from the point of failure without a state machine restart.
 
-{{< img src="serverless/step_functions/redrive.png" alt="A visualization of a failed Step Function execution." style="width:100%;" >}}
+{{< img src="serverless/step_functions/redrive_2.png" alt="A visualization of a failed Step Function execution." style="width:100%;" >}}
 
 ## Enable redrive within Datadog
 To enable using redrive within Datadog, configure an [AWS Connection][3] with [Datadog App Builder][4]. Ensure that your IAM roles include permissions that allow executing a Step Function for the retry action (`StartExecution`) or redriving a Step Function for the redrive action (`RedriveExecution`).

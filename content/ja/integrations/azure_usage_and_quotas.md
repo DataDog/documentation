@@ -4,7 +4,7 @@ categories:
 - クラウド
 - コスト管理
 - ネットワーク
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure の各サブスクリプションリソース (コンピューティング、ネットワーク、ストレージ) について、事前に構成された上限に照らして使用状況を追跡します
 doc_link: https://docs.datadoghq.com/integrations/azure_usage_and_quotas/
@@ -39,7 +39,7 @@ Azure では、サブスクリプションリソースに対して事前に構�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_usage_and_quotas" >}}
+{{< get-metrics-from-git "azure-usage-and-quotas" >}}
 
 
 ### イベント

@@ -1,0 +1,98 @@
+{{ define "main" }}
+  <div class="row">
+    <div class="col-12 order-1">
+        <h1 id="pagetitle">{{ .Title }}</h1>
+        <p>{{ .Params.content | markdownify }}</p>
+
+    </div>
+    <div class="col-12">
+      {{ if .File }}
+        {{ partial "breadcrumbs.html" . }}
+      {{ end }}
+    </div>
+  </div>
+  {{ partial "translate_status_banner/translate_status_banner.html" . }} 
+
+  
+  <div
+  class="filter-search-main row w-100"
+  x-data="{
+    searchValue: '',
+    pushState (filtering=true) {
+      // Updates the url with the new query params for 'suite' and 'search' without refreshing the page
+      const url = new URL(window.location.href)
+
+      
+      url.searchParams.set('search', this.searchValue)
+
+      if(!this.searchValue) {
+        url.searchParams.delete('search')
+      }
+
+      window.history.pushState(null,'', url.toString())
+      window.scroll(0, 0)
+    },
+    shouldShowAttribute (dataset) {
+      // Determines table-row display
+      // Compares search values and filter values against attributes info (dataset)
+      const searchValues = this.searchValue.split(' ')
+
+      const containsSearchValues = searchValues.some(word => dataset.includes(word.toLowerCase()))
+
+      return containsSearchValues
+    },
+    updateWithURLParams () {
+      // Updates x-data properties with url param values
+      const url = new URL(window.location.href)
+      this.searchValue = url.searchParams.get('search') || ''
+    }
+  }"
+  x-init="updateWithURLParams()">
+    <div
+    class="data-retention-periods table-wrapper order-1">
+      <table>
+        <thead class="table-header">
+          <tr>
+            <th>Product</th>
+            <th>Data Type and Default Retention Period</th>
+          </tr>
+        </thead>
+        <tbody class="table-body">
+          {{ range .Params.attributes }}
+
+          <!--  concatenating attribute info for a lookup dataset -->
+          {{ $pad := newScratch }}
+          {{/*  clean .data_type get rid of dashes, stars and colons */}}
+          {{ $cleaned_data_type := replaceRE `[-:*\(),/\n]+` "" .data_type }}
+
+          {{ $pad.Set "attribute_info" (slice .product $cleaned_data_type) }}
+          {{ $attribute_info := (delimit ($pad.Get "attribute_info") ";") | lower }}
+
+          <tr
+          class="table-row"
+          :class="shouldShowAttribute('{{ $attribute_info }}') && 'show'"
+          x-cloak x-show="shouldShowAttribute('{{ $attribute_info }}')"
+          x-transition.opacity.duration.250ms
+          >
+            <td>{{ .product |markdownify }}</td>
+            <td>{{ .data_type | markdownify }}</td>
+          </tr>
+
+          {{ end }}
+        </tbody>
+      </table>
+    </div>
+
+    <nav id="filter-search-nav" class="mb-3">
+      {{/*  SEARCH  */}}
+      <form
+      class="search mt-2">
+        <input type="text" placeholder="Search here" class="w-100" x-model="searchValue" @input.debounce="pushState(false)">
+      </form>
+    </nav>
+
+  </div>
+
+  {{ .Content }}
+
+{{ end }}

@@ -29,7 +29,7 @@ Datadog provides mocks for the `'@datadog/mobile-react-native'` package. To use 
 
 ```javascript
 jest.mock('@datadog/mobile-react-native', () => {
-    return require('@datadog/mobile-react-native/jest/mock');
+  return require('@datadog/mobile-react-native/jest')
 });
 ```
 
@@ -325,6 +325,47 @@ Adding user information to your RUM sessions makes it easy to:
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
 
+{{< tabs >}}
+{{% tab "SDK version >= 2.6.5" %}}
+<!-- source of truth: https://github.com/DataDog/dd-sdk-reactnative/pull/818 -->
+
+| Attribute   | Type   | Description                                                                     |
+| ----------- | ------ | ------------------------------------------------------------------------------- |
+| `usr.id`    | String | (Required) Unique user identifier.                                              |
+| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
+| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
+| `usr.extraInfo` | Object | (Optional) Include custom attributes such as subscription type, any user specific information that enhance user context in RUM sessions. |
+
+To identify user sessions, use the `setUserInfo` API, for example:
+
+```js
+DdSdkReactNative.setUserInfo({
+    id: '1337',
+    name: 'John Smith',
+    email: 'john@example.com',
+    extraInfo: {
+        type: 'premium'
+    }
+});
+```
+
+If you want to add or update user information, you can use the following code to modify the existing user's details.
+
+```js
+DdSdkReactNative.addUserExtraInfo({
+    hasPaid: 'true'
+});
+```
+
+If you want to clear the user information (for example, when the user signs out), you can do so by passing an empty object, as follows:
+
+```js
+DdSdkReactNative.setUser({});
+```
+
+{{% /tab %}}
+{{% tab "Legacy" %}}
+
 | Attribute   | Type   | Description                                                                     |
 | ----------- | ------ | ------------------------------------------------------------------------------- |
 | `usr.id`    | String | (Required) Unique user identifier.                                              |
@@ -355,6 +396,9 @@ If you want to clear the user information (for example, when the user signs out)
 ```js
 DdSdkReactNative.setUser({});
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Global attributes
 

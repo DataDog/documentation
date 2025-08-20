@@ -14,15 +14,15 @@ assets:
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 10168
-    source_type_name: Riak MDC Replication
+    source_type_name: Riak MDC 복제
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: 커뮤니티
   sales_email: britt.treece@gmail.com
   support_email: britt.treece@gmail.com
 categories:
-- 데이터 스토어
-custom_kind: integration
+- 데이터 저장소
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/riak_repl/README.md
 display_on_public_website: true
@@ -37,17 +37,17 @@ name: riak_repl
 public_title: Riak MDC 복제
 short_description: 복제 성능, 용량 및 상태를 추적하세요.
 supported_os:
-- 리눅스
+- linux
 - macos
-- windows
+- 윈도우즈(Windows)
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - 카테고리::데이터 저장
-  - 제공::통합
+  - Category::Data Stores
+  - Offering::Integration
   configuration: README.md#Setup
   description: 복제 성능, 용량 및 상태를 추적하세요.
   media: []
@@ -79,7 +79,7 @@ Riak-Repl 점검은 [Datadog 에이전트][2] 패키지에 포함되어 있지 �
 
 2. 통합을 코어 [통합][4]과 유사하게 설정하세요.
 
-### 구성
+### 설정
 
 1. 에이전트의 설정 디렉터리 루트에 있는 `conf.d/` 폴더에서 `riak_repl.d/conf.yaml` 파일을 편집하여 riak_repl 성능 데이터 수집을 시작합니다. 사용 가능한 모든 설정 옵션은 [샘플 riak_repl.d/conf.yaml][5]을  참조하세요.
 
@@ -92,7 +92,7 @@ Riak-Repl 점검은 [Datadog 에이전트][2] 패키지에 포함되어 있지 �
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "riak_repl" >}}
+{{< get-metrics-from-git "riak-repl" >}}
 
 
 ### 서비스 점검

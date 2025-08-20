@@ -17,10 +17,6 @@ further_reading:
       text: "Monitor your GitHub Actions workflows with Datadog CI Visibility"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.</div>
-{{< /site-region >}}
-
 ## Overview
 
 [GitHub Actions][1] is an automation tool that allows you to build, test, and deploy your code in GitHub. Create workflows that automate every step of your development process, streamlining software updates and enhancing code quality with CI/CD features integrated into your repositories.
@@ -40,6 +36,8 @@ Set up CI Visibility in GitHub Actions to track the execution of your workflows,
 | [Queue time][8] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
 | [Approval wait time][9] | Approval wait time | View the amount of time workflow runs and workflow jobs wait for manual approvals. |
 | [Custom spans][10] | Custom spans | Configure custom spans for your pipelines. |
+| [Filter CI Jobs on the critical path][24] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
+| [Execution time][25] | Execution time  | View the amount of time pipelines have been running jobs. |
 
 
 The following GitHub versions are supported:
@@ -145,3 +143,5 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [21]: https://github.com/actions/actions-runner-controller
 [22]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
 [23]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
+[24]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[25]: /glossary/#pipeline-execution-time

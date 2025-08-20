@@ -14,10 +14,6 @@ further_reading:
 title: Configurar el rastreo en un pipeline de Jenkins
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 [Jenkins][19] es un servidor de automatización con características de integración y entrega continuas (CI/CD). Con su arquitectura de complementos, Jenkins se puede personalizar para adaptarse a cualquier necesidad de CI/CD y automatiza todos los aspectos del desarrollo, los tests y el despliegue de proyectos.

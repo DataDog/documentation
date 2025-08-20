@@ -41,19 +41,21 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/sled-observability-pipelines/"
   tag: "blog"
   text: "How state, local, and education organizations can manage logs flexibly and efficiently using Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/optimize-high-volume-logs/"
+  tag: "blog"
+  text: "How to optimize high-volume log data without compromising visibility"
+- link: "https://www.datadoghq.com/blog/archive-search/"
+  tag: "Blog"
+  text: "Search your historical logs more efficiently with Datadog Archive Search"
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-danger">Observability Pipelines is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">
-Datadog recommends you update Observability Pipelines Worker (OPW) with every minor and patch release, or, at a minimum, monthly. <br><br> Upgrading to a major OPW version and keeping it updated is the only supported way to get the latest OPW functionality, fixes, and security updates.
-</div>
-
 ## Overview
 
-{{< img src="observability_pipelines/op_marketecture_11042024.png" alt="A graphic showing data being aggregated from a variety of sources, processed and enriched by the observability pipelines worker in your own environment, and then being routed to the security, analytics, and storage destinations of your choice" style="width:100%;" >}}
+{{< img src="observability_pipelines/op_marketecture_06042025.png" alt="A graphic showing data being aggregated from a variety of sources, processed and enriched by the observability pipelines worker in your own environment, and then being routed to the security, analytics, and storage destinations of your choice" style="width:100%;" >}}
 
 Observability Pipelines allows you to collect and process logs within your own infrastructure, before routing them to downstream integrations. Use out-of-the-box [templates](#build-pipelines-with-out-of-the-box-templates) to build and deploy pipelines based on your use case.
 
@@ -62,6 +64,10 @@ The Observability Pipelines Worker is the software that runs in your infrastruct
 The Observability Pipelines UI provides a control plane to manage your Observability Pipelines Workers. You build and edit pipelines and deploy pipeline changes to your Workers from there. You can also enable out-of-the-box monitors for your pipelines so that you can evaluate their health.
 
 ## Get started
+
+<div class="alert alert-info">
+Datadog recommends you update Observability Pipelines Worker (OPW) with every minor and patch release, or, at a minimum, monthly. <br><br> Upgrading to a major OPW version and keeping it updated is the only supported way to get the latest OPW functionality, fixes, and security updates. See <a href="https://docs.datadoghq.com/observability_pipelines/install_the_worker/?tab=docker#upgrade-the-worker">Upgrade the Worker</a> to update to the latest Worker version</a>.
+</div>
 
 To set up a pipeline:
 

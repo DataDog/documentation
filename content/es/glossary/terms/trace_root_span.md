@@ -1,6 +1,9 @@
 ---
 core_product:
 - apm
+short_definition: Un tramo es un tramo raíz de la traza cuando es el primer tramo
+  de una traza. El tramo raíz es el método de entrada de la solicitud rastreada. Su
+  inicio marca el comienzo de la traza.
 title: tramo (span) raíz de la traza (trace)
 ---
 Un [tramo][1] es un tramo raíz de la traza cuando es el primer tramo de una traza. El tramo raíz es el método de punto de entrada de la solicitud rastreada. Su inicio marca el inicio de la traza.

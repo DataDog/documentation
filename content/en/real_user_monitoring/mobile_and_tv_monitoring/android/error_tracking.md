@@ -85,7 +85,7 @@ Mapping files are used to deobfuscate stack traces, which helps in debugging err
 
 Depending on the [Android Gradle plugin][1] version, the matching of stack traces and mapping files relies on different fields:
 
-- Version 1.13.0 uses the `build_id` field (you must use Datadog Android SDK 2.8.0 or later to support this field)
+- Versions 1.13.0 and higher use the `build_id` field (you must use Datadog Android SDK 2.8.0 or later to support this field)
 - Older versions use a combination of the `service`, `version`, and `variant` fields
 
 ### Upload your mapping file
@@ -204,7 +204,7 @@ This resolves the final value for the `versionName` property as `fooBar`.
 |----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `versionName`              | The version name of the application (by default, the version declared in the `android` block of your `build.gradle` script).                                                                                                               |
 | `serviceName`              | The service name of the application (by default, the package name of your application as declared in the `android` block of your `build.gradle` script).                                                                                                                          |
-| `site`                     | The Datadog site to upload your data to (US1, US3, US5, EU1, US1_FED, or AP1).                                                                                                                                       |
+| `site`                     | The Datadog site to upload your data to (US1, US3, US5, EU1, US1_FED, AP1, or AP2).                                                                                                                                       |
 | `remoteRepositoryUrl`      | The URL of the remote repository where the source code was deployed. If this is not provided, this value is resolved from your Git configuration during the task execution time.                     |
 | `checkProjectDependencies` | This property controls if the plugin should check if the Datadog Android SDK is included in the dependencies. If not, "none" is ignored, "warn" logs a warning, and "fail" fails the build with an error (default). |
 

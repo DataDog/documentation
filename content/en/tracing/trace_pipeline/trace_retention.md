@@ -77,7 +77,7 @@ There are two types of retention filters:
 
 The following retention filters are enabled by default: 
 - The `Error Default` retention filter indexes error spans with `status:error`. The retention rate and the query are configurable. For example, to capture production errors, set the query to `status:error, env:production`. Disable the retention filter if you do not want to capture the errors by default.
-- The `Application Security Monitoring Default` retention filter is enabled if you are using [Application Security Management][16]. It ensures the retention of all spans in traces that have been identified as having an application security impact (an attack attempt).
+- The `App and API Protection Monitoring Default` retention filter is enabled if you are using [App and API Protection][16]. It ensures the retention of all spans in traces that have been identified as having an application security impact (an attack attempt).
 - The `Synthetics Default` retention filter is enabled if you are using Synthetic Monitoring. It ensures that traces generated from synthetic API and browser tests remain available by default. See [Synthetic APM][15] for more information, including how to correlate traces with synthetic tests.
 - The `Dynamic Instrumentation Default` retention filter is enabled if you are using [Dynamic Instrumentation][17]. It ensures spans created dynamically with Dynamic instrumentation remain available in the long term by default.
 

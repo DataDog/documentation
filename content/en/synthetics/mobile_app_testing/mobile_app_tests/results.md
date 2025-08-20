@@ -13,10 +13,6 @@ further_reading:
   text: "Learn about the Events Explorer"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
-{{< /site-region >}}
-
 ## Overview
 
 Click on a mobile app test on the [**Synthetic Tests** page][11] to see the Test Details page. The Test Details page contains all the information relating to your test, including test properties, test history, sample runs, and test runs.

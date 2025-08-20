@@ -74,12 +74,21 @@ Datadog Database Monitoring collects per-query metrics for the top 200 normalize
 
 Query samples have no limits on the number of unique normalized queries tracked, but the sampling is biased towards queries which are slow or frequent. It is possible for a query sample to be selected, but have no associated query metrics. This is the case when the query was slow or frequent for a brief period of time, but was not sustained enough to become a top query.
 
+## Query retention periods
+
+Datadog retains Database Monitoring query data based on the type of data collected:
+
+- Query Metrics are retained for 15 months.
+- Query Samples are retained for 15 days.
+
+For more information, see [Data Retention Periods][5].
+
 ## Other queries
 
 _Other Queries_ represent the metrics of all queries which do not appear in the top 200. Because a query may be a top query for some time frames but not others, the metrics for a particular query may sometimes be tracked as a distinct normalized query and other times counted in Other Queries.
-
 
 [1]: /dashboards/
 [2]: /monitors/
 [3]: /notebooks/
 [4]: /data_security/logs/
+[5]: /data_security/data_retention_periods/

@@ -25,4 +25,4 @@ If your HAproxy integration is not well configured, you may notice:
 * Missing points on HAProxy metrics that are reported as rate [can be checked here][1] and for which you should get a value each 20 seconds.
 * High values and high variations on metrics that are low in normal conditions such as 5xx code error responses.
 
-[1]: https://github.com/DataDog/integrations-core/blob/master/haproxy/datadog_checks/haproxy/haproxy.py
+[1]: https://github.com/DataDog/integrations-core/blob/master/haproxy/datadog_checks/haproxy/legacy/haproxy.py

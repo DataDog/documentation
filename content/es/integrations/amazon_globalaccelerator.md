@@ -9,7 +9,7 @@ assets:
     metrics:
       check:
       - aws.globalaccelerator.processed_bytes_in
-      metadata_path: metadata.csv
+      metadata_path: assets/metrics/metric-spec.yaml
       prefix: aws.globalaccelerator.
     service_checks:
       metadata_path: assets/service_checks.json
@@ -78,7 +78,7 @@ Si aún no lo has hecho, configura primero la [integración de Amazon Web Servic
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_globalaccelerator" >}}
+{{< get-metrics-from-git "amazon-globalaccelerator" >}}
 
 
 ### Checks de servicio
@@ -96,5 +96,5 @@ AWS Global Accelerator no incluye ningún evento.
 [1]: https://docs.datadoghq.com/es/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-globalaccelerator
-[4]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_globalaccelerator/metadata.csv
+[4]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_globalaccelerator/assets/metrics/metric-spec.yaml
 [5]: https://docs.datadoghq.com/es/help/

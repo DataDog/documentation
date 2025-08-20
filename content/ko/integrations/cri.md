@@ -24,7 +24,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - 컨테이너
-- 쿠버네티스(Kubernetes)
+- Kubernetes
 custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cri/README.md
@@ -47,6 +47,7 @@ tile:
   - Category::Containers
   - Category::Kubernetes
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog로 CRI 메트릭을 모두 추적하기
   media: []
@@ -113,13 +114,13 @@ spec:
 
 1. 에이전트 구성 디렉터리의 루트 수준에 있는 `conf.d/` 폴더에서 `cri.d/conf.yaml` 파일을 편집해 crio 성능 데이터 수집을 시작하세요. 사용할 수 있는 구성 옵션을 모두 보려면 [sample cri.d/conf.yaml][2]을 참고하세요.
 
-2. [에이전트를 재시작][3]하세요.
+2. [에이전트를 다시 시작합니다][3].
 
 ### 검증
 
 [에이전트 상태 하위 명령을 실행][3]하고 Checks 섹션에서 `cri`를 찾으세요.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "cri" >}}

@@ -1,9 +1,10 @@
 ---
 categories:
 - aws
-- cloud
-- 데이터 스토어
+- 클라우드
+- 데이터 저장소
 - 로그 수집
+custom_kind: 통합
 dependencies: []
 description: Amazon Neptune의 핵심 메트릭을 추적합니다.
 doc_link: https://docs.datadoghq.com/integrations/amazon_neptune/
@@ -14,11 +15,10 @@ integration_id: ''
 integration_title: Amazon Neptune
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_neptune
 public_title: Datadog-Amazon Neptune 통합
-short_description: Amazon Neptune의 핵심 메트릭 추적하기.
+short_description: Amazon Neptune의 핵심 메트릭을 추적합니다.
 version: '1.0'
 ---
 
@@ -33,7 +33,7 @@ Amazon Neptune은 빠르고 신뢰할 수 있는 전체 관리형 그래프 데�
 
 ### 설치
 
-이미 하지 않은 경우 먼저 [Amazon Web Services 통합][1]을 설정하세요.
+아직 설정하지 않은 경우 먼저 [Amazon Web Services 통합][1]을 설정하세요.
 
 ### 메트릭 수집
 
@@ -53,8 +53,8 @@ S3 버킷이나 CloudWatch로 로그를 전송하도록 Amazon Neptune을 구성
 1. 아직 설정하지 않은 경우 [Datadog Forwarder Lambda 함수][4]를 설정하세요.
 2. Lambda 함수를 설치한 후 AWS 콘솔에서 Amazon Neptune 로그를 포함하는 S3 버킷이나 CloudWatch 로그 그룹에 수동으로 트리거를 추가하세요.
 
-    - [S3 버킷에서 직접 트리거 추가][5]
-    - [클라우드와치(CloudWatch) 로그 그룹에 수동 트리거 추가][6]
+    - [S3 버킷에서 수동 트리거 추가][5]
+    - [CloudWatch 로그 그룹에 수동으로 트리거 추가][6]
 
 ## 수집한 데이터
 
@@ -78,7 +78,7 @@ Amazon Neptune 통합에는 서비스 점검이 포함되지 않습니다.
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-neptune
 [4]: https://docs.datadoghq.com/ko/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ko/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ko/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_neptune/amazon_neptune_metadata.csv
 [8]: https://docs.datadoghq.com/ko/help/

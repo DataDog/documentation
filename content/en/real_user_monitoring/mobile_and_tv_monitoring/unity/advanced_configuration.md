@@ -110,10 +110,17 @@ The `string` used for `resourceKey` in both calls must be unique for the resourc
 
 ### Track custom errors
 
-To track specific errors, notify `DdRum` when an error occurs with the message, source, exception, and additional attributes.
+To track specific errors, notify `DdRum` when an error occurs with the exception, the source, and any additional attributes.
 
 ```cs
-DatadogSdk.Instance.Rum.AddError("This is an error message.");
+try
+{
+  // Error prone code
+}
+catch(Exception e)
+{
+  DatadogSdk.Instance.Rum.AddError(e, RumErrorSource.Source);
+}
 ```
 
 ## Track custom global attributes

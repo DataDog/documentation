@@ -17,12 +17,12 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- ㅊ
-- 쿠버네티스(Kubernetes)
+- 컨테이너
+- Kubernetes
 - 로그 수집
 - 네트워크
-- orchestration
-custom_kind: integration
+- 오케스트레이션
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pivotal_pks/README.md
 display_on_public_website: true
@@ -37,7 +37,7 @@ name: pivotal_pks
 public_title: Pivotal Container Service
 short_description: Pivotal의 엔터프라이즈급 쿠버네티스(Kubernetes) 제품
 supported_os:
-- 리눅스
+- linux
 - macos
 tile:
   changelog: CHANGELOG.md
@@ -49,7 +49,7 @@ tile:
   - Category::Orchestration
   - Supported OS::Linux
   - Supported OS::macOS
-  - 제공::통합
+  - Offering::Integration
   configuration: README.md#Setup
   description: Pivotal의 엔터프라이즈급 쿠버네티스(Kubernetes) 제품
   media: []
@@ -77,7 +77,7 @@ PKS를 모니터링하려면 [쿠버네티스(Kubernetes)][3]에 대해 Datadog 
 
 ### 로그 수집
 
-_Agent 버전 6.0 이상에서 사용 가능_
+_에이전트 버전 > 6.0에서 사용 가능_
 
 설정은 쿠버네티스(Kubernetes)와 완전히 동일합니다.
 모든 컨테이너에서 로그 수집을 시작하려면 Datadog 에이전트 [환경 변수][4]를 사용하세요.

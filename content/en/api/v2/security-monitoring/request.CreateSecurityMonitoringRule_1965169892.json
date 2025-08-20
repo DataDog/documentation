@@ -25,6 +25,18 @@
           "options": {
             "duration": 900
           }
+        },
+        {
+          "type": "user_behavior",
+          "options": {
+            "userBehaviorName": "behavior"
+          }
+        },
+        {
+          "type": "flag_ip",
+          "options": {
+            "flaggedIPType": "FLAGGED"
+          }
         }
       ]
     }

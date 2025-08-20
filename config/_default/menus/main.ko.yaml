@@ -2085,15 +2085,20 @@ menu:
       parent: oncall
       identifier: oncall_teams
       weight: 1
-    - name: Send a Page
-      url: service_management/on-call/pages/
+    - name: Trigger a Page
+      url: service_management/on-call/triggering_pages/
       parent: oncall
-      identifier: oncall_pages
+      identifier: oncall_triggering_pages
       weight: 2
-    - name: Processing Rules
-      url: service_management/on-call/processing_rules/
+    - name: Live Call Routing
+      url: service_management/on-call/triggering_pages/live_call_routing
+      identifier: oncall_live_call_routing
+      parent: oncall_triggering_pages
+      weight: 201
+    - name: Routing Rules
+      url: service_management/on-call/routing_rules/
       parent: oncall
-      identifier: oncall_processing_rules
+      identifier: oncall_routing_rules
       weight: 3
     - name: Escalation Policies
       url: service_management/on-call/escalation_policies/
@@ -5157,12 +5162,12 @@ menu:
       identifier: cloud_siem_content_packs
       weight: 1
     - name: 로그 탐지 규칙
-      url: security/cloud_siem/log_detection_rules
+      url: security/cloud_siem/detection_rules
       parent: cloud_siem
       identifier: cloud_siem_log_detection_rules
       weight: 2
     - name: 신호 상관관계 규칙
-      url: security/cloud_siem/signal_correlation_rules
+      url: security/cloud_siem/detection_rules/signal_correlation_rules
       parent: cloud_siem
       identifier: cloud_siem_signal_correlation_rules
       weight: 3

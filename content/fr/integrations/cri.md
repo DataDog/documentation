@@ -23,8 +23,9 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- containers
+- incident-teams
 - kubernetes
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cri/README.md
 display_on_public_website: true
@@ -34,7 +35,6 @@ integration_id: cri
 integration_title: CRI
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: cri
 public_title: CRI
@@ -47,6 +47,7 @@ tile:
   - Category::Containers
   - Category::Kubernetes
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: Surveillez toutes vos métriques CRI avec Datadog.
   media: []
@@ -58,13 +59,13 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Présentation
+## Section Overview
 
 Ce check surveille une interface de runtime de conteneur (Container Runtime Interface ou CRI).
 
-## Formule et utilisation
+## Configuration
 
-### Liste des infrastructures
+### Installation
 
 CRI est un [check de base de l'Agent Datadog][1] qui doit être configuré dans `datadog.yaml` avec `cri.d/conf.yaml`.
 
@@ -109,7 +110,7 @@ spec:
 
 **Remarque :** le répertoire `/var/run` doit être monté à partir du host pour que l'intégration s'exécute correctement.
 
-### Dépannage de la solution Browser
+### Configuration
 
 1. Modifiez le fichier `cri.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance CRI. Consultez le [fichier d'exemple cri.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
@@ -119,21 +120,21 @@ spec:
 
 Lancez la [sous-commande status][3] de l'Agent et cherchez `cri` dans la section Checks.
 
-## Real User Monitoring
+## Données collectées
 
-### Analyse d'entonnoirs
+### Métriques
 {{< get-metrics-from-git "cri" >}}
 
 
-### Aide
+### Checks de service
 
 CRI n'inclut aucun check de service.
 
-### Aide
+### Événements
 
 CRI n'inclut aucun événement.
 
-## Aide
+## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][5].
 

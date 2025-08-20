@@ -31,10 +31,15 @@ This document walks you through:
 
 ## Enable Remote Configuration {#enable-remote-configuration}
 
-To use Sensitive Data Scanner in your AWS environments, you need to:
+Remote Configuration allows Datadog to send configuration data (such as which cloud storage resources to scan) to your deployed scanners. To use Sensitive Data Scanner in your AWS environments, you need to ensure that:
+- Remote Configuration is enabled for your Datadog organization.
+- You are using Remote-Configuration-enabled Datadog API keys for AWS accounts with scanners deployed to them.
 
-1. Enable Remote Configuration. Remote Configuration allows Datadog to send information to scanners, such as which cloud storage resources should be scanned. See the [Remote Configuration setup instructions][4].
-1. Use Remote-Configuration-enabled Datadog API keys for AWS accounts with scanners deployed to them. You need to manually enable Remote Configuration for the API keys you want to use for Agentless Scanning. See [Enable Remote Configuration on the API key][5] for instructions.
+Remote Configuration is enabled by default on most organizations. To verify this, navigate to the [Remote Configuration][4] settings page. If it is not enabled:
+1. Ensure your RBAC permissions include [`org_management`][7].
+1. From the Remote Configuration [setup page][5], click **Enable for your Organization** > **Next Step**.
+1. Search for and select the API keys that you want to use with Remote Configuration and click **Enable Keys**. 
+1. Click **Next Step** > **Done**. You do not need to configure Datadog components like the Agent or tracers.
 
 **Notes**:
 - Only AWS accounts that have scanners deployed to them need Remote-Configuration-enabled Datadog API keys.
@@ -85,7 +90,7 @@ You can add a scanner to a new AWS account or an existing AWS account.
 1. Select the AWS region in the dropdown menu.
 1. Select an API key that is already configured for Remote Configuration. If the API key you select does not have Remote Configuration enabled, Remote Configuration is automatically enabled for that key upon selection. **Note**: Only users with `api_keys_write` permissions can enable Remote Configuration for individual API keys.
 1. If you want to send AWS logs to Datadog, leave **Yes** selected.
-1. Select **Yes** if you want to use Datadog Cloud Security Management.
+1. Select **Yes** if you want to use Datadog Cloud Security.
 1. **Enable Sensitive Data Scanner** is automatically selected by default. This tells CloudFormation to add the AWS Managed SecurityAudit policy to your Datadog AWS Integration role and enable Agentless Scanning to start scanning your cloud data stores.
 1. Click **Launch CloudFormation Template**.
 
@@ -149,11 +154,12 @@ To uninstall Agentless Scanning, log in to your AWS console and delete the Cloud
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/remote_config/?tab=configurationyamlfile
+[1]: /remote_configuration
 [2]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [3]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/data-security
-[4]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
-[5]: /agent/remote_config/?tab=configurationyamlfile#enable-remote-configuration-on-the-api-key
+[4]: https://app.datadoghq.com/organization-settings/remote-config
+[5]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [6]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration/data-security
 [7]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner
 [8]: mailto:success@datadoghq.com
+[9]: /account_management/rbac/permissions#access-management

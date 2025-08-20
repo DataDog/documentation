@@ -22,7 +22,7 @@ author:
   sales_email: justin.morris@ferocia.com.au
   support_email: justin.morris@ferocia.com.au
 categories:
-- メトリクス
+- モニター
 custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/puma/README.md

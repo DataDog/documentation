@@ -22,7 +22,7 @@ author:
   support_email: emeric.planet@gmail.com
 categories:
 - 협업
-custom_kind: integration
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nextcloud/README.md
 display_on_public_website: true
@@ -37,9 +37,9 @@ name: nextcloud
 public_title: Nextcloud
 short_description: Nextcloud 인스턴스에서 전체 통계 추적
 supported_os:
-- 리눅스
+- linux
 - macos
-- windows
+- 윈도우즈(Windows)
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
@@ -47,7 +47,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Collaboration
-  - 제공::통합
+  - Offering::Integration
   configuration: README.md#Setup
   description: Nextcloud 인스턴스에서 전체 통계 추적
   media: []
@@ -79,11 +79,11 @@ Nextcloud 점검은 [Datadog 에이전트][2] 패키지에 포함되어 있지 �
 
 2. 통합을 코어 [통합][4]과 유사하게 설정하세요.
 
-### 구성
+### 설정
 
-1. [에이전트 설정 디렉토리][5]의 루트에 있는 `conf.d/` 폴더에서 `nextcloud.d/conf.yaml` 파일을 편집하여 Gnatsd [메트릭](#metrics) 수집을 시작합니다. 사용 가능한 모든 설정 옵션은 [nextcloud.d/conf.yaml 샘플][6]을 참고하세요.
+1. [에이전트 설정 디렉토리][5]의 루트에 있는 `conf.d/` 폴더에서 `nextcloud.d/conf.yaml` 파일을 편집하여 Nextcloud [메트릭](#metrics) 수집을 시작합니다. 사용 가능한 모든 설정 옵션은 [nextcloud.d/conf.yaml 샘플][6]을 참고하세요.
 
-2. [에이전트 다시 시작][7]
+2. [에이전트 다시 시작][7] 
 
 ### 검증
 

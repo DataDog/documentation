@@ -84,7 +84,7 @@ NVIDIA Jetson チェックは [Datadog Agent][2] パッケージに含まれて�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "nvidia_jetson" >}}
+{{< get-metrics-from-git "nvidia-jetson" >}}
 
 
 以下は、`use_sudo` が true に設定される場合にのみ報告されるメトリクスです。

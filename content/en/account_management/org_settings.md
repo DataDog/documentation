@@ -88,7 +88,11 @@ The [**Safety Center**][14] page contains security alerts, warnings, and recomme
 
 ### Public sharing
 
-The **Public Sharing** tab contains lists of shared dashboards and shared graphs. You can also edit your sharing settings by clicking the **Enabled** toggles.
+The **Public Sharing** tab includes org-wide settings for sharing, along with lists of shared dashboards and graphs. You can enable sharing features granularly and configure additional security options, such as setting a maximum invite duration.
+
+To apply sharing settings across all your orgs, reach out to [Datadog Support][16].
+
+**Note**: OrgAdmin permission is required to view and manage sharing settings and resources.
 
 ### OAuth Apps
 
@@ -128,14 +132,6 @@ When enabled, users with `Modify Index` permission can choose any of the 3-, 7-,
 
 **Note**: Using out-of-contract retention periods incur on-demand charges. If an out-of-contract retention period is often used, Datadog recommends that customers contact their account manager to have it added to their contract.
 
-#### Monitors time zone preference
-
-Users with the `Org Management` permission can customize the time zone used in alert graph snapshots within Monitor alert notifications.
-
-{{< img src="account_management/monitors-time-zone-preference.png" alt="Monitors Time Zone Preferences" style="width:70%;" >}}
-
-The setting applies to **all** Monitor alert notifications, as it's an org-wide setting.
-
 #### Max session duration configuration
 
 Users with the `Org Management` permission can set a maximum session duration for their organization. The duration applies to all new web sessions created after you change it, for all users, regardless of their role in the organization. It doesn't apply to Datadog mobile application sessions.
@@ -145,7 +141,7 @@ The session duration can be configured within the following limits:
 - **Minimum duration:** 1 hour
 - **Maximum duration:** 12 hours
 {{% /site-region %}}
-{{% site-region region="us,eu,us3,us5,ap1" %}}
+{{% site-region region="us,eu,us3,us5,ap1,ap2" %}}
 - **Minimum duration:** 1 hour
 - **Maximum duration:** 720 hours (30 days)
 {{% /site-region %}}
@@ -165,9 +161,10 @@ The session duration can be configured within the following limits:
 [7]: /account_management/saml/mapping
 [8]: /account_management/api-app-keys/
 [9]: /account_management/rbac/
-[10]: /agent/remote_config/?tab=configurationyamlfile#how-it-works
+[10]: /remote_configuration#how-it-works
 [11]: /account_management/api-app-keys/#client-tokens
 [12]: /service_management/events/guides/email/
 [13]: /synthetics/settings/?tab=specifyvalue#overview
 [14]: /account_management/safety_center
 [15]: /account_management/org_settings/oauth_apps
+[16]: /help/

@@ -6,10 +6,6 @@ further_reading:
 title: 스케줄
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call은 선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다.</div>
-{{< /site-region >}}
-
 Datadog On-Call에서 스케줄은 팀원들이 페이지에 응답하도록 배정되는 특정 시간을 정의하며, 다양한 시간대와 교대 근무에 따른 팀원의 근무 가능 시간을 구성하고 관리합니다.
 
 ### 개념

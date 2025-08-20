@@ -13,7 +13,7 @@ assets:
     metrics:
       check:
       - aws.apigateway.latency
-      metadata_path: metadata.csv
+      metadata_path: assets/metrics/metric-spec.yaml
       prefix: aws.apigateway
     service_checks:
       metadata_path: assets/service_checks.json
@@ -133,7 +133,7 @@ API Gateway 로깅 활성화 방법:
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_api_gateway" >}}
+{{< get-metrics-from-git "amazon-api-gateway" >}}
 
 
 
@@ -155,5 +155,5 @@ Amazon API Gateway 통합에는 어떠한 서비스 점검도 포함되지 않�
 [4]: https://app.datadoghq.com/integrations/amazon-api-gateway
 [5]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
 [6]: https://app.datadoghq.com/logs
-[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_api_gateway/amazon_api_gateway_metadata.csv
+[7]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_api_gateway/assets/metrics/metric-spec.yaml
 [8]: https://docs.datadoghq.com/ko/help/

@@ -68,9 +68,9 @@ The injection-related vulnerabilities are:
 This feature is available starting from the following versions of each language's tracing library:
 
 * **Java**: 1.45.0+
-* **.NET**: Not supported
+* **.NET**: 3.10.0+
 * **Node.js**: 5.37.0+
-* **Python**: Not supported
+* **Python**: 3.10.0+
 
 
 ## Examples
@@ -301,5 +301,153 @@ The following security control definition affects every `sql-sanitizer` package 
 
 {{% /collapse-content %}}
 
-[1]: /security/code_security/iast/#overview
+{{% collapse-content title=".NET" level="h4" %}}
 
+### General syntax
+`TYPE:SECURE_MARKS:Assembly:Class:Method(ParameterTypes)[:ParameterIndexes]`
+
+<div class="alert alert-info">
+Parameter types must be fully qualified with their namespace. Example: <code>System.String</code><br /><br />
+Parameter indexes are comma-separated. If no parameter index is provided, the value of the first parameter defaults to 0.
+</div>
+
+### Input validator
+
+#### Method that validates all input parameters to avoid command injection vulnerabilities
+
+##### Method
+`[FooAssembly]CustomInputValidatorClass::ValidateMethod(string input1, string input2)`
+
+##### Config
+`INPUT_VALIDATOR:COMMAND_INJECTION:FooAssembly:CustomInputValidatorClass:ValidateMethod(System.String,System.String):0,1`
+
+#### Method that validates one input parameter to avoid command injection vulnerabilities
+
+##### Method
+ `[FooAssembly]CustomInputValidatorClass::ValidateMethod(string input1, string inputToValidate)`
+
+##### Config
+ `INPUT_VALIDATOR:COMMAND_INJECTION:FooAssembly:CustomInputValidatorClass:ValidateMethod(System.String,System.String):1`
+
+#### Method that validates two input parameters to avoid command injection vulnerabilities
+
+##### Method
+ `[FooAssembly]CustomInputValidatorClass::ValidateMethod(string input1, string firstInputToValidate, string secondInputToValidate, object anotherInput)`
+
+##### Config
+ `INPUT_VALIDATOR:COMMAND_INJECTION:FooAssembly:CustomInputValidatorClass:ValidateMethod(System.String,System.String,System.String,System.Object):1,2`
+
+#### Method that validates the input parameter to avoid command injection and code injection vulnerabilities
+
+##### Method
+ `[FooAssembly]CustomInputValidatorClass::ValidateMethod(string input)`
+
+##### Config
+ `INPUT_VALIDATOR:COMMAND_INJECTION,CODE_INJECTION:FooAssembly:CustomInputValidatorClass:ValidateMethod(System.String)`
+
+### Sanitizer
+
+#### Sanitizer to avoid command injection vulnerabilities
+
+##### Method
+ `[FooAssembly]CustomInputValidatorClass::SanitizerMethod(string input)`
+
+##### Config
+ `SANITIZER:COMMAND_INJECTION:FooAssembly:CustomInputValidatorClass:SanitizerMethod(System.String)`
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Python" level="h4" %}}
+
+### Input validator
+
+#### Method that validates all input parameters to avoid command injection vulnerabilities
+
+##### Method
+`python_project.security.validators.validate(input1, input2)`
+
+##### Config
+`INPUT_VALIDATOR:COMMAND_INJECTION:python_project.security.validators:validate`
+
+#### Method that validates one input parameter to avoid command injection vulnerabilities
+
+##### Method
+`python_project.security.validators.validate(input1, input_to_validate)`
+
+##### Config
+`INPUT_VALIDATOR:COMMAND_INJECTION:python_project.security.validators:validate:1`
+
+#### Method that validates two input parameters to avoid command injection vulnerabilities
+
+##### Method
+`python_project.security.validators.validate(input1, first_input_to_validate, second_input_to_validate, another_input)`
+
+##### Config
+`INPUT_VALIDATOR:COMMAND_INJECTION:python_project.security.validators:validate:1,2`
+
+#### Method that validates the input parameter to avoid command injection and code injection vulnerabilities
+
+##### Method
+`python_project.security.validators.validate(input)`
+
+##### Config
+`INPUT_VALIDATOR:COMMAND_INJECTION,CODE_INJECTION:python_project.security.validators:validate`
+
+#### Method that validates the input parameter to avoid any vulnerabilities
+
+##### Method
+`python_project.security.validators.validate(input)`
+
+##### Config
+`INPUT_VALIDATOR:*:python_project.security.validators:validate`
+
+### Sanitizer
+
+#### Sanitizer to avoid command injection vulnerabilities
+
+##### Method
+`python_project.sql_sanitizer.SQLSanitizer.sanitize(input)`
+
+##### Config
+`SANITIZER:COMMAND_INJECTION:python_project.sql_sanitizer:SQLSanitizer.sanitize`
+
+#### Sanitizer to avoid command injection and code injection vulnerabilities
+
+##### Method
+`python_project.security.sanitizers.DataSanitizer.sanitize(input)`
+
+##### Config
+`SANITIZER:COMMAND_INJECTION,CODE_INJECTION:python_project.security.sanitizers:DataSanitizer.sanitize`
+
+#### Sanitizer to avoid any vulnerabilities
+
+##### Method
+`python_project.security.sanitizers.UniversalSanitizer.sanitize(input)`
+
+##### Config
+`SANITIZER:*:python_project.security.sanitizers:UniversalSanitizer.sanitize`
+
+### Special cases
+
+#### Function-level security control
+Function `validate_user_input` that validates the input parameter to avoid command injection vulnerabilities.
+
+```python
+# python_project/utils/validators.py
+def validate_user_input(input_data):
+    """Validation process"""
+    pass
+```
+
+##### Config
+`INPUT_VALIDATOR:COMMAND_INJECTION:python_project.utils.validators:validate_user_input`
+
+#### Security control method from a third-party package
+The following security control definition affects the `sanitize_sql` method from the `secure_db` package.
+
+##### Config
+`SANITIZER:SQL_INJECTION:secure_db.sanitizers:SQLSanitizer.sanitize_sql`
+
+{{% /collapse-content %}}
+
+[1]: /security/code_security/iast/#overview

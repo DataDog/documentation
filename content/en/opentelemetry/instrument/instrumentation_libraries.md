@@ -185,7 +185,11 @@ if __name__ == "__main__":
 
 ## Compatibility requirements
 
-The Datadog SDK for Go supports library instrumentations written using the [Opentelemetry-Go Trace API][21], including the [`opentelemetry-go-contrib/instrumentation`][22] libraries.
+The Datadog SDK for Go supports library instrumentations written using the [OpenTelemetry-Go Trace API][21], including the [`opentelemetry-go-contrib/instrumentation`][22] libraries.
+
+{{% tracing-go-v2 %}}
+
+OpenTelemetry support has not changed between v1 and v2 of the Go Tracer.
 
 ## Setup
 
@@ -196,7 +200,7 @@ To use OpenTelemetry integrations with the Datadog Go SDK, perform the following
 
 ## Example
 
-The following is an example instrumenting the `net/http` library with the Datadog Tracer and Opentelemetry's `net/http` integration:
+The following is an example instrumenting the `net/http` library with the Datadog Tracer and OpenTelemetry's `net/http` integration:
 
 ```go
 import (
@@ -204,10 +208,8 @@ import (
 	"log"
 	"net/http"
 
-  ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry" // 1.x
-  ddtracer "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer // 2.x
-  // "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry // 2.x
+  ddotel "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry"
+  ddtracer "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 	"go.opentelemetry.io/otel"

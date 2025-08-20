@@ -17,6 +17,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/alert-monitor-notifications"
   tag: "Learning Center"
   text: "Take a course to customize alert monitor notifications"
+- link: "https://www.datadoghq.com/blog/monitor-notification-rules/"
+  tag: "Blog"
+  text: "Route your monitor alerts with Datadog monitor notification rules"
 ---
 
 Use variables in notification messages to display conditional messaging and route notification to different teams using [conditional variables](#conditional-variables), or to enrich its content by using [attribute and tag variables](#attribute-and-tag-variables) and [template variables](#template-variables).
@@ -141,8 +144,7 @@ Or use the `{{else}}` parameter in the first example:
   @slack-example
 {{/is_match}}
 ```
-
-**Note**: To check if a `<TAG_VARIABLE>` is **NOT** empty, use an empty string for the `<COMPARISON_STRING>`.
+**Note**: To check if a `<TAG_VARIABLE>` does not exist or if it's empty, use `is_exact_match`. See `is_exact_match` tab for more details. 
 
 {{% /tab %}}
 {{% tab "is_exact_match" %}}
@@ -188,6 +190,14 @@ To notify your dev team if the value that breached the threshold of your monitor
   This displays if the value that breached the threshold of the monitor is 5. @dev-team@company.com
 {{/is_exact_match}}
 ```
+
+The `is_exact_match` conditional variable also supports an empty string for the `<COMPARISON_STRING>` to check if the attribute or tag is empty or does not exist.
+```text
+{{#is_exact_match "host.datacenter" ""}}
+  This displays if the attribute or tag does not exist or if it's empty
+{{/is_exact_match}}
+```
+
 
 {{% /tab %}}
 {{% tab "is_renotify" %}}
@@ -551,8 +561,9 @@ When building dynamic handles with attributes that might not always be present, 
 To avoid missed notifications when using dynamic handles with these variables, make sure to add a fallback handle:
 
 ```text
-{{#is_match "kube_namespace.owner" ""}}
+{{#is_exact_match "kube_namespace.owner" ""}}
   @slack-example
+  // This will notify @slack-example if the kube_namespace.owner variable is empty or does not exist.
 {{/is_match}}
 ```
 
@@ -642,7 +653,7 @@ The logs link is customizable with additional parameters. The most common are:
 
 ### Comments
 
-To include a comment in the monitor message that only displays in the monitor edit screen, use the syntax:
+To include a comment in the monitor message, use the syntax:
 
 ```text
 {{!-- this is a comment --}}

@@ -48,7 +48,7 @@ With the following definitions:
 : The name of the metric (examples: `hits`, `errors`, `apdex`, `duration`). See the section below.
 
 `<TAGS>`
-: Trace metrics tags, possible tags are: `env`, `service`, `version`, `resource`, `http.status_code`, `http.status_class`, and Datadog Agent tags (including the host and second primary tag). 
+: Trace metrics tags, possible tags are: `env`, `service`, `version`, `resource`, `http.status_code`, `http.status_class`, `rpc.grpc.status_code`(requires Datadog Agent v7.65.0+) , and Datadog Agent tags (including the host and [additional primary tags][4]). 
 : **Note:** Other tags set on spans are not available as tags on traces metrics.
 
 ## Metric suffix
@@ -59,21 +59,21 @@ With the following definitions:
 : **Prerequisite:** This metric exists for any APM service.<br>
 **Description:** Represent the count of spans created with a specific name (for example, `redis.command`, `pylons.request`, `rails.request`, or `mysql.query`).<br>
 **Metric type:** [COUNT][5].<br>
-**Tags:** `env`, `service`, `version`, `resource`, `resource_name`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
+**Tags:** `env`, `service`, `version`, `resource`, `resource_name`, `http.status_code`, `rpc.grpc.status_code`, all host tags from the Datadog Host Agent, and [additional primary tags][4].
 
 `trace.<SPAN_NAME>.hits.by_http_status`
 : **Prerequisite:** This metric exists for HTTP/WEB APM services if http metadata exists.<br>
 **Description:** Represent the count of hits for a given span break down by HTTP status code.<br>
 **Metric type:** [COUNT][5].<br>
-**Tags:** `env`, `service`, `version`, `resource`, `resource_name`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
+**Tags:** `env`, `service`, `version`, `resource`, `resource_name`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [additional primary tags][4].
 
 ### Latency distribution
 
 `trace.<SPAN_NAME>`
 : **Prerequisite:** This metric exists for any APM service.<br>
-**Description:** Represent the latency distribution for all services, resources, and versions across different environments and second primary tags. **Recommended for all latency measurement use cases.**<br>
+**Description:** Represent the latency distribution for all services, resources, and versions across different environments and additional primary tags. **Recommended for all latency measurement use cases.**<br>
 **Metric type:** [DISTRIBUTION][6].<br>
-**Tags:** `env`, `service`,`version`, `resource`, `resource_name`, `http.status_code`, `synthetics`, and [the second primary tag][4].
+**Tags:** `env`, `service`,`version`, `resource`, `resource_name`, `http.status_code`, `rpc.grpc.status_code`, `synthetics`, and [additional primary tags][4].
 
 ### Errors
 
@@ -81,13 +81,13 @@ With the following definitions:
 : **Prerequisite:** This metric exists for any APM service.<br>
 **Description:** Represent the count of errors for a given span.<br>
 **Metric type:** [COUNT][5].<br>
-**Tags:** `env`, `service`, `version`, `resource`, `resource_name`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
+**Tags:** `env`, `service`, `version`, `resource`, `resource_name`, `http.status_code`, `rpc.grpc.status_code`, all host tags from the Datadog Host Agent, and [additional primary tags][4].
 
 `trace.<SPAN_NAME>.errors.by_http_status`
 : **Prerequisite:** This metric exists for any APM service.<br>
 **Description:** Represent the count of errors for a given span.<br>
 **Metric type:** [COUNT][5].<br>
-**Tags:** `env`, `service`, `version`, `resource`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
+**Tags:** `env`, `service`, `version`, `resource`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [additional primary tags][4].
 
 ### Apdex
 
@@ -95,7 +95,7 @@ With the following definitions:
 : **Prerequisite:** This metric exists for any HTTP or web-based APM service.<br>
 **Description:** Measures the [Apdex][10] score for each web service.<br>
 **Metric type:** [GAUGE][7].<br>
-**Tags:** `env`, `service`, `version`, `resource` / `resource_name`, `synthetics`, and [the second primary tag][4].
+**Tags:** `env`, `service`, `version`, `resource` / `resource_name`, `synthetics`, and [additional primary tags][4].
 
 ## Legacy metrics
 
@@ -113,7 +113,7 @@ The following metrics are maintained for backward compatibility. For all latency
 `sum:trace.<SPAN_NAME>.duration{<FILTER>}.rollup(sum).fill(zero) / sum:trace.<SPAN_NAME>.hits{<FILTER>}.rollup(sum).fill(zero)` <br>
 This metric does not support percentile aggregations. Read the [Latency Distribution](#latency-distribution) section for more information. <br>
 **Metric type:** [GAUGE][7].<br>
-**Tags:** `env`, `service`, `resource`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
+**Tags:** `env`, `service`, `resource`, `http.status_code`, all host tags from the Datadog Host Agent, and [additional primary tags][4].
 
 ### Duration by (Legacy)
 
@@ -125,7 +125,7 @@ This metric does not support percentile aggregations. Read the [Latency Distribu
 : **Prerequisite:** This metric exists for HTTP/WEB APM services if http metadata exists.<br>
 **Description:** Measure the total time for a collection of spans for each HTTP status. Specifically, it is the relative share of time spent by all spans over an interval and a given HTTP status - including time spent waiting on child processes.<br>
 **Metric type:** [GAUGE][7].<br>
-**Tags:** `env`, `service`, `resource`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
+**Tags:** `env`, `service`, `resource`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [additional primary tags][4].
 
 ## Sampling impact on trace metrics
 
@@ -153,7 +153,7 @@ X-Ray spans are sampled before they are sent to Datadog, which means trace metri
 [1]: /tracing/trace_collection/
 [2]: /tracing/trace_pipeline/ingestion_mechanisms
 [3]: /tracing/glossary/#trace-metrics
-[4]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
+[4]: /tracing/guide/setting_primary_tags_to_scope/#add-additional-primary-tags-in-datadog
 [5]: /metrics/types/?tab=count#metric-types
 [6]: /metrics/types/?tab=distribution#metric-types
 [7]: /metrics/types/?tab=gauge#metric-types

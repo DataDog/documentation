@@ -6,7 +6,7 @@
 
     **참고**: `dd-test-scanner-log` 값은 최신 릴리스에서 지원됩니다.
 
-    애플리케이션을 활성화하고 실행한 몇 분 후 **Datadog의 [Application Trance and Signals Explorer][201]에 위협 정보가 표시**됩니다.
+    애플리케이션을 활성화하고 실행한 몇 분 후 **Datadog의 [Application Trace and Signals Explorer][201]에 위협 정보가 표시**됩니다.
 
 [201]: https://app.datadoghq.com/security/appsec
 [202]: /security/default_rules/#cat-application-security

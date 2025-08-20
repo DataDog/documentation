@@ -1,0 +1,17 @@
+{
+  "data": {
+    "attributes": {
+      "filter": {
+        "tags": [
+          "test:example-monitor"
+        ]
+      },
+      "name": "test rule",
+      "recipients": [
+        "slack-test-channel",
+        "jira-test"
+      ]
+    },
+    "type": "monitor-notification-rule"
+  }
+}

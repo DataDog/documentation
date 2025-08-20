@@ -44,12 +44,13 @@ Guides in the Datadog documentation are pages that provide background knowledge,
 
 {{< whatsnext desc="Security:">}}
 {{< nextlink href="/security/cloud_siem/guide" >}}<i class="icon-siem" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Cloud SIEM{{< /nextlink >}}
-{{< nextlink href="/security/cloud_security_management/guide" >}}<i class="icon-cloud-security-management" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Cloud Security Management{{< /nextlink >}}
-{{< nextlink href="/security/application_security/guide" >}}<i class="icon-app-sec" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Application Security Management{{< /nextlink >}}
+{{< nextlink href="/security/cloud_security_management/guide" >}}<i class="icon-cloud-security-management" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Cloud Security{{< /nextlink >}}
+{{< nextlink href="/security/application_security/guide" >}}<i class="icon-app-sec" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;App and API Protection{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Digital Experience:">}}
 {{< nextlink href="/synthetics/guide" >}}<i class="icon-synthetics" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Synthetic Monitoring{{< /nextlink >}}
+{{< nextlink href="/continuous_testing/guide" >}}<i class="icon-continuous-testing" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Continuous Testing{{< /nextlink >}}
 {{< nextlink href="/real_user_monitoring/guide" >}}<i class="icon-rum" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Real User Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
 

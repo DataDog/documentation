@@ -25,8 +25,8 @@ author:
   sales_email: noname@withgod.jp
   support_email: noname@withgod.jp
 categories:
-- 캐싱(caching)
-custom_kind: integration
+- 캐싱
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/php_apcu/README.md
 display_on_public_website: true
@@ -41,17 +41,17 @@ name: php_apcu
 public_title: PHP APCu
 short_description: PHP APCu 인메모리 데이터 캐싱을 모니터링하세요.
 supported_os:
-- 리눅스
-- windows
+- linux
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - 카테고리::캐싱(Caching)
+  - Category::Caching
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - 제공::통합
+  - Offering::Integration
   configuration: README.md#Setup
   description: PHP APCu 인메모리 데이터 캐싱을 모니터링하세요.
   media: []
@@ -101,7 +101,7 @@ Alias /apcu-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/datad
 </Location>
 ```
 
-### 구성
+### 설정
 
 1. 에이전트의 설정 디렉토리 루트에 있는 `conf.d/` 폴더에서 `php_apcu.d/conf.yaml` 파일을 편집하여 `php_apcu` 성능 데이터 수집을 시작합니다. 사용 가능한 모든 설정 옵션은 [샘플 `php_apcu.d/conf.yaml` 파일][5]을 참조하세요.
     ```
@@ -109,7 +109,7 @@ Alias /apcu-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/datad
       - url: http://localhost/apcu-status
     ```
 
-2. [Agent를 재시작합니다][6].
+2. [에이전트를 재시작합니다][6].
 
 ### 검증
 
@@ -118,7 +118,7 @@ Alias /apcu-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/datad
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "php_apcu" >}}
+{{< get-metrics-from-git "php-apcu" >}}
 
 
 ### 이벤트
@@ -126,7 +126,7 @@ Alias /apcu-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/datad
 PHP APCu 통합에는 이벤트가 포함되어 있지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "php_apcu" >}}
+{{< get-service-checks-from-git "php-apcu" >}}
 
 
 ## 트러블슈팅

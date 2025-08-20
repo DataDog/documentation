@@ -14,10 +14,6 @@ further_reading:
       text: "Extend Pipeline Visibility by adding custom tags and measures"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 [GitLab][18] is a DevOps platform that automates the software development lifecycle with integrated CI/CD features, enabling automated, continuous deployment of applications with built-in security controls.
@@ -30,6 +26,7 @@ Set up tracing in GitLab to collect data on your pipeline executions, analyze pe
 |---|---|---|
 | [Running pipelines][24] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
 | [CI jobs failure analysis][28] | CI jobs failure analysis | Analysis of the root causes of failed CI jobs based on relevant logs using LLM models. |
+| [Filter CI Jobs on the critical path][29] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Partial retries][19] | Partial pipelines | View partially retried pipeline executions. |
 | [Manual steps][20] | Manual steps | View manually triggered pipelines. |
 | [Queue time][21] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
@@ -450,3 +447,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [26]: /continuous_integration/explorer
 [27]: /continuous_integration/search/#search-for-pipelines
 [28]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
+[29]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/

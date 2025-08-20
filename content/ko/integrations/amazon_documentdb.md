@@ -1,9 +1,10 @@
 ---
 categories:
-- cloud
-- 데이터 스토어
+- 클라우드
+- 데이터 저장소
 - aws
 - 로그 수집
+custom_kind: 통합
 dependencies: []
 description: Amazon DocumentDB 메트릭 및 로그를 모니터링합니다.
 doc_link: https://docs.datadoghq.com/integrations/amazon_documentdb/
@@ -18,7 +19,6 @@ integration_id: ''
 integration_title: Amazon DocumentDB
 integration_version: ''
 is_public: true
-custom_kind: 통합
 manifest_version: '1.0'
 name: amazon_documentdb
 public_title: Datadog-Amazon DocumentDB 통합
@@ -35,7 +35,7 @@ Amazon DocumentDB는 MongoDB 워크로드를 지원하는 빠르고 확장 가�
 
 ### 설치
 
-이미 하지 않은 경우 먼저 [Amazon Web Services 통합][1]을 설정하세요.
+아직 설정하지 않은 경우 먼저 [Amazon Web Services 통합][1]을 설정하세요.
 
 ### 메트릭 수집
 
@@ -50,13 +50,13 @@ Amazon DocumentDB는 MongoDB 워크로드를 지원하는 빠르고 확장 가�
 
 **참고**: S3 버킷에 로그를 보내려면 `amazon_documentdb`를 _대상 접두사_로 설정합니다.
 
-#### Datadog에 로그 전송
+#### Datadog로 로그 전송
 
-1. 이미 하지 않은 경우 [Datadog 포워더 람다 함수][4]를 설정하세요.
+1. 아직 설정하지 않은 경우 [Datadog Forwarder Lambda 함수][4]를 설정하세요.
 2. Lambda 함수가 설치되면 AWS 콘솔에서 Amazon DocumentDB 로그가 포함된 S3 버킷 또는 CloudWatch 로그 그룹에 트리거를 수동으로 추가합니다.
 
-    - [S3 버킷에서 직접 트리거 추가][5]
-    - [클라우드와치(CloudWatch) 로그 그룹에 수동 트리거 추가][6]
+    - [S3 버킷에서 수동 트리거 추가][5]
+    - [CloudWatch 로그 그룹에 수동으로 트리거 추가][6]
 
 ## 수집한 데이터
 
@@ -86,7 +86,7 @@ Amazon DocumentDB 통합은 서비스 점검을 포함하지 않습니다.
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-documentdb
 [4]: https://docs.datadoghq.com/ko/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ko/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ko/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_documentdb/amazon_documentdb_metadata.csv
 [8]: https://docs.datadoghq.com/ko/help/

@@ -2,7 +2,7 @@
 categories:
 - azure
 - nube
-- la red
+- red
 custom_kind: integración
 dependencies: []
 description: Rastrea las métricas clave de Azure Firewall.
@@ -44,13 +44,13 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 
 La integración Azure Firewall no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración de Azure Firewall no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con [asistencia técnica de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_firewall/azure_firewall_metadata.csv

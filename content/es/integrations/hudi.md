@@ -65,7 +65,7 @@ tile:
   title: Hudi
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+<!--  FUENTE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -117,7 +117,7 @@ No es necesaria ninguna instalación adicional en tu servidor.
 
 ### Recopilación de logs
 
-Disponible para la versión 6.0 o posteriores del Agent
+_Disponible para la versión 6.0 o posteriores del Agent_
 
 1. Hudi utiliza el generador de logs `log4j` por defecto. Para personalizar el formato, edita el archivo `log4j.properties` en tu directorio `conf` de [Flink][13] o [Spark][14]. Un ejemplo de archivo `log4j.properties` es:
 
@@ -140,7 +140,7 @@ Disponible para la versión 6.0 o posteriores del Agent
 
    Clona y edita el [pipeline de la integración][15] si tienes un formato diferente.
 
-3. La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Habilítala en tu archivo `datadog.yaml`:
+3. La recopilación de logs está deshabilitada por defecto en el Datadog Agent; habilítala en tu archivo `datadog.yaml`:
 
    ```yaml
    logs_enabled: true
@@ -162,7 +162,7 @@ Disponible para la versión 6.0 o posteriores del Agent
 
 La integración Hudi no incluye eventos.
 
-### Checks de servicio
+### Checks de servicios
 {{< get-service-checks-from-git "hudi" >}}
 
 

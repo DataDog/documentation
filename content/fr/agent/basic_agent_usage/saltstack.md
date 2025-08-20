@@ -1,6 +1,6 @@
 ---
 dependencies:
-  - https://github.com/DataDog/datadog-formula/blob/main/README.md
+- https://github.com/DataDog/datadog-formula/blob/main/README.md
 title: SaltStack
 ---
 La formule SaltStack pour Datadog sert à installer l'Agent Datadog ainsi que les intégrations reposant sur l'Agent (checks). Pour en savoir plus sur les formules SaltStack, consultez les [instructions d'utilisation et d'installation des formules Sallt][1].
@@ -127,7 +127,7 @@ L'exemple ci-dessous permet d'installer l'Agent v6.14.1 :
 
 Pour ajouter une intégration de l'Agent à votre host, utilisez la variable `checks` avec le nom du check comme clé. Chaque check s'accompagne de deux options :
 
-| Option    | Description                                                                                                                                                             |
+| Option    | Rôle                                                                                                                                                             |
 |-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `config`  | Ajoutez les options de configuration à écrire dans le fichier de configuration du check :<br>Agents v6 et v7 : `<chemin_confd>/<check>.d/conf.yaml`<br>Agent v5 : `<chemin_confd>/<check>.yaml` |
 | `version` | Pour les Agents v6 et v7, la version du check à installer (par défaut, la version fournie avec l'Agent).                                                                |
@@ -204,7 +204,7 @@ datadog:
 
 Les formules Salt sont des states Salt pré-écrits. Les states suivants sont disponibles dans la formule Datadog :
 
-| State               | Description                                                                                             |
+| State               | Rôle                                                                                             |
 |---------------------|---------------------------------------------------------------------------------------------------------|
 | `datadog`           | Installe, configure et lance le service de l'Agent Datadog.                                             |
 | `datadog.install`   | Configure le référentiel adéquat et installe l'Agent Datadog.                                             |
@@ -214,7 +214,7 @@ Les formules Salt sont des states Salt pré-écrits. Les states suivants sont di
 
 **REMARQUE** : lorsque vous utilisez le state `datadog.config` pour configurer différentes instances de check sur plusieurs machines, l'option [pillar_merge_lists][5] doit être définie sur `True` dans la configuration master de Salt, ou dans la configuration minion de Salt dans le cas d'une exécution sans master.
 
-[1]: http://docs.saltstack.com/en/latest/topics/development/conventions/formulas.html
+[1]: https://docs.saltproject.io/en/latest/topics/development/conventions/formulas.html
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.datadoghq.com/fr/integrations/directory/
 [4]: https://github.com/DataDog/datadog-formula/blob/master/pillar.example

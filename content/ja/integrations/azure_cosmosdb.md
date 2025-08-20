@@ -3,7 +3,7 @@ categories:
 - azure
 - クラウド
 - data stores
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure Cosmos DB のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_cosmosdb/
@@ -41,7 +41,7 @@ Datadog Azure インテグレーションを使用して、Cosmos DB からメ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_cosmosdb" >}}
+{{< get-metrics-from-git "azure-cosmosdb" >}}
 
 
 ### イベント

@@ -3,12 +3,12 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/core-web-vitals-lab
   tag: 학습 센터
   text: '인터랙티브 랩: 코어 웹 바이탈'
-- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-  tag: 블로그
-  text: 실제 사용자 모니터링(RUM)
 - link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/
   tag: 블로그
   text: Datadog RUM 및 Synthetic 모니터링으로 코어 웹 바이탈 모니터링
+- link: https://www.datadoghq.com/blog/single-page-apps-inp/
+  tag: 블로그
+  text: Core Web Vitals 및 Datadog으로 단일 페이지 앱 상호 작용 모니터링
 - link: /real_user_monitoring/explorer/
   tag: 설명서
   text: Datadog에서 보기 탐색
