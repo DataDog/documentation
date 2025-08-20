@@ -10,7 +10,7 @@ Being on-call requires reliable and timely notifications to ensure you can respo
 
 1. Install the [Datadog mobile app][1].
 2. [Set up push notifications](#set-up-push-notifications): Enable your device to receive notifications from the Datadog mobile app.
-3. [Circumvent mute and Do Not Disturb mode](#circumvent-mute-and-do-not-disturb-mode): Receive push notifications, voice calls, and SMS while your device is in Do Not Disturb mode.
+3. [Circumvent mute and Do Not Disturb mode](#circumvent-mute-and-do-not-disturb-mode-for-on-call): Receive push notifications, voice calls, and SMS while your device is in Do Not Disturb mode.
 
 ## Set up push notifications
 <div class="alert alert-info">

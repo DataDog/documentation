@@ -1,0 +1,3 @@
+- Splunk TCP 주소:
+    - Observability Pipelines Worker는 이 소켓 주소를 사용해 Splunk Forwarder에서 로그를 수신합니다. 예: `0.0.0.0:9997`
+    - 환경 변수 `DD_OP_SOURCE_SPLUNK_TCP_ADDRESS`에 저장되어 있습니다.
