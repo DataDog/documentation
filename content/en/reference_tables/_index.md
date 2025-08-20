@@ -42,7 +42,7 @@ For example, you can:
 
 - **Enrich logs and security data for faster investigations:** Correlate logs, traces, and security events with up-to-date business context—such as customer names, account owners, threat intelligence, or error code descriptions—to accelerate troubleshooting and analysis.
 - **Segment users and resources for targeted analytics and cost management:** Group users, customers, or cloud resources into meaningful segments (like user tiers, teams, or business units) for deeper product analytics and precise cost attribution using tools like Tag Pipelines.
-- **Enhance data for advanced querying and reporting:** Join external data from Reference Tables in Sheets, DDSQL Editor, or Log Workspaces to perform complex queries, aggregations, and build custom reports without technical expertise.
+- **Enhance data for advanced querying and reporting:** Join external data from Reference Tables in Sheets, DDSQL Editor, or Notebooks to perform complex queries, aggregations, and build custom reports without technical expertise.
 
 ## Validation rules
 
