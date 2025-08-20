@@ -26,7 +26,7 @@ For emails, the report PDF is included as an email attachment and/or as a link, 
 1. Go to [**Cloud Cost > Analyze > Reports**][1] in Datadog.
 2. [Create a report][2] or select an existing report.
 3. Click **Share**, then **Schedule Report**.
-    {{< img src="cloud_cost/cost_reports/share_scheduled_report.png" alt="Click the Share button and Schedule Report on an individual report page." style="width:90%;" >}}
+    {{< img src="cloud_cost/cost_reports/share_scheduled_report-1.png" alt="Click the Share button and Schedule Report on an individual report page." style="width:90%;" >}}
     
 4. In the configuration modal that opens:
    - Set your schedule (when and how often the report should be sent)
