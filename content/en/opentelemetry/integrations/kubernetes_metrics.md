@@ -104,11 +104,12 @@ To edit a metric's metadata:
 
 Repeat this process for each of the metrics listed in the following table:
 
-| Metric Name              | Metric Type | Unit                                     |
-|--------------------------|-------------|------------------------------------------|
-| `k8s.pod.cpu.usage`      | `Gauge`     | `core`                                   |
-| `k8s.pod.network.io`     | `Gauge`     | `byte_in_binary_bytes_family per second` |
-| `k8s.pod.network.errors` | `Gauge`     | `byte_in_binary_bytes_family per second` |
+| Metric Name              | Metric Type | Unit   |
+|--------------------------|-------------|---------
+| `k8s.pod.cpu.usage`      | `Gauge`     | `core` |
+| `k8s.pod.memory.usage`   | `Gauge`     | `byte` |
+| `k8s.pod.network.io`     | `Gauge`     | `byte` |
+| `k8s.pod.network.errors` | `Gauge`     | `byte` |
   
 ## Correlating traces with infrastructure metrics
 
