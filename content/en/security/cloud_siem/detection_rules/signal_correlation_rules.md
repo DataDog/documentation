@@ -70,7 +70,7 @@ Use the **Tag resulting signals** dropdown menu to add tags to your signals. For
 
 **Note**: the tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
 
-See [Cloud SIEM Data Security ][2] for more information on using message template variables, group-by values in the notification title, and webhooks.
+See [Cloud SIEM Data Security][2] for more information on securely using message template variables, group-by values in the notification title, and webhooks.
 
 ## Further reading
 
