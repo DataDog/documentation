@@ -368,7 +368,7 @@ http {
 {{% /tab %}}
 {{% tab "OpenTelemetry" %}}
 
-If you are using the [NGINX OpenTelemetry module][13], use the `$otel_trace_id` and `$otel_span_id` variables. This value is an empty string for requests that are not traced.
+If you are using the [NGINX OpenTelemetry module][100], use the `$otel_trace_id` and `$otel_span_id` variables. This value is an empty string for requests that are not traced.
 
 Update your NGINX configuration file (for example, `/etc/nginx/nginx.conf`):
 
@@ -382,7 +382,7 @@ http {
   access_log /var/log/nginx/access.log main_opentelemetry;
 }
 ```
-
+[100]: https://nginx.org/en/docs/ngx_otel_module.html
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -432,5 +432,4 @@ Once the pipeline is active, new NGINX logs are automatically correlated with th
 [10]: /logs/log_configuration/processors/?tab=ui#trace-remapper
 [11]: /logs/log_configuration/processors/?tab=ui#grok-parser
 [12]: /logs/log_configuration/processors/?tab=ui#span-remapper
-[13]: https://nginx.org/en/docs/ngx_otel_module.html
 
