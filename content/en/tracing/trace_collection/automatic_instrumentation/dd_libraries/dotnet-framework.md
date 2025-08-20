@@ -60,7 +60,7 @@ For a full list of Datadog's .NET Framework library and processor architecture s
 ## Installation and getting started
 
 <div class="alert alert-info">
-  To set up Datadog APM in Serverless environments, such as AWS Lambda or Azure Functions, see [Tracing Serverless Functions][6].</strong>.
+  To set up Datadog APM in Serverless environments, such as AWS Lambda or Azure Functions, see [Tracing Serverless Functions][6].
 </div>
 
 <div class="alert alert-warning">
