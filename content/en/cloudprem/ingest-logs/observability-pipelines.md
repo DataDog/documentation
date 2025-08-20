@@ -30,7 +30,7 @@ On Observability Pipelines home page, choose the Log Volume Control template and
 
 Your pipeline should look like this one:
 
-{{< img src="/cloudprem/images/filter_index_cloudprem.png" alt="Screenshot of the Logs Explorer interface showing how to filter logs by selecting the cloudprem index in the facets panel" style="width:70%;" >}}
+{{< img src="/cloudprem/installation/filter_index_cloudprem.png" alt="Screenshot of the Logs Explorer interface showing how to filter logs by selecting the cloudprem index in the facets panel" style="width:70%;" >}}
 
 You are ready to deploy it.
 
