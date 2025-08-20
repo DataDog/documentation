@@ -39,7 +39,7 @@ Choose the installation type for the Browser SDK.
 {{< tabs >}}
 {{% tab "npm" %}}
 
-Installing through npm (node package manager) is recommended for modern web applications. The Browser SDK is packaged with the rest of your frontend JavaScript code. It has no impact on page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.
+Installing through npm (Node Package Manager) is recommended for modern web applications. The Browser SDK is packaged with the rest of your frontend JavaScript code. It has no impact on page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.
 
 Add [`@datadog/browser-rum`][1] to your `package.json` file, then initialize it with:
 
@@ -67,9 +67,9 @@ The `trackUserInteractions` parameter enables the automatic collection of user c
 {{% /tab %}}
 {{% tab "CDN async" %}}
 
-This method is recommended for web applications with performance targets. The Browser SDK loads from our CDN asynchronously, ensuring the SDK download does not impact page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized.
+Installing through CDN async is recommended for web applications with performance targets. The Browser SDK loads from Datadog's CDN asynchronously, ensuring the SDK download does not impact page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized.
 
-Add the generated code snippet to the head tag of every HTML page you want to monitor in your application. For **{{<region-param key="dd_site_name">}}** site:
+Add the generated code snippet to the head tag of every HTML page you want to monitor in your application. For the **{{<region-param key="dd_site_name">}}** site:
 
 ```javascript
 <script>
@@ -96,9 +96,9 @@ The `trackUserInteractions` parameter enables the automatic collection of user c
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-This method is recommended for collecting all events. The Browser SDK loads from Datadog's CDN synchronously, ensuring the SDK loads first and collects all errors, resources, and user actions. This method may impact page load performance.
+Installing through CDN sync is recommended for collecting all events. The Browser SDK loads from Datadog's CDN synchronously, ensuring the SDK loads first and collects all errors, resources, and user actions. This method may impact page load performance.
 
-Add the generated code snippet to the head tag (in front of any other script tags) of every HTML page you want to monitor in your application. Including the script tag higher and synchronized ensures Datadog RUM can collect all performance data and errors. For **{{<region-param key="dd_site_name">}}** site:
+Add the generated code snippet to the head tag (in front of any other script tags) of every HTML page you want to monitor in your application. Including the script tag higher and synchronized ensures Datadog RUM can collect all performance data and errors. For the **{{<region-param key="dd_site_name">}}** site:
 
 ```javascript
 <script
@@ -181,10 +181,10 @@ These parameters define your application's identity and environment. They're use
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| `env` | String | - | The application's environment (e.g., prod, pre-prod, staging). Follows the [tag syntax requirements][12]. |
+| `env` | String | - | The application's environment (for example: prod, pre-prod, staging). Follows the [tag syntax requirements][12]. |
 | `service` | String | - | The service name for your application. Follows the [tag syntax requirements][12]. |
 | `site` | String | `datadoghq.com` | [The Datadog site parameter of your organization][11]. |
-| `version` | String | - | The application's version (e.g., 1.2.3, 6c44da20). Follows the [tag syntax requirements][12]. |
+| `version` | String | - | The application's version (for example: 1.2.3, 6c44da20). Follows the [tag syntax requirements][12]. |
 
 ##### Privacy and consent
 
@@ -245,11 +245,11 @@ These parameters ensure compatibility when using both the RUM Browser SDK and Lo
 
 Deploy the changes to your application. After your deployment is live, Datadog collects events from your users' browsers.
 
-### Step 5: Upload source maps (optional but recommended)
+### Step 5 - Upload source maps (optional but recommended)
 
 Upload your JavaScript source maps to access unminified stack traces. See [Upload JavaScript source maps][30].
 
-### Step 6: Visualize your data
+### Step 6 - Visualize your data
 
 Now that you've completed the basic setup for Browser Error Tracking, your application is collecting browser errors and you can start monitoring and debugging issues in real-time.
 
