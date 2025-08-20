@@ -42,7 +42,7 @@ We use Helm command used to install OP but you can use other installation method
 helm upgrade --install opw \
 	-f values.yaml \
 	--set datadog.apiKey=XXXXXXX \
-	--set datadog.pipelineId=63ff1d66-7156-11f0-aebd-da7ad0900002 \
+	--set datadog.pipelineId=XXXXXXX \
 	--set env[0].name=DD_OP_SOURCE_HTTP_SERVER_ADDRESS,env[0].value='0.0.0.0:8282' \
 	--set env[1].name=DD_OP_DESTINATION_HTTP_CLIENT_URI,env[1].value='http://<RELEASE_NAME>-indexer.<NAMESPACE_NAME>.svc.cluster.local:7280/api/v2/datadog' \
 	--set service.ports[0].name=dd-op-source-http-server-address-port,service.ports[0].protocol=TCP,service.ports[0].port=8282,service.ports[0].targetPort=8282 \
