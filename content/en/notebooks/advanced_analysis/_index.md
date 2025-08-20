@@ -2,6 +2,7 @@
 title: Analysis Features
 aliases:
 - /logs/workspaces/
+- /logs/workspaces/export/
 further_reading:
 - link: "/notebooks"
   tag: "Documentation"
