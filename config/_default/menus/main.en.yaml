@@ -6071,9 +6071,9 @@ menu:
       identifier: cloud_siem_impossible_travel_rule
       weight: 2105
     - name: Third Party
-      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/threshold_rule
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/anomaly
       parent: cloud_siem_custom_detection_rules
-      identifier: cloud_siem_threshold_rule
+      identifier: cloud_siem_third_party_rule
       weight: 2106
     - name: Signal Correlation
       url: security/cloud_siem/detect_and_monitor/custom_detection_rules/signal_correlation_rules

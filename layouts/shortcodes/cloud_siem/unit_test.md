@@ -1,8 +1,8 @@
-Use unit testing to test your rules against sample logs and make sure the detection rule is working as expected. Specifically, this can be helpful when you are creating a detection rule for an event that hasn't happened yet, so you don't have actual logs for it. For example: You have logs with a `login_attempt` field and want to detect logs with `login_attempt:failed`, but you only have logs with `login_attempt:success`. To test the rule, you can construct a sample log by copying a log with `login_attempt:success` and changing the `login_attempt` field to `failed`.
+Use unit testing to test your rules against sample logs and make sure the detection rule is working as expected. This can be helpful when you are creating a detection rule for an event that hasn't happened yet, so you don't have actual logs for it. For example: You have logs with a `login_attempt` field and want to detect logs with `login_attempt:failed`, but you only have logs with `login_attempt:success`. To test the rule, you can construct a sample log by copying a log with `login_attempt:success` and changing the `login_attempt` field to `failed`.
 
 To use unit testing:
 
-1. After entering the rule query, click **Unit Test** to test your query against a sample log.
+1. After entering the rule query, click **Unit Test**.
 1. To construct a sample log, you can:  
     a. Navigate to [Log Explorer][2].  
     b. Enter the same detection rule query in the search bar.  

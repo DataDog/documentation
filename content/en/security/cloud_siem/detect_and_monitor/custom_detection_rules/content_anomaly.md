@@ -20,7 +20,7 @@ To create a threshold detection rule or job:
 
 ### Define search queries
 
-1. Cloud SIEM can analyze logs, Audit Trail events, and events from Event Management. To search Audit Trail events, click the down arrow next to **Logs** and select **Audit Trail**. Construct a search query for your logs or audit events using the [Log Explorer search syntax][1].
+1. Cloud SIEM can analyze logs, Audit Trail events, and events from Event Management. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Detect anomaly** field, specify the fields whose values you want to analyze.
 1. In the **Group by** field, specify the fields you want to group by.
 1. In the **Learn for** dropdown menu, select the number of days for the learning period. During the learning period, the rule sets a baseline of normal field values and does not generate any signals.

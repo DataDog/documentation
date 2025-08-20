@@ -22,19 +22,12 @@ To create a threshold detection rule or job:
 
 {{< img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" >}}
 
-Cloud SIEM can analyze logs, Audit Trail events, and events from Event Management. To search Audit Trail events, click the down arrow next to **Logs** and select **Audit Trail**. Construct a search query for your logs or audit events using the [Log Explorer search syntax][1].
-
-Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given time frame. The defined Group By generates a signal for each `group by` value. Typically, the `group by` is an entity (like user, or IP). The Group By is also used to [join the queries together](#joining-queries).
-
-Click **Add Query** to add additional queries.
-
-**Note**: The query applies to all ingested logs.
+{{% cloud_siem/define_search_queries %}}
 
 #### Joining queries
 
-Joining together logs that span a timeframe can increase the confidence or severity of the Security Signal. For example, to detect a successful brute force attack, both successful and unsuccessful authentication logs must be correlated for a user.
+{{% cloud_siem/joining_queries %}}
 
-The Detection Rules join the logs together using a `group by` value. The `group by` values are typically entities (for example, IP address or user), but can be any attribute.
 
 {{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
 
@@ -46,19 +39,7 @@ The Detection Rules join the logs together using a `group by` value. The `group 
 
 #### Unit testing
 
-Use unit testing to test your rules against sample logs and make sure the detection rule is working as expected. Specifically, this can be helpful when you are creating a detection rule for an event that hasn't happened yet, so you don't have actual logs for it. For example: You have logs with a `login_attempt` field and want to detect logs with `login_attempt:failed`, but you only have logs with `login_attempt:success`. To test the rule, you can construct a sample log by copying a log with `login_attempt:success` and changing the `login_attempt` field to `failed`.
-
-To use unit testing:
-
-1. After entering the rule query, click **Unit Test** to test your query against a sample log.
-1. To construct a sample log, you can:  
-    a. Navigate to [Log Explorer][2].  
-    b. Enter the same detection rule query in the search bar.  
-    c. Select one of the logs.  
-    d. Click the export button at the top right side of the log side panel, and then select **Copy**.
-1. Navigate back to the **Unit Test** modal, and then paste the log into the text box. Edit the sample as needed for your use case.
-1. Toggle the switch for **Query is expected to match based on the example event** to fit your use case.
-1. Click **Run Query Test**.
+{{% cloud_siem/unit_test %}}
 
 ### Set conditions
 
