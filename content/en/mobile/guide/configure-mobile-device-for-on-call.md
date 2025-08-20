@@ -150,3 +150,4 @@ For help with troubleshooting, [contact Datadog support][2]. You can also send a
 [2]: /help/
 [3]: https://chat.datadoghq.com/
 [4]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[5]: /service_management/on-call/
