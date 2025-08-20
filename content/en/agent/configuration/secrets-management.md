@@ -266,16 +266,7 @@ path "sys/mounts" {
 
 Datadog recommends that you authenticate using the [instance profile method][3003] if you are running your HashiCorp Vault from an AWS-connected machine.
 
-After this has been set up, run the following command to write an authentication-specific vault policy:
-
-```
-vault write auth/aws/role/<Name of AWS IAM Role> \
-  auth_type=iam \
-  bound_iam_principal_arn=arn:aws:iam::<AWS Account ID>:role/<Name of AWS IAM Role> \
-  policies=<name of *.hcl file policy> \
-  region=<AWS Region> \
-  max_ttl=768h
-```
+After this has been set up, write an [authentication-specific vault policy][3004].
 
 #### Configuration example
 
@@ -304,6 +295,7 @@ secret_backend_config:
 [3001]: https://www.hashicorp.com/en/products/vault
 [3002]: https://developer.hashicorp.com/vault/docs/auth/aws#aws-auth-method
 [3003]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
+[3004]: https://developer.hashicorp.com/vault/docs/auth/aws#iam-authentication-inferences
 {{% /collapse-content %}} 
 
 {{% collapse-content title="JSON or YAML File Secret Backends" level="h4" expanded=false id="id-for-anchoring" %}}
