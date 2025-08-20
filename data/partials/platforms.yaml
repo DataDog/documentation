@@ -43,6 +43,10 @@ platforms:
     link: "agent/kubernetes/"
     image: "platform_kubernetes.png"
     category: "Container platforms"
+  - name: Google Cloud Run
+    link: "serverless/google_cloud_run/containers/sidecar/"
+    image: "platform_gcr.png" 
+    category: "Container platforms"
   - name: puppet
     link: "agent/basic_agent_usage/puppet/"
     image: "platform_puppet.png"
@@ -51,6 +55,10 @@ platforms:
     link: "agent/basic_agent_usage/saltstack/"
     image: "platform_saltstack.png"
     category: "configuration_management"
+  - name: foundry
+    link: "https://app.datadoghq.com/fleet/install-agent/latest?platform=cloud_foundry"
+    image: "platform_cloud_foundry.png"
+    category: "Cloud platforms"
   # - name: source
   #   link: "agent/basic_agent_usage/source/"
   #   image: "platform_fromsource.png"
