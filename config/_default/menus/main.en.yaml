@@ -8065,7 +8065,7 @@ menu:
       identifier: data_security_guide
       url: data_security/guide/
       parent: data_security
-      weight: 9
+      weight: 11
     - name: Help
       url: help/
       pre: info-fill
