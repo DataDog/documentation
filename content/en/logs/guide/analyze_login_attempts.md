@@ -28,7 +28,7 @@ To get started, bring in the logs from the service(s) you want to analyze.
 
 To search for failed login attempts, which might indicate unauthorized attempts to access e-PHI, set up your logs query to filter for these events. An example query might include filtering by an event outcome code that signifies failure.
 
-{{< img src="/logs/workspace/use_cases/query_failed_logs.png" alt="Example workspace query to find failed login attempts" style="width:100%;" >}}
+{{< img src="/logs/guide/log_analysis_use_cases/query_failed_logs.png" alt="Example workspace query to find failed login attempts" style="width:100%;" >}}
 
 You can add any additional filters, facets, or attributes to narrow your search based on your requirements and what is available in your logs.
 
@@ -41,7 +41,7 @@ To analyze the data further, you can count the number of failed login attempts b
     ```
     SELECT * FROM failed_logins
     ```
-    {{< img src="/logs/workspace/use_cases/analyze_failed_login_count.png" alt="Analysis cell with query to count the number of failed logins" style="width:100%;" >}}
+    {{< img src="/logs/guide/log_analysis_use_cases/analyze_failed_login_count.png" alt="Analysis cell with query to count the number of failed logins" style="width:100%;" >}}
 
 ### 4. Visualize failed logins over time
 

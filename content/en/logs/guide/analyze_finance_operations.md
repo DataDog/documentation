@@ -42,13 +42,13 @@ For each function, the following metrics are tracked:
 
 Create a notebook and add a data source. In this example, credit cards and bill payments each have three data source cells, each filtering to the logs that are relevant to the analysis. For more information, see [Notebooks Analysis features][1].
 
-{{< img src="/logs/workspace/use_cases/finance/finance_credit_card_data_source.png" alt="Data source configuration for credit card transaction logs showing filters and query parameters" caption="Data source cells for credit card transaction monitoring, showing query filters and parameters to isolate relevant financial log data."style="width:100%;" >}}
+{{< img src="/logs/guide/log_analysis_use_cases/finance/finance_credit_card_data_source.png" alt="Data source configuration for credit card transaction logs showing filters and query parameters" caption="Data source cells for credit card transaction monitoring, showing query filters and parameters to isolate relevant financial log data."style="width:100%;" >}}
 
-{{< img src="/logs/workspace/use_cases/finance/finance_billpay_datasource.png" alt="Data source configuration for bill payment logs with relevant filters and query settings" caption="Data source cells for bill payment monitoring, showing query filters and parameters to isolate relevant financial log data."style="width:100%;" >}}
+{{< img src="/logs/guide/log_analysis_use_cases/finance/finance_billpay_datasource.png" alt="Data source configuration for bill payment logs with relevant filters and query settings" caption="Data source cells for bill payment monitoring, showing query filters and parameters to isolate relevant financial log data."style="width:100%;" >}}
 
 With the data from your credit card and bill payment data sources, you can create an Analysis cell using SQL to calculate and compare key metrics for both processes. This analysis helps you track success rates, identify failure patterns, and monitor performance trends.
 
-{{< img src="/logs/workspace/use_cases/finance/sql_query_analysis_0.png" alt="SQL query Analysis cell showing metrics for credit card and bill payment transactions including success rates and failure percentages" caption="SQL query Analysis cell displaying key metrics for credit card and bill payment transactions, highlighting success rates and failure percentages for financial monitoring"  style="width:100%;" >}}
+{{< img src="/logs/guide/log_analysis_use_cases/finance/sql_query_analysis_0.png" alt="SQL query Analysis cell showing metrics for credit card and bill payment transactions including success rates and failure percentages" caption="SQL query Analysis cell displaying key metrics for credit card and bill payment transactions, highlighting success rates and failure percentages for financial monitoring"  style="width:100%;" >}}
 
 ## SQL query analysis
 
