@@ -29,7 +29,7 @@ Datadog provides mocks for the `'@datadog/mobile-react-native'` package. To use 
 
 ```javascript
 jest.mock('@datadog/mobile-react-native', () => {
-    return require('@datadog/mobile-react-native/jest/mock');
+  return require('@datadog/mobile-react-native/jest')
 });
 ```
 

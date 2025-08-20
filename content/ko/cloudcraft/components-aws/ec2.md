@@ -135,7 +135,7 @@ micro, nano, small, medium, large, xlarge, 2xlarge, 3xlarge, 4xlarge, 6xlarge, 8
 ```
 
 - **type: ri**: 예약된 인스턴스의 요금 옵션은 항상 `ri`입니다.
-- **leaseContractLenght: number**: 인스턴스가 예약된 기간. 허용값은 12 또는 36.
+- **leaseContractLength: number**: 인스턴스가 예약된 기간. 허용값은 12 또는 36.
 - **purchaseOption: string**: 인스턴스의 구매 옵션. 허용된 값은 `No Upfront`, `Partial Upfront`, `All Upfront`입니다.
 - **offeringClass: string**: 인스턴스 제공 유형. 허용값은 `standard` 및 `convertible`
 
