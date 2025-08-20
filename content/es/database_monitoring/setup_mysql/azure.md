@@ -68,7 +68,6 @@ Crea el siguiente esquema:
 ```sql
 CREATE SCHEMA IF NOT EXISTS datadog;
 GRANT EXECUTE ON datadog.* to datadog@'%';
-GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
 Crea el procedimiento `explain_statement` para que el Agent pueda recopilar los planes de explicación:
@@ -102,7 +101,18 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
-## Instalación y configuración del Agent
+Para recopilar las métricas de índice, concede al usuario `datadog` un privilegio adicional:
+
+```sql
+GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
+```
+
+A partir del Agent v7.65, el Datadog Agent puede recopilar información de esquemas de bases de datos MySQL. Consulta la sección [Recopilación de esquemas][11] a continuación para obtener más información sobre cómo conceder al Agent permisos para esta recopilación.
+
+### Guardar tu contraseña de forma segura
+{{% dbm-secret %}}
+
+## Instala y configura el Agent
 
 Para monitorizar hosts de Azure, instala el Datadog Agent en tu infraestructura y configúralo para conectarse a cada endpoint de instancia de forma remota. El Agent no necesita ejecutarse en la base de datos, solo necesita conectarse a ella. Para conocer otros métodos de instalación del Agent no mencionados aquí, consulta las [Instrucciones de instalación del Agent][5].
 
@@ -111,7 +121,7 @@ Para monitorizar hosts de Azure, instala el Datadog Agent en tu infraestructura 
 
 Para configurar este check para un Agent que se ejecuta en un host, por ejemplo, cuando se aprovisiona una pequeña máquina virtual para que el Agent recopile de la base de datos:
 
-Edita el archivo `mysql.d/conf.yaml`, en la carpeta `conf.d/` en la raíz del [directorio de configuración de tu Agent][1] para empezar a recopilar métricas de MySQL. Ve el [ejemplo mysql.d/conf.yaml][2] para todas las opciones disponibles de configuración, incluidas las de métricas personalizadas.
+Edita el archivo `mysql.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del [directorio de configuración del Agent][1], para empezar a recopilar tus métricas de MySQL. Para conocer todas las opciones de configuración disponibles, consulta el [mysql.d/conf.yaml de ejemplo][2].
 
 Añade este bloque de configuración a tu `mysql.d/conf.yaml` para recopilar métricas de MySQL:
 
@@ -123,9 +133,9 @@ instances:
     host: '<AZURE_INSTANCE_ENDPOINT>'
     port: 3306
     username: datadog
-    password: '<YOUR_CHOSEN_PASSWORD>' # del paso CREATE USER (crear usuario) anterior
+    password: 'ENC[datadog_user_database_password]' # from the CREATE USER step earlier, stored as a secret
 
-    # Después de añadir tu proyecto e instancia, configura la integración de Datadog Azure para extraer datos de la nube adicionales como CPU y memoria.
+    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU and Memory.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
@@ -147,7 +157,7 @@ Consulta [la especificación de la integración MySQL][4] para obtener informaci
 
 Para configurar el Agent de la Monitorización de base de datos que se ejecuta en un contenedor de Docker, puedes establecer las [plantillas de integración de Autodiscovery][1] como etiquetas (label) de Docker en tu contenedor del Agent.
 
-**Nota**: El Agent debe tener permiso de lectura en el socket de Docker para que las etiquetas (labels) de Autodiscovery funcionen.
+**Nota**: El Agent debe tener permiso de lectura en el socket Docker para que las etiquetas de Autodiscovery funcionen.
 
 ### Línea de comandos
 
@@ -184,46 +194,42 @@ FROM datadog/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "ENC[datadog_user_database_password]", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
 ```
 
 Consulta [la especificación de la integración MySQL][4] para obtener información adicional sobre la configuración de los campos `deployment_type` y `name`.
 
-Para evitar exponer la contraseña del usuario `datadog` en texto simple, utiliza el [paquete de gestión de secretos][2] del Agent y declara la contraseña utilizando la sintaxis `ENC[]` o consulta la [documentación de variables de plantilla de Autodiscovery][3] para saber cómo pasar la contraseña como una variable de entorno.
-
 
 [1]: /es/agent/docker/integrations/?tab=docker
-[2]: /es/agent/configuration/secrets-management
-[3]: /es/agent/faq/template_variables/
 [4]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L523-L552
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Si tienes un clúster de Kubernetes, utiliza el [Datadog Cluster Agent][1] para la Monitorización de base de datos.
+Si tienes un clúster Kubernetes, utiliza el [Datadog Cluster Agent][1] para la monitorización de bases de datos.
 
 Sigue las instrucciones para [activar los checks de clúster][2] si no están ya habilitados en tu clúster de Kubernetes. Puedes declarar la configuración de MySQL con archivos estáticos integrados en el contenedor del Cluster Agent, o con anotaciones de servicio:
 
 ### Helm
 
-Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu clúster de Kubernetes. Sustituye los valores para que coincidan con tu cuenta y tu entorno.
+Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu clúster Kubernetes. Sustituye los valores para que coincidan con tu cuenta y tu entorno.
 
 1. Sigue las [instrucciones de instalación del Datadog Agent][3] para Helm.
 2. Actualiza tu archivo de configuración YAML (`datadog-values.yaml` en las instrucciones de instalación del Cluster Agent) para incluir lo siguiente:
     ```yaml
     clusterAgent:
       confd:
-        mysql.yaml: -|
+        mysql.yaml: |-
           cluster_check: true
           init_config:
-            instances:
-              - dbm: true
-                host: '<AZURE_INSTANCE_ENDPOINT>'
-                port: 3306
-                username: datadog
-                password: '<UNIQUE_PASSWORD>'
-                azure:
-                  deployment_type: '<DEPLOYMENT_TYPE>'
-                  fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
+          instances:
+            - dbm: true
+              host: '<AZURE_INSTANCE_ENDPOINT>'
+              port: 3306
+              username: datadog
+              password: 'ENC[datadog_user_database_password]'
+              azure:
+                deployment_type: '<DEPLOYMENT_TYPE>'
+                fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 
     clusterChecksRunner:
       enabled: true
@@ -235,35 +241,35 @@ Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu c
     ```
 
 <div class="alert alert-info">
-Para Windows, añade <code>--set targetSystem=Windows</code> al comando <code>helm install</code>.
+For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
 </div>
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /es/getting_started/site
 [3]: /es/containers/kubernetes/installation/?tab=helm#installation
 
-### Configurar con archivos integrados
+### Configuración con archivos integrados
 
-Para configurar un check de clúster con un archivo de configuración integrado, integra el archivo de configuración del contenedor del Cluster Agent en la ruta `/conf.d/postgres.yaml`:
+Para configurar un check de clúster con un archivo de configuración integrado, integra el archivo de configuración del contenedor del Cluster Agent en la ruta `/conf.d/mysql.yaml`:
 
 ```yaml
-cluster_check: true  # Asegúrate de incluir este indicador
+cluster_check: true  # Make sure to include this flag
 init_config:
 instances:
   - dbm: true
     host: '<AZURE_INSTANCE_ENDPOINT>'
     port: 3306
     username: datadog
-    password: '<UNIQUEPASSWORD>'
-    # Después de añadir tu proyecto e instancia, configura la integración de Datadog Azure para extraer los datos de la nube adicionales como CPU, Memoria, etc.
+    password: 'ENC[datadog_user_database_password]'
+    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 ```
 
-### Configurar con anotaciones de servicios de Kubernetes
+### Configuración con anotaciones de servicios de Kubernetes
 
-En lugar de integrar un archivo, puedes declarar la configuración de la instancia como servicio de Kubernetes. Para configurar este check en un Agent que se ejecuta en Kubernetes, crea un servicio en el mismo espacio de nombres que el Datadog Cluster Agent:
+En lugar de montar un archivo, puedes declarar la configuración de la instancia como servicio Kubernetes. Para configurar este check en un Agent que se ejecuta en Kubernetes, crea un servicio en el mismo espacio de nombres que el Datadog Cluster Agent:
 
 
 ```yaml
@@ -284,7 +290,7 @@ metadata:
           "host": "<AZURE_INSTANCE_ENDPOINT>",
           "port": 3306,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>",
+          "password": "ENC[datadog_user_database_password]",
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
             "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"
@@ -313,11 +319,11 @@ Para evitar exponer la contraseña del usuario `datadog` en texto simple, utiliz
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validar
+### Validación
 
 [Ejecuta el subcomando de estado del Agent][6] y busca `mysql` en la sección **Checks**. Si no, visita la página [Bases de datos][7] para empezar.
 
-## Ejemplo de configuraciones del Agent
+## Configuraciones del Agent de ejemplo
 {{% dbm-mysql-agent-config-examples %}}
 
 ## Instalación de la integración Azure MySQL
@@ -342,3 +348,4 @@ Si has instalado y configurado las integraciones y el Agent como se describe, pe
 [8]: /es/integrations/azure_db_for_mysql
 [9]: /es/database_monitoring/setup_mysql/troubleshooting
 [10]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
+[11]: /es/database_monitoring/setup_mysql/azure/?tab=host#collecting-schemas
