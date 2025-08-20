@@ -582,7 +582,7 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `model_name` | The friendly name of the model (for example, `Claude 3 Opus`). |
 | `service_tier` | The Anthropic service plan or tier associated with the usage (for example, `standard`, `pro`, `enterprise`). |
 | `token_type` | The category of tokens consumed.|
-| `context_window` | The context window size for the tokens (e.g., `tier_0-200k`). |
+| `context_window` | The context window size for the tokens (for example, `tier_0-200k`). |
 
 {{% /tab %}}
 
