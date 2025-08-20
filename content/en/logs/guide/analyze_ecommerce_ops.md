@@ -1,37 +1,39 @@
 ---
 title: Analyze E-Commerce Operations Using Payment and Customer Feedback Data
+aliases:
+- /logs/workspaces/use_cases/analyze_ecommerce_ops
 further_reading:
-- link: "/logs/workspaces/"
+- link: "/notebooks/advanced_analysis/"
   tag: "Documentation"
-  text: "Learn more about Log Workspaces"
+  text: "Learn more about Notebooks Analysis features"
 ---
 
 ## Overview
 
-Log Workspaces enables e-commerce businesses to gain valuable insights into their online stores by analyzing transaction data, customer behavior, and system performance. This guide shows how to use Log Workspaces to monitor your e-commerce platform, detect issues, and optimize the shopping experience.
+Notebooks Analysis features enables e-commerce businesses to gain valuable insights into their online stores by analyzing transaction data, customer behavior, and system performance. This guide shows how to use Notebooks Analysis features to monitor your e-commerce platform, detect issues, and optimize the shopping experience.
 
 ## Benefits
 
-Using Log Workspaces for e-commerce monitoring offers several advantages:
+Using Notebooks Analysis features for e-commerce monitoring offers several advantages:
 
 * **Real-time transaction visibility**: Track sales, cart abandonment, and checkout processes as they happen
 * **Customer experience insights**: Identify pain points in the customer journey
 * **Revenue impact analysis**: Quantify the financial impact of technical issues
 * **Performance optimization**: Pinpoint and address bottlenecks affecting conversion rates
 
-This guide demonstrates how to use Log Workspaces with an example focusing on payment failures and customer ratings.
+This guide demonstrates how to use Notebooks Analysis features with an example focusing on payment failures and customer ratings.
 
 ## Understanding the data
 Follow this example to understand how to correlate **payment processing errors** from your `web-store` service with **negative customer ratings and reviews** from the `shopist-customer-feedback` service. It also demonstrates how to quantify the **revenue impact** of bad ratings caused by failed payment experiences.
 
 The example focuses on two critical aspects of e-commerce operations:
 
-* **Payment Processing**: Logs from the payment gateway indicating successful and failed transactions  
+* **Payment Processing**: Logs from the payment gateway indicating successful and failed transactions
 * **Customer Feedback**: Ratings and reviews submitted after purchase attempts
 
 ## Bringing in your data source and building your queries
 
-Create a workspace and add data sources for payment transactions and customer feedback. For instructions on creating a workspace and adding data sources, see [Log Workspaces][1].
+Create a notebook and add data sources for payment transactions and customer feedback. For more information, see [Notebooks Analysis features][1].
 
 ### 1. Customer feedback with bad ratings
 
@@ -92,7 +94,7 @@ The query from the Analysis cell populates a table showing payment errors that r
 
 ## Visualize the data
 
-Log Workspaces provides powerful visualization capabilities to transform your e-commerce data into actionable insights:
+Notebooks Analysis features provides powerful visualization capabilities to transform your e-commerce data into actionable insights:
 
 * **Time series charts**: Track payment errors and bad ratings over time to identify patterns or spikes
 * **Merchant performance comparisons**: Compare success rates across different sellers on your platform
@@ -103,7 +105,7 @@ Log Workspaces provides powerful visualization capabilities to transform your e-
 
 ## Advanced analysis on SQL queries
 
-Reference tables in Log Workspaces allow you to import additional contextual data to enrich your analysis. For e-commerce operations, reference tables can provide critical business context that isn't available in your logs alone.
+Reference tables in Notebooks Analysis features allow you to import additional contextual data to enrich your analysis. For e-commerce operations, reference tables can provide critical business context that isn't available in your logs alone.
 
 In this example, we'll use a reference table containing merchant details to enhance our payment error analysis:
 
@@ -116,7 +118,7 @@ Use the merchant ID as the common key to connect log data with merchant details.
 {{< img src="logs/workspace/use_cases/analyze_ecommerce_ops/combined_salesforce.png" alt="SQL query joining log data with merchant reference table to provide business context for payment errors"  style="width:100%;" >}}
 
 ### 3. Calculated field queries
-Add business context like merchant tier, contract details, or support contacts. The following [Calculated Field][3] query computes the sum of lost revenue from failed transactions, grouped by merchant tier to identify high-impact segments:
+Add business context like merchant tier, contract details, or support contacts. The following [Calculated Field][2] query computes the sum of lost revenue from failed transactions, grouped by merchant tier to identify high-impact segments:
 {{< img src="logs/workspace/use_cases/analyze_ecommerce_ops/sum_lost_revenue.png" alt="SQL query calculating total lost revenue from failed transactions by merchant tier" style="width:100%;" >}}
 
 ### 4. Visualize the results
@@ -127,6 +129,5 @@ Create charts to visualize the lost revenue by merchant tier for clearer busines
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/workspaces/#create-a-workspace-and-add-a-data-source
-[2]: /logs/workspaces/#visualization-cell
-[3]: /logs/workspaces/#calculated-fields-queries
+[1]: /notebooks/advanced_analysis/
+[2]: /notebooks/advanced_analysis/#calculated-fields-queries

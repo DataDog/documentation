@@ -1,31 +1,33 @@
 ---
 title: Analyze Financial Operations Using Payments and Transactions Data
+aliases:
+- /logs/workspaces/use_cases/analyze_finance_operations
 further_reading:
-- link: "/logs/workspaces/"
+- link: "/notebooks/advanced_analysis/"
   tag: "Documentation"
-  text: "Learn more about Log Workspaces"
+  text: "Learn more about Notebooks Analysis features"
 ---
 
 ## Overview
 
-Log Workspaces is a powerful tool for analyzing and monitoring financial transactions and system performance. This feature enables you to use SQL queries and visualizations to gain valuable insights into your operations and make data-driven decisions to improve performance and efficiency.
+Notebooks Analysis features is a powerful tool for analyzing and monitoring financial transactions and system performance. This feature enables you to use SQL queries and visualizations to gain valuable insights into your operations and make data-driven decisions to improve performance and efficiency.
 
 ## Benefits
 
-Using Log Workspaces in the finance industry offers several benefits:
+Using Notebooks Analysis features in the finance industry offers several benefits:
 
 * **Real-time monitoring**: Track financial transactions and system performance in real time
 * **Issue identification**: Quickly identify and diagnose technical and business-related issues
 * **Performance analysis**: Analyze trends and patterns to optimize processes
 * **Reporting and auditing**: Generate reports for compliance and auditing purposes
 
-This guide demonstrates how to use Log Workspaces with an example focusing on credit card details and bill payment processing.
+This guide demonstrates how to use Notebooks Analysis features with an example focusing on credit card details and bill payment processing.
 
 ## Understanding the data
 
 The example in this guide focuses on two key functions within the finance industry:
 
-* **Credit Card Details:** Processing and managing credit card transactions.  
+* **Credit Card Details:** Processing and managing credit card transactions.
 * **Bill Payment:** Processing bill payments.
 
 For each function, the following metrics are tracked:
@@ -38,7 +40,7 @@ For each function, the following metrics are tracked:
 
 ## Bringing in your data source and building your queries
 
-Create a workspace and add a data source. In this example, credit cards and bill payments each have three data source cells, each filtering to the logs that are relevant to the analysis. For instructions on how to create a workspace and bring in your data source, see [Log Workspaces][1].
+Create a notebook and add a data source. In this example, credit cards and bill payments each have three data source cells, each filtering to the logs that are relevant to the analysis. For more information, see [Notebooks Analysis features][1].
 
 {{< img src="/logs/workspace/use_cases/finance/finance_credit_card_data_source.png" alt="Data source configuration for credit card transaction logs showing filters and query parameters" caption="Data source cells for credit card transaction monitoring, showing query filters and parameters to isolate relevant financial log data."style="width:100%;" >}}
 
@@ -148,7 +150,7 @@ The SQL for Bill Payment calculates metrics for bill payment processing by:
 
 ### Query output
 
-The query from the Analysis cell populates a table, allowing for easy comparison of each function's performance. By analyzing this data, you can identify areas for improvement, such as reducing technical failures or resolving business process issues. 
+The query from the Analysis cell populates a table, allowing for easy comparison of each function's performance. By analyzing this data, you can identify areas for improvement, such as reducing technical failures or resolving business process issues.
 
 The following is a sample of what you might see from running the SQL analysis:
 
@@ -160,7 +162,7 @@ The following is a sample of what you might see from running the SQL analysis:
 
 ## Visualizing the data
 
-Finally, paint a clear picture by visualizing your data. Log Workspaces offers several visualization options, including:
+Finally, paint a clear picture by visualizing your data. Notebooks Analysis features offers several visualization options, including:
 
 * Tables
 * Toplists
@@ -171,11 +173,8 @@ Finally, paint a clear picture by visualizing your data. Log Workspaces offers s
 
 Filter your datasets by status, environment, and other variables to focus on specific aspects of your data. Financial institutions gain valuable insights through these visualizations. Use them to identify trends in transaction processing, troubleshoot issues across payment systems, make data-driven decisions to improve system reliability, and enhance customer experience by reducing technical failures.
 
-For more information, see [Log Workspaces - Visualization cell][2]. These visualization capabilities provide a powerful way to transform raw transaction data into actionable intelligence for your financial operations.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/workspaces/#create-a-workspace-and-add-a-data-source
-[2]: /logs/workspaces/#visualization-cell
+[1]: /notebooks/advanced_analysis/

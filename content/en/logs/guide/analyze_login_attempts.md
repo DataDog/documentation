@@ -1,26 +1,28 @@
 ---
 title: Analyze Login Attempts for e-PHI
+aliases:
+- /logs/workspaces/use_cases/analyze_login_attempts
 further_reading:
-- link: "/logs/workspaces/"
+- link: "/notebooks/advanced_analysis/"
   tag: "Documentation"
-  text: "Learn more about Log Workspaces"
+  text: "Learn more about Notebooks Analysis features"
 ---
 
 ## Use case
 
-Log Workspaces allows you to bring in log data to analyze login attempts and audit access to electronic protected health information (e-PHI). To start monitoring and identifying failed login attempts, use Workspaces' flexible querying and visualization options by following these steps.
+Notebook Analysis features allows you to bring in log data to analyze login attempts and audit access to electronic protected health information (e-PHI). To start monitoring and identifying failed login attempts, use Notebook's flexible querying and visualization options by following these steps.
 
 ## Setup
 
 This guide assumes that you are:
 - Submitting logs to Datadog for a similar use case.
-- Able to [create a workspace][1] and add cells. 
+- Able to [create a notebook][1] and add cells.
 
 ### 1. Bring in your data source
 
 To get started, bring in the logs from the service(s) you want to analyze.
-1. [Create a new Workspace][2].
-1. Select **Logs Query** as your data source.
+1. [Create a new notebook][1].
+1. Select **Logs** as your data source.
 
 ### 2. Query for failed logins
 
@@ -34,7 +36,7 @@ You can add any additional filters, facets, or attributes to narrow your search 
 
 To analyze the data further, you can count the number of failed login attempts by user ID and sort the results. This is helpful for identifying users with repeated failed login attempts, which may require further investigation.
 
-1. Add an [Analysis cell][3] to your workspace.
+1. Add an [Analysis cell][3] to your notebook.
 1. Run a SQL query.
     ```
     SELECT * FROM failed_logins
@@ -52,7 +54,7 @@ To get a clearer picture of when failed logins are occurring, you can create a t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/workspaces/#create-a-workspace-and-add-a-data-source
-[2]: /logs/workspaces/
-[3]: /logs/workspaces/#analysis-cell
-[4]: /logs/workspaces/#visualization-cell
+[1]: /notebooks/#creating-a-notebook
+[2]: /notebooks/advanced_analysis/
+[3]: /notebooks/advanced_analysis/#analysis-cell
+[4]: /notebooks/advanced_analysis/#visualizing-transformed-data
