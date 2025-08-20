@@ -423,7 +423,7 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: SQL Server Database
       recommendation_type: Downsize SQL Server Database DTU
-      recommendation_description: SQL Server Database with low DTU usage that can be downsized.
+      recommendation_description: SQL Server database with low DTU usage that can be downsized
       recommendation_prerequisites: ""
     - category: Purchase
       cloud_provider: Azure
