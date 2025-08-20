@@ -1,0 +1,123 @@
+---
+title: Third Party
+disable_toc: false
+---
+
+## Overview
+
+Third Party allows you to forward alerts from an outside vendor or application. You can update the rule with suppression queries and who to notify when a signal is generated.
+
+## Create a rule
+
+To create a threshold detection rule or job:
+
+1. Navigate to the [Detection Rules][1] page and click **+ New Rule**.
+1. Select whether you want to create a **Real-Time Rule**, **Scheduled Rule** or a **Historical Job**.
+1. Select the **Impossible Travel** option.
+
+{{< tabs >}}
+{{% tab "Real-time rule" %}}
+
+### Define search queries
+
+{{< img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" >}}
+
+{{% cloud_siem/define_search_queries %}}
+
+#### Joining queries
+
+{{% cloud_siem/joining_queries %}}
+
+{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
+
+#### Filter logs based on Reference Tables
+
+{{% filter_by_reference_tables %}}
+
+{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
+
+#### Unit testing
+
+{{% cloud_siem/unit_test %}}
+
+### Set conditions
+
+{{< img src="security/security_monitoring/detection_rules/define_rule_case2.png" alt="The set rule case section showing the default settings" style="width:80%;" >}}
+
+{{% cloud_siem/set_conditions %}}
+
+#### Example
+
+If you have a `failed_login` and a `successful_login` query:
+
+{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
+
+and a rule case that triggers when `failed_login > 5 && successful_login>0`:
+
+{{< img src="security/security_monitoring/detection_rules/set_rule_case4.png" alt="The set rule cases section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:90%;" >}}
+
+The rule case joins these queries together based on their `group by` value. The `group by` attribute is typically the same attribute because the value must be the same for the case to be met. If a `group by` value doesn't exist, the case will never be met. A Security Signal is generated for each unique `group by` value when a case is matched.
+
+In this example, when there are more than five failed logins and at least one successful login for the same `User Name`, the first case is matched, and a Security Signal is generated.
+
+### Severity and notification
+
+{{% security-rule-severity-notification %}}
+
+### Time windows
+
+{{% security-rule-time-windows %}}
+
+Click **Add Case** to add additional cases.
+
+**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
+
+### Decreasing non-production severity
+
+{{% cloud_siem/decreasing_non_prod_severity %}}
+
+### Describe your playbook
+
+{{% security-rule-say-whats-happening %}}
+
+### Create a suppression
+
+{{% cloud_siem/create_suppression %}}
+
+[1]: /logs/search_syntax/
+[2]:  https://app.datadoghq.com/logs/
+
+{{% /tab %}}
+{{% tab "Scheduled rule" %}}
+
+### Define search queries
+
+{{% cloud_siem/define_search_queries %}}
+
+### Add custom schedule
+
+TKTK
+
+### Describe your playbook
+
+{{% security-rule-say-whats-happening %}}
+
+{{% /tab %}}
+{{% tab "Historical job" %}}
+
+### Define search queries
+
+{{% cloud_siem/define_search_queries %}}
+
+### Notify when job is complete
+
+TKTK
+
+### Describe your playbook
+
+{{% security-rule-say-whats-happening %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+[1]: https://app.datadoghq.com/security/configuration/siem/rules

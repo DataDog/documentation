@@ -6045,11 +6045,41 @@ menu:
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_custom_detection_rules
       weight: 201
+    - name: Threshold
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/threshold
+      parent: cloud_siem_custom_detection_rules
+      identifier: cloud_siem_threshold_rule
+      weight: 2011
+    - name: New Value
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/new_value
+      parent: cloud_siem_custom_detection_rules
+      identifier: cloud_siem_new_value_rule
+      weight: 2012
+    - name: Anomaly
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/anomaly
+      parent: cloud_siem_custom_detection_rules
+      identifier: cloud_siem_anomaly_rule
+      weight: 2103
+    - name: Content Anomaly
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/content_anomaly
+      parent: cloud_siem_custom_detection_rules
+      identifier: cloud_siem_content_anomaly_rule
+      weight: 2104
+    - name: Impossible Travel
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/impossible_travel
+      parent: cloud_siem_custom_detection_rules
+      identifier: cloud_siem_impossible_travel_rule
+      weight: 2105
+    - name: Third Party
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/threshold_rule
+      parent: cloud_siem_custom_detection_rules
+      identifier: cloud_siem_threshold_rule
+      weight: 2106
     - name: Signal Correlation
       url: security/cloud_siem/detect_and_monitor/custom_detection_rules/signal_correlation_rules
       parent: cloud_siem_custom_detection_rules
       identifier: cloud_siem_signal_correlation_rules
-      weight: 2101
+      weight: 2107
     - name: OOTB Rules
       url: /security/default_rules/#cat-cloud-siem-log-detection
       parent: cloud_siem_detect_and_monitor
