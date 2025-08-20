@@ -464,7 +464,7 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: VM Instance
       recommendation_type: Downsize Azure VM Instance
-      recommendation_description: VM instance that can be downsized to a smaller instance type
+      recommendation_description: VM instance that can be downsized to a smaller instance type.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Terminate
       cloud_provider: Azure
