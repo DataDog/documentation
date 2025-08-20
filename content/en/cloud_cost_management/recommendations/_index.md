@@ -105,7 +105,7 @@ multifiltersearch:
       cloud_provider: AWS
       resource_type: EBS Snapshot
       recommendation_type: Delete Old EBS Snapshots
-      recommendation_description: EBS Snapshots that are at least 90 days old and can be deleted
+      recommendation_description: EBS Snapshots that are at least 90 days old and can be deleted.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
@@ -351,7 +351,7 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: AKS Cluster
       recommendation_type: Terminate AKS Cluster
-      recommendation_description: An AKS cluster with less than 5% CPU usage
+      recommendation_description: An AKS cluster with less than 5% CPU usage.
       recommendation_prerequisites: ""
     - category: Purchase
       cloud_provider: Azure
@@ -363,25 +363,25 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: Container App
       recommendation_type: Downsize Container App
-      recommendation_description: A Container App has higher than necessary minimum replicas
+      recommendation_description: A Container App has higher than necessary minimum replicas.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: Load Balancer
       recommendation_type: Delete Load Balancer
-      recommendation_description: Load Balancer with 0 bytes transferred
+      recommendation_description: Load Balancer with 0 bytes transferred.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: Managed Disk
       recommendation_type: Delete Unattached Managed Disk
-      recommendation_description: Managed disk is unattached and can be deleted
+      recommendation_description: Managed disk is unattached and can be deleted.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: Managed Disk
       recommendation_type: Delete Unused Managed Disk
-      recommendation_description: Managed disk with no read/write operations, which can be deleted
+      recommendation_description: Managed disk with no read/write operations, which can be deleted.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: Azure
@@ -399,61 +399,61 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: MySQL Database
       recommendation_type: Purchase Reservation for MySQL
-      recommendation_description: Database for MySQL has no reservation coverage and is more than 45 days old
+      recommendation_description: Database for MySQL has no reservation coverage and is more than 45 days old.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: MySQL Database
       recommendation_type: Terminate Database for MySQL
-      recommendation_description: Database server with no connections, which can be terminated
+      recommendation_description: Database server with no connections, which can be terminated.
       recommendation_prerequisites: ""
     - category: Purchase
       cloud_provider: Azure
       resource_type: Database for PostgreSQL
       recommendation_type: Purchase Reservation for PostgreSQL
-      recommendation_description: Database for PostgreSQL has no reservation coverage and is more than 45 days old
+      recommendation_description: Database for PostgreSQL has no reservation coverage and is more than 45 days old.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: SQL Server
       recommendation_type: Terminate SQL Server
-      recommendation_description: SQL Server with no connections, which can be terminated
+      recommendation_description: SQL Server with no connections, which can be terminated.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: Azure
       resource_type: SQL Server Database
       recommendation_type: Downsize SQL Server Database DTU
-      recommendation_description: SQL Server database with low DTU usage that can be downsized
+      recommendation_description: SQL Server database with low DTU usage that can be downsized.
       recommendation_prerequisites: ""
     - category: Purchase
       cloud_provider: Azure
       resource_type: SQL Server Database
       recommendation_type: Purchase Reservation for SQL Server Database
-      recommendation_description: SQL server database has no reservation coverage and is more than 45 days old
+      recommendation_description: SQL server database has no reservation coverage and is more than 45 days old.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: SQL Server Database
       recommendation_type: Terminate SQL Server Database
-      recommendation_description: SQL Server Database with no successful connections and very minimal CPU, which can be terminated
+      recommendation_description: SQL Server Database with no successful connections and very minimal CPU, which can be terminated.
       recommendation_prerequisites: ""
     - category: Purchase
       cloud_provider: Azure
       resource_type: SQL Server Managed Instance
       recommendation_type: Purchase Reservation for SQL Server Managed Instance
-      recommendation_description: Purchase reservation for SQL Server Managed Instance with no reservation coverage and is more than 45 days old
+      recommendation_description: Purchase reservation for SQL Server Managed Instance with no reservation coverage and is more than 45 days old.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: VM Instance
       recommendation_type: Terminate Azure VM Instance
-      recommendation_description: VM instance with less than 5% user CPU and over 90% usable memory
+      recommendation_description: VM instance with less than 5% user CPU and over 90% usable memory.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Downsize
       cloud_provider: Azure
       resource_type: VM Instance
       recommendation_type: Downsize Azure VM Instance
-      recommendation_description: VM instance that can be downsized to a smaller instance type
+      recommendation_description: VM instance that can be downsized to a smaller instance type.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Purchase
       cloud_provider: GCP
@@ -489,13 +489,13 @@ multifiltersearch:
       cloud_provider: GCP
       resource_type: Compute Instance
       recommendation_type: Downsize Compute Instance
-      recommendation_description: Compute instance with low CPU and memory usage that can be downsized to a smaller instance type
+      recommendation_description: Compute instance with low CPU and memory usage that can be downsized to a smaller instance type.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Terminate
       cloud_provider: GCP
       resource_type: Compute Instance
       recommendation_type: Terminate Compute Instance
-      recommendation_description: Compute instance with low CPU usage, high available memory, and minimal network activity
+      recommendation_description: Compute instance with low CPU usage, high available memory, and minimal network activity.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Downsize
       cloud_provider: GCP
