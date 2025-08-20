@@ -16,11 +16,3 @@ After installing and configuring CloudPrem, you need to set up log ingestion to 
    {{< nextlink href="/cloudprem/ingest-logs/observability-pipelines/" >}}Observability Pipelines{{< /nextlink >}}
    {{< nextlink href="/cloudprem/ingest-logs/rest-api/" >}}REST API Integration{{< /nextlink >}}
 {{< /whatsnext >}}
-
-## Next steps
-
-{{< whatsnext desc="">}}
-   {{< nextlink href="/cloudprem/configure/datadog-account/" >}}Configure Datadog account{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/manage/" >}}Set up monitoring{{< /nextlink >}}
-{{< /whatsnext >}}
-

@@ -15,7 +15,7 @@ further_reading:
 
 This guide covers how to configure your AWS account prerequisites for CloudPrem deployment. This configuration is required before installing CloudPrem on AWS EKS.
 
-For the complete EKS installation process, see the [AWS EKS Installation Guide](aws-eks/).
+For the complete EKS installation process, see the [AWS EKS Installation Guide](../install/aws-eks/).
 
 ## AWS prerequisites
 
@@ -94,8 +94,8 @@ Here is an example of a bucket policy:
 
 After completing the AWS configuration:
 
-1. **Install CloudPrem on EKS** - Follow the [AWS EKS Installation Guide](aws-eks/) to deploy CloudPrem
-2. **Configure ingress** - Set up [ingress configuration](../configure/ingress/) for external access
+1. **Install CloudPrem on EKS** - Follow the [AWS EKS Installation Guide](../install/aws-eks/) to deploy CloudPrem
+2. **Configure ingress** - Set up [ingress configuration](./ingress/) for external access
 3. **Set up log ingestion** - Configure [log ingestion](../ingest-logs/) to start sending logs to CloudPrem
 
 ## Further reading

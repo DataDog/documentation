@@ -3,7 +3,7 @@ title: Install CloudPrem on AWS EKS
 description: Learn how to install and configure CloudPrem on AWS EKS
 private: true
 further_reading:
-- link: "/cloudprem/install/aws-config/"
+- link: "/cloudprem/configure/aws-config/"
   tag: "Documentation"
   text: "AWS Configuration"
 - link: "/cloudprem/configure/ingress/"

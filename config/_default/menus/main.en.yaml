@@ -5969,10 +5969,10 @@ menu:
       identifier: cloudprem_kubernetes_nginx
       weight: 204
     - name: AWS Configuration
-      url: /cloudprem/install/aws-config
-      parent: cloudprem_installation
+      url: /cloudprem/configure/aws-config
+      parent: cloudprem_advanced_configuration
       identifier: cloudprem_aws_configuration
-      weight: 205
+      weight: 402
     - name: Log Ingestion
       url: /cloudprem/ingest-logs/
       parent: cloudprem
@@ -6007,17 +6007,17 @@ menu:
       url: /cloudprem/configure/cluster-sizing
       parent: cloudprem_advanced_configuration
       identifier: cloudprem_cluster_sizing
-      weight: 402
+      weight: 403
     - name: Ingress
       url: /cloudprem/configure/ingress
       parent: cloudprem_advanced_configuration
       identifier: cloudprem_ingress
-      weight: 403
+      weight: 404
     - name: Processing
       url: /cloudprem/configure/processing
       parent: cloudprem_advanced_configuration
       identifier: cloudprem_processing
-      weight: 404
+      weight: 405
     - name: Management
       url: /cloudprem/manage/
       parent: cloudprem

@@ -42,6 +42,11 @@ This page outlines the infrastructure and software requirements for deploying Cl
 - Ceph Object Storage
 - Any S3-compatible storage
 
-## Further reading
+## Next step
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< whatsnext desc="Install CloudPrem">}}
+  {{< nextlink href="./aws-eks/" >}}Install on AWS EKS{{< /nextlink >}}
+  {{< nextlink href="./azure-aks/" >}}Install on Azure AKS{{< /nextlink >}}
+  {{< nextlink href="./kubernetes-nginx/" >}}Install on a K8s cluster with NGINX Ingress Controller{{< /nextlink >}}
+{{< /whatsnext >}}
+
