@@ -38,7 +38,7 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 
 **Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you don't grant permission to list S3 buckets, the diagram excludes those buckets. If permissions block certain resources, an alert displays in the UI.
 
-<div class="alert alert-info"><strong>Note</strong>: Enabling resource collection for your AWS accounts may impact your AWS CloudWatch costs if you are using Usage Metrics. To avoid the additional charge, you can disable collecting "Usage" metrics in the Metric Collection tab of the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog AWS Integration.</a><br/>
+<div class="alert alert-info"><strong>Note</strong>: Enabling resource collection can impact your AWS CloudWatch costs. To avoid these charges, disable <strong>Usage</strong> metrics in the <strong>Metric Collection</strong> tab of the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog AWS Integration</a>.<br/>
 
 {{< img src="/infrastructure/resource_catalog/aws_usage_toggle.png" alt="AWS Usage toggle in account settings" style="width:100%;" >}}</div>
 
