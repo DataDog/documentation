@@ -14,6 +14,14 @@ Scheduled Cloud Cost (CCM) Reports let you automatically receive recurring cost 
 
 {{< img src="cloud_cost/cost_reports/cloud-cost-scheduled-report-1.png" alt="Schedule Cost Report." style="width:80%;" >}}
 
+Below is an example of a report sent to a Slack channel.
+
+{{< img src="cloud_cost/cost_reports/cost-report-slack-1.png" alt="A report that has been sent to a Slack channel based on a schedule" style="width:70%;" >}}
+
+For emails, the report PDF is included as an email attachment and/or as a link, depending on its size.
+
+{{< img src="cloud_cost/cost_reports/cost-report-email.png" alt="A report that has been sent as an email based on a schedule" style="width:70%;" >}}
+
 ## Schedule a cost report
 1. Go to [**Cloud Cost > Analyze > Reports**][1] in Datadog.
 2. [Create a report][2] or select an existing report.
@@ -25,9 +33,10 @@ Scheduled Cloud Cost (CCM) Reports let you automatically receive recurring cost 
    - Enter a title for your schedule
 5. Add recipients:
    - **Email recipients**: Enter email addresses. Your Datadog account is automatically added, but you can remove it by hovering over it and clicking the trash icon.
-     {{< img src="dashboards/scheduled_reports/add_email_recipients.png" alt="The configuration modal for editing scheduled report variables." style="width:80%;" >}}  
-    - **Slack recipients**: Select your Slack workspace and channel from the dropdowns. If no workspaces appear, make sure you have the Datadog [Slack Integration][2] installed. All public channels within the Slack workspace are listed automatically. For private channels, invite the Datadog Slack bot first. You can test the connection by clicking **Send Test Message**.
-      {{< img src="dashboards/scheduled_reports/add_slack_recipients.png" alt="The configuration modal for editing scheduled report Slack recipients." style="width:80%;" >}}
+
+     **Note:** Enterprise and Pro accounts can send reports to recipients outside of their organizations. You can control which email domains are able to receive reports by configuring your [domain allowlist][4].
+
+    - **Slack recipients**: Select your Slack workspace and channel from the dropdowns. If no workspaces appear, make sure you have the Datadog [Slack Integration][2] installed. All public channels within the Slack workspace are listed automatically. For private channels, invite the Datadog Slack bot first. You can test the connection by clicking the **Send Test Message** button.
 
 ## Managing reports
 A single report can have multiple schedules with different settings, allowing you to inform different stakeholder groups interested in the same cost data. To view existing schedules, click **Share** and select **Manage Schedules**.
@@ -55,7 +64,7 @@ To see all report schedules across your organization:
 | Create/modify your schedules | Cloud Cost Report Schedules Write |
 | Modify others' schedules | Cloud Cost Report Schedules Manage |
 
-After a report is created, you can subscribe, unsubscribe, edit schedules, and delete reports (assuming you have the appropriate permissions). If you do not have **Cloud Cost Report Schedules Write** or **Cloud Cost Report Schedules Manage** permissions, you can still unsubscribe directly from the email.
+After a report is created, you can subscribe, unsubscribe, edit schedules, and delete reports (assuming you have the appropriate permissions). **Note:** Only Datadog users can unsubscribe directly from the email. External recipients (including group email addresses) must contact the report schedule owner to unsubscribe, as Datadog cannot distinguish between group emails and individual external emails.
 
 ## Further reading
 
@@ -64,3 +73,4 @@ After a report is created, you can subscribe, unsubscribe, edit schedules, and d
 [1]: https://app.datadoghq.com/cost/analyze/reports
 [2]: /cloud_cost_management/reports
 [3]: /integrations/slack/?tab=datadogforslack
+[4]: /account_management/org_settings/domain_allowlist/
