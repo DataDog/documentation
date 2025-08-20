@@ -3,6 +3,9 @@ title: Infrastructure as Code (IaC) Security
 aliases:
   - /security/cloud_security_management/iac_scanning/
 further_reading:
+  - link: "https://www.datadoghq.com/blog/datadog-iac-security/"
+    tag: "Blog"
+    text: "Prevent cloud misconfigurations from reaching production with Datadog IaC Security"
   - link: "/security/code_security/iac_security/setup"
     tag: "Documentation"
     text: "Set up IaC Security"

@@ -96,25 +96,25 @@ La mejor manera de cargar mapas de fuente es añadir un paso adicional en tu pip
 
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
-     --service=my-service \
-     --release-version=v35.2395005 \
-     --minified-path-prefix=https://hostname.com/static/js
+     --service my-service \
+     --release-version v35.2395005 \
+     --minified-path-prefix https://hostname.com/static/js
    ```
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 
-{{< site-region region="eu,us3,us5,gov,ap1" >}}
+{{< site-region region="eu,us3,us5,gov,ap1,ap2" >}}
 1. Añade `@datadog/datadog-ci` a tu archivo `package.json` (asegúrate de estar utilizando la última versión).
 2. [Crea una clave de API dedicada de Datadog][1] y expórtala como una variable de entorno denominada `DATADOG_API_KEY`.
 3. Configura la CLI para cargar archivos al sitio {{<region-param key="dd_site_name">}} exportando dos variables de entorno: `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} y `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}.
 4. Ejecuta el siguiente comando una vez por servicio en tu aplicación:
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
-     --service=my-service \
-     --release-version=v35.2395005 \
-     --minified-path-prefix=https://hostname.com/static/js
+     --service my-service \
+     --release-version v35.2395005 \
+     --minified-path-prefix https://hostname.com/static/js
    ```
 
 

@@ -20,7 +20,7 @@ If you have the following setup for the sample processor:
 
 Then, 40% of logs for each unique combination of `status` and `service` from `env:staging` is retained. For example:
 
-- 40% of logs with `status:info` and `service:networks` is retained.
-- 40% of logs with `status:info` and `service:core-web` is retained.
-- 40% of logs with `status:error` and `service:networks` is retained.
-- 40% of logs with `status:error` and `service:core-web` is retained.
+- 40% of logs with `status:info` and `service:networks` are retained.
+- 40% of logs with `status:info` and `service:core-web` are retained.
+- 40% of logs with `status:error` and `service:networks` are retained.
+- 40% of logs with `status:error` and `service:core-web` are retained.
