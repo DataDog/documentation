@@ -38,7 +38,9 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 
 **Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you don't grant permission to list S3 buckets, the diagram excludes those buckets. If permissions block certain resources, an alert displays in the UI.
 
-## Getting started
+<div class="alert alert-info"><strong>Note:</strong> Enabling resource collection for your AWS accounts may result in a small charge if you are using Usage Metrics. If you are not using Usage Metrics, you can disable this feature by turning off the Usage toggle in your AWS account settings.<br/>
+
+{{< img src="/infrastructure/resource_catalog/aws_usage_toggle.png" alt="AWS Usage toggle in account settings" style="width:100%;" >}}</div>
 
 To get started using Cloudcraft, use the following steps:
 1. Navigate to [**Infrastructure > Resources > Cloudcraft**][7]. 

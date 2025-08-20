@@ -52,7 +52,9 @@ By default, when you navigate to the Resource Catalog, you are able to see Datad
 
 {{< img src="/infrastructure/resource_catalog/resource_catalog_settings.png" alt="The Resource Catalog configuration page for extending resource collection" width="100%">}}
 
-**Note**: Extending resource collection does _not_ incur additional costs. The Resource Catalog is a free product for Infrastructure Monitoring customers.
+<div class="alert alert-info"><strong>Note:</strong> Enabling resource collection for your AWS accounts may result in a small charge if you are using Usage Metrics. If you are not using Usage Metrics, you can disable this feature by turning off the Usage toggle in your AWS account settings.<br/>
+
+{{< img src="/infrastructure/resource_catalog/aws_usage_toggle.png" alt="AWS Usage toggle in account settings" style="width:100%;" >}}</div>
 
 ## Browse the Resource Catalog
 
