@@ -395,11 +395,12 @@ The context object must contain the `x-datadog-trace-id` and `x-datadog-parent-i
 }
 {{< /highlight >}}
 
-**Step Functions to Downstream services**: Add Step Function execution context to your task definitions using the patterns shown above. Additional configuration of the downstream service may be required.
+**Step Functions to Downstream services**: Add Step Function execution context to your task definitions using the patterns described above in the [propagating traces to Lambda via Managed Services][4] section. Additional configuration of the downstream service may be required.
 
-For assistance with custom integrations, [contact Datadog Support][4].
+For assistance with custom integrations, [contact Datadog Support][5].
 
 [1]: /serverless/step_functions/installation
 [2]: /serverless/aws_lambda/installation
 [3]: /tracing/trace_collection/trace_context_propagation/?tab=java#datadog-format
-[4]: /help
+[4]: /serverless/step_functions/merge-step-functions-lambda?tab=serverlessframework#through-managed-services
+[5]: /help
