@@ -176,7 +176,7 @@
                 },
                 {
                     "id": "aws",
-                    "synonyms": ["aws", "amazon web service", "aws integration"]
+                    "synonyms": ["aws", "amazon web service"]
                 },
                 {
                     "id": "rum",
