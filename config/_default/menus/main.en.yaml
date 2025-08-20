@@ -5940,39 +5940,39 @@ menu:
       weight: 30000
     - name: Architecture
       url: /cloudprem/architecture
-      parent: cloudprem_getting_started
+      parent: log_management_heading
       identifier: cloudprem_architecture
-      weight: 101
-    - name: Prerequisites
-      url: /cloudprem/install/prerequisites
-      parent: cloudprem_getting_started
-      identifier: cloudprem_prerequisites
-      weight: 102
+      weight: 1
     - name: Installation
       url: /cloudprem/install
       parent: cloudprem
       identifier: cloudprem_installation
       weight: 2
+    - name: Prerequisites
+      url: /cloudprem/install/prerequisites
+      parent: cloudprem_installation
+      identifier: cloudprem_prerequisites
+      weight: 201
     - name: AWS EKS
       url: /cloudprem/install/aws-eks
       parent: cloudprem_installation
       identifier: cloudprem_aws_eks
-      weight: 201
+      weight: 202
     - name: Azure AKS
       url: /cloudprem/install/azure-aks
       parent: cloudprem_installation
       identifier: cloudprem_azure_aks
-      weight: 202
+      weight: 203
     - name: Kubernetes with NGINX
       url: /cloudprem/install/kubernetes-nginx
       parent: cloudprem_installation
       identifier: cloudprem_kubernetes_nginx
-      weight: 203
+      weight: 204
     - name: AWS Configuration
       url: /cloudprem/install/aws-config
       parent: cloudprem_installation
       identifier: cloudprem_aws_configuration
-      weight: 204
+      weight: 205
     - name: Log Ingestion
       url: /cloudprem/ingest-logs/
       parent: cloudprem
