@@ -84,7 +84,7 @@ From an individual case:
 - [Declare an incident][4]: Escalate a case to an incident and kick off your incident response process.
 - Manually create a Jira issue: Use `Shift + J` to create a Jira issue. For more information on how to configure automatic Jira issue creation and bidirectional synchronization, see the [Settings][5] documentation.
 - Manually create a ServiceNow incident: Use `Shift + N` to create a ServiceNow incident.
-- [Meet on CoScreen][6]: Share screens for collaborative debugging
+- [Meet on CoScreen][6]: Share screens for collaborative debugging.
 - Close out the case: Let the team know that no further action is needed. Update the status of the case to closed.
 
 ## Case Analytics
@@ -98,7 +98,7 @@ The following widgets support Case Analytics: timeseries, top list, query value,
 ## Export
 
 You can export cases directly from a case details page:
-1. Click the kebab menu (three dots) at the top right of a case details page.
+1. From an individual case, click the **More Options** icon at the top right of a case details page.
 1. Select **Export to PDF**.
 1. In the print dialog that appears, choose **Save as PDF** as your destination.
 1. Click **Save** to complete the export.

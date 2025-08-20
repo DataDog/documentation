@@ -75,8 +75,8 @@ To manually trigger a page:
 To automatically trigger a page, configure automated paging rules in your project settings:
 1. Go to [**Project Settings**][1] and click on a project to expand its settings.
 1. In the expanded menu, click **Integrations** > **Datadog On-Call**.
-1. Toggle on **Automatically page cases to On-Call**. This opens the "Paging Rule" modal, where you can define your first rule.
-1. In the modal, enter a query to specify which cases should trigger a page. If a case matches the specified query at any point in its lifecycle, the designated team is automatically paged.
+1. Toggle on **Automatically page cases to On-Call**. This opens the Paging Rule modal, where you can define your first rule.
+1. In the modal, enter a query. If a case matches the specified query at any point in its lifecycle, Datadog automatically pages the designated team.
 1. Choose which team to page:
    - **Specific Team**: Select a particular team to always be paged when the rule is triggered.
    - **Dynamic Team Selection**: Automatically page the team associated with the case through the `Team` attribute.
