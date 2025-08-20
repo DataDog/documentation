@@ -51,8 +51,6 @@ Policies are displayed with the following statuses:
 - **Partially Loaded:** some of the policy's rules fail.
 - **Fully Rejected:** the entire policy is failing.
 
-Click a policy to view the rules in error. Edit the rules as needed.
-
 ## Improving workload security using Coverage
 
 Here are some ways to use Coverage to improve your workload security.
@@ -62,8 +60,8 @@ Here are some ways to use Coverage to improve your workload security.
 1. In **Incomplete infrastructure coverage**, click **Warning**, and then select the policies in **Security coverage needs attention**. In the coverage map, assets with policy deployment problems are displayed as orange hexagons.
 3. Review the list of deployed policies. Policies are highlighted with statuses such as **Partially Loaded**, **Fully Rejected**, etc.
 4. In the policy details, do one of the following:
-   - Edit a policy.
-   - View a policy's rule errors, and then edit them as needed.
+   - [Edit a policy][4].
+   - View a policy's rule errors, and then [edit them][4] as needed.
 5. Redeploy and confirm the fix in the coverage map.
 
 ### Identify assets missing Workload Protection
@@ -77,7 +75,7 @@ Here are some ways to use Coverage to improve your workload security.
 
 To find gaps in protection, do the following:
 
-1. In **Improve infrastructure coverage**, click **INFO** to review the `outdated_agent` flag. The `outdated_agent` flag means the Agent is running an outdated version and might not support the latest Workload Protection features.
+1. In **Improve infrastructure coverage**, click **INFO** to review the `outdated_agent` flag. The `outdated_agent` flag means an outdated Agent version is running and might not support the latest Workload Protection features.
 2. In **Improve infrastructure coverage**, click **NO AGENT**. **NO AGENT** shows how many hosts are not running the Datadog Agent, and therefore can't be evaluated by Workload Protection.
    1. Click **Inspect Hosts Without Agent**. The Resource Catalog appears, allowing you to address hosts missing agents.
 3. Filter by **Agent Version** to detect outdated agents lacking recent security updates.
@@ -106,7 +104,7 @@ You can use Coverage to test and iterate on custom security rules:
 
 ## Workload coverage triage and remediation cycle
 
-As an example of how to use Coverage to triage and remediate coverage issues, here is a sequence that starts by establishing a baseline, closing blind spots, and securing the most critical assets. It then verifies enforcement mechanisms, restores agent health, and aligns detection coverage with known adversary behaviors. Lastly, it applies rule updates, confirms effectiveness, and records the state for audit and incident reference.
+As an example of how to use Coverage to triage and remediate coverage issues, here is a sequence that starts by establishing a baseline, closing blind spots, and securing the most critical assets. It then verifies enforcement mechanisms, restores agent health, and aligns detection coverage with known adversary behaviors. Finally, it applies rule updates, confirms effectiveness, and records the state for audit and incident reference.
 
 1. Do a full environment view to establish baseline coverage status.
 2. Focus on assets that appear fully covered. Validate that their policies, rules, and agents are working as intended before addressing visible gaps. This uncovers silent failures in trusted systems that would otherwise be ignored.
