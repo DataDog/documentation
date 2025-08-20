@@ -443,6 +443,12 @@ multifiltersearch:
       recommendation_type: Purchase Reservation for SQL Server Managed Instance
       recommendation_description: Purchase reservation for SQL Server Managed Instance with no reservation coverage and is more than 45 days old
       recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: VM Instance
+      recommendation_type: Terminate Azure VM Instance
+      recommendation_description: VM instance with less than 5% user CPU and over 90% usable memory
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Downsize
       cloud_provider: Azure
       resource_type: VM Instance
