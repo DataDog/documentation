@@ -33,11 +33,11 @@ This reduces the profiling expertise needed to identify and resolve performance 
 ## Explore insights
 Access Automated Analysis from the [Profile explorer][1]. Insights are displayed:
 
-- In the **Top Insights** banner at the top of the page when you're scoped to a specific service
+- In the **Insights** banner at the top of the page when you're scoped to a specific service
 {{< img src="profiler/profiling_automated_analysis_banner.png" alt="The Automated Analysis banner displaying insights detected for a given service" style="width:100%;">}}
 
-- In the **Insights** column within the service list
-{{< img src="profiler/profiling_automated_analysis_column.png" alt="The Automated Analysis column displaying insights detected for a given service within the service list" style="width:100%;">}}
+- In the **Insights** banner when the service list is displayed
+{{< img src="profiler/profiling_automated_analysis_column.png" alt="The Automated Analysis banner displaying insights detected for a given service list" style="width:100%;">}}
 
 - Within a flame graph view
 {{< img src="profiler/profiling_automated_analysis_flamegraph_viz.png" alt="The Automated Analysis column displaying insights detected for a given service within a flamegraph" style="width:100%;">}}
