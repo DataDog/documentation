@@ -1,5 +1,5 @@
 ---
-title: Instrumenting a .NET Cloud Run Container In-Process
+title: Instrumenting a .NET Cloud Run Container with Sidecar
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 50
@@ -12,9 +12,9 @@ further_reading:
     text: 'Correlating .NET Logs and Traces'
 ---
 
-## Setup
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/sidecar/dotnet">available on GitHub</a>.</div>
 
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-process/dotnet">available on GitHub</a>.</div>
+## Setup
 
 1. **Install the Datadog .NET tracer** in your Dockerfile.
 
@@ -41,35 +41,51 @@ RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /
 
    For more information, see [Tracing .NET applications][2].
 
-2. **Install serverless-init**.
+2. **Install serverless-init as a sidecar**.
 
-   {{% gcr-install-serverless-init cmd="\"dotnet\", \"dotnet.dll\"" %}}
+   {{< tabs >}}
+
+   {{% tab "Datadog CLI" %}}
+   {{% gcr-install-sidecar-datadog-ci %}}
+   {{% /tab %}}
+
+   {{% tab "YAML Deploy" %}}
+   {{% gcr-install-sidecar-yaml language="csharp" %}}
+   {{% /tab %}}
+
+   {{% tab "Custom" %}}
+   {{% gcr-install-sidecar-custom %}}
+   {{% /tab %}}
+
+   {{< /tabs >}}
 
 3. **Set up logs**.
 
-   To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows `serverless-init` to read logs from stdout and stderr.
+   In the previous step, you created a shared volume. Additionally, you set the `DD_SERVERLESS_LOG_PATH` env var, or it was defaulted to `/shared-volume/logs/app.log`.
 
-   Datadog also recommends setting the environment variable `DD_SOURCE=csharp` to enable advanced Datadog log parsing.
-
-   If you want multiline logs to be preserved in a single log message, Datadog recommends writing your logs in JSON format. For example, you can use a third-party logging library such as `Serilog`:
-
+   Now, you will need to configure your logging library to write logs to that file. In .NET, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `Serilog`:
    {{< code-block lang="csharp" disable_copy="false" >}}
 using Serilog;
 
+const string LOG_FILE = "/shared-volume/logs/app.log";
+
 builder.Host.UseSerilog((context, config) =>
 {
-    config.WriteTo.Console(new Serilog.Formatting.Json.JsonFormatter(renderMessage: true));
+    // Ensure the directory exists
+    Directory.CreateDirectory(Path.GetDirectoryName(LOG_FILE)!);
+
+    config.WriteTo.Console(new Serilog.Formatting.Json.JsonFormatter(renderMessage: true))
+          .WriteTo.File(new Serilog.Formatting.Json.JsonFormatter(renderMessage: true), LOG_FILE);
 });
 
 logger.LogInformation("Hello World!");
 {{< /code-block >}}
 
-   For more information, see [Correlating .NET Logs and Traces][3].
+Datadog recommends setting the environment variable `DD_SOURCE=csharp` in your sidecar container to enable advanced Datadog log parsing.
 
-4. **Configure your application**.
+For more information, see [Correlating .NET Logs and Traces][3].
 
-{{% gcr-configure %}}
-{{% gcr-env-vars instrumentationMethod="in-process" language="csharp" %}}
+{{% gcr-env-vars instrumentationMethod="sidecar" language="csharp" %}}
 
 ## Troubleshooting
 
