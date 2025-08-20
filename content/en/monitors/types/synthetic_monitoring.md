@@ -221,7 +221,7 @@ Iterate over steps extracting variables for browser and mobile tests:
 Template variables allow you to insert values from the test results and configuration into the message and are accessed using the standard `synthetics.attributes` prefix. For example:
 
 ```handlebars
-Test "{{check_name}}" failed at step {{synthetics.failed_step.name}} with error: {{synthetics.failed_step.failure.message}}.
+Test failed at step {{synthetics.failed_step.name}} with error: {{synthetics.failed_step.failure.message}}.
 ```
 
 ### Common variable shortcuts
@@ -740,7 +740,7 @@ Examples for `.browserErrors`:
 {{% /tab %}}
 {{% tab "Network tests" %}}
 
-**Websocket:**
+{{% collapse-content title="Websocket" level="h4" expanded=false %}}
 
 `.timings.open`
 : Time to open connection (in milliseconds)
@@ -797,7 +797,9 @@ Examples for `.browserErrors`:
 }
 ```
 
-**gRPC:**
+{{< /collapse-content >}}
+
+{{% collapse-content title= "gRPC" level="h4" expanded=false %}}
 
 `.callType`
 : Call type (`unary` or `healthcheck`)
@@ -837,7 +839,9 @@ Examples for `.browserErrors`:
 }
 ```
 
-**UDP:**
+{{< /collapse-content >}}
+
+{{% collapse-content title= "UDP" level="h4" expanded=false %}}
 
 `.request.message`
 : UDP request message
@@ -848,7 +852,9 @@ Examples for `.browserErrors`:
 `.timings.message`
 : Message timing
 
-**TCP:**
+{{< /collapse-content >}}
+
+{{% collapse-content title= "TCP" level="h4" expanded=false %}}
 
 `.connectionOutcome`
 : Connection result
@@ -880,7 +886,9 @@ Examples for `.browserErrors`:
 `.traceroute.latency.values`
 : Latency values array
 
-**ICMP:**
+{{< /collapse-content >}}
+
+{{% collapse-content title= "ICMP" level="h4" expanded=false %}}
 
 `.traceroute`
 : Same structure as TCP traceroute
@@ -894,10 +902,12 @@ Examples for `.browserErrors`:
 `.latency.min`, `.latency.max`, `.latency.avg`, `.latency.stddev`, `.latency.values`
 : Latency measurements (same as TCP)
 
+{{< /collapse-content >}}
+
 {{% /tab %}}
 {{% tab "Protocol tests" %}}
 
-**SSL:**
+{{% collapse-content title= "SSL" level="h4" expanded=false %}}
 
 `.cert`
 : SSL certificate information
@@ -923,14 +933,6 @@ Examples for `.browserErrors`:
 `.timings.handshake`
 : SSL handshake timing
 
-**DNS:**
-
-`.response.records.type`
-: DNS record type
-
-`.response.records.values`
-: DNS record values
-
 **Examples:**
 ```json
 {
@@ -946,7 +948,23 @@ Examples for `.browserErrors`:
     "timings": {
       "handshake": 45
     }
-  },
+  }
+}
+```
+
+{{< /collapse-content >}}
+
+{{% collapse-content title= "DNS" level="h4" expanded=false %}}
+
+`.response.records.type`
+: DNS record type
+
+`.response.records.values`
+: DNS record values
+
+**Examples:**
+```json
+{
   "dns": {
     "response": {
       "records": {
@@ -957,6 +975,8 @@ Examples for `.browserErrors`:
   }
 }
 ```
+
+{{< /collapse-content >}}
 
 {{% /tab %}}
 {{% tab "Summary and shortcuts" %}}
