@@ -8,4 +8,221 @@ aliases:
 
 ## Overview
 
+The Private Action Runner (PAR) script action allows you to run custom scripts and Linux binaries within your Datadog workflows and apps. Unlike standard private actions that call specific APIs or services, the script action gives you the flexibility to execute arbitrary commands, shell scripts, and command-line tools directly from your private network.
 
+For supported integrations, see [supported private actions][1].
+
+<div class="alert alert-warning">
+<strong>Security Notice:</strong> The PAR script action runs within a containerized environment using a dedicated Linux user named `scriptuser` for enhanced security. Datadog enforces container sandboxing and only accepts signed tasks, but you decide which binaries and scripts are allowed. Always review every command you add to the script action allow-list, especially ones that take dynamic user input. Ensure that your actions are configured with the least privileged commands, and carefully review the permissions you share through connections. For more information, see <a href="/actions/connections/?tab=workflowautomation#connection-security-considerations">connection security considerations</a>.
+</div>
+
+## Use cases
+
+The following table outlines supported and unsupported use cases for the script action:
+
+| Use Case                                            | Supported | Notes                                                                                                                        |
+|-----------------------------------------------------|-----------|------------------------------------------------------------------------------------------------------------------------------|
+| Running Linux binaries (`ls`, `rm`, `find`, `curl`) | Yes   | In order to run native Linux binaries, the relevant files must be accessible to the container.          |
+| Running CLIs (`aws`, `terraform`, `kubectl`)        | Yes   | The CLI and your CLI credentials must be added to your custom image.                                                       |
+| Running scripts (`bash`, `python`)                  | Yes   | Scripts can be mounted inside the container. Interpreters such as Python must be installed on your custom image. |
+| Running privileged commands (`systemctl restart`)   | No    | Because the PAR runs inside a container, it does not have high privilege permissions on the host.                                         |
+| Windows tools (PowerShell)                          | No    | Because PAR runs inside a Linux container, native Windows tools are not supported.                                             |
+
+## Prerequisites
+
+To use the script action, you need:
+
+- **Linux host**: A host capable of running Docker containers
+- **Network access**: Connection to Datadog and your internal services
+- **Custom tools**: For CLI tools not included in the base image, you need to create a custom Docker image
+- **PAR Version**: 1.7.0 or later. See [set up a private action runner][2] to get started.
+- anything else? 🤨
+
+## Set up a private action runner script
+
+### 1. Update your runner image
+
+Replace the standard PAR image with the development image that supports script actions. The development images are published on [Docker Hub][2].
+
+**Standard image:**
+```
+gcr.io/datadoghq/private-action-runner:v1.3.0
+```
+
+**Script-enabled image:**
+```
+datadog/private-action-runner-dev:latest@sha256:4e990e496b79d02514c19a633042d27be1ba8e7a4b9018efd0e942ed1a070ad8
+```
+
+You can either reuse an existing runner's identity by changing the image, or create a brand new runner.
+
+### 2. Create a script connection
+
+1. Navigate to the **Private Action Runner** page in [Workflow Automation][4] or [App Builder][5].
+1. Create a new script connection and associate it with your private action runner.
+1. Select this connection when using the script action in your workflows or apps.
+
+<div class="alert alert-info">
+The connection requires a placeholder field at creation. You can put any value there as it will be ignored.
+</div>
+
+### 3. Configure the action catalog
+
+You can find the "Run Predefined Script" action marked as "experimental" in the action catalog. This action is available for use in both workflows and apps.
+
+## Manage access
+
+To use script actions, users need the following permissions:
+
+- **Private Action Runner Read**: View existing runners and configurations
+- **Private Action Runner Use**: Execute script actions through workflows and apps  
+- **Private Action Runner Write**: Create and modify runner configurations
+
+By default, users may have read-only access. Organization administrators can modify these permissions through the Datadog access management interface.
+
+## Configuration
+
+Configure script actions through your runner's `config.yaml` file. If you create a new runner and select the script bundle, you get a default configuration.
+
+### Basic configuration
+
+```yaml
+# Add the script action to the allowlist
+actionsAllowlist:
+  - com.datadoghq.script.runPredefinedScript
+
+# Configure different scripts
+bundles:
+  "com.datadoghq.script":
+    runPredefinedScript:
+      echo:
+        command: ["echo", "Hello world"]
+      # Use workflow-like syntax to retrieve values from parameters
+      echo-parametrized:
+        command: ["echo", "{{ parameters.echoValue }}"]
+      echo-nested-parametrized:
+        command: ["echo", "{{ parameters.nested.echoValue }}"]
+```
+
+### Docker configuration example
+
+```yaml
+services:
+  runner:
+    image: datadog/private-action-runner-dev:latest@sha256:4e990e496b79d02514c19a633042d27be1ba8e7a4b9018efd0e942ed1a070ad8
+    volumes:
+      - "./config:/etc/dd-action-runner/config"
+      - "./scripts:/opt/scripts:ro"
+```
+
+### Using the configured scripts
+
+In your workflow or app, configure the action to use the `runPredefinedScript` with the script name you defined (for example, `echo` or `echo-parametrized`).
+
+**Note**: There are two levels of variable resolution: one at the workflow level and one at the action level inside the runner.
+
+## Advanced usage with custom images
+
+For binaries not available in the base runner image, create a custom image:
+
+```dockerfile
+# Dockerfile example
+FROM datadog/private-action-runner-dev:latest@sha256:4e990e496b79d02514c19a633042d27be1ba8e7a4b9018efd0e942ed1a070ad8
+RUN apt update && apt install -y python3
+```
+
+You can mount complex scripts inside the runner:
+
+```yaml
+# docker-compose example
+services:
+  runner:
+    image: datadog/private-action-runner-dev:latest@sha256:4e990e496b79d02514c19a633042d27be1ba8e7a4b9018efd0e942ed1a070ad8
+    volumes:
+      - "./config:/etc/dd-action-runner/config"
+      - "./scripts:/opt/scripts:ro"
+```
+
+```yaml
+# config.yaml
+bundles:
+  "com.datadoghq.script":
+    runPredefinedScript:
+      run-some-script:
+        command: ["/opt/scripts/some-script.sh"]
+      run-python:
+        command: ["python", "/opt/scripts/some-script.py"]
+```
+
+## Helm deployment
+
+The current official Helm chart doesn't support script actions yet. To use script actions with Helm:
+
+1. Clone the repository locally and use the development branch:
+
+```bash
+git clone git@github.com:DataDog/helm-charts.git
+cd helm-charts
+git checkout gabriel.plassard/ACTP-757/add-support-for-script-action
+```
+
+2. Update your `config.yaml`:
+
+```yaml
+image:
+  repository: datadog/private-action-runner-dev
+  tag: latest@sha256:4e990e496b79d02514c19a633042d27be1ba8e7a4b9018efd0e942ed1a070ad8
+
+runner:
+  config:
+    bundles:
+      "com.datadoghq.script":
+        runPredefinedScript:
+          echo:
+            command: ["echo", "Hello world"]
+          echo-parametrized:
+            command: ["echo", "{{ parameters.echoValue }}"]
+```
+
+3. Deploy the PAR:
+
+```bash
+helm upgrade --install <release-name> <file-path-to-cloned-repo> -f config.yaml
+```
+
+## Kustomize deployment
+
+For Kustomize usage, download the chart locally:
+
+1. Create a `kustomization.yaml`:
+
+```yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+helmCharts:
+  - name: private-action-runner
+    namespace: default
+    valuesFile: values.yaml
+```
+
+2. Download the chart:
+
+```bash
+mkdir charts
+curl https://codeload.github.com/DataDog/helm-charts/tar.gz/gabriel.plassard/ACTP-757/add-support-for-script-action | tar -xz --strip=2 helm-charts-gabriel.plassard-ACTP-757-add-support-for-script-action/charts/
+cd ..
+kustomize build . --enable-helm
+```
+
+## Known limitations
+
+- Long-running scripts are not well supported
+- Script configuration may move to a separate file format in future versions
+- Privileged operations requiring host access are not supported
+
+[1]: /actions/private_actions/use_private_actions/?tab=docker#supported-private-actions
+[2]: /actions/private_actions/use_private_actions/#set-up-a-private-action-runner
+[3]: https://hub.docker.com/r/datadog/private-action-runner-dev
+[4]: https://app.datadoghq.com/workflow/
+[5]: https://app.datadoghq.com/app-builder/
