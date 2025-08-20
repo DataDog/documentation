@@ -11,12 +11,12 @@ Select the installation guide that matches your environment:
 ## Cloud-managed Kubernetes
 
 {{< whatsnext desc=" ">}}
-  {{< nextlink href="./aws-eks/" >}}Install on AWS EKS{{< /nextlink >}}
-  {{< nextlink href="./azure-aks/" >}}Install on Azure AKS{{< /nextlink >}}
+  {{< nextlink href="./install/aws-eks/" >}}Install on AWS EKS{{< /nextlink >}}
+  {{< nextlink href="./install/azure-aks/" >}}Install on Azure AKS{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Self-managed Kubernetes
 
 {{< whatsnext desc=" ">}}
-  {{< nextlink href="./kubernetes-nginx/" >}}Install on a K8s cluster with NGINX Ingress Controller{{< /nextlink >}}
+  {{< nextlink href="./install/kubernetes-nginx/" >}}Install on a K8s cluster with NGINX Ingress Controller{{< /nextlink >}}
 {{< /whatsnext >}}
