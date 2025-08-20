@@ -385,6 +385,18 @@ For services not covered in this guide, you can merge traces by manually propaga
 
 **Upstream services to Step Functions**: Include trace context in the Step Function input payload as JSON under the `_datadog` key, which can be located anywhere in the payload.
 
+**Example datadog context object**:
+
+At a minimum, the context object must contain the `x-datadog-trace-id` and `x-datadog-parent-id` keys. The `x-datadog-tags` key is optional and can be used to pass additional tags.
+
+{{< highlight json >}}
+"_datadog": {
+  "x-datadog-trace-id": "280166049706551372",
+  "x-datadog-parent-id": "611647714644695775",
+  "x-datadog-tags": "_dd.p.tid=66bcb5eb00000000,_dd.p.dm=-0"
+}
+{{< /highlight >}}
+
 **Step Functions to Downstream services**: Add Step Function execution context to your task definitions using the patterns shown above. Additional configuration of the downstream service may be required.
 
 For assistance with custom integrations, [contact Datadog Support][4].
