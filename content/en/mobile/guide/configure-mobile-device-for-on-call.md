@@ -9,7 +9,7 @@ further_reading:
   text: "Mobile App Documentation"
 ---
 
-Being on-call requires reliable and timely notifications to ensure you can respond to incidents effectively. This guide walks you through the steps to configure your mobile device for optimal performance with Datadog On-Call.
+Being on-call requires reliable and timely notifications to ensure you can respond to incidents effectively. This guide walks you through the steps to configure your mobile device for optimal performance with [Datadog On-Call][5].
 
 1. Install the [Datadog mobile app][1].
 2. [Set up push notifications](#set-up-push-notifications): Enable your device to receive notifications from the Datadog mobile app.
