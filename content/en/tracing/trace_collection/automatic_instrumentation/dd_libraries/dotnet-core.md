@@ -64,7 +64,7 @@ For a full list of Datadog's .NET Core library and processor architecture suppor
 </div>
 
 <div class="alert alert-info">
-  To instrument trimmed apps, reference the <a href="https://www.nuget.org/packages/Datadog.Trace.Trimming/">Datadog.Trace.Trimming<a> NuGet package in your project.
+  To instrument trimmed apps, reference the <a href="https://www.nuget.org/packages/Datadog.Trace.Trimming/">Datadog.Trace.Trimming</a> NuGet package in your project.
 </div>
 
 ### Installation
