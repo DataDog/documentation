@@ -399,6 +399,10 @@ The context object must contain the `x-datadog-trace-id` and `x-datadog-parent-i
 
 For assistance with custom integrations, [contact Datadog Support][5].
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /serverless/step_functions/installation
 [2]: /serverless/aws_lambda/installation
 [3]: /tracing/trace_collection/trace_context_propagation/?tab=java#datadog-format
