@@ -5940,7 +5940,7 @@ menu:
       weight: 30000
     - name: Architecture
       url: /cloudprem/architecture
-      parent: log_management_heading
+      parent: cloudprem
       identifier: cloudprem_architecture
       weight: 1
     - name: Installation
