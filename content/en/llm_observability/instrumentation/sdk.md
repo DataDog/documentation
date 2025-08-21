@@ -1245,11 +1245,11 @@ The `LLMObs.annotate()` method accepts the following arguments:
 
 `input_data`
 : optional - _JSON serializable type or list of dictionaries_
-<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans).  **Note**: Embedding spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "..."}`.
+<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans). Messages can also include optional `"tool_calls"` (list of dictionaries with keys: `"name": "..."`, `"arguments": {...}`, `"tool_id": "..."`, `"type": "..."`) and `"tool_results"` (list of dictionaries with keys: `"name": "..."`, `"result": "..."`, `"tool_id": "..."`, `"type": "..."`) for function calling scenarios. **Note**: Embedding spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "..."}`.
 
 `output_data`
 : optional - _JSON serializable type or list of dictionaries_
-<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans). **Note**: Retrieval spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
+<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans). Messages can also include optional `"tool_calls"` (list of dictionaries with keys: `"name": "..."`, `"arguments": {...}`, `"tool_id": "..."`, `"type": "..."`) and `"tool_results"` (list of dictionaries with keys: `"name": "..."`, `"result": "..."`, `"tool_id": "..."`, `"type": "..."`) for function calling scenarios. **Note**: Retrieval spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
 
 `metadata`
 : optional - _dictionary_
