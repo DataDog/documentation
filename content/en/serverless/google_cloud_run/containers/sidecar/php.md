@@ -70,9 +70,9 @@ function logInfo($message) {
 logInfo('Hello World!');
 {{< /code-block >}}
 
-Datadog recommends setting the environment variable `DD_SOURCE=php` in your sidecar container to enable advanced Datadog log parsing.
+   Datadog recommends setting the environment variable `DD_SOURCE=php` in your sidecar container to enable advanced Datadog log parsing.
 
-For more information, see [Correlating PHP Logs and Traces][2].
+   For more information, see [Correlating PHP Logs and Traces][2].
 
 4. **Custom metrics**.
 

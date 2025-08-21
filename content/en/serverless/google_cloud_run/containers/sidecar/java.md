@@ -89,9 +89,9 @@ logger.info("Hello World!");
 </Configuration>
 {{< /code-block >}}
 
-Datadog recommends setting the environment variable `DD_SOURCE=java` in your sidecar container to enable advanced Datadog log parsing.
+   Datadog recommends setting the environment variable `DD_SOURCE=java` in your sidecar container to enable advanced Datadog log parsing.
 
-For more information, see [Correlating Java Logs and Traces][2].
+   For more information, see [Correlating Java Logs and Traces][2].
 
 4. **Custom metrics**.
 

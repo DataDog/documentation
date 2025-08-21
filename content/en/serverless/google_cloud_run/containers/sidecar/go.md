@@ -78,9 +78,9 @@ logrus.AddHook(&dd_logrus.DDContextLogHook{})
 logrus.WithContext(ctx).Info("Hello World!")
 {{< /code-block >}}
 
-Datadog recommends setting the environment variable `DD_SOURCE=go` in your sidecar container to enable advanced Datadog log parsing.
+   Datadog recommends setting the environment variable `DD_SOURCE=go` in your sidecar container to enable advanced Datadog log parsing.
 
-For more information, see [Correlating Go Logs and Traces][3].
+   For more information, see [Correlating Go Logs and Traces][3].
 
 4. **Custom metrics**.
 
