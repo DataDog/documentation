@@ -51436,9 +51436,20 @@ paths:
         type: idempotent
   /api/v2/cost_by_tag/active_billing_dimensions:
     get:
-      description: Get active billing dimensions for cost attribution. Cost data for
-        a given month becomes available no later than the 19th of the following month.
+      description: Get active billing dimensions for cost attribution in a given month.
+        Note that billing dimensions active in a given month may not appear in the
+        Monthly Cost Attribution API response until the 19th of the following month.
+        For the most accurate results, request the same month for both endpoints.
       operationId: GetActiveBillingDimensions
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM]
+          for billing dimensions active this month. Defaults to the current month.'
+        in: query
+        name: month
+        required: false
+        schema:
+          format: date-time
+          type: string
       responses:
         '200':
           content:

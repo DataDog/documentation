@@ -540,7 +540,7 @@
     "request_schema_description": "GCP Usage Cost config patch request."
   },
   "GetActiveBillingDimensions": {
-    "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
+    "description": "Get active billing dimensions for cost attribution in a given month. Note that billing dimensions active in a given month may not appear in the Monthly Cost Attribution API response until the 19th of the following month. For the most accurate results, request the same month for both endpoints.",
     "summary": "Get active billing dimensions for cost attribution"
   },
   "GetMonthlyCostAttribution": {
