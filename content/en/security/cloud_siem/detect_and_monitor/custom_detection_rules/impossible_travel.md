@@ -38,12 +38,6 @@ When selected, signals are suppressed for the first 24 hours. In that time, Data
 
 Do not click the checkbox if you want Datadog to detect all impossible travel behavior.
 
-#### Joining queries
-
-{{% cloud_siem/joining_queries %}}
-
-{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
-
 #### Filter logs based on Reference Tables
 
 {{% filter_by_reference_tables %}}
@@ -56,24 +50,6 @@ Do not click the checkbox if you want Datadog to detect all impossible travel be
 
 ### Set conditions
 
-{{< img src="security/security_monitoring/detection_rules/define_rule_case2.png" alt="The set rule case section showing the default settings" style="width:80%;" >}}
-
-{{% cloud_siem/set_conditions %}}
-
-#### Example
-
-If you have a `failed_login` and a `successful_login` query:
-
-{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
-
-and a rule case that triggers when `failed_login > 5 && successful_login>0`:
-
-{{< img src="security/security_monitoring/detection_rules/set_rule_case4.png" alt="The set rule cases section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:90%;" >}}
-
-The rule case joins these queries together based on their `group by` value. The `group by` attribute is typically the same attribute because the value must be the same for the case to be met. If a `group by` value doesn't exist, the case will never be met. A Security Signal is generated for each unique `group by` value when a case is matched.
-
-In this example, when there are more than five failed logins and at least one successful login for the same `User Name`, the first case is matched, and a Security Signal is generated.
-
 #### Severity and notification
 
 {{% security-rule-severity-notification %}}
@@ -81,8 +57,6 @@ In this example, when there are more than five failed logins and at least one su
 #### Time windows
 
 {{% security-rule-time-windows %}}
-
-Click **Add Case** to add additional cases.
 
 **Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 

@@ -22,13 +22,17 @@ To create a threshold detection rule or job:
 
 {{< img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" >}}
 
-{{% cloud_siem/define_search_queries %}}
+Cloud SIEM can analyze logs, Audit Trail events, and events from Event Management. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**. Construct a search query for your logs or events using the [Log Explorer search syntax][101].
 
-#### Joining queries
+Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given time frame. The defined `group by` generates a signal for each `group by` value. Typically, the `group by` is an entity (like user, or IP). The Group By is also used to [join the queries together](#joining-queries).
 
-{{% cloud_siem/joining_queries %}}
+Anomaly detection inspects how the `group by` attribute has behaved in the past. If a `group by` attribute is seen for the first time (for example, the first time an IP is communicating with your system) and is anomalous, it does not generate a security signal because the anomaly detection algorithm has no historical data to base its decision on.
 
-{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
+You can also filter logs using values from a specific columns in a reference table. See [Filter logs based on reference tables](#filter-logs-based-on-reference-tables) for more details.
+
+Click **Unit Test** if you want to test the selected query against a sample log. See [Unit testing](#unit-testing) for more information.
+
+**Note**: The query applies to all ingested logs and events.
 
 #### Filter logs based on Reference Tables
 
@@ -42,35 +46,17 @@ To create a threshold detection rule or job:
 
 ### Set conditions
 
-{{< img src="security/security_monitoring/detection_rules/define_rule_case2.png" alt="The set rule case section showing the default settings" style="width:80%;" >}}
-
-{{% cloud_siem/set_conditions %}}
-
-#### Example
-
-If you have a `failed_login` and a `successful_login` query:
-
-{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
-
-and a rule case that triggers when `failed_login > 5 && successful_login>0`:
-
-{{< img src="security/security_monitoring/detection_rules/set_rule_case4.png" alt="The set rule cases section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:90%;" >}}
-
-The rule case joins these queries together based on their `group by` value. The `group by` attribute is typically the same attribute because the value must be the same for the case to be met. If a `group by` value doesn't exist, the case will never be met. A Security Signal is generated for each unique `group by` value when a case is matched.
-
-In this example, when there are more than five failed logins and at least one successful login for the same `User Name`, the first case is matched, and a Security Signal is generated.
-
 #### Severity and notification
 
 {{% security-rule-severity-notification %}}
 
 #### Time windows
 
-{{% security-rule-time-windows %}}
+Datadog automatically detects the seasonality of the data and generates a security signal when the data is determined to be anomalous.
 
-Click **Add Case** to add additional cases.
+After a signal is generated, the signal remains "open" if the data remains anomalous and the last updated timestamp is updated for the anomalous duration.
 
-**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
+A signal "closes" after the time period exceeds the maximum signal duration, regardless of whether or not the anomaly is still anomalous. This time is calculated from the first seen timestamp.
 
 #### Other parameters
 

@@ -26,12 +26,6 @@ To create a threshold detection rule or job:
 1. In the **Learn for** dropdown menu, select the number of days for the learning period. During the learning period, the rule sets a baseline of normal field values and does not generate any signals.
   **Note**: If the detection rule is modified, the learning period restarts at day `0`.
 
-#### Joining queries
-
-{{% cloud_siem/joining_queries %}}
-
-{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
-
 #### Filter logs based on Reference Tables
 
 {{% filter_by_reference_tables %}}
@@ -43,24 +37,6 @@ To create a threshold detection rule or job:
 {{% cloud_siem/unit_test %}}
 
 ### Set conditions
-
-{{< img src="security/security_monitoring/detection_rules/define_rule_case2.png" alt="The set rule case section showing the default settings" style="width:80%;" >}}
-
-{{% cloud_siem/set_conditions %}}
-
-#### Example
-
-If you have a `failed_login` and a `successful_login` query:
-
-{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
-
-and a rule case that triggers when `failed_login > 5 && successful_login>0`:
-
-{{< img src="security/security_monitoring/detection_rules/set_rule_case4.png" alt="The set rule cases section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:90%;" >}}
-
-The rule case joins these queries together based on their `group by` value. The `group by` attribute is typically the same attribute because the value must be the same for the case to be met. If a `group by` value doesn't exist, the case will never be met. A Security Signal is generated for each unique `group by` value when a case is matched.
-
-In this example, when there are more than five failed logins and at least one successful login for the same `User Name`, the first case is matched, and a Security Signal is generated.
 
 #### Severity and notification
 

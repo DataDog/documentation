@@ -51,13 +51,13 @@ If you have a `failed_login` and a `successful_login` query:
 
 {{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
 
-and a rule case that triggers when `failed_login > 5 && successful_login>0`:
+and a rule condition that triggers when `failed_login > 5 && successful_login>0`:
 
-{{< img src="security/security_monitoring/detection_rules/set_rule_case4.png" alt="The set rule cases section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:90%;" >}}
+{{< img src="security/security_monitoring/detection_rules/set_rule_case4.png" alt="The set rule conditions section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:90%;" >}}
 
-The rule case joins these queries together based on their `group by` value. The `group by` attribute is typically the same attribute because the value must be the same for the case to be met. If a `group by` value doesn't exist, the case will never be met. A Security Signal is generated for each unique `group by` value when a case is matched.
+The rule condition joins these queries together based on their `group by` value. The `group by` attribute is typically the same attribute because the value must be the same for the condition to be met. If a `group by` value doesn't exist, the condition will never be met. A security signal is generated for each unique `group by` value when a condition is matched.
 
-In this example, when there are more than five failed logins and at least one successful login for the same `User Name`, the first case is matched, and a Security Signal is generated.
+In this example, when there are more than five failed logins and at least one successful login for the same `User Name`, the first condition is matched, and a security signal is generated.
 
 #### Severity and notification
 
@@ -73,7 +73,7 @@ Click **Add Condition** to add additional conditions.
 
 #### Other parameters
 
-In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected.
+In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected within a specified time frame. For example, the same signal updates if any new value is detected within 1 hour, for a maximum duration of 24 hours.
 
 Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
 

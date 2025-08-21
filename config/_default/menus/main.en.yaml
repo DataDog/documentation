@@ -6071,7 +6071,7 @@ menu:
       identifier: cloud_siem_impossible_travel_rule
       weight: 2105
     - name: Third Party
-      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/anomaly
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/third_party
       parent: cloud_siem_custom_detection_rules
       identifier: cloud_siem_third_party_rule
       weight: 2106

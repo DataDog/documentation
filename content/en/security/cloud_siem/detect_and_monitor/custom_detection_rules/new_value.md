@@ -20,15 +20,23 @@ To create a threshold detection rule or job:
 
 ### Define search queries
 
-{{< img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" >}}
+{{< img src="security/security_monitoring/detection_rules/new_value_20250310.png" alt="Define the search query" style="width:100%;" >}}
 
-{{% cloud_siem/define_search_queries %}}
+Cloud SIEM can analyze logs, Audit Trail events, and events from Event Management. To search Audit Trail events, click the down arrow next to **Logs** and select **Audit Trail**. Construct a search query for your logs or events using the [Log Explorer search syntax][1]. See [Learned value](#learned-value) for more information on selecting the new values you want to detect and the learning period.
 
-#### Joining queries
+You can also filter logs using values from a specific columns in a reference table. See [Filter logs based on reference tables](#filter-logs-based-on-reference-tables) for more details.
 
-{{% cloud_siem/joining_queries %}}
+Click **Unit Test** if you want to test the selected query against a sample log. See [Unit testing](#unit-testing) for more information.
 
-{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
+**Note**: The query applies to all ingested logs and events.
+
+#### Learned value
+
+In your search query, select the values you want to detect, the learning duration, and, optionally, define a signal grouping. The defined `group by` generates a signal for each `group by` value. Typically, the `group by` is an entity (like user or IP address).
+
+For example, create a query for successful user authentication and set **Detect new value** to `country` and group by to `user`. Set a learning duration of `7 days`. Once configured, logs coming in over the next 7 days are evaluated with the set values. If a log comes in with a new value after the learning duration, a signal is generated, and the new value is learned to prevent future signals with this value.
+
+You can also identify users and entities using multiple values in a single query. For example, if you want to detect when a user signs in from a new device and from a country that they've never signed in from before, add `device_id` and `country_name` to **Detect new value**.
 
 #### Filter logs based on Reference Tables
 
@@ -44,39 +52,17 @@ To create a threshold detection rule or job:
 
 {{< img src="security/security_monitoring/detection_rules/define_rule_case2.png" alt="The set rule case section showing the default settings" style="width:80%;" >}}
 
-{{% cloud_siem/set_conditions %}}
-
-#### Example
-
-If you have a `failed_login` and a `successful_login` query:
-
-{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
-
-and a rule case that triggers when `failed_login > 5 && successful_login>0`:
-
-{{< img src="security/security_monitoring/detection_rules/set_rule_case4.png" alt="The set rule cases section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:90%;" >}}
-
-The rule case joins these queries together based on their `group by` value. The `group by` attribute is typically the same attribute because the value must be the same for the case to be met. If a `group by` value doesn't exist, the case will never be met. A Security Signal is generated for each unique `group by` value when a case is matched.
-
-In this example, when there are more than five failed logins and at least one successful login for the same `User Name`, the first case is matched, and a Security Signal is generated.
-
 #### Severity and notification
 
 {{% security-rule-severity-notification %}}
 
-#### Time windows
-
-{{% security-rule-time-windows %}}
-
-Click **Add Case** to add additional cases.
-
-**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
-
 #### Other parameters
 
-In the **Forget Value** dropdown, select after how many days (**1**-**30 days**) you want the value to be forgotten.
+In the **Forget Value** dropdown, select the number of days (**1**-**30 days**) after which the value is forgotten.
 
-In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected.
+In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected within a specified time frame. For example, the same signal updates if any new value is detected within 1 hour, for a maximum duration of 24 hours. 
+
+**Note**: If a unique signal is required for every new value, configure this value to `0` minutes.
 
 Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
 
@@ -93,6 +79,8 @@ Toggle **Enable Optional Group By** section, if you want to group events even wh
 ### Create a suppression
 
 {{% cloud_siem/create_suppression %}}
+
+[1]: /logs/search_syntax/
 
 {{% /tab %}}
 {{% tab "Scheduled rule" %}}
