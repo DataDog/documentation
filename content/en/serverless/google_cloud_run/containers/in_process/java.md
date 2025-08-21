@@ -80,7 +80,7 @@ logger.info("Hello World!");
 
 {{% gcr-configure%}}
 
-5. **Custom metrics**.
+6. **Custom metrics**.
 
    To send custom metrics, [install the DogStatsD client][3] and [view code examples][4].
 

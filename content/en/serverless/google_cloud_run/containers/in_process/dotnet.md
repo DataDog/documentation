@@ -70,7 +70,7 @@ logger.LogInformation("Hello World!");
 
 {{% gcr-configure %}}
 
-5. **Custom metrics**.
+6. **Custom metrics**.
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5].
 
