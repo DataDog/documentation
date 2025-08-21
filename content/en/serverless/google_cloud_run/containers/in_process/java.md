@@ -78,7 +78,8 @@ logger.info("Hello World!");
 
 4. **Configure your application**.
 
-{{% gcr-configure-env-vars language="java" %}}
+{{% gcr-configure %}}
+{{% gcr-env-vars instrumentationMethod="in-process" language="java" %}}
 
 ## Troubleshooting
 
