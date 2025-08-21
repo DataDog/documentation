@@ -20,7 +20,7 @@ To create a threshold detection rule or job:
 
 ### Define search queries
 
-1. Cloud SIEM can analyze logs, Audit Trail events, and events from Event Management. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**. Construct a search query for your logs or events using the [Log Explorer search syntax][2].
+1. Cloud SIEM can analyze logs, Audit Trail events, and events from Event Management. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Detect anomaly** field, specify the fields whose values you want to analyze.
 1. In the **Group by** field, specify the fields you want to group by.
 1. In the **Learn for** dropdown menu, select the number of days for the learning period. During the learning period, the rule sets a baseline of normal field values and does not generate any signals.
@@ -110,6 +110,8 @@ These parameters help to identify field content that is both unusual and rare, f
 
 {{% cloud_siem/create_suppression %}}
 
+[1]: /logs/search_syntax/
+
 {{% /tab %}}
 {{% tab "Scheduled rule" %}}
 
@@ -144,4 +146,3 @@ TKTK
 {{< /tabs >}}
 
 [1]: https://app.datadoghq.com/security/configuration/siem/rules
-[2]: /logs/search_syntax/

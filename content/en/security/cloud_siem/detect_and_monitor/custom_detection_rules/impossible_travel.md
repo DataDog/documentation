@@ -107,8 +107,7 @@ Toggle **Enable Optional Group By** section, if you want to group events even wh
 {{% cloud_siem/create_suppression %}}
 
 [1]: /logs/search_syntax/
-[2]: https://app.datadoghq.com/logs/
-[3]: /logs/log_configuration/processors/?tab=ui#geoip-parser
+[2]: /logs/log_configuration/processors/?tab=ui#geoip-parser
 
 {{% /tab %}}
 {{% tab "Scheduled rule" %}}
