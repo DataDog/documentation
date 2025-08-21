@@ -1,0 +1,5 @@
+In your search query, select the values you want to detect, the learning duration, and, optionally, define a signal grouping. The defined `group by` generates a signal for each `group by` value. Typically, the `group by` is an entity (like user or IP address).
+
+For example, create a query for successful user authentication and set **Detect new value** to `country` and group by to `user`. Set a learning duration of `7 days`. Once configured, logs coming in over the next 7 days are evaluated with the set values. If a log comes in with a new value after the learning duration, a signal is generated, and the new value is learned to prevent future signals with this value.
+
+You can also identify users and entities using multiple values in a single query. For example, if you want to detect when a user signs in from a new device and from a country that they've never signed in from before, add `device_id` and `country_name` to **Detect new value**.

@@ -22,21 +22,11 @@ To create a threshold detection rule or job:
 
 {{< img src="security/security_monitoring/detection_rules/new_value_20250310.png" alt="Define the search query" style="width:100%;" >}}
 
-Cloud SIEM can analyze logs, Audit Trail events, and events from Event Management. To search Audit Trail events, click the down arrow next to **Logs** and select **Audit Trail**. Construct a search query for your logs or events using the [Log Explorer search syntax][1]. See [Learned value](#learned-value) for more information on selecting the new values you want to detect and the learning period.
-
-You can also filter logs using values from a specific columns in a reference table. See [Filter logs based on reference tables](#filter-logs-based-on-reference-tables) for more details.
-
-Click **Unit Test** if you want to test the selected query against a sample log. See [Unit testing](#unit-testing) for more information.
-
-**Note**: The query applies to all ingested logs and events.
+{{% cloud_siem/define_search_queries_new_value %}}
 
 #### Learned value
 
-In your search query, select the values you want to detect, the learning duration, and, optionally, define a signal grouping. The defined `group by` generates a signal for each `group by` value. Typically, the `group by` is an entity (like user or IP address).
-
-For example, create a query for successful user authentication and set **Detect new value** to `country` and group by to `user`. Set a learning duration of `7 days`. Once configured, logs coming in over the next 7 days are evaluated with the set values. If a log comes in with a new value after the learning duration, a signal is generated, and the new value is learned to prevent future signals with this value.
-
-You can also identify users and entities using multiple values in a single query. For example, if you want to detect when a user signs in from a new device and from a country that they've never signed in from before, add `device_id` and `country_name` to **Detect new value**.
+{{% cloud_siem/learned_value %}}
 
 #### Filter logs based on Reference Tables
 
@@ -60,7 +50,7 @@ You can also identify users and entities using multiple values in a single query
 
 In the **Forget Value** dropdown, select the number of days (**1**-**30 days**) after which the value is forgotten.
 
-In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected within a specified time frame. For example, the same signal updates if any new value is detected within 1 hour, for a maximum duration of 24 hours. 
+In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected within a specified time frame. For example, the same signal updates if any new value is detected within 1 hour, for a maximum duration of 24 hours.
 
 **Note**: If a unique signal is required for every new value, configure this value to `0` minutes.
 
@@ -87,7 +77,23 @@ Toggle **Enable Optional Group By** section, if you want to group events even wh
 
 ### Define search queries
 
-{{% cloud_siem/define_search_queries %}}
+{{< img src="security/security_monitoring/detection_rules/new_value_20250310.png" alt="Define the search query" style="width:100%;" >}}
+
+{{% cloud_siem/define_search_queries_new_value %}}
+
+#### Learned value
+
+{{% cloud_siem/learned_value %}}
+
+#### Filter logs based on Reference Tables
+
+{{% filter_by_reference_tables %}}
+
+{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
+
+#### Unit testing
+
+{{% cloud_siem/unit_test %}}
 
 ### Add custom schedule
 
@@ -102,7 +108,23 @@ TKTK
 
 ### Define search queries
 
-{{% cloud_siem/define_search_queries %}}
+{{< img src="security/security_monitoring/detection_rules/new_value_20250310.png" alt="Define the search query" style="width:100%;" >}}
+
+{{% cloud_siem/define_search_queries_new_value %}}
+
+#### Learned value
+
+{{% cloud_siem/learned_value %}}
+
+#### Filter logs based on Reference Tables
+
+{{% filter_by_reference_tables %}}
+
+{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
+
+#### Unit testing
+
+{{% cloud_siem/unit_test %}}
 
 ### Notify when job is complete
 
