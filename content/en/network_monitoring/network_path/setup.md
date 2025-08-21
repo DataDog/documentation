@@ -300,13 +300,16 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Network traffic paths
+### Network traffic paths (experimental)
 
 **Prerequisites**: [CNM][1] must be enabled.
+
+**Note**: Network traffic paths is experimental and is not yet stable. Do not deploy network traffic paths widely in a production environment.
 
 Configure network traffic paths to allow the Agent to automatically discover and monitor network paths based on actual network traffic, without requiring you to specify endpoints manually.
 
 <div class="alert alert-warning"> Enabling Network Path to automatically detect paths can generate a significant number of logs, particularly when monitoring network paths across a large number of hosts. </div>
+
 
 {{< tabs >}}
 {{% tab "Linux" %}}
