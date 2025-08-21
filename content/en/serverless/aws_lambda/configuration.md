@@ -486,7 +486,7 @@ Set the environment variable `DD_TRACE_ENABLED` to `false` on your Lambda functi
 
 If you are using the [Lambda extension][2] to collect traces and logs, Datadog automatically adds the AWS Lambda request ID to the `aws.lambda` span under the `request_id` tag. Additionally, Lambda logs for the same request are added under the `lambda.request_id` attribute. The Datadog trace and log views are connected using the AWS Lambda request ID.
 
-If you are using the [Forwarder Lambda function][4] to collect traces and logs, `dd.trace_id` is automatically injected into logs (enabled by default via the environment variable `DD_LOGS_INJECTION`). The Datadog trace and log views are connected using the Datadog trace ID. This feature is supported for most applications using a popular runtime and logger (see the [support by runtime][24]).
+If you are using the [Forwarder Lambda function][4] to collect traces and logs, `dd.trace_id` is automatically injected into logs (enabled by default with the environment variable `DD_LOGS_INJECTION`). The Datadog trace and log views are connected using the Datadog trace ID. This feature is supported for most applications using a popular runtime and logger (see the [support by runtime][24]).
 
 If you are using a runtime or custom logger that isn't supported, follow these steps:
 - When logging in JSON, you need to obtain the Datadog trace ID using `dd-trace` and add it to your logs under the `dd.trace_id` field:

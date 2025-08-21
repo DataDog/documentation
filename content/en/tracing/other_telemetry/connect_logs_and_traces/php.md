@@ -23,7 +23,7 @@ further_reading:
 
 ## Automatic injection
 
-Starting in version `1.12.0`, the PHP tracer automatically injects trace correlation identifiers into application logs. To enale automatic injection for older tracer versions, set the environment variable `DD_LOGS_INJECTION` (INI setting `datadog.logs_injection`) to `true`.
+Starting in version `1.12.0`, the PHP tracer automatically injects trace correlation identifiers into application logs. To enable automatic injection for older tracer versions, set the environment variable `DD_LOGS_INJECTION` (INI setting `datadog.logs_injection`) to `true`.
 
 The PHP tracer supports PSR-3 compliant loggers, such as [Monolog][4] or [Laminas Log][5].
 

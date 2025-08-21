@@ -91,7 +91,7 @@ The following configuration options behave consistently across the latest versio
 : **Default**: `true` <br>
 **Supported Input**: Boolean (`true`/`false`) <br>
 **Caveats**: Not supported in C++ or Go.<br>
-**Description**: Enables or disables the automatic injection of trace context (trace ID, span ID) into application logs. This allows for correlation between traces and logs.
+**Description**: Enables or disables the automatic injection of trace context (trace ID, span ID) into JSON/structured application logs. This allows for correlation between traces and logs.
 
 `DD_TRACE_RATE_LIMIT`
 : **Default**: `100` <br>
