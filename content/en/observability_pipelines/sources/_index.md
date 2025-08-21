@@ -58,7 +58,7 @@ After events are ingested by the source, they get sent to different processors a
 
 Enable TLS for Observability Pipelines to ensure that logs are encrypted during transit and prevent attackers from tampering with your log data.
 
-Observability Pipelines does not accept self-signed certificates by default because self-signed certificates do not provide secure trust verification and can potentially expose your environment to man-in-the-middle attacks.
+Observability Pipelines does not accept self-signed certificates by default because they do not provide secure trust verification and can potentially expose your environment to man-in-the-middle attacks.
 
 To check if your certificate is self signed, run this command:
 
