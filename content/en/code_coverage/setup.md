@@ -327,7 +327,7 @@ You can also view your coverage data aggregated by pull request in the [Code Cov
 
 ## Troubleshooting
 
-### Coverage upload command does not detect your coverage report files
+### Coverage upload command does not detect coverage report files
 
 The `datadog-ci coverage upload` command automatically detects supported coverage report files in the specified directories using heuristics, such as file names and extensions.
 If your coverage report files do not match expected patterns, the command might not detect them automatically. In this case, specify the report format and provide the file paths as positional arguments. For example:
@@ -341,7 +341,7 @@ datadog-ci coverage upload --format=lcov \
 ### Coverage upload fails with "Format could not be detected" error
 
 The `datadog-ci coverage upload` command automatically detects the format of the coverage report files based on their content and file extension.
-If the command fails with the following error: 
+If the command fails with the following error:
 ```
 Invalid coverage report file [...]: format could not be detected
 ```
@@ -358,6 +358,23 @@ If you are using a [source code provider integration][12], such as Datadog GitHu
 
 {{< code-block lang="shell" >}}
 datadog-ci coverage upload --skip-git-metadata-upload=1 .
+{{< /code-block >}}
+
+### Datadog UI does not show changed files in the PR view
+
+By default the "Changed files" table will only contain executable source code files that are present in the uploaded coverage reports.
+You can use the "Non-executable files" or "All" toggles in the table header to show all files that were changed in the PR, regardless of whether they are executable or not.
+
+If a source code file is mistakenly considered non-executable, it is probably missing in your uploaded coverage reports.
+Make sure that you are uploading all of your reports and double-check your coverage tool configuration to ensure coverage data is collected for all relevant files.
+
+### Datadog UI shows incorrect file paths
+
+Code Coverage relies on the file paths in coverage reports to be either absolute or relative to repository root.
+If the paths in your report are relative to a different directory in your repository, you can specify the base path relative to repo root with the `--base-path` option when running the `datadog-ci coverage upload` command, like this:
+
+{{< code-block lang="shell" >}}
+datadog-ci coverage upload --base-path=frontend/src .
 {{< /code-block >}}
 
 ### Discrepancy between Datadog UI and coverage report values
