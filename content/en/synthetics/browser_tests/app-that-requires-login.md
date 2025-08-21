@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview 
 
-<div class="alert alert-info">If you are interested in testing applications sitting behind MFA, visit the <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">Multi-factor authentication section</a></div>
+<div class="alert alert-info">If you are interested in testing applications sitting behind MFA, see the <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">Multi-factor authentication section.</a></div>
 
 You may need to monitor user journeys located behind a login. There are two ways to ensure that your Datadog browser tests can go through the login steps of your application to perform validation on post-login pages:
 
