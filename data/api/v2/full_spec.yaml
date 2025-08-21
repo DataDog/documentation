@@ -19189,7 +19189,7 @@ components:
       type: object
     IPAllowlistEntryType:
       default: ip_allowlist_entry
-      description: IP allowlist Entry type.
+      description: IP allowlist entry type.
       enum:
       - ip_allowlist_entry
       example: ip_allowlist_entry
