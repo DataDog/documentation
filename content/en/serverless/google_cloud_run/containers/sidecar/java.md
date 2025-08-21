@@ -93,6 +93,10 @@ Datadog recommends setting the environment variable `DD_SOURCE=java` in your sid
 
 For more information, see [Correlating Java Logs and Traces][2].
 
+4. **Custom metrics**.
+
+   To send custom metrics, [install the DogStatsD client][3] and [view code examples][4].
+
 {{% gcr-env-vars instrumentationMethod="sidecar" language="java" %}}
 
 ## Troubleshooting
@@ -105,3 +109,5 @@ For more information, see [Correlating Java Logs and Traces][2].
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [2]: /tracing/other_telemetry/connect_logs_and_traces/java/
+[3]: /developers/dogstatsd/?tab=java#install-the-dogstatsd-client
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=java#code-examples

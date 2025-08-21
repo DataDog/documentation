@@ -82,6 +82,10 @@ Datadog recommends setting the environment variable `DD_SOURCE=go` in your sidec
 
 For more information, see [Correlating Go Logs and Traces][3].
 
+4. **Custom metrics**.
+
+   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5].
+
 {{% gcr-env-vars instrumentationMethod="sidecar" language="go" %}}
 
 ## Troubleshooting
@@ -95,3 +99,5 @@ For more information, see [Correlating Go Logs and Traces][3].
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go/
 [2]: https://github.com/DataDog/dd-trace-go?tab=readme-ov-file#installing
 [3]: /tracing/other_telemetry/connect_logs_and_traces/go/
+[4]: /developers/dogstatsd/?tab=go#install-the-dogstatsd-client
+[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=go#code-examples
