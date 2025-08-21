@@ -44,7 +44,7 @@ Click **Digest Auth** and enter a username and password. Digital access authenti
 {{% /tab %}}
 {{% tab "AWS Signature" %}}
 
-Click **AWS Signature**, enter an Access Key ID and Secret Access Key, and optionally, a region, service name, and session token. AWS Signature authentication is supported in [HTTP tests][1] and [multistep API tests][2].
+Click **AWS Signature** and enter an Access Key ID and Secret Access Key. Optionally, enter a region, service name, and session token. AWS Signature authentication is supported in [HTTP tests][1] and [multistep API tests][2].
 
 [1]: /synthetics/api_tests/http_tests/
 [2]: /synthetics/multistep/
@@ -59,13 +59,13 @@ Click **NTLM**, enter a username and password, and optionally, a domain and work
 
 {{% tab "Kerberos" %}}
 
-Click **Kerberos**, and fill in the **Domain** field. See [Kerberos Authentication for Synthetic Monitoring][1] for more information.
+Click **Kerberos** and fill in the **Domain** field. See [Kerberos Authentication for Synthetic Monitoring][1] for more information.
 
 [1]: /synthetics/guide/kerberos-authentication
 {{% /tab %}}
 {{% tab "OAuth 2.0" %}}
 
-Click **OAuth 2.0**, select a grant type (**Client Credentials** or **Resource Password**), and include an Access Token URL, Client ID, and Client Secret. Select a token API authentication method (**Send as Basic Auth header** or **Send client credentials in body**) and optionally, include an audience, resource, and scope. OAuth 2.0 authentication is supported in [HTTP tests][1] and [multistep API tests][2].
+Click **OAuth 2.0**, select a grant type (**Client Credentials** or **Resource Password**), and enter an Access Token URL, Client ID, and Client Secret. Select a token API authentication method (**Send as Basic Auth header** or **Send client credentials in body**). Optionally, include an audience, resource, and scope. OAuth 2.0 authentication is supported in [HTTP tests][1] and [multistep API tests][2].
 
 [1]: /synthetics/api_tests/http_tests/
 [2]: /synthetics/multistep/

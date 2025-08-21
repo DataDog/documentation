@@ -82,7 +82,7 @@ Alternatively, you can configure your Datadog Browser Tests to authenticate usin
 
 - Specific headers
 - Cookies
-- Basic Auth, Digest Auth, AWS Signature, NTLM , Kerberos, or Auth 2.0 credentials
+- Basic Auth, Digest Auth, AWS Signature, NTLM, Kerberos, or Auth 2.0 credentials
 
 See [authentication methods][10] for more information.
 
@@ -98,7 +98,7 @@ You can manually apply these headers, cookies, and credentials to the recording 
 
 Store your credentials as [global variables][7] (for example, one global variable for username, another one for password) and select **Hide and obfuscate variable value** to hide their values from test results. You can restrict permissions on a browser test for individuals who have access to your instance of Datadog.
 
-After you create the obfuscated variables, you can then [import these global variables][8] into your browser tests and leverage them for your login steps.
+After you create the obfuscated variables, you can then [import these global variables][8] into your browser tests and use them in your login steps.
 
 **Note:** Although Datadog global variables are securely stored and encrypted, it is strongly recommended that you use an account dedicated to testing with dummy credentials as a general testing best practice.
 

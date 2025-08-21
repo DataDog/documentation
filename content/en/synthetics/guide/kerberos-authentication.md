@@ -28,7 +28,7 @@ Datadog Synthetic Monitoring enables proactive monitoring of web applications an
 - A Windows site with Kerberos authentication integrated with Active Directory (usually hosted on IIS).
 - A Windows server that is domain-joined to the Active Directory.
 - A domain user account with Active Directory authentication access to the Windows site.
-- Synthetic Monitoring tests must run on a Windows private location that is configured to authenticate with Active Directory. For more information see the [Windows private locations][1] prerequisites documentation.
+- Synthetic Monitoring tests must run on a Windows private location that is configured to authenticate with Active Directory. For more information, see the [Windows private locations][1] prerequisites documentation.
 
 ## Installation
 
