@@ -9,6 +9,6 @@ First, set up the **[Google Cloud Integration][1]** to collect metrics and logs 
 
 Then, instrument your application using one of the following guides:
 
-{{< partial name="serverless/in-process-languages.html" >}}
+{{% container-languages path="in_process" %}}
 
 [1]: /integrations/google-cloud-platform/
