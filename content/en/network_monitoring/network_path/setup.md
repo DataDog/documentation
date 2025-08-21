@@ -300,13 +300,9 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Network traffic paths (experimental)
-
-<div class="alert alert-info">Network traffic paths is in Limited Availability. Reach out to your Datadog representative to sign up, and then use the following instructions to configure the Datadog Agent to gather network traffic paths data.</div>
+### Network traffic paths
 
 **Prerequisites**: [CNM][1] must be enabled.
-
-**Note**: Network traffic paths is experimental and is not yet stable. Do not deploy network traffic paths widely in a production environment.
 
 Configure network traffic paths to allow the Agent to automatically discover and monitor network paths based on actual network traffic, without requiring you to specify endpoints manually.
 
