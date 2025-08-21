@@ -71,8 +71,10 @@ cascade:
 
 <br>
 
-{{< whatsnext desc="Logs Workspaces Use Cases" >}}
-    {{< nextlink href="/logs/workspaces/use_cases/analyze_login_attempts/" >}}Analyze Login Attempts for e-PHI{{< /nextlink >}}
+{{< whatsnext desc="Log Analysis with Notebooks" >}}
+    {{< nextlink href="/logs/guide/analyze_ecommerce_ops" >}}Analyze E-Commerce Operations Using Payment and Customer Feedback Data{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/analyze_finance_operations" >}}Analyze Finance Operations Using Payment and Transaction Data{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/analyze_login_attempts" >}}Analyze Login Attempts for Security and Compliance{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>

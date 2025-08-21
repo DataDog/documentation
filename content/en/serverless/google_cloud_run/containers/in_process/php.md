@@ -47,7 +47,8 @@ apk add libgcc
 
 4. **Configure your application**.
 
-{{% gcr-configure-env-vars language="php" %}}
+{{% gcr-configure %}}
+{{% gcr-env-vars instrumentationMethod="in-process" language="php" %}}
 
 ## Troubleshooting
 
