@@ -5034,6 +5034,8 @@ components:
           description: Optional prefix for blobs written to the container.
           example: logs/
           type: string
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         container_name:
           description: The name of the Azure Blob Storage container to store logs
             in.
@@ -25428,6 +25430,8 @@ components:
       description: The `microsoft_sentinel` destination forwards logs to Microsoft
         Sentinel.
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         client_id:
           description: Azure AD client ID used for authentication.
           example: a1b2c3d4-5678-90ab-cdef-1234567890ab
@@ -27083,6 +27087,8 @@ components:
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineAmazonOpenSearchDestinationAuth'
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         bulk_index:
           description: The index to write logs to.
           example: logs-index
@@ -27161,6 +27167,8 @@ components:
           description: S3 bucket name.
           example: error-logs
           type: string
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
           description: Unique identifier for the destination component.
           example: amazon-s3-destination
@@ -27333,6 +27341,30 @@ components:
             role session.
           type: string
       type: object
+    ObservabilityPipelineBufferOptions:
+      description: Configuration for buffer settings on destination components.
+      oneOf:
+      - $ref: '#/components/schemas/ObservabilityPipelineDiskBufferOptions'
+      - $ref: '#/components/schemas/ObservabilityPipelineMemoryBufferOptions'
+      - $ref: '#/components/schemas/ObservabilityPipelineMemoryBufferSizeOptions'
+    ObservabilityPipelineBufferOptionsDiskType:
+      default: disk
+      description: Specifies the buffer type to configure. This option supports only
+        a disk buffer.
+      enum:
+      - disk
+      type: string
+      x-enum-varnames:
+      - DISK
+    ObservabilityPipelineBufferOptionsMemoryType:
+      default: memory
+      description: Specifies the buffer type to configure. This option supports only
+        a memory buffer.
+      enum:
+      - memory
+      type: string
+      x-enum-varnames:
+      - MEMORY
     ObservabilityPipelineConfig:
       description: Specifies the pipeline's configuration, including its sources,
         processors, and destinations.
@@ -27646,6 +27678,8 @@ components:
     ObservabilityPipelineDatadogLogsDestination:
       description: The `datadog_logs` destination forwards logs to Datadog Log Management.
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
           description: The unique identifier for this component.
           example: datadog-logs-destination
@@ -27821,12 +27855,25 @@ components:
       type: string
       x-enum-varnames:
       - DEDUPE
+    ObservabilityPipelineDiskBufferOptions:
+      description: Options for configuring a disk buffer.
+      properties:
+        max_size:
+          description: Maximum size of the disk buffer.
+          example: 4096
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsDiskType'
+      type: object
     ObservabilityPipelineElasticsearchDestination:
       description: The `elasticsearch` destination writes logs to an Elasticsearch
         cluster.
       properties:
         api_version:
           $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestinationApiVersion'
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         bulk_index:
           description: The index to write logs to in Elasticsearch.
           example: logs-index
@@ -28311,6 +28358,8 @@ components:
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineGcpAuth'
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         customer_id:
           description: The Google Chronicle customer ID.
           example: abcdefg123456789
@@ -28377,6 +28426,8 @@ components:
           description: Name of the GCS bucket.
           example: error-logs
           type: string
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
           description: Unique identifier for the destination component.
           example: gcs-destination
@@ -28687,6 +28738,28 @@ components:
       type: string
       x-enum-varnames:
       - LOGSTASH
+    ObservabilityPipelineMemoryBufferOptions:
+      description: Options for configuring a memory buffer by byte size.
+      properties:
+        max_size:
+          description: Maximum size of the disk buffer.
+          example: 4096
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsMemoryType'
+      type: object
+    ObservabilityPipelineMemoryBufferSizeOptions:
+      description: Options for configuring a memory buffer by queue length.
+      properties:
+        max_events:
+          description: Maximum events for the memory buffer.
+          example: 500
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsMemoryType'
+      type: object
     ObservabilityPipelineMetadataEntry:
       description: A custom metadata entry.
       properties:
@@ -28710,6 +28783,8 @@ components:
     ObservabilityPipelineNewRelicDestination:
       description: The `new_relic` destination sends logs to the New Relic platform.
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
           description: The unique identifier for this component.
           example: new-relic-destination
@@ -28847,6 +28922,8 @@ components:
     ObservabilityPipelineOpenSearchDestination:
       description: The `opensearch` destination writes logs to an OpenSearch cluster.
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         bulk_index:
           description: The index to write logs to.
           example: logs-index
@@ -29071,9 +29148,10 @@ components:
         can drop or alert.
       properties:
         drop_events:
-          description: If set to `true`, logs that matched the quota filter and sent
-            after the quota has been met are dropped; only logs that did not match
-            the filter query continue through the pipeline.
+          description: 'If set to `true`, logs that match the quota filter and are
+            sent after the quota is exceeded are dropped. Logs that do not match the
+            filter continue through the pipeline. **Note**: You can set either `drop_events`
+            or `overflow_action`, but not both.'
           example: false
           type: boolean
         id:
@@ -29121,6 +29199,8 @@ components:
           items:
             type: string
           type: array
+        too_many_buckets_action:
+          $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessorOverflowAction'
         type:
           $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessorType'
       required:
@@ -29128,7 +29208,6 @@ components:
       - type
       - include
       - name
-      - drop_events
       - limit
       - inputs
       type: object
@@ -29159,7 +29238,8 @@ components:
       - BYTES
       - EVENTS
     ObservabilityPipelineQuotaProcessorOverflowAction:
-      description: 'The action to take when the quota is exceeded. Options:
+      description: 'The action to take when the quota or bucket limit is exceeded.
+        Options:
 
         - `drop`: Drop the event.
 
@@ -29420,6 +29500,8 @@ components:
       description: The `rsyslog` destination forwards logs to an external `rsyslog`
         server over TCP or UDP using the syslog protocol.
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
           description: The unique identifier for this component.
           example: rsyslog-destination
@@ -29490,6 +29572,16 @@ components:
       description: The `sample` processor allows probabilistic sampling of logs at
         a fixed rate.
       properties:
+        group_by:
+          description: Optional list of fields to group events by. Each group is sampled
+            independently.
+          example:
+          - service
+          - host
+          items:
+            type: string
+          minItems: 1
+          type: array
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline (for example, as the `input`
@@ -29894,6 +29986,8 @@ components:
     ObservabilityPipelineSentinelOneDestination:
       description: The `sentinel_one` destination sends logs to SentinelOne.
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
           description: The unique identifier for this component.
           example: sentinelone-destination
@@ -30250,6 +30344,8 @@ components:
             '
           example: true
           type: boolean
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineSplunkHecDestinationEncoding'
         id:
@@ -30363,6 +30459,8 @@ components:
     ObservabilityPipelineSumoLogicDestination:
       description: The `sumo_logic` destination forwards logs to Sumo Logic.
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineSumoLogicDestinationEncoding'
         header_custom_fields:
@@ -30466,6 +30564,8 @@ components:
       description: The `syslog_ng` destination forwards logs to an external `syslog-ng`
         server over TCP or UDP using the syslog protocol.
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
           description: The unique identifier for this component.
           example: syslog-ng-destination
