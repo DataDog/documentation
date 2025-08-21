@@ -28,7 +28,7 @@ To create a service account for an app, you must have either the Datadog admin r
 1. Click the cog (**Settings**) icon.
 1. Click **Manage app identity**.
 1. Select **Run as Service Account**.
-1. Select a role for your service account user or select an existing Service Account.
+1. Select a role for your service account user or select an existing service account.
 1. Click **Save** to save the service account and apply the changes.
 
 When you run an app, the service account user resolves the connections defined in the app queries. Therefore, the service account user needs the `connections_resolve` permission. The Datadog Admin Role and the Datadog Standard Role include the `connections_resolve` permission.
