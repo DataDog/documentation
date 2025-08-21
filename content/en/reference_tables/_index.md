@@ -194,8 +194,8 @@ Once the table is saved, the upserted rows are processed asynchronously and upda
 ## Export a Reference Table
 
 To export a Reference Table, select a table and click **Query in DDSQL Editor**. From there, you can use the [DDSQL Editor][7] to export to CSV, Dashboard, and more.
-<img width="878" height="265" alt="image" src="https://github.com/user-attachments/assets/8d8975af-9242-4e82-ba5c-1a627a95b349" />
 
+{{< img src="reference_tables/query_ddsql_editor.png" alt="Table preview with a blue button labeled Query in DDSQL Editor positioned above the results" style="width:100%;" >}}
 
 ## Delete a Reference Table
 
