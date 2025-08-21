@@ -383,9 +383,11 @@ If the layer or tracer version requirements are fulfilled, no further setup is r
 
 For services not covered in this guide, you can merge traces by manually propagating [Datadog trace context][3].
 
-**Upstream services to Step Functions**: Include trace context in the Step Function input payload as JSON under the `_datadog` key, which can be located anywhere in the payload.
+### Upstream services to Step Functions
 
-The context object must contain the `x-datadog-trace-id` and `x-datadog-parent-id` keys. The `x-datadog-tags` key is optional and is used to pass additional tags.
+Include trace context in the Step Function input payload as JSON under the `_datadog` key, which can be located anywhere in the payload.
+- The context object must contain the `x-datadog-trace-id` and `x-datadog-parent-id` keys.
+- The `x-datadog-tags` key is optional and is used to pass additional tags.
 
 {{< highlight json >}}
 "_datadog": {
@@ -395,7 +397,9 @@ The context object must contain the `x-datadog-trace-id` and `x-datadog-parent-i
 }
 {{< /highlight >}}
 
-**Step Functions to Downstream services**: Add Step Function execution context to your task definitions using the patterns described above in the [propagating traces to Lambda via Managed Services][4] section. Additional configuration of the downstream service may be required.
+### Step Functions to Downstream services
+
+Add Step Function execution context to your task definitions using the patterns described above in the [propagating traces to Lambda via Managed Services][4] section. Additional configuration of the downstream service may be required.
 
 For assistance with custom integrations, [contact Datadog Support][5].
 
