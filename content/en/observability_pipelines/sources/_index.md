@@ -80,7 +80,7 @@ Instead of using a self-signed certificate, Datadog recommends the following:
 1. Use a certificate signed by Certificate Authority (CA).
 2. If you cannot use a CA-signed certificate, use a certificate from [Let's Encrypt][3].
 
-If you must use a self-signed certificate because the above approaches are not possible, you can configure your environment to trust the self-signed certificate on the Observability Pipelines Worker host. **Note**: This method is less secure. Datadog recommends this method for internal use only.
+If you must use a self-signed certificate because the above approaches are not possible, you can configure your environment to trust the self-signed certificate on the Observability Pipelines Worker host. **Note**: Datadog does not recommend self-signed certificates. They are less secure and are not appropriate for production or internet-facing use.  If you must use self-signed certificates, limit usage to internal testing only.
 
 For the Worker host to trust the self-signed certificate:
 
