@@ -734,7 +734,6 @@ Examples for `.browserErrors`:
       }
     ]
   }
-}
 ```
 
 {{% /tab %}}
@@ -852,6 +851,23 @@ Examples for `.browserErrors`:
 `.timings.message`
 : Message timing
 
+**Examples:**
+```json
+{
+  "timings": {
+    "total": 135.3,
+    "dns": 14.4,
+    "message": 120.9
+  },
+  "request": {
+    "message": "Ping"
+  },
+  "response": {
+    "message": "Pong"
+  }
+}
+```
+
 {{< /collapse-content >}}
 
 {{% collapse-content title= "TCP" level="h4" expanded=false %}}
@@ -861,15 +877,6 @@ Examples for `.browserErrors`:
 
 `.netpath.routers.ip`
 : Router IP addresses
-
-`.netpath.routers.resolvedHost`
-: Resolved hostnames
-
-`.netpath.routers.packetsSent`
-: Packets sent count
-
-`.netpath.routers.packetsReceived`
-: Packets received count
 
 `.traceroute.latency.min`
 : Minimum latency
@@ -886,6 +893,42 @@ Examples for `.browserErrors`:
 `.traceroute.latency.values`
 : Latency values array
 
+**Examples:**
+```json
+[
+      {
+        "packetLossPercentage": 1,
+        "packetsReceived": 0,
+        "packetsSent": 2,
+        "routers": [
+          {
+            "ip": "???"
+          }
+        ]
+      },
+      {
+        "packetLossPercentage": 0,
+        "packetsReceived": 2,
+        "latency": {
+          "avg": 0.2375,
+          "min": 0.189,
+          "max": 0.286,
+          "values": [
+            0.189,
+            0.286
+          ],
+          "stddev": 0.04849999999999999
+        },
+        "packetsSent": 2,
+        "routers": [
+          {
+            "ip": "10.241.134.75"
+          }
+        ]
+      }
+]
+```
+
 {{< /collapse-content >}}
 
 {{% collapse-content title= "ICMP" level="h4" expanded=false %}}
@@ -901,6 +944,31 @@ Examples for `.browserErrors`:
 
 `.latency.min`, `.latency.max`, `.latency.avg`, `.latency.stddev`, `.latency.values`
 : Latency measurements (same as TCP)
+
+**Examples:**
+```json
+{
+  "ping": {
+    "packetLossPercentage": 0,
+    "packetsReceived": 4,
+    "latency": {
+      "avg": 1.47375,
+      "min": 1.442,
+      "max": 1.516,
+      "values": [
+        1.467,
+        1.442,
+        1.47,
+        1.516
+      ],
+      "stddev": 0.02670557057993708
+    },
+    "resolvedIp": "18.245.199.70",
+    "packetsSent": 4,
+    "packetSize": 56
+  }
+}
+```
 
 {{< /collapse-content >}}
 
@@ -935,21 +1003,23 @@ Examples for `.browserErrors`:
 
 **Examples:**
 ```json
+      "cipher": TLS_AES_128_GCM_SHA256,
+      "issuer": {
+        "C": "US",
+        "CN": "DigiCert Global G2 TLS RSA SHA256 2020 CA1",
+        "O": "DigiCert Inc"
+      },
+```
+```json
 {
-  "ssl": {
-    "cert": "-----BEGIN CERTIFICATE-----...",
-    "cipher": "TLS_AES_256_GCM_SHA384",
-    "issuer": "Let's Encrypt Authority X3",
-    "subject": "CN=datadoghq.com",
-    "valid": {
-      "from": "2024-01-01T00:00:00Z",
-      "to": "2024-12-31T23:59:59Z"
-    },
-    "timings": {
-      "handshake": 45
-    }
-  }
-}
+  "issuer": {
+    "C": "US",
+    "CN": "DigiCert Global G2 TLS RSA SHA256 2020 CA1",
+    "O": "DigiCert Inc"
+  },
+  "valid.from": 1751414400000, //milliseconds
+  "valid.to": 1783036799000 //milliseconds
+}     
 ```
 
 {{< /collapse-content >}}
@@ -985,8 +1055,27 @@ Examples for `.browserErrors`:
 - `.result.steps.<step_id>`
   - `.id`, `.status`, `.type`, `.duration`, `.description`, `.failure.message`, `.code`, `.url`
 
+The step summary contains the same data as described in [steps](#variables-extracted-by-steps), but you can access it in several ways:
+
+By step index (0-based):
+- `.steps.0` - first step
+- `.steps.1` - second step
+- `.steps.-1` - last step
+- `.steps.-2` - step before last
+
+By step name:
+- `.steps[Click button]`
+
+By step id:
+- `.steps.abc-def-ghi`
+
+Then you access the data as usual, for example:
+- `.steps.-1.status`
+- `.steps[Click button].status`
+- `.steps.abc-def-ghi.status`
+
 **Summary Data:**
-- `.count.steps.{total,completed}`, `.count.errors`, `.count.hops`
+- `.count.steps.{total,completed}`, `.count.errors`, `.count.hops` (for example, `4`)
 
 **Shortcuts:**
 - `synthetics.failed_step` points to the first non-skippable failed step
@@ -1001,12 +1090,30 @@ If `service` tag is set:
 - `{{service.team}}`
 - `{{service.docs}}`, `{{service.links}}`
 
+**Examples**:
+```json
+{
+  "service.name": "API Server",
+  "service.team": "Backend team",
+  "service.docs": "https://docs.datadoghq.com/api/"
+}
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Conditional alerting
 
 Use conditional templating to change messages, set notification handles, or override alert priority based on test results. This is especially useful when routing alerts to specific teams.
+
+<div class="alert alert-warning">
+
+To ensure notifications are delivered properly, always include a notification handle in your conditional logic. Notifications are dropped if no handle is provided. Make sure to:
+
+- Include a catch-all condition using `{{else}}` to handle any unmatched scenarios.
+- Provide notification handles for both alert and recovery notifications.
+
+For more detailed information, see the <a href="https://docs.datadoghq.com/monitors/notify/variables/?tab=is_alert#examples">Monitor documentation.</a></div>
 
 ### Examples
 
@@ -1075,6 +1182,8 @@ You can loop over lists (like steps or variables) or access items directly:
 ```
 
 ### Human-readable formatting
+
+**Note**: All durations are in milliseconds.
 
 - **Durations:**
 
@@ -1210,3 +1319,4 @@ For more information, see [Integrating Monitors with Statuspage][8].
 [7]: https://support.atlassian.com/statuspage/docs/get-started-with-email-automation/
 [8]: /monitors/guide/integrate-monitors-with-statuspage/
 [9]: /monitors/notifications
+
