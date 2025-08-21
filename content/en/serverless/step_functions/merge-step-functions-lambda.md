@@ -397,7 +397,7 @@ Include trace context in the Step Function input payload as JSON under the `_dat
 }
 {{< /highlight >}}
 
-### Step Functions to Downstream services
+### Step Functions to downstream services
 
 Add Step Function execution context to your task definitions using the patterns described above in the [propagating traces to Lambda via Managed Services][4] section. Additional configuration of the downstream service may be required.
 
