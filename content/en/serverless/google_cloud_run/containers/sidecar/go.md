@@ -82,7 +82,7 @@ logrus.WithContext(ctx).Info("Hello World!")
 
    For more information, see [Correlating Go Logs and Traces][3].
 
-4. **Custom metrics**.
+4. **Send custom metrics**.
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5].
 
