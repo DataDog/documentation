@@ -8,14 +8,16 @@ further_reading:
 - link: /developers/integrations/
   tag: Documentation
   text: Learn about creating an Agent or API-based integration
-- link: /developers/integrations/oauth_for_integrations/
+- link: /developers/integrations/api_integration/
   tag: Documentation
-  text: Learn about using OAuth for integrations
+  text: Learn about using OAuth for API-based integrations
 title: Integration Assets Reference
 ---
 ## Overview
 
 This page walks you through the files that you need to populate in order to create an offering on the [**Integrations** page][12] or the [**Marketplace** page][9]. 
+
+<div class="alert alert-info">Some files apply only to legacy integrations that were <em>not</em> created using the Integration Developer Platform.</div>
 
 ## Configuration file
 

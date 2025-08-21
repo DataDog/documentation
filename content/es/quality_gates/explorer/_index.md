@@ -58,7 +58,7 @@ En el panel **Quality Gates** (Puertas de calidad) de la izquierda se muestran l
 | Nombre de la regla    | El nombre que le dio el usuario a una regla particular para identificarla.                                    |
 | Estado de bloqueo | Determina si el estado de la regla provocará o no que falle el flujo de trabajo de CI: `true` o `false`.   |
 | Creador      | El usuario que creó la regla de la puerta de calidad.                                 |
-| Origen de datos  | El origen de los datos que se evalúa para la regla (tests, análisis estático).                             |
+| Fuente de datos  | El origen de los datos que se evalúa para la regla (tests, análisis estático).                             |
 | ID de puerta      | ID de la puerta de calidad.                                      |
 
 ## Detalles de las ejecuciones de reglas
@@ -98,7 +98,7 @@ Selecciona un tipo de visualización para visualizar los resultados de los filtr
 
 Exporta tu vista en el [explorador de puertas de calidad][5] para reutilizarla más adelante o en diferentes contextos. Para obtener más información, consulta [Vistas guardadas][4].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

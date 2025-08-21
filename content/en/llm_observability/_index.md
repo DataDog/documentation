@@ -21,6 +21,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-mcp-servers/"
   tag: "Blog"
   text: "Identify common security risks in MCP servers"
+- link: "https://www.datadoghq.com/blog/detect-abuse-ai-infrastructure/"
+  tag: "Blog"
+  text: "Abusing AI infrastructure: How mismanaged credentials and resources expose LLM applications"
 ---
 
 ## Overview

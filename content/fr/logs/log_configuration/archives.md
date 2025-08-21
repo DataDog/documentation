@@ -447,6 +447,7 @@ Cette structure de répertoire vous permet d'interroger plus facilement vos arch
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
+
 *Logging without Limits est une marque déposée de Datadog, Inc.
 
 [1]: /fr/logs/indexes/#exclusion-filters

@@ -6,7 +6,7 @@ aliases:
 further_reading:
 - link: "https://app.datadoghq.com/app-builder/action-catalog"
   tag: "App"
-  text: "Actions Catalog"
+  text: "Action Catalog"
 ---
 
 When you have Datadog App Builder apps embedded in your dashboards, you can take direct actions on your resources, and all of the relevant data and context is immediately available. Link your app with the dashboard's time frame and template variables to dynamically set the scope of the app's actions, which allows you to carry out actions in your environment at any needed scope.

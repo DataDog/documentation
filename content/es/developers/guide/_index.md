@@ -10,12 +10,12 @@ title: Guías para desarrolladores
 ---
 
 {{< whatsnext desc="General:" >}}
-    {{< nextlink href="developers/guide/data-collection-resolution-retention">}}Recopilación, resolución y conservación de datos de Datadog{{< /nextlink >}}
-    {{< nextlink href="developers/guide/creating-a-jmx-integración">}}Creación de una integración con JMX{{< /nextlink >}}
+    {{< nextlink href="developers/guide/data-collection-resolution">}}Recopilación y resolución de datos de Datadog{{< /nextlink >}}
+    {{< nextlink href="developers/guide/creating-a-jmx-integration">}}Creación de una integración de JMX{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Guías útiles para interactuar con las API de Datadog:" >}}
-{{< nextlink href="developers/guide/what-best-practices-are-recommended-for-naming-metrics-and-tags">}}Prácticas recomendadas para la denominación de métricas y etiquetas{{< /nextlink >}}
+    {{< nextlink href="developers/guide/what-best-practices-are-recommended-for-naming-metrics-and-tags">}}Prácticas recomendadas para la denominación de métricas y etiquetas{{< /nextlink >}}
     {{< nextlink href="developers/guide/query-the-infrastructure-list-via-the-api">}}Consultar la lista de infraestructuras mediante la API{{< /nextlink >}}
     {{< nextlink href="getting_started/api/">}}Uso de Postman con las API de Datadog{{< /nextlink >}}
     {{< nextlink href="developers/guide/calling-on-datadog-s-api-with-the-webhooks-integration">}}Llamadas a la API de Datadog mediante la integración con webhooks{{< /nextlink >}}
