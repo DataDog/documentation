@@ -81,11 +81,11 @@ You can use Terraform to create and manage the Datadog Agent extension. Follow t
 {{% tab "Windows" %}}
 1. [Install the Agent][11].
 2. Apply any desired [Agent configurations][12].
-3. Navigate to `%ProgramData%\Datadog`.  Remove any extra installation artifacts or files that may be present. Ensure that the folder contains only:
+3. Navigate to `%ProgramData%\Datadog`. Remove any extra installation artifacts or files that may be present. Ensure that the folder contains only:
     -  `datadog.yaml`
     -  `conf.d` folder containing your integration configurations
 4. Save the sanitized `%ProgramData%\Datadog` folder as a zip file.
-5. Generate a hash of the zipped folder using the Powershell command `Get-FileHash %ProgramData%\Datadog.zip -Algorithm SHA256`.  Reference this hash in the Terraform block with the `agentConfigurationChecksum` parameter.
+5. Generate a hash of the zipped folder using the Powershell command `Get-FileHash %ProgramData%\Datadog.zip -Algorithm SHA256`. Reference this hash in the Terraform block with the `agentConfigurationChecksum` parameter.
 6. Upload the file to blob storage.
 7. Reference the blob storage URL in the Terraform block with the `agentConfiguration` parameter to create the VM extension.
 
@@ -94,7 +94,7 @@ You can use Terraform to create and manage the Datadog Agent extension. Follow t
 1. [Install the Agent][11].
 2. Apply any desired [Agent configurations][12].
 3. Save the `/etc/datadog-agent` folder as a zip file, using the command `zip -r datadog_config.zip /etc/datadog-agent`.
-4. Generate a hash of the zipped folder using the command `sha256sum datadog_config.zip`.  Reference this hash in the Terraform block with the `agentConfigurationChecksum` parameter.
+4. Generate a hash of the zipped folder using the command `sha256sum datadog_config.zip`. Reference this hash in the Terraform block with the `agentConfigurationChecksum` parameter.
 5. Upload the file to blob storage.
 6. Reference the blob storage URL in the Terraform block with the `agentConfiguration` parameter to create the VM extension.
 
