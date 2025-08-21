@@ -101,7 +101,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/DataDog/datadog-go/v5/statsd"
+	"github.com/DataDog/datadog-go/v6/statsd"
 )
 
 func main() {
@@ -282,7 +282,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/DataDog/datadog-go/v5/statsd"
+	"github.com/DataDog/datadog-go/v6/statsd"
 )
 
 func main() {
@@ -456,7 +456,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/DataDog/datadog-go/v5/statsd"
+	"github.com/DataDog/datadog-go/v6/statsd"
 )
 
 func main() {
@@ -619,7 +619,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/DataDog/datadog-go/v5/statsd"
+	"github.com/DataDog/datadog-go/v6/statsd"
 )
 
 func main() {
@@ -888,7 +888,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/DataDog/datadog-go/v5/statsd"
+	"github.com/DataDog/datadog-go/v6/statsd"
 )
 
 func main() {
