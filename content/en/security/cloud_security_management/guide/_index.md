@@ -10,6 +10,7 @@ aliases:
 {{< whatsnext desc="Cloud Security Guides" >}}
     {{< nextlink href="/getting_started/cloud_security_management" >}}First Steps for Cloud Security{{< /nextlink >}}
     {{< nextlink href="/security/cloud_security_management/guide/agent_variables" >}}Cloud Security Agent Variables{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_security_management/guide/infraless-cloud-security" >}}Configure Datadog Agent for Cloud Security Only{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Cloud Security Misconfigurations Guides" >}}
