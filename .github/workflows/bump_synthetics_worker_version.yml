@@ -32,21 +32,28 @@ jobs:
         run: |
           python local/bin/py/version_getter.py
 
+      - name: Save modified file
+        run: |
+          mkdir -p $RUNNER_TEMP/synthetics
+          cp ./data/synthetics_worker_versions.json $RUNNER_TEMP/synthetics/
+
       - name: echo new version
         run: echo ${{ steps.write-synthetics-worker-version.outputs.new_version }}
 
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
         with:
           persist-credentials: true
+
+      - name: Restore modified file
+        run: |
+          cp $RUNNER_TEMP/synthetics/synthetics_worker_versions.json ./data/
+
       - name: Write version
         if: steps.write-synthetics-worker-version.outputs.new_version == 'true'
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          output=$(git status --porcelain)
-          expected=" M data/synthetics_worker_versions.json"
-          [[ "$output" != "$expected" ]] && exit 1
-          git add .
+          git add ./data/synthetics_worker_versions.json
           git commit -m "(Automated) Bump synthetics-worker version"
           git push -f origin HEAD:refs/heads/synthetics-worker/versions
 
