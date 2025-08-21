@@ -29,7 +29,7 @@ Query slowdowns occur when the concurrent query limit is reached, and a query is
 - **Concurrent query utilization:** Shows the number of queries running at the same time and the available headroom. If usage reaches the maximum capacity, additional queries are throttled until a slot is available.
 - **Slowdowns by day of the week:** Provides an overview of the percentage of query slowdowns by day, helping identify patterns in compute demand.
 - **Top sources of slowdowns:** Breaks down whether delays originate from the Log Explorer, dashboards, or API queries, making it easier to target areas for optimization.
-- **Drilldowns:** Click on a dashboard or user to open directly to the dashboard or the user history of Flex queries in [Audit Trail][2]. **Note**: Only Logs List queries are audited. This does not include queries used for visualizations, such as timeseries or toplist.
+- **Drilldowns:** Click on a dashboard or user to open directly to the dashboard or the user history of Flex queries in [Audit Trail][2]. **Note**: Only Logs List queries are audited. This does not include queries used for visualizations, such as timeseries or top list.
 
 ## Optimization recommendations
 
