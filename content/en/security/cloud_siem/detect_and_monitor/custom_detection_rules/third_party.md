@@ -20,11 +20,15 @@ To create a threshold detection rule or job:
 
 ### Define search queries
 
-{{< img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" >}}
+#### Root query
 
-{{% cloud_siem/define_search_queries %}}
+Cloud SIEM can analyze logs, Audit Trail events, and events from Event Management. To search Audit Trail events, click the down arrow next to **Logs** and select **Audit Trail**. Construct a search query for your logs or audit events using the [Log Explorer search syntax][1]. The trigger defined for each new attribute generates a signal for each new value of that attribute over a 24-hour roll-up period.
 
-#### Joining queries
+Click **Add Root Query** to add additional queries.
+
+**Note**: The query applies to all ingested logs.
+
+#### Joining root queries
 
 {{% cloud_siem/joining_queries %}}
 
@@ -60,11 +64,11 @@ The rule case joins these queries together based on their `group by` value. The 
 
 In this example, when there are more than five failed logins and at least one successful login for the same `User Name`, the first case is matched, and a Security Signal is generated.
 
-### Severity and notification
+#### Severity and notification
 
 {{% security-rule-severity-notification %}}
 
-### Time windows
+#### Time windows
 
 {{% security-rule-time-windows %}}
 
@@ -72,7 +76,13 @@ Click **Add Case** to add additional cases.
 
 **Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
-### Decreasing non-production severity
+#### Other parameters
+
+Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
+
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+
+##### Decreasing non-production severity
 
 {{% cloud_siem/decreasing_non_prod_severity %}}
 
@@ -85,7 +95,6 @@ Click **Add Case** to add additional cases.
 {{% cloud_siem/create_suppression %}}
 
 [1]: /logs/search_syntax/
-[2]:  https://app.datadoghq.com/logs/
 
 {{% /tab %}}
 {{% tab "Scheduled rule" %}}

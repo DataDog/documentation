@@ -20,9 +20,23 @@ To create a threshold detection rule or job:
 
 ### Define search queries
 
-{{< img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" >}}
+Cloud SIEM can analyze logs, Audit Trail events, and events from Event Management. To search Audit Trail events, click the down arrow next to **Logs** and select **Audit Trail**. Construct a search query for your logs or audit events using the [Log Explorer search syntax][1]. All logs matching this query are analyzed for a potential impossible travel. The `Preview matching logs` section shows logs that match the query.
 
-{{% cloud_siem/define_search_queries %}}
+#### User attribute
+
+For the `user attribute`, select the field in the analyzed log that contains the user ID. This can be an identifier like an email address, user name, or account identifier.
+
+#### Location attribute
+
+The `location attribute` specifies which field holds the geographic information for a log. The only supported value is `@network.client.geoip`, which is enriched by the [GeoIP parser][2] to give a log location information based on the client's IP address.
+
+#### Baseline user locations
+
+Click the checkbox if you'd like Datadog to learn regular access locations before triggering a signal.
+
+When selected, signals are suppressed for the first 24 hours. In that time, Datadog learns the user's regular access locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.
+
+Do not click the checkbox if you want Datadog to detect all impossible travel behavior.
 
 #### Joining queries
 
@@ -60,11 +74,11 @@ The rule case joins these queries together based on their `group by` value. The 
 
 In this example, when there are more than five failed logins and at least one successful login for the same `User Name`, the first case is matched, and a Security Signal is generated.
 
-### Severity and notification
+#### Severity and notification
 
 {{% security-rule-severity-notification %}}
 
-### Time windows
+#### Time windows
 
 {{% security-rule-time-windows %}}
 
@@ -72,7 +86,15 @@ Click **Add Case** to add additional cases.
 
 **Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
-### Decreasing non-production severity
+#### Other parameters
+
+In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected.
+
+Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
+
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+
+##### Decreasing non-production severity
 
 {{% cloud_siem/decreasing_non_prod_severity %}}
 
@@ -85,7 +107,8 @@ Click **Add Case** to add additional cases.
 {{% cloud_siem/create_suppression %}}
 
 [1]: /logs/search_syntax/
-[2]:  https://app.datadoghq.com/logs/
+[2]: https://app.datadoghq.com/logs/
+[3]: /logs/log_configuration/processors/?tab=ui#geoip-parser
 
 {{% /tab %}}
 {{% tab "Scheduled rule" %}}
@@ -121,3 +144,4 @@ TKTK
 {{< /tabs >}}
 
 [1]: https://app.datadoghq.com/security/configuration/siem/rules
+[2]: /logs/search_syntax/

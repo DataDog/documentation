@@ -60,11 +60,11 @@ The rule case joins these queries together based on their `group by` value. The 
 
 In this example, when there are more than five failed logins and at least one successful login for the same `User Name`, the first case is matched, and a Security Signal is generated.
 
-### Severity and notification
+#### Severity and notification
 
 {{% security-rule-severity-notification %}}
 
-### Time windows
+#### Time windows
 
 {{% security-rule-time-windows %}}
 
@@ -72,7 +72,17 @@ Click **Add Case** to add additional cases.
 
 **Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
-### Decreasing non-production severity
+#### Other parameters
+
+In the **Forget Value** dropdown, select after how many days (**1**-**30 days**) you want the value to be forgotten.
+
+In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected.
+
+Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
+
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+
+##### Decreasing non-production severity
 
 {{% cloud_siem/decreasing_non_prod_severity %}}
 
