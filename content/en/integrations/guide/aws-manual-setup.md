@@ -134,7 +134,6 @@ This policy defines the permissions necessary for the Datadog integration role t
 [5]: /integrations/amazon_web_services/#resource-collection
 [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html
 [7]: https://aws.amazon.com/blogs/security/easier-way-to-control-access-to-aws-regions-using-iam-policies/
-[8]: https://www.datadoghq.com/legal/restricted-service-locations/
 {{% /tab %}}
 {{% tab "Access keys" %}}
 
@@ -158,7 +157,6 @@ This policy defines the permissions necessary for the Datadog integration role t
 \*{{% mainland-china-disclaimer %}}
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
-[2]: https://www.datadoghq.com/legal/restricted-service-locations/
 {{% /tab %}}
 {{< /tabs >}}
 
