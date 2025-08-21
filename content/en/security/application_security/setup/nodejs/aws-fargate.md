@@ -155,7 +155,7 @@ aws ecs register-task-definition --cli-input-json file://task-definition.json
 aws ecs run-task --cluster your-cluster --task-definition your-task-definition
 ```
 
-{{% aap/aap_and_api_protection_nodejs_verify_setup %}}
+{{% aap/aap_and_api_protection_verify_setup %}}
 
 ## Troubleshooting
 

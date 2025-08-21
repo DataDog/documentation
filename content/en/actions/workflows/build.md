@@ -12,7 +12,7 @@ further_reading:
   text: "Getting Started with Workflow Automation"
 - link: "/actions/actions_catalog"
   tag: "Documentation"
-  text: "Browse the available actions in the Actions Catalog"
+  text: "Browse the available actions in the Action Catalog"
 - link: "/security/cloud_security_management/workflows"
   tag: "Documentation"
   text: "Automate Security Workflows with Workflow Automation"

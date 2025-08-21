@@ -7,7 +7,10 @@ disable_toc: false
 further_reading:
 - link: "/actions/actions_catalog/"
   tag: "Documentation"
-  text: "Actions Catalog"
+  text: "Action Catalog"
+- link: "https://learn.datadoghq.com/courses/getting-started-app-builder/"
+  tag: "Learning Center"
+  text: "Getting Started with App Builder"
 ---
 
 You can create an app or edit existing apps from the [App Builder][1] page. The page lists information about existing apps, including the following:
