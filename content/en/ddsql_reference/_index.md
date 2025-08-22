@@ -24,6 +24,8 @@ DDSQL is SQL for Datadog data. It implements several standard SQL operations, su
 
 This documentation covers the SQL support available and includes:
 - [Syntax compatible with PostgreSQL](#syntax)
+- [Data types](#data-types)
+- [Type literals](#type-literals)
 - [SQL functions](#functions)
 - [Window functions](#window-functions)
 - [JSON functions](#json-functions-and-operators)
@@ -88,6 +90,62 @@ FROM employees {{< /code-block >}}                |
 FROM products {{< /code-block >}} |
 | `INTERVAL value unit`  | interval                      | Represents a time duration specified in a given unit. Supported units:<br>- `milliseconds` / `millisecond`<br>- `seconds` / `second`<br>- `minutes` / `minute`<br>- `hours` / `hour`<br>- `days` / `day` |
 
+## Data types
+
+DDSQL supports the following data types:
+
+| Data Type | Description |
+|-----------|-------------|
+| `BIGINT` | 64-bit signed integers |
+| `BOOLEAN` | True or false values |
+| `DOUBLE` | Double-precision floating-point numbers |
+| `INTERVAL` | Time duration values |
+| `JSON` | JSON data |
+| `TIMESTAMP` | Date and time values |
+| `VARCHAR` | Variable-length character strings |
+
+### Array types
+
+All data types except `JSON` support array types. Arrays can contain multiple values of the same data type.
+
+## Type literals
+
+DDSQL supports explicit type literals using the syntax `[TYPE] [value]`.
+
+| Type | Syntax | Example |
+|------|--------|---------|
+| `BIGINT` | `BIGINT value` | `BIGINT 1234567` |
+| `BOOLEAN` | `BOOLEAN value` | `BOOLEAN true` |
+| `DOUBLE` | `DOUBLE value` | `DOUBLE 3.14159` |
+| `INTERVAL` | `INTERVAL 'value unit'` | `INTERVAL '30 minutes'` |
+| `JSON` | `JSON 'value'` | `JSON '{"key": "value", "count": 42}'` |
+| `TIMESTAMP` | `TIMESTAMP 'value'` | `TIMESTAMP '2023-12-25 10:30:00'` |
+| `VARCHAR` | `VARCHAR 'value'` | `VARCHAR 'hello world'` |
+
+The type prefix can be omitted and the type will be automatically inferred from the value. For example, `'hello world'` will be inferred as `VARCHAR`, `123` as `BIGINT`, and `true` as `BOOLEAN`.
+
+### Array literals
+
+Array literals use the syntax `ARRAY[value1, value2, ...]`. The array type is automatically inferred from the values.
+
+{{< code-block lang="sql" >}}
+SELECT ARRAY['apple', 'banana', 'cherry'] AS fruits; -- Inferred as VARCHAR array
+SELECT ARRAY[1, 2, 3] AS numbers;                    -- Inferred as BIGINT array
+SELECT ARRAY[true, false, true] AS flags;            -- Inferred as BOOLEAN array
+SELECT ARRAY[1.1, 2.2, 3.3] AS decimals;             -- Inferred as DOUBLE array
+{{< /code-block >}}
+
+### Example
+
+{{< code-block lang="sql" >}}
+-- Using type literals in queries
+SELECT 
+    VARCHAR 'Product Name: ' || name AS labeled_name,
+    price * DOUBLE 1.08 AS price_with_tax,
+    created_at + INTERVAL '7 days' AS expiry_date
+FROM products
+WHERE active = BOOLEAN true;
+{{< /code-block >}}
 
 ## Functions
 
