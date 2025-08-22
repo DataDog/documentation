@@ -72,7 +72,7 @@ After processing, the following structured log is generated:
 
 ### Matcher and filter
 
-<div class="alert alert-warning">Grok parsing features available at <em>query-time</em> (in <a href="/logs/workspaces/#transformation-cell">Log Workspaces</a> and in the <a href="/logs/explorer/calculated_fields/">Log Explorer</a>) support a limited subset of matchers (<strong>data</strong>, <strong>integer</strong>, <strong>notSpace</strong>, <strong>number</strong>, and <strong>word</strong>) and filters (<strong>number</strong> and <strong>integer</strong>).<br><br>
+<div class="alert alert-warning">Grok parsing features available at <em>query-time</em> (in the <a href="/logs/explorer/calculated_fields/">Log Explorer</a>) support a limited subset of matchers (<strong>data</strong>, <strong>integer</strong>, <strong>notSpace</strong>, <strong>number</strong>, and <strong>word</strong>) and filters (<strong>number</strong> and <strong>integer</strong>).<br><br>
 The following full set of matchers and filters are specific to <em>ingest-time</em> <a href="/logs/log_configuration/processors/?tab=ui#grok-parser">Grok Parser</a> functionality.</div>
 
 Here is a list of all the matchers and filters natively implemented by Datadog:
