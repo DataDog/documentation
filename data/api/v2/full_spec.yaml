@@ -71844,14 +71844,6 @@ paths:
         This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
       operationId: GetHistoricalCostByOrg
       parameters:
-      - description: String to specify whether cost is broken down at a parent-org
-          level or at the sub-org level. Available views are `summary` and `sub-org`.  Defaults
-          to `summary`.
-        in: query
-        name: view
-        required: false
-        schema:
-          type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
           for cost beginning this month.'
         in: query
@@ -71859,6 +71851,14 @@ paths:
         required: true
         schema:
           format: date-time
+          type: string
+      - description: String to specify whether cost is broken down at a parent-org
+          level or at the sub-org level. Available views are `summary` and `sub-org`.  Defaults
+          to `summary`.
+        in: query
+        name: view
+        required: false
+        schema:
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
           for cost ending this month.'
