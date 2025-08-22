@@ -28,13 +28,13 @@ The [DatadogPodAutoscaler (DKA)][1] is a Kubernetes custom resource definition (
 
 Before you begin, ensure you have the following:
 
-- **Kubernetes Cluster**: A working Kubernetes cluster with access via `kubectl`
+- **Kubernetes cluster**: A working Kubernetes cluster with access using `kubectl`
 - **Terraform**: Terraform installed (version 0.13 or later recommended)
-- **Datadog API Credentials**: Valid Datadog API and Application keys
+- **Datadog API credentials**: Valid Datadog API key and application key
 
 ## Project structure
 
-This guide uses a multi-stage deployment approach to ensure proper dependency creation for Terraform
+This guide uses a multi-stage deployment approach to ensure proper dependency creation for Terraform.
 
 ```
 .
@@ -50,21 +50,20 @@ This guide uses a multi-stage deployment approach to ensure proper dependency cr
 
 ## Deployment stages
 
-A multi-stage deployment approach is essential when working with Kubernetes Custom Resource Definitions (CRDs) and Terraform. Here's why this approach is necessary:
+A multi-stage deployment approach is essential when working with Kubernetes custom resource definitions (CRDs) and Terraform. This ordered approach is necessary to ensure that you create and install the dependencies required for each stage in the process.
 
 Kubernetes CRDs must be installed in the cluster before you can create custom resources that use them. The DatadogPodAutoscaler CRD is created when you install the Datadog Operator in Stage 1. Terraform needs to know about these CRDs before it can manage resources that depend on them.
 
 The Terraform Kubernetes provider discovers available resource types at initialization time. If you try to create a DatadogPodAutoscaler resource before the CRD is installed, Terraform will fail because it doesn't recognize the custom resource type.
 
-1. **Stage 1 (Datadog Operator and CRDs)**: Creates Datadog secret and operator and CRD
-   - Datadog operator via Helm (creates CRDs)
-2. **Stage 2 (Datadog Agent)**: Deploys the Datadog Agent configured for Datadog Kuberentes Autoscaling
-   - Datadog API and APP secrets
+1. **Stage 1 (Datadog Operator and CRDs)**: Creates Datadog secret, Operator, and CRD
+   - Datadog Operator using Helm (creates CRDs)
+2. **Stage 2 (Datadog Agent)**: Deploys the Datadog Agent configured for Datadog Kubernetes Autoscaling
+   - Datadog API and application secrets
    - DatadogAgent custom resource with Cluster Agent enabled
-   - Requires Stage 1 to complete first
 3. **Stage 3 (Autoscaled workload)**: Deploys application with DatadogPodAutoscaler
    - Nginx namespace and deployment
-   - DatadogPodAutoscaler resource for autoscaling the Nginx deployment
+   - DatadogPodAutoscaler resource for autoscaling the nginx deployment
 
 ## Set up configuration files
 
@@ -106,7 +105,7 @@ variable "datadog_api_key" {
 }
 
 variable "datadog_app_key" {
-  description = "Datadog Application key"
+  description = "Datadog application key"
   type        = string
   sensitive   = true
 }
@@ -376,7 +375,7 @@ kubectl get crd
 kubectl get pods -n datadog
 {{< /code-block >}}
 
-You should see that the Datadog CRDs are created and the datadog-operator pod is running
+You should see that the Datadog CRDs are created and the datadog-operator pod is running.
 
 ### Stage 2: Datadog Agent
 
