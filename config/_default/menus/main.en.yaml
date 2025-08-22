@@ -3678,6 +3678,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_reports
       weight: 9
+    - name: Scheduled Cost Reports
+      url: /cloud_cost_management/reports/scheduled_reports
+      parent: cloud_cost_reports
+      identifier: cloud_cost_scheduled_reports
+      weight: 901
     - name: Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost

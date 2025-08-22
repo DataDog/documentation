@@ -2,6 +2,12 @@
 title: Live Messages
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+    Data Streams Monitoring は、{{< region-param key="dd_site_name" >}} サイトでは使用できません。
+</div>
+{{% /site-region %}}
+
 {{< callout url="#" btn_hidden="true" header="プレビューに参加しよう!">}}
 Live Messages は Protobuf と Avro を使用する Java-Kafka サービス向けにプレビュー提供中です。他の言語やテクノロジーに関心がある場合は support@datadoghq.com に連絡してください。 
 {{< /callout >}}
@@ -21,7 +27,7 @@ Live Messages は、特定のサービスが消費または生成するメッセ
    - `Dynamic Instrumentation Read`
    - `Dynamic Instrumentation Write`
 
-### 使用方法
+### Usage
 
 1. Data Streams Monitoring マップに移動し、Dynamic Instrumentation が有効な Java サービスをクリックします。**Messages** タブを選択します。
    {{< img src="data_streams/dsm-messages-tab.png" alt="サービスのサイド パネルが開いた Data Streams Monitoring。再生ボタンが表示されています。" style="width:80%;" >}}

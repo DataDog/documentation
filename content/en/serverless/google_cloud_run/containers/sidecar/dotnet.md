@@ -81,9 +81,13 @@ builder.Host.UseSerilog((context, config) =>
 logger.LogInformation("Hello World!");
 {{< /code-block >}}
 
-Datadog recommends setting the environment variable `DD_SOURCE=csharp` in your sidecar container to enable advanced Datadog log parsing.
+   Datadog recommends setting the environment variable `DD_SOURCE=csharp` in your sidecar container to enable advanced Datadog log parsing.
 
-For more information, see [Correlating .NET Logs and Traces][3].
+   For more information, see [Correlating .NET Logs and Traces][3].
+
+4. **Send custom metrics**.
+
+   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5].
 
 {{% gcr-env-vars instrumentationMethod="sidecar" language="csharp" %}}
 
@@ -98,3 +102,5 @@ For more information, see [Correlating .NET Logs and Traces][3].
 [1]: https://docs.docker.com/build/building/secrets/
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=linux
 [3]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
+[4]: /developers/dogstatsd/?tab=dotnet#install-the-dogstatsd-client
+[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=dotnet#code-examples
