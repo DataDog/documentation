@@ -646,11 +646,31 @@ menu:
       url: /opentelemetry/setup/
       parent: opentelemetry_top_level
       weight: 4
+    - name: DDOT Collector (Recommended)
+      url: /opentelemetry/setup/ddot_collector
+      identifier: otel-setup-ddot
+      parent: otel_collect
+      weight: 401
+    - name: Install the Collector
+      url: /opentelemetry/setup/ddot_collector/install
+      identifier: otel-setup-ddot-install
+      parent: otel-setup-ddot
+      weight: 4011
+    - name: Use Custom OTel Components
+      url: /opentelemetry/setup/ddot_collector/custom_components
+      identifier: otel-setup-ddot-custom
+      parent: otel-setup-ddot
+      weight: 4012
+    - name: Other Setup Options
+      url: /opentelemetry/setup/
+      identifier: otel-setup-other
+      parent: otel_collect
+      weight: 402
     - name: OpenTelemetry Collector
       url: /opentelemetry/setup/collector_exporter/
       identifier: otel-setup-collector-exporter
-      parent: otel_collect
-      weight: 401
+      parent: otel-setup-other
+      weight: 4021
     - name: Deploy
       url: /opentelemetry/setup/collector_exporter/deploy
       identifier: otel-setup-collector-exporter-deploy
@@ -676,25 +696,15 @@ menu:
       identifier: otel_otlp_receiver
       parent: otel-setup-collector-exporter
       weight: 105
-    - name: Datadog Agent
-      url: /opentelemetry/setup/agent
-      identifier: otel-setup-agent
-      parent: otel_collect
-      weight: 402
-    - name: DDOT Collector
-      url: /opentelemetry/setup/ddot_collector
-      identifier: otel-setup-ddot-collector
-      parent: otel-setup-agent
-      weight: 4021
-    - name: OTLP Ingest
+    - name: OTLP Ingest in the Agent
       url: /opentelemetry/setup/otlp_ingest_in_the_agent
       identifier: otel-setup-otlp-ingest
-      parent: otel-setup-agent
+      parent: otel-setup-other
       weight: 4022
     - name: Agentless Deployment
       url: /opentelemetry/setup/agentless
       identifier: otel-setup-intake-endpoint
-      parent: otel_collect
+      parent: otel-setup-other
       weight: 403
     - name: Logs Endpoint
       url: /opentelemetry/setup/agentless/logs
