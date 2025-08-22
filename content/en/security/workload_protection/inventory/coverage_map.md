@@ -18,7 +18,7 @@ Coverage consolidates critical protection data into one view so you can:
 
 * Identify the workloads protected by security agents and policies.
 * Detect misconfigurations, outdated agents, and missing rules.
-* Validate that detection policies align with security baselines and frameworks like MITRE ATT\&CK. See also, [MITRE ATT&CK map][2].
+* Validate that detection policies align with security baselines and frameworks like MITRE ATT&CK. See also: [MITRE ATT&CK map][2].
 * Prioritize remediation for high-risk assets.
 
 ## Key functionality
@@ -51,18 +51,18 @@ Policies are displayed with the following statuses:
 - **Partially Loaded:** some of the policy's rules fail.
 - **Fully Rejected:** the entire policy is failing.
 
-## Improving workload security using Coverage
+## Use cases
 
 Here are some ways to use Coverage to improve your workload security.
 
 ### Detect and remediate policy deployment issues
-
+If you see an "Incomplete infrastructure coverage" status card on the Coverage page, do the following:
 1. In **Incomplete infrastructure coverage**, click **Warning**, and then select the policies in **Security coverage needs attention**. In the coverage map, assets with policy deployment problems are displayed as orange hexagons.
-3. Review the list of deployed policies. Policies are highlighted with statuses such as **Partially Loaded**, **Fully Rejected**, etc.
-4. In the policy details, do one of the following:
+2. Review the list of deployed policies. Policies are highlighted with statuses such as **Partially Loaded**, **Fully Rejected**, and so on.
+3. In the policy details, do one of the following:
    - [Edit a policy][4].
    - View a policy's rule errors, and then [edit them][4] as needed.
-5. Redeploy and confirm the fix in the coverage map.
+4. Redeploy and confirm the fix in the coverage map.
 
 ### Identify assets missing Workload Protection
 
