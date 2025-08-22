@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-The [DatadogPodAutoscaler (DKA)][1] is a Kubernetes custom resource definition (CRD) that enables autoscaling of Kubernetes workloads based on Datadog metrics. This guide demonstrates how to manage DatadogPodAutoscaler resources using Terraform and Hashicorp's kubernetes provider to deploy an autoscaling configurations.
+The [DatadogPodAutoscaler (DKA)][1] is a Kubernetes custom resource definition (CRD) that enables autoscaling of Kubernetes workloads based on Datadog metrics. This guide demonstrates how to manage DatadogPodAutoscaler resources using Terraform and HashiCorp's Kubernetes provider to deploy an autoscaling configurations.
 
 ## Prerequisites
 
@@ -379,7 +379,7 @@ datadog_api_key = "your-api-key-here"
 datadog_app_key = "your-app-key-here"
 EOF
 {{< /code-block >}}
-Alternatively, set the `TF_VAR_datadog_api_key` and `TF_VAR_datadog_app_key` enviornment variables in your shell.
+Alternatively, set the `TF_VAR_datadog_api_key` and `TF_VAR_datadog_app_key` environment variables in your shell.
 
 {{< code-block lang="bash" >}}
 cd datadogagent
@@ -392,7 +392,7 @@ terraform apply
 {{< code-block lang="bash" >}}
 kubectl get datadogagent -n datadog
 {{< /code-block >}}
-You should see the datadog agent custom resouce created. It should be in the `Running` state before proceeding.
+You should see the Datadog Agent custom resource created. It should be in the `Running` state before proceeding.
 
 {{< code-block lang="bash" >}}
 kubectl get pods -n datadog
@@ -423,7 +423,7 @@ kubectl describe datadogagent datadog -n datadog
 kubectl get datadogpodautoscaler -n nginx-dka-demo
 kubectl describe datadogpodautoscaler nginx-autoscaler -n nginx-dka-demo
 {{< /code-block >}}
-Congratulations, you now have a workload managed by the Datadog Kubernetes Autoscaler!
+Congratulations, you have a workload managed by the Datadog Kubernetes Autoscaler!
 
 ## Cleanup
 
