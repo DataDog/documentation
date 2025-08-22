@@ -49,7 +49,7 @@ Make sure you grant the mobile app the necessary permissions.
 {{< /tabs >}}
 
 ### Custom sounds
-On both iOS and Android, you have the option to override the default system notification sounds. The Datadog app comes preloaded with a selection of custom sounds.  
+On both iOS and Android, you have the option to override the default system notification sounds. The Datadog app comes preloaded with a selection of custom sounds.   
 
 ## Circumvent mute and Do Not Disturb mode for On-Call
 You can override your device's system volume and Do Not Disturb mode for both push notifications (from the Datadog mobile app) and telephony notifications (such as voice call and SMS).
@@ -93,13 +93,15 @@ Critical push notifications are only available for On-Call. If you are setting u
 
 3. Then tap **Bypass Do Not Disturb** and enable **Override Do Not Disturb** in System Settings for High Urgency On-Call.
 
+**For Samsung:** Go to device **Settings** > **Notifications** > **Do Not Disturb** > **App notification** options. Select Datadog as an app that bypasses Do Not Disturb.
+
 {{< img src="service_management/mobile/android_override_system_volume_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
-5. In order to override system volume, tap the **Override system volume** and allow **Mode access** in System Settings to toggle on **Override system volume**.
+4. In order to override system volume, tap the **Override system volume** and allow **Mode access** in System Settings to toggle on **Override system volume**.
 
-6. Select your device for **High Urgency Notifications** and/or **Low Urgency Notifications** under the Notification Preferences section.
+5. Select your device for **High Urgency Notifications** and/or **Low Urgency Notifications** under the Notification Preferences section.
 
-7. Test the setup of your critical push notification by tapping **Test push notifications**.
+6. Test the setup of your critical push notification by tapping **Test push notifications**.
 
 <div class="alert alert-danger">
 On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb settings when used within a Work Profile. As a workaround, install the Datadog mobile app on your personal profile.
@@ -108,8 +110,8 @@ On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb
 {{% /tab %}}
 {{< /tabs >}}
 
-### Custom sounds for critical push
-For high-urgency notifications, Datadog strongly recommends customizing your system sounds and volume settings. This ensures that alerts are not only more distinct and recognizable, but also more effective in capturing attention.
+### Custom sounds and volume for critical push
+For high-urgency notifications, Datadog strongly recommends customizing your system sounds and volume settings. This ensures that alerts are not only more distinct and recognizable, but also more effective in capturing attention. Test your critical push notification preferences to confirm that they behave as expected.
 
 ## Incident notifications
 Receive status updates on your active incidents by setting up [Notification Rules for incidents on the Web][2]. 
