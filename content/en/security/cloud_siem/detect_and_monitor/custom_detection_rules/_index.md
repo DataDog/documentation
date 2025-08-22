@@ -245,9 +245,7 @@ To use unit testing:
 
 ### Trigger
 
-{{< img src="security/security_monitoring/detection_rules/define_rule_case2.png" alt="The set rule case section showing the default settings" style="width:80%;" >}}
 
-Enable **Create rules cases with the Then operator** if you want to trigger a signal for the example: If query A occurs and then query B occurs. The `then` operator can only be used on a single rule case.
 
 All rule cases are evaluated as case statements. Thus, the order of the cases affects which notifications are sent because the first case to match generates the signal. Click and drag your rule cases to change their ordering. 
 
