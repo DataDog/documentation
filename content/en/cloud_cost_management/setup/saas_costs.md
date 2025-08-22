@@ -60,53 +60,21 @@ Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][8] and then cli
 
 {{% tab "Snowflake" %}}
 
-1. Navigate to the [Snowflake integration tile][101] in Datadog and click **Add Snowflake Account**.
-2. Enter your Snowflake account URL, for example: `https://xyz12345.us-east-1.snowflakecomputing.com`.
-3. Under the **Connect your Snowflake account** section, click the toggle to enable Snowflake in Cloud Cost Management.
-4. Enter your Snowflake user name in the `User Name` field.
-5. Create a Datadog-specific role and user to monitor Snowflake.
-
-   Run the following in Snowflake to create a custom role:
-
-   ```shell
-   -- Create a new role intended to monitor Snowflake usage.
-   create role DATADOG;
-
-   -- Grant privileges on the SNOWFLAKE database to the new role.
-   grant imported privileges on database SNOWFLAKE to role DATADOG;
-
-   -- Grant usage to your default warehouse to the role DATADOG.
-   grant usage on warehouse <WAREHOUSE> to role DATADOG;
-
-   -- If you have cost usage collection enabled, ensure that your credentials have permission to view the ORGANIZATION_USAGE schema.
-   grant database role SNOWFLAKE.ORGANIZATION_USAGE_VIEWER to role DATADOG;
-
-   -- Note that the account in which you are creating the Datadog role and user must have OrgAdmin enabled. If the account does not have OrgAdmin, the Datadog role will be unable to access organization usage data used to calculate costs.
-
-   -- Create a user.
-   create user DATADOG_USER
-   LOGIN_NAME = DATADOG_USER
-   password = <PASSWORD>
-   default_warehouse = <WAREHOUSE>
-   default_role = DATADOG
-
-   -- Grant the monitor role to the user.
-   grant role DATADOG to user <USER>
-   ```
-
-4. Configure the key-value pair authentication:
-
-   - Generate a private key by following the [official Snowflake documentation][102] and upload the private key file by clicking **Upload Key**.
-   - Generate a public key by following the [official Snowflake documentation][103].
-   - Assign the public key to the user created in Step 5 by following the [official Snowflake documentation][104].
-
-5. Click **Save**.
+1. Find your [Snowflake account URL][102].
+   {{< img src="integrations/snowflake/snowflake_account_url.png" alt="The account menu with the copy account URL option selected in the Snowflake UI" style="width:100%;" >}}
+2. Navigate to the [Snowflake integration tile][101] in Datadog and click **Add Snowflake Account**.
+3. Enter your Snowflake account URL in the **Account URL** field. For example: `https://xyz12345.us-east-1.snowflakecomputing.com`.
+4. Under the **Connect your Snowflake account** section, click the toggle to enable Snowflake in Cloud Cost Management.
+5. Enter your Snowflake user name in the `User Name` field.
+6. Follow step 4 of the [Snowflake integration][103] page to create a Datadog-specific role and user to monitor Snowflake.
+7. Follow step 5 of the [Snowflake integration][103] page to configure the key-value pair authentication.
+8. Click **Save**.
 
 Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 **Snowflake query tags**
 
-[Snowflake's query tags][106] are powerful metadata strings that can be associated with queries. The [Snowflake Cost Management integration][101] ingests [JSON parsable][107] query tags present in a comma-separated allowlist found in the Snowflake integration tile.
+[Snowflake's query tags][105] are powerful metadata strings that can be associated with queries. The [Snowflake Cost Management integration][101] ingests [JSON parsable][106] query tags present in a comma-separated allowlist found in the Snowflake integration tile.
 
 For example, if an organization wishes to group its Snowflake compute costs by the `team` and `application` dimensions, it may choose to tag its Snowflake queries for a specific team's application in the following manner:
 ```
@@ -128,7 +96,7 @@ To use query tags within cost management, ensure the following:
 
 Object tags are user-defined strings that you can attach to Snowflake objects for enhanced auditability and cost analysis. For example, to track costs by team, tag your warehouses with the respective teams that use them.
 
-All object tag configuration is done within [Snowflake][105].
+All object tag configuration is done within [Snowflake][104].
 
 Notes:
 - **Tag Inheritance**: Snowflake objects adhere to a hierarchical structure, and the CCM integration considers inherited tags when submitting cost data.
@@ -136,12 +104,11 @@ Notes:
 {{< img src="cloud_cost/saas_costs/snowflake_setup.png" alt="Integrate with Snowflake to collect cost data." style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/integrations/snowflake-web
-[102]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key
-[103]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-a-public-key
-[104]: https://docs.snowflake.com/en/user-guide/key-pair-auth#assign-the-public-key-to-a-snowflake-user
-[105]: https://docs.snowflake.com/en/user-guide/object-tagging
-[106]: https://docs.snowflake.com/en/sql-reference/parameters#query-tag
-[107]: https://docs.snowflake.com/en/sql-reference/functions/parse_json
+[102]: https://docs.snowflake.com/en/user-guide/organizations-connect
+[103]: /integrations/snowflake-web/#cloud-cost-management
+[104]: https://docs.snowflake.com/en/user-guide/object-tagging
+[105]: https://docs.snowflake.com/en/sql-reference/parameters#query-tag
+[106]: https://docs.snowflake.com/en/sql-reference/functions/parse_json
 
 {{% /tab %}}
 
@@ -264,7 +231,7 @@ Your Elastic Cloud cost data for the past 15 months can be accessed in Cloud Cos
 1. Create an API token with at least the `"global:read"` scope and `"Billing"` role on the [Personal API tokens][101] page in Fastly.
 2. Navigate to the [Fastly cost management integration tile][102] in Datadog and click **Add New**.
 3. Enter your Fastly account name and API token.
-5. Click **Save**.
+4. Click **Save**.
 
 Your Fastly cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
@@ -292,7 +259,7 @@ Your Twilio cost data for the past 15 months can be accessed in Cloud Cost Manag
 
 ## Data Collected
 
-You can view cost data on the [**Cloud Cost Explorer** page][3], the [Cloud Cost Tag Explorer][4], and in [dashboards][5], [notebooks][6], or [monitors][7]. You can also combine these cost metrics with other cloud cost metrics or observability metrics.
+You can view cost data on the [**Cloud Cost Explorer** page][3], the [Cloud Cost Tag Explorer][4], and in [dashboards][5], [notebooks][6], or [monitors][7]. You can also combine these cost metrics with other [cloud cost metrics][9] or observability metrics.
 
 The following table contains a non-exhaustive list of out-of-the-box tags associated with each SaaS Cost integration.
 
@@ -604,8 +571,9 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 {{% /tab %}}
 
 {{% tab "Elastic Cloud" %}}
+
 | Tag Name | Tag Description |
-|---|---
+|---|---|
 | `charge_description` | The SKU of a charge. |
 | `kind` | The type of resource. |
 | `name` | The unique identifier of the Elastic Cloud resource. |
@@ -731,3 +699,4 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 [6]: /notebooks
 [7]: /monitors/types/cloud_cost
 [8]: https://app.datadoghq.com/cost/settings/accounts
+[9]: /cloud_cost_management
