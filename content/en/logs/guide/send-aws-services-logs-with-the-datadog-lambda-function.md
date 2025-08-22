@@ -88,6 +88,7 @@ The following sources and locations are supported:
 | Network Firewall Logs       | S3, CloudWatch |
 | Redshift Logs               | S3, Cloudwatch |
 | Redshift Serverless Logs    | CloudWatch     |
+| RDS Logs                    | CloudWatch     |
 | Route53 DNS Query Logs      | CloudWatch     |
 | S3 Access Logs              | S3             |
 | SSM Command Logs            | CloudWatch     |
@@ -119,6 +120,8 @@ The following sources and locations are supported:
     "logs:PutSubscriptionFilter",
     "network-firewall:DescribeLoggingConfiguration",
     "network-firewall:ListFirewalls",
+    "rds:DescribeDBClusters",
+    "rds:DescribeDBInstances",
     "redshift-serverless:ListNamespaces",
     "redshift:DescribeClusters",
     "redshift:DescribeLoggingStatus",
@@ -156,6 +159,8 @@ The following sources and locations are supported:
     | `logs:DescribeSubscriptionFilters`                          | List the subscription filters for the specified log group.                   |
     | `network-firewall:DescribeLoggingConfiguration`             | Get the logging configuration of a firewall.                                 |
     | `network-firewall:ListFirewalls`                            | List all Network Firewall firewalls.                                         |
+    | `rds:DescribeDBClusters`                                    | List all RDS clusters.                                                       |
+    | `rds:DescribeDBInstances`                                   | List all RDS instances.                                                      |
     | `redshift:DescribeClusters`                                 | List all Redshift clusters.                                                  |
     | `redshift:DescribeLoggingStatus`                            | Get the name of the S3 bucket containing Redshift Logs.                      |
     | `redshift-serverless:ListNamespaces`                        | List all Redshift Serverless namespaces.                                     |
@@ -223,7 +228,7 @@ resource "aws_cloudwatch_log_subscription_filter" "datadog_log_subscription_filt
   filter_pattern  = ""
 }
 ```
-_*All use of Datadog Services in (or in connection with environments within) mainland China is subject to the disclaimer published in the [Restricted Service Locations](https://www.datadoghq.com/legal/restricted-service-locations/) section on our website._
+\*{{% mainland-china-disclaimer %}}
 
 [1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_subscription_filter
 {{% /tab %}}

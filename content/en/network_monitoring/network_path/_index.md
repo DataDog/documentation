@@ -8,8 +8,6 @@ further_reading:
   text: "Get end-to-end network visibility with Datadog Network Path"
 ---
 
-<div class="alert alert-info">Network Path is in Limited Availability. Reach out to your Datadog representative to sign up.</div>
-
 ## Overview
 
 Network Path illustrates the route that network traffic follows from its origin to its destination. This provides network administrators with the capability to precisely identify the source of network problems, whether they're internal or from an Internet Service Provider (ISP), or due to other issues such as misrouting. Each row signifies a path from a source to its destination, as depicted in the `source` and `destination` facet panel.

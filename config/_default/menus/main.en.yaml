@@ -3678,6 +3678,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_reports
       weight: 9
+    - name: Scheduled Cost Reports
+      url: /cloud_cost_management/reports/scheduled_reports
+      parent: cloud_cost_reports
+      identifier: cloud_cost_scheduled_reports
+      weight: 901
     - name: Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost
@@ -5812,21 +5817,6 @@ menu:
       url: logs/explorer/saved_views/
       parent: log_explorer
       weight: 514
-    - name: Workspaces
-      url: logs/workspaces/
-      parent: log_management
-      identifier: logs_workspaces
-      weight: 6
-    - name: Use Cases
-      url: logs/workspaces/use_cases/
-      parent: logs_workspaces
-      identifier: logs_workspaces_use_cases
-      weight: 601
-    - name: Time Selection
-      url: logs/workspaces/time_selection/
-      parent: logs_workspaces
-      identifier: logs_workspaces_time_selection
-      weight: 602
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management
