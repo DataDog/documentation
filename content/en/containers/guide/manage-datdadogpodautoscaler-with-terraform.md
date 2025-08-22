@@ -6,6 +6,18 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/kubernetes-autoscaling-datadog/'
     tag: 'Blog'
     text: 'Kubernetes autoscaling guide: determine which solution is right for your use case'
+  - link: "https://docs.datadoghq.com/containers/monitoring/autoscaling/"
+    tag: "Documentation"
+    text: "Datadog Kubernetes Autoscaling"
+  - link: "https://docs.datadoghq.com/agent/cluster_agent/"
+    tag: "Documentation"
+    text: "Datadog Cluster Agent"
+  - link: "https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs"
+    tag: "External Site"
+    text: "Terraform Kubernetes Provider documentation"
+  - link: "https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/"
+    tag: "External Site"
+    text: "Kubernetes Horizontal Pod Autoscaling documentation"
 ---
 
 ## Overview
@@ -460,14 +472,8 @@ kubectl get events -n nginx-dka-demo --sort-by='.lastTimestamp'
 kubectl logs -n datadog -l agent.datadoghq.com/component=cluster-agent 
 ```
 
-## Additional Resources
+## Further reading
 
-- [Datadog Kuberetetes Autoscaling Documentation][1]
-- [Terraform Kubernetes Provider][2]
-- [Datadog Cluster Agent][3]
-- [Kubernetes Horizontal Pod Autoscaler][4]
+{{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/containers/kubernetes/autoscaling/
-[2]: https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs
-[3]: /agent/cluster_agent/
-[4]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/
+[1]: /containers/monitoring/autoscaling/
