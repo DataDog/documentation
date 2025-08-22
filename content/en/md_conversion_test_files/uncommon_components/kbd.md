@@ -4,7 +4,7 @@ title: kbd
 
 ## Expected .md output
 
-The `kbd` is replaced with **bold** markers.
+The text contents of the `kbd` tag are in backticks (for example, `Cmd`).
 
 ## Example
 
