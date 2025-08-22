@@ -47,8 +47,8 @@ Make sure you grant the mobile app the necessary permissions.
 {{% /tab %}}
 {{< /tabs >}}
 
-### Custom sounds and volume
-On both iOS and Android, you have the option to override the default system notification sounds and volume. The Datadog app comes preloaded with a selection of custom sounds. Datadog recommends you test your notification preferences to confirm that they behave as expected. 
+### Custom sounds 
+On both iOS and Android, you have the option to override the default system notification sounds. The Datadog app comes preloaded with a selection of custom sounds. 
 
 ## Circumvent mute and Do Not Disturb mode for On-Call
 You can override your device's system volume and Do Not Disturb mode for both push notifications (from the Datadog mobile app) and telephony notifications (such as voice call and SMS).
@@ -100,8 +100,8 @@ On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb
 
 {{% /tab %}}
 {{< /tabs >}}
-### Custom sounds for critical push
-For high-urgency notifications, Datadog strongly recommends customizing your system sounds and volume settings. This ensures that alerts are not only more distinct and recognizable, but also more effective in capturing attention.
+### Custom sounds and volume for critical push
+For high-urgency notifications, Datadog strongly recommends customizing your system sounds and volume settings. This ensures that alerts are not only more distinct and recognizable, but also more effective in capturing attention. Test your notification preferences to confirm that they behave as expected.
 
 ### Telephony channels (voice calls and SMS)
 
