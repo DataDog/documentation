@@ -63,7 +63,12 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
 4. **Configure your application**.
 
-{{% gcr-configure %}}
+{{% gcr-configure%}}
+
+6. **Send custom metrics**.
+
+   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5].
+
 {{% gcr-env-vars instrumentationMethod="in-process" language="go" %}}
 
 ## Troubleshooting
@@ -77,3 +82,6 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go/
 [2]: https://github.com/DataDog/dd-trace-go?tab=readme-ov-file#installing
 [3]: /tracing/other_telemetry/connect_logs_and_traces/go/
+[4]: /developers/dogstatsd/?tab=go#install-the-dogstatsd-client
+[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=go#code-examples
+

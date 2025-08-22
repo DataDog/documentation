@@ -70,9 +70,13 @@ function logInfo($message) {
 logInfo('Hello World!');
 {{< /code-block >}}
 
-Datadog recommends setting the environment variable `DD_SOURCE=php` in your sidecar container to enable advanced Datadog log parsing.
+   Datadog recommends setting the environment variable `DD_SOURCE=php` in your sidecar container to enable advanced Datadog log parsing.
 
-For more information, see [Correlating PHP Logs and Traces][2].
+   For more information, see [Correlating PHP Logs and Traces][2].
+
+4. **Send custom metrics**.
+
+   To send custom metrics, [install the DogStatsD client][3] and [view code examples][4].
 
 {{% gcr-env-vars instrumentationMethod="sidecar" language="php" %}}
 
@@ -86,3 +90,5 @@ For more information, see [Correlating PHP Logs and Traces][2].
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/php/
 [2]: /tracing/other_telemetry/connect_logs_and_traces/php/
+[3]: /developers/dogstatsd/?tab=php#install-the-dogstatsd-client
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=php#code-examples
