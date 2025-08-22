@@ -362,8 +362,10 @@ datadog-ci coverage upload --skip-git-metadata-upload=1 .
 
 ### Datadog UI does not show changed files in the PR view
 
-By default the "Changed files" table will only contain executable source code files that are present in the uploaded coverage reports.
+By default, the "Changed files" table will only contain executable source code files that are present in the uploaded coverage reports.
 You can use the "Non-executable files" or "All" toggles in the table header to show all files that were changed in the PR, regardless of whether they are executable or not.
+
+{{< img src="/code_coverage/non_executable_files.png" text="Changed non-executable files" style="width:100%" >}}
 
 If a source code file is mistakenly considered non-executable, it is probably missing in your uploaded coverage reports.
 Make sure that you are uploading all of your reports and double-check your coverage tool configuration to ensure coverage data is collected for all relevant files.
