@@ -88,6 +88,7 @@ You can use Terraform to create and manage the Datadog Agent extension. Follow t
 5. Generate a hash of the zipped folder using the PowerShell command `Get-FileHash %ProgramData%\Datadog.zip -Algorithm SHA256`. Reference this hash in the Terraform block with the `agentConfigurationChecksum` parameter.
 6. Upload the file to blob storage.
 7. Reference the blob storage URL in the Terraform block with the `agentConfiguration` parameter to create the VM extension.
+
 [100]: https://app.datadoghq.com/account/settings/agent/latest
 [101]: /agent/guide/agent-configuration-files/?tab=agentv6v7
 {{% /tab %}}
@@ -98,11 +99,11 @@ You can use Terraform to create and manage the Datadog Agent extension. Follow t
 4. Generate a hash of the zipped folder using the command `sha256sum datadog_config.zip`. Reference this hash in the Terraform block with the `agentConfigurationChecksum` parameter.
 5. Upload the file to blob storage.
 6. Reference the blob storage URL in the Terraform block with the `agentConfiguration` parameter to create the VM extension.
+
 [200]: https://app.datadoghq.com/account/settings/agent/latest
 [201]: /agent/guide/agent-configuration-files/?tab=agentv6v7
 {{% /tab %}}
 {{< /tabs >}}
-
 
 #### Extension settings
 
