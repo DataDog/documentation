@@ -40,7 +40,7 @@ Before getting started with CloudPrem, ensure you have:
 
 ## Prepare your AWS environment
 
-Before installing CloudPrem on EKS, ensure your AWS environment is properly configured. For detailed AWS configuration instructions, see the [AWS Configuration guide](aws-config/).
+Before installing CloudPrem on EKS, ensure your AWS environment is properly configured. For detailed AWS configuration instructions, see the [AWS Configuration guide](/cloudprem/configure/aws-config/).
 
 Key requirements:
 - AWS credentials configured (IAM role or access keys)
@@ -94,7 +94,7 @@ echo ""
    ```bash
    kubectl create secret generic <SECRET_NAME> \
    -n <NAMESPACE_NAME> \
-   --from-literal QW_METASTORE_URI=postgres://<USERNAME>:<PASSWORD>@<ENDPOINT>:<PORT>/<DATABASE>
+   --from-literal QW_METASTORE_URI="postgres://<USERNAME>:<PASSWORD>@<ENDPOINT>:<PORT>/<DATABASE>"
    ```
 
 4. Customize the Helm chart
@@ -143,7 +143,7 @@ echo ""
    # 1. A public ingress for external access through the internet that will be used exclusively by Datadog's control plane and query service.
    # 2. An internal ingress for access within the VPC
    #
-   # Both ingresses provision Application Load Balancers (ALBs) in AWS.
+   # Both ingresses provision an Application Load Balancers (ALBs) in AWS.
    # The public ingress ALB is created in public subnets.
    # The internal ingress ALB is created in private subnets.
    #

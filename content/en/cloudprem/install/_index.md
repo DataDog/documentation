@@ -11,8 +11,8 @@ Select the installation guide that matches your environment:
 ## Cloud-managed Kubernetes
 
 {{< whatsnext desc=" ">}}
-  {{< nextlink href="./install/aws-eks/" >}}Install on AWS EKS{{< /nextlink >}}
-  {{< nextlink href="./install/azure-aks/" >}}Install on Azure AKS{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/install/aws-eks/" >}}Install on Amazon EKS{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/install/azure-aks/" >}}Install on Azure AKS{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Self-managed Kubernetes
