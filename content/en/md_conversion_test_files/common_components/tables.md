@@ -32,7 +32,7 @@ A key-value list for each table row:
 Both of these should be included:
 
 - Whatever the generator can safely derive from the table, in "key-value list" form, with a disclaimer that the data may be incomplete.
-- The raw HTML contents, for further reference.
+- For further reference, the raw HTML contents, wrapped in a `{% raw_html %}` tag.
 
 ### Example input
 
