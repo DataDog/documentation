@@ -89,7 +89,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-
     tags.datadoghq.com/env: "<ENV>"
     tags.datadoghq.com/service: "<SERVICE>"
     tags.datadoghq.com/version: "<VERSION>" 
