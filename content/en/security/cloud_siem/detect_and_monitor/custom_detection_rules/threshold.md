@@ -9,14 +9,15 @@ Detect when events exceed a threshold that you define. For example, if you creat
 
 ## Create a rule
 
-To create a threshold detection rule or job:
+To create a threshold detection rule or job, navigate to the [Detection Rules][1] page and click **+ New Rule**.
 
-1. Navigate to the [Detection Rules][1] page and click **+ New Rule**.
-1. Select whether you want to create a **Real-Time Rule**, **Scheduled Rule** or a **Historical Job**.
-1. Leave the **Threshold** option as the selected detection method.
+### Create a New Rule
 
-{{< tabs >}}
-{{% tab "Real-time rule" %}}
+Select a **Real-Time Rule**, **Scheduled Rule** or a **Historical Job**.
+
+### Define your rule or historical job
+
+Leave the **Threshold** option as the selected detection method.
 
 ### Define search queries
 
@@ -39,6 +40,11 @@ To create a threshold detection rule or job:
 #### Unit testing
 
 {{% cloud_siem/unit_test %}}
+
+To finish setting up the detection rule, select the type of rule you are creating and follow the instructions.
+
+{{< tabs >}}
+{{% tab "Real-time rule" %}}
 
 ### Set conditions
 
@@ -90,30 +96,12 @@ Toggle **Enable Optional Group By** section, if you want to group events even wh
 
 {{% cloud_siem/create_suppression %}}
 
+Click **Save Rule**.
+
 {{% /tab %}}
 {{% tab "Scheduled rule" %}}
 
-### Define search queries
-
-{{< img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" >}}
-
-{{% cloud_siem/define_search_queries %}}
-
-#### Joining queries
-
-{{% cloud_siem/joining_queries %}}
-
-{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
-
-#### Filter logs based on Reference Tables
-
-{{% filter_by_reference_tables %}}
-
-{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
-
-#### Unit testing
-
-{{% cloud_siem/unit_test %}}
+Click **Save Rule**.
 
 ### Set conditions
 
@@ -141,30 +129,12 @@ TKTK
 
 {{% security-rule-say-whats-happening %}}
 
+### Create a suppression
+
+{{% cloud_siem/create_suppression %}}
+
 {{% /tab %}}
 {{% tab "Historical job" %}}
-
-### Define search queries
-
-{{< img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" >}}
-
-{{% cloud_siem/define_search_queries %}}
-
-#### Joining queries
-
-{{% cloud_siem/joining_queries %}}
-
-{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
-
-#### Filter logs based on Reference Tables
-
-{{% filter_by_reference_tables %}}
-
-{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
-
-#### Unit testing
-
-{{% cloud_siem/unit_test %}}
 
 ### Set conditions
 
@@ -188,9 +158,7 @@ In this example, when there are more than five failed logins and at least one su
 
 TKTK
 
-### Describe your playbook
-
-{{% security-rule-say-whats-happening %}}
+Click **Save Rule**.
 
 {{% /tab %}}
 {{< /tabs >}}
