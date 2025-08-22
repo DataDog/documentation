@@ -362,20 +362,20 @@ datadog-ci coverage upload --skip-git-metadata-upload=1 .
 
 ### Datadog UI does not show changed files in the PR view
 
-By default, the "Changed files" table will only contain executable source code files that are present in the uploaded coverage reports.
-You can use the "Non-executable files" or "All" toggles in the table header to show all files that were changed in the PR, regardless of whether they are executable or not.
+By default, the "Changed files" table only contains executable source code files that are present in the uploaded coverage reports.
+Select **Non-executable files** or **All** in the table header to display all files that were changed in the PR, regardless of whether they are executable or not.
 
-{{< img src="/code_coverage/non_executable_files.png" text="Changed non-executable files" style="width:100%" >}}
+{{< img src="/code_coverage/non_executable_files.png" text="In Changed files, you have the option to select Non-executable on the table header" style="width:100%" >}}
 
-If a source code file is mistakenly considered non-executable, it is probably missing in your uploaded coverage reports.
-Make sure that you are uploading all of your reports and double-check your coverage tool configuration to ensure coverage data is collected for all relevant files.
+If a source code file is mistakenly marked as non-executable, it is probably missing from your uploaded coverage reports.
+Make sure that you are uploading all of your relevant reports, and double-check your coverage tool configuration to verify that coverage data is collected for all applicable files.
 
-Test sources are not considered executable files as they are not part of the production codebase that is subject to coverage measurement.
+Test sources are not considered executable files as they are not part of the production codebase being measured for coverage.
 
 ### Datadog UI shows incorrect file paths
 
-Code Coverage relies on the file paths in coverage reports to be either absolute or relative to repository root.
-If the paths in your report are relative to a different directory in your repository, you can specify the base path relative to repo root with the `--base-path` option when running the `datadog-ci coverage upload` command, like this:
+Code Coverage relies on the file paths in coverage reports to be either absolute or relative to the repository root.
+If the paths in your report are relative to a different directory in your repository, specify the correct base path (relative to the repo root) with the `--base-path` option when running the `datadog-ci coverage upload` command, like this:
 
 {{< code-block lang="shell" >}}
 datadog-ci coverage upload --base-path=frontend/src .
