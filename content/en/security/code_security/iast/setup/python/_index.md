@@ -28,7 +28,7 @@ You can detect code-level vulnerabilities and monitor application security in Py
 ## How to Enable Runtime Code Analysis (IAST)
 
 1. **Update your Datadog Agent** to at least version 7.41.1.
-2. **Update your Datadog Tracing Library** to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see [Compatibility Requirements](../compatibility/).
+2. **Update your Datadog Tracing Library** to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see [Compatibility Requirements](../compatibility/python/).
 3. **Add the `DD_IAST_ENABLED=true` environment variable** to your application configuration.
 
 {{< tabs >}}
@@ -110,4 +110,4 @@ Runtime Code Analysis (IAST) modifies Python code at runtime. This could cause c
 Additionally, Runtime Code Analysis (IAST) does not correctly propagate taint ranges over native (compiled) code. Therefore, if your codebase heavily relies on modules written in C or C++, using the CPython API, or on intermediate language systems like Cython, the results might be less accurate than expected.
 {{% /tab %}}
 {{< /tabs >}}
-For more details, see [Compatibility Requirements](../compatibility/).
+For more details, see [Compatibility Requirements](../compatibility/python/).

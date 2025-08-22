@@ -29,7 +29,7 @@ You can detect code-level vulnerabilities and monitor application security in No
 ## How to Enable Runtime Code Analysis (IAST)
 
 1. **Update your Datadog Agent** to at least version 7.41.1.
-2. **Update your Datadog Tracing Library** to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the [Compatibility Requirements](../compatibility/) below.
+2. **Update your Datadog Tracing Library** to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the [Compatibility Requirements](../compatibility/nodejs/) below.
 3. **Add the `DD_IAST_ENABLED=true` environment variable** to your application configuration.
 
 {{< tabs >}}
@@ -156,4 +156,4 @@ The following operating systems are officially supported by dd-trace. Any operat
 
 ---
 
-For more details, see [Compatibility Requirements](../compatibility/).
+For more details, see [Compatibility Requirements](../compatibility/nodejs/).
