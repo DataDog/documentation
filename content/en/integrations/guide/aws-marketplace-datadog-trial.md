@@ -4,7 +4,7 @@ description: "How to set up a free 14-day Datadog trial through the AWS Marketpl
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/amazon_web_services/"
   tag: "Documentation"
-  text: "AWS Integration"
+  text: "AWS integration"
 ---
 
 ## Overview
