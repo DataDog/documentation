@@ -32604,6 +32604,8 @@ components:
           format: int32
           maximum: 2147483647
           type: integer
+        product_scales:
+          $ref: '#/components/schemas/RUMProductScales'
         type:
           description: Type of the RUM application. Supported values are `browser`,
             `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`,
@@ -32650,6 +32652,10 @@ components:
           description: Name of the RUM application.
           example: my_new_rum_application
           type: string
+        product_analytics_retention_state:
+          $ref: '#/components/schemas/RUMProductAnalyticsRetentionState'
+        rum_event_processing_state:
+          $ref: '#/components/schemas/RUMEventProcessingState'
         type:
           description: Type of the RUM application. Supported values are `browser`,
             `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`,
@@ -32730,6 +32736,8 @@ components:
           format: int32
           maximum: 2147483647
           type: integer
+        product_scales:
+          $ref: '#/components/schemas/RUMProductScales'
         type:
           description: Type of the RUM application. Supported values are `browser`,
             `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`,
@@ -32803,6 +32811,10 @@ components:
           description: Name of the RUM application.
           example: updated_name_for_my_existing_rum_application
           type: string
+        product_analytics_retention_state:
+          $ref: '#/components/schemas/RUMProductAnalyticsRetentionState'
+        rum_event_processing_state:
+          $ref: '#/components/schemas/RUMEventProcessingState'
         type:
           description: Type of the RUM application. Supported values are `browser`,
             `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`,
@@ -32931,6 +32943,33 @@ components:
           format: date-time
           type: string
       type: object
+    RUMEventProcessingScale:
+      description: RUM event processing scale configuration.
+      properties:
+        last_modified_at:
+          description: Timestamp in milliseconds when this scale was last modified.
+          example: 1721897494108
+          format: int64
+          type: integer
+        state:
+          $ref: '#/components/schemas/RUMEventProcessingState'
+      type: object
+    RUMEventProcessingState:
+      description: Configures which RUM events are processed and stored for the application.
+      enum:
+      - ALL
+      - ERROR_FOCUSED_MODE
+      - NONE
+      example: ALL
+      type: string
+      x-enum-descriptions:
+      - Process and store all RUM events (sessions, views, actions, resources, errors)
+      - Process and store only error events and related critical events
+      - "Disable RUM event processing\u2014no events are stored"
+      x-enum-varnames:
+      - ALL
+      - ERROR_FOCUSED_MODE
+      - NONE
     RUMEventType:
       default: rum
       description: Type of the event.
@@ -33037,6 +33076,39 @@ components:
     RUMGroupByTotalString:
       description: A string to use as the key value for the total bucket.
       type: string
+    RUMProductAnalyticsRetentionScale:
+      description: Product Analytics retention scale configuration.
+      properties:
+        last_modified_at:
+          description: Timestamp in milliseconds when this scale was last modified.
+          example: 1747922145974
+          format: int64
+          type: integer
+        state:
+          $ref: '#/components/schemas/RUMProductAnalyticsRetentionState'
+      type: object
+    RUMProductAnalyticsRetentionState:
+      description: Controls the retention policy for Product Analytics data derived
+        from RUM events.
+      enum:
+      - MAX
+      - NONE
+      example: MAX
+      type: string
+      x-enum-descriptions:
+      - Store Product Analytics data for the maximum available retention period
+      - Do not store Product Analytics data
+      x-enum-varnames:
+      - MAX
+      - NONE
+    RUMProductScales:
+      description: Product Scales configuration for the RUM application.
+      properties:
+        product_analytics_retention_scale:
+          $ref: '#/components/schemas/RUMProductAnalyticsRetentionScale'
+        rum_event_processing_scale:
+          $ref: '#/components/schemas/RUMEventProcessingScale'
+      type: object
     RUMQueryFilter:
       description: The search and filter query settings.
       properties:
@@ -71772,14 +71844,6 @@ paths:
         This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
       operationId: GetHistoricalCostByOrg
       parameters:
-      - description: String to specify whether cost is broken down at a parent-org
-          level or at the sub-org level. Available views are `summary` and `sub-org`.  Defaults
-          to `summary`.
-        in: query
-        name: view
-        required: false
-        schema:
-          type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
           for cost beginning this month.'
         in: query
@@ -71787,6 +71851,14 @@ paths:
         required: true
         schema:
           format: date-time
+          type: string
+      - description: String to specify whether cost is broken down at a parent-org
+          level or at the sub-org level. Available views are `summary` and `sub-org`.  Defaults
+          to `summary`.
+        in: query
+        name: view
+        required: false
+        schema:
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
           for cost ending this month.'
