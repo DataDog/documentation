@@ -51,6 +51,11 @@ logger.info "Hello world!"
 4. **Configure your application**.
 
 {{% gcr-configure %}}
+
+6. **Send custom metrics**.
+
+   To send custom metrics, [install the DogStatsD client][3] and [view code examples][4].
+
 {{% gcr-env-vars instrumentationMethod="in-process" language="ruby" %}}
 
 ## Troubleshooting
@@ -63,3 +68,5 @@ logger.info "Hello world!"
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/#instrument-your-application
 [2]: /tracing/other_telemetry/connect_logs_and_traces/ruby/
+[3]: /developers/dogstatsd/?tab=ruby#install-the-dogstatsd-client
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=ruby#code-examples
