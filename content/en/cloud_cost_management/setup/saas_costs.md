@@ -63,7 +63,7 @@ Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][8] and then cli
 1. Find your [Snowflake account URL][102].
    {{< img src="integrations/snowflake/snowflake_account_url.png" alt="The account menu with the copy account URL option selected in the Snowflake UI" style="width:100%;" >}}
 2. Navigate to the [Snowflake integration tile][101] in Datadog and click **Add Snowflake Account**.
-3. Enter your Snowflake account URL in the **Account URL** field. For example: `https://xyz12345.us-east-1.snowflakecomputing.com`.
+3. Enter your Snowflake account URL in the `Account URL` field. For example: `https://xyz12345.us-east-1.snowflakecomputing.com`.
 4. Under the **Connect your Snowflake account** section, click the toggle to enable Snowflake in Cloud Cost Management.
 5. Enter your Snowflake user name in the `User Name` field.
 6. Follow step 4 of the [Snowflake integration][103] page to create a Datadog-specific role and user to monitor Snowflake.
