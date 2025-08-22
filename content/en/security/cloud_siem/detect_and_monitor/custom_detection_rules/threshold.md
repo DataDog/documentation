@@ -141,7 +141,7 @@ Click **Add Condition** to add additional conditions.
 
 ### Add custom schedule
 
-TKTK
+{{% cloud_siem/add_custom_schedule %}}
 
 ### Describe your playbook
 

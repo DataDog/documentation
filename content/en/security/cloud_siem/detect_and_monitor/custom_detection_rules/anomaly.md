@@ -109,7 +109,7 @@ Toggle **Enable Optional Group By** section, if you want to group events even wh
 
 ### Add custom schedule
 
-TKTK
+{{% cloud_siem/add_custom_schedule %}}
 
 ### Describe your playbook
 
