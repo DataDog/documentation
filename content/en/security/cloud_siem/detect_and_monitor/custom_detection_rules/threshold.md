@@ -174,7 +174,7 @@ In this example, when there are more than five failed logins and at least one su
 
 ### Notify when job is complete
 
-TKTK
+{{% cloud_siem/notify_when_job_complete %}}
 
 Click **Save Rule**.
 

@@ -159,9 +159,35 @@ TKTK
 {{% /tab %}}
 {{% tab "Historical job" %}}
 
+### Set conditions
+
+#### Severity and notification
+
+{{% security-rule-severity-notification %}}
+
+n the **Anomaly count** field, enter the condition for how many anomalous logs are required to trigger a signal. For example, if the condition is `a >= 3` where `a` is the query, a signal is triggered if there are at least three anomalous logs within the evaluation window.
+
+**Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
+
+#### Time windows
+
+Datadog automatically detects the seasonality of the data and generates a security signal when the data is determined to be anomalous.
+
+After a signal is generated, the signal remains "open" if the data remains anomalous and the last updated timestamp is updated for the anomalous duration.
+
+A signal "closes" once the time exceeds the maximum signal duration, regardless of whether or not the anomaly is still anomalous. This time is calculated from the first seen timestamp.
+
+#### Other parameters
+
+In the **Content anomaly detection options** section, specify the parameters to assess whether a log is anomalous or not. See [How an event is determined to be anomalous](#how-an-event-is-determined-to-be-anomalous) for more information.
+
+In the **Job multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected.
+
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+
 ### Notify when job is complete
 
-TKTK
+{{% cloud_siem/notify_when_job_complete %}}
 
 ### Describe your playbook
 

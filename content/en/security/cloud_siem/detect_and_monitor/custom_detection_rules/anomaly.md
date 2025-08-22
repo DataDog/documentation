@@ -130,7 +130,7 @@ Toggle **Enable Optional Group By** section, if you want to group events even wh
 
 ### Notify when job is complete
 
-TKTK
+{{% cloud_siem/notify_when_job_complete %}}
 
 ### Describe your playbook
 
