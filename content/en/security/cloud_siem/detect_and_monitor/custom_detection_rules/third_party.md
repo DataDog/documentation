@@ -78,6 +78,10 @@ In this example, when there are more than five failed logins and at least one su
 
 {{% security-rule-severity-notification %}}
 
+#### Time windows
+
+{{% security-rule-time-windows %}}
+
 #### Other parameters
 
 Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
@@ -99,9 +103,43 @@ Toggle **Enable Optional Group By** section, if you want to group events even wh
 {{% /tab %}}
 {{% tab "Scheduled rule" %}}
 
-### Define search queries
+### Set conditions
 
-{{% cloud_siem/define_search_queries %}}
+{{< img src="security/security_monitoring/detection_rules/define_rule_case2.png" alt="The set rule case section showing the default settings" style="width:80%;" >}}
+
+{{% cloud_siem/set_conditions %}}
+
+#### Example
+
+If you have a `failed_login` and a `successful_login` query:
+
+{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
+
+and a rule condition that triggers when `failed_login > 5 && successful_login>0`:
+
+{{< img src="security/security_monitoring/detection_rules/set_rule_case4.png" alt="The set rule conditions section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:90%;" >}}
+
+The rule condition joins these queries together based on their `group by` value. The `group by` attribute is typically the same attribute because the value must be the same for the condition to be met. If a `group by` value doesn't exist, the condition will never be met. A security signal is generated for each unique `group by` value when a condition is matched.
+
+In this example, when there are more than five failed logins and at least one successful login for the same `User Name`, the first condition is matched, and a security signal is generated.
+
+#### Severity and notification
+
+{{% security-rule-severity-notification %}}
+
+#### Time windows
+
+{{% security-rule-time-windows %}}
+
+#### Other parameters
+
+Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
+
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+
+##### Decreasing non-production severity
+
+{{% cloud_siem/decreasing_non_prod_severity %}}
 
 ### Add custom schedule
 
@@ -114,9 +152,33 @@ TKTK
 {{% /tab %}}
 {{% tab "Historical job" %}}
 
-### Define search queries
+### Set conditions
 
-{{% cloud_siem/define_search_queries %}}
+{{< img src="security/security_monitoring/detection_rules/define_rule_case2.png" alt="The set rule case section showing the default settings" style="width:80%;" >}}
+
+{{% cloud_siem/set_conditions %}}
+
+#### Example
+
+If you have a `failed_login` and a `successful_login` query:
+
+{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
+
+and a rule condition that triggers when `failed_login > 5 && successful_login>0`:
+
+{{< img src="security/security_monitoring/detection_rules/set_rule_case4.png" alt="The set rule conditions section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:90%;" >}}
+
+The rule condition joins these queries together based on their `group by` value. The `group by` attribute is typically the same attribute because the value must be the same for the condition to be met. If a `group by` value doesn't exist, the condition will never be met. A security signal is generated for each unique `group by` value when a condition is matched.
+
+In this example, when there are more than five failed logins and at least one successful login for the same `User Name`, the first condition is matched, and a security signal is generated.
+
+#### Time windows
+
+{{% security-rule-time-windows %}}
+
+#### Other parameters
+
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
 
 ### Notify when job is complete
 

@@ -91,9 +91,29 @@ Toggle **Enable Optional Group By** section, if you want to group events even wh
 {{% /tab %}}
 {{% tab "Scheduled rule" %}}
 
-### Define search queries
+### Set conditions
 
-{{% cloud_siem/define_search_queries %}}
+#### Severity and notification
+
+{{% security-rule-severity-notification %}}
+
+#### Time windows
+
+{{% security-rule-time-windows %}}
+
+**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
+
+#### Other parameters
+
+In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected.
+
+Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
+
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+
+##### Decreasing non-production severity
+
+{{% cloud_siem/decreasing_non_prod_severity %}}
 
 ### Add custom schedule
 
@@ -106,9 +126,15 @@ TKTK
 {{% /tab %}}
 {{% tab "Historical job" %}}
 
-### Define search queries
+### Set conditions
 
-{{% cloud_siem/define_search_queries %}}
+#### Other parameters
+
+In the **Job multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected.
+
+Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
+
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
 
 ### Notify when job is complete
 

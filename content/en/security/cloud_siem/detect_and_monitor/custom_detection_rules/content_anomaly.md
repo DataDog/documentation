@@ -72,10 +72,6 @@ Toggle **Decrease severity for non-production environment** if you want to prior
 
 Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
 
-##### Decreasing non-production severity
-
-{{% cloud_siem/decreasing_non_prod_severity %}}
-
 #####  How an event is determined to be anomalous
 
 Content anomaly detection balances precision and sensitivity using several rule parameters that you can set:
@@ -85,6 +81,11 @@ Content anomaly detection balances precision and sensitivity using several rule 
 1. Evaluation window: The time frame during which anomalies are counted toward a signal (for example, a 10-minute time frame).
 
 These parameters help to identify field content that is both unusual and rare, filtering out minor or common variations.
+
+##### Decreasing non-production severity
+
+{{% cloud_siem/decreasing_non_prod_severity %}}
+
 
 ### Describe your playbook
 
@@ -96,6 +97,56 @@ These parameters help to identify field content that is both unusual and rare, f
 
 {{% /tab %}}
 {{% tab "Scheduled rule" %}}
+
+### Set conditions
+
+#### Severity and notification
+
+{{% security-rule-severity-notification %}}
+
+n the **Anomaly count** field, enter the condition for how many anomalous logs are required to trigger a signal. For example, if the condition is `a >= 3` where `a` is the query, a signal is triggered if there are at least three anomalous logs within the evaluation window.
+
+**Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
+
+#### Time windows
+
+Datadog automatically detects the seasonality of the data and generates a security signal when the data is determined to be anomalous.
+
+After a signal is generated, the signal remains "open" if the data remains anomalous and the last updated timestamp is updated for the anomalous duration.
+
+A signal "closes" once the time exceeds the maximum signal duration, regardless of whether or not the anomaly is still anomalous. This time is calculated from the first seen timestamp.
+
+#### Other parameters
+
+In the **Content anomaly detection options** section, specify the parameters to assess whether a log is anomalous or not. See [How an event is determined to be anomalous](#how-an-event-is-determined-to-be-anomalous) for more information.
+
+In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected.
+
+Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
+
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+
+#####  How an event is determined to be anomalous
+
+Content anomaly detection balances precision and sensitivity using several rule parameters that you can set:
+
+1. Similarity threshold: Defines how dissimilar a field value must be to be considered anomalous (default: `70%`).
+1. Minimum similar items: Sets how many similar historical logs must exist for a value to be considered normal (default: `1`).
+1. Evaluation window: The time frame during which anomalies are counted toward a signal (for example, a 10-minute time frame).
+
+These parameters help to identify field content that is both unusual and rare, filtering out minor or common variations.
+
+##### Decreasing non-production severity
+
+{{% cloud_siem/decreasing_non_prod_severity %}}
+
+#### Other parameters
+
+In the **Job multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected within a specified time frame. For example, the same signal updates if any new value is detected within 1 hour, for a maximum duration of 24 hours.
+
+**Note**: If a unique signal is required for every new value, configure this value to `0` minutes.
+
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
 
 ### Add custom schedule
 

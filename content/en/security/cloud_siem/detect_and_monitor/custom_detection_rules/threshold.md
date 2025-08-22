@@ -129,6 +129,16 @@ The rule condition joins these queries together based on their `group by` value.
 
 In this example, when there are more than five failed logins and at least one successful login for the same `User Name`, the first condition is matched, and a security signal is generated.
 
+#### Severity and notification
+
+{{% security-rule-severity-notification %}}
+
+#### Time windows
+
+{{% security-rule-time-windows %}}
+
+Click **Add Condition** to add additional conditions.
+
 ### Add custom schedule
 
 TKTK

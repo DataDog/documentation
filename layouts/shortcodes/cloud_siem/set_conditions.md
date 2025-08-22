@@ -4,4 +4,4 @@ A rule condition contains logical operations (`>`, `>=`, `&&`, `||`) to determin
 
 **Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
 
-Provide a **name**, for example "Conditions 1", for each rule condition. This name is appended to the rule name when a signal is generated.
+Provide a **name**, for example `Conditions 1`, for each rule condition. This name is appended to the rule name when a signal is generated.
