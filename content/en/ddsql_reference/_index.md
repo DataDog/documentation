@@ -7,16 +7,10 @@ products:
 - name: DDSQL Editor
   url: /ddsql_editor/
   icon: ddsql
-- name: Log Workspaces
-  url: /logs/workspaces/
-  icon: logs
 - name: Notebooks
   url: /notebooks/
   icon: notebook
 further_reading:
-- link: "/logs/workspaces/"
-  tag: "Documentation"
-  text: "Learn more about Log Workspaces"
 - link: "/ddsql_editor/"
   tag: "Documentation"
   text: "Learn more about DDSQL Editor"
@@ -564,7 +558,7 @@ ON da.tags = de.tags -- for a specific tag: da.tags->'app' = de.tags->'app'
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/workspaces/#analysis-cell
+[1]: /notebooks/advanced_analysis
 [2]: https://www.postgresql.org/docs/current/functions-window.html
 [3]: https://www.postgresql.org/docs/current/functions-json.html
 [4]: /ddsql_editor/

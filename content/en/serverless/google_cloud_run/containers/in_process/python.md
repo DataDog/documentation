@@ -62,7 +62,13 @@ logger.info("Hello world!")
 
 4. **Configure your application**.
 
-{{% gcr-configure-env-vars language="python" %}}
+{{% gcr-configure %}}
+
+6. **Send custom metrics**.
+
+   To send custom metrics, [install the DogStatsD client][3] and [view code examples][4].
+
+{{% gcr-env-vars instrumentationMethod="in-process" language="python" %}}
 
 ## Troubleshooting
 
@@ -74,3 +80,5 @@ logger.info("Hello world!")
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
 [2]: /tracing/other_telemetry/connect_logs_and_traces/python/
+[3]: /developers/dogstatsd/?tab=python#install-the-dogstatsd-client
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples
