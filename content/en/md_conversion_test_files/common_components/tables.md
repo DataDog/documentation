@@ -6,15 +6,7 @@ title: Tables
 
 ### Expected .md output
 
-A key-value list for each table row:
-
-- Name: Jen
-  Country: USA
-  Has dog?: Yes
-
-- Name: Kari
-  Country: Canada
-  Has dog?: No
+No changes expected, beyond some spacing changes that don't impact the parseability of the content. The rendering library uses a uniform format for outputting Markdown tables, which sometimes won't match the original markup exactly.
 
 ### Example input
 
@@ -31,7 +23,7 @@ A key-value list for each table row:
 
 Both of these should be included:
 
-- Whatever the generator can safely derive from the table, in "key-value list" form, with a disclaimer that the data may be incomplete.
+- A plain Markdown table rendered to the best of our ability, with a preference for omitting rows vs. accidentally changing their meaning.
 - For further reference, the raw HTML contents, wrapped in a `{% raw_html %}` tag.
 
 ### Example input
