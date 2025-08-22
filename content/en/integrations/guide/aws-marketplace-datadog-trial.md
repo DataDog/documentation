@@ -15,7 +15,7 @@ You can get a 14-day free trial of all Datadog features through the AWS Marketpl
 
 1. Access the [Datadog AWS Marketplace listing][1].
 2. Click **View purchase options**.
-3. Review the details, and if needed, choose to add a [purchase order][2].
+3. Review the details. If needed, choose to add a [purchase order][2].
 4. Click **Subscribe**.
 
 ## Further reading
