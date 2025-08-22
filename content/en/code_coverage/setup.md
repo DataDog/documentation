@@ -370,6 +370,8 @@ You can use the "Non-executable files" or "All" toggles in the table header to s
 If a source code file is mistakenly considered non-executable, it is probably missing in your uploaded coverage reports.
 Make sure that you are uploading all of your reports and double-check your coverage tool configuration to ensure coverage data is collected for all relevant files.
 
+Test sources are not considered executable files as they are not part of the production codebase that is subject to coverage measurement.
+
 ### Datadog UI shows incorrect file paths
 
 Code Coverage relies on the file paths in coverage reports to be either absolute or relative to repository root.
