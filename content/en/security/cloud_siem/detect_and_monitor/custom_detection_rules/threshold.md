@@ -25,7 +25,13 @@ Leave the **Threshold** tile as the selected detection method.
 
 {{< img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" >}}
 
-{{% cloud_siem/define_search_queries %}}
+Construct a search query for your logs or events using the [Log Explorer search syntax][2].
+
+To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
+
+Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given time frame. The defined `group by` generates a signal for each `group by` value. Typically, the `group by` is an entity (like user, or IP). The `group by` is also used to [join the queries together](#joining-queries).
+
+**Note**: The query applies to all ingested logs and events.
 
 #### Joining queries
 
@@ -166,3 +172,4 @@ Click **Save Rule**.
 {{< /tabs >}}
 
 [1]: https://app.datadoghq.com/security/configuration/siem/rules
+[2]: /logs/search_syntax/

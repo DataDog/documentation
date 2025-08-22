@@ -43,6 +43,8 @@ Anomaly detection inspects how the `group by` attribute has behaved in the past.
 
 {{% cloud_siem/unit_test %}}
 
+To finish setting up the detection rule, select the type of rule you are creating and follow the instructions.
+
 {{< tabs >}}
 {{% tab "Real-time rule" %}}
 

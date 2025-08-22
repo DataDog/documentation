@@ -49,6 +49,8 @@ Click **Add Root Query** to add additional queries.
 
 {{% cloud_siem/unit_test %}}
 
+To finish setting up the detection rule, select the type of rule you are creating and follow the instructions.
+
 {{< tabs >}}
 {{% tab "Real-time rule" %}}
 

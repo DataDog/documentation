@@ -9,24 +9,35 @@ Detect when an attribute changes to a new value. For example, if you create a tr
 
 ## Create a rule
 
-To create a threshold detection rule or job:
+To create a threshold detection rule or job, navigate to the [Detection Rules][1] page and click **+ New Rule**.
 
-1. Navigate to the [Detection Rules][1] page and click **+ New Rule**.
-1. Select whether you want to create a **Real-Time Rule**, **Scheduled Rule** or a **Historical Job**.
-1. Select the **New Value** option.
+### Create a New Rule
 
-{{< tabs >}}
-{{% tab "Real-time rule" %}}
+Select a **Real-Time Rule**, **Scheduled Rule** or a **Historical Job**.
+
+### Define your rule or historical job
+
+If you are creating a historical job, select the logs index and time range for the job.
+
+Select the **New Value** tile.
 
 ### Define search queries
 
 {{< img src="security/security_monitoring/detection_rules/new_value_20250310.png" alt="Define the search query" style="width:100%;" >}}
 
-{{% cloud_siem/define_search_queries_new_value %}}
+Construct a search query for your logs or events using the [Log Explorer search syntax][2].
+
+To search Audit Trail events, click the down arrow next to **Logs** and select **Audit Trail**.
+
+**Note**: The query applies to all ingested logs and events.
 
 #### Learned value
 
-{{% cloud_siem/learned_value %}}
+In your search query, select the values you want to detect, the learning duration, and, optionally, define a signal grouping. The defined `group by` generates a signal for each `group by` value. Typically, the `group by` is an entity (like user or IP address).
+
+For example, create a query for successful user authentication and set **Detect new value** to `country` and group by to `user`. Set a learning duration of `7 days`. Once configured, logs coming in over the next 7 days are evaluated with the set values. If a log comes in with a new value after the learning duration, a signal is generated, and the new value is learned to prevent future signals with this value.
+
+You can also identify users and entities using multiple values in a single query. For example, if you want to detect when a user signs in from a new device and from a country that they've never signed in from before, add `device_id` and `country_name` to **Detect new value**.
 
 #### Filter logs based on Reference Tables
 
@@ -37,6 +48,11 @@ To create a threshold detection rule or job:
 #### Unit testing
 
 {{% cloud_siem/unit_test %}}
+
+To finish setting up the detection rule, select the type of rule you are creating and follow the instructions.
+
+{{< tabs >}}
+{{% tab "Real-time rule" %}}
 
 ### Set conditions
 
@@ -75,26 +91,6 @@ Toggle **Enable Optional Group By** section, if you want to group events even wh
 {{% /tab %}}
 {{% tab "Scheduled rule" %}}
 
-### Define search queries
-
-{{< img src="security/security_monitoring/detection_rules/new_value_20250310.png" alt="Define the search query" style="width:100%;" >}}
-
-{{% cloud_siem/define_search_queries_new_value %}}
-
-#### Learned value
-
-{{% cloud_siem/learned_value %}}
-
-#### Filter logs based on Reference Tables
-
-{{% filter_by_reference_tables %}}
-
-{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
-
-#### Unit testing
-
-{{% cloud_siem/unit_test %}}
-
 ### Add custom schedule
 
 TKTK
@@ -106,26 +102,6 @@ TKTK
 {{% /tab %}}
 {{% tab "Historical job" %}}
 
-### Define search queries
-
-{{< img src="security/security_monitoring/detection_rules/new_value_20250310.png" alt="Define the search query" style="width:100%;" >}}
-
-{{% cloud_siem/define_search_queries_new_value %}}
-
-#### Learned value
-
-{{% cloud_siem/learned_value %}}
-
-#### Filter logs based on Reference Tables
-
-{{% filter_by_reference_tables %}}
-
-{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
-
-#### Unit testing
-
-{{% cloud_siem/unit_test %}}
-
 ### Notify when job is complete
 
 TKTK
@@ -134,7 +110,10 @@ TKTK
 
 {{% security-rule-say-whats-happening %}}
 
+Click **Save Rule**.
+
 {{% /tab %}}
 {{< /tabs >}}
 
 [1]: https://app.datadoghq.com/security/configuration/siem/rules
+[2]: /logs/search_syntax/

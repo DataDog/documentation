@@ -51,6 +51,8 @@ Do not click the checkbox if you want Datadog to detect all impossible travel be
 
 {{% cloud_siem/unit_test %}}
 
+To finish setting up the detection rule, select the type of rule you are creating and follow the instructions.
+
 {{< tabs >}}
 {{% tab "Real-time rule" %}}
 
