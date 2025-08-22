@@ -32,7 +32,7 @@ Before you begin, ensure you have the following:
 - **Terraform**: Terraform installed (version 0.13 or later recommended)
 - **Datadog API Credentials**: Valid Datadog API and Application keys
 
-## Project Structure
+## Project structure
 
 This guide uses a multi-stage deployment approach to ensure proper dependency creation for Terraform
 
@@ -48,7 +48,7 @@ This guide uses a multi-stage deployment approach to ensure proper dependency cr
 │   └── main.tf               # Nginx namespace, deployment, and DKA
 ```
 
-## Deployment Stages
+## Deployment stages
 
 A multi-stage deployment approach is essential when working with Kubernetes Custom Resource Definitions (CRDs) and Terraform. Here's why this approach is necessary:
 
@@ -65,6 +65,10 @@ The Terraform Kubernetes provider discovers available resource types at initiali
 3. **Stage 3 (Autoscaled workload)**: Deploys application with DatadogPodAutoscaler
    - Nginx namespace and deployment
    - DatadogPodAutoscaler resource for autoscaling the Nginx deployment
+
+## Set up configuration files
+
+First, set up the following configuration files for each stage in the process.
 
 ### Stage 1: Datadog Operator and CRDs
 
@@ -92,7 +96,7 @@ resource "helm_release" "datadog_operator" {
 }
 {{< /code-block >}}
 
-### Stage 2: DatadogAgent Configuration
+### Stage 2: Datadog Agent
 
 {{< code-block lang="hcl" filename="datadogagent/variables.tf" >}}
 variable "datadog_api_key" {
@@ -352,16 +356,20 @@ resource "kubernetes_manifest" "datadogpodautoscaler_nginx_dka_demo_nginx" {
 }
 {{< /code-block >}}
 
-## Deployment Instructions
+## Deployment instructions
 
-### 1. Deploy Stage 1 (Datadog Operator and CRDs)
+After you have set up the [configuration files](#set-up-configuration-files) for each stage, follow these steps to deploy the components in the correct order.
+
+### Stage 1: Datadog Operator and CRDs
+
+Deploy the Datadog Operator and CRDs:
 
 {{< code-block lang="bash" >}}
 terraform init
 terraform apply
 {{< /code-block >}}
 
-### 2. Verify Stage 1
+Verify that the Datadog Operator and CRDs are deployed:
 
 {{< code-block lang="bash" >}}
 kubectl get crd 
@@ -370,9 +378,10 @@ kubectl get pods -n datadog
 
 You should see that the Datadog CRDs are created and the datadog-operator pod is running
 
-### 2. Deploy Stage 2 (DatadogAgent)
+### Stage 2: Datadog Agent
 
-Create terraform.tfvars file with your Datadog credentials
+Create a `terraform.tfvars` file with your Datadog credentials:
+
 {{< code-block lang="bash" >}}
 cat > datadogagent/terraform.tfvars << EOF
 datadog_api_key = "your-api-key-here"
@@ -387,20 +396,21 @@ terraform init
 terraform apply
 {{< /code-block >}}
 
-### Verify Stage 2
+Verify that the Datadog Agent is deployed:
 
 {{< code-block lang="bash" >}}
 kubectl get datadogagent -n datadog
 {{< /code-block >}}
-You should see the Datadog Agent custom resource created. It should be in the `Running` state before proceeding.
+
+You should see the Datadog Agent custom resource created. It should be in the `Running` state before proceeding. Also verify that the Datadog Agent and datadog-cluster-agent pods are running:
 
 {{< code-block lang="bash" >}}
 kubectl get pods -n datadog
 {{< /code-block >}}
 
-You should see that the datadog agent and datadog-cluster-agent pods are running.
+### Stage 3: Application with DatadogPodAutoscaler
 
-### 3. Deploy Stage 3 (Nginx with DKA)
+Deploy the nginx application with DatadogPodAutoscaler:
 
 {{< code-block lang="bash" >}}
 cd ../nginx-dka
@@ -408,51 +418,49 @@ terraform init
 terraform apply
 {{< /code-block >}}
 
-After deployment, verify that all components are working correctly:
+After deployment, verify that all components are working correctly.
 
-### Check DatadogAgent Status
+Check Datadog Agent status:
 
 {{< code-block lang="bash" >}}
 kubectl get datadogagent -n datadog
 kubectl describe datadogagent datadog -n datadog
 {{< /code-block >}}
 
-### Check DatadogPodAutoscaler Status
+Check DatadogPodAutoscaler status:
 
 {{< code-block lang="bash" >}}
 kubectl get datadogpodautoscaler -n nginx-dka-demo
 kubectl describe datadogpodautoscaler nginx-autoscaler -n nginx-dka-demo
 {{< /code-block >}}
+
 Congratulations, you have a workload managed by the Datadog Kubernetes Autoscaler!
 
 ## Cleanup
 
-To remove all resources, follow the reverse order:
+To remove all resources, follow the reverse order of the deployment stages:
 
-### 1. Cleanup Stage 3
+1. Clean up the deployed application (Stage 3):
+    ```bash
+    cd nginx-dka
+    terraform destroy
+    ```
 
-{{< code-block lang="bash" >}}
-cd nginx-dka
-terraform destroy
-{{< /code-block >}}
+2. Clean up the Datadog Agent (Stage 2):
+    ```bash
+    cd ../datadogagent
+    terraform destroy
+    ```
 
-### 2. Cleanup Stage 2
-
-{{< code-block lang="bash" >}}
-cd ../datadogagent
-terraform destroy
-{{< /code-block >}}
-
-### 3. Cleanup Stage 1
-
-{{< code-block lang="bash" >}}
-cd ..
-terraform destroy
-{{< /code-block >}}
+3. Clean up the Datadog Operator and CRDs (Stage 1):
+    ```bash
+    cd ..
+    terraform destroy
+    ```
 
 ## Troubleshooting
 
-### Debugging Commands
+### Debugging commands
 
 Check DatadogPodAutoscaler events:
 {{< code-block lang="bash" >}}
