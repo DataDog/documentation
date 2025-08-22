@@ -9,18 +9,21 @@ While the anomaly method detects anomalies in volume and is ideal for identifyin
 
 ## Create a rule
 
-To create a threshold detection rule or job:
+To create a threshold detection rule or job, navigate to the [Detection Rules][1] page and click **+ New Rule**.
 
-1. Navigate to the [Detection Rules][1] page and click **+ New Rule**.
-1. Select whether you want to create a **Real-Time Rule**, **Scheduled Rule** or a **Historical Job**.
-1. Select the **Content Anomaly** option.
+### Create a New Rule
 
-{{< tabs >}}
-{{% tab "Real-time rule" %}}
+Select a **Real-Time Rule**, **Scheduled Rule** or a **Historical Job**.
+
+### Define your rule or historical job
+
+If you are creating a historical job, select the logs index and time range for the job.
+
+Select the **Content Anomaly** tile.
 
 ### Define search queries
 
-1. Cloud SIEM can analyze logs, Audit Trail events, and events from Event Management. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
+1. Cloud SIEM can analyze logs, Audit Trail events, and events from Event Management. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**. Construct a search query for your logs or events using the [Log Explorer search syntax][2].
 1. In the **Detect anomaly** field, specify the fields whose values you want to analyze.
 1. In the **Group by** field, specify the fields you want to group by.
 1. In the **Learn for** dropdown menu, select the number of days for the learning period. During the learning period, the rule sets a baseline of normal field values and does not generate any signals.
@@ -35,6 +38,9 @@ To create a threshold detection rule or job:
 #### Unit testing
 
 {{% cloud_siem/unit_test %}}
+
+{{< tabs >}}
+{{% tab "Real-time rule" %}}
 
 ### Set conditions
 
@@ -86,14 +92,8 @@ These parameters help to identify field content that is both unusual and rare, f
 
 {{% cloud_siem/create_suppression %}}
 
-[1]: /logs/search_syntax/
-
 {{% /tab %}}
 {{% tab "Scheduled rule" %}}
-
-### Define search queries
-
-{{% cloud_siem/define_search_queries %}}
 
 ### Add custom schedule
 
@@ -106,10 +106,6 @@ TKTK
 {{% /tab %}}
 {{% tab "Historical job" %}}
 
-### Define search queries
-
-{{% cloud_siem/define_search_queries %}}
-
 ### Notify when job is complete
 
 TKTK
@@ -118,7 +114,10 @@ TKTK
 
 {{% security-rule-say-whats-happening %}}
 
+Click **Save Rule**.
+
 {{% /tab %}}
 {{< /tabs >}}
 
 [1]: https://app.datadoghq.com/security/configuration/siem/rules
+[2]: /logs/search_syntax/

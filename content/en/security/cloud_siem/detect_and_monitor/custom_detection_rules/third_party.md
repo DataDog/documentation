@@ -9,20 +9,25 @@ Third Party allows you to forward alerts from an outside vendor or application. 
 
 ## Create a rule
 
-To create a threshold detection rule or job:
+### Create a New Rule
 
-1. Navigate to the [Detection Rules][1] page and click **+ New Rule**.
-1. Select whether you want to create a **Real-Time Rule**, **Scheduled Rule** or a **Historical Job**.
-1. Select the **Impossible Travel** option.
+Select a **Real-Time Rule**, **Scheduled Rule** or a **Historical Job**.
 
-{{< tabs >}}
-{{% tab "Real-time rule" %}}
+### Define your rule or historical job
+
+If you are creating a historical job, select the logs index and time range for the job.
+
+Select the **Third Party** tile.
 
 ### Define search queries
 
 #### Root query
 
-Cloud SIEM can analyze logs, Audit Trail events, and events from Event Management. To search Audit Trail events, click the down arrow next to **Logs** and select **Audit Trail**. Construct a search query for your logs or audit events using the [Log Explorer search syntax][1]. The trigger defined for each new attribute generates a signal for each new value of that attribute over a 24-hour roll-up period.
+Construct a search query for your logs or audit events using the [Log Explorer search syntax][2].
+
+To search Audit Trail events, click the down arrow next to **Logs** and select **Audit Trail**.
+
+The trigger defined for each new attribute generates a signal for each new value of that attribute over a 24-hour roll-up period.
 
 Click **Add Root Query** to add additional queries.
 
@@ -43,6 +48,9 @@ Click **Add Root Query** to add additional queries.
 #### Unit testing
 
 {{% cloud_siem/unit_test %}}
+
+{{< tabs >}}
+{{% tab "Real-time rule" %}}
 
 ### Set conditions
 
@@ -86,8 +94,6 @@ Toggle **Enable Optional Group By** section, if you want to group events even wh
 
 {{% cloud_siem/create_suppression %}}
 
-[1]: /logs/search_syntax/
-
 {{% /tab %}}
 {{% tab "Scheduled rule" %}}
 
@@ -118,7 +124,10 @@ TKTK
 
 {{% security-rule-say-whats-happening %}}
 
+Click **Save Rule**.
+
 {{% /tab %}}
 {{< /tabs >}}
 
 [1]: https://app.datadoghq.com/security/configuration/siem/rules
+[2]: /logs/search_syntax/

@@ -17,7 +17,9 @@ Select a **Real-Time Rule**, **Scheduled Rule** or a **Historical Job**.
 
 ### Define your rule or historical job
 
-Leave the **Threshold** option as the selected detection method.
+If you are creating a historical job, select the logs index and time range for the job.
+
+Leave the **Threshold** tile as the selected detection method.
 
 ### Define search queries
 
