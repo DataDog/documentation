@@ -21,9 +21,6 @@ products:
 - name: Browser Tests
   url: /synthetics/browser_tests/
   icon: browser
-- name: API Tests
-  url: /synthetics/api_tests/
-  icon: api
 ---
 
 {{< product-availability names="Browser Tests" >}}
