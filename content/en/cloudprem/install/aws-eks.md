@@ -143,7 +143,7 @@ echo ""
    # 1. A public ingress for external access through the internet that will be used exclusively by Datadog's control plane and query service.
    # 2. An internal ingress for access within the VPC
    #
-   # Both ingresses provision Application Load Balancers (ALBs) in AWS.
+   # Both ingresses provision an Application Load Balancers (ALBs) in AWS.
    # The public ingress ALB is created in public subnets.
    # The internal ingress ALB is created in private subnets.
    #
