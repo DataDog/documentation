@@ -14,12 +14,6 @@ Workload Protection [Coverage][1] provides a real-time view of security coverage
 
 {{< img src="security/cws/workload_protection_coverage_map.png" alt="Leverage the Coverage map to get real time visibility into the workload protection status across all your hosts and see which policies are effectively applied" width="100%">}}
 
-Coverage consolidates critical protection data into one view so you can:
-
-* Identify the workloads protected by security agents and policies.
-* Detect misconfigurations, outdated agents, and missing rules.
-* Validate that detection policies align with security baselines and frameworks like MITRE ATT&CK. See also: [MITRE ATT&CK map][2].
-* Prioritize remediation for high-risk assets.
 
 ## Key functionality
 
@@ -42,6 +36,8 @@ Hosts are identified with the following colors:
 
 - Green: all rules in the policies applied to the host have passed.
 - Orange: one or more rules in the policies applied to the host are in error.
+
+{{< img src="security/cws/workload_protection_coverage_map.png" alt="Leverage the Coverage map to get real time visibility into the workload protection status across all your hosts and see which policies are effectively applied" width="100%">}}
 
 Click an orange hexagon to view a host with policy rules in error.
 

@@ -20,7 +20,7 @@ Inventory is organized into the following tools:
   * Filter by policy, rule, or MITRE ATT&CK tactic to locate gaps
   * Check for outdated or unhealthy agents
 
-## Benefits of using Inventory for posture management
+## Key benefits
 
 - **Proactive risk reduction:** Spot and fix gaps before attackers can exploit them.
 - **Faster incident response:** Pivot from high-level coverage views to specific assets or policies in seconds.
