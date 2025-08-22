@@ -99,7 +99,7 @@ This is an example of how to mark a cost anomaly as significant and explain why 
 
 If you're not seeing expected anomalies:
 - Verify that CCM is [properly set up][3]
-- Check that you have the necessary permissions for AWS, Azure or Google Cloud
+- Check that you have the necessary permissions for AWS, Azure, or Google Cloud
 - Review the time range of your anomaly view
 
 For more help, contact [Datadog Support][4].
