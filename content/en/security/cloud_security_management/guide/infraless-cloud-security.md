@@ -15,7 +15,7 @@ To use Cloud Security with Infrastructure Monitoring disabled, you must be runni
 {{% tab "Host " %}}
 
 1. Open the [datadog.yaml configuration file][1].
-2. Add the `enable_payloads` as a top-level attribute anywhere in the configuration file with the following settings:
+2. Add `enable_payloads` as a top-level attribute anywhere in the configuration file with the following settings:
 
     ```yaml
     enable_payloads:
