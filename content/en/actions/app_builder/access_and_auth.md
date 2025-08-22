@@ -6,13 +6,44 @@ aliases:
     - /actions/app_builder/auth
 ---
 
-A few tools control access and authentication for apps and their components. 
+A few tools control access and authentication for apps and their components.
 
 ## App execution identity
 
-A published app runs using the Datadog user identity of its author. The author is listed both in the **All Apps** view and in **App Properties**.
+A published app runs using the Datadog user identity of its author, or a service account associated with the app. The author is listed both in the **All Apps** view and in **App Properties**.
 
 In edit mode, an app runs as the current editor.
+
+### Use a service account
+
+A service account can be associated with an app and act as the identity of the app when it runs. A service account can:
+- resolve the connections defined in the app queries at runtime
+- provide an identity for app executions
+- provide an identity for app [audit trails][7]
+
+To create a service account for an app, you must have either the Datadog admin role, or a custom role with the **Service Account Write** permission. The service account you create adopts your role and permissions. For more information on service accounts and permissions, see [Service accounts][2] or [Role based access control][3].
+
+#### Configure your app to run as a service account
+
+1. Click the cog (**Settings**) icon.
+1. Click **Manage app identity**.
+1. Select **Run as Service Account**.
+1. Select a role for your service account user or select an existing service account.
+1. Click **Save** to save the service account and apply the changes.
+
+When you run an app, the service account user resolves the connections defined in the app queries. Therefore, the service account user needs the `connections_resolve` permission. The Datadog Admin Role and the Datadog Standard Role include the `connections_resolve` permission.
+
+#### View service account details
+
+1. Click the cog (**Settings**) icon.
+1. Select **Manage app identity**.
+1. Click on your service account next to *Run As*.
+
+#### Remove a service account associated with an app
+
+1. Click the cog (**Settings**) icon.
+1. Select **Manage app identity**.
+1. Click **Remove service account**.
 
 ## Action credentials
 
@@ -109,3 +140,4 @@ To restrict access to the app, perform the following steps in the app canvas:
 [4]: /account_management/rbac/
 [5]: https://app.datadoghq.com/app-builder/
 [6]: https://datadoghq.slack.com/
+[7]: /account_management/audit_trail/#overview
