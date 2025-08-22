@@ -9,7 +9,7 @@ further_reading:
     text: Setting Up Cloud Security
 ---
 
-To use Cloud Security with Infrastructure Monitoring disabled, you must be running Agent v6.4+. This disables metric data submission (including Custom Metrics) so that hosts stop showing up in Datadog. Follow these steps:
+You can use Cloud Security with Infrastructure Monitoring disabled, which disables metric data submission (including Custom Metrics) so that hosts stop showing up in Datadog. To do so, you must be running Agent v6.4+.
 
 {{< tabs >}}
 {{% tab "Host " %}}
