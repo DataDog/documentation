@@ -89,6 +89,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
+
     tags.datadoghq.com/env: "<ENV>"
     tags.datadoghq.com/service: "<SERVICE>"
     tags.datadoghq.com/version: "<VERSION>" 
@@ -336,7 +337,7 @@ Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` (optional with automatic versio
 }
 ```
 <div class="alert alert-warning">
-On ECS Fargate, you must add these tags to your ECS task definition, <strong>not</strong> the Datadog Agent task definition.
+On ECS Fargate, you must add these tags to your application container, <strong>not</strong> the Datadog Agent container.
 </div>
 
 ##### Partial configuration
