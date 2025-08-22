@@ -64,7 +64,7 @@ There are no billing implications for tracing Java Web Apps during this period.
 ## Installation
 Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require your web app to be fully stopped in order to install/update successfully.
 
-1. If you haven't already, set up the [Datadog-Azure integration][2].
+1. If you haven't already, set up the [Datadog-Azure integration][9].
 
 1. Verify that your Datadog-Azure integration is configured correctly by ensuring that you see the `azure.app_services.count` or `azure.functions.count` metrics in Datadog. 
 
