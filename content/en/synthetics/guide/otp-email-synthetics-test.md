@@ -63,7 +63,7 @@ After the email containing the OTP is sent, the Browser Test can access the emai
 
 ### Step 3 - Extract the OTP from the email body
 
-Next, create a test step that extracts the OTP from the email body after it's sent and stores it in a variable. This example uses the variable name OTP_FROM_EMAIL, which will be referenced throughout the rest of this guide.
+Next, create a test step that extracts the OTP from the email body after it's sent and stores it in a variable. This example uses the variable name OTP_FROM_EMAIL throughout the rest of this guide.
 
 1. Under **Add a variable** select **from Email body**.
 
