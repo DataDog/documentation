@@ -68,9 +68,7 @@ The Terraform Kubernetes provider discovers available resource types at initiali
 
 ### Stage 1: Datadog Operator and CRDs
 
-#### providers.tf
-
-```hcl
+{{< code-block lang="hcl" filename="providers.tf" >}}
 provider "kubernetes" {
   config_path = "~/.kube/config"
 }
@@ -80,11 +78,9 @@ provider "helm" {
     config_path = "~/.kube/config"
   }
 }
-```
+{{< /code-block >}}
 
-#### main.tf
-
-```hcl
+{{< code-block lang="hcl" filename="main.tf" >}}
 resource "helm_release" "datadog_operator" {
   name       = "datadog-operator"
   namespace  = "datadog"
@@ -94,13 +90,11 @@ resource "helm_release" "datadog_operator" {
 
   create_namespace = true
 }
-```
+{{< /code-block >}}
 
 ### Stage 2: DatadogAgent Configuration
 
-#### datadogagent/variables.tf
-
-```hcl
+{{< code-block lang="hcl" filename="datadogagent/variables.tf" >}}
 variable "datadog_api_key" {
   description = "Datadog API key"
   type        = string
@@ -112,11 +106,9 @@ variable "datadog_app_key" {
   type        = string
   sensitive   = true
 }
-```
+{{< /code-block >}}
 
-#### datadogagent/main.tf
-
-```hcl
+{{< code-block lang="hcl" filename="datadogagent/main.tf" >}}
 provider "kubernetes" {
   config_path = "~/.kube/config"
 }
@@ -192,13 +184,11 @@ resource "kubernetes_manifest" "datadog" {
     }
   }
 } 
-```
+{{< /code-block >}}
 
 ### Stage 3: Application with DatadogPodAutoscaler
 
-#### nginx-dka/main.tf
-
-```hcl
+{{< code-block lang="hcl" filename="nginx-dka/main.tf" >}}
 terraform {
   required_providers {
     kubernetes = {
@@ -360,79 +350,79 @@ resource "kubernetes_manifest" "datadogpodautoscaler_nginx_dka_demo_nginx" {
     }
   }
 }
-```
+{{< /code-block >}}
 
 ## Deployment Instructions
 
 ### 1. Deploy Stage 1 (Datadog Operator and CRDs)
 
-```bash
+{{< code-block lang="bash" >}}
 terraform init
 terraform apply
-```
+{{< /code-block >}}
 
 ### 2. Verify Stage 1
 
-```bash
+{{< code-block lang="bash" >}}
 kubectl get crd 
 kubectl get pods -n datadog
-```
+{{< /code-block >}}
 
 You should see that the Datadog CRDs are created and the datadog-operator pod is running
 
 ### 2. Deploy Stage 2 (DatadogAgent)
 
 Create terraform.tfvars file with your Datadog credentials
-```bash
+{{< code-block lang="bash" >}}
 cat > datadogagent/terraform.tfvars << EOF
 datadog_api_key = "your-api-key-here"
 datadog_app_key = "your-app-key-here"
 EOF
-```
+{{< /code-block >}}
 Alternatively, set the `TF_VAR_datadog_api_key` and `TF_VAR_datadog_app_key` enviornment variables in your shell.
 
-```bash
+{{< code-block lang="bash" >}}
 cd datadogagent
 terraform init
 terraform apply
-```
+{{< /code-block >}}
 
 ### Verify Stage 2
 
-```
+{{< code-block lang="bash" >}}
 kubectl get datadogagent -n datadog
-```
+{{< /code-block >}}
 You should see the datadog agent custom resouce created. It should be in the `Running` state before proceeding.
 
-```
+{{< code-block lang="bash" >}}
 kubectl get pods -n datadog
-```
+{{< /code-block >}}
 
 You should see that the datadog agent and datadog-cluster-agent pods are running.
 
 ### 3. Deploy Stage 3 (Nginx with DKA)
 
-```bash
+{{< code-block lang="bash" >}}
 cd ../nginx-dka
 terraform init
 terraform apply
-```
+{{< /code-block >}}
 
 After deployment, verify that all components are working correctly:
 
 ### Check DatadogAgent Status
 
-```bash
+{{< code-block lang="bash" >}}
 kubectl get datadogagent -n datadog
 kubectl describe datadogagent datadog -n datadog
-```
+{{< /code-block >}}
 
 ### Check DatadogPodAutoscaler Status
 
-```bash
+{{< code-block lang="bash" >}}
 kubectl get datadogpodautoscaler -n nginx-dka-demo
 kubectl describe datadogpodautoscaler nginx-autoscaler -n nginx-dka-demo
-```
+{{< /code-block >}}
 Congratulations, you now have a workload managed by the Datadog Kubernetes Autoscaler!
 
 ## Cleanup
@@ -441,36 +431,38 @@ To remove all resources, follow the reverse order:
 
 ### 1. Cleanup Stage 3
 
-```bash
+{{< code-block lang="bash" >}}
 cd nginx-dka
 terraform destroy
-```
+{{< /code-block >}}
 
 ### 2. Cleanup Stage 2
 
-```bash
+{{< code-block lang="bash" >}}
 cd ../datadogagent
 terraform destroy
-```
+{{< /code-block >}}
 
 ### 3. Cleanup Stage 1
 
-```bash
+{{< code-block lang="bash" >}}
 cd ..
 terraform destroy
-```
+{{< /code-block >}}
 
 ## Troubleshooting
 
 ### Debugging Commands
 
-```bash
-# Check DatadogPodAutoscaler events
+Check DatadogPodAutoscaler events:
+{{< code-block lang="bash" >}}
 kubectl get events -n nginx-dka-demo --sort-by='.lastTimestamp'
+{{< /code-block >}}
 
-# Check Cluster Agent logs
+Check Cluster Agent logs:
+{{< code-block lang="bash" >}}
 kubectl logs -n datadog -l agent.datadoghq.com/component=cluster-agent 
-```
+{{< /code-block >}}
 
 ## Further reading
 
