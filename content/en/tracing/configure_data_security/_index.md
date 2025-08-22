@@ -325,7 +325,7 @@ apm_config:
         - val1
 ```
 
-This can also be disabled with the environment variable `DD_APM_OBFUSCATION_ELASTICSEARCH_ENABLED=false`.
+This can also be disabled with the environment variable `DD_APM_OBFUSCATION_ELASTICSEARCH_ENABLED=true`.
 
 * `keep_values` or environment variable `DD_APM_OBFUSCATION_ELASTICSEARCH_KEEP_VALUES` - defines a set of keys to exclude from Datadog Agent trace obfuscation. If not set, all keys are obfuscated.
 * `obfuscate_sql_values` or environment variable `DD_APM_OBFUSCATION_ELASTICSEARCH_OBFUSCATE_SQL_VALUES` - defines a set of keys to include in Datadog Agent trace obfuscation. If not set, all keys are obfuscated.
