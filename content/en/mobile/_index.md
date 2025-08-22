@@ -258,6 +258,39 @@ You can also group by log patterns and select different log attributes for clust
 
 On the Services page, you can view, search and filter all services that you have access to in your Datadog account from the Datadog Mobile App to ensure the health of your service from anywhere. You can also view recent deployments, resources, SLOs, and monitors associated with that service. For more information about investigative tools for your services, see [manage Software Catalog][17].
 
+## Bits AI
+### Chat with Bits AI
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+{{< img src="service_management/mobile/ios_bits_chat.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="ios Bits AI Chat page showing querying with Bits AI">}}
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+{{< img src="service_management/mobile/android_bits_chat.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android Bits AI Chat page showing querying with Bits AI">}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+On the home page, you can ask questions to Bits about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information about Bits AI, see [chat with Bits AI][27].
+
+### Bits AI SRE
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+{{< img src="service_management/mobile/ios_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="ios Bits AI SRE on On-Call pages">}}
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+{{< img src="service_management/mobile/android_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android Bits AI SRE on On-Call pages">}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+On-Call pages generated from monitors with Bits AI SRE enabled will automatically initiate investigations. These investigations surface initial findings and conclusions directly on the On-Call page, helping responders understand potential root causes and next steps faster. For more information about Bits AI investigations, see [Bits AI SRE][28].
 
 ## Frequently Asked Question
 ### How do I remain logged into the mobile app?
@@ -311,3 +344,5 @@ For help with troubleshooting, [contact Datadog support][13]. You can also send 
 [24]: https://docs.datadoghq.com/dashboards/configure/#configuration-actions
 [25]: https://docs.datadoghq.com/logs/explorer/watchdog_insights/
 [26]: https://docs.datadoghq.com/watchdog/insights/?tab=logmanagement
+[27]: https://docs.datadoghq.com/bits_ai/chat_with_bits_ai/
+[28]: https://docs.datadoghq.com/bits_ai/bits_ai_sre/
