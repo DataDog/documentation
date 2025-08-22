@@ -591,6 +591,25 @@ components:
       required: true
       schema:
         type: string
+    IssueIDPathParameter:
+      description: The identifier of the issue
+      example: c1726a66-1f64-11ee-b338-da7ad0900002
+      in: path
+      name: issue_id
+      required: true
+      schema:
+        type: string
+    IssueIncludeQueryParameter:
+      description: Comma-separated list of relationship objects that should be included
+        in the response.
+      explode: false
+      in: query
+      name: include
+      required: false
+      schema:
+        items:
+          $ref: '#/components/schemas/IssueIncludeQueryParameterItem'
+        type: array
     KindID:
       description: Entity kind.
       in: path
@@ -21454,6 +21473,548 @@ components:
       - DOWN
       - WARNING
       - 'OFF'
+    Issue:
+      description: The issue matching the request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IssueAttributes'
+        id:
+          description: Issue identifier.
+          example: c1726a66-1f64-11ee-b338-da7ad0900002
+          type: string
+        relationships:
+          $ref: '#/components/schemas/IssueRelationships'
+        type:
+          $ref: '#/components/schemas/IssueType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    IssueAssigneeRelationship:
+      description: Relationship between the issue and assignee.
+      properties:
+        data:
+          $ref: '#/components/schemas/IssueUserReference'
+      required:
+      - data
+      type: object
+    IssueAttributes:
+      description: Object containing the information of an issue.
+      properties:
+        error_message:
+          description: Error message associated with the issue.
+          example: object of type 'NoneType' has no len()
+          type: string
+        error_type:
+          description: Type of the error that matches the issue.
+          example: builtins.TypeError
+          type: string
+        file_path:
+          description: Path of the file where the issue occurred.
+          example: /django-email/conduit/apps/core/utils.py
+          type: string
+        first_seen:
+          description: Timestamp of the first seen error in milliseconds since the
+            Unix epoch.
+          example: 1671612804001
+          format: int64
+          type: integer
+        first_seen_version:
+          description: Version where the issue was first observed.
+          example: aaf65cd0
+          type: string
+        function_name:
+          description: Name of the function where the issue occurred.
+          example: filter_forbidden_tags
+          type: string
+        impacted_sessions:
+          description: Count of sessions impacted by the issue.
+          example: 12
+          format: int64
+          type: integer
+        impacted_users:
+          description: Count of users impacted by the issue.
+          example: 4
+          format: int64
+          type: integer
+        is_crash:
+          description: Error is a crash.
+          example: false
+          type: boolean
+        languages:
+          description: Array of programming languages associated with the issue.
+          example:
+          - python
+          - go
+          items:
+            $ref: '#/components/schemas/IssueLanguage'
+          type: array
+        last_seen:
+          description: Timestamp of the last seen error in milliseconds since the
+            Unix epoch.
+          example: 1671620003100
+          format: int64
+          type: integer
+        last_seen_version:
+          description: Version where the issue was last observed.
+          example: b6199f80
+          type: string
+        platform:
+          $ref: '#/components/schemas/IssuePlatform'
+        service:
+          description: Service name.
+          example: email-api-py
+          type: string
+        state:
+          $ref: '#/components/schemas/IssueState'
+        total_count:
+          description: Total count of errors that match the issue over the queried
+            time window.
+          example: 82
+          format: int64
+          type: integer
+      type: object
+    IssueCaseReference:
+      description: The case the issue is attached to.
+      properties:
+        id:
+          description: Case identifier.
+          example: 2841440d-e780-4fe2-96cd-6a8c1d194da5
+          type: string
+        type:
+          $ref: '#/components/schemas/CaseResourceType'
+      required:
+      - id
+      - type
+      type: object
+    IssueCaseRelationship:
+      description: Relationship between the issue and case.
+      properties:
+        data:
+          $ref: '#/components/schemas/IssueCaseReference'
+      required:
+      - data
+      type: object
+    IssueIncludeQueryParameterItem:
+      description: Relationship object that should be included in the response.
+      enum:
+      - case
+      - teams
+      example: case
+      type: string
+      x-enum-varnames:
+      - CASE
+      - TEAMS
+    IssueIncluded:
+      description: Included data in the issue response.
+      oneOf:
+      - $ref: '#/components/schemas/Case'
+      - $ref: '#/components/schemas/IssueUser'
+      - $ref: '#/components/schemas/IssueTeam'
+    IssueLanguage:
+      description: Programming language associated with the issue.
+      enum:
+      - javascript
+      - jvm
+      - ruby
+      - typescript
+      - java
+      - kotlin
+      - scala
+      - groovy
+      - clojure
+      - go
+      - python
+      - php
+      - dot_net
+      - c_sharp
+      - c_plus_plus
+      - objective_c
+      - swift
+      - brightscript
+      - c
+      - elixir
+      - erlang
+      - perl
+      - haskell
+      - rust
+      example: python
+      type: string
+      x-enum-varnames:
+      - JAVASCRIPT
+      - JVM
+      - RUBY
+      - TYPESCRIPT
+      - JAVA
+      - KOTLIN
+      - SCALA
+      - GROOVY
+      - CLOJURE
+      - GO
+      - PYTHON
+      - PHP
+      - DOT_NET
+      - C_SHARP
+      - C_PLUS_PLUS
+      - OBJECTIVE_C
+      - SWIFT
+      - BRIGHTSCRIPT
+      - C
+      - ELIXIR
+      - ERLANG
+      - PERL
+      - HASKELL
+      - RUST
+    IssuePlatform:
+      description: Platform associated with the issue
+      enum:
+      - browser
+      - android
+      - backend
+      - ios
+      - react_native
+      - flutter
+      - roku
+      example: backend
+      type: string
+      x-enum-varnames:
+      - BROWSER
+      - ANDROID
+      - BACKEND
+      - IOS
+      - REACT_NATIVE
+      - FLUTTER
+      - ROKU
+    IssueRelationships:
+      description: Relationship between the issue and an assignee, case and/or teams.
+      properties:
+        assignee:
+          $ref: '#/components/schemas/IssueAssigneeRelationship'
+        case:
+          $ref: '#/components/schemas/IssueCaseRelationship'
+        team_owners:
+          $ref: '#/components/schemas/IssueTeamOwnersRelationship'
+      type: object
+    IssueResponse:
+      description: Response containing error tracking issue data
+      properties:
+        data:
+          $ref: '#/components/schemas/Issue'
+        included:
+          description: Array of resources related to the issue.
+          items:
+            $ref: '#/components/schemas/IssueIncluded'
+          type: array
+      type: object
+    IssueState:
+      description: State of the issue
+      enum:
+      - OPEN
+      - ACKNOWLEDGED
+      - RESOLVED
+      - IGNORED
+      - EXCLUDED
+      example: RESOLVED
+      type: string
+      x-enum-varnames:
+      - OPEN
+      - ACKNOWLEDGED
+      - RESOLVED
+      - IGNORED
+      - EXCLUDED
+    IssueTeam:
+      description: A team that owns an issue.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IssueTeamAttributes'
+        id:
+          description: Team identifier.
+          example: 221b0179-6447-4d03-91c3-3ca98bf60e8a
+          type: string
+        type:
+          $ref: '#/components/schemas/IssueTeamType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    IssueTeamAttributes:
+      description: Object containing the information of a team.
+      properties:
+        handle:
+          description: The team's identifier.
+          example: team-handle
+          type: string
+        name:
+          description: The name of the team.
+          example: Team Name
+          type: string
+        summary:
+          description: A brief summary of the team, derived from its description.
+          example: This is a team.
+          type: string
+      type: object
+    IssueTeamOwnersRelationship:
+      description: Relationship between the issue and teams.
+      properties:
+        data:
+          description: Array of teams that are owners of the issue.
+          items:
+            $ref: '#/components/schemas/IssueTeamReference'
+          type: array
+      required:
+      - data
+      type: object
+    IssueTeamReference:
+      description: A team that owns the issue.
+      properties:
+        id:
+          description: Team identifier.
+          example: 221b0179-6447-4d03-91c3-3ca98bf60e8a
+          type: string
+        type:
+          $ref: '#/components/schemas/IssueTeamType'
+      required:
+      - id
+      - type
+      type: object
+    IssueTeamType:
+      description: Type of the object.
+      enum:
+      - team
+      example: team
+      type: string
+      x-enum-varnames:
+      - TEAM
+    IssueType:
+      description: Type of the object.
+      enum:
+      - issue
+      example: issue
+      type: string
+      x-enum-varnames:
+      - ISSUE
+    IssueUpdateAssigneeRequest:
+      description: Update issue assignee request payload.
+      properties:
+        data:
+          $ref: '#/components/schemas/IssueUpdateAssigneeRequestData'
+      required:
+      - data
+      type: object
+    IssueUpdateAssigneeRequestData:
+      description: Update issue assignee request.
+      properties:
+        id:
+          description: User identifier.
+          example: 87cb11a0-278c-440a-99fe-701223c80296
+          type: string
+        type:
+          $ref: '#/components/schemas/IssueUpdateAssigneeRequestDataType'
+      required:
+      - id
+      - type
+      type: object
+    IssueUpdateAssigneeRequestDataType:
+      description: Type of the object.
+      enum:
+      - assignee
+      example: assignee
+      type: string
+      x-enum-varnames:
+      - ASSIGNEE
+    IssueUpdateStateRequest:
+      description: Update issue state request payload.
+      properties:
+        data:
+          $ref: '#/components/schemas/IssueUpdateStateRequestData'
+      required:
+      - data
+      type: object
+    IssueUpdateStateRequestData:
+      description: Update issue state request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IssueUpdateStateRequestDataAttributes'
+        id:
+          description: Issue identifier.
+          example: c1726a66-1f64-11ee-b338-da7ad0900002
+          type: string
+        type:
+          $ref: '#/components/schemas/IssueUpdateStateRequestDataType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    IssueUpdateStateRequestDataAttributes:
+      description: Object describing an issue state update request.
+      properties:
+        state:
+          $ref: '#/components/schemas/IssueState'
+      required:
+      - state
+      type: object
+    IssueUpdateStateRequestDataType:
+      description: Type of the object.
+      enum:
+      - error_tracking_issue
+      example: error_tracking_issue
+      type: string
+      x-enum-varnames:
+      - ERROR_TRACKING_ISSUE
+    IssueUser:
+      description: The user to whom the issue is assigned.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IssueUserAttributes'
+        id:
+          description: User identifier.
+          example: 87cb11a0-278c-440a-99fe-701223c80296
+          type: string
+        type:
+          $ref: '#/components/schemas/IssueUserType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    IssueUserAttributes:
+      description: Object containing the information of a user.
+      properties:
+        email:
+          description: Email of the user.
+          example: user@company.com
+          type: string
+        handle:
+          description: Handle of the user.
+          example: User Handle
+          type: string
+        name:
+          description: Name of the user.
+          example: User Name
+          type: string
+      type: object
+    IssueUserReference:
+      description: The user the issue is assigned to.
+      properties:
+        id:
+          description: User identifier.
+          example: 87cb11a0-278c-440a-99fe-701223c80296
+          type: string
+        type:
+          $ref: '#/components/schemas/IssueUserType'
+      required:
+      - id
+      - type
+      type: object
+    IssueUserType:
+      description: Type of the object
+      enum:
+      - user
+      example: user
+      type: string
+      x-enum-varnames:
+      - USER
+    IssuesResponse:
+      description: Search issues response payload.
+      properties:
+        data:
+          description: Array of issues matching the search query.
+          items:
+            $ref: '#/components/schemas/Issue'
+          type: array
+        included:
+          description: Array of resources related to the issues.
+          items:
+            $ref: '#/components/schemas/IssueIncluded'
+          type: array
+      type: object
+    IssuesSearchRequest:
+      description: Search issues request payload.
+      properties:
+        data:
+          $ref: '#/components/schemas/IssuesSearchRequestData'
+      required:
+      - data
+      type: object
+    IssuesSearchRequestData:
+      description: Search issues request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IssuesSearchRequestDataAttributes'
+        type:
+          $ref: '#/components/schemas/IssuesSearchRequestDataType'
+      required:
+      - type
+      - attributes
+      type: object
+    IssuesSearchRequestDataAttributes:
+      description: Object describing a search issue request.
+      properties:
+        from:
+          description: Start date (inclusive) of the query in milliseconds since the
+            Unix epoch.
+          example: 1671612804000
+          format: int64
+          type: integer
+        indexes:
+          description: Array of indexes to query.
+          items:
+            type: string
+          type: array
+        persona:
+          $ref: '#/components/schemas/IssuesSearchRequestDataAttributesPersona'
+        query:
+          description: Search query following the event search syntax.
+          example: service:orders-* AND @language:go
+          type: string
+        to:
+          description: End date (exclusive) of the query in milliseconds since the
+            Unix epoch.
+          example: 1671620004000
+          format: int64
+          type: integer
+        track:
+          $ref: '#/components/schemas/IssuesSearchRequestDataAttributesTrack'
+      required:
+      - query
+      - from
+      - to
+      type: object
+    IssuesSearchRequestDataAttributesPersona:
+      description: Persona for the search.
+      enum:
+      - browser
+      - mobile
+      - backend
+      example: backend
+      type: string
+      x-enum-varnames:
+      - BROWSER
+      - MOBILE
+      - BACKEND
+    IssuesSearchRequestDataAttributesTrack:
+      description: Track of the events to query.
+      enum:
+      - trace
+      - logs
+      - rum
+      example: trace
+      type: string
+      x-enum-varnames:
+      - TRACE
+      - LOGS
+      - RUM
+    IssuesSearchRequestDataType:
+      description: Type of the object.
+      enum:
+      - search_request
+      example: search_request
+      type: string
+      x-enum-varnames:
+      - SEARCH_REQUEST
     JSONAPIErrorItem:
       description: API error response body
       properties:
@@ -46236,6 +46797,8 @@ components:
             data_scanner_write: Edit Data Scanner configurations.
             embeddable_graphs_share: Generate public links to share embeddable graphs
               externally.
+            error_tracking_read: Read Error Tracking data.
+            error_tracking_write: Edit Error Tracking issues.
             events_read: Read Events data.
             hosts_read: List hosts and their attributes.
             incident_notification_settings_write: Configure Incidents Notification
@@ -53146,6 +53709,179 @@ paths:
         operator: OR
         permissions:
         - monitors_downtime
+      x-undo:
+        type: idempotent
+  /api/v2/error-tracking/issues/search:
+    post:
+      description: Search issues endpoint allows you to programmatically search for
+        issues within your organization. This endpoint returns a list of issues that
+        match a given search query, following the event search syntax. The search
+        results are limited to a maximum of 100 issues.
+      operationId: SearchIssues
+      parameters:
+      - $ref: '#/components/parameters/IssueIncludeQueryParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssuesSearchRequest'
+        description: Search issues request payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IssuesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - error_tracking_read
+      summary: Search error tracking issues
+      tags:
+      - Error Tracking
+      x-given:
+        issue:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"query\": \"service:synthetics-browser\",\n
+              \     \"from\": {{ timestamp(\"now - 15d\") }}000,\n      \"to\": {{
+              timestamp(\"now\") }}000,\n      \"track\": \"rum\"\n    },\n    \"type\":
+              \"search_request\"\n  }\n}"
+          source: data[0]
+          step: there is a valid "issue" in the system
+      x-menu-order: 1
+      x-undo:
+        type: safe
+  /api/v2/error-tracking/issues/{issue_id}:
+    get:
+      description: Get the details of an error tracking issue by `issue_id`.
+      operationId: GetIssue
+      parameters:
+      - $ref: '#/components/parameters/IssueIDPathParameter'
+      - $ref: '#/components/parameters/IssueIncludeQueryParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IssueResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - error_tracking_read
+      summary: Get the details of an error tracking issue
+      tags:
+      - Error Tracking
+      x-menu-order: 2
+      x-undo:
+        type: safe
+  /api/v2/error-tracking/issues/{issue_id}/assignee:
+    put:
+      description: Update the assignee of an issue by `issue_id`.
+      operationId: UpdateIssueAssignee
+      parameters:
+      - $ref: '#/components/parameters/IssueIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueUpdateAssigneeRequest'
+        description: Update issue assignee request payload.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IssueResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - error_tracking_read
+        - error_tracking_write
+        - cases_read
+        - cases_write
+      summary: Update the assignee of an issue
+      tags:
+      - Error Tracking
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+  /api/v2/error-tracking/issues/{issue_id}/state:
+    put:
+      description: Update the state of an issue by `issue_id`.
+      operationId: UpdateIssueState
+      parameters:
+      - $ref: '#/components/parameters/IssueIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueUpdateStateRequest'
+        description: Update issue state request payload.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IssueResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - error_tracking_read
+        - error_tracking_write
+      summary: Update the state of an issue
+      tags:
+      - Error Tracking
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v2/events:
@@ -73362,6 +74098,9 @@ tags:
 
     end times, prevent all alerting related to specified Datadog tags.'
   name: Downtimes
+- description: View and manage issues within Error Tracking. See the [Error Tracking
+    page](https://docs.datadoghq.com/error_tracking/) for more information.
+  name: Error Tracking
 - description: 'The Event Management API allows you to programmatically post events
     to the Events Explorer and fetch events from the Events Explorer. See the [Event
     Management page](https://docs.datadoghq.com/service_management/events/) for more
