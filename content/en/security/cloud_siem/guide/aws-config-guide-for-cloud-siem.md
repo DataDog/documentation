@@ -4,10 +4,10 @@ further_reading:
 - link: "/security/default_rules/#cat-cloud-siem-log-detection"
   tag: "Documentation"
   text: "Explore Cloud SIEM default detection rules"
-- link: "/security/cloud_siem/investigate_security_signals"
+- link: "/security/cloud_siem/triage_and_investigate/investigate_security_signals"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
-- link: "/security/cloud_siem/detection_rules/"
+- link: "/security/cloud_siem/detect_and_monitor/custom_detection_rules/"
   tag: "Documentation"
   text: "Create new detection rules"
 - link: "/getting_started/integrations/aws/"
@@ -64,7 +64,7 @@ Since Cloud SIEM applies detection rules to all processed logs, see the [in-app 
 
 [1]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Log%20Detection%22
 [9]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc&product=siem
-[10]: /security/cloud_siem/investigate_security_signals
+[10]: /security/cloud_siem/triage_and_investigate/investigate_security_signals
 [11]: https://app.datadoghq.com/dash/integration/30459/aws-cloudtrail
 [12]: https://docs.datadoghq.com/security/default_rules/#cat-cloud-siem
 [13]: https://docs.datadoghq.com/security/detection_rules/

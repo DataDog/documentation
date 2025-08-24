@@ -1,6 +1,8 @@
 ---
 title: Investigate Security Signals
 disable_toc: false
+aliases:
+  - /security/cloud_siem/investigate_security_signals
 further_reading:
   - link: "/cloud_siem/detection_rules/"
     tag: "Documentation"
