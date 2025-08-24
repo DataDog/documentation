@@ -36,7 +36,7 @@ The following environments are compatible:
 |-----------------|---------------------------------------------------------|---------|
 | Linux           | Not supported on hardened environments such as SELinux. | GA      |
 | Docker on Linux |                                                         | GA      |
-| Kubernetes      | Requires [Datadog Admission Controller][1] to be enabled.      | GA      |
+| Kubernetes      | Requires [Datadog Admission Controller][1] to be enabled. <br>Only supports Linux nodepools     | GA      |
 | Windows IIS     | Requires Agent v7.67.1+ and Tracer v3.19.0+.<br>Only .NET applications running in IIS are supported.     | GA      |
 
 
@@ -123,8 +123,6 @@ Single Step Instrumentation requires Python 3.7+, which is available by default 
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
-
-<div class="alert alert-warning">Using Single Step Instrumentation with Ruby applications is in Preview.</div>
 
 ### Troubleshooting
 
