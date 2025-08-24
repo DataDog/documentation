@@ -13,9 +13,6 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/datadog-quick-nav-menu/'
     tag: 'Blog'
     text: 'Introducing the Datadog quick nav menu'
-  - link: 'https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/'
-    tag: 'Blog'
-    text: 'DRUIDS, the design system that powers Datadog'
 ---
 
 {{< learning-center-callout header="Try Datadog Foundation in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/datadog-foundation">}}
