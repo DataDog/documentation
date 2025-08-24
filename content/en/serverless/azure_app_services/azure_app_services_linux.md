@@ -133,6 +133,27 @@ Additional flags, like `--service` and `--env`, can be used to set the service a
 {{% tab "Manual" %}}
 
 1. **Configure environment variables**.
+
+### Quick Deploy Option
+
+To streamline the setup process, you can use the "Deploy to Azure" button below to automatically create an Azure App Service (Linux) with all required DataDog application settings pre-configured:
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fdatadog-azure-templates%2Fmain%2Fapp-service-linux%2Fazuredeploy.json)
+
+This template automatically configures:
+- Azure App Service (Linux) with your chosen runtime
+- All required DataDog environment variables (DD_API_KEY, DD_SITE, DD_SERVICE, etc.)
+- Sidecar container configuration for DataDog monitoring
+- Proper storage settings for log collection
+
+After deployment, you can proceed directly to step 2 (Configure a sidecar container) or continue with the manual configuration below.
+
+---
+
+### Manual Configuration
+
+Alternatively, you can manually configure the environment variables:
+
    In Azure, add the following key-value pairs in **Settings** > **Configuration** > **Application settings**:
 
 `DD_API_KEY`
