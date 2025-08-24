@@ -54,3 +54,17 @@ instances:
     query_samples:
         collection_interval: 0.1
 ```
+
+## Set up Cancel Query integration
+
+To support cancelling a query throughout the Database Monitoring product, [set up a private action runner][1] and enable the “Cancel Query” action for the runner.
+
+The runner runs using an existing user in the database, the user is required to have `pg_signal_backend` and `pg_read_all_stats` permissions in the database.
+
+### Create a Connection to the Private Action Runner
+
+Create a Postgres connection in Datadog Actions Connections, and name and configure the connection:
+
+{{< img src="database_monitoring/db-cancel-query-connection-modal.png" alt="The Connection creation modal for the Cancel Query feature" style="width:90%;" >}}
+
+[1]: /actions/private_actions/use_private_actions/#set-up-a-private-action-runner
