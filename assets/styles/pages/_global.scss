@@ -499,6 +499,17 @@ h5 {
         }
     }
 
+    kbd {
+      padding: .1875rem .375rem;
+      font-size: .875em;
+      color: var(--bs-body-color);
+      background-color: var(--bs-body-bg);
+      border-radius: .25rem;
+      border: 1px solid var(--bs-body-color);
+      font-family: $font-family-sans-serif;
+      margin: 3px;
+    }
+
     pre {
         margin: 0 0 24px 0;
     }
