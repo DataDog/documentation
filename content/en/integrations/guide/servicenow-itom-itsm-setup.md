@@ -169,8 +169,7 @@ In ServiceNow, you can sync state, impact, and urgency bidirectionally with both
 
 The ServiceNow integration writes from Datadog to interim tables, which transform to records in ServiceNow. For any customizations (for example, custom field mappings, etc.), you can extend the transform maps to specify what fields you want to map to from Datadog to ServiceNow.
 
-### Templated Monitors ITXM table fields and transform maps
-
+{{% collapse-content title="Templated monitor table fields and transform maps" level="h4" expanded=false id="templated-monitor-table-fields-transform-maps" %}}
 `action`
 : **Type**: String<br>
 The action being taken on the monitor: `create`, `update`, `acknowledge`, or `resolve`
@@ -322,6 +321,8 @@ Urgency set from the user defined mapping on the integration tile based on monit
 **ITSM Transform**: `assigned_to`<br>
 **Reference Table**: User <br>
 sys_id from the templated handle passed in for user.
+
+{{% /collapse-content %}}
 
 ## Troubleshooting
 
