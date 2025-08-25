@@ -35,9 +35,9 @@ See GitHub's [webhook events and payloads documentation][1] for a detailed descr
 {{% /tab %}}
 {{% tab "Gitlab" %}}
 
-Code Coverage relies on the Gitlab webhooks. None of the webhooks include your source code content; they only include metadata about the merge request, such as title, description, author, labels, and commit SHAs.
+Code Coverage relies on Gitlab webhooks. The webhooks do not include your source code content. They only include metadata about the merge request, such as the title, description, author, labels, and commit SHAs.
 
-See Gitlab's [webhook events and payloads documentation][1] for a detailed description of the data sent by the webhooks.
+See Gitlab's [webhook events and payloads documentation][1] for a detailed description of the data sent by webhooks.
 
 [1]: https://docs.gitlab.com/user/project/integrations/webhook_events/
 

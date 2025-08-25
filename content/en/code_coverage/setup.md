@@ -54,7 +54,7 @@ If everything is configured correctly, a green check mark is displayed in Datado
 {{% /tab %}}
 {{% tab "Gitlab" %}}
 
-Follow the [Datadog Source Code Integration Guide][1] for instructions on how to connect your Gitlab repositories to Datadog.
+Follow instructions in the [Datadog Source Code Integration Guide][1] on how to connect your Gitlab repositories to Datadog.
 
 [1]: /integrations/guide/source-code-integration/?tab=gitlabsaasonprem#connect-your-git-repositories-to-datadog
 
