@@ -70,7 +70,7 @@ Cardinality can also be specified per metric by passing the value in the
 `"orchestrator"` or `"high"`.
 
 <div class="alert alert-warning">
-  By default, origin detection is enabled in all DogStatsD clients, but it is not enabled by default in the Datadog Agent. To disable origin detection in a client, see the documentation for the specific DogStatsD library you're using.
+  By default, origin detection is enabled in all DogStatsD clients, but it is not enabled by default in the Datadog Agent. To disable origin detection in a client either set the environment variable `DD_ORIGIN_DETECTION_ENABLED=false` or configure the library to disable origin detection - see the documentation for the specific DogStatsD library you're using.
 </div>
 
 **Note**: Origin detection is not supported for Fargate environments.
