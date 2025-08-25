@@ -3554,47 +3554,47 @@ menu:
       identifier: cloud_cost_saas_cost_integrations
       weight: 104
     - name: Snowflake
-      url: cloud_cost_management/setup/saas_costs/?tab=snowflake#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=snowflake#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_snowflake
       weight: 101
     - name: Databricks
-      url: cloud_cost_management/setup/saas_costs/?tab=databricks#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=databricks#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_databricks
       weight: 102
     - name: OpenAI
-      url: cloud_cost_management/setup/saas_costs/?tab=openai#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=openai#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_openai
       weight: 103
     - name: GitHub
-      url: cloud_cost_management/setup/saas_costs/?tab=github#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_github
       weight: 104
     - name: Confluent Cloud
-      url: cloud_cost_management/setup/saas_costs/?tab=confluentcloud#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=confluentcloud#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_confluentcloud
       weight: 105
     - name: MongoDB
-      url: cloud_cost_management/setup/saas_costs/?tab=mongodb#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=mongodb#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_mongodb
       weight: 106
     - name: Elastic Cloud
-      url: cloud_cost_management/setup/saas_costs/?tab=elasticcloud#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=elasticcloud#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_elasticcloud
       weight: 107
     - name: Fastly
-      url: cloud_cost_management/setup/saas_costs/?tab=fastly#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=fastly#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_fastly
       weight: 108
     - name: Twilio
-      url: cloud_cost_management/setup/saas_costs/?tab=twilio#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=twilio#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_twilio
       weight: 109
@@ -3619,7 +3619,7 @@ menu:
       identifier: cloud_cost_container_cost_allocation
       weight: 301
     - name: AWS
-      url: cloud_cost_management/cost_allocation/container_cost_allocation/?tab=aws
+      url: cloud_cost_management/cost_allocation/container_cost_allocation/?tab=aws/
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_aws
       weight: 101
@@ -3678,6 +3678,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_reports
       weight: 9
+    - name: Scheduled Cost Reports
+      url: /cloud_cost_management/reports/scheduled_reports
+      parent: cloud_cost_reports
+      identifier: cloud_cost_scheduled_reports
+      weight: 901
     - name: Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost
@@ -5812,21 +5817,6 @@ menu:
       url: logs/explorer/saved_views/
       parent: log_explorer
       weight: 514
-    - name: Workspaces
-      url: logs/workspaces/
-      parent: log_management
-      identifier: logs_workspaces
-      weight: 6
-    - name: Use Cases
-      url: logs/workspaces/use_cases/
-      parent: logs_workspaces
-      identifier: logs_workspaces_use_cases
-      weight: 601
-    - name: Time Selection
-      url: logs/workspaces/time_selection/
-      parent: logs_workspaces
-      identifier: logs_workspaces_time_selection
-      weight: 602
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management
