@@ -122,7 +122,7 @@ DDSQL supports explicit type literals using the syntax `[TYPE] [value]`.
 | `TIMESTAMP` | `TIMESTAMP 'value'` | `TIMESTAMP '2023-12-25 10:30:00'` |
 | `VARCHAR` | `VARCHAR 'value'` | `VARCHAR 'hello world'` |
 
-The type prefix can be omitted and the type will be automatically inferred from the value. For example, `'hello world'` will be inferred as `VARCHAR`, `123` as `BIGINT`, and `true` as `BOOLEAN`.
+The type prefix can be omitted and the type is automatically inferred from the value. For example, `'hello world'` is inferred as `VARCHAR`, `123` as `BIGINT`, and `true` as `BOOLEAN`.
 
 ### Array literals
 
