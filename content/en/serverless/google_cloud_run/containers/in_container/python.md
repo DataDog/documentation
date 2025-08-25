@@ -3,6 +3,8 @@ title: Instrumenting a Python Cloud Run Container In-Process
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 10
+aliases:
+  - /serverless/google_cloud_run/containers/in_process/python
 further_reading:
   - link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/python/'
     tag: 'Documentation'

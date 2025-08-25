@@ -3,6 +3,8 @@ title: Instrumenting a Java Cloud Run Container In-Process
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 40
+aliases:
+  - /serverless/google_cloud_run/containers/in_process/java
 further_reading:
   - link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/'
     tag: 'Documentation'

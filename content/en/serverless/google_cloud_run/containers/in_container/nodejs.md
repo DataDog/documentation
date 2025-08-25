@@ -3,6 +3,8 @@ title: Instrumenting a Node.js Cloud Run Container In-Process
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 20
+aliases:
+  - /serverless/google_cloud_run/containers/in_process/nodejs
 further_reading:
 - link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/'
   tag: 'Documentation'

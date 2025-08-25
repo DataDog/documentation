@@ -3,6 +3,8 @@ title: Instrumenting a Ruby Cloud Run Container In-Process
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 60
+aliases:
+  - /serverless/google_cloud_run/containers/in_process/ruby
 further_reading:
   - link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/'
     tag: 'Documentation'

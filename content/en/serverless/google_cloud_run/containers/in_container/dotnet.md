@@ -3,6 +3,8 @@ title: Instrumenting a .NET Cloud Run Container In-Process
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 50
+aliases:
+  - /serverless/google_cloud_run/containers/in_process/dotnet
 further_reading:
   - link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=linux'
     tag: 'Documentation'
