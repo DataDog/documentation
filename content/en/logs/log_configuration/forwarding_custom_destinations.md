@@ -18,12 +18,6 @@ further_reading:
   text: "Centrally process and govern your logs in Datadog before sending them to Microsoft Sentinel"
 ---
 
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">
-Log forwarding is not available for the Government site. Contact your account representative for more information.
-</div>
-{{% /site-region %}}
-
 ## Overview
 
 Log Forwarding allows you to send logs from Datadog to custom destinations like Splunk, Elasticsearch, and HTTP endpoints. This means that you can use [Log Pipelines][1] to centrally collect, process, and standardize your logs in Datadog. Then, send the logs from Datadog to other tools to support individual teams' workflows. You can choose to forward any of the ingested logs, whether or not they are indexed, to custom destinations. Logs are forwarded in JSON format and compressed with GZIP.
@@ -41,6 +35,10 @@ The following metrics report on logs that have been forwarded successfully, incl
 
 
 ## Set up log forwarding to custom destinations
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Sending logs to a custom destination is outside of the Datadog GovCloud environment, which is outside the control of Datadog. Datadog shall not be responsible for any logs that have left the Datadog GovCloud environment, including without limitation, any obligations or requirements that the user may have related to FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency or similar regulations applicable to such logs.</div>
+{{< /site-region >}}
 
 1. Add webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} to the allowlist.
 1. Navigate to [Log Forwarding][4].

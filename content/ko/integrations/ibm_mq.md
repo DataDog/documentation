@@ -323,7 +323,7 @@ Datadog Agent에서 로그 수집은 기본값으로 비활성화되어 있습�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "ibm_mq" >}}
+{{< get-metrics-from-git "ibm-mq" >}}
 
 
 ### 이벤트
@@ -331,7 +331,7 @@ Datadog Agent에서 로그 수집은 기본값으로 비활성화되어 있습�
 IBM MQ는 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "ibm_mq" >}}
+{{< get-service-checks-from-git "ibm-mq" >}}
 
 
 ## 트러블슈팅

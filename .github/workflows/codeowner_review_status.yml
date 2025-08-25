@@ -19,15 +19,22 @@ jobs:
     permissions:
       pull-requests: write
       contents: read
+      id-token: write # Needed to federate tokens.
     outputs:
       approval_status: ${{ steps.check_approvals.outputs.approval_status }}
       team_requested: ${{ steps.check_approvals.outputs.team_requested }}
     steps:
+      - uses: DataDog/dd-octo-sts-action@08f2144903ced3254a3dafec2592563409ba2aa0 # v1.0.1
+        id: octo-sts
+        with:
+          scope: DataDog
+          policy: documentation.read-org-members 
+
       - name: Check Documentation Team Approval
         id: check_approvals
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7
         env:
-          GITHUB_TOKEN: ${{ secrets.CODEOWNER_WORKFLOW_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.octo-sts.outputs.token }}
         with:
           github-token: ${{ env.GITHUB_TOKEN }}
           script: |
@@ -61,8 +68,8 @@ jobs:
               }
             });
 
-            // Get current approvals
-            const approvals = new Set(
+            // Get current approvals (will be filtered by team membership later)
+            const allApprovals = new Set(
               Array.from(latestReviews.values())
                 .filter(review => review.state === 'APPROVED')
                 .map(review => review.user.login)
@@ -106,11 +113,13 @@ jobs:
               console.log(`Documentation team considered requested: ${isDocumentationTeamRequested}`);
               
               if (isDocumentationTeamRequested) {
-                // Check for approval from documentation team members
-                hasDocumentationApproval = teamMembers.some(member => 
-                  approvals.has(member.login)
+                // Check for approval from documentation team members only
+                const docsTeamApprovals = teamMembers.filter(member => 
+                  allApprovals.has(member.login)
                 );
+                hasDocumentationApproval = docsTeamApprovals.length > 0;
                 
+                console.log(`Documentation team members who approved: ${docsTeamApprovals.map(m => m.login).join(', ')}`);
                 console.log(`Documentation team approval status: ${hasDocumentationApproval}`);
               } else {
                 // If documentation team is not requested, no approval needed

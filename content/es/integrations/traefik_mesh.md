@@ -187,7 +187,7 @@ Consulta las [plantillas de integración de Autodiscovery][2] para obtener orien
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "traefik_mesh" >}}
+{{< get-metrics-from-git "traefik-mesh" >}}
 
 
 ### Eventos
@@ -195,7 +195,7 @@ Consulta las [plantillas de integración de Autodiscovery][2] para obtener orien
 La integración de Traefik Mesh no incluye ningún evento.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "traefik_mesh" >}}
+{{< get-service-checks-from-git "traefik-mesh" >}}
 
 
 ## Solucionar problemas

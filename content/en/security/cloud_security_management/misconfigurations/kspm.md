@@ -42,7 +42,7 @@ Each finding contains the context you need to identify the issue's impact, such 
 
 **Note**: You can also use the [API to programmatically interact with findings][10].
 
-{{< img src="security/csm/kspm_finding.png" alt="The details panel for a high severity finding for the EKS Cluster should have public access limited rule" width="80%">}}
+{{< img src="security/csm/kspm_finding_1.png" alt="The details panel for a medium severity finding for the EKS Cluster should have public access limited rule" width="80%">}}
 
 ## Assess your Kubernetes security posture against industry-standard frameworks
 

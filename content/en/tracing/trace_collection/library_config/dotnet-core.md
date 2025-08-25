@@ -238,7 +238,7 @@ Available since version `2.42.0`
 
 `DD_TRACE_LOGFILE_RETENTION_DAYS`
 : During the tracer's startup, this configuration uses the tracer's current log directory to delete log files the same age and older than the given number of days. Added in version 2.19.0. <br>
-**Default**: `31`
+**Default**: `32`
 
 `DD_TRACE_LOGGING_RATE`
 : Sets rate limiting for log messages. If set, unique log lines are written once per `x` seconds. For example, to log a given message once per 60 seconds, set to `60`. Setting to `0` disables log rate limiting. Added in version 1.24.0. Disabled by default.
@@ -361,7 +361,7 @@ The following configuration variables are for features that are available for us
 [13]: /agent/configuration/network/#configure-ports
 [14]: /tracing/configure_data_security/#redacting-the-query-in-the-url
 [15]: /tracing/configure_data_security#telemetry-collection
-[16]: /agent/remote_config/
+[16]: /tracing/guide/remote_config
 [17]: https://app.datadoghq.com/services
 [18]: /tracing/trace_collection/otel_instrumentation/dotnet/
 [19]: /tracing/trace_collection/compatibility/dotnet-core/#opentelemetry-based-integrations

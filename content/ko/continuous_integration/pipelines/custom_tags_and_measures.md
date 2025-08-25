@@ -60,7 +60,7 @@ curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/d
 Windows에 독립형 바이너리를 설치하려면 다음을 실행하세요.
 
 ```shell
-Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64.exe" -OutFile "datadog-ci.exe"
+Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64" -OutFile "datadog-ci.exe"
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -145,6 +145,12 @@ GitHub 작업에 태그 및 측정값을 추가하려면 `datadog-ci CLI` 버전
         steps:
         - run: datadog-ci tag ...
     ```
+
+## 한계
+
+- 파이프라인이나 작업에 추가할 수 있는 태그의 최대 개수는 100개입니다.
+- 파이프라인이나 작업에 추가할 수 있는 측정값의 최대 개수는 100개입니다.
+- 태그 또는 측정값의 최대 길이는 300자(키 + 값)입니다.
 
 ## 참고 자료
 

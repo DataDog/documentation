@@ -42,7 +42,6 @@ Watchdog monitors the status of the following external providers' APIs:
 | Envoy | api.envoy.com |
 | Facebook | graph.facebook.com |
 | GitHub | api.github.com |
-| Google | developers.google.com |
 | Hubspot | api.hubspot.com |
 | Intercom | api.intercom.io |
 | Mapbox | api.mapbox.com |

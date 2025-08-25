@@ -52,7 +52,7 @@ Google Cloud VPN のログは Google Cloud Logging で収集され、Cloud Pub/S
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_cloud_vpn" >}}
+{{< get-metrics-from-git "google-cloud-vpn" >}}
 
 
 ### イベント

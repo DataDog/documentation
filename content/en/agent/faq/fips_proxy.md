@@ -188,10 +188,132 @@ The `use_https` option is set to `false` because the Agent uses HTTP to communic
 {{% /tab %}}
 
 {{% tab "Amazon ECS" %}}
+To install the FIPS proxy on Amazon ECS, follow the [Datadog Agent ECS Integrations guide](/containers/amazon_ecs/#fips-proxy-for-govcloud-environments). 
 
-For instructions on installing the FIPS proxy on Amazon ECS, see [FIPS proxy for GOVCLOUD environments][1].
+Ensure you add the `fips-proxy` sidecar container to your ECS task definition and open the required container ports (9803–9818) to enable communication for all [supported features](#supported-platforms-and-limitations).
 
-[1]: /containers/amazon_ecs/#fips-proxy-for-govcloud-environments
+**Note**: You must also ensure that the sidecar container is configured with applicable network settings and IAM permissions.
+
+```json
+ {
+   "containerDefinitions": [
+     (...)
+          {
+            "name": "fips-proxy",
+            "image": "datadog/fips-proxy:1.1.15",
+            "portMappings": [
+                {
+                    "containerPort": 9803,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9804,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9805,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9806,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9807,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9808,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9809,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9810,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9811,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9812,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9813,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9814,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9815,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9816,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9817,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9818,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "DD_FIPS_PORT_RANGE_START",
+                    "value": "9803"
+                },
+                {
+                    "name": "DD_FIPS_LOCAL_ADDRESS",
+                    "value": "127.0.0.1"
+                }
+            ]
+        }
+   ],
+   "family": "datadog-agent-task"
+}
+```
+
+You must also update the environment variables of the Datadog Agent's container to enable sending traffic through the FIPS proxy:
+
+```json
+{
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+            "image": "public.ecr.aws/datadog/agent:latest",
+            (...)
+            "environment": [
+              (...)
+                {
+                    "name": "DD_FIPS_ENABLED",
+                    "value": "true"
+                },
+                {
+                    "name": "DD_FIPS_PORT_RANGE_START",
+                    "value": "9803"
+                },
+                {
+                    "name": "DD_FIPS_HTTPS",
+                    "value": "false"
+                },
+             ],
+        },
+    ],
+   "family": "datadog-agent-task"
+}
+```
+[1]: https://docs.datadoghq.com/agent/configuration/fips-compliance/?tab=helmonamazoneks#supported-platforms-and-limitations
 {{% /tab %}}
 
 {{< /tabs >}}

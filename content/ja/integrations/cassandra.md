@@ -232,7 +232,7 @@ Cassandra Nodetool ログは Cassandra インテグレーションにより収�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "cassandra_nodetool" >}}
+{{< get-metrics-from-git "cassandra-nodetool" >}}
 
 
 ### イベント
@@ -240,7 +240,7 @@ Cassandra Nodetool ログは Cassandra インテグレーションにより収�
 Cassandra_nodetool チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "cassandra_nodetool" >}} 
+{{< get-service-checks-from-git "cassandra-nodetool" >}} 
 
 
 ## トラブルシューティング

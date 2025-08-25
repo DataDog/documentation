@@ -2,6 +2,12 @@
 title: Live Messages
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+    Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
+</div>
+{{% /site-region %}}
+
 {{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
 Live Messages is in Preview for Java-Kafka services using Protobuf and Avro. If you're interested in other languages and technologies, reach out to support@datadoghq.com. 
 {{< /callout >}}
@@ -15,7 +21,7 @@ Live Messages enables you to view a live tail of messages that a specific servic
 1. Enable [Dynamic Instrumentation][1] on the services you want to use this feature on. 
 
    <div class="alert alert-info">
-   Dynamic Instrumentation requires <a href="/agent/remote_config/">Remote Configuration</a>.
+   Dynamic Instrumentation requires <a href="/remote_configuration">Remote Configuration</a>.
    </div>
 1. In [Datadog Settings][2], ensure that you have the following roles:
    - `Dynamic Instrumentation Read`

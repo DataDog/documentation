@@ -70,7 +70,7 @@ Use the spectrum of log types shown in the image below to determine when to use 
 
 Compute is the querying capacity to run queries for Flex Logs. It is used when querying logs in the Flex Logs tier. It is not used for ingestion or when only searching Standard Indexing logs. The available compute tiers are:
 
-<div class="alert alert-warning">The compute sizes available for US3, US5, AP1, US1-FED are Starter, XS and S.</div>
+<div class="alert alert-warning">The compute sizes available for US3, US5, AP1, AP2, and US1-FED are Starter, XS and S.</div>
 
 - Starter
 - Extra small (XS)
@@ -142,7 +142,7 @@ If you select one of the scalable compute options for Flex Logs (for example, XS
 
 ## Configure storage tiers
 
-Flex Logs is set up within log index configurations. [Index filters][1] that apply to that index also apply to Flex Logs. With Flex Logs Starter, you can store logs for 6, 12, or 15 months. With a scalable compute option, you can store logs for 30-450 days. 
+Flex Logs is set up within log index configurations. [Index filters][1] that apply to that index also apply to Flex Logs. With Flex Logs Starter, you can store logs for 3, 6, 12, or 15 months. With a scalable compute option, you can store logs for 30-450 days. 
 
 Configure Flex Tier in the [Logs Index Configuration][2] page:
 

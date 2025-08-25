@@ -47,7 +47,7 @@ further_reading:
 
 Sensitive data, such as credit card numbers, API keys, IP addresses, and personally identifiable information (PII) are often leaked unintentionally, which can expose your organization to security and compliance risks. Sensitive data can be found in your telemetry data, such as application logs, APM spans, RUM events, events from Event Management. It can also be unintentionally moved to cloud storage resources when engineering teams move their workloads to the cloud. Datadog's Sensitive Data Scanner can help prevent sensitive data leaks and limit non-compliance risks by discovering, classifying, and optionally redacting sensitive data.
 
-**Note**: See [PCI DSS Compliance][1] for information on setting up a PCI-compliant Datadog organization.
+**Note**: Datadog's tools and policies comply with PCI v4.0. For more information, see [PCI DSS Compliance][1].
 
 ## Scan telemetry data
 
@@ -133,7 +133,7 @@ When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][15] summar
 [6]: /observability_pipelines/processors/sensitive_data_scanner
 [7]: /observability_pipelines/set_up_pipelines/
 [8]: /security/cloud_security_management/setup/agentless_scanning
-[9]: /agent/remote_config
+[9]: /remote_configuration
 [10]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [11]: /security/cloud_security_management
 [12]: /security/sensitive_data_scanner/setup/cloud_storage/

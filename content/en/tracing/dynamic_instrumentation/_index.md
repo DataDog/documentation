@@ -29,12 +29,6 @@ further_reading:
   text: "Use Datadog Dynamic Instrumentation to add application logs without redeploying"
 ---
 
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">
- Dynamic Instrumentation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}), as it requires <a href="/agent/remote_config/">Remote Configuration</a> to be enabled.
-</div>
-{{% /site-region %}}
-
 ## Overview
 
 Dynamic instrumentation allows you to add instrumentation into your running production systems without any restarts and at any location in your application's code, including third-party libraries. You can add or modify telemetry for logs, metrics, spans, and corresponding tagging, from the Datadog UI. Dynamic Instrumentation has low overhead and has no side effects on your system.
@@ -88,6 +82,7 @@ For more detailed instructions, select your runtime below:
 - Dynamic Instrumentation is not yet compatible with Azure App Services or serverless environments.
 - Full support is available only for applications built with Python, Java, .NET.
 - Limited previews are ongoing for applications built with Node.js, Ruby, and PHP.
+- The Java tracer library does not support Kotlin coroutines.
 
 ## Explore Dynamic Instrumentation
 
@@ -217,7 +212,7 @@ You can use a *span tag probe* as an alternative to [using Custom Instrumentatio
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/
-[2]: /agent/remote_config/
+[2]: /tracing/guide/remote_config
 [3]: https://github.com/DataDog/dd-trace-java
 [4]: https://github.com/DataDog/dd-trace-py
 [5]: https://github.com/DataDog/dd-trace-dotnet

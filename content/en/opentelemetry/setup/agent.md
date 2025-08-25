@@ -37,7 +37,7 @@ The Datadog Agent provides two ways to ingest OpenTelemetry data:
 
 The DDOT Collector combines the Datadog Agent with a built-in OpenTelemetry Collector. This option is best suited for Kubernetes users who want to take full advantage of Collector capabilities, such as advanced data processing and exporting OTLP data to multiple destinations.
 
-{{< img src="/opentelemetry/setup/ddot-collector.png" alt="Architecture overview for DDOT Collector, which is embedded in the Datadog Agent." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Architecture overview for DDOT Collector, which is embedded in the Datadog Agent." style="width:100%;" >}}
 
 **Use the DDOT Collector if**:
 

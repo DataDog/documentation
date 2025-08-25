@@ -3,26 +3,28 @@ title: Configure IaC Security Exclusions
 aliases:
   - /security/cloud_security_management/setup/iac_scanning/iac_scanning_exclusions/
 further_reading:
-    - link: "/security/code_security/iac_security"
-      tag: "Documentation"
-      text: "IaC Security"
-    - link: "/security/code_security/iac_security/setup"
-      tag: "Documentation"
-      text: "Set up IaC Security for Code Security"
+  - link: "https://www.datadoghq.com/blog/datadog-iac-security/"
+    tag: "Blog"
+    text: "Prevent cloud misconfigurations from reaching production with Datadog IaC Security"
+  - link: "/security/code_security/iac_security"
+    tag: "Documentation"
+    text: "IaC Security"
+  - link: "/security/code_security/iac_security/setup"
+    tag: "Documentation"
+    text: "Set up IaC Security for Code Security"
+  - link: "/security/code_security/iac_security/iac_rules/"
+    tag: "Documentation"
+    text: "IaC Security Rules"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/iac-security/" >}}
-  Infrastructure as Code (IaC) Security is in Preview. To request access, complete the form.
-{{< /callout >}}
-
-Infrastructure as Code (IaC) Security detects security misconfigurations in Terraform, Kubernetes, and CloudFormation files. Exclusions allow you to control which findings appear in scan results by ignoring specific rules, files, or issue categories.
+Infrastructure as Code (IaC) Security detects security misconfigurations in Terraform files. Exclusions allow you to control which findings appear in scan results by ignoring specific rules, files, or issue categories.
 
 ## Exclusion methods
 
 You can configure exclusions using:
 
 - A configuration file to define exclusions for severity levels, file paths, query IDs, and categories.
-- Inline comments to ignore specific findings within Terraform, Kubernetes, or CloudFormation files.
+- Inline comments to ignore specific findings within Terraform files.
 
 <div class="alert alert-info">If an exclusion is defined in both the configuration file and an inline comment, the configuration file takes priority.</div>
 

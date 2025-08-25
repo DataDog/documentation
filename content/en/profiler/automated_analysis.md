@@ -15,9 +15,8 @@ further_reading:
       tag: 'Blog'
       text: "Diagnose runtime and code inefficiencies using Continuous Profiler's timeline view"
 ---
-
-{{< callout url="" btn_hidden="true" >}}
- Automated Analysis for the Continuous Profiler is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/automated-analysis/" btn_hidden="false" header="Join the Preview!" >}}
+Automated Analysis is in Preview.
 {{< /callout >}}
 
 ## Overview

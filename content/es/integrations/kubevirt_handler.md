@@ -99,7 +99,7 @@ No es necesaria ninguna instalación adicional en su servidor.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "kubevirt_handler" >}}
+{{< get-metrics-from-git "kubevirt-handler" >}}
 
 
 ### Eventos

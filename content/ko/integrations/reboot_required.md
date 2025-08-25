@@ -105,7 +105,7 @@ Reboot Required 점검은 [Datadog 에이전트][1] 패키지에 포함되어 �
 Reboot_required 점검에는 이벤트가 포함되어 있지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "reboot_required" >}}
+{{< get-service-checks-from-git "reboot-required" >}}
 
 
 ## 트러블슈팅

@@ -2,7 +2,7 @@
 title: Fleet Automation
 disable_toc: false
 further_reading:
-- link: "/agent/remote_config"
+- link: "/remote_configuration"
   tag: "Documentation"
   text: "Find out more about Remote Configuration"
 - link: "/infrastructure/list/#agent-configuration"
@@ -56,7 +56,7 @@ Use this tab to:
 - Identify configuration changes, API key updates, installs, upgrades and support flares.
 - Determine when changes were made and from where
 
-Audit Trail event visibility depends on your plan. If Audit Trail is not enabled, events from the past 24 hours are available. If it is enabled, events are retained for up to 90 days.
+Audit Trail event visibility depends on your plan. When Audit Trail is enabled in your organization, you can view Agent events for up to 90 days based on your Audit Trail retention settings. If Audit Trail is not enabled in your organization, you can view the past 24 hours of events.
 
 ### Send a remote flare
 

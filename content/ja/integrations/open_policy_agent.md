@@ -179,7 +179,7 @@ open_policy_agent チェックを Kubernetes クラスターにインストー�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "open_policy_agent" >}}
+{{< get-metrics-from-git "open-policy-agent" >}}
 
 
 ### イベント
@@ -187,7 +187,7 @@ open_policy_agent チェックを Kubernetes クラスターにインストー�
 open_policy_agent には、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "open_policy_agent" >}}
+{{< get-service-checks-from-git "open-policy-agent" >}}
 
 
 ## トラブルシューティング

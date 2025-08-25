@@ -52,7 +52,7 @@ Data Streams Monitoring instruments Kafka _clients_ (consumers/producers). If yo
 
 |   | Java | Python | .NET | Node.js | Go |
 | - | ---- | ------ | ---- | ------- | -- |
-| Apache Kafka | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Apache Kafka <br/>(self-hosted, Amazon MSK, Confluent Cloud, or any other hosting platform) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | Amazon Kinesis | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
 | Amazon SNS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
 | Amazon SQS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
@@ -62,6 +62,9 @@ Data Streams Monitoring instruments Kafka _clients_ (consumers/producers). If yo
 | RabbitMQ | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
 
 Data Streams Monitoring requires minimum Datadog tracer versions. See each setup page for details.
+
+#### Support for OpenTelemetry
+Data Streams Monitoring supports OpenTelemetry. If you have set up Datadog APM to work with OpenTelemetry, no additional setup is required to use Data Streams Monitoring. See [OpenTelemetry Compatibility][11].
 
 ## Setup
 
@@ -144,3 +147,4 @@ Datadog can automatically detect your managed [Confluent Cloud][8] connectors an
 [8]: https://www.confluent.io/confluent-cloud/
 [9]: /integrations/confluent_cloud/
 [10]: https://app.datadoghq.com/data-streams/map
+[11]: /opentelemetry/compatibility

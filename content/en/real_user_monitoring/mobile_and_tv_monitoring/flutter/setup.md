@@ -112,6 +112,12 @@ For Web, add the following to your `index.html` under the `head` tag, for **{{<r
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v5/datadog-rum-slim.js"></script>
 ```
 {{</ site-region>}}
+{{< site-region region="ap2" >}}
+```html
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap2/v5/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap2/v5/datadog-rum-slim.js"></script>
+```
+{{</ site-region>}}
 {{< site-region region="eu" >}}
 ```html
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v5/datadog-logs.js"></script>
