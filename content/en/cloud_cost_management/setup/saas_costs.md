@@ -175,7 +175,7 @@ After you save your configuration, Datadog begins polling Anthropic usage and co
 
 {{% tab "GitHub" %}}
 
-1. Create a personal authorization token (classic), with the `manage_billing:enterprise` and `repo` scopes on the [Personal Access Tokens][109] page in GitHub.
+1. Create a personal authorization token (classic), with the `manage_billing:enterprise` and `read:org` scopes on the [Personal Access Tokens][109] page in GitHub.
 2. Navigate to the Datadog [GitHub Costs tile][108].
 3. Click **Add New**.
 4. Enter an account name, your personal access token, and your enterprise name (in `enterprise-name` format), as well as any appropriate tags.
@@ -278,7 +278,7 @@ Your Twilio cost data for the past 15 months can be accessed in Cloud Cost Manag
 
 ## Data Collected
 
-You can view cost data on the [**Cloud Cost Explorer** page][3], the [Cloud Cost Tag Explorer][4], and in [dashboards][5], [notebooks][6], or [monitors][7]. You can also combine these cost metrics with other [cloud cost metrics][9] or observability metrics.
+You can view cost data on the [**Cloud Cost Explorer** page][3], the [Cloud Cost Tag Explorer][4], and in [dashboards][5], [notebooks][6], or [monitors][7]. You can also combine these cost metrics with other [cloud cost metrics][2] or observability metrics.
 
 The following table contains a non-exhaustive list of out-of-the-box tags associated with each SaaS Cost integration.
 
@@ -737,4 +737,3 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 [6]: /notebooks
 [7]: /monitors/types/cloud_cost
 [8]: https://app.datadoghq.com/cost/settings/accounts
-[9]: /integrations/snowflake-web/#data-collected
