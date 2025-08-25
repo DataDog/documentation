@@ -52,6 +52,13 @@ If everything is configured correctly, a green check mark is displayed in Datado
 [1]: /integrations/github/#github-apps-1
 [2]: https://app.datadoghq.com/integrations/github/configuration
 {{% /tab %}}
+{{% tab "Gitlab" %}}
+
+Follow the [Datadog Source Code Integration Guide][1] for instructions on how to connect your Gitlab repositories to Datadog.
+
+[1]: /integrations/guide/source-code-integration/?tab=gitlabsaasonprem#connect-your-git-repositories-to-datadog
+
+{{% /tab %}}
 {{< /tabs >}}
 
 See [Data Collected][1] for details on what data is collected from your source code provider.
@@ -315,6 +322,17 @@ steps:
 </code>
 </pre>
 {{% /tab %}}
+{{% tab "Gitlab" %}}
+<pre>
+<code class="language-yaml" data-lang="yaml">
+test:
+  stage: test
+  script:
+    - ... # run your tests and generate coverage reports
+    - datadog-ci coverage upload . # make sure to add the DD_API_KEY CI/CD variable
+</code>
+</pre>
+{{% /tab %}}
 {{< /tabs >}}
 
 The command recursively searches the specified directories for supported coverage report files, so specifying the current directory (`.`) is usually sufficient.
@@ -341,7 +359,7 @@ datadog-ci coverage upload --format=lcov \
 ### Coverage upload fails with "Format could not be detected" error
 
 The `datadog-ci coverage upload` command automatically detects the format of the coverage report files based on their content and file extension.
-If the command fails with the following error: 
+If the command fails with the following error:
 ```
 Invalid coverage report file [...]: format could not be detected
 ```

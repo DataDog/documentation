@@ -33,6 +33,15 @@ See GitHub's [webhook events and payloads documentation][1] for a detailed descr
 [1]: https://docs.github.com/en/webhooks/webhook-events-and-payloads
 
 {{% /tab %}}
+{{% tab "Gitlab" %}}
+
+Code Coverage relies on the Gitlab webhooks. None of the webhooks include your source code content; they only include metadata about the merge request, such as title, description, author, labels, and commit SHAs.
+
+See Gitlab's [webhook events and payloads documentation][1] for a detailed description of the data sent by the webhooks.
+
+[1]: https://docs.gitlab.com/user/project/integrations/webhook_events/
+
+{{% /tab %}}
 {{< /tabs >}}
 
 By default, when synchronizing your repositories, Datadog doesn’t store the actual content of files in your repository, only the Git commit and tree objects.
