@@ -294,7 +294,7 @@ Your GitHub cost data for the past 15 months can be accessed in Cloud Cost Manag
 
 ## Data Collected
 
-You can view cost data on the [**Cloud Cost Explorer** page][3], the [Cloud Cost Tag Explorer][4], and in [dashboards][5], [notebooks][6], or [monitors][7]. You can also combine these cost metrics with other [cloud cost metrics][9] or observability metrics.
+You can view cost data on the [**Cloud Cost Explorer** page][3], the [Cloud Cost Tag Explorer][4], and in [dashboards][5], [notebooks][6], or [monitors][7]. You can also combine these cost metrics with other [cloud cost metrics][2] or observability metrics.
 
 The following table contains a non-exhaustive list of out-of-the-box tags associated with each SaaS Cost integration.
 
@@ -753,4 +753,3 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 [6]: /notebooks
 [7]: /monitors/types/cloud_cost
 [8]: https://app.datadoghq.com/cost/settings/accounts
-[9]: /cloud_cost_management
