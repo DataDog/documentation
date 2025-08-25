@@ -44,8 +44,8 @@ This guide uses a multi-stage deployment approach to ensure proper dependency cr
 ├── terraform.tfvars          # Example variable values
 ├── datadogagent/             # Stage 2: DatadogAgent CRD resource
 │   └── main.tf               # DatadogAgent manifest
-├── nginx-dka/                # Stage 3: Nginx application with DKA
-│   └── main.tf               # Nginx namespace, deployment, and DKA
+├── nginx-dpa/                # Stage 3: Nginx application with DPA
+│   └── main.tf               # Nginx namespace, deployment, and DPA
 ```
 
 ## Deployment stages
@@ -186,12 +186,12 @@ resource "kubernetes_manifest" "datadog" {
       }
     }
   }
-} 
+}
 {{< /code-block >}}
 
 ### Stage 3: Application with DatadogPodAutoscaler
 
-{{< code-block lang="hcl" filename="nginx-dka/main.tf" >}}
+{{< code-block lang="hcl" filename="nginx-dpa/main.tf" >}}
 terraform {
   required_providers {
     kubernetes = {
@@ -371,7 +371,7 @@ terraform apply
 Verify that the Datadog Operator and CRDs are deployed:
 
 {{< code-block lang="bash" >}}
-kubectl get crd 
+kubectl get crd
 kubectl get pods -n datadog
 {{< /code-block >}}
 
@@ -412,7 +412,7 @@ kubectl get pods -n datadog
 Deploy the nginx application with DatadogPodAutoscaler:
 
 {{< code-block lang="bash" >}}
-cd ../nginx-dka
+cd ../nginx-dpa
 terraform init
 terraform apply
 {{< /code-block >}}
@@ -441,7 +441,7 @@ To remove all resources, follow the reverse order of the deployment stages:
 
 1. Clean up the deployed application (Stage 3):
     ```bash
-    cd nginx-dka
+    cd nginx-dpa
     terraform destroy
     ```
 
@@ -468,7 +468,7 @@ kubectl get events -n nginx-dka-demo --sort-by='.lastTimestamp'
 
 Check Cluster Agent logs:
 {{< code-block lang="bash" >}}
-kubectl logs -n datadog -l agent.datadoghq.com/component=cluster-agent 
+kubectl logs -n datadog -l agent.datadoghq.com/component=cluster-agent
 {{< /code-block >}}
 
 ## Further reading
