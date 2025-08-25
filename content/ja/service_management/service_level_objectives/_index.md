@@ -254,7 +254,7 @@ SLO 詳細の "Audit History" タブを使用して、個々の SLO のすべて
 
 ## SLO ウィジェット
 
-{{< learning-center-callout header=“ラーニングセンターでダッシュボードと SLO を使用してビジネスクリティカルなインサイトを作成してみる" btn_title="今すぐ登録" btn_url=“https://learn.datadoghq.com/courses/dashboards-slos">}}
+{{< learning-center-callout header="ラーニングセンターでダッシュボードと SLO を使用してビジネスクリティカルなインサイトを作成してみる" btn_title="今すぐ登録" btn_url="https://learn.datadoghq.com/courses/dashboards-slos">}}
 実際のクラウドコンピューティング容量と Datadog トライアルアカウントで、コストをかけずに学ぶことができます。今すぐ登録して、SLO を追跡するダッシュボード構築の詳細をご覧ください。
 {{< /learning-center-callout >}}
 
@@ -337,7 +337,7 @@ SLO CSV エクスポート機能は、「週間」または「月間」カレン
 - SLO ターゲット
 - 過去の SLO ステータス値
 
-{{< img src="service_management/service_level_objectives/slo-csv-export.png" alt="SLO カレンダービュー” >}}
+{{< img src="service_management/service_level_objectives/slo-csv-export.png" alt="SLO カレンダービュー" >}}
 
 CSV エクスポートで使用できるタイムウィンドウは次のとおりです。
 
