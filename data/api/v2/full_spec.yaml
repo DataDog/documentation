@@ -9345,6 +9345,15 @@ components:
           that evaluates to a boolean.
         example: ${true}
         type: string
+    ComponentRecommendation:
+      description: Resource recommendation for a single Spark component (driver or
+        executor). Contains estimation data used to patch Spark job specs.
+      properties:
+        estimation:
+          $ref: '#/components/schemas/Estimation'
+      required:
+      - estimation
+      type: object
     ComponentType:
       description: The UI component type.
       enum:
@@ -10551,6 +10560,28 @@ components:
       type: string
       x-enum-varnames:
       - COST_BY_ORG
+    Cpu:
+      description: CPU usage statistics derived from historical Spark job metrics.
+        Provides multiple estimates so users can choose between conservative and cost-saving
+        risk profiles.
+      properties:
+        max:
+          description: Maximum CPU usage observed for the job, expressed in millicores.
+            This represents the upper bound of usage.
+          format: int64
+          type: integer
+        p75:
+          description: 75th percentile of CPU usage (millicores). Represents a cost-saving
+            configuration while covering most workloads.
+          format: int64
+          type: integer
+        p95:
+          description: 95th percentile of CPU usage (millicores). Balances performance
+            and cost, providing a safer margin than p75.
+          format: int64
+          type: integer
+      type: object
+      x-model-simple-name: SpaCpu
     CreateActionConnectionRequest:
       description: Request used to create an action connection.
       properties:
@@ -15817,6 +15848,33 @@ components:
       type: string
       x-enum-varnames:
       - ESCALATION_POLICY_STEPS
+    Estimation:
+      description: Recommended resource values for a Spark driver or executor, derived
+        from recent real usage metrics. Used by SPA to propose more efficient pod
+        sizing.
+      properties:
+        cpu:
+          $ref: '#/components/schemas/Cpu'
+        ephemeral_storage:
+          description: Recommended ephemeral storage allocation (in MiB). Derived
+            from job temporary storage patterns.
+          format: int64
+          type: integer
+        heap:
+          description: Recommended JVM heap size (in MiB).
+          format: int64
+          type: integer
+        memory:
+          description: Recommended total memory allocation (in MiB). Includes both
+            heap and overhead.
+          format: int64
+          type: integer
+        overhead:
+          description: Recommended JVM overhead (in MiB). Computed as total memory
+            - heap.
+          format: int64
+          type: integer
+      type: object
     Event:
       description: The metadata associated with a request.
       properties:
@@ -33289,6 +33347,52 @@ components:
       x-enum-varnames:
       - ANY
       - ALL
+    RecommendationAttributes:
+      description: Attributes of the SPA Recommendation resource. Contains recommendations
+        for both driver and executor components.
+      properties:
+        driver:
+          $ref: '#/components/schemas/ComponentRecommendation'
+        executor:
+          $ref: '#/components/schemas/ComponentRecommendation'
+      required:
+      - driver
+      - executor
+      type: object
+    RecommendationData:
+      description: JSON:API resource object for SPA Recommendation. Includes type,
+        optional ID, and resource attributes with structured recommendations.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RecommendationAttributes'
+        id:
+          description: Resource identifier for the recommendation. Optional in responses.
+          type: string
+        type:
+          $ref: '#/components/schemas/RecommendationType'
+      required:
+      - type
+      - attributes
+      type: object
+    RecommendationDocument:
+      description: JSON:API document containing a single Recommendation resource.
+        Returned by SPA when the Spark Gateway requests recommendations.
+      properties:
+        data:
+          $ref: '#/components/schemas/RecommendationData'
+      required:
+      - data
+      type: object
+    RecommendationType:
+      default: recommendation
+      description: JSON:API resource type for Spark Pod Autosizing recommendations.
+        Identifies the Recommendation resource returned by SPA.
+      enum:
+      - recommendation
+      example: recommendation
+      type: string
+      x-enum-varnames:
+      - RECOMMENDATION
     RegisterAppKeyResponse:
       description: The response object after creating an app key registration.
       properties:
@@ -69937,6 +70041,72 @@ paths:
       x-unstable: '**Note**: This feature is in private beta. To request access, use
         the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export)
         docs.'
+  /api/v2/spa/recommendations/{service}/{shard}:
+    get:
+      description: Retrieve resource recommendations for a Spark job. The caller (Spark
+        Gateway or DJM UI) provides a service name and shard identifier, and SPA returns
+        structured recommendations for driver and executor resources.
+      operationId: GetSPARecommendations
+      parameters:
+      - description: The shard tag for a spark job, which differentiates jobs within
+          the same service that have different resource needs
+        in: path
+        name: shard
+        required: true
+        schema:
+          type: string
+      - description: The service name for a spark job
+        in: path
+        name: service
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                data:
+                  attributes:
+                    driver:
+                      estimation:
+                        cpu:
+                          max: 1500
+                          p75: 1000
+                          p95: 1200
+                        ephemeral_storage: 896
+                        heap: 6144
+                        memory: 7168
+                        overhead: 1024
+                    executor:
+                      estimation:
+                        cpu:
+                          max: 2000
+                          p75: 1200
+                          p95: 1500
+                        ephemeral_storage: 512
+                        heap: 3072
+                        memory: 4096
+                        overhead: 1024
+                  id: dedupeactivecontexts:adp_dedupeactivecontexts_org2
+                  type: recommendation
+              schema:
+                $ref: '#/components/schemas/RecommendationDocument'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get SPA Recommendations
+      tags:
+      - Spa
+      x-menu-order: 1
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta and may change in the
+        future. It is not yet recommended for production use.'
   /api/v2/spans/analytics/aggregate:
     post:
       description: 'The API endpoint to aggregate spans into buckets and compute metrics
@@ -73677,6 +73847,9 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/service_catalog/service_definitions#metadata-schema-v30-beta
   name: Software Catalog
+- description: SPA (Spark Pod Autosizing) API. Provides resource recommendations and
+    cost insights to help optimize Spark job configurations.
+  name: Spa
 - description: Search and aggregate your spans from your Datadog platform over HTTP.
   name: Spans
 - description: Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics)
