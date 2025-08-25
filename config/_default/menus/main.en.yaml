@@ -965,35 +965,35 @@ menu:
       parent: dev_tools
       identifier: dev_tools_integrations
       weight: 4
+    - name: Build an Integration with Datadog
+      identifier: dev_tools_integrations_build
+      url: developers/integrations/build_integration/
+      parent: dev_tools_integrations
+      weight: 401
     - name: Create an Agent-based Integration
       identifier: dev_tools_integrations_agent
       url: developers/integrations/agent_integration/
       parent: dev_tools_integrations
-      weight: 401
-    - name: Create an API Integration
+      weight: 402
+    - name: Create an API-based Integration
       identifier: dev_tools_integrations_api
       url: developers/integrations/api_integration/
       parent: dev_tools_integrations
-      weight: 402
+      weight: 403
     - name: Create a Log Pipeline
       identifier: dev_tools_integrations_log
       url: developers/integrations/log_pipeline/
       parent: dev_tools_integrations
-      weight: 403
+      weight: 404
     - name: Integration Assets Reference
       identifier: dev_tools_integrations_check_references
       url: developers/integrations/check_references/
       parent: dev_tools_integrations
-      weight: 404
+      weight: 405
     - name: Build a Marketplace Offering
       url: developers/integrations/marketplace_offering/
       parent: dev_tools_integrations
       identifier: dev_tools__integrations_marketplace_offering
-      weight: 405
-    - name: Create a Tile
-      url: developers/integrations/create_a_tile/
-      parent: dev_tools_integrations
-      identifier: dev_tools_integrations_tile
       weight: 406
     - name: Create an Integration Dashboard
       identifier: dev_tools_integrations_dashboard
@@ -1010,16 +1010,11 @@ menu:
       url: developers/integrations/create-a-cloud-siem-detection-rule
       parent: dev_tools_integrations
       weight: 409
-    - name: OAuth for Integrations
-      identifier: dev_tools_integrations_oauth
-      url: developers/integrations/oauth_for_integrations
-      parent: dev_tools_integrations
-      weight: 410
     - name: Install Agent Integration Developer Tool
       identifier: dev_tools_integrations_install_developer_tool
       url: developers/integrations/python/
       parent: dev_tools_integrations
-      weight: 411
+      weight: 410
     - name: Service Checks
       url: developers/service_checks/
       parent: dev_tools
@@ -1154,6 +1149,11 @@ menu:
       identifier: mobile_widgets
       parent: mobile
       weight: 5
+    - name: Guides
+      url: mobile/guide
+      identifier: mobile_guide
+      parent: mobile
+      weight: 6
     - name: DDSQL Reference
       url: ddsql_reference/
       pre: ddsql
@@ -2698,10 +2698,10 @@ menu:
       parent: workflows
       identifier: workflows_build
       weight: 1
-    - name: Authentication
-      url: actions/workflows/access/
+    - name: Access and Authentication
+      url: actions/workflows/access_and_auth/
       parent: workflows
-      identifier: workflows_access
+      identifier: workflows_access_and_auth
       weight: 2
     - name: Trigger Workflows
       url: actions/workflows/trigger/
@@ -2759,10 +2759,10 @@ menu:
       parent: app_builder
       identifier: app_builder_build
       weight: 1
-    - name: Authentication
-      url: actions/app_builder/auth/
+    - name: Access and Authentication
+      url: actions/app_builder/access_and_auth/
       parent: app_builder
-      identifier: app_builder_access
+      identifier: app_builder_access_and_auth
       weight: 2
     - name: Queries
       url: actions/app_builder/queries/
@@ -3209,8 +3209,8 @@ menu:
       parent: serverless
       identifier: serverless_aws_lambda
       weight: 1
-    - name: Installation
-      url: serverless/aws_lambda/installation
+    - name: Instrumentation
+      url: serverless/aws_lambda/instrumentation
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_installation
       weight: 101
@@ -3554,47 +3554,47 @@ menu:
       identifier: cloud_cost_saas_cost_integrations
       weight: 104
     - name: Snowflake
-      url: cloud_cost_management/setup/saas_costs/?tab=snowflake#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=snowflake#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_snowflake
       weight: 101
     - name: Databricks
-      url: cloud_cost_management/setup/saas_costs/?tab=databricks#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=databricks#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_databricks
       weight: 102
     - name: OpenAI
-      url: cloud_cost_management/setup/saas_costs/?tab=openai#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=openai#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_openai
       weight: 103
     - name: GitHub
-      url: cloud_cost_management/setup/saas_costs/?tab=github#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_github
       weight: 104
     - name: Confluent Cloud
-      url: cloud_cost_management/setup/saas_costs/?tab=confluentcloud#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=confluentcloud#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_confluentcloud
       weight: 105
     - name: MongoDB
-      url: cloud_cost_management/setup/saas_costs/?tab=mongodb#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=mongodb#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_mongodb
       weight: 106
     - name: Elastic Cloud
-      url: cloud_cost_management/setup/saas_costs/?tab=elasticcloud#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=elasticcloud#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_elasticcloud
       weight: 107
     - name: Fastly
-      url: cloud_cost_management/setup/saas_costs/?tab=fastly#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=fastly#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_fastly
       weight: 108
     - name: Twilio
-      url: cloud_cost_management/setup/saas_costs/?tab=twilio#setup
+      url: cloud_cost_management/setup/saas_costs/?tab=twilio#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_twilio
       weight: 109
@@ -3608,26 +3608,36 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_datadog_costs
       weight: 2
-    - name: Container Cost Allocation
-      url: cloud_cost_management/container_cost_allocation
+    - name: Cost Allocation
+      url: cloud_cost_management/cost_allocation
       parent: cloud_cost
-      identifier: cloud_cost_container_cost_allocation
+      identifier: cloud_cost_cost_allocation
       weight: 3
+    - name: Container Costs
+      url: cloud_cost_management/cost_allocation/container_cost_allocation/
+      parent: cloud_cost_cost_allocation
+      identifier: cloud_cost_container_cost_allocation
+      weight: 301
     - name: AWS
-      url: cloud_cost_management/container_cost_allocation/?tab=aws
+      url: cloud_cost_management/cost_allocation/container_cost_allocation/?tab=aws/
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_aws
-      weight: 301
+      weight: 101
     - name: Azure
-      url: cloud_cost_management/container_cost_allocation/?tab=azure
+      url: cloud_cost_management/cost_allocation/container_cost_allocation/?tab=azure
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_azure
-      weight: 302
+      weight: 102
     - name: Google Cloud
-      url: cloud_cost_management/container_cost_allocation/?tab=google
+      url: cloud_cost_management/cost_allocation/container_cost_allocation/?tab=google
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_google
-      weight: 303
+      weight: 103
+    - name: BigQuery Costs
+      url: cloud_cost_management/cost_allocation/bigquery/
+      parent: cloud_cost_cost_allocation
+      identifier: cloud_cost_cost_allocationbigquery
+      weight: 302
     - name: Custom Allocation Rules
       url: cloud_cost_management/custom_allocation_rules
       parent: cloud_cost
@@ -3668,6 +3678,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_reports
       weight: 9
+    - name: Scheduled Cost Reports
+      url: /cloud_cost_management/reports/scheduled_reports
+      parent: cloud_cost_reports
+      identifier: cloud_cost_scheduled_reports
+      weight: 901
     - name: Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost
@@ -5802,21 +5817,6 @@ menu:
       url: logs/explorer/saved_views/
       parent: log_explorer
       weight: 514
-    - name: Workspaces
-      url: logs/workspaces/
-      parent: log_management
-      identifier: logs_workspaces
-      weight: 6
-    - name: Use Cases
-      url: logs/workspaces/use_cases/
-      parent: logs_workspaces
-      identifier: logs_workspaces_use_cases
-      weight: 601
-    - name: Time Selection
-      url: logs/workspaces/time_selection/
-      parent: logs_workspaces
-      identifier: logs_workspaces_time_selection
-      weight: 602
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management
@@ -7664,8 +7664,8 @@ menu:
       parent: pa_charts
       identifier: pa_funnel_analysis
       weight: 102
-    - name: User Retention
-      url: product_analytics/charts/user_retention
+    - name: Retention Analysis
+      url: product_analytics/charts/retention_analysis
       parent: pa_charts
       identifier: pa_user_retention
       weight: 103
