@@ -1,5 +1,5 @@
 ---
-title: Instrumenting a Go Cloud Run Container In-Process
+title: Instrumenting a Go Cloud Run Container In-Container
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 30
@@ -16,7 +16,7 @@ further_reading:
 
 ## Setup
 
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-process/go">available on GitHub</a>.</div>
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/go">available on GitHub</a>.</div>
 
 1. **Install the Datadog Go tracer**.
 
@@ -73,7 +73,7 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5].
 
-{{% gcr-env-vars instrumentationMethod="in-process" language="go" %}}
+{{% gcr-env-vars instrumentationMethod="in-container" language="go" %}}
 
 ## Troubleshooting
 

@@ -1,5 +1,5 @@
 ---
-title: Instrumenting a Node.js Cloud Run Container In-Process
+title: Instrumenting a Node.js Cloud Run Container In-Container
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 20
@@ -16,7 +16,7 @@ further_reading:
 
 ## Setup
 
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-process/node">available on GitHub</a>.</div>
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/node">available on GitHub</a>.</div>
 
 1. **Install the Datadog Node.js tracer**.
 
@@ -81,7 +81,7 @@ logger.info(`Hello world!`);
 
    To send custom metrics, [view code examples][3].
 
-{{% gcr-env-vars instrumentationMethod="in-process" language="nodejs" %}}
+{{% gcr-env-vars instrumentationMethod="in-container" language="nodejs" %}}
 
 ## Troubleshooting
 
