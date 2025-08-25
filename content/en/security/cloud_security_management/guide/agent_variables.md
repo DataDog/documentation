@@ -49,6 +49,6 @@ The Datadog Agent has several environment variables that can be enabled for Clou
     </tr>
     <tr>
         <td><code>DD_SBOM_CONTAINER_IMAGE_CONTAINER_INCLUDE</code></td>
-        <td>Allows allowlisting of specific containers from SBOM collection.</td>
+        <td>Allows allowlisting of specific containers in SBOM collection.</td>
     </tr>
 </table>
