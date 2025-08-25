@@ -12,6 +12,7 @@ Filter query examples:
     - This query can also be written as: `status:ok AND service:flask-web-app`.
 - `host:COMP-A9JNGYK OR host:COMP-J58KAS`: This filter query only matches logs from the labeled hosts.
 - `@user.status:inactive`: This filters for logs with the status `inactive` nested under the `user` attribute.
+- `@http.status:[200 TO 299]` or `@http.status:{300 TO 399}`: These two filters query a range.
 
 Queries run in the Observability Pipelines Worker are case sensitive. Learn more about writing filter queries in [Datadog's Log Search Syntax][4002].
 
