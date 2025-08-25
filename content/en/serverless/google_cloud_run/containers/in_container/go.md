@@ -3,6 +3,8 @@ title: Instrumenting a Go Cloud Run Container In-Process
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 30
+aliases:
+  - /serverless/google_cloud_run/containers/in_process/go
 further_reading:
   - link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/go/'
     tag: 'Documentation'
