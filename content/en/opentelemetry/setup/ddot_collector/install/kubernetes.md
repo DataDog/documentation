@@ -2,6 +2,9 @@
 title: Install the Datadog Distribution of OTel Collector on Kubernetes
 aliases:
 - "/opentelemetry/agent/install_agent_with_collector"
+code_lang: kubernetes
+type: multi-code-lang
+code_lang_weight: 1
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"

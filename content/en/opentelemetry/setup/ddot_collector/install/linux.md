@@ -1,5 +1,8 @@
 ---
 title: Install the Datadog Distribution of OTel Collector on Linux
+code_lang: linux
+type: multi-code-lang
+code_lang_weight: 2
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
@@ -38,7 +41,7 @@ This command will install both the core Datadog Agent package and the DDOT Colle
 
 #### Terminal command
 
-Run the Agent's [status command][19] to verify installation.
+Run the Agent's [status command][3] to verify installation.
 
 ```shell
 sudo datadog-agent status
@@ -212,7 +215,7 @@ To send telemetry data to Datadog, the following components are defined in the c
 
 ##### Datadog connector
 
-The [Datadog connector][6] computes Datadog APM trace metrics.
+The [Datadog connector][4] computes Datadog APM trace metrics.
 
 {{< code-block lang="yaml" filename="otel-config.yaml" disable_copy="false" collapsible="true" >}}
 connectors:
@@ -222,7 +225,7 @@ connectors:
 
 ##### Datadog exporter
 
-The [Datadog exporter][7] exports traces, metrics, and logs to Datadog.
+The [Datadog exporter][5] exports traces, metrics, and logs to Datadog.
 
 {{< code-block lang="yaml" filename="otel-config.yaml" disable_copy="false" collapsible="true" >}}
 exporters:
@@ -236,7 +239,7 @@ exporters:
 
 ##### Prometheus receiver
 
-The [Prometheus receiver][8] collects health metrics from the OpenTelemetry Collector for the metrics pipeline.
+The [Prometheus receiver][6] collects health metrics from the OpenTelemetry Collector for the metrics pipeline.
 
 {{< code-block lang="yaml" filename="otel-config.yaml" disable_copy="false" collapsible="true" >}}
 receivers:
@@ -249,7 +252,7 @@ receivers:
             - targets: ["0.0.0.0:8888"]
 {{< /code-block >}}
 
-For more information, see the [Collector Health Metrics][8] documentation.
+For more information, see the [Collector Health Metrics][6] documentation.
 
 ## Send your telemetry to Datadog
 
@@ -262,10 +265,10 @@ To send your telemetry data to Datadog:
 
 ### Instrument the application
 
-Instrument your application [using the OpenTelemetry API][12].
+Instrument your application [using the OpenTelemetry API][7].
 
 {{% collapse-content title="Example application instrumented with the OpenTelemetry API" level="p" %}}
-As an example, you can use the [Calendar sample application][9] that's already instrumented for you. The following code instruments the [CalendarService.getDate()][10] method using the OpenTelemetry annotations and API:
+As an example, you can use the [Calendar sample application][8] that's already instrumented for you. The following code instruments the [CalendarService.getDate()][9] method using the OpenTelemetry annotations and API:
    {{< code-block lang="java" filename="CalendarService.java" disable_copy="true" collapsible="false" >}}
 @WithSpan(kind = SpanKind.CLIENT)
 public String getDate() {
@@ -298,7 +301,7 @@ env:
 
 ### Correlate observability data
 
-[Unified service tagging][14] ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
+[Unified service tagging][10] ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
 
 Unified service tagging ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
 
@@ -389,58 +392,11 @@ View metrics from the DDOT Collector to monitor the Collector health.
 
 [1]: https://www.datadoghq.com/free-datadog-trial/
 [2]: https://app.datadoghq.com/organization-settings/api-keys/
-[3]: https://app.datadoghq.com/organization-settings/application-keys
-[4]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
-[5]: https://kubernetes.io/docs/tasks/tools/#kubectl
-[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector
-[7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
-[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/prometheusreceiver
-[9]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/rest-services/java/calendar
-[10]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/java/calendar/src/main/java/com/otel/service/CalendarService.java#L27-L48
-[11]: https://github.com/DataDog/datadog-agent/blob/386130a34dde43035c814f9a9b08bc72eb20e476/comp/otelcol/collector-contrib/impl/manifest.yaml
-[12]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
-[13]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/java/calendar/deploys/calendar/templates/deployment.yaml#L71-L72
-[14]: /getting_started/tagging/unified_service_tagging
-[15]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/java/calendar/deploys/calendar/templates/deployment.yaml#L75-L83
-[16]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/filelogreceiver/README.md
-[17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/fluentforwardreceiver/README.md
-[18]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/hostmetricsreceiver/README.md
-[19]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/jaegerreceiver/README.md
-[20]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md
-[21]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/prometheusreceiver/README.md
-[22]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/receivercreator/README.md
-[23]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/zipkinreceiver/README.md
-[24]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/nopreceiver#readme
-[25]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/attributesprocessor/README.md
-[26]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/processor/batchprocessor/README.md
-[27]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/cumulativetodeltaprocessor/README.md
-[28]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/filterprocessor/README.md
-[29]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/groupbyattrsprocessor/README.md
-[30]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/k8sattributesprocessor/README.md
-[31]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/processor/memorylimiterprocessor/README.md
-[32]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
-[33]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/resourcedetectionprocessor/README.md
-[34]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/resourceprocessor/README.md
-[35]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/routingprocessor
-[36]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
-[37]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/transformprocessor/README.md
-[38]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/README.md
-[39]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/debugexporter/README.md
-[40]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/otlpexporter/README.md
-[41]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/otlphttpexporter/README.md
-[42]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/sapmexporter/README.md
-[43]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/nopexporter/README.md
-[44]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/datadogconnector/README.md
-[45]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/README.md
-[46]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/healthcheckextension/README.md
-[47]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/observer/README.md
-[48]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/pprofextension/README.md
-[49]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/extension/zpagesextension/README.md
-[50]: https://docs.docker.com/engine/install/
-[51]: https://github.com/DataDog/datadog-agent/blob/main/comp/otelcol/collector-contrib/impl/manifest.yaml#L7
-[52]: /getting_started/site/
-[53]: /containers/guide/changing_container_registry/
-[54]: https://helm.sh
-[55]: /containers/datadog_operator
-[56]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
-[57]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog-operator/README.md
+[3]: /agent/configuration/agent-commands/#agent-status-and-information
+[4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector
+[5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
+[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/prometheusreceiver
+[7]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[8]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/rest-services/java/calendar
+[9]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/java/calendar/src/main/java/com/otel/service/CalendarService.java#L27-L48
+[10]: /getting_started/tagging/unified_service_tagging
