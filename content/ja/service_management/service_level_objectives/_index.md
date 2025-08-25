@@ -3,6 +3,7 @@ aliases:
 - /ja/monitors/monitor_uptime_widget/
 - /ja/monitors/slos/
 - /ja/monitors/service_level_objectives/
+- /ja/service_management/service_level_objectives/ootb_dashboard
 description: SLO のステータスを追跡する
 further_reading:
 - link: https://www.datadoghq.com/blog/slo-monitoring-tracking/
@@ -73,7 +74,7 @@ SLO を作成する際は、以下の種類から選択できます。
 
 Datadog の [Service Level Objectives ステータスページ][2]を使用して、SLO の新規作成や既存 SLO の閲覧・管理が行えます。
 
-### 構成
+### 設定
 
 1. [Service Level Objectives ステータスページ][2]で **New SLO +** を選択します。
 2. SLO の種類を選択します。[Metric-based][3]、[Monitor-based][4]、または [Time Slices][5] のいずれかを選択して SLO を作成できます。
@@ -253,7 +254,7 @@ SLO 詳細の "Audit History" タブを使用して、個々の SLO のすべて
 
 ## SLO ウィジェット
 
-{{< learning-center-callout header="ラーニングセンターでダッシュボードと SLO を使用してビジネスクリティカルなインサイトを作成してみる" btn_title="今すぐ登録" btn_url="https://learn.datadoghq.com/courses/dashboards-slos">}}
+{{< learning-center-callout header=“ラーニングセンターでダッシュボードと SLO を使用してビジネスクリティカルなインサイトを作成してみる" btn_title="今すぐ登録" btn_url=“https://learn.datadoghq.com/courses/dashboards-slos">}}
 実際のクラウドコンピューティング容量と Datadog トライアルアカウントで、コストをかけずに学ぶことができます。今すぐ登録して、SLO を追跡するダッシュボード構築の詳細をご覧ください。
 {{< /learning-center-callout >}}
 
@@ -336,7 +337,7 @@ SLO CSV エクスポート機能は、「週間」または「月間」カレン
 - SLO ターゲット
 - 過去の SLO ステータス値
 
-{{< img src="service_management/service_level_objectives/slo-csv-export.png" alt="SLO カレンダービュー" >}}
+{{< img src="service_management/service_level_objectives/slo-csv-export.png" alt="SLO カレンダービュー” >}}
 
 CSV エクスポートで使用できるタイムウィンドウは次のとおりです。
 
