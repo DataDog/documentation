@@ -10,7 +10,7 @@ You can configure Bits to automatically investigate when a monitor triggers an a
 There are a few ways to enable Bits for automated investigations:
 - **Option 1: Use the Bits AI SRE Monitors list**
   1. In Bits AI SRE, go to the [**Monitors**][5] page.
-  1. In the **Ready for Bits** tab, select one or more monitors, then click **Enable Automatic Investigations**.
+  1. In the **Ready for Bits** tab, toggle automatic investigations on for a monitor. 
 - **Option 2: Add the Bits AI tag to a single monitor**
   1. Open a monitor, click on the gear icon in the upper right corner, and select **Edit**.
   1. Add the `bitsai:enabled` tag.
@@ -28,9 +28,10 @@ An investigation initiates when a monitor transitions to the alert state. Transi
 Alternatively, you can manually invoke Bits on an individual monitor alert or warn event.
 
 - **Option 1: Monitor Status Page**
-  -  On the monitor status page, select an alert event, then click **Investigate with Bits AI**.
+  -  For a monitor that is ready for Bits, navigate to its status page and click **Investigate with Bits AI SRE** on the top right corner. 
+  -  Alternatively, select an alert from the event timeline and click **Investigate with Bits AI SRE**.
 - **Option 2: Monitor Event Side Panel**
-  -  On the monitor event side panel, click **Investigate with Bits AI**.
+  -  On the monitor event side panel, click **Investigate with Bits AI SRE**.
 - **Option 3: Slack**
   - In Slack, reply to a monitor notification with `@Datadog Investigate this alert`. 
 
@@ -55,21 +56,24 @@ Think of the first page you'd navigate to in Datadog if this monitor were to fir
 
 {{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
 
-### Configure where investigation results are sent
+### Configure where investigation findings are sent
 
-Bits can send investigation results to several destinations. By default, results appear in two places:
-  - **Full investigation results** are available on the [Bits AI Investigations][2] page.
-  - **A summary of the results** is available on the status page for the monitor.
+Bits can send investigation findings to several destinations. By default, findings appear in two places:
+  - **Full investigation findings** are available on the [Bits AI Investigations][2] page.
+  - **A summary of the findings** is available on the status page for the monitor.
 
-Additionally, if you have already configured `@slack` or `@case` [notifications in your monitor][8], Bits automatically writes to those places. If not, you can add them as destinations for investigation results to appear:
+Additionally, if you have already configured `@slack`, `@case`, or `@oncall` [notifications in your monitor][8], Bits automatically writes to those places. If not, you can add them as destinations for investigation findings to appear:
 
 {{% collapse-content title="Slack" level="h5" expanded=false id="slack" %}}
-1. Ensure the [Datadog Slack app][7] is installed in your workspace.
-1. Go to [**Bits AI** > **Settings** > **Integrations**][9] and connect your Slack workspace. 
-1. Go to a monitor. Under **Configure notifications and automations**, add the `@slack-{channel-name}` handle to send results to Slack.
+1. Ensure the [Datadog Slack app][7] is installed in your Slack workspace.
+1. In your monitor, go to **Configure notifications and automations** and add the `@slack-{channel-name}` handle. This sends monitor notifications to your chosen Slack channel.
+1. Lastly, go to [**Bits AI** > **Settings** > **Integrations**][9] and connect your Slack workspace. This allows Bits to write its findings directly under the monitor notification in Slack. Note: Each Slack workspace can only be connected to one Datadog organization.
 {{% /collapse-content %}}
 {{% collapse-content title="Case Management" level="h5" expanded=false id="case-management" %}}
-In the **Configure notifications and automations** section, add the `@case-{project-name}` handle.
+In the **Configure notifications and automations** section, add the `@case-{project-name}` handle. Case Management also supports optional two-way syncing with [ticketing platforms like Jira and ServiceNow][14]. 
+{{% /collapse-content %}}
+{{% collapse-content title="On-Call" level="h5" expanded=false id="on-call" %}}
+In the **Configure notifications and automations** section, add the @oncall-{team} handle. Bits' findings will appear on the On-Call page in the Datadog mobile app, helping teams triage issues more quickly on the go.     
 {{% /collapse-content %}}
 
 ### Configure knowledge base integrations
@@ -147,3 +151,4 @@ Every piece of feedback you give generates a **memory**. Bits uses these memorie
 [11]: /account_management/rbac
 [12]: /monitors/notify/#renotify
 [13]: https://app.datadoghq.com/integrations/confluence
+[14]: https://docs.datadoghq.com/service_management/case_management/notifications_integrations/#third-party-tickets
