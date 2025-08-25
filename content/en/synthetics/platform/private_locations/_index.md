@@ -16,9 +16,6 @@ further_reading:
     - link: '/synthetics/private_locations/dimensioning'
       tag: 'Documentation'
       text: 'Dimension your Private Locations'
-    - link: '/synthetics/api_tests'
-      tag: 'Documentation'
-      text: 'Configure an API Test'
     - link: "https://www.datadoghq.com/architecture/protect-sensitive-data-with-synthetics-private-location-runners/"
       tag: "Architecture Center"
       text: "Protect Sensitive Data with Synthetics Private Location Runners"
@@ -34,6 +31,7 @@ Private locations allow you to **monitor internal-facing applications or any pri
 * **Create custom Synthetic locations** in areas that are mission-critical to your business.
 * **Verify application performance in your internal CI environment** before you release new features to production with [Continuous Testing and CI/CD][28].
 * **Compare application performance** from both inside and outside your internal network.
+* **[Authenticate Synthetic Monitoring tests using Kerberos SSO][33]** for internal Windows-based sites and APIs.
 
 {{< img src="synthetics/private_locations/private_locations_worker_1.png" alt="Architecture diagram of how a private location works in Synthetic Monitoring" style="width:100%;">}}
 
@@ -97,7 +95,7 @@ You must install .NET version 4.7.2 or later on your computer before using the M
 
 {{< site-region region="gov" >}}
 
-<div class="alert alert-danger">FIPS compliance is not supported for private locations that report to <code>ddog-gov.com</code>. To disable this behavior, use the <a href="https://docs.datadoghq.com/synthetics/private_locations/configuration/?tab=docker#all-configuration-options"><code>--disableFipsCompliance</code> option</a>.</div>
+<div class="alert alert-danger">FIPS compliance is not supported for Windows private locations that report to <code>ddog-gov.com</code>. To disable this behavior, use the <a href="https://docs.datadoghq.com/synthetics/private_locations/configuration/?tab=docker#all-configuration-options"><code>--disableFipsCompliance</code> option</a>.</div>
 
 {{< /site-region >}}
 
@@ -1062,4 +1060,5 @@ Use [granular access control][24] to limit who has access to your test based on 
 [30]: https://github.com/DataDog/helm-charts/tree/master/charts/synthetics-private-location
 [31]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LinuxParameters.html
 [32]: /synthetics/platform/private_locations/configuration
+[33]: /synthetics/guide/kerberos-authentication/
 

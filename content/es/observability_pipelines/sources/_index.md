@@ -28,19 +28,6 @@ Selecciona y configura tu fuente cuando crees un pipeline en la interfaz de usua
 
 Las fuentes tienen diferentes requisitos previos y parámetros. Algunas fuentes también deben configurarse para enviar logs al worker de pipelines de observabilidad.
 
-{{< whatsnext desc="Select a source for more information:" >}}
-    {{< nextlink href="observability_pipelines/sources/datadog_agent/" >}}Datadog Agent{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/fluent/" >}}Fluentd y Fluent Bit{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/google_pubsub/" >}}Google Pub/Sub{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/http_client/" >}}Cliente HTTP/S{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/http_server/" >}}Servidor HTTP/S{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/logstash/" >}}Logstash{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/splunk_hec/" >}}HTTP Event Collector (HEC) de Splunk{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/splunk_tcp/" >}}Splunk Heavy o Universal Forwarders (TCP){{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/sumo_logic/" >}}Sumo Logic{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/syslog/" >}}rsyslog o syslog-ng{{< /nextlink >}}
-{{< /whatsnext >}}
-
 ## Campos de metadatos estándar
 
 Todas las fuentes añaden los siguientes campos de metadatos estándar a los eventos ingeridos:

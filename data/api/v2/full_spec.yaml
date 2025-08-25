@@ -233,7 +233,8 @@ components:
       name: cloud_account_id
       required: true
       schema:
-        type: string
+        format: int64
+        type: integer
     CloudWorkloadSecurityAgentRuleID:
       description: The ID of the Agent rule
       example: 3b5-v82-ns6
@@ -4539,8 +4540,7 @@ components:
           $ref: '#/components/schemas/AwsCURConfigAttributes'
         id:
           description: The ID of the AWS CUR config.
-          format: int64
-          type: integer
+          type: string
         type:
           $ref: '#/components/schemas/AwsCURConfigType'
       required:
@@ -4693,9 +4693,6 @@ components:
           description: The region the bucket is located in.
           example: us-east-1
           type: string
-        is_enabled:
-          description: Whether or not the Cloud Cost Management account is enabled.
-          type: boolean
         months:
           description: The month of the report.
           format: int32
@@ -5189,8 +5186,7 @@ components:
           type: string
         id:
           description: The ID of the Azure config.
-          format: int64
-          type: integer
+          type: string
         months:
           deprecated: true
           description: The number of months the report has been backfilled.
@@ -5246,8 +5242,7 @@ components:
           $ref: '#/components/schemas/AzureUCConfigPairAttributes'
         id:
           description: The ID of Cloud Cost Management account.
-          format: int64
-          type: integer
+          type: string
         type:
           $ref: '#/components/schemas/AzureUCConfigPairType'
       required:
@@ -5266,8 +5261,7 @@ components:
           type: array
         id:
           description: The ID of the Azure config pair.
-          format: int64
-          type: integer
+          type: string
       required:
       - configs
       type: object
@@ -9351,6 +9345,15 @@ components:
           that evaluates to a boolean.
         example: ${true}
         type: string
+    ComponentRecommendation:
+      description: Resource recommendation for a single Spark component (driver or
+        executor). Contains estimation data used to patch Spark job specs.
+      properties:
+        estimation:
+          $ref: '#/components/schemas/Estimation'
+      required:
+      - estimation
+      type: object
     ComponentType:
       description: The UI component type.
       enum:
@@ -10557,6 +10560,28 @@ components:
       type: string
       x-enum-varnames:
       - COST_BY_ORG
+    Cpu:
+      description: CPU usage statistics derived from historical Spark job metrics.
+        Provides multiple estimates so users can choose between conservative and cost-saving
+        risk profiles.
+      properties:
+        max:
+          description: Maximum CPU usage observed for the job, expressed in millicores.
+            This represents the upper bound of usage.
+          format: int64
+          type: integer
+        p75:
+          description: 75th percentile of CPU usage (millicores). Represents a cost-saving
+            configuration while covering most workloads.
+          format: int64
+          type: integer
+        p95:
+          description: 95th percentile of CPU usage (millicores). Balances performance
+            and cost, providing a safer margin than p75.
+          format: int64
+          type: integer
+      type: object
+      x-model-simple-name: SpaCpu
     CreateActionConnectionRequest:
       description: Request used to create an action connection.
       properties:
@@ -13128,9 +13153,7 @@ components:
         attributes:
           $ref: '#/components/schemas/DatasetAttributesRequest'
         type:
-          description: Resource type, always "dataset".
-          example: dataset
-          type: string
+          $ref: '#/components/schemas/DatasetType'
       required:
       - type
       - attributes
@@ -13152,9 +13175,7 @@ components:
           example: 123e4567-e89b-12d3-a456-426614174000
           type: string
         type:
-          description: Resource type, always "dataset".
-          example: dataset
-          type: string
+          $ref: '#/components/schemas/DatasetType'
       type: object
     DatasetResponseMulti:
       description: Response containing a list of datasets.
@@ -13171,6 +13192,15 @@ components:
         data:
           $ref: '#/components/schemas/DatasetResponse'
       type: object
+    DatasetType:
+      default: dataset
+      description: Resource type, always set to `dataset`.
+      enum:
+      - dataset
+      example: dataset
+      type: string
+      x-enum-varnames:
+      - DATASET
     DatasetUpdateRequest:
       description: Edit request for a dataset.
       properties:
@@ -15818,6 +15848,33 @@ components:
       type: string
       x-enum-varnames:
       - ESCALATION_POLICY_STEPS
+    Estimation:
+      description: Recommended resource values for a Spark driver or executor, derived
+        from recent real usage metrics. Used by SPA to propose more efficient pod
+        sizing.
+      properties:
+        cpu:
+          $ref: '#/components/schemas/Cpu'
+        ephemeral_storage:
+          description: Recommended ephemeral storage allocation (in MiB). Derived
+            from job temporary storage patterns.
+          format: int64
+          type: integer
+        heap:
+          description: Recommended JVM heap size (in MiB).
+          format: int64
+          type: integer
+        memory:
+          description: Recommended total memory allocation (in MiB). Includes both
+            heap and overhead.
+          format: int64
+          type: integer
+        overhead:
+          description: Recommended JVM overhead (in MiB). Computed as total memory
+            - heap.
+          format: int64
+          type: integer
+      type: object
     Event:
       description: The metadata associated with a request.
       properties:
@@ -32605,6 +32662,8 @@ components:
           format: int32
           maximum: 2147483647
           type: integer
+        product_scales:
+          $ref: '#/components/schemas/RUMProductScales'
         type:
           description: Type of the RUM application. Supported values are `browser`,
             `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`,
@@ -32651,6 +32710,10 @@ components:
           description: Name of the RUM application.
           example: my_new_rum_application
           type: string
+        product_analytics_retention_state:
+          $ref: '#/components/schemas/RUMProductAnalyticsRetentionState'
+        rum_event_processing_state:
+          $ref: '#/components/schemas/RUMEventProcessingState'
         type:
           description: Type of the RUM application. Supported values are `browser`,
             `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`,
@@ -32731,6 +32794,8 @@ components:
           format: int32
           maximum: 2147483647
           type: integer
+        product_scales:
+          $ref: '#/components/schemas/RUMProductScales'
         type:
           description: Type of the RUM application. Supported values are `browser`,
             `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`,
@@ -32804,6 +32869,10 @@ components:
           description: Name of the RUM application.
           example: updated_name_for_my_existing_rum_application
           type: string
+        product_analytics_retention_state:
+          $ref: '#/components/schemas/RUMProductAnalyticsRetentionState'
+        rum_event_processing_state:
+          $ref: '#/components/schemas/RUMEventProcessingState'
         type:
           description: Type of the RUM application. Supported values are `browser`,
             `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`,
@@ -32932,6 +33001,33 @@ components:
           format: date-time
           type: string
       type: object
+    RUMEventProcessingScale:
+      description: RUM event processing scale configuration.
+      properties:
+        last_modified_at:
+          description: Timestamp in milliseconds when this scale was last modified.
+          example: 1721897494108
+          format: int64
+          type: integer
+        state:
+          $ref: '#/components/schemas/RUMEventProcessingState'
+      type: object
+    RUMEventProcessingState:
+      description: Configures which RUM events are processed and stored for the application.
+      enum:
+      - ALL
+      - ERROR_FOCUSED_MODE
+      - NONE
+      example: ALL
+      type: string
+      x-enum-descriptions:
+      - Process and store all RUM events (sessions, views, actions, resources, errors)
+      - Process and store only error events and related critical events
+      - "Disable RUM event processing\u2014no events are stored"
+      x-enum-varnames:
+      - ALL
+      - ERROR_FOCUSED_MODE
+      - NONE
     RUMEventType:
       default: rum
       description: Type of the event.
@@ -33038,6 +33134,39 @@ components:
     RUMGroupByTotalString:
       description: A string to use as the key value for the total bucket.
       type: string
+    RUMProductAnalyticsRetentionScale:
+      description: Product Analytics retention scale configuration.
+      properties:
+        last_modified_at:
+          description: Timestamp in milliseconds when this scale was last modified.
+          example: 1747922145974
+          format: int64
+          type: integer
+        state:
+          $ref: '#/components/schemas/RUMProductAnalyticsRetentionState'
+      type: object
+    RUMProductAnalyticsRetentionState:
+      description: Controls the retention policy for Product Analytics data derived
+        from RUM events.
+      enum:
+      - MAX
+      - NONE
+      example: MAX
+      type: string
+      x-enum-descriptions:
+      - Store Product Analytics data for the maximum available retention period
+      - Do not store Product Analytics data
+      x-enum-varnames:
+      - MAX
+      - NONE
+    RUMProductScales:
+      description: Product Scales configuration for the RUM application.
+      properties:
+        product_analytics_retention_scale:
+          $ref: '#/components/schemas/RUMProductAnalyticsRetentionScale'
+        rum_event_processing_scale:
+          $ref: '#/components/schemas/RUMEventProcessingScale'
+      type: object
     RUMQueryFilter:
       description: The search and filter query settings.
       properties:
@@ -33218,6 +33347,52 @@ components:
       x-enum-varnames:
       - ANY
       - ALL
+    RecommendationAttributes:
+      description: Attributes of the SPA Recommendation resource. Contains recommendations
+        for both driver and executor components.
+      properties:
+        driver:
+          $ref: '#/components/schemas/ComponentRecommendation'
+        executor:
+          $ref: '#/components/schemas/ComponentRecommendation'
+      required:
+      - driver
+      - executor
+      type: object
+    RecommendationData:
+      description: JSON:API resource object for SPA Recommendation. Includes type,
+        optional ID, and resource attributes with structured recommendations.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RecommendationAttributes'
+        id:
+          description: Resource identifier for the recommendation. Optional in responses.
+          type: string
+        type:
+          $ref: '#/components/schemas/RecommendationType'
+      required:
+      - type
+      - attributes
+      type: object
+    RecommendationDocument:
+      description: JSON:API document containing a single Recommendation resource.
+        Returned by SPA when the Spark Gateway requests recommendations.
+      properties:
+        data:
+          $ref: '#/components/schemas/RecommendationData'
+      required:
+      - data
+      type: object
+    RecommendationType:
+      default: recommendation
+      description: JSON:API resource type for Spark Pod Autosizing recommendations.
+        Identifies the Recommendation resource returned by SPA.
+      enum:
+      - recommendation
+      example: recommendation
+      type: string
+      x-enum-varnames:
+      - RECOMMENDATION
     RegisterAppKeyResponse:
       description: The response object after creating an app key registration.
       properties:
@@ -43512,6 +43687,68 @@ components:
         urgency:
           $ref: '#/components/schemas/Urgency'
       type: object
+    TeamSyncAttributes:
+      description: Team sync attributes.
+      properties:
+        source:
+          $ref: '#/components/schemas/TeamSyncAttributesSource'
+        type:
+          $ref: '#/components/schemas/TeamSyncAttributesType'
+      required:
+      - source
+      - type
+      type: object
+    TeamSyncAttributesSource:
+      description: The external source platform for team synchronization. Only "github"
+        is supported.
+      enum:
+      - github
+      example: github
+      type: string
+      x-enum-varnames:
+      - GITHUB
+    TeamSyncAttributesType:
+      description: The type of synchronization operation. Only "link" is supported,
+        which links existing teams by matching names.
+      enum:
+      - link
+      example: link
+      type: string
+      x-enum-varnames:
+      - LINK
+    TeamSyncBulkType:
+      description: Team sync bulk type.
+      enum:
+      - team_sync_bulk
+      example: team_sync_bulk
+      type: string
+      x-enum-varnames:
+      - TEAM_SYNC_BULK
+    TeamSyncData:
+      description: Team sync data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamSyncAttributes'
+        type:
+          $ref: '#/components/schemas/TeamSyncBulkType'
+      required:
+      - attributes
+      - type
+      type: object
+    TeamSyncRequest:
+      description: Team sync request.
+      example:
+        data:
+          attributes:
+            source: github
+            type: link
+          type: team_sync_bulk
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamSyncData'
+      required:
+      - data
+      type: object
     TeamTarget:
       description: Represents a team target for an escalation policy step, including
         the team's ID and resource type.
@@ -50962,6 +51199,31 @@ paths:
     get:
       description: List the Custom Costs files.
       operationId: ListCustomCostsFiles
+      parameters:
+      - description: Page number for pagination
+        in: query
+        name: page[number]
+        schema:
+          format: int64
+          type: integer
+      - description: Page size for pagination
+        in: query
+        name: page[size]
+        schema:
+          default: 100
+          format: int64
+          type: integer
+      - description: Filter by file status
+        in: query
+        name: filter[status]
+        schema:
+          type: string
+      - description: Sort key with optional descending prefix
+        in: query
+        name: sort
+        schema:
+          default: created_at
+          type: string
       responses:
         '200':
           content:
@@ -50969,6 +51231,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/CustomCostsFileListResponse'
           description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
         '403':
           content:
             application/json:
@@ -51004,6 +51272,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/CustomCostsFileUploadResponse'
           description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
         '403':
           content:
             application/json:
@@ -51038,6 +51312,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -51069,6 +51349,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -69755,6 +70041,72 @@ paths:
       x-unstable: '**Note**: This feature is in private beta. To request access, use
         the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export)
         docs.'
+  /api/v2/spa/recommendations/{service}/{shard}:
+    get:
+      description: Retrieve resource recommendations for a Spark job. The caller (Spark
+        Gateway or DJM UI) provides a service name and shard identifier, and SPA returns
+        structured recommendations for driver and executor resources.
+      operationId: GetSPARecommendations
+      parameters:
+      - description: The shard tag for a spark job, which differentiates jobs within
+          the same service that have different resource needs
+        in: path
+        name: shard
+        required: true
+        schema:
+          type: string
+      - description: The service name for a spark job
+        in: path
+        name: service
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                data:
+                  attributes:
+                    driver:
+                      estimation:
+                        cpu:
+                          max: 1500
+                          p75: 1000
+                          p95: 1200
+                        ephemeral_storage: 896
+                        heap: 6144
+                        memory: 7168
+                        overhead: 1024
+                    executor:
+                      estimation:
+                        cpu:
+                          max: 2000
+                          p75: 1200
+                          p95: 1500
+                        ephemeral_storage: 512
+                        heap: 3072
+                        memory: 4096
+                        overhead: 1024
+                  id: dedupeactivecontexts:adp_dedupeactivecontexts_org2
+                  type: recommendation
+              schema:
+                $ref: '#/components/schemas/RecommendationDocument'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get SPA Recommendations
+      tags:
+      - Spa
+      x-menu-order: 1
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta and may change in the
+        future. It is not yet recommended for production use.'
   /api/v2/spans/analytics/aggregate:
     post:
       description: 'The API endpoint to aggregate spans into buckets and compute metrics
@@ -70133,6 +70485,74 @@ paths:
     x-merge-override:
       get: false
       post: false
+  /api/v2/team/sync:
+    post:
+      description: 'This endpoint attempts to link your existing Datadog teams with
+        GitHub teams by matching their names.
+
+        It evaluates all current Datadog teams and compares them against teams in
+        the GitHub organization
+
+        connected to your Datadog account, based on Datadog Team handle and GitHub
+        Team slug
+
+        (lowercased and kebab-cased).
+
+
+        This operation is read-only on the GitHub side, no teams will be modified
+        or created.
+
+
+        [A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),
+
+        and the GitHub App integrated with Datadog must have the `Members Read` permission.
+        Matching is performed by comparing the Datadog team handle to the GitHub team
+        slug
+
+        using a normalized exact match; case is ignored and spaces are removed. No
+        modifications are made
+
+        to teams in GitHub. This will not create new Teams in Datadog.'
+      operationId: SyncTeams
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamSyncRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Internal Server Error - Unexpected error during linking.
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_manage
+      summary: Link Teams with GitHub Teams
+      tags:
+      - Teams
+      x-codegen-request-body-name: body
+      x-menu-order: 19
+      x-permission:
+        operator: AND
+        permissions:
+        - teams_manage
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
+        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/team/{super_team_id}/member_teams:
     get:
       description: Get all member teams.
@@ -71594,14 +72014,6 @@ paths:
         This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
       operationId: GetHistoricalCostByOrg
       parameters:
-      - description: String to specify whether cost is broken down at a parent-org
-          level or at the sub-org level. Available views are `summary` and `sub-org`.  Defaults
-          to `summary`.
-        in: query
-        name: view
-        required: false
-        schema:
-          type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
           for cost beginning this month.'
         in: query
@@ -71609,6 +72021,14 @@ paths:
         required: true
         schema:
           format: date-time
+          type: string
+      - description: String to specify whether cost is broken down at a parent-org
+          level or at the sub-org level. Available views are `summary` and `sub-org`.  Defaults
+          to `summary`.
+        in: query
+        name: view
+        required: false
+        schema:
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
           for cost ending this month.'
@@ -73427,6 +73847,9 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/service_catalog/service_definitions#metadata-schema-v30-beta
   name: Software Catalog
+- description: SPA (Spark Pod Autosizing) API. Provides resource recommendations and
+    cost insights to help optimize Spark job configurations.
+  name: Spa
 - description: Search and aggregate your spans from your Datadog platform over HTTP.
   name: Spans
 - description: Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics)

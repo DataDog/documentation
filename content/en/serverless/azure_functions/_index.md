@@ -1,5 +1,9 @@
 ---
 title: Install Serverless Monitoring for Azure Functions
+further_reading:
+- link: 'http://datadoghq.com/blog/azure-well-architected-serverless-applications-best-practices/'
+  tag: 'Blog'
+  text: 'Build secure and scalable Azure serverless applications with the Well-Architected Framework'
 ---
 
 ## Overview
