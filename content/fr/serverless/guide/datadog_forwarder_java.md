@@ -1,5 +1,4 @@
 ---
-
 title: Instrumenter des applications Java sans serveur avec le Forwarder Datadog
 ---
 ## Présentation
@@ -62,9 +61,9 @@ dependencies {
 
     ```yaml
     JAVA_TOOL_OPTIONS: -javaagent:"/opt/java/lib/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-    DD_LOGS_INJECTION: true
+    DD_LOGS_INJECTION: true # default value
     DD_JMXFETCH_ENABLED: false
-    DD_TRACE_ENABLED: true
+    DD_TRACE_ENABLED: true # default value
     ```
 
 3. Incorporez la fonction Lambda de votre gestionnaire à l'aide du wrapper fourni par la bibliothèque Lambda Datadog :
