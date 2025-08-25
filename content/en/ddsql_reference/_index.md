@@ -25,6 +25,7 @@ DDSQL is SQL for Datadog data. It implements several standard SQL operations, su
 This documentation covers the SQL support available and includes:
 - [Syntax compatible with PostgreSQL](#syntax)
 - [SQL functions](#functions)
+- [Regular expressions](#regular-expressions)
 - [Window functions](#window-functions)
 - [JSON functions](#json-functions-and-operators)
 - [Table functions](#table-functions)
@@ -118,9 +119,6 @@ The following SQL functions are supported. For Window function, see the separate
 | `TO_TIMESTAMP(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.             |
 | `TO_CHAR(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.             |
 | `DATE_TRUNC(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.  |
-| `REGEXP_LIKE(string s, pattern p)`               | Boolean                               | Evaluates whether a string matches a regular expression pattern.            |
-| `REGEXP_MATCH(string s, pattern p)`              | array of strings                      | Returns substrings of the first pattern match in the string.  |
-| `REGEXP_REPLACE(string s, pattern p, string replacement [, string flags ])`| string      | Replaces the first occurrence of the pattern in a string with the replacement. Optional `flags` argument, add `'g'` (global) to match all occurrences instead of first.        |
 | `CARDINALITY(array a)`                           | integer                               | Returns the number of elements in the array.                                |
 | `ARRAY_POSITION(array a, typeof_array value)`    | integer                               | Returns the index of the first occurrence of the value found in the array, or null if value is not found. |
 | `STRING_TO_ARRAY(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter. |
@@ -369,28 +367,6 @@ FROM
   events
 {{< /code-block >}}
 
-### `REGEXP_LIKE`
-{{< code-block lang="sql" >}}
-SELECT
-  *
-FROM
-  emails
-WHERE
-  REGEXP_LIKE(email_address, '@example\.com$')
-{{< /code-block >}}
-
-### `REGEXP_MATCH`
-{{< code-block lang="sql" >}}
-SELECT
-  REGEXP_MATCH('abc123xyz', '[0-9]+')
-{{< /code-block >}}
-
-### `REGEXP_REPLACE`
-{{< code-block lang="sql" >}}
-SELECT
-  REGEXP_REPLACE('2025-07/29', '-', '/')
-{{< /code-block >}}
-
 ### `CARDINALITY`
 {{< code-block lang="sql" >}}
 SELECT
@@ -438,9 +414,117 @@ FROM
 
 {{% /collapse-content %}}
 
+## Regular expressions
+
+### Flavor
+
+All regular expression functions use the ICU (International Components for Unicode) flavor:
+
+- [Metacharacters](https://unicode-org.github.io/icu/userguide/strings/regexp.html#regular-expression-metacharacters)
+- [Operators](https://unicode-org.github.io/icu/userguide/strings/regexp.html#regular-expression-operators)
+- [Set Expressions (Character Classes)](https://unicode-org.github.io/icu/userguide/strings/regexp.html#set-expressions-character-classes)
+- [Flag Options for in-pattern flags](https://unicode-org.github.io/icu/userguide/strings/regexp.html#flag-options). Refer to the [flags section below](#function-level-flags) for function-level flags.
+- [Find and Replace (using capture groups)](https://unicode-org.github.io/icu/userguide/strings/regexp.html#find-and-replace)
+
+### Functions
+
+| Function                                                                                                         | Return Type      | Description                                                                                                                                                                                                                                                                |
+|------------------------------------------------------------------------------------------------------------------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `REGEXP_LIKE(string input, string pattern)`                                                                      | Boolean          | Evaluates whether a string matches a regular expression pattern.                                                                                                                                                                                                           |
+| `REGEXP_MATCH(string input, string pattern [, string flags ])`                                                   | array of strings | Returns substrings of the first pattern match in the string. <br><br> This function searches the input string using the given pattern and returns captured substrings (capture groups) from the first match. If no capture groups are present, the full match is returned. |
+| `REGEXP_REPLACE(string input, string pattern, string replacement [, string flags ])`                             | string           | Replaces the substring that is the first match to the pattern, or all such matches if the [optional `g` flag](#function-level-flags) is used.                                                                                                                              |
+| `REGEXP_REPLACE (string input, string pattern, string replacement, integer start, integer N [, string flags ] )` | string           | Replaces the substring that is the Nth match to the pattern, or all such matches if `N` is zero, starting from `start`.                                                                                                                                                    |
+
+{{% collapse-content title="Examples" level="h3" %}}
+
+### `REGEXP_LIKE`
+{{< code-block lang="sql" >}}
+SELECT
+  *
+FROM
+  emails
+WHERE
+  REGEXP_LIKE(email_address, '@example\.com$')
+{{< /code-block >}}
+
+### `REGEXP_MATCH`
+{{< code-block lang="sql" >}}
+SELECT regexp_match('foobarbequebaz', '(bar)(beque)');
+-- {bar,beque}
+
+SELECT regexp_match('foobarbequebaz', 'barbeque');
+-- {barbeque}
+
+SELECT regexp_match('abc123xyz', '([a-z]+)(\d+)(x(.)z)');
+-- {abc,123,xyz,y}
+{{< /code-block >}}
+
+### `REGEXP_REPLACE`
+{{< code-block lang="sql" >}}
+SELECT regexp_replace('Auth success token=abc123XYZ789', 'token=\w+', 'token=***');
+-- Auth success token=***
+
+SELECT regexp_replace('status=200 method=GET', 'status=(\d+) method=(\w+)', '$2: $1');
+-- GET: 200
+
+SELECT regexp_replace('INFO INFO INFO', 'INFO', 'DEBUG', 1, 2);
+-- INFO DEBUG INFO
+{{< /code-block >}}
+
+{{% /collapse-content %}}
+
+### Function-level flags
+
+You can use the following flags with [regular expression functions](#regular-expressions):
+
+`i`
+: Case-insensitive matching 
+
+`n` or `m`
+: Newline-sensitive matching
+
+`g`
+: Global
+
+{{% collapse-content title="Examples" level="h3" %}}
+
+### `i` flag
+
+{{< code-block lang="sql" >}}
+SELECT regexp_match('INFO', 'info') 
+-- NULL
+
+SELECT regexp_match('INFO', 'info', 'i') 
+-- ['INFO']
+{{< /code-block >}}
+
+### `n` flag
+
+{{< code-block lang="sql" >}}
+SELECT regexp_match('a
+b', '^b');
+-- NULL
+
+SELECT regexp_match('a
+b', '^b', 'n');
+-- ['b']
+{{< /code-block >}}   
+
+### `g` flag
+
+{{< code-block lang="sql" >}}
+SELECT icu_regexp_replace('Request id=12345 completed, id=67890 pending', 'id=\d+', 'id=XXX');
+-- Request id=XXX completed, id=67890 pending
+
+SELECT regexp_replace('Request id=12345 completed, id=67890 pending', 'id=\d+', 'id=XXX', 'g');
+-- Request id=XXX completed, id=XXX pending
+{{< /code-block >}}
+
+{{% /collapse-content %}}
+
 ## Window functions
 
-This table provides an overview of the supprted window functions. For comprehensive details and examples, see the [PostgreSQL documentation][2].
+This table provides an overview of the supported window functions. For comprehensive details and examples, see the [PostgreSQL documentation][2].
 
 | Function                | Return Type       | Description                                                            |
 |-------------------------|-------------------|------------------------------------------------------------------------|
