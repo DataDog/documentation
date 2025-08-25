@@ -6,11 +6,6 @@ disable_sidebar: false
 algolia:
   tags: ['app builder', 'actions']
 type: documentation
-aliases:
-  - /app_builder/actions_catalog/action_blueprints/
-  - /service_management/app_builder/actions_catalog/saved_actions/
-  - /service_management/app_builder/actions/saved_actions/
-  - /service_management/app_builder/saved_actions
 further_reading:
 - link: "/actions/workflows/actions/"
   tag: "Documentation"
