@@ -89,7 +89,7 @@ There are several ways to instrument your applications with OpenTelemetry and Da
 - **OpenTelemetry API**: Use the OpenTelemetry API with Datadog's SDK implementation.
 - **OpenTelemetry instrumentation libraries**: Extend Datadog's observability to additional frameworks and technologies.
 
-For more information, see [Instrument Your Applications][8]. 
+For more information, see [Instrument Your Applications][8].
 
 ## Send OpenTelemetry data to Datadog
 
@@ -97,20 +97,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 <div class="alert alert-info"><strong>Not sure which setup is right for you?</strong><br> See the <a href="/opentelemetry/compatibility/">Feature Compatibility</a> table to understand which Datadog features are supported.</div>
 
-### Option 1: Use the OpenTelemetry Collector
-
-{{< img src="/opentelemetry/setup/otel-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to host running OpenTelemetry Collector with Datadog Exporter, which forwards to Datadog's Observability Platform." style="width:100%;" >}}
-
-**Best for**: New or existing OTel users wanting a completely vendor-neutral setup.
-
-- Complete vendor neutrality for sending OpenTelemetry data to Datadog
-- Flexible configuration options like tail-based sampling and data transformations
-
-{{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}Learn more about using the OTel Collector{{< /nextlink >}}
-{{< /whatsnext >}}
-
-### Option 2: Use the Datadog Agent with DDOT Collector
+### Option 1: Use the Datadog Agent with DDOT Collector (Recommended)
 
 {{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Architecture overview for DDOT Collector, which is embedded in the Datadog Agent." style="width:100%;" >}}
 
@@ -128,6 +115,19 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/setup/ddot_collector/" >}}Learn more about using the Datadog Agent with DDOT Collector{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### Option 2: Use the OpenTelemetry Collector
+
+{{< img src="/opentelemetry/setup/otel-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to host running OpenTelemetry Collector with Datadog Exporter, which forwards to Datadog's Observability Platform." style="width:100%;" >}}
+
+**Best for**: New or existing OTel users wanting a completely vendor-neutral setup.
+
+- Complete vendor neutrality for sending OpenTelemetry data to Datadog
+- Flexible configuration options like tail-based sampling and data transformations
+
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}Learn more about using the OTel Collector{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Additional setup options
