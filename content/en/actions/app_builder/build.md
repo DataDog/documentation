@@ -123,7 +123,7 @@ To edit an app with JSON, click **Settings** {{< img src="icons/settings.png" in
 
 ### Export an app
 
-To copy an app layout across organizations or back it up, click **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon and select **Switch to JSON**. This shows the JSON code for the entire app. Copy this JSON code and save it in a text editor. You can save intermediate states of your app during development and return to them if necessary.
+To copy an app layout across organizations or back up the app, click **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} and select **Switch to JSON**. This shows the JSON code for the entire app. Copy this JSON code and save it in a text editor. You can save intermediate states of your app during development and return to them if necessary.
 
 To copy the app to another organization:
 1. Create an app. 
