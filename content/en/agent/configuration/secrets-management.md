@@ -245,10 +245,10 @@ After this has been set up, write an [authentication-specific vault policy][3004
 
 #### Configuration example
 
-In the following example, assume the HashiCorp Vault secret path prefix is `/Datadog/Production` with a parameter key of `api_key`:
+In the following example, assume the HashiCorp Vault secret path prefix is `/Datadog/Production` with a parameter key of `apikey`:
 
 ```sh
-/DatadogAgent/Production/api_key: (SecureString) "<your api key>"
+/DatadogAgent/Production/apikey: (SecureString) "<your api key>"
 ```
 
 Each of the following examples access the secret from the Datadog Agent configuration YAML file(s) as such:
