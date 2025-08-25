@@ -1,6 +1,5 @@
 ---
 title: Send Data to Datadog
-aliases:
 further_reading:
 - link: "/opentelemetry/instrument/"
   tag: "Documentation"
@@ -10,13 +9,42 @@ further_reading:
   text: "How to select your OpenTelemetry deployment"
 ---
 
-There are multiple ways to send OpenTelemetry data to Datadog. Choose the method that best fits your infrastructure and requirements:
+There are several ways to send OpenTelemetry data to Datadog. For the most comprehensive experience with access to all Datadog features, use the Datadog Distribution of OpenTelemetry (DDOT) Collector
 
-| Method                          | Best For                                                                 | Key Benefits                                                                                                                                                                                                                                  | Documentation                                 |
-|---------------------------------|--------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|
-| <strong>Datadog Agent</strong>  | Existing Datadog users or teams requiring Agent-based features:<ul><li><strong>[DDOT Collector][5] (<strong>Recommended</strong>):</strong> Recommended for Kubernetes environments</li><li><strong>[OTLP Ingest][1]:</strong> Recommended for all other environments</li></ul> | <ul><li>Access to full Datadog Agent capabilities</li><li>Enhanced monitoring capabilities including:<ul><li>Fleet Automation</li><li>Live Container Monitoring</li><li>Kubernetes Explorer</li><li>Live Processes</li><li>Cloud Network Monitoring</li><li>Universal Service Monitoring</li><li>{{< translate key="integration_count" >}}+ Datadog integrations</li></ul></li></ul> | [Send data using the Datadog Agent][1] |
-| <strong>OTel Collector</strong> | New or existing OTel users wanting a vendor-neutral setup                | <ul><li>Complete vendor neutrality</li><li>Send traces, metrics, and logs to Datadog without installing the Datadog Agent or tracing libraries</li><li>Advanced processing capabilities (for example, [tail-based sampling][4])</li></ul> | [Send data using the OTel Collector][2]       |
-| <strong>Agentless Deployment</strong>  | Situations requiring direct connection without additional infrastructure | <ul><li>Direct data transmission</li><li>No additional components needed</li></ul>                                                                                                                                                            | [Send data using the intake endpoint][3]      |
+## DDOT Collector (Recommended)
+
+The DDOT Collector is an open source solution that combines the flexibility of OpenTelemetry (OTel) with the comprehensive observability capabilities of Datadog. This approach is best for users who want to use the full potential of the Datadog platform in a Kubernetes environment.
+
+{{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Architecture overview for DDOT Collector, which is embedded in the Datadog Agent." style="width:100%;" >}}
+
+#### Key benefits
+
+This approach gives you full control over OpenTelemetry pipelines while also providing access to powerful, Agent-based Datadog features, including:
+* Fleet Automation
+* Live Container Monitoring and Kubernetes Explorer
+* Universal Service Monitoring (USM)
+* Access to {{< translate key="integration_count" >}}+ Datadog integrations
+* The ability to forward OTLP data to multiple backends
+
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/setup/ddot_collector/install/" >}}**Get Started with the DDOT Collector**{{< /nextlink >}}
+{{< /whatsnext >}}
+
+## Other setup options
+
+Alternative methods are available for specific use cases, such as maintaining a vendor-neutral pipeline or running in non-Kubernetes environments.
+
+### Standalone OpenTelemetry Collector
+* **Best for**: Users who require a completely vendor-neutral setup to send data to multiple backends.
+* **[Learn more about the OTel Collector →][2]**
+
+### OTLP ingest in the Agent
+* **Best for**: Users on platforms other than Kubernetes Linux, or those who prefer a minimal configuration without managing Collector pipelines.
+* **[Learn more about OTLP Ingest →][6]**
+
+### Agentless deployment
+* **Best for**: Situations requiring direct data transmission to Datadog's intake endpoint without any intermediary components.
+* **[Learn more about Agentless Deployment →][2]**
 
 <div class="alert alert-info"><strong>Still not sure which setup is right for you?</strong><br> See the <a href="/opentelemetry/compatibility/">Feature Compatibility</a> table to understand which Datadog features are supported.</div>
 
@@ -26,7 +54,7 @@ There are multiple ways to send OpenTelemetry data to Datadog. Choose the method
 
 [1]: /opentelemetry/setup/agent
 [2]: /opentelemetry/setup/collector_exporter/
-[3]: /opentelemetry/setup/intake_endpoint
+[3]: /opentelemetry/setup/agentless
 [4]: /opentelemetry/ingestion_sampling#tail-based-sampling
 [5]: /opentelemetry/agent
 [6]: /opentelemetry/setup/otlp_ingest_in_the_agent
