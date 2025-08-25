@@ -262,7 +262,7 @@ Your Twilio cost data for the past 15 months can be accessed in Cloud Cost Manag
 {{% /tab %}}
 {{% tab "GitHub" %}}
 
-1. Create a personal authorization token (classic), with the `manage_billing:enterprise` and `repo` scopes on the [Personal Access Tokens][109] page in GitHub.
+1. Create a personal authorization token (classic), with the `manage_billing:enterprise` and `read:org` scopes on the [Personal Access Tokens][109] page in GitHub.
 2. Navigate to the Datadog [GitHub Costs tile][108].
 3. Click **Add New**.
 4. Enter an account name, your personal access token, and your enterprise name (in `enterprise-name` format), as well as any appropriate tags.
