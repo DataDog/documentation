@@ -3,7 +3,7 @@
     "attributes": {
       "priority": "NOT_DEFINED",
       "title": "Security breach investigation in 0cfbc5cbc676ee71",
-      "type": "STANDARD"
+      "type_id": "00000000-0000-0000-0000-000000000001"
     },
     "relationships": {
       "assignee": {
