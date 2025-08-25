@@ -52,7 +52,7 @@ Policies are displayed with the following statuses:
 Here are some ways to use Coverage to improve your workload security.
 
 ### Detect and remediate policy deployment issues
-If you see an "Incomplete infrastructure coverage" status card on the Coverage page, do the following:
+From the **Incomplete infrastructure coverage** status card on the Coverage page, you can address policy deployment issues:
 1. In **Incomplete infrastructure coverage**, click **Warning**, and then select the policies in **Security coverage needs attention**. In the coverage map, assets with policy deployment problems are displayed as orange hexagons.
 2. Review the list of deployed policies. Policies are highlighted with statuses such as **Partially Loaded**, **Fully Rejected**, and so on.
 3. In the policy details, do one of the following:
@@ -62,14 +62,14 @@ If you see an "Incomplete infrastructure coverage" status card on the Coverage p
 
 ### Identify assets missing Workload Protection
 
-**Improve infrastructure coverage** flags assets without full Workload Protection.
+From the **Incomplete infrastructure coverage** status card on the Coverage page, you can review assets without full Workload Protection (WP):
 
 1. In **Improve infrastructure coverage**, click **NO WP**. **NO WP** shows how many hosts are running the Datadog Agent without Workload Protection enabled.
 2. Click **Inspect Hosts Without WP**. Fleet Automation appears, allowing you to [set up Workload Protection][3].
 
 ### Identify assets missing key features
 
-To find gaps in protection, do the following:
+From the **Incomplete infrastructure coverage** status card on the Coverage page, you can find assets with gaps in protection.
 
 1. In **Improve infrastructure coverage**, click **INFO** to review the `outdated_agent` flag. The `outdated_agent` flag means an outdated Agent version is running and might not support the latest Workload Protection features.
 2. In **Improve infrastructure coverage**, click **NO AGENT**. **NO AGENT** shows how many hosts are not running the Datadog Agent, and therefore can't be evaluated by Workload Protection.
@@ -79,7 +79,7 @@ To find gaps in protection, do the following:
 
 ### Search assets by MITRE ATT&CK techniques and tactics
 
-In **Filter by tactics, techniques, and policy types**, built-in filters for **Tactics**, **Techniques**, and **Policies** show exactly which parts of the MITRE ATT&CK framework are covered.
+From the **Filter by tactics, techniques, and policy types** status card on the Coverage page, built-in filters for **Tactics**, **Techniques**, and **Policies** show exactly which parts of the MITRE ATT&CK framework are covered.
 
 To use these filters to strengthen detection and response alignment with proven MITRE ATT&CK framework threat models, do the following:
 

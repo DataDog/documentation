@@ -10,10 +10,10 @@ Inventory is organized into the following tools:
 
 - [Hosts & Containers][1]:
   * List all physical and virtual hosts and container workloads.
-  * Filter by environment, enabled features, agent version, and so on.
+  * Filter by environment, enabled features, agent version, and more
 - [Serverless][2]:
   * Track coverage for serverless functions
-  * Filter by environment, enabled features, agent version, etc.
+  * Filter by environment, enabled features, agent version, and more
 - [Coverage Map][3]:
   * View a map of Workload Protection status updated every 1-5 minutes
   * Find and prioritize workloads in a warning state
