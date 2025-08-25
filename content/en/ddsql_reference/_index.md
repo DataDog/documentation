@@ -96,13 +96,13 @@ DDSQL supports the following data types:
 
 | Data Type | Description |
 |-----------|-------------|
-| `BIGINT` | 64-bit signed integers |
-| `BOOLEAN` | True or false values |
-| `DOUBLE` | Double-precision floating-point numbers |
-| `INTERVAL` | Time duration values |
-| `JSON` | JSON data |
-| `TIMESTAMP` | Date and time values |
-| `VARCHAR` | Variable-length character strings |
+| `BIGINT` | 64-bit signed integers. |
+| `BOOLEAN` | `true` or `false` values. |
+| `DOUBLE` | Double-precision floating-point numbers. |
+| `INTERVAL` | Time duration values. |
+| `JSON` | JSON data. |
+| `TIMESTAMP` | Date and time values. |
+| `VARCHAR` | Variable-length character strings. |
 
 ### Array types
 
