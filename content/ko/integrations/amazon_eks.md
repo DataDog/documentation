@@ -24,6 +24,7 @@ categories:
 - kubernetes
 - log collection
 - orchestration
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/amazon_eks/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: amazon-eks
 integration_title: Amazon EKS
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: amazon_eks
 public_title: Amazon EKS
@@ -55,10 +55,18 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Amazon EKS는 관리형 서비스로, AWS에서 쿠버네티스(Kubernetes)를 손쉽게 실행할 수 있도록 해줍니다.
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/announcing-eks
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/eks-cluster-metrics
+  - resource_type: 문서
+    url: https://docs.datadoghq.com/integrations/eks_fargate/
   support: README.md#Support
   title: Amazon EKS
 ---
@@ -88,11 +96,11 @@ EKS 모니터링을 위해서는 다음 Datadog 통합 중 하나를 설치해�
 
 - [쿠버네티스][6]
 - [AWS][7]
-- [AWS EC2][8]
+- [Amazon EC2][8]
 
 ### 로그 수집
 
-_에이전트 버전 > 6.0 이상 사용 가능_
+_Agent 버전 6.0 이상에서 사용 가능_
 
 설치 방법은 쿠버네티스의 설치 방법과 동일합니다.
 모든 컨테이너에서 로그 수집을 시작하려면 Datadog 에이전트 [환경 변수][9]를 사용하세요.

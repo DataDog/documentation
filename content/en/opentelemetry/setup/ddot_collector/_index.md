@@ -15,7 +15,9 @@ further_reading:
 {{< /site-region >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/ddot-for-linux-based-hosts-or-vms/" btn_hidden="false" >}}
-Support for deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is in Preview. To join the Preview, click <strong>Request Access</strong> and complete the form.
+The DDOT Collector for Kubernetes is <strong>Generally Available</strong>. You can get started by following the <a href="#get-started">instructions below</a>.
+<br><br>
+Deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is <strong>in Preview</strong>. To join this Preview, click <strong>Request Access</strong>.
 {{< /callout >}}
 
 ## Overview
@@ -116,6 +118,7 @@ By default, the DDOT Collector ships with the following Collector components. Yo
 {{% collapse-content title="Connectors" level="p" %}}
 
 - [datadogconnector][44]
+- [routingconnector][56] (available since version 7.68.0)
 - [spanmetricsconnector][45]
 
 {{% /collapse-content %}}
@@ -224,3 +227,4 @@ This guide helps you migrate from an existing OpenTelemetry Collector setup to t
 [53]: /containers/kubernetes/tag/?tab=datadogoperator#out-of-the-box-tags
 [54]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [55]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/loadbalancingexporter/README.md
+[56]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/routingconnector/README.md

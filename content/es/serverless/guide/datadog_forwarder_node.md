@@ -253,7 +253,7 @@ La versión secundaria del paquete `datadog-lambda-js` siempre coincide con la v
 [Configura las capas][8] de tu función de Lambda con el ARN en el siguiente formato.
 
 ```
-# For us,us3,us5,eu, and ap1 regions
+# For us,us3,us5,eu, ap1, and ap2 regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 
 # For us-gov regions

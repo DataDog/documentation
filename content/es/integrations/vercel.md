@@ -83,7 +83,34 @@ Aprovecha la integración de Vercel con Datadog para:
 
 ## Configuración
 
-- [Configurar la integración Vercel][8]
+### Datadog
+
+Para conectar Datadog con Vercel, activa la integración y selecciona una clave de API.
+
+1. Abre el cuadro de integración de Vercel.
+
+2. Selecciona la pestaña **Configure** (Configurar) y selecciona **Configure the Vercel integration** (Configurar la integración de Vercel).
+
+3. En el formulario **Your Datadog account info** (Tu información de cuenta de Datadog), selecciona **Select an API Key** (Seleccionar una clave de API) y elige una clave de API existente o selecciona **+ Create New** (+ Crear nueva) para utilizar una nueva clave de API para la integración de Vercel.
+
+4. Una vez realizada la selección, selecciona **Use API Key** (Usar clave de API). Esto copia la clave de API seleccionada en el portapapeles de tu dispositivo.
+
+5. Una vez seleccionada la clave de API, se te redirigirá de nuevo al formulario  **Your Datadog account info** (Tu información de cuenta de Datadog). Selecciona **Vercel > Add Integration** (Vercel > Añadir integración) para completar la configuración de integración para Vercel.
+### Vercel
+
+1. Haz clic en el enlace **Vercel > Add Integration** (Vercel > Añadir integración) para ser redirigido a la página de integración de Datadog de Vercel.
+
+2. Selecciona **Connect Account** (Conectar cuenta) para abrir el formulario **Connect Datadog Account** (Conectar cuenta de Datadog).
+
+3. Selecciona el equipo de Vercel al que deseas conectar la integración. (Los equipos que ya tienen instalada la integración tienen un icono al lado con la etiqueta **Installed** [Instalada]).
+
+4. Selecciona el botón de opción asociado con la activación de la integración para todos los proyectos o para un proyecto específico del que sea propietario el equipo. Selecciona **Connect Account** (Conectar cuenta) para guardar los cambios.
+
+5. Pega la clave de API que copiaste en el portapapeles en el paso 4 de la configuración de Datadog anterior en la casilla denominada **Your Datadog API Key** (Tu clave de API de Datadog).
+
+6. Desplázate hasta la parte inferior del formulario y selecciona **Add Integración** (Añadir integración) para guardar los cambios.
+
+- {{< region-param key="vercel_setup" link="true" text="Configurar la integración de Vercel" >}}
 
 ## Datos recopilados
 
@@ -101,25 +128,27 @@ La integración Vercel no incluye eventos.
 
 ### Logs
 
-La integración Vercel recopila logs de tu proyecto Vercel utilizando la función [Log Drains][10] de Vercel.
+La integración de Vercel recopila logs de tu proyecto de Vercel utilizando la función [Log Drains][9] de Vercel.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][11].
+Si estás utilizando el Vercel OpenTelemetry Collector, el `serviceName` especificado en el bloque `registerOTel` de tu [inicializador][10] debe coincidir con el nombre del proyecto de Vercel. Esto permite que aparezcan trazas en Datadog con las métricas y log apropiados.
+
+
+¿Necesitas ayuda? Ponte en contacto con el [equipo de asistencia de Datadog][11].
 
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/vercel/images/logo-full-black.png
 [2]: https://vercel.com/
 [3]: https://vercel.com/docs/edge-network/overview
 [4]: https://vercel.com/docs/serverless-functions/introduction
-[5]: /es/logs/
+[5]: https://docs.datadoghq.com/es/logs/
 [6]: https://vercel.com/docs/functions
-[7]: /es/synthetics/
-[8]: https://app.datadoghq.com/setup/vercel
-[9]: https://github.com/DataDog/integrations-extras/blob/master/vercel/metadata.csv
-[10]: https://vercel.com/docs/observability/log-drains
-[11]: /es/help/
+[7]: https://docs.datadoghq.com/es/synthetics/
+[8]: https://github.com/DataDog/integrations-extras/blob/master/vercel/metadata.csv
+[9]: https://vercel.com/docs/observability/log-drains
+[10]: https://vercel.com/docs/observability/otel-overview#initialize-otel
+[11]: https://docs.datadoghq.com/es/help/

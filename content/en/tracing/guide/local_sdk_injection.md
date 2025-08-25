@@ -18,7 +18,7 @@ Use this guide if:
 
 - Kubernetes v1.14+
 - [Datadog Cluster Agent][3]:
-  - v7.40+ for Java, Python, NodeJS
+  - v7.40+ for Java, Python, and Node.js
   - v7.44+ for .NET and Ruby
 - Datadog Admission Controller enabled (enabled by default in Helm chart v2.35.0+)
 
@@ -64,12 +64,12 @@ Use the following pod annotations to specify which language SDK to inject and wh
 | Language    | Pod annotation |
 | ----------- | -------------- |
 | Java | `admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"` |
-| JavaScript | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"` |
+| Node.js | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"` |
 | Python | `admission.datadoghq.com/python-lib.version: "<CONTAINER IMAGE TAG>"` |
 | .NET | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` | 
 | Ruby | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"` | 
 
-Replace `<CONTAINER IMAGE TAG>` with the appropriate value. For musl-based .NET containers, use tags with the `-musl` suffix (for example, `v2.29.0-musl`).
+Replace `<CONTAINER IMAGE TAG>` with the appropriate value.
 
 For example:
 
@@ -93,16 +93,17 @@ spec:
 
 To view available library versions, see the tracer repositories for each language:
 - [Java][4]
-- [JavaScript][5]
+- [Node.js][5]
 - [Python][6]
 - [.NET][7]
 - [Ruby][8]
+- [PHP][9]
 
 **Note:** If a container already includes a manually installed tracer, the injected version takes precedence at runtime.
 
 #### Add Unified Service Tags
 
-Use Unified Service Tags (USTs) to apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. See the [UST documentation][9] to learn how to add USTs to your pods.
+Use Unified Service Tags (USTs) to apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. See the [UST documentation][10] to learn how to add USTs to your pods.
 
 ### Step 3: Apply your changes and verify injection 
 
@@ -122,7 +123,7 @@ Alternatively, check for `datadog-lib-init` on your pod using:
 kubectl describe pod <pod-name>
 ```
 
-You should also see trace data in the [APM][10] UI shortly after startup.
+You should also see trace data in the [APM][11] UI shortly after startup.
 
 
 [1]: /containers/cluster_agent/admission_controller/?tab=datadogoperator 
@@ -133,5 +134,6 @@ You should also see trace data in the [APM][10] UI shortly after startup.
 [6]: https://github.com/DataDog/dd-trace-py/releases
 [7]: https://github.com/DataDog/dd-trace-dotnet/releases
 [8]: https://github.com/DataDog/dd-trace-rb/releases
-[9]: /getting_started/tagging/unified_service_tagging/
-[10]: https://app.datadoghq.com/apm/traces
+[9]: https://github.com/DataDog/dd-trace-php/releases
+[10]: /getting_started/tagging/unified_service_tagging/
+[11]: https://app.datadoghq.com/apm/traces

@@ -6260,6 +6260,18 @@ menu:
       url: /api/latest/cloud-network-monitoring/
       identifier: cloud-network-monitoring
       generated: true
+    - name: Get all aggregated DNS traffic
+      url: '#get-all-aggregated-dns-traffic'
+      identifier: cloud-network-monitoring-get-all-aggregated-dns-traffic
+      parent: cloud-network-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAggregatedDns
+        unstable: []
+        order: 2
     - name: Get all aggregated connections
       url: '#get-all-aggregated-connections'
       identifier: cloud-network-monitoring-get-all-aggregated-connections
@@ -6270,8 +6282,7 @@ menu:
           - v2
         operationids:
           - GetAggregatedConnections
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Cloudflare Integration
       url: /api/latest/cloudflare-integration/
@@ -6595,7 +6606,8 @@ menu:
           - v2
         operationids:
           - UpdateDataset
-        unstable: []
+        unstable:
+          - v2
         order: 4
     - name: Get a single dataset by ID
       url: '#get-a-single-dataset-by-id'
@@ -6607,7 +6619,8 @@ menu:
           - v2
         operationids:
           - GetDataset
-        unstable: []
+        unstable:
+          - v2
         order: 2
     - name: Delete a dataset
       url: '#delete-a-dataset'
@@ -6619,7 +6632,8 @@ menu:
           - v2
         operationids:
           - DeleteDataset
-        unstable: []
+        unstable:
+          - v2
         order: 5
     - name: Create a dataset
       url: '#create-a-dataset'
@@ -6631,7 +6645,8 @@ menu:
           - v2
         operationids:
           - CreateDataset
-        unstable: []
+        unstable:
+          - v2
         order: 1
     - name: Get all datasets
       url: '#get-all-datasets'
@@ -6643,7 +6658,8 @@ menu:
           - v2
         operationids:
           - GetAllDatasets
-        unstable: []
+        unstable:
+          - v2
         order: 3
     - name: Domain Allowlist
       url: /api/latest/domain-allowlist/
@@ -9340,6 +9356,23 @@ menu:
           - ListCatalogEntity
         unstable: []
         order: 1
+    - name: Spa
+      url: /api/latest/spa/
+      identifier: spa
+      generated: true
+    - name: Get SPA Recommendations
+      url: '#get-spa-recommendations'
+      identifier: spa-get-spa-recommendations
+      parent: spa
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSPARecommendations
+        unstable:
+          - v2
+        order: 1
     - name: Spans
       url: /api/latest/spans/
       identifier: spans
@@ -9667,6 +9700,19 @@ menu:
         unstable:
           - v2
         order: 21
+    - name: Link Teams with GitHub Teams
+      url: '#link-teams-with-github-teams'
+      identifier: teams-link-teams-with-github-teams
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SyncTeams
+        unstable:
+          - v2
+        order: 19
     - name: Create a team
       url: '#create-a-team'
       identifier: teams-create-a-team
