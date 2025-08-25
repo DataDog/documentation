@@ -9,7 +9,7 @@ cascade:
         subcategory: Integrations Guides
 ---
 
-{{< header-list header="General guides:" >}}
+{{< header-list header="General guides" >}}
     {{< nextlink href="integrations/guide/requests" tag=" documentation" >}}Request Datadog integrations{{< /nextlink >}}
     {{< nextlink href="/integrations/guide/reference-tables/" tag=" Documentation" >}}Add Custom Metadata with Reference Tables{{< /nextlink >}}
     {{< nextlink href="integrations/guide/source-code-integration" tag=" Documentation" >}}Datadog Source Code Integration{{< /nextlink >}}
@@ -33,7 +33,7 @@ cascade:
     {{< nextlink href="integrations/guide/fips-integrations" tag=" fips" >}}FIPS Verified Agent Integrations{{< /nextlink >}}
 {{< /header-list >}}
 
-{{< header-list header="AWS guides:" >}}
+{{< header-list header="AWS guides" >}}
     {{< nextlink href="getting_started/integrations/aws/" tag=" AWS" >}}AWS integration automatic setup with CloudFormation{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-terraform-setup" tag=" AWS" >}}AWS integration automatic setup with Terraform{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-organizations-setup" tag=" AWS" >}}AWS integration multi-account setup for Organizations{{< /nextlink >}}
@@ -47,7 +47,7 @@ cascade:
     {{< nextlink href="integrations/guide/aws-integration-and-cloudwatch-faq" tag=" AWS" >}}AWS integration and CloudWatch FAQ{{< /nextlink >}}
 {{< /header-list >}}
 
-{{< header-list header="Azure guides:" >}}
+{{< header-list header="Azure guides" >}}
     {{< nextlink href="integrations/guide/azure-manual-setup" tag=" Azure" >}}Azure manual setup guide{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-native-manual-setup" tag=" Azure" >}}Azure Native manual setup guide{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-programmatic-management" tag=" Azure" >}}Azure integration programmatic management guide{{< /nextlink >}}
@@ -63,11 +63,11 @@ cascade:
     {{< nextlink href="integrations/guide/azure-graph-api-permissions" tag=" Azure" >}}Microsoft Graph API Permissions for Monitoring Azure{{< /nextlink >}}
 {{< /header-list >}}
 
-{{< header-list header="Google Cloud guides:" >}}
+{{< header-list header="Google Cloud guides" >}}
     {{< nextlink href="integrations/guide/gcp-metric-discrepancy" tag=" gcp" >}}Google Cloud Metric Discrepancy{{< /nextlink >}}
 {{< /header-list >}}
 
-{{< header-list header="JMX guides:" >}}
+{{< header-list header="JMX guides" >}}
     {{< nextlink href="integrations/guide/running-jmx-commands-in-windows" tag=" jmx" >}}Running JMX commands in Windows{{< /nextlink >}}
     {{< nextlink href="integrations/guide/collecting-composite-type-jmx-attributes" tag=" jmx" >}}Collecting composite-type JMX attributes{{< /nextlink >}}
     {{< nextlink href="integrations/guide/use-bean-regexes-to-filter-your-jmx-metrics-and-supply-additional-tags" tag=" jmx" >}}Use Bean regexes to filter your JMX metrics and supply additional tags{{< /nextlink >}}
@@ -75,13 +75,13 @@ cascade:
     {{< nextlink href="integrations/guide/jmxfetch-fips/" tag=" jmx" >}}JMXFetch FIPS-140 mode{{< /nextlink >}}
 {{< /header-list >}}
 
-{{< header-list header="ServiceNow guides:" >}}
+{{< header-list header="ServiceNow guides" >}}
    {{< nextlink href="integrations/guide/servicenow-itom-itsm-setup" >}}Set up ServiceNow ITOM and ITSM{{< /nextlink >}}
    {{< nextlink href="integrations/guide/servicenow-cmdb-enrichment-setup" >}}Set up ServiceNow CMDB Enrichment{{< /nextlink >}}
    {{< nextlink href="integrations/guide/servicenow-service-graph-connector-setup" >}}Set up ServiceNow Service Graph Connector{{< /nextlink >}}
 {{< /header-list >}}
 
-{{< header-list header="Database guides:" >}}
+{{< header-list header="Database guides" >}}
     {{< nextlink href="integrations/guide/collect-more-metrics-from-the-sql-server-integration" tag=" SQL Server" >}}Collect more metrics from the SQL Server integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/collect-sql-server-custom-metrics" tag=" SQL Server" >}}Collect SQL Server custom metrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/use-wmi-to-collect-more-sql-server-performance-metrics" tag=" SQL Server" >}}Use WMI to collect more SQL Server performance metrics{{< /nextlink >}}
