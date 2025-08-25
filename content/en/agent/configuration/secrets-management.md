@@ -197,32 +197,7 @@ The backend secret is referenced in your Datadog Agent configuration file with `
 ```yaml
 # datadog.yaml
 
-api_key: "ENC[{secretHandle}]"
-```
-
-Azure Keyvault uses JSON to store multiple key-value pairs within a single secret. In the following example, assume there is an Azure secret named `MySecret`:
-
-```json
-{
-    "ddapikey": "SecretValue1",
-    "ddappkey": "SecretValue2",
-    "ddorgname": "SecretValue3"
-}
-```
-
-To reference a specific key within that secret, use a semicolon (`;`) to separate the secret name from the key. The notation in the `datadog.yaml` config file is `ENC[SecretName;SecretKey]`. 
-
-If this semicolon is not present, the entire JSON is treated as a plaintext value of the secret.
-When the semicolon is used, `SecretKey` refers to the specific JSON key whose value you want to retrieve from within `MySecret`:
-
-```yaml
-# datadog.yaml
-api_key: "ENC[MySecret;ddapikey]"
-app_key: "ENC[MySecret;ddappkey]"
-property3: "ENC[MySecret;ddorgname]"
-secret_backend_type: azure.keyvault
-secret_backend_config:
-  keyvaulturl: {keyVaultURL}
+api_key: "ENC[secretKeyNameInKeyVault]"
 ```
 
 [2000]: https://docs.microsoft.com/en-us/Azure/key-vault/secrets/quick-create-portal
