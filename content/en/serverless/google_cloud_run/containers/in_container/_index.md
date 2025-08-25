@@ -1,5 +1,5 @@
 ---
-title: In-Process Instrumentation
+title: In-Container Instrumentation
 type: multi-code-lang
 aliases:
   - /serverless/google_cloud_run/containers_in_process/
@@ -10,6 +10,6 @@ First, set up the **[Google Cloud Integration][1]** to collect metrics and logs 
 
 Then, instrument your application using one of the following guides:
 
-{{% container-languages path="in_process" %}}
+{{% container-languages path="in_container" %}}
 
 [1]: /integrations/google-cloud-platform/
