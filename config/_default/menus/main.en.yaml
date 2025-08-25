@@ -651,7 +651,7 @@ menu:
       identifier: otel-setup-ddot
       parent: otel_collect
       weight: 401
-    - name: Install the Collector
+    - name: Install the DDOT Collector
       url: /opentelemetry/setup/ddot_collector/install
       identifier: otel-setup-ddot-install
       parent: otel-setup-ddot
@@ -661,6 +661,11 @@ menu:
       identifier: otel-setup-ddot-custom
       parent: otel-setup-ddot
       weight: 4012
+    - name: Migrate to the DDOT Collector
+      url: /opentelemetry/migrate/ddot_collector
+      identifier: otel-setup-ddot-migrate
+      parent: otel-setup-ddot
+      weight: 4013
     - name: Other Setup Options
       url: /opentelemetry/setup/
       identifier: otel-setup-other
