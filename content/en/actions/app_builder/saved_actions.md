@@ -37,7 +37,7 @@ Use the _Saved Actions_ feature to store and reuse an action and its parameters.
 You can edit, clone, or delete your Saved Actions from the Action Catalog.
 
 To find a saved action:
-1. Navigate to the [**Action Catalog**][2].
+1. In Datadog, navigate to the [**Action Catalog**][2].
 1. Click **Saved Actions**. 
 1. Browse through the list of Saved Actions or use the search bar. Hover over the Saved Action you'd like to edit, clone, or delete.
 1. Click **Manage Saved Actions**. 
