@@ -87,6 +87,53 @@ When configuring a new Mobile Application test, use snippets to automatically po
 <br/>
   {{< img src="mobile_app_testing/mobile_app_snippets_2.png" alt="Screenshot of the left hand side of a mobile app test creation, showing the snippets examples" width="70%" >}}
 
+### Advanced options
+
+For iOS and Android applications, you can pass key-value pairs when creating a mobile test. This allows you to dynamically adjust app behavior, toggle features, or simulate different conditions without modifying your code. These configurations are available under the **Advanced Options** section:
+
+   {{< img src="mobile_app_testing/mobile_app_advanced.png" alt="Mobile app test creation page, highlighting the Advanced options drop-down." style="width:80%;" >}}
+
+**Available options**:
+
+Auto-accept alerts
+: When enabled, automatically accepts all OS system alerts during test execution.
+
+Allow application crash
+: When enabled, prevents the test from failing if an application crash is detected. You must include a restart application step after the expected crash to continue the test.
+
+Capture network resources (Android only)
+: When enabled, collects network requests and responses for each test step and displays them in the results. **Note**: This setting can impact application performance and could prevent the app from starting.
+
+Examples:
+
+  {{< tabs >}}
+  {{% tab "Android" %}}
+
+```json
+  "config": {
+    "initialApplicationArguments": {
+      "key1": "val1",
+      "key2": "val2"
+    }
+  } 
+```
+  
+  {{% /tab %}}
+  
+  {{% tab "iOS" %}}
+
+```json
+  "config": {
+    "initialApplicationArguments": {
+      "key1": "val1",
+      "key2": "val2"
+    }
+  } 
+```
+  
+  {{% /tab %}}
+  {{< /tabs >}}
+
 ## Devices
 
 On the device selection screen, you can choose to test mobile devices that are located in either Europe (EU) or the United States (US). 
