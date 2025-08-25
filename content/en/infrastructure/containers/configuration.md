@@ -200,7 +200,7 @@ Follow these steps to collect the custom resources that these CRDs define:
 
 1. In Datadog, open [Kubernetes Explorer][3]. On the left panel, under **Select Resources**, select [**Kubernetes > Custom Resources > Resource Definitions**][4].
 
-1. Locate the CRD that defines the custom resource you want to visualize in the explorer. Under the **Indexing** column, click **ENABLED** or **DISABLED**.
+1. Locate the CRD that defines the custom resource you want to visualize in the explorer. Under the **Indexing** column, click **ENABLED**.
 
    <div class="alert alert-info">If your CRD has multiple versions, you are prompted to select which version you want to configure indexing for.</div>
 
