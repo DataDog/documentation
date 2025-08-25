@@ -737,4 +737,4 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 [6]: /notebooks
 [7]: /monitors/types/cloud_cost
 [8]: https://app.datadoghq.com/cost/settings/accounts
-[9]: /cloud_cost_management
+[9]: /integrations/snowflake-web/#data-collected
