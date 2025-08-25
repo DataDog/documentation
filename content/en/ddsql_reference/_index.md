@@ -420,11 +420,11 @@ FROM
 
 All regular expression (regex) functions use the International Components for Unicode (ICU) flavor:
 
-- [Metacharacters](https://unicode-org.github.io/icu/userguide/strings/regexp.html#regular-expression-metacharacters)
-- [Operators](https://unicode-org.github.io/icu/userguide/strings/regexp.html#regular-expression-operators)
-- [Set Expressions (Character Classes)](https://unicode-org.github.io/icu/userguide/strings/regexp.html#set-expressions-character-classes)
-- [Flag Options for in-pattern flags](https://unicode-org.github.io/icu/userguide/strings/regexp.html#flag-options). Refer to the [flags section below](#function-level-flags) for function-level flags.
-- [Find and Replace (using capture groups)](https://unicode-org.github.io/icu/userguide/strings/regexp.html#find-and-replace)
+- [Metacharacters][5]
+- [Operators][6]
+- [Set Expressions (Character Classes)][7]
+- [Flag Options for in-pattern flags][8]. Refer to the [flags section below](#function-level-flags) for function-level flags.
+- [Find and Replace (using capture groups)][9]
 
 ### Functions
 
@@ -484,7 +484,7 @@ You can use the following flags with [regular expression functions](#regular-exp
 : Newline-sensitive matching
 
 `g`
-: Global
+: Global; replace _all_ matching substrings rather than only the first one
 
 {{% collapse-content title="Examples" level="h3" %}}
 
@@ -646,3 +646,8 @@ ON da.tags = de.tags -- for a specific tag: da.tags->'app' = de.tags->'app'
 [2]: https://www.postgresql.org/docs/current/functions-window.html
 [3]: https://www.postgresql.org/docs/current/functions-json.html
 [4]: /ddsql_editor/
+[5]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#regular-expression-metacharacters
+[6]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#regular-expression-operators
+[7]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#set-expressions-character-classes
+[8]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#flag-options
+[9]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#find-and-replace
