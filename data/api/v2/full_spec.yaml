@@ -1403,7 +1403,7 @@ components:
       x-enum-varnames:
       - ACCOUNT
     AWSAccountUpdateRequest:
-      description: AWS Account Update Request body.
+      description: AWS Account update request body.
       properties:
         data:
           $ref: '#/components/schemas/AWSAccountUpdateRequestData'

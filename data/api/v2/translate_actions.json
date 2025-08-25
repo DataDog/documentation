@@ -861,7 +861,7 @@
     "description": "Update an AWS Account Integration Config by config ID.",
     "summary": "Update an AWS integration",
     "request_description": "",
-    "request_schema_description": "AWS Account Update Request body."
+    "request_schema_description": "AWS Account update request body."
   },
   "ListAWSNamespaces": {
     "description": "Get a list of available AWS CloudWatch namespaces that can send metrics to Datadog.",
