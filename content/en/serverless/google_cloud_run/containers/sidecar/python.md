@@ -81,7 +81,9 @@ logger.info('Hello world!')
 
    For more information, see [Correlating Python Logs and Traces][3].
 
-4. **Send custom metrics**.
+4. {{% gcr-service-label %}}
+
+5. **Send custom metrics**.
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5].
 
