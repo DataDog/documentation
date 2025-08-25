@@ -127,7 +127,7 @@ To copy an app layout across organizations or back up the app, click **Settings*
 
 To copy the app to another organization:
 1. Create an app. 
-1. Click the **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon and select **Switch to JSON**. 
+1. Click **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} and select **Switch to JSON**. 
 1. Replace the existing JSON with the JSON that you previously copied. 
 
 The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
