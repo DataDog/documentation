@@ -3,6 +3,8 @@ title: Instrumenting a PHP Cloud Run Container In-Process
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 70
+aliases:
+  - /serverless/google_cloud_run/containers/in_process/php
 further_reading:
   - link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/php/'
     tag: 'Documentation'
