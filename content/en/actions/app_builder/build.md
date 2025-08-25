@@ -119,7 +119,7 @@ You can perform the following operations:
 
 ### Edit an app
 
-To edit an app with JSON, click **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
+To edit an app with JSON, click **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
 
 ### Export an app
 
