@@ -50897,6 +50897,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -51061,6 +51067,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
