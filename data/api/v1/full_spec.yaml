@@ -15933,6 +15933,10 @@ components:
             type: string
           description: Variables to replace in the test.
           type: object
+        version:
+          description: The version number of the Synthetic test version to trigger.
+          format: int64
+          type: integer
       required:
       - public_id
       type: object
