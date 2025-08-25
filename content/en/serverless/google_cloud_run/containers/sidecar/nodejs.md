@@ -86,7 +86,9 @@ logger.info(`Hello world!`);
 
    For more information, see [Correlating Node.js Logs and Traces][2].
 
-4. **Send custom metrics**.
+4. {{% gcr-service-label %}}
+
+5. **Send custom metrics**.
 
    To send custom metrics, [view code examples][3].
 
