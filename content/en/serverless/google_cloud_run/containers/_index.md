@@ -7,9 +7,9 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/'
     tag: 'Blog'
     text: 'Collect traces, logs, and custom metrics from Cloud Run services'
-  - link: "/serverless/google_cloud_run/containers/in_process/"
+  - link: "/serverless/google_cloud_run/containers/in_container/"
     tag: 'Documentation'
-    text: 'Instrument your container with the in-process approach'
+    text: 'Instrument your container with the in-container approach'
   - link: "/serverless/google_cloud_run/containers/sidecar/"
     tag: 'Documentation'
     text: 'Instrument your container with the sidecar approach'
@@ -22,12 +22,12 @@ To instrument your Google Cloud Run containers with Datadog, choose one of two o
 
 {{% gcr-container-options %}}
 
-- [**In-process**][1]: Wraps your application container with the Datadog Agent. Choose this option for a simpler setup, lower cost overhead, and direct log piping.
+- [**In-Container**][1]: Wraps your application container with the Datadog Agent. Choose this option for a simpler setup, lower cost overhead, and direct log piping.
 - [**Sidecar**][2]: Deploys the Datadog Agent in a separate container alongside your app container. Choose this option if you have multiple containers in a single service, if you prefer strict isolation of the Datadog Agent, or if you have performance-sensitive workloads.
 
-## Comparison: in-process versus sidecar instrumentation
+## Comparison: in-container versus sidecar instrumentation
 
-| Aspect                        | In-process                                               | Sidecar                                                                                                                                                      |
+| Aspect                        | In-container                                               | Sidecar                                                                                                                                                      |
 |-------------------------------|----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Deployment                    | One container (your app, wrapped with the Datadog Agent) | Two containers ( your app, Datadog Agent)                                                                                                                    |
 | Image changes                 | Increases app image size.                                | No change to app image.                                                                                                                                      |
@@ -41,5 +41,5 @@ To instrument your Google Cloud Run containers with Datadog, choose one of two o
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /serverless/google_cloud_run/containers/in_process
+[1]: /serverless/google_cloud_run/containers/in_container
 [2]: /serverless/google_cloud_run/containers/sidecar
