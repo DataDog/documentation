@@ -52,6 +52,13 @@ If everything is configured correctly, a green check mark is displayed in Datado
 [1]: /integrations/github/#github-apps-1
 [2]: https://app.datadoghq.com/integrations/github/configuration
 {{% /tab %}}
+{{% tab "Gitlab" %}}
+
+Follow instructions in the [Datadog Source Code Integration Guide][1] on how to connect your Gitlab repositories to Datadog.
+
+[1]: /integrations/guide/source-code-integration/?tab=gitlabsaasonprem#connect-your-git-repositories-to-datadog
+
+{{% /tab %}}
 {{< /tabs >}}
 
 See [Data Collected][1] for details on what data is collected from your source code provider.
@@ -312,6 +319,17 @@ steps:
   env:
     DD_API_KEY: ${{ secrets.DD_API_KEY }}
     DD_SITE: {{< region-param key="dd_site" >}}
+</code>
+</pre>
+{{% /tab %}}
+{{% tab "Gitlab" %}}
+<pre>
+<code class="language-yaml" data-lang="yaml">
+test:
+  stage: test
+  script:
+    - ... # run your tests and generate coverage reports
+    - datadog-ci coverage upload . # make sure to add the DD_API_KEY CI/CD variable
 </code>
 </pre>
 {{% /tab %}}
