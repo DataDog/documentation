@@ -31,14 +31,23 @@ For DBM correlation to work, your database spans must include the following attr
 |----------------|-----------|:------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
 | `db.system`    | Yes       | The database technology.                                                                                          | `postgres`, `mysql`, `sqlserver`        |
 | `db.statement` | Yes       | The raw SQL query text. Datadog uses this to set the span's resource name after obfuscation and normalization.    | `SELECT * FROM users WHERE id = ?`      |
-| `span.type`    | Yes       | **(Datadog-specific)** The type of span. This is required for the backend to identify and process database spans. | `sql`, `postgres`, `mysql`, `sql.query` |
+| `span.type`    | Yes       | **(Datadog-specific)** Identifies and processes database spans. Usually derived automatically by the OpenTelemetry SDK or Datadog Agent. Only set manually when spans are created directly with the SDK. | `sql`, `postgres`, `mysql`, `sql.query` |
 | `db.name`      | No        | The logical database or schema name being queried.                                                                | `user_accounts`                         |
 
-<div class="alert alert-info">The <code>span.type</code> attribute is a Datadog-specific convention required for the backend to identify and process database spans. It is not part of the standard OpenTelemetry semantic conventions.</div>
+<div class="alert alert-info">
+The <code>span.type</code> attribute is a Datadog-specific convention for identifying and processing database spans. 
+When using OpenTelemetry auto-instrumentation or the Datadog Agent, this attribute is set automatically. 
+Only add it manually if you are instrumenting spans directly with the SDK.
+</div>
 
-#### Auto instrumentation
+#### Using auto instrumentation
 
-If you are using an OpenTelemetry auto-instrumentation library, you can add required attributes without changing your application code. Most OpenTelemetry auto-instrumentation libraries already add `db.system` and `db.statement`. For DBM correlation, you typically only need to add the Datadog-specific `span.type` attribute. You can do this by using the OpenTelemetry Collector's `attributes` processor to enrich your spans.
+To get started, instrument your application using the appropriate OpenTelemetry auto-instrumentation library for your language. For setup instructions, see the official [OpenTelemetry instrumentation documentation][4].
+
+These libraries automatically add the required `db.system` and `db.statement` attributes. The Datadog Agent or SDK then derives `span.type` automatically, so no manual attribute configuration is needed.
+
+{{% collapse-content title="Set attributes manually (advanced)" level="h4" %}}
+If your environment involves a custom database client or spans not recognized by the library, you can enrich them using the OpenTelemetry Collector’s `attributes` processor.
 
 For example, you can add `span.type: sql` to any span that has the `db.system` attribute:
 
@@ -60,8 +69,9 @@ service:
       # Add the processor to your traces pipeline
       processors: [..., attributes/add_span_type, ...]
 ```
+{{% /collapse-content %}}
 
-#### Manual instrumentation
+#### Using manual instrumentation
 
 If you are manually creating spans with the OpenTelemetry SDK, you can set the attributes directly in your code. For more information, see the [OpenTelemetry documentation][4].
 
@@ -145,7 +155,7 @@ After your application is sending traces, you can see the correlation in the APM
 
 If you don't see the expected correlation between your APM traces and DBM, it's typically due to a missing or incorrect configuration. Check the following common causes:
 
-- **All required attributes (`db.system`, `db.statement`, `span.type`) must be present** on the database span.
+- **Missing attributes**: The database span must contain `db.system` and `db.statement`. The `span.type` attribute is also required but is typically derived automatically by Datadog.
 - **Incorrect unified service tagging**: The `service` tag on your traces must match the `service` tag on your database host metrics. Verify that [unified service tagging][1] is configured correctly.
 - **The SQL query may not be parsable**: The correlation relies on Datadog's ability to parse the SQL query from the `db.statement` attribute. If the query uses non-standard or complex syntax, parsing may fail. If you suspect this is the case, [contact Datadog support][5] for assistance.
 - **The correct feature gates must be enabled** for your specific trace ingestion path as described in the setup steps.
