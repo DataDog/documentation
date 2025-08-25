@@ -418,7 +418,7 @@ FROM
 
 ### Flavor
 
-All regular expression functions use the ICU (International Components for Unicode) flavor:
+All regular expression (regex) functions use the International Components for Unicode (ICU) flavor:
 
 - [Metacharacters](https://unicode-org.github.io/icu/userguide/strings/regexp.html#regular-expression-metacharacters)
 - [Operators](https://unicode-org.github.io/icu/userguide/strings/regexp.html#regular-expression-operators)
