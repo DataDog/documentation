@@ -1791,20 +1791,21 @@ components:
       - $ref: '#/components/schemas/AWSNamespaceFiltersIncludeOnly'
     AWSNamespaceFiltersExcludeOnly:
       description: 'Exclude only these namespaces from metrics collection. Defaults
-        to `["AWS/SQS", "AWS/ElasticMapReduce"]`.
+        to `["AWS/SQS", "AWS/ElasticMapReduce", "AWS/Usage"]`.
 
-        `AWS/SQS` and `AWS/ElasticMapReduce` are excluded by default to reduce your
-        AWS CloudWatch costs from `GetMetricData` API calls.'
+        `AWS/SQS`, `AWS/ElasticMapReduce`, and `AWS/Usage` are excluded by default
+        to reduce your AWS CloudWatch costs from `GetMetricData` API calls.'
       properties:
         exclude_only:
           description: 'Exclude only these namespaces from metrics collection. Defaults
-            to `["AWS/SQS", "AWS/ElasticMapReduce"]`.
+            to `["AWS/SQS", "AWS/ElasticMapReduce", "AWS/Usage"]`.
 
-            `AWS/SQS` and `AWS/ElasticMapReduce` are excluded by default to reduce
-            your AWS CloudWatch costs from `GetMetricData` API calls.'
+            `AWS/SQS`, `AWS/ElasticMapReduce`, and `AWS/Usage` are excluded by default
+            to reduce your AWS CloudWatch costs from `GetMetricData` API calls.'
           example:
           - AWS/SQS
           - AWS/ElasticMapReduce
+          - AWS/Usage
           items:
             example: AWS/SQS
             type: string
