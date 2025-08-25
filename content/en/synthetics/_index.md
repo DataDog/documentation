@@ -109,6 +109,24 @@ Optimize your test suite by [ensuring that your application's most critical work
 
 Use [Version History in Synthetic Monitoring][23] to run a previous version of a test, or clone a version to create a new Synthetic Monitoring test.
 
+## Synthetic test monitors
+
+Use and enrich Synthetic monitors to send notifications when a Synthetic Monitoring test is failing. The following use cases are available:
+
+Pre-filled monitor messages
+: Pre-filled monitor messages provide a structured starting point for Synthetic test alerts. Each message includes a standardized title, summary, and footer containing test metadata, making it easier to understand the alert at a glance.
+
+Template variables
+: Template variables let you inject test-specific data into monitor notifications dynamically. These variables pull from the `synthetics.attributes` object.
+
+Advanced usage
+: Advanced usage includes techniques for surfacing deeper test insights or structuring complex messages using handlebars templating.
+
+Conditional alerting
+: Conditional alerting allows you to change the content of a monitor notification based on specific test results or failure conditions.
+
+For more information, see [Synthetic Monitoring enhanced monitor messages and notifications][24].
+
 ## Ready to start?
 
 See [Getting Started with Synthetic Monitoring][18] for instructions on creating your first Synthetic test and monitoring your web applications. Then, explore [Getting Started with Private Locations][19] for instructions on creating your private location and running Synthetic tests with your private location.
@@ -141,3 +159,4 @@ See [Getting Started with Synthetic Monitoring][18] for instructions on creating
 [21]: /mobile_testing
 [22]: /synthetics/test_coverage
 [23]: /synthetics/guide/version_history/
+[24]: /monitors/types/synthetic_monitoring
