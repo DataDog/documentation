@@ -65,6 +65,8 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
 {{% gcr-configure%}}
 
+5. {{% gcr-service-label %}}
+
 6. **Send custom metrics**.
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5].

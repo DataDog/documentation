@@ -73,6 +73,8 @@ logger.info(`Hello world!`);
 
 {{% gcr-configure %}}
 
+5. {{% gcr-service-label %}}
+
 6. **Send custom metrics**.
 
    To send custom metrics, [view code examples][3].
