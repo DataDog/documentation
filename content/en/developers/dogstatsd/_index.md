@@ -207,6 +207,76 @@ To gather custom metrics with [DogStatsD][1] with helm:
 {{% /tab %}}
 {{< /tabs >}}
 
+### Origin detection
+
+Datadog Agent v6.10.0 supports _origin detection_, which allows DogStatsD to detect where the container metrics come from and automatically tag metrics. When origin detection is enabled, all metrics received through UDP are tagged by the same pod 
+tags as Autodiscovery metrics.
+
+#### In a DogStatsD client
+
+Origin detection is enabled by default in all DogStatsD clients.  
+
+To **disable** origin detection in a client, perform one of the following actions:
+- Set the environment variable `DD_ORIGIN_DETECTION_ENABLED=false` 
+- Configure the DogStatsD library to disable origin detection. For instructions, see the [documentation for your specific DogStatsD library][10].
+
+#### In the Datadog Agent
+Origin detection is not enabled by default in the Datadog Agent. To **enable** origin detection in the Datadog Agent, set the `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT` environment variable to `true`.
+
+<div class="alert alert-info">Origin detection is not supported for Fargate environments.</div>
+
+#### How origins are detected
+
+Origin detection can be achieved in a number of ways. Origin detection through cgroups is enabled by default. Origin detection over UDP or `DD_EXTERNAL_ENV` requires configuration.
+
+{{< tabs >}}
+{{% tab "Cgroups" %}}
+On Linux, the container ID can be extracted from `procfs` entries related to `cgroups`. The client reads from `/proc/self/cgroup` or `/proc/self/mountinfo` to attempt to parse the container ID. 
+
+In cgroup v2, the container ID can be inferred by resolving the cgroup path from `/proc/self/cgroup`, combining it with the cgroup mount point from `/proc/self/mountinfo`. The resulting directory's inode is sent to the Datadog Agent. If the Datadog Agent is on the same node as the client, this information can be used to identify the pod's UID.
+{{% /tab %}}
+
+{{% tab "UDP" %}}
+To enable origin detection over UDP, add the following lines to your application manifest:
+
+```yaml
+env:
+- name: DD_ENTITY_ID
+    valueFrom:
+      fieldRef:
+        fieldPath: metadata.uid
+```
+
+The DogStatsD client attaches an internal tag, `entity_id`. The value of this tag is the content of the `DD_ENTITY_ID` environment variable, which is the pod's UID. 
+
+<div class="alert alert-info">For UDP, <code>pod_name</code> tags are not added by default to avoid creating too many <a href="/metrics/custom_metrics/">custom metrics</a>.</div>
+{{% /tab %}}
+
+{{% tab "DD_EXTERNAL_ENV" %}}
+Add the following label to your pod:
+
+```
+admission.datadoghq.com/enabled: "true"
+```
+
+If your pod has this label, the [Admissions Controller][1] injects an environment variable, `DD_EXTERNAL_ENV`. The value of this variable is sent in a field with the metric, which can be used by the Datadog Agent to determine the metric's origin.
+
+[1]: /containers/cluster_agent/admission_controller
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Tag cardinality
+
+Read [Assigning Tags: Tags Cardinality][11] for more information about tag cardinality.
+
+##### Globally
+
+You can specify tag cardinality globally by setting the `DD_CARDINALITY` environment variable, or by passing a `'cardinality'` field to the constructor. 
+
+##### Per metric
+
+You can specify tag cardinality per metric by passing the value in the `cardinality` parameter. Valid values for this parameter are `"none"`, `"low"`, `"orchestrator"` or `"high"`.
+
 ### DogStatsD client
 
 Install the DogStatsD client library for your preferred language and configure it to match the address and port of the Datadog Agent DogStatsD server.
@@ -551,3 +621,5 @@ If you're interested in learning more about the datagram format used by DogStats
 [7]: /developers/service_checks/dogstatsd_service_checks_submission/
 [8]: /getting_started/tagging/unified_service_tagging
 [9]: /developers/dogstatsd/datagram_shell/
+[10]: /developers/community/libraries/
+[11]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#tags-cardinality
