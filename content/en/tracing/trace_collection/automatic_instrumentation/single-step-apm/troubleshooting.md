@@ -12,16 +12,12 @@ Single Step Instrumentation (SSI) allows you to instrument applications at the h
 
 ## Troubleshooting methods
 
-### Troubleshoot injection in Datadog
+You can troubleshoot injection issues in two ways: by using Fleet Automation in Datadog or by manually verifying at the container level.
 
-{{< callout url="https://google.com" d_toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger" btn_hidden="true" header="Join the Preview!">}}
-This feature is in preview for:
-<ul>
-<li>Languages: Python, Java, Node.js, Ruby, PHP, .NET</li>
-<li>Environments: Linux hosts, containers, Kubernetes</li>
-<li>Datadog Agent v7.68.2+</li>
-</ul>
-<p>To enable it, contact support or turn on the <code>apm-ssi-troubleshooting</code> feature flag.<p>
+### Troubleshoot injection in Datadog Fleet Automation
+
+{{< callout url="https://google.com" d_toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger" btn_hidden="true" header="false">}}
+This feature is available in public preview. 
 {{< /callout >}}
 
 Using Datadog, you can identify and troubleshoot instrumentation issues across your infrastructure. You can see information like:
@@ -30,9 +26,18 @@ Using Datadog, you can identify and troubleshoot instrumentation issues across y
 - Which services were instrumented successfully
 - Process-level detail to help debug injection failures
 
-Start with the UI to spot issues across multiple hosts or services before investigating logs or containers directly.
+#### Prerequisites
+
+Instrumentation insights are available for:
+
+* Languages: Python, Java, Node.js, Ruby, PHP, .NET
+* Environments: Linux hosts, containers, Kubernetes
+* Datadog Agent v7.68.2+
+
+#### View instrumentation insights 
 
 To access instrumentation insights in Datadog:
+
 1. Navigate to [Fleet Automation][9].
 1. Use facets to filter down to relevant hosts:
    - `single_step_instrumentation` shows which hosts have SSI enabled or disabled.
@@ -42,19 +47,6 @@ To access instrumentation insights in Datadog:
 1. If SSI is enabled on the host, the tab shows:
    - A banner with the message: "Single Step Instrumentation is enabled on this host."
    - An **SDK Installations** section if there are issues to troubleshoot.
-
-#### Common issues and solutions
-
-The **SDK Installations** section lists processes that failed injection, with a reason and recommended next steps. Some common examples:
-
-| Issue | Status | Reason | Suggested action |
-|-------|--------|--------|------------------|
-| Other Agent already attached | Injection failed | Another tracer is already loaded in the process | Remove existing tracer and restart the process, or disable SSI for this service. |
-| Unsupported runtime version | Injection failed | For example, Node.js 16.14.2 detected (minimum: 18.x) | Upgrade to a supported runtime version. |
-| Permission denied | Injection failed | Insufficient privileges to inject into process | Ensure the Agent has sufficient permissions. Check container security policies and capabilities. |
-| Process not showing in APM despite SSI being enabled | — | — | Check the SDK Installations table for a failure reason. Ensure the process is long-running and supported. |
-
-If a service is not instrumented and no failure reason is listed, check whether the process exited quickly or used a language that isn't yet supported.
 
 ### Manually verify injection in the application container
 
@@ -129,9 +121,9 @@ The container's behavior is expected and safe; the executable configures the env
 
 Datadog adheres to security best practices and is working with security vendors to allow this container.
 
-### Environments with strict Pod Security settings
+### Environments with strict pod security settings
 
-If Pod Security Rules block the Datadog init container, you may see errors like:
+If pod security rules block the Datadog init container, you may see errors like:
 ```
 Privilege escalation container is not allowed or violates PodSecurity "restricted: latest": allowPrivilegeEscalation is false
 ```
