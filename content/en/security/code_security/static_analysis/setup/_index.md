@@ -146,6 +146,10 @@ There are three levels of configuration:
 * Repo Level Configuration (Datadog)
 * Repo Level Configuration (Repo File)
 
+<div class="alert alert-warning">
+By default, with no configuration defined (either at org or repo level), Datadog uses a default configuration with all default rules enabled. If you define an org-level configuration without default rules, default rules will not be used and you have to explicit enable them.
+</div>
+
 All three locations use the same YAML format for configuration. These configurations are merged **in order** using an overlay/patch merge method. For example, lets look at these two sample YAML files:
 
 ```yaml
