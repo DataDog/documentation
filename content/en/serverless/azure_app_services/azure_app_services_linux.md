@@ -167,7 +167,7 @@ Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFile
 : **Value**: false <br>
 When `true`, log collection is automatically configured for the additional file path: `/home/LogFiles/*$COMPUTERNAME*.log`
 
-<div class="alert alert-info">If your application has multiple instances, make sure that your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicated logs from multiple instances reading the same file. Enabling this feature variable will also prevent <code>DD_SERVERLESS_LOG_PATH</code> from being set. This is to prevent duplicate logs being ingested.</div>
+<div class="alert alert-info">If your application has multiple instances, make sure your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicate logs from multiple instances that are reading the same file. Enabling this feature variable also prevents <code>DD_SERVERLESS_LOG_PATH</code> from being set. This is to prevent ingesting duplicate logs.</div>
 
 `WEBSITES_ENABLE_APP_SERVICE_STORAGE`
 : **Value**: `true`<br>
