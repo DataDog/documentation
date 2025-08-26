@@ -686,7 +686,7 @@ WHERE tags->'region' = 'us-east-1' -- region is a tag, not a column
 GROUP BY instance_type
 ```
 
-Tags are key-value pairs where each key can have zero, one, or multiple tag values corresponding to it. When accessed, the tag value returns a single string, containing _all_ corresponding values. When the data had multiple tag values for the same tag key, these will be represented as a sorted, comma-separated string. For example:
+Tags are key-value pairs where each key can have zero, one, or multiple tag values corresponding to it. When accessed, the tag value returns a single string, containing _all_ corresponding values. When the data has multiple tag values for the same tag key, they are represented as a sorted, comma-separated string. For example:
 
 ```sql
 SELECT tags->'team', instance_type, architecture, COUNT(*) as instance_count
