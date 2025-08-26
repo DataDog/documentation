@@ -1,8 +1,10 @@
 ---
-title: Instrumenting a Java Cloud Run Container In-Process
+title: Instrumenting a Java Cloud Run Container In-Container
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 40
+aliases:
+  - /serverless/google_cloud_run/containers/in_process/java
 further_reading:
   - link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/'
     tag: 'Documentation'
@@ -14,7 +16,7 @@ further_reading:
 
 ## Setup
 
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-process/java">available on GitHub</a>.</div>
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/java">available on GitHub</a>.</div>
 
 1. **Install the Datadog Java tracer**.
 
@@ -86,7 +88,7 @@ logger.info("Hello World!");
 
    To send custom metrics, [install the DogStatsD client][3] and [view code examples][4].
 
-{{% gcr-env-vars instrumentationMethod="in-process" language="java" %}}
+{{% gcr-env-vars instrumentationMethod="in-container" language="java" %}}
 
 ## Troubleshooting
 
