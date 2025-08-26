@@ -97,7 +97,7 @@ By default, the DDOT Collector ships with the following Collector components. Yo
 - [probabilisticsamplerprocessor][32]
 - [resourcedetectionprocessor][33]
 - [resourceprocessor][34]
-- [routingprocessor][35]
+- routingprocessor (deprecated and removed in v7.71.0; use the [routingconnector][56] instead)
 - [tailsamplingprocessor][36]
 - [transformprocessor][37]
 
@@ -206,7 +206,6 @@ This guide helps you migrate from an existing OpenTelemetry Collector setup to t
 [32]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
 [33]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/resourcedetectionprocessor/README.md
 [34]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/resourceprocessor/README.md
-[35]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/routingprocessor
 [36]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
 [37]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/transformprocessor/README.md
 [38]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/README.md
