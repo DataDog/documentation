@@ -33,7 +33,7 @@ When Cloud SIEM processes a log, the log's IP and domain attributes are evaluate
     - If a match is found, Datadog enriches the log with the threat intelligence metadata from the table (for example, `category`, `source`, `first_seen`, `last_seen`, `confidence`). The enriched fields are then available for search, analytics, and detection rules.
 
 **Notes**:
-- Cloud SIEM evaluates logs in real time and can use both Datadog-curated threat intelligence and your own reference tables.
+- Cloud SIEM evaluates logs in real time and uses both Datadog-curated threat intelligence and your own reference tables.
 - Reference tables are the mechanism for storing and joining your custom IoCs with logs and detections.
 
 ### Storing indicators of compromise in reference tables
