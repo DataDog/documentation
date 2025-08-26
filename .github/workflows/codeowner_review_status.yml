@@ -2,7 +2,7 @@ name: Documentation Team Approval Check
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize, review_requested]
   pull_request_review:
     types: [submitted, dismissed]
 
