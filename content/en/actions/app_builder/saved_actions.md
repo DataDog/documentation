@@ -38,14 +38,14 @@ Use the _Saved Actions_ feature to save a copy of an action for reuse. You can i
 
 You can edit, clone, or delete your Saved Actions from the Action Catalog.
 
+<div class="alert alert-info">If you did not create an action, you cannot delete it or edit it directly. Instead, select the <b>Clone</b> {{< img src="icons/clone-alert-blue.png" inline="true" style="width:14px;">}} icon to copy the action and make your configuration changes.</div>
+
 To find a saved action:
 1. In Datadog, navigate to the [**Action Catalog**][2].
 1. Click **Saved Actions**. 
 1. Browse through the list of Saved Actions or use the search bar. Hover over the Saved Action you'd like to edit, clone, or delete.
 1. Click **Manage Saved Actions**. 
 1. Select the icon to edit {{< img src="icons/pencil.png" inline="true" style="width:14px;">}}, clone {{< img src="icons/clone.png" inline="true" style="width:14px;">}}, or delete {{< img src="icons/delete.png" inline="true" style="width:14px;">}} the saved action.
-
-**Note:** If you did not create an action, you cannot delete it or edit it directly. Instead, select the **Clone** {{< img src="icons/clone.png" inline="true" style="width:14px;">}}icon to copy the action and make your configuration changes. 
 
 ## Further Reading
 
