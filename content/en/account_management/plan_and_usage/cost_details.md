@@ -20,7 +20,7 @@ You can break down your costs by sub-organization and by product to:
 - Allocate costs according to their source
 - Gain insight into how costs are tracking
 
-To gain visibility into daily Datadog spending in Cloud Cost Explorer, dashboards and [cost monitors][7], see [Datadog Costs in Cloud Cost Management][8].
+For visibility into daily Datadog spending in Cloud Cost Explorer, dashboards, and [cost monitors][7], see [Datadog Costs][8] under Cloud Cost Management.
 
 ### Permissions
 
