@@ -14,10 +14,10 @@ further_reading:
 &bull; If you are a GovCloud customer whose only requirement is data residency in the GovCloud (US1-FED) data center, you <strong>may</strong> use the DDOT Collector.</div>
 {{< /site-region >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/ddot-for-linux-based-hosts-or-vms/" btn_hidden="false" >}}
+{{< callout btn_hidden="true" >}}
 The DDOT Collector for Kubernetes is <strong>Generally Available</strong>. You can get started by following the <a href="#get-started">instructions below</a>.
 <br><br>
-Deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is <strong>in Preview</strong>. To get started, follow the [Linux documentation][57].
+Deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is <strong>in Preview</strong>. To get started, follow the <a href="/opentelemetry/setup/ddot_collector/install/linux">Linux documentation</a>.
 {{< /callout >}}
 
 ## Overview
@@ -228,4 +228,3 @@ This guide helps you migrate from an existing OpenTelemetry Collector setup to t
 [54]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [55]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/loadbalancingexporter/README.md
 [56]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/routingconnector/README.md
-[57]: /opentelemetry/setup/ddot_collector/install/linux

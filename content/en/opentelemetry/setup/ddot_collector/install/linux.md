@@ -282,23 +282,15 @@ public String getDate() {
 
 ### Configure the application
 
-Your application container must send data to the DDOT Collector on the same host. Since the Collector runs as a DaemonSet, you need to specify the local host as the OTLP endpoint.
+Your application container must send data to the DDOT Collector on the same host. Ensure that the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable is set on your application.
 
-If the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable is not already set, add it to your application's Deployment manifest file:
-   {{< code-block lang="yaml" filename="deployment.yaml" disable_copy="true" collapsible="true" >}}
-env:
-  ...
-  - name: HOST_IP
-    valueFrom:
-     fieldRef:
-        fieldPath: status.hostIP
-  - name: OTLP_GRPC_PORT
-    value: "4317"
-  - name: OTEL_EXPORTER_OTLP_ENDPOINT
-    value: 'http://$(HOST_IP):$(OTLP_GRPC_PORT)'
-  - name: OTEL_EXPORTER_OTLP_PROTOCOL
-    value: 'grpc'
-   {{< /code-block >}}
+In the example application, this is done in `run-otel-local.sh`:
+{{< code-block lang="bash" filename="run-otel-local.sh" disable_copy="true" collapsible="true" >}}
+export OTEL_METRICS_EXPORTER="otlp"
+export OTEL_LOGS_EXPORTER="otlp"
+export OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4317"
+export OTEL_EXPORTER_OTLP_PROTOCOL="grpc"
+{{< /code-block >}}
 
 ### Correlate observability data
 
@@ -306,40 +298,16 @@ env:
 
 Unified service tagging ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
 
-In containerized environments, `env`, `service`, and `version` are set through the OpenTelemetry Resource Attributes environment variables or Kubernetes labels on your deployments and pods. The DDOT detects this tagging configuration and applies it to the data it collects from containers.
+In bare-metal environments, `env`, `service`, and `version` are set through the OpenTelemetry Resource Attributes environment variables. The DDOT Collector detects this tagging configuration and applies it to the data it collects from applications.
 
-To get the full range of unified service tagging, add **both** the environment variables and the deployment/pod labels:
-
-{{< code-block lang="yaml" filename="deployment.yaml" disable_copy="true" collapsible="true" >}}
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    tags.datadoghq.com/env: "<ENV>"
-    tags.datadoghq.com/service: "<SERVICE>"
-    tags.datadoghq.com/version: "<VERSION>"
-...
-template:
-  metadata:
-    labels:
-      tags.datadoghq.com/env: "<ENV>"
-      tags.datadoghq.com/service: "<SERVICE>"
-      tags.datadoghq.com/version: "<VERSION>"
-  containers:
-  -  ...
-     env:
-      - name: OTEL_SERVICE_NAME
-        value: "<SERVICE>"
-      - name: OTEL_RESOURCE_ATTRIBUTES
-        value: >-
-          service.name=$(OTEL_SERVICE_NAME),
-          service.version=<VERSION>,
-          deployment.environment.name=<ENV>
+In the example application, this is done in `run-otel-local.sh`:
+{{< code-block lang="bash" filename="run-otel-local.sh" disable_copy="true" collapsible="true" >}}
+export OTEL_RESOURCE_ATTRIBUTES="service.name=my-calendar-service,service.version=1.0,deployment.environment.name=otel-test,host.name=calendar-host"
 {{< /code-block >}}
 
 ### Run the application
 
-Redeploy your application to apply the changes made in the deployment manifest. Once the updated configuration is active, Unified Service Tagging will be fully enabled for your metrics, traces, and logs.
+Redeploy your application to apply the changes made in your environment variables. Once the updated configuration is active, Unified Service Tagging will be fully enabled for your metrics, traces, and logs.
 
 ## Explore observability data in Datadog
 
