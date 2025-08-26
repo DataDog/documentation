@@ -1,5 +1,9 @@
 ---
 title: Integrations
+further_reading:
+- link: "/service_management/incident_management/integrations"
+  tag: "Documentation"
+  text: "Incident Integrations"
 ---
 
 ## Overview
@@ -143,6 +147,10 @@ In addition to integrating with Slack and Microsoft Teams, Incident Management a
 - [Statuspage][14] to create and update Statuspage incidents.
 - [ServiceNow][15] to create a ServiceNow ticket for an incident.
 - [Zoom][16] to create Zoom meetings for an incident.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/integrations
 [2]: https://app.datadoghq.com/incidents/settings#Integrations
