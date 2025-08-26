@@ -677,7 +677,7 @@ ORDER BY value DESC;{{< /code-block >}}
 
 ## Tags
 
-DDSQL exposes tags as an `hstore` type, which you can query using the PostgreSQL arrow operator. For example:
+DDSQL exposes tags as an `hstore` type, which is inspired by PostgreSQL. You can access the values for specific tag keys using the PostgreSQL arrow operator. For example:
 
 ```sql
 SELECT instance_type, count(instance_type)
@@ -686,7 +686,15 @@ WHERE tags->'region' = 'us-east-1' -- region is a tag, not a column
 GROUP BY instance_type
 ```
 
-Tags are key-value pairs where each key can have zero, one, or multiple values. When accessed, the tag value returns a string containing all corresponding values.
+Tags are key-value pairs where each key can have zero, one, or multiple tag values corresponding to it. When accessed, the tag value returns a single string, containing _all_ corresponding values. When the data had multiple tag values for the same tag key, these will be represented as a sorted, comma-separated string. For example:
+
+```sql
+SELECT tags->'team', instance_type, architecture, COUNT(*) as instance_count
+FROM aws.ec2_instance
+WHERE tags->'team' = 'compute_provisioning,database_ops'
+GROUP BY tags->'team', instance_type, architecture
+ORDER BY instance_count DESC
+```
 
 You can also compare tag values as strings or entire tag sets:
 
