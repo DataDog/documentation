@@ -7,7 +7,7 @@ disable_toc: false
 further_reading:
 - link: "/actions/actions_catalog/"
   tag: "Documentation"
-  text: "Actions Catalog"
+  text: "Action Catalog"
 - link: "https://learn.datadoghq.com/courses/getting-started-app-builder/"
   tag: "Learning Center"
   text: "Getting Started with App Builder"

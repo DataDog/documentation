@@ -9,7 +9,7 @@ aliases:
 further_reading:
 - link: "/actions/actions_catalog/"
   tag: "Documentation"
-  text: "Actions Catalog"
+  text: "Action Catalog"
 - link: "https://www.datadoghq.com/blog/datadog-app-builder-low-code-internal-tools/"
   tag: "Blog"
   text: "Build custom monitoring and remediation tools with the Datadog App Builder"

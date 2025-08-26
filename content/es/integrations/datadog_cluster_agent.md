@@ -33,7 +33,7 @@ draft: false
 git_integration_title: datadog_cluster_agent
 integration_id: datadog-cluster-agent
 integration_title: Datadog Cluster Agent
-integration_version: 5.3.0
+integration_version: 5.5.0
 is_public: true
 manifest_version: 2.0.0
 name: datadog_cluster_agent
@@ -91,7 +91,7 @@ Si necesitas configurar el check:
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "datadog-cluster-agent" >}}
+{{< get-metrics-from-git "datadog_cluster_agent" >}}
 
 
 ### Eventos
@@ -99,7 +99,7 @@ Si necesitas configurar el check:
 La integración Datadog Cluster Agent no incluye eventos.
 
 ### Checks de servicios
-{{< get-service-checks-from-git "datadog-cluster-agent" >}}
+{{< get-service-checks-from-git "datadog_cluster_agent" >}}
 
 
 ## Solucionar problemas
