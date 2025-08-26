@@ -140,7 +140,7 @@ jobs:
 
             // Set final status
             if (isDocumentationTeamRequested && !hasDocumentationApproval) {
-              core.setFailed(`Documentation team approval required from @${owner}/${DOCUMENTATION_TEAM} or @${owner}/${WEBOPSTEAM}`);
+              core.setFailed(`Team approval required from @${owner}/${DOCUMENTATION_TEAM} or @${owner}/${WEBOPSTEAM}`);
             } else if (!isDocumentationTeamRequested) {
               console.log('Documentation team review not required for this PR.');
             } else {
