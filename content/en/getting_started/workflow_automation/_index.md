@@ -140,7 +140,7 @@ The workflow also creates a Slack message to notify your team of the Jira issue 
 
 ## What's next?
 
-* Explore the list of all available workflow actions in the [Actions Catalog][8]. 
+* Explore the list of all available workflow actions in the [Action Catalog][8]. 
 * Build a workflow from an out of the box [blueprint][9].
 * Use the [HTTP action][10] to make a request to any endpoint.
 * Implement [data transformation][11] actions to perform necessary operations on the information flowing through your workflow.
