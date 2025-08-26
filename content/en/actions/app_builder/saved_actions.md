@@ -18,6 +18,8 @@ further_reading:
 
 Use the _Saved Actions_ feature to store and reuse an action and its parameters. You can insert a saved action into your app as a new step, or use one to populate an existing step's parameters.
 
+<div class="alert alert-info">You can only save actions if you have <a href="https://docs.datadoghq.com/actions/app_builder/access_and_auth/#app-permissions"><b>Editor</b> access.</a> for that app.</div>
+
 ## Save an action
 
 1. In Datadog, navigate to [**Actions** > **App Builder**][1] and hover over an app. Action icons for that app will appear under the **Last Saved** column. Click the **Edit** {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icon.
