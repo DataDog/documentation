@@ -16,23 +16,23 @@ You can troubleshoot injection issues in two ways: by using Fleet Automation in 
 
 ### Troubleshoot injection in Datadog Fleet Automation
 
-{{< callout url="https://google.com" d_toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger" btn_hidden="true" header="false">}}
-This feature is available in public preview. 
+{{< callout btn_hidden="true" header="false">}}
+Instrumentation insights in Fleet Automation is available in Preview.
 {{< /callout >}}
 
 Using Datadog, you can identify and troubleshoot instrumentation issues across your infrastructure. You can see information like:
 - Which hosts have SSI enabled
 - Which processes failed instrumentation and why
 - Which services were instrumented successfully
-- Process-level detail to help debug injection failures
+- Process-level details to help debug injection failures
 
 #### Prerequisites
 
 Instrumentation insights are available for:
 
-* Languages: Python, Java, Node.js, Ruby, PHP, .NET
-* Environments: Linux hosts, containers, Kubernetes
-* Datadog Agent v7.68.2+
+- **Languages**: Python, Java, Node.js, Ruby, PHP, .NET
+- **Environments**: Linux hosts, containers, Kubernetes
+- Datadog Agent v7.68.2+
 
 #### View instrumentation insights 
 
@@ -98,7 +98,7 @@ DD_INSTALLER_DEFAULT_PKG_VERSION_DATADOG_APM_INJECT=<VERSION>-1
 
 #### Default deny list
 
-Datadog maintains an internal deny list to prevent injection into certain processes (for example, IDEs or databases). If a process command or entrypoint is on this list, the injector exits the injection process.  
+Datadog maintains an internal deny list to prevent injection into certain processes (for example, IDEs or databases). If a process command or entrypoint is on this list, the injector skips the injection process.  
 
 #### Linux workload selection
 
@@ -119,7 +119,7 @@ Security tools may flag the `apm-inject` container because it runs an executable
 
 The container's behavior is expected and safe; the executable configures the environment for auto-instrumentation.
 
-Datadog adheres to security best practices and is working with security vendors to allow this container.
+Datadog adheres to security best practices and is working with security vendors to allowlist this container.
 
 ### Environments with strict pod security settings
 
@@ -164,7 +164,7 @@ To properly uninstall SSI, follow the platform-specific instructions:
 * [Kubernetes][1]
 * [Docker][2]
 * [Linux][3]
-* [Windows][3]
+* [Windows][4]
 
 #### Injection not working with rootless Docker
 
