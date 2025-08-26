@@ -39,8 +39,8 @@ Install and set up the following on your machine:
 - [Helm (v3+)][54]
 - [kubectl][5]
 
-{{< callout url="https://www.datadoghq.com/product-preview/ddot-for-linux-based-hosts-or-vms/" btn_hidden="false" >}}
-Support for deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is in Preview. To join the Preview, click <strong>Request Access</strong> and complete the form.
+{{< callout url="/opentelemetry/setup/ddot_collector/install/linux" btn_hidden="false" >}}
+Support for deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is in Preview. To get started, follow the [Linux documentation][58].
 {{< /callout >}}
 
 ## Install the Datadog Agent with OpenTelemetry Collector
@@ -964,3 +964,4 @@ View metrics from the DDOT Collector to monitor the Collector health.
 [55]: /containers/datadog_operator
 [56]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 [57]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog-operator/README.md
+[58]: /opentelemetry/setup/ddot_collector/install/linux

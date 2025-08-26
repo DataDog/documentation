@@ -1,5 +1,5 @@
 ---
-title: Install the Datadog Distribution of OTel Collector
+title: Install
 type: multi-code-lang
 external_redirect: /opentelemetry/setup/ddot_collector/install/kubernetes
 ---
