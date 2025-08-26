@@ -226,6 +226,15 @@ Image metrics are collected from the [Live Containers](#live-containers) and [Im
 
 {{< img src="infrastructure/containerimages/container_image_trends_configuration_modal.png" alt="The container images trends configuration modal" width="100%">}}
 
+### Data collected
+
+| Metric Name | Description |
+|-------------|-------------|
+| **contimage.max_image_size** <br>(gauge) | The maximum size of the container image |
+| **contimage.max_image_age** <br> (gauge) | The age of the container image |
+| **contimage.running_containers** <br> (gauge) | The number of containers in which the container image is running |
+| **contimage.vuln_count** <br> (gauge) | The total number of vulnerabilities found in the container image (for Datadog Cloud Security customers who have enabled Container Vulnerabilities) |
+
 ## Container image tagging
 
 Tag and enrich your container images with arbitrary tags by using [extract labels as tags][6] configuration on the Agent. These tags are then picked by the Container Image check.

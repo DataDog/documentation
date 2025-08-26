@@ -261,7 +261,9 @@ On the Services page, you can view, search and filter all services that you have
 
 ## Frequently Asked Question
 ### How do I remain logged into the mobile app?
-Upon successful authentication to the mobile app, you will remain logged in for 90 days. Provided you are active during that 90 day period, the token will be refreshed.
+Upon successful authentication to the mobile app, you will remain logged in for 90 days. Provided you are active during that 90 day period, the token will be refreshed. 
+
+**Note**: If you have notifications enabled, proactive notifications will be sent prior to token expiration.
 
 ### Will I still receive notifications if I am automatically signed out?
 If you are automatically logged out due to inactivity during the 90 day token period, you will still be able to receive notifications and will be prompted to log in again.
@@ -270,6 +272,9 @@ If you are automatically logged out due to inactivity during the 90 day token pe
 
 ### Why am I not receiving notifications?
 Check that you have notifications enabled for the Datadog app in your device app settings. If you would like to ensure that notifications bypass Do Not Disturb, check that Critical Alerts is toggled on.
+
+### What happens if a user is disabled?
+The mobile app token will be invalid and force the user to log out.
 
 ## Troubleshooting
 

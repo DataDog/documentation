@@ -22,7 +22,7 @@ author:
   support_email: britt.treece@gmail.com
 categories:
 - almacenes de datos
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/riak_repl/README.md
 display_on_public_website: true
@@ -37,26 +37,26 @@ name: riak_repl
 public_title: Replicación Riak MDC
 short_description: Seguimiento del rendimiento, la capacidad y el estado de la replicación
 supported_os:
-- Linux
-- macOS
-- Windows
+- linux
+- macos
+- windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::macOS
-  - Sistema operativo compatible::Windows
-  - Categoría::Almacenes de datos
-  - Oferta::Integración
-  configuration: README.md#Configuración
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Stores
+  - Offering::Integration
+  configuration: README.md#Setup
   description: Seguimiento del rendimiento, la capacidad y el estado de la replicación
   media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: Replicación Riak MDC
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -92,7 +92,7 @@ Ejecuta el [subcomando de estado del Agent][7] y busca `riak_repl` en la secció
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "riak-repl" >}}
+{{< get-metrics-from-git "riak_repl" >}}
 
 
 ### Checks de servicio
