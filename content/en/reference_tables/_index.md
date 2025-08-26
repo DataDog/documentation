@@ -191,6 +191,12 @@ The selected CSV is upserted into the table, meaning that:
 
 Once the table is saved, the upserted rows are processed asynchronously and updated in the preview. It may take up to 10 minutes for the update to complete.
 
+## Export a Reference Table
+
+To export a Reference Table, select a table and click **Query in DDSQL Editor**. From there, you can use the [DDSQL Editor][7] to export to CSV, Dashboard, and more.
+
+{{< img src="reference_tables/query_ddsql_editor.png" alt="Table preview with a blue button labeled Query in DDSQL Editor positioned above the results" style="width:100%;" >}}
+
 ## Delete a Reference Table
 
 To delete a Reference Table, select a table, click the gear icon in the top right corner, and then click **Delete Table**.
@@ -268,3 +274,4 @@ Restrict access to individual tables by specifying a list of teams, roles, or us
 [4]: /monitors/types/event/
 [5]: /help/
 [6]: /account_management/rbac/permissions/#reference-tables
+[7]: /ddsql_editor/#save-and-share-queries

@@ -86,6 +86,12 @@ logger.info(`Hello world!`);
 
    For more information, see [Correlating Node.js Logs and Traces][2].
 
+4. {{% gcr-service-label %}}
+
+5. **Send custom metrics**.
+
+   To send custom metrics, [view code examples][3].
+
 {{% gcr-env-vars instrumentationMethod="sidecar" language="nodejs" %}}
 
 ## Troubleshooting
@@ -98,3 +104,4 @@ logger.info(`Hello world!`);
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
 [2]: /tracing/other_telemetry/connect_logs_and_traces/nodejs/
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=nodejs#code-examples

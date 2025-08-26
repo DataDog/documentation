@@ -163,15 +163,17 @@ See [Unified Service Tagging][303] for more information on the `version` tag.<br
 : **Value**: The log path the sidecar uses to collect logs.<br>
 Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFiles/myapp/*.log`.<br>
 
+`DD_AAS_INSTANCE_LOGGING_ENABLED`
+: **Value**: false <br>
+When `true`, log collection is automatically configured for the additional file path: `/home/LogFiles/*$COMPUTERNAME*.log`
+
+<div class="alert alert-info">If your application has multiple instances, make sure your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicate logs from multiple instances that are reading the same file. Enabling this feature variable also prevents <code>DD_SERVERLESS_LOG_PATH</code> from being set. This is to prevent ingesting duplicate logs.</div>
+
 `WEBSITES_ENABLE_APP_SERVICE_STORAGE`
 : **Value**: `true`<br>
 Setting this environment variable to `true` allows the `/home/` mount to persist and be shared with the sidecar.<br>
 
-`DD_AAS_INSTANCE_LOGGING_ENABLED`
-: **Value**: false <br>
-When `true`, log collection is automatically configured for an additional file path: `/home/LogFiles/*$COMPUTERNAME*.log`
 
-<div class="alert alert-info">If your application has multiple instances, make sure that your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicated logs from multiple instances reading the same file.</div>
     
 {{% collapse-content title=".NET: Additional required environment variables" level="h4" id="dotnet-additional-settings" %}}
 
