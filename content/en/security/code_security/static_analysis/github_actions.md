@@ -39,10 +39,10 @@ jobs:
 
 You **must** set your Datadog API and application keys as [secrets in your GitHub repository][4] whether at the organization or repository level. Ensure that you add the `code_analysis_read` scope to your Datadog application key. For more information, see [API and Application Keys][2].
 
-Make sure to replace `dd_site` with the Datadog site you are using[3].
+Make sure to replace `dd_site` with the [Datadog site you are using][3].
 
 <div class="alert alert-warning">
-The GitHub action only supports the "push" event trigger. Other event triggers (such as "pull_request") are not supported and may cause issues with the product.
+Running a Datadog Static Code Analysis job as an action only supports the <code>push</code> event trigger. Other event triggers (<code>pull_request</code>, etc.) are not supported and can cause issues with the product.
 </div>
 
 ## Inputs
