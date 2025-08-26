@@ -35,7 +35,6 @@ The fastest way to configure Storage Monitoring is through the [Add Buckets][501
 {{< img src="integrations/guide/storage_monitoring/add-buckets.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
 
 3. Step 1: Enable Amazon S3 Integration and Resource collection for all the AWS accounts you want to monitor.
-
 4. Step 2: Enable S3 Inventory to get prefix level monitoring
 
       Note:
