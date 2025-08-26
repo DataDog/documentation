@@ -29,22 +29,21 @@ Select your cloud storage service to access setup instructions.
 
 The fastest way to configure Storage Monitoring is through the [Add Buckets][501] page in Datadog, where you can set up multiple S3 buckets at the same time.
 
-1. Go to Datadog > **Infrastructure** > **Storage Monitoring**.
-2. Click [Enable Buckets][501].
+Go to Datadog > **Infrastructure** > **Storage Monitoring**. Click [Enable Buckets][501].
 
 {{< img src="integrations/guide/storage_monitoring/add-buckets.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
 
-3. Step 1: Enable Amazon S3 Integration and Resource collection for all the AWS accounts you want to monitor.
-4. Step 2: Enable S3 Inventory to get prefix level monitoring
+1. **Enable Amazon S3 Integration and Resource collection for all the AWS accounts you want to monitor.**
+2. **Enable S3 Inventory to get prefix level monitoring**
 
-      Note:
+      **Note:**
       - Source bucket: The S3 bucket you want to monitor with Storage Monitoring
-      - Destination bucket: Used to store inventory reports (one per AWS region, can be reused)
+      - Destination bucket: Used to store inventory reports (one per AWS region, can be reused cross account)
 
-   1. **Allow Datadog to read from your destination buckets.** Add the following permissions to the Datadog IAM integration role for the account that owns the destination buckets:
+   1. **Allow Datadog to create inventories and read from your destination buckets.** Add the following permissions to the Datadog IAM integration role for the account that owns the destination buckets:
+      - `s3:PutInventoryConfiguration`
       - `s3:GetObject`
       - `s3:ListBucket`
-
       Scope these permissions to only the destination buckets containing your S3 inventory files.
 
       ```json
@@ -86,7 +85,7 @@ The fastest way to configure Storage Monitoring is through the [Add Buckets][501
 
    5. Complete the inventory configuration.
 
-5. Step 3: **Enable S3 Access Logs for prefix-level request and latency metrics:** To get prefix-level access metrics including request counts, server-side latency, and cold data identification for cost optimization, follow these additional steps:
+3. **Enable S3 Access Logs for prefix-level request and latency metrics:** To get prefix-level access metrics including request counts, server-side latency, and cold data identification for cost optimization, follow these additional steps:
 
    1. **Set up the Datadog Lambda Forwarder** (if not already configured):
       - Follow the [Datadog Forwarder installation instructions][503] to deploy the Datadog Lambda function in your AWS account
@@ -113,7 +112,7 @@ The fastest way to configure Storage Monitoring is through the [Add Buckets][501
         - Set the prefix to `access-logs/` (matching your access log prefix)
 
 
-6. Return to **Infrastructure > Storage Monitoring** to see any new buckets. The inventory generation process starts within AWS within 24 hours of the first report and you'll see data for your buckets after this period.
+4. Return to **Infrastructure > Storage Monitoring** to see any new buckets. The inventory generation process starts within AWS within 24 hours of the first report and you'll see data for your buckets after this period.
 
 [501]: https://app.datadoghq.com/storage-monitoring?mConfigure=true
 [502]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html#configure-inventory-destination-bucket-policy
