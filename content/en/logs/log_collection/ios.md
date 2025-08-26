@@ -513,13 +513,29 @@ Use the `addAttribute(forKey:value:)` method to add a custom attribute to all lo
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-// This adds an attribute "device-model" with a string value
+// This adds an attribute "device-model" with a string value in this logger instance.
 logger.addAttribute(forKey: "device-model", value: UIDevice.current.model)
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
 [logger addAttributeForKey:@"device-model" value:UIDevice.currentDevice.model];
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+Attributes can be added globally across all Logs instances (e.g., service name, environment) using:
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+// This adds an attribute "device-model" with a string value in all Logs instances.
+Logs.addAttribute(forKey: "device-model", value: UIDevice.current.model)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+[Logs addAttributeForKey:@"device-model" value:UIDevice.currentDevice.model];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -533,13 +549,29 @@ Use the `removeAttribute(forKey:)` method to remove a custom attribute from all 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-// This removes the attribute "device-model" from all further log send.
+// This removes the attribute "device-model" from all further logs sent from this logger instance.
 logger.removeAttribute(forKey: "device-model")
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
 [logger removeAttributeForKey:@"device-model"];
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+To remove a global attribute from all Logs instances:
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+// This removes the attribute "device-model" from all further logs sent from all logger instances.
+Logs.removeAttribute(forKey: "device-model")
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+[Logs removeAttributeForKey:@"device-model"];
 ```
 {{% /tab %}}
 {{< /tabs >}}
