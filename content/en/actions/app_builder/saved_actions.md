@@ -23,7 +23,7 @@ Use the _Saved Actions_ feature to store and reuse an action and its parameters.
 1. In Datadog, navigate to [**Actions** > **App Builder**][1], hover over an app, and click the **Edit** {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icon.
 1. Click the **Actions** {{< img src="icons/kebab.png" inline="true" style="width:14px;">}} menu, then **Save Action**.
 1. Enter a name and description for the action.
-1. If you want anyone in your organization to have access to the action, toggle **Usable by others in the organization**.
+1. If you want others in your organization to have access to the action, turn on the **Usable by others in the organization** toggle.
 1. Verify the configuration details for the action and click **Save Action Configuration**.
 
 ## Use a saved action in your app
