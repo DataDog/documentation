@@ -168,14 +168,20 @@ resource "datadog_integration_aws_account" "datadog_integration" {
     cloud_security_posture_management_collection = false
     extended_collection                          = true
   }
+
+  # Optionally, specify services to include for X-Ray tracing
   traces_config {
     xray_services {
     }
   }
-    logs_config {
+
+  # Optionally, specify the ARN of the Datadog Forwarder Lambda function and sources to enable for automatic log collection
+  logs_config {
     lambda_forwarder {
     }
   }
+
+  # Optionally, specify namespaces to exclude from metric collection
   metrics_config {
     namespace_filters {
     }

@@ -2,8 +2,8 @@
 title: Lista de IP permitidas
 ---
 
-{{< callout url="/ayuda/" header="Get Started with IP Allowlist" >}}
-La función de lista de IP permitidas solo está disponible para clientes con un plan de empresa. Solicita acceso poniéndote en contacto con el servicio de asistencia.
+{{< callout url="/ayuda/" header="Empezando con la lista de IP permitidas" >}}
+La función de lista de IP permitidas sólo está disponible para clientes con un plan de empresa. Solicita acceso poniéndote en contacto con el servicio de asistencia.
 {{< /callout >}}
 
 ## Información general
@@ -19,22 +19,25 @@ Cuando la lista de IP permitidas está activada, solo las direcciones IP o los r
 Si la IP de un usuario no está incluida en la lista de IP permitidas, se bloquean el acceso y el uso de manera efectiva:
 
 - Interfaz web de Datadog
-- [API][1] público de Datadog, incluidos los endpoints documentados e inéditos.
+- [API][1] pública de Datadog, incluidos los endpoints documentados e inéditos.
 - Aplicaciones móviles de Datadog (iOS, Android)
 - Integraciones y aplicaciones de terceros que acceden a Datadog a través de OAuth
 
 La función de lista de IP permitidas no bloquea el acceso a lo siguiente:
-- Endpoints de ingesta de datos a los que Agent envía datos, como métricas, trazas (traces), y logs
-- El endpoint [validate API key (validar clave de API)][2], que el Agent utiliza antes de enviar los datos.
-- [Public dashboards (dashboards públicos)][3]
+- Endpoints de ingesta de datos a los que el Agent envía datos, como métricas, trazas (traces) y logs
+- El endpoint [validar clave de API][2], que el Agent utiliza antes de enviar los datos.
+- [Presentación de flare del Agent][3]
+- [Dashboards públicos][4]
 
-Las aplicaciones e integraciones que envían telemetría como métricas, trazas y logs desde el Agent y las que utilizan una clave de API proporcionada por el usuario no se ven afectadas por la lista de IP permitidas. Datadog recomienda utilizar el [Audit Trail][4] para monitorear direcciones IP de terceros.
+Las aplicaciones e integraciones que envían telemetría desde el Agent (métricas, trazas (traces) y logs), y las que utilizan una clave de API proporcionada por el usuario, no se ven afectadas por la lista de IP permitidas. Datadog recomienda utilizar el [Audit Trail][5] para monitorizar las direcciones IP de aplicaciones e integraciones de terceros.
+
+Para permitir que los clientes de aplicaciones móviles se conecten a Datadog cuando la función de lista de IP permitidas está activada, Datadog recomienda que los dispositivos móviles se conecten a un rango permitido de red a través de VPN.
 
 ### Funcionalidad
 
-Solo los usuarios con el permiso **Org Management** pueden configurar la lista de IP permitidas.
+Sólo los usuarios con el permiso **Gestión de organización** pueden configurar la lista de IP permitidas.
 
-Con la lista de IP permitidas API o UI, puedes realizar lo siguiente:
+Con la API o la interfaz de usuario de la lista de IP permitidas, puedes realizar lo siguiente:
 - Controlar el estado de la lista de IP permitidas. Si la lista de IP permitidas está activada o desactivada determina si tu organización está restringiendo las solicitudes por pertenencia a la lista de IP permitidas.
 - Activar y desactivar la lista de IP permitidas.
 - Mostrar las direcciones IP (como rangos CIDR) que están cubiertas por tu lista de IP permitidas.
@@ -45,30 +48,30 @@ Con la lista de IP permitidas API o UI, puedes realizar lo siguiente:
 
 ### Prevención del bloqueo
 
-Cuando activas o modificas la lista de IP permitidas, el sistema aplica restricciones para asegurarse de que puedes seguir accediendo a tus datos:
+Cuando activas o modificas la lista de IP permitidas, el sistema aplica restricciones para asegurarse de que puedas seguir accediendo a tus datos:
 - Al menos una entrada de la lista de IP permitidas contiene tu IP actual.
 - La lista de permitidos contiene al menos una entrada.
 
 ## Gestión de la lista de IP permitidas en la interfaz de usuario
 
-**Nota:** La página de la lista de IP permitidas solo aparece en la interfaz de usuario si tu organización Datadog tiene la función activada.
+**Nota:** La página de la lista de IP permitidas sólo aparece en la interfaz de usuario si tu organización de Datadog tiene la función activada.
 
-Para encontrar la [IP allowlist UI (interfaz de usuario de la lista de IP permitidas)][5]:
+Para encontrar la [interfaz de usuario de la lista de IP permitidas][6]:
 
-1. Accede a **Organization Settings** (Parámetros de organización) desde el menú de tu cuenta.
-1. En **Acceso**, selecciona **Lista de IP permitidas**.
+1. Ve a **Parámetros de la organización** desde el menú de tu cuenta.
+1. En **Seguridad**, selecciona **Lista de IP permitidas**.
 
-La tabla de lista de IP permitida enumera los rangos CIDR contenidos en la lista de IP permitidas.
+La tabla de la lista de IP permitidas enumera los rangos CIDR contenidos en la lista de IP permitidas.
 
 ### Activar y desactivar la lista de IP permitidas
 
-Un banner en la parte superior de la página muestra el estado activado o desactivado de la lista de IP permitidas. También muestra tu IP y si esa IP está en la lista permitida.
+Un banner en la parte superior de la página muestra el estado activado o desactivado de la lista de IP permitidas. También muestra tu IP y si esa IP está en la lista de permitidos.
 
 Para cambiar el estado de la lista de IP permitidas, haz clic en el botón **Activar** o **Desactivar**.
 
-### Añadir direcciones IP o rangos CIDR
+### Añade direcciones IP o rangos CIDR
 
-{{< img src="account_management/org_settings/add_ip.png" alt="Captura de pantalla que muestra un cuadro de diálogo titulado Add IP (Añadir IP) a la lista permitida" >}}
+{{< img src="account_management/org_settings/add_ip_2.png" alt="Captura de pantalla que muestra un cuadro de diálogo titulado Añadir lista de IP permitidas" >}}
 
 1. Pulsa el botón **Añadir IP** en la parte superior derecha de la página. 
 1. Introduce una dirección IP válida o un rango CIDR.
@@ -89,15 +92,16 @@ Para cambiar el estado de la lista de IP permitidas, haz clic en el botón **Act
 
 ## Gestión programática de la lista de IP permitidas
 
-Para gestionar la lista de IP permitidas a través de la API, consulta la [IP Allowlist API documentation (Documentación de la API de la lista de IP permitidas)][6].
+Para gestionar la lista de IP permitidas a través de la API, consulta la [Documentación de la API de la lista de IP permitidas][7].
 
-Consulta el [`ip_allowlist` resource (recurso `ip_allowlist`)][7] para gestionar la lista de IP permitidas en Terraform.
+Consulta el [recurso `ip_allowlist`][8] para gestionar la lista de IP permitidas en Terraform.
 
 
 [1]: /es/api/latest/
 [2]: /es/api/latest/authentication/#validate-api-key
-[3]: /es/dashboards/sharing/
-[4]: /es/account_management/audit_trail/
-[5]: https://app.datadoghq.com/organization-settings/ip-allowlist
-[6]: /es/api/latest/ip-allowlist/
-[7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/ip_allowlist
+[3]: https://docs.datadoghq.com/es/agent/troubleshooting/send_a_flare/
+[4]: /es/dashboards/sharing/
+[5]: /es/account_management/audit_trail/
+[6]: https://app.datadoghq.com/organization-settings/ip-allowlist
+[7]: /es/api/latest/ip-allowlist/
+[8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/ip_allowlist
