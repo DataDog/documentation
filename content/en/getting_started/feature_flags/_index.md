@@ -20,6 +20,12 @@ Datadog Feature Flags offer a powerful, integrated way to manage feature deliver
 
 * **OpenFeature compatible:** Built on the OpenFeature standard, ensuring compatibility with existing OpenFeature implementations and providing a vendor-neutral approach to feature flag management.
 
+## Configure your environments
+
+Your organization likely already has pre-configured environments for `Development`, `Staging`, and `Production`. If not, and/or you need to configure other environments, navigate to [Feature Flags > Environments] to create tag queries for your environments, as well as identify which environment should be considered a **Production** environment.
+
+![Environments](/static/images/getting_started/feature_flags/environments.png)
+
 ## Creating your first feature flag
 
 ### Step 1: Import and initialize the SDK
@@ -114,3 +120,4 @@ Monitor the feature rollout from the feature flag details page, which provides r
 
 [1]: https://github.com/DataDog/openfeature-js-client/blob/main/README.md
 [2]: https://app.datadoghq.com/feature-flags/create
+[3]: https://app.datadoghq.com/feature-flags/environments
