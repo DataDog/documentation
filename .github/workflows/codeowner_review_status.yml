@@ -94,10 +94,17 @@ jobs:
               );
               
               // Also check if any documentation or webops-platform team member has reviewed (indicating they were requested)
-              const { data: teamMembers } = await github.rest.teams.listMembersInOrg({
+              const { data: docTeamMembers } = await github.rest.teams.listMembersInOrg({
                 org: owner,
-                team_slug: DOCUMENTATION_TEAM || WEBOPSTEAM,
+                team_slug: DOCUMENTATION_TEAM,
               });
+              
+              const { data: webopsTeamMembers } = await github.rest.teams.listMembersInOrg({
+                org: owner,
+                team_slug: WEBOPSTEAM,
+              });
+              
+              const teamMembers = [...docTeamMembers, ...webopsTeamMembers];
               
               const teamMemberLogins = new Set(teamMembers.map(member => member.login));
               const hasTeamMemberReview = reviews.some(review => 
