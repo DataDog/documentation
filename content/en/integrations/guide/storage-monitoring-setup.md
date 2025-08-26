@@ -74,7 +74,6 @@ The fastest way to configure Storage Monitoring is through the [Add Buckets][501
                 }
               ]
             }
-
       ```
 
    2. **Allow source buckets to write to destination buckets.** The destination buckets must include a policy that allows the source buckets to write inventory data. See [Creating a destination bucket policy][502] in the AWS documentation for details.
