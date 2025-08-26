@@ -9,7 +9,7 @@ You can configure Bits to automatically investigate when a monitor triggers an a
 
 There are a few ways to enable Bits for automated investigations:
 - **Option 1: Use the Bits AI SRE Monitors list**
-  1. In Bits AI SRE, go to the [**Monitors**][5] page.
+  1. In Bits AI SRE, go to the [**Monitor Management**][5] page.
   1. In the **Ready for Bits** tab, toggle automatic investigations on for a monitor. 
 - **Option 2: Add the Bits AI tag to a single monitor**
   1. Open a monitor, click on the gear icon in the upper right corner, and select **Edit**.
@@ -29,7 +29,7 @@ Alternatively, you can manually invoke Bits on an individual monitor alert or wa
 
 - **Option 1: Monitor Status Page**
   -  For a monitor that is ready for Bits, navigate to its status page and click **Investigate with Bits AI SRE** on the top right corner. 
-  -  Alternatively, select an alert from the event timeline and click **Investigate with Bits AI SRE**.
+  -  Alternatively, select an alert from the event timeline and click **Investigate with Bits AI SRE** on the right.
 - **Option 2: Monitor Event Side Panel**
   -  On the monitor event side panel, click **Investigate with Bits AI SRE**.
 - **Option 3: Slack**
@@ -67,7 +67,7 @@ Additionally, if you have already configured `@slack`, `@case`, or `@oncall` [no
 {{% collapse-content title="Slack" level="h5" expanded=false id="slack" %}}
 1. Ensure the [Datadog Slack app][7] is installed in your Slack workspace.
 1. In your monitor, go to **Configure notifications and automations** and add the `@slack-{channel-name}` handle. This sends monitor notifications to your chosen Slack channel.
-1. Lastly, go to [**Bits AI** > **Settings** > **Integrations**][9] and connect your Slack workspace. This allows Bits to write its findings directly under the monitor notification in Slack. Note: Each Slack workspace can only be connected to one Datadog organization.
+1. Lastly, go to [**Bits AI** > **Settings** > **Integrations**][9] and connect your Slack workspace. This allows Bits to write its findings directly under the monitor notification in Slack. **Note:** Each Slack workspace can only be connected to one Datadog organization.
 {{% /collapse-content %}}
 {{% collapse-content title="Case Management" level="h5" expanded=false id="case-management" %}}
 In the **Configure notifications and automations** section, add the `@case-{project-name}` handle. Case Management also supports optional two-way syncing with [ticketing platforms like Jira and ServiceNow][14]. 
@@ -137,7 +137,7 @@ At the end of an investigation, let Bits know if the conclusion it made was corr
 {{< img src="bits_ai/help_bits_ai_learn.png" alt="An investigation conclusion with buttons to rate the conclusion helpful or unhelpful highlighted" style="width:100%;" >}}
 
 ### Manage memories
-Every piece of feedback you give generates a **memory**. Bits uses these memories to enhance future investigations by recalling relevant patterns, queries, and corrections. You can navigate to [Bits-Enabled Monitors][3] to view and delete memories in the **Memories** column.
+Every piece of feedback you give generates a **memory**. Bits uses these memories to enhance future investigations by recalling relevant patterns, queries, and corrections. You can navigate to the [Monitor Management][3] page to view and delete memories in the **Memories** column.
 
 [2]: https://app.datadoghq.com/bits-ai/investigations
 [3]: https://app.datadoghq.com/bits-ai/monitors/enabled
