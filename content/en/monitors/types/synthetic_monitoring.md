@@ -1,5 +1,5 @@
 ---
-title: Synthetic Monitoring enhanced monitor messages and notifications
+title: Synthetic Monitoring Notifications
 aliases:
   - /synthetics/guide/synthetic-test-monitors/
 further_reading:
@@ -9,9 +9,6 @@ further_reading:
 - link: "/monitors/guide/integrate-monitors-with-statuspage/"
   tag: "Documentation"
   text: "Learn how to integrate monitors with Statuspage"
-- link: "/synthetics/guide/synthetic-test-monitors/"
-  tag: "Guide"
-  text: "Use Synthetic test monitors"
 products:
 - name: Browser Tests
   url: /synthetics/browser_tests/
@@ -30,7 +27,7 @@ products:
 {{< product-availability names="Browser Tests,API Tests,Mobile Application Tests,Multistep API Tests" >}}
 ## Overview
 
-Customize your Synthetic Monitoring monitor notifications to provide meaningful context for on-call responders. Datadog's message templating system enables you to enrich alerts with test details, extract data from test results, and route notifications conditionally based on the failure.
+Customize your Synthetic Monitoring notifications to provide meaningful context for on-call responders. Datadog's message templating system enables you to enrich alerts with test details, extract data from test results, and route notifications conditionally based on the failure.
 
 Monitor messages in Synthetic Monitoring consist of:
 

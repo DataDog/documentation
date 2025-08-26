@@ -125,7 +125,7 @@ Advanced usage
 Conditional alerting
 : Conditional alerting allows you to change the content of a monitor notification based on specific test results or failure conditions.
 
-For more information, see [Synthetic Monitoring enhanced monitor messages and notifications][24].
+For more information, see [Synthetic Monitoring notifications][24].
 
 ## Ready to start?
 
