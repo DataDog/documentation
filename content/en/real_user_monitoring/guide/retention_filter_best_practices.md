@@ -29,16 +29,16 @@ This guide provides strategies for managing your RUM session volumes effectively
 
 RUM retention filters let you choose which user sessions to keep. Here's how they work:
 
-Each session contains multiple events (like pageviews, user actions, errors, resource requests, or performance metrics). The system evaluates each event individually against your retention filters:
+Each session contains multiple events (like views that represent navigation, user actions, errors, resources that represent network requests) and each of them is full of attributes (like duration, context, etc.). The system evaluates each event individually against your retention filters:
 
-1. **Session kept**: If at least one event matches a retention filter AND is selected for retention, the entire session is preserved.
+1. **Session kept**: If at least one constitutive event matches a retention filter AND is sampled in for retention, then the entire session is preserved.
 2. **Session discarded**: If no events match any retention filters by the time the session ends, the entire session is removed.
 
 {{< img src="real_user_monitoring/rum_without_limits/rum-without-limits-how-retention-filters-work-3.png" alt="Flowchart showing how retention filters work: 1. Events from a session are checked against filters, 2. If any event matches and is selected, the entire session is kept, 3. If no events match any filters, the session is discarded" style="width:80%" >}}
 
 ### How different event types work
 
-Some events (like errors and clicks) are "locked in" once they happen - Datadog call these **immutable events**. Others (like session duration) can change as the user continues using your app - these are **mutable events**.
+Some events (like errors and actions) are "locked in" once they happen - Datadog call these **immutable events**. Others (like sessions and views) can change as the user continues using your app - these are **mutable events**.
 
 - **Immutable events** (Action, Error, Resource, Long Task, and Vital [events][1]) are only checked **once** against your filters and cannot be changed once created:
 
@@ -47,7 +47,7 @@ Some events (like errors and clicks) are "locked in" once they happen - Datadog 
   3. If the event is kept, the entire session (including all previous events) is preserved, and future events from the same session automatically skip the retention filters.
   4. If the event is discarded, it's not evaluated by other filters, but other events from the same session continue to be processed independently.
 
-- **Mutable events** are re-checked every time they update:
+- **Mutable events** (Session, View) are re-checked every time they update:
   - View and Session events are different from immutable events because they can change over time. These events receive updates whenever new events happen within them.
   - Unlike [immutable events](#immutable-events) that are evaluated only once, View and Session events are re-evaluated against the retention filters every time they receive an update. This continues until they match a filter for the first time.
 
@@ -99,7 +99,7 @@ Below we describe the set of default filters, suggested filters, and their typic
 | App versions | `@type:session version:v1.1.0-beta` | Filtering by app version (beta, alpha, or specific version) ensures all sessions from a particular build are saved for detailed analysis and troubleshooting. | 100% |
 | Environments | `@type:session environment:stage` | When collecting sessions from various build types or environments, ensure you capture at least 100% of sessions from staging environments, while collecting a smaller percentage from dev/test environments. | 100% |
 | Feature flags | `@type:session feature_flags.checkout_type:treatment_v1` | If you are already using feature flags, you can choose to keep 100% of sessions with specific feature flag treatments. | 100% |
-| Custom attributes | `@type:session @context.cartValue:>=500` | Create filters using almost any query, including session custom attributes, to specify retention criteria. For example, in the Datadog demo app Shopist, the cart value is a custom session attribute. This allows retention of sessions with high cart values, facilitating quick troubleshooting of revenue-impacting issues. | Variable |
+| Custom attributes | `@type:session @context.cartValue:>=500` | Create filters using almost any query, including session custom attributes, to specify retention criteria. For example, in the Datadog demo app Shopist, the cart value is a custom session attribute. This allows retention of sessions with high cart values, facilitating efficient troubleshooting of revenue-impacting issues. | Variable |
 | Session with user attributes | `@type:session user.tier:paid` | Use user information from a session to create a filter. For example, you can retain sessions for all your paid tier users. | 100% |
 | Sessions with a specific user | `@type:session user.id:XXXXX` | This filter can target sessions from specific users, such as a production test account or an executive who regularly tests the application. | 100% |
 | Sessions with a specific action | `@type:action @action.name:XXXXX` | You can retain all sessions with a specific action that the SDK automatically tracks out-of-the-box or a custom action that you instrumented in your code. | 100% |
