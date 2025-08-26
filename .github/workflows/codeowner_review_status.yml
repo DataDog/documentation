@@ -49,8 +49,9 @@ jobs:
               return;
             }
 
-            // Define the documentation team slug
+            // Define the documentation team slug (also check for webops-platform)
             const DOCUMENTATION_TEAM = 'documentation';
+            const WEBOPSTEAM = 'webops-platform';
             
             // Get all reviews
             const { data: reviews } = await github.rest.pulls.listReviews({
@@ -87,15 +88,15 @@ jobs:
                 pull_number: number,
               });
               
-              // Check if documentation team is currently in requested reviewers
+              // Check if documentation or webops-platform teams are currently in requested reviewers
               const currentlyRequested = reviewers.teams.some(team => 
-                team.slug === DOCUMENTATION_TEAM
+                team.slug === DOCUMENTATION_TEAM || team.slug === WEBOPSTEAM
               );
               
-              // Also check if any documentation team member has reviewed (indicating they were requested)
+              // Also check if any documentation or webops-platform team member has reviewed (indicating they were requested)
               const { data: teamMembers } = await github.rest.teams.listMembersInOrg({
                 org: owner,
-                team_slug: DOCUMENTATION_TEAM,
+                team_slug: DOCUMENTATION_TEAM || WEBOPSTEAM,
               });
               
               const teamMemberLogins = new Set(teamMembers.map(member => member.login));
@@ -139,7 +140,7 @@ jobs:
 
             // Set final status
             if (isDocumentationTeamRequested && !hasDocumentationApproval) {
-              core.setFailed(`Documentation team approval required from @${owner}/${DOCUMENTATION_TEAM}`);
+              core.setFailed(`Documentation team approval required from @${owner}/${DOCUMENTATION_TEAM} or @${owner}/${WEBOPSTEAM}`);
             } else if (!isDocumentationTeamRequested) {
               console.log('Documentation team review not required for this PR.');
             } else {
