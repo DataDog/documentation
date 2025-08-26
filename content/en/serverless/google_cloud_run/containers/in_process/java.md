@@ -78,7 +78,15 @@ logger.info("Hello World!");
 
 4. **Configure your application**.
 
-{{% gcr-configure-env-vars language="java" %}}
+{{% gcr-configure%}}
+
+5. {{% gcr-service-label %}}
+
+6. **Send custom metrics**.
+
+   To send custom metrics, [install the DogStatsD client][3] and [view code examples][4].
+
+{{% gcr-env-vars instrumentationMethod="in-process" language="java" %}}
 
 ## Troubleshooting
 
@@ -90,3 +98,6 @@ logger.info("Hello World!");
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [2]: /tracing/other_telemetry/connect_logs_and_traces/java/
+[3]: /developers/dogstatsd/?tab=java#install-the-dogstatsd-client
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=java#code-examples
+

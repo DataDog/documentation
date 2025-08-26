@@ -12,7 +12,6 @@ further_reading:
 - link: /tracing/trace_explorer/query_syntax/
   tag: ドキュメント
   text: スパンクエリ構文
-is_beta: true
 title: トレースクエリ
 ---
 
@@ -51,7 +50,7 @@ Trace Queries を使用して、調査を加速し、関連するトレースを
 | `\|\|` | **Or**: どちらか一方のスパンがトレース内にある | サービス `web-store` またはサービス `mobile-store` からのスパンを含むトレース: <br/>`service:web-store \|\| service:mobile-store` |
 | `->` | **間接関係**: 右のクエリにマッチするスパンのアップストリームにある、左のクエリにマッチするスパンを含むトレース | サービス `checkoutservice` がサービス `quoteservice` のアップストリームにある場合のトレース: <br/>`service:checkoutservice -> service:quoteservice` |
 | `=>` | **直接関係**: 右のクエリにマッチするスパンの直接の親である、左のクエリにマッチするスパンを含むトレース | サービス `checkoutservice` がサービス `shippingservice` を直接呼び出している場合のトレース: <br/>`service:checkoutservice => service:shippingservice` |
-| `NOT` | **Exclusion**: Traces that **do not** contain spans matching the query | Traces that contain spans from the service `web-store`, but not from the service `payments-go`:  <br/>`service:web-store && NOT(service:payments-go)` |
+| `NOT` | **除外**: クエリに一致するスパンを **含まない** トレース | サービス `web-store` のスパンは含むが、サービス `payments-go` のスパンは含まないトレース: <br/>`service:web-store && NOT(service:payments-go)` |
 
 ### トレースレベルのフィルター
 
@@ -102,12 +101,12 @@ Trace Queries を使用して、調査を加速し、関連するトレースを
 
 ## Trace Queries ソースデータの仕組み
 
-Datadog uses the [Intelligent Retention Filter][3] to index data for Trace Queries. It does so by performing:
+Datadog は、Trace Queries 用のデータをインデックスするために [インテリジェント リテンション フィルター][3] を使用します。これは次の処理によって実現されます:
 
 - [フラットサンプリング](#1-flat-sampling): 取り込まれたスパンの均一な 1% サンプル。
 - [多様性サンプリング](#diversity-sampling): 各環境、サービス、オペレーション、リソースの可視性を維持するための、代表的で多様なトレースの選択。
 
-These two sampling mechanisms capture **complete traces**, meaning that all spans of a trace are always indexed to ensure that Trace Queries return accurate results.
+これら 2 つのサンプリング メカニズムは **完全なトレース** を取得します。つまり、Trace Queries が正確な結果を返すよう、トレース内のすべてのスパンが常にインデックス化されます。
 
 {{< img src="tracing/trace_queries/trace_queries_new_dataset.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% フラットサンプリングと多様性サンプリング" >}}
 
@@ -116,12 +115,12 @@ These two sampling mechanisms capture **complete traces**, meaning that all span
 ### 1% フラットサンプリング
 `retained_by:flat_sampled`
 
-Flat 1% sampling is applied based on the `trace_id`, meaning that all spans belonging to the same trace share the same sampling decision. To learn more, read the [one percent flat sampling documentation][4].
+フラットな 1% サンプリングは `trace_id` に基づいて適用されます。つまり、同一トレースに属するすべてのスパンは同じサンプリング判定を共有します。詳細は [1% フラット サンプリングのドキュメント][4] を参照してください。
 
 ### 多様性サンプリング
 `retained_by:diversity_sampling`
 
-Every 15 minutes, diversity sampling retains at least one span and the associated trace for each combination of environment, service, operation, and resource. This occurs for the `p75`, `p90`, and `p95` percentile of latencies to ensure that you can always find example traces in service and resource pages, even for low traffic endpoints. To learn more, read the [diversity sampling documentation][5].
+15 分ごとに、ダイバーシティ サンプリングは environment 、service 、operation 、resource の各組み合わせごとに、少なくとも 1 つのスパンと関連するトレースを保持します。これはレイテンシの `p75` 、 `p90` 、および `p95` パーセンタイルで実行され、トラフィックの少ないエンドポイントであっても、service ページや resource ページで常にサンプル トレースを見つけられるようにします。詳細は [ダイバーシティ サンプリングのドキュメント][5] を参照してください。
 
 
 ## その他の参考資料

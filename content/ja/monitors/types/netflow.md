@@ -15,8 +15,8 @@ further_reading:
 title: NetFlow モニター
 ---
 
-{{< callout btn_hidden="true" header="ベータ版に参加！">}}
-NetFlow モニターは非公開ベータ版です。アクセスするには Datadog の担当者にお問い合わせください。
+{{< callout btn_hidden="true" header="プレビュー版にアクセス！">}}
+NetFlow モニターはプレビュー版です。アクセスするには Datadog の担当者にお問い合わせください。
 {{< /callout >}}
 
 ## 概要

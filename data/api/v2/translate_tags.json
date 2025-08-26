@@ -259,6 +259,10 @@
     "name": "Software Catalog",
     "description": "API to create, update, retrieve, and delete Software Catalog entities."
   },
+  "spa": {
+    "name": "Spa",
+    "description": "SPA (Spark Pod Autosizing) API. Provides resource recommendations and cost insights to help optimize Spark job configurations."
+  },
   "spans": {
     "name": "Spans",
     "description": "Search and aggregate your spans from your Datadog platform over HTTP."
