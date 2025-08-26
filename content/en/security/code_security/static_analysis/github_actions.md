@@ -42,7 +42,7 @@ You **must** set your Datadog API and application keys as [secrets in your GitHu
 Make sure to replace `dd_site` with the Datadog site you are using[3].
 
 <div class="alert alert-warning">
-The GitHub action only supports the `push` event trigger. Other event triggers (such as `pull_request`) are not supported and may cause issues with the product.
+The GitHub action only supports the "push" event trigger. Other event triggers (such as "pull_request") are not supported and may cause issues with the product.
 </div>
 
 ## Inputs
