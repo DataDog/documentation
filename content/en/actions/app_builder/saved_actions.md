@@ -37,7 +37,7 @@ Use the _Saved Actions_ feature to save a copy of an action for reuse. You can i
 
 ## Manage a saved action
 
-You can edit, clone, or delete your Saved Actions from the Action Catalog.
+You can edit, clone, or delete your saved actions from the Action Catalog.
 
 To find a saved action:
 1. In Datadog, navigate to the [**Action Catalog**][2].
