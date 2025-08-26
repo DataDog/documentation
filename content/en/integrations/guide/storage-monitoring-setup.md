@@ -44,6 +44,7 @@ Go to Datadog > **Infrastructure** > **Storage Monitoring**. Click [Enable Bucke
       - `s3:PutInventoryConfiguration`
       - `s3:GetObject`
       - `s3:ListBucket`
+
       Scope these permissions to only the destination buckets containing your S3 inventory files.
 
       ```json
