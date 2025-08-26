@@ -31,14 +31,14 @@ RUM retention filters let you choose which user sessions to keep. Here's how the
 
 Each session contains multiple events (like views that represent navigation, user actions, errors, resources that represent network requests) and each of them is full of attributes (like duration, context, etc.). The system evaluates each event individually against your retention filters:
 
-1. **Session kept**: If at least one constitutive event matches a retention filter AND is sampled in for retention, then the entire session is preserved.
+1. **Session kept**: If at least one event in a session matches a retention filter AND is sampled in for retention, then the entire session is preserved.
 2. **Session discarded**: If no events match any retention filters by the time the session ends, the entire session is removed.
 
 {{< img src="real_user_monitoring/rum_without_limits/rum-without-limits-how-retention-filters-work-3.png" alt="Flowchart showing how retention filters work: 1. Events from a session are checked against filters, 2. If any event matches and is selected, the entire session is kept, 3. If no events match any filters, the session is discarded" style="width:80%" >}}
 
 ### How different event types work
 
-Some events (like errors and actions) are "locked in" once they happen - Datadog call these **immutable events**. Others (like sessions and views) can change as the user continues using your app - these are **mutable events**.
+Some events (like errors and actions) cannot be changed after they happen. Datadog calls these **immutable events**. Others (like sessions and views) can change as the user continues using your app. Datadog calls these **mutable events**.
 
 - **Immutable events** (Action, Error, Resource, Long Task, and Vital [events][1]) are only checked **once** against your filters and cannot be changed once created:
 
@@ -57,7 +57,7 @@ Some events (like errors and actions) are "locked in" once they happen - Datadog
 
 The order of your [retention filters][2] is important. Datadog recommends putting the most specific filters with the highest sample rates at the top of the list, and your most general filters with the lowest sample rates at the bottom.
 
-For example, imagine you have a crash event (an Error event with the `@error.is_crash:true` attribute). This event could match more than one filter, but it is only be evaluated against the first matching filter in your list.
+For example, imagine you have a crash event (an Error event with the `@error.is_crash:true` attribute). This event could match more than one filter, but it is only evaluated against the first matching filter in your list.
 
 - In the example below, the "Crashes" retention filter is placed above the more general "All errors" filter. This means that all crash sessions are kept, because they match the "Crashes" filter first.
 
@@ -65,7 +65,7 @@ For example, imagine you have a crash event (an Error event with the `@error.is_
   |---------|
   | {{< img src="real_user_monitoring/rum_without_limits/retention-filters-good-3.png" alt="Good filter order example: 1. Sessions with replays (100% retention), 2. Crash sessions (100% retention), 3. All error sessions (50% retention). This ensures crashes are always captured." style="width:100%" >}} |
 
-- In following example, the more general "All errors" filter comes before the "Crashes" filter. Because of this, crash sessions are only kept if they are selected by the "All errors" filter (for example, if it has a 50% sample rate). If they are not selected, they are not evaluated by the "Crashes" filter, and those sessions are lost.
+- In the following example, the more general "All errors" filter comes before the "Crashes" filter. Because of this, crash sessions are only kept if they are selected by the "All errors" filter (for example, if it has a 50% sample rate). If they are not selected, they are not evaluated by the "Crashes" filter, and those sessions are lost.
 
   | ❌ Not recommended |
   |---------|
@@ -103,7 +103,7 @@ Below we describe the set of default filters, suggested filters, and their typic
 | Session with user attributes | `@type:session user.tier:paid` | Use user information from a session to create a filter. For example, you can retain sessions for all your paid tier users. | 100% |
 | Sessions with a specific user | `@type:session user.id:XXXXX` | This filter can target sessions from specific users, such as a production test account or an executive who regularly tests the application. | 100% |
 | Sessions with a specific action | `@type:action @action.name:XXXXX` | You can retain all sessions with a specific action that the SDK automatically tracks out-of-the-box or a custom action that you instrumented in your code. | 100% |
-| Sessions with a specific duration | `@session.view_count > 3 OR @session.duration  > 15` | If you notice many short sessions, like a user viewing a page for 10 seconds without further action or errors, they are typically not useful. You can use a duration retention filter to reduce these sessions. | Variable |
+| Sessions with a specific duration | `@session.view_count > 3 OR @session.duration  > 15s` | If you notice many short sessions, like a user viewing a page for 10 seconds without further action or errors, they are typically not useful. You can use a duration retention filter to reduce these sessions. | Variable |
 | Sessions with a network error 4XX and 5XX | `@type:resource @resource.status_code:>=400` | Frontend applications often encounter issues with downstream services returning 4XX or 5XX status codes. Using this filter, you can capture all sessions with resource calls that result in error codes. | 100% |
 
 
