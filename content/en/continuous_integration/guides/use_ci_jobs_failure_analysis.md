@@ -128,6 +128,14 @@ You can import the **CI Visibility - CI Jobs Failure Analysis** dashboard templa
 
 {{< img src="continuous_integration/ci_jobs_failure_analysis_dashboard.png" alt="CI jobs failure analysis dashboard" width="90%">}}
 
+### Using PR comments
+
+You can add jobs failure analysis in your PR comments.
+
+For PR Comments to be posted, your repositories need to be integrated with Datadog. To learn more about integrating repositories with Datadog, review how to [Connect your Git repositories to Datadog][7] documentation.
+
+{{< img src="continuous_integration/pr_comment.png" alt="PR comment with included jobs failure analysis" width="90%">}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -138,3 +146,4 @@ You can import the **CI Visibility - CI Jobs Failure Analysis** dashboard templa
 [4]:/resources/json/civisibility-ci-jobs-failure-analysis-dashboard.json
 [5]:/dashboards/
 [6]:/continuous_integration/pipelines/#setup
+[7]:/integrations/guide/source-code-integration/#connect-your-git-repositories-to-datadog
