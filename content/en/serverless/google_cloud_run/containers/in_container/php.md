@@ -1,8 +1,10 @@
 ---
-title: Instrumenting a PHP Cloud Run Container In-Process
+title: Instrumenting a PHP Cloud Run Container In-Container
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 70
+aliases:
+  - /serverless/google_cloud_run/containers/in_process/php
 further_reading:
   - link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/php/'
     tag: 'Documentation'
@@ -14,7 +16,7 @@ further_reading:
 
 ## Setup
 
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-process/php">available on GitHub</a>.</div>
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/php">available on GitHub</a>.</div>
 
 1. **Install the Datadog PHP tracer** in your Dockerfile.
 
@@ -55,7 +57,7 @@ apk add libgcc
 
    To send custom metrics, [install the DogStatsD client][3] and [view code examples][4].
 
-{{% gcr-env-vars instrumentationMethod="in-process" language="php" %}}
+{{% gcr-env-vars instrumentationMethod="in-container" language="php" %}}
 
 ## Troubleshooting
 

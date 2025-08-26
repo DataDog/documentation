@@ -1,8 +1,10 @@
 ---
-title: Instrumenting a .NET Cloud Run Container In-Process
+title: Instrumenting a .NET Cloud Run Container In-Container
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 50
+aliases:
+  - /serverless/google_cloud_run/containers/in_process/dotnet
 further_reading:
   - link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=linux'
     tag: 'Documentation'
@@ -14,7 +16,7 @@ further_reading:
 
 ## Setup
 
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-process/dotnet">available on GitHub</a>.</div>
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/dotnet">available on GitHub</a>.</div>
 
 1. **Install the Datadog .NET tracer** in your Dockerfile.
 
@@ -76,7 +78,7 @@ logger.LogInformation("Hello World!");
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5].
 
-{{% gcr-env-vars instrumentationMethod="in-process" language="csharp" %}}
+{{% gcr-env-vars instrumentationMethod="in-container" language="csharp" %}}
 
 ## Troubleshooting
 
