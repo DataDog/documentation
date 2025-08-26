@@ -30,7 +30,8 @@ Use the _Saved Actions_ feature to save a copy of an action for reuse. You can i
 
 ## Use a saved action in your app
 
-1. In the app editor view, click the **Actions** {{< img src="icons/kebab.png" inline="true" style="width:14px;">}} menu and select **Use Saved Actions**.
+1. In Datadog, navigate to [**Actions** > **App Builder**][1], hover over an app, and click the **Edit** {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icon.
+1. Click the **Actions** {{< img src="icons/kebab.png" inline="true" style="width:14px;">}} menu and select **Use Saved Actions**.
 1. Browse through the list to find the saved action you're looking for.
 1. Select the saved action to add it as a configured step in your app.
 
