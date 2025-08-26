@@ -750,6 +750,11 @@ menu:
       identifier: otel_rum
       parent: otel_explore
       weight: 703
+    - name: DBM and Traces
+      url: /opentelemetry/correlate/dbm_and_traces/
+      identifier: otel_dbm
+      parent: otel_explore
+      weight: 704
     - name: Integrations
       url: opentelemetry/integrations/
       identifier: otel_integrations
@@ -6187,11 +6192,21 @@ menu:
       parent: workload_protection_agent_expressions
       identifier: windows_expressions
       weight: 2
+    - name: Coverage and Posture Management
+      url: security/workload_protection/inventory
+      parent: workload_protection
+      identifier: workload_protection_inventory
+      weight: 205
+    - name: Coverage
+      url: security/workload_protection/inventory/coverage_map
+      parent: workload_protection_inventory
+      identifier: workload_protection_coverage_map
+      weight: 1
     - name: Guides
       url: security/workload_protection/guide
       parent: workload_protection
       identifier: workload_protection_guides
-      weight: 205
+      weight: 206
     - name: Troubleshooting
       url: security/workload_protection/troubleshooting/threats
       parent: workload_protection
