@@ -97,3 +97,4 @@ You can use out-of-the-box tags to break down and allocate your Datadog cost dat
 [6]: /account_management/plan_and_usage/cost_details/#cost-chargebacks
 [7]: https://app.datadoghq.com/billing/usage
 [8]: /help/
+[9]: /account_management/billing/usage_attribution/
