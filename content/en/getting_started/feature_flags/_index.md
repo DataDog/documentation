@@ -92,7 +92,7 @@ Now that the application is ready to check the value of your flag, you’re read
 
 Go to **Feature Flags > <YOUR_FLAG_NAME> > Targeting Rules & Rollouts**, then select the `Environment` whose rules you want to modify from the dropdown. Click `Edit Targeting Rules`.
 
-![Targeting Rules & Rollouts](/content/en/getting_started/feature_flags/ff-targeting-rules-and-rollouts.png)
+![Targeting Rules & Rollouts](/static/images/getting_started/feature_flags/ff-targeting-rules-and-rollouts.png)
 
 ### Step 5: Publish your rules in your environments
 
@@ -102,7 +102,7 @@ As a general best practice, changes should be rolled out in a `Staging` environm
 
 Go to Targeting Rules & Rollouts > Per environment override and select Use targeting rules in the dropdown under the environment of your choice.
 
-![Publish Targeting Rules](/content/en/getting_started/feature_flags/publish-targeting-rules.png)
+![Publish Targeting Rules](/static/images/getting_started/feature_flags/publish-targeting-rules.png)
 
 The flag now serves your targeting rules in this environment. You can continue to edit these targeting rules to control where the variants are served.
 
@@ -110,7 +110,7 @@ The flag now serves your targeting rules in this environment. You can continue t
 
 Monitor the feature rollout from the feature flag details page, which provides real-time exposure tracking and metrics such as **error rate** and **page load time**. As you incrementally release the feature with your flag, refer to the `Real-Time Metric Overview` panel in the Datadog UI to see how your feature impacts your application performance.
 
-![Real Time Flag Metrics Panel](/content/en/getting_started/feature_flags/real-time-flag-metrics.png)
+![Real Time Flag Metrics Panel](/static/images/getting_started/feature_flags/real-time-flag-metrics.png)
 
 [1]: https://github.com/DataDog/openfeature-js-client/blob/main/README.md
 [2]: https://app.datadoghq.com/feature-flags/create
