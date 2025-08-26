@@ -52,7 +52,7 @@ To find a saved action:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][3].
+<br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][3].
 
 [1]: https://app.datadoghq.com/app-builder/apps/list
 [2]: https://app.datadoghq.com/actions/action-catalog
