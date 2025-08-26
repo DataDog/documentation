@@ -89,11 +89,9 @@ When configuring a new Mobile Application test, use snippets to automatically po
 
 ### Advanced options
 
-For iOS and Android applications, you can pass key-value pairs when creating a mobile test. This allows you to dynamically adjust app behavior, toggle features, or simulate different conditions without modifying your code. These configurations are available under the **Advanced Options** section:
+You can configure advanced options when creating a mobile test to dynamically adjust app behavior without modifying your code. For example, you can auto-accept alerts, allow application crashes, and capture network resources. These configurations can be accessed in the **Advanced Options** section of your mobile test.
 
-   {{< img src="mobile_app_testing/mobile_app_advanced.png" alt="Mobile app test creation page, highlighting the Advanced options drop-down." style="width:80%;" >}}
-
-**Available options**:
+#### Test behavior options:
 
 Auto-accept alerts
 : When enabled, automatically accepts all OS system alerts during test execution.
@@ -101,38 +99,32 @@ Auto-accept alerts
 Allow application crash
 : When enabled, prevents the test from failing if an application crash is detected. You must include a restart application step after the expected crash to continue the test.
 
-Capture network resources (Android only)
-: When enabled, collects network requests and responses for each test step and displays them in the results. **Note**: This setting can impact application performance and could prevent the app from starting.
+Capture network resources
+: When enabled, collects network requests and responses for each test step and displays them in the results. </br>
+**Note**: This setting can impact application performance and could prevent the app from starting.
 
-Examples:
+#### Application arguments:
 
-  {{< tabs >}}
-  {{% tab "Android" %}}
+You can pass `key:value` pairs to your application when the test starts, allowing you to programmatically modify app behavior. Your application code must be configured to explicitly read and process these key-value pairs. 
 
-```json
-  "config": {
-    "initialApplicationArguments": {
-      "key1": "val1",
-      "key2": "val2"
-    }
-  } 
-```
-  
-  {{% /tab %}}
-  
-  {{% tab "iOS" %}}
+**Examples:**
 
-```json
-  "config": {
-    "initialApplicationArguments": {
-      "key1": "val1",
-      "key2": "val2"
-    }
-  } 
-```
-  
-  {{% /tab %}}
-  {{< /tabs >}}
+{{< tabs >}}
+{{% tab "Android (Initial Intent Extras)" %}}
+
+For example, to bypass the login process in your tests, add the appropriate `key:value` pairs in the Advanced Options section of your Android tests:
+
+{{< img src="mobile_app_testing/advanced/mobile_app_advanced_android.png" alt="Mobile app test creation page, showing an example of an advanced option for an Android device." style="width:100%;" >}}
+{{% /tab %}}
+
+{{% tab "iOS (Process Arguments)" %}}
+
+For iOS tests, you can also bypass the login process by adding the appropriate `key:value` pairs in the Advanced Options section:
+
+{{< img src="mobile_app_testing/advanced/mobile_app_advanced_iOS.png" alt="Mobile app test creation page, showing an example of an advanced option for an iOS device." style="width:100%;" >}}
+    
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Devices
 
