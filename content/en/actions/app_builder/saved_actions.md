@@ -20,28 +20,28 @@ Use the _Saved Actions_ feature to store and reuse an action and its parameters.
 
 ## Save an action
 
-1. From [your apps list][1], hover over an app. Action icons for that app will appear under the **Last Saved** column. Click the **Edit** {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icon.
+1. In Datadog, navigate to [**Actions** > **App Builder**][1], hover over an app, and click the **Edit** {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icon.
 1. Click the **Actions** {{< img src="icons/kebab.png" inline="true" style="width:14px;">}} menu, then **Save Action**.
 1. Enter a name and description for the action.
-1. If you want anyone in your organization to have access to the action, toggle **Usable by others in the organization**.
+1. If you want others in your organization to have access to the action, turn on the **Usable by others in the organization** toggle.
 1. Verify the configuration details for the action and click **Save Action Configuration**.
 
 ## Use a saved action in your app
 
 1. In the app editor view, click the **Actions** {{< img src="icons/kebab.png" inline="true" style="width:14px;">}} menu and select **Use Saved Actions**.
-1. Browse through the list to find the Saved Action you're looking for.
-1. Select the Saved Action to add it as a configured step in your app.
+1. Browse through the list to find the saved action you're looking for.
+1. Select the saved action to add it as a configured step in your app.
 
 ## Manage a saved action
 
 You can edit, clone, or delete your Saved Actions from the Action Catalog.
 
 To find a saved action:
-1. Navigate to the [**Action Catalog**][2].
+1. In Datadog, navigate to the [**Action Catalog**][2].
 1. Click **Saved Actions**. 
 1. Browse through the list of Saved Actions or use the search bar. Hover over the Saved Action you'd like to edit, clone, or delete.
 1. Click **Manage Saved Actions**. 
-1. Select the icon to edit {{< img src="icons/pencil.png" inline="true" style="width:14px;">}}, clone {{< img src="icons/clone.png" inline="true" style="width:14px;">}}, or delete {{< img src="icons/delete.png" inline="true" style="width:14px;">}} the Saved Action.
+1. Select the icon to edit {{< img src="icons/pencil.png" inline="true" style="width:14px;">}}, clone {{< img src="icons/clone.png" inline="true" style="width:14px;">}}, or delete {{< img src="icons/delete.png" inline="true" style="width:14px;">}} the saved action.
 
 **Note:** If you did not create an action, you cannot delete it or edit it directly. Instead, select the **Clone** {{< img src="icons/clone.png" inline="true" style="width:14px;">}}icon to copy the action and make your configuration changes. 
 
