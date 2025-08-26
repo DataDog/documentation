@@ -239,7 +239,7 @@ See [Configure labels for services][15] in the Cloud Run documentation for instr
 | `DD_SOURCE`      | See [Unified Service Tagging][13].                                                                                                                                          |
 | `DD_TAGS`        | See [Unified Service Tagging][13].                                                                                                                                          |
 
-Do not use the `DD_LOGS_ENABLED` environment variable. This variable is only used for [in-container container instrumentation][14].
+Do not use the `DD_LOGS_ENABLED` environment variable. This variable is only used for [In-Container container instrumentation][14].
 
 You can also find `FUNCTION_TARGET` on the source tab inside Google console: `Function entry point`.
 
