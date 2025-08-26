@@ -46,7 +46,7 @@ further_reading:
 {{< nextlink href="/monitors/types/real_user_monitoring" >}}<strong>Real User Monitoring</strong>: Monitor real user data gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/service_check" >}}<strong>Service Check</strong>: Monitor the status of arbitrary custom checks.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/slo" >}}<strong>SLO Alerts</strong>: Monitor your SLO's error budget and burn rate.{{< /nextlink >}}
-{{< nextlink href="/monitors/types/synthetic_monitoring" >}}<strong>Synthetic Monitoring</strong>: Enhanced monitor messages and notifications.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/synthetic_monitoring" >}}<strong>Synthetic Monitoring</strong>: Use Synthetic Test Monitors.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/watchdog" >}}<strong>Watchdog</strong>: Get notified when Watchdog detects anomalous behavior.{{< /nextlink >}}
 {{< /whatsnext >}}
 

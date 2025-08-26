@@ -105,11 +105,7 @@ Optimize your test suite by [ensuring that your application's most critical work
 
 {{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}}
 
-## Version History
-
-Use [Version History in Synthetic Monitoring][23] to run a previous version of a test, or clone a version to create a new Synthetic Monitoring test.
-
-## Synthetic test monitors
+## Synthetic Monitoring notifications
 
 Use and enrich Synthetic monitors to send notifications when a Synthetic Monitoring test is failing. The following use cases are available:
 
@@ -126,6 +122,10 @@ Conditional alerting
 : Conditional alerting allows you to change the content of a monitor notification based on specific test results or failure conditions.
 
 For more information, see [Synthetic Monitoring notifications][24].
+
+## Version History
+
+Use [Version History in Synthetic Monitoring][23] to run a previous version of a test, or clone a version to create a new Synthetic Monitoring test.
 
 ## Ready to start?
 
@@ -159,4 +159,4 @@ See [Getting Started with Synthetic Monitoring][18] for instructions on creating
 [21]: /mobile_testing
 [22]: /synthetics/test_coverage
 [23]: /synthetics/guide/version_history/
-[24]: /monitors/types/synthetic_monitoring
+[24]: /synthetics/notifications/

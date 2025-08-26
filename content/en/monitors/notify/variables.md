@@ -711,4 +711,4 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [17]: /monitors/types/ci/?tab=tests
 [18]: /monitors/types/ci/?tab=pipelines
 [19]: /monitors/types/database_monitoring/
-[20]: /monitors/types/synthetic_monitoring/?tab=apirequestresponse#template-variables
+[20]: /synthetics/notifications/template_variables/
