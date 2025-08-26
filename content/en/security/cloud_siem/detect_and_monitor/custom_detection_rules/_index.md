@@ -43,13 +43,15 @@ further_reading:
 
 Out-of-the-box detection rules help you cover the majority of threat scenarios, but you can also create custom detection rules for your specific use cases
 
-### Custom detection rules
+## Rule types
 
 You can create the following types of custom detection rules:
 
 - Real-time rule, which continuously monitors and analyzes incoming logs.
 - Scheduled rule, which runs at pre-scheduled intervals to analyze log data.
 - Historical job, which backtests detections by running them against historical logs.
+
+## Detection methods
 
 The following detection methods are available for custom detection rule or historical job:
 
