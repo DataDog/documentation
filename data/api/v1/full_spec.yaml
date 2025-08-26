@@ -24828,6 +24828,18 @@ components:
       - $ref: '#/components/schemas/WidgetLegacyLiveSpan'
       - $ref: '#/components/schemas/WidgetNewLiveSpan'
       - $ref: '#/components/schemas/WidgetNewFixedSpan'
+      - $ref: '#/components/schemas/WidgetTimeHideIncompleteData'
+    WidgetTimeHideIncompleteData:
+      additionalProperties: false
+      description: Widget time setting with hide incomplete cost data option.
+      properties:
+        hide_incomplete_cost_data:
+          description: Whether to hide incomplete cost data in the widget.
+          example: false
+          type: boolean
+      required:
+      - hide_incomplete_cost_data
+      type: object
     WidgetTimeWindows:
       description: Define a time window.
       enum:

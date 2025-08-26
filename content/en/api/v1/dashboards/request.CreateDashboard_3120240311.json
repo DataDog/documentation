@@ -1,0 +1,48 @@
+{
+  "title": "Example-Dashboard with hide incomplete cost data",
+  "widgets": [
+    {
+      "definition": {
+        "title": "",
+        "show_legend": true,
+        "legend_layout": "auto",
+        "legend_columns": [
+          "avg",
+          "min",
+          "max",
+          "value",
+          "sum"
+        ],
+        "time": {
+          "hide_incomplete_cost_data": true
+        },
+        "type": "timeseries",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "formula": "query1"
+              }
+            ],
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "avg:system.cpu.user{*}"
+              }
+            ],
+            "response_format": "timeseries",
+            "style": {
+              "palette": "dog_classic",
+              "line_type": "solid",
+              "line_width": "normal"
+            },
+            "display_type": "line"
+          }
+        ]
+      }
+    }
+  ],
+  "layout_type": "ordered",
+  "reflow_type": "auto"
+}
