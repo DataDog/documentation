@@ -13,6 +13,8 @@ jobs:
     - uses: actions/labeler@ac9175f8a1f3625fd0d4fb234536d26811351594 # v4.3.0
       with:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
+        sync-labels: true
+        dot: true
 
     - name: Set documentation preview
       if: github.event.pull_request.head.repo.fork == false && github.ref != 'refs/heads/guacbot/translation-pipeline'
