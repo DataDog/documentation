@@ -2443,10 +2443,10 @@ menu:
       parent: incidents
       identifier: incidents_clipboard
       weight: 8
-    - name: Guides
-      url: service_management/incident_management/guides
+    - name: Integrations
+      url: service_management/incident_management/integrations
       parent: incidents
-      identifier: incidents_guide
+      identifier: incidents_integrations
       weight: 9
     - name: On-Call
       url: service_management/on-call/
