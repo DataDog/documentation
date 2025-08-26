@@ -97,7 +97,7 @@ By default, the DDOT Collector ships with the following Collector components. Yo
 - [probabilisticsamplerprocessor][32]
 - [resourcedetectionprocessor][33]
 - [resourceprocessor][34]
-- routingprocessor (removed since version 7.71.0)
+- routingprocessor (deprecated and removed in v7.71.0; use the [routingconnector][56] instead)
 - [tailsamplingprocessor][36]
 - [transformprocessor][37]
 
