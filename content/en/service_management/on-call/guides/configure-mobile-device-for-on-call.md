@@ -10,7 +10,7 @@ Being on-call requires reliable and timely notifications to ensure you can respo
 
 1. Install the [Datadog mobile app][1].
 2. [Set up push notifications](#set-up-push-notifications): Enable your device to receive notifications from the Datadog mobile app.
-3. [Circumvent mute and Do Not Disturb mode](#circumvent-mute-and-do-not-disturb-mode): Receive push notifications, voice calls, and SMS while your device is in Do Not Disturb mode.
+3. [Circumvent mute and Do Not Disturb mode](#circumvent-mute-and-do-not-disturb-mode-for-on-call): Receive push notifications, voice calls, and SMS while your device is in Do Not Disturb mode.
 
 ## Set up push notifications
 <div class="alert alert-info">
@@ -117,6 +117,8 @@ For reliability, Datadog uses a rotating set of phone numbers to contact you. To
 3. After this contact is created, open your iOS system settings and navigate to **Focus** > **Do Not Disturb**.
 
 4. Under **People**, allow notifications from the Datadog On-Call contact. If you enabled critical alerts for Datadog push applications, then the Datadog mobile app also appears under **Apps**.
+
+5. To bypass silent mode, navigate to the Datadog On-Call contact >> tap **Ringstone** >> activate **Emergency Bypass**.
 {{% /tab %}}
 
 {{% tab "Android" %}}
@@ -138,4 +140,10 @@ For reliability, Datadog uses a rotating set of phone numbers to contact you. To
 <a href="https://datadog-on-call.s3.amazonaws.com/datadog-on-call.vcf">Download the current version of the Datadog On-Call contact card</a>. <strong>Note</strong>: The contact card is subject to change at any time.
 </div>
 
+## Troubleshooting
+For help with troubleshooting, [contact Datadog support][2]. You can also send a message in the [Datadog public Slack][3] [#mobile-app][4] channel.
+
 [1]: /service_management/mobile/?tab=ios
+[2]: /help/
+[3]: https://chat.datadoghq.com/
+[4]: https://datadoghq.slack.com/archives/C0114D5EHNG

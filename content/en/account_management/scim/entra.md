@@ -50,10 +50,12 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 2. In the **Provisioning Mode** menu, select **Automatic**
 3. Open **Admin Credentials**
 4. Complete the **Admin Credentials** section as follows:
-    - **Tenant URL**: `https://{{< region-param key="dd_full_site" >}}/api/v2/scim` **Note:** Use the appropriate subdomain for your site. To find your URL, see [Datadog sites][3].
+    - **Tenant URL**: `https://{{< region-param key="dd_full_site" >}}/api/v2/scim?aadOptscim062020`
+        - **Note:** Use the appropriate subdomain for your site. To find your URL, see [Datadog sites][3].
+        - **Note:** The `?aadOptscim062020` part of the Tenant URL is specifically for Entra ID. This is a flag that tells Entra to correct its SCIM behavior as outlined in this [Microsoft Entra documentation][8]. If you are not using Entra ID, you should not include this suffix on the URL.
     - **Secret Token**: Use a valid Datadog application key. You can create an application key on [your organization settings page][4]. To maintain continuous access to your data, use a [service account][5] application key.
 
-{{< img src="/account_management/scim/admin-credentials-2.png" alt="Azure AD Admin Credentials configuration screen">}}
+{{< img src="/account_management/scim/admin-credentials-entra-flag.png" alt="Azure AD Admin Credentials configuration screen">}}
 
 5. Click **Test Connection**, and wait for the message confirming that the credentials are authorized to enable provisioning.
 6. Click **Save**. The mapping section appears. See the following section to configure mapping.
@@ -91,3 +93,4 @@ Group mapping is not supported.
 [5]: /account_management/org_settings/service_accounts
 [6]: https://entra.microsoft.com/
 [7]: https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference#cloud-application-administrator
+[8]: https://learn.microsoft.com/en-us/entra/identity/app-provisioning/application-provisioning-config-problem-scim-compatibility#flags-to-alter-the-scim-behavior

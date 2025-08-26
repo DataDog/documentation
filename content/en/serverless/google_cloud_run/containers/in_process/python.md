@@ -13,17 +13,26 @@ further_reading:
 ---
 
 ## Setup
-1. **Install the Datadog Python tracer** in your Dockerfile.
 
-   {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
-RUN pip install --target /dd_tracer/python/ ddtrace
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-process/python">available on GitHub</a>.</div>
+
+1. **Install the Datadog Python tracer**.
+
+   Add `ddtrace` to your `requirements.txt` or `pyproject.toml`. You can find the latest version on [PyPI][1]:
+   {{< code-block lang="text" filename="requirements.txt" disable_copy="false" collapsible="true" >}}
+ddtrace==<VERSION>
 {{< /code-block >}}
 
-   For more information, see [Tracing Python applications][1].
+   Alternatively, you can install the tracer in your Dockerfile:
+   {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
+RUN pip install ddtrace
+{{< /code-block >}}
+
+   For more information, see [Tracing Python applications][2].
 
 2. **Install serverless-init**.
 
-   {{% gcr-install-serverless-init cmd="\"/dd_tracer/python/bin/ddtrace-run\", \"python\", \"path/to/your/python/app.py\"" %}}
+   {{% gcr-install-serverless-init cmd="\"ddtrace-run\", \"python\", \"path/to/your/python/app.py\"" %}}
 
 3. **Set up logs**.
 
@@ -55,11 +64,19 @@ logger = structlog.get_logger()
 logger.info("Hello world!")
 {{< /code-block >}}
 
-   For more information, see [Correlating Python Logs and Traces][2].
+   For more information, see [Correlating Python Logs and Traces][3].
 
 4. **Configure your application**.
 
-{{% gcr-configure-env-vars language="python" %}}
+{{% gcr-configure %}}
+
+5. {{% gcr-service-label %}}
+
+6. **Send custom metrics**.
+
+   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5].
+
+{{% gcr-env-vars instrumentationMethod="in-process" language="python" %}}
 
 ## Troubleshooting
 
@@ -69,5 +86,8 @@ logger.info("Hello world!")
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
-[2]: /tracing/other_telemetry/connect_logs_and_traces/python/
+[1]: https://pypi.org/project/ddtrace/
+[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
+[3]: /tracing/other_telemetry/connect_logs_and_traces/python/
+[4]: /developers/dogstatsd/?tab=python#install-the-dogstatsd-client
+[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples

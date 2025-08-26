@@ -13,6 +13,9 @@ further_reading:
 ---
 
 ## Setup
+
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-process/dotnet">available on GitHub</a>.</div>
+
 1. **Install the Datadog .NET tracer** in your Dockerfile.
 
    Because GitHub requests are rate limited, you must pass a GitHub token saved in the environment variable `GITHUB_TOKEN` as a [Docker build secret][1] `--secret id=github-token,env=GITHUB_TOKEN`.
@@ -65,7 +68,15 @@ logger.LogInformation("Hello World!");
 
 4. **Configure your application**.
 
-{{% gcr-configure-env-vars language="csharp" %}}
+{{% gcr-configure %}}
+
+5. {{% gcr-service-label %}}
+
+6. **Send custom metrics**.
+
+   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5].
+
+{{% gcr-env-vars instrumentationMethod="in-process" language="csharp" %}}
 
 ## Troubleshooting
 
@@ -78,3 +89,5 @@ logger.LogInformation("Hello World!");
 [1]: https://docs.docker.com/build/building/secrets/
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=linux
 [3]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
+[4]: /developers/dogstatsd/?tab=dotnet#install-the-dogstatsd-client
+[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=dotnet#code-examples

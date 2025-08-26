@@ -13,6 +13,9 @@ further_reading:
 ---
 
 ## Setup
+
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-process/java">available on GitHub</a>.</div>
+
 1. **Install the Datadog Java tracer**.
 
    1. Add the Datadog Java tracer to your Dockerfile:
@@ -33,7 +36,7 @@ ENV JAVA_TOOL_OPTIONS="-javaagent:agent.jar"
 </dependency>
 {{< /code-block >}}
       {{% /tab %}}
-      
+
       {{% tab "Gradle" %}}
 {{< code-block lang="groovy" disable_copy="false" >}}
 implementation 'com.datadoghq:dd-trace-api:DD_TRACE_JAVA_VERSION_HERE'
@@ -75,7 +78,15 @@ logger.info("Hello World!");
 
 4. **Configure your application**.
 
-{{% gcr-configure-env-vars language="java" %}}
+{{% gcr-configure%}}
+
+5. {{% gcr-service-label %}}
+
+6. **Send custom metrics**.
+
+   To send custom metrics, [install the DogStatsD client][3] and [view code examples][4].
+
+{{% gcr-env-vars instrumentationMethod="in-process" language="java" %}}
 
 ## Troubleshooting
 
@@ -87,3 +98,6 @@ logger.info("Hello World!");
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [2]: /tracing/other_telemetry/connect_logs_and_traces/java/
+[3]: /developers/dogstatsd/?tab=java#install-the-dogstatsd-client
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=java#code-examples
+

@@ -19,7 +19,11 @@ further_reading:
   text: API oficial y creada por la comunidad y bibliotecas de cliente de DogStatsD
 - link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
   tag: Blog
-  text: Monitoriza las aplicaciones web Linux en Azure App Service con Datadog
+  text: Monitorizar las aplicaciones web Linux en Azure App Service con Datadog
+- link: https://www.datadoghq.com/blog/datadog-csi-driver/
+  tag: Blog
+  text: Llevar la observabilidad de alto rendimiento a entornos Kubernetes seguros
+    con el controlador CSI de Datadog
 title: DogStatsD
 ---
 
@@ -99,16 +103,24 @@ docker run -d --cgroupns host \
 
 Si necesitas cambiar el puerto utilizado para recopilar métricas de StatsD, utiliza la variable de entorno `DD_DOGSTATSD_PORT="<NEW_DOGSTATSD_PORT>`. También puedes configurar DogStatsD para utilizar un [socket de dominio UNIX][1].
 
-#### Detección de origen a través de UDP
+#### Detección del origen a través de UDP
 
-La detección de origen es compatible con el Agent v6.10.0+, y permite a DogStatsD detectar de dónde proceden las métricas de contenedor y automáticamente etiquetar las métricas. Cuando este modo está activado, todas las métricas recibidas a través de UDP son etiquetadas por las mismas etiquetas (tags) de pod como métricas de Autodiscovery.
+La detección del origen es compatible con el Agent v6.10.0 o posterior, y permite a DogStatsD detectar de dónde proceden las métricas de contenedor y automáticamente etiquetar las métricas. Cuando este modo está activado, todas las métricas recibidas a través de UDP son etiquetadas por las mismas etiquetas (tags) de pod como métricas de Autodiscovery.
+
+Se añaden las siguientes etiquetas para [Docker][3]. Es importante señalar que la [cardinalidad][4] es un concepto clave cuando se trata de facturación.
 
 La detección del origen en entornos distintos a Kubernetes se basa en una extensión del protocolo DogStatsD en [Datagram Format and Shell Usage][2]. Para habilitar la función en el Agent, establece la variable de entorno `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT` en `true`.
 
-**Nota**: La detección de origen no es compatible con entornos de Fargate.
+<div class="alert alert-warning">
+  Por defecto, la detección del origen está activada en todos los clientes DogStatsD, pero no está activada por defecto en el Datadog Agent. Para desactivar la detección del origen en un cliente, consulta la documentación de la biblioteca DogStatsD específica que estás utilizando.
+</div>
+
+**Nota**: La detección del origen no es compatible con entornos de Fargate.
 
 [1]: /es/developers/dogstatsd/unix_socket/
 [2]: /es/developers/dogstatsd/datagram_shell/?tab=metrics#dogstatsd-protocol-v12
+[3]: /es/containers/docker/tag/
+[4]: /es/getting_started/tagging/assigning_tags/?tab=containerizedenvironments#tags-cardinality
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
@@ -167,11 +179,13 @@ Con esto, cualquier pod que ejecute tu aplicación es capaz de enviar métricas 
 
 **Nota**: Como práctica recomendada, Datadog recomienda utilizar el etiquetado de servicio unificado al asignar atributos. Éste une la telemetría de Datadog mediante el uso de tres etiquetas estándares: `env`, `service` y `version`. Para saber cómo unificar tu entorno, consulta [etiquetado de servicio unificado][4].
 
-#### Detección de origen a través de UDP
+#### Detección del origen a través de UDP
 
-La detección de origen es compatible con Agent 6.10.0+ y permite a DogStatsD detectar de dónde proceden las métricas de contenedor y etiquetar métricas automáticamente. Cuando este modo está activado, todas las métricas recibidas a través de UDP son etiquetadas por las mismas etiquetas de pod como métricas de Autodiscovery.
+La detección del origen es compatible con Agent 6.10.0 o posterior y permite a DogStatsD detectar de dónde proceden las métricas de contenedor y etiquetar métricas automáticamente. Cuando este modo está activado, todas las métricas recibidas a través de UDP son etiquetadas por las mismas etiquetas de pod como métricas de Autodiscovery.
 
-1. Para activar la detección de origen, añade la configuración `global.originDetectionUnified.enabled` a tu manifiesto `datadog-agent.yaml`:
+Se añaden las siguientes etiquetas para [Kubernetes][8]. Es importante señalar que la [cardinalidad][9] es un concepto clave cuando se trata de facturación.
+
+1. Para activar la detección del origen, añade la configuración `global.originDetectionUnified.enabled` a tu manifiesto `datadog-agent.yaml`:
 
     ```yaml
     global:
@@ -181,7 +195,7 @@ La detección de origen es compatible con Agent 6.10.0+ y permite a DogStatsD de
 
 **Notas**: 
 * Una alternativa a UDP son los [sockets de dominio UNIX][5].
-* La detección de origen con UDP puede utilizar el ID del pod como ID de entidad.
+* La detección del origen con UDP puede utilizar el ID del pod como ID de entidad.
 
 Para utilizar el ID del pod como ID de entidad, añade las siguientes líneas al manifiesto de tu aplicación:
 
@@ -204,6 +218,9 @@ Para establecer [cardinalidad de etiquetas][6] para las métricas recopiladas me
 [5]: /es/developers/dogstatsd/unix_socket/?tab=host#using-origin-detection-for-container-tagging
 [6]: /es/getting_started/tagging/assigning_tags/#environment-variables
 [7]: /es/metrics/custom_metrics/
+[8]: /es/containers/kubernetes/tag/
+[9]: /es/getting_started/tagging/assigning_tags/?tab=containerizedenvironments#tags-cardinality
+
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -244,7 +261,8 @@ Reunir métricas personalizadas con [DogStatsD][1] con helm:
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://github.com/containernetworking/cni
 [4]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
-{{% /tab %}}{{< /tabs >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Cliente DogStatsD
 

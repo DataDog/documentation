@@ -13,6 +13,9 @@ further_reading:
 ---
 
 ## Setup
+
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-process/php">available on GitHub</a>.</div>
+
 1. **Install the Datadog PHP tracer** in your Dockerfile.
 
    {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
@@ -44,7 +47,15 @@ apk add libgcc
 
 4. **Configure your application**.
 
-{{% gcr-configure-env-vars language="php" %}}
+{{% gcr-configure %}}
+
+5. {{% gcr-service-label %}}
+
+6. **Send custom metrics**.
+
+   To send custom metrics, [install the DogStatsD client][3] and [view code examples][4].
+
+{{% gcr-env-vars instrumentationMethod="in-process" language="php" %}}
 
 ## Troubleshooting
 
@@ -56,4 +67,6 @@ apk add libgcc
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/php/
 [2]: /tracing/other_telemetry/connect_logs_and_traces/php/
+[3]: /developers/dogstatsd/?tab=php#install-the-dogstatsd-client
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=php#code-examples
 
