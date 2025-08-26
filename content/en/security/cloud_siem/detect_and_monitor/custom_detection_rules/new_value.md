@@ -126,6 +126,10 @@ Toggle **Enable Optional Group By** section, if you want to group events even wh
 
 {{% security-rule-say-whats-happening %}}
 
+### Create a suppression
+
+{{% cloud_siem/create_suppression %}}
+
 {{% /tab %}}
 {{% tab "Historical job" %}}
 

@@ -109,8 +109,6 @@ Click **Save Rule**.
 {{% /tab %}}
 {{% tab "Scheduled rule" %}}
 
-Click **Save Rule**.
-
 ### Set conditions
 
 {{% cloud_siem/set_conditions %}}
@@ -138,6 +136,18 @@ In this example, when there are more than five failed logins and at least one su
 {{% security-rule-time-windows %}}
 
 Click **Add Condition** to add additional conditions.
+
+#### Other parameters
+
+In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected within a specified time frame. For example, the same signal updates if any new value is detected within 1 hour, for a maximum duration of 24 hours.
+
+Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
+
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+
+##### Decreasing non-production severity
+
+{{% cloud_siem/decreasing_non_prod_severity %}}
 
 ### Add custom schedule
 
@@ -172,9 +182,19 @@ The rule condition joins these queries together based on their `group by` value.
 
 In this example, when there are more than five failed logins and at least one successful login for the same `User Name`, the first condition is matched, and a security signal is generated.
 
+#### Other parameters
+
+In the **Job multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected within a specified time frame. For example, the same signal updates if any new value is detected within 1 hour, for a maximum duration of 24 hours.
+
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+
 ### Notify when job is complete
 
 {{% cloud_siem/notify_when_job_complete %}}
+
+### Describe your playbook
+
+{{% security-rule-say-whats-happening %}}
 
 Click **Save Rule**.
 
