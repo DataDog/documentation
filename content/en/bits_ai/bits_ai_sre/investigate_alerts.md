@@ -67,7 +67,7 @@ Additionally, if you have already configured `@slack`, `@case`, or `@oncall` [no
 {{% collapse-content title="Slack" level="h5" expanded=false id="slack" %}}
 1. Ensure the [Datadog Slack app][7] is installed in your Slack workspace.
 1. In your monitor, go to **Configure notifications and automations** and add the `@slack-{channel-name}` handle. This sends monitor notifications to your chosen Slack channel.
-1. Lastly, go to [**Bits AI** > **Settings** > **Integrations**][9] and connect your Slack workspace. This allows Bits to write its findings directly under the monitor notification in Slack. **Note:** Each Slack workspace can only be connected to one Datadog organization.
+1. Lastly, go to [**Bits AI** > **SRE Agent** > **Settings** > **Integrations**][9] and connect your Slack workspace. This allows Bits to write its findings directly under the monitor notification in Slack. **Note:** Each Slack workspace can only be connected to one Datadog organization.
 {{% /collapse-content %}}
 {{% collapse-content title="Case Management" level="h5" expanded=false id="case-management" %}}
 In the **Configure notifications and automations** section, add the `@case-{project-name}` handle. Case Management also supports optional two-way syncing with [ticketing platforms like Jira and ServiceNow][14]. 
