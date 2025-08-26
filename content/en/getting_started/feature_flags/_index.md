@@ -20,7 +20,7 @@ Datadog Feature Flags offer a powerful, integrated way to manage feature deliver
 
 * **OpenFeature compatible:** Built on the OpenFeature standard, ensuring compatibility with existing OpenFeature implementations and providing a vendor-neutral approach to feature flag management.
 
-## Creating Your First Feature Flag
+## Creating your first feature flag
 
 ### Step 1: Import and initialize the SDK
 
@@ -39,28 +39,28 @@ import { OpenFeature } from '@openfeature/web-sdk';
 
 // Initialize the provider
 const provider = new DatadogProvider({
-  clientToken: 'your-datadog-client-token',
-  applicationId: 'your-application-id',
-  enableExposureLogging: true,
-  site: 'datadoghq.com',
-  env: '<prod|staging|dev>',
-  service: 'my-service',
-  version: '1.0.0',
+   clientToken: '<CLIENT_TOKEN>',
+   applicationId: '<APPLICATION_ID>',
+   enableExposureLogging: true,
+   site: 'datadoghq.com',
+   env: '<YOUR_ENV>',
+   service: 'my-service',
+   version: '1.0.0',
 });
 
 // Set the provider
 await OpenFeature.setProvider(provider);
 ```
 
-More information about OpenFeature SDK configuration options can be found in its [README](https://github.com/DataDog/openfeature-js-client/blob/main/README.md).
+More information about OpenFeature SDK configuration options can be found in its [README][1].
 
 ### Step 2: Create a feature flag
 
-Use the [feature flags creation UI](https://app.datadoghq.com/feature-flags/create) to bootstrap your first feature flag. By default, your flag will be disabled in all environments.
+Use the [feature flags creation UI][2] to bootstrap your first feature flag. By default, the flag is disabled in all environments.
 
 ### Step 3: Evaluate your flag and write your feature code
 
-In your application code, use the SDK to evaluate your flag and gate your new feature.
+In your application code, use the SDK to evaluate the flag and gate the new feature.
 
 ```js
 import { OpenFeature } from '@openfeature/web-sdk';
@@ -70,33 +70,33 @@ const client = OpenFeature.getClient();
 // If applicable, set relevant attributes on the client's global context
 // (e.g. org id, user email)
 await OpenFeature.setContext({
-  org: { id: 2 },
-  user: { id: 'user-123', email: 'user@example.com' }
+   org: { id: 2 },
+   user: { id: 'user-123', email: 'user@example.com' }
 });
 
-// This is what the SDK will return if the flag is disabled in 
+// This is what the SDK returns if the flag is disabled in
 // the current environment
 const fallback = false; 
 
 const showFeature = await client.getBooleanValue('show-new-feature', fallback);
 if (showFeature) {
-  // Feature code here
+   // Feature code here
 }
 ```
 
-After you’ve completed this step, you’ll need to redeploy your application to pick up these changes. Additional usage examples can be found in the SDK’s [README](https://github.com/DataDog/openfeature-js-client/blob/main/README.md).
+After you’ve completed this step, redeploy your application to pick up these changes. Additional usage examples can be found in the SDK’s [README][1].
 
 ### Step 4: Define your targeting rules and enable your feature flag
 
-Now that your application is ready to check the value of your flag, you’re ready to start adding targeting rules. Targeting rules enable you to define where or to whom to serve different variants of your feature. 
+Now that the application is ready to check the value of your flag, you’re ready to start adding targeting rules. Targeting rules enable you to define where or to whom to serve different variants of your feature. 
 
-Go to **Feature Flags > [your flag] > Targeting Rules & Rollouts**, then select the `Environment` whose rules you want to modify from the dropdown. Now click `Edit Targeting Rules`.
+Go to **Feature Flags > <YOUR_FLAG_NAME> > Targeting Rules & Rollouts**, then select the `Environment` whose rules you want to modify from the dropdown. Click `Edit Targeting Rules`.
 
 ![Targeting Rules & Rollouts](/content/en/getting_started/feature_flags/ff-targeting-rules-and-rollouts.png)
 
 ### Step 5: Publish your rules in your environments
 
-After saving changes to your targeting rules, click you’ll now need to “publish” those rules by enabling your flag in the environment of your choice. 
+After saving changes to your targeting rules, publish those rules by enabling your flag in the environment of your choice. 
 
 As a general best practice, changes should be rolled out in a `Staging` environment before rolling out in `Production`.
 
@@ -104,12 +104,13 @@ Go to Targeting Rules & Rollouts > Per environment override and select Use targe
 
 ![Publish Targeting Rules](/content/en/getting_started/feature_flags/publish-targeting-rules.png)
 
-Congratulations! Your flag is now serving your targeting rules in this environment - you can continue to edit these targeting rules to control where your variants are served.
+The flag now serves your targeting rules in this environment. You can continue to edit these targeting rules to control where the variants are served.
 
 ### Step 6: Monitor your rollout
 
-Datadog flags offer real-time exposure tracking and “gut-check” metrics like **error rate** and **page load time** to help you track the progress of your feature’s rollout directly from the feature flag details page! As you incrementally release your feature with your flag, refer to the `Real-Time Metric Overview` panel in the Datadog UI to see how your feature impacts your application performance.
+Monitor the feature rollout from the feature flag details page, which provides real-time exposure tracking and metrics such as **error rate** and **page load time**. As you incrementally release the feature with your flag, refer to the `Real-Time Metric Overview` panel in the Datadog UI to see how your feature impacts your application performance.
 
 ![Real Time Flag Metrics Panel](/content/en/getting_started/feature_flags/real-time-flag-metrics.png)
 
-## Further Reading
+[1]: https://github.com/DataDog/openfeature-js-client/blob/main/README.md
+[2]: https://app.datadoghq.com/feature-flags/create
