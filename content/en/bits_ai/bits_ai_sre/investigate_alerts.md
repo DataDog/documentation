@@ -28,7 +28,7 @@ An investigation initiates when a monitor transitions to the alert state. Transi
 Alternatively, you can manually invoke Bits on an individual monitor alert or warn event.
 
 - **Option 1: Monitor Status Page**
-  -  For a monitor that is ready for Bits, navigate to its status page and click **Investigate with Bits AI SRE** on the top right corner. 
+  -  For a monitor that is ready for Bits, navigate to its status page and click **Investigate with Bits AI SRE** on the top-right corner. 
   -  Alternatively, select an alert from the event timeline and click **Investigate with Bits AI SRE** on the right.
 - **Option 2: Monitor Event Side Panel**
   -  On the monitor event side panel, click **Investigate with Bits AI SRE**.
@@ -73,7 +73,7 @@ Additionally, if you have already configured `@slack`, `@case`, or `@oncall` [no
 In the **Configure notifications and automations** section, add the `@case-{project-name}` handle. Case Management also supports optional two-way syncing with [ticketing platforms like Jira and ServiceNow][14]. 
 {{% /collapse-content %}}
 {{% collapse-content title="On-Call" level="h5" expanded=false id="on-call" %}}
-In the **Configure notifications and automations** section, add the @oncall-{team} handle. Bits' findings will appear on the On-Call page in the Datadog mobile app, helping teams triage issues more quickly on the go.     
+In the **Configure notifications and automations** section, add the @oncall-{team} handle. Bits' findings appear on the On-Call page in the Datadog mobile app, helping your teams triage issues on the go.     
 {{% /collapse-content %}}
 
 ### Configure knowledge base integrations
@@ -151,4 +151,4 @@ Every piece of feedback you give generates a **memory**. Bits uses these memorie
 [11]: /account_management/rbac
 [12]: /monitors/notify/#renotify
 [13]: https://app.datadoghq.com/integrations/confluence
-[14]: https://docs.datadoghq.com/service_management/case_management/notifications_integrations/#third-party-tickets
+[14]: /service_management/case_management/notifications_integrations/#third-party-tickets
