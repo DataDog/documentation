@@ -319,15 +319,9 @@ Explore your Datadog Agent and Collector configuration.
 
 {{< img src="/opentelemetry/embedded_collector/fleet_automation.png" alt="Review your Agent and Collector configuration from the Fleet Automation page." style="width:100%;" >}}
 
-### Live container monitoring
+### Infrastructure monitoring
 
-Monitor your container health using Live Container Monitoring capabilities.
-
-{{< img src="/opentelemetry/embedded_collector/containers.png" alt="Monitor your container health from the Containers page." style="width:100%;" >}}
-
-### Infrastructure node health
-
-View runtime and infrastructure metrics to visualize, monitor, and measure the performance of your nodes.
+View runtime and infrastructure metrics to visualize, monitor, and measure the performance of your hosts.
 
 {{< img src="/opentelemetry/embedded_collector/infrastructure.png" alt="View runtime and infrastructure metrics from the Host List." style="width:100%;" >}}
 
