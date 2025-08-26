@@ -5230,6 +5230,12 @@ components:
         error:
           $ref: '#/components/schemas/LogsAPIError'
       type: object
+    LogsAPILimitReachedResponse:
+      description: Response returned by the Logs API when the max limit has been reached.
+      properties:
+        error:
+          $ref: '#/components/schemas/LogsAPIError'
+      type: object
     LogsArithmeticProcessor:
       description: "Use the Arithmetic Processor to add a new attribute (without spaces
         or special characters\nin the new attribute name) to a log with the result
@@ -21004,6 +21010,21 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        event_management_correlation_correlated_events_sum:
+          description: Shows the sum of all Event Management correlated events over
+            all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        event_management_correlation_correlated_related_events_sum:
+          description: Shows the sum of all Event Management correlated related events
+            over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        event_management_correlation_sum:
+          description: Shows the sum of all Event Management correlations over all
+            hours in the current date for all organizations.
+          format: int64
+          type: integer
         fargate_container_profiler_profiling_fargate_avg:
           description: The average number of Profiling Fargate tasks over all hours
             in the current date for all organizations.
@@ -21036,6 +21057,11 @@ components:
           type: integer
         flex_logs_compute_small_avg:
           description: Shows the average number of Flex Logs Compute Small Instances
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_compute_xlarge_avg:
+          description: Shows the average number of Flex Logs Compute Extra Large Instances
             over all hours in the current date for the given org.
           format: int64
           type: integer
@@ -21934,6 +21960,21 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        event_management_correlation_correlated_events_sum:
+          description: Shows the sum of all Event Management correlated events over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        event_management_correlation_correlated_related_events_sum:
+          description: Shows the sum of all Event Management correlated related events
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        event_management_correlation_sum:
+          description: Shows the sum of all Event Management correlations over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
         fargate_container_profiler_profiling_fargate_avg:
           description: The average number of Profiling Fargate tasks over all hours
             in the current month for the given org.
@@ -21965,6 +22006,11 @@ components:
           type: integer
         flex_logs_compute_small_avg:
           description: Shows the average number of Flex Logs Compute Small Instances
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_compute_xlarge_avg:
+          description: Shows the average number of Flex Logs Compute Extra Large Instances
             over all hours in the current date for the given org.
           format: int64
           type: integer
@@ -22869,6 +22915,21 @@ components:
             hours in the current month for all organizations.
           format: int64
           type: integer
+        event_management_correlation_agg_sum:
+          description: Shows the sum of all Event Management correlations over all
+            hours in the current month for all organizations.
+          format: int64
+          type: integer
+        event_management_correlation_correlated_events_agg_sum:
+          description: Shows the sum of all Event Management correlated events over
+            all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        event_management_correlation_correlated_related_events_agg_sum:
+          description: Shows the sum of all Event Management correlated related events
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         fargate_container_profiler_profiling_fargate_avg_sum:
           description: The average number of Profiling Fargate tasks over all hours
             in the current month for all organizations.
@@ -22901,6 +22962,11 @@ components:
           type: integer
         flex_logs_compute_small_avg_sum:
           description: Shows the average number of Flex Logs Compute Small Instances
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        flex_logs_compute_xlarge_avg_sum:
+          description: Shows the average number of Flex Logs Compute Extra Large Instances
             over all hours in the current months for all organizations.
           format: int64
           type: integer
@@ -30451,6 +30517,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsAPILimitReachedResponse'
+          description: Unprocessable Entity
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create an index

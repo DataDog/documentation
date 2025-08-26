@@ -57,7 +57,7 @@ Dynamic Instrumentation also provides autocomplete for log templates and other t
 
 [1]: /dynamic_instrumentation/
 [2]: /agent/
-[3]: /agent/remote_config/
+[3]: /tracing/guide/remote_config
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: /dynamic_instrumentation/expression-language
 

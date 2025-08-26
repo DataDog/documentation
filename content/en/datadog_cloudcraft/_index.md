@@ -29,6 +29,7 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 
 ### Prerequisites
 
+- To access Cloudcraft in Datadog, you need the `cloudcraft_read` [permission](#permissions).
 - [Resource collection][2] must be enabled for your AWS accounts.
 - For the best experience, Datadog strongly recommends using the AWS-managed [`SecurityAudit`][5] policy, or the more permissive [`ReadOnlyAccess`][6] policy.
 - Viewing content on the [Security overlay][10] requires additional products to be enabled:
@@ -36,6 +37,10 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
   - To view sensitive data, [Sensitive Data Scanner][12] must be enabled. For a user to turn the layer on, they must have the [`data_scanner_read`][13] permission.
 
 **Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you don't grant permission to list S3 buckets, the diagram excludes those buckets. If permissions block certain resources, an alert displays in the UI.
+
+<div class="alert alert-warning"><strong>Note</strong>: Enabling resource collection can impact your AWS CloudWatch costs. To avoid these charges, disable <strong>Usage</strong> metrics in the <strong>Metric Collection</strong> tab of the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog AWS Integration</a>.<br/>
+
+{{< img src="/infrastructure/resource_catalog/aws_usage_toggle.png" alt="AWS Usage toggle in account settings" style="width:100%;" >}}</div>
 
 ## Getting started
 
@@ -96,6 +101,10 @@ Use the search bar to locate resources on the diagram by name, ID, or tag. This 
 
 {{< img src="datadog_cloudcraft/search_highlight_2.mp4" alt="Video showing the search and highlight feature in Cloudcraft" video=true >}}
 
+## Permissions
+
+To access Cloudcraft in Datadog, you need the `cloudcraft_read` permission. This permission is included in the Datadog Read Only Role by default. If your organization uses custom roles, add this permission to the appropriate role. For more information on managing permissions, see the [RBAC documentation][14].
+
 ## Next steps
 
 Learn how to navigate between [built-in overlays][4] to view your architecture from different perspectives. Each overlay is designed to support specific operational goals, such as:
@@ -122,3 +131,4 @@ Learn how to navigate between [built-in overlays][4] to view your architecture f
 [11]: /datadog_cloudcraft/overlays#cloud-cost-management
 [12]: /security/sensitive_data_scanner
 [13]: /account_management/rbac/permissions/#compliance
+[14]: /account_management/rbac/

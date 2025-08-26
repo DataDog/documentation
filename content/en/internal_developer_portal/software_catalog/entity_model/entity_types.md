@@ -401,6 +401,135 @@ Learn more about [peer tags and inferred entities][4].
 
 {{% /tab %}}
 
+{{% tab "Frontend" %}}
+In Software Catalog, a frontend (`kind:frontend`) represents a frontend application—such as a browser-based single-page application or mobile app—that interacts with services and APIs. Frontend entities offer a structured way to model user-facing applications in the same catalog alongside backend services.
+
+
+{{% collapse-content title="YAML for RUM app by name" level="h4" expanded=false id="rum-app-name" %}}
+
+This example shows a `kind:frontend` definition for a frontend application in RUM, linked by the name. You can find the name and ID under [Manage Applications][1], or you can click **Add Metadata** on an existing frontend app in Software Catalog to autofill the ID.
+
+### Example YAML definitions
+```yaml
+apiVersion: v3
+kind: frontend
+metadata:
+  name: checkout-webapp
+  displayName: Checkout Web App
+  description: Main frontend experience for the checkout flow in Shopist
+  owner: shopist-frontend
+  additionalOwners:
+    - name: ux-platform-team
+  type: team
+  links:
+    - name: "UX Design Guidelines"
+      type: doc
+      url: https://wiki.internal/checkout-design
+    - name: "Frontend Source Code"
+      type: repo
+      provider: github
+      url: https://github.com/shopist/checkout-webapp
+spec:
+  type: browser
+  lifecycle: production
+  tier: tier1
+  dependsOn:
+    - service:checkout-api
+    - service:payment-service
+  componentOf:
+    - system:shopist-checkout-platform
+```
+
+[1]: https://app.datadoghq.com/rum/list
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="YAML for RUM app by ID" level="h4" expanded=false id="rum-app-id" %}}
+
+This example shows a `kind:frontend` definition for a frontend application in RUM, linked by the ID. You can find the name and ID under [Manage Applications][1], or you can click **Add Metadata** on an existing frontend app in Software Catalog to autofill the ID.
+
+### Example YAML definitions
+```yaml
+apiVersion: v3
+kind: frontend
+metadata:
+  name: rum_application:750904cc-cdde-4d06-b427-5d3fec477219
+  displayName: Checkout Web App
+  description: Main frontend experience for the checkout flow in Shopist
+  owner: shopist-frontend
+  additionalOwners:
+    - name: ux-platform-team
+  type: team
+  links:
+    - name: "UX Design Guidelines"
+      type: doc
+      url: https://wiki.internal/checkout-design
+    - name: "Frontend Source Code"
+      type: repo
+      provider: github
+      url: https://github.com/shopist/checkout-webapp
+spec:
+  type: browser
+  lifecycle: production
+  tier: tier1
+  dependsOn:
+    - service:checkout-api
+    - service:payment-service
+  componentOf:
+    - system:shopist-checkout-platform
+```
+
+[1]: https://app.datadoghq.com/rum/list
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="YAML for manually defined frontend app" level="h4" expanded=false id="manually-created" %}}
+
+This example shows a `kind:frontend` definition for a manually declared frontend app.
+
+### Example YAML definitions
+```yaml
+apiVersion: v3
+kind: frontend
+metadata:
+  name: checkout-webapp
+  displayName: Checkout Web App
+  description: Main frontend experience for the checkout flow in Shopist
+  owner: shopist-frontend
+  additionalOwners:
+    - name: ux-platform-team
+  type: team
+  links:
+    - name: "UX Design Guidelines"
+      type: doc
+      url: https://wiki.internal/checkout-design
+    - name: "Frontend Source Code"
+      type: repo
+      provider: github
+      url: https://github.com/shopist/checkout-webapp
+spec:
+  type: browser
+  lifecycle: production
+  tier: tier1
+  dependsOn:
+    - service:checkout-api
+    - service:payment-service
+  componentOf:
+    - system:shopist-checkout-platform
+```
+
+{{% /collapse-content %}}
+
+When this definition is created:
+
+- The frontend app appears under the Frontend Apps section in Software Catalog.
+- If a RUM application exists with the same name or ID, its telemetry is automatically linked. You can find the name and ID under [Manage Applications][1], or you can click **Add Metadata** on an existing frontend app in Software Catalog to autofill the ID.
+- The entity aggregates metadata, dependencies, and real-time RUM performance metrics in a unified view.
+
+[1]: https://app.datadoghq.com/rum/list
+
+{{% /tab %}}
+
 {{% tab "Custom entities" %}}
 
 You can define custom entity types beyond service, system, datastore, queue, and API. Custom entities allow you to represent any component or resource that is important to your organization but does not fit into the standard categories.
