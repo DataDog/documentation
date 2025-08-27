@@ -57,7 +57,7 @@ A successful installation returns an Agent Status report that begins with Agent 
 
 ```text
 ====================
-Agent (v7.69.3)
+Agent (v7.x.x)
 ====================
   Status date: 2025-08-22 18:35:17.449 UTC (1755887717449)
   Agent start: 2025-08-22 18:16:27.004 UTC (1755886587004)
@@ -78,7 +78,7 @@ OTel Agent
 ==========
 
   Status: Running
-  Agent Version: 7.69.3
+  Agent Version: 7.x.x
   Collector Version: v0.129.0
 
   Receiver
@@ -364,3 +364,4 @@ View metrics from the DDOT Collector to monitor the Collector health.
 [8]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/rest-services/java/calendar
 [9]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/java/calendar/src/main/java/com/otel/service/CalendarService.java#L27-L48
 [10]: /opentelemetry/correlate/
+[11]: /opentelemetry/integrations/collector_health_metrics/
