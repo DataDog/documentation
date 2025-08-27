@@ -1,17 +1,20 @@
 ---
 title: Synthetic Monitoring Notifications
 further_reading:
-- link: "/monitors/manage/"
+- link: "synthetics/notifications/template_variables"
   tag: "Documentation"
-  text: "Learn how to manage monitors"
-- link: "/monitors/guide/integrate-monitors-with-statuspage/"
+  text: "Use template variables in your Synthetic Monitoring notifications"
+- link: "synthetics/notifications/conditional_alerting"
   tag: "Documentation"
-  text: "Learn how to integrate monitors with Statuspage"
+  text: "Use conditional alerting in your Synthetic Monitoring notifications"
+- link: "/synthetics/notifications/statuspage/"
+  tag: "Documentation"
+  text: "Learn how to integrate Synthetic monitors with Statuspage"
 ---
 
 ## Overview
 
-Customize your [Synthetic Monitoring notifications][1] to provide meaningful context for on-call responders. Datadog's message templating system enables you to enrich alerts with test details, extract data from test results, and route notifications conditionally based on the failure.
+Customize your [Synthetic Monitoring notifications][1] to provide meaningful context for on-call responders. Synthetic Monitoring's message templating system enables you to enrich alerts with test details, extract data from test results, and route notifications conditionally based on the failure.
 
 You can customize notifications using:
 
@@ -20,18 +23,6 @@ You can customize notifications using:
 - **[Conditional logic][3]**: Adapt alert messages across different test types and workflows.
 - **[Advanced usage][4]**: Structure complex messages using handlebars templating.
 - **[Custom notification display](#display-custom-notifications-message)**: Show only your custom message without default enriched content.
-
-## Use cases
-
-Synthetic Monitoring templating system supports a range of use cases:
-
-- **Basic context**: Include the test name, time, and locations.
-- **Failure specifics**: Add the failing step, error message, test duration, or response body.
-- **Step metadata**: Reference step names, order, execution time, and status.
-- **Variable values**: Insert test variables (for example, status code, response content).
-- **Conditional routing**: Route alerts to specific teams based on which step failed.
-- **Screenshots**: Browser and Mobile tests include screenshots in the message footer.
-- **Location metadata**: Include the failing location (for example, `private` or `managed`) in the message.
 
 ## Pre-filled monitor messages
 
@@ -208,13 +199,6 @@ You can select from the following options to hide or display the information rel
 | Slack   | Rich content + preview of failed run | Custom message only |
 
 See [Monitor Notifications][5] for more information.
-
-### Best practices
-
-- Always include a default `@notification` (outside any conditions) to prevent dropped messages.
-- Avoid complex logic for paging tools like PagerDuty, which require consistent routing for recovery.
-- Use conditional logic to override alert text, change priority, or split notifications between teams.
-
 
 ## Further Reading
 

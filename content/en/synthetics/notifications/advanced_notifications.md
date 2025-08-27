@@ -4,9 +4,9 @@ further_reading:
 - link: "/monitors/manage/"
   tag: "Documentation"
   text: "Learn how to manage monitors"
-- link: "/monitors/guide/integrate-monitors-with-statuspage/"
+- link: "/synthetics/notifications/statuspage/"
   tag: "Documentation"
-  text: "Learn how to integrate monitors with Statuspage"
+  text: "Learn how to integrate Synthetic monitors with Statuspage"
 ---
 
 ## Overview

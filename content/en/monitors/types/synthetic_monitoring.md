@@ -62,6 +62,12 @@ Conditional alerting
 
 For more information, see [Synthetic Monitoring notifications][6].
 
+## Best practices
+
+- Always include a default `@notification` (outside any conditions) to prevent dropped messages.
+- Avoid complex logic for paging tools like PagerDuty, which require consistent routing for recovery.
+- Use conditional logic to override alert text, change priority, or split notifications between teams.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -162,7 +162,7 @@ A notification is sent according to the set of alerting conditions. Use this sec
 3. Specify a renotification frequency. To prevent renotification on failing tests, check the option `Stop re-notifying on X occurrences`.
 4. Click **Save & Edit Recording** to save your test configuration and record your mobile app test steps.
 
-For more information, see [Synthetic Monitoring enhanced monitor messages and notifications][7].
+For more information, see [Synthetic Monitoring notifications][7].
 
 ## Flakiness 
 
@@ -216,7 +216,7 @@ If you are using the [custom role feature][9], add your user to any custom role 
 [4]: /synthetics/settings/?tab=specifyvalue#global-variables
 [5]: https://daringfireball.net/projects/markdown/syntax
 [6]: /monitors/notify/variables/?tab=is_alert#conditional-variables
-[7]: /monitors/types/synthetic_monitoring
+[7]: /synthetics/notifications/
 [8]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [9]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [11]: /mobile_app_testing/mobile_app_tests/steps/
