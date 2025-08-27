@@ -77,6 +77,14 @@ Create tables and analyze the data pulled from the following data sources:
 | Metrics              | [Metrics Explorer][7] |
 | Real User Monitoring | [RUM Explorer][8]  |
 | Reference Tables     | [Reference Tables][9] |
+| Security Signals     | [Security][11] |
+| Security Findings    | [Cloud Security][12] |
+| LLM Observability    | [LLM Observability][13] |
+| Events               | [Event Management][14] |
+| Audit Events         | [Audit Trail][15] |
+| Database Queries     | [Database Monitoring][16] |
+| CI Pipelines         | [CI Visibility][17] |
+| APM Spans            | [APM Explorer][18] |
 
 ## Configuring a spreadsheet
 
@@ -116,3 +124,11 @@ You must have edit access to restore general access to a restricted spreadsheet.
 [8]: https://app.datadoghq.com/rum/sessions
 [9]: https://app.datadoghq.com/reference-tables
 [10]: /account_management/rbac/
+[11]: https://app.datadoghq.com/security
+[12]: https://app.datadoghq.com/security/compliance
+[13]: https://app.datadoghq.com/llm/applications
+[14]: https://app.datadoghq.com/event/explorer
+[15]: https://app.datadoghq.com/audit-trail
+[16]: https://app.datadoghq.com/databases/queries
+[17]: https://app.datadoghq.com/ci/pipelines
+[18]: https://app.datadoghq.com/apm/traces
