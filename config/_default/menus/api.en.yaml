@@ -9356,6 +9356,23 @@ menu:
           - ListCatalogEntity
         unstable: []
         order: 1
+    - name: Spa
+      url: /api/latest/spa/
+      identifier: spa
+      generated: true
+    - name: Get SPA Recommendations
+      url: '#get-spa-recommendations'
+      identifier: spa-get-spa-recommendations
+      parent: spa
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSPARecommendations
+        unstable:
+          - v2
+        order: 1
     - name: Spans
       url: /api/latest/spans/
       identifier: spans
