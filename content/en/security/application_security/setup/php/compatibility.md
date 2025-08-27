@@ -1,7 +1,7 @@
 ---
 title: PHP Compatibility Requirements
 aliases:
-  - /security/application_security/threats/setup/compatibility/PHP
+  - /security/application_security/threats/setup/compatibility/php
 ---
 
 ## App and API Protection capabilities support
