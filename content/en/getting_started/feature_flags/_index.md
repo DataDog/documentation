@@ -118,6 +118,10 @@ Monitor the feature rollout from the feature flag details page, which provides r
 
 {{< img src="getting_started/feature_flags/real-time-flag-metrics.png" alt="Real-time flag metrics panel" style="width:100%;" >}}
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://github.com/DataDog/openfeature-js-client/blob/main/README.md
 [2]: https://app.datadoghq.com/feature-flags/create
 [3]: https://app.datadoghq.com/feature-flags/environments
