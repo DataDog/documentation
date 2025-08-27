@@ -71,20 +71,20 @@ Create tables and analyze the data pulled from the following data sources:
 
 | Data Source          | Product page       |
 | -------------------- | -----------        |
+| APM Spans            | [APM Explorer][18] |
+| Audit Events         | [Audit Trail][15] |
+| CI Pipelines         | [CI Visibility][17] |
 | Cloud Cost           | [Cloud Cost Analytics][5] |
+| Database Queries     | [Database Monitoring][16] |
+| Events               | [Event Management][14] |
 | Infrastructure Data (Preview) | [Infrastructure Data][6] |
+| LLM Observability    | [LLM Observability][13] |
 | Logs                 | [Logs Explorer][2] |
 | Metrics              | [Metrics Explorer][7] |
 | Real User Monitoring | [RUM Explorer][8]  |
 | Reference Tables     | [Reference Tables][9] |
-| Security Signals     | [Security][11] |
 | Security Findings    | [Cloud Security][12] |
-| LLM Observability    | [LLM Observability][13] |
-| Events               | [Event Management][14] |
-| Audit Events         | [Audit Trail][15] |
-| Database Queries     | [Database Monitoring][16] |
-| CI Pipelines         | [CI Visibility][17] |
-| APM Spans            | [APM Explorer][18] |
+| Security Signals     | [Security][11] |
 
 ## Configuring a spreadsheet
 
