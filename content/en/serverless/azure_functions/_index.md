@@ -1,5 +1,9 @@
 ---
 title: Install Serverless Monitoring for Azure Functions
+further_reading:
+- link: 'http://datadoghq.com/blog/azure-well-architected-serverless-applications-best-practices/'
+  tag: 'Blog'
+  text: 'Build secure and scalable Azure serverless applications with the Well-Architected Framework'
 ---
 
 ## Overview
@@ -22,7 +26,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    ```js
    require('@datadog/serverless-compat').start();
 
-   // This line must come before importing any instrumented module. 
+   // This line must come before importing any instrumented module.
    const tracer = require('dd-trace').init()
    ```
 
@@ -97,7 +101,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    Datadog.Serverless.CompatibilityLayer.Start();
    ```
 
-   If your Azure Function app uses the In-Process model, add a NuGet package reference to `Microsoft.Azure.Functions.Extensions`:
+   If your Azure Function app uses the In-Container model, add a NuGet package reference to `Microsoft.Azure.Functions.Extensions`:
    ```shell
    dotnet package add Microsoft.Azure.Functions.Extensions
    ```
@@ -193,7 +197,7 @@ You can collect [debug logs][6] for troubleshooting. To configure debug logs, us
 `DD_TRACE_DEBUG`
 : Enables (`true`) or disables (`false`) debug logging for the Datadog Tracing Library. Defaults to `false`.
 
-  **Values**: `true`, `false` 
+  **Values**: `true`, `false`
 
 `DD_LOG_LEVEL`
 : Sets logging level for the Datadog Serverless Compatibility Layer. Defaults to `info`.

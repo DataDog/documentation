@@ -16,9 +16,9 @@ further_reading:
 - link: "/dynamic_instrumentation/symdb/"
   tag: "Documentation"
   text: "Autocomplete and Search (Preview)"
-- link: "/tracing/error_tracking/execution_replay"
+- link: "/error_tracking/backend/exception_replay"
   tag: "Documentation"
-  text: "Execution Replay"
+  text: "Exception Replay"
 ---
 
 {{< beta-callout-private url="https://www.datadoghq.com/product-preview/live-debugger/" >}}
