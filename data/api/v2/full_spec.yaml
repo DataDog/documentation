@@ -51714,14 +51714,16 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
+        - billing_read
       summary: Get Monthly Cost Attribution
       tags:
       - Usage Metering
       x-menu-order: 5
       x-permission:
-        operator: OR
+        operator: AND
         permissions:
         - usage_read
+        - billing_read
       x-undo:
         type: safe
   /api/v2/csm/onboarding/agents:
@@ -71899,14 +71901,16 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
+        - billing_read
       summary: Get cost across multi-org account
       tags:
       - Usage Metering
       x-menu-order: 45
       x-permission:
-        operator: OR
+        operator: AND
         permissions:
         - usage_read
+        - billing_read
       x-undo:
         type: safe
   /api/v2/usage/estimated_cost:
@@ -72006,14 +72010,16 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
+        - billing_read
       summary: Get estimated cost across your account
       tags:
       - Usage Metering
       x-menu-order: 6
       x-permission:
-        operator: OR
+        operator: AND
         permissions:
         - usage_read
+        - billing_read
       x-undo:
         type: safe
   /api/v2/usage/historical_cost:
@@ -72090,14 +72096,16 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
+        - billing_read
       summary: Get historical cost across your account
       tags:
       - Usage Metering
       x-menu-order: 5
       x-permission:
-        operator: OR
+        operator: AND
         permissions:
         - usage_read
+        - billing_read
       x-undo:
         type: safe
   /api/v2/usage/hourly_usage:
@@ -72437,14 +72445,16 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
+        - billing_read
       summary: Get projected cost across your account
       tags:
       - Usage Metering
       x-menu-order: 7
       x-permission:
-        operator: OR
+        operator: AND
         permissions:
         - usage_read
+        - billing_read
       x-undo:
         type: safe
   /api/v2/user_invitations:
