@@ -96,6 +96,7 @@ OTel Agent
 
 ## Configure the Datadog Agent
 
+### Enable the DDOT Collector
 The configuration file for the Datadog Agent is automatically installed at `/etc/datadog-agent/datadog.yaml`. The installation script adds the following configuration settings to `/etc/datadog-agent/datadog.yaml` to enable the DDOT Collector:
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
@@ -108,6 +109,13 @@ agent_ipc:
 
 DDOT automatically binds the OpenTelemetry Collector to ports 4317 (grpc) and 4318 (http) by default.
 
+### (Optional) Enable additional Datadog features
+
+<div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
+
+A fully commented reference file, located in `/etc/datadog-agent/datadog.yaml.example`, lists every available option for comparison or to copy and paste. Alternatively, see the sample `config_template.yaml` file for all available configuration options.
+
+When enabling additional Datadog features, always use the Datadog or OpenTelemetry Collector configuration files instead of relying on Datadog environment variables.
 
 ## Configure the OpenTelemetry Collector
 
