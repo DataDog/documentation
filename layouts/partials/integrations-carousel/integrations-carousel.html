@@ -156,39 +156,42 @@ x-data="{
                 {{ $base_idx := (sub $asset_len 4) }}
                 {{ if and (gt $idx $base_idx) $is_scrollable_carousel}}
                 {{ $carousel_item_vertical.Set "idx" (sub $idx $base_idx) }}
+                {{ $image_url := printf "https://s3.amazonaws.com/%s/%s/media/%s" $app_listings_bucket $app_id (replaceRE `(./)?images/` "" $elm.image_url) }}
                 <button
                 id='carousel-item-vertical-{{ $carousel_item_vertical.Get "idx" }}'
                 data-index="{{ add $idx 1 }}"
                 class="carousel-item__vertical row g-0 p-0 w-100 mx-auto rounded-1"
                 :class="isActiveVertical({{$idx}}, $el)"
                 @click="navigateCarousel(chooseVerticalDirection($el))"
-                :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/{{ $app_listings_bucket }}/{{ $app_id }}/media/{{ (replaceRE `(./)?images/` "" $elm.image_url) | safeJSStr }})'}"
+                :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: `url('{{ $image_url }}')`}"
                 >
                 </button>
                 {{ end }}
             {{ end }}
             {{ range $idx, $elm := $media }}
             {{ $carousel_item_vertical.Add "idx" 1 }}
+            {{ $image_url := printf "https://s3.amazonaws.com/%s/%s/media/%s" $app_listings_bucket $app_id (replaceRE `(./)?images/` "" $elm.image_url) }}
             <button
             id='carousel-item-vertical-{{ $carousel_item_vertical.Get "idx" }}'
             data-index="{{ add $idx 1 }}"
             class="carousel-item__vertical row g-0 p-0 w-100 mx-auto rounded-1"
             :class="isActiveVertical({{$idx}}, $el)"
             @click="navigateCarousel(chooseVerticalDirection($el, {{ $idx }}))"
-            :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/{{ $app_listings_bucket }}/{{ $app_id }}/media/{{ (replaceRE `(./)?images/` "" $elm.image_url) | safeJSStr }})'}"
+            :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: `url('{{ $image_url }}')`}"
             >
             </button>
             {{ end }}
             {{ range $idx, $elm := first 1 $media }}
                 {{ if $is_scrollable_carousel}}
                 {{ $carousel_item_vertical.Add "idx" 1 }}
+                {{ $image_url := printf "https://s3.amazonaws.com/%s/%s/media/%s" $app_listings_bucket $app_id (replaceRE `(./)?images/` "" $elm.image_url) }}
                 <button
                 id='carousel-item-vertical-{{ $carousel_item_vertical.Get "idx" }}'
                 data-index="{{ add $idx 1 }}"
                 class="carousel-item__vertical row g-0 p-0 w-100 mx-auto rounded-1"
                 :class="isActiveVertical({{$idx}}, $el)"
                 @click="navigateCarousel(chooseVerticalDirection($el))"
-                :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/{{ $app_listings_bucket }}/{{ $app_id }}/media/{{ (replaceRE `(./)?images/` "" $elm.image_url) | safeJSStr }})'}"
+                :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: `url('{{ $image_url }}')`}"
                 >
                 </button>
                 {{ end }}
