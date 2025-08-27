@@ -63,7 +63,17 @@ To confirm injection at the container level, check that:
 4. Language-specific directories exist (for example, `/opt/datadog/apm/library/java/` for Java).
 
 To enable debug logs:
-1. Set `DD_APM_INSTRUMENTATION_DEBUG: true` in the pod spec.
+
+1. Set the following in your pod spec:
+ 
+   {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
+   env:
+     - name: DD_TRACE_DEBUG    # debug logging for the tracer
+       value: "true"
+     - name: DD_APM_INSTRUMENTATION_DEBUG    # debug logging for the injector
+       value: "true"
+   {{< /code-block >}}
+   
 2. Delete the pod to enable debug logs during injection.
 
 ## Configuration options that affect injection
