@@ -65,7 +65,7 @@ instances:
 
 {{% tab "Autodiscovery" %}}
 
-Configure ping settings in the `network_devices` section under the autodiscovery parameter to apply them to _all_ Autodiscovery subnets.
+Configure ping settings in the `network_devices` section under the autodiscovery parameter to apply them to _all_ autodiscovery subnets.
 
 ```yaml
 network_devices:
