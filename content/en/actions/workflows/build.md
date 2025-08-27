@@ -106,15 +106,15 @@ Published workflows accrue costs based on workflow executions. For more informat
 
 ### Updating a published workflow
 
-Editing a published workflow will create a draft. All changes made to the draft do not alter the published workflow. Each workflow can have one active draft, that all editors can modify. When ready, click on **Publish Changes** to replace the published version.
-
-Any update to the workflow properties (name, tags, or notifications) are applied immediately to the published version.
+Editing a published workflow will create a draft. All changes made to the draft do not alter the published workflow. Each workflow can have one active draft, which all editors can modify. When ready, click on **Publish Changes** to replace the published version.
 
 Drafts execute all configured steps as any normal workflows. They can only run from the workflow editor. 
 
 To discard the draft, click the "Cog" icon in the top-right corner of the editor, and select **Discard draft**.
 
-Draft's executions of published workflows, do not accrue costs.
+Draft executions of published workflows do not accrue costs.
+
+Note: Any update to the workflow properties (name, tags, or notifications) bypass the drafting flow and are applied immediately to the published version.
 
 ## Variables and parameters
 
