@@ -55,7 +55,7 @@ Click a table name to view its columns and relationships:
 
 {{< img src="ddsql_editor/data-tab.png" alt="The data tab showing table information for aws.ec2_instance" style="width:70%;" >}}
 
-For data sources like Logs, use the query builder to help you generate table functions.
+For data sources such as Logs, use the query builder to generate table functions.
 
 ## Save and share queries
 
