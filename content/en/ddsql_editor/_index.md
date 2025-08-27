@@ -13,6 +13,8 @@ further_reading:
 
 {{< callout url="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/" >}}
 Querying Logs and Metrics through DDSQL is in Preview. Use this form to request access.
+
+Spans and RUM is also in Preview. Mention if you want access to those data sources or any other ones in the use cases section.
 {{< /callout >}} 
 
 ## Overview
@@ -40,7 +42,10 @@ GROUP BY instance_type
 
 ## Explore your telemetry
 
-<div class="alert alert-warning">Querying Logs and Metrics through DDSQL is in Preview. Use this <a href="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/">form</a> to request access.</div>
+<div class="alert alert-warning">Querying Logs and Metrics through DDSQL is in Preview. Use this <a href="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/">form</a> to request access.
+
+Spans and RUM is also in Preview. Mention in the same form if you want access to those data sources or any other ones in the use cases section.
+</div>
 
 View, filter, and built queries in the Data Explorer.
 
@@ -50,7 +55,7 @@ Click a table name to view its columns and relationships:
 
 {{< img src="ddsql_editor/data-tab.png" alt="The data tab showing table information for aws.ec2_instance" style="width:70%;" >}}
 
-For Logs and Metrics, use the query builder to help you generate table functions.
+For data sources like Logs, use the query builder to help you generate table functions.
 
 ## Save and share queries
 
