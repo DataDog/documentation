@@ -66,7 +66,7 @@ The data that can be scanned and redacted are:
 - **RUM**: Event attribute values only
 - **Events**: Event attribute values only
 
-For each scanning rule, one of the following actions can be applied to matched sensitive data:
+For each [scanning rule][17], one of the following actions can be applied to matched sensitive data:
 
 - **Redact**: Replace the entire matched data with a single token that you choose, such as `[sensitive_data]`.
 - **Partially redact**: Replace a specific portion of all matching values.
@@ -143,3 +143,4 @@ When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][15] summar
 [14]: /security/sensitive_data_scanner/guide/investigate_sensitive_data_issues/
 [15]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
 [16]: /security/sensitive_data_scanner/setup/telemetry_data/?tab=logs#mask-action
+[17]: /security/sensitive_data_scanner/scanning_rules/
