@@ -25,7 +25,7 @@ cascade:
   {{< nextlink href="/dashboards/guide/graphing_json/" >}}Graphing with JSON{{< /nextlink >}}
   {{< nextlink href="dashboards/guide/how-to-graph-percentiles-in-datadog" >}}Graphing percentiles in Datadog{{< /nextlink >}}
   {{< nextlink href="dashboards/guide/widget_colors" >}}Selecting the right colors for your graphs{{< /nextlink >}}
-  {{< nextlink href="dashboards/guide/consisten-color-palette" >}}Consistent color palette{{< /nextlink >}}
+  {{< nextlink href="dashboards/guide/consistent-color-palette" >}}Understanding Duplicate Colors in the Consistent Palette{{< /nextlink >}}
   {{< nextlink href="dashboards/guide/unit-override" >}}Unit override{{< /nextlink >}}
   {{< nextlink href="dashboards/guide/custom_time_frames" >}}Custom time frames{{< /nextlink >}}
   {{< nextlink href="dashboards/guide/quick-graphs" >}}Quick Graphs{{< /nextlink >}}

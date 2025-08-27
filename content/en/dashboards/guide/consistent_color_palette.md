@@ -1,43 +1,150 @@
 ---
-title: Consistent Color Palette
-description: ""
+title: Understanding Duplicate Colors in the Consistent Palette
+description: "Learn why duplicate colors can appear in the Consistent color palette, and how to address this limitation in dashboards with many tag values."
 further_reading:
-- link: "dashboards/guide/compatible_semantic_tags"
-  tag: "Documentation"
-  text: "Compatible Semantic Tags"
 - link: "dashboards/guide/widget_colors"
   tag: "Documentation"
   text: "Selecting the right colors for your graphs"
+- link: "dashboards/guide/compatible_semantic_tags"
+  tag: "Documentation"
+  text: "Compatible Semantic Tags"
 ---
 
 ## Overview
 
-The Consistent palette allows you to assign the same color consistently to a series of tag groups, making it easier to correlate data across charts. The palette does not track which colors are used and this can lead to issues with duplicate colors in one graph.
+The **Consistent** color palette is designed to assign stable, repeatable colors to tag values, making it easier to correlate data across charts over time. However, it does not track which colors are already in use within a given widget. This can result in duplicate colors appearing in a single graph, especially when many tag values are displayed.
 
-Use this guide to learn more about what you can do to resolve duplicated colors in widgets and graphs.
+This guide explains why duplicate tag colors occur when using the Consistent palette and outlines options for mitigating this behavior.
 
-## Duplicate tag colors
+## Why duplicate colors occur
 
-When using the Consistent color palette, different tags can appear with duplicate colors because the palette does not track which colors have already been assigned.
+{{< img src="/dashboards/guide/consistent_color_palette/duplicate_color_tags.png" alt="Example of duplicate tag colors in a dashboard pie chart" style="width:100%;" >}}
 
-This is a known tradeoff when using this palette (stability across timeframes vs. uniqueness within this individual snapshot). It promises that a specific tag value will always have the same color across the app.
+The Consistent palette maps tag values to colors using a deterministic hashing algorithm. This ensures that a specific tag value always appears with the same color across all charts and timeframes. However, the palette:
 
-The algorithm is based on string hashing, where the list of tags associated with a shape gets mapped to the color space of available (in the 16 - 20 range) colors (a curated set that was chosen to ensure support for accessibility needs relative to other UI colors, color contrast between color pairs, and dark mode compatibility).  The palette draws from a limited palette of 16 to 20 colors, not infinite.
+- **Does not track which colors have already been used** in a specific graph.
+- **Uses a limited set of 16-20 curated colors**, chosen for accessibility, color contrast, and dark mode compatibility.
 
-So it looks at the consistency of the color across various graphs,rather than distinct color in the individual graph.
+Because the color mapping is fixed and the palette is limited, multiple tag values may be assigned the same color, particularly when the number of tag groups exceeds the number of available colors.
 
-A downside is that this approach is slow to maintain manually, especially if you need to apply this treatment to multiple widgets. It also may require lots of manual updating if the number of groupbys goes down over time. This cost can be mitigated with scripting and/or allowing a widget to be defined using a script rather than fixed JSON, for example:
+This tradeoff prioritizes color consistency across time and views over uniqueness within a single widget.
 
-[JSON config]
+## Limitations and maintainence challenges
 
-## Resolution
+This behavior is a known limitation of the Consistent palette. In dashboards with many group-by values or dynamic tags, duplicate colors can reduce visual clarity.
 
-The palette has a limited selection of colors it can assign to your data. If the number of groups is small and relatively unchanging (n < 15, something stable like the number of countries in the world, or datacenters at DD), you can create a formula per series, and assign a unique color per group with the color override feature. For more information, see [Color overrides][1].
+While you can manually override colors per series using the [color override][1] feature, this can be time-consuming to maintain, especially when:
+- The number of tag values changes frequently.
+- The same logic needs to be applied across many widgets.
 
-Datadog recommends using a higher cardinality palette (like Datadog16) for graphs that have many series where reducing the frequency of color reuse is important.
+To simplify this process, consider automating widget creation or updates through scripting instead of maintaining static JSON definitions.
 
+{{% collapse-content title="Example dashboard tiledef" level="h4" expanded=false %}}
+```json
+{
+    "viz": "timeseries",
+    "requests": [
+        {
+            "style": {
+                "palette": "semantic",
+                "type": "solid",
+                "width": "normal"
+            },
+            "type": "area",
+            "formulas": [
+                {
+                    "style": {
+                        "palette": "classic",
+                        "palette_index": 0
+                    },
+                    "alias": "ap1",
+                    "formula": "query2"
+                },
+                {
+                    "style": {
+                        "palette": "classic",
+                        "palette_index": 4
+                    },
+                    "alias": "eu1",
+                    "formula": "query1"
+                },
+                {
+                    "style": {
+                        "palette": "green",
+                        "palette_index": 3
+                    },
+                    "alias": "us1",
+                    "formula": "query3"
+                },
+                {
+                    "style": {
+                        "palette": "warm",
+                        "palette_index": 3
+                    },
+                    "alias": "us3",
+                    "formula": "query4"
+                },
+                {
+                    "style": {
+                        "palette": "purple",
+                        "palette_index": 5
+                    },
+                    "alias": "us5",
+                    "formula": "query5"
+                }
+            ],
+            "queries": [
+                {
+                    "query": "sum:process.reporting_processes.total{app:process-resolver ,datacenter:ap1.prod.dog}.fill(last).rollup(max).weighted()",
+                    "data_source": "metrics",
+                    "name": "query2"
+                },
+                {
+                    "query": "sum:process.reporting_processes.total{app:process-resolver ,datacenter:eu1.prod.dog}.fill(last).rollup(max).weighted()",
+                    "data_source": "metrics",
+                    "name": "query1"
+                },
+                {
+                    "query": "sum:process.reporting_processes.total{app:process-resolver ,datacenter:us1.prod.dog}.fill(last).rollup(max).weighted()",
+                    "data_source": "metrics",
+                    "name": "query3"
+                },
+                {
+                    "query": "sum:process.reporting_processes.total{app:process-resolver ,datacenter:us3.prod.dog}.fill(last).rollup(max).weighted()",
+                    "data_source": "metrics",
+                    "name": "query4"
+                },
+                {
+                    "query": "sum:process.reporting_processes.total{app:process-resolver ,datacenter:us5.prod.dog}.fill(last).rollup(max).weighted()",
+                    "data_source": "metrics",
+                    "name": "query5"
+                }
+            ],
+            "response_format": "timeseries"
+        }
+    ],
+    "yaxis": {
+        "include_zero": true,
+        "scale": "linear",
+        "label": "",
+        "min": "auto",
+        "max": "auto"
+    },
+    "markers": []
+}
+```
+{{% /collapse-content %}}
 
+## Resolution options
+
+**Use color overrides for small, stable group sets**
+If your graph displays a small and relatively fixed number of tag values (fewer than 15), such as datacenters or regions, you can assign a unique color to each series using the color override feature. For more details, see [Color overrides][1].
+
+**Use a higher-cardinality palette for larger datasets**
+For graphs with many tag values, switch to a palette like `Datadog16`, which includes more distinct colors and reduces the likelihood of duplication.
 
 ## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/dashboards/guide/widget_colors/#color-overrides
