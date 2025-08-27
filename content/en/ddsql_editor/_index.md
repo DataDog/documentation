@@ -12,7 +12,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/" >}}
-Querying Logs and Metrics through DDSQL is in Preview. Use this form to request access.
+Querying Logs, Metrics, Spans, and RUM through DDSQL is in Preview. Use this form to request access.
 
 If you want access to Spans, RUM, or other data sources not listed in the use cases section, mention them in the access request form.
 {{< /callout >}} 
