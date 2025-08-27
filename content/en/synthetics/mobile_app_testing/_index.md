@@ -112,14 +112,29 @@ You can pass `key:value` pairs to your application when the test starts, allowin
 {{< tabs >}}
 {{% tab "Android (Initial Intent Extras)" %}}
 
-For example, to bypass the login process in your tests, add the appropriate `key:value` pairs in the Advanced Options section of your Android tests:
+For Andriod tests, add the appropriate `key:value` pairs in the Advanced Options section of your test:
+
+```json
+{
+  "username": "example_user",
+  "password": "{{ EXAMPLE_VARIABLE }}"
+}
+```
 
 {{< img src="mobile_app_testing/advanced/mobile_app_advanced_android.png" alt="Mobile app test creation page, showing an example of an advanced option for an Android device." style="width:100%;" >}}
 {{% /tab %}}
 
 {{% tab "iOS (Process Arguments)" %}}
 
-For iOS tests, you can also bypass the login process by adding the appropriate `key:value` pairs in the Advanced Options section:
+For iOS tests, add the appropriate `key:value` pairs in the Advanced Options section:
+
+```json
+{
+  "username": "example_user",
+  "password": "{{ EXAMPLE_VARIABLE }}",
+  "enable_feature_x": "true"
+}
+```
 
 {{< img src="mobile_app_testing/advanced/mobile_app_advanced_iOS.png" alt="Mobile app test creation page, showing an example of an advanced option for an iOS device." style="width:100%;" >}}
     
