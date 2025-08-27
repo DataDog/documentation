@@ -162,7 +162,7 @@ x-data="{
                 class="carousel-item__vertical row g-0 p-0 w-100 mx-auto rounded-1"
                 :class="isActiveVertical({{$idx}}, $el)"
                 @click="navigateCarousel(chooseVerticalDirection($el))"
-                :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/{{ $app_listings_bucket }}/{{ $app_id }}/media/{{ (replaceRE `(./)?images/` "" $elm.image_url) | urlquery }})'}"
+                :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/{{ $app_listings_bucket }}/{{ $app_id }}/media/{{ (replaceRE `(./)?images/` "" $elm.image_url) | safeJSStr }})'}"
                 >
                 </button>
                 {{ end }}
@@ -175,7 +175,7 @@ x-data="{
             class="carousel-item__vertical row g-0 p-0 w-100 mx-auto rounded-1"
             :class="isActiveVertical({{$idx}}, $el)"
             @click="navigateCarousel(chooseVerticalDirection($el, {{ $idx }}))"
-            :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/{{ $app_listings_bucket }}/{{ $app_id }}/media/{{ (replaceRE `(./)?images/` "" $elm.image_url) | urlquery }})'}"
+            :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/{{ $app_listings_bucket }}/{{ $app_id }}/media/{{ (replaceRE `(./)?images/` "" $elm.image_url) | safeJSStr }})'}"
             >
             </button>
             {{ end }}
@@ -188,7 +188,7 @@ x-data="{
                 class="carousel-item__vertical row g-0 p-0 w-100 mx-auto rounded-1"
                 :class="isActiveVertical({{$idx}}, $el)"
                 @click="navigateCarousel(chooseVerticalDirection($el))"
-                :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/{{ $app_listings_bucket }}/{{ $app_id }}/media/{{ (replaceRE `(./)?images/` "" $elm.image_url) | urlquery }})'}"
+                :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/{{ $app_listings_bucket }}/{{ $app_id }}/media/{{ (replaceRE `(./)?images/` "" $elm.image_url) | safeJSStr }})'}"
                 >
                 </button>
                 {{ end }}
