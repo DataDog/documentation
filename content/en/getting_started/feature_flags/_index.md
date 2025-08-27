@@ -24,7 +24,7 @@ Datadog Feature Flags offer a powerful, integrated way to manage feature deliver
 
 Your organization likely already has pre-configured environments for `Development`, `Staging`, and `Production`. If not, and/or you need to configure other environments, navigate to [Feature Flags > Environments][3] to create tag queries for your environments, as well as identify which environment should be considered a **Production** environment.
 
-![Environments](/static/images/getting_started/feature_flags/environments.png)
+{{< img src="getting_started/feature_flags/environments.png" alt="Environments list" style="width:100%;" >}}
 
 ## Creating your first feature flag
 
@@ -98,7 +98,7 @@ Now that the application is ready to check the value of your flag, you’re read
 
 Go to **Feature Flags > <YOUR_FLAG_NAME> > Targeting Rules & Rollouts**, then select the `Environment` whose rules you want to modify from the dropdown. Click `Edit Targeting Rules`.
 
-![Targeting Rules & Rollouts](/static/images/getting_started/feature_flags/ff-targeting-rules-and-rollouts.png)
+{{< img src="getting_started/feature_flags/ff-targeting-rules-and-rollouts.png" alt="Targeting Rules & Rollouts" style="width:100%;" >}}
 
 ### Step 5: Publish your rules in your environments
 
@@ -108,7 +108,7 @@ As a general best practice, changes should be rolled out in a `Staging` environm
 
 Go to Targeting Rules & Rollouts > Per environment override and select Use targeting rules in the dropdown under the environment of your choice.
 
-![Publish Targeting Rules](/static/images/getting_started/feature_flags/publish-targeting-rules.png)
+{{< img src="getting_started/feature_flags/publish-targeting-rules.png" alt="Publish targeting rules" style="width:100%;" >}}
 
 The flag now serves your targeting rules in this environment. You can continue to edit these targeting rules to control where the variants are served.
 
@@ -116,7 +116,7 @@ The flag now serves your targeting rules in this environment. You can continue t
 
 Monitor the feature rollout from the feature flag details page, which provides real-time exposure tracking and metrics such as **error rate** and **page load time**. As you incrementally release the feature with your flag, refer to the `Real-Time Metric Overview` panel in the Datadog UI to see how your feature impacts your application performance.
 
-![Real Time Flag Metrics Panel](/static/images/getting_started/feature_flags/real-time-flag-metrics.png)
+{{< img src="getting_started/feature_flags/real-time-flag-metrics.png" alt="Real-time flag metrics panel" style="width:100%;" >}}
 
 [1]: https://github.com/DataDog/openfeature-js-client/blob/main/README.md
 [2]: https://app.datadoghq.com/feature-flags/create
