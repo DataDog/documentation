@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-The DatadogPodAutoscaler (DPA) is a Kubernetes custom resource definition (CRD) that enables autoscaling of Kubernetes workloads using [Datadog Kuberentes Autoscaling (DKA)][1]. This guide demonstrates how to manage DatadogPodAutoscaler resources using Terraform and HashiCorp's Kubernetes provider to deploy an autoscaling configuration.
+The DatadogPodAutoscaler (DPA) is a Kubernetes custom resource definition (CRD) that enables autoscaling of Kubernetes workloads using [Datadog Kubernetes Autoscaling (DKA)][1]. This guide demonstrates how to manage DatadogPodAutoscaler resources using Terraform and HashiCorp's Kubernetes provider to deploy an autoscaling configuration.
 
 ## Prerequisites
 
