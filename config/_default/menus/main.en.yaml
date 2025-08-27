@@ -1025,7 +1025,7 @@ menu:
       parent: dev_tools
       identifier: dev_tools_service_check
       weight: 6
-    - name: 'Submission - Agent Check '
+    - name: "Submission - Agent Check "
       url: developers/service_checks/agent_service_checks_submission/
       parent: dev_tools_service_check
       identifier: dev_tools_service_check_agent_check
@@ -1219,17 +1219,17 @@ menu:
       identifier: cloudcraft_account_management
       parent: cloudcraft
       weight: 2
-    - name: 'Components: Common'
+    - name: "Components: Common"
       url: cloudcraft/components-common/
       identifier: cloudcraft_components_common
       parent: cloudcraft
       weight: 3
-    - name: 'Components: Azure'
+    - name: "Components: Azure"
       url: cloudcraft/components-azure/
       identifier: cloudcraft_components_azure
       parent: cloudcraft
       weight: 4
-    - name: 'Components: AWS'
+    - name: "Components: AWS"
       url: cloudcraft/components-aws/
       identifier: cloudcraft_components_aws
       parent: cloudcraft
@@ -1887,7 +1887,7 @@ menu:
       parent: metrics_custom_metrics
       identifier: metrics_historical_metrics
       weight: 102
-    - name: 'Submission - Agent Check '
+    - name: "Submission - Agent Check "
       url: metrics/custom_metrics/agent_metrics_submission/
       parent: metrics_custom_metrics
       identifier: dev_tools_metrics_agent
@@ -1902,7 +1902,7 @@ menu:
       parent: metrics_custom_metrics
       identifier: dev_tools_metrics_powershell
       weight: 105
-    - name: 'Submission - API '
+    - name: "Submission - API "
       url: api/latest/metrics/#submit-metrics
       parent: metrics_custom_metrics
       identifier: dev_tools_metrics_api
@@ -1982,37 +1982,6 @@ menu:
       parent: metrics_top_level
       identifier: metrics_guide
       weight: 13
-    - name: Watchdog
-      url: watchdog/
-      identifier: watchdog_top_level
-      pre: watchdog
-      parent: platform_heading
-      weight: 90000
-    - name: Alerts
-      url: watchdog/alerts
-      identifier: watchdog_alerts
-      parent: watchdog_top_level
-      weight: 1
-    - name: Impact Analysis
-      url: watchdog/impact_analysis/
-      identifier: watchdog_impact_analysis
-      parent: watchdog_top_level
-      weight: 2
-    - name: RCA
-      url: watchdog/rca/
-      identifier: watchdog_rca
-      parent: watchdog_top_level
-      weight: 3
-    - name: Insights
-      identifier: watchdog_insights
-      url: watchdog/insights
-      parent: watchdog_top_level
-      weight: 4
-    - name: Faulty Deployment Detection
-      url: watchdog/faulty_deployment_detection/
-      identifier: watchdog_faulty_deployment_detection
-      parent: watchdog_top_level
-      weight: 5
     - name: Internal Developer Portal
       url: internal_developer_portal/
       pre: internal-developer-portal-wui
@@ -6882,7 +6851,7 @@ menu:
       parent: continuous_testing_environments
       identifier: continuous_testing_environments_multiple_environments
       weight: 101
-    - name: 'Testing With Proxy, Firewall, or VPN'
+    - name: Testing With Proxy, Firewall, or VPN
       url: /continuous_testing/environments/proxy_firewall_vpn
       parent: continuous_testing_environments
       identifier: continuous_testing_environments_proxy_firewall_vpn
@@ -7288,51 +7257,6 @@ menu:
       parent: rum_mobile_react_native
       identifier: rum_mobile_react_troubleshooting
       weight: 108
-    - name: Kotlin Multiplatform
-      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform
-      parent: mobile_and_tv_monitoring
-      identifier: rum_mobile_kotlin
-      weight: 204
-    - name: Setup
-      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup
-      parent: rum_mobile_kotlin
-      identifier: rum_mobile_kotlin_setup
-      weight: 101
-    - name: Crash Reporting
-      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/error_tracking
-      parent: rum_mobile_kotlin
-      identifier: rum_mobile_kotlin_crash
-      weight: 102
-    - name: Advanced Configuration
-      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/advanced_configuration
-      parent: rum_mobile_kotlin
-      identifier: rum_mobile_kotlin_advanced_config
-      weight: 103
-    - name: Data Collected
-      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/data_collected
-      parent: rum_mobile_kotlin
-      identifier: rum_mobile_kotlin_data_collected
-      weight: 104
-    - name: Mobile Vitals
-      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/mobile_vitals
-      parent: rum_mobile_kotlin
-      identifier: rum_mobile_kotlin_mobile_vitals
-      weight: 105
-    - name: Web View Tracking
-      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/web_view_tracking
-      parent: rum_mobile_kotlin
-      identifier: rum_mobile_kotlin_web_view_tracking
-      weight: 106
-    - name: Integrated Libraries
-      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/integrated_libraries
-      parent: rum_mobile_kotlin
-      identifier: rum_mobile_kotlin_integrated_libraries
-      weight: 107
-    - name: Troubleshooting
-      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/troubleshooting
-      parent: rum_mobile_kotlin
-      identifier: rum_mobile_kotlin_troubleshooting
-      weight: 108
     - name: Roku
       url: real_user_monitoring/mobile_and_tv_monitoring/roku
       parent: mobile_and_tv_monitoring
@@ -7659,7 +7583,7 @@ menu:
       identifier: rum_guides
       weight: 12
     - name: Data Security
-      identifier: data_security_real_user_monitoring
+      identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
       weight: 13
