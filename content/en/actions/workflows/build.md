@@ -112,7 +112,7 @@ Editing a published workflow creates a draft. All changes made to the draft do n
 
 Drafts execute all configured steps like any normal workflow. You can only run drafts from the workflow editor. 
 
-To discard the draft, click the **cog icon** in the top-right corner of the editor, and select **Discard draft**.
+To discard the draft, click the **cog icon** in the top-right corner of the editor and select **Discard draft**.
 
 **Notes**:
 - Running a draft for published workflows do not accrue costs.
