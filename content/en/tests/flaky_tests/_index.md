@@ -37,6 +37,16 @@ Once you identify a flaky test you want to fix, click on the test to see links t
 
 If a flaky test has not failed in the past 30 days, it is automatically removed from the table. You can also manually remove a flaky test by clicking on the trash icon that appears when you hover over the test row. It is added again if it re-exhibits flaky behavior.
 
+### Tags related to flaky tests
+
+Datadog uses distinct tags to categorize flaky tests:
+
+- **Flaky** (`is_flaky`): Applied when a test actively passes and fails across multiple runs for the same commit. Used for general identification of flaky tests.
+
+- [**New Flaky**](#new-flaky-tests) (`is_new_flaky`): Applied when a test exhibits flaky behavior _for the first time_ in the current or default branch, and wasn't previously identified as a flaky test. Used to identify recently introduced test reliability issues.
+
+- [**Known Flaky**](#known-flaky-failed-tests) (`is_known_flaky`): Applied when a failing test has already been identified as flaky in the current or default branch. Used to indicate that the test failure may be due to flakiness of the test itself rather than the committed changes being tested.
+
 ### Flaky tests in the default branch
 
 The flaky test table for the default branch includes tests that have flaked in the default branch as well as any tests that have exhibited flakiness in a feature branch that was merged into the default branch.
@@ -75,7 +85,7 @@ All test runs that exhibited flaky behavior for the first time as per the defini
 2. Filter the table to see branches, services, or commits of interest to you.
 3. Look at the **New Flaky** column to see the number of new flaky tests introduced by the latest commit as per the definition above.
 
-### Ignore new flaky tests detected by mistake
+#### Ignore new flaky tests detected by mistake
 
 You can ignore new flaky tests for a particular commit if you determine that those flaky tests were detected by mistake. The tests reappear if the commit exhibits flakiness again.
 
@@ -85,7 +95,7 @@ Click on the **New Flaky** number and then click **Ignore flaky tests**.
 
 ### Known flaky failed tests
 
-Known flaky failed tests are tests that have flaky behavior on the current or default branch of the repository.
+Known flaky failed tests are tests that have flaky behavior on the current or default branch of the repository. In these tests, the failure may be due to flakiness of the test itself rather than the committed changes being tested.
 
 #### Test Runs page
 
