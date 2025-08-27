@@ -113,7 +113,7 @@ Datadog's Ragas evaluations require `ragas` v0.1+ and `ddtrace` v3.0.0+.
 
 #### Sampling
 
-To enable Ragas scoring for a sampled subset of LLM calls, use the `DD_LLMOBS_EVALUATORS_SAMPLING_RULES` environment variable. Pass in a list of arrays, each containing the following fields:
+To enable Ragas scoring for a sampled subset of LLM calls, use the `DD_LLMOBS_EVALUATORS_SAMPLING_RULES` environment variable. Pass in a list of objects, each containing the following fields:
 
 | Field | Description | Required | Type |
 |-------|-------------|----------|------|
