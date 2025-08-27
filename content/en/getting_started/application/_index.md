@@ -1,12 +1,15 @@
 ---
 title: Getting Started in Datadog
 further_reading:
-  - link: 'https://learn.datadoghq.com/courses/dd-101-dev'
+  - link: 'https://learn.datadoghq.com/bundles/frontend-engineer-learning-path'
     tag: 'Learning Center'
-    text: 'Datadog 101: Developer'
-  - link: 'https://learn.datadoghq.com/courses/dd-101-sre'
+    text: 'Frontend Engineer Learning Path'
+  - link: 'https://learn.datadoghq.com/bundles/backend-engineer-learning-path'
     tag: 'Learning Center'
-    text: 'Datadog 101: Site Reliability Engineer'
+    text: 'Backend Engineer Learning Path'
+  - link: 'https://learn.datadoghq.com/bundles/site-reliability-engineer-learning-path'
+    tag: 'Learning Center'
+    text: 'Site Reliability Engineer Learning Path'
   - link: 'https://dtdg.co/fe'
     tag: 'Foundation Enablement'
     text: 'Join an interactive session to build a solid foundation of Datadog'
@@ -15,8 +18,8 @@ further_reading:
     text: 'Introducing the Datadog quick nav menu'
 ---
 
-{{< learning-center-callout header="Try Datadog Foundation in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/datadog-foundation">}}
-  Learn without cost on real cloud compute capacity and a Datadog trial account. Start these hands-on labs to get up to speed with services, logs, metrics, integrations, and dashboards.
+{{< learning-center-callout header="Try Datadog Core Skills in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/bundles/core-skills-learning-path">}}
+  Learn without cost on real cloud compute capacity and a Datadog trial account. Start these hands-on labs to get up to speed with tagging, metrics, monitors, and dashboards.
 {{< /learning-center-callout >}}
 
 ## Overview
@@ -69,7 +72,7 @@ Datadog [Synthetic Monitoring][22] allow you to create and run API and browser t
 - Datadog has over {{< translate key="integration_count" >}} integrations [officially listed][2].
 - Custom integrations are available through the [Datadog API][3].
 - The Agent is [open source][4].
-- Once integrations have been configured, all data is treated the same throughout Datadog, whether it is living in a datacenter or in an online service.
+- After integrations have been configured, all data is treated the same throughout Datadog, whether it is living in a data center or in an online service.
 
 ## Dashboards
 
@@ -77,8 +80,8 @@ Datadog [Synthetic Monitoring][22] allow you to create and run API and browser t
 
 - Synchronous mousing across all graphs in a [screenboard][13].
 - Vertical bars are events. They put a metric into context.
-- Click and drag on a graph to zoom in on a particular timeframe.
-- As you hover over the graph, the event stream moves with you.
+- Click and drag on a graph to zoom in on a particular time frame.
+- As you hover over the graph, the Event Stream moves with you.
 - Display by zone, host, or total usage.
 - Datadog exposes a JSON editor for the graph, allowing for [arithmetic][14] and [functions][15] to be applied to metrics.
 - Share a graph snapshot that appears in the stream.
@@ -91,7 +94,7 @@ Datadog [Synthetic Monitoring][22] allow you to create and run API and browser t
 - Use any metric reporting to Datadog
 - Set up multi alerts by device, host, and more
 - Use `@` in alert messages to direct notifications to the right people
-- Schedule downtimes to suppress notifications for system shutdowns, off-line maintenance, and more
+- Schedule downtimes to suppress notifications for system shutdowns, offline maintenance, and more
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
