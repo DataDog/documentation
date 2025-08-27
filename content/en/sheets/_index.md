@@ -72,7 +72,7 @@ Create tables and analyze the data pulled from the following data sources:
 | Data Source          | Product page       |
 | -------------------- | -----------        |
 | APM Spans            | [APM Explorer][18] |
-| Audit Events         | [Audit Trail][15] |
+| Audit Trail          | [Audit Trail][15] |
 | CI Pipelines         | [CI Visibility][17] |
 | Cloud Cost           | [Cloud Cost Analytics][5] |
 | Database Queries     | [Database Monitoring][16] |
