@@ -31,7 +31,7 @@ For DBM correlation to work, your database spans must include the following attr
 |----------------|-----------|:------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
 | `db.system`    | Yes       | The database technology.                                                                                          | `postgres`, `mysql`, `sqlserver`        |
 | `db.statement` | Yes       | The raw SQL query text. Datadog uses this to set the span's resource name after obfuscation and normalization.    | `SELECT * FROM users WHERE id = ?`      |
-| `span.type`    | Yes       | **(Datadog-specific)** Identifies and processes database spans. Usually derived automatically by the OpenTelemetry SDK or Datadog Agent. Only set manually when spans are created directly with the SDK. | `sql`, `postgres`, `mysql`, `sql.query` |
+| `span.type`    | Yes*      | **(Datadog-specific)** Identifies database spans. *Derived automatically from other OpenTelemetry attributes according to the [span type mapping rules][6]. Only set it manually when creating spans directly with an SDK. | `sql`, `postgres`, `mysql`, `sql.query` |
 | `db.name`      | No        | The logical database or schema name being queried.                                                                | `user_accounts`                         |
 
 <div class="alert alert-info">
@@ -169,3 +169,4 @@ If you don't see the expected correlation between your APM traces and DBM, it's 
 [3]: https://app.datadoghq.com/apm/traces
 [4]: https://opentelemetry.io/docs/languages/
 [5]: /help
+[6]: /opentelemetry/mapping/semantic_mapping/#span-type-mapping
