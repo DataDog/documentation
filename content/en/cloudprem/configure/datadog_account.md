@@ -2,7 +2,7 @@
 title: Configure your Datadog account
 description: Set up your Datadog account to access CloudPrem logs
 further_reading:
-- link: "/cloudprem/ingest-logs/datadog-agent/"
+- link: "/cloudprem/ingest_logs/datadog_agent/"
   tag: "Documentation"
   text: "Set up log ingestion with Datadog Agent"
 - link: "/cloudprem/configure/ingress/"
@@ -13,7 +13,11 @@ further_reading:
   text: "Manage and Monitor CloudPrem"
 ---
 
-You need to reach out to [Datadog support](/help/) and give the public DNS of your CloudPrem cluster so that you can search into CloudPrem logs from Datadog UI.
+{{< callout btn_hidden="true" >}}
+  Datadog CloudPrem is in Preview.
+{{< /callout >}}
+
+You need to reach out to [Datadog support][1] and give the public DNS of your CloudPrem cluster so that you can search into CloudPrem logs from Datadog UI.
 
 ### Searching your CloudPrem logs in the Logs Explorer
 
@@ -26,3 +30,5 @@ After your Datadog account is configured, you are ready to search into the `clou
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /help/

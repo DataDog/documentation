@@ -10,7 +10,9 @@ further_reading:
   text: "Troubleshooting"
 ---
 
-<div class="alert alert-warning">CloudPrem is in Preview.</div>
+{{< callout btn_hidden="true" >}}
+  Datadog CloudPrem is in Preview.
+{{< /callout >}}
 
 ## Overview
 

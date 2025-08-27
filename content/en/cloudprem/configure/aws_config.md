@@ -1,21 +1,24 @@
 ---
 title: AWS Configuration
 description: Learn how to configure AWS for CloudPrem
-private: true
 further_reading:
-- link: "/cloudprem/install/aws-eks/"
+- link: "/cloudprem/install/aws_eks/"
   tag: "Documentation"
   text: "Install CloudPrem on AWS EKS"
-- link: "/cloudprem/ingest-logs/"
+- link: "/cloudprem/ingest_logs/"
   tag: "Documentation"
   text: "Configure Log Ingestion"
 ---
+
+{{< callout btn_hidden="true" >}}
+  Datadog CloudPrem is in Preview.
+{{< /callout >}}
 
 ## Overview
 
 This guide covers how to configure your AWS account prerequisites for CloudPrem deployment. This configuration is required before installing CloudPrem on AWS EKS.
 
-For the complete EKS installation process, see the [AWS EKS Installation Guide](../install/aws-eks/).
+For the complete EKS installation process, see the [AWS EKS Installation Guide][1].
 
 ## AWS prerequisites
 
@@ -59,8 +62,7 @@ Required authorized actions:
 
 Here is an example of a bucket policy:
 
-```
-
+```json
 {
  "Version": "2012-10-17",
  "Statement": [
@@ -94,13 +96,15 @@ Here is an example of a bucket policy:
 
 After completing the AWS configuration:
 
-1. **Install CloudPrem on EKS** - Follow the [AWS EKS Installation Guide](../install/aws-eks/) to deploy CloudPrem
-2. **Configure ingress** - Set up [ingress configuration](./ingress/) for external access
-3. **Set up log ingestion** - Configure [log ingestion](../ingest-logs/) to start sending logs to CloudPrem
+1. **Install CloudPrem on EKS** - Follow the [AWS EKS Installation Guide][1] to deploy CloudPrem
+2. **Configure ingress** - Set up [ingress configuration][3] for external access
+3. **Set up log ingestion** - Configure [log ingestion][4] to start sending logs to CloudPrem
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /cloudprem/configure/ingress/
+[1]: /cloudprem/install/aws_eks
 [2]: https://docs.rs/rusoto_credential/latest/rusoto_credential/struct.ChainProvider.html
+[3]: /cloudprem/configure/ingress/
+[4]: /cloudprem/ingest_logs/

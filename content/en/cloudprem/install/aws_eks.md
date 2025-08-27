@@ -1,18 +1,21 @@
 ---
 title: Install CloudPrem on AWS EKS
 description: Learn how to install and configure CloudPrem on AWS EKS
-private: true
 further_reading:
-- link: "/cloudprem/configure/aws-config/"
+- link: "/cloudprem/configure/aws_config/"
   tag: "Documentation"
   text: "AWS Configuration"
 - link: "/cloudprem/configure/ingress/"
   tag: "Documentation"
   text: "Configure CloudPrem Ingress"
-- link: "/cloudprem/ingest-logs/"
+- link: "/cloudprem/ingest_logs/"
   tag: "Documentation"
   text: "Configure Log Ingestion"
 ---
+
+{{< callout btn_hidden="true" >}}
+  Datadog CloudPrem is in Preview.
+{{< /callout >}}
 
 ## Overview
 
@@ -40,7 +43,7 @@ Before getting started with CloudPrem, ensure you have:
 
 ## Prepare your AWS environment
 
-Before installing CloudPrem on EKS, ensure your AWS environment is properly configured. For detailed AWS configuration instructions, see the [AWS Configuration guide](aws-config/).
+Before installing CloudPrem on EKS, ensure your AWS environment is properly configured. For detailed AWS configuration instructions, see the [AWS Configuration guide][7].
 
 Key requirements:
 - AWS credentials configured (IAM role or access keys)
@@ -50,16 +53,16 @@ Key requirements:
 
 ### Create an RDS database
 
-With the following command, you will create a micro RDS instance. For production environment, a small instance with multi az is enough.
+You can create a micro RDS instance with the following command. For production environments, a small instance deployed across multiple Availability Zones (multi-AZ) is enough.
 
-```bash
+```shell
 # Micro RDS instance for testing purposes. Takes around 5 min.
 aws rds create-db-instance --db-instance-identifier cloudprem-postgres --db-instance-class db.t3.micro --engine postgres --engine-version 16.3 --master-username cloudprem --master-user-password 'FixMeCloudPrem' --allocated-storage 20 --storage-type gp2 --db-subnet-group-name <VPC-ID> --vpc-security-group-ids <VPC-SECURITY-GROUP-ID> --db-name cloudprem --backup-retention-period 0 --no-multi-az
 ```
 
-You can retrieve RDS info by executing the following bash commmands:
+You can retrieve RDS info by executing the following shell commmands:
 
-```bash
+```shell
 # Get RDS instance details
 RDS_INFO=$(aws rds describe-db-instances --db-instance-identifier cloudprem-demo-postgres --query 'DBInstances[0].{Status:DBInstanceStatus,Endpoint:Endpoint.Address,Port:Endpoint.Port,Database:DBName}' --output json 2>/dev/null)
 
@@ -78,20 +81,20 @@ echo ""
 
 1. Add and update the Datadog Helm repository:
 
-   ```bash
+   ```shell
    helm repo add datadog https://helm.datadoghq.com
    helm repo update
    ```
 
 2. Create a Kubernetes namespace for the chart:
 
-   ```bash
+   ```shell
    kubectl create namespace <NAMESPACE_NAME>
    ```
 
 3. Store the PostgreSQL database connection string as a Kubernetes secret:
 
-   ```bash
+   ```shell
    kubectl create secret generic <SECRET_NAME> \
    -n <NAMESPACE_NAME> \
    --from-literal QW_METASTORE_URI=postgres://<USERNAME>:<PASSWORD>@<ENDPOINT>:<PORT>/<DATABASE>
@@ -103,7 +106,7 @@ echo ""
 
    Any parameters not explicitly overridden in `datadog-values.yaml` fall back to the defaults defined in the chart's `values.yaml`.
 
-   ```bash
+   ```shell
    # Show default values
    helm show values datadog/cloudprem
    ```
@@ -226,7 +229,7 @@ echo ""
 
 5. Install or upgrade the Helm chart
 
-   ```bash
+   ```shell
    helm upgrade --install <RELEASE_NAME> datadog/cloudprem \
    -n <NAMESPACE_NAME> \
    -f datadog-values.yaml
@@ -238,7 +241,7 @@ echo ""
 
 Verify that all CloudPrem components are running:
 
-```bash
+```shell
 kubectl get pods -n <NAMESPACE_NAME>
 kubectl get ingress -n <NAMESPACE_NAME>
 kubectl get services -n <NAMESPACE_NAME>
@@ -248,13 +251,13 @@ kubectl get services -n <NAMESPACE_NAME>
 
 To uninstall CloudPrem:
 
-```bash
+```shell
 helm uninstall <RELEASE_NAME>
 ```
 
 ## Next step
 
-**[Set up log ingestion with Datadog Agent](../ingest-logs/datadog-agent/)** - Configure the Datadog Agent to send logs to CloudPrem
+**[Set up log ingestion with Datadog Agent][8]** - Configure the Datadog Agent to send logs to CloudPrem
 
 ## Further reading
 
@@ -266,3 +269,5 @@ helm uninstall <RELEASE_NAME>
 [4]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/deploy/installation/
 [5]: /getting_started/containers/datadog_operator/#installation-and-deployment
 [6]: /help/
+[7]: /cloudprem/configure/aws_config
+[8]: /cloudprem/ingest_logs/datadog_agent/

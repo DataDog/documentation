@@ -6,7 +6,14 @@ further_reading:
   text: "CloudPrem Architecture"
 ---
 
-If you experience unexpected behavior with CloudPrem, there are a few common issues you can investigate. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.
+{{< callout btn_hidden="true" >}}
+  Datadog CloudPrem is in Preview.
+{{< /callout >}}
+
+## Overview
+
+This page provides troubleshooting guidance for common issues you may encounter when deploying or operating Datadog CloudPrem. It includes typical error messages, diagnostic steps, and tips for resolving problems related to access permissions, storage configuration, and component health. Use this guide to quickly diagnose issues or to gather context before reaching out to [Datadog support][1].
+
 
 ## Access permissions
 

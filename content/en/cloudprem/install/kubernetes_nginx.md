@@ -4,4 +4,6 @@ description: Learn how to install and configure CloudPrem on any Kubernetes clus
 private: true
 ---
 
-Coming soon.
+{{< callout btn_hidden="true" >}}
+  Datadog CloudPrem is in Preview.
+{{< /callout >}}

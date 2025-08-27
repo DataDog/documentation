@@ -8,6 +8,10 @@ further_reading:
   text: "Install CloudPrem"
 ---
 
+{{< callout btn_hidden="true" >}}
+  Datadog CloudPrem is in Preview.
+{{< /callout >}}
+
 ## Overview
 
 This page outlines the infrastructure and software requirements for deploying CloudPrem.
@@ -45,8 +49,8 @@ This page outlines the infrastructure and software requirements for deploying Cl
 ## Next step
 
 {{< whatsnext desc="Install CloudPrem">}}
-  {{< nextlink href="./aws-eks/" >}}Install on AWS EKS{{< /nextlink >}}
-  {{< nextlink href="./azure-aks/" >}}Install on Azure AKS{{< /nextlink >}}
-  {{< nextlink href="./kubernetes-nginx/" >}}Install on a K8s cluster with NGINX Ingress Controller{{< /nextlink >}}
+  {{< nextlink href="./aws_eks/" >}}Install on AWS EKS{{< /nextlink >}}
+  {{< nextlink href="./azure_aks/" >}}Install on Azure AKS{{< /nextlink >}}
+  {{< nextlink href="./kubernetes_nginx/" >}}Install on a K8s cluster with NGINX Ingress Controller{{< /nextlink >}}
 {{< /whatsnext >}}
 

@@ -2,16 +2,20 @@
 title: Send logs to CloudPrem with the Datadog Agent
 description: Configure the Datadog Agent to send logs to your CloudPrem deployment
 further_reading:
-- link: "/cloudprem/ingest-logs/observability-pipelines/"
+- link: "/cloudprem/ingest_logs/observability_pipelines/"
   tag: "Documentation"
   text: "Observability Pipelines Integration"
-- link: "/cloudprem/ingest-logs/rest-api/"
+- link: "/cloudprem/ingest_logs/rest_api/"
   tag: "Documentation"
   text: "REST API Integration"
 - link: "/getting_started/containers/datadog_operator/"
   tag: "Documentation"
   text: "Datadog Operator Guide"
 ---
+
+{{< callout btn_hidden="true" >}}
+  Datadog CloudPrem is in Preview.
+{{< /callout >}}
 
 ## Overview
 
@@ -21,7 +25,7 @@ To send logs with the Datadog agent to CloudPrem, you need to set the two follow
 
 ## Send Kubernetes logs to CloudPrem with the Datadog Agent deployed with the Datadog Operator
 
-Follow the [Getting Started with Datadog Operator][5] guide for installation and deployment. When you reach Step 3, use the following `datadog-agent.yaml` configuration instead of the example provided in the guide.
+Follow the [Getting Started with Datadog Operator][1] guide for installation and deployment. When you reach Step 3, use the following `datadog-agent.yaml` configuration instead of the example provided in the guide.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -179,3 +183,4 @@ kubectl exec -it <RELEASE_NAME>-searcher-0 -n <NAMESPACE_NAME> -- curl 'http://l
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /getting_started/containers/datadog_operator/#installation-and-deployment

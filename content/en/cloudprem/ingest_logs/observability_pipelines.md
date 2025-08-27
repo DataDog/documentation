@@ -2,10 +2,10 @@
 title: Send logs to CloudPrem with Observability Pipelines
 description: Configure Observability Pipelines to send logs to CloudPrem with optional dual shipping
 further_reading:
-- link: "/cloudprem/ingest-logs/datadog-agent/"
+- link: "/cloudprem/ingest_logs/datadog_agent/"
   tag: "Documentation"
   text: "Datadog Agent Integration"
-- link: "/cloudprem/ingest-logs/rest-api/"
+- link: "/cloudprem/ingest_logs/rest_api/"
   tag: "Documentation"
   text: "REST API Integration"
 - link: "/observability_pipelines/"
@@ -13,7 +13,9 @@ further_reading:
   text: "Observability Pipelines Overview"
 ---
 
-<div class="alert alert-warning">CloudPrem is in Preview.</div>
+{{< callout btn_hidden="true" >}}
+  Datadog CloudPrem is in Preview.
+{{< /callout >}}
 
 ## Overview
 
@@ -23,14 +25,14 @@ You can send logs to CloudPrem using Observability Pipelines with the following 
 
 ## Create and configure an Observability Pipeline in Datadog
 
-On Observability Pipelines home page, choose the Log Volume Control template and configure the pipeline with:
+On the [Observability Pipelines][1] page, create a pipeline using the **Log Volume Control** template and configure the pipeline with:
 - An HTTP server source (no configuration).
 - An empty processor (remove all default processors).
 - An HTTP client destination (no configuration).
 
 Your pipeline should look like this one:
 
-{{< img src="/cloudprem/ingest/observability-pipelines-cloudprem-setup.png" alt="Screenshot of the Logs Explorer interface showing how to filter logs by selecting the cloudprem index in the facets panel" style="width:70%;" >}}
+{{< img src="/cloudprem/ingest/observability-pipelines-cloudprem-setup.png" alt="Screenshot of the Logs Explorer interface showing how to filter logs by selecting the cloudprem index in the facets panel" style="width:80%;" >}}
 
 You are ready to deploy it.
 
@@ -96,3 +98,5 @@ kubectl exec -it <RELEASE_NAME>-searcher-0 -n <NAMESPACE_NAME> -- curl 'http://l
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/observability-pipelines
