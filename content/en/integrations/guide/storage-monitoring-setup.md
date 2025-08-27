@@ -34,11 +34,11 @@ Go to Datadog > **Infrastructure** > **Storage Monitoring**. Click [Enable Bucke
 {{< img src="integrations/guide/storage_monitoring/add-buckets.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
 
 1. **Enable Amazon S3 Integration and Resource collection for all the AWS accounts you want to monitor.**
-2. **Enable S3 Inventory to get prefix level monitoring**
+2. **Enable S3 Inventory to get prefix level monitoring.**
 
       **Note:**
       - Source bucket: The S3 bucket you want to monitor with Storage Monitoring
-      - Destination bucket: Used to store inventory reports (one per AWS region, can be reused cross account)
+      - Destination bucket: Used to store inventory reports (one per AWS region, can be reused cross-account)
 
    1. **Allow Datadog to create inventories and read from your destination buckets.** Add the following permissions to the Datadog IAM integration role for the account that owns the destination buckets:
       - `s3:PutInventoryConfiguration`
@@ -56,11 +56,11 @@ Go to Datadog > **Infrastructure** > **Storage Monitoring**. Click [Enable Bucke
                   "Sid": "AllowDatadogToEnableInventory",
                   "Effect": "Allow",
                   "Action": [
-                    "s3:PutInventoryConfiguration" // Used for onboarding via UI
+                    "s3:PutInventoryConfiguration" // Used for onboarding through the UI
                   ],
                   "Resource": "arn:aws:s3:::storage-monitoring-source-bucket" // source bucket(s)
                 },
-                { //destination bucket
+                { // destination bucket
                   "Sid": "AllowDatadogToReadInventoryFiles",
                   "Effect": "Allow",
                   "Action": [
@@ -82,7 +82,7 @@ Go to Datadog > **Infrastructure** > **Storage Monitoring**. Click [Enable Bucke
 
     {{< img src="integrations/guide/storage_monitoring/step-2.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
 
-   4. Assign a destination bucket per region to store S3 inventory reports from the source buckets. This can be an existing AWS bucket or a new one.
+   4. Assign one destination bucket per region to store S3 inventory reports from the source buckets. This can be an existing AWS bucket or a new one.
 
    5. Complete the inventory configuration.
 
@@ -113,7 +113,7 @@ Go to Datadog > **Infrastructure** > **Storage Monitoring**. Click [Enable Bucke
         - Set the prefix to `access-logs/` (matching your access log prefix)
 
 
-4. Return to **Infrastructure > Storage Monitoring** to see any new buckets. The inventory generation process starts within AWS within 24 hours of the first report and you'll see data for your buckets after this period.
+4. Return to **Infrastructure > Storage Monitoring** to see any new buckets. The inventory generation process starts in AWS within 24 hours of the first report. Data from your buckets is visible after this period.
 
 [501]: https://app.datadoghq.com/storage-monitoring?mConfigure=true
 [502]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html#configure-inventory-destination-bucket-policy
