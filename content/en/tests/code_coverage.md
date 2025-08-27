@@ -106,7 +106,8 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service np
 When code coverage is available, the Datadog Tracer (v2.31.0 or later) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
 
 If you are using [Coverlet][1] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer's built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` environment variable.
-Note that `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` is only used when the command instrumented by `dd-trace ci run` is either `dotnet test` or `dotnet vstest`. For example, the results in `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` are ignored when running `dd-trace ci run -- coverlet TestAssembly.dll --target dotnet --targetargs "test TestAssembly.dll"`.
+
+**Note**: `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` is only used when the command instrumented by `dd-trace ci run` is `dotnet test`, `dotnet vstest`, or `vstest.console`. For example, the results in the variable are ignored when running `dd-trace ci run -- coverlet TestAssembly.dll --target dotnet --targetargs "test TestAssembly.dll"`.
 
 ### Advanced options
 
