@@ -2003,6 +2003,12 @@
     "description": "Fetches all rule outcomes.",
     "summary": "List all rule outcomes"
   },
+  "UpdateScorecardOutcomesAsync": {
+    "description": "Updates multiple scorecard rule outcomes in a single batched request.",
+    "summary": "Update Scorecard outcomes asynchronously",
+    "request_description": "Set of scorecard outcomes.",
+    "request_schema_description": "Scorecard outcomes batch request."
+  },
   "CreateScorecardOutcomesBatch": {
     "description": "Sets multiple service-rule outcomes in a single batched request.",
     "summary": "Create outcomes batch",
