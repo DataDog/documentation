@@ -2003,6 +2003,12 @@
     "description": "Fetches all rule outcomes.",
     "summary": "List all rule outcomes"
   },
+  "UpdateScorecardOutcomesAsync": {
+    "description": "Updates multiple scorecard rule outcomes in a single batched request.",
+    "summary": "Update Scorecard outcomes asynchronously",
+    "request_description": "Set of scorecard outcomes.",
+    "request_schema_description": "Scorecard outcomes batch request."
+  },
   "CreateScorecardOutcomesBatch": {
     "description": "Sets multiple service-rule outcomes in a single batched request.",
     "summary": "Create outcomes batch",
@@ -2427,6 +2433,10 @@
     "description": "Get the status of the SLO report job.",
     "summary": "Get SLO report status"
   },
+  "GetSPARecommendations": {
+    "description": "Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and shard identifier, and SPA returns structured recommendations for driver and executor resources.",
+    "summary": "Get SPA Recommendations"
+  },
   "AggregateSpans": {
     "description": "The API endpoint to aggregate spans into buckets and compute metrics and timeseries.\nThis endpoint is rate limited to `300` requests per hour.",
     "summary": "Aggregate spans",
@@ -2462,6 +2472,12 @@
     "summary": "Create a team",
     "request_description": "",
     "request_schema_description": "Request to create a team"
+  },
+  "SyncTeams": {
+    "description": "This endpoint attempts to link your existing Datadog teams with GitHub teams by matching their names.\nIt evaluates all current Datadog teams and compares them against teams in the GitHub organization\nconnected to your Datadog account, based on Datadog Team handle and GitHub Team slug\n(lowercased and kebab-cased).\n\nThis operation is read-only on the GitHub side, no teams will be modified or created.\n\n[A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),\nand the GitHub App integrated with Datadog must have the `Members Read` permission. Matching is performed by comparing the Datadog team handle to the GitHub team slug\nusing a normalized exact match; case is ignored and spaces are removed. No modifications are made\nto teams in GitHub. This will not create new Teams in Datadog.",
+    "summary": "Link Teams with GitHub Teams",
+    "request_description": "",
+    "request_schema_description": "Team sync request."
   },
   "ListMemberTeams": {
     "description": "Get all member teams.",

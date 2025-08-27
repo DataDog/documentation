@@ -9255,6 +9255,19 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Update Scorecard outcomes asynchronously
+      url: '#update-scorecard-outcomes-asynchronously'
+      identifier: service-scorecards-update-scorecard-outcomes-asynchronously
+      parent: service-scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateScorecardOutcomesAsync
+        unstable:
+          - v2
+        order: 1
     - name: List all rule outcomes
       url: '#list-all-rule-outcomes'
       identifier: service-scorecards-list-all-rule-outcomes
@@ -9355,6 +9368,23 @@ menu:
         operationids:
           - ListCatalogEntity
         unstable: []
+        order: 1
+    - name: Spa
+      url: /api/latest/spa/
+      identifier: spa
+      generated: true
+    - name: Get SPA Recommendations
+      url: '#get-spa-recommendations'
+      identifier: spa-get-spa-recommendations
+      parent: spa
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSPARecommendations
+        unstable:
+          - v2
         order: 1
     - name: Spans
       url: /api/latest/spans/
@@ -9683,6 +9713,19 @@ menu:
         unstable:
           - v2
         order: 21
+    - name: Link Teams with GitHub Teams
+      url: '#link-teams-with-github-teams'
+      identifier: teams-link-teams-with-github-teams
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SyncTeams
+        unstable:
+          - v2
+        order: 19
     - name: Create a team
       url: '#create-a-team'
       identifier: teams-create-a-team

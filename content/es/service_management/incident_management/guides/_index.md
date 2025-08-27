@@ -23,6 +23,6 @@ title: Guías de gestión de incidencias
 {{< /whatsnext >}}
 
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -50,30 +50,6 @@ The Java SDK works by monitoring your servlet API (which handles web requests an
 
 To get access to configuration steps for this feature, [join the preview program][4].
 
-## Troubleshooting
-
-### RUM JavaScript tag is not injected
-
-If you don't see the RUM JavaScript tag injected, try the following steps:
-
-1. **Check server logs** for any error messages related to RUM Auto-Instrumentation
-2. **Verify configuration** - ensure all required environment variables defined at the configuration step are set:
-   - `DD_RUM_ENABLED=true`
-   - `DD_RUM_APPLICATION_ID=<your-application-id>`
-   - `DD_RUM_CLIENT_TOKEN=<your-client-token>`
-   - `DD_RUM_REMOTE_CONFIGURATION_ID=<your-remote-config-id>`
-3. **Enable debug logging** by setting `dd.trace.debug=true` (system property) or `DD_TRACE_DEBUG=true` (environment variable)
-4. **Check HTML response** - ensure your server is returning HTML with a `<head>` section
-5. **Clear browser cache** - cached pages do not show the injected JavaScript
-
-In addition, when debug logging is enabled, you should see a message like this at startup:
-
-```shell
-DEBUG datadog.trace.api.Config - New instance: Config{..., rumEnabled=true, rumInjectorConfig={"applicationId":"appid","clientToken":"token","site":"datadoghq.com","remoteConfigurationId":"remoteconfigid"}, ...}
-```
-
-This confirms that RUM Auto-Instrumentation is properly configured.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

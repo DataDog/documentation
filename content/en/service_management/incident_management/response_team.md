@@ -15,7 +15,7 @@ Form your response team by adding other users and assigning them responder types
 A responder is any Datadog user who participates in the response process for a particular incident.
 
 When you add a responder to an incident:
-* Datadog notifies the responder about the by email.
+* Datadog notifies the responder about the incident by email.
 * If the incident is private, the responder can view it in Datadog.
 * If the incident has a Slack channel attached, the responders is automatically added to that channel.
 
@@ -45,4 +45,4 @@ When you assign a responder type, the assignee is notified about it in Slack.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/incident_management/incident_settings/responder-types
+[1]: /service_management/incident_management/incident_settings/responder_types

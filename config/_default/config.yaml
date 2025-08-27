@@ -209,7 +209,7 @@ outputFormats:
     mediaType: "text/plain"
     notAlternative: true
 
-timeout: "90s"
+timeout: 300s
 
 minify:
   disableSVG: true
