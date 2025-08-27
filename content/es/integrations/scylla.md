@@ -45,29 +45,29 @@ public_title: Scylla
 short_description: Realiza un seguimiento de los recursos de clúster, las latencias,
   el estado y mucho más.
 supported_os:
-- Linux
+- linux
 - Windows
 - macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Categoría::Almacenamiento en caché
-  - Categoría::Almacenes de datos
-  - Categoría::Recopilación de logs
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::Windows
-  - Sistema operativo compatible::macOS
-  - Oferta::Integración
-  configuration: README.md#Configuración
+  - Category::Data Stores
+  - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integration
+  configuration: README.md#Setup
   description: Realiza un seguimiento de los recursos de clúster, las latencias, el
     estado y mucho más.
   media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: Scylla
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+<!--  CON ORIGEN EN https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -94,7 +94,7 @@ El check de Scylla está incluido en el paquete del [Datadog Agent][2]. No es ne
 
 Scylla tiene diferentes modos de salida de los logs dependiendo del entorno en el que se está ejecutando. Para ver más detalles sobre cómo la aplicación genera logs, consulta la [documentación de Scylla][6].
 
-1. La recopilación de logs está desactivada por defecto en el Datadog Agent, actívala en tu archivo `datadog.yaml`:
+1. La recopilación de logs está desactivada en forma predeterminada en el Datadog Agent, actívala en tu archivo `datadog.yaml`:
 
       ```yaml
        logs_enabled: true
@@ -139,7 +139,7 @@ El check de Scylla no incluye eventos.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Contacta con el [equipo de asistencia de Datadog][11].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][11].
 
 
 [1]: https://scylladb.com

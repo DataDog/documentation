@@ -87,7 +87,7 @@ To integrate your PagerDuty account with DORA Metrics:
         </tr>
         <tr>
           <td>Scope Type</td>
-          <td>Select <strong>Account</strong> to send incidents for all PagerDuty services in your account. Alternatively, you can send incidents for specific services or teams by selecting a different scope type.</td>
+          <td>Select the scope of which incidents you want to send. You can send incidents for a specific <strong>Service</strong> or <strong>Team</strong>, or all PagerDuty services in your <strong>Account</strong>. Depending on your environment and access level, some scope types may not be available.</td>
         </tr>
         <tr>
           <td>Description</td>

@@ -407,6 +407,7 @@ Datadog이 스토리지 버킷에 전달하는 로그 아카이브는 압축된 
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
+
 *Logging without Limits는 Datadog, Inc.의 상표입니다.
 
 [1]: /ko/logs/indexes/#exclusion-filters

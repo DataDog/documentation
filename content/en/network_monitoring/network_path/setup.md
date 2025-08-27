@@ -3,13 +3,18 @@ title: Setup
 description: Setting up Network Path
 is_beta: true
 further_reading:
-- link: "/network_monitoring/network_path/list_view"
-  tag: "Documentation"
-  text: "Learn more about the List View in Network Path"
-- link: "/network_monitoring/network_path/path_view"
-  tag: "Documentation"
-  text: "Learn more about the Path View in Network Path"
+- link: "https://www.datadoghq.com/blog/datadog-network-path-monitoring/"
+  tag: "Blog"
+  text: "Get end-to-end network visibility with Network Path and SD-WAN monitoring"
+- link: "/network_monitoring/cloud_network_monitoring/guide/detecting_application_availability/"
+  tag: "Guide"
+  text: "Detecting Application Availability using Network Insights"
+- link: "/network_monitoring/network_path/guide/traceroute_variants/"
+  tag: "Guide"
+  text: "Network Path traceroute variants"
 ---
+
+
 
 ## Overview
 
@@ -297,8 +302,6 @@ spec:
 
 ### Network traffic paths (experimental)
 
-<div class="alert alert-info">Network traffic paths is in Limited Availability. Reach out to your Datadog representative to sign up, and then use the following instructions to configure the Datadog Agent to gather network traffic paths data.</div>
-
 **Prerequisites**: [CNM][1] must be enabled.
 
 **Note**: Network traffic paths is experimental and is not yet stable. Do not deploy network traffic paths widely in a production environment.
@@ -306,6 +309,7 @@ spec:
 Configure network traffic paths to allow the Agent to automatically discover and monitor network paths based on actual network traffic, without requiring you to specify endpoints manually.
 
 <div class="alert alert-warning"> Enabling Network Path to automatically detect paths can generate a significant number of logs, particularly when monitoring network paths across a large number of hosts. </div>
+
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -428,10 +432,45 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Troubleshooting
+
+Use the following guidelines to troubleshoot issues with Network Path. If you need additional help, contact [Datadog Support][3].
+
+### No Network Path data in the UI
+
+If no data appears in the [Network Path][4] UI, the feature may not be fully enabled. Network Path requires the following:
+
+1. The traceroute module must be enabled in your `system-probe.yaml` file:
+
+   ```yaml
+   traceroute:
+     enabled: true
+   ```
+
+2. At least one Network Path feature must be active, such as:
+
+   - [Individual paths](#monitor-individual-paths) configured through the `conf.d/network_path.d` file.
+   - Experimental [network traffic paths](#network-traffic-paths-experimental) configured by enabling both `network_path.connections_monitoring` and [Cloud Network Monitoring][1](CNM).
+
+### Error: status code: 404
+
+If you encounter an error like the following:
+
+   ```text
+   Error: failed to trace path: traceroute request failed: Probe Path <path>, url: <url>, status code: 404
+   ```
+
+   - This indicates that the traceroute module is not enabled. Ensure the traceroute module is enabled in your `system-probe.yaml` file.
+
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /network_monitoring/cloud_network_monitoring/setup/
 [2]: https://docs.datadoghq.com/agent/configuration/proxy/?tab=linux
+[3]: /help
+[4]: https://app.datadoghq.com/network/path
+
 
