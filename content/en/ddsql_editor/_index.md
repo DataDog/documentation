@@ -14,7 +14,7 @@ further_reading:
 {{< callout url="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/" >}}
 Querying Logs and Metrics through DDSQL is in Preview. Use this form to request access.
 
-Spans and RUM is also in Preview. Mention if you want access to those data sources or any other ones in the use cases section.
+Spans and RUM as data sources are also in Preview. Mention in the same form if you want access or even data sources not listed in the use cases section.
 {{< /callout >}} 
 
 ## Overview
@@ -44,7 +44,7 @@ GROUP BY instance_type
 
 <div class="alert alert-warning">Querying Logs and Metrics through DDSQL is in Preview. Use this <a href="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/">form</a> to request access.
 
-Spans and RUM is also in Preview. Mention in the same form if you want access to those data sources or any other ones in the use cases section.
+Spans and RUM as data sources are also in Preview. Mention in the same form if you want access or even data sources not listed in the use cases section.
 </div>
 
 View, filter, and built queries in the Data Explorer.
