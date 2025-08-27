@@ -40118,6 +40118,12 @@ components:
         replacement_string:
           description: Required if type == 'replacement_string'.
           type: string
+        should_save_match:
+          description: "Only valid when type == `replacement_string`. When enabled,
+            matches can be unmasked in logs by users with \u2018Data Scanner Unmask\u2019
+            permission. As a security best practice, avoid masking for highly-sensitive,
+            long-lived data."
+          type: boolean
         type:
           $ref: '#/components/schemas/SensitiveDataScannerTextReplacementType'
       type: object

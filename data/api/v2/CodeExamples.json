@@ -1377,6 +1377,11 @@
       "group": "sensitive_data_scanner",
       "suffix": "",
       "description": "Create Scanning Rule returns \"OK\" response"
+    },
+    {
+      "group": "sensitive_data_scanner",
+      "suffix": "_502667299",
+      "description": "Create Scanning Rule with should_save_match returns \"OK\" response"
     }
   ],
   "DeleteScanningGroup": [
