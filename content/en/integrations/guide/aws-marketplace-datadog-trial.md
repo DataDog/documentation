@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-You can get a 14-day free trial of all Datadog features through the AWS Marketplace. This allows you to monitor and take action on your infrastructure, services, and applications alongside security data in a single observability platform. Use Datadog's {{< translate key="integration_count" >}}+ integrations to collect and correlate data from every part of your stack.
+You can get a 14-day free trial of all Datadog features through the AWS Marketplace. This allows you to monitor and take action on your infrastructure, services, and applications alongside security data in a single observability platform. Use Datadog's {{< translate key="integration_count" >}}+ integrations, including 100+ AWS integrations, to collect and correlate data from every part of your stack.
 
 ## Activate your subscription
 
@@ -20,12 +20,18 @@ You can get a 14-day free trial of all Datadog features through the AWS Marketpl
 
 ## Next steps
 
+### Add commitments
+
 If you're ready to add commitments to your plan, check out the available options:
 
 - [Pro plan][3]
 - [Enterprise plan][4]
 
 See the [pricing page][5] for more information about the different plans.
+
+### Learn more
+
+Check out the [AWS Solutions Page][6] to learn more about how to monitor your AWS environment.
 
 ## Further reading
 
@@ -36,3 +42,4 @@ See the [pricing page][5] for more information about the different plans.
 [3]: https://aws.amazon.com/marketplace/pp/prodview-536p4hpqbajc2
 [4]: https://aws.amazon.com/marketplace/pp/prodview-tl2m77mvj2gmk
 [5]: https://www.datadoghq.com/pricing/
+[6]: https://www.datadoghq.com/solutions/aws/
