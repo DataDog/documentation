@@ -29,6 +29,10 @@ To complete this guide, you need the following:
 1. [Create a Datadog account][1] if you don't have one.
 1. Find or create your [Datadog API key][2].
 
+**Software**:
+- A supported Linux distribution (for example, Debian, Ubuntu, CentOS, RHEL, Fedora, SUSE).
+- `curl` must be installed to use the one-line installation script.
+
 ## Install the Datadog Agent with OpenTelemetry Collector
 
 ### Installation
@@ -39,11 +43,10 @@ To install the DDOT Collector on a Linux host, use the following one-line instal
 DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_OTELCOLLECTOR_ENABLED=true DD_AGENT_MAJOR_VERSION=7 DD_AGENT_MINOR_VERSION=69.4-1 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-This command will install both the core Datadog Agent package and the DDOT Collector that will run alongside it.
+This command installs both the core Datadog Agent package and the DDOT Collector that runs alongside it.
 
 ### Validation
 
-#### Terminal command
 
 Run the Agent's [status command][3] to verify installation.
 
@@ -67,7 +70,7 @@ Agent (v7.69.3)
   Log Level: info
 ```
 
-There will also be a DDOT status section that includes OpenTelemetry information:
+There will also be an **OTel Agent** status section that includes OpenTelemetry information:
 
 ```text
 ==========
@@ -93,8 +96,7 @@ OTel Agent
 
 ## Configure the Datadog Agent
 
-### Enabling the DDOT Collector
-The configuration file for the Datadog Agent will be automatically installed at `/etc/datadog-agent/datadog.yaml`. The installation script above adds the following configuration settings to `/etc/datadog-agent/datadog.yaml` in order to enable the DDOT Collector:
+The configuration file for the Datadog Agent is automatically installed at `/etc/datadog-agent/datadog.yaml`. The installation script adds the following configuration settings to `/etc/datadog-agent/datadog.yaml` to to enable the DDOT Collector:
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
 otelcollector:
@@ -253,7 +255,7 @@ receivers:
             - targets: ["0.0.0.0:8888"]
 {{< /code-block >}}
 
-For more information, see the [Collector Health Metrics][6] documentation.
+For more information, see the [Collector Health Metrics][11] documentation.
 
 ## Send your telemetry to Datadog
 
@@ -282,7 +284,7 @@ public String getDate() {
 
 ### Configure the application
 
-Your application container must send data to the DDOT Collector on the same host. Ensure that the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable is set on your application.
+Your application must send data to the DDOT Collector on the same host. Ensure that the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable is set on your application.
 
 In the example application, this is done in `run-otel-local.sh`:
 {{< code-block lang="bash" filename="run-otel-local.sh" disable_copy="true" collapsible="true" >}}
@@ -296,7 +298,6 @@ export OTEL_EXPORTER_OTLP_PROTOCOL="grpc"
 
 [Unified service tagging][10] ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
 
-Unified service tagging ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
 
 In bare-metal environments, `env`, `service`, and `version` are set through the OpenTelemetry Resource Attributes environment variables. The DDOT Collector detects this tagging configuration and applies it to the data it collects from applications.
 
@@ -307,7 +308,7 @@ export OTEL_RESOURCE_ATTRIBUTES="service.name=my-calendar-service,service.versio
 
 ### Run the application
 
-Redeploy your application to apply the changes made in your environment variables. Once the updated configuration is active, Unified Service Tagging will be fully enabled for your metrics, traces, and logs.
+Redeploy your application to apply the changes made in your environment variables. After the updated configuration is active, unified service tagging is fully enabled for your metrics, traces, and logs.
 
 ## Explore observability data in Datadog
 
@@ -359,7 +360,7 @@ View metrics from the DDOT Collector to monitor the Collector health.
 [4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector
 [5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
 [6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/prometheusreceiver
-[7]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[7]: /opentelemetry/instrument/api_support
 [8]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/rest-services/java/calendar
 [9]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/java/calendar/src/main/java/com/otel/service/CalendarService.java#L27-L48
-[10]: /getting_started/tagging/unified_service_tagging
+[10]: /opentelemetry/correlate/
