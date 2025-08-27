@@ -177,7 +177,7 @@ You can delete metric filtering policies from the [Metrics Settings page][1].
 This initial preview release includes the following limitations:
 
 - A maximum of 10,000 metric names can be filtered out.
-- Resource usage impact on the Agent is limited to up to 10MB RSS. There is no increase in CPU usage.
+- Resource usage impact on the Agent is limited to up to 10MB of memory (RSS), and no increase to CPU usage.
 - Only DogStatsD metrics are supported.
 
 ## Further reading
