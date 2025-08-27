@@ -89,6 +89,7 @@ After unified service tagging is configured, you can connect your various teleme
 - [Correlate logs and traces][1]
 - [Correlate metrics and traces][2]
 - [Correlate RUM and traces][3]
+- [Correlate DBM and traces][4]
 
 ## Further reading
 
@@ -97,3 +98,4 @@ After unified service tagging is configured, you can connect your various teleme
 [1]: /opentelemetry/correlate/logs_and_traces
 [2]: /opentelemetry/correlate/metrics_and_traces
 [3]: /opentelemetry/correlate/rum_and_traces
+[4]: /opentelemetry/correlate/dbm_and_traces
