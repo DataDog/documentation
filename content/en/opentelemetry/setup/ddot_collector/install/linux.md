@@ -96,7 +96,7 @@ OTel Agent
 
 ## Configure the Datadog Agent
 
-The configuration file for the Datadog Agent is automatically installed at `/etc/datadog-agent/datadog.yaml`. The installation script adds the following configuration settings to `/etc/datadog-agent/datadog.yaml` to to enable the DDOT Collector:
+The configuration file for the Datadog Agent is automatically installed at `/etc/datadog-agent/datadog.yaml`. The installation script adds the following configuration settings to `/etc/datadog-agent/datadog.yaml` to enable the DDOT Collector:
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
 otelcollector:
