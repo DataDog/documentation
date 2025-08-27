@@ -25,7 +25,7 @@ further_reading:
 
 [Azure App Service][1] is a platform that hosts web applications, REST APIs, and mobile backends. Datadog Serverless Monitoring provides metrics, logs, and traces for your Azure App Service applications.
 
-{{< img src="serverless/azure_app_service/azure_app_service_top.png" alt="Datadog UI, Serverless Monitoring page with Azure App Service selected." style="width:100%;" >}}
+{{< img src="serverless/azure_app_service/azure_app_service_top_2.png" alt="Datadog UI, Serverless Monitoring page with Azure App Service selected." style="width:100%;" >}}
 
 In Datadog, use the [Serverless > Azure][4] page to troubleshoot all your Azure resources.
 
