@@ -62,7 +62,7 @@ In the **Rule multi-triggering behavior** section, select how often you want to 
 
 Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
 
-Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid getting excluded.
 
 #####  How an event is determined to be anomalous
 
@@ -74,7 +74,7 @@ Content anomaly detection balances precision and sensitivity using several rule 
 
 These parameters help to identify field content that is both unusual and rare, filtering out minor or common variations.
 
-#### Time windows
+##### Time windows
 
 Datadog automatically detects the seasonality of the data and generates a security signal when the data is determined to be anomalous.
 
@@ -116,7 +116,7 @@ In the **Rule multi-triggering behavior** section, select how often you want to 
 
 Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
 
-Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid getting excluded.
 
 #####  How an event is determined to be anomalous
 
@@ -142,14 +142,6 @@ A signal "closes" once the time exceeds the maximum signal duration, regardless 
 
 {{% cloud_siem/decreasing_non_prod_severity %}}
 
-#### Other parameters
-
-In the **Job multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected within a specified time frame. For example, the same signal updates if any new value is detected within 1 hour, for a maximum duration of 24 hours.
-
-**Note**: If a unique signal is required for every new value, configure this value to `0` minutes.
-
-Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
-
 ### Add custom schedule
 
 {{% cloud_siem/add_custom_schedule %}}
@@ -171,23 +163,13 @@ In the **Anomaly count** field, enter the condition for how many anomalous logs 
 
 **Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
 
-#### Time windows
-
-Datadog automatically detects the seasonality of the data and generates a security signal when the data is determined to be anomalous.
-
-After a signal is generated, the signal remains "open" if the data remains anomalous and the last updated timestamp is updated for the anomalous duration.
-
-A signal "closes" once the time exceeds the maximum signal duration, regardless of whether or not the anomaly is still anomalous. This time is calculated from the first seen timestamp.
-
-**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
-
 #### Other parameters
 
 In the **Content anomaly detection options** section, specify the parameters to assess whether a log is anomalous or not. See [How an event is determined to be anomalous](#how-an-event-is-determined-to-be-anomalous) for more information.
 
 In the **Job multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected.
 
-Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid getting excluded.
 
 #####  How an event is determined to be anomalous
 

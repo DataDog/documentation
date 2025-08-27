@@ -60,7 +60,7 @@ In the **Rule multi-triggering behavior** section, select how often you want to 
 
 Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
 
-Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid getting excluded.
 
 ###### Time windows
 
@@ -99,7 +99,7 @@ In the **Rule multi-triggering behavior** section, select how often you want to 
 
 Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
 
-Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid getting excluded.
 
 ##### Time windows
 
@@ -134,7 +134,7 @@ In the **Job multi-triggering behavior** section, select how often you want to k
 
 **Note**: If a unique signal is required for every new value, configure this value to `0` minutes.
 
-Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid getting excluded.
 
 ### Notify when job is complete
 
