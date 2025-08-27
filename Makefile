@@ -35,7 +35,7 @@ help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
 clean-all: clean clean-examples clean-dependent-repos clean-build-scripts ## Clean everything (environment, sourced repos, generated files, build scripts)
-	rm -rf ./node_modules ./hugpython ./public
+	rm -rf ./node_modules ./hugpython ./public ./_vendor
 
 clean-dependent-repos:
 	rm -rf ./integrations_data

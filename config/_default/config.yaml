@@ -146,6 +146,15 @@ module:
       target: "assets/node_modules/datadog-rum.js"
     - source: "./node_modules/@datadog/browser-logs/bundle/datadog-logs.js"
       target: "assets/node_modules/datadog-logs.js"
+    - source: _vendor/content/en
+      target: content
+      lang: en
+    - source: _vendor/data
+      target: data
+    - source: _vendor/layouts
+      target: layouts
+    - source: _vendor/assets
+      target: assets
 
 security:
   funcs:
