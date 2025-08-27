@@ -62,19 +62,21 @@ To finish setting up the detection rule, select the type of rule you are creatin
 
 {{% security-rule-severity-notification %}}
 
+**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
+
+#### Other parameters
+
+In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected. See [Time windows](#time-windows) for more information.
+
+Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
+
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+
 #### Time windows
 
 {{% security-rule-time-windows %}}
 
 **Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
-
-#### Other parameters
-
-In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected.
-
-Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
-
-Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
 
 ##### Decreasing non-production severity
 
@@ -97,19 +99,19 @@ Toggle **Enable Optional Group By** section, if you want to group events even wh
 
 {{% security-rule-severity-notification %}}
 
+#### Other parameters
+
+In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected. See [Time windows](#time-windows) for more information.
+
+Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
+
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+
 #### Time windows
 
 {{% security-rule-time-windows %}}
 
 **Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
-
-#### Other parameters
-
-In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected.
-
-Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
-
-Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
 
 ##### Decreasing non-production severity
 

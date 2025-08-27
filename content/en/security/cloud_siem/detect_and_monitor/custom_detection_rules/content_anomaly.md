@@ -54,19 +54,11 @@ n the **Anomaly count** field, enter the condition for how many anomalous logs a
 
 **Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
 
-#### Time windows
-
-Datadog automatically detects the seasonality of the data and generates a security signal when the data is determined to be anomalous.
-
-After a signal is generated, the signal remains "open" if the data remains anomalous and the last updated timestamp is updated for the anomalous duration.
-
-A signal "closes" once the time exceeds the maximum signal duration, regardless of whether or not the anomaly is still anomalous. This time is calculated from the first seen timestamp.
-
 #### Other parameters
 
 In the **Content anomaly detection options** section, specify the parameters to assess whether a log is anomalous or not. See [How an event is determined to be anomalous](#how-an-event-is-determined-to-be-anomalous) for more information.
 
-In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected.
+In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected. See [Time windows](#time-windows) for more information.
 
 Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
 
@@ -81,6 +73,14 @@ Content anomaly detection balances precision and sensitivity using several rule 
 1. Evaluation window: The time frame during which anomalies are counted toward a signal (for example, a 10-minute time frame).
 
 These parameters help to identify field content that is both unusual and rare, filtering out minor or common variations.
+
+#### Time windows
+
+Datadog automatically detects the seasonality of the data and generates a security signal when the data is determined to be anomalous.
+
+After a signal is generated, the signal remains "open" if the data remains anomalous and the last updated timestamp is updated for the anomalous duration.
+
+A signal "closes" once the time exceeds the maximum signal duration, regardless of whether or not the anomaly is still anomalous. This time is calculated from the first seen timestamp.
 
 ##### Decreasing non-production severity
 
@@ -108,19 +108,11 @@ n the **Anomaly count** field, enter the condition for how many anomalous logs a
 
 **Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
 
-#### Time windows
-
-Datadog automatically detects the seasonality of the data and generates a security signal when the data is determined to be anomalous.
-
-After a signal is generated, the signal remains "open" if the data remains anomalous and the last updated timestamp is updated for the anomalous duration.
-
-A signal "closes" once the time exceeds the maximum signal duration, regardless of whether or not the anomaly is still anomalous. This time is calculated from the first seen timestamp.
-
 #### Other parameters
 
 In the **Content anomaly detection options** section, specify the parameters to assess whether a log is anomalous or not. See [How an event is determined to be anomalous](#how-an-event-is-determined-to-be-anomalous) for more information.
 
-In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected.
+In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected. See [Time windows](#time-windows) for more information.
 
 Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
 
@@ -135,6 +127,16 @@ Content anomaly detection balances precision and sensitivity using several rule 
 1. Evaluation window: The time frame during which anomalies are counted toward a signal (for example, a 10-minute time frame).
 
 These parameters help to identify field content that is both unusual and rare, filtering out minor or common variations.
+
+##### Time windows
+
+Datadog automatically detects the seasonality of the data and generates a security signal when the data is determined to be anomalous.
+
+After a signal is generated, the signal remains "open" if the data remains anomalous and the last updated timestamp is updated for the anomalous duration.
+
+A signal "closes" once the time exceeds the maximum signal duration, regardless of whether or not the anomaly is still anomalous. This time is calculated from the first seen timestamp.
+
+**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
 ##### Decreasing non-production severity
 
@@ -176,6 +178,8 @@ Datadog automatically detects the seasonality of the data and generates a securi
 After a signal is generated, the signal remains "open" if the data remains anomalous and the last updated timestamp is updated for the anomalous duration.
 
 A signal "closes" once the time exceeds the maximum signal duration, regardless of whether or not the anomaly is still anomalous. This time is calculated from the first seen timestamp.
+
+**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
 #### Other parameters
 

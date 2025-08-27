@@ -76,21 +76,19 @@ In this example, when there are more than five failed logins and at least one su
 
 {{% security-rule-severity-notification %}}
 
-#### Time windows
-
-{{% security-rule-time-windows %}}
-
-Click **Add Condition** to add additional conditions.
-
-**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
-
 #### Other parameters
 
-In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected within a specified time frame. For example, the same signal updates if any new value is detected within 1 hour, for a maximum duration of 24 hours.
+In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected within a specified time frame. For example, the same signal updates if any new value is detected within 1 hour, for a maximum duration of 24 hours. See [Time windows](#time-windows) for more information.
 
 Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
 
 Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+
+##### Time windows
+
+{{% security-rule-time-windows %}}
+
+**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
 ##### Decreasing non-production severity
 
@@ -131,19 +129,19 @@ In this example, when there are more than five failed logins and at least one su
 
 {{% security-rule-severity-notification %}}
 
-#### Time windows
-
-{{% security-rule-time-windows %}}
-
-Click **Add Condition** to add additional conditions.
-
 #### Other parameters
 
-In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected within a specified time frame. For example, the same signal updates if any new value is detected within 1 hour, for a maximum duration of 24 hours.
+In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected within a specified time frame. For example, the same signal updates if any new value is detected within 1 hour, for a maximum duration of 24 hours. See [Time windows](#time-windows) for more information.
 
 Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
 
 Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+
+##### Time windows
+
+{{% security-rule-time-windows %}}
+
+**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
 ##### Decreasing non-production severity
 

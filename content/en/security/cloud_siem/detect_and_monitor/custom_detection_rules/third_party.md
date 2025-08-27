@@ -78,10 +78,6 @@ In this example, when there are more than five failed logins and at least one su
 
 {{% security-rule-severity-notification %}}
 
-#### Time windows
-
-{{% security-rule-time-windows %}}
-
 #### Other parameters
 
 Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
@@ -127,10 +123,6 @@ In this example, when there are more than five failed logins and at least one su
 
 {{% security-rule-severity-notification %}}
 
-#### Time windows
-
-{{% security-rule-time-windows %}}
-
 #### Other parameters
 
 Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
@@ -171,10 +163,6 @@ and a rule condition that triggers when `failed_login > 5 && successful_login>0`
 The rule condition joins these queries together based on their `group by` value. The `group by` attribute is typically the same attribute because the value must be the same for the condition to be met. If a `group by` value doesn't exist, the condition will never be met. A security signal is generated for each unique `group by` value when a condition is matched.
 
 In this example, when there are more than five failed logins and at least one successful login for the same `User Name`, the first condition is matched, and a security signal is generated.
-
-#### Time windows
-
-{{% security-rule-time-windows %}}
 
 #### Other parameters
 

@@ -54,7 +54,15 @@ To finish setting up the detection rule, select the type of rule you are creatin
 
 {{% security-rule-severity-notification %}}
 
-#### Time windows
+#### Other parameters
+
+In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected. See [Time windows for more information](#time-windows)
+
+Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
+
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+
+###### Time windows
 
 Datadog automatically detects the seasonality of the data and generates a security signal when the data is determined to be anomalous.
 
@@ -62,13 +70,7 @@ After a signal is generated, the signal remains "open" if the data remains anoma
 
 A signal "closes" after the time period exceeds the maximum signal duration, regardless of whether or not the anomaly is still anomalous. This time is calculated from the first seen timestamp.
 
-#### Other parameters
-
-In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected.
-
-Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
-
-Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
 ##### Decreasing non-production severity
 
@@ -91,7 +93,15 @@ Toggle **Enable Optional Group By** section, if you want to group events even wh
 
 {{% security-rule-severity-notification %}}
 
-#### Time windows
+#### Other parameters
+
+In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected. See [Time windows](#time-windows) for more information.
+
+Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
+
+Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+
+##### Time windows
 
 Datadog automatically detects the seasonality of the data and generates a security signal when the data is determined to be anomalous.
 
@@ -99,13 +109,11 @@ After a signal is generated, the signal remains "open" if the data remains anoma
 
 A signal "closes" after the time period exceeds the maximum signal duration, regardless of whether or not the anomaly is still anomalous. This time is calculated from the first seen timestamp.
 
-#### Other parameters
+**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
-In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected.
+##### Decreasing non-production severity
 
-Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
-
-Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid selection exclusion.
+{{% cloud_siem/decreasing_non_prod_severity %}}
 
 ### Add custom schedule
 
