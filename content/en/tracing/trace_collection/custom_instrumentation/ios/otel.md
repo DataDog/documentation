@@ -201,6 +201,27 @@ Datadog.initialize(
 {{< /tabs >}}
 {{< /site-region >}}
 
+{{< site-region region="ap2" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+
+```swift
+import DatadogCore
+
+Datadog.initialize(
+    with: Datadog.Configuration(
+        clientToken: "<client token>",
+        env: "<environment>",
+        site: .ap2,
+        service: "<service name>"
+    ),
+    trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
 To be GDPR compliant, the SDK requires the `trackingConsent` value at initialization.
 The `trackingConsent` can be one of the following values:
 

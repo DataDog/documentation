@@ -24,12 +24,12 @@ author:
   support_email: praveen.prakash@sedai.io
 categories:
 - 자동화
-- cloud
-- 비용 관리
+- 클라우드
+- cost management
 - 알림
-- orchestration
+- 오케스트레이션
 - 프로비저닝
-custom_kind: integration
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sedai/README.md
 display_on_public_website: true
@@ -44,22 +44,22 @@ name: sedai
 public_title: Sedai
 short_description: 클라우드 애플리케이션을 지능적으로 관리하는 자율 플랫폼
 supported_os:
-- 리눅스
-- windows
+- linux
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Automation
-  - "\b카테고리::클라우드"
+  - 카테고리::자동화
+  - Category::Cloud
   - Category::Cost Management
   - Category::Notifications
   - Category::Orchestration
-  - 카테고리::프로비저닝
+  - Category::Provisioning
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - 제공::통합
+  - Offering::Integration
   configuration: README.md#Setup
   description: 클라우드 애플리케이션을 지능적으로 관리하는 자율 플랫폼
   media: []

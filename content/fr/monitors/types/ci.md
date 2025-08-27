@@ -20,11 +20,8 @@ further_reading:
   tag: Blog
   text: Configurer des alertes de pipeline avec les monitors CI Datadog
 title: Monitor CI
+site_support_id: ci_visibility
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution CI Visibility n'est pas disponible pour le site ({{< region-param key="dd_site_name" >}}) pour le moment.</div>
-{{< /site-region >}}
 
 ## Présentation
 

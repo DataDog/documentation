@@ -630,6 +630,20 @@ Adding user information to your RUM sessions helps you:
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
 
+{{< tabs >}}
+{{% tab "6.4.0 and above" %}}
+
+The following attributes are available:
+
+| Attribute  | Type | Required |  Description                                                                                              |
+|------------|------|------|----------------------------------------------------------------------------------------------------|
+| `usr.id`    | String | Yes | Unique user identifier.                                                                                  |
+| `usr.name`  | String | No | User friendly name, displayed by default in the RUM UI.                                                  |
+| `usr.email` | String | No | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
+
+{{% /tab %}}
+{{% tab "Before 6.4.0" %}}
+
 The below attributes are optional but Datadog strongly recommends providing at least one of them. For example, you should set the user ID on your sessions to see relevant data on some default RUM dashboards, which rely on `usr.id` as part of the query.
 
 | Attribute  | Type | Description                                                                                              |
@@ -637,6 +651,9 @@ The below attributes are optional but Datadog strongly recommends providing at l
 | `usr.id`    | String | Unique user identifier.                                                                                  |
 | `usr.name`  | String | User friendly name, displayed by default in the RUM UI.                                                  |
 | `usr.email` | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Increase your filtering capabilities by adding extra attributes on top of the recommended ones. For instance, add information about the user plan, or which user group they belong to.
 
@@ -781,6 +798,152 @@ window.DD_RUM.onReady(function() {
 {{% tab "CDN sync" %}}
 ```javascript
 window.DD_RUM && window.DD_RUM.clearUser()
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+## Account
+
+To group users into different set, use the account concept.
+
+The following attributes are available:
+
+| Attribute      | Type   | Required | Description                                                |
+|----------------|--------|----------|------------------------------------------------------------|
+| `account.id`   | String | Yes      | Unique account identifier.                                 |
+| `account.name` | String | No       | Account friendly name, displayed by default in the RUM UI. |
+
+### Identify account
+
+`datadogRum.setAccount(<ACCOUNT_CONFIG_OBJECT>)`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.setAccount({
+    id: '1234',
+    name: 'My Company Name',
+    ...
+})
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setAccount({
+        id: '1234',
+        name: 'My Company Name',
+        ...
+    })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.setAccount({
+    id: '1234',
+    name: 'My Company Name',
+    ...
+})
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Access account
+
+`datadogRum.getAccount()`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.getAccount()
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.getAccount()
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.getAccount()
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Add/Override account property
+
+`datadogRum.setAccountProperty('<ACCOUNT_KEY>', <ACCOUNT_VALUE>)`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.setAccountProperty('name', 'My Company Name')
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setAccountProperty('name', 'My Company Name')
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.setAccountProperty('name', 'My Company Name')
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Remove account property
+
+`datadogRum.removeAccountProperty('<ACCOUNT_KEY>')`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.removeAccountProperty('name')
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.removeAccountProperty('name')
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.removeAccountProperty('name')
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### Clear account properties
+
+`datadogRum.clearAccount()`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.clearAccount()
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.clearAccount()
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.clearAccount()
 ```
 {{% /tab %}}
 {{< /tabs >}}

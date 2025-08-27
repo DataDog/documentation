@@ -2,7 +2,7 @@
 categories:
 - azure
 - nube
-- network
+- red
 custom_kind: integración
 dependencies: []
 description: Rastrea las métricas clave de Azure Firewall.
@@ -21,7 +21,7 @@ short_description: Rastrea las métricas clave de Azure Firewall.
 version: '1.0'
 ---
 
-<!--  FUENTE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Azure Firewall es una seguridad de red nativa de la nube que se utiliza para proteger tus recursos de Azure Virtual Network.
@@ -32,7 +32,7 @@ Utiliza la integración de Azure con Datadog para recopilar métricas de Firewal
 
 ### Instalación
 
-Si aún no lo has hecho, configura primero [Microsoft Azure integración][1]. No hay otros pasos de instalación.
+Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1]. No es necesario realizar ningún otro paso de instalación.
 
 ## Datos recopilados
 
@@ -50,7 +50,7 @@ La integración de Azure Firewall no incluye ningún check de servicio.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con [asistencia técnica de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_firewall/azure_firewall_metadata.csv

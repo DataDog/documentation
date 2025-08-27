@@ -3,23 +3,22 @@ title: Setup
 description: Setting up Network Path
 is_beta: true
 further_reading:
-- link: "/network_monitoring/network_path/list_view"
-  tag: "Documentation"
-  text: "Learn more about the List View in Network Path"
-- link: "/network_monitoring/network_path/path_view"
-  tag: "Documentation"
-  text: "Learn more about the Path View in Network Path"
+- link: "https://www.datadoghq.com/blog/datadog-network-path-monitoring/"
+  tag: "Blog"
+  text: "Get end-to-end network visibility with Network Path and SD-WAN monitoring"
+- link: "/network_monitoring/cloud_network_monitoring/guide/detecting_application_availability/"
+  tag: "Guide"
+  text: "Detecting Application Availability using Network Insights"
+- link: "/network_monitoring/network_path/guide/traceroute_variants/"
+  tag: "Guide"
+  text: "Network Path traceroute variants"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Path is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
-<div class="alert alert-info">Network Path is in Limited Availability. Reach out to your Datadog representative to sign up, and then use the following instructions to configure the Datadog Agent to gather network path data.</div>
 
 ## Overview
 
-Setting up Network Path involves configuring your Linux environment to monitor and trace the network routes between your services and endpoints. This helps identify bottlenecks, latency issues, and potential points of failure in your network infrastructure. Network Path allows you to manually configure individual network paths or automatically discover them, depending on your needs.
+Setting up Network Path involves configuring your environment to monitor and trace the network routes between your services and endpoints. This helps identify bottlenecks, latency issues, and potential points of failure in your network infrastructure. Network Path allows you to manually configure individual network paths or automatically discover them, depending on your needs.
 
 **Note**: If your network configuration restricts outbound traffic, follow the setup instructions on the [Agent proxy configuration][2] documentation.
 
@@ -135,14 +134,14 @@ Agent `v7.61+` is required.
 
 **Note**: Windows only supports TCP traceroutes.
 
-1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
+1. Enable the `system-probe` traceroute module in `%ProgramData%\Datadog\system-probe.yaml` by adding the following:
 
    ```
    traceroute:
      enabled: true
    ```
 
-2. Enable `network_path` to monitor new destinations from this Agent by creating or editing the `/etc/datadog-agent/conf.d/network_path.d/conf.yaml` file:
+2. Enable `network_path` to monitor new destinations from this Agent by creating or editing the `%ProgramData%\Datadog\conf.d\network_path.d\conf.yaml` file:
 
    ```yaml
    init_config:
@@ -184,7 +183,21 @@ instances:
     port: 443 # optional port number, default is 80
 ```
 
+**Note**: In Windows Client OS environments, raw packets are [not supported][5]. To work around this, set `protocol: TCP` and `tcp_method: syn_socket`. Agent `v7.67+` and [Windows version 2004 (10.0; Build 19041) or later][6] are required. For example:
+
+```yaml
+init_config:
+  min_collection_interval: 60 # in seconds, default 60 seconds
+instances:
+  - hostname: api.datadoghq.eu # endpoint hostname or IP
+    protocol: TCP
+    port: 443 # optional port number, default is 80
+    tcp_method: syn_socket
+```
+
 [4]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
+[5]: https://learn.microsoft.com/en-us/windows/win32/winsock/tcp-ip-raw-sockets-2#limitations-on-raw-sockets
+[6]: https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-wsasetfailconnectonicmperror
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -227,6 +240,64 @@ To enable Network Path with Kubernetes using Helm, add the following to your `va
 [1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
 [2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration
 {{% /tab %}}
+{{% tab "Autodiscovery (Kubernetes)" %}}
+Datadog Autodiscovery allows you to enable Network Path on a per-service basis through Kubernetes annotations. To do this, first enable the traceroute module in the Datadog `values.yaml` file, which the Network Path integration depends on.</br>
+**Note:** Helm chart v3.109.1+ **is required**. For more information, see the [Datadog Helm Chart documentation][1].
+
+  ```yaml
+  datadog:
+    traceroute:
+      enabled: true
+  ```
+After the module is enabled, Datadog automatically detects Network Path annotations added to your Kubernetes pod. For more information, see [Kubernetes and Integrations][2].
+  ```yaml
+apiVersion: v1
+kind: Pod
+# (...)
+metadata:
+  name: '<POD_NAME>'
+  annotations:
+    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
+      {
+        "network_path": {
+          "init_config": {
+            "min_collection_interval": 300
+          },
+          "instances": [
+                {
+                  "protocol": "TCP",
+                  "port": 443,
+                  "source_service": "<CONTAINER_NAME>",
+                  "tags": [
+                    "tag_key:tag_value",
+                    "tag_key2:tag_value2"
+                  ],
+                  "hostname": "api.datadoghq.eu"
+                },
+                {
+                  "protocol": "UDP",
+                  "source_service": "<CONTAINER_NAME>",
+                  "tags": [
+                    "tag_key:tag_value",
+                    "tag_key2:tag_value2"
+                  ],
+                  "hostname": "1.1.1.1"
+                },
+          ]
+        }
+      }
+    # (...)
+spec:
+  containers:
+    - name: '<CONTAINER_NAME>'
+# (...)
+  ```
+  If you define pods indirectly (with deployments, ReplicaSets, or ReplicationControllers), add pod annotations under `spec.template.metadata`.
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
+[2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=annotations#configuration
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Network traffic paths (experimental)
@@ -238,6 +309,7 @@ To enable Network Path with Kubernetes using Helm, add the following to your `va
 Configure network traffic paths to allow the Agent to automatically discover and monitor network paths based on actual network traffic, without requiring you to specify endpoints manually.
 
 <div class="alert alert-warning"> Enabling Network Path to automatically detect paths can generate a significant number of logs, particularly when monitoring network paths across a large number of hosts. </div>
+
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -331,18 +403,18 @@ Agent `v7.61+` is required.
 Agent `v7.59+` is required.
 
 To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.
-**Note:** Helm chart v3.109.1+ is required. For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
+**Note:** Helm chart v3.124.0+ is required. For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
 
 ```yaml
 datadog:
-  connections_monitoring:
-    enabled: true
-
-## Set to true to enable the Traceroute Module of the System Probe
+  networkPath:
+    connectionsMonitoring:
+      enabled: true
+  ## Set to true to enable the Traceroute Module of the System Probe
   traceroute:
     enabled: true
 
-## @param collector - custom object - optional
+  ## @param collector - custom object - optional
   ## Configuration related to Network Path Collector.
   #
   collector:
@@ -360,11 +432,45 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Troubleshooting
+
+Use the following guidelines to troubleshoot issues with Network Path. If you need additional help, contact [Datadog Support][3].
+
+### No Network Path data in the UI
+
+If no data appears in the [Network Path][4] UI, the feature may not be fully enabled. Network Path requires the following:
+
+1. The traceroute module must be enabled in your `system-probe.yaml` file:
+
+   ```yaml
+   traceroute:
+     enabled: true
+   ```
+
+2. At least one Network Path feature must be active, such as:
+
+   - [Individual paths](#monitor-individual-paths) configured through the `conf.d/network_path.d` file.
+   - Experimental [network traffic paths](#network-traffic-paths-experimental) configured by enabling both `network_path.connections_monitoring` and [Cloud Network Monitoring][1](CNM).
+
+### Error: status code: 404
+
+If you encounter an error like the following:
+
+   ```text
+   Error: failed to trace path: traceroute request failed: Probe Path <path>, url: <url>, status code: 404
+   ```
+
+   - This indicates that the traceroute module is not enabled. Ensure the traceroute module is enabled in your `system-probe.yaml` file.
+
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /network_monitoring/cloud_network_monitoring/setup/
 [2]: https://docs.datadoghq.com/agent/configuration/proxy/?tab=linux
+[3]: /help
+[4]: https://app.datadoghq.com/network/path
 
 

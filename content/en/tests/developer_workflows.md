@@ -23,10 +23,6 @@ further_reading:
 
 ## Overview
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 [Test Optimization][5] integrates with other developer-oriented Datadog products as well as external partners such as GitHub to streamline developer workflows with features including being able to:
 
 - [Enable test summaries in GitHub pull request comments](#test-summaries-in-github-pull-requests)

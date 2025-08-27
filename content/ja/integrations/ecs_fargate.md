@@ -892,7 +892,7 @@ Agent は、タグを自動検出して、タスク全体またはこのタス�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "ecs_fargate" >}}
+{{< get-metrics-from-git "aws-fargate" >}}
 
 
 ### イベント
@@ -900,7 +900,7 @@ Agent は、タグを自動検出して、タスク全体またはこのタス�
 ECS Fargate チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "ecs_fargate" >}}
+{{< get-service-checks-from-git "aws-fargate" >}}
 
 
 ## トラブルシューティング

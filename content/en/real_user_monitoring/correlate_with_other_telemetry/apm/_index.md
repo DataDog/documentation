@@ -73,7 +73,13 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
-      allowedTracingUrls: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("https://api.example.com")],
+      allowedTracingUrls: [
+        "https://api.example.com",
+        // Matches any subdomain of my-api-domain.com, such as https://foo.my-api-domain.com
+        /^https:\/\/[^\/]+\.my-api-domain\.com/,
+        // You can also use a function for advanced matching:
+        (url) => url.startsWith("https://api.example.com")
+      ],
       sessionSampleRate: 100,
       sessionReplaySampleRate: 100, // if not specified, defaults to 100
       trackResources: true,
@@ -92,7 +98,13 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
-      allowedTracingUrls: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("https://api.example.com")],
+      allowedTracingUrls: [
+        "https://api.example.com",
+        // Matches any subdomain of my-api-domain.com, such as https://foo.my-api-domain.com
+        /^https:\/\/[^\/]+\.my-api-domain\.com/,
+        // You can also use a function for advanced matching:
+        (url) => url.startsWith("https://api.example.com")
+      ],
       sessionSampleRate: 100,
       sessionReplaySampleRate: 100, // if not included, the default is 100
       trackResources: true,
@@ -105,8 +117,10 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
     `allowedTracingUrls` matches the full URL (`<scheme>://<host>[:<port>]/<path>[?<query>][#<fragment>]`). It accepts the following types:
       - `string`: matches any URL that starts with the value, so `https://api.example.com` matches `https://api.example.com/v1/resource`.
-      - `RegExp`: executes a test with the provided RegExp and the URL.
+      - `RegExp`: matches if any substring of the URL matches the provided RegExp. For example, `/^https:\/\/[^\/]+\.my-api-domain\.com/` matches URLs like `https://foo.my-api-domain.com/path`, but not `https://notintended.com/?from=guess.my-api-domain.com`. **Note:** The RegExp is not anchored to the start of the URL unless you use `^`. Be careful, as overly broad patterns can unintentionally match unwanted URLs and cause CORS errors.
       - `function`: evaluates with the URL as parameter. Returning a `boolean` set to `true` indicates a match.
+
+<div class="alert alert-warning">When using RegExp, the pattern is tested against the entire URL as a substring, not just the prefix. To avoid unintended matches, anchor your RegExp with `^` and be as specific as possible. </div>
 
 3.  _(Optional)_ Configure the `traceSampleRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from browser requests are sent to Datadog. To keep 20% of backend traces, for example:
 
@@ -658,13 +672,23 @@ Datadog uses the distributed tracing protocol and sets up the HTTP headers below
 : `parent id`: 64 bits span ID, hexadecimal on 16 characters.
 : `trace flags`: Sampled (`01`) or not sampled (`00`)
 
+**Trace ID Conversion**: The 128-bit W3C trace ID is created by padding the original 64-bit source trace ID with leading zeros. This ensures compatibility with APM while conforming to the W3C Trace Context specification. The original 64-bit trace ID becomes the lower 64 bits of the 128-bit W3C trace ID.
+
 `tracestate: dd=s:[sampling priority];o:[origin]`
 : `dd`: Datadog's vendor prefix.
 : `sampling priority`: Set to `1` if the trace was sampled, or `0` if it was not.
 : `origin`: Always set to `rum` to make sure the generated traces from Real User Monitoring don't affect your APM Index Spans counts.
 
-Example:
-: `traceparent: 00-00000000000000008448eb211c80319c-b7ad6b7169203331s-01`
+**Examples**:
+
+Source trace ID (64-bit): `8448eb211c80319c`
+
+W3C Trace Context (128-bit): `00000000000000008448eb211c80319c`
+
+The relationship shows that the original 64-bit trace ID `8448eb211c80319c` is padded with 16 leading zeros (`0000000000000000`) to create the 128-bit W3C trace ID.
+
+Complete traceparent example:
+: `traceparent: 00-00000000000000008448eb211c80319c-b7ad6b7169203331-01`
 : `tracestate: dd=s:1;o:rum`
 
 {{% /tab %}}

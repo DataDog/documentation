@@ -71,7 +71,7 @@ Versions 22 and above are supported as in Preview.
 | Spring Web (MVC)        | 4.0+       |  {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Spring WebFlux          | 5.0+       |            |            |  {{< X >}} |
 | Tomcat                  | 5.5+       |   {{< X >}} |  {{< X >}} |  {{< X >}} |
-| Vert.x                  | 3.4-3.9.x  |   {{< X >}} |  {{< X >}} |  {{< X >}} |
+| Vert.x                  | 3.4+, 4+   |   {{< X >}} |  {{< X >}} |  {{< X >}} |
 
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss. Also, frameworks like Spring Boot (version 3) inherently work because they usually use a supported embedded application server, such as Tomcat, Jetty, or Netty.
 
@@ -155,5 +155,5 @@ Versions 22 and above are supported as in Preview.
 
 
 [1]: /tracing/trace_collection/compatibility/java/
-[2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[2]: /tracing/guide/remote_config/
 [3]: /security/code_security/software_composition_analysis/

@@ -16,11 +16,16 @@ API keys are unique to your organization. An [API key][1] is required by the Dat
 
 [Application keys][2], in conjunction with your organization's API key, give users access to Datadog's programmatic API. Application keys are associated with the user account that created them and by default have the permissions of the user who created them.
 
+### One-Time Read mode
+
+All application keys for new parent organizations (and their child organizations) created after August 20th, 2025 are in One-Time Read (OTR) mode. OTR mode is a security feature that limits the visibility of application key secrets to creation time only. All application key secrets are only displayed once during creation and cannot be retrieved later for security purposes.
+
 ### Scopes 
+
 
 To better protect and secure your applications, you can specify authorization scopes for your application keys to define more granular permissions and minimize the access that applications have to your Datadog data. This gives you fine-grained access control over your applications and minimizes security vulnerabilities by limiting extraneous access. For example, an application that only reads dashboards does not need admin rights to manage users or delete any of your organization's data.
 
-The recommended best practice for scoping application keys is to grant your keys the minimal privileges and least permissions necessary for an application to function as intended. Scoped application keys are granted only the scopes specified by the user, and no other additional permissions. While you can modify the authorization scopes of your application keys anytime, consider how those changes may impact the existing functionality or access of your application. 
+The recommended best practice for scoping application keys is to grant your keys the minimal privileges and least permissions necessary for an application to function as intended. Scoped application keys are granted only the scopes specified by the user, and no other additional permissions. While you can modify the authorization scopes of your application keys anytime, consider how those changes may impact the existing functionality or access of your application.
 
 **Notes:**
 
@@ -56,7 +61,6 @@ To add a Datadog API key or client token:
 
 - Your org must have at least one API key and at most 50 API keys.
 - Key names must be unique across your organization.
-- Newly created API keys typically take a few seconds to become valid.
 
 ## Remove API keys or client tokens
 
@@ -68,16 +72,31 @@ To add a Datadog application key, navigate to [**Organization Settings** > **App
 
 {{< img src="account_management/app-key.png" alt="Navigate to the Application Keys page for your organization in Datadog" style="width:80%;" >}}
 
+{{< site-region region="ap2,gov" >}}
+<div class="alert alert-warning">Make sure to securely store your application key immediately after creation, as the key secret cannot be retrieved later.</div>
+{{< /site-region >}}
+
 **Notes:**
 
 - Application key names cannot be blank.
-- Newly created Application keys typically take a few seconds to become valid.
 
 ## Remove application keys
 
 To remove a Datadog application key, navigate to [**Organization Settings** > **Application Keys**][2]. If you have the [permission][4] to create and manage application keys, you can see your own keys and click **Revoke** next to the key you want to revoke. If you have the permission to manage all org application keys, you can search for the key you want to revoke and click **Revoke** next to it.
 
-## Scope application keys 
+## Key propagation delay and eventual consistency
+
+Datadog's API and application keys follow an eventual consistency model. Due to the distributed nature of Datadog's systems, updates to keys, such as creation and revocation, may take a few seconds to fully propagate.
+
+As a result:
+
+- Do not use new API or application keys immediately in critical workflows. Allow a brief period (a few seconds) for propagation. You can implement a retry strategy with short exponential backoff to handle transient errors during the propagation window.
+- To validate whether an API key is active and usable, call the [/api/v1/validate][18] endpoint.
+- To verify that an application key is active, use the `/api/v2/validate_keys` endpoint with the appropriate key pair.
+
+Attempting to use a newly created key before it is fully propagated may result in temporary authentication errors such as 403 Forbidden or 401 Unauthorized.
+
+## Scope application keys
 
 To specify authorization scopes for application keys, [make a request to the Datadog API][5] or the UI to create or edit an application key. Scopes can be specified for application keys owned by [the current user][14] or a [service account][15]. If this field is unspecified, application keys by default have all the same scopes and permissions as the user who created them.
 
@@ -142,3 +161,5 @@ Need help? Contact [Datadog support][16].
 [15]: /api/latest/service-accounts/
 [16]: /help/
 [17]: /account_management/org_settings/service_accounts/
+[18]: /api/latest/authentication/#validate-api-key
+

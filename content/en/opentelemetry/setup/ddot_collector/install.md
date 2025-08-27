@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Follow this guide to install the Datadog Distribution of OpenTelemetry (DDOT) Collector using Helm.
+Follow this guide to install the Datadog Distribution of OpenTelemetry (DDOT) Collector using Helm or the Datadog Operator.
 
 <div class="alert alert-info">
   <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> to extend the Datadog Agent's capabilities. For a list of components included by default, see <a href="/opentelemetry/agent/#opentelemetry-collector-components">OpenTelemetry Collector components</a>.
@@ -27,16 +27,18 @@ To complete this guide, you need the following:
 **Datadog account**:
 1. [Create a Datadog account][1] if you don't have one.
 1. Find or create your [Datadog API key][2].
-1. Find or create your [Datadog application key][3].
 
 **Software**:
 Install and set up the following on your machine:
 
 - A Kubernetes cluster (v1.29+)
-  - **Note**: EKS Fargate environments are not supported
+  - **Note**: EKS Fargate and GKE Autopilot environments are not supported
 - [Helm (v3+)][54]
-- [Docker][50]
 - [kubectl][5]
+
+{{< callout url="https://www.datadoghq.com/product-preview/ddot-for-linux-based-hosts-or-vms/" btn_hidden="false" >}}
+Support for deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is in Preview. To join the Preview, click <strong>Request Access</strong> and complete the form.
+{{< /callout >}}
 
 ## Install the Datadog Agent with OpenTelemetry Collector
 
@@ -74,16 +76,15 @@ helm repo update
 {{% /tab %}}
 {{< /tabs >}}
 
-### Set up Datadog API and application keys
+### Set up Datadog API key
 
-1. Get the Datadog [API][2] and [application keys][3].
-1. Store the keys as a Kubernetes secret:
+1. Get the Datadog [API key][2].
+1. Store the API key as a Kubernetes secret:
    ```shell
    kubectl create secret generic datadog-secret \
-     --from-literal api-key=<DD_API_KEY> \
-     --from-literal app-key=<DD_APP_KEY>
+     --from-literal api-key=<DD_API_KEY>
    ```
-   Replace `<DD_API_KEY>` and `<DD_APP_KEY>` with your actual Datadog API and application keys.
+   Replace `<DD_API_KEY>` with your actual Datadog API key.
 
 ### Configure the Datadog Agent
 
@@ -106,44 +107,14 @@ After deploying the Datadog Operator, create the `DatadogAgent` resource that tr
          apiSecret:
            secretName: datadog-secret
            keyName: api-key
-         appSecret:
-           secretName: datadog-secret
-           keyName: app-key
 {{< /code-block >}}
 
   - Replace `<CLUSTER_NAME>` with a name for your cluster.
   - Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct **DATADOG SITE** is selected on the right.)
 
-2. Use the Datadog Agent image tag with embedded DDOT Collector:
+2. Enable the OpenTelemetry Collector:
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
-  ...
-  override:
-    # Node Agent configuration
-    nodeAgent:
-      image:
-        name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}"
-        pullPolicy: Always
-{{< /code-block >}}
-
-By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, [use another registry][2].
-
-3. Enable the OpenTelemetry Collector:
-
-{{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
-  ...
-  override:
-    # Node Agent configuration
-    nodeAgent:
-      image:
-        name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}"
-        pullPolicy: Always
-      containers:
-        otel-agent:
-          env:
-            - name: DD_OTELCOLLECTOR_ENABLED
-              value: "true"
-  ...
   # Enable Features
   features:
     otelCollector:
@@ -190,31 +161,17 @@ touch datadog-values.yaml
 
 <div class="alert alert-info">Unspecified parameters use defaults from <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml">values.yaml</a>.</div>
 
-2. Configure the Datadog API and application key secrets:
+2. Configure the Datadog API key secret:
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
   site: <DATADOG_SITE>
   apiKeyExistingSecret: datadog-secret
-  appKeyExistingSecret: datadog-secret
 {{< /code-block >}}
 
 Set `<DATADOG_SITE>` to your [Datadog site][2]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
 
-3. Use the Datadog Agent image tag with embedded DDOT Collector:
-
-{{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
-agents:
-  image:
-    repository: gcr.io/datadoghq/agent
-    tag: {{< version key="agent_tag" >}}
-    doNotCheckTag: true
-...
-{{< /code-block >}}
-
-By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, [use another registry][3].
-
-4. Enable the OpenTelemetry Collector and configure the essential ports:
+3. Enable the OpenTelemetry Collector and configure the essential ports:
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
@@ -243,7 +200,7 @@ If you don't want to expose the port, you can use the Agent service instead:
           value: 'grpc'
       ```
 
-5. (Optional) Enable additional Datadog features:
+4. (Optional) Enable additional Datadog features:
 
 <div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
 
@@ -264,7 +221,7 @@ datadog:
 
 When enabling additional Datadog features, always use the Datadog or OpenTelemetry Collector configuration files instead of relying on Datadog environment variables.
 
-6. (Optional) Collect pod labels and use them as tags to attach to metrics, traces, and logs:
+5. (Optional) Collect pod labels and use them as tags to attach to metrics, traces, and logs:
 
 <div class="alert alert-danger">Custom metrics may impact billing. See the <a href="https://docs.datadoghq.com/account_management/billing/custom_metrics">custom metrics billing page</a> for more information.</div>
 
@@ -279,16 +236,9 @@ datadog:
 {{% collapse-content title="Completed datadog-values.yaml file" level="p" %}}
 Your `datadog-values.yaml` file should look something like this:
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="false" >}}
-agents:
-  image:
-    repository: gcr.io/datadoghq/agent
-    tag: {{< version key="agent_tag" >}}
-    doNotCheckTag: true
-
 datadog:
   site: datadoghq.com
   apiKeyExistingSecret: datadog-secret
-  appKeyExistingSecret: datadog-secret
 
   otelCollector:
     enabled: true
@@ -414,21 +364,6 @@ spec:
       apiSecret:
         secretName: datadog-secret
         keyName: api-key
-      appSecret:
-        secretName: datadog-secret
-        keyName: app-key
-
-  override:
-    # Node Agent configuration
-    nodeAgent:
-      image:
-        name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}"
-        pullPolicy: Always
-      containers:
-        otel-agent:
-          env:
-            - name: DD_OTELCOLLECTOR_ENABLED
-              value: "true"
 
   # Enable Features
   features:
@@ -601,16 +536,6 @@ spec:
       apiSecret:
         secretName: datadog-secret
         keyName: api-key
-      appSecret:
-        secretName: datadog-secret
-        keyName: app-key
-
-  override:
-    # Node Agent configuration
-    nodeAgent:
-      image:
-        name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}"
-        pullPolicy: Always
 
   # Enable Features
   features:
@@ -1013,7 +938,6 @@ View metrics from the DDOT Collector to monitor the Collector health.
 [32]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
 [33]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/resourcedetectionprocessor/README.md
 [34]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/resourceprocessor/README.md
-[35]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/routingprocessor
 [36]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
 [37]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/transformprocessor/README.md
 [38]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/README.md

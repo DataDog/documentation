@@ -11,10 +11,6 @@ further_reading:
     text: "Troubleshooting CI Visibility"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 [TeamCity][1] is a continuous integration and delivery server that optimizes and automates software development processes.

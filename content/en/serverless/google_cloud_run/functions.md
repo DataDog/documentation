@@ -1,5 +1,5 @@
 ---
-title: Google Cloud Run Functions
+title: Instrumenting Cloud Run Functions
 further_reading:
 
   - link: 'https://cloud.google.com/blog/products/serverless/google-cloud-functions-is-now-cloud-run-functions'
@@ -10,13 +10,15 @@ further_reading:
 
 ## Overview
 
-Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run functions Gen 2 ([formerly Cloud Functions v2][1]) through the Datadog Agent in a sidecar container.
+This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Cloud Run functions.
 
-This page is **only for 2nd Gen Cloud Run Functions**. For 1st Gen support, see [1st Gen Functions][2], and to collect additional metrics, install the [Google Cloud integration][3].
+<div class="alert alert-info">
+<strong>Looking for 1st gen Cloud Run functions?</strong> If you're using Cloud Run functions (1st gen), previously known as Cloud Functions (1st gen), see <a href="/serverless/google_cloud_run/functions_1st_gen">Instrumenting 1st Gen Cloud Run Functions</a>.
+</div>
 
-[1]: https://cloud.google.com/blog/products/serverless/google-cloud-functions-is-now-cloud-run-functions
-[2]:/serverless/google_cloud_run/functions_gen1
-[3]:/integrations/google_cloud_platform/
+<div class="alert alert-info">
+<strong>Have you set up your <a href="/integrations/google-cloud-platform/">Google Cloud integration</a>?</strong> Datadog recommends setting up the integration, which collects metrics and logs from Google Cloud services, before proceeding on to instrumentation. Remember to add the <code>cloud asset viewer</code> role to your service account and enable the Cloud Asset Inventory API in Google Cloud.
+</div>
 
 ## Setup
 
@@ -31,13 +33,13 @@ In your main application, add the `dd-trace-js` library. See [Tracing Node.js ap
 Set `ENV NODE_OPTIONS="--require dd-trace/init"`. This specifies that the `dd-trace/init` module is required when the Node.js process starts.
 
 #### Profiling
-The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and proceed to enabling the profiler. See [Enabling the Node.js Profiler][5] to add the environment variables.
+The profiler is shipped within the `dd-trace-js` library. If you are already using APM to collect traces for your application, you can skip installing the library and proceed to enabling the profiler. See [Enabling the Node.js Profiler][5].
 
 #### Metrics
-The tracing library also collects custom metrics. See the [code examples][2].
+The `dd-trace-js` library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. During the [container step](#containers), add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container.
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. During the [container step](#containers), add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared volume mount to both the main and sidecar container.
 
 To set up logging in your application, see [Node.js Log Collection][3]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][4].
 
@@ -53,13 +55,13 @@ To set up logging in your application, see [Node.js Log Collection][3]. To set u
 In your main application, add the `dd-trace-py` library. See [Tracing Python Applications][1] for instructions. You can also use [Tutorial - Enabling Tracing for a Python Application and Datadog Agent in Containers][5].
 
 #### Profiling
-The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and proceed to enabling the profiler. See [Enabling the Python Profiler][7] to add the environment variables.
+The profiler is shipped within the `dd-trace-py` library. If you are already using APM to collect traces for your application, you can skip installing the library and proceed to enabling the profiler. See [Enabling the Python Profiler][7].
 
 #### Metrics
-The tracing library also collects custom metrics. See the [code examples][2].
+The `dd-trace-py` library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. During the [container step](#containers), add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container.
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. During the [container step](#containers), add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared volume mount to both the main and sidecar container.
 
 To set up logging in your application, see [Python Log Collection][3]. [Python Logging Best Practices][6] can also be helpful. To set up trace log correlation, see [Correlating Python Logs and Traces][4].
 
@@ -74,7 +76,7 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
 {{% /tab %}}
 {{% tab "Java" %}}
 #### Tracing
-   Download `dd-java-agent.jar` that contains the latest tracer class files, to a folder that is accessible by your Datadog user:
+   Download `dd-java-agent.jar`, which contains the latest tracer class files, to a folder that is accessible by your Datadog user.
 
    When setting up your [containers](#containers); Implement and [Auto instrument][1] the Java tracer by setting the environment variable to instrument your Java cloud function with the Datadog Java tracer.
 
@@ -82,8 +84,8 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
 |-----------| ----- |
 | `JAVA_TOOL_OPTIONS` | `-javaagent:/path/to/dd-java-agent.jar` |
 
-   Cloud Run Function code runs with a classpath that includes the function code and its dependencies. 
-   If [invoking the Functions Framework directly](https://github.com/GoogleCloudPlatform/functions-framework-java?tab=readme-ov-file#function-classpath) with the Datadog Agent, update the `--classpath` and `--target` options, along with the Java agent flag to the path of your jar files:
+   Cloud Run function code runs with a classpath that includes the function code and its dependencies.
+   If you are [invoking the Functions Framework directly](https://github.com/GoogleCloudPlatform/functions-framework-java?tab=readme-ov-file#function-classpath) with the Datadog Agent, update the `--classpath` and `--target` options, along with the Java agent flag to the path of your jar files:
 
    To run your app from an IDE, Maven, or Gradle application script, or `java -javaagent` command, add the `-javaagent` JVM argument and the following configuration options, as applicable:
    ```shell
@@ -114,13 +116,13 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
    </div>
 
 #### Profiling
-The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and proceed to enabling the profiler. See [Enabling the Java Profiler][6] to add the environment variables.
+The profiler is shipped within the `dd-java-agent` library. If you are already using APM to collect traces for your application, you can skip installing the library and proceed to enabling the profiler. See [Enabling the Java Profiler][6].
 
 #### Metrics
 To collect custom metrics, [install the Java DogStatsD client][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. During the [container step](#containers), add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container.
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. During the [container step](#containers), add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared volume mount to both the main and sidecar container.
 
 To set up logging in your application, see [Java Log Collection][3]. To set up trace log correlation, see [Correlating Java Logs and Traces][4].
 
@@ -138,13 +140,13 @@ To set up logging in your application, see [Java Log Collection][3]. To set up t
 In your main application, add the `dd-trace-go` library. See [Tracing Go Applications][1] for instructions.
 
 #### Profiling
-The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and proceed to enabling the profiler. See [Enabling the Go Profiler][5] to add the environment variables.
+The profiler is shipped within the `dd-trace-go` library. If you are already using APM to collect traces for your application, you can skip installing the library and proceed to enabling the profiler. See [Enabling the Go Profiler][5].
 
 #### Metrics
-The tracing library also collects custom metrics. See the [code examples][2].
+The `dd-trace-go` library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. During the [container step](#containers), add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container.
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. During the [container step](#containers), add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared volume mount to both the main and sidecar container.
 
 To set up logging in your application, see [Go Log Collection][3]. To set up trace log correlation, see [Correlating Go Logs and Traces][4].
 
@@ -158,16 +160,16 @@ To set up logging in your application, see [Go Log Collection][3]. To set up tra
 {{% tab ".NET" %}}
 #### Tracing
 
-In your main application, add the .NET tracing library. See [Tracing .NET Applications][1] for instructions.
+In your main application, add the `dd-trace-dotnet` library. See [Tracing .NET Applications][1] for instructions.
 
 #### Profiling
-The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and proceed to enabling the profiler. See [Enabling the .NET Profiler][5] to add the environment variables.
+The profiler is shipped within the `dd-trace-dotnet` library. If you are already using APM to collect traces for your application, you can skip installing the library and proceed to enabling the profiler. See [Enabling the .NET Profiler][5].
 
 #### Metrics
-The tracing library also collects custom metrics. See the [code examples][2].
+The `dd-trace-dotnet` library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. During the [container step](#containers), add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container.
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. During the [container step](#containers), add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared volume mount to both the main and sidecar container.
 To set up logging in your application, see [C# Log Collection][3]. To set up trace log correlation, see [Correlating .NET Logs and Traces][4].
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=linux#enable-the-tracer-for-your-service
@@ -202,7 +204,7 @@ If you are deploying a new Cloud Run function for the first time through the con
    - `DD_HEALTH_PORT`: The port you selected for the startup check in the previous step.
    - `FUNCTION_TARGET`: The entry point of your function. For example, `gcfv2.HelloworldApplication`.
    - `JAVA_TOOL_OPTIONS`: `-javaagent:/path/to/dd-java-agent.jar` (_Java only_).
-   
+
    For a list of all environment variables, including additional tags, see [Environment variables](#environment-variables).
 
 #### Main container
@@ -213,17 +215,15 @@ If you are deploying a new Cloud Run function for the first time through the con
 1. Go to **Settings**. In the **Container start up order** drop-down menu, select your sidecar.
 1. Deploy your main application.
 
-#### Add a `service` label
+#### Add a service label in Google Cloud
 
-Tag your GCP entity with the `service` label to correlate your traces with your service:
+In your Cloud Run service's info panel, add a label with the following key and value:
 
-Add the same value from `DD_SERVICE` to a `service` label on your cloud function, inside the info panel of your function. 
-
-| Name      | Value                                                       |
+| Key      | Value                                                       |
 |-----------|-------------------------------------------------------------|
-| `service` | The name of your service matching the `DD_SERVICE` env var. |
+| `service` | The name of your service. Matches the value provided as the `DD_SERVICE` environment variable. |
 
-For more information on how to add labels, see Google Cloud's [Configure labels for services][15] documentation.
+See [Configure labels for services][15] in the Cloud Run documentation for instructions.
 
 ## Environment variables
 
@@ -233,18 +233,19 @@ For more information on how to add labels, see Google Cloud's [Configure labels 
 | `DD_SITE`        | [Datadog site][5] - **Required**                                                                                                                                            |
 | `FUNCTION_TARGET`   | The entry point of your function - **Required**                                                                                                                             |
 | `DD_SERVICE`     | See [Unified Service Tagging][13] - **Required**                                                                                                                            |
-| `DD_LOGS_INJECTION` | When true, enrich all logs with trace data for supported loggers in [Java][6], [Node][7], [.NET][8], and [PHP][9]. See additional docs for [Python][10], [Go][11], and [Ruby][12]. |
+| `DD_LOGS_INJECTION` | Enrich all logs with trace data for supported loggers in [Java][6], [Node][7], [.NET][8], and [PHP][9]. See additional docs for [Python][10], [Go][11], and [Ruby][12]. |
 | `DD_VERSION`     | See [Unified Service Tagging][13].                                                                                                                                          |
 | `DD_ENV`         | See [Unified Service Tagging][13].                                                                                                                                          |
 | `DD_SOURCE`      | See [Unified Service Tagging][13].                                                                                                                                          |
 | `DD_TAGS`        | See [Unified Service Tagging][13].                                                                                                                                          |
 
-Do not use the `DD_LOGS_ENABLED` environment variable. This variable is only used for the [serverless-init][14] install method.
-`FUNCTION_TARGET` can also be found on the source tab inside Google console: `Function entry point`.
+Do not use the `DD_LOGS_ENABLED` environment variable. This variable is only used for [In-Container container instrumentation][14].
+
+You can also find `FUNCTION_TARGET` on the source tab inside Google console: `Function entry point`.
 
 ## Example application
 
-The following example contains a single app with tracing, metrics, and logs set up.
+The following examples contain a single app with tracing, metrics, and logs set up.
 
 {{< tabs >}}
 {{% tab "Node.js" %}}
@@ -539,7 +540,7 @@ package helloworld
 import (
   "fmt"
   "github.com/sirupsen/logrus"
-  dd_logrus "gopkg.in/DataDog/dd-trace-go.v1/contrib/sirupsen/logrus"
+  dd_logrus "github.com/DataDog/dd-trace-go/contrib/sirupsen/logrus/v2"
   "html/template"
   "net/http"
   "os"
@@ -547,8 +548,8 @@ import (
 
   "github.com/DataDog/datadog-go/v5/statsd"
   "github.com/GoogleCloudPlatform/functions-framework-go/functions"
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  "github.com/DataDog/dd-trace-go/v2/ddtrace"
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 const logDir = "/shared-volume/logs"
@@ -651,7 +652,7 @@ require (
 	github.com/DataDog/datadog-go/v5 v5.5.0
 	github.com/GoogleCloudPlatform/functions-framework-go v1.9.0
 	github.com/sirupsen/logrus v1.9.3
-	gopkg.in/DataDog/dd-trace-go.v1 v1.68.0
+	github.com/DataDog/dd-trace-go/v2 v2.0.0
 )
 ```
 {{% /tab %}}
@@ -756,5 +757,6 @@ public class Function : IHttpFunction
 [11]: /tracing/other_telemetry/connect_logs_and_traces/go
 [12]: /tracing/other_telemetry/connect_logs_and_traces/ruby
 [13]: /getting_started/tagging/unified_service_tagging/
-[14]: /serverless/guide/gcr_serverless_init
+[14]: /serverless/google_cloud_run/containers/in_container/
 [15]: https://cloud.google.com/run/docs/configuring/services/labels
+[16]: https://cloud.google.com/blog/products/serverless/google-cloud-functions-is-now-cloud-run-functions

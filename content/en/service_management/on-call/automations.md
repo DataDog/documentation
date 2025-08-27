@@ -9,10 +9,6 @@ further_reading:
   text: "Workflow Automation"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 Automations allow you to trigger actions based on events in On-Call. There are two types:

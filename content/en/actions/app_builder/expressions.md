@@ -11,10 +11,6 @@ further_reading:
   text: "Components"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 You can use JavaScript (JS) expressions anywhere in App Builder to create custom interactions between the different parts of your app. As you begin an expression, App Builder offers autocomplete suggestions based on the existing queries and components in your app. Click on an autocomplete suggestion to use it in your expression, or use the arrow keys on your keyboard and make a selection with the Enter key.
 
 {{< img src="service_management/app_builder/app-builder-variable.png" alt="If you're not sure what to enter as an expression, type ${ to open a suggestion menu with all available expressions" style="width:70%;" >}}

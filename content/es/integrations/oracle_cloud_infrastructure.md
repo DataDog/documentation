@@ -391,7 +391,7 @@ Para más información sobre OCI Object Storage, consulta [Empezando con eventos
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "oracle_cloud_infrastructure" >}}
+{{< get-metrics-from-git "oracle-cloud-infrastructure" >}}
 
 
 ### Checks de servicio

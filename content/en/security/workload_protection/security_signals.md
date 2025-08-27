@@ -3,6 +3,10 @@ title: Investigate Security Signals
 disable_toc: false
 aliases:
   - /security/threats/security_signals
+  - /security_platform/cspm/signals_explorer
+  - /security/cspm/signals_explorer
+  - /security/misconfigurations/signals_explorer
+  - /security/cloud_security_management/misconfigurations/signals_explorer/
 further_reading:
   - link: "/security/default_rules/?category=cat-csm-threats#all"
     tag: "Documentation"

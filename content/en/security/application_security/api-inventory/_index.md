@@ -49,7 +49,7 @@ To use API Security on your services, **you must have AAP Threats Protection ena
 
 API Inventory leverages the Datadog tracing library with AAP enabled to gather security metadata about API traffic, including the API schema, types of sensitive data processed, and the authentication scheme. API information is evaluated per endpoint, every 30 seconds, which should ensure minimal performance impact.
 
-API Inventory Security uses [Remote Configuration][4] to manage and configure scanning rules that detect sensitive data and authentication.
+API Inventory Security uses [Remote Configuration][1] to manage and configure scanning rules that detect sensitive data and authentication.
 
 The following risks are calculated for each endpoint:
 
@@ -119,18 +119,13 @@ Datadog reports the type of authentication when available in a header through th
 | Basic Authentication                              | `basic_auth`     |
 | Digest access authentication                      | `digest_auth`    |
 
-### Vulnerabilities count
-
-Counts the [Code Security][8] vulnerabilities on the endpoint , in addition to the [Software Composition Analysis][3] vulnerabilities of its service.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[1]: /tracing/guide/remote_config/
 [2]: /security/workload_protection/
 [3]: /security/code_security/software_composition_analysis/
-[4]: /agent/remote_config/
-[6]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header
+[6]: /security/application_security/policies/library_configuration/#configuring-a-client-ip-header
 [7]: https://app.datadoghq.com/security/appsec/inventory/apis
 [8]: /security/code_security/iast/

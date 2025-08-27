@@ -5,9 +5,9 @@ aliases:
   - /synthetics/browser_check
   - /synthetics/browser_test
 further_reading:
-- link: "https://www.datadoghq.com/blog/browser-tests/"
-  tag: "Blog"
-  text: "User experience monitoring with browser tests"
+- link: "/synthetics/guide/version_history/"
+  tag: "Guide"
+  text: "Version History for Synthetic Monitoring"
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
   text: "Best practices for creating end-to-end tests"
@@ -16,7 +16,7 @@ further_reading:
   text: 'Datadog Learning Center: Getting started with Synthetic Browser Testing'
 - link: "/getting_started/synthetics/browser_test"
   tag: "Documentation"
-  text: "Getting started with browser tests"
+  text: "Getting started with Browser Tests"
 - link: "/synthetics/guide/synthetic-test-monitors"
   tag: "Documentation"
   text: "Learn about Synthetic test monitors"
@@ -143,6 +143,17 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 [1]: https://www.loc.gov/standards/iso639-2/php/code_list.php
 
    {{% /tab %}}
+
+   {{% tab "Blocked Requests" %}}
+
+   Enter one or more request patterns to block from loading while the test is run. Enter one request pattern per line using the [match pattern format][1]. Wildcards (for example, `*://*.example.com/*`) are supported.
+
+   Blocked requests are skipped during test execution but do not affect page rendering when [recording steps](/synthetics/browser_tests/actions). View blocked requests in the [Resources tab](/synthetics/browser_tests/test_results#resources) of test runs. Blocked requests have a status of `blocked`.
+
+[1]: https://developer.chrome.com/docs/extensions/develop/concepts/match-patterns
+
+   {{% /tab %}}
+
    {{< /tabs >}}
 
 {{% synthetics-variables %}}

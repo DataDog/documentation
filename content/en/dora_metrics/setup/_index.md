@@ -8,11 +8,6 @@ further_reading:
   text: 'Learn about DORA Metrics'
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
-
 ## Overview
 
 The four DORA Metrics are calculated based on two types of events that support different data sources.

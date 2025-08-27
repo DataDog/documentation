@@ -1,0 +1,3 @@
+- Dirección TCP de Splunk:
+    - El worker de Observability Pipelines escucha esta dirección de socket para recibir logs del Splunk Forwarder. Por ejemplo, `0.0.0.0:9997`.
+    - Almacenado en la variable de entorno `DD_OP_SOURCE_SPLUNK_TCP_ADDRESS`.

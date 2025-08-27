@@ -3,6 +3,8 @@ title: Node.js Compatibility Requirements
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 50
+aliases:
+  - /security/application_security/threats/setup/compatibility/nodejs
 ---
 
 ## App and API Protection capabilities
@@ -14,8 +16,6 @@ The following App and API Protection capabilities are supported in the Node.js l
 | Threat Detection                       | 4.0.0                                              |
 | Threat Protection                      | 4.0.0                                              |
 | Customize response to blocked requests | 4.1.0                                              |
-| Software Composition Analysis (SCA)    | 4.0.0                                              |
-| Code Security                          | 4.18.0 for Node.js 16+, or 5.0.0 for Node.js 18+   |
 | Automatic user activity event tracking | 4.4.0 for Node.js 16+                              |
 | API Security                           | 4.30.0 for Node.js 16+, or 5.6.0 for Node.js 18+   |
 
@@ -26,13 +26,13 @@ The minimum tracer version to get all supported App and API Protection capabilit
 - Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
 ### Supported deployment types
-| Type        | Threat Detection support | Software Composition Analysis |
-|-------------|--------------------------|-------------------------------|
-| Docker      | {{< X >}}                | {{< X >}}                     |
-| Kubernetes  | {{< X >}}                | {{< X >}}                     |
-| Amazon ECS  | {{< X >}}                | {{< X >}}                     |
-| AWS Fargate | {{< X >}}                | {{< X >}}                     |
-| AWS Lambda  | {{< X >}}                | {{< X >}}                     |
+| Type        | Threat Detection support |
+|-------------|--------------------------|
+| Docker      | {{< X >}}                |
+| Kubernetes  | {{< X >}}                |
+| Amazon ECS  | {{< X >}}                |
+| AWS Fargate | {{< X >}}                |
+| AWS Lambda  | {{< X >}}                |
 
 ## Language and framework compatibility
 
@@ -73,14 +73,14 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 - Distributed Tracing to see attack flows through your applications
 
 ##### App and API Protection Capability Notes
-- **Software Composition Analysis** is supported on all frameworks
-- If your framework is not listed below, **Code Security** will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
-- Although Threat Protection is available for express >= 4 versions, the blocking of payloads on the body is only supported for applications using `body-parser` library.
 
-| Framework | Versions | Threat Detection supported? | Threat Protection supported? | Code Security? |
-|-----------|----------|-----------------------------|------------------------------|----------------------------------------------------|
-| express   | >=4      | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
-| nextjs    | >=11.1   | {{< X >}}                   |                              |                                                    |
+Although Threat Protection is available for express >= 4 versions, the blocking of payloads on the body is only supported for applications using either the [`body-parser`][45] or [`multer`][46] libraries.
+
+| Framework | Versions | Threat Detection supported? | Threat Protection supported? |
+|-----------|----------|-----------------------------|------------------------------|
+| express   | `>=4`      | {{< X >}}                   | {{< X >}}                    |
+| fastify   | `>=2`      | {{< X >}}                   | {{< X >}}                    |
+| nextjs    | `>=11.1`   | {{< X >}}                   |                              |
 
 
 
@@ -98,14 +98,12 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 - Request-based blocking
 
 ##### App and API Protection Capability Notes
-- **Software Composition Analysis**  is supported on all frameworks
 
 
-
-| Framework | Threat Detection supported? | Threat Protection supported? | Code Security? |
-|-----------|-----------------------------|------------------------------|----------------------------------------------------|
-| http      | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
-| https     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
+| Framework | Threat Detection supported? | Threat Protection supported? |
+|-----------|-----------------------------|------------------------------|
+| http      | {{< X >}}                   | {{< X >}}                    |
+| https     | {{< X >}}                   | {{< X >}}                    |
 
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
@@ -120,30 +118,30 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 - Error and stacktrace capturing
 
 ##### App and API Protection Capability Notes
-- **Software Composition Analysis**  is supported on all frameworks
+
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
 
-| Framework                | Versions  | Threat Detection supported? | Threat Protection supported? | Code Security? |
-|--------------------------|-----------|-----------------------------|------------------------------|----------------------------------------------------|
-| [@apollo/server][43]     | `>=4`     | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [apollo-server-core][44] | `>=3`     | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [cassandra-driver][28]   | `>=3`     | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [couchbase][29]          | `^2.4.2`  | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [elasticsearch][30]      | `>=10`    | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [ioredis][31]            | `>=2`     | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [knex][32]               | `>=0.8`   | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [mariadb][5]             | `>=3`     | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [memcached][33]          | `>=2.2`   | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [mongodb-core][34]       | `>=2`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
-| [mysql][35]              | `>=2`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
-| [mysql2][36]             | `>=1`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
-| [oracledb][37]           | `>=5`     | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [pg][38]                 | `>=4`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
-| [redis][39]              | `>=0.12`  | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [sharedb][40]            | `>=1`     | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [tedious][41]            | `>=1`     | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [sequelize][42]          | `>=4`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
+| Framework                | Versions  | Threat Detection supported? | Threat Protection supported? |
+|--------------------------|-----------|-----------------------------|------------------------------|
+| [@apollo/server][43]     | `>=4`     | {{< X >}}                   | {{< X >}}                    |
+| [apollo-server-core][44] | `>=3`     | {{< X >}}                   | {{< X >}}                    |
+| [cassandra-driver][28]   | `>=3`     | {{< X >}}                   | {{< X >}}                    |
+| [couchbase][29]          | `^2.4.2`  | {{< X >}}                   | {{< X >}}                    |
+| [elasticsearch][30]      | `>=10`    | {{< X >}}                   | {{< X >}}                    |
+| [ioredis][31]            | `>=2`     | {{< X >}}                   | {{< X >}}                    |
+| [knex][32]               | `>=0.8`   | {{< X >}}                   | {{< X >}}                    |
+| [mariadb][5]             | `>=3`     | {{< X >}}                   | {{< X >}}                    |
+| [memcached][33]          | `>=2.2`   | {{< X >}}                   | {{< X >}}                    |
+| [mongodb-core][34]       | `>=2`     | {{< X >}}                   | {{< X >}}                    |
+| [mysql][35]              | `>=2`     | {{< X >}}                   | {{< X >}}                    |
+| [mysql2][36]             | `>=1`     | {{< X >}}                   | {{< X >}}                    |
+| [oracledb][37]           | `>=5`     | {{< X >}}                   | {{< X >}}                    |
+| [pg][38]                 | `>=4`     | {{< X >}}                   | {{< X >}}                    |
+| [redis][39]              | `>=0.12`  | {{< X >}}                   | {{< X >}}                    |
+| [sharedb][40]            | `>=1`     | {{< X >}}                   | {{< X >}}                    |
+| [tedious][41]            | `>=1`     | {{< X >}}                   | {{< X >}}                    |
+| [sequelize][42]          | `>=4`     | {{< X >}}                   | {{< X >}}                    |
 
 
 ### User Authentication Frameworks compatibility
@@ -159,7 +157,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 | passport-http   | 0.3.0                     |
 
 [1]: /tracing/trace_collection/compatibility/nodejs/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[2]: /tracing/guide/remote_config
 [4]: https://github.com/nodejs/release#release-schedule
 [5]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
 [28]: https://github.com/datastax/nodejs-driver
@@ -179,3 +177,5 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 [42]: https://github.com/sequelize/sequelize
 [43]: https://github.com/apollographql/apollo-server
 [44]: https://www.npmjs.com/package/apollo-server-core
+[45]: https://www.npmjs.com/package/body-parser
+[46]: https://www.npmjs.com/package/multer

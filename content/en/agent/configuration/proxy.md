@@ -47,12 +47,13 @@ proxy:
   no_proxy:
     - <HOST_TO_BYPASS_1>
     - <HOST_TO_BYPASS_2>
-  # Recommended: Set to true to ensure no_proxy behaves in a standard way
-  no_proxy_nonexact_match: true
 
-  # Recommended: Force the Agent to use HTTP to send logs (if logs is enabled)
-  logs_config:
-    force_use_http: true
+# Recommended: Set to true to ensure no_proxy behaves in a standard way
+no_proxy_nonexact_match: true
+
+# Recommended: Force the Agent to use HTTP to send logs (if logs is enabled)
+logs_config:
+  force_use_http: true
 ```
 
 * Replace `<USER>`, `<PASSWORD>`, `<PROXY_HOST>`, and `<PROXY_PORT>` with your proxy credentials and address.
@@ -71,8 +72,8 @@ Alternatively, you can configure a proxy by setting the following environment va
 DD_PROXY_HTTP="http://<USER>:<PASSWORD>@<PROXY_HOST>:<PROXY_PORT>"
 DD_PROXY_HTTPS="http://<USER>:<PASSWORD>@<PROXY_HOST>:<PROXY_PORT>"
 
-DD_PROXY_NO_PROXY="<HOST_TO_BYPASS_1>,<HOST_TO_BYPASS_2>"
-DD_PROXY_NO_PROXY_NONE_EXACT_MATCH=true
+DD_PROXY_NO_PROXY="<HOST_TO_BYPASS_1> <HOST_TO_BYPASS_2>"
+DD_NO_PROXY_NONEXACT_MATCH=true
 
 DD_LOGS_CONFIG_FORCE_USE_HTTP=true
 ```

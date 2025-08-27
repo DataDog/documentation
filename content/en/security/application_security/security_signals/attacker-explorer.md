@@ -1,17 +1,19 @@
 ---
-title: Attacker Explorer
+title: Attackers Explorer
 disable_toc: false
+aliases:
+  - /security/application_security/threats/attacker-explorer
 further_reading:
 - link: "/security/application_security/policies"
   tag: "Documentation"
   text: "Protection"
 ---
  
-This topic describes how to use **Attacker Explorer** to investigate and block Flagged Attackers.
+This topic describes how to use **Attackers Explorer** to investigate and block Flagged Attackers.
 
 ## Overview
 
-Datadog App and API Protection (AAP) identifies attackers as suspicious and flagged. With [Attacker Explorer][1], you can investigate and take action against the attackers. 
+Datadog App and API Protection (AAP) identifies attackers as suspicious and flagged. With [Attackers Explorer][1], you can investigate and take action against the attackers. 
 
 
 ### Definitions
@@ -22,20 +24,20 @@ Datadog App and API Protection (AAP) identifies attackers as suspicious and flag
 
 <div class="alert alert-info"><strong>Flagged Attackers</strong> and <strong>Suspicious Attackers</strong> are mutually exclusive. An IP cannot be in both states at the same time.</a></div>
 
-### How Attacker Explorer differs from Signal and Trace explorers
+### How Attackers Explorer differs from Signal and Trace explorers
 
 To understand the difference between the different explorers, review these approaches:
 
 - **Protect:** Automated blocking using AAP Protection configuration. Customers should block attack tools as their first automated blocking action. Blocking attack tools reduces common vulnerability discovery for OWASP threats such as SQLi, command injection, and SSRF.
 - **Reactive:** Blocking using Signals or Attackers explorer in response to observed threats.
 
-<!-- {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_nav.png" alt="Screenshot of the AAP Attacker Explorer navigation"  >}} -->
+<!-- {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_nav.png" alt="Screenshot of the AAP Attackers Explorer navigation"  >}} -->
 
 Each explorer focuses on a specific use case:
 
 - **Signal Explorer**: List of actionable alerts such as Credential Stuffing Attack or Command Injection. Signals have workflow capabilities, a description, severity, and correlated Traces. Interactions include user assignment workflows, automated protection, analytics, search, and pivoting to Trace Explorer.
 - **Trace Explorer**: List of evidence for business logic events, such as logins, or attack payloads. Interactions include analytics and search.
-- **Attacker Explorer**: List of Flagged and Suspicious Attackers. Interactions include: 
+- **Attackers Explorer**: List of Flagged and Suspicious Attackers. Interactions include: 
   - Bulk actions for attacker analytics and blocking
   - Drill-down into the history of any attacker
   - Search
@@ -44,11 +46,11 @@ Each explorer focuses on a specific use case:
 
 ### Explore and filter attackers
 
-To start reviewing attackers, go to [Attacker Explorer][1].
+To start reviewing attackers, go to [Attackers Explorer][1].
 
-<!-- {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_default_view2.png" alt="AAP Attacker Explorer"  >}} -->
+<!-- {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_default_view2.png" alt="AAP Attackers Explorer"  >}} -->
 
-There are two sections to the Attacker Explorer:
+There are two sections to the Attackers Explorer:
 
 1. Facets and search. These enable you to filter traffic by service or attacker attributes. 
 2. The list of attackers with security metrics.
@@ -58,11 +60,11 @@ There are two sections to the Attacker Explorer:
 
 Click on any row to view the history and attributes of the IP.
 
-<!-- {{< img src="security/application_security/threats/attacker-explorer/ip_drawer.png" alt="Investigate and IP address with AAP Attacker Explorer"  >}} -->
+<!-- {{< img src="security/application_security/threats/attacker-explorer/ip_drawer.png" alt="Investigate and IP address with AAP Attackers Explorer"  >}} -->
 
 IPs can be blocked or added to the Passlist from the IP drawer.
 
-### Best practices for blocking with Attacker Explorer
+### Best practices for blocking with Attackers Explorer
 
 1. Account takeover attacks: Use short durations for blocking IP addresses.
 2. Add authorized scanners to monitored passlists to observe activity but prevent blocking.
@@ -72,14 +74,14 @@ IPs can be blocked or added to the Passlist from the IP drawer.
 
 To block an individual IP temporarily or permanently, do the following:
 
-{{< img src="security/application_security/threats/attacker-explorer/block_ip_address.png" alt="Block an IP address with AAP Attacker Explorer"  >}}
+{{< img src="security/application_security/threats/attacker-explorer/block_ip_address.png" alt="Block an IP address with AAP Attackers Explorer"  >}}
 
 1. Click `Block` on the row.
 2. Choose a blocking duration.
 
 ## Block IPs in bulk
 
-You can select multiple IPs and block them temporarily or permanently using the Attacker Explorer's **Compare and Block** option. 
+You can select multiple IPs and block them temporarily or permanently using the Attackers Explorer's **Compare and Block** option. 
 
 **Compare and Block** provides metrics about the IPs to help you block with safety and confidence. For example, **Similarity Overview** and **Activity**, described later in this topic.
 
@@ -90,7 +92,7 @@ To compare and block IPs in bulk, do the following:
     
     In the following example, the selected IPs are from the same location and appear to be related. The **Compare and Block** option opens the **Block selected attackers** view, showing metrics and attributes for the selected IP addresses.
 
-    {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_review_groups2.png" alt="Screenshot of the AAP Attacker Explorer group blocking"  >}}
+    {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_review_groups2.png" alt="Screenshot of the AAP Attackers Explorer group blocking"  >}}
 
 4. To block attackers, click **Block**.
 
@@ -98,7 +100,7 @@ To compare and block IPs in bulk, do the following:
 
 When you select the **Compare and Block** option, the **Block selected attackers** view opens, showing metrics and attributes for the selected IP addresses.
 
-{{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_review_groups2.png" alt="Screenshot of the AAP Attacker Explorer group blocking"  >}}
+{{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_review_groups2.png" alt="Screenshot of the AAP Attackers Explorer group blocking"  >}}
 
 <div class="alert alert-info">Metrics for <strong>Similarity Overview</strong> and <strong>Activity</strong> are scoped to the last 30 days.</a></div>
 

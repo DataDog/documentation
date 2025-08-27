@@ -1,12 +1,12 @@
 ---
 categories:
 - aws
-- cloud
-- 데이터 스토어
+- 클라우드
+- 데이터 저장소
 - 로그 수집
 - 네트워크
-- 보안
-custom_kind: integration
+- security
+custom_kind: 통합
 dependencies: []
 description: Amazon Security Lake 로그를 수집하세요.
 doc_link: ''
@@ -37,7 +37,7 @@ Amazon Security Lake는 보안 로그 및 이벤트 데이터를 집계하고 �
 
 ## 설정
 
-### 사전 필수 요건
+### 사전 필수 조건
 
 1. Amazon Security Lake는 AWS 계정 또는 AWS 조직에 대해 구성되어야 합니다. 자세한 내용은 [Amazon Security Lake 사용 설명서][1]를 참조하세요.
 2. [Datadog Log Management][2]와 [Datadog Cloud SIEM][3]을 모두 사용하는 Datadog 계정이 있어야 합니다.
@@ -88,12 +88,12 @@ Amazon Security Lake는 보안 로그 및 이벤트 데이터를 집계하고 �
 {{< site-region region="ap1" >}}
 3. 동일한 양식에 구독자 크리덴셜을 입력합니다.
    - **Account ID**에 `417141415827`을 입력합니다.
-   - **External ID**의 경우 새 탭을 열고 AWS 계정의 Datadog에서 [AWS 통합 페이지][7]로 이동합니다. **AWS External ID**는 **Account Details** 탭에 있습니다. 이를 복사하여 AWS의 양식에 붙여넣습니다.
+   - **External ID**의 경우 새 탭을 열고 AWS 계정의 Datadog에서 [AWS Integration 페이지][7]로 이동합니다. **AWS External ID**는 **Account Details** 탭에 있습니다. 이를 복사하여 AWS의 양식에 붙여넣습니다.
    - **Subscriber role**에 `DatadogSecurityLakeRole`을 입력합니다. **참고:** 이 역할은 `DatadogIntegrationRole`이 1단계에서 필요한 권한을 갖기 때문에 Datadog에서는 실제로 사용되지 않습니다.
    - **API destination role**에 `DatadogSecurityLakeAPIDestinationRole`을 입력합니다.
    - **Subscription endpoint**의 경우 이 값은 사용 중인 [Datadog 사이트][8]에 따라 다릅니다.  <code>https://api.{{< region-param key="dd_site" >}}/api/intake/aws/securitylake</code>
 
-     **참고:** 위 엔드포인트가 해당 지역을 반영하지 않는 경우 이 설명서 페이지 오른쪽에 있는 **Datadog site** 드롭다운 메뉴를 전환하여 지역을 전환하세요.
+     **참고:** 위 엔드포인트가 해당 지역을 반영하지 않는 경우 이 설명서 페이지 오른쪽에 있는 **Datadog site** 드롭다운 메뉴를 토글하여 지역을 전환하세요.
    - **HTTPS key name**에 `DD-API-KEY`를 입력합니다.
    - **HTTPS key value**의 경우 새 탭을 열고 Datadog의 [API Keys 페이지][9]로 이동하여 Datadog API 키를 찾거나 생성합니다. 이를 복사하여 AWS의 양식에 붙여넣습니다.
 
@@ -107,7 +107,7 @@ Amazon Security Lake는 보안 로그 및 이벤트 데이터를 집계하고 �
 
 실시간 위협 탐지를 위해 이 통합을 사용하려면 [블로그][8]에서 자세한 방법을 확인하세요.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 

@@ -39,7 +39,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft�
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "azure_data_lake_store" >}}
+{{ get-metrics-from-git "azure-datalakestore" }}
 
 
 **Remarque**: cette intégration permet uniquement la collecte de métriques pour Data Lake Storage Gen1. Data Lake Storage Gen2 étant basé sur Azure Blob Storage, les métriques associées peuvent être visualisées sur Datadog en définissant l'espace de nommage Blob Storage suivant : `azure.storage_storageaccounts_blobservices.*`. Pour en savoir plus, consultez la documentation sur [Azure Data Lake Storage Gen2][3].

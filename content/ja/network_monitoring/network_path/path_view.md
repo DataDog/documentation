@@ -9,9 +9,6 @@ further_reading:
   text: Datadog NPM でクラウドアーキテクチャとアプリの依存関係を監視する
 title: パスビュー
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog Network Performance Monitoring 用 Network Path は、選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) ではサポートされていません。</div>
-{{< /site-region >}}
 
 <div class="alert alert-info">Datadog Network Performance Monitoring 用 Network Path は、プレビュー版です。Datadog の担当者にご連絡の上、サインアップしてください。</div>
 

@@ -39,7 +39,7 @@ Datadog Azure インテグレーションを使用して、Azure Notification Hu
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_notification_hubs" >}}
+{{ get-metrics-from-git "azure-notificationhubs" }}
 
 
 ### イベント

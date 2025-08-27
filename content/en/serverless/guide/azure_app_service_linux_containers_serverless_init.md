@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-info">To instrument your Azure App Service containers with a sidecar, see <a href="/serverless/azure_app_services/azure_app_services_container">Instrument Azure App Service</a>.</div>
+<div class="alert alert-info">To instrument your Azure App Service containers with a sidecar (Recommended), see <a href="/serverless/azure_app_services/azure_app_services_container">Instrument Azure App Service</a>.</div>
 
 This instrumentation method uses `serverless-init` and provides the following additional monitoring capabilities for containerized Linux Azure App Service workloads:
 
@@ -115,7 +115,7 @@ Metrics are calculated based on 100% of the application’s traffic, and remain 
 |`DD_API_KEY`| [Datadog API Key][6] - **Required**|
 | `DD_SITE` | [Datadog site][4] - **Required** |
 | `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
-| `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][10], [Node.js][11], [.NET][12], and [PHP][13]. See additional docs for [Python][14], [Go][15], and [Ruby][16]. |
+| `DD_LOGS_INJECTION`| Enrich all logs with trace data for supported loggers in [Java][10], [Node.js][11], [.NET][12], and [PHP][13]. See additional docs for [Python][14], [Go][15], and [Ruby][16]. |
 | `DD_TRACE_SAMPLE_RATE`|  Controls the trace ingestion sample rate between `0.0` and `1.0`.|
 | `DD_SERVICE`      | See [Unified Service Tagging][5].                                       |
 | `DD_VERSION`      | See [Unified Service Tagging][5].                                       |

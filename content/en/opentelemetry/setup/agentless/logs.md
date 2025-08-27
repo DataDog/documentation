@@ -13,15 +13,8 @@ further_reading:
   - link: "https://opentelemetry.io/docs/reference/specification/protocol/exporter/"
     tag: "External Site"
     text: "OpenTelemetry Protocol Exporter"
+site_support_id: otlp_agentless
 ---
-
-{{< callout header="false" btn_hidden="true">}}
-  The Datadog OTLP logs intake endpoint is in Preview. To request access, contact your account representative.
-{{< /callout >}}
-
-{{< site-region region="ap1,gov" >}}
-<div class="alert alert-warning">Datadog OTLP logs intake endpoint is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -45,7 +38,7 @@ If you are using [OpenTelemetry automatic instrumentation][3], set the following
 ```shell
 export OTEL_EXPORTER_OTLP_LOGS_PROTOCOL="http/protobuf"
 export OTEL_EXPORTER_OTLP_LOGS_ENDPOINT="${YOUR_ENDPOINT}" // Replace this with the correct endpoint
-export OTEL_EXPORTER_OTLP_LOGS_HEADERS="dd-protocol=otlp,dd-api-key=${DD_API_KEY}"
+export OTEL_EXPORTER_OTLP_LOGS_HEADERS="dd-api-key=${DD_API_KEY}"
 ```
 
 #### Manual instrumentation
@@ -63,7 +56,6 @@ import io.opentelemetry.exporter.otlp.http.logs.OtlpHttpLogRecordExporter;
 
 OtlpHttpLogRecordExporter exporter = OtlpHttpLogRecordExporter.builder()
     .setEndpoint("${YOUR_ENDPOINT}") // Replace this with the correct endpoint
-    .addHeader("dd-protocol", "otlp")
     .addHeader("dd-api-key", System.getenv("DD_API_KEY"))
     .build();
 ```
@@ -78,10 +70,9 @@ import "go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploghttp"
 logExporter, err := otlploghttp.New(
     ctx,
     otlploghttp.WithEndpointURL("${YOUR_ENDPOINT}"), // Replace this with the correct endpoint, minus the URL path
-    otlploghttp.WithURLPath("/api/v2/logs"),
+    otlploghttp.WithURLPath("/v1/logs"),
     otlploghttp.WithHeaders(
         map[string]string{
-            "dd-protocol": "otlp",
             "dd-api-key": os.Getenv("DD_API_KEY"),
         }),
 )
@@ -100,7 +91,6 @@ exporters:
   otlphttp:
     logs_endpoint: ${YOUR_ENDPOINT} // Replace this with the correct endpoint
     headers:
-      dd-protocol: "otlp"
       dd-api-key: ${env:DD_API_KEY}
 
 service:
@@ -115,10 +105,7 @@ service:
 
 ### Error: 403 Forbidden
 
-If you receive a `403 Forbidden` error when sending logs to the Datadog OTLP logs intake endpoint, it indicates one of the following issues:
-
-- The API key belongs to an organization that is not allowed to access the Datadog OTLP logs intake endpoint.  
-   **Solution**: To request access, contact your account representative.
+If you receive a `403 Forbidden` error when sending logs to the Datadog OTLP logs intake endpoint, it indicates one potential issue:
 
 - The endpoint URL is incorrect for your organization.  
    **Solution**: Use the correct endpoint URL for your organization. Your site is {{< region-param key=dd_datacenter code="true" >}}, so you need to use the {{< region-param key="otlp_logs_endpoint" code="true" >}} endpoint.
