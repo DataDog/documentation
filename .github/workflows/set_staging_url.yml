@@ -6,6 +6,7 @@ jobs:
     permissions:
       pull-requests: write # to update pull request
       contents: read # to read the contents of the repository
+      statuses: write # to set the status of the commit
     runs-on: ubuntu-latest
     steps:
     - uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 # v6.4.1
