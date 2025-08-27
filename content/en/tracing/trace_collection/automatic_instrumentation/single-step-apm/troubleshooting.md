@@ -68,9 +68,9 @@ To enable debug logs:
  
    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
    env:
-     - name: DD_TRACE_DEBUG    ## debug logging for the tracer
+     - name: DD_TRACE_DEBUG    # debug logging for the tracer
        value: "true"
-     - name: DD_APM_INSTRUMENTATION_DEBUG    ## debug logging for the injector
+     - name: DD_APM_INSTRUMENTATION_DEBUG    # debug logging for the injector
        value: "true"
    {{< /code-block >}}
    
