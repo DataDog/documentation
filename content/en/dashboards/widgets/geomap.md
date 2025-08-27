@@ -56,6 +56,8 @@ The geomap widget visualizes geographic data with shaded regions or points. It c
   |Log Events   | The group by tag must include a country ISO Code following the alpha-2 ISO format. You can use the [GeoIP Processor][1] to do this, or manually include the [tags on ingest][2]. See the [Log search documentation][3] to configure a log event query. |
   |RUM   | See the [RUM documentation][4] to configure a RUM query. |
 
+  **Note**: The Points layer shows a maximum of 100,000 events at a time.
+  
   [1]: /logs/log_configuration/processors/#geoip-parser
   [2]: /getting_started/tagging/#define-tags
   [3]: /logs/search_syntax/

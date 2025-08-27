@@ -46,12 +46,7 @@ The Datadog .NET, Java, and Node.js APM extensions support the following runtime
 ### Extension-specific notes
 
 {{< tabs >}}
-{{% tab "Java" %}}
-Support for Java Web Apps is in Preview for extension v2.4+.
-
-There are no billing implications for tracing Java Web Apps during this period.
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{% tab ".NET" %}}
 Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog's .NET Tracer with Profiler enabled). To ensure maximum visibility, run only one APM solution within your application environment.
 
 Additionally, if you are using the Azure Native integration, you can use the Datadog resource in Azure to add the extension to your .NET apps. For instructions, see the [App Service extension section][1] of Datadog's [Azure Portal guide][2].
@@ -59,12 +54,17 @@ Additionally, if you are using the Azure Native integration, you can use the Dat
 [1]: /integrations/guide/azure-portal/?tab=vmextension#app-service-extension
 [2]: /integrations/guide/azure-portal/
 {{% /tab %}}
+{{% tab "Java" %}}
+Support for Java Web Apps is in Preview for extension v2.4+.
+
+There are no billing implications for tracing Java Web Apps during this period.
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Installation
 Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require your web app to be fully stopped in order to install/update successfully.
 
-1. If you haven't already, set up the [Datadog-Azure integration][2].
+1. If you haven't already, set up the [Datadog-Azure integration][9].
 
 1. Verify that your Datadog-Azure integration is configured correctly by ensuring that you see the `azure.app_services.count` or `azure.functions.count` metrics in Datadog. 
 
