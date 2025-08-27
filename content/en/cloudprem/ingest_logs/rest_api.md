@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-You can send logs to CloudPrem using direct REST API calls.
+You can send logs to CloudPrem using direct REST API calls. This method is useful for custom integrations or scripts that can't use a Datadog Agent or Observability Pipelines.
 
 ## Datadog Logs API
 

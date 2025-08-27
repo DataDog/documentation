@@ -1,7 +1,6 @@
 ---
 title: CloudPrem Prerequisites
 description: Understand the infrastructure and software requirements for deploying CloudPrem
-private: true
 further_reading:
 - link: "/cloudprem/install/"
   tag: "Documentation"

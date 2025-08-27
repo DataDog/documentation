@@ -7,7 +7,9 @@ description: Learn how to deploy CloudPrem on various platforms and environments
   Datadog CloudPrem is in Preview.
 {{< /callout >}}
 
-CloudPrem can be deployed in various environments, from cloud-managed Kubernetes services to bare metal servers. This section guides you through the installation process for Kubernetes distribution only.
+## Overview
+
+CloudPrem can be deployed in various environments, from cloud-managed Kubernetes services to bare metal servers. The provided installation instructions are specific to **Kubernetes distributions**.
 
 Select the installation guide that matches your environment:
 

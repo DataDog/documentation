@@ -23,22 +23,21 @@ You can send logs to CloudPrem using Observability Pipelines with the following 
 - Datadog Agent collects logs and send them to Observability Pipelines HTTP server source.
 - Observability Pipelines forwards logs to the HTTP client destination.
 
-## Create and configure an Observability Pipeline in Datadog
+## Create and configure an Observability Pipeline
 
-On the [Observability Pipelines][1] page, create a pipeline using the **Log Volume Control** template and configure the pipeline with:
-- An HTTP server source (no configuration).
-- An empty processor (remove all default processors).
-- An HTTP client destination (no configuration).
+You'll need to create a pipeline that acts as an intermediary for your logs. Navigate to the [Observability Pipelines][1] page and create a pipeline using the **Log Volume Control** template. Configure the pipeline with the following components:
+- **HTTP server source**:  (No configuration) This is the entry point where the Datadog Agent will send logs. Leave the configuration empty.
+- **Empty processor**: Remove all default processors from the pipeline.
+- **HTTP client destination**: (No configuration) This forwards the logs to your CloudPrem instance. Leave the configuration empty.
 
-Your pipeline should look like this one:
+After configuring, your pipeline should look like this and you are ready to deploy:
 
 {{< img src="/cloudprem/ingest/observability-pipelines-cloudprem-setup.png" alt="Screenshot of the Logs Explorer interface showing how to filter logs by selecting the cloudprem index in the facets panel" style="width:80%;" >}}
 
-You are ready to deploy it.
 
 ## Deploy your Observability Pipelines
 
-We use Helm command used to install OP but you can use other installation methods.
+While other methods exist, this guide uses the Helm command for deployment. The following command installs or upgrades the pipeline, configuring it to listen for logs and forward them to your CloudPrem indexer.
 
 ```shell
 helm upgrade --install opw \
@@ -51,9 +50,11 @@ helm upgrade --install opw \
 	datadog/observability-pipelines-worker
 ```
 
-After a minute or so, you should see logs flowing in OP and successfully forwarded to the CloudPrem destination.
+After a minute, you should see logs flowing through the pipelines and successfully reach the CloudPrem destination.
 
-## Configure Datadog Agent to send to Observability Pipelines
+## Configure Datadog Agent
+
+The final step is to update your Datadog Agent's configuration to point its logs to the newly deployed Observability Pipelines worker. You do this by setting the `DD_LOGS_CONFIG_LOGS_DD_URL` environment variable to the pipeline's address.
 
 Update your Datadog Agent configuration to send logs to the Observability Pipelines worker:
 

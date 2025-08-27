@@ -16,10 +16,16 @@ further_reading:
 {{< callout btn_hidden="true" >}}
   Datadog CloudPrem is in Preview.
 {{< /callout >}}
+## Overview
 
+This page explains how to configure your Datadog account to access logs from your CloudPrem environment. After it's configured, you'll be able to access and search the `cloudprem` index using the Logs Explorer in the Datadog UI.
+
+## Enabling CloudPrem log search
+
+Before you can search CloudPrem logs in the Datadog UI, contact [Datadog support][1] and provide the public DNS of your CloudPrem cluster. This links your cluster to your Datadog account.
 You need to reach out to [Datadog support][1] and give the public DNS of your CloudPrem cluster so that you can search into CloudPrem logs from Datadog UI.
 
-### Searching your CloudPrem logs in the Logs Explorer
+## Searching your CloudPrem logs in the Logs Explorer
 
 After your Datadog account is configured, you are ready to search into the `cloudprem` index by typing it in the search bar or selecting it in facets.
 

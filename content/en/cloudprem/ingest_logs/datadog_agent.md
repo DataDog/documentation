@@ -18,14 +18,19 @@ further_reading:
 {{< /callout >}}
 
 ## Overview
+This document provides configuration steps for using the Datadog Agent to send logs to a Datadog CloudPrem deployment. Unlike the Datadog SaaS platform, CloudPrem requires specific Agent configurations to ensure logs are enriched with necessary host-level tags and sent to the correct endpoint. This guide covers how to set these configurations for the most common deployment methods.
 
-To send logs with the Datadog agent to CloudPrem, you need to set the two following environment variables:
-- `DD_LOGS_CONFIG_LOGS_DD_URL` to CloudPrem endpoint, usually `http://<RELEASE_NAME>-indexer.<NAMESPACE_NAME>.svc.cluster.local:7280`.
-- Optionally, `DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION` to `100000` (~5 years). This ensure the Agent adds host-level tags that it knows about to each sent log. When sending logs to Datadog SaaS, those tags can be automatically added after ingestion. When sending logs to CloudPrem, we need to ensure those tags are added to each logs as CLoudPrem does not enrich those logs as the SaaS does.
+## Key requirements
+To send logs with the Datadog Agent to CloudPrem, you must configure two environment variables:
+`DD_LOGS_CONFIG_LOGS_DD_URL` 
+: Set this to your CloudPrem indexer endpoint, usually `http://<RELEASE_NAME>-indexer.<NAMESPACE_NAME>.svc.cluster.local:7280`. This tells the Agent where to send the logs
 
-## Send Kubernetes logs to CloudPrem with the Datadog Agent deployed with the Datadog Operator
+`DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION` 
+: (Optional) This is an optional but highly recommended variable. Set it to a large value, like "100000" (approximately 5 years). This ensures the Agent adds host-level tags to every log it sends. The Datadog SaaS platform automatically enriches logs with these tags after ingestion, but CloudPrem requires the Agent to add them upfront.
 
-Follow the [Getting Started with Datadog Operator][1] guide for installation and deployment. When you reach Step 3, use the following `datadog-agent.yaml` configuration instead of the example provided in the guide.
+## Send Kubernetes logs with the Datadog Operator
+
+To deploy the Agent on Kubernetes using the Datadog Operator, follow the [Getting Started with Datadog Operator][1] guide. When you reach Step 3, use the following `datadog-agent.yaml` configuration instead of the example provided in the guide.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -70,29 +75,36 @@ spec:
 
 The Datadog Agent can be configured to send logs to CloudPrem using different endpoints:
 
-**Internal cluster endpoint** (recommended for in-cluster agents):
+{{% collapse-content title="Internal cluster endpoint" level="h4" expanded=false %}}
+Recommended for in-cluster agents:
 ```
 DD_LOGS_CONFIG_LOGS_DD_URL=http://<RELEASE_NAME>-indexer.<NAMESPACE_NAME>.svc.cluster.local:7280
 ```
+{{% /collapse-content %}}
 
-**Internal ingress endpoint** (for agents outside the cluster):
+{{% collapse-content title="Internal ingress endpoint" level="h4" expanded=false %}}
+For Agents outside the cluster:
 ```
 DD_LOGS_CONFIG_LOGS_DD_URL=https://cloudprem-internal.your-domain.com
 ```
+{{% /collapse-content %}}
 
 ### Additional Agent configuration
 
 You can also configure additional features to send cluster metadata to Datadog:
 
-**Prometheus metrics scraping**:
+{{% collapse-content title="Prometheus metrics scraping" level="h4" expanded=false %}}
+
 ```yaml
 features:
   prometheusScrape:
     enabled: true
     enableServiceEndpoints: true
 ```
+{{% /collapse-content %}}
 
-**OTLP logs collection** (to send Agent logs to Datadog):
+{{% collapse-content title="OTLP logs collection" level="h4" expanded=false %}}
+To send Agent logs to Datadog:
 ```yaml
 features:
   otlp:
@@ -102,12 +114,13 @@ features:
           enabled: true
           endpoint: 0.0.0.0:4417
 ```
+{{% /collapse-content %}}
 
 ## Alternative deployment methods
-
+If you are not using the Datadog Operator, you can deploy the Agent using one of these common methods:
 ### Helm chart deployment
 
-If you're not using the Datadog Operator, you can deploy the Agent using Helm:
+Run the following command to deploy the Agent using the Helm chart, setting the log-specific environment variables directly.
 
 ```shell
 helm install datadog-agent datadog/datadog \
@@ -146,10 +159,11 @@ spec:
 ```
 
 ## Verification
+After the Agent is deployed, you can verify that logs are being sent and received correctly.
 
 ### Check Agent status
 
-Verify that the Agent is sending logs to CloudPrem:
+Use `kubectl exec` to check the Agent's status and confirm it is configured to send logs.
 
 ```shell
 # Check Agent status and logs configuration
@@ -161,7 +175,7 @@ kubectl logs <datadog-agent-pod> | grep -i cloudprem
 
 ### Check logs are indexed in CloudPrem
 
-This command should return indexed JSON logs:
+Run this command to query the CloudPrem searcher and verify that it's indexing the JSON logs.
 
 ```shell
 kubectl exec -it <RELEASE_NAME>-searcher-0 -n <NAMESPACE_NAME> -- curl 'http://localhost:7280/api/v1/datadog/search?query='
