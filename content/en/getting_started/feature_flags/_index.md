@@ -24,7 +24,7 @@ Datadog Feature Flags offer a powerful, integrated way to manage feature deliver
 
 Your organization likely already has pre-configured environments for `Development`, `Staging`, and `Production`. If not, and/or you need to configure other environments, navigate to [Feature Flags > Environments][3] to create tag queries for your environments, as well as identify which environment should be considered a **Production** environment.
 
-{{< img src="getting_started/feature_flags/environments.png" alt="Environments list" style="width:100%;" >}}
+{{< img src="getting_started/feature_flags/Environments.png" alt="Environments list" style="width:100%;" >}}
 
 ## Creating your first feature flag
 
