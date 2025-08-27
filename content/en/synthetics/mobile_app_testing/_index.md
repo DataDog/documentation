@@ -97,7 +97,7 @@ Auto-accept alerts
 : When enabled, automatically accepts all OS system alerts during test execution.
 
 Allow application crash
-: When enabled, prevents the test from failing if an application crash is detected. You must include a restart application step after the expected crash to continue the test.
+: When enabled, prevents the test from failing if an application crash is detected. You must include a step to restart the application after the expected crash to continue the test.
 
 Capture network resources
 : When enabled, collects network requests and responses for each test step and displays them in the results. </br>
@@ -112,7 +112,7 @@ You can pass `key:value` pairs to your application when the test starts, allowin
 {{< tabs >}}
 {{% tab "Android (Initial Intent Extras)" %}}
 
-For Andriod tests, add the appropriate `key:value` pairs in the Advanced Options section of your test:
+For Android tests, add the appropriate `key:value` pairs in the Advanced Options section of your test:
 
 ```json
 {
