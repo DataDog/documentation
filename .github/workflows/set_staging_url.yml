@@ -12,13 +12,12 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
-            script: |
-                github.rest.repos.createCommitStatus({
-                    "owner": context.repo.owner,
-                    "repo": context.repo.repo,
-                    "sha": context.payload.pull_request.head.sha,
-                    "state": "success",
-                    "context": "preview",
-                    "description": `Check preview branch "${context.payload.pull_request.head.ref}"`,
-                    "target_url": `https://docs-staging.datadoghq.com/${context.payload.pull_request.head.ref}`
-                })
+            github.rest.repos.createCommitStatus({
+                "owner": context.repo.owner,
+                "repo": context.repo.repo,
+                "sha": context.payload.pull_request.head.sha,
+                "state": "success",
+                "context": "preview",
+                "description": `Check preview branch "${context.payload.pull_request.head.ref}"`,
+                "target_url": `https://docs-staging.datadoghq.com/${context.payload.pull_request.head.ref}`
+            })
