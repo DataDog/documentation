@@ -42,7 +42,7 @@ GROUP BY instance_type
 
 ## Explore your telemetry
 
-<div class="alert alert-warning">Querying Logs and Metrics through DDSQL is in Preview. Use this <a href="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/">form</a> to request access.
+<div class="alert alert-warning">Querying Logs, Metrics, Spans, and RUM through DDSQL is in Preview. Use this <a href="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/">form</a> to request access.
 
 Spans and RUM as data sources are also in Preview. Mention in the same form if you want access or even data sources not listed in the use cases section.
 </div>
