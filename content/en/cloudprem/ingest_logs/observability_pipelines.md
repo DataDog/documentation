@@ -40,7 +40,7 @@ You are ready to deploy it.
 
 We use Helm command used to install OP but you can use other installation methods.
 
-```
+```shell
 helm upgrade --install opw \
 	-f values.yaml \
 	--set datadog.apiKey=XXXXXXX \
@@ -84,7 +84,7 @@ spec:
 
 Check that logs are flowing through the pipeline:
 
-```bash
+```shell
 # Check Observability Pipelines worker status
 kubectl get pods -l app=observability-pipelines-worker
 

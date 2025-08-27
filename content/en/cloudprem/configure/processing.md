@@ -2,7 +2,7 @@
 title: Processing Configuration
 description: Learn how to configure your processing pipelines in CloudPrem
 further_reading:
-- link: "/cloudprem/overview/architecture/"
+- link: "/cloudprem/architecture/"
   tag: "Documentation"
   text: "Learn more about CloudPrem Architecture"
 - link: "/cloudprem/troubleshooting/"

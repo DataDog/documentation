@@ -1,6 +1,5 @@
 ---
 title: Architecture
-private: true
 further_reading:
 - link: "/cloudprem/install/prerequisites/"
   tag: "Documentation"

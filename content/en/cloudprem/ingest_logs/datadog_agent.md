@@ -109,7 +109,7 @@ features:
 
 If you're not using the Datadog Operator, you can deploy the Agent using Helm:
 
-```bash
+```shell
 helm install datadog-agent datadog/datadog \
   --set datadog.apiKey=<YOUR_API_KEY> \
   --set datadog.logs.enabled=true \
@@ -151,7 +151,7 @@ spec:
 
 Verify that the Agent is sending logs to CloudPrem:
 
-```bash
+```shell
 # Check Agent status and logs configuration
 kubectl exec -it <datadog-agent-pod> -- agent status | grep -A 10 "Logs Agent"
 
@@ -163,7 +163,7 @@ kubectl logs <datadog-agent-pod> | grep -i cloudprem
 
 This command should return indexed JSON logs:
 
-```bash
+```shell
 kubectl exec -it <RELEASE_NAME>-searcher-0 -n <NAMESPACE_NAME> -- curl 'http://localhost:7280/api/v1/datadog/search?query='
 ```
 
