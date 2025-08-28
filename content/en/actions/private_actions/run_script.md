@@ -24,7 +24,7 @@ The following table outlines supported and unsupported use cases for the script 
 | Running CLIs (`aws`, `terraform`, `kubectl`)        | Yes   | The CLI and your CLI credentials must be added to your custom image.                                                       |
 | Running scripts (`bash`, `python`)                  | Yes   | Scripts can be mounted inside the container. Interpreters such as Python must be installed on your custom image. |
 | Running privileged commands (`systemctl restart`)   | No    | Because the PAR runs inside a container, it does not have high privilege permissions on the host.                                         |
-| Windows tools (PowerShell)                          | No    | Because PAR runs inside a Linux container, native Windows tools are not supported.                                             |
+| Windows tools (PowerShell)                          | No    | Because the PAR runs inside a Linux container, native Windows tools are not supported.                                             |
 
 ## Prerequisites
 
