@@ -26,27 +26,30 @@ This approach gives you full control over OpenTelemetry pipelines while also pro
 - {{< translate key="integration_count" >}}+ Datadog integrations
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/setup/ddot_collector/install/" >}}Install the DDOT Collector{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/ddot_collector/install/" >}}
+    <h3>Install the DDOT Collector</h3>
+    Follow our guided setup to install the Collector and start sending your OpenTelemetry data to Datadog.
+    {{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Other setup options
 
 Alternative methods are available for specific use cases, such as maintaining a vendor-neutral pipeline or running in non-Kubernetes environments.
 
-### Standalone OpenTelemetry Collector
-**Best for**: Users who require a completely vendor-neutral setup or advanced processing capabilities like tail-based sampling.
-
-[Set up the OTel Collector][2]
-
-### OTLP ingest in the Agent
-**Best for**: Users on platforms other than Kubernetes Linux, or those who prefer a minimal configuration without managing Collector pipelines.
-
-[Set up the Datadog Agent for OTLP Ingest][6]
-
-### Agentless deployment (in Preview)
-**Best for**: Situations requiring direct data transmission to Datadog's intake endpoint without any intermediary components.
-
-[Set up the Datadog OTLP intake endpoint][3]
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}
+    <h3>Standalone OpenTelemetry Collector</h3>
+    Best for: Users who require a completely vendor-neutral setup or advanced processing capabilities like tail-based sampling.
+    {{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/otlp_ingest_in_the_agent" >}}
+    <h3>OTLP Ingest in the Agent</h3>
+    Best for: Users on platforms other than Kubernetes Linux, or those who prefer a minimal configuration without managing Collector pipelines.
+    {{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/agentless" >}}
+    <h3>Agentless Deployment (Preview)</h3>
+    Best for: Situations requiring direct data transmission to Datadog's intake endpoint without any intermediary components.
+    {{< /nextlink >}}
+{{< /whatsnext >}}
 
 <div class="alert alert-info"><strong>Still not sure which setup is right for you?</strong><br> See the <a href="/opentelemetry/compatibility/">Feature Compatibility</a> table to understand which Datadog features are supported.</div>
 
