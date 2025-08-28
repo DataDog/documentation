@@ -14,7 +14,13 @@ further_reading:
 ## Overview
 Azure Container Apps is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Container Apps through the [Azure integration][1]. Datadog also provides a solution for instrumenting your Container Apps applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
+{{< img src="serverless/azure_container_apps/aca_top_2.png" alt="Datadog UI, Serverless Monitoring page with Azure Container Apps selected." style="width:100%;" >}}
+
 ## Setup
+
+### Azure integration
+
+Install the [Datadog-Azure integration][4] to collect metrics and logs.
 
 ### Application container
 
@@ -457,3 +463,4 @@ $statsd->increment('page.views', 1, array('environment'=>'dev'));
 [1]: /integrations/azure/#log-collection
 [2]: https://learn.microsoft.com/en-us/azure/container-apps/storage-mounts?pivots=azure-cli&tabs=smb#replica-scoped-storage
 [3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: /integrations/azure/

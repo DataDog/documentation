@@ -570,10 +570,12 @@ menu:
       url: /opentelemetry/getting_started/datadog_example
       parent: otel_guides_getting_started
       weight: 101
+      identifier: otel_guides_getting_started_datadog_example
     - name: OpenTelemetry Demo Application
       url: /opentelemetry/getting_started/otel_demo_to_datadog
       parent: otel_guides_getting_started
       weight: 102
+      identifier: otel_guides_getting_started_otel_demo_to_datadog
     - name: Feature Compatibility
       url: opentelemetry/compatibility/
       identifier: otel_compatibility
@@ -598,30 +600,37 @@ menu:
       url: /opentelemetry/instrument/api_support/java
       parent: otel-api-dd-sdk
       weight: 3021
+      identifier: otel_api_java
     - name: Python
       url: /opentelemetry/instrument/api_support/python
       parent: otel-api-dd-sdk
       weight: 3022
+      identifier: otel_api_python
     - name: Ruby
       url: /opentelemetry/instrument/api_support/ruby
       parent: otel-api-dd-sdk
       weight: 3023
+      identifier: otel_api_ruby
     - name: Go
       url: /opentelemetry/instrument/api_support/go
       parent: otel-api-dd-sdk
       weight: 3024
+      identifier: otel_api_go
     - name: Node.js
       url: /opentelemetry/instrument/api_support/nodejs
       parent: otel-api-dd-sdk
       weight: 3025
+      identifier: otel_api_nodejs
     - name: PHP
       url: /opentelemetry/instrument/api_support/php
       parent: otel-api-dd-sdk
       weight: 3026
+      identifier: otel_api_php
     - name: .NET
       url: /opentelemetry/instrument/api_support/dotnet
       parent: otel-api-dd-sdk
       weight: 3027
+      identifier: otel_api_dotnet
     - name: OTel Instrumentation Libraries
       url: /opentelemetry/instrument/instrumentation_libraries/
       identifier: otel_instrumentation_libraries
@@ -691,10 +700,12 @@ menu:
       url: /opentelemetry/setup/agentless/logs
       parent: otel-setup-intake-endpoint
       weight: 301
+      identifier: otel_setup_agentless_logs
     - name: Metrics Endpoint
       url: /opentelemetry/setup/agentless/metrics
       parent: otel-setup-intake-endpoint
       weight: 302
+      identifier: otel_setup_agentless_metrics
     - name: Semantic Mapping
       url: opentelemetry/mapping/
       identifier: otel_schema
@@ -849,10 +860,12 @@ menu:
       url: /opentelemetry/guide/otlp_delta_temporality
       parent: otel_guides
       weight: 1001
+      identifier: otel_guides_otlp_delta_temporality
     - name: Visualize Histograms as Heatmaps
       url: /opentelemetry/guide/otlp_histogram_heatmaps
       parent: otel_guides
       weight: 1002
+      identifier: otel_guides_otlp_histogram_heatmaps
     - name: Migration Guides
       url: /opentelemetry/migrate/
       identifier: otel_guides_migration
@@ -862,18 +875,22 @@ menu:
       url: /opentelemetry/migrate/collector_0_120_0
       parent: otel_guides_migration
       weight: 10031
+      identifier: otel_guides_migration_collector_0_120_0
     - name: Migrate to OTel Collector v0.95.0+
       url: /opentelemetry/migrate/collector_0_95_0
       parent: otel_guides_migration
       weight: 10032
+      identifier: otel_guides_migration_collector_0_95_0
     - name: New Operation Name Mappings
       url: /opentelemetry/migrate/migrate_operation_names/
       parent: otel_guides_migration
       weight: 10033
+      identifier: otel_guides_migration_operation_names
     - name: Agent with DDOT Collector
       url: /opentelemetry/migrate/ddot_collector/
       parent: otel_guides_migration
       weight: 10034
+      identifier: otel_guides_migration_ddot_collector
     - name: Reference
       url: /opentelemetry/reference
       identifier: otel_reference
@@ -1414,6 +1431,7 @@ menu:
       url: watchdog/faulty_cloud_saas_api_detection
       parent: watchdog_top_level
       weight: 6
+      identifier: watchdog_faulty_cloud_saas_api_detection
     - name: Bits AI
       url: bits_ai/
       pre: bits-ai
@@ -3299,23 +3317,23 @@ menu:
       parent: serverless
       weight: 3
     - name: Azure App Service
-      url: serverless/azure_app_services
+      url: serverless/azure_app_service
       parent: serverless
       identifier: serverless_app_services
       weight: 4
     - name: Linux - Code
       identifier: serverless_azure_app_services_linux_code
-      url: serverless/azure_app_services/azure_app_services_linux
+      url: serverless/azure_app_service/linux_code
       parent: serverless_app_services
       weight: 401
     - name: Linux - Container
       identifier: serverless_azure_app_services_linux_container
-      url: serverless/azure_app_services/azure_app_services_container
+      url: serverless/azure_app_service/linux_container
       parent: serverless_app_services
       weight: 402
     - name: Windows - Code
       identifier: serverless_azure_app_services_windows_code
-      url: serverless/azure_app_services/azure_app_services_windows
+      url: serverless/azure_app_service/windows_code
       parent: serverless_app_services
       weight: 403
     - name: Azure Container Apps
@@ -3337,14 +3355,17 @@ menu:
       url: serverless/google_cloud_run/containers
       parent: serverless_gcr
       weight: 701
+      identifier: serverless_gcr_containers
     - name: Functions
       url: serverless/google_cloud_run/functions
       parent: serverless_gcr
       weight: 702
+      identifier: serverless_gcr_functions
     - name: Functions (1st generation)
       url: serverless/google_cloud_run/functions_1st_gen
       parent: serverless_gcr
       weight: 703
+      identifier: serverless_gcr_functions_1st_gen
     - name: Glossary
       url: serverless/glossary
       parent: serverless
@@ -3962,6 +3983,7 @@ menu:
       url: tracing/trace_explorer/trace_queries/
       parent: trace_explorer
       weight: 603
+      identifier: trace_explorer_trace_queries
     - name: Span Tags and Attributes
       url: tracing/trace_explorer/span_tags_attributes/
       parent: trace_explorer
@@ -5671,6 +5693,7 @@ menu:
       url: logs/log_configuration/processors/
       parent: log_configuration
       weight: 202
+      identifier: log_configuration_processors
     - name: Parsing
       identifier: log_configuration_parsing
       url: logs/log_configuration/parsing/
@@ -7913,10 +7936,12 @@ menu:
       url: account_management/billing/pricing
       parent: account_management_billing
       weight: 1201
+      identifier: account_management_billing_pricing
     - name: Product Allotments
       url: account_management/billing/product_allotments
       parent: account_management_billing
       weight: 1202
+      identifier: account_management_billing_product_allotments
     - name: Containers
       identifier: account_management_billing_containers
       url: account_management/billing/containers
