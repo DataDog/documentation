@@ -267,6 +267,7 @@ The following table summarizes which Browser Test step types are supported by st
 | Scroll                   | {{< X >}}                       |       |
 | Select option            | {{< X >}}                       |       |
 | Wait                     | {{< X >}}                       |       |
+| Run API test             | {{< X >}}                       |       |
 | Assert checkbox state    | {{< X >}}                       |       |
 | Assert current URL       | {{< X >}}                       |       |
 | Assert element attribute | {{< X >}}                       |       |
@@ -288,7 +289,6 @@ The following table summarizes which Browser Test step types are supported by st
 | Go to email link         | Not supported            |
 | Upload files             | Not supported            |
 | Assert natural language  | Not supported            |
-| Run API test             | Not supported            |
 | Assert from JavaScript   | Not supported            |
 | Extract from JavaScript  | Not supported            |
 | Press key                | Not supported            |
