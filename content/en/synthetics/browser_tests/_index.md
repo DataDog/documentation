@@ -231,12 +231,12 @@ You can switch tabs in a browser test recording in order to perform an action on
 Step replay allows you to re-run one or more steps of your browser test directly from the Datadog Synthetic Monitoring Chrome extension. This feature helps you establish the correct state when adding or editing steps in the middle of a long test, so you don't need to manually replay the entire test from the beginning.
 
 <div class="alert alert-warning">
-  <p>The current version of the extension<strong> <span style="font-weight: bold;">does not have Chrome's debugger permission</span></strong>, as a result:</p>
+  <p>The current version of the extension <strong>does not have <a href="https://developer.chrome.com/docs/extensions/reference/api/debugger">Chrome's debugger permission</a> yet</strong>, as a result:</p>
   <ul>
-    <li>Some advanced actions are <strong>not supported</strong>.</li>
+    <li><strong>JavaScript-based steps, and keystroke simulations</strong> are <strong>not yet available</strong>.</li>
     <li>Certain steps (like <strong>click</strong> or <strong>hover</strong>) may behave <strong>differently</strong> than in a full Synthetic Monitoring test run.</li>
-    <li><strong>JavaScript-based assertions or extractions, keystroke simulations, and email interactions</strong> are <strong> unavailable</strong>.</li>
   </ul>
+  <p>A version of the extension with Chrome's debugger permission is <strong>coming soon</strong>.</p>
 </div>
 
 ### How to use step replay
@@ -283,16 +283,16 @@ The following table summarizes which Browser Test step types are supported by st
 
 | Step type                | Supported by step replay |
 |--------------------------|:------------------------:|
-| Assert email             | Not supported            |
-| Assert requests          | Not supported            |
-| Extract from email body  | Not supported            |
-| Go to email link         | Not supported            |
-| Upload files             | Not supported            |
-| Assert natural language  | Not supported            |
-| Assert from JavaScript   | Not supported            |
-| Extract from JavaScript  | Not supported            |
-| Press key                | Not supported            |
-| Type text                | Not supported            |
+| Assert from JavaScript   | Coming soon with the debugger permission |
+| Extract from JavaScript  | Coming soon with the debugger permission |
+| Press key                | Coming soon with the debugger permission |
+| Type text                | Coming soon with the debugger permission |
+| Assert email             | Not supported yet        |
+| Assert requests          | Not supported yet        |
+| Extract from email body  | Not supported yet        |
+| Go to email link         | Not supported yet        |
+| Upload files             | Not supported yet        |
+| Assert natural language  | Not supported yet        |
 
 ## Permissions
 
