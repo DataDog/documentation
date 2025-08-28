@@ -1,7 +1,8 @@
 ---
-title: Control Sensitive Logs Data
+title: Manage Sensitive Logs Data Access
 aliases:
   - /logs/guide/restrict-access-to-sensitive-data-with-rbac
+  - /logs/guide/control-sensitive-logs-data/
 further_reading:
   - link: /logs/guide/logs-rbac/
     tag: Documentation
@@ -16,10 +17,6 @@ further_reading:
     tag: "Blog"
     text: "Build compliance, governance, and transparency across your teams with Datadog Audit Trail"
 ---
-
-{{< callout url="https://www.datadoghq.com/product-preview/role-based-sensitive-data-unmasking-in-logs" btn_hidden="false" >}}
-Role-based sensitive data unmasking in logs is in Preview. To enroll, click <b>Request Access</b>.
-{{< /callout >}}
 
 ## Overview
 
@@ -39,6 +36,10 @@ If you have already indexed logs that contain sensitive data, then follow these 
 1. [Determine the scope of the data being sent](#determine-the-scope-of-the-data-being-sent)
 2. [Fix the source of the data upstream](#fix-the-source-of-the-data-upstream)
 3. [Handle data already sent to Datadog](#handle-data-already-sent-to-and-indexed-in-datadog)
+
+### Mask action
+
+{{% sds-mask-action %}}
 
 ## Determine the scope of the data being sent
 
