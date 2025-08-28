@@ -46889,9 +46889,13 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get AWS Scan Options
+      summary: List AWS Scan Options
       tags:
       - Agentless Scanning
+      x-given:
+        aws_scan_options:
+          source: data[0]
+          step: there is a valid "aws_scan_options" in the system
       x-menu-order: 1
       x-undo:
         type: safe
@@ -46924,7 +46928,7 @@ paths:
       tags:
       - Agentless Scanning
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 3
       x-undo:
         operationId: DeleteAwsScanOptions
         parameters:
@@ -46951,9 +46955,35 @@ paths:
       summary: Delete AWS Scan Options
       tags:
       - Agentless Scanning
-      x-menu-order: 4
+      x-menu-order: 5
       x-undo:
         type: idempotent
+    get:
+      description: Fetches the Agentless scan options for an activated account.
+      operationId: GetAwsScanOptions
+      parameters:
+      - $ref: '#/components/parameters/AwsAccountId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AwsScanOptionsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get AWS scan options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 2
+      x-undo:
+        type: safe
     patch:
       description: Update the Agentless scan options for an activated account.
       operationId: UpdateAwsScanOptions
@@ -46981,7 +47011,7 @@ paths:
       tags:
       - Agentless Scanning
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v2/agentless_scanning/ondemand/aws:
@@ -47002,7 +47032,7 @@ paths:
       summary: Get AWS On Demand tasks
       tags:
       - Agentless Scanning
-      x-menu-order: 5
+      x-menu-order: 6
       x-permission:
         operator: OR
         permissions:
@@ -47038,7 +47068,7 @@ paths:
       tags:
       - Agentless Scanning
       x-codegen-request-body-name: body
-      x-menu-order: 7
+      x-menu-order: 8
       x-permission:
         operator: OR
         permissions:
@@ -47069,7 +47099,7 @@ paths:
       summary: Get AWS On Demand task by id
       tags:
       - Agentless Scanning
-      x-menu-order: 6
+      x-menu-order: 7
       x-permission:
         operator: OR
         permissions:
