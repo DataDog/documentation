@@ -37,7 +37,7 @@
   },
   "ListAwsScanOptions": {
     "description": "Fetches the scan options configured for AWS accounts.",
-    "summary": "Get AWS Scan Options"
+    "summary": "List AWS Scan Options"
   },
   "CreateAwsScanOptions": {
     "description": "Activate Agentless scan options for an AWS account.",
@@ -48,6 +48,10 @@
   "DeleteAwsScanOptions": {
     "description": "Delete Agentless scan options for an AWS account.",
     "summary": "Delete AWS Scan Options"
+  },
+  "GetAwsScanOptions": {
+    "description": "Fetches the Agentless scan options for an activated account.",
+    "summary": "Get AWS scan options"
   },
   "UpdateAwsScanOptions": {
     "description": "Update the Agentless scan options for an activated account.",
