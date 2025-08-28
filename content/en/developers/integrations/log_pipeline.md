@@ -42,7 +42,7 @@ Below are important concepts to understand before building your pipeline. See [L
 
 To follow these steps, you must be registered as a Technology Partner and have access to a Datadog developer instance. If you have not yet joined, see [Join the Datadog Partner Network][6].
 
-1. [Create a pipeline that filters by your integration’s log source](#create-a-pipeline).
+1. [Create a pipeline that filters by your integration's log source](#create-a-pipeline).
 2. [Add processors to normalize and enrich logs](#add-processors).
 3. [Create custom facets to improve user filtering and exploration](#define-custom-facets).
 4. [Validate and test the pipeline](#validate-and-test-your-log-pipeline).
@@ -52,7 +52,7 @@ To follow these steps, you must be registered as a Technology Partner and have a
 ### Create a pipeline
 
 1. Navigate to the [**Pipelines**][7] page and select **New Pipeline**.
-2. In the **Filter** field, filter by your integration's logs source (e.g., `source:okta`). Your logs source can be found in the **Data** tab when viewing your integration in the Developer Platform.
+2. In the **Filter** field, filter by your integration's logs source (`source:<logs_source>`). Your logs source can be found in the **Data** tab when viewing your integration in the Developer Platform.
 3. (Optional) Add tags and a description.
 4. Click **Create**.
 
@@ -81,16 +81,16 @@ To add a processor, open your newly created pipeline and select **Add Processor*
 
 ### Define custom facets
 
-Once logs are normalized and enriched, the next step is to create custom facets, which map individual attributes to user-friendly fields in Datadog.
+After logs are normalized and enriched, the next step is to create custom facets, which map individual attributes to user-friendly fields in Datadog.
    - While not strictly required, custom facets provide key benefits:
-      - They give users a simple, consistent interface for filtering logs. Facets also power autocomplete in the Logs Explorer, making it easier to discover and aggregate important information.
+      - They give users a consistent interface for filtering logs. Facets also power autocomplete in the Logs Explorer, making it easier to discover and aggregate important information.
       - They allow attributes with low readability to be renamed with clear, user-friendly labels. For example, `@deviceCPUper` → `Device CPU Utilization Percentage`.
-   - Facets can be either qualitative (string or numeric values used for simple filtering and grouping) or quantitative, known as measures (numeric values used for aggregation, such as averaging or range filtering). See [Facets][5] to learn more.
+   - Facets can be either qualitative (string or numeric values used for basic filtering and grouping) or quantitative, known as measures (numeric values used for aggregation, such as averaging or range filtering). See [Facets][5] to learn more.
    - Create facets for attributes that users are most likely to filter, search, or group by in the Logs Explorer.
 
 **Note**: You do not need to create facets for [Datadog Standard Attributes][9]. These attributes are mapped to predefined facets, which Datadog automatically generates when a pipeline is published.
 
-Once you’ve identified the attributes that can benefit facets, follow these steps for each:
+After you've identified the attributes that can benefit facets, follow these steps for each:
 
 1. Navigate to the [Logs Explorer][19].
 2. Click **Add** in the facets panel.
@@ -116,8 +116,8 @@ Prior to testing your pipeline, review the following requirements to avoid commo
 - **Disable `Preserve source attribute` when using a general [Remapper][14]**: Enable this option only if the attribute is required for downstream processing, or if you are updating an existing pipeline and need to maintain backward compatibility.
 - **Do not duplicate existing Datadog facets**: To avoid confusion with existing out-of-the-box Datadog facets, do not create custom facets that overlap with [Datadog Standard Attributes][9].
 - **Use a custom prefix for custom facets**: Attributes that do not map to a [Datadog Standard Attribute][9] must include a unique prefix when being mapped to a custom facet. Use the general [Remapper][14] to add a prefix.
-- **Group custom facets**: Assign all custom facets to a group that matches your integration’s name.
-- **Match facet data types**: Ensure the facet’s data type (String, Boolean, Double, or Integer) matches the type of the attribute it maps to. Mismatched types can prevent the facet from working correctly.
+- **Group custom facets**: Assign all custom facets to a group that matches your integration's name.
+- **Match facet data types**: Ensure the facet's data type (String, Boolean, Double, or Integer) matches the type of the attribute it maps to. Mismatched types can prevent the facet from working correctly.
 - **Protect Datadog API and application keys**: Never log API keys. Keys should only be passed in request headers, not in log messages.
 
 ### Validate and test your log pipeline
@@ -125,7 +125,7 @@ Prior to testing your pipeline, review the following requirements to avoid commo
 Test your pipeline to confirm that logs are being parsed, normalized, and enriched correctly. For more complex pipelines, the [Pipeline Scanner][20] may be helpful.
 
 1. Generate new logs that flow through the pipeline.
-   - The pipeline will be automatically triggered if Datadog ingests a log matching the filter query.
+   - Pipelines are automatically triggered if Datadog ingests a log matching the filter query.
    - If the pipeline is not triggered, ensure it is enabled with the toggle.
 2. Verify custom facets in the [Logs Explorer][19] by checking that they appear and filter results as expected.
 3. Inspect individual logs in the Log Details panel to ensure:
@@ -140,12 +140,12 @@ The final step is to export the pipeline and upload the files to the Developer P
    {{< img src="developers/integrations/export_pipeline.png" alt="Click the Export Pipeline icon to export your log pipeline in Datadog" width="50%">}}
 2. Review the pipeline and click **Select Facets**.
 3. Select only the custom facets created for this integration and click **Add Sample Logs**.
-   - Facets for [Datadog Standard Attributes][9] will automatically be created by Datadog.
+   - Facets for [Datadog Standard Attributes][9] are automatically created by Datadog.
 4. Add sample logs.
-   - These samples must be in the format in which logs will be sent to the Datadog Logs API or ingested via the Datadog Agent.
+   - These samples must be in the format in which logs are sent to the Datadog Logs API or ingested with the Datadog Agent.
    - Ensure samples have coverage for variations of remappers. For example, if you've defined a category processor, add samples that trigger different category values.
 5. Click **Export**.
-   - Two YAML files will be generated: one for the pipeline definition and one that Datadog will use internally for testing. 
+   - Two YAML files are generated: one for the pipeline definition and one that Datadog uses internally for testing. 
 6. Upload the two YAML files to the Developer Platform, under **Data** > **Submitted Data** > **Logs**.
    {{< img src="developers/integrations/data_tab.png" alt="The Data tab in the Integration Developer Platform" style="width:100%;" >}}
 
