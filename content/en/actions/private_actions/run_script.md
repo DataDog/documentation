@@ -115,14 +115,13 @@ services:
 ```
 
 ```yaml
-# config.yaml
-bundles:
-  "com.datadoghq.script":
-    runPredefinedScript:
-      run-some-script:
-        command: ["/opt/scripts/some-script.sh"]
-      run-python:
-        command: ["python", "/opt/scripts/some-script.py"]
+# credentials/script.yaml
+schemaId: script-credentials-v1
+runPredefinedScript:
+  python:
+    command: ["python3", "/etc/dd-action-runner-script/scripts/script.py"]
+  shell:
+    command: [ "bash", "/etc/dd-action-runner-script/scripts/script.sh" ]
 ```
 
 [1]: /actions/private_actions/use_private_actions/?tab=docker#supported-private-actions
