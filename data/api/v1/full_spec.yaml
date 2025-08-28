@@ -35762,14 +35762,6 @@ paths:
         required: false
         schema:
           type: boolean
-      - description: The offset from which to start returning results.
-        in: query
-        name: start
-        required: false
-        schema:
-          default: 0
-          format: int64
-          type: integer
       - description: The maximum number of results to return.
         in: query
         name: count
