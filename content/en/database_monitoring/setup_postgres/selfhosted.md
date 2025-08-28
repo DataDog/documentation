@@ -209,7 +209,7 @@ When it prompts for a password, use the password you entered when you created th
 ## Install the Agent
 
 Installing the Datadog Agent also installs the Postgres check, which is required for Database Monitoring on Postgres. 
-If you haven’t installed the Agent, see the [Agent installation instructions][8]. Then, return here to continue with the instructions for your installation method.
+If you haven't installed the Agent, see the [Agent installation instructions][8]. Then, return here to continue with the instructions for your installation method.
 
 Edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to the Postgres instance you want to monitor. For a complete list of configuration options, see the [sample postgres.d/conf.yaml][1].
 
