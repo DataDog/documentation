@@ -170,7 +170,7 @@ Iterate over steps extracting variables for browser and mobile tests:
 
 ## Display custom notifications message
 
-Synthetic Monitoring monitors support the ability to display **only the custom notification message** in alert notifications, hiding all default enriched content such as query details, tags, screenshots, and footers.
+Synthetic Monitoring notifications support the ability to display **only the custom notification message** in alert notifications, hiding all default enriched content such as query details, tags, screenshots, and footers.
 
 By default, all monitors include enriched details in the alert message. This may include:
 - Test metadata

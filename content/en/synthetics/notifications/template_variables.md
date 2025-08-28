@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Template variables allow you to insert values from the test results and configuration into the message and are accessed using the standard `synthetics.attributes` prefix. For example:
+Template variables allow you to insert dynamic values from your test results and configuration into Synthetic Monitoring notification messages. Access these variables using the `synthetics.attributes` prefix. For example:
 
 ```text
 Test failed at step {{synthetics.failed_step.name}} with error: {{synthetics.failed_step.failure.message}}.
@@ -246,7 +246,7 @@ Similar to standard API tests, the variables are listed in the `variables.extrac
 {{< tabs >}}
 {{% tab "General steps" %}}
 
-For multistep/browser/mobile tests:
+**For multistep/browser/mobile tests**:
 
 `.steps.allowFailure`
 : Whether the step is allowed to fail without failing the entire test
@@ -844,7 +844,7 @@ Examples for `.browserErrors`:
 {{< /collapse-content >}}
 
 {{% /tab %}}
-{{% tab "Summary and shortcuts" %}}
+{{% tab "Step summary" %}}
 
 **Step Summary:**
 - `.result.steps.<step_id>`
@@ -871,13 +871,6 @@ Then you access the data as usual, for example:
 
 **Summary Data:**
 - `.count.steps.{total,completed}`, `.count.errors`, `.count.hops` (for example, `4`)
-
-**Shortcuts:**
-- `synthetics.failed_step` points to the first non-skippable failed step
-
-**Tags:**
-- `{{tags}}`: All tags
-- `{{tag.<key>}}`: Specific tag
 
 **Service Tag:**
 If `service` tag is set:
