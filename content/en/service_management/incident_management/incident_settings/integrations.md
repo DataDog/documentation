@@ -91,7 +91,7 @@ To use Incident Management's Microsoft Teams features, you must first [install t
 
 After you do that, go to **[Service Management > Incidents > Settings > Integrations][2]** to configure the Microsoft Teams features for Incident Management.
 
-### Declaring and Managing Incidents in Microsoft Teams
+### Declaring and managing incidents in Microsoft Teams
 
 To declare or manage an incident from a particular team, you must first [add the Datadog application to the team][7].
 
