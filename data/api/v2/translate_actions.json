@@ -1579,6 +1579,26 @@
     "request_description": "",
     "request_schema_description": "A request to update an Org Config."
   },
+  "ListOrgConnections": {
+    "description": "Returns a list of org connections.",
+    "summary": "List Org Connections"
+  },
+  "CreateOrgConnections": {
+    "description": "Create a new org connection between the current org and a target org.",
+    "summary": "Create Org Connection",
+    "request_description": "",
+    "request_schema_description": "Request to create an org connection."
+  },
+  "DeleteOrgConnections": {
+    "description": "Delete an existing org connection.",
+    "summary": "Delete Org Connection"
+  },
+  "UpdateOrgConnections": {
+    "description": "Update an existing org connection.",
+    "summary": "Update Org Connection",
+    "request_description": "",
+    "request_schema_description": "Request to update an org connection."
+  },
   "ListPermissions": {
     "description": "Returns a list of all permissions, including name, description, and ID.",
     "summary": "List permissions"

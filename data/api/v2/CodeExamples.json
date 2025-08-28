@@ -1018,6 +1018,20 @@
       "description": "Update a single service object returns \"OK\" response"
     }
   ],
+  "CreateOrgConnections": [
+    {
+      "group": "org_connections",
+      "suffix": "",
+      "description": "Create Org Connection returns \"OK\" response"
+    }
+  ],
+  "UpdateOrgConnections": [
+    {
+      "group": "org_connections",
+      "suffix": "",
+      "description": "Update Org Connection returns \"OK\" response"
+    }
+  ],
   "UpdateOrgConfig": [
     {
       "group": "organizations",
