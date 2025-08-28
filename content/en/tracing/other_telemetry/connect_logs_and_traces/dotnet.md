@@ -42,8 +42,7 @@ Ensure that log collection is configured in the Datadog Agent and that the [Logs
 To inject correlation identifiers into your log messages, follow the instructions for your logging library.
 
 <div class="alert alert-info">
-  <div class="alert-info">See the <a href="https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/AutomaticTraceIdInjection">samples in dd-trace-dotnet</a> for more examples.</div>
-  </div>
+  See the <a href="https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/AutomaticTraceIdInjection">samples in dd-trace-dotnet</a> for more examples.
 </div>
 
 {{< tabs >}}
@@ -210,15 +209,17 @@ Next, complete the setup for either automatic or manual injection.
 
 ## Automatic injection
 
-The final step to enable automatic correlation identifier injection is to:
+To enable automatic correlation identifier injection, ensure `DD_LOGS_INJECTION` is enabled.
 
-1. Enable `DD_LOGS_INJECTION=true` in the .NET Tracer's environment variables. To configure the .NET Tracer with a different method, see [Configuring the .NET Tracer][6].
+Starting in version 3.24.0, `DD_LOGS_INJECTION` is enabled by default. For older versions, set `DD_LOGS_INJECTION=true` in the .NET Tracer's environment variables.
+
+To configure the .NET Tracer with a different method, see [Configuring the .NET Tracer][6].
 
 After configuring the correlation identifier injection, see [C# Log Collection][7] to configure your log collection.
 
 **Note:** To correlate traces with logs, you might need to set up a [trace ID remapper][8] to parse `dd_trace_id` as the log's trace ID. See [Correlated Logs Not Showing Up in the Trace ID Panel][9] for more information.
 
-<div class="alert alert-info">Starting in version 2.35.0, if <a href="/agent/remote_config/">Agent Remote Configuration</a> is enabled where this service runs, you can set <code>DD_LOGS_INJECTION</code> in the <a href="/tracing/software_catalog">Software Catalog</a> UI.</div>
+<div class="alert alert-info">Starting in version 2.35.0, if <a href="/remote_configuration">Agent Remote Configuration</a> is enabled where this service runs, you can set <code>DD_LOGS_INJECTION</code> in the <a href="/tracing/software_catalog">Software Catalog</a> UI.</div>
 
 ## Manual injection
 

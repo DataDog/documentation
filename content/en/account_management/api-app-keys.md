@@ -16,7 +16,12 @@ API keys are unique to your organization. An [API key][1] is required by the Dat
 
 [Application keys][2], in conjunction with your organization's API key, give users access to Datadog's programmatic API. Application keys are associated with the user account that created them and by default have the permissions of the user who created them.
 
-### Scopes
+### One-Time Read mode
+
+All application keys for new parent organizations (and their child organizations) created after August 20th, 2025 are in One-Time Read (OTR) mode. OTR mode is a security feature that limits the visibility of application key secrets to creation time only. All application key secrets are only displayed once during creation and cannot be retrieved later for security purposes.
+
+### Scopes 
+
 
 To better protect and secure your applications, you can specify authorization scopes for your application keys to define more granular permissions and minimize the access that applications have to your Datadog data. This gives you fine-grained access control over your applications and minimizes security vulnerabilities by limiting extraneous access. For example, an application that only reads dashboards does not need admin rights to manage users or delete any of your organization's data.
 

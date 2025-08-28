@@ -50,6 +50,7 @@ If you're new to IDP, start with the [Getting Started guide][5], which walks thr
     {{< nextlink href="/internal_developer_portal/scorecards" >}}Promote engineering best practices at scale with Scorecards{{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/self_service_actions" >}}Accelerate releases through Self-Service Actions{{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/eng_reports" >}}Track reliability and scorecard compliance with Engineering Reports{{< /nextlink >}}
+    {{< nextlink href="/internal_developer_portal/external_provider_status" >}}Monitor external dependencies with External Provider Status{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Working with teams

@@ -37,13 +37,13 @@ Cloud SIEM Investigator proporciona una interfaz gráfica para que puedas pasar 
 {{< tabs >}}
 {{% tab "AWS" %}}
 
-1. Ve a **Security** > **Cloud SIEM** (Seguridad > Cloud SIEM) y haz clic en la pestaña [**Investigator**][1].
+1. Ve a **Security** > **Cloud SIEM** (Seguridad > Cloud SIEM) y haz clic en la pestaña **Investigate** (Investigar) y luego en la pestaña [**AWS Investigator**][1].
 
 2. Selecciona un tipo de entidad en el menú desplegable del campo **In** (En).
 
 3. Selecciona una entidad o introduce un nombre de entidad específico en el campo **Investigate** (Investigar) para ver un diagrama de las actividades asociadas a la entidad.
 
-4. Haz clic en un nodo y selecciona **View related logs** (Ver logs relacionados) o **View in Log Explorer** (Ver en Log Explorer) para ver los logs relacionados. Utiliza el menú desplegable **and filter by** (y filtrar por) para filtrar por acciones.
+4. Haz clic en un nodo y selecciona **View related logs** (Ver logs relacionados) o **View related signals** (Ver señales relacionadas) para investigar más. Utiliza el menú desplegable **Search for** (Buscar por) para filtrar por acciones.
 
 [1]: https://app.datadoghq.com/security/investigator/aws
 
@@ -51,30 +51,42 @@ Cloud SIEM Investigator proporciona una interfaz gráfica para que puedas pasar 
 
 {{% tab "GCP" %}}
 
-1. Ve a **Security** > **Cloud SIEM** (Seguridad > Cloud SIEM) y haz clic en la pestaña **Investigator**y luego en la pestaña [**GCP**][1].
+1. Ve a **Security** > **Cloud SIEM** (Seguridad > Cloud SIEM) y haz clic en la pestaña **Investigate** (Investigar) y luego en la pestaña [**GCP Investigator**][1].
 
 2. Selecciona un tipo de entidad en el menú desplegable del campo **In** (En).
 
 3. Selecciona una entidad o introduce un nombre de entidad específico en el campo **Investigate** (Investigar) para ver un diagrama de las actividades asociadas a la entidad.
 
-4. Haz clic en un nodo y selecciona **View related logs** (Ver logs relacionados) o **View in Log Explorer** (Ver en Log Explorer) para ver los logs relacionados. Utiliza el menú desplegable **and filter by** (y filtrar por) para filtrar por acciones.
+4. Haz clic en un nodo y selecciona **View related logs** (Ver logs relacionados) o **View related signals** (Ver señales relacionadas) para investigar más. Utiliza el menú desplegable **Search for** (Buscar por) para filtrar por acciones.
 
 [1]: https://app.datadoghq.com/security/investigator/gcp
 {{% /tab %}}
 
 {{% tab "Azure" %}}
 
-1. Ve a **Security** > **Cloud SIEM** (Seguridad > Cloud SIEM) y haz clic en la pestaña **Investigator**y luego en la pestaña [**Azure**][1].
+1. Ve a **Security** > **Cloud SIEM** (Seguridad > Cloud SIEM) y haz clic en la pestaña **Investigate** (Investigar) y luego en la pestaña [**Azure Investigator**][1].
 
 2. Selecciona un tipo de entidad en el menú desplegable del campo **In** (En).
 
 3. Selecciona una entidad o introduce un nombre de entidad específico en el campo **Investigate** (Investigar) para ver un diagrama de las actividades asociadas a la entidad.
 
-4. Haz clic en un nodo y selecciona **View related logs** (Ver logs relacionados) o **View in Log Explorer** (Ver en Log Explorer) para ver los logs relacionados. Utiliza el menú desplegable **and filter by** (y filtrar por) para filtrar por acciones.
+4. Haz clic en un nodo y selecciona **View related logs** (Ver logs relacionados) o **View related signals** (Ver señales relacionadas) para investigar más. Utiliza el menú desplegable **Search for** (Buscar por) para filtrar por acciones.
 
 [1]: https://app.datadoghq.com/security/investigator/azure
 {{% /tab %}}
 
+{{% tab "Datadog" %}}
+
+1. Ve a **Security** > **Cloud SIEM** (Seguridad > Cloud SIEM) y haz clic en la pestaña **Investigate** (Investigar) y luego en la pestaña [**Datadog Investigator**][1].
+
+2. Selecciona un tipo de entidad en el menú desplegable del campo **In** (En).
+
+3. Selecciona una entidad o introduce un nombre de entidad específico en el campo **Investigate** (Investigar) para ver un diagrama de las actividades asociadas a la entidad.
+
+4. Haz clic en un nodo y selecciona **View related Audit Trail** (Ver Audit Trail relacionado) o **View related signals** (Ver señales relacionadas) para investigar más. Utiliza el menú desplegable **Search for** (Buscar por) para filtrar por acciones.
+
+[1]: https://app.datadoghq.com/security/investigator/datadog
+{{% /tab %}}
 {{< /tabs >}}
 
 También puedes navegar hasta Cloud SIEM Investigator directamente desde una señal de seguridad. En el panel de señales de seguridad, haz clic en **Investigate user activity** (Investigar actividad del usuario) (donde `user` es la identidad de usuario en cuestión) para ver la vista de Investigator filtrada por la identidad de usuario específica.
