@@ -86,17 +86,6 @@ bundles:
         command: ["echo", "{{ parameters.nested.echoValue }}"]
 ```
 
-### Docker configuration example
-
-```yaml
-services:
-  runner:
-    image: datadog/private-action-runner-dev:latest@sha256:4e990e496b79d02514c19a633042d27be1ba8e7a4b9018efd0e942ed1a070ad8
-    volumes:
-      - "./config:/etc/dd-action-runner/config"
-      - "./scripts:/opt/scripts:ro"
-```
-
 ### Using the configured scripts
 
 In your workflow or app, configure the action to use the `runPredefinedScript` with the script name you defined (for example, `echo` or `echo-parametrized`).
