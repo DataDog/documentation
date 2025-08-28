@@ -79,7 +79,7 @@ logger.info(`Hello world!`);
 
 6. **Send custom metrics**.
 
-   To send custom metrics, [view code examples][3].
+   To send custom metrics, [view code examples][3]. In serverless, only the *distribution* metric type is supported.
 
 {{% gcr-env-vars instrumentationMethod="in-container" language="nodejs" %}}
 

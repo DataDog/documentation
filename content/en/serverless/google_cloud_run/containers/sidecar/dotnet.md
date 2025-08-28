@@ -89,7 +89,7 @@ logger.LogInformation("Hello World!");
 
 5. **Send custom metrics**.
 
-   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5].
+   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
 {{% gcr-env-vars instrumentationMethod="sidecar" language="csharp" %}}
 
