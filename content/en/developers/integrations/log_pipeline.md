@@ -23,16 +23,16 @@ description: Learn how to create a Datadog Log Integration Pipeline.
 Log pipelines parse, filter, and enrich incoming logs to make them searchable and actionable within Datadog. For Technology Partners, pipelines ensure that their logs are delivered in a structured, meaningful format right out of the box. For end users, prebuilt pipelines reduce the need to create custom parsing rules, allowing them to focus on troubleshooting and monitoring.
 
 This guide explains how to create a log pipeline for integrations that send logs into Datadog, including best practices and requirements. For a hands-on learning experience, check out related courses in the Datadog Learning Center:
-   - [Process Logs Out of the Box with Integration Pipelines][20]
-   - [Build and Manage Log Pipelines][34] 
+   - [Process Logs Out of the Box with Integration Pipelines][1]
+   - [Build and Manage Log Pipelines][2] 
 
 ### Core concepts
 
-Below are important concepts to understand before building your pipeline. See [Log Pipelines][13] to learn more.
+Below are important concepts to understand before building your pipeline. See [Log Pipelines][3] to learn more.
 
-- **Processors**: The building blocks that transform or enrich logs. See [Processors][10] to learn more.
+- **Processors**: The building blocks that transform or enrich logs. See [Processors][4] to learn more.
 
-- **Facets**: Provide a straightforward filtering interface for logs and improve readability by exposing clear, human-friendly labels for important attributes. See [Facets][12] to learn more.
+- **Facets**: Provide a straightforward filtering interface for logs and improve readability by exposing clear, human-friendly labels for important attributes. See [Facets][5] to learn more.
 
 - **Nested pipelines**: Pipelines within a pipeline that allow you to split processing into separate paths for different log types or conditions.
 
@@ -40,7 +40,7 @@ Below are important concepts to understand before building your pipeline. See [L
 
 ## Building an integration log pipeline
 
-To follow these steps, you must be registered as a Technology Partner and have access to a Datadog developer instance. If you have not yet joined, see [Join the Datadog Partner Network][35].
+To follow these steps, you must be registered as a Technology Partner and have access to a Datadog developer instance. If you have not yet joined, see [Join the Datadog Partner Network][6].
 
 1. [Create a pipeline that filters by your integration’s log source](#create-a-pipeline).
 2. [Add processors to normalize and enrich logs](#add-processors).
@@ -51,7 +51,7 @@ To follow these steps, you must be registered as a Technology Partner and have a
 
 ### Create a pipeline
 
-1. Navigate to the [**Pipelines**][3] page and select **New Pipeline**.
+1. Navigate to the [**Pipelines**][7] page and select **New Pipeline**.
 2. In the **Filter** field, filter by your integration's logs source (e.g., `source:okta`). Your logs source can be found in the **Data** tab when viewing your integration in the Developer Platform.
 3. (Optional) Add tags and a description.
 4. Click **Create**.
@@ -65,33 +65,33 @@ To add a processor, open your newly created pipeline and select **Add Processor*
       - To maintain optimal grok parsing performance, avoid wildcard matchers.
    - Skip this step if logs are already sent to Datadog in JSON format.
 2. Normalize logs with Datadog Standard Attributes in mind.
-   - Map incoming attributes to [Datadog Standard Attributes][6] so logs are consistent across the platform. For example, an attribute for a client IP value should be remapped to `network.client.ip`.
-   - For reserved attributes (`date`, `message`, `status`, `service`), use the dedicated processors: [Date Remapper][4], [Message Remapper][29], [Status Remapper][25], [Service Remapper][7].
+   - Map incoming attributes to [Datadog Standard Attributes][9] so logs are consistent across the platform. For example, an attribute for a client IP value should be remapped to `network.client.ip`.
+   - For reserved attributes (`date`, `message`, `status`, `service`), use the dedicated processors: [Date Remapper][10], [Message Remapper][11], [Status Remapper][12], [Service Remapper][13].
       - **Important**: Remappers must be explicitly added for these attributes, even if the incoming value matches Datadog defaults. Organization-level overrides can change default behavior.
    - At a minimum, add a Date Remapper to map the log timestamp to the reserved `date` attribute.
-   - For non-reserved standard attributes, use the general [Remapper][5].
+   - For non-reserved standard attributes, use the general [Remapper][14].
       - Unless updating an existing integration log pipeline, disable **Preserve source attribute** to prevent duplicate values.
 3. Enrich logs as needed. 
-   - For a list of all log processors, see the [Processors][10] documentation.
+   - For a list of all log processors, see the [Processors][4] documentation.
    - Consider adding processors that provide context or derived attributes, such as:
-      - [Geo IP Parser][30] to add geolocation data based on an IP address field.
-      - [Category Processor][19] to group logs by predefined rules.
-      - [Arithmetic Processor][31] to compute numeric values from existing attributes.
-      - [String Builder Processor][32] to concatenate multiple attributes into a single field.
+      - [Geo IP Parser][15] to add geolocation data based on an IP address field.
+      - [Category Processor][16] to group logs by predefined rules.
+      - [Arithmetic Processor][17] to compute numeric values from existing attributes.
+      - [String Builder Processor][18] to concatenate multiple attributes into a single field.
 
 ### Create custom facets
 
-Once logs are normalized and enriched, the next step is to make them easier to explore in the [Logs Explorer][16] by creating custom facets. 
-   - Facets can be either qualitative (string or numeric values used for simple filtering and grouping) or quantitative, known as Measures (numeric values used for aggregation, such as averaging or range filtering). See [Facets][12] to learn more.
+Once logs are normalized and enriched, the next step is to make them easier to explore in the [Logs Explorer][21] by creating custom facets. 
+   - Facets can be either qualitative (string or numeric values used for simple filtering and grouping) or quantitative, known as Measures (numeric values used for aggregation, such as averaging or range filtering). See [Facets][5] to learn more.
    - While not strictly required, custom facets provide key benefits:
       - They give users a simple, consistent interface for filtering logs. Facets also power autocomplete in the Logs Explorer, making it easier to discover and aggregate important information.
       - They allow attributes with low readability to be renamed with clear, user-friendly labels. For example, `@deviceCPUper` → `Device CPU Utilization Percentage`.
 
-**Note**: You do not need to create facets for [Datadog Standard Attributes][6]. These attributes are mapped to predefined facets, which Datadog automatically generates when a pipeline is published.
+**Note**: You do not need to create facets for [Datadog Standard Attributes][9]. These attributes are mapped to predefined facets, which Datadog automatically generates when a pipeline is published.
 
 #### Create a custom facet
 
-1. Navigate to the [Logs Explorer][33].
+1. Navigate to the [Logs Explorer][19].
 2. Click **Add** in the facets panel.
 3. Choose whether to create a **Facet** or **Measure**, then expand **Advanced options**.
 4. Define the **Path**.
@@ -104,7 +104,7 @@ Once logs are normalized and enriched, the next step is to make them easier to e
    - Use this same group for all additional custom facets in the integration.
 8. Add a **Description** explaining the facet.
 9. Click **Add** to save.
-10. Navigate back to the pipeline definition and add a [Remapper][5] to align the raw attribute with the prefixed path used by the facet.
+10. Navigate back to the pipeline definition and add a [Remapper][14] to align the raw attribute with the prefixed path used by the facet.
 
 ### Review requirements checklist
 
@@ -112,21 +112,21 @@ Prior to testing your pipeline, review the following requirements to avoid commo
 
 - **Log pipelines must not be empty**: Every pipeline must contain at least one processor. At a minimum, include a Date Remapper.
 - **Add dedicated remappers for `date`, `message`, `status`, and `service`**: Remappers must be explicitly added for these attributes, even if the incoming value matches Datadog defaults. Organization-level overrides can change default behavior.
-- **Disable `Preserve source attribute` when using a general [Remapper][5]**: Enable this option only if the attribute is required for downstream processing, or if you are updating an existing pipeline and need to maintain backward compatibility.
-- **Do not duplicate existing Datadog facets**: To avoid confusion with existing out-of-the-box Datadog facets, do not create custom facets that overlap with [Datadog Standard Attributes][6].
-- **Use a custom prefix for custom facets**: Attributes that do not map to a [Datadog Standard Attribute][6] must include a unique prefix when being mapped to a custom facet. Use the general [Remapper][5] to add a prefix.
+- **Disable `Preserve source attribute` when using a general [Remapper][14]**: Enable this option only if the attribute is required for downstream processing, or if you are updating an existing pipeline and need to maintain backward compatibility.
+- **Do not duplicate existing Datadog facets**: To avoid confusion with existing out-of-the-box Datadog facets, do not create custom facets that overlap with [Datadog Standard Attributes][9].
+- **Use a custom prefix for custom facets**: Attributes that do not map to a [Datadog Standard Attribute][9] must include a unique prefix when being mapped to a custom facet. Use the general [Remapper][14] to add a prefix.
 - **Group custom facets**: Assign all custom facets to a group that matches your integration’s name.
 - **Match facet data types**: Ensure the facet’s data type (String, Boolean, Double, or Integer) matches the type of the attribute it maps to. Mismatched types can prevent the facet from working correctly.
 - **Protect Datadog API and application keys**: Never log API keys. Keys should only be passed in request headers, not in log messages.
 
 ### Validate and test your log pipeline
 
-Test your pipeline to confirm that logs are being parsed, normalized, and enriched correctly. For more complex pipelines, the [Pipeline Scanner][36] may be helpful.
+Test your pipeline to confirm that logs are being parsed, normalized, and enriched correctly. For more complex pipelines, the [Pipeline Scanner][20] may be helpful.
 
 1. Generate new logs that flow through the pipeline.
    - The pipeline will be automatically triggered if Datadog ingests a log matching the filter query.
    - If the pipeline is not triggered, ensure it is enabled with the toggle.
-2. Verify custom facets in the [Logs Explorer][33] by checking that they appear and filter results as expected.
+2. Verify custom facets in the [Logs Explorer][19] by checking that they appear and filter results as expected.
 3. Inspect individual logs in the Log Details panel to ensure:
    - `service`, `source`, and `message` attributes are set correctly.
 	- Tags are applied as expected.
@@ -139,7 +139,7 @@ The final step is to export the pipeline and upload the files to the Developer P
    {{< img src="developers/integrations/export_pipeline.png" alt="Click the Export Pipeline icon to export your log pipeline in Datadog" width="50%">}}
 2. Review the pipeline and click **Select Facets**.
 3. Select only the custom facets created for this integration and click **Add Sample Logs**.
-   - Facets for [Datadog Standard Attributes][6] will automatically be created by Datadog.
+   - Facets for [Datadog Standard Attributes][9] will automatically be created by Datadog.
 4. Add sample logs.
    - These samples must be in the format in which logs will be sent to the Datadog Logs API or ingested via the Datadog Agent.
    - Ensure samples have coverage for variations of remappers. For example, if you've defined a category processor, add samples that trigger different category values.
@@ -152,39 +152,24 @@ The final step is to export the pipeline and upload the files to the Developer P
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/api/latest/logs/#send-logs
-[2]: https://docs.datadoghq.com/getting_started/site/
-[3]: https://app.datadoghq.com/logs/pipelines
-[4]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#log-date-remapper
-[5]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#remapper
-[6]: https://docs.datadoghq.com/standard-attributes/?product=log
-[7]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#service-remapper
+[1]: https://learn.datadoghq.com/courses/integration-pipelines
+[2]: https://learn.datadoghq.com/courses/log-pipelines
+[3]: https://docs.datadoghq.com/logs/log_configuration/pipelines/
+[4]: https://docs.datadoghq.com/logs/log_configuration/processors/
+[5]: https://docs.datadoghq.com/logs/explorer/facets/
+[6]: https://docs.datadoghq.com/developers/integrations/?tab=integrations#join-the-datadog-partner-network
+[7]: https://app.datadoghq.com/logs/pipelines
 [8]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#grok-parser
-[9]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#log-message-remapper
-[10]: https://docs.datadoghq.com/logs/log_configuration/processors/
-[11]: https://docs.datadoghq.com/logs/explorer/facets/#units
-[12]: https://docs.datadoghq.com/logs/explorer/facets/
-[13]: https://docs.datadoghq.com/logs/log_configuration/pipelines/
-[14]: https://docs.datadoghq.com/glossary/#facet
-[15]: https://docs.datadoghq.com/glossary/#measure
-[16]: https://docs.datadoghq.com/logs/explorer/
-[17]: https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#standard-attributes
-[18]: https://docs.datadoghq.com/developers/integrations/?tab=integrations
-[19]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#category-processor
-[20]: https://learn.datadoghq.com/courses/integration-pipelines
-[21]: https://partners.datadoghq.com/
-[22]: https://docs.datadoghq.com/developers/integrations/
-[23]: https://docs.datadoghq.com/logs/log_collection/?tab=http#additional-configuration-options
-[24]: https://docs.datadoghq.com/logs/explorer/search_syntax/#arrays
-[25]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#log-status-remapper
-[26]: https://docs.datadoghq.com/getting_started/tagging/#overview
-[27]: https://docs.datadoghq.com/logs/explorer/facets/#units
-[28]: https://docs.datadoghq.com/logs/log_configuration/pipelines/?tab=date#date-attribute
-[29]: http://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#log-message-remapper
-[30]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#geoip-parser
-[31]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#arithmetic-processor
-[32]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#string-builder-processor
-[33]: https://app.datadoghq.com/logs
-[34]: https://learn.datadoghq.com/courses/log-pipelines
-[35]: https://docs.datadoghq.com/developers/integrations/?tab=integrations#join-the-datadog-partner-network
-[36]: https://docs.datadoghq.com/logs/log_configuration/pipeline_scanner/
+[9]: https://docs.datadoghq.com/standard-attributes/?product=log
+[10]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#log-date-remapper
+[11]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#log-message-remapper
+[12]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#log-status-remapper
+[13]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#service-remapper
+[14]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#remapper
+[15]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#geoip-parser
+[16]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#category-processor
+[17]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#arithmetic-processor
+[18]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#string-builder-processor
+[19]: https://app.datadoghq.com/logs
+[20]: https://docs.datadoghq.com/logs/log_configuration/pipeline_scanner/
+[21]: https://docs.datadoghq.com/logs/explorer/
