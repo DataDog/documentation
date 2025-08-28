@@ -1,10 +1,5 @@
 ---
 title: PHP Compatibility Requirements
-code_lang: php
-type: multi-code-lang
-code_lang_weight: 40
-aliases:
-  - /security/application_security/threats/setup/compatibility/php
 ---
 
 ## App and API Protection capabilities support
@@ -19,7 +14,7 @@ The following App and API Protection capabilities are supported in the PHP libra
 | Automatic user activity event tracking | 0.89.0                     |
 | API Security | 0.98.0 |
 
-The minimum tracer version to get all supported AAP capabilities for PHP is 0.98.0.
+The minimum tracer version to get all supported App and API Protection capabilities for PHP is 0.98.0.
 
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
@@ -144,5 +139,3 @@ The following frameworks aren't directly instrumented by App and API Protection,
 | Symfony   | 3.3                       |
 | Wordpress | 4.8                       |
 
-[1]: /tracing/trace_collection/compatibility/php/
-[2]: /tracing/guide/remote_config
