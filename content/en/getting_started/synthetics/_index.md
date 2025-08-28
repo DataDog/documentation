@@ -57,7 +57,7 @@ To set up your first Synthetic test with Datadog, choose from the following opti
 
 ## Version History
 
-Use [Version History in Synthetic Monitoring][8] to restore your test to any saved version, or clone a version to create a new Synthetic Monitoring test.
+Use [Version History in Synthetic Monitoring][8] to run a previous version of a test, restore your test to any saved version, or clone a version to create a new Synthetic Monitoring test.
 
 ## Further Reading
 
