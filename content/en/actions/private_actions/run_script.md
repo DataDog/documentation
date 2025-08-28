@@ -62,16 +62,6 @@ You can either reuse an existing runner's identity by changing the image, or cre
 
 You can find the "Run Predefined Script" action marked as "experimental" in the action catalog. This action is available for use in both workflows and apps.
 
-## Manage access
-
-To use script actions, users need the following permissions:
-
-- **Private Action Runner Read**: View existing runners and configurations
-- **Private Action Runner Use**: Execute script actions through workflows and apps  
-- **Private Action Runner Write**: Create and modify runner configurations
-
-By default, users may have read-only access. Organization administrators can modify these permissions through the Datadog access management interface.
-
 ## Configuration
 
 Configure script actions through your runner's `config.yaml` file. If you create a new runner and select the script bundle, you get a default configuration.
