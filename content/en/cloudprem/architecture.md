@@ -7,7 +7,6 @@ further_reading:
 - link: "/cloudprem/install/"
   tag: "Documentation"
   text: "Install CloudPrem"
-
 ---
 
 {{< callout btn_hidden="true" >}}
