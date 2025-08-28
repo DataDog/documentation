@@ -1,39 +1,33 @@
 ---
 title: AWS Configuration
 description: Learn how to configure AWS for CloudPrem
-private: true
 further_reading:
-- link: "/cloudprem/"
+- link: "/cloudprem/install/aws_eks/"
   tag: "Documentation"
-  text: "CloudPrem Overview"
-- link: "/cloudprem/installation/"
+  text: "Install CloudPrem on AWS EKS"
+- link: "/cloudprem/ingest_logs/"
   tag: "Documentation"
-  text: "Install CloudPrem and Send Logs with the Agent"
-- link: "/cloudprem/ingress/"
-  tag: "Documentation"
-  text: "Configure CloudPrem Ingress"
-- link: "/cloudprem/processing/"
-  tag: "Documentation"
-  text: "Configure CloudPrem Log Processing"
-- link: "/cloudprem/cluster/"
-  tag: "Documentation"
-  text: "Learn more about Cluster Sizing and Operations"
-- link: "/cloudprem/architecture/"
-  tag: "Documentation"
-  text: "Learn more about CloudPrem Architecture"
-- link: "/cloudprem/troubleshooting/"
-  tag: "Documentation"
-  text: "Troubleshooting"
+  text: "Configure Log Ingestion"
 ---
+
+{{< callout btn_hidden="true" >}}
+  Datadog CloudPrem is in Preview.
+{{< /callout >}}
 
 ## Overview
 
-This guide covers how to configure your AWS account for CloudPrem. For ingress configuration, see [CloudPrem Ingress Configuration][1].
+This guide covers how to configure your AWS account prerequisites for CloudPrem deployment. This configuration is required before installing CloudPrem on AWS EKS.
+
+For the complete EKS installation process, see the [AWS EKS Installation Guide][1].
+
+## AWS prerequisites
 
 To deploy CloudPrem on AWS, you need to configure:
-- AWS credentials
-- AWS region
-- IAM permissions for S3
+- AWS credentials and authentication
+- AWS region selection
+- IAM permissions for S3 object storage
+- RDS PostgreSQL database (recommended)
+- EKS cluster with AWS Load Balancer Controller
 
 ## AWS credentials
 
@@ -68,8 +62,7 @@ Required authorized actions:
 
 Here is an example of a bucket policy:
 
-```
-
+```json
 {
  "Version": "2012-10-17",
  "Statement": [
@@ -99,9 +92,19 @@ Here is an example of a bucket policy:
 }
 ```
 
+## Next steps
+
+After completing the AWS configuration:
+
+1. **Install CloudPrem on EKS** - Follow the [AWS EKS Installation Guide][1] to deploy CloudPrem
+2. **Configure ingress** - Set up [ingress configuration][3] for external access
+3. **Set up log ingestion** - Configure [log ingestion][4] to start sending logs to CloudPrem
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /cloudprem/ingress/
+[1]: /cloudprem/install/aws_eks
 [2]: https://docs.rs/rusoto_credential/latest/rusoto_credential/struct.ChainProvider.html
+[3]: /cloudprem/configure/ingress/
+[4]: /cloudprem/ingest_logs/

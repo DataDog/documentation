@@ -1,26 +1,7 @@
 ---
 title: Processing Configuration
 description: Learn how to configure your processing pipelines in CloudPrem
-private: true
 further_reading:
-- link: "/logs/log_configuration/processors/"
-  tag: "Documentation"
-  text: "Datadog Log Management Processors"
-- link: "/cloudprem/"
-  tag: "Documentation"
-  text: "CloudPrem Overview"
-- link: "/cloudprem/installation/"
-  tag: "Documentation"
-  text: "Install CloudPrem and Send Logs with the Agent"
-- link: "/cloudprem/ingress/"
-  tag: "Documentation"
-  text: "Configure CloudPrem Ingress"
-- link: "/cloudprem/aws_config"
-  tag: "Documentation"
-  text: "Configure AWS"
-- link: "/cloudprem/cluster/"
-  tag: "Documentation"
-  text: "Learn more about Cluster Sizing and Operations"
 - link: "/cloudprem/architecture/"
   tag: "Documentation"
   text: "Learn more about CloudPrem Architecture"
@@ -29,7 +10,9 @@ further_reading:
   text: "Troubleshooting"
 ---
 
-<div class="alert alert-warning">CloudPrem is in Preview.</div>
+{{< callout btn_hidden="true" >}}
+  Datadog CloudPrem is in Preview.
+{{< /callout >}}
 
 ## Overview
 

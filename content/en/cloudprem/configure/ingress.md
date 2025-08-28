@@ -1,32 +1,18 @@
 ---
 title: CloudPrem Ingress Configuration
 description: Learn how to configure and manage ingress controllers for your CloudPrem deployment
-private: true
 further_reading:
-- link: "/cloudprem/"
+- link: "/cloudprem/ingest_logs/"
   tag: "Documentation"
-  text: "CloudPrem Overview"
-- link: "/cloudprem/installation/"
+  text: "Set up Log Ingestion"
+- link: "/cloudprem/manage/"
   tag: "Documentation"
-  text: "Install CloudPrem and Send Logs with the Agent"
-- link: "/cloudprem/aws_config"
-  tag: "Documentation"
-  text: "Configure AWS"
-- link: "/cloudprem/processing/"
-  tag: "Documentation"
-  text: "Configure CloudPrem Log Processing"
-- link: "/cloudprem/cluster/"
-  tag: "Documentation"
-  text: "Learn more about Cluster Sizing and Operations"
-- link: "/cloudprem/architecture/"
-  tag: "Documentation"
-  text: "Learn more about CloudPrem Architecture"
-- link: "/cloudprem/troubleshooting/"
-  tag: "Documentation"
-  text: "Troubleshooting"
+  text: "Manage and Monitor"
 ---
 
-<div class="alert alert-warning">CloudPrem is in Preview.</div>
+{{< callout btn_hidden="true" >}}
+  Datadog CloudPrem is in Preview.
+{{< /callout >}}
 
 ## Overview
 
@@ -34,7 +20,7 @@ Ingress is a critical component of your CloudPrem deployment. The Helm chart aut
 
 ## Public ingress
 
-<div class="alert alert-warning">Only the CloudPrem gRPC API endpoints (paths starting with `/cloudprem`) perform mutual TLS authentication. Exposing any other endpoints through the public ingress introduces a security risk, as those endpoints would be accessible over the internet without authentication. Always restrict non-gRPC endpoints to the internal ingress. </div>
+<div class="alert alert-warning">Only the CloudPrem gRPC API endpoints (paths starting with <code>/cloudprem</code>) perform mutual TLS authentication. Exposing any other endpoints through the public ingress introduces a security risk, as those endpoints would be accessible over the internet without authentication. Always restrict non-gRPC endpoints to the internal ingress. </div>
 
 The public ingress is essential for enabling Datadog's control plane and query service to manage and query CloudPrem clusters over the public internet. It provides secure access to the CloudPrem gRPC API through the following mechanisms:
 - Creates an internet-facing AWS Application Load Balancer (ALB) that accepts traffic from Datadog services

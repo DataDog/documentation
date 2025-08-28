@@ -5899,12 +5899,107 @@ menu:
       parent: log_troubleshooting
       identifier: log_troubleshooting_live_tail
       weight: 1101
-    # - name: CloudPrem
-    #   pre: cloud
-    #   url: cloudprem/
-    #   parent: log_management_heading
-    #   identifier: cloud_prem
-    #   weight: 30000
+    - name: CloudPrem
+      pre: upload-wui
+      url: cloudprem/
+      parent: log_management_heading
+      identifier: cloudprem
+      weight: 30000
+    - name: Architecture
+      url: /cloudprem/architecture
+      parent: cloudprem
+      identifier: cloudprem_architecture
+      weight: 1
+    - name: Installation
+      url: /cloudprem/install
+      parent: cloudprem
+      identifier: cloudprem_installation
+      weight: 2
+    - name: AWS EKS
+      url: /cloudprem/install/aws_eks
+      parent: cloudprem_installation
+      identifier: cloudprem_aws_eks
+      weight: 201
+    - name: Azure AKS
+      url: /cloudprem/install/azure_aks
+      parent: cloudprem_installation
+      identifier: cloudprem_azure_aks
+      weight: 202
+    # - name: Kubernetes with NGINX
+    #   url: /cloudprem/install/kubernetes_nginx
+    #   parent: cloudprem_installation
+    #   identifier: cloudprem_kubernetes_nginx
+    #   weight: 203
+    - name: Log Ingestion
+      url: /cloudprem/ingest_logs/
+      parent: cloudprem
+      identifier: cloudprem_log_ingestion
+      weight: 3
+    - name: Datadog Agent
+      url: /cloudprem/ingest_logs/datadog_agent
+      parent: cloudprem_log_ingestion
+      identifier: cloudprem_ingest_datadog_agent
+      weight: 301
+    - name: Observability Pipelines
+      url: /cloudprem/ingest_logs/observability_pipelines
+      parent: cloudprem_log_ingestion
+      identifier: cloudprem_ingest_observability_pipelines
+      weight: 302
+    - name: REST API
+      url: /cloudprem/ingest_logs/rest_api/
+      parent: cloudprem_log_ingestion
+      identifier: cloudprem_ingest_api
+      weight: 304
+    - name: Configuration
+      url: /cloudprem/configure/
+      parent: cloudprem
+      identifier: cloudprem_advanced_configuration
+      weight: 4
+    - name: Datadog Account
+      url: /cloudprem/configure/datadog_account
+      parent: cloudprem_advanced_configuration
+      identifier: cloudprem_datadog_account
+      weight: 401
+    - name: AWS Configuration
+      url: /cloudprem/configure/aws_config
+      parent: cloudprem_advanced_configuration
+      identifier: cloudprem_aws_configuration
+      weight: 402
+    - name: Azure Configuration
+      url: /cloudprem/configure/azure_config
+      parent: cloudprem_advanced_configuration
+      identifier: cloudprem_azure_configuration
+      weight: 403
+    - name: Cluster Sizing
+      url: /cloudprem/configure/cluster_sizing
+      parent: cloudprem_advanced_configuration
+      identifier: cloudprem_cluster_sizing
+      weight: 404
+    - name: Ingress
+      url: /cloudprem/configure/ingress
+      parent: cloudprem_advanced_configuration
+      identifier: cloudprem_ingress
+      weight: 405
+    - name: Processing
+      url: /cloudprem/configure/processing
+      parent: cloudprem_advanced_configuration
+      identifier: cloudprem_processing
+      weight: 406
+    - name: Management
+      url: /cloudprem/manage/
+      parent: cloudprem
+      identifier: cloudprem_manage
+      weight: 5
+    - name: Supported Features
+      url: /cloudprem/supported_features/
+      parent: cloudprem
+      identifier: cloudprem_supported_features
+      weight: 6
+    - name: Troubleshooting
+      url: /cloudprem/troubleshooting/
+      parent: cloudprem
+      identifier: cloudprem_troubleshooting
+      weight: 7
     - name: Security Overview
       url: security/
       pre: security-platform

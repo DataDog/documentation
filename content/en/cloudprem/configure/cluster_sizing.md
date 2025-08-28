@@ -1,32 +1,20 @@
 ---
-title: Cluster Sizing and Operations
-description: Learn about cluster sizing, scaling, monitoring, and maintenance for CloudPrem
-private: true
+title: Cluster Sizing
+description: Learn about cluster sizing for CloudPrem
 further_reading:
-- link: "/cloudprem/"
-  tag: "Documentation"
-  text: "CloudPrem Overview"
-- link: "/cloudprem/installation/"
-  tag: "Documentation"
-  text: "Install CloudPrem and Send Logs with the Agent"
-- link: "/cloudprem/ingress/"
+- link: "/cloudprem/configure/ingress/"
   tag: "Documentation"
   text: "Configure CloudPrem Ingress"
-- link: "/cloudprem/aws_config"
-  tag: "Documentation"
-  text: "Configure AWS"
-- link: "/cloudprem/processing/"
   tag: "Documentation"
   text: "Configure CloudPrem Log Processing"
 - link: "/cloudprem/architecture/"
   tag: "Documentation"
   text: "Learn more about CloudPrem Architecture"
-- link: "/cloudprem/troubleshooting/"
-  tag: "Documentation"
-  text: "Troubleshooting"
 ---
 
-<div class="alert alert-warning">CloudPrem is in Preview.</div>
+{{< callout btn_hidden="true" >}}
+  Datadog CloudPrem is in Preview.
+{{< /callout >}}
 
 ## Overview
 
@@ -39,7 +27,7 @@ These are starting recommendations. Monitor your cluster's performance and resou
 ## Indexers
 
 - **Performance:** To index 5 MB/s of logs, CloudPrem needs approximately 1 vCPU and 2 GB of RAM.
-- **Recommended Pod Sizes:** We recommend deploying indexer pods with either:
+- **Recommended Pod Sizes:** Datadog recommends that you deploy indexer pods with either:
   - 2 vCPUs and 4 GB of RAM
   - 4 vCPUs and 8 GB of RAM
   - 8 vCPUs and 16 GB of RAM
