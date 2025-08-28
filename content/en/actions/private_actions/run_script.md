@@ -8,7 +8,7 @@ aliases:
 
 ## Overview
 
-The Private Action Runner (PAR) script action allows you to run custom scripts and Linux binaries within your Datadog workflows and apps. Unlike standard private actions that call specific APIs or services, the script action gives you the flexibility to execute arbitrary commands, shell scripts, and command-line tools directly from your private network.
+The Private Action Runner (PAR) script action allows you to run custom scripts and Linux binaries within your Datadog workflows and apps. Unlike standard private actions that call specific APIs or services, the script action gives you the flexibility to execute arbitrary commands, shell scripts, and command-line tools directly from the private action runner in your private network.
 
 For supported integrations, see [supported private actions][1].
 
