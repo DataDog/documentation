@@ -16,7 +16,7 @@ Before getting started with CloudPrem, ensure you have:
 
 - Azure account with necessary permissions
 - Kubernetes `1.32+` ([AKS][1] recommended)
-- PostgreSQL database ([Azure Database for PostgreSQL][3] recommended)
+- PostgreSQL database ([Azure Database for PostgreSQL][2] recommended)
 - Azure Blob Storage container for storing logs
 - Datadog Agent
 - Kubernetes command line tool (`kubectl`)
@@ -31,78 +31,70 @@ Before getting started with CloudPrem, ensure you have:
 
 ## Prepare your Azure environment
 
-Before installing CloudPrem on AKS, ensure your Azure environment is properly configured. For detailed Azure configuration instructions, see the [Azure Configuration guide](/cloudprem/configure/azure_config/).
+Before installing CloudPrem on AKS, ensure your Azure environment is properly configured. For detailed Azure configuration instructions, see the [Azure Configuration guide][3].
 
 ## Install the CloudPrem Helm chart
 
 1. Add and update the Datadog Helm repository:
+   ```shell
+   helm repo add datadog https://helm.datadoghq.com
+   helm repo update
+   ```
 
-   {{< code-block lang="bash" >}}
-helm repo add datadog https://helm.datadoghq.com
-helm repo update
-{{< /code-block >}}
-
-2. Create a Kubernetes namespace for the chart:
-
-   {{< code-block lang="bash" >}}
-kubectl create namespace <NAMESPACE_NAME>
-{{< /code-block >}}
+1. Create a Kubernetes namespace for the chart:
+   ```shell
+   kubectl create namespace <NAMESPACE_NAME>
+   ```
 
    For example, to create a `cloudprem` namespace:
-   {{< code-block lang="bash" >}}
-kubectl create namespace cloudprem
-{{< /code-block >}}
+   ```shell
+   kubectl create namespace cloudprem
+   ```
 
-   💡 Tip
+   **Note**: You can set a default namespace for your current context to avoid typing `-n <NAMESPACE_NAME>` with every command:
+   ```shell
+   kubectl config set-context --current --namespace=cloudprem
+   ```
 
-   You can set a default namespace for your current context to avoid typing `-n <NAMESPACE_NAME>` with every command:
-   {{< code-block lang="bash" >}}
-kubectl config set-context --current --namespace=cloudprem
-{{< /code-block >}}
-
-3. Store the PostgreSQL database connection string as a Kubernetes secret:
-
+1. Store the PostgreSQL database connection string as a Kubernetes secret:
    To retrieve your PostgreSQL connection details, go the Azure Portal, navigate to **All resources**, then click on your _Azure Database for PostgreSQL flexible server_ instance. Finally, in the **Getting started** tab, click on the _View connection strings_ link in the **Connect card**.
 
-   {{< code-block lang="bash" >}}
-kubectl create secret generic <SECRET_NAME> \
--n <NAMESPACE_NAME> \
---from-literal QW_METASTORE_URI=postgres://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DATABASE>
-{{< /code-block >}}
+   ```shell
+   kubectl create secret generic <SECRET_NAME> \
+     -n <NAMESPACE_NAME> \
+     --from-literal QW_METASTORE_URI=postgres://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DATABASE>
+   ```
 
    For example, to store a `metastore-uri` secret in the `cloudprem` namespace:
-   {{< code-block lang="bash" >}}
-USERNAME=cloudprem-prod
-PASSWORD=1234567890
-HOST=cloudprem-prod.postgres.database.azure.com
-PORT=5432
-DATABASE=cloudprem_prod
+   ```shell
+   USERNAME=cloudprem-prod
+   PASSWORD=1234567890
+   HOST=cloudprem-prod.postgres.database.azure.com
+   PORT=5432
+   DATABASE=cloudprem_prod
+   kubectl create secret generic metastore-uri \
+     -n cloudprem \
+     --from-literal QW_METASTORE_URI="postgres://$USERNAME:$PASSWORD@$HOST:$PORT/$DATABASE"
+   ```
 
-kubectl create secret generic metastore-uri \
--n cloudprem \
---from-literal QW_METASTORE_URI="postgres://$USERNAME:$PASSWORD@$HOST:$PORT/$DATABASE"
-{{< /code-block >}}
+1. Store the client secret or storage account access key as a Kubernetes secret:
+   ```shell
+   kubectl create secret generic <SECRET_NAME> \
+     -n <NAMESPACE_NAME> \
+     --from-literal <SECRET_KEY>=<SECRET_VALUE>
+   ```
 
-4. Store the client secret or storage account access key as a Kubernetes secret:
-
-   {{< code-block lang="bash" >}}
-kubectl create secret generic <SECRET_NAME> \
--n <NAMESPACE_NAME> \
---from-literal <SECRET_KEY>=<SECRET_VALUE>
-{{< /code-block >}}
-
-5. Customize the Helm chart:
+1. Customize the Helm chart:
 
    Create a `datadog-values.yaml` file to override the default values with your custom configuration. This is where you define environment-specific settings such as the image tag, Azure tenant ID, service account, ingress setup, resource requests and limits, and more.
 
    Any parameters not explicitly overridden in `datadog-values.yaml` fall back to the defaults defined in the chart's `values.yaml`.
 
-   {{< code-block lang="bash" >}}
-# Show default values
-helm show values datadog/cloudprem
-{{< /code-block >}}
-
-   Here is an example of a `datadog-values.yaml` file with such overrides for Azure:
+   ```shell
+    # Show default values
+    helm show values datadog/cloudprem
+   ```
+   Here is an example of a `datadog-values.yaml` file with overrides for Azure:
 
    {{< code-block lang="yaml" filename="datadog-values.yaml">}}
 azure:
@@ -217,13 +209,12 @@ azure:
          memory: "16Gi"
 {{< /code-block >}}
 
-6. Install or upgrade the Helm chart
-
-   {{< code-block lang="bash" >}}
-helm upgrade --install <RELEASE_NAME> datadog/cloudprem \
-  -n <NAMESPACE_NAME> \
-  -f datadog-values.yaml
-{{< /code-block >}}
+1. Install or upgrade the Helm chart
+    ```shell
+    helm upgrade --install <RELEASE_NAME> datadog/cloudprem \
+      -n <NAMESPACE_NAME> \
+      -f datadog-values.yaml
+    ```
 
 ## Verification
 
@@ -231,31 +222,29 @@ helm upgrade --install <RELEASE_NAME> datadog/cloudprem \
 
 Verify that all CloudPrem components are running:
 
-{{< code-block lang="bash" >}}
+```shell
 kubectl get pods -n <NAMESPACE_NAME>
 kubectl get ingress -n <NAMESPACE_NAME>
 kubectl get services -n <NAMESPACE_NAME>
-{{< /code-block >}}
+```
 
 ## Uninstall
 
 To uninstall CloudPrem, execute the following command:
 
-{{< code-block lang="bash" >}}
+```shell
 helm uninstall <RELEASE_NAME>
-{{< /code-block >}}
+```
 
 ## Next step
 
-**[Set up log ingestion with Datadog Agent](../ingest-logs/datadog-agent/)** - Configure the Datadog Agent to send logs to CloudPrem
+**[Set up log ingestion with Datadog Agent][4]** - Configure the Datadog Agent to send logs to CloudPrem
 
-## Further reading
+<!-- ## Further reading
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}} -->
 
 [1]: https://azure.microsoft.com/en-us/products/kubernetes-service
-[2]: https://kubernetes-sigs.github.io/aws-load-balancer-controller
-[3]: https://aws.amazon.com/rds/
-[4]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/deploy/installation/
-[5]: /getting_started/containers/datadog_operator/#installation-and-deployment
-[6]: /help/
+[2]: https://azure.microsoft.com/en-us/products/postgresql
+[3]: /cloudprem/configure/azure_config/
+[4]: /cloudprem/ingest_logs/datadog_agent

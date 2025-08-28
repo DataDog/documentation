@@ -23,5 +23,5 @@ Select the installation guide that matches your environment:
 <!-- ## Self-managed Kubernetes
 
 {{< whatsnext desc=" ">}}
-  {{< nextlink href="/install/kubernetes_nginx/" >}}Install on a K8s cluster with NGINX Ingress Controller{{< /nextlink >}}
+  {{< nextlink href="cloudprem/install/kubernetes_nginx/" >}}Install on a K8s cluster with NGINX Ingress Controller{{< /nextlink >}}
 {{< /whatsnext >}} -->

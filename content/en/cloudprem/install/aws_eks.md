@@ -43,11 +43,7 @@ Before getting started with CloudPrem, ensure you have:
 
 ## Prepare your AWS environment
 
-<<<<<<< HEAD:content/en/cloudprem/install/aws-eks.md
-Before installing CloudPrem on EKS, ensure your AWS environment is properly configured. For detailed AWS configuration instructions, see the [AWS Configuration guide](/cloudprem/configure/aws-config/).
-=======
 Before installing CloudPrem on EKS, ensure your AWS environment is properly configured. For detailed AWS configuration instructions, see the [AWS Configuration guide][7].
->>>>>>> fmassot/cloudprem-update:content/en/cloudprem/install/aws_eks.md
 
 Key requirements:
 - AWS credentials configured (IAM role or access keys)
