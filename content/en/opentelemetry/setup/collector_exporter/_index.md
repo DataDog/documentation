@@ -21,15 +21,15 @@ This method is best for users who require a completely vendor-neutral setup or a
 To begin, install the OpenTelemetry Collector and configure it with the Datadog Exporter. This guide walks you through the initial setup required before proceeding to more specific configuration topics.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/setup/collector_exporter/install_and_configure" >}}
+    {{< nextlink href="/opentelemetry/setup/collector_exporter/install" >}}
     <h3>Install and Configure the Collector</h3>
     Follow the initial setup steps to get a Collector running with the Datadog Exporter.
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Configuration Guides
+## Configuration
 
-Once your Collector is running, use these guides to configure specific receivers and processors to collect and enrich your telemetry data.
+After your Collector is running, use these guides to configure specific receivers and processors to collect and enrich your telemetry data.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/setup/collector_exporter/deploy" >}}
