@@ -21,13 +21,13 @@ This method is best for users who prefer to use OTel Collector distributions fro
 To begin, install the OpenTelemetry Collector and configure it with the Datadog Exporter. This guide walks you through the initial setup required before proceeding to more specific configuration topics.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/setup/collector_exporter/install_and_configure" >}}
+    {{< nextlink href="/opentelemetry/setup/collector_exporter/install" >}}
     <h3>Install and Configure the Collector</h3>
     Follow the initial setup steps to get a Collector running with the Datadog Exporter.
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Configuration guides
+## Configuration
 
 After your Collector is running, use these guides to configure specific receivers and processors to collect and enrich your telemetry data.
 
