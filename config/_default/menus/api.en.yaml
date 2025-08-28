@@ -5083,7 +5083,7 @@ menu:
         operationids:
           - GetAwsOnDemandTask
         unstable: []
-        order: 6
+        order: 7
     - name: Post an AWS on demand task
       url: '#post-an-aws-on-demand-task'
       identifier: agentless-scanning-post-an-aws-on-demand-task
@@ -5095,7 +5095,7 @@ menu:
         operationids:
           - CreateAwsOnDemandTask
         unstable: []
-        order: 7
+        order: 8
     - name: Get AWS On Demand tasks
       url: '#get-aws-on-demand-tasks'
       identifier: agentless-scanning-get-aws-on-demand-tasks
@@ -5107,7 +5107,7 @@ menu:
         operationids:
           - ListAwsOnDemandTasks
         unstable: []
-        order: 5
+        order: 6
     - name: Patch AWS Scan Options
       url: '#patch-aws-scan-options'
       identifier: agentless-scanning-patch-aws-scan-options
@@ -5119,7 +5119,19 @@ menu:
         operationids:
           - UpdateAwsScanOptions
         unstable: []
-        order: 3
+        order: 4
+    - name: Get AWS scan options
+      url: '#get-aws-scan-options'
+      identifier: agentless-scanning-get-aws-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAwsScanOptions
+        unstable: []
+        order: 2
     - name: Delete AWS Scan Options
       url: '#delete-aws-scan-options'
       identifier: agentless-scanning-delete-aws-scan-options
@@ -5131,7 +5143,7 @@ menu:
         operationids:
           - DeleteAwsScanOptions
         unstable: []
-        order: 4
+        order: 5
     - name: Post AWS Scan Options
       url: '#post-aws-scan-options'
       identifier: agentless-scanning-post-aws-scan-options
@@ -5143,10 +5155,10 @@ menu:
         operationids:
           - CreateAwsScanOptions
         unstable: []
-        order: 2
-    - name: Get AWS Scan Options
-      url: '#get-aws-scan-options'
-      identifier: agentless-scanning-get-aws-scan-options
+        order: 3
+    - name: List AWS Scan Options
+      url: '#list-aws-scan-options'
+      identifier: agentless-scanning-list-aws-scan-options
       parent: agentless-scanning
       generated: true
       params:
@@ -9252,6 +9264,19 @@ menu:
           - v2
         operationids:
           - CreateScorecardOutcomesBatch
+        unstable:
+          - v2
+        order: 1
+    - name: Update Scorecard outcomes asynchronously
+      url: '#update-scorecard-outcomes-asynchronously'
+      identifier: service-scorecards-update-scorecard-outcomes-asynchronously
+      parent: service-scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateScorecardOutcomesAsync
         unstable:
           - v2
         order: 1

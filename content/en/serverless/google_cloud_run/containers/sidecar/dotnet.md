@@ -81,13 +81,15 @@ builder.Host.UseSerilog((context, config) =>
 logger.LogInformation("Hello World!");
 {{< /code-block >}}
 
-   Datadog recommends setting the environment variable `DD_SOURCE=csharp` in your sidecar container to enable advanced Datadog log parsing.
+   Datadog recommends setting the environment variables `DD_LOGS_INJECTION=true` (in your main container) and `DD_SOURCE=csharp` (in your sidecar container) to enable advanced Datadog log parsing.
 
    For more information, see [Correlating .NET Logs and Traces][3].
 
-4. **Send custom metrics**.
+4. {{% gcr-service-label %}}
 
-   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5].
+5. **Send custom metrics**.
+
+   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
 {{% gcr-env-vars instrumentationMethod="sidecar" language="csharp" %}}
 

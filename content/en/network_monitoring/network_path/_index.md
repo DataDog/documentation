@@ -6,6 +6,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-network-path-monitoring/"
   tag: "Blog"
   text: "Get end-to-end network visibility with Datadog Network Path"
+- link: "https://www.datadoghq.com/blog/network-path/"
+  tag: "Blog"
+  text: "Identify slowdowns across your entire network with Datadog Network Path"
 ---
 
 ## Overview
