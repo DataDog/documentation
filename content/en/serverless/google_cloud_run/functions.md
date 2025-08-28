@@ -239,7 +239,7 @@ See [Configure labels for services][15] in the Cloud Run documentation for instr
 | `DD_SOURCE`      | See [Unified Service Tagging][13].                                                                                                                                          |
 | `DD_TAGS`        | See [Unified Service Tagging][13].                                                                                                                                          |
 
-Do not use the `DD_LOGS_ENABLED` environment variable. This variable is only used for [in-process container instrumentation][14].
+Do not use the `DD_LOGS_ENABLED` environment variable. This variable is only used for [In-Container container instrumentation][14].
 
 You can also find `FUNCTION_TARGET` on the source tab inside Google console: `Function entry point`.
 
@@ -757,6 +757,6 @@ public class Function : IHttpFunction
 [11]: /tracing/other_telemetry/connect_logs_and_traces/go
 [12]: /tracing/other_telemetry/connect_logs_and_traces/ruby
 [13]: /getting_started/tagging/unified_service_tagging/
-[14]: /serverless/google_cloud_run/containers_in_process
+[14]: /serverless/google_cloud_run/containers/in_container/
 [15]: https://cloud.google.com/run/docs/configuring/services/labels
 [16]: https://cloud.google.com/blog/products/serverless/google-cloud-functions-is-now-cloud-run-functions
