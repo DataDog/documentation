@@ -28,25 +28,22 @@ Automated Analysis automatically detects performance issues in your applications
 
 This reduces the profiling expertise needed to identify and resolve performance issues in your applications that might otherwise go unnoticed.
 
-{{< img src="profiler/profiling_automated_analysis.png" alt="The Profiler Thread Time line showing a Thrown Exception insight" style="width:100%;" >}}
+{{< img src="profiler/profiling_automated_analysis_thread_timeline.png" alt="The Profiler Thread Time line showing a Thrown Exception insight" style="width:100%;" >}}
 
 ## Explore insights
 Access Automated Analysis from the [Profile explorer][1]. Insights are displayed:
 
-- In the **Top Insights** banner at the top of the page when you're scoped to a specific service
-{{< img src="profiler/profiling_automated_analysis_banner.png" alt="The Automated Analysis banner displaying insights detected for a given service" style="width:100%;">}}
-
-- In the **Insights** column within the service list
-{{< img src="profiler/profiling_automated_analysis_column.png" alt="The Automated Analysis column displaying insights detected for a given service within the service list" style="width:100%;">}}
+- In the **Insights** section at the top of the page
+{{< img src="profiler/profiling_automated_analysis_section.png" alt="The Automated Analysis banner displaying insights detected for a given service" style="width:100%;">}}
 
 - Within a flame graph view
-{{< img src="profiler/profiling_automated_analysis_flamegraph_viz.png" alt="The Automated Analysis column displaying insights detected for a given service within a flamegraph" style="width:100%;">}}
+{{< img src="profiler/profiling_automated_analysis_flamegraph.png" alt="The Automated Analysis column displaying insights detected for a given service within a flamegraph" style="width:100%;">}}
 
 - Within a timeline view
-{{< img src="profiler/profiling_automated_analysis.png" alt="The Automated Analysis column displaying insights detected for a given service within a timeline" style="width:100%;">}}
+{{< img src="profiler/profiling_automated_analysis_thread_timeline.png" alt="The Automated Analysis column displaying insights detected for a given service within a timeline" style="width:100%;">}}
 
 Click an insight to see a high-level summary that explains the issue, contextual insights from profiling data, and recommended next steps.
-{{< img src="profiler/profiling_automated_analysis_details.png" alt="Expanded Profiling Insights showing the details of a detected Issue" style="width:100%;">}}
+{{< img src="profiler/profiling_automated_analysis_detail.png" alt="Expanded Profiling Insights showing the details of a detected Issue" style="width:100%;">}}
 
 ## Supported insights
 

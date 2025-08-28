@@ -71,6 +71,8 @@ Datadog SCA scans libraries in the following languages and **requires** a lockfi
 | Language   | Package Manager    | Lockfile                                |
 |------------|-------------------|------------------------------------------|
 | C#         | .NET              | `packages.lock.json`                     |
+| C++        | Conan             | `conan.lock`                             |
+| Erlang     | Hex               | `mix.lock`                               |
 | Go         | mod               | `go.mod`                                 |
 | JVM        | Gradle            | `gradle.lockfile`                        |
 | JVM        | Maven             | `pom.xml`                                |
@@ -78,9 +80,12 @@ Datadog SCA scans libraries in the following languages and **requires** a lockfi
 | Node.js    | pnpm              | `pnpm-lock.yaml`                         |
 | Node.js    | yarn              | `yarn.lock`                              |
 | PHP        | composer          | `composer.lock`                          |
+| Python     | PDM               | `pdm.lock`                               |
 | Python     | pip               | `requirements.txt`, `Pipfile.lock`       |
 | Python     | poetry            | `poetry.lock`                            |
+| Python     | UV                | `uv.lock`                                |
 | Ruby       | bundler           | `Gemfile.lock`                           |
+| Rust       | Cargo             | `cargo.lock`                             |
 
 ### Select your source code management provider
 Datadog SCA supports all source code management providers, with native support for GitHub, GitLab, and Azure DevOps.

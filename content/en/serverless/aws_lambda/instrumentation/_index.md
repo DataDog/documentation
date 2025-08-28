@@ -21,6 +21,8 @@ Instrument your AWS Lambda applications with a Datadog Lambda Library to collect
 
 ## Quick start
 
+To get started, [sign up for a Datadog account][1] if you don’t already have one. Then, follow the [in-app installation flow in Fleet Automation][8] for AWS Lambda to instrument your Lambda functions. This quick-start configuration enables your functions to send real-time metrics, logs, and traces to Datadog.
+
 A sample application is [available on GitHub][6] with instructions on how to deploy with multiple runtimes and infrastructure-as-code tools.
 
 The quick start process configures your Lambda functions on the fly. To instrument Lambda functions permanently, see the detailed instructions in the next section.
@@ -48,8 +50,8 @@ After you're done with instrumentation and you've set up telemetry collection, y
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/signup/
-[2]: https://app.datadoghq.com/signup/agent#lambda
 [3]: /serverless/aws_lambda/configuration/
 [4]: /serverless/aws_lambda/fips-compliance/
 [5]: /serverless/aws_lambda/remote_instrumentation
 [6]: https://github.com/DataDog/serverless-sample-app
+[8]: https://app.datadoghq.com/fleet/install-agent/latest?platform=lambda

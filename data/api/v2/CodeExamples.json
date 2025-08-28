@@ -1051,6 +1051,11 @@
       "group": "rum",
       "suffix": "",
       "description": "Create a new RUM application returns \"OK\" response"
+    },
+    {
+      "group": "rum",
+      "suffix": "_1946294560",
+      "description": "Create a new RUM application with Product Scales returns \"OK\" response"
     }
   ],
   "SearchRUMEvents": [
@@ -1070,6 +1075,11 @@
       "group": "rum",
       "suffix": "",
       "description": "Update a RUM application returns \"OK\" response"
+    },
+    {
+      "group": "rum",
+      "suffix": "_394074053",
+      "description": "Update a RUM application with Product Scales returns \"OK\" response"
     }
   ],
   "UpdateRestrictionPolicy": [
@@ -1367,6 +1377,11 @@
       "group": "sensitive_data_scanner",
       "suffix": "",
       "description": "Create Scanning Rule returns \"OK\" response"
+    },
+    {
+      "group": "sensitive_data_scanner",
+      "suffix": "_502667299",
+      "description": "Create Scanning Rule with should_save_match returns \"OK\" response"
     }
   ],
   "DeleteScanningGroup": [
@@ -1466,6 +1481,13 @@
       "group": "service_scorecards",
       "suffix": "",
       "description": "Create outcomes batch returns \"OK\" response"
+    }
+  ],
+  "UpdateScorecardOutcomesAsync": [
+    {
+      "group": "service_scorecards",
+      "suffix": "",
+      "description": "Update Scorecard outcomes asynchronously returns \"Accepted\" response"
     }
   ],
   "UpdateScorecardRule": [
