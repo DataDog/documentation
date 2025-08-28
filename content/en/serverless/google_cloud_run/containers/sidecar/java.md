@@ -44,7 +44,7 @@ implementation 'com.datadoghq:dd-trace-api:DD_TRACE_JAVA_VERSION_HERE'
       {{% /tab %}}
       {{< /tabs >}}
 
-   See [dd-trace-java releases][1] for the latest tracer version.
+      See [dd-trace-java releases][1] for the latest tracer version.
 
    3. Add the `@Trace` annotation to any method you want to trace.
 
