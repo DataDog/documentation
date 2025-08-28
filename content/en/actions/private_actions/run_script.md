@@ -58,10 +58,6 @@ You can either reuse an existing runner's identity by changing the image, or cre
 1. Create a new script connection and associate it with your private action runner.
 1. Select this connection when using the script action in your workflows or apps.
 
-<div class="alert alert-info">
-The connection requires a placeholder field at creation. You can put any value there as it will be ignored.
-</div>
-
 ### 3. Configure the action catalog
 
 You can find the "Run Predefined Script" action marked as "experimental" in the action catalog. This action is available for use in both workflows and apps.
