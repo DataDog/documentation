@@ -30,9 +30,7 @@ The following table outlines supported and unsupported use cases for the script 
 
 To use the script action, you need:
 
-- **Linux host**: A host capable of running Docker containers
-- **Network access**: Connection to Datadog and your internal services
-- **Custom tools**: For CLI tools not included in the base image, you need to create a custom Docker image
+- **Custom tools**: For CLI tools not included in the base image, you need to create a custom Docker image.
 - **PAR Version**: 1.7.0 or later. See [set up a private action runner][2] to get started.
 - anything else? 🤨
 
