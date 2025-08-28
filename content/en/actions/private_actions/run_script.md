@@ -108,7 +108,7 @@ You can mount complex scripts inside the runner:
 # docker-compose example
 services:
   runner:
-    image: datadog/private-action-runner-dev:latest@sha256:4e990e496b79d02514c19a633042d27be1ba8e7a4b9018efd0e942ed1a070ad8
+    image: gcr.io/datadoghq/private-action-runner:v1.7.0
     volumes:
       - "./config:/etc/dd-action-runner/config"
       - "./scripts:/etc/dd-action-runner-script/scripts:ro"
