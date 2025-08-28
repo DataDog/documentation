@@ -294,7 +294,7 @@ public String getDate() {
 
 Your application must send data to the DDOT Collector on the same host. Ensure that the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable is set on your application.
 
-In the example application, this is done in `run-otel-local.sh`:
+If using the example application, [`run-otel-local.sh`][13] sets up the required environment variables and runs the application:
 {{< code-block lang="bash" filename="run-otel-local.sh" disable_copy="true" collapsible="true" >}}
 export OTEL_METRICS_EXPORTER="otlp"
 export OTEL_LOGS_EXPORTER="otlp"
@@ -374,3 +374,4 @@ View metrics from the DDOT Collector to monitor the Collector health.
 [10]: /opentelemetry/correlate/
 [11]: /opentelemetry/integrations/collector_health_metrics/
 [12]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[13]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/java/calendar/run-otel-local.sh
