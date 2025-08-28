@@ -7937,16 +7937,91 @@ menu:
       parent: account_management_billing
       weight: 1201
       identifier: account_management_billing_pricing
+    - name: Credit Card
+      identifier: account_management_billing_credit_card
+      url: account_management/billing/credit_card/
+      parent: account_management_billing
+      weight: 1202
     - name: Product Allotments
       url: account_management/billing/product_allotments
       parent: account_management_billing
-      weight: 1202
+      weight: 1203
       identifier: account_management_billing_product_allotments
+    - name: Usage Metrics
+      identifier: account_management_plan_and_usage_usage_metrics
+      url: account_management/billing/usage_metrics/
+      parent: account_management_billing
+      weight: 1204
+    - name: Usage Attribution
+      identifier: account_management_plan_and_usage_usage_attribution
+      url: account_management/billing/usage_attribution/
+      parent: account_management_billing
+      weight: 1205
+    - name: Custom Metrics
+      identifier: account_management_billing_custom_metrics
+      url: account_management/billing/custom_metrics/
+      parent: account_management_billing
+      weight: 1206
     - name: Containers
       identifier: account_management_billing_containers
       url: account_management/billing/containers
       parent: account_management_billing
-      weight: 1203
+      weight: 1207
+    - name: Log Management
+      identifier: account_management_billing_log_management
+      url: account_management/billing/log_management/
+      parent: account_management_billing
+      weight: 1208
+    - name: APM
+      identifier: account_management_billing_apm_tracing_profiler
+      url: account_management/billing/apm_tracing_profiler/
+      parent: account_management_billing
+      weight: 1209
+    - name: Serverless
+      identifier: account_management_billing_serverless
+      url: account_management/billing/serverless/
+      parent: account_management_billing
+      weight: 1210
+    - name: Real User Monitoring
+      identifier: account_management_billing_rum
+      url: account_management/billing/rum/
+      parent: account_management_billing
+      weight: 1211
+    - name: CI Visibility
+      identifier: account_management_billing_ci_visibility
+      url: account_management/billing/ci_visibility/
+      parent: account_management_billing
+      weight: 1212
+    - name: AWS Integration
+      identifier: account_management_billing_aws
+      url: account_management/billing/aws/
+      parent: account_management_billing
+      weight: 1213
+    - name: Azure Integration
+      identifier: account_management_billing_azure
+      url: account_management/billing/azure/
+      parent: account_management_billing
+      weight: 1214
+    - name: Google Cloud Integration
+      identifier: account_management_billing_google_cloud
+      url: account_management/billing/google_cloud/
+      parent: account_management_billing
+      weight: 1215
+    - name: Alibaba Integration
+      identifier: account_management_billing_alibaba
+      url: account_management/billing/alibaba/
+      parent: account_management_billing
+      weight: 1216
+    - name: vSphere Integration
+      identifier: account_management_billing_vsphere
+      url: account_management/billing/vsphere/
+      parent: account_management_billing
+      weight: 1217
+    - name: Multi-org Accounts
+      identifier: account_management_multi_org_accounts
+      url: account_management/multi_organization/
+      parent: account_management
+      weight: 13
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/
