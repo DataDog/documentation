@@ -215,7 +215,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                     stateToRoute(uiState) {
                         const indexUiState = uiState[docsIndex];
                         return {
-                            s: indexUiState.query
+                            s: indexUiState.query?.trim()
                         };
                     },
                     routeToState(routeState) {
@@ -310,6 +310,25 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
             const aisSearchBoxSubmit = document.querySelector('.ais-SearchBox-submit');
             const searchPathname = `${basePathName}search`;
 
+            const handleGlobalKeydown = (e) => {
+                if ((e.key === '/' ||(e.key === 'k' && (e.metaKey || e.ctrlKey))) && !['input', 'textarea'].includes(e.target.tagName.toLowerCase()) && !e.target.isContentEditable) {
+                    e.preventDefault();
+                    aisSearchBoxInput.focus();
+                    aisSearchBoxInput.value = ' ';
+                    const inputEvent = new Event('input', { bubbles: true });
+                    aisSearchBoxInput.dispatchEvent(inputEvent);
+                    aisSearchBoxInput.setSelectionRange(1, 1);
+                    
+                }
+
+                if (e.key === 'Escape') {
+                    aisSearchBoxInput.value = '';
+                    const inputEvent = new Event('input', { bubbles: true });
+                    aisSearchBoxInput.dispatchEvent(inputEvent);
+                    aisSearchBoxInput.blur();
+                }
+            };
+            
             const handleSearchbarKeydown = (e) => {
                 if (e.code === 'Enter') {
                     e.preventDefault();
@@ -356,6 +375,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
             aisSearchBoxInput.addEventListener('keydown', handleSearchbarKeydown);
             aisSearchBoxSubmit.addEventListener('click', handleSearchbarSubmitClick);
             document.addEventListener('click', handleOutsideSearchbarClick);
+            document.addEventListener('keydown', handleGlobalKeydown);
         } else {
             // Handle sending search RUM events from click events on the search results page.
             hitsContainer.addEventListener('click', (e) => {
