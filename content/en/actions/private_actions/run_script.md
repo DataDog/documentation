@@ -98,7 +98,7 @@ For binaries not available in the base runner image, create a custom image:
 
 ```dockerfile
 # Dockerfile example
-FROM datadog/private-action-runner-dev:latest@sha256:4e990e496b79d02514c19a633042d27be1ba8e7a4b9018efd0e942ed1a070ad8
+FROM gcr.io/datadoghq/private-action-runner:v1.7.0
 RUN apt update && apt install -y python3
 ```
 
