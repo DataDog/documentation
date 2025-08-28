@@ -7947,12 +7947,12 @@ menu:
       parent: account_management_billing
       weight: 1203
       identifier: account_management_billing_product_allotments
-    - name: Usage Metrics ## FIXED
+    - name: Usage Metrics
       identifier: account_management_plan_and_usage_usage_metrics
       url: account_management/billing/usage_metrics/
       parent: account_management_billing
       weight: 1204
-    - name: Usage Attribution ## FIXED
+    - name: Usage Attribution
       identifier: account_management_plan_and_usage_usage_attribution
       url: account_management/billing/usage_attribution/
       parent: account_management_billing
