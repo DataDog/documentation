@@ -1,10 +1,11 @@
 ---
 title: CloudPrem
 description: Learn how to deploy and manage Datadog CloudPrem, a self-hosted log management solution for cost-effective log ingestion, processing, indexing, and search capabilities
-private: true
 ---
 
-<div class="alert alert-warning">CloudPrem is in Preview.</div>
+{{< callout btn_hidden="true" >}}
+  Datadog CloudPrem is in Preview.
+{{< /callout >}}
 
 {{< img src="/cloudprem/overview_diagram_cloudprem.png" alt="CloudPrem architecture overview showing how logs flow from sources through CloudPrem to the Datadog platform" style="width:100%;" >}}
 
@@ -13,9 +14,9 @@ Datadog CloudPrem is a self-hosted log management solution that enables cost-eff
 ## Get started
 
 {{< whatsnext desc="Follow our guides to get CloudPrem up and running:">}}
-  {{< nextlink href="/cloudprem/install/aws-eks" >}}Install on AWS EKS{{< /nextlink >}}
-  {{< nextlink href="/cloudprem/ingest-logs/datadog-agent/" >}}Ingest logs with Datadog Agent{{< /nextlink >}}
-  {{< nextlink href="/cloudprem/configure/datadog-account" >}}Configure your Datadog account{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/install/aws_eks" >}}Install on AWS EKS{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/ingest_logs/datadog_agent/" >}}Ingest logs with Datadog Agent{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/configure/datadog_account" >}}Configure your Datadog account{{< /nextlink >}}
   {{< nextlink href="/cloudprem/architecture/" >}}Understand CloudPrem architecture{{< /nextlink >}}
 {{< /whatsnext >}}
 

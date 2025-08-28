@@ -186,9 +186,8 @@ Par défaut, les traceurs Datadog peuvent [injecter automatiquement les IDs de s
     **Remarque** : les filtres de pipeline sont appliqués avant tout traitement par les processeurs du pipeline. Par conséquent, vous ne pouvez pas appliquer un filtre basé sur un attribut qui est extrait dans le pipeline.
 
 4. Donnez un nom à votre pipeline.
-5. (Facultatif) Accorder un accès d'édition aux processeurs dans le pipeline. Si vous assignez un rôle à un pipeline, ce rôle reçoit les [autorisations][12] `logs_write_processor` spécifiquement limitées à ce pipeline. Les rôles disposant des autorisations `logs_write_processor` assignées globalement (via la modification du rôle) ne peuvent pas être sélectionnés, car ils ont accès à tous les pipelines.
-6. (Facultatif) Ajoutez une description et des tags au pipeline pour indiquer son objectif et sa responsabilité. Les tags de pipeline n'affectent pas les logs, mais peuvent être utilisés pour filtrer et effectuer des recherches dans la [page Pipelines][5].
-7. Sélectionnez **Create**.
+5. (Facultatif) Ajoutez une description et des tags au pipeline pour indiquer son objectif et sa responsabilité. Les tags de pipeline n'affectent pas les logs, mais peuvent être utilisés pour filtrer et effectuer des recherches dans la [page Pipelines][5].
+6. Sélectionnez **Create**.
 
 Voici un exemple de log converti par un pipeline :
 

@@ -8,10 +8,6 @@ further_reading:
     text: "Create and monitor LLM experiments with Datadog"
 ---
 
-{{< callout >}}
-LLM Observability Experiments is in Preview.
-{{< /callout >}}
-
 {{< img src="llm_observability/experiments/filtered_experiments.png" alt="LLM Observability, Experiment view. Heading: 'Comparing 12 experiments across 9 fields'. Line graph visualization charting the accuracy, correctness, duration, estimated cost, and other metrics of various experiments." style="width:100%;" >}}
 
 LLM Observability [Experiments][9] supports the entire lifecycle of building LLM applications and agents. It helps you understand how changes to prompts, models, providers, or system architecture affect performance. With this feature, you can:

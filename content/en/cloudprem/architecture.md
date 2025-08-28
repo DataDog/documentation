@@ -1,6 +1,5 @@
 ---
 title: Architecture
-private: true
 further_reading:
 - link: "/cloudprem/install/prerequisites/"
   tag: "Documentation"
@@ -9,6 +8,10 @@ further_reading:
   tag: "Documentation"
   text: "Install CloudPrem"
 ---
+
+{{< callout btn_hidden="true" >}}
+  Datadog CloudPrem is in Preview.
+{{< /callout >}}
 
 ## Overview
 

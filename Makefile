@@ -87,6 +87,7 @@ start:
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
 start-no-pre-build: node_modules  ## Build and run docs excluding external content.
 	@make setup-build-scripts
+	@make update_websites_sources_module
 	@make build-cdocs
 	@make server
 

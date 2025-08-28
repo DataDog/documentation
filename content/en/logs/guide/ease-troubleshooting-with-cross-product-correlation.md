@@ -67,39 +67,9 @@ The application tracer generates trace IDs by default. This can be changed by in
 
 #### NGINX
 
-##### Setup opentracing
+To correlate NGINX logs with traces, you must configure your NGINX `log_format` to include the trace ID and then configure a Datadog pipeline to parse that ID from your logs.
 
-Follow [NGINX tracing integration][5].
-
-##### Inject trace ID in logs
-
-Trace ID is stored as `opentelemetry_trace_id` variable. Update the NGINX log format by adding the following configuration block in the HTTP section of your NGINX configuration file `/etc/nginx/nginx.conf`:
-
-```conf
-http {
-  log_format main '$remote_addr - $opentelemetry_trace_id $http_x_forwarded_user [$time_local] "$request" '
-          '$status $body_bytes_sent "$http_referer" '
-          '"$http_user_agent" "$http_x_forwarded_for" ';
-
-  access_log /var/log/nginx/access.log;
-}
-```
-
-##### Parse trace ID in pipelines
-
-1. Clone the NGINX pipeline.
-
-2. Customize the first [grok parser][6]:
-   - In **Parsing rules**, replace the first parsing rule with:
-   ```text
-   access.common %{_client_ip} %{_ident} %{_trace_id} %{_auth} \[%{_date_access}\] "(?>%{_method} |)%{_url}(?> %{_version}|)" %{_status_code} (?>%{_bytes_written}|-)
-   ```
-   - In **Advanced settings** under **Helper Rules**, add the line:
-   ```text
-   _trace_id %{notSpace:dd.trace_id:nullIf("-")}
-   ```
-
-3. Add a [trace ID remapper][7] on `dd.trace_id` attribute.
+See the [Instrumenting NGINX][20] for complete, end-to-end setup instructions.
 
 ### Correlate database logs
 
@@ -243,3 +213,4 @@ For more information, see [Connect Synthetic Tests and Traces][19].
 [17]: /synthetics/browser_tests/
 [18]: https://app.datadoghq.com/synthetics/tests
 [19]: /synthetics/apm
+[20]: /tracing/trace_collection/proxy_setup/nginx
