@@ -122,7 +122,7 @@ and mount it into `/conf.d/`. The file name can be anything:
 Your Agent's Docker installation command should look like this:
 
 ```
-docker run -d --name datadog-agent \
+docker run -d --name dd-agent \
            --cgroupns host \
            --pid host \
            -e DD_API_KEY=<DATADOG_API_KEY> \
@@ -140,7 +140,7 @@ docker run -d --name datadog-agent \
 
 ## Verification
 
-After you have set this all up, you can deploy the Agent. You should be able to see something like the below when you run `docker exec -it datadog-agent agent status`:
+After you have set this all up, you can deploy the Agent. You should be able to see something like the below when you run `docker exec -it dd-agent agent status`:
 
 ```
 ==========
