@@ -2,6 +2,7 @@
 title: Instrument Azure App Service - Linux Containers
 aliases:
   - /serverless/guide/azure_app_service_linux_sidecar
+  - /serverless/azure_app_services/azure_app_services_container
 further_reading:
 - link: "/integrations/azure_app_services/"
   tag: "Documentation"
@@ -12,13 +13,19 @@ further_reading:
 ---
 
 
-### Prerequisites
+## Overview
+
+This page describes how to instrument your containerized Linux Azure App Service application with the Datadog Agent.
 
 This document assumes that your application is set up for sidecars according to Azure's [Configure a sidecar container for custom container in Azure App Service][1] tutorial.
 
 If you would prefer to not use the sidecar approach (Not Recommended), you can instead follow the instructions to [Instrument Azure App Service - Linux Container with `serverless-init`][2].
 
 ## Setup
+
+### Azure integration
+
+If you haven't already, install the [Datadog-Azure integration][3] to collect metrics and logs.
 
 ### Application
 
@@ -502,3 +509,4 @@ $statsd->increment('page.views', 1, array('environment'=>'dev'));
 
 [1]: https://learn.microsoft.com/en-us/azure/app-service/tutorial-custom-container-sidecar
 [2]: /serverless/guide/azure_app_service_linux_containers_serverless_init
+[3]: https://app.datadoghq.com/integrations/azure

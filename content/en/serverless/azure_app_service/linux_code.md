@@ -1,5 +1,7 @@
 ---
 title: Azure App Service - Linux Code
+aliases:
+  - /serverless/azure_app_services/azure_app_services_linux
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
   tag: "Blog"
@@ -7,13 +9,17 @@ further_reading:
 ---
 ## Overview
 
-This solution uses a sidecar container and Application Settings for Linux Azure App Service to instrument the application and manage its configuration.
+This page describes how to instrument your Linux Azure App Service application with the Datadog Agent. The procedure on this page makes use of a sidecar container and Application Settings for Linux Azure App Service to instrument the application and manage its configuration.
 
 If you would prefer to not use the sidecar approach (Not Recommended), you can instead follow the instructions to [Instrument Azure App Service - Linux Code Deployment with the Datadog wrapper][1].
 
 **Supported runtimes**: Java, Node.js, .NET, PHP, Python
 
 ## Setup
+
+### Azure integration
+
+If you haven't already, install the [Datadog-Azure integration][10] to collect metrics and logs.
 
 ### Application
 
@@ -272,3 +278,4 @@ Share the content of the **Log stream** with [Datadog Support][9].
 [7]: /developers/dogstatsd/?tab=python#dogstatsd-client
 [8]: /profiler/
 [9]: /help
+[10]: https://app.datadoghq.com/integrations/azure
