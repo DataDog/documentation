@@ -570,10 +570,12 @@ menu:
       url: /opentelemetry/getting_started/datadog_example
       parent: otel_guides_getting_started
       weight: 101
+      identifier: otel_guides_getting_started_datadog_example
     - name: OpenTelemetry Demo Application
       url: /opentelemetry/getting_started/otel_demo_to_datadog
       parent: otel_guides_getting_started
       weight: 102
+      identifier: otel_guides_getting_started_otel_demo_to_datadog
     - name: Feature Compatibility
       url: opentelemetry/compatibility/
       identifier: otel_compatibility
@@ -598,30 +600,37 @@ menu:
       url: /opentelemetry/instrument/api_support/java
       parent: otel-api-dd-sdk
       weight: 3021
+      identifier: otel_api_java
     - name: Python
       url: /opentelemetry/instrument/api_support/python
       parent: otel-api-dd-sdk
       weight: 3022
+      identifier: otel_api_python
     - name: Ruby
       url: /opentelemetry/instrument/api_support/ruby
       parent: otel-api-dd-sdk
       weight: 3023
+      identifier: otel_api_ruby
     - name: Go
       url: /opentelemetry/instrument/api_support/go
       parent: otel-api-dd-sdk
       weight: 3024
+      identifier: otel_api_go
     - name: Node.js
       url: /opentelemetry/instrument/api_support/nodejs
       parent: otel-api-dd-sdk
       weight: 3025
+      identifier: otel_api_nodejs
     - name: PHP
       url: /opentelemetry/instrument/api_support/php
       parent: otel-api-dd-sdk
       weight: 3026
+      identifier: otel_api_php
     - name: .NET
       url: /opentelemetry/instrument/api_support/dotnet
       parent: otel-api-dd-sdk
       weight: 3027
+      identifier: otel_api_dotnet
     - name: OTel Instrumentation Libraries
       url: /opentelemetry/instrument/instrumentation_libraries/
       identifier: otel_instrumentation_libraries
@@ -691,10 +700,12 @@ menu:
       url: /opentelemetry/setup/agentless/logs
       parent: otel-setup-intake-endpoint
       weight: 301
+      identifier: otel_setup_agentless_logs
     - name: Metrics Endpoint
       url: /opentelemetry/setup/agentless/metrics
       parent: otel-setup-intake-endpoint
       weight: 302
+      identifier: otel_setup_agentless_metrics
     - name: Semantic Mapping
       url: opentelemetry/mapping/
       identifier: otel_schema
@@ -849,10 +860,12 @@ menu:
       url: /opentelemetry/guide/otlp_delta_temporality
       parent: otel_guides
       weight: 1001
+      identifier: otel_guides_otlp_delta_temporality
     - name: Visualize Histograms as Heatmaps
       url: /opentelemetry/guide/otlp_histogram_heatmaps
       parent: otel_guides
       weight: 1002
+      identifier: otel_guides_otlp_histogram_heatmaps
     - name: Migration Guides
       url: /opentelemetry/migrate/
       identifier: otel_guides_migration
@@ -862,18 +875,22 @@ menu:
       url: /opentelemetry/migrate/collector_0_120_0
       parent: otel_guides_migration
       weight: 10031
+      identifier: otel_guides_migration_collector_0_120_0
     - name: Migrate to OTel Collector v0.95.0+
       url: /opentelemetry/migrate/collector_0_95_0
       parent: otel_guides_migration
       weight: 10032
+      identifier: otel_guides_migration_collector_0_95_0
     - name: New Operation Name Mappings
       url: /opentelemetry/migrate/migrate_operation_names/
       parent: otel_guides_migration
       weight: 10033
+      identifier: otel_guides_migration_operation_names
     - name: Agent with DDOT Collector
       url: /opentelemetry/migrate/ddot_collector/
       parent: otel_guides_migration
       weight: 10034
+      identifier: otel_guides_migration_ddot_collector
     - name: Reference
       url: /opentelemetry/reference
       identifier: otel_reference
@@ -1025,7 +1042,7 @@ menu:
       parent: dev_tools
       identifier: dev_tools_service_check
       weight: 6
-    - name: 'Submission - Agent Check '
+    - name: "Submission - Agent Check "
       url: developers/service_checks/agent_service_checks_submission/
       parent: dev_tools_service_check
       identifier: dev_tools_service_check_agent_check
@@ -1219,17 +1236,17 @@ menu:
       identifier: cloudcraft_account_management
       parent: cloudcraft
       weight: 2
-    - name: 'Components: Common'
+    - name: "Components: Common"
       url: cloudcraft/components-common/
       identifier: cloudcraft_components_common
       parent: cloudcraft
       weight: 3
-    - name: 'Components: Azure'
+    - name: "Components: Azure"
       url: cloudcraft/components-azure/
       identifier: cloudcraft_components_azure
       parent: cloudcraft
       weight: 4
-    - name: 'Components: AWS'
+    - name: "Components: AWS"
       url: cloudcraft/components-aws/
       identifier: cloudcraft_components_aws
       parent: cloudcraft
@@ -1414,6 +1431,7 @@ menu:
       url: watchdog/faulty_cloud_saas_api_detection
       parent: watchdog_top_level
       weight: 6
+      identifier: watchdog_faulty_cloud_saas_api_detection
     - name: Bits AI
       url: bits_ai/
       pre: bits-ai
@@ -1887,7 +1905,7 @@ menu:
       parent: metrics_custom_metrics
       identifier: metrics_historical_metrics
       weight: 102
-    - name: 'Submission - Agent Check '
+    - name: "Submission - Agent Check "
       url: metrics/custom_metrics/agent_metrics_submission/
       parent: metrics_custom_metrics
       identifier: dev_tools_metrics_agent
@@ -1902,7 +1920,7 @@ menu:
       parent: metrics_custom_metrics
       identifier: dev_tools_metrics_powershell
       weight: 105
-    - name: 'Submission - API '
+    - name: "Submission - API "
       url: api/latest/metrics/#submit-metrics
       parent: metrics_custom_metrics
       identifier: dev_tools_metrics_api
@@ -1982,37 +2000,6 @@ menu:
       parent: metrics_top_level
       identifier: metrics_guide
       weight: 13
-    - name: Watchdog
-      url: watchdog/
-      identifier: watchdog_top_level
-      pre: watchdog
-      parent: platform_heading
-      weight: 90000
-    - name: Alerts
-      url: watchdog/alerts
-      identifier: watchdog_alerts
-      parent: watchdog_top_level
-      weight: 1
-    - name: Impact Analysis
-      url: watchdog/impact_analysis/
-      identifier: watchdog_impact_analysis
-      parent: watchdog_top_level
-      weight: 2
-    - name: RCA
-      url: watchdog/rca/
-      identifier: watchdog_rca
-      parent: watchdog_top_level
-      weight: 3
-    - name: Insights
-      identifier: watchdog_insights
-      url: watchdog/insights
-      parent: watchdog_top_level
-      weight: 4
-    - name: Faulty Deployment Detection
-      url: watchdog/faulty_deployment_detection/
-      identifier: watchdog_faulty_deployment_detection
-      parent: watchdog_top_level
-      weight: 5
     - name: Internal Developer Portal
       url: internal_developer_portal/
       pre: internal-developer-portal-wui
@@ -2809,6 +2796,11 @@ menu:
       parent: app_builder
       identifier: app_builder_embedded_apps
       weight: 9
+    - name: Save and Reuse Actions
+      url: actions/app_builder/saved_actions/
+      parent: app_builder
+      identifier: app_builder_saved_actions
+      weight: 10
     - name: Action Interface
       url: actions/action_interface/
       pre: bits-ai
@@ -3325,23 +3317,23 @@ menu:
       parent: serverless
       weight: 3
     - name: Azure App Service
-      url: serverless/azure_app_services
+      url: serverless/azure_app_service
       parent: serverless
       identifier: serverless_app_services
       weight: 4
     - name: Linux - Code
       identifier: serverless_azure_app_services_linux_code
-      url: serverless/azure_app_services/azure_app_services_linux
+      url: serverless/azure_app_service/linux_code
       parent: serverless_app_services
       weight: 401
     - name: Linux - Container
       identifier: serverless_azure_app_services_linux_container
-      url: serverless/azure_app_services/azure_app_services_container
+      url: serverless/azure_app_service/linux_container
       parent: serverless_app_services
       weight: 402
     - name: Windows - Code
       identifier: serverless_azure_app_services_windows_code
-      url: serverless/azure_app_services/azure_app_services_windows
+      url: serverless/azure_app_service/windows_code
       parent: serverless_app_services
       weight: 403
     - name: Azure Container Apps
@@ -3363,14 +3355,17 @@ menu:
       url: serverless/google_cloud_run/containers
       parent: serverless_gcr
       weight: 701
+      identifier: serverless_gcr_containers
     - name: Functions
       url: serverless/google_cloud_run/functions
       parent: serverless_gcr
       weight: 702
+      identifier: serverless_gcr_functions
     - name: Functions (1st generation)
       url: serverless/google_cloud_run/functions_1st_gen
       parent: serverless_gcr
       weight: 703
+      identifier: serverless_gcr_functions_1st_gen
     - name: Glossary
       url: serverless/glossary
       parent: serverless
@@ -3988,6 +3983,7 @@ menu:
       url: tracing/trace_explorer/trace_queries/
       parent: trace_explorer
       weight: 603
+      identifier: trace_explorer_trace_queries
     - name: Span Tags and Attributes
       url: tracing/trace_explorer/span_tags_attributes/
       parent: trace_explorer
@@ -5697,6 +5693,7 @@ menu:
       url: logs/log_configuration/processors/
       parent: log_configuration
       weight: 202
+      identifier: log_configuration_processors
     - name: Parsing
       identifier: log_configuration_parsing
       url: logs/log_configuration/parsing/
@@ -6877,7 +6874,7 @@ menu:
       parent: continuous_testing_environments
       identifier: continuous_testing_environments_multiple_environments
       weight: 101
-    - name: 'Testing With Proxy, Firewall, or VPN'
+    - name: Testing With Proxy, Firewall, or VPN
       url: /continuous_testing/environments/proxy_firewall_vpn
       parent: continuous_testing_environments
       identifier: continuous_testing_environments_proxy_firewall_vpn
@@ -7283,51 +7280,6 @@ menu:
       parent: rum_mobile_react_native
       identifier: rum_mobile_react_troubleshooting
       weight: 108
-    - name: Kotlin Multiplatform
-      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform
-      parent: mobile_and_tv_monitoring
-      identifier: rum_mobile_kotlin
-      weight: 204
-    - name: Setup
-      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup
-      parent: rum_mobile_kotlin
-      identifier: rum_mobile_kotlin_setup
-      weight: 101
-    - name: Crash Reporting
-      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/error_tracking
-      parent: rum_mobile_kotlin
-      identifier: rum_mobile_kotlin_crash
-      weight: 102
-    - name: Advanced Configuration
-      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/advanced_configuration
-      parent: rum_mobile_kotlin
-      identifier: rum_mobile_kotlin_advanced_config
-      weight: 103
-    - name: Data Collected
-      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/data_collected
-      parent: rum_mobile_kotlin
-      identifier: rum_mobile_kotlin_data_collected
-      weight: 104
-    - name: Mobile Vitals
-      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/mobile_vitals
-      parent: rum_mobile_kotlin
-      identifier: rum_mobile_kotlin_mobile_vitals
-      weight: 105
-    - name: Web View Tracking
-      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/web_view_tracking
-      parent: rum_mobile_kotlin
-      identifier: rum_mobile_kotlin_web_view_tracking
-      weight: 106
-    - name: Integrated Libraries
-      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/integrated_libraries
-      parent: rum_mobile_kotlin
-      identifier: rum_mobile_kotlin_integrated_libraries
-      weight: 107
-    - name: Troubleshooting
-      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/troubleshooting
-      parent: rum_mobile_kotlin
-      identifier: rum_mobile_kotlin_troubleshooting
-      weight: 108
     - name: Roku
       url: real_user_monitoring/mobile_and_tv_monitoring/roku
       parent: mobile_and_tv_monitoring
@@ -7654,7 +7606,7 @@ menu:
       identifier: rum_guides
       weight: 12
     - name: Data Security
-      identifier: data_security_real_user_monitoring
+      identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
       weight: 13
@@ -7984,10 +7936,12 @@ menu:
       url: account_management/billing/pricing
       parent: account_management_billing
       weight: 1201
+      identifier: account_management_billing_pricing
     - name: Product Allotments
       url: account_management/billing/product_allotments
       parent: account_management_billing
       weight: 1202
+      identifier: account_management_billing_product_allotments
     - name: Containers
       identifier: account_management_billing_containers
       url: account_management/billing/containers

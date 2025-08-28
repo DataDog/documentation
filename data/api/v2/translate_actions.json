@@ -37,7 +37,7 @@
   },
   "ListAwsScanOptions": {
     "description": "Fetches the scan options configured for AWS accounts.",
-    "summary": "Get AWS Scan Options"
+    "summary": "List AWS Scan Options"
   },
   "CreateAwsScanOptions": {
     "description": "Activate Agentless scan options for an AWS account.",
@@ -48,6 +48,10 @@
   "DeleteAwsScanOptions": {
     "description": "Delete Agentless scan options for an AWS account.",
     "summary": "Delete AWS Scan Options"
+  },
+  "GetAwsScanOptions": {
+    "description": "Fetches the Agentless scan options for an activated account.",
+    "summary": "Get AWS scan options"
   },
   "UpdateAwsScanOptions": {
     "description": "Update the Agentless scan options for an activated account.",
@@ -2002,6 +2006,12 @@
   "ListScorecardOutcomes": {
     "description": "Fetches all rule outcomes.",
     "summary": "List all rule outcomes"
+  },
+  "UpdateScorecardOutcomesAsync": {
+    "description": "Updates multiple scorecard rule outcomes in a single batched request.",
+    "summary": "Update Scorecard outcomes asynchronously",
+    "request_description": "Set of scorecard outcomes.",
+    "request_schema_description": "Scorecard outcomes batch request."
   },
   "CreateScorecardOutcomesBatch": {
     "description": "Sets multiple service-rule outcomes in a single batched request.",

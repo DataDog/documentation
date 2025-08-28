@@ -24,6 +24,8 @@ DDSQL is SQL for Datadog data. It implements several standard SQL operations, su
 
 This documentation covers the SQL support available and includes:
 - [Syntax compatible with PostgreSQL](#syntax)
+- [Data types](#data-types)
+- [Type literals](#type-literals)
 - [SQL functions](#functions)
 - [Regular expressions](#regular-expressions)
 - [Window functions](#window-functions)
@@ -89,6 +91,62 @@ FROM employees {{< /code-block >}}                |
 FROM products {{< /code-block >}} |
 | `INTERVAL value unit`  | interval                      | Represents a time duration specified in a given unit. Supported units:<br>- `milliseconds` / `millisecond`<br>- `seconds` / `second`<br>- `minutes` / `minute`<br>- `hours` / `hour`<br>- `days` / `day` |
 
+## Data types
+
+DDSQL supports the following data types:
+
+| Data Type | Description |
+|-----------|-------------|
+| `BIGINT` | 64-bit signed integers. |
+| `BOOLEAN` | `true` or `false` values. |
+| `DOUBLE` | Double-precision floating-point numbers. |
+| `INTERVAL` | Time duration values. |
+| `JSON` | JSON data. |
+| `TIMESTAMP` | Date and time values. |
+| `VARCHAR` | Variable-length character strings. |
+
+### Array types
+
+All data types except `JSON` support array types. Arrays can contain multiple values of the same data type.
+
+## Type literals
+
+DDSQL supports explicit type literals using the syntax `[TYPE] [value]`.
+
+| Type | Syntax | Example |
+|------|--------|---------|
+| `BIGINT` | `BIGINT value` | `BIGINT 1234567` |
+| `BOOLEAN` | `BOOLEAN value` | `BOOLEAN true` |
+| `DOUBLE` | `DOUBLE value` | `DOUBLE 3.14159` |
+| `INTERVAL` | `INTERVAL 'value unit'` | `INTERVAL '30 minutes'` |
+| `JSON` | `JSON 'value'` | `JSON '{"key": "value", "count": 42}'` |
+| `TIMESTAMP` | `TIMESTAMP 'value'` | `TIMESTAMP '2023-12-25 10:30:00'` |
+| `VARCHAR` | `VARCHAR 'value'` | `VARCHAR 'hello world'` |
+
+The type prefix can be omitted and the type is automatically inferred from the value. For example, `'hello world'` is inferred as `VARCHAR`, `123` as `BIGINT`, and `true` as `BOOLEAN`.
+
+### Array literals
+
+Array literals use the syntax `ARRAY[value1, value2, ...]`. The array type is automatically inferred from the values.
+
+{{< code-block lang="sql" >}}
+SELECT ARRAY['apple', 'banana', 'cherry'] AS fruits; -- Inferred as VARCHAR array
+SELECT ARRAY[1, 2, 3] AS numbers;                    -- Inferred as BIGINT array
+SELECT ARRAY[true, false, true] AS flags;            -- Inferred as BOOLEAN array
+SELECT ARRAY[1.1, 2.2, 3.3] AS decimals;             -- Inferred as DOUBLE array
+{{< /code-block >}}
+
+### Example
+
+{{< code-block lang="sql" >}}
+-- Using type literals in queries
+SELECT 
+    VARCHAR 'Product Name: ' || name AS labeled_name,
+    price * DOUBLE 1.08 AS price_with_tax,
+    created_at + INTERVAL '7 days' AS expiry_date
+FROM products
+WHERE active = BOOLEAN true;
+{{< /code-block >}}
 
 ## Functions
 
@@ -619,7 +677,7 @@ ORDER BY value DESC;{{< /code-block >}}
 
 ## Tags
 
-DDSQL exposes tags as an `hstore` type, which you can query using the PostgreSQL arrow operator. For example:
+DDSQL exposes tags as an `hstore` type, which is inspired by PostgreSQL. You can access the values for specific tag keys using the PostgreSQL arrow operator. For example:
 
 ```sql
 SELECT instance_type, count(instance_type)
@@ -628,7 +686,15 @@ WHERE tags->'region' = 'us-east-1' -- region is a tag, not a column
 GROUP BY instance_type
 ```
 
-Tags are key-value pairs where each key can have zero, one, or multiple values. When accessed, the tag value returns a string containing all corresponding values.
+Tags are key-value pairs where each key can have zero, one, or multiple tag values corresponding to it. When accessed, the tag value returns a single string, containing _all_ corresponding values. When the data has multiple tag values for the same tag key, they are represented as a sorted, comma-separated string. For example:
+
+```sql
+SELECT tags->'team', instance_type, architecture, COUNT(*) as instance_count
+FROM aws.ec2_instance
+WHERE tags->'team' = 'compute_provisioning,database_ops'
+GROUP BY tags->'team', instance_type, architecture
+ORDER BY instance_count DESC
+```
 
 You can also compare tag values as strings or entire tag sets:
 
