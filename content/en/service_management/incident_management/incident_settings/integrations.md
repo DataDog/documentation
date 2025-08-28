@@ -97,7 +97,7 @@ To declare or manage an incident from a specific team:
 	1. [Add the Datadog application][7] to the team.
 	1. Add the **Datadog** tab to any channel in that team. 
 	1. From this tab, declare incidents and manage existing ones (for example, update fields, impacts, and responders). 
-	   **Note**:  In an incident channel, you can only manage the incident associated with that channel. In non-incident channels, you can only declare new incidents.
+	   **Note**: In an incident channel, you can only manage the incident associated with that channel. In non-incident channels, you can only declare new incidents.
 
 ### Incident channels
 
