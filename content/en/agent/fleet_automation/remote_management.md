@@ -42,7 +42,7 @@ If you are running older Agent versions:
 
 1. Use the generated Agent installation command to upgrade your Agent to version 7.66+.
 
-<div class="alert alert-info">For Agent versions older than 7.69, uou must run the generated installation command with <code>DD_REMOTE_UPDATES</code> set to <code>true</code> to gain access to Remote Agent Management. Enabling Remote Agent Management without running the installation command does not grant access to the feature.</div>
+<div class="alert alert-info">For Agent versions prior to 7.69, you must run the generated installation command with <code>DD_REMOTE_UPDATES</code> set to <code>true</code> to gain access to Remote Agent Management. Enabling Remote Agent Management without running the installation command does not grant access to the feature.</div>
 
 
 ## Upgrade Agents remotely
