@@ -861,7 +861,7 @@ Extract a specific value from an object inside an array when it matches a condit
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the [Datadog Log Pipeline API endpoint][1] with the following log status remapper JSON payload:
+Use the [Datadog Log Pipeline API endpoint][1] with the following array processor JSON payload:
 
 ```json
 {
@@ -927,7 +927,7 @@ Compute the number of elements in an array.
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the [Datadog Log Pipeline API endpoint][1] with the following log status remapper JSON payload:
+Use the [Datadog Log Pipeline API endpoint][1] with the following array processor JSON payload:
 
 ```json
 {
@@ -1000,7 +1000,7 @@ Add an attribute value to the end of a target array attribute in the log.
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the [Datadog Log Pipeline API endpoint][1] with the following log status remapper JSON payload:
+Use the [Datadog Log Pipeline API endpoint][1] with the following array processor JSON payload:
 
 ```json
 {
