@@ -2,6 +2,7 @@
 title: Azure App Service - Windows Code
 aliases:
   - /infrastructure/serverless/azure_app_services/
+  - /serverless/azure_app_services/azure_app_services_windows
 further_reading:
 - link: "/integrations/guide/azure-portal/"
   tag: "Documentation"
@@ -20,7 +21,7 @@ further_reading:
 
 ## Overview
 
-The Datadog extension for Azure App Service provides additional monitoring capabilities.
+The Datadog extension for Azure App Service provides monitoring capabilities in addition to the [Datadog-Azure integration][11], which provides metrics and logs.
 
 - Full distributed APM tracing using automatic instrumentation.
 - Customized APM service and trace views showing relevant Azure App Service metrics and metadata.
@@ -492,3 +493,4 @@ Still need help? Contact [Datadog support][10].
 [8]: /metrics/
 [9]: /integrations/azure/
 [10]: /help
+[11]: https://app.datadoghq.com/integrations/azure

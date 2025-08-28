@@ -3299,23 +3299,23 @@ menu:
       parent: serverless
       weight: 3
     - name: Azure App Service
-      url: serverless/azure_app_services
+      url: serverless/azure_app_service
       parent: serverless
       identifier: serverless_app_services
       weight: 4
     - name: Linux - Code
       identifier: serverless_azure_app_services_linux_code
-      url: serverless/azure_app_services/azure_app_services_linux
+      url: serverless/azure_app_service/linux_code
       parent: serverless_app_services
       weight: 401
     - name: Linux - Container
       identifier: serverless_azure_app_services_linux_container
-      url: serverless/azure_app_services/azure_app_services_container
+      url: serverless/azure_app_service/linux_container
       parent: serverless_app_services
       weight: 402
     - name: Windows - Code
       identifier: serverless_azure_app_services_windows_code
-      url: serverless/azure_app_services/azure_app_services_windows
+      url: serverless/azure_app_service/windows_code
       parent: serverless_app_services
       weight: 403
     - name: Azure Container Apps
