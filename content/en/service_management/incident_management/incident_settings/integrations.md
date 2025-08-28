@@ -93,11 +93,11 @@ After you do that, go to **[Service Management > Incidents > Settings > Integrat
 
 ### Declaring and managing incidents in Microsoft Teams
 
-To declare or manage an incident from a particular team, you must first [add the Datadog application to the team][7].
-
-After you add the application, you can add the **Datadog** tab to any channel within that team. From this tab, you can declare new incidents as well as manage existing incidents.
-
-If you are in an incident channel, the tab automatically surfaces the incident associated with that channel. From there, you can directly manage the incident — including updating its fields, impacts, and responders.
+To declare or manage an incident from a specific team:
+	1. [Add the Datadog application][7] to the team.
+	1. Add the **Datadog** tab to any channel in that team. 
+	1. From this tab, declare incidents and manage existing ones (for example, update fields, impacts, and responders). 
+	   **Note**:  In an incident channel, you can only manage the incident associated with that channel. In non-incident channels, you can only declare new incidents.
 
 ### Incident channels
 
