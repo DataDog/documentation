@@ -1,6 +1,6 @@
 ---
-title: Données recueillies par la solution Database_Monitoring
-description: Informations concernant les données recueillies par la solution Database_Monitoring.
+title: Données recueillies par la solution Database Monitoring
+description: Informations concernant les données recueillies par la solution Database Monitoring.
 further_reading: null
 ---
 
