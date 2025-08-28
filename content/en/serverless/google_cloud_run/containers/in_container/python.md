@@ -42,6 +42,7 @@ RUN pip install ddtrace
 
    Datadog also recommends the following environment variables:
    - `ENV PYTHONUNBUFFERED=1`: Ensure Python outputs appear immediately in container logs instead of being buffered.
+   - `ENV DD_LOGS_INJECTION=true`: Enable log/trace correlation for supported loggers.
    - `ENV DD_SOURCE=python`: Enable advanced Datadog log parsing.
 
    If you want multiline logs to be preserved in a single log message, Datadog recommends writing your logs in JSON format. For example, you can use a third-party logging library such as `structlog`:

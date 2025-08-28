@@ -43,7 +43,7 @@ apk add libgcc
 
    To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows `serverless-init` to read logs from stdout and stderr.
 
-   Datadog also recommends setting the environment variable `DD_SOURCE=php` to enable advanced Datadog log parsing.
+   Datadog also recommends setting the environment variable `DD_LOGS_INJECTION=true` and `DD_SOURCE=php` to enable advanced Datadog log parsing.
 
    For more information, see [Correlating PHP Logs and Traces][2].
 

@@ -81,7 +81,7 @@ builder.Host.UseSerilog((context, config) =>
 logger.LogInformation("Hello World!");
 {{< /code-block >}}
 
-   Datadog recommends setting the environment variable `DD_SOURCE=csharp` in your sidecar container to enable advanced Datadog log parsing.
+   Datadog recommends setting the environment variables `DD_LOGS_INJECTION=true` (in your main container) and `DD_SOURCE=csharp` (in your sidecar container) to enable advanced Datadog log parsing.
 
    For more information, see [Correlating .NET Logs and Traces][3].
 

@@ -51,7 +51,7 @@ RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /
 
    To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows `serverless-init` to read logs from stdout and stderr.
 
-   Datadog also recommends setting the environment variable `DD_SOURCE=csharp` to enable advanced Datadog log parsing.
+   Datadog also recommends setting the environment variables `DD_LOGS_INJECTION=true` and `DD_SOURCE=csharp` to enable advanced Datadog log parsing.
 
    If you want multiline logs to be preserved in a single log message, Datadog recommends writing your logs in JSON format. For example, you can use a third-party logging library such as `Serilog`:
 
