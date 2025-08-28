@@ -36,7 +36,7 @@ Minimum JDK versions:
 - Oracle JDK 8u351+, 11.0.17+, 17.0.5+, 21+
 - OpenJ9 JDK 8u372+, 11.0.18+, 17.0.6+ (used on Eclipse OpenJ9, IBM JDK, IBM Semeru Runtime).
 
-**Note:** The profiler is disabled by default for OpenJ9 due to the possibility of crashing JVM caused by a subtle bug in JVTMI implementation. If you are **not** experiencing any crashes, you can enable the profiler by adding `-Ddd.profiling.ddprof.enabled=true` or `DD_PROFILING_DDPROF_ENABLED=true`
+**Note:** The profiler is disabled by default for OpenJ9 due to the possibility of crashing JVM caused by a subtle bug in JVTMI implementation. If you are **not** experiencing any crashes, you can enable the profiler by adding `-Ddd.profiling.ddprof.enabled=true` or `DD_PROFILING_DDPROF_ENABLED=true`.
 - Azul Platform Prime 23.05.0.0+ (formerly Azul Zing)
 
 
