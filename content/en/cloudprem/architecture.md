@@ -1,12 +1,9 @@
 ---
 title: Architecture
 further_reading:
-- link: "/cloudprem/install/prerequisites/"
-  tag: "Documentation"
-  text: "CloudPrem Prerequisites"
 - link: "/cloudprem/install/"
   tag: "Documentation"
-  text: "Install CloudPrem"
+  text: "CloudPrem Installation Prerequisites"
 ---
 
 {{< callout btn_hidden="true" >}}

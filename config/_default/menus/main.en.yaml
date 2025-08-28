@@ -5903,7 +5903,7 @@ menu:
       identifier: log_troubleshooting_live_tail
       weight: 1101
     - name: CloudPrem
-      pre: cloudprem # Do you have an icon for this?
+      pre: upload-wui
       url: cloudprem/
       parent: log_management_heading
       identifier: cloudprem
@@ -5918,31 +5918,21 @@ menu:
       parent: cloudprem
       identifier: cloudprem_installation
       weight: 2
-    - name: Prerequisites
-      url: /cloudprem/install/prerequisites
-      parent: cloudprem_installation
-      identifier: cloudprem_prerequisites
-      weight: 201
     - name: AWS EKS
       url: /cloudprem/install/aws_eks
       parent: cloudprem_installation
       identifier: cloudprem_aws_eks
+      weight: 201
+    - name: Azure AKS
+      url: /cloudprem/install/azure_aks
+      parent: cloudprem_installation
+      identifier: cloudprem_azure_aks
       weight: 202
-    # - name: Azure AKS
-    #   url: /cloudprem/install/azure_aks
-    #   parent: cloudprem_installation
-    #   identifier: cloudprem_azure_aks
-    #   weight: 203
     # - name: Kubernetes with NGINX
     #   url: /cloudprem/install/kubernetes_nginx
     #   parent: cloudprem_installation
     #   identifier: cloudprem_kubernetes_nginx
-    #   weight: 204
-    - name: AWS Configuration
-      url: /cloudprem/configure/aws_config
-      parent: cloudprem_advanced_configuration
-      identifier: cloudprem_aws_configuration
-      weight: 402
+    #   weight: 203
     - name: Log Ingestion
       url: /cloudprem/ingest_logs/
       parent: cloudprem
@@ -5973,21 +5963,31 @@ menu:
       parent: cloudprem_advanced_configuration
       identifier: cloudprem_datadog_account
       weight: 401
+    - name: AWS Configuration
+      url: /cloudprem/configure/aws_config
+      parent: cloudprem_advanced_configuration
+      identifier: cloudprem_aws_configuration
+      weight: 402
+    - name: Azure Configuration
+      url: /cloudprem/configure/azure_config
+      parent: cloudprem_advanced_configuration
+      identifier: cloudprem_azure_configuration
+      weight: 403
     - name: Cluster Sizing
       url: /cloudprem/configure/cluster_sizing
       parent: cloudprem_advanced_configuration
       identifier: cloudprem_cluster_sizing
-      weight: 403
+      weight: 404
     - name: Ingress
       url: /cloudprem/configure/ingress
       parent: cloudprem_advanced_configuration
       identifier: cloudprem_ingress
-      weight: 404
+      weight: 405
     - name: Processing
       url: /cloudprem/configure/processing
       parent: cloudprem_advanced_configuration
       identifier: cloudprem_processing
-      weight: 405
+      weight: 406
     - name: Management
       url: /cloudprem/manage/
       parent: cloudprem
