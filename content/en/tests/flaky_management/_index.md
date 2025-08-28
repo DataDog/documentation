@@ -103,14 +103,14 @@ Flaky Test Management uses AI to automatically assign a root cause category to e
 
 To use Flaky Test Management features, you must use Datadog's native instrumentation for your test framework. The table below outlines the minimum versions of each Datadog tracing library required to quarantine, disable, and attempt to fix flaky tests. Click a language name for setup information:
 
-| Language        | Quarantine & Disable | Attempt to fix   |
-| --------------- | -------------------- | ---------------- |
-| [.NET][5]       | 3.13.0+              | 3.17.0+          |
-| [Go][6]         | 1.73.0+              | Not available    |
-| [Java][7]       | 1.48.0+              | 1.50.0+          |
-| [JavaScript][8] | 5.44.0+              | 5.52.0+          |
-| [Python][9]     | 3.3.0+               | 3.8.0+           |
-| [Ruby][10]       | 1.13.0+              | 1.17.0+          |
+| Language        | Quarantine & Disable          | Attempt to fix               |
+| --------------- | ----------------------------- | ---------------------------- |
+| [.NET][5]       | 3.13.0+                       | 3.17.0+                      |
+| [Go][6]         | 1.73.0+ (Orchestrion v1.3.0+) | 2.2.2+ (Orchestrion v1.6.0+) |
+| [Java][7]       | 1.48.0+                       | 1.50.0+                      |
+| [JavaScript][8] | 5.44.0+                       | 5.52.0+                      |
+| [Python][9]     | 3.3.0+                        | 3.8.0+                       |
+| [Ruby][10]      | 1.13.0+                       | 1.17.0+                      |
 
 ## Further reading
 
