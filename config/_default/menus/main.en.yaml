@@ -4009,10 +4009,10 @@ menu:
       parent: tracing
       identifier: apm_recommendations
       weight: 7
-    - name: Code Origins for Spans
-      url: tracing/code_origins
+    - name: Code Origin for Spans
+      url: tracing/code_origin
       parent: tracing
-      identifier: tracing_code_origins
+      identifier: tracing_code_origin
       weight: 8
     - name: Service Observability
       url: tracing/services/
