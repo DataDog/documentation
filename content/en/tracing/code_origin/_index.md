@@ -1,7 +1,8 @@
 ---
-title: Code Origins for Spans
-description: "Learn how to use Code Origins to understand where your spans originate in your codebase"
+title: Code Origin for Spans
+description: "Learn how to use Code Origin to understand where your spans originate in your codebase"
 aliases:
+  - /tracing/code_origins/
   - /tracing/guide/code_origins/
 further_reading:
 - link: "/tracing/glossary/"
@@ -26,14 +27,14 @@ further_reading:
 
 ## Overview
 
-Code Origins captures the exact locations in your codebase where APM spans are created. When enabled on a compatible service, it automatically adds file path, line number, and function name to each [service entry span][12], making it easier to:
+Code Origin captures the exact locations in your codebase where APM spans are created. When enabled on a compatible service, it automatically adds file path, line number, and function name to each [service entry span][12], making it easier to:
 
 - Debug performance issues
 - Understand code execution flow
 - Identify performance bottlenecks
 
 In Trace Explorer, select a span from an enabled service to see Code Origin details on the Overview tab:
-{{< img src="tracing/code_origins/code_origin_details_spotlight.png" alt="Code Origin Details" style="width:100%;">}}
+{{< img src="tracing/code_origin/code_origin_details_spotlight.png" alt="Code Origin Details" style="width:100%;">}}
 
 
 ## Getting started
@@ -50,9 +51,9 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 | Java | 1.47.0+ | Spring Boot/Data, gRPC servers, Micronaut 4, Kafka consumers|
 | Python | 2.15.0+ | Django, Flask, Starlette and derivatives|
 | Node.js | 4.49.0+ | Fastify, Express (5.54.0+)|
-| .NET | 3.15.0+ | ASP.NET, ASP.NET Core| 
+| .NET | 3.15.0+ | ASP.NET, ASP.NET Core|
 
-### Enable Code Origins
+### Enable Code Origin
 
 Run your service with the following environment variable:
 
@@ -64,28 +65,28 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
   For transpiled Node.js applications (for example, TypeScript), make sure to generate and publish source maps with the deployed application, run Node.js with the <a href="https://nodejs.org/docs/latest/api/cli.html#--enable-source-maps"><code>--enable-source-maps</code></a> flag, and use v5.59.0 or newer of the Node.js tracer. Otherwise, code previews do not work. See the Node.js <a href="/integrations/guide/source-code-integration/?tab=nodejs#setup">Source Code Integration</a> documentation for more details.
 </div>
 
-## Using Code Origins
+## Using Code Origin
 
 ### In the Trace Explorer
 
 1. Navigate to the [Trace Explorer][1].
-1. Search for "Service Entry Spans" from your Code Origins-enabled services.
+1. Search for "Service Entry Spans" from your Code Origin-enabled services.
 
-    {{< img src="tracing/code_origins/code_origin_service_entry_spans_filter.png" alt="Code Origins - Search for Service Entry Spans" style="width:100%;">}}
+    {{< img src="tracing/code_origin/code_origin_service_entry_spans_filter.png" alt="Code Origin - Search for Service Entry Spans" style="width:100%;">}}
 
 1. Click on a span to view its details.
 1. In the trace details side panel, look for the "Code Origin" section.
 
-    {{< img src="tracing/code_origins/code_origin_details_spotlight.png" alt="Code Origin Details in Traces Explorer" style="width:100%;">}}
+    {{< img src="tracing/code_origin/code_origin_details_spotlight.png" alt="Code Origin Details in Traces Explorer" style="width:100%;">}}
 
 1. From the Code Origin section:
     - Kick off a [Live Debugger][11] session on the running service by clicking "Start Debug Session" to capture logs at the Code Origin method location. Or, select a breakpoint in the gutter of the code preview to capture logs at the selected line of code.
-      
-        {{< img src="tracing/code_origins/code_origin_start_debug_session.png" alt="Code Origin - Start Live Debugger Session" style="width:100%;">}}  
+
+        {{< img src="tracing/code_origin/code_origin_start_debug_session.png" alt="Code Origin - Start Live Debugger Session" style="width:100%;">}}
 
      - Click on source code variables to add them as attributes to future spans with [Dynamic Instrumentation][5].
-        
-        {{< img src="tracing/code_origins/code_origin_add_span_tag_spotlight.png" alt="Code Origin - Add span tag with Dynamic Instrumentation" style="width:100%;">}} 
+
+        {{< img src="tracing/code_origin/code_origin_add_span_tag_spotlight.png" alt="Code Origin - Add span tag with Dynamic Instrumentation" style="width:100%;">}}
 
 
 ### In your IDE
@@ -95,23 +96,23 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
     - Supported Languages: Java, Python
 2. View RED metrics (Requests, Errors, and Duration) as inline annotations above your endpoint methods.
 
-    {{< img src="tracing/code_origins/code_origin_ide_details.png" alt="Code Origin Details in IDE" style="width:100%;">}}
+    {{< img src="tracing/code_origin/code_origin_ide_details.png" alt="Code Origin Details in IDE" style="width:100%;">}}
 
 ## Troubleshooting
 
 ### Code Origin section is missing
 
-- Verify Code Origins is [enabled](#enable-code-origins) in your tracing library configuration.
+- Verify Code Origin is [enabled](#enable-code-origin) in your tracing library configuration.
 - Confirm that your service meets all [compatibility requirements](#compatibility-requirements) (that is, service language, supported frameworks, and minimum tracer version).
-- For most services, Code Origins data is captured for [service entry spans][12] only. You can filter to "Service Entry Spans" in the [APM Trace Explorer][1].
+- For most services, Code Origin data is captured for [service entry spans][12] only. You can filter to "Service Entry Spans" in the [APM Trace Explorer][1].
 
-    {{< img src="tracing/code_origins/code_origin_service_entry_spans_filter.png" alt="Code Origins - Search for Service Entry Spans" style="width:100%;">}}
+    {{< img src="tracing/code_origin/code_origin_service_entry_spans_filter.png" alt="Code Origin - Search for Service Entry Spans" style="width:100%;">}}
 
 ### Code preview is not visible or the file is not found
 
 - Ensure all [Source Code Integration][7] setup requirements are met, including your `DD_GIT_*` environment variables are configured with the correct values.
 - For transpiled Node.js applications (for example, TypeScript), make sure to generate and publish source maps with the deployed application, run Node.js with the [`--enable-source-maps`][10] flag, and use v5.59.0 or newer of the Node.js tracer. Otherwise, code previews will not work. See the Node.js [Source Code Integration][9] documentation for more details.
-- Code Origins is designed to reference user code only, but in some cases, third-party code references may slip through. You can report these cases to [Datadog support][13] and help improve these references.
+- Code Origin is designed to reference user code only, but in some cases, third-party code references may slip through. You can report these cases to [Datadog support][13] and help improve these references.
 
 ## Further Reading
 
@@ -119,7 +120,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 
 [1]: https://app.datadoghq.com/apm/traces
 [2]: /tracing/services/service_page/
-[3]: /tracing/services/resource_page/ 
+[3]: /tracing/services/resource_page/
 [4]: /developers/ide_plugins/
 [5]: /dynamic_instrumentation/
 [6]: /tracing/trace_collection/
