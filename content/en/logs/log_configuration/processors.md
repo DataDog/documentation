@@ -886,9 +886,8 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following array processo
 | `operation.type`  | String      | Yes      | Type of array processor operation.                            |
 | `operation.source`  | String    | Yes      | Path of the array you want to select from.                    |
 | `operation.target`  | String    | Yes      | Target attribute.                                             |
-| `operation.filter`  | String    | Yes      | The first array element matching this expression is selected. |
+| `operation.filter`  | String    | Yes      | Expression to match an array element. The first matching element is selected. |
 | `operation.value_to_extract`  | String | Yes | Attribute to read in the selected element.                  |
-| `operation.type`  | String      | Yes      | Type of array processor operation.                            |
 
 [1]: /api/v1/logs-pipelines/
 {{% /tab %}}
