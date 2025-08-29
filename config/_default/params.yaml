@@ -132,6 +132,9 @@ code_language_ids:
     ibm: "IBM HTTP Server"
     gcp-service-extensions: "GCP Service Extensions"
     apigateway: "Amazon API Gateway"
+    real_time_rule: "Real-Time Rule"
+    scheduled_rule: "Scheduled Rule"
+    historical_job: "Historical Job"
 branch: ""
 
 signupclass: sign-up-trigger

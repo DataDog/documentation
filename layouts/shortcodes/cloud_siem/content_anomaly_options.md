@@ -1,0 +1,2 @@
+1. In the **Content anomaly detection options** section, specify the parameters to assess whether a log is anomalous or not.
+    - See [How an event is determined to be anomalous](#how-an-event-is-determined-to-be-anomalous) for more information.

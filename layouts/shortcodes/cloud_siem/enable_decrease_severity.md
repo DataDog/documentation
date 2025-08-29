@@ -1,0 +1,1 @@
+1. Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. 
