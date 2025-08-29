@@ -1,6 +1,6 @@
 ---
 aliases:
-- /es/tracing/guide/code_origin/
+- /es/tracing/code_origins/
 - /es/tracing/guide/code_origins/
 description: Más información sobre cómo utilizar Code Origin para entender dónde
   se originan tus tramos en tu código base
