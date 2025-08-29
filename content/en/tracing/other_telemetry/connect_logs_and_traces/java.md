@@ -36,7 +36,31 @@ Starting in version 0.74.0, the Java tracer automatically injects trace correlat
 
 ## Manual injection
 
-If you prefer to manually correlate your traces with your logs, use the Java tracer's API to retrieve correlation identifiers. Use `CorrelationIdentifier.getTraceId` and `CorrelationIdentifier.getSpanId` methods to inject identifiers at the beginning of the span being logged, and remove the identifiers when the span is complete.
+If you prefer to manually add correlation identifiers to your logs, you can use the tracer's API. This requires adding the `dd-trace-api` dependency to your project.
+
+{{< tabs >}}
+{{% tab "Maven" %}}
+
+```xml
+<dependency>
+    <groupId>com.datadoghq</groupId>
+    <artifactId>dd-trace-api</artifactId>
+    <version>LATEST_VERSION</version>
+</dependency>
+```
+
+{{% /tab %}}
+{{% tab "Gradle" %}}
+
+```groovy
+implementation 'com.datadoghq:dd-trace-api:LATEST_VERSION'
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+<div class="alert alert-info">Remember to replace <code>LATEST_VERSION</code> with the same version as your Datadog Java tracer (<code>dd-java-agent</code>).</div>
+
+After the dependency is added, use `CorrelationIdentifier.getTraceId()` and `CorrelationIdentifier.getSpanId()` to retrieve and inject the IDs into your logging context, as shown in the following examples.
 
 {{< tabs >}}
 {{% tab "Log4j 2" %}}
@@ -57,7 +81,6 @@ try {
     ThreadContext.remove("dd.span_id");
 }
 ```
-
 {{% /tab %}}
 {{% tab "SLF4J and Logback" %}}
 
