@@ -6,6 +6,9 @@ further_reading:
 - link: "synthetics/notifications/advanced_notifications"
   tag: "Documentation"
   text: "Use advanced notifications in Synthetic Monitoring"
+- link: "monitors/notify/variables"
+  tag: "Documentation"
+  text: "Learn more about monitor variables"
 ---
 
 ## Overview

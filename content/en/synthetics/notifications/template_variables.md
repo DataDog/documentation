@@ -6,9 +6,9 @@ further_reading:
 - link: "/monitors/manage/"
   tag: "Documentation"
   text: "Learn how to manage monitors"
-- link: "/monitors/guide/integrate-monitors-with-statuspage/"
+- link: "/monitors/templates/"
   tag: "Documentation"
-  text: "Learn how to integrate monitors with Statuspage"
+  text: "Learn more about monitor templates"
 ---
 
 ## Overview

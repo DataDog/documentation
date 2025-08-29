@@ -7069,11 +7069,6 @@ menu:
       parent: continuous_testing
       identifier: continuous_testing_guides
       weight: 6
-    - name: Guides
-      url: continuous_testing/guide/
-      parent: continuous_testing
-      identifier: continuous_testing_guides
-      weight: 6
     - name: Troubleshooting
       url: continuous_testing/troubleshooting/
       parent: continuous_testing

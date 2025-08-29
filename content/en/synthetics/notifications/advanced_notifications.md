@@ -15,7 +15,7 @@ You can customize Synthetic monitor messages using handlebars templating. The fo
 
 **Note:** Always test your syntax directly in the monitor message editor, as template behavior may vary slightly across versions.
 
-### Comments
+## Comments
 
 Use comments to explain what the template is doing. Comments are removed from the final rendered message.
 
@@ -27,7 +27,7 @@ multi-line comment
 }}
 ```
 
-### Raw strings
+## Raw strings
 
 To display raw values without HTML escaping (for example, URLs, or HTTP responses in code blocks), use triple curly braces:
 
@@ -35,7 +35,7 @@ To display raw values without HTML escaping (for example, URLs, or HTTP response
 {{{my_var}}}
 ```
 
-### Accessing list data
+## Accessing list data
 
 You can loop over lists (like steps or variables) or access items directly:
 
@@ -63,7 +63,7 @@ You can loop over lists (like steps or variables) or access items directly:
   {{eval "humanize_bytes(bodySize)"}}
   ```
 
-### Conditions
+## Conditions
 
 <div class="alert alert-info">Use <code>#if</code>, <code>#is_match</code>, and <code>#is_exact_match</code> for logic-based rendering.</div>
 
@@ -77,7 +77,7 @@ You can loop over lists (like steps or variables) or access items directly:
 {{/if}}
 ```
 
-#### Conditional alerting based on step ID:
+### Conditional alerting based on step ID
 
 ```handlebars
 {{#is_exact_match synthetics.failed_step.id "svn-yrx-3xg"}}
@@ -110,7 +110,7 @@ Use `#each` to loop over dictionaries or lists. You can access:
 Users: {{#each users}}`{{@key}}` ({{name}}){{#unless @last}}, {{/unless}}{{/each}}
 ```
 
-#### Steps loop (Synthetics-specific):
+## Steps loop
 
 ```handlebars
 {{#each synthetics.attributes.result.steps}}
