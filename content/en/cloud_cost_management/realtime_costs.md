@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Realtime Costs provide near realtime estimates of your AWS EC2 compute spend allowing you to see changes before they appear on your bill.
+Realtime Costs provide near realtime estimates of your Amazon EC2 compute spend allowing you to see changes before they appear on your bill.
 
 Use realtime costs to:
 - Detect anomalies early
@@ -28,10 +28,10 @@ Estimates are based on recent average hourly net amortized EC2 prices by instanc
 
 ## Usage
 
-To use realtime costs it is recommended to always use the `sum` aggregation. In addition a `rollup` using a `sum` with an interval no less than 5min is recommended.
+To use realtime costs it is recommended to always use the `sum` aggregation. In addition a `rollup` using a `sum` with an interval no less than 5min is recommended. `sum:aws.cost.net.amortized.realtime.estimated.test{*}.as_count().rollup(sum, 300)`
 
-Using `count` will give you the amount spent over the interval of time. For example if you set a 5min rollup, then the count is the amount spent in 5min. If the rollup is instead 1h it would be about 12 times as large.
-Using `rate` will instead show the amount spent per second. Using a formula to multipy this value can get you the rate per unit of time. For example taking the rate per second times 3600 will give you the rate per hour.
+Using `count` shows the amount spent over the interval of time. For example if you set a 5min rollup, then the count is the amount spent in 5min. If the rollup is instead 1h it would be about 12 times as large.
+Using `rate` shows the amount spent per second. Using a formula to multiply this value can get you the rate per unit of time. For example taking the rate per second times 3600 will give you the rate per hour.
 
 You can learn more about rate metrics [here][1].
 
@@ -54,6 +54,6 @@ You can learn more about rate metrics [here][1].
 
 Tagging may be inconsistent when compared to the other CCM metrics.
 Not all AWS billing or FinOps FOCUS tags are able to be replicated to the realtime cost metric.
-Realtime costs also do not support tag pipelines. Realtime costs do not support k8s resource tags such as `kube_namespace` or tags that show up on k8s nodes, but not the the AWS EC2 instance directly.
+Realtime costs also do not support tag pipelines. Realtime costs do not support Kubernetes resource tags such as `kube_namespace`. Therefore only tags that show up on Amazon EC2 instance directly will be available. Tags that exist only on Kubernetes nodes will not be available.
 
 [1]: /metrics/types/?tab=rate#metric-types
