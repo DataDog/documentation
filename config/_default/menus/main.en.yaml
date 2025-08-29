@@ -680,27 +680,27 @@ menu:
       url: /opentelemetry/setup/collector_exporter/deploy
       identifier: otel-setup-collector-exporter-deploy
       parent: otel-setup-collector-exporter
-      weight: 101
+      weight: 40211
     - name: Batch and Memory Settings
       url: opentelemetry/config/collector_batch_memory/
       identifier: otel_batch_memory
       parent: otel-setup-collector-exporter
-      weight: 102
+      weight: 40212
     - name: Hostnames and Tagging
       url: opentelemetry/config/hostname_tagging/
       identifier: otel_hostnames_tagging
       parent: otel-setup-collector-exporter
-      weight: 103
+      weight: 40213
     - name: Log Collection
       url: opentelemetry/config/log_collection/
       identifier: otel_log_collection
       parent: otel-setup-collector-exporter
-      weight: 104
+      weight: 40214
     - name: OTLP Receiver
       url: opentelemetry/config/otlp_receiver/
       identifier: otel_otlp_receiver
       parent: otel-setup-collector-exporter
-      weight: 105
+      weight: 40215
     - name: OTLP Ingest in the Agent
       url: /opentelemetry/setup/otlp_ingest_in_the_agent
       identifier: otel-setup-otlp-ingest
@@ -710,16 +710,16 @@ menu:
       url: /opentelemetry/setup/agentless
       identifier: otel-setup-intake-endpoint
       parent: otel-setup-other
-      weight: 403
+      weight: 4023
     - name: Logs Endpoint
       url: /opentelemetry/setup/agentless/logs
       parent: otel-setup-intake-endpoint
-      weight: 301
+      weight: 40231
       identifier: otel_setup_agentless_logs
     - name: Metrics Endpoint
       url: /opentelemetry/setup/agentless/metrics
       parent: otel-setup-intake-endpoint
-      weight: 302
+      weight: 40232
       identifier: otel_setup_agentless_metrics
     - name: Semantic Mapping
       url: opentelemetry/mapping/
