@@ -1809,11 +1809,16 @@ menu:
       parent: monitor_types
       identifier: monitor_types_slo
       weight: 424
+    - name: Synthetic Monitoring
+      url: monitors/types/synthetic_monitoring/
+      parent: monitor_types
+      identifier: monitor_types_syn
+      weight: 425
     - name: Watchdog
       url: monitors/types/watchdog/
       parent: monitor_types
       identifier: monitor_types_watchdog
-      weight: 425
+      weight: 426
     - name: Notifications
       url: monitors/notify/
       parent: alerting
@@ -6943,16 +6948,41 @@ menu:
       parent: synthetics
       identifier: synthetics_guides
       weight: 8
+    - name: Notifications
+      url: synthetics/notifications/
+      parent: synthetics
+      identifier: synthetics_notifications
+      weight: 9
+    - name: Template Variables
+      url: synthetics/notifications/template_variables
+      parent: synthetics_notifications
+      identifier: synthetics_notifications_template_variables
+      weight: 901
+    - name: Conditional Alerting
+      url: synthetics/notifications/conditional_alerting
+      parent: synthetics_notifications
+      identifier: synthetics_notifications_conditional_alerting
+      weight: 902
+    - name: Advanced Notifications
+      url: synthetics/notifications/advanced_notifications
+      parent: synthetics_notifications
+      identifier: synthetics_notifications_advanced_notifications
+      weight: 903
+    - name: Integrate with Statuspage
+      url: synthetics/notifications/statuspage
+      parent: synthetics_notifications
+      identifier: synthetics_notifications_statuspage
+      weight: 904
     - name: Troubleshooting
       url: synthetics/troubleshooting/
       parent: synthetics
       identifier: synthetics_troubleshooting
-      weight: 9
+      weight: 10
     - name: Data Security
       identifier: data_security_synthetics
       url: data_security/synthetics/
       parent: synthetics
-      weight: 10
+      weight: 11
     - name: Continuous Testing
       url: continuous_testing/
       pre: continuous-testing
