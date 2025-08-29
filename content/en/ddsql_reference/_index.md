@@ -182,7 +182,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `STRING_TO_ARRAY(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter. |
 | `ARRAY_AGG(expression e)`                        | array of input type                   | Creates an array by collecting all the input values.                        |
 | `UNNEST(array a [, array b...])`                 | rows of a [, b...]                    | Expands arrays into a set of rows. This form is only allowed in a FROM clause. |
-| `CURRENT_SETTING(setting_name text)`             | string                                | Returns the current value of the specified setting. Supports the parameters `dd.time_frame_start` and `dd.time_frame_end`, which return the start and end of the global time frame, respectively. |
+| `CURRENT_SETTING(string setting_name)`           | string                                | Returns the current value of the specified setting. Supports the parameters `dd.time_frame_start` and `dd.time_frame_end`, which return the start and end of the global time frame, respectively. |
 | `NOW()`                                          | timestamp                             | Returns the current timestamp at the start of the current transaction. |
 
 {{% collapse-content title="Examples" level="h3" %}}
