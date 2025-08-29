@@ -92,9 +92,9 @@ It means that you are either:
 - running your CI pipeline with a Linux distribution that does not rely on the glibc (such as Alpine Linux). Instead,
   run your CI pipeline with a distribution that supports the latest version of the glibc (such as the stable version of Ubuntu).
 
-### Services or teams in the Static Code (SAST) explorer or Repositories view are not updating
+### Services or teams in the SAST explorer or Repositories view are not updating
 
-Results for services and teams in SAST are based on the `entity.datadog.yml` or `CODEOWNERS` files from your repository's default branch.
+Results for services and teams in Static Code Analysis (SAST) are based on the `entity.datadog.yml` or `CODEOWNERS` files from your repository's default branch.
 If you've made changes to these files in a feature branch, those updates are not reflected in the vulnerability for that branch.
 
 After updating either file on your default branch, it may take up to six hours for the changes to appear in subsequent scan results.
