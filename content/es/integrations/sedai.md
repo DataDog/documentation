@@ -47,15 +47,15 @@ short_description: Una plataforma autónoma para gestionar de forma inteligente 
 supported_os:
 - linux
 - windows
-- macos
+- macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Automatización
-  - Categoría::Nube
-  - Categoría::Gestión de costes
+  - Category::Automation
+  - Category::Cloud
+  - Category::Cost Management
   - Category::Notifications
-  - Categoría::Orquestación
+  - Category::Orchestration
   - Category::Provisioning
   - Supported OS::Linux
   - Supported OS::Windows

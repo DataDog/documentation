@@ -143,6 +143,7 @@ Watchdog looks at infrastructure metrics from the following integrations:
   * [Amazon Web Services][5]:
     * [S3][6]
     * [ELB/ALB/NLB][7]
+    * [CloudFront][8]
     * [DynamoDB][9]
     * [RDS][10]
     * [ECS][11]
@@ -160,6 +161,7 @@ Watchdog starts finding anomalies after the minimum required history is availabl
 [5]: /integrations/amazon_web_services/
 [6]: /integrations/amazon_s3/
 [7]: /integrations/amazon_elb/
+[8]: /integrations/amazon_cloudfront/
 [9]: /integrations/amazon_dynamodb/
 [10]: /integrations/amazon_rds/
 [11]: /containers/amazon_ecs/?tab=awscli
@@ -167,7 +169,7 @@ Watchdog starts finding anomalies after the minimum required history is availabl
 [13]: /containers/docker/?tab=standard
 [14]: /containers/kubernetes/installation/?tab=operator
 [15]: /integrations/mysql/
-[16]: /integrations/mysql/
+[16]: /integrations/sqlserver/
 [17]: /integrations/cassandra/
 [18]: /integrations/oracle/
 {{% /tab %}}

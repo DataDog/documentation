@@ -22,15 +22,12 @@ further_reading:
   - link: "/metrics/otlp/?tab=summary#mapping"
     tag: "Documentation"
     text: "OTLP Metrics Mapping in Datadog"
+site_support_id: otlp_agentless
 ---
 
 {{< callout header="false" btn_hidden="true">}}
   The Datadog OTLP metrics intake endpoint is in Preview. To request access, contact your account representative.
 {{< /callout >}}
-
-{{< site-region region="ap1,gov" >}}
-<div class="alert alert-warning">Datadog OTLP metrics intake endpoint is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -242,7 +239,7 @@ exporters:
     metrics_endpoint: {{< region-param key="otlp_metrics_endpoint" >}}
     headers:
       dd-api-key: ${env:DD_API_KEY}
-      dd-otel-metric-config: "{resource_attributes_as_tags: true}"
+      dd-otel-metric-config: '{"resource_attributes_as_tags": true}'
       dd-otlp-source: "${PARTNER_ID}", # For Datadog platform partners only. Use the ID provided by Datadog.
 ...
 

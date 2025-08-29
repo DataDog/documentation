@@ -40,8 +40,8 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
 1. Navigate to [Cost Management | Configuration][5] under Azure portal's **Tools** > **Cost Management** > **Settings** > **Configuration** and click **Exports**.
   {{< img src="cloud_cost/azure_export_path.png" alt="In Azure portal highlighting Exports option in navigation" style="width:100%" >}}
-2. Select the export scope located next to the search filter. 
-    
+2. Select the export scope located next to the search filter.
+
    **Note:** The scope must be **billing account**, **subscription**, or **resource group**.
 3. After the scope is selected, click **Schedule export**.
 
@@ -59,15 +59,7 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
 6. Enter an "Export prefix" for the new exports. For example, enter `datadog` to avoid conflicts with existing exports.
 
-7. Click **Edit** on each export and confirm the following details:
-    - Frequency: **Daily export of month-to-date costs**
-    - Dataset version:
-      - Supported versions: `2021-10-01`, `2021-01-01`, `2020-01-01`
-      - Unsupported versions: `2019-10-01`
-
-   {{< img src="cloud_cost/improved_export.png" alt="Export details with Metric: Actual, Export type: Daily, and Dataset Version" style="width:100%" >}}
-
-8. In the **Destination** tab, select the following details:
+7. In the **Destination** tab, select the following details:
     - Choose **Azure blob storage** as the storage type.
     - Choose a storage account, container, and directory for the exports.
         - **Note:** Do not use special characters like `.` in these fields.
@@ -80,9 +72,8 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
    {{< img src="cloud_cost/improved_export_destination_2.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}
 
-9. On the **Review + create** tab, select **Create**.
-
-For faster processing, generate the first exports manually by clicking **Run Now**.
+8. On the **Review + create** tab, select **Create**.
+9. For faster processing, generate the first exports manually by clicking **Run Now**.
 
 {{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports" style="width:50%" >}}
 
@@ -138,6 +129,29 @@ This ensures complete cost accuracy by allowing periodic cost calculations again
 
 ### Configure Cloud Cost in Datadog
 Navigate to [Setup & Configuration][3] and follow the steps.
+
+### Getting historical data
+Datadog automatically ingests up to 15 months of available historical cost data.
+
+Azure exports cost data starting from the month you created the export. You can manually backfill up to 12 months of Azure cost data using the Azure Cost Exports UI.
+
+1. Complete the instructions in the **Setup** and **Configure Cloud Cost in Datadog** sections above.
+1. Wait up to 24 hours for cost data to appear in Datadog to ensure the integration is working end-to-end before beginning the backfill process. **Note:** If you have already completed setup, and cost data is appearing in Datadog, you can proceed directly to the backfill steps below.
+1. Manually export an **actual** and **amortized** report for each calendar month. For example, for June 2025:
+    1. Edit the Export
+    2. Change Export Type to "One-time export"
+    3. Set From to 06-01-2025 **Note:** This must be the first day of the month.
+    4. Set End to 06-30-2025 **Note:** This must be the last day of the month.
+    5. Save the export **Note:** This automatically runs the export
+    6. Wait for the export to finish running
+1. Revert both the **actual** and **amortized** exports to their original state to resume daily exports:
+    1. Edit the Export
+    2. Change Export Type to "Daily export of month-to-date costs"
+    3. Save the export
+
+Datadog automatically discovers and ingests this data, and it should appear in Datadog within 24 hours.
+
+You can also create historical data in your storage account using the [Microsoft API][6] or by creating a [support ticket with Microsoft][7]. Ensure the file structure and partitioning follows the format of scheduled exports.
 
 ### Cost types
 
@@ -219,11 +233,6 @@ Datadog adds out-of-the-box tags to ingested cost data to help you further break
 Viewing costs in context of observability data is important to understand how infrastructure changes impact costs, identify why costs change, and optimize infrastructure for both costs and performance. Datadog adds the `name` tag on cost data for top Azure products to simplify correlating observability and cost metrics.
 
 For example, to view cost and utilization for each Azure VM, you can make a table with `azure.cost.amortized` and `azure.vm.network_in_total` (or any other VM metric) and group by `name`. Or, to see Storage usage and costs side by side, you can filter into `metercategory:Storage` and graph `azure.storage.transactions` and `azure.cost.amortized` grouped by `name`.
-
-
-### Getting historical data
-
-You can create historical data in your storage account using the [Microsoft API][6] or by creating a [support ticket with Microsoft][7] to have them backfill cost data. Cloud Cost Management automatically pulls in up to 15 months of historical data as long as the file structure and partitioning follows the format of scheduled exports.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}

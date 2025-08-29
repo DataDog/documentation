@@ -6,12 +6,6 @@ further_reading:
 title: ケースの表示と管理
 ---
 
-{{% site-region region="gov,ap1" %}}
-<div class="alert alert-warning">
-Case Management は現在、{{< region-param key=dd_datacenter code="true" >}} サイトでは利用できません。
-</div>
-{{% /site-region %}}
-
 ## 概要
 
 {{< img src="/service_management/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="すべてのケースを表示し、ステータスを選択でき、アサインされたメンバーが表示されているケース管理ページ" style="width:100%;" >}}

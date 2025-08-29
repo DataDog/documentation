@@ -36,7 +36,7 @@ draft: false
 git_integration_title: vertica
 integration_id: vertica
 integration_title: Vertica
-integration_version: 6.0.0
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: vertica

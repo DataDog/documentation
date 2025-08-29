@@ -28,17 +28,17 @@ Funnel analysis helps you track conversion rates across key workflows to identif
 
 ## Build a funnel
 
-To build a funnel, navigate to [**Digital Experience > Product Analytics > Journeys**][1] and click **Funnel**.
+To build a funnel, navigate to [**Product Analytics > Charts**][1] and click **Funnel**.
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnels-overview.png" alt="Navigate to the Funnel Analysis tab within Product Analytics" style="width:100%;" >}}
+{{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_overview.png" alt="Navigate to the Funnel Analysis tab within Product Analytics" style="width:100%;" >}}
 
-From this page, choose your starting view or action and click on the plus icon to build additional steps. You can also use drag and drop functionality to move steps around.
+From this page, choose your starting view or action and click on `+ Step` to build additional steps. You can also use drag and drop functionality to move steps around.
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnels-start-view-action.mp4" alt="Filtering network map with search" video=true >}}
+{{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_video1.mp4" alt="Filtering network map with search" video=true >}}
 
 If you have a starting point in mind, but aren't sure what your users did next, the funnel step editor automatically loads the top most common **views** and **actions** that users typically see and take next. This allows you to build funnels quicker knowing the paths your users are taking in sequence.
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnels-build-next-steps.png" alt="The funnel step editor automatically loads the top most common views and actions that users typically see and take next." style="width:50%;" >}}
+{{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_dropoffs.png" alt="The funnel step editor automatically loads the top most common views and actions that users typically see and take next." style="width:50%;" >}}
 
 **Note**: Any action or view that happens between two steps in a funnel does not impact the step-by-step or overall conversion rate. As long as step 1 and step 2 happen in the right order in a given session at least once, it counts as a single converted session.
 
@@ -48,11 +48,11 @@ When constructing your funnel, you can filter globally or on a step.
 
 - **Global filters** are applied to the entire funnel.
 
-  {{< img src="product_analytics/journeys/funnel_analysis/funnels-global-filters.png" alt="Use attributes to filter information globally when constructing your funnel" style="width:50%;" >}}
+  {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_filter_by-2.png" alt="Use attributes to filter information globally when constructing your funnel" style="width:50%;" >}}
 
 - **Filtering on a step** provides insight on how the step changes based on a particular constraint on that step. For example, you may want to see how a specific device, operating system, geolocation, or user impacts conversion between steps.
 
-    {{< img src="product_analytics/journeys/funnel_analysis/funnels-step-filters.png" alt="Use attributes to filter information between steps when constructing your funnel" style="width:50%;" >}}
+    {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_filter_by_step.png" alt="Use attributes to filter information between steps when constructing your funnel" style="width:50%;" >}}
 
 ### Combining events
 
@@ -83,7 +83,7 @@ You can measure conversion by the following attributes:
 
 You can measure these attributes **across all steps** or between **specific steps**.
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnels-across-steps.png" alt="Measure attributes across all steps or specific steps." style="width:60%;" >}}
+{{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_conversion.png" alt="Measure attributes across all steps or specific steps." style="width:60%;" >}}
 
 Use the **filter** selector to filter by various criteria that you define.
 
@@ -91,7 +91,7 @@ Next, click a datapoint to **investigate the specific attributes** that might ha
 
 ## Changing the visualization
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnel-timeseries.mp4" alt="Click the visualization dropdown to select a different view" video=true >}}
+{{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_change_viz.mp4" alt="Click the visualization dropdown to select a different view" video=true >}}
 
 After you've defined the step events and conversion measurement, you can switch to a different visualization to better understand user conversions for your app.
 
@@ -100,19 +100,19 @@ Seeing the conversion as a timeseries can be helpful in understanding conversion
 
 You can select the time period for graphing the conversion and view conversions in percentages or in absolute count.
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnels-timeseries.png" alt="View conversion data as a timeseries." style="width:80%;" >}}
+{{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_timeseries.png" alt="View conversion data as a timeseries." style="width:80%;" >}}
 
 ### Query value
 
 Query values display the current value of the given usage metric.
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnels-query-value.png" alt="View conversion data as a query value." style="width:80%;" >}}
+{{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_query_value.png" alt="View conversion data as a query value." style="width:80%;" >}}
 
 ### Top list
 
 Visualize the top values from a facet based on your chosen measure.
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnels-top-list.png" alt="View conversion data as a top list." style="width:80%;" >}}
+{{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_toplist.png" alt="View conversion data as a top list." style="width:80%;" >}}
 
 ## Share a funnel
 
@@ -122,19 +122,16 @@ You can share the entire visualization or individual widgets.
 
 - Share the entire visualization to Notebooks and dashboards:
 
-  {{< img src="product_analytics/journeys/funnel_analysis/funnels-share-visualization.png" alt="Share the entire visualization by clicking Export" style="width:90%;" >}}
+  {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_share_funnel.png" alt="Share the entire visualization by clicking Export" style="width:90%;" >}}
 
 - Share individual widgets from a dashboard:
 
-  {{< img src="product_analytics/journeys/funnel_analysis/funnels-share.png" alt="Share a widget by clicking the export icon in the upper-right of the widget" style="width:90%;" >}}
+  {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_share_dashboard.png" alt="Share a widget by clicking the export icon in the upper-right of the widget" style="width:90%;" >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/product-analytics/user-journey/funnel
-[2]: /real_user_monitoring/browser/data_collected/#default-attributes
-[3]: /real_user_monitoring/browser/data_collected/#session-metrics
-[4]: /real_user_monitoring/session_replay
-[5]: /dashboards/
+[5]: /product_analytics/dashboards/
 [6]: /notebooks/

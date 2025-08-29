@@ -10,6 +10,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-resource-catalog/"
     tag: "Blog"
     text: "Govern your infrastructure resources with the Datadog Resource Catalog"
+  - link: "https://www.datadoghq.com/blog/datadog-resource-policies/"
+    tag: "Blog"
+    text: "Proactively enforce infrastructure best practices with Datadog Resource Policies"
 ---
 
 {{< site-region region="gov" >}}<div class="alert alert-warning"> Resource Catalog is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>

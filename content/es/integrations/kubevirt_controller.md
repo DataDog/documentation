@@ -137,7 +137,7 @@ Sustituye `<DD_CLUSTER_NAME>` por el nombre que hayas elegido para tu clúster.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "kubevirt_controller" >}}
+{{< get-metrics-from-git "kubevirt-controller" >}}
 
 
 ### Eventos

@@ -34,7 +34,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Containers
-  - Categoría::Kubernetes
+  - Category::Kubernetes
   - Category::Notifications
   - Offering::Integration
   - Supported OS::Linux

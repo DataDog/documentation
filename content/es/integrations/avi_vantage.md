@@ -31,7 +31,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - nube
-- la red
+- network
 custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/avi_vantage/README.md
@@ -48,18 +48,18 @@ public_title: Avi Vantage
 short_description: Monitorizar el mantenimiento y el rendimiento de tus instancias
   de Avi Vantage
 supported_os:
-- linux
-- windows
-- macos
+- Linux
+- Windows
+- macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Cloud
-  - Category::Network
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
+  - Categoría::Nube
+  - Categoría::Red
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::Windows
+  - Sistema operativo compatible::macOS
+  - Oferta::Integración
   configuration: README.md#Configuración
   description: Monitorizar el mantenimiento y el rendimiento de tus instancias de
     Avi Vantage
@@ -69,7 +69,7 @@ tile:
   title: Avi Vantage
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
+<!--  FUENTE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general

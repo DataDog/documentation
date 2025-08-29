@@ -75,7 +75,7 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_ai_search" >}}
+{{< get-metrics-from-git "azure-ai-search" >}}
 
 
 ### Checks de servicios

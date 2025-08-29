@@ -9,9 +9,6 @@ further_reading:
   tag: "Blog"
   text: "Monitor cloud architecture and app dependencies with Datadog NPM"
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Path for Datadog Cloud Network Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview 
 
@@ -51,7 +48,7 @@ Drag the latency reachability health bar to observe a snapshot of the end-to-end
 
 **Note**: Changing the health bar does not affect the global time range at the top of the page.
 
-{{< img src="network_performance_monitoring/network_path/latency_health_bar_2.mp4" alt="Video of the network path, selecting the latency health bar and dragging to a time period." video="true" >}}
+{{< img src="network_performance_monitoring/network_path/latency_health_bar_3.mp4" alt="Video of the network path, selecting the latency health bar and dragging to a time period." video="true" >}}
 
 ## Graphs
 
@@ -69,7 +66,7 @@ The end-to-end metrics graph presents a visual representation of both the end-to
 The hop-to-hop latency graph provides a detailed view of the latency for each hop along the path, making it easier to identify potential bottlenecks or problem areas.
 
 
-{{< img src="network_performance_monitoring/network_path/hop-to-hop-latency-graph_2.png" alt="Path view page showing the hop-to-hop-latency graph." >}}
+{{< img src="network_performance_monitoring/network_path/hop-to-hop-latency-graph_3.png" alt="Path view page showing the hop-to-hop-latency graph." >}}
 
 ## Further Reading
 

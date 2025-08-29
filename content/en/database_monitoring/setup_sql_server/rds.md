@@ -78,7 +78,7 @@ Because AWS does not grant direct host access, the Datadog Agent must be install
 
 {{< tabs >}}
 {{% tab "Windows Host" %}}
-{{% dbm-alwayson %}}
+{{% dbm-alwayson-cloud-hosted %}}
 
 To start collecting SQL Server telemetry, [install the Datadog Agent][1], then create the SQL Server Agent conf file at `C:\ProgramData\Datadog\conf.d\sqlserver.d\conf.yaml`. Refer to the [sample conf file][2] for all available configuration options.
 
@@ -144,7 +144,7 @@ Once all Agent configuration is complete, [restart the Datadog Agent][9].
 {{% /tab %}}
 
 {{% tab "Linux Host" %}}
-{{% dbm-alwayson %}}
+{{% dbm-alwayson-cloud-hosted %}}
 
 To start collecting SQL Server telemetry, first [install the Datadog Agent][1].
 
@@ -190,7 +190,7 @@ Once all Agent configuration is complete, [restart the Datadog Agent][6].
 {{% /tab %}}
 
 {{% tab "Docker" %}}
-{{% dbm-alwayson %}}
+{{% dbm-alwayson-cloud-hosted %}}
 
 To configure the Database Monitoring Agent running in a Docker container, set the [Autodiscovery Integration Templates][1] as Docker labels on your Agent container.
 
@@ -239,7 +239,7 @@ Use the `service` and `env` tags to link your database telemetry to other teleme
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
-{{% dbm-alwayson %}}
+{{% dbm-alwayson-cloud-hosted %}}
 
 If you're running a Kubernetes cluster, use the [Datadog Cluster Agent][1] to enable Database Monitoring. If cluster checks aren’t already enabled, [follow these instructions][2] to enable them before proceeding.
 
@@ -287,7 +287,7 @@ Follow the steps below to set up the SQL Server integration, using the [Operator
                   driver: 'ODBC Driver 18 for SQL Server'
                   dbm: true
                   # Optional: For additional tags
-                  tags:  
+                  tags:
                     - 'service:<CUSTOM_SERVICE>'
                     - 'env:<CUSTOM_ENV>'
                   # After adding your instance endpoint, configure the Datadog AWS integration to pull additional cloud data such as CPU, Memory, etc.
@@ -321,7 +321,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
             connector: 'odbc'
             driver: 'ODBC Driver 18 for SQL Server'
             # Optional: For additional tags
-            tags: 
+            tags:
               - 'service:<CUSTOM_SERVICE>'
               - 'env:<CUSTOM_ENV>'
             # After adding your instance endpoint, configure the Datadog AWS integration to pull additional cloud data such as CPU, Memory, etc.
@@ -355,8 +355,8 @@ instances:
     password: 'ENC[datadog_user_database_password]'
     connector: 'odbc'
     driver: 'ODBC Driver 18 for SQL Server'
-    # Optional: For additional tags  
-    tags: 
+    # Optional: For additional tags
+    tags:
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
     # After adding your instance endpoint, configure the Datadog AWS integration to pull additional cloud data such as CPU, Memory, etc.

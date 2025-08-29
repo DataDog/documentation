@@ -11,12 +11,6 @@ is_beta: true
 title: Vista de lista
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Path para Datadog Cloud Network Monitoring no es compatible con tu <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-<div class="alert alert-info">Network Path para Datadog Cloud Network Monitoring tiene disponibilidad limitada. Para inscribirte, ponte en contacto con tu representante de Datadog.</div>
-
 ## Información general
 
 La Vista de lista de Network Path es la vista por defecto para explorar varias rutas. Agrupa por fuentes como `hostname` y `service`.

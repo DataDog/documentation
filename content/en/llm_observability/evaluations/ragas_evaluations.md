@@ -7,9 +7,6 @@ further_reading:
       tag: 'Documentation'
       text: 'Submit Evaluations'
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -116,7 +113,7 @@ Datadog's Ragas evaluations require `ragas` v0.1+ and `ddtrace` v3.0.0+.
 
 #### Sampling
 
-To enable Ragas scoring for a sampled subset of LLM calls, use the `DD_LLMOBS_EVALUATORS_SAMPLING_RULES` environment variable. Pass in a list of arrays, each containing the following fields:
+To enable Ragas scoring for a sampled subset of LLM calls, use the `DD_LLMOBS_EVALUATOR_SAMPLING_RULES` environment variable. Pass in a list of objects, each containing the following fields:
 
 | Field | Description | Required | Type |
 |-------|-------------|----------|------|
@@ -127,7 +124,7 @@ To enable Ragas scoring for a sampled subset of LLM calls, use the `DD_LLMOBS_EV
 In the following example, Ragas Faithfulness scoring is enabled for 50% of all `answer_question` spans. Ragas evaluations are disabled for all other spans (`"sample_rate": 0`).
 
 ```bash
-export DD_LLMOBS_EVALUATORS_SAMPLING_RULES='[
+export DD_LLMOBS_EVALUATOR_SAMPLING_RULES='[
   {
     "sample_rate": 0.5,
     "evaluator_label": "ragas_faithfulness",

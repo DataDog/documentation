@@ -8,11 +8,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-datastore/"
   tag: "Blog"
   text: "Enhance your automated workflows and apps with Datastore"
+- link: "https://www.datadoghq.com/blog/pm-app-automation/"
+  tag: "Blog"
+  text: "How we created a single app to automate repetitive tasks with Datadog Workflow Automation, Datastore, and App Builder"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Datastores are not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 The Actions Datastore offers a scalable, structured data storage solution within Datadog's App Builder and Workflow Automation products. Datastores support CRUD (Create, Read, Update, and Delete) operations and integrate seamlessly with Datadog's ecosystem to optimize persistent data storage without the need for external databases.
 

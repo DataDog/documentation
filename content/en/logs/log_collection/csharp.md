@@ -352,7 +352,7 @@ To enable Agentless logging, set the following environment variables:
 `DD_LOGS_INJECTION`
 : Enables [connecting logs and traces][9]:<br>
 **Default**: `true` <br>
-Enabled by default when using Agentless logging from Tracer version 2.7.0.
+Enabled by default from Tracer version 3.24.0.
 
 `DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS`
 : Enables Agentless logging. Enable for your logging framework by setting to `Serilog`, `NLog`, `Log4Net`, or `ILogger` (for `Microsoft.Extensions.Logging`). If you are using multiple logging frameworks, use a semicolon separated list of variables.<br>
@@ -412,6 +412,14 @@ The following configuration values should generally not be modified, but may be 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
 : Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
 **Default**: `https://http-intake.logs.ap1.datadoghq.com:443` (based on `DD_SITE`)
+
+{{< /site-region >}}
+
+{{< site-region region="ap2" >}}
+
+`DD_LOGS_DIRECT_SUBMISSION_URL`
+: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
+**Default**: `https://http-intake.logs.ap2.datadoghq.com:443` (based on `DD_SITE`)
 
 {{< /site-region >}}
 

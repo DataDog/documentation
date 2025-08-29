@@ -16,10 +16,6 @@ further_reading:
     text: "Learn about Quality Gates"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Early Flake Detection is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 Early Flake Detection is Datadog's test flakiness solution that enhances code quality by identifying [flaky tests][1] early in the development cycle. For more information about flaky tests, see [Flaky Test Management][2].
@@ -53,9 +49,7 @@ After you have set up your Datadog library for Test Optimization, you can config
 
 1. Navigate to [**Software Delivery** > **Test Optimization** > **Settings**][7].
 1. Click **Configure** on the Early Flake Detection column for a test service.
-1. Click the toggle to enable Early Flake Detection and add or modify the list of [**Excluded Branches from Early Flake Detection**](#manage-excluded-branches).
-
-{{< img src="continuous_integration/early_flake_detection_configuration_modal.png" alt="Enabling Early Flake Detection and defining excluded branches in the test service configuration" style="width:60%">}}
+1. Click the toggle to enable Early Flake Detection.
 
 ## Compatibility
 {{< tabs >}}
@@ -113,10 +107,6 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 {{< /tabs >}}
 
-
-## Manage Excluded Branches
-
-Excluded Branches do not have any tests retried by Early Flake Detection. Tests run in these branches are not considered new for the purposes of Early Flake Detection. You can manage the list of excluded branches on the [Test Optimization Settings page][7], ensuring that the feature is tailored to your specific workflow and branch structure.
 
 ## Explore results in the Test Optimization Explorer
 

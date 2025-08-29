@@ -7,10 +7,6 @@ further_reading:
   text: "Learn about Quality Gates"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 The [**Quality Gate Rules** page][1] is useful for developers who want to keep an eye on the quality gates for their build pipelines. You can see all of the rules defined by the organization.

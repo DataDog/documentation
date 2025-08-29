@@ -92,7 +92,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Riak-Repl チ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "riak_repl" >}}
+{{< get-metrics-from-git "riak-repl" >}}
 
 
 ### サービスチェック

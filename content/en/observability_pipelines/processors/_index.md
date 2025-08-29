@@ -11,17 +11,21 @@ further_reading:
 
 <div class="alert alert-info">The processors outlined in this documentation are specific to on-premises logging environments. To parse, structure, and enrich cloud-based logs, see the <a href="https://docs.datadoghq.com/logs/log_configuration/logs_to_metrics">Log Management</a> documentation.</div>
 
-Use Observability Pipelines' processors to parse, structure, and enrich your logs. All processors are available for all templates. Set up your processors in the Observability Pipelines UI after you have selected a template, source, and destinations. This is step 5 in the pipeline setup process:
+Use Observability Pipelines' processors to parse, structure, and enrich your logs. When you create a pipeline in the UI, pre-selected processors are added to your processor group based on the selected template. You can add additional processors and delete any existing ones based on your processing needs.
 
-1. Navigate to [Observability Pipelines][1].
-1. Select a template.
-1. Select and set up your source.
-1. Select and set up your destinations.
-1. Set up your processors.
-1. Install the Observability Pipelines Worker.
-1. Enable monitors for your pipeline.
+Processor groups are executed from top to bottom. The order of the processors is important because logs are checked by each processor, but only logs that match the processor's filters are processed. To modify the order of the processors, use the drag handle on the top left corner of the processor you want to move.
 
-{{% observability_pipelines/processors/intro %}}
+Select a processor in the left navigation menu to see more information about it.
+
+## Processor groups
+
+<div class="alert alert-warning">Configuring a pipeline with processor groups is only available for Worker versions 2.7 and later.</div>
+
+You can organize your processors into logical groups to help you manage them. Each processor group has a Group Filter so that those processors are only applied to specific logs. For example, if you want the group processors to only process logs coming from `vpc`, then use the group filter `source:vpc`. You can also add filters for each individual processor.
+
+Processor groups and the processors within each group are executed from top to bottom. The order of the processors is important because logs are checked by each processor, but only logs that match the processor's filters are processed. To change the order of the processors, use the drag handle on the top left corner of the processor you want to move.
+
+**Note**: There is a limit of 10 processor groups for a pipeline canvas. For example, if you have a dual ship pipeline, where there are two destinations and each destination has its own set of processor groups, the combined number of processor groups from both sets is limited to 10.
 
 {{% observability_pipelines/processors/filter_syntax %}}
 

@@ -20,10 +20,6 @@ further_reading:
 
 Create Software Templates within Software Catalog to help developers quickly provision infrastructure and create microservices that align with your best practices. 
 
-{{< callout url="https://forms.gle/6Er52qd3BCERhotg7" d_target="#signupModal" btn_hidden="false">}}
-  Software Templates are in Preview. Complete the form to request access.
-{{< /callout >}} 
-
 ## Create a Software Template
 
 A Software Template is stored in a Git repository and serves as a reusable framework. [Build apps][2] to collect inputs and pass them into the template repository to generate customized configurations.
@@ -59,7 +55,7 @@ To build a Software Template from scratch:
     1. Enter a name and description, and use the drag-and-drop editor to create a form that collects the required parameters.
        - You can use the `Form` component or build a custom UI.
     1. Select **New Query**, and use the **Trigger workflow** action to call your workflow and pass in parameters. 
-       - Explore [Actions Catalog][7] for built-in integrations, or use the `HTTP` action to interact with any integrations not available.
+       - Explore [Action Catalog][7] for built-in integrations, or use the `HTTP` action to interact with any integrations not available.
     1. Create a **Button** that submits the form and triggers your workflow.
     1. Save and publish the app.
 

@@ -146,6 +146,10 @@ There are three levels of configuration:
 * Repo Level Configuration (Datadog)
 * Repo Level Configuration (Repo File)
 
+<div class="alert alert-warning">
+By default, when no configuration is defined at the org or repo level, Datadog uses a default configuration with all default rules enabled. If you define an org-level configuration without default rules, default rules are not used. If want to use default rules in this scenario, you must enable them.
+</div>
+
 All three locations use the same YAML format for configuration. These configurations are merged **in order** using an overlay/patch merge method. For example, lets look at these two sample YAML files:
 
 ```yaml
@@ -340,6 +344,8 @@ rulesets:
         arguments:
           # Set the max-function-lines rule's threshold to 150 lines
           max-lines: 150
+        # Override this rule's severity
+        severity: NOTICE
       max-class-lines:
         arguments:
           # Set different thresholds for the max-class-lines rule in different subtrees
@@ -348,6 +354,12 @@ rulesets:
             /: 200
             # Set the rule's threshold to 100 lines in src/main/backend
             src/main/backend: 100
+        # Override this rule's severity with different values in different subtrees
+        severity:
+          # Set the rule's severity to INFO by default
+          /: INFO
+          # Set the rule's severity to NONE in tests/
+          tests: NONE
   - python-inclusive
   - python-django:
     # Only apply the python-django ruleset to the following paths
@@ -392,12 +404,21 @@ You can include the following **rule** options in the `static-analysis.datadog.y
 | ------------- | ------------------------------------------------------------------------------------------------------------------ | --------- |
 | `ignore`    | A list of path prefixes and glob patterns to ignore for this specific rule. Matching files will not be analyzed.   | `false` |
 | `only`      | A list of path prefixes and glob patterns to analyze for this specific rule. Only matching files will be analyzed. | `false` |
-| `arguments` | A map of values for rules that support customizable arguments.                                                     | `false` |
+| `arguments` | A map of values for rules that support customizable arguments. See the syntax below.                               | `false` |
+| `severity`  | Override the rule's severity. See the syntax below.                                                                | `false` |
+| `category`  | Override the rule's category. See the syntax below.                                                                | `false` |
 
 The map in the `arguments` field uses an argument's name as its key, and the values are either strings or maps:
 
 * To set a value for the whole repository, you can specify it as a string.
 * To set different values for different subtrees in the repository, you can specify them as a map from a subtree prefix to the value that the argument will have within that subtree.
+
+The `severity` field can take a string or a map:
+
+* To set the severity for the whole repository, specify it as one of the following strings: `ERROR`, `WARNING`, `NOTICE`, or `NONE`.
+* To set different severities for different subtrees in the repository, you can specify them as a map from a subtree prefix to the severity for that subtree.
+
+The `category` field can take a string with one of the following values: `BEST_PRACTICES`, `CODE_STYLE`, `ERROR_PRONE`, `PERFORMANCE`, or `SECURITY`. You can only specify one category for the whole repository.
 
 ### Ignoring violations
 
@@ -448,17 +469,11 @@ myBar = 2
 ```
 
 ## Link results to Datadog services and teams
+
 ### Link results to services
 Datadog associates static code and library scan results with relevant services by using the following mechanisms:
 
-1. [Identifying the code location associated with a service using the Software Catalog.](#identifying-the-code-location-in-the-software-catalog)
-2. [Detecting usage patterns of files within additional Datadog products.](#detecting-file-usage-patterns)
-3. [Searching for the service name in the file path or repository.](#detecting-service-name-in-paths-and-repository-names)
-
-If one method succeeds, no further mapping attempts are made. Each mapping method is detailed below.
-
-#### Identifying the code location in the Software Catalog
-
+{{% collapse-content title="Identifying the code location in the Software Catalog" level="h4" %}}
 The [schema version `v3`][14] and later of the Software Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
 
 The `paths` attribute is a list of globs that should match paths in the repository.
@@ -475,8 +490,7 @@ datadog:
         - path/to/service/code/**
 {{< /code-block >}}
 
-
-If you want all the files in a repository to be associated with a service, you can use the glob `**/*` as follows:
+If you want all the files in a repository to be associated with a service, you can use the glob `**` as follows:
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
@@ -487,18 +501,18 @@ datadog:
   codeLocations:
     - repositoryURL: https://github.com/myorganization/myrepo.git
       paths:
-        - "**/*"
+        - "**"
 {{< /code-block >}}
+{{% /collapse-content %}}
 
-#### Detecting file usage patterns
-
+{{% collapse-content title="Detecting file usage patterns" level="h4" %}}
 Datadog detects file usage in additional products such as Error Tracking and associate
 files with the runtime service. For example, if a service called `foo` has
 a log entry or a stack trace containing a file with a path `/modules/foo/bar.py`,
 it associates files `/modules/foo/bar.py` to service `foo`.
+{{% /collapse-content %}}
 
-#### Detecting service name in paths and repository names
-
+{{% collapse-content title="Detecting service name in paths and repository names" level="h4" %}}
 Datadog detects service names in paths and repository names, and associates the file with the service if a match is found.
 
 For a repository match, if there is a service called `myservice` and
@@ -508,6 +522,9 @@ it associates `myservice` to all files in the repository.
 If no repository match is found, Datadog attempts to find a match in the
 `path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
 in the path, the service name closest to the filename is selected.
+{{% /collapse-content %}}
+
+If one method succeeds (in order), no further mapping attempts are made.
 
 ### Link results to teams
 

@@ -42,7 +42,7 @@ Amazon Athena は、標準 SQL を使用して Amazon Simple Storage Service (Am
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_athena" >}}
+{{< get-metrics-from-git "amazon-athena" >}}
 
 
 ### イベント

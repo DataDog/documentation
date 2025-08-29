@@ -32,8 +32,8 @@ Datadog recommends v2 of the Go tracer for all users. If you are using v1, see t
 
 | Version	| Preview	   | General Availability (GA)	| Maintenance	| End-of-life (EOL) |
 |---------|------------|----------------------------|-------------|-------------------|
-| v2      | 2024-11-27 | 2025-07-04                 | TBD         | TBD               |
-| v1      | 2018-06-06 | 2018-06-06                 | 2025-03-31  | 2025-12-31        |
+| v2      | 2024-11-27 | 2025-06-04                 | TBD         | TBD               |
+| v1      | 2018-06-06 | 2018-06-06                 | 2025-06-04  | 2025-12-31        |
 | v0      | 2016-12-12 | 2016-12-12                 | 2018-06-06  | 2019-06-06        |
 
 | Level	                    |  Support provided                                       |

@@ -101,7 +101,7 @@ gnatsd_streaming チェックは、すべての主要プラットフォームと
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "gnatsd_streaming" >}}
+{{< get-metrics-from-git "gnatsd-streaming" >}}
 
 
 Nats ストリーミングサーバーのメトリクスは、"nss-cluster_id" のような名前でタグ付けされます。
@@ -111,7 +111,7 @@ Nats ストリーミングサーバーのメトリクスは、"nss-cluster_id" �
 Nats ストリーミングサーバーをフォールトトレラントグループ内で実行している場合、サーバーのステータスが `FT_STANDBY` と `FT_ACTIVE` の間で切り替わると、Nats ストリーミングフェイルオーバーイベントが発行されます。
 
 ### サービスチェック
-{{< get-service-checks-from-git "gnatsd_streaming" >}}
+{{< get-service-checks-from-git "gnatsd-streaming" >}}
 
 
 ## トラブルシューティング

@@ -1,10 +1,10 @@
 ---
 title: Bits AI Dev Agent
+further_reading:
+  - link: "https://www.datadoghq.com/blog/bits-ai-dev-agent/"
+    tag: "Blog"
+    text: "Automatically identify issues and generate fixes with the Bits AI Dev Agent"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Bits AI Dev Agent is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 {{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
 Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
@@ -49,6 +49,10 @@ To use Bits AI Dev Agent, you must install the [GitHub integration][4]. For full
 ### Tag telemetry with service and version
 
 Bits AI Dev Agent uses the `service` and `version` telemetry tags to match issues such as errors or vulnerabilities to the version of your code that was running at the time. To configure telemetry tagging, see the [Tag your telemetry with Git information][6] section of the Datadog Source Code Integration documentation.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /error_tracking
 [2]: /security/code_security

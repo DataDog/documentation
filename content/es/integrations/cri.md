@@ -24,7 +24,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - rastreo
-- Kubernetes
+- kubernetes
 custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cri/README.md
@@ -44,19 +44,19 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Containers
+  - Categoría::Contenedores
   - Categoría::Kubernetes
   - Supported OS::Linux
   - Offering::Integration
-  configuration: README.md#Configuración
+  configuration: README.md#Setup
   description: Seguimiento de todas tus métricas de CRI con Datadog
   media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: CRI
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
+<!--  CON ORIGEN EN https://github.com/DataDog/integrations-core -->
 
 
 ## Información general

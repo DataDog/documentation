@@ -68,7 +68,7 @@ Datadog Azure インテグレーションを使用して、Data Lake Store か�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_data_lake_store" >}}
+{{ get-metrics-from-git "azure-datalakestore" }}
 
 
 **注**: このインテグレーションは、Data Lake Storage Gen 1 のメトリクスのみを収集します。Data Lake Storage Gen 2 は Azure Blob Storage に構築されているため、そのメトリクスは Datadog の Blob ストレージネームスペース、`azure.storage_storageaccounts_blobservices.*` に収集されます。詳細については、[Azure Data Lake Storage Gen 2][3]に関するドキュメントを参照してください。

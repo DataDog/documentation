@@ -13,7 +13,7 @@ algolia:
 
 ## Overview
 
-The Datadog Agent allows you to securely manage secrets by integrating with any external secrets management solution (HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, a custom solution...). Instead of hardcoding sensitive values like API keys or passwords in plaintext within configuration files, the Agent can retrieve them dynamically at runtime.
+The Datadog Agent allows you to securely manage secrets by integrating with any external secrets management solution (such as HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, or a custom solution). Instead of hardcoding sensitive values like API keys or passwords in plaintext within configuration files, the Agent can retrieve them dynamically at runtime.
 
 ### How it works
 
@@ -27,14 +27,14 @@ instances:
     password: "ENC[db_prod_password]"
 ```
 
-The secret handle must make up the full value of the YAML field and is always resolved as strings. This means configurations like `password: "db-ENC[prod_password]"` are not be recognized as secrets.
+The secret handle must make up the full value of the YAML field and is always resolved as strings. This means configurations like `password: "db-ENC[prod_password]"` are not recognized as secrets.
 
 You can use any characters inside the `ENC[]` brackets as long as the YAML is valid. If your secret ID includes special characters or is a JSON string, make sure to properly escape it. For example:
 ```
 "ENC[{\"env\": \"prod\", \"check\": \"postgres\", \"id\": \"user_password\"}]"
 ```
 
-It's also possible to use [Autodiscovery](/agent/kubernetes/integrations/) variables in secret handles. The Agent resolves these variables before resolving the secret. For example:
+It's also possible to use [Autodiscovery][1] variables in secret handles. The Agent resolves these variables before resolving the secret. For example:
 ```
 instances:
   - server: %%host%%
@@ -42,7 +42,7 @@ instances:
     password: ENC[db_prod_password_%%host%%]
 ```
 
-However, note that you cannot use the `ENC[]` syntax in `secret_*` settings like `secret_backend_command`.
+**Note**: You cannot use the `ENC[]` syntax in `secret_*` settings like `secret_backend_command`.
 
 ### Agent security requirements
 
@@ -64,7 +64,7 @@ On Windows, the executable must:
 
 * Have read/exec for `ddagentuser` (the user used to run the Agent).
 * Have no rights for any user or group except for the `Administrators` group, the built-in `Local System` account, or the Agent user context (`ddagentuser` by default)
-* Be a valid Win32 application so the Agent can execute it (a PowerShell or Python script would not work for example).
+* Be a valid Win32 application so the Agent can execute it (for example, a PowerShell or Python script doesn't work).
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -98,10 +98,8 @@ The executable should respond through STDOUT:
 }
 ```
 
-
 * `value` (string): the secret value to be used in the configurations. This can be `null` in the case of an error.
 * `error` (string): an error message or `null`.
-
 
 If a secret fails to resolve (either by returning a non-zero exit code or a non-null error), the related configuration is ignored by the Agent.
 
@@ -140,7 +138,7 @@ DD_SECRET_BACKEND_COMMAND=/readsecret_multiple_providers.sh
 
 #### Example: Reading from mounted files
 
-Kubernetes supports [exposing Secrets as files](https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#create-a-pod-that-has-access-to-the-secret-data-through-a-volume) inside a pod that the Agent can read to resolve secrets.
+Kubernetes supports [exposing Secrets as files][2] inside a pod that the Agent can read to resolve secrets.
 
 In Kubernetes, you can mount a Secret as a volume like this:
 ```yaml
@@ -166,9 +164,9 @@ password: ENC[file@/etc/secret-volume/password]
 - The Secret must exist in the same namespace as the pod it is being mounted in.
 - The script is able to access all subfolders, including the sensitive `/var/run/secrets/kubernetes.io/serviceaccount/token`. As such, Datadog recommends using a dedicated folder instead of `/var/run/secrets`.
 
-[Docker swarm secrets](https://docs.docker.com/engine/swarm/secrets/) are mounted in the `/run/secrets` folder. For example, the Docker secret `db_prod_passsword` is located in `/run/secrets/db_prod_password` in the Agent container. This would be referenced in the configuration with `ENC[file@/run/secrets/db_prod_password]`.
+[Docker swarm secrets][3] are mounted in the `/run/secrets` folder. For example, the Docker secret `db_prod_passsword` is located in `/run/secrets/db_prod_password` in the Agent container. This would be referenced in the configuration with `ENC[file@/run/secrets/db_prod_password]`.
 
-**Example: Reading a Kubernetes Secret Across Namespaces**
+#### Example: Reading a Kubernetes secret across namespaces
 
 If you want the Agent to read a Secret from a different namespace, use the `k8s_secret@` prefix. For example:
 ```
@@ -208,7 +206,7 @@ This `Role` gives access to the `Secret: database-secret` in the `Namespace: dat
 
 ### Option 2: Using a prebuilt executable
 
-If you're using a standard secrets provider like `AWS Secrets Manager`, `AWS SSM` or other, you can use the prebuilt [datadog-secret-backend](https://github.com/DataDog/datadog-secret-backend) executable.
+If you're using a standard secrets provider like `AWS Secrets Manager`, `AWS SSM` or other, you can use the prebuilt [datadog-secret-backend][4] executable.
 
 Here's an example showing how to set it up:
 
@@ -233,19 +231,17 @@ Here's an example showing how to set it up:
      ]
    }
    ```
-3. Download the binary to your EC2 instance and configure it at /datadog-secret-backend.yaml:
 
-3. Download the latest release of `datadog-secret-backend` on your EC2 instance and create its configuration `datadog-secret-backend.yaml` next to the binary (more information [at this link](https://github.com/DataDog/datadog-secret-backend/blob/main/docs/aws/secrets.md)):
+3. Download the latest release of [datadog-secret-backend][5] on your EC2 instance and create its configuration `datadog-secret-backend.yaml` next to the binary. The following example shows a configuration for a backend of type `aws.secrets` under the name `staging-aws`:
    ```
    backends:
      staging-aws:
        backend_type: aws.secrets
    ```
-   We are configuring one backend of type `aws.secrets` under the name `staging-aws`
 4. Set the correct access rights for the binary as described in [Agent security requirements](#agent-security-requirements):
-   ```
-   $> chown dd-agent:dd-agent datadog-secret-backend
-   $> chmod 500 datadog-secret-backend
+   ```sh
+   chown dd-agent:dd-agent datadog-secret-backend
+   chmod 500 datadog-secret-backend
    ```
 5. Configure the Agent to use the binary to resolve secrets and use the AWS secret (here as the `api_key`):
    ```
@@ -322,7 +318,6 @@ instances:
     password: decrypted_db_prod_password
 ```
 
-
 ## Refreshing API/APP keys at runtime
 
 Starting in Agent version v7.67, you can configure the Agent to refresh its API and APP keys at regular intervals without requiring a restart. This relies on the API key and APP key being pulled as secrets.
@@ -339,6 +334,10 @@ By default the Agent randomly spreads its first refresh within the specified `se
 means that it resolves the API key at startup, then refreshes it within the first interval and every interval after that.
 This avoids having a fleet of Agents refreshing their API/APP key at the same time.
 
+To prevent downtime, only invalidate the previous API key and APP key when your entire fleet of Agents has
+pulled the updated keys from your secret management solution. You can track usage of your API keys in the [Fleet
+Management](https://app.datadoghq.com/fleet) page.
+
 You can disable this behavior by setting:
 ```yaml
 secret_refresh_scatter: false
@@ -348,6 +347,16 @@ To refresh manually, use:
 ```
 datadog-agent secret refresh
 ```
+
+### Enabling DDOT collector refresh
+If you are using [DDOT collector][7] and want to enable API/APP refresh you must add the following additional configuration to your `datadog.yaml` file:
+```
+agent_ipc:
+  port: 5051
+  config_refresh_interval: 3600
+```
+
+This ensures the DDOT collector remains in-sync with the Agent after secrets are refreshed. Similar to how the Agent periodically verifies its configuration state, the DDOT collector uses this setting to regularly check for updated values from the Agent.
 
 ## Troubleshooting
 
@@ -362,8 +371,8 @@ On Linux, the command outputs file mode, owner and group for the executable. On 
 
 Example on Linux:
 
-```shell
-$> datadog-agent secret
+```sh
+datadog-agent secret
 === Checking executable rights ===
 Executable path: /path/to/you/executable
 Check Rights: OK, the executable has the correct rights
@@ -416,7 +425,6 @@ Secrets handle decrypted:
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ### Seeing configurations after secrets were injected
 
 To quickly see how the check's configurations are resolved, you can use the `configcheck` command:
@@ -443,7 +451,7 @@ password: <obfuscated_password2>
 ===
 ```
 
-**Note**: The Agent needs to be [restarted](/agent/configuration/agent-commands/#restart-the-agent) to pick up changes on configuration files.
+**Note**: The Agent needs to be [restarted][6] to pick up changes on configuration files.
 
 ### Debugging your secret_backend_command
 
@@ -459,14 +467,12 @@ sudo -u dd-agent bash -c "echo '{\"version\": \"1.0\", \"secrets\": [\"secret1\"
 
 The `dd-agent` user is created when you install the Datadog Agent.
 
-
 {{% /tab %}}
 {{% tab "Windows" %}}
-**Windows**
 
-##### Rights related errors
+##### Rights-related errors
 
-If you encounter one of the following errors, then something is missing in your setup. See the [Windows instructions](#windows).
+The following errors indicate that something is missing in your setup.
 
 1. If any other group or user than needed has rights on the executable, a similar error to the following is logged:
    ```
@@ -556,7 +562,6 @@ exit code:
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ### Agent refusing to start
 
 The first thing the Agent does on startup is to load `datadog.yaml` and decrypt any secrets in it. This is done before setting up the logging. This means that on platforms like Windows, errors occurring when loading `datadog.yaml` aren't written in the logs, but on `stderr`. This can occur when the executable given to the Agent for secrets returns an error.
@@ -573,7 +578,7 @@ When reading Secrets directly from Kubernetes you can double check your permissi
 kubectl auth can-i get secret/<SECRET_NAME> -n <SECRET_NAMESPACE> --as system:serviceaccount:<AGENT_NAMESPACE>:<AGENT_SERVICE_ACCOUNT>
 ```
 
-Consider the previous [Kubernetes Secrets example](#read-from-kubernetes-secret-example), where the Secret `Secret:database-secret` exists in the `Namespace: database`, and the Service Account `ServiceAccount:datadog-agent` exists in the `Namespace: default`.
+Consider the previous [Kubernetes Secrets example](#example-reading-a-kubernetes-secret-across-namespaces), where the Secret `Secret:database-secret` exists in the `Namespace: database`, and the Service Account `ServiceAccount:datadog-agent` exists in the `Namespace: default`.
 
 In this case, use the following command:
 
@@ -586,3 +591,11 @@ This command returns whether the permissions are valid for the Agent to view thi
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/kubernetes/integrations/
+[2]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#create-a-pod-that-has-access-to-the-secret-data-through-a-volume
+[3]: https://docs.docker.com/engine/swarm/secrets/
+[4]: https://github.com/DataDog/datadog-secret-backend
+[5]: https://github.com/DataDog/datadog-secret-backend/blob/main/docs/aws/secrets.md
+[6]: /agent/configuration/agent-commands/#restart-the-agent
+[7]: /opentelemetry/setup/ddot_collector/

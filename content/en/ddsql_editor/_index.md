@@ -3,13 +3,19 @@ title: DDSQL Editor
 aliases:
 - /dashboards/ddsql_editor/
 further_reading:
-- link: "/ddsql_editor/guide/ddsql_use_cases"
-  tag: "Guide"
-  text: "Common queries and use cases"
-- link: "/ddsql_reference/ddsql_preview"
+- link: "ddsql_reference/ddsql_default"
   tag: "Documentation"
-  text: "DDSQL Reference (Preview)"
+  text: "DDSQL Reference"
+- link: "https://www.datadoghq.com/blog/advanced-analysis-tools/"
+  tag: "Blog"
+  text: "Explore your data with Sheets, DDSQL Editor, and Notebooks for advanced analysis in Datadog"
 ---
+
+{{< callout url="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/" >}}
+Querying Logs, Metrics, Spans, and RUM through DDSQL is in Preview. Use this form to request access.
+
+If you want access to Spans, RUM, or other data sources not listed in the use cases section, mention them in the access request form.
+{{< /callout >}} 
 
 ## Overview
 
@@ -34,15 +40,22 @@ WHERE tags->'region' = 'us-east-1' -- region is a tag, not a column
 GROUP BY instance_type
 {{< /code-block >}}
 
-## Explore your infrastructure data
+## Explore your telemetry
 
-View and filter the list of tables and fields in the schema side panel:
+<div class="alert alert-warning">Querying Logs, Metrics, Spans, and RUM through DDSQL is in Preview. Use this <a href="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/">form</a> to request access.
+
+If you want access to Spans, RUM, or other data sources not listed in the use cases section, mention them in the access request form.
+</div>
+
+View, filter, and built queries in the Data Explorer.
 
 {{< img src="/ddsql_editor/data-tab-available-tables.png" alt="Side panel showing a list of available tables for querying in the DDSQL Editor" style="width:90%;" >}}
 
 Click a table name to view its columns and relationships:
 
 {{< img src="ddsql_editor/data-tab.png" alt="The data tab showing table information for aws.ec2_instance" style="width:70%;" >}}
+
+For data sources such as Logs, use the query builder to generate table functions.
 
 ## Save and share queries
 

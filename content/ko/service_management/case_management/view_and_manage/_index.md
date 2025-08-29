@@ -6,12 +6,6 @@ further_reading:
 title: 사례 보기 및 관리
 ---
 
-{{% site-region region="gov,ap1" %}}
-<div class="alert alert-warning">
-Case Management is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
-</div>
-{{% /site-region %}}
-
 ## 개요
 
 {{< img src="/service_management/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="모든 사례 보기, 상태 선택 옵션 및 할당 번호 보기를 표시하는 사례 관리 폐이지" style="width:100%;" >}}

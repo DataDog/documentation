@@ -118,7 +118,7 @@ Ejecuta el [subcomando de estado del Agent][8] y busca `zenoh_router` en la secc
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "zenoh_router" >}}
+{{< get-metrics-from-git "zenoh-router" >}}
 
 
 ### Eventos
@@ -126,7 +126,7 @@ Ejecuta el [subcomando de estado del Agent][8] y busca `zenoh_router` en la secc
 El enrutador Zenoh no incluye ningún evento.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "zenoh_router" >}}
+{{< get-service-checks-from-git "zenoh-router" >}}
 
 
 ## Solucionar problemas

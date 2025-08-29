@@ -237,7 +237,7 @@ The most common errors include the following:
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
 
 `MALFORMED_RESPONSE`
-: The remote server responded with a payload that does not comply with HTTP specifications.
+: The remote server responded with a payload that does not comply with HTTP specifications. This error can happen when remote servers differ in their HTTP support. To prevent issues, run tests with a consistent HTTP version: either HTTP/2 (if available) or HTTP/1.1.
 
 ## Permissions
 

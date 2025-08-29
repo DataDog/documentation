@@ -134,7 +134,7 @@ Nvidia Triton también ofrece la posibilidad de exponer [métricas personalizada
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "nvidia_triton" >}}
+{{< get-metrics-from-git "nvidia-triton" >}}
 
 
 ### Eventos
@@ -142,7 +142,7 @@ Nvidia Triton también ofrece la posibilidad de exponer [métricas personalizada
 La integración Nvidia Triton no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "nvidia_triton" >}}
+{{< get-service-checks-from-git "nvidia-triton" >}}
 
 
 ### Logs

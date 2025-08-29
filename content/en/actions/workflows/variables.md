@@ -13,10 +13,6 @@ further_reading:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 The following variables and parameters are available in workflows:
 - [Context variables](#context-variables): Context variables are a broad category of immutable variables that store contextual information about a workflow, or contain data that is passed into the workflow by a triggering event or by a step in the workflow.
 - [Input parameters](#input-parameters): Input parameters are immutable key-value pairs that you can use to pass data into a workflow at runtime.
@@ -153,3 +149,4 @@ To avoid a type error resulting from an undefined variable, assign a custom vari
 [5]: /service_management/workflows/trigger
 [6]: /service_management/app_builder/queries/#return-workflow-results-to-an-app
 [7]: /service_management/workflows/trigger/#access-the-result-of-a-child-workflow
+[8]: /service_management/workflows/expressions/#inline-javascript-expressions

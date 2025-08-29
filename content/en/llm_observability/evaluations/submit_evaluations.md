@@ -14,9 +14,6 @@ further_reading:
       tag: 'Documentation'
       text: 'Learn about submitting evaluations from NVIDIA NeMo'
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -25,7 +22,7 @@ While LLM Observability provides a few out-of-the-box evaluations for your trace
 
 ## Submitting custom evaluations with the SDK
 
-The LLM Observability SDK provides the methods `LLMObs.submit_evaluation_for()` and `LLMObs.export_span()` to help your traced LLM application submit custom evaluations to LLM Observability. See the [Python][3] or [NodeJS][4] SDK documentation for more details.
+The LLM Observability SDK provides the methods `LLMObs.submit_evaluation_for()` and `LLMObs.export_span()` to help your traced LLM application submit custom evaluations to LLM Observability. See the [Python][3] or [Node.js][4] SDK documentation for more details.
 
 ### Example
 

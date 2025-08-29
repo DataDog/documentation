@@ -110,7 +110,7 @@ pprof.Do(ctx, pprof.Labels("customer_name", <value>), func(context.Context) {
 })
 ```
 
-Para especificar qué claves de etiqueta (tag) quieres utilizar para el filtrado, añade la opción [WithCustomProfilerLabelKeys][2] (o [WithCustomProfilerLabelKeys v2][3]) al iniciar el Profiler:
+Para especificar qué claves de etiqueta (label) deseas utilizar para el filtrado, añade la opción [WithCustomProfilerLabelKeys][3] (o [WithCustomProfilerLabelKeys v1][2]) al iniciar el generador de perfiles:
 
 ```go
 profiler.Start(

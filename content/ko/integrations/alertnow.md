@@ -26,7 +26,7 @@ categories:
 - 협업
 - 인시던트
 - 모바일
-custom_kind: integration
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/alertnow/README.md
 display_on_public_website: true
@@ -41,8 +41,8 @@ name: alertnow
 public_title: AlertNow
 short_description: Datadog 알림을 AlertNow의 알림과 동기화하기
 supported_os:
-- 리눅스
-- windows
+- linux
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
@@ -55,7 +55,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - 제공::통합
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog 알림을 AlertNow의 알림과 동기화하기
   media: []
@@ -73,7 +73,7 @@ AlertNow는 다양하고 복잡한 IT 환경으로부터 알림을 수집하고 
 
 
 AlertNow가 제공하는 서비스:
-- Datadog에서 인시던트 트리거 및 해결하기
+- Datadog에서 인시던트 트리거 및 해결
 - 인시던트 발생 시 이메일, SMS, 음성 통화, 모바일 애플리케이션을 통해 적절한 담당자에게 알립니다.
 
 - 에스컬레이션 정책을 기반으로 사용자에게 알림을 보냅니다.

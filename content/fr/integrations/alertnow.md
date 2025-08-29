@@ -24,7 +24,7 @@ categories:
 - slos
 - automation
 - collaboration
-- logs-restriction-queries-update-a-restriction-query
+- incidents
 - tracing_custom_inst_ruby
 custom_kind: integration
 dependencies:
