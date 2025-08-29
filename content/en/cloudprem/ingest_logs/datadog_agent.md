@@ -22,6 +22,7 @@ This document provides configuration steps for using the Datadog Agent to send l
 
 ## Key requirements
 To send logs with the Datadog Agent to CloudPrem, you must configure two environment variables:
+
 `DD_LOGS_CONFIG_LOGS_DD_URL` 
 : Set this to your CloudPrem indexer endpoint, usually `http://<RELEASE_NAME>-indexer.<NAMESPACE_NAME>.svc.cluster.local:7280`. This tells the Agent where to send the logs
 
