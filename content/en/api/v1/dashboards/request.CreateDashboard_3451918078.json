@@ -16,7 +16,8 @@
         "time": {
           "type": "fixed",
           "from": 1712080128,
-          "to": 1712083128
+          "to": 1712083128,
+          "hide_incomplete_cost_data": true
         },
         "type": "timeseries",
         "requests": [
