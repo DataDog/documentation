@@ -19,7 +19,7 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/finops-at-datadog/"
     tag: "Blog"
     text: "How we've created a successful FinOps practice at Datadog"
-  - link: https://www.datadoghq.com/blog/cloud-cost-recommendations/
+  - link: "https://www.datadoghq.com/blog/cloud-cost-recommendations/"
     tag: "Blog"
     text: "Eliminate cloud waste across AWS, Azure, and Google Cloud with Cloud Cost Recommendations"
 
