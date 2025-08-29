@@ -90,7 +90,11 @@ In Software Catalog, an API (`kind:API`) refers to a collection of endpoints tha
 
 To define components within an API, you can specify values for the `components` key in the `spec` field of the entity's v3 definition. 
 
-Example YAML for `kind:api`:
+You can also include an OpenAPI spec in your entity definition in two ways: 
+
+Inline: 
+Add the OpenAPI definition under the spec field using `type: openapi`.
+
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 {
  "apiVersion": "v3",
@@ -175,6 +179,34 @@ Example YAML for `kind:api`:
          }
        }
      }
+   },
+   "lifecycle": "production",
+   "tier": "Tier 0"
+ }
+}
+{{< /code-block >}}
+
+File reference: 
+
+Point to an OpenAPI file stored in GitHub using the `fileref` field.
+
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+{
+ "apiVersion": "v3",
+ "kind": "api",
+ "metadata": {
+   "name": "payments",
+   "displayName": "Payments",
+   "owner": "Payments Team",
+ },
+ "spec": {
+   "type": "openapi",
+   "implementedBy": [
+     "service:payment",
+     "service:payments-go"
+   ],
+   "interface": {
+     fileRef: https://github.com/openapi.yaml
    },
    "lifecycle": "production",
    "tier": "Tier 0"
