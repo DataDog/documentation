@@ -94,16 +94,6 @@ To set the injector version:
 
 For host or Docker injection, modifying the `auto_inject` version is not recommended. 
 
-To manually update the injector version, run:
-```
-sudo datadog-installer install "oci://install.datadoghq.com/apm-inject-package: <VERSION>-1"
-```
-
-Alternatively, set the following in the installation script:
-```
-DD_INSTALLER_DEFAULT_PKG_VERSION_DATADOG_APM_INJECT=<VERSION>-1
-```
-
 ### Allow and deny lists
 
 #### Default deny list
