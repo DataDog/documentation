@@ -2,14 +2,12 @@
 <div class="whatsnext">
   <p>{{- i18n "additional_sentence" -}}:</p>
   <div class="list-group">
-
-    <!-- Iterate over items in the 'further_reading' parameter of the page -->
     {{- range $dot.Page.Params.further_reading -}}
-      <!-- Retrieve the link and page for each item -->
       {{- $link := .link -}}
+      {{ printf "link: %s" $link }} <!-- Debug: print $link -->
       {{- $linkedPage := $.Site.GetPage (printf "/%s" (trim .link "/")) -}}
 
-      <!-- Fallback logic if the linked page is not directly found -->
+      {{ printf "linkedPage: %v" $linkedPage }} <!-- Debug: print $linkedPage -->
       {{- if not $linkedPage -}} 
         {{- range $.Site.Pages -}}
           {{- if in .Aliases $link -}}
@@ -19,22 +17,23 @@
         {{- end -}}
       {{- end -}}
 
-      <!-- Set the display text for the item -->
       {{- $displayText := .text | default "" -}}
+      {{ printf "displayText (before): %s" $displayText }} <!-- Debug: print $displayText before update -->
       {{- if eq $displayText "" -}}
           {{- if $linkedPage -}}
               {{- $displayText = $linkedPage.Title -}}
-              {{- $link = $linkedPage.RelPermalink -}} <!-- Update link to the correct permalink -->
+              {{- $link = $linkedPage.RelPermalink -}} {{/* Update link to the correct permalink */}}
           {{- else -}}
-              {{- $displayText = "Title not found" -}} <!-- Fallback text -->
+              {{- $displayText = "Title not found" -}} {{/* Fallback text */}}
           {{- end -}}
       {{- end -}}
-
+      {{ printf "displayText (after): %s" $displayText }} <!-- Debug: print $displayText after update -->
       <a class="list-group-item list-group-item-action list-group-item-white d-flex justify-content-between align-items-center" href="{{- $link -}}">
         <span class="w-100 d-flex justify-content-between">
           <span class="text">{{- $displayText -}}</span>
           {{- if .tag -}}
             <span class="badge badge-white pe-2 border-0">{{- .tag | upper -}}</span>
+            {{ printf "tag: %s" .tag }} <!-- Debug: print .tag -->
           {{- end -}}
         </span>
         {{- partial "img.html" (dict "root" $dot "src" "icons/list-group-whats-next-arrow-1.png" "class" "img-fluid static" "alt" "more") -}}
