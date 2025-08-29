@@ -140,7 +140,7 @@ SELECT ARRAY[1.1, 2.2, 3.3] AS decimals;             -- Inferred as DOUBLE array
 
 {{< code-block lang="sql" >}}
 -- Using type literals in queries
-SELECT 
+SELECT
     VARCHAR 'Product Name: ' || name AS labeled_name,
     price * DOUBLE 1.08 AS price_with_tax,
     created_at + INTERVAL '7 days' AS expiry_date
@@ -182,7 +182,8 @@ The following SQL functions are supported. For Window function, see the separate
 | `STRING_TO_ARRAY(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter. |
 | `ARRAY_AGG(expression e)`                        | array of input type                   | Creates an array by collecting all the input values.                        |
 | `UNNEST(array a [, array b...])`                 | rows of a [, b...]                    | Expands arrays into a set of rows. This form is only allowed in a FROM clause. |
-
+| `CURRENT_SETTING(setting_name text)`             | string                       | Returns the current value of the specified setting. Supports the parameters `dd.time_frame_start` and `dd.time_frame_end`, which return the start and end of the global time frame, respectively. |
+| `NOW()`                                          | timestamp                             | Returns the current timestamp at the start of the current transaction.
 {{% collapse-content title="Examples" level="h3" %}}
 
 ### `MIN`
@@ -470,6 +471,35 @@ FROM
   UNNEST(recipients) AS recipient
 {{< /code-block >}}
 
+### `CURRENT_SETTING`
+
+Supported setting parameters:
+- `dd.time_frame_start`: Returns the start of the time frame in epoch milliseconds
+- `dd.time_frame_end`: Returns the end of the time frame in epoch milliseconds
+
+{{< code-block lang="sql" >}}
+-- Define the current analysis window
+WITH bounds AS (
+  SELECT CAST(current_setting('dd.time_frame.start') AS TIMESTAMP) AS time_frame_start,
+         CAST(current_setting('dd.time_frame.end')   AS TIMESTAMP) AS time_frame_end,
+-- Define the immediately preceding window of equal length
+     previous_bounds AS (
+  SELECT time_frame_start - (time_frame_end - time_frame_start) AS prev_time_frame_start,
+         time_frame_start                                       AS prev_time_frame_end
+  FROM bounds
+)
+{{< /code-block >}}
+
+### `NOW`
+{{< code-block lang="sql" >}}
+SELECT
+  *
+FROM
+  sales
+WHERE
+  purchase_date > now() - INTERVAL '1 hour'
+{{< /code-block >}}
+
 {{% /collapse-content %}}
 
 ## Regular expressions
@@ -536,7 +566,7 @@ SELECT regexp_replace('INFO INFO INFO', 'INFO', 'DEBUG', 1, 2);
 You can use the following flags with [regular expression functions](#regular-expressions):
 
 `i`
-: Case-insensitive matching 
+: Case-insensitive matching
 
 `n` or `m`
 : Newline-sensitive matching
@@ -549,10 +579,10 @@ You can use the following flags with [regular expression functions](#regular-exp
 ### `i` flag
 
 {{< code-block lang="sql" >}}
-SELECT regexp_match('INFO', 'info') 
+SELECT regexp_match('INFO', 'info')
 -- NULL
 
-SELECT regexp_match('INFO', 'info', 'i') 
+SELECT regexp_match('INFO', 'info', 'i')
 -- ['INFO']
 {{< /code-block >}}
 
@@ -566,7 +596,7 @@ b', '^b');
 SELECT regexp_match('a
 b', '^b', 'n');
 -- ['b']
-{{< /code-block >}}   
+{{< /code-block >}}
 
 ### `g` flag
 
@@ -608,7 +638,7 @@ This table provides an overview of the supported window functions. For comprehen
 
 {{< callout url="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/" >}}
 Querying Logs and Metrics through DDSQL is in Preview. Use this form to request access.
-{{< /callout >}} 
+{{< /callout >}}
 
 Table functions are used to query Logs and Metrics
 
