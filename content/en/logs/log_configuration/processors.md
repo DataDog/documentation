@@ -1022,7 +1022,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following array processo
 | `operation.type`             | String     | Yes      | Type of array processor operation.                                 |
 | `operation.source`           | String     | Yes      | Attribute to append.                                               |
 | `operation.target`           | String     | Yes      | Array attribute to append to.                                      |
-| `operation.preserve_source`  | Boolean    | No      | Remove or preserve the remapped source element. Default: `false`.   |
+| `operation.preserve_source`  | Boolean    | No      | Whether to preserve the original source after remapping. Default: `false`.   |
 
 [1]: /api/v1/logs-pipelines/
 {{% /tab %}}
