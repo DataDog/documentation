@@ -181,6 +181,14 @@ public class ShoppingCartController : Controller
 }
 ```
 
+### Usage with ASP.NET `IHttpModule`
+
+To access the current request span from a custom ASP.NET `IHttpModule`, it is best to read `Tracer.Instance.ActiveScope` in the `PreRequestHandlerExecute` event (or `AcquireRequestStat` if you require session state).
+
+While Datadog creates the request span at the start of the ASP.NET pipeline, the execution order of `IHttpModules` is not guaranteed. If your module runs before Datadog's, `ActiveScope` may be `null` during early events like `BeginRequest`. The `PreRequestHandlerExecute` event occurs late enough in the lifecycle to ensure the Datadog module has run and the span is available.
+
+Keep in mind that ActiveScope can still be null for requests that are not traced (due to sampling or filtering) or when instrumentation is disabled.
+
 ### Set errors on a span
 
 To mark errors that occur in your code, use the `Span.SetException(Exception)` method. The method marks the span as an error and adds [related span metadata][5] to provide insight into the exception.
