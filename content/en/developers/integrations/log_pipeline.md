@@ -40,7 +40,7 @@ Below are important concepts to understand before building your pipeline. See [L
 
 ## Building an integration log pipeline
 
-To follow these steps, you must be registered as a Technology Partner and have access to a Datadog developer instance. If you have not yet joined, see [Join the Datadog Partner Network][6].
+To get started, make sure you’re a registered Technology Partner with access to a Datadog developer instance. If you haven't joined yet, see [Join the Datadog Partner Network][6].
 
 1. [Create a pipeline that filters by your integration's log source](#create-a-pipeline).
 2. [Add processors to normalize and enrich logs](#add-processors).
@@ -90,7 +90,7 @@ After logs are normalized and enriched, the next step is to create custom facets
 
 **Note**: You do not need to create facets for [Datadog Standard Attributes][9]. These attributes are mapped to predefined facets, which Datadog automatically generates when a pipeline is published.
 
-After you've identified the attributes that can benefit facets, follow these steps for each:
+After you've identified the attributes that can benefit from facets, follow these steps for each:
 
 1. Navigate to the [Logs Explorer][19].
 2. Click **Add** in the facets panel.
