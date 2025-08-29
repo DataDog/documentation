@@ -6701,6 +6701,58 @@ menu:
           - GetDomainAllowlist
         unstable: []
         order: 1
+    - name: Error Tracking
+      url: /api/latest/error-tracking/
+      identifier: error-tracking
+      generated: true
+    - name: Update the state of an issue
+      url: '#update-the-state-of-an-issue'
+      identifier: error-tracking-update-the-state-of-an-issue
+      parent: error-tracking
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIssueState
+        unstable: []
+        order: 3
+    - name: Update the assignee of an issue
+      url: '#update-the-assignee-of-an-issue'
+      identifier: error-tracking-update-the-assignee-of-an-issue
+      parent: error-tracking
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIssueAssignee
+        unstable: []
+        order: 4
+    - name: Get the details of an error tracking issue
+      url: '#get-the-details-of-an-error-tracking-issue'
+      identifier: error-tracking-get-the-details-of-an-error-tracking-issue
+      parent: error-tracking
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIssue
+        unstable: []
+        order: 2
+    - name: Search error tracking issues
+      url: '#search-error-tracking-issues'
+      identifier: error-tracking-search-error-tracking-issues
+      parent: error-tracking
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchIssues
+        unstable: []
+        order: 1
     - name: Fastly Integration
       url: /api/latest/fastly-integration/
       identifier: fastly-integration
