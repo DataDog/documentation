@@ -1,7 +1,10 @@
 ---
-title: Install the Datadog Distribution of OTel Collector
+title: Install the Datadog Distribution of OTel Collector on Kubernetes
 aliases:
 - "/opentelemetry/agent/install_agent_with_collector"
+code_lang: kubernetes
+type: multi-code-lang
+code_lang_weight: 1
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
@@ -36,8 +39,8 @@ Install and set up the following on your machine:
 - [Helm (v3+)][54]
 - [kubectl][5]
 
-{{< callout url="https://www.datadoghq.com/product-preview/ddot-for-linux-based-hosts-or-vms/" btn_hidden="false" >}}
-Support for deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is in Preview. To join the Preview, click <strong>Request Access</strong> and complete the form.
+{{< callout btn_hidden="true" >}}
+Support for deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is in Preview. To get started, follow the <a href="/opentelemetry/setup/ddot_collector/install/linux">Linux documentation</a>.
 {{< /callout >}}
 
 ## Install the Datadog Agent with OpenTelemetry Collector
