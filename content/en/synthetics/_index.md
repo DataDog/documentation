@@ -107,7 +107,7 @@ Optimize your test suite by [ensuring that your application's most critical work
 
 ## Synthetic Monitoring notifications
 
-Use and enrich Synthetic monitors to send notifications when a Synthetic Monitoring test is failing. The following use cases are available:
+Use and enrich Synthetic monitors to send notifications when a Synthetic Monitoring test is failing. The following features are available:
 
 Pre-filled monitor messages
 : Pre-filled monitor messages provide a structured starting point for Synthetic test alerts. Each message includes a standardized title, summary, and footer containing test metadata, making it easier to understand the alert at a glance.

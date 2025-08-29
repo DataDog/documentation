@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Customize your [Synthetic Monitoring notifications][1] to provide meaningful context for on-call responders. Synthetic Monitoring's message templating system enables you to enrich alerts with test details, extract data from test results, and route notifications conditionally based on the failure.
+Customize your alerts in [Synthetic Monitoring][1] to give on-call responders meaningful context. Synthetic Monitoring's message templating system lets you enrich alerts with test details, extract data from test results, and route notifications conditionally based on the failure.
 
 You can customize notifications using:
 

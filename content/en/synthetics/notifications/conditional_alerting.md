@@ -3,15 +3,9 @@ title: Synthetic Monitoring Conditional Alerting
 aliases:
   - /synthetics/guide/synthetic-test-monitors/
 further_reading:
-- link: "/monitors/manage/"
-  tag: "Documentation"
-  text: "Learn how to manage monitors"
 - link: "synthetics/notifications/advanced_notifications"
   tag: "Documentation"
   text: "Use advanced notifications in Synthetic Monitoring"
-- link: "/synthetics/notifications/statuspage/"
-  tag: "Documentation"
-  text: "Learn how to integrate Synthetic monitors with Statuspage"
 ---
 
 ## Overview

@@ -1,14 +1,14 @@
 ---
-title: Synthetic Monitoring Notifications
+title: Synthetic Monitors
 aliases:
   - /synthetics/guide/synthetic-test-monitors/
 further_reading:
 - link: "/monitors/manage/"
   tag: "Documentation"
   text: "Learn how to manage monitors"
-- link: "/monitors/guide/integrate-monitors-with-statuspage/"
+- link: "/synthetics/notifications/"
   tag: "Documentation"
-  text: "Learn how to integrate monitors with Statuspage"
+  text: "Learn more about Synthetic Monitoring Notifications"
 ---
 
 ## Overview
@@ -17,7 +17,7 @@ When you create a Synthetic test, Datadog automatically creates an associated mo
 
 ## Create a Synthetic test monitor
 
-<div class="alert alert-info">You cannot create or import a Synthetic test monitor in <a href="/monitors/">Monitors</a>.</div>
+<div class="alert alert-info">You can only create **Synthetic test monitors** within the <a href="https://app.datadoghq.com/synthetics/tests">Synthetic Monitoring</a> section of the application. The general <a href="https://app.datadoghq.com/monitors">Monitors</a> page is used for creating other types of monitors, such as those based on metrics, logs, or processes.</div>
 
 Create a monitor in the **Monitor** section of a new or existing Synthetic test to send notifications when a Synthetic Monitoring test is failing. Monitors are associated with the Synthetic test you create and link to the alerting conditions set in your Synthetic test configuration. To use monitor attribute and tag variables, create a [metric monitor][1].
 
@@ -46,7 +46,7 @@ To enable renotification, toggle **Enable renotification** and select a time int
 
 ## Enhanced notifications
 
-Use and enrich Synthetic monitors to send more detailed notifications when a Synthetic Monitoring test is failing. The following use cases are available:
+Use and enrich Synthetic monitors to send more detailed notifications when a Synthetic Monitoring test is failing. The following features are available:
 
 Pre-filled monitor messages
 : Pre-filled monitor messages provide a structured starting point for Synthetic test alerts. Each message includes a standardized title, summary, and footer containing test metadata, making it easier to understand the alert at a glance.
