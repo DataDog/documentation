@@ -87,6 +87,60 @@ When configuring a new Mobile Application test, use snippets to automatically po
 <br/>
   {{< img src="mobile_app_testing/mobile_app_snippets_2.png" alt="Screenshot of the left hand side of a mobile app test creation, showing the snippets examples" width="70%" >}}
 
+### Advanced options
+
+You can configure advanced options when creating a mobile test to dynamically adjust app behavior without modifying your code. For example, you can auto-accept alerts, allow application crashes, and capture network resources. These configurations can be accessed in the **Advanced Options** section of your mobile test.
+
+#### Test behavior options:
+
+Auto-accept alerts
+: When enabled, automatically accepts all OS system alerts during test execution.
+
+Allow application crash
+: When enabled, prevents the test from failing if an application crash is detected. You must include a step to restart the application after the expected crash to continue the test.
+
+Capture network resources
+: When enabled, collects network requests and responses for each test step and displays them in the results. </br>
+**Note**: This setting can impact application performance and could prevent the app from starting.
+
+#### Application arguments:
+
+You can pass `key:value` pairs to your application when the test starts, allowing you to programmatically modify app behavior. Your application code must be configured to explicitly read and process these key-value pairs. 
+
+**Examples:**
+
+{{< tabs >}}
+{{% tab "Android (Initial Intent Extras)" %}}
+
+For Android tests, add the appropriate `key:value` pairs in the Advanced Options section of your test:
+
+```json
+{
+  "username": "example_user",
+  "password": "{{ EXAMPLE_VARIABLE }}"
+}
+```
+
+{{< img src="mobile_app_testing/advanced/mobile_app_advanced_android.png" alt="Mobile app test creation page, showing an example of an advanced option for an Android device." style="width:100%;" >}}
+{{% /tab %}}
+
+{{% tab "iOS (Process Arguments)" %}}
+
+For iOS tests, add the appropriate `key:value` pairs in the Advanced Options section:
+
+```json
+{
+  "username": "example_user",
+  "password": "{{ EXAMPLE_VARIABLE }}",
+  "enable_feature_x": "true"
+}
+```
+
+{{< img src="mobile_app_testing/advanced/mobile_app_advanced_iOS.png" alt="Mobile app test creation page, showing an example of an advanced option for an iOS device." style="width:100%;" >}}
+    
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Devices
 
 On the device selection screen, you can choose to test mobile devices that are located in either Europe (EU) or the United States (US). 
