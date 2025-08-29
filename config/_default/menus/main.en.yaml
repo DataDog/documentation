@@ -2111,6 +2111,11 @@ menu:
       parent: internal_developer_portal
       identifier: idp_use_cases
       weight: 7
+    - name: Onboarding Guide
+      url: internal_developer_portal/onboarding_guide
+      parent: internal_developer_portal
+      identifier: idp_onboarding_guide
+      weight: 8
     - name: API Management
       url: internal_developer_portal/use_cases/api_management
       parent: idp_use_cases

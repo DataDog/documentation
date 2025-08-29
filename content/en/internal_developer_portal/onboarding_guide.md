@@ -1,6 +1,5 @@
 ---
 title: Onboard with Internal Developer Portal
-kind: guide
 further_reading:
   - link: '/internal_developer_portal/getting_started/'
     tag: 'Documentation'
@@ -24,9 +23,9 @@ further_reading:
 This onboarding guide walks platform and engineering leaders through the phases of implementing Datadog's Internal Developer Portal (IDP).  
 
 Recommendations:
-- Start small: onboard one or two teams, and use their feedback to refine standards.  
-- Iterate: treat your Internal Developer Portal as a product, with regular improvements.  
-- Cross-link with other initiatives: connect IDP standards to your Service Level Objectives (SLOs), CI/CD pipelines, and incident workflows. 
+- Onboard one or two teams first, and use their feedback to refine standards.  
+- Iterate regularly—treat your Internal Developer Portal as a product.  
+- Connect IDP standards with other initiatives, such as SLOs, CI/CD pipelines, and incident workflows.  
 
 ## Phase 1: Plan your implementation
 
@@ -36,38 +35,45 @@ Recommendations:
 
 ## Phase 2: Familiarize yourself with tooling
 
-1. **Identify data sources**: Choose sources of truth for your [Software Catalog][7], such as external manifests or Datadog telemetry.  
+1. **Identify data sources**: Learn about the three ways to bring in entities, and decide what you to use as sources of truth for your [Software Catalog][7]:
+
+   - **[Automatically discover entries from Datadog][23]** products, such as APM, RUM, or USM. You can also import from Infrastructure or Logs.  
+   - **Import from external systems** such as [Backstage][14] or [ServiceNow][15].  
+   - **[Create entries directly][24]** through the Datadog UI, or programmatically by importing from GitHub, Terraform, the Datadog Software Metadata Provider, or the Service Definition API.  
+
+  **Note**: If you use APM, prioritize [Unified Service Tagging][13] and [Inferred Services][14] as entry points, rather than relying on service overrides.
+
 1. **Create internal onboarding guidance**: Document tagging standards, sample `entity.definition.yaml` files, and expectations for application teams.  
 1. **Explore automation**: Use the [API][8] or Terraform provider to manage entities, scorecards, and workflows programmatically.
 
 ## Phase 3: Integrate data sources
 
-- **Adopt GitOps-style management**: [Connect GitHub][13] or other repos to manage your catalog. [Import existing Backstage manifests][14] if available.  
-- **[Import from ServiceNow][15]**: Sync CIs from your ServiceNow CMDB into IDP.  
-- **Connect on-call and incident tools**: Configure [Jira][9], [PagerDuty][10], or [other integrations][16].
+1. **Adopt GitOps-style management**: [Connect GitHub][13] or other repos to manage your catalog. [Import existing Backstage manifests][14] if available.  
+1. **[Import from ServiceNow][15]**: Sync CIs from your ServiceNow CMDB into IDP.  
+1. **Connect on-call and incident tools**: Configure [Jira][9], [PagerDuty][10], or [other integrations][16].
 
 ## Phase 4: Customize and extend schema
 
-- **Establish definition standards**: Decide how you represent criticality, lifecycle, and environments. See [Entity Model][17] for definition schemas. 
-- **Set metadata expectations**: Decide on whether to include [custom tags and extensions][18]. Determine how to define relationships between components, and how to audit automatically detected relationships.
-- **Maintain internal guidance**: Keep documentation for developers, such as standards for instrumentation and tagging, and sample entity definition manifests.
+1. **Establish entity definition standards**: Decide how you represent criticality, lifecycle, and environments. See [Entity Model][6] for definition schemas. 
+1. **Set metadata expectations**: Decide on whether to include [custom tags and extensions][18]. Determine how to define relationships between components, and how to audit automatically detected relationships.
+1. **Maintain internal guidance**: Keep documentation for developers, such as standards for instrumentation and tagging, and sample entity definition manifests.
 
 ## Phase 5: Establish and communicate standards
 
-- **Review recommended Scorecards**: Start with [Datadog's out-of-the-box rules][3]. Select those relevant to your organization.
-- **Add organization-specific rules**: [Extend scorecards][19] with custom security checks, deployment frequency requirements, or tagging standards.  
-- **Set levels of criticality**: [Group rules into levels][20] to signal importance.
+1. **Review recommended Scorecards**: Start with [Datadog's out-of-the-box rules][3]. Select those relevant to your organization.
+1. **Add organization-specific rules**: [Extend scorecards][19] with custom security checks, deployment frequency requirements, or tagging standards.  
+1. **Set levels of criticality**: [Group rules into levels][20] to signal importance.
 
 ## Phase 6: Set up golden paths
 
-- **Review example blueprints**: Explore [Self-service blueprints][11], which show example paths for infrastructure provisioning and management, project scaffolding, and more. Experiment with modifying the blueprints to fit your organization's stack.
-- **Explore the Action Catalog**: See supported integrations, or extend with [HTTP requests and private actions][4].  
-- **Publish your first workflow**: Build a golden path and iterate based on developer feedback.
+1. **Review example blueprints**: Explore [Self-service blueprints][11], which show example paths for infrastructure provisioning and management, project scaffolding, and more. Experiment with modifying the blueprints to fit your organization's stack.
+1. **Explore the Action Catalog**: See supported integrations, or extend with [HTTP requests and private actions][4].  
+1. **Publish your first workflow**: Build a golden path and iterate based on developer feedback.
 
 ## Phase 7: Explore engineering reports
 
-- **Track progress**: Use built-in [Engineering Reports][12] to monitor production readiness, reliability, and adoption of best practices.  
-- **Measure engagement**: Monitor developer engagement through the built-in usage analytics dashboard.
+1. **Track progress**: Use built-in [Engineering Reports][12] to monitor production readiness, reliability, and adoption of best practices.  
+1. **Measure engagement**: Monitor developer engagement through the built-in usage analytics dashboard.
  
 ## Further reading
 
@@ -89,7 +95,10 @@ Recommendations:
 [14]: /internal_developer_portal/software_catalog/set_up/import_entities#import-from-backstage
 [15]: /internal_developer_portal/software_catalog/set_up/import_entities#import-from-servicenow
 [16]: /internal_developer_portal/integrations
-[17]: /internal_developer_portal/software_catalog/entity_model
 [18]: /internal_developer_portal/software_catalog/entity_model?tab=v30#build-custom-extensions
 [19]: /internal_developer_portal/scorecards/custom_rules
 [20]: /internal_developer_portal/scorecards/scorecard_configuration#group-rules-into-levels
+[21]: /internal_developer_portal/software_catalog/set_up/discover_entities#automatic-discovery-with-apm-usm-and-rum
+[22]: /internal_developer_portal/software_catalog/set_up/import_entities
+[23]: /internal_developer_portal/software_catalog/set_up/discover_entities
+[24]: /internal_developer_portal/software_catalog/set_up/create_entities
