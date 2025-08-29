@@ -945,7 +945,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following array processo
 |---------------------|-----------|----------|---------------------------------------------------------------|
 | `type`              | String    | Yes      | Type of the processor.                                        |
 | `name`              | String    | No       | Name of the processor.                                        |
-| `is_enabled`        | Boolean   | No       | If the processors is enabled or not. Default: `false`.        |
+| `is_enabled`        | Boolean   | No       | Whether the processor is enabled. Default: `false`.        |
 | `operation.type`    | String    | Yes      | Type of array processor operation.                            |
 | `operation.source`  | String    | Yes      | Path of the array to extract the length of.                   |
 | `operation.target`  | String    | Yes      | Target attribute.                                             |
