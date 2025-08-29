@@ -543,46 +543,100 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-Starting in dd-trace-rb v1.9.0, you can use the Ruby tracer's API to track user events.
+Starting in dd-trace-rb v1.9.0, you can use the Ruby tracer's API to track user events. Version v2.19.0 of dd-trace-rb introduces new methods under the `Datadog::Kit::AppSec::Events::V2` namespace. Existing event tracking methods are retained for compatibility.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
-Traces containing login success/failure events can be queried using the following query `@appsec.security_activity:business_logic.users.login.success` or `@appsec.security_activity:business_logic.users.login.failure`.
-
 {{% collapse-content title="Login success" level="h4" expanded="true" %}}
 ```ruby
-require 'datadog/kit/appsec/events'
+require 'datadog/kit/appsec/events/v2'
 
-trace = Datadog::Tracing.active_trace
-# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
-Datadog::Kit::AppSec::Events.track_login_success(trace, user: { id: 'my_user_id' }, { 'usr.login': 'my_user_email' })
+login = 'user@some.com'
+user = 'some-user-id'    # any unique string identifier (i.e. id, username or email)
+user = {                 # or user could be a Hash with an id and other fields
+  id: 'some-user-id',    # id is mandatory
+  email: 'user@some.com' # other fields are optional
+}
+metadata = { 'some.key': 'value' } # any arbitrary key-value pairs
+
+Datadog::Kit::AppSec::Events::V2.track_user_login_success(login, user, metadata)
 ```
 {{% /collapse-content %}}
 
 {{% collapse-content title="Login failure" level="h4" expanded="false" id="ruby-login-failure" %}}
 ```ruby
-require 'datadog/kit/appsec/events'
-trace = Datadog::Tracing.active_trace
+require 'datadog/kit/appsec/events/v2'
 
-# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
+login = 'user@some.com' # the string used by the user to log in
+user_exists = true      # if the user login exists in database for example
+metadata = { 'some.key': 'value' } # any arbitrary key-value pairs
 
-# if the user exists
-Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: true, { 'usr.login': 'my_user_email' })
-
-# if the user doesn't exist
-Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: false, { 'usr.login': 'my_user_email' })
+Datadog::Kit::AppSec::Events::V2.track_user_login_failure(login, user_exists, metadata)
 ```
 {{% /collapse-content %}}
 
 {{% collapse-content title="Custom business logic" level="h4" expanded="false" id="ruby-custom-business" %}}
 ```ruby
 require 'datadog/kit/appsec/events'
+
+span = nil
 trace = Datadog::Tracing.active_trace
+metadata = { 'usr.id': 'some-user-id' }
+event_name = 'users.signup'
 
-# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
+Datadog::Kit::AppSec::Events.track(event_name, trace, span, metadata)
+```
+{{% /collapse-content %}}
 
-# Leveraging custom business logic tracking to track user signups
-Datadog::Kit::AppSec::Events.track('users.signup', trace, nil, { 'usr.id': 'my_user_id'})
+#### Migrating to the new login success and failure methods
+
+The new methods in `Datadog::Kit::AppSec::Events::V2` introduce a more intuitive parameter order and clearer separation of concerns. Here are the key changes:
+
+1. The login identifier (email, username) is the first parameter and is mandatory.
+2. The user object/ID is optional in success events and has been removed from failure events.
+3. Metadata has been simplified and no longer requires the `usr.login` field.
+4. The trace and span parameters are no longer required and are automatically inferred.
+
+**Note**: the legacy methods `track_login_success` and `track_login_failure` are deprecated in favor of the new methods `track_user_login_success` and `track_user_login_failure`, respectively.
+
+In the following example, the commented code is no longer necessary.
+
+{{% collapse-content title="Login success" level="h4" expanded="true" id="ruby-v2-migration-login-success" %}}
+```ruby
+require 'datadog/kit/appsec/events/v2'
+
+login = 'user@some.com' # new mandatory argument
+user = {                # same as before, but now the Hash is optional
+  id: 'some-user-id',   # providing a user ID will nonetheless help with post-compromised activity correlation
+  email: 'user@some.com'
+}
+metadata = {
+# 'usr.login': 'user@some.com', this is no longer necessary in metadata, but became the required first parameter
+  'some.key': 'value'
+}
+
+# deprecated
+# Datadog::Kit::AppSec::Events.track_login_success(trace, span, user: user, **metadata)
+
+Datadog::Kit::AppSec::Events::V2.track_user_login_success(login, user, metadata)
+```
+{{% /collapse-content %}}
+
+{{% collapse-content title="Login failure" level="h4" expanded="false" id="ruby-v2-migration-login-failure" %}}
+```ruby
+require 'datadog/kit/appsec/events/v2'
+
+login = 'user@some.com' # new mandatory argument
+user_exists = true      # if the user login exists in database for example
+metadata = {
+# 'usr.login': 'user@some.com', this is no longer necessary in metadata, but became the required first parameter
+  'some.key': 'value'
+}
+
+# deprecated
+# Datadog::Kit::AppSec::Events.track_login_failure(trace, span, user_exists: user_exists, user_id: login, **metadata)
+
+Datadog::Kit::AppSec::Events::V2.track_user_login_failure(login, user_exists, metadata)
 ```
 {{% /collapse-content %}}
 
@@ -970,7 +1024,7 @@ This will open a menu in which you may define your custom WAF rule. By selecting
 Once saved, the rule is deployed to instances of the service that have Remote Configuration enabled.
 
 
-[1]: /agent/remote_config?tab=configurationyamlfile#application-security-management-asm
+[1]: /tracing/guide/remote_config
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
 
 ## Automatic user activity event tracking
@@ -1042,4 +1096,4 @@ For manual configuration, you can set the environment variable `DD_APPSEC_AUTOMA
 [12]: /security/default_rules/appsec-ato-bf/
 [13]: /security/default_rules/distributed-ato-ua-asn/
 [14]: https://app.datadoghq.com/security/appsec/inventory/services?tab=capabilities
-[15]: /agent/remote_config/
+[15]: /tracing/guide/remote_config

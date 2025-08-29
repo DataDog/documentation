@@ -1,11 +1,8 @@
 ---
-title: "Données recueillies par la solution Database\_Monitoring"
-description: "Informations concernant les données recueillies par la solution Database\_Monitoring."
+title: Données recueillies par la solution Database Monitoring
+description: Informations concernant les données recueillies par la solution Database Monitoring.
 further_reading: null
 ---
-{{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
-{{< /site-region >}}
 
 Lorsque vous configurez la solution Database Monitoring, l'Agent recueille toutes les métriques décrites dans la documentation relative à l'intégration correspondante. Celles-ci incluent les métriques sur l'état de la base de données, les événements, les failovers, les connexions et les pools de buffer, ainsi que les métriques sur les performances des requêtes recueillies par la solution Database Monitoring.
 

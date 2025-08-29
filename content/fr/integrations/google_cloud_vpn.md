@@ -54,7 +54,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud VPN depui
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "google_cloud_vpn" >}}
+{{< get-metrics-from-git "google-cloud-vpn" >}}
 
 
 ### Événements

@@ -11,12 +11,6 @@ further_reading:
   text: "Setup Network Path"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Path for Datadog Cloud Network Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-<div class="alert alert-info">Network Path for Datadog Cloud Network Monitoring is in Limited Availability. Reach out to your Datadog representative to sign up.</div>
-
 ## Overview
 
 The List View of Network Path is the default view for exploring various paths. Group by sources such as `hostname` and `service`.
@@ -47,7 +41,7 @@ Reachable
 
 Use the **Multi-path map** button to build a path map based on one or more selected paths:
 
-{{< img src="network_performance_monitoring/network_path/multi_path.png" alt="Multi-path view showing 3 selected paths" >}}
+{{< img src="network_performance_monitoring/network_path/multi_path_2.png" alt="Multi-path view showing 2 selected paths." >}}
 
 From this view, you can view the latency and reachability for the selected paths, as well as investigate end-to-end packet loss and hop-to-hop latency.
 For more information on this view, see the [Path View][1] documentation.

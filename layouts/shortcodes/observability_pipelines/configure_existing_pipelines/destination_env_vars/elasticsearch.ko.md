@@ -1,0 +1,6 @@
+- Elasticsearch 인증 사용자 이름
+   - 환경 변수에 저장됨: `DD_OP_DESTINATION_ELASTICSEARCH_USERNAME`.
+- Elasticsearch 인증 비밀번호
+   - 환경 변수에 저장됨: `DD_OP_DESTINATION_ELASTICSEARCH_PASSWORD`.
+- Elasticsearch 엔드포인트 URL
+   - 다음 환경 변수에 저장됨: `DD_OP_DESTINATION_ELASTICSEARCH_ENDPOINT_URL`.

@@ -53,11 +53,11 @@ The Java Tracer supports automatic instrumentation for the following Oracle JDK,
 
 Datadog does not officially support any early-access versions of Java.
 
-#### Java Tracer v0 (maintenance)
+#### Java Tracer v0
 
 | Java versions      | Operating Systems                                                               | Support level                     |
 |--------------------|---------------------------------------------------------------------------------|-----------------------------------|
-| 7 only             | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [Maintenance](#levels-of-support) |
+| 7 only             | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [End-of-life](#levels-of-support) |
 | 7 only             | Linux (arm64)<br>Mac (arm64)                                                    | [End-of-life](#levels-of-support) |
 
 ### Levels of support
@@ -128,7 +128,6 @@ The following instrumentations are disabled by default and can be enabled with t
 | Ignite                       | `-Ddd.integration.ignite.enabled=true`                                                                   |
 | JAX-WS                       | `-Ddd.integration.jax-ws.enabled=true`                                                                   |
 | JDBC Datasource              | `-Ddd.integration.jdbc-datasource.enabled=true`                                                          |
-| Kotlin Coroutines            | `-Ddd.integration.kotlin_coroutine.experimental.enabled=true`                                            |
 | Mulesoft                     | `-Ddd.integration.mule.enabled=true`                                                                     |
 | Netty Promise                | `-Ddd.integration.netty-promise.enabled=true`                                                            |
 | Ning                         | `-Ddd.integration.ning.enabled=true`                                                                     |
@@ -258,6 +257,7 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | Hystrix             | 1.4+       | Fully Supported                                        | `hystrix`                                      |
 | JSP Rendering       | 2.3+       | Fully Supported                                        | `jsp`, `jsp-render`, `jsp-compile`             |
 | JUnit               | 4.1+, 5.3+ | Fully Supported                                        | `junit`, `junit-4`, `junit-5`                  |
+| Kotlin Coroutines   | 1.3+       | Fully Supported                                        | `kotlin_coroutine`                             |
 | Project Reactor     | 3.1+       | Fully Supported                                        | `reactor-core`                                 |
 | Quartz              | 2.x        | Fully Supported                                        | `quartz`                                       |
 | RxJava              | 2.x        | Fully Supported                                        | `rxjava`                                       |

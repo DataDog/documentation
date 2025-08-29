@@ -37,6 +37,7 @@ translate.yaml                                          @DataDog/WebOps-Platform
 yarn.lock                                               @DataDog/WebOps-Platform
 .yarnrc.yml                                             @DataDog/WebOps-Platform
 repository.datadog.yml                                  @Datadog/WebOps-Platform
+service.datadog.yaml                                    @DataDog/WebOps-Platform @DataDog/documentation
 
 # Scoped Docs/WebOps
 .github/                                                      @DataDog/WebOps-Platform
@@ -151,7 +152,7 @@ static/resources/yaml/observability_pipelines/                  @DataDog/observa
 
 content/en/synthetics/*.md                                      @Datadog/synthetics-app @Datadog/documentation
 content/en/continuous_testing/*.md                              @Datadog/synthetics-ct @Datadog/documentation
-content/en/mobile_app_testing/*.md                              @Datadog/synthetics-mobile @Datadog/documentation
+content/en/mobile_app_testing/*.md                              @Datadog/synthetics-executing-mobile @Datadog/documentation
 
 # Software Delivery
 
@@ -164,7 +165,7 @@ content/en/code_analysis/                         @Datadog/static-analysis @Data
 content/en/quality_gates/                         @Datadog/ci-app-backend @Datadog/documentation
 
 # DDSQL Editor References
-content/en/ddsql_reference/*.md                     @Datadog/xpq @Datadog/documentation
+content/en/ddsql_reference/*.md                   @Datadog/documentation @Datadog/advanced-query-guild
 
 # Data Streams Monitoring
 content/en/data_streams/*.md                      @Datadog/data-streams-monitoring @Datadog/documentation

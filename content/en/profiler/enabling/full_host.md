@@ -7,8 +7,8 @@ further_reading:
       text: 'Getting Started with Profiler'
 ---
 
-{{< callout url="" btn_hidden="true" header="Try the Full-Host Profiler Preview!">}}
-The Full-Host Profiler is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/full-host-profiler/" btn_hidden="false" header="Join the Preview!" >}}
+Full Host is in Preview.
 {{< /callout >}}
 
 The Full-Host Profiler is an eBPF-based profiling solution built on OpenTelemetry that sends profiling data to Datadog using the Datadog Agent. It supports symbolication for compiled languages and is optimized for containerized environments such as Docker and Kubernetes.
@@ -39,6 +39,8 @@ Debugging information
 : Symbols should be available locally or can be uploaded in CI with `datadog-ci` 
 
 ## Installation
+
+<div class="alert alert-info">Always set <b>DD_SERVICE</b> for each service you want to profile and identify separately. This ensures accurate attribution and more actionable profiling data. To learn more, see <a href="#service-naming">Service naming</a.</div>
 
 The Full-Host Profiler is distributed as a standalone executable.
 
@@ -71,6 +73,16 @@ To build the Full-Host Profiler directly on your machine, run:
    ```shell
    make
    ```
+
+## Service naming
+When using full-host profiling, Datadog captures profiles from all processes running on the host. The service name for each process depends on the `DD_SERVICE` environment variable.
+
+If `DD_SERVICE` is set, the profiler uses the value of `DD_SERVICE` as the service name. This is the recommended and most reliable approach.
+
+If `DD_SERVICE` is not set, Datadog infers a service name from the binary name. For interpreted languages, this is the name of the interpreter. For example, for a service written in Java, the full-host profiler sets the service name to `service:java`.
+{{< img src="profiler/inferred_service_example.png" alt="Example of an inferred services within Profiling" style="width:50%;">}}
+
+If multiple services are running under the same interpreter (for example, two separate Java applications on the same host), and neither sets `DD_SERVICE`, Datadog groups them together under the same service name. Datadog cannot distinguish between them unless you provide a unique service name.
 
 
 ## What's next?

@@ -44,15 +44,14 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/optimize-high-volume-logs/"
   tag: "blog"
   text: "How to optimize high-volume log data without compromising visibility"
+- link: "https://www.datadoghq.com/blog/archive-search/"
+  tag: "Blog"
+  text: "Search your historical logs more efficiently with Datadog Archive Search"
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-danger">Observability Pipelines is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
-
-<div class="alert alert-info">
-Datadog recommends you update Observability Pipelines Worker (OPW) with every minor and patch release, or, at a minimum, monthly. <br><br> Upgrading to a major OPW version and keeping it updated is the only supported way to get the latest OPW functionality, fixes, and security updates.
-</div>
 
 ## Overview
 
@@ -65,6 +64,10 @@ The Observability Pipelines Worker is the software that runs in your infrastruct
 The Observability Pipelines UI provides a control plane to manage your Observability Pipelines Workers. You build and edit pipelines and deploy pipeline changes to your Workers from there. You can also enable out-of-the-box monitors for your pipelines so that you can evaluate their health.
 
 ## Get started
+
+<div class="alert alert-info">
+Datadog recommends you update Observability Pipelines Worker (OPW) with every minor and patch release, or, at a minimum, monthly. <br><br> Upgrading to a major OPW version and keeping it updated is the only supported way to get the latest OPW functionality, fixes, and security updates. See <a href="https://docs.datadoghq.com/observability_pipelines/install_the_worker/?tab=docker#upgrade-the-worker">Upgrade the Worker</a> to update to the latest Worker version</a>.
+</div>
 
 To set up a pipeline:
 

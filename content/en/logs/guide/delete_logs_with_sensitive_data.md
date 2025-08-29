@@ -3,9 +3,9 @@ title: Delete Logs with Sensitive Data
 
 disable_toc: false
 further_reading:
-- link: "logs/guide/control-sensitive-logs-data/"
+- link: "logs/guide/manage-sensitive-logs-data-access/"
   tag: "Documentation"
-  text: "Control Sensitive Logs Data"
+  text: "Manage sensitive logs data access"
 - link: "/security/sensitive_data_scanner/"
   tag: "Documentation"
   text: "Sensitive Data Scanner"
@@ -43,8 +43,6 @@ To delete an entire index:
 1. Click the **Delete** icon on the right side of the index you want to delete.
 1. Click **Confirm** to delete the index.
 
-**Note**: The index shows as a pending deletion until the logs age out, after which the index is fully deleted and removed from the UI.
-
 ## Redact sensitive data with Sensitive Data Scanner
 
 Use [Sensitive Data Scanner][5] to limit the risk of storing sensitive data in Datadog. Sensitive Data Scanner is a stream-based, pattern matching service used to identify, tag, and optionally redact or hash sensitive data. Security and compliance teams can implement Sensitive Data Scanner to prevent sensitive data leaks and limit non-compliance risks.
@@ -72,7 +70,7 @@ If the options for changing your retention period, making logs un-queryable, and
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines/indexes
-[2]: /logs/guide/control-sensitive-logs-data/#make-sensitive-logs-un-queryable-in-datadog-until-they-age-out
+[2]: /logs/guide/manage-sensitive-logs-data-access/#make-sensitive-logs-un-queryable-in-datadog-until-they-age-out
 [3]: /help/
 [4]: /getting_started/site/
 [5]: https://www.datadoghq.com/product/sensitive-data-scanner/

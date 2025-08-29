@@ -10,25 +10,27 @@ title: Guías de integración
 ---
 
 {{< whatsnext desc="Guías generales:" >}}
-    {{< nextlink href="integrations/guide/requests" tag=" documentation" >}}Solicitar integraciones de Datadog{{< /nextlink >}}
-    {{< nextlink href="/integrations/guide/reference-tables/" tag=" Documentation" >}}Añadir metadatos personalizados con tablas de referencia{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/source-code-integration" tag=" Documentation" >}}Integración de código fuente en Datadog{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/requests" tag=" documentation" >}}Solicitar integraciones Datadog{{< /nextlink >}}
+    {{< nextlink href="/integrations/guide/reference-tables/" tag=" documentation" >}}Añadir metadatos personalizados con tablas de referencia{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/source-code-integration" tag=" documentation" >}}Integración del código fuente en Datadog{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/high_availability" tag=" Documentation" >}}Soporte de alta disponibilidad para el Datadog Agent{{< /nextlink >}}
     {{< nextlink href="integrations/guide/cloud-metric-delay" tag=" cloud" >}}Retraso de métricas en la nube{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/add-event-log-files-to-the-win32-ntlogevent-wmi-class" tag=" Windows" >}}Añadir archivos de logs de eventos a la clase WMI `Win32_NTLogEvent`{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/add-event-log-files-to-the-win32-ntlogevent-wmi-class" tag=" Windows" >}}Añadir archivos de logs de eventos a la`Win32_NTLogEvent` clase WMI{{< /nextlink >}}
     {{< nextlink href="integrations/guide/retrieving-wmi-metrics" tag=" Windows" >}}Recuperar métricas de WMI{{< /nextlink >}}
     {{< nextlink href="integrations/guide/mongo-custom-query-collection" tag=" MongoDB" >}}Recopilar métricas personalizadas de MongoDB{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/prometheus-metrics" tag=" Prometheus" >}}Asignación de métricas de Prometheus a métricas de Datadog{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/prometheus-host-collection" tag=" Prometheus" >}}Recopilación de métricas de Prometheus y OpenMetrics desde un host{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/freshservice-tickets-using-webhooks" tag=" Webhooks" >}}Tiques de Freshservice mediante webhooks{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/hadoop-distributed-file-system-hdfs-integration-error" tag=" Hadoop" >}}Error de integración de Hadoop Distributed File System (HDFS){{< /nextlink >}}
-    {{< nextlink href="integrations/guide/hcp-consul" tag=" Consul" >}}Monitorización de HCP Consul con Datadog{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/prometheus-metrics" tag=" Prometheus" >}}Apuntar métricas de Prometheus a métricas de Datadog{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/prometheus-host-collection" tag=" Prometheus" >}}Recopilar métricas de Prometheus y OpenMetrics a partir de un host{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/freshservice-tickets-using-webhooks" tag=" Webhooks" >}}Tickets de Freshservice mediante webhooks{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/hadoop-distributed-file-system-hdfs-integration-error" tag=" Hadoop" >}}Error de la integración Hadoop Distributed File System (HDFS){{< /nextlink >}}
+    {{< nextlink href="integrations/guide/hcp-consul" tag=" Consul" >}}Monitorizar HCP Consul con Datadog{{< /nextlink >}}
     {{< nextlink href="integrations/guide/agent-failed-to-retrieve-rmiserver-stub" tag=" kafka" >}}El Agent no pudo recuperar un stub de RMIServer{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/send-tcp-udp-host-metrics-to-the-datadog-api/" tag=" network" >}}Envío de métricas de host TCP/UDP a la API de Datadog{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/snmp-commonly-used-compatible-oids/" tag=" snmp" >}}SNMP usados con frecuencia y OIDs compatibles{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/versions-for-openmetrics-based-integrations" tag=" openmetrics" >}}Versiones de las integraciones basadas en OpenMetrics{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/send-tcp-udp-host-metrics-to-the-datadog-api/" tag=" network" >}}Enviar métricas de host TCP/UDP a la API de Datadog{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/snmp-commonly-used-compatible-oids/" tag=" snmp" >}}Identificadores de objeto (OID) compatibles y frecuentemente utilizados de SNMP{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/versions-for-openmetrics-based-integrations" tag=" openmetrics" >}}Versiones de integraciones basadas en OpenMetrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/cloud-foundry-setup" tag=" pivotal cloud foundry" >}}Configuración manual de Pivotal Cloud Foundry{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/application-monitoring-vmware-tanzu" tag=" VMWare Tanzu" >}}Monitorización de aplicaciones de Datadog para VMware Tanzu{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/cluster-monitoring-vmware-tanzu" tag=" VMWare Tanzu" >}}Monitorización de clústeres de Datadog para VMware Tanzu{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/application-monitoring-vmware-tanzu" tag=" VMWare Tanzu" >}}Datadog Application Monitoring para VMware Tanzu{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/cluster-monitoring-vmware-tanzu" tag=" VMWare Tanzu" >}}Datadog Cluster Monitoring para VMware Tanzu{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/fips-integrations" tag=" fips" >}}Integraciones del Agent verificadas por FIPS{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Guías de AWS:" >}}
@@ -46,26 +48,27 @@ title: Guías de integración
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Guías de Azure:" >}}
-    {{< nextlink href="integrations/guide/azure-manual-setup" tag=" Azure" >}}Guía de configuración manual de Azure{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-native-manual-setup" tag=" Azure" >}}Guía de configuración manual de Azure Native{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-programmatic-management" tag=" Azure" >}}Guía de gestión programática de la integración de Azure{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-native-programmatic-management" tag=" Azure" >}}Guía de gestión programática de la integración de Azure Native{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-portal" tag=" Azure" >}}Gestión de la integración de Azure Native{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-cloud-adoption-framework" tag=" Azure" >}}Marco de adopción en la nube de Azure con Datadog{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-manual-setup" tag=" Azure" >}}Guía para la configuración manual de Azure{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-native-manual-setup" tag=" Azure" >}}Guía para la configuración manual de Azure Native{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-programmatic-management" tag=" Azure" >}}Guía para la gestión mediante programación de la integración Azure{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-native-programmatic-management" tag=" Azure" >}}Guía para la gestión mediante programación de la integración Azure Native{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-portal" tag=" Azure" >}}Gestionar la integración Azure Native{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-cloud-adoption-framework" tag=" Azure" >}}Marco de adopción de Azure Cloud con Datadog{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-troubleshooting" tag=" Azure" >}}Solucionar problemas de Azure{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-architecture-and-configuration" tag=" Azure" >}}Arquitectura y configuración de Azure{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-status-metric" tag=" Azure" >}}Estado y métricas de recuento de Azure{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-vms-appear-in-app-without-metrics" tag=" Azure" >}}Aparecen VMs de Azure en la aplicación sin métricas{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/powered-down-azure-vm-on-infrastructure-list" tag=" Azure" >}}VMs de Azure apagadas en la lista de infraestructura{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/powershell-command-to-install-azure-datadog-extension" tag=" Azure" >}}Comandos para instalar la extensión de Azure Datadog{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-graph-api-permissions" tag=" Azure" >}}Permisos de la API de Microsoft Graph para monitorizar Azure{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-architecture-and-configuration" tag=" Azure" >}}Configuración y arquitectura de Azure{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-count-metric" tag=" Azure" >}}Métrica de recuento Azure{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-vms-appear-in-app-without-metrics" tag=" Azure" >}}En la aplicación aparecen máquinas virtuales Azure sin métricas{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/powered-down-azure-vm-on-infrastructure-list" tag=" Azure" >}}Máquinas virtuales Azure desconectadas en la lista de infraestructuras{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/powershell-command-to-install-azure-datadog-extension" tag=" Azure" >}}Comandos para instalar la extensión Azure Datadog{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-graph-api-permissions" tag=" Azure" >}}Permisos a la API de Microsoft Graph para monitorizar Azure{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Guías de JMX:" >}}
-    {{< nextlink href="integrations/guide/running-jmx-commands-in-windows" tag=" jmx" >}}Ejecución de comandos de JMX en Windows{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/collecting-composite-type-jmx-attributes" tag=" jmx" >}}Recopilación de atributos de JMX de tipo compuesto{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/use-bean-regexes-to-filter-your-jmx-metrics-and-supply-additional-tags" tag=" jmx" >}}Uso de expresiones regulares de bean para filtrar tus métricas de JMX y proporcionar etiquetas adicionales{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/jmx_integrations/" tag=" jmx" >}}¿Qué integraciones usan Jmxfetch?{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/running-jmx-commands-in-windows" tag=" jmx" >}}Ejecutar comandos JMX en Windows{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/collecting-composite-type-jmx-attributes" tag=" jmx" >}}Recopilar atributos de tipo compuesto de JMX{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/use-bean-regexes-to-filter-your-jmx-metrics-and-supply-additional-tags" tag=" jmx" >}}Utilizar expresiones regulares (regex) de beans para filtrar tus métricas de JMX y proporcionar etiquetas (tags) adicionales{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/jmx_integrations/" tag=" jmx" >}}¿Cuáles integraciones utilizan Jmxfetch?{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/jmxfetch-fips/" tag=" jmx" >}}Modo JMXFetch FIPS-140{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Guías de bases de datos:" >}}

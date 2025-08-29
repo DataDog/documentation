@@ -59,7 +59,7 @@ AWS AppSync から S3 バケットまたは CloudWatch のいずれかにログ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_appsync" >}}
+{{< get-metrics-from-git "amazon-appsync" >}}
 
 
 ### イベント

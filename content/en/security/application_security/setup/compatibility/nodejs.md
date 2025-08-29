@@ -74,12 +74,13 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 
 ##### App and API Protection Capability Notes
 
-Although Threat Protection is available for express >= 4 versions, the blocking of payloads on the body is only supported for applications using `body-parser` library.
+Although Threat Protection is available for express >= 4 versions, the blocking of payloads on the body is only supported for applications using either the [`body-parser`][45] or [`multer`][46] libraries.
 
 | Framework | Versions | Threat Detection supported? | Threat Protection supported? |
 |-----------|----------|-----------------------------|------------------------------|
-| express   | >=4      | {{< X >}}                   | {{< X >}}                    |
-| nextjs    | >=11.1   | {{< X >}}                   |                              |
+| express   | `>=4`      | {{< X >}}                   | {{< X >}}                    |
+| fastify   | `>=2`      | {{< X >}}                   | {{< X >}}                    |
+| nextjs    | `>=11.1`   | {{< X >}}                   |                              |
 
 
 
@@ -156,7 +157,7 @@ Although Threat Protection is available for express >= 4 versions, the blocking 
 | passport-http   | 0.3.0                     |
 
 [1]: /tracing/trace_collection/compatibility/nodejs/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[2]: /tracing/guide/remote_config
 [4]: https://github.com/nodejs/release#release-schedule
 [5]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
 [28]: https://github.com/datastax/nodejs-driver
@@ -176,3 +177,5 @@ Although Threat Protection is available for express >= 4 versions, the blocking 
 [42]: https://github.com/sequelize/sequelize
 [43]: https://github.com/apollographql/apollo-server
 [44]: https://www.npmjs.com/package/apollo-server-core
+[45]: https://www.npmjs.com/package/body-parser
+[46]: https://www.npmjs.com/package/multer

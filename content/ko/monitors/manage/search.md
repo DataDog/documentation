@@ -49,7 +49,7 @@ title: 모니터 검색
 | 유형         | Datadog [모니터 유형][4]                                                                   |
 | 생성자      | 모니터 생성자                                                                      |
 | 서비스      | 양식 `service:<VALUE>`에서 사용자가 사용한 서비스 태그입니다.                                         |
-| 태그          | 모니터에 할당된 [태그](#monitor-tags)                                               |
+| 태그          | 모니터에 할당된 [태그][5]                                               |
 | Env          | 양식 `env:<VALUE>`에서 사용자가 사용한 환경 태그입니다.                                         |
 | 범위        | 검색 태그가 모니터 쿼리의 `from`필드에 나와 있습니다.                                   |
 | 메트릭/점검 | 모니터링되는 메트릭 또는 서비스                                                      |
@@ -92,7 +92,8 @@ UI에서 작업을 완료하거나 다른 설정을 포함하는 모니터 관�
 * 현재 파라미터를 사용해 기본 보기를 **업데이트**합니다.
 * 완전한 재시작을 위해 기본 보기를 Datadog 기본값으로 **재설정**합니다.
 
-[1]: /ko/monitors/manage/status/#properties
+[1]: /ko/monitors/status/#properties
 [2]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax
 [3]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
 [4]: /ko/monitors/
+[5]: /ko/monitors/manage/#monitor-tags

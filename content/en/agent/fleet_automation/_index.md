@@ -2,7 +2,7 @@
 title: Fleet Automation
 disable_toc: false
 further_reading:
-- link: "/agent/remote_config"
+- link: "/remote_configuration"
   tag: "Documentation"
   text: "Find out more about Remote Configuration"
 - link: "/infrastructure/list/#agent-configuration"
@@ -12,10 +12,6 @@ further_reading:
   tag: "Blog"
   text: "Centrally govern and remotely manage Datadog Agents at scale with Fleet Automation"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Fleet Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -33,7 +29,7 @@ With the Fleet Automation platform, you can:
 
 ## Configure Fleet Automation
 
-- **Remote Configuration**: For information on supported Agent versions and configuration steps, see [Enable Remote Agent Management][3].
+- **Remotely Upgrade and Configure Agents**: For information on supported Agent versions and configuration steps, see [Enable Remote Agent Management][3].
 - **View Agent configuration**: The Agent configuration view is enabled by default in Agent versions 7.47.0 or later. To enable Agent configuration manually, set `inventories_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable.
 - **View Agent integration configuration**: Agent integration configuration is enabled by default on Agent versions 7.49 or later. To enable Agent integration configuration manually, set `inventories_checks_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the environment variable `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED`.
 
@@ -60,7 +56,7 @@ Use this tab to:
 - Identify configuration changes, API key updates, installs, upgrades and support flares.
 - Determine when changes were made and from where
 
-Audit Trail event visibility depends on your plan. If Audit Trail is not enabled, events from the past 24 hours are available. If it is enabled, events are retained for up to 90 days.
+Audit Trail event visibility depends on your plan. When Audit Trail is enabled in your organization, you can view Agent events for up to 90 days based on your Audit Trail retention settings. If Audit Trail is not enabled in your organization, you can view the past 24 hours of events.
 
 ### Send a remote flare
 

@@ -11,7 +11,7 @@ Muchos sistemas operativos vienen con una versión preinstalada de Python. Sin e
 {{< tabs >}}
 
 {{% tab "MacOS" %}}
-Instala Python 3.11 usando [Homebrew][1]:
+Instala Python 3.12 usando [Homebrew][1]:
 
 1. Actualizar Homebrew:
    ```
@@ -20,31 +20,31 @@ Instala Python 3.11 usando [Homebrew][1]:
 
 2. Instalar Python:
    ```
-   brew install python@3.11
+   brew install python@3.12
    ```
 
 3. Comprueba la salida de la instalación de Homebrew y ejecuta cualquier comando adicional recomendado por el script de instalación.
 
 4. Comprueba que el binario de Python está instalado en tu `PATH` y que se ha instalado la versión correcta:
    ```
-   which python3.11
+   which python3.12
    ```
 
    Deberías ver la siguiente salida según la arquitectura de tu Mac:
    - Máquinas ARM (M1+):
      ```
-     /opt/homebrew/bin/python3.11
+     /opt/homebrew/bin/python3.12
      ```
    - MacOS en máquinas Intel:
      ```
-     /usr/local/bin/python3.11
+     /usr/local/bin/python3.12
      ```
 
 [1]: https://brew.sh/
 {{% /tab %}}
 
 {{% tab "Windows" %}}
-1. Descarga el [instalador ejecutable para Python 3.11 64 bit][1] y ejecútalo.
+1. Descarga el [instalador ejecutable de Python 3.12 64-bit][1] y ejecútalo.
 1. Selecciona la opción para añadir Python a tu PATH.
 1. Haz clic en **Install Now** (Instalar ahora).
 1. Una vez finalizada la instalación, reinicia el equipo.
@@ -59,7 +59,7 @@ Instala Python 3.11 usando [Homebrew][1]:
 {{% /tab %}}
 
 {{% tab "Linux" %}}
-Para instalaciones de Linux, evita modificar tu sistema Python. Datadog recomienda instalar Python 3.11 usando [pyenv][1] o [miniconda][2].
+Para instalaciones de Linux, evita modificar tu sistema de Python. Datadog recomienda instalar Python 3.12 usando [pyenv][1] o [miniconda][2].
 
 [1]: https://github.com/pyenv/pyenv#automatic-installer
 [2]: https://conda.io/projects/conda/en/stable/user-guide/install/linux.html
@@ -103,9 +103,9 @@ Tienes 2 opciones para instalar la CLI `ddev`.
 
 {{< tabs >}}
 {{% tab "MacOS" %}}
-1. En tu navegador, descarga el archivo `curl`. El `-o` option specifies the file name that the downloaded package is written to. In this example, the file is written to `ddev-{{< sdk-version "integrations-core" >}}.pkg` en el directorio actual.
+1. Descarga el archivo utilizando el comando `curl`. La opción -L permite redireccionamientos, y la opción -o especifica el nombre de archivo en el que se escribe el paquete descargado. En este ejemplo, el archivo se escribe en `ddev-{{< sdk-version "integrations-core" >}}.pkg` en el directorio actual.
    ```shell
-   curl -o ddev-{{< sdk-version "integrations-core" >}}.pkg https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}.pkg
+   curl -L -o ddev-{{< sdk-version "integrations-core" >}}.pkg https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}.pkg
    ```
 2. Ejecute el programa estándar de macOS [`installer`](https://ss64.com/osx/installer.html), especificando el archivo descargado `.pkg` como la fuente. Usa `-pkg` parameter to specify the name of the package to install, and the `-target /` parameter for the drive in which to install the package. The files are installed to `/usr/local/ddev`, and an entry is created at `/etc/paths.d/ddev` that instructs shells to add the `/usr/local/ddev` directory to. You must include `sudo` en el comando para conceder permiso de escritura a esas carpetas.
    ```shell

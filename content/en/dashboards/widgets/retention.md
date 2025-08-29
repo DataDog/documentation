@@ -2,13 +2,19 @@
 title: Retention Widget
 widget_type: cohort
 further_reading:
-- link: "product_analytics/user_retention/"
+- link: "product_analytics/charts/retention_analysis/"
   tag: "Documentation"
-  text: "Product Analytics User Retention"
+  text: "Retention Analysis"
 - link: "https://www.datadoghq.com/blog/user-engagement-retention-analysis/"
   tag: "Blog"
   text: "Measure long-term user engagement with Datadog Retention Analysis"
 ---
+
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+The Retention widget is not available in the <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
+</div>
+{{% /site-region %}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/product-analytics/" header="false" >}}
 The Retention widget is available in Preview for Product Analytics customers. To request access, complete the form.
@@ -25,7 +31,7 @@ Retention Analysis allows you to measure how often users are successfully return
 
 ## Setup
 
-To populate User Retention data, you must set the `usr.id` attribute in your SDK. [See the instructions for sending unique user attributes][1].
+To populate user retention data, you must set the `usr.id` attribute in your SDK. [See the instructions for sending unique user attributes][1].
 
 ### Configuration
 

@@ -68,9 +68,8 @@ Datadog で観測するアプリケーションを作成するには
 
 ## Datadog APM を設定する
 
-アプリケーションのコードやデプロイプロセスを変更せずに Datadog APM をセットアップするには、Single Step APM Instrumentation を使用します。
+アプリケーションのコードやデプロイプロセスを変更せずに Datadog APM を設定するには、Single Step APM Instrumentation を使用します。あるいは、[Datadog トレーシング][8]ライブラリを使用して APM を設定することもできます。
 
-<div class="alert alert-info"><strong>注</strong>: <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/">Single Step APM Instrumentation</a> はベータ版です。または、<a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/">Datadog トレーシングライブラリ</a>を使用して APM をセットアップすることもできます。</div>
 
 1. インストールコマンドを実行します。
 
@@ -142,7 +141,7 @@ Datadog にトレースを送信するアプリケーションをテストしま
 
 1. Datadog で [**APM** > **Services**][3] に移動します。すると `hello` という Python サービスが見つかるはずです。
 
-   {{< img src="/getting_started/apm/service-catalog.png" alt="サービスカタログに新しい Python サービスが表示されています。" style="width:100%;" >}}
+   {{< img src="/getting_started/apm/service-catalog.png" alt="Software Catalog に新しい Python サービスが表示されている" style="width:100%;" >}}
 
 1. サービスを選択して、レイテンシー、スループット、エラー率などのパフォーマンスメトリクスを表示します。
 1. [**APM** > **Traces**][4] に移動します。`hello` サービスのトレースが表示されるはずです。
@@ -221,3 +220,4 @@ Datadog にトレースを送信するアプリケーションをテストしま
 [5]: /ja/tracing/glossary/#instrumentation
 [6]: /ja/tracing/trace_collection/custom_instrumentation/
 [7]: /ja/getting_started/site/
+[8]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/

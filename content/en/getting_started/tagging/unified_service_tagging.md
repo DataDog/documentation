@@ -335,6 +335,9 @@ Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` (optional with automatic versio
   "com.datadoghq.tags.version": "<VERSION>"
 }
 ```
+<div class="alert alert-warning">
+On ECS Fargate, you must add these tags to your application container, <strong>not</strong> the Datadog Agent container.
+</div>
 
 ##### Partial configuration
 

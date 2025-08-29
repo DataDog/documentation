@@ -32,7 +32,7 @@ Aprovecha la integración con DingTalk para:
 
 La integración DingTalk se instala con el [cuadro de la integración DingTalk][1] de Datadog.
 
-## Configuración
+## Configurar
 
 Para integrar Datadog en un grupo DingTalk:
 
@@ -56,13 +56,13 @@ La integración DingTalk no proporciona métricas.
 
 La integración DingTalk no no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración DingTalk no no incluye checks de servicio.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con [asistencia técnica de Datadog][3].
 
 [1]: https://app.datadoghq.com/integrations/dingtalk
 [2]: https://docs.datadoghq.com/es/monitors/notifications/#notification

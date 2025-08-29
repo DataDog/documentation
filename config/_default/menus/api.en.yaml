@@ -22,6 +22,18 @@ menu:
       url: /api/latest/aws-integration/
       identifier: aws-integration
       generated: true
+    - name: Get AWS integration IAM permissions
+      url: '#get-aws-integration-iam-permissions'
+      identifier: aws-integration-get-aws-integration-iam-permissions
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAWSIntegrationIAMPermissions
+        unstable: []
+        order: 6
     - name: List available namespaces
       url: '#list-available-namespaces'
       identifier: aws-integration-list-available-namespaces
@@ -838,6 +850,7 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - GetEvent
         unstable: []
@@ -1582,6 +1595,18 @@ menu:
           - DeleteTagConfiguration
         unstable: []
         order: 4
+    - name: Get tag key cardinality details
+      url: '#get-tag-key-cardinality-details'
+      identifier: metrics-get-tag-key-cardinality-details
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMetricTagCardinalityDetails
+        unstable: []
+        order: 13
     - name: Tag Configuration Cardinality Estimator
       url: '#tag-configuration-cardinality-estimator'
       identifier: metrics-tag-configuration-cardinality-estimator
@@ -1755,6 +1780,97 @@ menu:
       url: /api/latest/monitors/
       identifier: monitors
       generated: true
+    - name: Validate an existing monitor user template
+      url: '#validate-an-existing-monitor-user-template'
+      identifier: monitors-validate-an-existing-monitor-user-template
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateExistingMonitorUserTemplate
+        unstable:
+          - v2
+        order: 25
+    - name: Update a monitor user template to a new version
+      url: '#update-a-monitor-user-template-to-a-new-version'
+      identifier: monitors-update-a-monitor-user-template-to-a-new-version
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateMonitorUserTemplate
+        unstable:
+          - v2
+        order: 22
+    - name: Get a monitor user template
+      url: '#get-a-monitor-user-template'
+      identifier: monitors-get-a-monitor-user-template
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMonitorUserTemplate
+        unstable:
+          - v2
+        order: 19
+    - name: Delete a monitor user template
+      url: '#delete-a-monitor-user-template'
+      identifier: monitors-delete-a-monitor-user-template
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteMonitorUserTemplate
+        unstable:
+          - v2
+        order: 23
+    - name: Validate a monitor user template
+      url: '#validate-a-monitor-user-template'
+      identifier: monitors-validate-a-monitor-user-template
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateMonitorUserTemplate
+        unstable:
+          - v2
+        order: 24
+    - name: Create a monitor user template
+      url: '#create-a-monitor-user-template'
+      identifier: monitors-create-a-monitor-user-template
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateMonitorUserTemplate
+        unstable:
+          - v2
+        order: 21
+    - name: Get all monitor user templates
+      url: '#get-all-monitor-user-templates'
+      identifier: monitors-get-all-monitor-user-templates
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListMonitorUserTemplates
+        unstable:
+          - v2
+        order: 20
     - name: Edit a monitor configuration policy
       url: '#edit-a-monitor-configuration-policy'
       identifier: monitors-edit-a-monitor-configuration-policy
@@ -1825,8 +1941,7 @@ menu:
           - v2
         operationids:
           - UpdateMonitorNotificationRule
-        unstable:
-          - v2
+        unstable: []
         order: 17
     - name: Get a monitor notification rule
       url: '#get-a-monitor-notification-rule'
@@ -1838,8 +1953,7 @@ menu:
           - v2
         operationids:
           - GetMonitorNotificationRule
-        unstable:
-          - v2
+        unstable: []
         order: 14
     - name: Delete a monitor notification rule
       url: '#delete-a-monitor-notification-rule'
@@ -1851,8 +1965,7 @@ menu:
           - v2
         operationids:
           - DeleteMonitorNotificationRule
-        unstable:
-          - v2
+        unstable: []
         order: 18
     - name: Create a monitor notification rule
       url: '#create-a-monitor-notification-rule'
@@ -1864,8 +1977,7 @@ menu:
           - v2
         operationids:
           - CreateMonitorNotificationRule
-        unstable:
-          - v2
+        unstable: []
         order: 16
     - name: Get all monitor notification rules
       url: '#get-all-monitor-notification-rules'
@@ -1877,8 +1989,7 @@ menu:
           - v2
         operationids:
           - GetMonitorNotificationRules
-        unstable:
-          - v2
+        unstable: []
         order: 15
     - name: Unmute all monitors
       url: '#unmute-all-monitors'
@@ -2811,6 +2922,19 @@ menu:
         unstable:
           - v2
         order: 27
+    - name: List assets SBOMs
+      url: '#list-assets-sboms'
+      identifier: security-monitoring-list-assets-sboms
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAssetsSBOMs
+        unstable:
+          - v2
+        order: 28
     - name: List vulnerable assets
       url: '#list-vulnerable-assets'
       identifier: security-monitoring-list-vulnerable-assets
@@ -3570,6 +3694,18 @@ menu:
           - TriggerTests
         unstable: []
         order: 8
+    - name: Search Synthetic tests
+      url: '#search-synthetic-tests'
+      identifier: synthetics-search-synthetic-tests
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - SearchTests
+        unstable: []
+        order: 34
     - name: Edit a Mobile test
       url: '#edit-a-mobile-test'
       identifier: synthetics-edit-a-mobile-test
@@ -4884,6 +5020,54 @@ menu:
           - CreateActionConnection
         unstable: []
         order: 2
+    - name: Register a new App Key
+      url: '#register-a-new-app-key'
+      identifier: action-connection-register-a-new-app-key
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RegisterAppKey
+        unstable: []
+        order: 5
+    - name: Get an existing App Key Registration
+      url: '#get-an-existing-app-key-registration'
+      identifier: action-connection-get-an-existing-app-key-registration
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAppKeyRegistration
+        unstable: []
+        order: 8
+    - name: Unregister an App Key
+      url: '#unregister-an-app-key'
+      identifier: action-connection-unregister-an-app-key
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnregisterAppKey
+        unstable: []
+        order: 7
+    - name: List App Key Registrations
+      url: '#list-app-key-registrations'
+      identifier: action-connection-list-app-key-registrations
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAppKeyRegistrations
+        unstable: []
+        order: 6
     - name: Agentless Scanning
       url: /api/latest/agentless-scanning/
       identifier: agentless-scanning
@@ -4899,7 +5083,7 @@ menu:
         operationids:
           - GetAwsOnDemandTask
         unstable: []
-        order: 6
+        order: 7
     - name: Post an AWS on demand task
       url: '#post-an-aws-on-demand-task'
       identifier: agentless-scanning-post-an-aws-on-demand-task
@@ -4911,7 +5095,7 @@ menu:
         operationids:
           - CreateAwsOnDemandTask
         unstable: []
-        order: 7
+        order: 8
     - name: Get AWS On Demand tasks
       url: '#get-aws-on-demand-tasks'
       identifier: agentless-scanning-get-aws-on-demand-tasks
@@ -4923,7 +5107,7 @@ menu:
         operationids:
           - ListAwsOnDemandTasks
         unstable: []
-        order: 5
+        order: 6
     - name: Patch AWS Scan Options
       url: '#patch-aws-scan-options'
       identifier: agentless-scanning-patch-aws-scan-options
@@ -4935,7 +5119,19 @@ menu:
         operationids:
           - UpdateAwsScanOptions
         unstable: []
-        order: 3
+        order: 4
+    - name: Get AWS scan options
+      url: '#get-aws-scan-options'
+      identifier: agentless-scanning-get-aws-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAwsScanOptions
+        unstable: []
+        order: 2
     - name: Delete AWS Scan Options
       url: '#delete-aws-scan-options'
       identifier: agentless-scanning-delete-aws-scan-options
@@ -4947,7 +5143,7 @@ menu:
         operationids:
           - DeleteAwsScanOptions
         unstable: []
-        order: 4
+        order: 5
     - name: Post AWS Scan Options
       url: '#post-aws-scan-options'
       identifier: agentless-scanning-post-aws-scan-options
@@ -4959,10 +5155,10 @@ menu:
         operationids:
           - CreateAwsScanOptions
         unstable: []
-        order: 2
-    - name: Get AWS Scan Options
-      url: '#get-aws-scan-options'
-      identifier: agentless-scanning-get-aws-scan-options
+        order: 3
+    - name: List AWS Scan Options
+      url: '#list-aws-scan-options'
+      identifier: agentless-scanning-list-aws-scan-options
       parent: agentless-scanning
       generated: true
       params:
@@ -5708,6 +5904,18 @@ menu:
           - UpdatePriority
         unstable: []
         order: 5
+    - name: Update case attributes
+      url: '#update-case-attributes'
+      identifier: case-management-update-case-attributes
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAttributes
+        unstable: []
+        order: 10
     - name: Assign case
       url: '#assign-case'
       identifier: case-management-assign-case
@@ -5820,6 +6028,54 @@ menu:
       url: /api/latest/cloud-cost-management/
       identifier: cloud-cost-management
       generated: true
+    - name: Update Cloud Cost Management GCP Usage Cost config
+      url: '#update-cloud-cost-management-gcp-usage-cost-config'
+      identifier: cloud-cost-management-update-cloud-cost-management-gcp-usage-cost-config
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCostGCPUsageCostConfig
+        unstable: []
+        order: 2
+    - name: Delete Cloud Cost Management GCP Usage Cost config
+      url: '#delete-cloud-cost-management-gcp-usage-cost-config'
+      identifier: cloud-cost-management-delete-cloud-cost-management-gcp-usage-cost-config
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCostGCPUsageCostConfig
+        unstable: []
+        order: 4
+    - name: Create Cloud Cost Management GCP Usage Cost config
+      url: '#create-cloud-cost-management-gcp-usage-cost-config'
+      identifier: cloud-cost-management-create-cloud-cost-management-gcp-usage-cost-config
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCostGCPUsageCostConfig
+        unstable: []
+        order: 3
+    - name: List Cloud Cost Management GCP Usage Cost configs
+      url: '#list-cloud-cost-management-gcp-usage-cost-configs'
+      identifier: cloud-cost-management-list-cloud-cost-management-gcp-usage-cost-configs
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostGCPUsageCostConfigs
+        unstable: []
+        order: 1
     - name: Get Custom Costs file
       url: '#get-custom-costs-file'
       identifier: cloud-cost-management-get-custom-costs-file
@@ -6016,6 +6272,18 @@ menu:
       url: /api/latest/cloud-network-monitoring/
       identifier: cloud-network-monitoring
       generated: true
+    - name: Get all aggregated DNS traffic
+      url: '#get-all-aggregated-dns-traffic'
+      identifier: cloud-network-monitoring-get-all-aggregated-dns-traffic
+      parent: cloud-network-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAggregatedDns
+        unstable: []
+        order: 2
     - name: Get all aggregated connections
       url: '#get-all-aggregated-connections'
       identifier: cloud-network-monitoring-get-all-aggregated-connections
@@ -6026,8 +6294,7 @@ menu:
           - v2
         operationids:
           - GetAggregatedConnections
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Cloudflare Integration
       url: /api/latest/cloudflare-integration/
@@ -6337,6 +6604,75 @@ menu:
           - CreateDORADeployment
         unstable: []
         order: 1
+    - name: Datasets
+      url: /api/latest/datasets/
+      identifier: datasets
+      generated: true
+    - name: Edit a dataset
+      url: '#edit-a-dataset'
+      identifier: datasets-edit-a-dataset
+      parent: datasets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDataset
+        unstable:
+          - v2
+        order: 4
+    - name: Get a single dataset by ID
+      url: '#get-a-single-dataset-by-id'
+      identifier: datasets-get-a-single-dataset-by-id
+      parent: datasets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDataset
+        unstable:
+          - v2
+        order: 2
+    - name: Delete a dataset
+      url: '#delete-a-dataset'
+      identifier: datasets-delete-a-dataset
+      parent: datasets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDataset
+        unstable:
+          - v2
+        order: 5
+    - name: Create a dataset
+      url: '#create-a-dataset'
+      identifier: datasets-create-a-dataset
+      parent: datasets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDataset
+        unstable:
+          - v2
+        order: 1
+    - name: Get all datasets
+      url: '#get-all-datasets'
+      identifier: datasets-get-all-datasets
+      parent: datasets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAllDatasets
+        unstable:
+          - v2
+        order: 3
     - name: Domain Allowlist
       url: /api/latest/domain-allowlist/
       identifier: domain-allowlist
@@ -8931,6 +9267,19 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Update Scorecard outcomes asynchronously
+      url: '#update-scorecard-outcomes-asynchronously'
+      identifier: service-scorecards-update-scorecard-outcomes-asynchronously
+      parent: service-scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateScorecardOutcomesAsync
+        unstable:
+          - v2
+        order: 1
     - name: List all rule outcomes
       url: '#list-all-rule-outcomes'
       identifier: service-scorecards-list-all-rule-outcomes
@@ -8960,6 +9309,42 @@ menu:
           - ListCatalogRelation
         unstable: []
         order: 3
+    - name: Delete a single kind
+      url: '#delete-a-single-kind'
+      identifier: software-catalog-delete-a-single-kind
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCatalogKind
+        unstable: []
+        order: 6
+    - name: Create or update kinds
+      url: '#create-or-update-kinds'
+      identifier: software-catalog-create-or-update-kinds
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertCatalogKind
+        unstable: []
+        order: 5
+    - name: Get a list of entity kinds
+      url: '#get-a-list-of-entity-kinds'
+      identifier: software-catalog-get-a-list-of-entity-kinds
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCatalogKind
+        unstable: []
+        order: 4
     - name: Delete a single entity
       url: '#delete-a-single-entity'
       identifier: software-catalog-delete-a-single-entity
@@ -8995,6 +9380,23 @@ menu:
         operationids:
           - ListCatalogEntity
         unstable: []
+        order: 1
+    - name: Spa
+      url: /api/latest/spa/
+      identifier: spa
+      generated: true
+    - name: Get SPA Recommendations
+      url: '#get-spa-recommendations'
+      identifier: spa-get-spa-recommendations
+      parent: spa
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSPARecommendations
+        unstable:
+          - v2
         order: 1
     - name: Spans
       url: /api/latest/spans/
@@ -9115,7 +9517,7 @@ menu:
         operationids:
           - GetUserMemberships
         unstable: []
-        order: 1
+        order: 19
     - name: Update permission setting for team
       url: '#update-permission-setting-for-team'
       identifier: teams-update-permission-setting-for-team
@@ -9284,6 +9686,58 @@ menu:
           - DeleteTeam
         unstable: []
         order: 5
+    - name: Remove a member team
+      url: '#remove-a-member-team'
+      identifier: teams-remove-a-member-team
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RemoveMemberTeam
+        unstable:
+          - v2
+        order: 22
+    - name: Add a member team
+      url: '#add-a-member-team'
+      identifier: teams-add-a-member-team
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AddMemberTeam
+        unstable:
+          - v2
+        order: 20
+    - name: Get all member teams
+      url: '#get-all-member-teams'
+      identifier: teams-get-all-member-teams
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListMemberTeams
+        unstable:
+          - v2
+        order: 21
+    - name: Link Teams with GitHub Teams
+      url: '#link-teams-with-github-teams'
+      identifier: teams-link-teams-with-github-teams
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SyncTeams
+        unstable:
+          - v2
+        order: 19
     - name: Create a team
       url: '#create-a-team'
       identifier: teams-create-a-team

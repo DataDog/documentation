@@ -243,7 +243,7 @@ GitLab Runner 점검은 [Datadog 에이전트][2] 패키지에 포함되어 있�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "gitlab_runner" >}}
+{{< get-metrics-from-git "gitlab-runner" >}}
 
 
 ### 로그 수집

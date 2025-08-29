@@ -14,11 +14,6 @@ further_reading:
   text: "Learn about CI Monitors"
 ---
 
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 Before you begin, make sure that [Test Optimization][1] is already set up for your language. This guide walks you through adding and using custom measures for your tests.
