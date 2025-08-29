@@ -90,9 +90,9 @@ In Software Catalog, an API (`kind:API`) refers to a collection of endpoints tha
 
 To define components within an API, you can specify values for the `components` key in the `spec` field of the entity's v3 definition. 
 
-You can also include an OpenAPI spec in your entity definition in two ways: 
+You can also include an OpenAPI spec in your entity definition in two ways: inline, or through a file reference.
 
-Inline: 
+**Inline:** 
 Add the OpenAPI definition under the spec field using `type: openapi`.
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
@@ -186,7 +186,7 @@ Add the OpenAPI definition under the spec field using `type: openapi`.
 }
 {{< /code-block >}}
 
-File reference: 
+**File reference:** 
 
 Point to an OpenAPI file stored in GitHub using the `fileref` field.
 
