@@ -1,4 +1,56 @@
 {
+  "ListDatastores": {
+    "description": "Lists all datastores for the organization.",
+    "summary": "List datastores"
+  },
+  "CreateDatastore": {
+    "description": "Creates a new datastore.",
+    "summary": "Create datastore",
+    "request_description": "",
+    "request_schema_description": "The definition of `CreateAppsDatastoreRequest` object."
+  },
+  "CreateDatastoreFromImport": {
+    "description": "Creates a new datastore and populates it with items from the provided data.",
+    "summary": "Create datastore from import",
+    "request_description": "",
+    "request_schema_description": "The definition of `CreateAppsDatastoreFromImportRequest` object."
+  },
+  "DeleteDatastore": {
+    "description": "Deletes a datastore by its ID.",
+    "summary": "Delete datastore"
+  },
+  "GetDatastore": {
+    "description": "Retrieves a specific datastore by its ID.",
+    "summary": "Get datastore"
+  },
+  "UpdateDatastore": {
+    "description": "Updates an existing datastore's attributes.",
+    "summary": "Update datastore",
+    "request_description": "",
+    "request_schema_description": "The definition of `UpdateAppsDatastoreRequest` object."
+  },
+  "DeleteDatastoreItem": {
+    "description": "Deletes an item from a datastore by its key.",
+    "summary": "Delete datastore item",
+    "request_description": "",
+    "request_schema_description": "The definition of `DeleteAppsDatastoreItemRequest` object."
+  },
+  "ListDatastoreItems": {
+    "description": "Lists items from a datastore. You can filter the results by specifying either an item key or a filter query parameter, but not both at the same time.",
+    "summary": "List datastore items"
+  },
+  "WriteDatastoreItem": {
+    "description": "Creates or replaces an item in a datastore by its key.",
+    "summary": "Write datastore item",
+    "request_description": "",
+    "request_schema_description": "The definition of `PutAppsDatastoreItemRequest` object."
+  },
+  "BulkWriteDatastoreItems": {
+    "description": "Creates or replaces multiple items in a datastore by their keys in a single operation.",
+    "summary": "Bulk write datastore items",
+    "request_description": "",
+    "request_schema_description": "The definition of `BulkPutAppsDatastoreItemsRequest` object."
+  },
   "ListAppKeyRegistrations": {
     "description": "List App Key Registrations",
     "summary": "List App Key Registrations"

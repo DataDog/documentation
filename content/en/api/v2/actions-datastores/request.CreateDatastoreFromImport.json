@@ -1,0 +1,19 @@
+{
+  "data": {
+    "attributes": {
+      "name": "datastore-name",
+      "primary_column_name": "primaryKey",
+      "values": [
+        {
+          "primaryKey": "key1",
+          "value": "Newton"
+        },
+        {
+          "primaryKey": "key2",
+          "value": "Leibniz"
+        }
+      ]
+    },
+    "type": "datastores"
+  }
+}
