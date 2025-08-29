@@ -51,18 +51,53 @@ To create a new test based on a previous version without modifying your current 
 ## Run any version
 
 From the Version History side panel, after you choose the version to restore, click the kebab menu to the right of a user profile and select **Run this test version**. 
-Optionally, you can use **Copy Version ID** to run the test version with the [Datadog CLI][2]. Use the `<test_public_id>@<version_number>` pattern, for example:
-
-```text
-datadog-ci synthetics run-tests -p m8f-pfb-gkz@36 -p m8f-pfb-gkz
-```
-
-**Notes**:
-- When running tests through the CLI, you can combine the version parameter with other parameters. The additional parameters override the version's settings (consistent with non version pinned tests).
-
-- Versions used in CI runs are automatically retained for 16 months after their last execution to prevent deletion of actively used pipeline versions. While these extended versions remain hidden from the UI, they still follow the standard 30 and 90 day visibility rules.
 
 {{< img src="/synthetics/guide/version_history/synthetics_run_version.png" alt="Synthetic Monitoring Version history menu, highlighting run this test version" style="width:60%;" >}}
+
+Optionally, click **Copy version ID** to run the test version with the [Datadog CLI][2] or [Datadog API][3]: 
+
+{{< tabs >}}
+{{% tab "Datadog CLI" %}}
+
+Use the `<test_public_id>@<version_number>` pattern, for example:
+
+```text
+datadog-ci synthetics run-tests -p m8f-pfb-gkz@36
+```
+
+{{% /tab %}}
+
+{{% tab "Datadog API" %}}
+
+Use the optional field `version` to choose which version to run:
+
+```json
+POST https://api.datad0g.com/api/v1/synthetics/tests/trigger/ci
+DD-API-KEY: {{api_key}}
+DD-APPLICATION-KEY: {{app_key}}
+Content-Type: application/json
+
+{
+  "tests": [
+    {
+        "public_id": "m8f-pfb-gkz",
+        "version": 2
+    },
+    {
+        "public_id": "xj3-i4r-zzr",
+        "version": 16
+    },
+  ]
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+   **Notes**:
+   - When running tests through the CLI or API, you can combine the version parameter with other parameters. The additional parameters override the version's settings (consistent with non version pinned tests).
+
+   - Versions used in CI runs are automatically retained for 16 months after their last execution to prevent deletion of actively used pipeline versions. While these extended versions remain hidden from the UI, they still follow the standard 30 and 90 day visibility rules.
 
 ## Version History retention
 |                          | Retention Period    |
@@ -75,4 +110,5 @@ datadog-ci synthetics run-tests -p m8f-pfb-gkz@36 -p m8f-pfb-gkz
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/audit_trail/
-[2]: https://github.com/DataDog/datadog-ci
+[2]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/synthetics#run-tests-command
+[3]: /api/latest/synthetics/#trigger-tests-from-cicd-pipelines
