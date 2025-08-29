@@ -198,8 +198,7 @@ jobs:
             const approvalStatus = '${{ needs.check-documentation-team-approval.outputs.approval_status }}' === 'true';
             const teamRequested = '${{ needs.check-documentation-team-approval.outputs.team_requested }}' === 'true';
             const errorMessage = '${{ needs.check-documentation-team-approval.outputs.error }}';
-            
-            // Shared utilities
+
             const retryApiCall = async (apiCall, maxRetries = 3, delay = 1000) => {
               for (let i = 0; i < maxRetries; i++) {
                 try {
@@ -226,7 +225,7 @@ jobs:
               github.rest.pulls.get({ owner, repo, pull_number: number })
             );
             
-            // Determine status based on error state and approval status
+            // Determine PR status based on error state and approval status
             let statusState, statusDescription;
             
             if (errorMessage) {
@@ -257,7 +256,7 @@ jobs:
             
             console.log(`Created commit status: ${statusState} - ${statusDescription}`);
             
-            // If there was an error, fail this job to make it clear something went wrong
+            // If there was an error, fail the job
             if (errorMessage) {
               core.setFailed(`Team approval check failed: ${errorMessage}`);
             }
