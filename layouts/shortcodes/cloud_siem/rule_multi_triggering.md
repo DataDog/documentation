@@ -1,1 +1,2 @@
-1. In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected within a specified time frame. For example, the same signal updates if any new value is detected within 1 hour, for a maximum duration of 24 hours. See [Time windows](#time-windows) for more information.
+1. In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected within a specified time frame. 
+    - For example, the same signal updates if any new value is detected within 1 hour, for a maximum duration of 24 hours.

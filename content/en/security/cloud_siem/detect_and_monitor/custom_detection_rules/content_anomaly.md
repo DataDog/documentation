@@ -50,7 +50,7 @@ To finish setting up the detection rule, select the type of rule you are creatin
 
 {{% security-rule-severity-notification %}}
 
-n the **Anomaly count** field, enter the condition for how many anomalous logs are required to trigger a signal. For example, if the condition is `a >= 3` where `a` is the query, a signal is triggered if there are at least three anomalous logs within the evaluation window.
+In the **Anomaly count** field, enter the condition for how many anomalous logs are required to trigger a signal. For example, if the condition is `a >= 3` where `a` is the query, a signal is triggered if there are at least three anomalous logs within the evaluation window.
 
 **Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
 

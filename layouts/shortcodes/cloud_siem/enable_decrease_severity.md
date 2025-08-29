@@ -1,1 +1,1 @@
-1. Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
+1. Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. 

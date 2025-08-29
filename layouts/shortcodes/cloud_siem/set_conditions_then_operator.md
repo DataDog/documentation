@@ -7,6 +7,9 @@
     - **Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
 1. In the **Add notify** section, click **Add Recipient** to optionally configure [notification targets][101].
     - You can also create [notification rules][102] to avoid manual edits to notification preferences for individual detection rules.
-    
+1. (Optional) If you want to create rule conditions with the `then` operator, click **THEN condition** and follow steps 1-4.
+    - This is when you want to trigger a signal if query A occurs and then query B occurs.
+    - **Note**: The `then` operator can only be used on a single rule condition.
+
 [101]: /security_platform/notifications/#notification-channels
 [102]: /security/notifications/rules/
