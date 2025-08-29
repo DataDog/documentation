@@ -41,7 +41,9 @@ jobs:
           script: |
             const { owner, repo, number } = context.issue;
             
-            // Retry function for API calls to handle timing issues
+            // Shared utilities and constants
+            const TEAM_SLUGS = ['documentation', 'webops-platform'];
+            
             const retryApiCall = async (apiCall, maxRetries = 3, delay = 1000) => {
               for (let i = 0; i < maxRetries; i++) {
                 try {
@@ -54,6 +56,17 @@ jobs:
               }
             };
             
+            const getAllTeamMembers = async () => {
+              const allMembers = [];
+              for (const teamSlug of TEAM_SLUGS) {
+                const { data: members } = await retryApiCall(() =>
+                  github.rest.teams.listMembersInOrg({ org: owner, team_slug: teamSlug })
+                );
+                allMembers.push(...members);
+              }
+              return allMembers;
+            };
+            
             // Get pull request details
             const { data: pr } = await retryApiCall(() => 
               github.rest.pulls.get({ owner, repo, pull_number: number })
@@ -64,10 +77,6 @@ jobs:
               console.log(`Base branch is ${pr.base.ref}. Skipping check.`);
               return;
             }
-
-            // Define the documentation team slug (also check for webops-platform)
-            const DOCUMENTATION_TEAM = 'documentation';
-            const WEBOPSTEAM = 'webops-platform';
             
             // Get all reviews
             const { data: reviews } = await retryApiCall(() =>
@@ -94,12 +103,12 @@ jobs:
                 .map(review => review.user.login)
             );
 
-            // Check if documentation team is required via CODEOWNERS (requested reviewers)
-            let hasDocumentationApproval = false;
-            let isDocumentationTeamRequested = false;
+            // Check if teams are required via CODEOWNERS (requested reviewers)
+            let hasTeamApproval = false;
+            let isTeamRequested = false;
             
             try {
-              // Get requested reviewers to see if documentation team is currently requested
+              // Get requested reviewers to see if teams are currently requested
               const { data: reviewers } = await retryApiCall(() =>
                 github.rest.pulls.listRequestedReviewers({
                   owner,
@@ -108,59 +117,45 @@ jobs:
                 })
               );
               
-              // Check if documentation or webops-platform teams are currently in requested reviewers
+              // Check if any of our teams are currently in requested reviewers
               const currentlyRequested = reviewers.teams.some(team => 
-                team.slug === DOCUMENTATION_TEAM || team.slug === WEBOPSTEAM
+                TEAM_SLUGS.includes(team.slug)
               );
               
-              // Also check if any documentation or webops-platform team member has reviewed (indicating they were requested)
-              const { data: docTeamMembers } = await retryApiCall(() =>
-                github.rest.teams.listMembersInOrg({
-                  org: owner,
-                  team_slug: DOCUMENTATION_TEAM,
-                })
-              );
-              
-              const { data: webopsTeamMembers } = await retryApiCall(() =>
-                github.rest.teams.listMembersInOrg({
-                  org: owner,
-                  team_slug: WEBOPSTEAM,
-                })
-              );
-              
-              const teamMembers = [...docTeamMembers, ...webopsTeamMembers];
+              // Get all team members from both teams
+              const teamMembers = await getAllTeamMembers();
               
               const teamMemberLogins = new Set(teamMembers.map(member => member.login));
               const hasTeamMemberReview = reviews.some(review => 
                 teamMemberLogins.has(review.user.login)
               );
               
-              // Documentation team is considered "requested" if:
+              // Teams are considered "requested" if:
               // 1. They are currently in requested reviewers, OR
               // 2. Any team member has already reviewed (meaning they were requested but fulfilled the request)
-              isDocumentationTeamRequested = currentlyRequested || hasTeamMemberReview;
+              isTeamRequested = currentlyRequested || hasTeamMemberReview;
               
-              console.log(`Documentation team currently requested: ${currentlyRequested}`);
-              console.log(`Documentation team member has reviewed: ${hasTeamMemberReview}`);
-              console.log(`Documentation team considered requested: ${isDocumentationTeamRequested}`);
+              console.log(`Teams currently requested: ${currentlyRequested}`);
+              console.log(`Team member has reviewed: ${hasTeamMemberReview}`);
+              console.log(`Teams considered requested: ${isTeamRequested}`);
               
-              if (isDocumentationTeamRequested) {
-                // Check for approval from documentation team members only
-                const docsTeamApprovals = teamMembers.filter(member => 
+              if (isTeamRequested) {
+                // Check for approval from team members
+                const teamApprovals = teamMembers.filter(member => 
                   allApprovals.has(member.login)
                 );
-                hasDocumentationApproval = docsTeamApprovals.length > 0;
+                hasTeamApproval = teamApprovals.length > 0;
                 
-                console.log(`Documentation team members who approved: ${docsTeamApprovals.map(m => m.login).join(', ')}`);
-                console.log(`Documentation team approval status: ${hasDocumentationApproval}`);
+                console.log(`Team members who approved: ${teamApprovals.map(m => m.login).join(', ')}`);
+                console.log(`Team approval status: ${hasTeamApproval}`);
               } else {
-                // If documentation team is not requested, no approval needed
-                hasDocumentationApproval = true;
-                console.log('Documentation team not required for this PR - no approval needed.');
+                // If teams are not requested, no approval needed
+                hasTeamApproval = true;
+                console.log('Teams not required for this PR - no approval needed.');
               }
               
             } catch (error) {
-              console.error(`Error checking documentation team: ${error}`);
+              console.error(`Error checking teams: ${error}`);
               // Don't fail the job here - let the status check job handle the failure
               // Set outputs to indicate error state
               core.setOutput('approval_status', 'false');
@@ -169,18 +164,18 @@ jobs:
               return;
             }
 
-            // Set output for the comment job
-            core.setOutput('approval_status', hasDocumentationApproval);
-            core.setOutput('team_requested', isDocumentationTeamRequested);
+            // Set output for the status job
+            core.setOutput('approval_status', hasTeamApproval);
+            core.setOutput('team_requested', isTeamRequested);
             core.setOutput('error', '');
 
             // Log final status but don't fail the job
-            if (isDocumentationTeamRequested && !hasDocumentationApproval) {
-              console.log(`Team approval required from @${owner}/${DOCUMENTATION_TEAM} or @${owner}/${WEBOPSTEAM}`);
-            } else if (!isDocumentationTeamRequested) {
-              console.log('Documentation team review not required for this PR.');
+            if (isTeamRequested && !hasTeamApproval) {
+              console.log(`Team approval required from @${owner}/${TEAM_SLUGS.join(' or @' + owner + '/')}`);
+            } else if (!isTeamRequested) {
+              console.log('Team review not required for this PR.');
             } else {
-              console.log('Documentation team has approved this PR.');
+              console.log('Teams have approved this PR.');
             }
 
   update-pr-status:
@@ -204,16 +199,7 @@ jobs:
             const teamRequested = '${{ needs.check-documentation-team-approval.outputs.team_requested }}' === 'true';
             const errorMessage = '${{ needs.check-documentation-team-approval.outputs.error }}';
             
-            // Debug logging
-            console.log('Raw outputs from first job:');
-            console.log('approval_status:', '${{ needs.check-documentation-team-approval.outputs.approval_status }}');
-            console.log('team_requested:', '${{ needs.check-documentation-team-approval.outputs.team_requested }}');
-            console.log('error:', '${{ needs.check-documentation-team-approval.outputs.error }}');
-            console.log('Parsed values:');
-            console.log('approvalStatus:', approvalStatus);
-            console.log('teamRequested:', teamRequested);
-            
-            // Retry function for API calls to handle timing issues
+            // Shared utilities
             const retryApiCall = async (apiCall, maxRetries = 3, delay = 1000) => {
               for (let i = 0; i < maxRetries; i++) {
                 try {
@@ -226,6 +212,15 @@ jobs:
               }
             };
             
+            // Debug logging
+            console.log('Raw outputs from first job:');
+            console.log('approval_status:', '${{ needs.check-documentation-team-approval.outputs.approval_status }}');
+            console.log('team_requested:', '${{ needs.check-documentation-team-approval.outputs.team_requested }}');
+            console.log('error:', '${{ needs.check-documentation-team-approval.outputs.error }}');
+            console.log('Parsed values:');
+            console.log('approvalStatus:', approvalStatus);
+            console.log('teamRequested:', teamRequested);
+            
             // Get pull request details for commit SHA
             const { data: pr } = await retryApiCall(() =>
               github.rest.pulls.get({ owner, repo, pull_number: number })
@@ -236,16 +231,16 @@ jobs:
             
             if (errorMessage) {
               statusState = 'error';
-              statusDescription = `Error checking documentation team approval: ${errorMessage}`;
+              statusDescription = `Error checking team approval: ${errorMessage}`;
             } else if (teamRequested && !approvalStatus) {
               statusState = 'failure';
-              statusDescription = 'Documentation team approval required';
+              statusDescription = 'Team approval required';
             } else if (teamRequested && approvalStatus) {
               statusState = 'success';
-              statusDescription = 'Documentation team has approved';
+              statusDescription = 'Team has approved';
             } else {
               statusState = 'success';
-              statusDescription = 'Documentation team review not required';
+              statusDescription = 'Team review not required';
             }
 
             await retryApiCall(() =>
@@ -264,5 +259,5 @@ jobs:
             
             // If there was an error, fail this job to make it clear something went wrong
             if (errorMessage) {
-              core.setFailed(`Documentation team approval check failed: ${errorMessage}`);
+              core.setFailed(`Team approval check failed: ${errorMessage}`);
             }
