@@ -37,36 +37,34 @@ The following AI clients are compatible with the Datadog MCP Server.
 
 | Client | Developer | Notes |
 |--------|------|------|
+| [Cursor][8] | Anysphere | Datadog [VS Code & Cursor extension](#connect-in-vs-code-or-cursor) recommended. |
 | [Claude Code][5]<br/>[Claude&nbsp;Desktop][6] | Anthropic | |
 | [Codex CLI][7] | OpenAI | |
-| [Cursor][8] | Anysphere | Datadog [VS Code & Cursor extension](#connect-in-vs-code-or-cursor) recommended. |
+| [VS Code][11] | Microsoft | Datadog [VS Code & Cursor extension](#connect-in-vs-code-or-cursor) recommended. |
 | [Goose][9] | Block | |
 | [Q CLI][10] | Amazon | Does not support HTTP transport for remote authentication. Use [local binary authentication](#connect-to-the-datadog-mcp-server) instead. |
-| [VS Code][11] | Microsoft | Datadog [VS Code & Cursor extension](#connect-in-vs-code-or-cursor) recommended. |
 
-## Connect in VS Code or Cursor
+## Connect in Cursor and VS Code
 
-Datadog's [VS Code and Cursor extension][12] includes built-in access to the Datadog MCP Server. Benefits include:
+Datadog's [Cursor and VS Code extension][12] includes built-in access to the Datadog MCP Server. Benefits include:
 
 * No additional MCP Server setup after you install the extension and connect to Datadog.
 * One-click transitions between multiple Datadog organizations.
-* Better fixes from **Fix in Chat** on Code Insights (issues from Error Tracking, Code Vulnerabilities, and Library Vulnerabilities), informed by context from the MCP Server.
+* [Cursor only] Better fixes from **Fix in Chat** on Code Insights (issues from Error Tracking, Code Vulnerabilities, and Library Vulnerabilities), informed by context from the MCP Server.
 
 To install the extension:
 
-1. Ensure you have an active version of [Node.js][13] installed on your local machine.  
-2. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. To find the MCP Server configuration:
+1. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. To find the MCP Server configuration:
    - VS Code: Open the command palette (`Shift` + `Cmd/Ctrl` + `P`) and run `MCP: Open User Configuration`.
    - Cursor: Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`) and select the **Tools & Integrations** tab.
-3. Install the Datadog extension following [these instructions][14]. If you have the extension installed already, make sure it's the latest version, as new features are released regularly.  
-4. Sign in to your Datadog account. If you have multiple accounts, use the account included in your Product Preview.
+2. Install the Datadog extension following [these instructions][14]. If you have the extension installed already, make sure it's the latest version, as new features are released regularly.  
+3. Sign in to your Datadog account. If you have multiple accounts, use the account included in your Product Preview.
     {{< img src="bits_ai/mcp_server/ide_sign_in.png" alt="Sign in to Datadog from the IDE extension" style="width:70%;" >}}
-5. Open a project or workspace.
-6. **Restart the IDE.**
-7. Confirm the Datadog MCP Server is available and the [tools](#available-tools) are listed in your IDE:
+4. **Restart the IDE.**
+5. Confirm the Datadog MCP Server is available and the [tools](#available-tools) are listed in your IDE:
+    - Cursor: Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), and select the **Tools & Integrations** tab.
     - VS Code: Open the chat panel, select Agent mode, and click the **Configure Tools** button.
        {{< img src="bits_ai/mcp_server/vscode_configure_tools_button.png" alt="Configure Tools button in VS Code" style="width:70%;" >}}
-    - Cursor: Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), and select the **Tools & Integrations** tab.
 
 ## Connect in supported AI clients
 
