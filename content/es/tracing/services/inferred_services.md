@@ -14,19 +14,21 @@ Datadog detecta automáticamente las dependencias de un servicio instrumentado, 
 
 {{< img src="tracing/visualization/service/dependencies_section.png" alt="Mapa de dependencias de la página de servicios" style="width:90%;">}}
 
-{{< site-region region="ap1,us3,us5,eu,us" >}}
+{{< site-region region="ap1,us3,us5,eu,us,ap2" >}}
 
 Explora los servicios inferidos en el [Catálogo de software][1], filtrando las entradas por tipo de entidad, como bases de datos, colas o API de terceros. Cada [página de servicios][2] se ajusta al tipo de servicio que estás investigando. Por ejemplo, las páginas de servicios de bases de datos muestran información específica de las bases de datos y, si estás utilizando [Database Monitoring][3], incluyen datos de monitorización de estas bases de datos.
 
 ## Configurar servicios inferidos
-
-Para ver los servicios inferidos, debes habilitar algunas configuraciones. 
-A partir de la versión [7.60.0][1] del Datadog Agent, estas configuraciones están activadas por defecto. 
-
 {{< tabs >}}
-{{% tab "Agent v7.55.1 o posterior" %}}
+{{% tab "Agent v7.60.0+" %}}
+A partir de la versión [7.60.0][1] del Datadog Agent, no se necesita ninguna configuración manual para ver servicios inferidos. Las configuraciones necesarias —`apm_config.compute_stats_by_span_kind` y `apm_config.peer_tags_aggregation`— están activadas por defecto.
 
-Para las versiones [7.55.1][2] o posteriores del Datadog Agent, añade lo siguiente a tu archivo de configuración `datadog.yaml`:
+[1]: https://github.com/DataDog/datadog-agent/releases/tag/7.60.0
+
+{{% /tab %}}
+{{% tab "Agent v7.55.1 - v7.59.1" %}}
+
+Para las versiones [7.55.1][1] a [7.59.1][2] del Datadog Agent, añade lo siguiente a tu archivo de configuración `datadog.yaml`:
 
 {{< code-block lang="yaml" filename="datadog.yaml" collapsible="true" >}}
 
@@ -47,8 +49,8 @@ DD_APM_PEER_TAGS_AGGREGATION=true
 
 Si utilizas Helm, incluye estas variables de entorno en tu [archivo][3] `values.yaml`.
 
-[1]: https://github.com/DataDog/datadog-agent/releases/tag/7.60.0
-[2]: https://github.com/DataDog/datadog-agent/releases/tag/7.55.1
+[1]: https://github.com/DataDog/datadog-agent/releases/tag/7.55.1
+[2]: https://github.com/DataDog/datadog-agent/releases/tag/7.59.1
 [3]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Agent v7.50.3 - v7.54.1" %}}

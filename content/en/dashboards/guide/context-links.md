@@ -4,6 +4,9 @@ further_reading:
 - link: '/dashboards/widgets'
   tag: 'Documentation'
   text: 'Dashboard widget list'
+- link: '/metrics/units'
+  tag: 'Documentation'
+  text: 'Metrics Units'
 ---
 
 ## Overview

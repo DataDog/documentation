@@ -148,7 +148,7 @@ You can also calculate other Apdex scores with the following methods:
 - To compute the Apdex score for a specific application, add an additional `@application.name` query and update your formula.
 - To compute the Apdex score with another RUM performance metric such as First Contentful Paint, replace `@view.LargestContentfulPaint` with `@view.FirstContentfulPaint` in the queries.
 
-To compute additional performance indicators for your applications, determine what data points you need and which RUM events are relevant for you before [creating a quick graph](#create-a-quick-graph).
+To compute additional performance indicators for your applications, determine what datapoints you need and which RUM events are relevant for you before [creating a quick graph](#create-a-quick-graph).
 
 ## Further Reading
 

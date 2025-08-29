@@ -8,6 +8,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
     tag: "Blog"
     text: "Configure pipeline alerts with Datadog CI monitors"
+  - link: "/continuous_testing/guide/view-continuous-testing-test-runs-in-test-optimization/"
+    tag: "Guide"
+    text: "View Continuous Testing Test Runs in Test Optimization"
 ---
 
 ## Overview

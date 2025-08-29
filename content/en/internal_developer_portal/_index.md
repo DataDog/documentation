@@ -50,19 +50,24 @@ If you're new to IDP, start with the [Getting Started guide][5], which walks thr
     {{< nextlink href="/internal_developer_portal/scorecards" >}}Promote engineering best practices at scale with Scorecards{{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/self_service_actions" >}}Accelerate releases through Self-Service Actions{{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/eng_reports" >}}Track reliability and scorecard compliance with Engineering Reports{{< /nextlink >}}
+    {{< nextlink href="/internal_developer_portal/external_provider_status" >}}Monitor external dependencies with External Provider Status{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Working with teams
 
 Use [Datadog Teams][6] to enable team-based features in IDP:
 
-- Track your teams in Datadog and automatically sync with your external sources of truth
-- Assign teams as owners of services and other entities
-- Filter views by team throughout IDP (for example, in Software Catalog, Scorecards, and Engineering Reports)
+- Track your teams in Datadog and automatically sync with your external sources of truth 
+- Assign teams as owners of services and other entities 
+- Create hierarchies to have parent-child relationships between your teams
+- Filter views by teams throughout IDP (for example, in Software Catalog, Scorecards, and Engineering Reports)
 
 If your organization manages team structure in GitHub, join the preview for GitHub Integration for Teams to automatically sync GitHub teams to Datadog.
 
-{{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" d_target="#signupModal" btn_hidden="false" header="Join the preview for GitHub Integration for Teams!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" d_target="#signupModal" btn_hidden="false" header="Join the preview for GitHub Integration for Teams" >}}
+{{< /callout >}}
+
+{{< callout url="https://www.datadoghq.com/product-preview/teams-hierarchy/" d_target="#signupModal" btn_hidden="false" header="Join the preview for the Teams hierarchy feature" >}}
 {{< /callout >}}
 
 

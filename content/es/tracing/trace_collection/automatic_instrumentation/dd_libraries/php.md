@@ -33,7 +33,7 @@ type: lenguaje de código múltiple
 
 El requisito mínimo de versión de PHP para la última versión de `dd-trace-php` es PHP 7. Si estás utilizando PHP 5, puedes seguir utilizando el rastreador PHP hasta la versión [0.99](https://github.com/DataDog/dd-trace-php/releases/tag/0.99.0). PHP 5 es EOL a partir de la versión 1.0 de PHP biblioteca.
 
-Para consultar la lista completa de compatibilidades de versiones PHP y de marcos de trabajo Datadog (incluyendo las versiones heredadas y de mantenimiento), consulta la página de [requisitos de compatibilidad][1].
+Para ver la lista completa de compatibilidad de versiones PHP y de marcos de Datadog (incluidas las versiones heredadas y de mantenimiento), consulta la página de [requisitos de compatibilidad][1].
 
 ## Para empezar
 
@@ -56,16 +56,16 @@ apk add libgcc
 Ejecuta el instalador:
 
 ```shell
-# Instalación completa: APM + ASM + Generación de perfiles
+# Full installation: APM + AAP + Profiling
 php datadog-setup.php --php-bin=all --enable-appsec --enable-profiling
 
-# Sólo APM
+# APM only
 php datadog-setup.php --php-bin=all
 
-# APM + ASM
+# APM + AAP
 php datadog-setup.php --php-bin=all --enable-appsec
 
-# APM + Generación de perfiles (Beta)
+# APM + Profiling
 php datadog-setup.php --php-bin=all --enable-profiling
 ```
 
@@ -219,11 +219,11 @@ El proyecto Debian tiene una página wiki con las [instrucciones para instalar s
 Edita el archivo `/etc/apt/sources.list`:
 
 ```
-# ... dejar aquí todos los paquetes preexistentes
+# ... leave here all the pre-existing packages
 
-# añadir un `deb` deb http://deb.Debian.org/Debian-debug/ $RELEASE-debug main
-# Por ejemplo para buster
-deb http://deb.Debian.org/Debian-debug/ buster-debug main
+# add a `deb` deb http://deb.debian.org/debian-debug/ $RELEASE-debug main
+# For example for buster
+deb http://deb.debian.org/debian-debug/ buster-debug main
 ```
 
 Actualiza `apt`:
@@ -237,7 +237,7 @@ Prueba primero nombres canónicos de paquetes para los símbolos de depuración.
 ```
 apt install -y php7.2-fpm-dbgsym
 
-# si lo anterior no funciona
+# if the above does not work
 
 apt install -y php7.2-fpm-dbg
 ```
@@ -295,7 +295,7 @@ Prueba primero nombres canónicos de paquetes para los símbolos de depuración.
 ```
 apt install -y php7.2-fpm-dbgsym
 
-# si lo anterior no funciona
+# if the above does not work
 
 apt install -y php7.2-fpm-dbg
 ```
@@ -323,7 +323,7 @@ Intenta añadir nombres canónicos de paquetes para los símbolos de depuración
 ```
 apt install -y php7.2-fpm-dbgsym
 
-# si lo anterior no funciona
+# if the above does not work
 
 apt install -y php7.2-fpm-dbg
 ```
@@ -352,7 +352,7 @@ Obtener un volcado de núcleo para aplicaciones PHP puede ser complicado, especi
 
 1. Determina si PHP-FPM ha generado un volcado de núcleo consultando el log de errores de aplicación:
    - Busca `(SIGSEGV - core dumped)`, ya que un mensaje como este significa que el núcelo ha sido volcado: `WARNING: [pool www] child <pid> exited on signal 11 (SIGSEGV - core dumped) after <duration> seconds from start`.
-   - Busca , ya que un mensaje como éste indica que el núcleo no ha sido volcado: `WARNING: [pool www] child <pid> exited on signal 11 (SIGSEGV) after <duration> seconds from start`.
+   - Busca `(SIGSEGV)`, ya que un mensaje como éste indica que el núcleo no ha sido volcado: `WARNING: [pool www] child <pid> exited on signal 11 (SIGSEGV) after <duration> seconds from start`.
 1. Localiza el volcado de núcleo ejecutando `cat /proc/sys/kernel/core_pattern`. El valor por defecto suele ser `core`, lo que significa que se generará un archivo llamado `core` en la carpeta raíz de la web.
 
 Si no se ha generado ningún volcado de núcleo, comprueba las siguientes configuraciones y cámbielas, si es necesario:
@@ -457,7 +457,7 @@ Algunos problemas son causados por factores externos, por lo que puede ser valio
 
 Instala el `strace` con tu gestor de paquetes. Cuando generes un `strace` para enviarlo al servicio de asistencia de Datadog, asegúrate de utilizar la opción `-f` para seguir a procesos secundarios.
 
-Para una aplicación CLI, ejecuta:
+Para una aplicación de CLI, ejecuta:
 {{< code-block lang="shell" >}}
 strace -f php path/to/script.php
 {{< /code-block >}}
@@ -472,7 +472,7 @@ Para Apache, ejecuta:
 (. /etc/apache2/envvars; strace -f apache2 -X)
 {{< /code-block >}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

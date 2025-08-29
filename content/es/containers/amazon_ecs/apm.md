@@ -31,7 +31,7 @@ Una vez activado, el contenedor del Datadog Agent recopila las trazas emitidas d
           "name": "datadog-agent",
           "image": "public.ecr.aws/datadog/agent:latest",
           "cpu": 100,
-          "memory": 256,
+          "memory": 512,
           "essential": true,
           "portMappings": [
             {
@@ -200,7 +200,7 @@ end
 
 {{< /programming-lang >}}
 
-{{< programming-lang lang="go" >}}
+{{< programming-lang lang="go">}}
 
 #### Variable de momento de inicio
 Actualiza el `entryPoint` de la definición de tareas con lo siguiente, sustituyendo tu`<Go Startup Command>`:
@@ -214,7 +214,7 @@ Actualiza el `entryPoint` de la definición de tareas con lo siguiente, sustituy
 ```
 
 #### Código
-También puedes actualizar el código para que el rastreador configure el nombre de host explícitamente:
+También puedes actualizar tu código para que el rastreador establezca el nombre de host explícitamente. {{% tracing-go-v2 %}}
 
 ```go
 package main
@@ -222,7 +222,7 @@ package main
 import (
     "net/http"
     "io/ioutil"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {

@@ -243,6 +243,9 @@ To generate and use a TOTP in your tests, create a global variable where you ent
 
 {{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
 
+**Note**: If your TOTP token works in Google Authenticator, it is likely compatible with Datadog.
+Some QR codes are limited to specific verification methods and may not work across platforms. To ensure compatibility, use a QR code or secret that follows standard TOTP protocols.
+
 For more information about TOTP-based MFA in a browser test, see [TOTPs For Multi-Factor Authentication (MFA) In Browser Tests][1].
 
 [1]: /synthetics/guide/browser-tests-totp

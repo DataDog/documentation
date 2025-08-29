@@ -37,7 +37,7 @@
   },
   "ListAwsScanOptions": {
     "description": "Fetches the scan options configured for AWS accounts.",
-    "summary": "Get AWS Scan Options"
+    "summary": "List AWS Scan Options"
   },
   "CreateAwsScanOptions": {
     "description": "Activate Agentless scan options for an AWS account.",
@@ -48,6 +48,10 @@
   "DeleteAwsScanOptions": {
     "description": "Delete Agentless scan options for an AWS account.",
     "summary": "Delete AWS Scan Options"
+  },
+  "GetAwsScanOptions": {
+    "description": "Fetches the Agentless scan options for an activated account.",
+    "summary": "Get AWS scan options"
   },
   "UpdateAwsScanOptions": {
     "description": "Update the Agentless scan options for an activated account.",
@@ -304,6 +308,12 @@
     "summary": "Assign case",
     "request_description": "Assign case payload",
     "request_schema_description": "Case assign request"
+  },
+  "UpdateAttributes": {
+    "description": "Update case attributes",
+    "summary": "Update case attributes",
+    "request_description": "Case attributes update payload",
+    "request_schema_description": "Case update attributes request"
   },
   "UpdatePriority": {
     "description": "Update case priority",
@@ -607,6 +617,30 @@
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
   },
+  "GetAllDatasets": {
+    "description": "Get all datasets that have been configured for an organization.",
+    "summary": "Get all datasets"
+  },
+  "CreateDataset": {
+    "description": "Create a dataset with the configurations in the request.",
+    "summary": "Create a dataset",
+    "request_description": "Dataset payload",
+    "request_schema_description": "Create request for a dataset."
+  },
+  "DeleteDataset": {
+    "description": "Deletes the dataset associated with the ID.",
+    "summary": "Delete a dataset"
+  },
+  "GetDataset": {
+    "description": "Retrieves the dataset associated with the ID.",
+    "summary": "Get a single dataset by ID"
+  },
+  "UpdateDataset": {
+    "description": "Edits the dataset associated with the ID.",
+    "summary": "Edit a dataset",
+    "request_description": "Dataset payload",
+    "request_schema_description": "Edit request for a dataset."
+  },
   "GetDomainAllowlist": {
     "description": "Get the domain allowlist for an organization.",
     "summary": "Get Domain Allowlist"
@@ -684,7 +718,7 @@
     "summary": "Get a list of events"
   },
   "CreateEvent": {
-    "description": "This endpoint allows you to publish events.\n\n**Note:** To utilize this endpoint with our client libraries, please ensure you are using the latest version released on or after July 1, 2025. Earlier versions do not support this functionality.\n\n✅ **Only events with the `change` or `alert` category** are in General Availability. For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).\n\n❌ Notifications are not yet supported for events sent to this endpoint. Use the V1 endpoint for notification functionality.\n\n❌ This endpoint is not available for the Government (US1-FED) site. Contact your account representative for more information.",
+    "description": "This endpoint allows you to publish events.\n\n**Note:** To utilize this endpoint with our client libraries, please ensure you are using the latest version released on or after July 1, 2025. Earlier versions do not support this functionality.\n\n✅ **Only events with the `change` or `alert` category** are in General Availability. For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).\n\n❌ Notifications are not yet supported for events sent to this endpoint. Use the V1 endpoint for notification functionality.",
     "summary": "Post an event",
     "request_description": "Event creation request payload.",
     "request_schema_description": "Payload for creating an event."
@@ -694,6 +728,10 @@
     "summary": "Search events",
     "request_description": "",
     "request_schema_description": "The object sent with the request to retrieve a list of events from your organization."
+  },
+  "GetEvent": {
+    "description": "Get the details of an event by `event_id`.",
+    "summary": "Get an event"
   },
   "ListIncidents": {
     "description": "Get all incidents for the user's organization.",
@@ -1305,6 +1343,10 @@
     "description": "Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations configuration using Metrics without Limits&trade;.",
     "summary": "Tag Configuration Cardinality Estimator"
   },
+  "GetMetricTagCardinalityDetails": {
+    "description": "Returns the cardinality details of tags for a specific metric.",
+    "summary": "Get tag key cardinality details"
+  },
   "DeleteTagConfiguration": {
     "description": "Deletes a metric's tag configuration. Can only be used with application\nkeys from users with the `Manage Tags for Metrics` permission.",
     "summary": "Delete a tag configuration"
@@ -1443,6 +1485,10 @@
     "description": "Get all aggregated connections.",
     "summary": "Get all aggregated connections"
   },
+  "GetAggregatedDns": {
+    "description": "Get all aggregated DNS traffic.",
+    "summary": "Get all aggregated DNS traffic"
+  },
   "CreateOnCallEscalationPolicy": {
     "description": "Create a new On-Call escalation policy",
     "summary": "Create On-Call escalation policy",
@@ -1538,7 +1584,7 @@
     "summary": "List permissions"
   },
   "ListFindings": {
-    "description": "Get a list of findings. These include both misconfigurations and identity risks.\n\n**Note**: To filter and return only identity risks, add the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Additional extension fields\n\nAdditional extension fields are available for some findings.\n\nThe data is available when you include the query parameter `?detailed_findings=true` in the request.\n\nThe following fields are available for findings:\n- `external_id`: The resource external ID related to the finding.\n- `description`: The description and remediation steps for the finding.\n- `datadog_link`: The Datadog relative link for the finding.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.\n",
+    "description": "Get a list of findings. These include both misconfigurations and identity risks.\n\n**Note**: To filter and return only identity risks, add the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Additional extension fields\n\nAdditional extension fields are available for some findings.\n\nThe data is available when you include the query parameter `?detailed_findings=true` in the request.\n\nThe following fields are available for findings:\n- `external_id`: The resource external ID related to the finding.\n- `description`: The description and remediation steps for the finding.\n- `datadog_link`: The Datadog relative link for the finding.\n- `ip_addresses`: The list of private IP addresses for the resource related to the finding.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.\n",
     "summary": "List findings"
   },
   "MuteFindings": {
@@ -1730,7 +1776,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Accounts: `integration-account`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Accounts        | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -1960,6 +2006,12 @@
   "ListScorecardOutcomes": {
     "description": "Fetches all rule outcomes.",
     "summary": "List all rule outcomes"
+  },
+  "UpdateScorecardOutcomesAsync": {
+    "description": "Updates multiple scorecard rule outcomes in a single batched request.",
+    "summary": "Update Scorecard outcomes asynchronously",
+    "request_description": "Set of scorecard outcomes.",
+    "request_schema_description": "Scorecard outcomes batch request."
   },
   "CreateScorecardOutcomesBatch": {
     "description": "Sets multiple service-rule outcomes in a single batched request.",
@@ -2385,6 +2437,10 @@
     "description": "Get the status of the SLO report job.",
     "summary": "Get SLO report status"
   },
+  "GetSPARecommendations": {
+    "description": "Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and shard identifier, and SPA returns structured recommendations for driver and executor resources.",
+    "summary": "Get SPA Recommendations"
+  },
   "AggregateSpans": {
     "description": "The API endpoint to aggregate spans into buckets and compute metrics and timeseries.\nThis endpoint is rate limited to `300` requests per hour.",
     "summary": "Aggregate spans",
@@ -2420,6 +2476,12 @@
     "summary": "Create a team",
     "request_description": "",
     "request_schema_description": "Request to create a team"
+  },
+  "SyncTeams": {
+    "description": "This endpoint attempts to link your existing Datadog teams with GitHub teams by matching their names.\nIt evaluates all current Datadog teams and compares them against teams in the GitHub organization\nconnected to your Datadog account, based on Datadog Team handle and GitHub Team slug\n(lowercased and kebab-cased).\n\nThis operation is read-only on the GitHub side, no teams will be modified or created.\n\n[A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),\nand the GitHub App integrated with Datadog must have the `Members Read` permission. Matching is performed by comparing the Datadog team handle to the GitHub team slug\nusing a normalized exact match; case is ignored and spaces are removed. No modifications are made\nto teams in GitHub. This will not create new Teams in Datadog.",
+    "summary": "Link Teams with GitHub Teams",
+    "request_description": "",
+    "request_schema_description": "Team sync request."
   },
   "ListMemberTeams": {
     "description": "Get all member teams.",

@@ -20,6 +20,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/mobile-app-getting-started/"
   tag: "Blog"
   text: "Getting started with the Datadog mobile app"
+- link: "https://www.datadoghq.com/blog/mobile-app-reduce-mttr/"
+  tag: "Blog"
+  text: "Reduce your mean time to repair with the Datadog mobile app"
 ---
 
 The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert through On-Call, Slack, or email, you can investigate issues by opening monitor graphs and dashboards on your mobile device.
@@ -88,9 +91,48 @@ To log out, navigate to the **Settings** page on the mobile app and click on **L
 
 The On-Call page provides a comprehensive view of On-Call shifts, schedules, pages, and escalation policies. You can filter the information by user, team, urgency, status, or date to quickly find relevant details. Tapping **Escalate** prompts you to confirm the escalation to the next policy level. Tapping **Declare Incident** prompts you to enter a title and provide relevant incident attributes.
 
-You can initiate a page to an individual or team, and also override existing shifts when necessary. For more information, see [Datadog On-Call][20].
+You can initiate a page to an individual or team, and also override existing shifts by tapping on the shift you would like to override. You can view Bits AI SRE monitor investigations for initial findings and conclusions. For more information, see [Datadog On-Call][20].
 
 To configure On-Call notifications on your mobile device, see the guide to [Set up your Mobile Device for Datadog On-Call][21].
+
+## Incidents
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+{{< img src="service_management/mobile/incident_may_2025.png" alt="Incidents page in the Datadog On-call mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+{{< img src="service_management/mobile/Android_Incident.png" alt="Incidents page in the Datadog On-call mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+On the Incidents page, you can view, search, and filter all incidents that you have access to in your Datadog account to ensure response and resolution from anywhere. You can also declare and edit incidents, and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see [Datadog Incident Management][12].
+
+### Create an incident
+
+1. Navigate to the incident list by tapping on the Incidents Tab in the bottom bar.
+2. Tap the **+** button in the top right corner.
+3. Give your incident a title, severity, and commander.
+
+## Notification Center
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+{{< img src="service_management/mobile/ios_notification_center.png" alt="ios Notification center in the Datadog mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+{{< img src="service_management/mobile/android_notification_center.png" alt="Android Notification center in the Datadog mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+The Notification Center lists all push notifications recieved so that notification context is never lost. You can filter by notification type.
 
 ## Dashboards
 
@@ -216,33 +258,12 @@ You can also group by log patterns and select different log attributes for clust
 
 On the Services page, you can view, search and filter all services that you have access to in your Datadog account from the Datadog Mobile App to ensure the health of your service from anywhere. You can also view recent deployments, resources, SLOs, and monitors associated with that service. For more information about investigative tools for your services, see [manage Software Catalog][17].
 
-## Incidents
-
-{{< tabs >}}
-{{% tab "iOS" %}}
-
-{{< img src="service_management/mobile/incident_may_2025.png" alt="Incidents page in the Datadog On-call mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
-
-{{% /tab %}}
-{{% tab "Android" %}}
-
-{{< img src="service_management/mobile/Android_Incident.png" alt="Incidents page in the Datadog On-call mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also declare and edit incidents, and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see the [Datadog Incident Management documentation][12].
-
-### Create an incident
-
-1. Navigate to the incident list by clicking on the Incidents Tab in the bottom bar.
-2. Click the **+** button in the top right corner.
-3. Give your incident a title, severity, and commander.
-
 
 ## Frequently Asked Question
 ### How do I remain logged into the mobile app?
-Upon successful authentication to the mobile app, you will remain logged in for 90 days. Provided you are active during that 90 day period, the token will be refreshed.
+Upon successful authentication to the mobile app, you will remain logged in for 90 days. Provided you are active during that 90 day period, the token will be refreshed. 
+
+**Note**: If you have notifications enabled, proactive notifications will be sent prior to token expiration.
 
 ### Will I still receive notifications if I am automatically signed out?
 If you are automatically logged out due to inactivity during the 90 day token period, you will still be able to receive notifications and will be prompted to log in again.
@@ -251,6 +272,9 @@ If you are automatically logged out due to inactivity during the 90 day token pe
 
 ### Why am I not receiving notifications?
 Check that you have notifications enabled for the Datadog app in your device app settings. If you would like to ensure that notifications bypass Do Not Disturb, check that Critical Alerts is toggled on.
+
+### What happens if a user is disabled?
+The mobile app token will be invalid and force the user to log out.
 
 ## Troubleshooting
 

@@ -274,7 +274,7 @@ spec:
 
 | Parameter           | Description                                                        |
 |---------------------|--------------------------------------------------------------------|
-| `exclude_truncated` | When present, it excludes truncated logs and does not send to Datadog. |
+| `exclude_truncated` | When present, it excludes truncated logs and does not send to Datadog. The `exclude_truncated` rule is available starting with Agent v7.69. |
 
 For example, to **filter out** truncated logs:
 
@@ -651,7 +651,7 @@ logs:
 
 ## Global processing rules
 
-For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][5] or through an environment variable:
+For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][5] or through an environment variable. The `exclude_truncated` rule is available starting with Agent v7.69.
 
 {{< tabs >}}
 {{% tab "Configuration files" %}}
@@ -714,6 +714,21 @@ datadog:
 All the logs collected by the Datadog Agent are impacted by the global processing rules.
 
 **Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the Agent's [status subcommand][6] to troubleshoot any issues.
+
+## Multi-line log aggregation FAQ
+
+**1. When should I use manual multi-line rules vs. automatic multi-line detection?**
+
+If you know the format of your logs, you should use manual multi-line rules for precise control. 
+If you are sending lots of multi-line logs, and you are unsure of their format or don't have the means to configure all sources individually, you should use automatic multi-line detection.
+
+**2. What happens when a multi-line pattern doesn't match any logs?**
+
+All non-JSON log lines are processed individually as separate log entries.
+All JSON-formatted log lines are treated as a single line of logs, and only the first valid JSON format enters the intake; the rest are dropped.
+
+**3. What happens when there are both global rules and integration-specific rules?**
+Integration-specific rules completely override global rules for the particular integration.
 
 ## Further Reading
 
