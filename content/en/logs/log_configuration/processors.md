@@ -1018,7 +1018,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following array processo
 |------------------------------|------------|----------|--------------------------------------------------------------------|
 | `type`                       | String     | Yes      | Type of the processor.                                             |
 | `name`                       | String     | No       | Name of the processor.                                             |
-| `is_enabled`                 | Boolean    | No       | If the processors is enabled or not. Default: `false`.             |
+| `is_enabled`                 | Boolean    | No       | Whether the processor is enabled. Default: `false`.             |
 | `operation.type`             | String     | Yes      | Type of array processor operation.                                 |
 | `operation.source`           | String     | Yes      | Attribute to append.                                               |
 | `operation.target`           | String     | Yes      | Array attribute to append to.                                      |
