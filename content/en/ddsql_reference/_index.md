@@ -182,6 +182,8 @@ The following SQL functions are supported. For Window function, see the separate
 | `STRING_TO_ARRAY(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter. |
 | `ARRAY_AGG(expression e)`                        | array of input type                   | Creates an array by collecting all the input values.                        |
 | `UNNEST(array a [, array b...])`                 | rows of a [, b...]                    | Expands arrays into a set of rows. This form is only allowed in a FROM clause. |
+| `CURRENT_SETTING(string setting_name)`           | string                                | Returns the current value of the specified setting. Supports the parameters `dd.time_frame_start` and `dd.time_frame_end`, which return the start and end of the global time frame, respectively. |
+| `NOW()`                                          | timestamp                             | Returns the current timestamp at the start of the current transaction. |
 
 {{% collapse-content title="Examples" level="h3" %}}
 
@@ -468,6 +470,35 @@ SELECT
 FROM
   emails,
   UNNEST(recipients) AS recipient
+{{< /code-block >}}
+
+### `CURRENT_SETTING`
+
+Supported setting parameters:
+- `dd.time_frame_start`: Returns the start of the time frame in epoch milliseconds
+- `dd.time_frame_end`: Returns the end of the time frame in epoch milliseconds
+
+{{< code-block lang="sql" >}}
+-- Define the current analysis window
+WITH bounds AS (
+  SELECT CAST(current_setting('dd.time_frame.start') AS TIMESTAMP) AS time_frame_start,
+         CAST(current_setting('dd.time_frame.end')   AS TIMESTAMP) AS time_frame_end,
+-- Define the immediately preceding window of equal length
+     previous_bounds AS (
+  SELECT time_frame_start - (time_frame_end - time_frame_start) AS prev_time_frame_start,
+         time_frame_start                                       AS prev_time_frame_end
+  FROM bounds
+)
+{{< /code-block >}}
+
+### `NOW`
+{{< code-block lang="sql" >}}
+SELECT
+  *
+FROM
+  sales
+WHERE
+  purchase_date > now() - INTERVAL '1 hour'
 {{< /code-block >}}
 
 {{% /collapse-content %}}
