@@ -11,17 +11,13 @@ TKTK
 
 ## Create a rule
 
-To create a threshold detection rule or job, navigate to the [Detection Rules][1] page and click **+ New Rule**.
-
-## Create a New Rule
-
-Select a **Real-Time Rule**, **Scheduled Rule** or a **Historical Job**.
+1. To create a threshold detection rule or job, navigate to the [Create a New Detection][1] page.
+1. Select a **Real-Time Rule**, **Scheduled Rule** or a **Historical Job**.
 
 ## Define your rule or historical job
 
-If you are creating a historical job, select the logs index and time range for the job.
-
-Select the detection method you want to use for creating signals.
+1. If you are creating a historical job, select the logs index and time range for the job.
+1. Select the detection method you want to use for creating signals.
 
 ## Define search queries
 
@@ -485,4 +481,4 @@ In this example, when there are more than five failed logins and at least one su
 
 {{% cloud_siem/create_suppression %}}
 
-[1]: https://app.datadoghq.com/security/configuration/siem/rules
+[1]: https://app.datadoghq.com/security/rules/new
