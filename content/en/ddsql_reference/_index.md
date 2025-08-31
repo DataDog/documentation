@@ -140,7 +140,7 @@ SELECT ARRAY[1.1, 2.2, 3.3] AS decimals;             -- Inferred as DOUBLE array
 
 {{< code-block lang="sql" >}}
 -- Using type literals in queries
-SELECT 
+SELECT
     VARCHAR 'Product Name: ' || name AS labeled_name,
     price * DOUBLE 1.08 AS price_with_tax,
     created_at + INTERVAL '7 days' AS expiry_date
@@ -436,8 +436,8 @@ Supported setting parameters:
 {{< code-block lang="sql" >}}
 -- Define the current analysis window
 WITH bounds AS (
-  SELECT CAST(current_setting('dd.time_frame.start') AS TIMESTAMP) AS time_frame_start,
-         CAST(current_setting('dd.time_frame.end')   AS TIMESTAMP) AS time_frame_end,
+  SELECT CAST(current_setting('dd.time_frame_start') AS TIMESTAMP) AS time_frame_start,
+         CAST(current_setting('dd.time_frame_end')   AS TIMESTAMP) AS time_frame_end,
 -- Define the immediately preceding window of equal length
      previous_bounds AS (
   SELECT time_frame_start - (time_frame_end - time_frame_start) AS prev_time_frame_start,
@@ -567,7 +567,7 @@ SELECT regexp_replace('INFO INFO INFO', 'INFO', 'DEBUG', 1, 2);
 You can use the following flags with [regular expression functions](#regular-expressions):
 
 `i`
-: Case-insensitive matching 
+: Case-insensitive matching
 
 `n` or `m`
 : Newline-sensitive matching
@@ -580,10 +580,10 @@ You can use the following flags with [regular expression functions](#regular-exp
 ### `i` flag
 
 {{< code-block lang="sql" >}}
-SELECT regexp_match('INFO', 'info') 
+SELECT regexp_match('INFO', 'info')
 -- NULL
 
-SELECT regexp_match('INFO', 'info', 'i') 
+SELECT regexp_match('INFO', 'info', 'i')
 -- ['INFO']
 {{< /code-block >}}
 
@@ -597,7 +597,7 @@ b', '^b');
 SELECT regexp_match('a
 b', '^b', 'n');
 -- ['b']
-{{< /code-block >}}   
+{{< /code-block >}}
 
 ### `g` flag
 
@@ -639,7 +639,7 @@ This table provides an overview of the supported window functions. For comprehen
 
 {{< callout url="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/" >}}
 Querying Logs and Metrics through DDSQL is in Preview. Use this form to request access.
-{{< /callout >}} 
+{{< /callout >}}
 
 Table functions are used to query Logs and Metrics
 
