@@ -430,8 +430,8 @@ FROM
 ### `CURRENT_SETTING`
 
 Supported setting parameters:
-- `dd.time_frame_start`: Returns the start of the time frame in epoch milliseconds
-- `dd.time_frame_end`: Returns the end of the time frame in epoch milliseconds
+- `dd.time_frame_start`: Returns the start of the selected time frame in RFC 3339 format (`YYYY-MM-DD HH:mm:ss.sss±HH:mm`).
+- `dd.time_frame_end`: Returns the end of the selected time frame in RFC 3339 format (`YYYY-MM-DD HH:mm:ss.sss±HH:mm`).
 
 {{< code-block lang="sql" >}}
 -- Define the current analysis window
