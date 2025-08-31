@@ -436,8 +436,8 @@ Supported setting parameters:
 {{< code-block lang="sql" >}}
 -- Define the current analysis window
 WITH bounds AS (
-  SELECT CAST(current_setting('dd.time_frame_start') AS TIMESTAMP) AS time_frame_start,
-         CAST(current_setting('dd.time_frame_end')   AS TIMESTAMP) AS time_frame_end
+  SELECT CAST(CURRENT_SETTING('dd.time_frame_start') AS TIMESTAMP) AS time_frame_start,
+         CAST(CURRENT_SETTING('dd.time_frame_end')   AS TIMESTAMP) AS time_frame_end
 ),
 -- Define the immediately preceding window of equal length
      previous_bounds AS (
@@ -455,7 +455,7 @@ SELECT
 FROM
   sales
 WHERE
-  purchase_date > now() - INTERVAL '1 hour'
+  purchase_date > NOW() - INTERVAL '1 hour'
 {{< /code-block >}}
 
 ### `CARDINALITY`
