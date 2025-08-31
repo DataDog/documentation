@@ -437,13 +437,15 @@ Supported setting parameters:
 -- Define the current analysis window
 WITH bounds AS (
   SELECT CAST(current_setting('dd.time_frame_start') AS TIMESTAMP) AS time_frame_start,
-         CAST(current_setting('dd.time_frame_end')   AS TIMESTAMP) AS time_frame_end,
+         CAST(current_setting('dd.time_frame_end')   AS TIMESTAMP) AS time_frame_end
+),
 -- Define the immediately preceding window of equal length
      previous_bounds AS (
   SELECT time_frame_start - (time_frame_end - time_frame_start) AS prev_time_frame_start,
          time_frame_start                                       AS prev_time_frame_end
   FROM bounds
 )
+SELECT * FROM bounds, previous_bounds
 {{< /code-block >}}
 
 ### `NOW`
