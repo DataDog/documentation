@@ -6,7 +6,6 @@ import { searchbarHits } from './instantsearch/searchbarHits';
 import { searchpageHits } from './instantsearch/searchpageHits';
 import { customPagination } from './instantsearch/customPagination';
 import { debounce } from '../utils/debounce';
-import { trim } from 'lodash';
 
 // Helper function to handle navigation with proper anchor scrolling
 function navigateToUrl(url) {
