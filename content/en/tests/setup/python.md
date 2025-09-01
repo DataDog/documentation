@@ -456,7 +456,7 @@ There are several issues when these plugins are used together with `ddtrace`. Fo
 
 Each worker reports test results to Datadog independently, so tests from the same module running in different processes generate separate module or suite events.
 
-The overall count of test events (and their correctness) remains unaffected. Individual session, module, or suite events can have inconsistent results with other events in the same `pytest` run.
+The overall count of test events (and their correctness) remains unaffected. Individual session, module, or suite events can have inconsistent results with other events in the same `pytest` run (with `pytest-forked`).
 
 ### Test ordering
 
