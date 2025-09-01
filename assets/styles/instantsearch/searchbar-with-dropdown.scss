@@ -191,7 +191,7 @@
     .ais-SearchBox {
         position: relative;
 
-        &::before {
+        &::after {
             z-index: 1000;
             content: "/";
             position: absolute;
@@ -208,13 +208,17 @@
             font-size: 14px;
             font-weight: 500;
             color: #7d8081;
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 0.2s ease-out, transform 0.2s ease-out;
 
             @media screen and (max-width: 1280px) {
                 display: none;
             }
         }
-        &:focus-within::before {
-            display: none;
+        &:focus-within::after {
+            opacity: 0;
+            transform: scale(0.8);
         }
 
     }
