@@ -6,6 +6,7 @@ import { searchbarHits } from './instantsearch/searchbarHits';
 import { searchpageHits } from './instantsearch/searchpageHits';
 import { customPagination } from './instantsearch/customPagination';
 import { debounce } from '../utils/debounce';
+import { trim } from 'lodash';
 
 // Helper function to handle navigation with proper anchor scrolling
 function navigateToUrl(url) {
@@ -205,7 +206,9 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
     }
 
     // No searchBoxContainer means no instantSearch
-    if(!searchBoxContainer) return ;
+    if(!searchBoxContainer) {
+        return;
+    }
 
 
     const search = instantsearch({
@@ -216,8 +219,9 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
             stateMapping: {
                 stateToRoute(uiState) {
                     const indexUiState = uiState[docsIndex];
+                    const trimmedQuery = indexUiState.query?.trim();
                     return {
-                        s: indexUiState.query?.trim()
+                        ...(trimmedQuery && { s: trimmedQuery })
                     };
                 },
                 routeToState(routeState) {
