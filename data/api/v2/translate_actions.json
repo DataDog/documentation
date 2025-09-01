@@ -713,6 +713,28 @@
     "request_description": "Update a downtime request body.",
     "request_schema_description": "Request for editing a downtime."
   },
+  "SearchIssues": {
+    "description": "Search issues endpoint allows you to programmatically search for issues within your organization. This endpoint returns a list of issues that match a given search query, following the event search syntax. The search results are limited to a maximum of 100 issues per request.",
+    "summary": "Search error tracking issues",
+    "request_description": "Search issues request payload.",
+    "request_schema_description": "Search issues request payload."
+  },
+  "GetIssue": {
+    "description": "Retrieve the full details for a specific error tracking issue, including attributes and relationships.",
+    "summary": "Get the details of an error tracking issue"
+  },
+  "UpdateIssueAssignee": {
+    "description": "Update the assignee of an issue by `issue_id`.",
+    "summary": "Update the assignee of an issue",
+    "request_description": "Update issue assignee request payload.",
+    "request_schema_description": "Update issue assignee request payload."
+  },
+  "UpdateIssueState": {
+    "description": "Update the state of an issue by `issue_id`. Use this endpoint to move an issue between states such as `OPEN`, `RESOLVED`, or `IGNORED`.",
+    "summary": "Update the state of an issue",
+    "request_description": "Update issue state request payload.",
+    "request_schema_description": "Update issue state request payload."
+  },
   "ListEvents": {
     "description": "List endpoint returns events that match an events search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest events.",
     "summary": "Get a list of events"
