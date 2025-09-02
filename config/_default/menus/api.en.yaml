@@ -2692,6 +2692,18 @@ menu:
           - DeleteSecurityMonitoringSuppression
         unstable: []
         order: 0
+    - name: Validate a suppression rule
+      url: '#validate-a-suppression-rule'
+      identifier: security-monitoring-validate-a-suppression-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateSecurityMonitoringSuppression
+        unstable: []
+        order: 0
     - name: Get suppressions affecting a specific rule
       url: '#get-suppressions-affecting-a-specific-rule'
       identifier: security-monitoring-get-suppressions-affecting-a-specific-rule
