@@ -143,7 +143,7 @@ Elasticsearch 검사는 [Datadog Agent][2] 패키지에 포함되어 있어 추�
 
       - AWS Elasticsearch 서비스에 대한 Agent의 Elasticsearch 통합을 사용하려면 AWS Elasticsearch 통계 URL을 가리키도록 `url` 파라미터를 설정합니다.
       - Amazon ES 구성 API에 대한 모든 요청은 서명해야 합니다. 자세한 내용은 [OpenSearch 서비스 요청 만들기 및 서명][4]을 참조하세요.
-      - `aws` 인증 유형은 [boto3][5]를 사용하여 `.aws/credentials`에서 AWS 크리덴셜을 자동으로 수집합니다. `conf.yaml`에서 `auth_type: basic`를 사용하고 `username: <USERNAME>` 및 `password: <PASSWORD>`으로 크리덴셜을 정의합니다. 
+      - `aws` 인증 유형은 [boto3][5]를 사용하여 `.aws/credentials`에서 AWS 크리덴셜을 자동으로 수집합니다. `conf.yaml`에서 `auth_type: basic`를 사용하고 `username: <USERNAME>` 및 `password: <PASSWORD>`으로 크리덴셜을 정의합니다.
       - Elasticsearch에서 모니터링할 적절한 권한이 있는 사용자와 역할(아직 없는 경우)을 생성해야 합니다. 이는 Elasticsearch에서 제공하는 REST API 또는 Kibana UI를 통해 수행할 수 있습니다.
       - If you have enabled security features in Elasticsearch, you can use `monitor` or `manage` privilege while using the API to make the calls to the Elasticsearch indices.
       - 생성된 역할에 다음 속성을 포함합니다.
@@ -166,7 +166,7 @@ Elasticsearch 검사는 [Datadog Agent][2] 패키지에 포함되어 있어 추�
 
 ###### 커스텀 쿼리
 
-The Elasticsearch integration allows you to collect custom metrics through custom queries by using the `custom_queries` configuration option. 
+The Elasticsearch integration allows you to collect custom metrics through custom queries by using the `custom_queries` configuration option.
 
 **Note:** When running custom queries, use a read only account to ensure that the Elasticsearch instance does not change.
 
@@ -529,7 +529,7 @@ Agent 컨테이너의 필수 환경 변수:
 - `slm_stats`는 **elasticsearch.slm.\*** 메트릭을 전송합니다.
 
 ### 메트릭
-{{< get-metrics-from-git "elastic" >}}
+{{< get-metrics-from-git "elasticsearch" >}}
 
 
 ### 이벤트
@@ -537,7 +537,7 @@ Agent 컨테이너의 필수 환경 변수:
 Elasticsearch 검사는 Elasticsearch 클러스터의 전체 상태가 빨간색, 노란색 또는 녹색으로 변경될 때마다 Datadog에 이벤트를 내보냅니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "elastic" >}}
+{{< get-service-checks-from-git "elasticsearch" >}}
 
 
 ## 트러블슈팅

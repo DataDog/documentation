@@ -1,6 +1,6 @@
 
 {{/*  Carousel Modal  */}}
-{{ $media := .Params.tile.media | default slice}}
+{{ $media := .Params.media | default slice}}
 {{ $asset_len := ($media | default slice) | len  }}
 {{ $title := .Params.integration_title | default .Title}}
 {{ $app_id := .Params.app_id | default "" }}
@@ -89,12 +89,13 @@ x-cloak x-show="$store.integrationsModal.isOpen"
         {{/*  ALL ITEMS  */}}
         <div class="modal-item-btns mx-auto">
             {{ range $idx, $elm := $media }}
+            {{ $image_url := printf "https://s3.amazonaws.com/%s/%s/media/%s" $app_listings_bucket $app_id (replaceRE `(./)?images/` "" $elm.image_url) }}
             <button
             id="modal-item-btn-{{ add $idx 1 }}"
             class="modal-item-btn p-0"
             :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
             @click="selectCarouselItem({{ $idx }})"
-            :style="{backgroundImage: 'url(https://s3.amazonaws.com/{{ $app_listings_bucket }}/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }})'}"
+            :style="{backgroundImage: `url('{{ $image_url }}')`}"
             >
             </button>
             {{ end }}

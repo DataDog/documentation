@@ -11,11 +11,24 @@ In the Datadog paradigm, any of the following are appropriate situations for dec
 
 You can declare an incident from multiple places within the Datadog platform, such as a graph widget on a dashboard, the Incidents UI, or any alert reporting into Datadog.
 
+## Declaration modal
+
+When you declare an incident, a declaration modal appears. This modal has several core elements:
+
+| Incident elements  | Description |
+| ------------------ | ----------- |
+| Title              | (Required) A descriptive title for the incident. |
+| Severity Level     | (Required) By default, severity ranges from SEV-1 (most severe) to SEV-5 (least severe). You can customize the number of severities and their descriptions in Incident Management settings.
+| Incident Commander | The person assigned to lead the incident response. |
+
+You can configure [Incident Management Settings][2] to include more fields in the incident declaration modal or require certain fields.
+
+
 ## From the Incident page
 
 In the [Datadog UI][1], click **Declare Incident** to create an incident.
 
-The *Declare Incident* modal displays a collapsible side panel that contains helper text and descriptions for the severities and statuses used by your organization. The helper text and descriptions are customizable in [Incident Settings][2]. 
+The *Declare Incident* modal displays a collapsible side panel that contains helper text and descriptions for the severities and statuses used by your organization. The helper text and descriptions are customizable in [Incident Settings][2].
 
 ## From a monitor
 
@@ -32,7 +45,7 @@ Incidents created from a monitor will inherit [field values][10] from the monito
 Declare an incident directly from a Cloud SIEM or Workload Protection signal side panel, by clicking **Declare incident** or **Escalate Investigation**. For more information, see [Investigate Security Signals][3].
 
 Declare an incident from an App and API Protection signal through the actions listed in the signal side panel. Click **Show all actions** and click **Declare Incident**.
-For more information, see [Investigate Security Signals][4] for App and API Protection. 
+For more information, see [Investigate Security Signals][4] for App and API Protection.
 
 {{< img src="/service_management/incidents/declare/declare_asm.png" alt="Your image description" style="width:90%;" >}}
 
@@ -58,6 +71,10 @@ Use the [Datadog Clipboard][6] to gather multiple monitors and graphs and to gen
 
 {{< img src="service_management/incidents/declare/declare_clipboard.png" alt="Declare an incident from the Datadog Clipboard" style="width:90%;" >}}
 
+## From a Datadog On-Call page
+
+You can declare an incident directly from a [Datadog On-Call page][12]. From the [On-Call pages list][13], select a page and click **Declare Incident** to create an incident and automatically associate it with the relevant on-call team.
+
 ## From Slack
 
 If you have the [Datadog integration enabled on Slack][7], you can declare a new incident with the slash command `/datadog incident` from any Slack channel.
@@ -67,6 +84,21 @@ If the user declaring the incident connected their Slack to their Datadog accoun
 {{< img src="service_management/incidents/from-slack.png" alt="Create in incident from Slack" style="width:60%;">}}
 
 After you declare an incident from Slack, it generates an incident channel.
+
+## From Handoff Notifications
+
+The Handoff Notification displays callout cards when you are paged or added to active incidents. These cards allow you to:
+
+- View and acknowledge On-Call pages
+- Navigate to relevant incident resources
+- Preview Slack messages from incident channels
+- Take direct actions on incidents
+
+{{< img src="/service_management/incidents/declare/handoff_notification_card.png" alt="Handoff notification card showing incident details with options to view, acknowledge, and take actions" style="width:100%;" >}}
+
+Handoff Notificiation cards remain visible until dismissed or until the incident status changes. You can expand, collapse, or dismiss the entire handoff container rather than individual cards.
+
+You can declare an incident from individual Handoff Notification cards.
 
 ## What's next
 
@@ -85,3 +117,5 @@ After you declare an incident from Slack, it generates an incident channel.
 [9]: https://app.datadoghq.com/incidents/settings?section=global-settings
 [10]: /service_management/incident_management/incident_settings/property_fields
 [11]: /service_management/incident_management/incident_settings/notification_rules
+[12]: /service_management/on-call/
+[13]: https://app.datadoghq.com/on-call/pages

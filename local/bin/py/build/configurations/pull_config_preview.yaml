@@ -1,34 +1,5 @@
 ---
 - data:
-    - org_name: jenkinsci
-
-      repos:
-      - repo_name: datadog-plugin
-
-        contents:
-
-        - action: pull-and-push-file
-          branch: master
-          globs:
-          - README.md
-          options:
-            dest_path: '/integrations/'
-            file_name: 'jenkins.md'
-            front_matters:
-              dependencies: ["https://github.com/jenkinsci/datadog-plugin/blob/master/README.md"]
-              public_title: Datadog-Jenkins Integration
-              custom_kind: integration
-              name: jenkins
-              is_public: true
-              integration_title: Jenkins
-              has_logo: true
-              git_integration_title: jenkins
-              description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
-              short_description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
-              categories:
-                - "configuration & deployment"
-              doc_link: https://docs.datadoghq.com/integrations/jenkins/
-
     - org_name: ansible-collections
 
       repos:
@@ -74,6 +45,8 @@
           # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/azure_services.go
           - networks/model/domain/azure_services.go
 
+      # Some dogweb integrations are not migrated to APW yet, this is here for reviewing upstream changes locally.
+      # Please don't add this to pull_config.yaml / production.
       - repo_name: dogweb
 
         contents:
@@ -86,63 +59,6 @@
           - integration/*/service_checks.json
           - integration/*/README.md
           - integration/*/__init__.py
-
-      - repo_name: integrations-core
-        contents:
-
-        - action: integrations
-          branch: master
-          globs:
-          - "*/metadata.csv"
-          - "*/manifest.json"
-          - "*/assets/service_checks.json"
-          - "*/README.md"
-          - "*/datadog_checks/*/__about__.py"
-
-      - repo_name: integrations-extras
-        contents:
-
-        - action: integrations
-          branch: master
-          globs:
-          - "*/metadata.csv"
-          - "*/manifest.json"
-          - "*/assets/service_checks.json"
-          - "*/README.md"
-          - "*/datadog_checks/*/__about__.py"
-
-      - repo_name: integrations-internal-core
-        contents:
-
-        - action: integrations
-          branch: main
-          globs:
-          - "*/metadata.csv"
-          - "*/manifest.json"
-          - "*/assets/service_checks.json"
-          - "*/assets/metrics/metric-spec.yaml"
-          - "*/README.md"
-          - "*/datadog_checks/*/__about__.py"
-
-      # - repo_name: marketplace
-      #   contents:
-
-      #   - action: marketplace-integrations
-      #     branch: master
-      #     globs:
-      #     - "*/metadata.csv"
-      #     - "*/manifest.json"
-      #     - "*/assets/service_checks.json"
-      #     - "*/README.md"
-      #     - "*/images/*.png"
-      #     - "*/images/*.jpg"
-      #     - "*/images/*.jpeg"
-      #     - "*/images/*.svg"
-      #     options:
-      #       front_matters:
-      #         algolia:
-      #           subcategory: Marketplace Integrations
-
 
       - repo_name: ansible-datadog
         contents:
@@ -290,7 +206,7 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application/blob/main/README.md"]
               title: Continuous Testing and Bitrise
-      
+
       - repo_name: synthetics-test-automation-bitrise-step-run-tests
         contents:
         - action: pull-and-push-file
@@ -505,7 +421,7 @@
             file_name: 'agent_config.yaml'
             output_content: false
         - action: pull-and-push-folder
-          branch: 7.66.x
+          branch: 7.69.x
           globs:
           - 'docs/cloud-workload-security/agent_expressions.md'
           - 'docs/cloud-workload-security/backend_linux.md'
@@ -513,67 +429,8 @@
           - 'docs/cloud-workload-security/linux_expressions.md'
           - 'docs/cloud-workload-security/windows_expressions.md'
           options:
-            dest_dir: '/security/threats/'
+            dest_dir: '/security/workload_protection/'
             path_to_remove: 'docs/cloud-workload-security/'
-
-      - repo_name: dd-source
-        contents:
-        - action: pull-and-push-file
-          branch: main
-          globs:
-            - "domains/workflow/actionplatform/documentation/stable_bundles.json"
-          options:
-            base_path: ""
-            dest_path: "/data/"
-            file_name: "workflow_bundles.json"
-        - action: pull-and-push-file
-          branch: main
-          globs:
-            - "domains/cloud_platform/aws/libs/mappings/content/product_resource_types_permissions_cc.md"
-          options:
-            base_path: ""
-            dest_path: "/layouts/shortcodes/"
-            file_name: "aws-resource-collection-cloudcraft.md"
-        - action: pull-and-push-file
-          branch: main
-          globs:
-            - "domains/cloud_platform/aws/libs/mappings/content/product_resource_types_permissions_ccm.md"
-          options:
-            base_path: ""
-            dest_path: "/layouts/shortcodes/"
-            file_name: "aws-resource-collection-cloud-cost-management.md"
-        - action: pull-and-push-file
-          branch: main
-          globs:
-            - "domains/cloud_platform/aws/libs/mappings/content/product_resource_types_permissions_csm.md"
-          options:
-            base_path: ""
-            dest_path: "/layouts/shortcodes/"
-            file_name: "aws-resource-collection-cloud-security-monitoring.md"
-        - action: pull-and-push-file
-          branch: main
-          globs:
-            - "domains/cloud_platform/aws/libs/mappings/content/product_resource_types_permissions_npm.md"
-          options:
-            base_path: ""
-            dest_path: "/layouts/shortcodes/"
-            file_name: "aws-resource-collection-network-performance-monitoring.md"
-        - action: pull-and-push-file
-          branch: main
-          globs:
-            - "domains/cloud_platform/aws/libs/mappings/content/product_resource_types_permissions_rc.md"
-          options:
-            base_path: ""
-            dest_path: "/layouts/shortcodes/"
-            file_name: "aws-resource-collection-resource-catalog.md"
-        - action: pull-and-push-file
-          branch: main
-          globs:
-            - "domains/cloud_platform/aws/libs/mappings/content/aws_future_permissions.md"
-          options:
-            base_path: ""
-            dest_path: "/layouts/shortcodes/"
-            file_name: "aws-resource-collection-upcoming-permissions.md"
 
       - repo_name: web-ui
         contents:

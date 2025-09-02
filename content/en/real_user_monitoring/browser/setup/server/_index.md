@@ -1,5 +1,5 @@
 ---
-title: Browser Monitoring Auto-Instrumentation (Server-Side)
+title: Auto-Instrumentation
 beta: true
 code_lang: server
 type: multi-code-lang
@@ -17,40 +17,13 @@ further_reading:
 
 ## Overview
 
-RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy.
+RUM Auto-Instrumentation allows you to add RUM JS to your web app HTML. It works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. After auto-instrumentation is set up, you can manage configurations from the UI.
 
 ## Getting started
 
-### Remotely configure your RUM applications in Datadog
+Select a platform to start collecting RUM data on your application:
 
-Remotely manage your RUM application configurations directly from Datadog, after having them auto-instrumented with the RUM SDK.
-If you want to manage RUM configs in your web server files instead, see [Non-remote managed applications](#non-remote-managed-applications).
-
-The following configurations can be remotely managed:
-
-- Session sampling rate
-- Session Replay sampling rate
-- Session Replay privacy setting
-- Action name privacy setting
-- Environment (attribute)
-- Service name (attribute)
-
-To remotely configure your RUM application:
-
-1. Make sure you have [Remote Configuration][1] enabled in Datadog.
-1. In Datadog, navigate to the [**Digital Experience > Add an Application Page**][2] and select the JavaScript (JS) application type.
-1. Select **Auto-Instrumentation**.
-1. Configure all desired settings.
-1. Click **Save Changes**.
-1. Click the tab for your web server.
-1. Copy and run the command shown.
-1. Restart your web server.
-
-### Non-remote managed applications
-
-<div class="alert alert-warning">To request support for a web server that is not listed here, <a href="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/">fill out this form.</a></div>
-
-If you don't want to configure your RUM applications remotely, follow the documentation for your web server type to configure your RUM application locally:
+<div class="alert alert-info">To request support for a web server that is not listed here, <a href="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/">fill out this form.</a></div>
 
 <br>
 {{< partial name="rum/rum-browser-setup.html" >}}
@@ -58,9 +31,9 @@ If you don't want to configure your RUM applications remotely, follow the docume
 
 ## Limitations
 
-Keep in mind the following limitations when using this setup:
+Keep in mind the following limitations when using auto-instrumentation:
 
-- This instrumentation method **does not support [advanced RUM configurations][1]**, except for `allowedTracingUrls` and `excludedActivityUrls`.
+- This instrumentation method **does not support [advanced RUM configurations][1]**.
 - If your web server is acting as a proxy and the upstream server uses **end-to-end encryption (TLS)** or **content compression** (gzip, zstd, Brotli), the RUM Browser SDK **cannot be injected**. To ensure proper instrumentation:
   - **Disable content compression** on the upstream server.
   - **Enable TLS origination** on the web server.
@@ -69,5 +42,4 @@ Keep in mind the following limitations when using this setup:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/remote_config/
-[2]: https://app.datadoghq.com/rum/list
+[1]: /real_user_monitoring/browser/advanced_configuration/

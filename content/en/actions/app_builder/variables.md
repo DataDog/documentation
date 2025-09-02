@@ -13,10 +13,6 @@ further_reading:
   text: "JavaScript Expressions"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 If you want to encapsulate logic within your app, you can use state variables.
 
 ## Create a state variable

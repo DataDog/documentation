@@ -13,12 +13,11 @@ further_reading:
 - link: "/service_management/app_builder/expressions/"
   tag: "Documentation"
   text: "JavaScript Expressions"
+- link: "https://learn.datadoghq.com/courses/app-builder-integration"
+  tag: "Learning Center"
+  text: "Build Self-Serve Apps with App Builder for Third-Party Integrations"
 
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 This page provides a list of UI components that you can use when creating apps in App Builder.
 

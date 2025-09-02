@@ -354,6 +354,12 @@ To filter pipeline executions by tags, use the search bar or facet checkboxes. T
 {{% /tab %}}
 {{< /tabs >}}
 
+## DORA Metrics
+
+The [DORA Metrics Explorer][33] displays your DORA Metrics aggregations. To filter the displayed metrics and aggregations by tags, use the `+ Filter` button to add facets for existing tags. For querying with tags in graphs and dashboards, see [DORA Metrics Create Custom Dashboards][34].
+
+{{< img src="/dora_metrics/dora_ui_3.png" alt="An overview of DORA Metrics calculations filtered by the Language custom tag" style="width:80%;">}}
+
 ## Developers
 
 Tags can be used in various ways with the [API][17].
@@ -411,3 +417,5 @@ See this list for links to respective sections:
 [30]: /monitors/manage/#monitor-tags
 [31]: /monitors/downtimes/
 [32]: /getting_started/tagging/assigning_tags?tab=monitors
+[33]: https://app.datadoghq.com/ci/dora
+[34]: /dora_metrics/#create-custom-dashboards

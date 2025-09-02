@@ -7,10 +7,8 @@ further_reading:
 - link: "watchdog/faulty_deployment_detection/"
   tag: "Documentation"
   text: "Learn about Watchdog Faulty Service Deployment Detections"
+site_support_id: watchdog_faulty_service_deployment
 ---
-{{< site-region region="us3,us5,eu,ap1,gov" >}}
-<div class="alert alert-warning">Watchdog Faulty Service Deployment Detections are not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -20,12 +18,11 @@ When Watchdog identifies that an external provider you are using is faulty, it f
 
 {{< img src="watchdog/external_provider_outage.png" alt="Faulty SaaS API vendor detection" >}}
 
-Whenever a faulty deployment is detected, Watchdog creates an event in the [Event Explorer][1]. You can set up a monitor to get automatically notified on such events:
+Whenever Watchdog detects a provider degradation, it creates an event in the [Event Explorer][1]. You can set up a monitor to get automatically notified on such events:
 
 1. Go to the [New Monitor][2] page.
 2. Choose **Watchdog**.
 3. Select `Third Party` in the alert category.
-
 
 ## Supported providers
 Watchdog monitors the status of the following external providers' APIs: 
@@ -44,7 +41,6 @@ Watchdog monitors the status of the following external providers' APIs:
 | Envoy | api.envoy.com |
 | Facebook | graph.facebook.com |
 | GitHub | api.github.com |
-| Google | developers.google.com |
 | Hubspot | api.hubspot.com |
 | Intercom | api.intercom.io |
 | Mapbox | api.mapbox.com |

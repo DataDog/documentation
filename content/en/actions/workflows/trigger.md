@@ -10,7 +10,7 @@ further_reading:
 - link: "/getting_started/workflow_automation/"
   tag: "Documentation"
   text: "Getting Started with Workflow Automation"
-- link: "/service_management/workflows/access/#service-accounts/"
+- link: "/actions/workflows/access_and_auth/#use-a-service-account"
   tag: "Documentation"
   text: "Find out more about Service Accounts for workflows"
 - link: "dashboards"
@@ -26,10 +26,6 @@ further_reading:
   tag: "Documentation"
   text: "Automate Security Workflows with Workflow Automation"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 You can trigger a workflow manually or automatically and a workflow can have multiple triggers. This allows you to trigger a workflow from a variety of different sources, like a Datadog monitor and a Datadog dashboard.
 
@@ -277,7 +273,7 @@ After you trigger a workflow, the workflow page switches to the workflow's **Run
 
 <br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][7].
 
-[1]: /service_management/workflows/access/#use-a-service-account
+[1]: /actions/workflows/access_and_auth/#use-a-service-account
 [2]: https://app.datadoghq.com/monitors/manage
 [3]: https://app.datadoghq.com/security/configuration/notification-rules
 [4]: /security/cloud_security_management/workflows

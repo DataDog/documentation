@@ -17,11 +17,8 @@ further_reading:
   tag: GitHub
   text: Datadog CI モニターによるパイプラインアラートの構成
 title: CI モニター
+site_support_id: ci_visibility
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
-{{< /site-region >}}
 
 ## 概要
 

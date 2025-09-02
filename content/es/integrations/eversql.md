@@ -10,7 +10,7 @@ author:
 categories:
 - automatización
 - almacenes de datos
-- herramientas para desarrolladores
+- herramientas de desarrollo
 custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/eversql/README.md
@@ -33,14 +33,14 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Automation
-  - Categoría::Almacenes de datos
-  - Category::Developer Tools
+  - Categoría::Automatización
+  - Category::Data Stores
+  - Categoría::Herramientas de desarrollo
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
   - Offering::Integration
-  configuration: README.md#Setup
+  configuration: README.md#Configuración
   description: Ajuste automático de SQL y de las bases de datos para MySQL, PostgreSQL
     y Aurora
   media:
@@ -56,8 +56,8 @@ tile:
   - caption: Sistemas operativos compatibles con EverSQL
     image_url: images/4.png
     media_type: imagen
-  overview: README.md#Overview
-  support: README.md#Support
+  overview: README.md#Información general
+  support: README.md#Soporte
   title: 'EverSQL: Ajuste de las bases de datos'
 ---
 
@@ -102,7 +102,7 @@ EverSQL no incluye checks de servicio.
 
 EverSQL no incluye eventos.
 
-## Ayuda
+## Soporte
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de EverSQL][5].
 

@@ -133,7 +133,7 @@ API Gateway 로깅 활성화 방법:
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_api_gateway" >}}
+{{< get-metrics-from-git "amazon-api-gateway" >}}
 
 
 

@@ -57,7 +57,7 @@
   },
   "csm-threats": {
     "name": "CSM Threats",
-    "description": "Cloud Security Management Threats (CSM Threats) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. See [Cloud Security Management Threats](https://docs.datadoghq.com/security/threats/) for more information on setting up CSM Threats."
+    "description": "Workload Protection monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. See [Workload Protection](https://docs.datadoghq.com/security/workload_protection/) for more information on setting up Workload Protection.\n\n**Note**: These endpoints are split based on whether you are using the US1-FED site or not. Please reference the specific resource for the site you are using."
   },
   "case-management": {
     "name": "Case Management",
@@ -65,11 +65,11 @@
   },
   "cloud-cost-management": {
     "name": "Cloud Cost Management",
-    "description": "The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS and Azure. You can query your cost data by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products) and the `cloud_cost` data source. For more information, see the [Cloud Cost Management documentation](https://docs.datadoghq.com/cloud_cost_management/)."
+    "description": "The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS, Azure, and GCP. You can query your cost data by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products) and the `cloud_cost` data source. For more information, see the [Cloud Cost Management documentation](https://docs.datadoghq.com/cloud_cost_management/)."
   },
   "cloud-network-monitoring": {
     "name": "Cloud Network Monitoring",
-    "description": "The Cloud Network Monitoring API allows you to fetch aggregated connections and their attributes. See the [Cloud Network Monitoring page](https://docs.datadoghq.com/network_monitoring/cloud_network_monitoring/) for more information."
+    "description": "The Cloud Network Monitoring API allows you to fetch aggregated connections and DNS traffic with their attributes. See the [Cloud Network Monitoring page](https://docs.datadoghq.com/network_monitoring/cloud_network_monitoring/) and [DNS Monitoring page](https://docs.datadoghq.com/network_monitoring/dns/) for more information."
   },
   "cloudflare-integration": {
     "name": "Cloudflare Integration",
@@ -89,11 +89,15 @@
   },
   "dora-metrics": {
     "name": "DORA Metrics",
-    "description": "Send events for DORA Metrics to measure and improve software delivery. See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/) for more information."
+    "description": "Search or send events for DORA Metrics to measure and improve your software delivery performance. See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/) for more information.\n\n**Note**: DORA Metrics are not available in the US1-FED site."
   },
   "dashboard-lists": {
     "name": "Dashboard Lists",
     "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization."
+  },
+  "datasets": {
+    "name": "Datasets",
+    "description": "Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate\naccess to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can\nview certain types of telemetry (for example, logs, traces, metrics, and RUM data)."
   },
   "domain-allowlist": {
     "name": "Domain Allowlist",
@@ -102,6 +106,10 @@
   "downtimes": {
     "name": "Downtimes",
     "description": "**Note**: Downtime V2 is currently in private beta. To request access, contact [Datadog support](https://docs.datadoghq.com/help/).\n\n[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes) gives\nyou greater control over monitor notifications by allowing you to globally exclude\nscopes from alerting. Downtime settings, which can be scheduled with start and\nend times, prevent all alerting related to specified Datadog tags."
+  },
+  "error-tracking": {
+    "name": "Error Tracking",
+    "description": "View and manage issues within Error Tracking. See the [Error Tracking page](https://docs.datadoghq.com/error_tracking/) for more information."
   },
   "events": {
     "name": "Events",
@@ -133,7 +141,7 @@
   },
   "key-management": {
     "name": "Key Management",
-    "description": "Manage your Datadog API and application keys. You need an API key and\nan application key for a user with the required permissions to interact\nwith these endpoints. The full list of API and application keys can be\nseen on your [Datadog API page](https://app.datadoghq.com/account/settings#api)."
+    "description": "Manage your Datadog API and application keys. You need an API key and an\napplication key for a user with the required permissions to interact with these endpoints.\n\nConsult the following pages to view and manage your keys:\n\n- [API Keys](https://app.datadoghq.com/organization-settings/api-keys)\n- [Application Keys](https://app.datadoghq.com/personal-settings/application-keys)"
   },
   "logs": {
     "name": "Logs",
@@ -182,6 +190,10 @@
   "on-call": {
     "name": "On-Call",
     "description": "Configure your [Datadog On-Call](https://docs.datadoghq.com/service_management/on-call/)\ndirectly through the Datadog API."
+  },
+  "on-call-paging": {
+    "name": "On-Call Paging",
+    "description": "Trigger and manage [Datadog On-Call](https://docs.datadoghq.com/service_management/on-call/)\npages directly through the Datadog API."
   },
   "opsgenie-integration": {
     "name": "Opsgenie Integration",
@@ -250,6 +262,10 @@
   "software-catalog": {
     "name": "Software Catalog",
     "description": "API to create, update, retrieve, and delete Software Catalog entities."
+  },
+  "spa": {
+    "name": "Spa",
+    "description": "SPA (Spark Pod Autosizing) API. Provides resource recommendations and cost insights to help optimize Spark job configurations."
   },
   "spans": {
     "name": "Spans",

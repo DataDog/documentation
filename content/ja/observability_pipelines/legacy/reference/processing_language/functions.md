@@ -4,10 +4,6 @@ aliases:
 title: (レガシー) 関数
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines は、US1-FED Datadog サイトではご利用いただけません。</div>
-{{< /site-region >}}
-
 Datadog Processing Language (DPL)、または Vector Remap Language (VRL) には、データを変換するための関数が組み込まれています。
 
 {{< whatsnext desc="関数は以下のカテゴリーに分類されています。" >}}

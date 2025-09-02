@@ -88,7 +88,7 @@ Google Firebase 로그는 Google Cloud Logging으로 수집하여 클라우드 P
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_cloud_firebase" >}}
+{{< get-metrics-from-git "google-cloud-firebase" >}}
 
 
 ### 이벤트

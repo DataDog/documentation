@@ -1,7 +1,6 @@
 ---
 title: Azure Automated Log Forwarding Architecture and Configuration
 description: "Guide to architecture and configuration of the Datadog Azure integration automated log forwarding setup"
-private: true
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/azure/"
   tag: "Documentation"
@@ -34,7 +33,7 @@ This setup supports forwarding of any logs available through diagnostic settings
 
 ### High-level architecture
 
-{{<img src="/logs/guide/azure_automated_logs_architecture/high_level_architecture.png" alt="A high-level representation of the automated log forwarding setup" style="width:100%">}}
+{{<img src="/logs/guide/azure_automated_logs_architecture/high_level_architecture_06-13-2025.png" alt="A high-level representation of the automated log forwarding setup" style="width:100%">}}
 
 The deployment template sets up a [control plane](#control-plane) and [log forwarders](#log-forwarders) in your selected subscriptions.
 

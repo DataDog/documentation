@@ -6,8 +6,8 @@ aliases:
 further_reading:
 - link: "/security/application_security/terms"
   tag: "Documentation"
-  text: "Application Security terms and concepts"
-- link: "/security/application_security/how-appsec-works"
+  text: "App and API Protection terms and concepts"
+- link: "/security/application_security/how-it-works"
   tag: "Documentation"
   text: "How App and API Protection works"
 - link: "https://dtdg.co/fe"
@@ -44,7 +44,7 @@ These security insights are detected from data reported by APM. The insights hel
 ## Enable AAP
 
 ### Enable AAP with in-app instructions
-- To enable Threat Management in-app, navigate to [**Application Security > Setup**][29].
+- To enable App and API Protection in-app, navigate to [**App and API Protection > Setup**][29].
 - To enable Code Security in-app, navigate to [**Code Security > Setup**][29].
 
 
@@ -54,7 +54,7 @@ These security insights are detected from data reported by APM. The insights hel
 - Restarting your services. </br>
 
 1. Click **Get Started with AAP**.
-2. Select **Get Started** to detect vulnerabilities in open-source libraries (Software Composition Analysis), find and fix code-level vulnerabilities (Runtime Code Analysis), and find and enable threat detection on your services (Threat Management).
+2. Select **Get Started** to detect vulnerabilities in open-source libraries (Software Composition Analysis), find and fix code-level vulnerabilities (Runtime Code Analysis), and find and enable threat detection on your services (App and API Protection).
 3. Follow the instructions to get started with AAP.
 
    {{< img src="getting_started/appsec/asm_sca_setup.png" alt="Software Composition Analysis setup page." style="width:100%;" >}} -->
@@ -71,7 +71,7 @@ These security insights are detected from data reported by APM. The insights hel
   2. Add Remote Configuration capability to an existing API key, or create a new one.
   3. Update your Datadog Agent configuration to use the API key with Remote Configuration capability.
 
-  See [Setting up Remote Configuration][21] for more information.
+  See [Setting up Remote Configuration][15] for more information.
 
 ### Test AAP
 Once enabled, AAP immediately identifies application vulnerabilities and detects attacks and attackers targeting your services.
@@ -100,6 +100,8 @@ For information on disabling AAP or its related capabilities, see the following:
 
 ## Reports and notifications
 
+{{% sec-hipaa-limits %}}
+
 1. Set up [notification rules][23] to receive alerts using Slack, Jira, email, and more.
 2. Subscribe to the weekly [threat digest][22] reports to begin investigation and remediation of the most important security threats discovered in the last seven days. 
 
@@ -110,8 +112,8 @@ For information on disabling AAP or its related capabilities, see the following:
 [1]: https://app.datadoghq.com/services?&lens=Security
 [2]: https://app.datadoghq.com/services?hostGroup=%2A&lens=Security
 [3]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header
-[4]: /security/application_security/how-appsec-works/
-[5]: /security/application_security/threats/add-user-info/
+[4]: /security/application_security/how-it-works/
+[5]: /security/application_security/how-it-works/add-user-info/
 [6]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&view=signal&viz=stream&start=1674824351640&end=1675429151640&paused=false
 [7]: https://app.datadoghq.com/security/appsec
 [8]: https://app.datadoghq.com/security/appsec/traces
@@ -121,11 +123,10 @@ For information on disabling AAP or its related capabilities, see the following:
 [12]: /security/notifications/rules/
 [13]: /security/application_security/risk_management
 [14]: https://app.datadoghq.com/security/appsec/vm?&group=vulnerability
-[15]: https://docs.datadoghq.com/agent/guide/how_remote_config_works/?tab=configurationyamlfile#overview
+[15]: /tracing/guide/remote_config
 [17]: https://app.datadoghq.com/organization-settings/remote-config
 [18]: https://app.datadoghq.com/security/appsec/landing
 [20]: /getting_started/application_security/#setup-asm
-[21]: /agent/remote_config?tab=configurationyamlfile#setup
 [22]: https://app.datadoghq.com/security/configuration/reports
 [23]: https://app.datadoghq.com/security/configuration/notification-rules
 [24]: /security/application_security/troubleshooting/#disabling-threat-management-and-protection

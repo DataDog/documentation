@@ -200,32 +200,44 @@
       "description": "Search tests events returns \"OK\" response with pagination"
     }
   ],
-  "CreateCSMThreatsAgentRule": [
-    {
-      "group": "csm_threats",
-      "suffix": "",
-      "description": "Create a CSM Threats Agent rule returns \"OK\" response"
-    }
-  ],
   "CreateCloudWorkloadSecurityAgentRule": [
     {
       "group": "csm_threats",
       "suffix": "",
-      "description": "Create a Cloud Workload Security Agent rule returns \"OK\" response"
+      "description": "Create a Workload Protection agent rule (US1-FED) returns \"OK\" response"
     }
   ],
-  "UpdateCSMThreatsAgentRule": [
+  "CreateCSMThreatsAgentRule": [
     {
       "group": "csm_threats",
       "suffix": "",
-      "description": "Update a CSM Threats Agent rule returns \"OK\" response"
+      "description": "Create a Workload Protection agent rule returns \"OK\" response"
+    },
+    {
+      "group": "csm_threats",
+      "suffix": "_1295653933",
+      "description": "Create a Workload Protection agent rule with set action returns \"OK\" response"
+    }
+  ],
+  "CreateCSMThreatsAgentPolicy": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Create a Workload Protection policy returns \"OK\" response"
     }
   ],
   "UpdateCloudWorkloadSecurityAgentRule": [
     {
       "group": "csm_threats",
       "suffix": "",
-      "description": "Update a Cloud Workload Security Agent rule returns \"OK\" response"
+      "description": "Update a Workload Protection agent rule (US1-FED) returns \"OK\" response"
+    }
+  ],
+  "UpdateCSMThreatsAgentPolicy": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Update a Workload Protection policy returns \"OK\" response"
     }
   ],
   "ArchiveCase": [
@@ -263,6 +275,13 @@
       "description": "Unassign case returns \"OK\" response"
     }
   ],
+  "UpdateAttributes": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Update case attributes returns \"OK\" response"
+    }
+  ],
   "UpdatePriority": [
     {
       "group": "case_management",
@@ -291,6 +310,13 @@
       "description": "Create Cloud Cost Management Azure configs returns \"OK\" response"
     }
   ],
+  "CreateCostGCPUsageCostConfig": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Create Cloud Cost Management GCP Usage Cost config returns \"OK\" response"
+    }
+  ],
   "UpdateCostAWSCURConfig": [
     {
       "group": "cloud_cost_management",
@@ -303,6 +329,13 @@
       "group": "cloud_cost_management",
       "suffix": "",
       "description": "Update Cloud Cost Management Azure config returns \"OK\" response"
+    }
+  ],
+  "UpdateCostGCPUsageCostConfig": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Update Cloud Cost Management GCP Usage Cost config returns \"OK\" response"
     }
   ],
   "UploadCustomCostsFile": [
@@ -350,8 +383,8 @@
   "CreateDORAIncident": [
     {
       "group": "dora_metrics",
-      "suffix": "",
-      "description": "Send an incident event for DORA Metrics returns \"OK\" response"
+      "suffix": "_1768887482",
+      "description": "Send a failure event for DORA Metrics returns \"OK\" response"
     }
   ],
   "CreateDashboardListItems": [
@@ -392,6 +425,20 @@
       "description": "Creates a data deletion request returns \"OK\" response"
     }
   ],
+  "CreateDataset": [
+    {
+      "group": "datasets",
+      "suffix": "",
+      "description": "Create a dataset returns \"OK\" response"
+    }
+  ],
+  "UpdateDataset": [
+    {
+      "group": "datasets",
+      "suffix": "",
+      "description": "Edit a dataset returns \"OK\" response"
+    }
+  ],
   "PatchDomainAllowlist": [
     {
       "group": "domain_allowlist",
@@ -411,6 +458,34 @@
       "group": "downtimes",
       "suffix": "",
       "description": "Update a downtime returns \"OK\" response"
+    }
+  ],
+  "SearchIssues": [
+    {
+      "group": "error_tracking",
+      "suffix": "",
+      "description": "Search error tracking issues returns \"OK\" response"
+    }
+  ],
+  "UpdateIssueAssignee": [
+    {
+      "group": "error_tracking",
+      "suffix": "",
+      "description": "Update the assignee of an issue returns \"OK\" response"
+    }
+  ],
+  "UpdateIssueState": [
+    {
+      "group": "error_tracking",
+      "suffix": "",
+      "description": "Update the state of an issue returns \"OK\" response"
+    }
+  ],
+  "CreateEvent": [
+    {
+      "group": "events",
+      "suffix": "",
+      "description": "Post an event returns \"OK\" response"
     }
   ],
   "SearchEvents": [
@@ -702,6 +777,11 @@
     },
     {
       "group": "logs_custom_destinations",
+      "suffix": "_1735989579",
+      "description": "Create a Microsoft Sentinel custom destination returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
       "suffix": "_1288180912",
       "description": "Create a Splunk custom destination returns \"OK\" response"
     },
@@ -826,6 +906,13 @@
       "description": "Create a monitor notification rule returns \"OK\" response"
     }
   ],
+  "CreateMonitorUserTemplate": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Create a monitor user template returns \"OK\" response"
+    }
+  ],
   "UpdateMonitorConfigPolicy": [
     {
       "group": "monitors",
@@ -838,6 +925,27 @@
       "group": "monitors",
       "suffix": "",
       "description": "Update a monitor notification rule returns \"OK\" response"
+    }
+  ],
+  "UpdateMonitorUserTemplate": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Update a monitor user template to a new version returns \"OK\" response"
+    }
+  ],
+  "ValidateMonitorUserTemplate": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Validate a monitor user template returns \"OK\" response"
+    }
+  ],
+  "ValidateExistingMonitorUserTemplate": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Validate an existing monitor user template returns \"OK\" response"
     }
   ],
   "UpdateDeviceUserTags": [
@@ -886,35 +994,35 @@
     {
       "group": "on-call",
       "suffix": "",
-      "description": "Create on-call escalation policy returns \"Created\" response"
+      "description": "Create On-Call escalation policy returns \"Created\" response"
     }
   ],
   "CreateOnCallSchedule": [
     {
       "group": "on-call",
       "suffix": "",
-      "description": "Create on-call schedule returns \"Created\" response"
+      "description": "Create On-Call schedule returns \"Created\" response"
     }
   ],
   "SetOnCallTeamRoutingRules": [
     {
       "group": "on-call",
       "suffix": "",
-      "description": "Set on-call team routing rules returns \"OK\" response"
+      "description": "Set On-Call team routing rules returns \"OK\" response"
     }
   ],
   "UpdateOnCallEscalationPolicy": [
     {
       "group": "on-call",
       "suffix": "",
-      "description": "Update on-call escalation policy returns \"OK\" response"
+      "description": "Update On-Call escalation policy returns \"OK\" response"
     }
   ],
   "UpdateOnCallSchedule": [
     {
       "group": "on-call",
       "suffix": "",
-      "description": "Update on-call schedule returns \"OK\" response"
+      "description": "Update On-Call schedule returns \"OK\" response"
     }
   ],
   "CreateOpsgenieService": [
@@ -964,6 +1072,11 @@
       "group": "rum",
       "suffix": "",
       "description": "Create a new RUM application returns \"OK\" response"
+    },
+    {
+      "group": "rum",
+      "suffix": "_1946294560",
+      "description": "Create a new RUM application with Product Scales returns \"OK\" response"
     }
   ],
   "SearchRUMEvents": [
@@ -983,6 +1096,11 @@
       "group": "rum",
       "suffix": "",
       "description": "Update a RUM application returns \"OK\" response"
+    },
+    {
+      "group": "rum",
+      "suffix": "_394074053",
+      "description": "Update a RUM application with Product Scales returns \"OK\" response"
     }
   ],
   "UpdateRestrictionPolicy": [
@@ -1125,6 +1243,11 @@
       "group": "security_monitoring",
       "suffix": "_498211763",
       "description": "Create a detection rule with type 'workload_security' returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_868881438",
+      "description": "Create a scheduled detection rule returns \"OK\" response"
     }
   ],
   "CreateCustomFramework": [
@@ -1172,6 +1295,13 @@
       "group": "security_monitoring",
       "suffix": "_1309350146",
       "description": "Get a list of security signals returns \"OK\" response with pagination"
+    }
+  ],
+  "GetSuppressionsAffectingFutureRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Get suppressions affecting future rule returns \"OK\" response"
     }
   ],
   "EditSecurityMonitoringSignalAssignee": [
@@ -1249,6 +1379,13 @@
       "description": "Update a suppression rule returns \"OK\" response"
     }
   ],
+  "UpdateResourceEvaluationFilters": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update resource filters returns \"OK\" response"
+    }
+  ],
   "ValidateSecurityMonitoringRule": [
     {
       "group": "security_monitoring",
@@ -1268,6 +1405,11 @@
       "group": "sensitive_data_scanner",
       "suffix": "",
       "description": "Create Scanning Rule returns \"OK\" response"
+    },
+    {
+      "group": "sensitive_data_scanner",
+      "suffix": "_502667299",
+      "description": "Create Scanning Rule with should_save_match returns \"OK\" response"
     }
   ],
   "DeleteScanningGroup": [
@@ -1369,6 +1511,13 @@
       "description": "Create outcomes batch returns \"OK\" response"
     }
   ],
+  "UpdateScorecardOutcomesAsync": [
+    {
+      "group": "service_scorecards",
+      "suffix": "",
+      "description": "Update Scorecard outcomes asynchronously returns \"Accepted\" response"
+    }
+  ],
   "UpdateScorecardRule": [
     {
       "group": "service_scorecards",
@@ -1440,6 +1589,13 @@
       "group": "teams",
       "suffix": "_252121814",
       "description": "Create a team with V2 fields returns \"CREATED\" response"
+    }
+  ],
+  "SyncTeams": [
+    {
+      "group": "teams",
+      "suffix": "_3215592344",
+      "description": "Sync teams returns \"OK\" response"
     }
   ],
   "UpdateTeamLink": [

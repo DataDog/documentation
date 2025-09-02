@@ -24,6 +24,10 @@ If you can't see any RUM data or if data is missing for some users:
 
 Read the [Content Security Policy guidelines][5] and ensure your website grants access to the RUM Browser SDK CDN and the intake endpoint.
 
+## Issues running multiple RUM tools in the same application
+
+Datadog supports only one SDK per application. To ensure optimal data collection and full functionality of all Datadog RUM SDK features, use only the Datadog RUM SDK.
+
 ### The RUM Browser SDK is initialized
 
 Check if the RUM Browser SDK is initialized by running `window.DD_RUM.getInternalContext()` in your browser console and verify an `application_id`, `session_id`, and view object are returned:
@@ -48,9 +52,9 @@ The RUM SDK sends batches of event data to Datadog's intake every time one of th
 - When the payload is >16 kB
 - On `visibility:hidden` or `beforeUnload`
 
-If data is being sent, you should see network requests targeting `/v1/input` (the URL origin part may differ due to RUM configuration) in the Network section of your browser developer tools:
+If data is being sent, you should see network requests targeting `api/v2/rum` (the URL origin part may differ due to RUM configuration) in the Network section of your browser developer tools:
 
-{{< img src="real_user_monitoring/browser/troubleshooting/network_intake.png" alt="RUM requests to Datadog intake">}}
+{{< img src="real_user_monitoring/browser/troubleshooting/network_intake-1.png" alt="RUM requests to Datadog intake">}}
 
 ## RUM cookies
 

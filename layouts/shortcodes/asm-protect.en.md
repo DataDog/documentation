@@ -15,4 +15,4 @@ To start leveraging Protection capabilities---In-App WAF, IP blocking, User bloc
 
 [107]: /tracing/trace_collection/dd_libraries/
 [108]: /agent/guide/how_remote_config_works/
-[109]: /security/application_security/threats/protection
+[109]: /security/application_security/

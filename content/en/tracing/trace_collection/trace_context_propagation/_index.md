@@ -51,6 +51,14 @@ Use the following environment variables to configure formats for reading and wri
 : Specifies trace context propagation formats for both extraction and injection (comma-separated list). Lowest precedence; ignored if any other Datadog trace context propagation environment variable is set.<br>
 **Note**: Only use this configuration when migrating an application from the OpenTelemetry SDK to the Datadog SDK. For more information on this configuration and other OpenTelemetry environment variables, see [Using OpenTelemetry Environment Variables with Datadog SDKs][9].
 
+`DD_TRACE_PROPAGATION_BEHAVIOR_EXTRACT`
+: Specifies how incoming distributed tracing headers should be handled at a service level. Accepted values are:<br>
+`continue`: The SDK will continue the distributed trace if the incoming distributed tracing headers represent a valid trace context.<br>
+`restart`: The SDK will always start a new trace. If the incoming distributed tracing headers represent a valid trace context, that trace context will be represented as a span link on service entry spans (as opposed to the parent span in the `continue` configuration).<br>
+`ignore`: The SDK will always start a new trace and all incoming distributed tracing headers are ignored.<br>
+**Default**: `continue` <br>
+**Note**: This is only implemented in the .NET, Node.js, Python, and Java libraries.
+
 ### Advanced configuration
 
 Most services send and receive trace context headers using the same format. However, if your service needs to accept trace context headers in one format and send them in another, use these configurations:
@@ -641,9 +649,12 @@ When the Datadog SDK is configured with the None format for extraction or inject
 
 ### Baggage
 
-_Currently available in Python, Ruby, PHP, Java, Node.js, C++, Go and .NET. For other languages, please reach out to [Support][11]_ 
-
 By default, Baggage is automatically propagated through a distributed request using OpenTelemetry's [W3C-compatible headers][10]. To disable baggage, set [DD_TRACE_PROPAGATION_STYLE][12] to `datadog,tracecontext`.
+
+#### Adding baggage as span tags
+_Available in Python, PHP, Node.js, Go, .NET, Ruby, and Java. For other languages, reach out to [Support][11]_ 
+
+By default, `user.id,session.id,account.id` baggage keys are added as span tags. To customize this configuration, see [Context Propagation Configuration][13]. Specified baggage keys are automatically added as span tags `baggage.<key>` (for example, `baggage.user.id`).
 
 ## Further reading
 
@@ -661,3 +672,4 @@ By default, Baggage is automatically propagated through a distributed request us
 [10]: https://www.w3.org/TR/baggage/
 [11]: /help
 [12]: #customize-trace-context-propagation
+[13]: /tracing/trace_collection/library_config#context-propagation

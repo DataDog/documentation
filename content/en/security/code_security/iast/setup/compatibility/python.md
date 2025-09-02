@@ -8,15 +8,15 @@ code_lang_weight: 50
 
 The following application security capabilities are supported in the Python library, for the specified tracer version:
 
-| Application Security capability  | Minimum Python tracer version |
-| -------------------------------- | ----------------------------|
-| Threat Detection | 1.9.0   |
-| Threat Protection | 1.10.0  |
-| Customize response to blocked requests | 1.19.0 |
-| Software Composition Analysis (SCA) | 1.5.0  |
-| Code Security         | Preview (2.9.3)  |
-| Automatic user activity event tracking | 1.17.0 |
-| API Security | 2.6.0 |
+| Application Security capability        | Minimum Python tracer version |
+|----------------------------------------|-------------------------------|
+| Threat Detection                       | `1.9.0`                       |
+| Threat Protection                      | `1.10.0`                      |
+| Customize response to blocked requests | `1.19.0`                      |
+| Software Composition Analysis (SCA)    | `1.5.0`                       |
+| Code Security                          | Preview (`>=2.21.0`)          |
+| Automatic user activity event tracking | `1.17.0`                      |
+| API Security                           | `2.6.0`                       |
 
 **Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
@@ -38,18 +38,11 @@ The Python Application Security Client library follows a [versioning policy][3] 
 
 Two release branches are supported:
 
-| Release    | Support level        |
-|------------|----------------------|
-| `<1`       | Maintenance           |
-| `>=1.0,<2` | General Availability |
+{{< partial name="trace_collection/python/supported_versions.html" >}}
 
 And the library supports the following runtimes:
 
-| OS      | CPU                   | Runtime | Runtime version | Support ddtrace versions |
-|---------|-----------------------|---------|-----------------|--------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                     |
+{{< partial name="trace_collection/python/supported_runtimes.html" >}}
 
 
 ### Web framework compatibility
@@ -64,10 +57,11 @@ And the library supports the following runtimes:
 ### Supported frameworks
 
 
-| Framework                | Versions    | Threat Detection supported? | Threat Protection supported? |
-| ------------------------ | ----------- | --------------- | ---------------------------------------------- |
-| Django    | 1.8   |  {{< X >}} | {{< X >}}  |
-| Flask     | 0.10  |  {{< X >}} | {{< X >}}  |
+| Framework  | Versions | Threat Detection supported? | Threat Protection supported? |
+|------------|----------|-----------------------------|------------------------------|
+| Django     | `1.8`    | {{< X >}}                   | {{< X >}}                    |
+| FastAPI    | `0.86`   | {{< X >}}                   | {{< X >}}                    |
+| Flask      | `0.10`   | {{< X >}}                   | {{< X >}}                    |
 
 Support for query strings is not available for Flask.
 
@@ -95,12 +89,12 @@ The Python library supports the [database API specifications][4] and supports al
 - User login events, including the user IDs
 - Account Takeover detection monitoring for user login events
 
-| Framework         | Framework Versions   |
-|-------------------| --------------------------- |
-| Django            | 1.11, 2.2, 3.2, >= 4.0
+| Framework         | Framework Versions              |
+|-------------------|---------------------------------|
+| Django            | `1.11`, `2.2`, `3.2`, `>=4.0`   |
 
 [1]: /tracing/trace_collection/compatibility/python/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[2]: /tracing/guide/remote_config/
 [3]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [4]: https://peps.python.org/pep-0249/
 

@@ -19,7 +19,7 @@ algolia:
 
 Metrics without Limits™ provides you flexibility and control over your custom metrics volumes by decoupling custom metric ingestion and indexing. You only pay for custom metric tags that are valuable to your organization.
 
-Metrics without Limits™ provides you with the ability to configure tags on all metric types in-app. You can also customize aggregations on counts, rates, and gauges without having to re-deploy or change any code. With Metrics without Limits™, you can configure an allowlist of tags in-app to remain queryable throughout the Datadog platform; this automatically drops nonessential tags attached to application-level or business metrics (for example, `host`). Alternatively, you can configure a blocklist of tags in-app to quickly drop and exclude tags; this automatically retains remaining essential tags that provide business value to your teams. These configuration functionalities are located in the [Metrics Summary][1] page.
+Metrics without Limits™ lets you configure tags on all metric types in-app by selecting an allowlist of tags to remain queryable throughout Datadog; this automatically drops nonessential tags attached to application-level or business metrics (for example, `host`). Alternatively, you can configure a blocklist of tags in-app to drop and exclude tags; this automatically retains remaining essential tags that provide business value to your teams. These configuration functionalities are located in the [Metrics Summary][1] page.
 
 This page identifies key components of Metrics without Limits™ that can help you manage your custom metrics volumes within your observability budget.
 
@@ -31,10 +31,13 @@ This page identifies key components of Metrics without Limits™ that can help y
 2. Click **Manage Tags**, then **Include tags** to configure the tags you'd like to remain as queryable in dashboards, notebooks, monitors, and other Datadog products.
 3. Define your allowlist of tags. 
 By default, the tag configuration modal pre-populates with a Datadog recommended allowlist of tags that have been actively queried on dashboards, notebooks, monitors, or through the API in the past 30 days. Recommended tags are distinguished with a line graph icon. 
+   a.Additionally, include tags that are used on assets (dashboards, monitors, notebooks, and SLOs). These tags are used on assets but not actively queried and are marked with a target icon. Adding these ensures you don't lose visibility on your critical assets. 
 4. Review the *Estimated New Volume* of indexed custom metrics that results from this potential tag configuration.
 5. Click **Save**.
 
 {{< img src="metrics/mwl_example_include_tags-compressed_03182025.mp4" alt="Configuration of Tags with Allowlist" video=true style="width:100%" >}}
+
+{{< img src="metrics/tags_used_assets.png" alt="Showing customers they can add tags used on assets on their MWL configuration" style="width:100%" >}}
 
 You can [create][2], [edit][3], [delete][4], and [estimate the impact][5] of your tag configuration through the Metrics APIs.
 
@@ -49,8 +52,6 @@ You can [create][2], [edit][3], [delete][4], and [estimate the impact][5] of you
 {{< img src="metrics/mwl-example-tag-exclusion-compressed_04032025.mp4" alt="Configuration of Tags with Tag Exclusion" video=true style="width:100%" >}}
 
 Set the parameter `exclude_tags_mode: true` on the Metrics API to [create][2] and [edit][3] a blocklist of tags.
-
-When configuring tags for counts, rates, and gauges, the most frequently queried time/space aggregation combination is available for query by default.
 
 **Note:** For tags to be managed on a metric, the metric must have a type declared. This is typically done when a metric is submitted, but may also be done manually using the `Edit` button for a metric in Metrics Summary.
 

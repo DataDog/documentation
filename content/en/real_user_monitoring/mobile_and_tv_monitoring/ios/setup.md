@@ -47,7 +47,7 @@ Declare the iOS library as a dependency depending on your package manager. Swift
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
 ```swift
-.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
+.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "3.0.0"))
 ```
 
 In your project, link the following libraries:
@@ -75,7 +75,13 @@ You can use [Carthage][1] to install `dd-sdk-ios`:
 github "DataDog/dd-sdk-ios"
 ```
 
-In Xcode, link the following frameworks:
+**Note**: Datadog does not provide prebuilt Carthage binaries. This means Carthage will build the SDK from source.
+To build and integrate the SDK, run:
+```
+carthage bootstrap --use-xcframeworks --no-use-binaries
+```
+
+After building, add the following XCFrameworks to your Xcode project (in the "Frameworks, Libraries, and Embedded Content" section):
 ```
 DatadogInternal.xcframework
 DatadogCore.xcframework
@@ -125,7 +131,11 @@ For more information about setting up a client token, see the [Client token docu
 
 ### Step 3 - Initialize the library
 
-In the initialization snippet, set an environment name, service name, and version number. In the examples below, `app-name` specifies the variant of the application that generates data.
+In the initialization snippet, set an environment name, service name, and client token.
+
+The SDK should be initialized as early as possible in the app lifecycle, specifically in the `AppDelegate`'s `application(_:didFinishLaunchingWithOptions:)` callback. This ensures all measurements, including application startup duration, are captured correctly. For apps built with SwiftUI, you can use `@UIApplicationDelegateAdaptor` to hook into the `AppDelegate`.
+
+<div class="alert alert-warning">Initializing the SDK elsewhere (for example later during view loading) may result in inaccurate or missing telemetry, especially around app startup performance.</div>
 
 For more information, see [Using Tags][5].
 
@@ -148,7 +158,7 @@ Datadog.initialize(
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogCore;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
@@ -179,7 +189,7 @@ Datadog.initialize(
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogCore;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
@@ -211,7 +221,7 @@ Datadog.initialize(
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogCore;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
@@ -243,7 +253,7 @@ Datadog.initialize(
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogCore;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
@@ -275,7 +285,7 @@ Datadog.initialize(
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogCore;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
@@ -307,11 +317,43 @@ Datadog.initialize(
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogCore;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
 configuration.site = [DDSite ap1];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
+{{< site-region region="ap2" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+import DatadogCore
+
+Datadog.initialize(
+  with: Datadog.Configuration(
+    clientToken: "<client token>",
+    env: "<environment>",
+    site: .ap2,
+    service: "<service name>"
+  ),
+  trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+@import DatadogCore;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite ap2];
 
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
@@ -364,8 +406,8 @@ For example, if the current tracking consent is `.pending`:
 
 ### Step 4 - Start sending data
 
-#### Initialize the Datadog Monitor
-Configure and register the Datadog Monitor. You only need to do it once, usually in your `AppDelegate` code:
+#### Enable RUM
+Configure and start RUM. This should be done once and as early as possible, specifically in your `AppDelegate`:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -378,6 +420,8 @@ RUM.enable(
     applicationID: "<rum application id>",
     uiKitViewsPredicate: DefaultUIKitRUMViewsPredicate(),
     uiKitActionsPredicate: DefaultUIKitRUMActionsPredicate(),
+    swiftUIViewsPredicate: DefaultSwiftUIRUMViewsPredicate(),
+    swiftUIActionsPredicate: DefaultSwiftUIRUMActionsPredicate(isLegacyDetectionEnabled: true),
     urlSessionTracking: RUM.Configuration.URLSessionTracking()
   )
 )
@@ -385,11 +429,13 @@ RUM.enable(
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogRUM;
 
 DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
 configuration.uiKitViewsPredicate = [DDDefaultUIKitRUMViewsPredicate new];
 configuration.uiKitActionsPredicate = [DDDefaultUIKitRUMActionsPredicate new];
+configuration.swiftUIViewsPredicate = [DDDefaultSwiftUIRUMViewsPredicate new];
+configuration.swiftUIActionsPredicate = [[DDDefaultSwiftUIRUMActionsPredicate alloc] initWithIsLegacyDetectionEnabled:YES];
 [configuration setURLSessionTracking:[DDRUMURLSessionTracking new]];
 
 [DDRUM enableWith:configuration];

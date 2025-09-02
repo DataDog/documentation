@@ -62,9 +62,9 @@ dependencies {
 
     ```yaml
     JAVA_TOOL_OPTIONS: -javaagent:"/opt/java/lib/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-    DD_LOGS_INJECTION: true
+    DD_LOGS_INJECTION: true # default value
     DD_JMXFETCH_ENABLED: false
-    DD_TRACE_ENABLED: true
+    DD_TRACE_ENABLED: true # default value
     ```
 
 3. Wrap your Lambda handler function using the wrapper provided by the Datadog Lambda Library:

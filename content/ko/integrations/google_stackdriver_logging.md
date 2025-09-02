@@ -47,7 +47,7 @@ Google Cloud 로그는 Google Cloud Logging으로 수집하여 클라우드 Pub/
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_stackdriver_logging" >}}
+{{< get-metrics-from-git "google-stackdriver-logging" >}}
 
 
 **참고**: Datadog은 접두어 `gcp.logging.user`가 있는 Google Cloud Logging [사용자 정의 메트릭][4]을 수집합니다.

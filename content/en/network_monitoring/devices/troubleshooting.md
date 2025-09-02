@@ -12,7 +12,7 @@ further_reading:
 
 Use the information below for troubleshooting Datadog Network Device Monitoring. If you need additional help, contact [Datadog support][1].
 
-### Device not visible in Datadog
+## Device not visible in Datadog
 
 The following assumes you are running Datadog Agent v7.61.0+.
 
@@ -80,15 +80,15 @@ The output should look similar to the following:
 
     Refer to your vendor specific documentation for additional information on running these commands.
 
-### Troubleshooting SNMP Errors
+## Troubleshooting SNMP errors
 
 If either the SNMP status or Agent walk shows an error, it could indicate one of the following issues:
 
-#### Permission denied
+### Permission denied
 
 If you see a permission denied error while port binding in agent logs, the port number you've indicated may require elevated permissions. To bind to a port number under 1024, see [Using the default SNMP Trap port 162][8].
 
-#### Unreachable or misconfigured device:
+### Unreachable or misconfigured device:
 
    **Error**:
    ```plaintext
@@ -112,7 +112,7 @@ If you see a permission denied error while port binding in agent logs, the port 
       ```
    3. Ensure your community string matches.
 
-#### Incorrect SNMPv2 credentials
+### Incorrect SNMPv2 credentials
 
    **Error**:
    ```
@@ -123,7 +123,7 @@ If you see a permission denied error while port binding in agent logs, the port 
 
    If using SNMPv2, ensure that a community string is set.
 
-#### Incorrect SNMPv3 privacy protocol
+### Incorrect SNMPv3 privacy protocol
 
    **Error**:
    ```
@@ -145,6 +145,63 @@ If you see a permission denied error while port binding in agent logs, the port 
    - privKey
    - privProtocol
 
+### Traps or Flows not being received at all
+
+If SNMP traps or NetFlow traffic are missing, a common cause is firewall rules blocking UDP packets before they reach the Agent. Both SNMP traps and NetFlow rely on UDP and use the ports defined in your [datadog.yaml][9] configuration.
+
+Use the following platform-specific commands to check for firewall rules that may be blocking the traffic from reaching the Agent.
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+Linux has multiple types of firewalls, such as `iptables`, `nftables`, or `ufw`. Depending on which is in use, the following commands can be used:
+
+- `sudo iptables -S`
+
+- `sudo nft list ruleset`
+
+- `sudo ufw status`
+
+Check for rules blocking UDP traffic on the configured ports.
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+Starting with version `7.67`, the Agent's `datadog-agent diagnose` command automatically checks for blocking firewall rules and displays warnings if any are found.
+
+To manually inspect firewall rules:
+
+```powershell
+Get-NetFirewallRule -Action Block | ForEach-Object {
+    $rule = $_
+    Get-NetFirewallPortFilter -AssociatedNetFirewallRule $rule | Select-Object
+        @{Name="Name"; Expression={$rule.Name}},
+        @{Name="DisplayName"; Expression={'"' + $rule.DisplayName + '"'}},
+        @{Name="Direction"; Expression={$rule.Direction}},
+        @{Name="Protocol"; Expression={$_.Protocol}},
+        @{Name="LocalPort"; Expression={$_.LocalPort}},
+        @{Name="RemotePort"; Expression={$_.RemotePort}}
+} | Format-Table -AutoSize
+```
+
+Look for rules where:
+- **Direction** is inbound
+- **Protocol** is UDP
+- **LocalPort** matches one of your configured ports
+
+{{% /tab %}}
+{{% tab "MacOS" %}}
+
+Run the following command to review Packet Filter (pf) rules:
+
+```shell
+sudo pfctl -sr
+```
+
+Check for any rules blocking UDP traffic on your configured ports. For example:`block drop in proto udp from any to any port = <CONFIG_PORT>`.
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Traps not being received for devices
 
 1. Check the Datadog `agent.log` file to ensure that you can bind to the traps port. The following error indicates that you are unable to bind to the traps port:
@@ -160,7 +217,7 @@ If you see a permission denied error while port binding in agent logs, the port 
    sudo setcap 'cap_net_bind_service=+ep' /opt/datadog-agent/bin/agent/agent
    ```
 
-#### Traps incorrectly formatted
+### Traps incorrectly formatted
 
 1. Navigate to the troubleshooting dashboard in NDM:
 
@@ -219,3 +276,4 @@ If you see a permission denied error while port binding in agent logs, the port 
 [6]: /api/latest/network-device-monitoring/#get-the-list-of-tags-for-a-device
 [7]: /api/latest/network-device-monitoring/#update-the-tags-for-a-device
 [8]: /network_monitoring/devices/snmp_traps/#using-the-default-snmp-trap-port-162
+[9]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
