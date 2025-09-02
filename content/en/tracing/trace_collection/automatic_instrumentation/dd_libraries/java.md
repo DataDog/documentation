@@ -65,7 +65,7 @@ To begin tracing your applications:
     ```text
     java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar path/to/your/app.jar
     ```
-    **Note**: If you have a strong need to reduce the size of your image and omit modules, you can use the [jdeps][19] command to identify dependencies. However, required modules can change over time, so do this at your own risk.
+    **Note**: If you have a strong need to reduce the size of your image and omit modules, you can use the [`jdeps`][19] command to identify dependencies. However, required modules can change over time, so do this at your own risk.
 
     **Note**: When enabling the tracer for Java 24+, you may see warnings related to JNI native access or `sun.misc.Unsafe` memory access. Suppress these warnings by adding the `--illegal-native-access=allow` and `--sun-misc-unsafe-memory-access=allow` environment variables right before the `-javaagent:/path/to/dd-java-agent.jar` argument. See [JEP 472][23] and [JEP 498][24] for more information.
 
