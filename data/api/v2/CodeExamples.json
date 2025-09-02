@@ -1297,6 +1297,13 @@
       "description": "Get a list of security signals returns \"OK\" response with pagination"
     }
   ],
+  "GetSuppressionsAffectingFutureRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Get suppressions affecting future rule returns \"OK\" response"
+    }
+  ],
   "EditSecurityMonitoringSignalAssignee": [
     {
       "group": "security_monitoring",
