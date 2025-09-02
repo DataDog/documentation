@@ -13,6 +13,9 @@ aliases:
  - /security/cloud_siem/log_detection_rules/
  - /security/cloud_siem/detection_rules/
 further_reading:
+- link: "/security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule/"
+  tag: "Documentation"
+  text: "Create a custom detection rule"
 - link: "/cloud_siem/default_rules/"
   tag: "Documentation"
   text: "Configure default Cloud SIEM detection rules"
@@ -41,7 +44,7 @@ further_reading:
 
 ## Overview
 
-Out-of-the-box detection rules help you cover the majority of threat scenarios, but you can also create custom detection rules for your specific use cases
+Out-of-the-box detection rules help you cover the majority of threat scenarios, but you can also create custom detection rules for your specific use cases. See [Create Rule][1] for instructions on how to create a custom rule.
 
 ## Rule types
 
@@ -55,13 +58,13 @@ You can create the following types of custom detection rules:
 
 The following detection methods are available for custom detection rule or historical job:
 
-- Threshold: Detects when events exceed a user-defined threshold.
-- Anomaly: Detects when a behavior deviates from its historical baseline.
-- Impossible travel: Detects if impossible speed is detected in user activity logs.
-- Signal Correlation: Chains multiple rules to create higher fidelity signals.
-- New value: Detects when an attributes changes to a brand new value.
-- Content anomaly: Detects when an event's content is an anomaly compared to the historical baseline
-- Third party: Maps third-party security logs to signals, setting the severity based on log attributes.
+- [Threshold][3]: Detects when events exceed a user-defined threshold.
+- [New value][4]: Detects when an attributes changes to a brand new value.
+- [Anomaly][5]: Detects when a behavior deviates from its historical baseline.
+- [Content anomaly][6]: Detects when an event's content is an anomaly compared to the historical baseline
+- [Impossible travel][7]: Detects if impossible speed is detected in user activity logs.
+- [Third party][8]: Maps third-party security logs to signals, setting the severity based on log attributes.
+- [Signal correlation][9]: Combines multiple signals together to generate a new signal so you can alert on more complex use cases and reduce alert fatigue.
 
 ## Rule Version History
 
@@ -73,7 +76,7 @@ Use Rule Version History to:
 - Compare versions with diffs to analyze the modifications and impact of the changes.
 
 To see the version history of a rule:
-1. Navigate to [Detection Rules][1].
+1. Navigate to [Detection Rules][2].
 1. Click on the rule you are interested in.
 1. In the rule editor, click **Version History** to see past changes.
 1. Click a specific version to see what changes were made.
@@ -86,4 +89,12 @@ To see the version history of a rule:
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/rules
+[1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule/
+[2]: https://app.datadoghq.com/security/rules
+[3]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/threshold/
+[4]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/new_value/
+[5]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/anomaly/
+[6]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/content_anomaly/
+[7]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/impossible_travel/
+[8]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/third_party/
+[9]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/signal_correlation_rules/
