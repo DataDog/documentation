@@ -144,7 +144,7 @@ Stop the container:
 docker stop <id>
 ```
 
-Start a new container with [the latest image][7]. Environment variables are no longer needed. Everything is configured in the `config/config.yaml` file.
+Start a new container with [the latest image][6]. Environment variables are no longer needed. Everything is configured in the `config/config.yaml` file.
 
 Run:
 ```bash
@@ -167,20 +167,18 @@ Navigate to the directory containing your `docker-compose.yaml` file. Next, navi
 ```yaml
 services:
   runner:
-    # you can find the latest image at https://api.datadoghq.com/api/v2/on-prem-management-service/runner/latest-image
-    image: gcr.io/datadoghq/private-action-runner:v1.0.0
-    platform: linux/x86_64
-    ports:
-      - "9016:9016"
+    image: gcr.io/datadoghq/private-action-runner:<latest_version>
+    cpus: 25
+    mem_limit: 1g
+    deploy:
+      replicas: 1
+    environment:
+      - DD_BASE_URL=https://app.datadoghq.com
+      - DD_PRIVATE_RUNNER_CONFIG_DIR=/etc/dd-action-runner/config 
+      - RUNNER_ENROLLMENT_TOKEN=<the_token>
+      - STATSD_ENABLED=true
     volumes:
-      - "./config:/etc/dd-action-runner"
-    user: "0"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9016/liveness"]
-      interval: 10s
-      timeout: 10s
-      retries: 3
-```
+      - "./config:/etc/dd-action-runner/config"
 
 Start the container again:
 ```bash
