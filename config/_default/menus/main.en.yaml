@@ -2438,22 +2438,32 @@ menu:
       parent: incidents
       identifier: analytics
       weight: 7
-    - name: Datadog Clipboard
-      url: service_management/incident_management/datadog_clipboard
-      parent: incidents
-      identifier: incidents_clipboard
-      weight: 8
     - name: Integrations
       url: service_management/incident_management/integrations
       parent: incidents
       identifier: incidents_integrations
       weight: 9
+    - name: Jira
+      url: service_management/incident_management/jira
+      parent: incidents_integrations
+      identifier: incidents_jira
+      weight: 901
+    - name: Statuspage
+      url: service_management/incident_management/statuspage
+      parent: incidents_integrations
+      identifier: incidents_statuspage
+      weight: 902
     - name: On-Call
       url: service_management/on-call/
       pre: on-call
       parent: service_management_heading
       identifier: oncall
       weight: 30000
+    - name: Datadog Clipboard
+      url: service_management/incident_management/datadog_clipboard
+      parent: incidents
+      identifier: incidents_clipboard
+      weight: 10
     - name: Onboard a Team
       url: service_management/on-call/teams/
       parent: oncall
