@@ -23,7 +23,7 @@ In Datadog, [reserved attributes][1] are log fields that are set aside for speci
 
 There are restrictions in Observability Pipelines on how you can modify reserved attributes. For example, reserved attributes cannot be renamed using the Rename Field processor, but must be remapped instead. This guide walks you through the steps to remap the value of reserved attributes.
 
-If your specific setup uses a Splunk HEC source and Datadog destinations, see [Remap source and service attributes when using the Splunk HEC source and Datadog destination](#remap-source-and-service-attributes-when-using-the-splunk-hec-source-and-datadog-destination).
+If your specific setup uses a Splunk HEC source and Datadog destination, see [Remap source and service attributes when using the Splunk HEC source and Datadog destination](#remap-source-and-service-attributes-when-using-the-splunk-hec-source-and-datadog-destination).
 
 ## Remap the value of reserved attributes
 
@@ -76,7 +76,7 @@ In the below example image, the input shows `status` with the value `wrongstatus
 ## Remap source and service attributes when using the Splunk HEC source and Datadog destination
 
 If you are processing logs with the following setup:
-- Using Observability Pipelines with Splunk HEC as the source and Datadog as the destination.
+- Using Splunk HEC as the source and Datadog as the destination.
 - Remapping or rewriting the value of `source` and/or `service`.
 
 You must follow the instructions in this section to remap the `source` and `service` attributes because Splunk's semantic meaning for the `service` attribute is the same as Datadog's semantic meaning for the `source` attribute.
