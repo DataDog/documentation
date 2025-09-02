@@ -149,3 +149,4 @@ To avoid a type error resulting from an undefined variable, assign a custom vari
 [5]: /service_management/workflows/trigger
 [6]: /service_management/app_builder/queries/#return-workflow-results-to-an-app
 [7]: /service_management/workflows/trigger/#access-the-result-of-a-child-workflow
+[8]: /service_management/workflows/expressions/#inline-javascript-expressions

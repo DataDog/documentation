@@ -20,72 +20,54 @@ title: Configurer la surveillance sans serveur pour AWS Lambda
 
 Commencez par [installer][1] la surveillance sans serveur Datadog afin de commencer à recueillir des métriques, traces et logs. Une fois cette première étape terminée, consultez les rubriques suivantes pour configurer votre installation afin de répondre à vos besoins en matière de surveillance.
 
-### Métriques
-- [Recueillir des métriques à partir de ressources non Lambda](#recueillir-des-metriques-a-partir-de-ressources-non-Lambda)
-- [Envoyer des métriques custom](#envoyer-des-metriques-custom)
-
-### Logs
-- [Filtrer ou nettoyer des données des logs](#filtrer-ou-nettoyer-des-donnees-des-logs)
-- [Désactiver la collecte de logs](#desactiver-la-collecte-de-logs)
-- [Recueillir des logs à partir de ressources non Lambda](#recueillir-des-logs-a-partir-de-ressources-non-Lambda)
-- [Parser et transformer des logs](#parser-et-transformer-des-logs)
-- [Associer des logs à des traces](#associer-des-logs-a-des-traces)
-
-### APM
 - [Associer des données de télémétrie à l'aide de tags](#associer-des-donnees-de-telemetrie-a-l-aide-de-tags)
 - [Recueillir les charges utiles des requêtes et réponses](#recueillir-les-charges-utiles-des-requetes-et-reponses)
-- [Recueillir des métriques à partir de ressources non Lambda](#recueillir-des-metriques-a-partir-de-ressources-non-Lambda)
-- [Recueillir des logs à partir de ressources non Lambda](#recueillir-des-logs-a-partir-de-ressources-non-Lambda)
 - [Recueillir des traces à partir de ressources non Lambda](#recueillir-des-traces-a-partir-de-ressources-non-lambda)
-- [Filtrer ou nettoyer des données des logs](#filtrer-ou-nettoyer-des-donnees-des-logs)
-- [Désactiver la collecte de logs](#desactiver-la-collecte-de-logs)
-- [Parser et transformer des logs](#parser-et-transformer-des-logs)
 - [Configurer le traceur Datadog](#configurer-le-traceur-datadog)
 - [Choisir les taux d'échantillonnage pour l'ingestion des spans APM](#choisir-les-taux-d-echantillonnage-pour-l-ingestion-des-spans-apm)
 - [Filtrer ou nettoyer des informations sensibles des traces](#filtrer-ou-nettoyer-des-informations-sensibles-des-traces)
-- [Désactiver la collecte de traces](#desactiver-la-collecte-de-traces)
+- [Activer ou désactiver la collecte de traces](#activer-ou-desactiver-la-collecte-de-traces)
 - [Associer des logs à des traces](#associer-des-logs-a-des-traces)
 - [Associer des erreurs à votre code source](#associer-des-erreurs-a-votre-code-source)
-- [Envoyer des métriques custom](#envoyer-des-metriques-custom)
-- [Envoyer des données OpenTelemetry à Datadog](#envoyer-des-donnees-opentelemetry-a-datadog)
+- [Envoyer des métriques custom][27]
+- [Recueillir des données de profiling](#recueillir-des-donnees-de-profiling)
 - [Envoyer des données de télémétrie via PrivateLink ou un proxy](#envoyer-des-donnees-de-telemetrie-via-privatelink-ou-un-proxy)
 - [Envoyer des données de télémétrie à plusieurs organisations Datadog](#envoyer-des donnees-de-telemetrie-a-plusieurs-organisations-Datadog)
+- [Activer la conformité FIPS](#activer-la-conformite-fips)
 - [Propager le contexte de traces vers des ressources AWS](#propager-le-contexte-de-traces-vers-des-ressources-aws)
 - [Fusionner des traces X-Ray et Datadog](#fusionner-des-traces-x-ray-et-datadog)
 - [Activer la signature de code pour AWS Lambda](#activer-la-signature-de-code-pour-aws-lambda)
 - [Migrer vers l'extension Lambda Datadog](#migrer-vers-l-extension-lambda-datadog)
 - [Migrer de x86 à arm64 avec l'extension Lambda Datadog](#migrer-de-x86-a-arm64-avec-l-extension-lambda-datadog)
 - [Configurer l'extension Lambda Datadog pour effectuer des tests locaux](#configurer-l-extension-lambda-datadog-pour-effectuer-des-tests-locaux)
+- [Instrumenter AWS Lambda avec l'API OpenTelemetry](#instrumenter-aws-lambda-avec-l-api-opentelemetry)
+- [Utiliser l'extension Lambda Datadog v67+](#utiliser-l-extension-lambda-datadog-v67+)
+- [Configurer l'association automatique pour DynamoDB PutItem](#configurer-l-association-automatique-pour-dynamodb-putitem)
+- [Visualiser et modéliser correctement les services AWS](#visualiser-et-modeliser-correctement-les-services-aws)
 - [Dépannage](#depannage)
 - [Pour aller plus loin](#pour-aller-plus-loin)
 
-### Autres
-- [Associer des données de télémétrie à l'aide de tags](#associer-des-donnees-de-telemetrie-a-l-aide-de-tags)
-- [Recueillir les charges utiles des requêtes et réponses](#recueillir-les-charges-utiles-des-requetes-et-reponses)
-- [Recueillir des métriques à partir de ressources non Lambda](#recueillir-des-metriques-a-partir-de-ressources-non-Lambda)
-- [Recueillir des logs à partir de ressources non Lambda](#recueillir-des-logs-a-partir-de-ressources-non-Lambda)
-- [Recueillir des traces à partir de ressources non Lambda](#recueillir-des-traces-a-partir-de-ressources-non-lambda)
-- [Filtrer ou nettoyer des données des logs](#filtrer-ou-nettoyer-des-donnees-des-logs)
-- [Désactiver la collecte de logs](#desactiver-la-collecte-de-logs)
-- [Parser et transformer des logs](#parser-et-transformer-des-logs)
-- [Configurer le traceur Datadog](#configurer-le-traceur-datadog)
-- [Choisir les taux d'échantillonnage pour l'ingestion des spans APM](#choisir-les-taux-d-echantillonnage-pour-l-ingestion-des-spans-apm)
-- [Filtrer ou nettoyer des informations sensibles des traces](#filtrer-ou-nettoyer-des-informations-sensibles-des-traces)
-- [Désactiver la collecte de traces](#desactiver-la-collecte-de-traces)
-- [Associer des logs à des traces](#associer-des-logs-a-des-traces)
-- [Associer des erreurs à votre code source](#associer-des-erreurs-a-votre-code-source)
-- [Envoyer des métriques custom](#envoyer-des-metriques-custom)
-- [Envoyer des données OpenTelemetry à Datadog](#envoyer-des-donnees-opentelemetry-a-datadog)
-- [Envoyer des données de télémétrie via PrivateLink ou un proxy](#envoyer-des-donnees-de-telemetrie-via-privatelink-ou-un-proxy)
-- [Envoyer des données de télémétrie à plusieurs organisations Datadog](#envoyer-des donnees-de-telemetrie-a-plusieurs-organisations-Datadog)
-- [Propager le contexte de traces vers des ressources AWS](#propager-le-contexte-de-traces-vers-des-ressources-aws)
-- [Fusionner des traces X-Ray et Datadog](#fusionner-des-traces-x-ray-et-datadog)
-- [Activer la signature de code pour AWS Lambda](#activer-la-signature-de-code-pour-aws-lambda)
-- [Migrer vers l'extension Lambda Datadog](#migrer-vers-l-extension-lambda-datadog)
-- [Migrer de x86 à arm64 avec l'extension Lambda Datadog](#migrer-de-x86-a-arm64-avec-l-extension-lambda-datadog)
-- [Configurer l'extension Lambda Datadog pour effectuer des tests locaux](#configurer-l-extension-lambda-datadog-pour-effectuer-des-tests-locaux)
-- [Dépannage](#depannage)
-- [Pour aller plus loin](#pour-aller-plus-loin)
+
+## Activer la détection des menaces pour observer les tentatives d'attaque
+
+Recevez des alertes lorsque des acteurs malveillants ciblent vos applications sans serveur et prenez rapidement des mesures.
+
+Pour commencer, assurez-vous d'abord que le [tracing est activé][43] pour vos fonctions.
+
+Pour activer la surveillance des menaces, ajoutez les variables d'environnement suivantes à votre déploiement :
+   ```yaml
+   environment:
+     DD_SERVERLESS_APPSEC_ENABLED: true
+     AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
+   ```
+
+Redéployez la fonction et invoquez-la. Après quelques minutes, elle apparaît dans les [vues AAP][49].
+
+Pour voir la détection des menaces d'App and API Protection en action, envoyez des patterns d'attaque connus sur votre application. Par exemple, envoyez un en-tête HTTP avec la valeur `acunetix-product` pour déclencher une tentative d'[attaque par analyse des vulnérabilités][44] :
+   ```sh
+   curl -H 'My-AAP-Test-Header: acunetix-product' https://<YOUR_FUNCTION_URL>/<EXISTING_ROUTE>
+   ```
+Quelques minutes après avoir activé votre application et envoyé les patterns d'attaque, **des informations sur les menaces s'affichent dans l'[Application Signals Explorer][41]**.
 
 ## Associer des données de télémétrie à l'aide de tags
 
@@ -148,14 +130,14 @@ Transform:
 Vérifiez que vous utilisez la dernière version du [CDK Construct sans serveur Datadog][1] et appliquez les tags à l'aide des paramètres `env`, `service`, `version` et `tags`. Exemple :
 
 ```typescript
-const datadog = new Datadog(this, "Datadog", {
-    // … autres paramètres requis, comme la clé d'API et le site Datadog
+const datadog = new DatadogLambda(this, "Datadog", {
+    // ... other required parameters, such as the Datadog site and API key
     env: "dev",
     service: "web",
     version: "v1.2.3",
     tags: "team:avengers,project:marvel"
 });
-datadog.addLambdaFunctions([<FONCTIONS_LAMBDA>]);
+datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
 ```
 
 [1]: https://github.com/DataDog/datadog-cdk-constructs
@@ -183,7 +165,7 @@ Datadog peut également enrichir les données de télémétrie recueillies à l'
 
 ## Recueillir les charges utiles des requêtes et réponses
 
-<div class="alert alert-info">Cette fonctionnalité est prise en charge pour les langages Python, Node.js, Go et .NET.</div>
+<div class="alert alert-info">Cette fonctionnalité est prise en charge pour les langages Python, Node.js, Go, Java et .NET.</div>
 
 Datadog peut [recueillir et visualiser les charges utiles des requêtes et réponses JSON de vos fonctions AWS Lambda][5]. Vous bénéficiez ainsi d'informations pertinentes sur vos applications sans serveur, pour un dépannage simplifié des échecs de vos fonctions Lambda.
 
@@ -235,11 +217,11 @@ Transform:
 Vérifiez que vous utilisez la dernière version du [CDK Construct sans serveur Datadog][1] et définissez le paramètre `captureLambdaPayload` sur `true`. Exemple :
 
 ```typescript
-const datadog = new Datadog(this, "Datadog", {
-    // … autres paramètres requis, comme la clé d'API et le site Datadog
+const datadog = new DatadogLambda(this, "Datadog", {
+    // ... other required parameters, such as the Datadog site and API key
     captureLambdaPayload: true
 });
-datadog.addLambdaFunctions([<FONCTIONS_LAMBDA>]);
+datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
 ```
 
 [1]: https://github.com/DataDog/datadog-cdk-constructs
@@ -294,22 +276,11 @@ DD_APM_REPLACE_TAGS=[
 ]
 ```
 
-## Recueillir des métriques à partir de ressources non Lambda
+Pour collecter les charges utiles depuis des services AWS, consultez la section [Capturer les requêtes et réponses des services AWS][54].
 
-Datadog peut non seulement recueillir en temps réel des [métriques Lambda optimisées][7], mais également vous aider à recueillir des métriques relatives aux ressources gérées par AWS, comme les ressources [API Gateway][8], [AppSync][9] et [SQS][10]. Vous pouvez ainsi surveiller l'intégralité de votre application sans serveur. Les tags de ressource AWS correspondants sont également ajoutés aux métriques.
 
-Pour recueillir ces métriques, configurez l'[intégration Datadog/AWS][3].
-
-## Recueillir des logs à partir de ressources non Lambda
-
-Les logs générés par des ressources gérées (outre les fonctions Lambda AWS) peuvent être utiles pour identifier la cause à l'origine des problèmes de vos applications sans serveur. Datadog vous conseille de [recueillir les logs][11] des ressources gérées par AWS suivantes dans votre environnement :
-- API : API Gateway, AppSync et ALB
-- Files d'attente et flux : SQS, SNS et Kinesis
-- Datastores : DynamoDB, S3 et RDS
 
 ## Recueillir des traces à partir de ressources non Lambda
-
-<div class="alert alert-info">Cette fonctionnalité est actuellement prise en charge pour les langages Python, Node.js, Java et .NET.</div>
 
 Datadog peut déduire des spans APM en fonction des événements Lambda reçus pour les ressources gérées par AWS qui déclenchent une fonction Lambda. Vous pouvez ainsi visualiser plus facilement la relation entre les ressources gérées par AWS et identifier plus rapidement les problèmes de performances de vos applications sans serveur. Consultez [cet article de blog][12] (en anglais) pour obtenir plus d'informations sur les solutions incluses.
 
@@ -326,74 +297,56 @@ Les ressources suivantes sont actuellement prises en charge :
 
 Pour désactiver cette fonctionnalité, définissez `DD_TRACE_MANAGED_SERVICES` sur `false`.
 
-## Filtrer ou nettoyer des données des logs
+### DD_SERVICE_MAPPING
 
-Pour exclure les logs `START` et `END`, définissez la variable d'environnement `DD_LOGS_CONFIG_PROCESSING_RULES` sur `[{"type": "exclude_at_match", "name": "exclude_start_and_end_logs", "pattern": "(START|END) RequestId"}]`. Vous pouvez également ajouter un fichier `datadog.yaml` dans le répertoire racine de votre projet avec le contenu suivant :
+La variable d'environnement `DD_SERVICE_MAPPING` sert à renommer les [noms des services][46] autres que Lambda en amont. Elle repose sur des paires dont le format est `ancien-service:nouveau-service`.
 
-```yaml
-logs_config:
-  processing_rules:
-    - type: exclude_at_match
-      name: exclude_start_and_end_logs
-      pattern: (START|END) RequestId
-```
+#### Syntaxe
 
-Datadog vous conseille de conserver les logs `REPORT`. En effet, ils permettent de remplir la liste d'invocations des vues des fonctions sans serveur.
+`DD_SERVICE_MAPPING=key1:value1,key2:value2`...
 
-Pour nettoyer ou filtrer d'autres logs avant de les envoyer à Datadog, consultez la section [Collecte de logs avancée][13].
+Vous pouvez interagir avec cette variable de deux façons différentes :
 
-## Désactiver la collecte de logs
+#### Renommer tous les services d'un type
 
-Par défaut, la collecte de logs via l'extension Lambda Datadog est activée.
+Pour renommer tous les services en amont associés à une intégration AWS Lambda, utilisez les identificateurs suivants :
 
-Si vous ne souhaitez plus recueillir de logs à l'aide de la fonction Lambda du Forwarder Datadog, supprimez le filtre d'abonnement du groupe de logs CloudWatch de votre propre fonction Lambda.
+| Intégration AWS Lambda | Valeur de DD_SERVICE_MAPPING |
+|---|---|
+| `lambda_api_gateway` | `"lambda_api_gateway:newServiceName"` |
+| `lambda_sns` | `"lambda_sns:newServiceName"` |
+| `lambda_sqs` | `"lambda_sqs:newServiceName"` |
+| `lambda_s3` | `"lambda_s3:newServiceName"` |
+| `lambda_eventbridge` | `"lambda_eventbridge:newServiceName"` |
+| `lambda_kinesis` | `"lambda_kinesis:newServiceName"` |
+| `lambda_dynamodb` | `"lambda_dynamodb:newServiceName"` |
+| `lambda_url` | `"lambda_url:newServiceName"` |
+| `lambda_msk` | `"lambda_msk:newServiceName"` |
 
-Si vous ne souhaitez plus recueillir de logs à l'aide de l'extension Lambda Datadog, suivez les instructions ci-dessous pour la méthode d'installation que vous avez suivie :
+#### Renommer des services spécifiques
 
-{{< tabs >}}
-{{% tab "Framework Serverless" %}}
+Pour bénéficier d'un contrôle plus granulaire, utilisez les identificateurs suivants, qui sont propres à chaque service :
 
-```yaml
-custom:
-  datadog:
-    # … autres paramètres requis, comme la clé d'API et le site Datadog
-    enableDDLogs: false
-```
+| Service | Identificateur | Valeur de DD_SERVICE_MAPPING |
+|---|---|---|
+| API Gateway | ID de l'API | `"r3pmxmplak:newServiceName"` |
+| SNS | Nom du sujet | `"ExampleTopic:newServiceName"` |
+| SQS | Nom de la file d'attente | `"MyQueue:newServiceName"` |
+| S3 | Nom du compartiment | `"example-bucket:newServiceName"` |
+| EventBridge | Source d'événements | `"eventbridge.custom.event.sender:newServiceName"` |
+| Kinesis | Nom du flux | `"MyStream:newServiceName"` |
+| DynamoDB | Nom de la table | `"ExampleTableWithStream:newServiceName"` |
+| URL Lambda | ID de l'API | `"a8hyhsshac:newServiceName"` |
+| MSK | Nom du cluster | `"ExampleCluster:newServiceName"` |
 
-{{% /tab %}}
-{{% tab "AWS SAM" %}}
+#### Exemples et explications
 
-```yaml
-Transform:
-  - AWS::Serverless-2016-10-31
-  - Name: DatadogServerless
-    Parameters:
-      # … autres paramètres requis, comme la clé d'API et le site Datadog
-      enableDDLogs: false
-```
+| Commande | Rôle |
+|---|---|
+| `DD_SERVICE_MAPPING="lambda_api_gateway:new-service-name"` | Remplace le nom de tous les services `lambda_api_gateway` en amont par `new-service-name`. |
+| `DD_SERVICE_MAPPING="08se3mvh28:new-service-name"` | Remplace le nom du service en amont `08se3mvh28.execute-api.eu-west-1.amazonaws.com` par `new-service-name`. |
 
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
-
-```typescript
-const datadog = new Datadog(this, "Datadog", {
-    // … autres paramètres requis, comme la clé d'API et le site Datadog
-    enableDatadogLogs: false
-});
-datadog.addLambdaFunctions([<FONCTIONS_LAMBDA>]);
-```
-
-{{% /tab %}}
-{{% tab "Autres" %}}
-
-Définissez la variable d'environnement `DD_SERVERLESS_LOGS_ENABLED` sur `false` sur vos fonctions Lambda.
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## Parser et transformer des logs
-
-Pour parser et transformer vos logs dans Datadog, consultez la documentation relative aux [pipelines de logs Datadog][14].
+Pour renommer des services en aval, consultez la rubrique relative à `DD_SERVICE_MAPPING` dans la [documentation sur la configuration du traceur][45].
 
 ## Configurer le traceur Datadog
 
@@ -403,7 +356,9 @@ Pour découvrir quelles bibliothèques et quels frameworks sont automatiquement 
 
 Pour gérer le [taux d'échantillonnage des invocations tracées par APM][17] pour des fonctions sans serveur, définissez la variable d'environnement `DD_TRACE_SAMPLING_RULES` de la fonction sur une valeur comprise entre 0.000 (aucun tracing des invocations de fonction Lambda) et 1.000 (tracing de toutes les invocations de fonction Lambda).
 
-Les métriques sont calculées en tenant compte de l'intégralité du trafic de l'application. Votre configuration d'échantillonnage ne nuit donc aucunement à leur justesse.
+**Remarques** :
+   - L'utilisation de `DD_TRACE_SAMPLE_RATE` est obsolète. Utilisez `DD_TRACE_SAMPLING_RULES` à la place. Par exemple, si vous avez déjà défini `DD_TRACE_SAMPLE_RATE` sur `0.1`, définissez plutôt `DD_TRACE_SAMPLING_RULES` sur `[{"sample_rate":0.1}]`.
+   - Les métriques de trafic globales comme `trace.<OPERATION_NAME>.hits` sont calculées *uniquement* à partir des invocations échantillonnées dans Lambda.
 
 Pour les services qui génèrent beaucoup de requêtes, puisque les données des traces sont très répétitives, vous n'avez généralement pas besoin de recueillir chaque requête : les problèmes suffisamment graves sont systématiquement détectables dans plusieurs traces. Les [paramètres d'ingestion][18] vous permettent de visualiser les données dont vous avez besoin pour diagnostiquer des problèmes tout en respectant votre marge d'erreur.
 
@@ -419,9 +374,64 @@ Pour filtrer les traces avant de les envoyer à Datadog, consultez la section [I
 
 Si vous avez besoin de nettoyer les attributs de vos traces pour des raisons de sécurité, consultez la section [Configurer l'Agent Datadog ou le traceur pour assurer la sécurité des données][23].
 
-## Désactiver la collecte de logs
+## Activer ou désactiver la collecte de traces
 
-La collecte de traces via l'extension Lambda Datadog est activée par défaut. Si vous ne souhaitez pas recueillir de traces à partir de vos fonctions Lambda, suivez les instructions ci-dessous :
+Par défaut, la collecte de traces via l'extension Lambda Datadog est activée.
+
+Si vous souhaitez commencer à recueillir des traces à partir de vos fonctions Lambda, appliquez les configurations ci-dessous :
+
+{{< tabs >}}
+{{% tab "Interface de ligne de commande Datadog" %}}
+
+```sh
+datadog-ci lambda instrument \
+    --tracing true
+    # … autres arguments requis, comme le nom des fonctions
+```
+{{% /tab %}}
+{{% tab "Serverless Framework" %}}
+
+```yaml
+custom:
+  datadog:
+    # … autres paramètres requis, comme la clé d'API et le site Datadog
+    enableDDTracing: true
+```
+
+{{% /tab %}}
+{{% tab "AWS SAM" %}}
+
+```yaml
+Transform:
+  - AWS::Serverless-2016-10-31
+  - Name: DatadogServerless
+    Parameters:
+      # … autres paramètres requis, comme la clé d'API et le site Datadog
+      enableDDTracing: true
+```
+
+{{% /tab %}}
+{{% tab "AWS CDK" %}}
+
+```typescript
+const datadog = new DatadogLambda(this, "Datadog", {
+    // ... other required parameters, such as the Datadog site and API key
+    enableDatadogTracing: true
+});
+datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
+```
+
+{{% /tab %}}
+{{% tab "Autres" %}}
+
+Définissez la variable d'environnement `DD_TRACE_ENABLED` sur `true` sur vos fonctions Lambda.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Désactiver la collecte de logs
+
+Si vous souhaitez interrompre la collecte de traces à partir de vos fonctions Lambda, appliquez les configurations ci-dessous :
 
 {{< tabs >}}
 {{% tab "Interface de ligne de commande Datadog" %}}
@@ -457,11 +467,11 @@ Transform:
 {{% tab "AWS CDK" %}}
 
 ```typescript
-const datadog = new Datadog(this, "Datadog", {
-    //… autres paramètres requis, comme la clé d'API et le site Datadog
+const datadog = new DatadogLambda(this, "Datadog", {
+    // ... other required parameters, such as the Datadog site and API key
     enableDatadogTracing: false
 });
-datadog.addLambdaFunctions([<FONCTIONS_LAMBDA>]);
+datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
 ```
 
 {{% /tab %}}
@@ -476,7 +486,7 @@ Définissez la variable d'environnement `DD_TRACE_ENABLED` sur `false` sur vos f
 
 Si vous utilisez l'[extension Lambda][2] pour recueillir des traces et des logs, Datadog ajoute automatiquement l'ID de la requête AWS Lambda à la span `aws.lambda` via le tag `request_id`. En outre, les logs Lambda d'une même requête partagent le même attribut `lambda.request_id`. L'ID de requête AWS Lambda permet d'associer les vues des traces et des logs Datadog.
 
-Si vous utilisez la [fonction Lambda du Forwarder][4] pour recueillir des traces et des logs, `dd.trace_id` est automatiquement injecté dans les logs (grâce à la variable d'environnement `DD_LOGS_INJECTION`). L'ID de trace Datadog permet d'associer les vues des traces et des logs Datadog. Cette fonctionnalité est compatible avec la majorité des applications utilisant un runtime et un logger connus (voir la [prise en charge pour chaque runtime][24]).
+Si vous utilisez la [fonction Lambda du Forwarder][4] pour recueillir des traces et des logs, `dd.trace_id` est automatiquement injecté dans les logs (par défaut avec la variable d'environnement `DD_LOGS_INJECTION`). L'ID de trace Datadog permet d'associer les vues des traces et des logs Datadog. Cette fonctionnalité est compatible avec la majorité des applications utilisant un runtime et un logger connus (voir la [prise en charge pour chaque runtime][24]).
 
 Si vous utilisez un runtime ou un logger personnalisé qui n'est pas pris en charge, procédez comme suit :
 - Si vos logs sont au format JSON, vous devez récupérer l'ID de trace Datadog à l'aide de `dd-trace`, puis l'ajouter à vos logs via le champ `dd.trace_id` :
@@ -497,169 +507,17 @@ Si vous utilisez un runtime ou un logger personnalisé qui n'est pas pris en cha
 
 ## Associer des erreurs à votre code source
 
-<div class="alert alert-info">Cette fonctionnalité prend en charge les langages Go, Java, Python et JavaScript.</div>
+L'[intégration du code source Datadog][26] vous permet de lier vos données de télémétrie (comme les stack traces) au code source de vos fonctions Lambda dans vos référentiels Git.
 
-Grâce à l'[intégration du code source Datadog][26], vous pouvez associer vos données de télémétrie (comme vos stack traces) au code source de vos fonctions Lambda dans GitHub. Suivez les instructions ci-dessous pour activer cette fonctionnalité. **Remarque** : vous devez procéder au déploiement depuis un référentiel Git local qui n'est ni « dirty » ni en avance par rapport à un référentiel distant.
+Pour découvrir comment configurer l'intégration du code source dans vos applications serverless, consultez la section [Intégrer les informations Git dans vos artefacts de build][101].
 
-{{< tabs >}}
-{{% tab "Interface de ligne de commande Datadog" %}}
+[101]: /fr/integrations/guide/source-code-integration/?tab=go#serverless
 
-Exécutez `datadog-ci lambda instrument` avec --source-code-integration=true` pour envoyer automatiquement des métadonnées Git au répertoire local actuel et ajouter les tags requis à vos fonctions Lambda.
+## Collecter des données de profiling
 
-**Remarque** : vous devez définir la variable d'environnement `DATADOG_API_KEY` pour `datadog-ci` afin d'importer les métadonnées Git. `DATADOG_API_KEY` est également défini sur vos fonctions Lambda pour l'envoi des données de télémétrie, sauf si vous avez également défini `DATADOG_API_KEY_SECRET_ARN`, qui est prioritaire par rapport à `DATADOG_API_KEY`.
+Le [Continuous Profiler][42] de Datadog est disponible en version d'aperçu pour la version 4.62.0 du traceur Python et les versions 62 et antérieures de la couche. Cette fonctionnalité facultative est activée en définissant la variable d'environnement `DD_PROFILING_ENABLED` sur `true`.
 
-
-```sh
-# … autres variables d'environnement requises, comme DATADOG_SITE
-
-# requis, permet d'importer les métadonnées Git
-export DATADOG_API_KEY=<CLÉ_API_DATADOG>
-
-# facultatif, DATADOG_API_KEY est utilisé si cette variable d'environnement n'est pas définie
-export DATADOG_API_KEY_SECRET_ARN=<ARN_SECRET_CLÉ_API_DATADOG>
-
-datadog-ci lambda instrument \
-    --source-code-integration=true
-    # … autres arguments requis, comme le nom des fonctions
-```
-{{% /tab %}}
-{{% tab "Serverless Framework" %}}
-
-Lorsque `enableSourceCodeIntegration` est défini sur `true`, le plug-in Serverless Datadog envoie automatiquement les métadonnées Git au répertoire local actuel et ajoute les tags requis à vos fonctions Lambda.
-
-**Remarque** : vous devez définir le paramètre `apiKey` pour le plug-in afin d'importer les métadonnées Git. `apiKey` est également défini sur vos fonctions Lambda pour l'envoi de données de télémétrie, sauf si vous avez également défini `apiKeySecretArn`, qui est prioritaire par rapport à `apiKey`.
-
-```yaml
-custom:
-  datadog:
-    # … autres paramètres requis, comme le site Datadog
-    apiKey: <CLÉ_API> # requis, permet d'importer les métadonnées Git
-    apiKeySecretArn: <ARN_SECRET_CLÉ_API> # facultatif, apiKey est utilisé si ce paramètre n'est pas défini
-    enableSourceCodeIntegration: true # valeur par défaut : true
-```
-
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
-
-Remplacez votre fonction d'initialisation par ce qui suit pour passer la valeur gitHash à la pile CDK :
-
-```typescript
-async function main() {
-  // Bien ajouter @datadog/datadog-ci via votre gestionnaire de packages
-  const datadogCi = require("@datadog/datadog-ci");
-  const gitHash = await datadogCi.gitMetadata.uploadGitCommitHash('{Datadog_API_Key}', '<SITE>')
-
-  const app = new cdk.App();
-  // Passer la valeur au constructor ExampleStack dans le hash
-  new ExampleStack(app, "ExampleStack", {}, gitHash);
-}
-```
-
-Dans le constructor de votre pile, ajoutez un paramètre `gitHash` facultatif, puis appelez `addGitCommitMetadata()` :
-
-```typescript
-export class ExampleStack extends cdk.Stack {
-  constructor(scope: cdk.App, id: string, props?: cdk.StackProps, gitHash?: string) {
-    ...
-    ...
-    datadog.addGitCommitMetadata([<VOS_FONCTIONS>], gitHash)
-  }
-}
-```
-
-{{% /tab %}}
-{{% tab "Autres" %}}
-
-1. Définissez la variable d'environnement `DD_TAGS="git.commit.sha:<HASH_COMMIT_GIT>,git.repository_url=<URL_RÉFÉRENTIEL>"` sur vos fonctions Lambda.
-2. Exécutez [datadog-ci git-metadata upload][1] dans votre pipeline de CI pour importer les métadonnées Git.
-3. Enfin, vous avez la possibilité d'[installer une app GitHub][2] pour intégrer des extraits de code source.
-
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
-[2]: https://app.datadoghq.com/integrations/github/
-{{% /tab %}}
-{{< /tabs >}}
-
-## Envoyer des métriques custom
-
-Vous pouvez [envoyer des métriques custom][27] pour surveiller une logique opérationnelle personnalisée.
-
-## Envoyer des données OpenTelemetry à Datadog
-
-1. Indiquez à OpenTelemetry que les spans doivent être exportées à l'[extension Lambda Datadog][40].
-
-   ```js
-   // instrument.js
-
-   const { NodeTracerProvider } = require("@opentelemetry/sdk-trace-node");
-   const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http');
-   const { Resource } = require('@opentelemetry/resources');
-   const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
-   const { SimpleSpanProcessor } = require('@opentelemetry/sdk-trace-base');
-
-   const provider = new NodeTracerProvider({
-      resource: new Resource({
-          [ SemanticResourceAttributes.SERVICE_NAME ]: 'rey-app-otlp-dev-node',
-      })
-   });
-
-   provider.addSpanProcessor(
-      new SimpleSpanProcessor(
-          new OTLPTraceExporter(
-              { url: 'http://localhost:4318/v1/traces' },
-          ),
-      ),
-   );
-   provider.register();
-   ```
-2. Ajoutez l'instrumentation d'OpenTelemetry pour AWS Lambda. Cela revient à ajouter la couche de tracing.
-   ```js
-   // instrument.js
-
-   const { AwsInstrumentation } = require('@opentelemetry/instrumentation-aws-sdk');
-   const { AwsLambdaInstrumentation } = require('@opentelemetry/instrumentation-aws-lambda');
-   const { registerInstrumentations } = require('@opentelemetry/instrumentation');
-
-   registerInstrumentations({
-      instrumentations: [
-          new AwsInstrumentation({
-              suppressInternalInstrumentation: true,
-          }),
-          new AwsLambdaInstrumentation({
-              disableAwsContextPropagation: true,
-          }),
-      ],
-   });
-
-   ```
-3. Appliquez l'instrumentation au moment de l'exécution. Par exemple, pour Node.js, utilisez `NODE_OPTIONS`.
-
-   ```yaml
-   # serverless.yml
-
-   functions:
-     node:
-       handler: handler.handler
-       environment:
-         NODE_OPTIONS: --require instrument
-   ```
-
-4. Activez OTel via la variable d'environnement `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` ou `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT`. Ajoutez la version 41 ou une version ultérieure de l'extension Datadog. N'ajoutez pas la couche de tracing Datadog.
-
-   ```yaml
-   # serverless.yml
-
-   provider:
-     name: aws
-     region: sa-east-1
-     runtime: nodejs18.x
-     environment:
-       DD_API_KEY: ${env:DD_API_KEY}
-       DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT: localhost:4318
-     layers:
-       - arn:aws:lambda:sa-east-1:464622532012:layer:Datadog-Extension:42
-   ```
-
-5. Procédez au déploiement.
+Le profileur en continu fonctionne en générant un thread qui effectue régulièrement un snapshot du processeur et de l'ensemble du code Python exécuté. Cela peut inclure le profileur lui-même. Si vous voulez que le profileur s'ignore, définissez `DD_PROFILING_IGNORE_PROFILER` sur `true`.
 
 ## Envoyer des données de télémétrie via AWS PrivateLink ou un proxy
 
@@ -677,15 +535,15 @@ Si vous souhaitez envoyer vos données à plusieurs organisations différentes, 
 Vous pouvez activer la transmission multiple à l'aide d'une clé d'API en clair en définissant les variables d'environnement suivantes sur votre fonction Lambda.
 
 ```bash
-# Activer la transmission multiple pour les métriques
-DD_ADDITIONAL_ENDPOINTS={"https://app.datadoghq.com": ["<votre_clé_API_2>", "<votre_clé_API_3>"], "https://app.datadoghq.eu": ["<votre_clé_API_4>"]}
-# Activer la transmission multiple pour APM (traces)
-DD_APM_ADDITIONAL_ENDPOINTS={"https://trace.agent.datadoghq.com": ["<votre_clé_API_2>", "<votre_clé_API_3>"], "https://trace.agent.datadoghq.eu": ["<votre_clé_API_4>"]}
-# Activer la transmission multiple pour APM (profiling)
-DD_APM_PROFILING_ADDITIONAL_ENDPOINTS={"https://trace.agent.datadoghq.com": ["<votre_clé_API_2>", "<votre_clé_API_3>"], "https://trace.agent.datadoghq.eu": ["<votre_clé_API_4>"]}
-# Activer la transmission multiple pour les logs
-DD_LOGS_CONFIG_USE_HTTP=true
-DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS=[{"api_key": "<votre_clé_API_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]
+# Enable dual shipping for metrics
+DD_ADDITIONAL_ENDPOINTS={"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}
+# Enable dual shipping for APM (traces)
+DD_APM_ADDITIONAL_ENDPOINTS={"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}
+# Enable dual shipping for APM (profiling)
+DD_APM_PROFILING_ADDITIONAL_ENDPOINTS={"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}
+# Enable dual shipping for logs
+DD_LOGS_CONFIG_FORCE_USE_HTTP=true
+DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS=[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]
 ```
 
 {{% /tab %}}
@@ -693,7 +551,7 @@ DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS=[{"api_key": "<votre_clé_API_2>", "Host": "
 
 L'extension Datadog permet de récupérer automatiquement les valeurs [AWS Secrets Manager][1] pour toutes les variables d'environnement qui présentent le préfixe `_SECRET_ARN`. Vous pouvez utiliser cette méthode pour stocker sans risque vos variables d'environnement dans Secrets Manager et effectuer la transmission multiple avec Datadog.
 
-1. Définissez la variable d'environnement `DD_LOGS_CONFIG_USE_HTTP=true` sur votre fonction Lambda.
+1. Définissez la variable d'environnement `DD_LOGS_CONFIG_FORCE_USE_HTTP` sur votre fonction Lambda.
 2. Ajoutez l'autorisation `secretsmanager:GetSecretValue` au rôle IAM de votre fonction Lambda.
 3. Côté Secrets Manager, créez un nouveau secret pour stocker la variable d'environnement dédiée à la transmission multiple des métriques. Le contenu doit ressembler à ce qui suit : `{"https://app.datadoghq.com": ["<votre_clé_API_2>", "<votre_clé_API_3>"], "https://app.datadoghq.eu": ["<votre_clé_API_4>"]}`.
 4. Définissez la variable d'environnement `DD_ADDITIONAL_ENDPOINTS_SECRET_ARN` associée à votre fonction Lambda sur l'ARN du secret précédent.
@@ -711,7 +569,7 @@ L'extension Datadog permet de récupérer automatiquement les valeurs [AWS Secre
 
 L'extension Datadog permet de déchiffrer automatiquement les valeurs [AWS KMS][41] pour toutes les variables d'environnement qui présentent le préfixe `_KMS_ENCRYPTED`. Vous pouvez utiliser cette méthode pour stocker sans risque vos variables d'environnement dans KMS et effectuer la transmission multiple avec Datadog.
 
-1. Définissez la variable d'environnement `DD_LOGS_CONFIG_USE_HTTP=true` sur votre fonction Lambda.
+1. Définissez la variable d'environnement `DD_LOGS_CONFIG_FORCE_USE_HTTP=true` sur votre fonction Lambda.
 2. Ajoutez les autorisations `kms:GenerateDataKey` et `kms:Decrypt` au rôle IAM de votre fonction Lambda.
 3. Pour configurer la transmission multiple des métriques, chiffrez `{"https://app.datadoghq.com": ["<votre_clé_API_2>", "<votre_clé_API_3>"], "https://app.datadoghq.eu": ["<votre_clé_API_4>"]}` avec KMS et définissez la variable d'environnement `DD_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` sur la valeur obtenue.
 4. Pour configurer la transmission multiple des traces, chiffrez `{"https://trace.agent.datadoghq.com": ["<votre_clé_API_2>", "<votre_clé_API_3>"], "https://trace.agent.datadoghq.eu": ["<votre_clé_API_4>"]}` avec KMS et définissez la variable d'environnement `DD_APM_ADDITIONAL_KMS_ENCRYPTED` sur la valeur obtenue.
@@ -723,6 +581,40 @@ L'extension Datadog permet de déchiffrer automatiquement les valeurs [AWS KMS][
 {{< /tabs >}}
 
 Pour découvrir des options d'utilisation plus avancées, consultez le [guide dédié à la transmission multiple][32].
+
+## Assurer la conformité à la norme FIPS
+
+<div class="alert alert-info">Pour une vue d'ensemble complète de la conformité FIPS pour les fonctions AWS Lambda, consultez la page dédiée <a href="/serverless/aws_lambda/fips-compliance">Conformité FIPS pour AWS Lambda</a>.</div>
+
+Pour activer la conformité FIPS pour les fonctions AWS Lambda, procédez comme suit :
+
+1. Utilisez une couche d'extension conforme FIPS en indiquant l'ARN approprié :
+
+{{< tabs >}}
+{{% tab "AWS GovCLoud" %}}
+ ```sh
+ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer :Datadog-Extension-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
+ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer :Datadog-Extension-ARM-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
+ ```
+{{% /tab %}}
+{{% tab "AWS Commercial" %}}
+ ```sh
+ arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
+ arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM-FIPS:{{< latest-lambda-layer-version layer="extension" >}}
+ ```
+{{% /tab %}}
+{{< /tabs >}}
+
+2. Pour les fonctions Lambda utilisant Python, JavaScript ou Go, définissez la variable d'environnement `DD_LAMBDA_FIPS_MODE` sur `true`. Cette variable d'environnement :
+   - En mode FIPS, les fonctions utilitaires de métriques Lambda nécessitent l'extension conforme FIPS pour l'envoi des métriques.
+   - Utilise les endpoints FIPS d'AWS pour la récupération des clés d'API
+   - Est activée par défaut dans les environnements GovCloud
+
+3. Pour les fonctions Lambda utilisant Ruby, .NET ou Java, aucune configuration supplémentaire de variable d'environnement n'est nécessaire.
+
+4. Pour garantir une conformité FIPS complète de bout en bout, configurez votre fonction Lambda pour utiliser le site Datadog US1-FED :
+   - Définissez `DD_SITE` sur `ddog-gov.com` (requis pour une conformité FIPS complète de bout en bout)
+   **Remarque** : bien que les composants Lambda conformes FIPS fonctionnent avec n'importe quel site Datadog, seul le site US1-FED dispose d'endpoints d'ingestion conformes FIPS.
 
 ## Propager le contexte de traces vers des ressources AWS
 
@@ -760,6 +652,8 @@ Datadog peut recueillir les données de surveillance de vos fonctions Lambda via
 Pour procéder à la migration, comparez les [instructions d'installation via l'extension Lambda Datadog][1] avec [celles via le Forwarder Datadog][38]. Pour vous faciliter la tâche, les principales différences sont répertoriées ci-dessous.
 
 **Remarque** : Datadog vous conseille de migrer en premier vos applications dev et staging, puis de migrer vos applications de production une par une.
+
+<div class="alert alert-info">L'extension Lambda Datadog active la collecte de logs par défaut. Si vous migrez du Forwarder vers l'extension, assurez-vous de supprimer votre abonnement aux logs. Sinon, vous risquez de voir des logs en double.</div>
 
 {{< tabs >}}
 {{% tab "Interface de ligne de commande Datadog" %}}
@@ -823,7 +717,76 @@ Si vous ne pouvez pas utiliser les paramètres LayerVersion, Datadog vous recomm
 
 ## Configurer l'extension Lambda Datadog pour effectuer des tests locaux
 
-Pour tester l'image du conteneur de votre fonction Lambda en local lorsque l'extension Lambda Datadog est installée, vous devez définir `DD_LOCAL_TEST` sur `true` dans votre environnement de test local. Si ce n'est pas le cas, l'extension attend des réponses de l'API d'extensions AWS et bloque l'appel.
+Tous les émulateurs Lambda ne prennent pas en charge l'AWS Lambda Telemetry API. Pour tester l'image conteneur de votre fonction Lambda en local avec l'extension Lambda Datadog installée, vous devez définir `DD_SERVERLESS_FLUSH_STRATEGY` sur `periodically,1` dans votre environnement de test local. Sinon, l'extension attend les réponses de l'AWS Lambda Telemetry API et bloque l'invocation.
+
+## Instrumenter AWS Lambda avec l'API OpenTelemetry
+
+La bibliothèque de tracing Datadog, incluse dans l'extension Lambda Datadog lors de l'installation, accepte les spans et les traces générées par du code instrumenté avec OpenTelemetry, traite les données de télémétrie et les envoie à Datadog.
+
+Vous pouvez par exemple utiliser cette approche si votre code a déjà été instrumenté avec l'API OpenTelemetry, ou si vous souhaitez effectuer une instrumentation avec du code indépendant de tout fournisseur à l'aide de l'API OpenTelemetry tout en exploitant les bibliothèques de tracing Datadog.
+
+Pour instrumenter AWS Lambda avec l'API OpenTelemetry, définissez la variable d'environnement `DD_TRACE_OTEL_ENABLED` sur `true`. Consultez la section [Instrumentation personnalisée avec l'API OpenTelemetry][48] pour en savoir plus.
+
+## Utiliser l'extension Lambda Datadog v67+
+La version 67+ de [l'extension Datadog][53] est optimisée pour réduire significativement la durée des cold starts.
+Pour utiliser l'extension optimisée, définissez la variable d'environnement `DD_SERVERLESS_APPSEC_ENABLED` sur `false`.
+Lorsque la variable d'environnement `DD_SERVERLESS_APPSEC_ENABLED` est définie sur `true`, l'extension Datadog utilise par défaut l'ancienne version, entièrement compatible. Vous pouvez également forcer l'utilisation de cette ancienne version en définissant `DD_EXTENSION_VERSION` sur `compatibility`. Datadog vous encourage à signaler tout retour ou bug en créant un [ticket sur GitHub][54] et en le taguant avec `version/next`.
+
+## Configurer l'association automatique pour DynamoDB PutItem
+_Disponible pour les runtimes Python et Node.js_.
+Lorsque certains segments de vos requêtes asynchrones ne peuvent pas propager le contexte de trace, la fonctionnalité [association automatique de spans][55] de Datadog détecte automatiquement les spans liés.
+Pour activer l'association automatique de spans pour l'opération `PutItem` des [flux de modifications DynamoDB][56], configurez les noms de clés primaires de vos tables.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+```python
+ddtrace.config.botocore['dynamodb_primary_key_names_for_tables'] = {
+    'table_name': {'key1', 'key2'},
+    'other_table': {'other_key'},
+}
+```
+{{% /tab %}}
+{{% tab "Node.js" %}}
+```js
+// Initialize the tracer with the configuration
+const tracer = require('dd-trace').init({
+  dynamoDb: {
+    tablePrimaryKeys: {
+      'table_name': ['key1', 'key2'],
+      'other_table': ['other_key']
+    }
+  }
+})
+```
+{{% /tab %}}
+{{% tab "Environment variable" %}}
+```sh
+export DD_BOTOCORE_DYNAMODB_TABLE_PRIMARY_KEYS='{
+    "table_name": ["key1", "key2"],
+    "other_table": ["other_key"]
+}'
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+Cela permet d'instrumenter les appels `PutItem` de DynamoDB avec des pointeurs de span. De nombreux appels à l'API DynamoDB n'incluent pas les champs de clé primaire de l'élément en tant que valeurs distinctes, ils doivent donc être fournis séparément au tracer. La configuration ci-dessus est structurée comme un dictionnaire (`dict`) ou un objet dont les clés sont les noms de table sous forme de chaînes (`str`). Chaque valeur est l'ensemble des noms de champs de clé primaire (en chaînes de caractères) pour la table associée. Cet ensemble peut contenir exactement un ou deux éléments, selon le schéma de clé primaire de la table.
+
+## Visualiser et modéliser les services AWS par nom de ressource
+
+Ces versions des couches Lambda [Node.js][50], [Python][51] et [Java][52] incluent des modifications permettant de nommer, modéliser et visualiser correctement les services gérés par AWS.
+
+Les noms de service reflètent le nom réel de la ressource AWS plutôt que seulement le service AWS :
+* `aws.lambda` → `[function_name]`
+* `aws.dynamodb` → `[table_name]`
+* `aws.sns` → `[topic_name]`
+* `aws.sqs` → `[queue_name]`
+* `aws.kinesis` → `[stream_name]`
+* `aws.s3` → `[bucket_name]`
+* `aws.eventbridge` → `[event_name]`
+
+Vous pouvez préférer l'ancien modèle de représentation des services si vos dashboards et monitors reposent sur l'ancienne convention de nommage. Pour rétablir le comportement précédent, définissez la variable d'environnement : `DD_TRACE_AWS_SERVICE_REPRESENTATION_ENABLED=false`
+
+Il est recommandé d'utiliser la nouvelle configuration de modélisation des services.
 
 ## Dépannage
 
@@ -832,7 +795,6 @@ Si vous ne parvenez pas à configurer vos installations, définissez la variable
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 
 [1]: /fr/serverless/installation/
@@ -861,7 +823,7 @@ Si vous ne parvenez pas à configurer vos installations, définissez la variable
 [24]: /fr/tracing/other_telemetry/connect_logs_and_traces/
 [25]: /fr/logs/log_configuration/parsing/
 [26]: /fr/integrations/guide/source-code-integration
-[27]: /fr/serverless/custom_metrics
+[27]: /fr/serverless/aws_lambda/metrics/#submit-custom-metrics
 [28]: /fr/agent/guide/private-link/
 [29]: /fr/getting_started/site/
 [30]: /fr/agent/proxy/
@@ -875,3 +837,20 @@ Si vous ne parvenez pas à configurer vos installations, définissez la variable
 [38]: /fr/serverless/guide#install-using-the-datadog-forwarder
 [39]: /fr/serverless/guide/troubleshoot_serverless_monitoring/
 [40]: /fr/serverless/libraries_integrations/extension/
+[41]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+[42]: /fr/profiler/
+[43]: /fr/serverless/installation#installation-instructions
+[44]: /fr/security/default_rules/security-scan-detected/
+[45]: https://docs.datadoghq.com/fr/tracing/trace_collection/library_config/
+[46]: https://docs.datadoghq.com/fr/tracing/glossary/#services
+[47]: /fr/logs/
+[48]: /fr/tracing/trace_collection/otel_instrumentation/
+[49]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+[50]: https://github.com/DataDog/datadog-lambda-js/releases/tag/v12.127.0
+[51]: https://github.com/DataDog/datadog-lambda-python/releases/tag/v8.113.0
+[52]: https://github.com/DataDog/datadog-lambda-java/releases/tag/v24
+[53]: https://github.com/DataDog/datadog-lambda-extension
+[54]: https://github.com/DataDog/datadog-lambda-extension/issues
+[55]: /fr/serverless/aws_lambda/distributed_tracing/#span-auto-linking
+[56]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
+[57]: /fr/tracing/guide/aws_payload_tagging/?code-lang=python&tab=nodejs
