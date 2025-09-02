@@ -14,6 +14,204 @@ further_reading:
 
 Follow this guide to migrate between major versions of the Mobile RUM, Logs, and Trace SDKs. See each SDK's documentation for details on its features and capabilities.
 
+## From v2 to v3
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+The migration from v2 to v3 focuses on streamlining modules, refining defaults, and improving reliability across product features.
+
+All SDK products (RUM, Trace, Logs, SessionReplay, and so on) remain modular and separated into distinct libraries. The main change is that the `DatadogObjc` module has been removed, with its contents integrated into the corresponding product modules.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Modules
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+Libraries continue to be modularized in v3. Adopt the following libraries:
+
+- `DatadogCore`
+- `DatadogCrashReporting`
+- `DatadogLogs`
+- `DatadogRUM`
+- `DatadogSessionReplay`
+- `DatadogTrace`
+- `DatadogWebViewTracking`
+
+<details>
+  <summary>SPM (Recommended)</summary>
+
+  ```swift
+let package = Package(
+    ...
+    dependencies: [
+        .package(url: "https://github.com/DataDog/dd-sdk-ios", from: "3.0.0")
+    ],
+    targets: [
+        .target(
+            ...
+            dependencies: [
+                .product(name: "DatadogCore", package: "dd-sdk-ios"),
+                .product(name: "DatadogCrashReporting", package: "dd-sdk-ios"),
+                .product(name: "DatadogLogs", package: "dd-sdk-ios"),
+                .product(name: "DatadogRUM", package: "dd-sdk-ios"),
+                .product(name: "DatadogSessionReplay", package: "dd-sdk-ios"),
+                .product(name: "DatadogTrace", package: "dd-sdk-ios"),
+                .product(name: "DatadogWebViewTracking", package: "dd-sdk-ios"),
+            ]
+        ),
+    ]
+)
+  ```
+
+</details>
+
+<details>
+  <summary>CocoaPods</summary>
+
+  ```ruby
+  pod 'DatadogCore'
+  pod 'DatadogCrashReporting'
+  pod 'DatadogLogs'
+  pod 'DatadogRUM'
+  pod 'DatadogSessionReplay'
+  pod 'DatadogTrace'
+  pod 'DatadogWebViewTracking'
+  ```
+</details>
+
+<details>
+  <summary>Carthage</summary>
+
+  The `Cartfile` stays the same:
+  ```
+  github "DataDog/dd-sdk-ios"
+  ```
+
+  In Xcode, you **must** link the following frameworks:
+  ```
+  DatadogInternal.xcframework
+  DatadogCore.xcframework
+  ```
+
+  Then you can select the modules you want to use:
+  ```
+  DatadogCrashReporting.xcframework + CrashReporter.xcframework
+  DatadogLogs.xcframework
+  DatadogRUM.xcframework
+  DatadogSessionReplay.xcframework
+  DatadogTrace.xcframework
+  DatadogWebViewTracking.xcframework
+  ```
+</details>
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### SDK initialization
+{{< tabs >}}
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+The SDK should be initialized as early as possible in the app lifecycle, specifically in the `AppDelegate`'s `application(_:didFinishLaunchingWithOptions:)` callback. This ensures accurate measurement of all metrics, including application startup duration. For apps built with SwiftUI, use `@UIApplicationDelegateAdaptor` to access the `AppDelegate`.
+
+```swift
+import DatadogCore
+
+Datadog.initialize(
+    with: Datadog.Configuration(
+        clientToken: "<client token>",
+        env: "<environment>",
+        service: "<service name>"
+    ),
+    trackingConsent: .granted
+)
+```
+
+**Note**: Initializing the SDK elsewhere (for example later during view loading) may result in inaccurate or missing telemetry, especially around app startup performance.
+
+The API to set the user info now requires the `id` parameter, which was optional in 2.x:
+
+| `2.x`                               | `3.0`                              |
+|-------------------------------------|------------------------------------|
+| `Datadog.setUserInfo(id: String?, name: String?, email: String?, extraInfo: [AttributeKey: AttributeValue], in core: DatadogCoreProtocol)` | `Datadog.setUserInfo(id: String, name: String?, email: String?, extraInfo: [AttributeKey: AttributeValue], in core: DatadogCoreProtocol)` |
+
+### RUM
+
+RUM View-level attributes are now automatically propagated to all related child events, including resources, user actions, errors, and long tasks. This ensures consistent metadata across events, making it easier to filter and correlate data on Datadog dashboards.
+
+To manage View level attributes more effectively, new APIs were added:
+- `Monitor.addViewAttribute(forKey:value:)`
+- `Monitor.addViewAttributes(_:)`
+- `Monitor.removeViewAttribute(forKey:)`
+- `Monitor.removeViewAttributes(forKeys:)`
+
+Other notable changes:
+- All Objective-C RUM APIs are now included in `DatadogRUM`. The separate `DatadogObjc` module is no longer available.
+- App Hangs and Watchdog terminations are no longer reported from app extensions or widgets.
+- A new property `trackMemoryWarnings` was added to `RUM.Configuration` to report memory warnings as RUM Errors.
+
+API changes:
+
+|`2.x`|`3.0`|
+|---|---|
+|-|`RUM.Configuration.trackMemoryWarnings`|
+|`RUMView(path:attributes:)`|`RUMView(name:attributes:isUntrackedModal:)`|
+|-|`Monitor.addViewAttribute(forKey:value:)`|
+|-|`Monitor.addViewAttributes(:)`|
+|-|`Monitor.removeViewAttribute(forKey:)`|
+|-|`Monitor.removeViewAttributes(forKeys:)`|
+
+### Logs
+
+The Logs product no longer reports fatal errors. To enable Error Tracking for crashes, Crash Reporting must be enabled in conjunction with RUM.
+
+Additionally, all Objective-C Logs APIs are now included in `DatadogLogs`. The separate `DatadogObjc` module is no longer available.
+
+### Trace
+
+Trace sampling is now deterministic when used alongside RUM. It uses the RUM `session.id` to ensure consistent sampling.
+
+Also:
+- The `Trace.Configuration.URLSessionTracking.FirstPartyHostsTracing` configuration sets sampling for all requests by default and the trace context is injected only into sampled requests.
+- All Objective-C Trace APIs are now included in `DatadogTrace`. The separate `DatadogObjc` module is no longer available.
+
+**Note**: A similar configuration exists in `RUM.Configuration.URLSessionTracking.FirstPartyHostsTracing`.
+
+### Session Replay
+
+Privacy settings are now more granular. The previous `defaultPrivacyLevel` parameter has been replaced with:
+- `textAndInputPrivacyLevel`
+- `imagePrivacyLevel`
+- `touchPrivacyLevel`
+
+Learn more about [privacy levels][1].
+
+API changes:
+
+|`2.x`|`3.0`|
+|---|---|
+|`SessionReplay.Configuration(replaySampleRate:defaultPrivacyLevel:startRecordingImmediately:customEndpoint:)`|`SessionReplay.Configuration(replaySampleRate:textAndInputPrivacyLevel:imagePrivacyLevel:touchPrivacyLevel:startRecordingImmediately:customEndpoint:featureFlags:)`|
+|`SessionReplay.Configuration(replaySampleRate:defaultPrivacyLevel:startRecordingImmediately:customEndpoint:)`|`SessionReplay.Configuration(replaySampleRate:textAndInputPrivacyLevel:imagePrivacyLevel:touchPrivacyLevel:startRecordingImmediately:customEndpoint:featureFlags:)`|
+
+### URLSession Instrumentation
+
+To enable URLSession Instrumentation, make sure to also enable RUM and/or Trace to report to those products respectively.
+
+Legacy delegate types have been replaced by a unified instrumentation API:
+
+|`2.x`|`3.0`|
+|---|---|
+|`DatadogURLSessionDelegate()`|`URLSessionInstrumentation.enable(with:)`|
+|`DDURLSessionDelegate()`|`URLSessionInstrumentation.enable(with:)`|
+|`DDNSURLSessionDelegate()`|`URLSessionInstrumentation.enable(with:)`|
+
+[1]: /real_user_monitoring/session_replay/mobile/privacy_options?platform=ios
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## From v1 to v2
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -22,9 +220,9 @@ The migration from v1 to v2 represents a migration from a monolith SDK into a mo
 
 SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the Android SDK, and other Datadog products.
 
-SDK v2 enables the usage of [Mobile Session Replay][1] on Android and iOS applications.
+SDK v2 enables the usage of [Mobile Session Replay][2] on Android and iOS applications.
 
-[1]: /real_user_monitoring/session_replay/mobile/
+[2]: /real_user_monitoring/session_replay/mobile/
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -33,9 +231,9 @@ The migration from v1 to v2 represents a migration from a monolith SDK into a mo
 
 SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the Android SDK, and other Datadog products.
 
-SDK v2 enables the usage of [Mobile Session Replay][1] on Android and iOS applications.
+SDK v2 enables the usage of [Mobile Session Replay][3] on Android and iOS applications.
 
-[1]: /real_user_monitoring/session_replay/mobile/
+[3]: /real_user_monitoring/session_replay/mobile/
 
 {{% /tab %}}
 {{% tab "React Native" %}}
@@ -77,7 +275,7 @@ A failure occurred while executing com.android.build.gradle.internal.tasks.Check
 Duplicate class kotlin.collections.jdk8.CollectionsJDK8Kt found in modules kotlin-stdlib-1.8.10 (org.jetbrains.kotlin:kotlin-stdlib:1.8.10) and kotlin-stdlib-jdk8-1.7.20 (org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20)
 ```
 
-Add the following rules to your build script (more details in the relevant [Stack Overflow issue][2]):
+Add the following rules to your build script (more details in the relevant [Stack Overflow issue][4]):
 
 ```kotlin
 dependencies {
@@ -92,10 +290,10 @@ dependencies {
 }
 ```
 
-See the [Android sample application][3] for an example of how to set up the SDK.
+See the [Android sample application][5] for an example of how to set up the SDK.
 
-[2]: https://stackoverflow.com/a/75298544
-[3]: https://github.com/DataDog/dd-sdk-android/tree/develop/sample
+[4]: https://stackoverflow.com/a/75298544
+[5]: https://github.com/DataDog/dd-sdk-android/tree/develop/sample
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -561,9 +759,9 @@ To improve granularity for the Datadog SDK libraries used, the `dd-sdk-android-k
 
 ### Session Replay
 
-For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][4].
+For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][6].
 
-[4]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=android
+[6]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=android
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -756,9 +954,9 @@ WebViewTracking.enable(webView: webView)
 
 ### Session Replay
 
-For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][5].
+For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][7].
 
-[5]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=ios
+[7]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=ios
 
 {{% /tab %}}
 {{% tab "React Native" %}}
