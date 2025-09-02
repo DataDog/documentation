@@ -115,19 +115,6 @@ GRANT SELECT ON pg_stat_database TO datadog;
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
-Create functions **in every database** to enable the Agent to read the full contents of `pg_stat_activity` and `pg_stat_statements`:
-
-```SQL
-CREATE OR REPLACE FUNCTION datadog.pg_stat_activity() RETURNS SETOF pg_stat_activity AS
-  $$ SELECT * FROM pg_catalog.pg_stat_activity; $$
-LANGUAGE sql
-SECURITY DEFINER;
-CREATE OR REPLACE FUNCTION datadog.pg_stat_statements() RETURNS SETOF pg_stat_statements AS
-    $$ SELECT * FROM pg_stat_statements; $$
-LANGUAGE sql
-SECURITY DEFINER;
-```
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -229,10 +216,6 @@ After you've installed the Host Agent, edit the Agent's `conf.d/postgres.d/conf.
        port: 5432
        username: datadog
        password: 'ENC[datadog_user_database_password]'
-
-      ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
-      # pg_stat_statements_view: datadog.pg_stat_statements()
-      # pg_stat_activity_view: datadog.pg_stat_activity()
 
       ## Optional: Connect to a different database if needed for `custom_queries`
       # dbname: '<DB_NAME>'
@@ -377,7 +360,7 @@ Using the [Operator instructions in Kubernetes and Integrations][3] as a referen
     ```shell
     kubectl apply -f datadog-agent.yaml
     ```
-  
+
 ### Helm
 
 Using the [Helm instructions in Kubernetes and Integrations][4] as a reference, follow the steps below to set up the Postgres integration:
@@ -437,10 +420,6 @@ instances:
     port: 5432
     username: datadog
     password: 'ENC[datadog_user_database_password]'
-
-    ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
-    # pg_stat_statements_view: datadog.pg_stat_statements()
-    # pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
 ### Configure with Kubernetes service annotations
@@ -472,7 +451,7 @@ metadata:
             }
           ]
         }
-      }      
+      }
 spec:
   ports:
   - port: 5432
