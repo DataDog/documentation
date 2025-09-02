@@ -27,7 +27,7 @@ The Consistent palette maps tag values to colors using a deterministic hashing a
 
 Because the color mapping is fixed and the palette is limited, multiple tag values may be assigned the same color, particularly when the number of tag groups exceeds the number of available colors.
 
-This tradeoff prioritizes color consistency across time and views over uniqueness within a single widget.
+This trade-off prioritizes color consistency across time and views over uniqueness within a single widget.
 
 ## Limitations and maintainence challenges
 
@@ -138,9 +138,11 @@ To simplify this process, consider automating widget creation or updates through
 ## Resolution options
 
 **Use color overrides for small, stable group sets**
+
 If your graph displays a small and relatively fixed number of tag values (fewer than 15), such as datacenters or regions, you can assign a unique color to each series using the color override feature. For more details, see [Color overrides][1].
 
 **Use a higher-cardinality palette for larger datasets**
+
 For graphs with many tag values, switch to a palette like `Datadog16`, which includes more distinct colors and reduces the likelihood of duplication.
 
 ## Further reading
