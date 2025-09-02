@@ -103,12 +103,18 @@ The following section provides additional notes, troubleshooting guidance, and k
 
 {{< programming-lang lang="java" >}}
 
+### Limitations
+
+By default, SSI does not instrument some Java applications and libraries to avoid performance overhead or low-value traces. These exclusions are defined in the [Java tracer denylist][1]. If your workload is included, the injector skips attaching the Java agent.
+
 ### Troubleshooting
 
-**Environment Variable Length**: If your application uses extensive command-line options or environment variables, you might encounter initialization failures. This typically occurs when you have many JVM arguments or other startup configurations. To resolve this:
+**Environment variable length**: If your application uses extensive command-line options or environment variables, you might encounter initialization failures. This typically occurs when you have many JVM arguments or other startup configurations. To resolve this:
   - Minimize non-essential JVM arguments
   - Consider moving some configurations to a `.properties` file
   - Check application logs for specific initialization errors
+
+[1]: https://github.com/DataDog/dd-trace-java/blob/master/metadata/requirements.json
 
 {{< /programming-lang >}}
 

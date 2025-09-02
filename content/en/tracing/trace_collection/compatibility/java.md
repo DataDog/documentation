@@ -292,6 +292,7 @@ Integrations can be enabled or disabled individually (overriding the default abo
 
 - Running the Java tracer in Bitbucket is not supported.
 - Loading multiple Java Agents that perform APM/tracing functions is not a recommended or supported configuration.
+- When enabling the tracer for Java 24+, you may see warnings related to JNI native access or `sun.misc.Unsafe` memory access. Suppress these warnings by adding the `--illegal-native-access=allow` and `--sun-misc-unsafe-memory-access=allow` environment variables right before the `-javaagent:/path/to/dd-java-agent.jar` argument. See [JEP 472][13] and [JEP 498][14] for more information.
 
 ## GraalVM Native Image support
 
@@ -447,3 +448,5 @@ For more information, see [Configure APM and DogstatsD communication mode][11]. 
 [10]: /opentelemetry/interoperability/instrumentation_libraries/?tab=java
 [11]: /containers/cluster_agent/admission_controller/?tab=datadogoperator#configure-apm-and-dogstatsd-communication-mode
 [12]: /tracing/trace_collection/library_config/#agent
+[13]: https://openjdk.org/jeps/472
+[14]: https://openjdk.org/jeps/498
