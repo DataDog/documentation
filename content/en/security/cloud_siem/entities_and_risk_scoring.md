@@ -62,7 +62,7 @@ Each signal has a score impact. You can see a signal's score impact in the entit
 | Signal Severity | Number of points |
 |-----------------|------------------|
 | Critical        | `100`            |
-| High            | `50              |
+| High            | `50`             |
 | Medium          | `5`              |
 | Low and Info    | `0`              |
 
@@ -72,11 +72,11 @@ The threshold severity of an entity is calculated by adding up the score impact 
 
 | Entity's Threshold Severity | Sum of the score impact for all related signals |
 |-----------------------------| ------------------------------------------------|
-| Critical                    | Greater than or equal to 100                    |
-| High                        | Between 50 and 100, exclusive                   |
-| Medium                      | Between 25 and 50, exclusive                    |
-| Low                         | Between 10 and 25, exclusive                    |
-| Info                        | Less than or equal to 10                        |
+| Critical                    | Greater than or equal to `100`                  |
+| High                        | Between `50` and `100`, exclusive               |
+| Medium                      | Between `25` and `50`, exclusive                |
+| Low                         | Between `10` and `25`, exclusive                |
+| Info                        | Less than or equal to `10`                      |
 
 ## Further reading
 
