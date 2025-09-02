@@ -169,7 +169,6 @@ Iterate over steps extracting variables for browser and mobile tests:
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ## Display custom notifications message
 
 Synthetic Monitoring notifications support the ability to display **only the custom notification message** in alert notifications, hiding all default enriched content such as query details, tags, screenshots, and footers.
@@ -203,9 +202,6 @@ You can select from the following options to hide or display the information rel
 See [Monitor Notifications][5] for more information.
 
 ## Simulate notifications
-
-{{< site-region region="gov" >}}<div class="alert alert-warning"> Enter summary here <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 You can test your notification messages by sending simulated notifications. To do this:
 
