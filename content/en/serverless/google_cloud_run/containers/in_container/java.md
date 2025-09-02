@@ -46,9 +46,11 @@ implementation 'com.datadoghq:dd-trace-api:DD_TRACE_JAVA_VERSION_HERE'
       {{% /tab %}}
       {{< /tabs >}}
 
+      See [dd-trace-java releases][1] for the latest tracer version.
+
    3. Add the `@Trace` annotation to any method you want to trace.
 
-   For more information, see [Tracing Java Applications][1].
+   For more information, see [Tracing Java Applications][2].
 
 2. **Install serverless-init**.
 
@@ -58,7 +60,7 @@ implementation 'com.datadoghq:dd-trace-api:DD_TRACE_JAVA_VERSION_HERE'
 
    To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows `serverless-init` to read logs from stdout and stderr.
 
-   Datadog also recommends setting the environment variable `DD_SOURCE=java` to enable advanced Datadog log parsing.
+   Datadog also recommends setting the environment variable `DD_LOGS_INJECTION=true` and `DD_SOURCE=java` to enable advanced Datadog log parsing.
 
    If you want multiline logs to be preserved in a single log message, Datadog recommends writing your logs in *compact* JSON format. For example, you can use a third-party logging library such as `Log4j 2`:
 
@@ -76,7 +78,7 @@ logger.info("Hello World!");
 </Configuration>
 {{< /code-block >}}
 
-   For more information, see [Correlating Java Logs and Traces][2].
+   For more information, see [Correlating Java Logs and Traces][3].
 
 4. **Configure your application**.
 
@@ -86,7 +88,7 @@ logger.info("Hello World!");
 
 6. **Send custom metrics**.
 
-   To send custom metrics, [install the DogStatsD client][3] and [view code examples][4].
+   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
 {{% gcr-env-vars instrumentationMethod="in-container" language="java" %}}
 
@@ -98,8 +100,9 @@ logger.info("Hello World!");
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
-[2]: /tracing/other_telemetry/connect_logs_and_traces/java/
-[3]: /developers/dogstatsd/?tab=java#install-the-dogstatsd-client
-[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=java#code-examples
+[1]: https://github.com/DataDog/dd-trace-java/releases
+[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+[3]: /tracing/other_telemetry/connect_logs_and_traces/java/
+[4]: /developers/dogstatsd/?tab=java#install-the-dogstatsd-client
+[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=java#code-examples
 
