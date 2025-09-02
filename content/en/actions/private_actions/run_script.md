@@ -130,8 +130,6 @@ runPredefinedScript:
 
 To view the latest version of the PAR, check [this URL][6].
 
-Before updating the PAR, you need to have [remote configuration][7] enabled in your organization for the workflow automation mode.
-
 ### Docker mode
 Navigate to the directory where you started the PAR. Next, navigate to the `config` directory, then the `config.yaml` file. 
 
