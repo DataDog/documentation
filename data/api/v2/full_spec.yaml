@@ -68656,6 +68656,71 @@ paths:
         - name: suppression_id
           source: data.id
         type: unsafe
+  /api/v2/security_monitoring/configuration/suppressions/rules:
+    post:
+      description: Get the list of suppressions that would affect a rule.
+      operationId: GetSuppressionsAffectingFutureRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringRuleCreatePayload'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSuppressionsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_suppressions_read
+      summary: Get suppressions affecting future rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 0
+      x-undo:
+        type: safe
+  /api/v2/security_monitoring/configuration/suppressions/rules/{rule_id}:
+    get:
+      description: Get the list of suppressions that affect a specific existing rule
+        by its ID.
+      operationId: GetSuppressionsAffectingRule
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringRuleID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSuppressionsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_suppressions_read
+      summary: Get suppressions affecting a specific rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 0
+      x-undo:
+        type: safe
   /api/v2/security_monitoring/configuration/suppressions/{suppression_id}:
     delete:
       description: Delete a specific suppression rule.

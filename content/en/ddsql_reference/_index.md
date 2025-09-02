@@ -107,7 +107,7 @@ DDSQL supports the following data types:
 
 ### Array types
 
-All data types except `JSON` support array types. Arrays can contain multiple values of the same data type.
+All data types support array types. Arrays can contain multiple values of the same data type.
 
 ## Type literals
 
@@ -123,7 +123,7 @@ DDSQL supports explicit type literals using the syntax `[TYPE] [value]`.
 | `TIMESTAMP` | `TIMESTAMP 'value'` | `TIMESTAMP '2023-12-25 10:30:00'` |
 | `VARCHAR` | `VARCHAR 'value'` | `VARCHAR 'hello world'` |
 
-The type prefix can be omitted and the type is automatically inferred from the value. For example, `'hello world'` is inferred as `VARCHAR`, `123` as `BIGINT`, and `true` as `BOOLEAN`.
+The type prefix can be omitted and the type is automatically inferred from the value. For example, `'hello world'` is inferred as `VARCHAR`, `123` as `BIGINT`, and `true` as `BOOLEAN`. Use explicit type prefixes when values could be ambiguous; for example,`TIMESTAMP '2025-01-01'` would be inferred as `VARCHAR` without the prefix.
 
 ### Array literals
 
@@ -145,7 +145,7 @@ SELECT
     price * DOUBLE 1.08 AS price_with_tax,
     created_at + INTERVAL '7 days' AS expiry_date
 FROM products
-WHERE active = BOOLEAN true;
+WHERE created_at > TIMESTAMP '2025-01-01';
 {{< /code-block >}}
 
 ## Functions
