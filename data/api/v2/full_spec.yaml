@@ -14358,6 +14358,10 @@ components:
       description: Entity definition in raw JSON or YAML representation.
       example: "apiVersion: v3\nkind: service\nmetadata:\n  name: myservice\n"
       type: string
+    EntityReference:
+      description: The unique reference for an IDP entity.
+      example: service:my-service
+      type: string
     EntityRelationships:
       description: Entity relationships.
       properties:
@@ -35115,6 +35119,8 @@ components:
           description: If enabled, the rule is calculated as part of the score.
           example: true
           type: boolean
+        level:
+          $ref: '#/components/schemas/RuleLevel'
         modified_at:
           description: Time of the last rule outcome modification.
           format: date-time
@@ -35135,6 +35141,13 @@ components:
       description: The unique ID for a scorecard rule.
       example: q8MQxk8TCqrHnWkx
       type: string
+    RuleLevel:
+      description: The maturity level of the rule (1, 2, or 3).
+      example: 2
+      format: int32
+      maximum: 3
+      minimum: 1
+      type: integer
     RuleName:
       description: Name of the notification rule.
       example: Rule 1
@@ -40118,6 +40131,12 @@ components:
         replacement_string:
           description: Required if type == 'replacement_string'.
           type: string
+        should_save_match:
+          description: "Only valid when type == `replacement_string`. When enabled,
+            matches can be unmasked in logs by users with \u2018Data Scanner Unmask\u2019
+            permission. As a security best practice, avoid masking for highly-sensitive,
+            long-lived data."
+          type: boolean
         type:
           $ref: '#/components/schemas/SensitiveDataScannerTextReplacementType'
       type: object
@@ -44511,6 +44530,57 @@ components:
         id:
           $ref: '#/components/schemas/ApiID'
       type: object
+    UpdateOutcomesAsyncAttributes:
+      description: The JSON:API attributes for a batched set of scorecard outcomes.
+      properties:
+        results:
+          description: Set of scorecard outcomes to update asynchronously.
+          items:
+            $ref: '#/components/schemas/UpdateOutcomesAsyncRequestItem'
+          type: array
+      type: object
+    UpdateOutcomesAsyncRequest:
+      description: Scorecard outcomes batch request.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateOutcomesAsyncRequestData'
+      type: object
+    UpdateOutcomesAsyncRequestData:
+      description: Scorecard outcomes batch request data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateOutcomesAsyncAttributes'
+        type:
+          $ref: '#/components/schemas/UpdateOutcomesAsyncType'
+      type: object
+    UpdateOutcomesAsyncRequestItem:
+      description: Scorecard outcome for a single entity and rule.
+      properties:
+        entity_reference:
+          $ref: '#/components/schemas/EntityReference'
+        remarks:
+          description: Any remarks regarding the scorecard rule's evaluation. Supports
+            HTML hyperlinks.
+          example: 'See: <a href="https://app.datadoghq.com/services">Services</a>'
+          type: string
+        rule_id:
+          $ref: '#/components/schemas/RuleId'
+        state:
+          $ref: '#/components/schemas/State'
+      required:
+      - rule_id
+      - entity_reference
+      - state
+      type: object
+    UpdateOutcomesAsyncType:
+      default: batched-outcome
+      description: The JSON:API type for scorecard outcomes.
+      enum:
+      - batched-outcome
+      example: batched-outcome
+      type: string
+      x-enum-varnames:
+      - BATCHED_OUTCOME
     UpdateResourceEvaluationFiltersRequest:
       description: Request object to update a resource filter.
       properties:
@@ -46677,6 +46747,7 @@ paths:
     delete:
       description: Delete an existing Action Connection. This API requires a [registered
         application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
+        Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
       operationId: DeleteActionConnection
       parameters:
       - $ref: '#/components/parameters/ConnectionId'
@@ -46819,9 +46890,13 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get AWS Scan Options
+      summary: List AWS Scan Options
       tags:
       - Agentless Scanning
+      x-given:
+        aws_scan_options:
+          source: data[0]
+          step: there is a valid "aws_scan_options" in the system
       x-menu-order: 1
       x-undo:
         type: safe
@@ -46854,7 +46929,7 @@ paths:
       tags:
       - Agentless Scanning
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 3
       x-undo:
         operationId: DeleteAwsScanOptions
         parameters:
@@ -46881,9 +46956,35 @@ paths:
       summary: Delete AWS Scan Options
       tags:
       - Agentless Scanning
-      x-menu-order: 4
+      x-menu-order: 5
       x-undo:
         type: idempotent
+    get:
+      description: Fetches the Agentless scan options for an activated account.
+      operationId: GetAwsScanOptions
+      parameters:
+      - $ref: '#/components/parameters/AwsAccountId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AwsScanOptionsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get AWS scan options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 2
+      x-undo:
+        type: safe
     patch:
       description: Update the Agentless scan options for an activated account.
       operationId: UpdateAwsScanOptions
@@ -46911,7 +47012,7 @@ paths:
       tags:
       - Agentless Scanning
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v2/agentless_scanning/ondemand/aws:
@@ -46932,7 +47033,7 @@ paths:
       summary: Get AWS On Demand tasks
       tags:
       - Agentless Scanning
-      x-menu-order: 5
+      x-menu-order: 6
       x-permission:
         operator: OR
         permissions:
@@ -46968,7 +47069,7 @@ paths:
       tags:
       - Agentless Scanning
       x-codegen-request-body-name: body
-      x-menu-order: 7
+      x-menu-order: 8
       x-permission:
         operator: OR
         permissions:
@@ -46999,7 +47100,7 @@ paths:
       summary: Get AWS On Demand task by id
       tags:
       - Agentless Scanning
-      x-menu-order: 6
+      x-menu-order: 7
       x-permission:
         operator: OR
         permissions:
@@ -47938,6 +48039,7 @@ paths:
     delete:
       description: Delete multiple apps in a single request from a list of app IDs.
         This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
+        Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
       operationId: DeleteApps
       requestBody:
         content:
@@ -47987,6 +48089,7 @@ paths:
         is paginated. Only basic app information such as the app ID, name, and description
         is returned by this endpoint. This API requires a [registered application
         key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
+        Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
       operationId: ListApps
       parameters:
       - description: The number of apps to return per page.
@@ -48097,6 +48200,7 @@ paths:
     post:
       description: Create a new app, returning the app ID. This API requires a [registered
         application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
+        Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
       operationId: CreateApp
       requestBody:
         content:
@@ -48162,6 +48266,7 @@ paths:
     delete:
       description: Delete a single app. This API requires a [registered application
         key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
+        Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
       operationId: DeleteApp
       parameters:
       - description: The ID of the app to delete.
@@ -48218,6 +48323,7 @@ paths:
     get:
       description: Get the full definition of an app. This API requires a [registered
         application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
+        Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
       operationId: GetApp
       parameters:
       - description: The ID of the app to retrieve.
@@ -48284,6 +48390,7 @@ paths:
     patch:
       description: Update an existing app. This creates a new version of the app.
         This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
+        Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
       operationId: UpdateApp
       parameters:
       - description: The ID of the app to update.
@@ -48340,6 +48447,7 @@ paths:
         (`00000000-0000-0000-0000-000000000000`). The app can still be updated and
         published again in the future. This API requires a [registered application
         key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
+        Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
       operationId: UnpublishApp
       parameters:
       - description: The ID of the app to unpublish.
@@ -48392,6 +48500,7 @@ paths:
         to the correct users, you also need to set a [Restriction Policy](https://docs.datadoghq.com/api/latest/restriction-policies/)
         on the app if a policy does not yet exist. This API requires a [registered
         application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
+        Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
       operationId: PublishApp
       parameters:
       - description: The ID of the app to publish.
@@ -65564,6 +65673,42 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Updates multiple scorecard rule outcomes in a single batched request.
+      operationId: UpdateScorecardOutcomesAsync
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOutcomesAsyncRequest'
+        description: Set of scorecard outcomes.
+        required: true
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
+      summary: Update Scorecard outcomes asynchronously
+      tags:
+      - Service Scorecards
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/scorecard/outcomes/batch:
     post:
       description: Sets multiple service-rule outcomes in a single batched request.
@@ -72992,6 +73137,7 @@ paths:
     post:
       description: Create a new workflow, returning the workflow ID. This API requires
         a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
+        Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
       operationId: CreateWorkflow
       requestBody:
         content:
@@ -73054,6 +73200,7 @@ paths:
     delete:
       description: Delete a workflow by ID. This API requires a [registered application
         key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
+        Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
       operationId: DeleteWorkflow
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -73091,6 +73238,7 @@ paths:
     get:
       description: Get a workflow by ID. This API requires a [registered application
         key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
+        Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
       operationId: GetWorkflow
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -73138,6 +73286,7 @@ paths:
     patch:
       description: Update a workflow by ID. This API requires a [registered application
         key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
+        Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
       operationId: UpdateWorkflow
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -73192,6 +73341,7 @@ paths:
     get:
       description: List all instances of a given workflow. This API requires a [registered
         application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
+        Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
       operationId: ListWorkflowInstances
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -73228,6 +73378,7 @@ paths:
     post:
       description: Execute the given workflow. This API requires a [registered application
         key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
+        Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
       operationId: CreateWorkflowInstance
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -73270,6 +73421,7 @@ paths:
     get:
       description: Get a specific execution of a given workflow. This API requires
         a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
+        Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
       operationId: GetWorkflowInstance
       parameters:
       - $ref: '#/components/parameters/WorkflowId'
@@ -73308,6 +73460,7 @@ paths:
     put:
       description: Cancels a specific execution of a given workflow. This API requires
         a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
+        Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
       operationId: CancelWorkflowInstance
       parameters:
       - $ref: '#/components/parameters/WorkflowId'

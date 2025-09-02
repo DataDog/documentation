@@ -18,12 +18,11 @@ When Watchdog identifies that an external provider you are using is faulty, it f
 
 {{< img src="watchdog/external_provider_outage.png" alt="Faulty SaaS API vendor detection" >}}
 
-Whenever a provider degradation is detected, Watchdog creates an event in the [Event Explorer][1]. You can set up a monitor to get automatically notified on such events:
+Whenever Watchdog detects a provider degradation, it creates an event in the [Event Explorer][1]. You can set up a monitor to get automatically notified on such events:
 
 1. Go to the [New Monitor][2] page.
 2. Choose **Watchdog**.
 3. Select `Third Party` in the alert category.
-
 
 ## Supported providers
 Watchdog monitors the status of the following external providers' APIs: 
