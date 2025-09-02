@@ -873,7 +873,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following array processo
     "source": "httpRequest.headers",
     "target": "referrer",
     "filter": "name:Referrer",
-    "value_to_xtract": "value"
+    "value_to_extract": "value"
   }
 }
 ```
