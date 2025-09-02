@@ -53,6 +53,31 @@ An entity's risk score approximates the entity's risk level over the past 14 day
 
 The risk score is calculated from the characteristics of the entity's associated signals, such as the severity level of the signal and how many times the signal has fired.
 
+### Signal's score impact
+
+Each signal has a score impact. You can see a signal's score impact in the entity panel.
+
+**Note**: A signal's score impact lasts for 2 weeks, after which the score drops to `0`.
+
+| Signal Severity | Number of points |
+|-----------------|------------------|
+| Critical        | `100`            |
+| High            | `50              |
+| Medium          | `5`              |
+| Low and Info    | `0`              |
+
+### Entity's threshold severity
+
+The threshold severity of an entity is calculated by adding up the score impact for all signals associated with the entity.
+
+| Entity's Threshold Severity | Sum of the score impact for all related signals |
+|-----------------------------| ------------------------------------------------|
+| Critical                    | Greater than or equal to 100                    |
+| High                        | Between 50 and 100, exclusive                   |
+| Medium                      | Between 25 and 50, exclusive                    |
+| Low                         | Between 10 and 25, exclusive                    |
+| Info                        | Less than or equal to 10                        |
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
