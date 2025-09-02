@@ -85,6 +85,10 @@ HAVING SUM(quantity) > 10 {{< /code-block >}} |
 | `IN`, `ON`, `OR`  | Used for specified conditions in queries. Available in `WHERE`, `JOIN` clauses.       | {{< code-block lang="sql" >}}SELECT *
 FROM orders
 WHERE order_status IN ('Shipped', 'Pending') {{< /code-block >}} |
+| `USING`  | This clause is a shorthand for joins where both tables share the same column names. It takes a list of those columns and creates equality conditions for each one. For example, joining `T1` and `T2` with `USING (a, b)` is equivalent to `ON T1.a = T2.a AND T1.b = T2.b`.     | {{< code-block lang="sql" >}} SELECT orders.order_id, customers.customer_name
+FROM orders
+JOIN customers
+USING (customer_id) {{< /code-block >}} |
 | `AS`        | Renames a column or table with an alias.                                                        | {{< code-block lang="sql" >}}SELECT first_name AS name
 FROM employees {{< /code-block >}}                |
 | Arithmetic Operations | Performs basic calculations using operators like `+`, `-`, `*`, `/`.                 | {{< code-block lang="sql" >}}SELECT price, tax, (price * tax) AS total_cost
@@ -140,7 +144,7 @@ SELECT ARRAY[1.1, 2.2, 3.3] AS decimals;             -- Inferred as DOUBLE array
 
 {{< code-block lang="sql" >}}
 -- Using type literals in queries
-SELECT 
+SELECT
     VARCHAR 'Product Name: ' || name AS labeled_name,
     price * DOUBLE 1.08 AS price_with_tax,
     created_at + INTERVAL '7 days' AS expiry_date
@@ -536,7 +540,7 @@ SELECT regexp_replace('INFO INFO INFO', 'INFO', 'DEBUG', 1, 2);
 You can use the following flags with [regular expression functions](#regular-expressions):
 
 `i`
-: Case-insensitive matching 
+: Case-insensitive matching
 
 `n` or `m`
 : Newline-sensitive matching
@@ -549,10 +553,10 @@ You can use the following flags with [regular expression functions](#regular-exp
 ### `i` flag
 
 {{< code-block lang="sql" >}}
-SELECT regexp_match('INFO', 'info') 
+SELECT regexp_match('INFO', 'info')
 -- NULL
 
-SELECT regexp_match('INFO', 'info', 'i') 
+SELECT regexp_match('INFO', 'info', 'i')
 -- ['INFO']
 {{< /code-block >}}
 
@@ -566,7 +570,7 @@ b', '^b');
 SELECT regexp_match('a
 b', '^b', 'n');
 -- ['b']
-{{< /code-block >}}   
+{{< /code-block >}}
 
 ### `g` flag
 
@@ -608,7 +612,7 @@ This table provides an overview of the supported window functions. For comprehen
 
 {{< callout url="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/" >}}
 Querying Logs and Metrics through DDSQL is in Preview. Use this form to request access.
-{{< /callout >}} 
+{{< /callout >}}
 
 Table functions are used to query Logs and Metrics
 
