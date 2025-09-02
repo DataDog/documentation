@@ -85,7 +85,7 @@ There are several configuration mechanisms that can block or alter injection beh
 SSI downloads language tracing libraries and an injector package onto each host. The amount of disk space required depends on the number of languages in use and the number of pods being instrumented. A rough estimate is:
 
 <div style="text-align:center;">
-  <pre><code>sum of the language library sizes
+  <pre><code>[sum of the language library sizes]
 +
 [injector package size] * [number of injected pods per host]</code></pre>
 </div>
