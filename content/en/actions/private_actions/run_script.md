@@ -34,7 +34,7 @@ To use the script action, you need:
 - **PAR Version**: 1.7.0 or later. See [set up a private action runner][2] to get started.
 - anything else? 🤨
 
-## Set up a private action runner script
+## Set up a PAR script
 
 ### 1. Update your runner image
 
