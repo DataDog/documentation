@@ -20,9 +20,11 @@ description: Learn how to create a Datadog Log Integration Pipeline.
 ---
 ## Overview
 
-Log pipelines parse, filter, and enrich incoming logs to make them searchable and actionable within Datadog. For Technology Partners, pipelines ensure that their logs are delivered in a structured, meaningful format right out of the box. For end users, prebuilt pipelines reduce the need to create custom parsing rules, allowing them to focus on troubleshooting and monitoring.
+Log pipelines parse, filter, and enrich incoming logs to make them searchable and actionable within Datadog. For Technology Partners, pipelines ensure that their logs are delivered in a structured, meaningful format right out of the box. For end users, prebuilt pipelines reduce the need to create custom parsing rules, allowing them to focus on troubleshooting and monitoring. Log pipelines are required for integrations that submit logs to Datadog.
 
-This guide explains how to create a log pipeline for integrations that send logs into Datadog, including best practices and requirements. For a hands-on learning experience, check out related courses in the Datadog Learning Center:
+{{< img src="developers/integrations/pipeline_library.png" alt="Browse the integration pipeline library" style="width:100%;" >}}
+
+This guide explains how to create a log pipeline, including best practices and requirements. For a hands-on learning experience, check out related courses in the Datadog Learning Center:
    - [Process Logs Out of the Box with Integration Pipelines][1]
    - [Build and Manage Log Pipelines][2] 
 
@@ -82,11 +84,10 @@ To add a processor, open your newly created pipeline and select **Add Processor*
 ### Define custom facets
 
 After logs are normalized and enriched, the next step is to create custom facets, which map individual attributes to user-friendly fields in Datadog.
-   - While not strictly required, custom facets provide key benefits:
-      - They give users a consistent interface for filtering logs. Facets also power autocomplete in the Logs Explorer, making it easier to discover and aggregate important information.
-      - They allow attributes with low readability to be renamed with clear, user-friendly labels. For example, `@deviceCPUper` → `Device CPU Utilization Percentage`.
-   - Facets can be either qualitative (string or numeric values used for basic filtering and grouping) or quantitative, known as measures (numeric values used for aggregation, such as averaging or range filtering). See [Facets][5] to learn more.
-   - Create facets for attributes that users are most likely to filter, search, or group by in the Logs Explorer.
+
+Custom facets provide users with a consistent interface for filtering logs and power autocomplete in the Logs Explorer, making it easier to discover and aggregate important information. They also allow attributes with low readability to be renamed with clear, user-friendly labels. For example, transforming `@deviceCPUper` into `Device CPU Utilization Percentage`.
+
+Facets can be either qualitative (string or numeric values for basic filtering and grouping) or quantitative, known as measures (numeric values for aggregation operations, such as averaging or range filtering). Create facets for attributes that users are most likely to filter, search, or group by in the Logs Explorer. See [Facets][5] to learn more.
 
 **Note**: You do not need to create facets for [Datadog Standard Attributes][9]. These attributes are mapped to predefined facets, which Datadog automatically generates when a pipeline is published.
 
@@ -173,4 +174,3 @@ The final step is to export the pipeline and upload the files to the Developer P
 [18]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#string-builder-processor
 [19]: https://app.datadoghq.com/logs
 [20]: https://docs.datadoghq.com/logs/log_configuration/pipeline_scanner/
-[21]: https://docs.datadoghq.com/logs/explorer/
