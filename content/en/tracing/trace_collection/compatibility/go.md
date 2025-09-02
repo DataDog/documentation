@@ -250,7 +250,7 @@ import "github.com/DataDog/dd-trace-go/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>/v2"
 | [gRPC][10]        | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc][11]     |
 | [gRPC v1.2][10]   | Manual                                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12][12] |
 | [chi][13]         | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi][14]                 |
-| [chi v5][13]         | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi.v5][TODO]                 |
+| [chi v5][13]         | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi.v5][78]                 |
 | [echo v4][15]     | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4][16]           |
 | [echo v3][15]     | Manual                                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo][17]              |
 | [Negroni][79]    | Manual or Compile-Time                              | [gopkg.in/DataDog/dd-trace-go.v1/contrib/urfave/negroni][80]            |
@@ -311,7 +311,7 @@ The Go tracer includes support for the following data stores and libraries.
 | [Memcache][73]          | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/bradfitz/gomemcache/memcache][74]      |
 | [go-pg v10][109] | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-pg/pg.v10][110] |
 | [Bun][111] | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/uptrace/bun][112] |
-| [Logrus][113]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/sirupsen/logrus][114]                   |
+| [Logrus][113]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/sirupsen/logrus][119]                   |
 | [Valkey-go][115]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/valkey-io/valkey-go][116]                   |
 | [Goji][117]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/zenazn/goji.v1/web][118]                   |
 
@@ -396,25 +396,25 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 [79]: https://github.com/urfave/negroni
 [80]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/urfave/negroni/
 [81]: https://github.com/dimfeld/httptreemux
-[82]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/dimfeld/httptreemux.v5
+[82]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/dimfeld/httptreemux.v5
 [83]: https://github.com/valyala/fasthttp
-[84]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/valyala/fasthttp.v1
+[84]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/valyala/fasthttp.v1
 [85]: https://github.com/elastic/go-elasticsearch
-[86]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/elastic/go-elasticsearch.v6
+[86]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/elastic/go-elasticsearch.v6
 [87]: https://github.com/graphql-go/graphql
-[88]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/graphql-go/graphql
+[88]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/graphql-go/graphql
 [89]: https://github.com/99designs/gqlgen
-[90]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/99designs/gqlgen
-[91]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/go-redis/redis.v7
-[92]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/redis/go-redis.v9
+[90]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/99designs/gqlgen
+[91]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis.v7
+[92]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/redis/go-redis.v9
 [93]: https://github.com/redis/rueidis
-[94]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/redis/rueidis
+[94]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/redis/rueidis
 [95]: https://github.com/jackc/pgx
-[96]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/jackc/pgx.v5
+[96]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/jackc/pgx.v5
 [97]: https://github.com/confluentinc/confluent-kafka-go
-[98]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/confluentinc/confluent-kafka-go/kafka.v2
+[98]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go/kafka.v2
 [99]: https://github.com/segmentio/kafka-go
-[100]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/segmentio/kafka.go.v0
+[100]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/segmentio/kafka.go.v0
 [101]: https://github.com/googleapis/google-cloud-go/tree/main/pubsub
 [102]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/cloud.google.com/go/pubsub.v1
 [103]: https://github.com/emicklei/go-restful
@@ -428,7 +428,7 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 [111]: https://github.com/uptrace/bun
 [112]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/uptrace/bun
 [113]: https://github.com/sirupsen/logrus
-[114]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/sirupsen/logrus
+[119]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/sirupsen/logrus
 [115]: https://github.com/valkey-io/valkey-go
 [116]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/valkey-go
 [117]: https://github.com/zenazn/goji/
