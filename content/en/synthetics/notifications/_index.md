@@ -233,8 +233,8 @@ Simulated notifications include **[TEST]** in their subject lines and use a defa
 
 - The test results used in simulations are standardized sample data, not actual results from your specific test configuration.
 - Results vary based on test type, subtype (for API tests), and notification type:
-  - **Alert notifications**: Use simulated failure data
-  - **Recovery notifications**: Use simulated success data
+  - **Alert notifications**: Simulated failure data
+  - **Recovery notifications**: Simulated success data
 - All users receive the same simulated data regardless of their test setup
 
 ## Further Reading
