@@ -166,7 +166,7 @@ Navigate to the directory containing your `docker-compose.yaml` file. Next, navi
 
 ```yaml
 services:
-  runner:
+  private-actions-runner:
     image: gcr.io/datadoghq/private-action-runner:<latest_version>
     cpus: 25
     mem_limit: 1g
