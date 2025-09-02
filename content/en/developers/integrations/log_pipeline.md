@@ -87,7 +87,7 @@ After logs are normalized and enriched, the next step is to create custom facets
 
 Custom facets provide users with a consistent interface for filtering logs and power autocomplete in the Logs Explorer, making it easier to discover and aggregate important information. They also allow attributes with low readability to be renamed with clear, user-friendly labels. For example, transforming `@deviceCPUper` into `Device CPU Utilization Percentage`.
 
-Facets can be qualitative (for filtering and grouping) or quantitative measures (for aggregation like averaging or range filtering). Create facets for attributes that users are most likely to filter, search, or group by in the Logs Explorer. See [Facets][5] to learn more.
+Facets can be qualitative (for basic filtering and grouping) or quantitative, known as measures (for aggregation operations, such as averaging or range filtering). Create facets for attributes that users are most likely to filter, search, or group by in the Logs Explorer. See [Facets][5] to learn more.
 
 **Note**: You do not need to create facets for [Datadog Standard Attributes][9]. These attributes are mapped to predefined facets, which Datadog automatically generates when a pipeline is published.
 
