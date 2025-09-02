@@ -107,7 +107,7 @@ In Project Settings, you can manage membership, configure the auto-closing of ca
 - A case can only be synced with one external resource at a time, per project. To enable Jira syncing, ServiceNow automatic creation and syncing must be disabled.
 - Only cases using the core statuses of "Open", "In Progress" and "Closed" can sync with Jira.
 - Two-way syncing requires [webhook support][2].
-- Available for Jira Cloud, not Jira Data Center.
+- Issue creation is available for Jira Cloud and Data Center. Field syncing is only available for Jira Cloud.
 {{% /collapse-content %}}
 
 {{% collapse-content title="ServiceNow Configuration" level="h4" expanded=false id="servicenow" %}}

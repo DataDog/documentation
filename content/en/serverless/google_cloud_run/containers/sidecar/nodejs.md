@@ -82,13 +82,15 @@ const logger = createLogger({
 logger.info(`Hello world!`);
 {{< /code-block >}}
 
-   Datadog recommends setting the environment variable `DD_SOURCE=nodejs` in your sidecar container to enable advanced Datadog log parsing.
+   Datadog recommends setting the environment variables `DD_LOGS_INJECTION=true` (in your main container) and `DD_SOURCE=nodejs` (in your sidecar container) to enable advanced Datadog log parsing.
 
    For more information, see [Correlating Node.js Logs and Traces][2].
 
-4. **Send custom metrics**.
+4. {{% gcr-service-label %}}
 
-   To send custom metrics, [view code examples][3].
+5. **Send custom metrics**.
+
+   To send custom metrics, [view code examples][3]. In serverless, only the *distribution* metric type is supported.
 
 {{% gcr-env-vars instrumentationMethod="sidecar" language="nodejs" %}}
 
