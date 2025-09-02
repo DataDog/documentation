@@ -469,17 +469,11 @@ myBar = 2
 ```
 
 ## Link results to Datadog services and teams
+
 ### Link results to services
 Datadog associates static code and library scan results with relevant services by using the following mechanisms:
 
-1. [Identifying the code location associated with a service using the Software Catalog.](#identifying-the-code-location-in-the-software-catalog)
-2. [Detecting usage patterns of files within additional Datadog products.](#detecting-file-usage-patterns)
-3. [Searching for the service name in the file path or repository.](#detecting-service-name-in-paths-and-repository-names)
-
-If one method succeeds, no further mapping attempts are made. Each mapping method is detailed below.
-
-#### Identifying the code location in the Software Catalog
-
+{{% collapse-content title="Identifying the code location in the Software Catalog" level="h4" %}}
 The [schema version `v3`][14] and later of the Software Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
 
 The `paths` attribute is a list of globs that should match paths in the repository.
@@ -496,7 +490,6 @@ datadog:
         - path/to/service/code/**
 {{< /code-block >}}
 
-
 If you want all the files in a repository to be associated with a service, you can use the glob `**` as follows:
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
@@ -510,16 +503,16 @@ datadog:
       paths:
         - "**"
 {{< /code-block >}}
+{{% /collapse-content %}}
 
-#### Detecting file usage patterns
-
+{{% collapse-content title="Detecting file usage patterns" level="h4" %}}
 Datadog detects file usage in additional products such as Error Tracking and associate
 files with the runtime service. For example, if a service called `foo` has
 a log entry or a stack trace containing a file with a path `/modules/foo/bar.py`,
 it associates files `/modules/foo/bar.py` to service `foo`.
+{{% /collapse-content %}}
 
-#### Detecting service name in paths and repository names
-
+{{% collapse-content title="Detecting service name in paths and repository names" level="h4" %}}
 Datadog detects service names in paths and repository names, and associates the file with the service if a match is found.
 
 For a repository match, if there is a service called `myservice` and
@@ -529,6 +522,9 @@ it associates `myservice` to all files in the repository.
 If no repository match is found, Datadog attempts to find a match in the
 `path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
 in the path, the service name closest to the filename is selected.
+{{% /collapse-content %}}
+
+If one method succeeds (in order), no further mapping attempts are made.
 
 ### Link results to teams
 
