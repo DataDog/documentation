@@ -110,7 +110,7 @@ If these are the correct values you want for the log sent to Datadog:
 }
 ```
 
-This the Custom Processor script to remap the `service` and `source` to the correct values:
+Use this Custom Processor script to remap the `service` and `source` to the correct values:
 
 ```json
   .source = "cdn-logs"
