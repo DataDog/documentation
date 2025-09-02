@@ -25,6 +25,7 @@ You can customize notifications using:
 - **[Conditional logic][3]**: Adapt alert messages across different test types and workflows.
 - **[Advanced usage][4]**: Structure complex messages using handlebars templating.
 - **[Custom notification display](#display-custom-notifications-message)**: Show only your custom message without default enriched content.
+- **[Simulate notifications](#simulate-notifications)**: Test your notification messages by sending simulated notifications.
 
 ## Pre-filled monitor messages
 
@@ -221,10 +222,10 @@ Simulated notifications include **[TEST]** in their subject lines and use a defa
 <table style="width:100%; border:none;">
 <tr>
 <td style="width:50%; text-align:center; border:none; padding:10px;">
-{{< img src="/synthetics/notifications/simulated_notifications_email.png" alt="Email notification simulating a test failure." style="height:400px; width:auto;" >}}
+{{< img src="/synthetics/notifications/simulated_notifications_email.png" alt="Email notification simulating a test failure." style= "width:100%;" >}}
 </td>
 <td style="width:50%; text-align:center; border:none; padding:10px;">
-{{< img src="/synthetics/notifications/simulated_notifications_email_recovered.png" alt="Email notification simulating a test recovery." style="height:400px; width:auto;" >}}
+{{< img src="/synthetics/notifications/simulated_notifications_email_recovered.png" alt="Email notification simulating a test recovery." style= "width:100%;" >}}
 </td>
 </tr>
 </table>
