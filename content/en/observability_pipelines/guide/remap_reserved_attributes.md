@@ -79,7 +79,7 @@ If you are processing logs with the following setup:
 - Using Splunk HEC as the source and Datadog as the destination.
 - Remapping or rewriting the value of `source` and/or `service`.
 
-You must follow the instructions in this section to remap the `source` and `service` attributes because Splunk's semantic meaning for the `service` attribute is the same as Datadog's semantic meaning for the `source` attribute.
+You must follow the instructions in this section to remap the `source` and `service` attributes because Splunk's `service` attribute is what Datadog calls the `source` attribute.
 
 **Note**: If you want to remap other reserved attributes, such as `env` and `hostname`, follow the [Remap the value of reserved attributes](#remap-the-value-of-reserved-attributes) instructions.
 
