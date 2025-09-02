@@ -25341,8 +25341,8 @@ components:
       - space
       type: object
     MetricCustomAggregations:
-      description: Deprecated. You no longer need to configure specific time and space
-        aggregations for Metrics Without Limits.
+      description: "Deprecated. You no longer need to configure specific time and
+        space aggregations for Metrics without Limits\u2122."
       example:
       - space: sum
         time: sum
