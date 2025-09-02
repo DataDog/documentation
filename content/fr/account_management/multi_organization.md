@@ -8,7 +8,7 @@ aliases:
 further_reading:
 - link: "https://docs.datadoghq.com/account_management/multi_organization/"
   tag: "Blog"
-  text: "Meilleures pratiques pour la gestion des organisations Datadog à grande échelle" (en anglais)
+  text: "Meilleures pratiques pour la gestion des organisations Datadog à grande échelle (en anglais)"
 - link: "/account_management/saml/"
   tag: "Documentation"
   text: "Configurer SAML pour votre compte Datadog"

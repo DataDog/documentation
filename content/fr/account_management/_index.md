@@ -10,7 +10,7 @@ cascade:
 further_reading:
     - link: "https://www.datadoghq.com/blog/volkswagen-organizations/"
       tag: "Blog"
-      text: "Meilleures pratiques pour la gestion des organisations Datadog à grande échelle" (en anglais)
+      text: "Meilleures pratiques pour la gestion des organisations Datadog à grande échelle (en anglais)"
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">La plateforme Datadog for Government prend uniquement en charge l'authentification SAML ou l'authentification de base avec nom d'utilisateur/adresse e-mail et mot de passe. Avant de configurer l'authentification SAML, assurez-vous qu'au moins un compte avec nom d'utilisateur ou adresse e-mail et mot de passe est disponible afin de maintenir l'accès pendant le processus de configuration. Datadog recommande d'activer l'authentification multifacteur (MFA) pour les comptes avec mot de passe.
