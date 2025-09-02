@@ -60,7 +60,7 @@ implementation 'com.datadoghq:dd-trace-api:LATEST_VERSION'
 
 <div class="alert alert-info">Remember to replace <code>LATEST_VERSION</code> with the same version as your Datadog Java tracer (<code>dd-java-agent</code>).</div>
 
-After the dependency is added, use `CorrelationIdentifier.getTraceId()` and `CorrelationIdentifier.getSpanId()` to retrieve and inject the IDs into your logging context, as shown in the following examples.
+After you add the dependency, use `CorrelationIdentifier.getTraceId()` and `CorrelationIdentifier.getSpanId()` to retrieve and inject the IDs into your logging context, as shown in the following examples.
 
 {{< tabs >}}
 {{% tab "Log4j 2" %}}
