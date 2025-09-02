@@ -43,11 +43,19 @@ Datadog APM 플랜에는 수집 및 인덱싱된 스팬이 포함되어 있습�
  - `datadog.estimated_usage.apm.ingested_spans`
  - `datadog.estimated_usage.apm.ingested_traces`
 
-`datadog.estimated_usage.apm.ingested_bytes`로 사용량을 제어하세요. 데이터 수집의 경우 스팬이나 트레이스 수가 아니라 볼륨에 따라 가격이 책정됩니다. 이 메트릭은 `env`와 `service`로 태깅되기 때문에 수집 볼륨에 영향을 주는 환경과 서비스를 바로 확인할 수 있습니다.
+사용량을 관리하려면 `datadog.estimated_usage.apm.ingested_bytes`를 사용하세요. 수집은 스팬이나 트레이스 수가 아닌 볼륨을 기준으로 측정됩니다. 이 메트릭에는 `env`, `service`, `sampling_service` 태그가 지정되어 있습니다. 이러한 태그는 수집 볼륨에 기여하는 환경과 서비스를 식별하는 데 도움이 됩니다. `sampling_service` 차원에 대한 자세한 내용은 [샘플링 서비스란 무엇인가요?](#what-is-the-sampling-service)를 참고하세요.
 
 이 메트릭은 `ingestion_reason`으로도 태깅되는데, 이를 통해 Datadog로 스팬을 전송하는 데 원인이 된 [수집 메커니즘][5]을 알 수 있습니다. 이 메커니즘은 Datadog 에이전트의 추적 라이브러리에 중첩되어 있습니다. 차원에 관한 자세한 정보는 [수집 이유 대시보드][6]를 참고하세요.
 
 `datadog.estimated_usage.apm.ingested_traces` 메트릭은 초당 샘플된 요청 수를 측정하고 [헤드 기반 샘플링][7]에 따라 트레이스 수를 셉니다. 또 이 메트릭은 `env`와 `service`로 태깅되기 때문에 트레이스를 가장 많이 시작한 서비스를 바로 확인할 수 있습니다.
+
+#### 샘플링 서비스란 무엇인가요?
+
+`datadog.estimated_usage.apm.ingested_bytes`의 `sampling_service` 차원은 스팬을 방출하는 서비스가 아닌 **샘플링 결정을 내리는 서비스**에 수집된 바이트를 할당합니다.
+
+총 수집량에 가장 큰 영향을 미치는 서비스를 식별하기 위해 메트릭을 `sampling_service`별로 그룹화합니다. 예를 들어, `A` 서비스가 트레이스를 시작하고 `B`와 `C` 서비스를 호출하기 전에 헤드 기반 샘플링 결정을 내리는 경우, `A`, `B`, `C` 서비스의 모든 바이트는 `sampling_service:A`에 귀속됩니다.
+
+{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/sampling_service.png" style="width:80%;" alt="Ingested Bytes 샘플링 서비스 설명" >}}
 
 ### 인덱싱된 스팬
 

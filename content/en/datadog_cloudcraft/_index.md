@@ -87,6 +87,13 @@ Use the zoom and hover features to pinpoint the most critical resources. As you 
 
 {{< img src="datadog_cloudcraft/cloudcraft_with_ccm_2.mp4" alt="Video showing the zoom and hover feature in Cloudcraft and clicking on a resource to open the side panel" video=true >}}
 
+#### Projection toggle
+
+Toggle the projection from 3D (default) to 2D to visualize your resources from a top-down view.
+
+{{< img src="datadog_cloudcraft/cloudcraft_2D.png" alt="Cloudcraft landing page with the 2D toggle enabled" >}}
+
+
 ### Filtering and search
 
 Diagrams can be filtered by tags, such as team, application, or service, allowing you to concentrate on relevant resources while maintaining context through connected resources. Additionally, Cloudcraft provides a powerful search and highlight feature, enabling ease of location of specific resources or groups of resources.
