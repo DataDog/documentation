@@ -311,6 +311,158 @@ For this example, you have a service field that contains an incorrect service na
 }
 ```
 
+## Remove attributes containing null values
+
+Attributes with null or empty values can add unnecessary bloat to your logs. Remove null values to trim the log and only send attributes that provide information. In the script below, the `empty_patterns` section contains the list of empty patterns to check for in your logs. You can add and remove patterns to fit your use case.
+
+```
+# Define your empty patterns
+empty_patterns = ["null", "NULL", "N/A", "n/a", "none", "NONE", "-", "undefined"]
+
+# Apply generic cleanup
+. = compact(map_values(., recursive: true) -> |v| {
+ if is_null(v) ||
+    includes(empty_patterns, v) ||
+    (is_string(v) && strip_whitespace!(v) == "") ||
+    (is_array(v) && length!(v) == 0) ||
+    (is_object(v) && length!(v) == 0) {
+   null
+ } else {
+   v
+ }
+})
+```
+
+## Merge nested attributes to root level
+
+Targeting nested objects or fields in a filter query may require multiple paths to define. This is common when working with the message field, where the resulting parsed contents are nested in an object. When you use the Observability Pipelines' filter syntax, accessing a nested field requires the <OUTER_PATH>.<INNER_PATH> notation.
+
+For example, this log contains a stringified JSON message:
+
+```json
+{
+ "level": "info",
+ "message": "{\"event_type\":\"user_login\",\"result\":\"success\",\"login_method\":\"oauth\",\"user_agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36\",\"ip_address\":\"192.168.1.100\",\"session_id\":\"sess_abc123xyz\",\"duration_ms\":245}",
+ "timestamp": "2019-03-12T11:30:00Z",
+ "processed_ts": "2025-05-22T14:30:00Z",
+ "user_id": "12345",
+ "app_id": "streaming-services",
+ "ddtags": [
+   "kube_service:my-service",
+   "k8_deployment:your-host",
+   "kube_cronjob:myjob"
+ ]
+}
+```
+
+Now see the output after the `message` field is parsed. The parsed content is nested in the `message` object.
+
+```
+{
+   "app_id": "streaming-services",
+   "ddtags": [
+       "kube_service:my-service",
+       "k8_deployment:your-host",
+       "kube_cronjob:myjob"
+   ],
+   "level": "info",
+   "message": {
+       "duration_ms": 245,
+       "event_type": "user_login",
+       "ip_address": "192.168.1.100",
+       "login_method": "oauth",
+       "result": "success",
+       "session_id": "sess_abc123xyz",
+       "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+   },
+   "processed_ts": "2025-05-22T14:30:00Z",
+   "timestamp": "2019-03-12T11:30:00Z",
+   "user_id": "12345"
+}
+```
+In this case, to filter for `event_type`, you need to specify` @message.event_type`. Though that works, it can be difficult to do at scale. Therefore, Datadog recommends flattening the object to the root level.
+
+In order to merge the events from the `message` object to the root level, use this script:
+
+```
+if is_object(.message) {
+ . = merge!(., .message)
+ del(.message)
+}
+```
+
+**Note**: This script works with any JSON object. You just need to replace the `message` attribute with the name of the field you are trying to flatten.
+
+This results in the log with flattened attributes that you can filter directly:
+
+```
+{
+   "app_id": "streaming-services",
+   "ddtags": [
+       "kube_service:my-service",
+       "k8_deployment:your-host",
+       "kube_cronjob:myjob"
+   ],
+   "duration_ms": 245,
+   "event_type": "user_login",
+   "ip_address": "192.168.1.100",
+   "level": "info",
+   "login_method": "oauth",
+   "processed_ts": "2025-05-22T14:30:00Z",
+   "result": "success",
+   "session_id": "sess_abc123xyz",
+   "timestamp": "2019-03-12T11:30:00Z",
+   "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+   "user_id": "12345"
+}
+```
+
+## Serialize outbound logs in _raw format
+
+Splunk and CrowdStrike prefer a format called `_raw` for log ingestion. Sending data in `_raw` normalizes your logs and allows you to benefit from their out-of-the-box dashboards, monitors, and threat detection content. To ensure the `_raw` log format gets applied, you can serialize the outbound event in `_raw`.
+
+**Notes**:
+- You should add any processing, remapping, or parsing before using this step.
+- Select `Raw` as the encoding option when you set up the Splunk HEC or Crowdstrike destination.
+
+An example input log:
+
+```
+{
+   "app_id": "streaming-services",
+   "level": "info",
+   "message": {
+       "duration_ms": 245,
+       "event_type": "user_login",
+       "ip_address": "192.168.1.100",
+       "login_method": "oauth",
+       "result": "success",
+       "session_id": "sess_abc123xyz",
+       "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+   },
+   "processed_ts": "2025-05-22T14:30:00Z",
+   "timestamp": "2019-03-12T11:30:00Z",
+   "user_id": "12345"
+}
+```
+
+This custom function serializes the event to `_raw` format:
+
+```
+# Serialize the entire event into _raw
+._raw = encode_key_value(.)
+# Only keep _raw
+. = { "_raw": ._raw }
+```
+
+This is the output of the example log after it's been processed by the custom script:
+
+```
+{
+   "_raw": "app_id=streaming-services level=info message.duration_ms=245 message.event_type=user_login message.ip_address=192.168.1.100 message.login_method=oauth message.result=success message.session_id=sess_abc123xyz message.user_agent=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36\" processed_ts=2025-05-22T14:30:00Z timestamp=2019-03-12T11:30:00Z user_id=12345"
+}
+```
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
