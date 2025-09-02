@@ -56,11 +56,20 @@ If you prefer to manually add correlation identifiers to your logs, you can use 
 implementation 'com.datadoghq:dd-trace-api:LATEST_VERSION'
 ```
 {{% /tab %}}
+{{% tab "Gradle (Kotlin DSL)" %}}
+
+```kotlin
+implementation("com.datadoghq:dd-trace-api:LATEST_VERSION")
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">Remember to replace <code>LATEST_VERSION</code> with the same version as your Datadog Java tracer (<code>dd-java-agent</code>).</div>
+Replace `LATEST_VERSION` with the same version as your Datadog Java tracer (`dd-java-agent`).
 
 After you add the dependency, use `CorrelationIdentifier.getTraceId()` and `CorrelationIdentifier.getSpanId()` to retrieve and inject the IDs into your logging context, as shown in the following examples.
+
+<div class="alert alert-info">If no span is active, <code>CorrelationIdentifier.getTraceId()</code> and <code>getSpanId()</code> return <code>"0"</code>. Ensure that spans are started before this code is executed.</div>
 
 {{< tabs >}}
 {{% tab "Log4j 2" %}}
