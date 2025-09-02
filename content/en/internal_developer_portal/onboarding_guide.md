@@ -35,9 +35,9 @@ Recommendations:
 
 ## Phase 2: Familiarize yourself with tooling
 
-1. **Identify data sources**: Learn about the three ways to bring in entities, and decide what you to use as sources of truth for your [Software Catalog][7]:
+1. **Identify data sources**: Learn about the three ways to bring in entities, and decide what to use as sources of truth for your [Software Catalog][7]:
 
-   - **[Automatically discover entries from Datadog][23]** products, such as APM, RUM, or USM. You can also import from Infrastructure or Logs.  
+   - **[Automatically discover entries from Datadog][23]** products, such as APM, RUM, or USM. You can also import from Infrastructure or Log Management.
    - **Import from external systems** such as [Backstage][14] or [ServiceNow][15].  
    - **[Create entries directly][24]** through the Datadog UI, or programmatically by importing from GitHub, Terraform, the Datadog Software Metadata Provider, or the Service Definition API.  
 
