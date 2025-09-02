@@ -20,7 +20,7 @@ This guide explains why duplicate tag colors occur when using the Consistent pal
 
 {{< img src="/dashboards/guide/consistent_color_palette/duplicate_color_tags.png" alt="Example of duplicate tag colors in a dashboard pie chart" style="width:100%;" >}}
 
-The Consistent palette maps tag values to colors using a deterministic hashing algorithm. This ensures that a specific tag value always appears with the same color across all charts and timeframes. However, the palette:
+The Consistent palette maps tag values to colors using a deterministic hashing algorithm. This ensures that a specific tag value always appears with the same color across all dashboards, notebooks, and timeframes. However, the palette:
 
 - **Does not track which colors have already been used** in a specific graph.
 - **Uses a limited set of 16-20 curated colors**, chosen for accessibility, color contrast, and dark mode compatibility.
