@@ -66,11 +66,11 @@ Each signal has a score impact. You can see a signal's score impact in the entit
 | Medium          | `5`              |
 | Low and Info    | `0`              |
 
-### Entity's threshold severity
+### Entity's severity threshold
 
-The threshold severity of an entity is calculated by adding up the score impact for all signals associated with the entity.
+The severity threshold of an entity is calculated by adding up the score impact for all signals associated with the entity.
 
-| Entity's Threshold Severity | Sum of the score impact for all related signals |
+| Entity's Severity Threshold | Sum of the score impact for all related signals |
 |-----------------------------| ------------------------------------------------|
 | Critical                    | Greater than or equal to `100`                  |
 | High                        | Between `50` and `100`, exclusive               |
