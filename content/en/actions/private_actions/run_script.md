@@ -208,7 +208,7 @@ helm upgrade <RELEASE_NAME> datadog/private-action-runner -f ./values.yaml
 
 Specify the PAR version in your `values.yaml` under the `common.image.tag` key with the values found [here][9]:
 
-```
+```yaml
 common:
   image:
     repository: gcr.io/datadoghq/private-action-runner # optional
