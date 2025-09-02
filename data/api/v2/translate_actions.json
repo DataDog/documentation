@@ -2187,6 +2187,16 @@
     "request_description": "The definition of the new suppression rule.",
     "request_schema_description": "Request object that includes the suppression rule that you would like to create."
   },
+  "GetSuppressionsAffectingFutureRule": {
+    "description": "Get the list of suppressions that would affect a rule.",
+    "summary": "Get suppressions affecting future rule",
+    "request_description": "",
+    "request_schema_description": "Create a new rule."
+  },
+  "GetSuppressionsAffectingRule": {
+    "description": "Get the list of suppressions that affect a specific existing rule by its ID.",
+    "summary": "Get suppressions affecting a specific rule"
+  },
   "DeleteSecurityMonitoringSuppression": {
     "description": "Delete a specific suppression rule.",
     "summary": "Delete a suppression rule"

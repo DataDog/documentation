@@ -2692,6 +2692,30 @@ menu:
           - DeleteSecurityMonitoringSuppression
         unstable: []
         order: 0
+    - name: Get suppressions affecting a specific rule
+      url: '#get-suppressions-affecting-a-specific-rule'
+      identifier: security-monitoring-get-suppressions-affecting-a-specific-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSuppressionsAffectingRule
+        unstable: []
+        order: 0
+    - name: Get suppressions affecting future rule
+      url: '#get-suppressions-affecting-future-rule'
+      identifier: security-monitoring-get-suppressions-affecting-future-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSuppressionsAffectingFutureRule
+        unstable: []
+        order: 0
     - name: Create a suppression rule
       url: '#create-a-suppression-rule'
       identifier: security-monitoring-create-a-suppression-rule
