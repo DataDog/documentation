@@ -210,7 +210,7 @@ You can test your notification messages by sending simulated notifications. To d
 
   {{< img src="/synthetics/notifications/simulate_notifications.png" alt="Synthetics Monitor screen, highlighting the Simulate Notifications button" style="width:80%;" >}}
 
-3. Select the notification types you want to test and click **Send**:
+3. Select the notification type you want to test and click **Send**:
 
    {{< img src="/synthetics/notifications/simulate_notifications_type.png" alt="Send a notification simulating a test failure or recovery." style="width:80%;" >}}
 
