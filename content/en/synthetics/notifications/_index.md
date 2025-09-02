@@ -16,6 +16,8 @@ further_reading:
 
 Customize your alerts in [Synthetic Monitoring][1] to give on-call responders meaningful context. Synthetic Monitoring's message templating system lets you enrich alerts with test details, extract data from test results, and route notifications conditionally based on the failure.
 
+<div class="alert alert-info">Synthetic Monitoring notifications are not supported in your <a href="https://docs.datadoghq.com/continuous_testing/">Continuous Testing CI/CD pipelines.</a></div>
+
 You can customize notifications using:
 
 - **[Pre-filled content](#pre-filled-monitor-messages)**: Start with a structured starting point.
@@ -199,6 +201,34 @@ You can select from the following options to hide or display the information rel
 | Slack   | Rich content + preview of failed run | Custom message only |
 
 See [Monitor Notifications][5] for more information.
+
+## Simulate notifications
+
+You can test your notification messages by sending simulated notifications. To do this:
+
+1. Add a notification handle to your monitor message
+2. Click the **Simulate Notifications** button:
+
+  {{< img src="/synthetics/notifications/simulate_notifications.png" alt="Synthetics Monitor screen, highlighting the Simulate Notifications button" style="width:80%;" >}}
+
+3. Select the notification types you want to test and click **Send**:
+
+   {{< img src="/synthetics/notifications/simulate_notifications_type.png" alt="Send a notification simulating a test failure or recovery." style="width:80%;" >}}
+
+Simulated notifications include **[TEST]** in their subject lines and use a default monitor name when needed.
+**Examples:**
+
+   {{< img src="/synthetics/notifications/simulated_notifications_email.png" alt="Email notification simulating a test failure." style="height:400px; width:80%" >}}
+
+   {{< img src="/synthetics/notifications/simulated_notifications_email_recovered.png" alt="Email notification simulating a test recovery." style="height:400px; width:80%" >}}
+
+**Important notes about simulated notifications:**
+
+- The test results used in simulations are standardized sample data, not actual results from your specific test configuration.
+- Results vary based on test type, subtype (for API tests), and notification type:
+  - **Alert notifications**: Use simulated failure data
+  - **Recovery notifications**: Use simulated success data
+- All users receive the same simulated data regardless of their test setup
 
 ## Further Reading
 
