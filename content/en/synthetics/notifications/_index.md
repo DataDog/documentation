@@ -204,6 +204,9 @@ See [Monitor Notifications][5] for more information.
 
 ## Simulate notifications
 
+{{< site-region region="gov" >}}<div class="alert alert-warning"> Enter summary here <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 You can test your notification messages by sending simulated notifications. To do this:
 
 1. Add a notification handle to your monitor message
@@ -216,11 +219,19 @@ You can test your notification messages by sending simulated notifications. To d
    {{< img src="/synthetics/notifications/simulate_notifications_type.png" alt="Send a notification simulating a test failure or recovery." style="width:80%;" >}}
 
 Simulated notifications include **[TEST]** in their subject lines and use a default monitor name when needed.
+
 **Examples:**
 
-   {{< img src="/synthetics/notifications/simulated_notifications_email.png" alt="Email notification simulating a test failure." style="height:400px; width:80%" >}}
-
-   {{< img src="/synthetics/notifications/simulated_notifications_email_recovered.png" alt="Email notification simulating a test recovery." style="height:400px; width:80%" >}}
+<table style="width:100%; border:none;">
+<tr>
+<td style="width:50%; text-align:center; border:none; padding:10px;">
+{{< img src="/synthetics/notifications/simulated_notifications_email.png" alt="Email notification simulating a test failure." style="height:400px; width:auto;" >}}
+</td>
+<td style="width:50%; text-align:center; border:none; padding:10px;">
+{{< img src="/synthetics/notifications/simulated_notifications_email_recovered.png" alt="Email notification simulating a test recovery." style="height:400px; width:auto;" >}}
+</td>
+</tr>
+</table>
 
 **Important notes about simulated notifications:**
 
