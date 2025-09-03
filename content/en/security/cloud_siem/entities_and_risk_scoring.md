@@ -72,11 +72,11 @@ The severity threshold of an entity is calculated by adding up the score impact 
 
 | Entity's Severity Threshold | Sum of the score impact for all related signals  |
 |-----------------------------| -------------------------------------------------|
-| Critical                    | Greater than or equal to `100`                   |
-| High                        | Greater than or equal to `50` and less than `100`|
-| Medium                      | Greater than or equal to `25` and less than `50` |
-| Low                         | Greater than or equal to `10` and less than `25` |
-| Info                        | Less than or equal to `10`                       |
+| Critical                    | Greater than or equal to `100`.                   |
+| High                        | Greater than or equal to `50` and less than `100`.|
+| Medium                      | Greater than or equal to `25` and less than `50`. |
+| Low                         | Greater than or equal to `10` and less than `25`. |
+| Info                        | Less than or equal to `10`.                       |
 
 ## Further reading
 
