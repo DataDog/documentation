@@ -15,15 +15,4 @@ After deploying your Cloud Run app, you can manually modify your app's settings 
 
    For a list of all environment variables, including additional tags, see [Environment variables](#environment-variables).
 
-#### Add a service label in Google Cloud
-
-In your Cloud Run service's info panel, add a label with the following key and value:
-
-| Key      | Value                                                       |
-|-----------|-------------------------------------------------------------|
-| `service` | The name of your service. Matches the value provided as the `DD_SERVICE` environment variable. |
-
-See [Configure labels for services][1002] in the Cloud Run documentation for instructions.
-
 [1001]: https://app.datadoghq.com/organization-settings/api-keys
-[1002]: https://cloud.google.com/run/docs/configuring/services/labels
