@@ -29,15 +29,9 @@ Because the color mapping is fixed and the palette is limited, multiple tag valu
 
 This trade-off prioritizes color consistency across time and views over uniqueness within a single widget.
 
-## Limitations and maintainence challenges
+## Use color overrides
 
-This behavior is a known limitation of the Consistent palette. In dashboards with many group-by values or dynamic tags, duplicate colors can reduce visual clarity.
-
-While you can manually override colors per series using the [color override][1] feature, this can be time-consuming to maintain, especially when:
-- The number of tag values changes frequently.
-- The same logic needs to be applied across many widgets.
-
-To simplify this process, consider automating widget creation or updates through scripting instead of maintaining static JSON definitions.
+If your graph displays a small and relatively fixed number of tag values (fewer than 15), such as datacenters or regions, you can assign a unique color to each series using the color override feature. For more details, see [Color overrides][1].
 
 {{% collapse-content title="Example dashboard tiledef" level="h4" expanded=false %}}
 ```json
@@ -135,18 +129,19 @@ To simplify this process, consider automating widget creation or updates through
 ```
 {{% /collapse-content %}}
 
-## Resolution options
+## Limitations and maintenance challenges
 
-**Use color overrides for small, stable group sets**
+This color duplication behavior is a known limitation of the Consistent palette. In dashboards with many group-by values or dynamic tags, duplicate colors can reduce visual clarity.
 
-If your graph displays a small and relatively fixed number of tag values (fewer than 15), such as datacenters or regions, you can assign a unique color to each series using the color override feature. For more details, see [Color overrides][1].
+While you can manually override colors per series using the color override feature, this can be time-consuming to maintain, especially when:
+- The number of tag values changes frequently.
+- The same logic needs to be applied across many widgets.
 
-**Use a higher-cardinality palette for larger datasets**
-
-For graphs with many tag values, switch to a palette like `Datadog16`, which includes more distinct colors and reduces the likelihood of duplication.
+To simplify this process, consider automating widget creation ([Terraform][2]) or updates through scripting instead of maintaining static JSON definitions.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/dashboards/guide/widget_colors/#color-overrides
+[1]: /dashboards/guide/widget_colors/#color-overrides
+[2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/dashboard
