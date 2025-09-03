@@ -60,7 +60,7 @@ You can either reuse an existing runner's identity by changing the image, or cre
 
 ### 3. Configure the action catalog
 
-You can find the "Run Predefined Script" action marked as "experimental" in the action catalog. This action is available for use in both workflows and apps.
+Navigate to the Action Catalog and select [**Run Predefined Script**][10]. This action is available for use in both workflows and apps.
 
 ## Configuration
 
@@ -236,3 +236,4 @@ kubectl logs <name-of-the-pod>
 [7]: https://app.datadoghq.com/organization-settings/remote-config?resource_type=agents
 [8]: https://github.com/DataDog/helm-charts/blob/main/charts/private-action-runner/CHANGELOG.md
 [9]: https://github.com/DataDog/helm-charts/blob/main/charts/private-action-runner/values.yaml
+[10]: https://app.datadoghq.com/actions/action-catalog#/com.datadoghq.script.runPredefinedScript
