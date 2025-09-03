@@ -24,7 +24,7 @@ Estimates are based on recent average hourly net amortized EC2 prices by instanc
 ## Requirements
 
 - Cloud Cost Management is enabled for the AWS account
-- Datadog Agent installed on each EC2 instance
+- Datadog Agent is installed on each EC2 instance
 
 ## Usage
 
