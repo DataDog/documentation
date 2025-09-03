@@ -8,7 +8,8 @@ After deploying your Cloud Run app, you can manually modify your app's settings 
      <li><code>DD_SERVICE</code>: A name for your service. For example, <code>gcr-sidecar-test</code>.</li>
      <li><code>DD_ENV</code>: A name for your environment. For example, <code>dev</code>.</li>
      <li><code>DD_SERVERLESS_LOG_PATH</code>: Your log path. For example, <code>/shared-volume/logs/*.log</code>. The path must begin with the mount path you defined in the previous step.</li>
-     <li><code>DD_API_KEY</code>: Your <a href="https://app.datadoghq.com/organization-settings/api-keys">Datadog API key</a>.</li>
+     <li><code>DD_API_KEY</code>: Your <a href="https://app.datadoghq.com/organization-settings/api-keys">Datadog API key</a>.</li>{{ if eq (.Get "function") "true" }}
+     <li><code>FUNCTION_TARGET</code>: The entry point of your function. For example, <code>Main</code>.</li>{{ end }}
    </ul>
 
 
