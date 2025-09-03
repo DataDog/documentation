@@ -31,7 +31,7 @@ This trade-off prioritizes color consistency across time and views over uniquene
 
 ## Use color overrides
 
-If your graph displays a small and relatively fixed number of tag values (fewer than 15), such as datacenters or regions, you can assign a unique color to each series using the color override feature. For more details, see [Color overrides][1].
+If your graph displays a small and relatively fixed number of tag values (fewer than 15), such as data centers or regions, you can assign a unique color to each series using the color override feature. For more details, see [Color overrides][1].
 
 {{% collapse-content title="Example dashboard tiledef" level="h4" expanded=false %}}
 ```json
