@@ -8,7 +8,7 @@ further_reading:
   text: "Learn about Cloud Cost Management"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Realtime Costs is in Preview" >}}
+{{< callout url="#" btn_hidden="true" header="Real-Time Costs is in Preview" >}}
 
 ## Overview
 
