@@ -148,7 +148,8 @@ Options
 : The list of checkboxes that a user can select from. The format is an array of objects where each object consists of a `label` and `value` key-value pair. The minimum number of options is 1.<br>
 **Value**: expression<br>
 **Example**:<br>
-:     ${[
+:     ```json
+      ${[
         {
             "label": "Staging",
             "value": "staging"
@@ -158,6 +159,7 @@ Options
             "value": "production"
         }
       ]}
+      ```
 
 ### Appearance
 
@@ -569,18 +571,18 @@ Options
 : The list of radio button options that a user can select from. The format is an array of objects where each object consists of a `label` and `value` key-value pair.<br>
 **Value**: expression<br>
 **Example**:<br>
-: ```json
-  ${[
-    {
-        "label": "Staging",
-        "value": "staging"
-    },
-    {
-        "label": "Production",
-        "value": "production"
-    }
-  ]}
-  ```
+:    ```json
+     ${[
+       {
+           "label": "Staging",
+           "value": "staging"
+       },
+       {
+           "label": "Production",
+           "value": "production"
+       }
+     ]}
+     ```
 
 Default value
 : The value that is selected when the radio loads.<br>
@@ -688,18 +690,18 @@ Options
 : The list of select options that a user can select from. The format is an array of objects where each object consists of a `label` and `value` key-value pair. <br>
 **Value**: expression<br>
 **Example**:<br>
-: ```json
-  ${[
-    {
-        "label": "Staging",
-        "value": "staging"
-    },
-    {
-        "label": "Production",
-        "value": "production"
-    }
-  ]}
-  ```
+:     ```json
+      ${[
+        {
+            "label": "Staging",
+            "value": "staging"
+        },
+        {
+            "label": "Production",
+            "value": "production"
+        }
+      ]}
+      ```
 
 Default value
 : The value that is selected when the select loads.<br>
@@ -1006,7 +1008,7 @@ Displays property and value pairs in JSON format.
 
 ### Relationships
 
-Displays data dependencies between the table data and components and other components or data sets.
+Displays data dependencies between table data and components in the app.
 
 ### Example
 
