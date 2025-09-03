@@ -43,7 +43,7 @@ Ensure [remote configuration][3] is set up for the agent running the Kafka Consu
 
 ## Required permissions
 
-You must have the following permissions enabled:
+You must have the following permissions:
 
 * `Data Streams Monitoring Capture Messages`
 * `Logs Read Index Data`
