@@ -86,42 +86,42 @@ To add scanning rules, perform the following steps:
 1. Click **Add Scanning Rule**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Rule**.
 1. Select whether you want to add a library rule or create a custom scanning rule.
 
-{{% collapse-content title="Add library rules" level="p" id="add-library-rules" %}}
+#### Rule settings
 
-The Scanning Rule Library contains predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more.
+{{< tabs >}}
+{{% tab "Library rules" %}}
 
 1. Select a scanning group if you did not create this rule within a scanning group.
 1. In the **Priority** dropdown menu, select the priority level for the rule based on your business needs.
-1. In the **Add Library Rules** section, select the library rules you want to use.
-{{% sds-scanning-rule %}}
-1. Click **Add Rules**.
 
-#### Add custom keywords
+{{% /tab %}}
 
-The recommended keywords are used by default when OOTB scanning rules are created. After adding OOTB rules, you can edit each rule separately and add keywords to or remove keywords from the keyword dictionary.
-
-1. Navigate to the [Sensitive Data Scanner][5] settings page.
-1. Click the scanning group with the rule you want to edit.
-1. Hover over the rule, and then click the pencil icon.
-1. In the **Match Conditions** section, click **Custom Keywords**.
-    - To add keywords:
-    1. Enter a keyword.
-    1. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
-    1. Click the plus icon to add the keyword to the list.
-    1. Repeat these steps to add more keywords.
-    - To remove keywords:
-    1. Click the **X** next to the keyword you want to remove.
-1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
-1. Click **Update**.
-
-{{% /collapse-content %}}
-{{% collapse-content title="Add a custom rule" level="p" id="add-custom-rule"%}}
-You can create custom scanning rules using regex patterns to scan for sensitive data.
+{{% tab "Custom rule" %}}
 
 1. Select a scanning group if you did not create this rule within a scanning group.
 1. Enter a name for rule.
 1. In the **Priority** dropdown menu, select the priority level for the rule based on your business needs.
 1. (Optional) Enter a description for the rule.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Add rules
+
+{{< tabs >}}
+{{% tab "Library rules" %}}
+
+The Scanning Rule Library contains predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more.
+
+In the **Add Library Rules** section, select the library rules you want to use.
+
+You can add [custom keywords](#add-custom-keywords-to-library-rules) after for each library rule after they have been added.
+
+{{% /tab %}}
+{{% tab "Custom rule" %}}
+
+You can create custom scanning rules using regex patterns to scan for sensitive data.
+
 1. In the **Match conditions** section, specify the regex pattern to use for matching against events in the **Define the regex** field. Enter sample data in the **Add sample data** field to verify that your regex pattern is valid.<br>
     Sensitive Data Scanner supports Perl Compatible Regular Expressions (PCRE), but the following patterns are not supported:
     - Backreferences and capturing sub-expressions (lookarounds)
@@ -139,9 +139,14 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
     - To remove keywords, click the **X** next to the keyword you want to remove.
     - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value. **Note**: You cannot have more than 20 keywords for a rule.
 1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Action on match
+
 {{% sds-scanning-rule %}}
-1. Click **Add Rule**.
-{{% /collapse-content %}}
+1. Click **Add Rules**.
 
 **Notes**:
 
@@ -151,6 +156,24 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 - When you add rules to a scanning group with sampling enabled, you will not be able to select the **redact**, **partially redact**, or **hash** actions. For complete obfuscation, disable sampling in your scanning group settings.
 
 See [Investigate Sensitive Data Issues][7] for details on how to use the [Summary][8] page to triage your sensitive data issues.
+
+#### Add custom keywords to library rules
+
+The recommended keywords are used by default when library rules are created. After adding library rules, you can edit each rule separately and add keywords to or remove keywords from the keyword dictionary.
+
+1. Navigate to the [Sensitive Data Scanner][5] settings page.
+1. Click the scanning group with the rule you want to edit.
+1. Hover over the rule, and then click the pencil icon.
+1. In the **Match Conditions** section, click **Custom Keywords**.
+    - To add keywords:
+    1. Enter a keyword.
+    1. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+    1. Click the plus icon to add the keyword to the list.
+    1. Repeat these steps to add more keywords.
+    - To remove keywords:
+    1. Click the **X** next to the keyword you want to remove.
+1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
+1. Click **Update**.
 
 #### Excluded namespaces
 
