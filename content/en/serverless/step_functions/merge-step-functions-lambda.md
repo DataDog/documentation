@@ -247,7 +247,7 @@ Follow these instructions if your Step Function indirectly invokes a Lambda thro
 | Runtime | Requirement                                    |
 | ------- |------------------------------------------------|
 | Python  | Datadog Lambda Library for Python layer v107+  |
-| Node.js | Datadog Lambda Library for Node.js layer v127+ |
+| Node.js | Datadog Lambda Library for Node.js layer v128+ |
 
 Your State Machine definition must use [JSONata][1] as the query language. To enable this, set your definition's top-level `QueryLanguage` field to `JSONata`.
 
