@@ -5,7 +5,7 @@ title: Messages
 The Messages feature allows you to view Kafka messages on specific partitions / offsets, to debug poison payload problems, or to learn more about your data streams.
 
 <div class="alert alert-info">
-   This feature is in a preview state. To be added to the preview, contact your Datadog Customer Success Manager.
+   Messages is in Preview. Contact your Customer Success Manager for access.
 </div>
 
 ## Supported Data Formats
