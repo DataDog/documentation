@@ -813,6 +813,10 @@ Table components have the following properties.
 
 ### General
 
+Title
+: A title for the table. Select **Markdown** for custom formatting.<br>
+**Value**: string
+
 Data source
 : The array of objects to display in a table.<br>
 **Values**: query, demo data, components
@@ -935,7 +939,7 @@ Show column options
 : Displays a sorting option in the table header for app viewers to modify sorting options.<br>
 **Provided values**: on, off
 
-Had date range filter
+Has date range filter
 : Adds a date range picker to the table header for filtering.<br>
 **Provided values**: on, off
 
