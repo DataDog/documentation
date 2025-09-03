@@ -4059,11 +4059,16 @@ menu:
       parent: tracing_services
       identifier: tracing_inferred_services
       weight: 906
+    - name: Service Renaming
+      url: tracing/services/service_renaming
+      parent: tracing_services
+      identifier: tracing_service_renaming
+      weight: 907
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 907
+      weight: 908
     - name: Endpoint Observability
       url: internal_developer_portal/software_catalog/endpoints/
       identifier: endpoint_observability
