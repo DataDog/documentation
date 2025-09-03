@@ -60,7 +60,7 @@ implementation 'com.datadoghq:dd-trace-api:DD_TRACE_JAVA_VERSION_HERE'
    {{% /tab %}}
 
    {{% tab "Custom" %}}
-   {{% gcr-install-sidecar-custom %}}
+   {{% gcr-install-sidecar-custom function="true" %}}
    {{% /tab %}}
 
    {{< /tabs >}}
