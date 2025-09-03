@@ -124,7 +124,7 @@ runPredefinedScript:
     command: [ "bash", "/etc/dd-action-runner-script/scripts/script.sh" ]
 ```
 
-## Updating the PAR
+## Update the PAR 
 
 <!-- ADD INFO? -->
 
