@@ -148,18 +148,18 @@ Options
 : The list of checkboxes that a user can select from. The format is an array of objects where each object consists of a `label` and `value` key-value pair. The minimum number of options is 1.<br>
 **Value**: expression<br>
 **Example**:<br>
-:     ```json
-      ${[
-        {
-            "label": "Staging",
-            "value": "staging"
-        },
-        {
-            "label": "Production",
-            "value": "production"
-        }
-      ]}
-      ```
+: ```json
+  ${[
+    {
+        "label": "Staging",
+        "value": "staging"
+    },
+    {
+        "label": "Production",
+        "value": "production"
+    }
+  ]}
+  ```
 
 ### Appearance
 
@@ -571,18 +571,18 @@ Options
 : The list of radio button options that a user can select from. The format is an array of objects where each object consists of a `label` and `value` key-value pair.<br>
 **Value**: expression<br>
 **Example**:<br>
-:    ```json
-     ${[
-       {
-           "label": "Staging",
-           "value": "staging"
-       },
-       {
-           "label": "Production",
-           "value": "production"
-       }
-     ]}
-     ```
+: ```json
+  ${[
+    {
+        "label": "Staging",
+        "value": "staging"
+    },
+    {
+        "label": "Production",
+        "value": "production"
+    }
+  ]}
+  ```
 
 Default value
 : The value that is selected when the radio loads.<br>
@@ -673,6 +673,8 @@ Displays property and value pairs in JSON format.
 To view this component in context, see the [EC2 Instance Manager][3] app blueprint.
 {{% /collapse-content %}}
 
+
+
 {{% collapse-content title="Select" level="h3" %}}
 Select components have the following properties.
 
@@ -690,18 +692,18 @@ Options
 : The list of select options that a user can select from. The format is an array of objects where each object consists of a `label` and `value` key-value pair. <br>
 **Value**: expression<br>
 **Example**:<br>
-:     ```json
-      ${[
-        {
-            "label": "Staging",
-            "value": "staging"
-        },
-        {
-            "label": "Production",
-            "value": "production"
-        }
-      ]}
-      ```
+: ```json
+  ${[
+    {
+        "label": "Staging",
+        "value": "staging"
+    },
+    {
+        "label": "Production",
+        "value": "production"
+    }
+  ]}
+  ```
 
 Default value
 : The value that is selected when the select loads.<br>
@@ -748,7 +750,6 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 
 
 {{% collapse-content title="Tab" level="h3" %}}
-
 Tab components have the following properties.
 
 ### Tabs
@@ -808,14 +809,9 @@ Displays property and value pairs in JSON format.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Table" level="h3" %}}
-
 Table components have the following properties.
 
 ### General
-
-Title
-: A title for the table. Select **Markdown** for custom formatting.<br>
-**Value**: string
 
 Data source
 : The array of objects to display in a table.<br>
@@ -837,12 +833,8 @@ Formatting
 : The type of format that the column takes on.<br>
 **Provided values**: string, link, status pill, date / time, markdown, tags, percent bar, number, score bar, avatar
 
-Copyable
-: Determines whether the user click to copy the contents of the column.<br>
-**Provided values**: on, off
-
-Filterable
-: Determines whether a filter option is available for the column.<br>
+Sortable
+: Determines whether the user can sort by the column.<br>
 **Provided values**: on, off
 
 Some columns have additional properties based on their **Formatting** property.
@@ -865,20 +857,9 @@ Type
 : Determines the type of pagination.<br>
 **Provided values**: client side, server side
 
-### Sorting
-
-Select the column and direction for default table sorting. 
-Column
-: The column to sort by.<br>
-**Value**: column name
-
-Direction
-: The direction to sort.<br>
-**Provided values**: ascending, descending
-
 ### Row actions
 
-Adding a row action adds an **Actions** column to the table, which contains user-defined action buttons. Rows can have multiple actions. Actions have the following properties:
+Adding a row action adds an **Actions** column to the table, which contains user-defined action buttons. These buttons have the following properties:
 
 Label
 : The text that displays on the action button.<br>
@@ -900,10 +881,9 @@ Level
 : Controls the color of the button according to its intent.<br>
 **Provided values**: default, danger, success, warning
 
-Reactions
-: The reactions the button triggers. A button can have multiple reactions.<br>
-**Provided values**: download file, open modal, close modal, open side panel, close side panel, open url, set component state, set state variable value, toast notification, trigger action, custom<br>
-Some reaction types have additional properties.
+Reaction
+: The reaction type the button triggers.
+**Values**: custom, set component state, trigger query, open modal, close modal, open url, download file
 
 State Function
 : fetch<br>
@@ -911,37 +891,17 @@ State Function
 
 ### Appearance
 
-Scrollable
-: Determines what ways the table is scrollable in.<br>
-**Provided values**: both, vertical
-
 Is Loading
 : Shows a loading indicator.<br>
 **Provided values**: on, off
 
 Has text wrapping
 : Determines whether cell text wraps.<br>
-**Provided values**: on, off
+**Provided values**: on, off<br>
 
-Has subrows
-: Enables subrows for each row. Include the `subRows` property in the data source.<br>
-**Provided values**: on, off
-
-Is searchable
-: Determines whether to add a search bar to the table. <br>
-**Provided values**: on, off
-
-Show sort options
-: Show Sort Options.<br>
-**Provided values**: on, off
-
-Show column options
-: Displays a sorting option in the table header for app viewers to modify sorting options.<br>
-**Provided values**: on, off
-
-Has date range filter
-: Adds a date range picker to the table header for filtering.<br>
-**Provided values**: on, off
+Scrollable
+: Determines what ways the table is scrollable in.<br>
+**Provided values**: both, vertical
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
@@ -953,7 +913,7 @@ Event
 : **Values**: pageChange, tableRowClick
 
 Reaction
-: **Values**: download file, open modal, close modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action, custom
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
 State Functions
 : fetch<br>
@@ -1009,10 +969,6 @@ Is Visible
 ### Inspect data
 
 Displays property and value pairs in JSON format.
-
-### Relationships
-
-Displays data dependencies between table data and components in the app.
 
 ### Example
 
