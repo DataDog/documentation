@@ -2197,6 +2197,12 @@
     "description": "Get the list of suppressions that affect a specific existing rule by its ID.",
     "summary": "Get suppressions affecting a specific rule"
   },
+  "ValidateSecurityMonitoringSuppression": {
+    "description": "Validate a suppression rule.",
+    "summary": "Validate a suppression rule",
+    "request_description": "",
+    "request_schema_description": "Request object containing the fields to update on the suppression rule."
+  },
   "DeleteSecurityMonitoringSuppression": {
     "description": "Delete a specific suppression rule.",
     "summary": "Delete a suppression rule"
@@ -2427,6 +2433,20 @@
     "request_description": "Incident Service Payload.",
     "request_schema_description": "Update request with an incident service payload."
   },
+  "ListSecurityMonitoringHistsignals": {
+    "description": "List hist signals.",
+    "summary": "List hist signals"
+  },
+  "SearchSecurityMonitoringHistsignals": {
+    "description": "Search hist signals.",
+    "summary": "Search hist signals",
+    "request_description": "",
+    "request_schema_description": "The request for a security signal list."
+  },
+  "GetSecurityMonitoringHistsignal": {
+    "description": "Get a hist signal's details.",
+    "summary": "Get a hist signal's details"
+  },
   "ListHistoricalJobs": {
     "description": "List historical jobs.",
     "summary": "List historical jobs"
@@ -2454,6 +2474,10 @@
   "CancelHistoricalJob": {
     "description": "Cancel a historical job.",
     "summary": "Cancel a historical job"
+  },
+  "GetSecurityMonitoringHistsignalsByJobId": {
+    "description": "Get a job's hist signals.",
+    "summary": "Get a job's hist signals"
   },
   "CreateSLOReportJob": {
     "description": "Create a job to generate an SLO report. The report job is processed asynchronously and eventually results in a CSV report being available for download.\n\nCheck the status of the job and download the CSV report using the returned `report_id`.",

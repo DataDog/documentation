@@ -15,7 +15,7 @@ Scheduled CSV Reports let you automatically receive recurring, structured data e
 To schedule a CSV Report, the query must meet the following conditions:
 
 * The query must be created from the [Log Explorer][1]  
-* The query result displays as a **List** or **Table** (no other visualization types are supported at this time)  
+* The query result displays as a **List** or **Table** (no other visualization types are supported)  
 * The query is not a composite query (no [subqueries][2])
 * The query doesn't use [calculated fields][3] or [Reference Tables][4]
 * The CSV is limited to 50k rows
