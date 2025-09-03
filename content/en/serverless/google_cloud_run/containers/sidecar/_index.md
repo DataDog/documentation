@@ -9,6 +9,6 @@ First, set up the [Datadog-Google Cloud Platform integration][1] to collect metr
 
 Then, select your runtime below for instructions on how to instrument your application:
 
-{{% serverless-init-languages path="google_cloud_run/containers/sidecar" %}}
+{{% container-languages path="google_cloud_run/containers/sidecar" %}}
 
 [1]: /integrations/google-cloud-platform/
