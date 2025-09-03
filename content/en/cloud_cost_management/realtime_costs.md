@@ -38,7 +38,7 @@ You can learn more about rate metrics [here][1].
 ## Accuracy
 
 - Sources of variance include:
-  - Hourly averages that shift with your recent mix of on-demand, commitment, and spot spend
+  - Hourly averages that shift with your recent mix of on-demand, commitment, and spot spending
   - Minor differences between true instance start and end times versus what the agent reports
 - Underestimation can occur when:
   - EC2 instances are not monitored by the Datadog Agent
