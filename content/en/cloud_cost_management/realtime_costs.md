@@ -48,7 +48,7 @@ You can learn more about rate metrics [here][1].
   - Instances are monitored by the Datadog Agent but are not included in CCM billing data
 - Preview accuracy:
   - During the preview period data may be unstable. Large temporary drops in cost or gaps may occur
-  - For long term trends it is still always recommended to use the accurate Cloud Cost metrics based on direct AWS billing data
+  - For long-term trends, Datadog always recommends to use the accurate Cloud Cost metrics based on direct AWS billing data
 
 ## Limitations
 
