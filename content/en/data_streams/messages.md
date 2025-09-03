@@ -14,7 +14,7 @@ Avro, Protobuf, and JSON are supported.
 
 ## Prerequisites
 
-### Kafka consumer integration
+### Kafka Consumer integration
 
 [Kafka Consumer][6] integration needs to be set up on the topic you want to retrieve messages from.
 
