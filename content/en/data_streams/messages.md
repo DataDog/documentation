@@ -2,7 +2,7 @@
 title: Messages
 ---
 
-The Messages feature allows you to view Kafka messages on specific partitions / offsets, to debug poison payload problems, or to learn more about your data streams.
+The Messages feature allows you to view Kafka messages at specific partitions or offsets, debug poison payload problems, and better understand your data streams.
 
 <div class="alert alert-info">
    Messages is in Preview. Contact your Customer Success Manager for access.
