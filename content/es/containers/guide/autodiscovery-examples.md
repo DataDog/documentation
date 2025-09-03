@@ -152,7 +152,7 @@ labels:
 ```
 
 {{% /tab %}}
-{{% tab "Archivo local" %}}
+{{% tab "Local file" %}}
 1. Crea un archivo `conf.d/redisdb.d/conf.yaml` en tu host:
 
    ```yaml
@@ -220,7 +220,7 @@ A continuación, define `volumeMounts` y `volumes` en tu manifiesto:
 ```
 
 {{% /tab %}}
-{{% tab "Base de datos clave-valor" %}}
+{{% tab "Key-value store" %}}
 
 Los siguientes comandos etcd crean una plantilla de con integración Redis con un parámetro de `password` personalizado:
 
@@ -428,7 +428,7 @@ LABEL "com.datadoghq.ad.instances"='[[{"apache_status_url": "http://%%host%%/ser
 ```
 
 {{% /tab %}}
-{{% tab "Archivo local" %}}
+{{% tab "Local file" %}}
 
 * Crea las carpetas `conf.d/` y `conf.d/apache.d` en tu host.
 * Añade la siguiente auto-configuración personalizada a `conf.d/apache.d/conf.yaml` en tu host.
@@ -526,7 +526,7 @@ En el manifiesto, define `volumeMounts` y `volumes`:
 ```
 
 {{% /tab %}}
-{{% tab "Base de datos clave-valor" %}}
+{{% tab "Key-value store" %}}
 
 ```conf
 etcdctl set /datadog/check_configs/apache/check_names '["apache", "http_check"]'

@@ -2,14 +2,21 @@
 aliases:
 - /es/code_analysis/
 disable_toc: false
-title: Seguridad del código
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor (noun)-mcp-servidores/
+  tag: Blog
+  text: Identificar los riesgos de seguridad más comunes en los servidores MCP
+title: Code Security
 ---
 
-Code Security escanea tu código de origen y bibliotecas de código abierto utilizadas en tus aplicaciones, tanto en tus repositorios como servicios en ejecución, proporcionando visibilidad de extremo a extremo desde el desarrollo hasta la producción. Abarca las siguientes capacidades:
+Code Security analiza tu código de origen y bibliotecas de código abierto utilizadas en tus aplicaciones, tanto en tus repositorios como servicios en ejecución, proporcionando visibilidad de extremo a extremo desde el desarrollo hasta la producción. Abarca las siguientes capacidades:
 
 - [Static Code Analysis (SAST)][1] para identificar problemas de seguridad y calidad en el código de origen.
 - [Software Composition Analysis (SCA)][2] para identificar dependencias de código abierto tanto en tus repositorios como en tus servicios
-- [Runtime Code Analysis (IAST)][3] para detectar vulnerabilidades a nivel de código en tus servicios
+- [Runtime Code Analysis (IAST)][3] para identificar vulnerabilidades en el código de origen dentro de tus servicios
+- [Secret Scanning][8] para identificar y validar secretos filtrados (en vista previa)
+- [Infrastructure as Code (IaC) Security][10] para identificar configuraciones de seguridad incorrectas en los archivos Terraform almacenados en tus repositorios
+- [Supply Chain Security](#supply-chain-security) para evitar que paquetes maliciosos entren en tu entorno de desarrollo y repositorios de código
 
 Code Security ayuda a los equipos a implementar DevSecOps en toda la organización:
 - **Desarrolladores:** detección temprana de vulnerabilidades, mejoras en la calidad del código, desarrollo más rápido, ya que los desarrolladores pasan menos tiempo depurando y parcheando.
@@ -43,6 +50,20 @@ Runtime Code Analysis (IAST) identifica vulnerabilidades a nivel de código en t
 
 Puedes activar IAST en tus servicios instrumentados con Datadog APM. Consulta [Configuración de IAST][3] para empezar.
 
+## Secret Scanning
+Secret Scanning identifica y valida los secretos filtrados en tu código base. [Solicita acceso a la vista previa][9].
+
+## Supply Chain Security
+Los desarrolladores están siendo blanco activo de ataques a la cadena de suministro. Evita que entren paquetes maliciosos en tus entornos de desarrollo con Datadog Supply Chain Security Firewall, disponible en GitHub.
+{{< callout url="https://docs.google.com/forms/d/1Xqh5h1n3-jC7au2t30fdTq732dkTJqt_cb7C7T-AkPc" >}}
+  Para inscribirte como socio de diseño, haz clic en Solicitar acceso.
+{{< /callout >}}
+
+
+## Referencias adicionales
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /es/security/code_security/static_analysis/
 [2]: /es/security/code_security/software_composition_analysis/
 [3]: /es/security/code_security/iast/
@@ -50,3 +71,6 @@ Puedes activar IAST en tus servicios instrumentados con Datadog APM. Consulta [C
 [5]: /es/security/code_security/software_composition_analysis/setup_runtime/
 [6]: /es/security/code_security/static_analysis/setup/
 [7]: /es/security/code_security/iast/setup/
+[8]: /es/security/code_security/secret_scanning/
+[9]: https://www.datadoghq.com/product-preview/secret-scanning/
+[10]: /es/security/code_security/iac_security

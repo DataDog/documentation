@@ -52,7 +52,7 @@ override func viewDidDisappear(_ animated: Bool) {
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogRUM;
 // in your `UIViewController`:
 
 DDRUMMonitor *rum = [DDRUMMonitor shared];
@@ -268,6 +268,9 @@ You can use the following properties in `Datadog.Configuration` when creating th
 `backgroundTasksEnabled`
 : This flag determines if the `UIApplication` methods `beginBackgroundTask(expirationHandler:)` and `endBackgroundTask:` are used to perform background uploads. Enabling this flag might increase the amount of time that the app operates in the background by 30 seconds. Tasks are normally stopped when there's nothing to upload or when encountering a blocker to uploading, such as having no internet connection or having a low battery. By default, this flag is set to `false`.
 
+`batchProcessingLevel`
+: Batch processing level defines the maximum number of batches processed sequentially without a delay within one reading/uploading cycle. The default value is `.medium`.
+
 `batchSize`
 : Sets the preferred size of batched data uploaded to Datadog. This value impacts the size and number of requests performed by the RUM iOS SDK (small batches mean more requests, but each request becomes smaller in size). Available values include: `.small`, `.medium`, and `.large`.
 
@@ -344,11 +347,14 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 `trackAnonymousUser`
 : When enabled, the SDK generates a unique, non-personal anonymous user ID that is persisted across app launches. This ID will be attached to each RUM Session, allowing you to link sessions originating from the same user/device without collecting personal data. By default, this is set to `true`.
 
+`trackBackgroundEvents`
+: Determines whether RUM events are tracked when no view is active. By default, this is set to `false`.
+
 `trackFrustrations`
 : Determines whether automatic tracking of user frustrations is enabled. By default, this is set to `true`.
 
-`trackBackgroundEvents`
-: Determines whether RUM events are tracked when no view is active. By default, this is set to `false`.
+`trackMemoryWarnings`
+: Determines whether automatic tracking of memory warnings is enabled. By default, this is set to `true`.
 
 `trackWatchdogTerminations`
 : Determines whether the SDK should track application terminations performed by Watchdog. The default setting is `false`.
@@ -642,12 +648,20 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-info">Be mindful of delegate retention.
+While Datadog instrumentation does not create memory leaks directly, it relies on <code>URLSession</code> delegates. According to <a href="https://developer.apple.com/documentation/foundation/urlsession/init(configuration:delegate:delegatequeue:)#parameters"> Apple documentation</a>:
+"The session object keeps a strong reference to the delegate until your app exits or explicitly invalidates the session. If you do not invalidate the session by calling the <code>invalidateAndCancel()</code> or <code>finishTasksAndInvalidate()</code> method, your app leaks memory until it exits."
+To avoid memory leaks, make sure to invalidate any <code>URLSession</code> instances you no longer need.
+</div>
+
+
 If you have more than one delegate type in your app that you want to instrument, you can call `URLSessionInstrumentation.enable(with:)` for each delegate type.
 
 Also, you can configure first party hosts using `urlSessionTracking`. This classifies resources that match the given domain as "first party" in RUM and propagates tracing information to your backend (if you have enabled Tracing). Network traces are sampled with an adjustable sampling rate. A sampling of 20% is applied by default.
 
 For instance, you can configure `example.com` as the first party host and enable both RUM and Tracing features:
 
+[10]: https://developer.apple.com/documentation/foundation/urlsession/init(configuration:delegate:delegatequeue:)#parameters
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
@@ -685,7 +699,7 @@ This tracks all requests sent with the instrumented `session`. Requests matching
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogRUM;
 
 DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
 DDRUMURLSessionTracking *urlSessionTracking = [DDRUMURLSessionTracking new];
@@ -749,7 +763,7 @@ logger.critical("message")
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogLogs;
 
 DDLogger *logger = [DDLogger create];
 [logger error:@"message"];

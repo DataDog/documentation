@@ -19,14 +19,17 @@ further_reading:
 
 Sensitive Data Scanner in the Cloud scans telemetry data, such as your application logs, APM events, RUM events, and events from Event Management. The data that can be scanned and redacted are:
 
-- Logs: All structured and unstructured log content, including log message and attribute values
-- APM: Span attribute values only
-- RUM: Event attribute values only
-- Events: Event attribute values only
+- **Logs**: All structured and unstructured log content, including log message and attribute values
+- **APM**: Span attribute values only
+- **RUM**: Event attribute values only
+- **Events**: Event attribute values only
 
-{{< callout url="https://www.datadoghq.com/product-preview/role-based-sensitive-data-unmasking-in-logs" btn_hidden="false" >}}
-Role-based sensitive data unmasking in logs is in Preview. To enroll, click <b>Request Access</b>.
-{{< /callout >}}
+For each scanning rule, one of the following actions can be applied to matched sensitive data:
+
+- **Redact**: Replace the entire matched data with a single token that you choose, such as `[sensitive_data]`.
+- **Partially redact**: Replace a specific portion of all matching values.
+- **Hash**: Replace the entire matched data with a non-reversible unique identifier.
+- **Mask** (available for logs only): Obfuscate all matching values. Users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) and view this data in Datadog. See [Mask action](#mask-action) for more information.
 
 You submit logs and events to the Datadog backend, so the data leaves your environment before it gets redacted. The logs and events are scanned and redacted in the Datadog backend during processing, so sensitive data is redacted before events are indexed and shown in the Datadog UI.
 
@@ -47,6 +50,8 @@ This document goes through the following:
 ### Permissions
 
 By default, users with the Datadog Admin role have access to view and set up scanning rules. To allow other users access, grant the `data_scanner_read` or `data_scanner_write` permissions under [Compliance][1] to a custom role. See [Access Control][2] for details on how to set up roles and permissions.
+
+If a scanning rule uses the **mask** action (only available for logs) for matched sensitive data, users with the `data_scanner_unmask` permission can de-obfuscate and view the data in Datadog. **Note**: Datadog does not recommend using the **mask** action for credentials, unless you have a plan to respond to and rotate all leaked credentials. See [Mask action](#mask-action) for more information.
 
 {{< img src="sensitive_data_scanner/read_write_permissions.png" alt="The compliance permissions sections showing data scanner read and writer permissions" style="width:80%;">}}
 
@@ -137,6 +142,9 @@ There are reserved keywords that the Datadog platform requires for functionality
 
 The excluded namespaces are:
 
+{{% tabs %}}
+{{% tab "Logs" %}}
+
 - `host`
 - `hostname`
 - `syslog.hostname`
@@ -159,6 +167,78 @@ The excluded namespaces are:
 - `error.fingerprint`
 - `x-datadog-parent-id`
 
+{{% /tab %}}
+{{% tab "Spans" %}}
+
+- `metrics._dd.`
+- `metrics.dd.`
+- `metrics._dd1.`
+- `metrics.otel.trace_id`
+- `metrics.otlp.`
+- `metrics._sampling_priority_v1`
+- `metrics._sample_rate`
+- `meta._dd.`
+- `meta.api.endpoint.`
+- `meta.dd.`
+- `meta_struct.dd.`
+- `meta_struct._dd.`
+- `meta_struct.api.endpoint.`
+- `meta_struct.appsec.`
+- `meta_struct.threat_intel.results.`
+- `meta.otel.trace_id`
+- `meta.otel.library.`
+- `meta.otlp.`
+- `trace_id`
+- `span_id`
+- `start`
+- `timestamp`
+- `end`
+- `duration`
+- `parent_id`
+- `type`
+- `resource`
+- `resource_hash`
+- `ingest_size_in_bytes`
+- `ingestion_reason`
+- `error`
+- `flags`
+- `status`
+- `chunk_id`
+- `host`
+- `host_id`
+- `hostname`
+- `env`
+- `service`
+- `operation_name`
+- `name`
+- `version`
+- `meta._dd.error_tracking`
+- `meta.error.fingerprint`
+- `meta.issue`
+
+{{% /tab %}}
+{{% tab "RUM" %}}
+
+- `application.id`
+- `session.id`
+- `session.initial_view.id`
+- `session.last_view.id`
+- `view.id`
+- `action.id`
+- `resource.id`
+- `geo`
+- `error.fingerprint`
+- `error.binary_images.uuid`
+- `issue`
+- `_dd.trace_id`
+- `_dd.span_id`
+- `_dd.usage_attribution_tag_names`
+- `_dd.error.unminified_frames`
+- `_dd.error.threads`
+
+{{% /tab %}}
+{{% /tabs %}}
+
 ### Edit scanning rules
 
 1. Navigate to the [Sensitive Data Scanner][5] settings page.
@@ -174,6 +254,10 @@ The excluded namespaces are:
 ## Control access to logs with sensitive data
 
 To control who can access logs containing sensitive data, use tags added by the Sensitive Data Scanner to build queries with role-based access control (RBAC). You can restrict access to specific individuals or teams until the data ages out after the retention period. See [How to Set Up RBAC for Logs][9] for more information.
+
+### Mask action
+
+{{% sds-mask-action %}}
 
 ## Redact sensitive data in tags
 

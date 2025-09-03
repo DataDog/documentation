@@ -51,6 +51,9 @@ further_reading:
 - link: https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/
   tag: Centro de arquitectura
   text: Guía de estrategias de indexación de la gestión de logs con Datadog
+- link: https://www.datadoghq.com/blog/archive-search/
+  tag: Blog
+  text: Busca en tus logs históricos de forma más eficiente con Datadog Archive Search
 title: Gestión de logs
 ---
 
@@ -65,8 +68,6 @@ Registrar las partes importantes de las operaciones de tu sistema es crucial par
 Datadog Log Management, también denominado como logs de Datadog o logging, elimina estas limitaciones desacoplando la ingesta de logs desde la indexación. Esto te permite recopilar, procesar, archivar, explorar y monitorizar de forma rentable todos tus logs sin limitaciones, también conocido como Logging without Limits\*.
 
 Logging without Limits\* permite agilizar la experiencia de solucionar problemas en el [Log Explorer][1], lo que te permite a ti y a tus equipos evaluar y solucionar rápidamente los problemas de infraestructura. Proporciona un archivado intuitivo para ayudar a tus equipos de seguridad y TI durante las auditorías y evaluaciones. Logging without Limits* también impulsa [Datadog Cloud SIEM][2], que detecta amenazas a la seguridad en tu entorno, sin necesidad de indexar logs.
-
-**Nota**: Consulta [Cumplimiento de PCI DSS][3] para obtener información sobre la creación de una organización de Datadog que cumple con la PCI.
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/293195142/rendition/1080p/file.mp4?loc=external&signature=8a45230b500688315ef9c8991ce462f20ed1660f3edff3d2904832e681bd6000" poster="/images/poster/logs.png" >}}
 
@@ -110,7 +111,7 @@ Comienza a explorar tus logs ingeridos en el [Log Explorer][1].
   Aprende sin coste alguno sobre la capacidad real de computación en la nube y una cuenta de prueba de Datadog. Inscríbete hoy mismo para obtener más información sobre la recopilación, consulta, análisis, métricas, monitorización, procesamiento, almacenamiento y control de acceso de logs.
 {{< /learning-center-callout >}}
 
-## Para leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
@@ -118,7 +119,6 @@ Comienza a explorar tus logs ingeridos en el [Log Explorer][1].
 
 [1]: /es/logs/explorer/
 [2]: /es/security/cloud_siem/
-[3]: /es/data_security/pci_compliance/
 [4]: /es/logs/log_collection/
 [5]: /es/logs/log_configuration/
 [6]: /es/tracing/other_telemetry/connect_logs_and_traces/

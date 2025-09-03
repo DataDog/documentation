@@ -14,7 +14,7 @@ El Datadog IoT Agent es una versión del Agent optimizada para monitorizar los d
 
 El IoT Agent incluye los siguientes checks de sistema. La configuración de los dispositivos IoT es idéntica a la de otros tipos de hosts.
 
-- [Sistema][1] (abarca CPU, E/S, carga, memoria, intercambios y tiempo de actividad)
+- [Sistema][1] (incluye CPU, E/S, carga, memoria, intercambios y tiempo de actividad)
 - [Disco][2]
 - [Red][3]
 - [Systemd][4]
@@ -25,7 +25,7 @@ El IoT Agent también es compatible con:
 - La recopilación de métricas personalizadas mediante un servidor [DogStatsD][6] integrado
 - La recopilación de logs mediante [archivos de cola][7], [TCP/UDP][8] y [journald][9]
 
-El IoT Agent no incluye el intérprete de Python ni otras integraciones que suelen venir en el paquete del Agent estándar. Tampoco admite el rastreo de APM, la monitorización de procesos en tiempo real ni la monitorización del rendimiento de la red.
+El IoT Agent no incluye el intérprete Python ni otras integraciones en el paquete del Agent estándar. Tampoco admite el rastreo de APM, la monitorización de procesos en directo o Cloud Network Monitoring.
 
 ## Configuración
 
@@ -98,7 +98,7 @@ Para instalar el IoT Agent en sistemas operativos basados en Debian, ejecuta los
 
 6. Define tu sitio Datadog como {{< region-param key="dd_site" code="true" >}}. El valor predeterminado es `datadoghq.com`.
     ```shell
-    sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml
+    sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml"
     ```
 
 7. Inicia el IoT Agent:
@@ -133,7 +133,7 @@ Para instalar de forma manual el IoT Agent en sistemas operativos basados en RPM
     - arm64: `https://yum.datadoghq.com/stable/7/aarch64/`
     - ARMv7: `https://yum.datadoghq.com/stable/7/armv7hl/`
 
-2. Actualiza el repositorio Yum local e instala el Agent:
+2. Actualiza el repositorio de YUM local e instala el Agent:
     ```shell
     sudo yum makecache
     sudo yum install datadog-iot-agent
@@ -146,7 +146,7 @@ Para instalar de forma manual el IoT Agent en sistemas operativos basados en RPM
 
 4. Define tu sitio Datadog como {{< region-param key="dd_site" code="true" >}}. El valor predeterminado es `datadoghq.com`.
     ```shell
-    sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml
+    sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml"
     ```
 
 5. Inicia el IoT Agent:
@@ -170,10 +170,10 @@ sudo apt-get remove datadog-iot-agent -y
 
 Este comando borra el Agent, pero no elimina:
 
-* el archivo de configuración `datadog.yaml`;
-* los archivos que ha creado el usuario en la carpeta de configuración `/etc/datadog-agent`;
-* los archivos que ha creado el usuario en la carpeta `/opt/datadog-agent`;
-* el usuario `dd-agent`.
+* El archivo de configuración `datadog.yaml`
+* Los archivos que ha creado el usuario en la carpeta de configuración `/etc/datadog-agent`
+* Los archivos que ha creado el usuario en la carpeta `/opt/datadog-agent`
+* El usuario `dd-agent`
 
 Si también quieres eliminar esos elementos, usa este comando:
 
@@ -181,7 +181,7 @@ Si también quieres eliminar esos elementos, usa este comando:
 sudo apt-get remove --purge datadog-iot-agent -y
 ```
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

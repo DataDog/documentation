@@ -5230,6 +5230,12 @@ components:
         error:
           $ref: '#/components/schemas/LogsAPIError'
       type: object
+    LogsAPILimitReachedResponse:
+      description: Response returned by the Logs API when the max limit has been reached.
+      properties:
+        error:
+          $ref: '#/components/schemas/LogsAPIError'
+      type: object
     LogsArithmeticProcessor:
       description: "Use the Arithmetic Processor to add a new attribute (without spaces
         or special characters\nin the new attribute name) to a log with the result
@@ -15927,6 +15933,10 @@ components:
             type: string
           description: Variables to replace in the test.
           type: object
+        version:
+          description: The version number of the Synthetic test version to trigger.
+          format: int64
+          type: integer
       required:
       - public_id
       type: object
@@ -21004,6 +21014,21 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        event_management_correlation_correlated_events_sum:
+          description: Shows the sum of all Event Management correlated events over
+            all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        event_management_correlation_correlated_related_events_sum:
+          description: Shows the sum of all Event Management correlated related events
+            over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        event_management_correlation_sum:
+          description: Shows the sum of all Event Management correlations over all
+            hours in the current date for all organizations.
+          format: int64
+          type: integer
         fargate_container_profiler_profiling_fargate_avg:
           description: The average number of Profiling Fargate tasks over all hours
             in the current date for all organizations.
@@ -21036,6 +21061,11 @@ components:
           type: integer
         flex_logs_compute_small_avg:
           description: Shows the average number of Flex Logs Compute Small Instances
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_compute_xlarge_avg:
+          description: Shows the average number of Flex Logs Compute Extra Large Instances
             over all hours in the current date for the given org.
           format: int64
           type: integer
@@ -21934,6 +21964,21 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        event_management_correlation_correlated_events_sum:
+          description: Shows the sum of all Event Management correlated events over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        event_management_correlation_correlated_related_events_sum:
+          description: Shows the sum of all Event Management correlated related events
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        event_management_correlation_sum:
+          description: Shows the sum of all Event Management correlations over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
         fargate_container_profiler_profiling_fargate_avg:
           description: The average number of Profiling Fargate tasks over all hours
             in the current month for the given org.
@@ -21965,6 +22010,11 @@ components:
           type: integer
         flex_logs_compute_small_avg:
           description: Shows the average number of Flex Logs Compute Small Instances
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_compute_xlarge_avg:
+          description: Shows the average number of Flex Logs Compute Extra Large Instances
             over all hours in the current date for the given org.
           format: int64
           type: integer
@@ -22869,6 +22919,21 @@ components:
             hours in the current month for all organizations.
           format: int64
           type: integer
+        event_management_correlation_agg_sum:
+          description: Shows the sum of all Event Management correlations over all
+            hours in the current month for all organizations.
+          format: int64
+          type: integer
+        event_management_correlation_correlated_events_agg_sum:
+          description: Shows the sum of all Event Management correlated events over
+            all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        event_management_correlation_correlated_related_events_agg_sum:
+          description: Shows the sum of all Event Management correlated related events
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         fargate_container_profiler_profiling_fargate_avg_sum:
           description: The average number of Profiling Fargate tasks over all hours
             in the current month for all organizations.
@@ -22901,6 +22966,11 @@ components:
           type: integer
         flex_logs_compute_small_avg_sum:
           description: Shows the average number of Flex Logs Compute Small Instances
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        flex_logs_compute_xlarge_avg_sum:
+          description: Shows the average number of Flex Logs Compute Extra Large Instances
             over all hours in the current months for all organizations.
           format: int64
           type: integer
@@ -24331,6 +24401,9 @@ components:
       additionalProperties: false
       description: Wrapper for live span
       properties:
+        hide_incomplete_cost_data:
+          description: Whether to hide incomplete cost data in the widget.
+          type: boolean
         live_span:
           $ref: '#/components/schemas/WidgetLiveSpan'
       type: object
@@ -24531,6 +24604,9 @@ components:
           format: int64
           minimum: 0
           type: integer
+        hide_incomplete_cost_data:
+          description: Whether to hide incomplete cost data in the widget.
+          type: boolean
         to:
           description: End time in seconds since epoch.
           example: 1712083128
@@ -24555,6 +24631,9 @@ components:
     WidgetNewLiveSpan:
       description: Used for arbitrary live span times, such as 17 minutes or 6 hours.
       properties:
+        hide_incomplete_cost_data:
+          description: Whether to hide incomplete cost data in the widget.
+          type: boolean
         type:
           $ref: '#/components/schemas/WidgetNewLiveSpanType'
         unit:
@@ -30451,6 +30530,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsAPILimitReachedResponse'
+          description: Unprocessable Entity
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create an index
@@ -33136,7 +33221,9 @@ paths:
         type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/assignee:
     patch:
-      description: Modify the triage assignee of a security signal.
+      deprecated: true
+      description: This endpoint is deprecated - Modify the triage assignee of a security
+        signal.
       operationId: EditSecurityMonitoringSignalAssignee
       parameters:
       - $ref: '#/components/parameters/SignalID'
@@ -33187,7 +33274,9 @@ paths:
         type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/state:
     patch:
-      description: Change the triage state of a security signal.
+      deprecated: true
+      description: This endpoint is deprecated - Change the triage state of a security
+        signal.
       operationId: EditSecurityMonitoringSignalState
       parameters:
       - $ref: '#/components/parameters/SignalID'

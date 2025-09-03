@@ -283,9 +283,73 @@ Set the following values as environment variables. They cannot be configured pro
 
 {{% /collapse-content %}}
 
-### AWS Lambda setup
+{{% collapse-content title="AWS Lambda Setup" level="h3" expanded=false id="aws-lambda-setup" %}}
 
-See [Quickstart: Trace an LLM application in AWS Lambda][15].
+To instrument an existing AWS Lambda function with LLM Observability, you can use the Datadog Extension and respective language layers.
+
+1. Open a Cloudshell in the AWS console.
+2. Install the Datadog CLI client
+```shell
+npm install -g @datadog/datadog-ci
+```
+3. Set the Datadog API key and site
+```shell
+export DD_API_KEY=<YOUR_DATADOG_API_KEY>
+export DD_SITE=<YOUR_DATADOG_SITE>
+```
+If you already have or prefer to use a secret in Secrets Manager, you can set the API key by using the secret ARN:
+```shell
+export DATADOG_API_KEY_SECRET_ARN=<DATADOG_API_KEY_SECRET_ARN>
+```
+4. Install your Lambda function with LLM Observability (this requires at least version 77 of the Datadog Extension layer)
+{{< tabs >}}
+{{% tab "Python" %}}
+```shell
+datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="python" >}} -e {{< latest-lambda-layer-version layer="extension" >}} --llmobs <YOUR_LLMOBS_ML_APP>
+```
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+```shell
+datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="node" >}} -e {{< latest-lambda-layer-version layer="extension" >}} --llmobs <YOUR_LLMOBS_ML_APP>
+```
+{{% /tab %}}
+
+{{% tab "Java" %}}
+```shell
+datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="dd-trace-java" >}} -e {{< latest-lambda-layer-version layer="extension" >}} --llmobs <YOUR_LLMOBS_ML_APP>
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+4. Invoke your Lambda function and verify that LLM Observability traces are visible in the Datadog UI.
+
+Manually flush LLM Observability traces by using the `flush` method before the Lambda function returns.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+```python
+from ddtrace.llmobs import LLMObs
+def handler():
+  # function body
+  LLMObs.flush()
+```
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+```javascript
+import tracer from 'dd-trace';
+const llmobs = tracer.llmobs;
+
+export const handler = async (event) => {
+  // your function body
+  llmobs.flush();
+};
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% /collapse-content %}}
 
 ### Application naming guidelines
 
@@ -1106,7 +1170,7 @@ getRelevantDocs = llmobs.wrap({ kind: 'retrieval' }, getRelevantDocs)
 
 ## Tracking user sessions
 
-Session tracking allows you to associate multiple interactions with a given user. 
+Session tracking allows you to associate multiple interactions with a given user.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1181,11 +1245,15 @@ The `LLMObs.annotate()` method accepts the following arguments:
 
 `input_data`
 : optional - _JSON serializable type or list of dictionaries_
-<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans).  **Note**: Embedding spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "..."}`.
+<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"content": "...", "role": "...", "tool_calls": ..., "tool_results": ...}`, where `"tool_calls"` are an optional list of tool call dictionaries with required keys: `"name"`, `"arguments"`, and optional keys: `"tool_id"`, `"type"`, and `"tool_results"` are an optional list of tool result dictionaries with required key: `"result"`, and optional keys: `"name"`, `"tool_id"`, `"type"` for function calling scenarios. **Note**: Embedding spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "..."}`.
 
 `output_data`
 : optional - _JSON serializable type or list of dictionaries_
-<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans). **Note**: Retrieval spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
+<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"content": "...", "role": "...", "tool_calls": ...}`, where `"tool_calls"` are an optional list of tool call dictionaries with required keys: `"name"`, `"arguments"`, and optional keys: `"tool_id"`, `"type"` for function calling scenarios. **Note**: Retrieval spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
+
+`tool_definitions`
+: optional - _list of dictionaries_
+<br />List of tool definition dictionaries for function calling scenarios. Each tool definition should have a required `"name": "..."` key and optional `"description": "..."` and `"schema": {...}` keys.
 
 `metadata`
 : optional - _dictionary_
@@ -2219,6 +2287,3 @@ tracer.use('http', false) // disable the http integration
 [11]: /tracing/trace_collection/compatibility/python/#integrations
 [12]: /tracing/trace_collection/compatibility/python/#library-compatibility
 [13]: /llm_observability/instrumentation/auto_instrumentation/
-[14]: /serverless/aws_lambda/installation/python/?tab=custom#installation
-[15]: /llm_observability/quickstart?tab=python#trace-an-llm-application-in-aws-lambda
-[16]: https://app.datadoghq.com/llm/settings/evaluations
