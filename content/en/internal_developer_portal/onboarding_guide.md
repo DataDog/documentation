@@ -79,7 +79,6 @@ Recommendations:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /internal_developer_portal/getting_started/
 [2]: /internal_developer_portal/software_catalog/entity_model/entity_types/
 [3]: /internal_developer_portal/scorecards/
 [4]: /internal_developer_portal/self_service_actions/
