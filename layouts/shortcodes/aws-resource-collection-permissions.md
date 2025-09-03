@@ -8,7 +8,7 @@ The set of permissions necessary to use all the integrations for individual AWS 
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Action": {{ $.Site.Data.aws_core_standard_permissions | jsonify (dict "indent" "        ") }},
+      "Action": {{ $.Site.Data.aws_resource_collection_permissions | jsonify (dict "indent" "        ") }},
       "Effect": "Allow",
       "Resource": "*"
     }

@@ -7,7 +7,7 @@ To correctly set up the AWS Integration, you must attach the relevant IAM polici
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Action": {{ $.Site.Data.aws_core_standard_permissions | jsonify (dict "indent" "        ") }},
+      "Action": {{ $.Site.Data.aws_permissions | jsonify (dict "prefix" "      " "indent" "  ") }},
       "Effect": "Allow",
       "Resource": "*"
     }
