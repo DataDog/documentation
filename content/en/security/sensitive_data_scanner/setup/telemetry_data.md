@@ -45,9 +45,7 @@ This document goes through the following:
 - [How to control access to logs wth sensitive data](#control-access-to-logs-with-sensitive-data)
 - [How to redact sensitive data in tags](#redact-sensitive-data-in-tags)
 
-## Setup
-
-### Permissions
+## Permissions
 
 By default, users with the Datadog Admin role have access to view and set up scanning rules. To allow other users access, grant the `data_scanner_read` or `data_scanner_write` permissions under [Compliance][1] to a custom role. See [Access Control][2] for details on how to set up roles and permissions.
 
@@ -55,7 +53,7 @@ If a scanning rule uses the **mask** action (only available for logs) for matche
 
 {{< img src="sensitive_data_scanner/read_write_permissions.png" alt="The compliance permissions sections showing data scanner read and writer permissions" style="width:80%;">}}
 
-### Add a scanning group
+## Add a scanning group
 
 A scanning group determines what data to scan. It consists of a query filter, a set of buttons to enable scanning for logs, APM, RUM, and events, and the option to set sampling rates between 10% to 99% for each product. See the [Log Search Syntax][3] documentation to learn more about query filters.
 
@@ -73,7 +71,7 @@ To set up a scanning group, perform the following steps:
 
 By default, a newly-created scanning group is disabled. To enable a scanning group, click the corresponding toggle on the right side.
 
-### Add scanning rules
+## Add scanning rules
 
 A scanning rule determines what sensitive information to match within the data defined by a scanning group. You can add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules using regex patterns. The data is scanned at ingestion time during processing. For logs, this means the scan is done before indexing and other routing decisions.
 
@@ -86,7 +84,7 @@ To add scanning rules, perform the following steps:
 1. Click **Add Scanning Rule**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Rule**.
 1. Select whether you want to add a library rule or create a custom scanning rule.
 
-#### Rule settings
+### Rule settings
 
 {{< tabs >}}
 {{% tab "Library rules" %}}
@@ -106,7 +104,7 @@ To add scanning rules, perform the following steps:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Add rules
+### Add rules
 
 {{< tabs >}}
 {{% tab "Library rules" %}}
@@ -143,7 +141,7 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Action on match
+### Action on match
 
 {{% sds-scanning-rule %}}
 1. Click **Add Rules**.
@@ -157,7 +155,7 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 
 See [Investigate Sensitive Data Issues][7] for details on how to use the [Summary][8] page to triage your sensitive data issues.
 
-#### Add custom keywords to library rules
+### Add custom keywords to library rules
 
 The recommended keywords are used by default when library rules are created. After adding library rules, you can edit each rule separately and add keywords to or remove keywords from the keyword dictionary.
 
@@ -175,7 +173,7 @@ The recommended keywords are used by default when library rules are created. Aft
 1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
 1. Click **Update**.
 
-#### Excluded namespaces
+### Excluded namespaces
 
 There are reserved keywords that the Datadog platform requires for functionality. If any of these words are in a log that is being scanned, the 30 characters after the matched word are ignored and not redacted. For example, what comes after the word `date` in a log is usually the event timestamp. If the timestamp is accidentally redacted, that would result in issues with processing the log and being able to query it later. Therefore, the behavior for excluded namespaces is to prevent unintentionally redacting important information for product functionality.
 
@@ -278,7 +276,7 @@ The excluded namespaces are:
 {{% /tab %}}
 {{% /tabs %}}
 
-### Edit scanning rules
+## Edit scanning rules
 
 To edit scanning rules:
 
