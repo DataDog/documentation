@@ -104,13 +104,10 @@ The recommended keywords are used by default when OOTB scanning rules are create
 1. Click the scanning group with the rule you want to edit.
 1. Hover over the rule, and then click the pencil icon.
 1. In the **Match Conditions** section, click **Custom Keywords**.
-    - To add keywords:
-    1. Enter a keyword.
-    1. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
-    1. Click the plus icon to add the keyword to the list.
-    1. Repeat these steps to add more keywords.
-    - To remove keywords:
-    1. Click the **X** next to the keyword you want to remove.
+    - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
+    - To remove keywords, click the **X** next to the keyword you want to remove.
+    - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+    - **Note**: You cannot have more than 20 keywords for a rule.
 1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
 1. Click **Update**.
 
@@ -137,7 +134,8 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 1. For **Check for keywords near regex pattern**, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`.
     - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
     - To remove keywords, click the **X** next to the keyword you want to remove.
-    - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value. **Note**: You cannot have more than 20 keywords for a rule.
+    - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+    - **Note**: You cannot have more than 20 keywords for a rule.
 1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
 {{% sds-scanning-rule %}}
 1. Click **Add Rule**.
