@@ -51,7 +51,7 @@ You must have the following permissions:
 * `Logs Live Tail`
 
 You can verify your current permissions on your [Profile page][7].
-To enable permissions, edit an existing role or create a new one on the [Roles page][8]. If you don't have adequate access to modify roles, contact your organization's administrator.
+To enable permissions, edit an existing role or create a new one on the [Roles page][8]. If you do not have permission to modify roles, contact your organization's administrator.
 
 ### 1. Create a new role
 
