@@ -24401,6 +24401,9 @@ components:
       additionalProperties: false
       description: Wrapper for live span
       properties:
+        hide_incomplete_cost_data:
+          description: Whether to hide incomplete cost data in the widget.
+          type: boolean
         live_span:
           $ref: '#/components/schemas/WidgetLiveSpan'
       type: object
@@ -24601,6 +24604,9 @@ components:
           format: int64
           minimum: 0
           type: integer
+        hide_incomplete_cost_data:
+          description: Whether to hide incomplete cost data in the widget.
+          type: boolean
         to:
           description: End time in seconds since epoch.
           example: 1712083128
@@ -24625,6 +24631,9 @@ components:
     WidgetNewLiveSpan:
       description: Used for arbitrary live span times, such as 17 minutes or 6 hours.
       properties:
+        hide_incomplete_cost_data:
+          description: Whether to hide incomplete cost data in the widget.
+          type: boolean
         type:
           $ref: '#/components/schemas/WidgetNewLiveSpanType'
         unit:
