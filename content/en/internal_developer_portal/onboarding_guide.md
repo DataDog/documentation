@@ -97,7 +97,5 @@ Recommendations:
 [18]: /internal_developer_portal/software_catalog/entity_model?tab=v30#build-custom-extensions
 [19]: /internal_developer_portal/scorecards/custom_rules
 [20]: /internal_developer_portal/scorecards/scorecard_configuration#group-rules-into-levels
-[21]: /internal_developer_portal/software_catalog/set_up/discover_entities#automatic-discovery-with-apm-usm-and-rum
-[22]: /internal_developer_portal/software_catalog/set_up/import_entities
 [23]: /internal_developer_portal/software_catalog/set_up/discover_entities
 [24]: /internal_developer_portal/software_catalog/set_up/create_entities
