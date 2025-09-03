@@ -164,13 +164,10 @@ The [recommended keywords][15] are used by default when library rules are create
 1. Click the scanning group with the rule you want to edit.
 1. Hover over the rule, and then click the pencil icon.
 1. In the **Match Conditions** section, click **Custom Keywords**.
-    - To add keywords:
-    1. Enter a keyword.
-    1. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
-    1. Click the plus icon to add the keyword to the list.
-    1. Repeat these steps to add more keywords.
-    - To remove keywords:
-    1. Click the **X** next to the keyword you want to remove.
+    - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
+    - To remove keywords, click the **X** next to the keyword you want to remove.
+    - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+    - **Note**: You cannot have more than 20 keywords for a rule.
 1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
 1. Click **Update**.
 
