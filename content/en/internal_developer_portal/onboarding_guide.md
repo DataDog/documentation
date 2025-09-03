@@ -1,7 +1,7 @@
 ---
 title: Onboard with Internal Developer Portal
 further_reading:
-  - link: '/internal_developer_portal/getting_started/'
+  - link: '/getting_started/internal_developer_portal/'
     tag: 'Documentation'
     text: 'Getting started with Internal Developer Portal'
   - link: '/internal_developer_portal/software_catalog/'
