@@ -95,14 +95,22 @@ The Scanning Rule Library contains predefined rules for detecting common pattern
 {{% sds-scanning-rule %}}
 1. Click **Add Rules**.
 
-#### Add additional keywords
+#### Add custom keywords
 
-After adding OOTB scanning rules, you can edit each rule separately and add additional keywords to the keyword dictionary.
+The recommended keywords are used by default when OOTB scanning rules are created. After adding OOTB rules, you can edit each rule separately and add keywords to or remove keywords from the keyword dictionary.
 
 1. Navigate to the [Sensitive Data Scanner][5] settings page.
 1. Click the scanning group with the rule you want to edit.
 1. Hover over the rule, and then click the pencil icon.
-1. The recommend keywords are used by default. To add additional keywords, toggle **Use recommended keywords**, then add your keywords to the list. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+1. In the **Match Conditions** section, click **Custom Keywords**.
+    - To add keywords:
+    1. Enter a keyword.
+    1. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+    1. Click the plus icon to add the keyword to the list.
+    1. Repeat these steps to add more keywords.
+    - To remove keywords:
+    1. Click the **X** next to the keyword you want to remove.
+1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
 1. Click **Update**.
 
 {{% /collapse-content %}}
@@ -110,7 +118,7 @@ After adding OOTB scanning rules, you can edit each rule separately and add addi
 You can create custom scanning rules using regex patterns to scan for sensitive data.
 
 1. Select a scanning group if you did not create this rule within a scanning group.
-1. In the **Define match conditions** section, specify the regex pattern to use for matching against events in the **Define the regex** field. Enter sample data in the **Add sample data** field to verify that your regex pattern is valid.<br>
+1. In the **Match conditions** section, specify the regex pattern to use for matching against events in the **Define the regex** field. Enter sample data in the **Add sample data** field to verify that your regex pattern is valid.<br>
     Sensitive Data Scanner supports Perl Compatible Regular Expressions (PCRE), but the following patterns are not supported:
     - Backreferences and capturing sub-expressions (lookarounds)
     - Arbitrary zero-width assertions
@@ -122,7 +130,16 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
     - The `\K` start of match reset directive
     - Callouts and embedded code
     - Atomic grouping and possessive quantifiers
-1. For **Create keyword dictionary**, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+1. For **Check for keywords near regex pattern**, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`.
+   - To add keywords:
+    1. Enter a keyword.
+    1. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+    1. Click the plus icon to add the keyword to the list.
+    1. Repeat these steps to add more keywords.
+    - To remove keywords:
+    1. Click the **X** next to the keyword you want to remove.
+    1. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
 {{% sds-scanning-rule %}}
 1. Click **Add Rule**.
 {{% /collapse-content %}}
