@@ -85,7 +85,7 @@ HAVING SUM(quantity) > 10 {{< /code-block >}} |
 | `IN`, `ON`, `OR`  | Used for specified conditions in queries. Available in `WHERE`, `JOIN` clauses.       | {{< code-block lang="sql" >}}SELECT *
 FROM orders
 WHERE order_status IN ('Shipped', 'Pending') {{< /code-block >}} |
-| `USING`  | This clause is a shorthand for joins where both tables share the same column names. It takes a list of those columns and creates equality conditions for each one. For example, joining `T1` and `T2` with `USING (a, b)` is equivalent to `ON T1.a = T2.a AND T1.b = T2.b`.     | {{< code-block lang="sql" >}}SELECT orders.order_id, customers.customer_name
+| `USING`  | This clause is a shorthand for joins where the join columns have the same name in both tables. It takes a comma-separated list of those columns and creates a separate equality condition for each matching pair. For example, joining `T1` and `T2` with `USING (a, b)` is equivalent to `ON T1.a = T2.a AND T1.b = T2.b`.     | {{< code-block lang="sql" >}}SELECT orders.order_id, customers.customer_name
 FROM orders
 JOIN customers
 USING (customer_id) {{< /code-block >}} |
