@@ -266,7 +266,7 @@ To edit scanning rules:
 
 1. Navigate to the [Sensitive Data Scanner][5] settings page.
 1. Hover over the scanning rule you want to edit and click the **Edit** (pencil) icon.
-1. Make the changes you want for the rule. See [Add library rules](#add-library-rules) or [Add custom rule](#add-custom-rule) for more information on each setup section.
+1. Make the changes you want for the rule. Depending on the type of rule you are editing, see [Add library rules](#add-library-rules) or [Add custom rule](#add-custom-rule) for more information on each setup section.
 1. Click **Update**.
 
 ## Control access to logs with sensitive data
