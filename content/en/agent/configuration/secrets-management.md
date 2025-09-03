@@ -588,6 +588,10 @@ kubectl auth can-i get secret/database-secret -n database --as system:serviceacc
 
 This command returns whether the permissions are valid for the Agent to view this Secret.
 
+### Remove trailing line breaks
+
+As some secret management tools automatically add a line break when exporting secrets through files, you can set `secret_backend_remove_trailing_line_break: true` in [the datadog.yaml configuration file](/agent/configuration/agent-configuration-files/), or use the environment variable `DD_SECRET_BACKEND_REMOVE_TRAILING_LINE_BREAK` to do the same, especially in containerized environments
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
