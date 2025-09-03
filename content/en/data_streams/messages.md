@@ -39,7 +39,7 @@ Ensure [remote configuration][3] is set up for the agent running the Kafka Consu
 #### Validation
 
 1. In the Datadog app, under `organization-settings/remote-config`, check that remote configuration is enabled at the organization level
-2. In the Datadog app, under `organization-settings/remote-config`, check that the agent running the Kafka Consumer integration has remote configuration enabled, and is using an api key with remote configuration enabled.
+2. In Datadog, under `organization-settings/remote-config`, check that the agent running the Kafka Consumer integration has remote configuration enabled, and is using an API key with remote configuration enabled.
 
 ## Required permissions
 
