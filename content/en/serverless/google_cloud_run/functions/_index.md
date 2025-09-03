@@ -16,6 +16,6 @@ First, set up the [Datadog-Google Cloud Platform integration][1] to collect metr
 
 Then, select your runtime below for instructions on how to instrument your application:
 
-{{% container-languages path="google_cloud_run/functions" %}}
+{{% container-languages path="google_cloud_run/functions" functions="true" %}}
 
 [1]: /integrations/google-cloud-platform/
