@@ -59,7 +59,7 @@ Add the following Datadog iOS SDK dependencies, which are needed for the linking
 * `DatadogObjc`
 * `DatadogCrashReporting`
 
-**Note**: Versions of these dependencies should be aligned with the version used by the Datadog Kotlin Multiplatform SDK itself. The full list of corresponding Datadog iOS SDK versions depending on the Datadog Kotlin Multiplatform SDK release can be found [here][14].
+**Note**: Versions of these dependencies should be aligned with the version used by the Datadog Kotlin Multiplatform SDK itself. You can find the complete mapping of iOS SDK versions for each Kotlin Multiplatform SDK release in the [version compatibility guide][14].
 
 #### Adding native iOS dependencies using the CocoaPods plugin
 
