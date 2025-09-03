@@ -76,7 +76,7 @@ The severity threshold of an entity is calculated by adding up the score impact 
 | High                        | Greater than or equal to `50` and less than `100`.|
 | Medium                      | Greater than or equal to `25` and less than `50`. |
 | Low                         | Greater than or equal to `10` and less than `25`. |
-| Info                        | Less than or equal to `10`.                       |
+| Info                        | Less than `10`.                       |
 
 ## Further reading
 
