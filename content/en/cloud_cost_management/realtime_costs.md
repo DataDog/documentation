@@ -1,5 +1,5 @@
 ---
-title: Realtime Costs
+title: Real-Time Cloud Costs
 private: true
 description: View and analyze cloud spend in real time.
 further_reading:
