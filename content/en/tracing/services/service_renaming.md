@@ -15,7 +15,7 @@ Renaming is useful when:
 - Services that you expect to appear as one are split into multiple inferred entities.  
 - Multiple components are grouped under one name, but you want them represented separately.  
 
-**Note**: Renaming applies only to [inferred entities][1]. These are entities that Datadog identifies automatically.
+**Note**: Renaming applies only to [inferred entities][1], which are entities that Datadog identifies automatically.
 
 ## Create a renaming rule 
 
@@ -28,16 +28,18 @@ Renaming is useful when:
 
 ### Step 2: Choose a rename method
 
-Enter a custom name directly or use tags and regular expressions to generate names.  
-
-1. In the text box, enter a new name for the selected entity (or entities). Alternatively, use tag values with the `{{tagName}}` syntax to rename based on an entity's tags.
+1. In the text box, enter a unique name for the selected entity (or entities). Alternatively, use tag values with the `{{tagName}}` syntax to rename based on an entity's tags.
 1. If tag values follow a pattern, apply a regular expression to extract only the portion you want in the name.  
 
-### Step 3: name your rule and review
+### Step 3: Name your rule and review
 
 1. Enter a descriptive name for the renaming rule so you can identify it later.
 1. Review and save your renaming rule.
 
-**Note:** Rules are processed at intake and applied to data as it comes in. As such, they are irreversible and should be created with caution. 
+**Note:** Rules are processed at intake and applied to data as it comes in. Therefore, they are irreversible and should be created with caution. 
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/services/inferred_services
