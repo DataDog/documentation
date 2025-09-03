@@ -34,7 +34,7 @@ Ensure the agent version you are running is 7.70 or later.
 
 ### Remote configuration
 
-Ensure [remote configuration][3] is setup for the agent running the Kafka Consumer integration.
+Ensure [remote configuration][3] is set up for the agent running the Kafka Consumer integration.
 
 #### Validation
 
