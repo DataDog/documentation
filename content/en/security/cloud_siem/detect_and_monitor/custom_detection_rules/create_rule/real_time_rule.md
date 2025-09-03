@@ -14,7 +14,7 @@ TKTK
 1. To create a detection rule, navigate to the [Create a New Detection][1] page.
 1. Select **Real-Time Rule**.
 
-## Define your Real-time rule
+## Define your real-time rule
 
 Select the detection method you want to use for creating signals.
 

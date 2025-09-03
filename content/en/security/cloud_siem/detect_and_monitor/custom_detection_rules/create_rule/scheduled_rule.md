@@ -11,17 +11,12 @@ TKTK
 
 ## Create a rule
 
-To create a threshold detection rule or job, navigate to the [Detection Rules][1] page and click **+ New Rule**.
+1. To create a detection rule, navigate to the [Create a New Detection][1] page.
+1. Select **Scheduled Rule**.
 
-## Create a New Rule
+## Define your scheduled rule
 
-Select a **Real-Time Rule**, **Scheduled Rule** or a **Historical Job**.
-
-## Define your rule or historical job
-
-If you are creating a historical job, select the logs index and time range for the job.
-
-Select the detection method for creating signals.
+Select the detection method you want to use for creating signals.
 
 ## Define search queries
 
