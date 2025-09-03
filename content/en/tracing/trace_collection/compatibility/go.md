@@ -99,7 +99,6 @@ The Go tracer includes support for the following data stores and libraries.
 | [PostgreSQL (pgx v5)][135] | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/jackc/pgx.v5/v2][136]                  |
 | [MongoDB][44]           | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/go.mongodb.org/mongo-driver/mongo/v2][98] |
 | [MongoDB (mgo)][114]      | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/globalsign/mgo/v2][99]                    |
-| [Gorm][137]             | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/jinzhu/gorm/v2][138]                      |
 | [Gorm v1][69]           | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/gorm.io/gorm.v1/v2][110]                   |
 | [BuntDB][47]            | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/tidwall/buntdb/v2][100]                    |
 | [LevelDB][49]           | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/syndtr/goleveldb/leveldb/v2][101]          |
@@ -110,9 +109,9 @@ The Go tracer includes support for the following data stores and libraries.
 | [Kafka (sarama v1)][140] | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/IBM/sarama.v1/v2][141]                  |
 | [Kafka (Shopify sarama)][142] | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/Shopify/sarama/v2][143]             |
 | [Kafka (segmentio)][144] | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/segmentio/kafka-go/v2][145]             |
-| [Kafka (segmentio v0)][144] | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/segmentio/kafka.go.v0/v2][146]         |
 | [Google API][57]        | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/google.golang.org/api/v2][105]             |
 | [Google Pub/Sub v1][147] | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/cloud.google.com/go/pubsub.v1/v2][148]    |
+| [Google Pub/Sub v2][158] | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/cloud.google.com/go/pubsub.v2/v2][157]    |
 | [go-restful v3][59]     | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/emicklei/go-restful.v3/v2][106]               |
 | [Twirp][61]             | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/twitchtv/twirp/v2][107]                    |
 | [Vault][63]             | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/hashicorp/vault/v2][108]                   |
@@ -216,8 +215,6 @@ import "github.com/DataDog/dd-trace-go/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>/v2"
 [134]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/redis/go-redis.v9/v2
 [135]: https://github.com/jackc/pgx
 [136]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/jackc/pgx.v5/v2
-[137]: https://github.com/jinzhu/gorm
-[138]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/jinzhu/gorm/v2
 [139]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/confluentinc/confluent-kafka-go/kafka.v2/v2
 [140]: https://github.com/IBM/sarama
 [141]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/IBM/sarama.v1/v2
@@ -225,8 +222,7 @@ import "github.com/DataDog/dd-trace-go/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>/v2"
 [143]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/Shopify/sarama/v2
 [144]: https://github.com/segmentio/kafka-go
 [145]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/segmentio/kafka-go/v2
-[146]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/segmentio/kafka.go.v0/v2
-[147]: https://cloud.google.com/pubsub
+[147]: https://pkg.go.dev/cloud.google.com/go/pubsub
 [148]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/cloud.google.com/go/pubsub.v1/v2
 [149]: https://github.com/sirupsen/logrus
 [150]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/sirupsen/logrus/v2
@@ -236,6 +232,9 @@ import "github.com/DataDog/dd-trace-go/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>/v2"
 [154]: https://github.com/graphql-go/graphql
 [155]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/graphql-go/graphql/v2
 [156]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi.v5
+[157]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/cloud.google.com/go/pubsub.v2/v2
+[158]: https://cloud.google.com/pubsub
+
 {{% /tab %}}
 {{% tab "v1" %}}
 **Note**: The [integrations documentation][5] provides a detailed overview of the supported packages and their APIs, along with usage examples.
