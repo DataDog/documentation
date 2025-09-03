@@ -91,7 +91,8 @@ To add scanning rules, perform the following steps:
 The Scanning Rule Library contains predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more.
 
 1. Select a scanning group if you did not create this rule within a scanning group.
-1. In the **Add library rules to the scanning group** section, select the library rules you want to use.
+1. In the **Priority** dropdown menu, select the priority level for the rule based on your business needs.
+1. In the **Add Library Rules** section, select the library rules you want to use.
 {{% sds-scanning-rule %}}
 1. Click **Add Rules**.
 
@@ -118,6 +119,9 @@ The recommended keywords are used by default when OOTB scanning rules are create
 You can create custom scanning rules using regex patterns to scan for sensitive data.
 
 1. Select a scanning group if you did not create this rule within a scanning group.
+1. Enter a name for rule.
+1. In the **Priority** dropdown menu, select the priority level for the rule based on your business needs.
+1. (Optional) Enter a description for the rule.
 1. In the **Match conditions** section, specify the regex pattern to use for matching against events in the **Define the regex** field. Enter sample data in the **Add sample data** field to verify that your regex pattern is valid.<br>
     Sensitive Data Scanner supports Perl Compatible Regular Expressions (PCRE), but the following patterns are not supported:
     - Backreferences and capturing sub-expressions (lookarounds)
