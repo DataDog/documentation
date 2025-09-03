@@ -43,7 +43,7 @@ You can learn more about rate metrics [here][1].
 - Underestimation can occur when:
   - EC2 instances are not monitored by the Datadog Agent
   - Newly used instance types or regions have not yet appeared in CCM billing data
-  - Estimates cover compute only (not EBS, networking, etc.)
+  - Estimates cover compute only (not EBS, networking, and so on)
 - Overestimation can occur when:
   - Instances are monitored by the Datadog Agent but are not included in CCM billing data
 - Preview accuracy:
