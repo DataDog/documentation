@@ -19,7 +19,7 @@ Use real-time costs to:
 - Observe the impact of recent changes
 - Monitor hourly or sub-hourly spend trends
 
-Estimates are based on recent average hourly net amortized EC2 prices by instance type, region, and aws account.
+Estimates are based on recent average hourly net amortized EC2 prices by instance type, region, and AWS account.
 
 ## Requirements
 
