@@ -8,7 +8,7 @@ The Messages feature allows you to view Kafka messages at specific partitions or
    Messages is in Preview. Contact your Customer Success Manager for access.
 </div>
 
-## Supported Data Formats
+## Supported data formats
 
 Avro, Protobuf, and JSON are supported.
 
