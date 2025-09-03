@@ -47,7 +47,7 @@ further_reading:
 
 Sensitive data, such as credit card numbers, API keys, IP addresses, and personally identifiable information (PII) are often leaked unintentionally, which can expose your organization to security and compliance risks. Sensitive data can be found in your telemetry data, such as application logs, APM spans, RUM events, events from Event Management. It can also be unintentionally moved to cloud storage resources when engineering teams move their workloads to the cloud. Datadog's Sensitive Data Scanner can help prevent sensitive data leaks and limit non-compliance risks by discovering, classifying, and optionally redacting sensitive data.
 
-**Note**: See [PCI DSS Compliance][1] for information on setting up a PCI-compliant Datadog organization.
+**Note**: Datadog's tools and policies comply with PCI v4.0. For more information, see [PCI DSS Compliance][1].
 
 ## Scan telemetry data
 
@@ -61,21 +61,23 @@ With Sensitive Data Scanner in the Cloud, you submit logs and events to the Data
 
 The data that can be scanned and redacted are:
 
-- Logs: All structured and unstructured log content, including log message and attribute values
-- APM: Span attribute values only
-- RUM: Event attribute values only
-- Events: Event attribute values only
+- **Logs**: All structured and unstructured log content, including log message and attribute values
+- **APM**: Span attribute values only
+- **RUM**: Event attribute values only
+- **Events**: Event attribute values only
 
-{{< callout url="https://www.datadoghq.com/product-preview/role-based-sensitive-data-unmasking-in-logs" btn_hidden="false" >}}
-Role-based sensitive data unmasking in logs is in Preview. To enroll, click <b>Request Access</b>.
-{{< /callout >}}
+For each [scanning rule][17], one of the following actions can be applied to matched sensitive data:
+
+- **Redact**: Replace the entire matched data with a single token that you choose, such as `[sensitive_data]`.
+- **Partially redact**: Replace a specific portion of all matching values.
+- **Hash**: Replace the entire matched data with a non-reversible unique identifier.
+- **Mask** (available for logs only): Obfuscate all matching values. Users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) and view this data in Datadog. See [Mask action][16] for more information.
 
 To use Sensitive Data Scanner, set up a scanning group to define what data to scan and then set up scanning rules to determine what sensitive information to match within the data. For scanning rules you can:
 - Add predefined scanning rules from Datadog's [Scanning Rule Library][2]. These rules detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more.
 - [Create your own rules using regex patterns][3].
 
 See [Set Up Sensitive Data Scanner for Telemetry Data][4] for setup details.
-
 
 ### In your environment {#in-your-environment}
 
@@ -133,10 +135,12 @@ When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][15] summar
 [6]: /observability_pipelines/processors/sensitive_data_scanner
 [7]: /observability_pipelines/set_up_pipelines/
 [8]: /security/cloud_security_management/setup/agentless_scanning
-[9]: /agent/remote_config
+[9]: /remote_configuration
 [10]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [11]: /security/cloud_security_management
 [12]: /security/sensitive_data_scanner/setup/cloud_storage/
 [13]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
 [14]: /security/sensitive_data_scanner/guide/investigate_sensitive_data_issues/
 [15]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
+[16]: /security/sensitive_data_scanner/setup/telemetry_data/?tab=logs#mask-action
+[17]: /security/sensitive_data_scanner/scanning_rules/

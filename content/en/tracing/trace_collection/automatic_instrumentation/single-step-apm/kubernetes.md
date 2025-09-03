@@ -10,19 +10,22 @@ further_reading:
   - link: /tracing/guide/init_resource_calc/
     tag: Documentation
     text: Learn about init container resource usage
+  - link: /tracing/guide/local_sdk_injection
+    tag: Documentation
+    text: Instrument your applications using local SDK injection
 ---
 
 ## Overview
 
-<div class="alert alert-warning">Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.</div>
-
-In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][3] your applications in one step, with no additional configuration required. 
+In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][3] your applications with the Datadog APM SDKs in one step.
 
 ## Requirements
 
-- Kubernetes v1.20+
+- Kubernetes v1.20+.
 - [`Helm`][1] for deploying the Datadog Operator.
 - [`Kubectl` CLI][2] for installing the Datadog Agent.
+- Confirmed environment compatibility per the [Single Step Instrumentation compatibility guide][36].
+
 
 ## Enable APM on your applications
 
@@ -30,12 +33,12 @@ In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to in
 
 Follow these steps to enable Single Step Instrumentation across your entire cluster. This automatically sends traces from all applications written in supported languages.
 
-**Note:** To instrument only specific namespaces or pods, see [Advanced options](#advanced-options).
+**Note:** To instrument only specific namespaces or pods, see workload targeting in [Advanced options](#advanced-options).
 
 1. In Datadog, go to the [Install the Datadog Agent on Kubernetes][11] page.
 1. Follow the on-screen instructions to choose your installation method, select an API key, and set up the Operator or Helm repository.
 1. In the **Configure `datadog-agent.yaml`** section, go to **Additional configuration** > **Application Observability**, and turn on **APM Instrumentation**.
-   
+
    {{< img src="tracing/trace_collection/k8s-apm-instrumentation-toggle.jpg" alt="The configuration block for installing the Datadog Agent on Kubernetes through the Datadog app" style="width:100%;" >}}
 
 1. Deploy the Agent using the generated configuration file.
@@ -43,9 +46,85 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 
 ## Configure Unified Service Tags
 
-Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. Learn how to [set USTs for Kubernetes services][5].
+Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. You can configure USTs through label extraction (recommended) or in deployment manifests.
 
-**Note**: USTs must be set on both the Deployment object and the Pod template spec.
+### (Recommended) Configure USTs through label extraction
+
+With SSI, you can automatically extract UST values from pod labels and metadata without modifying individual deployments. To do this, configure `kubernetesResourcesLabelsAsTags` to map your existing Kubernetes labels to Datadog service tags.
+
+#### Prerequisites
+
+| Component | Minimum version  |
+|-----------|------------------|
+| `datadog-agent` | 7.69        |
+| `datadog-operator` | 1.16.0   |
+| `datadog-helm-chart` | 3.120.0 |
+
+#### Automatic configuration
+
+Replace `app.kubernetes.io/name` in the following example with any label that contains your service name (for example, `service.kubernetes.io/name` or `component`). You can configure multiple labels this way.
+
+```yaml
+datadog:
+  # Automatically extract service names from Kubernetes labels
+  kubernetesResourcesLabelsAsTags:
+    pods:
+      app.kubernetes.io/name: service     # Modern Kubernetes label
+    deployments.apps:
+      app.kubernetes.io/name: service
+    replicasets.apps:
+      app.kubernetes.io/name: service
+
+  # Set environment globally for the entire cluster
+  tags:
+    - "env:production"
+
+  apm:
+    instrumentation:
+      enabled: true
+```
+
+With this configuration, Datadog automatically sets the `service` tag using the value of the `app.kubernetes.io/name` label for any instrumented workload that includes this label.
+
+#### Explicit control with ddTraceConfigs
+
+In most cases, automatic configuration is sufficient. However, if you need granular control over settings for specific workloads, use `ddTraceConfigs` to explicitly map labels to service configurations:
+
+```yaml
+datadog:
+  kubernetesResourcesLabelsAsTags:
+    pods:
+      app.kubernetes.io/name: service
+    deployments.apps:
+      app.kubernetes.io/name: service
+
+  # Set environment globally for the entire cluster
+  tags:
+    - "env:production"
+
+  apm:
+    instrumentation:
+      enabled: true
+      targets:
+        - name: frontend-services
+          podSelector:
+            matchLabels:
+              tier: frontend
+          ddTraceConfigs:
+            - name: DD_SERVICE       # Explicitly override service name
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['app.kubernetes.io/name']
+            # DD_ENV inherited from cluster-level tags above
+            # DD_VERSION automatically extracted from image tags
+```
+
+
+### Configure USTs in deployment manifests
+
+If your setup doesn't use labels suitable for UST extraction, you can set USTs directly in your deployment manifests using environment variables. This approach requires modifying each deployment individually, but offers precise control.
+
+For complete instructions, see [setting USTs for Kubernetes services][5].
 
 ## Enable SDK-dependent products and features
 
@@ -53,13 +132,13 @@ After SSI loads the Datadog SDK into your applications and enables distributed t
 
 Use one of the following setup methods:
 
-- **[Configure with workload targeting](#target-specific-workloads)**:
+- **[Configure with workload targeting (recommended)](#target-specific-workloads)**:
 
   By default, Single Step Instrumentation instruments all services in all namespaces. Use workload targeting to limit instrumentation to specific namespaces, pods, or workloads, and apply custom configurations.
 
 - **[Set environment variables][7]**:
 
-  Enable products by setting environment variables directly in your application configuration. 
+  Enable products by setting environment variables directly in your application configuration.
 
 ## Advanced options
 
@@ -89,7 +168,7 @@ The file you need to configure depends on how you enabled Single Step Instrument
 - If you enabled SSI with Datadog Operator, edit `datadog-agent.yaml`.
 - If you enabled SSI with Helm, edit `datadog-values.yaml`.
 
-**Note**: Targets are evaluated in order; the first match takes precedence. 
+**Note**: Targets are evaluated in order; the first match takes precedence.
 
 #### Example configurations
 
@@ -434,7 +513,7 @@ If your organization does not allow direct pulls from public registries (such as
 
 To use SSI with a private container registry:
 
-1. Follow [these instructions][34] to mirror Datadog's container images to your private registry. 
+1. Follow [these instructions][34] to mirror Datadog's container images to your private registry.
 
    You only need the images for the languages you are instrumenting. If you're not sure which ones you need, here's a baseline that covers most use cases:
 
@@ -476,7 +555,7 @@ To use SSI with a private container registry:
 
 3. Update the Cluster Agent configuration to use your private registry.
 
-   Set the `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in your Cluster Agent config to use your private registry. 
+   Set the `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in your Cluster Agent config to use your private registry.
 
 For more details on changing your container registry, see [Changing Your Container Registry][33].
 
@@ -490,7 +569,7 @@ To remove APM instrumentation and stop sending traces from a specific service, y
 
 #### Use workload selection (recommended)
 
-With workload selection (available for Agent v7.64+), you can enable and disable tracing for specific applications. [See configuration details here](#advanced-options). 
+With workload selection (available for Agent v7.64+), you can enable and disable tracing for specific applications. [See configuration details here](#advanced-options).
 
 #### Use the Datadog Admission Controller
 
@@ -568,8 +647,8 @@ To control where APM is activated and reduce overhead, consider the following be
 
 #### Example: Enable instrumentation for specific pods
 
-1. Add a meaningful label (for example, `datadoghq.com/apm-instrumentation: "enabled"`) to both the deployment metadata and the pod template. 
-  
+1. Add a meaningful label (for example, `datadoghq.com/apm-instrumentation: "enabled"`) to both the deployment metadata and the pod template.
+
    ```
    apiVersion: apps/v1
    kind: Deployment
@@ -598,8 +677,8 @@ To control where APM is activated and reduce overhead, consider the following be
              image: my-registry/checkout:latest
              ports:
                - containerPort: 8080
-   ```  
-   
+   ```
+
 2. In your Datadog Agent Helm config, enable SSI and use `podSelector` to inject only into pods with the matching opt-in label.
 
    ```
@@ -607,7 +686,7 @@ To control where APM is activated and reduce overhead, consider the following be
        instrumentation:
          enabled: true
          targets:
-           - name: apm-instrumented 
+           - name: apm-instrumented
              podSelector:
                matchLabels:
                  datadoghq.com/apm-instrumentation: "enabled"
@@ -692,6 +771,7 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [33]: /containers/guide/changing_container_registry/
 [34]: /containers/guide/sync_container_images/#copy-an-image-to-another-registry-using-crane
 [35]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
+[36]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
 
 
 

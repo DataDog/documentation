@@ -22,7 +22,7 @@ into this one `abs(sin{*})`:
 
 | Function | Description                             | Example                 |
 | :----    | :-------                                | :---------              |
-| `pow()`  | Graph the exponent of the metric. | `pow(<METRIC_NAME>{*}, INT)` |
+| `pow()`  | Graph all combinations of metric and constant using exponentiation. | `pow(<METRIC_NAME>{*}, CONSTANT)`, `pow(<METRIC_NAME>{*}, <METRIC_NAME>{*})`, `pow(CONSTANT, <METRIC_NAME>{*})`, `pow(CONSTANT, CONSTANT)` |
 
 ## Logarithm
 

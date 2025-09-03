@@ -6,10 +6,10 @@ aliases:
 further_reading:
 - link: /containers/kubernetes/integrations/
   tag: Documentation
-  text: Configure integrations with Autodiscovery on Kubernetes
+  text: Kubernetes で Autodiscovery を使用してインテグレーションを構成する
 - link: /containers/docker/integrations/
   tag: Documentation
-  text: Configure integrations with Autodiscovery on Docker
+  text: Docker で Autodiscovery を使用してインテグレーションを構成する
 - link: /agent/guide/ad_identifiers/
   tag: Documentation
   text: コンテナと該当するインテグレーションテンプレートとの対応
@@ -19,28 +19,28 @@ further_reading:
 title: オートディスカバリーテンプレート変数
 ---
 
-[Autodiscovery][1] enables you to set static configurations for dynamic resources like containers.
+[Autodiscovery][1] を使用すると、コンテナのような動的リソースに対して静的な設定を行うことができます。
 
-You can use the following template variables to dynamically assign your container's values:
+コンテナの値を動的に割り当てるために、以下のテンプレート変数を使用できます:
 
 | テンプレート変数 | 説明 |
 | --------------------------  | ---    |
-| `"%%host%%"`                | The container's network IP. |
-| `"%%host_<ネットワーク名>%%"` | When the container is attached to multiple networks, returns the network name to use. |
-| `"%%port%%"`                | The highest exposed port **sorted numerically and in ascending order**.<br>For example, returns `8443` for a container that exposes ports `80`, `443`, and `8443`. |
-| `"%%port_<数値_X>%%"`     | The `<NUMBER_X>` port **sorted numerically and in ascending order**.<br>For example, if a container exposes ports `80`, `443`, and `8443`, `"%%port_0%%` refers to port `80`, and `"%%port_1%%"` refers to `443`. |
-| `"%%port_<名前>%%"`     | The port associated with the port name `<NAME>`. |
-| `"%%pid%%"`                 | The container process ID, as returned by `docker inspect --format '{{.State.Pid}}' <CONTAINER_NAME>`. |
-| `"%%hostname%%"`            | The `hostname` value from the container configuration. Only use this variable if the `"%%host%%"` variable cannot fetch a reliable IP (for example, in [ECS awsvpc mode][2]).                                       |
-| `"%%env_<環境変数>%%"`       | The contents of the `$<ENV_VAR>` environment variable **as seen by the Agent process**.  |
-| `"%%kube_namespace%%"`      | The Kubernetes namespace. |
-| `"%%kube_pod_name%%"`       | The Kubernetes pod name.  |
-| `"%%kube_pod_uid%%"`        | The Kubernetes pod UID.   |
+| `"%%host%%"`                | コンテナのネットワーク IP。 |
+| `"%%host_<ネットワーク名>%%"` | コンテナが複数のネットワークに接続されている場合、使用すべきネットワーク名を返します。 |
+| `"%%port%%"`                | 最も大きい公開ポート (**数値で昇順にソート**)。<br>例えば、ポート `80`、`443`、`8443` を公開するコンテナの場合、`8443` が返されます。 |
+| `"%%port_<数値_X>%%"`     | `<NUMBER_X>` ポート (**数値で昇順にソート**)。<br>例えば、コンテナがポート `80`、`443`、`8443` を公開している場合、`"%%port_0%%` はポート `80`、`"%%port_1%%"` は `443` を指します。 |
+| `"%%port_<名前>%%"`     | `<NAME>` というポート名に関連付けられたポート。 |
+| `"%%pid%%"`                 | `docker inspect --format '{{.State.Pid}}' <CONTAINER_NAME>` で返されるコンテナのプロセス ID。 |
+| `"%%hostname%%"`            | コンテナ設定の `hostname` 値。`"%%host%%"` 変数で信頼できる IP を取得できない場合 (例えば、[ECS awsvpc モード][2]など) のみ、この変数を使用してください。                                       |
+| `"%%env_<環境変数>%%"`       | Agent プロセスから見える `$<ENV_VAR>` 環境変数の内容。  |
+| `"%%kube_namespace%%"`      | Kubernetes ネームスペース。 |
+| `"%%kube_pod_name%%"`       | Kubernetes Pod 名。  |
+| `"%%kube_pod_uid%%"`        | Kubernetes Pod UID。   |
 
 **フォールバック**:
 
-* For the `"%%host%%"` template variable: in case the Agent is not able to find the IP, this template variable falls back to the `bridge` network IP.
-* For the `"%%host_<NETWORK NAME>%%"`: if the `<NETWORK_NAME>` specified is not found, this template variable behaves like `"%%host%%"`.
+* `"%%host%%"` テンプレート変数について: Agent が IP を検出できない場合、このテンプレート変数は `bridge` ネットワークの IP にフォールバックします。
+* `"%%host_<NETWORK NAME>%%"` について: 指定した `<NETWORK_NAME>` が見つからない場合、このテンプレート変数は `"%%host%%"` と同様に動作します。
 
 プラットフォームによっては、すべてのテンプレート変数がサポートされているわけではありません。
 

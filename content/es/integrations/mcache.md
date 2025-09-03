@@ -32,7 +32,7 @@ categories:
 - caching
 - log collection
 - tracing
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mcache/README.md
 display_on_public_website: true
@@ -40,7 +40,7 @@ draft: false
 git_integration_title: mcache
 integration_id: memcached
 integration_title: Memcache
-integration_version: 4.1.0
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: mcache
@@ -191,7 +191,7 @@ Ejecuta el [subcomando `status` del Agent][2] y busca `mcache` en la sección Ch
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "memcached" >}}
+{{< get-metrics-from-git "mcache" >}}
 
 
 El check solo recopila métricas `memcache.slabs.*` si estableces `options.slabs: true` en `mcache.d/conf.yaml`. Del mismo modo, solo recopila métricas `memcache.items.*` si estableces `options.items: true`.
@@ -201,7 +201,7 @@ El check solo recopila métricas `memcache.slabs.*` si estableces `options.slabs
 El check de Mcache no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "memcached" >}}
+{{< get-service-checks-from-git "mcache" >}}
 
 
 ## Solucionar problemas

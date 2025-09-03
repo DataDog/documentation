@@ -1,8 +1,5 @@
 ---
-title: Building your Go application with Datadog's WAF
-code_lang: docker
-type: multi-code-lang
-code_lang_weight: 10
+title: Building your Go application for App and API Protection
 further_reading:
 - link: "/security/application_security/how-it-works/"
   tag: "Documentation"
@@ -15,9 +12,7 @@ further_reading:
   text: "Troubleshooting App and API Protection"
 ---
 
-# Introduction
-
-App and API Protection (AAP) for Go installation requirements can be abstract and the Go toolchain
+App and API Protection for Go installation requirements can be abstract and the Go toolchain
 cross-compilation and CGO capabilities can make precise installation steps difficult to understand.
 
 The goal of this guide is to provide a step-by-step guide to a working Dockerfile customized for your use case.
@@ -66,7 +61,7 @@ Two main dimensions impact your Dockerfile choice for App and API Protection:
 * **libc implementation**: glibc (Debian/Ubuntu) or musl (Alpine)
 * **CGO**: enabled or disabled (with the env var `CGO_ENABLED`).
 
-These dimensions affect both build requirements and runtime compatibility. The Datadog WAF requires specific shared libraries (`libc.so.6` and `libpthread.so.0`) at runtime and the build approach varies depending on these choices. Those dependencies are required by all programs built with CGO enabled, so the Datadog WAF will work out-of-the-box on runtime environments that support such programs. 
+These dimensions affect both build requirements and runtime compatibility. The Datadog WAF requires specific shared libraries (`libc.so.6`, `libpthread.so.0` and `libdl.so.2`) at runtime and the build approach varies depending on these choices. Those dependencies are required by all programs built with CGO enabled, so the Datadog WAF will work out-of-the-box on runtime environments that support such programs. 
 
 When CGO is disabled, however, Go usually produces a fully, statically linked binary that does not require these libraries. but this is not true when using the Datadog WAF. This is why, when CGO is disabled, the `-tags=appsec` flag needs to be passed to enable the Datadog WAF.
 
@@ -244,7 +239,15 @@ docker build -f ./examples/alpine/Dockerfile -t appsec-go-test-app .
 docker run appsec-go-test-app
 ```
 
-{{% app_and_api_protection_verify_setup %}}
+### Verify your setup
+
+To verify that App and API Protection is working correctly:
+   
+To see App and API Protection threat detection in action, send known attack patterns to your application. For example, trigger the [Security Scanner Detected][9] rule by running a file that contains the following curl script:
+<div>
+<pre><code>for ((i=1;i<=250;i++)); <br>do<br># Target existing service’s routes<br>curl https://your-application-url/existing-route -A Arachni/v1.0;<br># Target non existing service’s routes<br>curl https://your-application-url/non-existing-route -A Arachni/v1.0;<br>done</code></pre></div>
+
+A few minutes after you enable your application and exercise it, **threat information appears in the [Application Trace and Signals Explorer][8] in Datadog**.
 
 ## Further Reading
 
@@ -256,3 +259,5 @@ docker run appsec-go-test-app
 [5]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go/?tab=compiletimeinstrumentation
 [6]: /security/application_security/setup/go/setup
 [7]: https://github.com/GoogleContainerTools/distroless
+[8]: https://app.datadoghq.com/security/appsec
+[9]: /security/default_rules/security-scan-detected/

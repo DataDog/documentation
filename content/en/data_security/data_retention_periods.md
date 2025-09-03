@@ -9,6 +9,8 @@ further_reading:
     - link: '/data_security/'
       tag: 'Documentation'
       text: 'Review the main categories of data submitted to Datadog'
+algolia:
+  tags: ['data retention']
 filter_all: All
 content: "The following table lists default data retention periods by data type and product. Optionally, search by keyword or description text to find the data type or product you're interested in. For collection interval and minimum resolution information, see [Datadog Data Collection and Resolution](/developers/guide/data-collection-resolution). Still need help? Contact [Datadog support](/help)."
 attributes: 
@@ -24,7 +26,8 @@ attributes:
        - **Spans**: 90 days
   - product: Audit Trail
     data_type: |
-       - **Audit logs**: 90 days
+       - **Audit logs (Audit Trail enabled)**: 90 days
+       - **Audit logs (Audit Trail disabled)**: 7 days
   - product: Browser RUM
     data_type: |
        - **Events**: 30 days

@@ -5,9 +5,6 @@ aliases:
   - /notebooks_new/
   - /notebooks_legacy/
 further_reading:
-- link: "https://www.datadoghq.com/blog/incident-response-templates-notebooks-list/"
-  tag: "Blog"
-  text: "Create and navigate a documentation library"
 - link: "https://www.datadoghq.com/blog/collaborative-notebooks-datadog/"
   tag: "Blog"
   text: "Tell data-driven stories with Collaborative Notebooks"
@@ -78,14 +75,15 @@ Additional graph configuration options are accessible under the three-dot ellips
 
 Notebooks support commonly used rich text features like bold, italics, inline code, and headers. Notebooks also support a variety of list types such as bullet, numbered, or check list. 
 
-| Feature       | Description                                                                                                      |
-|---------------|------------------------------------------------------------------------------------------------------------------|
-| **Bold**      | To bold text, select it and press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>B</kbd>.                                 |
-| *Italics*     | To italicize text, select it and press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.                            |
-| `Inline code` | For inline code, type <code>`</code> at the beginning and at the end of the text.                                |
-| Codeblocks    | Insert a codeblock by typing <code>```</code> and pressing <kbd>Enter</kbd>, or by using the slash command menu. |
-| Quotes        | Insert a quote block by typing `>`, or by using the slash command menu.                                          |
-| Text tables   | Insert a table by typing `/table` or using the **Add Cell** menu.                                                |
+| Feature       | Description                                                                                                                |
+|---------------|----------------------------------------------------------------------------------------------------------------------------|
+| **Bold**      | To bold text, select it and press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>B</kbd>.                                           |
+| *Italics*     | To italicize text, select it and press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.                                      |
+| `Inline code` | For inline code, type <code>`</code> at the beginning and at the end of the text.                                          |
+| Codeblocks    | Insert a codeblock by typing <code>```</code> and pressing <kbd>Enter</kbd>, or by using the slash command menu.           |
+| Quotes        | Insert a quote block by typing `>`, or by using the slash command menu.                                                    |
+| Text tables   | Insert a table by typing `/table` or using the **Add Cell** menu.                                                          |
+| Callouts      | Insert a callout by typing `/table` or typing `!NOTE`, `!TIP`, `!WARNING`, `!IMPORTANT`, or `!CAUTION` and then pressing <kbd>Space</kbd>.   |
 
 ### Smart chips
 

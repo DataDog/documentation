@@ -859,6 +859,38 @@ Extract a specific value from an object inside an array when it matches a condit
 ```
 
 {{% /tab %}}
+{{% tab "API" %}}
+
+Use the [Datadog Log Pipeline API endpoint][1] with the following array processor JSON payload:
+
+```json
+{
+  "type": "array-processor",
+  "name": "Extract Referrer URL",
+  "is_enabled": true,
+  "operation" : {
+    "type" : "select",
+    "source": "httpRequest.headers",
+    "target": "referrer",
+    "filter": "name:Referrer",
+    "value_to_extract": "value"
+  }
+}
+```
+
+| Parameter    | Type             | Required | Description                                                   |
+|--------------|------------------|----------|---------------------------------------------------------------|
+| `type`       | String           | Yes      | Type of the processor.                                        |
+| `name`       | String           | No       | Name of the processor.                                        |
+| `is_enabled` | Boolean          | No       | Whether the processor is enabled. Default: `false`.        |
+| `operation.type`  | String      | Yes      | Type of array processor operation.                            |
+| `operation.source`  | String    | Yes      | Path of the array you want to select from.                    |
+| `operation.target`  | String    | Yes      | Target attribute.                                             |
+| `operation.filter`  | String    | Yes      | Expression to match an array element. The first matching element is selected. |
+| `operation.value_to_extract`  | String | Yes | Attribute to read in the selected element.                  |
+
+[1]: /api/v1/logs-pipelines/
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Array length
@@ -891,6 +923,34 @@ Compute the number of elements in an array.
   "tagCount": 3
 }
 ```
+{{% /tab %}}
+{{% tab "API" %}}
+
+Use the [Datadog Log Pipeline API endpoint][1] with the following array processor JSON payload:
+
+```json
+{
+  "type": "array-processor",
+  "name": "Compute number of tags",
+  "is_enabled": true,
+  "operation" : {
+    "type" : "length",
+    "source": "tags",
+    "target": "tagCount"
+  }
+}
+```
+
+| Parameter           | Type      | Required | Description                                                   |
+|---------------------|-----------|----------|---------------------------------------------------------------|
+| `type`              | String    | Yes      | Type of the processor.                                        |
+| `name`              | String    | No       | Name of the processor.                                        |
+| `is_enabled`        | Boolean   | No       | Whether the processor is enabled. Default: `false`.        |
+| `operation.type`    | String    | Yes      | Type of array processor operation.                            |
+| `operation.source`  | String    | Yes      | Path of the array to extract the length of.                   |
+| `operation.target`  | String    | Yes      | Target attribute.                                             |
+
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -936,6 +996,60 @@ Add an attribute value to the end of a target array attribute in the log.
   "sourceIps": ["203.0.113.1", "198.51.100.23"]
 }
 ```
+{{% /tab %}}
+{{% tab "API" %}}
+
+Use the [Datadog Log Pipeline API endpoint][1] with the following array processor JSON payload:
+
+```json
+{
+  "type": "array-processor",
+  "name": "Append client IP to sourceIps",
+  "is_enabled": true,
+  "operation" : {
+    "type" : "append",
+    "source": "network.client.ip",
+    "target": "sourceIps"
+  }
+}
+```
+
+| Parameter                    | Type       | Required | Description                                                        |
+|------------------------------|------------|----------|--------------------------------------------------------------------|
+| `type`                       | String     | Yes      | Type of the processor.                                             |
+| `name`                       | String     | No       | Name of the processor.                                             |
+| `is_enabled`                 | Boolean    | No       | Whether the processor is enabled. Default: `false`.             |
+| `operation.type`             | String     | Yes      | Type of array processor operation.                                 |
+| `operation.source`           | String     | Yes      | Attribute to append.                                               |
+| `operation.target`           | String     | Yes      | Array attribute to append to.                                      |
+| `operation.preserve_source`  | Boolean    | No      | Whether to preserve the original source after remapping. Default: `false`.   |
+
+[1]: /api/v1/logs-pipelines/
+{{% /tab %}}
+{{< /tabs >}}
+
+## Decoder processor
+
+The Decoder processor translates binary-to-text encoded string fields (such as Base64 or Hex/Base16) into their original representation. This allows the data to be interpreted in its native context, whether as a UTF-8 string, ASCII command, or a numeric value (for example, an integer derived from a hex string). The Decoder processor is especially useful for analyzing encoded commands, logs from specific systems, or evasion techniques used by threat actors.
+
+**Notes**:
+
+- Truncated strings: The processor handles partially truncated Base64/Base16 strings gracefully by trimming or padding as needed.
+
+- Hex format: Hex input can be decoded into either a string (UTF-8) or an integer.
+
+- Failure handling: If decoding fails (because of invalid input), the processor skips the transformation, and the log remains unchanged
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+1. Set the source attribute: Provide the attribute path that contains the encoded string, such as `encoded.base64`.
+2. Select the source encoding: Choose the binary-to-text encoding of the source: `base64` or `base16/hex`.
+2. For `Base16/Hex`: Choose the output format: `string (UTF-8)` or `integer`.
+3. Set the target attribute: Enter the attribute path to store the decoded result.
+   
+{{< img src="logs/log_configuration/processor/decoder-processor.png" alt="Decoder processor - Append" style="width:80%;" >}}
+
 {{% /tab %}}
 {{< /tabs >}}
 
