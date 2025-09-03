@@ -11,6 +11,12 @@ further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: "Source Code"
   text: Source code for dd-sdk-android
+- link: '/real_user_monitoring/error_tracking/'
+  tag: 'Documentation'
+  text: 'Get started with Error Tracking'
+- link: '/real_user_monitoring/error_tracking/explorer'
+  tag: 'Documentation'
+  text: 'Visualize Error Tracking data in the Explorer'
 
 ---
 
@@ -21,16 +27,20 @@ Android [Error Tracking][1] gives you comprehensive visibility into your mobile 
 - Monitor app stability in real-time with instant crash alerts and error rate tracking across versions, devices, and user segments.
 - Debug issues faster with deobfuscated stack traces and automatic ProGuard mapping file uploads for easier problem identification.
 - Improve app quality by pinpointing crash-prone features, tracking error trends, and prioritizing fixes for better user satisfaction.
+- Access aggregated Android crash dashboards and attributes
+- View deobfuscated Android crash reports with trend analysis
 
 The Datadog Android SDK supports Android 5.0+ (API level 21) and Android TV.
 
+Your crash reports appear in [**Error Tracking**][2].
+
 ## Setup
 
-To start sending Error Tracking data from your Android or Android TV application to Datadog:
+If you have not set up the Android SDK yet, follow the [in-app setup instructions][3] or see the [Android setup documentation][4].
 
 ### Step 1 - Declare the Android SDK as a dependency
 
-Declare [dd-sdk-android-rum][2] and the [Gradle plugin][3] as dependencies in your **application module's** `build.gradle` file.
+Declare [dd-sdk-android-rum][5] and the [Gradle plugin][6] as dependencies in your **application module's** `build.gradle` file.
 
 ```groovy
 buildscript {
@@ -54,10 +64,10 @@ dependencies {
 
 ### Step 2 - Specify application details in the UI
 
-1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][4].
+1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][7].
 2. Select `android` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][5].
-4. To disable automatic user data collection for either client IP or geolocation data, use the toggles for those settings. For more information, see [Android Data Collected][6].
+3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][8].
+4. To disable automatic user data collection for either client IP or geolocation data, use the toggles for those settings. For more information, see [Android Data Collected][9].
 
    {{< img src="/error_tracking/setup/android/mobile-new-app.png" alt="Create an application for Android in Datadog" style="width:90%;">}}
 
@@ -65,9 +75,9 @@ dependencies {
 
 #### Update the initialization snippet
 
-In the initialization snippet, set an environment name, service name, and version number. In the examples below, `APP_VARIANT_NAME` specifies the variant of the application that generates data. For more information, see [Using Tags][7].
+In the initialization snippet, set an environment name, service name, and version number. In the examples below, `APP_VARIANT_NAME` specifies the variant of the application that generates data. For more information, see [Using Tags][10].
 
-During initialization, you can also set the sample rate (RUM sessions) and set the tracking consent for GDPR compliance, as described below. See [other configuration options][8] to initialize the library.
+During initialization, you can also set the sample rate (RUM sessions) and set the tracking consent for GDPR compliance, as described below. See [other configuration options][11] to initialize the library.
 
 {{< site-region region="us" >}}
 {{< tabs >}}
@@ -327,11 +337,11 @@ public class SampleApplication extends Application {
 
 The initialization credentials require your application's variant name and use the value of `BuildConfig.FLAVOR`. With the variant, the SDK can match the errors reported from your application to the mapping files uploaded by the Gradle plugin. If you do not have variants, the credentials use an empty string.
 
-The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` file at build time so you can view deobfuscated error stack traces. For more information, see the [Track Android Errors][9].
+The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` file at build time so you can view deobfuscated error stack traces. For more information, see the [Upload your mapping file](#upload-your-mapping-file) section.
 
 #### Sample session rates
 
-To control the data your application sends to Datadog, you can specify a sample rate for sessions when [initializing RUM][8]. The sample rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
+To control the data your application sends to Datadog, you can specify a sample rate for sessions when [initializing RUM][11]. The sample rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
@@ -386,13 +396,83 @@ To enable the Android SDK to start sending data:
 {{% /tab %}}
 {{< /tabs >}}
 
-See [`ViewTrackingStrategy`][10] to enable automatic tracking of all your views (activities, fragments, and more).
+See [`ViewTrackingStrategy`][12] to enable automatic tracking of all your views (activities, fragments, and more).
 
-### Step 5 - Initialize the interceptor to track network events
+### Step 5 - Add NDK crash reporting
+
+Your Android application may be running native code (C/C++) for performance or code reusability reasons. In order to enable NDK crash reporting, use the Datadog NDK plugin. 
+
+1. Add the Gradle dependency by declaring the library as a dependency in your `build.gradle` file:
+
+   ```kotlin
+    dependencies {
+        implementation("com.datadoghq:dd-sdk-android-ndk:x.x.x")
+        //(...)
+    }
+   ```
+2. Enable NDK crash collection after initializing the SDK.
+
+    ``` kotlin
+    NdkCrashReports.enable()
+    ```
+
+### Step 6 - Add ANR reporting
+
+An "Application Not Responding" ([ANR][18]) is an Android-specific type of error that gets triggered when the application is unresponsive for too long. You can add ANR reporting to your RUM configuration to monitor these application responsiveness issues.
+
+To enable ANR reporting, add the following to your RUM configuration:
+
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+```kotlin
+val rumConfig = RumConfiguration.Builder(applicationId)
+    .trackInteractions()
+    .trackLongTasks(durationThreshold)
+    .trackNonFatalAnrs(true) // Enable non-fatal ANR reporting
+    .useViewTrackingStrategy(strategy)
+    .build()
+Rum.enable(rumConfig)
+```
+{{% /tab %}}
+{{% tab "Java" %}}
+```java
+RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
+    .trackInteractions()
+    .trackLongTasks(durationThreshold)
+    .trackNonFatalAnrs(true) // Enable non-fatal ANR reporting
+    .useViewTrackingStrategy(strategy)
+    .build();
+Rum.enable(rumConfig);
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+ANRs are only reported through the SDK (not through Logs).
+
+#### Reporting fatal ANRs
+Fatal ANRs result in crashes. The application reports them when it's unresponsive, leading to the Android OS displaying a popup dialog to the user, who chooses to force quit the app through the popup.
+
+{{< img src="real_user_monitoring/error_tracking/rum-anr-fatal.png" alt="A fatal crash report in Error Tracking." >}}
+
+- In the **Error Tracking** page, fatal ANRs are grouped based on their similarity, which can result into several **individual issues** being created.
+- By default, Datadog catches fatal ANRs through the [ApplicationExitInfo API][19] (available since *[Android 30+][20]*), which can be read on the next app launch.
+- In *[Android 29][21] and below*, reporting on fatal ANRs is not possible.
+
+#### Reporting non-fatal ANRs
+Non-fatal ANRs may or may not have led to the application being terminated (crashing).
+
+{{< img src="real_user_monitoring/error_tracking/rum-anr-non-fatal.png" alt="A non-fatal crash report in Error Tracking." >}}
+
+- In the **Error Tracking** page, non-fatal ANRs are grouped under a **single** issue due to their level of noise.
+- By default, the reporting of non-fatal ANRs on *Android 30+* is **disabled** because it would create too much noise over fatal ANRs. On *Android 29* and below, however, the reporting of non-fatal ANRs is **enabled** by default, as fatal ANRs cannot be reported on those versions.
+
+For any Android version, you can override the default setting for reporting non-fatal ANRs by setting `trackNonFatalAnrs` to `true` or `false` when initializing the SDK.
+
+### Step 7 - Initialize the interceptor to track network events
 
 To initialize an interceptor for tracking network events:
 
-1. For distributed tracing, [add and enable the Trace feature][11].
+1. For distributed tracing, [add and enable the Trace feature][13].
 2. Add the Gradle dependency to the `dd-sdk-android-okhttp` library in the module-level `build.gradle` file:
 
     ```groovy
@@ -401,7 +481,7 @@ To initialize an interceptor for tracking network events:
     }
     ```
 
-3. To track your OkHttp requests as resources, add the provided [interceptor][12]:
+3. To track your OkHttp requests as resources, add the provided [interceptor][14]:
 
    {{< tabs >}}
    {{% tab "Kotlin" %}}
@@ -433,9 +513,9 @@ To initialize an interceptor for tracking network events:
    {{< /tabs >}}
 
 4. To automatically create RUM resources and spans for your OkHttp requests, use the `DatadogInterceptor` as an interceptor.
-   - This records each request processed by the `OkHttpClient` as a resource, with all the relevant information (URL, method, status code, and error) automatically filled in. Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][13].
+   - This records each request processed by the `OkHttpClient` as a resource, with all the relevant information (URL, method, status code, and error) automatically filled in. Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][15].
       
-5. To monitor the network redirects or retries, you can use the `DatadogInterceptor` as a [network interceptor][14]:
+5. To monitor the network redirects or retries, you can use the `DatadogInterceptor` as a [network interceptor][16]:
 
    {{< tabs >}}
    {{% tab "Kotlin" %}}
@@ -458,7 +538,150 @@ To initialize an interceptor for tracking network events:
 - To use spans but not RUM resources, you can use the `TracingInterceptor` instead of `DatadogInterceptor` as described above.
 - If you use multiple interceptors, add `DatadogInterceptor` first.
 
-You can also add an `EventListener` for the `OkHttpClient` to [automatically track resource timing][15] for third-party providers and network requests.
+You can also add an `EventListener` for the `OkHttpClient` to [automatically track resource timing][17] for third-party providers and network requests.
+
+## Advanced Error Tracking Features
+
+### Get deobfuscated stack traces
+
+Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated for each build run, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
+
+Depending on the [Android Gradle plugin][22] version, the matching of stack traces and mapping files relies on different fields:
+
+- Versions 1.13.0 and higher use the `build_id` field (you must use Datadog Android SDK 2.8.0 or later to support this field)
+- Older versions use a combination of the `service`, `version`, and `variant` fields
+
+### Upload your mapping file
+
+**Note**: Re-uploading a source map does not override the existing one if the version has not changed.
+
+{{< tabs >}}
+{{% tab "US" %}}
+
+1. Add the [Android Gradle Plugin][22] to your Gradle project using the following code snippet.
+
+   ```kotlin
+   // In your app's build.gradle script
+   plugins {
+       id("com.datadoghq.dd-sdk-android-gradle-plugin") version "x.y.z"
+   }
+   ```
+
+2. [Create a dedicated Datadog API key][23] and export it as an environment variable named `DD_API_KEY` or `DATADOG_API_KEY`. Alternatively, pass it as a task property, or if you have `datadog-ci.json` file in the root of your project, it can be taken from an `apiKey` property there.
+3. Optionally, configure the plugin to upload files to the EU region by configuring the plugin in your `build.gradle` script:
+   
+   ```kotlin
+   datadog {
+       site = "EU1"
+   }
+   ```
+
+4. Run the upload task after your obfuscated APK builds:
+    
+   ```bash
+   ./gradlew uploadMappingRelease
+   ```
+
+5. If running native code, run the NDK symbol upload task:
+   ```bash
+   ./gradlew uploadNdkSymbolFilesRelease
+   ```
+
+**Note**: If your project uses additional flavors, the plugin provides an upload task for each variant with obfuscation enabled. In this case, initialize the Android SDK with a proper variant name (the necessary API is available in versions `1.8.0` and later).
+
+
+[22]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
+[23]: https://app.datadoghq.com/organization-settings/api-keys
+{{% /tab %}}
+{{% tab "EU" %}}
+1. Add the [Android Gradle Plugin][22] to your Gradle project using the following code snippet.
+
+   ```kotlin
+   // In your app's build.gradle script
+   plugins {
+       id("com.datadoghq.dd-sdk-android-gradle-plugin") version "x.y.z"
+   }
+   ```
+
+2. [Create a dedicated Datadog API key][23] and export it as an environment variable named `DD_API_KEY` or `DATADOG_API_KEY`. Alternatively, pass it as a task property, or if you have `datadog-ci.json` file in the root of your project, it can be taken from an `apiKey` property there.
+3. Configure the plugin to use the EU region by adding the following snippet in your app's `build.gradle` script file:
+
+   ```kotlin
+   datadog {
+       site = "EU1"
+   }
+   ```
+
+4. Run the upload task after your obfuscated APK builds:
+   
+   ```bash
+   ./gradlew uploadMappingRelease
+   ```
+   
+5. If running native code, run the NDK symbol upload task:
+   ```bash
+   ./gradlew uploadNdkSymbolFilesRelease
+   ```
+
+**Note**: If your project uses additional flavors, the plugin provides an upload task for each variant with obfuscation enabled. In this case, initialize the Android SDK with a proper variant name (the necessary API is available in versions `1.8.0` and later).
+
+
+[22]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
+[23]: https://app.datadoghq.com/organization-settings/api-keys
+{{% /tab %}}
+{{< /tabs >}}
+
+#### List uploaded mapping files
+
+See the [RUM Debug Symbols][24] page to view all uploaded symbols.
+
+### Plugin configuration options
+
+There are several plugin properties that can be configured through the plugin extension. In case you are using multiple variants, you can set a property value for a specific flavor in the variant.
+
+For example, for a `fooBarRelease` variant, you can use the following configuration:
+
+```kotlin
+datadog {
+    foo {
+        versionName = "foo"
+    }
+    bar {
+        versionName = "bar"
+    }
+    fooBar {
+        versionName = "fooBar"
+    }
+}
+```
+
+The task configuration for this variant is merged from all three flavor configurations provided in the following order:
+
+1. `bar`
+2. `foo`
+3. `fooBar`
+
+This resolves the final value for the `versionName` property as `fooBar`.
+
+| Property name              | Description                                                                                                                                                                                               |
+|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `versionName`              | The version name of the application (by default, the version declared in the `android` block of your `build.gradle` script).                                                                                                               |
+| `serviceName`              | The service name of the application (by default, the package name of your application as declared in the `android` block of your `build.gradle` script).                                                                                                                          |
+| `site`                     | The Datadog site to upload your data to (US1, US3, US5, EU1, US1_FED, AP1, or AP2).                                                                                                                                       |
+| `remoteRepositoryUrl`      | The URL of the remote repository where the source code was deployed. If this is not provided, this value is resolved from your Git configuration during the task execution time.                     |
+| `checkProjectDependencies` | This property controls if the plugin should check if the Datadog Android SDK is included in the dependencies. If not, "none" is ignored, "warn" logs a warning, and "fail" fails the build with an error (default). |
+
+### Integrate with a CI/CD pipeline
+
+By default, the upload mapping task is independent from other tasks in the build graph. Run the task manually when you need to upload mapping.
+
+If you want to run this task in a CI/CD pipeline, and the task is required as part of the build graph, you can set the upload task to run after the mapping file is generated.
+
+For example:
+
+```kotlin
+tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
+```
 
 ## Track background events
 
@@ -488,6 +711,50 @@ The Android SDK ensures availability of data when your user device is offline. I
 Each batch follows the intake specification. Batches are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
  
 This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
+
+## Limitations
+
+### File sizing
+Mapping files are limited in size to **500 MB** each. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
+
+- Set the `mappingFileTrimIndents` option to `true`. This reduces your file size by 5%, on average.
+- Set a map of `mappingFilePackagesAliases`: This replaces package names with shorter aliases. **Note**: Datadog's stacktrace uses the same alias instead of the original package name, so it's better to use this option for third party dependencies.
+
+```kotlin
+datadog {
+    mappingFileTrimIndents = true
+    mappingFilePackageAliases = mapOf(
+        "kotlinx.coroutines" to "kx.cor",
+        "com.google.android.material" to "material",
+        "com.google.gson" to "gson",
+        "com.squareup.picasso" to "picasso"
+    )
+}
+```
+
+### Collection
+When looking at RUM Crash Reporting behaviors for Android, consider the following:
+
+- The crash can only be detected after the SDK is initialised. Given this, the recommendation is to initialize the SDK as soon as possible in your application's `onCreate` method.
+- RUM crashes must be attached to a RUM view. If a crash occurs before a view is visible (typically an Activity or Fragment in an `onResume` state), or after the app is sent to the background by the end-user navigating away from it, the crash is muted and isn't reported for collection. To mitigate this, use the `trackBackgroundEvents()` [method][25] in your `RumConfiguration` builder.
+- Only crashes that occur in sampled sessions are kept, meaning if a [session sampling rate is not 100%][24], some will not be reported.
+
+## Test your implementation
+
+To verify your Android Crash Reporting and Error Tracking configuration, you need to trigger a crash in your application and confirm that the error appears in Datadog.
+
+To test your implementation:
+
+1. Run your application on an Android emulator or a real device.
+2. Execute some code containing an error or crash. For example:
+
+   ```kotlin
+   fun onEvent() {
+       throw RuntimeException("Crash the app")
+   }
+   ```
+
+3. After the crash happens, restart your application and wait for the Android SDK to upload the crash report in [**Error Tracking**][2].
 
 ## Kotlin extensions
 
@@ -522,17 +789,27 @@ val inputStream = context.getRawResAsRumResource(id)
 
 
 [1]: /error_tracking/
-[2]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
-[3]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
-[4]: https://app.datadoghq.com/error-tracking/settings/setup/client
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/android/web_view_tracking/
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/android/data_collected/
-[7]: /getting_started/tagging/using_tags/
-[8]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#initialization-parameters
-[9]: /real_user_monitoring/error_tracking/android/#upload-your-mapping-file
-[10]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-views
-[11]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/android/
-[12]: https://square.github.io/okhttp/features/interceptors/
-[13]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#custom-views
-[14]: https://square.github.io/okhttp/features/interceptors/#network-interceptors
-[15]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-network-requests
+[2]: https://app.datadoghq.com/rum/error-tracking
+[3]: https://app.datadoghq.com/rum/application/create
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/android/setup/#setup
+[5]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
+[6]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
+[7]: https://app.datadoghq.com/error-tracking/settings/setup/client
+[8]: /real_user_monitoring/mobile_and_tv_monitoring/android/web_view_tracking/
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/android/data_collected/
+[10]: /getting_started/tagging/using_tags/
+[11]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#initialization-parameters
+[12]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-views
+[13]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/android/
+[14]: https://square.github.io/okhttp/features/interceptors/
+[15]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#custom-views
+[16]: https://square.github.io/okhttp/features/interceptors/#network-interceptors
+[17]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-network-requests
+[18]: https://developer.android.com/topic/performance/vitals/anr
+[19]: https://developer.android.com/reference/android/app/ApplicationExitInfo
+[20]: https://developer.android.com/tools/releases/platforms#11
+[21]: https://developer.android.com/tools/releases/platforms#10
+[22]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
+[23]: https://app.datadoghq.com/organization-settings/api-keys
+[24]: https://app.datadoghq.com/source-code/setup/rum
+[25]: /real_user_monitoring/mobile_and_tv_monitoring/android/setup/#track-background-events
