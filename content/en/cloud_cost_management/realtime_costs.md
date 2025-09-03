@@ -39,7 +39,7 @@ You can learn more about rate metrics [here][1].
 
 - Sources of variance include:
   - Hourly averages that shift with your recent mix of on-demand, commitment, and spot spend
-  - Minor differences in true instance start and end times vs what the agent reports
+  - Minor differences between true instance start and end times versus what the agent reports
 - Underestimation can occur when:
   - EC2 instances are not monitored by the Datadog Agent
   - Newly used instance types or regions have not yet appeared in CCM billing data
