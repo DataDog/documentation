@@ -56,7 +56,7 @@ export function initializeGroupedListings() {
         }
     }
 
-    const showResults = (filteredResults) => {
+    const showResults = (filteredResults, shouldExpand = false) => {
         // Hide all groups, headers, and rules.
         allRules.forEach(element => {
             element.style.display = 'none';
@@ -86,6 +86,9 @@ export function initializeGroupedListings() {
                 jsGroup.style.display = 'block';
                 if(header) {
                   header.style.display = 'block';
+                  if (shouldExpand) {
+                      header.classList.add('active')
+                  }
                 }
             }
             element.style.display = 'inline';
@@ -105,7 +108,7 @@ export function initializeGroupedListings() {
         
         const filtered = filterResults(selectedCategory, searchValue);
         setActiveCategoryFilterButton(selectedCategory);
-        showResults(filtered);
+        showResults(filtered, true);
     }
     
     const handleKeyup = () => {
