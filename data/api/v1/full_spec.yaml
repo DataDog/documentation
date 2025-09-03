@@ -31428,19 +31428,6 @@ paths:
       requestBody:
         content:
           application/json:
-            examples:
-              json-request-body:
-                value:
-                  message: You may need to add web hosts if this is consistently high.
-                  name: Bytes received on host0
-                  options:
-                    no_data_timeframe: 20
-                    notify_no_data: true
-                  query: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
-                  tags:
-                  - app:webserver
-                  - frontend
-                  type: query alert
             schema:
               $ref: '#/components/schemas/Monitor'
         description: Create a monitor request body.
