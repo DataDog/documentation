@@ -14,7 +14,7 @@ further_reading:
 
 Real-Time Costs provide near real-time estimates of your Amazon EC2 compute spend, allowing you to see changes before they appear on your bill.
 
-Use realtime costs to:
+Use real-time costs to:
 - Detect anomalies early
 - Observe the impact of recent changes
 - Monitor hourly or sub-hourly spend trends
