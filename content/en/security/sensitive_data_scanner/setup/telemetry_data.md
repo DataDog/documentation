@@ -157,7 +157,7 @@ See [Investigate Sensitive Data Issues][7] for details on how to use the [Summar
 
 ### Add custom keywords to library rules
 
-The recommended keywords are used by default when library rules are created. After adding library rules, you can edit each rule separately and add keywords to or remove keywords from the keyword dictionary.
+The [recommended keywords][15] are used by default when library rules are created. After adding library rules, you can edit each rule separately and add keywords to or remove keywords from the keyword dictionary.
 
 1. Navigate to the [Sensitive Data Scanner][5] settings page.
 1. Click the scanning group with the rule you want to edit.
@@ -342,3 +342,4 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [12]: /observability_pipelines/
 [13]: /observability_pipelines/processors/sensitive_data_scanner/
 [14]: /observability_pipelines/set_up_pipelines/
+[15]: /security/sensitive_data_scanner/scanning_rules/library_rules/
