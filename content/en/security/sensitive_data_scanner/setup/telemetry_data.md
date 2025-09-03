@@ -86,7 +86,7 @@ To add scanning rules, perform the following steps:
 1. Click **Add Scanning Rule**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Rule**.
 1. Select whether you want to add a library rule or create a custom scanning rule.
 
-{{% collapse-content title="Add scanning rule from the library rules" level="p" %}}
+{{% collapse-content title="Add scanning rule from the library rules" level="p" id="add-library-rules" %}}
 
 The Scanning Rule Library contains predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more.
 
@@ -115,7 +115,7 @@ The recommended keywords are used by default when OOTB scanning rules are create
 1. Click **Update**.
 
 {{% /collapse-content %}}
-{{% collapse-content title="Add a custom scanning rule" level="p" %}}
+{{% collapse-content title="Add a custom scanning rule" level="p" id="add-custom-scanning-rule"%}}
 You can create custom scanning rules using regex patterns to scan for sensitive data.
 
 1. Select a scanning group if you did not create this rule within a scanning group.
@@ -260,16 +260,13 @@ The excluded namespaces are:
 {{% /tab %}}
 {{% /tabs %}}
 
-### Edit scanning rules
+## Edit scanning rules
+
+To edit scanning rules:
 
 1. Navigate to the [Sensitive Data Scanner][5] settings page.
 1. Hover over the scanning rule you want to edit and click the **Edit** (pencil) icon.
-   The **Define match conditions** section shows either the regular expression you wrote for your custom rule or an explanation of the library scanning rule you chose along with examples of matched sensitive information.
-1. To make sure that a rule matches your data, you can provide a sample in the **Add sample data** section. If the rule finds matches in the sample data, a green **Match** label appears next to the input field.
-1. Under **Create keyword dictionary**, you can add keywords to refine detection accuracy. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`.
-1. Choose the number of characters before a match that the keyword must appear in. By default, keywords must be within 30 characters before a match.
-1. Optionally, under **Define rule target and action**, edit the tags that you want to associate with events where the values match the rule. Datadog recommends using `sensitive_data` and `sensitive_data_category` tags, which can be used in searches, dashboards, and monitors. See [Control access to logs with sensitive data](#control-access-to-logs-with-sensitive-data) for information on how to use tags to determine who can access logs that contain sensitive data.
-1. For **Set priority level**, choose a value based on your business needs.
+1. Make the changes you want for the rule. See [Add scanning rules from library rules](#add-library-rules) or [Add a custom scanning rule](#add-custom-scanning-rule) for more information on each setup section.
 1. Click **Update**.
 
 ## Control access to logs with sensitive data
