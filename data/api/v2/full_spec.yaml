@@ -68721,6 +68721,41 @@ paths:
       x-menu-order: 0
       x-undo:
         type: safe
+  /api/v2/security_monitoring/configuration/suppressions/validation:
+    post:
+      description: Validate a suppression rule.
+      operationId: ValidateSecurityMonitoringSuppression
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringSuppressionUpdateRequest'
+        required: true
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_suppressions_write
+      summary: Validate a suppression rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 0
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_suppressions_write
+      x-undo:
+        type: idempotent
   /api/v2/security_monitoring/configuration/suppressions/{suppression_id}:
     delete:
       description: Delete a specific suppression rule.

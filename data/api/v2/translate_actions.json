@@ -2197,6 +2197,12 @@
     "description": "Get the list of suppressions that affect a specific existing rule by its ID.",
     "summary": "Get suppressions affecting a specific rule"
   },
+  "ValidateSecurityMonitoringSuppression": {
+    "description": "Validate a suppression rule.",
+    "summary": "Validate a suppression rule",
+    "request_description": "",
+    "request_schema_description": "Request object containing the fields to update on the suppression rule."
+  },
   "DeleteSecurityMonitoringSuppression": {
     "description": "Delete a specific suppression rule.",
     "summary": "Delete a suppression rule"
