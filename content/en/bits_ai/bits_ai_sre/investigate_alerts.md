@@ -42,7 +42,7 @@ Bits is able to run investigations on monitors that fulfill all three of the fol
 
 2. **Service scope**: The monitor must have one of the following:
    - A monitor query filtered by a service
-   - A monitor query grouped by a service
+   - A monitor query grouped by service
    - A service tag on the monitor
 
 3. **Telemetry links**: For metric, anomaly, forecast, integration, and outlier monitors, the monitor message must include at least one helpful link:
