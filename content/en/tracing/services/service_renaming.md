@@ -15,7 +15,7 @@ Renaming is useful when:
 - Services that you expect to appear as one are split into multiple inferred entities.  
 - Multiple components are grouped under one name, but you want them represented separately.  
 
-Renaming applies only to [inferred entities][1]. These are entities that Datadog identifies automatically, such as inferred services, datastores, and queues.  
+**Note**: Renaming applies only to [inferred entities][1]. These are entities that Datadog identifies automatically.
 
 ## Create a renaming rule 
 
