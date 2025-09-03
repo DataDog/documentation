@@ -53,7 +53,7 @@ You can learn more about rate metrics [here][1].
 ## Limitations
 
 Tagging may be inconsistent when compared to the other CCM metrics.
-Not all AWS billing or FinOps FOCUS tags are able to be replicated to the realtime cost metric.
+Not all AWS billing or FinOps FOCUS tags can be replicated to the real-time cost metric.
 Real-time costs also do not support tag pipelines. Real-time costs do not support Kubernetes resource tags such as `kube_namespace`. Therefore only tags that show up on Amazon EC2 instance directly are available. Tags that exist only on Kubernetes nodes are not available.
 
 [1]: /metrics/types/?tab=rate#metric-types
