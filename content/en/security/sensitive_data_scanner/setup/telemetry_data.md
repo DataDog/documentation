@@ -86,7 +86,7 @@ To add scanning rules, perform the following steps:
 1. Click **Add Scanning Rule**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Rule**.
 1. Select whether you want to add a library rule or create a custom scanning rule.
 
-{{% collapse-content title="Add scanning rule from the library rules" level="p" id="add-library-rules" %}}
+{{% collapse-content title="Add library rules" level="p" id="add-library-rules" %}}
 
 The Scanning Rule Library contains predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more.
 
@@ -115,7 +115,7 @@ The recommended keywords are used by default when OOTB scanning rules are create
 1. Click **Update**.
 
 {{% /collapse-content %}}
-{{% collapse-content title="Add a custom scanning rule" level="p" id="add-custom-scanning-rule"%}}
+{{% collapse-content title="Add a custom rule" level="p" id="add-custom-rule"%}}
 You can create custom scanning rules using regex patterns to scan for sensitive data.
 
 1. Select a scanning group if you did not create this rule within a scanning group.
@@ -260,13 +260,13 @@ The excluded namespaces are:
 {{% /tab %}}
 {{% /tabs %}}
 
-## Edit scanning rules
+### Edit scanning rules
 
 To edit scanning rules:
 
 1. Navigate to the [Sensitive Data Scanner][5] settings page.
 1. Hover over the scanning rule you want to edit and click the **Edit** (pencil) icon.
-1. Make the changes you want for the rule. See [Add scanning rules from library rules](#add-library-rules) or [Add a custom scanning rule](#add-custom-scanning-rule) for more information on each setup section.
+1. Make the changes you want for the rule. See [Add library rules](#add-library-rules) or [Add custom rule](#add-custom-rule) for more information on each setup section.
 1. Click **Update**.
 
 ## Control access to logs with sensitive data
