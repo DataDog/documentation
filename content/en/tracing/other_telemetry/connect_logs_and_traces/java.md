@@ -77,18 +77,16 @@ For example:
 
 ```java
 import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.SpanContext;
 import org.slf4j.MDC;
 
 // ...
 
-Span span = Span.current();
-if (span.getSpanContext().isValid()) {
-    String traceId = span.getSpanContext().getTraceId();
-    String spanId = span.getSpanContext().getSpanId();
-
-    try {
-        MDC.put("dd.trace_id", traceId);
-        MDC.put("dd.span_id", spanId);
+SpanContext spanContext = Span.current().getSpanContext();
+if (spanContext.isValid()) {
+   try {
+        MDC.put("dd.trace_id", spanContext.getTraceId());
+        MDC.put("dd.span_id", spanContext.getSpanId());
         // Log something
     } finally {
         MDC.remove("dd.trace_id");
