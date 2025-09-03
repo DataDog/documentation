@@ -25,9 +25,9 @@ To instrument your Google Cloud Run containers with Datadog, choose one of two o
 - [**In-Container**][1]: Wraps your application container with the Datadog Agent. Choose this option for a simpler setup, lower cost overhead, and direct log piping.
 - [**Sidecar**][2]: Deploys the Datadog Agent in a separate container alongside your app container. Choose this option if you have multiple containers in a single service, if you prefer strict isolation of the Datadog Agent, or if you have performance-sensitive workloads.
 
-## Comparison: in-container versus sidecar instrumentation
+## Comparison: In-Container versus sidecar instrumentation
 
-| Aspect                        | In-container                                               | Sidecar                                                                                                                                                      |
+| Aspect                        | In-Container                                               | Sidecar                                                                                                                                                      |
 |-------------------------------|----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Deployment                    | One container (your app, wrapped with the Datadog Agent) | Two containers ( your app, Datadog Agent)                                                                                                                    |
 | Image changes                 | Increases app image size.                                | No change to app image.                                                                                                                                      |
