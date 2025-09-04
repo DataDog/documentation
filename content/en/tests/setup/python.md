@@ -452,7 +452,7 @@ Plugins for `pytest` that alter test execution may cause unexpected behavior.
 
 Plugins that introduce parallelization to `pytest` (such as [`pytest-xdist`][1] or [`pytest-forked`][2]) create one session event for each parallelized instance.
 
-There are several issues when these plugins are used together with `ddtrace`, although they have been resolved for `pytest-xdist` in recent versions of `dd-trace-py` (3.12.0 and later). For example, a session, module, or suite may pass even when individual tests fail. Likewise, all the tests may pass and the suite/session/module fail. This happens because these plugins create worker subprocesses, and spans created in the parent process may not reflect the results from the child processes. For this reason, **the usage of `ddtrace` together with `pytest-forked` is not supported at the moment, while `pytest-xdist` only has support for `ddtrace>=3.12.0`.**
+There are several issues when these plugins are used together with `ddtrace`, although they have been resolved for `pytest-xdist` in recent versions of `dd-trace-py` (3.12.6 and later). For example, a session, module, or suite may pass even when individual tests fail. Likewise, all the tests may pass and the suite/session/module fail. This happens because these plugins create worker subprocesses, and spans created in the parent process may not reflect the results from the child processes. For this reason, **the usage of `ddtrace` together with `pytest-forked` is not supported at the moment, while `pytest-xdist` only has support for `ddtrace>=3.12.6`.**
 
 Each worker reports test results to Datadog independently, so tests from the same module running in different processes generate separate module or suite events.
 
