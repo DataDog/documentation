@@ -187,7 +187,7 @@ To access the current request span from a custom ASP.NET `IHttpModule`, it is be
 
 While Datadog creates the request span at the start of the ASP.NET pipeline, the execution order of `IHttpModules` is not guaranteed. If your module runs before Datadog's, `ActiveScope` may be `null` during early events like `BeginRequest`. The `PreRequestHandlerExecute` event occurs late enough in the lifecycle to ensure the Datadog module has run and the span is available.
 
-Keep in mind that ActiveScope can still be `null` for requests that are not traced (due to sampling or filtering) or when instrumentation is disabled.
+`ActiveScope` can still be `null` for other reasons (for example, if instrumentation is disabled), so you should always check for `null`.
 
 ```csharp
 using System;
@@ -212,25 +212,16 @@ public class MyCustomModule : IHttpModule
         var scope = Tracer.Instance.ActiveScope;
         if (scope == null)
         {
-            return; // request not traced (sampling/filters) or instrumentation disabled
+            return; // request not traced, for example, instrumentation disabled
         }
 
         // Example: add a custom tag
         scope.Span.SetTag("my.custom.tag", "some_value");
-
-        // SOAP-specific: tag the SOAP action if present
-        if (sender is HttpApplication app)
-        {
-            var soapAction = app.Context?.Request?.Headers["SOAPAction"];
-            if (!string.IsNullOrEmpty(soapAction))
-            {
-                // SOAPAction often includes quotes; trimming keeps it clean
-                scope.Span.SetTag("http.soap_action", soapAction.Trim('"'));
-            }
-        }
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 ```
 
