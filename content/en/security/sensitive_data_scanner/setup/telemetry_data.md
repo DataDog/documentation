@@ -45,9 +45,7 @@ This document goes through the following:
 - [How to control access to logs wth sensitive data](#control-access-to-logs-with-sensitive-data)
 - [How to redact sensitive data in tags](#redact-sensitive-data-in-tags)
 
-## Setup
-
-### Permissions
+## Permissions
 
 By default, users with the Datadog Admin role have access to view and set up scanning rules. To allow other users access, grant the `data_scanner_read` or `data_scanner_write` permissions under [Compliance][1] to a custom role. See [Access Control][2] for details on how to set up roles and permissions.
 
@@ -55,7 +53,7 @@ If a scanning rule uses the **mask** action (only available for logs) for matche
 
 {{< img src="sensitive_data_scanner/read_write_permissions.png" alt="The compliance permissions sections showing data scanner read and writer permissions" style="width:80%;">}}
 
-### Add a scanning group
+## Add a scanning group
 
 A scanning group determines what data to scan. It consists of a query filter, a set of buttons to enable scanning for logs, APM, RUM, and events, and the option to set sampling rates between 10% to 99% for each product. See the [Log Search Syntax][3] documentation to learn more about query filters.
 
@@ -73,7 +71,7 @@ To set up a scanning group, perform the following steps:
 
 By default, a newly-created scanning group is disabled. To enable a scanning group, click the corresponding toggle on the right side.
 
-### Add scanning rules
+## Add scanning rules
 
 A scanning rule determines what sensitive information to match within the data defined by a scanning group. You can add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules using regex patterns. The data is scanned at ingestion time during processing. For logs, this means the scan is done before indexing and other routing decisions.
 
@@ -86,31 +84,43 @@ To add scanning rules, perform the following steps:
 1. Click **Add Scanning Rule**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Rule**.
 1. Select whether you want to add a library rule or create a custom scanning rule.
 
-{{% collapse-content title="Add scanning rule from the library rules" level="p" %}}
+### Rule settings
+
+{{< tabs >}}
+{{% tab "Library rules" %}}
+
+1. Select a scanning group if you did not create this rule within a scanning group.
+1. In the **Priority** dropdown menu, select the priority level for the rule based on your business needs.
+
+{{% /tab %}}
+
+{{% tab "Custom rule" %}}
+
+1. Select a scanning group if you did not create this rule within a scanning group.
+1. Enter a name for rule.
+1. In the **Priority** dropdown menu, select the priority level for the rule based on your business needs.
+1. (Optional) Enter a description for the rule.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Add rules
+
+{{< tabs >}}
+{{% tab "Library rules" %}}
 
 The Scanning Rule Library contains predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more.
 
-1. Select a scanning group if you did not create this rule within a scanning group.
-1. In the **Add library rules to the scanning group** section, select the library rules you want to use.
-{{% sds-scanning-rule %}}
-1. Click **Add Rules**.
+In the **Add Library Rules** section, select the library rules you want to use.
 
-#### Add additional keywords
+You can add [custom keywords](#add-custom-keywords-to-library-rules) after for each library rule after they have been added.
 
-After adding OOTB scanning rules, you can edit each rule separately and add additional keywords to the keyword dictionary.
+{{% /tab %}}
+{{% tab "Custom rule" %}}
 
-1. Navigate to the [Sensitive Data Scanner][5] settings page.
-1. Click the scanning group with the rule you want to edit.
-1. Hover over the rule, and then click the pencil icon.
-1. The recommend keywords are used by default. To add additional keywords, toggle **Use recommended keywords**, then add your keywords to the list. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
-1. Click **Update**.
-
-{{% /collapse-content %}}
-{{% collapse-content title="Add a custom scanning rule" level="p" %}}
 You can create custom scanning rules using regex patterns to scan for sensitive data.
 
-1. Select a scanning group if you did not create this rule within a scanning group.
-1. In the **Define match conditions** section, specify the regex pattern to use for matching against events in the **Define the regex** field. Enter sample data in the **Add sample data** field to verify that your regex pattern is valid.<br>
+1. In the **Match conditions** section, specify the regex pattern to use for matching against events in the **Define the regex** field. Enter sample data in the **Add sample data** field to verify that your regex pattern is valid.<br>
     Sensitive Data Scanner supports Perl Compatible Regular Expressions (PCRE), but the following patterns are not supported:
     - Backreferences and capturing sub-expressions (lookarounds)
     - Arbitrary zero-width assertions
@@ -122,10 +132,20 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
     - The `\K` start of match reset directive
     - Callouts and embedded code
     - Atomic grouping and possessive quantifiers
-1. For **Create keyword dictionary**, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+1. For **Check for keywords near regex pattern**, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`.
+    - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
+    - To remove keywords, click the **X** next to the keyword you want to remove.
+    - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+    - **Note**: You cannot have more than 20 keywords for a rule.
+1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Action on match
+
 {{% sds-scanning-rule %}}
-1. Click **Add Rule**.
-{{% /collapse-content %}}
+1. Click **Add Rules**.
 
 **Notes**:
 
@@ -136,7 +156,22 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 
 See [Investigate Sensitive Data Issues][7] for details on how to use the [Summary][8] page to triage your sensitive data issues.
 
-#### Excluded namespaces
+### Add custom keywords to library rules
+
+The [recommended keywords][15] are used by default when library rules are created. After adding library rules, you can edit each rule separately and add keywords to or remove keywords from the keyword dictionary.
+
+1. Navigate to the [Sensitive Data Scanner][5] settings page.
+1. Click the scanning group with the rule you want to edit.
+1. Hover over the rule, and then click the pencil icon.
+1. In the **Match Conditions** section, click **Custom Keywords**.
+    - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
+    - To remove keywords, click the **X** next to the keyword you want to remove.
+    - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+    - **Note**: You cannot have more than 20 keywords for a rule.
+1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
+1. Click **Update**.
+
+### Excluded namespaces
 
 There are reserved keywords that the Datadog platform requires for functionality. If any of these words are in a log that is being scanned, the 30 characters after the matched word are ignored and not redacted. For example, what comes after the word `date` in a log is usually the event timestamp. If the timestamp is accidentally redacted, that would result in issues with processing the log and being able to query it later. Therefore, the behavior for excluded namespaces is to prevent unintentionally redacting important information for product functionality.
 
@@ -239,16 +274,13 @@ The excluded namespaces are:
 {{% /tab %}}
 {{% /tabs %}}
 
-### Edit scanning rules
+## Edit scanning rules
+
+To edit scanning rules:
 
 1. Navigate to the [Sensitive Data Scanner][5] settings page.
 1. Hover over the scanning rule you want to edit and click the **Edit** (pencil) icon.
-   The **Define match conditions** section shows either the regular expression you wrote for your custom rule or an explanation of the library scanning rule you chose along with examples of matched sensitive information.
-1. To make sure that a rule matches your data, you can provide a sample in the **Add sample data** section. If the rule finds matches in the sample data, a green **Match** label appears next to the input field.
-1. Under **Create keyword dictionary**, you can add keywords to refine detection accuracy. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`.
-1. Choose the number of characters before a match that the keyword must appear in. By default, keywords must be within 30 characters before a match.
-1. Optionally, under **Define rule target and action**, edit the tags that you want to associate with events where the values match the rule. Datadog recommends using `sensitive_data` and `sensitive_data_category` tags, which can be used in searches, dashboards, and monitors. See [Control access to logs with sensitive data](#control-access-to-logs-with-sensitive-data) for information on how to use tags to determine who can access logs that contain sensitive data.
-1. For **Set priority level**, choose a value based on your business needs.
+1. Make the changes you want for the rule. Depending on the type of rule you are editing, see [Add library rules](#add-library-rules) or [Add custom rule](#add-custom-rule) for more information on each setup section.
 1. Click **Update**.
 
 ## Control access to logs with sensitive data
@@ -308,3 +340,4 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [12]: /observability_pipelines/
 [13]: /observability_pipelines/processors/sensitive_data_scanner/
 [14]: /observability_pipelines/set_up_pipelines/
+[15]: /security/sensitive_data_scanner/scanning_rules/library_rules/
