@@ -7,47 +7,26 @@ further_reading:
 ---
 ServiceNow's ITOM/ITSM integration allows you to send alerts, cases, and incidents generated in Datadog to ServiceNow as records in the Incident or Event tables. The integration relies on interim tables and transform maps.
 
-To use the integration, follow the instructions to install the app, and then configure the integration for each product:
-1. [Install the ITOM/ITSM app](#install)
-1. Configure the app
+To use the integration, follow the instructions to install the integration, and then configure the integration for each product:
+1. [Install the ITOM/ITSM integration](#install)
+1. Configure the integration
    1. [Configure Datadog templated monitor notifications](#monitor-notifications)
    1. [Configure Datadog Case Management](#case-management)
    1. [Configure Datadog Incident Management](#incident-management)
 1. [Customize data with transform maps](#transform-maps)
 
-## Install the ITOM/ITSM app {#install}
-There are two ways to install the app:
-- Install the latest version of the [ITOM/ITSM Integration for Datadog][1] app from the ServiceNow store.
+## Install the ITOM/ITSM integration {#install}
+There are two ways to install the integration:
+- Install the latest version of the [ITOM/ITSM Integration for Datadog][1] integration from the ServiceNow store.
 - Download the latest Update Set ([Datadog-Snow_Update_Set_v2.7.2.xml][2]) and upload it to your ServiceNow instance manually.
 
 Before proceeding, make sure you have [added your ServiceNow instance][3] into your ServiceNow tile in Datadog.
 
-<!-- Verify if following section is necessary -->
-
-### Install the update set in ServiceNow
-
-**Note**: If you have custom transform map modifications, ServiceNow notifies you of any conflicts and can choose the appropriate changes based on your requirements. Datadog recommends backing up your existing transform map customizations before making any updates.
-
-1. Manually import the Update Set XML file that you downloaded to your ServiceNow instance.
-1. After you import the XML file, the Update Set should show a state of `Loaded`. Click the name of the Update Set to preview the changes.
-1. After you preview the Update Set to ensure there are no errors, select **Commit Update Set** to merge the application into your system.
-
-After you have installed the app, search for **Datadog** in the ServiceNow navigation menu to access all of the tables and the Configuration Page for bidirectional syncing setup:
-
-- `Configuration`
-- `Datadog Incidents ITSM`
-- `Cases ITOM`, formerly `Datadog Cases ITOM`
-- `Cases ITSM`, formerly `Datadog Cases ITSM`
-- `Legacy Monitors ITOM`, formerly `Datadog Monitors ITOM`
-- `Legacy Monitors ITSM`, formerly `Datadog Monitors ITSM`
-- `Templated Monitors ITOM`
-- `Templated Monitors ITSM`
-
-## Configure the app
+## Configure the integration
 
 ### Configure templated monitor notifications {#monitor-notifications}
 
-<div class="alert alert-info">These features require ITOM/ITSM integration app version 2.6.0 or newer.</a></div>
+<div class="alert alert-info">These features require ITOM/ITSM integration version 2.6.0 or newer.</a></div>
 
 #### Configure instance priority mapping
 
@@ -74,17 +53,18 @@ To create a ServiceNow record from a monitor, you need to configure an @-handle 
 
 To use the new template, add `@servicenow-<TEMPLATE_NAME>` in a monitor description. When the monitor alerts, ServiceNow also creates a corresponding record, and automatically sets it to **Resolved** when the underlying alert recovers.
 
-#### Configure legacy monitor notifications
-
+{{% collapse-content title="Configure legacy monitor notifications" level="h4" expanded=false id="configure-legacy-monitor-notifications" %}}
 To configure legacy monitor notifications using `@servicenow-<INSTANCE_NAME>`:
 
 1. In Datadog, go to the [ServiceNow integration settings][4] page.
 1. Go to the **Configure** tab, then the **ITOM/ITSM** tab, then the **Monitors** tab.
 1. Under **Manage Legacy Monitor Notifications**, select the instance you want to configure notifications for, then select the table that legacy monitor notifications write to.
-1. To validate the integration is set up correctly, add `@servicenow-<INSTANCE_NAME>` in a monitor or event notification. The raw data populates rows in the interim table and is forwarded to the ServiceNow table specified by the app.
+1. To validate the integration is set up correctly, add `@servicenow-<INSTANCE_NAME>` in a monitor or event notification. The raw data populates rows in the interim table and is forwarded to the ServiceNow table specified by the integration.
 1. Use [transform maps](#transform-maps) in ServiceNow to customize the transformation of the data sent to the interim tables.
 1. Customize the notification payload with available Datadog variables or custom strings.
 1. To set priority in ServiceNow incidents, follow the instructions in [Incident Priority field mapping](#legacy-incident-priority-field-mapping)
+{{% /collapse-content %}}
+
 
 ### Configure Datadog Case Management {#case-management}
 
@@ -107,7 +87,7 @@ You can choose to send cases from Datadog to either the Datadog Cases ITOM or IT
 
 ### Configure Datadog Incident Management {#incident-management}
 
-After installing the app, in Datadog, go to the [Integration Settings][9] page. Click the **ServiceNow** tile to configure ServiceNow incident creation.
+After installing the integration, in Datadog, go to the [Integration Settings][9] page. Click the **ServiceNow** tile to configure ServiceNow incident creation.
 
 #### Incident Management field mappings
 
@@ -144,13 +124,13 @@ This section describes the fields that are synced between Incident Management an
 
 \***Note**: If `Start at SEV-0` is enabled in Incident Management settings, the values in `ServiceNow Urgency`, `ServiceNow Impact`, and `ServiceNow Priority` will all stay the same, but the `Datadog Incident Severity` shifts down by 1. For example, in the first row of this table, the Datadog Incident Severity would be 0, but the rest of the values in the rest of the row would stay the same.
 
-#### Legacy Incident Priority field mapping
-
+{{% collapse-content title="Legacy Incident Priority field mapping" level="h4" expanded=false id="legacy-incident-priority-field-mapping" %}}
 **Note:** `Impact` and `Urgency` in monitor descriptions work only for [legacy monitor configurations](#configure-legacy-monitor-notifications). For [templated monitors](#monitor-notifications), configure [instance priority mapping](#configure-instance-priority-mapping).
 
 The `priority` field in ServiceNow incidents is _read only_ and can only be updated using [priority lookup rules][8].
+{{% /collapse-content %}}
 
-### Sync data bidirectionally between ServiceNow and Case/Incident Management
+#### Sync data bidirectionally between ServiceNow and Case/Incident Management
 
 In ServiceNow, you can sync state, impact, and urgency bidirectionally with both Case Management and Incident Management.
 
@@ -163,7 +143,7 @@ In ServiceNow, you can sync state, impact, and urgency bidirectionally with both
    1. Paste in your **Service Account Application Key** you created.
    1. Check the **Enabled** box.
 1. Click **Save**.
-1. (Optional) If you have ITOM/ITSM integration app version 2.7.0 or newer, you can use information from correlated alerts to populate values in ServiceNow.<br />The transform maps for Datadog Cases ITOM and ITSM tables contain an example transform script that runs onBefore. By default, the script is commented out, but you can enable it by uncommenting it and modifying it to fit your use case.
+1. (Optional) If you have ITOM/ITSM integration version 2.7.0 or newer, you can use information from correlated alerts to populate values in ServiceNow.<br />The transform maps for Datadog Cases ITOM and ITSM tables contain an example transform script that runs onBefore. By default, the script is commented out, but you can enable it by uncommenting it and modifying it to fit your use case.
 
 ## Customize data with transform maps {#transform-maps}
 
