@@ -179,7 +179,7 @@ filelog:
 ```
 
 - `include`: The list of files the receiver tails
-- `start_at: end`: Indicates to read new content that is being written
+- `start_at: end`: Signals to read newly written content
 - `poll_internal`: Sets the poll frequency
 - Operators:
     - `json_parser`: Parses JSON logs. By default, the filelog receiver converts each log line into a log record, which is the `body` of the logs' [data model][15]. Then, the `json_parser` converts the JSON body into attributes in the data model.
