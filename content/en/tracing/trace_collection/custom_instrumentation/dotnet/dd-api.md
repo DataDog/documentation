@@ -212,7 +212,7 @@ public class MyCustomModule : IHttpModule
         var scope = Tracer.Instance.ActiveScope;
         if (scope == null)
         {
-            return; // request not traced, for example, instrumentation disabled
+            return; // there is no active scope, for example, if instrumentation is disabled
         }
 
         // Example: add a custom tag
