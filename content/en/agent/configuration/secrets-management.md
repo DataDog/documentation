@@ -590,7 +590,7 @@ This command returns whether the permissions are valid for the Agent to view thi
 
 ### Remove trailing line breaks
 
-As some secret management tools automatically add a line break when exporting secrets through files, you can set `secret_backend_remove_trailing_line_break: true` in [the datadog.yaml configuration file][8], or use the environment variable `DD_SECRET_BACKEND_REMOVE_TRAILING_LINE_BREAK` to do the same, especially in containerized environments
+Some secret management tools automatically add a line break when exporting secrets through files. You can remove these line breaks by setting `secret_backend_remove_trailing_line_break: true` in [the datadog.yaml configuration file][8], or use the environment variable `DD_SECRET_BACKEND_REMOVE_TRAILING_LINE_BREAK` to do the same, especially in containerized environments.
 
 ## Further Reading
 
