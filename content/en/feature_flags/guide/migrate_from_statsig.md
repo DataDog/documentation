@@ -1,6 +1,11 @@
 ---
 title: Migrate Your Feature Flags from Statsig
+description: Learn how to migrate feature flags from Statsig to Datadog.
 ---
+
+{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
+Feature Flags are in Preview. Complete the form to request access.
+{{< /callout >}}
 
 ## Overview
 
