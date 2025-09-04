@@ -98,7 +98,7 @@ The Scanning Rule Library contains predefined rules for detecting common pattern
 
 #### Add custom keywords
 
-The [recommended keywords][15] are used by default when library rules are created. After adding library rules, you can edit each rule separately and add keywords to or remove keywords from the keyword dictionary.
+The [recommended keywords][15] are used by default when library rules are added. After adding library rules, you can edit each rule separately and add keywords to or remove keywords from the keyword dictionary.
 
 1. Navigate to the [Sensitive Data Scanner][5] settings page.
 1. Click the scanning group with the rule you want to edit.
