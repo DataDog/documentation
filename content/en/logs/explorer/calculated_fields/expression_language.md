@@ -11,7 +11,7 @@ further_reading:
 
 | Construct                                                                 | Syntax and Notation                                                                                                                  |
 | --------------------------------------------------------------------------| ------------------------------------------------------------------------------------------------------------------------------------ |
-| Reserved attribute or tag named `tag`                                     | `tag` (no prefix required)                                                                                                           |
+| Reserved attribute or tag named `tag`                                     | `tag` (no prefix required)<br>For tags containing dashes, escape them with a backslash.<br>Example: `ci\-job\-id`                    |
 | Attribute named `attr`                                                    | `@attr` (use an `@` prefix)                                                                                                          |
 | Calculated field named `field`                                            | `#field` (use a `#` prefix)                                                                                                          |
 | String literal (quote)<br>For example, `text` or `Quoted "text"`.         | `"text"`<br> `"Quoted \"text\""`<br>(<a href="https://docs.datadoghq.com/logs/explorer/search_syntax/">Log Search Syntax</a> applies)|
