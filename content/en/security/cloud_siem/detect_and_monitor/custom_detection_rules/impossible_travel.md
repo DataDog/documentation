@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-The impossible travel method detects access from different locations whose distance is greater than the distance a human can travel in the time between the two access events.
+The impossible travel method detects access from different locations whose distance is greater than the distance a human can travel in the time between the two access events. See [Create Rule][1] for instructions on how to create an impossible travel rule.
 
 ## How the impossible travel method works
 
@@ -33,3 +33,5 @@ When **Baseline User Locations** is enabled:
         - If it's not an impossible travel situation, Datadog moves on to the next log or event.
         - It it's an impossible travel situation, Datadog checks if there is an IP transition pattern.
 - You can enable "Common locations and IP transitions detection" through a toggle button in the rule editor UI.
+
+[1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule

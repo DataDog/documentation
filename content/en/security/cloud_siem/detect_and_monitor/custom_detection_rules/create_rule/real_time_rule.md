@@ -233,7 +233,7 @@ Click **Add Root Query** to add additional queries.
 1. Select a rule for **Rule a**.
 1. Click the pencil icon to rename the rule.
 1. Use the **correlated by** dropdown to define the correlating attribute.
-    - You can select multiple attributes (maximum of 3) to correlate the selected rules. See [Time windows](#time-windows-signal-correlation) for more information about the sliding window.
+    - You can select multiple attributes (maximum of 3) to correlate the selected rules.
 1. Select a rule for **Rule b** in the second Rule editor's dropdown.
     - The attributes and sliding window time frame is automatically set to what was selected for **Rule a**.
 1. Click the pencil icon to rename the rule.
@@ -266,14 +266,16 @@ In this example, when there are more than five failed logins and at least one su
 
 ### Other parameters
 
-#### 1. Rule multi-triggering {#rule-multi-triggering-threshold}
+#### 1. Rule multi-triggering {#rule-multi-triggering-rt-threshold}
 
 {{% cloud_siem/rule_multi_triggering %}}
 
-#### 2. Decrease severity for non-production environments {#decrease-severity-threshold}
+#### 2. Decrease severity for non-production environments {#decrease-severity-rt-threshold}
+
 {{% cloud_siem/enable_decrease_severity %}}
 
-#### 3. Enable optional group by {#enable-group-by-threshold}
+#### 3. Enable optional group by {#enable-group-by-rt-threshold}
+
 {{% cloud_siem/enable_group_by %}}
 
 {{% /tab %}}
@@ -283,19 +285,20 @@ In this example, when there are more than five failed logins and at least one su
 
 ### Other parameters
 
-#### 1. Forget value {#forget-value-real-time-new-value}
+#### 1. Forget value {#forget-value-rt-new-value}
 
 {{% cloud_siem/forget_value %}}
 
-
-#### 2. Rule multi-triggering {#rule-multi-triggering-new-value}
+#### 2. Rule multi-triggering {#rule-multi-triggering-rt-new-value}
 
 {{% cloud_siem/rule_multi_triggering %}}
 
 #### 3. Decrease severity for non-production environments {#decrease-severity-new-value}
+
 {{% cloud_siem/enable_decrease_severity %}}
 
-#### 4. Enable optional group by {#enable-group-by-new-value}
+#### 4. Enable optional group by {#enable-group-by-rt-new-value}
+
 {{% cloud_siem/enable_group_by %}}
 
 {{% /tab %}}
@@ -305,14 +308,16 @@ In this example, when there are more than five failed logins and at least one su
 
 ### Other parameters
 
-#### 1. Rule multi-triggering {#rule-multi-triggering-anomaly}
+#### 1. Rule multi-triggering {#rule-multi-triggering-rt-anomaly}
 
 {{% cloud_siem/rule_multi_triggering %}}
 
-#### 2. Decrease severity for non-production environments {#decrease-severity-anomaly}
+#### 2. Decrease severity for non-production environments {#decrease-severity-rt-anomaly}
+
 {{% cloud_siem/enable_decrease_severity %}}
 
-#### 3. Enable optional group by {#enable-group-by-anomaly}
+#### 3. Enable optional group by {#enable-group-by-rt-anomaly}
+
 {{% cloud_siem/enable_group_by %}}
 
 {{% /tab %}}
@@ -322,16 +327,19 @@ In this example, when there are more than five failed logins and at least one su
 
 ### Other parameters
 
-#### 1. Content anomaly detection option {#content-anomaly-options-real-time-content-anomaly}
+#### 1. Content anomaly detection {#content-anomaly-rt-content-anomaly}
 {{% cloud_siem/content_anomaly_options %}}
 
-#### 2. Rule multi-triggering {#rule-multi-triggering-anomaly}
+#### 2. Rule multi-triggering {#rule-multi-triggering-rt-content-anomaly}
+
 {{% cloud_siem/rule_multi_triggering %}}
 
-#### 3. Decrease severity for non-production environments {#decrease-severity-anomaly}
+#### 3. Decrease severity for non-production environments {#decrease-severity-rt-content-anomaly}
+
 {{% cloud_siem/enable_decrease_severity %}}
 
-#### 4. Enable optional group by {#enable-group-by-anomaly}
+#### 4. Enable optional group by {#enable-group-by-rt-anomaly}
+
 {{% cloud_siem/enable_group_by %}}
 
 {{% /tab %}}
@@ -341,14 +349,16 @@ In this example, when there are more than five failed logins and at least one su
 
 ### Other parameters
 
-#### 1. Rule multi-triggering {#rule-multi-triggering-impossible-travel}
+#### 1. Rule multi-triggering {#rule-multi-triggering-rt-impossible-travel}
 
 {{% cloud_siem/rule_multi_triggering %}}
 
-#### 2. Decrease severity for non-production environments {#decrease-severity-impossible-travel}
+#### 2. Decrease severity for non-production environments {#decrease-severity-rt-impossible-travel}
+
 {{% cloud_siem/enable_decrease_severity %}}
 
-#### 3. Enable optional group by {#enable-group-by-impossible-travel}
+#### 3. Enable optional group by {#enable-group-by-rt-impossible-travel}
+
 {{% cloud_siem/enable_group_by %}}
 
 {{% /tab %}}
@@ -358,10 +368,12 @@ In this example, when there are more than five failed logins and at least one su
 
 ### Other parameters
 
-#### 1. Decrease severity for non-production environments {#decrease-severity-third-party}
+#### 1. Decrease severity for non-production environments {#decrease-severity-rt-third-party}
+
 {{% cloud_siem/enable_decrease_severity %}}
 
-#### 2. Enable optional group by {#enable-group-by-third-party}
+#### 2. Enable optional group by {#enable-group-by-rt-third-party}
+
 {{% cloud_siem/enable_group_by %}}
 
 {{% /tab %}}
@@ -371,11 +383,12 @@ In this example, when there are more than five failed logins and at least one su
 
 ### Other parameters
 
-#### 1. Rule multi-triggering {#rule-multi-triggering-signal-correlation}
+#### 1. Rule multi-triggering {#rule-multi-triggering-rt-signal-correlation}
 
 {{% cloud_siem/rule_multi_triggering %}}
 
-#### 2. Decrease severity for non-production environments {#decrease-severity-signal-correlation}
+#### 2. Decrease severity for non-production environments {#decrease-severity-rt-signal-correlation}
+
 {{% cloud_siem/enable_decrease_severity %}}
 
 {{% /tab %}}
