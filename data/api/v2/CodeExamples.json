@@ -460,6 +460,27 @@
       "description": "Update a downtime returns \"OK\" response"
     }
   ],
+  "SearchIssues": [
+    {
+      "group": "error_tracking",
+      "suffix": "",
+      "description": "Search error tracking issues returns \"OK\" response"
+    }
+  ],
+  "UpdateIssueAssignee": [
+    {
+      "group": "error_tracking",
+      "suffix": "",
+      "description": "Update the assignee of an issue returns \"OK\" response"
+    }
+  ],
+  "UpdateIssueState": [
+    {
+      "group": "error_tracking",
+      "suffix": "",
+      "description": "Update the state of an issue returns \"OK\" response"
+    }
+  ],
   "CreateEvent": [
     {
       "group": "events",
@@ -1276,6 +1297,13 @@
       "description": "Get a list of security signals returns \"OK\" response with pagination"
     }
   ],
+  "GetSuppressionsAffectingFutureRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Get suppressions affecting future rule returns \"OK\" response"
+    }
+  ],
   "EditSecurityMonitoringSignalAssignee": [
     {
       "group": "security_monitoring",
@@ -1363,6 +1391,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Validate a detection rule returns \"OK\" response"
+    }
+  ],
+  "ValidateSecurityMonitoringSuppression": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Validate a suppression rule returns \"OK\" response"
     }
   ],
   "CreateScanningGroup": [
