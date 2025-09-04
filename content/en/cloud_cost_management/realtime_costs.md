@@ -28,7 +28,7 @@ Estimates are based on recent average hourly net amortized EC2 prices by instanc
 
 ## Usage
 
-To use real-time costs it is recommended to always use the `sum` aggregation. In addition a `rollup` using a `sum` with an interval no less than 5min is recommended. `sum:aws.cost.net.amortized.realtime.estimated.test{*}.as_count().rollup(sum, 300)`
+To use real-time costs, Datadog recommends always using the `sum` aggregation. In addition, a `rollup` using a `sum` with an interval no less than 5 minutes is recommended. For example: `sum:aws.cost.net.amortized.realtime.estimated.test{*}.as_count().rollup(sum, 300)`
 
 Using `count` shows the amount spent over the selected interval. For example if you set a 5-minute rollup, the count is the amount spent in 5 minutes. If the rollup is 1 hour, it would be about 12 times as large.
 Using `rate` shows the amount spent per second. To convert this value to a different time unit, multiply accordingly. For example, multiplying the rate per second by 3,600 gives you the rate per hour.
