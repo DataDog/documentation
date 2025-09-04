@@ -31,7 +31,7 @@ Ensure the agent version you are running is 7.70 or later.
 #### Validation
 
 1. [Run the Agent's status subcommand][10] and check the agent version.
-2. In Datadog, under [integrations, View agents][12], find  the agent running the Kafka Consumer integration, and check its version.
+2. In Datadog, under [integrations, View agents][12], find the agent running the Kafka Consumer integration, and check its version.
 
 ### Remote configuration
 
