@@ -2201,7 +2201,7 @@
     "description": "Validate a suppression rule.",
     "summary": "Validate a suppression rule",
     "request_description": "",
-    "request_schema_description": "Request object containing the fields to update on the suppression rule."
+    "request_schema_description": "Request object that includes the suppression rule that you would like to create."
   },
   "DeleteSecurityMonitoringSuppression": {
     "description": "Delete a specific suppression rule.",
