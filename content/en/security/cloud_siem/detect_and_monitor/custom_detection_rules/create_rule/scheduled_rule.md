@@ -7,7 +7,9 @@ weight: 2
 
 ## Overview
 
-TKTK
+Scheduled detection rules run at predefined intervals to analyze indexed log data and detect security threats. These rules can identify patterns, anomalies, or specific conditions within a defined timeframe, and trigger alerts or reports if the criteria are met.
+
+Scheduled rules complement real-time monitoring by ensuring periodic, in-depth analysis of logs with advanced query time operations and functions.
 
 ## Create a rule
 

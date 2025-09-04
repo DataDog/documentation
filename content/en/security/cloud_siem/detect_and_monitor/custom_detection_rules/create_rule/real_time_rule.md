@@ -7,7 +7,7 @@ weight: 1
 
 ## Overview
 
-TKTK
+Real-time detection rules continuously monitors and analyzes incoming logs for security threats. These rules trigger immediate alerts when specific patterns or anomalies are detected, enabling quicker response to potential incidents.
 
 ## Create a rule
 

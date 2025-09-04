@@ -7,7 +7,7 @@ weight: 3
 
 ## Overview
 
-TKTK
+Historical jobs are one-time executable searches on historical logs using the detection engine that creates results instead of signals. These results can be converted to signals. It allows backtesting of detection rules to assess their effectiveness on past data.
 
 ## Create a rule
 
