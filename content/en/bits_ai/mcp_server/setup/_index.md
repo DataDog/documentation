@@ -37,7 +37,7 @@ The following AI clients are compatible with the Datadog MCP Server.
 
 | Client | Developer | Notes |
 |--------|------|------|
-| [Cursor][8] | Anysphere | Datadog [Cursor &VS Code extension](#connect-in-vs-code-or-cursor) recommended. |
+| [Cursor][8] | Anysphere | Datadog [Cursor & VS Code extension](#connect-in-vs-code-or-cursor) recommended. |
 | [Claude Code][5]<br/>[Claude&nbsp;Desktop][6] | Anthropic | |
 | [Codex CLI][7] | OpenAI | |
 | [VS Code][11] | Microsoft | Datadog [Cursor & VS Code extension](#connect-in-vs-code-or-cursor) recommended. |
