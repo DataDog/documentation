@@ -32,6 +32,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/mobile-apps-synthetic-tests/"
   tag: "Blog"
   text: "How to build reliable and accurate synthetic tests for your mobile apps"
+- link: "https://www.datadoghq.com/blog/ambassador-browser-tests/"
+  tag: "Blog"
+  text: "How I helped my client scale their browser tests with Datadog"
 algolia:
   tags: ['synthetics']
 cascade:
