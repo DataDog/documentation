@@ -190,7 +190,7 @@ module "my_web_app" {
 
 Finally, run `terraform apply`, and follow any prompts.
 
-The [Datadog Linux Web App module][251] only deploys the Web App resource, so you will need to [deploy your code][252] separately.
+The [Datadog Linux Web App module][251] only deploys the Web App resource, so you need to [deploy your code][252] separately.
 
 [250]: https://developer.hashicorp.com/terraform/install
 [251]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux

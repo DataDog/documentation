@@ -232,7 +232,7 @@ Additional flags, like `--service` and `--env`, can be used to set the service a
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-<div class="alert alert-warning">The Azure Web App for Containers resource does not directly support sitecontainers, and as such you should expect drift in your configuration.</div>
+<div class="alert alert-warning">Because the Azure Web App for Containers resource does not directly support sitecontainers, you should expect drift in your configuration.</div>
 
 If you don't already have Terraform set up, [install Terraform][250], create a new directory and make a file called `main.tf`.
 
@@ -287,7 +287,7 @@ module "my_web_app" {
 
 Finally, run `terraform apply`, and follow any prompts.
 
-The [Datadog Linux Web App module][251] only deploys the Web App resource, so you will need to [deploy your code][252] separately.
+The [Datadog Linux Web App module][251] only deploys the Web App resource, so you need to [deploy your code][252] separately.
 
 [250]: https://developer.hashicorp.com/terraform/install
 [251]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux

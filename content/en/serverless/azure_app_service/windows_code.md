@@ -67,7 +67,7 @@ Datadog recommends doing regular updates to the latest version of the extension 
 
 If you haven't already, set up the [Datadog-Azure integration][9]. You can verify that your Azure integration is configured correctly by ensuring that you see the `azure.app_services.count` or `azure.functions.count` metrics in Datadog. 
 
-<div class="alert alert-info">This step is critical for metric/trace correlation, functional trace panel views, and improves the overall experience of using Datadog with Azure App Services.
+<div class="alert alert-info">This step is critical for metric/trace correlation and functional trace panel views, and improves the overall experience of using Datadog with Azure App Services.
 </div>
 
 {{< tabs >}}
@@ -126,7 +126,7 @@ module "my_web_app" {
 
 Finally, run `terraform apply`, and follow any prompts.
 
-The [Datadog Windows Web App module][251] only deploys the Web App resource and extension, so you will need to [deploy your code][252] separately.
+The [Datadog Windows Web App module][251] only deploys the Web App resource and extension, so you need to [deploy your code][252] separately.
 
 [250]: https://developer.hashicorp.com/terraform/install
 [251]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/windows
