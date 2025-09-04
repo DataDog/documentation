@@ -38,6 +38,10 @@ RUN pip install ddtrace
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
+   {{% tab "Terraform" %}}
+   {{% gcr-install-sidecar-terraform %}}
+   {{% /tab %}}
+
    {{% tab "YAML Deploy" %}}
    {{% gcr-install-sidecar-yaml language="python" %}}
    {{% /tab %}}
