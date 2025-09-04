@@ -237,58 +237,46 @@
                 - /serverless/serverless_integrations/macro/
 
       - repo_name: datadog-ci
-      contents:
-      - action: pull-and-push-file
-        branch: master
-        globs:
-        - 'packages/datadog-ci/src/commands/lambda/README.md'
-        options:
-          dest_path: '/serverless/libraries_integrations/'
-          file_name: 'cli.md'
-          front_matters:
-            dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/lambda/README.md"]
-            title: Datadog Serverless CLI
-            aliases:
-              - /serverless/datadog_lambda_library/
-              - /serverless/serverless_integrations/cli/
-      - action: pull-and-push-file
-        branch: master
-        globs:
-        - 'packages/datadog-ci/src/commands/synthetics/README.md'
-        options:
-          dest_path: '/continuous_testing/cicd_integrations/'
-          file_name: 'configuration.md'
-          front_matters:
-            dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/README.md"]
-            title: Continuous Testing and CI/CD Configuration
-            description: Configure Continuous Testing to run tests in your CI/CD pipelines.
-            aliases:
-              - /synthetics/cicd_integrations/configuration
-            further_reading:
-            - link: "https://www.datadoghq.com/blog/datadog-github-action-synthetics-ci-visibility/"
-              tag: "Blog"
-              text: "Use Datadog's GitHub Action to add continuous testing to workflows"
-            - link: "/continuous_testing/cicd_integrations"
-              tag: "Documentation"
-              text: "Learn about Continuous Testing and CI/CD"
-            - link: "/continuous_testing/explorer"
-              tag: "Documentation"
-              text: "Learn about the Synthetic Monitoring & Testing Results Explorer"
-            - link: "/continuous_testing/testing_tunnel"
-              tag: "Documentation"
-              text: "Learn about the Continuous Testing Tunnel"
-
-      - repo_name: datadog-static-analyzer-rule-docs
         contents:
-        - action: pull-and-push-folder
-          branch: main
+        - action: pull-and-push-file
+          branch: master
           globs:
-          - rulesets/**/*.md
+          - 'packages/datadog-ci/src/commands/lambda/README.md'
           options:
-            dest_dir: '/security/code_security/static_analysis/static_analysis_rules/'
-            path_to_remove: 'rulesets/'
+            dest_path: '/serverless/libraries_integrations/'
+            file_name: 'cli.md'
             front_matters:
-              disable_edit: true
+              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md"]
+              title: Datadog Serverless CLI
+              aliases:
+                - /serverless/datadog_lambda_library/
+                - /serverless/serverless_integrations/cli/
+        - action: pull-and-push-file
+          branch: master
+          globs:
+          - 'packages/datadog-ci/src/commands/synthetics/README.md'
+          options:
+            dest_path: '/continuous_testing/cicd_integrations/'
+            file_name: 'configuration.md'
+            front_matters:
+              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/README.md"]
+              title: Continuous Testing and CI/CD Configuration
+              description: Configure Continuous Testing to run tests in your CI/CD pipelines.
+              aliases:
+                - /synthetics/cicd_integrations/configuration
+              further_reading:
+              - link: "https://www.datadoghq.com/blog/datadog-github-action-synthetics-ci-visibility/"
+                tag: "Blog"
+                text: "Use Datadog's GitHub Action to add continuous testing to workflows"
+              - link: "/continuous_testing/cicd_integrations"
+                tag: "Documentation"
+                text: "Learn about Continuous Testing and CI/CD"
+              - link: "/continuous_testing/explorer"
+                tag: "Documentation"
+                text: "Learn about the Synthetic Monitoring & Testing Results Explorer"
+              - link: "/continuous_testing/testing_tunnel"
+                tag: "Documentation"
+                text: "Learn about the Testing Tunnel"
 
       - repo_name: datadog-static-analyzer-rule-docs
         contents:
