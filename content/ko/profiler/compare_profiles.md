@@ -50,7 +50,7 @@ UI의 각기 다른 위치에서 서로 다른 유형의 비교를 열 수 있�
 
 비교하려는 메트릭(코드 언어에 따라 목록 다양)을 선택합니다. 예를 들어 CPU 프로파일 조사 중 할당 증가를 찾을 때 유용할 수 있습니다.
 
-{{< img src="profiler/compare_time_periods.mp4" alt="시간 프레임 동안의 프로파일을 집계와 비교하기 위한 비교 보기 열기" video="true">}}
+{{< img src="profiler/compare_time_period.mp4" alt="시간 프레임 동안의 프로파일을 집계와 비교하기 위한 비교 보기 열기" video="true">}}
 
 범례 색상을 기억해 둡니다. 색상은 다음을 의미합니다.
  - 짙어지는 빨간색은 프로파일 B에서 더 많은 시간이 소요된 메서드입니다.
@@ -70,7 +70,7 @@ UI의 각기 다른 위치에서 서로 다른 유형의 비교를 열 수 있�
 
 집계 보기에서 서비스를 선택하여 선택한 시간 프레임에 대한 특정 메트릭(예: 실제 시간(wall time)의 집계 프로파일을 확인합니다. 그런 다음 **비교**를 클릭해 또 다른 버전의 집계 프로파일과 해당 정보를 비교합니다.
 
-{{< img src="profiler/compare_versions.mp4" alt="두 버전에 대한 비교 보기 열기" video="true">}}
+{{< img src="profiler/compare_version.mp4" alt="두 버전에 대한 비교 보기 열기" video="true">}}
 
 ## 참고 자료
 
