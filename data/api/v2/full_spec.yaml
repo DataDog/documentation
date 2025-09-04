@@ -445,6 +445,13 @@ components:
       required: true
       schema:
         type: string
+    HistoricalSignalID:
+      description: The ID of the historical signal.
+      in: path
+      name: histsignal_id
+      required: true
+      schema:
+        type: string
     IncidentAttachmentFilterQueryParameter:
       description: Specifies which types of attachments are included in the response.
       explode: false
@@ -750,6 +757,58 @@ components:
       required: true
       schema:
         type: string
+    QueryFilterFrom:
+      description: The minimum timestamp for requested security signals.
+      example: '2019-01-02T09:42:36.320Z'
+      in: query
+      name: filter[from]
+      required: false
+      schema:
+        format: date-time
+        type: string
+    QueryFilterSearch:
+      description: The search query for security signals.
+      example: security:attack status:high
+      in: query
+      name: filter[query]
+      required: false
+      schema:
+        type: string
+    QueryFilterTo:
+      description: The maximum timestamp for requested security signals.
+      example: '2019-01-03T09:42:36.320Z'
+      in: query
+      name: filter[to]
+      required: false
+      schema:
+        format: date-time
+        type: string
+    QueryPageCursor:
+      description: A list of results using the cursor provided in the previous query.
+      example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+      in: query
+      name: page[cursor]
+      required: false
+      schema:
+        type: string
+    QueryPageLimit:
+      description: The maximum number of security signals in the response.
+      example: 25
+      in: query
+      name: page[limit]
+      required: false
+      schema:
+        default: 10
+        format: int32
+        maximum: 1000
+        type: integer
+    QuerySort:
+      description: The order of the security signals in results.
+      in: query
+      name: sort
+      required: false
+      schema:
+        $ref: '#/components/schemas/SecurityMonitoringSignalsSort'
     RelationInclude:
       description: Include relationship data.
       explode: true
@@ -68721,6 +68780,41 @@ paths:
       x-menu-order: 0
       x-undo:
         type: safe
+  /api/v2/security_monitoring/configuration/suppressions/validation:
+    post:
+      description: Validate a suppression rule.
+      operationId: ValidateSecurityMonitoringSuppression
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringSuppressionCreateRequest'
+        required: true
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_suppressions_write
+      summary: Validate a suppression rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 0
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_suppressions_write
+      x-undo:
+        type: idempotent
   /api/v2/security_monitoring/configuration/suppressions/{suppression_id}:
     delete:
       description: Delete a specific suppression rule.
@@ -69317,52 +69411,12 @@ paths:
         security signals.'
       operationId: ListSecurityMonitoringSignals
       parameters:
-      - description: The search query for security signals.
-        example: security:attack status:high
-        in: query
-        name: filter[query]
-        required: false
-        schema:
-          type: string
-      - description: The minimum timestamp for requested security signals.
-        example: '2019-01-02T09:42:36.320Z'
-        in: query
-        name: filter[from]
-        required: false
-        schema:
-          format: date-time
-          type: string
-      - description: The maximum timestamp for requested security signals.
-        example: '2019-01-03T09:42:36.320Z'
-        in: query
-        name: filter[to]
-        required: false
-        schema:
-          format: date-time
-          type: string
-      - description: The order of the security signals in results.
-        in: query
-        name: sort
-        required: false
-        schema:
-          $ref: '#/components/schemas/SecurityMonitoringSignalsSort'
-      - description: A list of results using the cursor provided in the previous query.
-        example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
-        in: query
-        name: page[cursor]
-        required: false
-        schema:
-          type: string
-      - description: The maximum number of security signals in the response.
-        example: 25
-        in: query
-        name: page[limit]
-        required: false
-        schema:
-          default: 10
-          format: int32
-          maximum: 1000
-          type: integer
+      - $ref: '#/components/parameters/QueryFilterSearch'
+      - $ref: '#/components/parameters/QueryFilterFrom'
+      - $ref: '#/components/parameters/QueryFilterTo'
+      - $ref: '#/components/parameters/QuerySort'
+      - $ref: '#/components/parameters/QueryPageCursor'
+      - $ref: '#/components/parameters/QueryPageLimit'
       responses:
         '200':
           content:
@@ -70842,6 +70896,132 @@ paths:
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is deprecated.'
+  /api/v2/siem-historical-detections/histsignals:
+    get:
+      description: List hist signals.
+      operationId: ListSecurityMonitoringHistsignals
+      parameters:
+      - $ref: '#/components/parameters/QueryFilterSearch'
+      - $ref: '#/components/parameters/QueryFilterFrom'
+      - $ref: '#/components/parameters/QueryFilterTo'
+      - $ref: '#/components/parameters/QuerySort'
+      - $ref: '#/components/parameters/QueryPageCursor'
+      - $ref: '#/components/parameters/QueryPageLimit'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalsListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_signals_read
+      summary: List hist signals
+      tags:
+      - Security Monitoring
+      x-menu-order: 42
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
+
+        Please check the documentation regularly for updates.'
+  /api/v2/siem-historical-detections/histsignals/search:
+    get:
+      description: Search hist signals.
+      operationId: SearchSecurityMonitoringHistsignals
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringSignalListRequest'
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalsListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_signals_read
+      summary: Search hist signals
+      tags:
+      - Security Monitoring
+      x-menu-order: 40
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
+
+        Please check the documentation regularly for updates.'
+  /api/v2/siem-historical-detections/histsignals/{histsignal_id}:
+    get:
+      description: Get a hist signal's details.
+      operationId: GetSecurityMonitoringHistsignal
+      parameters:
+      - $ref: '#/components/parameters/HistoricalSignalID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_signals_read
+      summary: Get a hist signal's details
+      tags:
+      - Security Monitoring
+      x-menu-order: 41
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
+
+        Please check the documentation regularly for updates.'
   /api/v2/siem-historical-detections/jobs:
     get:
       description: List historical jobs.
@@ -71098,6 +71278,51 @@ paths:
         - security_monitoring_rules_write
       x-undo:
         type: idempotent
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
+
+        Please check the documentation regularly for updates.'
+  /api/v2/siem-historical-detections/jobs/{job_id}/histsignals:
+    get:
+      description: Get a job's hist signals.
+      operationId: GetSecurityMonitoringHistsignalsByJobId
+      parameters:
+      - $ref: '#/components/parameters/HistoricalJobID'
+      - $ref: '#/components/parameters/QueryFilterSearch'
+      - $ref: '#/components/parameters/QueryFilterFrom'
+      - $ref: '#/components/parameters/QueryFilterTo'
+      - $ref: '#/components/parameters/QuerySort'
+      - $ref: '#/components/parameters/QueryPageCursor'
+      - $ref: '#/components/parameters/QueryPageLimit'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalsListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_signals_read
+      summary: Get a job's hist signals
+      tags:
+      - Security Monitoring
+      x-menu-order: 43
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_read
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
 
         Please check the documentation regularly for updates.'

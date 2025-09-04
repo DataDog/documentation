@@ -2397,6 +2397,19 @@ menu:
       url: /api/latest/security-monitoring/
       identifier: security-monitoring
       generated: true
+    - name: Get a job's hist signals
+      url: '#get-a-jobs-hist-signals'
+      identifier: security-monitoring-get-a-jobs-hist-signals
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringHistsignalsByJobId
+        unstable:
+          - v2
+        order: 43
     - name: Cancel a historical job
       url: '#cancel-a-historical-job'
       identifier: security-monitoring-cancel-a-historical-job
@@ -2475,6 +2488,45 @@ menu:
         unstable:
           - v2
         order: 20
+    - name: Get a hist signal's details
+      url: '#get-a-hist-signals-details'
+      identifier: security-monitoring-get-a-hist-signals-details
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringHistsignal
+        unstable:
+          - v2
+        order: 41
+    - name: Search hist signals
+      url: '#search-hist-signals'
+      identifier: security-monitoring-search-hist-signals
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchSecurityMonitoringHistsignals
+        unstable:
+          - v2
+        order: 40
+    - name: List hist signals
+      url: '#list-hist-signals'
+      identifier: security-monitoring-list-hist-signals
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityMonitoringHistsignals
+        unstable:
+          - v2
+        order: 42
     - name: Change the related incidents of a security signal
       url: '#change-the-related-incidents-of-a-security-signal'
       identifier: security-monitoring-change-the-related-incidents-of-a-security-signal
@@ -2690,6 +2742,18 @@ menu:
           - v2
         operationids:
           - DeleteSecurityMonitoringSuppression
+        unstable: []
+        order: 0
+    - name: Validate a suppression rule
+      url: '#validate-a-suppression-rule'
+      identifier: security-monitoring-validate-a-suppression-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateSecurityMonitoringSuppression
         unstable: []
         order: 0
     - name: Get suppressions affecting a specific rule
