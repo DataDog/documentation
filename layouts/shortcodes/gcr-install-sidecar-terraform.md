@@ -19,6 +19,8 @@ module "my-cloud-run-app" {
   datadog_service = "test-service" // your application service
   datadog_version = "0.0.0" // your code version
   datadog_env     = "prod" // your application environment
+  
+  datadog_enable_logging = true
 
   deletion_protection = false
   template = {
@@ -46,12 +48,10 @@ module "my-cloud-run-app" {
 
 See the [Environment Variables](#environment-variables) for more information on the configuration options available through the `env`.
 
-In this example, the environment variables, startup health check, and volume mount are already added. If you don't want to enable logs, remove the shared volume.
-
 Ensure the container port for the main container is the same as the one exposed in your Dockerfile/service.
 
 
-If you haven't already, initialize your terraform project:
+If you haven't already, initialize your Terraform project:
 ```shell
 terraform init
 ```
