@@ -1,12 +1,12 @@
 ---
-title: Service renaming
+title: Renaming rules for inferred entities
 further_reading:
 - link: "tracing/services/inferred_services"
   tag: "Documentation"
   text: "Inferred services"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/1Qt03IHB-oHF_BmYQxDiENPksjXzxsfD0kGpTSHd81Hw/edit" d_toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger" btn_hidden="false" header="Join the preview for service renaming!">}}
+{{< callout url="https://docs.google.com/forms/d/1Qt03IHB-oHF_BmYQxDiENPksjXzxsfD0kGpTSHd81Hw/edit" d_toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger" btn_hidden="false" header="Join the preview for renaming rules for inferred entities!">}}
 {{< /callout >}}
 
 ## Overview

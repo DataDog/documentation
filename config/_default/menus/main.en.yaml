@@ -4059,10 +4059,10 @@ menu:
       parent: tracing_services
       identifier: tracing_inferred_services
       weight: 906
-    - name: Service Renaming
-      url: tracing/services/service_renaming
+    - name: Renaming Rules for Inferred Entities
+      url: tracing/services/renaming_rules
       parent: tracing_services
-      identifier: tracing_service_renaming
+      identifier: tracing_renaming_rules
       weight: 907
     - name: APM Monitors
       url: /monitors/create/types/apm/
