@@ -35,7 +35,7 @@ further_reading:
 The Datadog Docker Agent is the containerized version of the host [Agent][1]. The Docker Agent supports Docker, containerd, and Podman runtimes.
 
 ## Installation
-To install the Datadog Agent on Docker, follow the [in-app installation instructions in Fleet Automation][34]. For a list of supported versions, see [Supported Platforms][35] before installing.
+Before installing, see the list of supported versions in the [Supported Platforms][35] documentation. To install the Datadog Agent on Docker, follow the [in-app installation instructions in Fleet Automation][34].
 
 {{< img src="/agent/basic_agent_usage/agent_install_docker.png" alt="In-app installation steps for the Datadog Agent on Docker." style="width:90%;">}}
 
