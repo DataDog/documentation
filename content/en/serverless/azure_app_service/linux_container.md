@@ -200,7 +200,7 @@ To set up logging in your application, see [Node.js Log Collection][603]. To set
 Instrumentation is done using a sidecar container. This sidecar container collects traces, metrics, and logs from your main application container and sends them to Datadog.
 
 {{< tabs >}}
-{{% tab "Automated" %}}
+{{% tab "Datadog CLI" %}}
 
 #### Using the Datadog CLI
 
@@ -230,7 +230,70 @@ Additional flags, like `--service` and `--env`, can be used to set the service a
 [601]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
 [602]: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
 {{% /tab %}}
+{{% tab "Terraform" %}}
 
+<div class="alert alert-warning">The Azure Web App for Containers resource does not directly support sitecontainers, and as such you should expect drift in your configuration.</div>
+
+If you don't already have Terraform set up, [install Terraform][250], create a new directory and make a file called `main.tf`.
+
+Then, add the following to your Terraform configuration, updating it as necessary based on your needs:
+
+```tf
+variable "datadog_api_key" {
+  description = "Your Datadog API key"
+  type        = string
+  sensitive   = true
+}
+variable "resource_group" { type = string }
+
+provider "azurerm" {
+  features {}
+  subscription_id = "<YOUR SUBSCRIPTION ID>"
+}
+
+resource "azurerm_service_plan" "my_asp" {
+  name                = "my-app-service-plan"
+  resource_group_name = var.resource_group
+  os_type             = "Linux"
+  location            = "eastus"
+  sku_name            = "P1v2"
+}
+
+module "my_web_app" {
+  source  = "DataDog/web-app-datadog/azurerm//modules/linux"
+  version = "1.0.0"
+
+  name                = "my-web-app"
+  location            = "eastus"
+  resource_group_name = var.resource_group
+  service_plan_id     = azurerm_service_plan.my_asp.id
+
+  datadog_api_key = var.datadog_api_key
+  datadog_service = "my-service" // Replace with your service name
+  datadog_env     = "prod"       // Replace with your environment (e.g., prod, staging)
+  datadog_version = "0.0.0"      // Replace with your application version
+
+  site_config = {
+    application_stack = {
+      docker_registry_url = "<YOUR IMAGE REGISTRY>"
+      docker_image_name   = "my-app:latest"
+    }
+  }
+  app_settings = {
+    DD_TRACE_ENABLED = "true"
+  }
+}
+```
+
+Finally, run `terraform apply`, and follow any prompts.
+
+The [Datadog Linux Web App module][251] only deploys the Web App resource, so you will need to [deploy your code][252] separately.
+
+[250]: https://developer.hashicorp.com/terraform/install
+[251]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux
+[252]: https://learn.microsoft.com/en-us/azure/app-service/getting-started
+
+{{% /tab %}}
 {{% tab "Manual" %}}
 
 #### Sidecar container
