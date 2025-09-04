@@ -49,9 +49,9 @@ const tracer = require('dd-trace').init({
 
 3. **Set up logs**.
 
-   In the previous step, you created a shared volume. Additionally, you set the `DD_SERVERLESS_LOG_PATH` env var, or it was defaulted to `/shared-volume/logs/app.log`.
+   In the previous step, you created a shared volume. You may have also set the `DD_SERVERLESS_LOG_PATH` environment variable, which defaults to `/shared-volume/logs/app.log`.
 
-   Now, you will need to configure your logging library to write logs to that file. In Node.js, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `winston`:
+   In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. In Node.js, Datadog recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `winston`:
    {{< code-block lang="javascript" disable_copy="false" >}}
 const tracer = require('dd-trace').init({
   logInjection: true,
@@ -81,7 +81,7 @@ logger.info(`Hello world!`);
 
 5. **Send custom metrics**.
 
-   To send custom metrics, [view code examples][3]. In serverless, only the *distribution* metric type is supported.
+   To send custom metrics, [view code examples][3]. In Serverless Monitoring, only the *distribution* metric type is supported.
 
 {{% gcr-env-vars instrumentationMethod="sidecar" language="nodejs" function="true" %}}
 

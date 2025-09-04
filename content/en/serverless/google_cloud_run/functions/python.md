@@ -41,9 +41,9 @@ ddtrace==<VERSION>
 
 3. **Set up logs**.
 
-   In the previous step, you created a shared volume. Additionally, you set the `DD_SERVERLESS_LOG_PATH` env var, or it was defaulted to `/shared-volume/logs/app.log`.
+   In the previous step, you created a shared volume. You may have also set the `DD_SERVERLESS_LOG_PATH` environment variable, which defaults to `/shared-volume/logs/app.log`.
 
-   Now, you will need to configure your logging library to write logs to that file. You can also set a custom format for log/trace correlation and other features. Datadog recommends setting the following environment variables:
+   In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. You can also set a custom format for log/trace correlation and other features. Datadog recommends setting the following environment variables:
    - `PYTHONUNBUFFERED=1`: In your main container. Ensure Python outputs appear immediately in container logs instead of being buffered.
    - `DD_LOGS_INJECTION=true`: In your main container. Enable log/trace correlation for supported loggers.
    - `DD_SOURCE=python`: In your sidecar container. Enable advanced Datadog log parsing.
@@ -77,7 +77,7 @@ logger.info('Hello world!')
 
 5. **Send custom metrics**.
 
-   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
+   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In Serverless Monitoring, only the *distribution* metric type is supported.
 
 {{% gcr-env-vars instrumentationMethod="sidecar" language="python" function="true" %}}
 

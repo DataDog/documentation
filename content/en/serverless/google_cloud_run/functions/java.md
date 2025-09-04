@@ -67,9 +67,9 @@ implementation 'com.datadoghq:dd-trace-api:DD_TRACE_JAVA_VERSION_HERE'
 
 3. **Set up logs**.
 
-   In the previous step, you created a shared volume. Additionally, you set the `DD_SERVERLESS_LOG_PATH` env var, or it was defaulted to `/shared-volume/logs/app.log`.
+   In the previous step, you created a shared volume. You may have also set the `DD_SERVERLESS_LOG_PATH` environment variable, which defaults to `/shared-volume/logs/app.log`.
 
-   Now, you will need to configure your logging library to write logs to that file. In Java, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `Log4j 2`:
+   In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. In Java, Datadog recommend writing logs in JSON format. For example, you can use a third-party logging library such as `Log4j 2`:
 
    {{< code-block lang="java" disable_copy="false" >}}
 private static final Logger logger = LogManager.getLogger(App.class);
@@ -96,7 +96,7 @@ logger.info("Hello World!");
 
 5. **Send custom metrics**.
 
-   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
+   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In Serverless Monitoring, only the *distribution* metric type is supported.
 
 {{% gcr-env-vars instrumentationMethod="sidecar" language="java" function="true" %}}
 
