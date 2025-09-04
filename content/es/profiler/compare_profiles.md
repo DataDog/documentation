@@ -50,7 +50,7 @@ En la vista Búsqueda del generador de perfiles, selecciona un perfil en la list
 
 Selecciona la métrica que quieres comparar (la lista varía en función del lenguaje del código). Esto puede ser útil, por ejemplo, para observar los picos de asignación mientras se investigan perfiles de CPU.
 
-{{< img src="profiler/compare_time_periods.mp4" alt="Abrir la vista de comparación para comparar un perfil con una agregación para un periodo de tiempo." video="true">}}
+{{< img src="profiler/compare_time_period.mp4" alt="Abrir la vista de comparación para comparar un perfil con una agregación para un periodo de tiempo." video="true">}}
 
 Toma nota de los colores de la leyenda, que muestran:
  - Tonos rojos más intensos para los métodos que requieren más tiempo en el Perfil B.
@@ -70,7 +70,7 @@ Pasa el ratón por encima de los métodos del perfil para ver métricas específ
 
 En la vista Agregación, selecciona un servicio para ver su perfil agregado para una métrica concreta (por ejemplo, tiempo de pared) durante el periodo de tiempo seleccionado. A continuación, haz clic en **Compare** (Comparar) para compararlo con el perfil agregado de otra versión.
 
-{{< img src="profiler/compare_versions.mp4" alt="Abrir la vista de comparación para ver dos versiones diferentes." video="true">}}
+{{< img src="profiler/compare_version.mp4" alt="Abrir la vista de comparación para ver dos versiones diferentes." video="true">}}
 
 ## Lectura adicional
 
