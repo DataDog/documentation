@@ -1,7 +1,5 @@
 {
   "$$mdtype": "Node",
-  "errors": [],
-  "lines": [],
   "inline": false,
   "attributes": {
     "frontmatter": {
@@ -60,40 +58,36 @@
       ]
     }
   },
-  "children": [
-    {
-      "$$mdtype": "Node",
-      "errors": [],
-      "lines": [
-        25,
-        26
-      ],
-      "inline": false,
-      "attributes": {
-        "file": "rum/session_replay/mobile/privacy_options.mdoc.md"
-      },
-      "children": [],
-      "type": "tag",
-      "tag": "partial",
-      "annotations": [
-        {
-          "type": "attribute",
-          "name": "file",
-          "value": "rum/session_replay/mobile/privacy_options.mdoc.md"
-        }
-      ],
-      "slots": {},
-      "location": {
-        "start": {
-          "line": 25
+  "children": {
+    "translationListData": {
+      "0": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "attributes": {
+          "file": "rum/session_replay/mobile/privacy_options.mdoc.md"
         },
-        "end": {
-          "line": 26
-        }
+        "children": {
+          "translationListData": {}
+        },
+        "type": "tag",
+        "tag": "partial",
+        "annotations": {
+          "translationListData": {
+            "0": {
+              "type": "attribute",
+              "name": "file",
+              "value": "rum/session_replay/mobile/privacy_options.mdoc.md"
+            }
+          }
+        },
+        "slots": {},
+        "location": "line 25-26"
       }
     }
-  ],
+  },
   "type": "document",
-  "annotations": [],
+  "annotations": {
+    "translationListData": {}
+  },
   "slots": {}
 }

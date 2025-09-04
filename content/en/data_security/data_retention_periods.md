@@ -54,7 +54,7 @@ attributes:
     data_type: | 
        - **Events**: 90 days
        - **Security signals**: 15 months
-  - product: Code Analysis
+  - product: Code Security SAST
     data_type: | 
        - **Scans**: 15 months
   - product: Code Security IAST
