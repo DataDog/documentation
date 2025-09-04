@@ -719,6 +719,15 @@ components:
       schema:
         example: monitor_timezone
         type: string
+    OrgConnectionId:
+      description: The unique identifier of the org connection.
+      in: path
+      name: connection_id
+      required: true
+      schema:
+        example: f9ec96b0-8c8a-4b0a-9b0a-1b2c3d4e5f6a
+        format: uuid
+        type: string
     PageNumber:
       description: Specific page number to return.
       in: query
@@ -32186,6 +32195,255 @@ components:
       required:
       - data
       type: object
+    OrgConnection:
+      description: An org connection.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OrgConnectionAttributes'
+        id:
+          description: The unique identifier of the org connection.
+          example: f9ec96b0-8c8a-4b0a-9b0a-1b2c3d4e5f6a
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/OrgConnectionRelationships'
+        type:
+          $ref: '#/components/schemas/OrgConnectionType'
+      required:
+      - id
+      - type
+      - attributes
+      - relationships
+      type: object
+    OrgConnectionAttributes:
+      description: Org connection attributes.
+      properties:
+        connection_types:
+          description: List of connection types.
+          example:
+          - logs
+          - metrics
+          items:
+            $ref: '#/components/schemas/OrgConnectionTypeEnum'
+          type: array
+        created_at:
+          description: Timestamp when the connection was created.
+          example: '2023-01-01T12:00:00Z'
+          format: date-time
+          type: string
+      required:
+      - connection_types
+      - created_at
+      type: object
+    OrgConnectionCreate:
+      description: Org connection creation data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OrgConnectionCreateAttributes'
+        relationships:
+          $ref: '#/components/schemas/OrgConnectionCreateRelationships'
+        type:
+          $ref: '#/components/schemas/OrgConnectionType'
+      required:
+      - type
+      - attributes
+      - relationships
+      type: object
+    OrgConnectionCreateAttributes:
+      description: Attributes for creating an org connection.
+      properties:
+        connection_types:
+          description: List of connection types to establish.
+          example:
+          - logs
+          items:
+            $ref: '#/components/schemas/OrgConnectionTypeEnum'
+          minItems: 1
+          type: array
+      required:
+      - connection_types
+      type: object
+    OrgConnectionCreateRelationships:
+      description: Relationships for org connection creation.
+      properties:
+        sink_org:
+          $ref: '#/components/schemas/OrgConnectionOrgRelationship'
+      required:
+      - sink_org
+      type: object
+    OrgConnectionCreateRequest:
+      description: Request to create an org connection.
+      properties:
+        data:
+          $ref: '#/components/schemas/OrgConnectionCreate'
+      required:
+      - data
+      type: object
+    OrgConnectionListResponse:
+      description: Response containing a list of org connections.
+      properties:
+        data:
+          description: List of org connections.
+          items:
+            $ref: '#/components/schemas/OrgConnection'
+          type: array
+        meta:
+          $ref: '#/components/schemas/OrgConnectionListResponseMeta'
+      required:
+      - data
+      type: object
+    OrgConnectionListResponseMeta:
+      description: Pagination metadata.
+      properties:
+        page:
+          $ref: '#/components/schemas/OrgConnectionListResponseMetaPage'
+      type: object
+    OrgConnectionListResponseMetaPage:
+      description: Page information.
+      properties:
+        total_count:
+          description: Total number of org connections.
+          example: 0
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: Total number of org connections matching the filter.
+          example: 0
+          format: int64
+          type: integer
+      type: object
+    OrgConnectionOrgRelationship:
+      description: Org relationship.
+      properties:
+        data:
+          $ref: '#/components/schemas/OrgConnectionOrgRelationshipData'
+      type: object
+    OrgConnectionOrgRelationshipData:
+      description: The definition of `OrgConnectionOrgRelationshipData` object.
+      properties:
+        id:
+          description: Org UUID.
+          example: f9ec96b0-8c8a-4b0a-9b0a-1b2c3d4e5f6a
+          type: string
+        name:
+          description: Org name.
+          example: Example Org
+          type: string
+        type:
+          $ref: '#/components/schemas/OrgConnectionOrgRelationshipDataType'
+      type: object
+    OrgConnectionOrgRelationshipDataType:
+      description: The type of the organization relationship.
+      enum:
+      - orgs
+      example: orgs
+      type: string
+      x-enum-varnames:
+      - ORGS
+    OrgConnectionRelationships:
+      description: Related organizations and user.
+      properties:
+        created_by:
+          $ref: '#/components/schemas/OrgConnectionUserRelationship'
+        sink_org:
+          $ref: '#/components/schemas/OrgConnectionOrgRelationship'
+        source_org:
+          $ref: '#/components/schemas/OrgConnectionOrgRelationship'
+      type: object
+    OrgConnectionResponse:
+      description: Response containing a single org connection.
+      properties:
+        data:
+          $ref: '#/components/schemas/OrgConnection'
+      required:
+      - data
+      type: object
+    OrgConnectionType:
+      description: Org connection type.
+      enum:
+      - org_connection
+      example: org_connection
+      type: string
+      x-enum-varnames:
+      - ORG_CONNECTION
+    OrgConnectionTypeEnum:
+      description: Available connection types between organizations.
+      enum:
+      - logs
+      - metrics
+      example: logs
+      type: string
+      x-enum-varnames:
+      - LOGS
+      - METRICS
+    OrgConnectionUpdate:
+      description: Org connection update data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OrgConnectionUpdateAttributes'
+        id:
+          description: The unique identifier of the org connection.
+          example: f9ec96b0-8c8a-4b0a-9b0a-1b2c3d4e5f6a
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/OrgConnectionType'
+      required:
+      - type
+      - id
+      - attributes
+      type: object
+    OrgConnectionUpdateAttributes:
+      description: Attributes for updating an org connection.
+      properties:
+        connection_types:
+          description: Updated list of connection types.
+          example:
+          - logs
+          - metrics
+          items:
+            $ref: '#/components/schemas/OrgConnectionTypeEnum'
+          minItems: 1
+          type: array
+      required:
+      - connection_types
+      type: object
+    OrgConnectionUpdateRequest:
+      description: Request to update an org connection.
+      properties:
+        data:
+          $ref: '#/components/schemas/OrgConnectionUpdate'
+      required:
+      - data
+      type: object
+    OrgConnectionUserRelationship:
+      description: User relationship.
+      properties:
+        data:
+          $ref: '#/components/schemas/OrgConnectionUserRelationshipData'
+      type: object
+    OrgConnectionUserRelationshipData:
+      description: The data for a user relationship.
+      properties:
+        id:
+          description: User UUID.
+          example: usr123abc456
+          type: string
+        name:
+          description: User name.
+          example: John Doe
+          type: string
+        type:
+          $ref: '#/components/schemas/OrgConnectionUserRelationshipDataType'
+      type: object
+    OrgConnectionUserRelationshipDataType:
+      description: The type of the user relationship.
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
     Organization:
       description: Organization object.
       properties:
@@ -47308,6 +47566,8 @@ components:
               is not required to set downtimes.
             monitors_read: View monitors.
             monitors_write: Edit, delete, and resolve individual monitors.
+            org_connections_read: Read cross organization connections.
+            org_connections_write: Create, edit, and delete cross organization connections.
             org_management: Edit org configurations, including authentication and
               certain security preferences such as configuring SAML, renaming an org,
               configuring allowed login methods, creating child orgs, subscribing
@@ -62718,6 +62978,175 @@ paths:
         - org_management
       x-undo:
         type: idempotent
+  /api/v2/org_connections:
+    get:
+      description: Returns a list of org connections.
+      operationId: ListOrgConnections
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrgConnectionListResponse'
+          description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_connections_read
+      summary: List Org Connections
+      tags:
+      - Org Connections
+      x-menu-order: 100
+      x-permission:
+        operator: OR
+        permissions:
+        - org_connections_read
+      x-undo:
+        type: safe
+    post:
+      description: Create a new org connection between the current org and a target
+        org.
+      operationId: CreateOrgConnections
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrgConnectionCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrgConnectionResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_connections_write
+      summary: Create Org Connection
+      tags:
+      - Org Connections
+      x-codegen-request-body-name: body
+      x-given:
+        org_connection:
+          parameters:
+          - name: body
+            origin: request
+            value: "{\n  \"data\": {\n    \"type\": \"org_connection\",\n    \"relationships\":
+              {\n      \"sink_org\": {\n        \"data\": {\n          \"type\": \"orgs\",\n
+              \         \"id\": \"83999dcd-7f97-11f0-8de1-1ecf66f1aa85\"\n        }\n
+              \     }\n    },\n    \"attributes\": {\n      \"connection_types\":
+              [\"logs\"]\n    }\n  }\n}"
+          step: there is a valid "org_connection" in the system
+      x-menu-order: 101
+      x-permission:
+        operator: OR
+        permissions:
+        - org_connections_write
+      x-undo:
+        operationId: DeleteOrgConnections
+        parameters:
+        - name: connection_id
+          source: data.id
+        type: unsafe
+  /api/v2/org_connections/{connection_id}:
+    delete:
+      description: Delete an existing org connection.
+      operationId: DeleteOrgConnections
+      parameters:
+      - $ref: '#/components/parameters/OrgConnectionId'
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_connections_write
+      summary: Delete Org Connection
+      tags:
+      - Org Connections
+      x-menu-order: 103
+      x-permission:
+        operator: OR
+        permissions:
+        - org_connections_write
+      x-undo:
+        type: idempotent
+    patch:
+      description: Update an existing org connection.
+      operationId: UpdateOrgConnections
+      parameters:
+      - $ref: '#/components/parameters/OrgConnectionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrgConnectionUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrgConnectionResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_connections_write
+      summary: Update Org Connection
+      tags:
+      - Org Connections
+      x-menu-order: 102
+      x-permission:
+        operator: OR
+        permissions:
+        - org_connections_write
+      x-undo:
+        type: idempotent
   /api/v2/permissions:
     get:
       description: Returns a list of all permissions, including name, description,
@@ -75199,6 +75628,11 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/api/latest/opsgenie-integration
   name: Opsgenie Integration
+- description: Manage connections between organizations. Org connections allow for
+    controlled sharing of data between different Datadog organizations. See the [Cross-Organization
+    Visibiltiy](https://docs.datadoghq.com/account_management/org_settings/cross_org_visibility/)
+    page for more information.
+  name: Org Connections
 - description: Create, edit, and manage your organizations. Read more about [multi-org
     accounts](https://docs.datadoghq.com/account_management/multi_organization).
   externalDocs:
