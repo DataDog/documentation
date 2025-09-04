@@ -66,9 +66,12 @@ Hover over methods in the profile to see specific metrics about the methods that
 
 {{< img src="profiler/compare_tooltip.png" alt="Hover over a method in the profile to see metrics comparison" >}}
 
+
 ### Comparing a profile to a previous time period
 
-On the Profiler Search view, select a profile from the list. Click **Compare** to open the comparison view. By default, the selected profile is shown as Profile B. For Profile A, select an aggregation time frame and tags, or a specific profile ID.
+From the single profile views, click **⇄ Compare** to open the comparison view.
+
+By default, the selected profile is shown as Profile B. For Profile A, select an aggregation time frame and tags, or a specific profile ID.
 
 Select the metric you want to compare (the list varies based on code language). This can be helpful, for example, for looking at allocation spikes while investigating CPU profiles.
 
@@ -79,7 +82,7 @@ Select the metric you want to compare (the list varies based on code language). 
 
 On the Explorer view, select a service to see its aggregated profile for a particular metric (for example, wall time) over the selected time frame. Then click **Compare To** to compare it to the aggregated profile of another version.
 
-{{< img src="profiler/compare_recent_versions.mp4" alt="Opening the comparison view for two versions." video="true">}}
+{{< img src="profiler/compare_versions.mp4" alt="Opening the comparison view for two versions." video="true">}}
 
 ## Further reading
 
