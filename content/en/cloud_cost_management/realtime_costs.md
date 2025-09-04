@@ -1,6 +1,6 @@
 ---
 title: Real-Time Costs
-private: true
+private: false
 description: View and analyze cloud spend in real time.
 further_reading:
 - link: "/cloud_cost_management/"
