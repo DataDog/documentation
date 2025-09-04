@@ -1,5 +1,5 @@
 ---
-title: Service renaming
+title: Service Renaming
 further_reading:
 - link: "tracing/services/inferred_services"
   tag: "Documentation"
@@ -14,7 +14,7 @@ further_reading:
 You can rename inferred services, datastores, and queues in Datadog to make them easier to identify and manage. Renaming rules let you override the `peer.service` tag on spans with custom names, or generate names dynamically using tags and regular expressions.  
 
 Renaming is useful when:
-- A default name does not match your preferences or conventions.  
+- The default name does not match your preferences or conventions.  
 - Services that you expect to appear as one are split into multiple inferred entities.  
 - Multiple components are grouped under one name, but you want them represented separately.  
 
