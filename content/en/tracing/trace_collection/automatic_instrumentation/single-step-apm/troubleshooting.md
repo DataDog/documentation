@@ -80,6 +80,18 @@ To enable debug logs:
 
 There are several configuration mechanisms that can block or alter injection behavior.
 
+### Storage requirements
+
+SSI downloads language tracing libraries and an injector package onto each host. The amount of disk space required depends on the number of languages in use and the number of pods being instrumented. A rough estimate is:
+
+<div style="text-align:center;">
+  <pre><code>[sum of the language library sizes]
++
+[injector package size] * [number of injected pods per host]</code></pre>
+</div>
+
+Because library packages are updated frequently and may grow when support for new language versions is added, disk usage can change over time. If your environment has limited disk space, monitor package sizes and allow extra capacity to avoid injection failures.
+
 ### Injector version
 
 To set the injector version:
