@@ -26,6 +26,8 @@ further_reading:
 
 Notebooks are collaborative rich text documents that give you all the power of Datadog graphs. Multiple users can work together to put together an investigation or postmortem featuring live data from your incident. Notebooks are also great for runbooks and documentation featuring real insights into your systems alongside your content.
 
+Learning week demo
+
 ## Creating a notebook
 
 You can create a notebook in two places:
