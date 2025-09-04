@@ -1,0 +1,10 @@
+{
+  "data": {
+    "attributes": {
+      "description": "Investigations done in case management",
+      "emoji": "\ud83d\udc51",
+      "name": "Investigation"
+    },
+    "type": "case_type"
+  }
+}
