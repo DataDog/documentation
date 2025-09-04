@@ -1,4 +1,4 @@
-1. Add a **Rule name** to configure the rule name that appears in the detection rules list view and the title of the Security Signal.
+1. Enter a **Rule name**. The name appears in the detection rules list view and the title of the security signal.
 1. In the **Rule message** section, use [notification variables][201] and Markdown to customize the notifications sent when a signal is generated.
     - You can use [template variables][202] in the notification to inject dynamic context from triggered logs directly into a security signal and its associated notifications.
     - See the [Notification Variables documentation][201] for more information and examples.

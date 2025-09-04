@@ -30,13 +30,13 @@ Select the detection method you want to use for creating signals.
 1. (Optional) In the **Count** dropdown menu, select attributes whose unique values are counted over the specified time frame.
 1. (Optional) In the **group by** dropdown menu, select attributes you want to group by.
     - The defined `group by` generates a signal for each `group by` value.
-    - Typically, the `group by` is an entity (like user, or IP). The `group by` is also used to [join the queries together](#joining-queries).
+    - Typically, the `group by` is an entity (like user, or IP). The `group by` is also used to [join the queries together](#joining-queries-threshold).
 1. (Optional) You can [filter logs using references tables](#filter-ref-threshold):
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
-    1. Select your reference table in the dropdown menu.
-    1. Select the log field to join on.
+    1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
+    1. In the **where field** dropdown menu, select the log field to join on.
     1. Select the **IN** or **NOT IN** operator to filter in or out matching logs.
-    1. Select the Reference Table column to join on.
+    1. In the **column** dropdown menu, select the Reference Table column to join on.
     1. (Optional) Select Reference Table columns used to enrich logs.
     1. (Optional) Filter logs by directly querying data in Reference Table columns.
 1. (Optional) To use [unit testing](#unit-testing-threshold) to test your rules against sample logs, click **Unit Test**.
@@ -77,16 +77,17 @@ Select the detection method you want to use for creating signals.
 
 1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
-1. In the **Detect new value** dropdown menu, select the attributes you want to detect. See the [learned value example](#learned-value-example)
+1. In the **Detect new value** dropdown menu, select the attributes you want to detect. See the [learned value example](#learned-value-example) for more information.
 1. (Optional) Define a signal grouping in the **group by** dropdown menu.
     - The defined `group by` generates a signal for each `group by` value.
     - Typically, the `group by` is an entity (like user or IP address).
+1. In the dropdown menu to the right of **group by**, select the learning duration. See the [learned value example](#learned-value-example) for more information.
 1. (Optional) You can [filter logs using references tables](#filter-ref-threshold):
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
-    1. Select your reference table in the dropdown menu.
-    1. Select the log field to join on.
+    1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
+    1. In the **where field** dropdown menu, select the log field to join on.
     1. Select the **IN** or **NOT IN** operator to filter in or out matching logs.
-    1. Select the Reference Table column to join on.
+    1. In the **column** dropdown menu, select the Reference Table column to join on.
     1. (Optional) Select Reference Table columns used to enrich logs.
     1. (Optional) Filter logs by directly querying data in Reference Table columns.
 1. (Optional) To use [unit testing](#unit-testing-threshold) to test your rules against sample logs, click **Unit Test**.
@@ -125,17 +126,17 @@ Select the detection method you want to use for creating signals.
 
 1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
-1. (Optional) In the **Count unique** dropdown menu, select attributes whose unique values you want to count during the specified time frame.
+1. (Optional) In the **Count** dropdown menu, select attributes whose unique values you want to count during the specified time frame.
 1. (Optional) In the **group by** dropdown menu, select attributes you want to group by.
     - The defined `group by` generates a signal for each `group by` value.
     - Typically, the `group by` is an entity (like user, or IP). The Group By is also used to [join the queries together](#joining-queries).
     - Anomaly detection inspects how the `group by` attribute has behaved in the past. If a `group by` attribute is seen for the first time (for example, the first time an IP is communicating with your system) and is anomalous, it does not generate a security signal because the anomaly detection algorithm has no historical data to base its decision on.
 1. (Optional) You can [filter logs using references tables](#filter-ref-anomaly):
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
-    1. Select your reference table in the dropdown menu.
-    1. Select the log field to join on.
+    1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
+    1. In the **where field** dropdown menu, select the log field to join on.
     1. Select the **IN** or **NOT IN** operator to filter in or out matching logs.
-    1. Select the Reference Table column to join on.
+    1. In the **column** dropdown menu, select the Reference Table column to join on.
     1. (Optional) Select Reference Table columns used to enrich logs.
     1. (Optional) Filter logs by directly querying data in Reference Table columns.
 1. (Optional) To use [unit testing](#unit-testing-anomaly) to test your rules against sample logs, click **Unit Test**.
@@ -169,15 +170,15 @@ Select the detection method you want to use for creating signals.
 1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Detect anomaly** field, specify the fields whose values you want to analyze.
-1. In the **Group by** field, specify the fields you want to group by.
+1. In the **group by** field, specify the fields you want to group by.
 1. In the **Learn for** dropdown menu, select the number of days for the learning period. During the learning period, the rule sets a baseline of normal field values and does not generate any signals.
     - **Note**: If the detection rule is modified, the learning period restarts at day `0`.
 1. (Optional) You can [filter logs using references tables](#filter-ref-content-anomaly):
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
-    1. Select your reference table in the dropdown menu.
-    1. Select the log field to join on.
+    1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
+    1. In the **where field** dropdown menu, select the log field to join on.
     1. Select the **IN** or **NOT IN** operator to filter in or out matching logs.
-    1. Select the Reference Table column to join on.
+    1. In the **column** dropdown menu, select the Reference Table column to join on.
     1. (Optional) Select Reference Table columns used to enrich logs.
     1. (Optional) Filter logs by directly querying data in Reference Table columns.
 1. (Optional) To use [unit testing](#unit-testing-content-anomaly) to test your rules against sample logs, click **Unit Test**.
@@ -209,7 +210,7 @@ Select the detection method you want to use for creating signals.
 1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **User attribute** dropdown menu, select the log attribute that contains the user ID. This can be an identifier like an email address, user name, or account identifier.
-1. The **Location attribute** value is set to `@network.client.geoip`.
+1. The **Location attribute** value is automatically set to `@network.client.geoip`.
     - The `location attribute` specifies which field holds the geographic information for a log.
     - The only supported value is `@network.client.geoip`, which is enriched by the [GeoIP parser][3] to give a log location information based on the client's IP address.
 1. Click the **Baseline user locations** checkbox if you want Datadog to learn regular access locations before triggering a signal.
@@ -218,10 +219,10 @@ Select the detection method you want to use for creating signals.
     - See [How the impossible detection method works][4] for more information.
 1. (Optional) You can [filter logs using references tables](#filter-ref-impossible):
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
-    1. Select your reference table in the dropdown menu.
-    1. Select the log field to join on.
+    1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
+    1. In the **where field** dropdown menu, select the log field to join on.
     1. Select the **IN** or **NOT IN** operator to filter in or out matching logs.
-    1. Select the Reference Table column to join on.
+    1. In the **column** dropdown menu, select the Reference Table column to join on.
     1. (Optional) Select Reference Table columns used to enrich logs.
     1. (Optional) Filter logs by directly querying data in Reference Table columns.
 1. (Optional) To use [unit testing](#unit-testing-impossible) to test your rules against sample logs, click **Unit Test**.
@@ -457,7 +458,6 @@ In this example, when there are more than five failed logins and at least one su
     - See [Time windows](#time-windows-signal-correlation) for more information.
 {{% cloud_siem/enable_decrease_severity %}}
     - See [Decreasing non-production severity](#decreasing-non-production-severity-signal-correlation) for more information.
-{{% cloud_siem/enable_group_by %}}
 
 #### Time windows {#time-windows-signal-correlation}
 

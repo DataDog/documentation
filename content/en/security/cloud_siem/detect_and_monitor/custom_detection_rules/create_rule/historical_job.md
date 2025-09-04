@@ -34,10 +34,10 @@ TKTK
     - Typically, the `group by` is an entity (like user, or IP). The `group by` is also used to [join the queries together](#joining-queries).
 1. (Optional) You can [filter logs using references tables](#filter-ref-threshold):
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
-    1. Select your reference table in the dropdown menu.
-    1. Select the log field to join on.
+    1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
+    1. In the **where field** dropdown menu, select the log field to join on.
     1. Select the **IN** or **NOT IN** operator to filter in or out matching logs.
-    1. Select the Reference Table column to join on.
+    1. In the **column** dropdown menu, select the Reference Table column to join on.
     1. (Optional) Select Reference Table columns used to enrich logs.
     1. (Optional) Filter logs by directly querying data in Reference Table columns.
 1. (Optional) To use [unit testing](#unit-testing-threshold) to test your rules against sample logs, click **Unit Test**.
@@ -78,16 +78,17 @@ TKTK
 
 1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
-1. In the **Detect new value** dropdown menu, select the attributes you want to detect. See the [learned value example](#learned-value-example)
+1. In the **Detect new value** dropdown menu, select the attributes you want to detect. See the [learned value example](#learned-value-example) for more information.
 1. (Optional) Define a signal grouping in the **group by** dropdown menu.
     - The defined `group by` generates a signal for each `group by` value.
     - Typically, the `group by` is an entity (like user or IP address).
+1. In the dropdown menu to the right of **group by**, select the learning duration. See the [learned value example](#learned-value-example) for more information.
 1. (Optional) You can [filter logs using references tables](#filter-ref-threshold):
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
-    1. Select your reference table in the dropdown menu.
-    1. Select the log field to join on.
+    1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
+    1. In the **where field** dropdown menu, select the log field to join on.
     1. Select the **IN** or **NOT IN** operator to filter in or out matching logs.
-    1. Select the Reference Table column to join on.
+    1. In the **column** dropdown menu, select the Reference Table column to join on.
     1. (Optional) Select Reference Table columns used to enrich logs.
     1. (Optional) Filter logs by directly querying data in Reference Table columns.
 1. (Optional) To use [unit testing](#unit-testing-threshold) to test your rules against sample logs, click **Unit Test**.
@@ -133,10 +134,10 @@ TKTK
     - Anomaly detection inspects how the `group by` attribute has behaved in the past. If a `group by` attribute is seen for the first time (for example, the first time an IP is communicating with your system) and is anomalous, it does not generate a security signal because the anomaly detection algorithm has no historical data to base its decision on.
 1. (Optional) You can [filter logs using references tables](#filter-ref-anomaly):
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
-    1. Select your reference table in the dropdown menu.
-    1. Select the log field to join on.
+    1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
+    1. In the **where field** dropdown menu, select the log field to join on.
     1. Select the **IN** or **NOT IN** operator to filter in or out matching logs.
-    1. Select the Reference Table column to join on.
+    1. In the **column** dropdown menu, select the Reference Table column to join on.
     1. (Optional) Select Reference Table columns used to enrich logs.
     1. (Optional) Filter logs by directly querying data in Reference Table columns.
 1. (Optional) To use [unit testing](#unit-testing-anomaly) to test your rules against sample logs, click **Unit Test**.
@@ -175,10 +176,10 @@ TKTK
     - **Note**: If the detection rule is modified, the learning period restarts at day `0`.
 1. (Optional) You can [filter logs using references tables](#filter-ref-content-anomaly):
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
-    1. Select your reference table in the dropdown menu.
-    1. Select the log field to join on.
+    1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
+    1. In the **where field** dropdown menu, select the log field to join on.
     1. Select the **IN** or **NOT IN** operator to filter in or out matching logs.
-    1. Select the Reference Table column to join on.
+    1. In the **column** dropdown menu, select the Reference Table column to join on.
     1. (Optional) Select Reference Table columns used to enrich logs.
     1. (Optional) Filter logs by directly querying data in Reference Table columns.
 1. (Optional) To use [unit testing](#unit-testing-content-anomaly) to test your rules against sample logs, click **Unit Test**.
@@ -219,10 +220,10 @@ TKTK
     - See [How the impossible detection method works][4] for more information.
 1. (Optional) You can [filter logs using references tables](#filter-ref-impossible):
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
-    1. Select your reference table in the dropdown menu.
-    1. Select the log field to join on.
+    1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
+    1. In the **where field** dropdown menu, select the log field to join on.
     1. Select the **IN** or **NOT IN** operator to filter in or out matching logs.
-    1. Select the Reference Table column to join on.
+    1. In the **column** dropdown menu, select the Reference Table column to join on.
     1. (Optional) Select Reference Table columns used to enrich logs.
     1. (Optional) Filter logs by directly querying data in Reference Table columns.
 1. (Optional) To use [unit testing](#unit-testing-impossible) to test your rules against sample logs, click **Unit Test**.
