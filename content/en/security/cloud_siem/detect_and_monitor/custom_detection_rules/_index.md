@@ -66,6 +66,16 @@ The following detection methods are available for custom detection rule or histo
 - [Third party][8]: Maps third-party security logs to signals, setting the severity based on log attributes.
 - [Signal correlation][9]: Combines multiple signals together to generate a new signal so you can alert on more complex use cases and reduce alert fatigue.
 
+## Filter logs based on Reference Tables
+
+<div class="alert alert-warning">Reference Tables containing over 1,000,000 rows cannot be used to filter events. See <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Add Custom Metadata with Reference Tables</a> for more information on how to create and manage Reference Tables. </div>
+
+Reference Tables allow you to combine metadata with logs, providing more information to resolve application issues. When you define a query for a rule, you can add a query filter based on a Reference Table to perform lookup queries. For more information on creating and managing this feature, see the [Reference Tables][10] guide.
+
+In the following example, a Reference Table containing product information is used to filter and enrich logs:
+
+{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
+
 ## Rule Version History
 
 {{< img src="/security/security_monitoring/detection_rules/rule_version_history_20250207.png" alt="The version history for a GitHub OAuth access token compromise showing" style="width:80%;" >}}
@@ -98,3 +108,4 @@ To see the version history of a rule:
 [7]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/impossible_travel/
 [8]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/third_party/
 [9]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/signal_correlation_rules/
+[10]: /integrations/guide/reference-tables/

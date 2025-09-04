@@ -30,7 +30,8 @@ Select the detection method you want to use for creating signals.
 1. (Optional) In the **Count** dropdown menu, select attributes whose unique values are counted over the specified time frame.
 1. (Optional) In the **group by** dropdown menu, select attributes you want to group by.
     - The defined `group by` generates a signal for each `group by` value.
-    - Typically, the `group by` is an entity (like user, or IP). The `group by` is also used to [join the queries together](#joining-queries-threshold).
+    - Typically, the `group by` is an entity (like user, or IP). The `group by` is also used to join the queries together.
+    - Joining logs that span a time frame can increase the confidence or severity of the security signal. For example, to detect a successful brute force attack, both successful and unsuccessful authentication logs must be correlated for a user.
 1. (Optional) You can [filter logs using references tables](#filter-ref-threshold):
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
     1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
@@ -39,7 +40,7 @@ Select the detection method you want to use for creating signals.
     1. In the **column** dropdown menu, select the Reference Table column to join on.
     1. (Optional) Select Reference Table columns used to enrich logs.
     1. (Optional) Filter logs by directly querying data in Reference Table columns.
-1. (Optional) To use [unit testing](#unit-testing-threshold) to test your rules against sample logs, click **Unit Test**.
+1. (Optional) To test your rules against sample logs, click **Unit Test**.
     1. To construct a sample log, you can:  
         1. Navigate to [Log Explorer][2].  
         1. Enter the same detection rule query in the search bar.  
@@ -50,22 +51,6 @@ Select the detection method you want to use for creating signals.
     1. Click **Run Query Test**.
 
 **Note**: The query applies to all ingested logs and events.
-
-#### Joining queries {#joining-queries-threshold}
-
-{{% cloud_siem/joining_queries %}}
-
-{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
-
-#### Filter logs based on Reference Tables {#filter-ref-threshold}
-
-{{% filter_by_reference_tables %}}
-
-{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
-
-#### Unit testing {#unit-testing-threshold}
-
-{{% cloud_siem/unit_test %}}
 
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
@@ -77,11 +62,18 @@ Select the detection method you want to use for creating signals.
 
 1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
-1. In the **Detect new value** dropdown menu, select the attributes you want to detect. See the [learned value example](#learned-value-example) for more information.
+1. In the **Detect new value** dropdown menu, select the attributes you want to detect.
+    - For example, if you want to create a query for successful user authentication with the following settings:
+        - **Detect new value** is `country`
+        - **group by** is `user`
+        - Learning duration is `after 7 days`
+    <br>Then, logs coming in over the next 7 days are evaluated with those configured values. If a log comes in with a new value after the learning duration (`7 days`), a signal is generated, and the new value is learned to prevent future signals with this value.
+    - You can also identify users and entities using multiple **Detect new value** attributes in a single query.
+        - For example, if you want to detect when a user signs in from a new device and from a country that they've never signed in from before, add `device_id` and `country_name` to the **Detect new value** field.
 1. (Optional) Define a signal grouping in the **group by** dropdown menu.
     - The defined `group by` generates a signal for each `group by` value.
     - Typically, the `group by` is an entity (like user or IP address).
-1. In the dropdown menu to the right of **group by**, select the learning duration. See the [learned value example](#learned-value-example) for more information.
+1. In the dropdown menu to the right of **group by**, select the learning duration.
 1. (Optional) You can [filter logs using references tables](#filter-ref-threshold):
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
     1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
@@ -90,7 +82,7 @@ Select the detection method you want to use for creating signals.
     1. In the **column** dropdown menu, select the Reference Table column to join on.
     1. (Optional) Select Reference Table columns used to enrich logs.
     1. (Optional) Filter logs by directly querying data in Reference Table columns.
-1. (Optional) To use [unit testing](#unit-testing-threshold) to test your rules against sample logs, click **Unit Test**.
+1. (Optional) To test your rules against sample logs, click **Unit Test**.
     1. To construct a sample log, you can:  
         1. Navigate to [Log Explorer][2].  
         1. Enter the same detection rule query in the search bar.  
@@ -101,20 +93,6 @@ Select the detection method you want to use for creating signals.
     1. Click **Run Query Test**.
 
 **Note**: The query applies to all ingested logs and events.
-
-#### Learned value example
-
-{{% cloud_siem/learned_value_example %}}
-
-#### Filter logs based on Reference Tables {#filter-ref-new-value}
-
-{{% filter_by_reference_tables %}}
-
-{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
-
-#### Unit testing {#unit-testing-new-value}
-
-{{% cloud_siem/unit_test %}}
 
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
@@ -129,7 +107,8 @@ Select the detection method you want to use for creating signals.
 1. (Optional) In the **Count** dropdown menu, select attributes whose unique values you want to count during the specified time frame.
 1. (Optional) In the **group by** dropdown menu, select attributes you want to group by.
     - The defined `group by` generates a signal for each `group by` value.
-    - Typically, the `group by` is an entity (like user, or IP). The Group By is also used to [join the queries together](#joining-queries).
+    - Typically, the `group by` is an entity (like user, or IP). The `group by` is also used to join the queries together.
+    - Joining logs that span a time frame can increase the confidence or severity of the security signal. For example, to detect a successful brute force attack, both successful and unsuccessful authentication logs must be correlated for a user.
     - Anomaly detection inspects how the `group by` attribute has behaved in the past. If a `group by` attribute is seen for the first time (for example, the first time an IP is communicating with your system) and is anomalous, it does not generate a security signal because the anomaly detection algorithm has no historical data to base its decision on.
 1. (Optional) You can [filter logs using references tables](#filter-ref-anomaly):
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
@@ -139,7 +118,7 @@ Select the detection method you want to use for creating signals.
     1. In the **column** dropdown menu, select the Reference Table column to join on.
     1. (Optional) Select Reference Table columns used to enrich logs.
     1. (Optional) Filter logs by directly querying data in Reference Table columns.
-1. (Optional) To use [unit testing](#unit-testing-anomaly) to test your rules against sample logs, click **Unit Test**.
+1. (Optional) To test your rules against sample logs, click **Unit Test**.
     1. To construct a sample log, you can:  
         1. Navigate to [Log Explorer][2].  
         1. Enter the same detection rule query in the search bar.  
@@ -151,16 +130,6 @@ Select the detection method you want to use for creating signals.
 
 **Note**: The query applies to all ingested logs and events.
 
-#### Filter logs based on Reference Tables {#filter-ref-anomaly}
-
-{{% filter_by_reference_tables %}}
-
-{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
-
-#### Unit testing {#unit-testing-anomaly}
-
-{{% cloud_siem/unit_test %}}
-
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
 
@@ -171,6 +140,9 @@ Select the detection method you want to use for creating signals.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Detect anomaly** field, specify the fields whose values you want to analyze.
 1. In the **group by** field, specify the fields you want to group by.
+    - The defined `group by` generates a signal for each `group by` value.
+    - Typically, the `group by` is an entity (like user, or IP). The `group by` is also used to join the queries together.
+    - Joining logs that span a time frame can increase the confidence or severity of the security signal. For example, to detect a successful brute force attack, both successful and unsuccessful authentication logs must be correlated for a user.
 1. In the **Learn for** dropdown menu, select the number of days for the learning period. During the learning period, the rule sets a baseline of normal field values and does not generate any signals.
     - **Note**: If the detection rule is modified, the learning period restarts at day `0`.
 1. (Optional) You can [filter logs using references tables](#filter-ref-content-anomaly):
@@ -181,7 +153,7 @@ Select the detection method you want to use for creating signals.
     1. In the **column** dropdown menu, select the Reference Table column to join on.
     1. (Optional) Select Reference Table columns used to enrich logs.
     1. (Optional) Filter logs by directly querying data in Reference Table columns.
-1. (Optional) To use [unit testing](#unit-testing-content-anomaly) to test your rules against sample logs, click **Unit Test**.
+1. (Optional) To test your rules against sample logs, click **Unit Test**.
     1. To construct a sample log, you can:  
         1. Navigate to [Log Explorer][2].  
         1. Enter the same detection rule query in the search bar.  
@@ -190,16 +162,6 @@ Select the detection method you want to use for creating signals.
     1. Navigate back to the **Unit Test** modal, and then paste the log into the text box. Edit the sample as needed for your use case.
     1. Toggle the switch for **Query is expected to match based on the example event** to fit your use case.
     1. Click **Run Query Test**.
-
-#### Filter logs based on Reference Tables {#filter-ref-content-anomaly}
-
-{{% filter_by_reference_tables %}}
-
-{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
-
-#### Unit testing {#unit-testing-content-anomaly}
-
-{{% cloud_siem/unit_test %}}
 
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
@@ -225,7 +187,7 @@ Select the detection method you want to use for creating signals.
     1. In the **column** dropdown menu, select the Reference Table column to join on.
     1. (Optional) Select Reference Table columns used to enrich logs.
     1. (Optional) Filter logs by directly querying data in Reference Table columns.
-1. (Optional) To use [unit testing](#unit-testing-impossible) to test your rules against sample logs, click **Unit Test**.
+1. (Optional) To test your rules against sample logs, click **Unit Test**.
     1. To construct a sample log, you can:  
         1. Navigate to [Log Explorer][2].  
         1. Enter the same detection rule query in the search bar.  
@@ -236,16 +198,6 @@ Select the detection method you want to use for creating signals.
     1. Click **Run Query Test**.
 
 **Note**: All logs and events matching this query are analyzed for a potential impossible travel.
-
-#### Filter logs based on Reference Tables {#filter-ref-impossible}
-
-{{% filter_by_reference_tables %}}
-
-{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
-
-#### Unit testing {#unit-testing-impossible}
-
-{{% cloud_siem/unit_test %}}
 
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
@@ -258,7 +210,7 @@ Select the detection method you want to use for creating signals.
 1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Trigger for each new** dropdown menu, select the attributes where each attribute generates a signal for each new attribute value over 24-hour roll-up period.
-1. (Optional) To use [unit testing](#unit-testing-third-party) to test your rules against sample logs, click **Unit Test**.
+1. (Optional) To test your rules against sample logs, click **Unit Test**.
     1. To construct a sample log, you can:  
         1. Navigate to [Log Explorer][2].  
         1. Enter the same detection rule query in the search bar.  
@@ -271,10 +223,6 @@ Select the detection method you want to use for creating signals.
 **Note**: The query applies to all ingested logs and events.
 
 Click **Add Root Query** to add additional queries.
-
-#### Unit testing {#unit-testing-third-party}
-
-{{% cloud_siem/unit_test %}}
 
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
@@ -318,21 +266,15 @@ In this example, when there are more than five failed logins and at least one su
 
 ### Other parameters
 
+#### 1. Rule multi-triggering {#rule-multi-triggering-threshold}
+
 {{% cloud_siem/rule_multi_triggering %}}
-    - See [Time windows](#time-windows-threshold) for more information.
+
+#### 2. Decrease severity for non-production environments {#decrease-severity-threshold}
 {{% cloud_siem/enable_decrease_severity %}}
-    - See [Decreasing non-production severity](#decreasing-non-production-severity-threshold) for more information.
+
+#### 3. Enable optional group by {#enable-group-by-threshold}
 {{% cloud_siem/enable_group_by %}}
-
-#### Time windows {#time-windows-threshold}
-
-{{% security-rule-time-windows %}}
-
-**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
-
-#### Decreasing non-production severity {#decreasing-non-production-severity-threshold}
-
-{{% cloud_siem/decreasing_non_prod_severity %}}
 
 {{% /tab %}}
 {{% tab "New Value" %}}
@@ -341,22 +283,20 @@ In this example, when there are more than five failed logins and at least one su
 
 ### Other parameters
 
+#### 1. Forget value {#forget-value-real-time-new-value}
+
 {{% cloud_siem/forget_value %}}
+
+
+#### 2. Rule multi-triggering {#rule-multi-triggering-new-value}
+
 {{% cloud_siem/rule_multi_triggering %}}
-    - See [Time windows](#time-windows-new-value) for more information.
+
+#### 3. Decrease severity for non-production environments {#decrease-severity-new-value}
 {{% cloud_siem/enable_decrease_severity %}}
-    - See [Decreasing non-production severity](#decreasing-non-production-severity-new-value) for more information.
+
+#### 4. Enable optional group by {#enable-group-by-new-value}
 {{% cloud_siem/enable_group_by %}}
-
-#### Time windows {#time-windows-new-value}
-
-{{% security-rule-time-windows %}}
-
-**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
-
-#### Decreasing non-production severity{#decreasing-non-production-severity-new-value}
-
-{{% cloud_siem/decreasing_non_prod_severity %}}
 
 {{% /tab %}}
 {{% tab "Anomaly" %}}
@@ -365,21 +305,15 @@ In this example, when there are more than five failed logins and at least one su
 
 ### Other parameters
 
+#### 1. Rule multi-triggering {#rule-multi-triggering-anomaly}
+
 {{% cloud_siem/rule_multi_triggering %}}
-    - See [Time windows](#time-windows-anomaly) for more information.
+
+#### 2. Decrease severity for non-production environments {#decrease-severity-anomaly}
 {{% cloud_siem/enable_decrease_severity %}}
-    - See [Decreasing non-production severity](#decreasing-non-production-severity-anomaly) for more information.
+
+#### 3. Enable optional group by {#enable-group-by-anomaly}
 {{% cloud_siem/enable_group_by %}}
-
-#### Time windows {#time-windows-anomaly}
-
-{{% security-rule-time-windows %}}
-
-**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
-
-#### Decreasing non-production severity #decreasing-non-production-severity-anomaly}
-
-{{% cloud_siem/decreasing_non_prod_severity %}}
 
 {{% /tab %}}
 {{% tab "Content Anomaly" %}}
@@ -388,26 +322,17 @@ In this example, when there are more than five failed logins and at least one su
 
 ### Other parameters
 
+#### 1. Content anomaly detection option {#content-anomaly-options-real-time-content-anomaly}
 {{% cloud_siem/content_anomaly_options %}}
+
+#### 2. Rule multi-triggering {#rule-multi-triggering-anomaly}
 {{% cloud_siem/rule_multi_triggering %}}
-    - See [Time windows](#time-windows-content-anomaly) for more information.
+
+#### 3. Decrease severity for non-production environments {#decrease-severity-anomaly}
 {{% cloud_siem/enable_decrease_severity %}}
-    - See [Decreasing non-production severity](#decreasing-non-production-severity-content-anomaly) for more information.
+
+#### 4. Enable optional group by {#enable-group-by-anomaly}
 {{% cloud_siem/enable_group_by %}}
-
-#### How an event is determined to be anomalous
-
-{{% cloud_siem/how_event_determined_anomalous %}}
-
-#### Time windows {#time-windows-content-anomaly}
-
-{{% security-rule-time-windows %}}
-
-**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
-
-#### Decreasing non-production severity #decreasing-non-production-severity-content-anomaly}
-
-{{% cloud_siem/decreasing_non_prod_severity %}}
 
 {{% /tab %}}
 {{% tab "Impossible Travel" %}}
@@ -416,21 +341,15 @@ In this example, when there are more than five failed logins and at least one su
 
 ### Other parameters
 
+#### 1. Rule multi-triggering {#rule-multi-triggering-impossible-travel}
+
 {{% cloud_siem/rule_multi_triggering %}}
-    - See [Time windows](#time-windows-impossib;e) for more information.
+
+#### 2. Decrease severity for non-production environments {#decrease-severity-impossible-travel}
 {{% cloud_siem/enable_decrease_severity %}}
-    - See [Decreasing non-production severity](#decreasing-non-production-severity-impossible) for more information.
+
+#### 3. Enable optional group by {#enable-group-by-impossible-travel}
 {{% cloud_siem/enable_group_by %}}
-
-#### Time windows {#time-windows-impossible}
-
-{{% security-rule-time-windows %}}
-
-**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
-
-#### Decreasing non-production severity {#decreasing-non-production-severity-impossible}
-
-{{% cloud_siem/decreasing_non_prod_severity %}}
 
 {{% /tab %}}
 {{% tab "Third Party" %}}
@@ -439,13 +358,11 @@ In this example, when there are more than five failed logins and at least one su
 
 ### Other parameters
 
+#### 1. Decrease severity for non-production environments {#decrease-severity-third-party}
 {{% cloud_siem/enable_decrease_severity %}}
-    - See [Decreasing non-production severity](#decreasing-non-production-severity-third-party) for more information.
+
+#### 2. Enable optional group by {#enable-group-by-third-party}
 {{% cloud_siem/enable_group_by %}}
-
-#### Decreasing non-production severity {#decreasing-non-production-severity-third-party}
-
-{{% cloud_siem/decreasing_non_prod_severity %}}
 
 {{% /tab %}}
 {{% tab "Signal Correlation" %}}
@@ -454,20 +371,12 @@ In this example, when there are more than five failed logins and at least one su
 
 ### Other parameters
 
+#### 1. Rule multi-triggering {#rule-multi-triggering-signal-correlation}
+
 {{% cloud_siem/rule_multi_triggering %}}
-    - See [Time windows](#time-windows-signal-correlation) for more information.
+
+#### 2. Decrease severity for non-production environments {#decrease-severity-signal-correlation}
 {{% cloud_siem/enable_decrease_severity %}}
-    - See [Decreasing non-production severity](#decreasing-non-production-severity-signal-correlation) for more information.
-
-#### Time windows {#time-windows-signal-correlation}
-
-{{% security-rule-time-windows %}}
-
-**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
-
-#### Decreasing non-production severity {#decreasing-non-production-severity-signal-correlation}
-
-{{% cloud_siem/decreasing_non_prod_severity %}}
 
 {{% /tab %}}
 {{< /tabs >}}

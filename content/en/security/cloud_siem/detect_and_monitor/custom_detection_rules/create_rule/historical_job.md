@@ -31,8 +31,8 @@ TKTK
 1. (Optional) In the **Count** dropdown menu, select attributes whose unique values are counted over the specified time frame.
 1. (Optional) In the **group by** dropdown menu, select attributes you want to group by.
     - The defined `group by` generates a signal for each `group by` value.
-    - Typically, the `group by` is an entity (like user, or IP). The `group by` is also used to [join the queries together](#joining-queries).
-1. (Optional) You can [filter logs using references tables](#filter-ref-threshold):
+    - Typically, the `group by` is an entity (like user, or IP). The `group by` is also used to join the queries together.
+    - Joining logs that span a time frame can increase the confidence or severity of the security signal. For example, to detect a successful brute force attack, both successful and unsuccessful authentication logs must be correlated for a user.
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
     1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
     1. In the **where field** dropdown menu, select the log field to join on.
@@ -40,7 +40,7 @@ TKTK
     1. In the **column** dropdown menu, select the Reference Table column to join on.
     1. (Optional) Select Reference Table columns used to enrich logs.
     1. (Optional) Filter logs by directly querying data in Reference Table columns.
-1. (Optional) To use [unit testing](#unit-testing-threshold) to test your rules against sample logs, click **Unit Test**.
+1. (Optional) To test your rules against sample logs, click **Unit Test**.
     1. To construct a sample log, you can:  
         1. Navigate to [Log Explorer][2].  
         1. Enter the same detection rule query in the search bar.  
@@ -51,22 +51,6 @@ TKTK
     1. Click **Run Query Test**.
 
 **Note**: The query applies to all ingested logs and events.
-
-#### Joining queries {#joining-queries-threshold}
-
-{{% cloud_siem/joining_queries %}}
-
-{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
-
-#### Filter logs based on Reference Tables {#filter-ref-threshold}
-
-{{% filter_by_reference_tables %}}
-
-{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
-
-#### Unit testing {#unit-testing-threshold}
-
-{{% cloud_siem/unit_test %}}
 
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
@@ -91,7 +75,7 @@ TKTK
     1. In the **column** dropdown menu, select the Reference Table column to join on.
     1. (Optional) Select Reference Table columns used to enrich logs.
     1. (Optional) Filter logs by directly querying data in Reference Table columns.
-1. (Optional) To use [unit testing](#unit-testing-threshold) to test your rules against sample logs, click **Unit Test**.
+1. (Optional) To test your rules against sample logs, click **Unit Test**.
     1. To construct a sample log, you can:  
         1. Navigate to [Log Explorer][2].  
         1. Enter the same detection rule query in the search bar.  
@@ -106,16 +90,6 @@ TKTK
 #### Learned value example
 
 {{% cloud_siem/learned_value_example %}}
-
-#### Filter logs based on Reference Tables {#filter-ref-new-value}
-
-{{% filter_by_reference_tables %}}
-
-{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
-
-#### Unit testing {#unit-testing-new-value}
-
-{{% cloud_siem/unit_test %}}
 
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
@@ -140,7 +114,7 @@ TKTK
     1. In the **column** dropdown menu, select the Reference Table column to join on.
     1. (Optional) Select Reference Table columns used to enrich logs.
     1. (Optional) Filter logs by directly querying data in Reference Table columns.
-1. (Optional) To use [unit testing](#unit-testing-anomaly) to test your rules against sample logs, click **Unit Test**.
+1. (Optional) To test your rules against sample logs, click **Unit Test**.
     1. To construct a sample log, you can:  
         1. Navigate to [Log Explorer][2].  
         1. Enter the same detection rule query in the search bar.  
@@ -151,16 +125,6 @@ TKTK
     1. Click **Run Query Test**.
 
 **Note**: The query applies to all ingested logs and events.
-
-#### Filter logs based on Reference Tables {#filter-ref-anomaly}
-
-{{% filter_by_reference_tables %}}
-
-{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
-
-#### Unit testing {#unit-testing-anomaly}
-
-{{% cloud_siem/unit_test %}}
 
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
@@ -182,7 +146,7 @@ TKTK
     1. In the **column** dropdown menu, select the Reference Table column to join on.
     1. (Optional) Select Reference Table columns used to enrich logs.
     1. (Optional) Filter logs by directly querying data in Reference Table columns.
-1. (Optional) To use [unit testing](#unit-testing-content-anomaly) to test your rules against sample logs, click **Unit Test**.
+1. (Optional) To test your rules against sample logs, click **Unit Test**.
     1. To construct a sample log, you can:  
         1. Navigate to [Log Explorer][2].  
         1. Enter the same detection rule query in the search bar.  
@@ -191,16 +155,6 @@ TKTK
     1. Navigate back to the **Unit Test** modal, and then paste the log into the text box. Edit the sample as needed for your use case.
     1. Toggle the switch for **Query is expected to match based on the example event** to fit your use case.
     1. Click **Run Query Test**.
-
-#### Filter logs based on Reference Tables {#filter-ref-content-anomaly}
-
-{{% filter_by_reference_tables %}}
-
-{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
-
-#### Unit testing {#unit-testing-content-anomaly}
-
-{{% cloud_siem/unit_test %}}
 
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
@@ -226,7 +180,7 @@ TKTK
     1. In the **column** dropdown menu, select the Reference Table column to join on.
     1. (Optional) Select Reference Table columns used to enrich logs.
     1. (Optional) Filter logs by directly querying data in Reference Table columns.
-1. (Optional) To use [unit testing](#unit-testing-impossible) to test your rules against sample logs, click **Unit Test**.
+1. (Optional) To test your rules against sample logs, click **Unit Test**.
     1. To construct a sample log, you can:  
         1. Navigate to [Log Explorer][2].  
         1. Enter the same detection rule query in the search bar.  
@@ -237,16 +191,6 @@ TKTK
     1. Click **Run Query Test**.
 
 **Note**: All logs and events matching this query are analyzed for a potential impossible travel.
-
-#### Filter logs based on Reference Tables {#filter-ref-impossible}
-
-{{% filter_by_reference_tables %}}
-
-{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
-
-#### Unit testing {#unit-testing-impossible}
-
-{{% cloud_siem/unit_test %}}
 
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
@@ -259,7 +203,7 @@ TKTK
 1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Trigger for each new** dropdown menu, select the attributes where each attribute generates a signal for each new attribute value over 24-hour roll-up period.
-1. (Optional) To use [unit testing](#unit-testing-third-party) to test your rules against sample logs, click **Unit Test**.
+1. (Optional) To test your rules against sample logs, click **Unit Test**.
     1. To construct a sample log, you can:  
         1. Navigate to [Log Explorer][2].  
         1. Enter the same detection rule query in the search bar.  
@@ -272,10 +216,6 @@ TKTK
 **Note**: The query applies to all ingested logs and events.
 
 Click **Add Root Query** to add additional queries.
-
-#### Unit testing {#unit-testing-third-party}
-
-{{% cloud_siem/unit_test %}}
 
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
