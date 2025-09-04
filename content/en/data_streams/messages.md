@@ -2,7 +2,8 @@
 title: Messages
 ---
 
-The Messages feature allows you to view Kafka messages at specific partitions or offsets, debug poison payload problems, and better understand your data streams.
+Messages feature allows identifying the root cause of poison pill messages and to better understand data streams by inspecting message content.
+It allows viewing Kafka messages at specific partitions and offsets.
 
 <div class="alert alert-info">
    Messages is in Preview. Contact your Customer Success Manager for access.
@@ -16,12 +17,12 @@ Avro, Protobuf, and JSON are supported.
 
 ### Kafka Consumer integration
 
-[Kafka Consumer][6] integration needs to be set up on the topic you want to retrieve messages from.
+[Kafka Consumer][6] integration needs to be set up on any consumer consuming from the topic you want to retrieve messages from.
+If a topic has more than one consumer group, setting up the integration on one of these consumer groups is enough to use the feature.
 
 #### Validation
 
-1. [Run the Agent's status subcommand][10] and look for `kafka_consumer` under the Checks section.
-2. Ensure the metric `kafka.consumer_lag` is generated for the appropriate `topic`.
+Ensure that the Kafka Consumer check is running correctly by following [these instructions][11]
 
 ### Agent version
 
@@ -30,7 +31,7 @@ Ensure the agent version you are running is 7.70 or later.
 #### Validation
 
 1. [Run the Agent's status subcommand][10] and check the agent version.
-2. In Datadog, under `integrations`, `View agents`, find the agent running the Kafka Consumer integration, and check its version.
+2. In Datadog, under [integrations, View agents][12], find  the agent running the Kafka Consumer integration, and check its version.
 
 ### Remote configuration
 
@@ -38,14 +39,14 @@ Ensure [remote configuration][3] is set up for the agent running the Kafka Consu
 
 #### Validation
 
-1. In Datadog, under `organization-settings/remote-config`, check that remote configuration is enabled at the organization level.
-2. In Datadog, under `organization-settings/remote-config`, check that the agent running the Kafka Consumer integration has remote configuration enabled, and is using an API key with remote configuration enabled.
+1. In Datadog, under [Remote Configuration][13], check that remote configuration is enabled at the organization level.
+2. In Datadog, under [Remote Configuration][13], check that the agent running the Kafka Consumer integration has remote configuration enabled, and is using an API key with remote configuration enabled.
 
 ## Required permissions
 
-You must have the following permissions:
-
+You must have the following permission:
 * `Data Streams Monitoring Capture Messages`
+And, these logs permissions that are part of the Datadog Standard role:
 * `Logs Read Index Data`
 * `Logs Read Data`
 * `Logs Live Tail`
@@ -88,4 +89,7 @@ To enable permissions, edit an existing role or create a new one on the [Roles p
 [7]: https://app.datadoghq.com/personal-settings/profile
 [8]: https://app.datadoghq.com/organization-settings/roles
 [9]: https://app.datadoghq.com/organization-settings/users
-[10]: /agent/guide/agent-commands/#agent-status-and-information
+[10]: /agent/configuration/agent-commands/#agent-information
+[11]: /integrations/kafka-consumer/?tab=host#validation
+[12]: https://app.datadoghq.com/fleet
+[13]: https://app.datadoghq.com/organization-settings/remote-config
