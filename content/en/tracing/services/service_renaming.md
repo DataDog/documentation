@@ -6,6 +6,9 @@ further_reading:
   text: "Inferred services"
 ---
 
+{{< callout url="https://docs.google.com/forms/d/1Qt03IHB-oHF_BmYQxDiENPksjXzxsfD0kGpTSHd81Hw/edit" d_toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger" btn_hidden="false" header="Join the preview for service renaming!">}}
+{{< /callout >}}
+
 ## Overview
 
 You can rename inferred services, datastores, and queues in Datadog to make them easier to identify and manage. Renaming rules let you override the `peer.service` tag on spans with custom names, or generate names dynamically using tags and regular expressions.  
