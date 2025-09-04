@@ -35,9 +35,17 @@ platforms:
     link: "agent/basic_agent_usage/heroku/"
     image: "platform_heroku.png"
     category: "Cloud platforms"
+  - name: awslambda
+    link: "serverless/aws_lambda/instrumentation/"
+    image: "platform_awslambda.png"
+    category: "Cloud platforms"
   - name: kubernetes
     link: "agent/kubernetes/"
     image: "platform_kubernetes.png"
+    category: "Container platforms"
+  - name: Google Cloud Run
+    link: "serverless/google_cloud_run/containers/sidecar/"
+    image: "platform_gcr.png" 
     category: "Container platforms"
   - name: puppet
     link: "agent/basic_agent_usage/puppet/"
@@ -47,6 +55,10 @@ platforms:
     link: "agent/basic_agent_usage/saltstack/"
     image: "platform_saltstack.png"
     category: "configuration_management"
+  - name: foundry
+    link: "https://app.datadoghq.com/fleet/install-agent/latest?platform=cloud_foundry"
+    image: "platform_cloud_foundry.png"
+    category: "Cloud platforms"
   - name: Amazon ECS
     link: "containers/"
     image: "platform_ecs.png" 

@@ -24,7 +24,7 @@ aliases:
 
 If your application is deployed as a container image, use the _Container Image_ method.
 
-**Note**: Datadog recommends that you use Go tracer v1.73.1 for instrumenting AWS Lambda functions.
+**Note**: Datadog recommends that you use Go tracer v1.73.1 for instrumenting AWS Lambda functions. Go tracer v2 is not supported.
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
@@ -216,7 +216,7 @@ import (
   "github.com/aws/aws-lambda-go/events"
   "github.com/aws/aws-lambda-go/lambda"
   httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func main() {
