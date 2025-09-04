@@ -2116,6 +2116,11 @@ menu:
       parent: internal_developer_portal
       identifier: idp_use_cases
       weight: 7
+    - name: Onboarding Guide
+      url: internal_developer_portal/onboarding_guide
+      parent: internal_developer_portal
+      identifier: idp_onboarding_guide
+      weight: 8
     - name: API Management
       url: internal_developer_portal/use_cases/api_management
       parent: idp_use_cases
@@ -3114,41 +3119,46 @@ menu:
       identifier: containers_datadog_operator_installation
       parent: containers_datadog_operator
       weight: 701
+    - name: Configuration
+      url: containers/datadog_operator/config
+      identifier: containers_datadog_operator_configuration
+      parent: containers_datadog_operator
+      weight: 702
     - name: Custom Checks
       url: containers/datadog_operator/custom_check
       identifier: containers_datadog_operator_customchecks
       parent: containers_datadog_operator
-      weight: 702
+      weight: 703
     - name: Data Collected
       url: containers/datadog_operator/data_collected
       identifier: containers_datadog_operator_datacollected
       parent: containers_datadog_operator
-      weight: 703
+      weight: 704
     - name: kubectl Plugin
       url: containers/datadog_operator/kubectl_plugin
       identifier: containers_datadog_operator_kubectlplugin
       parent: containers_datadog_operator
-      weight: 704
+      weight: 705
     - name: Secret Management
       url: containers/datadog_operator/secret_management
       identifier: containers_datadog_operator_secretmanagement
       parent: containers_datadog_operator
-      weight: 705
+      weight: 706
     - name: DatadogDashboard CRD
       url: containers/datadog_operator/crd_dashboard
       identifier: containers_datadog_operator_crd_dashboard
       parent: containers_datadog_operator
-      weight: 708
+      weight: 707
     - name: DatadogMonitor CRD
       url: containers/datadog_operator/crd_monitor
       identifier: containers_datadog_operator_crd_monitor
       parent: containers_datadog_operator
-      weight: 709
+      weight: 708
     - name: DatadogSLO CRD
       url: containers/datadog_operator/crd_slo
       identifier: containers_datadog_operator_crd_slo
       parent: containers_datadog_operator
-      weight: 710
+      weight: 709
     - name: Datadog CSI Driver
       url: containers/csi_driver
       parent: containers

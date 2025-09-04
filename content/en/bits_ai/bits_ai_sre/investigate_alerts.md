@@ -38,11 +38,11 @@ Alternatively, you can manually invoke Bits on an individual monitor alert or wa
 ### Monitor requirements for Bits AI SRE
 
 Bits is able to run investigations on monitors that fulfill all three of the following requirements:
-1. **Monitor Type**: The monitor must be a metric, logs, APM (`query_alert` type only), anomaly, forecast, integration, or outlier monitor.
+1. **Monitor Type**: The monitor must be a metric, logs, APM (`APM Metrics` type only), anomaly, forecast, integration, or outlier monitor.
 
 2. **Service scope**: The monitor must have one of the following:
    - A monitor query filtered by a service
-   - A monitor query grouped by a service
+   - A monitor query grouped by service
    - A service tag on the monitor
 
 3. **Telemetry links**: For metric, anomaly, forecast, integration, and outlier monitors, the monitor message must include at least one helpful link:

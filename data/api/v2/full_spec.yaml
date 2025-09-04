@@ -427,10 +427,28 @@ components:
       required: true
       schema:
         type: string
+    GetIssueIncludeQueryParameter:
+      description: Comma-separated list of relationship objects that should be included
+        in the response.
+      explode: false
+      in: query
+      name: include
+      required: false
+      schema:
+        items:
+          $ref: '#/components/schemas/GetIssueIncludeQueryParameterItem'
+        type: array
     HistoricalJobID:
       description: The ID of the job.
       in: path
       name: job_id
+      required: true
+      schema:
+        type: string
+    HistoricalSignalID:
+      description: The ID of the historical signal.
+      in: path
+      name: histsignal_id
       required: true
       schema:
         type: string
@@ -591,6 +609,14 @@ components:
       required: true
       schema:
         type: string
+    IssueIDPathParameter:
+      description: The identifier of the issue.
+      example: c1726a66-1f64-11ee-b338-da7ad0900002
+      in: path
+      name: issue_id
+      required: true
+      schema:
+        type: string
     KindID:
       description: Entity kind.
       in: path
@@ -731,6 +757,58 @@ components:
       required: true
       schema:
         type: string
+    QueryFilterFrom:
+      description: The minimum timestamp for requested security signals.
+      example: '2019-01-02T09:42:36.320Z'
+      in: query
+      name: filter[from]
+      required: false
+      schema:
+        format: date-time
+        type: string
+    QueryFilterSearch:
+      description: The search query for security signals.
+      example: security:attack status:high
+      in: query
+      name: filter[query]
+      required: false
+      schema:
+        type: string
+    QueryFilterTo:
+      description: The maximum timestamp for requested security signals.
+      example: '2019-01-03T09:42:36.320Z'
+      in: query
+      name: filter[to]
+      required: false
+      schema:
+        format: date-time
+        type: string
+    QueryPageCursor:
+      description: A list of results using the cursor provided in the previous query.
+      example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+      in: query
+      name: page[cursor]
+      required: false
+      schema:
+        type: string
+    QueryPageLimit:
+      description: The maximum number of security signals in the response.
+      example: 25
+      in: query
+      name: page[limit]
+      required: false
+      schema:
+        default: 10
+        format: int32
+        maximum: 1000
+        type: integer
+    QuerySort:
+      description: The order of the security signals in results.
+      in: query
+      name: sort
+      required: false
+      schema:
+        $ref: '#/components/schemas/SecurityMonitoringSignalsSort'
     RelationInclude:
       description: Include relationship data.
       explode: true
@@ -843,6 +921,17 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/ServiceDefinitionSchemaVersions'
+    SearchIssuesIncludeQueryParameter:
+      description: Comma-separated list of relationship objects that should be included
+        in the response.
+      explode: false
+      in: query
+      name: include
+      required: false
+      schema:
+        items:
+          $ref: '#/components/schemas/SearchIssuesIncludeQueryParameterItem'
+        type: array
     SecurityFilterID:
       description: The ID of the security filter.
       in: path
@@ -18393,6 +18482,18 @@ components:
             $ref: '#/components/schemas/GetInterfacesData'
           type: array
       type: object
+    GetIssueIncludeQueryParameterItem:
+      description: Relationship object that should be included in the response.
+      enum:
+      - assignee
+      - case
+      - team_owners
+      example: case
+      type: string
+      x-enum-varnames:
+      - ASSIGNEE
+      - CASE
+      - TEAM_OWNERS
     GetResourceEvaluationFiltersResponse:
       description: The definition of `GetResourceEvaluationFiltersResponse` object.
       properties:
@@ -21517,6 +21618,773 @@ components:
       - DOWN
       - WARNING
       - 'OFF'
+    Issue:
+      description: The issue matching the request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IssueAttributes'
+        id:
+          description: Issue identifier.
+          example: c1726a66-1f64-11ee-b338-da7ad0900002
+          type: string
+        relationships:
+          $ref: '#/components/schemas/IssueRelationships'
+        type:
+          $ref: '#/components/schemas/IssueType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    IssueAssigneeRelationship:
+      description: Relationship between the issue and assignee.
+      properties:
+        data:
+          $ref: '#/components/schemas/IssueUserReference'
+      required:
+      - data
+      type: object
+    IssueAttributes:
+      description: Object containing the information of an issue.
+      properties:
+        error_message:
+          description: Error message associated with the issue.
+          example: object of type 'NoneType' has no len()
+          type: string
+        error_type:
+          description: Type of the error that matches the issue.
+          example: builtins.TypeError
+          type: string
+        file_path:
+          description: Path of the file where the issue occurred.
+          example: /django-email/conduit/apps/core/utils.py
+          type: string
+        first_seen:
+          description: Timestamp of the first seen error in milliseconds since the
+            Unix epoch.
+          example: 1671612804001
+          format: int64
+          type: integer
+        first_seen_version:
+          description: The application version (for example, git commit hash) where
+            the issue was first observed.
+          example: aaf65cd0
+          type: string
+        function_name:
+          description: Name of the function where the issue occurred.
+          example: filter_forbidden_tags
+          type: string
+        is_crash:
+          description: Error is a crash.
+          example: false
+          type: boolean
+        languages:
+          description: Array of programming languages associated with the issue.
+          example:
+          - PYTHON
+          - GO
+          items:
+            $ref: '#/components/schemas/IssueLanguage'
+          type: array
+        last_seen:
+          description: Timestamp of the last seen error in milliseconds since the
+            Unix epoch.
+          example: 1671620003100
+          format: int64
+          type: integer
+        last_seen_version:
+          description: The application version (for example, git commit hash) where
+            the issue was last observed.
+          example: b6199f80
+          type: string
+        platform:
+          $ref: '#/components/schemas/IssuePlatform'
+        service:
+          description: Service name.
+          example: email-api-py
+          type: string
+        state:
+          $ref: '#/components/schemas/IssueState'
+      type: object
+    IssueCase:
+      description: The case attached to the issue.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IssueCaseAttributes'
+        id:
+          description: Case identifier.
+          example: 2841440d-e780-4fe2-96cd-6a8c1d194da5
+          type: string
+        relationships:
+          $ref: '#/components/schemas/IssueCaseRelationships'
+        type:
+          $ref: '#/components/schemas/IssueCaseResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    IssueCaseAttributes:
+      description: Object containing the information of a case.
+      properties:
+        archived_at:
+          description: Timestamp of when the case was archived.
+          example: '2025-01-01T00:00:00Z'
+          format: date-time
+          type: string
+        closed_at:
+          description: Timestamp of when the case was closed.
+          example: '2025-01-01T00:00:00Z'
+          format: date-time
+          type: string
+        created_at:
+          description: Timestamp of when the case was created.
+          example: '2025-01-01T00:00:00Z'
+          format: date-time
+          type: string
+        creation_source:
+          description: Source of the case creation.
+          example: ERROR_TRACKING
+          type: string
+        description:
+          description: Description of the case.
+          type: string
+        due_date:
+          description: Due date of the case.
+          example: '2025-01-01'
+          type: string
+        insights:
+          description: Insights of the case.
+          items:
+            $ref: '#/components/schemas/IssueCaseInsight'
+          type: array
+        jira_issue:
+          $ref: '#/components/schemas/IssueCaseJiraIssue'
+        key:
+          description: Key of the case.
+          example: ET-123
+          type: string
+        modified_at:
+          description: Timestamp of when the case was last modified.
+          example: '2025-01-01T00:00:00Z'
+          format: date-time
+          type: string
+        priority:
+          $ref: '#/components/schemas/CasePriority'
+        status:
+          $ref: '#/components/schemas/CaseStatus'
+        title:
+          description: Title of the case.
+          example: 'Error: HTTP error'
+          type: string
+        type:
+          description: Type of the case.
+          example: ERROR_TRACKING_ISSUE
+          type: string
+      type: object
+    IssueCaseInsight:
+      description: Insight of the case.
+      properties:
+        ref:
+          description: Reference of the insight.
+          example: /error-tracking?issueId=2841440d-e780-4fe2-96cd-6a8c1d194da5
+          type: string
+        resource_id:
+          description: Insight identifier.
+          example: 2841440d-e780-4fe2-96cd-6a8c1d194da5
+          type: string
+        type:
+          description: Type of the insight.
+          example: ERROR_TRACKING
+          type: string
+      type: object
+    IssueCaseJiraIssue:
+      description: Jira issue of the case.
+      properties:
+        result:
+          $ref: '#/components/schemas/IssueCaseJiraIssueResult'
+        status:
+          description: Creation status of the Jira issue.
+          example: COMPLETED
+          type: string
+      type: object
+    IssueCaseJiraIssueResult:
+      description: Contains the identifiers and URL for a successfully created Jira
+        issue.
+      properties:
+        issue_id:
+          description: Jira issue identifier.
+          example: '1904866'
+          type: string
+        issue_key:
+          description: Jira issue key.
+          example: ET-123
+          type: string
+        issue_url:
+          description: Jira issue URL.
+          example: https://your-jira-instance.atlassian.net/browse/ET-123
+          type: string
+        project_key:
+          description: Jira project key.
+          example: ET
+          type: string
+      type: object
+    IssueCaseReference:
+      description: The case the issue is attached to.
+      properties:
+        id:
+          description: Case identifier.
+          example: 2841440d-e780-4fe2-96cd-6a8c1d194da5
+          type: string
+        type:
+          $ref: '#/components/schemas/IssueCaseResourceType'
+      required:
+      - id
+      - type
+      type: object
+    IssueCaseRelationship:
+      description: Relationship between the issue and case.
+      properties:
+        data:
+          $ref: '#/components/schemas/IssueCaseReference'
+      required:
+      - data
+      type: object
+    IssueCaseRelationships:
+      description: Resources related to a case.
+      properties:
+        assignee:
+          $ref: '#/components/schemas/NullableUserRelationship'
+        created_by:
+          $ref: '#/components/schemas/NullableUserRelationship'
+        modified_by:
+          $ref: '#/components/schemas/NullableUserRelationship'
+        project:
+          $ref: '#/components/schemas/ProjectRelationship'
+      type: object
+    IssueCaseResourceType:
+      description: Type of the object.
+      enum:
+      - case
+      example: case
+      type: string
+      x-enum-varnames:
+      - CASE
+    IssueIncluded:
+      description: An array of related resources, returned when the `include` query
+        parameter is used.
+      oneOf:
+      - $ref: '#/components/schemas/IssueCase'
+      - $ref: '#/components/schemas/IssueUser'
+      - $ref: '#/components/schemas/IssueTeam'
+    IssueLanguage:
+      description: Programming language associated with the issue.
+      enum:
+      - BRIGHTSCRIPT
+      - C
+      - C_PLUS_PLUS
+      - C_SHARP
+      - CLOJURE
+      - DOT_NET
+      - ELIXIR
+      - ERLANG
+      - GO
+      - GROOVY
+      - HASKELL
+      - HCL
+      - JAVA
+      - JAVASCRIPT
+      - JVM
+      - KOTLIN
+      - OBJECTIVE_C
+      - PERL
+      - PHP
+      - PYTHON
+      - RUBY
+      - RUST
+      - SCALA
+      - SWIFT
+      - TERRAFORM
+      - TYPESCRIPT
+      - UNKNOWN
+      example: PYTHON
+      type: string
+      x-enum-varnames:
+      - BRIGHTSCRIPT
+      - C
+      - C_PLUS_PLUS
+      - C_SHARP
+      - CLOJURE
+      - DOT_NET
+      - ELIXIR
+      - ERLANG
+      - GO
+      - GROOVY
+      - HASKELL
+      - HCL
+      - JAVA
+      - JAVASCRIPT
+      - JVM
+      - KOTLIN
+      - OBJECTIVE_C
+      - PERL
+      - PHP
+      - PYTHON
+      - RUBY
+      - RUST
+      - SCALA
+      - SWIFT
+      - TERRAFORM
+      - TYPESCRIPT
+      - UNKNOWN
+    IssuePlatform:
+      description: Platform associated with the issue.
+      enum:
+      - ANDROID
+      - BACKEND
+      - BROWSER
+      - FLUTTER
+      - IOS
+      - REACT_NATIVE
+      - ROKU
+      - UNKNOWN
+      example: BACKEND
+      type: string
+      x-enum-varnames:
+      - ANDROID
+      - BACKEND
+      - BROWSER
+      - FLUTTER
+      - IOS
+      - REACT_NATIVE
+      - ROKU
+      - UNKNOWN
+    IssueReference:
+      description: The issue the search result corresponds to.
+      properties:
+        id:
+          description: Issue identifier.
+          example: c1726a66-1f64-11ee-b338-da7ad0900002
+          type: string
+        type:
+          $ref: '#/components/schemas/IssueType'
+      required:
+      - id
+      - type
+      type: object
+    IssueRelationships:
+      description: Relationship between the issue and an assignee, case and/or teams.
+      properties:
+        assignee:
+          $ref: '#/components/schemas/IssueAssigneeRelationship'
+        case:
+          $ref: '#/components/schemas/IssueCaseRelationship'
+        team_owners:
+          $ref: '#/components/schemas/IssueTeamOwnersRelationship'
+      type: object
+    IssueResponse:
+      description: Response containing error tracking issue data.
+      properties:
+        data:
+          $ref: '#/components/schemas/Issue'
+        included:
+          description: Array of resources related to the issue.
+          items:
+            $ref: '#/components/schemas/IssueIncluded'
+          type: array
+      type: object
+    IssueState:
+      description: State of the issue
+      enum:
+      - OPEN
+      - ACKNOWLEDGED
+      - RESOLVED
+      - IGNORED
+      - EXCLUDED
+      example: RESOLVED
+      type: string
+      x-enum-varnames:
+      - OPEN
+      - ACKNOWLEDGED
+      - RESOLVED
+      - IGNORED
+      - EXCLUDED
+    IssueTeam:
+      description: A team that owns an issue.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IssueTeamAttributes'
+        id:
+          description: Team identifier.
+          example: 221b0179-6447-4d03-91c3-3ca98bf60e8a
+          type: string
+        type:
+          $ref: '#/components/schemas/IssueTeamType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    IssueTeamAttributes:
+      description: Object containing the information of a team.
+      properties:
+        handle:
+          description: The team's identifier.
+          example: team-handle
+          type: string
+        name:
+          description: The name of the team.
+          example: Team Name
+          type: string
+        summary:
+          description: A brief summary of the team, derived from its description.
+          example: This is a team.
+          type: string
+      type: object
+    IssueTeamOwnersRelationship:
+      description: Relationship between the issue and teams.
+      properties:
+        data:
+          description: Array of teams that are owners of the issue.
+          items:
+            $ref: '#/components/schemas/IssueTeamReference'
+          type: array
+      required:
+      - data
+      type: object
+    IssueTeamReference:
+      description: A team that owns the issue.
+      properties:
+        id:
+          description: Team identifier.
+          example: 221b0179-6447-4d03-91c3-3ca98bf60e8a
+          type: string
+        type:
+          $ref: '#/components/schemas/IssueTeamType'
+      required:
+      - id
+      - type
+      type: object
+    IssueTeamType:
+      description: Type of the object.
+      enum:
+      - team
+      example: team
+      type: string
+      x-enum-varnames:
+      - TEAM
+    IssueType:
+      description: Type of the object.
+      enum:
+      - issue
+      example: issue
+      type: string
+      x-enum-varnames:
+      - ISSUE
+    IssueUpdateAssigneeRequest:
+      description: Update issue assignee request payload.
+      properties:
+        data:
+          $ref: '#/components/schemas/IssueUpdateAssigneeRequestData'
+      required:
+      - data
+      type: object
+    IssueUpdateAssigneeRequestData:
+      description: Update issue assignee request.
+      properties:
+        id:
+          description: User identifier.
+          example: 87cb11a0-278c-440a-99fe-701223c80296
+          type: string
+        type:
+          $ref: '#/components/schemas/IssueUpdateAssigneeRequestDataType'
+      required:
+      - id
+      - type
+      type: object
+    IssueUpdateAssigneeRequestDataType:
+      description: Type of the object.
+      enum:
+      - assignee
+      example: assignee
+      type: string
+      x-enum-varnames:
+      - ASSIGNEE
+    IssueUpdateStateRequest:
+      description: Update issue state request payload.
+      properties:
+        data:
+          $ref: '#/components/schemas/IssueUpdateStateRequestData'
+      required:
+      - data
+      type: object
+    IssueUpdateStateRequestData:
+      description: Update issue state request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IssueUpdateStateRequestDataAttributes'
+        id:
+          description: Issue identifier.
+          example: c1726a66-1f64-11ee-b338-da7ad0900002
+          type: string
+        type:
+          $ref: '#/components/schemas/IssueUpdateStateRequestDataType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    IssueUpdateStateRequestDataAttributes:
+      description: Object describing an issue state update request.
+      properties:
+        state:
+          $ref: '#/components/schemas/IssueState'
+      required:
+      - state
+      type: object
+    IssueUpdateStateRequestDataType:
+      description: Type of the object.
+      enum:
+      - error_tracking_issue
+      example: error_tracking_issue
+      type: string
+      x-enum-varnames:
+      - ERROR_TRACKING_ISSUE
+    IssueUser:
+      description: The user to whom the issue is assigned.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IssueUserAttributes'
+        id:
+          description: User identifier.
+          example: 87cb11a0-278c-440a-99fe-701223c80296
+          type: string
+        type:
+          $ref: '#/components/schemas/IssueUserType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    IssueUserAttributes:
+      description: Object containing the information of a user.
+      properties:
+        email:
+          description: Email of the user.
+          example: user@company.com
+          type: string
+        handle:
+          description: Handle of the user.
+          example: User Handle
+          type: string
+        name:
+          description: Name of the user.
+          example: User Name
+          type: string
+      type: object
+    IssueUserReference:
+      description: The user the issue is assigned to.
+      properties:
+        id:
+          description: User identifier.
+          example: 87cb11a0-278c-440a-99fe-701223c80296
+          type: string
+        type:
+          $ref: '#/components/schemas/IssueUserType'
+      required:
+      - id
+      - type
+      type: object
+    IssueUserType:
+      description: Type of the object
+      enum:
+      - user
+      example: user
+      type: string
+      x-enum-varnames:
+      - USER
+    IssuesSearchRequest:
+      description: Search issues request payload.
+      properties:
+        data:
+          $ref: '#/components/schemas/IssuesSearchRequestData'
+      required:
+      - data
+      type: object
+    IssuesSearchRequestData:
+      description: Search issues request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IssuesSearchRequestDataAttributes'
+        type:
+          $ref: '#/components/schemas/IssuesSearchRequestDataType'
+      required:
+      - type
+      - attributes
+      type: object
+    IssuesSearchRequestDataAttributes:
+      description: Object describing a search issue request.
+      properties:
+        from:
+          description: Start date (inclusive) of the query in milliseconds since the
+            Unix epoch.
+          example: 1671612804000
+          format: int64
+          type: integer
+        order_by:
+          $ref: '#/components/schemas/IssuesSearchRequestDataAttributesOrderBy'
+        persona:
+          $ref: '#/components/schemas/IssuesSearchRequestDataAttributesPersona'
+        query:
+          description: Search query following the event search syntax.
+          example: service:orders-* AND @language:go
+          type: string
+        to:
+          description: End date (exclusive) of the query in milliseconds since the
+            Unix epoch.
+          example: 1671620004000
+          format: int64
+          type: integer
+        track:
+          $ref: '#/components/schemas/IssuesSearchRequestDataAttributesTrack'
+      required:
+      - query
+      - from
+      - to
+      type: object
+    IssuesSearchRequestDataAttributesOrderBy:
+      description: The attribute to sort the search results by.
+      enum:
+      - TOTAL_COUNT
+      - FIRST_SEEN
+      - IMPACTED_SESSIONS
+      - PRIORITY
+      example: IMPACTED_SESSIONS
+      type: string
+      x-enum-varnames:
+      - TOTAL_COUNT
+      - FIRST_SEEN
+      - IMPACTED_SESSIONS
+      - PRIORITY
+    IssuesSearchRequestDataAttributesPersona:
+      description: Persona for the search. Either track(s) or persona(s) must be specified.
+      enum:
+      - ALL
+      - BROWSER
+      - MOBILE
+      - BACKEND
+      example: BACKEND
+      type: string
+      x-enum-varnames:
+      - ALL
+      - BROWSER
+      - MOBILE
+      - BACKEND
+    IssuesSearchRequestDataAttributesTrack:
+      description: Track of the events to query. Either track(s) or persona(s) must
+        be specified.
+      enum:
+      - trace
+      - logs
+      - rum
+      example: trace
+      type: string
+      x-enum-varnames:
+      - TRACE
+      - LOGS
+      - RUM
+    IssuesSearchRequestDataType:
+      description: Type of the object.
+      enum:
+      - search_request
+      example: search_request
+      type: string
+      x-enum-varnames:
+      - SEARCH_REQUEST
+    IssuesSearchResponse:
+      description: Search issues response payload.
+      properties:
+        data:
+          description: Array of results matching the search query.
+          items:
+            $ref: '#/components/schemas/IssuesSearchResult'
+          type: array
+        included:
+          description: Array of resources related to the search results.
+          items:
+            $ref: '#/components/schemas/IssuesSearchResultIncluded'
+          type: array
+      type: object
+    IssuesSearchResult:
+      description: Result matching the search query.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IssuesSearchResultAttributes'
+        id:
+          description: Search result identifier (matches the nested issue's identifier).
+          example: c1726a66-1f64-11ee-b338-da7ad0900002
+          type: string
+        relationships:
+          $ref: '#/components/schemas/IssuesSearchResultRelationships'
+        type:
+          $ref: '#/components/schemas/IssuesSearchResultType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    IssuesSearchResultAttributes:
+      description: Object containing the information of a search result.
+      properties:
+        impacted_sessions:
+          description: Count of sessions impacted by the issue over the queried time
+            window.
+          example: 12
+          format: int64
+          type: integer
+        impacted_users:
+          description: Count of users impacted by the issue over the queried time
+            window.
+          example: 4
+          format: int64
+          type: integer
+        total_count:
+          description: Total count of errors that match the issue over the queried
+            time window.
+          example: 82
+          format: int64
+          type: integer
+      type: object
+    IssuesSearchResultIncluded:
+      description: An array of related resources, returned when the `include` query
+        parameter is used.
+      oneOf:
+      - $ref: '#/components/schemas/Issue'
+      - $ref: '#/components/schemas/Case'
+      - $ref: '#/components/schemas/IssueUser'
+      - $ref: '#/components/schemas/IssueTeam'
+    IssuesSearchResultIssueRelationship:
+      description: Relationship between the search result and the corresponding issue.
+      properties:
+        data:
+          $ref: '#/components/schemas/IssueReference'
+      required:
+      - data
+      type: object
+    IssuesSearchResultRelationships:
+      description: Relationships between the search result and other resources.
+      properties:
+        issue:
+          $ref: '#/components/schemas/IssuesSearchResultIssueRelationship'
+      type: object
+    IssuesSearchResultType:
+      description: Type of the object.
+      enum:
+      - error_tracking_search_result
+      example: error_tracking_search_result
+      type: string
+      x-enum-varnames:
+      - ERROR_TRACKING_SEARCH_RESULT
     JSONAPIErrorItem:
       description: API error response body
       properties:
@@ -36928,6 +37796,20 @@ components:
       type: string
       x-enum-varnames:
       - SCORECARD
+    SearchIssuesIncludeQueryParameterItem:
+      description: Relationship object that should be included in the search response.
+      enum:
+      - issue
+      - issue.assignee
+      - issue.case
+      - issue.team_owners
+      example: issue.case
+      type: string
+      x-enum-varnames:
+      - ISSUE
+      - ISSUE_ASSIGNEE
+      - ISSUE_CASE
+      - ISSUE_TEAM_OWNERS
     SecurityFilter:
       description: The security filter's properties.
       properties:
@@ -46411,6 +47293,8 @@ components:
             data_scanner_write: Edit Data Scanner configurations.
             embeddable_graphs_share: Generate public links to share embeddable graphs
               externally.
+            error_tracking_read: Read Error Tracking data.
+            error_tracking_write: Edit Error Tracking issues.
             events_read: Read Events data.
             hosts_read: List hosts and their attributes.
             incident_notification_settings_write: Configure Incidents Notification
@@ -53374,6 +54258,181 @@ paths:
         operator: OR
         permissions:
         - monitors_downtime
+      x-undo:
+        type: idempotent
+  /api/v2/error-tracking/issues/search:
+    post:
+      description: Search issues endpoint allows you to programmatically search for
+        issues within your organization. This endpoint returns a list of issues that
+        match a given search query, following the event search syntax. The search
+        results are limited to a maximum of 100 issues per request.
+      operationId: SearchIssues
+      parameters:
+      - $ref: '#/components/parameters/SearchIssuesIncludeQueryParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssuesSearchRequest'
+        description: Search issues request payload.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IssuesSearchResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - error_tracking_read
+      summary: Search error tracking issues
+      tags:
+      - Error Tracking
+      x-given:
+        issue:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"query\": \"service:synthetics-browser\",\n
+              \     \"from\": {{ timestamp(\"now - 15d\") }}000,\n      \"to\": {{
+              timestamp(\"now\") }}000,\n      \"track\": \"rum\"\n    },\n    \"type\":
+              \"search_request\"\n  }\n}"
+          source: data[0]
+          step: there is a valid "issue" in the system
+      x-menu-order: 1
+      x-undo:
+        type: safe
+  /api/v2/error-tracking/issues/{issue_id}:
+    get:
+      description: Retrieve the full details for a specific error tracking issue,
+        including attributes and relationships.
+      operationId: GetIssue
+      parameters:
+      - $ref: '#/components/parameters/IssueIDPathParameter'
+      - $ref: '#/components/parameters/GetIssueIncludeQueryParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IssueResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - error_tracking_read
+      summary: Get the details of an error tracking issue
+      tags:
+      - Error Tracking
+      x-menu-order: 2
+      x-undo:
+        type: safe
+  /api/v2/error-tracking/issues/{issue_id}/assignee:
+    put:
+      description: Update the assignee of an issue by `issue_id`.
+      operationId: UpdateIssueAssignee
+      parameters:
+      - $ref: '#/components/parameters/IssueIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueUpdateAssigneeRequest'
+        description: Update issue assignee request payload.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IssueResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - error_tracking_read
+        - error_tracking_write
+        - cases_read
+        - cases_write
+      summary: Update the assignee of an issue
+      tags:
+      - Error Tracking
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+  /api/v2/error-tracking/issues/{issue_id}/state:
+    put:
+      description: Update the state of an issue by `issue_id`. Use this endpoint to
+        move an issue between states such as `OPEN`, `RESOLVED`, or `IGNORED`.
+      operationId: UpdateIssueState
+      parameters:
+      - $ref: '#/components/parameters/IssueIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueUpdateStateRequest'
+        description: Update issue state request payload.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IssueResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - error_tracking_read
+        - error_tracking_write
+      summary: Update the state of an issue
+      tags:
+      - Error Tracking
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v2/events:
@@ -67656,6 +68715,106 @@ paths:
         - name: suppression_id
           source: data.id
         type: unsafe
+  /api/v2/security_monitoring/configuration/suppressions/rules:
+    post:
+      description: Get the list of suppressions that would affect a rule.
+      operationId: GetSuppressionsAffectingFutureRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringRuleCreatePayload'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSuppressionsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_suppressions_read
+      summary: Get suppressions affecting future rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 0
+      x-undo:
+        type: safe
+  /api/v2/security_monitoring/configuration/suppressions/rules/{rule_id}:
+    get:
+      description: Get the list of suppressions that affect a specific existing rule
+        by its ID.
+      operationId: GetSuppressionsAffectingRule
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringRuleID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSuppressionsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_suppressions_read
+      summary: Get suppressions affecting a specific rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 0
+      x-undo:
+        type: safe
+  /api/v2/security_monitoring/configuration/suppressions/validation:
+    post:
+      description: Validate a suppression rule.
+      operationId: ValidateSecurityMonitoringSuppression
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringSuppressionCreateRequest'
+        required: true
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_suppressions_write
+      summary: Validate a suppression rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 0
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_suppressions_write
+      x-undo:
+        type: idempotent
   /api/v2/security_monitoring/configuration/suppressions/{suppression_id}:
     delete:
       description: Delete a specific suppression rule.
@@ -68252,52 +69411,12 @@ paths:
         security signals.'
       operationId: ListSecurityMonitoringSignals
       parameters:
-      - description: The search query for security signals.
-        example: security:attack status:high
-        in: query
-        name: filter[query]
-        required: false
-        schema:
-          type: string
-      - description: The minimum timestamp for requested security signals.
-        example: '2019-01-02T09:42:36.320Z'
-        in: query
-        name: filter[from]
-        required: false
-        schema:
-          format: date-time
-          type: string
-      - description: The maximum timestamp for requested security signals.
-        example: '2019-01-03T09:42:36.320Z'
-        in: query
-        name: filter[to]
-        required: false
-        schema:
-          format: date-time
-          type: string
-      - description: The order of the security signals in results.
-        in: query
-        name: sort
-        required: false
-        schema:
-          $ref: '#/components/schemas/SecurityMonitoringSignalsSort'
-      - description: A list of results using the cursor provided in the previous query.
-        example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
-        in: query
-        name: page[cursor]
-        required: false
-        schema:
-          type: string
-      - description: The maximum number of security signals in the response.
-        example: 25
-        in: query
-        name: page[limit]
-        required: false
-        schema:
-          default: 10
-          format: int32
-          maximum: 1000
-          type: integer
+      - $ref: '#/components/parameters/QueryFilterSearch'
+      - $ref: '#/components/parameters/QueryFilterFrom'
+      - $ref: '#/components/parameters/QueryFilterTo'
+      - $ref: '#/components/parameters/QuerySort'
+      - $ref: '#/components/parameters/QueryPageCursor'
+      - $ref: '#/components/parameters/QueryPageLimit'
       responses:
         '200':
           content:
@@ -69777,6 +70896,132 @@ paths:
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is deprecated.'
+  /api/v2/siem-historical-detections/histsignals:
+    get:
+      description: List hist signals.
+      operationId: ListSecurityMonitoringHistsignals
+      parameters:
+      - $ref: '#/components/parameters/QueryFilterSearch'
+      - $ref: '#/components/parameters/QueryFilterFrom'
+      - $ref: '#/components/parameters/QueryFilterTo'
+      - $ref: '#/components/parameters/QuerySort'
+      - $ref: '#/components/parameters/QueryPageCursor'
+      - $ref: '#/components/parameters/QueryPageLimit'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalsListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_signals_read
+      summary: List hist signals
+      tags:
+      - Security Monitoring
+      x-menu-order: 42
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
+
+        Please check the documentation regularly for updates.'
+  /api/v2/siem-historical-detections/histsignals/search:
+    get:
+      description: Search hist signals.
+      operationId: SearchSecurityMonitoringHistsignals
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringSignalListRequest'
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalsListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_signals_read
+      summary: Search hist signals
+      tags:
+      - Security Monitoring
+      x-menu-order: 40
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
+
+        Please check the documentation regularly for updates.'
+  /api/v2/siem-historical-detections/histsignals/{histsignal_id}:
+    get:
+      description: Get a hist signal's details.
+      operationId: GetSecurityMonitoringHistsignal
+      parameters:
+      - $ref: '#/components/parameters/HistoricalSignalID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_signals_read
+      summary: Get a hist signal's details
+      tags:
+      - Security Monitoring
+      x-menu-order: 41
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
+
+        Please check the documentation regularly for updates.'
   /api/v2/siem-historical-detections/jobs:
     get:
       description: List historical jobs.
@@ -70033,6 +71278,51 @@ paths:
         - security_monitoring_rules_write
       x-undo:
         type: idempotent
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
+
+        Please check the documentation regularly for updates.'
+  /api/v2/siem-historical-detections/jobs/{job_id}/histsignals:
+    get:
+      description: Get a job's hist signals.
+      operationId: GetSecurityMonitoringHistsignalsByJobId
+      parameters:
+      - $ref: '#/components/parameters/HistoricalJobID'
+      - $ref: '#/components/parameters/QueryFilterSearch'
+      - $ref: '#/components/parameters/QueryFilterFrom'
+      - $ref: '#/components/parameters/QueryFilterTo'
+      - $ref: '#/components/parameters/QuerySort'
+      - $ref: '#/components/parameters/QueryPageCursor'
+      - $ref: '#/components/parameters/QueryPageLimit'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalsListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_signals_read
+      summary: Get a job's hist signals
+      tags:
+      - Security Monitoring
+      x-menu-order: 43
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_read
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
 
         Please check the documentation regularly for updates.'
@@ -73708,6 +74998,9 @@ tags:
 
     end times, prevent all alerting related to specified Datadog tags.'
   name: Downtimes
+- description: View and manage issues within Error Tracking. See the [Error Tracking
+    page](https://docs.datadoghq.com/error_tracking/) for more information.
+  name: Error Tracking
 - description: 'The Event Management API allows you to programmatically post events
     to the Events Explorer and fetch events from the Events Explorer. See the [Event
     Management page](https://docs.datadoghq.com/service_management/events/) for more
