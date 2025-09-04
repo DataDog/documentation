@@ -6632,6 +6632,18 @@ menu:
           - GetDORAFailure
         unstable: []
         order: 6
+    - name: Delete a failure event
+      url: '#delete-a-failure-event'
+      identifier: dora-metrics-delete-a-failure-event
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDORAFailure
+        unstable: []
+        order: 7
     - name: Get a list of failure events
       url: '#get-a-list-of-failure-events'
       identifier: dora-metrics-get-a-list-of-failure-events
@@ -6668,6 +6680,18 @@ menu:
           - GetDORADeployment
         unstable: []
         order: 5
+    - name: Delete a deployment event
+      url: '#delete-a-deployment-event'
+      identifier: dora-metrics-delete-a-deployment-event
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDORADeployment
+        unstable: []
+        order: 8
     - name: Get a list of deployment events
       url: '#get-a-list-of-deployment-events'
       identifier: dora-metrics-get-a-list-of-deployment-events
