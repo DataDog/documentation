@@ -5237,6 +5237,17 @@ menu:
       parent: dora_metrics
       identifier: dora_metrics_data_collected
       weight: 2
+    - name: Feature Flags
+      url: feature_flags/
+      pre: ci
+      parent: software_delivery_heading
+      identifier: feature_flags
+      weight: 80000
+    - name: Guides
+      url: feature_flags/guide
+      parent: feature_flags
+      identifier: feature_flags_guide
+      weight: 1
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
