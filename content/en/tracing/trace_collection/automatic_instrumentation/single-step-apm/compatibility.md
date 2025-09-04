@@ -114,7 +114,13 @@ By default, SSI does not instrument some Java applications and libraries to avoi
   - Consider moving some configurations to a `.properties` file
   - Check application logs for specific initialization errors
 
+### Known warnings
+
+When using SSI for Java 24+, you may see warnings related to JNI native access or `sun.misc.Unsafe` memory access. These warnings can be suppressed with the `--illegal-native-access=allow` and `--sun-misc-unsafe-memory-access=allow` environment variables. See [JEP 472][2] and [JEP 498][3] for more information.
+
 [1]: https://github.com/DataDog/dd-trace-java/blob/master/metadata/requirements.json
+[2]: https://openjdk.org/jeps/472
+[3]: https://openjdk.org/jeps/498
 
 {{< /programming-lang >}}
 
