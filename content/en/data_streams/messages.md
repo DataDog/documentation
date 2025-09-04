@@ -44,9 +44,7 @@ Ensure [remote configuration][3] is set up for the agent running the Kafka Consu
 
 ## Required permissions
 
-You must have the following permission:
-* `Data Streams Monitoring Capture Messages`
-And, these logs permissions that are part of the Datadog Standard role:
+You must have the `Data Streams Monitoring Capture Messages` permission, and these logs permissions that are part of the Datadog Standard role:
 * `Logs Read Index Data`
 * `Logs Read Data`
 * `Logs Live Tail`
