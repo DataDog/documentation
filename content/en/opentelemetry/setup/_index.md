@@ -39,7 +39,7 @@ Alternative methods are available for specific use cases, such as maintaining a 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}
     <h3>Standalone OpenTelemetry Collector</h3>
-    Best for: Users who require a completely vendor-neutral setup or advanced processing capabilities like tail-based sampling.
+    Best for: Users who prefer to use OTel Collector distributions from the OpenTelemetry open source community or require advanced processing capabilities like tail-based sampling.
     {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/setup/otlp_ingest_in_the_agent" >}}
     <h3>OTLP Ingest in the Agent</h3>
