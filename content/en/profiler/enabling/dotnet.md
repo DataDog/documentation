@@ -74,6 +74,7 @@ The following profiling features are available in the following minimum versions
 - Allocations and Live Heap profiling are in beta until .NET 10 ships with the required changes for better statistical allocations sampling.
 - Continuous Profiler is not supported for AWS Lambda.
 - Continuous Profiler does not support ARM64.
+- Source Code Integration is available for Continuous Profiler .NET, but its still in Preview.
  
 <div class="alert alert-warning">
   <strong>Note:</strong> Unlike APM, Continuous Profiler is not activated by default when the APM package is installed. You must explicitly enable it for the applications you want to profile.
