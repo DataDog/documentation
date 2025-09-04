@@ -1,35 +1,44 @@
 traits:
 - id: prog_lang
   label: Programming Language
+  type: text
   internal_notes: Do not use for frameworks like Next or React Native. Instead, use `platform`.
 
 - id: protocol
   label: Protocol
+  type: text
   internal_notes: For example, HTTP, gRPC, or SOCKS.
 
 - id: platform
   label: "Platform"
+  type: text
   internal_notes: The target platform (language, framework, specific env) for a library, SDK, or other third-party entity. Do not use if every option is a pure programming language (Go, Python, etc.) -- use `prog_lang` instead. Re-label to "Framework", "SDK", etc. if it's more appropriate for your context.
 
 - id: host
   label: "Host"
+  type: text
   internal_notes: Hosting platform, such as AWS or GCP. Can also refer to containers like Kubernetes.
 
 - id: host_type
   label: "Host type"
+  type: text
   internal_notes: The machine or container type within a given host, such as EC2. Use only as a followup to a `host` selection.
 
 - id: os
   label: "OS"
+  type: text
   internal_notes: Env operating system, such as Linux or Windows. Can refer to a mobile OS, but `mobile_os` is preferred for lists of mobile-only options.
 
 - id: database
+  type: text
   label: "Database"
 
 - id: mobile_os
   label: "OS"
+  type: text
   internal_notes: Mobile operating system, such as Android.
   
 - id: lib_src
   label: "Source"
+  type: text
   internal_notes: The source of a software library that the customer is trying to use in their code, such as an SDK. This is most often a package manager like NPM. But it could also have a more general value, like "CDN" or "GitHub".

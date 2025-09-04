@@ -241,12 +241,12 @@
         - action: pull-and-push-file
           branch: master
           globs:
-          - 'src/commands/lambda/README.md'
+          - 'packages/datadog-ci/src/commands/lambda/README.md'
           options:
             dest_path: '/serverless/libraries_integrations/'
             file_name: 'cli.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md"]
+              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/lambda/README.md"]
               title: Datadog Serverless CLI
               aliases:
                 - /serverless/datadog_lambda_library/
@@ -254,12 +254,12 @@
         - action: pull-and-push-file
           branch: master
           globs:
-          - 'src/commands/synthetics/README.md'
+          - 'packages/datadog-ci/src/commands/synthetics/README.md'
           options:
             dest_path: '/continuous_testing/cicd_integrations/'
             file_name: 'configuration.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/README.md"]
+              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/synthetics/README.md"]
               title: Continuous Testing and CI/CD Configuration
               description: Configure Continuous Testing to run tests in your CI/CD pipelines.
               aliases:
