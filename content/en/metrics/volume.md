@@ -110,10 +110,6 @@ To view a metric's related assets:
 
 ## Identify tags driving up your metric's volume
 
-{{< callout url="https://forms.gle/H3dG9tTdR6bqzHAX9" >}}
-Custom Metrics Tags Cardinality Explorer is in Preview. Use this form to request access today.
-{{< /callout >}} 
-
 {{< img src="metrics/tagsexplorer.png" alt="Custom Metrics Tags Cardinality Explorer for a spiking metric name" style="width:80%;">}}
 
 To determine why a particular metric name is emitting a large number of custom metrics, or spiking, use the Custom Metrics Tags Cardinality Explorer. This helps you pinpoint the tag keys driving the spike, which you can immediately exclude using Metrics without Limits™ for cost savings.

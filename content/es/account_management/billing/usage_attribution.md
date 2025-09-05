@@ -99,7 +99,7 @@ Se puede ver una serie temporal de los datos de Atribución de uso al hacer clic
 
 Para los clientes de facturación directa, los informes de atribución de costes de fin de mes se generan al final de cada ciclo de facturación para permitir la devolución mensual de gastos y los procesos de atribución de costes.
 - Los datos de costes del mes anterior están disponibles a más tardar el día 19 del mes en curso.
-- Los datos de atribución de costes no están disponibles actualmente en los centros de datos de GovCloud
+- Para los clientes de GovCloud, debe aprobarse un descargo de responsabilidad antes de habilitar la función.
 - Los datos mensuales de Atribución de costes están [disponibles con la API][4]
 
 {{< img src="account_management/billing/usage_attribution/Cost-Attribution-Monthly.png" alt="Informe de Atribución de costes" style="width:100%;" >}}

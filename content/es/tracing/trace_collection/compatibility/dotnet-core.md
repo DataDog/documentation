@@ -155,6 +155,7 @@ El rastreador .NET funciona en .NET Core 2.0, 2.1, 2.2, 3.0 y 3.1, y en .NET 5 y
 | Error en el compilador JIT                              | 2.x, 3.x, 5.x, 6.x, 7.x, 8.0.0-8.0.5      | Actualiza .NET a 8.0.6 o posterior    | [dotnet/runtime/pull/73760][16]   |
 | Error en el compilador JIT                              | Todas las versiones de .NET                      | No hay solución    | [dotnet/runtime/issues/85777][17]   |
 | Error de tiempo de ejecución de .NET que causa bloqueos cuando se utiliza con métricas de tiempo de ejecución | 6.0.0-6.0.10            | Actualiza a .NET 6.0.11 o posterior, o desactiva las métricas de tiempo de ejecución    | [dotnet/runtime/pull/76431][18]   |
+| Error en el compilador JIT que provoca fallos              | 2.x, 3.x, 5.x, 6.x, 7.x, 8.x              | Actualizar .NET a la v9.0.0 o posterior    | [dotnet/runtime/pull/95653][22]   |
 
 ## Versiones compatibles del Datadog Agent 
 
@@ -191,7 +192,6 @@ Las actualizaciones de versión implican los siguientes cambios en la compatibil
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://github.com/DataDog/dd-trace-dotnet
 [2]: /es/tracing/compatibility_requirements/dotnet-framework/
 [3]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
@@ -212,3 +212,4 @@ Las actualizaciones de versión implican los siguientes cambios en la compatibil
 [19]: https://github.com/dotnet/core/tree/main/release-notes
 [20]: https://www.gnu.org/software/libc/
 [21]: https://musl.libc.org/
+[22]: https://github.com/dotnet/runtime/issues/95653

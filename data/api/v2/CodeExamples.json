@@ -460,6 +460,27 @@
       "description": "Update a downtime returns \"OK\" response"
     }
   ],
+  "SearchIssues": [
+    {
+      "group": "error_tracking",
+      "suffix": "",
+      "description": "Search error tracking issues returns \"OK\" response"
+    }
+  ],
+  "UpdateIssueAssignee": [
+    {
+      "group": "error_tracking",
+      "suffix": "",
+      "description": "Update the assignee of an issue returns \"OK\" response"
+    }
+  ],
+  "UpdateIssueState": [
+    {
+      "group": "error_tracking",
+      "suffix": "",
+      "description": "Update the state of an issue returns \"OK\" response"
+    }
+  ],
   "CreateEvent": [
     {
       "group": "events",
@@ -1018,6 +1039,20 @@
       "description": "Update a single service object returns \"OK\" response"
     }
   ],
+  "CreateOrgConnections": [
+    {
+      "group": "org_connections",
+      "suffix": "",
+      "description": "Create Org Connection returns \"OK\" response"
+    }
+  ],
+  "UpdateOrgConnections": [
+    {
+      "group": "org_connections",
+      "suffix": "",
+      "description": "Update Org Connection returns \"OK\" response"
+    }
+  ],
   "UpdateOrgConfig": [
     {
       "group": "organizations",
@@ -1051,6 +1086,11 @@
       "group": "rum",
       "suffix": "",
       "description": "Create a new RUM application returns \"OK\" response"
+    },
+    {
+      "group": "rum",
+      "suffix": "_1946294560",
+      "description": "Create a new RUM application with Product Scales returns \"OK\" response"
     }
   ],
   "SearchRUMEvents": [
@@ -1070,6 +1110,11 @@
       "group": "rum",
       "suffix": "",
       "description": "Update a RUM application returns \"OK\" response"
+    },
+    {
+      "group": "rum",
+      "suffix": "_394074053",
+      "description": "Update a RUM application with Product Scales returns \"OK\" response"
     }
   ],
   "UpdateRestrictionPolicy": [
@@ -1212,6 +1257,11 @@
       "group": "security_monitoring",
       "suffix": "_498211763",
       "description": "Create a detection rule with type 'workload_security' returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_868881438",
+      "description": "Create a scheduled detection rule returns \"OK\" response"
     }
   ],
   "CreateCustomFramework": [
@@ -1259,6 +1309,13 @@
       "group": "security_monitoring",
       "suffix": "_1309350146",
       "description": "Get a list of security signals returns \"OK\" response with pagination"
+    }
+  ],
+  "GetSuppressionsAffectingFutureRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Get suppressions affecting future rule returns \"OK\" response"
     }
   ],
   "EditSecurityMonitoringSignalAssignee": [
@@ -1350,6 +1407,13 @@
       "description": "Validate a detection rule returns \"OK\" response"
     }
   ],
+  "ValidateSecurityMonitoringSuppression": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Validate a suppression rule returns \"OK\" response"
+    }
+  ],
   "CreateScanningGroup": [
     {
       "group": "sensitive_data_scanner",
@@ -1362,6 +1426,11 @@
       "group": "sensitive_data_scanner",
       "suffix": "",
       "description": "Create Scanning Rule returns \"OK\" response"
+    },
+    {
+      "group": "sensitive_data_scanner",
+      "suffix": "_502667299",
+      "description": "Create Scanning Rule with should_save_match returns \"OK\" response"
     }
   ],
   "DeleteScanningGroup": [
@@ -1463,6 +1532,13 @@
       "description": "Create outcomes batch returns \"OK\" response"
     }
   ],
+  "UpdateScorecardOutcomesAsync": [
+    {
+      "group": "service_scorecards",
+      "suffix": "",
+      "description": "Update Scorecard outcomes asynchronously returns \"Accepted\" response"
+    }
+  ],
   "UpdateScorecardRule": [
     {
       "group": "service_scorecards",
@@ -1534,6 +1610,13 @@
       "group": "teams",
       "suffix": "_252121814",
       "description": "Create a team with V2 fields returns \"CREATED\" response"
+    }
+  ],
+  "SyncTeams": [
+    {
+      "group": "teams",
+      "suffix": "_3215592344",
+      "description": "Sync teams returns \"OK\" response"
     }
   ],
   "UpdateTeamLink": [

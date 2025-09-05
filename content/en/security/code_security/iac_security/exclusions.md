@@ -3,6 +3,9 @@ title: Configure IaC Security Exclusions
 aliases:
   - /security/cloud_security_management/setup/iac_scanning/iac_scanning_exclusions/
 further_reading:
+  - link: "https://www.datadoghq.com/blog/datadog-iac-security/"
+    tag: "Blog"
+    text: "Prevent cloud misconfigurations from reaching production with Datadog IaC Security"
   - link: "/security/code_security/iac_security"
     tag: "Documentation"
     text: "IaC Security"

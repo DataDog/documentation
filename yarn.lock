@@ -4982,6 +4982,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/semver@npm:^7.7.0":
+  version: 7.7.0
+  resolution: "@types/semver@npm:7.7.0"
+  checksum: d488eaeddb23879a0a8a759bed667e1a76cb0dd4d23e3255538e24c189db387357953ca9e7a3bda2bb7f95e84cac8fe0db4fbe6b3456e893043337732d1d23cc
+  languageName: node
+  linkType: hard
+
 "@types/stack-utils@npm:^1.0.1":
   version: 1.0.1
   resolution: "@types/stack-utils@npm:1.0.1"
@@ -6520,30 +6527,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.0.4.tgz":
-  version: 1.0.4
-  resolution: "cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.0.4.tgz"
+"cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.2.0.tgz":
+  version: 1.2.0
+  resolution: "cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.2.0.tgz"
   dependencies:
+    "@types/semver": ^7.7.0
     js-yaml: ^4.1.0
     jsdom: ^26.0.0
     rimraf: ^5.0.5
+    semver: ^7.7.2
     typedoc: ^0.27.6
     typedoc-plugin-markdown: ^4.4.1
     typedoc-plugin-zod: ^1.3.1
     uuid: ^11.0.5
     zod: ^3.22.4
-  checksum: 296e81391b14fa96c0c9e6e925efebd2842a4cace54d206322ea039dfca00271444ccb5a115d23401864e884f14af90c8218889a872e7bd7d5551b864d98ee93
+  checksum: 1c55fc8b8e0f2413e337fb2fa6770b10664824d38d825205c512090f5f9a3bd8922bb386195a976dfb0fe0b706c4f6aafdf9b4f3aab092b48d956f85e3510ea8
   languageName: node
   linkType: hard
 
-"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v1.4.0.tgz":
-  version: 1.4.0
-  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v1.4.0.tgz"
+"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.0.0.tgz":
+  version: 2.0.0
+  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.0.0.tgz"
   dependencies:
     "@prettier/sync": ^0.5.2
     "@types/markdown-it": ^14.1.2
     "@vitejs/plugin-react": ^4.3.3
-    cdocs-data: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.0.4.tgz"
+    cdocs-data: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.2.0.tgz"
     cdocs-markdoc: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.0.1.tgz"
     chokidar: ^4.0.3
     chroma-highlight: ^2.4.2
@@ -6563,7 +6572,7 @@ __metadata:
     vite: ^5.4.10
     vite-plugin-singlefile: ^2.0.2
     zod: ^3.22.4
-  checksum: f37b2a894d9206cfc7f886d45d39fa9063560b7dad158df24c5c59ffa5f3a6e84dc7fc4f932003033053c99d127ae3e60817b9e210e50ddabb528cd06797763f
+  checksum: fbb4f01d8e45138d288f10e6e08b24cdf2b97cbe99826fb8a778953092c2e91d71e1ae070b660cb0a2707f0b5800f4c50230e6e5395193c3634b4171788d1934
   languageName: node
   linkType: hard
 
@@ -7630,7 +7639,7 @@ __metadata:
     acorn: ^7.4.1
     alpinejs: ^3.13.7
     bootstrap: ^5.2
-    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v1.4.0.tgz"
+    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.0.0.tgz"
     cross-env: ^5.2.1
     del: 4.1.1
     docs-llms-txt: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/docs-llms-txt-v1.0.0.tgz"
@@ -15390,6 +15399,15 @@ __metadata:
   bin:
     semver: bin/semver.js
   checksum: 40f6a95101e8d854357a644da1b8dd9d93ce786d5c6a77227bc69dbb17bea83d0d1d1d7c4cd5920a6df909f48e8bd8a5909869535007f90278289f2451d0292d
+  languageName: node
+  linkType: hard
+
+"semver@npm:^7.7.2":
+  version: 7.7.2
+  resolution: "semver@npm:7.7.2"
+  bin:
+    semver: bin/semver.js
+  checksum: dd94ba8f1cbc903d8eeb4dd8bf19f46b3deb14262b6717d0de3c804b594058ae785ef2e4b46c5c3b58733c99c83339068203002f9e37cfe44f7e2cc5e3d2f621
   languageName: node
   linkType: hard
 
