@@ -40,59 +40,116 @@ This documentation covers the SQL support available and includes:
 
 The following SQL syntax is supported:
 
-| Syntax        | Description                                                                                  | Example                                                                                                  |
-|---------------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| `SELECT (DISTINCT)`<br>DISTINCT: Optional | Retrieves rows from a database, with `DISTINCT` filtering out duplicate records.       | {{< code-block lang="sql" >}}SELECT DISTINCT customer_id
-FROM orders {{< /code-block >}} |
-| `JOIN`        | Combines rows from two or more tables based on a related column between them. Supports FULL JOIN, INNER JOIN, LEFT JOIN, RIGHT JOIN.  | {{< code-block lang="sql" >}}SELECT orders.order_id, customers.customer_name
+`SELECT (DISTINCT)` (DISTINCT: Optional)
+: Retrieves rows from a database, with `DISTINCT` filtering out duplicate records.
+
+    {{< code-block lang="sql" >}}SELECT DISTINCT customer_id
+FROM orders {{< /code-block >}}
+
+`JOIN`
+: Combines rows from two or more tables based on a related column between them. Supports FULL JOIN, INNER JOIN, LEFT JOIN, RIGHT JOIN.
+
+    {{< code-block lang="sql" >}}SELECT orders.order_id, customers.customer_name
 FROM orders
 JOIN customers
-ON orders.customer_id = customers.customer_id {{< /code-block >}} |
-| `GROUP BY`    | Groups rows that have the same values in specified columns into summary rows.                | {{< code-block lang="sql" >}}SELECT product_id, SUM(quantity)
+ON orders.customer_id = customers.customer_id {{< /code-block >}}
+
+`GROUP BY`
+: Groups rows that have the same values in specified columns into summary rows.
+
+    {{< code-block lang="sql" >}}SELECT product_id, SUM(quantity)
 FROM sales
-GROUP BY product_id {{< /code-block >}} |
-| `\|\|` (concat)          | Concatenates two or more strings together.                                                  | {{< code-block lang="sql" >}}SELECT first_name || ' ' || last_name AS full_name
-FROM employees {{< /code-block >}} |
-| `WHERE`<br>Includes support for `LIKE`, `IN`, `ON`, `OR` filters.  | Filters records that meet a specified condition.                                             | {{< code-block lang="sql" >}}SELECT *
+GROUP BY product_id {{< /code-block >}}
+
+`||` (concat)
+: Concatenates two or more strings together.
+
+    {{< code-block lang="sql" >}}SELECT first_name || ' ' || last_name AS full_name
+FROM employees {{< /code-block >}}
+
+`WHERE` (Includes support for `LIKE`, `IN`, `ON`, `OR` filters)
+: Filters records that meet a specified condition.
+
+    {{< code-block lang="sql" >}}SELECT *
 FROM employees
-WHERE department = 'Sales' AND name LIKE 'J%' {{< /code-block >}} |
-| `CASE`        | Provides conditional logic to return different values based on specified conditions.         | {{< code-block lang="sql" >}}SELECT order_id,
+WHERE department = 'Sales' AND name LIKE 'J%' {{< /code-block >}}
+
+`CASE`
+: Provides conditional logic to return different values based on specified conditions.
+
+    {{< code-block lang="sql" >}}SELECT order_id,
   CASE
     WHEN quantity > 10 THEN 'Bulk Order'
     ELSE 'Standard Order'
   END AS order_type
-FROM orders {{< /code-block >}} |
-| `WINDOW` | Performs a calculation across a set of table rows that are related to the current row.                 | {{< code-block lang="sql" >}}SELECT
+FROM orders {{< /code-block >}}
+
+`WINDOW`
+: Performs a calculation across a set of table rows that are related to the current row.
+
+    {{< code-block lang="sql" >}}SELECT
   timestamp,
   service_name,
   cpu_usage_percent,
   AVG(cpu_usage_percent) OVER (PARTITION BY service_name ORDER BY timestamp ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) AS moving_avg_cpu
 FROM
-  cpu_usage_data {{< /code-block >}} |
-| `IS NULL` / `IS NOT NULL`   | Checks if a value is null or not null.                                         | {{< code-block lang="sql" >}}SELECT *
+  cpu_usage_data {{< /code-block >}}
+
+`IS NULL` / `IS NOT NULL`
+: Checks if a value is null or not null.
+
+    {{< code-block lang="sql" >}}SELECT *
 FROM orders
-WHERE delivery_date IS NULL {{< /code-block >}}        |
-| `LIMIT`    | Specifies the maximum number of records to return.                                               | {{< code-block lang="sql" >}}SELECT *
+WHERE delivery_date IS NULL {{< /code-block >}}
+
+`LIMIT`
+: Specifies the maximum number of records to return.
+
+    {{< code-block lang="sql" >}}SELECT *
 FROM customers
-LIMIT 10 {{< /code-block >}}                         |
-| `ORDER BY`  | Sorts the result set of a query by one or more columns. Includes ASC, DESC for sorting order.  | {{< code-block lang="sql" >}}SELECT *
+LIMIT 10 {{< /code-block >}}
+
+`ORDER BY`
+: Sorts the result set of a query by one or more columns. Includes ASC, DESC for sorting order.
+
+    {{< code-block lang="sql" >}}SELECT *
 FROM sales
-ORDER BY sale_date DESC {{< /code-block >}}              |
-| `HAVING`    | Filters records that meet a specified condition after grouping.                               | {{< code-block lang="sql" >}}SELECT product_id, SUM(quantity)
+ORDER BY sale_date DESC {{< /code-block >}}
+
+`HAVING`
+: Filters records that meet a specified condition after grouping.
+
+    {{< code-block lang="sql" >}}SELECT product_id, SUM(quantity)
 FROM sales
 GROUP BY product_id
-HAVING SUM(quantity) > 10 {{< /code-block >}} |
-| `IN`, `ON`, `OR`  | Used for specified conditions in queries. Available in `WHERE`, `JOIN` clauses.       | {{< code-block lang="sql" >}}SELECT *
+HAVING SUM(quantity) > 10 {{< /code-block >}}
+
+`IN`, `ON`, `OR`
+: Used for specified conditions in queries. Available in `WHERE`, `JOIN` clauses.
+
+    {{< code-block lang="sql" >}}SELECT *
 FROM orders
-WHERE order_status IN ('Shipped', 'Pending') {{< /code-block >}} |
-| `USING`  | This clause is a shorthand for joins where the join columns have the same name in both tables. It takes a comma-separated list of those columns and creates a separate equality condition for each matching pair. For example, joining `T1` and `T2` with `USING (a, b)` is equivalent to `ON T1.a = T2.a AND T1.b = T2.b`.     | {{< code-block lang="sql" >}}SELECT orders.order_id, customers.customer_name
+WHERE order_status IN ('Shipped', 'Pending') {{< /code-block >}}
+
+`USING`
+: This clause is a shorthand for joins where the join columns have the same name in both tables. It takes a comma-separated list of those columns and creates a separate equality condition for each matching pair. For example, joining `T1` and `T2` with `USING (a, b)` is equivalent to `ON T1.a = T2.a AND T1.b = T2.b`.
+
+    {{< code-block lang="sql" >}}SELECT orders.order_id, customers.customer_name
 FROM orders
 JOIN customers
-USING (customer_id) {{< /code-block >}} |
-| `AS`        | Renames a column or table with an alias.                                                        | {{< code-block lang="sql" >}}SELECT first_name AS name
-FROM employees {{< /code-block >}}                |
-| Arithmetic Operations | Performs basic calculations using operators like `+`, `-`, `*`, `/`.                 | {{< code-block lang="sql" >}}SELECT price, tax, (price * tax) AS total_cost
-FROM products {{< /code-block >}} |
+USING (customer_id) {{< /code-block >}}
+
+`AS`
+: Renames a column or table with an alias.
+
+    {{< code-block lang="sql" >}}SELECT first_name AS name
+FROM employees {{< /code-block >}}
+
+Arithmetic Operations
+: Performs basic calculations using operators like `+`, `-`, `*`, `/`.
+
+    {{< code-block lang="sql" >}}SELECT price, tax, (price * tax) AS total_cost
+FROM products {{< /code-block >}}
 | `INTERVAL value unit`  | interval                      | Represents a time duration specified in a given unit. Supported units:<br>- `milliseconds` / `millisecond`<br>- `seconds` / `second`<br>- `minutes` / `minute`<br>- `hours` / `hour`<br>- `days` / `day` |
 
 ## Data types
