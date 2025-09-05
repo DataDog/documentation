@@ -116,7 +116,7 @@ The [recommended keywords][15] are used by default when library rules are added.
 You can create custom scanning rules using regex patterns to scan for sensitive data.
 
 1. Select a scanning group if you did not create this rule within a scanning group.
-1. Enter a name for rule.
+1. Enter a name for the rule.
 1. In the **Priority** dropdown menu, select the priority level for the rule based on your business needs.
 1. (Optional) Enter a description for the rule.
 1. In the **Match conditions** section, specify the regex pattern to use for matching against events in the **Define the regex** field. Enter sample data in the **Add sample data** field to verify that your regex pattern is valid.<br>
@@ -135,7 +135,7 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
     - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
     - To remove keywords, click the **X** next to the keyword you want to remove.
     - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
-    - **Note**: You cannot have more than 20 keywords for a rule.
+      **Note**: You cannot have more than 20 keywords for a rule.
 1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
 {{% sds-scanning-rule %}}
 1. Click **Add Rule**.
