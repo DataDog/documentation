@@ -1,1 +1,1 @@
-Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid getting excluded.
+Toggle **Enable Optional Group By** section if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid getting excluded.

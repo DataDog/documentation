@@ -25,14 +25,14 @@ Select the detection method you want to use for creating signals.
 
 {{< img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" >}}
 
-1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. (Optional) In the **Count** dropdown menu, select attributes whose unique values are counted over the specified time frame.
 1. (Optional) In the **group by** dropdown menu, select attributes you want to group by.
     - The defined `group by` generates a signal for each `group by` value.
     - Typically, the `group by` is an entity (like user, or IP). The `group by` is also used to join the queries together.
     - Joining logs that span a time frame can increase the confidence or severity of the security signal. For example, to detect a successful brute force attack, both successful and unsuccessful authentication logs must be correlated for a user.
-1. (Optional) You can [filter logs using references tables](#filter-ref-threshold):
+1. (Optional) You can filter logs using references tables:
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
     1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
     1. In the **where field** dropdown menu, select the log field to join on.
@@ -60,7 +60,7 @@ Select the detection method you want to use for creating signals.
 
 {{< img src="security/security_monitoring/detection_rules/new_value_20250310.png" alt="Define the search query" style="width:100%;" >}}
 
-1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Detect new value** dropdown menu, select the attributes you want to detect.
     - For example, if you want to create a query for successful user authentication with the following settings:
@@ -74,7 +74,7 @@ Select the detection method you want to use for creating signals.
     - The defined `group by` generates a signal for each `group by` value.
     - Typically, the `group by` is an entity (like user or IP address).
 1. In the dropdown menu to the right of **group by**, select the learning duration.
-1. (Optional) You can [filter logs using references tables](#filter-ref-threshold):
+1. (Optional) You can filter logs using references tables:
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
     1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
     1. In the **where field** dropdown menu, select the log field to join on.
@@ -102,7 +102,7 @@ Select the detection method you want to use for creating signals.
 
 {{< img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" >}}
 
-1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. (Optional) In the **Count** dropdown menu, select attributes whose unique values you want to count during the specified time frame.
 1. (Optional) In the **group by** dropdown menu, select attributes you want to group by.
@@ -136,7 +136,7 @@ Select the detection method you want to use for creating signals.
 {{% /tab %}}
 {{% tab "Content Anomaly" %}}
 
-1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Detect anomaly** field, specify the fields whose values you want to analyze.
 1. In the **group by** field, specify the fields you want to group by.
@@ -169,7 +169,7 @@ Select the detection method you want to use for creating signals.
 {{% /tab %}}
 {{% tab "Impossible Travel" %}}
 
-1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **User attribute** dropdown menu, select the log attribute that contains the user ID. This can be an identifier like an email address, user name, or account identifier.
 1. The **Location attribute** value is automatically set to `@network.client.geoip`.
@@ -207,7 +207,7 @@ Select the detection method you want to use for creating signals.
 {{% /tab %}}
 {{% tab "Third Party" %}}
 
-1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Trigger for each new** dropdown menu, select the attributes where each attribute generates a signal for each new attribute value over 24-hour roll-up period.
 1. (Optional) To test your rules against sample logs, click **Unit Test**.

@@ -1,4 +1,4 @@
-1. (Optional) Click the pencil icon next to **Condition 1** if you want to change the name of the condition. This name is appended to the rule name when a signal is generated.
+1. (Optional) Click the pencil icon next to **Condition 1** if you want to rename the condition. This name is appended to the rule name when a signal is generated.
 1. In the **Set severity to** dropdown menu, select the appropriate severity level (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
 1. In the **Condition** field, enter the condition when a signal should be created. See the example below.
     - All rule conditions are evaluated as condition statements. Thus, the order of the conditions affects which notifications are sent because the first condition to match generates the signal. Click and drag your rule conditions to change their ordering.

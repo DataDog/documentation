@@ -7,7 +7,7 @@ weight: 2
 
 ## Overview
 
-Scheduled detection rules run at predefined intervals to analyze indexed log data and detect security threats. These rules can identify patterns, anomalies, or specific conditions within a defined timeframe, and trigger alerts or reports if the criteria are met.
+Scheduled detection rules run at predefined intervals to analyze indexed log data and detect security threats. These rules can identify patterns, anomalies, or specific conditions within a defined time frame, and trigger alerts or reports if the criteria are met.
 
 Scheduled rules complement real-time monitoring by ensuring periodic, in-depth analysis of logs with advanced query time operations and functions.
 
@@ -31,7 +31,7 @@ Choose the query language you want to use.
 
 {{< img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" >}}
 
-1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. (Optional) In the **Count** dropdown menu, select attributes whose unique values are counted over the specified time frame.
@@ -39,7 +39,7 @@ Choose the query language you want to use.
     - The defined `group by` generates a signal for each `group by` value.
     - Typically, the `group by` is an entity (like user, or IP). The `group by` is also used to join the queries together.
     - Joining logs that span a time frame can increase the confidence or severity of the security signal. For example, to detect a successful brute force attack, both successful and unsuccessful authentication logs must be correlated for a user.
-1. (Optional) You can [filter logs using references tables](#filter-ref-threshold):
+1. (Optional) You can filter logs using references tables:
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
     1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
     1. In the **where field** dropdown menu, select the log field to join on.
@@ -74,7 +74,7 @@ TKTK
 
 {{< img src="security/security_monitoring/detection_rules/new_value_20250310.png" alt="Define the search query" style="width:100%;" >}}
 
-1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Detect new value** dropdown menu, select the attributes you want to detect.
@@ -89,7 +89,7 @@ TKTK
     - The defined `group by` generates a signal for each `group by` value.
     - Typically, the `group by` is an entity (like user or IP address).
 1. In the dropdown menu to the right of **group by**, select the learning duration.
-1. (Optional) You can [filter logs using references tables](#filter-ref-threshold):
+1. (Optional) You can filter logs using references tables:
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
     1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
     1. In the **where field** dropdown menu, select the log field to join on.
@@ -117,7 +117,7 @@ TKTK
 
 {{< img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" >}}
 
-1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. (Optional) In the **Count** dropdown menu, select attributes whose unique values you want to count during the specified time frame.
@@ -152,7 +152,7 @@ TKTK
 {{% /tab %}}
 {{% tab "Content Anomaly" %}}
 
-1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Detect anomaly** field, specify the fields whose values you want to analyze.
@@ -186,7 +186,7 @@ TKTK
 {{% /tab %}}
 {{% tab "Impossible Travel" %}}
 
-1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
 1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
@@ -226,7 +226,7 @@ TKTK
 {{% /tab %}}
 {{% tab "Third Party" %}}
 
-1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Trigger for each new** dropdown menu, select the attributes where each attribute generates a signal for each new attribute value over 24-hour roll-up period.
@@ -304,6 +304,10 @@ Click **Add Root Query** to add additional queries.
 #### 4. Enable optional group by {#enable-group-by-scheduled-new-value}
 
 {{% cloud_siem/enable_group_by %}}
+
+#### 5. Enable instantaneous baseline
+
+{{% cloud_siem/enable_instantaneous_baseline %}}
 
 {{% /tab %}}
 {{% tab "Anomaly" %}}
