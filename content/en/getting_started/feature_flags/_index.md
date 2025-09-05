@@ -16,7 +16,6 @@ Datadog feature flags offer a powerful, integrated way to manage feature deliver
 
 * **Built for experimentation:** Target specific audiences for A/B tests, roll out features gradually with canary releases, and automatically roll back when regressions are detected.
 
-
 * **OpenFeature compatible:** Built on the OpenFeature standard, ensuring compatibility with existing OpenFeature implementations and providing a vendor-neutral approach to feature flag management.
 
 ## Configure your environments
@@ -57,7 +56,7 @@ const provider = new DatadogProvider({
 await OpenFeature.setProvider(provider);
 ```
 
-More information about OpenFeature SDK configuration options can be found in its [README][1].
+More information about OpenFeature SDK configuration options can be found in its [README][1]. For more information on creating client tokens and/or application ID's check out [Account Management][4].
 
 ### Step 2: Create a feature flag
 
@@ -126,3 +125,4 @@ Monitor the feature rollout from the feature flag details page, which provides r
 [1]: https://openfeature.dev/docs/reference/technologies/client/web/
 [2]: https://app.datadoghq.com/feature-flags/create
 [3]: https://app.datadoghq.com/feature-flags/environments
+[4]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
