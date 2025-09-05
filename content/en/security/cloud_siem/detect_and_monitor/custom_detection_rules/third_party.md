@@ -60,19 +60,7 @@ To finish setting up the detection rule, select the type of rule you are creatin
 
 {{% cloud_siem/set_conditions %}}
 
-#### Example
 
-If you have a `failed_login` and a `successful_login` query:
-
-{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
-
-and a rule condition that triggers when `failed_login > 5 && successful_login>0`:
-
-{{< img src="security/security_monitoring/detection_rules/set_rule_case4.png" alt="The set rule conditions section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:90%;" >}}
-
-The rule condition joins these queries together based on their `group by` value. The `group by` attribute is typically the same attribute because the value must be the same for the condition to be met. If a `group by` value doesn't exist, the condition will never be met. A security signal is generated for each unique `group by` value when a condition is matched.
-
-In this example, when there are more than five failed logins and at least one successful login for the same `User Name`, the first condition is matched, and a security signal is generated.
 
 #### Severity and notification
 
@@ -105,19 +93,7 @@ Toggle **Enable Optional Group By** section, if you want to group events even wh
 
 {{% cloud_siem/set_conditions %}}
 
-#### Example
 
-If you have a `failed_login` and a `successful_login` query:
-
-{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
-
-and a rule condition that triggers when `failed_login > 5 && successful_login>0`:
-
-{{< img src="security/security_monitoring/detection_rules/set_rule_case4.png" alt="The set rule conditions section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:90%;" >}}
-
-The rule condition joins these queries together based on their `group by` value. The `group by` attribute is typically the same attribute because the value must be the same for the condition to be met. If a `group by` value doesn't exist, the condition will never be met. A security signal is generated for each unique `group by` value when a condition is matched.
-
-In this example, when there are more than five failed logins and at least one successful login for the same `User Name`, the first condition is matched, and a security signal is generated.
 
 #### Severity and notification
 
@@ -150,19 +126,7 @@ Toggle **Enable Optional Group By** section, if you want to group events even wh
 
 {{% cloud_siem/set_conditions %}}
 
-#### Example
 
-If you have a `failed_login` and a `successful_login` query:
-
-{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
-
-and a rule condition that triggers when `failed_login > 5 && successful_login>0`:
-
-{{< img src="security/security_monitoring/detection_rules/set_rule_case4.png" alt="The set rule conditions section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:90%;" >}}
-
-The rule condition joins these queries together based on their `group by` value. The `group by` attribute is typically the same attribute because the value must be the same for the condition to be met. If a `group by` value doesn't exist, the condition will never be met. A security signal is generated for each unique `group by` value when a condition is matched.
-
-In this example, when there are more than five failed logins and at least one successful login for the same `User Name`, the first condition is matched, and a security signal is generated.
 
 #### Other parameters
 
