@@ -16,7 +16,6 @@ Datadog feature flags offer a powerful, integrated way to manage feature deliver
 
 * **Built for experimentation:** Target specific audiences for A/B tests, roll out features gradually with canary releases, and automatically roll back when regressions are detected.
 
-* **Integration with Datadog:** Out-of-the-box integration with Datadog metrics, change tracking events, and more—no additional instrumentation needed.
 
 * **OpenFeature compatible:** Built on the OpenFeature standard, ensuring compatibility with existing OpenFeature implementations and providing a vendor-neutral approach to feature flag management.
 
