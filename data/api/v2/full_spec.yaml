@@ -42395,7 +42395,7 @@ components:
           type: string
       type: object
     Shift:
-      description: The definition of `Shift` object.
+      description: An on-call shift with its associated data and relationships.
       example:
         data:
           attributes:
@@ -42426,7 +42426,7 @@ components:
           type: array
       type: object
     ShiftData:
-      description: The definition of `ShiftData` object.
+      description: Data for an on-call shift.
       properties:
         attributes:
           $ref: '#/components/schemas/ShiftDataAttributes'
@@ -42441,7 +42441,7 @@ components:
       - type
       type: object
     ShiftDataAttributes:
-      description: The definition of `ShiftDataAttributes` object.
+      description: Attributes for an on-call shift.
       properties:
         end:
           description: The end time of the shift.
@@ -42453,7 +42453,7 @@ components:
           type: string
       type: object
     ShiftDataRelationships:
-      description: The definition of `ShiftDataRelationships` object.
+      description: Relationships for an on-call shift.
       properties:
         user:
           $ref: '#/components/schemas/ShiftDataRelationshipsUser'
@@ -42500,7 +42500,7 @@ components:
       x-enum-varnames:
       - SHIFTS
     ShiftIncluded:
-      description: The definition of `ShiftIncluded` object.
+      description: Included data for shift operations.
       oneOf:
       - $ref: '#/components/schemas/ScheduleUser'
     SimpleMonitorUserTemplate:
