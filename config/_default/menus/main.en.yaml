@@ -100,151 +100,151 @@ menu:
       url: getting_started/devsecops
       parent: getting_started
       weight: 10
-    - name: Feature Flags
-      identifier: getting_started_feature_flags
-      url: getting_started/feature_flags/
-      parent: getting_started
-      weight: 11
     - name: Incident Management
       identifier: getting_started_incident_management
       url: getting_started/incident_management/
       parent: getting_started
-      weight: 12
+      weight: 11
     - name: Integrations
       identifier: getting_started_integrations
       url: getting_started/integrations/
       parent: getting_started
-      weight: 13
+      weight: 12
     - name: AWS
       identifier: getting_started_with_aws
       url: getting_started/integrations/aws/
-      weight: 1301
+      weight: 1201
       parent: getting_started_integrations
     - name: Azure
       identifier: getting_started_with_azure
       url: getting_started/integrations/azure/
-      weight: 1302
+      weight: 1202
       parent: getting_started_integrations
     - name: Google Cloud
       identifier: getting_started_with_google_cloud
       url: getting_started/integrations/google_cloud/
-      weight: 1303
+      weight: 1203
       parent: getting_started_integrations
     - name: Terraform
       identifier: getting_started_with_terraform
       url: getting_started/integrations/terraform/
-      weight: 1304
+      weight: 1204
       parent: getting_started_integrations
     - name: Internal Developer Portal
       identifier: getting_started_internal_developer_portal
       url: getting_started/internal_developer_portal/
       parent: getting_started
-      weight: 14
+      weight: 13
     - name: Logs
       identifier: getting_started_logs
       url: getting_started/logs/
       parent: getting_started
-      weight: 15
+      weight: 14
     - name: Monitors
       identifier: getting_started_monitors
       url: getting_started/monitors/
       parent: getting_started
-      weight: 16
+      weight: 15
     - name: OpenTelemetry
       identifier: getting_started_opentelemetry
       url: getting_started/opentelemetry/
       parent: getting_started
-      weight: 17
+      weight: 16
     - name: Profiler
       identifier: getting_started_profiler
       url: getting_started/profiler/
       parent: getting_started
-      weight: 18
+      weight: 17
     - name: Session Replay
       identifier: getting_started_session_replay
       url: getting_started/session_replay/
       parent: getting_started
-      weight: 19
+      weight: 18
     - name: Security
       identifier: getting_started_security
       url: getting_started/security/
       parent: getting_started
-      weight: 20
+      weight: 19
     - name: App and API Protection
       identifier: getting_started_application_security
       url: getting_started/security/application_security
       parent: getting_started_security
-      weight: 2001
+      weight: 1901
     - name: Cloud Security
       identifier: getting_started_cloud_security_management
       url: getting_started/security/cloud_security_management/
       parent: getting_started_security
-      weight: 2002
+      weight: 1902
     - name: Cloud SIEM
       identifier: getting_started_cloud_siem
       url: getting_started/security/cloud_siem/
       parent: getting_started_security
-      weight: 2003
+      weight: 1903
     - name: Code Security
       identifier: getting_started_code_security
       url: getting_started/code_security/
       parent: getting_started_security
-      weight: 2004
+      weight: 1904
     - name: Serverless for AWS Lambda
       identifier: getting_started_serverless
       url: getting_started/serverless/
       parent: getting_started
-      weight: 21
+      weight: 20
     - name: Software Delivery
       identifier: getting_started_software_delivery
       url: getting_started/software_delivery/
       parent: getting_started
-      weight: 22
+      weight: 21
     - name: CI Visibility
       identifier: getting_started_ci_visibility
       url: getting_started/ci_visibility/
       parent: getting_started_software_delivery
-      weight: 2201
+      weight: 2101
+    - name: Feature Flags
+      identifier: getting_started_feature_flags
+      url: getting_started/feature_flags/
+      parent: getting_started_software_delivery
+      weight: 2102
     - name: Test Optimization
       identifier: getting_started_test_optimization
       url: getting_started/test_optimization/
       parent: getting_started_software_delivery
-      weight: 2202
+      weight: 2103
     - name: Test Impact Analysis
       identifier: getting_started_test_impact_analysis
       url: getting_started/test_impact_analysis/
       parent: getting_started_software_delivery
-      weight: 2203
+      weight: 2104
     - name: Synthetic Monitoring and Testing
       identifier: getting_started_synthetics
       url: getting_started/synthetics/
       parent: getting_started
-      weight: 23  
+      weight: 22
     - name: API Tests
       identifier: getting_started_api_test
       url: getting_started/synthetics/api_test
       parent: getting_started_synthetics
-      weight: 2301
+      weight: 2201
     - name: Browser Tests
       identifier: getting_started_browser_test
       url: getting_started/synthetics/browser_test
       parent: getting_started_synthetics
-      weight: 2302
+      weight: 2202
     - name: Mobile App Tests
       identifier: getting_started_mobile_app
       url: getting_started/synthetics/mobile_app_testing
       parent: getting_started_synthetics
-      weight: 2303
+      weight: 2203
     - name: Continuous Testing
       identifier: getting_started_continuous_testing
       url: getting_started/continuous_testing/
       parent: getting_started_synthetics
-      weight: 2304
+      weight: 2204
     - name: Private Locations
       identifier: getting_started_private_location
       url: getting_started/synthetics/private_location
       parent: getting_started_synthetics
-      weight: 2305
+      weight: 2205
     - name: Tags
       identifier: tagging_
       url: getting_started/tagging/
