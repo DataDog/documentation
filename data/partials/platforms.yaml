@@ -56,11 +56,7 @@ platforms:
     image: "platform_saltstack.png"
     category: "configuration_management"
   - name: foundry
-<<<<<<< HEAD
-    link: "/integrations/"
-=======
     link: "https://app.datadoghq.com/fleet/install-agent/latest?platform=cloud_foundry"
->>>>>>> master
     image: "platform_cloud_foundry.png"
     category: "Cloud platforms"
   # - name: source
