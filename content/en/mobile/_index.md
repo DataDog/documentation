@@ -284,7 +284,7 @@ On the Bits AI home page, you can ask questions about your organization's system
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/android_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android Bits AI SRE on On-Call pages">}}
+{{< img src="service_management/mobile/android_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI SRE investigation results displayed on an On-Call page">}}
 
 {{% /tab %}}
 {{< /tabs >}}
