@@ -44,6 +44,12 @@ To list all of the available values of a specific template variable, use the fol
 ${global?.dashboard?.templateVariables?.find(v => v.name === '<TEMPLATE_VARIABLE_NAME>')?.availableValues}
 {{< /code-block >}}
 
+To list all of the available values when using a select component, use the following template expression:
+
+{{< code-block lang="json" disable_copy="false">}}
+${global?.dashboard?.templateVariables?.find(v => v.name === '<TEMPLATE_VARIABLE_NAME>')?.availableValues.map(availableValue => {return {label: availableValue, value:availableValue}})}
+{{< /code-block >}}
+
 To get the selected value of a template variable, use the following template expressions:
 
 - For a single-select template variable:

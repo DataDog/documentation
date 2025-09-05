@@ -1,12 +1,12 @@
 ---
-description: Test Visibility Explorer でテスト実行を検索する際に使用できるデフォルトのファセットについて学びます。
+description: Test Optimization Explorer でテスト実行を検索する際に使用できるデフォルトのファセットについて学びます。
 further_reading:
 - link: tests/search/
   tag: ドキュメント
   text: テストの検索方法について
 - link: tests/explorer/
   tag: ドキュメント
-  text: Test Visibility Explorer について
+  text: Learn about the Test Optimization Explorer
 title: テスト実行ファセット
 ---
 
@@ -14,21 +14,21 @@ title: テスト実行ファセット
 
 ファセットとは、テストからユーザーが定義したタグや属性のことです。これらは、[定性的](#qualitative-facets)および[定量的](#quantitative-measures)なデータ分析に役立ちます。ファセットによって、[CI テストモニター][1]や[ダッシュボード][2]、[ノートブック][3]に表示される検索クエリでテストを操作することができるようになります。
 
-[ファセットの作成](#creating-facets)は、[テスト実行の検索][5]には**必須**ではありません。オートコンプリート機能は既存のファセットを使用しますが、入力されたテスト実行にマッチする入力も適用されます。
+[ファセットの作成](#creating-facets)は、テスト実行の検索には**必須**ではありません。オートコンプリート機能は既存のファセットを使用しますが、入力した値が受信したテスト実行に含まれる値に一致する場合も補完対象となります。
 
 ## 一般的なファセット
 
-[**Software Delivery** &gt; **Test Visibility** &gt; **Test Runs**][7] に移動して、テスト実行リストの左側に表示されるファセットの一覧にアクセスします。
+[**Software Delivery** > **Test Optimization** > **Test Runs**][7] に移動して、テスト実行リストの左側に表示されるファセットの一覧にアクセスします。
 
-{{< img src="/continuous_integration/facets-tests.png" text="Test Visibility Explorer の Test Runs ページの Facets リスト" style="width:100%" >}}
+{{< img src="/continuous_integration/facets-tests.png" text="Test Optimization Explorer の Test Runs ページの Facets リスト" style="width:100%" >}}
 
-Test Visibility Explorer でファセットを使用して、以下の操作を行うことができます。
+Test Optimization Explorer でファセットを使用して、以下の操作を行うことができます。
 
-- [テスト実行の検索とフィルタリング][5]
+- テスト実行の検索とフィルタリング
 - テスト分析の実行
 - テスト実行が完了したら、トラブルシューティングを開始します
 
-[Test Visibility Explorer][4] には、すぐに使える以下のファセットが含まれています。
+[Test Optimization Explorer][4] には、すぐに使える以下のファセットが含まれています。
 
 | ファセット | 説明 |
 |---|---|
@@ -55,7 +55,7 @@ Test Visibility Explorer でファセットを使用して、以下の操作を�
 | Repository ID | Git リポジトリを一意に識別する ID。 |
 | Commit SHA | Git コミット SHA。 |
 | Branch | Git ブランチ。 |
-| タグ | Git タグ。 |
+| Tag | Git タグ。 |
 | Author Email | Git 作成者メールアドレス。 |
 | Committer Email | Git コミッターメールアドレス。 |
 | Committer Date | Git コミッター日付。 |
@@ -125,7 +125,7 @@ Test Visibility Explorer でファセットを使用して、以下の操作を�
 
 {{< img src="tests/explorer/create_facet.png" alt="Test Runs サイドパネルで、失敗したテスト実行からファセットを作成します" style="width:100%;">}}
 
-1. [Test Visibility Explorer][4] で、ファセットを作成するフィールドを含む対象のテスト実行に移動します。
+1. [Test Optimization Explorer][4] で、ファセットを作成するフィールドを含む対象のテスト実行に移動します。
 2. リストからテスト実行を選択して、Test Runs サイドパネルを開きます。
 3. 必要なフィールド (テスト実行の場合は **Other tags** セクション) をクリックし、そこからファセットを作成します。
 
@@ -153,6 +153,5 @@ Test Visibility Explorer でファセットを使用して、以下の操作を�
 [2]: /ja/dashboards/
 [3]: /ja/notebooks/
 [4]: /ja/tests/explorer
-[5]: /ja/tests/search
 [6]: /ja/tests/explorer/search_syntax/
 [7]: https://app.datadoghq.com/ci/test-runs
