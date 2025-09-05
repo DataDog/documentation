@@ -75,7 +75,8 @@ const client = OpenFeature.getClient();
 // (e.g. org id, user email)
 await OpenFeature.setContext({
    org: { id: 2 },
-   user: { id: 'user-123', email: 'user@example.com' }
+   user: { id: 'user-123', email: 'user@example.com' },
+   targetingKey: 'user-123',
 });
 
 // This is what the SDK returns if the flag is disabled in
