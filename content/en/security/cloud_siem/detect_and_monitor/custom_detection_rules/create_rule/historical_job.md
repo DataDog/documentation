@@ -110,7 +110,7 @@ Historical jobs are one-time executable searches on historical logs using the de
     - Typically, the `group by` is an entity (like user, or IP). The `group by` is also used to join the queries together.
     - Joining logs that span a time frame can increase the confidence or severity of the security signal. For example, to detect a successful brute force attack, both successful and unsuccessful authentication logs must be correlated for a user.
     - Anomaly detection inspects how the `group by` attribute has behaved in the past. If a `group by` attribute is seen for the first time (for example, the first time an IP is communicating with your system) and is anomalous, it does not generate a security signal because the anomaly detection algorithm has no historical data to base its decision on.
-1. (Optional) You can [filter logs using references tables](#filter-ref-anomaly):
+1. (Optional) You can filter logs using references tables:
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
     1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
     1. In the **where field** dropdown menu, select the log field to join on.
@@ -145,7 +145,7 @@ Historical jobs are one-time executable searches on historical logs using the de
     - Joining logs that span a time frame can increase the confidence or severity of the security signal. For example, to detect a successful brute force attack, both successful and unsuccessful authentication logs must be correlated for a user.
 1. In the **Learn for** dropdown menu, select the number of days for the learning period. During the learning period, the rule sets a baseline of normal field values and does not generate any signals.
     - **Note**: If the detection rule is modified, the learning period restarts at day `0`.
-1. (Optional) You can [filter logs using references tables](#filter-ref-content-anomaly):
+1. (Optional) You can filter logs using references tables:
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
     1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
     1. In the **where field** dropdown menu, select the log field to join on.
@@ -179,7 +179,7 @@ Historical jobs are one-time executable searches on historical logs using the de
     - When selected, signals are suppressed for the first 24 hours. During that time, Datadog learns the user's regular access locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.
     - Do **not** click the checkbox if you want Datadog to detect all impossible travel behavior.
     - See [How the impossible detection method works][4] for more information.
-1. (Optional) You can [filter logs using references tables](#filter-ref-impossible):
+1. (Optional) You can filter logs using references tables:
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
     1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
     1. In the **where field** dropdown menu, select the log field to join on.
