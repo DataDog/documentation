@@ -77,6 +77,8 @@ Using the Datadog Agent or the RFC5424 format automatically sets the host value 
 * `hostname`
 * `syslog.hostname`
 
+**Note** : If JSON logs ingested by the Datadog Agent in Kubernetes ( say the logs contains a 'host', 'hostname', or 'syslog.hostname' key  attribute) , this value overrides the default agent hostname for that log. As a result, the logs would be attributed to the “wrong” host and not inheriting the expected host-level tags of the “correct” host . The log will not inherit the expected host-level tags which are set at the host level.
+
 {{% /tab %}}
 {{% tab "Date" %}}
 
