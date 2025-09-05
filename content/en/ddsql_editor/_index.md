@@ -25,7 +25,7 @@ With [DDSQL Editor][1], you can get deeper visibility into your infrastructure b
 
 ## Query in natural language
 
-Type your question into the search box, and Datadog builds the SQL query for you. You can accept or discard and provide feedback to help improve the feature! 
+Type your question into the search box, and Datadog builds the SQL query for you. You can accept or discard changes, and can provide feedback to help improve the feature.
 
 {{< img src="ddsql_editor/natural-language-query-2.png" alt="A query inputted into the natural language search box" style="width:90%;" >}}
 
