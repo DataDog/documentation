@@ -279,7 +279,7 @@ On the Bits AI home page, you can ask questions about your organization's system
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/ios_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="ios Bits AI SRE on On-Call pages">}}
+{{< img src="service_management/mobile/ios_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI SRE investigation results displayed on an On-Call page">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
