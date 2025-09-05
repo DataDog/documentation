@@ -400,7 +400,11 @@ See [`ViewTrackingStrategy`][12] to enable automatic tracking of all your views 
 
 ### Step 5 - Add NDK crash reporting
 
-Your Android application may be running native code (C/C++) for performance or code reusability reasons. In order to enable NDK crash reporting, use the Datadog NDK plugin. 
+If your Android app uses native code (C/C++) through the Android NDK (Native Development Kit), you can track crashes that occur in this native code. Native code is often used for performance-critical operations, image processing, or when reusing existing C/C++ libraries.
+
+Without NDK crash reporting, crashes in your native code do not appear in Error Tracking, making it difficult to debug issues in this part of your application.
+
+To enable NDK crash reporting, use the Datadog NDK plugin:
 
 1. Add the Gradle dependency by declaring the library as a dependency in your `build.gradle` file:
 
@@ -540,20 +544,43 @@ To initialize an interceptor for tracking network events:
 
 You can also add an `EventListener` for the `OkHttpClient` to [automatically track resource timing][17] for third-party providers and network requests.
 
-## Advanced Error Tracking Features
+## Advanced Error Tracking features
 
 ### Get deobfuscated stack traces
 
-Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated for each build run, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
+When your Android app is built for production, the code is typically obfuscated using ProGuard or R8 to reduce app size and protect intellectual property. This obfuscation makes stack traces in crash reports unreadable, showing meaningless class and method names like `a.b.c()` instead of `com.example.MyClass.myMethod()`.
 
-Depending on the [Android Gradle plugin][22] version, the matching of stack traces and mapping files relies on different fields:
+To make these stack traces readable for debugging, you need to upload your mapping files to Datadog. These files contain the mapping between obfuscated and original code, allowing Datadog to automatically deobfuscate stack traces in your error reports.
 
-- Versions 1.13.0 and higher use the `build_id` field (you must use Datadog Android SDK 2.8.0 or later to support this field)
-- Older versions use a combination of the `service`, `version`, and `variant` fields
+#### How it works
 
-### Upload your mapping file
+Datadog uses a unique build ID generated for each build to automatically match stack traces with the correct mapping files. This ensures that:
 
-**Note**: Re-uploading a source map does not override the existing one if the version has not changed.
+- Stack traces are always deobfuscated with the correct mapping file, regardless of when it was uploaded
+- You can upload mapping files during pre-production or production builds
+- The process works seamlessly across different build variants and environments
+
+The matching process depends on your [Android Gradle plugin][22] version:
+
+- **Versions 1.13.0 and higher**: Uses the `build_id` field (requires Datadog Android SDK 2.8.0 or later)
+- **Older versions**: Uses a combination of `service`, `version`, and `variant` fields
+
+#### Upload your mapping file
+
+The Android Gradle plugin automates the mapping file upload process. Once configured, it automatically uploads the appropriate ProGuard/R8 mapping file for each build variant when you build your app.
+
+**Note**: Re-uploading a mapping file does not override the existing one if the version has not changed. For information about file size limitations and other constraints, see the [Limitations](#limitations) section.
+
+#### Run the upload tasks
+
+After configuring the plugin, run the Gradle tasks to upload your Proguard/R8 mapping file and NDK symbol files to Datadog:
+
+```bash
+./gradlew uploadMappingRelease
+./gradlew uploadNdkSymbolFilesRelease
+```
+
+For any given error, you can access the file path, line number, and a code snippet for each frame of the related stack trace.
 
 {{< tabs >}}
 {{% tab "US" %}}
@@ -589,7 +616,6 @@ Depending on the [Android Gradle plugin][22] version, the matching of stack trac
 
 **Note**: If your project uses additional flavors, the plugin provides an upload task for each variant with obfuscation enabled. In this case, initialize the Android SDK with a proper variant name (the necessary API is available in versions `1.8.0` and later).
 
-
 [22]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [23]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
@@ -624,7 +650,6 @@ Depending on the [Android Gradle plugin][22] version, the matching of stack trac
    ```
 
 **Note**: If your project uses additional flavors, the plugin provides an upload task for each variant with obfuscation enabled. In this case, initialize the Android SDK with a proper variant name (the necessary API is available in versions `1.8.0` and later).
-
 
 [22]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [23]: https://app.datadoghq.com/organization-settings/api-keys
@@ -786,7 +811,6 @@ val inputStream = context.getRawResAsRumResource(id)
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /error_tracking/
 [2]: https://app.datadoghq.com/rum/error-tracking
