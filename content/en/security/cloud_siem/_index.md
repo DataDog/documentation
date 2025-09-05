@@ -258,11 +258,6 @@ See which rules are the noisiest by calculating the percentage of signals that a
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<<<<<<< HEAD
-[1]: /security/cloud_siem/triage_and_investigate/investigate_security_signals
-[2]: /security/default_rules#cat-cloud-siem
-[3]: /security/detection_rules
-=======
 [1]: https://securitylabs.datadoghq.com/
 [2]: https://www.datadoghq.com/product/cloud-siem/
 [3]: https://app.datadoghq.com/security/home?
@@ -274,4 +269,3 @@ See which rules are the noisiest by calculating the percentage of signals that a
 [9]: /security/cloud_siem/content_packs/
 [10]: /logs/explorer/search_syntax/
 [11]: /logs/explorer/
->>>>>>> master
