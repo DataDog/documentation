@@ -47,7 +47,7 @@ const provider = new DatadogProvider({
    applicationId: '<APPLICATION_ID>',
    enableExposureLogging: true,
    site: 'datadoghq.com',
-   env: '<YOUR_ENV>',
+   env: '<YOUR_ENV>', // Same environment normally passed to the RUM SDK
    service: '<SERVICE_NAME>',
    version: '1.0.0',
 });
