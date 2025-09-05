@@ -74,6 +74,7 @@ Restart the Agent service to observe your configuration changes:
 1. Run the script to restart the Datadog Agent.
 1. Check for new data in the Datadog UI.
 
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
