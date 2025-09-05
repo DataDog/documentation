@@ -2,8 +2,8 @@
 title: Getting Started with Feature Flags
 further_reading:
 - link: 'https://openfeature.dev/docs/reference/technologies/client/web/'
-  tag: 'Source Code'
-  text: 'OpenFeature JavaScript client documentation'
+  tag: 'External Site'
+  text: 'OpenFeature Web SDK documentation'
 site_support_id: getting_started_feature_flags
 ---
 
