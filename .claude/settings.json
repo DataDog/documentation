@@ -11,15 +11,6 @@
             "timeout": 300
           }
         ]
-      },
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "jq . > pre-log.json"
-          }
-        ]
       }
     ]
   }
