@@ -125,6 +125,7 @@ For the fastest introduction to navigating Datadog, try the [Quick Start course]
 {{< nextlink href="/getting_started/cloud_siem" >}}<u>Cloud SIEM</u>: Discover best practices for getting your team up and running with Cloud SIEM.{{< /nextlink >}}
 {{< nextlink href="/getting_started/logs" >}}<u>Logs</u>: Send your first logs and use log processing to enrich them.{{< /nextlink >}}
 {{< nextlink href="/getting_started/ci_visibility" >}}<u>CI Visibility</u>: Collect CI pipeline data by setting up integrations with your CI providers.{{< /nextlink >}}
+{{< nextlink href="/getting_started/feature_flags" >}}<u>Feature Flags</u>: Manage feature delivery and personalize user experiences, with built-in observability.{{< /nextlink >}}
 {{< nextlink href="/getting_started/test_optimization" >}}<u>Test Optimization</u>: Collect CI test data by setting up test services in Datadog.{{< /nextlink >}}
 {{< nextlink href="/getting_started/test_impact_analysis" >}}<u>Test Impact Analysis</u>: Optimize your test suite and reduce CI costs by only running tests that are relevant to your code changes.{{< /nextlink >}}
 {{< nextlink href="/getting_started/code_security" >}}<u>Code Security</u>: Analyze your first-party code and open source libraries in your applications from development to runtime.{{< /nextlink >}}
