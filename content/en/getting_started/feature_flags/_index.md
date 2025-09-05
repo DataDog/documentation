@@ -53,7 +53,7 @@ const provider = new DatadogProvider({
 });
 
 // Set the provider
-await OpenFeature.setProvider(provider);
+await OpenFeature.setProviderAndWait(provider);
 ```
 
 More information about OpenFeature SDK configuration options can be found in its [README][1]. For more information on creating client tokens and/or application ID's check out [Account Management][4].
