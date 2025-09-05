@@ -94,7 +94,7 @@ if (showFeature) {
 }
 ```
 
-After you've completed this step, redeploy the application to pick up these changes. Additional usage examples can be found in the SDK's [README][1].
+After you've completed this step, redeploy the application to pick up these changes. Additional usage examples can be found in the SDK's [documentation][1].
 
 ### Step 4: Define targeting rules and enable the feature flag
 
