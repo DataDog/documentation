@@ -95,7 +95,7 @@ After you've completed this step, redeploy the application to pick up these chan
 
 Now that the application is ready to check the value of your flag, you can start adding targeting rules. Targeting rules enable you to define where or to whom to serve different variants of your feature. 
 
-Go to **Feature Flags**, select your flag, then select **Targeting Rules & Rollouts**. Select the environment whose rules you want to modify from the dropdown, and click **Edit Targeting Rules**.
+Go to **Feature Flags**, select your flag, then find the section titled **Targeting Rules & Rollouts**. Select the environment whose rules you want to modify, and click **Edit Targeting Rules**.
 
 {{< img src="getting_started/feature_flags/ff-targeting-rules-and-rollouts.png" alt="Targeting Rules & Rollouts" style="width:100%;" >}}
 
