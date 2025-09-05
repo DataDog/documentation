@@ -93,7 +93,7 @@ Critical push notifications are only available for On-Call. If you are setting u
 
 3. Then tap **Bypass Do Not Disturb** and enable **Override Do Not Disturb** in System Settings for High Urgency On-Call.
 
-**For Samsung:** Go to device **Settings** > **Notifications** > **Do Not Disturb** > **App notification** options. Select Datadog as an app that bypasses Do Not Disturb.
+   **On Samsung devices**: Go to **Settings** > **Notifications** > **Do Not Disturb** > **App notifications**. Select Datadog and allow it to bypass Do Not Disturb.
 
 {{< img src="service_management/mobile/android_override_system_volume_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
