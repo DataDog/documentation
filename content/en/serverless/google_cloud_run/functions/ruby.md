@@ -1,5 +1,5 @@
 ---
-title: Instrumenting a Ruby Cloud Run Container with Sidecar
+title: Instrumenting a Ruby Cloud Run Function
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 60
@@ -34,19 +34,15 @@ gem 'datadog'
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
-   {{% tab "YAML Deploy" %}}
-   {{% gcr-install-sidecar-yaml language="ruby" %}}
-   {{% /tab %}}
-
    {{% tab "Custom" %}}
-   {{% gcr-install-sidecar-custom %}}
+   {{% gcr-install-sidecar-custom function="true" %}}
    {{% /tab %}}
 
    {{< /tabs >}}
 
 3. **Set up logs**.
 
-   In the previous step, you created a shared volume. Additionally, you may have also set the `DD_SERVERLESS_LOG_PATH` environment variable, which defaults to `/shared-volume/logs/app.log`.
+   In the previous step, you created a shared volume. You may have also set the `DD_SERVERLESS_LOG_PATH` environment variable, which defaults to `/shared-volume/logs/app.log`.
 
    In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. You can also set a custom format for log/trace correlation and other features. Datadog recommends setting the environment variable `DD_SOURCE=ruby` in your sidecar container to enable advanced Datadog log parsing.
 
@@ -69,9 +65,9 @@ logger.info "Hello World!"
 
 5. **Send custom metrics**.
 
-   To send custom metrics, [install the DogStatsD client][3] and [view code examples][4]. In serverless, only the *distribution* metric type is supported.
+   To send custom metrics, [install the DogStatsD client][3] and [view code examples][4]. In Serverless Monitoring, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars instrumentationMethod="sidecar" language="ruby" %}}
+{{% gcr-env-vars instrumentationMethod="sidecar" language="ruby" function="true" %}}
 
 ## Troubleshooting
 

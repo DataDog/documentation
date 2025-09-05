@@ -1,5 +1,5 @@
 ---
-title: Instrumenting a Go Cloud Run Container with Sidecar
+title: Instrumenting a Go Cloud Run Function
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 30
@@ -12,7 +12,7 @@ further_reading:
     text: 'Correlating Go Logs and Traces'
 ---
 
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/sidecar/go">available on GitHub</a>.</div>
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run-functions/go">available on GitHub</a>.</div>
 
 ## Setup
 
@@ -49,12 +49,8 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
-   {{% tab "YAML Deploy" %}}
-   {{% gcr-install-sidecar-yaml language="go" %}}
-   {{% /tab %}}
-
    {{% tab "Custom" %}}
-   {{% gcr-install-sidecar-custom %}}
+   {{% gcr-install-sidecar-custom function="true" %}}
    {{% /tab %}}
 
    {{< /tabs >}}
@@ -63,7 +59,7 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
    In the previous step, you created a shared volume. You may have also set the `DD_SERVERLESS_LOG_PATH` environment variable, which defaults to `/shared-volume/logs/app.log`.
 
-   In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. In Go, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `logrus`:
+   In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. In Go, Datadog recommends writing logs in JSON format. For example, you can use a third-party logging library such as `logrus`:
    {{< code-block lang="go" disable_copy="false" >}}
 const LOG_FILE = "/shared-volume/logs/app.log"
 
@@ -86,9 +82,9 @@ logrus.WithContext(ctx).Info("Hello World!")
 
 5. **Send custom metrics**.
 
-   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
+   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In Serverless Monitoring, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars instrumentationMethod="sidecar" language="go" %}}
+{{% gcr-env-vars instrumentationMethod="sidecar" language="go" function="true" %}}
 
 ## Troubleshooting
 

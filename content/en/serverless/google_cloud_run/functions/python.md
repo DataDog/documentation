@@ -1,5 +1,5 @@
 ---
-title: Instrumenting a Python Cloud Run Container with Sidecar
+title: Instrumenting a Python Cloud Run Function
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 10
@@ -12,20 +12,15 @@ further_reading:
     text: 'Correlating Python Logs and Traces'
 ---
 
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/sidecar/python">available on GitHub</a>.</div>
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run-functions/python">available on GitHub</a>.</div>
 
 ## Setup
 
 1. **Install the Datadog Python tracer**.
 
-   Add `ddtrace` to your `requirements.txt` or `pyproject.toml`. You can find the latest version on [PyPI][1]:
+   Add `ddtrace` to your `requirements.txt` or `pyproject.toml`. This ensures the tracer is included in your container image when it is built and deployed. You can find the latest version on [PyPI][1]:
    {{< code-block lang="text" filename="requirements.txt" disable_copy="false" collapsible="true" >}}
 ddtrace==<VERSION>
-{{< /code-block >}}
-
-   Alternatively, you can install the tracer in your Dockerfile:
-   {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
-RUN pip install ddtrace
 {{< /code-block >}}
 
    For more information, see [Tracing Python applications][2].
@@ -38,12 +33,8 @@ RUN pip install ddtrace
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
-   {{% tab "YAML Deploy" %}}
-   {{% gcr-install-sidecar-yaml language="python" %}}
-   {{% /tab %}}
-
    {{% tab "Custom" %}}
-   {{% gcr-install-sidecar-custom %}}
+   {{% gcr-install-sidecar-custom function="true" %}}
    {{% /tab %}}
 
    {{< /tabs >}}
@@ -53,8 +44,8 @@ RUN pip install ddtrace
    In the previous step, you created a shared volume. You may have also set the `DD_SERVERLESS_LOG_PATH` environment variable, which defaults to `/shared-volume/logs/app.log`.
 
    In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. You can also set a custom format for log/trace correlation and other features. Datadog recommends setting the following environment variables:
-   - `ENV PYTHONUNBUFFERED=1`: In your main container. Ensure Python outputs appear immediately in container logs instead of being buffered.
-   - `ENV DD_LOGS_INJECTION=true`: In your main container. Enable log/trace correlation for supported loggers.
+   - `PYTHONUNBUFFERED=1`: In your main container. Ensure Python outputs appear immediately in container logs instead of being buffered.
+   - `DD_LOGS_INJECTION=true`: In your main container. Enable log/trace correlation for supported loggers.
    - `DD_SOURCE=python`: In your sidecar container. Enable advanced Datadog log parsing.
 
    Then, update your logging library. For example, you can use Python's native `logging` library:
@@ -86,9 +77,9 @@ logger.info('Hello world!')
 
 5. **Send custom metrics**.
 
-   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
+   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In Serverless Monitoring, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars instrumentationMethod="sidecar" language="python" %}}
+{{% gcr-env-vars instrumentationMethod="sidecar" language="python" function="true" %}}
 
 ## Troubleshooting
 
