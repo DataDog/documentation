@@ -12,13 +12,13 @@ title: Comprender los tiempos de los tests de API y solucionar las variaciones
 
 ## Información general
 
-Puedes identificar cuellos de botella en la comunicación entre tu servidor y el cliente con las [métricas de tiempo][1] que recopilan los tests de API Synthetic.
+Puedes identificar cuellos de botella en la comunicación entre tu servidor y el cliente con las [métricas de tiempo][1] que recopilan los tests de API de Synthetic.
 
 
 ## Métricas de tiempo
 
 
-Los tests Synthetic recopilan [métricas][1] que miden lo siguiente: 
+Los tests de Synthetic recopilan [métricas][1] que miden lo siguiente:
 
 
 ### Tiempo de redireccionamiento
@@ -30,11 +30,11 @@ Por ejemplo, un test de HTTP con **Follow Redirects** (Seguir redirecciones) sel
 Para obtener más información sobre cómo seguir las redirecciones, consulta [Tests de HTTP][2].
 
 
-La métrica `synthetics.http.redirect.time` solo se mide si las redirecciones se producen durante la ejecución del test de HTTP de Synthetics.
+La métrica `synthetics.http.redirect.time` sólo se mide si se producen redireccionamientos durante la ejecución de tests HTTP de Synthetic Monitoring.
 
 ### Tiempo de resolución DNS
 
-Las métricas `synthetics.dns.response.time` y `*.dns.time` miden el tiempo empleado en resolver el nombre de dominio. Los tests de API Synthetic utilizan servidores DNS comunes para la resolución de nombres de dominio, como Google, CloudFlare, AWS y Azure. Puedes anular estos servidores con [localizaciones privadas][3] o [tests DNS][4].
+Las métricas `synthetics.dns.response.time` y `*.dns.time` miden el tiempo empleado en resolver el nombre de dominio. Los tests de API de Synthetic utilizan servidores DNS comunes para la resolución de nombres de dominio, como Google, CloudFlare, AWS y Azure. Puedes anular estos servidores con [localizaciones privadas][3] o [tests DNS][4].
 
 Estas métricas solo se miden cuando el campo de URL de test de API contiene un nombre de dominio. Si utilizas una dirección IP, se omite la resolución DNS y no aparecen series temporales para estas métricas.
 
@@ -86,7 +86,7 @@ Identifica los siguientes comportamientos:
 
 - Si la variación se observa como una tendencia general o un pico repentino.
 - Si la variación solo se produce en una etapa específica de la solicitud. Por ejemplo, en los tiempos de DNS.
-- Si el test de Synthetics afectado se ejecuta desde múltiples localizaciones, ya sea que la variación esté ubicada en una única localización o generalizada.
+- Si el test de Synthetic Monitoring afectado se ejecuta desde varias ubicaciones, tanto si la variación está localizada en una única ubicación como si está generalizada
 - Si la variación solo se produce en una única URL, dominio o subdominio, o si afecta a todos los tests.
 
 
@@ -103,7 +103,7 @@ Por ejemplo, cualquier retraso en la resolución DNS repercute en el tiempo de r
 Puede producirse un aumento del tiempo de resolución DNS con latencia adicional de los servidores autoritativos.
 
 ### Tiempo de conexión TCP
-Pueden producirse variaciones del protocolo de enlace TCP debido a la carga de red y del servidor, al tamaño de los mensajes de solicitud y respuesta, y a la distancia entre la [localización privada][5] o gestionada por Synthetics y el servidor.
+Pueden producirse variaciones del handshake TCP debido a la carga de la red y del servidor, al tamaño de los mensajes de solicitud y respuesta, y a la distancia entre la [ubicación privada][5] o gestionada de Synthetic Monitoring y el servidor.
 
 ### Tiempo del protocolo de enlace SSL
 Pueden producirse variaciones del tiempo del protocolo de enlace SSL debido a la carga del servidor (los protocolos de enlace SSL suelen requerir un uso intensivo de CPU), la carga de red y la distancia entre la [localización privada][5] o gestionada por Synthetics y el servidor. Los problemas con el CDN pueden aumentar el tiempo del protocolo de enlace SSL.
@@ -114,7 +114,7 @@ Pueden producirse variaciones del tiempo hasta el primer byte debido a la carga 
 ### Tiempo de descarga
 Pueden producirse variaciones en el tiempo de descarga debido a cambios en el tamaño de la respuesta. El tamaño del cuerpo descargado está disponible en los resultados de los tests y en la métrica `synthetics.http.response.size`.
 
-Siempre que puedan producirse variaciones debido a la carga de red, puedes utilizar [Network Performance Monitoring][6] y [Tests de ICMP de Synthetics][7] para identificar posibles cuellos de botella.
+Siempre que puedan producirse variaciones debido a la carga de la red, puedes utilizar tests de [Cloud Network Monitoring][6] y [Synthetic Monitoring ICMP][7] para identificar posibles cuellos de botella.
 
 En los casos en los que puedan producirse variaciones debido a la carga del servidor, utiliza el [Datadog Agent][8] y sus [integraciones][9] para identificar posibles retrasos. 
 
@@ -128,7 +128,7 @@ En los casos en los que puedan producirse variaciones debido a la carga del serv
 [3]: /es/synthetics/private_locations/configuration#dns-configuration
 [4]: /es/synthetics/api_tests/dns_tests#define-request
 [5]: /es/synthetics/private_locations/?tab=docker#overview
-[6]: /es/network_monitoring/performance/#overview
+[6]: /es/network_monitoring/cloud_network_monitoring/#overview
 [7]: /es/synthetics/api_tests/icmp_tests/#overview
 [8]: /es/getting_started/agent/#overview
 [9]: /es/integrations/

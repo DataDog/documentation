@@ -52,7 +52,7 @@ Consulta la siguiente tabla para obtener un resumen de las distintas opciones de
 
 Las configuraciones ***_Todos los sitios_** se pueden utilizar en las organizaciones de sitios US3, pero solo las organizaciones de sitios US3 pueden utilizar la integración nativa de Azure.
 
-<div class="alert alert-warning"> <strong>Nota</strong>: La <a href="https://docs.datadoghq.com/cloud_cost_management/azure/?tab=billingaccounts&site=us3#overview">gestión de costes en la nube</a> y los <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">archivos de log</a> solo son compatibles con el registro de aplicaciones. Para los sitios de US3 que han configurado la integración nativa de Azure de Datadog, debes crear un <a href="">registro de aplicaciones</a> para acceder a estas funcionalidades.
+<div class="alert alert-warning"> <strong>Nota</strong>: La <a href="https://docs.datadoghq.com/cloud_cost_management/setup/azure/?tab=billingaccounts&site=us3#overview">gestión de costes en la nube</a> y los <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">archivos de log</a> solo son compatibles con el registro de aplicaciones. Para los sitios de US3 que han configurado la integración nativa de Azure de Datadog, debes crear un <a href="">registro de aplicaciones</a> para acceder a estas funcionalidades.
 </div>
 
 ## Configuración

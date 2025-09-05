@@ -12,10 +12,6 @@ further_reading:
   tag: "Documentation"
   text: "Learn about advanced options in mobile tests"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
-{{< /site-region >}}
  
 
 ## Overview

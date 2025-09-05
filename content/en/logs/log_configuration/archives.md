@@ -200,7 +200,7 @@ Navigate to the [Log Forwarding page][6] and select **Add a new archive** on the
 * Only Datadog users with the [`logs_write_archive` permission][5] can complete this and the following step.
 * Archiving logs to Azure Blob Storage requires an App Registration. See instructions [on the Azure integration page][7], and set the "site" on the right-hand side of the documentation page to "US." App Registration(s) created for archiving purposes only need the "Storage Blob Data Contributor" role. If your storage bucket is in a subscription being monitored through a Datadog Resource, a warning is displayed about the App Registration being redundant. You can ignore this warning.
 * If your bucket restricts network access to specified IPs, add the webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} to the allowlist.
-* For the **US1-FED site**, you can configure Datadog to send logs to a destination outside the Datadog GovCloud environment. Datadog is not responsible for any logs that leave the Datadog GovCloud environment. Additionally, Datatdog is not responsible for any obligations or requirements you might have concerning FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency, or similar regulations applicable to these logs after they leave the GovCloud environment.
+* For the **US1-FED site**, you can configure Datadog to send logs to a destination outside the Datadog GovCloud environment. Datadog is not responsible for any logs that leave the Datadog GovCloud environment. Additionally, Datadog is not responsible for any obligations or requirements you might have concerning FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency, or similar regulations applicable to these logs after they leave the GovCloud environment.
 
 | Service                  | Steps                                                                                                                                                      |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -283,24 +283,41 @@ Archiving and [Rehydration][1] supports the following access tiers:
 
 {{< /tabs >}}
 
-#### Server side encryption (SSE)
+#### Server-side encryption (SSE) for S3 archives
 
+When creating or updating an S3 archive in Datadog, you can optionally configure **Advanced Encryption**. Three options are available under the **Encryption Type** dropdown:
+
+- **Default S3 Bucket-Level Encryption** (Default): Datadog does not override your S3 bucket's default encryption settings.
+- **Amazon S3 managed keys**: Forces server-side encryption using Amazon S3 managed keys ([SSE-S3][1]), regardless of the S3 bucket's default encryption.
+- **AWS Key Management Service**: Forces server-side encryption using a customer-managed key (CMK) from [AWS KMS][2], regardless of the S3 bucket's default encryption. You will need to provide the CMK ARN.
+
+[1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
+[2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 {{< tabs >}}
-{{% tab "AWS S3" %}}
+{{% tab "Default S3 Bucket-Level Encryption" %}}
 
-##### SSE-S3
+When this option is selected, Datadog does not specify any encryption headers in the upload request. The default encryption from your S3 bucket will apply.
 
-The default encryption for Amazon S3 buckets is server-side encryption with Amazon S3 management keys ([SSE-S3][1]).
-
-To confirm your S3 bucket is encrypted with SSE-S3:
+To set or check your S3 bucket's encryption configuration:
 
 1. Navigate to your S3 bucket.
-1. Click the **Properties** tab.
-1. In the **Default Encryption** section, check that the **Encryption key type** is **Amazon S3 managed keys (SSE-S3)**.
+2. Click the **Properties** tab.
+3. In the **Default Encryption** section, configure or confirm the encryption type. If your encryption uses [AWS KMS][1], ensure that you have a valid CMK and CMK policy attached to your CMK.
 
-##### SSE-KMS
+[1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 
-Alternatively, Datadog supports server-side encryption with a CMK from [AWS KMS][2]. To enable it, take the following steps:
+{{% /tab %}}
+{{% tab "Amazon S3 managed keys" %}}
+
+This option ensures that all archives objects are uploaded with [SSE_S3][1], using Amazon S3 managed keys. This overrides any default encryption setting on the S3 bucket. 
+
+[1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
+{{% /tab %}}
+{{% tab "AWS Key Management Service" %}}
+
+This option ensures that all archives objects are uploaded using a customer-managed key (CMK) from [AWS KMS][1]. This overrides any default encryption setting on the S3 bucket. 
+
+Ensure that you have completed the following steps to create a valid CMK and CMK policy. You will need to provide the CMK ARN to successfully configure this encryption type. 
 
 1. Create your CMK.
 2. Attach a CMK policy to your CMK with the following content, replacing the AWS account number and Datadog IAM role name appropriately:
@@ -356,15 +373,10 @@ Alternatively, Datadog supports server-side encryption with a CMK from [AWS KMS]
 }
 ```
 
-3. Go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Choose the "AWS-KMS" option, select your CMK ARN, and save.
+3. After selecting **AWS Key Management Service** as your **Encryption Type** in Datadog, input your AWS KMS key ARN.
 
-For any changes to existing KSM keys, reach out to [Datadog support][3] for further assistance.
-
-[1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
-[2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
-[3]: /help/
+[1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 {{% /tab %}}
-
 {{< /tabs >}}
 
 ### Validation
@@ -419,6 +431,7 @@ Within the zipped JSON file, each event's content is formatted as follows:
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
+
 *Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /logs/indexes/#exclusion-filters

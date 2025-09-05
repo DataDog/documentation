@@ -12,11 +12,16 @@ further_reading:
 - link: '/synthetics/guide/popup/#moving-popups'
   tag: 'Documentation'
   text: 'Learn how to handle pop-ups triggered at unknown times'
+- link: "https://www.datadoghq.com/blog/ambassador-browser-tests/"
+  tag: "Blog"
+  text: "How I helped my client scale their browser tests with Datadog"
 ---
 
 ## Overview
 
 This guide describes how you can test a user interface (UI) using custom JavaScript in a [browser test][1]. JavaScript assertions support synchronous and asynchronous code.
+
+<div class="alert alert-info">JavaScript assertions are not supported in Windows private locations.</div>
 
 To create an assertion using custom JavaScript:
 

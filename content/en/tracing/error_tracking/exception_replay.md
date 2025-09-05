@@ -1,6 +1,6 @@
 ---
-title: Error Tracking Explorer
-description: Learn about the Error Tracking Explorer.
+title: Exception Replay in Error Tracking
+description: Learn about Exception Replay in APM Error Tracking.
 further_reading:
 - link: '/monitors/types/error_tracking'
   tag: 'Documentation'

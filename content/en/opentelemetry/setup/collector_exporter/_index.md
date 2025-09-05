@@ -262,6 +262,8 @@ spec:
 
 You can find working examples of out-of-the-box configuration for Datadog Exporter in the [`exporter/datadogexporter/examples` folder][31] in the OpenTelemetry Collector Contrib project. See the full configuration example file, [`ootb-ec2.yaml`][30]. Configure each of the following components to suit your needs:
 
+**Note**: This example is for applications running directly on an EC2 host. For containerized applications, see the [deployment documentation][33].
+
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/collector_exporter/otlp_receiver/" >}}OTLP Receiver{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/collector_exporter/hostname_tagging/" >}}Hostname and Tags{{< /nextlink >}}
@@ -296,3 +298,4 @@ You can find working examples of out-of-the-box configuration for Datadog Export
 [30]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/ootb-ec2.yaml
 [31]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/
 [32]: /opentelemetry/compatibility/
+[33]: /opentelemetry/collector_exporter/deployment

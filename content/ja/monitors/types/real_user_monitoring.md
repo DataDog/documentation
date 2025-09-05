@@ -12,7 +12,7 @@ further_reading:
 - link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: ドキュメント
   text: モニターステータスを確認
 title: リアルユーザーモニタリングモニター
@@ -20,9 +20,9 @@ title: リアルユーザーモニタリングモニター
 
 ## 概要
 
-Datadog's [Real User Monitoring (RUM)][1]  provides real-time visibility into individual user activity for web and mobile applications. It addresses performance tracking, error management, analytics, and support use cases. 
+Datadog の [Real User Monitoring (RUM)][1] は、Web およびモバイル アプリケーションの個々のユーザー アクティビティをリアルタイムで可視化します。これにより、パフォーマンス トラッキング、エラー管理、アナリティクス、サポートなどのユース ケースに対応できます。
 
-After you enable RUM for your organization, you can create a RUM monitor to alert you when a specific RUM event type exceeds a predefined threshold over a given period of time.
+組織で RUM を有効化した後、特定の RUM イベント タイプが所定の期間内に事前定義されたしきい値を超えた場合に通知する RUM モニターを作成できます。
 
 ## RUM モニターの作成
 
@@ -40,7 +40,7 @@ Datadog で RUM モニターを作成するには、まず [**Monitors** --> **N
     * **Monitor over a facet**: [ファセット][4]を選択すると、モニターはファセットの `Unique value count` に対してアラートを発出します。
     * **Monitor over measure**: [メジャー][5]を選択すると、モニターは (メトリクスモニターと同様に) RUM ファセットの数値に対してアラートを発出します。集計タイプ (`min`、`avg`、 `sum`、`median`、`pc75`、`pc90`、`pc95`、`pc98`、`pc99`、または `max`) を選択します。
 3. 複数のディメンションで RUM イベントをグループ化する (オプション):
-  All RUM events matching the query are aggregated into groups based on the value of up to four facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. The dimensions limit depends on the total number of dimensions:
+  クエリに一致するすべての RUM イベントは、最大 4 つのファセットの値に基づいてグループ化されます。複数のディメンションがある場合、トップ値は最初のディメンションで決定され、そのトップ値内で 2 番目のディメンションに従って決定され、以下同様に最後のディメンションまで続きます。ディメンションの制限は、ディメンションの総数によって異なります:
    * **ファセット 1 個**: 上位値 1000
    * **ファセット 2 個**: ファセットごとに上位値 30 (最大 900 グループ)
    * **ファセット 3 個**: ファセットごとに上位値 10 (最大 1000 グループ)
@@ -92,7 +92,7 @@ Datadog で RUM モニターを作成するには、まず [**Monitors** --> **N
 
 ### 通知
 
-For more information about the **Configure notifications and automations** section, see [Notifications][7].
+**Configure notifications and automations** セクションの詳細については、[通知][7] を参照してください。
 
 ## その他の参考資料
 

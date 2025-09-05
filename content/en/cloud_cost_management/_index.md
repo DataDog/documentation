@@ -31,6 +31,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/unit-economics-ccm/"
     tag: "Blog"
     text: "Monitor unit economics with Datadog Cloud Cost Management"
+  - link: "https://www.datadoghq.com/blog/finops-at-datadog/"
+    tag: "Blog"
+    text: "How we've created a successful FinOps practice at Datadog"
+  - link: "https://www.datadoghq.com/blog/cloud-cost-management-saved-millions/"
+    tag: "Blog"
+    text: "How we saved $1.5 million per year with Cloud Cost Management"
 cascade:
     algolia:
       subcategory: 'Cloud Cost Management'
@@ -53,11 +59,11 @@ Datadog ingests your cloud cost data and transforms it into metrics you can use 
 ## Setup
 
 {{< whatsnext desc="To start managing your cloud costs with Cloud Cost Management, see the following documentation.">}}
-  {{< nextlink href="/cloud_cost_management/aws">}}<u>AWS</u>: Configure Cloud Cost Management for your AWS bill.{{< /nextlink >}}
-  {{< nextlink href="/cloud_cost_management/azure">}}<u>Azure</u>: Configure Cloud Cost Management for your Azure bill. {{< /nextlink >}}
-  {{< nextlink href="/cloud_cost_management/google_cloud">}}<u>Google Cloud</u>: Configure Cloud Cost Management for your Google Cloud bill. {{< /nextlink >}}
-  {{< nextlink href="/cloud_cost_management/saas_costs">}}<u>SaaS Cost Integrations</u>: Send cost data from a supported SaaS cost provider to Datadog. {{< /nextlink >}}
-  {{< nextlink href="/cloud_cost_management/custom">}}<u>Custom Costs</u>: Upload any cost data source to Datadog. {{< /nextlink >}}
+  {{< nextlink href="/cloud_cost_management/setup/aws">}}<u>AWS</u>: Configure Cloud Cost Management for your AWS bill.{{< /nextlink >}}
+  {{< nextlink href="/cloud_cost_management/setup/azure">}}<u>Azure</u>: Configure Cloud Cost Management for your Azure bill. {{< /nextlink >}}
+  {{< nextlink href="/cloud_cost_management/setup/google_cloud">}}<u>Google Cloud</u>: Configure Cloud Cost Management for your Google Cloud bill. {{< /nextlink >}}
+  {{< nextlink href="/cloud_cost_management/setup/saas_costs">}}<u>SaaS Cost Integrations</u>: Send cost data from a supported SaaS cost provider to Datadog. {{< /nextlink >}}
+  {{< nextlink href="/cloud_cost_management/setup/custom">}}<u>Custom Costs</u>: Upload any cost data source to Datadog. {{< /nextlink >}}
   {{< nextlink href="/cloud_cost_management/datadog_costs">}}<u>Datadog Costs</u>: Visualize daily Datadog spending and utilization metrics. {{< /nextlink >}}
  {{< /whatsnext >}}
 
@@ -67,7 +73,7 @@ Visualize infrastructure spend alongside related utilization metrics with a rete
 
 When creating a dashboard, select **Cloud Cost** as the data source for your search query.
 
-{{< img src="cloud_cost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation" style="width:100%;" >}}
+{{< img src="cloud_cost/cloud_cost_data_source-1.png" alt="Cloud Cost available as a data source in dashboard widget creation" style="width:80%;" >}}
 
 Optionally, you can programmatically export a timeseries graph of your cloud cost data by using the [Metrics API][2].
 
@@ -77,7 +83,7 @@ Visualize daily Datadog spending alongside related utilization metrics with a re
 
 When creating a dashboard, select **Cloud Cost** as the data source for your search query.
 
-{{< img src="cloud_cost/datadog_costs/dashboard.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:100%;" >}}
+{{< img src="cloud_cost/datadog_costs/dashboard-updated.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:80%;" >}}
 
 Optionally, you can programmatically export a timeseries graph of your Datadog cost data by using the [Metrics API][2].
 
@@ -97,7 +103,7 @@ Proactively manage and optimize your cloud spending by creating a [Cloud Cost Mo
 
 ## Allocate costs
 
-Use [Container Cost Allocation metrics][4] to discover costs associated with clusters and workloads across Kubernetes, AWS ECS, Azure, and Google Cloud. Gain visibility into pod-level costs, identify idle resource costs, and analyze costs by resource type.
+Use [Container Cost Allocation metrics][4] to discover costs associated with clusters and workloads across Kubernetes, Amazon ECS, Azure, and Google Cloud. Gain visibility into pod-level costs, identify idle resource costs, and analyze costs by resource type.
 
 ## Permissions
 Two permissions are available:
@@ -117,11 +123,16 @@ The table below describes the impact of these permissions in both Cloud Cost Man
 | CCM Settings Page - Tag Pipelines     | Permission Required                         | Permission Required to create tag pipelines       |
 | CCM Settings Page - SaaS Integrations | Permission Required                         | Permission Required to enable integration for CCM |
 | CCM Settings Page - Accounts          | Permission Required                         | Permission Required to modify or create accounts  |
+| CCM Settings Page - Configure Recommendations          | Permission Required                         | Permission Required to customize recommendations  |
 | Dashboards/Notebooks (external)   | Permission Required to create and view data | N/A                                               |
 | Monitors (external)               | Permission Required to create CCM monitors  | N/A                                               |
 | Service Catalog (external)        | Permission Required to view cost data       | N/A                                               |
 | Resource Catalog (external)       | Permission Required to view cost data       | N/A                                               |
 | API Queries for Cost Data     | Permission Required                           | N/A                                               |
+
+### Data Access Control Preview
+More granular tag-level restrictions are available as part of the [Data Access Control Preview][6]. To request preview access,
+please fill out [this form][7].
 
 ## Further reading
 
@@ -132,3 +143,5 @@ The table below describes the impact of these permissions in both Cloud Cost Man
 [3]: /monitors/types/cloud_cost/
 [4]: /cloud_cost_management/container_cost_allocation
 [5]: /cloud_cost_management/tag_pipelines
+[6]: /account_management/rbac/data_access/
+[7]: https://www.datadoghq.com/product-preview/data-access-control/

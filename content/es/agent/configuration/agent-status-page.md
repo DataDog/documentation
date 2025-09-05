@@ -14,10 +14,10 @@ further_reading:
 - link: /agent/configuration/agent-commands/
   tag: Guía
   text: Comandos del Agent
-title: Página de estado del Agent v6
+title: Página de estado del Agent
 ---
 
-La página de estado del Agent v6 muestra información sobre el Agent en ejecución. Consulta la página [Agent Commands (Comandos del Agent)][1] para encontrar el comando de estado adecuado para tu entorno. En las siguientes secciones, encontrarás más detalles sobre el contenido de la página de estado.
+La página de estado del Agent muestra información sobre la ejecución del Agent. Consulta [Comandos del Agent][1] para encontrar el comando de estado para tu entorno. Las secciones siguientes proporcionan detalles sobre el contenido de la página de estado.
 
 **Nota**: La página de estado puede variar ligeramente entre las distintas versiones del Agent.
 
@@ -270,7 +270,7 @@ En esta sección, se indica el número de paquetes que recibió el servidor de D
   Uds Packets: 0
 ```
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

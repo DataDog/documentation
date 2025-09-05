@@ -25,7 +25,7 @@ This guide walks you through configuring Microsoft Azure to send logs to Datadog
 
 Click the button below and fill in the form on Azure portal. After completing the form, the Azure resources required to send activity logs into your Datadog account are deployed for you.
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fdatadog-serverless-functions%2Fmaster%2Fazure%2Fdeploy-to-azure%2Fparent_template.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fdatadog-serverless-functions%2Frefs%2Fheads%2Fmaster%2Fazure%2Feventhub_log_forwarder%2Fparent_template.json)
 
 1. Select an existing resource group or create a new one.
 1. Select a region.

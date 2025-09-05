@@ -1,32 +1,5 @@
 ---
 app_id: openstack
-app_uuid: 38f1f51e-9f6a-49fc-84d5-358bde9e3782
-assets:
-  dashboards:
-    openstack: assets/dashboards/openstack_dashboard.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: openstack.nova.hypervisor_load.1
-      metadata_path: metadata.csv
-      prefix: openstack.
-    process_signatures:
-    - stack.sh
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 125
-    source_type_name: OpenStack
-  saved_views:
-    openstack_processes: assets/saved_views/openstack_processes.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
 - cloud
 - log collection
@@ -34,60 +7,30 @@ categories:
 - provisioning
 - configuration & deployment
 custom_kind: 통합
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/openstack/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: openstack
-integration_id: openstack
-integration_title: OpenStack (레거시)
-integration_version: 4.0.0
-is_public: true
-manifest_version: 2.0.0
-name: openstack
-public_title: OpenStack (레거시)
-short_description: 하이퍼바이저 및 VM 수준 리소스 사용량과 Neutron 메트릭을 추적합니다.
+description: 하이퍼바이저 및 VM 수준 리소스 사용량과 Neutron 메트릭을 추적합니다.
+further_reading:
+- link: https://www.datadoghq.com/blog/openstack-monitoring-nova
+  tag: 블로그
+  text: OpenStack Nova 모니터링
+- link: https://www.datadoghq.com/blog/install-openstack-in-two-commands
+  tag: 블로그
+  text: 개발 및 테스트용 명령 2개로 OpenStack 설치
+- link: https://www.datadoghq.com/blog/openstack-host-aggregates-flavors-availability-zones
+  tag: 블로그
+  text: 'OpenStack: 호스트 집계, 플레이버 및 가용성 영역'
+integration_version: 4.0.1
+media: []
 supported_os:
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cloud
-  - Category::Log Collection
-  - Category::Network
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Category::Provisioning
-  - Category::Configuration & Deployment
-  - Submitted Data Type::Metrics
-  - Submitted Data Type::Logs
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: 하이퍼바이저 및 VM 수준 리소스 사용량과 Neutron 메트릭을 추적합니다.
-  media: []
-  overview: README.md#Overview
-  resources:
-  - resource_type: 블로그
-    url: https://www.datadoghq.com/blog/openstack-monitoring-nova
-  - resource_type: 블로그
-    url: https://www.datadoghq.com/blog/install-openstack-in-two-commands
-  - resource_type: 블로그
-    url: https://www.datadoghq.com/blog/openstack-host-aggregates-flavors-availability-zones
-  support: README.md#Support
-  title: OpenStack (레거시)
+title: OpenStack(레거시)
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
-
-
-![OpenStack 기본값 대시보드][1]
+![OpenStack 기본 대시보드](https://raw.githubusercontent.com/DataDog/integrations-core/master/openstack/images/openstack_dashboard.png)
 
 ## 개요
 
-**참고**: 본 통합은 OpenStack v12 이하에만 적용됩니다. OpenStack v13 이상에서 메트릭을 수집하려면 [OpenStack 컨트롤러 통합][2]를 사용하세요.
+**참고**: 이 통합은 OpenStack v12 이하에만 적용됩니다. OpenStack v13 이상에서 메트릭을 수집하려면 [OpenStack Controller 통합](https://docs.datadoghq.com/integrations/openstack_controller)을 사용합니다.
 
 OpenStack 서비스에서 실시간으로 메트릭을 받아 다음을 수행할 수 있습니다.
 
@@ -98,7 +41,7 @@ OpenStack 서비스에서 실시간으로 메트릭을 받아 다음을 수행�
 
 ### 설치
 
-OpenStack 메트릭을 캡처하려면 하이퍼바이저를 실행 중인 호스트에 [에이전트에 설치하세요][3].
+OpenStack 메트릭을 캡처하려면 [에이전트를 설치합니다](https://app.datadoghq.com/account/settings/agent/latest) on your hosts running hypervisors.
 
 ### 설정
 
@@ -161,7 +104,7 @@ openstack role add datadog_monitoring \
 
 #### 에이전트 설정
 
-1. Datadog 에이전트를 설정하여 Keystone 서버에 연결하고, 개별 프로젝트를 모니터링하도록 지정합니다. 아래 설정으로 [에이전트 설정 디렉토리][4] 루트에 있는 `conf.d/` 폴더의 `openstack.d/conf.yaml` 파일을 수정하세요. 사용 가능한 모든 설정 옵션을 보려면 [ openstack.d/conf.yaml 샘플][5]을 참조하세요.
+1. Datadog Agent가 Keystone 서버에 연결하도록 설정하고 모니터할 개별 프로젝트를 지정하려면 [Agent 설정 디렉터리](https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory)의 루트에 있는 `conf.d/` 폴더의 `openstack.d/conf.yaml` 파일을 편집합니다. 이때 아래의 설정을 따릅니다. 모든 가용 설정 옵션을 보려면 [샘플 openstack.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/openstack/datadog_checks/openstack/data/conf.yaml.example)을 참조하세요.
 
    ```yaml
    init_config:
@@ -194,7 +137,7 @@ openstack role add datadog_monitoring \
            id: "<DOMAINE_ID>"
    ```
 
-2. [에이전트를 재시작합니다][6].
+1. [Agent를 다시 시작합니다](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ##### 로그 수집
 
@@ -204,7 +147,7 @@ openstack role add datadog_monitoring \
    logs_enabled: true
    ```
 
-2. Openstack 로그 수집을 시작하려면 `openstack.d/conf.yaml` 파일에 설정 블록을 추가하세요.
+1. Openstack 로그 수집을 시작하려면 `openstack.d/conf.yaml` 파일에 설정 블록을 추가하세요.
 
    ```yaml
    logs:
@@ -213,49 +156,107 @@ openstack role add datadog_monitoring \
        source: openstack
    ```
 
-    `path` 파라미터 값을 변경하고 환경에 맞게 설정하세요. 사용 가능한 모든 설정 옵션은 [openstack.d/conf.yaml 샘플][5]을 참조하세요.
-
+   `path` 파라미터 값을 변경하고 환경에 맞게 설정합니다. 모든 가용 설정 옵션은 [샘플 openstack.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/openstack/datadog_checks/openstack/data/conf.yaml.example)을 참조하세요.
 
 ### 검증
 
-[에이전트 상태 하위 명령을 실행하고][7] 점검 섹션에서 `openstack`를 찾으세요.
+[Agent의 상태 명령](https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information)을 실행하고 점검 섹션 아래에서 `openstack`을 찾습니다.
 
 ## 수집한 데이터
 
-### 메트릭
-{{< get-metrics-from-git "openstack" >}}
+### Metrics
 
+| | |
+| --- | --- |
+| **openstack.nova.current_workload**<br>(게이지) | Nova 하이퍼바이저의 현재 워크로드|
+| **openstack.nova.disk_available_least**<br>(게이지) | Nova 하이퍼바이저에서 사용 가능한 디스크<br>_기가바이트로 표시_ |
+| **openstack.nova.free_disk_gb**<br>(게이지) | Nova 하이퍼바이저의 빈 디스크<br>_기가바이트로 표시_ |
+| **openstack.nova.free_ram_mb**<br>(게이지) | Nova 하이퍼바이저의 빈 RAM<br>_메가바이트로 표시_ |
+| **openstack.nova.hypervisor_load.1**<br>(게이지) | 1분 동안의 평균 하이퍼바이저 로드입니다. |
+| **openstack.nova.hypervisor_load.15**<br>(게이지) | 15분 간의 평균 하이퍼바이저 로드입니다.|
+| **openstack.nova.hypervisor_load.5**<br>(게이지) | 5분 간의 평균 하이퍼바이저 로드입니다.|
+| **openstack.nova.limits.max_image_meta**<br>(게이지) | 이 테넌트에 최대로 허용된 이미지 메타데이터 정의|
+| **openstack.nova.limits.max_personality**<br>(게이지) | 이 테넌트에 최대로 허용된 퍼스낼리티 수|
+| **openstack.nova.limits.max_personality_size**<br>(게이지) | 이 테넌트에 허용된 단일 퍼스낼리티 최대 크기|
+| **openstack.nova.limits.max_security_group_rules**<br>(게이지) | 이 테넌트에 허용된 보안 그룹 규칙의 최대 숫자|
+| **openstack.nova.limits.max_security_groups**<br>(게이지) | 이 테넌트에 허용된 보안 그룹 최대 숫자|
+| **openstack.nova.limits.max_server_meta**<br>(게이지) | 이 테넌트의 최대 허용 서비스 메타데이터 정의|
+| **openstack.nova.limits.max_total_cores**<br>(게이지) | 이 테넌트의 최대 허용 코어|
+| **openstack.nova.limits.max_total_floating_ips**<br>(게이지) | 이 테넌트의 최대 허용 플로팅 IP|
+| **openstack.nova.limits.max_total_instances**<br>(게이지) | 이 테넌트에 허용된 최대 인스턴스 수|
+| **openstack.nova.limits.max_total_keypairs**<br>(게이지) | 이 테넌트에 허용된 최대 허용 키 페어|
+| **openstack.nova.limits.max_total_ram_size**<br>(게이지) | 이 테넌트의 최대 허용 RAM 크기(메가바이트(MB)<br>_메가바이트로 표시_ |
+| **openstack.nova.limits.total_cores_used**<br>(게이지) | 이 테넌트에서 사용된 총 코어|
+| **openstack.nova.limits.total_floating_ips_used**<br>(게이지) | 이 테넌트에서 사용된 플로팅 IP|
+| **openstack.nova.limits.total_instances_used**<br>(게이지) | 이 테넌트에서 사용된 총 인스턴스|
+| **openstack.nova.limits.total_ram_used**<br>(게이지) | 이 테넌트에서 사용된 현재 RAM(메가바이트(MB))<br>_메가바이트로 표시_ |
+| **openstack.nova.limits.total_security_groups_used**<br>(게이지) | 이 테넌트에서 사용된 보안 그룹 총 개수|
+| **openstack.nova.local_gb**<br>(게이지) | 이 하이퍼바이저 호스트에 존재하는 임시 디스크 크기(GB)<br>_기가바이트로 표시_ |
+| **openstack.nova.local_gb_used**<br>(게이지) | 이 하이퍼바이저 호스트에서 사용된 디스크 크기(GB)<br>_기가바이트로 표시_ |
+| **openstack.nova.memory_mb**<br>(게이지) | 이 하이퍼바이저 호스트에 있는 RAM 크기(MB)<br>_메가바이트로 표시_ |
+| **openstack.nova.memory_mb_used**<br>(게이지) | 이 하이퍼바이저 호스트에서 사용된 RAM 크기(MB)<br>_메가바이트로 표시_ |
+| **openstack.nova.running_vms**<br>(게이지) | 이 하이퍼바이저에서 실행되는 VM 개수|
+| **openstack.nova.server.cpu0_time**<br>(게이지) | 이 가상 CPU의 CPU 시간(나노초)<br>_나노초로 표시_ |
+| **openstack.nova.server.hdd_errors**<br>(게이지) | HDD 디바이스 액세스 시 서버에서 확인된 오류 개수|
+| **openstack.nova.server.hdd_read**<br>(게이지) | 이 서버에서 HDD 디바이스를 통해 읽은 바이트 수<br>_바이트로 표시_ |
+| **openstack.nova.server.hdd_read_req**<br>(게이지) | 이 서버에서 HDD 디바이스에 요청한 읽기 개수|
+| **openstack.nova.server.hdd_write**<br>(게이지) | 이 서버에서 HDD 디바이스에 쓴 바이트 수<br>_바이트로 표시_ |
+| **openstack.nova.server.hdd_write_req**<br>(게이지) | 이 서버에서 HDD 디바이스에 요청한 쓰기 개수|
+| **openstack.nova.server.memory**<br>(게이지) | 이 서버에서 프로비저닝한 메모리 크기(MB)<br>_메가바이트로 표시_ |
+| **openstack.nova.server.memory_actual**<br>(게이지) | 이 서버에서 프로비저닝한 메모리 크기(MB)<br>_메가바이트로 표시_ |
+| **openstack.nova.server.memory_rss**<br>(게이지) | 스택 및 힙 메모리 등 디스크 페이지와 관련 없는 이 서버 프로세스에서 사용된 메모리 크기<br>_메가바이트로 표시_ |
+| **openstack.nova.server.vda_errors**<br>(게이지) | VDA 디바이스 액세스 시 서버에서 확인된 오류 개수|
+| **openstack.nova.server.vda_read**<br>(게이지) | 이 서버에서 VDA 디바이스를 통해 읽은 바이트 수<br>_바이트로 표시_ |
+| **openstack.nova.server.vda_read_req**<br>(게이지) | 이 서버에서 VDA 디바이스에 요청한 읽기 개수|
+| **openstack.nova.server.vda_write**<br>(게이지) | 이 서버에서 VDA 디바이스에 쓴 바이트 수<br>_바이트로 표시_ |
+| **openstack.nova.server.vda_write_req**<br>(게이지) | 이 서버에서 VDA 디바이스에 요청한 쓰기 개수|
+| **openstack.nova.vcpus**<br>(게이지) | 이 하이퍼바이저 호스트에서 사용 가능한 vCPU 개수|
+| **openstack.nova.vcpus_used**<br>(게이지) | 이 하이퍼바이저 호스트에서 사용된 vCPU 개수|
 
 ### 이벤트
 
 OpenStack 점검은 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "openstack" >}}
 
+**openstack.neutron.api.up**
+
+Agent가 Neutron API에 쿼리할 수 없는 경우 `CRITICAL`이 반환됩니다. Keystone API에 문제가 있는 경우 `UNKNOWN`이 반환되며, 그 외 경우에는 `OK`가 반환됩니다.
+
+_상태: ok, critical, unknown_
+
+**openstack.nova.api.up**
+
+Agent가 Nova API에 쿼리할 수 없는 경우 `CRITICAL`이 반환됩니다. Keystone API에 문제가 있는 경우 이 반환되며, 그 외 경우에는 `OK`가 반환됩니다.
+
+_상태: ok, critical, unknown_
+
+**openstack.keystone.api.up**
+
+Agent가 Keystone API에 쿼리할 수 없는 경우 `CRITICAL`이 반환되며, 그 외 경우에는 `OK`가 반환됩니다.
+
+_상태: ok, critical_
+
+**openstack.nova.hypervisor.up**
+
+Agent가 하이퍼바이저 상태를 가져올 수 없는 경우 `UNKNOWN`이 반환됩니다. 하이퍼바이저가 중단된 경우 `CRITICAL`이 반환되며 그 외의 경우에는 `OK`가 반환됩니다.
+
+_상태: ok, critical, unknown_
+
+**openstack.neutron.network.up**
+
+Agent가 네트워크 상태를 가져올 수 없는 경우 `UNKNOWN`이 반환됩니다. 네트워크가 중단된 경우 `CRITICAL`이 반환되며, 그 외의 경우에는 `OK`가 반환됩니다.
+
+_상태: ok, critical, unknown_
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 고객 지원팀][10]에 문의해주세요.
+도움이 필요하세요? [Datadog 고객지원팀](https://docs.datadoghq.com/help/)에 문의하세요.
 
 ## 참고 자료
 
 기타 유용한 문서, 링크 및 기사:
 
-- [OpenStack Nova 모니터링하기][11]
-- [개발 및 테스트용 명령 두 가지로 OpenStack 설치하기][12]
-- [OpenStack: 집계, 작업, 가용 영역 호스팅][13]
-
-[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/openstack/images/openstack_dashboard.png
-[2]: https://docs.datadoghq.com/ko/integrations/openstack_controller
-[3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.datadoghq.com/ko/agent/guide/agent-configuration-files/#agent-configuration-directory
-[5]: https://github.com/DataDog/integrations-core/blob/master/openstack/datadog_checks/openstack/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/openstack/metadata.csv
-[9]: https://github.com/DataDog/integrations-core/blob/master/openstack/assets/service_checks.json
-[10]: https://docs.datadoghq.com/ko/help/
-[11]: https://www.datadoghq.com/blog/openstack-monitoring-nova
-[12]: https://www.datadoghq.com/blog/install-openstack-in-two-commands
-[13]: https://www.datadoghq.com/blog/openstack-host-aggregates-flavors-availability-zones
+- [OpenStack Nova 모니터링](https://www.datadoghq.com/blog/openstack-monitoring-nova)
+- [개발 및 테스트용 명령 2개로 OpenStack 설치](https://www.datadoghq.com/blog/install-openstack-in-two-commands)
+- [OpenStack: 호스트 집계, 플레이버 및 가용 영역](https://www.datadoghq.com/blog/openstack-host-aggregates-flavors-availability-zones)

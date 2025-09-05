@@ -48,7 +48,7 @@ Supported .NET runtimes (64-bit applications)
 .NET 9
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> For containers, <strong>at least one core</strong> is required. Read the <a href="/profiler/profiler_troubleshooting/dotnet#linux-containers">Troubleshooting documentation</a> for more details.
+  <strong>Note:</strong> For containers, <strong>more than one core</strong> is required. Read the <a href="/profiler/profiler_troubleshooting/dotnet#linux-containers">Troubleshooting documentation</a> for more details.
 </div>
 
 Supported languages
@@ -60,18 +60,21 @@ The following profiling features are available in the following minimum versions
 |----------------------------|------------------------------------|------------------------------------------------------------------------------------------|
 | Wall time profiling        | 2.7.0+                             | All supported runtime versions.                                                          |
 | CPU profiling              | 2.15.0+                            | All supported runtime versions.                                                          |
+| GC CPU consumption         | 3.19.0+                            | .NET 5+                                                          |
 | Exceptions profiling       | 2.31.0+                            | All supported runtime versions.                                                          |
 | Allocations profiling beta | 3.12.0+ / 2.18.0+                  | .NET Framework (requires Datadog Agent 7.51+ and 3.12.0+) / .NET 6+ (requires 2.18.0+)   |
 | Lock Contention profiling  | 2.49.0+                            | .NET Framework (requires Datadog Agent 7.51+) and .NET 5+                                |
 | Live heap profiling beta   | 2.22.0+                            | .NET 7+                                                                                  |
 | [Trace to Profiling integration][12]         | 2.30.0+                            | All supported runtime versions.                                                          |
 | [Endpoint Profiling][13]  | 2.15.0+                            | All supported runtime versions.                                                          |
-| Timeline                  | 2.30.0+ (and 3.10.0+ for outgoing HTTP requests longer than 50 ms in beta)     | All supported runtime versions (except .NET 5+ required for garbage collection details and .NET 7+ required for outgoing HTTP requests). |
+| Timeline                  | 2.30.0+ (and 3.19.0+ for outgoing HTTP requests longer than 50 ms in beta and thread start/end events)     | All supported runtime versions (except .NET 5+ required for garbage collection details and .NET 7+ required for outgoing HTTP requests). |
 
+- Allocations and Lock Contention profiling for .NET Framework requires that the Datadog Agent and the profiled applications are running on the same machine.
 - Due to a limitation of the .NET Framework, Allocations profiling does not show the size of the allocations. Instead, it only shows the count.
 - Allocations and Live Heap profiling are in beta until .NET 10 ships with the required changes for better statistical allocations sampling.
 - Continuous Profiler is not supported for AWS Lambda.
-
+- Continuous Profiler does not support ARM64.
+ 
 <div class="alert alert-warning">
   <strong>Note:</strong> Unlike APM, Continuous Profiler is not activated by default when the APM package is installed. You must explicitly enable it for the applications you want to profile.
 </div>
@@ -465,7 +468,7 @@ You can configure the profiler using the following environment variables. Note t
 | `DD_PROFILING_LOCK_ENABLED` | Boolean        | If set to `true`, enables Lock Contention profiling. Defaults to `false`.  |
 | `DD_PROFILING_HEAP_ENABLED` | Boolean        | If set to `true`, enables Live Heap profiling (in Preview). Defaults to `false`.  |
 | `DD_PROFILING_GC_ENABLED` | Boolean        | If set to `false`, disables Garbage Collection profiling used in Timeline user interface. Defaults to `true`.  |
-| `DD_INTERNAL_PROFILING_HTTP_ENABLED` | Boolean        | If set to `true`, enables outgoing HTTP request profiling used in Timeline user interface. Defaults to `false`.  |
+| `DD_PROFILING_HTTP_ENABLED` | Boolean        | If set to `true`, enables outgoing HTTP request profiling used in Timeline user interface. Defaults to `false`.  |
 
 
 <div class="alert alert-warning">

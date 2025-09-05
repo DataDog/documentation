@@ -64,6 +64,11 @@ These tutorials walk you through setting up a sample multi-service application w
 {{< /whatsnext >}}
 <br>
 
+{{< whatsnext desc="Configuration guides" >}}
+    {{< nextlink href="/tracing/guide/remote_config" >}}Setting up Remote Configuration for Tracing{{< /nextlink >}}
+{{< /whatsnext >}}
+<br>
+
 {{< whatsnext desc="Tracing Guides" >}}
     {{< nextlink href="/opentelemetry/guide/otel_api_tracing_interoperability/" >}}Interoperability of OpenTelemetry API and Datadog instrumented traces{{< /nextlink >}}
     {{< nextlink href="tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm" >}}Configure Apdex Score by Service{{< /nextlink >}}
@@ -83,5 +88,5 @@ These tutorials walk you through setting up a sample multi-service application w
     {{< nextlink href="/tracing/guide/aws_payload_tagging/" >}}Capture requests and responses from AWS services automatically{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/service_overrides/" >}}Service Overrides{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/injectors/" >}}Understanding injector behavior with Single Step Instrumentation{{< /nextlink >}}
-    {{< nextlink href="/tracing/code_origins/" >}}Code Origins for Spans{{< /nextlink >}}
+    {{< nextlink href="/tracing/code_origin/" >}}Code Origin for Spans{{< /nextlink >}}
 {{< /whatsnext >}}

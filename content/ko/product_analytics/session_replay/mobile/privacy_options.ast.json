@@ -1,0 +1,93 @@
+{
+  "$$mdtype": "Node",
+  "inline": false,
+  "attributes": {
+    "frontmatter": {
+      "title": {
+        "string": "모바일 세션 리플레이 개인정보 보호 옵션"
+      },
+      "description": {
+        "string": "모바일 세션 재생을 위한 개인정보 보호 옵션을 설정합니다."
+      },
+      "further_reading": [
+        {
+          "link": "/real_user_monitoring/session_replay/mobile",
+          "text": {
+            "string": "Mobile Session Replay"
+          },
+          "tag": {
+            "string": "Documentation"
+          }
+        },
+        {
+          "link": "/real_user_monitoring/session_replay/mobile/app_performance",
+          "text": {
+            "string": "How Mobile Session Replay Impacts App Performance"
+          },
+          "tag": {
+            "string": "Documentation"
+          }
+        },
+        {
+          "link": "/real_user_monitoring/session_replay/mobile/setup_and_configuration",
+          "text": {
+            "string": "Setup and Configure Mobile Session Replay"
+          },
+          "tag": {
+            "string": "Documentation"
+          }
+        },
+        {
+          "link": "/real_user_monitoring/session_replay/mobile/troubleshooting",
+          "text": {
+            "string": "Troubleshoot Mobile Session Replay"
+          },
+          "tag": {
+            "string": "Documentation"
+          }
+        },
+        {
+          "link": "/real_user_monitoring/session_replay",
+          "text": {
+            "string": "Session Replay"
+          },
+          "tag": {
+            "string": "Documentation"
+          }
+        }
+      ]
+    }
+  },
+  "children": {
+    "translationListData": {
+      "0": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "attributes": {
+          "file": "rum/session_replay/mobile/privacy_options.mdoc.md"
+        },
+        "children": {
+          "translationListData": {}
+        },
+        "type": "tag",
+        "tag": "partial",
+        "annotations": {
+          "translationListData": {
+            "0": {
+              "type": "attribute",
+              "name": "file",
+              "value": "rum/session_replay/mobile/privacy_options.mdoc.md"
+            }
+          }
+        },
+        "slots": {},
+        "location": "line 25-26"
+      }
+    }
+  },
+  "type": "document",
+  "annotations": {
+    "translationListData": {}
+  },
+  "slots": {}
+}

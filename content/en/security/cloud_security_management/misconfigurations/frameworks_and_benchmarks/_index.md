@@ -31,7 +31,7 @@ View a high-level overview of your compliance posture for each framework on the 
 - **Explore Resources**: A filtered view of the **Misconfigurations** page that shows resources with misconfigurations for the selected framework.
 - **Configure Rules**: Customize how your environment is scanned and set notification targets by modifying the compliance rules for each framework.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/compliance_reports_4.png" alt="The compliance reports section of the Cloud Security Misconfigurations Compliance page provides a high-level overview of your compliance posture" style="width:100%;">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/compliance_reports_5.png" alt="The compliance reports section of the Cloud Security Misconfigurations Compliance page provides a high-level overview of your compliance posture" style="width:100%;">}}
 
 ## Explore compliance framework reports
 
@@ -43,7 +43,7 @@ Below the summary is a complete listing of all rules associated with the framewo
 
 Search for a rule name to filter the list, or group by requirement, control, severity, resource type, or resource category to organize the list. You can also click a table column header to sort by that column within the group.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/cis_aws_compliance_report_4.png" alt="The CIS AWS compliance framework report provides details on critical rule failures" style="width:100%;">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/cis_aws_compliance_report_5.png" alt="The CIS AWS compliance framework report provides details on critical rule failures" style="width:100%;">}}
 
 Select a rule to view details about the misconfigured resources, the rule description, its framework or industry benchmark mapping, and suggested remediation steps. Then, you can click a specific resource to get more details.
 

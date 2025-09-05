@@ -92,10 +92,16 @@ It means that you are either:
 - running your CI pipeline with a Linux distribution that does not rely on the glibc (such as Alpine Linux). Instead,
   run your CI pipeline with a distribution that supports the latest version of the glibc (such as the stable version of Ubuntu).
 
+### Services or teams in the SAST explorer or Repositories view are not updating
+
+Results for services and teams in Static Code Analysis (SAST) are based on the `entity.datadog.yml` or `CODEOWNERS` files from your repository's default branch.
+If you've made changes to these files in a feature branch, those updates are not reflected in the vulnerability for that branch.
+
+After updating either file on your default branch, it may take up to six hours for the changes to appear in subsequent scan results.
+
 ### Results are not being surfaced in the Datadog UI
 
-**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
-`master`, `main`, `prod`, or `production`). After you commit on your default branch, non-default branches are analyzed. You can always configure your default branch in-app under [Repository Settings][4].
+**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt a SARIF upload for your repository and then manually override the default branch in-app under [Repository Settings][4]. Afterwards, uploads from your non-default branches will succeed.
 
 If you are using Datadog's analyzer, [diff-aware scanning][6] is enabled by default. If you running the tool within your CI pipeline, make sure that `datadog-ci` runs **at the root** of the repository being analyzed.
 
@@ -124,7 +130,6 @@ For issues with Datadog Software Composition Analysis (SCA), include the followi
 While the [Datadog SBOM generator][7] is recommended, Datadog supports the ingestion of any SBOM files. Please ensure your files adhere to either the Cyclone-DX 1.4 or Cyclone-DX 1.5 formats.
 
 Ingestion of SBOM files is verified for the following third-party tools:
-- [osv-scanner][7]
 - [trivy][8]
 
 To ingest your SBOM file into Datadog, follow the steps below:
@@ -150,26 +155,35 @@ After updating either file on your default branch, it may take up to six hours f
 
 ### Results are not being surfaced in the Datadog UI
 
-**If you are running static scanning on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
-`master`, `main`, `prod`, or `production`). After you commit on your default branch, non-default branches are analyzed.
-
-You can always configure your default branch in-app under [Repository Settings][4].
+**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt an SBOM upload for your repository and then manually override the default branch in-app under [Repository Settings][4]. Afterwards, uploads from your non-default branches will succeed.
 
 ### No package detected for C# projects
 
-Our SBOM generator, ([`osv-scanner`][7]), extracts dependencies from a `packages.lock.json` file. If you do not have
+The Datadog SBOM generator, ([`datadog-sbom-generator`][7]), extracts dependencies from a `packages.lock.json` file. If you do not have
 this file, you can update your project definition to generate it. Follow these [instructions to update your project definition][9] to generate a `packages.lock.json` file.
 
-The generated lock file is used by [`osv-scanner`][7] to extract dependencies and generate an SBOM.
+The generated lock file is used by [`datadog-sbom-generator`][7] to extract dependencies and generate an SBOM.
 
-### No results from Datadog-hosted scans for a repository using `git-lfs`
+### No results from Datadog-hosted scans
 
-Datadog-hosted scanning for Software Composition Analysis (SCA) does not support repositories that use [Git Large File Storage][18] (`git-lfs`). If your repository uses `git-lfs`, [set up the analysis in a CI pipeline][19] and upload the results to Datadog instead.
+Datadog-hosted SCA scans do **not** support repositories that:
 
-### Datadog-hosted scan did not run for a repository with a backslash (`\`) in the file path
+- Use [Git Large File Storage][18] (`git-lfs`)
+- Contain invalid or reserved file paths (such as `/` or `\\`)
+- Contain file paths with parent directory traversal (`..`)
+- Contain file names longer than 255 characters
 
-Datadog-hosted scanning for Software Composition Analysis (SCA) does not support repositories containing files with paths that include backslashes (`\`). If your repository includes such paths,
-you can [set up the analysis in a CI pipeline][19] and upload the results to Datadog manually. Alternatively, you can update the affected file paths to remove the backslashes and continue using Datadog-hosted scanning.
+If any of these conditions apply to your repository, and you cannot update your repository to account for these constraints, [set up the analysis in a CI pipeline][19] to run SCA and upload results to Datadog.
+
+### Missing libraries
+
+To ensure data quality, Datadog applies validation rules during SBOM processing. Libraries that meet any of the following criteria are excluded:
+
+- **Missing version**: The library does not specify a version.
+- **Non-ASCII name**: The library name contains characters outside the ASCII character set.
+- **Empty purl**: The package URL (purl) field is missing or blank.
+- **Invalid purl**: The package URL is present but not in a valid purl format.
+- **Unsupported language**: The library is associated with a programming language that Datadog does not support.
 
 ## No vulnerabilities detected by Software Composition Analysis
 
@@ -177,13 +191,13 @@ There are a series of steps that must run successfully for vulnerability informa
 
 ### Confirming runtime detection is enabled
 
-If you have enabled runtime vulnerability detection on your services, you can use the metric `datadog.apm.appsec_host` to check if SCA is running.
+If you have enabled Runtime Software Composition Analysis (SCA) on your services, you can use the metric `datadog.appsec.risk_management.sca.host_instance` to check if it is running.
 
 1. Go to **Metrics > Summary** in Datadog.
-2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn't exist, then there are no services running AAP. If the metric exists, the services are reported with the metric tags `host` and `service`.
+2. Search for the metric `datadog.appsec.risk_management.sca.host_instance`. If the metric doesn't exist, then there are no services running Runtime Software Composition Analysis (SCA). If the metric exists, the services are reported with the metric tags `host` and `service`.
 3. Select the metric, and in the **Tags** section, search for `service` to see which services are running AAP.
 
-If you are not seeing `datadog.apm.appsec_host`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
+If you are not seeing `datadog.appsec.risk_management.sca.host_instance`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
 
 Runtime application security data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
 
@@ -199,6 +213,16 @@ Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRAC
 
 ### Confirm IAST is enabled
 Ensure the `DD_IAST_ENABLED` environment variable is set to `true` or the corresponding system property for your language is enabled.
+
+If you have enabled Runtime Code Analysis (IAST) on your services, you can use the metric `datadog.appsec.risk_management.iast.host_instance` to check if it is running.
+
+1. Go to **Metrics > Summary** in Datadog.
+2. Search for the metric `datadog.appsec.risk_management.iast.host_instance`. If the metric doesn't exist, then there are no services running Runtime Code Analysis (IAST). If the metric exists, the services are reported with the metric tags `host` and `service`.
+3. Select the metric, and in the **Tags** section, search for `service` to see which services are running AAP.
+
+If you are not seeing `datadog.appsec.risk_management.iast.host_instance`, check the [in-app instructions][20] to confirm that all steps for the initial setup are complete.
+
+Runtime application security data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
 
 ### Issues with Python and Flask instrumentation
 If you're running a Flask application, ensure that you are calling the `ddtrace_iast_flask_patch()` function at the top level of the module and before calling `app.run()`. For more information, see the [Flask integration documentation][17].
@@ -242,7 +266,7 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [4]: https://app.datadoghq.com/source-code/repositories
 [5]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
 [6]: https://docs.datadoghq.com/security/code_security/static_analysis/setup/#diff-aware-scanning
-[7]: https://github.com/DataDog/osv-scanner
+[7]: https://github.com/DataDog/datadog-sbom-generator
 [8]: https://github.com/aquasecurity/trivy
 [9]: https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#enabling-the-lock-file
 [12]: https://app.datadoghq.com/security/appsec/vm/library
@@ -251,4 +275,5 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [16]: https://app.datadoghq.com/services?&lens=Security
 [17]: https://app.datadoghq.com/security/configuration/code-security/setup
 [18]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
-[19]: https://docs.datadoghq.com/security/code_security/software_composition_analysis/setup_static/#scan-in-ci-pipelines
+[19]: https://docs.datadoghq.com/security/code_security/software_composition_analysis/setup_static/?tab=datadog#running-options
+[20]: /security/configuration/code-security/setup?steps=iast

@@ -14,10 +14,6 @@ further_reading:
 title: LLM Observability の用語と概念
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 LLM Observability は利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 LLM Observability UI には、会話のパフォーマンスを診断し、製品全体でデータを相関させるための多くのツールが提供されています。これにより、大規模言語モデル (LLM) の問題を特定し、解決することができます。

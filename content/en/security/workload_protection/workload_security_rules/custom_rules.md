@@ -24,39 +24,23 @@ Here are some important [role and permissions][11] to use for custom rules RBAC:
 
 Rules are managed and applied using [policies][3].
 
-You can create and deploy different custom policies containing rules you want to apply to different sets of hosts in your infrastructure.
-
-For example, you can do the following with policies:
-
-- [Assign priorities][17] to your policies. Priorities can account for policies with partially overlapping tags.
-- Deploy multiple rules to a specific subset of an infrastructure using [tags][18].
-
-### Default policy
-
-The default policy and its rules cannot be modified. You can use the policy priority setting to override the default policy with custom policies.
+You can create and deploy different custom policies containing rules you want to apply to different sets of hosts in your infrastructure using [tags][18].
 
 ### Create a policy
 
-1. Go to [Agent Configuration][3].
+1. Go to [Policies][3].
 2. Click **New Policy**. You can also open an existing policy, click **Actions**, and clone it.
 3. Enter a name for the policy and click **Create**.
-   The new policy is created and placed as the top priority, but it is not enabled or deployed.
+   The new policy is created, but it is not enabled or deployed.
 4. Click the policy to open it.
-5. In **Actions**, add custom Agent rules to the policy. For details, see [Create the custom Agent and detection rules together][14].
-6. Click **Apply Tags & Deploy**. 
+5. In **New Rule**, add custom Agent rules to the policy. For details, see [Create the custom Agent and detection rules together][14].
+6. Click **Edit** next to **Deployed on 0 agents**. 
 7. Add tags to the policy to target specific infrastructure.
-8. To deploy the policy, select **Enable** and click **Apply**.
+8. To deploy the policy, toggle the switch next to **Policy is disabled** and confirm.
 
-### Prioritize policies
+### Conflicting Rules
 
-1. Go to [Agent Configuration][3].
-2. Click **Determine Priority**.
-3. Drag the policies to set their priority.
-4. Click **Confirm Reordering**.
-
-Agents that are in the scope of multiple policies apply configurations based on the priority order. In cases where a higher priority policy contains the same rules as a lower priority, the higher priority policy's rules override the lower priority policy.
-
-When a policy is overridden, the **Overridden** status is displayed. Hover over the status to see the overriding policy name.
+When two policies deployed to the same host contain the same rule with a different status, the most severe aciton will be taken (Blocking > Monitoring > Disabled).
 
 ### Apply tags
 
@@ -65,12 +49,10 @@ When a policy is overridden, the **Overridden** status is displayed. Hover over 
 Tags identify two things: the Agents using the policy and the infrastructure where those Agents apply the policy. For example, if a policy has the tag `cluster_name:mycluster` the Agents in that cluster use the policy on the hosts in that cluster.
 
 1. Go to [Agent Configuration][3].
-2. Hover over a policy, or open a policy, and click **Apply Tags & Deploy Policy**.
+2. Open a policy and click **Edit**.
 3.  Enter tags and click **Apply**. If the policy is enabled, the policy is applied to the tag targets.
 
-When you add tags, Datadog displays how many hosts the tags target. For example, `Tags match 144 hosts`. 
-
-In the policy, click **Tags With This Policy**. The number of hosts targeted by each tag are displayed in **Hosts matching this tag**.
+When you add tags, Datadog displays how many agents the tags target as well the infrastructure running each agents. For example, `Tags match 144 agents`. 
 
 ## Custom detection rules summary
 
@@ -207,7 +189,7 @@ To enable a policy using Remote Configuration in the Datadog UI, do the followin
 
 If you disable a policy, its rules are no longer applied to the infrastructure identified by its tags.
 
-Custom Agent rules are deployed to the Agent in a custom policy separate from the default policy. The custom policy contains custom Agent rules as well as [default rules that have been disabled][13].
+Custom Agent rules are deployed to the Agent in a custom policy separate from the default policies. The custom policy contains only custom Agent rules.
 
 ## Create a custom detection rule
 
@@ -245,7 +227,7 @@ You can also disable a rule by setting the **Then...** section of a rule to **Do
 
 [1]:#create-the-custom-agent-and-detection-rules-together
 [2]:#create-a-custom-agent-rule
-[3]: https://app.datadoghq.com/security/configuration/workload/agent-rules
+[3]: https://app.datadoghq.com/security/workload-protection/policies
 [4]: https://app.datadoghq.com/security/configuration/agent-rules
 [5]: /security/notifications/variables/?tab=cloudsiem
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules

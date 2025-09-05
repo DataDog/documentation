@@ -19,11 +19,11 @@ assets:
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
+  sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
 - ネットワーク
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/external_dns/README.md
 display_on_public_website: true
@@ -72,7 +72,7 @@ tile:
 
 外部 DNS チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### 設定
 
 サーバーとポートを指定し、監視するマスターを設定するには、[Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `external_dns.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[external_dns.d/conf.yaml のサンプル][4] を参照してください。
 

@@ -9,10 +9,6 @@ further_reading:
 title: 온콜
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call은 선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다.</div>
-{{< /site-region >}}
-
 Datadog On-Call은 모니터링, 페이징, 인시던트 대응을 하나의 플랫폼에 통합합니다.
 
 {{< img src="service_management/oncall/oncall_overview.png" alt="페이지가 라우팅되는 방식에 대한 개요. 모니터, 인시던트, 보안 신호 또는 API 호출에서 페이지는 팀(예: 'payments-team')으로 전송된 다음 처리 규칙(예: 우선순위 기반)으로 전송되고 에스컬레이션 정책으로 전송됩니다. 그곳에서 스케줄로 전송되거나 사용자에게 직접 전송될 수 있습니다." style="width:100%;" >}}
@@ -45,7 +41,7 @@ On-Call을 시작하려면 [On-Call 팀을 구성][1]하고 모든 팀 구성원
 
 {{< whatsnext desc="이 섹션은 다음 주제를 포함하고 있습니다.">}}
   {{< nextlink href="/service_management/on-call/teams">}}<u>팀 온보딩하기</u>: 새로운 On-Call 팀을 생성하거나 기존 Datadog 팀을 On-Call에 추가하거나 PagerDuty 또는 Opsgenie에서 팀을 가져옵니다.{{< /nextlink >}}
-  {{< nextlink href="/service_management/on-call/pages">}}<u>페이지 보내기</u>: 모니터, 인시던트, 보안 신호 등을 통해 팀에 페이지를 보내거나 Datadog, Slack, Microsoft Teams 또는 Datadog API를 통해 수동으로 페이지를 보냅니다. {{< /nextlink >}}
+  {{< nextlink href="/service_management/on-call/triggering_pages">}}<u>페이지 보내기</u>: 모니터, 인시던트, 보안 신호 등을 통해 팀에 페이지를 보내거나 Datadog, Slack, Microsoft Teams 또는 Datadog API를 통해 수동으로 페이지를 보냅니다. {{< /nextlink >}}
   {{< nextlink href="/service_management/on-call/escalation_policies">}}<u>에스컬레이션 정책</u>: 페이지가 다양한 스케줄로 전송되는 방법에 대한 단계를 정의합니다. {{< /nextlink >}}
   {{< nextlink href="/service_management/on-call/schedules">}}<u>스케줄</u>: 팀원의 온콜 로테이션에 대한 일정을 정의합니다.{{< /nextlink >}}
   {{< nextlink href="/service_management/on-call/profile_settings">}}<u>프로필 설정</u>: 필요한 때에 효과적인 페이지를 받을 수 있도록 연락 방법과 알림 기본 설정을 구성합니다.{{< /nextlink >}}

@@ -18,6 +18,12 @@ class ExpressionLanguageParser {
         if (typeof value === 'object' && value !== null) return Object.keys(value).length;
         throw new Error('len() requires a string, array, or object argument');
       },
+      count: (value) => {
+        if (typeof value === 'string') return value.length;
+        if (Array.isArray(value)) return value.length;
+        if (typeof value === 'object' && value !== null) return Object.keys(value).length;
+        throw new Error('count() requires a string, array, or object argument');
+      },
       isEmpty: (value) => {
         if (typeof value === 'string') return value.length === 0;
         if (Array.isArray(value)) return value.length === 0;
@@ -136,12 +142,11 @@ class ExpressionLanguageParser {
 
     // Initialize the environment with default variables
     this.environment = {
-      myCollection: [1, 2, 3],
+      myString: "Hello, world!",
+      mySequence: [1, 2, 3, 4],
+      myMap: {"a": 1, "b": 2, "c": 3},
       loops: 5,
-      a: [6, 7, 8, 9, 10],
-      b: {"a": 1, "b": 2, "c": 3},
-      c: "hello world",
-      i: 0 // Current loop iteration index
+      i: 0
     };
 
     // Add built-in functions to the environment
@@ -286,6 +291,7 @@ class ExpressionLanguageParser {
   _getFunctionDescription(funcName) {
     const descriptions = {
       'len': 'Returns the length of a string, array, or object',
+      'count': 'Returns the length of a string, array, or object',
       'isEmpty': 'Checks if a string, array, or object is empty',
       'substring': 'Returns a substring from start to end index',
       'startsWith': 'Checks if a string starts with the specified prefix',

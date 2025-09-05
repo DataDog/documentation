@@ -5,7 +5,10 @@
       "Default": "https://aws-kinesis-http-intake.logs.datadoghq.com/v1/input",
       "AllowedValues": [
         "https://aws-kinesis-http-intake.logs.datadoghq.com/v1/input",
-        "https://aws-kinesis-http-intake.logs.datadoghq.eu/v1/input"
+        "https://aws-kinesis-http-intake.logs.datadoghq.eu/v1/input",
+        "https://aws-kinesis-http-intake.logs.ap1.datadoghq.com/api/v2/logs?dd-protocol=aws-kinesis-firehose",
+        "https://aws-kinesis-http-intake.logs.us3.datadoghq.com/api/v2/logs?dd-protocol=aws-kinesis-firehose",
+        "https://aws-kinesis-http-intake.logs.us5.datadoghq.com/api/v2/logs?dd-protocol=aws-kinesis-firehose"
       ]
     },
     "DatadogAPIKey": {

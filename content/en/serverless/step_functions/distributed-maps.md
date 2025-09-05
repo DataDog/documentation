@@ -18,15 +18,12 @@ In AWS Step Functions, you can set up a large-scale parallel workload by includi
    "ItemBatcher": {
      "MaxItemsPerBatch": N,
      "BatchInput": {
-       "_datadog": "{% ($execInput := $states.context.Execution.Input; $hasDatadogTraceId := $exists($execInput._datadog.`x-datadog-trace-id`); $hasDatadogRootExecutionId := $exists($execInput._datadog.RootExecutionId); $ddTraceContext := $hasDatadogTraceId ? {'x-datadog-trace-id': $execInput._datadog.`x-datadog-trace-id`, 'x-datadog-tags': $execInput._datadog.`x-datadog-tags`} : {'RootExecutionId': $hasDatadogRootExecutionId ?  $execInput._datadog.RootExecutionId : $states.context.Execution.Id}; $merge([$ddTraceContext, {'serverless-version': 'v1', 'timestamp': $millis()}])) %}"
+       "_datadog": "{% ($ddctx := ($states.context.**._datadog)[0];$maybeSnsCtx := ($parse($parse(($states.context.**.body)[0]).**._datadog.Value))[0];$ddctx := $exists($maybeSnsCtx) ? $maybeSnsCtx : $ddctx;$ddTraceContext := $exists($ddctx.`x-datadog-trace-id`) ? {'x-datadog-trace-id': $ddctx.`x-datadog-trace-id`, 'x-datadog-tags': $ddctx.`x-datadog-tags`} : {'RootExecutionId': $exists($ddctx.RootExecutionId) ? $ddctx.RootExecutionId : $states.context.Execution.Id};$merge([$ddTraceContext, {'serverless-version': 'v1', 'timestamp': $millis()}])) %}"
      }
    }
    {{< /highlight >}}
 
 {{< img src="serverless/step_functions/distributed_map_trace.png" alt="An example Datadog trace of a Step Function with a Distributed Map state." style="width:100%;" >}}
-
-## Limitations
-Executions from a child map run are in the same invocation table as the parent Step Function. As a result, the child table in the Step Functions page is empty.
 
 ## Troubleshooting
 If trace merging is broken because there is another upstream service, ensure the upstream setup is correct according to the [Step Function Trace Merging documentation][3]. Also, validate the setup of any Lambda or nested Step Function invocations from within the Distributed Map.

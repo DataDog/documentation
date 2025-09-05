@@ -59,17 +59,7 @@ Add the following Datadog iOS SDK dependencies, which are needed for the linking
 * `DatadogObjc`
 * `DatadogCrashReporting`
 
-**Note**: Versions of these dependencies should be aligned with the version used by the Datadog Kotlin Multiplatform SDK itself.
-
-| Datadog Kotlin Multiplatform SDK version | Datadog iOS SDK version |
-|------------------------------------------|-------------------------| 
-| 0.0.1                                    | 2.14.1                  |
-| 0.0.2                                    | 2.17.0                  |
-| 0.0.3                                    | 2.17.0                  |
-| 0.4.0                                    | 2.20.0                  |
-| 0.5.0                                    | 2.22.1                  |
-| 1.0.0                                    | 2.23.0                  |
-| 1.1.0                                    | 2.26.0                  |
+**Note**: Versions of these dependencies should be aligned with the version used by the Datadog Kotlin Multiplatform SDK itself. You can find the complete mapping of iOS SDK versions for each Kotlin Multiplatform SDK release in the [version compatibility guide][14].
 
 #### Adding native iOS dependencies using the CocoaPods plugin
 
@@ -85,12 +75,12 @@ cocoapods {
 
    pod("DatadogObjc") {
      linkOnly = true
-     version = 2.26.0
+     version = x.x.x
    }
 
    pod("DatadogCrashReporting") {
      linkOnly = true
-     version = 2.26.0
+     version = x.x.x
    }
 }
 ```
@@ -276,6 +266,28 @@ fun initializeDatadog(context: Any? = null) {
 }
 ```
 {{< /site-region >}}
+{{< site-region region="ap2" >}}
+```kotlin
+// in common source set
+fun initializeDatadog(context: Any? = null) {
+    // context should be application context on Android and can be null on iOS
+    val appClientToken = <CLIENT_TOKEN>
+    val appEnvironment = <ENV_NAME>
+    val appVariantName = <APP_VARIANT_NAME>
+
+    val configuration = Configuration.Builder(
+            clientToken = appClientToken,
+            env = appEnvironment,
+            variant = appVariantName
+    )
+        .useSite(DatadogSite.AP2)
+        .trackCrashes(true)
+        .build()
+
+    Datadog.initialize(context, configuration, trackingConsent)
+}
+```
+{{< /site-region >}}
 
 ### Sample RUM sessions
 
@@ -410,3 +422,4 @@ This means that even if users open your application while offline, no data is lo
 [11]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin_multiplatform/#custom-views
 [12]: /real_user_monitoring/error_tracking/kotlin_multiplatform/
 [13]: /real_user_monitoring/explorer/
+[14]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/blob/develop/NATIVE_SDK_VERSIONS.md

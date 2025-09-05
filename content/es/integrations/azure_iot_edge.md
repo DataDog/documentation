@@ -32,7 +32,7 @@ categories:
 - azure
 - iot
 - recopilación de logs
-- la red
+- network
 custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/README.md
@@ -55,27 +55,27 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Azure
+  - Categoría::Azure
   - Category::IoT
-  - Category::Log Collection
-  - Category::Network
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
-  configuration: README.md#Setup
+  - Categoría::Recopilación de logs
+  - Categoría::Red
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::Windows
+  - Sistema operativo compatible::macOS
+  - Oferta::Integración
+  configuration: README.md#Configuración
   description: Monitoriza el estado y el rendimiento de un dispositivo y módulos de
     Azure IoT Edge.
   media: []
-  overview: README.md#Overview
+  overview: README.md#Información general
   resources:
   - resource_type: Blog
     url: https://www.datadoghq.com/blog/monitor-azure-iot-edge-with-datadog/
-  support: README.md#Support
+  support: README.md#Soporte
   title: Azure IoT Edge
 ---
 
-<!--  CON ORIGEN EN https://github.com/DataDog/integrations-core -->
+<!--  FUENTE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -186,7 +186,7 @@ Una vez que Agent se haya implementado en el dispositivo, [ejecuta el subcomando
 
 Azure IoT Edge no incluye ningún evento.
 
-### Checks de servicio
+### Checks de servicios
 {{< get-service-checks-from-git "azure_iot_edge" >}}
 
 

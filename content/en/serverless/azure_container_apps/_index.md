@@ -4,6 +4,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/azure-container-apps/'
       tag: 'Blog'
       text: 'Collect traces, logs, and custom metrics from Container Apps services'
+    - link: 'http://datadoghq.com/blog/azure-well-architected-serverless-applications-best-practices/'
+      tag: 'Blog'
+      text: 'Build secure and scalable Azure serverless applications with the Well-Architected Framework'
 ---
 
 <div class="alert alert-info">To instrument your Azure Container Apps applications with <code>serverless-init</code>, see <a href="/serverless/guide/aca_serverless_init">Azure Container Apps with serverless-init</a>.</div>
@@ -11,7 +14,13 @@ further_reading:
 ## Overview
 Azure Container Apps is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Container Apps through the [Azure integration][1]. Datadog also provides a solution for instrumenting your Container Apps applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
+{{< img src="serverless/azure_container_apps/aca_top_2.png" alt="Datadog UI, Serverless Monitoring page with Azure Container Apps selected." style="width:100%;" >}}
+
 ## Setup
+
+### Azure integration
+
+Install the [Datadog-Azure integration][4] to collect metrics and logs.
 
 ### Application container
 
@@ -26,7 +35,7 @@ Custom metrics are also collected through the tracer. See the [code examples][2]
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. 
 
-In Azure, add a volume mount using [replica-scoped storage][5]. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
+In Azure, add a volume mount to the sidecar container *and* your application containers using [replica-scoped storage][5]. Use type "Ephemeral storage" when creating your volume. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
 
 {{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adding a volume mount to a container in Azure" style="width:60%;" >}}
 
@@ -48,7 +57,7 @@ Custom metrics are also collected through the tracer. See the [code examples][2]
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. 
 
-In Azure, add a volume mount using [replica-scoped storage][5]. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
+In Azure, add a volume mount to the sidecar container *and* your application containers using [replica-scoped storage][5]. Use type "Ephemeral storage" when creating your volume. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
 
 {{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adding a volume mount to a container in Azure" style="width:60%;" >}}
 
@@ -70,7 +79,7 @@ Custom metrics are also collected through the tracer. See the [code examples][2]
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. 
 
-In Azure, add a volume mount using [replica-scoped storage][5]. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
+In Azure, add a volume mount to the sidecar container *and* your application containers using [replica-scoped storage][5]. Use type "Ephemeral storage" when creating your volume. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
 
 {{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adding a volume mount to a container in Azure" style="width:60%;" >}}
 
@@ -92,7 +101,7 @@ Custom metrics are also collected through the tracer. See the [code examples][2]
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. 
 
-In Azure, add a volume mount using [replica-scoped storage][5]. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
+In Azure, add a volume mount to the sidecar container *and* your application containers using [replica-scoped storage][5]. Use type "Ephemeral storage" when creating your volume. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
 
 {{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adding a volume mount to a container in Azure" style="width:60%;" >}}
 
@@ -114,7 +123,7 @@ Custom metrics are also collected through the tracer. See the [code examples][2]
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. 
 
-In Azure, add a volume mount using [replica-scoped storage][5]. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
+In Azure, add a volume mount to the sidecar container *and* your application containers using [replica-scoped storage][5]. Use type "Ephemeral storage" when creating your volume. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
 
 {{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adding a volume mount to a container in Azure" style="width:60%;" >}}
 
@@ -136,7 +145,7 @@ Custom metrics are also collected through the tracer. See the [code examples][2]
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. 
 
-In Azure, add a volume mount using [replica-scoped storage][5]. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
+In Azure, add a volume mount to the sidecar container *and* your application containers using [replica-scoped storage][5]. Use type "Ephemeral storage" when creating your volume. The examples on this page use the volume name `logs` and the mount path `/LogFiles`.
 
 {{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adding a volume mount to a container in Azure" style="width:60%;" >}}
 
@@ -169,7 +178,7 @@ Because Azure Container Apps is built on Kubernetes, you cannot share environmen
    - **Registry login server**: `docker.io`
    - **Image and tag**: `datadog/serverless-init:latest`
    - Define your container resource allocation based on your usage.
-4. Add a volume mount using [replica-scoped storage][2]. Ensure that the name and mount path matches the mount you configured in the application container.
+4. Add a volume mount using [replica-scoped storage][2]. Use type "Ephemeral storage" when creating your volume. Ensure that the name and mount path matches the mount you configured in the application container.
 5. Set the environment variables in the following table:
 
 #### Environment variables
@@ -178,6 +187,7 @@ Because Azure Container Apps is built on Kubernetes, you cannot share environmen
 | `DD_AZURE_SUBSCRIPTION_ID` | **Required**. Your Azure subscription ID. |
 | `DD_AZURE_RESOURCE_GROUP` | **Required**. Your Azure resource group. |
 | `DD_API_KEY` | **Required**. Your [Datadog API key][3]. |
+| `DD_SITE`  | Your Datadog site: `{{< region-param key="dd_site" code="true" >}}`
 | `DD_SERVICE` | How you want to tag your service. For example, `sidecar-azure`. |
 | `DD_ENV` | How you want to tag your env. For example, `prod`.|
 | `DD_VERSION` | How you want to tag your version. |
@@ -304,8 +314,8 @@ import (
    "os"
    "path/filepath"
    "github.com/DataDog/datadog-go/v5/statsd"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+   "github.com/DataDog/dd-trace-go/v2/ddtrace"
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 const logDir = "/LogFiles"
@@ -453,3 +463,4 @@ $statsd->increment('page.views', 1, array('environment'=>'dev'));
 [1]: /integrations/azure/#log-collection
 [2]: https://learn.microsoft.com/en-us/azure/container-apps/storage-mounts?pivots=azure-cli&tabs=smb#replica-scoped-storage
 [3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: /integrations/azure/

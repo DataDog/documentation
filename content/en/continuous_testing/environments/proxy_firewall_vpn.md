@@ -97,6 +97,15 @@ Allow **Outbound connections** for the following Datadog endpoints:
 
 {{< /site-region >}}
 
+{{< site-region region="ap2" >}}
+
+ Port | Endpoint                                                                                             | Description                                                                                                                             |
+| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| 443 | `tunnel-ap2.synthetics.datadoghq.com`   | Required to open the WSS connection from the `datadog-ci` client to the tunnel service. |
+| 443 | `api.ap2.datadoghq.com` | Required to get the presigned URL, search for Synthetic tests, get them, trigger them, and poll their results. |
+
+{{< /site-region >}}
+
 ## Using the testing tunnel with multiple environments
 
 The testing tunnel can be configured to work with multiple environments, including `localhost`, by using the `startUrl`, `startUrlSubstitutionRegex`, and `resourceUrlSubstitutionRegexes` fields. These fields allow you to substitute parts of the starting URL and resource URLs based on the provided regular expressions, enabling you to redirect requests to different environments during test execution.

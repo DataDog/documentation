@@ -225,7 +225,7 @@ Docker 컨테이너를 사용하는 경우 세 가지 옵션이 있습니다. Do
   Node.js 클라이언트 라이브러리 버전 3.21.0 이상이 필요합니다.
  </br>
   </br>
-  TypeScript 애플리케이션에 대한 코드 링크 및 스니펫을 표시하려면 Node 애플리케이션을 실행해야 합니다: 
+  TypeScript 애플리케이션에 대한 코드 링크 및 스니펫을 표시하려면 Node 애플리케이션을 실행해야 합니다:
  </br>
   <a href="https://NodeJS.org/dist/v12.22.12/docs/API/cli.html#cli_enable_source_maps"><code>--enable-source-maps</code></a>.
 </div>
@@ -520,7 +520,7 @@ GitHub(통합)를 사용 중이거나 GitLab SaaS 인스턴스(gitlab.com)에서
 {{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="연속 프로파일러에서 GitHub 연결" style="width:100%;">}}
 
 [1]: /ko/profiler/
-[2]: https://app.datadoghq.com/profiling/search
+[2]: https://app.datadoghq.com/profiling/explorer
 {{% /tab %}}
 {{% tab "Serverless Monitoring" %}}
 
