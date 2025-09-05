@@ -338,7 +338,7 @@ In this example, when there are more than five failed logins and at least one su
 
 {{% cloud_siem/enable_decrease_severity %}}
 
-#### 4. Enable optional group by {#enable-group-by-rt-anomaly}
+#### 4. Enable optional group by {#enable-group-by-rt-content-anomaly}
 
 {{% cloud_siem/enable_group_by %}}
 

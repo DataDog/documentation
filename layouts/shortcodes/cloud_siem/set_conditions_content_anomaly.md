@@ -4,7 +4,7 @@
     - For example, if the condition is `a >= 3` where `a` is the query, a signal is triggered if there are at least three anomalous logs within the evaluation window.
     - All rule conditions are evaluated as condition statements. Thus, the order of the conditions affects which notifications are sent because the first condition to match generates the signal. Click and drag your rule conditions to change their ordering.
     - A rule condition contains logical operations (`>`, `>=`, `&&`, `||`) to determine if a signal should be generated based on the event counts in the previously defined queries.
-    - The ASCII lowercase [query labels](#define-a-search-query) are referenced in this section. An example rule condition for query `a` is `a > 3`.
+    - The ASCII lowercase query labels are referenced in this section. An example rule condition for query `a` is `a > 3`.
     - **Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
 1. In the **within a window of** dropdown menu, select the time period during which a signal is triggered if the condition is met.
 1. In the **Add notify** section, click **Add Recipient** to optionally configure [notification targets][101].

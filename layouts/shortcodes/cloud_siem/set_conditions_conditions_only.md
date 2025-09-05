@@ -1,0 +1,1 @@
+(Optional) Click the pencil icon next to **Condition 1** if you want to change the name of the condition. This name is appended to the rule name when a signal is generated.

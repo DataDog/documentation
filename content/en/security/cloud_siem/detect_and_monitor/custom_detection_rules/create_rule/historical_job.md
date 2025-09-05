@@ -62,11 +62,18 @@ Historical jobs are one-time executable searches on historical logs using the de
 
 1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
-1. In the **Detect new value** dropdown menu, select the attributes you want to detect. See the [learned value example](#learned-value-example) for more information.
+1. In the **Detect new value** dropdown menu, select the attributes you want to detect.
+    - For example, if you want to create a query for successful user authentication with the following settings:
+        - **Detect new value** is `country`
+        - **group by** is `user`
+        - Learning duration is `after 7 days`
+    <br>Then, logs coming in over the next 7 days are evaluated with those configured values. If a log comes in with a new value after the learning duration (`7 days`), a signal is generated, and the new value is learned to prevent future signals with this value.
+    - You can also identify users and entities using multiple **Detect new value** attributes in a single query.
+        - For example, if you want to detect when a user signs in from a new device and from a country that they've never signed in from before, add `device_id` and `country_name` to the **Detect new value** field.
 1. (Optional) Define a signal grouping in the **group by** dropdown menu.
     - The defined `group by` generates a signal for each `group by` value.
     - Typically, the `group by` is an entity (like user or IP address).
-1. In the dropdown menu to the right of **group by**, select the learning duration. See the [learned value example](#learned-value-example) for more information.
+1. In the dropdown menu to the right of **group by**, select the learning duration.
 1. (Optional) You can [filter logs using references tables](#filter-ref-threshold):
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
     1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
@@ -87,10 +94,6 @@ Historical jobs are one-time executable searches on historical logs using the de
 
 **Note**: The query applies to all ingested logs and events.
 
-#### Learned value example
-
-{{% cloud_siem/learned_value_example %}}
-
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
 
@@ -101,10 +104,11 @@ Historical jobs are one-time executable searches on historical logs using the de
 
 1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
-1. (Optional) In the **Count unique** dropdown menu, select attributes whose unique values you want to count during the specified time frame.
+1. (Optional) In the **Count** dropdown menu, select attributes whose unique values you want to count during the specified time frame.
 1. (Optional) In the **group by** dropdown menu, select attributes you want to group by.
     - The defined `group by` generates a signal for each `group by` value.
-    - Typically, the `group by` is an entity (like user, or IP). The Group By is also used to [join the queries together](#joining-queries).
+    - Typically, the `group by` is an entity (like user, or IP). The `group by` is also used to join the queries together.
+    - Joining logs that span a time frame can increase the confidence or severity of the security signal. For example, to detect a successful brute force attack, both successful and unsuccessful authentication logs must be correlated for a user.
     - Anomaly detection inspects how the `group by` attribute has behaved in the past. If a `group by` attribute is seen for the first time (for example, the first time an IP is communicating with your system) and is anomalous, it does not generate a security signal because the anomaly detection algorithm has no historical data to base its decision on.
 1. (Optional) You can [filter logs using references tables](#filter-ref-anomaly):
     1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
@@ -135,7 +139,10 @@ Historical jobs are one-time executable searches on historical logs using the de
 1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Detect anomaly** field, specify the fields whose values you want to analyze.
-1. In the **Group by** field, specify the fields you want to group by.
+1. In the **group by** field, specify the fields you want to group by.
+    - The defined `group by` generates a signal for each `group by` value.
+    - Typically, the `group by` is an entity (like user, or IP). The `group by` is also used to join the queries together.
+    - Joining logs that span a time frame can increase the confidence or severity of the security signal. For example, to detect a successful brute force attack, both successful and unsuccessful authentication logs must be correlated for a user.
 1. In the **Learn for** dropdown menu, select the number of days for the learning period. During the learning period, the rule sets a baseline of normal field values and does not generate any signals.
     - **Note**: If the detection rule is modified, the learning period restarts at day `0`.
 1. (Optional) You can [filter logs using references tables](#filter-ref-content-anomaly):
@@ -165,7 +172,7 @@ Historical jobs are one-time executable searches on historical logs using the de
 1. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **User attribute** dropdown menu, select the log attribute that contains the user ID. This can be an identifier like an email address, user name, or account identifier.
-1. The **Location attribute** value is set to `@network.client.geoip`.
+1. The **Location attribute** value is automatically set to `@network.client.geoip`.
     - The `location attribute` specifies which field holds the geographic information for a log.
     - The only supported value is `@network.client.geoip`, which is enriched by the [GeoIP parser][3] to give a log location information based on the client's IP address.
 1. Click the **Baseline user locations** checkbox if you want Datadog to learn regular access locations before triggering a signal.
@@ -221,19 +228,6 @@ Click **Add Root Query** to add additional queries.
 [2]: https://app.datadoghq.com/logs
 
 {{% /tab %}}
-{{% tab "Signal Correlation" %}}
-
-1. Select a rule for **Rule a**.
-1. Click the pencil icon to rename the rule.
-1. Use the **correlated by** dropdown to define the correlating attribute.
-    - You can select multiple attributes (maximum of 3) to correlate the selected rules. See [Time windows](#time-windows-signal-correlation) for more information about the sliding window.
-1. Select a rule for **Rule b** in the second Rule editor's dropdown.
-    - The attributes and sliding window time frame is automatically set to what was selected for **Rule a**.
-1. Click the pencil icon to rename the rule.
-
-[1]: /logs/search_syntax/
-
-{{% /tab %}}
 {{< /tabs >}}
 
 ## Set conditions
@@ -241,7 +235,7 @@ Click **Add Root Query** to add additional queries.
 {{< tabs >}}
 {{% tab "Threshold" %}}
 
-{{% cloud_siem/set_conditions %}}
+{{% cloud_siem/set_conditions_conditions_only %}}
 
 #### Example
 
@@ -259,90 +253,86 @@ In this example, when there are more than five failed logins and at least one su
 
 ### Other parameters
 
+#### 1. Job multi-triggering {#job-multi-triggering-threshold}
+
 {{% cloud_siem/job_multi_triggering %}}
-    - See [Time windows](#time-windows-threshold) for more information.
+
+#### 2. Enable optional group by {#enable-group-by-historical-threshold}
+
 {{% cloud_siem/enable_group_by %}}
-
-#### Time windows {#time-windows-threshold}
-
-{{% security-rule-time-windows %}}
-
-**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
 {{% /tab %}}
 {{% tab "New Value" %}}
 
-{{% cloud_siem/set_conditions_severity_notify_only %}}
-
 ### Other parameters
 
+#### 1. Forget value {#forget-value-historical-new-value}
+
 {{% cloud_siem/forget_value %}}
+
+#### 2. Job multi-triggering {#job-multi-triggering-historical-new-value}
+
 {{% cloud_siem/job_multi_triggering %}}
-    - See [Time windows](#time-windows-threshold) for more information.
+
+#### 3. Enable optional group by {#enable-group-by-historical-new-value}
+
 {{% cloud_siem/enable_group_by %}}
-
-#### Time windows {#time-windows-new-value}
-
-{{% security-rule-time-windows %}}
-
-**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
 {{% /tab %}}
 {{% tab "Anomaly" %}}
 
 ### Other parameters
 
+#### 1. Job multi-triggering {#job-multi-triggering-historical-anomaly}
+
 {{% cloud_siem/job_multi_triggering %}}
-    - See [Time windows](#time-windows-threshold) for more information.
+
+#### 2. Enable optional group by {#enable-group-by-historical-anomaly}
+
 {{% cloud_siem/enable_group_by %}}
-
-#### Time windows {#time-windows-anomaly}
-
-{{% security-rule-time-windows %}}
-
-**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
 {{% /tab %}}
 {{% tab "Content Anomaly" %}}
 
-{{% cloud_siem/set_conditions_content_anomaly %}}
+1. (Optional) Click the pencil icon next to **Condition 1** if you want to change the name of the condition. This name is appended to the rule name when a signal is generated.
+1. In the **Anomaly count** field, enter the condition for how many anomalous logs within the specified window are required to trigger a signal.
+    - For example, if the condition is `a >= 3` where `a` is the query, a signal is triggered if there are at least three anomalous logs within the evaluation window.
+    - All rule conditions are evaluated as condition statements. Thus, the order of the conditions affects which notifications are sent because the first condition to match generates the signal. Click and drag your rule conditions to change their ordering.
+    - A rule condition contains logical operations (`>`, `>=`, `&&`, `||`) to determine if a signal should be generated based on the event counts in the previously defined queries.
+    - The ASCII lowercase query labels are referenced in this section. An example rule condition for query `a` is `a > 3`.
+    - **Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
+1. In the **within a window of** dropdown menu, select the time period during which a signal is triggered if the condition is met.
 
 ### Other parameters
 
+#### 1. Content anomaly detection {#content-anomaly-historical-content-anomaly}
 {{% cloud_siem/content_anomaly_options %}}
+
+#### 2. Job multi-triggering {#job-multi-triggering-historical-content-anomaly}
+
 {{% cloud_siem/job_multi_triggering %}}
-    - See [Time windows](#time-windows-threshold) for more information.
+
+#### 3. Enable optional group by {#enable-group-by-historical-content-anomaly}
+
 {{% cloud_siem/enable_group_by %}}
-
-#### How an event is determined to be anomalous
-
-{{% cloud_siem/how_event_determined_anomalous %}}
-
-#### Time windows {#time-windows-content-anomaly}
-
-{{% security-rule-time-windows %}}
-
-**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
 {{% /tab %}}
 {{% tab "Impossible Travel" %}}
 
 ### Other parameters
 
+#### 1. Job multi-triggering {#job-multi-triggering-historical-anomaly}
+
 {{% cloud_siem/job_multi_triggering %}}
-    - See [Time windows](#time-windows-threshold) for more information.
+
+#### 2. Enable optional group by {#enable-group-by-historical-anomaly}
+
 {{% cloud_siem/enable_group_by %}}
-
-#### Time windows {#time-windows-impossible}
-
-{{% security-rule-time-windows %}}
-
-**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
 {{% /tab %}}
 {{% tab "Third Party" %}}
 
-{{% cloud_siem/set_conditions %}}
+{{% cloud_siem/set_conditions_conditions_only %}}
 
 ### Other parameters
 
@@ -358,9 +348,5 @@ In this example, when there are more than five failed logins and at least one su
 ## Describe your playbook
 
 {{% security-rule-say-whats-happening %}}
-
-## Create a suppression
-
-{{% cloud_siem/create_suppression %}}
 
 [1]: https://app.datadoghq.com/security/rules/new
