@@ -340,8 +340,8 @@ For help with troubleshooting, [contact Datadog support][13]. You can also send 
 [21]: /service_management/on-call/guides/configure-mobile-device-for-on-call/?tab=ios
 [22]: https://docs.datadoghq.com/logs/explorer/analytics/patterns/
 [23]: https://docs.datadoghq.com/logs/explorer/search_syntax/
-[24]: https://docs.datadoghq.com/dashboards/configure/#configuration-actions
-[25]: https://docs.datadoghq.com/logs/explorer/watchdog_insights/
-[26]: https://docs.datadoghq.com/watchdog/insights/?tab=logmanagement
-[27]: https://docs.datadoghq.com/bits_ai/chat_with_bits_ai/
-[28]: https://docs.datadoghq.com/bits_ai/bits_ai_sre/
+[24]: /dashboards/configure/#configuration-actions
+[25]: /logs/explorer/watchdog_insights/
+[26]: /watchdog/insights/?tab=logmanagement
+[27]: /bits_ai/chat_with_bits_ai/
+[28]: /bits_ai/bits_ai_sre/
