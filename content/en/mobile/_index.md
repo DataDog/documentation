@@ -263,7 +263,7 @@ On the Services page, you can view, search and filter all services that you have
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/ios_bits_chat.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="ios Bits AI Chat page showing querying with Bits AI">}}
+{{< img src="service_management/mobile/ios_bits_chat.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI chatbot interface in ios where a user asks about a service">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
