@@ -9,11 +9,16 @@ description: Learn how to monitor, maintain, and operate your CloudPrem deployme
 
 ## Dashboards
 
-CloudPrem provides an Out-Of-The-Box dashboard which monitors CloudPrem's key metrics
+CloudPrem provides an out-of-the-box dashboard that monitors CloudPrem's key metrics
 
 ### Setup
 
-OOTB metrics are exported by [DogStatsD][1] which is bundled with the Datadog Agent. Run either DogStatsD or the Datadog Agent, configured with your organization's `API key`, to export these metrics. As soon as your CloudPrem cluster is connected to Datadog, the OOTB dashboard is automatically created. You can have access to it in your [dashboards page][2].
+These metrics are exported by [DogStatsD][1]. You can either:
+
+- Run DogStatsD as a standalone service, or
+- Run the Datadog Agent (which includes DogStatsD by default)
+
+Configure either option with your organization's API key to export these metrics. As soon as your CloudPrem cluster is connected to Datadog, the OOTB dashboard is automatically created, and you can access it from your [Dashboards list][2].
 
 ### Data Collected
 
@@ -23,9 +28,9 @@ OOTB metrics are exported by [DogStatsD][1] which is bundled with the Datadog Ag
 | **indexed_events_bytes.count**<br/>(Counter) | Number of indexed bytes |
 | **object_storage_delete_requests.count**<br/>(Counter) | Number of delete requests on object storage |
 | **object_storage_get_requests.count**<br/>(Counter) | Number of get requests on object storage |
-| **object_storage_get_requests_bytes.count**<br/>(Counter) | Total bytes read from object storage via GET requests |
+| **object_storage_get_requests_bytes.count**<br/>(Counter) | Total bytes read from object storage using GET requests |
 | **object_storage_put_requests.count**<br/>(Counter) | Number of PUT requests on object storage |
-| **object_storage_put_requests_bytes.count**<br/>(Counter) | Total bytes written to object storage via PUT requests |
+| **object_storage_put_requests_bytes.count**<br/>(Counter) | Total bytes written to object storage using PUT requests |
 | **pending_merge_ops.gauge**<br/>(Gauge) | Number of pending merge operations |
 | **search_requests.count**<br/>(Counter) | Number of search requests |
 | **search_requests.duration_seconds**<br/>(Histogram) | Search request latency |
