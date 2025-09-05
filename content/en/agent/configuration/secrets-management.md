@@ -602,7 +602,7 @@ datadog-agent secret refresh
 ```
 
 ### Enabling DDOT collector refresh
-If you are using [DDOT collector][7] and want to enable API/APP refresh you must add the following additional configuration to your `datadog.yaml` file:
+If you are using [DDOT collector][6] and want to enable API/APP refresh you must add the following additional configuration to your `datadog.yaml` file:
 ```
 agent_ipc:
   port: 5051
@@ -704,7 +704,7 @@ password: <obfuscated_password2>
 ===
 ```
 
-**Note**: The Agent needs to be [restarted][6] to pick up changes on configuration files.
+**Note**: The Agent needs to be [restarted][7] to pick up changes on configuration files.
 
 ### Debugging your secret_backend_command
 
@@ -742,7 +742,7 @@ The following errors indicate that something is missing in your setup.
    error while running 'C:\decrypt.py': fork/exec C:\decrypt.py: %1 is not a valid Win32 application.
    ```
 
-Datadog has a [Powershell script][8] to help you set the correct permission on your executable. Example on how to use it:
+Datadog has a [Powershell script][1] to help you set the correct permission on your executable. Example on how to use it:
 
 ```powershell
 .\Set-SecretPermissions.ps1 -SecretBinaryPath C:\secrets\decrypt_secrets.exe
@@ -792,7 +792,7 @@ To do so, follow those steps:
     sc.exe config DatadogAgent password= "a_new_password"
     ```
 
-You can now login as `ddagentuser` to test your executable. Datadog has a [Powershell script][7] to help you test your
+You can now login as `ddagentuser` to test your executable. Datadog has a [Powershell script][2] to help you test your
 executable as another user. It switches user contexts and mimics how the Agent runs your executable.
 
 Example on how to use it:
@@ -809,9 +809,9 @@ stderr: None
 exit code:
 0
 ```
-[7]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/secrets_tester.ps1
-[8]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/Set-SecretPermissions.ps1
 
+[1]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/Set-SecretPermissions.ps1
+[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/secrets_tester.ps1
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -841,6 +841,10 @@ kubectl auth can-i get secret/database-secret -n database --as system:serviceacc
 
 This command returns whether the permissions are valid for the Agent to view this Secret.
 
+### Remove trailing line breaks
+
+Some secret management tools automatically add a line break when exporting secrets through files. You can remove these line breaks by setting `secret_backend_remove_trailing_line_break: true` in [the datadog.yaml configuration file][8], or use the environment variable `DD_SECRET_BACKEND_REMOVE_TRAILING_LINE_BREAK` to do the same, especially in containerized environments.
+
 ### Autodiscovery variables in secret handles
 
 It's also possible to use [Autodiscovery][1] variables in secret handles. The Agent resolves these variables before resolving the secret. For example:
@@ -860,5 +864,6 @@ instances:
 [3]: https://docs.docker.com/engine/swarm/secrets/
 [4]: https://github.com/DataDog/datadog-secret-backend
 [5]: https://github.com/DataDog/datadog-secret-backend/blob/main/docs/aws/secrets.md
-[6]: /agent/configuration/agent-commands/#restart-the-agent
-[7]: /opentelemetry/setup/ddot_collector/
+[6]: /opentelemetry/setup/ddot_collector/
+[7]: /agent/configuration/agent-commands/#restart-the-agent
+[8]: /agent/configuration/agent-configuration-files/

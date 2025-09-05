@@ -14649,6 +14649,11 @@ components:
         extractedValuesFromScript:
           description: Generate variables using JavaScript.
           type: string
+        id:
+          description: ID of the step.
+          example: abc-def-123
+          readOnly: true
+          type: string
         isCritical:
           description: 'Determines whether or not to consider the entire test as failed
             if this step fails.
@@ -14705,6 +14710,11 @@ components:
     SyntheticsAPIWaitStep:
       description: The Wait step used in a Synthetic multi-step API test.
       properties:
+        id:
+          description: ID of the step.
+          example: abc-def-123
+          readOnly: true
+          type: string
         name:
           description: The name of the step.
           example: Example step name
@@ -15933,6 +15943,10 @@ components:
             type: string
           description: Variables to replace in the test.
           type: object
+        version:
+          description: The version number of the Synthetic test version to trigger.
+          format: int64
+          type: integer
       required:
       - public_id
       type: object
@@ -24397,6 +24411,9 @@ components:
       additionalProperties: false
       description: Wrapper for live span
       properties:
+        hide_incomplete_cost_data:
+          description: Whether to hide incomplete cost data in the widget.
+          type: boolean
         live_span:
           $ref: '#/components/schemas/WidgetLiveSpan'
       type: object
@@ -24597,6 +24614,9 @@ components:
           format: int64
           minimum: 0
           type: integer
+        hide_incomplete_cost_data:
+          description: Whether to hide incomplete cost data in the widget.
+          type: boolean
         to:
           description: End time in seconds since epoch.
           example: 1712083128
@@ -24621,6 +24641,9 @@ components:
     WidgetNewLiveSpan:
       description: Used for arbitrary live span times, such as 17 minutes or 6 hours.
       properties:
+        hide_incomplete_cost_data:
+          description: Whether to hide incomplete cost data in the widget.
+          type: boolean
         type:
           $ref: '#/components/schemas/WidgetNewLiveSpanType'
         unit:

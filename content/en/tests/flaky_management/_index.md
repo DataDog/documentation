@@ -38,6 +38,23 @@ Use the status drop-down to change how a flaky test is handled in your CI pipeli
 
 <div class="alert alert-info"><strong>Note</strong>: Status actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
 
+## Configure policies to automate the flaky test lifecycle
+
+Configure automated Flaky Test Policies to govern how flaky tests are handled in each repository. For example, a test that flakes in the default branch can automatically be quarantined, and later disabled if it remains unfixed after 30 days.
+
+1. Click the **Policies** button at the upper right of the Flaky Management page. You can also navigate to [**Flaky Test Policies**][11] in Software Delivery settings.
+2. Search for and select the repository you want to configure. This opens the **Edit Policies** flyout.
+    {{< img src="tests/flaky-policies-2.png" alt="Flaky Test Policies page with the Edit Policies flyout open to configure a policy" style="width:100%;" >}}
+
+3. Use the toggles to enable specific automated actions, and use automation rules to further customize how tests get quarantined, disabled, or retried:
+
+| Action    | Description |
+| ---- | ---- |
+| **Quarantine**     | Toggle to allow flaky tests to be quarantined for this repository. Customize automation rules based on: <li>Time: Quarantine a test if its status is `Active` for a specified number of days. <li>Branch: Quarantine an `Active` test if it flakes in one or more specified branches.|
+| **Disable**        | Toggle to allow flaky tests to be disabled for this repository. You may want to do this after quarantining or to protect specific branches from flakiness. Customize automation rules based on: <li>Status and time: Disable a test if it has a specified status for a specified number of days. <li>Branch: Disable an `Active` or `Quarantined` test if it flakes in one or more specified branches. |
+| **Attempt&nbsp;to&nbsp;Fix** | When you attempt to fix a flaky test, automatically retry the test a specified number of times on the commit containing the fix. |
+| **Fixed**          | If a flaky test no longer flakes for 30 days, it is automatically moved to Fixed status. This automation is default behavior and can't be customized. |
+
 ## Track evolution of flaky tests
 
 Track the evolution of the number of flaky tests with the `test_optimization.test_management.flaky_tests` out-of-the-box metric. The metric is enriched with the tags below to help you investigate the counts in more detail.
@@ -103,14 +120,14 @@ Flaky Test Management uses AI to automatically assign a root cause category to e
 
 To use Flaky Test Management features, you must use Datadog's native instrumentation for your test framework. The table below outlines the minimum versions of each Datadog tracing library required to quarantine, disable, and attempt to fix flaky tests. Click a language name for setup information:
 
-| Language        | Quarantine & Disable | Attempt to fix   |
-| --------------- | -------------------- | ---------------- |
-| [.NET][5]       | 3.13.0+              | 3.17.0+          |
-| [Go][6]         | 1.73.0+              | Not available    |
-| [Java][7]       | 1.48.0+              | 1.50.0+          |
-| [JavaScript][8] | 5.44.0+              | 5.52.0+          |
-| [Python][9]     | 3.3.0+               | 3.8.0+           |
-| [Ruby][10]       | 1.13.0+              | 1.17.0+          |
+| Language        | Quarantine & Disable          | Attempt to fix               |
+| --------------- | ----------------------------- | ---------------------------- |
+| [.NET][5]       | 3.13.0+                       | 3.17.0+                      |
+| [Go][6]         | 1.73.0+ (Orchestrion v1.3.0+) | 2.2.2+ (Orchestrion v1.6.0+) |
+| [Java][7]       | 1.48.0+                       | 1.50.0+                      |
+| [JavaScript][8] | 5.44.0+                       | 5.52.0+                      |
+| [Python][9]     | 3.3.0+                        | 3.8.0+                       |
+| [Ruby][10]      | 1.13.0+                       | 1.17.0+                      |
 
 ## Further reading
 
@@ -126,3 +143,4 @@ To use Flaky Test Management features, you must use Datadog's native instrumenta
 [8]: /tests/setup/javascript/
 [9]: /tests/setup/python/
 [10]: /tests/setup/ruby/
+[11]: https://app.datadoghq.com/ci/settings/test-optimization/flaky-test-management

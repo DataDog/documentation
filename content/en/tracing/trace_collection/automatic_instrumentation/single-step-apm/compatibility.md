@@ -103,12 +103,24 @@ The following section provides additional notes, troubleshooting guidance, and k
 
 {{< programming-lang lang="java" >}}
 
+### Limitations
+
+By default, SSI does not instrument some Java applications and libraries to avoid performance overhead or low-value traces. These exclusions are defined in the [Java tracer denylist][1]. If your workload is included, the injector skips attaching the Java agent.
+
 ### Troubleshooting
 
-**Environment Variable Length**: If your application uses extensive command-line options or environment variables, you might encounter initialization failures. This typically occurs when you have many JVM arguments or other startup configurations. To resolve this:
+**Environment variable length**: If your application uses extensive command-line options or environment variables, you might encounter initialization failures. This typically occurs when you have many JVM arguments or other startup configurations. To resolve this:
   - Minimize non-essential JVM arguments
   - Consider moving some configurations to a `.properties` file
   - Check application logs for specific initialization errors
+
+### Known warnings
+
+When using SSI for Java 24+, you may see warnings related to JNI native access or `sun.misc.Unsafe` memory access. These warnings can be suppressed with the `--illegal-native-access=allow` and `--sun-misc-unsafe-memory-access=allow` environment variables. See [JEP 472][2] and [JEP 498][3] for more information.
+
+[1]: https://github.com/DataDog/dd-trace-java/blob/master/metadata/requirements.json
+[2]: https://openjdk.org/jeps/472
+[3]: https://openjdk.org/jeps/498
 
 {{< /programming-lang >}}
 
