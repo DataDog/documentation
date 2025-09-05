@@ -61,7 +61,7 @@ const provider = new DatadogProvider({
 await OpenFeature.setProviderAndWait(provider);
 ```
 
-More information about OpenFeature SDK configuration options can be found in its [README][1]. For more information on creating client tokens and/or application ID's check out [Account Management][4].
+More information about OpenFeature SDK configuration options can be found in its [documentation][1]. For more information on creating client tokens and application IDs, see [API and Application Keys][4].
 
 ### Step 2: Create a feature flag
 
