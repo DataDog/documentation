@@ -1,7 +1,7 @@
 ---
 title: Getting Started with Feature Flags
 further_reading:
-- link: 'https://github.com/DataDog/openfeature-js-client/blob/main/README.md'
+- link: 'https://openfeature.dev/docs/reference/technologies/client/web/'
   tag: 'Source Code'
   text: 'OpenFeature JavaScript client documentation'
 ---
