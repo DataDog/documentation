@@ -289,7 +289,7 @@ On the Bits AI home page, you can ask questions about your organization's system
 {{% /tab %}}
 {{< /tabs >}}
 
-On-Call pages generated from monitors with Bits AI SRE enabled will automatically initiate investigations. These investigations surface initial findings and conclusions directly on the On-Call page, helping responders understand potential root causes and next steps faster. For more information about Bits AI investigations, see [Bits AI SRE][28].
+When enabled, Bits AI SRE initiates investigations directly on On-Call pages. These investigations present initial findings and conclusions to help responders identify potential root causes and next steps. For more information, see [Bits AI SRE][28].
 
 ## Frequently Asked Question
 ### How do I remain logged into the mobile app?
