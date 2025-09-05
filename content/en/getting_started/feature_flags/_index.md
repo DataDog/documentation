@@ -4,7 +4,12 @@ further_reading:
 - link: 'https://openfeature.dev/docs/reference/technologies/client/web/'
   tag: 'Source Code'
   text: 'OpenFeature JavaScript client documentation'
+site_support_id: getting_started_feature_flags
 ---
+
+{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
+Feature Flags are in Preview. Complete the form to request access.
+{{< /callout >}}
 
 ## Overview
 
