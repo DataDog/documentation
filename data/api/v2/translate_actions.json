@@ -663,6 +663,10 @@
     "request_description": "",
     "request_schema_description": "Request to get a list of deployments."
   },
+  "DeleteDORADeployment": {
+    "description": "Use this API endpoint to delete a deployment event.",
+    "summary": "Delete a deployment event"
+  },
   "GetDORADeployment": {
     "description": "Use this API endpoint to get a deployment event.",
     "summary": "Get a deployment event"
@@ -678,6 +682,10 @@
     "summary": "Get a list of failure events",
     "request_description": "",
     "request_schema_description": "Request to get a list of failures."
+  },
+  "DeleteDORAFailure": {
+    "description": "Use this API endpoint to delete a failure event.",
+    "summary": "Delete a failure event"
   },
   "GetDORAFailure": {
     "description": "Use this API endpoint to get a failure event.",
