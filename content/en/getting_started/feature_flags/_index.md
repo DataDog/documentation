@@ -50,7 +50,7 @@ const provider = new DatadogProvider({
    enableExposureLogging: true,
    site: 'datadoghq.com',
    env: '<YOUR_ENV>',
-   service: 'my-service',
+   service: '<SERVICE_NAME>',
    version: '1.0.0',
 });
 
