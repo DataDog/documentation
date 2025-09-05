@@ -501,7 +501,6 @@ You can enable or disable the application metadata prefix in the Firehose Nozzle
 [8]: https://github.com/cf-platform-eng/meta-buildpack
 [15]: https://bosh.io/docs/bosh-cli.html
 [16]: https://bosh.io/docs/cli-v2.html#install
-[17]: https://bosh.io/docs/runtime-config.html#addons
 [18]: https://github.com/DataDog/datadog-agent-boshrelease
 [19]: https://github.com/DataDog/datadog-agent-boshrelease/blob/master/jobs/dd-agent/spec
 [20]: https://app.datadoghq.com/infrastructure/map
