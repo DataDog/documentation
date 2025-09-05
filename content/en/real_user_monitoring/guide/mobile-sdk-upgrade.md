@@ -16,6 +16,12 @@ Follow this guide to migrate between major versions of the Mobile RUM, Logs, and
 
 ## From v2 to v3
 {{< tabs >}}
+{{% tab "Android" %}}
+
+The transition from version 2 to version 3 focuses on removing support for the legacy Open Tracing project, improving the stability and consistency of the SDK.
+
+{{% /tab %}}
+
 {{% tab "iOS" %}}
 
 The migration from v2 to v3 focuses on streamlining modules, refining defaults, and improving reliability across product features.
@@ -27,6 +33,16 @@ All SDK products (RUM, Trace, Logs, SessionReplay, and so on) remain modular and
 
 ### Modules
 {{< tabs >}}
+{{% tab "Android" %}}
+
+We are following Google's [AndroidX library version policy](https://developer.android.com/jetpack/androidx/versions#version-table) for the `AndroidX` libraries so the minimum Android API level supported by SDK v3 is `23` now.
+
+Kotlin 1.9 is required.
+
+The `Open Tracing` dependency was removed because it is obsolete.
+
+{{% /tab %}}
+
 {{% tab "iOS" %}}
 
 Libraries continue to be modularized in v3. Adopt the following libraries:
@@ -84,18 +100,18 @@ let package = Package(
 <details>
   <summary>Carthage</summary>
 
-  The `Cartfile` stays the same:
+The `Cartfile` stays the same:
   ```
   github "DataDog/dd-sdk-ios"
   ```
 
-  In Xcode, you **must** link the following frameworks:
+In Xcode, you **must** link the following frameworks:
   ```
   DatadogInternal.xcframework
   DatadogCore.xcframework
   ```
 
-  Then you can select the modules you want to use:
+Then you can select the modules you want to use:
   ```
   DatadogCrashReporting.xcframework + CrashReporter.xcframework
   DatadogLogs.xcframework
@@ -109,8 +125,161 @@ let package = Package(
 {{% /tab %}}
 {{< /tabs >}}
 
-### SDK initialization
+### API changes
 {{< tabs >}}
+{{% tab "Android" %}}
+
+### Core
+
+In SDK v3, the user info ID becomes mandatory, and the `null` value cannot be provided anymore.
+
+API changes:
+
+| `2.x`                               | `3.0`                              |
+|-------------------------------------|------------------------------------|
+| `Datadog#setUserInfo(String?, ...)` | `Datadog.setUserInfo(String, ...)` |
+
+### RUM
+
+We made minor improvements to the RUM modules. They don't require significant changes to your code, but it's worth checking if you can refactor some redundant parameters.
+
+API changes:
+
+| `2.x`                                                                               | `3.0`                                                                                |
+|-------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| `DatadogRumMonitor#startResource(String, String, String,Map<String, Any?>)`         | Use `startResource` method which takes `RumHttpMethod` as `method` parameter instead |
+| `com.datadog.android.rum.GlobalRum`                                                 | `GlobalRum` object was renamed to `com.datadog.android.rum.GlobalRumMonitor`         |
+| `com.datadog.android.rum.RumMonitor#addAction()`                                    | Parameter `attributes: Map<String, Any?>` is now optional                            |
+| `com.datadog.android.rum.RumMonitor#startAction()`                                  | Parameter `attributes: Map<String, Any?>` is now optional                            |
+| `com.datadog.android.rum.RumMonitor#stopResource()`                                 | Parameter `attributes: Map<String, Any?>` is now optional                            |
+| `com.datadog.android.rum.RumMonitor#addError()`                                     | Parameter `attributes: Map<String, Any?>` is now optional                            |
+| `com.datadog.android.rum.RumMonitor#addErrorWithStacktrace()`                       | Parameter `attributes: Map<String, Any?>` is now optional                            |
+| `com.datadog.android.rum.internal.monitor.AdvancedNetworkRumMonitor#stopResource()` | Parameter `attributes: Map<String, Any?>` is now optional                            |
+| `com.datadog.android.rum.internal.monitor.AdvancedNetworkRumMonitor#stopResource()` | Parameter `attributes: Map<String, Any?>` is now optional                            |
+
+### Logs
+
+The Logs product no longer reports fatal errors. To enable Error Tracking for crashes, Crash Reporting must be enabled in conjunction with RUM.
+
+### Trace
+
+The [`Open Tracing`](https://opentracing.io/) project has been marked as archived and it is no longer supported. The `Open Tracing` dependencies on has been removed from SDK v3.
+
+The Datadog SDK already supports [`Open Telemetry`](https://opentelemetry.io/), which is now the recommended way to use the tracing feature API.
+
+**Note** that the `Open Telemetry` specification library [requires](https://github.com/open-telemetry/opentelemetry-java?tab=readme-ov-file#requirements) desugaring to be enabled for projects with a `minSdk` < 26.
+
+#### Migrating tracing from `Open Tracing` to `Open Telemetry` (recommended)
+
+1. Add the `Open Telemetry` dependency to your `build.gradle.kts`:
+
+```kotlin
+implementation(project("com.datadoghq:dd-sdk-android-trace-otel:x.x.x"))
+```
+
+2. Replace the `Open Tracing` configuration:
+```kotlin
+GlobalTracer.registerIfAbsent(
+  AndroidTracer.Builder()
+    .setService(BuildConfig.APPLICATION_ID)
+    .build()
+)
+```
+
+with the `Open Telemetry` configuration:
+```kotlin
+GlobalOpenTelemetry.set(
+  DatadogOpenTelemetry(BuildConfig.APPLICATION_ID)
+)
+```
+
+To access the tracer object for manual (custom) tracing, use `io.opentelemetry.api.GlobalOpenTelemetry.get()` instead of `io.opentracing.util.GlobalTracer.get()`.
+For example:
+```kotlin
+val tracer: Tracer = GlobalOpenTelemetry
+  .get()
+  .getTracer("SampleApplicationTracer")
+
+val span = tracer
+  .spanBuilder("Executing operation")
+  .startSpan()
+
+// Code that should be instrumented
+
+span.end()
+```
+
+Refer to the official `Open Telemetry` [documentation](https://opentelemetry.io/docs/) for more details.
+
+#### Migrating tracing from `Open Tracing` to `DatadogTracing` (transition period)
+
+<div class="alert alert-warning">This option has been added for compatibility and to simplify the transition from Open Tracing to Open Telemetry, but it may not be available in future major releases. We recommend using Open Telemetry as the standard for tracing tasks. However, if it is not possible to enable desugaring in your project for some reason, you can use this method.</div>
+Replace the `Open Tracing` configuration:
+```kotlin
+GlobalTracer.registerIfAbsent(
+  AndroidTracer.Builder()
+    .setService(BuildConfig.APPLICATION_ID)
+    .build()
+)
+```
+
+with the `DatadogTracing` configuration:
+```kotlin
+GlobalDatadogTracer.registerIfAbsent(
+  DatadogTracing.newTracerBuilder()
+    .build()
+)
+```
+
+For manual (custom) tracing use `com.datadog.android.trace.GlobalDatadogTracer.get()` instead of `io.opentracing.util.GlobalTracer.get()` to access the tracer object.
+For example:
+```kotlin
+val tracer = GlobalDatadogTracer.get()
+
+val span = tracer
+  .buildSpan("Executing operation")
+  .start()
+
+// Code that should be instrumented
+
+span.finish()
+```
+Refer to the Datadog [documentation](https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/android?tab=kotlin) for more details.
+
+API changes:
+
+| `2.x`                                     | `3.0` `Open Telemetry`                     | `3.0` `Datadog Tracing`                                 |
+|-------------------------------------------|--------------------------------------------|---------------------------------------------------------|
+| `io.opentracing.util.GlobalTracer`        | `io.opentelemetry.api.GlobalOpenTelemetry` | `com.datadog.android.trace.GlobalDatadogTracer`         |
+| `com.datadog.android.trace.AndroidTracer` | `io.opentelemetry.api.trace.Tracer`        | `com.datadog.android.trace.api.tracer.DatadogTracer`    |
+| `io.opentracing.Span`                     | `io.opentelemetry.api.trace.Span`          | `com.datadog.android.trace.api.span.DatadogSpan`        |
+| `io.opentracing.Scope`                    | `io.opentelemetry.context.Scope`           | `com.datadog.android.trace.api.scope.DatadogScope`      |
+| `io.opentracing.SpanContext`              | `io.opentelemetry.api.trace.SpanContext`   | `com.datadog.android.trace.api.span.DatadogSpanContext` |
+
+Replacement hints:
+
+| `2.x`                                         | `3.0` `Open Telemetry`                                | `3.0` `Datadog Tracing`                           |
+|-----------------------------------------------|-------------------------------------------------------|---------------------------------------------------|
+| `AndroidTracer.Builder().build()`             |                                                       | `DatadogTracing.newTracerBuilder().build()`       |
+| `AndroidTracer#setPartialFlushThreshold(Int)` | `OtelTracerProvider#setPartialFlushThreshold()`       | `DatadogTracerBuilder#withPartialFlushMinSpans()` |
+| `io.opentracing.SpanContext#toTraceId()`      | `io.opentelemetry.api.trace.SpanContext#getTraceId()` | `DatadogSpanContext.traceId.toString()`           |
+| `io.opentracing.Span#setError()`              | `io.opentelemetry.api.trace#recordException()`        | `DatadogSpan#addThrowable()`                      |
+
+### OkHttp instrumentation
+
+The OkHttp instrumentation (`com.datadoghq:dd-sdk-android-okhttp:x.x.x`) does not require desugaring support. However, a few migration actions may be necessary.
+
+API changes:
+
+| `2.x`                                                                                                                                  | `3.0`                                       |
+|----------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
+| `TracingInterceptor(String, List<String>, TracedRequestListener,Sampler<Span>)`                                                        | Use `TracingInterceptor.Builder()` instead. |
+| `TracingInterceptor(String?,Map<String, Set<TracingHeaderType>>, TracedRequestListener, Sampler<Span>)`                                | Use `TracingInterceptor.Builder()` instead. |
+| `TracingInterceptor(String?,TracedRequestListener,Sampler<Span>)`                                                                      | Use `TracingInterceptor.Builder()` instead. |
+| `DatadogInterceptor(String?, Map<String, Set<TracingHeaderType>>,TracedRequestListener, RumResourceAttributesProvider, Sampler<Span>)` | Use `DatadogInterceptor.Builder()` instead. |
+| `DatadogInterceptor(String?,List<String>,TracedRequestListener,RumResourceAttributesProvider,Sampler<Span>)`                           | Use `DatadogInterceptor.Builder()` instead. |
+| `DatadogInterceptor(String?,TracedRequestListener,RumResourceAttributesProvider,Sampler<Span>) `                                       | Use `DatadogInterceptor.Builder()` instead. |
+
 {{% /tab %}}
 {{% tab "iOS" %}}
 
@@ -247,6 +416,7 @@ The migration from v1 to v2 comes with improved performance and additional featu
 
 {{% /tab %}}
 {{< /tabs >}}
+
 ### Modules
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -355,18 +525,18 @@ let package = Package(
 <details>
   <summary>Carthage</summary>
 
-  The `Cartfile` stays the same:
+The `Cartfile` stays the same:
   ```
   github "DataDog/dd-sdk-ios"
   ```
 
-  In Xcode, you **must** link the following frameworks:
+In Xcode, you **must** link the following frameworks:
   ```
   DatadogInternal.xcframework
   DatadogCore.xcframework
   ```
 
-  Then you can select the modules you want to use:
+Then you can select the modules you want to use:
   ```
   DatadogLogs.xcframework
   DatadogTrace.xcframework
