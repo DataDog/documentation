@@ -33,7 +33,7 @@ First, install `@datadog/openfeature-browser` and `@openfeature/web-sdk` as depe
 
 
 ```
-yarn add @datadog/openfeature-browser @openfeature/web-sdk
+yarn add @datadog/openfeature-browser@preview @openfeature/web-sdk
 ```
 
 Then, add the following to your project to initialize the SDK:
