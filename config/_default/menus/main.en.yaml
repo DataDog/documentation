@@ -3477,6 +3477,11 @@ menu:
       parent: ndm_setup
       identifier: ndm_sd-wan
       weight: 30005
+    - name: VPN Monitoring
+      url: network_monitoring/devices/vpn_monitoring
+      parent: ndm_setup
+      identifier: ndm_vpn_monitoring
+      weight: 30006
     - name: Profiles
       url: network_monitoring/devices/profiles
       parent: ndm
