@@ -273,7 +273,7 @@ On the Services page, you can view, search and filter all services that you have
 {{% /tab %}}
 {{< /tabs >}}
 
-On the home page, you can ask questions to Bits about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information about Bits AI, see [chat with Bits AI][27].
+On the Bits AI home page, you can ask questions about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information, see [Chat with Bits AI][27].
 
 ### Bits AI SRE
 {{< tabs >}}
