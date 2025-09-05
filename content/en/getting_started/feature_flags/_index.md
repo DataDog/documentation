@@ -107,7 +107,7 @@ After saving changes to the targeting rules, publish those rules by enabling you
 As a general best practice, changes should be rolled out in a Staging environment before rolling out in Production.
 </div>
 
-Go to **Targeting Rules & Rollouts > Per environment override**, and select **Use targeting rules** in the dropdown under the environment where you want to enable the rules.
+In the **Targeting Rules & Rollouts** section, toggle your selected environment to **Enabled**.
 
 {{< img src="getting_started/feature_flags/publish-targeting-rules.png" alt="Publish targeting rules" style="width:100%;" >}}
 
