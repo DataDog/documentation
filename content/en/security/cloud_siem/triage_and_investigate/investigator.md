@@ -6,6 +6,7 @@ aliases:
   - /security_platform/cloud_siem/investigator/
   - /security/cloud_siem/cloud_security_investigator/
   - /security/cloud_siem/cloud_siem_investigator/
+  - /security/cloud_siem/investigator/
 further_reading:
 - link: "/security/cloud_siem/guide/aws-config-guide-for-cloud-siem/"
   tag: "Documentation"

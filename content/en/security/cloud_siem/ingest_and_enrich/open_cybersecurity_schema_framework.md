@@ -1,6 +1,8 @@
 ---
 title: Open Cybersecurity Schema Framework (OCSF) Common Data Model in Datadog
 disable_toc: false
+aliases:
+  - /security/cloud_siem/open_cybersecurity_schema_framework
 further_reading:
 - link: "logs/processing/pipelines"
   tag: "Documentation"

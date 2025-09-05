@@ -4,6 +4,7 @@ type: documentation
 aliases:
  - /security_platform/cloud_siem/signal_correlation_rules
  - /security/cloud_siem/signal_correlation_rules
+ - /security/cloud_siem/detection_rules/signal_correlation_rules
 further_reading:
 - link: "/cloud_siem/explorer/"
   tag: "Documentation"

@@ -1,5 +1,7 @@
 ---
 title: Risk Insights
+aliases:
+- /security/cloud_siem/entities_and_risk_scoring
 further_reading:
     - link: "https://www.datadoghq.com/blog/risk-prioritization-entity-analytics/"
       tag: Blog

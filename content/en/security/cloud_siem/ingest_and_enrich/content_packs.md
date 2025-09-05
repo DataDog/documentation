@@ -1,6 +1,8 @@
 ---
 title: Content Packs
 disable_toc: true
+aliases:
+  - /security/cloud_siem/content_packs
 further_reading:
 - link: "/security/cloud_siem/detection_rules"
   tag: "Documentation"
@@ -8,7 +10,7 @@ further_reading:
 - link: "security/cloud_siem/investigator"
   tag: "Documentation"
   text: "Learn more about the Investigator"
-- link: "/security/cloud_siem/investigate_security_signals"
+- link: "/security/cloud_siem/triage_and_investigate/investigate_security_signals"
   tag: "Documentation"
   text: "Investigate security signals"
 - link: "https://www.datadoghq.com/blog/cloud-siem-content-packs-whats-new-2024-09/"
@@ -43,5 +45,5 @@ further_reading:
 
 [1]: https://app.datadoghq.com/security/content-packs
 [2]: /security/detection_rules/
-[3]: /security/cloud_siem/investigator
+[3]: /security/cloud_siem/triage_and_investigate/investigator
 [4]: /service_management/workflows/
