@@ -9,6 +9,12 @@ further_reading:
   text: "Observing the data lifecycle with Datadog"
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+    Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
+</div>
+{{% /site-region %}}
+
 {{< callout url="https://www.datadoghq.com/product-preview/monitoring-for-data-and-data-pipelines/" >}}
   Data Pipeline Lineage is available in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}} 
