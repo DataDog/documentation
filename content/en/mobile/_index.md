@@ -268,7 +268,7 @@ On the Services page, you can view, search and filter all services that you have
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/android_bits_chat.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android Bits AI Chat page showing querying with Bits AI">}}
+{{< img src="service_management/mobile/android_bits_chat.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI chatbot interface in Android where a user asks about a service">}}
 
 {{% /tab %}}
 {{< /tabs >}}
