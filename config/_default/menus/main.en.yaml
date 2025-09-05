@@ -8172,7 +8172,7 @@ menu:
       url: account_management/guide/
       parent: account_management
       weight: 14
-    - name: Cloud-provider Based Authentication
+    - name: Cloud-based Authentication
       identifier: account_management_cloud_auth
       url: account_management/cloud_provider_authentication/
       parent: account_management
