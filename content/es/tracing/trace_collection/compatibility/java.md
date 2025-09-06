@@ -304,7 +304,7 @@ Para configurar el rastreador Java de Datadog con GraalVM Native Image, sigue lo
    native-image -J-javaagent:/path/to/dd-java-agent.jar -jar App.jar
    ```
 3. (Opcional) Habilita la integración del generador de perfiles añadiendo el siguiente argumento:
-`-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+`-J-Ddd.profiling.enabled=true --enable-monitoring=jfr`.
 
 [6]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 {{% /tab %}}
@@ -318,7 +318,7 @@ Para configurar el rastreador Java de Datadog con Quarkus Native, sigue los paso
    ./mvnw package -Dnative -Dquarkus.native.additional-build-args='-J-javaagent:/path/to/dd-java-agent.jar'
    ```
 3. (Opcional) Habilita la integración del generador de perfiles añadiendo el siguiente argumento:
-`-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+`-J-Ddd.profiling.enabled=true –-enable-monitoring=jfr`.
 
 [6]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 {{% /tab %}}
@@ -350,7 +350,7 @@ Para configurar el rastreador Java de Datadog con Spring Native, sigue los pasos
      </build>
      ```
    - También puedes utilizar el comando `pack build` con la opción `--env BP_DATADOG_ENABLED=true` para habilitar el paquete de compilación Datadog.
-3. (Opcional) Habilita la integración del generador de perfiles configurando la siguiente variable de entorno:`BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true –enable-monitoring=jfr’` .
+3. (Opcional) Habilita la integración del generador de perfiles configurando la siguiente variable de entorno:`BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true --enable-monitoring=jfr’` .
 
 [6]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [8]: https://github.com/paketo-buildpacks/datadog
