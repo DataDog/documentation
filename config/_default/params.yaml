@@ -305,5 +305,6 @@ unsupported_sites:
   test_optimization: [gov]
   universal_service_monitoring: [gov]
   watchdog_faulty_service_deployment: [us3,us5,eu,ap1,ap2,gov]
+  wiz: [gov]
   workflow-automation: [gov]
   workflows: [gov]
