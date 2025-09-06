@@ -605,23 +605,6 @@
       "description": "Update an existing incident team returns \"OK\" response"
     }
   ],
-  "UpdateIncident": [
-    {
-      "group": "incidents",
-      "suffix": "_3369341440",
-      "description": "Add commander to an incident returns \"OK\" response"
-    },
-    {
-      "group": "incidents",
-      "suffix": "_1009194038",
-      "description": "Remove commander from an incident returns \"OK\" response"
-    },
-    {
-      "group": "incidents",
-      "suffix": "",
-      "description": "Update an existing incident returns \"OK\" response"
-    }
-  ],
   "UpdateIncidentAttachments": [
     {
       "group": "incidents",
@@ -655,6 +638,18 @@
       "group": "incidents",
       "suffix": "",
       "description": "Create an incident type returns \"CREATED\" response"
+    }
+  ],
+  "UpdateIncident": [
+    {
+      "group": "incidents",
+      "suffix": "_1009194038",
+      "description": "Remove commander from an incident returns \"OK\" response"
+    },
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Update an existing incident returns \"OK\" response"
     }
   ],
   "UpdateIncidentIntegration": [
