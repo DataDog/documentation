@@ -11,6 +11,15 @@
             "timeout": 300
           }
         ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./hooks/block-go-files.py"
+          }
+        ]
       }
     ]
   }
