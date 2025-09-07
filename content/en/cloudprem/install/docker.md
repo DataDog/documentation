@@ -16,7 +16,7 @@ further_reading:
   Datadog CloudPrem is in Preview.
 {{< /callout >}}
 
-This document walks you through the process of installing CloudPrem on your local machine for testing purposes. CloudPrem can be deployed using either standalone Docker container, you can also use Docker Compose for a single command line CloudPrem + Datadog agent setup.
+This document walks you through the process of installing CloudPrem on your local machine for **testing purposes**. CloudPrem can be deployed using either standalone Docker container, you can also use Docker Compose for a single command line CloudPrem + Datadog agent setup.
 
 ## Prerequisites
 

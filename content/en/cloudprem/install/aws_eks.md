@@ -27,7 +27,7 @@ Before getting started with CloudPrem, ensure you have:
 
 - AWS account with necessary permissions
 - Kubernetes `1.25+` ([EKS][1] recommended)
-- [AWS Load Balancer Controller installed][2]
+- [AWS Load Balancer Controller installed][2] (optional)
 - PostgreSQL database ([RDS][3] recommended)
 - S3 bucket for log storage
 - Datadog Agent
@@ -140,6 +140,16 @@ echo ""
      # The root URI where index data is stored. This should be an S3 path.
      # All indexes created in CloudPrem are stored under this location.
      default_index_root_uri: s3://<BUCKET_NAME>/indexes
+
+    # Reverse connection configuration
+    # When enabled, CloudPrem initiates the connection to Datadog, eliminating the need for public ingress.
+    # This is useful for environments with strict network policies or when you prefer not to expose CloudPrem publicly.
+    # cloudprem:
+    #   enable_reverse_connection: true
+    #   site: "datadoghq.com"
+    #   dd_api_key: "${DD_API_KEY}"
+    #   dd_application_key: "${DD_APP_KEY}"
+
 
    # Ingress configuration
    # The chart supports two ingress configurations:
