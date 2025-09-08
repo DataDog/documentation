@@ -34,7 +34,7 @@ These features are available for all Test Optimization customers, and they do no
 
 ## Test summaries in GitHub pull requests
 
-Test Optimization integrates with GitHub to show summaries of test results directly in your pull request comments. Each summary contains an overview of the tests executions, flakiness information and error messages for failed tests.
+Test Optimization integrates with GitHub to show summaries of test results directly in your pull request comments. Each summary contains an overview of the tests executions, flakiness information, and error messages for failed tests.
 
 {{< img src="ci/github_comments_light.png" alt="Datadog GitHub pull request comment preview" style="width:100%;">}}
 
