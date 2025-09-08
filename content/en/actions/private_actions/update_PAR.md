@@ -5,6 +5,8 @@ disable_toc: false
 
 ## Overview
 
+This page explains how to update the private action runner (PAR). 
+
 To view the latest version of the PAR, check [this URL][1].
 
 ## Docker mode
