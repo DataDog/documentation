@@ -220,7 +220,7 @@ You can configure the Failure to Answer evaluation to use specific categories of
 
 | Configuration Option | Description | Example(s) |
 |---|---|---|
-| Empty Code Response | An empty code object, like an empty list or tuple, signifiying no data or results | (), [], {}, "", "" |
+| Empty Code Response | An empty code object, like an empty list or tuple, signifiying no data or results | (), [], {}, "", '' |
 | Empty Response | No meaningful response, returning only whitespace | whitespace |
 | No Content Response | An empty output accompanied by a message indicating no content is available | Not found, N/A |
 | Redirection Response | Redirects the user to another source or suggests an alternative approach | If you have additional details, I'd be happy to include them|
@@ -256,7 +256,7 @@ This check evaluates whether your LLM chatbot can successfully carry out a full 
 |---|---|---|
 | Evaluated on session | Evaluated using LLM | Goal Completeness assesses whether all user intentions within a multi-turn interaction were successfully resolved. The evaluation identifies resolved and unresolved intentions, providing a completeness score based on the ratio of unresolved to total intentions. |
 
-For optimal evaluation accuracy, it is preferable to send a tag when the session is finished and configure the evaluation to run only on session with this tag. The evaluation returns a detailed breakdown including resolved intentions, unresolved intentions, and reasoning for the assessment. A session is considered incomplete if more than 50% of identified intentions remain unresolved.
+For optimal evaluation accuracy and cost control, it is preferable to send a tag when the session is finished and configure the evaluation to run only on session with this tag. The evaluation returns a detailed breakdown including resolved intentions, unresolved intentions, and reasoning for the assessment. A session is considered incomplete if more than 50% of identified intentions remain unresolved.
 
 ##### Instrumentation
 
@@ -287,11 +287,8 @@ The span should contain meaningful `input_data` and `output_data` that represent
 
 After instrumenting your application to send session-end spans, configure the evaluation to run only on sessions with your specific tag. This targeted approach ensures the evaluation analyzes complete sessions rather than partial interactions.
 
-1. Navigate to [**LLM Observability > Settings > Evaluations**][2].
-1. Click on **Goal Completeness**.
-1. Select **Configure Evaluation** or click the edit icon for your specific application.
-1. Choose your LLM provider (OpenAI, Azure OpenAI, Anthropic, or Amazon Bedrock) and account.
-1. Configure the evaluation data:
+1. Go to the **Goal Completeness** settings
+2. Configure the evaluation data:
    - Select **spans** as the data type since Goal Completeness runs on individual spans.
    - Choose the span name that corresponds to your session-end function (for example, `send_session_ended_span`).
    - In the **tags** section, specify the tag you configured in your instrumentation (for example, `session_status:completed`).
