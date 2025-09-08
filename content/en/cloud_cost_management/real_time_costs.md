@@ -8,7 +8,9 @@ further_reading:
   text: "Learn about Cloud Cost Management"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Real-Time Costs is in Preview" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/real-time-costs" header="Join the Preview!">}}
+Real-Time Costs is in Preview.
+{{< /callout >}}
 
 ## Overview
 
