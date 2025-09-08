@@ -24,8 +24,8 @@ You can configure and manage all incident-related integrations in the **Incident
 ## Setup
 
 {{< whatsnext desc="Set up and use the following integrations within the context of Datadog Incident Management:">}}
-    {{< nextlink href="/service_management/incident_management/guides/jira" >}}Jira{{< /nextlink >}}
-    {{< nextlink href="/service_management/incident_management/guides/statuspage" >}}Statuspage{{< /nextlink >}}
+    {{< nextlink href="/service_management/incident_management/integrations/jira" >}}Jira{{< /nextlink >}}
+    {{< nextlink href="/service_management/incident_management/integrations/statuspage" >}}Statuspage{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
