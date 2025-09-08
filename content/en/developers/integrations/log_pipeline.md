@@ -156,10 +156,10 @@ The final step is to export the pipeline and upload the files to the Developer P
 
 [1]: https://learn.datadoghq.com/courses/integration-pipelines
 [2]: https://learn.datadoghq.com/courses/log-pipelines
-[3]: https://docs.datadoghq.com/logs/log_configuration/pipelines/
-[4]: https://docs.datadoghq.com/logs/log_configuration/processors/
-[5]: https://docs.datadoghq.com/logs/explorer/facets/
-[6]: https://docs.datadoghq.com/developers/integrations/?tab=integrations#join-the-datadog-partner-network
+[3]: /logs/log_configuration/pipelines/
+[4]: /logs/log_configuration/processors/
+[5]: /logs/explorer/facets/
+[6]: /developers/integrations/?tab=integrations#join-the-datadog-partner-network
 [7]: https://app.datadoghq.com/logs/pipelines
 [8]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#grok-parser
 [9]: https://docs.datadoghq.com/standard-attributes/?product=log
