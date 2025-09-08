@@ -64,7 +64,7 @@ dependencies {
 
 ### Step 2 - Specify application details in the UI
 
-1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][7].
+1. Navigate to [**Errors** > **Settings** > **Browser and Mobile** > **+ New Application**][7].
 2. Select `android` as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][8].
 4. To disable automatic user data collection for either client IP or geolocation data, use the toggles for those settings. For more information, see [Android Data Collected][9].
