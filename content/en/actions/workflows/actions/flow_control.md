@@ -54,7 +54,7 @@ When a run completes, the workflow enters **Debug** mode. Select a step within t
 
 ## While loop
 
-The **While loop** action allows you to execute a set of actions iteratively based on a set of conditions, perfect for automation patterns where the number of repetitions isn't known in advance. While loops run a maximum of 2000 iterations. You can perform many different operations with a while loop, including pagination, polling for progress, and retrying until success.
+The **While loop** action allows you to execute a set of actions iteratively based on a set of conditions and is recommended for automation patterns where the number of repetitions isn't known in advance. While loops run a maximum of 2000 iterations. You can perform different operations with a while loop, including pagination, polling for progress, and retrying until success.
 
 In the example below, a while loop is used to paginate the AWS S3 List Buckets API to be displayed in an App.
 
