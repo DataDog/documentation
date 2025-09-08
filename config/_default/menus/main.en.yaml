@@ -6324,11 +6324,16 @@ menu:
       parent: workload_protection
       identifier: workload_protection_inventory
       weight: 205
+    - name: Hosts and Containers
+      url: security/workload_protection/inventory/hosts_and_containers
+      parent: workload_protection_inventory
+      identifier: workload_protection_hosts_and_containers
+      weight: 1
     - name: Coverage
       url: security/workload_protection/inventory/coverage_map
       parent: workload_protection_inventory
       identifier: workload_protection_coverage_map
-      weight: 1
+      weight: 3
     - name: Guides
       url: security/workload_protection/guide
       parent: workload_protection
