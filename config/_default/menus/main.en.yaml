@@ -2444,7 +2444,7 @@ menu:
       identifier: incidents_integrations
       weight: 9
     - name: Jira
-      url: service_management/incident_management/jira
+      url: service_management/incident_management/integrations/jira
       parent: incidents_integrations
       identifier: incidents_jira
       weight: 901
