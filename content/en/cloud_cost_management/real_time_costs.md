@@ -14,7 +14,7 @@ Real-Time Costs is in Preview.
 
 ## Overview
 
-Real-Time Costs provide near real-time estimates of your Amazon EC2 compute spend, including Kubernetes spend on EC2, allowing you to see changes before they appear on your bill.
+Real-Time Costs provide near real-time estimates of your Amazon EC2 costs, including Kubernetes cost allocation, so that you can react to cost changes in minutes and hours, not days. Estimates are generated using real-time usage data from the Datadog Agent, based on recent average hourly net amortized EC2 prices by instance type, region, and AWS account.
 
 Use real-time costs to:
 - Detect anomalies early
@@ -22,7 +22,9 @@ Use real-time costs to:
 - Monitor hourly or sub-hourly spend trends
 - Gain deeper visibility into rapidly changing Kubernetes clusters
 
-Estimates are based on recent average hourly net amortized EC2 prices by instance type, region, and AWS account.
+Real-time costs are currently available in Preview for:
+- Amazon EC2 spend (excluding EBS, networking, etc)
+- Kubernetes running on EC2
 
 ## Requirements
 
@@ -30,27 +32,39 @@ Estimates are based on recent average hourly net amortized EC2 prices by instanc
 - Datadog Agent is installed on each EC2 instance
 - Optionally, to see Kubernetes costs in real time, enable Datadog Container Monitoring for your clusters by following the setup in [Container Cost Allocation][2]
 
-## Usage
+## How to query real-time costs
 
-Real-time costs can be found under the standard "Metrics" source and not the "Cloud Cost" source. To use real-time costs, Datadog recommends always using the `sum` aggregation. Costs are updated every 5 minutes. Therefore, additionally a `rollup` using a minimum of a 5 minute `sum` interval is recommended. For example: `sum:aws.cost.net.amortized.realtime.estimated.test{*}.as_count().rollup(sum, 300)`. Setting the interval to a greater value, such as 1 hour, can also be utilized to see costs on an hourly. Hourly costs can be helpful to better understand usage patterns before buying savings plans and reservations.
+Real-time costs can be found under the standard "Metrics" source in Metrics Explorer and dashboards, and should be queried using `sum:aws.cost.net.amortized.realtime.estimated{*}.as_count().rollup(sum, 300)`:
+- the `sum` or `sum by` aggregation
+- as `count` (read more about rate vs count metrics [here][1])
+- rollup `sum`, minimum of 5 minutes (or 300 seconds in the query above, since real-time costs are updated every 5 minutes)
 
-Real-time costs are based on a rate metrics type. When viewing rate metrics a choice must be made between `count` or `rate`. Using `count` shows the amount spent over the selected interval. For example if you set a 5-minute rollup, the count is the amount spent in 5 minutes. If the rollup is 1 hour, it would be about 12 times as large.
-Using `rate` shows the amount spent per second. To convert this value to a different time unit, multiply accordingly. For example, multiplying the rate per second by 3,600 gives you the rate per hour.
+Rollups can be longer, such as 1 hour, to see costs on an hourly basis. Hourly costs can be helpful to better understand usage patterns before buying savings plans and reservations.
 
-You can learn more about rate metrics [here][1].
+## Real-time Kubernetes allocation
 
-## Kubernetes
-
-Real-time costs provides insights into your rapidly changing Amazon EC2 based Kubernetes clusters such as EKS. Similar to the existing container cost allocation, ec2 instance costs are broken down into the Kubernetes pods that ran on them. Therefore any tags used on your pod are available in real time. Common tags include `kube_cluster_name` `kube_namespace` `kube_deployment` `kube_deployment` `kube_stateful_set` `pod_name` `pod_phase` `pod_status` and many more including any of your custom tags added to pods. The `allocated_spend_type` is also available to help you differentiate between pod costs and unused space on an EC2 Kubernetes Node instance.
+Similar to the existing container cost allocation, EC2 instance costs are broken down into the Kubernetes pods that ran on them. All tags used on your pod are available in real time, including **custom tags on your pods**, such as team, service or env, and **out-of-the-box Kubernetes tags**:
+- `allocated_spend_type` 
+- `kube_cluster_name`
+- `kube_namespace`
+- `kube_deployment`
+- `kube_stateful_set`
+- `pod_name`
+- `pod_phase`
+- `pod_status`
 
 ## Tags
 
-The tags available on Real-time costs are similar, but not exactly the same as those that show up on other Cloud Cost Management Metrics.
-- All tag values are lowercase
-- Tag pipelines and custom allocation rules are not applied
-- Various CUR specific tags may not exist on the metric. Tags on real-time costs are mostly derived from the data collected by the Datadog Agent and not the CUR
+The tags available on real-time costs are similar, but not exactly the same as those that show up on other Cloud Cost Management metrics.
+- All tag values are lowercase, normalized like Metrics data
+- Tag Pipelines and Custom Allocation Rules are not applied
+- Some Cost and Usage Report (CUR) specific tags and FOCUS tags may not exist on the real-time cost metric, since real-time costs are derived primarily using usage data collected by the Datadog Agent, not the CUR
 
 ## Accuracy
+
+Real-time costs aim to be within 10% accuracy of the cost data from the daily EC2 costs on your CUR, for EC2 hosts monitored by the Datadog Agent. During the preview period data may be unstable. Large temporary drops in cost or gaps may occur, and for long term cost trend analysis, Datadog recommends using the Cloud Cost metrics based on direct AWS billing data.
+
+You can use the `estimated_hourly_cost` tag to understand the estimated unit cost of an instance type per hour.
 
 - Sources of variance include:
   - Hourly averages that shift with your recent mix of on-demand, commitment, and spot spending
@@ -61,15 +75,6 @@ The tags available on Real-time costs are similar, but not exactly the same as t
   - Estimates cover compute only (not EBS, networking, and so on)
 - Overestimation can occur when:
   - Instances are monitored by the Datadog Agent but are not included in CCM billing data
-- Preview accuracy:
-  - During the preview period data may be unstable. Large temporary drops in cost or gaps may occur
-  - For long-term trends, Datadog always recommends to use the accurate Cloud Cost metrics based on direct AWS billing data
-
-## Limitations
-
-Tagging may be inconsistent when compared to other CCM metrics.
-Not all AWS billing or FinOps FOCUS tags can be replicated to the real-time cost metric.
-Real-time costs also do not support tag pipelines or Kubernetes resource tags such as `kube_namespace`. Only tags that appear on the Amazon EC2 instance directly are available. Tags that exist only on Kubernetes nodes are not available.
 
 [1]: /metrics/types/?tab=rate#metric-types
 [2]: /cloud_cost_management/cost_allocation/container_cost_allocation/
