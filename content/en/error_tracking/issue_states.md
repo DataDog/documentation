@@ -10,7 +10,7 @@ further_reading:
 
 All issues in Error Tracking have a status to help you triage and prioritize issues or dismiss noise. There are five statuses:
 
-- **FOR REVIEW**: Ongoing and in need of attention because the issue is new or it's a regression.
+- **FOR REVIEW**: New or regressed issues that need attention.
 - **REVIEWED**: Triaged issues that need to be fixed, now or later.
 - **RESOLVED**: Issues that have been fixed and are no longer occurring.
 - **IGNORED**: Issues that require no further investigation or action.
