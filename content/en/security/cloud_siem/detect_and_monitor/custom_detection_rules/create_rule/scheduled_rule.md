@@ -163,33 +163,11 @@ TKTK
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
-1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
-1. In the **Detect anomaly** field, specify the fields whose values you want to analyze.
-1. In the **group by** field, specify the fields you want to group by.
-    - The defined `group by` generates a signal for each `group by` value.
-    - Typically, the `group by` is an entity (like user, or IP). The `group by` is also used to join the queries together.
-    - Joining logs that span a time frame can increase the confidence or severity of the security signal. For example, to detect a successful brute force attack, both successful and unsuccessful authentication logs must be correlated for a user.
-1. In the **Learn for** dropdown menu, select the number of days for the learning period. During the learning period, the rule sets a baseline of normal field values and does not generate any signals.
-    - **Note**: If the detection rule is modified, the learning period restarts at day `0`.
-1. (Optional) If you want to create calculated fields to transform your logs during query time, click **Add** and select **Calculated fields**. 
+{{% cloud_siem/content_anomaly_query %}}
+{{% cloud_siem/add_calculated_fields %}}
     - See [Calculated Fields Expressions Language][3] for information on syntax and language constructs.
-1. (Optional) You can filter logs using references tables:
-    1. Click the **Add** button next to the query editor and select **Join with Reference Table**.
-    1. In the **Inner join with reference table** dropdown menu, select your reference table in the dropdown menu.
-    1. In the **where field** dropdown menu, select the log field to join on.
-    1. Select the **IN** or **NOT IN** operator to filter in or out matching logs.
-    1. In the **column** dropdown menu, select the Reference Table column to join on.
-    1. (Optional) Select Reference Table columns used to enrich logs.
-    1. (Optional) Filter logs by directly querying data in Reference Table columns.
-1. (Optional) To test your rules against sample logs, click **Unit Test**.
-    1. To construct a sample log, you can:  
-        1. Navigate to [Log Explorer][2].  
-        1. Enter the same detection rule query in the search bar.  
-     1. Select one of the logs.  
-     1. Click the export button at the top right side of the log side panel, and then select **Copy**.
-    1. Navigate back to the **Unit Test** modal, and then paste the log into the text box. Edit the sample as needed for your use case.
-    1. Toggle the switch for **Query is expected to match based on the example event** to fit your use case.
-    1. Click **Run Query Test**.
+{{% cloud_siem/add_reference_tables %}}
+{{% cloud_siem/unit_testing %}}
 
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
