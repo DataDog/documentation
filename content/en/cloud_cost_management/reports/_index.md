@@ -83,8 +83,6 @@ Use filters to include only the specific costs you want to allocate, such as by 
 
 ## Save and share your report
 
-## Save and share your report
-
 - **Save your report** to make it available for personal or team use.
 - **Share your report** by copying the URL or exporting it to CSV or PNG.
 - **Export report views to Dashboards** to track costs alongside other widgets.
