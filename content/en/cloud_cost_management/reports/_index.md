@@ -79,13 +79,17 @@ Use filters to include only the specific costs you want to allocate, such as by 
 - **Show usage charges only**: Choose to include all spend (fees, taxes, refunds) or focus on usage charges only.
 - **Cost type**: Choose a cost type that best matches your reporting, analysis, or financial management needs. Review the definitions for each cost type based on your provider: [AWS][7], [Azure][8], [Google Cloud][9], [Custom][10].
 
-  **Note**: The availability of these options vary depending on the provider(s) selected. 
+  **Note**: The availability of these options vary depending on the provider(s) selected.
 
 ## Save and share your report
 
-1. Click **Save** at the top right to save your report for personal or team use.
-1. Share the report by copying the URL or exporting the view to CSV or PNG.
-1. Search for saved reports as needed.
+## Save and share your report
+
+- **Save your report** to make it available for personal or team use.
+- **Share your report** by copying the URL or exporting it to CSV or PNG.
+- **Export report views to Dashboards** to track costs alongside other widgets.
+- **Schedule reports** to be automatically sent to your team. [Learn more][11].
+- **Search saved reports** to quickly find what you need.
 
 ## Further reading
 
@@ -101,3 +105,4 @@ Use filters to include only the specific costs you want to allocate, such as by 
 [8]: /cloud_cost_management/setup/azure/#cost-types
 [9]: /cloud_cost_management/setup/google_cloud/#cost-types
 [10]: /cloud_cost_management/setup/custom/#cost-metric-types
+[11]: /cloud_cost_management/reports/scheduled_reports
