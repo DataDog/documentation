@@ -646,65 +646,80 @@ menu:
       url: /opentelemetry/setup/
       parent: opentelemetry_top_level
       weight: 4
+    - name: DDOT Collector (Recommended)
+      url: /opentelemetry/setup/ddot_collector
+      identifier: otel-setup-ddot
+      parent: otel_collect
+      weight: 401
+    - name: Install the DDOT Collector
+      url: /opentelemetry/setup/ddot_collector/install/kubernetes
+      identifier: otel-setup-ddot-install
+      parent: otel-setup-ddot
+      weight: 4011
+    - name: Use Custom OTel Components
+      url: /opentelemetry/setup/ddot_collector/custom_components
+      identifier: otel-setup-ddot-custom
+      parent: otel-setup-ddot
+      weight: 4012
+    - name: Migrate to the DDOT Collector
+      url: /opentelemetry/migrate/ddot_collector
+      identifier: otel-setup-ddot-migrate
+      parent: otel-setup-ddot
+      weight: 4013
+    - name: Other Setup Options
+      url: /opentelemetry/setup/
+      identifier: otel-setup-other
+      parent: otel_collect
+      weight: 402
     - name: OpenTelemetry Collector
       url: /opentelemetry/setup/collector_exporter/
       identifier: otel-setup-collector-exporter
-      parent: otel_collect
-      weight: 401
+      parent: otel-setup-other
+      weight: 4021
     - name: Deploy
       url: /opentelemetry/setup/collector_exporter/deploy
       identifier: otel-setup-collector-exporter-deploy
       parent: otel-setup-collector-exporter
-      weight: 101
+      weight: 40211
     - name: Batch and Memory Settings
       url: opentelemetry/config/collector_batch_memory/
       identifier: otel_batch_memory
       parent: otel-setup-collector-exporter
-      weight: 102
+      weight: 40212
     - name: Hostnames and Tagging
       url: opentelemetry/config/hostname_tagging/
       identifier: otel_hostnames_tagging
       parent: otel-setup-collector-exporter
-      weight: 103
+      weight: 40213
     - name: Log Collection
       url: opentelemetry/config/log_collection/
       identifier: otel_log_collection
       parent: otel-setup-collector-exporter
-      weight: 104
+      weight: 40214
     - name: OTLP Receiver
       url: opentelemetry/config/otlp_receiver/
       identifier: otel_otlp_receiver
       parent: otel-setup-collector-exporter
-      weight: 105
-    - name: Datadog Agent
-      url: /opentelemetry/setup/agent
-      identifier: otel-setup-agent
-      parent: otel_collect
-      weight: 402
-    - name: DDOT Collector
-      url: /opentelemetry/setup/ddot_collector
-      identifier: otel-setup-ddot-collector
-      parent: otel-setup-agent
-      weight: 4021
-    - name: OTLP Ingest
+      weight: 40215
+    - name: OTLP Ingest in the Agent
       url: /opentelemetry/setup/otlp_ingest_in_the_agent
       identifier: otel-setup-otlp-ingest
-      parent: otel-setup-agent
+      parent: otel-setup-other
       weight: 4022
     - name: Agentless Deployment
       url: /opentelemetry/setup/agentless
       identifier: otel-setup-intake-endpoint
-      parent: otel_collect
-      weight: 403
+      parent: otel-setup-other
+      weight: 4023
     - name: Logs Endpoint
       url: /opentelemetry/setup/agentless/logs
       parent: otel-setup-intake-endpoint
-      weight: 301
+      weight: 40231
       identifier: otel_setup_agentless_logs
     - name: Metrics Endpoint
       url: /opentelemetry/setup/agentless/metrics
       parent: otel-setup-intake-endpoint
-      weight: 302
+      weight: 40232
       identifier: otel_setup_agentless_metrics
     - name: Semantic Mapping
       url: opentelemetry/mapping/
@@ -1809,11 +1824,16 @@ menu:
       parent: monitor_types
       identifier: monitor_types_slo
       weight: 424
+    - name: Synthetic Monitoring
+      url: monitors/types/synthetic_monitoring/
+      parent: monitor_types
+      identifier: monitor_types_syn
+      weight: 425
     - name: Watchdog
       url: monitors/types/watchdog/
       parent: monitor_types
       identifier: monitor_types_watchdog
-      weight: 425
+      weight: 426
     - name: Notifications
       url: monitors/notify/
       parent: alerting
@@ -2111,6 +2131,11 @@ menu:
       parent: internal_developer_portal
       identifier: idp_use_cases
       weight: 7
+    - name: Onboarding Guide
+      url: internal_developer_portal/onboarding_guide
+      parent: internal_developer_portal
+      identifier: idp_onboarding_guide
+      weight: 8
     - name: API Management
       url: internal_developer_portal/use_cases/api_management
       parent: idp_use_cases
@@ -3109,41 +3134,46 @@ menu:
       identifier: containers_datadog_operator_installation
       parent: containers_datadog_operator
       weight: 701
+    - name: Configuration
+      url: containers/datadog_operator/config
+      identifier: containers_datadog_operator_configuration
+      parent: containers_datadog_operator
+      weight: 702
     - name: Custom Checks
       url: containers/datadog_operator/custom_check
       identifier: containers_datadog_operator_customchecks
       parent: containers_datadog_operator
-      weight: 702
+      weight: 703
     - name: Data Collected
       url: containers/datadog_operator/data_collected
       identifier: containers_datadog_operator_datacollected
       parent: containers_datadog_operator
-      weight: 703
+      weight: 704
     - name: kubectl Plugin
       url: containers/datadog_operator/kubectl_plugin
       identifier: containers_datadog_operator_kubectlplugin
       parent: containers_datadog_operator
-      weight: 704
+      weight: 705
     - name: Secret Management
       url: containers/datadog_operator/secret_management
       identifier: containers_datadog_operator_secretmanagement
       parent: containers_datadog_operator
-      weight: 705
+      weight: 706
     - name: DatadogDashboard CRD
       url: containers/datadog_operator/crd_dashboard
       identifier: containers_datadog_operator_crd_dashboard
       parent: containers_datadog_operator
-      weight: 708
+      weight: 707
     - name: DatadogMonitor CRD
       url: containers/datadog_operator/crd_monitor
       identifier: containers_datadog_operator_crd_monitor
       parent: containers_datadog_operator
-      weight: 709
+      weight: 708
     - name: DatadogSLO CRD
       url: containers/datadog_operator/crd_slo
       identifier: containers_datadog_operator_crd_slo
       parent: containers_datadog_operator
-      weight: 710
+      weight: 709
     - name: Datadog CSI Driver
       url: containers/csi_driver
       parent: containers
@@ -3462,6 +3492,11 @@ menu:
       parent: ndm_setup
       identifier: ndm_sd-wan
       weight: 30005
+    - name: VPN Monitoring
+      url: network_monitoring/devices/vpn_monitoring
+      parent: ndm_setup
+      identifier: ndm_vpn_monitoring
+      weight: 30006
     - name: Profiles
       url: network_monitoring/devices/profiles
       parent: ndm
@@ -6943,16 +6978,41 @@ menu:
       parent: synthetics
       identifier: synthetics_guides
       weight: 8
+    - name: Notifications
+      url: synthetics/notifications/
+      parent: synthetics
+      identifier: synthetics_notifications
+      weight: 9
+    - name: Template Variables
+      url: synthetics/notifications/template_variables
+      parent: synthetics_notifications
+      identifier: synthetics_notifications_template_variables
+      weight: 901
+    - name: Conditional Alerting
+      url: synthetics/notifications/conditional_alerting
+      parent: synthetics_notifications
+      identifier: synthetics_notifications_conditional_alerting
+      weight: 902
+    - name: Advanced Notifications
+      url: synthetics/notifications/advanced_notifications
+      parent: synthetics_notifications
+      identifier: synthetics_notifications_advanced_notifications
+      weight: 903
+    - name: Integrate with Statuspage
+      url: synthetics/notifications/statuspage
+      parent: synthetics_notifications
+      identifier: synthetics_notifications_statuspage
+      weight: 904
     - name: Troubleshooting
       url: synthetics/troubleshooting/
       parent: synthetics
       identifier: synthetics_troubleshooting
-      weight: 9
+      weight: 10
     - name: Data Security
       identifier: data_security_synthetics
       url: data_security/synthetics/
       parent: synthetics
-      weight: 10
+      weight: 11
     - name: Continuous Testing
       url: continuous_testing/
       pre: continuous-testing
