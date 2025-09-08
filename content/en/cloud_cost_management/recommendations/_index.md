@@ -57,6 +57,12 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
+      resource_type: Cloudtrail Trail
+      recommendation_type: Delete unnecessary Cloudtrail Trails
+      recommendation_description: More than the necessary number of Cloudtrails Trails are active on an account
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: AWS
       resource_type: DynamoDB
       recommendation_type: Delete DynamoDB Global Secondary Index
       recommendation_description: A DynamoDB table's Global Secondary Index (GSI) has 0 consumed reads.
