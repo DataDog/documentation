@@ -21,7 +21,7 @@ The Datadog Agent helps you securely manage your secrets by integrating with the
 - File JSON
 - File YAML
 
-Instead of hardcoding sensitive values like API keys or passwords in plaintext within configuration files, the Agent can retrieve them dynamically at runtime. The secret is fetched and loaded in memory but is never written to disk or sent to the Datadog backend.
+Instead of hardcoding sensitive values like API keys or passwords in plaintext within configuration files, the Agent can retrieve them dynamically at runtime. To reference a secret in your configuration, use the `ENC[<secret_id>]` notation.  The secret is fetched and loaded in memory but is never written to disk or sent to the Datadog backend.
 
 **Note**: You cannot use the `ENC[]` syntax in `secret_*` settings like `secret_backend_command`.
 
@@ -144,9 +144,9 @@ secret_backend_config:
   aws_session:
     aws_region: us-east-1
 
+api_key: "ENC[/path/to/your/api/key]"
 property1: "ENC[/DatadogAgent/Production/ParameterKey1]"
 property2: "ENC[/DatadogAgent/Production/ParameterKey2]"
-property3: "ENC[/DatadogAgent/Production/ParameterKey3]"
 ```
 
 [200]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
@@ -171,7 +171,7 @@ The following Azure services are supported:
 
 | "secret_backend_type" value                            | Azure Service          |
 | ----------------------------------------|------------------------|
-| [azure.keyvault](#azure-authentication) | [Azure Keyvault][2000] |
+| `azure.keyvault` | [Azure Keyvault][2000] |
 
 ##### Azure authentication
 
@@ -212,8 +212,7 @@ The following HashiCorp services are supported:
 
 | "secret_backend_type" value                               | HashiCorp Service                                  |
 | ------------------------------------------ | -------------------------------------------------- |
-| [hashicorp.vault](#hashicorp-auth-session) | [HashiCorp Vault (Secrets Engine Version 1)][3000] |
-| [hashicorp.vault](#hashicorp-auth-session) | [HashiCorp Vault (Secrets Engine Version 2)][3000] |
+| `hashicorp.vault` | [HashiCorp Vault (Secrets Engine Version 1 and 2)][3000] |
 
 #### General instructions to set up HashiCorp Vault
 1. Run your HashiCorp Vault. For more information, see the [official HashiCorp Vault documentation][3001]. 
@@ -251,7 +250,7 @@ In the following example, assume the HashiCorp Vault secret path prefix is `/Dat
 /DatadogAgent/Production/apikey: (SecureString) "<your api key>"
 ```
 
-Each of the following examples access the secret from the Datadog Agent configuration YAML file(s) as such:
+The following example fetches the API key value from HashiCorp Vault leveraging AWS for authentication.
 
 ```yaml
 # datadog.yaml
@@ -277,8 +276,8 @@ secret_backend_config:
 
 | "secret_backend_type" value                                 | File Service                             |
 |---------------------------------------------|-----------------------------------------|
-|[file.json](#json-backend-settings)          |[JSON][4001]                             |
-|[file.yaml](#yaml-backend-settings)          |[YAML][4002]                             |
+|`file.json`           |[JSON][4001]                             |
+|`file.yaml`          |[YAML][4002]                        |                            |
 
 ##### File permissions
 The file backend only requires read permissions for the configured JSON or YAML files. These permissions must be granted to the local Datadog Agent user (`dd-agent` on Linux, `ddagentuser` on Windows).
@@ -305,7 +304,7 @@ You can use the following configuration to pull secrets from it:
 
 ```yaml
 # datadog.yaml
-api_key: "ENC[{datadog_api_key}]"
+api_key: "ENC[datadog_api_key]"
 
 secret_backend_type: file.json
 secret_backend_config:
@@ -316,7 +315,7 @@ secret_backend_config:
 
 {{% tab "YAML File Backend" %}}
 
-**Note**: Only one level of YAML depth is supported (for example, `key: value`)
+**Note**: Only one level of YAML depth is supported (for example, `{key: value}`)
 
 ##### Datadog.yaml Configuration
 
@@ -332,7 +331,7 @@ You can use the following configuration to pull secrets from it:
 
 ```yaml
 # datadog.yaml
-api_key: "ENC[{datadog_api_key}]"
+api_key: "ENC[datadog_api_key]"
 secret_backend_type: file.yaml
 secret_backend_config:
   file_path: /path/to/secret.yaml
