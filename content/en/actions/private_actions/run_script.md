@@ -44,26 +44,35 @@ Navigate to the Action Catalog and select [**Run Predefined Script**][10]. This 
 
 ## Configuration
 
-Configure script actions through your runner's `config.yaml` file. If you create a new runner and select the script bundle, you get a default configuration.
-
-### Basic configuration
+Configure script actions through your runner's `config.yaml` file and the script connection (`credentials/script.yaml` by default). If you create a new runner and select the script bundle, you get a default configuration.
 
 ```yaml
-# Add the script action to the allowlist
+# Add the script action to the allowlist (`config.yaml`)
 actionsAllowlist:
   - com.datadoghq.script.runPredefinedScript
+```
 
-# Configure different scripts
-bundles:
-  "com.datadoghq.script":
-    runPredefinedScript:
-      echo:
-        command: ["echo", "Hello world"]
-      # Use workflow-like syntax to retrieve values from parameters
-      echo-parametrized:
-        command: ["echo", "{{ parameters.echoValue }}"]
-      echo-nested-parametrized:
-        command: ["echo", "{{ parameters.nested.echoValue }}"]
+```yaml
+# Configure your script connection (`credentials/script.yaml`)
+schemaId: script-credentials-v1
+runPredefinedScript:
+  # use "echo" as the "Script name" in the action configuration
+  echo:
+    # use an array to specify the command
+    command: ["echo", "Hello world"]
+
+  # another script
+  echo-parametrized:
+    # you can use workflow syntax (https://docs.datadoghq.com/actions/workflows/variables/) to retrieve values from the parameters object
+    command: [ "echo", "{{ parameters.echoValue }}" ]
+    # you can use JSON schema (https://json-schema.org/) to validate the parameters
+    parameterSchema:
+      properties:
+        echoValue:
+          type: string
+          const: "world"
+      required:
+        - echoValue
 ```
 
 ### Using the configured scripts
