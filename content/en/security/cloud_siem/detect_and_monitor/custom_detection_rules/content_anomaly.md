@@ -6,6 +6,7 @@ disable_toc: false
 ## Overview
 
 Content anomaly detection analyzes incoming logs to identify and alert on anomalous log content. It examines user-specified fields and triggers signals when new logs contain values that significantly deviate from historical patterns within a group. A significant deviation is when the similarity between incoming and historical values is low or there is no similarity at all.
+
 See [Create Rule][1] for detailed instructions on how to configure a content anomaly rule.
 
 ## How the content anomaly detection works
@@ -46,9 +47,9 @@ In the rule editor:
 ### Anomaly detection parameters
 
 - `similarityPercentageThreshold`
+  - Definition: Minimum similarity required to consider a log as normal.
   - Default: 70%
   - Limits: 35-100%
-  - Definition: Minimum similarity required to consider a log as normal.
 
 - `nbSimilarItemsThreshold`
   - Definition: Number of historical logs required for an incoming value to be considered normal.
