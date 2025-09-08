@@ -23,6 +23,7 @@ The MITRE ATT&CK Framework is a knowledge base used to develop specific threat m
 To view detection rules against the MITRE ATT&CK Framework:
 1. Navigate to the [Detection Rules][1] page.
 1. Click the **MITRE ATT&CK Map** button located next to **Rules List**.
+1. Toggle the resize button on the bottom left side of the page to switch between an expanded view and a condensed view.
 
 The default view of the map shows all Datadog out-of-the-box and custom rules for active sources, broken down into different attack techniques. Active sources are the sources of logs found and analyzed in the Cloud SIEM index.
 
