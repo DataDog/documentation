@@ -32,7 +32,6 @@ To use the script action, you need:
 
 - **Custom tools**: For CLI tools not included in the base image, you need to create a custom Docker image.
 - **PAR Version**: 1.7.0 or later. See [set up a private action runner][2] to get started.
-- anything else? 🤨
 
 ## Set up a PAR script
 
