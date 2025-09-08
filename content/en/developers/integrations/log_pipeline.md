@@ -173,4 +173,4 @@ The final step is to export the pipeline and upload the files to the Developer P
 [17]: /logs/log_configuration/processors/?tab=ui#arithmetic-processor
 [18]: /logs/log_configuration/processors/?tab=ui#string-builder-processor
 [19]: https://app.datadoghq.com/logs
-[20]: https://docs.datadoghq.com/logs/log_configuration/pipeline_scanner/
+[20]: /logs/log_configuration/pipeline_scanner/
