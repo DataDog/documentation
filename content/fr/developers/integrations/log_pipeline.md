@@ -28,7 +28,7 @@ Ce guide accompagne les partenaires technologiques dans la création d'un pipeli
    - Vous pouvez aussi utiliser le [endpoint HTTP de collecte de logs][1] pour envoyer des logs à Datadog.
 2. Assurez la compatibilité avec tous les sites Datadog.
    - Veillez à permettre aux utilisateurs de choisir le site Datadog approprié lorsque nécessaire.
-   - Consultez la section [PDébuter avec les sites Datadog][2] pour connaître des détails spécifiques à chaque site.
+   - Consultez la section [Débuter avec les sites Datadog][2] pour connaître des détails spécifiques à chaque site.
    - Le endpoint de site Datadog pour la collecte de logs est : `http-intake.logs.{{< region-param key="dd_site" code="true" >}}`
 3. Permettez aux utilisateurs d'ajouter des tags personnalisés.
    - Les tags doivent être définis comme des attributs clé-valeur dans le corps JSON de la charge utile du log. 
