@@ -31,33 +31,17 @@ The following table outlines supported and unsupported use cases for the script 
 To use the script action, you need:
 
 - **Custom tools**: For CLI tools not included in the base image, you need to create a custom Docker image.
-- **PAR Version**: 1.7.0 or later. See [set up a private action runner][2] to get started.
+- **PAR Version**: 1.7.0 or later. To update your PAR version, see [Update the Private Action Runner][11].
 
 ## Set up a PAR script
 
-### 1. Update your runner image
-
-Replace the standard PAR image with the development image that supports script actions. The development images are published on [Docker Hub][2].
-
-**Standard image:**
-```
-gcr.io/datadoghq/private-action-runner:v1.3.0
-```
-
-**Script-enabled image:**
-```
-datadog/private-action-runner-dev:latest@sha256:4e990e496b79d02514c19a633042d27be1ba8e7a4b9018efd0e942ed1a070ad8
-```
-
-You can either reuse an existing runner's identity by changing the image, or create a brand new runner.
-
-### 2. Create a script connection
+### Create a script connection
 
 1. Navigate to the **Private Action Runner** page in [Workflow Automation][4] or [App Builder][5].
 1. Create a new script connection and associate it with your private action runner.
 1. Select this connection when using the script action in your workflows or apps.
 
-### 3. Configure the action catalog
+### Configure the action catalog
 
 Navigate to the Action Catalog and select [**Run Predefined Script**][10]. This action is available for use in both workflows and apps.
 
@@ -133,3 +117,4 @@ runPredefinedScript:
 [8]: https://github.com/DataDog/helm-charts/blob/main/charts/private-action-runner/CHANGELOG.md
 [9]: https://github.com/DataDog/helm-charts/blob/main/charts/private-action-runner/values.yaml
 [10]: https://app.datadoghq.com/actions/action-catalog#/com.datadoghq.script.runPredefinedScript
+[11]: /actions/private_actions/update_PAR/
