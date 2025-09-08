@@ -17,15 +17,25 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/openai-datadog-ai-devops-agent/"
   tag: "Blog"
   text: "Datadog + OpenAI: Codex CLI integration for AI‑assisted DevOps"
+- link: "https://youtu.be/yEG_X0NcEWY"
+  tag: "Video"
+  text: "Demo: Use Datadog MCP Server with Cursor and Claude Code"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/datadog-mcp-server/" >}}
-The Datadog MCP Server is in Preview. If you're interested in this feature and need access, complete this form. Read more about the MCP Server on the <a href="https://www.datadoghq.com/blog/datadog-remote-mcp-server/">Datadog blog</a>.
+The Datadog MCP Server is in Preview. There is no charge for using the Datadog MCP Server during the Preview. If you're interested in this feature and need access, complete this form. Learn more about the MCP Server in the <a href="https://www.datadoghq.com/blog/datadog-remote-mcp-server/">Datadog blog</a> and this <a href="https://youtu.be/yEG_X0NcEWY">demo video</a>.
 {{< /callout >}}
+
+<div class="alert alert-warning">
+<strong>Disclaimers</strong>
+<li>The Datadog MCP Server is not supported for production use or to the general public during the Preview.
+<li>Only Datadog organizations that have been specifically allowlisted can use the Datadog MCP Server.
+<li>The Datadog MCP Server is not available for organizations that require HIPAA compliance.
+</div>
 
 ## Overview
 
-The Datadog MCP Server acts as a bridge between your observability data in Datadog and AI agents that support the [Model Context Protocol (MCP)][1]. Providing structured access to relevant Datadog contexts, features, and tools, the MCP Server lets you query and retrieve observability insights directly from AI-powered clients such as Cursor, OpenAI Codex, Claude Code, or your own AI agent.
+Datadog's managed MCP Server acts as a bridge between your observability data in Datadog and AI agents that support the [Model Context Protocol (MCP)][1]. Providing structured access to relevant Datadog contexts, features, and tools, the MCP Server lets you query and retrieve observability insights directly from AI-powered clients such as Cursor, OpenAI Codex, Claude Code, or your own AI agent.
 
 This page provides instructions for connecting your AI agent to the Datadog MCP Server, lists the available tools, and includes example prompts.
 
@@ -37,16 +47,21 @@ The following AI clients are compatible with the Datadog MCP Server.
 
 | Client | Developer | Notes |
 |--------|------|------|
-| [Cursor][8] | Anysphere | Datadog [Cursor & VS Code extension](#connect-in-vs-code-or-cursor) recommended. |
-| [Claude Code][5]<br/>[Claude&nbsp;Desktop][6] | Anthropic | |
+| [Cursor][8] | Anysphere | Datadog [Cursor & VS Code extension](#connect-in-cursor-and-vs-code) recommended. |
+| [Claude Code][5]<br/>[Claude&nbsp;Desktop][6] | Anthropic | Claude Desktop: Limited support for remote authentication. Use [local binary authentication](#connect-to-the-datadog-mcp-server) as needed. |
 | [Codex CLI][7] | OpenAI | |
-| [VS Code][11] | Microsoft | Datadog [Cursor & VS Code extension](#connect-in-vs-code-or-cursor) recommended. |
+| [VS Code][11] | Microsoft | Datadog [Cursor & VS Code extension](#connect-in-cursor-and-vs-code) recommended. |
 | [Goose][9] | Block | |
-| [Q CLI][10] | Amazon | Does not support HTTP transport for remote authentication. Use [local binary authentication](#connect-to-the-datadog-mcp-server) instead. |
+| [Q CLI][10] | Amazon | Limited support for remote authentication. Use [local binary authentication](#connect-to-the-datadog-mcp-server) as needed. |
+| [Cline][18] | Cline Bot | Limited support for remote authentication. Use [local binary authentication](#connect-to-the-datadog-mcp-server) as needed. |
+
+## Requirements
+
+Datadog users must have the `Incidents Read` [permission][19] to use the MCP Server.
 
 ## Connect in Cursor and VS Code
 
-Datadog's [Cursor and VS Code extension][12] includes built-in access to the Datadog MCP Server. Benefits include:
+Datadog's [Cursor and VS Code extension][12] includes built-in access to the managed Datadog MCP Server. Benefits include:
 
 * No additional MCP Server setup after you install the extension and connect to Datadog.
 * One-click transitions between multiple Datadog organizations.
@@ -68,13 +83,15 @@ To install the extension:
 
 ## Connect in supported AI clients
 
-The following instructions are for all [MCP-compatible clients](#client-compatibility). For VS Code or Cursor, use the [Datadog extension](#connect-in-vs-code-or-cursor) for built-in access to the Datadog MCP Server.
+The following instructions are for all [MCP-compatible clients](#client-compatibility). For VS Code or Cursor, use the [Datadog extension](#connect-in-cursor-and-vs-code) for built-in access to the Datadog MCP Server.
 
 {{< tabs >}}
 {{% tab "Remote authentication" %}}
 This method uses the MCP specification's [Streamable HTTP][1] transport mechanism to connect to the MCP Server.
 
 Point your AI agent to the MCP Server endpoint for your regional [Datadog site][2]. For example, if you're using `app.datadoghq.com` to access Datadog, use the endpoint for the US1 site.
+
+If your organization uses a [custom sub-domain][3], use the endpoint that corresponds to your regional Datadog site. For example, if your custom sub-domain is `myorg.datadoghq.com`, use the US1 endpoint.
 
 | Datadog Site | MCP Server Endpoint | 
 |--------|------|
@@ -111,6 +128,7 @@ These examples are for the US1 site:
 
 [1]: https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#streamable-http
 [2]: /getting_started/site/
+[3]: /account_management/multi_organization/#custom-sub-domains
 {{% /tab %}}
 
 {{% tab "Local binary authentication" %}}
@@ -237,11 +255,11 @@ Retrieves information about Datadog monitors, including their statuses, threshol
 - Find monitors tagged with `team:infrastructure`.
 
 ### `get_synthetics_tests`
-Searches Datadog synthetic tests.
+Searches Datadog Synthetic tests.
 
-- Help me understand why the synthetic test on endpoint `/v1/my/tested/endpoint` is failing.
-- There is an outage; find all the failing synthetic tests on the domain `api.mycompany.com`.
-- Are synthetic tests on my website `api.mycompany.com` still working in the past hour?
+- Help me understand why the Synthetic test on endpoint `/v1/my/tested/endpoint` is failing.
+- There is an outage; find all the failing Synthetic tests on the domain `api.mycompany.com`.
+- Are Synthetic tests on my website `api.mycompany.com` still working in the past hour?
 
 ### `get_datadog_trace`
 Fetches a complete trace from Datadog APM using a trace ID.
@@ -310,9 +328,33 @@ Search Datadog RUM events using advanced query syntax.
 - Find pages that are loading slowly (more than 3 seconds).
 - Show recent user interactions on product detail pages.
 
+## Toolsets
+
+The Datadog MCP Server supports _toolsets_, which allow you to use only the tools you need, saving valuable context window space. These toolsets are available:
+
+- `core`: The default toolset
+- `synthetics`: Tools for interacting with Datadog [Synthetic tests][21]
+
+To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](?tab=remote-authentication#connect-in-supported-ai-clients) only). For example:
+
+- `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp` retrieves only the core tools (this is the default if `toolsets` is not specified).
+- `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=synthetics` retrieves only Synthetic Testing-related tools.
+- `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=core,synthetics` retrieves both core and Synthetic Testing tools.
+
+## Context efficiency
+
+The Datadog MCP Server is optimized to provide responses in a way that AI agents get relevant context without being overloaded with unnecessary information. For example:
+
+- Responses are truncated based on the estimated length of responses each tool provides. The tools respond to AI agents with instructions on how to request more information if the response was truncated.
+- Most tools have a `max_tokens` parameter that enables AI agents to request less or more information.
+
 ## Track tool calls in Audit Trail
 
 You can view information about calls made by MCP Server tools in Datadog's [Audit Trail][17]. Search or filter by the event name `MCP Server`.
+
+## Feedback
+
+The Datadog MCP Server is under significant development. During the Preview, use [this feedback form][20] to share any feedback, use cases, or issues encountered with your prompts and queries.
 
 ## Further reading
 
@@ -335,3 +377,7 @@ You can view information about calls made by MCP Server tools in Datadog's [Audi
 [15]: /
 [16]: /api/latest/events/
 [17]: /account_management/audit_trail/
+[18]: https://cline.bot/
+[19]: /account_management/rbac/permissions/#case-and-incident-management
+[20]: https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform
+[21]: /synthetics/
