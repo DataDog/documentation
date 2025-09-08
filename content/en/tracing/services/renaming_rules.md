@@ -29,10 +29,15 @@ Renaming is useful when:
    1. You can select one or more entities, but all must be of the same type (service, datastore, or queue).
    1. As you select entities, a span query is built in the background. To edit the query, select the code icon to the right of the search bar.
 
+{{< img src="tracing/services/renaming_rules/create-service-rename-rule-search.png" alt="Step 1 in the Create Service Rename Rule UI, prompting the user to filter and select the entities to rename" style="width:100%;" >}}
+
 ### Step 2: Choose a rename method
 
 1. In the text box, enter a unique name for the selected entity (or entities). Alternatively, use tag values with the `{{tagName}}` syntax to rename based on an entity's tags.
 1. If tag values follow a pattern, apply a regular expression to extract only the portion you want in the name.  
+
+{{< img src="tracing/services/renaming_rules/create-service-rename-rule-tags.png" alt="Step 2 in the Create Service Rename Rule UI, prompting the user to choose how to rename the selected entities" style="width:100%;" >}}
+
 
 ### Step 3: Name your rule and review
 
@@ -40,6 +45,8 @@ Renaming is useful when:
 1. Review and save your renaming rule.
 
 **Note:** Rules are processed at intake and applied to data as it comes in. Therefore, they are irreversible and should be created with caution. 
+
+{{< img src="tracing/services/renaming_rules/create-service-rename-rule-reviewandsave.png" alt="The final step of the Create Service Rename Rule UI, prompting the user to review and save their renaming rule" style="width:100%;" >}}
 
 ## Further reading
 
