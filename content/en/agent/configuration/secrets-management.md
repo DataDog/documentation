@@ -21,7 +21,7 @@ The Datadog Agent helps you securely manage your secrets by integrating with the
 - File JSON
 - File YAML
 
-Instead of hardcoding sensitive values like API keys or passwords in plaintext within configuration files, the Agent can retrieve them dynamically at runtime. To reference a secret in your configuration, use the `ENC[<secret_id>]` notation.  The secret is fetched and loaded in memory but is never written to disk or sent to the Datadog backend.
+Instead of hardcoding sensitive values like API keys or passwords in plaintext within configuration files, the Agent can retrieve them dynamically at runtime. To reference a secret in your configuration, use the `ENC[<secret_id>]` notation. The secret is fetched and loaded in memory but is never written to disk or sent to the Datadog backend.
 
 **Note**: You cannot use the `ENC[]` syntax in `secret_*` settings like `secret_backend_command`.
 
