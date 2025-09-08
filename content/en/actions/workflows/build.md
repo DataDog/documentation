@@ -104,6 +104,20 @@ Scheduled and triggered workflows don't trigger automatically until you've publi
 
 Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
+### Updating a published workflow
+
+You can update published workflows without affecting the live version until you are ready.
+
+Editing a published workflow creates a draft. All changes made to the draft do not alter the published workflow. Each workflow can have one active draft, which all editors can modify. When ready, click on **Publish Changes** to replace the published version.
+
+Drafts execute all configured steps like any normal workflow. You can only run drafts from the workflow editor. 
+
+To discard the draft, click the **cog icon** in the top-right corner of the editor and select **Discard draft**.
+
+**Notes**:
+- Running a draft for published workflows do not accrue costs.
+- Any update to the workflow properties (name, tags, or notifications) bypass the drafting flow and are applied immediately to the published version.
+
 ## Variables and parameters
 
 For information on using variables and parameters in your workflows, see [Variables and parameters][12].

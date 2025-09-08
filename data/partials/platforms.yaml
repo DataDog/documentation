@@ -14,7 +14,7 @@ platforms:
   - name: sccm
     link: "agent/basic_agent_usage/sccm/"
     image: "platform_sccm.png"
-    category: "Host-based"
+    category: "configuration_management"
   - name: osx
     link: "agent/basic_agent_usage/osx/"
     image: "platform_macos.png"
