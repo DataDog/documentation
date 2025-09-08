@@ -47,7 +47,7 @@ To add a for loop to your workflow:
 1. Click the loop step and enter an **Input list** for the step to iterate over. You can enter a custom list or use a workflow variable.
 1. Inside the loop frame, click the (**+**) icon to add a step to the loop.
 1. Configure the looped action. To access the current value in the input list, use the `{{Current.Value}}` variable. To access the index of the current value, use `{{Current.Index}}`.
-1. Add and configure any additional steps you need to loop. You can use an if statement and break action to exit your loop early.
+1. Add and configure any additional steps you need to loop. You can use an `if statement` and `break action` to exit your loop early.
 1. **Save** and **Publish** the workflow.
 
 When a run completes, the workflow enters **Debug** mode. Select a step within the loop to see a list of **All**, **Failed**, or **Successful** iterations for that step. Select an iteration to see the output or the error message.
