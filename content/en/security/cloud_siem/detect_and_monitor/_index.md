@@ -18,11 +18,11 @@ further_reading:
 
 ## Overview
 
-You can use out-of-the-box detection rules or create your own custom rules to detect threats in your logs, Audit Trail events, and events from Event Management. A security signal is generated when a threat is detected. However, you can add suppressions to a rule so that a signal is not generated under specific conditions, which can improve the accuracy and relevance of security signals generated.
+Monitor your Datadog telemetry and use out-of-the-box detection rules or create custom rules to detect threats. When a threat is detected, a security signal is generated. Additionally, you can add suppressions to refine detection rules so that a signal is not generated under specific conditions. This can improve the accuracy and relevance of security signals generated.
 
 ## Out-of-the-box detection rules
 
-Cloud SIEM provides you with an extensive list of [OOTB detection rules][1]. After you enabled and configured Cloud SIEM to ingest logs and events, OOTB detection rules automatically begin analyzing your logs, Audit Trail events, and events from Event Management.
+Cloud SIEM provides you with an extensive list of [OOTB detection rules][1]. After you have enabled and configured Cloud SIEM content packs, OOTB detection rules automatically begin analyzing your logs, Audit Trail events, and events from Event Management.
 
 You can [edit OOTB detection rules][2] and do the following:
 
@@ -35,7 +35,7 @@ You can [edit OOTB detection rules][2] and do the following:
 
 OOTB detection rules cover the majority of threat scenarios, but you can also create custom detection rules for your specific use cases. For custom detection rules, use the log search syntax to build and join log queries so you can target individual services, accounts, or events that you want to monitor. You can also enhance those queries with information such as the geolocation of an IP address or the status code of an HTTP request.
 
-For logs that match the query, you can set conditions to determine whether it's a threat and if a security signal should be generated, and indicate the severity of the threat. Security signals provide details about the threat and include a customizable playbook, which provides information such as security policies and remediation steps.
+For logs that match the query, you can set conditions to determine whether it's a threat and if a security signal should be generated, as well as indicate the severity of the threat. Security signals provide details about the threat and include a customizable playbook, which provides information such as security policies and remediation steps.
 
 See [Custom Detection Rules][3] for more information.
 
