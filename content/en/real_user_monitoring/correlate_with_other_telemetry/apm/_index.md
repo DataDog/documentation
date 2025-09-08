@@ -135,7 +135,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 **Note**: `traceSampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
-4. _(Optional)_ If you set a `traceSampleRate`, to ensure backend services' sampling decisions are still applied, configure the `traceContextInjection` initialization parameter to `sampled` (`sampled` by default).
+4. _(Optional)_ If you set a `traceSampleRate`, to ensure backend services' sampling decisions are still applied, configure the `traceContextInjection` initialization parameter to `sampled` (set to `sampled` by default).
 
     For example, if you set the `traceSampleRate` to 20% in the Browser SDK:
     - When `traceContextInjection` is set to `all`, **20%** of backend traces are kept and **80%** of backend traces are dropped.
