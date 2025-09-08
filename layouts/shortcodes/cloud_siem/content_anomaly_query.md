@@ -1,4 +1,3 @@
-1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Detect anomaly** field, specify the fields whose values you want to analyze.
 1. In the **group by** field, specify the fields you want to group by.
     - The defined `group by` generates a signal for each `group by` value.

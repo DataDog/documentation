@@ -1,4 +1,3 @@
-1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. (Optional) In the **Count** dropdown menu, select attributes whose unique values are counted over the specified time frame.
 1. (Optional) In the **group by** dropdown menu, select attributes you want to group by.
     - The defined `group by` generates a signal for each `group by` value.
