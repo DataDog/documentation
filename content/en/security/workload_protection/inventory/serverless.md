@@ -19,7 +19,7 @@ Here are some examples of how **Serverless** helps secure serverless environment
 
 - **Validate protection enforcement in CI/CD:** 
   - Use **Serverless** to confirm that workloads launched using infrastructure-as-code (IaC) templates or automated pipelines have the correct security coverage. 
-  - Filter for **Not Configured** or **Agent Version** to pinpoint deployments where instrumentation failed or was skipped. This enables feedback into IaC modules or base container images.
+  - Filter for **Not Configured** or **Agent Version** to pinpoint deployments where instrumentation wasn't set up. This enables feedback into IaC modules or base container images.
 - **Detect drift across clusters:** 
   - Filter tasks using **Cluster Name** to detect when only some tasks in a cluster are instrumented with Workload Protection. This is a common sign of inconsistent task definitions or container image drift. Comparing coverage across clusters helps prevent partial rollout of security controls.
 - **Enforce Agent version consistency:** 
