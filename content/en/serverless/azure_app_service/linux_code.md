@@ -148,16 +148,15 @@ variable "datadog_api_key" {
   type        = string
   sensitive   = true
 }
-variable "resource_group" { type = string }
 
 provider "azurerm" {
   features {}
-  subscription_id = "<YOUR SUBSCRIPTION ID>"
+  subscription_id = "00000000-0000-0000-0000-000000000000" // Replace with your subscription ID
 }
 
 resource "azurerm_service_plan" "my_asp" {
-  name                = "my-app-service-plan"
-  resource_group_name = var.resource_group
+  name                = "my-app-service-plan" // Replace with your app service plan name
+  resource_group_name = "my-resource-group"   // Replace with your resource group name
   os_type             = "Linux"
   location            = "eastus"
   sku_name            = "P1v2"
@@ -167,10 +166,10 @@ module "my_web_app" {
   source  = "DataDog/web-app-datadog/azurerm//modules/linux"
   version = "1.0.0"
 
-  name                = "my-web-app"
-  location            = "eastus"
-  resource_group_name = var.resource_group
+  name                = "my-web-app"        // Replace with your web app name
+  resource_group_name = "my-resource-group" // Replace with your resource group name
   service_plan_id     = azurerm_service_plan.my_asp.id
+  location            = "eastus"
 
   datadog_api_key = var.datadog_api_key
   datadog_service = "my-service" // Replace with your service name
@@ -183,7 +182,7 @@ module "my_web_app" {
     }
   }
   app_settings = {
-    DD_TRACE_ENABLED = "true"
+    DD_TRACE_ENABLED = "true" // Example setting
   }
 }
 ```
