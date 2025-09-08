@@ -325,6 +325,41 @@ Displays property and value pairs in JSON format.
 {{% /collapse-content %}}
 
 
+{{% collapse-content title="Integration logo" level="h3" %}}
+Integration logo components have the following properties.
+
+### General
+
+Integration Id
+: Specifies which integration logo icon to display.<br>
+**Value**: string or expression<br>
+**Examples**: "datadog", "amazon-s3", "postgres", "okta"
+
+### Appearance
+
+Horizontal Alignment
+: Controls the horizontal positioning of the logo within the component.<br>
+**Provided values**: align left, align center, align right
+
+Vertical Alignment
+: Controls the vertical positioning of the logo within the component.<br>
+**Provided values**: align top, align center, align bottom
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+Is Loading
+: Shows a loading indicator.<br>
+**Provided values**: on, off
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
+
+{{% /collapse-content %}}
+
+
 {{% collapse-content title="Form" level="h3" %}}
 Form components have the following properties.
 
