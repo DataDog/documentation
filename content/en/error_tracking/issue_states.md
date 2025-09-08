@@ -51,7 +51,7 @@ The issue status appears anywhere the issue can be viewed, such as in the issues
 
 The `EXCLUDED` status, allows you to prevent specific errors from being tracked, ensuring they are not collected or counted toward billing. This helps you remove non-actionable errors or expected failures issues without needing complex exclusion rules.
 
-To manually exclude an issue, click the issue status and choose **EXCLUDED** in the dropdown menu. Excluded issues remain accessible in the **IGNORED** tab, and you can review their history at any time.
+To exclude an issue, click its status and choose **EXCLUDED** in the dropdown menu. Excluded issues are still accessible in the **IGNORED** tab. You can review their history at any time.
 
 {{< img src="error_tracking/issue-states-excluded.png" alt="Excluded in issue status dropdown" style="width:100%;" >}}
 
