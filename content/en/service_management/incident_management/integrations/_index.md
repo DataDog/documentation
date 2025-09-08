@@ -9,17 +9,17 @@ further_reading:
 
 ## Overview
 
-Datadog Incident Management enables collaboration and response by integrating with a variety of third-party tools and platforms. Integrations allow you to connect your incident workflows with popular ticketing systems, communication channels, or status pages to ensure that your teams can coordinate, escalate, and resolve incidents, all within the context of your existing tools.
+Datadog Incident Management integrates with third-party platforms to support collaboration and response. Integrations connect your incident workflows with ticketing systems, communication channels, and status pages so your teams can coordinate, escalate, and resolve incidents in their existing tools.
 
-**How integrations work in Incident Management**
+Use integrations in Datadog Incident Management to:**
 
-- **Automated Workflows:** Trigger actions in external systems (such as creating Jira tickets or updating Statuspage) directly from Datadog incidents.
-- **Centralized Communication:** Sync incident updates and notifications with chat tools, ticketing platforms, and on-call systems to keep stakeholders informed.
-- **Customizable Responses:** Tailor integration settings to match your organization's incident response processes, ensuring the right people and systems are engaged at the right time.
+- **Automate workflows:** Trigger actions in external systems (such as creating Jira tickets or updating Statuspage) directly from Datadog incidents.
+- **Centralize communication:** Sync incident updates and notifications with chat tools, ticketing platforms, and on-call systems to keep stakeholders informed.
+- **Customize responses:** Tailor integration settings to match your organization's incident response processes, ensuring the right people and systems are engaged at the right time.
 
 ## Integration settings
 
-You can configure and manage all incident-related integrations in the **Incident Settings** page. This includes connecting tools like Slack and Microsoft Teams to automate notifications, ticket creation, and collaboration during incidents. For more information, see [Incident Settings: Integrations][1].
+Configure and manage incident-related integrations from the **Incident Settings** page. Connect tools such as Slack or Microsoft Teams to automate notifications, ticket creation, and collaboration during incidents. For more information, see [Incident Settings: Integrations][1].
 
 ## Setup
 
