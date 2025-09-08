@@ -3,7 +3,6 @@ import re
 import os
 import json
 import requests
-import sys
 
 def get_data(url):
     response = requests.get(url)
@@ -29,7 +28,6 @@ def get_synthetics_worker_version(data):
     return version    
 
 def get_private_action_runner_version(data):
-    '''{"data":{"id":"gcr.io/datadoghq/private-action-runner:v1.7.0","type":"latestImageResponse"}}'''
     '''Get the latest version'''
     data = data.json()
     latest_info = data.get("data", {}).get("id", "")
@@ -74,8 +72,6 @@ if __name__ == "__main__":
     else:
         raise Exception("Invalid file name: " + file_name)
 
-    # latest_version = get_version(data)  # This function doesn't exist, using the specific function instead
-
     try:
         with open(f'data/{file_name}', 'r') as f:
             current_versions = json.load(f)
@@ -85,7 +81,7 @@ if __name__ == "__main__":
     current_version = current_versions[0].get('version') if current_versions else None
     print("Current version: ", current_version)
 
-    if current_version != latest_version:
+    if current_version != latest_version and client:
         print("New version detected: ", latest_version)
         final_versions = [{
             "client": client,
@@ -97,7 +93,7 @@ if __name__ == "__main__":
             with open(github_output, 'a', encoding='utf-8') as f:
                 f.write('new_version=true')    
         else:
-            print("new_version=true")
+            print("A new version was found!")
     else:
         if github_output:
             with open(github_output, 'a', encoding='utf-8') as f:
