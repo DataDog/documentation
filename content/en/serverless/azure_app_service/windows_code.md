@@ -67,14 +67,14 @@ Datadog recommends doing regular updates to the latest version of the extension 
 
 If you haven't already, set up the [Datadog-Azure integration][9]. You can verify that your Azure integration is configured correctly by ensuring that you see the `azure.app_services.count` or `azure.functions.count` metrics in Datadog. 
 
-<div class="alert alert-info">This step is critical for metric/trace correlation and functional trace panel views, and improves the overall experience of using Datadog with Azure App Services.
+<div class="alert alert-info">This step is critical for metric/trace correlation and functional trace panel views and improves the overall experience of using Datadog with Azure App Services.
 </div>
 
 {{< tabs >}}
 {{% tab "Terraform" %}}
 
 
-If you don't already have Terraform set up, [install Terraform][250], create a new directory and make a file called `main.tf`.
+If you don't already have Terraform set up, [install Terraform][250], create a new directory, and make a file called `main.tf`.
 
 Then, add the following to your Terraform configuration, updating it as necessary based on your needs:
 

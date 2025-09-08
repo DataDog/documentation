@@ -138,7 +138,7 @@ Additional flags, like `--service` and `--env`, can be used to set the service a
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-If you don't already have Terraform set up, [install Terraform][250], create a new directory and make a file called `main.tf`.
+If you don't already have Terraform set up, [install Terraform][250], create a new directory, and make a file called `main.tf`.
 
 Then, add the following to your Terraform configuration, updating it as necessary based on your needs:
 
