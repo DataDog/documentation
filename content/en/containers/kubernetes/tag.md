@@ -113,7 +113,37 @@ com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
 
 ### Kubernetes resources labels as tags
 
-Starting with Agent v7.58+, the Agent can be configured to collect labels for any Kubernetes resource and use them as tags to attach to all metrics, traces, and logs associated with that resource.
+Starting with Agent v7.58+, the Agent can be configured to collect labels for Kubernetes resources and use them as tags.
+
+<div class="alert alert-info">
+<strong>How resource tagging works</strong>
+
+Resource labels are applied as tags to data <strong>directly associated</strong> with that specific resource:
+<ul>
+<li><strong>Deployment labels</strong> → Applied to deployment manifests in Orchestrator Explorer and deployment-specific KSM metrics</li>
+<li><strong>Pod labels</strong> → Applied to pod metrics, logs, traces, and manifests</li>
+<li><strong>Service labels</strong> → Applied to service manifests and service-specific KSM metrics</li>
+</ul>
+
+<strong>Important:</strong> Tags do NOT cascade between parent and child resources. For example, labels on a Deployment are NOT automatically applied to logs from its child Pods. To tag pod logs, you must configure labels on the Pods themselves.
+</div>
+
+</div>
+
+#### Version requirements and feature availability
+
+<div style="overflow-x: auto;">
+
+| Component | Support | Version Required |
+|-----------|---------|------------------|
+| **Orchestrator Explorer** | Resource manifests are tagged with their labels | v7.63+ |
+| **KSM Metrics** | kubernetes_state.* metrics are tagged based on resource labels | v7.64+ |
+| **Kubernetes Events** | Events are tagged with their resource's labels | v7.58+ |
+| **Logs** | Only pod and container labels are applied to logs | v7.58+ |
+| **Traces** | Only pod and container labels are applied to traces | v7.58+ |
+| **CRDs and Custom Resources** | Supported in Orchestrator Explorer and KSM metrics | v7.65+ |
+
+</div>
 
 This configuration option is more generic and should be preferred over the following options:
 - podLabelsAsTags
@@ -271,7 +301,37 @@ bar: quuz
 
 ### Kubernetes resources annotations as tags
 
-Starting with Agent v7.58+, the Agent can be configured to collect annotations for any Kubernetes resource and use them as tags to attach to all metrics, traces. and logs associated with that resource.
+Starting with Agent v7.58+, the Agent can be configured to collect annotations for Kubernetes resources and use them as tags.
+
+<div class="alert alert-info">
+<strong>How resource tagging works</strong>
+
+Resource annotations are applied as tags to data <strong>directly associated</strong> with that specific resource:
+<ul>
+<li><strong>Deployment annotations</strong> → Applied to deployment manifests in Orchestrator Explorer and deployment-specific KSM metrics</li>
+<li><strong>Pod annotations</strong> → Applied to pod metrics, logs, traces, and manifests</li>
+<li><strong>Service annotations</strong> → Applied to service manifests and service-specific KSM metrics</li>
+</ul>
+
+<strong>Important:</strong> Tags do NOT cascade between parent and child resources. For example, annotations on a Deployment are NOT automatically applied to logs from its child Pods. To tag pod logs, you must configure annotations on the Pods themselves.
+</div>
+
+</div>
+
+#### Version requirements and feature availability
+
+<div style="overflow-x: auto;">
+
+| Component | Support | Version Required |
+|-----------|---------|------------------|
+| **Orchestrator Explorer** | Resource manifests are tagged with their annotations | v7.63+ |
+| **KSM Metrics** | kubernetes_state.* metrics are tagged based on resource annotations | v7.64+ |
+| **Kubernetes Events** | Events are tagged with their resource's annotations | v7.58+ |
+| **Logs** | Only pod and container annotations are applied to logs | v7.58+ |
+| **Traces** | Only pod and container annotations are applied to traces | v7.58+ |
+| **CRDs and Custom Resources** | Supported in Orchestrator Explorer and KSM metrics | v7.65+ |
+
+</div>
 
 This configuration option is more generic and should be preferred over the following options:
 - podAnnotationsAsTags
