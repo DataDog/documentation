@@ -14,7 +14,7 @@ All issues in Error Tracking have a status to help you triage and prioritize iss
 - **REVIEWED**: Triaged and needs to be fixed, either now or later.
 - **RESOLVED**: Fixed and no longer occurring.
 - **IGNORED**: Requiring no additional investigation or action.
-- **EXCLUDED**: Requiring no additional investigation or action, stops collecting new errors, and no longer count towards usage or billing
+- **EXCLUDED**: Issues that require no further investigation, stops collecting new errors, and no longer count towards usage or billing
 
 All issues start with a FOR REVIEW status. Error Tracking automatically updates the status in the cases described below, or you can [manually update the status](#updating-an-error-status). You can also [view the history](#issue-history) of a given error's state changes.
 
