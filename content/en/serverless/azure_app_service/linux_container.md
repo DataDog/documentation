@@ -270,7 +270,7 @@ module "my_web_app" {
 
   datadog_api_key = var.datadog_api_key
   datadog_service = "my-service" // Replace with your service name
-  datadog_env     = "prod"       // Replace with your environment (e.g., prod, staging)
+  datadog_env     = "prod"       // Replace with your environment (e.g. prod, staging)
   datadog_version = "0.0.0"      // Replace with your application version
 
   site_config = {
