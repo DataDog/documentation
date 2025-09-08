@@ -42395,7 +42395,7 @@ components:
           type: string
       type: object
     Shift:
-      description: The definition of `Shift` object.
+      description: An on-call shift with its associated data and relationships.
       example:
         data:
           attributes:
@@ -42426,7 +42426,7 @@ components:
           type: array
       type: object
     ShiftData:
-      description: The definition of `ShiftData` object.
+      description: Data for an on-call shift.
       properties:
         attributes:
           $ref: '#/components/schemas/ShiftDataAttributes'
@@ -42441,7 +42441,7 @@ components:
       - type
       type: object
     ShiftDataAttributes:
-      description: The definition of `ShiftDataAttributes` object.
+      description: Attributes for an on-call shift.
       properties:
         end:
           description: The end time of the shift.
@@ -42453,7 +42453,7 @@ components:
           type: string
       type: object
     ShiftDataRelationships:
-      description: The definition of `ShiftDataRelationships` object.
+      description: Relationships for an on-call shift.
       properties:
         user:
           $ref: '#/components/schemas/ShiftDataRelationshipsUser'
@@ -42500,7 +42500,7 @@ components:
       x-enum-varnames:
       - SHIFTS
     ShiftIncluded:
-      description: The definition of `ShiftIncluded` object.
+      description: Included data for shift operations.
       oneOf:
       - $ref: '#/components/schemas/ScheduleUser'
     SimpleMonitorUserTemplate:
@@ -60879,6 +60879,47 @@ paths:
       description: Returns a list of all monitor notification rules.
       operationId: GetMonitorNotificationRules
       parameters:
+      - description: The page to start paginating from. If `page` is not specified,
+          the argument defaults to the first page.
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          maximum: 1000000
+          minimum: 0
+          type: integer
+      - description: The number of rules to return per page. If `per_page` is not
+          specified, the argument defaults to 100.
+        in: query
+        name: per_page
+        required: false
+        schema:
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+      - description: 'String for sort order, composed of field and sort order separated
+          by a colon, for example `name:asc`. Supported sort directions: `asc`, `desc`.
+          Supported fields: `name`, `created_at`.'
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+      - description: 'JSON-encoded filter object. Supported keys:
+
+          * `text`: Free-text query matched against rule name, tags, and recipients.
+
+          * `tags`: Array of strings. Return rules that have any of these tags.
+
+          * `recipients`: Array of strings. Return rules that have any of these recipients.'
+        example: '{"text":"error","tags":["env:prod","team:my-team"],"recipients":["slack-monitor-app","email@example.com"]}'
+        in: query
+        name: filters
+        required: false
+        schema:
+          type: string
       - description: 'Comma-separated list of resource paths for related resources
           to include in the response. Supported resource
 

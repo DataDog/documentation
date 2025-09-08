@@ -57,6 +57,38 @@ To update your RUM Application:
 2. On the **SDK Configuration** page, adjust the slider or enter a specific percentage in the input box for Session Sampling or Session Replay Sampling.
 3. Copy and replace the code in the Datadog RUM config file for the IIS site that you instrumented.
 
+## Manual configuration
+
+### Log Level
+
+You can configure the log level in the IIS `applicationHost.config` file:
+
+```
+<configuration>
+  <system.applicationHost>
+    <datadogRumServer logLevel="debug" />
+  </system.applicationHost>
+</configuration>
+```
+
+ The possible `logLevel` values are:
+- `debug`
+- `info` (default)
+- `error`
+
+### Allowed tracing URLs
+
+To connect RUM sessions and APM traces you can configure `allowedTracingUrls` in the site's `web.config` file with comma-separated fixed URLs in the `datadogRum` section. Regular expressions and Javascript functions are unsupported. See [more information about trace correlation][1].
+
+```
+<datadogRum>
+  ...
+  <option name="allowedTracingUrls" value="https://api.example.com,https://other.example.com" />
+</datadogRum>
+```
+
+[1]: https://docs.datadoghq.com/tracing/other_telemetry/rum
+
 ## Troubleshooting
 
 ### RUM is not injected
