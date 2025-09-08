@@ -465,6 +465,10 @@ Static reachability analysis is available for the following advisories:
 - [GHSA-f3j5-rmmp-3fc5](https://osv.dev/vulnerability/GHSA-f3j5-rmmp-3fc5)
 {{% /collapse-content %}}
 
+## Data Retention
+
+Datadog stores findings in accordance with our [Data Rentention Periods](https://docs.datadoghq.com/data_security/data_retention_periods/). Datadog does not store or retain customer source code.
+
 [1]: /security/code_security/software_composition_analysis/
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup
 [3]: /security/code_security/software_composition_analysis/setup_static

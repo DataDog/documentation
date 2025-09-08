@@ -1,0 +1,12 @@
+{
+  "data": {
+    "type": "org_connection",
+    "id": "f9ec96b0-8c8a-4b0a-9b0a-1b2c3d4e5f6a",
+    "attributes": {
+      "connection_types": [
+        "logs",
+        "metrics"
+      ]
+    }
+  }
+}
