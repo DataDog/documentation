@@ -26,10 +26,6 @@ aliases:
   - /security/default_rules/cis-gcp-1.3.0-1.4/
   - /security/default_rules/cis-gcp-1.3.0-1.7/
   - /security/default_rules/cis-gcp-1.3.0-5.1/
-further_reading:
-  - link: https://www.datadoghq.com/blog/cloudcraft-security/
-    tag: Blog
-    text: Visually identify and prioritize security risks using Cloudcraft
 disable_sidebar: true
 cascade:
   algolia:
