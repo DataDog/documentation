@@ -100,7 +100,7 @@ Select the detection method you want to use for creating signals.
 {{% /tab %}}
 {{% tab "Anomaly" %}}
 
-{{< img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" >}}
+{{< img src="security/security_monitoring/detection_rules/anomaly_query.png" alt="Define the search query" style="width:100%;" >}}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
@@ -136,6 +136,8 @@ Select the detection method you want to use for creating signals.
 {{% /tab %}}
 {{% tab "Content Anomaly" %}}
 
+{{< img src="security/security_monitoring/detection_rules/content_anomaly_query.png" alt="Define the search query" style="width:100%;" >}}
+
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Detect anomaly** field, specify the fields whose values you want to analyze.
@@ -168,6 +170,8 @@ Select the detection method you want to use for creating signals.
 
 {{% /tab %}}
 {{% tab "Impossible Travel" %}}
+
+{{< img src="security/security_monitoring/detection_rules/impossible_travel_query.png" alt="Define the search query" style="width:100%;" >}}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
@@ -207,6 +211,8 @@ Select the detection method you want to use for creating signals.
 {{% /tab %}}
 {{% tab "Third Party" %}}
 
+{{< img src="security/security_monitoring/detection_rules/third_party_query.png" alt="Define the search query" style="width:100%;" >}}
+
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Trigger for each new** dropdown menu, select the attributes where each attribute generates a signal for each new attribute value over 24-hour roll-up period.
@@ -230,6 +236,8 @@ Click **Add Root Query** to add additional queries.
 {{% /tab %}}
 {{% tab "Signal Correlation" %}}
 
+{{< img src="security/security_monitoring/detection_rules/signal_correlation_query.png" alt="Define the search query" style="width:100%;" >}}
+
 1. Select a rule for **Rule a**.
 1. Click the pencil icon to rename the rule.
 1. Use the **correlated by** dropdown to define the correlating attribute.
@@ -247,6 +255,8 @@ Click **Add Root Query** to add additional queries.
 
 {{< tabs >}}
 {{% tab "Threshold" %}}
+
+{{< img src="security/security_monitoring/detection_rules/condition_severity_notification.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
 
 {{% cloud_siem/set_conditions %}}
 
@@ -266,6 +276,8 @@ Click **Add Root Query** to add additional queries.
 
 {{% /tab %}}
 {{% tab "New Value" %}}
+
+{{< img src="security/security_monitoring/detection_rules/severity_notification.png" alt="Set your severity and notification recipients" style="width:100%;" >}}
 
 {{% cloud_siem/set_conditions_severity_notify_only %}}
 
@@ -290,6 +302,8 @@ Click **Add Root Query** to add additional queries.
 {{% /tab %}}
 {{% tab "Anomaly" %}}
 
+{{< img src="security/security_monitoring/detection_rules/severity_notification.png" alt="Set your severity and notification recipients" style="width:100%;" >}}
+
 {{% cloud_siem/set_conditions_severity_notify_only %}}
 
 ### Other parameters
@@ -308,6 +322,8 @@ Click **Add Root Query** to add additional queries.
 
 {{% /tab %}}
 {{% tab "Content Anomaly" %}}
+
+{{< img src="security/security_monitoring/detection_rules/condition_content_anomaly.png" alt="Set your condition, severity, and notification recipients" style="width:100%;" >}}
 
 {{% cloud_siem/set_conditions_content_anomaly %}}
 
@@ -331,6 +347,8 @@ Click **Add Root Query** to add additional queries.
 {{% /tab %}}
 {{% tab "Impossible Travel" %}}
 
+{{< img src="security/security_monitoring/detection_rules/severity_notification.png" alt="Set your severity and notification recipients" style="width:100%;" >}}
+
 {{% cloud_siem/set_conditions_severity_notify_only %}}
 
 ### Other parameters
@@ -350,6 +368,8 @@ Click **Add Root Query** to add additional queries.
 {{% /tab %}}
 {{% tab "Third Party" %}}
 
+{{< img src="security/security_monitoring/detection_rules/condition_severity_notification.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
+
 {{% cloud_siem/set_conditions %}}
 
 ### Other parameters
@@ -364,6 +384,8 @@ Click **Add Root Query** to add additional queries.
 
 {{% /tab %}}
 {{% tab "Signal Correlation" %}}
+
+{{< img src="security/security_monitoring/detection_rules/condition_signal_correlation.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
 
 {{% cloud_siem/set_conditions_then_operator %}}
 

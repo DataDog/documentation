@@ -283,6 +283,8 @@ Click **Add Root Query** to add additional queries.
 {{< tabs >}}
 {{% tab "Threshold" %}}
 
+{{< img src="security/security_monitoring/detection_rules/condition_severity_notification.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
+
 {{% cloud_siem/set_conditions %}}
 
 ### Other parameters
@@ -299,6 +301,8 @@ Click **Add Root Query** to add additional queries.
 
 {{% /tab %}}
 {{% tab "New Value" %}}
+
+{{< img src="security/security_monitoring/detection_rules/severity_notification.png" alt="Set your severity and notification recipients" style="width:100%;" >}}
 
 ### Other parameters
 
@@ -325,6 +329,8 @@ Click **Add Root Query** to add additional queries.
 {{% /tab %}}
 {{% tab "Anomaly" %}}
 
+{{< img src="security/security_monitoring/detection_rules/severity_notification.png" alt="Set your severity and notification recipients" style="width:100%;" >}}
+
 {{% cloud_siem/set_conditions_severity_notify_only %}}
 
 ### Other parameters
@@ -343,6 +349,8 @@ Click **Add Root Query** to add additional queries.
 
 {{% /tab %}}
 {{% tab "Content Anomaly" %}}
+
+{{< img src="security/security_monitoring/detection_rules/condition_content_anomaly.png" alt="Set your condition, severity, and notification recipients" style="width:100%;" >}}
 
 {{% cloud_siem/set_conditions_content_anomaly %}}
 
@@ -367,6 +375,8 @@ Click **Add Root Query** to add additional queries.
 {{% /tab %}}
 {{% tab "Impossible Travel" %}}
 
+{{< img src="security/security_monitoring/detection_rules/severity_notification.png" alt="Set your severity and notification recipients" style="width:100%;" >}}
+
 {{% cloud_siem/set_conditions_severity_notify_only %}}
 
 ### Other parameters
@@ -386,6 +396,8 @@ Click **Add Root Query** to add additional queries.
 {{% /tab %}}
 {{% tab "Third Party" %}}
 
+{{< img src="security/security_monitoring/detection_rules/condition_severity_notification.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
+
 {{% cloud_siem/set_conditions %}}
 
 ### Other parameters
@@ -400,6 +412,8 @@ Click **Add Root Query** to add additional queries.
 
 {{% /tab %}}
 {{% tab "Signal Correlation" %}}
+
+{{< img src="security/security_monitoring/detection_rules/condition_signal_correlation.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
 
 {{% cloud_siem/set_conditions_then_operator %}}
 
