@@ -68,6 +68,7 @@ To add a while loop to your workflow:
 1. Configure the looped action. To access the index of the current value, use `{{Current.Index}}`.
 1. Add and configure any additional steps you need to loop. You can use an if statement and break action to exit your loop early.
 1. **Save** and **Publish** the workflow.
+
 When a run completes, the workflow enters **Debug** mode. Select a step within the loop to see a list of **All**, **Failed**, or **Successful** iterations for that step. Select an iteration to see the output or the error message. Select the While Loop step and a specific index to see the evaluated condition at the index.
 
 ## Further Reading
