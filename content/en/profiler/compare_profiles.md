@@ -46,11 +46,11 @@ You can open different types of comparisons from different places in the UI.
 
 ### Comparing different time periods
 
-Go to **APM -> Profiles -> Comparison** and select a service to view its profiles over 2 distinct time periods.
+Go to **[APM > Profiles > Comparison][1]** and select a service to view its profiles over two distinct time periods.
 
 {{< img src="profiler/compare_time_period.mp4" alt="Opening the comparison view to compare profile with an aggregation for two time periods." video="true">}}
 
-Select the metric you want to compare (the list varies based on code language). This can be helpful, for example, for looking at allocation spikes while investigating CPU profiles.
+Select the metric you want to compare (the list of available metrics depends on the programming language). This allows you to correlate different performance issues, for example, by checking for memory allocation spikes while investigating a CPU profile.
 
 Take note of the legend colors, which show:
  - Deepening shades of red for methods that take more time in profile B.
@@ -69,21 +69,27 @@ Hover over methods in the profile to see specific metrics about the methods that
 
 ### Comparing a profile to a previous time period
 
-From the single profile views, click **⇄ Compare** to open the comparison view.
+To compare a profile you are viewing against a different time period or a specific profile:
 
-By default, the selected profile is shown as Profile B. For Profile A, select an aggregation time frame and tags, or a specific profile ID.
+1. From any single profile view, click **⇄ Compare** to open the comparison view.
 
-Select the metric you want to compare (the list varies based on code language). This can be helpful, for example, for looking at allocation spikes while investigating CPU profiles.
+2. The comparison view opens with your selected profile set as Profile B (the comparison target).
+
+3. For Profile A (the baseline), select an aggregation time frame and tags, or provide a specific profile ID.
+
+4. Select the metric you want to compare (the list of available metrics depends on the programming language). This is useful for correlating performance, for example, by checking for allocation spikes while investigating a CPU profile.
 
 {{< img src="profiler/compare_single_profile_traces.mp4" alt="Opening the comparison view to compare a profile with an aggregation for a time frame." video="true">}}
 
 
 ### Comparing recent versions
 
-On the Explorer view, select a service to see its aggregated profile for a particular metric (for example, wall time) over the selected time frame. Then click **Compare To** to compare it to the aggregated profile of another version.
+On the **Explorer** view, select a service to see its aggregated profile for a particular metric (for example, wall time) over the selected time frame. Then click **Compare To** to compare it to the aggregated profile of another version.
 
 {{< img src="profiler/compare_version.mp4" alt="Opening the comparison view for two versions." video="true">}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/profiling/comparison
