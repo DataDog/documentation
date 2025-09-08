@@ -2449,7 +2449,7 @@ menu:
       identifier: incidents_jira
       weight: 901
     - name: Statuspage
-      url: service_management/incident_management/statuspage
+      url: service_management/incident_management/integrations/statuspage
       parent: incidents_integrations
       identifier: incidents_statuspage
       weight: 902
