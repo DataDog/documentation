@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-The impossible travel method detects access from different locations whose distance is greater than the distance a human can travel in the time between the two access events. See [Create Rule][1] for instructions on how to create an impossible travel rule.
+The impossible travel method detects access from different locations whose distance is greater than the distance a human can travel in the time between the two access events. See [Create Rule][1] for detailed instructions on how to create an impossible travel rule.
 
 ## How the impossible travel method works
 

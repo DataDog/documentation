@@ -5,194 +5,99 @@ disable_toc: false
 
 ## Overview
 
-While the anomaly method detects anomalies in volume and is ideal for identifying spikes in log or event activity, content anomaly detection analyzes the content of logs. The rule determines a similarity score for incoming values by comparing them to previous values. The similarity score helps determine whether the incoming value is an outlier. See [How an event is determined to be anomalous](?tab=contentanomaly#how-an-event-is-determined-to-be-anomalous) for more information.
+Content anomaly detection analyzes incoming logs to identify and alert on anomalous log content. It examines user-specified fields and triggers signals when new logs contain values that significantly deviate from historical patterns within a group. A significant deviation is when the similarity between incoming and historical values is low or there is no similarity at all.
+See [Create Rule][1] for detailed instructions on how to configure a content anomaly rule.
 
-## Create a rule
+## How the content anomaly detection works
 
-To create a threshold detection rule or job, navigate to the [Detection Rules][1] page and click **+ New Rule**.
+### 1. Define the rule
+In the rule editor:
+  1. Select **Content Anomaly** as the detection method.
+  1. Specify a query to filter logs.
+  1. Select the fields to analyze.
+  1. Define **group by** fields and the **learning period** (1-10 days).
+  1. Set conditions for how many anomalous logs are required to trigger a signal.
+  1. Optionally, adjust **Other Parameters** (defaults are provided).
 
-### Create a New Rule
+### 2. Learning historical values
+- During the **learning period**, the rule observes logs and learns typical field values.
+- No signals are generated during this phase.
+- If the rule is modified, the learning period restarts.
 
-Select a **Real-Time Rule**, **Scheduled Rule** or a **Historical Job**.
+### 3. Detecting anomalies
 
-### Define your rule or historical job
+- After the learning period has passed, incoming logs are compared against historical values.
+- If a log's field values are significantly different and the count of anomalous logs meets the threshold, a signal is triggered.
 
-If you are creating a historical job, select the logs index and time range for the job.
+## Configuration options
 
-Select the **Content Anomaly** tile.
+### Learning duration (`learningDuration`)
 
-### Define search queries
+- Definition: Time window during which values are learned without generating signals.
+- Default: 7 days
+- Limits: 1-10 days
 
-1. Construct a search query for your logs or events using the [Log Explorer search syntax][2]. To search Audit Trail or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
-1. In the **Detect anomaly** field, specify the fields whose values you want to analyze.
-1. In the **Group by** field, specify the fields you want to group by.
-1. In the **Learn for** dropdown menu, select the number of days for the learning period. During the learning period, the rule sets a baseline of normal field values and does not generate any signals.
-  **Note**: If the detection rule is modified, the learning period restarts at day `0`.
+### Forget after (forgetAfter)
 
-#### Filter logs based on Reference Tables
+- Definition: How long the learned values are retained before being discarded.
+- Default: 7 days
+- Limits: 1-10 days
 
-{{% filter_by_reference_tables %}}
+### Anomaly detection parameters
 
-{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
+- `similarityPercentageThreshold`
+  - Default: 70%
+  - Limits: 35-100%
+  - Definition: Minimum similarity required to consider a log as normal.
 
-#### Unit testing
+- `nbSimilarItemsThreshold`
+  - Definition: Number of historical logs required for an incoming value to be considered normal.
+  - Default: 1
+  - Limits: 1-20
 
-{{% cloud_siem/unit_test %}}
+### Evaluation window (`evaluationsWindow`)
+  - Definition: Defines the time frame for counting anomalous logs. Signals are triggered if anomalies exceed the case condition (for example, `a >= 2`, where `a` is the query).
+  - Limits: 0-24 hours
 
-To finish setting up the detection rule, select the type of rule you are creating and follow the instructions.
+## How a log is assessed
 
-{{< tabs >}}
-{{% tab "Real-time rule" %}}
+1. Logs are tokenized using Unicode Text Segmentation (UTS #29).
+1. Tokens are compared using Jaccard similarity.
+1. Efficient comparisons are achieved with MinHash and Locality Sensitive Hashing (LSH).
+1. A log is anomalous if it fails both similarity and historical thresholds.
 
-### Set conditions
+## Similarity computation examples
 
-#### Severity and notification
+### Single-word fields
 
-{{% security-rule-severity-notification %}}
+```
+log1={actionType:auth, resourceType:k8s, networkType:public, userType:swe}
+log2={actionType:auth, resourceType:k8s, networkType:public, userType:pm}
+```
 
-In the **Anomaly count** field, enter the condition for how many anomalous logs are required to trigger a signal. For example, if the condition is `a >= 3` where `a` is the query, a signal is triggered if there are at least three anomalous logs within the evaluation window.
+Intersection = {auth, k8s, public}, Union = {auth, k8s, public, swe, pm} → Jaccard = 3/5 = 0.6
 
-**Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
+### Multi-word fields
 
-#### Other parameters
+```
+log1={actionDescription: "User connected to abc network"}
+log2={actionDescription: "User got unauthorized network access"}
+```
 
-In the **Content anomaly detection options** section, specify the parameters to assess whether a log is anomalous or not. See [How an event is determined to be anomalous](#how-an-event-is-determined-to-be-anomalous) for more information.
+Intersection = {User, network}, Union = {User, connected, to, abc, network, got, unauthorized, access} → Jaccard = 2/8 = 0.25
 
-In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected. See [Time windows](#time-windows) for more information.
+## Comparison to other detection methods
 
-Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
+| Feature | Anomaly Detection | New Value Detection | Content Anomaly Detection |
+|---------|-------------------|---------------------|---------------------------|
+| Detects new field values | No | Yes | Yes (configurable) |
+| Detects rare field values | No | No | Yes |
+| Detects dissimilar values | No | No | Yes |
+| Detects log spikes | Yes | No | No |
+| Multiple queries supported | No | No | Yes |
+| Multiple cases supported | No | No | Yes |
+| Threshold definition | Learned distribution | Always `1` | User-specified |
+| Evaluation window | Yes | No | Yes |
+| Retention | 14 days | 30 days | 10 days |
 
-Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid getting excluded.
-
-#####  How an event is determined to be anomalous
-
-Content anomaly detection balances precision and sensitivity using several rule parameters that you can set:
-
-1. Similarity threshold: Defines how dissimilar a field value must be to be considered anomalous (default: `70%`).
-1. Minimum similar items: Sets how many similar historical logs must exist for a value to be considered normal (default: `1`).
-1. Evaluation window: The time frame during which anomalies are counted toward a signal (for example, a 10-minute time frame).
-
-These parameters help to identify field content that is both unusual and rare, filtering out minor or common variations.
-
-##### Time windows
-
-Datadog automatically detects the seasonality of the data and generates a security signal when the data is determined to be anomalous.
-
-After a signal is generated, the signal remains "open" if the data remains anomalous and the last updated timestamp is updated for the anomalous duration.
-
-A signal "closes" once the time exceeds the maximum signal duration, regardless of whether or not the anomaly is still anomalous. This time is calculated from the first seen timestamp.
-
-##### Decreasing non-production severity
-
-{{% cloud_siem/decreasing_non_prod_severity %}}
-
-
-### Describe your playbook
-
-{{% security-rule-say-whats-happening %}}
-
-### Create a suppression
-
-{{% cloud_siem/create_suppression %}}
-
-{{% /tab %}}
-{{% tab "Scheduled rule" %}}
-
-### Set conditions
-
-#### Severity and notification
-
-{{% security-rule-severity-notification %}}
-
-n the **Anomaly count** field, enter the condition for how many anomalous logs are required to trigger a signal. For example, if the condition is `a >= 3` where `a` is the query, a signal is triggered if there are at least three anomalous logs within the evaluation window.
-
-**Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
-
-#### Other parameters
-
-In the **Content anomaly detection options** section, specify the parameters to assess whether a log is anomalous or not. See [How an event is determined to be anomalous](#how-an-event-is-determined-to-be-anomalous) for more information.
-
-In the **Rule multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected. See [Time windows](#time-windows) for more information.
-
-Toggle **Decrease severity for non-production environment** if you want to prioritize production environment signals over non-production signals. See [Decreasing non-production severity](#decreasing-non-production-severity) for more information.
-
-Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid getting excluded.
-
-#####  How an event is determined to be anomalous
-
-Content anomaly detection balances precision and sensitivity using several rule parameters that you can set:
-
-1. Similarity threshold: Defines how dissimilar a field value must be to be considered anomalous (default: `70%`).
-1. Minimum similar items: Sets how many similar historical logs must exist for a value to be considered normal (default: `1`).
-1. Evaluation window: The time frame during which anomalies are counted toward a signal (for example, a 10-minute time frame).
-
-These parameters help to identify field content that is both unusual and rare, filtering out minor or common variations.
-
-##### Time windows
-
-Datadog automatically detects the seasonality of the data and generates a security signal when the data is determined to be anomalous.
-
-After a signal is generated, the signal remains "open" if the data remains anomalous and the last updated timestamp is updated for the anomalous duration.
-
-A signal "closes" once the time exceeds the maximum signal duration, regardless of whether or not the anomaly is still anomalous. This time is calculated from the first seen timestamp.
-
-**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
-
-##### Decreasing non-production severity
-
-{{% cloud_siem/decreasing_non_prod_severity %}}
-
-### Add custom schedule
-
-{{% cloud_siem/add_custom_schedule %}}
-
-### Describe your playbook
-
-{{% security-rule-say-whats-happening %}}
-
-{{% /tab %}}
-{{% tab "Historical job" %}}
-
-### Set conditions
-
-#### Severity and notification
-
-{{% security-rule-severity-notification %}}
-
-In the **Anomaly count** field, enter the condition for how many anomalous logs are required to trigger a signal. For example, if the condition is `a >= 3` where `a` is the query, a signal is triggered if there are at least three anomalous logs within the evaluation window.
-
-**Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
-
-#### Other parameters
-
-In the **Content anomaly detection options** section, specify the parameters to assess whether a log is anomalous or not. See [How an event is determined to be anomalous](#how-an-event-is-determined-to-be-anomalous) for more information.
-
-In the **Job multi-triggering behavior** section, select how often you want to keep updating the same signal if new values are detected.
-
-Toggle **Enable Optional Group By** section, if you want to group events even when values are missing. If there is a missing value, a sample value is generated to avoid getting excluded.
-
-#####  How an event is determined to be anomalous
-
-Content anomaly detection balances precision and sensitivity using several rule parameters that you can set:
-
-1. Similarity threshold: Defines how dissimilar a field value must be to be considered anomalous (default: `70%`).
-1. Minimum similar items: Sets how many similar historical logs must exist for a value to be considered normal (default: `1`).
-1. Evaluation window: The time frame during which anomalies are counted toward a signal (for example, a 10-minute time frame).
-
-These parameters help to identify field content that is both unusual and rare, filtering out minor or common variations.
-
-### Notify when job is complete
-
-{{% cloud_siem/notify_when_job_complete %}}
-
-### Describe your playbook
-
-{{% security-rule-say-whats-happening %}}
-
-Click **Save Rule**.
-
-{{% /tab %}}
-{{< /tabs >}}
-
-[1]: https://app.datadoghq.com/security/configuration/siem/rules
-[2]: /logs/search_syntax/
+[1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule
