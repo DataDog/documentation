@@ -23,7 +23,7 @@ Stop the container:
 docker stop <id>
 ```
 
-Start a new container with [the latest image][6]. Environment variables are no longer needed. Everything is configured in the `config/config.yaml` file.
+Start a new container with [the latest image][2]. Environment variables are no longer needed. Everything is configured in the `config/config.yaml` file.
 
 Run:
 ```bash
@@ -106,3 +106,4 @@ kubectl get pods
 kubectl logs <name-of-the-pod>
 ```
 [1]: https://api.datadoghq.com/api/v2/on-prem-management-service/runner/latest-image
+[2]: https://api.datadoghq.com/api/v2/on-prem-management-service/runner/latest-image

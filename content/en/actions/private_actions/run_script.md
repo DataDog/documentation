@@ -28,7 +28,7 @@ The following table outlines supported and unsupported use cases for the script 
 To use the script action, you need:
 
 - **Custom tools**: For CLI tools not included in the base image, you need to create a custom Docker image.
-- **PAR Version**: 1.7.0 or later. To update your PAR version, see [Update the Private Action Runner][11].
+- **PAR Version**: 1.7.0 or later. To create a new PAR, see [Set Up a Private Action Runner][2]. To update your PAR version, see [Update the Private Action Runner][11].
 
 ## Set up a PAR script
 
