@@ -64,7 +64,7 @@ To add a while loop to your workflow:
 1. Click the plus (**+**) icon on your workflow canvas to open the action catalog.
 1. Search for and select the **While loop** step.
 1. Click the loop step and define the condition that the While loop will evaluate before each iteration. The loop continues if the condition is true, and stops when it evaluates to false.
-1. Inside the loop frame, click the (**+**) icon to add a step to the loop.
+1. Inside the loop frame, click the plus (**+**) icon to add a step to the loop.
 1. Configure the looped action. To access the index of the current value, use `{{Current.Index}}`.
 1. Add and configure any additional steps you need to loop. You can use an if statement and break action to exit your loop early.
 1. **Save** and **Publish** the workflow.
