@@ -339,35 +339,7 @@ The initialization credentials require your application's variant name and use t
 
 The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` file at build time so you can view deobfuscated error stack traces. For more information, see the [Upload your mapping file](#upload-your-mapping-file) section.
 
-#### Sample session rates
-
-To control the data your application sends to Datadog, you can specify a sample rate for sessions when [initializing RUM][11]. The sample rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
-
-```kotlin
-val rumConfig = RumConfiguration.Builder(applicationId)
-        // Here 75% of the RUM sessions are sent to Datadog
-        .setSessionSampleRate(75.0f)
-        .build()
-Rum.enable(rumConfig)
-```
-
-#### Set tracking consent (GDPR compliance)
-
-To be compliant with the GDPR regulation, the SDK requires the tracking consent value upon initialization.
-
-Tracking consent can be one of the following values:
-
-- `TrackingConsent.PENDING`: (Default) The SDK starts collecting and batching the data but does not send it to the
- collection endpoint. The SDK waits for the new tracking consent value to decide what to do with the batched data.
-- `TrackingConsent.GRANTED`: The SDK starts collecting the data and sends it to the data collection endpoint.
-- `TrackingConsent.NOT_GRANTED`: The SDK does not collect any data. You are not able to manually send any logs, traces, or events.
-
-To **update the tracking consent** after the SDK is initialized, call `Datadog.setTrackingConsent(<NEW CONSENT>)`. The SDK changes its behavior according to the new consent. For example, if the current tracking consent is `TrackingConsent.PENDING` and you update it to:
-
-- `TrackingConsent.GRANTED`: The SDK sends all current batched data and future data directly to the data collection endpoint.
-- `TrackingConsent.NOT_GRANTED`: The SDK wipes all batched data and does not collect any future data.
-
-### Step 4 - Enable the feature to start sending data
+#### Enable the feature to start sending data
 
 To enable the Android SDK to start sending data:
 
@@ -398,7 +370,7 @@ To enable the Android SDK to start sending data:
 
 See [`ViewTrackingStrategy`][12] to enable automatic tracking of all your views (activities, fragments, and more).
 
-### Step 5 - Add NDK crash reporting
+### Step 4 - Add NDK crash reporting
 
 If your Android app uses native code (C/C++) through the Android NDK (Native Development Kit), you can track crashes that occur in this native code. Native code is often used for performance-critical operations, image processing, or when reusing existing C/C++ libraries.
 
@@ -420,7 +392,7 @@ To enable NDK crash reporting, use the Datadog NDK plugin:
     NdkCrashReports.enable()
     ```
 
-### Step 6 - Add ANR reporting
+### Step 5 - Add ANR reporting
 
 An "Application Not Responding" ([ANR][18]) is an Android-specific type of error that gets triggered when the application is unresponsive for too long. You can add ANR reporting to your RUM configuration to monitor these application responsiveness issues.
 
@@ -472,81 +444,8 @@ Non-fatal ANRs may or may not have led to the application being terminated (cras
 
 For any Android version, you can override the default setting for reporting non-fatal ANRs by setting `trackNonFatalAnrs` to `true` or `false` when initializing the SDK.
 
-### Step 7 - Initialize the interceptor to track network events
 
-To initialize an interceptor for tracking network events:
-
-1. For distributed tracing, [add and enable the Trace feature][13].
-2. Add the Gradle dependency to the `dd-sdk-android-okhttp` library in the module-level `build.gradle` file:
-
-    ```groovy
-    dependencies {
-        implementation "com.datadoghq:dd-sdk-android-okhttp:x.x.x"
-    }
-    ```
-
-3. To track your OkHttp requests as resources, add the provided [interceptor][14]:
-
-   {{< tabs >}}
-   {{% tab "Kotlin" %}}
-   ```kotlin
-   val tracedHostsWithHeaderType = mapOf(
-       "example.com" to setOf(
-           TracingHeaderType.DATADOG,
-           TracingHeaderType.TRACECONTEXT),
-       "example.eu" to setOf(
-           TracingHeaderType.DATADOG,
-           TracingHeaderType.TRACECONTEXT))
-   val okHttpClient = OkHttpClient.Builder()
-       .addInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
-       .build()
-   ```
-   {{% /tab %}}
-
-   {{% tab "Java" %}}
-   ```java
-   Map<String, Set<TracingHeaderType>> tracedHostsWithHeaderType = new HashMap<>();
-   Set<TracingHeaderType> datadogAndW3HeadersTypes = new HashSet<>(Arrays.asList(TracingHeaderType.DATADOG, TracingHeaderType.TRACECONTEXT));
-   tracedHostsWithHeaderType.put("example.com", datadogAndW3HeadersTypes);
-   tracedHostsWithHeaderType.put("example.eu", datadogAndW3HeadersTypes);
-   OkHttpClient okHttpClient = new OkHttpClient.Builder()
-       .addInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
-       .build();
-   ```
-   {{% /tab %}}
-   {{< /tabs >}}
-
-4. To automatically create RUM resources and spans for your OkHttp requests, use the `DatadogInterceptor` as an interceptor.
-   - This records each request processed by the `OkHttpClient` as a resource, with all the relevant information (URL, method, status code, and error) automatically filled in. Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][15].
-      
-5. To monitor the network redirects or retries, you can use the `DatadogInterceptor` as a [network interceptor][16]:
-
-   {{< tabs >}}
-   {{% tab "Kotlin" %}}
-   ```kotlin
-   val okHttpClient = OkHttpClient.Builder()
-       .addNetworkInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
-       .build()
-   ```
-   {{% /tab %}}
-   {{% tab "Java" %}}
-   ```java
-   OkHttpClient okHttpClient = new OkHttpClient.Builder()
-       .addNetworkInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
-       .build();
-   ```
-   {{% /tab %}}
-   {{< /tabs >}}
-
-**Notes**:
-- To use spans but not RUM resources, you can use the `TracingInterceptor` instead of `DatadogInterceptor` as described above.
-- If you use multiple interceptors, add `DatadogInterceptor` first.
-
-You can also add an `EventListener` for the `OkHttpClient` to [automatically track resource timing][17] for third-party providers and network requests.
-
-## Advanced Error Tracking features
-
-### Get deobfuscated stack traces
+###  Step 6 - Get deobfuscated stack traces
 
 When your Android app is built for production, the code is typically obfuscated using ProGuard or R8 to reduce app size and protect intellectual property. This obfuscation makes stack traces in crash reports unreadable, showing meaningless class and method names like `a.b.c()` instead of `com.example.MyClass.myMethod()`.
 
@@ -567,7 +466,7 @@ The matching process depends on your [Android Gradle plugin][22] version:
 
 #### Upload your mapping file
 
-The Android Gradle plugin automates the mapping file upload process. Once configured, it automatically uploads the appropriate ProGuard/R8 mapping file for each build variant when you build your app.
+The Android Gradle plugin automates the mapping file upload process. After configuration, it automatically uploads the appropriate ProGuard/R8 mapping file for each build variant when you build your app.
 
 **Note**: Re-uploading a mapping file does not override the existing one if the version has not changed. For information about file size limitations and other constraints, see the [Limitations](#limitations) section.
 
@@ -660,6 +559,137 @@ For any given error, you can access the file path, line number, and a code snipp
 
 See the [RUM Debug Symbols][24] page to view all uploaded symbols.
 
+## Advanced Error Tracking features
+
+### Set tracking consent (GDPR compliance)
+
+To be compliant with the GDPR regulation, the SDK requires the tracking consent value upon initialization.
+
+Tracking consent can be one of the following values:
+
+- `TrackingConsent.PENDING`: (Default) The SDK starts collecting and batching the data but does not send it to the
+ collection endpoint. The SDK waits for the new tracking consent value to decide what to do with the batched data.
+- `TrackingConsent.GRANTED`: The SDK starts collecting the data and sends it to the data collection endpoint.
+- `TrackingConsent.NOT_GRANTED`: The SDK does not collect any data. You are not able to manually send any logs, traces, or events.
+
+To **update the tracking consent** after the SDK is initialized, call `Datadog.setTrackingConsent(<NEW CONSENT>)`. The SDK changes its behavior according to the new consent. For example, if the current tracking consent is `TrackingConsent.PENDING` and you update it to:
+
+- `TrackingConsent.GRANTED`: The SDK sends all current batched data and future data directly to the data collection endpoint.
+- `TrackingConsent.NOT_GRANTED`: The SDK wipes all batched data and does not collect any future data.
+
+### Sample session rates
+
+To control the data your application sends to Datadog, you can specify a sample rate for sessions when [initializing RUM][11]. The sample rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
+
+```kotlin
+val rumConfig = RumConfiguration.Builder(applicationId)
+        // Here 75% of the RUM sessions are sent to Datadog
+        .setSessionSampleRate(75.0f)
+        .build()
+Rum.enable(rumConfig)
+```
+
+### Initialize the interceptor to track network events
+
+The network interceptor automatically tracks HTTP requests and responses, capturing network errors, timeouts, and performance issues that can help you correlate network problems with app crashes and user experience issues. To initialize an interceptor for tracking network events:
+
+1. For distributed tracing, [add and enable the Trace feature][13].
+2. Add the Gradle dependency to the `dd-sdk-android-okhttp` library in the module-level `build.gradle` file:
+
+    ```groovy
+    dependencies {
+        implementation "com.datadoghq:dd-sdk-android-okhttp:x.x.x"
+    }
+    ```
+
+3. To track your OkHttp requests as resources, add the provided [interceptor][14]:
+
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+   val tracedHostsWithHeaderType = mapOf(
+       "example.com" to setOf(
+           TracingHeaderType.DATADOG,
+           TracingHeaderType.TRACECONTEXT),
+       "example.eu" to setOf(
+           TracingHeaderType.DATADOG,
+           TracingHeaderType.TRACECONTEXT))
+   val okHttpClient = OkHttpClient.Builder()
+       .addInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
+       .build()
+   ```
+   {{% /tab %}}
+
+   {{% tab "Java" %}}
+   ```java
+   Map<String, Set<TracingHeaderType>> tracedHostsWithHeaderType = new HashMap<>();
+   Set<TracingHeaderType> datadogAndW3HeadersTypes = new HashSet<>(Arrays.asList(TracingHeaderType.DATADOG, TracingHeaderType.TRACECONTEXT));
+   tracedHostsWithHeaderType.put("example.com", datadogAndW3HeadersTypes);
+   tracedHostsWithHeaderType.put("example.eu", datadogAndW3HeadersTypes);
+   OkHttpClient okHttpClient = new OkHttpClient.Builder()
+       .addInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
+       .build();
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+
+4. To automatically create RUM resources and spans for your OkHttp requests, use the `DatadogInterceptor` as an interceptor.
+   - This records each request processed by the `OkHttpClient` as a resource, with all the relevant information (URL, method, status code, and error) automatically filled in. Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][15].
+      
+5. To monitor the network redirects or retries, you can use the `DatadogInterceptor` as a [network interceptor][16]:
+
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+   val okHttpClient = OkHttpClient.Builder()
+       .addNetworkInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
+       .build()
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+   OkHttpClient okHttpClient = new OkHttpClient.Builder()
+       .addNetworkInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
+       .build();
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+
+**Notes**:
+- To use spans but not RUM resources, you can use the `TracingInterceptor` instead of `DatadogInterceptor` as described above.
+- If you use multiple interceptors, add `DatadogInterceptor` first.
+
+You can also add an `EventListener` for the `OkHttpClient` to [automatically track resource timing][17] for third-party providers and network requests.
+
+### Track background events
+
+You can track events such as crashes and network requests when your application is in the background (for example, no active view is available). 
+
+Add the following snippet during configuration:
+
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+```kotlin
+.trackBackgroundEvents(true)
+```
+{{% /tab %}}
+{{% tab "Java" %}}
+```java
+.trackBackgroundEvents(true)
+```
+{{% /tab %}}
+{{< /tabs >}}
+<div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
+</div>
+
+### Sending data when device is offline
+
+The Android SDK ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. 
+
+Each batch follows the intake specification. Batches are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+ 
+This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
+
 ### Plugin configuration options
 
 There are several plugin properties that can be configured through the plugin extension. In case you are using multiple variants, you can set a property value for a specific flavor in the variant.
@@ -708,39 +738,10 @@ For example:
 tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
 ```
 
-## Track background events
-
-You can track events such as crashes and network requests when your application is in the background (for example, no active view is available). 
-
-Add the following snippet during configuration:
-
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-```kotlin
-.trackBackgroundEvents(true)
-```
-{{% /tab %}}
-{{% tab "Java" %}}
-```java
-.trackBackgroundEvents(true)
-```
-{{% /tab %}}
-{{< /tabs >}}
-<div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
-</div>
-
-## Sending data when device is offline
-
-The Android SDK ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. 
-
-Each batch follows the intake specification. Batches are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
- 
-This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
-
 ## Limitations
 
 ### File sizing
-Mapping files are limited in size to **500 MB** each. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
+[Mapping files](#upload-your-mapping-file) are limited in size to **500 MB** each. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
 
 - Set the `mappingFileTrimIndents` option to `true`. This reduces your file size by 5%, on average.
 - Set a map of `mappingFilePackagesAliases`: This replaces package names with shorter aliases. **Note**: Datadog's stacktrace uses the same alias instead of the original package name, so it's better to use this option for third party dependencies.
@@ -762,7 +763,7 @@ When looking at RUM Crash Reporting behaviors for Android, consider the followin
 
 - The crash can only be detected after the SDK is initialised. Given this, the recommendation is to initialize the SDK as soon as possible in your application's `onCreate` method.
 - RUM crashes must be attached to a RUM view. If a crash occurs before a view is visible (typically an Activity or Fragment in an `onResume` state), or after the app is sent to the background by the end-user navigating away from it, the crash is muted and isn't reported for collection. To mitigate this, use the `trackBackgroundEvents()` [method][25] in your `RumConfiguration` builder.
-- Only crashes that occur in sampled sessions are kept, meaning if a [session sampling rate is not 100%][24], some will not be reported.
+- Only crashes that occur in sampled sessions are kept, meaning if a [session sampling rate is not 100%][24], some are not reported.
 
 ## Test your implementation
 
