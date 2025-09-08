@@ -202,12 +202,12 @@ Follow these steps to collect the custom resources that these CRDs define:
 
 1. Locate the CRD that defines the custom resource you want to visualize in the explorer. Under the **Versions** column, click the `version` tag you want to configure indexing for.
 
-   {{< img src="infrastructure/containers_view/CRD_indexing_1.mp4" alt="A video of Kubernetes Explorer with the Custom Resources dropdown expanded and Resource Definitions selected. The cursor moves down to one of the rows of the table and, under the 'Versions' column, clicks on one of the versions. The cursor selects 'v1alpha1'. A modal appears." video="true">}}
+   {{< img src="infrastructure/containers_view/CRD_indexing_access_1.mp4" alt="A video of Kubernetes Explorer with the Custom Resources dropdown expanded and Resource Definitions selected. The cursor moves down to one of the rows of the table and, under the 'Versions' column, clicks on one of the versions. The cursor selects 'v1alpha1'. A modal appears." video="true">}}
 
    A modal appears:
-   {{< img src="infrastructure/containers_view/indexing_modal.png" alt="The Collecting and Indexing modal. Contains two sections: Set up Datadog Agent, with copyable snippets for updating an Agent configuration, and Select indexed fields for filtering/sorting, with checkboxes for fields to index and a preview.">}}
+   {{< img src="infrastructure/containers_view/indexing_modal_1.png" alt="The Collecting and Indexing modal. Contains two sections: Set up Datadog Agent, with copyable snippets for updating an Agent configuration, and Select indexed fields for filtering/sorting, with checkboxes for fields to index and a preview.">}}
 
-1. Follow the instructions in the modal's **Set up Datadog Agent** section to update the Agent configuration for clusters that are not collecting CRs. The modal lists all such clusters, either because the Agent is not configured to collect CRs or because no CRs are available in that cluster. If the Agent is configured and no CRs exist, no action is required.
+1. Follow the instructions in the modal's **Set up Datadog Agent** section to update the Agent configuration for clusters that are not collecting custom resources. The modal lists all such clusters, either because the Agent is not configured to collect custom resources, or because none are available in that cluster. If the Agent is configured and no custom resources exist, no action is required.
 
    {{< tabs >}}
    {{% tab "Helm Chart" %}}
@@ -268,7 +268,7 @@ Follow these steps to collect the custom resources that these CRDs define:
     <div class="alert alert-info">After the Datadog Agent is set up, it collects available CRs automatically. Indexing fields is optional.</div>
 
 
-    {{< img src="infrastructure/containers_view/CRD_indexing_2.mp4" alt="A video of the Collecting and Indexing modal. The cursor selects three fields and clicks Update Indexing. A success message displays." video="true">}}
+    {{< img src="infrastructure/containers_view/CRD_indexing_modal_1.mp4" alt="A video of the Collecting and Indexing modal. The cursor selects three fields and clicks Update Fields. A success message displays." video="true">}}
 
     For arrays of objects, see the [Indexing complex types](#indexing-complex-types) section.
 
@@ -278,7 +278,7 @@ After the fields are indexed, you can add them as columns in the explorer and so
 
 ### Indexing complex types
 
-{{< img src="containers/explorer/crd_groupby.png" alt="Indexing Configuration: A conditions object[] array, with 'Group by' drop down options: no field, containerResource.container, containerResource.name, containerResource.value.type, etc" style="width:100%;" >}}
+{{< img src="containers/explorer/crd_groupby_1.png" alt="Indexing Configuration: A targets object[] array, with 'Group by' drop down options: no field, containerResource.container, containerResource.name, containerResource.value.type, etc" style="width:100%;" >}}
 
 For arrays of objects, two group-by strategies are available:
 
