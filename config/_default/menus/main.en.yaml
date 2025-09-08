@@ -2857,11 +2857,16 @@ menu:
       parent: private_actions
       identifier: run_script
       weight: 202
+    - name: Update the Private Action Runner
+      url: actions/private_actions/update_PAR/
+      parent: private_actions
+      identifier: update_PAR
+      weight: 203
     - name: Private Action Credentials
       url: actions/private_actions/private_action_credentials/
       parent: private_actions
       identifier: private_actions_creds
-      weight: 203
+      weight: 204
     - name: Cloudcraft
       url: datadog_cloudcraft/
       pre: cloudcraft
