@@ -152,7 +152,8 @@ Arithmetic Operations
 FROM products {{< /code-block >}}
 
 `INTERVAL value unit`
-  : Interval representing a time duration specified in a given unit. Supported units:<br>- `milliseconds` / `millisecond`<br>- `seconds` / `second`<br>- `minutes` / `minute`<br>- `hours` / `hour`<br>- `days` / `day`
+: Interval representing a time duration specified in a given unit.
+Supported units:<br>- `milliseconds` / `millisecond`<br>- `seconds` / `second`<br>- `minutes` / `minute`<br>- `hours` / `hour`<br>- `days` / `day`
 
 ## Data types
 
