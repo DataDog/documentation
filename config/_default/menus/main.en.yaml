@@ -1197,6 +1197,11 @@ menu:
       identifier: ddsql_reference
       parent: essentials_heading
       weight: 110000
+    - name: Dataset Directory
+      url: ddsql_reference/dataset_directory/
+      identifier: ddsql_reference_dataset_directory
+      parent: ddsql_reference
+      weight: 1
     - name: CoScreen
       url: coscreen/
       pre: coscreen
