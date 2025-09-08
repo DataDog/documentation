@@ -48,12 +48,12 @@ The following AI clients are compatible with the Datadog MCP Server.
 | Client | Developer | Notes |
 |--------|------|------|
 | [Cursor][8] | Anysphere | Datadog [Cursor & VS Code extension](#connect-in-cursor-and-vs-code) recommended. |
-| [Claude Code][5]<br/>[Claude&nbsp;Desktop][6] | Anthropic | Claude Desktop: Limited support for remote authentication. Use [local binary authentication](#connect-to-the-datadog-mcp-server) as needed. |
+| [Claude Code][5]<br/>[Claude&nbsp;Desktop][6] | Anthropic | Claude Desktop: Limited support for remote authentication. Use [local binary authentication](?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
 | [Codex CLI][7] | OpenAI | |
 | [VS Code][11] | Microsoft | Datadog [Cursor & VS Code extension](#connect-in-cursor-and-vs-code) recommended. |
 | [Goose][9] | Block | |
-| [Q CLI][10] | Amazon | Limited support for remote authentication. Use [local binary authentication](#connect-to-the-datadog-mcp-server) as needed. |
-| [Cline][18] | Cline Bot | Limited support for remote authentication. Use [local binary authentication](#connect-to-the-datadog-mcp-server) as needed. |
+| [Q CLI][10] | Amazon | Limited support for remote authentication. Use [local binary authentication](?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
+| [Cline][18] | Cline Bot | Limited support for remote authentication. Use [local binary authentication](?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
 
 ## Requirements
 
@@ -206,7 +206,7 @@ The MCP Server uses OAuth 2.0 for [authentication][2]. If you cannot go through 
     npx @modelcontextprotocol/inspector
     ```
 2. In the inspector's web UI, for **Transport Type**, select **Streamable HTTP**.
-3. For **URL**, enter the [MCP Server URL](#connect-to-the-datadog-mcp-server) for your regional Datadog site.
+3. For **URL**, enter the [MCP Server URL](?tab=remoteauthentication#connect-in-supported-ai-clients) for your regional Datadog site.
 4. Click **Connect**, then go to **Tools** > **List Tools**.
 5. Check if the [available tools](#available-tools) appear.
 
