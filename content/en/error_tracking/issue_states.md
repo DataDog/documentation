@@ -55,7 +55,7 @@ To exclude an issue, click its status and choose **EXCLUDED** in the dropdown me
 
 {{< img src="error_tracking/issue-states-excluded.png" alt="Excluded in issue status dropdown" style="width:100%;" >}}
 
-To restart the error collection of an excluded issue, choose a status other than **EXCLUDED**.
+To resume collecting errors for an excluded issue, select any status other than **EXCLUDED**.
 
 
 ## Issue history
