@@ -932,15 +932,15 @@ Is searchable
 **Provided values**: on, off
 
 Show sort options
-: Show Sort Options.<br>
+: Adds a **Sort** button to the table that gives users sorting options.<br>
 **Provided values**: on, off
 
 Show column options
-: Displays a sorting option in the table header for app viewers to modify sorting options.<br>
+: Adds a **Columns** button to the table for displaying, hiding, or reorganizing table columns.<br>
 **Provided values**: on, off
 
 Has date range filter
-: Adds a date range picker to the table header for filtering.<br>
+: Adds a date range filter to the table.<br>
 **Provided values**: on, off
 
 Is Visible
