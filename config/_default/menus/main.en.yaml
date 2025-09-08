@@ -4761,7 +4761,7 @@ menu:
       identifier: llm_obs_submit_evaluations
       weight: 404
     - name: Experiments
-      url: llm_observability/experiments_preview
+      url: llm_observability/experiments
       parent: llm_obs
       identifier: llm_obs_experiments
       weight: 5
