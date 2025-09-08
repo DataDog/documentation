@@ -234,7 +234,7 @@ Additional flags, like `--service` and `--env`, can be used to set the service a
 
 <div class="alert alert-warning">Because the Azure Web App for Containers resource does not directly support sitecontainers, you should expect drift in your configuration.</div>
 
-If you don't already have Terraform set up, [install Terraform][250], create a new directory and make a file called `main.tf`.
+If you don't already have Terraform set up, [install Terraform][250], create a new directory, and make a file called `main.tf`.
 
 Then, add the following to your Terraform configuration, updating it as necessary based on your needs:
 
