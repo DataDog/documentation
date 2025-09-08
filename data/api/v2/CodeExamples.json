@@ -657,6 +657,13 @@
       "description": "Create an incident type returns \"CREATED\" response"
     }
   ],
+  "CreateIncidentNotificationTemplate": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Create incident notification template returns \"Created\" response"
+    }
+  ],
   "UpdateIncidentIntegration": [
     {
       "group": "incidents",
@@ -676,6 +683,13 @@
       "group": "incidents",
       "suffix": "",
       "description": "Update an incident type returns \"OK\" response"
+    }
+  ],
+  "UpdateIncidentNotificationTemplate": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Update incident notification template returns \"OK\" response"
     }
   ],
   "CreateAPIKey": [
