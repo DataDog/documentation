@@ -35,7 +35,7 @@ The **Sleep** action pauses the execution of the workflow for a specified durati
 
 ## For loop
 
-The **For loop** action allows you to execute a set of actions iteratively for each item in a given input list. For loops accept an input list of up to 2000 items. You can perform many different operations within a for loop, including configuring error paths for individual iterations that fail.
+The **For loop** action allows you to execute a set of actions iteratively for each item in a given input list. For loops accept an input list of up to 2000 items. You can perform many different operations within a for loop, including configuring error paths and updating variables.
 
 In the example below, a for loop iterates over a list of incidents and sends a Slack message for any incident that is more than a week old.
 
@@ -47,10 +47,28 @@ To add a for loop to your workflow:
 1. Click the loop step and enter an **Input list** for the step to iterate over. You can enter a custom list or use a workflow variable.
 1. Inside the loop frame, click the (**+**) icon to add a step to the loop.
 1. Configure the looped action. To access the current value in the input list, use the `{{Current.Value}}` variable. To access the index of the current value, use `{{Current.Index}}`.
-1. Add and configure any additional steps you need to loop.
+1. Add and configure any additional steps you need to loop. You can use an if statement and break action to exit your loop early.
 1. **Save** and **Publish** the workflow.
 
 When a run completes, the workflow enters **Debug** mode. Select a step within the loop to see a list of **All**, **Failed**, or **Successful** iterations for that step. Select an iteration to see the output or the error message.
+
+## While loop
+
+The **While loop** action allows you to execute a set of actions iteratively based on a set of conditions, perfect for automation patterns where the number of repetitions isn't known in advance. While loops run a maximum of 2000 iterations. You can perform many different operations with a while loop, including pagination, polling for progress, and retrying until success.
+
+In the example below, a while loop is used to paginate the AWS S3 List Buckets API and send an email with all the buckets.
+
+{{< img src="service_management/workflows/iteration3.png" alt="A workflow with a while loop. The loop paginates the AWS S3 List Buckets API to be used in an App." style="width:100%;" >}}
+
+To add a while loop to your workflow:
+1. Click the plus (**+**) icon on your workflow canvas to open the action catalog.
+1. Search for and select the **While loop** step.
+1. Click the loop step and define the condition that the While loop will evaluate before each iteration. The loop continues if the condition is true, and stops when it evaluates to false.
+1. Inside the loop frame, click the (**+**) icon to add a step to the loop.
+1. Configure the looped action. To access the index of the current value, use `{{Current.Index}}`.
+1. Add and configure any additional steps you need to loop. You can use an if statement and break action to exit your loop early.
+1. **Save** and **Publish** the workflow.
+When a run completes, the workflow enters **Debug** mode. Select a step within the loop to see a list of **All**, **Failed**, or **Successful** iterations for that step. Select an iteration to see the output or the error message. Select the While Loop step and a specific index to see the evaluated condition.
 
 ## Further Reading
 
