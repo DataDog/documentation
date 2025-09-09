@@ -172,7 +172,7 @@ agents:
 ```
 
 3. Create a new `values-gpu.yaml` file with an affinity selector for GPU nodes and the corresponding GPU configuration. This file includes the necessary configuration changes[3] to ensure that it joins the existing cluster agents.
-4. 
+   
 Example snippet from values-gpu.yaml configuration file: 
 ```
 # GPU-specific values-gpu.yaml (for GPU nodes)
