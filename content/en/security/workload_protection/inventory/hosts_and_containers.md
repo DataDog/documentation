@@ -3,7 +3,7 @@ title: Hosts and Containers
 disable_toc: false
 ---
 
-The [Hosts and Containers][1] inventory in Datadog Workload Protection provides a unified visibility layer for host-level agent deployment, configuration health, and security feature status. 
+The [Hosts and Containers][1] inventory in Datadog Workload Protection provides a unified view of host-level agent deployment, configuration health, and security feature status. 
 
 **Hosts and Containers** enables DevSecOps teams to verify whether the following protections are properly deployed and running across environments:
 
@@ -17,11 +17,11 @@ The [Hosts and Containers][1] inventory in Datadog Workload Protection provides 
 
 ## Use cases
 
-Here are some common DevSecOps use cases for the [Hosts and Containers][1] inventory feature.
+The [Hosts and Containers][1] inventory supports several common DevSecOps use cases.
 
 ### Assess coverage status
 
-To identify hosts where runtime threat detection is not configured, do the following:
+To identify hosts where runtime threat detection is not configured:
 
 1. In [Hosts and Containers][1], set the following facets to **false**:
    - **Workload Protection Enabled**
@@ -33,48 +33,48 @@ To identify hosts where runtime threat detection is not configured, do the follo
 2. For remediation guidance, hover over the icon for a feature and click **Configure**.
 
 <div class="alert alert-info">
-Filter by <b>Containers VM Enabled: true</b> to ensure scanning is applied to ephemeral container workloads too.
+Filter by <b>Containers VM Enabled: true</b> to ensure scanning is also applied to ephemeral container workloads.
 </div>
 
 ### Validate Agent health
 
-To validate Agent health, do the following:
+To validate Agent health:
 
 1. In the **Agent Version** column, look for older versions identified with yellow labels.
    
-   Yellow labels identify that these versions might not support all security features. 
+   Yellow labels indicate versions that might not support all security features.
 2. Click a version label (for example, 7.69.1), and select **Filter by agent_version:[number]**. 
    This isolates all hosts running that version. 
 3. Outside of [Hosts and Containers][1], check each Agent host for upgrade readiness and [schedule upgrades accordingly][5].
 
 ### Detect misconfigurations
 
-Hosts without CSM Misconfigurations enabled can't surface IAM, logging, or encryption misconfigurations. Misconfiguration checks are critical for CIS Benchmarks or NIST-aligned cloud security posture management.
+Hosts without CSM Misconfigurations enabled can't surface IAM, logging, or encryption misconfigurations. Misconfiguration checks are critical for CIS Benchmarks and NIST-aligned cloud security posture management.
 
-To see if posture checks are enabled for a host, do the following:
+To check whether posture checks are enabled for a host:
 
 1. In [Hosts and Containers][1], set the **Misconfigurations Enabled** facet to **false**.
 
-   The hosts and containers without CSM Misconfigurations enabled are shown with an orange icon. 
+   The hosts and containers without CSM Misconfigurations enabled are indicated by an orange icon. 
 2. For remediation guidance, hover over the **CSM Misconfigurations** icon and click **Configure**.
 
 ### Cluster-level tracking
 
-The **Cluster Name** column links hosts to logical infrastructure boundaries like Kubernetes clusters. You can filter on a cluster by clicking its name and selecting **Filter by cluster_name:[name]**.
+The **Cluster Name** column links hosts to logical infrastructure boundaries like Kubernetes clusters. Filter on a cluster by clicking its name and selecting **Filter by cluster_name:[name]**.
 
-Filtering on a cluster confirms whether protections are applied uniformly. This helps prevent misalignment between environments or inconsistent deployments by region.
+Filtering on a cluster confirms whether protections are applied uniformly. This ensures protections are applied consistently across environments and regions.
 
 ### Prioritize response
 
-[Hosts and Containers][1] can be used when investigating alerts or during incident triage. Use the feature icon panel to spot protection gaps. 
+[Hosts and Containers][1] supports investigations and incident triage. Use the feature icon panel to spot protection gaps. 
 
 Typically, hosts missing critical features like **Workload Protection** or **Host/Container Vulnerability Scanning** are triaged first. 
 
-Hover over a feature icon and click **Configure** to see remediation steps for all feature gaps. This let's you perform triage without context switching.
+Hover over a feature icon and click **Configure** to see remediation steps for all feature gaps. This enables triage without context switching.
 
 ### Compliance evidence
 
-[Hosts and Containers][1] serves as a live audit view for workload security posture. Filters such as **Workload Protection Enabled** and **Agent Version** demonstrate control coverage to auditors for frameworks like SOC 2, PCI DSS, or FedRAMP.
+[Hosts and Containers][1] provides a live audit view for workload security posture. Filters such as **Workload Protection Enabled** and **Agent Version** demonstrate control coverage for frameworks such as SOC 2, PCI DSS, or FedRAMP.
 
 
 [1]: https://app.datadoghq.com/security/workload-protection/inventory/hosts
