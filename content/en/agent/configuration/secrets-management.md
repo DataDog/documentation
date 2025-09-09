@@ -130,7 +130,7 @@ Datadog recommends using the [instance profile method][1006] of retrieving secre
 The AWS System Manager Parameter Store supports a hierachical model. For example, assuming the following AWS System Manager Parameter Store paths:
 
 ```sh
-/DatadogAgent/Production/ParameterKey1 = ParameterStringValue1
+/DatadogAgent/Production/ApiKey = < your api key >
 /DatadogAgent/Production/ParameterKey2 = ParameterStringValue2
 /DatadogAgent/Production/ParameterKey3 = ParameterStringValue3
 ```
@@ -144,7 +144,7 @@ secret_backend_config:
   aws_session:
     aws_region: us-east-1
 
-api_key: "ENC[/path/to/your/api/key]"
+api_key: "ENC[/DatadogAgent/Production/ApiKey]"
 property1: "ENC[/DatadogAgent/Production/ParameterKey1]"
 property2: "ENC[/DatadogAgent/Production/ParameterKey2]"
 ```
@@ -228,6 +228,10 @@ path "<your mount path>/data/<additional subpath>" {
   capabilities = ["read"]
 }
 
+/*
+We need access to mount information to check the Secrets Engine version
+number. If access isn't granted, version 1 is assumed.
+*/
 path "sys/mounts" {
   capabilities = ["read"]
 }
@@ -315,7 +319,7 @@ secret_backend_config:
 
 {{% tab "YAML File Backend" %}}
 
-**Note**: Only one level of YAML depth is supported (for example, `{key: value}`)
+**Note**: Only one level of YAML depth is supported (for example, `key: value`)
 
 ##### Datadog.yaml Configuration
 
