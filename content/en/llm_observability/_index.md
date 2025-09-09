@@ -26,6 +26,10 @@ further_reading:
   text: "Abusing AI infrastructure: How mismanaged credentials and resources expose LLM applications"
 ---
 
+{{< learning-center-callout header="Try Getting Started with LLM Observability in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/llm-obs-getting-started">}}
+  Learn how to monitor your LLM application's performance, costs, traces, token usage, and errors to quickly identify and resolve issues.
+{{< /learning-center-callout >}}
+
 ## Overview
 
 With LLM Observability, you can monitor, troubleshoot, and evaluate your LLM-powered applications, such as chatbots. You can investigate the root cause of issues, monitor operational performance, and evaluate the quality, privacy, and safety of your LLM applications.
