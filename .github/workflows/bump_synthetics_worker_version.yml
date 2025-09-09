@@ -9,7 +9,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
-    uses: Datadog/documentation/.github/workflows/version_getter_shared.yml@heston/dynamic-action-version
+    uses: Datadog/documentation/.github/workflows/version_getter_shared.yml@fc972275dd6ac5ac1e519864a4e8ff25778f66af
     with:
       url: https://ddsynthetics-windows.s3.amazonaws.com/installers.json
       file-name: synthetics_worker_versions.json
