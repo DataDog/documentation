@@ -9,21 +9,21 @@ further_reading:
 
 The [Serverless][1] view in Workload Protection [Inventory][2] provides real-time visibility into the security posture for serverless containerization workloads such as AWS Fargate ECS tasks. 
 
-**Serverless** shows each task ARN, agent version, cluster name, and enabled protection features. It highlights tasks without coverage or with unsupported agent versions, helping teams identify drift and misconfigurations that reduce visibility.
+The Serverless view shows each task ARN, Datadog Agent version, cluster name, and enabled protection features. It highlights tasks without coverage or with unsupported Agent versions, helping teams identify drift and misconfigurations that reduce visibility.
 
 This view helps ensure that all serverless containers launched using CI/CD pipelines are protected by security policies at runtime. It enables early detection of drift, version mismatches, and failed instrumentation, which are critical risks in high-churn environments.
 
 ## Key use cases
 
-Here are some examples of how **Serverless** helps secure serverless environments:
+Here are some examples of how the Serverless view in Workload Protection Inventory helps secure serverless environments:
 
 - **Validate protection enforcement in CI/CD:** 
-  - Use **Serverless** to confirm that workloads launched using infrastructure-as-code (IaC) templates or automated pipelines have the correct security coverage. 
+  - Use the Serverless view to confirm that workloads launched using infrastructure-as-code (IaC) templates or automated pipelines have the correct security coverage. 
   - Filter for **Not Configured** or **Agent Version** to pinpoint deployments where instrumentation wasn't set up. This enables feedback into IaC modules or base container images.
 - **Detect drift across clusters:** 
   - Filter tasks using **Cluster Name** to detect when only some tasks in a cluster are instrumented with Workload Protection. This is a common sign of inconsistent task definitions or container image drift. Comparing coverage across clusters helps prevent partial rollout of security controls.
 - **Enforce Agent version consistency:** 
-  - Filter using **Agent Version** to identify stale deployments. Outdated agents might lack recent detection rules or bug fixes. Teams can respond with pipeline updates or enforcement rules to maintain alignment with the approved version baseline.
+  - Filter using **Agent Version** to identify stale deployments. Outdated Agents might lack recent detection rules or bug fixes. Teams can respond with pipeline updates or enforcement rules to maintain alignment with the approved version baseline.
 - **Enable scalable runtime policy deployment:** 
   - Filter using **Workload Protection Status** to see which tasks have Workload Protection **Configured** or **Not Configured**. 
   - For tasks without Workload Protection, hover over the icon in the **Features** column and select **Configure**. Next, follow the steps to perform a manual or automatic installation.
