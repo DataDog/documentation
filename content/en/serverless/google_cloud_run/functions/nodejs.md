@@ -1,5 +1,5 @@
 ---
-title: Instrumenting a Node.js Cloud Run Container with Sidecar
+title: Instrumenting a Node.js Cloud Run Function
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 20
@@ -12,7 +12,7 @@ further_reading:
   text: 'Correlating Node.js Logs and Traces'
 ---
 
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/sidecar/node">available on GitHub</a>.</div>
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run-functions/node">available on GitHub</a>.</div>
 
 ## Setup
 
@@ -31,11 +31,6 @@ const tracer = require('dd-trace').init({
 });
 {{< /code-block >}}
 
-   3. Set the following environment variable to specify that the `dd-trace/init` module is required when the Node.js process starts:
-   {{< code-block lang="dockerfile" disable_copy="false" >}}
-ENV NODE_OPTIONS="--require dd-trace/init"
-{{< /code-block >}}
-
    For more information, see [Tracing Node.js applications][1].
 
 2. **Install serverless-init as a sidecar**.
@@ -46,12 +41,8 @@ ENV NODE_OPTIONS="--require dd-trace/init"
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
-   {{% tab "YAML Deploy" %}}
-   {{% gcr-install-sidecar-yaml language="nodejs" %}}
-   {{% /tab %}}
-
    {{% tab "Custom" %}}
-   {{% gcr-install-sidecar-custom %}}
+   {{% gcr-install-sidecar-custom function="true" %}}
    {{% /tab %}}
 
    {{< /tabs >}}
@@ -60,7 +51,7 @@ ENV NODE_OPTIONS="--require dd-trace/init"
 
    In the previous step, you created a shared volume. You may have also set the `DD_SERVERLESS_LOG_PATH` environment variable, which defaults to `/shared-volume/logs/app.log`.
 
-   In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. In Node.js, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `winston`:
+   In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. In Node.js, Datadog recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `winston`:
    {{< code-block lang="javascript" disable_copy="false" >}}
 const tracer = require('dd-trace').init({
   logInjection: true,
@@ -90,9 +81,9 @@ logger.info(`Hello world!`);
 
 5. **Send custom metrics**.
 
-   To send custom metrics, [view code examples][3]. In serverless, only the *distribution* metric type is supported.
+   To send custom metrics, [view code examples][3]. In Serverless Monitoring, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars instrumentationMethod="sidecar" language="nodejs" %}}
+{{% gcr-env-vars instrumentationMethod="sidecar" language="nodejs" function="true" %}}
 
 ## Troubleshooting
 
@@ -105,3 +96,4 @@ logger.info(`Hello world!`);
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
 [2]: /tracing/other_telemetry/connect_logs_and_traces/nodejs/
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=nodejs#code-examples
+

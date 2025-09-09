@@ -1,5 +1,5 @@
 ---
-title: Instrumenting a .NET Cloud Run Container with Sidecar
+title: Instrumenting a .NET Cloud Run Function
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 50
@@ -12,32 +12,21 @@ further_reading:
     text: 'Correlating .NET Logs and Traces'
 ---
 
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/sidecar/dotnet">available on GitHub</a>.</div>
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run-functions/dotnet">available on GitHub</a>.</div>
 
 ## Setup
 
-1. **Install the Datadog .NET tracer** in your Dockerfile.
+1. **Install the Datadog .NET tracer**.
 
-   Because GitHub requests are rate limited, you must pass a GitHub token saved in the environment variable `GITHUB_TOKEN` as a [Docker build secret][1] `--secret id=github-token,env=GITHUB_TOKEN`.
+   Add the `Datadog.Trace.Bundle` [NuGet package][1] to your application.
 
-   {{< tabs >}}
-   {{% tab "Linux/AMD64" %}}
-{{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
-RUN --mount=type=secret,id=github-token,env=GITHUB_TOKEN \
-    chmod +x /app/dotnet.sh && /app/dotnet.sh
+   Set the following environment variables to enable automatic instrumentation:
+   {{< code-block lang="text" disable_copy="false" >}}
+CORECLR_ENABLE_PROFILING=1
+CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+CORECLR_PROFILER_PATH=/workspace/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so
+DD_DOTNET_TRACER_HOME=/workspace/datadog
 {{< /code-block >}}
-   {{% /tab %}}
-
-   {{% tab "Alpine" %}}
-{{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
-# For alpine use datadog-dotnet-apm-2.57.0-musl.tar.gz
-ARG TRACER_VERSION
-ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v${TRACER_VERSION}/datadog-dotnet-apm-${TRACER_VERSION}.tar.gz /tmp/datadog-dotnet-apm.tar.gz
-
-RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /dd_tracer/dotnet/ && rm /tmp/datadog-dotnet-apm.tar.gz
-{{< /code-block >}}
-   {{% /tab %}}
-   {{< /tabs >}}
 
    For more information, see [Tracing .NET applications][2].
 
@@ -49,12 +38,8 @@ RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
-   {{% tab "YAML Deploy" %}}
-   {{% gcr-install-sidecar-yaml language="csharp" %}}
-   {{% /tab %}}
-
    {{% tab "Custom" %}}
-   {{% gcr-install-sidecar-custom %}}
+   {{% gcr-install-sidecar-custom function="true" %}}
    {{% /tab %}}
 
    {{< /tabs >}}
@@ -63,7 +48,7 @@ RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /
 
    In the previous step, you created a shared volume. You may have also set the `DD_SERVERLESS_LOG_PATH` environment variable, which defaults to `/shared-volume/logs/app.log`.
 
-   In this step, configure your logging library to write logs to that file set in `DD_SERVERLESS_LOG_PATH`. In .NET, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `Serilog`:
+   In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. In .NET, Datadog recommends writing logs in JSON format. For example, you can use a third-party logging library such as `Serilog`:
    {{< code-block lang="csharp" disable_copy="false" >}}
 using Serilog;
 
@@ -89,9 +74,9 @@ logger.LogInformation("Hello World!");
 
 5. **Send custom metrics**.
 
-   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
+   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In Serverless Monitoring, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars instrumentationMethod="sidecar" language="csharp" %}}
+{{% gcr-env-vars instrumentationMethod="sidecar" language="csharp" function="true" %}}
 
 ## Troubleshooting
 
@@ -101,7 +86,7 @@ logger.LogInformation("Hello World!");
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.docker.com/build/building/secrets/
+[1]: https://www.nuget.org/packages/Datadog.Trace.Bundle
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=linux
 [3]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
 [4]: /developers/dogstatsd/?tab=dotnet#install-the-dogstatsd-client
