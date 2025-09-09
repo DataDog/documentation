@@ -31,4 +31,4 @@ See the [Setup documentation][1] for instructions on how to set up Datadog's GPU
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /gpu_monitoring/setup
+[1]: /gpu_monitoring/quickstart
