@@ -9,7 +9,7 @@ jobs:
         permissions:
             contents: read
             pull-requests: write
-        uses: Datadog/documentation/.github/workflows/version_getter_shared.yml@fc972275dd6ac5ac1e519864a4e8ff25778f66af
+        uses: Datadog/documentation/.github/workflows/version_getter_shared.yml@e135a6b659590a1a4cd1cf5e05e6939aa6d4d805
         with:
             url: https://api.datadoghq.com/api/v2/on-prem-management-service/runner/latest-image
             file-name: private_action_runner_version.json
