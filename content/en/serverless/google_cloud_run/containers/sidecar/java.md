@@ -44,9 +44,11 @@ implementation 'com.datadoghq:dd-trace-api:DD_TRACE_JAVA_VERSION_HERE'
       {{% /tab %}}
       {{< /tabs >}}
 
+      See [dd-trace-java releases][1] for the latest tracer version.
+
    3. Add the `@Trace` annotation to any method you want to trace.
 
-   For more information, see [Tracing Java Applications][1].
+   For more information, see [Tracing Java Applications][2].
 
 2. **Install serverless-init as a sidecar**.
 
@@ -89,15 +91,15 @@ logger.info("Hello World!");
 </Configuration>
 {{< /code-block >}}
 
-   Datadog recommends setting the environment variable `DD_SOURCE=java` in your sidecar container to enable advanced Datadog log parsing.
+   Datadog recommends setting the environment variables `DD_LOGS_INJECTION=true` (in your main container) and `DD_SOURCE=java` (in your sidecar container) to enable advanced Datadog log parsing.
 
-   For more information, see [Correlating Java Logs and Traces][2].
+   For more information, see [Correlating Java Logs and Traces][3].
 
 4. {{% gcr-service-label %}}
 
 5. **Send custom metrics**.
 
-   To send custom metrics, [install the DogStatsD client][3] and [view code examples][4].
+   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
 {{% gcr-env-vars instrumentationMethod="sidecar" language="java" %}}
 
@@ -109,7 +111,8 @@ logger.info("Hello World!");
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
-[2]: /tracing/other_telemetry/connect_logs_and_traces/java/
-[3]: /developers/dogstatsd/?tab=java#install-the-dogstatsd-client
-[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=java#code-examples
+[1]: https://github.com/DataDog/dd-trace-java/releases
+[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+[3]: /tracing/other_telemetry/connect_logs_and_traces/java/
+[4]: /developers/dogstatsd/?tab=java#install-the-dogstatsd-client
+[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=java#code-examples

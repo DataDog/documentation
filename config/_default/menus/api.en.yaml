@@ -2397,6 +2397,19 @@ menu:
       url: /api/latest/security-monitoring/
       identifier: security-monitoring
       generated: true
+    - name: Get a job's hist signals
+      url: '#get-a-jobs-hist-signals'
+      identifier: security-monitoring-get-a-jobs-hist-signals
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringHistsignalsByJobId
+        unstable:
+          - v2
+        order: 43
     - name: Cancel a historical job
       url: '#cancel-a-historical-job'
       identifier: security-monitoring-cancel-a-historical-job
@@ -2475,6 +2488,45 @@ menu:
         unstable:
           - v2
         order: 20
+    - name: Get a hist signal's details
+      url: '#get-a-hist-signals-details'
+      identifier: security-monitoring-get-a-hist-signals-details
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringHistsignal
+        unstable:
+          - v2
+        order: 41
+    - name: Search hist signals
+      url: '#search-hist-signals'
+      identifier: security-monitoring-search-hist-signals
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchSecurityMonitoringHistsignals
+        unstable:
+          - v2
+        order: 40
+    - name: List hist signals
+      url: '#list-hist-signals'
+      identifier: security-monitoring-list-hist-signals
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityMonitoringHistsignals
+        unstable:
+          - v2
+        order: 42
     - name: Change the related incidents of a security signal
       url: '#change-the-related-incidents-of-a-security-signal'
       identifier: security-monitoring-change-the-related-incidents-of-a-security-signal
@@ -2690,6 +2742,42 @@ menu:
           - v2
         operationids:
           - DeleteSecurityMonitoringSuppression
+        unstable: []
+        order: 0
+    - name: Validate a suppression rule
+      url: '#validate-a-suppression-rule'
+      identifier: security-monitoring-validate-a-suppression-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateSecurityMonitoringSuppression
+        unstable: []
+        order: 0
+    - name: Get suppressions affecting a specific rule
+      url: '#get-suppressions-affecting-a-specific-rule'
+      identifier: security-monitoring-get-suppressions-affecting-a-specific-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSuppressionsAffectingRule
+        unstable: []
+        order: 0
+    - name: Get suppressions affecting future rule
+      url: '#get-suppressions-affecting-future-rule'
+      identifier: security-monitoring-get-suppressions-affecting-future-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSuppressionsAffectingFutureRule
         unstable: []
         order: 0
     - name: Create a suppression rule
@@ -5083,7 +5171,7 @@ menu:
         operationids:
           - GetAwsOnDemandTask
         unstable: []
-        order: 6
+        order: 7
     - name: Post an AWS on demand task
       url: '#post-an-aws-on-demand-task'
       identifier: agentless-scanning-post-an-aws-on-demand-task
@@ -5095,7 +5183,7 @@ menu:
         operationids:
           - CreateAwsOnDemandTask
         unstable: []
-        order: 7
+        order: 8
     - name: Get AWS On Demand tasks
       url: '#get-aws-on-demand-tasks'
       identifier: agentless-scanning-get-aws-on-demand-tasks
@@ -5107,7 +5195,7 @@ menu:
         operationids:
           - ListAwsOnDemandTasks
         unstable: []
-        order: 5
+        order: 6
     - name: Patch AWS Scan Options
       url: '#patch-aws-scan-options'
       identifier: agentless-scanning-patch-aws-scan-options
@@ -5119,7 +5207,19 @@ menu:
         operationids:
           - UpdateAwsScanOptions
         unstable: []
-        order: 3
+        order: 4
+    - name: Get AWS scan options
+      url: '#get-aws-scan-options'
+      identifier: agentless-scanning-get-aws-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAwsScanOptions
+        unstable: []
+        order: 2
     - name: Delete AWS Scan Options
       url: '#delete-aws-scan-options'
       identifier: agentless-scanning-delete-aws-scan-options
@@ -5131,7 +5231,7 @@ menu:
         operationids:
           - DeleteAwsScanOptions
         unstable: []
-        order: 4
+        order: 5
     - name: Post AWS Scan Options
       url: '#post-aws-scan-options'
       identifier: agentless-scanning-post-aws-scan-options
@@ -5143,10 +5243,10 @@ menu:
         operationids:
           - CreateAwsScanOptions
         unstable: []
-        order: 2
-    - name: Get AWS Scan Options
-      url: '#get-aws-scan-options'
-      identifier: agentless-scanning-get-aws-scan-options
+        order: 3
+    - name: List AWS Scan Options
+      url: '#list-aws-scan-options'
+      identifier: agentless-scanning-list-aws-scan-options
       parent: agentless-scanning
       generated: true
       params:
@@ -6689,6 +6789,58 @@ menu:
           - GetDomainAllowlist
         unstable: []
         order: 1
+    - name: Error Tracking
+      url: /api/latest/error-tracking/
+      identifier: error-tracking
+      generated: true
+    - name: Update the state of an issue
+      url: '#update-the-state-of-an-issue'
+      identifier: error-tracking-update-the-state-of-an-issue
+      parent: error-tracking
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIssueState
+        unstable: []
+        order: 3
+    - name: Update the assignee of an issue
+      url: '#update-the-assignee-of-an-issue'
+      identifier: error-tracking-update-the-assignee-of-an-issue
+      parent: error-tracking
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIssueAssignee
+        unstable: []
+        order: 4
+    - name: Get the details of an error tracking issue
+      url: '#get-the-details-of-an-error-tracking-issue'
+      identifier: error-tracking-get-the-details-of-an-error-tracking-issue
+      parent: error-tracking
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIssue
+        unstable: []
+        order: 2
+    - name: Search error tracking issues
+      url: '#search-error-tracking-issues'
+      identifier: error-tracking-search-error-tracking-issues
+      parent: error-tracking
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchIssues
+        unstable: []
+        order: 1
     - name: Fastly Integration
       url: /api/latest/fastly-integration/
       identifier: fastly-integration
@@ -7256,6 +7408,71 @@ menu:
         unstable:
           - v2
         order: 20
+    - name: Update incident notification template
+      url: '#update-incident-notification-template'
+      identifier: incidents-update-incident-notification-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentNotificationTemplate
+        unstable:
+          - v2
+        order: 13
+    - name: Get incident notification template
+      url: '#get-incident-notification-template'
+      identifier: incidents-get-incident-notification-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentNotificationTemplate
+        unstable:
+          - v2
+        order: 12
+    - name: Delete a notification template
+      url: '#delete-a-notification-template'
+      identifier: incidents-delete-a-notification-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentNotificationTemplate
+        unstable:
+          - v2
+        order: 14
+    - name: Create incident notification template
+      url: '#create-incident-notification-template'
+      identifier: incidents-create-incident-notification-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentNotificationTemplate
+        unstable:
+          - v2
+        order: 11
+    - name: List incident notification templates
+      url: '#list-incident-notification-templates'
+      identifier: incidents-list-incident-notification-templates
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentNotificationTemplates
+        unstable:
+          - v2
+        order: 10
     - name: Create an incident
       url: '#create-an-incident'
       identifier: incidents-create-an-incident
@@ -8278,6 +8495,58 @@ menu:
           - ListOpsgenieServices
         unstable: []
         order: 1
+    - name: Org Connections
+      url: /api/latest/org-connections/
+      identifier: org-connections
+      generated: true
+    - name: Update Org Connection
+      url: '#update-org-connection'
+      identifier: org-connections-update-org-connection
+      parent: org-connections
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrgConnections
+        unstable: []
+        order: 102
+    - name: Delete Org Connection
+      url: '#delete-org-connection'
+      identifier: org-connections-delete-org-connection
+      parent: org-connections
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrgConnections
+        unstable: []
+        order: 103
+    - name: Create Org Connection
+      url: '#create-org-connection'
+      identifier: org-connections-create-org-connection
+      parent: org-connections
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOrgConnections
+        unstable: []
+        order: 101
+    - name: List Org Connections
+      url: '#list-org-connections'
+      identifier: org-connections-list-org-connections
+      parent: org-connections
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgConnections
+        unstable: []
+        order: 100
     - name: Powerpack
       url: /api/latest/powerpack/
       identifier: powerpack

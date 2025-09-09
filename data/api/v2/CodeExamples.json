@@ -460,6 +460,27 @@
       "description": "Update a downtime returns \"OK\" response"
     }
   ],
+  "SearchIssues": [
+    {
+      "group": "error_tracking",
+      "suffix": "",
+      "description": "Search error tracking issues returns \"OK\" response"
+    }
+  ],
+  "UpdateIssueAssignee": [
+    {
+      "group": "error_tracking",
+      "suffix": "",
+      "description": "Update the assignee of an issue returns \"OK\" response"
+    }
+  ],
+  "UpdateIssueState": [
+    {
+      "group": "error_tracking",
+      "suffix": "",
+      "description": "Update the state of an issue returns \"OK\" response"
+    }
+  ],
   "CreateEvent": [
     {
       "group": "events",
@@ -636,6 +657,13 @@
       "description": "Create an incident type returns \"CREATED\" response"
     }
   ],
+  "CreateIncidentNotificationTemplate": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Create incident notification template returns \"Created\" response"
+    }
+  ],
   "UpdateIncidentIntegration": [
     {
       "group": "incidents",
@@ -655,6 +683,13 @@
       "group": "incidents",
       "suffix": "",
       "description": "Update an incident type returns \"OK\" response"
+    }
+  ],
+  "UpdateIncidentNotificationTemplate": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Update incident notification template returns \"OK\" response"
     }
   ],
   "CreateAPIKey": [
@@ -1018,6 +1053,20 @@
       "description": "Update a single service object returns \"OK\" response"
     }
   ],
+  "CreateOrgConnections": [
+    {
+      "group": "org_connections",
+      "suffix": "",
+      "description": "Create Org Connection returns \"OK\" response"
+    }
+  ],
+  "UpdateOrgConnections": [
+    {
+      "group": "org_connections",
+      "suffix": "",
+      "description": "Update Org Connection returns \"OK\" response"
+    }
+  ],
   "UpdateOrgConfig": [
     {
       "group": "organizations",
@@ -1276,6 +1325,13 @@
       "description": "Get a list of security signals returns \"OK\" response with pagination"
     }
   ],
+  "GetSuppressionsAffectingFutureRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Get suppressions affecting future rule returns \"OK\" response"
+    }
+  ],
   "EditSecurityMonitoringSignalAssignee": [
     {
       "group": "security_monitoring",
@@ -1363,6 +1419,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Validate a detection rule returns \"OK\" response"
+    }
+  ],
+  "ValidateSecurityMonitoringSuppression": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Validate a suppression rule returns \"OK\" response"
     }
   ],
   "CreateScanningGroup": [

@@ -244,13 +244,14 @@ Requests between Step Functions and Lambdas can be traced through many AWS manag
 
 #### Requirements
 
-| Runtime | Requirement |
-| ------- | ----------- |
-| Python  | Datadog Lambda Library for Python layer v107+ |
+| Runtime | Requirement                                    |
+| ------- |------------------------------------------------|
+| Python  | Datadog Lambda Library for Python layer v107+  |
+| Node.js | Datadog Lambda Library for Node.js layer v128+ |
 
 Your State Machine definition must use [JSONata][1] as the query language. To enable this, set your definition's top-level `QueryLanguage` field to `JSONata`.
 
-Merging Step Functions with Lambda traces through managed services is only supported for Python runtimes.
+Only Python and Node.js runtimes are supported for merging Step Functions with Lambda traces through managed services.
 
 #### EventBridge
 
