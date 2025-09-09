@@ -101,4 +101,3 @@ if __name__ == "__main__":
                 f.write('new_version=false')
         else:
             print("No new version detected")
-            print("new_version=false")
