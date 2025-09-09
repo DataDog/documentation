@@ -318,7 +318,7 @@ Para configurar el rastreador Java de Datadog con Quarkus Native, sigue los paso
    ./mvnw package -Dnative -Dquarkus.native.additional-build-args='-J-javaagent:/path/to/dd-java-agent.jar'
    ```
 3. (Opcional) Habilita la integración del generador de perfiles añadiendo el siguiente argumento:
-`-J-Ddd.profiling.enabled=true –-enable-monitoring=jfr`.
+`-J-Ddd.profiling.enabled=true --enable-monitoring=jfr`.
 
 [6]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 {{% /tab %}}
