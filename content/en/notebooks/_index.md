@@ -179,7 +179,7 @@ At the top of the notebook, you can see avatar images of all of the users curren
 
 Notebooks support template variables. Dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][5].
 
-<div class="alert alert-warning">Some Analysis features have limited or no support for template variable features. For more information, see <a href="/guide/template_variables_analysis_notebooks">Template Variable Support in Analysis Notebooks</a></div>
+<div class="alert alert-warning">Some Analysis features have limited or no support for template variables. For more information, see <a href="/guide/template_variables_analysis_notebooks">Template Variable Support in Analysis Notebooks</a></div>
 
 ### Time controls
 
