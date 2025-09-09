@@ -27,7 +27,7 @@ further_reading:
 ---
 
 {{< learning-center-callout header="Try Getting Started with LLM Observability in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/llm-obs-getting-started">}}
-  Learn how to monitor your LLM application's performance, costs, traces, token usage, and errors to quickly identify and resolve issues.
+  Learn how to monitor your LLM application's performance, costs, traces, token usage, and errors to identify and resolve issues.
 {{< /learning-center-callout >}}
 
 ## Overview
