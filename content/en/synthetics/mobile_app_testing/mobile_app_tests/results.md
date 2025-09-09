@@ -80,9 +80,9 @@ Every executed test step contains a screenshot of the step action, step action n
 
 ### Video replay
 
-Use video replay to help you diagnose test failures by revealing unexpected UI behavior and pop-ups that may have caused the issue.
+Use video replay to diagnose test failures by showing unexpected UI behavior or pop-ups that may have caused the issue.
 
-Click on individual test runs from the [Mobile Application test details page][11] to view detailed information in the side panel, including step duration, pass/fail status, and screenshots. Use the video replay tab to watch the complete test execution.
+Click on an individual test run from the [Mobile Application test details page][11] to view detailed information in the side panel, including step duration, pass/fail status, and screenshots. Use the **Video Replay** tab to watch the complete test execution.
 
 {{< img src="mobile_app_testing/video_replay.mp4" alt="Video Replay of a test run in Mobile App testing" video=true >}}
 
