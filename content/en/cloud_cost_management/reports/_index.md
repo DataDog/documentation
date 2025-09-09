@@ -87,7 +87,7 @@ Use filters to include only the specific costs you want to allocate, such as by 
 - **Share your report** by copying the URL or exporting it to CSV or PNG.
 - **Export report views to Dashboards** to track costs alongside other widgets.
 - **Schedule reports** to be automatically sent to your team. [Learn more about scheduling reports][11].
-- **Search saved reports** to find what you need.
+- **Search saved reports** to find what you need (available from main reports page only).
 
 ## Further reading
 
