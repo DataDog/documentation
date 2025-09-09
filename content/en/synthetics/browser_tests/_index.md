@@ -233,7 +233,7 @@ Step replay allows you to re-run one or more steps of your browser test directly
 <div class="alert alert-warning">
   <p>The current version of the extension <strong>does not have <a href="https://developer.chrome.com/docs/extensions/reference/api/debugger">Chrome's debugger permission</a> yet</strong>, as a result:</p>
   <ul>
-    <li><strong>JavaScript-based steps, and keystroke simulations</strong> are <strong>not yet available</strong>.</li>
+    <li><strong>JavaScript-based steps and keystroke simulations</strong> are <strong>not yet available</strong>.</li>
     <li>Certain steps (like <strong>click</strong> or <strong>hover</strong>) may behave <strong>differently</strong> than in a full Synthetic Monitoring test run.</li>
   </ul>
   <p>A version of the extension with Chrome's debugger permission is <strong>coming soon</strong>.</p>
