@@ -35,7 +35,7 @@ To identify hosts where runtime threat detection is not configured:
 2. For remediation guidance, hover over the icon for a feature and click **Configure**.
 
 <div class="alert alert-info">
-Filter by <b>Containers VM Enabled: true</b> to ensure scanning is also applied to ephemeral container workloads.
+Filter by <b>Containers VM Enabled: true</b> to ensure scanning is also applied to virtual machines.
 </div>
 
 ### Validate Agent health
