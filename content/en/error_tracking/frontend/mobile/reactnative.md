@@ -6,29 +6,28 @@ code_lang_weight: 60
 ---
 
 ## Overview 
-This page describes how to instrument your applications for [Error Tracking][1] with the React Native SDK. It also walks though enabling React Native Crash Reporting to get comprehensive crash reports with Real User Monitoring (RUM). With React Native Crash Reporting and Error Tracking, you can access:
+
+Enable React Native Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring. With this feature, you can access:
 
 -   Aggregated React Native crash dashboards and attributes
 -   Symbolicated React Native (JavaScript and native iOS or Android) crash reports
 -   Trend analysis with React Native Error Tracking
 
-
-The React Native SDK also supports the following services:
-
-- [CodePush][2]. For more information, see the [CodePush documentation][3].
-- [Expo][4]. For more information, see the [Expo documentation][5].
-
-
-The minimum supported version for the React Native SDK is React Native v0.63.4+. Compatibility with older versions is not guaranteed out-of-the-box.
+**Note**: In order to symbolicate your stack traces, you must manually upload your source maps and native debug symbols into Datadog.
 
 ## Setup
 
+If you have not set up the React Native SDK yet, follow the [in-app setup instructions][16] or see the [React Native setup documentation][17]. Then, follow the steps on this page to enable React Native Crash Reporting and Error Tracking.
+
+ 
+
+<!-- 
 ### Installation
 To install the React Native SDK using the command line, select the appropriate tab.
 
 {{< tabs >}}
 
-<!-- NPM -->
+
 {{% tab "NPM" %}}
 To install with NPM, run:
 
@@ -38,7 +37,7 @@ npm install @datadog/mobile-react-native
 
 {{% /tab %}}
 
-<!-- YARN -->
+
 {{% tab "Yarn" %}}
 To install with Yarn, run:
 
@@ -52,7 +51,7 @@ To install the React Native SDK for your specific operating system, select the a
 
 {{< tabs >}}
 
-<!-- Android -->
+
 {{% tab "Android" %}}
 
 To begin, ensure that your React Native version and Java version are compatible. Datadog recommends using a React Native version that is actively supported.
@@ -83,10 +82,8 @@ buildscript {
 }
 ```
 
-
 {{% /tab %}}
 
-<!-- iOS -->
 {{% tab "iOS" %}}
 Install the added pod:
 
@@ -94,10 +91,10 @@ Install the added pod:
 (cd ios && pod install)
 ```
 {{% /tab %}}
-{{< /tabs >}}
+{{< /tabs >}} -->
 
 
-### Specify application details in the UI
+### Step 1 - Specify application details in the UI
 
 1. In Datadog, navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][1].
 2. Choose `react-native` as the application type.
@@ -110,7 +107,7 @@ To ensure the safety of your data, you must use a client token. If you used only
 
 For more information about setting up a client token, see the [Client Token documentation][7].
 
-### Initialize the library with application context
+### Step 2- Initialize the library with application context
 
 {{< site-region region="us" >}}
 
@@ -320,7 +317,7 @@ export default function App() {
 
 <br>
 
-### Add Crash Reporting
+### Step 3 - Add Crash Reporting
 
 Update your initialization snippet to enable native JavaScript crash reporting:
 
@@ -338,7 +335,7 @@ config.nativeCrashReportEnabled = true; // enable native crash reporting
 
 Your crash reports appear in [**Error Tracking**][1].
 
-### Get deobfuscated stack traces
+### Step 4 - Get deobfuscated stack traces
 To symbolicate your stack traces, manually upload your native debug symbols and source maps into Datadog.
 
 #### How deobfuscation works
@@ -988,6 +985,8 @@ end
 [13]: https://reactnative.dev/docs/signed-apk-android#enabling-proguard-to-reduce-the-size-of-the-apk-optional
 [14]: https://plugins.gradle.org/plugin/com.datadoghq.dd-sdk-android-gradle-plugin
 [15]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
+[16]: https://app.datadoghq.com/rum/application/create
+[17]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/
 
 
 
