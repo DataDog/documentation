@@ -128,8 +128,6 @@ Resource labels are applied as tags to data <strong>directly associated</strong>
 <strong>Important:</strong> Tags do NOT cascade between parent and child resources. For example, labels on a Deployment are NOT automatically applied to logs from its child Pods. To tag pod logs, you must configure labels on the Pods themselves.
 </div>
 
-</div>
-
 #### Version requirements and feature availability
 
 <div style="overflow-x: auto;">
@@ -314,8 +312,6 @@ Resource annotations are applied as tags to data <strong>directly associated</st
 </ul>
 
 <strong>Important:</strong> Tags do NOT cascade between parent and child resources. For example, annotations on a Deployment are NOT automatically applied to logs from its child Pods. To tag pod logs, you must configure annotations on the Pods themselves.
-</div>
-
 </div>
 
 #### Version requirements and feature availability
