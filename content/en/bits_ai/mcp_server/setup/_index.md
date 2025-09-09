@@ -17,13 +17,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/openai-datadog-ai-devops-agent/"
   tag: "Blog"
   text: "Datadog + OpenAI: Codex CLI integration for AI‑assisted DevOps"
-- link: "https://youtu.be/yEG_X0NcEWY"
-  tag: "Video"
-  text: "Demo: Use Datadog MCP Server with Cursor and Claude Code"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/datadog-mcp-server/" >}}
-The Datadog MCP Server is in Preview. There is no charge for using the Datadog MCP Server during the Preview. If you're interested in this feature and need access, complete this form. Learn more about the MCP Server in the <a href="https://www.datadoghq.com/blog/datadog-remote-mcp-server/">Datadog blog</a> and this <a href="https://youtu.be/yEG_X0NcEWY">demo video</a>.
+The Datadog MCP Server is in Preview. There is no charge for using the Datadog MCP Server during the Preview. If you're interested in this feature and need access, complete this form. Learn more about the MCP Server on the <a href="https://www.datadoghq.com/blog/datadog-remote-mcp-server/">Datadog blog</a>.
 {{< /callout >}}
 
 <div class="alert alert-warning">
@@ -40,6 +37,10 @@ The Datadog MCP Server is in Preview. There is no charge for using the Datadog M
 Datadog's managed MCP Server acts as a bridge between your observability data in Datadog and AI agents that support the [Model Context Protocol (MCP)][1]. Providing structured access to relevant Datadog contexts, features, and tools, the MCP Server lets you query and retrieve observability insights directly from AI-powered clients such as Cursor, OpenAI Codex, Claude Code, or your own AI agent.
 
 This page provides instructions for connecting your AI agent to the Datadog MCP Server, lists the available tools, and includes example prompts.
+
+This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unmute for audio):
+
+{{< img src="bits_ai/mcp_server/mcp_cursor_demo_3.mp4" alt="Demo of Datadog MCP Server in Cursor and Claude Code" video="true" >}}
 
 ## Client compatibility
 
