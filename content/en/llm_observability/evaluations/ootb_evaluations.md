@@ -289,10 +289,9 @@ After instrumenting your application to send session-end spans, configure the ev
 
 1. Go to the **Goal Completeness** settings
 2. Configure the evaluation data:
-   - Select **spans** as the data type since Goal Completeness runs on individual spans.
-   - Choose the span name that corresponds to your session-end function (for example, `send_session_ended_span`).
+   - Select **spans** as the data type since Goal Completeness runs on LLM spans which contains the full session history.
+   - Choose the tag name associated with the span that corresponds to your session-end function (for example, `send_session_ended_span`).
    - In the **tags** section, specify the tag you configured in your instrumentation (for example, `session_status:completed`).
-   - Set the **sampling percentage** to 100% to ensure all completed sessions are evaluated.
 
 This configuration ensures evaluations run only on complete sessions. This provides accurate assessments of user intention resolution.
 
