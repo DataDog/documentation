@@ -36,11 +36,11 @@ Serverless
 : `full host` is not supported on serverless platforms, such as AWS Lambda.
 
 Debugging information
-: Symbols should be available locally or can be uploaded in CI with `datadog-ci` 
+: Symbols should be available locally or can be uploaded in CI with `datadog-ci`
 
 ## Installation
 
-<div class="alert alert-info">Always set <b>DD_SERVICE</b> for each service you want to profile and identify separately. This ensures accurate attribution and more actionable profiling data. To learn more, see <a href="#service-naming">Service naming</a.</div>
+<div class="alert alert-info">Always set <b>DD_SERVICE</b> for each service you want to profile and identify separately. This ensures accurate attribution and more actionable profiling data. To learn more, see <a href="#service-naming">Service naming</a>.</div>
 
 The Full-Host Profiler is distributed as a standalone executable.
 
