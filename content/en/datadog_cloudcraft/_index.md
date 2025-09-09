@@ -7,6 +7,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-cloudcraft/"
   tag: "Blog"
   text: "Create rich, up-to-date visualizations of your AWS infrastructure with Cloudcraft in Datadog"
+- link: "https://www.datadoghq.com/blog/cloudcraft-security/"
+  tag: "Blog"
+  text: "Visually identify and prioritize security risks using Cloudcraft"
 ---
 
 ## Overview
@@ -37,6 +40,10 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
   - To view sensitive data, [Sensitive Data Scanner][12] must be enabled. For a user to turn the layer on, they must have the [`data_scanner_read`][13] permission.
 
 **Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you don't grant permission to list S3 buckets, the diagram excludes those buckets. If permissions block certain resources, an alert displays in the UI.
+
+<div class="alert alert-warning"><strong>Note</strong>: Enabling resource collection can impact your AWS CloudWatch costs. To avoid these charges, disable <strong>Usage</strong> metrics in the <strong>Metric Collection</strong> tab of the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog AWS Integration</a>.<br/>
+
+{{< img src="/infrastructure/resource_catalog/aws_usage_toggle.png" alt="AWS Usage toggle in account settings" style="width:100%;" >}}</div>
 
 ## Getting started
 
@@ -82,6 +89,13 @@ To apply a saved view to your diagram:
 Use the zoom and hover features to pinpoint the most critical resources. As you zoom in, additional resource names become visible. Hovering over a resource displays a panel with basic information, while clicking on a resource opens a side panel with observability, cost, and security data, along with cross-links to other relevant Datadog products.
 
 {{< img src="datadog_cloudcraft/cloudcraft_with_ccm_2.mp4" alt="Video showing the zoom and hover feature in Cloudcraft and clicking on a resource to open the side panel" video=true >}}
+
+#### Projection toggle
+
+Toggle the projection from 3D (default) to 2D to visualize your resources from a top-down view.
+
+{{< img src="datadog_cloudcraft/cloudcraft_2D.png" alt="Cloudcraft landing page with the 2D toggle enabled" >}}
+
 
 ### Filtering and search
 

@@ -124,7 +124,12 @@ You can add a budget to dashboards in two ways:
 
   {{< img src="cloud_cost/budgets/budgets-widgets.png" alt="Search and add the Budget Summary widget from any dashboard"  style="width:100%;">}}
 
+## Create an alert for your budget
+
+Learn how to [create a budget-based monitor][2].
+
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/plan/budgets
+[2]: /cloud_cost_management/monitors/
