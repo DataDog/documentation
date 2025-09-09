@@ -95,7 +95,108 @@ Consider the following factors when deciding on a compute tier:
 - The number of users regularly querying Flex tier logs.
 - The frequency and types of queries you run. For example, the query time windows you typically use to query your logs.
 
-The number of logs stored in the Flex tier has the largest impact on the size needed to performantly query the data. Datadog recommends the following compute sizes based on log volume:
+The number of logs stored in the Flex tier has the largest impact on the size needed to performantly query the data. Datadog recommends the following compute sizes based on log volume. Use this calculator to help evaluate:
+
+<!-- Log Size Calculator (JS, no deps) -->
+<style>
+  .calc { max-width: 520px; padding: 1rem; border: 1px solid #ddd; border-radius: .75rem; font: 14px/1.4 system-ui, sans-serif; }
+  .calc h3 { margin: 0 0 .75rem; font-size: 1.1rem; }
+  .calc label { display:block; margin:.5rem 0 .25rem; font-weight:600; }
+  .calc input, .calc select, .calc button { padding:.5rem .6rem; border:1px solid #ccc; border-radius:.5rem; font: inherit; }
+  .calc .row { display:flex; gap:.5rem; align-items:end; flex-wrap: wrap; }
+  .calc .row > div { flex:1 1 180px; }
+  .calc .muted { color:#666; font-size:.9em; }
+  .calc .result { margin-top:.75rem; padding:.75rem; background:#f8f9fa; border:1px solid #e6e8eb; border-radius:.5rem; }
+  .calc .tier { font-weight:700; }
+</style>
+
+<div class="calc" id="log-calc">
+  <h3>Log Size Recommendation</h3>
+  <div class="row">
+    <div>
+      <label for="logsPerDay">Logs per day</label>
+      <input id="logsPerDay" type="number" inputmode="numeric" min="0" step="1" placeholder="e.g. 250000000" />
+      <div class="muted">Enter a whole number (no decimals)</div>
+    </div>
+    <div>
+      <label for="retentionDays">Retention</label>
+      <select id="retentionDays">
+        <option value="15">15 days</option>
+        <option value="30" selected>30 days</option>
+        <option value="45">45 days</option>
+      </select>
+    </div>
+    <div>
+      <button id="calcBtn" type="button">Calculate</button>
+    </div>
+  </div>
+
+  <div class="result" id="result" hidden>
+    <div>Total logs over <span id="daysOut">0</span> days: <strong id="totalOut">0</strong></div>
+    <div>Recommendation: <span class="tier" id="tierOut"></span></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $ = (id) => document.getElementById(id);
+  const elLogs = $("logsPerDay");
+  const elDays = $("retentionDays");
+  const elBtn = $("calcBtn");
+  const elResult = $("result");
+  const elDaysOut = $("daysOut");
+  const elTotalOut = $("totalOut");
+  const elTierOut = $("tierOut");
+
+  // Thresholds and labels (edit here to add tiers)
+  const thresholds = [
+    { lt: 10_000_000_000n, tier: "Starter" },       // < 10B
+    { lt: 50_000_000_000n, tier: "Extra Small" },   // < 50B
+    { lt: null,               tier: "Extra Small or larger" } // >= 50B
+  ];
+
+  function toBigIntSafe(value) {
+    // strip non-digits, prevent leading '+' etc.
+    const s = String(value).trim();
+    if (!/^\d+$/.test(s)) return null;
+    try { return BigInt(s); } catch { return null; }
+  }
+
+  function formatBigInt(n) {
+    try { return n.toLocaleString(); } catch { return String(n); }
+  }
+
+  function recommendTier(total) {
+    for (const t of thresholds) {
+      if (t.lt === null) return t.tier;
+      if (total < t.lt) return t.tier;
+    }
+    return thresholds[thresholds.length - 1].tier;
+  }
+
+  function calc() {
+    const logsBI = toBigIntSafe(elLogs.value);
+    const days = parseInt(elDays.value, 10);
+
+    if (logsBI === null || isNaN(days) || days <= 0) {
+      elResult.hidden = true;
+      return;
+    }
+    const total = logsBI * BigInt(days);
+    const tier = recommendTier(total);
+
+    elDaysOut.textContent = days.toString();
+    elTotalOut.textContent = formatBigInt(total);
+    elTierOut.textContent = tier;
+    elResult.hidden = false;
+  }
+
+  elBtn.addEventListener("click", calc);
+  elLogs.addEventListener("keydown", (e)=>{ if(e.key==="Enter"){ e.preventDefault(); calc(); }});
+  elDays.addEventListener("change", calc);
+})();
+</script>
+
 | Size                                      | Volume (events stored)   |
 | ----------------------------------------- | ------------------------ |
 | Starter                                   | < 10 billion             |
