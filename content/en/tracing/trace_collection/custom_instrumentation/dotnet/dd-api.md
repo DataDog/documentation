@@ -11,6 +11,8 @@ aliases:
     - /tracing/trace_collection/custom_instrumentation/dotnet
     - /tracing/trace_collection/custom_instrumentation/dd_libraries/dotnet
 description: 'Manually instrument your .NET application to send custom traces to Datadog.'
+algolia:
+    tags: ["C#","APM"]
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'
       tag: 'Guide'

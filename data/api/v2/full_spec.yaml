@@ -497,6 +497,37 @@ components:
       required: true
       schema:
         type: string
+    IncidentNotificationTemplateIDPathParameter:
+      description: The ID of the notification template.
+      in: path
+      name: id
+      required: true
+      schema:
+        example: 00000000-0000-0000-0000-000000000001
+        format: uuid
+        type: string
+    IncidentNotificationTemplateIncidentTypeFilterQueryParameter:
+      description: Optional incident type ID filter.
+      explode: false
+      in: query
+      name: filter[incident-type]
+      required: false
+      schema:
+        example: 00000000-0000-0000-0000-000000000001
+        format: uuid
+        type: string
+    IncidentNotificationTemplateIncludeQueryParameter:
+      description: 'Comma-separated list of relationships to include. Supported values:
+        `created_by_user`, `last_modified_by_user`, `incident_type`
+
+        '
+      explode: false
+      in: query
+      name: include
+      required: false
+      schema:
+        example: created_by_user,incident_type
+        type: string
     IncidentSearchIncludeQueryParameter:
       description: Specifies which types of related objects should be included in
         the response.
@@ -718,6 +749,15 @@ components:
       required: true
       schema:
         example: monitor_timezone
+        type: string
+    OrgConnectionId:
+      description: The unique identifier of the org connection.
+      in: path
+      name: connection_id
+      required: true
+      schema:
+        example: f9ec96b0-8c8a-4b0a-9b0a-1b2c3d4e5f6a
+        format: uuid
         type: string
     PageNumber:
       description: Specific page number to return.
@@ -10811,6 +10851,14 @@ components:
       required:
       - data
       type: object
+    CreateIncidentNotificationTemplateRequest:
+      description: Create request for a notification template.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentNotificationTemplateCreateData'
+      required:
+      - data
+      type: object
     CreateNotificationRuleParameters:
       description: Body of the notification rule create request.
       properties:
@@ -18671,6 +18719,33 @@ components:
       required:
       - type
       type: object
+    GoogleMeetConfigurationReference:
+      description: A reference to a Google Meet Configuration resource.
+      nullable: true
+      properties:
+        data:
+          $ref: '#/components/schemas/GoogleMeetConfigurationReferenceData'
+      required:
+      - data
+      type: object
+    GoogleMeetConfigurationReferenceData:
+      description: The Google Meet configuration relationship data object.
+      nullable: true
+      properties:
+        id:
+          description: The unique identifier of the Google Meet configuration.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          description: The type of the Google Meet configuration.
+          example: google_meet_configurations
+          type: string
+      required:
+      - id
+      - type
+      type: object
+      x-merge-override:
+        required: false
     GreyNoiseAPIKey:
       description: The definition of the `GreyNoiseAPIKey` object.
       properties:
@@ -19998,6 +20073,256 @@ components:
           example: '@test.user@test.com'
           type: string
       type: object
+    IncidentNotificationTemplate:
+      description: Response with a notification template.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentNotificationTemplateResponseData'
+        included:
+          description: Related objects that are included in the response.
+          items:
+            $ref: '#/components/schemas/IncidentNotificationTemplateIncludedItems'
+          type: array
+      required:
+      - data
+      type: object
+    IncidentNotificationTemplateArray:
+      description: Response with notification templates.
+      properties:
+        data:
+          description: The `NotificationTemplateArray` `data`.
+          items:
+            $ref: '#/components/schemas/IncidentNotificationTemplateResponseData'
+          type: array
+        included:
+          description: Related objects that are included in the response.
+          items:
+            $ref: '#/components/schemas/IncidentNotificationTemplateIncludedItems'
+          type: array
+        meta:
+          $ref: '#/components/schemas/IncidentNotificationTemplateArrayMeta'
+      required:
+      - data
+      type: object
+    IncidentNotificationTemplateArrayMeta:
+      description: Response metadata.
+      properties:
+        page:
+          $ref: '#/components/schemas/IncidentNotificationTemplateArrayMetaPage'
+      type: object
+    IncidentNotificationTemplateArrayMetaPage:
+      description: Pagination metadata.
+      properties:
+        total_count:
+          description: Total number of notification templates.
+          example: 42
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: Total number of notification templates matching the filter.
+          example: 15
+          format: int64
+          type: integer
+      type: object
+    IncidentNotificationTemplateAttributes:
+      description: The notification template's attributes.
+      properties:
+        category:
+          description: The category of the notification template.
+          example: alert
+          type: string
+        content:
+          description: The content body of the notification template.
+          example: 'An incident has been declared.
+
+
+            Title: {{incident.title}}
+
+            Severity: {{incident.severity}}
+
+            Affected Services: {{incident.services}}
+
+            Status: {{incident.state}}
+
+
+            Please join the incident channel for updates.'
+          type: string
+        created:
+          description: Timestamp when the notification template was created.
+          example: '2025-01-15T10:30:00Z'
+          format: date-time
+          readOnly: true
+          type: string
+        modified:
+          description: Timestamp when the notification template was last modified.
+          example: '2025-01-15T14:45:00Z'
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          description: The name of the notification template.
+          example: Incident Alert Template
+          type: string
+        subject:
+          description: The subject line of the notification template.
+          example: '{{incident.severity}} Incident: {{incident.title}}'
+          type: string
+      required:
+      - name
+      - subject
+      - content
+      - category
+      - created
+      - modified
+      type: object
+    IncidentNotificationTemplateCreateAttributes:
+      description: The attributes for creating a notification template.
+      properties:
+        category:
+          description: The category of the notification template.
+          example: alert
+          type: string
+        content:
+          description: The content body of the notification template.
+          example: 'An incident has been declared.
+
+
+            Title: {{incident.title}}
+
+            Severity: {{incident.severity}}
+
+            Affected Services: {{incident.services}}
+
+            Status: {{incident.state}}
+
+
+            Please join the incident channel for updates.'
+          type: string
+        name:
+          description: The name of the notification template.
+          example: Incident Alert Template
+          type: string
+        subject:
+          description: The subject line of the notification template.
+          example: '{{incident.severity}} Incident: {{incident.title}}'
+          type: string
+      required:
+      - name
+      - subject
+      - content
+      - category
+      type: object
+    IncidentNotificationTemplateCreateData:
+      description: Notification template data for a create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentNotificationTemplateCreateAttributes'
+        relationships:
+          $ref: '#/components/schemas/IncidentNotificationTemplateCreateDataRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentNotificationTemplateType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentNotificationTemplateCreateDataRelationships:
+      description: The definition of `NotificationTemplateCreateDataRelationships`
+        object.
+      properties:
+        incident_type:
+          $ref: '#/components/schemas/RelationshipToIncidentType'
+      type: object
+    IncidentNotificationTemplateIncludedItems:
+      description: Objects related to a notification template.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/IncidentTypeObject'
+    IncidentNotificationTemplateRelationships:
+      description: The notification template's resource relationships.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        incident_type:
+          $ref: '#/components/schemas/RelationshipToIncidentType'
+        last_modified_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+      type: object
+    IncidentNotificationTemplateResponseData:
+      description: Notification template data from a response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentNotificationTemplateAttributes'
+        id:
+          description: The unique identifier of the notification template.
+          example: 00000000-0000-0000-0000-000000000001
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentNotificationTemplateRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentNotificationTemplateType'
+      required:
+      - id
+      - type
+      type: object
+    IncidentNotificationTemplateType:
+      description: Notification templates resource type.
+      enum:
+      - notification_templates
+      example: notification_templates
+      type: string
+      x-enum-varnames:
+      - NOTIFICATION_TEMPLATES
+    IncidentNotificationTemplateUpdateAttributes:
+      description: The attributes to update on a notification template.
+      properties:
+        category:
+          description: The category of the notification template.
+          example: update
+          type: string
+        content:
+          description: The content body of the notification template.
+          example: 'Incident Status Update:
+
+
+            Title: {{incident.title}}
+
+            New Status: {{incident.state}}
+
+            Severity: {{incident.severity}}
+
+            Services: {{incident.services}}
+
+            Commander: {{incident.commander}}
+
+
+            For more details, visit the incident page.'
+          type: string
+        name:
+          description: The name of the notification template.
+          example: Incident Status Update Template
+          type: string
+        subject:
+          description: The subject line of the notification template.
+          example: 'Incident Update: {{incident.title}} - {{incident.state}}'
+          type: string
+      type: object
+    IncidentNotificationTemplateUpdateData:
+      description: Notification template data for an update request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentNotificationTemplateUpdateAttributes'
+        id:
+          description: The unique identifier of the notification template.
+          example: 00000000-0000-0000-0000-000000000001
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentNotificationTemplateType'
+      required:
+      - id
+      - type
+      type: object
     IncidentPostmortemType:
       default: incident_postmortems
       description: Incident postmortem resource type.
@@ -21159,6 +21484,8 @@ components:
           description: The incident type's ID.
           example: 00000000-0000-0000-0000-000000000000
           type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentTypeRelationships'
         type:
           $ref: '#/components/schemas/IncidentTypeType'
       required:
@@ -21188,6 +21515,21 @@ components:
           $ref: '#/components/schemas/IncidentTypePatchData'
       required:
       - data
+      type: object
+    IncidentTypeRelationships:
+      additionalProperties: {}
+      description: The incident type's resource relationships.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        google_meet_configuration:
+          $ref: '#/components/schemas/GoogleMeetConfigurationReference'
+        last_modified_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        microsoft_teams_configuration:
+          $ref: '#/components/schemas/MicrosoftTeamsConfigurationReference'
+        zoom_configuration:
+          $ref: '#/components/schemas/ZoomConfigurationReference'
       type: object
     IncidentTypeResponse:
       description: Incident type response data.
@@ -26453,6 +26795,33 @@ components:
       type: string
       x-enum-varnames:
       - MS_TEAMS_CHANNEL_INFO
+    MicrosoftTeamsConfigurationReference:
+      description: A reference to a Microsoft Teams Configuration resource.
+      nullable: true
+      properties:
+        data:
+          $ref: '#/components/schemas/MicrosoftTeamsConfigurationReferenceData'
+      required:
+      - data
+      type: object
+    MicrosoftTeamsConfigurationReferenceData:
+      description: The Microsoft Teams configuration relationship data object.
+      nullable: true
+      properties:
+        id:
+          description: The unique identifier of the Microsoft Teams configuration.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          description: The type of the Microsoft Teams configuration.
+          example: microsoft_teams_configurations
+          type: string
+      required:
+      - id
+      - type
+      type: object
+      x-merge-override:
+        required: false
     MicrosoftTeamsCreateTenantBasedHandleRequest:
       description: Create tenant-based handle request.
       properties:
@@ -32186,6 +32555,255 @@ components:
       required:
       - data
       type: object
+    OrgConnection:
+      description: An org connection.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OrgConnectionAttributes'
+        id:
+          description: The unique identifier of the org connection.
+          example: f9ec96b0-8c8a-4b0a-9b0a-1b2c3d4e5f6a
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/OrgConnectionRelationships'
+        type:
+          $ref: '#/components/schemas/OrgConnectionType'
+      required:
+      - id
+      - type
+      - attributes
+      - relationships
+      type: object
+    OrgConnectionAttributes:
+      description: Org connection attributes.
+      properties:
+        connection_types:
+          description: List of connection types.
+          example:
+          - logs
+          - metrics
+          items:
+            $ref: '#/components/schemas/OrgConnectionTypeEnum'
+          type: array
+        created_at:
+          description: Timestamp when the connection was created.
+          example: '2023-01-01T12:00:00Z'
+          format: date-time
+          type: string
+      required:
+      - connection_types
+      - created_at
+      type: object
+    OrgConnectionCreate:
+      description: Org connection creation data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OrgConnectionCreateAttributes'
+        relationships:
+          $ref: '#/components/schemas/OrgConnectionCreateRelationships'
+        type:
+          $ref: '#/components/schemas/OrgConnectionType'
+      required:
+      - type
+      - attributes
+      - relationships
+      type: object
+    OrgConnectionCreateAttributes:
+      description: Attributes for creating an org connection.
+      properties:
+        connection_types:
+          description: List of connection types to establish.
+          example:
+          - logs
+          items:
+            $ref: '#/components/schemas/OrgConnectionTypeEnum'
+          minItems: 1
+          type: array
+      required:
+      - connection_types
+      type: object
+    OrgConnectionCreateRelationships:
+      description: Relationships for org connection creation.
+      properties:
+        sink_org:
+          $ref: '#/components/schemas/OrgConnectionOrgRelationship'
+      required:
+      - sink_org
+      type: object
+    OrgConnectionCreateRequest:
+      description: Request to create an org connection.
+      properties:
+        data:
+          $ref: '#/components/schemas/OrgConnectionCreate'
+      required:
+      - data
+      type: object
+    OrgConnectionListResponse:
+      description: Response containing a list of org connections.
+      properties:
+        data:
+          description: List of org connections.
+          items:
+            $ref: '#/components/schemas/OrgConnection'
+          type: array
+        meta:
+          $ref: '#/components/schemas/OrgConnectionListResponseMeta'
+      required:
+      - data
+      type: object
+    OrgConnectionListResponseMeta:
+      description: Pagination metadata.
+      properties:
+        page:
+          $ref: '#/components/schemas/OrgConnectionListResponseMetaPage'
+      type: object
+    OrgConnectionListResponseMetaPage:
+      description: Page information.
+      properties:
+        total_count:
+          description: Total number of org connections.
+          example: 0
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: Total number of org connections matching the filter.
+          example: 0
+          format: int64
+          type: integer
+      type: object
+    OrgConnectionOrgRelationship:
+      description: Org relationship.
+      properties:
+        data:
+          $ref: '#/components/schemas/OrgConnectionOrgRelationshipData'
+      type: object
+    OrgConnectionOrgRelationshipData:
+      description: The definition of `OrgConnectionOrgRelationshipData` object.
+      properties:
+        id:
+          description: Org UUID.
+          example: f9ec96b0-8c8a-4b0a-9b0a-1b2c3d4e5f6a
+          type: string
+        name:
+          description: Org name.
+          example: Example Org
+          type: string
+        type:
+          $ref: '#/components/schemas/OrgConnectionOrgRelationshipDataType'
+      type: object
+    OrgConnectionOrgRelationshipDataType:
+      description: The type of the organization relationship.
+      enum:
+      - orgs
+      example: orgs
+      type: string
+      x-enum-varnames:
+      - ORGS
+    OrgConnectionRelationships:
+      description: Related organizations and user.
+      properties:
+        created_by:
+          $ref: '#/components/schemas/OrgConnectionUserRelationship'
+        sink_org:
+          $ref: '#/components/schemas/OrgConnectionOrgRelationship'
+        source_org:
+          $ref: '#/components/schemas/OrgConnectionOrgRelationship'
+      type: object
+    OrgConnectionResponse:
+      description: Response containing a single org connection.
+      properties:
+        data:
+          $ref: '#/components/schemas/OrgConnection'
+      required:
+      - data
+      type: object
+    OrgConnectionType:
+      description: Org connection type.
+      enum:
+      - org_connection
+      example: org_connection
+      type: string
+      x-enum-varnames:
+      - ORG_CONNECTION
+    OrgConnectionTypeEnum:
+      description: Available connection types between organizations.
+      enum:
+      - logs
+      - metrics
+      example: logs
+      type: string
+      x-enum-varnames:
+      - LOGS
+      - METRICS
+    OrgConnectionUpdate:
+      description: Org connection update data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OrgConnectionUpdateAttributes'
+        id:
+          description: The unique identifier of the org connection.
+          example: f9ec96b0-8c8a-4b0a-9b0a-1b2c3d4e5f6a
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/OrgConnectionType'
+      required:
+      - type
+      - id
+      - attributes
+      type: object
+    OrgConnectionUpdateAttributes:
+      description: Attributes for updating an org connection.
+      properties:
+        connection_types:
+          description: Updated list of connection types.
+          example:
+          - logs
+          - metrics
+          items:
+            $ref: '#/components/schemas/OrgConnectionTypeEnum'
+          minItems: 1
+          type: array
+      required:
+      - connection_types
+      type: object
+    OrgConnectionUpdateRequest:
+      description: Request to update an org connection.
+      properties:
+        data:
+          $ref: '#/components/schemas/OrgConnectionUpdate'
+      required:
+      - data
+      type: object
+    OrgConnectionUserRelationship:
+      description: User relationship.
+      properties:
+        data:
+          $ref: '#/components/schemas/OrgConnectionUserRelationshipData'
+      type: object
+    OrgConnectionUserRelationshipData:
+      description: The data for a user relationship.
+      properties:
+        id:
+          description: User UUID.
+          example: usr123abc456
+          type: string
+        name:
+          description: User name.
+          example: John Doe
+          type: string
+        type:
+          $ref: '#/components/schemas/OrgConnectionUserRelationshipDataType'
+      type: object
+    OrgConnectionUserRelationshipDataType:
+      description: The type of the user relationship.
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
     Organization:
       description: Organization object.
       properties:
@@ -32632,6 +33250,14 @@ components:
           items:
             $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
           type: array
+      type: object
+    PatchIncidentNotificationTemplateRequest:
+      description: Update request for a notification template.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentNotificationTemplateUpdateData'
+      required:
+      - data
       type: object
     PatchNotificationRuleParameters:
       description: Body of the notification rule patch request.
@@ -34565,6 +35191,27 @@ components:
           type: array
       required:
       - data
+      type: object
+    RelationshipToIncidentType:
+      description: Relationship to an incident type.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToIncidentTypeData'
+      required:
+      - data
+      type: object
+    RelationshipToIncidentTypeData:
+      description: Relationship to incident type object.
+      properties:
+        id:
+          description: The incident type's ID.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentTypeType'
+      required:
+      - id
+      - type
       type: object
     RelationshipToIncidentUserDefinedFieldData:
       description: Relationship to impact object.
@@ -42137,7 +42784,7 @@ components:
           type: string
       type: object
     Shift:
-      description: The definition of `Shift` object.
+      description: An on-call shift with its associated data and relationships.
       example:
         data:
           attributes:
@@ -42168,7 +42815,7 @@ components:
           type: array
       type: object
     ShiftData:
-      description: The definition of `ShiftData` object.
+      description: Data for an on-call shift.
       properties:
         attributes:
           $ref: '#/components/schemas/ShiftDataAttributes'
@@ -42183,7 +42830,7 @@ components:
       - type
       type: object
     ShiftDataAttributes:
-      description: The definition of `ShiftDataAttributes` object.
+      description: Attributes for an on-call shift.
       properties:
         end:
           description: The end time of the shift.
@@ -42195,7 +42842,7 @@ components:
           type: string
       type: object
     ShiftDataRelationships:
-      description: The definition of `ShiftDataRelationships` object.
+      description: Relationships for an on-call shift.
       properties:
         user:
           $ref: '#/components/schemas/ShiftDataRelationshipsUser'
@@ -42242,7 +42889,7 @@ components:
       x-enum-varnames:
       - SHIFTS
     ShiftIncluded:
-      description: The definition of `ShiftIncluded` object.
+      description: Included data for shift operations.
       oneOf:
       - $ref: '#/components/schemas/ScheduleUser'
     SimpleMonitorUserTemplate:
@@ -47251,6 +47898,33 @@ components:
       oneOf:
       - $ref: '#/components/schemas/XRayServicesIncludeAll'
       - $ref: '#/components/schemas/XRayServicesIncludeOnly'
+    ZoomConfigurationReference:
+      description: A reference to a Zoom configuration resource.
+      nullable: true
+      properties:
+        data:
+          $ref: '#/components/schemas/ZoomConfigurationReferenceData'
+      required:
+      - data
+      type: object
+    ZoomConfigurationReferenceData:
+      description: The Zoom configuration relationship data object.
+      nullable: true
+      properties:
+        id:
+          description: The unique identifier of the Zoom configuration.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          description: The type of the Zoom configuration.
+          example: zoom_configurations
+          type: string
+      required:
+      - id
+      - type
+      type: object
+      x-merge-override:
+        required: false
   securitySchemes:
     AuthZ:
       description: This API uses OAuth 2 with the implicit grant flow.
@@ -47300,6 +47974,7 @@ components:
             incident_notification_settings_write: Configure Incidents Notification
               settings.
             incident_read: View incidents in Datadog.
+            incident_settings_read: View Incident Settings.
             incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
@@ -47308,6 +47983,8 @@ components:
               is not required to set downtimes.
             monitors_read: View monitors.
             monitors_write: Edit, delete, and resolve individual monitors.
+            org_connections_read: Read cross organization connections.
+            org_connections_write: Create, edit, and delete cross organization connections.
             org_management: Edit org configurations, including authentication and
               certain security preferences such as configuring SAML, renaming an org,
               configuring allowed login methods, creating child orgs, subscribing
@@ -54839,6 +55516,240 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/config/notification-templates:
+    get:
+      description: Lists all notification templates. Optionally filter by incident
+        type.
+      operationId: ListIncidentNotificationTemplates
+      parameters:
+      - $ref: '#/components/parameters/IncidentNotificationTemplateIncidentTypeFilterQueryParameter'
+      - $ref: '#/components/parameters/IncidentNotificationTemplateIncludeQueryParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentNotificationTemplateArray'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_settings_read
+      summary: List incident notification templates
+      tags:
+      - Incidents
+      x-menu-order: 10
+      x-permission:
+        operator: AND
+        permissions:
+        - incident_notification_settings_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Creates a new notification template.
+      operationId: CreateIncidentNotificationTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateIncidentNotificationTemplateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentNotificationTemplate'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_notification_settings_write
+      summary: Create incident notification template
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-given:
+        notification_template:
+          operationId: CreateIncidentNotificationTemplate
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"category\": \"alert\",\n
+              \     \"content\": \"Test notification template\",\n      \"name\":
+              \"Test Template {{ unique }}\",\n      \"subject\": \"Test Subject\"\n
+              \   },\n    \"relationships\": {\n      \"incident_type\": {\n        \"data\":
+              {\n          \"id\": \"{{ incident_type.data.id }}\",\n          \"type\":
+              \"incident_types\"\n        }\n      }\n    },\n    \"type\": \"notification_templates\"\n
+              \ }\n}"
+          step: there is a valid "notification_template" in the system
+      x-menu-order: 11
+      x-permission:
+        operator: AND
+        permissions:
+        - incident_notification_settings_write
+      x-undo:
+        operationId: DeleteIncidentNotificationTemplate
+        parameters:
+        - name: id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/config/notification-templates/{id}:
+    delete:
+      description: Deletes a notification template by its ID.
+      operationId: DeleteIncidentNotificationTemplate
+      parameters:
+      - $ref: '#/components/parameters/IncidentNotificationTemplateIDPathParameter'
+      - $ref: '#/components/parameters/IncidentNotificationTemplateIncludeQueryParameter'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_notification_settings_write
+      summary: Delete a notification template
+      tags:
+      - Incidents
+      x-menu-order: 14
+      x-permission:
+        operator: AND
+        permissions:
+        - incident_notification_settings_write
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Retrieves a specific notification template by its ID.
+      operationId: GetIncidentNotificationTemplate
+      parameters:
+      - $ref: '#/components/parameters/IncidentNotificationTemplateIDPathParameter'
+      - $ref: '#/components/parameters/IncidentNotificationTemplateIncludeQueryParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentNotificationTemplate'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_settings_read
+      summary: Get incident notification template
+      tags:
+      - Incidents
+      x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_read
+        - incident_write
+        - incident_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Updates an existing notification template's attributes.
+      operationId: UpdateIncidentNotificationTemplate
+      parameters:
+      - $ref: '#/components/parameters/IncidentNotificationTemplateIDPathParameter'
+      - $ref: '#/components/parameters/IncidentNotificationTemplateIncludeQueryParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchIncidentNotificationTemplateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentNotificationTemplate'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_notification_settings_write
+      summary: Update incident notification template
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-menu-order: 13
+      x-permission:
+        operator: AND
+        permissions:
+        - incident_notification_settings_write
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/config/types:
     get:
       description: Get all incident types.
@@ -60619,6 +61530,47 @@ paths:
       description: Returns a list of all monitor notification rules.
       operationId: GetMonitorNotificationRules
       parameters:
+      - description: The page to start paginating from. If `page` is not specified,
+          the argument defaults to the first page.
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          maximum: 1000000
+          minimum: 0
+          type: integer
+      - description: The number of rules to return per page. If `per_page` is not
+          specified, the argument defaults to 100.
+        in: query
+        name: per_page
+        required: false
+        schema:
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+      - description: 'String for sort order, composed of field and sort order separated
+          by a colon, for example `name:asc`. Supported sort directions: `asc`, `desc`.
+          Supported fields: `name`, `created_at`.'
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+      - description: 'JSON-encoded filter object. Supported keys:
+
+          * `text`: Free-text query matched against rule name, tags, and recipients.
+
+          * `tags`: Array of strings. Return rules that have any of these tags.
+
+          * `recipients`: Array of strings. Return rules that have any of these recipients.'
+        example: '{"text":"error","tags":["env:prod","team:my-team"],"recipients":["slack-monitor-app","email@example.com"]}'
+        in: query
+        name: filters
+        required: false
+        schema:
+          type: string
       - description: 'Comma-separated list of resource paths for related resources
           to include in the response. Supported resource
 
@@ -62716,6 +63668,175 @@ paths:
         operator: OR
         permissions:
         - org_management
+      x-undo:
+        type: idempotent
+  /api/v2/org_connections:
+    get:
+      description: Returns a list of org connections.
+      operationId: ListOrgConnections
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrgConnectionListResponse'
+          description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_connections_read
+      summary: List Org Connections
+      tags:
+      - Org Connections
+      x-menu-order: 100
+      x-permission:
+        operator: OR
+        permissions:
+        - org_connections_read
+      x-undo:
+        type: safe
+    post:
+      description: Create a new org connection between the current org and a target
+        org.
+      operationId: CreateOrgConnections
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrgConnectionCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrgConnectionResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_connections_write
+      summary: Create Org Connection
+      tags:
+      - Org Connections
+      x-codegen-request-body-name: body
+      x-given:
+        org_connection:
+          parameters:
+          - name: body
+            origin: request
+            value: "{\n  \"data\": {\n    \"type\": \"org_connection\",\n    \"relationships\":
+              {\n      \"sink_org\": {\n        \"data\": {\n          \"type\": \"orgs\",\n
+              \         \"id\": \"83999dcd-7f97-11f0-8de1-1ecf66f1aa85\"\n        }\n
+              \     }\n    },\n    \"attributes\": {\n      \"connection_types\":
+              [\"logs\"]\n    }\n  }\n}"
+          step: there is a valid "org_connection" in the system
+      x-menu-order: 101
+      x-permission:
+        operator: OR
+        permissions:
+        - org_connections_write
+      x-undo:
+        operationId: DeleteOrgConnections
+        parameters:
+        - name: connection_id
+          source: data.id
+        type: unsafe
+  /api/v2/org_connections/{connection_id}:
+    delete:
+      description: Delete an existing org connection.
+      operationId: DeleteOrgConnections
+      parameters:
+      - $ref: '#/components/parameters/OrgConnectionId'
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_connections_write
+      summary: Delete Org Connection
+      tags:
+      - Org Connections
+      x-menu-order: 103
+      x-permission:
+        operator: OR
+        permissions:
+        - org_connections_write
+      x-undo:
+        type: idempotent
+    patch:
+      description: Update an existing org connection.
+      operationId: UpdateOrgConnections
+      parameters:
+      - $ref: '#/components/parameters/OrgConnectionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrgConnectionUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrgConnectionResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_connections_write
+      summary: Update Org Connection
+      tags:
+      - Org Connections
+      x-menu-order: 102
+      x-permission:
+        operator: OR
+        permissions:
+        - org_connections_write
       x-undo:
         type: idempotent
   /api/v2/permissions:
@@ -75199,6 +76320,11 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/api/latest/opsgenie-integration
   name: Opsgenie Integration
+- description: Manage connections between organizations. Org connections allow for
+    controlled sharing of data between different Datadog organizations. See the [Cross-Organization
+    Visibiltiy](https://docs.datadoghq.com/account_management/org_settings/cross_org_visibility/)
+    page for more information.
+  name: Org Connections
 - description: Create, edit, and manage your organizations. Read more about [multi-org
     accounts](https://docs.datadoghq.com/account_management/multi_organization).
   externalDocs:

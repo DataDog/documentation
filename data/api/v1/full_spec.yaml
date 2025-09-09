@@ -14649,6 +14649,11 @@ components:
         extractedValuesFromScript:
           description: Generate variables using JavaScript.
           type: string
+        id:
+          description: ID of the step.
+          example: abc-def-123
+          readOnly: true
+          type: string
         isCritical:
           description: 'Determines whether or not to consider the entire test as failed
             if this step fails.
@@ -14705,6 +14710,11 @@ components:
     SyntheticsAPIWaitStep:
       description: The Wait step used in a Synthetic multi-step API test.
       properties:
+        id:
+          description: ID of the step.
+          example: abc-def-123
+          readOnly: true
+          type: string
         name:
           description: The name of the step.
           example: Example step name

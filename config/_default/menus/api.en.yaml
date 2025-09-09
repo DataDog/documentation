@@ -7408,6 +7408,71 @@ menu:
         unstable:
           - v2
         order: 20
+    - name: Update incident notification template
+      url: '#update-incident-notification-template'
+      identifier: incidents-update-incident-notification-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentNotificationTemplate
+        unstable:
+          - v2
+        order: 13
+    - name: Get incident notification template
+      url: '#get-incident-notification-template'
+      identifier: incidents-get-incident-notification-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentNotificationTemplate
+        unstable:
+          - v2
+        order: 12
+    - name: Delete a notification template
+      url: '#delete-a-notification-template'
+      identifier: incidents-delete-a-notification-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentNotificationTemplate
+        unstable:
+          - v2
+        order: 14
+    - name: Create incident notification template
+      url: '#create-incident-notification-template'
+      identifier: incidents-create-incident-notification-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentNotificationTemplate
+        unstable:
+          - v2
+        order: 11
+    - name: List incident notification templates
+      url: '#list-incident-notification-templates'
+      identifier: incidents-list-incident-notification-templates
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentNotificationTemplates
+        unstable:
+          - v2
+        order: 10
     - name: Create an incident
       url: '#create-an-incident'
       identifier: incidents-create-an-incident
@@ -8430,6 +8495,58 @@ menu:
           - ListOpsgenieServices
         unstable: []
         order: 1
+    - name: Org Connections
+      url: /api/latest/org-connections/
+      identifier: org-connections
+      generated: true
+    - name: Update Org Connection
+      url: '#update-org-connection'
+      identifier: org-connections-update-org-connection
+      parent: org-connections
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrgConnections
+        unstable: []
+        order: 102
+    - name: Delete Org Connection
+      url: '#delete-org-connection'
+      identifier: org-connections-delete-org-connection
+      parent: org-connections
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrgConnections
+        unstable: []
+        order: 103
+    - name: Create Org Connection
+      url: '#create-org-connection'
+      identifier: org-connections-create-org-connection
+      parent: org-connections
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOrgConnections
+        unstable: []
+        order: 101
+    - name: List Org Connections
+      url: '#list-org-connections'
+      identifier: org-connections-list-org-connections
+      parent: org-connections
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgConnections
+        unstable: []
+        order: 100
     - name: Powerpack
       url: /api/latest/powerpack/
       identifier: powerpack
