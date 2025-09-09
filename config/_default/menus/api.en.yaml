@@ -44,8 +44,7 @@ menu:
           - v2
         operationids:
           - ListAWSNamespaces
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Get an AWS integration by config ID
       url: '#get-an-aws-integration-by-config-id'
@@ -57,8 +56,7 @@ menu:
           - v2
         operationids:
           - GetAWSAccount
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Generate a new external ID
       url: '#generate-a-new-external-id'
@@ -71,8 +69,7 @@ menu:
           - v2
         operationids:
           - CreateNewAWSExternalID
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Set an AWS tag filter
       url: '#set-an-aws-tag-filter'
@@ -169,8 +166,7 @@ menu:
           - v2
         operationids:
           - UpdateAWSAccount
-        unstable:
-          - v2
+        unstable: []
         order: 9
     - name: Create an AWS integration
       url: '#create-an-aws-integration'
@@ -183,8 +179,7 @@ menu:
           - v2
         operationids:
           - CreateAWSAccount
-        unstable:
-          - v2
+        unstable: []
         order: 8
     - name: List all AWS integrations
       url: '#list-all-aws-integrations'
@@ -197,8 +192,7 @@ menu:
           - v2
         operationids:
           - ListAWSAccounts
-        unstable:
-          - v2
+        unstable: []
         order: 6
     - name: Delete an AWS integration
       url: '#delete-an-aws-integration'
@@ -211,8 +205,7 @@ menu:
           - v2
         operationids:
           - DeleteAWSAccount
-        unstable:
-          - v2
+        unstable: []
         order: 7
     - name: AWS Logs Integration
       url: /api/latest/aws-logs-integration/
@@ -253,8 +246,7 @@ menu:
           - v2
         operationids:
           - ListAWSLogsServices
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Check that an AWS Lambda Function exists
       url: '#check-that-an-aws-lambda-function-exists'
