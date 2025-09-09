@@ -267,6 +267,34 @@ bar: quuz
 
 </div>
 
+<div class="alert alert-info">
+
+Although Kubernetes labels and annotations are case sensitive, this configuration is not.
+For example, you have this label on a pod
+
+```yaml
+  labels:
+    foo: bar
+    Foo: qux
+```
+This setting makes a conflict and create an unexpected result.
+
+```yaml
+    kubernetesResourcesLabelsAsTags:
+      pods:
+        foo: tag1
+        Foo: tag2 
+```
+
+It should be changed like this, and you will get `tag1: bar` for your data.
+
+```yaml
+    kubernetesResourcesLabelsAsTags:
+      pods:
+        foo: tag1
+```
+
+</div>
 
 
 ### Kubernetes resources annotations as tags
