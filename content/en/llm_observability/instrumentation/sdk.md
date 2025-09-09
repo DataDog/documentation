@@ -1855,7 +1855,7 @@ def llm_call():
     # joining an evaluation to a span via span ID and trace ID
     span_context = LLMObs.export_span(span=None)
     LLMObs.submit_evaluation(
-        span = span_context,
+        span_context = span_context,
         ml_app = "chatbot",
         label="harmfulness",
         metric_type="score",

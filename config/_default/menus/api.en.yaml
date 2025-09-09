@@ -44,8 +44,7 @@ menu:
           - v2
         operationids:
           - ListAWSNamespaces
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Get an AWS integration by config ID
       url: '#get-an-aws-integration-by-config-id'
@@ -57,8 +56,7 @@ menu:
           - v2
         operationids:
           - GetAWSAccount
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Generate a new external ID
       url: '#generate-a-new-external-id'
@@ -71,8 +69,7 @@ menu:
           - v2
         operationids:
           - CreateNewAWSExternalID
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Set an AWS tag filter
       url: '#set-an-aws-tag-filter'
@@ -169,8 +166,7 @@ menu:
           - v2
         operationids:
           - UpdateAWSAccount
-        unstable:
-          - v2
+        unstable: []
         order: 9
     - name: Create an AWS integration
       url: '#create-an-aws-integration'
@@ -183,8 +179,7 @@ menu:
           - v2
         operationids:
           - CreateAWSAccount
-        unstable:
-          - v2
+        unstable: []
         order: 8
     - name: List all AWS integrations
       url: '#list-all-aws-integrations'
@@ -197,8 +192,7 @@ menu:
           - v2
         operationids:
           - ListAWSAccounts
-        unstable:
-          - v2
+        unstable: []
         order: 6
     - name: Delete an AWS integration
       url: '#delete-an-aws-integration'
@@ -211,8 +205,7 @@ menu:
           - v2
         operationids:
           - DeleteAWSAccount
-        unstable:
-          - v2
+        unstable: []
         order: 7
     - name: AWS Logs Integration
       url: /api/latest/aws-logs-integration/
@@ -253,8 +246,7 @@ menu:
           - v2
         operationids:
           - ListAWSLogsServices
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Check that an AWS Lambda Function exists
       url: '#check-that-an-aws-lambda-function-exists'
@@ -7408,6 +7400,71 @@ menu:
         unstable:
           - v2
         order: 20
+    - name: Update incident notification template
+      url: '#update-incident-notification-template'
+      identifier: incidents-update-incident-notification-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentNotificationTemplate
+        unstable:
+          - v2
+        order: 13
+    - name: Get incident notification template
+      url: '#get-incident-notification-template'
+      identifier: incidents-get-incident-notification-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentNotificationTemplate
+        unstable:
+          - v2
+        order: 12
+    - name: Delete a notification template
+      url: '#delete-a-notification-template'
+      identifier: incidents-delete-a-notification-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentNotificationTemplate
+        unstable:
+          - v2
+        order: 14
+    - name: Create incident notification template
+      url: '#create-incident-notification-template'
+      identifier: incidents-create-incident-notification-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentNotificationTemplate
+        unstable:
+          - v2
+        order: 11
+    - name: List incident notification templates
+      url: '#list-incident-notification-templates'
+      identifier: incidents-list-incident-notification-templates
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentNotificationTemplates
+        unstable:
+          - v2
+        order: 10
     - name: Create an incident
       url: '#create-an-incident'
       identifier: incidents-create-an-incident

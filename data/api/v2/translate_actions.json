@@ -765,6 +765,30 @@
     "request_description": "Incident payload.",
     "request_schema_description": "Create request for an incident."
   },
+  "ListIncidentNotificationTemplates": {
+    "description": "Lists all notification templates. Optionally filter by incident type.",
+    "summary": "List incident notification templates"
+  },
+  "CreateIncidentNotificationTemplate": {
+    "description": "Creates a new notification template.",
+    "summary": "Create incident notification template",
+    "request_description": "",
+    "request_schema_description": "Create request for a notification template."
+  },
+  "DeleteIncidentNotificationTemplate": {
+    "description": "Deletes a notification template by its ID.",
+    "summary": "Delete a notification template"
+  },
+  "GetIncidentNotificationTemplate": {
+    "description": "Retrieves a specific notification template by its ID.",
+    "summary": "Get incident notification template"
+  },
+  "UpdateIncidentNotificationTemplate": {
+    "description": "Updates an existing notification template's attributes.",
+    "summary": "Update incident notification template",
+    "request_description": "",
+    "request_schema_description": "Update request for a notification template."
+  },
   "ListIncidentTypes": {
     "description": "Get all incident types.",
     "summary": "Get a list of incident types"
