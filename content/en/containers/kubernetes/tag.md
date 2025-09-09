@@ -286,7 +286,7 @@ This setting makes a conflict and create an unexpected result.
         Foo: tag2 
 ```
 
-It should be changed like this, and you will get `tag1: bar` for your data.
+It should be changed like this, and you get `tag1: bar` for your data.
 
 ```yaml
     kubernetesResourcesLabelsAsTags:
