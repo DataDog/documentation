@@ -3,17 +3,19 @@ title: Hosts and Containers
 disable_toc: false
 ---
 
-The [Hosts and Containers][1] inventory in Datadog Workload Protection provides a unified view of host-level agent deployment, configuration health, and security feature status. 
+The [Hosts and Containers][1] view in Datadog Workload Protection **Inventory** provides a unified view of host-level agent deployment, configuration health, and security feature status. 
 
-**Hosts and Containers** enables DevSecOps teams to verify whether the following protections are properly deployed and running across environments:
+The **Hosts and Containers** view shows the hostname of all active Agents running directly on hosts or as containers. This includes hosts with Workload Protection enabled or disabled.
 
-- [Workload Protection][3]
-- [CSM Misconfigurations][2]
-- [Container Vulnerability Scanning][4]
-- [Host Vulnerability Scanning][4]
-- It also helps identify which hosts and containers are running old versions of the Agent.
+**Hosts and Containers** enables DevSecOps teams to:  
 
-**Hosts and Containers** also provides remediation guidance for missing protections.
+- Verify that protections are properly deployed and running across environments, including:  
+  - [Workload Protection][3]  
+  - [CSM Misconfigurations][2]  
+  - [Container Vulnerability Scanning][4]  
+  - [Host Vulnerability Scanning][4]  
+- Identify which hosts and containers are running old versions of the Agent  
+- Access remediation guidance for missing protections
 
 ## Use cases
 
@@ -58,6 +60,8 @@ To check whether posture checks are enabled for a host:
    The hosts and containers without CSM Misconfigurations enabled are indicated by an orange icon. 
 2. For remediation guidance, hover over the **CSM Misconfigurations** icon and click **Configure**.
 
+See Cloud Security Vulnerabilities [deployment methods][6].
+
 ### Cluster-level tracking
 
 The **Cluster Name** column links hosts to logical infrastructure boundaries like Kubernetes clusters. Filter on a cluster by clicking its name and selecting **Filter by cluster_name:[name]**.
@@ -82,3 +86,4 @@ Hover over a feature icon and click **Configure** to see remediation steps for a
 [3]: /security/workload_protection/
 [4]: /security/cloud_security_management/vulnerabilities/
 [5]: /agent/guide/upgrade_agent_fleet_automation
+[6]: /security/cloud_security_management/vulnerabilities/
