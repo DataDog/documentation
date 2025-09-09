@@ -99,9 +99,9 @@ connectors:
 {{< /highlight >}}
 1. Save your changes to the manifest file.
 
-## Build and push the DDOT Collector(Agent) image
+## Build and push the DDOT Collector (Agent) image
 
-The custom DDOT Collector(Agent) image you build needs to be stored in your organization's private container registry for your clusters to access it. Additionally, this build process must be repeated each time you update the Agent version to maintain compatibility with new Agent releases.
+The custom DDOT Collector (Agent) image you build needs to be stored in your organization's private container registry for your clusters to access it. Additionally, this build process must be repeated each time you update the Agent version to maintain compatibility with new Agent releases.
 
 Build your custom Datadog Agent image and push it to a container registry.
 
