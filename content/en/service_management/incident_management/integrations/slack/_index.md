@@ -38,8 +38,8 @@ The Slack integration documentation is organized around the typical lifecycle of
 
 ## Setup
 
-1. Install the integration through the [Slack Integration tile][1]. For more information, see the [Slack integration][20] documentation.
-1. After the integration is installed, navigate to **[Service Management > Incidents > Settings > Integrations][2]**.
+1. Install the integration through the [Slack Integration tile][1]. For more information, see the [Slack integration][2] documentation.
+1. After the integration is installed, navigate to **[Service Management > Incidents > Settings > Integrations][3]**.
 1. Select the Slack integration.
 1. Toggle **Create Slack channels for incidents** to enable the Slack feature for Incident Management.
 
@@ -93,12 +93,12 @@ A global incident updates channel provides your team with organization-wide visi
 
 - Newly declared incidents.
 - Changes to severity, status transition, and incident commander.
-- Links to the [incident][11]'s overview page in app.
+- Links to the [incident][4]'s overview page in app.
 - Link to join dedicated incident Slack channels.
 
 To set up a global incident updates channel:
 
-1. In Datadog, navigate to the [**Incidents** > **Settings** > **Integrations**][2] page.
+1. In Datadog, navigate to the [**Incidents** > **Settings** > **Integrations**][3] page.
 2. In the Slack section, click the **Send all incident updates to a global channel** toggle.
 3. Select the Slack workspace and Slack channel where you want the incident updates to be posted.
 
@@ -123,7 +123,7 @@ For a full list of channel commands, see the [Incident channel commands](#incide
 
 ## Additional Slack configurations
 
-Access all configuration options for Slack in Incident Management through the [**Incidents** > **Settings** > **Integrations**][2] page.
+Access all configuration options for Slack in Incident Management through the [**Incidents** > **Settings** > **Integrations**][3] page.
 
 
 | Feature                                                                 | Description & Notes                                                                                                                                                                                                                                                                         |
@@ -142,7 +142,7 @@ Access all configuration options for Slack in Incident Management through the [*
 ## Slack incident commands
 
 You can view the full list of available Slack commands at any time by typing `/dd help` or `/datadog help` in Slack. This will open the command reference directly in your Slack workspace. To open the action tray for common incident management actions, type `/datadog`.
-<!-- 
+<!--
 
 | Command                          | Description                                                                 |
 |----------------------------------|-----------------------------------------------------------------------------|
@@ -222,19 +222,6 @@ You can view the full list of available Slack commands at any time by typing `/d
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/integrations/slack/
-[20]: /integrations/slack/?tab=datadogforslack
-[2]: https://app.datadoghq.com/incidents/settings#Integrations
-[3]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
-[4]: /service_management/on-call/
-[5]: /service_management/incident_management/incident_settings/notification_rules
-[6]: /integrations/microsoft-teams/?tab=datadogapprecommended
-[7]: /integrations/microsoft-teams/?tab=datadogapprecommended#datadog-incident-management-in-microsoft-teams
-[8]: /integrations/pagerduty/
-[9]: /integrations/opsgenie/
-[10]: /coscreen
-[11]: /integrations/jira/
-[12]: /integrations/webhooks/
-[13]: /integrations/webhooks/#sending-sms-through-twilio
-[14]: /integrations/statuspage/
-[15]: /integrations/servicenow/
-[16]: /integrations/zoom_incident_management/
+[2]: /integrations/slack/?tab=datadogforslack
+[3]: https://app.datadoghq.com/incidents/settings#Integrations
+[4]: /integrations/jira/
