@@ -25,7 +25,7 @@ Data privacy
 APM tracer integrations support a *Propagation Mode*, which controls the amount of information passed from applications to the database.
 
 - `full` mode sends full trace information to the database, allowing you to investigate individual traces within DBM. This is the recommended solution for most integrations.
-- `service` mode sends the service name, allowing you to understand which services are the contributors to database load. This is the only supported mode for Oracle applications.
+- `service` mode sends the service name, allowing you to understand which services are the contributors to database load.
 - `disabled` mode disables propagation and does not send any information from applications.
 
 | DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL Server |  Oracle   |  MongoDB   |
