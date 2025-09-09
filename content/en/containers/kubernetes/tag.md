@@ -200,6 +200,11 @@ spec:
       pods:
         "*": <PREFIX>_%%label%%
 ```
+
+<div class="alert alert-info">
+<strong>Note:</strong> The wildcard pattern with <code>%%label%%</code> template variable is supported for pod/container runtime metrics, logs, and traces, but <strong>NOT</strong> for KSM metrics (kubernetes_state.*). For KSM metrics, you must explicitly map each label.
+</div>
+
 {{% /tab %}}
 
 {{% tab "Helm" %}}
@@ -237,6 +242,11 @@ datadog:
     pods:
       "*": <PREFIX>_%%label%%
 ```
+
+<div class="alert alert-info">
+<strong>Note:</strong> The wildcard pattern with <code>%%label%%</code> template variable is supported for pod/container runtime metrics, logs, and traces, but <strong>NOT</strong> for KSM metrics (kubernetes_state.*). For KSM metrics, you must explicitly map each label.
+</div>
+
 {{% /tab %}}
 
 {{% tab "Manual (DaemonSet)" %}}
@@ -262,6 +272,11 @@ For Agent v7.24.0+, use the following environment variable configuration to add 
 ```bash
 DD_KUBERNETES_RESOURCES_LABELS_AS_TAGS='{"pods":{"*": "<PREFIX>_%%label%%"}}'
 ```
+
+<div class="alert alert-info">
+<strong>Note:</strong> The wildcard pattern with <code>%%label%%</code> template variable is supported for pod/container runtime metrics, logs, and traces, but <strong>NOT</strong> for KSM metrics (kubernetes_state.*). For KSM metrics, you must explicitly map each label.
+</div>
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -386,6 +401,11 @@ spec:
       pods:
         "*": <PREFIX>_%%annotation%%
 ```
+
+<div class="alert alert-info">
+<strong>Note:</strong> The wildcard pattern with <code>%%annotation%%</code> template variable is supported for pod/container runtime metrics, logs, and traces, but <strong>NOT</strong> for KSM metrics (kubernetes_state.*). For KSM metrics, you must explicitly map each annotation.
+</div>
+
 {{% /tab %}}
 
 {{% tab "Helm" %}}
@@ -423,6 +443,11 @@ datadog:
     pods:
       "*": <PREFIX>_%%annotation%%
 ```
+
+<div class="alert alert-info">
+<strong>Note:</strong> The wildcard pattern with <code>%%annotation%%</code> template variable is supported for pod/container runtime metrics, logs, and traces, but <strong>NOT</strong> for KSM metrics (kubernetes_state.*). For KSM metrics, you must explicitly map each annotation.
+</div>
+
 {{% /tab %}}
 
 {{% tab "Manual (DaemonSet)" %}}
@@ -448,6 +473,11 @@ For Agent v7.24.0+, use the following environment variable configuration to add 
 ```bash
 DD_KUBERNETES_RESOURCES_ANNOTATIONS_AS_TAGS='{"pods":{"*": "<PREFIX>_%%annotation%%"}}'
 ```
+
+<div class="alert alert-info">
+<strong>Note:</strong> The wildcard pattern with <code>%%annotation%%</code> template variable is supported for pod/container runtime metrics, logs, and traces, but <strong>NOT</strong> for KSM metrics (kubernetes_state.*). For KSM metrics, you must explicitly map each annotation.
+</div>
+
 {{% /tab %}}
 {{< /tabs >}}
 
