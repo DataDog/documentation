@@ -139,7 +139,6 @@ Resource labels are applied as tags to data <strong>directly associated</strong>
 | **Kubernetes Events** | Events are tagged with their resource's labels | v7.58+ |
 | **Logs** | Only pod and container labels are applied to logs | v7.58+ |
 | **Traces** | Only pod and container labels are applied to traces | v7.58+ |
-| **CRDs and Custom Resources** | Supported in Orchestrator Explorer and KSM metrics | v7.65+ |
 
 </div>
 
@@ -340,7 +339,6 @@ Resource annotations are applied as tags to data <strong>directly associated</st
 | **Kubernetes Events** | Events are tagged with their resource's annotations | v7.58+ |
 | **Logs** | Only pod and container annotations are applied to logs | v7.58+ |
 | **Traces** | Only pod and container annotations are applied to traces | v7.58+ |
-| **CRDs and Custom Resources** | Supported in Orchestrator Explorer and KSM metrics | v7.65+ |
 
 </div>
 
