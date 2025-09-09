@@ -84,7 +84,7 @@ Each compute tier is approximately 2X the query performance and capacity of the 
 
 The query performance of a compute tier depends on several factors:
 
-- Volume: The amount of data stored in the Flex tier.
+- Volume: The amount of daily events stored in the Flex tier.
 - Time window: The query's timespace, for example a 15-minute window compared to a 1-month window of logs.
 - Complexity: The type of query you run, for example, whether it is performing multiple levels of aggregation, using multiple filters, and so on.
 - Concurrency: The number of users concurrently querying Flex Logs.
@@ -96,7 +96,7 @@ Consider the following factors when deciding on a compute tier:
 - The frequency and types of queries you run. For example, the query time windows you typically use to query your logs.
 
 The number of logs stored in the Flex tier has the largest impact on the size needed to performantly query the data. Datadog recommends the following compute sizes based on log volume:
-| Size                                      | Volume (events stored)   |
+| Size                                      | Volume (events stored daily)   |
 | ----------------------------------------- | ------------------------ |
 | Starter                                   | < 10 billion             |
 | Extra Small (XS)                          | 10 - 50 billion          |
@@ -109,7 +109,7 @@ Scalable (XS, S, M, L) compute tiers are billed at a flat rate. Flex Logs Starte
 
 ## Enable and disable Flex Logs
 
-You can enable or disable Flex Logs at the organization level. You must have the `flex_logs_config_write` permission to do so.
+You can enable or disable Flex Logs at the organization level. You must have the `flex_logs_config_write`[8](https://docs.datadoghq.com/account_management/rbac/permissions/#log-management) permission to do so.
 
 If Flex Logs is part of your contract, the compute options available on your contract is shown in the UI.
 
@@ -240,3 +240,4 @@ When your organization reaches the compute limit in terms of concurrent queries,
 [5]: https://app.datadoghq.com/logs/pipelines/flex-logs-controls
 [6]: https://www.datadoghq.com/pricing/?product=log-management#products
 [7]: mailto:success@datadoghq.com
+[8]: https://docs.datadoghq.com/account_management/rbac/permissions/#log-management
