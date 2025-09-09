@@ -58,14 +58,32 @@ For hosts without container runtimes, follow the instructions for [running direc
 
 ### Configuration
 #### Local symbol upload (Experimental)
-For compiled languages (C/C++/Rust/Go), the profiler can upload local symbols to Datadog for symbolication when unstripped binaries are available.
+For compiled languages (C/C++/Rust/Go), the profiler can upload local symbols to Datadog for symbolication when unstripped binaries are available. 
+The Full-Host Profiler handles this automatically.
 
-To enable local symbol upload:
+To manually upload symbols or add debug information:
 
-1. Set the `DD_HOST_PROFILING_EXPERIMENTAL_UPLOAD_SYMBOLS=true`.
-2. Provide a [Datadog API key][11] through the `DD_API_KEY` environment variable.
-3. Provide a [Datadog application key][13] through the `DD_APP_KEY` environment variable.
-4. Set the `DD_SITE` environment variable to your [Datadog site][12]. Your site is: {{< region-param key="dd_site" code="true" >}}
+1. Git clone the [Datadog CI][14] 
+2. Install `datadog-ci`, run:
+
+   ```shell
+   npm install -g @datadog/datadog-ci
+   ```
+3. Provide a [Datadog API key][11] through the `DD_API_KEY` environment variable.
+4. Set variables in an encrypted `datadog-ci.json` file at the root of your project:
+
+   ```
+   {
+      "apiKey": "<API_KEY>",
+      "datadogSite": "<SITE>"
+   }
+   ```
+5. Install `binutils` 
+6. Run:
+
+```
+DD_BETA_COMMANDS_ENABLED=1 datadog-ci elf-symbols upload ~/your/build/bin/
+```
 
 ### Build
 To build the Full-Host Profiler directly on your machine, run:
@@ -105,3 +123,4 @@ After installing the Full-Host Profiler, see the [Getting Started with Profiler]
 [11]: https://app.datadoghq.com/organization-settings/api-keys
 [12]: /getting_started/site/
 [13]: https://app.datadoghq.com/access/application-keys
+[14]: https://github.com/DataDog/datadog-ci/tree/master
