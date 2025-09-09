@@ -41,22 +41,23 @@ To create a service account for a workflow, you must have either the Datadog adm
 You can dynamically create a service account for your workflow when you [add an automatic trigger][4].
 
 1. Click the cog (**Settings**) icon.
-1. Click **Create a service account**.
-1. Select a role for your service account user.
-1. Click **Create** to save the service account.
-1. Save your workflow to apply the changes.
+1. Click **Manage workflow identity**.
+1. Select **Run as Service Account**.
+1. Select a role for your service account user or select an existing Service Account.
+1. Click **Save** to save the service account and apply the changes.
 
 When you run a workflow, the service account user resolves the connections defined in the workflow actions. Therefore, the service account user needs the `connections_resolve` permission. The Datadog Admin Role and the Datadog Standard Role include the `connections_resolve` permission.
 
 #### View service account details
 
 1. Click the cog (**Settings**) icon.
-1. Select your service account from the dropdown menu.
+1. Select **Manage workflow identity**.
+1. Click on your service account next to *Run As*.
 
-#### Remove a service account associated with workflow
+#### Remove a service account associated with a workflow
 
 1. Click the cog (**Settings**) icon.
-1. Select your service account from the dropdown menu.
+1. Select **Manage workflow identity**.
 1. Click **Remove service account**.
 
 ## Action credentials

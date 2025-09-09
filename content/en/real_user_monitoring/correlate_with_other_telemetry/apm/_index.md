@@ -135,14 +135,14 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 **Note**: `traceSampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
-4. _(Optional)_ If you set a `traceSampleRate`, to ensure backend services' sampling decisions are still applied, configure the `traceContextInjection` initialization parameter to `sampled` (set to `all` by default).
+4. _(Optional)_ If you set a `traceSampleRate`, to ensure backend services' sampling decisions are still applied, configure the `traceContextInjection` initialization parameter to `sampled` (set to `sampled` by default).
 
     For example, if you set the `traceSampleRate` to 20% in the Browser SDK:
     - When `traceContextInjection` is set to `all`, **20%** of backend traces are kept and **80%** of backend traces are dropped.
 
   {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_all-2.png" alt="traceContextInjection set to all" style="width:90%;">}}
 
-  - When `traceContextInjection` is set to `sampled`, **20%** of backend traces are kept. For the remaining **80%**, the browser SDK **does not inject** a sampling decision. The decision is made on the server side and is based on the tracing library head-based sampling [configuration][2]. In the example below, the backend sample rate is set to 40%, and therefore 32% of the remaining backend traces are kept.
+    - When `traceContextInjection` is set to `sampled`, **20%** of backend traces are kept. For the remaining **80%**, the browser SDK **does not inject** a sampling decision. The decision is made on the server side and is based on the tracing library head-based sampling [configuration][2]. In the example below, the backend sample rate is set to 40%, and therefore 32% of the remaining backend traces are kept.
 
     {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_sampled-3.png" alt="traceContextInjection set to sampled" style="width:90%;">}}
 
@@ -672,13 +672,23 @@ Datadog uses the distributed tracing protocol and sets up the HTTP headers below
 : `parent id`: 64 bits span ID, hexadecimal on 16 characters.
 : `trace flags`: Sampled (`01`) or not sampled (`00`)
 
+**Trace ID Conversion**: The 128-bit W3C trace ID is created by padding the original 64-bit source trace ID with leading zeros. This ensures compatibility with APM while conforming to the W3C Trace Context specification. The original 64-bit trace ID becomes the lower 64 bits of the 128-bit W3C trace ID.
+
 `tracestate: dd=s:[sampling priority];o:[origin]`
 : `dd`: Datadog's vendor prefix.
 : `sampling priority`: Set to `1` if the trace was sampled, or `0` if it was not.
 : `origin`: Always set to `rum` to make sure the generated traces from Real User Monitoring don't affect your APM Index Spans counts.
 
-Example:
-: `traceparent: 00-00000000000000008448eb211c80319c-b7ad6b7169203331s-01`
+**Examples**:
+
+Source trace ID (64-bit): `8448eb211c80319c`
+
+W3C Trace Context (128-bit): `00000000000000008448eb211c80319c`
+
+The relationship shows that the original 64-bit trace ID `8448eb211c80319c` is padded with 16 leading zeros (`0000000000000000`) to create the 128-bit W3C trace ID.
+
+Complete traceparent example:
+: `traceparent: 00-00000000000000008448eb211c80319c-b7ad6b7169203331-01`
 : `tracestate: dd=s:1;o:rum`
 
 {{% /tab %}}

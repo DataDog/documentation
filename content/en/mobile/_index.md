@@ -258,10 +258,44 @@ You can also group by log patterns and select different log attributes for clust
 
 On the Services page, you can view, search and filter all services that you have access to in your Datadog account from the Datadog Mobile App to ensure the health of your service from anywhere. You can also view recent deployments, resources, SLOs, and monitors associated with that service. For more information about investigative tools for your services, see [manage Software Catalog][17].
 
+## Bits AI
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+{{< img src="service_management/mobile/ios_bits_chat.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI chatbot interface in ios where a user asks about a service">}}
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+{{< img src="service_management/mobile/android_bits_chat.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI chatbot interface in Android where a user asks about a service">}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+On the Bits AI home page, you can ask questions about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information, see [Chat with Bits AI][27].
+
+### Bits AI SRE
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+{{< img src="service_management/mobile/ios_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI SRE investigation results displayed on an On-Call page">}}
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+{{< img src="service_management/mobile/android_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI SRE investigation results displayed on an On-Call page">}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+When enabled, Bits AI SRE initiates investigations directly on On-Call pages. These investigations present initial findings and conclusions to help responders identify potential root causes and next steps. For more information, see [Bits AI SRE][28].
 
 ## Frequently Asked Question
 ### How do I remain logged into the mobile app?
-Upon successful authentication to the mobile app, you will remain logged in for 90 days. Provided you are active during that 90 day period, the token will be refreshed.
+Upon successful authentication to the mobile app, you will remain logged in for 90 days. Provided you are active during that 90 day period, the token will be refreshed. 
+
+**Note**: If you have notifications enabled, proactive notifications will be sent prior to token expiration.
 
 ### Will I still receive notifications if I am automatically signed out?
 If you are automatically logged out due to inactivity during the 90 day token period, you will still be able to receive notifications and will be prompted to log in again.
@@ -270,6 +304,9 @@ If you are automatically logged out due to inactivity during the 90 day token pe
 
 ### Why am I not receiving notifications?
 Check that you have notifications enabled for the Datadog app in your device app settings. If you would like to ensure that notifications bypass Do Not Disturb, check that Critical Alerts is toggled on.
+
+### What happens if a user is disabled?
+The mobile app token will be invalid and force the user to log out.
 
 ## Troubleshooting
 
@@ -303,6 +340,8 @@ For help with troubleshooting, [contact Datadog support][13]. You can also send 
 [21]: /service_management/on-call/guides/configure-mobile-device-for-on-call/?tab=ios
 [22]: https://docs.datadoghq.com/logs/explorer/analytics/patterns/
 [23]: https://docs.datadoghq.com/logs/explorer/search_syntax/
-[24]: https://docs.datadoghq.com/dashboards/configure/#configuration-actions
-[25]: https://docs.datadoghq.com/logs/explorer/watchdog_insights/
-[26]: https://docs.datadoghq.com/watchdog/insights/?tab=logmanagement
+[24]: /dashboards/configure/#configuration-actions
+[25]: /logs/explorer/watchdog_insights/
+[26]: /watchdog/insights/?tab=logmanagement
+[27]: /bits_ai/chat_with_bits_ai/
+[28]: /bits_ai/bits_ai_sre/

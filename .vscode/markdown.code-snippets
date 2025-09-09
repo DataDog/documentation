@@ -79,7 +79,7 @@
 
     "Alert box": {
         "scope": "markdown",
-        "prefix": ";;alert",
+        "prefix": [";;alert", ";;admonition", ";;note"],
         "body": [
             "<div class=\"alert alert-${1|info,danger,warning|}\">Text containing an <a href=\"https://google.com\">HTML link.</a></div>"
         ],

@@ -8,6 +8,7 @@ aliases:
   - /security/application_security/enabling
   - /security/application_security/getting_started
   - /security/application_security/threats
+  - /security/application_security/setup/standalone
 further_reading:
 - link: "/security/application_security/how-it-works/"
   tag: "Documentation"
