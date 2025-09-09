@@ -15,12 +15,15 @@ The ARM template deploys resources from a series of Azure services (storage acco
 
 **All sites**: Automated log forwarding is available to use on all [Datadog sites][4].
 
+## How to choose between automated and manual setup
+
+<CONTENT>
+
 ## Setup
 
 Begin by opening the [Automated Log Forwarding ARM template][1]. The sections below provide instructions for completing each page of the template.
 
 ### Basics
-
 
 1. Under **Project details**, select the management group. This is needed for the ARM template to grant permissions to the subscriptions you select for automated log forwarding.
 2. Under **Instance details**, select values for:
@@ -33,7 +36,7 @@ Begin by opening the [Automated Log Forwarding ARM template][1]. The sections be
 
 3. Click **Next**.
 
-### Datadog Configuration
+### Datadog configuration
 
 1. Enter your [Datadog API key][2] value.
 2. Select your [Datadog Site][4].
@@ -51,6 +54,8 @@ Begin by opening the [Automated Log Forwarding ARM template][1]. The sections be
 
 1. Review the finalized deployment details.
 2. Click **Create**.
+
+{{% azure-log-archiving %}}
 
 ## Uninstall
 
