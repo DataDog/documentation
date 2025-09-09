@@ -558,7 +558,7 @@ metadata:
 spec:
   global:
     nodeLabelsAsTags:
-      "*": <PREFIX>_%%label%%
+      "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM metrics
 ```
 {{% /tab %}}
 
@@ -583,7 +583,7 @@ For Agent v7.24.0+, use the following environment variable configuration to add 
 ```yaml
 datadog:
   nodeLabelsAsTags:
-    "*": <PREFIX>_%%label%%
+    "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM metrics
 ```
 {{% /tab %}}
 
@@ -603,7 +603,7 @@ DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"kubernetes.io/arch":"arch"}'
 For Agent v7.24.0+, use the following environment variable configuration to add all node labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
 
 ```bash
-DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
+DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}' # Note: wildcards do not work for KSM metrics
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -657,7 +657,7 @@ metadata:
 spec:
   global:
     podLabelsAsTags:
-      "*": <PREFIX>_%%label%%
+      "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM metrics
 ```
 {{% /tab %}}
 
@@ -682,7 +682,7 @@ For Agent v7.24.0+, use the following environment variable configuration to add 
 ```yaml
 datadog:
   podLabelsAsTags:
-    "*": <PREFIX>_%%label%%
+    "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM metrics
 ```
 {{% /tab %}}
 
@@ -702,7 +702,7 @@ DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app"}'
 For Agent v6.8.0+, use the following environment variable configuration to add all pod labels as tags to your metrics. In this example, the tags names are prefixed by `<PREFIX>_`:
 
 ```bash
-DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
+DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}' # Note: wildcards do not work for KSM metrics
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -756,7 +756,7 @@ metadata:
 spec:
   global:
     podAnnotationsAsTags:
-      "*": <PREFIX>_%%label%%
+      "*": <PREFIX>_%%annotation%% # Note: wildcards do not work for KSM metrics
 ```
 {{% /tab %}}
 
@@ -781,7 +781,7 @@ For Agent v7.24.0+, use the following environment variable configuration to add 
 ```yaml
 datadog:
   podAnnotationsAsTags:
-    "*": <PREFIX>_%%label%%
+    "*": <PREFIX>_%%annotation%% # Note: wildcards do not work for KSM metrics
 ```
 {{% /tab %}}
 
@@ -801,7 +801,7 @@ DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"app":"kube_app"}'
 For Agent v7.24.0+, use the following environment variable configuration to add all pod annotations as tags to your metrics. In this example, the tags names are prefixed by `<PREFIX>_`:
 
 ```bash
-DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PREFIX>_%%annotation%%"}'
+DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PREFIX>_%%annotation%%"}' # Note: wildcards do not work for KSM metrics
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -855,7 +855,7 @@ metadata:
 spec:
   global:
     namespaceLabelsAsTags:
-      "*": <PREFIX>_%%label%%
+      "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM metrics
 ```
 {{% /tab %}}
 
@@ -880,7 +880,7 @@ For Agent v7.24.0+, use the following environment variable configuration to add 
 ```yaml
 datadog:
   namespaceLabelsAsTags:
-    "*": <PREFIX>_%%label%%
+    "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM metrics
 ```
 {{% /tab %}}
 
@@ -900,7 +900,7 @@ DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"app":"kube_app"}'
 Use the following environment variable configuration to add all namespace labels as tags to your metrics. In this example, the tag names are prefixed by `<PREFIX>_`:
 
 ```bash
-DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
+DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}' # Note: wildcards do not work for KSM metrics
 ```
 {{% /tab %}}
 {{< /tabs >}}
