@@ -7,6 +7,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-cloudcraft/"
   tag: "Blog"
   text: "Create rich, up-to-date visualizations of your AWS infrastructure with Cloudcraft in Datadog"
+- link: "https://www.datadoghq.com/blog/cloudcraft-security/"
+  tag: "Blog"
+  text: "Visually identify and prioritize security risks using Cloudcraft"
 ---
 
 ## Overview

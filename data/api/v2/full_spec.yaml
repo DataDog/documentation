@@ -497,6 +497,37 @@ components:
       required: true
       schema:
         type: string
+    IncidentNotificationTemplateIDPathParameter:
+      description: The ID of the notification template.
+      in: path
+      name: id
+      required: true
+      schema:
+        example: 00000000-0000-0000-0000-000000000001
+        format: uuid
+        type: string
+    IncidentNotificationTemplateIncidentTypeFilterQueryParameter:
+      description: Optional incident type ID filter.
+      explode: false
+      in: query
+      name: filter[incident-type]
+      required: false
+      schema:
+        example: 00000000-0000-0000-0000-000000000001
+        format: uuid
+        type: string
+    IncidentNotificationTemplateIncludeQueryParameter:
+      description: 'Comma-separated list of relationships to include. Supported values:
+        `created_by_user`, `last_modified_by_user`, `incident_type`
+
+        '
+      explode: false
+      in: query
+      name: include
+      required: false
+      schema:
+        example: created_by_user,incident_type
+        type: string
     IncidentSearchIncludeQueryParameter:
       description: Specifies which types of related objects should be included in
         the response.
@@ -10820,6 +10851,14 @@ components:
       required:
       - data
       type: object
+    CreateIncidentNotificationTemplateRequest:
+      description: Create request for a notification template.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentNotificationTemplateCreateData'
+      required:
+      - data
+      type: object
     CreateNotificationRuleParameters:
       description: Body of the notification rule create request.
       properties:
@@ -18680,6 +18719,33 @@ components:
       required:
       - type
       type: object
+    GoogleMeetConfigurationReference:
+      description: A reference to a Google Meet Configuration resource.
+      nullable: true
+      properties:
+        data:
+          $ref: '#/components/schemas/GoogleMeetConfigurationReferenceData'
+      required:
+      - data
+      type: object
+    GoogleMeetConfigurationReferenceData:
+      description: The Google Meet configuration relationship data object.
+      nullable: true
+      properties:
+        id:
+          description: The unique identifier of the Google Meet configuration.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          description: The type of the Google Meet configuration.
+          example: google_meet_configurations
+          type: string
+      required:
+      - id
+      - type
+      type: object
+      x-merge-override:
+        required: false
     GreyNoiseAPIKey:
       description: The definition of the `GreyNoiseAPIKey` object.
       properties:
@@ -20007,6 +20073,256 @@ components:
           example: '@test.user@test.com'
           type: string
       type: object
+    IncidentNotificationTemplate:
+      description: Response with a notification template.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentNotificationTemplateResponseData'
+        included:
+          description: Related objects that are included in the response.
+          items:
+            $ref: '#/components/schemas/IncidentNotificationTemplateIncludedItems'
+          type: array
+      required:
+      - data
+      type: object
+    IncidentNotificationTemplateArray:
+      description: Response with notification templates.
+      properties:
+        data:
+          description: The `NotificationTemplateArray` `data`.
+          items:
+            $ref: '#/components/schemas/IncidentNotificationTemplateResponseData'
+          type: array
+        included:
+          description: Related objects that are included in the response.
+          items:
+            $ref: '#/components/schemas/IncidentNotificationTemplateIncludedItems'
+          type: array
+        meta:
+          $ref: '#/components/schemas/IncidentNotificationTemplateArrayMeta'
+      required:
+      - data
+      type: object
+    IncidentNotificationTemplateArrayMeta:
+      description: Response metadata.
+      properties:
+        page:
+          $ref: '#/components/schemas/IncidentNotificationTemplateArrayMetaPage'
+      type: object
+    IncidentNotificationTemplateArrayMetaPage:
+      description: Pagination metadata.
+      properties:
+        total_count:
+          description: Total number of notification templates.
+          example: 42
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: Total number of notification templates matching the filter.
+          example: 15
+          format: int64
+          type: integer
+      type: object
+    IncidentNotificationTemplateAttributes:
+      description: The notification template's attributes.
+      properties:
+        category:
+          description: The category of the notification template.
+          example: alert
+          type: string
+        content:
+          description: The content body of the notification template.
+          example: 'An incident has been declared.
+
+
+            Title: {{incident.title}}
+
+            Severity: {{incident.severity}}
+
+            Affected Services: {{incident.services}}
+
+            Status: {{incident.state}}
+
+
+            Please join the incident channel for updates.'
+          type: string
+        created:
+          description: Timestamp when the notification template was created.
+          example: '2025-01-15T10:30:00Z'
+          format: date-time
+          readOnly: true
+          type: string
+        modified:
+          description: Timestamp when the notification template was last modified.
+          example: '2025-01-15T14:45:00Z'
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          description: The name of the notification template.
+          example: Incident Alert Template
+          type: string
+        subject:
+          description: The subject line of the notification template.
+          example: '{{incident.severity}} Incident: {{incident.title}}'
+          type: string
+      required:
+      - name
+      - subject
+      - content
+      - category
+      - created
+      - modified
+      type: object
+    IncidentNotificationTemplateCreateAttributes:
+      description: The attributes for creating a notification template.
+      properties:
+        category:
+          description: The category of the notification template.
+          example: alert
+          type: string
+        content:
+          description: The content body of the notification template.
+          example: 'An incident has been declared.
+
+
+            Title: {{incident.title}}
+
+            Severity: {{incident.severity}}
+
+            Affected Services: {{incident.services}}
+
+            Status: {{incident.state}}
+
+
+            Please join the incident channel for updates.'
+          type: string
+        name:
+          description: The name of the notification template.
+          example: Incident Alert Template
+          type: string
+        subject:
+          description: The subject line of the notification template.
+          example: '{{incident.severity}} Incident: {{incident.title}}'
+          type: string
+      required:
+      - name
+      - subject
+      - content
+      - category
+      type: object
+    IncidentNotificationTemplateCreateData:
+      description: Notification template data for a create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentNotificationTemplateCreateAttributes'
+        relationships:
+          $ref: '#/components/schemas/IncidentNotificationTemplateCreateDataRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentNotificationTemplateType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentNotificationTemplateCreateDataRelationships:
+      description: The definition of `NotificationTemplateCreateDataRelationships`
+        object.
+      properties:
+        incident_type:
+          $ref: '#/components/schemas/RelationshipToIncidentType'
+      type: object
+    IncidentNotificationTemplateIncludedItems:
+      description: Objects related to a notification template.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/IncidentTypeObject'
+    IncidentNotificationTemplateRelationships:
+      description: The notification template's resource relationships.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        incident_type:
+          $ref: '#/components/schemas/RelationshipToIncidentType'
+        last_modified_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+      type: object
+    IncidentNotificationTemplateResponseData:
+      description: Notification template data from a response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentNotificationTemplateAttributes'
+        id:
+          description: The unique identifier of the notification template.
+          example: 00000000-0000-0000-0000-000000000001
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentNotificationTemplateRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentNotificationTemplateType'
+      required:
+      - id
+      - type
+      type: object
+    IncidentNotificationTemplateType:
+      description: Notification templates resource type.
+      enum:
+      - notification_templates
+      example: notification_templates
+      type: string
+      x-enum-varnames:
+      - NOTIFICATION_TEMPLATES
+    IncidentNotificationTemplateUpdateAttributes:
+      description: The attributes to update on a notification template.
+      properties:
+        category:
+          description: The category of the notification template.
+          example: update
+          type: string
+        content:
+          description: The content body of the notification template.
+          example: 'Incident Status Update:
+
+
+            Title: {{incident.title}}
+
+            New Status: {{incident.state}}
+
+            Severity: {{incident.severity}}
+
+            Services: {{incident.services}}
+
+            Commander: {{incident.commander}}
+
+
+            For more details, visit the incident page.'
+          type: string
+        name:
+          description: The name of the notification template.
+          example: Incident Status Update Template
+          type: string
+        subject:
+          description: The subject line of the notification template.
+          example: 'Incident Update: {{incident.title}} - {{incident.state}}'
+          type: string
+      type: object
+    IncidentNotificationTemplateUpdateData:
+      description: Notification template data for an update request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentNotificationTemplateUpdateAttributes'
+        id:
+          description: The unique identifier of the notification template.
+          example: 00000000-0000-0000-0000-000000000001
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentNotificationTemplateType'
+      required:
+      - id
+      - type
+      type: object
     IncidentPostmortemType:
       default: incident_postmortems
       description: Incident postmortem resource type.
@@ -21168,6 +21484,8 @@ components:
           description: The incident type's ID.
           example: 00000000-0000-0000-0000-000000000000
           type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentTypeRelationships'
         type:
           $ref: '#/components/schemas/IncidentTypeType'
       required:
@@ -21197,6 +21515,21 @@ components:
           $ref: '#/components/schemas/IncidentTypePatchData'
       required:
       - data
+      type: object
+    IncidentTypeRelationships:
+      additionalProperties: {}
+      description: The incident type's resource relationships.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        google_meet_configuration:
+          $ref: '#/components/schemas/GoogleMeetConfigurationReference'
+        last_modified_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        microsoft_teams_configuration:
+          $ref: '#/components/schemas/MicrosoftTeamsConfigurationReference'
+        zoom_configuration:
+          $ref: '#/components/schemas/ZoomConfigurationReference'
       type: object
     IncidentTypeResponse:
       description: Incident type response data.
@@ -26462,6 +26795,33 @@ components:
       type: string
       x-enum-varnames:
       - MS_TEAMS_CHANNEL_INFO
+    MicrosoftTeamsConfigurationReference:
+      description: A reference to a Microsoft Teams Configuration resource.
+      nullable: true
+      properties:
+        data:
+          $ref: '#/components/schemas/MicrosoftTeamsConfigurationReferenceData'
+      required:
+      - data
+      type: object
+    MicrosoftTeamsConfigurationReferenceData:
+      description: The Microsoft Teams configuration relationship data object.
+      nullable: true
+      properties:
+        id:
+          description: The unique identifier of the Microsoft Teams configuration.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          description: The type of the Microsoft Teams configuration.
+          example: microsoft_teams_configurations
+          type: string
+      required:
+      - id
+      - type
+      type: object
+      x-merge-override:
+        required: false
     MicrosoftTeamsCreateTenantBasedHandleRequest:
       description: Create tenant-based handle request.
       properties:
@@ -32891,6 +33251,14 @@ components:
             $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
           type: array
       type: object
+    PatchIncidentNotificationTemplateRequest:
+      description: Update request for a notification template.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentNotificationTemplateUpdateData'
+      required:
+      - data
+      type: object
     PatchNotificationRuleParameters:
       description: Body of the notification rule patch request.
       properties:
@@ -34823,6 +35191,27 @@ components:
           type: array
       required:
       - data
+      type: object
+    RelationshipToIncidentType:
+      description: Relationship to an incident type.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToIncidentTypeData'
+      required:
+      - data
+      type: object
+    RelationshipToIncidentTypeData:
+      description: Relationship to incident type object.
+      properties:
+        id:
+          description: The incident type's ID.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentTypeType'
+      required:
+      - id
+      - type
       type: object
     RelationshipToIncidentUserDefinedFieldData:
       description: Relationship to impact object.
@@ -47509,6 +47898,33 @@ components:
       oneOf:
       - $ref: '#/components/schemas/XRayServicesIncludeAll'
       - $ref: '#/components/schemas/XRayServicesIncludeOnly'
+    ZoomConfigurationReference:
+      description: A reference to a Zoom configuration resource.
+      nullable: true
+      properties:
+        data:
+          $ref: '#/components/schemas/ZoomConfigurationReferenceData'
+      required:
+      - data
+      type: object
+    ZoomConfigurationReferenceData:
+      description: The Zoom configuration relationship data object.
+      nullable: true
+      properties:
+        id:
+          description: The unique identifier of the Zoom configuration.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          description: The type of the Zoom configuration.
+          example: zoom_configurations
+          type: string
+      required:
+      - id
+      - type
+      type: object
+      x-merge-override:
+        required: false
   securitySchemes:
     AuthZ:
       description: This API uses OAuth 2 with the implicit grant flow.
@@ -47558,6 +47974,7 @@ components:
             incident_notification_settings_write: Configure Incidents Notification
               settings.
             incident_read: View incidents in Datadog.
+            incident_settings_read: View Incident Settings.
             incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
@@ -55099,6 +55516,240 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/config/notification-templates:
+    get:
+      description: Lists all notification templates. Optionally filter by incident
+        type.
+      operationId: ListIncidentNotificationTemplates
+      parameters:
+      - $ref: '#/components/parameters/IncidentNotificationTemplateIncidentTypeFilterQueryParameter'
+      - $ref: '#/components/parameters/IncidentNotificationTemplateIncludeQueryParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentNotificationTemplateArray'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_settings_read
+      summary: List incident notification templates
+      tags:
+      - Incidents
+      x-menu-order: 10
+      x-permission:
+        operator: AND
+        permissions:
+        - incident_notification_settings_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Creates a new notification template.
+      operationId: CreateIncidentNotificationTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateIncidentNotificationTemplateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentNotificationTemplate'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_notification_settings_write
+      summary: Create incident notification template
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-given:
+        notification_template:
+          operationId: CreateIncidentNotificationTemplate
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"category\": \"alert\",\n
+              \     \"content\": \"Test notification template\",\n      \"name\":
+              \"Test Template {{ unique }}\",\n      \"subject\": \"Test Subject\"\n
+              \   },\n    \"relationships\": {\n      \"incident_type\": {\n        \"data\":
+              {\n          \"id\": \"{{ incident_type.data.id }}\",\n          \"type\":
+              \"incident_types\"\n        }\n      }\n    },\n    \"type\": \"notification_templates\"\n
+              \ }\n}"
+          step: there is a valid "notification_template" in the system
+      x-menu-order: 11
+      x-permission:
+        operator: AND
+        permissions:
+        - incident_notification_settings_write
+      x-undo:
+        operationId: DeleteIncidentNotificationTemplate
+        parameters:
+        - name: id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/config/notification-templates/{id}:
+    delete:
+      description: Deletes a notification template by its ID.
+      operationId: DeleteIncidentNotificationTemplate
+      parameters:
+      - $ref: '#/components/parameters/IncidentNotificationTemplateIDPathParameter'
+      - $ref: '#/components/parameters/IncidentNotificationTemplateIncludeQueryParameter'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_notification_settings_write
+      summary: Delete a notification template
+      tags:
+      - Incidents
+      x-menu-order: 14
+      x-permission:
+        operator: AND
+        permissions:
+        - incident_notification_settings_write
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Retrieves a specific notification template by its ID.
+      operationId: GetIncidentNotificationTemplate
+      parameters:
+      - $ref: '#/components/parameters/IncidentNotificationTemplateIDPathParameter'
+      - $ref: '#/components/parameters/IncidentNotificationTemplateIncludeQueryParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentNotificationTemplate'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_settings_read
+      summary: Get incident notification template
+      tags:
+      - Incidents
+      x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_read
+        - incident_write
+        - incident_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Updates an existing notification template's attributes.
+      operationId: UpdateIncidentNotificationTemplate
+      parameters:
+      - $ref: '#/components/parameters/IncidentNotificationTemplateIDPathParameter'
+      - $ref: '#/components/parameters/IncidentNotificationTemplateIncludeQueryParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchIncidentNotificationTemplateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentNotificationTemplate'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_notification_settings_write
+      summary: Update incident notification template
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-menu-order: 13
+      x-permission:
+        operator: AND
+        permissions:
+        - incident_notification_settings_write
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/config/types:
     get:
       description: Get all incident types.
@@ -56094,9 +56745,6 @@ paths:
         - aws_configuration_read
       x-undo:
         type: safe
-      x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).**'
     post:
       description: Create a new AWS Account Integration Config.
       operationId: CreateAWSAccount
@@ -56162,9 +56810,6 @@ paths:
         - name: aws_account_config_id
           source: data.id
         type: unsafe
-      x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v2/integration/aws/accounts/{aws_account_config_id}:
     delete:
       description: Delete an AWS Account Integration Config by config ID.
@@ -56192,9 +56837,6 @@ paths:
         - aws_configurations_manage
       x-undo:
         type: idempotent
-      x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).**'
     get:
       description: Get an AWS Account Integration Config by config ID.
       operationId: GetAWSAccount
@@ -56225,9 +56867,6 @@ paths:
         - aws_configuration_read
       x-undo:
         type: safe
-      x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).**'
     patch:
       description: Update an AWS Account Integration Config by config ID.
       operationId: UpdateAWSAccount
@@ -56265,9 +56904,6 @@ paths:
         - aws_configuration_edit
       x-undo:
         type: idempotent
-      x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v2/integration/aws/available_namespaces:
     get:
       description: Get a list of available AWS CloudWatch namespaces that can send
@@ -56294,9 +56930,6 @@ paths:
         - aws_configuration_read
       x-undo:
         type: safe
-      x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v2/integration/aws/generate_new_external_id:
     post:
       description: Generate a new external ID for AWS role-based authentication.
@@ -56322,9 +56955,6 @@ paths:
         - aws_configuration_edit
       x-undo:
         type: safe
-      x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v2/integration/aws/iam_permissions:
     get:
       description: Get all AWS IAM permissions required for the AWS integration.
@@ -56369,9 +56999,6 @@ paths:
         - aws_configuration_read
       x-undo:
         type: safe
-      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v2/integration/gcp/accounts:
     get:
       description: List all GCP STS-enabled service accounts configured in your Datadog
@@ -60879,6 +61506,47 @@ paths:
       description: Returns a list of all monitor notification rules.
       operationId: GetMonitorNotificationRules
       parameters:
+      - description: The page to start paginating from. If `page` is not specified,
+          the argument defaults to the first page.
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          maximum: 1000000
+          minimum: 0
+          type: integer
+      - description: The number of rules to return per page. If `per_page` is not
+          specified, the argument defaults to 100.
+        in: query
+        name: per_page
+        required: false
+        schema:
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+      - description: 'String for sort order, composed of field and sort order separated
+          by a colon, for example `name:asc`. Supported sort directions: `asc`, `desc`.
+          Supported fields: `name`, `created_at`.'
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+      - description: 'JSON-encoded filter object. Supported keys:
+
+          * `text`: Free-text query matched against rule name, tags, and recipients.
+
+          * `tags`: Array of strings. Return rules that have any of these tags.
+
+          * `recipients`: Array of strings. Return rules that have any of these recipients.'
+        example: '{"text":"error","tags":["env:prod","team:my-team"],"recipients":["slack-monitor-app","email@example.com"]}'
+        in: query
+        name: filters
+        required: false
+        schema:
+          type: string
       - description: 'Comma-separated list of resource paths for related resources
           to include in the response. Supported resource
 
