@@ -23,6 +23,7 @@ Your installation method depends on your deployment type (uniform or mixed):
 - Uniform clusters are those where all the nodes have GPU devices
 - Mixed clusters have some nodes with GPU devices and others without. 
 
+#### Datadog Operator Users
 {{< tabs >}}
 {{% tab "Uniform Clusters" %}}
 
@@ -52,9 +53,9 @@ spec:
 {{% tab "Mixed Clusters" %}}
 Mixed clusters have some nodes with GPU devices and others without. If you have a mixed cluster, you'll need to leverage the Datadog Operator's Datadog Agent Profiles feature to enable GPU monitoring only on your nodes with GPUs.
 
-1. Install and deploy the Datadog Agent on Kubernetes (instructions here[1])
+1. Install and deploy the Datadog Agent on Kubernetes using the Datadog Operator (instructions here[1])
 2. Modify your existing DatadogAgent resource with the following changes that can safely be applied to all agents, regardless of whether they run on GPU nodes or not:
-3. ```
+```
    spec:
   features:
     oomKill:
@@ -91,89 +92,129 @@ override:
             - name: pod-resources
               mountPath: /var/lib/kubelet/pod-resources
    ```
-3. Once the Datadog Agent configuration is changed, a profile needs to be created so that the GPU feature is enabled only on nodes with GPUs. The profileNodeAffinity selector is a suggestion based on a tag that’s commonly present in nodes with the NVIDIA GPU operator, but any other tag can be used. 
-
-
+3. Once the Datadog Agent configuration is changed, a profile needs to be created so that the GPU feature is enabled only on nodes with GPUs. The profileNodeAffinity selector is a suggestion based on a tag that’s commonly present in nodes with the NVIDIA GPU operator, but any other tag can be used.
+```
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgentProfile
+metadata:
+  name: gpu-nodes
+spec:
+  profileAffinity:
+    profileNodeAffinity:
+      - key: nvidia.com/gpu.present
+        operator: In
+        values:
+          - "true"
+  config:
+    override:
+      nodeAgent:
+        runtimeClassName: nvidia  # Only if not in AWS EKS or Oracle Cloud
+        containers:
+          # Change system-probe environment variables only for advanced 
+          # eBPF metrics, or if running in GKE 
+          system-probe:
+            env:
+              - name: DD_GPU_MONITORING_ENABLED
+                value: "true"
+              # cgroup permission patching only for GKE
+              - name: DD_GPU_MONITORING_CONFIGURE_CGROUP_PERMS
+                value: "true"
+          agent:
+            env:
+              - name: DD_GPU_ENABLED
+                value: "true"
+              # Only for advanced eBPF metrics
+              - name: DD_GPU_MONITORING_ENABLED
+                value: "true"
+```
 {{% /tab %}}
 {{< /tabs >}}
 
-### View traces
-
-Make requests to your application triggering LLM calls and then view traces in the **Traces** tab [of the **LLM Observability** page][3] in Datadog. If you don't see any traces, make sure you are using a supported library. Otherwise, you may need to instrument your application's LLM calls manually.
-
-
-### Next steps
-
-After traces are being submitted from your application, you can:
-
-- [Configure evaluations][4] that you can use to assess the effectiveness of your LLM application.
-- Add [custom instrumentation][5] to your application and extract data that automatic instrumentation cannot.
-
-
-## Example "Hello World" application
-
-See below for a simple application that can be used to begin exploring the LLM Observability product.
-
-
+#### Helm Chart Users
 {{< tabs >}}
-{{% tab "Python" %}}
+{{% tab "Uniform Clusters" %}}
 
-1. Install OpenAI with `pip install openai`.
+Uniform clusters are those where all the nodes have GPU devices.
 
-2. Save example script `app.py`.
+1. Install and deploy the Datadog Agent on Kubernetes with Helm (instructions here[1])
+2. Include the additional parameter, `gpu.enabled:true` to the `datadog-values.yaml` configuration file. If you would like to opt-in for more advanced eBPF metrics such as [METRIC NAME HERE], also include the additional parameter of `gpu.privilegedMode:true` as shown in the example snippet below
 
-   ```python
-   import os
-   from openai import OpenAI
-
-   oai_client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-   completion = oai_client.chat.completions.create(
-       model="gpt-4o-mini",
-       messages=[
-        {"role": "system", "content": "You are a helpful customer assistant for a furniture store."},
-        {"role": "user", "content": "I'd like to buy a chair for my living room."},
-    ],
-   )
-   ```
-
-3. Run the application:
-
-   ```shell
-   # Make sure you have the required environment variables listed above
-   DD_...= \
-   ddtrace-run app.py
-   ```
+Example snippet from datadog-values.yaml configuration file: 
+```
+  datadog:
+  gpuMonitoring:
+    enabled: true
+    privilegedMode: true        # Only for advanced SP metrics
+    configureCgroupPerms: true  # Only for GKE 
+    runtimeClassName: ""        # Only for Oracle Cloud
+```
+3. Restart the Agent
 {{% /tab %}}
 
-{{% tab "Node.js" %}}
-1. Install OpenAI `npm install openai`.
+{{% tab "Mixed Clusters" %}}
+Mixed clusters have some nodes with GPU devices and others without. If you have a mixed cluster, you'll need to create two different Helm deployments, one targeting non-GPU nodes and another for GPU nodes.
 
-2. Save example script `app.js`
+1. Install and deploy the Datadog Agent on Kubernetes using Helm (instructions here[1])
+2. Update the affinity of that deployment within the `datadog-values.yaml` configuration file. The label `nvidia.com/gpu.present` is a suggestion based on common NVIDIA GPU operator settings, but any label can be used to exclude GPU nodes.
 
-   ```js
-   const { OpenAI } = require('openai');
-   const oaiClient = new OpenAI(process.env.OPENAI_API_KEY);
+Example snippet from datadog-values.yaml configuration file: 
+```
+agents:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: nvidia.com/gpu.present
+            operator: NotIn
+            values:
+              - "true"
+```
 
-   async function main () {
-       const completion = await oaiClient.chat.completions.create({
-          model: 'gpt-4o-mini',
-          messages: [
-             { role: 'system', content: 'You are a helpful customer assistant for a furniture store.' },
-             { role: 'user', content: 'I\'d like to buy a chair for my living room.' },
-          ]
-       });
-       return completion;
-   }
+3. Create a new `values-gpu.yaml` file with an affinity selector for GPU nodes and the corresponding GPU configuration. This file includes the necessary configuration changes[3] to ensure that it joins the existing cluster agents.
+4. 
+Example snippet from values-gpu.yaml configuration file: 
+```
+# GPU-specific values-gpu.yaml (for GPU nodes)
+datadog:
+  kubeStateMetricsEnabled: false # Disabled as we're joining an existing Cluster Agent
+  gpuMonitoring:
+    enabled: true
+    privilegedMode: true        # Only for advanced SP metrics
+    configureCgroupPerms: true  # Only for GKE 
+    runtimeClassName: ""        # Only for Oracle Cloud
 
-   main().then(console.log)
+agents:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: nvidia.com/gpu.present
+            operator: In
+            values:
+              - "true"
 
-3. Run the application:
+existingClusterAgent:
+  join: true
 
-   ```
-   # Make sure you have the required environment variables listed above
-   DD_...= \
-   NODE_OPTIONS="--import dd-trace/initialize.mjs" node app.js
-   ```
+# Disabled datadogMetrics deployment since it should have been already deployed with the other chart release.
+datadog-crds:
+  crds:
+    datadogMetrics: false
+```
+
+4. Deploy the chart first with the first values.yaml modified as explained above
+
+``` shell
+helm install -f values.yaml datadog datadog
+```
+
+5. Deploy the chart for a second time with the GPU specific overrides
+
+``` shell
+helm install -f values.yaml -f values-gpu.yaml datadog-gpu datadog
+```
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -184,3 +225,4 @@ See below for a simple application that can be used to begin exploring the LLM O
 
 [1]: https://docs.datadoghq.com/containers/kubernetes/installation/?tab=datadogoperator
 [2]: https://github.com/DataDog/datadog-agent/releases?page=1
+[3]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog#how-to-join-a-cluster-agent-from-another-helm-chart-deployment-linux
