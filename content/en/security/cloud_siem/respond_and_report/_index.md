@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Datadog Security Orchestration, Automations, and Respond (SOAR) helps you orchestrate security operations, investigate, and remediate threats using [Workflow Automation][1]. For example, you can [run a workflow][2] to:
+Datadog Security Orchestration, Automations, and Respond (SOAR) helps you orchestrate security operations, investigate signals, and remediate threats using [Workflow Automation][1]. For example, you can [run a workflow][2] to:
 
 - Block an IP address from your environment.
 - Disable a user account.
@@ -21,13 +21,13 @@ Datadog Security Orchestration, Automations, and Respond (SOAR) helps you orches
 - Assign signals for investigation.
 - Automatically enrich cases and close duplicate cases.
 
-There are also ready-to-use customizable [blueprints][4] to help you build workflows for remediating threats. For example:
+SOAR also includes ready-to-use customizable [blueprints][4] to help you build workflows for remediating threats. For example:
 
 - An Identity and Access Management (IAM) workflow that automates responses to suspicious logins and account compromises.
 - An Endpoint Detection and Response (EDR) workflow that speeds up the investigation and containment of endpoint threats.
 - A Threat Intelligence Enrichment workflow that enriches alerts with external data so you can prioritize and respond more effectively.
 
-Finally, use [security operational metrics][3] to get insights into the efficiency and effectiveness of your security processes.
+Cloud SIEM also provides [security operational metrics][3], so you can determine the efficiency and effectiveness of your security processes.
 
 ## Further reading
 

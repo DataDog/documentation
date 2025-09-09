@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Monitor your Datadog telemetry and use out-of-the-box detection rules or create custom rules to detect threats. When a threat is detected, a security signal is generated. Additionally, you can add suppressions to refine detection rules so that a signal is not generated under specific conditions. This can improve the accuracy and relevance of security signals generated.
+Monitor your Datadog telemetry and use [out-of-the-box detection rules](#out-of-the-box-detection-rules) or [create custom rules](#custom-detection-rules) to detect threats. When a threat is detected, a security signal is generated. Additionally, you can add [suppressions](#suppressions) to refine detection rules so that a signal is not generated under specific conditions. This can improve the accuracy and relevance of security signals generated.
 
 ## Out-of-the-box detection rules
 

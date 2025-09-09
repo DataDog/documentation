@@ -28,9 +28,9 @@ The easiest way to send data to Datadog is by using [Content Packs][1], which ar
 - Parsers
 - SOAR workflows
 
-With many content packs available for popular security technologies, onboarding using content packs should cover most of your needs.
+[Content packs][1] are available for many popular security technologies.
 
-If you have custom logs or have a data source not listed on Cloud SIEM's [Content Pack][2] page, check Datadog's extensive [integration library][3] to confirm the integration is not available. If it isn't available, you can send those logs as [custom logs][4] to Cloud SIEM for analysis.
+If you have custom logs or have a data source not listed on Cloud SIEM's [Content Pack][2] page, check whether the integration is available in Datadog's extensive [integration library][3]. If it isn't available, you can send those logs as [custom logs][4] to Cloud SIEM for analysis.
 
 ## Enrich logs
 
@@ -40,7 +40,7 @@ Datadog provides built-in [Threat Intelligence][5] for Cloud SIEM logs and also 
 
 ### Open Cybersecurity Framework (OCSF)
 
-[Open Cybersecurity Framework (OCSF)][7] is integrated directly into Cloud SIEM so incoming security logs are automatically enriched with OCSF-compliant attributes through out-of-the-box pipelines.
+[Open Cybersecurity Framework (OCSF)][7] is integrated directly into Cloud SIEM, so incoming security logs are automatically enriched with OCSF-compliant attributes through out-of-the-box pipelines.
 
 ## Further reading
 

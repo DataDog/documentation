@@ -6142,21 +6142,21 @@ menu:
       parent: cloud_siem
       identifier: cloud_siem_detect_and_monitor
       weight: 2
+    - name: OOTB Rules
+      url: /security/default_rules/#cat-cloud-siem-log-detection
+      parent: cloud_siem_detect_and_monitor
+      identifier: cloud_siem_default_rules
+      weight: 201
     - name: Custom Detection Rules
       url: security/cloud_siem/detect_and_monitor/custom_detection_rules
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_custom_detection_rules
-      weight: 201
+      weight: 202
     - name: Signal Correlation
       url: security/cloud_siem/detect_and_monitor/custom_detection_rules/signal_correlation_rules
       parent: cloud_siem_custom_detection_rules
       identifier: cloud_siem_signal_correlation_rules
       weight: 2101
-    - name: OOTB Rules
-      url: /security/default_rules/#cat-cloud-siem-log-detection
-      parent: cloud_siem_detect_and_monitor
-      identifier: cloud_siem_default_rules
-      weight: 202
     - name: Suppressions
       url: security/cloud_siem/detect_and_monitor/suppressions
       parent: cloud_siem_detect_and_monitor
