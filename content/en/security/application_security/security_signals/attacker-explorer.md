@@ -37,6 +37,11 @@ Each explorer focuses on a specific use case:
 
 - **Signal Explorer**: List of actionable alerts such as Credential Stuffing Attack or Command Injection. Signals have workflow capabilities, a description, severity, and correlated Traces. Interactions include user assignment workflows, automated protection, analytics, search, and pivoting to Trace Explorer.
 - **Trace Explorer**: List of evidence for business logic events, such as logins, or attack payloads. Interactions include analytics and search.
+- **Users explorer**: Lists authenticated users associated with one or more traces. Interactions include: 
+  - Bulk actions for user analytics and blocking
+  - Drill-down into the history of any user
+  - Search
+  - Pivoting to other explorers
 - **Attackers Explorer**: List of Flagged and Suspicious Attackers. Interactions include: 
   - Bulk actions for attacker analytics and blocking
   - Drill-down into the history of any attacker
@@ -56,13 +61,16 @@ There are two sections to the Attackers Explorer:
 2. The list of attackers with security metrics.
 
 
-### Investigate an IP
+### Investigate an attacker
 
-Click on any row to view the history and attributes of the IP.
+1. In **View by**, click **IP**, **User Agent**, **ASN**, or **Cluster**.
+2. Click on any row to view the details pane for the attacker.
 
 <!-- {{< img src="security/application_security/threats/attacker-explorer/ip_drawer.png" alt="Investigate and IP address with AAP Attackers Explorer"  >}} -->
 
-IPs can be blocked or added to the Passlist from the IP drawer.
+An attacker can be blocked or added to the Passlist from its details.
+
+
 
 ### Best practices for blocking with Attackers Explorer
 
