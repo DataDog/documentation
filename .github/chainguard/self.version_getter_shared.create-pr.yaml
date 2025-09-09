@@ -6,7 +6,7 @@ claim_pattern:
   event_name: schedule
   ref: refs/heads/master
   ref_protected: "true"
-  job_workflow_ref: DataDog/documentation/\.github/workflows/bump_versions\.yml@refs/heads/master
+  job_workflow_ref: DataDog/documentation/\.github/workflows/version_getter_shared\.yml@refs/heads/master
 
 permissions:
   contents: write
