@@ -1,6 +1,7 @@
 ---
 title: Dataset Directory
-type: ddsql_schema
+cascade:
+    type: ddsql_schema
 
 ---
 

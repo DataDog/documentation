@@ -13,25 +13,28 @@
     {{ partial "site_support_banner/site_support_banner.html" . }}
 
     {{ $list := sort .Pages }}
+ 
+    {{ range $list.GroupByParam "namespace" }}
+        {{ $namespace := cond (eq .Key "dd") "Datadog" (.Key | upper) }}
+        <div class="whatsnext list-group mb-3">
+            <h2 id="{{ .Key | anchorize }}">{{ $namespace }} Datasets</h2>
+            {{ $key := .Key }}
+            {{ range .Pages }}
 
-
-    <!-- For each section, loop over and display the links that include the key. ex: AWS, GCP...   -->
-    <div class="whatsnext list-group">
-    {{ range $list }}
-        <p>{{ .File.Filename }}</p>
-        {{/*  <a 
-        href='/ddsql_reference/dataset_directory/{{ .Name }}/' 
-        class="list-group-item list-group-item-action list-group-item-white d-flex justify-content-between align-items-center">
-            <span class="w-100 d-flex justify-content-between">
-                <span class="text">
-                    <code>{{ .Name }}</code>
-                </span>
-            </span>
-            {{- partial "img.html" (dict "root" $dot "src" "icons/list-group-whats-next-arrow-1.png" "class" "img-fluid static" "alt" "more") -}}
-            {{- partial "img.html" (dict "root" $dot "src" "icons/list-group-whats-next-arrow-2.png" "class" "img-fluid hover" "alt" "more" "disable_lazy" "true") -}}
-
-        </a>  */}}
+                <a 
+                href='/ddsql_reference/dataset_directory/{{ $key }}/{{ .File.BaseFileName }}/' 
+                class="list-group-item list-group-item-action list-group-item-white d-flex justify-content-between align-items-center">
+                    <span class="w-100 d-flex justify-content-between">
+                        <span class="text">
+                            <code>{{ .Name }}</code>
+                        </span>
+                    </span>
+                    {{- partial "img.html" (dict "root" $dot "src" "icons/list-group-whats-next-arrow-1.png" "class" "img-fluid static" "alt" "more") -}}
+                    {{- partial "img.html" (dict "root" $dot "src" "icons/list-group-whats-next-arrow-2.png" "class" "img-fluid hover" "alt" "more" "disable_lazy" "true") -}}
+                </a>
+            {{ end }}
+        </div>
     {{ end }}
-    </div>
+
 
 {{ end }}
