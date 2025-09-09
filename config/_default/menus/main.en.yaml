@@ -2450,22 +2450,32 @@ menu:
       parent: incidents
       identifier: analytics
       weight: 7
-    - name: Datadog Clipboard
-      url: service_management/incident_management/datadog_clipboard
+    - name: Integrations
+      url: service_management/incident_management/integrations
       parent: incidents
-      identifier: incidents_clipboard
-      weight: 8
-    - name: Guides
-      url: service_management/incident_management/guides
-      parent: incidents
-      identifier: incidents_guide
+      identifier: incidents_integrations
       weight: 9
+    - name: Jira
+      url: service_management/incident_management/integrations/jira
+      parent: incidents_integrations
+      identifier: incidents_jira
+      weight: 901
+    - name: Statuspage
+      url: service_management/incident_management/integrations/statuspage
+      parent: incidents_integrations
+      identifier: incidents_statuspage
+      weight: 902
     - name: On-Call
       url: service_management/on-call/
       pre: on-call
       parent: service_management_heading
       identifier: oncall
       weight: 30000
+    - name: Datadog Clipboard
+      url: service_management/incident_management/datadog_clipboard
+      parent: incidents
+      identifier: incidents_clipboard
+      weight: 10
     - name: Onboard a Team
       url: service_management/on-call/teams/
       parent: oncall
@@ -4751,7 +4761,7 @@ menu:
       identifier: llm_obs_submit_evaluations
       weight: 404
     - name: Experiments
-      url: llm_observability/experiments_preview
+      url: llm_observability/experiments
       parent: llm_obs
       identifier: llm_obs_experiments
       weight: 5
