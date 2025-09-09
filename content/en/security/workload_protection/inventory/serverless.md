@@ -25,7 +25,7 @@ Here are some examples of how the Serverless view in Workload Protection Invento
 - **Enforce Agent version consistency:** 
   - Filter using **Agent Version** to identify stale deployments. Outdated Agents might lack recent detection rules or bug fixes. Teams can respond with pipeline updates or enforcement rules to maintain alignment with the approved version baseline.
 - **Enable scalable runtime policy deployment:** 
-  - Filter using **Workload Protection Status** to see which tasks have Workload Protection **Configured** or **Not Configured**. 
+  - Filter using **Workload Protection Status** to see which tasks are labeled with **Configured** or **Not Configured**. 
   - For tasks without Workload Protection, hover over the icon in the **Features** column and select **Configure**. Next, follow the steps to perform a manual or automatic installation.
 
 ## Serverless workflows
