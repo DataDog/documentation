@@ -13,6 +13,8 @@ This guide assumes that you have configured the [Datadog Heroku buildpack][1] in
 
 *Note*: Only databases in the [Standard and Premium plans][4] publish metrics used by the integration. Not all the features of Database Monitoring are available when used with a Postgres instance in the Hobby plan.
 
+## Preparing the Postgres Database
+
 First, create a `datadog` user in your database:
 
 ```shell
@@ -66,7 +68,39 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
-Finally, we configure the Datadog agent to enable the Postgres check using the new credentials:
+## Configuring the Postgres Integration
+
+Finally, we configure the Datadog agent to enable the Postgres Integration, for this we have two options.
+
+**Option A**: Which is where the buildpack will create a default Postgres configuration that customers cannot modify.
+
+**Option B**: Allows the customer to create their own Postgres configuration allowing them to enable additional features that aren’t available in Option A.
+
+{{% collapse-content title="Option A: Static Configuration" level="h4" %}}
+To enable the Postgres Integration and collect standard metrics, simply set `DD_ENABLE_HEROKU_POSTGRES` to true and rebuild the application:
+
+``` bash
+heroku config:set DD_ENABLE_HEROKU_POSTGRES=true
+git commit --allow-empty -m "enabled postgres integration"
+git push heroku main
+```
+ 
+To enabled DBM for Postgres you will need both `DD_ENABLE_HEROKU_POSTGRES` and `DD_ENABLE_DBM` set to true:
+
+``` bash
+heroku config:set DD_ENABLE_HEROKU_POSTGRES=true
+heroku config:add DD_ENABLE_DBM=true
+git commit --allow-empty -m "enabled postgres integration with DBM"
+git push heroku main
+```
+
+The agent should be deployed with the Postgres Integration running.
+{{% /collapse-content %}}
+
+{{% collapse-content title="Option B: Custom Configuration" level="h4" %}}
+...
+{{% /collapse-content %}}
+
 
 ```shell
 # Ensure that you are in the root directory of your application
