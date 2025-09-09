@@ -1,5 +1,5 @@
 ---
-title: Google Pub/Sub Destination
+title: CloudPrem Destination
 disable_toc: false
 ---
 
