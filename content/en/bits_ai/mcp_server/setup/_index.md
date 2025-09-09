@@ -27,10 +27,12 @@ The Datadog MCP Server is in Preview. There is no charge for using the Datadog M
 {{< /callout >}}
 
 <div class="alert alert-warning">
-<strong>Disclaimers</strong>
-<li>The Datadog MCP Server is not supported for production use or to the general public during the Preview.
-<li>Only Datadog organizations that have been specifically allowlisted can use the Datadog MCP Server.
-<li>The Datadog MCP Server is not available for organizations that require HIPAA compliance.
+<h3>Disclaimers</h3>
+<ul>
+<li>The Datadog MCP Server is not supported for production use during the Preview.</li>
+<li>Only Datadog organizations that have been specifically allowlisted can use the Datadog MCP Server. It is not available to the general public.</li>
+<li>The Datadog MCP Server is not available for organizations that require HIPAA compliance.</li>
+</ul>
 </div>
 
 ## Overview
@@ -43,7 +45,7 @@ This page provides instructions for connecting your AI agent to the Datadog MCP 
 
 The following AI clients are compatible with the Datadog MCP Server.
 
-<div class="alert alert-info">Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
+<div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
 
 | Client | Developer | Notes |
 |--------|------|------|
