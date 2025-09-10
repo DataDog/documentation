@@ -55,7 +55,7 @@
 {{ with index .Site.Menus "api" }}
   {{ $dot.Scratch.Set "menu" . }}
 {{ else }}
-  {{ $dot.Scratch.Set "menu" (index .Sites.Default.Menus "api") }}
+  {{ $dot.Scratch.Set "menu" (index .Sites.First.Menus "api") }}
 {{ end }}
 {{ $menu := .Scratch.Get "menu" }}
 
@@ -66,7 +66,7 @@
 {{ partial "api/intro.html" (dict "api" $dot.Site.Data.api "title" $ParamTitleEn "translate_tag" $translate_tag) }}
 
 <!-- Loop over the menu to determine what to pull in -->
-{{ range (where .Sites.Default.Menus.api ".Name" "==" $ParamTitleEn) }}
+{{ range (where .Sites.First.Menus.api ".Name" "==" $ParamTitleEn) }}
   {{ range $menuChild := sort .Children ".Params.order" "asc" }}
 
     {{ $anchorStr := $menuChild.Name }}
