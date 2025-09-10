@@ -92,7 +92,7 @@ logger.info('Hello world!')
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting %}}
+{{% gcr-troubleshooting sidecar="true" %}}
 
 ## Further reading
 

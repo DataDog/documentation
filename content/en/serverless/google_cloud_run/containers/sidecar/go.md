@@ -92,7 +92,7 @@ logrus.WithContext(ctx).Info("Hello World!")
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting %}}
+{{% gcr-troubleshooting sidecar="true" %}}
 
 ## Further reading
 
