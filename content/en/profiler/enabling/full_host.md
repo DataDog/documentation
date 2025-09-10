@@ -57,15 +57,11 @@ For hosts running containerized workloads, Datadog recommends running the profil
 For hosts without container runtimes, follow the instructions for [running directly on the host][10].
 
 ### Configuration
-#### Local symbol upload (Experimental)
-For compiled languages (C/C++/Rust/Go), the profiler can upload local symbols to Datadog for symbolication when unstripped binaries are available.
+#### Local symbol upload
+For compiled languages (C/C++/Rust/Go), the profiler can upload local symbols to Datadog for symbolication when unstripped binaries are available. 
+The Full-Host Profiler handles this automatically.
 
-To enable local symbol upload:
-
-1. Set the `DD_HOST_PROFILING_EXPERIMENTAL_UPLOAD_SYMBOLS=true`.
-2. Provide a [Datadog API key][11] through the `DD_API_KEY` environment variable.
-3. Provide a [Datadog application key][13] through the `DD_APP_KEY` environment variable.
-4. Set the `DD_SITE` environment variable to your [Datadog site][12]. Your site is: {{< region-param key="dd_site" code="true" >}}
+To upload symbols using datadog-ci, see <a href="#symbol-upload-using-datadog-ci">Symbol upload</a>.
 
 ### Build
 To build the Full-Host Profiler directly on your machine, run:
@@ -83,6 +79,31 @@ If `DD_SERVICE` is not set, Datadog infers a service name from the binary name. 
 {{< img src="profiler/inferred_service_example.png" alt="Example of an inferred services within Profiling" style="width:50%;">}}
 
 If multiple services are running under the same interpreter (for example, two separate Java applications on the same host), and neither sets `DD_SERVICE`, Datadog groups them together under the same service name. Datadog cannot distinguish between them unless you provide a unique service name.
+
+## Symbol upload using datadog-ci
+
+1. Git clone the [datadog-ci][13] command line tool 
+2. Install `datadog-ci`, run:
+
+   ```shell
+   npm install -g @datadog/datadog-ci
+   ```
+3. Provide a [Datadog API key][11] through the `DD_API_KEY` environment variable.
+4. Set the `DD_SITE` environment variable to your [Datadog site][12]. Your site is: {{< region-param key="dd_site" code="true" >}}
+5. Set variables in an encrypted `datadog-ci.json` file at the root of your project:
+
+   ```
+   {
+      "apiKey": "<API_KEY>",
+      "datadogSite": "<SITE>"
+   }
+   ```
+6. Install `binutils` 
+7. Run:
+
+```
+DD_BETA_COMMANDS_ENABLED=1 datadog-ci elf-symbols upload ~/your/build/bin/
+```
 
 
 ## What's next?
@@ -104,4 +125,4 @@ After installing the Full-Host Profiler, see the [Getting Started with Profiler]
 [10]: https://github.com/DataDog/dd-otel-host-profiler/blob/main/doc/running-on-host.md
 [11]: https://app.datadoghq.com/organization-settings/api-keys
 [12]: /getting_started/site/
-[13]: https://app.datadoghq.com/access/application-keys
+[13]: https://github.com/DataDog/datadog-ci/tree/master

@@ -6334,11 +6334,16 @@ menu:
       parent: workload_protection
       identifier: workload_protection_inventory
       weight: 205
+    - name: Serverless
+      url: security/workload_protection/inventory/serverless
+      parent: workload_protection_inventory
+      identifier: workload_protection_serverless
+      weight: 1
     - name: Coverage
       url: security/workload_protection/inventory/coverage_map
       parent: workload_protection_inventory
       identifier: workload_protection_coverage_map
-      weight: 1
+      weight: 2
     - name: Guides
       url: security/workload_protection/guide
       parent: workload_protection
