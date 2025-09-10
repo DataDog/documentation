@@ -319,7 +319,7 @@ secret_backend_config:
 
 **Note**: Only one level of YAML depth is supported (for example, `key: value`)
 
-##### Datadog.yaml Configuration
+##### Configuration example
 
 You can use a YAML file to store secrets locally.
 
@@ -444,13 +444,13 @@ roleRef:
 
 This `Role` gives access to the `Secret: database-secret` in the `Namespace: database`. The `RoleBinding` links up this permission to the `ServiceAccount: datadog-agent` in the `Namespace: default`. This needs to be manually added to your cluster with respect to your resources deployed.
 
-### Option 3: Creating your own custom executable
+### Option 3: Creating a custom executable
 
 To retrieve secrets, the Agent uses an external executable that you provide. The executable is used when new secrets are discovered and are cached for the lifecycle of the Agent. If you need to update or rotate a secret, you must restart the Agent to reload it.
 
 This allow you to use any secret management solution and gives you full control on how the Agent accesses secrets.
 
-The Agent sends to this executable a JSON payload over standard input containing a list of secret handles to resolve. Your executable will fetch each secret and return them in a JSON format through a standard output.
+The Agent sends to this executable a JSON payload over standard input containing a list of secret handles to resolve. Then, your executable fetches each secret and return them in a JSON format through a standard output.
 
 The following example shows what the Agent sends to your executable on STDIN:
 ```
@@ -546,7 +546,7 @@ You can configure the Agent to use the binary to resolve secrets by adding the f
 secret_backend_command: /path/to/binary
 ```
 
-### Agent security requirements
+## Agent security requirements
 
 The Agent runs the provided executable as a sub-process. The execution patterns differ on Linux and Windows.
 
@@ -557,7 +557,7 @@ On Linux, your executable must:
 
 * Belong to the same user running the Agent (`dd-agent` by default, or `root` inside a container).
 * Have no rights for `group` or `other`.
-* Have at least exec rights for the owner.
+* Have at least the **execute** right for the owner.
 
 {{% /tab %}}
 {{% tab "Windows" %}}
