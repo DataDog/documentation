@@ -6147,66 +6147,91 @@ menu:
       parent: security_platform_heading
       identifier: cloud_siem
       weight: 20000
-    - name: Content Packs
-      url: security/cloud_siem/content_packs
+    - name: Ingest and Enrich
+      url: security/cloud_siem/ingest_and_enrich/
       parent: cloud_siem
-      identifier: cloud_siem_content_packs
+      identifier: cloud_siem_ingest_and_enrich
       weight: 1
-    - name: Detection Rules
-      url: security/cloud_siem/detection_rules
+    - name: Content Packs
+      url: security/cloud_siem/ingest_and_enrich/content_packs
+      parent: cloud_siem_ingest_and_enrich
+      identifier: cloud_siem_content_packs
+      weight: 101
+    - name: Threat Intelligence
+      url: security/cloud_siem/ingest_and_enrich/threat_intelligence
+      parent: cloud_siem_ingest_and_enrich
+      identifier: cloud_siem_threat_intelligence
+      weight: 102
+    - name: Open Cybersecurity Schema Framework
+      url: security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework
+      parent: cloud_siem_ingest_and_enrich
+      identifier: cloud_siem_open_cybersecurity_schema_framework
+      weight: 103
+    - name: Detect and Monitor
+      url: security/cloud_siem/detect_and_monitor/
       parent: cloud_siem
-      identifier: cloud_siem_detection_rules
+      identifier: cloud_siem_detect_and_monitor
       weight: 2
-    - name: Signal Correlation Rules
-      url: security/cloud_siem/detection_rules/signal_correlation_rules
-      parent: cloud_siem_detection_rules
-      identifier: cloud_siem_signal_correlation_rules
-      weight: 20500
-    - name: MITRE ATT&CK Map
-      url: security/cloud_siem/detection_rules/mitre_attack_map
-      parent: cloud_siem_detection_rules
-      identifier: cloud_siem_mitre_attack_map
-      weight: 20510
     - name: OOTB Rules
       url: /security/default_rules/#cat-cloud-siem-log-detection
-      parent: cloud_siem
+      parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_default_rules
-      weight: 4
-    - name: Threat Intelligence
-      url: /security/cloud_siem/threat_intelligence
-      parent: cloud_siem
-      identifier: cloud_siem_threat_intelligence
-      weight: 5
-    - name: Open Cybersecurity Schema Framework
-      url: /security/cloud_siem/open_cybersecurity_schema_framework
-      parent: cloud_siem
-      identifier: cloud_siem_open_cybersecurity_schema_framework
-      weight: 5
-    - name: Investigate Security Signals
-      url: /security/cloud_siem/investigate_security_signals
-      parent: cloud_siem
-      identifier: cloud_siem_investigate_security_signals
-      weight: 6
-    - name: Investigator
-      url: security/cloud_siem/investigator
-      parent: cloud_siem
-      identifier: cloud_siem_investigator
-      weight: 7
+      weight: 201
+    - name: Custom Detection Rules
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules
+      parent: cloud_siem_detect_and_monitor
+      identifier: cloud_siem_custom_detection_rules
+      weight: 202
+    - name: Signal Correlation
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/signal_correlation_rules
+      parent: cloud_siem_custom_detection_rules
+      identifier: cloud_siem_signal_correlation_rules
+      weight: 2101
+    - name: Suppressions
+      url: security/cloud_siem/detect_and_monitor/suppressions
+      parent: cloud_siem_detect_and_monitor
+      identifier: cloud_siem_suppressions
+      weight: 203
     - name: Historical Jobs
-      url: security/cloud_siem/historical_jobs
-      parent: cloud_siem
+      url: security/cloud_siem/detect_and_monitor/historical_jobs
+      parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_log_historical_jobs
-      weight: 8
+      weight: 204
+    - name: MITRE ATT&CK Map
+      url: security/cloud_siem/detect_and_monitor/mitre_attack_map
+      parent: cloud_siem_detect_and_monitor
+      identifier: cloud_siem_mitre_attack_map
+      weight: 205
+    - name: Triage and Investigate
+      url: security/cloud_siem/triage_and_investigate
+      parent: cloud_siem
+      identifier: cloud_siem_triage_and_investigate
+      weight: 3
+    - name: Investigate Security Signals
+      url: security/cloud_siem/triage_and_investigate/investigate_security_signals
+      parent: cloud_siem_triage_and_investigate
+      identifier: cloud_siem_investigate_security_signals
+      weight: 301
     - name: Risk Insights
-      url: security/cloud_siem/entities_and_risk_scoring
-      parent: cloud_siem
+      url: security/cloud_siem/triage_and_investigate/entities_and_risk_scoring
+      parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_entities_and_risk_scoring
-      weight: 9
-    - name: Security Operational Metrics
-      url: security/cloud_siem/security_operational_metrics/
+      weight: 302
+    - name: Investigator
+      url: security/cloud_siem/triage_and_investigate/investigator
+      parent: cloud_siem_triage_and_investigate
+      identifier: cloud_siem_investigator
+      weight: 303
+    - name: Respond and Report
+      url: security/cloud_siem/respond_and_report
       parent: cloud_siem
+      identifier: cloud_siem_respond_and_report
+      weight: 4
+    - name: Security Operational Metrics
+      url: security/cloud_siem/respond_and_report/security_operational_metrics
+      parent: cloud_siem_respond_and_report
       identifier: siem_security_operational_metrics
-      weight: 10
+      weight: 401
     - name: Guides
       url: security/cloud_siem/guide/
       parent: cloud_siem

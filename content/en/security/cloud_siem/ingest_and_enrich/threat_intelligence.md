@@ -1,6 +1,8 @@
 ---
 title: Threat Intelligence
 disable_toc: false
+aliases:
+  - /security/cloud_siem/threat_intelligence
 further_reading:
 - link: "security/cloud_siem/detection_rules"
   tag: "Documentation"
