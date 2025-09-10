@@ -106,7 +106,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
   }
 }
 
-// Fix for nav-tabs being affected by .main ul li:before rule
+// Fix for dashboard nav-tabs being affected by .main ul li:before rule
 .nav-tabs.response-toggle {
   .nav-item {
     &::before {
