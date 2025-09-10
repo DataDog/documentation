@@ -75,11 +75,8 @@ In the below example image, the input shows `status` with the value `wrongstatus
 
 ## Remap source and service attributes when using the Splunk HEC source and Datadog destination
 
-If you are processing logs with the following setup:
-- Using Splunk HEC as the source and Datadog as the destination.
-- Remapping or rewriting the value of `source` and/or `service`.
+Follow the instructions in this section to remap the `source` and/or `service` values if you are using a Splunk HEC source and Datadog destination. You must follow these instructions to remap those attributes because:
 
-You must follow the instructions in this section to remap the `source` and `service` attributes because:
  - Splunk's `service` is what Datadog calls the `source` attribute.
  - Splunk's `sourcetype` is what Datadog calls the `ddsource` attribute.
 
