@@ -7412,7 +7412,7 @@ menu:
           - UpdateIncidentNotificationTemplate
         unstable:
           - v2
-        order: 13
+        order: 27
     - name: Get incident notification template
       url: '#get-incident-notification-template'
       identifier: incidents-get-incident-notification-template
@@ -7425,7 +7425,7 @@ menu:
           - GetIncidentNotificationTemplate
         unstable:
           - v2
-        order: 12
+        order: 26
     - name: Delete a notification template
       url: '#delete-a-notification-template'
       identifier: incidents-delete-a-notification-template
@@ -7438,7 +7438,7 @@ menu:
           - DeleteIncidentNotificationTemplate
         unstable:
           - v2
-        order: 14
+        order: 28
     - name: Create incident notification template
       url: '#create-incident-notification-template'
       identifier: incidents-create-incident-notification-template
@@ -7451,7 +7451,7 @@ menu:
           - CreateIncidentNotificationTemplate
         unstable:
           - v2
-        order: 11
+        order: 25
     - name: List incident notification templates
       url: '#list-incident-notification-templates'
       identifier: incidents-list-incident-notification-templates
@@ -7464,7 +7464,72 @@ menu:
           - ListIncidentNotificationTemplates
         unstable:
           - v2
-        order: 10
+        order: 24
+    - name: Update an incident notification rule
+      url: '#update-an-incident-notification-rule'
+      identifier: incidents-update-an-incident-notification-rule
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentNotificationRule
+        unstable:
+          - v2
+        order: 32
+    - name: Get an incident notification rule
+      url: '#get-an-incident-notification-rule'
+      identifier: incidents-get-an-incident-notification-rule
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentNotificationRule
+        unstable:
+          - v2
+        order: 31
+    - name: Delete an incident notification rule
+      url: '#delete-an-incident-notification-rule'
+      identifier: incidents-delete-an-incident-notification-rule
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentNotificationRule
+        unstable:
+          - v2
+        order: 33
+    - name: Create an incident notification rule
+      url: '#create-an-incident-notification-rule'
+      identifier: incidents-create-an-incident-notification-rule
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentNotificationRule
+        unstable:
+          - v2
+        order: 30
+    - name: List incident notification rules
+      url: '#list-incident-notification-rules'
+      identifier: incidents-list-incident-notification-rules
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentNotificationRules
+        unstable:
+          - v2
+        order: 29
     - name: Create an incident
       url: '#create-an-incident'
       identifier: incidents-create-an-incident
