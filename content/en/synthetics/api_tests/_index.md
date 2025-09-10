@@ -8,9 +8,6 @@ further_reading:
 - link: "/synthetics/guide/version_history/"
   tag: "Guide"
   text: "Version History for Synthetic Monitoring"
-- link: 'https://www.datadoghq.com/blog/api-test-coverage-monitoring-datadog-synthetics/'
-  tag: 'Blog'
-  text: 'Improve your API test coverage with Datadog Synthetic Monitoring'
 - link: 'https://www.datadoghq.com/blog/monitor-apis-with-datadog'
   tag: 'Blog'
   text: 'Monitor your workflows with Datadog SSL, TLS, and Multistep API tests'

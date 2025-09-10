@@ -17,7 +17,7 @@ further_reading:
 
 Click on a mobile app test on the [**Synthetic Tests** page][11] to see the Test Details page. The Test Details page contains all the information relating to your test, including test properties, test history, sample runs, and test runs.
 
-{{< img src="mobile_app_testing/test_details.png" alt="The Test Details page" style="width=80%" >}}
+{{< img src="mobile_app_testing/test_details_2.png" alt="The Mobile App Test Details page" style="width=80%" >}}
 
 Test runs appear in a test details page after a Synthetic mobile app test executes. [Sample results](#sample-results) correlate to the latest passed and failed test executions over a time interval and in a specific number of locations and devices.
 
@@ -77,6 +77,16 @@ Records
 Every executed test step contains a screenshot of the step action, step action name, step ID, and step duration.
 
 {{< img src="mobile_app_testing/screenshot-and-action.png" alt="Screenshots and actions in the Sample Runs section of the test details" style="width=80%" >}}
+
+### Video replay
+
+Use video replay to diagnose test failures by showing unexpected UI behavior or pop-ups that may have caused the issue.
+
+Click on an individual test run from the [Mobile Application test details page][11] to view detailed information in the side panel, including step duration, pass/fail status, and screenshots. Use the **Video Replay** tab to watch the complete test execution.
+
+{{< img src="mobile_app_testing/mobile_app_video_replay.mp4" alt="Video Replay of a test run in Mobile App testing" video=true >}}
+
+**Note**: Mobile Application test session replays are not available in RUM.
 
 ### XML highlighting 
 

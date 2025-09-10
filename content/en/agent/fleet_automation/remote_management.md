@@ -31,7 +31,7 @@ Users must have the [Agent Upgrade][2] within Fleet Automation for upgrades, and
 
 ## Enable Remote Agent Management
 If you are running Agent version 7.69+:
-1. Ensure that your Agent configuration includes the environment variable `DD_REMOTE_UPDATES=true` set. This alone enabled Remote Agent Management on the Agent.
+1. Ensure that your Agent configuration includes the environment variable `DD_REMOTE_UPDATES=true` set. This alone enables Remote Agent Management on the Agent.
 
 If you are running older Agent versions:
 1. Ensure that [Remote Configuration is enabled for your organization][15].

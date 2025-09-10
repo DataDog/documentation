@@ -657,6 +657,20 @@
       "description": "Create an incident type returns \"CREATED\" response"
     }
   ],
+  "CreateIncidentNotificationRule": [
+    {
+      "group": "incidents",
+      "suffix": "_3029800608",
+      "description": "Create incident notification rule returns \"Created\" response"
+    }
+  ],
+  "CreateIncidentNotificationTemplate": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Create incident notification template returns \"Created\" response"
+    }
+  ],
   "UpdateIncidentIntegration": [
     {
       "group": "incidents",
@@ -676,6 +690,20 @@
       "group": "incidents",
       "suffix": "",
       "description": "Update an incident type returns \"OK\" response"
+    }
+  ],
+  "UpdateIncidentNotificationRule": [
+    {
+      "group": "incidents",
+      "suffix": "_1207309457",
+      "description": "Update incident notification rule returns \"OK\" response"
+    }
+  ],
+  "UpdateIncidentNotificationTemplate": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Update incident notification template returns \"OK\" response"
     }
   ],
   "CreateAPIKey": [
@@ -1039,6 +1067,20 @@
       "description": "Update a single service object returns \"OK\" response"
     }
   ],
+  "CreateOrgConnections": [
+    {
+      "group": "org_connections",
+      "suffix": "",
+      "description": "Create Org Connection returns \"OK\" response"
+    }
+  ],
+  "UpdateOrgConnections": [
+    {
+      "group": "org_connections",
+      "suffix": "",
+      "description": "Update Org Connection returns \"OK\" response"
+    }
+  ],
   "UpdateOrgConfig": [
     {
       "group": "organizations",
@@ -1297,6 +1339,13 @@
       "description": "Get a list of security signals returns \"OK\" response with pagination"
     }
   ],
+  "GetSuppressionsAffectingFutureRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Get suppressions affecting future rule returns \"OK\" response"
+    }
+  ],
   "EditSecurityMonitoringSignalAssignee": [
     {
       "group": "security_monitoring",
@@ -1384,6 +1433,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Validate a detection rule returns \"OK\" response"
+    }
+  ],
+  "ValidateSecurityMonitoringSuppression": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Validate a suppression rule returns \"OK\" response"
     }
   ],
   "CreateScanningGroup": [

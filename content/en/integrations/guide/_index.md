@@ -47,6 +47,11 @@ cascade:
     {{< nextlink href="integrations/guide/aws-integration-and-cloudwatch-faq" tag=" AWS" >}}AWS integration and CloudWatch FAQ{{< /nextlink >}}
 {{< /header-list >}}
 
+{{< header-list header="AWS Marketplace guides:" >}}
+    {{< nextlink href="integrations/guide/aws-marketplace-datadog-trial" tag=" AWS Marketplace" >}}AWS Marketplace Datadog trial setup{{< /nextlink >}}
+
+{{< /header-list >}}
+
 {{< header-list header="Azure guides" >}}
     {{< nextlink href="integrations/guide/azure-manual-setup" tag=" Azure" >}}Azure manual setup guide{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-native-manual-setup" tag=" Azure" >}}Azure Native manual setup guide{{< /nextlink >}}
