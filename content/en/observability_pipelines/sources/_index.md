@@ -74,13 +74,14 @@ certificate.pem: OK
 
 Otherwise, you see the error `unable to get local issuer certificate`.
 
-
 Instead of using a self-signed certificate, Datadog recommends the following:
 
 1. Use a certificate signed by Certificate Authority (CA).
 2. If you cannot use a CA-signed certificate, use a certificate from [Let's Encrypt][3].
 
-If you must use a self-signed certificate because the above approaches are not possible, you can configure your environment to trust the self-signed certificate on the Observability Pipelines Worker host. **Note**: Datadog does not recommend self-signed certificates. They are less secure and are not appropriate for production or internet-facing use.  If you must use self-signed certificates, limit usage to internal testing only.
+If you must use a self-signed certificate because the above approaches are not possible, you can configure your environment to trust the self-signed certificate on the Observability Pipelines Worker host.
+
+<div class="alert alert-danger">Datadog does not recommend self-signed certificates. They are less secure and are not appropriate for production or internet-facing use. If you must use self-signed certificates, limit usage to internal testing only.</a></div>
 
 For the Worker host to trust the self-signed certificate:
 
