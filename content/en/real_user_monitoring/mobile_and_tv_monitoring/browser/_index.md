@@ -31,8 +31,8 @@ The responsibility of keeping user data secure is shared between Datadog and dev
 ## Getting started
 
 {{< whatsnext desc="To get started with the RUM Browser SDK, follow the steps to create a RUM application based on how your application is served:" >}}
-  {{< nextlink href="/real_user_monitoring/browser/setup/client">}}<u>Client-Side</u>: Instrument each of your browser-based web applications, deploy the application, then configure the initialization parameters you want to track, and use advanced configuration to further manage data and context that RUM collects.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/browser/setup/server">}}<u>Auto-Instrumentation</u>: Inject a RUM SDK JavaScript scriptlet into the HTML responses of your web applications being served through a web server or proxy.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/browser/setup/client">}}<u>Client-Side</u>: Instrument each of your browser-based web applications, deploy the application, then configure the initialization parameters you want to track, and use advanced configuration to further manage data and context that RUM collects.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/browser/setup/server">}}<u>Auto-Instrumentation</u>: Inject a RUM SDK JavaScript scriptlet into the HTML responses of your web applications being served through a web server or proxy.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 From here, you can modify the [data and context][2] the RUM Browser SDK collects to support your specific needs. Learn how to override default settings in [Advanced Configuration][3].
@@ -42,5 +42,5 @@ From here, you can modify the [data and context][2] the RUM Browser SDK collects
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /data_security/real_user_monitoring/#shared-responsibility
-[2]: /real_user_monitoring/browser/data_collected/
-[3]: /real_user_monitoring/browser/advanced_configuration/
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/browser/data_collected/
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/browser/advanced_configuration/

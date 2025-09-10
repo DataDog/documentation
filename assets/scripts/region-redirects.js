@@ -1,54 +1,54 @@
 import Cookies from 'js-cookie';
-import config from './config/regions.config'
+import config from './config/regions.config';
 
 // need to wait for DOM since this script is loaded in the <head>
 document.addEventListener('DOMContentLoaded', () => {
-    const regionSelector = document.querySelector('.js-region-select')
-    const currentUserSavedRegion = Cookies.get('site')
-    const currentReferrerAppRegion = getDDSiteFromReferrer()
+    const regionSelector = document.querySelector('.js-region-select');
+    const currentUserSavedRegion = Cookies.get('site');
+    const currentReferrerAppRegion = getDDSiteFromReferrer();
 
     // keep docs/app saved regions in sync.   if user navigates to docs from app,
     // we want docs links back to the app returning user to DD app region they came from.
     // reloading resets document.referrer ensuring user region remains in sync.
     if (currentReferrerAppRegion && currentReferrerAppRegion !== currentUserSavedRegion) {
-        regionOnChangeHandler(currentReferrerAppRegion)
-        window.location.reload()
+        regionOnChangeHandler(currentReferrerAppRegion);
+        window.location.reload();
     } else {
-        redirectToRegion()
+        redirectToRegion();
     }
-    hideTOCItems()
+    hideTOCItems();
 
     if (regionSelector) {
         const options = regionSelector.querySelectorAll('.dropdown-item');
 
-        options.forEach(option => {
+        options.forEach((option) => {
             option.addEventListener('click', () => {
                 const region = option.dataset.value;
                 regionOnChangeHandler(region);
-                hideTOCItems(true)
-            })
-        })
+                hideTOCItems(true);
+            });
+        });
     }
 });
 
 // returns the Datadog site associated with referrer URL, if applicable.
 // i.e. 'app.datadoghq.eq' => 'eu'
 const getDDSiteFromReferrer = () => {
-    const ddFullSitesObject = config.dd_full_site
-    let referrerSite = ''
+    const ddFullSitesObject = config.dd_full_site;
+    let referrerSite = '';
 
     if (document.referrer) {
-        const referrerHostname = new URL(document.referrer).hostname
+        const referrerHostname = new URL(document.referrer).hostname;
 
         for (const site in ddFullSitesObject) {
             if (ddFullSitesObject[site] === referrerHostname) {
-                referrerSite = site
+                referrerSite = site;
             }
         }
     }
-    
-    return referrerSite
-}
+
+    return referrerSite;
+};
 
 function replaceButtonInnerText(value) {
     const selectedRegion = config.dd_datacenter[value];
@@ -64,11 +64,7 @@ function regionOnChangeHandler(region) {
     if (config.allowedRegions.includes(queryParams.get('site') || region)) {
         queryParams.set('site', region);
 
-        window.history.replaceState(
-            {},
-            '',
-            `${window.location.pathname}?${queryParams}`
-        );
+        window.history.replaceState({}, '', `${window.location.pathname}?${queryParams}`);
 
         showRegionSnippet(region);
         replaceButtonInnerText(region);
@@ -83,29 +79,33 @@ function regionOnChangeHandler(region) {
  * Hides all TOC items that are related to headers nested in {{ tabs }}
  * @param {boolean} shouldResetTOC - region selected via site select dropdown or loading the page asynchronously
  */
-function hideTOCItems(shouldResetTOC=false) {
-    const allTOCItems = document.querySelectorAll('#TableOfContents li')
-    const hiddenHeaders = document.querySelectorAll('.site-region-container.d-none > h3, .site-region-container.d-none > h2')
-    const hiddenHeaderIDs = [...hiddenHeaders].map(el => `#${el.id}`)
-    
-    const tabNestedHeaders = document.querySelectorAll('.code-tabs > .tab-content > .tab-pane > h3, .code-tabs > .tab-content > .tab-pane > h2')
-    const tabNestedHeaderIDs = [...tabNestedHeaders].map(el => `#${el.id}`)
-    
-    allTOCItems.forEach(item => {
-        const refID = item.querySelector('a')?.hash
-        if(shouldResetTOC){
+function hideTOCItems(shouldResetTOC = false) {
+    const allTOCItems = document.querySelectorAll('#TableOfContents li');
+    const hiddenHeaders = document.querySelectorAll(
+        '.site-region-container.d-none > h3, .site-region-container.d-none > h2'
+    );
+    const hiddenHeaderIDs = [...hiddenHeaders].map((el) => `#${el.id}`);
+
+    const tabNestedHeaders = document.querySelectorAll(
+        '.code-tabs > .tab-content > .tab-pane > h3, .code-tabs > .tab-content > .tab-pane > h2'
+    );
+    const tabNestedHeaderIDs = [...tabNestedHeaders].map((el) => `#${el.id}`);
+
+    allTOCItems.forEach((item) => {
+        const refID = item.querySelector('a')?.hash;
+        if (shouldResetTOC) {
             // display all items if region selected or async loading
-            item.classList.remove('d-none')
+            item.classList.remove('d-none');
         }
-        if(hiddenHeaderIDs.includes(refID)){
+        if (hiddenHeaderIDs.includes(refID)) {
             // since the headers are hidden, also hide the related toc item
-            item.classList.add('d-none')
+            item.classList.add('d-none');
         }
-        if(tabNestedHeaderIDs.includes(refID)){
-            // hide all toc items related to headers that are nested in {{tabs}} 
-            item.classList.add('d-none')
+        if (tabNestedHeaderIDs.includes(refID)) {
+            // hide all toc items related to headers that are nested in {{tabs}}
+            item.classList.add('d-none');
         }
-    })
+    });
 }
 
 function showRegionSnippet(newSiteRegion) {
@@ -114,14 +114,14 @@ function showRegionSnippet(newSiteRegion) {
 
     // build list of external app links using config
     let externalLinksQuery = '';
-    Object.entries(config.dd_full_site).forEach(e => {
-        externalLinksQuery += `#mainContent a[href*="${e[1]}"],`
-    })
+    Object.entries(config.dd_full_site).forEach((e) => {
+        externalLinksQuery += `#mainContent a[href*="${e[1]}"],`;
+    });
 
     // query selector for all app links, removing trailing comma
     const externalLinks = document.querySelectorAll(externalLinksQuery.slice(0, -1));
 
-    regionSnippets.forEach(regionSnippet => {
+    regionSnippets.forEach((regionSnippet) => {
         const { region } = regionSnippet.dataset;
 
         if (region.split(',').indexOf(newSiteRegion) === -1) {
@@ -131,7 +131,7 @@ function showRegionSnippet(newSiteRegion) {
         }
     });
 
-    regionParams.forEach(param => {
+    regionParams.forEach((param) => {
         const { regionParam } = param.dataset;
 
         // check if the region config object has the key specified in the hugo shortcode
@@ -141,25 +141,29 @@ function showRegionSnippet(newSiteRegion) {
             );
         } else {
             // checks if it's an `<a>` element, in which case we set the href
-            if (param.tagName === 'A'){
-                param.setAttribute("href", config[regionParam][newSiteRegion])
+            let value = config[regionParam][newSiteRegion];
+            if (param.dataset.lowercase === 'true') {
+                value = value.toLowerCase();
+            }
+            if (param.tagName === 'A') {
+                param.setAttribute('href', value);
             } else {
-              param.innerHTML = config[regionParam][newSiteRegion];
-              // checks if there are two `<code>` elements next to each other, and allows them to 'blend' together(no padding or border radius in between the two)
-              if (param.previousElementSibling && param.previousElementSibling.tagName === 'CODE'){
-                  param.previousElementSibling.style.paddingRight = '0';
-                  param.previousElementSibling.style.borderTopRightRadius = '0';
-                  param.previousElementSibling.style.borderBottomRightRadius = '0';
-              }
-             }
+                param.innerHTML = value;
+                // checks if there are two `<code>` elements next to each other, and allows them to 'blend' together(no padding or border radius in between the two)
+                if (param.previousElementSibling && param.previousElementSibling.tagName === 'CODE') {
+                    param.previousElementSibling.style.paddingRight = '0';
+                    param.previousElementSibling.style.borderTopRightRadius = '0';
+                    param.previousElementSibling.style.borderBottomRightRadius = '0';
+                }
+            }
         }
     });
 
     if (externalLinks) {
-        externalLinks.forEach(link => {
+        externalLinks.forEach((link) => {
             // skips links that are generated by the region-param shortcode
-            if (!link.hasAttribute("data-region-param")){
-              link.href = `https://${config.dd_full_site[newSiteRegion]}${link.pathname}${link.search}${link.hash}`;
+            if (!link.hasAttribute('data-region-param')) {
+                link.href = `https://${config.dd_full_site[newSiteRegion]}${link.pathname}${link.search}${link.hash}`;
             }
         });
     }
@@ -178,10 +182,7 @@ function redirectToRegion(region = '') {
     } else if (newSiteRegion !== '') {
         Cookies.set('site', newSiteRegion, { path: '/' });
         showRegionSnippet(newSiteRegion);
-    } else if (
-        Cookies.get('site') &&
-        config.allowedRegions.includes(Cookies.get('site'))
-    ) {
+    } else if (Cookies.get('site') && config.allowedRegions.includes(Cookies.get('site'))) {
         if (newSiteRegion !== '') {
             Cookies.set('site', newSiteRegion, { path: '/' });
             showRegionSnippet(newSiteRegion);

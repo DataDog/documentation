@@ -2217,37 +2217,73 @@ menu:
       parent: error_tracking
       identifier: error_tracking_issue_team_ownership
       weight: 10
-    - name: Browser Error Tracking
-      url: error_tracking/frontend/browser
-      parent: error_tracking_frontend
+  
+    - name: Browser
       identifier: error_tracking_browser
+      url: error_tracking/frontend
+      parent: error_tracking_frontend
+      weight: 101
+    - name: Android
+      identifier: error_tracking_android
+      url: error_tracking/frontend/android/
+      parent: error_tracking_frontend
+      weight: 102
+    - name: iOS
+      identifier: error_tracking_ios
+      url: error_tracking/frontend/ios/
+      parent: error_tracking_frontend
+      weight: 103
+    - name: Flutter
+      identifier: error_tracking_flutter
+      url: error_tracking/frontend/flutter/
+      parent: error_tracking_frontend
+      weight: 104
+    - name: React Native
+      identifier: error_tracking_react_native
+      url: error_tracking/frontend/reactnative/
+      parent: error_tracking_frontend
+      weight: 105
+    - name: Roku
+      identifier: error_tracking_roku
+      url: error_tracking/frontend/roku/
+      parent: error_tracking_frontend
+      weight: 106
+    - name: Kotlin Multiplatform
+      identifier: error_tracking_kotlin_multiplatform
+      url: error_tracking/frontend/kotlin_multiplatform/
+      parent: error_tracking_frontend
+      weight: 107
+
+
+    - name: Setup
+      url: error_tracking/frontend/browser
+      parent: error_tracking_browser
+      identifier: error_tracking_frontend_setup
       weight: 100
     - name: Collecting Browser Errors
       url: error_tracking/frontend/collecting_browser_errors
-      parent: error_tracking_frontend
+      parent: error_tracking_browser
       identifier: error_tracking_collect_errors
       weight: 101
-    - name: Mobile Crash Tracking
-      url: error_tracking/frontend/mobile
-      parent: error_tracking_frontend
-      identifier: error_tracking_mobile
-      weight: 102
+
     - name: Replay Errors
       url: error_tracking/frontend/replay_errors
-      parent: error_tracking_frontend
+      parent: error_tracking_browser
       identifier: error_tracking_replays
       weight: 103
     - name: Real User Monitoring
       url: error_tracking/rum
-      parent: error_tracking_frontend
+      parent: error_tracking_browser
       identifier: error_tracking_rum
       weight: 104
     - name: Logs
       url: error_tracking/frontend/logs
-      parent: error_tracking_frontend
+      parent: error_tracking_browser
       identifier: error_tracking__fe_logs
       weight: 105
-    - name: Track Browser and Mobile Errors
+
+
+    - name: Track Client Errors
       url: error_tracking/frontend
       parent: error_tracking
       identifier: error_tracking_frontend
@@ -7080,81 +7116,91 @@ menu:
       identifier: rum
       parent: digital_experience_heading
       weight: 20000
-    - name: Browser Monitoring
-      url: real_user_monitoring/browser/
-      parent: rum
-      identifier: rum_browser
-      weight: 1
-    - name: Setup
-      url: real_user_monitoring/browser/setup/
-      parent: rum_browser
-      identifier: rum_browser_setup
-      weight: 101
-    - name: Client-Side
-      url: real_user_monitoring/browser/setup/client
-      parent: rum_browser_setup
-      identifier: rum_browser_setup_client
-      weight: 1101
-    - name: Auto-Instrumentation
-      url: real_user_monitoring/browser/setup/server
-      parent: rum_browser_setup
-      identifier: rum_browser_setup_server
-      weight: 1102
-    - name: Advanced Configuration
-      url: real_user_monitoring/browser/advanced_configuration/
-      parent: rum_browser
-      identifier: rum_advanced
-      weight: 102
-    - name: Data Collected
-      url: real_user_monitoring/browser/data_collected/
-      parent: rum_browser
-      identifier: rum_data_collected
-      weight: 103
-    - name: Monitoring Page Performance
-      url: real_user_monitoring/browser/monitoring_page_performance/
-      parent: rum_browser
-      identifier: page_performance
-      weight: 104
-    - name: Optimizing Performance
-      url: real_user_monitoring/browser/optimizing_performance/
-      parent: rum_browser
-      identifier: rum_optimizing_performance
-      weight: 105
-    - name: Monitoring Resource Performance
-      url: real_user_monitoring/browser/monitoring_resource_performance/
-      parent: rum_browser
-      identifier: resource_performance
-      weight: 106
-    - name: Collecting Browser Errors
-      url: real_user_monitoring/browser/collecting_browser_errors/
-      parent: rum_browser
-      identifier: collect_errors
-      weight: 107
-    - name: Tracking User Actions
-      url: real_user_monitoring/browser/tracking_user_actions/
-      parent: rum_browser
-      identifier: track_actions
-      weight: 108
-    - name: Frustration Signals
-      url: real_user_monitoring/browser/frustration_signals/
-      parent: rum_browser
-      identifier: rum_frustration_signals
-      weight: 109
-    - name: Error Tracking
-      url: real_user_monitoring/browser/error_tracking/
-      parent: rum_browser
-      identifier: rum_browser_error_tracking
-      weight: 110
-    - name: Troubleshooting
-      url: real_user_monitoring/browser/troubleshooting/
-      parent: rum_browser
-      identifier: troubleshooting
-      weight: 111
-    - name: Mobile and TV Monitoring
+    - name: Platform Monitoring
       url: real_user_monitoring/mobile_and_tv_monitoring/
       parent: rum
       identifier: mobile_and_tv_monitoring
       weight: 2
+    - name: React
+      url: real_user_monitoring/mobile_and_tv_monitoring/react/setup/
+      parent: mobile_and_tv_monitoring
+      identifier: rum_react
+      weight: 200
+    - name: Setup
+      url: real_user_monitoring/mobile_and_tv_monitoring/react/setup/
+      parent: rum_react
+      identifier: rum_react_setup
+      weight: 101
+    - name: Browser
+      url: real_user_monitoring/mobile_and_tv_monitoring/browser/
+      parent: mobile_and_tv_monitoring
+      identifier: rum_browser
+      weight: 199
+    - name: Setup
+      url: real_user_monitoring/mobile_and_tv_monitoring/browser/setup/
+      parent: rum_browser
+      identifier: rum_browser_setup
+      weight: 101
+    - name: Client-Side
+      url: real_user_monitoring/mobile_and_tv_monitoring/browser/setup/client
+      parent: rum_browser_setup
+      identifier: rum_browser_setup_client
+      weight: 1101
+    - name: Auto-Instrumentation
+      url: real_user_monitoring/mobile_and_tv_monitoring/browser/setup/server
+      parent: rum_browser_setup
+      identifier: rum_browser_setup_server
+      weight: 1102
+    - name: Advanced Configuration
+      url: real_user_monitoring/mobile_and_tv_monitoring/browser/advanced_configuration/
+      parent: rum_browser
+      identifier: rum_advanced
+      weight: 102
+    - name: Data Collected
+      url: real_user_monitoring/mobile_and_tv_monitoring/browser/data_collected/
+      parent: rum_browser
+      identifier: rum_data_collected
+      weight: 103
+    - name: Monitoring Page Performance
+      url: real_user_monitoring/mobile_and_tv_monitoring/browser/monitoring_page_performance/
+      parent: rum_browser
+      identifier: page_performance
+      weight: 104
+    - name: Optimizing Performance
+      url: real_user_monitoring/mobile_and_tv_monitoring/browser/optimizing_performance/
+      parent: rum_browser
+      identifier: rum_optimizing_performance
+      weight: 105
+    - name: Monitoring Resource Performance
+      url: real_user_monitoring/mobile_and_tv_monitoring/browser/monitoring_resource_performance/
+      parent: rum_browser
+      identifier: resource_performance
+      weight: 106
+    - name: Collecting Browser Errors
+      url: real_user_monitoring/mobile_and_tv_monitoring/browser/collecting_browser_errors/
+      parent: rum_browser
+      identifier: collect_errors
+      weight: 107
+    - name: Tracking User Actions
+      url: real_user_monitoring/mobile_and_tv_monitoring/browser/tracking_user_actions/
+      parent: rum_browser
+      identifier: track_actions
+      weight: 108
+    - name: Frustration Signals
+      url: real_user_monitoring/mobile_and_tv_monitoring/browser/frustration_signals/
+      parent: rum_browser
+      identifier: rum_frustration_signals
+      weight: 109
+    - name: Error Tracking
+      url: real_user_monitoring/mobile_and_tv_monitoring/browser/error_tracking/
+      parent: rum_browser
+      identifier: rum_browser_error_tracking
+      weight: 110
+    - name: Troubleshooting
+      url: real_user_monitoring/mobile_and_tv_monitoring/browser/troubleshooting/
+      parent: rum_browser
+      identifier: troubleshooting
+      weight: 111
     - name: Android and Android TV
       url: real_user_monitoring/mobile_and_tv_monitoring/android
       parent: mobile_and_tv_monitoring
@@ -7776,26 +7822,63 @@ menu:
       parent: product_analytics
       identifier: pa_session_replay
       weight: 3
+
+
+
+    - name: Browser
+      identifier: pa_tracking_browser
+      url: product_analytics/session_replay/browser
+      parent: pa_session_replay
+      weight: 101
+    - name: Android
+      identifier: pa_tracking_android
+      url: product_analytics/session_replay/mobile
+      parent: pa_session_replay
+      weight: 102
+    - name: iOS
+      identifier: pa_tracking_ios
+      url: product_analytics/session_replay/mobile
+      parent: pa_session_replay
+      weight: 103
+    - name: Flutter
+      identifier: pa_tracking_flutter
+      url: product_analytics/session_replay/mobile
+      parent: pa_session_replay
+      weight: 104
+    - name: React Native
+      identifier: pa_tracking_react_native
+      url: product_analytics/session_replay/mobile
+      parent: pa_session_replay
+      weight: 105
+    - name: Roku
+      identifier: pa_tracking_roku
+      url: product_analytics/session_replay/mobile
+      parent: pa_session_replay
+      weight: 106
+    - name: Kotlin Multiplatform
+      identifier: pa_tracking_kotlin_multiplatform
+      url: product_analytics/session_replay/mobile
+      parent: pa_session_replay
+      weight: 107
+
+
+    - name: Setup
+      url: pproduct_analytics/session_replay/browser/setup
+      parent: pa_tracking_browser
+      identifier: pa_session_replay_browser_setup
+      weight: 100
     - name: Heatmaps
       url: product_analytics/session_replay/heatmaps
-      parent: pa_session_replay
+      parent: pa_tracking_browser
       identifier: pa_heatmaps
       weight: 301
     - name: Playlists
       url: product_analytics/session_replay/playlists
-      parent: pa_session_replay
+      parent: pa_tracking_browser
       identifier: pa_playlists
       weight: 302
-    - name: Mobile
-      url: product_analytics/session_replay/mobile
-      parent: pa_session_replay
-      identifier: pa_session_replay_mobile
-      weight: 302
-    - name: Setup
-      url: product_analytics/session_replay/mobile/setup_and_configuration
-      parent: pa_session_replay_mobile
-      identifier: pa_session_replay_mobile_setup
-      weight: 101
+
+
     - name: Privacy Options
       url: product_analytics/session_replay/mobile/privacy_options
       parent: pa_session_replay_mobile
@@ -7818,17 +7901,17 @@ menu:
       weight: 303
     - name: Privacy Options
       url: product_analytics/session_replay/browser/privacy_options
-      parent: pa_session_replay_browser
+      parent: pa_tracking_browser
       identifier: pa_session_replay_browser_privacy_options
       weight: 102
     - name: Developer Tools
       url: product_analytics/session_replay/browser/developer_tools
-      parent: pa_session_replay_browser
+      parent: pa_tracking_browser
       identifier: pa_session_replay_browser_developer_tools
       weight: 103
     - name: Troubleshooting
       url: product_analytics/session_replay/browser/troubleshooting
-      parent: pa_session_replay_browser
+      parent: pa_tracking_browser
       identifier: pa_session_replay_browser_troubleshooting
       weight: 104
     - name: Segments

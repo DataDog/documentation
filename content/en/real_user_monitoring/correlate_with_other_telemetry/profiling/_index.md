@@ -11,7 +11,7 @@ further_reading:
     tag: "Documentation"
     text: "APM and Distributed Tracing"
 ---
-{{< callout url="https://www.datadoghq.com/product-preview/browser-profiler/" btn_hidden="false" header="Join the Preview!" >}}
+{{< callout url="<https://www.datadoghq.com/product-preview/browser-profiler/>" btn_hidden="false" header="Join the Preview!" >}}
 Browser Profiling is in Preview.
 {{< /callout >}}
 
@@ -23,46 +23,76 @@ Browser profiling provides visibility into how your application behaves in your 
 
 To get started, ensure browser profiling is enabled in your RUM SDK configuration. When browser profiling is enabled, you can click on a profiled event sample to see a profile section.
 
-## Usage
+## Setup
 
-### Setup RUM
-1. Set up [RUM Browser Monitoring][2].
+### Step 1 - Set up RUM Browser Monitoring
 
-2. Initialize the RUM SDK and configure `profilingSampleRate`, which sets the percentage of sessions that are profiled.
-    ```javascript
-    import { datadogRum } from '@datadog/browser-rum'
+To start collecting data, set up Datadog [RUM Browser Monitoring][2].
 
-    datadogRum.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      profilingSampleRate: 100,
-      trackLongTasks: true,
-      trackUserInteractions: true,
-    })
-    ```
+### Step 2 - Configure the profiling sample rate
 
-3. Configure your web servers to serve HTML pages with the HTTP response header `Document-Policy: js-profiling`:
-    ```javascript
-        app.get("/", (request, response) => {
-            … 
-            response.set("Document-Policy", "js-profiling");
-            …
-        });
-    ```
+The `profilingSampleRate` sets the percentage of sessions that are profiled.
 
-4. Set up Cross-Origin Resource Sharing (CORS) if needed.
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum'
+
+datadogRum.init({
+  ...
+  profilingSampleRate: 100,
+})
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum'
+
+datadogRum.init({
+  ...
+  profilingSampleRate: 100,
+})
+```
+
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum'
+
+datadogRum.init({
+  ...
+  profilingSampleRate: 100,
+})
+```
+
+{{% /tab %}}
+{{% /tabs %}}
+
+### Step 3 - Configure your web servers
+
+Configure your web servers to serve HTML pages with the HTTP response header `Document-Policy: js-profiling`:
+
+```javascript
+    app.get("/", (request, response) => {
+        … 
+        response.set("Document-Policy", "js-profiling");
+        …
+    });
+```
+
+### Step 4 - Set up Cross-Origin Resource Sharing (CORS) if needed
 
     This step is required only if your JavaScript files are served from a different origin. For example, an HTML document is served from `cdn.com`, and JavaScript files are served from `static.cdn.com`. In this case, you must enable CORS; if you do not, your JavaScript files are invisible for the profiler. By default, your browser loads JavaScript in `no-cors` mode. For more information, see the [Browser profiling and CORS](#cors) section.
-    
+
     To enable CORS:
 
     - Add a `crossorigin="anonymous"` attribute to `<script/>` tags
     - Ensure that JavaScript response includes the `Access-Control-Allow-Origin: *` HTTP header (or the proper origin value)
-    
+
        ```javascript
        app.get("/", (request, response) => {
            … 
@@ -73,6 +103,7 @@ To get started, ensure browser profiling is enabled in your RUM SDK configuratio
        ```
 
 {{% collapse-content title="Browser profiling and CORS" level="h4" expanded=false id="cors" %}}
+
 #### Why would I need to set CORS?
 
 If a script's execution or attribution information is to be surfaced in performance entries (and thus captured in browser profiling), the resource (for example, a JavaScript file) needs to be fetched with CORS headers that explicitly allow it to be shared with the origin making the measurement (your application).
@@ -102,6 +133,7 @@ Without the `crossorigin="anonymous"` attribute, the browser does not make a COR
 - The fetched script is not eligible for detailed attribution in performance entries or stack traces. These stack frames are displayed as "(anonymous)" or with no attribution.
 
 To protect cross-origin script privacy, _both_ sides must agree to share information:
+
 - The page must explicitly request a CORS-enabled fetch, with `crossorigin="anonymous"`.
 - The server must permit this, with an `Access-Control-Allow-Origin` header in the response.
 

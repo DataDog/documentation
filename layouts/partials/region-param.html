@@ -1,9 +1,18 @@
-{{ $dot := . }}
-{{- if  not ($dot.key) -}}{{ errorf "region-param shortcode error: Missing value for param 'key': %s" $dot.Position }}{{- end -}}
-{{- if eq ($dot.code) "true" -}}
-    <code class="js-region-param region-param" data-region-param="{{ $dot.key }}"></code>
+{{ $dot := . }} {{- if not ($dot.key) -}}{{ errorf "region-param shortcode error: Missing value for param 'key': %s"
+$dot.Position }}{{- end -}} {{- $lowercase := or ($dot.lowercase) "false" -}} {{- if eq ($dot.code) "true" -}}
+<code
+    class="js-region-param region-param"
+    data-region-param="{{ $dot.key }}"
+    data-lowercase="{{ $dot.lowercase }}"
+></code>
 {{- else if eq ($dot.link) "true" -}}
-    <a class="js-region-param region-param" data-region-param="{{ $dot.key }}" href="">{{ $dot.text }}</a>
+<a class="js-region-param region-param" data-region-param="{{ $dot.key }}" data-lowercase="{{ $dot.lowercase }}" href=""
+    >{{ $dot.text }}</a
+>
 {{- else -}}
-    <span class="js-region-param region-param" data-region-param="{{ $dot.key }}"></span>
+<span
+    class="js-region-param region-param"
+    data-region-param="{{ $dot.key }}"
+    data-lowercase="{{ $dot.lowercase}}"
+></span>
 {{- end -}}

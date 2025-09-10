@@ -1,5 +1,5 @@
 ---
-title: Mobile and TV Monitoring
+title: Platform Monitoring
 description: Collect RUM data from your mobile and TV applications.
 aliases:
 - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/
