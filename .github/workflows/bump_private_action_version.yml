@@ -7,7 +7,8 @@ on:
 jobs:
     call-version-getter-shared-workflow:
         permissions:
-            contents: read
+            contents: write
+            id-token: write
             pull-requests: write
         uses: Datadog/documentation/.github/workflows/version_getter_shared.yml@e135a6b659590a1a4cd1cf5e05e6939aa6d4d805
         with:
