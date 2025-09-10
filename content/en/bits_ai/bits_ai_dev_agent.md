@@ -39,10 +39,15 @@ Bits AI Dev Agent is available for the following Datadog products:
 To use Bits AI Dev Agent, you must install the [GitHub integration][4]. For full installation and configuration steps, see the [GitHub integration guide][5].
 
 <div class="alert alert-info">
-  To support Bits AI Dev Agent functionality, the GitHub integration must be granted the following permissions:
+  To support core Bits AI Dev Agent functionality, the GitHub integration must be granted the following permissions:
   <ul style="font-size: inherit; padding-left: 1.25rem; margin-top: 0.5rem;">
-    <li style="font-size: inherit;"><strong>Repository contents</strong> (<code>contents: read</code>, <code>contents: write</code>)</li>
-    <li style="font-size: inherit;"><strong>Pull requests</strong> (<code>pull_requests: write</code>)</li>
+    <li style="font-size: inherit;"><strong>Repository Permissions</strong> (<code>Contents: Read & Write</code>, <code>Pull Requests: Read & Write</code>)</li>
+    <li style="font-size: inherit;"><strong>Subscribe to Events</strong> (<code>Push</code>)</li>
+  </ul>
+  The Dev Agent can also iterate on PRs using CI logs to try and pass CI checks. This feature requires CI logs to be sent to Datadog and the Auto-commit feature to be enabled. The following permissions are required for this feature:
+  <ul style="font-size: inherit; padding-left: 1.25rem; margin-top: 0.5rem;">
+    <li style="font-size: inherit;"><strong>Repository Permissions</strong> (<code>Checks: Read</code>, <code>Commit Statuses: Read Only</code>)</li>
+    <li style="font-size: inherit;"><strong>Subscribe to Events</strong> (<code>Check run</code>, <code>Check suite</code>, <code>Issue comment</code>, <code>Status</code>)</li>
   </ul>
 </div> 
 
