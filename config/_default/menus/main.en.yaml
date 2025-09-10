@@ -4431,16 +4431,42 @@ menu:
       parent: dbm_setup_postgres
       identifier: dbm_postgres_azure
       weight: 306
+<<<<<<< Updated upstream
+=======
+    - name: Heroku
+      url: database_monitoring/setup_postgres/heroku
+      parent: dbm_setup_postgres
+      identifier: dbm_postgres_heroku
+      weight: 307
+    - name: Kubernetes
+      url: database_monitoring/setup_postgres/kubernetes
+      parent: dbm_setup_postgres
+      identifier: dbm_postgres_kubernetes
+      weight: 308
+    - name: Docker
+      url: database_monitoring/setup_postgres/docker
+      parent: dbm_setup_postgres
+      identifier: dbm_postgres_docker
+      weight: 309
+>>>>>>> Stashed changes
     - name: Advanced Configuration
       url: database_monitoring/setup_postgres/advanced_configuration
       parent: dbm_setup_postgres
       identifier: dbm_postgres_advanced_configuration
+<<<<<<< Updated upstream
       weight: 307
+=======
+      weight: 310
+>>>>>>> Stashed changes
     - name: Troubleshooting
       url: database_monitoring/setup_postgres/troubleshooting/
       parent: dbm_setup_postgres
       identifier: dbm_troubleshooting_postgres
+<<<<<<< Updated upstream
       weight: 308
+=======
+      weight: 311
+>>>>>>> Stashed changes
     - name: Setting Up MySQL
       url: database_monitoring/setup_mysql/
       parent: dbm
