@@ -481,7 +481,6 @@ To finish a span, call `finish()` on a span object instance. If possible, wrap t
 {{< tabs >}}
 {{% tab "Python" %}}
 To trace an LLM span, use the function decorator `ddtrace.llmobs.decorators.llm()`.
-**Note**: To display the estimated cost in U.S. dollars, set modelProvider to one of the following values: `openai`, `azure_openai`, or `anthropic`.
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="llm-span-arguments" %}}
 
@@ -495,6 +494,7 @@ To trace an LLM span, use the function decorator `ddtrace.llmobs.decorators.llm(
 
 `model_provider`
 : optional - _string_ - **default**: `"custom"`
+**Note**: To display the estimated cost in U.S. dollars, set modelProvider to one of the following values: `openai`, `azure_openai`, or `anthropic`.
 
 `session_id`
 : optional - _string_
@@ -520,7 +520,6 @@ def llm_call():
 
 {{% tab "Node.js" %}}
 To trace an LLM span, specify the span kind as `llm`, and optionally specify the following arguments on the options object.
-**Note**: To display the estimated cost in U.S. dollars, set modelProvider to one of the following values: `openai`, `azure_openai`, or `anthropic`.
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="llm-span-arguments" %}}
 
@@ -535,6 +534,7 @@ To trace an LLM span, specify the span kind as `llm`, and optionally specify the
 `modelProvider`
 : optional - _string_ - **default**: `"custom"`
 <br/>The name of the model provider.
+**Note**: To display the estimated cost in U.S. dollars, set modelProvider to one of the following values: `openai`, `azure_openai`, or `anthropic`.
 
 `sessionId`
 : optional - _string_
@@ -559,7 +559,6 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 {{% /tab %}}
 {{% tab "Java" %}}
 To trace an LLM span, import and call the following method with the arguments listed below:
-**Note**: To display the estimated cost in U.S. dollars, set modelProvider to one of the following values: `openai`, `azure_openai`, or `anthropic`.
 
 ```
 import datadog.trace.api.llmobs.LLMObs;
@@ -578,7 +577,7 @@ LLMObs.startLLMSpan(spanName, modelName, modelProvider, mlApp, sessionID);
 
 `modelProvider`
 : optional - _String_ - **default**: `"custom"`
-<br/>The name of the model provider.
+**Note**: To display the estimated cost in U.S. dollars, set modelProvider to one of the following values: `openai`, `azure_openai`, or `anthropic`.
 
 `mlApp`
 : optional - _String_
