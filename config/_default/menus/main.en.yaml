@@ -6339,6 +6339,11 @@ menu:
       parent: workload_protection_inventory
       identifier: workload_protection_hosts_and_containers
       weight: 1
+    - name: Serverless
+      url: security/workload_protection/inventory/serverless
+      parent: workload_protection_inventory
+      identifier: workload_protection_serverless
+      weight: 2
     - name: Coverage
       url: security/workload_protection/inventory/coverage_map
       parent: workload_protection_inventory
