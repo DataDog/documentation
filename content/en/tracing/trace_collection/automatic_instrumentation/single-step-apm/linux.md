@@ -31,7 +31,7 @@ To enable APM on a Linux host:
 
 By default, Single Step Instrumentation installs the latest versions of Datadog APM SDKs.
 
-You may want to choose specific SDK versions.
+You may want to choose specific SDK versions for compatability with your application's language version or specific environment requirements.
 
 To customize SDK versions:
 
@@ -43,7 +43,7 @@ To customize SDK versions:
 
 1. Find your language(s) and use the dropdown to either:
    - Select an exact SDK version, or
-   - Select the major version which will use the latest minor release available when the Agent install command is run.
+   - Select the major version which will use the latest minor release available when the Agent installation command is run.
 1. Copy and run the updated installation command.
 
 [15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
@@ -64,7 +64,7 @@ To customize SDK versions:
 
 1. Find your language(s) and use the dropdown to either:
    - Select an exact SDK version, or
-   - Select the major version which will use the latest minor release available when the Agent install command is run.
+   - Select the major version which will use the latest minor release available when the Agent installation command is run.
 1. Copy and run the updated installation command.
 
 [15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
@@ -104,7 +104,7 @@ The SDK version is fixed when you run the Agent installation command.
 
 To update the SDK versions:
 
-1. Re-run the Agent install command. This command also updates the Agent to the latest version.
+1. Re-run the Agent installation command. This command also updates the Agent to the latest version.
 1. Restart your applications.
 
 ## Remove Single Step APM instrumentation from your Agent
