@@ -11,6 +11,7 @@ aliases:
 - /service_management/app_builder/connections/http_request/
 ---
 
+
 Use the **Make request** action to make a custom request to an HTTP endpoint. You can control the request method and its contents, how it is authenticated and processed, and how it should respond to scenarios like expired certificates or redirects. If you need to add Datadog IP address ranges to your allowlist so that the HTTP action works as expected, use the IPs listed in the `webhooks` object. See the [IP Ranges API][1] for details.
 
 To add an HTTP Request:
