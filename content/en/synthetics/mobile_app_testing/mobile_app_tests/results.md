@@ -84,17 +84,7 @@ Use video replay to diagnose test failures by showing unexpected UI behavior or 
 
 Click on an individual test run from the [Mobile Application test details page][11] to view detailed information in the side panel, including step duration, pass/fail status, and screenshots. Use the **Video Replay** tab to watch the complete test execution.
 
-{{< img src="mobile_app_testing/video_replay.mp4" alt="Video Replay of a test run in Mobile App testing" video=true >}}
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const videos = document.querySelectorAll('video source[src*="video_replay.mp4"]');
-    videos.forEach(source => {
-        const video = source.parentElement;
-        video.playbackRate = 1.5;
-    });
-});
-</script>
+{{< img src="mobile_app_testing/mobile_app_video_replay.mp4" alt="Video Replay of a test run in Mobile App testing" video=true >}}
 
 **Note**: Mobile Application test session replays are not available in RUM.
 
