@@ -61,9 +61,9 @@ RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /
 
 3. **Set up logs**.
 
-   In the previous step, you created a shared volume. Additionally, you set the `DD_SERVERLESS_LOG_PATH` env var, or it was defaulted to `/shared-volume/logs/app.log`.
+   In the previous step, you created a shared volume. You may have also set the `DD_SERVERLESS_LOG_PATH` environment variable, which defaults to `/shared-volume/logs/app.log`.
 
-   Now, you will need to configure your logging library to write logs to that file. In .NET, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `Serilog`:
+   In this step, configure your logging library to write logs to that file set in `DD_SERVERLESS_LOG_PATH`. In .NET, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `Serilog`:
    {{< code-block lang="csharp" disable_copy="false" >}}
 using Serilog;
 
@@ -81,9 +81,15 @@ builder.Host.UseSerilog((context, config) =>
 logger.LogInformation("Hello World!");
 {{< /code-block >}}
 
-Datadog recommends setting the environment variable `DD_SOURCE=csharp` in your sidecar container to enable advanced Datadog log parsing.
+   Datadog recommends setting the environment variables `DD_LOGS_INJECTION=true` (in your main container) and `DD_SOURCE=csharp` (in your sidecar container) to enable advanced Datadog log parsing.
 
-For more information, see [Correlating .NET Logs and Traces][3].
+   For more information, see [Correlating .NET Logs and Traces][3].
+
+4. {{% gcr-service-label %}}
+
+5. **Send custom metrics**.
+
+   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
 {{% gcr-env-vars instrumentationMethod="sidecar" language="csharp" %}}
 
@@ -98,3 +104,5 @@ For more information, see [Correlating .NET Logs and Traces][3].
 [1]: https://docs.docker.com/build/building/secrets/
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=linux
 [3]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
+[4]: /developers/dogstatsd/?tab=dotnet#install-the-dogstatsd-client
+[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=dotnet#code-examples

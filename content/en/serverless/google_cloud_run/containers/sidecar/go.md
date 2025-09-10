@@ -61,9 +61,9 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
 3. **Set up logs**.
 
-   In the previous step, you created a shared volume. Additionally, you set the `DD_SERVERLESS_LOG_PATH` env var, or it was defaulted to `/shared-volume/logs/app.log`.
+   In the previous step, you created a shared volume. You may have also set the `DD_SERVERLESS_LOG_PATH` environment variable, which defaults to `/shared-volume/logs/app.log`.
 
-   Now, you will need to configure your logging library to write logs to that file. In Go, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `logrus`:
+   In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. In Go, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `logrus`:
    {{< code-block lang="go" disable_copy="false" >}}
 const LOG_FILE = "/shared-volume/logs/app.log"
 
@@ -78,9 +78,15 @@ logrus.AddHook(&dd_logrus.DDContextLogHook{})
 logrus.WithContext(ctx).Info("Hello World!")
 {{< /code-block >}}
 
-Datadog recommends setting the environment variable `DD_SOURCE=go` in your sidecar container to enable advanced Datadog log parsing.
+   Datadog recommends setting the environment variable `DD_SOURCE=go` in your sidecar container to enable advanced Datadog log parsing.
 
-For more information, see [Correlating Go Logs and Traces][3].
+   For more information, see [Correlating Go Logs and Traces][3].
+
+4. {{% gcr-service-label %}}
+
+5. **Send custom metrics**.
+
+   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
 {{% gcr-env-vars instrumentationMethod="sidecar" language="go" %}}
 
@@ -95,3 +101,5 @@ For more information, see [Correlating Go Logs and Traces][3].
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go/
 [2]: https://github.com/DataDog/dd-trace-go?tab=readme-ov-file#installing
 [3]: /tracing/other_telemetry/connect_logs_and_traces/go/
+[4]: /developers/dogstatsd/?tab=go#install-the-dogstatsd-client
+[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=go#code-examples

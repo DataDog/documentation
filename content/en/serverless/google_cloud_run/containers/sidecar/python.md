@@ -16,13 +16,19 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog Python tracer** in your Dockerfile.
+1. **Install the Datadog Python tracer**.
 
-   {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
-RUN pip install --target /dd_tracer/python/ ddtrace
+   Add `ddtrace` to your `requirements.txt` or `pyproject.toml`. You can find the latest version on [PyPI][1]:
+   {{< code-block lang="text" filename="requirements.txt" disable_copy="false" collapsible="true" >}}
+ddtrace==<VERSION>
 {{< /code-block >}}
 
-   For more information, see [Tracing Python applications][1].
+   Alternatively, you can install the tracer in your Dockerfile:
+   {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
+RUN pip install ddtrace
+{{< /code-block >}}
+
+   For more information, see [Tracing Python applications][2].
 
 2. **Install serverless-init as a sidecar**.
 
@@ -44,11 +50,12 @@ RUN pip install --target /dd_tracer/python/ ddtrace
 
 3. **Set up logs**.
 
-   In the previous step, you created a shared volume. Additionally, you set the `DD_SERVERLESS_LOG_PATH` env var, or it was defaulted to `/shared-volume/logs/app.log`.
+   In the previous step, you created a shared volume. You may have also set the `DD_SERVERLESS_LOG_PATH` environment variable, which defaults to `/shared-volume/logs/app.log`.
 
-   Now, you will need to configure your logging library to write logs to that file. You can also set a custom format for log/trace correlation and other features. Datadog recommends setting the following environment variables:
-   - `ENV PYTHONUNBUFFERED=1`: Ensure Python outputs appear immediately in container logs instead of being buffered.
-   - `ENV DD_SOURCE=python`: Enable advanced Datadog log parsing.
+   In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. You can also set a custom format for log/trace correlation and other features. Datadog recommends setting the following environment variables:
+   - `ENV PYTHONUNBUFFERED=1`: In your main container. Ensure Python outputs appear immediately in container logs instead of being buffered.
+   - `ENV DD_LOGS_INJECTION=true`: In your main container. Enable log/trace correlation for supported loggers.
+   - `DD_SOURCE=python`: In your sidecar container. Enable advanced Datadog log parsing.
 
    Then, update your logging library. For example, you can use Python's native `logging` library:
    {{< code-block lang="python" disable_copy="false" >}}
@@ -73,7 +80,13 @@ logger.level = logging.INFO
 logger.info('Hello world!')
 {{< /code-block >}}
 
-   For more information, see [Correlating Python Logs and Traces][2].
+   For more information, see [Correlating Python Logs and Traces][3].
+
+4. {{% gcr-service-label %}}
+
+5. **Send custom metrics**.
+
+   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
 {{% gcr-env-vars instrumentationMethod="sidecar" language="python" %}}
 
@@ -85,5 +98,8 @@ logger.info('Hello world!')
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
-[2]: /tracing/other_telemetry/connect_logs_and_traces/python/
+[1]: https://pypi.org/project/ddtrace/
+[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
+[3]: /tracing/other_telemetry/connect_logs_and_traces/python/
+[4]: /developers/dogstatsd/?tab=python#install-the-dogstatsd-client
+[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples
