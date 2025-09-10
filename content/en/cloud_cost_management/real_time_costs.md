@@ -14,7 +14,7 @@ Real-Time Costs is in Preview.
 
 ## Overview
 
-Real-Time Costs provide near real-time estimates of your Amazon EC2 costs, including Kubernetes cost allocation, so that you can react to cost changes in minutes and hours, not days. Estimates are generated using real-time usage data from the Datadog Agent, based on recent average hourly net amortized EC2 prices by instance type, region, and AWS account.
+Real-Time Costs provide near real-time estimates of your Amazon EC2 costs, including Kubernetes cost allocation, so that you can react to cost changes in minutes and hours, instead of days. Estimates are generated using real-time usage data from the Datadog Agent, based on recent average hourly net amortized EC2 prices by instance type, region, and AWS account.
 
 Use real-time costs to:
 - Detect anomalies early
@@ -30,13 +30,13 @@ Real-time costs are currently available in Preview for:
 
 - Cloud Cost Management is enabled for the AWS account
 - Datadog Agent is installed on each EC2 instance
-- Optionally, to see Kubernetes costs in real time, enable Datadog Container Monitoring for your clusters by following the setup in [Container Cost Allocation][2]
+- (Optional) To see Kubernetes costs in real time, enable Datadog Container Monitoring for your clusters by following the setup guide in [Container Cost Allocation][2]
 
 ## How to query real-time costs
 
 Real-time costs can be found under the standard "Metrics" source in Metrics Explorer and dashboards, and should be queried using `sum:aws.cost.net.amortized.realtime.estimated{*}.as_count().rollup(sum, 300)`:
 - the `sum` or `sum by` aggregation
-- as `count` (read more about rate vs count metrics [here][1])
+- as `count` (learn more about [rate vs count metrics][1])
 - rollup `sum`, minimum of 5 minutes (or 300 seconds in the query above, since real-time costs are updated every 5 minutes)
 
 Rollups can be longer, such as 1 hour, to see costs on an hourly basis. Hourly costs can be helpful to better understand usage patterns before buying savings plans and reservations.
@@ -55,14 +55,14 @@ Similar to the existing container cost allocation, EC2 instance costs are broken
 
 ## Tags
 
-The tags available on real-time costs are similar, but not exactly the same as those that show up on other Cloud Cost Management metrics.
+Tags for real-time costs are similar to those on other Cloud Cost Management metrics, but not identical.
 - All tag values are lowercase, normalized like Metrics data
 - Tag Pipelines and Custom Allocation Rules are not applied
 - Some Cost and Usage Report (CUR) specific tags and FOCUS tags may not exist on the real-time cost metric, since real-time costs are derived primarily using usage data collected by the Datadog Agent, not the CUR
 
 ## Accuracy
 
-Real-time costs aim to be within 10% accuracy of the cost data from the daily EC2 costs on your CUR, for EC2 hosts monitored by the Datadog Agent. During the preview period data may be unstable. Large temporary drops in cost or gaps may occur, and for long term cost trend analysis, Datadog recommends using the Cloud Cost metrics based on direct AWS billing data.
+Real-time costs aim to be within 10% accuracy of the cost data from the daily EC2 costs on your CUR, for EC2 hosts monitored by the Datadog Agent. During the preview period data may be unstable. Large temporary drops in cost or gaps may occur. For long-term cost trend analysis, Datadog recommends using Cloud Cost metrics based on direct AWS billing data.
 
 You can use the `estimated_hourly_cost` tag to understand the estimated unit cost of an instance type per hour.
 
