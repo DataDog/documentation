@@ -50,8 +50,8 @@ ENV NODE_OPTIONS="--require dd-trace/init"
    {{% gcr-install-sidecar-yaml language="nodejs" %}}
    {{% /tab %}}
 
-   {{% tab "Custom" %}}
-   {{% gcr-install-sidecar-custom %}}
+   {{% tab "Other" %}}
+   {{% gcr-install-sidecar-other %}}
    {{% /tab %}}
 
    {{< /tabs >}}

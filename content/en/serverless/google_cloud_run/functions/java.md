@@ -59,8 +59,8 @@ implementation 'com.datadoghq:dd-trace-api:DD_TRACE_JAVA_VERSION_HERE'
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
-   {{% tab "Custom" %}}
-   {{% gcr-install-sidecar-custom function="true" %}}
+   {{% tab "Other" %}}
+   {{% gcr-install-sidecar-other function="true" %}}
    {{% /tab %}}
 
    {{< /tabs >}}

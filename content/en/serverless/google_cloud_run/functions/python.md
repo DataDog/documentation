@@ -33,8 +33,8 @@ ddtrace==<VERSION>
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
-   {{% tab "Custom" %}}
-   {{% gcr-install-sidecar-custom function="true" %}}
+   {{% tab "Other" %}}
+   {{% gcr-install-sidecar-other function="true" %}}
    {{% /tab %}}
 
    {{< /tabs >}}

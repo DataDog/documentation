@@ -49,8 +49,8 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
-   {{% tab "Custom" %}}
-   {{% gcr-install-sidecar-custom function="true" %}}
+   {{% tab "Other" %}}
+   {{% gcr-install-sidecar-other function="true" %}}
    {{% /tab %}}
 
    {{< /tabs >}}
