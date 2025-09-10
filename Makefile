@@ -94,6 +94,13 @@ start-no-pre-build: node_modules  ## Build and run docs excluding external conte
 # This is useful for testing changes to the build scripts locally
 start-preserve-build: dependencies
 	@make server
+	
+# Run the site with websites_sources_data (integrations previews)
+start-integrations: node_modules
+	@make setup-build-scripts
+	@make websites_sources_data
+	@make build-cdocs
+	@make server
 
 # Leave build scripts in place, but skip dependencies and sources_module
 # Useful for testing local changes to the CDOCS build script
