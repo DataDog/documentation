@@ -8,7 +8,7 @@ This page demonstrates how to configure and start using Datadog's GPU Monitoring
 In order to begin using Datadog's GPU Monitoring, you must meet the following critieria:
 - Already a Datadog customer  (you have active Datadog infrastructure hosts)
 - You have already installed and deployed[1] the latest version[2] of the Datadog agent on all of your GPU-enabled hosts that you'd like to monitor
-- Uses Kubernetes and NVIDIA's device plugin for Kubernetes (either directly or through NVIDIA's GPU Operator) 
+- Uses Kubernetes and NVIDIA's device plugin for Kubernetes (either directly[3] or through NVIDIA's GPU Operator[4]) 
 
 The minimum version requirements are: 
 - Datadog Agent: version 7.70+
@@ -30,7 +30,7 @@ Your installation method depends on your deployment type (uniform or mixed):
 Uniform clusters are those where all the nodes have GPU devices
 
 1. Install and deploy the Datadog Agent on Kubernetes (instructions here[1])
-2. Include the additional parameter, `gpu.enabled:true` to the `/etc/datadog-agent/datadog.yaml` configuration file. If you would like to opt-in for more advanced eBPF metrics such as [METRIC NAME HERE], also include the additional parameter of `gpu.privilegedMode:true` as shown in the example snippet below
+2. Include the additional parameter, `gpu.enabled:true` to your existing Operator configuration file. If you would like to opt-in for more advanced eBPF metrics such as [METRIC NAME HERE], also include the additional parameter of `gpu.privilegedMode:true` as shown in the example snippet below
 
 Example snippet from configuration file: 
    ```
@@ -51,7 +51,7 @@ spec:
 {{% /tab %}}
 
 {{% tab "Mixed Clusters" %}}
-Mixed clusters have some nodes with GPU devices and others without. If you have a mixed cluster, you'll need to leverage the Datadog Operator's Datadog Agent Profiles feature to enable GPU monitoring only on your nodes with GPUs.
+Mixed clusters have some nodes with GPU devices and others without. If you have a mixed cluster, you'll need to leverage the Datadog Operator's Datadog Agent Profiles[6] feature to enable GPU monitoring only on your nodes with GPUs.
 
 1. Install and deploy the Datadog Agent on Kubernetes using the Datadog Operator (instructions here[1])
 2. Modify your existing DatadogAgent resource with the following changes that can safely be applied to all agents, regardless of whether they run on GPU nodes or not:
@@ -155,7 +155,7 @@ Example snippet from datadog-values.yaml configuration file:
 Mixed clusters have some nodes with GPU devices and others without. If you have a mixed cluster, you'll need to create two different Helm deployments, one targeting non-GPU nodes and another for GPU nodes.
 
 1. Install and deploy the Datadog Agent on Kubernetes using Helm (instructions here[1])
-2. Update the affinity of that deployment within the `datadog-values.yaml` configuration file. The label `nvidia.com/gpu.present` is a suggestion based on common NVIDIA GPU operator settings, but any label can be used to exclude GPU nodes.
+2. Update the affinity of that deployment within the `datadog-values.yaml` configuration file. The label `nvidia.com/gpu.present`[7] is a suggestion based on common NVIDIA GPU operator settings, but any label can be used to exclude GPU nodes.
 
 Example snippet from datadog-values.yaml configuration file: 
 ```
@@ -171,7 +171,7 @@ agents:
               - "true"
 ```
 
-3. Create a new `values-gpu.yaml` file with an affinity selector for GPU nodes and the corresponding GPU configuration. This file includes the necessary configuration changes[3] to ensure that it joins the existing cluster agents.
+3. Create a new `values-gpu.yaml` file with an affinity selector for GPU nodes and the corresponding GPU configuration. This file includes the necessary configuration changes[5] to ensure that it joins the existing cluster agents.
    
 Example snippet from values-gpu.yaml configuration file: 
 ```
@@ -225,4 +225,8 @@ helm install -f values.yaml -f values-gpu.yaml datadog-gpu datadog
 
 [1]: https://docs.datadoghq.com/containers/kubernetes/installation/?tab=datadogoperator
 [2]: https://github.com/DataDog/datadog-agent/releases?page=1
-[3]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog#how-to-join-a-cluster-agent-from-another-helm-chart-deployment-linux
+[3]: https://github.com/NVIDIA/k8s-device-plugin
+[4]: https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/getting-started.html
+[5]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog#how-to-join-a-cluster-agent-from-another-helm-chart-deployment-linux
+[6]: https://github.com/DataDog/datadog-operator/blob/main/docs/datadog_agent_profiles.md
+[7]: http://nvidia.com/gpu.present
