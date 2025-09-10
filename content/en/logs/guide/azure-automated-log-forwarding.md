@@ -17,7 +17,15 @@ The ARM template deploys resources from a series of Azure services (storage acco
 
 ## How to choose between automated and manual setup
 
-<CONTENT>
+Choose the manual setup method if you want to:
+   - apply custom tags to your resources
+
+Use the automated setup method if you want to:
+   - automate deployment through the Azure portal
+   - manage your infrastructure through declarative templates
+   - centrally control access, tags, and billing
+   - redeploy your resources in the correct order and in a consistent way
+
 
 ## Setup
 
