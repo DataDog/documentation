@@ -86,9 +86,11 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 : required - _integer or string_
 <br />Toggle to enable submitting data to LLM Observability. Should be set to `1` or `true`.
 
-`DD_LLMOBS_ML_APP`[^python-version]
+`DD_LLMOBS_ML_APP`
 : optional - _string_
 <br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1], or the value of a propagated `DD_LLMOBS_ML_APP` from an upstream service.
+
+**Note**: Before version `ddtrace==3.14.0`, this is a **required field**.
 
 `DD_LLMOBS_AGENTLESS_ENABLED`
 : optional - _integer or string_ - **default**: `false`
@@ -97,8 +99,6 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 `DD_API_KEY`
 : optional - _string_
 <br />Your Datadog API key. Only required if you are not using the Datadog Agent.
-
-[^python-version]: Optional starting with version `ddtrace==3.14.0`. In previous versions, this is a required field.
 
 [1]: /getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
 {{% /tab %}}
@@ -123,9 +123,11 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 : required - _integer or string_
 <br />Toggle to enable submitting data to LLM Observability. Should be set to `1` or `true`.
 
-`DD_LLMOBS_ML_APP`[^nodejs-version]
+`DD_LLMOBS_ML_APP`
 : optional - _string_
 <br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1], or the value of a propagated `DD_LLMOBS_ML_APP` from an upstream service.
+
+**Note**: Before version `dd-trace@5.66.0`, this is a **required field**.
 
 `DD_LLMOBS_AGENTLESS_ENABLED`
 : optional - _integer or string_ - **default**: `false`
@@ -135,7 +137,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 : optional - _string_
 <br />Your Datadog API key. Only required if you are not using the Datadog Agent.
 
-[^nodejs-version]: Optional starting with `dd-trace@5.66.0`. In previous versions, this is a required field.
+**Note**: Before version `dd-trace@5.66.0`, this is a **required field**.
 
 [1]: /getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
 {{% /tab %}}
@@ -161,9 +163,11 @@ You can supply the following parameters as environment variables (for example, `
 : required - _integer or string_
 <br />Toggle to enable submitting data to LLM Observability. Should be set to `1` or `true`.
 
-`DD_LLMOBS_ML_APP` or `dd.llmobs.ml.app`[^java-version]
+`DD_LLMOBS_ML_APP` or `dd.llmobs.ml.app`
 : optional - _string_
 <br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1], or the value of a propagated `DD_LLMOBS_ML_APP` from an upstream service.
+
+**Note**: Before version 1.54.0, this is a **required field**.
 
 `DD_LLMOBS_AGENTLESS_ENABLED` or `dd.llmobs.agentless.enabled`
 : optional - _integer or string_ - **default**: `false`
@@ -172,8 +176,6 @@ You can supply the following parameters as environment variables (for example, `
 `DD_API_KEY` or `dd.api.key`
 : optional - _string_
 <br />Your Datadog API key. Only required if you are not using the Datadog Agent.
-
-[^java-version]: Optional starting with version 1.54.0. In previous versions, this is a required field.
 
 [1]: /getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
 {{% /tab %}}
