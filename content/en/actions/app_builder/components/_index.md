@@ -333,7 +333,7 @@ Integration logo components have the following properties.
 Integration Id
 : Specifies which integration logo icon to display.<br>
 **Value**: string or expression<br>
-**Examples**: "datadog", "amazon-s3", "postgres", "okta"
+**Examples**: datadog, amazon-s3, postgres, okta
 
 ### Appearance
 
