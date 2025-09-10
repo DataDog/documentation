@@ -194,7 +194,7 @@ The rule deprecation process is as follows:
 [8]: /tracing/
 [9]: /agent/
 [10]: https://app.datadoghq.com/security/configuration/
-[11]: /security/cloud_siem/detection_rules/
+[11]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/
 [12]: /security/application_security/policies/custom_rules/
 [13]: /security/cloud_security_management/misconfigurations/custom_rules
 [14]: /security/workload_protection/workload_security_rules?tab=host#create-custom-rules

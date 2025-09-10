@@ -681,6 +681,9 @@ When ingesting SARIF files, Datadog maps SARIF severities into CVSS severities u
 | Note           | Medium        |
 | None           | Low           |
 
+## Data Retention
+
+Datadog stores findings in accordance with our [Data Rentention Periods](https://docs.datadoghq.com/data_security/data_retention_periods/). Datadog does not store or retain customer source code.
 
 <!-- ## Further Reading
 
