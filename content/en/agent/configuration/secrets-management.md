@@ -14,12 +14,12 @@ algolia:
 ## Overview
 
 The Datadog Agent helps you securely manage your secrets by integrating with the following secrets management solutions:
-- AWS Secrets Manager
-- AWS SSM
-- Azure KeyVault
-- HashiCorp Vault
-- File JSON
-- File YAML
+- [AWS Secrets Manager](#id-for-secrets)
+- [AWS SSM](#id-for-ssm)
+- [Azure KeyVault](#id-for-azure)
+- [HashiCorp Vault](#id-for-hashicorp)
+- [File JSON](#id-for-json-yaml)
+- [File YAML](#id-for-json-yaml)
 
 Instead of hardcoding sensitive values like API keys or passwords in plaintext within configuration files, the Agent can retrieve them dynamically at runtime. To reference a secret in your configuration, use the `ENC[<secret_id>]` notation. The secret is fetched and loaded in memory but is never written to disk or sent to the Datadog backend.
 
@@ -47,7 +47,7 @@ secret_backend_config:
 More specific setup instructions depend on the backend type used. Refer to the appropriate section bellow for further information: 
 
 
-{{% collapse-content title="AWS Secrets" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="AWS Secrets" level="h4" expanded=false id="id-for-secrets" %}}
 The following AWS services are supported:
 
 |secret_backend_type value                                | AWS Service                             |
@@ -114,7 +114,7 @@ secret_backend_config:
 
 {{% /collapse-content %}} 
 
-{{% collapse-content title="AWS SSM" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="AWS SSM" level="h4" expanded=false id="id-for-ssm" %}}
 The following AWS services are supported:
 
 |secret_backend_type value                                | AWS Service                             |
@@ -163,7 +163,7 @@ property2: "ENC[/DatadogAgent/Production/ParameterKey2]"
 {{% /collapse-content %}} 
 
 
-{{% collapse-content title="Azure Keyvault Backend" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Azure Keyvault Backend" level="h4" expanded=false id="id-for-azure" %}}
 
 
 The following Azure services are supported:
@@ -204,7 +204,7 @@ api_key: "ENC[secretKeyNameInKeyVault]"
 {{% /collapse-content %}} 
 
 
-{{% collapse-content title="HashiCorp Vault Backend" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="HashiCorp Vault Backend" level="h4" expanded=false id="id-for-hashicorp" %}}
 
 The following HashiCorp services are supported:
 
@@ -274,7 +274,7 @@ secret_backend_config:
 [3004]: https://developer.hashicorp.com/vault/docs/auth/aws#iam-authentication-inferences
 {{% /collapse-content %}} 
 
-{{% collapse-content title="JSON or YAML File Secret Backends" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="JSON or YAML File Secret Backends" level="h4" expanded=false id="id-for-json-yaml" %}}
 
 | secret_backend_type value                                 | File Service                             |
 |---------------------------------------------|-----------------------------------------|
