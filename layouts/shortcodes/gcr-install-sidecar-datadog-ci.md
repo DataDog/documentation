@@ -35,4 +35,4 @@ Additional parameters can be found in the [CLI documentation][1003].
 
 [1001]: https://cloud.google.com/sdk/docs/install
 [1002]: /getting_started/site/
-[1003]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/cloud-run#readme
+[1003]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/cloud-run#readme
