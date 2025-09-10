@@ -276,6 +276,7 @@ unsupported_sites:
   dynamic_quotas: [gov]
   eng_reports: [gov]
   events_from_sns_emails: [gov]
+  feature_flags: [gov]
   fips-compliance: [us,us3,us5,eu,ap1,ap2]
   fips-integrations: [us,us3,us5,eu,ap1,ap2]
   fips-proxy: [us,us3,us5,eu,ap1,ap2]
