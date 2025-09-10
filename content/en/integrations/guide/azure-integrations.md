@@ -132,7 +132,7 @@ See the [Azure Advanced Configuration][60] guide for more configuration options.
 
 All standard Azure Monitor metrics plus [unique Datadog generated metrics][53]. You can also enable collection of custom metrics from Azure Application Insights under the **Metric Collection** tab in the [Azure integration page][54].
 
-For a detailed list of metrics, select the appropriate Azure service in the [overview section](#overview). To exclude certain VMs from metric collection, see [Azure VM Exclusion][55].
+For a detailed list of metrics, select the appropriate Azure service in the [Azure service-specific integrations section](#azure-service-specific-integrations). To exclude certain VMs from metric collection, see [Azure VM Exclusion][55].
 
 ### Logs
 
