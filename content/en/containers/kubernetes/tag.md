@@ -267,7 +267,6 @@ bar: quuz
 
 </div>
 
-<div class="alert alert-info">
 
 Although Kubernetes labels and annotations are case sensitive, this configuration is not.
 For example, you have this label on a pod
