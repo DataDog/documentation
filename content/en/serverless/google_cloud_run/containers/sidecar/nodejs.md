@@ -50,8 +50,8 @@ ENV NODE_OPTIONS="--require dd-trace/init"
    {{% gcr-install-sidecar-yaml language="nodejs" %}}
    {{% /tab %}}
 
-   {{% tab "Custom" %}}
-   {{% gcr-install-sidecar-custom %}}
+   {{% tab "Other" %}}
+   {{% gcr-install-sidecar-other %}}
    {{% /tab %}}
 
    {{< /tabs >}}
@@ -92,11 +92,11 @@ logger.info(`Hello world!`);
 
    To send custom metrics, [view code examples][3]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars instrumentationMethod="sidecar" language="nodejs" %}}
+{{% gcr-env-vars-sidecar language="nodejs" %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting %}}
+{{% gcr-troubleshooting sidecar="true" %}}
 
 ## Further reading
 
