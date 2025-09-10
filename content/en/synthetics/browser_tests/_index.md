@@ -228,7 +228,7 @@ You can switch tabs in a browser test recording in order to perform an action on
 
 ## Step replay
 
-Step replay allows you to re-run one or more steps of your browser test directly in your browser with the [Datadog Record Test extension][11]. This feature helps you establish the correct state when adding or editing steps in the middle of a long test, so you don't need to manually replay the entire test from the beginning.
+Step replay allows you to re-run one or more steps of your browser test directly in your browser with the [Datadog Record Test extension][11]. This feature helps you establish the correct state when adding or editing steps in the middle of a test, so you don't need to do it manually.
 
 ### Debugger permission
 
